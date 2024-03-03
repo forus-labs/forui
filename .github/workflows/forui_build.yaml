@@ -1,0 +1,31 @@
+name: Forui Build
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - .github/workflows/forui_build.yaml
+      - forui/**
+      - forui_assets/**
+
+  pull_request:
+    paths:
+      - .github/workflows/forui_build.yaml
+      - forui/**
+      - forui_assets/**
+
+jobs:
+  test:
+    name: Build & test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forui
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2.12.0
+      - run: flutter pub get
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: flutter analyze
+      - run: flutter test
