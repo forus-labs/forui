@@ -1,0 +1,12 @@
+# Configuration for build runners. See https://github.com/dart-lang/build/blob/master/build_config/README.md
+
+targets:
+  $default:
+    builders:
+      stevia_runner:steviaAssetGenerator:
+        generate_for:
+          - assets/**
+
+      mockito:mockBuilder:
+        generate_for:
+          - test/**.dart
