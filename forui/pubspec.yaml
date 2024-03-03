@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # TODO: replace with pub version once forui_assets is published
+  forui_assets:
+    path: ../forui_assets
   sugar: ^3.1.0
 
 dev_dependencies:
@@ -17,12 +20,15 @@ dev_dependencies:
   flint: ^2.8.1
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
   mockito: ^5.4.2
   stevia_runner:
     git:
       url: https://github.com/forus-labs/cauldron.git
       path: stevia_runner
+
+dependency_overrides:
+  forui_assets:
+    path: ../forui_assets
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
