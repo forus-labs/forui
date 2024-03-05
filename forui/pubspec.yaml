@@ -10,9 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # TODO: replace with pub version once forui_assets is published
-  forui_assets:
-    path: ../forui_assets
+  google_fonts: ^6.2.0
+  meta: ^1.11.0
   sugar: ^3.1.0
 
 dev_dependencies:
@@ -26,15 +25,13 @@ dev_dependencies:
       url: https://github.com/forus-labs/cauldron.git
       path: stevia_runner
 
-dependency_overrides:
-  forui_assets:
-    path: ../forui_assets
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/fonts/inter
 
   # To add assets to your package, add an assets section, like this:
   # assets:
@@ -53,16 +50,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages

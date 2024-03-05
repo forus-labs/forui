@@ -55,6 +55,4 @@ Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
 ## Conventions
 
-* Bundle assets in `forui_assets`, see https://github.com/flutter/flutter/issues/106782.
-* Make all widgets accessible in the showcase project.
-* Prefix all publicly exported widgets with `Fui`, i.e. `FuiScaffold`.
+* Prefix all publicly exported widgets with `F`, i.e. `FScaffold`.
