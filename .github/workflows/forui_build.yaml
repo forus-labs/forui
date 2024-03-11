@@ -6,13 +6,11 @@ on:
     paths:
       - .github/workflows/forui_build.yaml
       - forui/**
-      - forui_assets/**
 
   pull_request:
     paths:
       - .github/workflows/forui_build.yaml
       - forui/**
-      - forui_assets/**
 
 jobs:
   test:
