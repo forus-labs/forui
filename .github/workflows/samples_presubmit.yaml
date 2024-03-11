@@ -10,7 +10,7 @@ on:
 
 jobs:
   prepare:
-    if: github.actor != 'forus-labs-token-mint'
+    if: github.actor != 'forus-labs-token-mint[bot]'
     name: Prepare PR for review
     runs-on: ubuntu-latest
     defaults:
