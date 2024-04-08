@@ -30,9 +30,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  assets:
-    - assets/fonts/inter
-
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -50,7 +47,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
