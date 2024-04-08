@@ -20,7 +20,9 @@ class FTheme extends StatefulWidget {
 
   /// Creates a [FTheme].
   const FTheme({
-    required this.data, required this.child, super.key,
+    required this.data,
+    required this.child,
+    super.key,
   });
 
   @override
