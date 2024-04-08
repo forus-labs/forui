@@ -1,7 +1,5 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Project imports:
 import 'package:forui/src/theme_data.dart';
 
 /// Represents a ForUI theme.
