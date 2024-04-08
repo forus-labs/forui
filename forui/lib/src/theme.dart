@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:forui/src/theme_data.dart';
 
 /// Represents a ForUI theme.
@@ -17,9 +20,7 @@ class FTheme extends StatefulWidget {
 
   /// Creates a [FTheme].
   const FTheme({
-    super.key,
-    required this.data,
-    required this.child,
+    required this.data, required this.child, super.key,
   });
 
   @override
