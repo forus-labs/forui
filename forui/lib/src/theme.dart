@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:forui/src/theme_data.dart';
 
+/// Represents a ForUI theme.
 class FTheme extends StatefulWidget {
+  /// Retrieves the theme data.
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
     return theme?.data ?? const FThemeData.light();
   }
 
+  /// The theme data.
   final FThemeData data;
+
+  /// The child widget.
   final Widget child;
 
+  /// Creates a [FTheme].
   const FTheme({
     super.key,
     required this.data,
