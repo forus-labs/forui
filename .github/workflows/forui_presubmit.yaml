@@ -8,9 +8,13 @@ on:
       - .github/workflows/forui_presubmit.yaml
       - forui/**
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   prepare:
-    if: github.actor != 'forus-labs-token-mint[bot]'
+    if: github.actor != 'forus-labs-token-mint[bot]' && github.event.pull_request.draft == false
     name: Prepare PR for review
     runs-on: ubuntu-latest
     defaults:
@@ -24,7 +28,7 @@ jobs:
           app_id: ${{ secrets.TOKEN_MINT_APP_ID }}
           private_key: ${{ secrets.TOKEN_MINT_PRIVATE_KEY }}
 
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - uses: actions/checkout@v4
         with:
           token: ${{ steps.generate-token.outputs.token }}
           ref: ${{ github.event.pull_request.head.ref }}
@@ -32,8 +36,6 @@ jobs:
       - uses: subosito/flutter-action@v2.12.0
         with:
           cache: true
-
-      - uses: dart-lang/setup-dart@v1.4
 
       - run: flutter pub get
       - run: flutter pub global activate import_sorter
@@ -43,5 +45,5 @@ jobs:
 
       - uses: EndBug/add-and-commit@v9
         with:
+          pull: '--rebase --autostash'
           add: '*'
-          push: true
