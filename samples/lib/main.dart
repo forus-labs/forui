@@ -13,7 +13,7 @@ class Application extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) => FTheme(
-      data: FZincStyle.light,
+      data: FZincThemeData.light,
       child: Container(),
     );
 }
