@@ -6,8 +6,6 @@ import 'package:forui/forui.dart';
 ///
 /// The zinc style is based on [shadcn/ui](https://ui.shadcn.com/themes).
 extension FZincThemeData on Never {
-  // TODO: Manually verify fields. Currently generated with a LLM.
-
   /// The light theme of [FZincThemeData].
   static FThemeData light = FThemeData(
     background: const Color(0xFFFFFFFF),
