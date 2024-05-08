@@ -16,7 +16,7 @@ class FBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).widgetData.boxStyle;
+    final style = this.style ?? FTheme.of(context).widgets.box;
 
     return ColoredBox(
       color: style.color,

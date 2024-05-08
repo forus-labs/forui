@@ -13,13 +13,19 @@ class FThemeData {
   final FStyleData styleData;
 
   /// The widget data.
-  final FWidgetData widgetData;
+  final FWidgetData widgets;
 
-  /// Creates a [FThemeData].
-  const FThemeData({
+  FThemeData.foo({
     required this.fontData,
     required this.styleData,
-    required this.widgetData
+  }):
+    widgets = FWidgetData.inherit(data: fontData, style: styleData);
+
+  /// Creates a [FThemeData].
+  FThemeData({
+    required this.fontData,
+    required this.styleData,
+    required this.widgets
   });
 
   /// Creates a copy of this [ThemeData] with the given properties replaced.
@@ -30,6 +36,6 @@ class FThemeData {
   }) => FThemeData(
     fontData: fontData ?? this.fontData,
     styleData: styleData ?? this.styleData,
-    widgetData: widgetData ?? this.widgetData
+    widgets: widgetData ?? this.widgets
   );
 }
