@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 /// * Height
 /// * Letter spacing
 /// * Word spacing
-extension type TextStyleBuilder(TextStyle style) implements TextStyle {
+extension type TextStyleBuilder._(TextStyle style) implements TextStyle {
   /// Creates a [TextStyle] that inherits the properties from the given [FFontData].
   TextStyleBuilder.inherit(FFontData data, TextStyle style)
       : style = TextStyle(
