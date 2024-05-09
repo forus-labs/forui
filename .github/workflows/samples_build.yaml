@@ -49,4 +49,4 @@ jobs:
       - run: flutter test
       - run: pod repo update
         working-directory: samples/ios
-      - run: flutter build ios --debug --no-codesign --no-pub --flavor development --dart-define=DEVELOPMENT
+      - run: flutter build ios --debug --no-codesign --no-pub
