@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A class that holds the theme data for the app.
+/// The default theme data that is inherited from a [FTheme] by child Forui widgets.
 class FStyleData {
   /// The background color.
   final Color background;
