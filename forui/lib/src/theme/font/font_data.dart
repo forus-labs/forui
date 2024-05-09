@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/theme/theme.dart';
 
 /// The font data that is inherited from a [FTheme] deigned to be utilized by [ScaledTextStyle] and child Forui widgets.
 ///
