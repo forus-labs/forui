@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// A class that holds the theme data for the app.
+/// The default font and theme data that are inherited by child Forui widgets.
 class FThemeData {
   /// The font data.
   final FFontData font;
