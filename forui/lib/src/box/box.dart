@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// A sample widget demonstrating the architecture of ForUI.
+/// A sample widget that demonstrates Forui's architecture.
 class FBox extends StatelessWidget {
   /// The text.
   final String text;
