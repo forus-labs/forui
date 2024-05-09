@@ -25,7 +25,7 @@ extension FZincThemeData on Never {
     ),
   );
 
-  /// The dark theme of [FZincThemeData].
+  /// The dark variant.
   static FThemeData dark = FThemeData.inherit(
     font: const FFontData(),
     style: FStyleData(
