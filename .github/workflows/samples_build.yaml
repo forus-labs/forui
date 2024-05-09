@@ -30,3 +30,23 @@ jobs:
       - run: flutter analyze
       - run: flutter test
       - run: flutter build appbundle --debug --no-pub --no-tree-shake-icons
+
+  build-ios:
+    name: Build iOS
+    runs-on: macos-14 # TODO: macos-latest still points to MacOS 12 which doesn't support XCode 15, https://github.blog/changelog/2024-01-30-github-actions-macos-14-sonoma-is-now-available/
+    defaults:
+      run:
+        working-directory: samples
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2.16.0
+        with:
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: flutter analyze
+      - run: flutter test
+      - run: pod repo update
+        working-directory: samples/ios
+      - run: flutter build ios --debug --no-codesign --no-pub --flavor development --dart-define=DEVELOPMENT
