@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// A class that holds the font data.
+/// The default font data that is inherited from a [FTheme] by child Forui widgets.
 class FFontData {
   /// The size that corresponds to the `fontSize` property on [TextStyle].
   final double fontSize;
