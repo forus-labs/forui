@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// The font data that is inherited from a [FTheme] deigned to be utilized by [ScaledTextStyle] and child Forui widgets.
+/// The font data that is inherited from a [FTheme] by child Forui widgets and [ScaledTextStyle]s.
 ///
 /// This class contains scalar values that are multiplied with the corresponding properties on [TextStyle] to ensure
 /// that various fonts are scaled consistently across the application.
 class FFontData {
-  /// The font size scalar that multiplies with the `fontSize` property on [TextStyle].
+  /// A value used to scale [TextStyle.fontSize].
   final double fontSizeScalar;
 
-  /// The letter spacing scalar that multiplies with the `letterSpacing` property on [TextStyle].
+  /// A value used to scale [TextStyle.letterSpacing].
   final double letterSpacingScalar;
 
-  /// The word spacing scalar that multiplies with the `wordSpacing` property on [TextStyle].
+  /// A value used to scale [TextStyle.wordSpacing].
   final double wordSpacingScalar;
 
-  /// The height scalar that multiplies with the `height` property on [TextStyle].
+  /// A value used to scale [TextStyle.height].
   final double heightScalar;
 
   /// Creates a [FFontData].
