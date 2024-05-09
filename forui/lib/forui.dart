@@ -10,8 +10,8 @@ export 'src/theme/widget_data.dart';
 export 'src/theme/font/font_data.dart';
 export 'src/theme/font/scaled_text_style.dart';
 
-export 'src/theme/style/zinc_style.dart';
+export 'src/themes/zinc_theme.dart';
 
 // Widgets
-export 'src/box/box.dart';
-export 'src/box/box_style.dart';
+export 'src/widgets/box/box.dart';
+export 'src/widgets/box/box_style.dart';

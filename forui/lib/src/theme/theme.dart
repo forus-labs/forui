@@ -7,7 +7,7 @@ class FTheme extends StatefulWidget {
   /// Retrieves the theme data.
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FZincThemeData.light;
+    return theme?.data ?? FZincTheme.light;
   }
 
   /// The theme data.
