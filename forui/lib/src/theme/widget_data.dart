@@ -7,10 +7,10 @@ class FWidgetData {
   /// The box style.
   final FBoxStyle box;
 
-  /// Creates a [WidgetData].
+  /// Creates a [FWidgetData].
   FWidgetData({required this.box});
 
-  /// Creates a [WidgetData] that inherits the properties from the given [FontData] and [StyleData].
+  /// Creates a [FWidgetData] that inherits the properties from the given [FFontData] and [FStyleData].
   FWidgetData.inherit({required FFontData data, required FStyleData style}):
       box = FBoxStyle.inherit(data: data, style: style);
 

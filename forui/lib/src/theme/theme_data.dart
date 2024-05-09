@@ -18,7 +18,7 @@ class FThemeData {
   /// Creates a [FThemeData].
   FThemeData({required this.font, required this.style, required this.widgets});
 
-  /// Creates a [FThemeData] that inherits the properties from the given [FontData] and [StyleData].
+  /// Creates a [FThemeData] that inherits the properties from the given [FFontData] and [FStyleData].
   FThemeData.inherit({
     required this.font,
     required this.style,
