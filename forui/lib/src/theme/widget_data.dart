@@ -1,5 +1,5 @@
 import 'package:forui/src/box/box_style.dart';
-import 'package:forui/src/theme/font_data.dart';
+import 'package:forui/src/theme/font/font_data.dart';
 import 'package:forui/src/theme/style_data.dart';
 
 /// A class that holds the widget data.
@@ -10,6 +10,7 @@ class FWidgetData {
   /// Creates a [WidgetData].
   FWidgetData({required this.box});
 
+  /// Creates a [WidgetData] that inherits the properties from the given [FontData] and [StyleData].
   FWidgetData.inherit({required FFontData data, required FStyleData style}):
       box = FBoxStyle.inherit(data: data, style: style);
 
@@ -17,6 +18,6 @@ class FWidgetData {
   FWidgetData copyWith({
     FBoxStyle? boxStyle,
   }) => FWidgetData(
-      box: boxStyle ?? this.box,
+      box: boxStyle ?? box,
     );
 }
