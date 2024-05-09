@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// An extension that adds a `inherit` constructor to [TextStyleBuilder].
+/// A [TextStyle] that scales its properties by factors.
+/// 
+/// The scaled properties are:
+/// * Font size
+/// * Height
+/// * Letter spacing
+/// * Word spacing
 extension type TextStyleBuilder(TextStyle style) implements TextStyle {
   /// Creates a [TextStyle] that inherits the properties from the given [FFontData].
   TextStyleBuilder.inherit(FFontData data, TextStyle style)
