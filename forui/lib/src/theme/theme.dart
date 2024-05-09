@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:forui/src/theme/style/zinc_style.dart';
-import 'package:forui/src/theme/theme_data.dart';
+import 'package:forui/forui.dart';
 
 /// Represents a ForUI theme.
 class FTheme extends StatefulWidget {

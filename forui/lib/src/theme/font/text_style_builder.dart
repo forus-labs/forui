@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:forui/src/theme/font/font_data.dart';
+import 'package:forui/forui.dart';
 
 /// An extension that adds a `inherit` constructor to [TextStyleBuilder].
 extension type TextStyleBuilder(TextStyle style) implements TextStyle {

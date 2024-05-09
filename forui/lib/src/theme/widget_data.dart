@@ -1,6 +1,4 @@
-import 'package:forui/src/box/box_style.dart';
-import 'package:forui/src/theme/font/font_data.dart';
-import 'package:forui/src/theme/style_data.dart';
+import 'package:forui/forui.dart';
 
 /// A class that holds the widget data.
 class FWidgetData {

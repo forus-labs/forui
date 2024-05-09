@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/box/box_style.dart';
 
 /// A sample widget demonstrating the architecture of ForUI.
 class FBox extends StatelessWidget {
