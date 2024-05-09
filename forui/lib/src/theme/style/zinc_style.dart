@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 ///
 /// The zinc style is based on [shadcn/ui](https://ui.shadcn.com/themes).
 extension FZincThemeData on Never {
-  /// The light theme of [FZincThemeData].
+  /// The light variant.
   static FThemeData light = FThemeData.inherit(
     font: const FFontData(),
     style: FStyleData(
