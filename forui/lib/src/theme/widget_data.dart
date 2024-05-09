@@ -1,6 +1,6 @@
 import 'package:forui/forui.dart';
 
-/// A class that holds the widget data.
+/// The default widget-specific theme and font data that is inherited from a [FTheme] by child Forui widgets.
 class FWidgetData {
   /// The box style.
   final FBoxStyle box;
