@@ -8,7 +8,7 @@ export 'src/theme/theme_data.dart';
 export 'src/theme/widget_data.dart';
 
 export 'src/theme/font/font_data.dart';
-export 'src/theme/font/text_style_builder.dart';
+export 'src/theme/font/scaled_text_style.dart';
 
 export 'src/theme/style/zinc_style.dart';
 

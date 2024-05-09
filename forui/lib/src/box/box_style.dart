@@ -15,5 +15,5 @@ class FBoxStyle {
 
   /// Creates a [FBoxStyle] that inherits its properties from [data] and [style].
   FBoxStyle.inherit({required FFontData data, required FStyleData style}):
-    color = style.background, text = TextStyleBuilder.inherit(data, const TextStyle(fontSize: 20));
+    color = style.background, text = ScaledTextStyle(const TextStyle(fontSize: 20), data);
 }
