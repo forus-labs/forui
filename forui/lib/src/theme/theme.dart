@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:forui/src/theme/style/zinc_style.dart';
-import 'package:forui/src/theme/theme_data.dart';
+import 'package:forui/forui.dart';
 
 /// Represents a ForUI theme.
 class FTheme extends StatefulWidget {
   /// Retrieves the theme data.
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FZincThemeData.light;
+    return theme?.data ?? FZincTheme.light;
   }
 
   /// The theme data.
