@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// A class that holds the styles for [FBox].
+/// [FBox]'s style.
 class FBoxStyle {
   /// The color.
   final Color color;
