@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/theme/style_data.dart';
 import 'package:forui/src/theme/font/font_data.dart';
+import 'package:forui/src/theme/style_data.dart';
 
 /// Zinc style of [FThemeData].
 ///

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:forui/src/box/box.dart';
 import 'package:forui/src/theme/font/font_data.dart';
 import 'package:forui/src/theme/font/text_style_builder.dart';
 import 'package:forui/src/theme/style_data.dart';
-import 'package:forui/src/box/box.dart';
 
 /// A class that holds the styles for [FBox].
 class FBoxStyle {
