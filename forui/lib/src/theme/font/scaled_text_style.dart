@@ -11,7 +11,8 @@ import 'package:forui/forui.dart';
 /// * Word spacing
 extension type ScaledTextStyle._(TextStyle style) implements TextStyle {
   /// Creates a [TextStyle] that inherits the properties from the given [FFontData].
-  ScaledTextStyle(TextStyle base, FFontData data): style = TextStyle(
+  ScaledTextStyle(TextStyle base, FFontData data): style = base.copyWith(
+    fontFamily: data.fontFamily,
     fontSize: _calculateFactor(base.fontSize, data.fontSizeScalar),
     letterSpacing: _calculateFactor(base.letterSpacing, data.letterSpacingScalar),
     wordSpacing: _calculateFactor(base.wordSpacing, data.wordSpacingScalar),
