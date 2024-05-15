@@ -16,10 +16,16 @@ class FTheme extends StatefulWidget {
   /// The child widget.
   final Widget child;
 
+  /// The text direction.
+  ///
+  /// If none is provided, the text direction is inherited from the context.
+  final TextDirection? textDirection;
+
   /// Creates a [FTheme].
   const FTheme({
     required this.data,
     required this.child,
+    this.textDirection,
     super.key,
   });
 
@@ -37,7 +43,14 @@ class _State extends State<FTheme> {
   }
 
   @override
-  Widget build(BuildContext context) => _InheritedTheme(data: data, child: widget.child);
+  Widget build(BuildContext context) => _InheritedTheme(
+        data: data,
+        // Required for `Text` widgets.
+        child: Directionality(
+          textDirection: widget.textDirection ?? Directionality.of(context),
+          child: widget.child,
+        ),
+      );
 }
 
 class _InheritedTheme extends InheritedWidget {

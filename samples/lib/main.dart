@@ -10,10 +10,21 @@ void main() {
 class Application extends StatelessWidget {
   /// Creates an application widget.
   const Application({super.key});
-  
+
   @override
-  Widget build(BuildContext context) => FTheme(
-      data: FZincTheme.light,
-      child: Container(),
-    );
+  Widget build(BuildContext context) => MaterialApp(
+        home: FTheme(
+          data: FZincTheme.light,
+          child: Scaffold(
+            body: Container(
+              alignment: Alignment.center,
+              // TODO: Replace with FText.
+              child: Text(
+                'Hello',
+                style: ScaledTextStyle(const TextStyle(fontWeight: FontWeight.w500), FTheme.of(context).font),
+              ),
+            ),
+          ),
+        ),
+      );
 }

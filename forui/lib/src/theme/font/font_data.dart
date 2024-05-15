@@ -24,7 +24,7 @@ class FFontData {
 
   /// Creates a [FFontData].
   const FFontData({
-    this.fontFamily = 'Inter',
+    this.fontFamily = 'packages/forui/Inter',
     this.fontSizeScalar = 1,
     this.letterSpacingScalar = 1,
     this.wordSpacingScalar = 1,
