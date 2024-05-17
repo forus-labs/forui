@@ -9,29 +9,29 @@ final class FCardContent extends StatelessWidget {
   final String? subtitle;
 
   /// The child.
-  final Widget? content;
+  final Widget? child;
 
   /// The style.
   final FCardContentStyle? style;
 
   /// Creates a [FCardContent].
-  const FCardContent({this.title, this.subtitle, this.content, this.style, super.key});
+  const FCardContent({this.title, this.subtitle, this.child, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? FTheme.of(context).widgets.card.content;
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+      padding: style.padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null) Text(title!, style: style.title),
           if (subtitle != null) Text(subtitle!, style: style.subtitle),
-          if (content != null)
+          if (child != null)
             Padding(
               padding: (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),
-              child: content!,
+              child: child!,
             ),
         ],
       ),

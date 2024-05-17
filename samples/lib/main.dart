@@ -24,7 +24,7 @@ class Application extends StatelessWidget {
                   FCard(
                     title: 'Notification',
                     subtitle: 'You have 3 unread messages.',
-                    content: const SizedBox(
+                    child: const SizedBox(
                       width: double.infinity,
                       child: FBox(
                         text: 'BODY',

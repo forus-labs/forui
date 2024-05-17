@@ -16,7 +16,7 @@ class FCardContentStyle {
 
   /// Creates a [FCardContentStyle] that inherits its properties from [style] and [font].
   FCardContentStyle.inherit({required FStyleData style, required FFontData font})
-      : padding = const EdgeInsets.all(20),
+      : padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
         title = ScaledTextStyle(
           TextStyle(
             fontSize: 16,

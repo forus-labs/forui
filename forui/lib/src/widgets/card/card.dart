@@ -18,10 +18,10 @@ class FCard extends StatelessWidget {
   FCard({
     String? title,
     String? subtitle,
-    Widget? content,
+    Widget? child,
     this.style,
     super.key,
-  }) : child = FCardContent(title: title, subtitle: subtitle, content: content);
+  }) : child = FCardContent(title: title, subtitle: subtitle, child: child);
 
   /// Creates a [FCard].
   const FCard.raw({required this.child, this.style, super.key});
