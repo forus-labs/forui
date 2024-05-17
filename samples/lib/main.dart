@@ -16,12 +16,22 @@ class Application extends StatelessWidget {
         home: FTheme(
           data: FZincTheme.light,
           child: Scaffold(
-            body: Container(
-              alignment: Alignment.center,
-              // TODO: Replace with FText.
-              child: Text(
-                'Hello',
-                style: ScaledTextStyle(const TextStyle(fontWeight: FontWeight.w500), FTheme.of(context).font),
+            backgroundColor: Colors.white,
+            body: Padding(
+              padding: const EdgeInsets.all(16),
+              child: ListView(
+                children: [
+                  FCard(
+                    title: 'Notification',
+                    subtitle: 'You have 3 unread messages.',
+                    content: const SizedBox(
+                      width: double.infinity,
+                      child: FBox(
+                        text: 'BODY',
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
