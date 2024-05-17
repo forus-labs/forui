@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-/// Creates a [LinkButton] within a RichText.
+/// Creates a [FLinkButton] within a RichText.
 ///              Row(
 ///                 children: [
 ///                  Expanded(
