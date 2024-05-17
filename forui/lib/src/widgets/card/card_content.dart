@@ -30,7 +30,7 @@ final class FCardContent extends StatelessWidget {
           if (subtitle != null) Text(subtitle!, style: style.subtitle),
           if (content != null)
             Padding(
-              padding: (title != null || subtitle != null) ? const EdgeInsets.only(top: 10) : const EdgeInsets.only(top: 4),
+              padding: (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),
               child: content!,
             ),
         ],
