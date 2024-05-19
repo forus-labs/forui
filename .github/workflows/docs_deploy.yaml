@@ -41,7 +41,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: out
+          path: ./docs/out
 
   deploy:
     name: Deploy
