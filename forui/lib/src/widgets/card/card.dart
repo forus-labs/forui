@@ -22,7 +22,7 @@ final class FCard extends StatelessWidget {
     Widget? child,
     this.style,
     super.key,
-  }) : child = FCardContent(title: title, subtitle: subtitle, child: child);
+  }) : child = FCardContent(title: title, subtitle: subtitle, style: style?.content, child: child,);
 
   /// Creates a [FCard].
   const FCard.raw({required this.child, this.style, super.key});

@@ -11,31 +11,30 @@ enum FButtonType {
 }
 
 class Fbutton extends StatelessWidget {
-  /// The style.
-  final FButtonStyle? style;
-
   /// The type of button.
   final FButtonType type;
-
-  /// This FButton's child.
-  final Widget child;
 
   /// Called when the FButton is tapped or otherwise activated.
   final VoidCallback? onPressed;
 
+  /// This FButton's child.
+  final Widget child;
+
+  /// The style.
+  final FButtonStyle? style;
+
   /// Creates a [FButton] widget.
   Fbutton({
-    required this.onPressed,
     required this.type,
+    required this.onPressed,
     String? text,
     String? icon,
-    Widget? child,
     this.style,
     super.key,
-  }) : child = FButtonContent(text: text, icon: icon, child: child);
+  }) : child = FButtonContent(text: text, icon: icon, style: style?.content);
 
   /// Creates a [Fbutton].
-  const Fbutton.raw({required this.type, required this.child, required this.onPressed, this.style, super.key});
+  const Fbutton.raw({required this.type, required this.onPressed, required this.child, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,19 +67,19 @@ class _FlatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FTappable(
-      onPressed: onPressed,
-      builder: (context, onPressed) => ElevatedButton(
-        style: style,
         onPressed: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 5,
-            vertical: 17,
+        builder: (context, onPressed) => ElevatedButton(
+          style: style,
+          onPressed: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+              vertical: 17,
+            ),
+            child: content,
           ),
-          child: content,
         ),
-      ),
-    );
+      );
 }
 
 class _OutlinedButton extends StatelessWidget {
@@ -97,17 +96,17 @@ class _OutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FTappable(
-      onPressed: onPressed,
-      builder: (context, onPressed) => OutlinedButton(
-        style: style,
         onPressed: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 5,
-            vertical: 17,
+        builder: (context, onPressed) => OutlinedButton(
+          style: style,
+          onPressed: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 5,
+              vertical: 17,
+            ),
+            child: content,
           ),
-          child: content,
         ),
-      ),
-    );
+      );
 }
