@@ -7,8 +7,8 @@ const _borderRadius = 8.0;
 const _overlayOpacity = 0.20;
 const _textStyle = TextStyle(
   overflow: TextOverflow.ellipsis,
-  fontWeight: FontWeight.w500,
-  fontSize: 14,
+  fontWeight: FontWeight.w600,
+  fontSize: 16,
 );
 
 /// [FButtonStyle]'s style.
