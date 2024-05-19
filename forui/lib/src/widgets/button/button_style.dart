@@ -13,38 +13,48 @@ const _textStyle = TextStyle(
 
 /// [FButtonStyle]'s style.
 class FButtonStyle {
-  /// The color.
-  final ButtonStyle button;
+  /// The primary style.
+  final ButtonStyle primary;
+
+  /// The secondary style.
+  final ButtonStyle secondary;
+
+  /// The destructive style.
+  final ButtonStyle destructive;
+
+  /// The outlined style.
+  final ButtonStyle outlined;
+
+  /// The link style.
+  final ButtonStyle link;
 
   /// The text.
   final TextStyle text;
 
+  /// The text.
+  final FButtonContentStyle content;
+
   /// Creates a [FButtonStyle].
-  const FButtonStyle({required this.button, required this.text});
+  const FButtonStyle({
+    required this.primary,
+    required this.secondary,
+    required this.destructive,
+    required this.outlined,
+    required this.link,
+    required this.text,
+    required this.content,
+  });
 
   /// Creates a [FButtonStyle] that inherits its properties from [data] and [style].
-  FButtonStyle.inherit({required FFontData data, required FStyleData style})
-  // TODO: How do I link the default buttonStyles to the corresponding Factory constructor
-      : button = Style.secondary,
-        text = ScaledTextStyle(_textStyle, data);
-}
-
-/// An extension to apply the default buttonStyles.
-extension Style on Never {
-  /// buttonStyle for a primary button
-  static final primary = _primaryStyle;
-
-  /// buttonStyle for a secondary button
-  static final secondary = _secondaryStyle;
-
-  /// buttonStyle for a destructive button
-  static final destructive = _destructiveStyle;
-
-  /// buttonStyle for a outlined button
-  static final outlined = _outlinedStyle;
-
-  /// buttonStyle for a link button
-  static final link = _linkStyle;
+  FButtonStyle.inherit({required FFontData font, required FStyleData style})
+      // TODO: How do I link the default buttonStyles to the corresponding Factory constructor
+      : primary = _primaryStyle,
+        secondary = _secondaryStyle,
+        destructive = _destructiveStyle,
+        outlined = _outlinedStyle,
+        link = _linkStyle,
+        text = ScaledTextStyle(_textStyle, font),
+        content = FButtonContentStyle.inherit(style: style, font: font);
 }
 
 final _primaryStyle = ButtonStyle(

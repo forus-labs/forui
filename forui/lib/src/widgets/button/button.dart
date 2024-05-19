@@ -1,129 +1,76 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/button/button_content.dart';
 
-/// A [FButton] widget.
-abstract class FButton extends StatelessWidget {
+enum FButtonType {
+  primary,
+  secondary,
+  destructive,
+  outlined,
+}
+
+class Fbutton extends StatelessWidget {
   /// The style.
   final FButtonStyle? style;
 
-  /// This FButton's content.
-  final Widget content;
+  /// The type of button.
+  final FButtonType type;
+
+  /// This FButton's child.
+  final Widget child;
 
   /// Called when the FButton is tapped or otherwise activated.
   final VoidCallback? onPressed;
 
   /// Creates a [FButton] widget.
-  const FButton._({
+  Fbutton({
+    required this.onPressed,
+    required this.type,
+    String? text,
+    String? icon,
+    Widget? child,
+    this.style,
+    super.key,
+  }) : child = FButtonContent(text: text, icon: icon, child: child);
+
+  /// Creates a [Fbutton].
+  const Fbutton.raw({required this.type, required this.child, required this.onPressed, this.style, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final style = this.style ?? FTheme.of(context).widgets.button;
+
+    switch (type) {
+      case FButtonType.primary:
+        return _FlatButton(content: child, onPressed: onPressed, style: style.primary);
+      case FButtonType.secondary:
+        return _FlatButton(content: child, onPressed: onPressed, style: style.secondary);
+      case FButtonType.destructive:
+        return _FlatButton(content: child, onPressed: onPressed, style: style.destructive);
+      case FButtonType.outlined:
+        return _OutlinedButton(content: child, onPressed: onPressed, style: style.outlined);
+    }
+  }
+}
+
+class _FlatButton extends StatelessWidget {
+  final ButtonStyle style;
+  final Widget content;
+  final VoidCallback? onPressed;
+
+  const _FlatButton({
     required this.content,
     required this.onPressed,
-    this.style,
+    required this.style,
     super.key,
   });
 
-  /// Creates a primary [FButton].
-  ///
-  /// ```dart
-  /// FButton.primary(
-  ///   content: FTextButtonContent('Example'),
-  ///   onPressed: (){}
-  /// );
-  /// ```
-  factory FButton.primary({
-    required Widget content,
-    required VoidCallback? onPressed,
-    FButtonStyle? style,
-    Key? key,
-  }) =>
-      _FlatButton(
-        key: key,
-        style: style,
-        content: content,
-        onPressed: onPressed,
-      );
-
-  /// Creates a secondary [FButton].
-  ///
-  /// ```dart
-  /// FButton.secondary(
-  ///   content: FTextButtonContent('Example'),
-  ///   onPressed: (){}
-  /// );
-  /// ```
-  factory FButton.secondary({
-    required Widget content,
-    required VoidCallback? onPressed,
-    FButtonStyle? style,
-    Key? key,
-  }) =>
-      // TODO: How do I link the default buttonStyles to the corresponding Factory constructor
-      _FlatButton(
-        key: key,
-        style: style,
-        content: content,
-        onPressed: onPressed,
-      );
-
-  /// Creates a destructive [FButton].
-  ///
-  /// ```dart
-  /// FButton.destructive(
-  ///   content: FTextButtonContent('Example'),
-  ///   onPressed: (){}
-  /// );
-  /// ```
-  factory FButton.destructive({
-    required Widget content,
-    required VoidCallback? onPressed,
-    FButtonStyle? style,
-    Key? key,
-  }) =>
-      _FlatButton(
-        key: key,
-        style: style,
-        content: content,
-        onPressed: onPressed,
-      );
-
-  /// Creates an outlined [FButton].
-  ///
-  /// ```dart
-  /// FButton.outline(
-  ///   content: FTextButtonContent('Example'),
-  ///   onPressed: (){}
-  /// );
-  /// ```
-  factory FButton.outlined({
-    required Widget content,
-    required VoidCallback? onPressed,
-    FButtonStyle? style,
-    Key? key,
-  }) =>
-      _OutlinedButton(
-        key: key,
-        style: style,
-        content: content,
-        onPressed: onPressed,
-      );
-}
-
-class _FlatButton extends FButton {
-  const _FlatButton({
-    required super.content,
-    required super.onPressed,
-    super.style,
-    super.key,
-  }) : super._();
-
   @override
-  Widget build(BuildContext context) {
-    // TODO: Insert button type here?
-    final style = this.style ?? FTheme.of(context).widgets.button;
-
-    return FTappable(
+  Widget build(BuildContext context) => FTappable(
       onPressed: onPressed,
       builder: (context, onPressed) => ElevatedButton(
-        style: style.button,
+        style: style,
         onPressed: onPressed,
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -134,25 +81,25 @@ class _FlatButton extends FButton {
         ),
       ),
     );
-  }
 }
 
-class _OutlinedButton extends FButton {
+class _OutlinedButton extends StatelessWidget {
+  final ButtonStyle style;
+  final Widget content;
+  final VoidCallback? onPressed;
+
   const _OutlinedButton({
-    required super.content,
-    required super.onPressed,
-    super.style,
+    required this.content,
+    required this.onPressed,
+    required this.style,
     super.key,
-  }) : super._();
+  });
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).widgets.button;
-
-    return FTappable(
+  Widget build(BuildContext context) => FTappable(
       onPressed: onPressed,
       builder: (context, onPressed) => OutlinedButton(
-        style: style.button,
+        style: style,
         onPressed: onPressed,
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -163,5 +110,4 @@ class _OutlinedButton extends FButton {
         ),
       ),
     );
-  }
 }
