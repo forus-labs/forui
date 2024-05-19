@@ -1,0 +1,26 @@
+{
+  "name": "forui-docs",
+  "version": "0.0.1",
+  "description": "Documentation for Forui.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next build && next export",
+    "start": "next start"
+  },
+  "bugs": {
+    "url": "https://github.com/forus-labs/forui/issues"
+  },
+  "homepage": "https://forui.dev",
+  "dependencies": {
+    "next": "^13.0.6",
+    "nextra": "latest",
+    "nextra-theme-docs": "latest",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.10",
+    "typescript": "^4.9.3"
+  }
+}

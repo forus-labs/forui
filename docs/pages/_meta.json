@@ -1,0 +1,16 @@
+{
+  "index": {
+    "title": "Home",
+    "type": "page"
+  },
+  "docs": {
+    "title": "Documentation",
+    "type": "page"
+  },
+  "contact": {
+    "title": "About ↗",
+    "type": "page",
+    "href": "https://foruslabs.com",
+    "newWindow": true
+  }
+}
