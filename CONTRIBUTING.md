@@ -58,22 +58,24 @@ In some situations, it is unrealistic to implement things ourselves. In these ca
 
 Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
+### Widget Styles
+
+Widget styles, i.e. `CardStyle`, should mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
+
+They should provide:
+* a primary constructor
+* a named constructor, `inherit(...)` , that configures itself based on an ancestor `FTheme`.
+
+They should override:
+* [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html)
+  to include all fields.
+* `operator ==`
+* `hashCode`
+
+They should not scale `TextStyle`S during initialization. `TextStyle`s should be scaled in a widget's build method instead.
+This avoids confusion about whether `TextStyle`s are automatically scaled inside widget styles.
+
 
 ## Conventions
 
 * Prefix all publicly exported widgets and styles with `F`, i.e. `FScaffold`.
-
-## Widget Styles
-
-Widget styles, i.e. `CardStyle`, should mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
-It should override the [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html)
-method to include all fields in the style.
-
-Widget styles, i.e. `CardStyle`, should provide:
-* a primary constructor
-* a named constructor, `inherit(...)` , that configures itself based on an ancestor `FTheme`.
-
-Widget styles, i.e. `CardStyle`, should override the hashCode and equality operator (==).
-
-Do not scale `TextStyles` inside a widget style during its initialization. Instead, scale the `TextStyle`s inside a
-widget's build method. This avoids confusion on whether `TextStyle`s are automatically scaled inside widget styles.
