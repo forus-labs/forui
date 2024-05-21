@@ -11,11 +11,11 @@ class FCardStyle {
   /// Creates a [FCardStyle].
   FCardStyle({required this.decoration, required this.content});
 
-  /// Creates a [FCardStyle] that inherits its properties from [style] and [font].
-  FCardStyle.inherit({required FStyleData style, required FFontData font})
+  /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [font].
+  FCardStyle.inherit({required FColorScheme colorScheme, required FFont font, required FStyle style})
       : decoration = BoxDecoration(
-          border: Border.all(color: style.border),
+          border: Border.all(color: colorScheme.border),
           borderRadius: style.borderRadius,
         ),
-        content = FCardContentStyle.inherit(style: style, font: font);
+        content = FCardContentStyle.inherit(colorScheme: colorScheme, font: font);
 }

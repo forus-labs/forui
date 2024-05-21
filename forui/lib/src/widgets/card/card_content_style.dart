@@ -14,22 +14,17 @@ class FCardContentStyle {
   /// Creates a [FCardContentStyle].
   const FCardContentStyle({required this.padding, required this.title, required this.subtitle});
 
-  /// Creates a [FCardContentStyle] that inherits its properties from [style] and [font].
-  FCardContentStyle.inherit({required FStyleData style, required FFontData font})
-      : padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
-        title = ScaledTextStyle(
-          TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: style.foreground,
-          ),
-          font,
-        ),
-        subtitle = ScaledTextStyle(
-          TextStyle(
-            fontSize: 12,
-            color: style.mutedForeground,
-          ),
-          font,
-        );
+  /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [font].
+  FCardContentStyle.inherit({required FColorScheme colorScheme, required FFont font}):
+      padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
+      title = font.toTextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: colorScheme.foreground,
+      ),
+      subtitle = font.toTextStyle(
+        fontSize: 12,
+        color: colorScheme.mutedForeground,
+      );
+
 }
