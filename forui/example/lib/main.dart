@@ -14,7 +14,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         home: FTheme(
-          data: FThemes.light,
+          data: FThemes.zinc.light,
           child: Scaffold(
             backgroundColor: Colors.white,
             body: Padding(

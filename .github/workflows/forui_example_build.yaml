@@ -1,12 +1,11 @@
-name: Samples Build
+name: Forui Example Build
 
 on:
   workflow_dispatch: {}
   push:
     paths:
-      - .github/workflows/samples_build.yaml
+      - .github/workflows/forui_example_build.yaml
       - forui/**
-      - samples/**
 
 jobs:
   build-android:
@@ -14,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: samples
+        working-directory: forui/example
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4

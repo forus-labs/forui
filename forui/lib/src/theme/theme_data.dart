@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
 /// The color scheme, fonts, overarching style, and widget specific styles used to configure child Forui widgets.
 class FThemeData with Diagnosticable {
-  /// The style data.
+  /// The color scheme.
   final FColorScheme colorScheme;
 
   /// The font data.
@@ -76,26 +74,4 @@ class FThemeData with Diagnosticable {
 
   @override
   int get hashCode => colorScheme.hashCode ^ font.hashCode ^ style.hashCode ^ boxStyle.hashCode ^ cardStyle.hashCode;
-}
-
-/// The overarching style that is used to configure the properties of widget-specific styles if they are not provided.
-final class FStyle with Diagnosticable {
-
-  /// The border radius.
-  final BorderRadius borderRadius;
-
-  /// Creates an [FStyle].
-  const FStyle({required this.borderRadius});
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
-  }
-
-  @override
-  bool operator ==(Object other) => identical(this, other) || other is FStyle && borderRadius == other.borderRadius;
-
-  @override
-  int get hashCode => borderRadius.hashCode;
 }

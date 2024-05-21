@@ -25,9 +25,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # TODO: replace with published version
   forui:
-    path: ../forui
+    path: ../
   sugar: ^3.1.0
 
 dev_dependencies:
@@ -36,10 +35,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^5.4.2
-  stevia_runner:
-    git:
-      url: https://github.com/forus-labs/cauldron.git
-      path: stevia_runner
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

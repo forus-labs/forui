@@ -22,7 +22,7 @@ class FCardContentStyle {
         fontWeight: FontWeight.w600,
         color: colorScheme.foreground,
       ),
-      subtitle = font.toTextStyle(
+      subtitle = TextStyle(
         fontSize: 12,
         color: colorScheme.mutedForeground,
       );
