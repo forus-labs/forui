@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:sugar/core.dart';
+
+import 'package:forui/forui.dart';
 
 /// A Forui font that used to configure the [TextStyle]s of Forui widgets.
 ///
