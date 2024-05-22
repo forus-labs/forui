@@ -8,7 +8,7 @@ final class FStyle with Diagnosticable {
   final BorderRadius borderRadius;
 
   /// Creates an [FStyle].
-  const FStyle({required this.borderRadius});
+  FStyle({BorderRadius? borderRadius}) : borderRadius = borderRadius ?? BorderRadius.circular(8);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -35,7 +35,7 @@ jobs:
     runs-on: macos-14 # TODO: macos-latest still points to MacOS 12 which doesn't support XCode 15, https://github.blog/changelog/2024-01-30-github-actions-macos-14-sonoma-is-now-available/
     defaults:
       run:
-        working-directory: samples
+        working-directory: forui/example
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0

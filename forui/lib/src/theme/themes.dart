@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
@@ -22,9 +22,7 @@ extension FThemes on Never {
         destructiveForeground: Color(0xFFFAFAFA),
         border: Color(0xFFE4E4E7),
       ),
-      style: FStyle(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      style: FStyle(),
     ),
     dark: FThemeData.inherit(
       font: FFont(),
@@ -41,9 +39,7 @@ extension FThemes on Never {
         destructiveForeground: Color(0xFFFAFAFA),
         border: Color(0xFF27272A),
       ),
-      style: FStyle(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      style: FStyle(),
     ),
   );
 }
