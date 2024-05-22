@@ -28,7 +28,7 @@ class FCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).widgets.card;
+    final style = this.style ?? FTheme.of(context).cardStyle;
 
     return DecoratedBox(
       decoration: style.decoration,

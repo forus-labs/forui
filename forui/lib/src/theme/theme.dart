@@ -1,13 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
 /// Represents a ForUI theme.
-class FTheme extends StatefulWidget {
+class FTheme extends StatelessWidget {
   /// Retrieves the theme data.
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FZincTheme.light;
+    return theme?.data ?? FThemes.zinc.light;
   }
 
   /// The theme data.
@@ -30,27 +31,20 @@ class FTheme extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => _State();
-}
-
-class _State extends State<FTheme> {
-  late FThemeData data;
+  Widget build(BuildContext context) => _InheritedTheme(
+    data: data,
+    child: Directionality(
+      textDirection: textDirection ?? Directionality.of(context),
+      child: child,
+    ),
+  );
 
   @override
-  void initState() {
-    super.initState();
-    data = widget.data;
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FThemeData>('data', data, showName: false));
   }
 
-  @override
-  Widget build(BuildContext context) => _InheritedTheme(
-        data: data,
-        // Required for `Text` widgets.
-        child: Directionality(
-          textDirection: widget.textDirection ?? Directionality.of(context),
-          child: widget.child,
-        ),
-      );
 }
 
 class _InheritedTheme extends InheritedWidget {

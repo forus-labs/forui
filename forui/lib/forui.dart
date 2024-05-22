@@ -2,16 +2,15 @@
 library forui;
 
 // Theme
-export 'src/theme/style_data.dart';
+export 'src/theme/color_scheme.dart';
+export 'src/theme/style.dart';
 export 'src/theme/theme.dart';
 export 'src/theme/theme_data.dart';
-export 'src/theme/widget_data.dart';
 
-export 'src/theme/font/font_data.dart';
-export 'src/theme/font/scaled_text_style.dart';
+export 'src/theme/font.dart';
 
 // Themes
-export 'src/themes/zinc_theme.dart';
+export 'src/theme/themes.dart';
 
 // Widgets
 export 'src/widgets/box/box.dart';

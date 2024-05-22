@@ -40,6 +40,11 @@ class Foo extends StatelessWidget {
 }
 ```
 
+### Mark widgets as final when sensible
+
+Subclasses can interact with Forui in unforeseen ways, and cause potential issues. It is not breaking to initially mark 
+classes as `final`, and subsequently unmark it. The inverse isn't true. Favor composition over inheritance.
+
 ### Minimize dependency on 3rd party packages
 
 3rd party packages introduce uncertainty. It is difficult to predict whether a package will be maintained in the future.
@@ -53,6 +58,75 @@ In some situations, it is unrealistic to implement things ourselves. In these ca
 
 Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
+### Widget Styles
+
+```dart
+class FooStyle with Diagnosticable { // ---- (1)
+  
+  final Color color;
+  
+  FooStyle({required this.color}); // ---- (2)
+  
+  FooStyle.inherit({FFont font, FColorScheme scheme}): color = scheme.primary; // ---- (2)
+  
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) { // ---- (3)
+    super.debugFillProperties(properties);
+    properties.add(ColorProperty<BorderRadius>('color', color));
+  }
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is FStyle && color == other.color; // ---- (4)
+
+  @override
+  int get hashCode => color.hashCode; // ---- (4)
+  
+}
+```
+
+1. They should mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
+2. They should provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on 
+   an ancestor `FTheme`.
+3. They should override [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html).
+4. They should implement `operator ==` and `hashCode`.
+
+
+Widget should not scale `TextStyle`S during initialization. `TextStyle`s should be scaled in a widget's build method instead.
+This avoids confusion about whether `TextStyle`s are automatically scaled inside widget styles.
+
+✅ Prefer this:
+```dart
+class FooStyle {
+  final TextStyle text;
+  
+  FooStyle.inherit({FFont font, FColorScheme scheme}): text = const TextStyle(size: 1);
+}
+
+class Foo extends StatelessWidget {
+  final FooStyle style;
+  
+  @overrride
+  Widget build(BuildContext context) => Text('Hi', style: style.text.withFont(context.theme.font));
+}
+```
+
+❌ Instead of:
+```dart
+class FooStyle {
+  final TextStyle text;
+
+  FooStyle.inherit({FFont font, FColorScheme scheme}): text = const TextStyle(size: 1).withFont(font);
+}
+
+class Foo extends StatelessWidget {
+  final FooStyle style;
+
+  @overrride
+  Widget build(BuildContext context) => Text('Hi', style: style.text);
+}
+```
+
+
 ## Conventions
 
-* Prefix all publicly exported widgets with `F`, i.e. `FScaffold`.
+* Prefix all publicly exported widgets and styles with `F`, i.e. `FScaffold`.

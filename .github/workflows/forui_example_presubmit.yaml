@@ -1,12 +1,12 @@
-name: Samples Presubmit
+name: Forui Example Presubmit
 
 on:
   workflow_dispatch: {}
   pull_request:
     branches: [ master ]
     paths:
-      - .github/workflows/samples_presubmit.yaml
-      - samples/**
+      - .github/workflows/forui_example_presubmit.yaml
+      - forui/example/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: samples
+        working-directory: forui/example
 
     steps:
       - uses: tibdex/github-app-token@v2

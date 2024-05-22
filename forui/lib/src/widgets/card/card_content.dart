@@ -19,7 +19,7 @@ final class FCardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).widgets.card.content;
+    final style = this.style ?? FTheme.of(context).cardStyle.content;
 
     return Padding(
       padding: style.padding,

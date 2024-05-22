@@ -1,31 +1,77 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
 
-/// The default font and theme data that are inherited by child Forui widgets.
-class FThemeData {
+/// The color scheme, fonts, overarching style, and widget specific styles used to configure child Forui widgets.
+class FThemeData with Diagnosticable {
+  /// The color scheme.
+  final FColorScheme colorScheme;
+
   /// The font data.
-  final FFontData font;
+  final FFont font;
 
-  /// The style data.
-  final FStyleData style;
+  /// The overarching style.
+  final FStyle style;
 
-  /// The widget data.
-  final FWidgetData widgets;
+  /// The box style.
+  final FBoxStyle boxStyle;
+
+  /// The card style.
+  final FCardStyle cardStyle;
 
   /// Creates a [FThemeData].
-  FThemeData({required this.font, required this.style, required this.widgets});
-
-  /// Creates a [FThemeData] that inherits the properties from the given [FFontData] and [FStyleData].
-  FThemeData.inherit({
+  FThemeData({
+    required this.colorScheme,
     required this.font,
     required this.style,
-  }) : widgets = FWidgetData.inherit(data: font, style: style);
+    required this.boxStyle,
+    required this.cardStyle,
+  });
 
-  /// Creates a copy of this [ThemeData] with the given properties replaced.
-  FThemeData copyWith({FFontData? fontData, FStyleData? styleData, FWidgetData? widgetData}) => FThemeData(
-        font: fontData ?? font,
-        style: styleData ?? style,
-        widgets: widgetData ?? widgets,
-      );
+  /// Creates a [FThemeData] that inherits the given arguments' properties.
+  FThemeData.inherit({
+    required this.colorScheme,
+    required this.font,
+    required this.style,
+  }):
+    boxStyle = FBoxStyle.inherit(colorScheme: colorScheme, font: font),
+    cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style);
+
+  /// Creates a copy of this [FThemeData] with the given properties replaced.
+  FThemeData copyWith({
+    FColorScheme? colorScheme,
+    FFont? font,
+    FStyle? style,
+    FBoxStyle? boxStyle,
+    FCardStyle? cardStyle,
+  }) => FThemeData(
+    colorScheme: colorScheme ?? this.colorScheme,
+    font: font ?? this.font,
+    style: style ?? this.style,
+    boxStyle: boxStyle ?? this.boxStyle,
+    cardStyle: cardStyle ?? this.cardStyle,
+  );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<FColorScheme>('colorScheme', colorScheme, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FFont>('font', font, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FStyle>('style', style, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug));
+  }
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is FThemeData &&
+    runtimeType == other.runtimeType &&
+    colorScheme == other.colorScheme &&
+    font == other.font &&
+    style == other.style &&
+    boxStyle == other.boxStyle &&
+    cardStyle == other.cardStyle;
+
+  @override
+  int get hashCode => colorScheme.hashCode ^ font.hashCode ^ style.hashCode ^ boxStyle.hashCode ^ cardStyle.hashCode;
 }
