@@ -54,7 +54,6 @@ class FLinkButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? FTheme.of(context).widgets.button;
     return TextButton(
-      style: style.link,
       onPressed: onPressed,
       child: Text(
         text,

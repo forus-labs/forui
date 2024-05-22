@@ -31,8 +31,13 @@ final class FButtonContent extends StatelessWidget {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       // [SvgTheme] provides a default color that overrides material's ButtonStyle foregroundColor
       // This is a workaround, the color of the icon is set here instead of the ButtonStyle.
-      if (icon != null) //...[icon(height: 20, color: style.color), const SizedBox(width: 10)],
-        if (text != null) Flexible(child: Text(text!, style: style.text)),
+      //if (icon != null) ...[icon(height: 20, color: style.color), const SizedBox(width: 10)],
+      if (text != null)
+        Flexible(
+            child: Text(text!,
+                //TODO: How do I make this specific to Button Type
+                style: style.text)),
+
       if (child != null) child!
     ]);
   }

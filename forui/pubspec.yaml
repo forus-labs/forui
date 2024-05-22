@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.20.0
   google_fonts: ^6.2.0
   meta: ^1.11.0
   sugar: ^3.1.0

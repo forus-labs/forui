@@ -1,78 +1,62 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_hooks/flutter_hooks.dart';
-
-/// A builder of [FTappable] widget.
-typedef TappableBuilder = Widget Function(
-    BuildContext,
-    VoidCallback?,
-    );
-
 /// A [FTappable] creates a scale animation that mimics a tap.
-///
-/// ```dart
-/// Tappable(
-///   onPressed: () { // Some action on pressed. },
-///   builder: (context, onPressed) =>
-///     ElevatedButton(
-///       style: _style(settings.palette),
-///       onPressed: onPressed,
-///       child: Text('Hello World!'),
-///     ),
-/// );
-/// ```
-final class FTappable extends HookWidget {
-  /// A builder for animated widgets.
-  final TappableBuilder builder;
-
+class FTappable extends StatefulWidget {
   /// The callback for when this [FTappable] is pressed.
   final VoidCallback? onPressed;
 
+  /// This child.
+  final Widget child;
+
   /// Creates a [FTappable] widget.
   const FTappable({
-    required this.builder,
+    required this.child,
     this.onPressed,
     super.key,
   });
 
-  /// Creates a [FTappable] widget with an inbuilt `GestureDetector`.
-  FTappable.gesture({
-    required Widget child,
-    this.onPressed,
-    behavior = HitTestBehavior.deferToChild,
-    super.key,
-  }) : builder = ((context, onPressed) => GestureDetector(
-    behavior: behavior,
-    onTap: onPressed,
-    child: child,
-  ));
+  @override
+  State<FTappable> createState() => _FTappableState();
+}
+
+class _FTappableState extends State<FTappable> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
 
   @override
-  Widget build(BuildContext context) {
-    final controller = useAnimationController(
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
       duration: const Duration(milliseconds: 100),
     );
 
-    final animation = useState(
-      Tween(begin: 1.0, end: 0.95).animate(controller)
-        ..addStatusListener((status) {
-          if (status == AnimationStatus.completed) {
-            controller.reverse();
-          }
-        }),
-    );
+    _animation = Tween<double>(begin: 1.0, end: 0.95).animate(_controller)
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          _controller.reverse();
+        }
+      });
+  }
 
-    return ScaleTransition(
-      scale: animation.value,
-      child: builder(
-        context,
-        onPressed == null
-            ? null
-            : () {
-          onPressed!();
-          controller.forward();
-        },
-      ),
-    );
+  @override
+  Widget build(BuildContext context) => ScaleTransition(
+        scale: _animation,
+        child: GestureDetector(
+          behavior: HitTestBehavior.deferToChild,
+          onTap: widget.onPressed == null
+              ? null
+              : () {
+                  widget.onPressed!();
+                  _controller.forward();
+                },
+          child: widget.child,
+        ),
+      );
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 }

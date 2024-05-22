@@ -20,5 +20,6 @@ export 'src/widgets/button/button.dart';
 export 'src/widgets/button/link_button.dart';
 export 'src/widgets/button/button_style.dart';
 export 'src/widgets/button/button_content_style.dart';
+export 'src/widgets/button/button_type_style.dart';
 export 'src/widgets/card/card.dart' hide FCardContent;
 export 'src/widgets/separator.dart';

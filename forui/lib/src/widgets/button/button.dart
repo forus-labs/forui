@@ -3,14 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 
+/// A [FButtonType] represents the possible states that a [FButton] can be in.
 enum FButtonType {
+  /// a primary button
   primary,
+
+  /// a secondary button
   secondary,
+
+  /// a destructive button
   destructive,
+
+  /// a outlined button
   outlined,
 }
 
-class Fbutton extends StatelessWidget {
+/// Represents a button widget.
+class FButton extends StatelessWidget {
   /// The type of button.
   final FButtonType type;
 
@@ -24,7 +33,7 @@ class Fbutton extends StatelessWidget {
   final FButtonStyle? style;
 
   /// Creates a [FButton] widget.
-  Fbutton({
+  FButton({
     required this.type,
     required this.onPressed,
     String? text,
@@ -33,8 +42,8 @@ class Fbutton extends StatelessWidget {
     super.key,
   }) : child = FButtonContent(text: text, icon: icon, style: style?.content);
 
-  /// Creates a [Fbutton].
-  const Fbutton.raw({required this.type, required this.onPressed, required this.child, this.style, super.key});
+  /// Creates a [FButton].
+  const FButton.raw({required this.type, required this.onPressed, required this.child, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,71 +51,42 @@ class Fbutton extends StatelessWidget {
 
     switch (type) {
       case FButtonType.primary:
-        return _FlatButton(content: child, onPressed: onPressed, style: style.primary);
+        return _Button(onPressed: onPressed, style: style, type: style.primary, child: child);
       case FButtonType.secondary:
-        return _FlatButton(content: child, onPressed: onPressed, style: style.secondary);
+        return _Button(onPressed: onPressed, style: style, type: style.secondary, child: child);
       case FButtonType.destructive:
-        return _FlatButton(content: child, onPressed: onPressed, style: style.destructive);
+        return _Button(onPressed: onPressed, style: style, type: style.destructive, child: child);
       case FButtonType.outlined:
-        return _OutlinedButton(content: child, onPressed: onPressed, style: style.outlined);
+        return _Button(onPressed: onPressed, style: style, type: style.outlined, child: child);
     }
   }
 }
 
-class _FlatButton extends StatelessWidget {
-  final ButtonStyle style;
-  final Widget content;
+class _Button extends StatelessWidget {
+  final FButtonStyle style;
+  final FButtonTypeStyle type;
+  final Widget child;
   final VoidCallback? onPressed;
 
-  const _FlatButton({
-    required this.content,
-    required this.onPressed,
+  const _Button({
     required this.style,
+    required this.type,
+    required this.onPressed,
+    required this.child,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) => FTappable(
-        onPressed: onPressed,
-        builder: (context, onPressed) => ElevatedButton(
-          style: style,
-          onPressed: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 5,
-              vertical: 17,
-            ),
-            child: content,
-          ),
+      onPressed: onPressed,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: type.border),
+          borderRadius: style.borderRadius,
+          color: type.background,
         ),
-      );
-}
-
-class _OutlinedButton extends StatelessWidget {
-  final ButtonStyle style;
-  final Widget content;
-  final VoidCallback? onPressed;
-
-  const _OutlinedButton({
-    required this.content,
-    required this.onPressed,
-    required this.style,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) => FTappable(
-        onPressed: onPressed,
-        builder: (context, onPressed) => OutlinedButton(
-          style: style,
-          onPressed: onPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 5,
-              vertical: 17,
-            ),
-            child: content,
-          ),
-        ),
-      );
+        padding: style.padding,
+        child: child,
+      ),
+    );
 }

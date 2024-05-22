@@ -14,22 +14,25 @@ const _textStyle = TextStyle(
 /// [FButtonStyle]'s style.
 class FButtonStyle {
   /// The primary style.
-  final ButtonStyle primary;
+  final FButtonTypeStyle primary;
 
   /// The secondary style.
-  final ButtonStyle secondary;
+  final FButtonTypeStyle secondary;
 
   /// The destructive style.
-  final ButtonStyle destructive;
+  final FButtonTypeStyle destructive;
 
   /// The outlined style.
-  final ButtonStyle outlined;
-
-  /// The link style.
-  final ButtonStyle link;
+  final FButtonTypeStyle outlined;
 
   /// The text.
   final TextStyle text;
+
+  /// The padding.
+  final EdgeInsets padding;
+
+  /// The padding.
+  final BorderRadius borderRadius;
 
   /// The text.
   final FButtonContentStyle content;
@@ -40,22 +43,47 @@ class FButtonStyle {
     required this.secondary,
     required this.destructive,
     required this.outlined,
-    required this.link,
     required this.text,
+    required this.padding,
+    required this.borderRadius,
     required this.content,
   });
 
   /// Creates a [FButtonStyle] that inherits its properties from [data] and [style].
   FButtonStyle.inherit({required FFontData font, required FStyleData style})
-      // TODO: How do I link the default buttonStyles to the corresponding Factory constructor
-      : primary = _primaryStyle,
-        secondary = _secondaryStyle,
-        destructive = _destructiveStyle,
-        outlined = _outlinedStyle,
-        link = _linkStyle,
+      : primary = FButtonTypeStyle(
+          background: style.primary,
+          foreground: style.primaryForeground,
+          disabled: style.mutedForeground,
+          border: style.background,
+        ),
+        secondary = FButtonTypeStyle(
+          background: style.secondary,
+          foreground: style.secondaryForeground,
+          disabled: style.mutedForeground,
+          border: style.background,
+        ),
+        destructive = FButtonTypeStyle(
+          background: style.destructive,
+          foreground: style.foreground,
+          disabled: style.mutedForeground,
+          border: style.background,
+        ),
+        outlined = FButtonTypeStyle(
+          background: style.background,
+          foreground: style.foreground,
+          disabled: style.mutedForeground,
+          border: style.background,
+        ),
         text = ScaledTextStyle(_textStyle, font),
+        padding = const EdgeInsets.symmetric(
+          horizontal: 5,
+          vertical: 17,
+        ),
+        borderRadius = style.borderRadius,
         content = FButtonContentStyle.inherit(style: style, font: font);
 }
+
 
 final _primaryStyle = ButtonStyle(
   backgroundColor: MaterialStateProperty.resolveWith(
