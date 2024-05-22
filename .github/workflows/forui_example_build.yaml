@@ -47,5 +47,5 @@ jobs:
       - run: flutter analyze
       - run: flutter test
       - run: pod repo update
-        working-directory: samples/ios
+        working-directory: forui/example/ios
       - run: flutter build ios --debug --no-codesign --no-pub

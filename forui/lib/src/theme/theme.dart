@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// Represents a ForUI theme.
+/// Represents a Forui theme.
+///
+/// See [ThemeBuildContext.theme] for accessing the current theme.
 class FTheme extends StatelessWidget {
-  /// Retrieves the theme data.
-  static FThemeData of(BuildContext context) {
-    final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FThemes.zinc.light;
-  }
 
   /// The theme data.
   final FThemeData data;
@@ -35,7 +32,10 @@ class FTheme extends StatelessWidget {
     data: data,
     child: Directionality(
       textDirection: textDirection ?? Directionality.of(context),
-      child: child,
+      child: DefaultTextStyle(
+        style: data.style.textStyle.withFont(data.font),
+        child: child,
+      ),
     ),
   );
 
@@ -54,4 +54,16 @@ class _InheritedTheme extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant _InheritedTheme old) => data != old.data;
+}
+
+/// Provides functions for accessing the current [FThemeData].
+extension ThemeBuildContext on BuildContext {
+
+  /// Retrieves the current [FThemeData] from an ancestor [FTheme]. Defaults to [FThemes.zinc.light] if there is no
+  /// ancestor [FTheme].
+  FThemeData get theme {
+    final theme = dependOnInheritedWidgetOfExactType<_InheritedTheme>();
+    return theme?.data ?? FThemes.zinc.light;
+  }
+
 }

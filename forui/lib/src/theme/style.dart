@@ -7,8 +7,13 @@ final class FStyle with Diagnosticable {
   /// The border radius.
   final BorderRadius borderRadius;
 
+  /// The text style.
+  final TextStyle textStyle;
+
   /// Creates an [FStyle].
-  FStyle({BorderRadius? borderRadius}) : borderRadius = borderRadius ?? BorderRadius.circular(8);
+  FStyle({BorderRadius? borderRadius, TextStyle? textStyle}):
+    borderRadius = borderRadius ?? BorderRadius.circular(8),
+    textStyle = textStyle ?? const TextStyle(fontSize: 10);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

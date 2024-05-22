@@ -19,15 +19,15 @@ final class FCardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).cardStyle.content;
-
+    final font = context.theme.font;
+    final style = this.style ?? context.theme.cardStyle.content;
     return Padding(
       padding: style.padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (title != null) Text(title!, style: style.title),
-          if (subtitle != null) Text(subtitle!, style: style.subtitle),
+          if (title != null) Text(title!, style: style.title.withFont(font)),
+          if (subtitle != null) Text(subtitle!, style: style.subtitle.withFont(font)),
           if (child != null)
             Padding(
               padding: (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),

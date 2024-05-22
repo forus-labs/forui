@@ -17,13 +17,12 @@ class FBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).boxStyle;
-
+    final FBoxStyle(:color, :text) = style ?? context.theme.boxStyle;
     return ColoredBox(
-      color: style.color,
+      color: color,
       child: Text(
-        text,
-        style: style.text,
+        this.text,
+        style: text.withFont(context.theme.font),
       ),
     );
   }
