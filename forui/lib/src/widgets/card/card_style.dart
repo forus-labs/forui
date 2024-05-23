@@ -2,6 +2,7 @@ part of 'card.dart';
 
 /// [FCard]'s style.
 final class FCardStyle with Diagnosticable {
+
   /// The decoration.
   final BoxDecoration decoration;
 

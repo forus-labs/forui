@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
@@ -47,11 +46,11 @@ class FThemeData with Diagnosticable {
     cardStyle = FCardStyle.inherit(colorScheme: colorScheme, style: style),
     separatorStyle = FSeparatorStyle.inherit(
       colorScheme: colorScheme,
-      padding: const EdgeInsets.only(top: 20, bottom: 20),
+      padding: FSeparatorStyle.defaultPadding.horizontal,
     ),
     verticalSeparatorStyle = FSeparatorStyle.inherit(
       colorScheme: colorScheme,
-      padding: const EdgeInsets.only(left: 20, right: 20),
+      padding: FSeparatorStyle.defaultPadding.vertical,
     );
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.

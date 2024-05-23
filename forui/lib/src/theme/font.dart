@@ -59,10 +59,10 @@ final class FFont with Diagnosticable {
     this.heightScalar = 1,
   }):
     assert(family.isNotBlank, 'Font family should not be blank.'),
-    assert(0 < sizeScalar, 'The sizeScalar is $sizeScalar, but it should be in range "0 < sizeScalar"'),
-    assert(0 < letterSpacingScalar, 'The letterSpacingScalar is $letterSpacingScalar, but it should be in range "0 < letterSpacingScalar"'),
-    assert(0 < wordSpacingScalar, 'The wordSpacingScalar is $wordSpacingScalar, but it should be in range "0 < wordSpacingScalar"'),
-    assert(0 < heightScalar, 'The heightScalar is $heightScalar, but it should be in range "0 < heightScalar"');
+    assert(0 < sizeScalar, 'The sizeScalar is $sizeScalar, but it should be in the range "0 < sizeScalar".'),
+    assert(0 < letterSpacingScalar, 'The letterSpacingScalar is $letterSpacingScalar, but it should be in the range "0 < letterSpacingScalar".'),
+    assert(0 < wordSpacingScalar, 'The wordSpacingScalar is $wordSpacingScalar, but it should be in the range "0 < wordSpacingScalar".'),
+    assert(0 < heightScalar, 'The heightScalar is $heightScalar, but it should be in the range "0 < heightScalar".');
 
   /// Creates a copy of this [FFont] with the given properties replaced.
   FFont copyWith({
