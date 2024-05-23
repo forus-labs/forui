@@ -15,7 +15,7 @@ final class FStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
+      .add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
   }
 
   @override
