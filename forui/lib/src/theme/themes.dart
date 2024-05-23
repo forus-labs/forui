@@ -5,6 +5,12 @@ import 'package:forui/forui.dart';
 /// The Forui themes.
 extension FThemes on Never {
 
+  /// All the themes.
+  static final all = Map<String, FThemeData>.unmodifiable({
+    'zinc-light': zinc.light,
+    'zinc-dark': zinc.dark,
+  });
+
   /// The light and dark variants of the [Zinc](https://ui.shadcn.com/themes) theme.
   static final zinc = (
     light: FThemeData.inherit(

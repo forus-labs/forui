@@ -73,9 +73,8 @@ extension ThemeBuildContext on BuildContext {
 
   /// Retrieves the current [FThemeData] from an ancestor [FTheme]. Defaults to [FThemes.zinc.light] if there is no
   /// ancestor [FTheme].
-  FThemeData get theme {
-    final theme = dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FThemes.zinc.light;
-  }
+  ///
+  /// This is a convenience method for [FTheme.of].
+  FThemeData get theme => FTheme.of(this);
 
 }

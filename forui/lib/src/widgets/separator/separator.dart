@@ -23,11 +23,13 @@ final class FSeparator extends StatelessWidget {
       child: vertical ?
         SizedBox(
           width: style.width,
+          height: double.infinity,
           child: ColoredBox(
             color: style.color,
           ),
         ) :
         SizedBox(
+          width: double.infinity,
           height: style.width,
           child: ColoredBox(
             color: style.color,
