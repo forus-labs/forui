@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
@@ -28,8 +29,8 @@ class FCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).cardStyle;
-
+    final theme = context.theme;
+    final style = this.style ?? theme.cardStyle;
     return DecoratedBox(
       decoration: style.decoration,
       child: child,

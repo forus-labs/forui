@@ -8,16 +8,22 @@ final class FStyle with Diagnosticable {
   final BorderRadius borderRadius;
 
   /// Creates an [FStyle].
-  FStyle({BorderRadius? borderRadius}) : borderRadius = borderRadius ?? BorderRadius.circular(8);
+  FStyle({BorderRadius? borderRadius}):
+    borderRadius = borderRadius ?? BorderRadius.circular(8);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
+    properties
+      .add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is FStyle && borderRadius == other.borderRadius;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FStyle &&
+          runtimeType == other.runtimeType &&
+          borderRadius == other.borderRadius;
 
   @override
   int get hashCode => borderRadius.hashCode;

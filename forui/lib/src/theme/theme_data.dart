@@ -34,8 +34,8 @@ class FThemeData with Diagnosticable {
     required this.font,
     required this.style,
   }):
-    boxStyle = FBoxStyle.inherit(colorScheme: colorScheme, font: font),
-    cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style);
+    boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
+    cardStyle = FCardStyle.inherit(colorScheme: colorScheme, style: style);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   FThemeData copyWith({

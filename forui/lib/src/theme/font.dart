@@ -185,3 +185,43 @@ final class FFont with Diagnosticable {
     heightScalar.hashCode;
 
 }
+
+/// Provides functions for working with [FFont]s.
+extension FontTextStyle on TextStyle {
+
+  /// Returns a [TextStyle] scaled using the given [font].
+  ///
+  /// ```dart
+  /// final font = FFont(
+  ///   family: 'packages/forui/my-font',
+  ///   sizeScalar: 2,
+  ///   letterSpacingScalar: 3,
+  ///   wordSpacingScalar: 4,
+  ///   heightScalar: 5,
+  /// );
+  ///
+  /// final style = TextStyle(
+  ///   fontFamily: 'default-font',
+  ///   fontSize: 1,
+  ///   letterSpacing: 1,
+  ///   wordSpacing: 1,
+  ///   height: 1,
+  /// ).withFont(font);
+  ///
+  /// print(style.fontFamily); // 'packages/forui/my-font'
+  /// print(style.fontSize); // 2
+  /// print(style.letterSpacing); // 3
+  /// print(style.wordSpacing); // 4
+  /// print(style.height); // 5
+  /// ```
+  TextStyle withFont(FFont font) => TextStyle(
+    fontFamily: font.family,
+    fontSize: _scale(fontSize, font.sizeScalar),
+    letterSpacing: _scale(letterSpacing, font.letterSpacingScalar),
+    wordSpacing: _scale(wordSpacing, font.wordSpacingScalar),
+    height: _scale(height, font.heightScalar),
+  );
+
+  double? _scale(double? value, double factor) => value == null ? null : value * factor;
+
+}
