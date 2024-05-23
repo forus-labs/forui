@@ -214,7 +214,7 @@ extension FontTextStyle on TextStyle {
   /// print(style.wordSpacing); // 4
   /// print(style.height); // 5
   /// ```
-  TextStyle withFont(FFont font) => TextStyle(
+  TextStyle withFont(FFont font) => copyWith(
     fontFamily: font.family,
     fontSize: _scale(fontSize, font.sizeScalar),
     letterSpacing: _scale(letterSpacing, font.letterSpacingScalar),

@@ -39,16 +39,27 @@ final class FSeparatorStyle with Diagnosticable {
   /// The thickness of
   final double thickness;
 
-  FSeparatorStyle({required this.color, required this.padding, this.thickness = 2});
+  FSeparatorStyle({required this.color, required this.padding, this.thickness = 1});
 
   FSeparatorStyle.inherit({required FColorScheme colorScheme}):
     color = colorScheme.secondary,
-    padding = const EdgeInsets.only(top: 5, bottom: 5),
-    thickness = 2;
+    padding = const EdgeInsets.only(top: 20, bottom: 20),
+    thickness = 1;
 
   FSeparatorStyle.inheritVertical({required FColorScheme colorScheme}):
     color = colorScheme.secondary,
-    padding = const EdgeInsets.only(left: 5, right: 5),
-    thickness = 2;
+    padding = const EdgeInsets.only(left: 20, right: 20),
+    thickness = 1;
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FSeparatorStyle &&
+          runtimeType == other.runtimeType &&
+          color == other.color &&
+          padding == other.padding &&
+          thickness == other.thickness;
+
+  @override
+  int get hashCode => color.hashCode ^ padding.hashCode ^ thickness.hashCode;
 }

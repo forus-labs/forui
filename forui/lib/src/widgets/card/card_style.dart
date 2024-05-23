@@ -16,6 +16,7 @@ final class FCardStyle with Diagnosticable {
     decoration = BoxDecoration(
       border: Border.all(color: colorScheme.border),
       borderRadius: style.borderRadius,
+      color: colorScheme.background,
     ),
     content = FCardContentStyle.inherit(colorScheme: colorScheme);
 

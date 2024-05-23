@@ -4,9 +4,6 @@ import 'package:flutter/widgets.dart';
 /// The overarching style that is used to configure the properties of widget-specific styles if they are not provided.
 final class FStyle with Diagnosticable {
 
-  /// The text style.
-  final TextStyle textStyle;
-
   /// The border radius.
   final BorderRadius borderRadius;
 
@@ -29,6 +26,6 @@ final class FStyle with Diagnosticable {
           borderRadius == other.borderRadius;
 
   @override
-  int get hashCode => textStyle.hashCode ^ borderRadius.hashCode;
+  int get hashCode => borderRadius.hashCode;
 
 }
