@@ -8,6 +8,14 @@ import 'package:forui/forui.dart';
 /// See [ThemeBuildContext.theme] for accessing the current theme.
 class FTheme extends StatelessWidget {
 
+  /// Retrieves the current theme data.
+  ///
+  /// It is recommended to use [ThemeBuildContext.theme] to access the current theme instead.
+  static FThemeData of(BuildContext context) {
+    final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
+    return theme?.data ?? FThemes.zinc.light;
+  }
+
   /// The theme data.
   final FThemeData data;
 
