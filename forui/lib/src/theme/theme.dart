@@ -41,7 +41,11 @@ class FTheme extends StatelessWidget {
     child: Directionality(
       textDirection: textDirection ?? Directionality.of(context),
       child: DefaultTextStyle(
-        style: data.style.textStyle.withFont(data.font),
+        // TODO: replace with configurable default font.
+        style: data.font.toTextStyle(
+          fontSize: 10,
+          color: data.colorScheme.foreground,
+        ),
         child: child,
       ),
     ),
