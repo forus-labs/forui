@@ -41,15 +41,8 @@ final class FSeparatorStyle with Diagnosticable {
 
   FSeparatorStyle({required this.color, required this.padding, this.thickness = 1});
 
-  FSeparatorStyle.inherit({required FColorScheme colorScheme}):
-    color = colorScheme.secondary,
-    padding = const EdgeInsets.only(top: 20, bottom: 20),
-    thickness = 1;
-
-  FSeparatorStyle.inheritVertical({required FColorScheme colorScheme}):
-    color = colorScheme.secondary,
-    padding = const EdgeInsets.only(left: 20, right: 20),
-    thickness = 1;
+  FSeparatorStyle.inherit({required FColorScheme colorScheme, required EdgeInsetsGeometry padding}):
+    this(color: colorScheme.secondary, padding: padding);
 
   @override
   bool operator ==(Object other) =>
