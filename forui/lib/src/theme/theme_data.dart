@@ -19,11 +19,8 @@ class FThemeData with Diagnosticable {
   /// The card style.
   final FCardStyle cardStyle;
 
-  /// The separator style.
-  final FSeparatorStyle separatorStyle;
-
-  /// The vertical separator style.
-  final FSeparatorStyle verticalSeparatorStyle;
+  /// The separator styles.
+  final ({FSeparatorStyle horizontal, FSeparatorStyle vertical}) separatorStyles;
 
   /// Creates a [FThemeData].
   FThemeData({
@@ -32,8 +29,7 @@ class FThemeData with Diagnosticable {
     required this.style,
     required this.boxStyle,
     required this.cardStyle,
-    required this.separatorStyle,
-    required this.verticalSeparatorStyle,
+    required this.separatorStyles,
   });
 
   /// Creates a [FThemeData] that inherits the given arguments' properties.
@@ -44,13 +40,15 @@ class FThemeData with Diagnosticable {
   }):
     boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
     cardStyle = FCardStyle.inherit(colorScheme: colorScheme, style: style),
-    separatorStyle = FSeparatorStyle.inherit(
-      colorScheme: colorScheme,
-      padding: FSeparatorStyle.defaultPadding.horizontal,
-    ),
-    verticalSeparatorStyle = FSeparatorStyle.inherit(
-      colorScheme: colorScheme,
-      padding: FSeparatorStyle.defaultPadding.vertical,
+    separatorStyles = (
+      horizontal: FSeparatorStyle.inherit(
+        colorScheme: colorScheme,
+        padding: FSeparatorStyle.defaultPadding.horizontal,
+      ),
+      vertical: FSeparatorStyle.inherit(
+        colorScheme: colorScheme,
+        padding: FSeparatorStyle.defaultPadding.vertical,
+      )
     );
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
@@ -60,16 +58,14 @@ class FThemeData with Diagnosticable {
     FStyle? style,
     FBoxStyle? boxStyle,
     FCardStyle? cardStyle,
-    FSeparatorStyle? separatorStyle,
-    FSeparatorStyle? verticalSeparatorStyle,
+    ({FSeparatorStyle horizontal, FSeparatorStyle vertical})? separatorStyles,
   }) => FThemeData(
     colorScheme: colorScheme ?? this.colorScheme,
     font: font ?? this.font,
     style: style ?? this.style,
     boxStyle: boxStyle ?? this.boxStyle,
     cardStyle: cardStyle ?? this.cardStyle,
-    separatorStyle: separatorStyle ?? this.separatorStyle,
-    verticalSeparatorStyle: verticalSeparatorStyle ?? this.separatorStyle,
+    separatorStyles: separatorStyles ?? this.separatorStyles,
   );
 
   @override
@@ -81,29 +77,27 @@ class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<FStyle>('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FSeparatorStyle>('separatorStyle', separatorStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FSeparatorStyle>('verticalSeparatorStyle', verticalSeparatorStyle, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty<({FSeparatorStyle horizontal, FSeparatorStyle vertical})>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug));
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is FThemeData &&
-    runtimeType == other.runtimeType &&
-    colorScheme == other.colorScheme &&
-    font == other.font &&
-    style == other.style &&
-    boxStyle == other.boxStyle &&
-    cardStyle == other.cardStyle &&
-    separatorStyle == other.separatorStyle &&
-    verticalSeparatorStyle == other.verticalSeparatorStyle;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FThemeData &&
+          runtimeType == other.runtimeType &&
+          colorScheme == other.colorScheme &&
+          font == other.font &&
+          style == other.style &&
+          boxStyle == other.boxStyle &&
+          cardStyle == other.cardStyle &&
+          separatorStyles == other.separatorStyles;
 
   @override
   int get hashCode =>
-    colorScheme.hashCode ^
-    font.hashCode ^
-    style.hashCode ^
-    boxStyle.hashCode ^
-    cardStyle.hashCode ^
-    separatorStyle.hashCode ^
-    verticalSeparatorStyle.hashCode;
-
+      colorScheme.hashCode ^
+      font.hashCode ^
+      style.hashCode ^
+      boxStyle.hashCode ^
+      cardStyle.hashCode ^
+      separatorStyles.hashCode;
 }

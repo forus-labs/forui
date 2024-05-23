@@ -17,7 +17,7 @@ final class FSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? (vertical ? context.theme.verticalSeparatorStyle : context.theme.separatorStyle);
+    final style = this.style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
     return Padding(
       padding: style.padding,
       child: vertical ?
@@ -43,8 +43,8 @@ final class FSeparatorStyle with Diagnosticable {
 
   /// The default padding for horizontal and vertical separators.
   static const defaultPadding = (
-    horizontal: EdgeInsets.only(top: 20, bottom: 20),
-    vertical: EdgeInsets.only(left: 20, right: 20),
+    horizontal: EdgeInsets.symmetric(vertical: 20),
+    vertical: EdgeInsets.symmetric(horizontal: 20),
   );
 
   /// The color of the separating line. Defaults to [FColorScheme.secondary].
