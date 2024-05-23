@@ -4,27 +4,33 @@ import 'package:flutter/widgets.dart';
 /// The overarching style that is used to configure the properties of widget-specific styles if they are not provided.
 final class FStyle with Diagnosticable {
 
-  /// The border radius.
-  final BorderRadius borderRadius;
-
   /// The text style.
   final TextStyle textStyle;
 
+  /// The border radius.
+  final BorderRadius borderRadius;
+
   /// Creates an [FStyle].
-  FStyle({BorderRadius? borderRadius, TextStyle? textStyle}):
-    borderRadius = borderRadius ?? BorderRadius.circular(8),
-    textStyle = textStyle ?? const TextStyle(fontSize: 10);
+  FStyle({required this.textStyle, BorderRadius? borderRadius}):
+    borderRadius = borderRadius ?? BorderRadius.circular(8);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
+    properties
+      ..add(DiagnosticsProperty<TextStyle>('textStyle', textStyle))
+      ..add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius));
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is FStyle && borderRadius == other.borderRadius;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FStyle &&
+          runtimeType == other.runtimeType &&
+          textStyle == other.textStyle &&
+          borderRadius == other.borderRadius;
 
   @override
-  int get hashCode => borderRadius.hashCode;
+  int get hashCode => textStyle.hashCode ^ borderRadius.hashCode;
 
 }

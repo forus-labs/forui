@@ -22,7 +22,12 @@ extension FThemes on Never {
         destructiveForeground: Color(0xFFFAFAFA),
         border: Color(0xFFE4E4E7),
       ),
-      style: FStyle(),
+      style: FStyle(
+        textStyle: const TextStyle(
+          fontSize: 10,
+          color: Color(0xFF09090B),
+        ),
+      ),
     ),
     dark: FThemeData.inherit(
       font: FFont(),
@@ -39,7 +44,12 @@ extension FThemes on Never {
         destructiveForeground: Color(0xFFFAFAFA),
         border: Color(0xFF27272A),
       ),
-      style: FStyle(),
+      style: FStyle(
+        textStyle: const TextStyle(
+          fontSize: 10,
+          color: Color(0xFFFAFAFA),
+        ),
+      ),
     ),
   );
 }

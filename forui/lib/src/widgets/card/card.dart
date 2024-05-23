@@ -33,10 +33,7 @@ class FCard extends StatelessWidget {
     final style = this.style ?? theme.cardStyle;
     return DecoratedBox(
       decoration: style.decoration,
-      child: DefaultTextStyle(
-        style: style.text.withFont(theme.font),
-        child: child,
-      ),
+      child: child,
     );
   }
 }
