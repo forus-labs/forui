@@ -69,6 +69,13 @@ final class FSeparatorStyle with Diagnosticable {
   FSeparatorStyle.inherit({required FColorScheme colorScheme, required FStyle style, required EdgeInsetsGeometry padding}):
     this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
+  /// Creates a copy of this [FSeparatorStyle] with the given properties replaced.
+  FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? thickness}) => FSeparatorStyle(
+    color: color ?? this.color,
+    padding: padding ?? this.padding,
+    thickness: thickness ?? this.thickness,
+  );
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

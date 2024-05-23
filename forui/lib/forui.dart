@@ -14,5 +14,5 @@ export 'src/theme/themes.dart';
 
 // Widgets
 export 'src/widgets/box/box.dart';
-export 'src/widgets/card/card.dart';
+export 'src/widgets/card/card.dart' hide FCardContent;
 export 'src/widgets/separator/separator.dart';
