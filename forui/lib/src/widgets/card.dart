@@ -6,6 +6,8 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+import 'package:forui/forui.dart';
+
 part 'card_content.dart';
 
 /// A card widget.
