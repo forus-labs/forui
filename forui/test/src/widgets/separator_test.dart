@@ -33,18 +33,20 @@ void main() {
             ),
           ];
 
-          await tester.pumpWidget(Box(
-            data: theme,
-            child: value ?
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children,
-              ) :
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: children,
-              ),
-          ));
+          await tester.pumpWidget(
+            Box(
+              data: theme,
+              child: value ?
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: children,
+                ) :
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: children,
+                ),
+            ),
+          );
 
           await expectLater(
             find.byType(Box),

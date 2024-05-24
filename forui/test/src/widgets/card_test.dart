@@ -12,19 +12,21 @@ void main() {
   group('FCard', () {
     for (final (name, theme, background) in Box.themes) {
       testWidgets('$name with FCardContent', (tester) async {
-        await tester.pumpWidget(Box(
-          data: theme,
-          background: background,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FCard(
-                title: 'Notifications',
-                subtitle: 'You have 3 unread messages.',
-              ),
-            ],
+        await tester.pumpWidget(
+          Box(
+            data: theme,
+            background: background,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FCard(
+                  title: 'Notifications',
+                  subtitle: 'You have 3 unread messages.',
+                ),
+              ],
+            ),
           ),
-        ));
+        );
 
         await expectLater(
           find.byType(Box),
@@ -33,21 +35,23 @@ void main() {
       });
 
       testWidgets('$name with raw content', (tester) async {
-        await tester.pumpWidget(Box(
-          data: theme,
-          background: background,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FCard.raw(
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
+        await tester.pumpWidget(
+          Box(
+            data: theme,
+            background: background,
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FCard.raw(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ));
+        );
 
         await expectLater(
           find.byType(Box),
