@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 part 'card_content.dart';
 
-/// A card, typically with a title and subtitle.
+/// A card widget.
 final class FCard extends StatelessWidget {
   /// The child.
   final Widget child;
@@ -15,7 +15,7 @@ final class FCard extends StatelessWidget {
   /// The style.
   final FCardStyle? style;
 
-  /// Creates a [FCard].
+  /// Creates a [FCard] with a tile and subtitle.
   FCard({
     String? title,
     String? subtitle,
