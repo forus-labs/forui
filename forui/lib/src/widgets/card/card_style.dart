@@ -2,6 +2,7 @@ part of 'card.dart';
 
 /// [FCard]'s style.
 final class FCardStyle with Diagnosticable {
+
   /// The decoration.
   final BoxDecoration decoration;
 
@@ -14,8 +15,12 @@ final class FCardStyle with Diagnosticable {
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [style].
   FCardStyle.inherit({required FColorScheme colorScheme, required FStyle style}):
     decoration = BoxDecoration(
-      border: Border.all(color: colorScheme.border),
+      border: Border.all(
+        color: colorScheme.border,
+        width: style.borderWidth,
+      ),
       borderRadius: style.borderRadius,
+      color: colorScheme.background,
     ),
     content = FCardContentStyle.inherit(colorScheme: colorScheme);
 
