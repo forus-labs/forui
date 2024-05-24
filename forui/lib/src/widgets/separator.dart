@@ -72,10 +72,10 @@ final class FSeparatorStyle with Diagnosticable {
     this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
   /// Creates a copy of this [FSeparatorStyle] with the given properties replaced.
-  FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? thickness}) => FSeparatorStyle(
+  FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FSeparatorStyle(
     color: color ?? this.color,
     padding: padding ?? this.padding,
-    thickness: thickness ?? this.thickness,
+    width: width ?? this.width,
   );
 
   @override
