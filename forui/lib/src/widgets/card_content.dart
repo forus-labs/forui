@@ -1,20 +1,11 @@
 part of 'card.dart';
 
-/// Represents a [FCard]'s content.
 @internal final class FCardContent extends StatelessWidget {
-  /// The title.
   final String? title;
-
-  /// The subtitle.
   final String? subtitle;
-
-  /// The child.
   final Widget? child;
-
-  /// The style.
   final FCardContentStyle? style;
 
-  /// Creates a [FCardContent].
   const FCardContent({this.title, this.subtitle, this.child, this.style, super.key});
 
   @override
@@ -26,6 +17,7 @@ part of 'card.dart';
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // TODO: Check if TextStyle and font have the same font before scaling.
           if (title != null) Text(title!, style: style.title.withFont(font)),
           if (subtitle != null) Text(subtitle!, style: style.subtitle.withFont(font)),
           if (child != null)
@@ -39,7 +31,7 @@ part of 'card.dart';
   }
 }
 
-/// [FCardContent]'s style.
+/// A card content's style.
 final class FCardContentStyle with Diagnosticable {
   /// The padding.
   final EdgeInsets padding;
