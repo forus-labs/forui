@@ -43,10 +43,12 @@ class FThemeData with Diagnosticable {
     separatorStyles = (
       horizontal: FSeparatorStyle.inherit(
         colorScheme: colorScheme,
+        style: style,
         padding: FSeparatorStyle.defaultPadding.horizontal,
       ),
       vertical: FSeparatorStyle.inherit(
         colorScheme: colorScheme,
+        style: style,
         padding: FSeparatorStyle.defaultPadding.vertical,
       )
     );

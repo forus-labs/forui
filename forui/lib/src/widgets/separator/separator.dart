@@ -22,13 +22,13 @@ final class FSeparator extends StatelessWidget {
       padding: style.padding,
       child: vertical ?
         SizedBox(
-          width: style.thickness,
+          width: style.width,
           child: ColoredBox(
             color: style.color,
           ),
         ) :
         SizedBox(
-          height: style.thickness,
+          height: style.width,
           child: ColoredBox(
             color: style.color,
           ),
@@ -53,21 +53,21 @@ final class FSeparatorStyle with Diagnosticable {
   /// The padding surrounding the separating line.
   final EdgeInsetsGeometry padding;
 
-  /// The thickness of the separating line. Defaults to 1.
+  /// The width of the separating line. Defaults to 1.
   ///
   /// ## Contract:
   /// Throws an [AssertionError] if:
-  /// * `thickness` <= 0.0
-  /// * `thickness` is Nan
-  final double thickness;
+  /// * `width` <= 0.0
+  /// * `width` is Nan
+  final double width;
 
   /// Creates a [FSeparatorStyle].
-  FSeparatorStyle({required this.color, required this.padding, this.thickness = 1}):
-    assert(0 < thickness, 'The thickness is $thickness, but it should be in the range "0 < thickness".');
+  FSeparatorStyle({required this.color, required this.padding, this.width = 1}):
+    assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme].
-  FSeparatorStyle.inherit({required FColorScheme colorScheme, required EdgeInsetsGeometry padding}):
-    this(color: colorScheme.secondary, padding: padding);
+  FSeparatorStyle.inherit({required FColorScheme colorScheme, required FStyle style, required EdgeInsetsGeometry padding}):
+    this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
   @override
   bool operator ==(Object other) =>
@@ -76,9 +76,9 @@ final class FSeparatorStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           color == other.color &&
           padding == other.padding &&
-          thickness == other.thickness;
+          width == other.width;
 
   @override
-  int get hashCode => color.hashCode ^ padding.hashCode ^ thickness.hashCode;
+  int get hashCode => color.hashCode ^ padding.hashCode ^ width.hashCode;
 
 }
