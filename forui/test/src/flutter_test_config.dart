@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'threshold_file_comparator.dart';
