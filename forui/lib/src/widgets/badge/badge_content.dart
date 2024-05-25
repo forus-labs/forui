@@ -13,6 +13,14 @@ part of 'badge.dart';
     child: Text(text, style: style.content.text.withFont(context.theme.font)),
   );
 
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<FBadgeStyle>('style', style))
+      ..add(StringProperty('text', text));
+  }
+
 }
 
 /// A badge content's style.

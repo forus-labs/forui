@@ -54,6 +54,15 @@ class FBadge extends StatelessWidget {
     // TODO: Wrap in FTappable when it's ready.
     return chip;
   }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<FBadgeDesign>('design', design))
+      ..add(DiagnosticsProperty<void Function(BuildContext)?>('onPressed', onPressed, defaultValue: null))
+      ..add(DiagnosticsProperty<void Function(BuildContext)?>('onLongPressed', onLongPressed, defaultValue: null))
+      ..add(DiagnosticsProperty<Widget Function(BuildContext, FBadgeStyle)>('builder', builder, defaultValue: null));
+  }
 
 }
 

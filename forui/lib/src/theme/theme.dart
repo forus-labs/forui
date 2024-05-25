@@ -54,7 +54,9 @@ class FTheme extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FThemeData>('data', data, showName: false));
+    properties
+      ..add(DiagnosticsProperty<FThemeData>('data', data, showName: false))
+      ..add(EnumProperty<TextDirection?>('textDirection', textDirection));
   }
 
 }
@@ -66,6 +68,12 @@ class _InheritedTheme extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant _InheritedTheme old) => data != old.data;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FThemeData>('data', data));
+  }
 }
 
 /// Provides functions for accessing the current [FThemeData].

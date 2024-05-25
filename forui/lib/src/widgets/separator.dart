@@ -37,6 +37,13 @@ final class FSeparator extends StatelessWidget {
         ),
     );
   }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<bool>('vertical', vertical))
+      ..add(DiagnosticsProperty<FSeparatorStyle?>('style', style));
+  }
 
 }
 
@@ -77,6 +84,15 @@ final class FSeparatorStyle with Diagnosticable {
     padding: padding ?? this.padding,
     width: width ?? this.width,
   );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding))
+      ..add(ColorProperty('color', color))
+      ..add(DoubleProperty('width', width));
+  }
 
   @override
   bool operator ==(Object other) =>

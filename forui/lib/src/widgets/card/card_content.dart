@@ -29,6 +29,14 @@ part of 'card.dart';
       ),
     );
   }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('title', title))
+      ..add(StringProperty('subtitle', subtitle))
+      ..add(DiagnosticsProperty<FCardContentStyle?>('style', style));
+  }
 }
 
 /// A card content's style.

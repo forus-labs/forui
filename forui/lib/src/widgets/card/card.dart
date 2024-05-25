@@ -1,12 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
-
-import 'package:forui/forui.dart';
 
 part 'card_content.dart';
 
@@ -38,6 +33,12 @@ final class FCard extends StatelessWidget {
       decoration: style.decoration,
       child: child,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FCardStyle?>('style', style));
   }
 }
 
@@ -71,7 +72,8 @@ final class FCardStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty<FCardContentStyle>('content', content));
+      ..add(DiagnosticsProperty<FCardContentStyle>('content', content))
+      ..add(DiagnosticsProperty<BoxDecoration>('decoration', decoration));
   }
 
   @override
