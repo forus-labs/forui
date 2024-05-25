@@ -2,10 +2,10 @@ part of 'badge.dart';
 
 @internal final class FBadgeContent extends StatelessWidget {
 
-  final FBadgeStyle style;
   final String label;
+  final FBadgeStyle style;
 
-  const FBadgeContent(this.label, {required this.style, super.key});
+  const FBadgeContent({required this.label, required this.style, super.key});
 
   @override
   Widget build(BuildContext context) => Center(
@@ -42,7 +42,6 @@ final class FBadgeContentStyle with Diagnosticable {
     label: label ?? this.label,
     padding: padding ?? this.padding,
   );
-
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

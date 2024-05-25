@@ -17,7 +17,10 @@ void main() {
             TestScaffold(
               data: theme,
               background: background,
-              child: FBadge('Badge', design: variant),
+              child: FBadge(
+                label: 'Badge',
+                design: variant,
+              ),
             ),
           );
 

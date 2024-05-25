@@ -13,16 +13,19 @@ class FBadge extends StatelessWidget {
 
   /// The design.
   final FBadgeDesign design;
+
   /// A callback for when the badge is pressed.
   final void Function(BuildContext)? onPressed;
+
   /// A callback for when the badge is long pressed.
   final void Function(BuildContext)? onLongPressed;
+
   /// The builder.
   final Widget Function(BuildContext, FBadgeStyle) builder;
 
   /// Creates a [FBadge].
-  FBadge(String label, {required this.design, this.onPressed, this.onLongPressed, super.key}):
-    builder = ((context, style) => FBadgeContent(label, style: style));
+  FBadge({required String label, required this.design, this.onPressed, this.onLongPressed, super.key}):
+    builder = ((context, style) => FBadgeContent(label: label, style: style));
 
   /// Creates a [FBadge].
   const FBadge.raw({required this.design, required this.builder, this.onPressed, this.onLongPressed, super.key});

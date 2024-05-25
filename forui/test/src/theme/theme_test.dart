@@ -21,9 +21,11 @@ class Foo extends StatelessWidget {
 void main() {
   group('FTheme', () {
     testWidgets('ThemeData is visible in child widgets', (tester) async {
-      await tester.pumpWidget(Foo(
-        child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}')),
-      ));
+      await tester.pumpWidget(
+        Foo(
+          child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}')),
+        ),
+      );
 
       expect(find.text('true'), findsOneWidget);
     });

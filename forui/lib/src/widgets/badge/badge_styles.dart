@@ -5,10 +5,13 @@ class FBadgeStyles with Diagnosticable {
 
   /// The primary badge style.
   final FBadgeStyle primary;
+
   /// The secondary badge style.
   final FBadgeStyle secondary;
+
   /// The outlined badge style.
   final FBadgeStyle outline;
+
   /// The destructive badge style.
   final FBadgeStyle destructive;
 
