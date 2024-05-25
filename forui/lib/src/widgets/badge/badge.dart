@@ -19,8 +19,8 @@ class FBadge extends StatelessWidget {
   final Widget Function(BuildContext, FBadgeStyle) builder;
 
   /// Creates a [FBadge].
-  FBadge(String text, {required this.design, this.onPressed, this.onLongPressed, super.key}):
-    builder = ((context, style) => FBadgeContent(text, style: style));
+  FBadge(String label, {required this.design, this.onPressed, this.onLongPressed, super.key}):
+    builder = ((context, style) => FBadgeContent(label, style: style));
 
   /// Creates a [FBadge].
   const FBadge.raw({required this.design, required this.builder, this.onPressed, this.onLongPressed, super.key});
@@ -35,16 +35,20 @@ class FBadge extends StatelessWidget {
       FBadgeVariant.destructive => context.theme.badgeStyles.destructive,
     };
 
-    final chip = DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: style.border,
-          width: style.borderWidth,
+    final chip = IntrinsicWidth(
+      child: IntrinsicHeight(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: style.border,
+              width: style.borderWidth,
+            ),
+            borderRadius: style.borderRadius,
+            color: style.background,
+          ),
+          child: builder(context, style),
         ),
-        borderRadius: style.borderRadius,
-        color: style.background,
       ),
-      child: builder(context, style),
     );
 
     if (onPressed == null && onLongPressed == null) {
@@ -119,7 +123,7 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
     required this.background,
     required this.border,
     required this.content,
-  }): borderRadius = style.borderRadius, borderWidth = style.borderWidth;
+  }): borderRadius = BorderRadius.circular(100), borderWidth = style.borderWidth;
 
   /// Creates a copy of this [FBadgeStyle] with the given properties replaced.
   FBadgeStyle copyWith({

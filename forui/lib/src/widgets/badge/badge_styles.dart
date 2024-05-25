@@ -17,50 +17,50 @@ class FBadgeStyles with Diagnosticable {
 
   /// Creates a [FBadgeStyles] that inherits its properties from [colorScheme] and [style].
   FBadgeStyles.inherit({required FColorScheme colorScheme, required FStyle style}):
-    primary = FBadgeStyle(
+    primary = FBadgeStyle.inherit(
+      style: style,
       background: colorScheme.primary,
       border: colorScheme.primary,
-      borderRadius: style.borderRadius,
       content: FBadgeContentStyle(
-        text: TextStyle(
+        label: TextStyle(
           color: colorScheme.primaryForeground,
-          fontSize: 10,
+          fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
       ),
     ),
-    secondary = FBadgeStyle(
+    secondary = FBadgeStyle.inherit(
+      style: style,
       background: colorScheme.secondary,
       border: colorScheme.secondary,
-      borderRadius: style.borderRadius,
       content: FBadgeContentStyle(
-        text: TextStyle(
+        label: TextStyle(
           color: colorScheme.secondaryForeground,
-          fontSize: 10,
+          fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
       ),
     ),
-    outline = FBadgeStyle(
+    outline = FBadgeStyle.inherit(
+      style: style,
       background: colorScheme.background,
       border: colorScheme.border,
-      borderRadius: style.borderRadius,
       content: FBadgeContentStyle(
-        text: TextStyle(
+        label: TextStyle(
           color: colorScheme.foreground,
-          fontSize: 10,
+          fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
       ),
     ),
-    destructive = FBadgeStyle(
+    destructive = FBadgeStyle.inherit(
+      style: style,
       background: colorScheme.destructive,
       border: colorScheme.destructive,
-      borderRadius: style.borderRadius,
       content: FBadgeContentStyle(
-        text: TextStyle(
+        label: TextStyle(
           color: colorScheme.destructiveForeground,
-          fontSize: 10,
+          fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
       ),

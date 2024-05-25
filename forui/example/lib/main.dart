@@ -16,22 +16,27 @@ class Application extends StatelessWidget {
         home: FTheme(
           data: FThemes.zinc.light,
           child: Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: FThemes.zinc.light.colorScheme.background,
             body: Padding(
               padding: const EdgeInsets.all(16),
-              child: ListView(
-                children: [
-                  FCard(
-                    title: 'Notification',
-                    subtitle: 'You have 3 unread messages.',
-                    child: const SizedBox(
-                      width: double.infinity,
-                      child: FBox(
-                        text: 'BODY',
+              child: Center(
+                child: FBadge.raw(
+                  design: FBadgeVariant.outline,
+                  builder: (context, style) => Padding(
+                    padding: const EdgeInsets.all(50),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: style.background,
+                        border: Border.all(
+                          color: Colors.blueAccent,
+                          width: 2,
+                        ),
                       ),
-                    ),
-                  ),
-                ],
+                    )
+                  )
+                ),
               ),
             ),
           ),
