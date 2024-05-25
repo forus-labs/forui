@@ -5,6 +5,8 @@ import 'package:sugar/core.dart';
 
 import 'package:forui/forui.dart';
 
+double? _scale(double? value, double factor) => value == null ? null : value * factor;
+
 /// A Forui font that used to configure the [TextStyle]s of Forui widgets.
 ///
 /// It is usually inherited from a ancestor [FTheme]. Besides the typical font information, a [FFont] also contains
@@ -155,8 +157,6 @@ final class FFont with Diagnosticable {
     overflow: overflow,
   );
 
-  double? _scale(double? value, double factor) => value == null ? null : value * factor;
-
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -221,7 +221,5 @@ extension FontTextStyle on TextStyle {
     wordSpacing: _scale(wordSpacing, font.wordSpacingScalar),
     height: _scale(height, font.heightScalar),
   );
-
-  double? _scale(double? value, double factor) => value == null ? null : value * factor;
 
 }

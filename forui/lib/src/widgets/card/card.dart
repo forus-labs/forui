@@ -1,21 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 
 part 'card_content.dart';
-part 'card_style.dart';
-part 'card_content_style.dart';
 
-/// Represents a card widget.
-class FCard extends StatelessWidget {
+/// A card widget.
+final class FCard extends StatelessWidget {
   /// The child.
   final Widget child;
 
   /// The style.
   final FCardStyle? style;
 
-  /// Creates a [FCard].
+  /// Creates a [FCard] with a tile and subtitle.
   FCard({
     String? title,
     String? subtitle,
@@ -36,4 +36,47 @@ class FCard extends StatelessWidget {
       child: child,
     );
   }
+}
+
+/// [FCard]'s style.
+final class FCardStyle with Diagnosticable {
+  /// The decoration.
+  final BoxDecoration decoration;
+
+  /// The [FCardContent] style.
+  final FCardContentStyle content;
+
+  /// Creates a [FCardStyle].
+  FCardStyle({required this.decoration, required this.content});
+
+  /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [style].
+  FCardStyle.inherit({required FColorScheme colorScheme, required FStyle style}):
+    decoration = BoxDecoration(
+      border: Border.all(color: colorScheme.border),
+      borderRadius: style.borderRadius,
+      color: colorScheme.background,
+    ),
+    content = FCardContentStyle.inherit(colorScheme: colorScheme);
+
+  /// Creates a copy of this [FCardStyle] with the given properties replaced.
+  FCardStyle copyWith({BoxDecoration? decoration, FCardContentStyle? content}) => FCardStyle(
+    decoration: decoration ?? this.decoration,
+    content: content ?? this.content,
+  );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty<FCardContentStyle>('content', content));
+  }
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is FCardStyle &&
+      runtimeType == other.runtimeType &&
+      decoration == other.decoration &&
+      content == other.content;
+
+  @override
+  int get hashCode => decoration.hashCode ^ content.hashCode;
 }

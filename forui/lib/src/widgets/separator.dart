@@ -23,11 +23,13 @@ final class FSeparator extends StatelessWidget {
       child: vertical ?
         SizedBox(
           width: style.width,
+          height: double.infinity,
           child: ColoredBox(
             color: style.color,
           ),
         ) :
         SizedBox(
+          width: double.infinity,
           height: style.width,
           child: ColoredBox(
             color: style.color,
@@ -68,6 +70,13 @@ final class FSeparatorStyle with Diagnosticable {
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme].
   FSeparatorStyle.inherit({required FColorScheme colorScheme, required FStyle style, required EdgeInsetsGeometry padding}):
     this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
+
+  /// Creates a copy of this [FSeparatorStyle] with the given properties replaced.
+  FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FSeparatorStyle(
+    color: color ?? this.color,
+    padding: padding ?? this.padding,
+    width: width ?? this.width,
+  );
 
   @override
   bool operator ==(Object other) =>

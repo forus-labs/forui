@@ -69,26 +69,32 @@ class FooStyle with Diagnosticable { // ---- (1)
   
   FooStyle.inherit({FFont font, FColorScheme scheme}): color = scheme.primary; // ---- (2)
   
+  FooStyle copyWith({Color? color}) => FooStyle( // ---- (3)
+    color: color ?? this.color, 
+  );
+  
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) { // ---- (3)
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) { // ---- (4)
     super.debugFillProperties(properties);
     properties.add(ColorProperty<BorderRadius>('color', color));
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is FStyle && color == other.color; // ---- (4)
+  bool operator ==(Object other) => identical(this, other) || other is FStyle && color == other.color; // ---- (5)
 
   @override
-  int get hashCode => color.hashCode; // ---- (4)
+  int get hashCode => color.hashCode; // ---- (5)
   
 }
 ```
 
-1. They should mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
-2. They should provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on 
+They should:
+1. mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
+2. provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on 
    an ancestor `FTheme`.
-3. They should override [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html).
-4. They should implement `operator ==` and `hashCode`.
+3. provide a `copyWith(...)` method.
+4. override [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html).
+5. implement `operator ==` and `hashCode`.
 
 
 Widget should not scale `TextStyle`S during initialization. `TextStyle`s should be scaled in a widget's build method instead.
