@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-class Box extends StatelessWidget {
+class TestScaffold extends StatelessWidget {
 
   static List<(String, FThemeData, Color)> get themes => [
     ('zinc-light', FThemes.zinc.light, const Color(0xFFD5FFFF)),
@@ -13,7 +13,7 @@ class Box extends StatelessWidget {
   final Color? background;
   final Widget child;
 
-  const Box({required this.data, required this.child, this.background, super.key});
+  const TestScaffold({required this.data, required this.child, this.background, super.key});
 
   @override
   Widget build(BuildContext context) => FTheme(

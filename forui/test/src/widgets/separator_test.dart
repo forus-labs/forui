@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import '../box.dart';
+import '../test_scaffold.dart';
 
 void main() {
   group('FSeparator', () {
-    for (final (name, theme, _) in Box.themes) {
+    for (final (name, theme, _) in TestScaffold.themes) {
       for (final (orientation, value) in [('horizontal', false), ('vertical', true)]) {
         testWidgets('$name - $orientation', (tester) async {
           final children = [
@@ -34,7 +34,7 @@ void main() {
           ];
 
           await tester.pumpWidget(
-            Box(
+            TestScaffold(
               data: theme,
               child: value ?
                 Row(
@@ -49,7 +49,7 @@ void main() {
           );
 
           await expectLater(
-            find.byType(Box),
+            find.byType(TestScaffold),
             matchesGoldenFile('separator/$name-$orientation.png'),
           );
         });

@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import '../box.dart';
+import '../test_scaffold.dart';
 
 void main() {
   group('FCard', () {
-    for (final (name, theme, background) in Box.themes) {
+    for (final (name, theme, background) in TestScaffold.themes) {
       testWidgets('$name with FCardContent', (tester) async {
         await tester.pumpWidget(
-          Box(
+          TestScaffold(
             data: theme,
             background: background,
             child: Column(
@@ -29,14 +29,14 @@ void main() {
         );
 
         await expectLater(
-          find.byType(Box),
+          find.byType(TestScaffold),
           matchesGoldenFile('card/$name-card-content.png'),
         );
       });
 
       testWidgets('$name with raw content', (tester) async {
         await tester.pumpWidget(
-          Box(
+          TestScaffold(
             data: theme,
             background: background,
             child: const Column(
@@ -54,7 +54,7 @@ void main() {
         );
 
         await expectLater(
-          find.byType(Box),
+          find.byType(TestScaffold),
           matchesGoldenFile('card/$name-raw-content.png'),
         );
       });
