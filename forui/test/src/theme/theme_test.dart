@@ -91,7 +91,8 @@ void main() {
       expect(
         builder.properties.map((p) => p.toString()),
         [
-          DiagnosticsProperty<FThemeData>('data', FThemes.zinc.dark, showName: false)
+          DiagnosticsProperty<FThemeData>('data', FThemes.zinc.dark, showName: false),
+          EnumProperty<TextDirection?>('textDirection', theme.textDirection),
         ].map((p) => p.toString()),
       );
     });

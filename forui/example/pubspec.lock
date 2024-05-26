@@ -205,10 +205,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flint
-      sha256: b2a1021a21f01d7e87ce4527d63b9fc7018bc00f3ef7f2fb5a1f88eb97a8790a
+      sha256: "47d2c84e11bf93fd0d257883a4aa6483d094b70672ec26e33a56faf8e4c04671"
       url: "https://pub.dev"
     source: hosted
-    version: "2.9.0"
+    version: "2.10.0"
   flutter:
     dependency: "direct main"
     description: flutter

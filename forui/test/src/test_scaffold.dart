@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -26,4 +27,12 @@ class TestScaffold extends StatelessWidget {
       child: child,
     ),
   );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<FThemeData>('data', data))
+      ..add(ColorProperty('background', background));
+  }
 }

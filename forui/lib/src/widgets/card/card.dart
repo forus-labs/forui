@@ -36,6 +36,12 @@ final class FCard extends StatelessWidget {
       child: child,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FCardStyle?>('style', style));
+  }
 }
 
 /// [FCard]'s style.
@@ -68,7 +74,8 @@ final class FCardStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty<FCardContentStyle>('content', content));
+      ..add(DiagnosticsProperty<FCardContentStyle>('content', content))
+      ..add(DiagnosticsProperty<BoxDecoration>('decoration', decoration));
   }
 
   @override

@@ -25,6 +25,13 @@ final class FBox extends StatelessWidget {
       ),
     );
   }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('text', text))
+      ..add(DiagnosticsProperty<FBoxStyle?>('style', style));
+  }
 }
 
 /// [FBox]'s style.
