@@ -68,4 +68,13 @@ class FButtonStyles {
             color: style.secondaryForeground,
           ),
         );
+
+  /// Returns a [FButtonStyle] based on the corresponding [FButtonVariant].
+  FButtonStyle variant(FButtonDesign style) => switch (style) {
+        final FButtonStyle style => style,
+        FButtonVariant.primary => primary,
+        FButtonVariant.secondary => secondary,
+        FButtonVariant.destructive => destructive,
+        FButtonVariant.outlined => outlined,
+      };
 }
