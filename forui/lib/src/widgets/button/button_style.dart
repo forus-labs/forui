@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:forui/forui.dart';
+part of 'button.dart';
 
-// TODO: make FButtonStyle extend Marked
 /// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton] widgets.
-class FButtonStyle {
+class FButtonStyle extends FButtonDesign {
   /// The background color.
   final Color background;
 
@@ -23,7 +21,7 @@ class FButtonStyle {
   final FButtonContentStyle content;
 
   /// Creates a [FButtonStyle].
-  const FButtonStyle({
+  FButtonStyle({
     required this.background,
     required this.foreground,
     required this.disabled,

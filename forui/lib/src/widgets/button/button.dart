@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-import 'button_content.dart';
-
+part 'button_content.dart';
+part 'button_style.dart';
+part 'button_styles.dart';
+part 'button_content_style.dart';
 
 sealed class FButtonDesign {}
 

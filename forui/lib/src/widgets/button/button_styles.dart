@@ -1,4 +1,4 @@
-import 'package:forui/forui.dart';
+part of 'button.dart';
 
 /// [FButtonStyle]'s style.
 class FButtonStyles {
@@ -30,7 +30,10 @@ class FButtonStyles {
           disabled: style.mutedForeground,
           border: style.primary,
           borderRadius: style.borderRadius,
-          content: FButtonContentStyle.inherit(style: style, font: font, color: style.primaryForeground,),
+          content: FButtonContentStyle.inherit(
+            font: font,
+            color: style.primaryForeground,
+          ),
         ),
         secondary = FButtonStyle(
           background: style.mutedForeground,
@@ -38,7 +41,10 @@ class FButtonStyles {
           disabled: style.mutedForeground,
           border: style.mutedForeground,
           borderRadius: style.borderRadius,
-            content: FButtonContentStyle.inherit(style: style, font: font, color: style.secondaryForeground,),
+          content: FButtonContentStyle.inherit(
+            font: font,
+            color: style.secondaryForeground,
+          ),
         ),
         destructive = FButtonStyle(
           background: style.destructive,
@@ -46,7 +52,10 @@ class FButtonStyles {
           disabled: style.mutedForeground,
           border: style.destructive,
           borderRadius: style.borderRadius,
-            content: FButtonContentStyle.inherit(style: style, font: font, color: style.foreground,),
+          content: FButtonContentStyle.inherit(
+            font: font,
+            color: style.foreground,
+          ),
         ),
         outlined = FButtonStyle(
           background: style.secondary,
@@ -54,6 +63,9 @@ class FButtonStyles {
           disabled: style.mutedForeground,
           border: style.mutedForeground,
           borderRadius: style.borderRadius,
-            content: FButtonContentStyle.inherit(style: style, font: font, color: style.secondaryForeground,),
+          content: FButtonContentStyle.inherit(
+            font: font,
+            color: style.secondaryForeground,
+          ),
         );
 }
