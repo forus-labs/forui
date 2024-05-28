@@ -23,7 +23,7 @@ class FThemeData with Diagnosticable {
   final FCardStyle cardStyle;
 
   /// The separator styles.
-  final ({FSeparatorStyle horizontal, FSeparatorStyle vertical}) separatorStyles;
+  final FSeparatorStyles separatorStyles;
 
   /// Creates a [FThemeData].
   FThemeData({
@@ -45,18 +45,7 @@ class FThemeData with Diagnosticable {
     badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, style: style),
     boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
     cardStyle = FCardStyle.inherit(colorScheme: colorScheme, style: style),
-    separatorStyles = (
-      horizontal: FSeparatorStyle.inherit(
-        colorScheme: colorScheme,
-        style: style,
-        padding: FSeparatorStyle.defaultPadding.horizontal,
-      ),
-      vertical: FSeparatorStyle.inherit(
-        colorScheme: colorScheme,
-        style: style,
-        padding: FSeparatorStyle.defaultPadding.vertical,
-      )
-    );
+    separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   FThemeData copyWith({
@@ -66,7 +55,7 @@ class FThemeData with Diagnosticable {
     FBadgeStyles? badgeStyles,
     FBoxStyle? boxStyle,
     FCardStyle? cardStyle,
-    ({FSeparatorStyle horizontal, FSeparatorStyle vertical})? separatorStyles,
+    FSeparatorStyles? separatorStyles,
   }) => FThemeData(
     colorScheme: colorScheme ?? this.colorScheme,
     font: font ?? this.font,
@@ -87,7 +76,7 @@ class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<FBadgeStyles>('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<({FSeparatorStyle horizontal, FSeparatorStyle vertical})>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty<FSeparatorStyles>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug));
   }
 
   @override

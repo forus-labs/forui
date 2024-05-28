@@ -20,22 +20,9 @@ class Application extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.all(16),
               child: Center(
-                child: FBadge.raw(
+                child: FBadge(
                   design: FBadgeVariant.outline,
-                  builder: (context, style) => Padding(
-                    padding: const EdgeInsets.all(50),
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: style.background,
-                        border: Border.all(
-                          color: Colors.blueAccent,
-                          width: 2,
-                        ),
-                      ),
-                    )
-                  )
+                  label: 'Hello, World!',
                 ),
               ),
             ),
