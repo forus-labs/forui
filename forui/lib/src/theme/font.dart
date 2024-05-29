@@ -70,6 +70,7 @@ final class FFont with Diagnosticable {
 
   /// The font size for base text. Defaults to 16.
   ///
+  /// ## Contract: 
   /// Throws an [AssertionError] if:
   /// * `base` <= 0.0
   /// * `base` is NaN
