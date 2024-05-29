@@ -26,7 +26,9 @@ class Application extends StatelessWidget {
       );
 }
 
+/// The example widget.
 class ExampleWidget extends StatelessWidget {
+  /// Creates an example widget.
   const ExampleWidget({super.key});
 
   @override
