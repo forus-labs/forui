@@ -53,7 +53,8 @@ final class FFont with Diagnosticable {
   final double heightScalar;
 
   /// The font size for extra small text. Defaults to 12.
-  ///
+  /// 
+  /// ## Contract:
   /// Throws an [AssertionError] if:
   /// * `xs` <= 0.0
   /// * `xs` is NaN
