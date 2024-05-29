@@ -47,6 +47,58 @@ final class FSeparator extends StatelessWidget {
 
 }
 
+/// The [FSeparator] styles.
+final class FSeparatorStyles with Diagnosticable {
+
+  /// The horizontal separator style.
+  final FSeparatorStyle horizontal;
+
+  /// The vertical separator style.
+  final FSeparatorStyle vertical;
+
+  /// Creates a [FSeparatorStyles].
+  FSeparatorStyles({required this.horizontal, required this.vertical});
+
+  /// Creates a [FSeparatorStyles] that inherits its properties from [colorScheme].
+  FSeparatorStyles.inherit({required FColorScheme colorScheme, required FStyle style}):
+    horizontal = FSeparatorStyle.inherit(
+      colorScheme: colorScheme,
+      style: style,
+      padding: FSeparatorStyle.defaultPadding.horizontal,
+    ),
+    vertical = FSeparatorStyle.inherit(
+      colorScheme: colorScheme,
+      style: style,
+      padding: FSeparatorStyle.defaultPadding.vertical
+    );
+
+  /// Creates a copy of this [FSeparatorStyles] with the given properties replaced.
+  FSeparatorStyles copyWith({FSeparatorStyle? horizontal, FSeparatorStyle? vertical}) => FSeparatorStyles(
+    horizontal: horizontal ?? this.horizontal,
+    vertical: vertical ?? this.vertical,
+  );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty<FSeparatorStyle>('horizontal', horizontal))
+      ..add(DiagnosticsProperty<FSeparatorStyle>('vertical', vertical));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FSeparatorStyles &&
+          runtimeType == other.runtimeType &&
+          horizontal == other.horizontal &&
+          vertical == other.vertical;
+
+  @override
+  int get hashCode => horizontal.hashCode ^ vertical.hashCode;
+
+}
+
 /// [FSeparator]'s style.
 final class FSeparatorStyle with Diagnosticable {
 
