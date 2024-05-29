@@ -298,6 +298,18 @@ final class FFont with Diagnosticable {
       ..add(DoubleProperty('letterSpacingScalar', letterSpacingScalar, defaultValue: 1))
       ..add(DoubleProperty('wordSpacingScalar', wordSpacingScalar, defaultValue: 1))
       ..add(DoubleProperty('heightScalar', heightScalar, defaultValue: 1));
+      properties.add(DoubleProperty('xs', xs));
+      properties.add(DoubleProperty('sm', sm));
+      properties.add(DoubleProperty('base', base));
+      properties.add(DoubleProperty('lg', lg));
+      properties.add(DoubleProperty('xl', xl));
+      properties.add(DoubleProperty('xl2', xl2));
+      properties.add(DoubleProperty('xl3', xl3));
+      properties.add(DoubleProperty('xl4', xl4));
+      properties.add(DoubleProperty('xl5', xl5));
+      properties.add(DoubleProperty('xl6', xl6));
+      properties.add(DoubleProperty('xl7', xl7));
+      properties.add(DoubleProperty('xl8', xl8));
   }
 
   @override
