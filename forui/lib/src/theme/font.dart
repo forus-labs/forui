@@ -78,6 +78,7 @@ final class FFont with Diagnosticable {
 
   /// The font size for large text. Defaults to 18.
   ///
+  /// ## Contract: 
   /// Throws an [AssertionError] if:
   /// * `lg` <= 0.0
   /// * `lg` is NaN
