@@ -53,16 +53,16 @@ final class FCardContentStyle with Diagnosticable {
   /// Creates a [FCardContentStyle].
   const FCardContentStyle({required this.padding, required this.title, required this.subtitle});
 
-  /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme].
-  FCardContentStyle.inherit({required FColorScheme colorScheme}):
+  /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [font].
+  FCardContentStyle.inherit({required FColorScheme colorScheme, required FFont font}):
     padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
     title = TextStyle(
-      fontSize: 16,
+      fontSize: font.base,
       fontWeight: FontWeight.w600,
       color: colorScheme.foreground,
     ),
     subtitle = TextStyle(
-      fontSize: 12,
+      fontSize: font.sm,
       color: colorScheme.mutedForeground,
     );
 
