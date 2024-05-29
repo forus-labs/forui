@@ -133,6 +133,7 @@ final class FFont with Diagnosticable {
 
   /// The font size for extra large text. Defaults to 72.
   ///
+  /// ## Contract:
   /// Throws an [AssertionError] if:
   /// * `xl7` <= 0.0
   /// * `xl7` is NaN
