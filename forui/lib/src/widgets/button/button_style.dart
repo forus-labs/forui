@@ -8,11 +8,14 @@ class FButtonStyle extends FButtonDesign {
   /// The foreground color.
   final Color foreground;
 
-  /// The primary color.
+  /// The disabled color.
   final Color disabled;
 
   /// The border color.
   final Color border;
+
+  /// The disabled border color.
+  final Color disabledBorder;
 
   /// The border radius.
   final BorderRadius borderRadius;
@@ -26,6 +29,7 @@ class FButtonStyle extends FButtonDesign {
     required this.foreground,
     required this.disabled,
     required this.border,
+    required this.disabledBorder,
     required this.borderRadius,
     required this.content,
   });
@@ -36,6 +40,7 @@ class FButtonStyle extends FButtonDesign {
     Color? foreground,
     Color? disabled,
     Color? border,
+    Color? disabledBorder,
     BorderRadius? borderRadius,
     FButtonContentStyle? content,
   }) =>
@@ -44,6 +49,7 @@ class FButtonStyle extends FButtonDesign {
         foreground: foreground ?? this.foreground,
         disabled: disabled ?? this.disabled,
         border: border ?? this.border,
+        disabledBorder: disabledBorder ?? this.disabledBorder,
         borderRadius: borderRadius ?? this.borderRadius,
         content: content ?? this.content,
       );

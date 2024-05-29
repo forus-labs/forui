@@ -44,7 +44,7 @@ final class FButtonContent extends StatelessWidget {
             child: Text(
               text!,
               style: style.content.text.copyWith(
-                color: disabled ? style.disabled : style.foreground,
+                color: disabled ? style.content.text.color!.withOpacity(0.5) : style.content.text.color,
               ),
             ),
           ),

@@ -65,7 +65,7 @@ class FButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(
-            color: onPressed == null ? style.disabled : style.border,
+            color: onPressed == null ? style.disabledBorder : style.border,
           ),
           borderRadius: style.borderRadius,
           color: onPressed == null ? style.disabled : style.background,

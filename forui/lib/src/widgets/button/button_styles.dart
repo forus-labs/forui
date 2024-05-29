@@ -27,8 +27,9 @@ class FButtonStyles {
       : primary = FButtonStyle(
           background: style.primary,
           foreground: style.primaryForeground,
-          disabled: style.mutedForeground,
+          disabled: const Color(0xFF787878),
           border: style.primary,
+          disabledBorder: const Color(0xFF787878),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
             font: font,
@@ -36,10 +37,11 @@ class FButtonStyles {
           ),
         ),
         secondary = FButtonStyle(
-          background: style.mutedForeground,
+          background: style.secondary,
           foreground: style.secondaryForeground,
-          disabled: style.mutedForeground,
-          border: style.mutedForeground,
+          disabled: const Color(0xFFF7F7F8),
+          border: style.secondary,
+          disabledBorder: const Color(0xFFF7F7F8),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
             font: font,
@@ -48,20 +50,22 @@ class FButtonStyles {
         ),
         destructive = FButtonStyle(
           background: style.destructive,
-          foreground: style.foreground,
-          disabled: style.mutedForeground,
+          foreground: style.destructiveForeground,
+          disabled: const Color(0xFFEFAAAA),
           border: style.destructive,
+          disabledBorder: const Color(0xFFEFAAAA),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
             font: font,
-            color: style.foreground,
+            color: style.destructiveForeground,
           ),
         ),
         outlined = FButtonStyle(
-          background: style.secondary,
+          background: style.background,
           foreground: style.secondaryForeground,
-          disabled: style.mutedForeground,
-          border: style.mutedForeground,
+          disabled:  style.background,
+          border: style.border,
+          disabledBorder: const Color(0xFFF0F0F0),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
             font: font,
