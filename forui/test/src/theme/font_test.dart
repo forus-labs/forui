@@ -33,7 +33,8 @@ void main() {
 
       test('letterSpacingScalar is 0', () => expect(() => FFont(letterSpacingScalar: 0), throwsAssertionError));
 
-      test('letterSpacingScalar is NaN', () => expect(() => FFont(letterSpacingScalar: double.nan), throwsAssertionError));
+      test('letterSpacingScalar is NaN',
+          () => expect(() => FFont(letterSpacingScalar: double.nan), throwsAssertionError));
 
       test('wordSpacingScalar is 0', () => expect(() => FFont(wordSpacingScalar: 0), throwsAssertionError));
 
@@ -114,18 +115,44 @@ void main() {
         letterSpacingScalar: 3,
         wordSpacingScalar: 4,
         heightScalar: 5,
+        xs: 6,
+        sm: 7,
+        base: 8,
+        lg: 9,
+        xl: 10,
+        xl2: 11,
+        xl3: 12,
+        xl4: 13,
+        xl5: 14,
+        xl6: 15,
+        xl7: 16,
+        xl8: 17,
       );
 
       final builder = DiagnosticPropertiesBuilder();
       font.debugFillProperties(builder);
 
-      expect(builder.properties.map((p) => p.toString()), [
-        StringProperty('family', 'Roboto'),
-        DoubleProperty('sizeScalar', 2),
-        DoubleProperty('letterSpacingScalar', 3),
-        DoubleProperty('wordSpacingScalar', 4),
-        DoubleProperty('heightScalar', 5),
-      ].map((p) => p.toString()));
+      expect(
+          builder.properties.map((p) => p.toString()),
+          [
+            StringProperty('family', 'Roboto'),
+            DoubleProperty('sizeScalar', 2),
+            DoubleProperty('letterSpacingScalar', 3),
+            DoubleProperty('wordSpacingScalar', 4),
+            DoubleProperty('heightScalar', 5),
+            DoubleProperty('xs', 6),
+            DoubleProperty('sm', 7),
+            DoubleProperty('base', 8),
+            DoubleProperty('lg', 9),
+            DoubleProperty('xl', 10),
+            DoubleProperty('xl2', 11),
+            DoubleProperty('xl3', 12),
+            DoubleProperty('xl4', 13),
+            DoubleProperty('xl5', 14),
+            DoubleProperty('xl6', 15),
+            DoubleProperty('xl7', 16),
+            DoubleProperty('xl8', 17),
+          ].map((p) => p.toString()));
     });
 
     group('equality and hashcode', () {
