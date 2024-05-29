@@ -62,6 +62,7 @@ final class FFont with Diagnosticable {
 
   /// The font size for small text. Defaults to 14.
   ///
+  /// ## Contract: 
   /// Throws an [AssertionError] if:
   /// * `sm` <= 0.0
   /// * `sm` is NaN
