@@ -46,7 +46,7 @@ class FBadge extends StatelessWidget {
       FBadgeVariant.destructive => context.theme.badgeStyles.destructive,
     };
 
-    final chip = IntrinsicWidth(
+    final badge = IntrinsicWidth(
       child: IntrinsicHeight(
         child: DecoratedBox(
           decoration: BoxDecoration(
@@ -63,11 +63,11 @@ class FBadge extends StatelessWidget {
     );
 
     if (onPressed == null && onLongPressed == null) {
-      return chip;
+      return badge;
     }
 
     // TODO: Wrap in FTappable when it's ready.
-    return chip;
+    return badge;
   }
 
   @override

@@ -14,7 +14,7 @@ class FAssets {
 
   static $FAssetsIcons get icons => const $FAssetsIcons();
 
-  static Map<String, Asset> get contents => {};
+  static Map<String, Asset> get contents => const {};
 }
 
 class $FAssetsIcons {
@@ -8780,7 +8780,7 @@ class $FAssetsIcons {
         'assets/icons/zoom-out.svg',
       );
 
-  Map<String, Asset> get contents => {
+  Map<String, Asset> get contents => const {
         'a-arrow-down': const SvgAsset(
           'forui_assets',
           'a-arrow-down',
