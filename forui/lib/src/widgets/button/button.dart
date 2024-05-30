@@ -58,8 +58,7 @@ class FButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = FTheme.of(context).widgets.button.variant(this.style);
-
+    final style = context.theme.buttonStyles.variant(this.style);
     return FTappable(
       onPressed: onPressed,
       child: DecoratedBox(

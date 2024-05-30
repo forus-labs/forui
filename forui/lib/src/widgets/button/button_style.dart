@@ -34,7 +34,7 @@ class FButtonStyle extends FButtonDesign {
     required this.content,
   });
 
-  /// Creates a copy of this [FButtonTypeStyle] with the given properties replaced.
+  /// Creates a copy of this [FButtonStyle] with the given properties replaced.
   FButtonStyle copyWith({
     Color? background,
     Color? foreground,

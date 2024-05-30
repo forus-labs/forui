@@ -22,54 +22,50 @@ class FButtonStyles {
     required this.outlined,
   });
 
-  /// Creates a [FButtonStyle] that inherits its properties from [data] and [style].
-  FButtonStyles.inherit({required FFontData font, required FStyleData style})
+  /// Creates a [FButtonStyle] that inherits its properties from [colorScheme].
+  FButtonStyles.inherit({required FColorScheme colorScheme, required FStyle style})
       : primary = FButtonStyle(
-          background: style.primary,
-          foreground: style.primaryForeground,
+          background: colorScheme.primary,
+          foreground: colorScheme.primaryForeground,
           disabled: const Color(0xFF787878),
-          border: style.primary,
+          border: colorScheme.primary,
           disabledBorder: const Color(0xFF787878),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
-            font: font,
-            color: style.primaryForeground,
+            color: colorScheme.primaryForeground,
           ),
         ),
         secondary = FButtonStyle(
-          background: style.secondary,
-          foreground: style.secondaryForeground,
+          background: colorScheme.secondary,
+          foreground: colorScheme.secondaryForeground,
           disabled: const Color(0xFFF7F7F8),
-          border: style.secondary,
+          border: colorScheme.secondary,
           disabledBorder: const Color(0xFFF7F7F8),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
-            font: font,
-            color: style.secondaryForeground,
+            color: colorScheme.secondaryForeground,
           ),
         ),
         destructive = FButtonStyle(
-          background: style.destructive,
-          foreground: style.destructiveForeground,
+          background: colorScheme.destructive,
+          foreground: colorScheme.destructiveForeground,
           disabled: const Color(0xFFEFAAAA),
-          border: style.destructive,
+          border: colorScheme.destructive,
           disabledBorder: const Color(0xFFEFAAAA),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
-            font: font,
-            color: style.destructiveForeground,
+            color: colorScheme.destructiveForeground,
           ),
         ),
         outlined = FButtonStyle(
-          background: style.background,
-          foreground: style.secondaryForeground,
-          disabled:  style.background,
-          border: style.border,
+          background: colorScheme.background,
+          foreground: colorScheme.secondaryForeground,
+          disabled:  colorScheme.background,
+          border: colorScheme.border,
           disabledBorder: const Color(0xFFF0F0F0),
           borderRadius: style.borderRadius,
           content: FButtonContentStyle.inherit(
-            font: font,
-            color: style.secondaryForeground,
+            color: colorScheme.secondaryForeground,
           ),
         );
 

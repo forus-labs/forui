@@ -19,6 +19,9 @@ class FThemeData with Diagnosticable {
   /// The box style.
   final FBoxStyle boxStyle;
 
+  /// The button styles.
+  final FButtonStyles buttonStyles;
+
   /// The card style.
   final FCardStyle cardStyle;
 
@@ -32,6 +35,7 @@ class FThemeData with Diagnosticable {
     required this.style,
     required this.badgeStyles,
     required this.boxStyle,
+    required this.buttonStyles,
     required this.cardStyle,
     required this.separatorStyles,
   });
@@ -44,6 +48,7 @@ class FThemeData with Diagnosticable {
   }):
     badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
     boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
+    buttonStyles = FButtonStyles.inherit(colorScheme: colorScheme, style: style),
     cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
     separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style);
 
@@ -54,6 +59,7 @@ class FThemeData with Diagnosticable {
     FStyle? style,
     FBadgeStyles? badgeStyles,
     FBoxStyle? boxStyle,
+    FButtonStyles? buttonStyles,
     FCardStyle? cardStyle,
     FSeparatorStyles? separatorStyles,
   }) => FThemeData(
@@ -62,6 +68,7 @@ class FThemeData with Diagnosticable {
     style: style ?? this.style,
     badgeStyles: badgeStyles ?? this.badgeStyles,
     boxStyle: boxStyle ?? this.boxStyle,
+    buttonStyles: buttonStyles ?? this.buttonStyles,
     cardStyle: cardStyle ?? this.cardStyle,
     separatorStyles: separatorStyles ?? this.separatorStyles,
   );
@@ -75,6 +82,7 @@ class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<FStyle>('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FBadgeStyles>('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FButtonStyles>('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FSeparatorStyles>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug));
   }
@@ -89,6 +97,7 @@ class FThemeData with Diagnosticable {
           style == other.style &&
           badgeStyles == other.badgeStyles &&
           boxStyle == other.boxStyle &&
+          buttonStyles == other.buttonStyles &&
           cardStyle == other.cardStyle &&
           separatorStyles == other.separatorStyles;
 
@@ -99,6 +108,7 @@ class FThemeData with Diagnosticable {
       style.hashCode ^
       badgeStyles.hashCode ^
       boxStyle.hashCode ^
+      buttonStyles.hashCode ^
       cardStyle.hashCode ^
       separatorStyles.hashCode;
 }

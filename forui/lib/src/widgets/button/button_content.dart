@@ -29,7 +29,8 @@ final class FButtonContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = FTheme.of(context).widgets.button.variant(this.style);
+    final theme = context.theme;
+    final style = theme.buttonStyles.variant(this.style);
 
     return Padding(
       padding: style.content.padding,
@@ -45,7 +46,7 @@ final class FButtonContent extends StatelessWidget {
               text!,
               style: style.content.text.copyWith(
                 color: disabled ? style.content.text.color!.withOpacity(0.5) : style.content.text.color,
-              ),
+              ).withFont(theme.font),
             ),
           ),
         if (child != null) child!
