@@ -12,13 +12,16 @@ dependencies:
     sdk: flutter
   google_fonts: ^6.2.0
   meta: ^1.11.0
+  nitrogen_types: ^0.2.0
   sugar: ^3.1.0
+
 
 dev_dependencies:
   build_runner: ^2.4.0
   flint: ^2.8.1
   flutter_test:
     sdk: flutter
+  nitrogen_flutter_svg: ^0.2.0+1
 
 
 

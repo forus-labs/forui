@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:nitrogen_types/nitrogen_types.dart';
+import 'package:forui/src/svg_extension.nitrogen.dart';
 
 part 'button_content.dart';
 
@@ -10,7 +13,7 @@ part 'button_styles.dart';
 
 part 'button_content_style.dart';
 
-/// Matthias help!
+/// The button design.
 sealed class FButtonDesign {}
 
 /// A [FButtonVariant] represents the possible states that a [FButton] can be in.
@@ -44,10 +47,14 @@ class FButton extends StatelessWidget {
     required this.style,
     required this.onPressed,
     String? text,
-    String? icon,
+    SvgAsset? icon,
     super.key,
   }) : child = FButtonContent(
-            text: text, icon: icon, style: style, disabled: onPressed == null);
+          text: text,
+          icon: icon,
+          style: style,
+          disabled: onPressed == null,
+        );
 
   /// Creates a [FButton].
   const FButton.raw(
@@ -72,5 +79,11 @@ class FButton extends StatelessWidget {
         child: child,
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed))
+    ..add(DiagnosticsProperty<FButtonDesign>('style', style));
   }
 }

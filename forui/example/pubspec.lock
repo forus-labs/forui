@@ -378,6 +378,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.4"
+  nitrogen_types:
+    dependency: transitive
+    description:
+      name: nitrogen_types
+      sha256: "3fe75e5741242cf46c1ab5eda685f3f5edda3bd57d5bfaf8c2b3156c13df7b0b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0+1"
   package_config:
     dependency: transitive
     description:

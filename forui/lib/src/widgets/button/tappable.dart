@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// A [FTappable] creates a scale animation that mimics a tap.
@@ -17,6 +18,11 @@ class FTappable extends StatefulWidget {
 
   @override
   State<FTappable> createState() => _FTappableState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
+  }
 }
 
 class _FTappableState extends State<FTappable> with SingleTickerProviderStateMixin {
