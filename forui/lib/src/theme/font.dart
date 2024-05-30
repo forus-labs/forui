@@ -325,21 +325,47 @@ final class FFont with Diagnosticable {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is FFont &&
-    family == other.family &&
-    sizeScalar == other.sizeScalar &&
-    letterSpacingScalar == other.letterSpacingScalar &&
-    wordSpacingScalar == other.wordSpacingScalar &&
-    heightScalar == other.heightScalar;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FFont &&
+          runtimeType == other.runtimeType &&
+          family == other.family &&
+          sizeScalar == other.sizeScalar &&
+          letterSpacingScalar == other.letterSpacingScalar &&
+          wordSpacingScalar == other.wordSpacingScalar &&
+          heightScalar == other.heightScalar &&
+          xs == other.xs &&
+          sm == other.sm &&
+          base == other.base &&
+          lg == other.lg &&
+          xl == other.xl &&
+          xl2 == other.xl2 &&
+          xl3 == other.xl3 &&
+          xl4 == other.xl4 &&
+          xl5 == other.xl5 &&
+          xl6 == other.xl6 &&
+          xl7 == other.xl7 &&
+          xl8 == other.xl8;
 
   @override
   int get hashCode =>
-    family.hashCode ^
-    sizeScalar.hashCode ^
-    letterSpacingScalar.hashCode ^
-    wordSpacingScalar.hashCode ^
-    heightScalar.hashCode;
-
+      family.hashCode ^
+      sizeScalar.hashCode ^
+      letterSpacingScalar.hashCode ^
+      wordSpacingScalar.hashCode ^
+      heightScalar.hashCode ^
+      xs.hashCode ^
+      sm.hashCode ^
+      base.hashCode ^
+      lg.hashCode ^
+      xl.hashCode ^
+      xl2.hashCode ^
+      xl3.hashCode ^
+      xl4.hashCode ^
+      xl5.hashCode ^
+      xl6.hashCode ^
+      xl7.hashCode ^
+      xl8.hashCode;
 }
 
 /// Provides functions for working with [FFont]s.
