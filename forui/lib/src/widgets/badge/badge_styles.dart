@@ -19,7 +19,7 @@ class FBadgeStyles with Diagnosticable {
   FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
 
   /// Creates a [FBadgeStyles] that inherits its properties from [colorScheme] and [style].
-  FBadgeStyles.inherit({required FColorScheme colorScheme, required FStyle style}):
+  FBadgeStyles.inherit({required FColorScheme colorScheme, required FFont font, required FStyle style}):
     primary = FBadgeStyle.inherit(
       style: style,
       background: colorScheme.primary,
@@ -27,7 +27,7 @@ class FBadgeStyles with Diagnosticable {
       content: FBadgeContentStyle(
         label: TextStyle(
           color: colorScheme.primaryForeground,
-          fontSize: 14,
+          fontSize: font.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -39,7 +39,7 @@ class FBadgeStyles with Diagnosticable {
       content: FBadgeContentStyle(
         label: TextStyle(
           color: colorScheme.secondaryForeground,
-          fontSize: 14,
+          fontSize: font.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -51,7 +51,7 @@ class FBadgeStyles with Diagnosticable {
       content: FBadgeContentStyle(
         label: TextStyle(
           color: colorScheme.foreground,
-          fontSize: 14,
+          fontSize: font.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -63,7 +63,7 @@ class FBadgeStyles with Diagnosticable {
       content: FBadgeContentStyle(
         label: TextStyle(
           color: colorScheme.destructiveForeground,
-          fontSize: 14,
+          fontSize: font.sm,
           fontWeight: FontWeight.w600,
         ),
       ),

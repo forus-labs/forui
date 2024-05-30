@@ -7,11 +7,11 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 part 'badge_content.dart';
+
 part 'badge_styles.dart';
 
 /// A badge, or a component that looks like a badge.
 class FBadge extends StatelessWidget {
-
   /// The design.
   final FBadgeDesign design;
 
@@ -25,8 +25,13 @@ class FBadge extends StatelessWidget {
   final Widget Function(BuildContext, FBadgeStyle) builder;
 
   /// Creates a [FBadge].
-  FBadge({required String label, required this.design, this.onPressed, this.onLongPressed, super.key}):
-    builder = ((context, style) => FBadgeContent(label: label, style: style));
+  FBadge({
+    required String label,
+    this.design = FBadgeVariant.primary,
+    this.onPressed,
+    this.onLongPressed,
+    super.key,
+  }) : builder = ((context, style) => FBadgeContent(label: label, style: style));
 
   /// Creates a [FBadge].
   const FBadge.raw({required this.design, required this.builder, this.onPressed, this.onLongPressed, super.key});
@@ -64,6 +69,7 @@ class FBadge extends StatelessWidget {
     // TODO: Wrap in FTappable when it's ready.
     return chip;
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -73,7 +79,6 @@ class FBadge extends StatelessWidget {
       ..add(DiagnosticsProperty<void Function(BuildContext)?>('onLongPressed', onLongPressed, defaultValue: null))
       ..add(DiagnosticsProperty<Widget Function(BuildContext, FBadgeStyle)>('builder', builder, defaultValue: null));
   }
-
 }
 
 /// The badge design. Either a pre-defined [FBadgeVariant], or a custom [FBadgeStyle].
@@ -83,17 +88,19 @@ sealed class FBadgeDesign {}
 enum FBadgeVariant implements FBadgeDesign {
   /// A primary-styled badge.
   primary,
+
   /// A secondary-styled badge.
   secondary,
+
   /// An outlined badge.
   outline,
+
   /// A destructive badge.
   destructive,
 }
 
 /// A [FBadge]'s style.
 final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
-
   /// The background color.
   final Color background;
 
@@ -121,7 +128,7 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
     required this.borderRadius,
     required this.content,
     this.borderWidth = 1,
-  }): assert(0 < borderWidth, 'The borderWidth is $borderWidth, but it should be in the range "0 < borderWidth".');
+  }) : assert(0 < borderWidth, 'The borderWidth is $borderWidth, but it should be in the range "0 < borderWidth".');
 
   /// Creates a [FBadgeStyle] that inherits its properties from [style].
   FBadgeStyle.inherit({
@@ -129,7 +136,8 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
     required this.background,
     required this.border,
     required this.content,
-  }): borderRadius = BorderRadius.circular(100), borderWidth = style.borderWidth;
+  })  : borderRadius = BorderRadius.circular(100),
+        borderWidth = style.borderWidth;
 
   /// Creates a copy of this [FBadgeStyle] with the given properties replaced.
   FBadgeStyle copyWith({
@@ -138,14 +146,14 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
     BorderRadius? borderRadius,
     double? borderWidth,
     FBadgeContentStyle? content,
-  }) => FBadgeStyle(
-    background: background ?? this.background,
-    border: border ?? this.border,
-    borderRadius: borderRadius ?? this.borderRadius,
-    borderWidth: borderWidth ?? this.borderWidth,
-    content: content ?? this.content,
-  );
-
+  }) =>
+      FBadgeStyle(
+        background: background ?? this.background,
+        border: border ?? this.border,
+        borderRadius: borderRadius ?? this.borderRadius,
+        borderWidth: borderWidth ?? this.borderWidth,
+        content: content ?? this.content,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -172,5 +180,4 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
   @override
   int get hashCode =>
       background.hashCode ^ border.hashCode ^ borderRadius.hashCode ^ borderWidth.hashCode ^ content.hashCode;
-
 }

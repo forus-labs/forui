@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Update Golden Test Images" type="FlutterTestConfigType" factoryName="Flutter Test">
-    <option name="testDir" value="C:\Users\Matthias\Documents\NetBeansProjects\forui\forui" />
+    <option name="testDir" value="$PROJECT_DIR$/forui" />
     <option name="useRegexp" value="false" />
     <option name="additionalArgs" value="--update-goldens" />
     <method v="2" />
