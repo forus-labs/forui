@@ -13,7 +13,8 @@ export 'src/theme/font.dart';
 export 'src/theme/themes.dart';
 
 // Widgets
-export 'src/widgets/box.dart';
 export 'src/widgets/badge/badge.dart' hide FBadgeContent;
 export 'src/widgets/card/card.dart' hide FCardContent;
+export 'src/widgets/header/header.dart';
+export 'src/widgets/box.dart';
 export 'src/widgets/separator.dart';
