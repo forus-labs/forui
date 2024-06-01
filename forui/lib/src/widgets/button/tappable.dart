@@ -1,10 +1,20 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 /// A [FTappable] creates a scale animation that mimics a tap.
 class FTappable extends StatefulWidget {
   /// The callback for when this [FTappable] is pressed.
   final VoidCallback? onPressed;
+
+  /// The behavior
+  final HitTestBehavior behavior;
+
+  /// Determines the way that drag start behavior is handled.
+  final DragStartBehavior dragStartBehavior;
+
+  /// The callback for when this [FTappable] is pressed.
+  final bool excludeFromSemantics;
 
   /// This child.
   final Widget child;
@@ -13,6 +23,9 @@ class FTappable extends StatefulWidget {
   const FTappable({
     required this.child,
     this.onPressed,
+    this.behavior = HitTestBehavior.deferToChild,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.excludeFromSemantics = false,
     super.key,
   });
 
@@ -22,6 +35,9 @@ class FTappable extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed));
+    properties.add(EnumProperty<HitTestBehavior?>('behavior', behavior));
+    properties.add(EnumProperty<DragStartBehavior?>('dragStartBehavior', dragStartBehavior));
+    properties.add(DiagnosticsProperty<bool>('excludeFromSemantics', excludeFromSemantics));
   }
 }
 
@@ -49,7 +65,9 @@ class _FTappableState extends State<FTappable> with SingleTickerProviderStateMix
   Widget build(BuildContext context) => ScaleTransition(
         scale: _animation,
         child: GestureDetector(
-          behavior: HitTestBehavior.deferToChild,
+          behavior: widget.behavior,
+          dragStartBehavior: widget.dragStartBehavior,
+          excludeFromSemantics: widget.excludeFromSemantics,
           onTap: widget.onPressed == null
               ? null
               : () {
