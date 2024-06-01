@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/switch.dart';
 
 /// The color scheme, fonts, overarching style, and widget specific styles used to configure child Forui widgets.
 class FThemeData with Diagnosticable {
@@ -25,6 +26,9 @@ class FThemeData with Diagnosticable {
   /// The separator styles.
   final FSeparatorStyles separatorStyles;
 
+  /// The switch style.
+  final FSwitchStyle switchStyle;
+
   /// Creates a [FThemeData].
   FThemeData({
     required this.colorScheme,
@@ -34,6 +38,7 @@ class FThemeData with Diagnosticable {
     required this.boxStyle,
     required this.cardStyle,
     required this.separatorStyles,
+    required this.switchStyle,
   });
 
   /// Creates a [FThemeData] that inherits the given arguments' properties.
@@ -45,7 +50,8 @@ class FThemeData with Diagnosticable {
     badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
     boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
     cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
-    separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style);
+    separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
+    switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   FThemeData copyWith({
@@ -56,6 +62,7 @@ class FThemeData with Diagnosticable {
     FBoxStyle? boxStyle,
     FCardStyle? cardStyle,
     FSeparatorStyles? separatorStyles,
+    FSwitchStyle? switchStyle,
   }) => FThemeData(
     colorScheme: colorScheme ?? this.colorScheme,
     font: font ?? this.font,
@@ -64,6 +71,7 @@ class FThemeData with Diagnosticable {
     boxStyle: boxStyle ?? this.boxStyle,
     cardStyle: cardStyle ?? this.cardStyle,
     separatorStyles: separatorStyles ?? this.separatorStyles,
+    switchStyle: switchStyle ?? this.switchStyle,
   );
 
   @override
@@ -76,7 +84,8 @@ class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<FBadgeStyles>('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FSeparatorStyles>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty<FSeparatorStyles>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FSwitchStyle>('switchStyle', switchStyle));
   }
 
   @override
@@ -90,7 +99,8 @@ class FThemeData with Diagnosticable {
           badgeStyles == other.badgeStyles &&
           boxStyle == other.boxStyle &&
           cardStyle == other.cardStyle &&
-          separatorStyles == other.separatorStyles;
+          separatorStyles == other.separatorStyles &&
+          switchStyle == other.switchStyle;
 
   @override
   int get hashCode =>
@@ -100,5 +110,6 @@ class FThemeData with Diagnosticable {
       badgeStyles.hashCode ^
       boxStyle.hashCode ^
       cardStyle.hashCode ^
-      separatorStyles.hashCode;
+      separatorStyles.hashCode ^
+      switchStyle.hashCode;
 }
