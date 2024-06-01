@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/switch.dart';
 
 /// The color scheme, fonts, overarching style, and widget specific styles used to configure child Forui widgets.
 class FThemeData with Diagnosticable {

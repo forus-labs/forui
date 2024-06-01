@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+
 import 'package:forui/forui.dart';
 
 /// A control that allows the user to toggle between checked and not checked.
