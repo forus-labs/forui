@@ -77,9 +77,9 @@ class FSwitch extends StatelessWidget {
   /// Creates a [FSwitch].
   const FSwitch({
     required this.value,
+    required this.onChanged,
     super.key,
     this.style,
-    this.onChanged,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -92,14 +92,14 @@ class FSwitch extends StatelessWidget {
     return CupertinoSwitch(
       value: value,
       onChanged: onChanged,
-      // activeColor: style.checked,
-      // trackColor: style.unchecked,
-      // thumbColor: style.thumb,
-      // focusColor: style.focus,
-      // autofocus: autofocus,
-      // focusNode: focusNode,
-      // onFocusChange: onFocusChange,
-      // dragStartBehavior: dragStartBehavior,
+      activeColor: style.checked,
+      trackColor: style.unchecked,
+      thumbColor: style.thumb,
+      focusColor: style.focus,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      dragStartBehavior: dragStartBehavior,
     );
   }
 
