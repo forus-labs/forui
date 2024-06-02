@@ -9,7 +9,6 @@ import 'package:forui/src/svg_extension.nitrogen.dart';
 part 'button_content.dart';
 part 'button_style.dart';
 part 'button_styles.dart';
-
 part 'button_content_style.dart';
 
 /// The button design.
