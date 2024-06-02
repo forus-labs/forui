@@ -34,14 +34,17 @@ final class FButtonContent extends StatelessWidget {
 
     return Padding(
       padding: style.padding,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        if (icon != null) ...[
-          icon!(height: 20, colorFilter: disabled ? style.disabledIcon : style.enabledIcon),
-          const SizedBox(width: 10)
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (icon != null) ...[
+            icon!(height: 20, colorFilter: disabled ? style.disabledIcon : style.enabledIcon),
+            const SizedBox(width: 10)
+          ],
+          if (text != null) Flexible(child: Text(text!, style: disabled ? style.disabledText : style.enabledText)),
+          if (child != null) child!
         ],
-        if (text != null) Flexible(child: Text(text!, style: disabled ? style.disabledText : style.enabledText)),
-        if (child != null) child!
-      ]),
+      ),
     );
   }
 

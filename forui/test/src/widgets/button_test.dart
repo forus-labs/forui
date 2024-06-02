@@ -16,11 +16,13 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
-              background: background,
-              child: FButton(
-                text: 'Badge',
-                style: variant,
-                onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton(
+                  text: 'Button',
+                  style: variant,
+                  onPressed: () {},
+                ),
               ),
             ),
           );
@@ -35,11 +37,13 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
-              background: background,
-              child: FButton(
-                text: 'Badge',
-                style: variant,
-                onPressed: null,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton(
+                  text: 'Button',
+                  style: variant,
+                  onPressed: null,
+                ),
               ),
             ),
           );
@@ -50,29 +54,30 @@ void main() {
           );
         });
 
-
         testWidgets('$name with raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
-              background: background,
-              child: FButton.raw(
-                style: variant,
-                onPressed: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(50),
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    color: Colors.blueAccent,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton.raw(
+                  style: variant,
+                  onPressed: () {},
+                  builder: (_, style) => Padding(
+                    padding: const EdgeInsets.all(50),
                     child: Container(
                       width: 50,
                       height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        border: Border.all(
-                          color: Colors.blueAccent,
-                          width: 2,
+                      color: Colors.blueAccent,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          border: Border.all(
+                            color: Colors.blueAccent,
+                            width: 2,
+                          ),
                         ),
                       ),
                     ),
@@ -92,24 +97,26 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
-              background: background,
-              child: FButton.raw(
-                style: variant,
-                onPressed: null,
-                child: Padding(
-                  padding: const EdgeInsets.all(50),
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    color: Colors.blueAccent,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton.raw(
+                  style: variant,
+                  onPressed: null,
+                  builder: (_, style) => Padding(
+                    padding: const EdgeInsets.all(50),
                     child: Container(
                       width: 50,
                       height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        border: Border.all(
-                          color: Colors.blueAccent,
-                          width: 2,
+                      color: Colors.blueAccent,
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          border: Border.all(
+                            color: Colors.blueAccent,
+                            width: 2,
+                          ),
                         ),
                       ),
                     ),

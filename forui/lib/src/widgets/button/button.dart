@@ -36,8 +36,8 @@ class FButton extends StatelessWidget {
   /// Called when the FButton is tapped or otherwise activated.
   final VoidCallback? onPressed;
 
-  /// This FButton's child.
-  final Widget child;
+  /// The builder.
+  final Widget Function(BuildContext, FButtonStyle) builder;
 
   /// The style.
   final FButtonDesign style;
@@ -49,24 +49,24 @@ class FButton extends StatelessWidget {
     String? text,
     SvgAsset? icon,
     super.key,
-  }) : child = FButtonContent(
-          text: text,
-          icon: icon,
-          style: style,
-          disabled: onPressed == null,
-        );
+  }) : builder = ((context, style) => FButtonContent(
+              text: text,
+              icon: icon,
+              style: style,
+              disabled: onPressed == null,
+            ));
 
   /// Creates a [FButton].
-  const FButton.raw({required this.onPressed, required this.child, required this.style, super.key});
+  const FButton.raw({required this.onPressed, required this.builder, required this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
     final style = context.theme.buttonStyles.variant(this.style);
     return FTappable(
-      onPressed: onPressed,
+      onTap: onPressed,
       child: DecoratedBox(
         decoration: onPressed == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
-        child: child,
+        child: builder(context, style),
       ),
     );
   }
@@ -76,6 +76,7 @@ class FButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed))
-      ..add(DiagnosticsProperty<FButtonDesign>('style', style));
+      ..add(DiagnosticsProperty<FButtonDesign>('style', style))
+      ..add(ObjectFlagProperty<Widget Function(BuildContext p1, FButtonStyle p2)>.has('builder', builder));
   }
 }
