@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 import 'package:nitrogen_types/nitrogen_types.dart';
 import 'package:forui/src/svg_extension.nitrogen.dart';
 
@@ -13,39 +14,39 @@ part 'button_styles.dart';
 
 part 'button_content_style.dart';
 
-/// The button design.
+/// The button design. Either a pre-defined [FButtonVariant], or a custom [FButtonStyle].
 sealed class FButtonDesign {}
 
-/// A [FButtonVariant] represents the possible states that a [FButton] can be in.
+/// A pre-defined button variant.
 enum FButtonVariant implements FButtonDesign {
-  /// a primary button
+  /// A primary-styled button.
   primary,
 
-  /// a secondary button
+  /// A secondary-styled button.
   secondary,
 
-  /// a destructive button
-  destructive,
-
-  /// a outlined button
+  /// An outlined button.
   outlined,
+
+  /// A destructive button.
+  destructive,
 }
 
 /// Represents a button widget.
 class FButton extends StatelessWidget {
+  /// The style.
+  final FButtonDesign design;
+
   /// Called when the FButton is tapped or otherwise activated.
   final VoidCallback? onPressed;
 
   /// The builder.
   final Widget Function(BuildContext, FButtonStyle) builder;
 
-  /// The style.
-  final FButtonDesign style;
-
   /// Creates a [FButton] widget.
   FButton({
-    required this.style,
-    required this.onPressed,
+    this.design = FButtonVariant.primary,
+    this.onPressed,
     String? text,
     SvgAsset? icon,
     super.key,
@@ -53,15 +54,21 @@ class FButton extends StatelessWidget {
               text: text,
               icon: icon,
               style: style,
-              disabled: onPressed == null,
+              enabled: onPressed != null,
             ));
 
   /// Creates a [FButton].
-  const FButton.raw({required this.onPressed, required this.builder, required this.style, super.key});
+  const FButton.raw({required this.design, required this.builder, required this.onPressed, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style = context.theme.buttonStyles.variant(this.style);
+    final style = switch (design) {
+      final FButtonStyle style => style,
+      FButtonVariant.primary => context.theme.buttonStyles.primary,
+      FButtonVariant.secondary => context.theme.buttonStyles.secondary,
+      FButtonVariant.outlined => context.theme.buttonStyles.outlined,
+      FButtonVariant.destructive => context.theme.buttonStyles.destructive,
+    };
     return FTappable(
       onTap: onPressed,
       child: DecoratedBox(
@@ -75,8 +82,8 @@ class FButton extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed))
-      ..add(DiagnosticsProperty<FButtonDesign>('style', style))
+      ..add(DiagnosticsProperty<VoidCallback?>('onPressed', onPressed))
+      ..add(DiagnosticsProperty<FButtonDesign>('style', design))
       ..add(ObjectFlagProperty<Widget Function(BuildContext p1, FButtonStyle p2)>.has('builder', builder));
   }
 }

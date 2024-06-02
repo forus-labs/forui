@@ -2,12 +2,13 @@ part of 'button.dart';
 
 /// [FButtonContent]'s style.
 class FButtonContentStyle {
-  /// The title.
+  /// The textile of .
   final TextStyle enabledText;
 
   /// The title.
   final TextStyle disabledText;
 
+  /// the color
   final ColorFilter enabledIcon;
 
   final ColorFilter disabledIcon;
@@ -25,18 +26,18 @@ class FButtonContentStyle {
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties from the given [color].
-  FButtonContentStyle.inherit({required Color foreground, required Color disabledForeground})
+  FButtonContentStyle.inherit({ required FFont font,required Color foreground, required Color disabledForeground})
       : padding = const EdgeInsets.symmetric(
           horizontal: 5,
           vertical: 17,
         ),
         enabledText = TextStyle(
-          fontSize: 16,
+          fontSize: font.base,
           fontWeight: FontWeight.w600,
           color: foreground,
         ),
         disabledText = TextStyle(
-          fontSize: 16,
+          fontSize: font.base,
           fontWeight: FontWeight.w600,
           color: disabledForeground,
         ),

@@ -10,7 +10,7 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FButton', () {
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme, _) in TestScaffold.themes) {
       for (final variant in FButtonVariant.values) {
         testWidgets('$name with FButtonContent', (tester) async {
           await tester.pumpWidget(
@@ -20,7 +20,7 @@ void main() {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
                   text: 'Button',
-                  style: variant,
+                  design: variant,
                   onPressed: () {},
                 ),
               ),
@@ -41,7 +41,7 @@ void main() {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
                   text: 'Button',
-                  style: variant,
+                  design: variant,
                   onPressed: null,
                 ),
               ),
@@ -61,7 +61,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton.raw(
-                  style: variant,
+                  design: variant,
                   onPressed: () {},
                   builder: (_, style) => Padding(
                     padding: const EdgeInsets.all(50),
@@ -100,7 +100,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton.raw(
-                  style: variant,
+                  design: variant,
                   onPressed: null,
                   builder: (_, style) => Padding(
                     padding: const EdgeInsets.all(50),

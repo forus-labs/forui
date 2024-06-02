@@ -23,7 +23,7 @@ class FButtonStyles {
   });
 
   /// Creates a [FButtonStyle] that inherits its properties from [colorScheme].
-  FButtonStyles.inherit({required FColorScheme colorScheme, required FStyle style})
+  FButtonStyles.inherit({required FColorScheme colorScheme, required FFont font, required FStyle style})
       : primary = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -34,6 +34,7 @@ class FButtonStyles {
             color: colorScheme.primary.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
+              font: font,
               foreground: colorScheme.primaryForeground,
               disabledForeground: colorScheme.primaryForeground.withOpacity(0.5)),
         ),
@@ -47,6 +48,7 @@ class FButtonStyles {
             color: colorScheme.secondary.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
+              font: font,
               foreground: colorScheme.secondaryForeground,
               disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5)),
         ),
@@ -60,6 +62,7 @@ class FButtonStyles {
             color: colorScheme.destructive.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
+              font: font,
               foreground: colorScheme.destructiveForeground,
               disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5)),
         ),
@@ -77,16 +80,8 @@ class FButtonStyles {
             color: colorScheme.background,
           ),
           content: FButtonContentStyle.inherit(
+              font: font,
               foreground: colorScheme.secondaryForeground,
               disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5)),
         );
-
-  /// Returns a [FButtonStyle] based on the corresponding [FButtonVariant].
-  FButtonStyle variant(FButtonDesign style) => switch (style) {
-        final FButtonStyle style => style,
-        FButtonVariant.primary => primary,
-        FButtonVariant.secondary => secondary,
-        FButtonVariant.destructive => destructive,
-        FButtonVariant.outlined => outlined,
-      };
 }
