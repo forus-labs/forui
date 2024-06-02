@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui_assets/forui_assets.dart';
 
 void main() {
   runApp(const Application());
@@ -98,6 +99,10 @@ class ExampleWidget extends StatelessWidget {
           'text-8xl',
           style: TextStyle(fontSize: font.xl8).withFont(font),
         ),
+        FButton(
+          text: 'Button',
+          icon: FAssets.icons.airplay,
+        )
       ],
     );
   }
