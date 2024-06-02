@@ -25,48 +25,60 @@ class FButtonStyles {
   /// Creates a [FButtonStyle] that inherits its properties from [colorScheme].
   FButtonStyles.inherit({required FColorScheme colorScheme, required FStyle style})
       : primary = FButtonStyle(
-          background: colorScheme.primary,
-          foreground: colorScheme.primaryForeground,
-          disabled: const Color(0xFF787878),
-          border: colorScheme.primary,
-          disabledBorder: const Color(0xFF787878),
-          borderRadius: style.borderRadius,
-          content: FButtonContentStyle.inherit(
-            color: colorScheme.primaryForeground,
+          enabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.primary,
           ),
+          disabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.primary.withOpacity(0.5),
+          ),
+          content: FButtonContentStyle.inherit(
+              foreground: colorScheme.primaryForeground,
+              disabledForeground: colorScheme.primaryForeground.withOpacity(0.5)),
         ),
         secondary = FButtonStyle(
-          background: colorScheme.secondary,
-          foreground: colorScheme.secondaryForeground,
-          disabled: const Color(0xFFF7F7F8),
-          border: colorScheme.secondary,
-          disabledBorder: const Color(0xFFF7F7F8),
-          borderRadius: style.borderRadius,
-          content: FButtonContentStyle.inherit(
-            color: colorScheme.secondaryForeground,
+          enabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.secondary,
           ),
+          disabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.secondary.withOpacity(0.5),
+          ),
+          content: FButtonContentStyle.inherit(
+              foreground: colorScheme.secondaryForeground,
+              disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5)),
         ),
         destructive = FButtonStyle(
-          background: colorScheme.destructive,
-          foreground: colorScheme.destructiveForeground,
-          disabled: const Color(0xFFEFAAAA),
-          border: colorScheme.destructive,
-          disabledBorder: const Color(0xFFEFAAAA),
-          borderRadius: style.borderRadius,
-          content: FButtonContentStyle.inherit(
-            color: colorScheme.destructiveForeground,
+          enabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.destructive,
           ),
+          disabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.destructive.withOpacity(0.5),
+          ),
+          content: FButtonContentStyle.inherit(
+              foreground: colorScheme.destructiveForeground,
+              disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5)),
         ),
         outlined = FButtonStyle(
-          background: colorScheme.background,
-          foreground: colorScheme.secondaryForeground,
-          disabled:  colorScheme.background,
-          border: colorScheme.border,
-          disabledBorder: const Color(0xFFF0F0F0),
-          borderRadius: style.borderRadius,
-          content: FButtonContentStyle.inherit(
-            color: colorScheme.secondaryForeground,
+          enabledBoxDecoration: BoxDecoration(
+            border: Border.all(
+              color: colorScheme.border,
+            ),
+            borderRadius: style.borderRadius,
+            color: colorScheme.background,
           ),
+          disabledBoxDecoration: BoxDecoration(
+            border: Border.all(color: colorScheme.border.withOpacity(0.5)),
+            borderRadius: style.borderRadius,
+            color: colorScheme.background,
+          ),
+          content: FButtonContentStyle.inherit(
+              foreground: colorScheme.secondaryForeground,
+              disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5)),
         );
 
   /// Returns a [FButtonStyle] based on the corresponding [FButtonVariant].

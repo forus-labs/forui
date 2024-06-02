@@ -20,7 +20,7 @@ final class FButtonContent extends StatelessWidget {
   /// Creates a [FButtonContent].
   const FButtonContent({
     required this.style,
-    required this.disabled,
+    this.disabled = false,
     this.text,
     this.icon,
     this.child,
@@ -30,42 +30,28 @@ final class FButtonContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final style = theme.buttonStyles.variant(this.style);
+    final style = theme.buttonStyles.variant(this.style).content;
 
     return Padding(
-      padding: style.content.padding,
+      padding: style.padding,
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         if (icon != null) ...[
-          icon!(
-            height: 20,
-            colorFilter: ColorFilter.mode(style.foreground, BlendMode.srcIn),
-          ),
+          icon!(height: 20, colorFilter: disabled ? style.disabledIcon : style.enabledIcon),
           const SizedBox(width: 10)
         ],
-
-        if (text != null)
-          Flexible(
-            child: Text(
-              text!,
-              style: style.content.text
-                  .copyWith(
-                    color: disabled
-                        ? style.content.text.color!.withOpacity(0.5)
-                        : style.content.text.color,
-                  )
-                  .withFont(theme.font),
-            ),
-          ),
+        if (text != null) Flexible(child: Text(text!, style: disabled ? style.disabledText : style.enabledText)),
         if (child != null) child!
       ]),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty<bool>('disabled', disabled))
-    ..add(DiagnosticsProperty<SvgAsset?>('icon', icon))
-    ..add(StringProperty('text', text))
-    ..add(DiagnosticsProperty<FButtonDesign>('style', style));
+    properties
+      ..add(DiagnosticsProperty<bool>('disabled', disabled))
+      ..add(DiagnosticsProperty<SvgAsset?>('icon', icon))
+      ..add(StringProperty('text', text))
+      ..add(DiagnosticsProperty<FButtonDesign>('style', style));
   }
 }

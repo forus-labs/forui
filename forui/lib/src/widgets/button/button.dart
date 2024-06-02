@@ -57,11 +57,7 @@ class FButton extends StatelessWidget {
         );
 
   /// Creates a [FButton].
-  const FButton.raw(
-      {required this.onPressed,
-      required this.child,
-      required this.style,
-      super.key});
+  const FButton.raw({required this.onPressed, required this.child, required this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,21 +65,17 @@ class FButton extends StatelessWidget {
     return FTappable(
       onPressed: onPressed,
       child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: onPressed == null ? style.disabledBorder : style.border,
-          ),
-          borderRadius: style.borderRadius,
-          color: onPressed == null ? style.disabled : style.background,
-        ),
+        decoration: onPressed == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
         child: child,
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed))
-    ..add(DiagnosticsProperty<FButtonDesign>('style', style));
+    properties
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onPressed', onPressed))
+      ..add(DiagnosticsProperty<FButtonDesign>('style', style));
   }
 }
