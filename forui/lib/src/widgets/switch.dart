@@ -79,12 +79,12 @@ class FSwitch extends StatelessWidget {
   const FSwitch({
     required this.value,
     required this.onChanged,
-    super.key,
     this.style,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.dragStartBehavior = DragStartBehavior.start,
+    super.key,
   });
 
   @override
