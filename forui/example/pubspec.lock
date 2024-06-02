@@ -235,7 +235,7 @@ packages:
     source: path
     version: "0.0.1"
   forui_assets:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../forui_assets"
       relative: true
