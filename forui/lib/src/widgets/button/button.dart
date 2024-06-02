@@ -29,7 +29,7 @@ enum FButtonVariant implements FButtonDesign {
   outlined,
 }
 
-/// Represents a button widget.
+/// A button.
 class FButton extends StatelessWidget {
   /// Called when the FButton is tapped or otherwise activated.
   final VoidCallback? onPressed;
