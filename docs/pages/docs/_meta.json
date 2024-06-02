@@ -1,5 +1,10 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)"
+  "index": "Getting Started",
+  "themes": "Themes",
+  "typography": "Typography",
+  "-- widgets": {
+    "type": "separator",
+    "title": "Widgets"
+  },
+  "card": "Card"
 }
