@@ -61,9 +61,7 @@ class FButton extends StatelessWidget {
     return FTappable(
       onTap: onPressed,
       child: DecoratedBox(
-        decoration: onPressed == null
-            ? style.disabledBoxDecoration
-            : style.enabledBoxDecoration,
+        decoration: onPressed == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
         child: builder(context, style),
       ),
     );
@@ -75,8 +73,6 @@ class FButton extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty<VoidCallback?>('onPressed', onPressed))
       ..add(DiagnosticsProperty<FButtonDesign>('style', design))
-      ..add(ObjectFlagProperty<
-          Widget Function(
-              BuildContext p1, FButtonStyle p2)>.has('builder', builder));
+      ..add(ObjectFlagProperty<Widget Function(BuildContext p1, FButtonStyle p2)>.has('builder', builder));
   }
 }
