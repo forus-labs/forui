@@ -40,7 +40,7 @@ class FButton extends StatelessWidget {
   /// The style.
   final FButtonDesign style;
 
-  /// Creates a [FButton] widget.
+  /// Creates a [FButton].
   FButton({
     required this.style,
     required this.onPressed,
