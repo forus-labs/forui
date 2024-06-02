@@ -100,9 +100,7 @@ class ExampleWidget extends StatelessWidget {
           style: TextStyle(fontSize: font.xl8).withFont(font),
         ),
         FButton(
-          design: FButtonVariant.primary,
           text: 'Button',
-          onPressed: null,
           icon: FAssets.icons.airplay,
         )
       ],

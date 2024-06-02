@@ -42,7 +42,6 @@ void main() {
                 child: FButton(
                   text: 'Button',
                   design: variant,
-                  onPressed: null,
                 ),
               ),
             ),
