@@ -1,16 +1,17 @@
 part of 'button.dart';
 
 /// [FButtonContent]'s style.
-class FButtonContentStyle {
-  /// The textile of .
+class FButtonContentStyle with Diagnosticable {
+  /// The TextStyle for an enabled button.
   final TextStyle enabledText;
 
-  /// The title.
+  /// The TextStyle for an disabled button.
   final TextStyle disabledText;
 
-  /// the color
+  /// The ColorFilter for an enabled button.
   final ColorFilter enabledIcon;
 
+  /// The ColorFilter for an disabled button.
   final ColorFilter disabledIcon;
 
   /// The padding.
@@ -25,7 +26,7 @@ class FButtonContentStyle {
     required this.padding,
   });
 
-  /// Creates a [FButtonContentStyle] that inherits its properties from the given [color].
+  /// Creates a [FButtonContentStyle] that inherits its properties from the given [foreground] and [].
   FButtonContentStyle.inherit({ required FFont font,required Color foreground, required Color disabledForeground})
       : padding = const EdgeInsets.symmetric(
           horizontal: 5,
@@ -43,4 +44,13 @@ class FButtonContentStyle {
         ),
         enabledIcon = ColorFilter.mode(foreground, BlendMode.srcIn),
         disabledIcon = ColorFilter.mode(disabledForeground, BlendMode.srcIn);
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty<TextStyle>('enabledText', enabledText))
+    ..add(DiagnosticsProperty<TextStyle>('disabledText', disabledText))
+    ..add(DiagnosticsProperty<ColorFilter>('enabledIcon', enabledIcon))
+    ..add(DiagnosticsProperty<ColorFilter>('disabledIcon', disabledIcon))
+    ..add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+  }
 }

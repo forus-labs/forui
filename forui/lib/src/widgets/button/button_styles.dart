@@ -1,7 +1,7 @@
 part of 'button.dart';
 
 /// [FButtonStyle]'s style.
-class FButtonStyles {
+class FButtonStyles with Diagnosticable{
   /// The primary style.
   final FButtonStyle primary;
 
@@ -84,4 +84,12 @@ class FButtonStyles {
               foreground: colorScheme.secondaryForeground,
               disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5)),
         );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty<FButtonStyle>('primary', primary))
+    ..add(DiagnosticsProperty<FButtonStyle>('secondary', secondary))
+    ..add(DiagnosticsProperty<FButtonStyle>('destructive', destructive))
+    ..add(DiagnosticsProperty<FButtonStyle>('outlined', outlined));
+  }
 }

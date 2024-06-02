@@ -2,33 +2,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/button/tappable.dart';
 import 'package:meta/meta.dart';
 import 'package:nitrogen_types/nitrogen_types.dart';
 
 import 'package:forui/src/svg_extension.nitrogen.dart';
 
 part 'button_content.dart';
+
 part 'button_style.dart';
+
 part 'button_styles.dart';
+
 part 'button_content_style.dart';
-
-/// The button design. Either a pre-defined [FButtonVariant], or a custom [FButtonStyle].
-sealed class FButtonDesign {}
-
-/// A pre-defined button variant.
-enum FButtonVariant implements FButtonDesign {
-  /// A primary-styled button.
-  primary,
-
-  /// A secondary-styled button.
-  secondary,
-
-  /// An outlined button.
-  outlined,
-
-  /// A destructive button.
-  destructive,
-}
 
 /// A button.
 class FButton extends StatelessWidget {
@@ -56,11 +42,12 @@ class FButton extends StatelessWidget {
             ));
 
   /// Creates a [FButton].
-  const FButton.raw(
-      {required this.design,
-      required this.builder,
-      required this.onPressed,
-      super.key});
+  const FButton.raw({
+    required this.design,
+    required this.builder,
+    required this.onPressed,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +61,7 @@ class FButton extends StatelessWidget {
     return FTappable(
       onTap: onPressed,
       child: DecoratedBox(
-        decoration: onPressed == null
-            ? style.disabledBoxDecoration
-            : style.enabledBoxDecoration,
+        decoration: onPressed == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
         child: builder(context, style),
       ),
     );
@@ -88,8 +73,6 @@ class FButton extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty<VoidCallback?>('onPressed', onPressed))
       ..add(DiagnosticsProperty<FButtonDesign>('style', design))
-      ..add(ObjectFlagProperty<
-          Widget Function(
-              BuildContext p1, FButtonStyle p2)>.has('builder', builder));
+      ..add(ObjectFlagProperty<Widget Function(BuildContext p1, FButtonStyle p2)>.has('builder', builder));
   }
 }

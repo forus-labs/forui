@@ -1,7 +1,25 @@
 part of 'button.dart';
 
+/// The button design. Either a pre-defined [FButtonVariant], or a custom [FButtonStyle].
+sealed class FButtonDesign {}
+
+/// A pre-defined button variant.
+enum FButtonVariant implements FButtonDesign  {
+  /// A primary-styled button.
+  primary,
+
+  /// A secondary-styled button.
+  secondary,
+
+  /// An outlined button.
+  outlined,
+
+  /// A destructive button.
+  destructive,
+}
+
 /// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton].
-class FButtonStyle extends FButtonDesign {
+class FButtonStyle extends FButtonDesign with Diagnosticable{
   /// The content.
   final FButtonContentStyle content;
 
@@ -29,4 +47,11 @@ class FButtonStyle extends FButtonDesign {
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
         disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty<FButtonContentStyle>('content', content))
+    ..add(DiagnosticsProperty<BoxDecoration>('enabledBoxDecoration', enabledBoxDecoration))
+    ..add(DiagnosticsProperty<BoxDecoration>('disabledBoxDecoration', disabledBoxDecoration));
+  }
 }

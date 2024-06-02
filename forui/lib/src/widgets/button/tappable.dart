@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 /// A [FTappable] creates a scale animation that mimics a tap.
-class FTappable extends StatefulWidget {
+@internal class FTappable extends StatefulWidget {
   /// A pointer that might cause a tap with a primary button has contacted the
   /// screen at a particular location.
   ///
@@ -437,10 +438,13 @@ class FTappable extends StatefulWidget {
   /// If set to null, events from all device types will be recognized. Defaults to null.
   final Set<PointerDeviceKind>? supportedDevices;
 
-  /// {@macro flutter.gestures.scale.trackpadScrollCausesScale}
+  /// Whether scrolling up/down on a trackpad should cause scaling instead of panning.
+  /// Defaults to false.
   final bool trackpadScrollCausesScale;
 
-  /// {@macro flutter.gestures.scale.trackpadScrollToScaleFactor}
+  /// A factor to control the direction and magnitude of scale when converting trackpad scrolling.
+  /// Incoming trackpad pan offsets will be divided by this factor to get scale values.
+  /// Increasing this offset will reduce the amount of scaling caused by a fixed amount of trackpad scrolling.
   final Offset trackpadScrollToScaleFactor;
 
   /// This child.

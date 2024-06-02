@@ -48,7 +48,7 @@ class FThemeData with Diagnosticable {
   }):
     badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
     boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
-    buttonStyles = FButtonStyles.inherit(colorScheme: colorScheme, style: style),
+    buttonStyles = FButtonStyles.inherit(colorScheme: colorScheme, font: font, style: style, ),
     cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
     separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style);
 
