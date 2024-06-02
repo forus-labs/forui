@@ -7,7 +7,6 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/svg_extension.nitrogen.dart';
 
 part 'button_content.dart';
-
 part 'button_style.dart';
 
 part 'button_styles.dart';
