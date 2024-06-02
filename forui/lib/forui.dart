@@ -19,3 +19,4 @@ export 'src/widgets/button/tappable.dart' hide FTappable;
 export 'src/widgets/button/button.dart' hide FButtonContent;
 export 'src/widgets/card/card.dart' hide FCardContent;
 export 'src/widgets/separator.dart';
+export 'src/widgets/switch.dart';
