@@ -1,6 +1,6 @@
 part of 'button.dart';
 
-/// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton] widgets.
+/// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton].
 class FButtonStyle extends FButtonDesign {
   /// The content.
   final FButtonContentStyle content;
