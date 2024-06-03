@@ -1,11 +1,51 @@
+import { Tabs } from 'nextra/components';
+
 # Card
-Displays a card with header, content, and footer.
+Displays a card typically with a title, subtitle, and child widget.
 
-import { Tabs } from 'nextra/components'
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <img src="https://nextra.site/assets/blog-theme.png" alt="Embed"/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      FCard(
+          title: 'Notification',
+          subtitle: 'You have 3 unread messages.',
+          child: const Text('Some content here...'),
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>
 
-{/* prettier-ignore */}
-<Tabs items={['pnpm', 'npm', 'yarn']}>
-  <Tabs.Tab>**pnpm**: Fast, disk space efficient package manager.</Tabs.Tab>
-  <Tabs.Tab>**npm** is a package manager for the JavaScript programming language.</Tabs.Tab>
-  <Tabs.Tab>**Yarn** is a software packaging system.</Tabs.Tab>
+## Usage
+
+### Title and Subtitle
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <img src="https://nextra.site/assets/blog-theme.png" alt="Embed"/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FCard(
+            title: 'Notification',
+            subtitle: 'You have 3 unread messages.',
+            child: const Text('Some content here...'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Raw
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <img src="https://nextra.site/assets/blog-theme.png" alt="Embed"/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FCard.raw(
+            child: const Text('Some content here...'),
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>
