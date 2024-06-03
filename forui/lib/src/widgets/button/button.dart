@@ -5,8 +5,8 @@ import 'package:meta/meta.dart';
 import 'package:nitrogen_types/nitrogen_types.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/svg_extension.nitrogen.dart';
 import 'package:forui/src/foundation/tappable.dart';
+import 'package:forui/src/svg_extension.nitrogen.dart';
 
 part 'button_content.dart';
 
