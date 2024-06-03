@@ -102,6 +102,7 @@ class ExampleWidget extends StatelessWidget {
         FButton(
           text: 'Button',
           icon: FAssets.icons.airplay,
+          onPress: () {},
         )
       ],
     );
