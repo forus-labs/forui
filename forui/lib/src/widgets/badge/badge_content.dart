@@ -2,10 +2,10 @@ part of 'badge.dart';
 
 @internal final class FBadgeContent extends StatelessWidget {
 
-  final String label;
   final FBadgeStyle style;
+  final String label;
 
-  const FBadgeContent({required this.label, required this.style, super.key});
+  const FBadgeContent({required this.style, required this.label, super.key});
 
   @override
   Widget build(BuildContext context) => Center(
@@ -19,8 +19,8 @@ part of 'badge.dart';
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FBadgeStyle>('style', style))
-      ..add(StringProperty('text', label));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('label', label));
   }
 
 }
@@ -28,11 +28,11 @@ part of 'badge.dart';
 /// A badge content's style.
 final class FBadgeContentStyle with Diagnosticable {
 
-  /// The padding.
-  final EdgeInsets padding;
-
   /// The text.
   final TextStyle label;
+
+  /// The padding.
+  final EdgeInsets padding;
 
   /// Creates a [FBadgeContentStyle].
   FBadgeContentStyle({required this.label, this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 2)});
@@ -47,8 +47,8 @@ final class FBadgeContentStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('text', label));
+      ..add(DiagnosticsProperty('label', label))
+      ..add(DiagnosticsProperty('padding', padding, defaultValue: const EdgeInsets.symmetric(horizontal: 14, vertical: 2)));
   }
 
   @override

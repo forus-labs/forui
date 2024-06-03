@@ -5,16 +5,17 @@ import 'package:sugar/core.dart';
 
 import 'package:forui/forui.dart';
 
+// TODO: replace with nullable number operations in Sugar 4.
 double? _scale(double? value, double factor) => value == null ? null : value * factor;
 
-/// A Forui font that used to configure the [TextStyle]s of Forui widgets.
+/// A Forui font used to configure the Forui widgets' [TextStyle]s.
 ///
-/// It is usually inherited from a ancestor [FTheme]. Besides the typical font information, a [FFont] also contains
-/// scalar values used to scale a [TextStyle]'s corresponding properties. This ensures that various fonts are scaled
-/// consistently throughout an application.
+/// It is usually inherited from an ancestor [FTheme]. Besides the typical font information, a [FFont] also contains
+/// scalar values used to scale a [TextStyle]'s corresponding properties. This ensures that various [TextStyle]s with the
+/// same font are scaled consistently throughout a project.
 final class FFont with Diagnosticable {
 
-  /// The font family. Defaults to `packages/forui/Inter`.
+  /// The font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
   /// ## Contract:
   /// Throws an [AssertionError] if blank.
@@ -310,18 +311,18 @@ final class FFont with Diagnosticable {
       ..add(DoubleProperty('letterSpacingScalar', letterSpacingScalar, defaultValue: 1))
       ..add(DoubleProperty('wordSpacingScalar', wordSpacingScalar, defaultValue: 1))
       ..add(DoubleProperty('heightScalar', heightScalar, defaultValue: 1))
-      ..add(DoubleProperty('xs', xs))
-      ..add(DoubleProperty('sm', sm))
-      ..add(DoubleProperty('base', base))
-      ..add(DoubleProperty('lg', lg))
-      ..add(DoubleProperty('xl', xl))
-      ..add(DoubleProperty('xl2', xl2))
-      ..add(DoubleProperty('xl3', xl3))
-      ..add(DoubleProperty('xl4', xl4))
-      ..add(DoubleProperty('xl5', xl5))
-      ..add(DoubleProperty('xl6', xl6))
-      ..add(DoubleProperty('xl7', xl7))
-      ..add(DoubleProperty('xl8', xl8));
+      ..add(DoubleProperty('xs', xs, defaultValue: 12))
+      ..add(DoubleProperty('sm', sm, defaultValue: 14))
+      ..add(DoubleProperty('base', base, defaultValue: 16))
+      ..add(DoubleProperty('lg', lg, defaultValue: 18))
+      ..add(DoubleProperty('xl', xl, defaultValue: 20))
+      ..add(DoubleProperty('xl2', xl2, defaultValue: 22))
+      ..add(DoubleProperty('xl3', xl3, defaultValue: 30))
+      ..add(DoubleProperty('xl4', xl4, defaultValue: 36))
+      ..add(DoubleProperty('xl5', xl5, defaultValue: 48))
+      ..add(DoubleProperty('xl6', xl6, defaultValue: 60))
+      ..add(DoubleProperty('xl7', xl7, defaultValue: 72))
+      ..add(DoubleProperty('xl8', xl8, defaultValue: 96));
   }
 
   @override
@@ -371,7 +372,7 @@ final class FFont with Diagnosticable {
 /// Provides functions for working with [FFont]s.
 extension FontTextStyle on TextStyle {
 
-  /// Returns a [TextStyle] scaled using the given [font].
+  /// Returns a [TextStyle] with the given [font], scaled using it.
   ///
   /// ```dart
   /// final font = FFont(

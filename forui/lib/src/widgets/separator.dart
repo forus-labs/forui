@@ -3,13 +3,13 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-/// A separator visually separates content.
+/// A separator that visually separates content.
 final class FSeparator extends StatelessWidget {
 
-  /// The style.
+  /// The style. Defaults to the appropriate style in [FThemeData.separatorStyles] if null.
   final FSeparatorStyle? style;
 
-  /// Whether this separator should be horizontal or vertical. Defaults to horizontal (false).
+  /// True if this separator is vertical. Defaults to false (horizontal).
   final bool vertical;
 
   /// Creates a [FSeparator].
@@ -17,32 +17,33 @@ final class FSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
+    final FSeparatorStyle(:padding, :width, :color) = style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
     return Padding(
-      padding: style.padding,
+      padding: padding,
       child: vertical ?
         SizedBox(
-          width: style.width,
+          width: width,
           height: double.infinity,
           child: ColoredBox(
-            color: style.color,
+            color: color,
           ),
         ) :
         SizedBox(
           width: double.infinity,
-          height: style.width,
+          height: width,
           child: ColoredBox(
-            color: style.color,
+            color: color,
           ),
         ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<bool>('vertical', vertical))
-      ..add(DiagnosticsProperty<FSeparatorStyle?>('style', style));
+      ..add(FlagProperty('vertical', value: vertical, defaultValue: false))
+      ..add(DiagnosticsProperty('style', style));
   }
 
 }
@@ -82,8 +83,8 @@ final class FSeparatorStyles with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FSeparatorStyle>('horizontal', horizontal))
-      ..add(DiagnosticsProperty<FSeparatorStyle>('vertical', vertical));
+      ..add(DiagnosticsProperty('horizontal', horizontal))
+      ..add(DiagnosticsProperty('vertical', vertical));
   }
 
   @override
@@ -111,7 +112,7 @@ final class FSeparatorStyle with Diagnosticable {
   /// The color of the separating line. Defaults to [FColorScheme.secondary].
   final Color color;
 
-  /// The padding surrounding the separating line.
+  /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
   final EdgeInsetsGeometry padding;
 
   /// The width of the separating line. Defaults to 1.
@@ -141,7 +142,7 @@ final class FSeparatorStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(ColorProperty('color', color))
       ..add(DoubleProperty('width', width));
   }

@@ -135,4 +135,7 @@ class Foo extends StatelessWidget {
 
 ## Conventions
 
+* Avoid [double negatives](https://en.wikipedia.org/wiki/Double_negative) when naming things, i.e. a boolean field should
+  be named `enabled` instead of `disabled`.
+
 * Prefix all publicly exported widgets and styles with `F`, i.e. `FScaffold`.

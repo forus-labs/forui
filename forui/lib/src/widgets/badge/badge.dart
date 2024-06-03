@@ -1,25 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-import 'package:forui/forui.dart';
-
 part 'badge_content.dart';
-
 part 'badge_styles.dart';
 
 /// A badge, or a component that looks like a badge.
 class FBadge extends StatelessWidget {
-  /// The design.
+
+  /// The design. Defaults to [FBadgeVariant.primary].
   final FBadgeDesign design;
-
-  /// A callback for when the badge is pressed.
-  final void Function(BuildContext)? onPressed;
-
-  /// A callback for when the badge is long pressed.
-  final void Function(BuildContext)? onLongPressed;
 
   /// The builder.
   final Widget Function(BuildContext, FBadgeStyle) builder;
@@ -28,13 +20,11 @@ class FBadge extends StatelessWidget {
   FBadge({
     required String label,
     this.design = FBadgeVariant.primary,
-    this.onPressed,
-    this.onLongPressed,
     super.key,
   }) : builder = ((context, style) => FBadgeContent(label: label, style: style));
 
   /// Creates a [FBadge].
-  const FBadge.raw({required this.design, required this.builder, this.onPressed, this.onLongPressed, super.key});
+  const FBadge.raw({required this.design, required this.builder, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +36,7 @@ class FBadge extends StatelessWidget {
       FBadgeVariant.destructive => context.theme.badgeStyles.destructive,
     };
 
-    final badge = IntrinsicWidth(
+    return IntrinsicWidth(
       child: IntrinsicHeight(
         child: DecoratedBox(
           decoration: BoxDecoration(
@@ -61,24 +51,16 @@ class FBadge extends StatelessWidget {
         ),
       ),
     );
-
-    if (onPressed == null && onLongPressed == null) {
-      return badge;
-    }
-
-    // TODO: Wrap in FTappable when it's ready.
-    return badge;
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FBadgeDesign>('design', design))
-      ..add(DiagnosticsProperty<void Function(BuildContext)?>('onPressed', onPressed, defaultValue: null))
-      ..add(DiagnosticsProperty<void Function(BuildContext)?>('onLongPressed', onLongPressed, defaultValue: null))
-      ..add(DiagnosticsProperty<Widget Function(BuildContext, FBadgeStyle)>('builder', builder, defaultValue: null));
+      ..add(DiagnosticsProperty('design', design, defaultValue: FBadgeVariant.primary))
+      ..add(DiagnosticsProperty('builder', builder, defaultValue: null));
   }
+
 }
 
 /// The badge design. Either a pre-defined [FBadgeVariant], or a custom [FBadgeStyle].
@@ -101,6 +83,7 @@ enum FBadgeVariant implements FBadgeDesign {
 
 /// A [FBadge]'s style.
 final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
+
   /// The background color.
   final Color background;
 
@@ -161,7 +144,7 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
     properties
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('border', border))
-      ..add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius))
+      ..add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius, defaultValue: BorderRadius.circular(100)))
       ..add(DoubleProperty('borderWidth', borderWidth))
       ..add(DiagnosticsProperty<FBadgeContentStyle>('content', content));
   }
@@ -180,4 +163,5 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
   @override
   int get hashCode =>
       background.hashCode ^ border.hashCode ^ borderRadius.hashCode ^ borderWidth.hashCode ^ content.hashCode;
+
 }

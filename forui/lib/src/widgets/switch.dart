@@ -4,16 +4,16 @@ import 'package:flutter/gestures.dart';
 
 import 'package:forui/forui.dart';
 
-/// A control that allows the user to toggle between checked and not checked.
+/// A control that allows the user to toggle between checked and unchecked.
 class FSwitch extends StatelessWidget {
 
-  /// The style of the switch.
+  /// The style. Defaults to the appropriate style in [FThemeData.switchStyle] if null.
   final FSwitchStyle? style;
 
-  /// Whether this switch is on or off.
+  /// True if this switch is checked, and false if unchecked.
   final bool value;
 
-  /// Called when the user toggles with switch on or off.
+  /// Called when the user toggles the switch on or off.
   ///
   /// The switch passes the new value to the callback but does not actually
   /// change state until the parent widget rebuilds the switch with the new
@@ -108,29 +108,30 @@ class FSwitch extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('value', value))
-      ..add(DiagnosticsProperty('autofocus', autofocus))
-      ..add(DiagnosticsProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty<ValueChanged<bool>>('onChanged', onChanged))
-      ..add(DiagnosticsProperty<FocusNode>('focusNode', focusNode))
-      ..add(DiagnosticsProperty<ValueChanged<bool>>('onFocusChange', onFocusChange));
+      ..add(FlagProperty('value', value: value))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false))
+      ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start))
+      ..add(DiagnosticsProperty('onChanged', onChanged, defaultValue: null))
+      ..add(DiagnosticsProperty('focusNode', focusNode, defaultValue: null))
+      ..add(DiagnosticsProperty('onFocusChange', onFocusChange, defaultValue: null));
   }
+
 }
 
 /// The style of a [FSwitch].
 final class FSwitchStyle with Diagnosticable {
 
-  /// The color of the switch when it is checked.
+  /// The track's color when checked. Defaults to [FColorScheme.primary].
   final Color checked;
 
-  /// The color of the switch when it is unchecked.
+  /// The track's color when unchecked. Defaults to [FColorScheme.border].
   final Color unchecked;
 
-  /// The color of the switch's thumb.
+  /// The thumb's color. Defaults to [FColorScheme.background].
   final Color thumb;
 
-  /// The color of the switch when it is focused. Defaults to a slightly transparent [checked] color.
+  /// This switch's color when focused. Defaults to a slightly transparent [checked] color.
   final Color focus;
 
   /// Creates a [FSwitchStyle].
