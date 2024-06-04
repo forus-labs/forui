@@ -25,8 +25,17 @@ class FThemeData with Diagnosticable {
   /// The box style.
   final FBoxStyle boxStyle;
 
+  /// The button styles.
+  final FButtonStyles buttonStyles;
+
+  /// The card style.
+  final FCardStyle cardStyle;
+
   /// The separator styles.
   final FSeparatorStyles separatorStyles;
+
+  /// The switch style.
+  final FSwitchStyle switchStyle;
 
   /// Creates a [FThemeData].
   FThemeData({
@@ -37,7 +46,10 @@ class FThemeData with Diagnosticable {
     required this.cardStyle,
     required this.headerStyle,
     required this.boxStyle,
+    required this.buttonStyles,
+    required this.cardStyle,
     required this.separatorStyles,
+    required this.switchStyle,
   });
 
   /// Creates a [FThemeData] that inherits the given arguments' properties.
@@ -45,11 +57,13 @@ class FThemeData with Diagnosticable {
     required this.colorScheme,
     required this.font,
     required this.style,
-  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
-        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
-        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, font: font, style: style),
-        boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
-        separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style);
+  }):
+    badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
+    boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
+    buttonStyles = FButtonStyles.inherit(colorScheme: colorScheme, font: font, style: style, ),
+    cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
+    separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
+    switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   FThemeData copyWith({
@@ -62,13 +76,21 @@ class FThemeData with Diagnosticable {
 
     FHeaderStyle? headerStyles,
     FBoxStyle? boxStyle,
+    FButtonStyles? buttonStyles,
+    FCardStyle? cardStyle,
     FSeparatorStyles? separatorStyles,
-  }) =>
-      FThemeData(
-        colorScheme: colorScheme ?? this.colorScheme,
-        font: font ?? this.font,
-        style: style ?? this.style,
-        badgeStyles: badgeStyles ?? this.badgeStyles,
+    FSwitchStyle? switchStyle,
+  }) => FThemeData(
+    colorScheme: colorScheme ?? this.colorScheme,
+    font: font ?? this.font,
+    style: style ?? this.style,
+    badgeStyles: badgeStyles ?? this.badgeStyles,
+    boxStyle: boxStyle ?? this.boxStyle,
+    buttonStyles: buttonStyles ?? this.buttonStyles,
+    cardStyle: cardStyle ?? this.cardStyle,
+    separatorStyles: separatorStyles ?? this.separatorStyles,
+    switchStyle: switchStyle ?? this.switchStyle,
+  );
 
         cardStyle: cardStyle ?? this.cardStyle,
 
@@ -85,10 +107,11 @@ class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<FFont>('font', font, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FStyle>('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FBadgeStyles>('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FButtonStyles>('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FHeaderStyle>('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FSeparatorStyles>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty<FSwitchStyle>('switchStyle', switchStyle));
   }
 
   @override
@@ -103,7 +126,10 @@ class FThemeData with Diagnosticable {
           cardStyle == other.cardStyle &&
           headerStyle == other.headerStyle &&
           boxStyle == other.boxStyle &&
-          separatorStyles == other.separatorStyles;
+          buttonStyles == other.buttonStyles &&
+          cardStyle == other.cardStyle &&
+          separatorStyles == other.separatorStyles &&
+          switchStyle == other.switchStyle;
 
   @override
   int get hashCode =>
@@ -114,5 +140,8 @@ class FThemeData with Diagnosticable {
       cardStyle.hashCode ^
       headerStyle.hashCode ^
       boxStyle.hashCode ^
-      separatorStyles.hashCode;
+      buttonStyles.hashCode ^
+      cardStyle.hashCode ^
+      separatorStyles.hashCode ^
+      switchStyle.hashCode;
 }
