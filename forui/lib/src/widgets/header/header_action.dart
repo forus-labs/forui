@@ -50,7 +50,7 @@ class FHeaderActionStyle with Diagnosticable {
   /// The icon's color when this button is enabled. Defaults to [FColorScheme.foreground].
   final Color enabledIcon;
 
-  /// The icon's color when this button is disabled.
+  /// The icon's color when this button is disabled. Defaults to a slightly translucent [FColorScheme.foreground].
   final Color disabledIcon;
 
   /// The padding. Defaults to `EdgeInsets.only(left: 10)`.
