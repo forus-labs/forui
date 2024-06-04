@@ -78,6 +78,6 @@ class FHeaderActionStyle with Diagnosticable {
       ..add(DoubleProperty('iconSize', iconSize, defaultValue: 30))
       ..add(ColorProperty('enabledIcon', enabledIcon))
       ..add(ColorProperty('disabledIcon', disabledIcon))
-      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+      ..add(DiagnosticsProperty('padding', padding, defaultValue: const EdgeInsets.only(left: 10)));
   }
 }
