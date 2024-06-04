@@ -2,7 +2,6 @@ part of 'button.dart';
 
 /// [FButtonContent]'s style.
 class FButtonContentStyle with Diagnosticable {
-
   /// The [TextStyle] when this button is enabled.
   final TextStyle enabledText;
 
@@ -56,5 +55,4 @@ class FButtonContentStyle with Diagnosticable {
       ..add(DiagnosticsProperty('disabledIcon', disabledIcon))
       ..add(DiagnosticsProperty('padding', padding));
   }
-
 }

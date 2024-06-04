@@ -1,7 +1,6 @@
 part of 'badge.dart';
 
 @internal final class FBadgeContent extends StatelessWidget {
-
   final FBadgeStyle style;
   final String label;
 
@@ -22,12 +21,10 @@ part of 'badge.dart';
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('label', label));
   }
-
 }
 
 /// A badge content's style.
 final class FBadgeContentStyle with Diagnosticable {
-
   /// The text.
   final TextStyle label;
 
@@ -58,5 +55,4 @@ final class FBadgeContentStyle with Diagnosticable {
 
   @override
   int get hashCode => padding.hashCode ^ label.hashCode;
-
 }

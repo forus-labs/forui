@@ -1,6 +1,10 @@
 /// A Flutter package for building beautiful user interfaces.
 library forui;
 
+// Icons
+export 'package:forui_assets/forui_assets.dart';
+export 'package:forui/src/svg_extension.nitrogen.dart';
+
 // Theme
 export 'src/theme/color_scheme.dart';
 export 'src/theme/style.dart';

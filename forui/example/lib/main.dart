@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui_assets/forui_assets.dart';
 
 void main() {
   runApp(const Application());
@@ -38,6 +37,20 @@ class ExampleWidget extends StatelessWidget {
 
     return ListView(
       children: [
+        FHeader(
+          title: 'Notification - A very long message',
+          actions: [
+            FHeaderAction(
+              icon: FAssets.icons.alarmClock,
+              onPress: null,
+            ),
+            FHeaderAction(
+              icon: FAssets.icons.plus,
+              onPress: () {},
+            ),
+          ],
+        ),
+        const SizedBox(height: 40),
         FCard(
           title: 'Notification',
           subtitle: 'You have 3 unread messages.',
@@ -67,43 +80,6 @@ class ExampleWidget extends StatelessWidget {
           'text-lg',
           style: TextStyle(fontSize: font.lg).withFont(font),
         ),
-        Text(
-          'text-xl',
-          style: TextStyle(fontSize: font.xl).withFont(font),
-        ),
-        Text(
-          'text-2xl',
-          style: TextStyle(fontSize: font.xl2).withFont(font),
-        ),
-        Text(
-          'text-3xl',
-          style: TextStyle(fontSize: font.xl3).withFont(font),
-        ),
-        Text(
-          'text-4xl',
-          style: TextStyle(fontSize: font.xl4).withFont(font),
-        ),
-        Text(
-          'text-5xl',
-          style: TextStyle(fontSize: font.xl5).withFont(font),
-        ),
-        Text(
-          'text-6xl',
-          style: TextStyle(fontSize: font.xl6).withFont(font),
-        ),
-        Text(
-          'text-7xl',
-          style: TextStyle(fontSize: font.xl7).withFont(font),
-        ),
-        Text(
-          'text-8xl',
-          style: TextStyle(fontSize: font.xl8).withFont(font),
-        ),
-        FButton(
-          text: 'Button',
-          icon: FAssets.icons.airplay,
-          onPress: () {},
-        )
       ],
     );
   }

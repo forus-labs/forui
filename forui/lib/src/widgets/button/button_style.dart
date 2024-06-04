@@ -20,7 +20,6 @@ enum FButtonVariant implements FButtonDesign  {
 
 /// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton].
 class FButtonStyle extends FButtonDesign with Diagnosticable{
-
   /// The content.
   final FButtonContentStyle content;
 
@@ -56,5 +55,4 @@ class FButtonStyle extends FButtonDesign with Diagnosticable{
     ..add(DiagnosticsProperty('enabledBoxDecoration', enabledBoxDecoration))
     ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration));
   }
-
 }

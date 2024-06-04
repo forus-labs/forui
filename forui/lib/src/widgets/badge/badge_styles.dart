@@ -2,7 +2,6 @@ part of 'badge.dart';
 
 /// The [FBadgeStyle]s.
 class FBadgeStyles with Diagnosticable {
-
   /// The primary badge style.
   final FBadgeStyle primary;
 
@@ -104,5 +103,4 @@ class FBadgeStyles with Diagnosticable {
 
   @override
   int get hashCode => primary.hashCode ^ secondary.hashCode ^ outline.hashCode ^ destructive.hashCode;
-
 }

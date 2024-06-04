@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
-import 'package:nitrogen_types/nitrogen_types.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
-import 'package:forui/src/svg_extension.nitrogen.dart';
 
 part 'button_content.dart';
 
@@ -18,7 +16,6 @@ part 'button_content_style.dart';
 
 /// A button.
 class FButton extends StatelessWidget {
-
   /// The design. Defaults to [FBadgeVariant.primary].
   final FButtonDesign design;
 
@@ -122,5 +119,4 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('onFocusChange', onFocusChange))
       ..add(DiagnosticsProperty('builder', builder));
   }
-
 }

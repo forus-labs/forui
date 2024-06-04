@@ -4,7 +4,6 @@ import 'package:forui/forui.dart';
 
 /// The color scheme, fonts, overarching style, and widget specific styles used to configure child Forui widgets.
 class FThemeData with Diagnosticable {
-
   /// The color scheme.
   final FColorScheme colorScheme;
 
@@ -17,6 +16,9 @@ class FThemeData with Diagnosticable {
   /// The chip styles.
   final FBadgeStyles badgeStyles;
 
+  /// The button styles.
+  final FButtonStyles buttonStyles;
+
   /// The card style.
   final FCardStyle cardStyle;
 
@@ -25,12 +27,6 @@ class FThemeData with Diagnosticable {
 
   /// The box style.
   final FBoxStyle boxStyle;
-
-  /// The button styles.
-  final FButtonStyles buttonStyles;
-
-  /// The card style.
-  final FCardStyle cardStyle;
 
   /// The separator styles.
   final FSeparatorStyles separatorStyles;
@@ -44,11 +40,10 @@ class FThemeData with Diagnosticable {
     required this.font,
     required this.style,
     required this.badgeStyles,
+    required this.buttonStyles,
     required this.cardStyle,
     required this.headerStyle,
     required this.boxStyle,
-    required this.buttonStyles,
-    required this.cardStyle,
     required this.separatorStyles,
     required this.switchStyle,
   });
@@ -58,13 +53,17 @@ class FThemeData with Diagnosticable {
     required this.colorScheme,
     required this.font,
     required this.style,
-  }):
-    badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
-    boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
-    buttonStyles = FButtonStyles.inherit(colorScheme: colorScheme, font: font, style: style),
-    cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
-    separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
-    switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
+  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
+        buttonStyles = FButtonStyles.inherit(
+          colorScheme: colorScheme,
+          font: font,
+          style: style,
+        ),
+        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
+        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, font: font),
+        boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
+        separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
+        switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   FThemeData copyWith({
@@ -72,32 +71,24 @@ class FThemeData with Diagnosticable {
     FFont? font,
     FStyle? style,
     FBadgeStyles? badgeStyles,
-
-    FCardStyle? cardStyle,
-
-    FHeaderStyle? headerStyles,
-    FBoxStyle? boxStyle,
     FButtonStyles? buttonStyles,
     FCardStyle? cardStyle,
+    FHeaderStyle? headerStyle,
+    FBoxStyle? boxStyle,
     FSeparatorStyles? separatorStyles,
     FSwitchStyle? switchStyle,
-  }) => FThemeData(
-    colorScheme: colorScheme ?? this.colorScheme,
-    font: font ?? this.font,
-    style: style ?? this.style,
-    badgeStyles: badgeStyles ?? this.badgeStyles,
-    boxStyle: boxStyle ?? this.boxStyle,
-    buttonStyles: buttonStyles ?? this.buttonStyles,
-    cardStyle: cardStyle ?? this.cardStyle,
-    separatorStyles: separatorStyles ?? this.separatorStyles,
-    switchStyle: switchStyle ?? this.switchStyle,
-  );
-
+  }) =>
+      FThemeData(
+        colorScheme: colorScheme ?? this.colorScheme,
+        font: font ?? this.font,
+        style: style ?? this.style,
+        badgeStyles: badgeStyles ?? this.badgeStyles,
+        buttonStyles: buttonStyles ?? this.buttonStyles,
         cardStyle: cardStyle ?? this.cardStyle,
-
-        headerStyle: headerStyles ?? this.headerStyle,
+        headerStyle: headerStyle ?? this.headerStyle,
         boxStyle: boxStyle ?? this.boxStyle,
         separatorStyles: separatorStyles ?? this.separatorStyles,
+        switchStyle: switchStyle ?? this.switchStyle,
       );
 
   @override
@@ -108,9 +99,10 @@ class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty<FFont>('font', font, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FStyle>('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FBadgeStyles>('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FButtonStyles>('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FHeaderStyle>('headerStyle', headerStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FSeparatorStyles>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FSwitchStyle>('switchStyle', switchStyle));
   }
@@ -124,11 +116,10 @@ class FThemeData with Diagnosticable {
           font == other.font &&
           style == other.style &&
           badgeStyles == other.badgeStyles &&
+          buttonStyles == other.buttonStyles &&
           cardStyle == other.cardStyle &&
           headerStyle == other.headerStyle &&
           boxStyle == other.boxStyle &&
-          buttonStyles == other.buttonStyles &&
-          cardStyle == other.cardStyle &&
           separatorStyles == other.separatorStyles &&
           switchStyle == other.switchStyle;
 
@@ -138,12 +129,10 @@ class FThemeData with Diagnosticable {
       font.hashCode ^
       style.hashCode ^
       badgeStyles.hashCode ^
+      buttonStyles.hashCode ^
       cardStyle.hashCode ^
       headerStyle.hashCode ^
       boxStyle.hashCode ^
-      buttonStyles.hashCode ^
-      cardStyle.hashCode ^
       separatorStyles.hashCode ^
       switchStyle.hashCode;
-
 }

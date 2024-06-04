@@ -92,5 +92,4 @@ final class FCardContentStyle with Diagnosticable {
 
   @override
   int get hashCode => padding.hashCode ^ title.hashCode ^ subtitle.hashCode;
-
 }

@@ -1,11 +1,10 @@
 part of 'button.dart';
 
 @internal final class FButtonContent extends StatelessWidget {
-
   final FButtonStyle style;
   final bool enabled;
   final String? text;
-  final SvgAsset? icon;
+  final SvgAsset? icon; // TODO: We should allow for custom heading and trailing widgets.
   final Widget? child;
 
   const FButtonContent({
@@ -27,7 +26,7 @@ part of 'button.dart';
         children: [
           if (icon != null) ...[
             icon!(
-              height: 20,
+              height: 20, // TODO: Icon size should be configurable.
               colorFilter: ColorFilter.mode(enabled ? style.enabledIcon : style.disabledIcon, BlendMode.srcIn),
             ),
             const SizedBox(width: 10)
@@ -48,5 +47,4 @@ part of 'button.dart';
       ..add(StringProperty('text', text))
       ..add(DiagnosticsProperty('icon', icon));
   }
-
 }
