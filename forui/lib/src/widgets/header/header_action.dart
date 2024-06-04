@@ -75,7 +75,7 @@ class FHeaderActionStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('iconSize', iconSize))
+      ..add(DoubleProperty('iconSize', iconSize, defaultValue: 30))
       ..add(ColorProperty('enabledIcon', enabledIcon))
       ..add(ColorProperty('disabledIcon', disabledIcon))
       ..add(DiagnosticsProperty<EdgeInsets>('padding', padding));
