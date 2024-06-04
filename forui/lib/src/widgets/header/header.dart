@@ -83,7 +83,7 @@ final class FHeaderStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<TextStyle>('title', title))
-      ..add(DiagnosticsProperty<FHeaderActionStyle>('actionStyle', actionStyle));
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('actionStyle', actionStyle));
   }
 }
