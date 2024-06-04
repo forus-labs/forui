@@ -65,7 +65,7 @@ final class FHeaderStyle with Diagnosticable {
   final TextStyle title;
 
   /// The [FHeaderAction]'s style.
-  final FHeaderActionStyle actionStyle;
+  final FHeaderActionStyle action;
 
   /// Creates a [FHeaderStyle].
   FHeaderStyle({required this.title, required this.actionStyle});
