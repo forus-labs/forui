@@ -34,9 +34,10 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.primary.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
-              font: font,
-              foreground: colorScheme.primaryForeground,
-              disabledForeground: colorScheme.primaryForeground.withOpacity(0.5)),
+            font: font,
+            foreground: colorScheme.primaryForeground,
+            disabledForeground: colorScheme.primaryForeground.withOpacity(0.5),
+          ),
         ),
         secondary = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -48,9 +49,10 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.secondary.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
-              font: font,
-              foreground: colorScheme.secondaryForeground,
-              disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5)),
+            font: font,
+            foreground: colorScheme.secondaryForeground,
+            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+          ),
         ),
         destructive = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -62,9 +64,10 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.destructive.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
-              font: font,
-              foreground: colorScheme.destructiveForeground,
-              disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5)),
+            font: font,
+            foreground: colorScheme.destructiveForeground,
+            disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5),
+          ),
         ),
         outlined = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -80,16 +83,20 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.background,
           ),
           content: FButtonContentStyle.inherit(
-              font: font,
-              foreground: colorScheme.secondaryForeground,
-              disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5)),
+            font: font,
+            foreground: colorScheme.secondaryForeground,
+            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+          ),
         );
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty<FButtonStyle>('primary', primary))
-    ..add(DiagnosticsProperty<FButtonStyle>('secondary', secondary))
-    ..add(DiagnosticsProperty<FButtonStyle>('destructive', destructive))
-    ..add(DiagnosticsProperty<FButtonStyle>('outlined', outlined));
+    properties
+      ..add(DiagnosticsProperty('primary', primary))
+      ..add(DiagnosticsProperty('secondary', secondary))
+      ..add(DiagnosticsProperty('destructive', destructive))
+      ..add(DiagnosticsProperty('outlined', outlined));
   }
+
 }

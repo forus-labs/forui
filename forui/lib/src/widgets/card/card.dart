@@ -9,11 +9,12 @@ part 'card_content.dart';
 
 /// A card widget.
 final class FCard extends StatelessWidget {
-  /// The child.
-  final Widget child;
 
   /// The style.
   final FCardStyle? style;
+
+  /// The child.
+  final Widget child;
 
   /// Creates a [FCard] with a tile and subtitle.
   FCard({
@@ -22,7 +23,12 @@ final class FCard extends StatelessWidget {
     Widget? child,
     this.style,
     super.key,
-  }) : child = FCardContent(title: title, subtitle: subtitle, style: style?.content, child: child,);
+  }) : child = FCardContent(
+    title: title,
+    subtitle: subtitle,
+    style: style?.content,
+    child: child,
+  );
 
   /// Creates a [FCard].
   const FCard.raw({required this.child, this.style, super.key});
@@ -40,12 +46,14 @@ final class FCard extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FCardStyle?>('style', style));
+    properties.add(DiagnosticsProperty('style', style));
   }
+
 }
 
 /// [FCard]'s style.
 final class FCardStyle with Diagnosticable {
+
   /// The decoration.
   final BoxDecoration decoration;
 
@@ -74,8 +82,8 @@ final class FCardStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FCardContentStyle>('content', content))
-      ..add(DiagnosticsProperty<BoxDecoration>('decoration', decoration));
+      ..add(DiagnosticsProperty('content', content))
+      ..add(DiagnosticsProperty('decoration', decoration));
   }
 
   @override
@@ -86,4 +94,5 @@ final class FCardStyle with Diagnosticable {
 
   @override
   int get hashCode => decoration.hashCode ^ content.hashCode;
+
 }

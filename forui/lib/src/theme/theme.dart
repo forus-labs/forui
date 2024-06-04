@@ -19,13 +19,13 @@ class FTheme extends StatelessWidget {
   /// The theme data.
   final FThemeData data;
 
-  /// The child widget.
-  final Widget child;
-
   /// The text direction.
   ///
   /// If none is provided, the text direction is inherited from the context.
   final TextDirection? textDirection;
+
+  /// The child widget.
+  final Widget child;
 
   /// Creates a [FTheme].
   const FTheme({

@@ -17,7 +17,6 @@ part of 'card.dart';
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // TODO: Check if TextStyle and font have the same font before scaling.
           if (title != null) Text(title!, style: style.title.withFont(font)),
           if (subtitle != null) Text(subtitle!, style: style.subtitle.withFont(font)),
           if (child != null)
@@ -29,18 +28,20 @@ part of 'card.dart';
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('title', title))
       ..add(StringProperty('subtitle', subtitle))
-      ..add(DiagnosticsProperty<FCardContentStyle?>('style', style));
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
 /// A card content's style.
 final class FCardContentStyle with Diagnosticable {
+
   /// The padding.
   final EdgeInsets padding;
 
@@ -77,9 +78,9 @@ final class FCardContentStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
-      ..add(DiagnosticsProperty<TextStyle>('title', title))
-      ..add(DiagnosticsProperty<TextStyle>('subtitle', subtitle));
+      ..add(DiagnosticsProperty('padding', padding))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('subtitle', subtitle));
   }
 
   @override
@@ -91,4 +92,5 @@ final class FCardContentStyle with Diagnosticable {
 
   @override
   int get hashCode => padding.hashCode ^ title.hashCode ^ subtitle.hashCode;
+
 }

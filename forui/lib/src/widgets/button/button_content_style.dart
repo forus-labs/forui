@@ -2,17 +2,18 @@ part of 'button.dart';
 
 /// [FButtonContent]'s style.
 class FButtonContentStyle with Diagnosticable {
-  /// The TextStyle for an enabled button.
+
+  /// The [TextStyle] when this button is enabled.
   final TextStyle enabledText;
 
-  /// The TextStyle for an disabled button.
+  /// The [TextStyle] when this button is disabled.
   final TextStyle disabledText;
 
-  /// The ColorFilter for an enabled button.
-  final ColorFilter enabledIcon;
+  /// The icon's color when this button is enabled.
+  final Color enabledIcon;
 
-  /// The ColorFilter for an disabled button.
-  final ColorFilter disabledIcon;
+  /// The icon's color when this button is disabled.
+  final Color disabledIcon;
 
   /// The padding.
   final EdgeInsets padding;
@@ -26,7 +27,7 @@ class FButtonContentStyle with Diagnosticable {
     required this.padding,
   });
 
-  /// Creates a [FButtonContentStyle] that inherits its properties from the given [foreground] and [].
+  /// Creates a [FButtonContentStyle] that inherits its properties from the given [foreground] and [disabledForeground].
   FButtonContentStyle.inherit({ required FFont font,required Color foreground, required Color disabledForeground})
       : padding = const EdgeInsets.symmetric(
           horizontal: 5,
@@ -42,15 +43,18 @@ class FButtonContentStyle with Diagnosticable {
           fontWeight: FontWeight.w600,
           color: disabledForeground,
         ),
-        enabledIcon = ColorFilter.mode(foreground, BlendMode.srcIn),
-        disabledIcon = ColorFilter.mode(disabledForeground, BlendMode.srcIn);
+        enabledIcon = foreground,
+        disabledIcon = disabledForeground;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty<TextStyle>('enabledText', enabledText))
-    ..add(DiagnosticsProperty<TextStyle>('disabledText', disabledText))
-    ..add(DiagnosticsProperty<ColorFilter>('enabledIcon', enabledIcon))
-    ..add(DiagnosticsProperty<ColorFilter>('disabledIcon', disabledIcon))
-    ..add(DiagnosticsProperty<EdgeInsets>('padding', padding));
+    properties
+      ..add(DiagnosticsProperty('enabledText', enabledText))
+      ..add(DiagnosticsProperty('disabledText', disabledText))
+      ..add(DiagnosticsProperty('enabledIcon', enabledIcon))
+      ..add(DiagnosticsProperty('disabledIcon', disabledIcon))
+      ..add(DiagnosticsProperty('padding', padding));
   }
+
 }
