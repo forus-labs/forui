@@ -85,5 +85,6 @@ final class FHeaderStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('actionStyle', actionStyle));
+      properties.add(DiagnosticsProperty<FHeaderActionStyle>('action', action));
   }
 }
