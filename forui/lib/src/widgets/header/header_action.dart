@@ -47,7 +47,7 @@ class FHeaderActionStyle with Diagnosticable {
   /// The icon's size. Defaults to 30.
   final double iconSize;
 
-  /// The icon's color when this button is enabled.
+  /// The icon's color when this button is enabled. Defaults to [FColorScheme.foreground].
   final Color enabledIcon;
 
   /// The icon's color when this button is disabled.
