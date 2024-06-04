@@ -4,7 +4,6 @@ import 'package:forui/forui.dart';
 
 /// The Forui themes.
 extension FThemes on Never {
-
   /// The light and dark variants of the [Zinc](https://ui.shadcn.com/themes) theme.
   static final zinc = (
     light: FThemeData.inherit(

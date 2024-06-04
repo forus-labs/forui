@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -13,6 +14,18 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+        theme: ThemeData(
+          brightness: Brightness.light,
+          primarySwatch: Colors.green,
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: CupertinoColors.activeBlue,
+            selectionColor: CupertinoColors.activeBlue.withOpacity(0.4),
+            selectionHandleColor: CupertinoColors.activeBlue,
+          ),
+          cupertinoOverrideTheme: const CupertinoThemeData(
+            primaryColor: CupertinoColors.activeBlue,
+          ),
+        ),
         home: FTheme(
           data: FThemes.zinc.light,
           child: Scaffold(
@@ -34,53 +47,54 @@ class ExampleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final font = context.theme.font;
-
-    return ListView(
-      children: [
-        FHeader(
-          title: 'Notification - A very long message',
-          actions: [
-            FHeaderAction(
-              icon: FAssets.icons.alarmClock,
-              onPress: null,
-            ),
-            FHeaderAction(
-              icon: FAssets.icons.plus,
-              onPress: () {},
-            ),
-          ],
+    return Center(
+      child: TextField(
+        // enabled: false,
+        // cursorColor: CupertinoColors.activeBlue,
+        style: TextStyle(
+          fontFamily: font.family,
+          fontSize: font.sm,
+          color: context.theme.colorScheme.primary,
         ),
-        const SizedBox(height: 40),
-        FCard(
-          title: 'Notification',
-          subtitle: 'You have 3 unread messages.',
-          child: const Text(
-            'Material default font size of 14. (text-sm)',
-            style: TextStyle(fontSize: 14),
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+          hintText: 'Email',
+          hintStyle: TextStyle(
+            inherit: false,
+            fontFamily: font.family,
+            fontSize: font.sm,
+            color: context.theme.colorScheme.mutedForeground, // TODO: change color dynamically when disabled
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: context.theme.colorScheme.border,
+              width: context.theme.style.borderWidth,
+            ),
+            borderRadius: context.theme.style.borderRadius,
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: context.theme.colorScheme.border.withOpacity(0.5),
+              width: context.theme.style.borderWidth,
+            ),
+            borderRadius: context.theme.style.borderRadius,
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: context.theme.colorScheme.border,
+              width: context.theme.style.borderWidth,
+            ),
+            borderRadius: context.theme.style.borderRadius,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: context.theme.colorScheme.mutedForeground,
+              width: context.theme.style.borderWidth,
+            ),
+            borderRadius: context.theme.style.borderRadius,
           ),
         ),
-        const SizedBox(height: 10),
-        Container(
-          alignment: Alignment.centerLeft,
-          child: FBadge(label: 'New'),
-        ),
-        Text(
-          'text-xs',
-          style: TextStyle(fontSize: font.xs).withFont(font),
-        ),
-        Text(
-          'text-sm',
-          style: TextStyle(fontSize: font.sm).withFont(font),
-        ),
-        Text(
-          'text-base',
-          style: TextStyle(fontSize: font.base).withFont(font),
-        ),
-        Text(
-          'text-lg',
-          style: TextStyle(fontSize: font.lg).withFont(font),
-        ),
-      ],
+      ),
     );
   }
 }
