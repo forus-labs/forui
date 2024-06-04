@@ -44,7 +44,7 @@ class FHeaderAction extends StatelessWidget {
 
 /// [FHeaderAction]'s style.
 class FHeaderActionStyle with Diagnosticable {
-  /// The icon's size.
+  /// The icon's size. Defaults to 30.
   final double iconSize;
 
   /// The icon's color when this button is enabled.
