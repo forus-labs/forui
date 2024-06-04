@@ -53,7 +53,7 @@ class FHeaderActionStyle with Diagnosticable {
   /// The icon's color when this button is disabled.
   final Color disabledIcon;
 
-  /// The padding.
+  /// The padding. Defaults to `EdgeInsets.only(left: 10)`.
   final EdgeInsets padding;
 
   /// Creates a [FHeaderActionStyle].
