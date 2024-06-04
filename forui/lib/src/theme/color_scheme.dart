@@ -1,7 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-/// A set of colors that can be used to configure the color properties of most components.
+import 'package:forui/forui.dart';
+
+/// A set of colors that can be used to configure the colors of most widgets.
+///
+/// See the pre-defined themes' color schemes in [FThemes].
 final class FColorScheme with Diagnosticable {
 
   /// The background color.
@@ -124,4 +128,5 @@ final class FColorScheme with Diagnosticable {
     destructive.hashCode ^
     destructiveForeground.hashCode ^
     border.hashCode;
+
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-/// The overarching style that is used to configure the properties of widget-specific styles if they are not provided.
+/// The fallback global style is used to configure the widget-specific styles if they are not provided.
 final class FStyle with Diagnosticable {
 
   /// The border radius.

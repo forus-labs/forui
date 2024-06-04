@@ -12,7 +12,7 @@ void main() {
   group('FButton', () {
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final variant in FButtonVariant.values) {
-        testWidgets('$name with FButtonContent', (tester) async {
+        testWidgets('$name enabled with FButtonContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
@@ -21,7 +21,7 @@ void main() {
                 child: FButton(
                   text: 'Button',
                   design: variant,
-                  onPressed: () {},
+                  onPress: () {},
                 ),
               ),
             ),
@@ -29,7 +29,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name-$variant-button-content.png'),
+            matchesGoldenFile('button/$name-$variant-enabled-button-content.png'),
           );
         });
 
@@ -42,6 +42,7 @@ void main() {
                 child: FButton(
                   text: 'Button',
                   design: variant,
+                  onPress: null,
                 ),
               ),
             ),
@@ -53,7 +54,7 @@ void main() {
           );
         });
 
-        testWidgets('$name with raw content', (tester) async {
+        testWidgets('$name with enabled raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
@@ -61,7 +62,7 @@ void main() {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton.raw(
                   design: variant,
-                  onPressed: () {},
+                  onPress: () {},
                   builder: (_, style) => Padding(
                     padding: const EdgeInsets.all(50),
                     child: Container(
@@ -88,7 +89,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name-$variant-raw-content.png'),
+            matchesGoldenFile('button/$name-$variant-enabled-raw-content.png'),
           );
         });
 
@@ -100,7 +101,7 @@ void main() {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton.raw(
                   design: variant,
-                  onPressed: null,
+                  onPress: null,
                   builder: (_, style) => Padding(
                     padding: const EdgeInsets.all(50),
                     child: Container(

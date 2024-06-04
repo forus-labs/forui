@@ -14,7 +14,7 @@ export 'src/theme/themes.dart';
 
 // Widgets
 export 'src/widgets/badge/badge.dart' hide FBadgeContent;
-export 'src/widgets/button/tappable.dart' hide FTappable;
+export 'src/foundation/tappable.dart' hide FTappable;
 export 'src/widgets/button/button.dart' hide FButtonContent;
 export 'src/widgets/card/card.dart' hide FCardContent;
 export 'src/widgets/header/header.dart';

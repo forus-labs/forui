@@ -4,6 +4,7 @@ import 'package:forui/forui.dart';
 
 /// The color scheme, fonts, overarching style, and widget specific styles used to configure child Forui widgets.
 class FThemeData with Diagnosticable {
+
   /// The color scheme.
   final FColorScheme colorScheme;
 
@@ -52,7 +53,7 @@ class FThemeData with Diagnosticable {
     required this.switchStyle,
   });
 
-  /// Creates a [FThemeData] that inherits the given arguments' properties.
+  /// Creates a [FThemeData] that inherits the given properties.
   FThemeData.inherit({
     required this.colorScheme,
     required this.font,
@@ -60,7 +61,7 @@ class FThemeData with Diagnosticable {
   }):
     badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
     boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
-    buttonStyles = FButtonStyles.inherit(colorScheme: colorScheme, font: font, style: style, ),
+    buttonStyles = FButtonStyles.inherit(colorScheme: colorScheme, font: font, style: style),
     cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
     separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
     switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
@@ -144,4 +145,5 @@ class FThemeData with Diagnosticable {
       cardStyle.hashCode ^
       separatorStyles.hashCode ^
       switchStyle.hashCode;
+
 }
