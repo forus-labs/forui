@@ -8,6 +8,9 @@ import 'package:forui/forui.dart';
 /// See the pre-defined themes' color schemes in [FThemes].
 final class FColorScheme with Diagnosticable {
 
+  /// The system brightness.
+  final Brightness brightness;
+
   /// The background color.
   final Color background;
 
@@ -43,6 +46,7 @@ final class FColorScheme with Diagnosticable {
 
   /// Creates a [FColorScheme].
   const FColorScheme({
+    required this.brightness,
     required this.background,
     required this.foreground,
     required this.primary,
@@ -58,6 +62,7 @@ final class FColorScheme with Diagnosticable {
 
   /// Creates a copy of this [FColorScheme] with the given properties replaced.
   FColorScheme copyWith({
+    Brightness? brightness,
     Color? background,
     Color? foreground,
     Color? primary,
@@ -71,6 +76,7 @@ final class FColorScheme with Diagnosticable {
     Color? border,
   }) =>
       FColorScheme(
+        brightness: brightness ?? this.brightness,
         background: background ?? this.background,
         foreground: foreground ?? this.foreground,
         primary: primary ?? this.primary,
@@ -88,6 +94,7 @@ final class FColorScheme with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(EnumProperty('brightness', brightness))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))
       ..add(ColorProperty('primary', primary))
@@ -103,6 +110,7 @@ final class FColorScheme with Diagnosticable {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is FColorScheme &&
+    brightness == other.brightness &&
     background == other.background &&
     foreground == other.foreground &&
     primary == other.primary &&
@@ -117,6 +125,7 @@ final class FColorScheme with Diagnosticable {
 
   @override
   int get hashCode =>
+    brightness.hashCode ^
     background.hashCode ^
     foreground.hashCode ^
     primary.hashCode ^

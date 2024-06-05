@@ -34,6 +34,9 @@ class FThemeData with Diagnosticable {
   /// The switch style.
   final FSwitchStyle switchStyle;
 
+  /// The text field style.
+  final FTextFieldStyle textFieldStyle;
+
   /// Creates a [FThemeData].
   FThemeData({
     required this.colorScheme,
@@ -46,6 +49,7 @@ class FThemeData with Diagnosticable {
     required this.boxStyle,
     required this.separatorStyles,
     required this.switchStyle,
+    required this.textFieldStyle,
   });
 
   /// Creates a [FThemeData] that inherits the given properties.
@@ -63,7 +67,8 @@ class FThemeData with Diagnosticable {
         headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, font: font),
         boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
         separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
-        switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
+        switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme),
+        textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, font: font, style: style);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   FThemeData copyWith({
@@ -77,6 +82,7 @@ class FThemeData with Diagnosticable {
     FBoxStyle? boxStyle,
     FSeparatorStyles? separatorStyles,
     FSwitchStyle? switchStyle,
+    FTextFieldStyle? textFieldStyle,
   }) =>
       FThemeData(
         colorScheme: colorScheme ?? this.colorScheme,
@@ -89,22 +95,24 @@ class FThemeData with Diagnosticable {
         boxStyle: boxStyle ?? this.boxStyle,
         separatorStyles: separatorStyles ?? this.separatorStyles,
         switchStyle: switchStyle ?? this.switchStyle,
+        textFieldStyle: textFieldStyle ?? this.textFieldStyle,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FColorScheme>('colorScheme', colorScheme, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FFont>('font', font, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FStyle>('style', style, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FBadgeStyles>('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FButtonStyles>('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FCardStyle>('cardStyle', cardStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FHeaderStyle>('headerStyle', headerStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FBoxStyle>('boxStyle', boxStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FSeparatorStyles>('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FSwitchStyle>('switchStyle', switchStyle));
+      ..add(DiagnosticsProperty('colorScheme', colorScheme, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('font', font, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('boxStyle', boxStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug));
   }
 
   @override
@@ -121,7 +129,8 @@ class FThemeData with Diagnosticable {
           headerStyle == other.headerStyle &&
           boxStyle == other.boxStyle &&
           separatorStyles == other.separatorStyles &&
-          switchStyle == other.switchStyle;
+          switchStyle == other.switchStyle &&
+          textFieldStyle == other.textFieldStyle;
 
   @override
   int get hashCode =>
@@ -134,5 +143,6 @@ class FThemeData with Diagnosticable {
       headerStyle.hashCode ^
       boxStyle.hashCode ^
       separatorStyles.hashCode ^
-      switchStyle.hashCode;
+      switchStyle.hashCode ^
+      textFieldStyle.hashCode;
 }

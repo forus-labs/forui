@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -9,6 +10,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       font: FFont(),
       colorScheme: const FColorScheme(
+        brightness: Brightness.light,
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
         primary: Color(0xFF18181B),
@@ -26,6 +28,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       font: FFont(),
       colorScheme: const FColorScheme(
+        brightness: Brightness.dark,
         background: Color(0xFF09090B),
         foreground: Color(0xFFFAFAFA),
         primary: Color(0xFFFAFAFA),
