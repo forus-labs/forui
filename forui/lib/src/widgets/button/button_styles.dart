@@ -98,5 +98,4 @@ class FButtonStyles with Diagnosticable{
       ..add(DiagnosticsProperty('destructive', destructive))
       ..add(DiagnosticsProperty('outlined', outlined));
   }
-
 }

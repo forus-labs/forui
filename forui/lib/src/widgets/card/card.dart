@@ -9,7 +9,6 @@ part 'card_content.dart';
 
 /// A card widget.
 final class FCard extends StatelessWidget {
-
   /// The style.
   final FCardStyle? style;
 
@@ -35,8 +34,8 @@ final class FCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.theme;
-    final style = this.style ?? theme.cardStyle;
+    final style = this.style ?? context.theme.cardStyle;
+
     return DecoratedBox(
       decoration: style.decoration,
       child: child,
@@ -94,5 +93,4 @@ final class FCardStyle with Diagnosticable {
 
   @override
   int get hashCode => decoration.hashCode ^ content.hashCode;
-
 }

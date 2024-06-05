@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -11,7 +10,6 @@ part 'badge_styles.dart';
 
 /// A badge, or a component that looks like a badge.
 class FBadge extends StatelessWidget {
-
   /// The design. Defaults to [FBadgeVariant.primary].
   final FBadgeDesign design;
 
@@ -62,7 +60,6 @@ class FBadge extends StatelessWidget {
       ..add(DiagnosticsProperty('design', design, defaultValue: FBadgeVariant.primary))
       ..add(DiagnosticsProperty('builder', builder, defaultValue: null));
   }
-
 }
 
 /// The badge design. Either a pre-defined [FBadgeVariant], or a custom [FBadgeStyle].
@@ -165,5 +162,4 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
   @override
   int get hashCode =>
       background.hashCode ^ border.hashCode ^ borderRadius.hashCode ^ borderWidth.hashCode ^ content.hashCode;
-
 }
