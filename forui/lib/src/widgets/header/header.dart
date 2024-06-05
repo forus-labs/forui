@@ -10,10 +10,10 @@ part 'header_action.dart';
 ///
 /// Typically used on pages at the root of the navigation stack.
 final class FHeader extends StatelessWidget {
-  /// The title.
+  /// The title displayed on the left side of the [FHeader].
   final String title;
 
-  /// The actions on the right of the header.
+  /// The actions displayed on the right side of the [FHeader].
   final List<Widget> actions;
 
   /// The style.
@@ -54,7 +54,7 @@ final class FHeader extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('title', title))
-      ..add(DiagnosticsProperty('actions', actions))
+      ..add(IterableProperty('actions', actions))
       ..add(DiagnosticsProperty('style', style));
   }
 }
@@ -68,23 +68,22 @@ final class FHeaderStyle with Diagnosticable {
   final FHeaderActionStyle action;
 
   /// Creates a [FHeaderStyle].
-  FHeaderStyle({required this.title, required this.actionStyle});
+  FHeaderStyle({required this.title, required this.action});
 
   /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FFont].
   FHeaderStyle.inherit({required FColorScheme colorScheme, required FFont font})
       : title = TextStyle(
-        fontSize: font.xl3,
-        fontWeight: FontWeight.w700,
-        color: colorScheme.foreground,
-      ),
-      actionStyle = FHeaderActionStyle.inherit(colorScheme: colorScheme);
+          fontSize: font.xl3,
+          fontWeight: FontWeight.w700,
+          color: colorScheme.foreground,
+        ),
+        action = FHeaderActionStyle.inherit(colorScheme: colorScheme);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('actionStyle', actionStyle));
-      properties.add(DiagnosticsProperty<FHeaderActionStyle>('action', action));
+      ..add(DiagnosticsProperty('actionStyle', action));
   }
 }

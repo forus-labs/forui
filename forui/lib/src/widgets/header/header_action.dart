@@ -18,7 +18,7 @@ class FHeaderAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.headerStyle.actionStyle;
+    final style = this.style ?? context.theme.headerStyle.action;
 
     return Padding(
       padding: style.padding,
