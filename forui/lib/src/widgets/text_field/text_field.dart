@@ -10,11 +10,16 @@ part 'text_field_style.dart';
 
 /// A text field.
 final class FTextField extends StatefulWidget {
+  static Widget _defaultContextMenuBuilder(
+    BuildContext context,
+    EditableTextState editableTextState,
+  ) => AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
+
   /// The style.
   final FTextFieldStyle? style;
 
   /// The text to display when the text field is empty.
-  final String? hintText;
+  final String? hint;
 
   /// The configuration for the magnifier of this text field.
   ///
@@ -411,10 +416,18 @@ final class FTextField extends StatefulWidget {
   /// If this configuration is left null, then spell check is disabled by default.
   final SpellCheckConfiguration? spellCheckConfiguration;
 
+  /// The label.
+  final String? label;
+
+  /// The suffix icon.
+  ///
+  /// See [InputDecoration.suffixIcon] for more information.
+  final Widget? suffixIcon;
+
   /// Creates an [FTextField].
   const FTextField({
     this.style,
-    this.hintText,
+    this.hint,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -454,10 +467,12 @@ final class FTextField extends StatefulWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
+    this.label,
+    this.suffixIcon,
   });
 
   @override
@@ -467,8 +482,9 @@ final class FTextField extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(StringProperty('label', label))
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('hintText', hintText))
+      ..add(StringProperty('hintText', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))

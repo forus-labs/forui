@@ -14,22 +14,10 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        theme: ThemeData(
-          brightness: Brightness.light,
-          primarySwatch: Colors.green,
-          textSelectionTheme: TextSelectionThemeData(
-            cursorColor: CupertinoColors.activeBlue,
-            selectionColor: CupertinoColors.activeBlue.withOpacity(0.4),
-            selectionHandleColor: CupertinoColors.activeBlue,
-          ),
-          cupertinoOverrideTheme: const CupertinoThemeData(
-            primaryColor: CupertinoColors.activeBlue,
-          ),
-        ),
         home: FTheme(
-          data: FThemes.zinc.light,
+          data: FThemes.zinc.dark,
           child: Scaffold(
-            backgroundColor: FThemes.zinc.light.colorScheme.background,
+            backgroundColor: FThemes.zinc.dark.colorScheme.background,
             body: const Padding(
               padding: EdgeInsets.all(16),
               child: ExampleWidget(),
@@ -47,54 +35,18 @@ class ExampleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final font = context.theme.font;
-    return Center(
-      child: TextField(
-        // enabled: false,
-        // cursorColor: CupertinoColors.activeBlue,
-        style: TextStyle(
-          fontFamily: font.family,
-          fontSize: font.sm,
-          color: context.theme.colorScheme.primary,
+    return ListView(
+      children: [
+        TextField(
+          keyboardType: TextInputType.emailAddress,
         ),
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-          hintText: 'Email',
-          hintStyle: TextStyle(
-            inherit: false,
-            fontFamily: font.family,
-            fontSize: font.sm,
-            color: context.theme.colorScheme.mutedForeground, // TODO: change color dynamically when disabled
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: context.theme.colorScheme.border,
-              width: context.theme.style.borderWidth,
-            ),
-            borderRadius: context.theme.style.borderRadius,
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: context.theme.colorScheme.border.withOpacity(0.5),
-              width: context.theme.style.borderWidth,
-            ),
-            borderRadius: context.theme.style.borderRadius,
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: context.theme.colorScheme.border,
-              width: context.theme.style.borderWidth,
-            ),
-            borderRadius: context.theme.style.borderRadius,
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: context.theme.colorScheme.mutedForeground,
-              width: context.theme.style.borderWidth,
-            ),
-            borderRadius: context.theme.style.borderRadius,
-          ),
+        const SizedBox(height: 5),
+        FTextField(
+          label: 'Email',
+          hint: 'Email',
+          keyboardType: TextInputType.emailAddress,
         ),
-      ),
+      ]
     );
   }
 }

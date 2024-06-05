@@ -2,6 +2,9 @@ part of 'text_field.dart';
 
 /// A [FTextFieldStyle]'s style.
 final class FTextFieldStyle with Diagnosticable {
+  /// The label's [TextStyle].
+  final TextStyle label;
+
   /// The appearance of the keyboard. Defaults to [FColorScheme.brightness].
   ///
   /// This setting is only honored on iOS devices.
@@ -42,6 +45,7 @@ final class FTextFieldStyle with Diagnosticable {
 
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
+    required this.label,
     required this.keyboardAppearance,
     required this.enabled,
     required this.disabled,
@@ -59,6 +63,11 @@ final class FTextFieldStyle with Diagnosticable {
     required FFont font,
     required FStyle style,
   }):
+    label = TextStyle(
+      color: colorScheme.primary,
+      fontSize: font.sm,
+      fontWeight: FontWeight.bold,
+    ),
     keyboardAppearance = colorScheme.brightness,
     cursor = CupertinoColors.activeBlue,
     contentPadding = const EdgeInsets.symmetric(horizontal: 16),
@@ -103,6 +112,7 @@ final class FTextFieldStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('label', label))
       ..add(EnumProperty('keyboardAppearance', keyboardAppearance))
       ..add(ColorProperty('cursor', cursor, defaultValue: CupertinoColors.activeBlue))
       ..add(DiagnosticsProperty('contentPadding', contentPadding))
@@ -119,6 +129,7 @@ final class FTextFieldStyle with Diagnosticable {
       identical(this, other) ||
       other is FTextFieldStyle &&
           runtimeType == other.runtimeType &&
+          label == other.label &&
           keyboardAppearance == other.keyboardAppearance &&
           cursor == other.cursor &&
           contentPadding == other.contentPadding &&
@@ -131,6 +142,7 @@ final class FTextFieldStyle with Diagnosticable {
 
   @override
   int get hashCode =>
+      label.hashCode ^
       keyboardAppearance.hashCode ^
       cursor.hashCode ^
       contentPadding.hashCode ^
