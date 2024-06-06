@@ -33,7 +33,7 @@ Future<void> configureGoldenTests(double threshold) async {
       // append a generically named `test.dart` so that the `baseDir` is
       // properly extracted.
       Uri.parse('./test/golden/test.dart'),
-      _kGoldenTestsThreshold,
+      threshold,
     );
   }
 }
