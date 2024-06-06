@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/tabs/tabs.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
@@ -52,6 +53,9 @@ final class FThemeData with Diagnosticable {
   /// The switch style.
   final FSwitchStyle switchStyle;
 
+  /// The tabs style.
+  final FTabsStyle tabsStyle;
+
   /// Creates a [FThemeData].
   ///
   /// **Note:**
@@ -69,6 +73,7 @@ final class FThemeData with Diagnosticable {
     required this.boxStyle,
     required this.separatorStyles,
     required this.switchStyle,
+    required this.tabsStyle,
     this.typography = const FTypography(),
     this.style = const FStyle(),
   });
@@ -90,7 +95,8 @@ final class FThemeData with Diagnosticable {
         textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
         separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
-        switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
+        switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme),
+        tabsStyle = FTabsStyle.inherit(colorScheme: colorScheme, font: font, style: style);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   ///
@@ -121,6 +127,7 @@ final class FThemeData with Diagnosticable {
     FBoxStyle? boxStyle,
     FSeparatorStyles? separatorStyles,
     FSwitchStyle? switchStyle,
+    FTabsStyle? tabsStyle,
   }) =>
       FThemeData(
         colorScheme: colorScheme ?? this.colorScheme,
@@ -135,6 +142,7 @@ final class FThemeData with Diagnosticable {
         boxStyle: boxStyle ?? this.boxStyle,
         separatorStyles: separatorStyles ?? this.separatorStyles,
         switchStyle: switchStyle ?? this.switchStyle,
+        tabsStyle: tabsStyle ?? this.tabsStyle,
       );
 
   @override
@@ -153,6 +161,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty<FTabsStyle>('tabsStyle', tabsStyle));
   }
 
   @override
@@ -171,7 +180,8 @@ final class FThemeData with Diagnosticable {
           textFieldStyle == other.textFieldStyle &&
           boxStyle == other.boxStyle &&
           separatorStyles == other.separatorStyles &&
-          switchStyle == other.switchStyle;
+          switchStyle == other.switchStyle &&
+          tabsStyle == other.tabsStyle;
 
   @override
   int get hashCode =>
@@ -186,5 +196,6 @@ final class FThemeData with Diagnosticable {
       textFieldStyle.hashCode ^
       boxStyle.hashCode ^
       separatorStyles.hashCode ^
-      switchStyle.hashCode;
+      switchStyle.hashCode ^
+      tabsStyle.hashCode;
 }
