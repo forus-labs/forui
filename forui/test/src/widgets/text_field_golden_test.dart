@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
-const _text =
+const _longText =
 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure '
 'dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non '
@@ -18,8 +18,8 @@ void main() {
   group('FTextField', () {
     for (final (theme, theme_, _) in TestScaffold.themes) {
       for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
-        for (final (text, text_) in [('text', _text), ('no-text', null)]) {
-          testWidgets('default - $theme - $focused', (tester) async {
+        for (final (text, text_) in [('text', 'short text'), ('no-text', null)]) {
+          testWidgets('default - $theme - $focused - $text', (tester) async {
             final controller = text_ == null ? null : TextEditingController(text: text_);
             await tester.pumpWidget(
               MaterialApp(
@@ -46,7 +46,7 @@ void main() {
             );
           });
 
-          testWidgets('email - $theme - $focused', (tester) async {
+          testWidgets('email - $theme - $focused - $text', (tester) async {
             final controller = text_ == null ? null : TextEditingController(text: text_);
             await tester.pumpWidget(
               MaterialApp(
@@ -73,7 +73,7 @@ void main() {
             );
           });
 
-          testWidgets('password - $theme - $focused', (tester) async {
+          testWidgets('password - $theme - $focused - $text', (tester) async {
             final controller = text_ == null ? null : TextEditingController(text: text_);
             await tester.pumpWidget(
               MaterialApp(
@@ -99,8 +99,10 @@ void main() {
               matchesGoldenFile('text_field/password-$theme-$focused-$text.png'),
             );
           });
+        }
 
-          testWidgets('multiline - $theme - $focused', (tester) async {
+        for (final (text, text_) in [('text', _longText), ('no-text', null)]) {
+          testWidgets('multiline - $theme - $focused - $text', (tester) async {
             final controller = text_ == null ? null : TextEditingController(text: text_);
             await tester.pumpWidget(
               MaterialApp(
