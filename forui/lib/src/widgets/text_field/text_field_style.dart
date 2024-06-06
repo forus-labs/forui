@@ -15,7 +15,8 @@ final class FTextFieldStyle with Diagnosticable {
   /// The cursor indicates the current location of text insertion point in the field.
   final Color cursor;
 
-  /// The padding surrounding this text field's content. Defaults to `const EdgeInsets.symmetric(horizontal: 16)`.
+  /// The padding surrounding this text field's content. Defaults to
+  /// `const EdgeInsets.symmetric(horizontal: 16, vertical: 7)`.
   final EdgeInsets contentPadding;
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
@@ -53,7 +54,7 @@ final class FTextFieldStyle with Diagnosticable {
     required this.focused,
     required this.focusedError,
     this.cursor = CupertinoColors.activeBlue,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 16),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 7.5),
     this.scrollPadding = const EdgeInsets.all(20.0),
   });
 
@@ -70,7 +71,7 @@ final class FTextFieldStyle with Diagnosticable {
     ),
     keyboardAppearance = colorScheme.brightness,
     cursor = CupertinoColors.activeBlue,
-    contentPadding = const EdgeInsets.symmetric(horizontal: 16),
+    contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 7.5),
     scrollPadding = const EdgeInsets.all(20.0),
     enabled = FTextFieldStateStyle.inherit(
       contentColor: colorScheme.primary,

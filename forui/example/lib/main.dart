@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -15,9 +14,9 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         home: FTheme(
-          data: FThemes.zinc.dark,
+          data: FThemes.zinc.light,
           child: Scaffold(
-            backgroundColor: FThemes.zinc.dark.colorScheme.background,
+            backgroundColor: FThemes.zinc.light.colorScheme.background,
             body: const Padding(
               padding: EdgeInsets.all(16),
               child: ExampleWidget(),
@@ -33,20 +32,5 @@ class ExampleWidget extends StatelessWidget {
   const ExampleWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final font = context.theme.font;
-    return ListView(
-      children: [
-        TextField(
-          keyboardType: TextInputType.emailAddress,
-        ),
-        const SizedBox(height: 5),
-        FTextField(
-          label: 'Email',
-          hint: 'Email',
-          keyboardType: TextInputType.emailAddress,
-        ),
-      ]
-    );
-  }
+  Widget build(BuildContext context) => ListView();
 }
