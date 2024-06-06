@@ -67,7 +67,7 @@ final class FTextFieldStyle with Diagnosticable {
     label = TextStyle(
       color: colorScheme.primary,
       fontSize: font.sm,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w600,
     ),
     keyboardAppearance = colorScheme.brightness,
     cursor = CupertinoColors.activeBlue,

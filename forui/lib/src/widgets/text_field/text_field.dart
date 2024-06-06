@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:forui/forui.dart';
 
 part 'text_field_state.dart';
@@ -475,13 +478,64 @@ final class FTextField extends StatefulWidget {
     this.suffixIcon,
   });
 
+  /// Creates a [FTextField] configured for emails.
+  const FTextField.email({
+    this.style,
+    this.hint = 'Email',
+    this.magnifierConfiguration,
+    this.controller,
+    this.focusNode,
+    this.keyboardType = TextInputType.emailAddress,
+    this.textInputAction,
+    this.textCapitalization = TextCapitalization.none,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical,
+    this.textDirection,
+    this.autofocus = false,
+    this.statesController,
+    this.obscureText = false,
+    this.autocorrect = false,
+    this.smartDashesType,
+    this.smartQuotesType,
+    this.enableSuggestions = true,
+    this.minLines,
+    this.maxLines = 1,
+    this.expands = false,
+    this.readOnly = false,
+    this.showCursor,
+    this.maxLength,
+    this.maxLengthEnforcement,
+    this.onChange,
+    this.onEditingComplete,
+    this.onSubmit,
+    this.onAppPrivateCommand,
+    this.inputFormatters,
+    this.enabled = true,
+    this.ignorePointers,
+    this.enableInteractSelection = true,
+    this.selectionControls,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.scrollPhysics,
+    this.scrollController,
+    this.autofillHints = const [AutofillHints.email],
+    this.restorationId,
+    this.scribbleEnabled = true,
+    this.enableIMEPersonalizedLearning = true,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.canRequestFocus = true,
+    this.undoController,
+    this.spellCheckConfiguration,
+    this.label,
+    this.suffixIcon,
+  });
+
   /// Creates a [FTextField] configured for passwords.
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
   /// when handling the creation of new passwords.
   const FTextField.password({
     this.style,
-    this.hint,
+    this.hint = 'Password',
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
