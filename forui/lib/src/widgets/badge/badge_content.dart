@@ -10,7 +10,7 @@ part of 'badge.dart';
   Widget build(BuildContext context) => Center(
     child: Padding(
       padding: style.content.padding,
-      child: Text(label, style: style.content.label.withFont(context.theme.font)),
+      child: Text(label, style: style.content.label.scale(context.theme.typography)),
     ),
   );
 

@@ -8,18 +8,18 @@ import 'package:forui/forui.dart';
 // TODO: replace with nullable number operations in Sugar 4.
 double? _scale(double? value, double factor) => value == null ? null : value * factor;
 
-/// A Forui font used to configure the Forui widgets' [TextStyle]s.
+/// A Forui typography used to configure the Forui widgets' [TextStyle]s.
 ///
-/// It is usually inherited from an ancestor [FTheme]. Besides the typical font information, a [FFont] also contains
+/// It is usually inherited from an ancestor [FTheme]. Besides the typical font information, a [FTypography] also contains
 /// scalar values used to scale a [TextStyle]'s corresponding properties. This ensures that various [TextStyle]s with the
 /// same font are scaled consistently throughout a project.
-final class FFont with Diagnosticable {
+final class FTypography with Diagnosticable {
 
-  /// The font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
+  /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
   /// ## Contract:
   /// Throws an [AssertionError] if blank.
-  final String family;
+  final String defaultFontFamily;
 
   /// A value used to scale [TextStyle.fontSize]. Defaults to 1.
   ///
@@ -149,9 +149,9 @@ final class FFont with Diagnosticable {
   /// * `xl8` is NaN
   final double xl8;
 
-  /// Creates a [FFont].
-  FFont({
-    this.family = 'packages/forui/Inter',
+  /// Creates a [FTypography].
+  FTypography({
+    this.defaultFontFamily = 'packages/forui/Inter',
     this.sizeScalar = 1,
     this.letterSpacingScalar = 1,
     this.wordSpacingScalar = 1,
@@ -169,7 +169,7 @@ final class FFont with Diagnosticable {
     this.xl7 = 72,
     this.xl8 = 96,
   }):
-    assert(family.isNotBlank, 'Font family should not be blank.'),
+    assert(defaultFontFamily.isNotBlank, 'Font family should not be blank.'),
     assert(0 < sizeScalar, 'The sizeScalar is $sizeScalar, but it should be in the range "0 < sizeScalar".'),
     assert(0 < letterSpacingScalar, 'The letterSpacingScalar is $letterSpacingScalar, but it should be in the range "0 < letterSpacingScalar".'),
     assert(0 < wordSpacingScalar, 'The wordSpacingScalar is $wordSpacingScalar, but it should be in the range "0 < wordSpacingScalar".'),
@@ -187,9 +187,9 @@ final class FFont with Diagnosticable {
     assert(0 < xl7, 'The xl7 is $xl7, but it should be in the range "0 < xl7".'),
     assert(0 < xl8, 'The xl8 is $xl8, but it should be in the range "0 < xl8".');
 
-  /// Creates a copy of this [FFont] with the given properties replaced.
-  FFont copyWith({
-    String? family,
+  /// Creates a copy of this [FTypography] with the given properties replaced.
+  FTypography copyWith({
+    String? defaultFontFamily,
     double? sizeScalar,
     double? letterSpacingScalar,
     double? wordSpacingScalar,
@@ -207,8 +207,8 @@ final class FFont with Diagnosticable {
     double? xl7,
     double? xl8,
   }) =>
-      FFont(
-        family: family ?? this.family,
+      FTypography(
+        defaultFontFamily: defaultFontFamily ?? this.defaultFontFamily,
         sizeScalar: sizeScalar ?? this.sizeScalar,
         letterSpacingScalar: letterSpacingScalar ?? this.letterSpacingScalar,
         wordSpacingScalar: wordSpacingScalar ?? this.wordSpacingScalar,
@@ -227,7 +227,7 @@ final class FFont with Diagnosticable {
         xl8: xl8 ?? this.xl8,
       );
 
-  /// Returns a [TextStyle] with the given properties, based on and scaled using this [FFont].
+  /// Returns a [TextStyle] with the given properties, based on and scaled using this [FTypography].
   ///
   /// ```dart
   /// final font = FFont(
@@ -298,7 +298,7 @@ final class FFont with Diagnosticable {
     decorationStyle: decorationStyle,
     decorationThickness: decorationThickness,
     debugLabel: debugLabel,
-    fontFamily: family,
+    fontFamily: defaultFontFamily,
     overflow: overflow,
   );
 
@@ -306,7 +306,7 @@ final class FFont with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(StringProperty('family', family, defaultValue: 'packages/forui/Inter'))
+      ..add(StringProperty('family', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
       ..add(DoubleProperty('sizeScalar', sizeScalar, defaultValue: 1))
       ..add(DoubleProperty('letterSpacingScalar', letterSpacingScalar, defaultValue: 1))
       ..add(DoubleProperty('wordSpacingScalar', wordSpacingScalar, defaultValue: 1))
@@ -328,9 +328,9 @@ final class FFont with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FFont &&
+      other is FTypography &&
           runtimeType == other.runtimeType &&
-          family == other.family &&
+          defaultFontFamily == other.defaultFontFamily &&
           sizeScalar == other.sizeScalar &&
           letterSpacingScalar == other.letterSpacingScalar &&
           wordSpacingScalar == other.wordSpacingScalar &&
@@ -350,7 +350,7 @@ final class FFont with Diagnosticable {
 
   @override
   int get hashCode =>
-      family.hashCode ^
+      defaultFontFamily.hashCode ^
       sizeScalar.hashCode ^
       letterSpacingScalar.hashCode ^
       wordSpacingScalar.hashCode ^
@@ -369,14 +369,14 @@ final class FFont with Diagnosticable {
       xl8.hashCode;
 }
 
-/// Provides functions for working with [FFont]s.
-extension FontTextStyle on TextStyle {
+/// Provides functions for working with [FTypography]s.
+extension TypographyTextStyle on TextStyle {
 
-  /// Returns a [TextStyle] with the given [font], scaled using it.
+  /// Returns a [TextStyle] scaled using the given [typography].
   ///
   /// ```dart
-  /// final font = FFont(
-  ///   family: 'packages/forui/my-font',
+  /// final typography = FTypography(
+  ///   defaultFontFamily: 'packages/forui/my-font',
   ///   sizeScalar: 2,
   ///   letterSpacingScalar: 3,
   ///   wordSpacingScalar: 4,
@@ -389,20 +389,19 @@ extension FontTextStyle on TextStyle {
   ///   letterSpacing: 1,
   ///   wordSpacing: 1,
   ///   height: 1,
-  /// ).withFont(font);
+  /// ).scale(typography);
   ///
-  /// print(style.fontFamily); // 'packages/forui/my-font'
+  /// print(style.fontFamily); // 'default-font'
   /// print(style.fontSize); // 2
   /// print(style.letterSpacing); // 3
   /// print(style.wordSpacing); // 4
   /// print(style.height); // 5
   /// ```
-  TextStyle withFont(FFont font) => copyWith(
-    fontFamily: font.family,
-    fontSize: _scale(fontSize, font.sizeScalar),
-    letterSpacing: _scale(letterSpacing, font.letterSpacingScalar),
-    wordSpacing: _scale(wordSpacing, font.wordSpacingScalar),
-    height: _scale(height, font.heightScalar),
+  TextStyle scale(FTypography typography) => copyWith(
+    fontSize: _scale(fontSize, typography.sizeScalar),
+    letterSpacing: _scale(letterSpacing, typography.letterSpacingScalar),
+    wordSpacing: _scale(wordSpacing, typography.wordSpacingScalar),
+    height: _scale(height, typography.heightScalar),
   );
 
 }

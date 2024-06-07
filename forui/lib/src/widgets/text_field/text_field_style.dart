@@ -61,7 +61,7 @@ final class FTextFieldStyle with Diagnosticable {
   /// Creates a [FTextFieldStyle] that inherits its properties.
   FTextFieldStyle.inherit({
     required FColorScheme colorScheme,
-    required FFont font,
+    required FTypography font,
     required FStyle style,
   }):
     label = TextStyle(
@@ -186,16 +186,16 @@ final class FTextFieldStateStyle with Diagnosticable {
     required Color contentColor,
     required Color hintColor,
     required this.borderColor,
-    required FFont font,
+    required FTypography font,
     required FStyle style,
   }):
     content = TextStyle(
-      fontFamily: font.family,
+      fontFamily: font.defaultFontFamily,
       fontSize: font.sm,
       color: contentColor,
     ),
     hint = TextStyle(
-      fontFamily: font.family,
+      fontFamily: font.defaultFontFamily,
       fontSize: font.sm,
       color: hintColor,
     ),

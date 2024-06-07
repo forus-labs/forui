@@ -18,7 +18,7 @@ class FBadgeStyles with Diagnosticable {
   FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
 
   /// Creates a [FBadgeStyles] that inherits its properties from [colorScheme] and [style].
-  FBadgeStyles.inherit({required FColorScheme colorScheme, required FFont font, required FStyle style}):
+  FBadgeStyles.inherit({required FColorScheme colorScheme, required FTypography font, required FStyle style}):
     primary = FBadgeStyle.inherit(
       style: style,
       background: colorScheme.primary,

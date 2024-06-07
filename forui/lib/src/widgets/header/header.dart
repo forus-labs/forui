@@ -30,7 +30,7 @@ final class FHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.headerStyle;
-    final font = context.theme.font;
+    final typography = context.theme.typography;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,7 +41,7 @@ final class FHeader extends StatelessWidget {
             overflow: TextOverflow.fade,
             maxLines: 1,
             softWrap: false,
-            style: style.title.withFont(font),
+            style: style.title.scale(typography),
           ),
         ),
         Row(children: actions),
@@ -70,8 +70,8 @@ final class FHeaderStyle with Diagnosticable {
   /// Creates a [FHeaderStyle].
   FHeaderStyle({required this.title, required this.action});
 
-  /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FFont].
-  FHeaderStyle.inherit({required FColorScheme colorScheme, required FFont font})
+  /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
+  FHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography font})
       : title = TextStyle(
           fontSize: font.xl3,
           fontWeight: FontWeight.w700,

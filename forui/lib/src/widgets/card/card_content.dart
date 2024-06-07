@@ -10,15 +10,15 @@ part of 'card.dart';
 
   @override
   Widget build(BuildContext context) {
-    final font = context.theme.font;
+    final typography = context.theme.typography;
     final style = this.style ?? context.theme.cardStyle.content;
     return Padding(
       padding: style.padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (title != null) Text(title!, style: style.title.withFont(font)),
-          if (subtitle != null) Text(subtitle!, style: style.subtitle.withFont(font)),
+          if (title != null) Text(title!, style: style.title.scale(typography)),
+          if (subtitle != null) Text(subtitle!, style: style.subtitle.scale(typography)),
           if (child != null)
             Padding(
               padding: (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),
@@ -55,7 +55,7 @@ final class FCardContentStyle with Diagnosticable {
   const FCardContentStyle({required this.padding, required this.title, required this.subtitle});
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [font].
-  FCardContentStyle.inherit({required FColorScheme colorScheme, required FFont font}):
+  FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography font}):
     padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
     title = TextStyle(
       fontSize: font.base,

@@ -23,7 +23,7 @@ class FButtonStyles with Diagnosticable{
   });
 
   /// Creates a [FButtonStyle] that inherits its properties from [colorScheme].
-  FButtonStyles.inherit({required FColorScheme colorScheme, required FFont font, required FStyle style})
+  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography font, required FStyle style})
       : primary = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
