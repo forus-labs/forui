@@ -10,6 +10,11 @@ import 'threshold_file_comparator.dart';
 const _kGoldenTestsThreshold = 0.5 / 100;
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
+  await configureGoldenTests(_kGoldenTestsThreshold);
+  await testMain();
+}
+
+Future<void> configureGoldenTests(double threshold) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final fontLoader = FontLoader('packages/forui/Inter');
@@ -28,9 +33,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
       // append a generically named `test.dart` so that the `baseDir` is
       // properly extracted.
       Uri.parse('./test/golden/test.dart'),
-      _kGoldenTestsThreshold,
+      threshold,
     );
   }
-
-  await testMain();
 }

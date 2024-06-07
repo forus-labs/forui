@@ -138,4 +138,17 @@ class Foo extends StatelessWidget {
 * Avoid [double negatives](https://en.wikipedia.org/wiki/Double_negative) when naming things, i.e. a boolean field should
   be named `enabled` instead of `disabled`.
 
+* Avoid past tense when naming callbacks, prefer present tense instead.
+
+  ✅ Prefer this:
+  ```dart
+  final VoidCallback onPress;
+  ```
+
+  ❌ Instead of:
+  ```dart
+  final VoidCallback onPressed;
+  ```
+
+
 * Prefix all publicly exported widgets and styles with `F`, i.e. `FScaffold`.

@@ -9,7 +9,7 @@ part 'card_content.dart';
 
 /// A card widget.
 final class FCard extends StatelessWidget {
-  /// The style.
+  /// The style. Defaults to [FThemeData.cardStyle].
   final FCardStyle? style;
 
   /// The child.
