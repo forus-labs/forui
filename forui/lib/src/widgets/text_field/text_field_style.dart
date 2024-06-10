@@ -2,9 +2,6 @@ part of 'text_field.dart';
 
 /// A [FTextFieldStyle]'s style.
 final class FTextFieldStyle with Diagnosticable {
-  /// The label's [TextStyle].
-  final TextStyle label;
-
   /// The appearance of the keyboard. Defaults to [FColorScheme.brightness].
   ///
   /// This setting is only honored on iOS devices.
@@ -16,7 +13,7 @@ final class FTextFieldStyle with Diagnosticable {
   final Color cursor;
 
   /// The padding surrounding this text field's content. Defaults to
-  /// `const EdgeInsets.symmetric(horizontal: 16, vertical: 7)`.
+  /// `const EdgeInsets.symmetric(horizontal: 15, vertical: 6)`.
   final EdgeInsets contentPadding;
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
@@ -38,23 +35,14 @@ final class FTextFieldStyle with Diagnosticable {
   /// The style when this text field has an error.
   final FTextFieldStateStyle error;
 
-  /// The style when this text field is focused.
-  final FTextFieldStateStyle focused;
-
-  /// The style when this text field is focused and has an error.
-  final FTextFieldStateStyle focusedError;
-
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
-    required this.label,
     required this.keyboardAppearance,
     required this.enabled,
     required this.disabled,
     required this.error,
-    required this.focused,
-    required this.focusedError,
     this.cursor = CupertinoColors.activeBlue,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 7.5),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     this.scrollPadding = const EdgeInsets.all(20.0),
   });
 
@@ -64,47 +52,37 @@ final class FTextFieldStyle with Diagnosticable {
     required FTypography font,
     required FStyle style,
   }):
-    label = TextStyle(
-      color: colorScheme.primary,
-      fontSize: font.sm,
-      fontWeight: FontWeight.w600,
-    ),
     keyboardAppearance = colorScheme.brightness,
     cursor = CupertinoColors.activeBlue,
-    contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 7.5),
+    contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
     scrollPadding = const EdgeInsets.all(20.0),
     enabled = FTextFieldStateStyle.inherit(
+      labelColor: colorScheme.primary,
       contentColor: colorScheme.primary,
       hintColor: colorScheme.mutedForeground,
-      borderColor: colorScheme.border,
+      footerColor: colorScheme.mutedForeground,
+      focusedBorderColor: colorScheme.primary,
+      unfocusedBorderColor: colorScheme.border,
       font: font,
       style: style,
     ),
     disabled = FTextFieldStateStyle.inherit(
+      labelColor: colorScheme.primary,
       contentColor: colorScheme.primary,
       hintColor: colorScheme.border.withOpacity(0.5),
-      borderColor: colorScheme.border.withOpacity(0.5),
+      footerColor: colorScheme.border.withOpacity(0.5),
+      focusedBorderColor: colorScheme.border.withOpacity(0.5),
+      unfocusedBorderColor: colorScheme.border.withOpacity(0.5),
       font: font,
       style: style,
     ),
-    error = FTextFieldStateStyle.inherit( // TODO: add error colors
+    error = FTextFieldStateStyle.inherit(
+      labelColor: colorScheme.primary,
       contentColor: colorScheme.primary,
       hintColor: colorScheme.mutedForeground,
-      borderColor: colorScheme.border,
-      font: font,
-      style: style,
-    ),
-    focused = FTextFieldStateStyle.inherit(
-      contentColor: colorScheme.primary,
-      hintColor: colorScheme.mutedForeground,
-      borderColor: colorScheme.primary,
-      font: font,
-      style: style,
-    ),
-    focusedError = FTextFieldStateStyle.inherit( // TODO: add error colors
-      contentColor: colorScheme.primary,
-      hintColor: colorScheme.mutedForeground,
-      borderColor: colorScheme.primary,
+      footerColor: colorScheme.error,
+      focusedBorderColor: colorScheme.error,
+      unfocusedBorderColor: colorScheme.error,
       font: font,
       style: style,
     );
@@ -113,16 +91,13 @@ final class FTextFieldStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('label', label))
       ..add(EnumProperty('keyboardAppearance', keyboardAppearance))
       ..add(ColorProperty('cursor', cursor, defaultValue: CupertinoColors.activeBlue))
       ..add(DiagnosticsProperty('contentPadding', contentPadding))
       ..add(DiagnosticsProperty('scrollPadding', scrollPadding))
       ..add(DiagnosticsProperty('enabledBorder', enabled))
       ..add(DiagnosticsProperty('disabledBorder', disabled))
-      ..add(DiagnosticsProperty('errorBorder', error))
-      ..add(DiagnosticsProperty('focusedBorder', focused))
-      ..add(DiagnosticsProperty('focusedErrorBorder', focusedError));
+      ..add(DiagnosticsProperty('errorBorder', error));
   }
 
   @override
@@ -130,65 +105,71 @@ final class FTextFieldStyle with Diagnosticable {
       identical(this, other) ||
       other is FTextFieldStyle &&
           runtimeType == other.runtimeType &&
-          label == other.label &&
           keyboardAppearance == other.keyboardAppearance &&
           cursor == other.cursor &&
           contentPadding == other.contentPadding &&
           scrollPadding == other.scrollPadding &&
           enabled == other.enabled &&
           disabled == other.disabled &&
-          error == other.error &&
-          focused == other.focused &&
-          focusedError == other.focusedError;
+          error == other.error;
 
   @override
   int get hashCode =>
-      label.hashCode ^
       keyboardAppearance.hashCode ^
       cursor.hashCode ^
       contentPadding.hashCode ^
       scrollPadding.hashCode ^
       enabled.hashCode ^
       disabled.hashCode ^
-      error.hashCode ^
-      focused.hashCode ^
-      focusedError.hashCode;
+      error.hashCode;
 }
 
 /// A [FTextFieldStateStyle]'s style.
 final class FTextFieldStateStyle with Diagnosticable {
+  /// The label's [TextStyle].
+  final TextStyle label;
+
   /// The content's [TextStyle].
   final TextStyle content;
 
   /// The hint's [TextStyle].
   final TextStyle hint;
 
-  /// The border's color.
-  final Color borderColor;
+  /// The help/error's [TextStyle].
+  final TextStyle footer;
 
-  /// The border's width. Defaults to [FStyle.borderWidth].
-  final double borderWidth;
+  /// The border's color when focused.
+  final FTextFieldBorderStyle focused;
 
-  /// The border's width. Defaults to [FStyle.borderRadius].
-  final BorderRadius borderRadius;
+  /// The border's style when unfocused.
+  final FTextFieldBorderStyle unfocused;
 
   /// Creates a [FTextFieldStateStyle].
   FTextFieldStateStyle({
+    required this.label,
     required this.content,
     required this.hint,
-    required this.borderColor,
-    required this.borderWidth,
-    required this.borderRadius,
+    required this.footer,
+    required this.focused,
+    required this.unfocused,
   });
 
   /// Creates a [FTextFieldStateStyle] that inherits its properties.
   FTextFieldStateStyle.inherit({
+    required Color labelColor,
     required Color contentColor,
     required Color hintColor,
-    required this.borderColor,
+    required Color footerColor,
+    required Color focusedBorderColor,
+    required Color unfocusedBorderColor,
     required FTypography font,
     required FStyle style,
   }):
+    label = TextStyle(
+      color: labelColor,
+      fontSize: font.sm,
+      fontWeight: FontWeight.w600,
+    ),
     content = TextStyle(
       fontFamily: font.defaultFontFamily,
       fontSize: font.sm,
@@ -199,18 +180,24 @@ final class FTextFieldStateStyle with Diagnosticable {
       fontSize: font.sm,
       color: hintColor,
     ),
-    borderWidth = style.borderWidth,
-    borderRadius = style.borderRadius;
+    footer = TextStyle(
+      fontFamily: font.defaultFontFamily,
+      fontSize: font.sm,
+      color: footerColor,
+    ),
+    focused = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
+    unfocused = FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('label', label))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('hint', hint))
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius));
+      ..add(DiagnosticsProperty('footer', footer))
+      ..add(DiagnosticsProperty('focused', focused))
+      ..add(DiagnosticsProperty('unfocused', unfocused));
   }
 
   @override
@@ -218,17 +205,76 @@ final class FTextFieldStateStyle with Diagnosticable {
       identical(this, other) ||
       other is FTextFieldStateStyle &&
           runtimeType == other.runtimeType &&
+          label == other.label &&
           content == other.content &&
           hint == other.hint &&
-          borderColor == other.borderColor &&
-          borderWidth == other.borderWidth &&
-          borderRadius == other.borderRadius;
+          focused == other.focused &&
+          unfocused == other.unfocused;
 
   @override
   int get hashCode =>
+      label.hashCode ^
       content.hashCode ^
       hint.hashCode ^
-      borderColor.hashCode ^
-      borderWidth.hashCode ^
-      borderRadius.hashCode;
+      focused.hashCode ^
+      unfocused.hashCode;
+}
+
+/// A [FTextFieldBorderStyle]'s style.
+final class FTextFieldBorderStyle with Diagnosticable {
+  /// The border's color.
+  final Color color;
+
+  /// The border's width. Defaults to [FStyle.borderWidth].
+  final double width;
+
+  /// The border's width. Defaults to [FStyle.borderRadius].
+  final BorderRadius radius;
+
+  /// Creates a [FTextFieldBorderStyle].
+  FTextFieldBorderStyle({
+    required this.color,
+    required this.width,
+    required this.radius,
+  });
+
+  /// Creates a [FTextFieldBorderStyle] that inherits its properties.
+  FTextFieldBorderStyle.inherit({
+    required this.color,
+    required FStyle style,
+  }):
+    width = style.borderWidth,
+    radius = style.borderRadius;
+
+  /// Creates a copy of this border style but with the given fields replaced with the new values.
+  FTextFieldBorderStyle copyWith({
+    Color? color,
+    double? width,
+    BorderRadius? radius,
+  }) => FTextFieldBorderStyle(
+    color: color ?? this.color,
+    width: width ?? this.width,
+    radius: radius ?? this.radius,
+  );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ColorProperty('color', color))
+      ..add(DoubleProperty('width', width))
+      ..add(DiagnosticsProperty('radius', radius));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FTextFieldBorderStyle &&
+          runtimeType == other.runtimeType &&
+          color == other.color &&
+          width == other.width &&
+          radius == other.radius;
+
+  @override
+  int get hashCode => color.hashCode ^ width.hashCode ^ radius.hashCode;
 }
