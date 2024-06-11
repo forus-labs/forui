@@ -41,6 +41,12 @@ final class FColorScheme with Diagnosticable {
   /// The destructive foreground color.
   final Color destructiveForeground;
 
+  /// The error color.
+  final Color error;
+
+  /// The error foreground color.
+  final Color errorForeground;
+
   /// The border color.
   final Color border;
 
@@ -57,6 +63,8 @@ final class FColorScheme with Diagnosticable {
     required this.mutedForeground,
     required this.destructive,
     required this.destructiveForeground,
+    required this.error,
+    required this.errorForeground,
     required this.border,
   });
 
@@ -73,6 +81,8 @@ final class FColorScheme with Diagnosticable {
     Color? mutedForeground,
     Color? destructive,
     Color? destructiveForeground,
+    Color? error,
+    Color? errorForeground,
     Color? border,
   }) =>
       FColorScheme(
@@ -87,6 +97,8 @@ final class FColorScheme with Diagnosticable {
         mutedForeground: mutedForeground ?? this.mutedForeground,
         destructive: destructive ?? this.destructive,
         destructiveForeground: destructiveForeground ?? this.destructiveForeground,
+        error: error ?? this.error,
+        errorForeground: errorForeground ?? this.errorForeground,
         border: border ?? this.border,
       );
 
@@ -105,6 +117,8 @@ final class FColorScheme with Diagnosticable {
       ..add(ColorProperty('mutedForeground', mutedForeground))
       ..add(ColorProperty('destructive', destructive))
       ..add(ColorProperty('destructiveForeground', destructiveForeground))
+      ..add(ColorProperty('error', error))
+      ..add(ColorProperty('errorForeground', errorForeground))
       ..add(ColorProperty('border', border));
   }
 
@@ -121,6 +135,8 @@ final class FColorScheme with Diagnosticable {
     mutedForeground == other.mutedForeground &&
     destructive == other.destructive &&
     destructiveForeground == other.destructiveForeground &&
+    error == other.error &&
+    errorForeground == other.errorForeground &&
     border == other.border;
 
   @override
@@ -136,6 +152,8 @@ final class FColorScheme with Diagnosticable {
     mutedForeground.hashCode ^
     destructive.hashCode ^
     destructiveForeground.hashCode ^
+    error.hashCode ^
+    errorForeground.hashCode ^
     border.hashCode;
 
 }

@@ -21,7 +21,7 @@ final class FBox extends StatelessWidget {
       color: color,
       child: Text(
         this.text,
-        style: text.withFont(context.theme.font),
+        style: text.scale(context.theme.typography),
       ),
     );
   }

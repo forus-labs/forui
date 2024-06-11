@@ -8,11 +8,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
 
-part 'text_field_state.dart';
 part 'text_field_style.dart';
 
 /// A text field.
-final class FTextField extends StatefulWidget {
+final class FTextField extends StatelessWidget {
   static Widget _defaultContextMenuBuilder(
     BuildContext context,
     EditableTextState editableTextState,
@@ -21,8 +20,38 @@ final class FTextField extends StatefulWidget {
   /// The style.
   final FTextFieldStyle? style;
 
+  /// The label text.
+  final String? labelText;
+
   /// The text to display when the text field is empty.
-  final String? hint;
+  ///
+  /// See [InputDecoration.hintText] for more information.
+  final String? hintText;
+
+  /// The maximum number of lines the [hintText] can occupy. Defaults to the value of [TextField.maxLines] attribute.
+  /// 
+  /// See [InputDecoration.hintMaxLines] for more information.
+  final int? hintMaxLines;
+
+  /// The help text.
+  ///
+  /// See [InputDecoration.helperText] for more information.
+  final String? helpText;
+
+  /// The maximum number of lines the [helpText] can occupy. Defaults to the value of [TextField.maxLines] attribute.
+  /// 
+  /// See [InputDecoration.helperMaxLines] for more information.
+  final int? helpMaxLines;
+
+  /// The error text.
+  ///
+  /// See [InputDecoration.errorText] for more information.
+  final String? errorText;
+
+  /// The maximum number of lines the [errorText] can occupy. Defaults to the value of [TextField.maxLines] attribute.
+  /// 
+  /// See [InputDecoration.errorMaxLines] for more information.
+  final int? errorMaxLines;
 
   /// The configuration for the magnifier of this text field.
   ///
@@ -33,7 +62,7 @@ final class FTextField extends StatefulWidget {
   /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
 
-  /// Defines the keyboard focus for this widget.
+  /// Defines the keyboard focus for this 
   ///
   /// See [TextField.focusNode] for more information.
   final FocusNode? focusNode;
@@ -380,7 +409,7 @@ final class FTextField extends StatefulWidget {
   /// See [TextField.restorationId] for more information.
   final String? restorationId;
 
-  /// Whether iOS 14 Scribble features are enabled for this widget. Defaults to true.
+  /// Whether iOS 14 Scribble features are enabled for this  Defaults to true.
   ///
   /// Only available on iPads.
   final bool scribbleEnabled;
@@ -419,9 +448,6 @@ final class FTextField extends StatefulWidget {
   /// If this configuration is left null, then spell check is disabled by default.
   final SpellCheckConfiguration? spellCheckConfiguration;
 
-  /// The label.
-  final String? label;
-
   /// The suffix icon.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
@@ -430,7 +456,13 @@ final class FTextField extends StatefulWidget {
   /// Creates a [FTextField].
   const FTextField({
     this.style,
-    this.hint,
+    this.labelText,
+    this.hintText,
+    this.hintMaxLines,
+    this.helpText,
+    this.helpMaxLines,
+    this.errorText,
+    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -474,14 +506,19 @@ final class FTextField extends StatefulWidget {
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.label,
     this.suffixIcon,
   });
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
-    this.hint = 'Email',
+    this.labelText,
+    this.hintText = 'Email',
+    this.hintMaxLines,
+    this.helpText,
+    this.helpMaxLines,
+    this.errorText,
+    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -525,7 +562,6 @@ final class FTextField extends StatefulWidget {
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.label,
     this.suffixIcon,
   });
 
@@ -535,7 +571,13 @@ final class FTextField extends StatefulWidget {
   /// when handling the creation of new passwords.
   const FTextField.password({
     this.style,
-    this.hint = 'Password',
+    this.labelText,
+    this.hintText = 'Password',
+    this.hintMaxLines,
+    this.helpText,
+    this.helpMaxLines,
+    this.errorText,
+    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -579,14 +621,19 @@ final class FTextField extends StatefulWidget {
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.label,
     this.suffixIcon,
   });
 
   /// Creates a [FTextField] configured for multiline inputs.
   const FTextField.multiline({
     this.style,
-    this.hint,
+    this.labelText,
+    this.hintText,
+    this.hintMaxLines,
+    this.helpText,
+    this.helpMaxLines,
+    this.errorText,
+    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -630,20 +677,184 @@ final class FTextField extends StatefulWidget {
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.label,
     this.suffixIcon,
   });
 
   @override
-  State<FTextField> createState() => _State();
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    final typography = theme.typography;
+    final style = this.style ?? theme.textFieldStyle;
+    final stateStyle = switch (this) {
+      _ when !enabled => style.disabled,
+      _ when errorText != null => style.error,
+      _ => style.enabled,
+    };
+    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+
+    final textField = MergeSemantics(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (labelText != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 4, bottom: 7),
+              child: Text(
+                labelText!,
+                style: stateStyle.label,
+              ),
+            ),
+          Material(
+            color: Colors.transparent,
+            child: Theme(
+              // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
+              // for overriding selectionHandleColor.
+              data: Theme.of(context).copyWith(
+                textSelectionTheme: TextSelectionThemeData(
+                  cursorColor: style.cursor,
+                  selectionColor: style.cursor.withOpacity(0.4),
+                  selectionHandleColor: style.cursor,
+                ),
+                cupertinoOverrideTheme: CupertinoThemeData(
+                  primaryColor: style.cursor,
+                ),
+              ),
+              child: _textField(context, typography, style, stateStyle),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    return materialLocalizations == null ?
+      Localizations(
+        locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+        delegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        child: textField,
+      ) :
+      textField;
+  }
+
+  Widget _textField(
+    BuildContext context,
+    FTypography typography,
+    FTextFieldStyle style,
+    FTextFieldStateStyle current,
+  ) => TextField(
+    controller: controller,
+    focusNode: focusNode,
+    undoController: undoController,
+    cursorErrorColor: style.cursor,
+    decoration: InputDecoration(
+      suffixIcon: suffixIcon,
+      // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
+      prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
+      contentPadding: style.contentPadding.copyWith(left: 0),
+      hintText: hintText,
+      hintStyle: current.hint.scale(typography),
+      hintMaxLines: hintMaxLines,
+      helperText: helpText,
+      helperStyle: current.footer.scale(typography),
+      helperMaxLines: helpMaxLines,
+      errorText: errorText,
+      errorStyle: current.footer.scale(typography),
+      errorMaxLines: errorMaxLines,
+      disabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.disabled.unfocused.color,
+          width: style.disabled.unfocused.width,
+        ),
+        borderRadius: style.disabled.unfocused.radius,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.enabled.unfocused.color,
+          width: style.enabled.unfocused.width,
+        ),
+        borderRadius: style.enabled.unfocused.radius,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.enabled.focused.color,
+          width: style.enabled.focused.width,
+        ),
+        borderRadius: current.focused.radius,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.error.unfocused.color,
+          width: style.error.unfocused.width,
+        ),
+        borderRadius: style.error.unfocused.radius,
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.error.focused.color,
+          width: style.error.focused.width,
+        ),
+        borderRadius: style.error.focused.radius,
+      ),
+    ),
+    keyboardType: keyboardType,
+    textInputAction: textInputAction,
+    textCapitalization: textCapitalization,
+    style: current.content.scale(typography),
+    textAlign: textAlign,
+    textAlignVertical: textAlignVertical,
+    textDirection: textDirection,
+    readOnly: readOnly,
+    showCursor: showCursor,
+    autofocus: autofocus,
+    statesController: statesController,
+    obscureText: obscureText,
+    autocorrect: autocorrect,
+    smartDashesType: smartDashesType,
+    smartQuotesType: smartQuotesType,
+    enableSuggestions: enableSuggestions,
+    maxLines: maxLines,
+    minLines: minLines,
+    expands: expands,
+    maxLength: maxLength,
+    maxLengthEnforcement: maxLengthEnforcement,
+    onChanged: onChange,
+    onEditingComplete: onEditingComplete,
+    onSubmitted: onSubmit,
+    onAppPrivateCommand: onAppPrivateCommand,
+    inputFormatters: inputFormatters,
+    enabled: enabled,
+    ignorePointers: ignorePointers,
+    keyboardAppearance: style.keyboardAppearance,
+    scrollPadding: style.scrollPadding,
+    dragStartBehavior: dragStartBehavior,
+    selectionControls: selectionControls,
+    scrollController: scrollController,
+    scrollPhysics: scrollPhysics,
+    autofillHints: autofillHints,
+    restorationId: restorationId,
+    scribbleEnabled: scribbleEnabled,
+    enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+    contextMenuBuilder: contextMenuBuilder,
+    canRequestFocus: canRequestFocus,
+    spellCheckConfiguration: spellCheckConfiguration,
+    magnifierConfiguration: magnifierConfiguration,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(StringProperty('label', label))
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('hintText', hint))
+      ..add(StringProperty('labelText', labelText))
+      ..add(StringProperty('hintText', hintText))
+      ..add(IntProperty('hintMaxLines', hintMaxLines))
+      ..add(StringProperty('helpText', helpText))
+      ..add(IntProperty('helpMaxLines', helpMaxLines))
+      ..add(StringProperty('errorText', errorText))
+      ..add(IntProperty('errorMaxLines', errorMaxLines))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -686,6 +897,7 @@ final class FTextField extends StatefulWidget {
       ..add(DiagnosticsProperty('contextMenuBuilder', contextMenuBuilder))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('undoController', undoController))
-      ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration));
+      ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
+      ..add(DiagnosticsProperty('suffixIcon', suffixIcon));
   }
 }

@@ -17,20 +17,66 @@ class Application extends StatelessWidget {
           data: FThemes.zinc.light,
           child: Scaffold(
             backgroundColor: FThemes.zinc.light.colorScheme.background,
-            body: const Padding(
-              padding: EdgeInsets.all(16),
-              child: ExampleWidget(),
+            body: const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ExampleWidget(),
+              ],
             ),
           ),
         ),
       );
 }
 
-/// The example widget.
-class ExampleWidget extends StatelessWidget {
-  /// Creates an example widget.
+class ExampleWidget extends StatefulWidget {
   const ExampleWidget({super.key});
 
   @override
-  Widget build(BuildContext context) => ListView();
+  State<ExampleWidget> createState() => _ExampleWidgetState();
+}
+
+class _ExampleWidgetState extends State<ExampleWidget> {
+  late WidgetStatesController controller;
+  late TextEditingController textController;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = WidgetStatesController();
+    textController = TextEditingController()..addListener(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(
+        children: [
+          // FCard(title: 'Email'),
+          FTextField(
+            // enabled: false,
+            labelText: 'Email',
+            hintText: 'hannah@foruslabs.com',
+            helpText: 'This is your public display name.',
+            // errorText: 'Error',
+            // statesController: controller,
+            controller: textController,
+          ),
+          // const TextField(
+          //   // enabled: false,
+          //   decoration: InputDecoration(
+          //     labelText: 'Material TextField',
+          //     hintText: 'Email',
+          //     errorText: 'Error text',
+          //   ),
+          // ),
+        ],
+      ),
+  );
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+    textController.dispose();
+  }
 }

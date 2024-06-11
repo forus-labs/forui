@@ -30,8 +30,9 @@ void main() {
                     child: FTextField(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'My Label',
-                      hint: 'hint',
+                      labelText: 'My Label',
+                      hintText: 'hint',
+                      helpText: 'Some help text.',
                     ),
                   ),
                 ),
@@ -46,6 +47,34 @@ void main() {
             );
           });
 
+          testWidgets('error - $theme - $focused - $text', (tester) async {
+            final controller = text_ == null ? null : TextEditingController(text: text_);
+            await tester.pumpWidget(
+              MaterialApp(
+                home: TestScaffold(
+                  data: theme_,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: FTextField(
+                      controller: controller,
+                      autofocus: focused_,
+                      labelText: 'My Label',
+                      hintText: 'hint',
+                      errorText: 'An error has occurred.',
+                    ),
+                  ),
+                ),
+              ),
+            );
+
+            await tester.pumpAndSettle();
+
+            await expectLater(
+              find.byType(TestScaffold),
+              matchesGoldenFile('text_field/error-$theme-$focused-$text.png'),
+            );
+          });
+
           testWidgets('email - $theme - $focused - $text', (tester) async {
             final controller = text_ == null ? null : TextEditingController(text: text_);
             await tester.pumpWidget(
@@ -57,8 +86,8 @@ void main() {
                     child: FTextField.email(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'Email',
-                      hint: 'janedoe@foruslabs.com',
+                      labelText: 'Email',
+                      hintText: 'janedoe@foruslabs.com',
                     ),
                   ),
                 ),
@@ -84,8 +113,8 @@ void main() {
                     child: FTextField.password(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'Password',
-                      hint: 'password',
+                      labelText: 'Password',
+                      hintText: 'password',
                     ),
                   ),
                 ),
@@ -113,8 +142,8 @@ void main() {
                     child: FTextField.multiline(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'My Label',
-                      hint: 'hint',
+                      labelText: 'My Label',
+                      hintText: 'hint',
                     ),
                   ),
                 ),

@@ -7,8 +7,8 @@ class FThemeData with Diagnosticable {
   /// The color scheme.
   final FColorScheme colorScheme;
 
-  /// The font data.
-  final FFont font;
+  /// The typography data.
+  final FTypography typography;
 
   /// The overarching style.
   final FStyle style;
@@ -40,7 +40,7 @@ class FThemeData with Diagnosticable {
   /// Creates a [FThemeData].
   FThemeData({
     required this.colorScheme,
-    required this.font,
+    required this.typography,
     required this.style,
     required this.badgeStyles,
     required this.buttonStyles,
@@ -55,17 +55,17 @@ class FThemeData with Diagnosticable {
   /// Creates a [FThemeData] that inherits the given properties.
   FThemeData.inherit({
     required this.colorScheme,
-    required this.font,
+    required this.typography,
     required this.style,
-  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: font, style: style),
+  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: typography, style: style),
         buttonStyles = FButtonStyles.inherit(
           colorScheme: colorScheme,
-          font: font,
+          font: typography,
           style: style,
         ),
-        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: font, style: style),
-        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, font: font),
-        textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, font: font, style: style),
+        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: typography, style: style),
+        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, font: typography),
+        textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, font: typography, style: style),
         boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
         separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
         switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
@@ -73,7 +73,7 @@ class FThemeData with Diagnosticable {
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   FThemeData copyWith({
     FColorScheme? colorScheme,
-    FFont? font,
+    FTypography? typography,
     FStyle? style,
     FBadgeStyles? badgeStyles,
     FButtonStyles? buttonStyles,
@@ -86,7 +86,7 @@ class FThemeData with Diagnosticable {
   }) =>
       FThemeData(
         colorScheme: colorScheme ?? this.colorScheme,
-        font: font ?? this.font,
+        typography: typography ?? this.typography,
         style: style ?? this.style,
         badgeStyles: badgeStyles ?? this.badgeStyles,
         buttonStyles: buttonStyles ?? this.buttonStyles,
@@ -103,7 +103,7 @@ class FThemeData with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('colorScheme', colorScheme, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('font', font, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
@@ -121,7 +121,7 @@ class FThemeData with Diagnosticable {
       other is FThemeData &&
           runtimeType == other.runtimeType &&
           colorScheme == other.colorScheme &&
-          font == other.font &&
+          typography == other.typography &&
           style == other.style &&
           badgeStyles == other.badgeStyles &&
           buttonStyles == other.buttonStyles &&
@@ -135,7 +135,7 @@ class FThemeData with Diagnosticable {
   @override
   int get hashCode =>
       colorScheme.hashCode ^
-      font.hashCode ^
+      typography.hashCode ^
       style.hashCode ^
       badgeStyles.hashCode ^
       buttonStyles.hashCode ^

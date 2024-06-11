@@ -19,6 +19,8 @@ void main() {
       mutedForeground: Colors.blue,
       destructive: Colors.blueAccent,
       destructiveForeground: Colors.blueGrey,
+      error: Colors.red,
+      errorForeground: Colors.redAccent,
       border: Colors.lightBlue,
     );
     
@@ -38,6 +40,8 @@ void main() {
           mutedForeground: Colors.indigo,
           destructive: Colors.teal,
           destructiveForeground: Colors.pink,
+          error: Colors.blueAccent,
+          errorForeground: Colors.blueGrey,
           border: Colors.lime,
         );
 
@@ -52,6 +56,8 @@ void main() {
         expect(copy.mutedForeground, equals(Colors.indigo));
         expect(copy.destructive, equals(Colors.teal));
         expect(copy.destructiveForeground, equals(Colors.pink));
+        expect(copy.error, equals(Colors.blueAccent));
+        expect(copy.errorForeground, equals(Colors.blueGrey));
         expect(copy.border, equals(Colors.lime));
       });
     });
@@ -72,6 +78,8 @@ void main() {
         ColorProperty('mutedForeground', Colors.blue),
         ColorProperty('destructive', Colors.blueAccent),
         ColorProperty('destructiveForeground', Colors.blueGrey),
+        ColorProperty('error', Colors.red),
+        ColorProperty('errorForeground', Colors.redAccent),
         ColorProperty('border', Colors.lightBlue),
       ].map((p) => p.toString()));
     });
