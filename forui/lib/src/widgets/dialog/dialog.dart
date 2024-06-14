@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+import 'package:sugar/collection.dart';
 
 part 'dialog_content.dart';
 
@@ -30,6 +32,14 @@ class FDialog extends StatelessWidget {
   /// Defaults to [Curves.decelerate].
   final Curve insetAnimationCurve;
 
+  /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the dialog
+  /// is opened and closed.
+  ///
+  /// See also:
+  ///  * [SemanticsConfiguration.namesRoute], for a description of how this
+  ///    value is used.
+  final String? semanticLabel;
+
   /// The builder.
   final Widget Function(BuildContext, FDialogStyle) builder;
 
@@ -39,24 +49,27 @@ class FDialog extends StatelessWidget {
     this.style,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
+    String? semanticLabel,
     String? title,
     String? subtitle,
     FDialogAlignment alignment = FDialogAlignment.vertical,
     super.key,
-  }): builder = switch (alignment) {
-    FDialogAlignment.horizontal => (context, style) => FHorizontalDialogContent(
-      style: style.horizontal,
-      title: title,
-      subtitle: subtitle,
-      actions: actions,
-    ),
-    FDialogAlignment.vertical => (context, style) => FVerticalDialogContent(
-      style: style.vertical,
-      title: title,
-      subtitle: subtitle,
-      actions: actions,
-    ),
-  };
+  }):
+    semanticLabel = semanticLabel ?? title ?? subtitle,
+    builder = switch (alignment) {
+      FDialogAlignment.horizontal => (context, style) => FHorizontalDialogContent(
+        style: style.horizontal,
+        title: title,
+        subtitle: subtitle,
+        actions: actions,
+      ),
+      FDialogAlignment.vertical => (context, style) => FVerticalDialogContent(
+        style: style.vertical,
+        title: title,
+        subtitle: subtitle,
+        actions: actions,
+      ),
+    };
 
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({
@@ -64,6 +77,7 @@ class FDialog extends StatelessWidget {
     this.style,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
+    this.semanticLabel,
     super.key,
   });
 
@@ -89,11 +103,20 @@ class FDialog extends StatelessWidget {
               fontSize: typography.base,
               color: context.theme.colorScheme.foreground,
             ),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(minWidth: 280.0),
-              child: DecoratedBox(
-                decoration: style.decoration,
-                child: builder(context, style),
+            child: Semantics(
+              scopesRoute: true,
+              explicitChildNodes: true,
+              namesRoute: true,
+              label: semanticLabel,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(
+                  minWidth: 280.0,
+                  maxWidth: 560.0,
+                ),
+                child: DecoratedBox(
+                  decoration: style.decoration,
+                  child: builder(context, style),
+                ),
               ),
             ),
           ),
@@ -109,6 +132,7 @@ class FDialog extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration))
       ..add(DiagnosticsProperty('insetAnimationCurve', insetAnimationCurve))
+      ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('builder', builder));
   }
 }
@@ -136,13 +160,24 @@ final class FDialogStyle with Diagnosticable {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties from [colorScheme].
-  FDialogStyle.inherit({required FColorScheme colorScheme, required FTypography typography}):
+  FDialogStyle.inherit({required FStyle style, required FColorScheme colorScheme, required FTypography typography}):
     decoration = BoxDecoration(
+      borderRadius: style.borderRadius,
       color: colorScheme.background,
     ),
-    insetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
-    horizontal = FDialogContentStyle.inherit(colorScheme: colorScheme, typography: typography),
-    vertical = FDialogContentStyle.inherit(colorScheme: colorScheme, typography: typography);
+    insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+    horizontal = FDialogContentStyle.inherit(
+      colorScheme: colorScheme,
+      typography: typography,
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+      actionPadding: 10,
+    ),
+    vertical = FDialogContentStyle.inherit(
+      colorScheme: colorScheme,
+      typography: typography,
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+      actionPadding: 8,
+    );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

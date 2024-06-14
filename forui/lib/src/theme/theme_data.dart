@@ -68,7 +68,7 @@ class FThemeData with Diagnosticable {
           style: style,
         ),
         cardStyle = FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        dialogStyle = FDialogStyle.inherit(colorScheme: colorScheme, typography: typography),
+        dialogStyle = FDialogStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
         headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
         textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),

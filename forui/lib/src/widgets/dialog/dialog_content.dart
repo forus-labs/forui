@@ -23,32 +23,40 @@ part of 'dialog.dart';
   @override
   Widget build(BuildContext context) {
     final typography = context.theme.typography;
-    return Padding(
-      padding: style.padding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: alignment,
-        children: [
-          if (title != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Text(
-                title!,
-                style: style.title.scale(typography),
-                textAlign: titleTextAlign,
+    return IntrinsicWidth(
+      child: Padding(
+        padding: style.padding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: alignment,
+          children: [
+            if (title != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Semantics(
+                  container: true,
+                  child: Text(
+                    title!,
+                    style: style.title.scale(typography),
+                    textAlign: titleTextAlign,
+                  ),
+                ),
               ),
-            ),
-          if (subtitle != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 18),
-              child: Text(
-                subtitle!,
-                style: style.subtitle.scale(typography),
-                textAlign: subtitleTextAlign,
+            if (subtitle != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Semantics(
+                  container: true,
+                  child: Text(
+                    subtitle!,
+                    style: style.subtitle.scale(typography),
+                    textAlign: subtitleTextAlign,
+                  ),
+                ),
               ),
-            ),
-          _actions(context),
-        ],
+            _actions(context),
+          ],
+        ),
       ),
     );
   }
@@ -83,17 +91,16 @@ part of 'dialog.dart';
 
   @override
   Widget _actions(BuildContext context) => Row(
-    mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.end,
-    children: [
-      for (final action in actions)
-        Expanded(
-          child: Padding(
-            padding: style.actionPadding,
+    children: separate(
+      [
+        for (final action in actions)
+          IntrinsicWidth(
             child: action,
           ),
-        ),
-    ],
+      ],
+      by: [ SizedBox(width: style.actionPadding) ],
+    ),
   );
 }
 
@@ -113,13 +120,10 @@ part of 'dialog.dart';
   @override
   Widget _actions(BuildContext context) => Column(
     mainAxisSize: MainAxisSize.min,
-    children: [
-      for (final action in actions)
-        Padding(
-          padding: style.actionPadding,
-          child: action,
-        ),
-    ],
+    children: separate(
+      actions,
+      by: [ SizedBox(height: style.actionPadding) ],
+    ),
   );
 }
 
@@ -128,29 +132,32 @@ final class FDialogContentStyle with Diagnosticable {
   /// The padding surrounding the content.
   final EdgeInsets padding;
 
-  /// The padding surrounding each action.
-  final EdgeInsets actionPadding;
-
   /// The title style.
   final TextStyle title;
 
   /// The subtitle style.
   final TextStyle subtitle;
+
+  /// The padding between actions.
+  final double actionPadding;
   
   /// Creates a [FDialogContentStyle].
   FDialogContentStyle({
+    required this.padding,
     required this.title,
     required this.subtitle,
-    this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 16), 
-    this.actionPadding = const EdgeInsets.symmetric(vertical: 7.0),
+    required this.actionPadding,
   });
   
   /// Creates a [FDialogContentStyle] that inherits its properties from [colorScheme] and [typography].
-  FDialogContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography}):
-    padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
-    actionPadding = const EdgeInsets.symmetric(vertical: 7.0),
+  FDialogContentStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+    required this.padding,
+    required this.actionPadding,
+  }):
     title = TextStyle(
-      fontSize: typography.base,
+      fontSize: typography.lg,
       fontWeight: FontWeight.w600,
       color: colorScheme.foreground,
     ),
@@ -164,8 +171,8 @@ final class FDialogContentStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('actionPadding', actionPadding))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('subtitle', subtitle));
+      ..add(DiagnosticsProperty('subtitle', subtitle))
+      ..add(DoubleProperty('actionPadding', actionPadding));
   }
 }
