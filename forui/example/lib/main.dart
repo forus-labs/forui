@@ -18,10 +18,10 @@ class Application extends StatelessWidget {
           data: FThemes.zinc.light,
           child: Scaffold(
             backgroundColor: FThemes.zinc.light.colorScheme.background,
-            body: Column(
+            body: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const ExampleWidget(),
+                ExampleWidget(),
               ],
             ),
           ),
