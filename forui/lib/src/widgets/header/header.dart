@@ -71,9 +71,9 @@ final class FHeaderStyle with Diagnosticable {
   FHeaderStyle({required this.title, required this.action});
 
   /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
-  FHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography font})
+  FHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : title = TextStyle(
-          fontSize: font.xl3,
+          fontSize: typography.xl3,
           fontWeight: FontWeight.w700,
           color: colorScheme.foreground,
         ),

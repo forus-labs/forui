@@ -23,7 +23,7 @@ class FButtonStyles with Diagnosticable{
   });
 
   /// Creates a [FButtonStyle] that inherits its properties from [colorScheme].
-  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography font, required FStyle style})
+  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -34,7 +34,7 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.primary.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
-            font: font,
+            typography: typography,
             foreground: colorScheme.primaryForeground,
             disabledForeground: colorScheme.primaryForeground.withOpacity(0.5),
           ),
@@ -49,7 +49,7 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.secondary.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
-            font: font,
+            typography: typography,
             foreground: colorScheme.secondaryForeground,
             disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
@@ -64,7 +64,7 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.destructive.withOpacity(0.5),
           ),
           content: FButtonContentStyle.inherit(
-            font: font,
+            typography: typography,
             foreground: colorScheme.destructiveForeground,
             disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
@@ -83,7 +83,7 @@ class FButtonStyles with Diagnosticable{
             color: colorScheme.background,
           ),
           content: FButtonContentStyle.inherit(
-            font: font,
+            typography: typography,
             foreground: colorScheme.secondaryForeground,
             disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
           ),

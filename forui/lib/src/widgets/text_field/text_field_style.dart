@@ -49,7 +49,7 @@ final class FTextFieldStyle with Diagnosticable {
   /// Creates a [FTextFieldStyle] that inherits its properties.
   FTextFieldStyle.inherit({
     required FColorScheme colorScheme,
-    required FTypography font,
+    required FTypography typography,
     required FStyle style,
   }):
     keyboardAppearance = colorScheme.brightness,
@@ -63,7 +63,7 @@ final class FTextFieldStyle with Diagnosticable {
       footerColor: colorScheme.mutedForeground,
       focusedBorderColor: colorScheme.primary,
       unfocusedBorderColor: colorScheme.border,
-      font: font,
+      typography: typography,
       style: style,
     ),
     disabled = FTextFieldStateStyle.inherit(
@@ -73,7 +73,7 @@ final class FTextFieldStyle with Diagnosticable {
       footerColor: colorScheme.border.withOpacity(0.5),
       focusedBorderColor: colorScheme.border.withOpacity(0.5),
       unfocusedBorderColor: colorScheme.border.withOpacity(0.5),
-      font: font,
+      typography: typography,
       style: style,
     ),
     error = FTextFieldStateStyle.inherit(
@@ -83,7 +83,7 @@ final class FTextFieldStyle with Diagnosticable {
       footerColor: colorScheme.error,
       focusedBorderColor: colorScheme.error,
       unfocusedBorderColor: colorScheme.error,
-      font: font,
+      typography: typography,
       style: style,
     );
 
@@ -162,27 +162,27 @@ final class FTextFieldStateStyle with Diagnosticable {
     required Color footerColor,
     required Color focusedBorderColor,
     required Color unfocusedBorderColor,
-    required FTypography font,
+    required FTypography typography,
     required FStyle style,
   }):
     label = TextStyle(
       color: labelColor,
-      fontSize: font.sm,
+      fontSize: typography.sm,
       fontWeight: FontWeight.w600,
     ),
     content = TextStyle(
-      fontFamily: font.defaultFontFamily,
-      fontSize: font.sm,
+      fontFamily: typography.defaultFontFamily,
+      fontSize: typography.sm,
       color: contentColor,
     ),
     hint = TextStyle(
-      fontFamily: font.defaultFontFamily,
-      fontSize: font.sm,
+      fontFamily: typography.defaultFontFamily,
+      fontSize: typography.sm,
       color: hintColor,
     ),
     footer = TextStyle(
-      fontFamily: font.defaultFontFamily,
-      fontSize: font.sm,
+      fontFamily: typography.defaultFontFamily,
+      fontSize: typography.sm,
       color: footerColor,
     ),
     focused = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
 
-/// The color scheme, fonts, overarching style, and widget specific styles used to configure child Forui widgets.
+/// The color scheme, typography, overarching style, and widget specific styles used to configure child Forui widgets.
 class FThemeData with Diagnosticable {
   /// The color scheme.
   final FColorScheme colorScheme;
@@ -21,6 +21,9 @@ class FThemeData with Diagnosticable {
 
   /// The card style.
   final FCardStyle cardStyle;
+
+  /// The dialog style.
+  final FDialogStyle dialogStyle;
 
   /// The header styles.
   final FHeaderStyle headerStyle;
@@ -45,6 +48,7 @@ class FThemeData with Diagnosticable {
     required this.badgeStyles,
     required this.buttonStyles,
     required this.cardStyle,
+    required this.dialogStyle,
     required this.headerStyle,
     required this.textFieldStyle,
     required this.boxStyle,
@@ -57,15 +61,16 @@ class FThemeData with Diagnosticable {
     required this.colorScheme,
     required this.typography,
     required this.style,
-  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, font: typography, style: style),
+  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
         buttonStyles = FButtonStyles.inherit(
           colorScheme: colorScheme,
-          font: typography,
+          typography: typography,
           style: style,
         ),
-        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, font: typography, style: style),
-        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, font: typography),
-        textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, font: typography, style: style),
+        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        dialogStyle = FDialogStyle.inherit(colorScheme: colorScheme, typography: typography),
+        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
+        textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
         separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
         switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
@@ -78,6 +83,7 @@ class FThemeData with Diagnosticable {
     FBadgeStyles? badgeStyles,
     FButtonStyles? buttonStyles,
     FCardStyle? cardStyle,
+    FDialogStyle? dialogStyle,
     FHeaderStyle? headerStyle,
     FTextFieldStyle? textFieldStyle,
     FBoxStyle? boxStyle,
@@ -91,6 +97,7 @@ class FThemeData with Diagnosticable {
         badgeStyles: badgeStyles ?? this.badgeStyles,
         buttonStyles: buttonStyles ?? this.buttonStyles,
         cardStyle: cardStyle ?? this.cardStyle,
+        dialogStyle: dialogStyle ?? this.dialogStyle,
         headerStyle: headerStyle ?? this.headerStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         boxStyle: boxStyle ?? this.boxStyle,
@@ -108,6 +115,7 @@ class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('boxStyle', boxStyle, level: DiagnosticLevel.debug))
@@ -126,6 +134,7 @@ class FThemeData with Diagnosticable {
           badgeStyles == other.badgeStyles &&
           buttonStyles == other.buttonStyles &&
           cardStyle == other.cardStyle &&
+          dialogStyle == other.dialogStyle &&
           headerStyle == other.headerStyle &&
           textFieldStyle == other.textFieldStyle &&
           boxStyle == other.boxStyle &&
@@ -140,6 +149,7 @@ class FThemeData with Diagnosticable {
       badgeStyles.hashCode ^
       buttonStyles.hashCode ^
       cardStyle.hashCode ^
+      dialogStyle.hashCode ^
       headerStyle.hashCode ^
       textFieldStyle.hashCode ^
       boxStyle.hashCode ^

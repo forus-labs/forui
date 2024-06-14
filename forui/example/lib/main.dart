@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
@@ -58,13 +57,6 @@ class _ExampleWidgetState extends State<ExampleWidget> {
     final typography = context.theme.typography;
     final effectivePadding =
         MediaQuery.viewInsetsOf(context) + const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0);
-
-    final button = Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 7.0),
-        child: FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {}),
-      ),
-    );
 
     final child = Align(
       child: DefaultTextStyle(
@@ -169,9 +161,6 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         context: context,
         builder: (context) {
           final style = context.theme.cardStyle;
-          final contentStyle = style.content;
-          final typography = context.theme.typography;
-
           return _dialog(context);
 
           // return AlertDialog()
