@@ -18,10 +18,10 @@ class Application extends StatelessWidget {
           data: FThemes.zinc.light,
           child: Scaffold(
             backgroundColor: FThemes.zinc.light.colorScheme.background,
-            body: Column(
+            body: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const ExampleWidget(),
+                ExampleWidget(),
               ],
             ),
           ),
@@ -53,20 +53,16 @@ class _ExampleWidgetState extends State<ExampleWidget> {
             text: 'Delete?',
             onPress: () => showAdaptiveDialog(
               context: context,
-              builder: (context) {
-                final style = context.theme.cardStyle;
-                return FDialog(
-                  title: 'Are you absolutely sure?',
-                  subtitle: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                  actions: [
-                    FButton(text: 'Continue', onPress: () {}),
-                    FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {
-                      Navigator.of(context).pop();
-                    }),
-                  ],
-                );
-                // return _dialog(context);
-              },
+              builder: (context) => FDialog(
+                title: 'Are you absolutely sure?',
+                subtitle: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                actions: [
+                  FButton(text: 'Continue', onPress: () {}),
+                  FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {
+                    Navigator.of(context).pop();
+                  }),
+                ],
+              ),
             ),
           ),
         ],
