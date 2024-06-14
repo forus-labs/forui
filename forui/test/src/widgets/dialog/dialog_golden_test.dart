@@ -1,10 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+<<<<<<< HEAD:forui/test/src/widgets/dialog_golden_test.dart
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
+=======
+import '../../test_scaffold.dart';
+>>>>>>> 3323baa (increase tolerance of dialog golden tests):forui/test/src/widgets/dialog/dialog_golden_test.dart
 
 class UnderTest extends StatelessWidget {
   final FDialogAlignment alignment;
