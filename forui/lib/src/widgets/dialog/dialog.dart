@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
 import 'package:sugar/collection.dart';
+
+import 'package:forui/forui.dart';
 
 part 'dialog_content.dart';
 
