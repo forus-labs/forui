@@ -22,10 +22,6 @@ class Application extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const ExampleWidget(),
-                FButton(
-                  text: 'Hi',
-                  onPress: () {},
-                ),
               ],
             ),
           ),
