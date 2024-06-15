@@ -87,16 +87,21 @@ class FButton extends StatelessWidget {
       FButtonVariant.destructive => context.theme.buttonStyles.destructive,
     };
 
-    return FocusableActionDetector(
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      child: FTappable(
-        onTap: onPress,
-        onLongPress: onLongPress,
-        child: DecoratedBox(
-          decoration: onPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
-          child: builder(context, style),
+    return Semantics(
+      container: true,
+      button: true,
+      enabled: onPress != null || onLongPress != null,
+      child: FocusableActionDetector(
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        child: FTappable(
+          onTap: onPress,
+          onLongPress: onLongPress,
+          child: DecoratedBox(
+            decoration: onPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
+            child: builder(context, style),
+          ),
         ),
       ),
     );
