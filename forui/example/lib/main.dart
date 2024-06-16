@@ -70,7 +70,36 @@ class _ExampleWidgetState extends State<ExampleWidget> {
               ),
             ),
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          alignment: Alignment.centerLeft,
+          child: FBadge(label: 'New'),
+        ),
+        Text(
+          'text-xs',
+          style: TextStyle(fontSize: font.xs).withFont(font),
+        ),
+        Text(
+          'text-sm',
+          style: TextStyle(fontSize: font.sm).withFont(font),
+        ),
+        Text(
+          'text-base',
+          style: TextStyle(fontSize: font.base).withFont(font),
+        ),
+        Text(
+          'text-lg',
+          style: TextStyle(fontSize: font.lg).withFont(font),
+        ),
+        const SizedBox(height: 10),
+        FTabs(
+          tabs: [
+            ('Account', FTabContent(child: Column(children: [Container(color: Colors.red, height: 30,)],),)),
+            ('Password', FTabContent(child: Column(children: [Container(color: Colors.blue, height: 30,)],),)),
+          ],
+
+        )
+      ],
     );
 }
