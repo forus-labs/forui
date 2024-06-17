@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A set of miscellaneous properties that is part of a [FThemeData].
 ///
-/// These properties are not used directly by widgets. Instead, they are the defaults for the corresponding properties
-/// of widget styles configured via `inherit(...)` constructors.
+/// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding
+/// properties of widget styles configured via `inherit(...)` constructors.
 final class FStyle with Diagnosticable {
   /// The border radius. Defaults to `BorderRadius.circular(8)`.
   final BorderRadius borderRadius;
@@ -17,7 +18,7 @@ final class FStyle with Diagnosticable {
   ///
   /// **Note:**
   /// Unless you are creating a completely new style, modifying [FThemes]' predefined styles should be preferred.
-  FStyle({
+  const FStyle({
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
   });
@@ -35,7 +36,7 @@ final class FStyle with Diagnosticable {
   /// print(copy.borderRadius); // BorderRadius.circular(1)
   /// print(copy.borderWidth); // 3
   /// ```
-  FStyle copyWith({
+  @useResult FStyle copyWith({
     BorderRadius? borderRadius,
     double? borderWidth,
   }) => FStyle(

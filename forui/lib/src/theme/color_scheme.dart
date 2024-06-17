@@ -2,8 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A set of colors that is part of a [FThemeData]. It is used to configure the color properties of Forui widgets.
+///
+/// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding colors
+/// of widget styles configured via `inherit(...)` constructors.
 ///
 /// The main color groups in this scheme are [primary], [secondary], [muted], [destructive], and [error].
 /// * Primary colors are used for key widgets across the UI.
@@ -120,7 +124,7 @@ final class FColorScheme with Diagnosticable {
   /// print(copy.brightness); // Brightness.dark
   /// print(copy.background); // Colors.blue
   /// ```
-  FColorScheme copyWith({
+  @useResult FColorScheme copyWith({
     Brightness? brightness,
     Color? background,
     Color? foreground,

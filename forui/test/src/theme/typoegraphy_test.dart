@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 void main() {
   group('FTypography', () {
-    final typography = FTypography(
+    const typography = FTypography(
       defaultFontFamily: 'Roboto',
       sizeScalar: 2,
       letterSpacingScalar: 3,
@@ -17,7 +17,7 @@ void main() {
 
     group('constructor', () {
       test('no arguments', () {
-        final typography = FTypography();
+        const typography = FTypography();
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
         expect(typography.sizeScalar, 1);
         expect(typography.letterSpacingScalar, 1);
@@ -57,7 +57,7 @@ void main() {
       });
 
       test('all arguments', () {
-        final typography = FTypography().copyWith(
+        final typography = const FTypography().copyWith(
           defaultFontFamily: 'Roboto',
           sizeScalar: 2,
           letterSpacingScalar: 3,
@@ -109,7 +109,7 @@ void main() {
     });
 
     test('debugFillProperties', () {
-      final font = FTypography(
+      const font = FTypography(
         defaultFontFamily: 'Roboto',
         sizeScalar: 2,
         letterSpacingScalar: 3,
@@ -171,7 +171,7 @@ void main() {
   });
 
   group('FontTextStyle', () {
-    final font = FTypography(
+    const font = FTypography(
       defaultFontFamily: 'Roboto',
       sizeScalar: 2,
       letterSpacingScalar: 3,

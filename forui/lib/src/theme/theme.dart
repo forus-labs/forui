@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 
 /// Applies a theme to descendant widgets.
@@ -32,16 +33,49 @@ import 'package:forui/forui.dart';
 ///
 /// See [FThemeData] which describes of the actual configuration of a theme.
 class FTheme extends StatelessWidget {
-
-  
-
   /// Returns the current [FThemeData], or [FThemes.zinc.light] if there is no ancestor [FTheme].
   ///
   /// It is recommended to use the terser [ThemeBuildContext.theme] getter instead.
   ///
-  /// ## Why is the default :
+  /// ## Troubleshooting:
   ///
-  static FThemeData of(BuildContext context) {
+  /// ### [FTheme.of] always returns [FThemes.zinc.light]
+  ///
+  /// One of the most common causes is calling [FTheme.of] in the same context which [FTheme] was declared. To fix this,
+  /// move the call to [FTheme.of] to a descendant widget.
+  ///
+  /// ✅ Do:
+  /// ```dart
+  /// class Parent extends StatelessWidget {
+  ///   @override
+  ///   Widget build(BuildContext context) => FTheme(
+  ///      data: FThemes.zinc.light,
+  ///      child: Child(),
+  ///    );
+  ///  }
+  ///
+  ///  class Child extends StatelessWidget {
+  ///    @override
+  ///    Widget build(BuildContext context) {
+  ///      final FThemeData theme = FTheme.of(context);
+  ///      return const SomeWidget(theme: theme);
+  ///    }
+  ///  }
+  /// ```
+  ///
+  /// ❌ Do not:
+  /// ```dart
+  /// class Parent extends StatelessWidget {
+  ///   @override
+  ///   Widget build(BuildContext context) => FTheme(
+  ///      data: FThemes.zinc.light,
+  ///      child: SomeWidget(
+  ///        theme: FTheme.of(context), // Whoops!
+  ///      ),
+  ///    );
+  ///  }
+  /// ```
+  @useResult static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
     return theme?.data ?? FThemes.zinc.light;
   }
@@ -105,10 +139,46 @@ class _InheritedTheme extends InheritedWidget {
 /// Provides functions for accessing the current [FThemeData].
 extension ThemeBuildContext on BuildContext {
 
-  /// Retrieves the current [FThemeData] from an ancestor [FTheme]. Defaults to [FThemes.zinc.light] if there is no
-  /// ancestor [FTheme].
+  /// Returns the current [FThemeData], or [FThemes.zinc.light] if there is no ancestor [FTheme].
   ///
-  /// This is a convenience method for [FTheme.of].
+  /// ## Troubleshooting:
+  ///
+  /// ### [theme] always returns [FThemes.zinc.light]
+  ///
+  /// One of the most common causes is calling [theme] in the same context which [FTheme] was declared. To fix this,
+  /// move the call to [theme] to a descendant widget.
+  ///
+  /// ✅ Do:
+  /// ```dart
+  /// class Parent extends StatelessWidget {
+  ///   @override
+  ///   Widget build(BuildContext context) => FTheme(
+  ///      data: FThemes.zinc.light,
+  ///      child: Child(),
+  ///    );
+  ///  }
+  ///
+  ///  class Child extends StatelessWidget {
+  ///    @override
+  ///    Widget build(BuildContext context) {
+  ///      final FThemeData theme = context.theme;
+  ///      return const SomeWidget(theme: theme);
+  ///    }
+  ///  }
+  /// ```
+  ///
+  /// ❌ Do not:
+  /// ```dart
+  /// class Parent extends StatelessWidget {
+  ///   @override
+  ///   Widget build(BuildContext context) => FTheme(
+  ///      data: FThemes.zinc.light,
+  ///      child: SomeWidget(
+  ///        theme: context.theme, // Whoops!
+  ///      ),
+  ///    );
+  ///  }
+  /// ```
   FThemeData get theme => FTheme.of(this);
 
 }

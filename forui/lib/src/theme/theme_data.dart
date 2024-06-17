@@ -1,19 +1,30 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
-/// The color scheme, typography, overarching style, and widget specific styles used to configure child Forui widgets.
-class FThemeData with Diagnosticable {
-  /// The color scheme.
+/// Defines the configuration of the overall visual [FTheme] for a widget subtree.
+///
+/// A [FThemeData] is composed of [colorScheme], [typography], [style], and widget styles.
+/// * [colorScheme] is a set of colors.
+/// * [typography] contains font and typography information.
+/// * [style] is a set of miscellaneous properties.
+/// * widget styles are used to style individual Forui widgets.
+///
+/// [FThemeData] and widget styles provide an `inherit(...)` constructor. The constructor configures the theme data/
+/// widget style using the defaults provided by the [colorScheme], [typography], and [style].
+final class FThemeData with Diagnosticable {
+  /// The color scheme. It is used to configure the color properties of Forui widgets.
   final FColorScheme colorScheme;
 
-  /// The typography data.
+  /// The typography data. It is used to configure the [TextStyle]s of Forui widgets.
   final FTypography typography;
 
-  /// The overarching style.
+  /// The style. It is used to configure the miscellaneous properties, such as border radii, of Forui widgets.
   final FStyle style;
 
-  /// The chip styles.
+  /// The badge styles.
   final FBadgeStyles badgeStyles;
 
   /// The button styles.
@@ -41,10 +52,13 @@ class FThemeData with Diagnosticable {
   final FSwitchStyle switchStyle;
 
   /// Creates a [FThemeData].
+  ///
+  /// **Note:**
+  /// Unless you are creating a completely new theme, modifying [FThemes]' predefined themes is preferred.
+  /// [FThemeData.inherit] can also be used as a simpler way to create a [FThemeData] without manually specifying the
+  /// widget styles.
   FThemeData({
     required this.colorScheme,
-    required this.typography,
-    required this.style,
     required this.badgeStyles,
     required this.buttonStyles,
     required this.cardStyle,
@@ -54,13 +68,15 @@ class FThemeData with Diagnosticable {
     required this.boxStyle,
     required this.separatorStyles,
     required this.switchStyle,
+    this.typography = const FTypography(),
+    this.style = const FStyle(),
   });
 
-  /// Creates a [FThemeData] that inherits the given properties.
+  /// Creates a [FThemeData] that configures the widget styles using the given properties.
   FThemeData.inherit({
     required this.colorScheme,
-    required this.typography,
-    required this.style,
+    this.typography = const FTypography(),
+    this.style = const FStyle(),
   })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
         buttonStyles = FButtonStyles.inherit(
           colorScheme: colorScheme,
@@ -76,7 +92,22 @@ class FThemeData with Diagnosticable {
         switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
-  FThemeData copyWith({
+  ///
+  /// ```dart
+  /// final foo = FTypography();
+  /// final bar = FTypography();
+  ///
+  /// final theme = FThemeData.inherit(
+  ///   colorScheme: FColorScheme(...),
+  ///   typography: foo,
+  /// );
+  ///
+  /// final copy = theme.copyWith(typography: bar);
+  ///
+  /// print(theme.colorScheme == copy.colorScheme); // true
+  /// print(copy.typography); // bar
+  /// ```
+  @useResult FThemeData copyWith({
     FColorScheme? colorScheme,
     FTypography? typography,
     FStyle? style,
