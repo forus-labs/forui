@@ -1,14 +1,22 @@
 <a href="https://forui.dev">
-  <h1 style="width: 400px; margin: 0 auto;">
+  <h1 align="center">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/public/dark_logo.svg">
-      <img alt="Forui" src="docs/public/light_logo.svg">
+      <source width="400" media="(prefers-color-scheme: dark)" srcset="docs/public/dark_logo.svg">
+      <img width="400" alt="Forui" src="docs/public/light_logo.svg">
     </picture>
   </h1>
 </a>
 
 **Forui** is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by [shadcn/ui](https://ui.shadcn.com/).
 
-# Documentation
-- [Documentation](https://forui.dev)
-- [Contributing](https://github.com/forus-labs/forui/blob/master/CONTRIBUTING.md)
+## Documentation
+
+Visit [forui.dev](https://forui.dev) to view the documentation.
+
+## Contributing
+
+Please read the [contributing guide](/CONTRIBUTING.md).
+
+## License
+
+Licensed under the [MIT license](/LICENSE.md).
