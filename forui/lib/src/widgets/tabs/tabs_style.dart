@@ -8,20 +8,17 @@ final class FTabsStyle with Diagnosticable {
   /// The padding.
   final EdgeInsets padding;
 
-  /// The color of the unselected tabs.
-  final Color unselectedColor;
-
   /// The [TextStyle] of the label
   final TextStyle unselectedLabel;
-
-  /// The color of the selected tabs.
-  final Color selectedColor;
 
   /// The [TextStyle] of the label
   final TextStyle selectedLabel;
 
-  /// The decoration.
+  /// The indicator.
   final BoxDecoration indicator;
+
+  /// The indicator size.
+  final TabBarIndicatorSize indicatorSize;
 
   /// The [FTabContent] style.
   final FTabContentStyle content;
@@ -31,10 +28,9 @@ final class FTabsStyle with Diagnosticable {
     required this.decoration,
     required this.padding,
     required this.unselectedLabel,
-    required this.unselectedColor,
     required this.selectedLabel,
-    required this.selectedColor,
     required this.indicator,
+    required this.indicatorSize,
     required this.content,
   });
 
@@ -46,59 +42,56 @@ final class FTabsStyle with Diagnosticable {
       : decoration = BoxDecoration(
           border: Border.all(color: colorScheme.border),
           borderRadius: style.borderRadius,
-          color: colorScheme.background,
+          color: colorScheme.border,
         ),
-        padding = const EdgeInsets.all(5),
-        unselectedColor = colorScheme.muted,
+        padding = const EdgeInsets.all(4),
         unselectedLabel = TextStyle(
           fontSize: font.sm,
           fontWeight: FontWeight.w600,
-          color: colorScheme.foreground.withOpacity(0.5),
+          color: colorScheme.mutedForeground,
         ),
-        selectedColor = colorScheme.background,
         selectedLabel = TextStyle(
           fontSize: font.sm,
           fontWeight: FontWeight.w600,
-          color: colorScheme.foreground,
-        ),
-        indicator = BoxDecoration(
           color: colorScheme.primary,
-          borderRadius: BorderRadius.circular(50),
         ),
-        content =
-            FTabContentStyle.inherit(colorScheme: colorScheme, font: font);
+        indicatorSize = TabBarIndicatorSize.tab,
+        indicator = BoxDecoration(
+          color: colorScheme.background,
+          borderRadius: style.borderRadius,
+        ),
+        content = FTabContentStyle.inherit(
+            colorScheme: colorScheme, font: font, style: style);
 
   /// Creates a copy of this [FCardStyle] with the given properties replaced.
   FTabsStyle copyWith({
-    Color? selectedColor,
-    Color? unselectedColor,
     EdgeInsets? padding,
     BoxDecoration? decoration,
     TextStyle? selectedLabel,
     TextStyle? unselectedLabel,
     BoxDecoration? indicator,
+    TabBarIndicatorSize? indicatorSize,
     FTabContentStyle? content,
   }) =>
       FTabsStyle(
-        selectedColor: selectedColor ?? this.selectedColor,
-        unselectedColor: unselectedColor ?? this.unselectedColor,
         padding: padding ?? this.padding,
         decoration: decoration ?? this.decoration,
         selectedLabel: selectedLabel ?? this.selectedLabel,
         unselectedLabel: unselectedLabel ?? this.unselectedLabel,
+        indicatorSize: indicatorSize ?? this.indicatorSize,
         indicator: indicator ?? this.indicator,
         content: content ?? this.content,
       );
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty<BoxDecoration>('decoration', decoration))
-    ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
-    ..add(ColorProperty('unselectedColor', unselectedColor))
-    ..add(DiagnosticsProperty<TextStyle>('unselectedLabel', unselectedLabel))
-    ..add(ColorProperty('selectedColor', selectedColor))
-    ..add(DiagnosticsProperty<TextStyle>('selectedLabel', selectedLabel))
-    ..add(DiagnosticsProperty<BoxDecoration>('indicator', indicator))
-    ..add(DiagnosticsProperty<FTabContentStyle>('content', content));
+    properties
+      ..add(DiagnosticsProperty<BoxDecoration>('decoration', decoration))
+      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
+      ..add(DiagnosticsProperty<TextStyle>('unselectedLabel', unselectedLabel))
+      ..add(DiagnosticsProperty<TextStyle>('selectedLabel', selectedLabel))
+      ..add(DiagnosticsProperty<BoxDecoration>('indicator', indicator))
+      ..add(DiagnosticsProperty<FTabContentStyle>('content', content));
   }
 }

@@ -7,9 +7,9 @@ part 'tabs_style.dart';
 part 'tab_content.dart';
 
 /// A [FTabs] that allows switching between tabs.
-class FTabs extends StatelessWidget {
+class FTabs extends StatefulWidget {
   /// The tab and it's corresponding view.
-  final List<(String, Widget)> tabs;
+  final List<MapEntry<String, Widget>> tabs;
 
   /// The height of the tab button.
   final double? height;
@@ -30,7 +30,7 @@ class FTabs extends StatelessWidget {
   const FTabs({
     required this.tabs,
     this.height,
-    this.spacing = 2,
+    this.spacing = 10,
     this.onTap,
     this.initialIndex = 0,
     this.style,
@@ -38,57 +38,68 @@ class FTabs extends StatelessWidget {
   });
 
   @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<MapEntry<String, Widget>>('tabs', tabs))
+      ..add(DoubleProperty('height', height))
+      ..add(DiagnosticsProperty<double>('spacing', spacing))
+      ..add(ObjectFlagProperty<ValueChanged<int>?>.has('onTap', onTap))
+      ..add(IntProperty('initialIndex', initialIndex))
+      ..add(DiagnosticsProperty<FTabsStyle?>('style', style));
+  }
+
+  @override
+  State<FTabs> createState() => _FTabsState();
+}
+
+class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
+  late int _selectedTab;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedTab = widget.initialIndex;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.tabsStyle;
+    final style = widget.style ?? context.theme.tabsStyle;
+    final tabs = widget.tabs;
 
     return DefaultTabController(
-      initialIndex: initialIndex,
+      initialIndex: widget.initialIndex,
       length: tabs.length,
       child: Column(
         children: [
           DecoratedBox(
             decoration: style.decoration,
             child: TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              onTap: onTap,
               padding: style.padding,
-              unselectedLabelStyle: style.unselectedLabel,
-              unselectedLabelColor: style.unselectedColor,
-              labelStyle: style.selectedLabel,
-              labelColor: style.selectedColor,
-              indicatorColor: Colors.transparent,
-              dividerColor: Colors.transparent,
+              indicatorSize: style.indicatorSize,
               indicator: style.indicator,
+              unselectedLabelStyle: style.unselectedLabel,
+              labelStyle: style.selectedLabel,
+              dividerColor: Colors.transparent,
               tabs: [
-                for (final (text, _) in tabs)
+                for (final child in tabs)
                   Tab(
-                    height: height,
-                    child: Text(text),
+                    height: widget.height,
+                    child: Text(child.key),
                   )
               ],
+              onTap: (index) {
+                setState(() {
+                  _selectedTab = index;
+                });
+                widget.onTap?.call(_selectedTab);
+              },
             ),
           ),
-          SizedBox(height: spacing),
-          Flexible(
-            child: TabBarView(
-              physics: const BouncingScrollPhysics(),
-              children: [for (final (_, widget) in tabs) widget],
-            ),
-          ),
+          SizedBox(height: widget.spacing),
+          tabs[_selectedTab].value,
         ],
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(IterableProperty<(String, Widget)>('tabs', tabs))
-      ..add(DoubleProperty('height', height))
-      ..add(DiagnosticsProperty<double>('spacing', spacing))
-      ..add(ObjectFlagProperty<ValueChanged<int>?>.has('onTap', onTap))
-      ..add(IntProperty('initialIndex', initialIndex))
-      ..add(DiagnosticsProperty<FTabsStyle?>('style', style));
   }
 }

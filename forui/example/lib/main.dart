@@ -94,11 +94,39 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         ),
         const SizedBox(height: 10),
         FTabs(
+          height: 35,
           tabs: [
-            ('Account', FTabContent(child: Column(children: [Container(color: Colors.red, height: 30,)],),)),
-            ('Password', FTabContent(child: Column(children: [Container(color: Colors.blue, height: 30,)],),)),
+            MapEntry(
+              'Account',
+              FTabContent(
+                title: 'Account',
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      color: Colors.red,
+                      height: 100,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            MapEntry(
+              'Password',
+              FTabContent(
+                title: 'Password',
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                      height: 100,
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
-
         )
       ],
     );
