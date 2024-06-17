@@ -3,31 +3,59 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// Represents a Forui theme.
+
+/// Applies a theme to descendant widgets.
 ///
-/// See [ThemeBuildContext.theme] for accessing the current theme.
+/// A theme configures the colors and typographic choices of Forui widgets. The actual configuration is stored in
+/// a [FThemeData]. Descendant widgets obtain the current theme's [FThemeData] via either [ThemeBuildContext.theme],
+/// or [FTheme.of]. When a widget uses either, it is automatically rebuilt if the theme later changes.
+///
+/// ```dart
+/// class Parent extends StatelessWidget {
+///   @override
+///   Widget build(BuildContext context) => FTheme(
+///      data: FThemes.zinc.light,
+///      child: Child(),
+///    );
+///  }
+///
+///  class Child extends StatelessWidget {
+///    @override
+///    Widget build(BuildContext context) {
+///      final FThemeData theme = context.theme;
+///      final FThemeData sameTheme = FTheme.of(context);
+///
+///      return const Placeholder();
+///    }
+///  }
+/// ```
+///
+/// See [FThemeData] which describes of the actual configuration of a theme.
 class FTheme extends StatelessWidget {
 
-  /// Retrieves the current theme data.
+  
+
+  /// Returns the current [FThemeData], or [FThemes.zinc.light] if there is no ancestor [FTheme].
   ///
-  /// It is recommended to use [ThemeBuildContext.theme] to access the current theme instead.
+  /// It is recommended to use the terser [ThemeBuildContext.theme] getter instead.
+  ///
+  /// ## Why is the default :
+  ///
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
     return theme?.data ?? FThemes.zinc.light;
   }
 
-  /// The theme data.
+  /// The color and typography values for descendant Forui widgets.
   final FThemeData data;
 
-  /// The text direction.
-  ///
-  /// If none is provided, the text direction is inherited from the context.
+  /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
   final TextDirection? textDirection;
 
-  /// The child widget.
+  /// The widget below this widget in the tree.
   final Widget child;
 
-  /// Creates a [FTheme].
+  /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
   const FTheme({
     required this.data,
     required this.child,
@@ -57,7 +85,6 @@ class FTheme extends StatelessWidget {
       ..add(DiagnosticsProperty<FThemeData>('data', data, showName: false))
       ..add(EnumProperty<TextDirection?>('textDirection', textDirection));
   }
-
 }
 
 class _InheritedTheme extends InheritedWidget {
