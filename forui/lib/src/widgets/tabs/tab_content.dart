@@ -11,7 +11,7 @@ final class FTabContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final font = context.theme.font;
+    final font = context.theme.typography;
     final style = this.style ?? context.theme.tabsStyle.content;
     return Container(
       decoration: style.decoration,
@@ -20,9 +20,9 @@ final class FTabContent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (title != null) Text(title!, style: style.title.withFont(font)),
+          if (title != null) Text(title!, style: style.title.scale(font)),
           if (subtitle != null)
-            Text(subtitle!, style: style.subtitle.withFont(font)),
+            Text(subtitle!, style: style.subtitle.scale(font)),
           if (child != null)
             Padding(
               padding: (title == null && subtitle == null)
@@ -69,16 +69,16 @@ final class FTabContentStyle with Diagnosticable {
 
   /// Creates a [FTabContentStyle] that inherits its properties from [colorScheme] and [font].
   FTabContentStyle.inherit(
-      {required FColorScheme colorScheme, required FFont font,required FStyle style})
+      {required FColorScheme colorScheme, required FTypography typography,required FStyle style})
       : decoration = BoxDecoration(borderRadius: style.borderRadius,border: Border.all(color: colorScheme.border)),
         padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
         title = TextStyle(
-          fontSize: font.base,
+          fontSize: typography.base,
           fontWeight: FontWeight.w600,
           color: colorScheme.foreground,
         ),
         subtitle = TextStyle(
-          fontSize: font.sm,
+          fontSize: typography.sm,
           color: colorScheme.mutedForeground,
         );
 

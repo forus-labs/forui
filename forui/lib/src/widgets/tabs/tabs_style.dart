@@ -43,7 +43,7 @@ final class FTabsStyle with Diagnosticable {
   });
 
   /// Creates a [FBoxStyle] that inherits its properties from [colorScheme].
-  FTabsStyle.inherit({required FColorScheme colorScheme, required FFont font, required FStyle style})
+  FTabsStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : decoration = BoxDecoration(
           border: Border.all(color: colorScheme.muted),
           borderRadius: style.borderRadius,
@@ -51,12 +51,12 @@ final class FTabsStyle with Diagnosticable {
         ),
         padding = const EdgeInsets.all(4),
         unselectedLabel = TextStyle(
-          fontSize: font.sm,
+          fontSize: typography.sm,
           fontWeight: FontWeight.w500,
           color: colorScheme.mutedForeground,
         ),
         selectedLabel = TextStyle(
-          fontSize: font.sm,
+          fontSize: typography.sm,
           fontWeight: FontWeight.w500,
           color: colorScheme.foreground,
         ),
@@ -67,7 +67,7 @@ final class FTabsStyle with Diagnosticable {
         ),
         height = 35,
         spacing = 10,
-        content = FTabContentStyle.inherit(colorScheme: colorScheme, font: font, style: style);
+        content = FTabContentStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
 
   /// Creates a copy of this [FCardStyle] with the given properties replaced.
   FTabsStyle copyWith({

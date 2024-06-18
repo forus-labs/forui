@@ -45,6 +45,16 @@ class _ExampleWidgetState extends State<ExampleWidget> {
   void initState() {
     super.initState();
   }
+  @override
+  Widget build(BuildContext context) {
+    final font = context.theme.typography;
+
+class _ExampleWidgetState extends State<ExampleWidget> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -78,19 +88,19 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         ),
         Text(
           'text-xs',
-          style: TextStyle(fontSize: font.xs).withFont(font),
+          style: TextStyle(fontSize: font.xs).scale(font),
         ),
         Text(
           'text-sm',
-          style: TextStyle(fontSize: font.sm).withFont(font),
+          style: TextStyle(fontSize: font.sm).scale(font),
         ),
         Text(
           'text-base',
-          style: TextStyle(fontSize: font.base).withFont(font),
+          style: TextStyle(fontSize: font.base).scale(font),
         ),
         Text(
           'text-lg',
-          style: TextStyle(fontSize: font.lg).withFont(font),
+          style: TextStyle(fontSize: font.lg).scale(font),
         ),
         const SizedBox(height: 10),
         FTabs(
