@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A set of miscellaneous properties that is part of a [FThemeData].
 ///
