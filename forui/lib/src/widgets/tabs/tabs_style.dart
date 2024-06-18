@@ -20,6 +20,12 @@ final class FTabsStyle with Diagnosticable {
   /// The indicator size.
   final TabBarIndicatorSize indicatorSize;
 
+  /// The height.
+  final double height;
+
+  /// The spacing between the tab bar and the views.
+  final double spacing;
+
   /// The [FTabContent] style.
   final FTabContentStyle content;
 
@@ -31,37 +37,37 @@ final class FTabsStyle with Diagnosticable {
     required this.selectedLabel,
     required this.indicator,
     required this.indicatorSize,
+    required this.height,
+    required this.spacing,
     required this.content,
   });
 
   /// Creates a [FBoxStyle] that inherits its properties from [colorScheme].
-  FTabsStyle.inherit(
-      {required FColorScheme colorScheme,
-      required FFont font,
-      required FStyle style})
+  FTabsStyle.inherit({required FColorScheme colorScheme, required FFont font, required FStyle style})
       : decoration = BoxDecoration(
-          border: Border.all(color: colorScheme.border),
+          border: Border.all(color: colorScheme.muted),
           borderRadius: style.borderRadius,
-          color: colorScheme.border,
+          color: colorScheme.muted,
         ),
         padding = const EdgeInsets.all(4),
         unselectedLabel = TextStyle(
           fontSize: font.sm,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           color: colorScheme.mutedForeground,
         ),
         selectedLabel = TextStyle(
           fontSize: font.sm,
-          fontWeight: FontWeight.w600,
-          color: colorScheme.primary,
+          fontWeight: FontWeight.w500,
+          color: colorScheme.foreground,
         ),
         indicatorSize = TabBarIndicatorSize.tab,
         indicator = BoxDecoration(
           color: colorScheme.background,
           borderRadius: style.borderRadius,
         ),
-        content = FTabContentStyle.inherit(
-            colorScheme: colorScheme, font: font, style: style);
+        height = 35,
+        spacing = 10,
+        content = FTabContentStyle.inherit(colorScheme: colorScheme, font: font, style: style);
 
   /// Creates a copy of this [FCardStyle] with the given properties replaced.
   FTabsStyle copyWith({
@@ -71,6 +77,8 @@ final class FTabsStyle with Diagnosticable {
     TextStyle? unselectedLabel,
     BoxDecoration? indicator,
     TabBarIndicatorSize? indicatorSize,
+    double? height,
+    double? spacing,
     FTabContentStyle? content,
   }) =>
       FTabsStyle(
@@ -80,6 +88,8 @@ final class FTabsStyle with Diagnosticable {
         unselectedLabel: unselectedLabel ?? this.unselectedLabel,
         indicatorSize: indicatorSize ?? this.indicatorSize,
         indicator: indicator ?? this.indicator,
+        height: height ?? this.height,
+        spacing: spacing ?? this.spacing,
         content: content ?? this.content,
       );
 
@@ -91,7 +101,10 @@ final class FTabsStyle with Diagnosticable {
       ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
       ..add(DiagnosticsProperty<TextStyle>('unselectedLabel', unselectedLabel))
       ..add(DiagnosticsProperty<TextStyle>('selectedLabel', selectedLabel))
+      ..add(EnumProperty<TabBarIndicatorSize>('indicatorSize', indicatorSize))
       ..add(DiagnosticsProperty<BoxDecoration>('indicator', indicator))
+      ..add(DoubleProperty('height', height))
+      ..add(DoubleProperty('spacing', spacing))
       ..add(DiagnosticsProperty<FTabContentStyle>('content', content));
   }
 }

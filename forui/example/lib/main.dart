@@ -94,7 +94,6 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         ),
         const SizedBox(height: 10),
         FTabs(
-          height: 35,
           tabs: [
             MapEntry(
               'Account',
