@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 // TODO: replace with nullable number operations in Sugar 4.
 double? _scale(double? value, double factor) => value == null ? null : value * factor;

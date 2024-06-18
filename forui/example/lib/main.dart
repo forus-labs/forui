@@ -67,16 +67,15 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                 padding: style.content.padding,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('Are you absolutely sure?', style: contentStyle.title.scale(typography)),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                         'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                         style: contentStyle.subtitle.scale(typography), textAlign: TextAlign.center,),
-                    SizedBox(
+                    const SizedBox(
                       height: 18,
                     ),
                     LayoutBuilder(
