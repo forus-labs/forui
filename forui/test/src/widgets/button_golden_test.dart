@@ -40,7 +40,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
-                  text: 'Button',
+                  labelText: 'Button',
                   design: variant,
                   onPress: null,
                 ),

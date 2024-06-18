@@ -17,8 +17,8 @@ class UnderTest extends StatelessWidget {
     titleText: 'Are you absolutely sure?',
     bodyText: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
     actions: [
-      FButton(text: 'Continue', onPress: () {}),
-      FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {
+      FButton(labelText: 'Continue', onPress: () {}),
+      FButton(design: FButtonVariant.outlined, labelText: 'Cancel', onPress: () {
         Navigator.of(context).pop();
       }),
     ],
