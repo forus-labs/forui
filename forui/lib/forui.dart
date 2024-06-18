@@ -21,6 +21,7 @@ export 'src/widgets/badge/badge.dart' hide FBadgeContent;
 export 'src/foundation/tappable.dart' hide FTappable;
 export 'src/widgets/button/button.dart' hide FButtonContent;
 export 'src/widgets/card/card.dart' hide FCardContent;
+export 'src/widgets/dialog/dialog.dart' hide FDialogContent, FHorizontalDialogContent, FVerticalDialogContent;
 export 'src/widgets/header/header.dart';
 export 'src/widgets/box.dart';
 export 'src/widgets/separator.dart';

@@ -7,12 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 
 part 'button_content.dart';
-
-part 'button_style.dart';
-
 part 'button_styles.dart';
-
-part 'button_content_style.dart';
 
 /// A button.
 class FButton extends StatelessWidget {
@@ -92,16 +87,21 @@ class FButton extends StatelessWidget {
       FButtonVariant.destructive => context.theme.buttonStyles.destructive,
     };
 
-    return FocusableActionDetector(
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      child: FTappable(
-        onTap: onPress,
-        onLongPress: onLongPress,
-        child: DecoratedBox(
-          decoration: onPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
-          child: builder(context, style),
+    return Semantics(
+      container: true,
+      button: true,
+      enabled: onPress != null || onLongPress != null,
+      child: FocusableActionDetector(
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        child: FTappable(
+          onTap: onPress,
+          onLongPress: onLongPress,
+          child: DecoratedBox(
+            decoration: onPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
+            child: builder(context, style),
+          ),
         ),
       ),
     );
@@ -118,5 +118,62 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('onFocusChange', onFocusChange))
       ..add(DiagnosticsProperty('builder', builder));
+  }
+}
+
+/// The button design. Either a pre-defined [FButtonVariant], or a custom [FButtonStyle].
+sealed class FButtonDesign {}
+
+/// A pre-defined button variant.
+enum FButtonVariant implements FButtonDesign  {
+  /// A primary-styled button.
+  primary,
+
+  /// A secondary-styled button.
+  secondary,
+
+  /// An outlined button.
+  outlined,
+
+  /// A destructive button.
+  destructive,
+}
+
+/// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton].
+class FButtonStyle extends FButtonDesign with Diagnosticable{
+  /// The content.
+  final FButtonContentStyle content;
+
+  /// The box decoration for an enabled button.
+  final BoxDecoration enabledBoxDecoration;
+
+  /// The box decoration for a disabled button.
+  final BoxDecoration disabledBoxDecoration;
+
+  /// Creates a [FButtonStyle].
+  FButtonStyle({
+    required this.content,
+    required this.enabledBoxDecoration,
+    required this.disabledBoxDecoration,
+  });
+
+  /// Creates a copy of this [FButtonStyle] with the given properties replaced.
+  FButtonStyle copyWith({
+    FButtonContentStyle? content,
+    BoxDecoration? enabledBoxDecoration,
+    BoxDecoration? disabledBoxDecoration,
+  }) =>
+      FButtonStyle(
+        content: content ?? this.content,
+        enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
+        disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('content', content))
+      ..add(DiagnosticsProperty('enabledBoxDecoration', enabledBoxDecoration))
+      ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration));
   }
 }

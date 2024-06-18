@@ -57,7 +57,7 @@ void main() {
       });
 
       test('all arguments', () {
-        final font = FTypography().copyWith(
+        final typography = FTypography().copyWith(
           defaultFontFamily: 'Roboto',
           sizeScalar: 2,
           letterSpacingScalar: 3,
@@ -65,11 +65,11 @@ void main() {
           heightScalar: 5,
         );
 
-        expect(font.defaultFontFamily, 'Roboto');
-        expect(font.sizeScalar, 2);
-        expect(font.letterSpacingScalar, 3);
-        expect(font.wordSpacingScalar, 4);
-        expect(font.heightScalar, 5);
+        expect(typography.defaultFontFamily, 'Roboto');
+        expect(typography.sizeScalar, 2);
+        expect(typography.letterSpacingScalar, 3);
+        expect(typography.wordSpacingScalar, 4);
+        expect(typography.heightScalar, 5);
       });
     });
 

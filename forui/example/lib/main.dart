@@ -36,47 +36,36 @@ class ExampleWidget extends StatefulWidget {
 }
 
 class _ExampleWidgetState extends State<ExampleWidget> {
-  late WidgetStatesController controller;
-  late TextEditingController textController;
 
   @override
   void initState() {
     super.initState();
-    controller = WidgetStatesController();
-    textController = TextEditingController()..addListener(() {});
   }
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Column(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
         children: [
-          // FCard(title: 'Email'),
-          FTextField(
-            // enabled: false,
-            labelText: 'Email',
-            hintText: 'hannah@foruslabs.com',
-            helpText: 'This is your public display name.',
-            // errorText: 'Error',
-            // statesController: controller,
-            controller: textController,
+          FButton(
+            design: FButtonVariant.destructive,
+            text: 'Delete?',
+            onPress: () => showAdaptiveDialog(
+              context: context,
+              builder: (context) => FDialog(
+                alignment: FDialogAlignment.horizontal,
+                title: 'Are you absolutely sure?',
+                subtitle: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                actions: [
+                  FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {
+                    Navigator.of(context).pop();
+                  }),
+                  FButton(text: 'Continue', onPress: () {}),
+                ],
+              ),
+            ),
           ),
-          // const TextField(
-          //   // enabled: false,
-          //   decoration: InputDecoration(
-          //     labelText: 'Material TextField',
-          //     hintText: 'Email',
-          //     errorText: 'Error text',
-          //   ),
-          // ),
         ],
       ),
-  );
-
-  @override
-  void dispose() {
-    super.dispose();
-    controller.dispose();
-    textController.dispose();
-  }
+    );
 }
