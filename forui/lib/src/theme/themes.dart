@@ -8,7 +8,6 @@ extension FThemes on Never {
   /// The light and dark variants of the [Zinc](https://ui.shadcn.com/themes) theme.
   static final zinc = (
     light: FThemeData.inherit(
-      typography: FTypography(),
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
         background: Color(0xFFFFFFFF),
@@ -25,10 +24,8 @@ extension FThemes on Never {
         errorForeground: Color(0xFFFAFAFA),
         border: Color(0xFFE4E4E7),
       ),
-      style: FStyle(),
     ),
     dark: FThemeData.inherit(
-      typography: FTypography(),
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
         background: Color(0xFF09090B),
@@ -45,7 +42,6 @@ extension FThemes on Never {
         errorForeground: Color(0xFFFAFAFA),
         border: Color(0xFF27272A),
       ),
-      style: FStyle(),
     ),
   );
 

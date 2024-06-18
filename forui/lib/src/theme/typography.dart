@@ -1,24 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:sugar/core.dart';
+import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
 // TODO: replace with nullable number operations in Sugar 4.
 double? _scale(double? value, double factor) => value == null ? null : value * factor;
 
-/// A Forui typography used to configure the Forui widgets' [TextStyle]s.
+/// Definitions for the various typographical styles that are part of a [FThemeData].
 ///
-/// It is usually inherited from an ancestor [FTheme]. Besides the typical font information, a [FTypography] also contains
-/// scalar values used to scale a [TextStyle]'s corresponding properties. This ensures that various [TextStyle]s with the
-/// same font are scaled consistently throughout a project.
+/// A [FTypography] contains scalar values for scaling a [TextStyle]'s corresponding properties. It also contains labelled
+/// font sizes, such as [FTypography.xs], which are based on [Tailwind CSS](https://tailwindcss.com/docs/font-size).
+///
+/// The scaling is applied automatically in all Forui widgets while the labelled font sizes are used as the defaults
+/// for the corresponding properties of widget styles configured via `inherit(...)` constructors.
 final class FTypography with Diagnosticable {
 
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if blank.
+  /// Throws an [AssertionError] if empty.
   final String defaultFontFamily;
 
   /// A value used to scale [TextStyle.fontSize]. Defaults to 1.
@@ -150,7 +152,7 @@ final class FTypography with Diagnosticable {
   final double xl8;
 
   /// Creates a [FTypography].
-  FTypography({
+  const FTypography({
     this.defaultFontFamily = 'packages/forui/Inter',
     this.sizeScalar = 1,
     this.letterSpacingScalar = 1,
@@ -169,7 +171,7 @@ final class FTypography with Diagnosticable {
     this.xl7 = 72,
     this.xl8 = 96,
   }):
-    assert(defaultFontFamily.isNotBlank, 'Font family should not be blank.'),
+    assert(0 < defaultFontFamily.length, 'The defaultFontFamily should not be empty.'),
     assert(0 < sizeScalar, 'The sizeScalar is $sizeScalar, but it should be in the range "0 < sizeScalar".'),
     assert(0 < letterSpacingScalar, 'The letterSpacingScalar is $letterSpacingScalar, but it should be in the range "0 < letterSpacingScalar".'),
     assert(0 < wordSpacingScalar, 'The wordSpacingScalar is $wordSpacingScalar, but it should be in the range "0 < wordSpacingScalar".'),
@@ -188,7 +190,19 @@ final class FTypography with Diagnosticable {
     assert(0 < xl8, 'The xl8 is $xl8, but it should be in the range "0 < xl8".');
 
   /// Creates a copy of this [FTypography] with the given properties replaced.
-  FTypography copyWith({
+  ///
+  /// ```dart
+  /// const typography = FTypography(
+  ///   defaultFontFamily: 'packages/forui/my-font',
+  ///   sizeScalar: 2,
+  /// );
+  ///
+  /// final copy = typography.copyWith(sizeScalar: 3);
+  ///
+  /// print(copy.defaultFontFamily); // 'packages/forui/my-font'
+  /// print(copy.sizeScalar); // 3
+  /// ```
+  @useResult FTypography copyWith({
     String? defaultFontFamily,
     double? sizeScalar,
     double? letterSpacingScalar,
@@ -227,18 +241,18 @@ final class FTypography with Diagnosticable {
         xl8: xl8 ?? this.xl8,
       );
 
-  /// Returns a [TextStyle] with the given properties, based on and scaled using this [FTypography].
+  /// Returns a [TextStyle] with the given properties, based on, and scaled using this [FTypography].
   ///
   /// ```dart
-  /// final font = FFont(
-  ///   family: 'packages/forui/my-font',
+  /// final typography = FTypography(
+  ///   defaultFontFamily: 'packages/forui/my-font',
   ///   sizeScalar: 2,
   ///   letterSpacingScalar: 3,
   ///   wordSpacingScalar: 4,
   ///   heightScalar: 5,
   /// );
   ///
-  /// final style = font.toTextStyle(
+  /// final style = typography.toTextStyle(
   ///   fontSize: 1,
   ///   letterSpacing: 1,
   ///   wordSpacing: 1,
@@ -251,7 +265,7 @@ final class FTypography with Diagnosticable {
   /// print(style.wordSpacing); // 4
   /// print(style.height); // 5
   /// ```
-  TextStyle toTextStyle({
+  @useResult TextStyle toTextStyle({
     bool inherit = true,
     Color? color,
     Color? backgroundColor,
@@ -372,7 +386,7 @@ final class FTypography with Diagnosticable {
 /// Provides functions for working with [FTypography]s.
 extension TypographyTextStyle on TextStyle {
 
-  /// Returns a [TextStyle] scaled using the given [typography].
+  /// Scales a [TextStyle] using the given [typography].
   ///
   /// ```dart
   /// final typography = FTypography(
@@ -397,7 +411,7 @@ extension TypographyTextStyle on TextStyle {
   /// print(style.wordSpacing); // 4
   /// print(style.height); // 5
   /// ```
-  TextStyle scale(FTypography typography) => copyWith(
+  @useResult TextStyle scale(FTypography typography) => copyWith(
     fontSize: _scale(fontSize, typography.sizeScalar),
     letterSpacing: _scale(letterSpacing, typography.letterSpacingScalar),
     wordSpacing: _scale(wordSpacing, typography.wordSpacingScalar),
