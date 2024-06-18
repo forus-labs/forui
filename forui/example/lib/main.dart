@@ -53,13 +53,14 @@ class _ExampleWidgetState extends State<ExampleWidget> {
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
+                alignment: FDialogAlignment.horizontal,
                 title: 'Are you absolutely sure?',
                 subtitle: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 actions: [
-                  FButton(text: 'Continue', onPress: () {}),
                   FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {
                     Navigator.of(context).pop();
                   }),
+                  FButton(text: 'Continue', onPress: () {}),
                 ],
               ),
             ),

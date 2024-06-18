@@ -78,17 +78,17 @@ class FButtonContentStyle with Diagnosticable {
   /// Creates a [FButtonContentStyle] that inherits its properties from the given [foreground] and [disabledForeground].
   FButtonContentStyle.inherit({required FTypography typography, required Color foreground, required Color disabledForeground})
       : padding = const EdgeInsets.symmetric(
-    horizontal: 20,
-    vertical: 15,
+    horizontal: 16,
+    vertical: 12.5,
   ),
         enabledText = TextStyle(
           fontSize: typography.base,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           color: foreground,
         ),
         disabledText = TextStyle(
           fontSize: typography.base,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           color: disabledForeground,
         ),
         enabledIcon = foreground,

@@ -111,9 +111,9 @@ class FDialog extends StatelessWidget {
               namesRoute: true,
               label: semanticLabel,
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  minWidth: 280.0,
-                  maxWidth: 560.0,
+                constraints: BoxConstraints(
+                  minWidth: style.minWidth,
+                  maxWidth: style.maxWidth,
                 ),
                 child: DecoratedBox(
                   decoration: style.decoration,
@@ -153,11 +153,19 @@ final class FDialogStyle with Diagnosticable {
   /// The vertical dialog content's style.
   final FDialogContentStyle vertical;
 
+  /// The minimum width of the dialog. Defaults to 280.0.
+  final double minWidth;
+
+  /// The maximum width of the dialog. Defaults to 560.0.
+  final double maxWidth;
+
   /// Creates a [FDialogStyle].
   const FDialogStyle({
     required this.decoration,
     required this.horizontal,
     required this.vertical,
+    this.minWidth = 280.0,
+    this.maxWidth = 560.0,
     this.insetPadding = const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   });
 
@@ -172,14 +180,16 @@ final class FDialogStyle with Diagnosticable {
       colorScheme: colorScheme,
       typography: typography,
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-      actionPadding: 10,
+      actionPadding: 7,
     ),
     vertical = FDialogContentStyle.inherit(
       colorScheme: colorScheme,
       typography: typography,
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
       actionPadding: 8,
-    );
+    ),
+    minWidth = 280.0,
+    maxWidth = 560.0;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -188,6 +198,8 @@ final class FDialogStyle with Diagnosticable {
       ..add(DiagnosticsProperty('decoration', decoration))
       ..add(DiagnosticsProperty('insetPadding', insetPadding))
       ..add(DiagnosticsProperty('horizontal', horizontal))
-      ..add(DiagnosticsProperty('vertical', vertical));
+      ..add(DiagnosticsProperty('vertical', vertical))
+      ..add(DoubleProperty('minWidth', minWidth, defaultValue: 280.0))
+      ..add(DoubleProperty('maxWidth', maxWidth, defaultValue: 560.0));
   }
 }
