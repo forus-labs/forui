@@ -1,16 +1,13 @@
 part of 'button.dart';
 
-@internal final class FButtonContent extends StatelessWidget {
-  final FButtonStyle style;
-  final bool enabled;
+@internal
+final class FButtonContent extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Widget? label;
   final String? labelText;
 
   const FButtonContent({
-    required this.style,
-    this.enabled = true,
     this.prefixIcon,
     this.suffixIcon,
     this.label,
@@ -20,37 +17,34 @@ part of 'button.dart';
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style.content;
+    final typography = context.theme.typography;
+    final (:style, :enabled) = FButton._of(context);
+
     return Padding(
-      padding: style.padding,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: separate([
-          if (prefixIcon != null)
-            prefixIcon!,
-
-          switch ((label, labelText)) {
-            (final Widget label, _) => label,
-            (_, final String label) => Text(label),
-            _ => const Placeholder(),
-          },
-
-          if (suffixIcon != null)
-            suffixIcon!,
-        ], by: [
-          const SizedBox(width: 10),
-        ]),
-      ),
-    );
+        padding: style.content.padding,
+        child: DefaultTextStyle.merge(
+          style: enabled ? style.content.enabledText.scale(typography) : style.content.disabledText.scale(typography),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: separate([
+              if (prefixIcon != null) prefixIcon!,
+              switch ((label, labelText)) {
+                (final Widget label, _) => label,
+                (_, final String label) => Text(label),
+                _ => const Placeholder(),
+              },
+              if (suffixIcon != null) suffixIcon!,
+            ], by: [
+              const SizedBox(width: 10),
+            ]),
+          ),
+        ));
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, defaultValue: true))
-      ..add(StringProperty('labelText', labelText));
+    properties.add(StringProperty('labelText', labelText));
   }
 }
 
@@ -73,11 +67,14 @@ class FButtonContentStyle with Diagnosticable {
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties from the given [foreground] and [disabledForeground].
-  FButtonContentStyle.inherit({required FTypography typography, required Color foreground, required Color disabledForeground})
-      : padding = const EdgeInsets.symmetric(
-    horizontal: 16,
-    vertical: 12.5,
-  ),
+  FButtonContentStyle.inherit({
+    required FTypography typography,
+    required Color foreground,
+    required Color disabledForeground,
+  })  : padding = const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12.5,
+        ),
         enabledText = TextStyle(
           fontSize: typography.base,
           fontWeight: FontWeight.w500,
@@ -88,8 +85,6 @@ class FButtonContentStyle with Diagnosticable {
           fontWeight: FontWeight.w500,
           color: disabledForeground,
         );
-        // enabledIcon = foreground,
-        // disabledIcon = disabledForeground;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -99,4 +94,16 @@ class FButtonContentStyle with Diagnosticable {
       ..add(DiagnosticsProperty('disabledText', disabledText))
       ..add(DiagnosticsProperty('padding', padding));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FButtonContentStyle &&
+          runtimeType == other.runtimeType &&
+          enabledText == other.enabledText &&
+          disabledText == other.disabledText &&
+          padding == other.padding;
+
+  @override
+  int get hashCode => enabledText.hashCode ^ disabledText.hashCode ^ padding.hashCode;
 }

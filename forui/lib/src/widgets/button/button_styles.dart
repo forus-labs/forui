@@ -1,7 +1,7 @@
 part of 'button.dart';
 
 /// [FButtonStyle]'s style.
-class FButtonStyles with Diagnosticable{
+class FButtonStyles with Diagnosticable {
   /// The primary style.
   final FButtonStyle primary;
 
@@ -38,6 +38,10 @@ class FButtonStyles with Diagnosticable{
             foreground: colorScheme.primaryForeground,
             disabledForeground: colorScheme.primaryForeground.withOpacity(0.5),
           ),
+          icon: FButtonIconStyle.inherit(
+            foreground: colorScheme.primaryForeground,
+            disabledForeground: colorScheme.primaryForeground.withOpacity(0.5),
+          ),
         ),
         secondary = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -53,6 +57,10 @@ class FButtonStyles with Diagnosticable{
             foreground: colorScheme.secondaryForeground,
             disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
+          icon: FButtonIconStyle.inherit(
+            foreground: colorScheme.secondaryForeground,
+            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+          ),
         ),
         destructive = FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -65,6 +73,10 @@ class FButtonStyles with Diagnosticable{
           ),
           content: FButtonContentStyle.inherit(
             typography: typography,
+            foreground: colorScheme.destructiveForeground,
+            disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5),
+          ),
+          icon: FButtonIconStyle.inherit(
             foreground: colorScheme.destructiveForeground,
             disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
@@ -87,6 +99,10 @@ class FButtonStyles with Diagnosticable{
             foreground: colorScheme.secondaryForeground,
             disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
+          icon: FButtonIconStyle.inherit(
+            foreground: colorScheme.secondaryForeground,
+            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+          ),
         );
 
   @override
@@ -98,4 +114,17 @@ class FButtonStyles with Diagnosticable{
       ..add(DiagnosticsProperty('destructive', destructive))
       ..add(DiagnosticsProperty('outlined', outlined));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FButtonStyles &&
+          runtimeType == other.runtimeType &&
+          primary == other.primary &&
+          secondary == other.secondary &&
+          destructive == other.destructive &&
+          outlined == other.outlined;
+
+  @override
+  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outlined.hashCode;
 }

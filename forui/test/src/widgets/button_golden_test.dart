@@ -21,6 +21,8 @@ void main() {
                 child: FButton(
                   labelText: 'Button',
                   design: variant,
+                  prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
+                  suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: () {},
                 ),
               ),
@@ -42,6 +44,8 @@ void main() {
                 child: FButton(
                   labelText: 'Button',
                   design: variant,
+                  prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
+                  suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: null,
                 ),
               ),
@@ -63,7 +67,7 @@ void main() {
                 child: FButton.raw(
                   design: variant,
                   onPress: () {},
-                  builder: (_, style) => Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(50),
                     child: Container(
                       width: 50,
@@ -102,7 +106,7 @@ void main() {
                 child: FButton.raw(
                   design: variant,
                   onPress: null,
-                  builder: (_, style) => Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(50),
                     child: Container(
                       width: 50,
