@@ -26,9 +26,6 @@ final class FTabsStyle with Diagnosticable {
   /// The spacing between the tab bar and the views.
   final double spacing;
 
-  /// The [FTabContent] style.
-  final FTabContentStyle content;
-
   /// Creates a [FTabsStyle].
   FTabsStyle({
     required this.decoration,
@@ -39,7 +36,6 @@ final class FTabsStyle with Diagnosticable {
     required this.indicatorSize,
     required this.height,
     required this.spacing,
-    required this.content,
   });
 
   /// Creates a [FBoxStyle] that inherits its properties from [colorScheme].
@@ -66,8 +62,7 @@ final class FTabsStyle with Diagnosticable {
           borderRadius: style.borderRadius,
         ),
         height = 35,
-        spacing = 10,
-        content = FTabContentStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
+        spacing = 10;
 
   /// Creates a copy of this [FCardStyle] with the given properties replaced.
   FTabsStyle copyWith({
@@ -79,7 +74,6 @@ final class FTabsStyle with Diagnosticable {
     TabBarIndicatorSize? indicatorSize,
     double? height,
     double? spacing,
-    FTabContentStyle? content,
   }) =>
       FTabsStyle(
         padding: padding ?? this.padding,
@@ -90,7 +84,6 @@ final class FTabsStyle with Diagnosticable {
         indicator: indicator ?? this.indicator,
         height: height ?? this.height,
         spacing: spacing ?? this.spacing,
-        content: content ?? this.content,
       );
 
   @override
@@ -104,7 +97,6 @@ final class FTabsStyle with Diagnosticable {
       ..add(EnumProperty<TabBarIndicatorSize>('indicatorSize', indicatorSize))
       ..add(DiagnosticsProperty<BoxDecoration>('indicator', indicator))
       ..add(DoubleProperty('height', height))
-      ..add(DoubleProperty('spacing', spacing))
-      ..add(DiagnosticsProperty<FTabContentStyle>('content', content));
+      ..add(DoubleProperty('spacing', spacing));
   }
 }

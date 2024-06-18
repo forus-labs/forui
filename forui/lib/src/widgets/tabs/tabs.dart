@@ -4,14 +4,30 @@ import 'package:flutter/foundation.dart';
 
 part 'tabs_style.dart';
 
-part 'tab_content.dart';
-
 part 'tab_controller.dart';
+
+class FTabEntry {
+  final String? _label;
+
+  final Widget? rawLabel;
+
+  final Widget content;
+
+  FTabEntry({
+    required this.content,
+    String? label,
+    this.rawLabel,
+  })  : _label = label,
+        assert((label != null && rawLabel == null) || (label == null && rawLabel != null),
+            'Either a label or rawLabel must be provided');
+
+  Widget get label => _label != null ? Text(_label) : rawLabel!;
+}
 
 /// A [FTabs] that allows switching between tabs.
 class FTabs extends StatefulWidget {
   /// The tab and it's corresponding view.
-  final List<MapEntry<String, Widget>> tabs;
+  final List<FTabEntry> tabs;
 
   /// The initial tab that is selected.
   final int initialIndex;
@@ -47,7 +63,7 @@ class FTabs extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty<MapEntry<String, Widget>>('tabs', tabs))
+      ..add(IterableProperty<FTabEntry>('tabs', tabs))
       ..add(IntProperty('initialIndex', initialIndex))
       ..add(DiagnosticsProperty<FTabController?>('controller', controller))
       ..add(DiagnosticsProperty<FTabsStyle?>('style', style))
@@ -89,10 +105,10 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
             labelStyle: style.selectedLabel,
             dividerColor: Colors.transparent,
             tabs: [
-              for (final child in tabs)
+              for (final tab in tabs)
                 Tab(
                   height: style.height,
-                  child: Text(child.key),
+                  child: tab.label,
                 )
             ],
             onTap: (index) {
@@ -104,7 +120,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           ),
         ),
         SizedBox(height: style.spacing),
-        tabs[_selectedTab].value,
+        tabs[_selectedTab].content,
       ],
     );
   }
