@@ -49,14 +49,14 @@ final class FTabsStyle with Diagnosticable {
         unselectedLabel = TextStyle(
           fontSize: typography.sm,
           fontWeight: FontWeight.w500,
-          // required as material implementation uses DefaultTabStyle
+          // required as material implementation of [Tab] uses DefaultTabStyle
           fontFamily: typography.defaultFontFamily,
           color: colorScheme.mutedForeground,
         ),
         selectedLabel = TextStyle(
           fontSize: typography.sm,
           fontWeight: FontWeight.w500,
-          // required as material implementation uses DefaultTabStyle
+          // required as material implementation of [Tab] uses DefaultTabStyle
           fontFamily: typography.defaultFontFamily,
           color: colorScheme.foreground,
         ),

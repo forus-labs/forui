@@ -95,7 +95,7 @@ final class FThemeData with Diagnosticable {
         boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
         separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
         switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme),
-        tabsStyle = FTabsStyle.inherit(colorScheme: colorScheme, font: font, style: style);
+        tabsStyle = FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
 
   /// Creates a copy of this [FThemeData] with the given properties replaced.
   ///
@@ -159,7 +159,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty<FTabsStyle>('tabsStyle', tabsStyle));
   }
 

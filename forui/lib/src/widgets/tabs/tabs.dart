@@ -8,13 +8,17 @@ part 'tabs_style.dart';
 
 part 'tab_controller.dart';
 
+/// An object that represents a tab entry in a group of tabs.
 class FTabEntry {
   final String? _label;
 
+  /// A raw label.
   final Widget? rawLabel;
 
+  /// The content of a tab.
   final Widget content;
 
+  /// Creates a [FTabs].
   FTabEntry({
     required this.content,
     String? label,
@@ -23,6 +27,7 @@ class FTabEntry {
         assert((label != null && rawLabel == null) || (label == null && rawLabel != null),
             'Either a label or rawLabel must be provided');
 
+  /// Returns either the provided raw label or the label text as a widget.
   Widget get label => _label != null ? Text(_label) : rawLabel!;
 }
 
@@ -36,7 +41,7 @@ class FTabs extends StatefulWidget {
 
   /// Whether this tab bar can be scrolled horizontally.
   ///
-  /// If [isScrollable] is true, then each tab is as wide as needed for its label
+  /// If [scrollable] is true, then each tab is as wide as needed for its label
   /// and the entire [TabBar] is scrollable. Otherwise each tab gets an equal
   /// share of the available space.
   final bool scrollable;
