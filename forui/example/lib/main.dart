@@ -17,12 +17,7 @@ class Application extends StatelessWidget {
           data: FThemes.zinc.light,
           child: Scaffold(
             backgroundColor: FThemes.zinc.light.colorScheme.background,
-            body: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ExampleWidget(),
-              ],
-            ),
+            body: const ExampleWidget(),
           ),
         ),
       );
@@ -49,10 +44,11 @@ class _ExampleWidgetState extends State<ExampleWidget> {
   Widget build(BuildContext context) {
     final font = context.theme.typography;
 
-    return Expanded(
-      child: ListView(
-        children: [
-          FHeader(
+    return Column(
+      mainAxisSize:  MainAxisSize.min,
+      children: [
+        SafeArea(
+          child: FHeader(
             title: 'Notification - A very long message',
             actions: [
               FHeaderAction(
@@ -65,61 +61,63 @@ class _ExampleWidgetState extends State<ExampleWidget> {
               ),
             ],
           ),
-          const SizedBox(height: 40),
-          FCard(
-            title: 'Notification',
-            subtitle: 'You have 3 unread messages.',
-            child: const Text(
-              'Material default font size of 14. (text-sm)',
-              style: TextStyle(fontSize: 14),
+        ),
+        const SizedBox(height: 40),
+        FCard(
+          title: 'Notification',
+          subtitle: 'You have 3 unread messages.',
+          child: const Text(
+            'Material default font size of 14. (text-sm)',
+            style: TextStyle(fontSize: 14),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          alignment: Alignment.centerLeft,
+          child: FBadge(label: 'New'),
+        ),
+        Text(
+          'text-xs',
+          style: TextStyle(fontSize: font.xs).scale(font),
+        ),
+        Text(
+          'text-sm',
+          style: TextStyle(fontSize: font.sm).scale(font),
+        ),
+        Text(
+          'text-base',
+          style: TextStyle(fontSize: font.base).scale(font),
+        ),
+        Text(
+          'text-lg',
+          style: TextStyle(fontSize: font.lg).scale(font),
+        ),
+        const SizedBox(height: 10),
+        FButton(
+          design: FButtonVariant.destructive,
+          text: 'Delete?',
+          onPress: () => showAdaptiveDialog(
+            context: context,
+            builder: (context) => FDialog(
+              alignment: FDialogAlignment.horizontal,
+              title: 'Are you absolutely sure?',
+              subtitle:
+                  'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+              actions: [
+                FButton(
+                    design: FButtonVariant.outlined,
+                    text: 'Cancel',
+                    onPress: () {
+                      Navigator.of(context).pop();
+                    }),
+                FButton(text: 'Continue', onPress: () {}),
+              ],
             ),
           ),
-          const SizedBox(height: 10),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FBadge(label: 'New'),
-          ),
-          Text(
-            'text-xs',
-            style: TextStyle(fontSize: font.xs).scale(font),
-          ),
-          Text(
-            'text-sm',
-            style: TextStyle(fontSize: font.sm).scale(font),
-          ),
-          Text(
-            'text-base',
-            style: TextStyle(fontSize: font.base).scale(font),
-          ),
-          Text(
-            'text-lg',
-            style: TextStyle(fontSize: font.lg).scale(font),
-          ),
-          const SizedBox(height: 10),
-          FButton(
-            design: FButtonVariant.destructive,
-            text: 'Delete?',
-            onPress: () => showAdaptiveDialog(
-              context: context,
-              builder: (context) => FDialog(
-                alignment: FDialogAlignment.horizontal,
-                title: 'Are you absolutely sure?',
-                subtitle:
-                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                actions: [
-                  FButton(
-                      design: FButtonVariant.outlined,
-                      text: 'Cancel',
-                      onPress: () {
-                        Navigator.of(context).pop();
-                      }),
-                  FButton(text: 'Continue', onPress: () {}),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          FTabs(
+        ),
+        const SizedBox(height: 10),
+        Expanded(
+          child: FTabs(
             tabs: [
               FTabEntry(
                 label: 'Account',
@@ -153,7 +151,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
 }

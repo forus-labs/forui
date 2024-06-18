@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 part 'tabs_style.dart';
 
 part 'tab_controller.dart';
@@ -49,7 +51,7 @@ class FTabs extends StatefulWidget {
   final ValueChanged<int>? onTap;
 
   /// Creates a [FTabs].
-  const FTabs({
+  FTabs({
     required this.tabs,
     this.initialIndex = 0,
     this.scrollable = false,
@@ -57,7 +59,7 @@ class FTabs extends StatefulWidget {
     this.style,
     this.onTap,
     super.key,
-  });
+  }) : assert(tabs.isNotEmpty, 'Must have at least 1 tab provided');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -88,41 +90,67 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+    final typography = theme.typography;
     final style = widget.style ?? context.theme.tabsStyle;
     final tabs = widget.tabs;
+    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
-    return Column(
-      children: [
-        DecoratedBox(
-          decoration: style.decoration,
-          child: TabBar(
-            isScrollable: widget.scrollable,
-            controller: widget.controller?._controller ?? _controller._controller,
-            padding: style.padding,
-            indicatorSize: style.indicatorSize,
-            indicator: style.indicator,
-            unselectedLabelStyle: style.unselectedLabel,
-            labelStyle: style.selectedLabel,
-            dividerColor: Colors.transparent,
-            tabs: [
-              for (final tab in tabs)
-                Tab(
-                  height: style.height,
-                  child: tab.label,
-                )
-            ],
-            onTap: (index) {
-              setState(() {
-                _selectedTab = index;
-              });
-              widget.onTap?.call(_selectedTab);
-            },
+    final widget_ = Material(
+      color: Colors.transparent,
+      child: Column(
+        children: [
+          DecoratedBox(
+            decoration: style.decoration,
+            child: TabBar(
+              isScrollable: widget.scrollable,
+              controller: widget.controller?._controller ?? _controller._controller,
+              padding: style.padding,
+              indicatorSize: style.indicatorSize,
+              indicator: style.indicator,
+              unselectedLabelStyle: style.unselectedLabel.scale(typography),
+              labelStyle: style.selectedLabel.scale(typography),
+              dividerColor: Colors.transparent,
+              tabs: [
+                for (final tab in tabs)
+                  Tab(
+                    height: style.height,
+                    child: tab.label,
+                  )
+              ],
+              onTap: (index) {
+                setState(() {
+                  _selectedTab = index;
+                });
+                widget.onTap?.call(_selectedTab);
+              },
+            ),
           ),
-        ),
-        SizedBox(height: style.spacing),
-        tabs[_selectedTab].content,
-      ],
+          SizedBox(height: style.spacing),
+          // A workaround to ensure any widgets under Tabs do not revert to material text style
+          // TODO: abstract out logic
+          DefaultTextStyle(
+            style: theme.typography.toTextStyle(
+              fontSize: theme.typography.base,
+              color: theme.colorScheme.foreground,
+            ),
+            child: tabs[_selectedTab].content,
+          ),
+        ],
+      ),
     );
+
+    return materialLocalizations == null
+        ? Localizations(
+            locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+            delegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            child: widget_,
+          )
+        : widget_;
   }
 
   @override
