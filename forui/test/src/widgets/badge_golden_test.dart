@@ -18,7 +18,7 @@ void main() {
               data: theme,
               background: background,
               child: FBadge(
-                label: 'Badge',
+                labelText: 'Badge',
                 design: variant,
               ),
             ),

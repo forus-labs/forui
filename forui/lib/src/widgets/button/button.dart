@@ -5,8 +5,10 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
+import 'package:sugar/collection.dart';
 
 part 'button_content.dart';
+part 'button_content_icon.dart';
 part 'button_styles.dart';
 
 /// A button.
@@ -55,15 +57,21 @@ class FButton extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    String? text,
-    SvgAsset? icon,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    Widget? label,
+    String? labelText,
     super.key,
-  }) : builder = ((context, style) => FButtonContent(
-    text: text,
-    icon: icon,
-    style: style,
-    enabled: onPress != null,
-  ));
+  }) :
+    assert((label != null) ^ (labelText != null), 'Either label or labelText must be provided, but not both.'),
+    builder = ((context, style) => FButtonContent(
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      label: label,
+      labelText: labelText,
+      style: style,
+      enabled: onPress != null,
+    ));
 
   /// Creates a [FButton].
   const FButton.raw({

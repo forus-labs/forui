@@ -3,16 +3,18 @@ part of 'button.dart';
 @internal final class FButtonContent extends StatelessWidget {
   final FButtonStyle style;
   final bool enabled;
-  final String? text;
-  final SvgAsset? icon; // TODO: We should allow for custom heading and trailing widgets.
-  final Widget? child;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final Widget? label;
+  final String? labelText;
 
   const FButtonContent({
     required this.style,
     this.enabled = true,
-    this.text,
-    this.icon,
-    this.child,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.label,
+    this.labelText,
     super.key,
   });
 
@@ -23,17 +25,21 @@ part of 'button.dart';
       padding: style.padding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (icon != null) ...[
-            icon!(
-              height: 20, // TODO: Icon size should be configurable.
-              colorFilter: ColorFilter.mode(enabled ? style.enabledIcon : style.disabledIcon, BlendMode.srcIn),
-            ),
-            const SizedBox(width: 10)
-          ],
-          if (text != null) Flexible(child: Text(text!, style: enabled ? style.enabledText : style.disabledText)),
-          if (child != null) child!
-        ],
+        children: separate([
+          if (prefixIcon != null)
+            prefixIcon!,
+
+          switch ((label, labelText)) {
+            (final Widget label, _) => label,
+            (_, final String label) => Text(label),
+            _ => const Placeholder(),
+          },
+
+          if (suffixIcon != null)
+            suffixIcon!,
+        ], by: [
+          const SizedBox(width: 10),
+        ]),
       ),
     );
   }
@@ -44,8 +50,7 @@ part of 'button.dart';
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, defaultValue: true))
-      ..add(StringProperty('text', text))
-      ..add(DiagnosticsProperty('icon', icon));
+      ..add(StringProperty('labelText', labelText));
   }
 }
 
@@ -57,12 +62,6 @@ class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is disabled.
   final TextStyle disabledText;
 
-  /// The icon's color when this button is enabled.
-  final Color enabledIcon;
-
-  /// The icon's color when this button is disabled.
-  final Color disabledIcon;
-
   /// The padding.
   final EdgeInsets padding;
 
@@ -70,8 +69,6 @@ class FButtonContentStyle with Diagnosticable {
   FButtonContentStyle({
     required this.enabledText,
     required this.disabledText,
-    required this.enabledIcon,
-    required this.disabledIcon,
     required this.padding,
   });
 
@@ -90,9 +87,9 @@ class FButtonContentStyle with Diagnosticable {
           fontSize: typography.base,
           fontWeight: FontWeight.w500,
           color: disabledForeground,
-        ),
-        enabledIcon = foreground,
-        disabledIcon = disabledForeground;
+        );
+        // enabledIcon = foreground,
+        // disabledIcon = disabledForeground;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -100,8 +97,6 @@ class FButtonContentStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('enabledText', enabledText))
       ..add(DiagnosticsProperty('disabledText', disabledText))
-      ..add(DiagnosticsProperty('enabledIcon', enabledIcon))
-      ..add(DiagnosticsProperty('disabledIcon', disabledIcon))
       ..add(DiagnosticsProperty('padding', padding));
   }
 }

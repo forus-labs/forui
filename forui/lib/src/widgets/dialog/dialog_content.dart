@@ -3,26 +3,43 @@ part of 'dialog.dart';
 @internal sealed class FDialogContent extends StatelessWidget {
   final FDialogContentStyle style;
   final CrossAxisAlignment alignment;
-  final String? title;
+  final Widget? title;
+  final String? titleText;
   final TextAlign titleTextAlign;
-  final String? subtitle;
-  final TextAlign subtitleTextAlign;
+  final Widget? body;
+  final String? bodyText;
+  final TextAlign bodyTextAlign;
   final List<Widget> actions;
 
   const FDialogContent({
     required this.style, 
-    required this.alignment, 
-    required this.titleTextAlign, 
-    required this.subtitleTextAlign,
-    required this.actions, 
-    this.title, 
-    this.subtitle,
+    required this.alignment,
+    required this.title,
+    required this.titleText,
+    required this.titleTextAlign,
+    required this.body,
+    required this.bodyText,
+    required this.bodyTextAlign,
+    required this.actions,
     super.key,
   });
   
   @override
   Widget build(BuildContext context) {
     final typography = context.theme.typography;
+    
+    final title = switch ((this.title, titleText)) {
+      (final Widget label, _) => label,
+      (_, final String label) => Text(label),
+      _ => null,
+    };
+    
+    final body = switch ((this.body, bodyText)) {
+      (final Widget label, _) => label,
+      (_, final String label) => Text(label),
+      _ => null,
+    };
+    
     return IntrinsicWidth(
       child: Padding(
         padding: style.padding,
@@ -35,22 +52,22 @@ part of 'dialog.dart';
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Semantics(
                   container: true,
-                  child: Text(
-                    title!,
-                    style: style.title.scale(typography),
+                  child: DefaultTextStyle(
                     textAlign: titleTextAlign,
+                    style: style.title.scale(typography),
+                    child: title,
                   ),
                 ),
               ),
-            if (subtitle != null)
+            if (body != null)
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Semantics(
                   container: true,
-                  child: Text(
-                    subtitle!,
-                    style: style.subtitle.scale(typography),
-                    textAlign: subtitleTextAlign,
+                  child: DefaultTextStyle(
+                    textAlign: bodyTextAlign,
+                    style: style.body.scale(typography),
+                    child: body,
                   ),
                 ),
               ),
@@ -69,10 +86,10 @@ part of 'dialog.dart';
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(StringProperty('title', title))
+      ..add(StringProperty('titleText', titleText))
       ..add(DiagnosticsProperty('titleTextAlign', titleTextAlign))
-      ..add(StringProperty('subtitle', subtitle))
-      ..add(DiagnosticsProperty('subtitleTextAlign', subtitleTextAlign))
+      ..add(StringProperty('bodyText', bodyText))
+      ..add(DiagnosticsProperty('bodyTextAlign', bodyTextAlign))
       ..add(IterableProperty('actions', actions));
   }
 }
@@ -81,12 +98,14 @@ part of 'dialog.dart';
   const FHorizontalDialogContent({
     required super.style,
     required super.title,
-    required super.subtitle,
+    required super.titleText,
+    required super.body,
+    required super.bodyText,
     required super.actions,
   }): super(
       alignment: CrossAxisAlignment.start,
       titleTextAlign: TextAlign.start,
-      subtitleTextAlign: TextAlign.start
+      bodyTextAlign: TextAlign.start
   );
 
   @override
@@ -109,12 +128,14 @@ part of 'dialog.dart';
   const FVerticalDialogContent({
     required super.style,
     required super.title,
-    required super.subtitle,
+    required super.titleText,
+    required super.body,
+    required super.bodyText,
     required super.actions,
   }): super(
     alignment: CrossAxisAlignment.center,
     titleTextAlign: TextAlign.center,
-    subtitleTextAlign: TextAlign.center
+    bodyTextAlign: TextAlign.center
   );
 
   @override
@@ -135,8 +156,8 @@ final class FDialogContentStyle with Diagnosticable {
   /// The title style.
   final TextStyle title;
 
-  /// The subtitle style.
-  final TextStyle subtitle;
+  /// The body style.
+  final TextStyle body;
 
   /// The padding between actions.
   final double actionPadding;
@@ -145,7 +166,7 @@ final class FDialogContentStyle with Diagnosticable {
   FDialogContentStyle({
     required this.padding,
     required this.title,
-    required this.subtitle,
+    required this.body,
     required this.actionPadding,
   });
   
@@ -161,7 +182,7 @@ final class FDialogContentStyle with Diagnosticable {
       fontWeight: FontWeight.w600,
       color: colorScheme.foreground,
     ),
-    subtitle = TextStyle(
+    body = TextStyle(
       fontSize: typography.sm,
       color: colorScheme.mutedForeground,
     );
@@ -172,7 +193,7 @@ final class FDialogContentStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('subtitle', subtitle))
+      ..add(DiagnosticsProperty('subtitle', body))
       ..add(DoubleProperty('actionPadding', actionPadding));
   }
 }
