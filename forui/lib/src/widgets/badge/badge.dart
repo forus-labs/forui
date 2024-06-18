@@ -146,9 +146,9 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
     properties
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('border', border))
-      ..add(DiagnosticsProperty<BorderRadius>('borderRadius', borderRadius, defaultValue: BorderRadius.circular(100)))
+      ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(100)))
       ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(DiagnosticsProperty<FBadgeContentStyle>('content', content));
+      ..add(DiagnosticsProperty('content', content));
   }
 
   @override

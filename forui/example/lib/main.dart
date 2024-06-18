@@ -52,15 +52,6 @@ class _ExampleWidgetState extends State<ExampleWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FTextField(
-            rawHelp: Text('Some error text'),
-          ),
-          const SizedBox(height: 10),
-          FTextField(rawHelp: Text('Some error text', style: context.theme.textFieldStyle.enabled.footer,)),
-          const SizedBox(height: 10),
-          Text('Some error text', style: context.theme.textFieldStyle.enabled.footer,),
-          FTextField(help: 'Some error text', textAlign: TextAlign.start,),
-          const SizedBox(height: 10),
           FButton(
             design: FButtonVariant.destructive,
             labelText: 'Delete?',

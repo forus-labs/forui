@@ -17,6 +17,11 @@ class FButtonIcon extends StatelessWidget {
       colorFilter: ColorFilter.mode(enabled ? style.icon.enabled : style.icon.disabled, BlendMode.srcIn),
     );
   }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('icon', icon));
+  }
 }
 
 /// [FButtonIcon]'s style.

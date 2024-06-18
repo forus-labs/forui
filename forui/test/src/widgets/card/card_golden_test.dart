@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import '../test_scaffold.dart';
+import '../../test_scaffold.dart';
 
 void main() {
   group('FCard', () {
     for (final (name, theme, background) in TestScaffold.themes) {
-      testWidgets('$name with FCardContent', (tester) async {
+      testWidgets('$name with text FCardContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             data: theme,
@@ -30,7 +30,30 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('card/$name-card-content.png'),
+          matchesGoldenFile('card/$name-text-card-content.png'),
+        );
+      });
+
+      testWidgets('$name with raw FCardContent', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            data: theme,
+            background: background,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FCard(
+                  rawTitle: const Text('Notifications'),
+                  rawSubtitle: const Text('You have 3 unread messages.'),
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('card/$name-raw-card-content.png'),
         );
       });
 
