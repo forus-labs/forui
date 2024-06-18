@@ -20,15 +20,18 @@ final class FTextField extends StatelessWidget {
   /// The style.
   final FTextFieldStyle? style;
 
-  /// The label text.
-  final String? labelText;
+  /// The label.
+  final String? label;
+
+  /// The raw label.
+  final Widget? rawLabel;
 
   /// The text to display when the text field is empty.
   ///
   /// See [InputDecoration.hintText] for more information.
-  final String? hintText;
+  final String? hint;
 
-  /// The maximum number of lines the [hintText] can occupy. Defaults to the value of [TextField.maxLines] attribute.
+  /// The maximum number of lines the [hint] can occupy. Defaults to the value of [TextField.maxLines] attribute.
   /// 
   /// See [InputDecoration.hintMaxLines] for more information.
   final int? hintMaxLines;
@@ -36,9 +39,12 @@ final class FTextField extends StatelessWidget {
   /// The help text.
   ///
   /// See [InputDecoration.helperText] for more information.
-  final String? helpText;
+  final String? help;
 
-  /// The maximum number of lines the [helpText] can occupy. Defaults to the value of [TextField.maxLines] attribute.
+  /// The raw help text.
+  final Widget? rawHelp;
+
+  /// The maximum number of lines the [help] can occupy. Defaults to the value of [TextField.maxLines] attribute.
   /// 
   /// See [InputDecoration.helperMaxLines] for more information.
   final int? helpMaxLines;
@@ -46,9 +52,12 @@ final class FTextField extends StatelessWidget {
   /// The error text.
   ///
   /// See [InputDecoration.errorText] for more information.
-  final String? errorText;
+  final String? error;
 
-  /// The maximum number of lines the [errorText] can occupy. Defaults to the value of [TextField.maxLines] attribute.
+  /// The raw error text.
+  final Widget? rawError;
+
+  /// The maximum number of lines the [error] can occupy. Defaults to the value of [TextField.maxLines] attribute.
   /// 
   /// See [InputDecoration.errorMaxLines] for more information.
   final int? errorMaxLines;
@@ -456,12 +465,15 @@ final class FTextField extends StatelessWidget {
   /// Creates a [FTextField].
   const FTextField({
     this.style,
-    this.labelText,
-    this.hintText,
+    this.label,
+    this.rawLabel,
+    this.hint,
     this.hintMaxLines,
-    this.helpText,
+    this.help,
+    this.rawHelp,
     this.helpMaxLines,
-    this.errorText,
+    this.error,
+    this.rawError,
     this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
@@ -507,17 +519,23 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  });
+  }):
+    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
-    this.labelText,
-    this.hintText = 'Email',
+    this.label,
+    this.rawLabel,
+    this.hint = 'Email',
     this.hintMaxLines,
-    this.helpText,
+    this.help,
+    this.rawHelp,
     this.helpMaxLines,
-    this.errorText,
+    this.error,
+    this.rawError,
     this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
@@ -563,7 +581,10 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  });
+  }):
+    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   /// Creates a [FTextField] configured for passwords.
   ///
@@ -571,12 +592,15 @@ final class FTextField extends StatelessWidget {
   /// when handling the creation of new passwords.
   const FTextField.password({
     this.style,
-    this.labelText,
-    this.hintText = 'Password',
+    this.label,
+    this.rawLabel,
+    this.hint = 'Password',
     this.hintMaxLines,
-    this.helpText,
+    this.help,
+    this.rawHelp,
     this.helpMaxLines,
-    this.errorText,
+    this.error,
+    this.rawError,
     this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
@@ -622,17 +646,23 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  });
+  }):
+    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   /// Creates a [FTextField] configured for multiline inputs.
   const FTextField.multiline({
     this.style,
-    this.labelText,
-    this.hintText,
+    this.label,
+    this.rawLabel,
+    this.hint,
     this.hintMaxLines,
-    this.helpText,
+    this.help,
+    this.rawHelp,
     this.helpMaxLines,
-    this.errorText,
+    this.error,
+    this.rawError,
     this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
@@ -678,7 +708,10 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  });
+  }):
+    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   @override
   Widget build(BuildContext context) {
@@ -687,21 +720,27 @@ final class FTextField extends StatelessWidget {
     final style = this.style ?? theme.textFieldStyle;
     final stateStyle = switch (this) {
       _ when !enabled => style.disabled,
-      _ when errorText != null => style.error,
+      _ when error != null || rawError != null => style.error,
       _ => style.enabled,
     };
     final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+
+    final label = switch ((this.label, rawLabel)) {
+      (final String label, _) => Text(label),
+      (_, final Widget label) => label,
+      _ => null,
+    };
 
     final textField = MergeSemantics(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (labelText != null)
+          if (label != null)
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 7),
-              child: Text(
-                labelText!,
-                style: stateStyle.label,
+              child: DefaultTextStyle.merge(
+                style: stateStyle.label.scale(typography),
+                child: label,
               ),
             ),
           Material(
@@ -744,116 +783,131 @@ final class FTextField extends StatelessWidget {
     FTypography typography,
     FTextFieldStyle style,
     FTextFieldStateStyle current,
-  ) => TextField(
-    controller: controller,
-    focusNode: focusNode,
-    undoController: undoController,
-    cursorErrorColor: style.cursor,
-    decoration: InputDecoration(
-      suffixIcon: suffixIcon,
-      // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-      prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
-      contentPadding: style.contentPadding.copyWith(left: 0),
-      hintText: hintText,
-      hintStyle: current.hint.scale(typography),
-      hintMaxLines: hintMaxLines,
-      helperText: helpText,
-      helperStyle: current.footer.scale(typography),
-      helperMaxLines: helpMaxLines,
-      errorText: errorText,
-      errorStyle: current.footer.scale(typography),
-      errorMaxLines: errorMaxLines,
-      disabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: style.disabled.unfocused.color,
-          width: style.disabled.unfocused.width,
+  ) {
+
+    final rawError = this.rawError == null ? this.rawError : DefaultTextStyle.merge(
+      style: current.footer.scale(typography),
+      child: this.rawError!,
+    );
+
+    final rawHelp = this.rawHelp == null ? this.rawHelp : DefaultTextStyle.merge(
+      style: current.footer.scale(typography),
+      child: this.rawHelp!,
+    );
+
+    return TextField(
+      controller: controller,
+      focusNode: focusNode,
+      undoController: undoController,
+      cursorErrorColor: style.cursor,
+      decoration: InputDecoration(
+        suffixIcon: suffixIcon,
+        // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
+        prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
+        contentPadding: style.contentPadding.copyWith(left: 0),
+        hintText: hint,
+        hintStyle: current.hint.scale(typography),
+        hintMaxLines: hintMaxLines,
+        helper: rawHelp,
+        helperText: help,
+        helperStyle: current.footer.scale(typography),
+        helperMaxLines: helpMaxLines,
+        error: rawError,
+        errorText: error,
+        errorStyle: current.footer.scale(typography),
+        errorMaxLines: errorMaxLines,
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.disabled.unfocused.color,
+            width: style.disabled.unfocused.width,
+          ),
+          borderRadius: style.disabled.unfocused.radius,
         ),
-        borderRadius: style.disabled.unfocused.radius,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: style.enabled.unfocused.color,
-          width: style.enabled.unfocused.width,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.enabled.unfocused.color,
+            width: style.enabled.unfocused.width,
+          ),
+          borderRadius: style.enabled.unfocused.radius,
         ),
-        borderRadius: style.enabled.unfocused.radius,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: style.enabled.focused.color,
-          width: style.enabled.focused.width,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.enabled.focused.color,
+            width: style.enabled.focused.width,
+          ),
+          borderRadius: current.focused.radius,
         ),
-        borderRadius: current.focused.radius,
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: style.error.unfocused.color,
-          width: style.error.unfocused.width,
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.error.unfocused.color,
+            width: style.error.unfocused.width,
+          ),
+          borderRadius: style.error.unfocused.radius,
         ),
-        borderRadius: style.error.unfocused.radius,
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: style.error.focused.color,
-          width: style.error.focused.width,
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.error.focused.color,
+            width: style.error.focused.width,
+          ),
+          borderRadius: style.error.focused.radius,
         ),
-        borderRadius: style.error.focused.radius,
       ),
-    ),
-    keyboardType: keyboardType,
-    textInputAction: textInputAction,
-    textCapitalization: textCapitalization,
-    style: current.content.scale(typography),
-    textAlign: textAlign,
-    textAlignVertical: textAlignVertical,
-    textDirection: textDirection,
-    readOnly: readOnly,
-    showCursor: showCursor,
-    autofocus: autofocus,
-    statesController: statesController,
-    obscureText: obscureText,
-    autocorrect: autocorrect,
-    smartDashesType: smartDashesType,
-    smartQuotesType: smartQuotesType,
-    enableSuggestions: enableSuggestions,
-    maxLines: maxLines,
-    minLines: minLines,
-    expands: expands,
-    maxLength: maxLength,
-    maxLengthEnforcement: maxLengthEnforcement,
-    onChanged: onChange,
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmit,
-    onAppPrivateCommand: onAppPrivateCommand,
-    inputFormatters: inputFormatters,
-    enabled: enabled,
-    ignorePointers: ignorePointers,
-    keyboardAppearance: style.keyboardAppearance,
-    scrollPadding: style.scrollPadding,
-    dragStartBehavior: dragStartBehavior,
-    selectionControls: selectionControls,
-    scrollController: scrollController,
-    scrollPhysics: scrollPhysics,
-    autofillHints: autofillHints,
-    restorationId: restorationId,
-    scribbleEnabled: scribbleEnabled,
-    enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-    contextMenuBuilder: contextMenuBuilder,
-    canRequestFocus: canRequestFocus,
-    spellCheckConfiguration: spellCheckConfiguration,
-    magnifierConfiguration: magnifierConfiguration,
-  );
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      textCapitalization: textCapitalization,
+      style: current.content.scale(typography),
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      readOnly: readOnly,
+      showCursor: showCursor,
+      autofocus: autofocus,
+      statesController: statesController,
+      obscureText: obscureText,
+      autocorrect: autocorrect,
+      smartDashesType: smartDashesType,
+      smartQuotesType: smartQuotesType,
+      enableSuggestions: enableSuggestions,
+      maxLines: maxLines,
+      minLines: minLines,
+      expands: expands,
+      maxLength: maxLength,
+      maxLengthEnforcement: maxLengthEnforcement,
+      onChanged: onChange,
+      onEditingComplete: onEditingComplete,
+      onSubmitted: onSubmit,
+      onAppPrivateCommand: onAppPrivateCommand,
+      inputFormatters: inputFormatters,
+      enabled: enabled,
+      ignorePointers: ignorePointers,
+      keyboardAppearance: style.keyboardAppearance,
+      scrollPadding: style.scrollPadding,
+      dragStartBehavior: dragStartBehavior,
+      selectionControls: selectionControls,
+      scrollController: scrollController,
+      scrollPhysics: scrollPhysics,
+      autofillHints: autofillHints,
+      restorationId: restorationId,
+      scribbleEnabled: scribbleEnabled,
+      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+      contextMenuBuilder: contextMenuBuilder,
+      canRequestFocus: canRequestFocus,
+      spellCheckConfiguration: spellCheckConfiguration,
+      magnifierConfiguration: magnifierConfiguration,
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('labelText', labelText))
-      ..add(StringProperty('hintText', hintText))
+      ..add(StringProperty('label', label))
+      ..add(StringProperty('hint', hint))
       ..add(IntProperty('hintMaxLines', hintMaxLines))
-      ..add(StringProperty('helpText', helpText))
+      ..add(StringProperty('help', help))
       ..add(IntProperty('helpMaxLines', helpMaxLines))
-      ..add(StringProperty('errorText', errorText))
+      ..add(StringProperty('error', error))
       ..add(IntProperty('errorMaxLines', errorMaxLines))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('controller', controller))

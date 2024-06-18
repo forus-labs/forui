@@ -14,8 +14,8 @@ class UnderTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FDialog(
     alignment: alignment,
-    titleText: 'Are you absolutely sure?',
-    bodyText: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+    title: 'Are you absolutely sure?',
+    body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
     actions: [
       FButton(labelText: 'Continue', onPress: () {}),
       FButton(design: FButtonVariant.outlined, labelText: 'Cancel', onPress: () {

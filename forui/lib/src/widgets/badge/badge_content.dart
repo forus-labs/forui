@@ -2,13 +2,13 @@ part of 'badge.dart';
 
 @internal final class FBadgeContent extends StatelessWidget {
   final FBadgeStyle style;
-  final Widget? label;
-  final String? labelText;
+  final String? label;
+  final Widget? rawLabel;
 
   const FBadgeContent({
     required this.style,
     this.label,
-    this.labelText,
+    this.rawLabel,
     super.key,
   });
 
@@ -16,11 +16,11 @@ part of 'badge.dart';
   Widget build(BuildContext context) => Center(
     child: Padding(
       padding: style.content.padding,
-      child: DefaultTextStyle(
+      child: DefaultTextStyle.merge(
         style: style.content.label.scale(context.theme.typography),
-        child: switch ((label, labelText)) {
-          (final Widget label, _) => label,
-          (_, final String label) => Text(label),
+        child: switch ((label, rawLabel)) {
+          (final String label, _) => Text(label),
+          (_, final Widget label) => label,
           _ => const Placeholder(),
         },
       ),
@@ -32,7 +32,7 @@ part of 'badge.dart';
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('labelText', labelText));
+      ..add(StringProperty('labelText', label));
   }
 }
 

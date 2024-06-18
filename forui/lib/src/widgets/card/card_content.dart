@@ -2,23 +2,56 @@ part of 'card.dart';
 
 @internal final class FCardContent extends StatelessWidget {
   final String? title;
+  final Widget? rawTitle;
   final String? subtitle;
+  final Widget? rawSubtitle;
   final Widget? child;
   final FCardContentStyle? style;
 
-  const FCardContent({this.title, this.subtitle, this.child, this.style, super.key});
+  const FCardContent({
+    this.title,
+    this.rawTitle,
+    this.subtitle,
+    this.rawSubtitle,
+    this.child, 
+    this.style, 
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final typography = context.theme.typography;
     final style = this.style ?? context.theme.cardStyle.content;
+    
+    final title = switch ((this.title, rawTitle)) {
+      (final String title, _) => Text(title),
+      (_, final Widget title) => title,
+      _ => null,
+    };
+    
+    final subtitle = switch ((this.subtitle, rawSubtitle)) {
+      (final String subtitle, _) => Text(subtitle),
+      (_, final Widget subtitle) => subtitle,
+      _ => null,
+    };
+    
     return Padding(
       padding: style.padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (title != null) Text(title!, style: style.title.scale(typography)),
-          if (subtitle != null) Text(subtitle!, style: style.subtitle.scale(typography)),
+          if (title != null)
+            DefaultTextStyle.merge(
+              style: style.title.scale(typography), 
+              child: title,
+            ),
+          
+          if (subtitle != null)
+            DefaultTextStyle.merge(
+              style: style.subtitle.scale(typography), 
+              child: subtitle,
+            ),
+
           if (child != null)
             Padding(
               padding: (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),

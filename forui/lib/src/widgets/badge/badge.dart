@@ -18,13 +18,13 @@ class FBadge extends StatelessWidget {
 
   /// Creates a [FBadge].
   FBadge({
-    Widget? label,
-    String? labelText,
+    String? label,
+    Widget? rawLabel,
     this.design = FBadgeVariant.primary,
     super.key,
   }) :
-      assert((label == null) ^ (labelText == null), 'Either "label" or "labelText" must be provided.'),
-      builder = ((context, style) => FBadgeContent(label: label, labelText: labelText, style: style));
+      assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.'),
+      builder = ((context, style) => FBadgeContent(rawLabel: rawLabel, label: label, style: style));
 
   /// Creates a [FBadge].
   const FBadge.raw({required this.design, required this.builder, super.key});

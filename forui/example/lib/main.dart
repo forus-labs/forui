@@ -50,21 +50,31 @@ class _ExampleWidgetState extends State<ExampleWidget> {
   Widget build(BuildContext context) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          FTextField(
+            rawHelp: Text('Some error text'),
+          ),
+          const SizedBox(height: 10),
+          FTextField(rawHelp: Text('Some error text', style: context.theme.textFieldStyle.enabled.footer,)),
+          const SizedBox(height: 10),
+          Text('Some error text', style: context.theme.textFieldStyle.enabled.footer,),
+          FTextField(help: 'Some error text', textAlign: TextAlign.start,),
+          const SizedBox(height: 10),
           FButton(
             design: FButtonVariant.destructive,
-            text: 'Delete?',
+            labelText: 'Delete?',
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
                 alignment: FDialogAlignment.horizontal,
-                titleText: 'Are you absolutely sure?',
-                bodyText: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                title: 'Are you absolutely sure?',
+                body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 actions: [
-                  FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {
+                  FButton(design: FButtonVariant.outlined, labelText: 'Cancel', onPress: () {
                     Navigator.of(context).pop();
                   }),
-                  FButton(text: 'Continue', onPress: () {}),
+                  FButton(labelText: 'Continue', onPress: () {}),
                 ],
               ),
             ),

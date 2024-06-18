@@ -18,13 +18,20 @@ final class FCard extends StatelessWidget {
   /// Creates a [FCard] with a tile and subtitle.
   FCard({
     String? title,
+    Widget? rawTitle,
     String? subtitle,
+    Widget? rawSubtitle,
     Widget? child,
     this.style,
     super.key,
-  }) : child = FCardContent(
+  }) :
+    assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
+    assert(subtitle == null || rawSubtitle == null, 'Cannot provide both a subtitle and a rawSubtitle.'),
+    child = FCardContent(
     title: title,
+    rawTitle: rawTitle,
     subtitle: subtitle,
+    rawSubtitle: rawSubtitle,
     style: style?.content,
     child: child,
   );
@@ -33,14 +40,10 @@ final class FCard extends StatelessWidget {
   const FCard.raw({required this.child, this.style, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.cardStyle;
-
-    return DecoratedBox(
-      decoration: style.decoration,
-      child: child,
-    );
-  }
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: (style ?? context.theme.cardStyle).decoration,
+    child: child,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

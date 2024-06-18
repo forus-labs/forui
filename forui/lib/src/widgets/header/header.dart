@@ -11,7 +11,10 @@ part 'header_action.dart';
 /// Typically used on pages at the root of the navigation stack.
 final class FHeader extends StatelessWidget {
   /// The title displayed on the left side of the [FHeader].
-  final String title;
+  final String? title;
+
+  /// The title displayed on the left side of the [FHeader].
+  final Widget? rawTitle;
 
   /// The actions displayed on the right side of the [FHeader].
   final List<Widget> actions;
@@ -21,27 +24,35 @@ final class FHeader extends StatelessWidget {
 
   /// Creates a [FHeader].
   const FHeader({
-    required this.title,
+    this.title,
+    this.rawTitle,
     this.actions = const [],
     this.style,
     super.key,
-  });
+  }):
+    assert((title != null) ^ (rawTitle != null), 'title or rawTitle must be provided, but not both.');
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.headerStyle;
     final typography = context.theme.typography;
 
+    final title = switch ((this.title, rawTitle)) {
+      (final String title, _) => Text(title),
+      (_, final Widget title) => title,
+      _ => const Placeholder(),
+    };
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Text(
-            title,
+          child: DefaultTextStyle.merge(
             overflow: TextOverflow.fade,
             maxLines: 1,
             softWrap: false,
             style: style.title.scale(typography),
+            child: title,
           ),
         ),
         Row(children: actions),

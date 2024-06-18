@@ -6,19 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import '../test_scaffold.dart';
+import '../../test_scaffold.dart';
 
 void main() {
   group('FBadge', () {
     for (final (name, theme, background) in TestScaffold.themes) {
       for (final variant in FBadgeVariant.values) {
-        testWidgets('$name with FBadgeContent', (tester) async {
+        testWidgets('$name with text FBadgeContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
               background: background,
               child: FBadge(
-                labelText: 'Badge',
+                label: 'Badge',
                 design: variant,
               ),
             ),
@@ -26,9 +26,28 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('badge/$name-$variant-badge-content.png'),
+            matchesGoldenFile('badge/$name-$variant-text-badge-content.png'),
           );
         });
+
+        testWidgets('$name with raw FBadgeContent', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              background: background,
+              child: FBadge(
+                rawLabel: const Text('Badge'),
+                design: variant,
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('badge/$name-$variant-raw-badge-content.png'),
+          );
+        });
+
 
         testWidgets('$name with raw content', (tester) async {
           await tester.pumpWidget(

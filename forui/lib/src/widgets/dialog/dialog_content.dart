@@ -3,23 +3,23 @@ part of 'dialog.dart';
 @internal sealed class FDialogContent extends StatelessWidget {
   final FDialogContentStyle style;
   final CrossAxisAlignment alignment;
-  final Widget? title;
-  final String? titleText;
+  final String? title;
   final TextAlign titleTextAlign;
-  final Widget? body;
-  final String? bodyText;
+  final Widget? rawTitle;
+  final String? body;
   final TextAlign bodyTextAlign;
+  final Widget? rawBody;
   final List<Widget> actions;
 
   const FDialogContent({
     required this.style, 
     required this.alignment,
     required this.title,
-    required this.titleText,
     required this.titleTextAlign,
+    required this.rawTitle,
     required this.body,
-    required this.bodyText,
     required this.bodyTextAlign,
+    required this.rawBody,
     required this.actions,
     super.key,
   });
@@ -28,15 +28,15 @@ part of 'dialog.dart';
   Widget build(BuildContext context) {
     final typography = context.theme.typography;
     
-    final title = switch ((this.title, titleText)) {
-      (final Widget label, _) => label,
-      (_, final String label) => Text(label),
+    final title = switch ((this.title, rawTitle)) {
+      (final String title, _) => Text(title),
+      (_, final Widget title) => title,
       _ => null,
     };
     
-    final body = switch ((this.body, bodyText)) {
-      (final Widget label, _) => label,
-      (_, final String label) => Text(label),
+    final body = switch ((this.body, rawBody)) {
+      (final String body, _) => Text(body),
+      (_, final Widget body) => body,
       _ => null,
     };
     
@@ -52,7 +52,7 @@ part of 'dialog.dart';
                 padding: const EdgeInsets.only(bottom: 12),
                 child: Semantics(
                   container: true,
-                  child: DefaultTextStyle(
+                  child: DefaultTextStyle.merge(
                     textAlign: titleTextAlign,
                     style: style.title.scale(typography),
                     child: title,
@@ -64,7 +64,7 @@ part of 'dialog.dart';
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Semantics(
                   container: true,
-                  child: DefaultTextStyle(
+                  child: DefaultTextStyle.merge(
                     textAlign: bodyTextAlign,
                     style: style.body.scale(typography),
                     child: body,
@@ -86,9 +86,9 @@ part of 'dialog.dart';
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(StringProperty('titleText', titleText))
+      ..add(StringProperty('title', title))
       ..add(DiagnosticsProperty('titleTextAlign', titleTextAlign))
-      ..add(StringProperty('bodyText', bodyText))
+      ..add(StringProperty('body', body))
       ..add(DiagnosticsProperty('bodyTextAlign', bodyTextAlign))
       ..add(IterableProperty('actions', actions));
   }
@@ -98,9 +98,9 @@ part of 'dialog.dart';
   const FHorizontalDialogContent({
     required super.style,
     required super.title,
-    required super.titleText,
+    required super.rawTitle,
     required super.body,
-    required super.bodyText,
+    required super.rawBody,
     required super.actions,
   }): super(
       alignment: CrossAxisAlignment.start,
@@ -128,9 +128,9 @@ part of 'dialog.dart';
   const FVerticalDialogContent({
     required super.style,
     required super.title,
-    required super.titleText,
+    required super.rawTitle,
     required super.body,
-    required super.bodyText,
+    required super.rawBody,
     required super.actions,
   }): super(
     alignment: CrossAxisAlignment.center,

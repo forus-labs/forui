@@ -52,31 +52,31 @@ class FDialog extends StatelessWidget {
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
     String? semanticLabel,
-    Widget? title,
-    String? titleText,
-    Widget? body,
-    String? bodyText,
+    String? title,
+    Widget? rawTitle,
+    String? body,
+    Widget? rawBody,
     FDialogAlignment alignment = FDialogAlignment.vertical,
     super.key,
   }):
-    assert((title != null) ^ (titleText != null), 'Either title or titleText must be provided, but not both.'),
-    assert((body != null) ^ (bodyText != null), 'Either body or bodyText must be provided, but not both.'),
-    semanticLabel = semanticLabel ?? titleText,
+    assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
+    assert(body == null || rawBody == null, 'Cannot provide both a body and a rawBody.'),
+    semanticLabel = semanticLabel ?? title,
     builder = switch (alignment) {
       FDialogAlignment.horizontal => (context, style) => FHorizontalDialogContent(
         style: style.horizontal,
         title: title,
-        titleText: titleText,
+        rawTitle: rawTitle,
         body: body,
-        bodyText: bodyText,
+        rawBody: rawBody,
         actions: actions,
       ),
       FDialogAlignment.vertical => (context, style) => FVerticalDialogContent(
         style: style.vertical,
         title: title,
-        titleText: titleText,
+        rawTitle: rawTitle,
         body: body,
-        bodyText: bodyText,
+        rawBody: rawBody,
         actions: actions,
       ),
     };
@@ -108,7 +108,7 @@ class FDialog extends StatelessWidget {
         removeBottom: true,
         context: context,
         child: Align(
-          child: DefaultTextStyle(
+          child: DefaultTextStyle.merge(
             style: context.theme.typography.toTextStyle(
               fontSize: typography.base,
               color: context.theme.colorScheme.foreground,

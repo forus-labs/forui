@@ -132,7 +132,7 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('design', design))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress))
-      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: 'autofocus'))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('onFocusChange', onFocusChange))
       ..add(DiagnosticsProperty('builder', child));
@@ -233,6 +233,8 @@ class _InheritedData extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('data', data));
+    properties
+      ..add(DiagnosticsProperty('style', data.style))
+      ..add(FlagProperty('enabled', value: data.enabled, ifTrue: 'enabled'));
   }
 }
