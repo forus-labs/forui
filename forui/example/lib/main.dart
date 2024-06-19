@@ -45,7 +45,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
     final font = context.theme.typography;
 
     return Column(
-      mainAxisSize:  MainAxisSize.min,
+      mainAxisSize: MainAxisSize.min,
       children: [
         SafeArea(
           child: FHeader(
@@ -93,29 +93,6 @@ class _ExampleWidgetState extends State<ExampleWidget> {
           style: TextStyle(fontSize: font.lg).scale(font),
         ),
         const SizedBox(height: 10),
-        FButton(
-          design: FButtonVariant.destructive,
-          text: 'Delete?',
-          onPress: () => showAdaptiveDialog(
-            context: context,
-            builder: (context) => FDialog(
-              alignment: FDialogAlignment.horizontal,
-              title: 'Are you absolutely sure?',
-              subtitle:
-                  'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-              actions: [
-                FButton(
-                    design: FButtonVariant.outlined,
-                    text: 'Cancel',
-                    onPress: () {
-                      Navigator.of(context).pop();
-                    }),
-                FButton(text: 'Continue', onPress: () {}),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
         Expanded(
           child: FTabs(
             tabs: [
@@ -154,4 +131,5 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         ),
       ],
     );
+  }
 }
