@@ -11,7 +11,8 @@ part 'tab_controller.dart';
 
 /// An object that represents a tab entry in a group of tabs.
 class FTabEntry {
-  final String? _label;
+  /// The label.
+  final String? label;
 
   /// A raw label.
   final Widget? rawLabel;
@@ -22,14 +23,10 @@ class FTabEntry {
   /// Creates a [FTabs].
   FTabEntry({
     required this.content,
-    String? label,
+    this.label,
     this.rawLabel,
-  })  : _label = label,
-        assert((label != null && rawLabel == null) || (label == null && rawLabel != null),
-            'Either a label or rawLabel must be provided');
-
-  /// Returns either the provided raw label or the label text as a widget.
-  Widget get label => _label != null ? Text(_label) : rawLabel!;
+  }) : assert(label == null || rawLabel == null,
+            'Cannot provide both a label and a rawLabel.');
 }
 
 /// A [FTabs] that allows switching between tabs.
@@ -71,12 +68,12 @@ class FTabs extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty<FTabEntry>('tabs', tabs))
+      ..add(IterableProperty('tabs', tabs))
       ..add(IntProperty('initialIndex', initialIndex))
-      ..add(DiagnosticsProperty<FTabController?>('controller', controller))
-      ..add(DiagnosticsProperty<FTabsStyle?>('style', style))
-      ..add(ObjectFlagProperty<ValueChanged<int>?>.has('onTap', onTap))
-      ..add(DiagnosticsProperty<bool>('scrollable', scrollable));
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('onTap', onTap))
+      ..add(FlagProperty('scrollable', value: scrollable));
   }
 
   @override
@@ -100,30 +97,33 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     final typography = theme.typography;
     final style = widget.style ?? context.theme.tabsStyle;
     final tabs = widget.tabs;
-    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+    final materialLocalizations =
+        Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
-    final widget_ = Material(
+    // ignore_for_file: no_leading_underscores_for_local_identifiers
+    final _tabs = Material(
       color: Colors.transparent,
       child: Column(
         children: [
           DecoratedBox(
             decoration: style.decoration,
             child: TabBar(
-              isScrollable: widget.scrollable,
-              controller: widget.controller?._controller ?? _controller._controller,
-              padding: style.padding,
-              indicatorSize: style.indicatorSize,
-              indicator: style.indicator,
-              unselectedLabelStyle: style.unselectedLabel.scale(typography),
-              labelStyle: style.selectedLabel.scale(typography),
-              dividerColor: Colors.transparent,
               tabs: [
                 for (final tab in tabs)
                   Tab(
                     height: style.height,
-                    child: tab.label,
+                    child: tab.rawLabel ?? Text(tab.label!),
                   )
               ],
+              controller:
+                  widget.controller?._controller ?? _controller._controller,
+              isScrollable: widget.scrollable,
+              padding: style.padding,
+              indicator: style.indicator,
+              indicatorSize: style.indicatorSize,
+              unselectedLabelStyle: style.unselectedLabel.scale(typography),
+              dividerColor: Colors.transparent,
+              labelStyle: style.selectedLabel.scale(typography),
               onTap: (index) {
                 setState(() {
                   _selectedTab = index;
@@ -148,15 +148,16 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
     return materialLocalizations == null
         ? Localizations(
-            locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+            locale: Localizations.maybeLocaleOf(context) ??
+                const Locale('en', 'US'),
             delegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            child: widget_,
+            child: _tabs,
           )
-        : widget_;
+        : _tabs;
   }
 
   @override

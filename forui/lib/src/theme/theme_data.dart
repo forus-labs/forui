@@ -160,7 +160,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty<FTabsStyle>('tabsStyle', tabsStyle));
+      ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug));
   }
 
   @override
