@@ -22,11 +22,14 @@ class FHeaderAction extends StatelessWidget {
 
     return Padding(
       padding: style.padding,
-      child: FTappable(
-        onTap: onPress,
-        child: icon(
-          height: style.iconSize,
-          colorFilter: ColorFilter.mode(onPress == null ? style.disabledIcon : style.enabledIcon, BlendMode.srcIn),
+      child: MouseRegion(
+        cursor: onPress == null ? MouseCursor.defer : SystemMouseCursors.click,
+        child: FTappable(
+          onTap: onPress,
+          child: icon(
+            height: style.iconSize,
+            colorFilter: ColorFilter.mode(onPress == null ? style.disabledIcon : style.enabledIcon, BlendMode.srcIn),
+          ),
         ),
       ),
     );

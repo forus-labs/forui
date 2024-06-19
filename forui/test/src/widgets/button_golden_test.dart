@@ -19,7 +19,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
-                  labelText: 'Button',
+                  label: 'Button',
                   design: variant,
                   prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
                   suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
@@ -42,7 +42,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
-                  labelText: 'Button',
+                  label: 'Button',
                   design: variant,
                   prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
                   suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),

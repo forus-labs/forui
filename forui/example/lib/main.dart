@@ -13,14 +13,14 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        home: FTheme(
-          data: FThemes.zinc.light,
-          child: Scaffold(
-            backgroundColor: FThemes.zinc.light.colorScheme.background,
-            body: const ExampleWidget(),
-          ),
-        ),
-      );
+    home: FTheme(
+      data: FThemes.zinc.light,
+      child: Scaffold(
+        backgroundColor: FThemes.zinc.light.colorScheme.background,
+        body: const ExampleWidget(),
+      ),
+    ),
+  );
 }
 
 
