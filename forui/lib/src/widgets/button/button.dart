@@ -2,15 +2,25 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
+import 'package:sugar/collection.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 
 part 'button_content.dart';
+
+part 'button_icon.dart';
+
 part 'button_styles.dart';
 
 /// A button.
 class FButton extends StatelessWidget {
+  @useResult
+  static _Data _of(BuildContext context) {
+    final theme = context.dependOnInheritedWidgetOfExactType<_InheritedData>();
+    return theme?.data ?? (style: context.theme.buttonStyles.primary, enabled: true);
+  }
+
   /// The design. Defaults to [FBadgeVariant.primary].
   final FButtonDesign design;
 
@@ -44,8 +54,8 @@ class FButton extends StatelessWidget {
   /// Called with true if this widget's node gains focus, and false if it loses focus.
   final ValueChanged<bool>? onFocusChange;
 
-  /// The builder.
-  final Widget Function(BuildContext, FButtonStyle) builder;
+  /// The child.
+  final Widget child;
 
   /// Creates a [FButton].
   FButton({
@@ -55,21 +65,24 @@ class FButton extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    String? text,
-    SvgAsset? icon,
+    Widget? prefixIcon,
+    Widget? suffixIcon,
+    Widget? label,
+    String? labelText,
     super.key,
-  }) : builder = ((context, style) => FButtonContent(
-    text: text,
-    icon: icon,
-    style: style,
-    enabled: onPress != null,
-  ));
+  })  : assert((label != null) ^ (labelText != null), 'Either label or labelText must be provided, but not both.'),
+        child = FButtonContent(
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          label: label,
+          labelText: labelText,
+        );
 
   /// Creates a [FButton].
   const FButton.raw({
     required this.design,
     required this.onPress,
-    required this.builder,
+    required this.child,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -87,20 +100,25 @@ class FButton extends StatelessWidget {
       FButtonVariant.destructive => context.theme.buttonStyles.destructive,
     };
 
-    return Semantics(
-      container: true,
-      button: true,
-      enabled: onPress != null || onLongPress != null,
-      child: FocusableActionDetector(
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        child: FTappable(
-          onTap: onPress,
-          onLongPress: onLongPress,
-          child: DecoratedBox(
-            decoration: onPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
-            child: builder(context, style),
+    final enabled = onPress != null || onLongPress != null;
+
+    return _InheritedData(
+      data: (style: style, enabled: enabled),
+      child: Semantics(
+        container: true,
+        button: true,
+        enabled: enabled,
+        child: FocusableActionDetector(
+          autofocus: autofocus,
+          focusNode: focusNode,
+          onFocusChange: onFocusChange,
+          child: FTappable(
+            onTap: onPress,
+            onLongPress: onLongPress,
+            child: DecoratedBox(
+              decoration: onPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
+              child: child,
+            ),
           ),
         ),
       ),
@@ -114,10 +132,10 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('design', design))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress))
-      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: 'autofocus'))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('onFocusChange', onFocusChange))
-      ..add(DiagnosticsProperty('builder', builder));
+      ..add(DiagnosticsProperty('builder', child));
   }
 }
 
@@ -125,7 +143,7 @@ class FButton extends StatelessWidget {
 sealed class FButtonDesign {}
 
 /// A pre-defined button variant.
-enum FButtonVariant implements FButtonDesign  {
+enum FButtonVariant implements FButtonDesign {
   /// A primary-styled button.
   primary,
 
@@ -140,40 +158,83 @@ enum FButtonVariant implements FButtonDesign  {
 }
 
 /// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton].
-class FButtonStyle extends FButtonDesign with Diagnosticable{
-  /// The content.
-  final FButtonContentStyle content;
-
+class FButtonStyle extends FButtonDesign with Diagnosticable {
   /// The box decoration for an enabled button.
   final BoxDecoration enabledBoxDecoration;
 
   /// The box decoration for a disabled button.
   final BoxDecoration disabledBoxDecoration;
 
+  /// The content.
+  final FButtonContentStyle content;
+
+  /// The icon.
+  final FButtonIconStyle icon;
+
   /// Creates a [FButtonStyle].
   FButtonStyle({
-    required this.content,
     required this.enabledBoxDecoration,
     required this.disabledBoxDecoration,
+    required this.content,
+    required this.icon,
   });
 
   /// Creates a copy of this [FButtonStyle] with the given properties replaced.
   FButtonStyle copyWith({
-    FButtonContentStyle? content,
     BoxDecoration? enabledBoxDecoration,
     BoxDecoration? disabledBoxDecoration,
+    FButtonContentStyle? content,
+    FButtonIconStyle? icon,
   }) =>
       FButtonStyle(
-        content: content ?? this.content,
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
         disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
+        content: content ?? this.content,
+        icon: icon ?? this.icon,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('content', content))
+    properties
       ..add(DiagnosticsProperty('enabledBoxDecoration', enabledBoxDecoration))
-      ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration));
+      ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
+      ..add(DiagnosticsProperty('content', content))
+      ..add(DiagnosticsProperty('icon', icon));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FButtonStyle &&
+          runtimeType == other.runtimeType &&
+          enabledBoxDecoration == other.enabledBoxDecoration &&
+          disabledBoxDecoration == other.disabledBoxDecoration &&
+          content == other.content &&
+          icon == other.icon;
+
+  @override
+  int get hashCode => enabledBoxDecoration.hashCode ^ disabledBoxDecoration.hashCode ^ content.hashCode ^ icon.hashCode;
+}
+
+typedef _Data = ({FButtonStyle style, bool enabled});
+
+class _InheritedData extends InheritedWidget {
+  final _Data data;
+
+  const _InheritedData({
+    required this.data,
+    required super.child,
+  });
+
+  @override
+  bool updateShouldNotify(covariant _InheritedData old) => data != old.data;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', data.style))
+      ..add(FlagProperty('enabled', value: data.enabled, ifTrue: 'enabled'));
   }
 }

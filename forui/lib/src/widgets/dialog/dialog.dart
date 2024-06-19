@@ -53,22 +53,30 @@ class FDialog extends StatelessWidget {
     this.insetAnimationCurve = Curves.decelerate,
     String? semanticLabel,
     String? title,
-    String? subtitle,
+    Widget? rawTitle,
+    String? body,
+    Widget? rawBody,
     FDialogAlignment alignment = FDialogAlignment.vertical,
     super.key,
   }):
-    semanticLabel = semanticLabel ?? title ?? subtitle,
+    assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
+    assert(body == null || rawBody == null, 'Cannot provide both a body and a rawBody.'),
+    semanticLabel = semanticLabel ?? title,
     builder = switch (alignment) {
       FDialogAlignment.horizontal => (context, style) => FHorizontalDialogContent(
         style: style.horizontal,
         title: title,
-        subtitle: subtitle,
+        rawTitle: rawTitle,
+        body: body,
+        rawBody: rawBody,
         actions: actions,
       ),
       FDialogAlignment.vertical => (context, style) => FVerticalDialogContent(
         style: style.vertical,
         title: title,
-        subtitle: subtitle,
+        rawTitle: rawTitle,
+        body: body,
+        rawBody: rawBody,
         actions: actions,
       ),
     };
@@ -100,7 +108,7 @@ class FDialog extends StatelessWidget {
         removeBottom: true,
         context: context,
         child: Align(
-          child: DefaultTextStyle(
+          child: DefaultTextStyle.merge(
             style: context.theme.typography.toTextStyle(
               fontSize: typography.base,
               color: context.theme.colorScheme.foreground,

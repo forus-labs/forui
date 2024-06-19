@@ -50,21 +50,22 @@ class _ExampleWidgetState extends State<ExampleWidget> {
   Widget build(BuildContext context) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FButton(
             design: FButtonVariant.destructive,
-            text: 'Delete?',
+            labelText: 'Delete?',
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
                 alignment: FDialogAlignment.horizontal,
                 title: 'Are you absolutely sure?',
-                subtitle: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 actions: [
-                  FButton(design: FButtonVariant.outlined, text: 'Cancel', onPress: () {
+                  FButton(design: FButtonVariant.outlined, labelText: 'Cancel', onPress: () {
                     Navigator.of(context).pop();
                   }),
-                  FButton(text: 'Continue', onPress: () {}),
+                  FButton(labelText: 'Continue', onPress: () {}),
                 ],
               ),
             ),

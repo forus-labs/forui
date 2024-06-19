@@ -19,8 +19,10 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
-                  text: 'Button',
+                  labelText: 'Button',
                   design: variant,
+                  prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
+                  suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: () {},
                 ),
               ),
@@ -40,8 +42,10 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
-                  text: 'Button',
+                  labelText: 'Button',
                   design: variant,
+                  prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
+                  suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: null,
                 ),
               ),
@@ -63,7 +67,7 @@ void main() {
                 child: FButton.raw(
                   design: variant,
                   onPress: () {},
-                  builder: (_, style) => Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(50),
                     child: Container(
                       width: 50,
@@ -102,7 +106,7 @@ void main() {
                 child: FButton.raw(
                   design: variant,
                   onPress: null,
-                  builder: (_, style) => Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(50),
                     child: Container(
                       width: 50,
