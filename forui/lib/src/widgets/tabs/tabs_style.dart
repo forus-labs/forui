@@ -38,7 +38,7 @@ final class FTabsStyle with Diagnosticable {
     required this.spacing,
   });
 
-  /// Creates a [FBoxStyle] that inherits its properties from [colorScheme].
+  /// Creates a [FTabsStyle] that inherits its properties from [colorScheme].
   FTabsStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : decoration = BoxDecoration(
           border: Border.all(color: colorScheme.muted),
