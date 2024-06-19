@@ -4,14 +4,14 @@ part of 'button.dart';
 final class FButtonContent extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final Widget? label;
-  final String? labelText;
+  final String? label;
+  final Widget? rawLabel;
 
   const FButtonContent({
     this.prefixIcon,
     this.suffixIcon,
     this.label,
-    this.labelText,
+    this.rawLabel,
     super.key,
   });
 
@@ -28,9 +28,9 @@ final class FButtonContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: separate([
               if (prefixIcon != null) prefixIcon!,
-              switch ((label, labelText)) {
-                (final Widget label, _) => label,
-                (_, final String label) => Text(label),
+              switch ((label, rawLabel, )) {
+                (final String label, _) => Text(label),
+                (_, final Widget label) => label,
                 _ => const Placeholder(),
               },
               if (suffixIcon != null) suffixIcon!,
@@ -44,7 +44,7 @@ final class FButtonContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('labelText', labelText));
+    properties.add(StringProperty('label', label));
   }
 }
 

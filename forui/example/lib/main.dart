@@ -54,7 +54,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         children: [
           FButton(
             design: FButtonVariant.destructive,
-            labelText: 'Delete?',
+            label: 'Delete?',
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
@@ -62,10 +62,10 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                 title: 'Are you absolutely sure?',
                 body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 actions: [
-                  FButton(design: FButtonVariant.outlined, labelText: 'Cancel', onPress: () {
+                  FButton(design: FButtonVariant.outline, label: 'Cancel', onPress: () {
                     Navigator.of(context).pop();
                   }),
-                  FButton(labelText: 'Continue', onPress: () {}),
+                  FButton(label: 'Continue', onPress: () {}),
                 ],
               ),
             ),

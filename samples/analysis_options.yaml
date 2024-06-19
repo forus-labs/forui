@@ -1,0 +1,6 @@
+include: package:flint/analysis_options.flutter.yaml
+analyzer:
+  errors:
+    diagnostic_describe_all_properties: ignore
+    public_member_api_docs: ignore
+    unused_result: ignore
