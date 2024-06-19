@@ -108,7 +108,7 @@ class FDialog extends StatelessWidget {
         removeBottom: true,
         context: context,
         child: Align(
-          child: DefaultTextStyle.merge(
+          child: DefaultTextStyle(
             style: context.theme.typography.toTextStyle(
               fontSize: typography.base,
               color: context.theme.colorScheme.foreground,

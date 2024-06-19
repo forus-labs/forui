@@ -67,16 +67,16 @@ class FButton extends StatelessWidget {
     this.onFocusChange,
     Widget? prefixIcon,
     Widget? suffixIcon,
-    Widget? label,
-    String? labelText,
+    String? label,
+    Widget? rawLabel,
     super.key,
-  })  : assert((label != null) ^ (labelText != null), 'Either label or labelText must be provided, but not both.'),
-        child = FButtonContent(
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          label: label,
-          labelText: labelText,
-        );
+  })  : assert((label != null) ^ (rawLabel != null), 'Either label or rawLabel must be provided, but not both.'),
+    child = FButtonContent(
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      rawLabel: rawLabel,
+      label: label,
+    );
 
   /// Creates a [FButton].
   const FButton.raw({
@@ -96,7 +96,7 @@ class FButton extends StatelessWidget {
       final FButtonStyle style => style,
       FButtonVariant.primary => context.theme.buttonStyles.primary,
       FButtonVariant.secondary => context.theme.buttonStyles.secondary,
-      FButtonVariant.outlined => context.theme.buttonStyles.outlined,
+      FButtonVariant.outline => context.theme.buttonStyles.outlined,
       FButtonVariant.destructive => context.theme.buttonStyles.destructive,
     };
 
@@ -112,12 +112,15 @@ class FButton extends StatelessWidget {
           autofocus: autofocus,
           focusNode: focusNode,
           onFocusChange: onFocusChange,
-          child: FTappable(
-            onTap: onPress,
-            onLongPress: onLongPress,
-            child: DecoratedBox(
-              decoration: onPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
-              child: child,
+          child: MouseRegion(
+            cursor: onPress == null && onLongPress == null ? MouseCursor.defer : SystemMouseCursors.click,
+            child: FTappable(
+              onTap: onPress,
+              onLongPress: onLongPress,
+              child: DecoratedBox(
+                decoration: onPress == null && onLongPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
+                child: child,
+              ),
             ),
           ),
         ),
@@ -151,7 +154,7 @@ enum FButtonVariant implements FButtonDesign {
   secondary,
 
   /// An outlined button.
-  outlined,
+  outline,
 
   /// A destructive button.
   destructive,

@@ -43,9 +43,6 @@ final class FThemeData with Diagnosticable {
   /// The text field style.
   final FTextFieldStyle textFieldStyle;
 
-  /// The box style.
-  final FBoxStyle boxStyle;
-
   /// The separator styles.
   final FSeparatorStyles separatorStyles;
 
@@ -66,7 +63,6 @@ final class FThemeData with Diagnosticable {
     required this.dialogStyle,
     required this.headerStyle,
     required this.textFieldStyle,
-    required this.boxStyle,
     required this.separatorStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
@@ -88,7 +84,6 @@ final class FThemeData with Diagnosticable {
         dialogStyle = FDialogStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
         headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
         textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        boxStyle = FBoxStyle.inherit(colorScheme: colorScheme),
         separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
         switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
 
@@ -118,7 +113,6 @@ final class FThemeData with Diagnosticable {
     FDialogStyle? dialogStyle,
     FHeaderStyle? headerStyle,
     FTextFieldStyle? textFieldStyle,
-    FBoxStyle? boxStyle,
     FSeparatorStyles? separatorStyles,
     FSwitchStyle? switchStyle,
   }) =>
@@ -132,7 +126,6 @@ final class FThemeData with Diagnosticable {
         dialogStyle: dialogStyle ?? this.dialogStyle,
         headerStyle: headerStyle ?? this.headerStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
-        boxStyle: boxStyle ?? this.boxStyle,
         separatorStyles: separatorStyles ?? this.separatorStyles,
         switchStyle: switchStyle ?? this.switchStyle,
       );
@@ -150,7 +143,6 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('boxStyle', boxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
@@ -169,7 +161,6 @@ final class FThemeData with Diagnosticable {
           dialogStyle == other.dialogStyle &&
           headerStyle == other.headerStyle &&
           textFieldStyle == other.textFieldStyle &&
-          boxStyle == other.boxStyle &&
           separatorStyles == other.separatorStyles &&
           switchStyle == other.switchStyle;
 
@@ -184,7 +175,6 @@ final class FThemeData with Diagnosticable {
       dialogStyle.hashCode ^
       headerStyle.hashCode ^
       textFieldStyle.hashCode ^
-      boxStyle.hashCode ^
       separatorStyles.hashCode ^
       switchStyle.hashCode;
 }
