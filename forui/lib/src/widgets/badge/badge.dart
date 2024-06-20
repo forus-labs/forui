@@ -8,35 +8,48 @@ import 'package:forui/forui.dart';
 part 'badge_content.dart';
 part 'badge_styles.dart';
 
-/// A badge, or a component that looks like a badge.
+/// A badge. Badges are typically used to draw attention to specific information, such as labels and counts.
+///
+/// See https://forui.dev/docs/badge for working examples.
 class FBadge extends StatelessWidget {
-  /// The design. Defaults to [FBadgeVariant.primary].
-  final FBadgeDesign design;
+  /// The style. Defaults to [FBadgeStyle.primary].
+  ///
+  /// Although typically one of the pre-defined styles in [FBadgeStyle], it can also be a [FBadgeCustomStyle].
+  final FBadgeStyle style;
 
-  /// The builder.
-  final Widget Function(BuildContext, FBadgeStyle) builder;
+  /// The builder used to build the badge's content.
+  final Widget Function(BuildContext, FBadgeCustomStyle) builder;
 
-  /// Creates a [FBadge].
+  /// Creates a [FBadge] that contains a [label] or a [rawLabel].
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * both [label] and [rawLabel] are not null
+  /// * both [label] and [rawLabel] are null
   FBadge({
     String? label,
     Widget? rawLabel,
-    this.design = FBadgeVariant.primary,
+    this.style = FBadgeStyle.primary,
     super.key,
   }) :
       assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.'),
       builder = ((context, style) => FBadgeContent(rawLabel: rawLabel, label: label, style: style));
 
-  /// Creates a [FBadge].
-  const FBadge.raw({required this.design, required this.builder, super.key});
+  /// Creates a [FBadge] with custom content.
+  const FBadge.raw({
+    required this.builder,
+    this.style = FBadgeStyle.primary,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final style = switch (design) {
-      final FBadgeStyle style => style,
-      FBadgeVariant.primary => context.theme.badgeStyles.primary,
-      FBadgeVariant.secondary => context.theme.badgeStyles.secondary,
-      FBadgeVariant.outline => context.theme.badgeStyles.outline,
-      FBadgeVariant.destructive => context.theme.badgeStyles.destructive,
+    final style = switch (this.style) {
+      final FBadgeCustomStyle style => style,
+      FBadgeStyle.primary => context.theme.badgeStyles.primary,
+      FBadgeStyle.secondary => context.theme.badgeStyles.secondary,
+      FBadgeStyle.outline => context.theme.badgeStyles.outline,
+      FBadgeStyle.destructive => context.theme.badgeStyles.destructive,
     };
 
     return IntrinsicWidth(
@@ -60,42 +73,57 @@ class FBadge extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('design', design, defaultValue: FBadgeVariant.primary))
-      ..add(DiagnosticsProperty('builder', builder, defaultValue: null));
+      ..add(DiagnosticsProperty('style', style, defaultValue: FBadgeStyle.primary))
+      ..add(DiagnosticsProperty('builder', builder, level: DiagnosticLevel.debug));
   }
 }
 
-/// The badge design. Either a pre-defined [FBadgeVariant], or a custom [FBadgeStyle].
-sealed class FBadgeDesign {}
 
-/// A pre-defined badge variant.
-enum FBadgeVariant implements FBadgeDesign {
-  /// A primary-styled badge.
+/// A [FBadge]'s style.
+///
+/// A style can be either one of the pre-defined styles in [FBadgeStyle] or a [FBadgeCustomStyle]. The pre-defined styles
+/// are a convenient shorthand for the various [FBadgeCustomStyle]s in the current context's [FBadgeStyles].
+sealed class FBadgeStyle {
+  /// The badge's primary style.
+  ///
+  /// Shorthand for the current context's [FBadgeStyles.primary] style.
+  static const FBadgeStyle primary = Variant.primary;
+
+  /// The badge's secondary style.
+  ///
+  /// Shorthand for the current context's [FBadgeStyles.secondary] style.
+  static const FBadgeStyle secondary = Variant.secondary;
+
+  /// The badge's outline style.
+  ///
+  /// Shorthand for the current context's [FBadgeStyles.outline] style.
+  static const FBadgeStyle outline = Variant.outline;
+
+  /// The badge's destructive style.
+  ///
+  /// Shorthand for the current context's [FBadgeStyles.destructive] style.
+  static const FBadgeStyle destructive = Variant.destructive;
+}
+
+@internal enum Variant implements FBadgeStyle {
   primary,
-
-  /// A secondary-styled badge.
   secondary,
-
-  /// An outlined badge.
   outline,
-
-  /// A destructive badge.
   destructive,
 }
 
-/// A [FBadge]'s style.
-final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
-
+/// A custom [FBadge] style.
+final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   /// The background color.
   final Color background;
 
   /// The border color.
   final Color border;
 
-  /// The border radius.
+  /// The border radius. Defaults to `BorderRadius.circular(100)`.
   final BorderRadius borderRadius;
 
-  /// The border width (thickness). Defaults to 1.
+  /// The border width (thickness).
   ///
   /// ## Contract:
   /// Throws an [AssertionError] if:
@@ -103,20 +131,20 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
   /// * `borderWidth` is Nan
   final double borderWidth;
 
-  /// The button content's style.
+  /// The badge content's style.
   final FBadgeContentStyle content;
 
-  /// Creates a [FBadgeStyle].
-  FBadgeStyle({
+  /// Creates a [FBadgeCustomStyle].
+  FBadgeCustomStyle({
     required this.background,
     required this.border,
-    required this.borderRadius,
     required this.content,
+    this.borderRadius = const BorderRadius.all(Radius.circular(100)),
     this.borderWidth = 1,
   }) : assert(0 < borderWidth, 'The borderWidth is $borderWidth, but it should be in the range "0 < borderWidth".');
 
-  /// Creates a [FBadgeStyle] that inherits its properties from [style].
-  FBadgeStyle.inherit({
+  /// Creates a [FBadgeCustomStyle] that inherits its properties from [style].
+  FBadgeCustomStyle.inherit({
     required FStyle style,
     required this.background,
     required this.border,
@@ -124,15 +152,30 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
   })  : borderRadius = BorderRadius.circular(100),
         borderWidth = style.borderWidth;
 
-  /// Creates a copy of this [FBadgeStyle] with the given properties replaced.
-  FBadgeStyle copyWith({
+  /// Creates a copy of this [FBadgeCustomStyle] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FBadgeCustomStyle(
+  ///   background: Colors.red,
+  ///   border: Colors.black,
+  ///   // other properties omitted for brevity
+  /// );
+  ///
+  /// final copy = style.copyWith(
+  ///   background: Colors.blue,
+  /// );
+  ///
+  /// print(copy.background); // Colors.blue
+  /// print(copy.border); // Colors.black
+  /// ```
+  @useResult FBadgeCustomStyle copyWith({
     Color? background,
     Color? border,
     BorderRadius? borderRadius,
     double? borderWidth,
     FBadgeContentStyle? content,
   }) =>
-      FBadgeStyle(
+      FBadgeCustomStyle(
         background: background ?? this.background,
         border: border ?? this.border,
         borderRadius: borderRadius ?? this.borderRadius,
@@ -154,7 +197,7 @@ final class FBadgeStyle with Diagnosticable implements FBadgeDesign {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FBadgeStyle &&
+      other is FBadgeCustomStyle &&
           runtimeType == other.runtimeType &&
           background == other.background &&
           border == other.border &&

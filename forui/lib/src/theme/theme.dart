@@ -116,8 +116,8 @@ class FTheme extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FThemeData>('data', data, showName: false))
-      ..add(EnumProperty<TextDirection?>('textDirection', textDirection));
+      ..add(DiagnosticsProperty('data', data, showName: false))
+      ..add(EnumProperty('textDirection', textDirection));
   }
 }
 
@@ -132,7 +132,7 @@ class _InheritedTheme extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FThemeData>('data', data));
+    properties.add(DiagnosticsProperty('data', data));
   }
 }
 

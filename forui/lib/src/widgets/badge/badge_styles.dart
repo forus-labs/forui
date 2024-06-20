@@ -1,25 +1,25 @@
 part of 'badge.dart';
 
-/// The [FBadgeStyle]s.
+/// The [FBadgeCustomStyle]s.
 class FBadgeStyles with Diagnosticable {
   /// The primary badge style.
-  final FBadgeStyle primary;
+  final FBadgeCustomStyle primary;
 
   /// The secondary badge style.
-  final FBadgeStyle secondary;
+  final FBadgeCustomStyle secondary;
 
   /// The outlined badge style.
-  final FBadgeStyle outline;
+  final FBadgeCustomStyle outline;
 
   /// The destructive badge style.
-  final FBadgeStyle destructive;
+  final FBadgeCustomStyle destructive;
 
   /// Creates a [FBadgeStyles].
   FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
 
-  /// Creates a [FBadgeStyles] that inherits its properties from [colorScheme] and [style].
+  /// Creates a [FBadgeStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FBadgeStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style}):
-    primary = FBadgeStyle.inherit(
+    primary = FBadgeCustomStyle.inherit(
       style: style,
       background: colorScheme.primary,
       border: colorScheme.primary,
@@ -31,7 +31,7 @@ class FBadgeStyles with Diagnosticable {
         ),
       ),
     ),
-    secondary = FBadgeStyle.inherit(
+    secondary = FBadgeCustomStyle.inherit(
       style: style,
       background: colorScheme.secondary,
       border: colorScheme.secondary,
@@ -43,7 +43,7 @@ class FBadgeStyles with Diagnosticable {
         ),
       ),
     ),
-    outline = FBadgeStyle.inherit(
+    outline = FBadgeCustomStyle.inherit(
       style: style,
       background: colorScheme.background,
       border: colorScheme.border,
@@ -55,7 +55,7 @@ class FBadgeStyles with Diagnosticable {
         ),
       ),
     ),
-    destructive = FBadgeStyle.inherit(
+    destructive = FBadgeCustomStyle.inherit(
       style: style,
       background: colorScheme.destructive,
       border: colorScheme.destructive,
@@ -69,11 +69,23 @@ class FBadgeStyles with Diagnosticable {
     );
 
   /// Creates a copy of this [FBadgeStyles] with the given properties replaced.
-  FBadgeStyles copyWith({
-    FBadgeStyle? primary,
-    FBadgeStyle? secondary,
-    FBadgeStyle? outline,
-    FBadgeStyle? destructive,
+  ///
+  /// ```dart
+  /// final styles = FBadgeStyles(
+  ///   primary: ...,
+  ///   secondary: ...,
+  /// );
+  ///
+  /// final copy = styles.copyWith(secondary: ...);
+  ///
+  /// print(styles.primary == copy.primary); // true
+  /// print(styles.secondary == copy.secondary); // false
+  /// ```
+  @useResult FBadgeStyles copyWith({
+    FBadgeCustomStyle? primary,
+    FBadgeCustomStyle? secondary,
+    FBadgeCustomStyle? outline,
+    FBadgeCustomStyle? destructive,
   }) => FBadgeStyles(
     primary: primary ?? this.primary,
     secondary: secondary ?? this.secondary,

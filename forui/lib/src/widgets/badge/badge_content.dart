@@ -1,7 +1,7 @@
 part of 'badge.dart';
 
 @internal final class FBadgeContent extends StatelessWidget {
-  final FBadgeStyle style;
+  final FBadgeCustomStyle style;
   final String? label;
   final Widget? rawLabel;
 
@@ -32,23 +32,38 @@ part of 'badge.dart';
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('labelText', label));
+      ..add(StringProperty('label', label));
   }
 }
 
 /// A badge content's style.
 final class FBadgeContentStyle with Diagnosticable {
-  /// The text.
+  /// The label's style.
   final TextStyle label;
 
-  /// The padding.
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 14, vertical: 2)`.
   final EdgeInsets padding;
 
   /// Creates a [FBadgeContentStyle].
-  FBadgeContentStyle({required this.label, this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 2)});
+  FBadgeContentStyle({
+    required this.label,
+    this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+  });
 
   /// Creates a copy of this [FBadgeContentStyle] with the given properties replaced.
-  FBadgeContentStyle copyWith({TextStyle? label, EdgeInsets? padding}) => FBadgeContentStyle(
+  ///
+  /// ```dart
+  /// final style = FBadgeContentStyle(
+  ///   label: TextStyle(...),
+  ///   padding = EdgeInsets.zero,
+  /// );
+  ///
+  /// final copy = style.copyWith(padding: EdgeInsets.symmetric(vertical: 10));
+  ///
+  /// print(style.label == copy.label); // true
+  /// print(style.padding == copy.padding); // false
+  /// ```
+  @useResult FBadgeContentStyle copyWith({TextStyle? label, EdgeInsets? padding}) => FBadgeContentStyle(
     label: label ?? this.label,
     padding: padding ?? this.padding,
   );

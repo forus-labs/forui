@@ -1,31 +1,30 @@
-// Flutter imports:
+// ignore_for_file: invalid_use_of_internal_member, implementation_imports
+
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:auto_route/auto_route.dart';
-import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/badge/badge.dart';
 
-// Project imports:
 import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
 class BadgePage extends SampleScaffold {
-  static final variants = {
-    for (final value in FBadgeVariant.values)
+  static final styles = {
+    for (final value in Variant.values)
       value.name: value,
   };
 
-  final FBadgeVariant variant;
+  final FBadgeStyle style;
 
   BadgePage({
     @queryParam super.theme,
-    @queryParam String variant = 'primary',
+    @queryParam String style = 'primary',
   }):
-    variant = variants[variant]!;
+    style = styles[style]!;
 
   @override
   Widget child(BuildContext context) => FBadge(
     label: 'Badge',
-    design: variant,
+    style: style,
   );
 }
