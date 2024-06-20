@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -17,24 +18,14 @@ final class FSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FSeparatorStyle(:padding, :width, :color) = style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
-    return Padding(
-      padding: padding,
-      child: vertical ?
-        SizedBox(
-          width: width,
-          height: double.infinity,
-          child: ColoredBox(
-            color: color,
-          ),
-        ) :
-        SizedBox(
-          width: double.infinity,
-          height: width,
-          child: ColoredBox(
-            color: color,
-          ),
-        ),
+    final style = this.style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
+    final (height, width) = vertical ? (null, style.width) : (style.width, null);
+
+    return Container(
+      margin: style.padding,
+      color: style.color,
+      height: height,
+      width: width,
     );
   }
 
@@ -42,7 +33,7 @@ final class FSeparator extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('vertical', value: vertical, defaultValue: false))
+      ..add(FlagProperty('vertical', value: vertical, defaultValue: false, ifTrue: 'vertical'))
       ..add(DiagnosticsProperty('style', style));
   }
 

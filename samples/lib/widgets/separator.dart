@@ -35,12 +35,26 @@ class SeparatorPage extends SampleScaffold {
             ),
           ),
           const FSeparator(),
-          Text(
-            'An open-source UI component library.',
-            style: TextStyle(
-              fontSize: typography.sm,
-              color: colorScheme.mutedForeground,
-            ),
+          Row(
+            children: [
+              Text(
+                'Forui',
+                style: TextStyle(
+                  fontSize: typography.base,
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.foreground,
+                ),
+              ),
+              const FSeparator(vertical: true),
+              Text(
+                'Forui',
+                style: TextStyle(
+                  fontSize: typography.base,
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.foreground,
+                ),
+              ),
+            ],
           ),
         ],
         ),
