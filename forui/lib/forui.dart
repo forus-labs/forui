@@ -19,7 +19,7 @@ export 'src/theme/themes.dart';
 // Widgets
 export 'src/widgets/badge/badge.dart' hide FBadgeContent, Variant;
 export 'src/foundation/tappable.dart' hide FTappable;
-export 'src/widgets/button/button.dart' hide FButtonContent;
+export 'src/widgets/button/button.dart' hide FButtonContent, Variant;
 export 'src/widgets/card/card.dart' hide FCardContent;
 export 'src/widgets/dialog/dialog.dart' hide FDialogContent, FHorizontalDialogContent, FVerticalDialogContent;
 export 'src/widgets/header/header.dart';
