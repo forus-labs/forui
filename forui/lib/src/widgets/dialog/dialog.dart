@@ -18,7 +18,7 @@ part 'dialog_content.dart';
 /// * https://forui.dev/docs/dialog for working examples.
 /// * [FDialogStyle] for customizing a dialog's appearance.
 class FDialog extends StatelessWidget {
-  /// The dialog's style.
+  /// The dialog's style. Defaults to [FThemeData.dialogStyle].
   final FDialogStyle? style;
 
   /// The duration of the animation to show when the system keyboard intrudes into the space that the dialog is placed in.

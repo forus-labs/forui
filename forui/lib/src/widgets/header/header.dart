@@ -16,7 +16,7 @@ part 'header_action.dart';
 /// * https://forui.dev/docs/header for working examples.
 /// * [FHeaderStyle] for customizing a header's appearance.
 class FHeader extends StatelessWidget {
-  /// The style.
+  /// The header's style. Defaults to [FThemeData.headerStyle].
   final FHeaderStyle? style;
 
   /// The title, aligned to the left.
@@ -120,7 +120,7 @@ final class FHeaderStyle with Diagnosticable {
   /// );
   ///
   /// final copy = style.copyWith(
-  ///   action: 3,
+  ///   action: ...,
   /// );
   ///
   /// print(style.titleTextStyle == copy.titleTextStyle); // true

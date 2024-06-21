@@ -7,23 +7,39 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 part 'text_field_style.dart';
 
 /// A text field.
+///
+/// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
+///
+/// See:
+/// * https://forui.dev/docs/text-field for working examples.
+/// * [FTextFieldStyle] for customizing a text field's appearance.
+/// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget {
   static Widget _defaultContextMenuBuilder(
     BuildContext context,
     EditableTextState editableTextState,
   ) => AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
 
-  /// The style.
+  /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
 
-  /// The label.
+  /// The label above a text field.
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * both [label] and [rawLabel] are not null
   final String? label;
 
-  /// The raw label.
+  /// The raw label above a text field.
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * both [label] and [rawLabel] are not null
   final Widget? rawLabel;
 
   /// The text to display when the text field is empty.
@@ -463,6 +479,12 @@ final class FTextField extends StatelessWidget {
   final Widget? suffixIcon;
 
   /// Creates a [FTextField].
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * both [label] and [rawLabel] are not null
+  /// * both [help] and [rawHelp] are not null
+  /// * both [error] and [rawError] are not null
   const FTextField({
     this.style,
     this.label,
@@ -590,6 +612,12 @@ final class FTextField extends StatelessWidget {
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
   /// when handling the creation of new passwords.
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * both [label] and [rawLabel] are not null
+  /// * both [help] and [rawHelp] are not null
+  /// * both [error] and [rawError] are not null
   const FTextField.password({
     this.style,
     this.label,
@@ -652,6 +680,14 @@ final class FTextField extends StatelessWidget {
     assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   /// Creates a [FTextField] configured for multiline inputs.
+  ///
+  /// The text field's height can be configured by adjusting [minLines].
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * both [label] and [rawLabel] are not null
+  /// * both [help] and [rawHelp] are not null
+  /// * both [error] and [rawError] are not null
   const FTextField.multiline({
     this.style,
     this.label,
@@ -739,7 +775,7 @@ final class FTextField extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 7),
               child: DefaultTextStyle.merge(
-                style: stateStyle.label.scale(typography),
+                style: stateStyle.labelTextStyle.scale(typography),
                 child: label,
               ),
             ),
@@ -750,12 +786,12 @@ final class FTextField extends StatelessWidget {
               // for overriding selectionHandleColor.
               data: Theme.of(context).copyWith(
                 textSelectionTheme: TextSelectionThemeData(
-                  cursorColor: style.cursor,
-                  selectionColor: style.cursor.withOpacity(0.4),
-                  selectionHandleColor: style.cursor,
+                  cursorColor: style.cursorColor,
+                  selectionColor: style.cursorColor.withOpacity(0.4),
+                  selectionHandleColor: style.cursorColor,
                 ),
                 cupertinoOverrideTheme: CupertinoThemeData(
-                  primaryColor: style.cursor,
+                  primaryColor: style.cursorColor,
                 ),
               ),
               child: _textField(context, typography, style, stateStyle),
@@ -786,12 +822,12 @@ final class FTextField extends StatelessWidget {
   ) {
 
     final rawError = this.rawError == null ? this.rawError : DefaultTextStyle.merge(
-      style: current.footer.scale(typography),
+      style: current.footerTextStyle.scale(typography),
       child: this.rawError!,
     );
 
     final rawHelp = this.rawHelp == null ? this.rawHelp : DefaultTextStyle.merge(
-      style: current.footer.scale(typography),
+      style: current.footerTextStyle.scale(typography),
       child: this.rawHelp!,
     );
 
@@ -799,22 +835,22 @@ final class FTextField extends StatelessWidget {
       controller: controller,
       focusNode: focusNode,
       undoController: undoController,
-      cursorErrorColor: style.cursor,
+      cursorErrorColor: style.cursorColor,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
         prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
         contentPadding: style.contentPadding.copyWith(left: 0),
         hintText: hint,
-        hintStyle: current.hint.scale(typography),
+        hintStyle: current.hintTextStyle.scale(typography),
         hintMaxLines: hintMaxLines,
         helper: rawHelp,
         helperText: help,
-        helperStyle: current.footer.scale(typography),
+        helperStyle: current.footerTextStyle.scale(typography),
         helperMaxLines: helpMaxLines,
         error: rawError,
         errorText: error,
-        errorStyle: current.footer.scale(typography),
+        errorStyle: current.footerTextStyle.scale(typography),
         errorMaxLines: errorMaxLines,
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -855,7 +891,7 @@ final class FTextField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       textCapitalization: textCapitalization,
-      style: current.content.scale(typography),
+      style: current.contentTextStyle.scale(typography),
       textAlign: textAlign,
       textAlignVertical: textAlignVertical,
       textDirection: textDirection,
