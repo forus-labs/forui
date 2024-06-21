@@ -66,7 +66,7 @@ void main() {
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: style.background,
+                          color: style.backgroundColor,
                           border: Border.all(
                             color: Colors.blueAccent,
                             width: 2,

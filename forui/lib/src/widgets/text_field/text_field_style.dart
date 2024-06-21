@@ -246,7 +246,7 @@ final class FTextFieldBorderStyle with Diagnosticable {
     width = style.borderWidth,
     radius = style.borderRadius;
 
-  /// Creates a copy of this border style but with the given fields replaced with the new values.
+  /// Returns a copy of this border style but with the given fields replaced with the new values.
   FTextFieldBorderStyle copyWith({
     Color? color,
     double? width,

@@ -64,7 +64,7 @@ final class FSeparatorStyles with Diagnosticable {
       padding: FSeparatorStyle.defaultPadding.vertical
     );
 
-  /// Creates a copy of this [FSeparatorStyles] with the given properties replaced.
+  /// Returns a copy of this [FSeparatorStyles] with the given properties replaced.
   FSeparatorStyles copyWith({FSeparatorStyle? horizontal, FSeparatorStyle? vertical}) => FSeparatorStyles(
     horizontal: horizontal ?? this.horizontal,
     vertical: vertical ?? this.vertical,
@@ -109,7 +109,7 @@ final class FSeparatorStyle with Diagnosticable {
   /// The width of the separating line. Defaults to 1.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `width` <= 0.0
   /// * `width` is Nan
   final double width;
@@ -122,7 +122,7 @@ final class FSeparatorStyle with Diagnosticable {
   FSeparatorStyle.inherit({required FColorScheme colorScheme, required FStyle style, required EdgeInsetsGeometry padding}):
     this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
-  /// Creates a copy of this [FSeparatorStyle] with the given properties replaced.
+  /// Returns a copy of this [FSeparatorStyle] with the given properties replaced.
   FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FSeparatorStyle(
     color: color ?? this.color,
     padding: padding ?? this.padding,

@@ -15,16 +15,21 @@ class FBadgeStyles with Diagnosticable {
   final FBadgeCustomStyle destructive;
 
   /// Creates a [FBadgeStyles].
-  FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
+  FBadgeStyles({
+    required this.primary, 
+    required this.secondary, 
+    required this.outline, 
+    required this.destructive,
+  });
 
   /// Creates a [FBadgeStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FBadgeStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style}):
     primary = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.primary,
-      border: colorScheme.primary,
+      backgroundColor: colorScheme.primary,
+      borderColor: colorScheme.primary,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.primaryForeground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
@@ -33,10 +38,10 @@ class FBadgeStyles with Diagnosticable {
     ),
     secondary = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.secondary,
-      border: colorScheme.secondary,
+      backgroundColor: colorScheme.secondary,
+      borderColor: colorScheme.secondary,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.secondaryForeground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
@@ -45,10 +50,10 @@ class FBadgeStyles with Diagnosticable {
     ),
     outline = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.background,
-      border: colorScheme.border,
+      backgroundColor: colorScheme.background,
+      borderColor: colorScheme.border,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.foreground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
@@ -57,10 +62,10 @@ class FBadgeStyles with Diagnosticable {
     ),
     destructive = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.destructive,
-      border: colorScheme.destructive,
+      backgroundColor: colorScheme.destructive,
+      borderColor: colorScheme.destructive,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.destructiveForeground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
@@ -68,7 +73,7 @@ class FBadgeStyles with Diagnosticable {
       ),
     );
 
-  /// Creates a copy of this [FBadgeStyles] with the given properties replaced.
+  /// Returns a copy of this [FBadgeStyles] with the given properties replaced.
   ///
   /// ```dart
   /// final styles = FBadgeStyles(

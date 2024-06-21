@@ -25,7 +25,7 @@ final class FStyle with Diagnosticable {
     this.borderWidth = 1,
   });
 
-  /// Creates a copy of this [FStyle] with the given properties replaced.
+  /// Returns a copy of this [FStyle] with the given properties replaced.
   ///
   /// ```dart
   /// final style = FStyle(

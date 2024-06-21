@@ -21,7 +21,7 @@ class DialogPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) {
     final actions = [
-      FButton(design: FButtonVariant.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
+      FButton(style: Variant.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
       FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
     ];
 

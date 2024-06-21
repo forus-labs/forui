@@ -100,7 +100,7 @@ final class FCardContentStyle with Diagnosticable {
       color: colorScheme.mutedForeground,
     );
 
-  /// Creates a copy of this [FCardContentStyle] with the given properties replaced.
+  /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
   FCardContentStyle copyWith({EdgeInsets? padding, TextStyle? title, TextStyle? subtitle}) => FCardContentStyle(
       padding: padding ?? this.padding,
       title: title ?? this.title,

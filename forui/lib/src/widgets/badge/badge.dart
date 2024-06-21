@@ -10,7 +10,11 @@ part 'badge_styles.dart';
 
 /// A badge. Badges are typically used to draw attention to specific information, such as labels and counts.
 ///
-/// See https://forui.dev/docs/badge for working examples.
+/// The constants in [FBadgeStyle] provide a convenient way to style a badge.
+///
+/// See:
+/// * https://forui.dev/docs/badge for working examples.
+/// * [FBadgeCustomStyle] for customizing a badge's appearance.
 class FBadge extends StatelessWidget {
   /// The style. Defaults to [FBadgeStyle.primary].
   ///
@@ -57,11 +61,11 @@ class FBadge extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(
-              color: style.border,
+              color: style.borderColor,
               width: style.borderWidth,
             ),
             borderRadius: style.borderRadius,
-            color: style.background,
+            color: style.backgroundColor,
           ),
           child: builder(context, style),
         ),
@@ -115,10 +119,10 @@ sealed class FBadgeStyle {
 /// A custom [FBadge] style.
 final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   /// The background color.
-  final Color background;
+  final Color backgroundColor;
 
   /// The border color.
-  final Color border;
+  final Color borderColor;
 
   /// The border radius. Defaults to `BorderRadius.circular(100)`.
   final BorderRadius borderRadius;
@@ -126,7 +130,7 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   /// The border width (thickness).
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `borderWidth` <= 0.0
   /// * `borderWidth` is Nan
   final double borderWidth;
@@ -136,8 +140,8 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
 
   /// Creates a [FBadgeCustomStyle].
   FBadgeCustomStyle({
-    required this.background,
-    required this.border,
+    required this.backgroundColor,
+    required this.borderColor,
     required this.content,
     this.borderRadius = const BorderRadius.all(Radius.circular(100)),
     this.borderWidth = 1,
@@ -146,38 +150,38 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   /// Creates a [FBadgeCustomStyle] that inherits its properties from [style].
   FBadgeCustomStyle.inherit({
     required FStyle style,
-    required this.background,
-    required this.border,
+    required this.backgroundColor,
+    required this.borderColor,
     required this.content,
   })  : borderRadius = BorderRadius.circular(100),
         borderWidth = style.borderWidth;
 
-  /// Creates a copy of this [FBadgeCustomStyle] with the given properties replaced.
+  /// Returns a copy of this [FBadgeCustomStyle] with the given properties replaced.
   ///
   /// ```dart
   /// final style = FBadgeCustomStyle(
-  ///   background: Colors.red,
-  ///   border: Colors.black,
+  ///   backgroundColor: Colors.red,
+  ///   borderColor: Colors.black,
   ///   // other properties omitted for brevity
   /// );
   ///
   /// final copy = style.copyWith(
-  ///   background: Colors.blue,
+  ///   backgroundColor: Colors.blue,
   /// );
   ///
-  /// print(copy.background); // Colors.blue
-  /// print(copy.border); // Colors.black
+  /// print(copy.backgroundColor); // Colors.blue
+  /// print(copy.borderColor); // Colors.black
   /// ```
   @useResult FBadgeCustomStyle copyWith({
-    Color? background,
-    Color? border,
+    Color? backgroundColor,
+    Color? borderColor,
     BorderRadius? borderRadius,
     double? borderWidth,
     FBadgeContentStyle? content,
   }) =>
       FBadgeCustomStyle(
-        background: background ?? this.background,
-        border: border ?? this.border,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        borderColor: borderColor ?? this.borderColor,
         borderRadius: borderRadius ?? this.borderRadius,
         borderWidth: borderWidth ?? this.borderWidth,
         content: content ?? this.content,
@@ -187,8 +191,8 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ColorProperty('background', background))
-      ..add(ColorProperty('border', border))
+      ..add(ColorProperty('backgroundColor', backgroundColor))
+      ..add(ColorProperty('borderColor', borderColor))
       ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(100)))
       ..add(DoubleProperty('borderWidth', borderWidth))
       ..add(DiagnosticsProperty('content', content));
@@ -199,13 +203,13 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
       identical(this, other) ||
       other is FBadgeCustomStyle &&
           runtimeType == other.runtimeType &&
-          background == other.background &&
-          border == other.border &&
+          backgroundColor == other.backgroundColor &&
+          borderColor == other.borderColor &&
           borderRadius == other.borderRadius &&
           borderWidth == other.borderWidth &&
           content == other.content;
 
   @override
   int get hashCode =>
-      background.hashCode ^ border.hashCode ^ borderRadius.hashCode ^ borderWidth.hashCode ^ content.hashCode;
+      backgroundColor.hashCode ^ borderColor.hashCode ^ borderRadius.hashCode ^ borderWidth.hashCode ^ content.hashCode;
 }

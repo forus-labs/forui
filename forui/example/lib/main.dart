@@ -53,7 +53,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FButton(
-            design: FButtonVariant.destructive,
+            style: Variant.destructive,
             label: 'Delete?',
             onPress: () => showAdaptiveDialog(
               context: context,
@@ -62,7 +62,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                 title: 'Are you absolutely sure?',
                 body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 actions: [
-                  FButton(design: FButtonVariant.outline, label: 'Cancel', onPress: () {
+                  FButton(style: Variant.outline, label: 'Cancel', onPress: () {
                     Navigator.of(context).pop();
                   }),
                   FButton(label: 'Continue', onPress: () {}),

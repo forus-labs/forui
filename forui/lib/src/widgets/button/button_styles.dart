@@ -1,30 +1,31 @@
 part of 'button.dart';
 
-/// [FButtonStyle]'s style.
+/// [FButtonCustomStyle]'s style.
 class FButtonStyles with Diagnosticable {
-  /// The primary style.
-  final FButtonStyle primary;
+  /// The primary button style.
+  final FButtonCustomStyle primary;
 
-  /// The secondary style.
-  final FButtonStyle secondary;
+  /// The secondary  button style.
+  final FButtonCustomStyle secondary;
 
-  /// The destructive style.
-  final FButtonStyle destructive;
+  /// The destructive button style.
+  final FButtonCustomStyle destructive;
 
-  /// The outlined style.
-  final FButtonStyle outlined;
+  /// The outlined button style.
+  final FButtonCustomStyle outline;
 
-  /// Creates a [FButtonStyle].
+  /// Creates a [FButtonCustomStyle].
   const FButtonStyles({
     required this.primary,
     required this.secondary,
     required this.destructive,
-    required this.outlined,
+    required this.outline,
   });
 
-  /// Creates a [FButtonStyle] that inherits its properties from [colorScheme].
+  /// Creates a [FButtonCustomStyle] that inherits its properties from the provided [colorScheme], [typography], and
+  /// [style].
   FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : primary = FButtonStyle(
+      : primary = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
             color: colorScheme.primary,
@@ -35,15 +36,15 @@ class FButtonStyles with Diagnosticable {
           ),
           content: FButtonContentStyle.inherit(
             typography: typography,
-            foreground: colorScheme.primaryForeground,
-            disabledForeground: colorScheme.primaryForeground.withOpacity(0.5),
+            enabled: colorScheme.primaryForeground,
+            disabled: colorScheme.primaryForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle.inherit(
-            foreground: colorScheme.primaryForeground,
-            disabledForeground: colorScheme.primaryForeground.withOpacity(0.5),
+          icon: FButtonIconStyle(
+            enabledColor: colorScheme.primaryForeground,
+            disabledColor: colorScheme.primaryForeground.withOpacity(0.5),
           ),
         ),
-        secondary = FButtonStyle(
+        secondary = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
             color: colorScheme.secondary,
@@ -54,15 +55,15 @@ class FButtonStyles with Diagnosticable {
           ),
           content: FButtonContentStyle.inherit(
             typography: typography,
-            foreground: colorScheme.secondaryForeground,
-            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+            enabled: colorScheme.secondaryForeground,
+            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle.inherit(
-            foreground: colorScheme.secondaryForeground,
-            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+          icon: FButtonIconStyle(
+            enabledColor: colorScheme.secondaryForeground,
+            disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
         ),
-        destructive = FButtonStyle(
+        destructive = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
             color: colorScheme.destructive,
@@ -73,15 +74,15 @@ class FButtonStyles with Diagnosticable {
           ),
           content: FButtonContentStyle.inherit(
             typography: typography,
-            foreground: colorScheme.destructiveForeground,
-            disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5),
+            enabled: colorScheme.destructiveForeground,
+            disabled: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle.inherit(
-            foreground: colorScheme.destructiveForeground,
-            disabledForeground: colorScheme.destructiveForeground.withOpacity(0.5),
+          icon: FButtonIconStyle(
+            enabledColor: colorScheme.destructiveForeground,
+            disabledColor: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
         ),
-        outlined = FButtonStyle(
+        outline = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
             border: Border.all(
               color: colorScheme.border,
@@ -96,14 +97,41 @@ class FButtonStyles with Diagnosticable {
           ),
           content: FButtonContentStyle.inherit(
             typography: typography,
-            foreground: colorScheme.secondaryForeground,
-            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+            enabled: colorScheme.secondaryForeground,
+            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle.inherit(
-            foreground: colorScheme.secondaryForeground,
-            disabledForeground: colorScheme.secondaryForeground.withOpacity(0.5),
+          icon: FButtonIconStyle(
+            enabledColor: colorScheme.secondaryForeground,
+            disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
         );
+
+  /// Returns a copy of this [FButtonStyles] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FButtonStyles(
+  ///   primary: ...,
+  ///   secondary: ...,
+  ///   // Other arguments omitted for brevity
+  /// );
+  ///
+  /// final copy = style.copyWith(secondary: ...);
+  ///
+  /// print(style.primary == copy.primary); // true
+  /// print(style.secondary == copy.secondary); // false
+  /// ```
+  @useResult FButtonStyles copyWith({
+    FButtonCustomStyle? primary,
+    FButtonCustomStyle? secondary,
+    FButtonCustomStyle? destructive,
+    FButtonCustomStyle? outline,
+  }) =>
+      FButtonStyles(
+        primary: primary ?? this.primary,
+        secondary: secondary ?? this.secondary,
+        destructive: destructive ?? this.destructive,
+        outline: outline ?? this.outline,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -112,7 +140,7 @@ class FButtonStyles with Diagnosticable {
       ..add(DiagnosticsProperty('primary', primary))
       ..add(DiagnosticsProperty('secondary', secondary))
       ..add(DiagnosticsProperty('destructive', destructive))
-      ..add(DiagnosticsProperty('outlined', outlined));
+      ..add(DiagnosticsProperty('outlined', outline));
   }
 
   @override
@@ -123,8 +151,8 @@ class FButtonStyles with Diagnosticable {
           primary == other.primary &&
           secondary == other.secondary &&
           destructive == other.destructive &&
-          outlined == other.outlined;
+          outline == other.outline;
 
   @override
-  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outlined.hashCode;
+  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outline.hashCode;
 }

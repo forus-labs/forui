@@ -28,13 +28,13 @@ final class FCard extends StatelessWidget {
     assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
     assert(subtitle == null || rawSubtitle == null, 'Cannot provide both a subtitle and a rawSubtitle.'),
     child = FCardContent(
-    title: title,
-    rawTitle: rawTitle,
-    subtitle: subtitle,
-    rawSubtitle: rawSubtitle,
-    style: style?.content,
-    child: child,
-  );
+      title: title,
+      rawTitle: rawTitle,
+      subtitle: subtitle,
+      rawSubtitle: rawSubtitle,
+      style: style?.content,
+      child: child,
+    );
 
   /// Creates a [FCard].
   const FCard.raw({required this.child, this.style, super.key});
@@ -74,7 +74,7 @@ final class FCardStyle with Diagnosticable {
     ),
     content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography);
 
-  /// Creates a copy of this [FCardStyle] with the given properties replaced.
+  /// Returns a copy of this [FCardStyle] with the given properties replaced.
   FCardStyle copyWith({BoxDecoration? decoration, FCardContentStyle? content}) => FCardStyle(
     decoration: decoration ?? this.decoration,
     content: content ?? this.content,

@@ -16,7 +16,7 @@ class UnderTest extends StatelessWidget {
   Widget build(BuildContext context) {
     final actions = [
       FButton(label: 'Continue', onPress: () {}),
-      FButton(design: FButtonVariant.outline, label: 'Cancel', onPress: () {
+      FButton(style: Variant.outline, label: 'Cancel', onPress: () {
         Navigator.of(context).pop();
       }),
     ];

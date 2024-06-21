@@ -14,6 +14,15 @@ part 'button_icon.dart';
 part 'button_styles.dart';
 
 /// A button.
+///
+/// [FButton]s typically contain icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
+/// button will be disabled, it will not react to touch.
+///
+/// The constants in [FButtonStyle] provide a convenient way to style a badge.
+///
+/// See:
+/// * https://forui.dev/docs/button for working examples.
+/// * [FButtonCustomStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
   @useResult
   static _Data _of(BuildContext context) {
@@ -21,21 +30,27 @@ class FButton extends StatelessWidget {
     return theme?.data ?? (style: context.theme.buttonStyles.primary, enabled: true);
   }
 
-  /// The design. Defaults to [FBadgeVariant.primary].
-  final FButtonDesign design;
+  /// The style. Defaults to [FButtonStyle.primary].
+  ///
+  /// Although typically one of the pre-defined styles in [FButtonStyle], it can also be a [FButtonCustomStyle].
+  final FButtonStyle style;
 
   /// A callback for when the button is pressed.
+  ///
+  /// The button will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onPress;
 
   /// A callback for when the button is long pressed.
+  ///
+  /// The button will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
   ///
+  /// Defaults to false.
+  ///
   /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
   /// autofocus set, then the first one added to the tree will get focus.
-  ///
-  /// Defaults to false.
   final bool autofocus;
 
   /// An optional focus node to use as the focus node for this widget.
@@ -57,10 +72,24 @@ class FButton extends StatelessWidget {
   /// The child.
   final Widget child;
 
-  /// Creates a [FButton].
+  /// Creates a [FButton] that contains a [prefixIcon], [label]/[rawLabel], and [suffixIcon].
+  /// 
+  /// Assuming the locale is read from left to right, the button layout is as follows:
+  /// ```
+  /// |---------------------------------------------------|
+  /// | [prefixIcon]   [label]/[rawLabel]   [suffixIcon]  |
+  /// |---------------------------------------------------|
+  /// ```
+  ///
+  /// [FButtonIcon] provides a convenient way to transform a bundled SVG icon into a [prefixIcon] and [suffixIcon].
+  /// 
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * both [label] and [rawLabel] are not null
+  /// * both [label] and [rawLabel] are null
   FButton({
     required this.onPress,
-    this.design = FButtonVariant.primary,
+    this.style = Variant.primary,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -70,19 +99,19 @@ class FButton extends StatelessWidget {
     String? label,
     Widget? rawLabel,
     super.key,
-  })  : assert((label != null) ^ (rawLabel != null), 'Either label or rawLabel must be provided, but not both.'),
+  })  : assert((label != null) ^ (rawLabel != null), 'Either "label" or "rawLabel" must be provided, but not both.'),
     child = FButtonContent(
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
-      rawLabel: rawLabel,
       label: label,
+      rawLabel: rawLabel,
     );
 
-  /// Creates a [FButton].
+  /// Creates a [FButton] with custom content.
   const FButton.raw({
-    required this.design,
     required this.onPress,
     required this.child,
+    this.style = Variant.primary,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -92,33 +121,33 @@ class FButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = switch (design) {
-      final FButtonStyle style => style,
-      FButtonVariant.primary => context.theme.buttonStyles.primary,
-      FButtonVariant.secondary => context.theme.buttonStyles.secondary,
-      FButtonVariant.outline => context.theme.buttonStyles.outlined,
-      FButtonVariant.destructive => context.theme.buttonStyles.destructive,
+    final style = switch (this.style) {
+      final FButtonCustomStyle style => style,
+      Variant.primary => context.theme.buttonStyles.primary,
+      Variant.secondary => context.theme.buttonStyles.secondary,
+      Variant.outline => context.theme.buttonStyles.outline,
+      Variant.destructive => context.theme.buttonStyles.destructive,
     };
 
     final enabled = onPress != null || onLongPress != null;
 
-    return _InheritedData(
-      data: (style: style, enabled: enabled),
-      child: Semantics(
-        container: true,
-        button: true,
-        enabled: enabled,
-        child: FocusableActionDetector(
-          autofocus: autofocus,
-          focusNode: focusNode,
-          onFocusChange: onFocusChange,
-          child: MouseRegion(
-            cursor: onPress == null && onLongPress == null ? MouseCursor.defer : SystemMouseCursors.click,
-            child: FTappable(
-              onTap: onPress,
-              onLongPress: onLongPress,
-              child: DecoratedBox(
-                decoration: onPress == null && onLongPress == null ? style.disabledBoxDecoration : style.enabledBoxDecoration,
+    return Semantics(
+      container: true,
+      button: true,
+      enabled: enabled,
+      child: FocusableActionDetector(
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        child: MouseRegion(
+          cursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
+          child: FTappable(
+            onTap: onPress,
+            onLongPress: onLongPress,
+            child: DecoratedBox(
+              decoration: enabled ? style.enabledBoxDecoration : style.disabledBoxDecoration,
+              child: _InheritedData(
+                data: (style: style, enabled: enabled),
                 child: child,
               ),
             ),
@@ -132,7 +161,7 @@ class FButton extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('design', design))
+      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
@@ -142,54 +171,84 @@ class FButton extends StatelessWidget {
   }
 }
 
-/// The button design. Either a pre-defined [FButtonVariant], or a custom [FButtonStyle].
-sealed class FButtonDesign {}
+/// A [FButton]'s style.
+///
+/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonCustomStyle]. The pre-defined 
+/// styles are a convenient shorthand for the various [FButtonCustomStyle]s in the current context's [FButtonStyles].
+sealed class FButtonStyle {
+  /// The button's primary style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.primary] style.
+  static const FButtonStyle primary = Variant.primary;
 
-/// A pre-defined button variant.
-enum FButtonVariant implements FButtonDesign {
-  /// A primary-styled button.
+  /// The button's secondary style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.secondary] style.
+  static const FButtonStyle secondary = Variant.secondary;
+
+  /// The button's outline style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.outline] style.
+  static const FButtonStyle outline = Variant.outline;
+
+  /// The button's destructive style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.destructive] style.
+  static const FButtonStyle destructive = Variant.destructive;
+}
+
+@internal enum Variant implements FButtonStyle {
   primary,
-
-  /// A secondary-styled button.
   secondary,
-
-  /// An outlined button.
   outline,
-
-  /// A destructive button.
   destructive,
 }
 
-/// Represents the theme data that is inherited by [FButtonStyle] and used by child [FButton].
-class FButtonStyle extends FButtonDesign with Diagnosticable {
+/// A custom [FButton] style.
+class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   /// The box decoration for an enabled button.
   final BoxDecoration enabledBoxDecoration;
 
   /// The box decoration for a disabled button.
   final BoxDecoration disabledBoxDecoration;
 
-  /// The content.
+  /// The content's style.
   final FButtonContentStyle content;
 
-  /// The icon.
+  /// The icon's style.
   final FButtonIconStyle icon;
 
-  /// Creates a [FButtonStyle].
-  FButtonStyle({
+  /// Creates a [FButtonCustomStyle].
+  FButtonCustomStyle({
     required this.enabledBoxDecoration,
     required this.disabledBoxDecoration,
     required this.content,
     required this.icon,
   });
 
-  /// Creates a copy of this [FButtonStyle] with the given properties replaced.
-  FButtonStyle copyWith({
+  /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FButtonCustomStyle(
+  ///   enabledBoxDecoration: ...,
+  ///   disabledBoxDecoration: ...,
+  ///   // other properties omitted for brevity
+  /// );
+  ///
+  /// final copy = style.copyWith(
+  ///   disabledBoxDecoration: ...,
+  /// );
+  ///
+  /// print(style.background); // Colors.blue
+  /// print(copy.border); // Colors.black
+  /// ```
+  @useResult FButtonCustomStyle copyWith({
     BoxDecoration? enabledBoxDecoration,
     BoxDecoration? disabledBoxDecoration,
     FButtonContentStyle? content,
     FButtonIconStyle? icon,
   }) =>
-      FButtonStyle(
+      FButtonCustomStyle(
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
         disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
         content: content ?? this.content,
@@ -209,7 +268,7 @@ class FButtonStyle extends FButtonDesign with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FButtonStyle &&
+      other is FButtonCustomStyle &&
           runtimeType == other.runtimeType &&
           enabledBoxDecoration == other.enabledBoxDecoration &&
           disabledBoxDecoration == other.disabledBoxDecoration &&
@@ -220,7 +279,7 @@ class FButtonStyle extends FButtonDesign with Diagnosticable {
   int get hashCode => enabledBoxDecoration.hashCode ^ disabledBoxDecoration.hashCode ^ content.hashCode ^ icon.hashCode;
 }
 
-typedef _Data = ({FButtonStyle style, bool enabled});
+typedef _Data = ({FButtonCustomStyle style, bool enabled});
 
 class _InheritedData extends InheritedWidget {
   final _Data data;
