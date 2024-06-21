@@ -54,7 +54,7 @@ part of 'dialog.dart';
                   container: true,
                   child: DefaultTextStyle.merge(
                     textAlign: titleTextAlign,
-                    style: style.title.scale(typography),
+                    style: style.titleTextStyle.scale(typography),
                     child: title,
                   ),
                 ),
@@ -66,7 +66,7 @@ part of 'dialog.dart';
                   container: true,
                   child: DefaultTextStyle.merge(
                     textAlign: bodyTextAlign,
-                    style: style.body.scale(typography),
+                    style: style.bodyTextStyle.scale(typography),
                     child: body,
                   ),
                 ),
@@ -150,23 +150,23 @@ part of 'dialog.dart';
 
 /// The dialog content's style.
 final class FDialogContentStyle with Diagnosticable {
+  /// The title's [TextStyle].
+  final TextStyle titleTextStyle;
+
+  /// The body's [TextStyle].
+  final TextStyle bodyTextStyle;
+
   /// The padding surrounding the content.
   final EdgeInsets padding;
 
-  /// The title style.
-  final TextStyle title;
-
-  /// The body style.
-  final TextStyle body;
-
-  /// The padding between actions.
+  /// The space between actions.
   final double actionPadding;
   
   /// Creates a [FDialogContentStyle].
   FDialogContentStyle({
+    required this.titleTextStyle,
+    required this.bodyTextStyle,
     required this.padding,
-    required this.title,
-    required this.body,
     required this.actionPadding,
   });
   
@@ -177,23 +177,51 @@ final class FDialogContentStyle with Diagnosticable {
     required this.padding,
     required this.actionPadding,
   }):
-    title = TextStyle(
+    titleTextStyle = TextStyle(
       fontSize: typography.lg,
       fontWeight: FontWeight.w600,
       color: colorScheme.foreground,
     ),
-    body = TextStyle(
+    bodyTextStyle = TextStyle(
       fontSize: typography.sm,
       color: colorScheme.mutedForeground,
     );
+
+  /// Returns a copy of this [FDialogContentStyle] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FDialogContentStyle(
+  ///   titleTextStyle: ...,
+  ///   bodyTextStyle: ...,
+  ///   // other properties omitted for brevity
+  /// );
+  ///
+  /// final copy = style.copyWith(
+  ///   bodyTextStyle: ...,
+  /// );
+  ///
+  /// print(style.titleTextStyle == copy.titleTextStyle); // true
+  /// print(style.bodyTextStyle == copy.bodyTextStyle); // false
+  /// ```
+  @useResult FDialogContentStyle copyWith({
+    TextStyle? titleTextStyle,
+    TextStyle? bodyTextStyle,
+    EdgeInsets? padding,
+    double? actionPadding,
+  }) => FDialogContentStyle(
+    titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+    bodyTextStyle: bodyTextStyle ?? this.bodyTextStyle,
+    padding: padding ?? this.padding,
+    actionPadding: actionPadding ?? this.actionPadding,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
+      ..add(DiagnosticsProperty('bodyTextStyle', bodyTextStyle))
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('subtitle', body))
       ..add(DoubleProperty('actionPadding', actionPadding));
   }
 }

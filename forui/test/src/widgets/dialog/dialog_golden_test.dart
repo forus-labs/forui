@@ -7,10 +7,10 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 class UnderTest extends StatelessWidget {
-  final FDialogAlignment alignment;
+  final Axis direction;
   final bool raw;
 
-  const UnderTest({required this.alignment, required this.raw, super.key});
+  const UnderTest({required this.direction, required this.raw, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class UnderTest extends StatelessWidget {
 
     if (raw) {
       return FDialog(
-        alignment: alignment,
+        direction: direction,
         rawTitle: const Text('Are you absolutely sure?'),
         rawBody: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
         actions: actions,
@@ -31,7 +31,7 @@ class UnderTest extends StatelessWidget {
 
     } else {
       return FDialog(
-        alignment: alignment,
+        direction: direction,
         title: 'Are you absolutely sure?',
         body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
         actions: actions,
@@ -43,7 +43,7 @@ class UnderTest extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(EnumProperty('alignment', alignment))
+      ..add(EnumProperty('alignment', direction))
       ..add(DiagnosticsProperty('raw', raw));
   }
 }
@@ -52,38 +52,38 @@ class UnderTest extends StatelessWidget {
 void main() {
   group('FDialog', () {
     for (final (name, theme, background) in TestScaffold.themes) {
-      for (final alignment in [FDialogAlignment.horizontal, FDialogAlignment.vertical]) {
-        testWidgets('$name with $alignment text FDialogContent', (tester) async {
+      for (final direction in Axis.values) {
+        testWidgets('$name with $direction text FDialogContent', (tester) async {
           await tester.pumpWidget(
             MaterialApp(
               home: TestScaffold(
                 data: theme,
                 background: background,
-                child: UnderTest(alignment: alignment, raw: false),
+                child: UnderTest(direction: direction, raw: false),
               ),
             ),
           );
 
           await expectLater(
             find.byType(UnderTest),
-            matchesGoldenFile('dialog/$name-$alignment-text-dialog-content.png'),
+            matchesGoldenFile('dialog/$name-$direction-text-dialog-content.png'),
           );
         });
 
-        testWidgets('$name with $alignment raw FDialogContent', (tester) async {
+        testWidgets('$name with $direction raw FDialogContent', (tester) async {
           await tester.pumpWidget(
             MaterialApp(
               home: TestScaffold(
                 data: theme,
                 background: background,
-                child: UnderTest(alignment: alignment, raw: true),
+                child: UnderTest(direction: direction, raw: true),
               ),
             ),
           );
 
           await expectLater(
             find.byType(UnderTest),
-            matchesGoldenFile('dialog/$name-$alignment-raw-dialog-content.png'),
+            matchesGoldenFile('dialog/$name-$direction-raw-dialog-content.png'),
           );
         });
       }

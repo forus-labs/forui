@@ -10,13 +10,13 @@ import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
 class DialogPage extends SampleScaffold {
-  final FDialogAlignment alignment;
+  final Axis direction;
 
   DialogPage({
     @queryParam super.theme,
     @queryParam bool vertical = false,
   }):
-    alignment = vertical ? FDialogAlignment.vertical : FDialogAlignment.horizontal;
+    direction = vertical ? Axis.vertical : Axis.horizontal;
 
   @override
   Widget child(BuildContext context) {
@@ -34,10 +34,10 @@ class DialogPage extends SampleScaffold {
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
-                alignment: alignment,
+                direction: direction,
                 title: 'Are you absolutely sure?',
                 body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                actions: alignment == FDialogAlignment.vertical ? actions.reversed.toList() : actions,
+                actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
               ),
             ),
           ),

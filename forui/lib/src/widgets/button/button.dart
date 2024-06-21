@@ -74,7 +74,7 @@ class FButton extends StatelessWidget {
 
   /// Creates a [FButton] that contains a [prefixIcon], [label]/[rawLabel], and [suffixIcon].
   /// 
-  /// Assuming the locale is read from left to right, the button layout is as follows:
+  /// The button layout is as follows, assuming the locale is read from left to right:
   /// ```
   /// |---------------------------------------------------|
   /// | [prefixIcon]   [label]/[rawLabel]   [suffixIcon]  |
@@ -239,7 +239,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   ///   disabledBoxDecoration: ...,
   /// );
   ///
-  /// print(style.background); // Colors.blue
+  /// print(copy.background); // Colors.blue
   /// print(copy.border); // Colors.black
   /// ```
   @useResult FButtonCustomStyle copyWith({

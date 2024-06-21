@@ -58,7 +58,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
-                alignment: FDialogAlignment.horizontal,
+                direction: Axis.horizontal,
                 title: 'Are you absolutely sure?',
                 body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 actions: [
