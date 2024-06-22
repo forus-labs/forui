@@ -73,7 +73,7 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(FlagProperty('scrollable', value: scrollable));
+      ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'));
   }
 
   @override
