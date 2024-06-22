@@ -45,6 +45,8 @@ void main() {
       test('heightScalar is NaN', () => expect(() => FTypography(heightScalar: double.nan), throwsAssertionError));
     });
 
+    // TODO: scale function.
+
     group('copyWith(...)', () {
       test('no arguments', () {
         typography.copyWith();
