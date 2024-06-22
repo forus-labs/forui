@@ -121,9 +121,9 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               padding: style.padding,
               indicator: style.indicator,
               indicatorSize: style.indicatorSize,
-              unselectedLabelStyle: style.unselectedLabel.scale(typography),
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabel.scale(typography),
+              unselectedLabelStyle: style.unselectedLabel.scale(typography),
               onTap: (index) {
                 setState(() {
                   _selectedTab = index;
