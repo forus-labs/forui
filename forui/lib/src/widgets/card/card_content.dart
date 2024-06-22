@@ -94,7 +94,7 @@ final class FCardContentStyle with Diagnosticable {
       fontSize: typography.base,
       fontWeight: FontWeight.w600,
       color: colorScheme.foreground,
-    ),
+    ).copyWith(),
     subtitle = TextStyle(
       fontSize: typography.sm,
       color: colorScheme.mutedForeground,
