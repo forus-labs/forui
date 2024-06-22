@@ -1,6 +1,6 @@
 part of 'tabs.dart';
 
-/// An object that manages the state required by [TabBar] and its views.
+/// An object that controls selection in a [FTabs]
 class FTabController implements Listenable {
   final TabController _controller;
 

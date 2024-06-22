@@ -54,7 +54,7 @@ class FTabs extends StatefulWidget {
   final ValueChanged<int>? onTap;
 
   /// Creates a [FTabs].
-  FTabs({
+  const FTabs({
     required this.tabs,
     this.initialIndex = 0,
     this.scrollable = false,
@@ -62,7 +62,7 @@ class FTabs extends StatefulWidget {
     this.style,
     this.onTap,
     super.key,
-  }) : assert(tabs.isNotEmpty, 'Must have at least 1 tab provided');
+  }) : assert(0 < tabs.length, 'Must have at least 1 tab provided');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
