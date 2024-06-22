@@ -73,7 +73,8 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'));
+      ..add(
+          FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'));
   }
 
   @override
@@ -81,13 +82,13 @@ class FTabs extends StatefulWidget {
 }
 
 class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
-  late int _selectedTab;
+  late int _index;
   late final FTabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _selectedTab = widget.initialIndex;
+    _index = widget.initialIndex;
     _controller = FTabController(length: widget.tabs.length, vsync: this);
   }
 
@@ -101,7 +102,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
         Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
     // ignore_for_file: no_leading_underscores_for_local_identifiers
-    final _tabs = Material(
+    final _child = Material(
       color: Colors.transparent,
       child: Column(
         children: [
@@ -115,8 +116,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
                     child: tab.rawLabel ?? Text(tab.label!),
                   )
               ],
-              controller:
-                  (widget.controller ?? _controller)._controller,
+              controller: (widget.controller ?? _controller)._controller,
               isScrollable: widget.scrollable,
               padding: style.padding,
               indicator: style.indicator,
@@ -125,10 +125,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               labelStyle: style.selectedLabel.scale(typography),
               unselectedLabelStyle: style.unselectedLabel.scale(typography),
               onTap: (index) {
-                setState(() {
-                  _selectedTab = index;
-                });
-                widget.onTap?.call(_selectedTab);
+                setState(() => _index = index);
+                widget.onTap?.call(_index);
               },
             ),
           ),
@@ -140,7 +138,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               fontSize: theme.typography.base,
               color: theme.colorScheme.foreground,
             ),
-            child: tabs[_selectedTab].content,
+            child: tabs[_index].content,
           ),
         ],
       ),
@@ -155,9 +153,9 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            child: _tabs,
+            child: _child,
           )
-        : _tabs;
+        : _child;
   }
 
   @override
