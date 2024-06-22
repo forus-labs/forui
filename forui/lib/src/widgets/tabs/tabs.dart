@@ -116,7 +116,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
                   )
               ],
               controller:
-                  widget.controller?._controller ?? _controller._controller,
+                  (widget.controller ?? _controller)._controller,
               isScrollable: widget.scrollable,
               padding: style.padding,
               indicator: style.indicator,
