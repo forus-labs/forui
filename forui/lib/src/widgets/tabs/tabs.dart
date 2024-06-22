@@ -162,7 +162,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 }
