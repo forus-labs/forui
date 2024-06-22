@@ -1,5 +1,9 @@
 <component name="ProjectRunConfigurationManager">
+<<<<<<<< HEAD:.idea/runConfigurations/docs___run.xml
   <configuration default="false" name="docs - run" type="js.build_tools.npm">
+========
+  <configuration default="false" name="Docs - dev" type="js.build_tools.npm">
+>>>>>>>> cce3bd1 (Complete getting started):.idea/runConfigurations/Docs___dev.xml
     <package-json value="$PROJECT_DIR$/docs/package.json" />
     <command value="run" />
     <scripts>

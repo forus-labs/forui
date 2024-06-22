@@ -28,10 +28,6 @@ class Application extends StatelessWidget {
       );
 }
 
-
-
-
-
 class ExampleWidget extends StatefulWidget {
   const ExampleWidget({super.key});
 
@@ -40,7 +36,6 @@ class ExampleWidget extends StatefulWidget {
 }
 
 class _ExampleWidgetState extends State<ExampleWidget> {
-
   @override
   void initState() {
     super.initState();
@@ -69,8 +64,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
 }
