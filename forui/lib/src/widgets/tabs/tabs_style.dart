@@ -39,7 +39,10 @@ final class FTabsStyle with Diagnosticable {
   });
 
   /// Creates a [FTabsStyle] that inherits its properties from [colorScheme].
-  FTabsStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FTabsStyle.inherit(
+      {required FColorScheme colorScheme,
+      required FTypography typography,
+      required FStyle style})
       : decoration = BoxDecoration(
           border: Border.all(color: colorScheme.muted),
           borderRadius: style.borderRadius,
@@ -94,12 +97,12 @@ final class FTabsStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<BoxDecoration>('decoration', decoration))
-      ..add(DiagnosticsProperty<EdgeInsets>('padding', padding))
-      ..add(DiagnosticsProperty<TextStyle>('unselectedLabel', unselectedLabel))
-      ..add(DiagnosticsProperty<TextStyle>('selectedLabel', selectedLabel))
-      ..add(EnumProperty<TabBarIndicatorSize>('indicatorSize', indicatorSize))
-      ..add(DiagnosticsProperty<BoxDecoration>('indicator', indicator))
+      ..add(DiagnosticsProperty('decoration', decoration))
+      ..add(DiagnosticsProperty('padding', padding))
+      ..add(DiagnosticsProperty('unselectedLabel', unselectedLabel))
+      ..add(DiagnosticsProperty('selectedLabel', selectedLabel))
+      ..add(EnumProperty('indicatorSize', indicatorSize))
+      ..add(DiagnosticsProperty('indicator', indicator))
       ..add(DoubleProperty('height', height))
       ..add(DoubleProperty('spacing', spacing));
   }
