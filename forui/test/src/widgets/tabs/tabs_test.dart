@@ -71,29 +71,26 @@ void main() {
 
       expect(tester.takeException(), null);
     });
-    for (final constructor in [
-      (string, raw, content) =>
-          FTabEntry(label: string, rawLabel: raw, content: content),
-    ]) {
-      for (final (string, raw, content) in [
-        ('', null, const SizedBox()),
-        (null, const Text('test'), const SizedBox()),
+
+      for (final (string, raw) in [
+        ('', null),
+        (null, const Text('test')),
       ]) {
         testWidgets('constructor does not throw error', (tester) async {
           expect(
-              () => FTabEntry(label: string, rawLabel: raw, content: content),
-              returnsNormally);
+              () => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()),
+              returnsNormally,
+          );
         });
       }
 
-      for (final (string, raw, content) in [
-        (null, null, const SizedBox()),
-        ('', const Text('test'), const SizedBox()),
+      for (final (string, raw) in [
+        (null, null),
+        ('', const Text('test')),
       ]) {
         testWidgets('constructor throws assertion error', (tester) async {
-          expect(() => constructor(string, raw, content), throwsAssertionError);
+          expect(() => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()), throwsAssertionError,);
         });
       }
-    }
   });
 }

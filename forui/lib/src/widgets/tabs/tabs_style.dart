@@ -1,5 +1,16 @@
 part of 'tabs.dart';
 
+enum Wrapped {
+
+  label(TabIndicatorSize.label),
+  tab(TabIndicatorSize.tab);
+
+  final TabIndicatorSize _value;
+
+  Wrapped(this._value);
+
+}
+
 /// [FTabs]'s style.
 final class FTabsStyle with Diagnosticable {
   /// The decoration.

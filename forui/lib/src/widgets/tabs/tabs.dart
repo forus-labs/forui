@@ -25,10 +25,7 @@ class FTabEntry {
     required this.content,
     this.label,
     this.rawLabel,
-  }) : assert(
-            label == null && rawLabel != null ||
-                rawLabel == null && label != null,
-            'Cannot provide both a label and a rawLabel.');
+  }) : assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.');
 }
 
 /// A [FTabs] that allows switching between tabs.
@@ -53,7 +50,7 @@ class FTabs extends StatefulWidget {
   final FTabsStyle? style;
 
   /// A callback that returns the tab that was tapped.
-  final ValueChanged<int>? onTap;
+  final ValueChanged<int>? onPress;
 
   /// Creates a [FTabs].
   const FTabs({
@@ -62,7 +59,7 @@ class FTabs extends StatefulWidget {
     this.scrollable = false,
     this.controller,
     this.style,
-    this.onTap,
+    this.onPress,
     super.key,
   }) : assert(0 < tabs.length, 'Must have at least 1 tab provided');
 
@@ -74,9 +71,8 @@ class FTabs extends StatefulWidget {
       ..add(IntProperty('initialIndex', initialIndex))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(
-          FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'));
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'));
   }
 
   @override
@@ -128,7 +124,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               unselectedLabelStyle: style.unselectedLabel.scale(typography),
               onTap: (index) {
                 setState(() => _index = index);
-                widget.onTap?.call(_index);
+                widget.onPress?.call(_index);
               },
             ),
           ),
