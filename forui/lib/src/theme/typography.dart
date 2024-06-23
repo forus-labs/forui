@@ -119,6 +119,67 @@ final class FTypography with Diagnosticable {
     this.xl7 = const TextStyle(fontSize: 72, height: 1),
     this.xl8 = const TextStyle(fontSize: 96, height: 1),
   }) : assert(0 < defaultFontFamily.length, 'The defaultFontFamily should not be empty.');
+<<<<<<< HEAD
+=======
+
+  /// Creates a [FTypography] that inherits its properties from [colorScheme].
+  FTypography.inherit({
+    required FColorScheme colorScheme,
+    this.defaultFontFamily = 'packages/forui/Inter',
+  })  : xs = TextStyle(color: colorScheme.foreground, fontSize: 12, height: 1),
+        sm = TextStyle(color: colorScheme.foreground, fontSize: 14, height: 1.25),
+        base = TextStyle(color: colorScheme.foreground, fontSize: 16, height: 1.5),
+        lg = TextStyle(color: colorScheme.foreground, fontSize: 18, height: 1.75),
+        xl = TextStyle(color: colorScheme.foreground, fontSize: 20, height: 1.75),
+        xl2 = TextStyle(color: colorScheme.foreground, fontSize: 22, height: 2),
+        xl3 = TextStyle(color: colorScheme.foreground, fontSize: 30, height: 2.25),
+        xl4 = TextStyle(color: colorScheme.foreground, fontSize: 36, height: 2.5),
+        xl5 = TextStyle(color: colorScheme.foreground, fontSize: 48, height: 1),
+        xl6 = TextStyle(color: colorScheme.foreground, fontSize: 60, height: 1),
+        xl7 = TextStyle(color: colorScheme.foreground, fontSize: 72, height: 1),
+        xl8 = TextStyle(color: colorScheme.foreground, fontSize: 96, height: 1),
+        assert(defaultFontFamily.isNotEmpty, 'The defaultFontFamily should not be empty.');
+
+  /// Scales the fields of this [FTypography] by the given fields.
+  ///
+  /// ```dart
+  /// const typography = FTypography(
+  ///   sm: TextStyle(fontSize: 10),
+  ///   base: TextStyle(fontSize: 20),
+  /// );
+  ///
+  /// final scaled = typography.scale(sizeScalar: 1.5);
+  ///
+  /// print(scaled.sm.fontSize); // 15
+  /// print(scaled.base.fontSize); // 30
+  /// ```
+  @useResult
+  FTypography scale({double sizeScalar = 1}) => FTypography(
+        defaultFontFamily: defaultFontFamily,
+        xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
+        sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
+        base: _scaleTextStyle(style: base, sizeScalar: sizeScalar),
+        lg: _scaleTextStyle(style: lg, sizeScalar: sizeScalar),
+        xl: _scaleTextStyle(style: xl, sizeScalar: sizeScalar),
+        xl2: _scaleTextStyle(style: xl2, sizeScalar: sizeScalar),
+        xl3: _scaleTextStyle(style: xl3, sizeScalar: sizeScalar),
+        xl4: _scaleTextStyle(style: xl4, sizeScalar: sizeScalar),
+        xl5: _scaleTextStyle(style: xl5, sizeScalar: sizeScalar),
+        xl6: _scaleTextStyle(style: xl6, sizeScalar: sizeScalar),
+        xl7: _scaleTextStyle(style: xl7, sizeScalar: sizeScalar),
+        xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
+      );
+
+  TextStyle _scaleTextStyle({
+    required TextStyle style,
+    required double sizeScalar,
+  }) {
+    // default font size; https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
+    final double fontSize = style.fontSize ?? 14;
+
+    return style.copyWith(fontSize: fontSize * sizeScalar);
+  }
+>>>>>>> 3c7613ac53183a10286101d5e283112a565c6df1
 
   /// Creates a [FTypography] that inherits its properties from [colorScheme].
   FTypography.inherit({
@@ -247,6 +308,7 @@ final class FTypography with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
+<<<<<<< HEAD
           other is FTypography &&
               runtimeType == other.runtimeType &&
               defaultFontFamily == other.defaultFontFamily &&
@@ -262,6 +324,23 @@ final class FTypography with Diagnosticable {
               xl6 == other.xl6 &&
               xl7 == other.xl7 &&
               xl8 == other.xl8;
+=======
+      other is FTypography &&
+          runtimeType == other.runtimeType &&
+          defaultFontFamily == other.defaultFontFamily &&
+          xs == other.xs &&
+          sm == other.sm &&
+          base == other.base &&
+          lg == other.lg &&
+          xl == other.xl &&
+          xl2 == other.xl2 &&
+          xl3 == other.xl3 &&
+          xl4 == other.xl4 &&
+          xl5 == other.xl5 &&
+          xl6 == other.xl6 &&
+          xl7 == other.xl7 &&
+          xl8 == other.xl8;
+>>>>>>> 3c7613ac53183a10286101d5e283112a565c6df1
 
   @override
   int get hashCode =>
