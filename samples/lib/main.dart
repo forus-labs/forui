@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart' hide DialogRoute;
 
-// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-// Project imports:
 import 'package:forui_samples/main.gr.dart';
 
 void main() {

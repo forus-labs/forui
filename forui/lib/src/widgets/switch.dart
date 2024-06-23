@@ -2,12 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 
 /// A control that allows the user to toggle between checked and unchecked.
+///
+/// Typically used to toggle the on/off state of a single setting.
+///
+/// See:
+/// * https://forui.dev/docs/switch for working examples.
+/// * [FSwitchStyle] for customizing a switch's appearance.
 class FSwitch extends StatelessWidget {
-
-  /// The style. Defaults to the appropriate style in [FThemeData.switchStyle] if null.
+  /// The style. Defaults to [FThemeData.switchStyle].
   final FSwitchStyle? style;
 
   /// True if this switch is checked, and false if unchecked.
@@ -39,10 +46,10 @@ class FSwitch extends StatelessWidget {
 
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
   ///
+  /// Defaults to false.
+  ///
   /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
   /// autofocus set, then the first one added to the tree will get focus.
-  ///
-  /// Defaults to false.
   final bool autofocus;
 
   /// An optional focus node to use as the focus node for this widget.
@@ -93,10 +100,10 @@ class FSwitch extends StatelessWidget {
     return CupertinoSwitch(
       value: value,
       onChanged: onChanged,
-      activeColor: style.checked,
-      trackColor: style.unchecked,
-      thumbColor: style.thumb,
-      focusColor: style.focus,
+      activeColor: style.checkedColor,
+      trackColor: style.uncheckedColor,
+      thumbColor: style.thumbColor,
+      focusColor: style.focusColor,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -110,44 +117,43 @@ class FSwitch extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('value', value: value))
-      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start))
-      ..add(DiagnosticsProperty('onChanged', onChanged, defaultValue: null))
-      ..add(DiagnosticsProperty('focusNode', focusNode, defaultValue: null))
-      ..add(DiagnosticsProperty('onFocusChange', onFocusChange, defaultValue: null));
+      ..add(DiagnosticsProperty('onChanged', onChanged))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(DiagnosticsProperty('onFocusChange', onFocusChange));
   }
 
 }
 
-/// The style of a [FSwitch].
+/// [FSwitch]'s style.
 final class FSwitchStyle with Diagnosticable {
+  /// The track's color when checked.
+  final Color checkedColor;
 
-  /// The track's color when checked. Defaults to [FColorScheme.primary].
-  final Color checked;
+  /// The track's color when unchecked.
+  final Color uncheckedColor;
 
-  /// The track's color when unchecked. Defaults to [FColorScheme.border].
-  final Color unchecked;
+  /// The thumb's color.
+  final Color thumbColor;
 
-  /// The thumb's color. Defaults to [FColorScheme.background].
-  final Color thumb;
-
-  /// This switch's color when focused. Defaults to a slightly transparent [checked] color.
-  final Color focus;
+  /// This switch's color when focused.
+  final Color focusColor;
 
   /// Creates a [FSwitchStyle].
   const FSwitchStyle({
-    required this.checked,
-    required this.unchecked,
-    required this.thumb,
-    required this.focus,
+    required this.checkedColor,
+    required this.uncheckedColor,
+    required this.thumbColor,
+    required this.focusColor,
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
   FSwitchStyle.inherit({required FColorScheme colorScheme})
-      : checked = colorScheme.primary,
-        unchecked = colorScheme.border,
-        thumb = colorScheme.background,
-        focus = HSLColor.fromColor(colorScheme.primary.withOpacity(0.80))
+      : checkedColor = colorScheme.primary,
+        uncheckedColor = colorScheme.border,
+        thumbColor = colorScheme.background,
+        focusColor = HSLColor.fromColor(colorScheme.primary.withOpacity(0.80))
             .withLightness(0.69)
             .withSaturation(0.835)
             .toColor();
@@ -156,23 +162,48 @@ final class FSwitchStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ColorProperty('checked', checked))
-      ..add(ColorProperty('unchecked', unchecked))
-      ..add(ColorProperty('thumb', thumb))
-      ..add(ColorProperty('focus', focus));
+      ..add(ColorProperty('checkedColor', checkedColor))
+      ..add(ColorProperty('uncheckedColor', uncheckedColor))
+      ..add(ColorProperty('thumbColor', thumbColor))
+      ..add(ColorProperty('focusColor', focusColor));
   }
+
+  /// Returns a copy of this [FSwitchStyle] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FSwitch(
+  ///   checkedColor: Colors.black,
+  ///   uncheckedColor: Colors.white,
+  ///   // Other arguments omitted for brevity
+  /// );
+  ///
+  /// final copy = style.copyWith(uncheckedColor: Colors.blue);
+  ///
+  /// print(copy.checkedColor); // black
+  /// print(copy.uncheckedColor); // blue
+  /// ```
+  @useResult FSwitchStyle copyWith({
+    Color? checkedColor,
+    Color? uncheckedColor,
+    Color? thumbColor,
+    Color? focusColor,
+  }) => FSwitchStyle(
+      checkedColor: checkedColor ?? this.checkedColor,
+      uncheckedColor: uncheckedColor ?? this.uncheckedColor,
+      thumbColor: thumbColor ?? this.thumbColor,
+      focusColor: focusColor ?? this.focusColor,
+    );
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is FSwitchStyle &&
           runtimeType == other.runtimeType &&
-          checked == other.checked &&
-          unchecked == other.unchecked &&
-          thumb == other.thumb &&
-          focus == other.focus;
+          checkedColor == other.checkedColor &&
+          uncheckedColor == other.uncheckedColor &&
+          thumbColor == other.thumbColor &&
+          focusColor == other.focusColor;
 
   @override
-  int get hashCode => checked.hashCode ^ unchecked.hashCode ^ thumb.hashCode ^ focus.hashCode;
-
+  int get hashCode => checkedColor.hashCode ^ uncheckedColor.hashCode ^ thumbColor.hashCode ^ focusColor.hashCode;
 }

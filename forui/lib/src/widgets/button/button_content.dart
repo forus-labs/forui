@@ -17,13 +17,12 @@ final class FButtonContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final typography = context.theme.typography;
     final (:style, :enabled) = FButton._of(context);
 
     return Padding(
         padding: style.content.padding,
         child: DefaultTextStyle.merge(
-          style: enabled ? style.content.enabledText.scale(typography) : style.content.disabledText.scale(typography),
+          style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: separate([
@@ -51,47 +50,72 @@ final class FButtonContent extends StatelessWidget {
 /// [FButtonContent]'s style.
 class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is enabled.
-  final TextStyle enabledText;
+  final TextStyle enabledTextStyle;
 
   /// The [TextStyle] when this button is disabled.
-  final TextStyle disabledText;
+  final TextStyle disabledTextStyle;
 
   /// The padding.
   final EdgeInsets padding;
 
   /// Creates a [FButtonContentStyle].
   FButtonContentStyle({
-    required this.enabledText,
-    required this.disabledText,
+    required this.enabledTextStyle,
+    required this.disabledTextStyle,
     required this.padding,
   });
 
-  /// Creates a [FButtonContentStyle] that inherits its properties from the given [foreground] and [disabledForeground].
+  /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled].
   FButtonContentStyle.inherit({
     required FTypography typography,
-    required Color foreground,
-    required Color disabledForeground,
+    required Color enabled,
+    required Color disabled,
   })  : padding = const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 12.5,
         ),
-        enabledText = TextStyle(
-          fontSize: typography.base,
+        enabledTextStyle = typography.base.copyWith(
+          color: enabled,
           fontWeight: FontWeight.w500,
-          color: foreground,
+          height: 1,
         ),
-        disabledText = TextStyle(
-          fontSize: typography.base,
+        disabledTextStyle = typography.base.copyWith(
+          color: disabled,
           fontWeight: FontWeight.w500,
-          color: disabledForeground,
+          height: 1,
         );
+
+  /// Returns a copy of this [FButtonContentStyle] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FButtonContentStyle(
+  ///   enabledTextStyle: ...,
+  ///   disabledTextStyle: ...,
+  /// );
+  ///
+  /// final copy = style.copyWith(
+  ///   disabledTextStyle: ...,
+  /// );
+  ///
+  /// print(style.enabledTextStyle == copy.enabledTextStyle); // true
+  /// print(style.disabledTextStyle == copy.disabledTextStyle); // false
+  /// ```
+  @useResult FButtonContentStyle copyWith({
+    TextStyle? enabledTextStyle,
+    TextStyle? disabledTextStyle,
+    EdgeInsets? padding,
+  }) => FButtonContentStyle(
+      enabledTextStyle: enabledTextStyle ?? this.enabledTextStyle,
+      disabledTextStyle: disabledTextStyle ?? this.disabledTextStyle,
+      padding: padding ?? this.padding,
+    );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('enabledText', enabledText))
-      ..add(DiagnosticsProperty('disabledText', disabledText))
+      ..add(DiagnosticsProperty('enabledTextStyle', enabledTextStyle))
+      ..add(DiagnosticsProperty('disabledTextStyle', disabledTextStyle))
       ..add(DiagnosticsProperty('padding', padding));
   }
 
@@ -100,10 +124,10 @@ class FButtonContentStyle with Diagnosticable {
       identical(this, other) ||
       other is FButtonContentStyle &&
           runtimeType == other.runtimeType &&
-          enabledText == other.enabledText &&
-          disabledText == other.disabledText &&
+          enabledTextStyle == other.enabledTextStyle &&
+          disabledTextStyle == other.disabledTextStyle &&
           padding == other.padding;
 
   @override
-  int get hashCode => enabledText.hashCode ^ disabledText.hashCode ^ padding.hashCode;
+  int get hashCode => enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
 }

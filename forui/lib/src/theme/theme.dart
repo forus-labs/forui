@@ -75,7 +75,8 @@ class FTheme extends StatelessWidget {
   ///    );
   ///  }
   /// ```
-  @useResult static FThemeData of(BuildContext context) {
+  @useResult
+  static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
     return theme?.data ?? FThemes.zinc.light;
   }
@@ -99,25 +100,25 @@ class FTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _InheritedTheme(
-    data: data,
-    child: Directionality(
-      textDirection: textDirection ?? Directionality.of(context),
-      child: DefaultTextStyle(
-        style: data.typography.toTextStyle(
-          fontSize: data.typography.base,
-          color: data.colorScheme.foreground,
+        data: data,
+        child: Directionality(
+          textDirection: textDirection ?? Directionality.of(context),
+          child: DefaultTextStyle(
+            style: data.typography.base.copyWith(
+              fontFamily: data.typography.defaultFontFamily,
+              color: data.colorScheme.foreground,
+            ),
+            child: child,
+          ),
         ),
-        child: child,
-      ),
-    ),
-  );
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FThemeData>('data', data, showName: false))
-      ..add(EnumProperty<TextDirection?>('textDirection', textDirection));
+      ..add(DiagnosticsProperty('data', data, showName: false))
+      ..add(EnumProperty('textDirection', textDirection));
   }
 }
 
@@ -132,13 +133,12 @@ class _InheritedTheme extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FThemeData>('data', data));
+    properties.add(DiagnosticsProperty('data', data));
   }
 }
 
 /// Provides functions for accessing the current [FThemeData].
 extension ThemeBuildContext on BuildContext {
-
   /// Returns the current [FThemeData], or [FThemes.zinc.light] if there is no ancestor [FTheme].
   ///
   /// ## Troubleshooting:
@@ -180,5 +180,4 @@ extension ThemeBuildContext on BuildContext {
   ///  }
   /// ```
   FThemeData get theme => FTheme.of(this);
-
 }

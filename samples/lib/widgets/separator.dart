@@ -1,11 +1,8 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-// Project imports:
 import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
@@ -28,22 +25,33 @@ class SeparatorPage extends SampleScaffold {
         children: [
           Text(
             'Forui',
-            style: TextStyle(
-              fontSize: typography.base,
-              fontWeight: FontWeight.w600,
+            style: typography.base.copyWith(
               color: colorScheme.foreground,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const FSeparator(),
-          Text(
-            'An open-source UI component library.',
-            style: TextStyle(
-              fontSize: typography.sm,
-              color: colorScheme.mutedForeground,
-            ),
+          Row(
+            children: [
+              Text(
+                'Forui',
+                style: typography.base.copyWith(
+                  color: colorScheme.foreground,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const FSeparator(vertical: true),
+              Text(
+                'Forui',
+                style: typography.base.copyWith(
+                  color: colorScheme.foreground,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
           ),
         ],
-        ),
+      ),
     );
   }
 }

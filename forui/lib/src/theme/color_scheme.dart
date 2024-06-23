@@ -111,7 +111,7 @@ final class FColorScheme with Diagnosticable {
     required this.border,
   });
 
-  /// Creates a copy of this [FColorScheme] with the given properties replaced.
+  /// Returns a copy of this [FColorScheme] with the given properties replaced.
   ///
   /// ```dart
   /// final scheme = FColorScheme(

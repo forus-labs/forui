@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/button/button.dart';
 import '../test_scaffold.dart';
 
 void main() {
   group('FButton', () {
     for (final (name, theme, _) in TestScaffold.themes) {
-      for (final variant in FButtonVariant.values) {
+      for (final variant in Variant.values) {
         testWidgets('$name enabled with FButtonContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -20,7 +21,7 @@ void main() {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
                   label: 'Button',
-                  design: variant,
+                  style: variant,
                   prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
                   suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: () {},
@@ -43,7 +44,7 @@ void main() {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
                   label: 'Button',
-                  design: variant,
+                  style: variant,
                   prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
                   suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: null,
@@ -65,7 +66,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton.raw(
-                  design: variant,
+                  style: variant,
                   onPress: () {},
                   child: Padding(
                     padding: const EdgeInsets.all(50),
@@ -104,7 +105,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton.raw(
-                  design: variant,
+                  style: variant,
                   onPress: null,
                   child: Padding(
                     padding: const EdgeInsets.all(50),

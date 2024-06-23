@@ -49,9 +49,6 @@ final class FThemeData with Diagnosticable {
   /// The switch style.
   final FSwitchStyle switchStyle;
 
-  /// The tabs style.
-  final FTabsStyle tabsStyle;
-
   /// Creates a [FThemeData].
   ///
   /// **Note:**
@@ -68,31 +65,38 @@ final class FThemeData with Diagnosticable {
     required this.textFieldStyle,
     required this.separatorStyles,
     required this.switchStyle,
-    required this.tabsStyle,
     this.typography = const FTypography(),
     this.style = const FStyle(),
   });
 
   /// Creates a [FThemeData] that configures the widget styles using the given properties.
-  FThemeData.inherit({
-    required this.colorScheme,
-    this.typography = const FTypography(),
-    this.style = const FStyle(),
-  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        buttonStyles = FButtonStyles.inherit(
-          colorScheme: colorScheme,
-          typography: typography,
-          style: style,
-        ),
-        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        dialogStyle = FDialogStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
-        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
-        textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
-        switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme),
-        tabsStyle = FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
+  factory FThemeData.inherit({
+    required FColorScheme colorScheme,
+    FStyle style = const FStyle(),
+    FTypography? typography,
+  }) {
+    typography ??= FTypography.inherit(colorScheme: colorScheme);
 
-  /// Creates a copy of this [FThemeData] with the given properties replaced.
+    return FThemeData(
+      colorScheme: colorScheme,
+      typography: typography,
+      style: style,
+      badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      buttonStyles: FButtonStyles.inherit(
+        colorScheme: colorScheme,
+        typography: typography,
+        style: style,
+      ),
+      cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      dialogStyle: FDialogStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
+      headerStyle: FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
+      textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      separatorStyles: FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
+      switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme),
+    );
+  }
+
+  /// Returns a copy of this [FThemeData] with the given properties replaced.
   ///
   /// ```dart
   /// final foo = FTypography();
@@ -108,7 +112,8 @@ final class FThemeData with Diagnosticable {
   /// print(theme.colorScheme == copy.colorScheme); // true
   /// print(copy.typography); // bar
   /// ```
-  @useResult FThemeData copyWith({
+  @useResult
+  FThemeData copyWith({
     FColorScheme? colorScheme,
     FTypography? typography,
     FStyle? style,
@@ -120,7 +125,6 @@ final class FThemeData with Diagnosticable {
     FTextFieldStyle? textFieldStyle,
     FSeparatorStyles? separatorStyles,
     FSwitchStyle? switchStyle,
-    FTabsStyle? tabsStyle,
   }) =>
       FThemeData(
         colorScheme: colorScheme ?? this.colorScheme,
@@ -134,7 +138,6 @@ final class FThemeData with Diagnosticable {
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         separatorStyles: separatorStyles ?? this.separatorStyles,
         switchStyle: switchStyle ?? this.switchStyle,
-        tabsStyle: tabsStyle ?? this.tabsStyle,
       );
 
   @override
@@ -151,8 +154,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
 
   @override
@@ -170,8 +172,7 @@ final class FThemeData with Diagnosticable {
           headerStyle == other.headerStyle &&
           textFieldStyle == other.textFieldStyle &&
           separatorStyles == other.separatorStyles &&
-          switchStyle == other.switchStyle &&
-          tabsStyle == other.tabsStyle;
+          switchStyle == other.switchStyle;
 
   @override
   int get hashCode =>
@@ -185,6 +186,5 @@ final class FThemeData with Diagnosticable {
       headerStyle.hashCode ^
       textFieldStyle.hashCode ^
       separatorStyles.hashCode ^
-      switchStyle.hashCode ^
-      tabsStyle.hashCode;
+      switchStyle.hashCode;
 }
