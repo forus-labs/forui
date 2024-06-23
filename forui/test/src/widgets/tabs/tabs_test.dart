@@ -13,7 +13,9 @@ void main() {
         CupertinoApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: FTabs(tabs: [FTabEntry(label: 'Account', content: Container(height: 100))]),
+            child: FTabs(tabs: [
+              FTabEntry(label: 'Account', content: Container(height: 100))
+            ]),
           ),
         ),
       );
@@ -26,7 +28,9 @@ void main() {
         MaterialApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: FTabs(tabs: [FTabEntry(label: 'Account', content: Container(height: 100))]),
+            child: FTabs(tabs: [
+              FTabEntry(label: 'Account', content: Container(height: 100))
+            ]),
           ),
         ),
       );
@@ -38,7 +42,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
-          child: FTabs(tabs: [FTabEntry(label: 'Account', content: Container(height: 100))]),
+          child: FTabs(tabs: [
+            FTabEntry(label: 'Account', content: Container(height: 100))
+          ]),
         ),
       );
 
@@ -56,12 +62,38 @@ void main() {
           ],
           child: TestScaffold(
             data: FThemes.zinc.light,
-            child: FTabs(tabs: [FTabEntry(label: 'Account', content: Container(height: 100))]),
+            child: FTabs(tabs: [
+              FTabEntry(label: 'Account', content: Container(height: 100))
+            ]),
           ),
         ),
       );
 
       expect(tester.takeException(), null);
     });
+    for (final constructor in [
+      (string, raw, content) =>
+          FTabEntry(label: string, rawLabel: raw, content: content),
+    ]) {
+      for (final (string, raw, content) in [
+        ('', null, const SizedBox()),
+        (null, const Text('test'), const SizedBox()),
+      ]) {
+        testWidgets('constructor does not throw error', (tester) async {
+          expect(
+              () => FTabEntry(label: string, rawLabel: raw, content: content),
+              returnsNormally);
+        });
+      }
+
+      for (final (string, raw, content) in [
+        (null, null, const SizedBox()),
+        ('', const Text('test'), const SizedBox()),
+      ]) {
+        testWidgets('constructor throws assertion error', (tester) async {
+          expect(() => constructor(string, raw, content), throwsAssertionError);
+        });
+      }
+    }
   });
 }

@@ -25,7 +25,9 @@ class FTabEntry {
     required this.content,
     this.label,
     this.rawLabel,
-  }) : assert(label == null || rawLabel == null,
+  }) : assert(
+            label == null && rawLabel != null ||
+                rawLabel == null && label != null,
             'Cannot provide both a label and a rawLabel.');
 }
 
