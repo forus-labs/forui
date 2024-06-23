@@ -72,9 +72,9 @@ final class FThemeData with Diagnosticable {
   /// Creates a [FThemeData] that configures the widget styles using the given properties.
   FThemeData.inherit({
     required this.colorScheme,
-    this.typography = const FTypography(),
     this.style = const FStyle(),
-  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+  })  : typography = FTypography.inherit(colorScheme: colorScheme),
+        badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
         buttonStyles = FButtonStyles.inherit(
           colorScheme: colorScheme,
           typography: typography,
