@@ -27,8 +27,6 @@ sealed class FDialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final typography = context.theme.typography;
-
     final title = switch ((this.title, rawTitle)) {
       (final String title, _) => Text(title),
       (_, final Widget title) => title,
