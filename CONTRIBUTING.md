@@ -97,41 +97,6 @@ They should:
 5. implement `operator ==` and `hashCode`.
 
 
-Widget should not scale `TextStyle`S during initialization. `TextStyle`s should be scaled in a widget's build method instead.
-This avoids confusion about whether `TextStyle`s are automatically scaled inside widget styles.
-
-✅ Prefer this:
-```dart
-class FooStyle {
-  final TextStyle text;
-  
-  FooStyle.inherit({FFont font, FColorScheme scheme}): text = const TextStyle(size: 1);
-}
-
-class Foo extends StatelessWidget {
-  final FooStyle style;
-  
-  @overrride
-  Widget build(BuildContext context) => Text('Hi', style: style.text.withFont(context.theme.font));
-}
-```
-
-❌ Instead of:
-```dart
-class FooStyle {
-  final TextStyle text;
-
-  FooStyle.inherit({FFont font, FColorScheme scheme}): text = const TextStyle(size: 1).withFont(font);
-}
-
-class Foo extends StatelessWidget {
-  final FooStyle style;
-
-  @overrride
-  Widget build(BuildContext context) => Text('Hi', style: style.text);
-}
-```
-
 ## Expose `String` and `Widget` variants of the same parameter.
 
 Widgets typically contain string-based content such as titles and labels. These widgets should expose a `String` and
