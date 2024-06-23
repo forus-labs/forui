@@ -87,28 +87,27 @@ class FDialog extends StatelessWidget {
     Widget? rawBody,
     Axis direction = Axis.vertical,
     super.key,
-  }):
-    assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
-    assert(body == null || rawBody == null, 'Cannot provide both a body and a rawBody.'),
-    semanticLabel = semanticLabel ?? title,
-    builder = switch (direction) {
-      Axis.horizontal => (context, style) => FHorizontalDialogContent(
-        style: style.horizontal,
-        title: title,
-        rawTitle: rawTitle,
-        body: body,
-        rawBody: rawBody,
-        actions: actions,
-      ),
-      Axis.vertical => (context, style) => FVerticalDialogContent(
-        style: style.vertical,
-        title: title,
-        rawTitle: rawTitle,
-        body: body,
-        rawBody: rawBody,
-        actions: actions,
-      ),
-    };
+  })  : assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
+        assert(body == null || rawBody == null, 'Cannot provide both a body and a rawBody.'),
+        semanticLabel = semanticLabel ?? title,
+        builder = switch (direction) {
+          Axis.horizontal => (context, style) => FHorizontalDialogContent(
+                style: style.horizontal,
+                title: title,
+                rawTitle: rawTitle,
+                body: body,
+                rawBody: rawBody,
+                actions: actions,
+              ),
+          Axis.vertical => (context, style) => FVerticalDialogContent(
+                style: style.vertical,
+                title: title,
+                rawTitle: rawTitle,
+                body: body,
+                rawBody: rawBody,
+                actions: actions,
+              ),
+        };
 
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({
@@ -123,8 +122,8 @@ class FDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final style = this.style ?? theme.dialogStyle;
     final typography = theme.typography;
+    final style = this.style ?? theme.dialogStyle;
 
     return AnimatedPadding(
       padding: MediaQuery.viewInsetsOf(context) + style.insetPadding,
@@ -138,10 +137,7 @@ class FDialog extends StatelessWidget {
         context: context,
         child: Align(
           child: DefaultTextStyle(
-            style: context.theme.typography.toTextStyle(
-              fontSize: typography.base,
-              color: context.theme.colorScheme.foreground,
-            ),
+            style: typography.base.copyWith(color: theme.colorScheme.foreground),
             child: Semantics(
               scopesRoute: true,
               explicitChildNodes: true,
@@ -169,7 +165,8 @@ class FDialog extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration, defaultValue: const Duration(milliseconds: 100)))
+      ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration,
+          defaultValue: const Duration(milliseconds: 100)))
       ..add(DiagnosticsProperty('insetAnimationCurve', insetAnimationCurve, defaultValue: Curves.decelerate))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('builder', builder));
@@ -207,26 +204,26 @@ final class FDialogStyle with Diagnosticable {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties from the given [style], [colorScheme], and [typography].
-  FDialogStyle.inherit({required FStyle style, required FColorScheme colorScheme, required FTypography typography}):
-    decoration = BoxDecoration(
-      borderRadius: style.borderRadius,
-      color: colorScheme.background,
-    ),
-    insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
-    horizontal = FDialogContentStyle.inherit(
-      colorScheme: colorScheme,
-      typography: typography,
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-      actionPadding: 7,
-    ),
-    vertical = FDialogContentStyle.inherit(
-      colorScheme: colorScheme,
-      typography: typography,
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-      actionPadding: 8,
-    ),
-    minWidth = 280,
-    maxWidth = 560;
+  FDialogStyle.inherit({required FStyle style, required FColorScheme colorScheme, required FTypography typography})
+      : decoration = BoxDecoration(
+          borderRadius: style.borderRadius,
+          color: colorScheme.background,
+        ),
+        insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+        horizontal = FDialogContentStyle.inherit(
+          colorScheme: colorScheme,
+          typography: typography,
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          actionPadding: 7,
+        ),
+        vertical = FDialogContentStyle.inherit(
+          colorScheme: colorScheme,
+          typography: typography,
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+          actionPadding: 8,
+        ),
+        minWidth = 280,
+        maxWidth = 560;
 
   /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
   ///
@@ -244,21 +241,23 @@ final class FDialogStyle with Diagnosticable {
   /// print(copy.minWidth); // 1
   /// print(copy.maxWidth); // 3
   /// ```
-  @useResult FDialogStyle copyWith({
+  @useResult
+  FDialogStyle copyWith({
     BoxDecoration? decoration,
     EdgeInsets? insetPadding,
     FDialogContentStyle? horizontal,
     FDialogContentStyle? vertical,
     double? minWidth,
     double? maxWidth,
-  }) => FDialogStyle(
-      decoration: decoration ?? this.decoration,
-      insetPadding: insetPadding ?? this.insetPadding,
-      horizontal: horizontal ?? this.horizontal,
-      vertical: vertical ?? this.vertical,
-      minWidth: minWidth ?? this.minWidth,
-      maxWidth: maxWidth ?? this.maxWidth,
-    );
+  }) =>
+      FDialogStyle(
+        decoration: decoration ?? this.decoration,
+        insetPadding: insetPadding ?? this.insetPadding,
+        horizontal: horizontal ?? this.horizontal,
+        vertical: vertical ?? this.vertical,
+        minWidth: minWidth ?? this.minWidth,
+        maxWidth: maxWidth ?? this.maxWidth,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

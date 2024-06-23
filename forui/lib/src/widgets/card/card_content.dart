@@ -1,6 +1,7 @@
 part of 'card.dart';
 
-@internal final class FCardContent extends StatelessWidget {
+@internal
+final class FCardContent extends StatelessWidget {
   final String? title;
   final Widget? rawTitle;
   final String? subtitle;
@@ -13,28 +14,27 @@ part of 'card.dart';
     this.rawTitle,
     this.subtitle,
     this.rawSubtitle,
-    this.child, 
-    this.style, 
+    this.child,
+    this.style,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final typography = context.theme.typography;
     final style = this.style ?? context.theme.cardStyle.content;
-    
+
     final title = switch ((this.title, rawTitle)) {
       (final String title, _) => Text(title),
       (_, final Widget title) => title,
       _ => null,
     };
-    
+
     final subtitle = switch ((this.subtitle, rawSubtitle)) {
       (final String subtitle, _) => Text(subtitle),
       (_, final Widget subtitle) => subtitle,
       _ => null,
     };
-    
+
     return Padding(
       padding: style.padding,
       child: Column(
@@ -42,19 +42,18 @@ part of 'card.dart';
         children: [
           if (title != null)
             DefaultTextStyle.merge(
-              style: style.titleTextStyle.scale(typography),
+              style: style.titleTextStyle,
               child: title,
             ),
-          
           if (subtitle != null)
             DefaultTextStyle.merge(
-              style: style.subtitleTextStyle.scale(typography),
+              style: style.subtitleTextStyle,
               child: subtitle,
             ),
-
           if (child != null)
             Padding(
-              padding: (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),
+              padding:
+                  (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),
               child: child!,
             ),
         ],
@@ -91,17 +90,13 @@ final class FCardContentStyle with Diagnosticable {
   });
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
-  FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography}):
-    titleTextStyle = TextStyle(
-      fontSize: typography.base,
-      fontWeight: FontWeight.w600,
-      color: colorScheme.foreground,
-    ),
-    subtitleTextStyle = TextStyle(
-      fontSize: typography.sm,
-      color: colorScheme.mutedForeground,
-    ),
-    padding = const EdgeInsets.fromLTRB(16, 12, 16, 16);
+  FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+      : titleTextStyle = typography.base.copyWith(
+          fontWeight: FontWeight.w600,
+          color: colorScheme.foreground,
+        ),
+        subtitleTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground),
+        padding = const EdgeInsets.fromLTRB(16, 12, 16, 16);
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
   ///
@@ -120,11 +115,12 @@ final class FCardContentStyle with Diagnosticable {
     TextStyle? titleTextStyle,
     TextStyle? subtitleTextStyle,
     EdgeInsets? padding,
-  }) => FCardContentStyle(
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-      subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
-      padding: padding ?? this.padding,
-    );
+  }) =>
+      FCardContentStyle(
+        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+        subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
+        padding: padding ?? this.padding,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -136,11 +132,13 @@ final class FCardContentStyle with Diagnosticable {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is FCardContentStyle &&
-      runtimeType == other.runtimeType &&
-      titleTextStyle == other.titleTextStyle &&
-      subtitleTextStyle == other.subtitleTextStyle &&
-      padding == other.padding;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FCardContentStyle &&
+          runtimeType == other.runtimeType &&
+          titleTextStyle == other.titleTextStyle &&
+          subtitleTextStyle == other.subtitleTextStyle &&
+          padding == other.padding;
 
   @override
   int get hashCode => titleTextStyle.hashCode ^ subtitleTextStyle.hashCode ^ padding.hashCode;

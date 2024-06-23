@@ -18,7 +18,7 @@ final class FBadgeContent extends StatelessWidget {
     child: Padding(
       padding: style.content.padding,
       child: DefaultTextStyle.merge(
-        style: style.content.labelTextStyle.scale(context.theme.typography),
+        style: style.content.labelTextStyle,
         child: switch ((label, rawLabel)) {
           (final String label, _) => Text(label),
           (_, final Widget label) => label,

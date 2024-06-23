@@ -73,7 +73,7 @@ class FHeader extends StatelessWidget {
             overflow: TextOverflow.fade,
             maxLines: 1,
             softWrap: false,
-            style: style.titleTextStyle.scale(typography),
+            style: style.titleTextStyle,
             child: title,
           ),
         ),
@@ -105,8 +105,7 @@ final class FHeaderStyle with Diagnosticable {
 
   /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
   FHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : titleTextStyle = TextStyle(
-          fontSize: typography.xl3,
+      : titleTextStyle = typography.xl3.copyWith(
           fontWeight: FontWeight.w700,
           color: colorScheme.foreground,
         ),

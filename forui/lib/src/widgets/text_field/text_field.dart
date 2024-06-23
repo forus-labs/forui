@@ -775,7 +775,7 @@ final class FTextField extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 7),
               child: DefaultTextStyle.merge(
-                style: stateStyle.labelTextStyle.scale(typography),
+                style: stateStyle.labelTextStyle,
                 child: label,
               ),
             ),
@@ -822,12 +822,12 @@ final class FTextField extends StatelessWidget {
   ) {
 
     final rawError = this.rawError == null ? this.rawError : DefaultTextStyle.merge(
-      style: current.footerTextStyle.scale(typography),
+      style: current.footerTextStyle,
       child: this.rawError!,
     );
 
     final rawHelp = this.rawHelp == null ? this.rawHelp : DefaultTextStyle.merge(
-      style: current.footerTextStyle.scale(typography),
+      style: current.footerTextStyle,
       child: this.rawHelp!,
     );
 
@@ -842,15 +842,15 @@ final class FTextField extends StatelessWidget {
         prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
         contentPadding: style.contentPadding.copyWith(left: 0),
         hintText: hint,
-        hintStyle: current.hintTextStyle.scale(typography),
+        hintStyle: current.hintTextStyle,
         hintMaxLines: hintMaxLines,
         helper: rawHelp,
         helperText: help,
-        helperStyle: current.footerTextStyle.scale(typography),
+        helperStyle: current.footerTextStyle,
         helperMaxLines: helpMaxLines,
         error: rawError,
         errorText: error,
-        errorStyle: current.footerTextStyle.scale(typography),
+        errorStyle: current.footerTextStyle,
         errorMaxLines: errorMaxLines,
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -891,7 +891,7 @@ final class FTextField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       textCapitalization: textCapitalization,
-      style: current.contentTextStyle.scale(typography),
+      style: current.contentTextStyle,
       textAlign: textAlign,
       textAlignVertical: textAlignVertical,
       textDirection: textDirection,
