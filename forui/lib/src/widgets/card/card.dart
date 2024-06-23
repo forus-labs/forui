@@ -55,7 +55,6 @@ final class FCard extends StatelessWidget {
 
 /// [FCard]'s style.
 final class FCardStyle with Diagnosticable {
-
   /// The decoration.
   final BoxDecoration decoration;
 
