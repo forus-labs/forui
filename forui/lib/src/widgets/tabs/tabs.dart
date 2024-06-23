@@ -93,7 +93,6 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final typography = theme.typography;
     final style = widget.style ?? context.theme.tabsStyle;
     final tabs = widget.tabs;
     final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
@@ -119,8 +118,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               indicator: style.indicator,
               indicatorSize: style.indicatorSize._value,
               dividerColor: Colors.transparent,
-              labelStyle: style.selectedLabel.scale(typography),
-              unselectedLabelStyle: style.unselectedLabel.scale(typography),
+              labelStyle: style.selectedLabel,
+              unselectedLabelStyle: style.unselectedLabel,
               onTap: (index) {
                 setState(() => _index = index);
                 widget.onPress?.call(_index);
@@ -131,8 +130,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           // A workaround to ensure any widgets under Tabs do not revert to material text style
           // TODO: abstract out logic
           DefaultTextStyle(
-            style: theme.typography.toTextStyle(
-              fontSize: theme.typography.base,
+            style: theme.typography.base.copyWith(
+              fontFamily: theme.typography.defaultFontFamily,
               color: theme.colorScheme.foreground,
             ),
             child: tabs[_index].content,

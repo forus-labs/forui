@@ -64,17 +64,13 @@ final class FTabsStyle with Diagnosticable {
           color: colorScheme.muted,
         ),
         padding = const EdgeInsets.all(4),
-        unselectedLabel = TextStyle(
-          fontSize: typography.sm,
+        unselectedLabel = typography.sm.copyWith(
           fontWeight: FontWeight.w500,
-          // required as material implementation of [Tab] uses DefaultTabStyle
           fontFamily: typography.defaultFontFamily,
           color: colorScheme.mutedForeground,
         ),
-        selectedLabel = TextStyle(
-          fontSize: typography.sm,
+        selectedLabel = typography.sm.copyWith(
           fontWeight: FontWeight.w500,
-          // required as material implementation of [Tab] uses DefaultTabStyle
           fontFamily: typography.defaultFontFamily,
           color: colorScheme.foreground,
         ),
