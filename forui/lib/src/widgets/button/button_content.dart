@@ -75,12 +75,14 @@ class FButtonContentStyle with Diagnosticable {
           vertical: 12.5,
         ),
         enabledTextStyle = typography.base.copyWith(
-          fontWeight: FontWeight.w500,
           color: enabled,
+          fontWeight: FontWeight.w500,
+          height: 1,
         ),
         disabledTextStyle = typography.base.copyWith(
-          fontWeight: FontWeight.w500,
           color: disabled,
+          fontWeight: FontWeight.w500,
+          height: 1,
         );
 
   /// Returns a copy of this [FButtonContentStyle] with the given properties replaced.

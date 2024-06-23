@@ -51,13 +51,11 @@ class FHeader extends StatelessWidget {
     this.rawTitle,
     this.actions = const [],
     super.key,
-  }):
-    assert((title != null) ^ (rawTitle != null), 'title or rawTitle must be provided, but not both.');
+  }) : assert((title != null) ^ (rawTitle != null), 'title or rawTitle must be provided, but not both.');
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.headerStyle;
-    final typography = context.theme.typography;
 
     final title = switch ((this.title, rawTitle)) {
       (final String title, _) => Text(title),
@@ -106,8 +104,9 @@ final class FHeaderStyle with Diagnosticable {
   /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
   FHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : titleTextStyle = typography.xl3.copyWith(
-          fontWeight: FontWeight.w700,
           color: colorScheme.foreground,
+          fontWeight: FontWeight.w700,
+          height: 1,
         ),
         action = FHeaderActionStyle.inherit(colorScheme: colorScheme);
 
@@ -126,13 +125,15 @@ final class FHeaderStyle with Diagnosticable {
   /// print(style.titleTextStyle == copy.titleTextStyle); // true
   /// print(style.action == copy.action); // false
   /// ```
-  @useResult FHeaderStyle copyWith({
+  @useResult
+  FHeaderStyle copyWith({
     TextStyle? titleTextStyle,
     FHeaderActionStyle? action,
-  }) => FHeaderStyle(
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-      action: action ?? this.action,
-    );
+  }) =>
+      FHeaderStyle(
+        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+        action: action ?? this.action,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
