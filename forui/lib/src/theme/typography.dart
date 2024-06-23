@@ -20,13 +20,13 @@ final class FTypography with Diagnosticable {
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if empty.
+  /// Throws [AssertionError] if empty.
   final String defaultFontFamily;
 
   /// A value used to scale [TextStyle.fontSize]. Defaults to 1.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `sizeScalar` <= 0.0
   /// * `sizeScalar` is NaN
   final double sizeScalar;
@@ -34,7 +34,7 @@ final class FTypography with Diagnosticable {
   /// A value used to scale [TextStyle.letterSpacing]. Defaults to 1.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `letterSpacingScalar` <= 0.0
   /// * `letterSpacingScalar` is NaN
   final double letterSpacingScalar;
@@ -42,7 +42,7 @@ final class FTypography with Diagnosticable {
   /// A value used to scale [TextStyle.wordSpacing]. Defaults to 1.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `wordSpacingScalar` <= 0.0
   /// * `wordSpacingScalar` is NaN
   final double wordSpacingScalar;
@@ -50,7 +50,7 @@ final class FTypography with Diagnosticable {
   /// A value used to scale [TextStyle.height]. Defaults to 1.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `heightScalar` <= 0.0
   /// * `heightScalar` is NaN
   final double heightScalar;
@@ -58,7 +58,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra small text. Defaults to 12.
   /// 
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xs` <= 0.0
   /// * `xs` is NaN
   final double xs;
@@ -66,7 +66,7 @@ final class FTypography with Diagnosticable {
   /// The font size for small text. Defaults to 14.
   ///
   /// ## Contract: 
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `sm` <= 0.0
   /// * `sm` is NaN
   final double sm;
@@ -74,7 +74,7 @@ final class FTypography with Diagnosticable {
   /// The font size for base text. Defaults to 16.
   ///
   /// ## Contract: 
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `base` <= 0.0
   /// * `base` is NaN
   final double base;
@@ -82,7 +82,7 @@ final class FTypography with Diagnosticable {
   /// The font size for large text. Defaults to 18.
   ///
   /// ## Contract: 
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `lg` <= 0.0
   /// * `lg` is NaN
   final double lg;
@@ -90,7 +90,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 20.
   ///
   /// ## Contract: 
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl` <= 0.0
   /// * `xl` is NaN
   final double xl;
@@ -98,7 +98,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 22.
   ///
   /// ## Contract: 
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl2` <= 0.0
   /// * `xl2` is NaN
   final double xl2;
@@ -106,7 +106,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 30.
   ///
   /// ## Contract: 
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl3` <= 0.0
   /// * `xl3` is NaN
   final double xl3;
@@ -114,7 +114,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 36.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl4` <= 0.0
   /// * `xl4` is NaN
   final double xl4;
@@ -122,7 +122,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 48.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl5` <= 0.0
   /// * `xl5` is NaN
   final double xl5;
@@ -130,7 +130,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 60.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl6` <= 0.0
   /// * `xl6` is NaN
   final double xl6;
@@ -138,7 +138,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 72.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl7` <= 0.0
   /// * `xl7` is NaN
   final double xl7;
@@ -146,7 +146,7 @@ final class FTypography with Diagnosticable {
   /// The font size for extra large text. Defaults to 96.
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * `xl8` <= 0.0
   /// * `xl8` is NaN
   final double xl8;
@@ -189,7 +189,7 @@ final class FTypography with Diagnosticable {
     assert(0 < xl7, 'The xl7 is $xl7, but it should be in the range "0 < xl7".'),
     assert(0 < xl8, 'The xl8 is $xl8, but it should be in the range "0 < xl8".');
 
-  /// Creates a copy of this [FTypography] with the given properties replaced.
+  /// Returns a copy of this [FTypography] with the given properties replaced.
   ///
   /// ```dart
   /// const typography = FTypography(

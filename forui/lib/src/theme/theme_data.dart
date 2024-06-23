@@ -87,7 +87,7 @@ final class FThemeData with Diagnosticable {
         separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
         switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
 
-  /// Creates a copy of this [FThemeData] with the given properties replaced.
+  /// Returns a copy of this [FThemeData] with the given properties replaced.
   ///
   /// ```dart
   /// final foo = FTypography();

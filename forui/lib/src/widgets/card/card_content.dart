@@ -42,13 +42,13 @@ part of 'card.dart';
         children: [
           if (title != null)
             DefaultTextStyle.merge(
-              style: style.title.scale(typography), 
+              style: style.titleTextStyle.scale(typography),
               child: title,
             ),
           
           if (subtitle != null)
             DefaultTextStyle.merge(
-              style: style.subtitle.scale(typography), 
+              style: style.subtitleTextStyle.scale(typography),
               child: subtitle,
             ),
 
@@ -74,55 +74,74 @@ part of 'card.dart';
 
 /// A card content's style.
 final class FCardContentStyle with Diagnosticable {
+  /// The title's [TextStyle].
+  final TextStyle titleTextStyle;
 
-  /// The padding.
+  /// The subtitle's [TextStyle].
+  final TextStyle subtitleTextStyle;
+
+  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 16)`.
   final EdgeInsets padding;
 
-  /// The title.
-  final TextStyle title;
-
-  /// The subtitle.
-  final TextStyle subtitle;
-
   /// Creates a [FCardContentStyle].
-  const FCardContentStyle({required this.padding, required this.title, required this.subtitle});
+  const FCardContentStyle({
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
+  });
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
   FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography}):
-    padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
-    title = TextStyle(
+    titleTextStyle = TextStyle(
       fontSize: typography.base,
       fontWeight: FontWeight.w600,
       color: colorScheme.foreground,
     ),
-    subtitle = TextStyle(
+    subtitleTextStyle = TextStyle(
       fontSize: typography.sm,
       color: colorScheme.mutedForeground,
-    );
+    ),
+    padding = const EdgeInsets.fromLTRB(16, 12, 16, 16);
 
-  /// Creates a copy of this [FCardContentStyle] with the given properties replaced.
-  FCardContentStyle copyWith({EdgeInsets? padding, TextStyle? title, TextStyle? subtitle}) => FCardContentStyle(
+  /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FCardContentStyle(
+  ///   titleTextStyle: ...,
+  ///   subtitleTextStyle: ...,
+  /// );
+  ///
+  /// final copy = style.copyWith(titleTextStyle: ...);
+  ///
+  /// print(style.titleTextStyle == copy.titleTextStyle); // true
+  /// print(style.subtitleTextStyle == copy.subtitleTextStyle); // false
+  /// ```
+  FCardContentStyle copyWith({
+    TextStyle? titleTextStyle,
+    TextStyle? subtitleTextStyle,
+    EdgeInsets? padding,
+  }) => FCardContentStyle(
+      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
       padding: padding ?? this.padding,
-      title: title ?? this.title,
-      subtitle: subtitle ?? this.subtitle,
     );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('subtitle', subtitle));
+      ..add(DiagnosticsProperty('title', titleTextStyle))
+      ..add(DiagnosticsProperty('subtitle', subtitleTextStyle))
+      ..add(DiagnosticsProperty('padding', padding));
   }
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is FCardContentStyle &&
       runtimeType == other.runtimeType &&
-      padding == other.padding &&
-      title == other.title &&
-      subtitle == other.subtitle;
+      titleTextStyle == other.titleTextStyle &&
+      subtitleTextStyle == other.subtitleTextStyle &&
+      padding == other.padding;
 
   @override
-  int get hashCode => padding.hashCode ^ title.hashCode ^ subtitle.hashCode;
+  int get hashCode => titleTextStyle.hashCode ^ subtitleTextStyle.hashCode ^ padding.hashCode;
 }

@@ -32,8 +32,8 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                   'theme',
                   'zinc-light',
                 ),
-                variant: queryParams.getString(
-                  'variant',
+                style: queryParams.getString(
+                  'style',
                   'primary',
                 ),
               ));
@@ -41,7 +41,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
         routeData: routeData,
         child: _i1.BadgePage(
           theme: args.theme,
-          variant: args.variant,
+          style: args.style,
         ),
       );
     },
@@ -200,17 +200,17 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
 class BadgeRoute extends _i10.PageRouteInfo<BadgeRouteArgs> {
   BadgeRoute({
     String theme = 'zinc-light',
-    String variant = 'primary',
+    String style = 'primary',
     List<_i10.PageRouteInfo>? children,
   }) : super(
           BadgeRoute.name,
           args: BadgeRouteArgs(
             theme: theme,
-            variant: variant,
+            style: style,
           ),
           rawQueryParams: {
             'theme': theme,
-            'variant': variant,
+            'style': style,
           },
           initialChildren: children,
         );
@@ -224,16 +224,16 @@ class BadgeRoute extends _i10.PageRouteInfo<BadgeRouteArgs> {
 class BadgeRouteArgs {
   const BadgeRouteArgs({
     this.theme = 'zinc-light',
-    this.variant = 'primary',
+    this.style = 'primary',
   });
 
   final String theme;
 
-  final String variant;
+  final String style;
 
   @override
   String toString() {
-    return 'BadgeRouteArgs{theme: $theme, variant: $variant}';
+    return 'BadgeRouteArgs{theme: $theme, style: $style}';
   }
 }
 

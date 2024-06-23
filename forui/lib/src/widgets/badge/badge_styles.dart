@@ -1,66 +1,71 @@
 part of 'badge.dart';
 
-/// The [FBadgeStyle]s.
+/// The [FBadgeCustomStyle]s.
 class FBadgeStyles with Diagnosticable {
   /// The primary badge style.
-  final FBadgeStyle primary;
+  final FBadgeCustomStyle primary;
 
   /// The secondary badge style.
-  final FBadgeStyle secondary;
+  final FBadgeCustomStyle secondary;
 
   /// The outlined badge style.
-  final FBadgeStyle outline;
+  final FBadgeCustomStyle outline;
 
   /// The destructive badge style.
-  final FBadgeStyle destructive;
+  final FBadgeCustomStyle destructive;
 
   /// Creates a [FBadgeStyles].
-  FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
+  FBadgeStyles({
+    required this.primary, 
+    required this.secondary, 
+    required this.outline, 
+    required this.destructive,
+  });
 
-  /// Creates a [FBadgeStyles] that inherits its properties from [colorScheme] and [style].
+  /// Creates a [FBadgeStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FBadgeStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style}):
-    primary = FBadgeStyle.inherit(
+    primary = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.primary,
-      border: colorScheme.primary,
+      backgroundColor: colorScheme.primary,
+      borderColor: colorScheme.primary,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.primaryForeground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
     ),
-    secondary = FBadgeStyle.inherit(
+    secondary = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.secondary,
-      border: colorScheme.secondary,
+      backgroundColor: colorScheme.secondary,
+      borderColor: colorScheme.secondary,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.secondaryForeground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
     ),
-    outline = FBadgeStyle.inherit(
+    outline = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.background,
-      border: colorScheme.border,
+      backgroundColor: colorScheme.background,
+      borderColor: colorScheme.border,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.foreground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
     ),
-    destructive = FBadgeStyle.inherit(
+    destructive = FBadgeCustomStyle.inherit(
       style: style,
-      background: colorScheme.destructive,
-      border: colorScheme.destructive,
+      backgroundColor: colorScheme.destructive,
+      borderColor: colorScheme.destructive,
       content: FBadgeContentStyle(
-        label: TextStyle(
+        labelTextStyle: TextStyle(
           color: colorScheme.destructiveForeground,
           fontSize: typography.sm,
           fontWeight: FontWeight.w600,
@@ -68,12 +73,24 @@ class FBadgeStyles with Diagnosticable {
       ),
     );
 
-  /// Creates a copy of this [FBadgeStyles] with the given properties replaced.
-  FBadgeStyles copyWith({
-    FBadgeStyle? primary,
-    FBadgeStyle? secondary,
-    FBadgeStyle? outline,
-    FBadgeStyle? destructive,
+  /// Returns a copy of this [FBadgeStyles] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final styles = FBadgeStyles(
+  ///   primary: ...,
+  ///   secondary: ...,
+  /// );
+  ///
+  /// final copy = styles.copyWith(secondary: ...);
+  ///
+  /// print(styles.primary == copy.primary); // true
+  /// print(styles.secondary == copy.secondary); // false
+  /// ```
+  @useResult FBadgeStyles copyWith({
+    FBadgeCustomStyle? primary,
+    FBadgeCustomStyle? secondary,
+    FBadgeCustomStyle? outline,
+    FBadgeCustomStyle? destructive,
   }) => FBadgeStyles(
     primary: primary ?? this.primary,
     secondary: secondary ?? this.secondary,
