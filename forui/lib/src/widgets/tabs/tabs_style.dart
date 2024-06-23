@@ -1,14 +1,21 @@
 part of 'tabs.dart';
 
-enum Wrapped {
+/// Defines how the bounds of the selected tab indicator are computed.
+enum FTabBarIndicatorSize {
+  /// The tab indicator's bounds are as wide as the space occupied by the tab
+  /// in the tab bar: from the right edge of the previous tab to the left edge
+  /// of the next tab.
+  tab(TabBarIndicatorSize.tab),
 
-  label(TabIndicatorSize.label),
-  tab(TabIndicatorSize.tab);
+  /// The tab's bounds are only as wide as the (centered) tab widget itself.
+  ///
+  /// This value is used to align the tab's label, typically a [Tab]
+  /// widget's text or icon, with the selected tab indicator.
+  label(TabBarIndicatorSize.label);
 
-  final TabIndicatorSize _value;
+  final TabBarIndicatorSize _value;
 
-  Wrapped(this._value);
-
+  const FTabBarIndicatorSize(this._value);
 }
 
 /// [FTabs]'s style.
@@ -29,7 +36,7 @@ final class FTabsStyle with Diagnosticable {
   final BoxDecoration indicator;
 
   /// The indicator size.
-  final TabBarIndicatorSize indicatorSize;
+  final FTabBarIndicatorSize indicatorSize;
 
   /// The height.
   final double height;
@@ -50,10 +57,7 @@ final class FTabsStyle with Diagnosticable {
   });
 
   /// Creates a [FTabsStyle] that inherits its properties from [colorScheme].
-  FTabsStyle.inherit(
-      {required FColorScheme colorScheme,
-      required FTypography typography,
-      required FStyle style})
+  FTabsStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : decoration = BoxDecoration(
           border: Border.all(color: colorScheme.muted),
           borderRadius: style.borderRadius,
@@ -74,7 +78,7 @@ final class FTabsStyle with Diagnosticable {
           fontFamily: typography.defaultFontFamily,
           color: colorScheme.foreground,
         ),
-        indicatorSize = TabBarIndicatorSize.tab,
+        indicatorSize = FTabBarIndicatorSize.tab,
         indicator = BoxDecoration(
           color: colorScheme.background,
           borderRadius: style.borderRadius,
@@ -89,7 +93,7 @@ final class FTabsStyle with Diagnosticable {
     TextStyle? selectedLabel,
     TextStyle? unselectedLabel,
     BoxDecoration? indicator,
-    TabBarIndicatorSize? indicatorSize,
+    FTabBarIndicatorSize? indicatorSize,
     double? height,
     double? spacing,
   }) =>

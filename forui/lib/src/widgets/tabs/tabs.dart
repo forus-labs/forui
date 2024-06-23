@@ -96,8 +96,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     final typography = theme.typography;
     final style = widget.style ?? context.theme.tabsStyle;
     final tabs = widget.tabs;
-    final materialLocalizations =
-        Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
     // ignore_for_file: no_leading_underscores_for_local_identifiers
     final _child = Material(
@@ -118,7 +117,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               isScrollable: widget.scrollable,
               padding: style.padding,
               indicator: style.indicator,
-              indicatorSize: style.indicatorSize,
+              indicatorSize: style.indicatorSize._value,
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabel.scale(typography),
               unselectedLabelStyle: style.unselectedLabel.scale(typography),
@@ -144,8 +143,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
     return materialLocalizations == null
         ? Localizations(
-            locale: Localizations.maybeLocaleOf(context) ??
-                const Locale('en', 'US'),
+            locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
             delegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
