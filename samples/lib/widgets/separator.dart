@@ -25,10 +25,9 @@ class SeparatorPage extends SampleScaffold {
         children: [
           Text(
             'Forui',
-            style: TextStyle(
-              fontSize: typography.base,
-              fontWeight: FontWeight.w600,
+            style: typography.base.copyWith(
               color: colorScheme.foreground,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const FSeparator(),
@@ -36,25 +35,23 @@ class SeparatorPage extends SampleScaffold {
             children: [
               Text(
                 'Forui',
-                style: TextStyle(
-                  fontSize: typography.base,
-                  fontWeight: FontWeight.w600,
+                style: typography.base.copyWith(
                   color: colorScheme.foreground,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const FSeparator(vertical: true),
               Text(
                 'Forui',
-                style: TextStyle(
-                  fontSize: typography.base,
-                  fontWeight: FontWeight.w600,
+                style: typography.base.copyWith(
                   color: colorScheme.foreground,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
           ),
         ],
-        ),
+      ),
     );
   }
 }

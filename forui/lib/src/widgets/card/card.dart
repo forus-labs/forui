@@ -71,7 +71,6 @@ final class FCard extends StatelessWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('style', style));
   }
-
 }
 
 /// [FCard]'s style.

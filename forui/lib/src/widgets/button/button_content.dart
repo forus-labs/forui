@@ -17,13 +17,12 @@ final class FButtonContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final typography = context.theme.typography;
     final (:style, :enabled) = FButton._of(context);
 
     return Padding(
         padding: style.content.padding,
         child: DefaultTextStyle.merge(
-          style: enabled ? style.content.enabledTextStyle.scale(typography) : style.content.disabledTextStyle.scale(typography),
+          style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: separate([
@@ -75,15 +74,15 @@ class FButtonContentStyle with Diagnosticable {
           horizontal: 16,
           vertical: 12.5,
         ),
-        enabledTextStyle = TextStyle(
-          fontSize: typography.base,
-          fontWeight: FontWeight.w500,
+        enabledTextStyle = typography.base.copyWith(
           color: enabled,
-        ),
-        disabledTextStyle = TextStyle(
-          fontSize: typography.base,
           fontWeight: FontWeight.w500,
+          height: 1,
+        ),
+        disabledTextStyle = typography.base.copyWith(
           color: disabled,
+          fontWeight: FontWeight.w500,
+          height: 1,
         );
 
   /// Returns a copy of this [FButtonContentStyle] with the given properties replaced.

@@ -12,8 +12,9 @@ final class FTextFieldStyle with Diagnosticable {
   /// The cursor indicates the current location of text insertion point in the field.
   final Color cursorColor;
 
-  /// The padding surrounding this text field's content. Defaults to
-  /// `const EdgeInsets.symmetric(horizontal: 15, vertical: 5)`.
+  /// The padding surrounding this text field's content.
+  ///
+  /// Defaults to `const EdgeInsets.symmetric(horizontal: 15, vertical: 5)`.
   final EdgeInsets contentPadding;
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
@@ -199,24 +200,20 @@ final class FTextFieldStateStyle with Diagnosticable {
     required FTypography typography,
     required FStyle style,
   }):
-    labelTextStyle = TextStyle(
+    labelTextStyle = typography.sm.copyWith(
       color: labelColor,
-      fontSize: typography.sm,
       fontWeight: FontWeight.w600,
     ),
-    contentTextStyle = TextStyle(
+    contentTextStyle = typography.sm.copyWith(
       fontFamily: typography.defaultFontFamily,
-      fontSize: typography.sm,
       color: contentColor,
     ),
-    hintTextStyle = TextStyle(
+    hintTextStyle = typography.sm.copyWith(
       fontFamily: typography.defaultFontFamily,
-      fontSize: typography.sm,
       color: hintColor,
     ),
-    footerTextStyle = TextStyle(
+    footerTextStyle = typography.sm.copyWith(
       fontFamily: typography.defaultFontFamily,
-      fontSize: typography.sm,
       color: footerColor,
     ),
     focused = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),

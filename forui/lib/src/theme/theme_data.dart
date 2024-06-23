@@ -70,22 +70,31 @@ final class FThemeData with Diagnosticable {
   });
 
   /// Creates a [FThemeData] that configures the widget styles using the given properties.
-  FThemeData.inherit({
-    required this.colorScheme,
-    this.typography = const FTypography(),
-    this.style = const FStyle(),
-  })  : badgeStyles = FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        buttonStyles = FButtonStyles.inherit(
-          colorScheme: colorScheme,
-          typography: typography,
-          style: style,
-        ),
-        cardStyle = FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        dialogStyle = FDialogStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
-        headerStyle = FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
-        textFieldStyle = FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        separatorStyles = FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
-        switchStyle = FSwitchStyle.inherit(colorScheme: colorScheme);
+  factory FThemeData.inherit({
+    required FColorScheme colorScheme,
+    FStyle style = const FStyle(),
+    FTypography? typography,
+  }) {
+    typography ??= FTypography.inherit(colorScheme: colorScheme);
+
+    return FThemeData(
+      colorScheme: colorScheme,
+      typography: typography,
+      style: style,
+      badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      buttonStyles: FButtonStyles.inherit(
+        colorScheme: colorScheme,
+        typography: typography,
+        style: style,
+      ),
+      cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      dialogStyle: FDialogStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
+      headerStyle: FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
+      textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      separatorStyles: FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
+      switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme),
+    );
+  }
 
   /// Returns a copy of this [FThemeData] with the given properties replaced.
   ///
@@ -103,7 +112,8 @@ final class FThemeData with Diagnosticable {
   /// print(theme.colorScheme == copy.colorScheme); // true
   /// print(copy.typography); // bar
   /// ```
-  @useResult FThemeData copyWith({
+  @useResult
+  FThemeData copyWith({
     FColorScheme? colorScheme,
     FTypography? typography,
     FStyle? style,

@@ -29,9 +29,8 @@ class FBadgeStyles with Diagnosticable {
       backgroundColor: colorScheme.primary,
       borderColor: colorScheme.primary,
       content: FBadgeContentStyle(
-        labelTextStyle: TextStyle(
+        labelTextStyle: typography.sm.copyWith(
           color: colorScheme.primaryForeground,
-          fontSize: typography.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -41,9 +40,8 @@ class FBadgeStyles with Diagnosticable {
       backgroundColor: colorScheme.secondary,
       borderColor: colorScheme.secondary,
       content: FBadgeContentStyle(
-        labelTextStyle: TextStyle(
+        labelTextStyle: typography.sm.copyWith(
           color: colorScheme.secondaryForeground,
-          fontSize: typography.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -53,9 +51,8 @@ class FBadgeStyles with Diagnosticable {
       backgroundColor: colorScheme.background,
       borderColor: colorScheme.border,
       content: FBadgeContentStyle(
-        labelTextStyle: TextStyle(
+        labelTextStyle: typography.sm.copyWith(
           color: colorScheme.foreground,
-          fontSize: typography.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
@@ -65,9 +62,8 @@ class FBadgeStyles with Diagnosticable {
       backgroundColor: colorScheme.destructive,
       borderColor: colorScheme.destructive,
       content: FBadgeContentStyle(
-        labelTextStyle: TextStyle(
+        labelTextStyle: typography.sm.copyWith(
           color: colorScheme.destructiveForeground,
-          fontSize: typography.sm,
           fontWeight: FontWeight.w600,
         ),
       ),
