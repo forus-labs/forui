@@ -1,9 +1,10 @@
 import {Callout} from "nextra/components";
 
+
 # Icon
 
 Forui Icons is flutter library that provides a set of high-quality icons from [Lucide](https://lucide.dev/).
-It is a part of the Forui package.
+
 
 ## Installation
 
@@ -14,7 +15,35 @@ It is a part of the Forui package.
 From your Flutter project directory, run the following command to install Forui Icon.
 
 ```bash filename="bash"
-flutter pub install forui_icons
+flutter pub install forui_assets
 ```
 
+
 ## Usage
+
+<Callout type="info">
+    The best way to find a list of icons is to visit the [Lucide](https://lucide.dev/icons/) website.
+    We periodically update the icons in the Forui Icons package.
+    If you notice a missing icon in Forui Icons, please [open an issue](https://github.com/forus-labs/forui/issues/new).
+</Callout>
+
+```dart
+import 'package:forui/forui.dart';
+
+// alternatively; if you've only installed forui_assets.
+import 'package:forui_assets/forui_assets.dart';
+
+// Bird icon as a Widget.
+final birdIconWidget = FAssets.icons.bird();
+
+// White cat icon with a size of 24x24.
+final catIconWidget = FAssets.icons.cat(
+  width: 24,
+  height: 24,
+  colorFilter: const ColorFilter.mode(Color(0xFFFFFFFF), BlendMode.srcIn),
+);
+
+// Saving an icon to a variable for later use.
+final rabbitSvgAsset = FAssets.icons.rabbit;
+final rabbitIconWidget = rabbitSvgAsset();
+```

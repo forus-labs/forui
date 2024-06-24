@@ -9,10 +9,12 @@ export function Theme({title, color}) {
     );
 }
 
+
 # Themes
 
 Forui themes allows you to customize the look and feel of your Flutter application.
 Our theming solution is designed to help you get started quickly while offering powerful and flexible customization options.
+
 
 ## Predefined Themes
 
@@ -44,7 +46,32 @@ The color schemes are heavily inspired by [shadcn/ui themes](https://ui.shadcn.c
 | <Theme title="Yellow" color="#facc15" /> | `FThemes.yellow.light` | `FThemes.yellow.dark` |
 | <Theme title="Violet" color="#7c3aed" /> | `FThemes.violet.light` | `FThemes.violet.dark` |
 
+
 ## Usage
+
+`FTheme` uses inherited widgets to provide the `FThemeData` to all widgets in the subtree.
+Forui provides an extension on `BuildContext` which allows for direct access to `FThemeData` through `context.theme`.
+
+```dart {3-6}
+@override
+Widget build(BuildContext context) {
+  final theme = context.theme; // FThemeData
+  final colorScheme = context.theme.colorScheme; // FColorScheme
+  final typography = context.theme.typography; // FTypography
+  final style = context.theme.style; // FStyle
+
+  return const Placeholder();
+}
+```
+
+A high level overview of the theme data structure is as follows:
+- **`FThemeData`** contains `FColorScheme`, `FTypography`, `FStyle`, and widget styles (eg. `FCardStyle`).
+- **`FColorScheme`** contains the color scheme (eg. `background`, `foreground`, and `primary`).
+- **`FTypography`** contains the `defaultFontFamily` and various `TextStyle`s.
+- **`FStyle`** contains other miscellaneous styling options (eg. `borderRadius`).
+
+A more detailed explanation of each class can be found in the [Class Diagram](#class-diagram) section.
+
 
 ## Customize Themes
 
@@ -60,7 +87,7 @@ Widget build(BuildContext context) => FTheme(
         ),
         typography: FThemes.zinc.light.typography.copyWith(
           defaultFontFamily: 'Roboto',
-        ).scale(2),
+        ).scale(sizeScalar: 0.8),
         style: FThemes.zinc.light.style.copyWith(
           borderRadius: BorderRadius.zero,
         ),
@@ -77,14 +104,15 @@ Widget build(BuildContext context) => FTheme(
 The example above uses `FThemes.zinc.light` theme as a starting point and customizes the following:
 
 - Update the `primary` and `primaryForeground` colors.
-- Change the default font family to `Roboto`.
+- Change the default font family to `Roboto` and scale the font size by `2`.
 - Remove the `borderRadius` through the style.
 - Although we removed the `borderRadius` for all widgets, override the `borderRadius` to `8` for the `FCard()` widget.
 
 While the example may seem overwhelming, most use cases will only require customizations to the `FColorScheme`, `FTypography`, and `FStyle` class.
 Sensible defaults for each Forui widget will be automatically inherited.
 
-### Class Diagram
+
+## Class Diagram
 
 ```mermaid
 ---
@@ -102,6 +130,7 @@ class FColorScheme {
 
 class FTypography {
     +FTypography(...)
+    +FThemeData.inherit(colorScheme)
 }
 
 class FStyle {
@@ -120,12 +149,129 @@ FThemeData --> FStyle
 FThemeData --> FCardStyle
 ```
 
-### FThemeData
 
-### FColorScheme
+### Color Scheme
 
-### FTypography
+The `FColorScheme` class contains the color scheme for the theme.
+This usually consist of a set of colors with its corresponding foreground color (eg. `primary` and `primaryForeground`).
 
-### FStyle
+In most cases, the color will be used as the background color, and the foreground color will be used as the text/icon color.
 
-### Widget Themes
+```dart {3, 6-14}
+@override
+Widget build(BuildContext context) {
+  final colorScheme = context.theme.colorScheme;
+  final typography = context.theme.typography;
+
+  return ColoredBox(
+    color: colorScheme.primary,
+    child: Text(
+      'Hello World!',
+      style: typography.xs.copyWith(
+          color: colorScheme.primaryForeground
+      ),
+    ),
+  );
+}
+```
+
+
+### Typography
+
+The `FTypography` class contains the typography settings for the theme.
+This includes the default font family and various `TextStyle`s for different use cases.
+
+<Callout type="info">
+    The `TextStyle`s stored in `FTypography` are based on [Tailwind CSS Font Size](https://tailwindcss.com/docs/font-size).
+    For instance, `FTypography.sm` is closely related to `text-sm` in Tailwind CSS.
+</Callout>
+
+It is recommended to use the `copyWith(...)` to apply colors and other styles as the `TextStyle`s stored only contain the `fontSize` and `height` properties.
+
+```dart {4, 8-12}
+@override
+Widget build(BuildContext context) {
+  final colorScheme = context.theme.colorScheme;
+  final typography = context.theme.typography;
+
+  return Text(
+    'Hello World!',
+    style: typography.xs.copyWith(
+      color: colorScheme.primaryForeground,
+      fontWeight: FontWeight.bold,
+      fontStyle: FontStyle.italic,
+    ),
+  );
+}
+```
+
+
+#### Custom Font Family
+
+To change the default font family, use the `copyWith(...)` method to apply the new font family.
+As some fonts may have different sizes, the `scale(...)` method is provided to quickly scale all the font sizes.
+
+```dart filename="main.dart" {4-6}
+@override
+Widget build(BuildContext context) => FTheme(
+      data: FThemes.zinc.light.copyWith(
+        typography: FThemes.zinc.light.typography.copyWith(
+          defaultFontFamily: 'Roboto',
+        ).scale(sizeScalar: 0.8),
+      ),
+      child: const FScaffold(...),
+    );
+```
+
+
+### Style
+
+The `FStyle` class contains other miscellaneous styling options for the theme.
+
+```dart {4, 7-14}
+@override
+Widget build(BuildContext context) {
+  final colorScheme = context.theme.colorScheme;
+  final style = context.theme.style;
+
+  return DecoratedBox(
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: colorScheme.border,
+        width: style.borderWidth,
+      ),
+      borderRadius: style.borderRadius,
+      color: colorScheme.primary,
+    ),
+    child: const Placeholder(),
+  );
+}
+```
+
+
+## Override Individual Widgets
+
+In certain cases, you may want to override the theme for a specific widget.
+This can be easily achieved by using the `style(...)` parameter.
+
+<Callout type="info">
+    In the example below, styles are only overridden for this specific `FCard` widget.
+    `FCard` widgets that are used elsewhere will still inherit from theme data.
+</Callout>
+
+```dart filename="main.dart" {8-12}
+@override
+Widget build(BuildContext context) {
+  final theme = context.theme;
+
+  return FCard(
+    title: 'Notification',
+    subtitle: 'You have 3 new messages',
+    style: theme.cardStyle.copyWith(
+      decoration: theme.cardStyle.decoration.copyWith(
+        borderRadius: BorderRadius.zero, // Remove border radius.
+      ),
+    ),
+  );
+}
+```
