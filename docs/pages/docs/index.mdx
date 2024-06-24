@@ -1,11 +1,81 @@
-# Introduction
- 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
+import {Callout} from "nextra/components";
 
-## What is Nextra?
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+# Getting Started
 
-## Documentation
+This guide assumes you have a basic understanding of Flutter and have already set up your development environment.
+If you're new to Flutter, you may follow the official [installation guide](https://docs.flutter.dev/get-started).
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+
+## Installation
+
+From your Flutter project directory, run the following command to install Forui.
+
+```bash filename="bash"
+flutter pub install forui
+```
+
+
+### Forui Icons
+
+<Callout type="info">
+    Forui Icons is bundled with forui package. You don't need to install it separately if you installed `forui`.
+</Callout>
+
+If you would like to only use the icon package, run the following command from your Flutter project directory.
+
+```bash filename="bash"
+flutter pub install forui_assets
+```
+
+
+## Usage
+
+To use Forui widgets in your Flutter app, import the Forui package and place the `FTheme` widget at the root of the widget tree.
+
+```dart filename="main.dart" {3,12-16}
+import 'package:flutter/widgets.dart';
+
+import 'package:forui/forui.dart';
+
+void main() {
+  runApp(const Application());
+}
+
+class Application extends StatelessWidget {
+  const Application({super.key});
+
+  @override
+  Widget build(BuildContext context) => FTheme(
+    data: FThemes.zinc.light,
+    child: const FScaffold(...),
+  );
+}
+```
+
+
+### Themes
+
+Forui provides a set of predefined themes that you can use out of the box.
+In the example above, we used the `FThemes.zinc.light` theme, which is a light theme variant of the zinc color scheme.
+
+Themes are a very powerful building block in Forui, allowing you to customize the look and feel of your app.
+To learn more about themes, refer to the [Themes](/docs/themes) page.
+
+
+### With Material/Cupertino
+
+It's perfectly safe to use Forui widgets alongside Material/Cupertino widgets.
+This is especially useful when you need to use a Material/Cupertino widget that is not available in Forui or require it for routing.
+(eg. `MaterialApp.router` or `CupertinoApp.router`)
+
+```dart filename="main.dart"
+@override
+Widget build(BuildContext context) => MaterialApp(
+  // Other configurations...
+  home: FTheme(
+    data: FThemes.zinc.light,
+    child: const FScaffold(...),
+  ),
+);
+```
