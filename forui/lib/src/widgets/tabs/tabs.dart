@@ -97,8 +97,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     final tabs = widget.tabs;
     final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
-    // ignore_for_file: no_leading_underscores_for_local_identifiers
-    final _child = Material(
+    final child = Material(
       color: Colors.transparent,
       child: Column(
         children: [
@@ -148,9 +147,9 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            child: _child,
+            child: child,
           )
-        : _child;
+        : child;
   }
 
   @override
