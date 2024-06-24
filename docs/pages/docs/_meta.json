@@ -1,10 +1,15 @@
 {
   "index": "Getting Started",
   "themes": "Themes",
-  "typography": "Typography",
+  "icon": "Icon",
+  "api_reference": {
+    "title": "API Reference ↗",
+    "href": "https://pub.dev/packages/forui",
+    "newWindow": true
+  },
   "-- widgets": {
     "type": "separator",
     "title": "Widgets"
   },
-  "card": "Card"
+  "*": "All Widgets"
 }
