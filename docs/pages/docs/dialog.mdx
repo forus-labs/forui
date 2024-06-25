@@ -1,0 +1,130 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Dialog
+A modal dialog interrupts the user with important content and expects a response.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='dialog' query={{vertical: "false"}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IntrinsicWidth(
+          child: FButton(
+            label: 'Show Dialog',
+            onPress: () => showAdaptiveDialog(
+              context: context,
+              builder: (context) => FDialog(
+                direction: Axis.horizontal,
+                title: 'Are you absolutely sure?',
+                body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                actions: [
+                  FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
+                  FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FDialog(...)`
+
+```dart
+FDialog(
+  direction: Axis.horizontal,
+  title: 'Are you absolutely sure?',
+  body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+  actions: [
+    FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
+    FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+  ],
+);
+```
+
+### `FDialog.raw(...)`
+
+```dart
+FDialog.raw(
+  child: const Placeholder(),
+);
+```
+
+## Examples
+
+### Horizontal Layout
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='dialog' query={{vertical: "false"}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IntrinsicWidth(
+          child: FButton(
+            label: 'Show Dialog',
+            onPress: () => showAdaptiveDialog(
+              context: context,
+              builder: (context) => FDialog(
+                direction: Axis.horizontal,
+                title: 'Are you absolutely sure?',
+                body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                actions: [
+                  FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
+                  FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Vertical Layout
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='dialog' query={{vertical: "false"}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IntrinsicWidth(
+            child: FButton(
+              label: 'Show Dialog',
+              onPress: () => showAdaptiveDialog(
+                context: context,
+                builder: (context) => FDialog(
+                  direction: Axis.vertical,
+                  title: 'Are you absolutely sure?',
+                  body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                  actions: [
+                    FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+                    FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>

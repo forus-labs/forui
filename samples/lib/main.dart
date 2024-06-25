@@ -71,6 +71,14 @@ class _AppRouter extends $_AppRouter {
       page: TextFieldRoute.page,
     ),
     AutoRoute(
+      path: '/text-field/password',
+      page: PasswordTextFieldRoute.page,
+    ),
+    AutoRoute(
+      path: '/text-field/multiline',
+      page: MultilineTextFieldRoute.page,
+    ),
+    AutoRoute(
       path: '/separator/default',
       page: SeparatorRoute.page,
     ),

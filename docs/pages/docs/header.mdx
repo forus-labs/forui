@@ -1,0 +1,48 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Header
+A header contains the page's title and navigation actions.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='header' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart
+        FHeader(
+          title: 'Edit Alarm',
+          actions: [
+            FHeaderAction(
+              icon: FAssets.icons.alarmClock,
+              onPress: () {},
+            ),
+            FHeaderAction(
+              icon: FAssets.icons.plus,
+              onPress: () {},
+            ),
+          ],
+        )
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FHeader(...)`
+
+```dart
+FHeader(
+  title: 'Edit Alarm',
+  actions: [
+    FHeaderAction(
+      icon: FAssets.icons.alarmClock,
+      onPress: () {},
+    ),
+    FHeaderAction(
+      icon: FAssets.icons.plus,
+      onPress: () {},
+    ),
+  ],
+)
+```
