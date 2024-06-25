@@ -1,11 +1,12 @@
 import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
 
 # Card
 Displays a card typically with a title, subtitle, and child widget.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <img src="https://nextra.site/assets/blog-theme.png" alt="Embed"/>
+      <Widget query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
@@ -30,20 +31,6 @@ Displays a card typically with a title, subtitle, and child widget.
         FCard(
             title: 'Notification',
             subtitle: 'You have 3 unread messages.',
-            child: const Text('Some content here...'),
-        );
-        ```
-    </Tabs.Tab>
-</Tabs>
-
-### Raw
-<Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <img src="https://nextra.site/assets/blog-theme.png" alt="Embed"/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart
-        FCard.raw(
             child: const Text('Some content here...'),
         );
         ```
