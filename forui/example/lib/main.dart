@@ -16,9 +16,7 @@ class Application extends StatelessWidget {
         home: FTheme(
           data: FThemes.zinc.light,
           child: const FScaffold(
-            header: FHeader(
-              title: 'Example',
-            ),
+            header: FHeader(title: 'Example'),
             content: ExampleWidget(),
           ),
         ),
