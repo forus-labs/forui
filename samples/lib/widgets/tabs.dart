@@ -21,13 +21,28 @@ class TabsPage extends SampleScaffold {
               content: FCard(
                 title: 'Account',
                 subtitle: 'Make changes to your account here. Click save when you are done.',
-                child: Column(
-                  children: [
-                    Container(
-                      color: Colors.red,
-                      height: 100,
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Column(
+                    children: [
+                      const FTextField(
+                        label: 'Name',
+                        hint: 'John Renalo',
+                      ),
+                      const SizedBox(height: 10),
+                      const FTextField(
+                        label: 'Email',
+                        hint: 'john@doe.com',
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24, bottom: 16),
+                        child: FButton(
+                          label: 'Save',
+                          onPress: () {},
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -36,13 +51,22 @@ class TabsPage extends SampleScaffold {
               content: FCard(
                 title: 'Password',
                 subtitle: 'Change your password here. After saving, you will be logged out.',
-                child: Column(
-                  children: [
-                    Container(
-                      color: Colors.blue,
-                      height: 100,
-                    )
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: Column(
+                    children: [
+                      const FTextField(label: 'Current password'),
+                      const SizedBox(height: 10),
+                      const FTextField(label: 'New password'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 24, bottom: 16),
+                        child: FButton(
+                          label: 'Save',
+                          onPress: () {},
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
