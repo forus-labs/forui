@@ -12,18 +12,36 @@ class SwitchPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) {
-    final notifier = ValueNotifier(false);
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: ValueListenableBuilder(
-        valueListenable: notifier,
-        builder: (context, _, __) => FSwitch(
-          value: true,
-          autofocus: true,
-          onChanged: (value) {},
-        ),
-      ),
-    );
-  }
+  Widget child(BuildContext context) => const Switch();
 }
+
+class Switch extends StatefulWidget {
+  const Switch({super.key});
+
+  @override
+  State<Switch> createState() => _SwitchState();
+}
+
+class _SwitchState extends State<Switch> {
+  late final ValueNotifier<bool> notifier;
+
+  @override
+  void initState() {
+    super.initState();
+    notifier = ValueNotifier(false);
+  }
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.all(16),
+    child: ValueListenableBuilder(
+      valueListenable: notifier,
+      builder: (context, _, __) => FSwitch(
+        value: true,
+        autofocus: true,
+        onChanged: (value) {},
+      ),
+    ),
+  );
+}
+
