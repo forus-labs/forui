@@ -32,7 +32,7 @@ jobs:
   docs:
     name: Deploy Docs
     runs-on: ubuntu-latest
-    environment: ${{ (startsWith(github.ref, 'refs/tags/forui') || inputs.target == 'production') && 'production' || 'development' }}
+    environment: ${{ (startsWith(github.ref, 'refs/tags/forui') || inputs.target == 'production') && 'docs-production' || 'docs-development' }}
     defaults:
       run:
         working-directory: ./docs
@@ -63,7 +63,7 @@ jobs:
   samples:
     name: Deploy Samples
     runs-on: ubuntu-latest
-    environment: ${{ (startsWith(github.ref, 'refs/tags/forui') || inputs.target == 'production') && 'production' || 'development' }}
+    environment: ${{ (startsWith(github.ref, 'refs/tags/forui') || inputs.target == 'production') && 'docs-production' || 'docs-development' }}
     defaults:
       run:
         working-directory: ./samples
