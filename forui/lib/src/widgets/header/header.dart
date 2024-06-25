@@ -63,20 +63,26 @@ class FHeader extends StatelessWidget {
       _ => const Placeholder(),
     };
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: DefaultTextStyle.merge(
-            overflow: TextOverflow.fade,
-            maxLines: 1,
-            softWrap: false,
-            style: style.titleTextStyle,
-            child: title,
-          ),
+    return SafeArea(
+      bottom: false,
+      child: Padding(
+        padding: style.padding,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: DefaultTextStyle.merge(
+                overflow: TextOverflow.fade,
+                maxLines: 1,
+                softWrap: false,
+                style: style.titleTextStyle,
+                child: title,
+              ),
+            ),
+            Row(children: actions),
+          ],
         ),
-        Row(children: actions),
-      ],
+      ),
     );
   }
 
@@ -98,17 +104,28 @@ final class FHeaderStyle with Diagnosticable {
   /// The [FHeaderAction]'s style.
   final FHeaderActionStyle action;
 
+  /// The padding.
+  final EdgeInsets padding;
+
   /// Creates a [FHeaderStyle].
-  FHeaderStyle({required this.titleTextStyle, required this.action});
+  FHeaderStyle({
+    required this.titleTextStyle,
+    required this.action,
+    required this.padding,
+  });
 
   /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
-  FHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : titleTextStyle = typography.xl3.copyWith(
+  FHeaderStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+    required FStyle style,
+  })  : titleTextStyle = typography.xl3.copyWith(
           color: colorScheme.foreground,
           fontWeight: FontWeight.w700,
           height: 1,
         ),
-        action = FHeaderActionStyle.inherit(colorScheme: colorScheme);
+        action = FHeaderActionStyle.inherit(colorScheme: colorScheme),
+        padding = style.pagePadding.copyWith(bottom: 10);
 
   /// Returns a copy of this [FHeaderStyle] with the given properties replaced.
   ///
@@ -129,10 +146,12 @@ final class FHeaderStyle with Diagnosticable {
   FHeaderStyle copyWith({
     TextStyle? titleTextStyle,
     FHeaderActionStyle? action,
+    EdgeInsets? padding,
   }) =>
       FHeaderStyle(
         titleTextStyle: titleTextStyle ?? this.titleTextStyle,
         action: action ?? this.action,
+        padding: padding ?? this.padding,
       );
 
   @override
@@ -140,6 +159,7 @@ final class FHeaderStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
-      ..add(DiagnosticsProperty('action', action));
+      ..add(DiagnosticsProperty('action', action))
+      ..add(DiagnosticsProperty('padding', padding));
   }
 }

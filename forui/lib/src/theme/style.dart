@@ -16,6 +16,9 @@ final class FStyle with Diagnosticable {
   /// The border width. Defaults to 1.
   final double borderWidth;
 
+  /// The page's padding. Defaults to `EdgeInsets.all(4)`.
+  final EdgeInsets pagePadding;
+
   /// Creates an [FStyle].
   ///
   /// **Note:**
@@ -23,6 +26,7 @@ final class FStyle with Diagnosticable {
   const FStyle({
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
+    this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
   });
 
   /// Returns a copy of this [FStyle] with the given properties replaced.
@@ -38,20 +42,25 @@ final class FStyle with Diagnosticable {
   /// print(copy.borderRadius); // BorderRadius.circular(1)
   /// print(copy.borderWidth); // 3
   /// ```
-  @useResult FStyle copyWith({
+  @useResult
+  FStyle copyWith({
     BorderRadius? borderRadius,
     double? borderWidth,
-  }) => FStyle(
-    borderRadius: borderRadius ?? this.borderRadius,
-    borderWidth: borderWidth ?? this.borderWidth,
-  );
+    EdgeInsets? pagePadding,
+  }) =>
+      FStyle(
+        borderRadius: borderRadius ?? this.borderRadius,
+        borderWidth: borderWidth ?? this.borderWidth,
+        pagePadding: pagePadding ?? this.pagePadding,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(8)))
-      ..add(DoubleProperty('borderWidth', borderWidth, defaultValue: 1));
+      ..add(DoubleProperty('borderWidth', borderWidth, defaultValue: 1))
+      ..add(DiagnosticsProperty('pagePadding', pagePadding, defaultValue: const EdgeInsets.all(4)));
   }
 
   @override
@@ -60,8 +69,9 @@ final class FStyle with Diagnosticable {
       other is FStyle &&
           runtimeType == other.runtimeType &&
           borderRadius == other.borderRadius &&
-          borderWidth == other.borderWidth;
+          borderWidth == other.borderWidth &&
+          pagePadding == other.pagePadding;
 
   @override
-  int get hashCode => borderRadius.hashCode ^ borderWidth.hashCode;
+  int get hashCode => borderRadius.hashCode ^ borderWidth.hashCode ^ pagePadding.hashCode;
 }
