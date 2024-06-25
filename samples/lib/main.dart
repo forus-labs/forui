@@ -63,6 +63,10 @@ class _AppRouter extends $_AppRouter {
       page: HeaderRoute.page,
     ),
     AutoRoute(
+      path: '/tabs/default',
+      page: TabsRoute.page,
+    ),
+    AutoRoute(
       path: '/text-field/default',
       page: TextFieldRoute.page,
     ),
