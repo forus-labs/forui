@@ -18,7 +18,6 @@ class Application extends StatelessWidget {
           child: const FScaffold(
             header: FHeader(
               title: 'Example',
-              actions: [],
             ),
             content: ExampleWidget(),
           ),
