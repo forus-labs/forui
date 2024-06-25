@@ -1,8 +1,8 @@
 <a href="https://forui.dev">
   <h1 align="center">
     <picture>
-      <source width="400" media="(prefers-color-scheme: dark)" srcset="docs/public/dark_logo.svg">
-      <img width="400" alt="Forui" src="docs/public/light_logo.svg">
+      <source width="400" media="(prefers-color-scheme: dark)" srcset="../docs/public/dark_logo.svg">
+      <img width="400" alt="Forui" src="../docs/public/light_logo.svg">
     </picture>
   </h1>
 </a>
