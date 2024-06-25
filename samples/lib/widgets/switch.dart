@@ -21,7 +21,7 @@ class SwitchPage extends SampleScaffold {
         builder: (context, _, __) => FSwitch(
           value: notifier.value,
           autofocus: true,
-          onChanged: (value) => notifier.value = value,
+          onChanged: (value) => notifier.value = !value,
         ),
       ),
     );
