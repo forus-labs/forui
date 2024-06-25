@@ -267,7 +267,7 @@ packages:
       path: "../forui"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.1.0"
   forui_assets:
     dependency: transitive
     description:

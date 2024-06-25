@@ -8,7 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:auto_route/auto_route.dart' as _i11;
 import 'package:forui_samples/main.dart' as _i5;
 import 'package:forui_samples/widgets/badge.dart' as _i1;
 import 'package:forui_samples/widgets/button.dart' as _i2;
@@ -17,13 +17,14 @@ import 'package:forui_samples/widgets/dialog.dart' as _i4;
 import 'package:forui_samples/widgets/header.dart' as _i6;
 import 'package:forui_samples/widgets/separator.dart' as _i7;
 import 'package:forui_samples/widgets/switch.dart' as _i8;
-import 'package:forui_samples/widgets/text_field.dart' as _i9;
+import 'package:forui_samples/widgets/tabs.dart' as _i9;
+import 'package:forui_samples/widgets/text_field.dart' as _i10;
 
-abstract class $_AppRouter extends _i10.RootStackRouter {
+abstract class $_AppRouter extends _i11.RootStackRouter {
   $_AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i10.PageFactory> pagesMap = {
+  final Map<String, _i11.PageFactory> pagesMap = {
     BadgeRoute.name: (routeData) {
       final queryParams = routeData.queryParams;
       final args = routeData.argsAs<BadgeRouteArgs>(
@@ -37,7 +38,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                   'primary',
                 ),
               ));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.BadgePage(
           theme: args.theme,
@@ -58,7 +59,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                   'primary',
                 ),
               ));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.ButtonIconPage(
           theme: args.theme,
@@ -83,7 +84,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                   'Button',
                 ),
               ));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i2.ButtonTextPage(
           theme: args.theme,
@@ -100,7 +101,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                 'theme',
                 'zinc-light',
               )));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i3.CardPage(theme: args.theme),
       );
@@ -118,7 +119,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                   false,
                 ),
               ));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i4.DialogPage(
           theme: args.theme,
@@ -127,7 +128,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
       );
     },
     EmptyRoute.name: (routeData) {
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i5.EmptyPage(),
       );
@@ -140,7 +141,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                 'theme',
                 'zinc-light',
               )));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i6.HeaderPage(theme: args.theme),
       );
@@ -153,7 +154,7 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                 'theme',
                 'zinc-light',
               )));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i7.SeparatorPage(theme: args.theme),
       );
@@ -166,9 +167,22 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                 'theme',
                 'zinc-light',
               )));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i8.SwitchPage(theme: args.theme),
+      );
+    },
+    TabsRoute.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<TabsRouteArgs>(
+          orElse: () => TabsRouteArgs(
+                  theme: queryParams.getString(
+                'theme',
+                'zinc-light',
+              )));
+      return _i11.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i9.TabsPage(theme: args.theme),
       );
     },
     TextFieldRoute.name: (routeData) {
@@ -184,9 +198,9 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
                   false,
                 ),
               ));
-      return _i10.AutoRoutePage<dynamic>(
+      return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i9.TextFieldPage(
+        child: _i10.TextFieldPage(
           theme: args.theme,
           enabled: args.enabled,
         ),
@@ -197,11 +211,11 @@ abstract class $_AppRouter extends _i10.RootStackRouter {
 
 /// generated route for
 /// [_i1.BadgePage]
-class BadgeRoute extends _i10.PageRouteInfo<BadgeRouteArgs> {
+class BadgeRoute extends _i11.PageRouteInfo<BadgeRouteArgs> {
   BadgeRoute({
     String theme = 'zinc-light',
     String style = 'primary',
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           BadgeRoute.name,
           args: BadgeRouteArgs(
@@ -217,8 +231,8 @@ class BadgeRoute extends _i10.PageRouteInfo<BadgeRouteArgs> {
 
   static const String name = 'BadgeRoute';
 
-  static const _i10.PageInfo<BadgeRouteArgs> page =
-      _i10.PageInfo<BadgeRouteArgs>(name);
+  static const _i11.PageInfo<BadgeRouteArgs> page =
+      _i11.PageInfo<BadgeRouteArgs>(name);
 }
 
 class BadgeRouteArgs {
@@ -239,11 +253,11 @@ class BadgeRouteArgs {
 
 /// generated route for
 /// [_i2.ButtonIconPage]
-class ButtonIconRoute extends _i10.PageRouteInfo<ButtonIconRouteArgs> {
+class ButtonIconRoute extends _i11.PageRouteInfo<ButtonIconRouteArgs> {
   ButtonIconRoute({
     String theme = 'zinc-light',
     String variant = 'primary',
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           ButtonIconRoute.name,
           args: ButtonIconRouteArgs(
@@ -259,8 +273,8 @@ class ButtonIconRoute extends _i10.PageRouteInfo<ButtonIconRouteArgs> {
 
   static const String name = 'ButtonIconRoute';
 
-  static const _i10.PageInfo<ButtonIconRouteArgs> page =
-      _i10.PageInfo<ButtonIconRouteArgs>(name);
+  static const _i11.PageInfo<ButtonIconRouteArgs> page =
+      _i11.PageInfo<ButtonIconRouteArgs>(name);
 }
 
 class ButtonIconRouteArgs {
@@ -281,12 +295,12 @@ class ButtonIconRouteArgs {
 
 /// generated route for
 /// [_i2.ButtonTextPage]
-class ButtonTextRoute extends _i10.PageRouteInfo<ButtonTextRouteArgs> {
+class ButtonTextRoute extends _i11.PageRouteInfo<ButtonTextRouteArgs> {
   ButtonTextRoute({
     String theme = 'zinc-light',
     String variant = 'primary',
     String label = 'Button',
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           ButtonTextRoute.name,
           args: ButtonTextRouteArgs(
@@ -304,8 +318,8 @@ class ButtonTextRoute extends _i10.PageRouteInfo<ButtonTextRouteArgs> {
 
   static const String name = 'ButtonTextRoute';
 
-  static const _i10.PageInfo<ButtonTextRouteArgs> page =
-      _i10.PageInfo<ButtonTextRouteArgs>(name);
+  static const _i11.PageInfo<ButtonTextRouteArgs> page =
+      _i11.PageInfo<ButtonTextRouteArgs>(name);
 }
 
 class ButtonTextRouteArgs {
@@ -329,10 +343,10 @@ class ButtonTextRouteArgs {
 
 /// generated route for
 /// [_i3.CardPage]
-class CardRoute extends _i10.PageRouteInfo<CardRouteArgs> {
+class CardRoute extends _i11.PageRouteInfo<CardRouteArgs> {
   CardRoute({
     String theme = 'zinc-light',
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           CardRoute.name,
           args: CardRouteArgs(theme: theme),
@@ -342,8 +356,8 @@ class CardRoute extends _i10.PageRouteInfo<CardRouteArgs> {
 
   static const String name = 'CardRoute';
 
-  static const _i10.PageInfo<CardRouteArgs> page =
-      _i10.PageInfo<CardRouteArgs>(name);
+  static const _i11.PageInfo<CardRouteArgs> page =
+      _i11.PageInfo<CardRouteArgs>(name);
 }
 
 class CardRouteArgs {
@@ -359,11 +373,11 @@ class CardRouteArgs {
 
 /// generated route for
 /// [_i4.DialogPage]
-class DialogRoute extends _i10.PageRouteInfo<DialogRouteArgs> {
+class DialogRoute extends _i11.PageRouteInfo<DialogRouteArgs> {
   DialogRoute({
     String theme = 'zinc-light',
     bool vertical = false,
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           DialogRoute.name,
           args: DialogRouteArgs(
@@ -379,8 +393,8 @@ class DialogRoute extends _i10.PageRouteInfo<DialogRouteArgs> {
 
   static const String name = 'DialogRoute';
 
-  static const _i10.PageInfo<DialogRouteArgs> page =
-      _i10.PageInfo<DialogRouteArgs>(name);
+  static const _i11.PageInfo<DialogRouteArgs> page =
+      _i11.PageInfo<DialogRouteArgs>(name);
 }
 
 class DialogRouteArgs {
@@ -401,8 +415,8 @@ class DialogRouteArgs {
 
 /// generated route for
 /// [_i5.EmptyPage]
-class EmptyRoute extends _i10.PageRouteInfo<void> {
-  const EmptyRoute({List<_i10.PageRouteInfo>? children})
+class EmptyRoute extends _i11.PageRouteInfo<void> {
+  const EmptyRoute({List<_i11.PageRouteInfo>? children})
       : super(
           EmptyRoute.name,
           initialChildren: children,
@@ -410,15 +424,15 @@ class EmptyRoute extends _i10.PageRouteInfo<void> {
 
   static const String name = 'EmptyRoute';
 
-  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i6.HeaderPage]
-class HeaderRoute extends _i10.PageRouteInfo<HeaderRouteArgs> {
+class HeaderRoute extends _i11.PageRouteInfo<HeaderRouteArgs> {
   HeaderRoute({
     String theme = 'zinc-light',
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           HeaderRoute.name,
           args: HeaderRouteArgs(theme: theme),
@@ -428,8 +442,8 @@ class HeaderRoute extends _i10.PageRouteInfo<HeaderRouteArgs> {
 
   static const String name = 'HeaderRoute';
 
-  static const _i10.PageInfo<HeaderRouteArgs> page =
-      _i10.PageInfo<HeaderRouteArgs>(name);
+  static const _i11.PageInfo<HeaderRouteArgs> page =
+      _i11.PageInfo<HeaderRouteArgs>(name);
 }
 
 class HeaderRouteArgs {
@@ -445,10 +459,10 @@ class HeaderRouteArgs {
 
 /// generated route for
 /// [_i7.SeparatorPage]
-class SeparatorRoute extends _i10.PageRouteInfo<SeparatorRouteArgs> {
+class SeparatorRoute extends _i11.PageRouteInfo<SeparatorRouteArgs> {
   SeparatorRoute({
     String theme = 'zinc-light',
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           SeparatorRoute.name,
           args: SeparatorRouteArgs(theme: theme),
@@ -458,8 +472,8 @@ class SeparatorRoute extends _i10.PageRouteInfo<SeparatorRouteArgs> {
 
   static const String name = 'SeparatorRoute';
 
-  static const _i10.PageInfo<SeparatorRouteArgs> page =
-      _i10.PageInfo<SeparatorRouteArgs>(name);
+  static const _i11.PageInfo<SeparatorRouteArgs> page =
+      _i11.PageInfo<SeparatorRouteArgs>(name);
 }
 
 class SeparatorRouteArgs {
@@ -475,10 +489,10 @@ class SeparatorRouteArgs {
 
 /// generated route for
 /// [_i8.SwitchPage]
-class SwitchRoute extends _i10.PageRouteInfo<SwitchRouteArgs> {
+class SwitchRoute extends _i11.PageRouteInfo<SwitchRouteArgs> {
   SwitchRoute({
     String theme = 'zinc-light',
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           SwitchRoute.name,
           args: SwitchRouteArgs(theme: theme),
@@ -488,8 +502,8 @@ class SwitchRoute extends _i10.PageRouteInfo<SwitchRouteArgs> {
 
   static const String name = 'SwitchRoute';
 
-  static const _i10.PageInfo<SwitchRouteArgs> page =
-      _i10.PageInfo<SwitchRouteArgs>(name);
+  static const _i11.PageInfo<SwitchRouteArgs> page =
+      _i11.PageInfo<SwitchRouteArgs>(name);
 }
 
 class SwitchRouteArgs {
@@ -504,12 +518,42 @@ class SwitchRouteArgs {
 }
 
 /// generated route for
-/// [_i9.TextFieldPage]
-class TextFieldRoute extends _i10.PageRouteInfo<TextFieldRouteArgs> {
+/// [_i9.TabsPage]
+class TabsRoute extends _i11.PageRouteInfo<TabsRouteArgs> {
+  TabsRoute({
+    String theme = 'zinc-light',
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
+          TabsRoute.name,
+          args: TabsRouteArgs(theme: theme),
+          rawQueryParams: {'theme': theme},
+          initialChildren: children,
+        );
+
+  static const String name = 'TabsRoute';
+
+  static const _i11.PageInfo<TabsRouteArgs> page =
+      _i11.PageInfo<TabsRouteArgs>(name);
+}
+
+class TabsRouteArgs {
+  const TabsRouteArgs({this.theme = 'zinc-light'});
+
+  final String theme;
+
+  @override
+  String toString() {
+    return 'TabsRouteArgs{theme: $theme}';
+  }
+}
+
+/// generated route for
+/// [_i10.TextFieldPage]
+class TextFieldRoute extends _i11.PageRouteInfo<TextFieldRouteArgs> {
   TextFieldRoute({
     String theme = 'zinc-light',
     bool enabled = false,
-    List<_i10.PageRouteInfo>? children,
+    List<_i11.PageRouteInfo>? children,
   }) : super(
           TextFieldRoute.name,
           args: TextFieldRouteArgs(
@@ -525,8 +569,8 @@ class TextFieldRoute extends _i10.PageRouteInfo<TextFieldRouteArgs> {
 
   static const String name = 'TextFieldRoute';
 
-  static const _i10.PageInfo<TextFieldRouteArgs> page =
-      _i10.PageInfo<TextFieldRouteArgs>(name);
+  static const _i11.PageInfo<TextFieldRouteArgs> page =
+      _i11.PageInfo<TextFieldRouteArgs>(name);
 }
 
 class TextFieldRouteArgs {
