@@ -20,7 +20,6 @@ class SeparatorPage extends SampleScaffold {
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Flutter Forui',

@@ -21,7 +21,6 @@ abstract class SampleScaffold extends StatelessWidget {
   Widget build(BuildContext context) => FTheme(
       data: theme,
       child: FScaffold(
-
         content: Center(
         child: child(context),
       ),
