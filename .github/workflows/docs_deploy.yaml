@@ -3,9 +3,23 @@ name: Docs Deploy
 on:
   push:
     branches: [master]
+    paths: 
+       - '.github/workflows/docs_deploy.yaml'
+       - 'docs/**'
+       - 'samples/**'
   workflow_dispatch:
+    inputs:
+      target:
+        type: choice
+        description: 'Environment'
+        required: true
+        options:
+          - development
+          - production
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages.
+env:
+  ENV: ${{ (startsWith(github.ref, 'refs/tags/forui') || inputs.target == 'production') && 'production' || 'development' }}
+
 permissions:
   contents: read
   pages: write
@@ -14,13 +28,14 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: pages
+  group: docs
   cancel-in-progress: false
 
 jobs:
-  build:
-    name: Build
+  docs:
+    name: Deploy Docs
     runs-on: ubuntu-latest
+    environment: ${{ env.ENV }}
     defaults:
       run:
         working-directory: ./docs
@@ -37,20 +52,40 @@ jobs:
       - uses: actions/configure-pages@v4
 
       - run: pnpm install
-      - run: pnpm export
+      - run: NEXT_PUBLIC_DEMO_URL=${{ env.DEMO_URL }} pnpm run export
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          path: ./docs/out
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ env.CLOUDFLARE_DOCS_PROJECT_NAME }}
+          directory: ./docs/out
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-  deploy:
-    name: Deploy
+  samples:
+    name: Deploy Samples
     runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    environment: ${{ env.ENV }}
+    defaults:
+      run:
+        working-directory: ./samples
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v2.12.0
+        with:
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter build web
+
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ env.CLOUDFLARE_DEMO_PROJECT_NAME }}
+          directory: ./samples/build/web
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
