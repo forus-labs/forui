@@ -49,14 +49,14 @@ jobs:
       - uses: actions/configure-pages@v4
 
       - run: pnpm install
-      - run: NEXT_PUBLIC_DEMO_URL=${{ env.DEMO_URL }} pnpm run export
+      - run: NEXT_PUBLIC_DEMO_URL=${{ vars.DEMO_URL }} pnpm run export
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ env.CLOUDFLARE_DOCS_PROJECT_NAME }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }}
           directory: ./docs/out
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -82,7 +82,7 @@ jobs:
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ env.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ env.CLOUDFLARE_DEMO_PROJECT_NAME }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }}
           directory: ./samples/build/web
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
