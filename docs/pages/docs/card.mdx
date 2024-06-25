@@ -6,14 +6,13 @@ Displays a card typically with a title, subtitle, and child widget.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget query={{}}/>
+      <Widget name='card' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
       FCard(
           title: 'Notification',
           subtitle: 'You have 3 unread messages.',
-          child: const Text('Some content here...'),
       );
       ```
   </Tabs.Tab>
@@ -21,18 +20,20 @@ Displays a card typically with a title, subtitle, and child widget.
 
 ## Usage
 
-### Title and Subtitle
-<Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <img src="https://nextra.site/assets/blog-theme.png" alt="Embed"/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart
-        FCard(
-            title: 'Notification',
-            subtitle: 'You have 3 unread messages.',
-            child: const Text('Some content here...'),
-        );
-        ```
-    </Tabs.Tab>
-</Tabs>
+### `FCard(...)`
+
+```dart
+FCard(
+  title: 'Notification',
+  subtitle: 'You have 3 unread messages.',
+  child: const FButton('Read messages', onPress: () {}),
+);
+```
+
+### `FCard.raw(...)`
+
+```dart
+FCard.raw(
+  child: const Placeholder(),
+);
+```

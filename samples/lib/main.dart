@@ -39,7 +39,7 @@ class _AppRouter extends $_AppRouter {
       initial: true,
     ),
     AutoRoute(
-      path: '/badge',
+      path: '/badge/default',
       page: BadgeRoute.page,
     ),
     AutoRoute(
@@ -51,31 +51,27 @@ class _AppRouter extends $_AppRouter {
       page: ButtonIconRoute.page,
     ),
     AutoRoute(
-      path: '/card',
+      path: '/card/default',
       page: CardRoute.page,
     ),
     AutoRoute(
-      path: '/dialog',
+      path: '/dialog/default',
       page: DialogRoute.page,
     ),
     AutoRoute(
-      path: '/header',
+      path: '/header/default',
       page: HeaderRoute.page,
     ),
     AutoRoute(
-      path: '/tabs',
-      page: TabsRoute.page,
-    ),
-    AutoRoute(
-      path: '/text-field',
+      path: '/text-field/default',
       page: TextFieldRoute.page,
     ),
     AutoRoute(
-      path: '/separator',
+      path: '/separator/default',
       page: SeparatorRoute.page,
     ),
     AutoRoute(
-      path: '/switch',
+      path: '/switch/default',
       page: SwitchRoute.page,
     )
   ];
