@@ -22,7 +22,7 @@ class FScaffold extends StatelessWidget {
   final Widget? footer;
 
   /// True if [FScaffoldStyle.contentPadding] should be applied to the [content]. Defaults to `true`.
-  final bool pad;
+  final bool contentPad;
 
   /// The style. Defaults to [FThemeData.scaffoldStyle].
   final FScaffoldStyle? style;
@@ -32,7 +32,7 @@ class FScaffold extends StatelessWidget {
     required this.content,
     this.header,
     this.footer,
-    this.pad = true,
+    this.contentPad = true,
     this.style,
     super.key,
   });
@@ -42,7 +42,7 @@ class FScaffold extends StatelessWidget {
     final style = this.style ?? context.theme.scaffoldStyle;
     Widget content = this.content;
 
-    if (pad) {
+    if (contentPad) {
       content = Padding(padding: style.contentPadding, child: content);
     }
 
@@ -62,7 +62,7 @@ class FScaffold extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('pad', value: pad, defaultValue: true, ifTrue: 'pad'))
+      ..add(FlagProperty('pad', value: contentPad, defaultValue: true, ifTrue: 'pad'))
       ..add(DiagnosticsProperty('style', style));
   }
 }
@@ -72,7 +72,7 @@ final class FScaffoldStyle with Diagnosticable {
   /// The background color.
   final Color backgroundColor;
 
-  /// The content padding. Only used when [FScaffold.pad] is `true`.
+  /// The content padding. Only used when [FScaffold.contentPad] is `true`.
   final EdgeInsets contentPadding;
 
   /// The header decoration.
