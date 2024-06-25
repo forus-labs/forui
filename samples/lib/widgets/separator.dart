@@ -13,50 +13,54 @@ class SeparatorPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) {
-    final theme = context.theme;
     final colorScheme = theme.colorScheme;
     final typography = theme.typography;
 
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Flutter Forui',
-            style: typography.xl2.copyWith(
-              color: colorScheme.foreground,
-              fontWeight: FontWeight.w600,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 300),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Flutter Forui',
+              style: typography.xl2.copyWith(
+                color: colorScheme.foreground,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          Text(
-            'An open-source widget library.',
-            style: typography.sm.copyWith(color: colorScheme.mutedForeground),
-          ),
-          const FSeparator(),
-          SizedBox(
-            height: 30,
-            child: Row(
-              children: [
-                Text(
-                  'Blog',
-                  style: typography.sm.copyWith(color: colorScheme.foreground),
-                ),
-                const FSeparator(vertical: true),
-                Text(
-                  'Docs',
-                  style: typography.sm.copyWith(color: colorScheme.foreground),
-                ),
-                const FSeparator(vertical: true),
-                Text(
-                  'Source',
-                  style: typography.sm.copyWith(color: colorScheme.foreground),
-                ),
-              ],
+            Text(
+              'An open-source widget library.',
+              style: typography.sm.copyWith(color: colorScheme.mutedForeground),
             ),
-          ),
-        ],
+            const FSeparator(),
+            SizedBox(
+              height: 30,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Blog',
+                    style: typography.sm.copyWith(color: colorScheme.foreground),
+                  ),
+                  const FSeparator(vertical: true),
+                  Text(
+                    'Docs',
+                    style: typography.sm.copyWith(color: colorScheme.foreground),
+                  ),
+                  const FSeparator(vertical: true),
+                  Text(
+                    'Source',
+                    style: typography.sm.copyWith(color: colorScheme.foreground),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

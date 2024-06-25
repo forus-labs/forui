@@ -14,19 +14,20 @@ abstract class SampleScaffold extends StatelessWidget {
   SampleScaffold({
     String theme = 'zinc-light',
     super.key,
-  }):
-    theme = themes[theme]!;
+  }) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(
-      data: theme,
-      child: FScaffold(
-
-        content: Center(
-        child: child(context),
-      ),
-    ),
-  );
+        data: theme,
+        child: FScaffold(
+          content: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: child(context),
+            ),
+          ),
+        ),
+      );
 
   Widget child(BuildContext context);
 }

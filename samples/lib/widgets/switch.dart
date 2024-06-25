@@ -18,10 +18,10 @@ class SwitchPage extends SampleScaffold {
       padding: const EdgeInsets.all(16),
       child: ValueListenableBuilder(
         valueListenable: notifier,
-        builder: (context, _, __) => FSwitch(
-          value: true,
+        builder: (context, value, __) => FSwitch(
+          value: value,
           autofocus: true,
-          onChanged: (value) {},
+          onChanged: (value) => notifier.value = value,
         ),
       ),
     );

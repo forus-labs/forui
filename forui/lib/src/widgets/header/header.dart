@@ -125,7 +125,7 @@ final class FHeaderStyle with Diagnosticable {
           height: 1,
         ),
         action = FHeaderActionStyle.inherit(colorScheme: colorScheme),
-        padding = style.pagePadding.copyWith(bottom: 10);
+        padding = style.pagePadding.copyWith(bottom: 15);
 
   /// Returns a copy of this [FHeaderStyle] with the given properties replaced.
   ///

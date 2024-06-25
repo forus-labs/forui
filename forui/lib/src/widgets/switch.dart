@@ -153,10 +153,7 @@ final class FSwitchStyle with Diagnosticable {
       : checkedColor = colorScheme.primary,
         uncheckedColor = colorScheme.border,
         thumbColor = colorScheme.background,
-        focusColor = HSLColor.fromColor(colorScheme.primary.withOpacity(0.80))
-            .withLightness(0.69)
-            .withSaturation(0.835)
-            .toColor();
+        focusColor = colorScheme.primary;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
