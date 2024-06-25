@@ -25,7 +25,7 @@ const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/forus-labs/forui',
   },
-  docsRepositoryBase: 'https://github.com/forus-labs/forui/tree/master/docs',
+  docsRepositoryBase: 'https://github.com/forus-labs/forui/tree/main/docs',
   navigation: {
     prev: true,
     next: true

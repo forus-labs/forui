@@ -3,7 +3,7 @@ name: Forui Example Presubmit
 on:
   workflow_dispatch: {}
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - .github/workflows/forui_example_presubmit.yaml
       - forui/example/**
