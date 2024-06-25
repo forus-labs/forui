@@ -1,0 +1,88 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Badge
+Displays a badge.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      FBadge(label: 'Badge');
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FBadge(...)`
+
+```dart
+FBadge(label: 'Badge');
+```
+
+### `FBadge.raw(...)`
+
+```dart
+FBadge.raw(builder: (context, style) => Text('Badge'));
+```
+## Examples
+
+### Primary
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      FBadge(label: 'Badge');
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+### Secondary
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{variant: 'secondary'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      FBadge(
+          label: 'Badge',
+          style: FBadgeStyle.secondary,
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+### Outline
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{variant: 'outline'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      FBadge(
+          label: 'Badge',
+          style: FBadgeStyle.outline,
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+### Destructive
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='badge' query={{variant: 'destructive'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      FBadge(
+          label: 'Badge',
+          style: FBadgeStyle.destructive,
+      );
+      ```
+  </Tabs.Tab>
+</Tabs>

@@ -1,0 +1,119 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Button
+Displays a button.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='text' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FButton(
+     label: 'Button',
+     onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FButton(...)`
+
+```dart
+FButton(
+  label: 'Button',
+  onPress: () {},
+);
+```
+
+### `FButton.raw(...)`
+
+```dart
+FButton.raw(
+  child: Text('Button'),
+  onPress: () {};
+);
+```
+## Examples
+
+### Primary
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='text' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FButton(
+      label: 'Button',
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Secondary
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='text' query={{variant: 'secondary'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FButton(
+      label: 'Button',
+      style: FButtonStyle.secondary,
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Outline
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='text' query={{variant: 'outline'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FButton(
+      label: 'Button',
+      style: FButtonStyle.outline,
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Destructive
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='text' query={{variant: 'destructive'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FButton(
+      label: 'Button',
+      style: FButtonStyle.destructive,
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### With Icon
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='icon' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FButton(
+      prefixIcon: FButtonIcon(icon: FAssets.icons.mail),
+      label: 'Login with Email',
+      onPress: () {},
+    ),
+    ```
+  </Tabs.Tab>
+</Tabs>
