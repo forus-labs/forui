@@ -15,13 +15,18 @@ class TextFieldPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
-    child: FTextField(
-      enabled: enabled,
-      label: 'Email',
-      hint: 'john@doe.com',
-    ),
+  Widget child(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
+        child: FTextField(
+          enabled: enabled,
+          label: 'Email',
+          hint: 'john@doe.com',
+        ),
+      ),
+    ],
   );
 }
 
@@ -33,12 +38,17 @@ class PasswordTextFieldPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
-    child: FTextField.password(
-      controller: TextEditingController(text: 'My password'),
-      label: 'Password',
-    ),
+  Widget child(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
+        child: FTextField.password(
+          controller: TextEditingController(text: 'My password'),
+          label: 'Password',
+        ),
+      ),
+    ],
   );
 }
 
@@ -50,10 +60,15 @@ class MultilineTextFieldPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => const Padding(
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical:30),
-    child: FTextField.multiline(
-      label: 'Leave a review',
-    ),
+  Widget child(BuildContext context) => const Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical:30),
+        child: FTextField.multiline(
+          label: 'Leave a review',
+        ),
+      ),
+    ],
   );
 }

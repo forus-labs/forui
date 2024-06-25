@@ -12,46 +12,56 @@ class ScaffoldPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => FScaffold(
-        header: FHeader(
-          title: 'Settings',
-          actions: [
-            FHeaderAction(
-              icon: FAssets.icons.ellipsis,
-              onPress: () {},
-            ),
-          ],
-        ),
-        content: ListView(
-          children: [
-            FCard(
-              title: 'Account',
-              subtitle: 'Make changes to your account here. Click save when you are done.',
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Column(
-                  children: [
-                    const FTextField(
-                      label: 'Name',
-                      hint: 'John Renalo',
-                    ),
-                    const SizedBox(height: 10),
-                    const FTextField(
-                      label: 'Email',
-                      hint: 'john@doe.com',
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 24, bottom: 16),
-                      child: FButton(
-                        label: 'Save',
-                        onPress: () {},
+  Widget child(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const SizedBox(height: 30),
+      SizedBox(
+        height: 420,
+        child: FScaffold(
+              header: FHeader(
+                title: 'Settings',
+                actions: [
+                  FHeaderAction(
+                    icon: FAssets.icons.ellipsis,
+                    onPress: () {},
+                  ),
+                ],
+              ),
+              content: Column(
+                children: [
+                  const SizedBox(height: 5),
+                  FCard(
+                    title: 'Account',
+                    subtitle: 'Make changes to your account here. Click save when you are done.',
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Column(
+                        children: [
+                          const FTextField(
+                            label: 'Name',
+                            hint: 'John Renalo',
+                          ),
+                          const SizedBox(height: 10),
+                          const FTextField(
+                            label: 'Email',
+                            hint: 'john@doe.com',
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 24, bottom: 16),
+                            child: FButton(
+                              label: 'Save',
+                              onPress: () {},
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      );
+      ),
+    ],
+  );
 }
