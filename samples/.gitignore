@@ -42,4 +42,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-samples/lib/main.gr.dart
+/lib/main.gr.dart

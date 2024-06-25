@@ -1,0 +1,86 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Scaffold
+Creates a visual scaffold for Forui widgets.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='scaffold' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FScaffold(
+      header: FHeader(
+        title: 'Settings',
+        actions: [
+          FHeaderAction(
+            icon: FAssets.icons.ellipsis,
+            onPress: () {},
+          ),
+        ],
+      ),
+      content: ListView(
+        children: [
+          FCard(
+            title: 'Account',
+            subtitle: 'Make changes to your account here. Click save when you are done.',
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Column(
+                children: [
+                  const FTextField(
+                    label: 'Name',
+                    hint: 'John Renalo',
+                  ),
+                  const SizedBox(height: 10),
+                  const FTextField(
+                    label: 'Email',
+                    hint: 'john@doe.com',
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24, bottom: 16),
+                    child: FButton(
+                      label: 'Save',
+                      onPress: () {},
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FScaffold(...)`
+
+```dart
+FScaffold(
+  header: FHeader(
+    title: 'Settings',
+    actions: [
+      FHeaderAction(
+        icon: FAssets.icons.ellipsis,
+        onPress: () {},
+      ),
+    ],
+  ),
+  contentPad: false,
+  content: Column(
+    children: [
+      FCard(
+        title: 'Notification',
+        subtitle: 'You have 3 unread messages.',
+        child: FButton(label: 'Read messages', onPress: () {}),
+      ),
+    ],
+  ),
+  footer: const Text('Created by Forus Labs'),
+);
+```

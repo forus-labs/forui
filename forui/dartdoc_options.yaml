@@ -1,0 +1,6 @@
+dartdoc:
+  ignore:
+    - ambiguous-reexport
+  linkToSource:
+    root: '.'
+    uriTemplate: "https://github.com/forus-labs/forui/tree/master/forui/%f%#L%l%"

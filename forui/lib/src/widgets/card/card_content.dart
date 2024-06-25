@@ -86,7 +86,7 @@ final class FCardContentStyle with Diagnosticable {
   const FCardContentStyle({
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 16),
+    this.padding = const EdgeInsets.fromLTRB(16, 16, 16, 16),
   });
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
@@ -94,8 +94,11 @@ final class FCardContentStyle with Diagnosticable {
       : titleTextStyle = typography.xl2.copyWith(
           fontWeight: FontWeight.w600,
           color: colorScheme.foreground,
+          height: 1.5,
         ),
-        subtitleTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground),
+        subtitleTextStyle = typography.sm.copyWith(
+          color: colorScheme.mutedForeground,
+        ),
         padding = const EdgeInsets.fromLTRB(16, 12, 16, 16);
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.

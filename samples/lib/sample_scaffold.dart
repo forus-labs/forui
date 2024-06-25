@@ -18,11 +18,11 @@ abstract class SampleScaffold extends StatelessWidget {
     theme = themes[theme]!;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: theme.colorScheme.background,
-    body: FTheme(
+  Widget build(BuildContext context) => FTheme(
       data: theme,
-      child: Center(
+      child: FScaffold(
+
+        content: Center(
         child: child(context),
       ),
     ),

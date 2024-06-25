@@ -1,0 +1,133 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from '../../components/widget';
+
+# Text Fields
+A text field lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTextField(
+      enabled: enabled,
+      label: 'Email',
+      hint: 'john@doe.com',
+    )
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTextField(...)`
+
+```dart
+FTextField(
+  enabled: true,
+  label: 'Email',
+  hint: 'john@doe.com',
+  footer: 'Enter your email associated with your Forui account.',
+  keyboardType: TextInputType.emailAddress,
+  textCapitalization: TextCapitalization.none,
+);
+```
+
+### `FTextField.email(...)`
+
+```dart
+FTextField.email(
+  label: 'Email',
+  hint: 'john@doe.com',
+  footer: 'Enter your email associated with your Forui account.',
+);
+```
+
+### `FTextField.password(...)`
+
+```dart
+FTextField.password(
+  label: 'Password',
+  footer: 'Your password must be at least 8 characters long.',
+);
+```
+
+### `FTextField.multiline(...)`
+
+```dart
+FTextField.multiline(
+  label: 'Description',
+  hint: 'Enter a description...',
+  footer: 'Enter a description of the item.',
+);
+```
+
+
+## Examples
+
+### Enabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTextField.email(
+      label: 'Email',
+      hint: 'john@doe.com',
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'false'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTextField.email(
+      label: 'Email',
+      hint: 'john@doe.com',
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+### Password
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='password' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTextField.password(
+      controller: TextEditingController(text: 'My password'),
+      label: 'Password',
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Multiline
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='multiline' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTextField.multiline(
+      label: 'Leave a review',
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+

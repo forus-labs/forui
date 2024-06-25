@@ -1,0 +1,36 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Switch
+A switch that allows the user to toggle between checked and unchecked.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='switch' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    final notifier = ValueNotifier(false);
+
+    ValueListenableBuilder(
+      valueListenable: notifier,
+      builder: (context, _, __) => FSwitch(
+        value: notifier.value,
+        onChanged: (value) => notifier.value = value,
+      ),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FSwitch(...)`
+
+```dart
+FSwitch(
+  value: true,
+  autofocus: true,
+  onChanged: (value) {},
+);
+```

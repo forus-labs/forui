@@ -22,7 +22,7 @@ class TabsPage extends SampleScaffold {
                 title: 'Account',
                 subtitle: 'Make changes to your account here. Click save when you are done.',
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 12),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Column(
                     children: [
                       const FTextField(
@@ -52,7 +52,7 @@ class TabsPage extends SampleScaffold {
                 title: 'Password',
                 subtitle: 'Change your password here. After saving, you will be logged out.',
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 12),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Column(
                     children: [
                       const FTextField(label: 'Current password'),

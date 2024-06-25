@@ -24,3 +24,36 @@ class TextFieldPage extends SampleScaffold {
     ),
   );
 }
+
+@RoutePage()
+class PasswordTextFieldPage extends SampleScaffold {
+
+  PasswordTextFieldPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical:10),
+    child: FTextField.password(
+      controller: TextEditingController(text: 'My password'),
+      label: 'Password',
+    ),
+  );
+}
+
+@RoutePage()
+class MultilineTextFieldPage extends SampleScaffold {
+
+  MultilineTextFieldPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => const Padding(
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical:10),
+    child: FTextField.multiline(
+      label: 'Leave a review',
+    ),
+  );
+}
