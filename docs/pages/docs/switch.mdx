@@ -14,8 +14,8 @@ A switch that allows the user to toggle between checked and unchecked.
 
     ValueListenableBuilder(
       valueListenable: notifier,
-      builder: (context, _, __) => FSwitch(
-        value: notifier.value,
+      builder: (context, value, __) => FSwitch(
+        value: value,
         onChanged: (value) => notifier.value = value,
       ),
     );
