@@ -13,7 +13,6 @@ class SeparatorPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) {
-    final theme = context.theme;
     final colorScheme = theme.colorScheme;
     final typography = theme.typography;
 
