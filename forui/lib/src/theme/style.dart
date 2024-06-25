@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -17,7 +16,7 @@ final class FStyle with Diagnosticable {
   /// The border width. Defaults to 1.
   final double borderWidth;
 
-  /// The pagePadding. Defaults to `EdgeInsets.all(4)`.
+  /// The page's padding. Defaults to `EdgeInsets.all(4)`.
   final EdgeInsets pagePadding;
 
   /// Creates an [FStyle].

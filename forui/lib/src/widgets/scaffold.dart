@@ -21,7 +21,7 @@ class FScaffold extends StatelessWidget {
   /// The footer.
   final Widget? footer;
 
-  /// The pad. Defaults to `true`.
+  /// True if [FScaffoldStyle.contentPadding] should be applied to the [content]. Defaults to `true`.
   final bool pad;
 
   /// The style. Defaults to [FThemeData.scaffoldStyle].
@@ -62,7 +62,7 @@ class FScaffold extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('pad', value: pad, defaultValue: true))
+      ..add(FlagProperty('pad', value: pad, defaultValue: true, ifTrue: 'pad'))
       ..add(DiagnosticsProperty('style', style));
   }
 }
