@@ -16,7 +16,7 @@ class TextFieldPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical:10),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
     child: FTextField(
       enabled: enabled,
       label: 'Email',
@@ -34,7 +34,7 @@ class PasswordTextFieldPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical:10),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
     child: FTextField.password(
       controller: TextEditingController(text: 'My password'),
       label: 'Password',
@@ -51,7 +51,7 @@ class MultilineTextFieldPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => const Padding(
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical:10),
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical:30),
     child: FTextField.multiline(
       label: 'Leave a review',
     ),
