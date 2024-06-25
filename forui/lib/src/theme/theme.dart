@@ -33,7 +33,7 @@ import 'package:forui/forui.dart';
 ///
 /// See [FThemeData] which describes of the actual configuration of a theme.
 class FTheme extends StatelessWidget {
-  /// Returns the current [FThemeData], or [FThemes.zinc.light] if there is no ancestor [FTheme].
+  /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
   ///
   /// It is recommended to use the terser [ThemeBuildContext.theme] getter instead.
   ///
@@ -143,7 +143,7 @@ extension ThemeBuildContext on BuildContext {
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [theme] always returns [FThemes.zinc.light]
+  /// ### [theme] always returns `FThemes.zinc.light`
   ///
   /// One of the most common causes is calling [theme] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [theme] to a descendant widget.
