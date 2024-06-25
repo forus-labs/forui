@@ -34,24 +34,21 @@ class EmptyPage extends StatelessWidget {
 class _AppRouter extends $_AppRouter {
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: EmptyRoute.page, initial: true),
+    AutoRoute(
+      page: EmptyRoute.page,
+      initial: true,
+    ),
     AutoRoute(
       path: '/badge',
       page: BadgeRoute.page,
     ),
     AutoRoute(
-      path: '/button',
-      page: EmptyRoute.page,
-      children: [
-        AutoRoute(
-          path: 'text',
-          page: ButtonTextRoute.page,
-        ),
-        AutoRoute(
-          path: 'icon',
-          page: ButtonIconRoute.page,
-        ),
-      ],
+      path: '/button/text',
+      page: ButtonTextRoute.page,
+    ),
+    AutoRoute(
+      path: '/button/icon',
+      page: ButtonIconRoute.page,
     ),
     AutoRoute(
       path: '/card',
