@@ -46,6 +46,9 @@ final class FThemeData with Diagnosticable {
   /// The text field style.
   final FTextFieldStyle textFieldStyle;
 
+  /// The scaffold style.
+  final FScaffoldStyle scaffoldStyle;
+
   /// The separator styles.
   final FSeparatorStyles separatorStyles;
 
@@ -67,6 +70,7 @@ final class FThemeData with Diagnosticable {
     required this.headerStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
+    required this.scaffoldStyle,
     required this.separatorStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
@@ -86,16 +90,13 @@ final class FThemeData with Diagnosticable {
       typography: typography,
       style: style,
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      buttonStyles: FButtonStyles.inherit(
-        colorScheme: colorScheme,
-        typography: typography,
-        style: style,
-      ),
+      buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      dialogStyle: FDialogStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
-      headerStyle: FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
+      dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      headerStyle: FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       separatorStyles: FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme),
     );
@@ -129,6 +130,7 @@ final class FThemeData with Diagnosticable {
     FHeaderStyle? headerStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
+    FScaffoldStyle? scaffoldStyle,
     FSeparatorStyles? separatorStyles,
     FSwitchStyle? switchStyle,
   }) =>
@@ -143,6 +145,7 @@ final class FThemeData with Diagnosticable {
         headerStyle: headerStyle ?? this.headerStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
+        scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
         separatorStyles: separatorStyles ?? this.separatorStyles,
         switchStyle: switchStyle ?? this.switchStyle,
       );
@@ -159,8 +162,9 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tabsStyle', tabsStyle))
+      ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
@@ -180,6 +184,7 @@ final class FThemeData with Diagnosticable {
           headerStyle == other.headerStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
+          scaffoldStyle == other.scaffoldStyle &&
           separatorStyles == other.separatorStyles &&
           switchStyle == other.switchStyle;
 
@@ -195,6 +200,7 @@ final class FThemeData with Diagnosticable {
       headerStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
+      scaffoldStyle.hashCode ^
       separatorStyles.hashCode ^
       switchStyle.hashCode;
 }

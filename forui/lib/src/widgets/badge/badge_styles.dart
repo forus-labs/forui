@@ -16,9 +16,9 @@ class FBadgeStyles with Diagnosticable {
 
   /// Creates a [FBadgeStyles].
   FBadgeStyles({
-    required this.primary, 
-    required this.secondary, 
-    required this.outline, 
+    required this.primary,
+    required this.secondary,
+    required this.outline,
     required this.destructive,
   });
 

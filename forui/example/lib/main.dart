@@ -15,14 +15,12 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         home: FTheme(
           data: FThemes.zinc.light,
-          child: Scaffold(
-            backgroundColor: FThemes.zinc.light.colorScheme.background,
-            body: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ExampleWidget(),
-              ],
+          child: const FScaffold(
+            header: FHeader(
+              title: 'Example',
+              actions: [],
             ),
+            content: ExampleWidget(),
           ),
         ),
       );
