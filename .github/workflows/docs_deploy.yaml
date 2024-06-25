@@ -58,7 +58,6 @@ jobs:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }}
           directory: ./docs/out
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
   samples:
     name: Deploy Samples
@@ -85,4 +84,3 @@ jobs:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }}
           directory: ./samples/build/web
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
