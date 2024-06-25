@@ -34,57 +34,61 @@ class EmptyPage extends StatelessWidget {
 class _AppRouter extends $_AppRouter {
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(
-      page: EmptyRoute.page,
-      initial: true,
-    ),
-    AutoRoute(
-      path: '/badge/default',
-      page: BadgeRoute.page,
-    ),
-    AutoRoute(
-      path: '/button/text',
-      page: ButtonTextRoute.page,
-    ),
-    AutoRoute(
-      path: '/button/icon',
-      page: ButtonIconRoute.page,
-    ),
-    AutoRoute(
-      path: '/card/default',
-      page: CardRoute.page,
-    ),
-    AutoRoute(
-      path: '/dialog/default',
-      page: DialogRoute.page,
-    ),
-    AutoRoute(
-      path: '/header/default',
-      page: HeaderRoute.page,
-    ),
-    AutoRoute(
-      path: '/tabs/default',
-      page: TabsRoute.page,
-    ),
-    AutoRoute(
-      path: '/text-field/default',
-      page: TextFieldRoute.page,
-    ),
-    AutoRoute(
-      path: '/text-field/password',
-      page: PasswordTextFieldRoute.page,
-    ),
-    AutoRoute(
-      path: '/text-field/multiline',
-      page: MultilineTextFieldRoute.page,
-    ),
-    AutoRoute(
-      path: '/separator/default',
-      page: SeparatorRoute.page,
-    ),
-    AutoRoute(
-      path: '/switch/default',
-      page: SwitchRoute.page,
-    )
-  ];
+        AutoRoute(
+          page: EmptyRoute.page,
+          initial: true,
+        ),
+        AutoRoute(
+          path: '/badge/default',
+          page: BadgeRoute.page,
+        ),
+        AutoRoute(
+          path: '/button/text',
+          page: ButtonTextRoute.page,
+        ),
+        AutoRoute(
+          path: '/button/icon',
+          page: ButtonIconRoute.page,
+        ),
+        AutoRoute(
+          path: '/card/default',
+          page: CardRoute.page,
+        ),
+        AutoRoute(
+          path: '/dialog/default',
+          page: DialogRoute.page,
+        ),
+        AutoRoute(
+          path: '/header/default',
+          page: HeaderRoute.page,
+        ),
+        AutoRoute(
+          path: '/tabs/default',
+          page: TabsRoute.page,
+        ),
+        AutoRoute(
+          path: '/text-field/default',
+          page: TextFieldRoute.page,
+        ),
+        AutoRoute(
+          path: '/text-field/password',
+          page: PasswordTextFieldRoute.page,
+        ),
+        AutoRoute(
+          path: '/text-field/multiline',
+          page: MultilineTextFieldRoute.page,
+        ),
+        AutoRoute(
+          path: '/scaffold/default',
+          page: ScaffoldRoute.page,
+        ),
+        AutoRoute(
+          path: '/separator/default',
+          page: SeparatorRoute.page,
+        ),
+        AutoRoute(
+          path: '/switch/default',
+          page: SwitchRoute.page,
+        )
+      ];
 }
