@@ -2,7 +2,7 @@ import { Tabs } from 'nextra/components';
 import { Widget } from "../../components/widget";
 
 # Badge
-Displays a badge.
+A badge typically draws attention to specific information, such as labels and counts.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -45,7 +45,7 @@ FBadge.raw(builder: (context, style) => Text('Badge'));
 ### Secondary
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{variant: 'secondary'}}/>
+      <Widget name='badge' query={{style: 'secondary'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
@@ -60,7 +60,7 @@ FBadge.raw(builder: (context, style) => Text('Badge'));
 ### Outline
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{variant: 'outline'}}/>
+      <Widget name='badge' query={{style: 'outline'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
@@ -75,7 +75,7 @@ FBadge.raw(builder: (context, style) => Text('Badge'));
 ### Destructive
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{variant: 'destructive'}}/>
+      <Widget name='badge' query={{style: 'destructive'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart

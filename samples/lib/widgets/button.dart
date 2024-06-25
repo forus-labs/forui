@@ -20,10 +20,10 @@ class ButtonTextPage extends SampleScaffold {
 
   ButtonTextPage({
     @queryParam super.theme,
-    @queryParam String variant = 'primary',
+    @queryParam String style = 'primary',
     @queryParam this.label = 'Button',
   }):
-    variant = variants[variant] ?? Variant.primary;
+    variant = variants[style] ?? Variant.primary;
 
   @override
   Widget child(BuildContext context) => IntrinsicWidth(

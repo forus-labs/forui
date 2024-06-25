@@ -2,7 +2,7 @@ import { Tabs } from 'nextra/components';
 import { Widget } from "../../components/widget";
 
 # Button
-Displays a button.
+A button.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -11,8 +11,8 @@ Displays a button.
   <Tabs.Tab>
     ```dart
     FButton(
-     label: 'Button',
-     onPress: () {},
+      label: 'Button',
+      onPress: () {},
     );
     ```
   </Tabs.Tab>
@@ -57,7 +57,7 @@ FButton.raw(
 ### Secondary
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='button' variant='text' query={{variant: 'secondary'}}/>
+    <Widget name='button' variant='text' query={{style: 'secondary'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
@@ -73,7 +73,7 @@ FButton.raw(
 ### Outline
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='button' variant='text' query={{variant: 'outline'}}/>
+    <Widget name='button' variant='text' query={{style: 'outline'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
@@ -89,7 +89,7 @@ FButton.raw(
 ### Destructive
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='button' variant='text' query={{variant: 'destructive'}}/>
+    <Widget name='button' variant='text' query={{style: 'destructive'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
