@@ -39,7 +39,7 @@ class FTheme extends StatelessWidget {
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [FTheme.of] always returns [FThemes.zinc.light]
+  /// ### [FTheme.of] always returns `FThemes.zinc.light`
   ///
   /// One of the most common causes is calling [FTheme.of] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [FTheme.of] to a descendant widget.
@@ -139,7 +139,7 @@ class _InheritedTheme extends InheritedWidget {
 
 /// Provides functions for accessing the current [FThemeData].
 extension ThemeBuildContext on BuildContext {
-  /// Returns the current [FThemeData], or [FThemes.zinc.light] if there is no ancestor [FTheme].
+  /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
   ///
   /// ## Troubleshooting:
   ///

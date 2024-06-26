@@ -36,15 +36,15 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
-              child: value ?
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: children,
-                ) :
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: children,
-                ),
+              child: value
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: children,
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: children,
+                    ),
             ),
           );
 

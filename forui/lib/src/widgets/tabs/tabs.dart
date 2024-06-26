@@ -109,7 +109,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
                   Tab(
                     height: style.height,
                     child: tab.rawLabel ?? Text(tab.label!),
-                  )
+                  ),
               ],
               controller: (widget.controller ?? _controller)._controller,
               isScrollable: widget.scrollable,

@@ -9,8 +9,7 @@ import 'package:forui_samples/sample_scaffold.dart';
 // ignore_for_file: invalid_use_of_internal_member, implementation_imports
 
 final variants = {
-  for (final value in Variant.values)
-    value.name: value,
+  for (final value in Variant.values) value.name: value,
 };
 
 @RoutePage()
@@ -22,17 +21,16 @@ class ButtonTextPage extends SampleScaffold {
     @queryParam super.theme,
     @queryParam String style = 'primary',
     @queryParam this.label = 'Button',
-  }):
-    variant = variants[style] ?? Variant.primary;
+  }) : variant = variants[style] ?? Variant.primary;
 
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
-    child: FButton(
-      label: label,
-      style: variant,
-      onPress: () {  },
-    ),
-  );
+        child: FButton(
+          label: label,
+          style: variant,
+          onPress: () {},
+        ),
+      );
 }
 
 @RoutePage()
@@ -42,16 +40,15 @@ class ButtonIconPage extends SampleScaffold {
   ButtonIconPage({
     @queryParam super.theme = 'zinc-light',
     @queryParam String variant = 'primary',
-  }):
-    variant = variants[variant]!;
+  }) : variant = variants[variant]!;
 
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
-    child: FButton(
-      prefixIcon: FButtonIcon(icon: FAssets.icons.mail),
-      label: 'Login with Email',
-      style: variant,
-      onPress: () {  },
-    ),
-  );
+        child: FButton(
+          prefixIcon: FButtonIcon(icon: FAssets.icons.mail),
+          label: 'Login with Email',
+          style: variant,
+          onPress: () {},
+        ),
+      );
 }

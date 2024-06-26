@@ -10,8 +10,7 @@ import 'package:forui_samples/sample_scaffold.dart';
 @RoutePage()
 class BadgePage extends SampleScaffold {
   static final styles = {
-    for (final value in Variant.values)
-      value.name: value,
+    for (final value in Variant.values) value.name: value,
   };
 
   final FBadgeStyle style;
@@ -19,12 +18,11 @@ class BadgePage extends SampleScaffold {
   BadgePage({
     @queryParam super.theme,
     @queryParam String style = 'primary',
-  }):
-    style = styles[style]!;
+  }) : style = styles[style]!;
 
   @override
   Widget child(BuildContext context) => FBadge(
-    label: 'Badge',
-    style: style,
-  );
+        label: 'Badge',
+        style: style,
+      );
 }

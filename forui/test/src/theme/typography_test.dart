@@ -72,20 +72,113 @@ void main() {
 
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
         expect(
-            typography.xs,
-            TextStyle(
-                color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 12, height: 1,));
-        expect(typography.sm, TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily,fontSize: 14, height: 1.25,));
-        expect(typography.base, TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily,fontSize: 16, height: 1.5));
-        expect(typography.lg, TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 18, height: 1.75));
-        expect(typography.xl, TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily,fontSize: 20, height: 1.75));
-        expect(typography.xl2, TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily,fontSize: 22, height: 2));
-        expect(typography.xl3, TextStyle(color: colorScheme.foreground,fontFamily: typography.defaultFontFamily, fontSize: 30, height: 2.25));
-        expect(typography.xl4, TextStyle(color: colorScheme.foreground,fontFamily: typography.defaultFontFamily, fontSize: 36, height: 2.5));
-        expect(typography.xl5, TextStyle(color: colorScheme.foreground,fontFamily: typography.defaultFontFamily, fontSize: 48, height: 1));
-        expect(typography.xl6, TextStyle(color: colorScheme.foreground,fontFamily: typography.defaultFontFamily, fontSize: 60, height: 1));
-        expect(typography.xl7, TextStyle(color: colorScheme.foreground,fontFamily: typography.defaultFontFamily, fontSize: 72, height: 1));
-        expect(typography.xl8, TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily,fontSize: 96, height: 1));
+          typography.xs,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 12,
+            height: 1,
+          ),
+        );
+        expect(
+          typography.sm,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 14,
+            height: 1.25,
+          ),
+        );
+        expect(
+          typography.base,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 16,
+            height: 1.5,
+          ),
+        );
+        expect(
+          typography.lg,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 18,
+            height: 1.75,
+          ),
+        );
+        expect(
+          typography.xl,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 20,
+            height: 1.75,
+          ),
+        );
+        expect(
+          typography.xl2,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 22,
+            height: 2,
+          ),
+        );
+        expect(
+          typography.xl3,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 30,
+            height: 2.25,
+          ),
+        );
+        expect(
+          typography.xl4,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 36,
+            height: 2.5,
+          ),
+        );
+        expect(
+          typography.xl5,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 48,
+            height: 1,
+          ),
+        );
+        expect(
+          typography.xl6,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 60,
+            height: 1,
+          ),
+        );
+        expect(
+          typography.xl7,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 72,
+            height: 1,
+          ),
+        );
+        expect(
+          typography.xl8,
+          TextStyle(
+            color: colorScheme.foreground,
+            fontFamily: typography.defaultFontFamily,
+            fontSize: 96,
+            height: 1,
+          ),
+        );
       });
 
       test(
@@ -196,22 +289,23 @@ void main() {
       typography.debugFillProperties(builder);
 
       expect(
-          builder.properties.map((p) => p.toString()),
-          [
-            StringProperty('family', 'Roboto'),
-            DiagnosticsProperty('xs', const TextStyle(fontSize: 1)),
-            DiagnosticsProperty('sm', const TextStyle(fontSize: 2)),
-            DiagnosticsProperty('base', const TextStyle(fontSize: 3)),
-            DiagnosticsProperty('lg', const TextStyle(fontSize: 4)),
-            DiagnosticsProperty('xl', const TextStyle(fontSize: 5)),
-            DiagnosticsProperty('xl2', const TextStyle(fontSize: 6)),
-            DiagnosticsProperty('xl3', const TextStyle(fontSize: 7)),
-            DiagnosticsProperty('xl4', const TextStyle(fontSize: 8)),
-            DiagnosticsProperty('xl5', const TextStyle(fontSize: 9)),
-            DiagnosticsProperty('xl6', const TextStyle(fontSize: 10)),
-            DiagnosticsProperty('xl7', const TextStyle(fontSize: 11)),
-            DiagnosticsProperty('xl8', const TextStyle(fontSize: 12)),
-          ].map((p) => p.toString()));
+        builder.properties.map((p) => p.toString()),
+        [
+          StringProperty('family', 'Roboto'),
+          DiagnosticsProperty('xs', const TextStyle(fontSize: 1)),
+          DiagnosticsProperty('sm', const TextStyle(fontSize: 2)),
+          DiagnosticsProperty('base', const TextStyle(fontSize: 3)),
+          DiagnosticsProperty('lg', const TextStyle(fontSize: 4)),
+          DiagnosticsProperty('xl', const TextStyle(fontSize: 5)),
+          DiagnosticsProperty('xl2', const TextStyle(fontSize: 6)),
+          DiagnosticsProperty('xl3', const TextStyle(fontSize: 7)),
+          DiagnosticsProperty('xl4', const TextStyle(fontSize: 8)),
+          DiagnosticsProperty('xl5', const TextStyle(fontSize: 9)),
+          DiagnosticsProperty('xl6', const TextStyle(fontSize: 10)),
+          DiagnosticsProperty('xl7', const TextStyle(fontSize: 11)),
+          DiagnosticsProperty('xl8', const TextStyle(fontSize: 12)),
+        ].map((p) => p.toString()),
+      );
     });
 
     group('equality and hashcode', () {

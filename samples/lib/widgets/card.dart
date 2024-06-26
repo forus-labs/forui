@@ -13,12 +13,12 @@ class CardPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      FCard(
-        title: 'Notifications',
-        subtitle: 'You have 3 unread messages.',
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FCard(
+            title: 'Notifications',
+            subtitle: 'You have 3 unread messages.',
+          ),
+        ],
+      );
 }

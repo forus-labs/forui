@@ -27,8 +27,6 @@ dependencies:
     sdk: flutter
   forui:
     path: ../
-  forui_assets:
-    path: ../../forui_assets
   sugar: ^3.1.0
 
 dev_dependencies:

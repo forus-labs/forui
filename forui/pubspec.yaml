@@ -3,13 +3,11 @@ description: Forui is a UI library for Flutter that provides a set of minimalist
 version: 0.1.0
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
-repository: https://github.com/forus-labs/forui
+repository: https://github.com/forus-labs/forui/tree/main/forui
 issue_tracker: https://github.com/forus-labs/forui/issues
 topics:
   - ui
   - widget
-
-publish_to: 'none' # TODO publish forui_assets first
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
@@ -21,9 +19,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.10+1
-  # TODO publish forui_assets first
-  forui_assets:
-    path: ../forui_assets
+  forui_assets: ^0.1.0
   google_fonts: ^6.2.0
   meta: ^1.11.0
   nitrogen_types: ^0.2.0

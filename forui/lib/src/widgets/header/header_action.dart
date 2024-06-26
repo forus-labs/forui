@@ -105,7 +105,8 @@ class FHeaderActionStyle with Diagnosticable {
   /// print(copy.enabledColor); // black
   /// print(copy.disabledColor); // blue
   /// ```
-  @useResult FHeaderActionStyle copyWith({
+  @useResult
+  FHeaderActionStyle copyWith({
     Color? enabledColor,
     Color? disabledColor,
     double? size,

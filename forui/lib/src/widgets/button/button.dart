@@ -73,7 +73,7 @@ class FButton extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FButton] that contains a [prefixIcon], [label]/[rawLabel], and [suffixIcon].
-  /// 
+  ///
   /// The button layout is as follows, assuming the locale is read from left to right:
   /// ```
   /// |---------------------------------------------------|
@@ -82,7 +82,7 @@ class FButton extends StatelessWidget {
   /// ```
   ///
   /// [FButtonIcon] provides a convenient way to transform a bundled SVG icon into a [prefixIcon] and [suffixIcon].
-  /// 
+  ///
   /// ## Contract:
   /// Throws [AssertionError] if:
   /// * both [label] and [rawLabel] are not null
@@ -100,12 +100,12 @@ class FButton extends StatelessWidget {
     Widget? rawLabel,
     super.key,
   })  : assert((label != null) ^ (rawLabel != null), 'Either "label" or "rawLabel" must be provided, but not both.'),
-    child = FButtonContent(
-      prefixIcon: prefixIcon,
-      suffixIcon: suffixIcon,
-      label: label,
-      rawLabel: rawLabel,
-    );
+        child = FButtonContent(
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          label: label,
+          rawLabel: rawLabel,
+        );
 
   /// Creates a [FButton] with custom content.
   const FButton.raw({
@@ -173,7 +173,7 @@ class FButton extends StatelessWidget {
 
 /// A [FButton]'s style.
 ///
-/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonCustomStyle]. The pre-defined 
+/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonCustomStyle]. The pre-defined
 /// styles are a convenient shorthand for the various [FButtonCustomStyle]s in the current context's [FButtonStyles].
 sealed class FButtonStyle {
   /// The button's primary style.
@@ -197,7 +197,8 @@ sealed class FButtonStyle {
   static const FButtonStyle destructive = Variant.destructive;
 }
 
-@internal enum Variant implements FButtonStyle {
+@internal
+enum Variant implements FButtonStyle {
   primary,
   secondary,
   outline,
@@ -242,7 +243,8 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   /// print(copy.background); // Colors.blue
   /// print(copy.border); // Colors.black
   /// ```
-  @useResult FButtonCustomStyle copyWith({
+  @useResult
+  FButtonCustomStyle copyWith({
     BoxDecoration? enabledBoxDecoration,
     BoxDecoration? disabledBoxDecoration,
     FButtonContentStyle? content,

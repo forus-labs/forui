@@ -16,24 +16,30 @@ class UnderTest extends StatelessWidget {
   Widget build(BuildContext context) {
     final actions = [
       FButton(label: 'Continue', onPress: () {}),
-      FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () {
-        Navigator.of(context).pop();
-      }),
+      FButton(
+        style: FButtonStyle.outline,
+        label: 'Cancel',
+        onPress: () {
+          Navigator.of(context).pop();
+        },
+      ),
     ];
 
     if (raw) {
       return FDialog(
         direction: direction,
         rawTitle: const Text('Are you absolutely sure?'),
-        rawBody: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+        rawBody: const Text(
+          'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+        ),
         actions: actions,
       );
-
     } else {
       return FDialog(
         direction: direction,
         title: 'Are you absolutely sure?',
-        body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+        body:
+            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
         actions: actions,
       );
     }
@@ -47,7 +53,6 @@ class UnderTest extends StatelessWidget {
       ..add(DiagnosticsProperty('raw', raw));
   }
 }
-
 
 void main() {
   group('FDialog', () {

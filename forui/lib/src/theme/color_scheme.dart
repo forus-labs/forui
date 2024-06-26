@@ -125,7 +125,8 @@ final class FColorScheme with Diagnosticable {
   /// print(copy.brightness); // Brightness.dark
   /// print(copy.background); // Colors.blue
   /// ```
-  @useResult FColorScheme copyWith({
+  @useResult
+  FColorScheme copyWith({
     Brightness? brightness,
     Color? background,
     Color? foreground,

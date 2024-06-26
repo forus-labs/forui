@@ -15,13 +15,13 @@ class ForuiSamples extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-    title: 'Forui Samples',
-    theme: ThemeData(
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-      useMaterial3: true,
-    ),
-    routerConfig: _router.config(),
-  );
+        title: 'Forui Samples',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          useMaterial3: true,
+        ),
+        routerConfig: _router.config(),
+      );
 }
 
 @RoutePage()

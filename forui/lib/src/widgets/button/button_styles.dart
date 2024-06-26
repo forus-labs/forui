@@ -120,7 +120,8 @@ class FButtonStyles with Diagnosticable {
   /// print(style.primary == copy.primary); // true
   /// print(style.secondary == copy.secondary); // false
   /// ```
-  @useResult FButtonStyles copyWith({
+  @useResult
+  FButtonStyles copyWith({
     FButtonCustomStyle? primary,
     FButtonCustomStyle? secondary,
     FButtonCustomStyle? destructive,

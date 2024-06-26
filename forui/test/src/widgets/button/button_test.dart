@@ -15,7 +15,7 @@ void main() {
           () => FButton(
             label: label,
             rawLabel: rawLabel,
-            onPress: () {  },
+            onPress: () {},
           ),
           returnsNormally,
         );
@@ -31,12 +31,11 @@ void main() {
           () => FButton(
             label: label,
             rawLabel: rawLabel,
-            onPress: () {  },
+            onPress: () {},
           ),
           throwsAssertionError,
         );
       });
     }
-    
   });
 }

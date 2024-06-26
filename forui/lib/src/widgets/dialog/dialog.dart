@@ -18,6 +18,8 @@ part 'dialog_content.dart';
 /// * https://forui.dev/docs/dialog for working examples.
 /// * [FDialogStyle] for customizing a dialog's appearance.
 class FDialog extends StatelessWidget {
+  static const _defaultDuration = Duration(milliseconds: 100);
+
   /// The dialog's style. Defaults to [FThemeData.dialogStyle].
   final FDialogStyle? style;
 
@@ -78,7 +80,7 @@ class FDialog extends StatelessWidget {
   FDialog({
     required List<Widget> actions,
     this.style,
-    this.insetAnimationDuration = const Duration(milliseconds: 100),
+    this.insetAnimationDuration = _defaultDuration,
     this.insetAnimationCurve = Curves.decelerate,
     String? semanticLabel,
     String? title,
@@ -165,8 +167,7 @@ class FDialog extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration,
-          defaultValue: const Duration(milliseconds: 100)))
+      ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration, defaultValue: _defaultDuration))
       ..add(DiagnosticsProperty('insetAnimationCurve', insetAnimationCurve, defaultValue: Curves.decelerate))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('builder', builder));

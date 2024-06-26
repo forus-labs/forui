@@ -16,59 +16,57 @@ class TextFieldPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
-        child: FTextField(
-          enabled: enabled,
-          label: 'Email',
-          hint: 'john@doe.com',
-        ),
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: FTextField(
+              enabled: enabled,
+              label: 'Email',
+              hint: 'john@doe.com',
+            ),
+          ),
+        ],
+      );
 }
 
 @RoutePage()
 class PasswordTextFieldPage extends SampleScaffold {
-
   PasswordTextFieldPage({
     @queryParam super.theme,
   });
 
   @override
   Widget child(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical:30),
-        child: FTextField.password(
-          controller: TextEditingController(text: 'My password'),
-          label: 'Password',
-        ),
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: FTextField.password(
+              controller: TextEditingController(text: 'My password'),
+              label: 'Password',
+            ),
+          ),
+        ],
+      );
 }
 
 @RoutePage()
 class MultilineTextFieldPage extends SampleScaffold {
-
   MultilineTextFieldPage({
     @queryParam super.theme,
   });
 
   @override
   Widget child(BuildContext context) => const Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical:30),
-        child: FTextField.multiline(
-          label: 'Leave a review',
-        ),
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: FTextField.multiline(
+              label: 'Leave a review',
+            ),
+          ),
+        ],
+      );
 }

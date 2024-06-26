@@ -18,7 +18,8 @@ Future<void> configureGoldenTests(double threshold) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final fontLoader = FontLoader('packages/forui/Inter');
-  for (final file in Directory('./assets/fonts/inter/').listSync().whereType<File>().where((e) => e.path.endsWith('.ttf'))) {
+  final directory = Directory('./assets/fonts/inter/');
+  for (final file in directory.listSync().whereType<File>().where((e) => e.path.endsWith('.ttf'))) {
     fontLoader.addFont(rootBundle.load(file.path));
   }
 

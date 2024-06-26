@@ -23,7 +23,8 @@ final class FSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
+    final style =
+        this.style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
     final (height, width) = vertical ? (null, style.width) : (style.width, null);
 
     return Container(
@@ -55,17 +56,17 @@ final class FSeparatorStyles with Diagnosticable {
   FSeparatorStyles({required this.horizontal, required this.vertical});
 
   /// Creates a [FSeparatorStyles] that inherits its properties from [colorScheme] and [style].
-  FSeparatorStyles.inherit({required FColorScheme colorScheme, required FStyle style}):
-    horizontal = FSeparatorStyle.inherit(
-      colorScheme: colorScheme,
-      style: style,
-      padding: FSeparatorStyle.defaultPadding.horizontal,
-    ),
-    vertical = FSeparatorStyle.inherit(
-      colorScheme: colorScheme,
-      style: style,
-      padding: FSeparatorStyle.defaultPadding.vertical
-    );
+  FSeparatorStyles.inherit({required FColorScheme colorScheme, required FStyle style})
+      : horizontal = FSeparatorStyle.inherit(
+          colorScheme: colorScheme,
+          style: style,
+          padding: FSeparatorStyle.defaultPadding.horizontal,
+        ),
+        vertical = FSeparatorStyle.inherit(
+          colorScheme: colorScheme,
+          style: style,
+          padding: FSeparatorStyle.defaultPadding.vertical,
+        );
 
   /// Returns a copy of this [FSeparatorStyles] with the given properties replaced.
   ///
@@ -81,9 +82,9 @@ final class FSeparatorStyles with Diagnosticable {
   /// print(style.vertical == copy.vertical); // false
   /// ```
   FSeparatorStyles copyWith({FSeparatorStyle? horizontal, FSeparatorStyle? vertical}) => FSeparatorStyles(
-    horizontal: horizontal ?? this.horizontal,
-    vertical: vertical ?? this.vertical,
-  );
+        horizontal: horizontal ?? this.horizontal,
+        vertical: vertical ?? this.vertical,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -103,7 +104,6 @@ final class FSeparatorStyles with Diagnosticable {
 
   @override
   int get hashCode => horizontal.hashCode ^ vertical.hashCode;
-
 }
 
 /// [FSeparator]'s style.
@@ -129,12 +129,15 @@ final class FSeparatorStyle with Diagnosticable {
   final double width;
 
   /// Creates a [FSeparatorStyle].
-  FSeparatorStyle({required this.color, required this.padding, this.width = 1}):
-    assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
+  FSeparatorStyle({required this.color, required this.padding, this.width = 1})
+      : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme], [style], and [padding].
-  FSeparatorStyle.inherit({required FColorScheme colorScheme, required FStyle style, required EdgeInsetsGeometry padding}):
-    this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
+  FSeparatorStyle.inherit({
+    required FColorScheme colorScheme,
+    required FStyle style,
+    required EdgeInsetsGeometry padding,
+  }) : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
   /// Returns a copy of this [FSeparatorStyle] with the given properties replaced.
   ///
@@ -150,11 +153,12 @@ final class FSeparatorStyle with Diagnosticable {
   /// print(copy.color); // black
   /// print(copy.width); // 2
   /// ```
-  @useResult FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FSeparatorStyle(
-    color: color ?? this.color,
-    padding: padding ?? this.padding,
-    width: width ?? this.width,
-  );
+  @useResult
+  FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FSeparatorStyle(
+        color: color ?? this.color,
+        padding: padding ?? this.padding,
+        width: width ?? this.width,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
