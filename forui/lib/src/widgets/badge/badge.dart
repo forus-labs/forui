@@ -35,9 +35,8 @@ class FBadge extends StatelessWidget {
     Widget? rawLabel,
     this.style = FBadgeStyle.primary,
     super.key,
-  }) :
-      assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.'),
-      builder = ((context, style) => FBadgeContent(rawLabel: rawLabel, label: label, style: style));
+  })  : assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.'),
+        builder = ((context, style) => FBadgeContent(rawLabel: rawLabel, label: label, style: style));
 
   /// Creates a [FBadge] with custom content.
   const FBadge.raw({
@@ -82,7 +81,6 @@ class FBadge extends StatelessWidget {
   }
 }
 
-
 /// A [FBadge]'s style.
 ///
 /// A style can be either one of the pre-defined styles in [FBadgeStyle] or a [FBadgeCustomStyle]. The pre-defined styles
@@ -109,7 +107,8 @@ sealed class FBadgeStyle {
   static const FBadgeStyle destructive = Variant.destructive;
 }
 
-@internal enum Variant implements FBadgeStyle {
+@internal
+enum Variant implements FBadgeStyle {
   primary,
   secondary,
   outline,
@@ -172,7 +171,8 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   /// print(copy.backgroundColor); // Colors.blue
   /// print(copy.borderColor); // Colors.black
   /// ```
-  @useResult FBadgeCustomStyle copyWith({
+  @useResult
+  FBadgeCustomStyle copyWith({
     Color? backgroundColor,
     Color? borderColor,
     BorderRadius? borderRadius,

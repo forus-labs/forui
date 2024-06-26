@@ -13,12 +13,12 @@ class ScaffoldPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      const SizedBox(height: 30),
-      SizedBox(
-        height: 420,
-        child: FScaffold(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(height: 30),
+          SizedBox(
+            height: 420,
+            child: FScaffold(
               header: FHeader(
                 title: 'Settings',
                 actions: [
@@ -61,7 +61,7 @@ class ScaffoldPage extends SampleScaffold {
                 ],
               ),
             ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 }

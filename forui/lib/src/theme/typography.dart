@@ -153,20 +153,20 @@ final class FTypography with Diagnosticable {
   /// ```
   @useResult
   FTypography scale({double sizeScalar = 1}) => FTypography(
-    defaultFontFamily: defaultFontFamily,
-    xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
-    sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
-    base: _scaleTextStyle(style: base, sizeScalar: sizeScalar),
-    lg: _scaleTextStyle(style: lg, sizeScalar: sizeScalar),
-    xl: _scaleTextStyle(style: xl, sizeScalar: sizeScalar),
-    xl2: _scaleTextStyle(style: xl2, sizeScalar: sizeScalar),
-    xl3: _scaleTextStyle(style: xl3, sizeScalar: sizeScalar),
-    xl4: _scaleTextStyle(style: xl4, sizeScalar: sizeScalar),
-    xl5: _scaleTextStyle(style: xl5, sizeScalar: sizeScalar),
-    xl6: _scaleTextStyle(style: xl6, sizeScalar: sizeScalar),
-    xl7: _scaleTextStyle(style: xl7, sizeScalar: sizeScalar),
-    xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
-  );
+        defaultFontFamily: defaultFontFamily,
+        xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
+        sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
+        base: _scaleTextStyle(style: base, sizeScalar: sizeScalar),
+        lg: _scaleTextStyle(style: lg, sizeScalar: sizeScalar),
+        xl: _scaleTextStyle(style: xl, sizeScalar: sizeScalar),
+        xl2: _scaleTextStyle(style: xl2, sizeScalar: sizeScalar),
+        xl3: _scaleTextStyle(style: xl3, sizeScalar: sizeScalar),
+        xl4: _scaleTextStyle(style: xl4, sizeScalar: sizeScalar),
+        xl5: _scaleTextStyle(style: xl5, sizeScalar: sizeScalar),
+        xl6: _scaleTextStyle(style: xl6, sizeScalar: sizeScalar),
+        xl7: _scaleTextStyle(style: xl7, sizeScalar: sizeScalar),
+        xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
+      );
 
   TextStyle _scaleTextStyle({
     required TextStyle style,
@@ -247,21 +247,21 @@ final class FTypography with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FTypography &&
-              runtimeType == other.runtimeType &&
-              defaultFontFamily == other.defaultFontFamily &&
-              xs == other.xs &&
-              sm == other.sm &&
-              base == other.base &&
-              lg == other.lg &&
-              xl == other.xl &&
-              xl2 == other.xl2 &&
-              xl3 == other.xl3 &&
-              xl4 == other.xl4 &&
-              xl5 == other.xl5 &&
-              xl6 == other.xl6 &&
-              xl7 == other.xl7 &&
-              xl8 == other.xl8;
+      other is FTypography &&
+          runtimeType == other.runtimeType &&
+          defaultFontFamily == other.defaultFontFamily &&
+          xs == other.xs &&
+          sm == other.sm &&
+          base == other.base &&
+          lg == other.lg &&
+          xl == other.xl &&
+          xl2 == other.xl2 &&
+          xl3 == other.xl3 &&
+          xl4 == other.xl4 &&
+          xl5 == other.xl5 &&
+          xl6 == other.xl6 &&
+          xl7 == other.xl7 &&
+          xl8 == other.xl8;
 
   @override
   int get hashCode =>

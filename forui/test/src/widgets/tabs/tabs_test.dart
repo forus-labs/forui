@@ -13,9 +13,11 @@ void main() {
         CupertinoApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: FTabs(tabs: [
-              FTabEntry(label: 'Account', content: Container(height: 100))
-            ]),
+            child: FTabs(
+              tabs: [
+                FTabEntry(label: 'Account', content: Container(height: 100)),
+              ],
+            ),
           ),
         ),
       );
@@ -28,9 +30,11 @@ void main() {
         MaterialApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: FTabs(tabs: [
-              FTabEntry(label: 'Account', content: Container(height: 100))
-            ]),
+            child: FTabs(
+              tabs: [
+                FTabEntry(label: 'Account', content: Container(height: 100)),
+              ],
+            ),
           ),
         ),
       );
@@ -42,9 +46,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
-          child: FTabs(tabs: [
-            FTabEntry(label: 'Account', content: Container(height: 100))
-          ]),
+          child: FTabs(
+            tabs: [
+              FTabEntry(label: 'Account', content: Container(height: 100)),
+            ],
+          ),
         ),
       );
 
@@ -62,9 +68,11 @@ void main() {
           ],
           child: TestScaffold(
             data: FThemes.zinc.light,
-            child: FTabs(tabs: [
-              FTabEntry(label: 'Account', content: Container(height: 100))
-            ]),
+            child: FTabs(
+              tabs: [
+                FTabEntry(label: 'Account', content: Container(height: 100)),
+              ],
+            ),
           ),
         ),
       );
@@ -72,25 +80,28 @@ void main() {
       expect(tester.takeException(), null);
     });
 
-      for (final (string, raw) in [
-        ('', null),
-        (null, const Text('test')),
-      ]) {
-        testWidgets('constructor does not throw error', (tester) async {
-          expect(
-              () => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()),
-              returnsNormally,
-          );
-        });
-      }
+    for (final (string, raw) in [
+      ('', null),
+      (null, const Text('test')),
+    ]) {
+      testWidgets('constructor does not throw error', (tester) async {
+        expect(
+          () => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()),
+          returnsNormally,
+        );
+      });
+    }
 
-      for (final (string, raw) in [
-        (null, null),
-        ('', const Text('test')),
-      ]) {
-        testWidgets('constructor throws assertion error', (tester) async {
-          expect(() => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()), throwsAssertionError,);
-        });
-      }
+    for (final (string, raw) in [
+      (null, null),
+      ('', const Text('test')),
+    ]) {
+      testWidgets('constructor throws assertion error', (tester) async {
+        expect(
+          () => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()),
+          throwsAssertionError,
+        );
+      });
+    }
   });
 }

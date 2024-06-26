@@ -20,24 +20,28 @@ final class FButtonContent extends StatelessWidget {
     final (:style, :enabled) = FButton._of(context);
 
     return Padding(
-        padding: style.content.padding,
-        child: DefaultTextStyle.merge(
-          style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: separate([
+      padding: style.content.padding,
+      child: DefaultTextStyle.merge(
+        style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: separate(
+            [
               if (prefixIcon != null) prefixIcon!,
-              switch ((label, rawLabel, )) {
+              switch ((label, rawLabel)) {
                 (final String label, _) => Text(label),
                 (_, final Widget label) => label,
                 _ => const Placeholder(),
               },
               if (suffixIcon != null) suffixIcon!,
-            ], by: [
+            ],
+            by: [
               const SizedBox(width: 10),
-            ]),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   @override
@@ -100,15 +104,17 @@ class FButtonContentStyle with Diagnosticable {
   /// print(style.enabledTextStyle == copy.enabledTextStyle); // true
   /// print(style.disabledTextStyle == copy.disabledTextStyle); // false
   /// ```
-  @useResult FButtonContentStyle copyWith({
+  @useResult
+  FButtonContentStyle copyWith({
     TextStyle? enabledTextStyle,
     TextStyle? disabledTextStyle,
     EdgeInsets? padding,
-  }) => FButtonContentStyle(
-      enabledTextStyle: enabledTextStyle ?? this.enabledTextStyle,
-      disabledTextStyle: disabledTextStyle ?? this.disabledTextStyle,
-      padding: padding ?? this.padding,
-    );
+  }) =>
+      FButtonContentStyle(
+        enabledTextStyle: enabledTextStyle ?? this.enabledTextStyle,
+        disabledTextStyle: disabledTextStyle ?? this.disabledTextStyle,
+        padding: padding ?? this.padding,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

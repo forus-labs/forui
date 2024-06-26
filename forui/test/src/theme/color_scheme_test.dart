@@ -23,7 +23,7 @@ void main() {
       errorForeground: Colors.redAccent,
       border: Colors.lightBlue,
     );
-    
+
     group('copyWith(...)', () {
       test('no arguments', () => expect(scheme.copyWith(), scheme));
 
@@ -66,22 +66,25 @@ void main() {
       final builder = DiagnosticPropertiesBuilder();
       scheme.debugFillProperties(builder);
 
-      expect(builder.properties.map((p) => p.toString()), [
-        EnumProperty('brightness', Brightness.light),
-        ColorProperty('background', Colors.black),
-        ColorProperty('foreground', Colors.black12),
-        ColorProperty('primary', Colors.black26),
-        ColorProperty('primaryForeground', Colors.black38),
-        ColorProperty('secondary', Colors.black45),
-        ColorProperty('secondaryForeground', Colors.black54),
-        ColorProperty('muted', Colors.black87),
-        ColorProperty('mutedForeground', Colors.blue),
-        ColorProperty('destructive', Colors.blueAccent),
-        ColorProperty('destructiveForeground', Colors.blueGrey),
-        ColorProperty('error', Colors.red),
-        ColorProperty('errorForeground', Colors.redAccent),
-        ColorProperty('border', Colors.lightBlue),
-      ].map((p) => p.toString()));
+      expect(
+        builder.properties.map((p) => p.toString()),
+        [
+          EnumProperty('brightness', Brightness.light),
+          ColorProperty('background', Colors.black),
+          ColorProperty('foreground', Colors.black12),
+          ColorProperty('primary', Colors.black26),
+          ColorProperty('primaryForeground', Colors.black38),
+          ColorProperty('secondary', Colors.black45),
+          ColorProperty('secondaryForeground', Colors.black54),
+          ColorProperty('muted', Colors.black87),
+          ColorProperty('mutedForeground', Colors.blue),
+          ColorProperty('destructive', Colors.blueAccent),
+          ColorProperty('destructiveForeground', Colors.blueGrey),
+          ColorProperty('error', Colors.red),
+          ColorProperty('errorForeground', Colors.redAccent),
+          ColorProperty('border', Colors.lightBlue),
+        ].map((p) => p.toString()),
+      );
     });
 
     group('equality and hashcode', () {

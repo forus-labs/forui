@@ -47,14 +47,14 @@ void main() {
                                 Container(
                                   color: Colors.red,
                                   height: 100,
-                                )
+                                ),
                               ],
                             ),
                           ),
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

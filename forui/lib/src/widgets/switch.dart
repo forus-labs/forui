@@ -123,7 +123,6 @@ class FSwitch extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('onFocusChange', onFocusChange));
   }
-
 }
 
 /// [FSwitch]'s style.
@@ -179,17 +178,19 @@ final class FSwitchStyle with Diagnosticable {
   /// print(copy.checkedColor); // black
   /// print(copy.uncheckedColor); // blue
   /// ```
-  @useResult FSwitchStyle copyWith({
+  @useResult
+  FSwitchStyle copyWith({
     Color? checkedColor,
     Color? uncheckedColor,
     Color? thumbColor,
     Color? focusColor,
-  }) => FSwitchStyle(
-      checkedColor: checkedColor ?? this.checkedColor,
-      uncheckedColor: uncheckedColor ?? this.uncheckedColor,
-      thumbColor: thumbColor ?? this.thumbColor,
-      focusColor: focusColor ?? this.focusColor,
-    );
+  }) =>
+      FSwitchStyle(
+        checkedColor: checkedColor ?? this.checkedColor,
+        uncheckedColor: uncheckedColor ?? this.uncheckedColor,
+        thumbColor: thumbColor ?? this.thumbColor,
+        focusColor: focusColor ?? this.focusColor,
+      );
 
   @override
   bool operator ==(Object other) =>

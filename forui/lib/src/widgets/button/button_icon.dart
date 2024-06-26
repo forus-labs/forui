@@ -17,6 +17,7 @@ class FButtonIcon extends StatelessWidget {
       colorFilter: ColorFilter.mode(enabled ? icon.enabledColor : icon.disabledColor, BlendMode.srcIn),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -45,9 +46,7 @@ final class FButtonIconStyle with Diagnosticable {
     required this.enabledColor,
     required this.disabledColor,
     this.height = 20,
-  }):
-    assert(0 < height, 'The height is $height, but it should be in the range "0 < height".');
-
+  }) : assert(0 < height, 'The height is $height, but it should be in the range "0 < height".');
 
   /// Returns a copy of this [FBadgeContentStyle] with the given properties replaced.
   ///
@@ -64,15 +63,17 @@ final class FButtonIconStyle with Diagnosticable {
   /// print(copy.enabledColor); // Colors.blue
   /// print(copy.disabledColor); // Colors.black
   /// ```
-  @useResult FButtonIconStyle copyWith({
+  @useResult
+  FButtonIconStyle copyWith({
     Color? enabledColor,
     Color? disabledColor,
     double? height,
-  }) => FButtonIconStyle(
-      enabledColor: enabledColor ?? this.enabledColor,
-      disabledColor: disabledColor ?? this.disabledColor,
-      height: height ?? this.height,
-    );
+  }) =>
+      FButtonIconStyle(
+        enabledColor: enabledColor ?? this.enabledColor,
+        disabledColor: disabledColor ?? this.disabledColor,
+        height: height ?? this.height,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

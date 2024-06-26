@@ -48,7 +48,6 @@ void main() {
           );
         });
 
-
         testWidgets('$name with raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -57,23 +56,23 @@ void main() {
               child: FBadge.raw(
                 style: variant,
                 builder: (_, style) => Padding(
-                    padding: const EdgeInsets.all(50),
+                  padding: const EdgeInsets.all(50),
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    color: Colors.blueAccent,
                     child: Container(
                       width: 50,
                       height: 50,
-                      color: Colors.blueAccent,
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: style.backgroundColor,
-                          border: Border.all(
-                            color: Colors.blueAccent,
-                            width: 2,
-                          ),
+                      decoration: BoxDecoration(
+                        color: style.backgroundColor,
+                        border: Border.all(
+                          color: Colors.blueAccent,
+                          width: 2,
                         ),
                       ),
                     ),
+                  ),
                 ),
               ),
             ),

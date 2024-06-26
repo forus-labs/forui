@@ -23,7 +23,8 @@ final class FTextField extends StatelessWidget {
   static Widget _defaultContextMenuBuilder(
     BuildContext context,
     EditableTextState editableTextState,
-  ) => AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
+  ) =>
+      AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
 
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
@@ -48,7 +49,7 @@ final class FTextField extends StatelessWidget {
   final String? hint;
 
   /// The maximum number of lines the [hint] can occupy. Defaults to the value of [TextField.maxLines] attribute.
-  /// 
+  ///
   /// See [InputDecoration.hintMaxLines] for more information.
   final int? hintMaxLines;
 
@@ -61,7 +62,7 @@ final class FTextField extends StatelessWidget {
   final Widget? rawHelp;
 
   /// The maximum number of lines the [help] can occupy. Defaults to the value of [TextField.maxLines] attribute.
-  /// 
+  ///
   /// See [InputDecoration.helperMaxLines] for more information.
   final int? helpMaxLines;
 
@@ -74,7 +75,7 @@ final class FTextField extends StatelessWidget {
   final Widget? rawError;
 
   /// The maximum number of lines the [error] can occupy. Defaults to the value of [TextField.maxLines] attribute.
-  /// 
+  ///
   /// See [InputDecoration.errorMaxLines] for more information.
   final int? errorMaxLines;
 
@@ -87,7 +88,7 @@ final class FTextField extends StatelessWidget {
   /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
 
-  /// Defines the keyboard focus for this 
+  /// Defines the keyboard focus for this
   ///
   /// See [TextField.focusNode] for more information.
   final FocusNode? focusNode;
@@ -541,10 +542,9 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  }):
-    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
@@ -603,10 +603,9 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  }):
-    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   /// Creates a [FTextField] configured for passwords.
   ///
@@ -674,10 +673,9 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  }):
-    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
@@ -744,10 +742,9 @@ final class FTextField extends StatelessWidget {
     this.undoController,
     this.spellCheckConfiguration,
     this.suffixIcon,
-  }):
-    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
+        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
+        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
 
   @override
   Widget build(BuildContext context) {
@@ -801,17 +798,17 @@ final class FTextField extends StatelessWidget {
       ),
     );
 
-    return materialLocalizations == null ?
-      Localizations(
-        locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-        delegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        child: textField,
-      ) :
-      textField;
+    return materialLocalizations == null
+        ? Localizations(
+            locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+            delegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            child: textField,
+          )
+        : textField;
   }
 
   Widget _textField(
@@ -820,16 +817,19 @@ final class FTextField extends StatelessWidget {
     FTextFieldStyle style,
     FTextFieldStateStyle current,
   ) {
+    final rawError = this.rawError == null
+        ? this.rawError
+        : DefaultTextStyle.merge(
+            style: current.footerTextStyle,
+            child: this.rawError!,
+          );
 
-    final rawError = this.rawError == null ? this.rawError : DefaultTextStyle.merge(
-      style: current.footerTextStyle,
-      child: this.rawError!,
-    );
-
-    final rawHelp = this.rawHelp == null ? this.rawHelp : DefaultTextStyle.merge(
-      style: current.footerTextStyle,
-      child: this.rawHelp!,
-    );
+    final rawHelp = this.rawHelp == null
+        ? this.rawHelp
+        : DefaultTextStyle.merge(
+            style: current.footerTextStyle,
+            child: this.rawHelp!,
+          );
 
     return TextField(
       controller: controller,
@@ -983,7 +983,13 @@ final class FTextField extends StatelessWidget {
       ..add(IterableProperty('autofillHints', autofillHints))
       ..add(StringProperty('restorationId', restorationId))
       ..add(FlagProperty('scribbleEnabled', value: scribbleEnabled, ifTrue: 'scribbleEnabled'))
-      ..add(FlagProperty('enableIMEPersonalizedLearning', value: enableIMEPersonalizedLearning, ifTrue: 'enableIMEPersonalizedLearning'))
+      ..add(
+        FlagProperty(
+          'enableIMEPersonalizedLearning',
+          value: enableIMEPersonalizedLearning,
+          ifTrue: 'enableIMEPersonalizedLearning',
+        ),
+      )
       ..add(DiagnosticsProperty('contextMenuBuilder', contextMenuBuilder))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('undoController', undoController))

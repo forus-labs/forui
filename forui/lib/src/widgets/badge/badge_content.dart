@@ -15,18 +15,18 @@ final class FBadgeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-    child: Padding(
-      padding: style.content.padding,
-      child: DefaultTextStyle.merge(
-        style: style.content.labelTextStyle,
-        child: switch ((label, rawLabel)) {
-          (final String label, _) => Text(label),
-          (_, final Widget label) => label,
-          _ => const Placeholder(),
-        },
-      ),
-    ),
-  );
+        child: Padding(
+          padding: style.content.padding,
+          child: DefaultTextStyle.merge(
+            style: style.content.labelTextStyle,
+            child: switch ((label, rawLabel)) {
+              (final String label, _) => Text(label),
+              (_, final Widget label) => label,
+              _ => const Placeholder(),
+            },
+          ),
+        ),
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -39,6 +39,8 @@ final class FBadgeContent extends StatelessWidget {
 
 /// A badge content's style.
 final class FBadgeContentStyle with Diagnosticable {
+  static const _defaultPadding = EdgeInsets.symmetric(horizontal: 14, vertical: 2);
+
   /// The label's [TextStyle].
   final TextStyle labelTextStyle;
 
@@ -48,7 +50,7 @@ final class FBadgeContentStyle with Diagnosticable {
   /// Creates a [FBadgeContentStyle].
   FBadgeContentStyle({
     required this.labelTextStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
+    this.padding = _defaultPadding,
   });
 
   /// Returns a copy of this [FBadgeContentStyle] with the given properties replaced.
@@ -64,23 +66,27 @@ final class FBadgeContentStyle with Diagnosticable {
   /// print(style.labelTextStyle == copy.labelTextStyle); // true
   /// print(style.padding == copy.padding); // false
   /// ```
-  @useResult FBadgeContentStyle copyWith({TextStyle? labelTextStyle, EdgeInsets? padding}) => FBadgeContentStyle(
-    labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-    padding: padding ?? this.padding,
-  );
+  @useResult
+  FBadgeContentStyle copyWith({TextStyle? labelTextStyle, EdgeInsets? padding}) => FBadgeContentStyle(
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+        padding: padding ?? this.padding,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
-      ..add(DiagnosticsProperty('padding', padding, defaultValue: const EdgeInsets.symmetric(horizontal: 14, vertical: 2)));
+      ..add(DiagnosticsProperty('padding', padding, defaultValue: _defaultPadding));
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FBadgeContentStyle && runtimeType == other.runtimeType && padding == other.padding && labelTextStyle == other.labelTextStyle;
+      other is FBadgeContentStyle &&
+          runtimeType == other.runtimeType &&
+          padding == other.padding &&
+          labelTextStyle == other.labelTextStyle;
 
   @override
   int get hashCode => padding.hashCode ^ labelTextStyle.hashCode;

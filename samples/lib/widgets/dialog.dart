@@ -12,8 +12,7 @@ class DialogPage extends SampleScaffold {
   DialogPage({
     @queryParam super.theme,
     @queryParam bool vertical = false,
-  }):
-    direction = vertical ? Axis.vertical : Axis.horizontal;
+  }) : direction = vertical ? Axis.vertical : Axis.horizontal;
 
   @override
   Widget child(BuildContext context) {
@@ -33,7 +32,8 @@ class DialogPage extends SampleScaffold {
               builder: (context) => FDialog(
                 direction: direction,
                 title: 'Are you absolutely sure?',
-                body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                body:
+                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
               ),
             ),

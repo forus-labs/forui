@@ -12,10 +12,10 @@ class Foo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FTheme(
-    data: FThemes.zinc.dark,
-    textDirection: TextDirection.ltr,
-    child: child,
-  );
+        data: FThemes.zinc.dark,
+        textDirection: TextDirection.ltr,
+        child: child,
+      );
 }
 
 void main() {
@@ -97,5 +97,4 @@ void main() {
       );
     });
   });
-
 }

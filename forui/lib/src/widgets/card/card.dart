@@ -45,26 +45,25 @@ final class FCard extends StatelessWidget {
     Widget? child,
     this.style,
     super.key,
-  }) :
-    assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
-    assert(subtitle == null || rawSubtitle == null, 'Cannot provide both a subtitle and a rawSubtitle.'),
-    child = FCardContent(
-      title: title,
-      rawTitle: rawTitle,
-      subtitle: subtitle,
-      rawSubtitle: rawSubtitle,
-      style: style?.content,
-      child: child,
-    );
+  })  : assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
+        assert(subtitle == null || rawSubtitle == null, 'Cannot provide both a subtitle and a rawSubtitle.'),
+        child = FCardContent(
+          title: title,
+          rawTitle: rawTitle,
+          subtitle: subtitle,
+          rawSubtitle: rawSubtitle,
+          style: style?.content,
+          child: child,
+        );
 
   /// Creates a [FCard] with custom content.
   const FCard.raw({required this.child, this.style, super.key});
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-    decoration: (style ?? context.theme.cardStyle).decoration,
-    child: child,
-  );
+        decoration: (style ?? context.theme.cardStyle).decoration,
+        child: child,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -85,13 +84,13 @@ final class FCardStyle with Diagnosticable {
   FCardStyle({required this.decoration, required this.content});
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme], [typography] and [style].
-  FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style}):
-    decoration = BoxDecoration(
-      border: Border.all(color: colorScheme.border),
-      borderRadius: style.borderRadius,
-      color: colorScheme.background,
-    ),
-    content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography);
+  FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+      : decoration = BoxDecoration(
+          border: Border.all(color: colorScheme.border),
+          borderRadius: style.borderRadius,
+          color: colorScheme.background,
+        ),
+        content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography);
 
   /// Returns a copy of this [FCardStyle] with the given properties replaced.
   ///
@@ -106,10 +105,11 @@ final class FCardStyle with Diagnosticable {
   /// print(style.decoration == copy.decoration); // true
   /// print(style.content == copy.content); // false
   /// ```
-  @useResult FCardStyle copyWith({BoxDecoration? decoration, FCardContentStyle? content}) => FCardStyle(
-    decoration: decoration ?? this.decoration,
-    content: content ?? this.content,
-  );
+  @useResult
+  FCardStyle copyWith({BoxDecoration? decoration, FCardContentStyle? content}) => FCardStyle(
+        decoration: decoration ?? this.decoration,
+        content: content ?? this.content,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -120,10 +120,12 @@ final class FCardStyle with Diagnosticable {
   }
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is FCardStyle &&
-      runtimeType == other.runtimeType &&
-      decoration == other.decoration &&
-      content == other.content;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FCardStyle &&
+          runtimeType == other.runtimeType &&
+          decoration == other.decoration &&
+          content == other.content;
 
   @override
   int get hashCode => decoration.hashCode ^ content.hashCode;

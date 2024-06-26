@@ -41,7 +41,10 @@ jobs:
       - run: flutter pub global activate import_sorter
       - run: flutter pub global run import_sorter:main
       - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: dart format --line-length 120 .
       - run: dart fix --apply
+        # We format the code again since the required trailing comma lint fixes causes code to be formatted differently
+      - run: dart format --line-length 120 .
 
       - uses: EndBug/add-and-commit@v9
         with:
