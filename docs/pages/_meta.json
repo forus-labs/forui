@@ -7,10 +7,18 @@
     "title": "Documentation",
     "type": "page"
   },
-  "contact": {
-    "title": "About ↗",
-    "type": "page",
-    "href": "https://foruslabs.com",
-    "newWindow": true
+  "social": {
+    "title": "Core Team",
+    "type": "menu",
+    "items": {
+      "x-joe": {
+        "title": "Joe Kawai",
+        "href": "https://x.com/kawaijoe"
+      },
+      "x-matthias": {
+        "title": "Matthias Ngeo",
+        "href": "https://x.com/matthiasngeo"
+      }
+    }
   }
 }

@@ -22,7 +22,7 @@ abstract class SampleScaffold extends StatelessWidget {
         child: FScaffold(
           content: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 600),
+              constraints: const BoxConstraints(maxWidth: 400),
               child: child(context),
             ),
           ),
