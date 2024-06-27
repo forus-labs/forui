@@ -5,16 +5,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
 void main() {
-  group('FHeader', () {
+  group('FNestedHeader', () {
     for (final (title, rawTitle) in [
       ('', null),
       (null, const SizedBox()),
     ]) {
       testWidgets('constructor does not throw error', (tester) async {
         expect(
-          () => FHeader(
+          () => FNestedHeader(
             title: title,
             rawTitle: rawTitle,
+            onPop: null,
           ),
           returnsNormally,
         );
@@ -27,9 +28,10 @@ void main() {
     ]) {
       testWidgets('constructor throws error', (tester) async {
         expect(
-          () => FHeader(
+          () => FNestedHeader(
             title: title,
             rawTitle: rawTitle,
+            onPop: () {},
           ),
           throwsAssertionError,
         );
