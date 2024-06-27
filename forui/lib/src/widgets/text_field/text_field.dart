@@ -11,6 +11,14 @@ import 'package:forui/forui.dart';
 
 part 'text_field_style.dart';
 
+/// The default context menu builder.
+@internal
+Widget defaultContextMenuBuilder(
+  BuildContext context,
+  EditableTextState state,
+) => AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+
 /// A text field.
 ///
 /// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
@@ -20,12 +28,6 @@ part 'text_field_style.dart';
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget {
-  static Widget _defaultContextMenuBuilder(
-    BuildContext context,
-    EditableTextState editableTextState,
-  ) =>
-      AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
-
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
 
@@ -537,7 +539,7 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
@@ -598,7 +600,7 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
@@ -668,7 +670,7 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
@@ -737,7 +739,7 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
@@ -983,8 +985,7 @@ final class FTextField extends StatelessWidget {
       ..add(IterableProperty('autofillHints', autofillHints))
       ..add(StringProperty('restorationId', restorationId))
       ..add(FlagProperty('scribbleEnabled', value: scribbleEnabled, ifTrue: 'scribbleEnabled'))
-      ..add(
-        FlagProperty(
+      ..add(FlagProperty(
           'enableIMEPersonalizedLearning',
           value: enableIMEPersonalizedLearning,
           ifTrue: 'enableIMEPersonalizedLearning',
