@@ -10,13 +10,13 @@ part 'header_action.dart';
 
 /// A header.
 ///
-/// A header contains the page's title and navigation actions. It is typically used on pages at the root of the
-/// navigation stack.
+/// A header contains the page's title and navigation actions.
+/// It is typically used on pages at the root of the navigation stack.
 ///
 /// See:
 /// * https://forui.dev/docs/header for working examples.
 /// * [FHeaderStyle] for customizing a header's appearance.
-class FHeader extends StatelessWidget {
+final class FHeader extends StatelessWidget {
   /// The header's style. Defaults to [FThemeData.headerStyle].
   final FHeaderStyle? style;
 
@@ -79,7 +79,7 @@ class FHeader extends StatelessWidget {
                 child: title,
               ),
             ),
-            Row(children: actions),
+            Row(children: actions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
           ],
         ),
       ),
@@ -102,7 +102,10 @@ final class FHeaderStyle with Diagnosticable {
   final TextStyle titleTextStyle;
 
   /// The [FHeaderAction]'s style.
-  final FHeaderActionStyle action;
+  final FHeaderActionStyle actionStyle;
+
+  /// The spacing between [FHeaderAction]s.
+  final double actionSpacing;
 
   /// The padding.
   final EdgeInsets padding;
@@ -110,7 +113,8 @@ final class FHeaderStyle with Diagnosticable {
   /// Creates a [FHeaderStyle].
   FHeaderStyle({
     required this.titleTextStyle,
-    required this.action,
+    required this.actionStyle,
+    required this.actionSpacing,
     required this.padding,
   });
 
@@ -124,7 +128,8 @@ final class FHeaderStyle with Diagnosticable {
           fontWeight: FontWeight.w700,
           height: 1,
         ),
-        action = FHeaderActionStyle.inherit(colorScheme: colorScheme),
+        actionStyle = FHeaderActionStyle.inherit(colorScheme: colorScheme),
+        actionSpacing = 10,
         padding = style.pagePadding.copyWith(bottom: 15);
 
   /// Returns a copy of this [FHeaderStyle] with the given properties replaced.
@@ -145,12 +150,14 @@ final class FHeaderStyle with Diagnosticable {
   @useResult
   FHeaderStyle copyWith({
     TextStyle? titleTextStyle,
-    FHeaderActionStyle? action,
+    FHeaderActionStyle? actionStyle,
+    double? actionSpacing,
     EdgeInsets? padding,
   }) =>
       FHeaderStyle(
         titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-        action: action ?? this.action,
+        actionStyle: actionStyle ?? this.actionStyle,
+        actionSpacing: actionSpacing ?? this.actionSpacing,
         padding: padding ?? this.padding,
       );
 
@@ -159,7 +166,8 @@ final class FHeaderStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
-      ..add(DiagnosticsProperty('action', action))
+      ..add(DiagnosticsProperty('action', actionStyle))
+      ..add(DiagnosticsProperty('actionSpacing', actionSpacing))
       ..add(DiagnosticsProperty('padding', padding));
   }
 }
