@@ -65,6 +65,7 @@ class MultilineTextFieldPage extends SampleScaffold {
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: FTextField.multiline(
               label: 'Leave a review',
+              maxLines: 4,
             ),
           ),
         ],
