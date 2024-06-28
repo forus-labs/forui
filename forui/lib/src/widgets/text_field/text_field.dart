@@ -14,7 +14,8 @@ part 'text_field_style.dart';
 
 /// A text field.
 ///
-/// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
+/// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard. A [FTextField] is internally
+/// a [FormField].
 ///
 /// See:
 /// * https://forui.dev/docs/text-field for working examples.
@@ -26,34 +27,16 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
   final FTextFieldStyle? style;
 
   @override
-  final String? label;
-
-  @override
-  final Widget? rawLabel;
+  final Widget? label;
 
   @override
   final String? hint;
 
   @override
-  final int? hintMaxLines;
+  final Widget? help;
 
   @override
-  final String? help;
-
-  @override
-  final Widget? rawHelp;
-
-  @override
-  final int? helpMaxLines;
-
-  @override
-  final String? error;
-
-  @override
-  final Widget? rawError;
-
-  @override
-  final int? errorMaxLines;
+  final Widget? error;
 
   @override
   final TextMagnifierConfiguration? magnifierConfiguration;
@@ -188,24 +171,12 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
   final Widget? suffixIcon;
 
   /// Creates a [FTextField].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [help] and [rawHelp] are not null
-  /// * both [error] and [rawError] are not null
   const FTextField({
     this.style,
     this.label,
-    this.rawLabel,
     this.hint,
-    this.hintMaxLines,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -251,23 +222,15 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
     this.spellCheckConfiguration,
     this.suffixIcon,
     super.key,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  });
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
     this.label,
-    this.rawLabel,
     this.hint = 'Email',
-    this.hintMaxLines,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -313,32 +276,18 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
     this.spellCheckConfiguration,
     this.suffixIcon,
     super.key,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  });
 
   /// Creates a [FTextField] configured for passwords.
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
   /// when handling the creation of new passwords.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [help] and [rawHelp] are not null
-  /// * both [error] and [rawError] are not null
   const FTextField.password({
     this.style,
     this.label,
-    this.rawLabel,
     this.hint = 'Password',
-    this.hintMaxLines,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -384,31 +333,19 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
     this.spellCheckConfiguration,
     this.suffixIcon,
     super.key,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  });
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
-  /// The text field's height can be configured by adjusting [minLines].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [help] and [rawHelp] are not null
-  /// * both [error] and [rawError] are not null
+  /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
+  /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
+  /// [maxLines].
   const FTextField.multiline({
     this.style,
     this.label,
-    this.rawLabel,
     this.hint,
-    this.hintMaxLines,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -454,9 +391,7 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
     this.spellCheckConfiguration,
     this.suffixIcon,
     super.key,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -465,15 +400,8 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
     final style = this.style ?? theme.textFieldStyle;
     final stateStyle = switch (this) {
       _ when !enabled => style.disabled,
-      _ when error != null || rawError != null => style.error,
+      _ when error != null => style.error,
       _ => style.enabled,
-    };
-    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
-
-    final label = switch ((this.label, rawLabel)) {
-      (final String label, _) => Text(label),
-      (_, final Widget label) => label,
-      _ => null,
     };
 
     final textField = MergeSemantics(
@@ -485,7 +413,7 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
               padding: const EdgeInsets.only(top: 4, bottom: 7),
               child: DefaultTextStyle.merge(
                 style: stateStyle.labelTextStyle,
-                child: label,
+                child: label!,
               ),
             ),
           Material(
@@ -510,6 +438,7 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
       ),
     );
 
+    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
     return materialLocalizations == null
         ? Localizations(
             locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
@@ -529,18 +458,18 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
     FTextFieldStyle style,
     FTextFieldStateStyle current,
   ) {
-    final rawError = this.rawError == null
-        ? this.rawError
+    final rawError = this.error == null
+        ? null
         : DefaultTextStyle.merge(
             style: current.footerTextStyle,
-            child: this.rawError!,
+            child: this.error!,
           );
 
-    final rawHelp = this.rawHelp == null
-        ? this.rawHelp
+    final rawHelp = this.help == null
+        ? null
         : DefaultTextStyle.merge(
             style: current.footerTextStyle,
-            child: this.rawHelp!,
+            child: this.help!,
           );
 
     return TextField(
@@ -555,15 +484,10 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
         contentPadding: style.contentPadding.copyWith(left: 0),
         hintText: hint,
         hintStyle: current.hintTextStyle,
-        hintMaxLines: hintMaxLines,
         helper: rawHelp,
-        helperText: help,
         helperStyle: current.footerTextStyle,
-        helperMaxLines: helpMaxLines,
         error: rawError,
-        errorText: error,
         errorStyle: current.footerTextStyle,
-        errorMaxLines: errorMaxLines,
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: style.disabled.unfocused.color,
@@ -650,13 +574,7 @@ final class FTextField extends StatelessWidget with FTextFieldMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('label', label))
       ..add(StringProperty('hint', hint))
-      ..add(IntProperty('hintMaxLines', hintMaxLines))
-      ..add(StringProperty('help', help))
-      ..add(IntProperty('helpMaxLines', helpMaxLines))
-      ..add(StringProperty('error', error))
-      ..add(IntProperty('errorMaxLines', errorMaxLines))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))

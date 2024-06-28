@@ -23,14 +23,14 @@ class FTextFormField extends FormField<String> with FTextFieldMixin {
       child: FTextField(
         style: widget.style,
         label: widget.label,
-        rawLabel: widget.rawLabel,
+        label: widget.label,
         hint: widget.hint,
         hintMaxLines: widget.hintMaxLines,
         help: widget.help,
-        rawHelp: widget.rawHelp,
+        help: widget.help,
         helpMaxLines: widget.helpMaxLines,
         error: widget.error,
-        rawError: widget.rawError,
+        error: widget.error,
         errorMaxLines: widget.errorMaxLines,
         magnifierConfiguration: widget.magnifierConfiguration,
         controller: state._effectiveController,
@@ -91,7 +91,7 @@ class FTextFormField extends FormField<String> with FTextFieldMixin {
   final String? label;
 
   @override
-  final Widget? rawLabel;
+  final Widget? label;
 
   @override
   final String? hint;
@@ -103,7 +103,7 @@ class FTextFormField extends FormField<String> with FTextFieldMixin {
   final String? help;
 
   @override
-  final Widget? rawHelp;
+  final Widget? help;
 
   @override
   final int? helpMaxLines;
@@ -112,7 +112,7 @@ class FTextFormField extends FormField<String> with FTextFieldMixin {
   final String? error;
 
   @override
-  final Widget? rawError;
+  final Widget? error;
 
   @override
   final int? errorMaxLines;
@@ -247,20 +247,20 @@ class FTextFormField extends FormField<String> with FTextFieldMixin {
   ///
   /// ## Contract:
   /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [help] and [rawHelp] are not null
-  /// * both [error] and [rawError] are not null
+  /// * both [label] and [label] are not null
+  /// * both [help] and [help] are not null
+  /// * both [error] and [error] are not null
   FTextFormField({
     this.style,
     this.label,
-    this.rawLabel,
+    this.label,
     this.hint,
     this.hintMaxLines,
     this.help,
-    this.rawHelp,
+    this.help,
     this.helpMaxLines,
     this.error,
-    this.rawError,
+    this.error,
     this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
@@ -312,9 +312,9 @@ class FTextFormField extends FormField<String> with FTextFieldMixin {
     super.onSaved,
     super.validator,
   }):
-    assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-    assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-    assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.'),
+    assert(label == null || label == null, 'Cannot provide both a label and a rawLabel.'),
+    assert(help == null || help == null, 'Cannot provide both a help and a rawHelp.'),
+    assert(error == null || error == null, 'Cannot provide both an error and a rawError.'),
     assert(initialValue == null || controller == null, 'Cannot provide both a initialValue and a controller.'),
     super(
       initialValue: controller != null ? controller.text : (initialValue ?? ''),

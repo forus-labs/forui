@@ -15,54 +15,22 @@ mixin FTextFieldMixin {
   FTextFieldStyle? get style;
 
   /// The label above a text field.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  String? get label;
-
-  /// The raw label above a text field.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  Widget? get rawLabel;
+  Widget? get label;
 
   /// The text to display when the text field is empty.
   ///
   /// See [InputDecoration.hintText] for more information.
   String? get hint;
 
-  /// The maximum number of lines the [hint] can occupy. Defaults to the value of [TextField.maxLines] attribute.
-  ///
-  /// See [InputDecoration.hintMaxLines] for more information.
-  int? get hintMaxLines;
-
-  /// The help text.
-  ///
-  /// See [InputDecoration.helperText] for more information.
-  String? get help;
-
   /// The raw help text.
-  Widget? get rawHelp;
-
-  /// The maximum number of lines the [help] can occupy. Defaults to the value of [TextField.maxLines] attribute.
   ///
-  /// See [InputDecoration.helperMaxLines] for more information.
-  int? get helpMaxLines;
-
-  /// The error text.
-  ///
-  /// See [InputDecoration.errorText] for more information.
-  String? get error;
+  /// See [InputDecoration.helper] for more information.
+  Widget? get help;
 
   /// The raw error text.
-  Widget? get rawError;
-
-  /// The maximum number of lines the [error] can occupy. Defaults to the value of [TextField.maxLines] attribute.
   ///
-  /// See [InputDecoration.errorMaxLines] for more information.
-  int? get errorMaxLines;
+  /// See [InputDecoration.error] for more information.
+  Widget? get error;
 
   /// The configuration for the magnifier of this text field.
   ///

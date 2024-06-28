@@ -22,7 +22,7 @@ class TextFieldPage extends SampleScaffold {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: FTextField(
               enabled: enabled,
-              label: 'Email',
+              label: const Text('Email'),
               hint: 'john@doe.com',
             ),
           ),
@@ -44,7 +44,7 @@ class PasswordTextFieldPage extends SampleScaffold {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: FTextField.password(
               controller: TextEditingController(text: 'My password'),
-              label: 'Password',
+              label: const Text('Password'),
             ),
           ),
         ],
@@ -64,7 +64,7 @@ class MultilineTextFieldPage extends SampleScaffold {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: FTextField.multiline(
-              label: 'Leave a review',
+              label: Text('Leave a review'),
               maxLines: 4,
             ),
           ),
