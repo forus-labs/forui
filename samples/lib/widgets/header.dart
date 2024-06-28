@@ -12,20 +12,17 @@ class HeaderPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: FHeader(
-          title: 'Edit Alarm',
-          actions: [
-            FHeaderAction(
-              icon: FAssets.icons.alarmClock,
-              onPress: () {},
-            ),
-            FHeaderAction(
-              icon: FAssets.icons.plus,
-              onPress: () {},
-            ),
-          ],
-        ),
-      );
+  Widget child(BuildContext context) => FHeader(
+    title: 'Edit Alarm',
+    actions: [
+      FHeaderAction(
+        icon: FAssets.icons.alarmClock,
+        onPress: () {},
+      ),
+      FHeaderAction(
+        icon: FAssets.icons.plus,
+        onPress: () {},
+      ),
+    ],
+  );
 }

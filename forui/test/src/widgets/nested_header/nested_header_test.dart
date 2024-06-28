@@ -15,7 +15,6 @@ void main() {
           () => FNestedHeader(
             title: title,
             rawTitle: rawTitle,
-            onPop: null,
           ),
           returnsNormally,
         );
@@ -31,7 +30,6 @@ void main() {
           () => FNestedHeader(
             title: title,
             rawTitle: rawTitle,
-            onPop: () {},
           ),
           throwsAssertionError,
         );

@@ -4,10 +4,10 @@ interface Props {
     name: string;
     variant?: string;
     height?: number;
-    query: Record<string, string>;
+    query?: Record<string, string>;
 }
 
-export function Widget({name, variant = 'default', height = 200, query}: Props) {
+export function Widget({name, variant = 'default', height = 200, query = {}}: Props) {
     const {resolvedTheme} = useTheme();
     query['theme'] = `zinc-${resolvedTheme}`;
 
