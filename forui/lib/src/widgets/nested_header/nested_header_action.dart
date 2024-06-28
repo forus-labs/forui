@@ -29,6 +29,32 @@ class FNestedHeaderAction extends StatelessWidget {
     super.key,
   });
 
+  /// Creates a [FNestedHeaderAction] with [FAssets.icons.arrowLeft].
+  factory FNestedHeaderAction.back({
+    required VoidCallback? onPress,
+    FNestedHeaderActionStyle? style,
+    Key? key,
+  }) =>
+      FNestedHeaderAction(
+        icon: FAssets.icons.arrowLeft,
+        onPress: onPress,
+        style: style,
+        key: key,
+      );
+
+  /// Creates a [FNestedHeaderAction] with [FAssets.icons.x].
+  factory FNestedHeaderAction.x({
+    required VoidCallback? onPress,
+    FNestedHeaderActionStyle? style,
+    Key? key,
+  }) =>
+      FNestedHeaderAction(
+        icon: FAssets.icons.x,
+        onPress: onPress,
+        style: style,
+        key: key,
+      );
+
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.nestedHeaderStyle.actionStyle;

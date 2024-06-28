@@ -9,7 +9,7 @@ part 'nested_header_action.dart';
 
 /// A nested header.
 ///
-/// A nested header contains the page's title and navigation actions.
+/// A nested header contains the page's title and actions (including pop navigation).
 /// It is typically used on pages that are not at the root of the navigation stack.
 ///
 /// See:
@@ -41,33 +41,12 @@ final class FNestedHeader extends StatelessWidget {
   /// The actions, aligned to the right. Defaults to an empty list.
   final List<Widget> rightActions;
 
-  /// Creates a [FNestedHeader] with an [onPop] callback.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * [title] and [rawTitle] are both not null.
-  FNestedHeader({
-    required VoidCallback? onPop,
-    this.style,
-    this.title,
-    this.rawTitle,
-    this.rightActions = const [],
-    super.key,
-  })  : assert((title != null) ^ (rawTitle != null), 'title or rawTitle must be provided, but not both.'),
-        leftActions = [
-          if (onPop != null)
-            FNestedHeaderAction(
-              icon: FAssets.icons.arrowLeft,
-              onPress: onPop,
-            ),
-        ];
-
   /// Creates a [FNestedHeader].
   ///
   /// ## Contract:
   /// Throws [AssertionError] if:
   /// * [title] and [rawTitle] are both not null.
-  const FNestedHeader.raw({
+  const FNestedHeader({
     this.style,
     this.title,
     this.rawTitle,

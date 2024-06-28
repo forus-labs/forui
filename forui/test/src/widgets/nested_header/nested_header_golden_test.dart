@@ -29,7 +29,9 @@ void main() {
                     onPress: () {},
                   ),
                 ],
-                onPop: () {},
+                leftActions: [
+                  FNestedHeaderAction.back(onPress: () {}),
+                ],
               ),
             ),
           ),
@@ -49,17 +51,19 @@ void main() {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FNestedHeader(
                 rawTitle: const Text('Title'),
-                rightActions: [
+                leftActions: [
                   FNestedHeaderAction(
                     icon: FAssets.icons.alarmClock,
-                    onPress: null,
-                  ),
-                  FNestedHeaderAction(
-                    icon: FAssets.icons.plus,
                     onPress: () {},
                   ),
+                  FNestedHeaderAction(
+                    icon: FAssets.icons.cookingPot,
+                    onPress: null,
+                  ),
                 ],
-                onPop: null,
+                rightActions: [
+                  FNestedHeaderAction.x(onPress: () {}),
+                ],
               ),
             ),
           ),
@@ -68,45 +72,6 @@ void main() {
         await expectLater(
           find.byType(TestScaffold),
           matchesGoldenFile('nested-header/$name-raw-title.png'),
-        );
-      });
-
-      testWidgets('$name with raw constructor', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            data: theme,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: FNestedHeader.raw(
-                rawTitle: const Text('Title'),
-                leftActions: [
-                  FNestedHeaderAction(
-                    icon: FAssets.icons.orbit,
-                    onPress: () {},
-                  ),
-                  FNestedHeaderAction(
-                    icon: FAssets.icons.airVent,
-                    onPress: () {},
-                  ),
-                ],
-                rightActions: [
-                  FNestedHeaderAction(
-                    icon: FAssets.icons.alarmClock,
-                    onPress: null,
-                  ),
-                  FNestedHeaderAction(
-                    icon: FAssets.icons.plus,
-                    onPress: () {},
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('nested-header/$name-raw-constructor.png'),
         );
       });
     }
