@@ -19,7 +19,7 @@ class Application extends StatelessWidget {
           data: FThemes.zinc.light,
           child: FScaffold(
             header: FHeader(
-              title: 'Example Example Example Example',
+              title: const Text('Example Example Example Example'),
               actions: [
                 FHeaderAction(
                   icon: FAssets.icons.plus,
