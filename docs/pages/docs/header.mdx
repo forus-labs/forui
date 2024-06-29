@@ -12,7 +12,7 @@ It is typically used on pages at the root of the navigation stack.
   <Tabs.Tab>
         ```dart
         FHeader(
-          title: 'Edit Alarm',
+          title: const Text('Edit Alarm'),
           actions: [
             FHeaderAction(
               icon: FAssets.icons.alarmClock,
@@ -23,9 +23,39 @@ It is typically used on pages at the root of the navigation stack.
               onPress: () {},
             ),
           ],
-        )
+        );
         ```
   </Tabs.Tab>
+</Tabs>
+
+## Nested Header
+
+It is typically used on nested pages or sheets.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='header'  variant='nested'/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FHeader.nested(
+          title: const Text('Appointment'),
+          leftActions: [
+            FHeaderAction.back(onPress: () {}),
+          ],
+          rightActions: [
+            FHeaderAction(
+              icon: FAssets.icons.info,
+              onPress: () {},
+            ),
+            FHeaderAction(
+              icon: FAssets.icons.plus,
+              onPress: () {},
+            ),
+          ],
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>
 
 ## Usage
@@ -34,7 +64,7 @@ It is typically used on pages at the root of the navigation stack.
 
 ```dart
 FHeader(
-  title: 'Edit Alarm',
+  title: const Text('Title'),
   actions: [
     FHeaderAction(
       icon: FAssets.icons.alarmClock,
@@ -45,5 +75,103 @@ FHeader(
       onPress: () {},
     ),
   ],
-)
+);
 ```
+
+### `FHeader.nested(...)`
+
+```dart
+FHeader.nested(
+  title: const Text('Title'),
+  leftActions: [
+    FHeaderAction.back(onPress: () {}),
+  ],
+  rightActions: [
+    FHeaderAction(
+      icon: FAssets.icons.info,
+      onPress: () {},
+    ),
+    FHeaderAction.x(onPress: () {}),
+  ],
+);
+```
+
+## Examples
+
+### Header
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='header'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart
+        FHeader(
+          title: const Text('Edit Alarm'),
+          actions: [
+            FHeaderAction(
+              icon: FAssets.icons.alarmClock,
+              onPress: () {},
+            ),
+            FHeaderAction(
+              icon: FAssets.icons.plus,
+              onPress: () {},
+            ),
+          ],
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Nested Header with back icon
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='header' variant='nested' />
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart
+        FHeader.nested(
+          title: const Text('Appointment'),
+          leftActions: [
+            FHeaderAction.back(onPress: () {}),
+          ],
+          rightActions: [
+            FHeaderAction(
+              icon: FAssets.icons.info,
+              onPress: () {},
+            ),
+            FHeaderAction(
+              icon: FAssets.icons.plus,
+              onPress: () {},
+            ),
+          ],
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Nested Header with X icon
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='header' variant='nested-x' />
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart
+        FHeader.nested(
+          title: const Text('Climate'),
+          leftActions: [
+            FHeaderAction(
+              icon: FAssets.icons.thermometer,
+              onPress: () {},
+            ),
+            FHeaderAction(
+              icon: FAssets.icons.wind,
+              onPress: null,
+            ),
+          ],
+          rightActions: [
+            FHeaderAction.x(onPress: () {}),
+          ],
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>

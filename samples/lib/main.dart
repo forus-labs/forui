@@ -60,14 +60,14 @@ class _AppRouter extends $_AppRouter {
         ),
         AutoRoute(
           path: '/header/default',
-          page: HeaderRoute.page,
+          page: RootHeaderRoute.page,
         ),
         AutoRoute(
-          path: '/nested-header/default',
+          path: '/header/nested',
           page: NestedHeaderRoute.page,
         ),
         AutoRoute(
-          path: '/nested-header/x',
+          path: '/header/nested-x',
           page: XNestedHeaderRoute.page,
         ),
         AutoRoute(

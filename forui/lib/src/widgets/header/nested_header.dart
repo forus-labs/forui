@@ -1,12 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-
-import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
-
-part 'nested_header_action.dart';
+part of 'header.dart';
 
 /// A nested header.
 ///
@@ -14,27 +6,14 @@ part 'nested_header_action.dart';
 /// It is typically used on pages that are not at the root of the navigation stack.
 ///
 /// See:
-/// * https://forui.dev/docs/nested-header for working examples.
+/// * https://forui.dev/docs/header for working examples.
 /// * [FNestedHeaderStyle] for customizing a header's appearance.
-final class FNestedHeader extends StatelessWidget {
-  /// The style. Defaults to [FThemeData.nestedHeaderStyle].
+final class _FNestedHeader extends FHeader {
+  /// The style. Defaults to [FThemeData.headerStyle.nestedStyle].
   final FNestedHeaderStyle? style;
 
   /// The title, aligned to the center.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError]:
-  /// * if [title] and [rawTitle] are both not null
-  /// * if [title] and [rawTitle] are both null
-  final String? title;
-
-  /// The title, aligned to the center.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError]:
-  /// * if [title] and [rawTitle] are both not null
-  /// * if [title] and [rawTitle] are both null
-  final Widget? rawTitle;
+  final Widget title;
 
   /// The actions, aligned to the left. Defaults to an empty list.
   final List<Widget> leftActions;
@@ -42,29 +21,18 @@ final class FNestedHeader extends StatelessWidget {
   /// The actions, aligned to the right. Defaults to an empty list.
   final List<Widget> rightActions;
 
-  /// Creates a [FNestedHeader].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * [title] and [rawTitle] are both not null.
-  const FNestedHeader({
+  /// Creates a [_FNestedHeader].
+  const _FNestedHeader({
+    required this.title,
     this.style,
-    this.title,
-    this.rawTitle,
     this.leftActions = const [],
     this.rightActions = const [],
     super.key,
-  }) : assert((title != null) ^ (rawTitle != null), 'title or rawTitle must be provided, but not both.');
+  }) : super._();
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.nestedHeaderStyle;
-
-    final title = switch ((this.title, rawTitle)) {
-      (final String title, _) => Text(title),
-      (_, final Widget title) => title,
-      _ => const Placeholder(),
-    };
+    final style = this.style ?? context.theme.headerStyle.nestedStyle;
 
     return SafeArea(
       bottom: false,
@@ -72,12 +40,15 @@ final class FNestedHeader extends StatelessWidget {
         padding: style.padding,
         child: Stack(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(children: leftActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
-                Row(children: rightActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
-              ],
+            _InheritedActionStyle(
+              style: style.actionStyle,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(children: leftActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
+                  Row(children: rightActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
+                ],
+              ),
             ),
             Positioned.fill(
               child: Align(
@@ -101,18 +72,18 @@ final class FNestedHeader extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('title', title))
-      ..add(DiagnosticsProperty('rawTitle', rawTitle));
+      ..add(IterableProperty('leftActions', leftActions))
+      ..add(IterableProperty('rightActions', rightActions));
   }
 }
 
-/// [FNestedHeader]'s style.
+/// [_FNestedHeader]'s style.
 final class FNestedHeaderStyle with Diagnosticable {
   /// The title's [TextStyle].
   final TextStyle titleTextStyle;
 
-  /// The [FHeaderAction]'s style for [FNestedHeader.leftActions] and [FNestedHeader.rightActions].
-  final FNestedHeaderActionStyle actionStyle;
+  /// The [FHeaderAction]'s style for [_FNestedHeader.leftActions] and [_FNestedHeader.rightActions].
+  final FHeaderActionStyle actionStyle;
 
   /// The spacing between [FHeaderAction]s.
   final double actionSpacing;
@@ -128,7 +99,7 @@ final class FNestedHeaderStyle with Diagnosticable {
     required this.padding,
   });
 
-  /// Creates a [FNestedHeaderStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
+  /// Creates a [FNestedHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
   FNestedHeaderStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
@@ -138,7 +109,7 @@ final class FNestedHeaderStyle with Diagnosticable {
           fontWeight: FontWeight.w600,
           height: 1,
         ),
-        actionStyle = FNestedHeaderActionStyle.inherit(colorScheme: colorScheme),
+        actionStyle = FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 25),
         actionSpacing = 10,
         padding = style.pagePadding.copyWith(bottom: 15);
 
@@ -159,7 +130,7 @@ final class FNestedHeaderStyle with Diagnosticable {
   /// ```
   FNestedHeaderStyle copyWith({
     TextStyle? titleTextStyle,
-    FNestedHeaderActionStyle? actionStyle,
+    FHeaderActionStyle? actionStyle,
     double? actionSpacing,
     EdgeInsets? padding,
   }) =>
@@ -179,4 +150,17 @@ final class FNestedHeaderStyle with Diagnosticable {
       ..add(DiagnosticsProperty('actionSpacing', actionSpacing))
       ..add(DiagnosticsProperty('padding', padding));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FNestedHeaderStyle &&
+          runtimeType == other.runtimeType &&
+          titleTextStyle == other.titleTextStyle &&
+          actionStyle == other.actionStyle &&
+          actionSpacing == other.actionSpacing &&
+          padding == other.padding;
+
+  @override
+  int get hashCode => titleTextStyle.hashCode ^ actionStyle.hashCode ^ actionSpacing.hashCode ^ padding.hashCode;
 }
