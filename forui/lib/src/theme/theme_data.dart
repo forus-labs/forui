@@ -40,9 +40,6 @@ final class FThemeData with Diagnosticable {
   /// The header styles.
   final FHeaderStyle headerStyle;
 
-  /// The nested header styles.
-  final FNestedHeaderStyle nestedHeaderStyle;
-
   /// The tabs styles.
   final FTabsStyle tabsStyle;
 
@@ -71,7 +68,6 @@ final class FThemeData with Diagnosticable {
     required this.cardStyle,
     required this.dialogStyle,
     required this.headerStyle,
-    required this.nestedHeaderStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
     required this.scaffoldStyle,
@@ -98,7 +94,6 @@ final class FThemeData with Diagnosticable {
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       headerStyle: FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      nestedHeaderStyle: FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
@@ -149,7 +144,6 @@ final class FThemeData with Diagnosticable {
         cardStyle: cardStyle ?? this.cardStyle,
         dialogStyle: dialogStyle ?? this.dialogStyle,
         headerStyle: headerStyle ?? this.headerStyle,
-        nestedHeaderStyle: nestedHeaderStyle ?? this.nestedHeaderStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
@@ -169,7 +163,6 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('nestedHeaderStyle', nestedHeaderStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
@@ -190,7 +183,6 @@ final class FThemeData with Diagnosticable {
           cardStyle == other.cardStyle &&
           dialogStyle == other.dialogStyle &&
           headerStyle == other.headerStyle &&
-          nestedHeaderStyle == other.nestedHeaderStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
           scaffoldStyle == other.scaffoldStyle &&
@@ -207,7 +199,6 @@ final class FThemeData with Diagnosticable {
       cardStyle.hashCode ^
       dialogStyle.hashCode ^
       headerStyle.hashCode ^
-      nestedHeaderStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
       scaffoldStyle.hashCode ^

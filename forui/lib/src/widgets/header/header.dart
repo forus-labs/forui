@@ -8,166 +8,105 @@ import 'package:forui/src/foundation/tappable.dart';
 
 part 'header_action.dart';
 
+part 'root_header.dart';
+
+part 'nested_header.dart';
+
 /// A header.
 ///
-/// A header contains the page's title and navigation actions.
-/// It is typically used on pages at the root of the navigation stack.
+/// A header contains the page's title and actions.
+
 ///
 /// See:
 /// * https://forui.dev/docs/header for working examples.
 /// * [FHeaderStyle] for customizing a header's appearance.
-final class FHeader extends StatelessWidget {
-  /// The header's style. Defaults to [FThemeData.headerStyle].
-  final FHeaderStyle? style;
+sealed class FHeader extends StatelessWidget {
+  const FHeader._({super.key});
 
-  /// The title, aligned to the left.
+  /// Creates a header.
   ///
-  /// ## Contract:
-  /// Throws [AssertionError]:
-  /// * if [title] and [rawTitle] are both not null
-  /// * if [title] and [rawTitle] are both null
-  final String? title;
+  /// It is typically used on pages at the root of the navigation stack.
+  const factory FHeader({
+    required Widget title,
+    FRootHeaderStyle? style,
+    List<Widget> actions,
+    Key? key,
+  }) = _FRootHeader;
 
-  /// The title, aligned to the left.
+  /// Creates a nested header.
   ///
-  /// ## Contract:
-  /// Throws [AssertionError]:
-  /// * if [title] and [rawTitle] are both not null
-  /// * if [title] and [rawTitle] are both null
-  final Widget? rawTitle;
-
-  /// The actions, aligned to the right. Defaults to an empty list.
-  final List<Widget> actions;
-
-  /// Creates a [FHeader].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError]:
-  /// * if [title] and [rawTitle] are both not null
-  /// * if [title] and [rawTitle] are both null
-  const FHeader({
-    this.style,
-    this.title,
-    this.rawTitle,
-    this.actions = const [],
-    super.key,
-  }) : assert((title != null) ^ (rawTitle != null), 'title or rawTitle must be provided, but not both.');
-
-  @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.headerStyle;
-
-    final title = switch ((this.title, rawTitle)) {
-      (final String title, _) => Text(title),
-      (_, final Widget title) => title,
-      _ => const Placeholder(),
-    };
-
-    return SafeArea(
-      bottom: false,
-      child: Padding(
-        padding: style.padding,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: DefaultTextStyle.merge(
-                overflow: TextOverflow.fade,
-                maxLines: 1,
-                softWrap: false,
-                style: style.titleTextStyle,
-                child: title,
-              ),
-            ),
-            Row(children: actions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('title', title))
-      ..add(IterableProperty('actions', actions));
-  }
+  /// It is typically used on pages NOT at the root of the navigation stack.
+  const factory FHeader.nested({
+    required Widget title,
+    FNestedHeaderStyle? style,
+    List<Widget> leftActions,
+    List<Widget> rightActions,
+    Key? key,
+  }) = _FNestedHeader;
 }
 
 /// [FHeader]'s style.
 final class FHeaderStyle with Diagnosticable {
-  /// The title's [TextStyle].
-  final TextStyle titleTextStyle;
+  /// The root header style.
+  final FRootHeaderStyle rootStyle;
 
-  /// The [FHeaderAction]'s style.
-  final FHeaderActionStyle actionStyle;
-
-  /// The spacing between [FHeaderAction]s.
-  final double actionSpacing;
-
-  /// The padding.
-  final EdgeInsets padding;
+  /// The nested header style.
+  final FNestedHeaderStyle nestedStyle;
 
   /// Creates a [FHeaderStyle].
-  FHeaderStyle({
-    required this.titleTextStyle,
-    required this.actionStyle,
-    required this.actionSpacing,
-    required this.padding,
+  const FHeaderStyle({
+    required this.rootStyle,
+    required this.nestedStyle,
   });
 
-  /// Creates a [FHeaderStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
+  /// Creates a [FRootHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
   FHeaderStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  })  : titleTextStyle = typography.xl3.copyWith(
-          color: colorScheme.foreground,
-          fontWeight: FontWeight.w700,
-          height: 1,
-        ),
-        actionStyle = FHeaderActionStyle.inherit(colorScheme: colorScheme),
-        actionSpacing = 10,
-        padding = style.pagePadding.copyWith(bottom: 15);
+  })  : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        nestedStyle = FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
 
   /// Returns a copy of this [FHeaderStyle] with the given properties replaced.
   ///
   /// ```dart
   /// final style = FHeaderStyle(
-  ///   titleTextStyle: ...,
-  ///   action: ...,
+  ///   rootStyle: ...,
+  ///   nestedStyle: ...,
   /// );
   ///
   /// final copy = style.copyWith(
-  ///   action: ...,
+  ///   nestedStyle: ...,
   /// );
   ///
-  /// print(style.titleTextStyle == copy.titleTextStyle); // true
-  /// print(style.action == copy.action); // false
+  /// print(style.rootStyle == copy.rootStyle); // true
+  /// print(style.nestedStyle == copy.nestedStyle); // false
   /// ```
-  @useResult
   FHeaderStyle copyWith({
-    TextStyle? titleTextStyle,
-    FHeaderActionStyle? actionStyle,
-    double? actionSpacing,
-    EdgeInsets? padding,
+    FRootHeaderStyle? rootStyle,
+    FNestedHeaderStyle? nestedStyle,
   }) =>
       FHeaderStyle(
-        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-        actionStyle: actionStyle ?? this.actionStyle,
-        actionSpacing: actionSpacing ?? this.actionSpacing,
-        padding: padding ?? this.padding,
+        rootStyle: rootStyle ?? this.rootStyle,
+        nestedStyle: nestedStyle ?? this.nestedStyle,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
-      ..add(DiagnosticsProperty('action', actionStyle))
-      ..add(DiagnosticsProperty('actionSpacing', actionSpacing))
-      ..add(DiagnosticsProperty('padding', padding));
+      ..add(DiagnosticsProperty('rootStyle', rootStyle))
+      ..add(DiagnosticsProperty('nestedStyle', nestedStyle));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FHeaderStyle &&
+          runtimeType == other.runtimeType &&
+          rootStyle == other.rootStyle &&
+          nestedStyle == other.nestedStyle;
+
+  @override
+  int get hashCode => rootStyle.hashCode ^ nestedStyle.hashCode;
 }

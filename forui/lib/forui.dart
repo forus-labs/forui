@@ -25,7 +25,6 @@ export 'src/widgets/button/button.dart' hide FButtonContent, Variant;
 export 'src/widgets/card/card.dart' hide FCardContent;
 export 'src/widgets/dialog/dialog.dart' hide FDialogContent, FHorizontalDialogContent, FVerticalDialogContent;
 export 'src/widgets/header/header.dart';
-export 'src/widgets/nested_header/nested_header.dart';
 export 'src/widgets/tabs/tabs.dart';
 export 'src/widgets/text_field/text_field.dart';
 export 'src/widgets/scaffold.dart';
