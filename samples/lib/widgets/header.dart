@@ -13,18 +13,18 @@ class RootHeaderPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FHeader(
-    title: const Text('Edit Alarm'),
-    actions: [
-      FHeaderAction(
-        icon: FAssets.icons.alarmClock,
-        onPress: () {},
-      ),
-      FHeaderAction(
-        icon: FAssets.icons.plus,
-        onPress: () {},
-      ),
-    ],
-  );
+        title: const Text('Edit Alarm'),
+        actions: [
+          FHeaderAction(
+            icon: FAssets.icons.alarmClock,
+            onPress: () {},
+          ),
+          FHeaderAction(
+            icon: FAssets.icons.plus,
+            onPress: () {},
+          ),
+        ],
+      );
 }
 
 @RoutePage()
@@ -35,21 +35,21 @@ class NestedHeaderPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FHeader.nested(
-    title: const Text('Appointment'),
-    leftActions: [
-      FHeaderAction.back(onPress: () {}),
-    ],
-    rightActions: [
-      FHeaderAction(
-        icon: FAssets.icons.info,
-        onPress: () {},
-      ),
-      FHeaderAction(
-        icon: FAssets.icons.plus,
-        onPress: () {},
-      ),
-    ],
-  );
+        title: const Text('Appointment'),
+        leftActions: [
+          FHeaderAction.back(onPress: () {}),
+        ],
+        rightActions: [
+          FHeaderAction(
+            icon: FAssets.icons.info,
+            onPress: () {},
+          ),
+          FHeaderAction(
+            icon: FAssets.icons.plus,
+            onPress: () {},
+          ),
+        ],
+      );
 }
 
 @RoutePage()
@@ -60,19 +60,19 @@ class XNestedHeaderPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FHeader.nested(
-    title: const Text('Climate'),
-    leftActions: [
-      FHeaderAction(
-        icon: FAssets.icons.thermometer,
-        onPress: () {},
-      ),
-      FHeaderAction(
-        icon: FAssets.icons.wind,
-        onPress: null,
-      ),
-    ],
-    rightActions: [
-      FHeaderAction.x(onPress: () {}),
-    ],
-  );
+        title: const Text('Climate'),
+        leftActions: [
+          FHeaderAction(
+            icon: FAssets.icons.thermometer,
+            onPress: () {},
+          ),
+          FHeaderAction(
+            icon: FAssets.icons.wind,
+            onPress: null,
+          ),
+        ],
+        rightActions: [
+          FHeaderAction.x(onPress: () {}),
+        ],
+      );
 }
