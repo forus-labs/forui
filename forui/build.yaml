@@ -3,10 +3,6 @@
 targets:
   $default:
     builders:
-      stevia_runner:steviaAssetGenerator:
-        generate_for:
-          - assets/**
-
       mockito:mockBuilder:
         generate_for:
           - test/**.dart

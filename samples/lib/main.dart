@@ -79,6 +79,10 @@ class _AppRouter extends $_AppRouter {
           page: MultilineTextFieldRoute.page,
         ),
         AutoRoute(
+          path: '/text-field/form',
+          page: FormTextFieldRoute.page,
+        ),
+        AutoRoute(
           path: '/scaffold/default',
           page: ScaffoldRoute.page,
         ),

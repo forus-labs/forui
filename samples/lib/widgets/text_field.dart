@@ -71,3 +71,59 @@ class MultilineTextFieldPage extends SampleScaffold {
         ],
       );
 }
+
+@RoutePage()
+class FormTextFieldPage extends SampleScaffold {
+  FormTextFieldPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => const LoginForm();
+}
+
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) => Form(
+    key: _formKey,
+    child: Column(
+      children: [
+        FTextField.email(
+          label: const Text('Email'),
+          hint: 'janedoe@foruslabs.com',
+          help: const Text(''),
+          validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+        ),
+        const SizedBox(height: 4),
+        FTextField.password(
+          label: const Text('Password'),
+          hint: '',
+          help: const Text(''),
+          validator: (value) => (value?.length ?? 0) >= 8 ? null : 'Password must be at least 8 characters long.',
+        ),
+        const SizedBox(height: 4),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
+          child: FButton(
+            rawLabel: const Text('Login'),
+            onPress: () => _formKey.currentState!.validate(),
+          ),
+        )
+      ],
+    ),
+  );
+}

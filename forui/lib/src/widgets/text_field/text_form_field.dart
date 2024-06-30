@@ -1,15 +1,76 @@
 part of 'text_field.dart';
 
 class _Field extends FormField<String> {
-  
   final FTextField parent;
-  final InputDecoration initialDecoration;
 
   _Field({
+    required FTextField parent,
+    required FTextFieldStyle style,
+    required FTextFieldStateStyle stateStyle,
+    required Key? key,
+  }): this._(
+    parent: parent,
+    style: style,
+    stateStyle: stateStyle,
+    decoration: InputDecoration(
+      suffixIcon: parent.suffix,
+      // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
+      prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
+      contentPadding: style.contentPadding.copyWith(left: 0),
+      hintText: parent.hint,
+      hintStyle: stateStyle.hintTextStyle,
+      helper: parent.help == null ?
+        null :
+        DefaultTextStyle.merge(style: stateStyle.footerTextStyle, child: parent.help!),
+      helperStyle: stateStyle.footerTextStyle,
+      error: parent.error == null ?
+        null :
+        DefaultTextStyle.merge(style: stateStyle.footerTextStyle, child: parent.error!),
+      errorStyle: stateStyle.footerTextStyle,
+      disabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.disabledStyle.unfocusedStyle.color,
+          width: style.disabledStyle.unfocusedStyle.width,
+        ),
+        borderRadius: style.disabledStyle.unfocusedStyle.radius,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.enabledStyle.unfocusedStyle.color,
+          width: style.enabledStyle.unfocusedStyle.width,
+        ),
+        borderRadius: style.enabledStyle.unfocusedStyle.radius,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.enabledStyle.focusedStyle.color,
+          width: style.enabledStyle.focusedStyle.width,
+        ),
+        borderRadius: stateStyle.focusedStyle.radius,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.errorStyle.unfocusedStyle.color,
+          width: style.errorStyle.unfocusedStyle.width,
+        ),
+        borderRadius: style.errorStyle.unfocusedStyle.radius,
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: style.errorStyle.focusedStyle.color,
+          width: style.errorStyle.focusedStyle.width,
+        ),
+        borderRadius: style.errorStyle.focusedStyle.radius,
+      ),
+    ),
+    key: key,
+  );
+
+  _Field._({
     required this.parent,
     required FTextFieldStyle style,
     required FTextFieldStateStyle stateStyle,
-    required this.initialDecoration,
+    required InputDecoration decoration,
     super.key,
   }): super(
     onSaved: parent.onSave,
@@ -24,7 +85,7 @@ class _Field extends FormField<String> {
         bucket: state.bucket,
         child: TextField(
           controller: state._effectiveController,
-          decoration: initialDecoration.copyWith(
+          decoration: decoration.copyWith(
             error: state.errorText == null ? null : parent.errorBuilder(state.context, state.errorText!),
           ),
           focusNode: parent.focusNode,
@@ -86,8 +147,6 @@ class _Field extends FormField<String> {
 
 // This class is based on Material's _TextFormFieldState implementation.
 class _State extends FormFieldState<String> {
-  // TODO: move decoration here
-
   RestorableTextEditingController? _controller;
 
   @override

@@ -271,9 +271,10 @@ packages:
   forui_assets:
     dependency: transitive
     description:
-      path: "../forui_assets"
-      relative: true
-    source: path
+      name: forui_assets
+      sha256: a68dcbb7e6f669f495a0bcf6464f6e28197744318aabeb28aa0bb3c8435cde14
+      url: "https://pub.dev"
+    source: hosted
     version: "0.1.0"
   frontend_server_client:
     dependency: transitive

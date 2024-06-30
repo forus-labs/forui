@@ -268,7 +268,7 @@ final class FTextField extends StatelessWidget {
   /// Whitespace characters (e.g. newline, space, tab) are included in the character count.
   ///
   /// If [maxLengthEnforcement] is [MaxLengthEnforcement.none], then more than [maxLength] characters may be entered,
-  /// but the error counter and divider will switch to the [style]'s [FTextFieldStyle.error] when the limit is exceeded.
+  /// but the error counter and divider will switch to the [style]'s [FTextFieldStyle.errorStyle] when the limit is exceeded.
   final int? maxLength;
 
   /// Determines how the [maxLength] limit should be enforced.
@@ -731,9 +731,9 @@ final class FTextField extends StatelessWidget {
     final theme = context.theme;
     final style = this.style ?? theme.textFieldStyle;
     final stateStyle = switch (this) {
-      _ when !enabled => style.disabled,
-      _ when error != null => style.error,
-      _ => style.enabled,
+      _ when !enabled => style.disabledStyle,
+      _ when error != null => style.errorStyle,
+      _ => style.enabledStyle,
     };
 
     final textFormField = MergeSemantics(
@@ -765,7 +765,6 @@ final class FTextField extends StatelessWidget {
               ),
               child: _Field(
                 parent: this,
-                initialDecoration: _decoration(style, stateStyle),
                 style: style,
                 stateStyle: stateStyle,
                 key: key,
@@ -789,57 +788,6 @@ final class FTextField extends StatelessWidget {
           )
         : textFormField;
   }
-
-  InputDecoration _decoration(
-    FTextFieldStyle style,
-    FTextFieldStateStyle current,
-  ) => InputDecoration(
-    suffixIcon: suffix,
-    // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-    prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
-    contentPadding: style.contentPadding.copyWith(left: 0),
-    hintText: hint,
-    hintStyle: current.hintTextStyle,
-    helper: help == null ? null : DefaultTextStyle.merge(style: current.footerTextStyle, child: help!),
-    helperStyle: current.footerTextStyle,
-    error: error == null ? null : DefaultTextStyle.merge(style: current.footerTextStyle, child: error!),
-    errorStyle: current.footerTextStyle,
-    disabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: style.disabled.unfocused.color,
-        width: style.disabled.unfocused.width,
-      ),
-      borderRadius: style.disabled.unfocused.radius,
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: style.enabled.unfocused.color,
-        width: style.enabled.unfocused.width,
-      ),
-      borderRadius: style.enabled.unfocused.radius,
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: style.enabled.focused.color,
-        width: style.enabled.focused.width,
-      ),
-      borderRadius: current.focused.radius,
-    ),
-    errorBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: style.error.unfocused.color,
-        width: style.error.unfocused.width,
-      ),
-      borderRadius: style.error.unfocused.radius,
-    ),
-    focusedErrorBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: style.error.focused.color,
-        width: style.error.focused.width,
-      ),
-      borderRadius: style.error.focused.radius,
-    ),
-  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

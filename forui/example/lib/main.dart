@@ -31,6 +31,8 @@ class ExampleWidget extends StatefulWidget {
 }
 
 class _ExampleWidgetState extends State<ExampleWidget> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -38,49 +40,34 @@ class _ExampleWidgetState extends State<ExampleWidget> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 10),
-            Expanded(
-              child: FTabs(
-                tabs: [
-                  FTabEntry(
-                    label: 'Account',
-                    content: FCard(
-                      title: 'Account',
-                      subtitle: 'Make changes to your account here. Click save when you are done.',
-                      child: Column(
-                        children: [
-                          Container(
-                            color: Colors.red,
-                            height: 100,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  FTabEntry(
-                    label: 'Password',
-                    content: FCard(
-                      title: 'Password',
-                      subtitle: 'Change your password here. After saving, you will be logged out.',
-                      child: Column(
-                        children: [
-                          Container(
-                            color: Colors.blue,
-                            height: 100,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+    padding: const EdgeInsets.all(8.0),
+    child: Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          FTextField.email(
+            label: const Text('Email'),
+            hint: 'janedoe@foruslabs.com',
+            help: const Text(''),
+            validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+          ),
+          const SizedBox(height: 4),
+          FTextField.password(
+            label: const Text('Password'),
+            hint: '',
+            help: const Text(''),
+            validator: (value) => (value?.length ?? 0) >= 8 ? null : 'Password must be at least 8 characters long.',
+          ),
+          const SizedBox(height: 4),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
+            child: FButton(
+              rawLabel: const Text('Login'),
+              onPress: () => _formKey.currentState!.validate(),
             ),
-          ],
-        ),
-      );
+          )
+        ],
+      ),
+    )
+  );
 }
