@@ -79,9 +79,9 @@ class FormTextFieldPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => const Padding(
-    padding: EdgeInsets.all(15.0),
-    child: LoginForm(),
-  );
+        padding: EdgeInsets.all(15.0),
+        child: LoginForm(),
+      );
 }
 
 class LoginForm extends StatefulWidget {
@@ -101,26 +101,26 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) => Form(
-    key: _formKey,
-    child: Column(
-      children: [
-        FTextField.email(
-          hint: 'janedoe@foruslabs.com',
-          help: const Text(''),
-          validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+        key: _formKey,
+        child: Column(
+          children: [
+            FTextField.email(
+              hint: 'janedoe@foruslabs.com',
+              help: const Text(''),
+              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+            ),
+            const SizedBox(height: 4),
+            FTextField.password(
+              hint: '',
+              help: const Text(''),
+              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+            ),
+            const SizedBox(height: 30),
+            FButton(
+              rawLabel: const Text('Login'),
+              onPress: () => _formKey.currentState!.validate(),
+            ),
+          ],
         ),
-        const SizedBox(height: 4),
-        FTextField.password(
-          hint: '',
-          help: const Text(''),
-          validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-        ),
-        const SizedBox(height: 30),
-        FButton(
-          rawLabel: const Text('Login'),
-          onPress: () => _formKey.currentState!.validate(),
-        ),
-      ],
-    ),
-  );
+      );
 }
