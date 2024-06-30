@@ -1,11 +1,12 @@
 ## 0.2.0
 
-* Add `NestedHeader` widget.
+* Add `Header.nested` widget.
 
 ### Breaking changes
 
-* `FHeaderActionStyle.action` parameter has been renamed to `FHeaderStyle.actionStyle`.
-* `FHeaderActionStyle.padding` parameter has been moved to `FHeaderStyle.actionSpacing`.
+* `FHeaderStyle` have been nested in `FHeaderStyles.rootStyle`.
+* `FHeaderActionStyle.action` parameter has been renamed to `FRootHeaderStyle.actionStyle`.
+* `FHeaderActionStyle.padding` parameter has been moved to `FRootHeaderStyle.actionSpacing`.
 
 ## 0.1.0
 

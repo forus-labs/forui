@@ -15,11 +15,10 @@ part 'nested_header.dart';
 /// A header.
 ///
 /// A header contains the page's title and actions.
-
 ///
 /// See:
 /// * https://forui.dev/docs/header for working examples.
-/// * [FHeaderStyle] for customizing a header's appearance.
+/// * [FHeaderStyles] and [FNestedHeaderStyle] for customizing a header's appearance.
 sealed class FHeader extends StatelessWidget {
   const FHeader._({super.key});
 
@@ -46,28 +45,28 @@ sealed class FHeader extends StatelessWidget {
 }
 
 /// [FHeader]'s style.
-final class FHeaderStyle with Diagnosticable {
+final class FHeaderStyles with Diagnosticable {
   /// The root header style.
   final FRootHeaderStyle rootStyle;
 
   /// The nested header style.
   final FNestedHeaderStyle nestedStyle;
 
-  /// Creates a [FHeaderStyle].
-  const FHeaderStyle({
+  /// Creates a [FHeaderStyles].
+  const FHeaderStyles({
     required this.rootStyle,
     required this.nestedStyle,
   });
 
-  /// Creates a [FRootHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
-  FHeaderStyle.inherit({
+  /// Creates a [FHeaderStyles] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
+  FHeaderStyles.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   })  : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         nestedStyle = FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
 
-  /// Returns a copy of this [FHeaderStyle] with the given properties replaced.
+  /// Returns a copy of this [FHeaderStyles] with the given properties replaced.
   ///
   /// ```dart
   /// final style = FHeaderStyle(
@@ -82,11 +81,11 @@ final class FHeaderStyle with Diagnosticable {
   /// print(style.rootStyle == copy.rootStyle); // true
   /// print(style.nestedStyle == copy.nestedStyle); // false
   /// ```
-  FHeaderStyle copyWith({
+  FHeaderStyles copyWith({
     FRootHeaderStyle? rootStyle,
     FNestedHeaderStyle? nestedStyle,
   }) =>
-      FHeaderStyle(
+      FHeaderStyles(
         rootStyle: rootStyle ?? this.rootStyle,
         nestedStyle: nestedStyle ?? this.nestedStyle,
       );
@@ -102,7 +101,7 @@ final class FHeaderStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FHeaderStyle &&
+      other is FHeaderStyles &&
           runtimeType == other.runtimeType &&
           rootStyle == other.rootStyle &&
           nestedStyle == other.nestedStyle;

@@ -77,7 +77,7 @@ final class _FNestedHeader extends FHeader {
   }
 }
 
-/// [_FNestedHeader]'s style.
+/// [FHeader.nested]'s style.
 final class FNestedHeaderStyle with Diagnosticable {
   /// The title's [TextStyle].
   final TextStyle titleTextStyle;
