@@ -20,7 +20,7 @@ class ScaffoldPage extends SampleScaffold {
             height: 420,
             child: FScaffold(
               header: FHeader(
-                title: 'Settings',
+                title: const Text('Settings'),
                 actions: [
                   FHeaderAction(
                     icon: FAssets.icons.ellipsis,
