@@ -1,90 +1,83 @@
 part of 'text_field.dart';
 
-@internal
-class FTextFormField extends FormField<String> {
-
-  static Widget _builder(FormFieldState<String> field) {
-    final state = field as _State;
-    final FTextFormField(:configuration, :initialDecoration, :style, :stateStyle) = state.widget;
-
-    void onChange(String value) {
-      field.didChange(value);
-      configuration.onChange?.call(value);
-    }
-
-    return UnmanagedRestorationScope(
-      bucket: state.bucket,
-      child: TextField(
-        controller: state._effectiveController,
-        decoration: initialDecoration.copyWith(error: state.errorText), // TODO: Transformation function.
-        focusNode: configuration.focusNode,
-        undoController: configuration.undoController,
-        cursorErrorColor: style.cursorColor,
-        keyboardType: configuration.keyboardType,
-        textInputAction: configuration.textInputAction,
-        textCapitalization: configuration.textCapitalization,
-        style: stateStyle.contentTextStyle,
-        textAlign: configuration.textAlign,
-        textAlignVertical: configuration.textAlignVertical,
-        textDirection: configuration.textDirection,
-        readOnly: configuration.readOnly,
-        showCursor: configuration.showCursor,
-        autofocus: configuration.autofocus,
-        statesController: configuration.statesController,
-        obscureText: configuration.obscureText,
-        autocorrect: configuration.autocorrect,
-        smartDashesType: configuration.smartDashesType,
-        smartQuotesType: configuration.smartQuotesType,
-        enableSuggestions: configuration.enableSuggestions,
-        maxLines: configuration.maxLines,
-        minLines: configuration.minLines,
-        expands: configuration.expands,
-        maxLength: configuration.maxLength,
-        maxLengthEnforcement: configuration.maxLengthEnforcement,
-        onChanged: onChange,
-        onEditingComplete: configuration.onEditingComplete,
-        onSubmitted: configuration.onSubmit,
-        onAppPrivateCommand: configuration.onAppPrivateCommand,
-        inputFormatters: configuration.inputFormatters,
-        enabled: configuration.enabled,
-        ignorePointers: configuration.ignorePointers,
-        keyboardAppearance: style.keyboardAppearance,
-        scrollPadding: style.scrollPadding,
-        dragStartBehavior: configuration.dragStartBehavior,
-        selectionControls: configuration.selectionControls,
-        scrollController: configuration.scrollController,
-        scrollPhysics: configuration.scrollPhysics,
-        autofillHints: configuration.autofillHints,
-        restorationId: configuration.restorationId,
-        scribbleEnabled: configuration.scribbleEnabled,
-        enableIMEPersonalizedLearning: configuration.enableIMEPersonalizedLearning,
-        contextMenuBuilder: configuration.contextMenuBuilder,
-        canRequestFocus: configuration.canRequestFocus,
-        spellCheckConfiguration: configuration.spellCheckConfiguration,
-        magnifierConfiguration: configuration.magnifierConfiguration,
-      ),
-    );
-  }
-
-  final FTextField configuration;
+class _Field extends FormField<String> {
+  
+  final FTextField parent;
   final InputDecoration initialDecoration;
-  final FTextFieldStyle style;
-  final FTextFieldStateStyle stateStyle;
 
-  FTextFormField({
-    required this.configuration,
+  _Field({
+    required this.parent,
+    required FTextFieldStyle style,
+    required FTextFieldStateStyle stateStyle,
     required this.initialDecoration,
-    required this.style,
-    required this.stateStyle,
     super.key,
   }): super(
-    onSaved: configuration.onSave,
-    validator: configuration.validator,
-    initialValue: configuration.initialValue,
-    enabled: configuration.enabled,
-    autovalidateMode: configuration.autovalidateMode,
-    restorationId: configuration.restorationId,
-    builder: _builder,
+    onSaved: parent.onSave,
+    validator: parent.validator,
+    initialValue: parent.initialValue,
+    enabled: parent.enabled,
+    autovalidateMode: parent.autovalidateMode,
+    restorationId: parent.restorationId,
+    builder: (field) {
+      final state = field as _State;
+      return UnmanagedRestorationScope(
+        bucket: state.bucket,
+        child: TextField(
+          controller: state._effectiveController,
+          decoration: initialDecoration.copyWith(
+            error: state.errorText == null ? null : parent.errorBuilder(state.context, state.errorText!),
+          ),
+          focusNode: parent.focusNode,
+          undoController: parent.undoController,
+          cursorErrorColor: style.cursorColor,
+          keyboardType: parent.keyboardType,
+          textInputAction: parent.textInputAction,
+          textCapitalization: parent.textCapitalization,
+          style: stateStyle.contentTextStyle,
+          textAlign: parent.textAlign,
+          textAlignVertical: parent.textAlignVertical,
+          textDirection: parent.textDirection,
+          readOnly: parent.readOnly,
+          showCursor: parent.showCursor,
+          autofocus: parent.autofocus,
+          statesController: parent.statesController,
+          obscureText: parent.obscureText,
+          autocorrect: parent.autocorrect,
+          smartDashesType: parent.smartDashesType,
+          smartQuotesType: parent.smartQuotesType,
+          enableSuggestions: parent.enableSuggestions,
+          maxLines: parent.maxLines,
+          minLines: parent.minLines,
+          expands: parent.expands,
+          maxLength: parent.maxLength,
+          maxLengthEnforcement: parent.maxLengthEnforcement,
+          onChanged: (value) {
+            field.didChange(value);
+            parent.onChange?.call(value);
+          },
+          onEditingComplete: parent.onEditingComplete,
+          onSubmitted: parent.onSubmit,
+          onAppPrivateCommand: parent.onAppPrivateCommand,
+          inputFormatters: parent.inputFormatters,
+          enabled: parent.enabled,
+          ignorePointers: parent.ignorePointers,
+          keyboardAppearance: style.keyboardAppearance,
+          scrollPadding: style.scrollPadding,
+          dragStartBehavior: parent.dragStartBehavior,
+          selectionControls: parent.selectionControls,
+          scrollController: parent.scrollController,
+          scrollPhysics: parent.scrollPhysics,
+          autofillHints: parent.autofillHints,
+          restorationId: parent.restorationId,
+          scribbleEnabled: parent.scribbleEnabled,
+          enableIMEPersonalizedLearning: parent.enableIMEPersonalizedLearning,
+          contextMenuBuilder: parent.contextMenuBuilder,
+          canRequestFocus: parent.canRequestFocus,
+          spellCheckConfiguration: parent.spellCheckConfiguration,
+          magnifierConfiguration: parent.magnifierConfiguration,
+        ),
+      );
+    },
   );
 
   @override
@@ -101,60 +94,60 @@ class _State extends FormFieldState<String> {
   void initState() {
     super.initState();
 
-    final controller = widget.configuration.controller;
-    if (controller == null) {
-      _createLocalController(widget.initialValue != null ? TextEditingValue(text: widget.initialValue!) : null);
-    } else {
+    if (widget.parent.controller case final controller?) {
       controller.addListener(_handleControllerChanged);
+
+    } else {
+      _registerController(RestorableTextEditingController(text: widget.initialValue));
     }
   }
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
     super.restoreState(oldBucket, initialRestore);
-    if (_controller != null) {
-      registerForRestoration(_controller!, 'controller');
+    if (_controller case final controller?) {
+      registerForRestoration(controller, 'controller');
     }
 
-    // Make sure to update the internal [FormFieldState] value to sync up with
-    // text editing controller value.
+    // Make sure to update the internal [FormFieldState] value to sync up with text editing controller value.
     setValue(_effectiveController.text);
   }
 
-  void _createLocalController([TextEditingValue? value]) {
-    _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
+  void _registerController(RestorableTextEditingController controller) {
+    assert(_controller == null, '_controller is already initialized.');
+    _controller = controller;
     if (!restorePending) {
-      registerForRestoration(_controller!, 'controller');
+      registerForRestoration(controller, 'controller');
     }
   }
 
   @override
-  void didUpdateWidget(TextFormField old) {
+  void didUpdateWidget(_Field old) {
     super.didUpdateWidget(old);
-    if (widget.configuration.controller == old.controller) {
+    if (widget.parent.controller == old.parent.controller) {
       return;
     }
 
-    old.controller?.removeListener(_handleControllerChanged);
-    widget.configuration.controller?.addListener(_handleControllerChanged);
+    widget.parent.controller?.addListener(_handleControllerChanged);
+    old.parent.controller?.removeListener(_handleControllerChanged);
 
-    if (old.controller != null && widget.configuration.controller == null) {
-      _createLocalController(old.controller!.value);
-    }
+    switch ((widget.parent.controller, old.parent.controller)) {
+      case (final current?, _):
+        setValue(current.text);
+        if (_controller != null) {
+          unregisterFromRestoration(_controller!);
+          _controller?.dispose();
+          _controller = null;
+        }
 
-    if (widget.configuration.controller != null) {
-      setValue(widget.configuration.controller!.text);
-      if (old.controller == null) {
-        unregisterFromRestoration(_controller!);
-        _controller!.dispose();
-        _controller = null;
-      }
+      case (null, final old?):
+        _registerController(RestorableTextEditingController.fromValue(old.value));
     }
   }
 
   @override
   void dispose() {
-    widget.configuration.controller?.removeListener(_handleControllerChanged);
+    widget.parent.controller?.removeListener(_handleControllerChanged);
     _controller?.dispose();
     super.dispose();
   }
@@ -162,7 +155,6 @@ class _State extends FormFieldState<String> {
   @override
   void didChange(String? value) {
     super.didChange(value);
-
     if (_effectiveController.text != value) {
       _effectiveController.text = value ?? '';
     }
@@ -170,28 +162,25 @@ class _State extends FormFieldState<String> {
 
   @override
   void reset() {
-    // Set the controller value before calling super.reset() to let
-    // _handleControllerChanged suppress the change.
+    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
     _effectiveController.text = widget.initialValue ?? '';
     super.reset();
-    widget.configuration.onChange?.call(_effectiveController.text);
+    widget.parent.onChange?.call(_effectiveController.text);
   }
 
   void _handleControllerChanged() {
     // Suppress changes that originated from within this class.
     //
-    // In the case where a controller has been passed in to this widget, we
-    // register this change listener. In these cases, we'll also receive change
-    // notifications for changes originating from within this class -- for
-    // example, the reset() method. In such cases, the FormField value will
-    // already have been set.
+    // In the case where a controller has been passed in to this widget, we register this change listener. In these
+    // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
+    // reset() method. In such cases, the FormField value will already have been set.
     if (_effectiveController.text != value) {
       didChange(_effectiveController.text);
     }
   }
 
   @override
-  FTextFormField get widget => super.widget as FTextFormField;
+  _Field get widget => super.widget as _Field;
 
-  TextEditingController get _effectiveController => widget.configuration.controller ?? _controller!.value;
+  TextEditingController get _effectiveController => widget.parent.controller ?? _controller!.value;
 }

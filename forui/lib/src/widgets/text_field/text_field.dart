@@ -20,7 +20,7 @@ part 'text_form_field.dart';
 /// See:
 /// * https://forui.dev/docs/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
-/// * [FTextFormField] for a text field that integrates with a [Form].
+/// * [_Field] for a text field that integrates with a [Form].
 /// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget {
   static Widget _contextMenuBuilder(
@@ -457,12 +457,12 @@ final class FTextField extends StatelessWidget {
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
   ///
-  /// The returned value is exposed by the [FormFieldState.errorText] property. [FTextFormField] transform the text
+  /// The returned value is exposed by the [FormFieldState.errorText] property. [_Field] transform the text
   /// using [...] before using the returned widget to override [error].
   ///
-  /// Alternating between error and normal state can cause the height of the [FTextFormField] to change if no other
+  /// Alternating between error and normal state can cause the height of the [_Field] to change if no other
   /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
-  /// error is displayed, either wrap the [FTextFormField] in a fixed height parent like [SizedBox], or set the [help]
+  /// error is displayed, either wrap the [_Field] in a fixed height parent like [SizedBox], or set the [help]
   /// parameter to a space.
   final FormFieldValidator<String>? validator;
 
@@ -763,11 +763,12 @@ final class FTextField extends StatelessWidget {
                   primaryColor: style.cursorColor,
                 ),
               ),
-              child: FTextFormField(
-                configuration: this,
+              child: _Field(
+                parent: this,
                 initialDecoration: _decoration(style, stateStyle),
                 style: style,
                 stateStyle: stateStyle,
+                key: key,
               ),
             ),
           ),
@@ -899,6 +900,7 @@ final class FTextField extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onSave', onSave))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialValue', initialValue))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode));
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }
