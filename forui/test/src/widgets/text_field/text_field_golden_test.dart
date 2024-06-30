@@ -86,7 +86,6 @@ void main() {
                     child: FTextField.email(
                       controller: controller,
                       autofocus: focused_,
-                      label: const Text('Email'),
                       hint: 'janedoe@foruslabs.com',
                     ),
                   ),
@@ -113,7 +112,6 @@ void main() {
                     child: FTextField.password(
                       controller: controller,
                       autofocus: focused_,
-                      label: const Text('Password'),
                       hint: 'password',
                     ),
                   ),

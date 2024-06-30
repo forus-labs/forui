@@ -44,7 +44,6 @@ class PasswordTextFieldPage extends SampleScaffold {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: FTextField.password(
               controller: TextEditingController(text: 'My password'),
-              label: const Text('Password'),
             ),
           ),
         ],
@@ -79,7 +78,10 @@ class FormTextFieldPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => const LoginForm();
+  Widget child(BuildContext context) => const Padding(
+    padding: EdgeInsets.all(15.0),
+    child: LoginForm(),
+  );
 }
 
 class LoginForm extends StatefulWidget {
@@ -103,26 +105,21 @@ class _LoginFormState extends State<LoginForm> {
     child: Column(
       children: [
         FTextField.email(
-          label: const Text('Email'),
           hint: 'janedoe@foruslabs.com',
           help: const Text(''),
           validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
         ),
         const SizedBox(height: 4),
         FTextField.password(
-          label: const Text('Password'),
           hint: '',
           help: const Text(''),
-          validator: (value) => (value?.length ?? 0) >= 8 ? null : 'Password must be at least 8 characters long.',
+          validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
         ),
-        const SizedBox(height: 4),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 30),
-          child: FButton(
-            rawLabel: const Text('Login'),
-            onPress: () => _formKey.currentState!.validate(),
-          ),
-        )
+        const SizedBox(height: 30),
+        FButton(
+          rawLabel: const Text('Login'),
+          onPress: () => _formKey.currentState!.validate(),
+        ),
       ],
     ),
   );

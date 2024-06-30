@@ -2,7 +2,8 @@ import { Tabs } from 'nextra/components';
 import { Widget } from '../../components/widget';
 
 # Text Fields
-A text field lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
+A text field lets the user enter text, either with hardware keyboard or with an onscreen keyboard. It can also be used
+in a form.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -14,7 +15,7 @@ A text field lets the user enter text, either with hardware keyboard or with an 
       enabled: enabled,
       label: 'Email',
       hint: 'john@doe.com',
-    )
+    );
     ```
   </Tabs.Tab>
 </Tabs>
@@ -26,9 +27,9 @@ A text field lets the user enter text, either with hardware keyboard or with an 
 ```dart
 FTextField(
   enabled: true,
-  label: 'Email',
+  label: Text('Email'),
   hint: 'john@doe.com',
-  footer: 'Enter your email associated with your Forui account.',
+  footer: Text('Enter your email associated with your Forui account.'),
   keyboardType: TextInputType.emailAddress,
   textCapitalization: TextCapitalization.none,
 );
@@ -38,9 +39,8 @@ FTextField(
 
 ```dart
 FTextField.email(
-  label: 'Email',
   hint: 'john@doe.com',
-  footer: 'Enter your email associated with your Forui account.',
+  footer: Text('Enter your email associated with your Forui account.'),
 );
 ```
 
@@ -48,8 +48,7 @@ FTextField.email(
 
 ```dart
 FTextField.password(
-  label: 'Password',
-  footer: 'Your password must be at least 8 characters long.',
+  footer: Text('Your password must be at least 8 characters long.'),
 );
 ```
 
@@ -57,9 +56,9 @@ FTextField.password(
 
 ```dart
 FTextField.multiline(
-  label: 'Description',
+  label: Text('Description'),
   hint: 'Enter a description...',
-  footer: 'Enter a description of the item.',
+  footer: Text('Enter a description of the item.'),
 );
 ```
 
@@ -75,7 +74,6 @@ FTextField.multiline(
   <Tabs.Tab>
     ```dart
     FTextField.email(
-      label: 'Email',
       hint: 'john@doe.com',
     );
     ```
@@ -92,7 +90,7 @@ FTextField.multiline(
   <Tabs.Tab>
     ```dart
     FTextField.email(
-      label: 'Email',
+      enabled: false
       hint: 'john@doe.com',
     );
     ```
@@ -110,7 +108,6 @@ FTextField.multiline(
     ```dart
     FTextField.password(
       controller: TextEditingController(text: 'My password'),
-      label: 'Password',
     );
     ```
   </Tabs.Tab>
@@ -125,10 +122,62 @@ FTextField.multiline(
   <Tabs.Tab>
     ```dart
     FTextField.multiline(
-      label: 'Leave a review',
+      label: Text('Leave a review'),
       maxLines: 4,
     );
     ```
   </Tabs.Tab>
 </Tabs>
 
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='form' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    class LoginForm extends StatefulWidget {
+      const LoginForm({super.key});
+
+      @override
+      State<LoginForm> createState() => _LoginFormState();
+    }
+
+    class _LoginFormState extends State<LoginForm> {
+      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+      @override
+      void initState() {
+        super.initState();
+      }
+
+      @override
+      Widget build(BuildContext context) => Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            FTextField.email(
+              hint: 'janedoe@foruslabs.com',
+              help: const Text(''),
+              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+            ),
+            const SizedBox(height: 4),
+            FTextField.password(
+              hint: '',
+              help: const Text(''),
+              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+            ),
+            const SizedBox(height: 30),
+            FButton(
+              rawLabel: const Text('Login'),
+              onPress: () => _formKey.currentState!.validate(),
+            ),
+          ],
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

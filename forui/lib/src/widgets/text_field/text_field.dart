@@ -545,8 +545,8 @@ final class FTextField extends StatelessWidget {
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
-    this.label,
-    this.hint = 'Email',
+    this.label = const Text('Email'),
+    this.hint,
     this.help,
     this.error,
     this.magnifierConfiguration,
@@ -607,8 +607,8 @@ final class FTextField extends StatelessWidget {
   /// when handling the creation of new passwords.
   const FTextField.password({
     this.style,
-    this.label,
-    this.hint = 'Password',
+    this.label = const Text('Password'),
+    this.hint,
     this.help,
     this.error,
     this.magnifierConfiguration,

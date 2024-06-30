@@ -46,14 +46,12 @@ class _ExampleWidgetState extends State<ExampleWidget> {
       child: Column(
         children: [
           FTextField.email(
-            label: const Text('Email'),
             hint: 'janedoe@foruslabs.com',
             help: const Text(''),
             validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
           ),
           const SizedBox(height: 4),
           FTextField.password(
-            label: const Text('Password'),
             hint: '',
             help: const Text(''),
             validator: (value) => (value?.length ?? 0) >= 8 ? null : 'Password must be at least 8 characters long.',

@@ -93,6 +93,6 @@ class _AppRouter extends $_AppRouter {
         AutoRoute(
           path: '/switch/default',
           page: SwitchRoute.page,
-        )
+        ),
       ];
 }
