@@ -26,7 +26,8 @@ final class FTextField extends StatelessWidget {
   static Widget _contextMenuBuilder(
     BuildContext context,
     EditableTextState state,
-  ) => AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+  ) =>
+      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
   static Widget _errorBuilder(BuildContext context, String text) => Text(text);
 
@@ -479,7 +480,7 @@ final class FTextField extends StatelessWidget {
   final AutovalidateMode? autovalidateMode;
 
   /// A builder that transforms a [FormFieldState.errorText] into a widget. Defaults to a [Text] widget.
-  /// 
+  ///
   /// The builder is called whenever [validator] returns an error text. It replaces [error] if it was provided.
   final Widget Function(BuildContext, String) errorBuilder;
 
