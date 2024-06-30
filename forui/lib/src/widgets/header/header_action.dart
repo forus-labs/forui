@@ -29,22 +29,45 @@ class FHeaderAction extends StatelessWidget {
     super.key,
   });
 
+  /// Creates a [FHeaderAction] with [FAssets.icons.arrowLeft].
+  factory FHeaderAction.back({
+    required VoidCallback? onPress,
+    FHeaderActionStyle? style,
+    Key? key,
+  }) =>
+      FHeaderAction(
+        icon: FAssets.icons.arrowLeft,
+        onPress: onPress,
+        style: style,
+        key: key,
+      );
+
+  /// Creates a [FHeaderAction] with [FAssets.icons.x].
+  factory FHeaderAction.x({
+    required VoidCallback? onPress,
+    FHeaderActionStyle? style,
+    Key? key,
+  }) =>
+      FHeaderAction(
+        icon: FAssets.icons.x,
+        onPress: onPress,
+        style: style,
+        key: key,
+      );
+
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.headerStyle.action;
+    final style = FHeaderActionStyle._of(context);
     final enabled = onPress != null || onLongPress != null;
 
-    return Padding(
-      padding: style.padding,
-      child: MouseRegion(
-        cursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
-        child: FTappable(
-          onTap: onPress,
-          onLongPress: onLongPress,
-          child: icon(
-            height: style.size,
-            colorFilter: ColorFilter.mode(onPress == null ? style.disabledColor : style.enabledColor, BlendMode.srcIn),
-          ),
+    return MouseRegion(
+      cursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
+      child: FTappable(
+        onTap: onPress,
+        onLongPress: onLongPress,
+        child: icon(
+          height: style.size,
+          colorFilter: ColorFilter.mode(onPress == null ? style.disabledColor : style.enabledColor, BlendMode.srcIn),
         ),
       ),
     );
@@ -63,32 +86,35 @@ class FHeaderAction extends StatelessWidget {
 
 /// [FHeaderAction]'s style.
 class FHeaderActionStyle with Diagnosticable {
+  @useResult
+  static FHeaderActionStyle _of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<_InheritedActionStyle>()?.style ??
+      context.theme.headerStyle.rootStyle.actionStyle;
+
   /// The icon's color when this action is enabled.
   final Color enabledColor;
 
   /// The icon's color when this action is disabled.
   final Color disabledColor;
 
-  /// The icon's size. Defaults to 30.
+  /// The icon's size.
+  ///
+  /// Defaults to:
+  /// * 30 for [FHeader].
+  /// * 25 for [FHeader.nested]
   final double size;
-
-  /// The padding. Defaults to `EdgeInsets.only(left: 10)`.
-  final EdgeInsets padding;
 
   /// Creates a [FHeaderActionStyle].
   FHeaderActionStyle({
     required this.enabledColor,
     required this.disabledColor,
-    this.size = 30,
-    this.padding = const EdgeInsets.only(left: 10),
+    required this.size,
   });
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
-  FHeaderActionStyle.inherit({required FColorScheme colorScheme})
+  FHeaderActionStyle.inherit({required FColorScheme colorScheme, required this.size})
       : enabledColor = colorScheme.foreground,
-        disabledColor = colorScheme.foreground.withOpacity(0.5),
-        size = 30,
-        padding = const EdgeInsets.only(left: 10);
+        disabledColor = colorScheme.foreground.withOpacity(0.5);
 
   /// Returns a copy of this [FHeaderActionStyle] with the given properties replaced.
   ///
@@ -116,7 +142,6 @@ class FHeaderActionStyle with Diagnosticable {
         enabledColor: enabledColor ?? this.enabledColor,
         disabledColor: disabledColor ?? this.disabledColor,
         size: size ?? this.size,
-        padding: padding ?? this.padding,
       );
 
   @override
@@ -125,7 +150,24 @@ class FHeaderActionStyle with Diagnosticable {
     properties
       ..add(ColorProperty('enabledColor', enabledColor))
       ..add(ColorProperty('disabledColor', disabledColor))
-      ..add(DoubleProperty('size', size, defaultValue: 30))
-      ..add(DiagnosticsProperty('padding', padding, defaultValue: const EdgeInsets.only(left: 10)));
+      ..add(DoubleProperty('size', size));
+  }
+}
+
+class _InheritedActionStyle extends InheritedWidget {
+  final FHeaderActionStyle style;
+
+  const _InheritedActionStyle({
+    required this.style,
+    required super.child,
+  });
+
+  @override
+  bool updateShouldNotify(_InheritedActionStyle oldWidget) => style != oldWidget.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
   }
 }

@@ -38,7 +38,7 @@ final class FThemeData with Diagnosticable {
   final FDialogStyle dialogStyle;
 
   /// The header styles.
-  final FHeaderStyle headerStyle;
+  final FHeaderStyles headerStyle;
 
   /// The tabs styles.
   final FTabsStyle tabsStyle;
@@ -93,7 +93,7 @@ final class FThemeData with Diagnosticable {
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      headerStyle: FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
@@ -127,7 +127,7 @@ final class FThemeData with Diagnosticable {
     FButtonStyles? buttonStyles,
     FCardStyle? cardStyle,
     FDialogStyle? dialogStyle,
-    FHeaderStyle? headerStyle,
+    FHeaderStyles? headerStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
     FScaffoldStyle? scaffoldStyle,
