@@ -82,7 +82,7 @@ final class FNestedHeaderStyle with Diagnosticable {
   /// The title's [TextStyle].
   final TextStyle titleTextStyle;
 
-  /// The [FHeaderAction]'s style for [_FNestedHeader.leftActions] and [_FNestedHeader.rightActions].
+  /// The [FHeaderAction]s' style.
   final FHeaderActionStyle actionStyle;
 
   /// The spacing between [FHeaderAction]s.

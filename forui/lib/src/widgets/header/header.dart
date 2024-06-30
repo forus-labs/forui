@@ -18,7 +18,7 @@ part 'nested_header.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/header for working examples.
-/// * [FHeaderStyles] and [FNestedHeaderStyle] for customizing a header's appearance.
+/// * [FRootHeaderStyle] and [FNestedHeaderStyle] for customizing a header's appearance.
 sealed class FHeader extends StatelessWidget {
   const FHeader._({super.key});
 
@@ -44,12 +44,12 @@ sealed class FHeader extends StatelessWidget {
   }) = _FNestedHeader;
 }
 
-/// [FHeader]'s style.
+/// [FHeader]'s styles.
 final class FHeaderStyles with Diagnosticable {
-  /// The root header style.
+  /// The root header's style.
   final FRootHeaderStyle rootStyle;
 
-  /// The nested header style.
+  /// The nested header's style.
   final FNestedHeaderStyle nestedStyle;
 
   /// Creates a [FHeaderStyles].
