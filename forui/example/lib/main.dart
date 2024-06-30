@@ -44,6 +44,9 @@ class _ExampleWidgetState extends State<ExampleWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 10),
+            const FProgress(
+              value: 0.5,
+            ),
             Expanded(
               child: FTabs(
                 tabs: [
