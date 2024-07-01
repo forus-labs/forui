@@ -10,74 +10,47 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 part 'text_field_style.dart';
+part 'text_form_field.dart';
 
 /// A text field.
 ///
-/// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard.
+/// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard. A [FTextField] is internally
+/// a [FormField], therefore it can be used in a [Form].
 ///
 /// See:
 /// * https://forui.dev/docs/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
+/// * [_Field] for a text field that integrates with a [Form].
 /// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget {
-  static Widget _defaultContextMenuBuilder(
+  static Widget _contextMenuBuilder(
     BuildContext context,
-    EditableTextState editableTextState,
+    EditableTextState state,
   ) =>
-      AdaptiveTextSelectionToolbar.editableText(editableTextState: editableTextState);
+      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+  static Widget _errorBuilder(BuildContext context, String text) => Text(text);
 
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
 
   /// The label above a text field.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  final String? label;
-
-  /// The raw label above a text field.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  final Widget? rawLabel;
+  final Widget? label;
 
   /// The text to display when the text field is empty.
   ///
   /// See [InputDecoration.hintText] for more information.
   final String? hint;
 
-  /// The maximum number of lines the [hint] can occupy. Defaults to the value of [TextField.maxLines] attribute.
-  ///
-  /// See [InputDecoration.hintMaxLines] for more information.
-  final int? hintMaxLines;
-
-  /// The help text.
-  ///
-  /// See [InputDecoration.helperText] for more information.
-  final String? help;
-
   /// The raw help text.
-  final Widget? rawHelp;
-
-  /// The maximum number of lines the [help] can occupy. Defaults to the value of [TextField.maxLines] attribute.
   ///
-  /// See [InputDecoration.helperMaxLines] for more information.
-  final int? helpMaxLines;
-
-  /// The error text.
-  ///
-  /// See [InputDecoration.errorText] for more information.
-  final String? error;
+  /// See [InputDecoration.helper] for more information.
+  final Widget? help;
 
   /// The raw error text.
-  final Widget? rawError;
-
-  /// The maximum number of lines the [error] can occupy. Defaults to the value of [TextField.maxLines] attribute.
   ///
-  /// See [InputDecoration.errorMaxLines] for more information.
-  final int? errorMaxLines;
+  /// See [InputDecoration.error] for more information.
+  final Widget? error;
 
   /// The configuration for the magnifier of this text field.
   ///
@@ -296,7 +269,7 @@ final class FTextField extends StatelessWidget {
   /// Whitespace characters (e.g. newline, space, tab) are included in the character count.
   ///
   /// If [maxLengthEnforcement] is [MaxLengthEnforcement.none], then more than [maxLength] characters may be entered,
-  /// but the error counter and divider will switch to the [style]'s [FTextFieldStyle.error] when the limit is exceeded.
+  /// but the error counter and divider will switch to the [style]'s [FTextFieldStyle.errorStyle] when the limit is exceeded.
   final int? maxLength;
 
   /// Determines how the [maxLength] limit should be enforced.
@@ -477,27 +450,47 @@ final class FTextField extends StatelessWidget {
   /// The suffix icon.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
-  final Widget? suffixIcon;
+  final Widget? suffix;
+
+  /// An optional method to call with the final value when the form is saved via [FormState.save].
+  final FormFieldSetter<String>? onSave;
+
+  /// An optional method that validates an input. Returns an error string to
+  /// display if the input is invalid, or null otherwise.
+  ///
+  /// The returned value is exposed by the [FormFieldState.errorText] property. [_Field] transform the text
+  /// using [...] before using the returned widget to override [error].
+  ///
+  /// Alternating between error and normal state can cause the height of the [_Field] to change if no other
+  /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
+  /// error is displayed, either wrap the [_Field] in a fixed height parent like [SizedBox], or set the [help]
+  /// parameter to a space.
+  final FormFieldValidator<String>? validator;
+
+  /// An optional value to initialize the form field to, or null otherwise.
+  final String? initialValue;
+
+  /// Used to enable/disable this form field auto validation and update its error text.
+  ///
+  /// Defaults to [AutovalidateMode.disabled].
+  ///
+  /// If [AutovalidateMode.onUserInteraction], this FormField will only auto-validate after its content changes. If
+  /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
+  /// auto-validation will be disabled.
+  final AutovalidateMode? autovalidateMode;
+
+  /// A builder that transforms a [FormFieldState.errorText] into a widget. Defaults to a [Text] widget.
+  ///
+  /// The builder is called whenever [validator] returns an error text. It replaces [error] if it was provided.
+  final Widget Function(BuildContext, String) errorBuilder;
 
   /// Creates a [FTextField].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [help] and [rawHelp] are not null
-  /// * both [error] and [rawError] are not null
   const FTextField({
     this.style,
     this.label,
-    this.rawLabel,
     this.hint,
-    this.hintMaxLines,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -537,28 +530,26 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.suffixIcon,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+    this.suffix,
+    this.onSave,
+    this.validator,
+    this.initialValue,
+    this.autovalidateMode,
+    this.errorBuilder = _errorBuilder,
+    super.key,
+  });
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
-    this.label,
-    this.rawLabel,
-    this.hint = 'Email',
-    this.hintMaxLines,
+    this.label = const Text('Email'),
+    this.hint,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -598,37 +589,29 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.suffixIcon,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+    this.suffix,
+    this.onSave,
+    this.validator,
+    this.initialValue,
+    this.autovalidateMode,
+    this.errorBuilder = _errorBuilder,
+    super.key,
+  });
 
   /// Creates a [FTextField] configured for passwords.
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
   /// when handling the creation of new passwords.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [help] and [rawHelp] are not null
-  /// * both [error] and [rawError] are not null
   const FTextField.password({
     this.style,
-    this.label,
-    this.rawLabel,
-    this.hint = 'Password',
-    this.hintMaxLines,
+    this.label = const Text('Password'),
+    this.hint,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -668,36 +651,30 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.suffixIcon,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+    this.suffix,
+    this.onSave,
+    this.validator,
+    this.initialValue,
+    this.autovalidateMode,
+    this.errorBuilder = _errorBuilder,
+    super.key,
+  });
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
-  /// The text field's height can be configured by adjusting [minLines].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [help] and [rawHelp] are not null
-  /// * both [error] and [rawError] are not null
+  /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
+  /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
+  /// [maxLines].
   const FTextField.multiline({
     this.style,
     this.label,
-    this.rawLabel,
     this.hint,
-    this.hintMaxLines,
     this.help,
-    this.rawHelp,
-    this.helpMaxLines,
     this.error,
-    this.rawError,
-    this.errorMaxLines,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -737,34 +714,30 @@ final class FTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
-    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.suffixIcon,
-  })  : assert(label == null || rawLabel == null, 'Cannot provide both a label and a rawLabel.'),
-        assert(help == null || rawHelp == null, 'Cannot provide both a help and a rawHelp.'),
-        assert(error == null || rawError == null, 'Cannot provide both an error and a rawError.');
+    this.suffix,
+    this.onSave,
+    this.validator,
+    this.initialValue,
+    this.autovalidateMode,
+    this.errorBuilder = _errorBuilder,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final typography = theme.typography;
     final style = this.style ?? theme.textFieldStyle;
     final stateStyle = switch (this) {
-      _ when !enabled => style.disabled,
-      _ when error != null || rawError != null => style.error,
-      _ => style.enabled,
-    };
-    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
-
-    final label = switch ((this.label, rawLabel)) {
-      (final String label, _) => Text(label),
-      (_, final Widget label) => label,
-      _ => null,
+      _ when !enabled => style.disabledStyle,
+      _ when error != null => style.errorStyle,
+      _ => style.enabledStyle,
     };
 
-    final textField = MergeSemantics(
+    final textFormField = MergeSemantics(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -773,7 +746,7 @@ final class FTextField extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4, bottom: 7),
               child: DefaultTextStyle.merge(
                 style: stateStyle.labelTextStyle,
-                child: label,
+                child: label!,
               ),
             ),
           Material(
@@ -791,13 +764,19 @@ final class FTextField extends StatelessWidget {
                   primaryColor: style.cursorColor,
                 ),
               ),
-              child: _textField(context, typography, style, stateStyle),
+              child: _Field(
+                parent: this,
+                style: style,
+                stateStyle: stateStyle,
+                key: key,
+              ),
             ),
           ),
         ],
       ),
     );
 
+    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
     return materialLocalizations == null
         ? Localizations(
             locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
@@ -806,131 +785,9 @@ final class FTextField extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            child: textField,
+            child: textFormField,
           )
-        : textField;
-  }
-
-  Widget _textField(
-    BuildContext context,
-    FTypography typography,
-    FTextFieldStyle style,
-    FTextFieldStateStyle current,
-  ) {
-    final rawError = this.rawError == null
-        ? this.rawError
-        : DefaultTextStyle.merge(
-            style: current.footerTextStyle,
-            child: this.rawError!,
-          );
-
-    final rawHelp = this.rawHelp == null
-        ? this.rawHelp
-        : DefaultTextStyle.merge(
-            style: current.footerTextStyle,
-            child: this.rawHelp!,
-          );
-
-    return TextField(
-      controller: controller,
-      focusNode: focusNode,
-      undoController: undoController,
-      cursorErrorColor: style.cursorColor,
-      decoration: InputDecoration(
-        suffixIcon: suffixIcon,
-        // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-        prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
-        contentPadding: style.contentPadding.copyWith(left: 0),
-        hintText: hint,
-        hintStyle: current.hintTextStyle,
-        hintMaxLines: hintMaxLines,
-        helper: rawHelp,
-        helperText: help,
-        helperStyle: current.footerTextStyle,
-        helperMaxLines: helpMaxLines,
-        error: rawError,
-        errorText: error,
-        errorStyle: current.footerTextStyle,
-        errorMaxLines: errorMaxLines,
-        disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: style.disabled.unfocused.color,
-            width: style.disabled.unfocused.width,
-          ),
-          borderRadius: style.disabled.unfocused.radius,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: style.enabled.unfocused.color,
-            width: style.enabled.unfocused.width,
-          ),
-          borderRadius: style.enabled.unfocused.radius,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: style.enabled.focused.color,
-            width: style.enabled.focused.width,
-          ),
-          borderRadius: current.focused.radius,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: style.error.unfocused.color,
-            width: style.error.unfocused.width,
-          ),
-          borderRadius: style.error.unfocused.radius,
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: style.error.focused.color,
-            width: style.error.focused.width,
-          ),
-          borderRadius: style.error.focused.radius,
-        ),
-      ),
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      textCapitalization: textCapitalization,
-      style: current.contentTextStyle,
-      textAlign: textAlign,
-      textAlignVertical: textAlignVertical,
-      textDirection: textDirection,
-      readOnly: readOnly,
-      showCursor: showCursor,
-      autofocus: autofocus,
-      statesController: statesController,
-      obscureText: obscureText,
-      autocorrect: autocorrect,
-      smartDashesType: smartDashesType,
-      smartQuotesType: smartQuotesType,
-      enableSuggestions: enableSuggestions,
-      maxLines: maxLines,
-      minLines: minLines,
-      expands: expands,
-      maxLength: maxLength,
-      maxLengthEnforcement: maxLengthEnforcement,
-      onChanged: onChange,
-      onEditingComplete: onEditingComplete,
-      onSubmitted: onSubmit,
-      onAppPrivateCommand: onAppPrivateCommand,
-      inputFormatters: inputFormatters,
-      enabled: enabled,
-      ignorePointers: ignorePointers,
-      keyboardAppearance: style.keyboardAppearance,
-      scrollPadding: style.scrollPadding,
-      dragStartBehavior: dragStartBehavior,
-      selectionControls: selectionControls,
-      scrollController: scrollController,
-      scrollPhysics: scrollPhysics,
-      autofillHints: autofillHints,
-      restorationId: restorationId,
-      scribbleEnabled: scribbleEnabled,
-      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-      contextMenuBuilder: contextMenuBuilder,
-      canRequestFocus: canRequestFocus,
-      spellCheckConfiguration: spellCheckConfiguration,
-      magnifierConfiguration: magnifierConfiguration,
-    );
+        : textFormField;
   }
 
   @override
@@ -938,13 +795,7 @@ final class FTextField extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('label', label))
       ..add(StringProperty('hint', hint))
-      ..add(IntProperty('hintMaxLines', hintMaxLines))
-      ..add(StringProperty('help', help))
-      ..add(IntProperty('helpMaxLines', helpMaxLines))
-      ..add(StringProperty('error', error))
-      ..add(IntProperty('errorMaxLines', errorMaxLines))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -994,6 +845,11 @@ final class FTextField extends StatelessWidget {
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('undoController', undoController))
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
-      ..add(DiagnosticsProperty('suffixIcon', suffixIcon));
+      ..add(DiagnosticsProperty('suffixIcon', suffix))
+      ..add(ObjectFlagProperty.has('onSave', onSave))
+      ..add(ObjectFlagProperty.has('validator', validator))
+      ..add(StringProperty('initialValue', initialValue))
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }

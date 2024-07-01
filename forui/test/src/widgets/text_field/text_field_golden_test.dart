@@ -18,60 +18,6 @@ void main() {
   group('FTextField', () {
     for (final (theme, theme_, _) in TestScaffold.themes) {
       for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
-        testWidgets('default - $theme - $focused - raw text', (tester) async {
-          await tester.pumpWidget(
-            MaterialApp(
-              home: TestScaffold(
-                data: theme_,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: FTextField(
-                    controller: TextEditingController(text: 'short text'),
-                    autofocus: focused_,
-                    rawLabel: const Text('My Label'),
-                    hint: 'hint',
-                    rawHelp: const Text('Some help text.'),
-                  ),
-                ),
-              ),
-            ),
-          );
-
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('text_field/default-$theme-$focused-raw-text.png'),
-          );
-        });
-
-        testWidgets('error - $theme - $focused - raw text', (tester) async {
-          await tester.pumpWidget(
-            MaterialApp(
-              home: TestScaffold(
-                data: theme_,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: FTextField(
-                    controller: TextEditingController(text: 'short text'),
-                    autofocus: focused_,
-                    rawLabel: const Text('My Label'),
-                    hint: 'hint',
-                    rawError: const Text('An error has occurred.'),
-                  ),
-                ),
-              ),
-            ),
-          );
-
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('text_field/error-$theme-$focused-raw-text.png'),
-          );
-        });
-
         for (final (text, text_) in [('text', 'short text'), ('no-text', null)]) {
           testWidgets('default - $theme - $focused - $text', (tester) async {
             final controller = text_ == null ? null : TextEditingController(text: text_);
@@ -84,9 +30,9 @@ void main() {
                     child: FTextField(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'My Label',
+                      label: const Text('My Label'),
                       hint: 'hint',
-                      help: 'Some help text.',
+                      help: const Text('Some help text.'),
                     ),
                   ),
                 ),
@@ -112,9 +58,9 @@ void main() {
                     child: FTextField(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'My Label',
+                      label: const Text('My Label'),
                       hint: 'hint',
-                      error: 'An error has occurred.',
+                      error: const Text('An error has occurred.'),
                     ),
                   ),
                 ),
@@ -140,7 +86,6 @@ void main() {
                     child: FTextField.email(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'Email',
                       hint: 'janedoe@foruslabs.com',
                     ),
                   ),
@@ -167,7 +112,6 @@ void main() {
                     child: FTextField.password(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'Password',
                       hint: 'password',
                     ),
                   ),
@@ -196,7 +140,7 @@ void main() {
                     child: FTextField.multiline(
                       controller: controller,
                       autofocus: focused_,
-                      label: 'My Label',
+                      label: const Text('My Label'),
                       hint: 'hint',
                     ),
                   ),

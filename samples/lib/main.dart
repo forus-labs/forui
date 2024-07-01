@@ -60,7 +60,15 @@ class _AppRouter extends $_AppRouter {
         ),
         AutoRoute(
           path: '/header/default',
-          page: HeaderRoute.page,
+          page: RootHeaderRoute.page,
+        ),
+        AutoRoute(
+          path: '/header/nested',
+          page: NestedHeaderRoute.page,
+        ),
+        AutoRoute(
+          path: '/header/nested-x',
+          page: XNestedHeaderRoute.page,
         ),
         AutoRoute(
           path: '/tabs/default',
@@ -79,6 +87,10 @@ class _AppRouter extends $_AppRouter {
           page: MultilineTextFieldRoute.page,
         ),
         AutoRoute(
+          path: '/text-field/form',
+          page: FormTextFieldRoute.page,
+        ),
+        AutoRoute(
           path: '/scaffold/default',
           page: ScaffoldRoute.page,
         ),
@@ -89,6 +101,6 @@ class _AppRouter extends $_AppRouter {
         AutoRoute(
           path: '/switch/default',
           page: SwitchRoute.page,
-        )
+        ),
       ];
 }

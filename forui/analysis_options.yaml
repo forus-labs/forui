@@ -5,4 +5,5 @@ analyzer:
 
 linter:
   rules:
+    - use_key_in_widget_constructors
     - require_trailing_commas

@@ -29,12 +29,12 @@ class TabsPage extends SampleScaffold {
                       child: Column(
                         children: [
                           const FTextField(
-                            label: 'Name',
+                            label: Text('Name'),
                             hint: 'John Renalo',
                           ),
                           const SizedBox(height: 10),
                           const FTextField(
-                            label: 'Email',
+                            label: Text('Email'),
                             hint: 'john@doe.com',
                           ),
                           Padding(
@@ -58,9 +58,9 @@ class TabsPage extends SampleScaffold {
                       padding: const EdgeInsets.only(top: 10),
                       child: Column(
                         children: [
-                          const FTextField(label: 'Current password'),
+                          const FTextField(label: Text('Current password')),
                           const SizedBox(height: 10),
-                          const FTextField(label: 'New password'),
+                          const FTextField(label: Text('New password')),
                           Padding(
                             padding: const EdgeInsets.only(top: 24, bottom: 16),
                             child: FButton(
