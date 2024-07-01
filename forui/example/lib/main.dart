@@ -30,5 +30,5 @@ class Application extends StatelessWidget {
             content: const Example(),
           ),
         ),
-      ));
+      );
 }
