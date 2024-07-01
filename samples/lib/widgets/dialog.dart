@@ -33,7 +33,8 @@ class DialogPage extends SampleScaffold {
                 direction: direction,
                 title: const Text('Are you absolutely sure?'),
                 body: const Text(
-                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+                  'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                ),
                 actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
               ),
             ),
