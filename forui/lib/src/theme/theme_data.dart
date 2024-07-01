@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/src/widgets/progress.dart';
 
 import 'package:meta/meta.dart';
 
@@ -39,7 +38,7 @@ final class FThemeData with Diagnosticable {
   final FDialogStyle dialogStyle;
 
   /// The header styles.
-  final FHeaderStyle headerStyle;
+  final FHeaderStyles headerStyle;
 
   /// The progress styles.
   final FProgressStyle progressStyle;
@@ -98,8 +97,8 @@ final class FThemeData with Diagnosticable {
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      headerStyle: FHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      progressStyle: FProgressStyle.inherit(colorScheme: colorScheme),
+      headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
@@ -133,7 +132,7 @@ final class FThemeData with Diagnosticable {
     FButtonStyles? buttonStyles,
     FCardStyle? cardStyle,
     FDialogStyle? dialogStyle,
-    FHeaderStyle? headerStyle,
+    FHeaderStyles? headerStyle,
     FProgressStyle? progressStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
@@ -176,7 +175,6 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
-
   }
 
   @override

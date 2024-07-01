@@ -21,6 +21,8 @@ class _ExampleState extends State<Example> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 10),
+          FProgress.bar(),
+          const SizedBox(height: 10),
           Expanded(
             child: FTabs(
               tabs: [
