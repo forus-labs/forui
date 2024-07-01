@@ -1,39 +1,21 @@
 part of 'card.dart';
 
-@internal
-final class FCardContent extends StatelessWidget {
-  final String? title;
-  final Widget? rawTitle;
-  final String? subtitle;
-  final Widget? rawSubtitle;
+final class _FCardContent extends StatelessWidget {
+  final Widget? title;
+  final Widget? subtitle;
   final Widget? child;
   final FCardContentStyle? style;
 
-  const FCardContent({
+  const _FCardContent({
     this.title,
-    this.rawTitle,
     this.subtitle,
-    this.rawSubtitle,
     this.child,
     this.style,
-    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.cardStyle.content;
-
-    final title = switch ((this.title, rawTitle)) {
-      (final String title, _) => Text(title),
-      (_, final Widget title) => title,
-      _ => null,
-    };
-
-    final subtitle = switch ((this.subtitle, rawSubtitle)) {
-      (final String subtitle, _) => Text(subtitle),
-      (_, final Widget subtitle) => subtitle,
-      _ => null,
-    };
 
     return Padding(
       padding: style.padding,
@@ -43,12 +25,12 @@ final class FCardContent extends StatelessWidget {
           if (title != null)
             DefaultTextStyle.merge(
               style: style.titleTextStyle,
-              child: title,
+              child: title!,
             ),
           if (subtitle != null)
             DefaultTextStyle.merge(
               style: style.subtitleTextStyle,
-              child: subtitle,
+              child: subtitle!,
             ),
           if (child != null)
             Padding(
@@ -65,8 +47,8 @@ final class FCardContent extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(StringProperty('title', title))
-      ..add(StringProperty('subtitle', subtitle))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('subtitle', subtitle))
       ..add(DiagnosticsProperty('style', style));
   }
 }

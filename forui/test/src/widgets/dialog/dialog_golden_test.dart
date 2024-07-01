@@ -8,49 +8,42 @@ import '../../test_scaffold.dart';
 
 class UnderTest extends StatelessWidget {
   final Axis direction;
-  final bool raw;
 
-  const UnderTest({required this.direction, required this.raw, super.key});
+  const UnderTest({
+    required this.direction,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final actions = [
-      FButton(label: 'Continue', onPress: () {}),
+      FButton(
+        label: const Text('Continue'),
+        onPress: () {},
+      ),
       FButton(
         style: FButtonStyle.outline,
-        label: 'Cancel',
+        label: const Text('Cancel'),
         onPress: () {
           Navigator.of(context).pop();
         },
       ),
     ];
 
-    if (raw) {
-      return FDialog(
-        direction: direction,
-        rawTitle: const Text('Are you absolutely sure?'),
-        rawBody: const Text(
-          'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-        ),
-        actions: actions,
-      );
-    } else {
-      return FDialog(
-        direction: direction,
-        title: 'Are you absolutely sure?',
-        body:
-            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-        actions: actions,
-      );
-    }
+    return FDialog(
+      direction: direction,
+      title: const Text('Are you absolutely sure?'),
+      body: const Text(
+        'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+      ),
+      actions: actions,
+    );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(EnumProperty('alignment', direction))
-      ..add(DiagnosticsProperty('raw', raw));
+    properties.add(EnumProperty('alignment', direction));
   }
 }
 
@@ -58,37 +51,20 @@ void main() {
   group('FDialog', () {
     for (final (name, theme, background) in TestScaffold.themes) {
       for (final direction in Axis.values) {
-        testWidgets('$name with $direction text FDialogContent', (tester) async {
+        testWidgets('$name with $direction FDialogContent', (tester) async {
           await tester.pumpWidget(
             MaterialApp(
               home: TestScaffold(
                 data: theme,
                 background: background,
-                child: UnderTest(direction: direction, raw: false),
+                child: UnderTest(direction: direction),
               ),
             ),
           );
 
           await expectLater(
             find.byType(UnderTest),
-            matchesGoldenFile('dialog/$name-$direction-text-dialog-content.png'),
-          );
-        });
-
-        testWidgets('$name with $direction raw FDialogContent', (tester) async {
-          await tester.pumpWidget(
-            MaterialApp(
-              home: TestScaffold(
-                data: theme,
-                background: background,
-                child: UnderTest(direction: direction, raw: true),
-              ),
-            ),
-          );
-
-          await expectLater(
-            find.byType(UnderTest),
-            matchesGoldenFile('dialog/$name-$direction-raw-dialog-content.png'),
+            matchesGoldenFile('dialog/$name-$direction-content-dialog.png'),
           );
         });
       }
@@ -114,7 +90,7 @@ void main() {
 
         await expectLater(
           find.byType(FDialog),
-          matchesGoldenFile('dialog/$name-raw-content.png'),
+          matchesGoldenFile('dialog/$name-raw-content-dialog.png'),
         );
       });
     }

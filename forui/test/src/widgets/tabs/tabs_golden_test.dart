@@ -16,46 +16,49 @@ void main() {
           MaterialApp(
             home: TestScaffold(
               data: theme,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: FTabs(
-                      tabs: [
-                        FTabEntry(
-                          label: 'Account',
-                          content: FCard(
-                            title: 'Account',
-                            subtitle: 'Make changes to your account here. Click save when you are done.',
-                            child: Column(
-                              children: [
-                                Container(
-                                  color: Colors.blue,
-                                  height: 100,
-                                ),
-                              ],
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: FTabs(
+                        tabs: [
+                          FTabEntry(
+                            label: const Text('Account'),
+                            content: FCard(
+                              title: const Text('Account'),
+                              subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    color: Colors.blue,
+                                    height: 100,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        FTabEntry(
-                          label: 'Password',
-                          content: FCard(
-                            title: 'Password',
-                            subtitle: 'Change your password here. After saving, you will be logged out.',
-                            child: Column(
-                              children: [
-                                Container(
-                                  color: Colors.red,
-                                  height: 100,
-                                ),
-                              ],
+                          FTabEntry(
+                            label: const Text('Password'),
+                            content: FCard(
+                              title: const Text('Password'),
+                              subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    color: Colors.red,
+                                    height: 100,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -63,7 +66,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('tabs/$name-tab.png'),
+          matchesGoldenFile('tabs/$name-tabs.png'),
         );
       });
     }

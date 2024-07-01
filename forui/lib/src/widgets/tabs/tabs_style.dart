@@ -117,4 +117,29 @@ final class FTabsStyle with Diagnosticable {
       ..add(DoubleProperty('height', height))
       ..add(DoubleProperty('spacing', spacing));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FTabsStyle &&
+          runtimeType == other.runtimeType &&
+          decoration == other.decoration &&
+          padding == other.padding &&
+          unselectedLabel == other.unselectedLabel &&
+          selectedLabel == other.selectedLabel &&
+          indicator == other.indicator &&
+          indicatorSize == other.indicatorSize &&
+          height == other.height &&
+          spacing == other.spacing;
+
+  @override
+  int get hashCode =>
+      decoration.hashCode ^
+      padding.hashCode ^
+      unselectedLabel.hashCode ^
+      selectedLabel.hashCode ^
+      indicator.hashCode ^
+      indicatorSize.hashCode ^
+      height.hashCode ^
+      spacing.hashCode;
 }

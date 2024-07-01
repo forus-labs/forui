@@ -22,7 +22,7 @@ class BadgePage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FBadge(
-        label: 'Badge',
+        label: const Text('Badge'),
         style: style,
       );
 }

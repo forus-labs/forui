@@ -15,27 +15,27 @@ A set of layered sections of content—known as tab entries—that are displayed
       child: FTabs(
         tabs: [
           FTabEntry(
-            label: 'Account',
+            label: const Text('Account'),
             content: FCard(
-              title: 'Account',
-              subtitle: 'Make changes to your account here. Click save when you are done.',
+              title: const Text('Account'),
+              subtitle: const Text('Make changes to your account here. Click save when you are done.'),
               child: Padding(
                 padding: const EdgeInsets.only(top: 12),
                 child: Column(
                   children: [
                     const FTextField(
-                      label: 'Name',
+                      label: Text('Name'),
                       hint: 'John Renalo',
                     ),
                     const SizedBox(height: 10),
                     const FTextField(
-                      label: 'Email',
+                      label: Text('Email'),
                       hint: 'john@doe.com',
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 16),
                       child: FButton(
-                        label: 'Save',
+                        label: const Text('Save'),
                         onPress: () {},
                       ),
                     ),
@@ -45,21 +45,21 @@ A set of layered sections of content—known as tab entries—that are displayed
             ),
           ),
           FTabEntry(
-            label: 'Password',
+            label: const Text(Password'),
             content: FCard(
-              title: 'Password',
-              subtitle: 'Change your password here. After saving, you will be logged out.',
+              title: const Text('Password'),
+              subtitle: const Text('Change your password here. After saving, you will be logged out.'),
               child: Padding(
                 padding: const EdgeInsets.only(top: 12),
                 child: Column(
                   children: [
-                    const FTextField(label: 'Current password'),
+                    const FTextField(label: Text('Current password')),
                     const SizedBox(height: 10),
-                    const FTextField(label: 'New password'),
+                    const FTextField(label: Text('New password')),
                     Padding(
                       padding: const EdgeInsets.only(top: 24, bottom: 16),
                       child: FButton(
-                        label: 'Save',
+                        label: const Text('Save'),
                         onPress: () {},
                       ),
                     ),
@@ -82,9 +82,9 @@ A set of layered sections of content—known as tab entries—that are displayed
 ```dart
 FTabs(
   initialIndex: 1,
-  tabs: [
-    FTabEntry(label: 'Account', content: FCard()),
-    FTabEntry(label: 'Password', content: FCard()),
+  tabs: const [
+    FTabEntry(label: Text('Account'), content: Placeholder()),
+    FTabEntry(label: Text('Password'), content: Placeholder()),
   ],
   onPress: (index) {},
 );

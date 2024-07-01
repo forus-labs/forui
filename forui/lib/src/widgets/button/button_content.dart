@@ -1,18 +1,14 @@
 part of 'button.dart';
 
-@internal
-final class FButtonContent extends StatelessWidget {
-  final Widget? prefixIcon;
-  final Widget? suffixIcon;
-  final String? label;
-  final Widget? rawLabel;
+final class _FButtonContent extends StatelessWidget {
+  final Widget? prefix;
+  final Widget? suffix;
+  final Widget label;
 
-  const FButtonContent({
-    this.prefixIcon,
-    this.suffixIcon,
-    this.label,
-    this.rawLabel,
-    super.key,
+  const _FButtonContent({
+    required this.label,
+    this.prefix,
+    this.suffix,
   });
 
   @override
@@ -27,13 +23,9 @@ final class FButtonContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: separate(
             [
-              if (prefixIcon != null) prefixIcon!,
-              switch ((label, rawLabel)) {
-                (final String label, _) => Text(label),
-                (_, final Widget label) => label,
-                _ => const Placeholder(),
-              },
-              if (suffixIcon != null) suffixIcon!,
+              if (prefix != null) prefix!,
+              label,
+              if (suffix != null) suffix!,
             ],
             by: [
               const SizedBox(width: 10),
@@ -47,11 +39,11 @@ final class FButtonContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('label', label));
+    properties.add(DiagnosticsProperty('label', label));
   }
 }
 
-/// [FButtonContent]'s style.
+/// [_FButtonContent]'s style.
 class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is enabled.
   final TextStyle enabledTextStyle;

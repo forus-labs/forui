@@ -33,4 +33,12 @@ class FTabController implements Listenable {
   /// it is called. Consumers of this class must decide on whether to notify
   /// listeners or not immediately before disposal.
   void dispose() => _controller.dispose();
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FTabController && runtimeType == other.runtimeType && _controller == other._controller;
+
+  @override
+  int get hashCode => _controller.hashCode;
 }

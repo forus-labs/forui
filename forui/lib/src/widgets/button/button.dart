@@ -72,39 +72,31 @@ class FButton extends StatelessWidget {
   /// The child.
   final Widget child;
 
-  /// Creates a [FButton] that contains a [prefixIcon], [label]/[rawLabel], and [suffixIcon].
+  /// Creates a [FButton] that contains a [prefix], [label], and [suffix].
   ///
   /// The button layout is as follows, assuming the locale is read from left to right:
   /// ```
   /// |---------------------------------------------------|
-  /// | [prefixIcon]   [label]/[rawLabel]   [suffixIcon]  |
+  /// | [prefixIcon]   [label]   [suffixIcon]  |
   /// |---------------------------------------------------|
   /// ```
   ///
-  /// [FButtonIcon] provides a convenient way to transform a bundled SVG icon into a [prefixIcon] and [suffixIcon].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [label] and [rawLabel] are null
+  /// [FButtonIcon] provides a convenient way to transform a bundled SVG icon into a [prefix] and [suffix].
   FButton({
     required this.onPress,
+    required Widget label,
     this.style = Variant.primary,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    Widget? prefixIcon,
-    Widget? suffixIcon,
-    String? label,
-    Widget? rawLabel,
+    Widget? prefix,
+    Widget? suffix,
     super.key,
-  })  : assert((label != null) ^ (rawLabel != null), 'Either "label" or "rawLabel" must be provided, but not both.'),
-        child = FButtonContent(
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
+  }) : child = _FButtonContent(
+          prefix: prefix,
+          suffix: suffix,
           label: label,
-          rawLabel: rawLabel,
         );
 
   /// Creates a [FButton] with custom content.

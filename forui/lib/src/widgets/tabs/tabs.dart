@@ -11,21 +11,28 @@ part 'tab_controller.dart';
 
 /// An object that represents a tab entry in a group of tabs.
 class FTabEntry {
-  /// The label.
-  final String? label;
-
-  /// A raw label.
-  final Widget? rawLabel;
+  /// A label.
+  final Widget label;
 
   /// The content of a tab.
   final Widget content;
 
   /// Creates a [FTabs].
-  FTabEntry({
+  const FTabEntry({
     required this.content,
-    this.label,
-    this.rawLabel,
-  }) : assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.');
+    required this.label,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FTabEntry &&
+          runtimeType == other.runtimeType &&
+          label == other.label &&
+          content == other.content;
+
+  @override
+  int get hashCode => label.hashCode ^ content.hashCode;
 }
 
 /// A [FTabs] that allows switching between tabs.
@@ -108,7 +115,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
                 for (final tab in tabs)
                   Tab(
                     height: style.height,
-                    child: tab.rawLabel ?? Text(tab.label!),
+                    child: tab.label,
                   ),
               ],
               controller: (widget.controller ?? _controller)._controller,
