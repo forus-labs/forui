@@ -67,8 +67,8 @@ final class FTextFieldStyle with Diagnosticable {
           style: style,
         ),
         disabledStyle = FTextFieldStateStyle.inherit(
-          labelColor: colorScheme.primary,
-          contentColor: colorScheme.primary,
+          labelColor: colorScheme.primary.withOpacity(0.7),
+          contentColor: colorScheme.primary.withOpacity(0.7),
           hintColor: colorScheme.border.withOpacity(0.7),
           footerColor: colorScheme.border.withOpacity(0.7),
           focusedBorderColor: colorScheme.border.withOpacity(0.7),
