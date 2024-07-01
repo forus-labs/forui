@@ -26,10 +26,7 @@ class FTabEntry {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FTabEntry &&
-          runtimeType == other.runtimeType &&
-          label == other.label &&
-          content == other.content;
+      other is FTabEntry && runtimeType == other.runtimeType && label == other.label && content == other.content;
 
   @override
   int get hashCode => label.hashCode ^ content.hashCode;

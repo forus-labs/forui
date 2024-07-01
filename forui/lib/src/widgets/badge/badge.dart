@@ -29,7 +29,7 @@ class FBadge extends StatelessWidget {
     required Widget label,
     this.style = FBadgeStyle.primary,
     super.key,
-  })  : builder = ((context, style) => _FBadgeContent(label: label, style: style));
+  }) : builder = ((context, style) => _FBadgeContent(label: label, style: style));
 
   /// Creates a [FBadge] with custom content.
   const FBadge.raw({

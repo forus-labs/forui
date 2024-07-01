@@ -21,41 +21,41 @@ sealed class _FDialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => IntrinsicWidth(
-      child: Padding(
-        padding: style.padding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: alignment,
-          children: [
-            if (title != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: Semantics(
-                  container: true,
-                  child: DefaultTextStyle.merge(
-                    textAlign: titleTextAlign,
-                    style: style.titleTextStyle,
-                    child: title!,
+        child: Padding(
+          padding: style.padding,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: alignment,
+            children: [
+              if (title != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Semantics(
+                    container: true,
+                    child: DefaultTextStyle.merge(
+                      textAlign: titleTextAlign,
+                      style: style.titleTextStyle,
+                      child: title!,
+                    ),
                   ),
                 ),
-              ),
-            if (body != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Semantics(
-                  container: true,
-                  child: DefaultTextStyle.merge(
-                    textAlign: bodyTextAlign,
-                    style: style.bodyTextStyle,
-                    child: body!,
+              if (body != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Semantics(
+                    container: true,
+                    child: DefaultTextStyle.merge(
+                      textAlign: bodyTextAlign,
+                      style: style.bodyTextStyle,
+                      child: body!,
+                    ),
                   ),
                 ),
-              ),
-            _actions(context),
-          ],
+              _actions(context),
+            ],
+          ),
         ),
-      ),
-    );
+      );
 
   Widget _actions(BuildContext context);
 

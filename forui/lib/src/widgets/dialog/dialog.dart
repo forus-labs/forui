@@ -82,7 +82,7 @@ class FDialog extends StatelessWidget {
     Widget? body,
     Axis direction = Axis.vertical,
     super.key,
-  })  : builder = switch (direction) {
+  }) : builder = switch (direction) {
           Axis.horizontal => (context, style) => _FHorizontalDialogContent(
                 style: style.horizontal,
                 title: title,
