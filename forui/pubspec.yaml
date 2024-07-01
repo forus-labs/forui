@@ -19,7 +19,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.10+1
-  forui_assets: ^0.1.0
+  forui_assets:
+    path: ../forui_assets
   google_fonts: ^6.2.0
   meta: ^1.11.0
   nitrogen_flutter_svg: ^0.3.0+1
