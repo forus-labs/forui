@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      nitrogen:
+        options:
+          package: true
+          prefix: 'F'
