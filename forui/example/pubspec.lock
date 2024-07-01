@@ -240,7 +240,7 @@ packages:
     source: path
     version: "0.1.0"
   forui_assets:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../forui_assets"
       relative: true

@@ -36,6 +36,10 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.4.2
 
+dependency_overrides:
+  forui_assets:
+    path: ../../forui_assets
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
