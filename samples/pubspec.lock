@@ -271,10 +271,9 @@ packages:
   forui_assets:
     dependency: transitive
     description:
-      name: forui_assets
-      sha256: a68dcbb7e6f669f495a0bcf6464f6e28197744318aabeb28aa0bb3c8435cde14
-      url: "https://pub.dev"
-    source: hosted
+      path: "../forui_assets"
+      relative: true
+    source: path
     version: "0.1.0"
   frontend_server_client:
     dependency: transitive
@@ -428,14 +427,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  nitrogen_flutter_svg:
+    dependency: transitive
+    description:
+      name: nitrogen_flutter_svg
+      sha256: "2c473caaeeeddb11a437e72f9d112622619493ce22dcd6b41f7364cb999b8e2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.0+1"
   nitrogen_types:
     dependency: transitive
     description:
       name: nitrogen_types
-      sha256: "3fe75e5741242cf46c1ab5eda685f3f5edda3bd57d5bfaf8c2b3156c13df7b0b"
+      sha256: "04c3e921fe59a47710b81f6bfd3c4dfeb819ca16e25ad6824dcc5b44ca39ed46"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.0+1"
+    version: "0.3.0+1"
   package_config:
     dependency: transitive
     description:
