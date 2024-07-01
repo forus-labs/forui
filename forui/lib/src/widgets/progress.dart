@@ -80,13 +80,17 @@ class _Circular extends FProgress {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.progressStyle;
-    return CircularProgressIndicator(
-      strokeWidth: style.strokeWidth,
-      semanticsLabel: 'Circular FProgress',
-      semanticsValue: '${value ?? 'Indeterminate'}',
-      backgroundColor: style.backgroundColor,
-      valueColor: AlwaysStoppedAnimation<Color>(style.progressColor),
-      value: value,
+    return FittedBox(
+      fit: BoxFit.fitHeight,
+      child: CircularProgressIndicator(
+        strokeWidth: style.strokeWidth,
+        strokeCap: StrokeCap.round,
+        semanticsLabel: 'Circular FProgress',
+        semanticsValue: '${value ?? 'Indeterminate'}',
+        backgroundColor: style.backgroundColor,
+        valueColor: AlwaysStoppedAnimation<Color>(style.progressColor),
+        value: value,
+      ),
     );
   }
 }
@@ -123,7 +127,7 @@ final class FProgressStyle with Diagnosticable {
         progressColor = colorScheme.primary,
         borderRadius = style.borderRadius,
         minHeight = 15.0,
-        strokeWidth = 15.0;
+        strokeWidth = 8;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

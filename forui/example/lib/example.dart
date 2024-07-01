@@ -20,8 +20,8 @@ class _ExampleState extends State<Example> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10),
-          FProgress.bar(),
+          Container(color: Colors.red,height: 100,),
+          Container(color:Colors.blue,height:100, width: 100, child: FProgress.circular()),
           const SizedBox(height: 10),
           Expanded(
             child: FTabs(
