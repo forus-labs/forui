@@ -4,3 +4,7 @@ analyzer:
     diagnostic_describe_all_properties: ignore
     public_member_api_docs: ignore
     unused_result: ignore
+
+linter:
+  rules:
+    - require_trailing_commas

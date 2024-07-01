@@ -14,7 +14,7 @@ final class FTextFieldStyle with Diagnosticable {
 
   /// The padding surrounding this text field's content.
   ///
-  /// Defaults to `const EdgeInsets.symmetric(horizontal: 15, vertical: 5)`.
+  /// Defaults to `const EdgeInsets.symmetric(horizontal: 15, vertical: 15)`.
   final EdgeInsets contentPadding;
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
@@ -28,22 +28,22 @@ final class FTextFieldStyle with Diagnosticable {
   final EdgeInsets scrollPadding;
 
   /// The style when this text field is enabled.
-  final FTextFieldStateStyle enabled;
+  final FTextFieldStateStyle enabledStyle;
 
   /// The style when this text field is enabled.
-  final FTextFieldStateStyle disabled;
+  final FTextFieldStateStyle disabledStyle;
 
   /// The style when this text field has an error.
-  final FTextFieldStateStyle error;
+  final FTextFieldStateStyle errorStyle;
 
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
     required this.keyboardAppearance,
-    required this.enabled,
-    required this.disabled,
-    required this.error,
+    required this.enabledStyle,
+    required this.disabledStyle,
+    required this.errorStyle,
     this.cursorColor = CupertinoColors.activeBlue,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
     this.scrollPadding = const EdgeInsets.all(20),
   });
 
@@ -54,9 +54,9 @@ final class FTextFieldStyle with Diagnosticable {
     required FStyle style,
   })  : keyboardAppearance = colorScheme.brightness,
         cursorColor = CupertinoColors.activeBlue,
-        contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+        contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         scrollPadding = const EdgeInsets.all(20.0),
-        enabled = FTextFieldStateStyle.inherit(
+        enabledStyle = FTextFieldStateStyle.inherit(
           labelColor: colorScheme.primary,
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,
@@ -66,9 +66,9 @@ final class FTextFieldStyle with Diagnosticable {
           typography: typography,
           style: style,
         ),
-        disabled = FTextFieldStateStyle.inherit(
-          labelColor: colorScheme.primary,
-          contentColor: colorScheme.primary,
+        disabledStyle = FTextFieldStateStyle.inherit(
+          labelColor: colorScheme.primary.withOpacity(0.7),
+          contentColor: colorScheme.primary.withOpacity(0.7),
           hintColor: colorScheme.border.withOpacity(0.7),
           footerColor: colorScheme.border.withOpacity(0.7),
           focusedBorderColor: colorScheme.border.withOpacity(0.7),
@@ -76,7 +76,7 @@ final class FTextFieldStyle with Diagnosticable {
           typography: typography,
           style: style,
         ),
-        error = FTextFieldStateStyle.inherit(
+        errorStyle = FTextFieldStateStyle.inherit(
           labelColor: colorScheme.primary,
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,
@@ -91,17 +91,17 @@ final class FTextFieldStyle with Diagnosticable {
   ///
   /// ```dart
   /// final style = FTextFieldStyle(
-  ///   enabled: ...,
-  ///   disabled: ...,
+  ///   enabledStyle: ...,
+  ///   disabledStyle: ...,
   ///   // Other arguments omitted for brevity
   /// );
   ///
   /// final copy = style.copyWith(
-  ///   disabled: ...,
+  ///   disabledStyle: ...,
   /// );
   ///
-  /// print(style.enabled == copy.enabled); // true
-  /// print(style.disabled == copy.disabled); // false
+  /// print(style.enabledStyle == copy.enabledStyle); // true
+  /// print(style.disabledStyle == copy.disabledStyle); // false
   /// ```
   @useResult
   FTextFieldStyle copyWith({
@@ -109,18 +109,18 @@ final class FTextFieldStyle with Diagnosticable {
     Color? cursorColor,
     EdgeInsets? contentPadding,
     EdgeInsets? scrollPadding,
-    FTextFieldStateStyle? enabled,
-    FTextFieldStateStyle? disabled,
-    FTextFieldStateStyle? error,
+    FTextFieldStateStyle? enabledStyle,
+    FTextFieldStateStyle? disabledStyle,
+    FTextFieldStateStyle? errorStyle,
   }) =>
       FTextFieldStyle(
         keyboardAppearance: keyboardAppearance ?? this.keyboardAppearance,
         cursorColor: cursorColor ?? this.cursorColor,
         contentPadding: contentPadding ?? this.contentPadding,
         scrollPadding: scrollPadding ?? this.scrollPadding,
-        enabled: enabled ?? this.enabled,
-        disabled: disabled ?? this.disabled,
-        error: error ?? this.error,
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+        errorStyle: errorStyle ?? this.errorStyle,
       );
 
   @override
@@ -131,9 +131,9 @@ final class FTextFieldStyle with Diagnosticable {
       ..add(ColorProperty('cursorColor', cursorColor, defaultValue: CupertinoColors.activeBlue))
       ..add(DiagnosticsProperty('contentPadding', contentPadding))
       ..add(DiagnosticsProperty('scrollPadding', scrollPadding))
-      ..add(DiagnosticsProperty('enabledBorder', enabled))
-      ..add(DiagnosticsProperty('disabledBorder', disabled))
-      ..add(DiagnosticsProperty('errorBorder', error));
+      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
+      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
+      ..add(DiagnosticsProperty('errorStyle', errorStyle));
   }
 
   @override
@@ -145,9 +145,9 @@ final class FTextFieldStyle with Diagnosticable {
           cursorColor == other.cursorColor &&
           contentPadding == other.contentPadding &&
           scrollPadding == other.scrollPadding &&
-          enabled == other.enabled &&
-          disabled == other.disabled &&
-          error == other.error;
+          enabledStyle == other.enabledStyle &&
+          disabledStyle == other.disabledStyle &&
+          errorStyle == other.errorStyle;
 
   @override
   int get hashCode =>
@@ -155,9 +155,9 @@ final class FTextFieldStyle with Diagnosticable {
       cursorColor.hashCode ^
       contentPadding.hashCode ^
       scrollPadding.hashCode ^
-      enabled.hashCode ^
-      disabled.hashCode ^
-      error.hashCode;
+      enabledStyle.hashCode ^
+      disabledStyle.hashCode ^
+      errorStyle.hashCode;
 }
 
 /// A [FTextField] state's style.
@@ -175,10 +175,10 @@ final class FTextFieldStateStyle with Diagnosticable {
   final TextStyle footerTextStyle;
 
   /// The border's color when focused.
-  final FTextFieldBorderStyle focused;
+  final FTextFieldBorderStyle focusedStyle;
 
   /// The border's style when unfocused.
-  final FTextFieldBorderStyle unfocused;
+  final FTextFieldBorderStyle unfocusedStyle;
 
   /// Creates a [FTextFieldStateStyle].
   FTextFieldStateStyle({
@@ -186,8 +186,8 @@ final class FTextFieldStateStyle with Diagnosticable {
     required this.contentTextStyle,
     required this.hintTextStyle,
     required this.footerTextStyle,
-    required this.focused,
-    required this.unfocused,
+    required this.focusedStyle,
+    required this.unfocusedStyle,
   });
 
   /// Creates a [FTextFieldStateStyle] that inherits its properties.
@@ -216,8 +216,8 @@ final class FTextFieldStateStyle with Diagnosticable {
           fontFamily: typography.defaultFontFamily,
           color: footerColor,
         ),
-        focused = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
-        unfocused = FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style);
+        focusedStyle = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
+        unfocusedStyle = FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style);
 
   /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
   ///
@@ -241,16 +241,16 @@ final class FTextFieldStateStyle with Diagnosticable {
     TextStyle? contentTextStyle,
     TextStyle? hintTextStyle,
     TextStyle? footerTextStyle,
-    FTextFieldBorderStyle? focused,
-    FTextFieldBorderStyle? unfocused,
+    FTextFieldBorderStyle? focusedStyle,
+    FTextFieldBorderStyle? unfocusedStyle,
   }) =>
       FTextFieldStateStyle(
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         contentTextStyle: contentTextStyle ?? this.contentTextStyle,
         hintTextStyle: hintTextStyle ?? this.hintTextStyle,
         footerTextStyle: footerTextStyle ?? this.footerTextStyle,
-        focused: focused ?? this.focused,
-        unfocused: unfocused ?? this.unfocused,
+        focusedStyle: focusedStyle ?? this.focusedStyle,
+        unfocusedStyle: unfocusedStyle ?? this.unfocusedStyle,
       );
 
   @override
@@ -261,8 +261,8 @@ final class FTextFieldStateStyle with Diagnosticable {
       ..add(DiagnosticsProperty('contentTextStyle', contentTextStyle))
       ..add(DiagnosticsProperty('hintTextStyle', hintTextStyle))
       ..add(DiagnosticsProperty('footerTextStyle', footerTextStyle))
-      ..add(DiagnosticsProperty('focused', focused))
-      ..add(DiagnosticsProperty('unfocused', unfocused));
+      ..add(DiagnosticsProperty('focusedStyle', focusedStyle))
+      ..add(DiagnosticsProperty('unfocusedStyle', unfocusedStyle));
   }
 
   @override
@@ -273,16 +273,16 @@ final class FTextFieldStateStyle with Diagnosticable {
           labelTextStyle == other.labelTextStyle &&
           contentTextStyle == other.contentTextStyle &&
           hintTextStyle == other.hintTextStyle &&
-          focused == other.focused &&
-          unfocused == other.unfocused;
+          focusedStyle == other.focusedStyle &&
+          unfocusedStyle == other.unfocusedStyle;
 
   @override
   int get hashCode =>
       labelTextStyle.hashCode ^
       contentTextStyle.hashCode ^
       hintTextStyle.hashCode ^
-      focused.hashCode ^
-      unfocused.hashCode;
+      focusedStyle.hashCode ^
+      unfocusedStyle.hashCode;
 }
 
 /// A [FTextField] border's style.

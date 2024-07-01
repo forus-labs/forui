@@ -39,12 +39,12 @@ class ScaffoldPage extends SampleScaffold {
                       child: Column(
                         children: [
                           const FTextField(
-                            label: 'Name',
+                            label: Text('Name'),
                             hint: 'John Renalo',
                           ),
                           const SizedBox(height: 10),
                           const FTextField(
-                            label: 'Email',
+                            label: Text('Email'),
                             hint: 'john@doe.com',
                           ),
                           Padding(

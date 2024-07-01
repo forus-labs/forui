@@ -102,6 +102,7 @@ class FHorizontalDialogContent extends FDialogContent {
     required super.body,
     required super.rawBody,
     required super.actions,
+    super.key,
   }) : super(alignment: CrossAxisAlignment.start, titleTextAlign: TextAlign.start, bodyTextAlign: TextAlign.start);
 
   @override
@@ -125,6 +126,7 @@ class FVerticalDialogContent extends FDialogContent {
     required super.body,
     required super.rawBody,
     required super.actions,
+    super.key,
   }) : super(alignment: CrossAxisAlignment.center, titleTextAlign: TextAlign.center, bodyTextAlign: TextAlign.center);
 
   @override
