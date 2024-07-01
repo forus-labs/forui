@@ -15,6 +15,7 @@ in a form.
       enabled: enabled,
       label: 'Email',
       hint: 'john@doe.com',
+      footer: Text('Enter your email associated with your Forui account.'),
     );
     ```
   </Tabs.Tab>
@@ -172,7 +173,12 @@ FTextField.multiline(
             const SizedBox(height: 30),
             FButton(
               rawLabel: const Text('Login'),
-              onPress: () => _formKey.currentState!.validate(),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+              },
             ),
           ],
         ),
