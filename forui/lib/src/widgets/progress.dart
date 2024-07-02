@@ -5,7 +5,9 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A widget that shows progress on a line.
+/// A progress bar
+///
+/// Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 ///
 /// See:
 /// * https://forui.dev/docs/progress for working examples.
