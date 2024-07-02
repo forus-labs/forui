@@ -23,21 +23,23 @@ final class _FCardContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title != null)
-            DefaultTextStyle.merge(
-              style: style.titleTextStyle,
-              child: title!,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 2),
+              child: DefaultTextStyle.merge(
+                style: style.titleTextStyle,
+                child: title!,
+              ),
             ),
           if (subtitle != null)
-            DefaultTextStyle.merge(
-              style: style.subtitleTextStyle,
-              child: subtitle!,
-            ),
-          if (child != null)
             Padding(
-              padding:
-                  (title == null && subtitle == null) ? const EdgeInsets.only(top: 4) : const EdgeInsets.only(top: 10),
-              child: child!,
+              padding: const EdgeInsets.only(bottom: 2),
+              child: DefaultTextStyle.merge(
+                style: style.subtitleTextStyle,
+                child: subtitle!,
+              ),
             ),
+          if (title != null && subtitle != null) const SizedBox(height: 8),
+          if (child != null) child!,
         ],
       ),
     );
@@ -65,7 +67,7 @@ final class FCardContentStyle with Diagnosticable {
   const FCardContentStyle({
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    this.padding = const EdgeInsets.fromLTRB(16, 16, 16, 16),
+    this.padding = const EdgeInsets.all(16),
   });
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
@@ -75,9 +77,7 @@ final class FCardContentStyle with Diagnosticable {
           color: colorScheme.foreground,
           height: 1.5,
         ),
-        subtitleTextStyle = typography.sm.copyWith(
-          color: colorScheme.mutedForeground,
-        ),
+        subtitleTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground),
         padding = const EdgeInsets.fromLTRB(16, 12, 16, 16);
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
