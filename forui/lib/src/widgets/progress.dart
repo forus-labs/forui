@@ -74,7 +74,7 @@ final class FProgressStyle with Diagnosticable {
     required this.minHeight,
   });
 
-  /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
+  /// Creates a [FProgressStyle] that inherits its properties from [colorScheme] and [style].
   FProgressStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : backgroundDecoration = BoxDecoration(
           borderRadius: style.borderRadius,
