@@ -11,16 +11,16 @@ class FProgress extends StatelessWidget {
   ///
   /// A value of 0.0 means no progress and 1.0 means that progress is complete.
   /// The value will be clamped to be in the range 0.0-1.0.
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * [value] is NaN
   final double value;
 
   /// The style. Defaults to [FThemeData.progressStyle].
   final FProgressStyle? style;
 
   /// Creates a [FProgress].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * [value] is NaN
   FProgress({
     required this.value,
     this.style,
@@ -41,7 +41,7 @@ class FProgress extends StatelessWidget {
               width: constraints.maxWidth,
             ),
             AnimatedContainer(
-              duration: const Duration(milliseconds: 500),
+              duration: style.animationDuration,
               decoration: style.progressDecoration,
               width: value.abs() * constraints.maxWidth,
             ),
@@ -55,8 +55,8 @@ class FProgress extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('value', value));
+      ..add(DoubleProperty('value', value))
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -68,14 +68,18 @@ final class FProgressStyle with Diagnosticable {
   /// The progress's color.
   final BoxDecoration progressDecoration;
 
-  /// The minimum height of the progress bar.
+  /// The constraints for the progress bar.
   final BoxConstraints constraints;
+
+  /// The animation duration.
+  final Duration animationDuration;
 
   /// Creates a [FProgressStyle].
   const FProgressStyle({
     required this.backgroundDecoration,
     required this.progressDecoration,
     required this.constraints,
+    required this.animationDuration,
   });
 
   /// Creates a [FProgressStyle] that inherits its properties from [colorScheme] and [style].
@@ -88,7 +92,8 @@ final class FProgressStyle with Diagnosticable {
           borderRadius: style.borderRadius,
           color: colorScheme.primary,
         ),
-        constraints = const BoxConstraints(minHeight: 15.0, maxHeight: 15.0);
+        constraints = const BoxConstraints(minHeight: 15.0, maxHeight: 15.0),
+        animationDuration = const Duration(milliseconds: 500);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -96,7 +101,8 @@ final class FProgressStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('progressDecoration', progressDecoration))
       ..add(DiagnosticsProperty('backgroundDecoration', backgroundDecoration))
-      ..add(DiagnosticsProperty('constraints', constraints));
+      ..add(DiagnosticsProperty('constraints', constraints))
+      ..add(DiagnosticsProperty('animationDuration', animationDuration));
   }
 
   /// Returns a copy of this [FProgressStyle] with the given properties replaced.
@@ -117,11 +123,13 @@ final class FProgressStyle with Diagnosticable {
     BoxDecoration? backgroundDecoration,
     BoxDecoration? progressDecoration,
     BoxConstraints? constraints,
+    Duration? animationDuration,
   }) =>
       FProgressStyle(
         backgroundDecoration: backgroundDecoration ?? this.backgroundDecoration,
         progressDecoration: progressDecoration ?? this.progressDecoration,
         constraints: constraints ?? this.constraints,
+        animationDuration: animationDuration ?? this.animationDuration,
       );
 
   @override
@@ -131,8 +139,10 @@ final class FProgressStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           backgroundDecoration == other.backgroundDecoration &&
           progressDecoration == other.progressDecoration &&
-          constraints == other.constraints;
+          constraints == other.constraints &&
+          animationDuration == other.animationDuration;
 
   @override
-  int get hashCode => backgroundDecoration.hashCode ^ progressDecoration.hashCode ^ constraints.hashCode;
+  int get hashCode =>
+      backgroundDecoration.hashCode ^ progressDecoration.hashCode ^ constraints.hashCode ^ animationDuration.hashCode;
 }
