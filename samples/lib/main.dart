@@ -72,6 +72,10 @@ class _AppRouter extends $_AppRouter {
           page: XNestedHeaderRoute.page,
         ),
         AutoRoute(
+          path: '/progress/default',
+          page: ProgressRoute.page,
+        ),
+        AutoRoute(
           path: '/tabs/default',
           page: TabsRoute.page,
         ),

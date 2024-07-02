@@ -41,6 +41,7 @@ class FProgress extends StatelessWidget {
               width: constraints.maxWidth,
             ),
             AnimatedContainer(
+              curve: style.curve,
               duration: style.animationDuration,
               decoration: style.progressDecoration,
               width: value.abs() * constraints.maxWidth,
@@ -74,12 +75,16 @@ final class FProgressStyle with Diagnosticable {
   /// The animation duration.
   final Duration animationDuration;
 
+  /// The animation curve.
+  final Curve curve;
+
   /// Creates a [FProgressStyle].
   const FProgressStyle({
     required this.backgroundDecoration,
     required this.progressDecoration,
     required this.constraints,
     required this.animationDuration,
+    required this.curve,
   });
 
   /// Creates a [FProgressStyle] that inherits its properties from [colorScheme] and [style].
@@ -93,7 +98,8 @@ final class FProgressStyle with Diagnosticable {
           color: colorScheme.primary,
         ),
         constraints = const BoxConstraints(minHeight: 15.0, maxHeight: 15.0),
-        animationDuration = const Duration(milliseconds: 500);
+        animationDuration = const Duration(milliseconds: 500),
+        curve = Curves.ease;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -102,7 +108,8 @@ final class FProgressStyle with Diagnosticable {
       ..add(DiagnosticsProperty('progressDecoration', progressDecoration))
       ..add(DiagnosticsProperty('backgroundDecoration', backgroundDecoration))
       ..add(DiagnosticsProperty('constraints', constraints))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration));
+      ..add(DiagnosticsProperty('animationDuration', animationDuration))
+      ..add(DiagnosticsProperty<Curve>('curve', curve));
   }
 
   /// Returns a copy of this [FProgressStyle] with the given properties replaced.
@@ -119,17 +126,18 @@ final class FProgressStyle with Diagnosticable {
   /// print(style.progressDecoration == copy.progressDecoration); // false
   /// ```
   @useResult
-  FProgressStyle copyWith({
-    BoxDecoration? backgroundDecoration,
-    BoxDecoration? progressDecoration,
-    BoxConstraints? constraints,
-    Duration? animationDuration,
-  }) =>
+  FProgressStyle copyWith(
+          {BoxDecoration? backgroundDecoration,
+          BoxDecoration? progressDecoration,
+          BoxConstraints? constraints,
+          Duration? animationDuration,
+          Curve? curve}) =>
       FProgressStyle(
         backgroundDecoration: backgroundDecoration ?? this.backgroundDecoration,
         progressDecoration: progressDecoration ?? this.progressDecoration,
         constraints: constraints ?? this.constraints,
         animationDuration: animationDuration ?? this.animationDuration,
+        curve: curve ?? this.curve,
       );
 
   @override
@@ -140,9 +148,14 @@ final class FProgressStyle with Diagnosticable {
           backgroundDecoration == other.backgroundDecoration &&
           progressDecoration == other.progressDecoration &&
           constraints == other.constraints &&
-          animationDuration == other.animationDuration;
+          animationDuration == other.animationDuration &&
+          curve == other.curve;
 
   @override
   int get hashCode =>
-      backgroundDecoration.hashCode ^ progressDecoration.hashCode ^ constraints.hashCode ^ animationDuration.hashCode;
+      backgroundDecoration.hashCode ^
+      progressDecoration.hashCode ^
+      constraints.hashCode ^
+      animationDuration.hashCode ^
+      curve.hashCode;
 }
