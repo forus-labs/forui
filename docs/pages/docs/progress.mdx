@@ -1,0 +1,43 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Progress
+Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='progress'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    class Progress extends StatefulWidget {
+      @override
+      State<Progress> createState() => ProgressState();
+    }
+
+    class ProgressState extends State<Progress> {
+      double value = 0.2;
+
+      @override
+      void initState() {
+        Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+        super.initState();
+      }
+
+      @override
+      Widget build(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [FProgress(value: value)],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FProgress(...)`
+
+```dart
+FProgress(value: 0.6);
+```

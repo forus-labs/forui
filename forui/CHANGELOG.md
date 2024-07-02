@@ -1,7 +1,8 @@
 ## Next
 
 ### Changes
-* Add `Header.nested` widget.
+* Add `FHeader.nested` widget.
+* Add `FProgress` widget.
 * **Breaking** Move `FHeaderStyle` to `FHeaderStyles.rootStyle`.
 * **Breaking** Move `FHeaderActionStyle.padding` to `FRootHeaderStyle.actionSpacing`.
 * **Breaking** Suffix style parameters with `Style`, i.e. `FRootHeaderStyle.action` has been renamed to `FRootHeaderStyle.actionStyle`.

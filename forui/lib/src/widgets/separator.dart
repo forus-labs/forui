@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/separator for working examples.
-/// * [FBadgeCustomStyle] for customizing a separator's appearance.
+/// * [FSeparatorStyle] for customizing a separator's appearance.
 final class FSeparator extends StatelessWidget {
   /// The separator's style. Defaults to the appropriate style in [FThemeData.separatorStyles].
   final FSeparatorStyle? style;
