@@ -24,28 +24,23 @@ class TabsPage extends SampleScaffold {
                   content: FCard(
                     title: const Text('Account'),
                     subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Column(
-                        children: [
-                          const FTextField(
-                            label: Text('Name'),
-                            hint: 'John Renalo',
-                          ),
-                          const SizedBox(height: 10),
-                          const FTextField(
-                            label: Text('Email'),
-                            hint: 'john@doe.com',
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 24, bottom: 16),
-                            child: FButton(
-                              label: const Text('Save'),
-                              onPress: () {},
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: Column(
+                      children: [
+                        const FTextField(
+                          label: Text('Name'),
+                          hint: 'John Renalo',
+                        ),
+                        const SizedBox(height: 10),
+                        const FTextField(
+                          label: Text('Email'),
+                          hint: 'john@doe.com',
+                        ),
+                        const SizedBox(height: 16),
+                        FButton(
+                          label: const Text('Save'),
+                          onPress: () {},
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -54,22 +49,17 @@ class TabsPage extends SampleScaffold {
                   content: FCard(
                     title: const Text('Password'),
                     subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Column(
-                        children: [
-                          const FTextField(label: Text('Current password')),
-                          const SizedBox(height: 10),
-                          const FTextField(label: Text('New password')),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 24, bottom: 16),
-                            child: FButton(
-                              label: const Text('Save'),
-                              onPress: () {},
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: Column(
+                      children: [
+                        const FTextField(label: Text('Current password')),
+                        const SizedBox(height: 10),
+                        const FTextField(label: Text('New password')),
+                        const SizedBox(height: 16),
+                        FButton(
+                          label: const Text('Save'),
+                          onPress: () {},
+                        ),
+                      ],
                     ),
                   ),
                 ),

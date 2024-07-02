@@ -29,7 +29,7 @@ sealed class _FDialogContent extends StatelessWidget {
             children: [
               if (title != null)
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.only(bottom: 4),
                   child: Semantics(
                     container: true,
                     child: DefaultTextStyle.merge(
@@ -41,7 +41,7 @@ sealed class _FDialogContent extends StatelessWidget {
                 ),
               if (body != null)
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.only(bottom: 4),
                   child: Semantics(
                     container: true,
                     child: DefaultTextStyle.merge(
@@ -51,6 +51,8 @@ sealed class _FDialogContent extends StatelessWidget {
                     ),
                   ),
                 ),
+              if (title != null && body != null)
+                const SizedBox(height: 8),
               _actions(context),
             ],
           ),
