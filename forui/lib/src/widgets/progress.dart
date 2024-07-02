@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -30,6 +30,12 @@ class FProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.progressStyle;
+    final value = switch (this.value) {
+      < 0.0 => 0.0,
+      > 1.0 => 1.0,
+      _ => this.value,
+    };
+
     return LayoutBuilder(
       builder: (context, constraints) => ConstrainedBox(
         constraints: style.constraints,
@@ -44,7 +50,7 @@ class FProgress extends StatelessWidget {
               curve: style.curve,
               duration: style.animationDuration,
               decoration: style.progressDecoration,
-              width: value.abs() * constraints.maxWidth,
+              width: value * constraints.maxWidth,
             ),
           ],
         ),
