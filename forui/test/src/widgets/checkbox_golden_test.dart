@@ -21,7 +21,7 @@ void main() {
             TestScaffold(
               data: theme,
               background: background,
-              child: FCheckBox(
+              child: FCheckbox(
                 enabled: enabled,
                 initialValue: initialValue,
               ),

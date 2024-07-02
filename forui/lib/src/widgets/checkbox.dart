@@ -5,15 +5,15 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-/// A check box control that allows the user to toggle between checked and not checked.
+/// A checkbox control that allows the user to toggle between checked and not checked.
 ///
-/// On touch devices, it is recommended to use a [FSwitch] instead in most cases. A [FCheckBox] is internally a
+/// On touch devices, it is recommended to use a [FSwitch] instead in most cases. A [FCheckbox] is internally a
 /// [FormField], therefore it can be used in a form.
 ///
 /// See:
-/// * https://forui.dev/docs/check-box for working examples.
-/// * [FCheckBoxStyle] for customizing a check box's appearance.
-class FCheckBox extends StatelessWidget {
+/// * https://forui.dev/docs/checkbox for working examples.
+/// * [FCheckboxStyle] for customizing a checkbox's appearance.
+class FCheckbox extends StatelessWidget {
   /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the dialog
   /// is opened and closed.
   ///
@@ -24,10 +24,10 @@ class FCheckBox extends StatelessWidget {
   /// Called when the user initiates a change to the FCheckBox's value: when they have checked or unchecked this box.
   final ValueChanged<bool>? onChange;
 
-  /// Whether this check box should focus itself if nothing else is already focused. Defaults to false.
+  /// Whether this checkbox should focus itself if nothing else is already focused. Defaults to false.
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this check box.
+  /// Defines the [FocusNode] for this checkbox.
   final FocusNode? focusNode;
 
   /// Handler called when the focus changes.
@@ -73,8 +73,8 @@ class FCheckBox extends StatelessWidget {
   ///  * [RestorationManager], which explains how state restoration works in Flutter.
   final String? restorationId;
 
-  /// Creates a [FCheckBox].
-  const FCheckBox({
+  /// Creates a [FCheckbox].
+  const FCheckbox({
     this.semanticLabel,
     this.onChange,
     this.autofocus = false,
@@ -174,53 +174,53 @@ class FCheckBox extends StatelessWidget {
   }
 }
 
-/// A [FCheckBox]'s style.
-final class FCheckBoxStyle with Diagnosticable {
-  /// The duration of the animation when the check box's switches between checked and unchecked.
+/// A [FCheckbox]'s style.
+final class FCheckboxStyle with Diagnosticable {
+  /// The duration of the animation when the checkbox's switches between checked and unchecked.
   ///
   /// Defaults to `const Duration(milliseconds: 100)`.
   final Duration animationDuration;
 
-  /// The curve of the animation when the check box's switches between checked and unchecked.
+  /// The curve of the animation when the checkbox's switches between checked and unchecked.
   ///
   /// Defaults to [Curves.linear].
   final Curve curve;
 
-  /// The check box's style when it's enabled.
-  final FCheckBoxStateStyle enabledStyle;
+  /// The checkbox's style when it's enabled.
+  final FCheckboxStateStyle enabledStyle;
 
-  /// The check box's style when it's disabled.
-  final FCheckBoxStateStyle disabledStyle;
+  /// The checkbox's style when it's disabled.
+  final FCheckboxStateStyle disabledStyle;
 
-  /// Creates a [FCheckBoxStyle].
-  FCheckBoxStyle({
+  /// Creates a [FCheckboxStyle].
+  FCheckboxStyle({
     required this.enabledStyle,
     required this.disabledStyle,
     this.animationDuration = const Duration(milliseconds: 100),
     this.curve = Curves.linear,
   });
 
-  /// Creates a [FCheckBoxStyle] that inherits its properties from the given [FColorScheme].
-  FCheckBoxStyle.inherit({required FColorScheme colorScheme})
+  /// Creates a [FCheckboxStyle] that inherits its properties from the given [FColorScheme].
+  FCheckboxStyle.inherit({required FColorScheme colorScheme})
       : animationDuration = const Duration(milliseconds: 100),
         curve = Curves.linear,
-        enabledStyle = FCheckBoxStateStyle(
-          borderColor: colorScheme.foreground,
+        enabledStyle = FCheckboxStateStyle(
+          borderColor: colorScheme.primary,
           iconColor: colorScheme.background,
-          checkedBackgroundColor: colorScheme.foreground,
+          checkedBackgroundColor: colorScheme.primary,
           uncheckedBackgroundColor: colorScheme.background,
         ),
-        disabledStyle = FCheckBoxStateStyle(
-          borderColor: colorScheme.foreground.withOpacity(0.5),
+        disabledStyle = FCheckboxStateStyle(
+          borderColor: colorScheme.primary.withOpacity(0.5),
           iconColor: colorScheme.background.withOpacity(0.5),
-          checkedBackgroundColor: colorScheme.foreground.withOpacity(0.5),
+          checkedBackgroundColor: colorScheme.primary.withOpacity(0.5),
           uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
         );
 
-  /// Returns a copy of this [FCheckBoxStyle] with the given properties replaced.
+  /// Returns a copy of this [FCheckboxStyle] with the given properties replaced.
   ///
   /// ```dart
-  /// final style = FCheckBoxStyle(
+  /// final style = FCheckboxStyle(
   ///   animationDuration: const Duration(minutes: 1),
   ///   curve: Curves.linear,
   ///   // Other arguments omitted for brevity.
@@ -233,13 +233,13 @@ final class FCheckBoxStyle with Diagnosticable {
   /// print(style.animationDuration); // const Duration(minutes: 1)
   /// print(copy.curve); // Curves.bounceIn
   /// ```
-  FCheckBoxStyle copyWith({
+  FCheckboxStyle copyWith({
     Duration? animationDuration,
     Curve? curve,
-    FCheckBoxStateStyle? enabledStyle,
-    FCheckBoxStateStyle? disabledStyle,
+    FCheckboxStateStyle? enabledStyle,
+    FCheckboxStateStyle? disabledStyle,
   }) =>
-      FCheckBoxStyle(
+      FCheckboxStyle(
         animationDuration: animationDuration ?? this.animationDuration,
         curve: curve ?? this.curve,
         enabledStyle: enabledStyle ?? this.enabledStyle,
@@ -259,7 +259,7 @@ final class FCheckBoxStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FCheckBoxStyle &&
+      other is FCheckboxStyle &&
           runtimeType == other.runtimeType &&
           animationDuration == other.animationDuration &&
           curve == other.curve &&
@@ -270,29 +270,29 @@ final class FCheckBoxStyle with Diagnosticable {
   int get hashCode => animationDuration.hashCode ^ curve.hashCode ^ enabledStyle.hashCode ^ disabledStyle.hashCode;
 }
 
-/// A check box state's style.
-final class FCheckBoxStateStyle with Diagnosticable {
-  /// The check box's border color.
+/// A checkbox state's style.
+final class FCheckboxStateStyle with Diagnosticable {
+  /// The checkbox's border color.
   final Color borderColor;
 
-  /// The checked check box's icon's color.
+  /// The checked checkbox's icon's color.
   final Color iconColor;
 
-  /// The checked check box's background color.
+  /// The checked checkbox's background color.
   final Color checkedBackgroundColor;
 
-  /// The unchecked check box's background color.
+  /// The unchecked checkbox's background color.
   final Color uncheckedBackgroundColor;
 
-  /// Creates a [FCheckBoxStateStyle].
-  const FCheckBoxStateStyle({
+  /// Creates a [FCheckboxStateStyle].
+  const FCheckboxStateStyle({
     required this.borderColor,
     required this.iconColor,
     required this.checkedBackgroundColor,
     required this.uncheckedBackgroundColor,
   });
 
-  /// Returns a copy of this [FCheckBoxStateStyle] with the given properties replaced.
+  /// Returns a copy of this [FCheckboxStateStyle] with the given properties replaced.
   ///
   /// ```dart
   /// final style = FCheckBoxStateStyle(
@@ -308,13 +308,13 @@ final class FCheckBoxStateStyle with Diagnosticable {
   /// print(style.iconColor == copy.iconColor); // true
   /// print(style.checkedBackgroundColor == copy.checkedBackgroundColor); // false
   /// ```
-  FCheckBoxStateStyle copyWith({
+  FCheckboxStateStyle copyWith({
     Color? borderColor,
     Color? iconColor,
     Color? checkedBackgroundColor,
     Color? uncheckedBackgroundColor,
   }) =>
-      FCheckBoxStateStyle(
+      FCheckboxStateStyle(
         borderColor: borderColor ?? this.borderColor,
         iconColor: iconColor ?? this.iconColor,
         checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
@@ -334,7 +334,7 @@ final class FCheckBoxStateStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FCheckBoxStateStyle &&
+      other is FCheckboxStateStyle &&
           runtimeType == other.runtimeType &&
           borderColor == other.borderColor &&
           iconColor == other.iconColor &&
