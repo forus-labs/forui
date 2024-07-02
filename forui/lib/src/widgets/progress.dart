@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A progress bar
+/// A progress bar.
 ///
 /// Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 ///
