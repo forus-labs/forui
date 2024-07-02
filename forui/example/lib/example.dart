@@ -16,13 +16,13 @@ class _ExampleState extends State<Example> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) => const Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 100),
-          const FProgress(value: 0.9),
-          const SizedBox(height: 10),
+          SizedBox(height: 100),
+          FProgress(value: 0.9),
+          SizedBox(height: 10),
         ],
       );
 }
