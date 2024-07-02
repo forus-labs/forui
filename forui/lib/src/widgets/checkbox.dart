@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 
 /// A check box control that allows the user to toggle between checked and not checked.
@@ -113,10 +114,12 @@ class FCheckBox extends StatelessWidget {
               enabled: enabled,
               checked: value,
               child: GestureDetector(
-                onTap: enabled ? () {
-                  state.didChange(!value);
-                  onChange?.call(!value);
-                } : null,
+                onTap: enabled
+                    ? () {
+                        state.didChange(!value);
+                        onChange?.call(!value);
+                      }
+                    : null,
                 child: AnimatedSwitcher(
                   duration: style.animationDuration,
                   switchInCurve: style.curve,
@@ -132,15 +135,16 @@ class FCheckBox extends StatelessWidget {
                         ),
                         color: value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
                       ),
-                      child: value ?
-                      FAssets.icons.check(
-                        height: 15,
-                        width: 15,
-                        colorFilter: ColorFilter.mode(
-                          stateStyle.iconColor,
-                          BlendMode.srcIn,
-                        ),
-                      ) : const SizedBox(),
+                      child: value
+                          ? FAssets.icons.check(
+                              height: 15,
+                              width: 15,
+                              colorFilter: ColorFilter.mode(
+                                stateStyle.iconColor,
+                                BlendMode.srcIn,
+                              ),
+                            )
+                          : const SizedBox(),
                     ),
                   ),
                 ),
@@ -176,6 +180,7 @@ final class FCheckBoxStyle with Diagnosticable {
   ///
   /// Defaults to `const Duration(milliseconds: 100)`.
   final Duration animationDuration;
+
   /// The curve of the animation when the check box's switches between checked and unchecked.
   ///
   /// Defaults to [Curves.linear].
@@ -196,21 +201,21 @@ final class FCheckBoxStyle with Diagnosticable {
   });
 
   /// Creates a [FCheckBoxStyle] that inherits its properties from the given [FColorScheme].
-  FCheckBoxStyle.inherit({required FColorScheme colorScheme}):
-    animationDuration = const Duration(milliseconds: 100),
-    curve = Curves.linear,
-    enabledStyle = FCheckBoxStateStyle(
-      borderColor: colorScheme.foreground,
-      iconColor: colorScheme.background,
-      checkedBackgroundColor: colorScheme.foreground,
-      uncheckedBackgroundColor: colorScheme.background,
-    ),
-    disabledStyle = FCheckBoxStateStyle(
-      borderColor: colorScheme.foreground.withOpacity(0.5),
-      iconColor: colorScheme.background.withOpacity(0.5),
-      checkedBackgroundColor: colorScheme.foreground.withOpacity(0.5),
-      uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
-    );
+  FCheckBoxStyle.inherit({required FColorScheme colorScheme})
+      : animationDuration = const Duration(milliseconds: 100),
+        curve = Curves.linear,
+        enabledStyle = FCheckBoxStateStyle(
+          borderColor: colorScheme.foreground,
+          iconColor: colorScheme.background,
+          checkedBackgroundColor: colorScheme.foreground,
+          uncheckedBackgroundColor: colorScheme.background,
+        ),
+        disabledStyle = FCheckBoxStateStyle(
+          borderColor: colorScheme.foreground.withOpacity(0.5),
+          iconColor: colorScheme.background.withOpacity(0.5),
+          checkedBackgroundColor: colorScheme.foreground.withOpacity(0.5),
+          uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
+        );
 
   /// Returns a copy of this [FCheckBoxStyle] with the given properties replaced.
   ///
@@ -228,12 +233,18 @@ final class FCheckBoxStyle with Diagnosticable {
   /// print(style.animationDuration); // const Duration(minutes: 1)
   /// print(copy.curve); // Curves.bounceIn
   /// ```
-  FCheckBoxStyle copyWith({Duration? animationDuration, Curve? curve, FCheckBoxStateStyle? enabledStyle, FCheckBoxStateStyle? disabledStyle,}) => FCheckBoxStyle(
-      animationDuration: animationDuration ?? this.animationDuration,
-      curve: curve ?? this.curve,
-      enabledStyle: enabledStyle ?? this.enabledStyle,
-      disabledStyle: disabledStyle ?? this.disabledStyle,
-    );
+  FCheckBoxStyle copyWith({
+    Duration? animationDuration,
+    Curve? curve,
+    FCheckBoxStateStyle? enabledStyle,
+    FCheckBoxStateStyle? disabledStyle,
+  }) =>
+      FCheckBoxStyle(
+        animationDuration: animationDuration ?? this.animationDuration,
+        curve: curve ?? this.curve,
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -298,16 +309,17 @@ final class FCheckBoxStateStyle with Diagnosticable {
   /// print(style.checkedBackgroundColor == copy.checkedBackgroundColor); // false
   /// ```
   FCheckBoxStateStyle copyWith({
-      Color? borderColor,
-      Color? iconColor,
-      Color? checkedBackgroundColor,
-      Color? uncheckedBackgroundColor,
-  }) => FCheckBoxStateStyle(
-      borderColor: borderColor ?? this.borderColor,
-      iconColor: iconColor ?? this.iconColor,
-      checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
-      uncheckedBackgroundColor: uncheckedBackgroundColor ?? this.uncheckedBackgroundColor,
-    );
+    Color? borderColor,
+    Color? iconColor,
+    Color? checkedBackgroundColor,
+    Color? uncheckedBackgroundColor,
+  }) =>
+      FCheckBoxStateStyle(
+        borderColor: borderColor ?? this.borderColor,
+        iconColor: iconColor ?? this.iconColor,
+        checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
+        uncheckedBackgroundColor: uncheckedBackgroundColor ?? this.uncheckedBackgroundColor,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -331,8 +343,5 @@ final class FCheckBoxStateStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      borderColor.hashCode ^
-      iconColor.hashCode ^
-      checkedBackgroundColor.hashCode ^
-      uncheckedBackgroundColor.hashCode;
+      borderColor.hashCode ^ iconColor.hashCode ^ checkedBackgroundColor.hashCode ^ uncheckedBackgroundColor.hashCode;
 }
