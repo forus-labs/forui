@@ -56,6 +56,14 @@ class _AppRouter extends $_AppRouter {
           page: CardRoute.page,
         ),
         AutoRoute(
+          path: '/checkbox/default',
+          page: CheckboxRoute.page,
+        ),
+        AutoRoute(
+          path: '/checkbox/form',
+          page: FormCheckboxRoute.page,
+        ),
+        AutoRoute(
           path: '/dialog/default',
           page: DialogRoute.page,
         ),

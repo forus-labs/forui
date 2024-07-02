@@ -34,6 +34,9 @@ final class FThemeData with Diagnosticable {
   /// The card style.
   final FCardStyle cardStyle;
 
+  /// The checkbox style.
+  final FCheckboxStyle checkBoxStyle;
+
   /// The dialog style.
   final FDialogStyle dialogStyle;
 
@@ -69,6 +72,7 @@ final class FThemeData with Diagnosticable {
     required this.badgeStyles,
     required this.buttonStyles,
     required this.cardStyle,
+    required this.checkBoxStyle,
     required this.dialogStyle,
     required this.headerStyle,
     required this.progressStyle,
@@ -96,6 +100,7 @@ final class FThemeData with Diagnosticable {
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      checkBoxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
@@ -131,6 +136,7 @@ final class FThemeData with Diagnosticable {
     FBadgeStyles? badgeStyles,
     FButtonStyles? buttonStyles,
     FCardStyle? cardStyle,
+    FCheckboxStyle? checkBoxStyle,
     FDialogStyle? dialogStyle,
     FHeaderStyles? headerStyle,
     FProgressStyle? progressStyle,
@@ -147,6 +153,7 @@ final class FThemeData with Diagnosticable {
         badgeStyles: badgeStyles ?? this.badgeStyles,
         buttonStyles: buttonStyles ?? this.buttonStyles,
         cardStyle: cardStyle ?? this.cardStyle,
+        checkBoxStyle: checkBoxStyle ?? this.checkBoxStyle,
         dialogStyle: dialogStyle ?? this.dialogStyle,
         headerStyle: headerStyle ?? this.headerStyle,
         progressStyle: progressStyle ?? this.progressStyle,
@@ -167,6 +174,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('checkBoxStyle', checkBoxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle))
@@ -188,6 +196,7 @@ final class FThemeData with Diagnosticable {
           badgeStyles == other.badgeStyles &&
           buttonStyles == other.buttonStyles &&
           cardStyle == other.cardStyle &&
+          checkBoxStyle == other.checkBoxStyle &&
           dialogStyle == other.dialogStyle &&
           headerStyle == other.headerStyle &&
           progressStyle == other.progressStyle &&
@@ -205,6 +214,7 @@ final class FThemeData with Diagnosticable {
       badgeStyles.hashCode ^
       buttonStyles.hashCode ^
       cardStyle.hashCode ^
+      checkBoxStyle.hashCode ^
       dialogStyle.hashCode ^
       headerStyle.hashCode ^
       progressStyle.hashCode ^
