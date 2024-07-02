@@ -17,31 +17,36 @@ class FProgress extends StatelessWidget {
   final FProgressStyle? style;
 
   /// Creates a [FProgress].
-  const FProgress({
+  ///
+  /// ## Contract:
+  /// Throws [AssertionError] if:
+  /// * [value] is NaN
+  FProgress({
     required this.value,
     this.style,
     super.key,
-  });
+  }) : assert(!value.isNaN, 'Cannot provide a NaN value');
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.progressStyle;
     return LayoutBuilder(
-      builder: (context, constraints) => Stack(
-        alignment: AlignmentDirectional.centerStart,
-        children: [
-          Container(
-            height: style.minHeight,
-            decoration: style.backgroundDecoration,
-            width: constraints.maxWidth,
-          ),
-          AnimatedContainer(
-            height: style.minHeight,
-            duration: const Duration(milliseconds: 500),
-            decoration: style.progressDecoration,
-            width: value.abs() * constraints.maxWidth,
-          ),
-        ],
+      builder: (context, constraints) => ConstrainedBox(
+        constraints: style.constraints,
+        child: Stack(
+          alignment: AlignmentDirectional.centerStart,
+          children: [
+            Container(
+              decoration: style.backgroundDecoration,
+              width: constraints.maxWidth,
+            ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              decoration: style.progressDecoration,
+              width: value.abs() * constraints.maxWidth,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -64,13 +69,13 @@ final class FProgressStyle with Diagnosticable {
   final BoxDecoration progressDecoration;
 
   /// The minimum height of the progress bar.
-  final double minHeight;
+  final BoxConstraints constraints;
 
   /// Creates a [FProgressStyle].
   const FProgressStyle({
     required this.backgroundDecoration,
     required this.progressDecoration,
-    required this.minHeight,
+    required this.constraints,
   });
 
   /// Creates a [FProgressStyle] that inherits its properties from [colorScheme] and [style].
@@ -83,7 +88,7 @@ final class FProgressStyle with Diagnosticable {
           borderRadius: style.borderRadius,
           color: colorScheme.primary,
         ),
-        minHeight = 15.0;
+        constraints = const BoxConstraints(minHeight: 15.0, maxHeight: 15.0);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -91,7 +96,7 @@ final class FProgressStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('progressDecoration', progressDecoration))
       ..add(DiagnosticsProperty('backgroundDecoration', backgroundDecoration))
-      ..add(DoubleProperty('minHeight', minHeight));
+      ..add(DiagnosticsProperty('constraints', constraints));
   }
 
   /// Returns a copy of this [FProgressStyle] with the given properties replaced.
@@ -111,12 +116,12 @@ final class FProgressStyle with Diagnosticable {
   FProgressStyle copyWith({
     BoxDecoration? backgroundDecoration,
     BoxDecoration? progressDecoration,
-    double? minHeight,
+    BoxConstraints? constraints,
   }) =>
       FProgressStyle(
         backgroundDecoration: backgroundDecoration ?? this.backgroundDecoration,
         progressDecoration: progressDecoration ?? this.progressDecoration,
-        minHeight: minHeight ?? this.minHeight,
+        constraints: constraints ?? this.constraints,
       );
 
   @override
@@ -126,8 +131,8 @@ final class FProgressStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           backgroundDecoration == other.backgroundDecoration &&
           progressDecoration == other.progressDecoration &&
-          minHeight == other.minHeight;
+          constraints == other.constraints;
 
   @override
-  int get hashCode => backgroundDecoration.hashCode ^ progressDecoration.hashCode ^ minHeight.hashCode;
+  int get hashCode => backgroundDecoration.hashCode ^ progressDecoration.hashCode ^ constraints.hashCode;
 }

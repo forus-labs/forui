@@ -17,7 +17,10 @@ void main() {
             TestScaffold(
               data: theme,
               child: Center(
-                child: FProgress(value: value),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: FProgress(value: value),
+                ),
               ),
             ),
           );
