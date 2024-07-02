@@ -97,22 +97,6 @@ They should:
 5. implement `operator ==` and `hashCode`.
 
 
-## Expose `String` and `Widget` variants of the same parameter.
-
-Widgets typically contain string-based content such as titles and labels. These widgets should expose a `String` and
-`Widget` variant of the same parameter. For example, a widget that has a title should expose `String? label` and `Widget?
-rawLabel` constructor parameters. The constructor should then assert that only one of these parameters is non-null.
-
-[Example](https://github.com/forus-labs/forui/blob/e61a11a346e8e1d788ba2eb9031b73a18a407402/forui/lib/src/widgets/badge/badge.dart#L20): 
-```dart
-FBadge({
-  String? label,
-  Widget? rawLabel,
-}) :
-    assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.'),
-```
-
-
 ## Conventions
 
 * Avoid [double negatives](https://en.wikipedia.org/wiki/Double_negative) when naming things, i.e. a boolean field should

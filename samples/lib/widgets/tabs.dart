@@ -20,10 +20,10 @@ class TabsPage extends SampleScaffold {
             child: FTabs(
               tabs: [
                 FTabEntry(
-                  label: 'Account',
+                  label: const Text('Account'),
                   content: FCard(
-                    title: 'Account',
-                    subtitle: 'Make changes to your account here. Click save when you are done.',
+                    title: const Text('Account'),
+                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Column(
@@ -40,7 +40,7 @@ class TabsPage extends SampleScaffold {
                           Padding(
                             padding: const EdgeInsets.only(top: 24, bottom: 16),
                             child: FButton(
-                              label: 'Save',
+                              label: const Text('Save'),
                               onPress: () {},
                             ),
                           ),
@@ -50,10 +50,10 @@ class TabsPage extends SampleScaffold {
                   ),
                 ),
                 FTabEntry(
-                  label: 'Password',
+                  label: const Text('Password'),
                   content: FCard(
-                    title: 'Password',
-                    subtitle: 'Change your password here. After saving, you will be logged out.',
+                    title: const Text('Password'),
+                    subtitle: const Text('Change your password here. After saving, you will be logged out.'),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Column(
@@ -64,7 +64,7 @@ class TabsPage extends SampleScaffold {
                           Padding(
                             padding: const EdgeInsets.only(top: 24, bottom: 16),
                             child: FButton(
-                              label: 'Save',
+                              label: const Text('Save'),
                               onPress: () {},
                             ),
                           ),

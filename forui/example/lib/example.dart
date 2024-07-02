@@ -20,9 +20,7 @@ class _ExampleState extends State<Example> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 100,
-          ),
+          const SizedBox(height: 100),
           const FProgress(value: 0.9),
           const SizedBox(height: 10),
         ],

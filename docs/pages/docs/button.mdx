@@ -11,7 +11,7 @@ A button.
   <Tabs.Tab>
     ```dart
     FButton(
-      label: 'Button',
+      label: const Text('Button'),
       onPress: () {},
     );
     ```
@@ -24,7 +24,7 @@ A button.
 
 ```dart
 FButton(
-  label: 'Button',
+  label: const Text('Button'),
   onPress: () {},
 );
 ```
@@ -33,7 +33,7 @@ FButton(
 
 ```dart
 FButton.raw(
-  child: Text('Button'),
+  child: const Text('Button'),
   onPress: () {},
 );
 ```
@@ -48,7 +48,7 @@ FButton.raw(
   <Tabs.Tab>
     ```dart
     FButton(
-      label: 'Button',
+      label: const Text('Button'),
       onPress: () {},
     );
     ```
@@ -63,7 +63,7 @@ FButton.raw(
   <Tabs.Tab>
     ```dart
     FButton(
-      label: 'Button',
+      label: const Text('Button'),
       style: FButtonStyle.secondary,
       onPress: () {},
     );
@@ -79,7 +79,7 @@ FButton.raw(
   <Tabs.Tab>
     ```dart
     FButton(
-      label: 'Button',
+      label: const Text('Button'),
       style: FButtonStyle.outline,
       onPress: () {},
     );
@@ -95,7 +95,7 @@ FButton.raw(
   <Tabs.Tab>
     ```dart
     FButton(
-      label: 'Button',
+      label: const Text('Button'),
       style: FButtonStyle.destructive,
       onPress: () {},
     );
@@ -111,8 +111,8 @@ FButton.raw(
   <Tabs.Tab>
     ```dart
     FButton(
-      prefixIcon: FButtonIcon(icon: FAssets.icons.mail),
-      label: 'Login with Email',
+      prefix: FButtonIcon(icon: FAssets.icons.mail),
+      label: const Text('Login with Email'),
       onPress: () {},
     ),
     ```

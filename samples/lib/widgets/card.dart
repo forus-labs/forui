@@ -16,8 +16,8 @@ class CardPage extends SampleScaffold {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FCard(
-            title: 'Notifications',
-            subtitle: 'You have 3 unread messages.',
+            title: const Text('Notifications'),
+            subtitle: const Text('You have 3 unread messages.'),
           ),
         ],
       );

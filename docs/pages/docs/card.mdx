@@ -11,8 +11,8 @@ A card, typically with a title, subtitle, and child widget.
   <Tabs.Tab>
       ```dart
       FCard(
-          title: 'Notification',
-          subtitle: 'You have 3 unread messages.',
+          title: const Text('Notification'),
+          subtitle: const Text('You have 3 unread messages.'),
       );
       ```
   </Tabs.Tab>
@@ -24,9 +24,9 @@ A card, typically with a title, subtitle, and child widget.
 
 ```dart
 FCard(
-  title: 'Notification',
-  subtitle: 'You have 3 unread messages.',
-  child: FButton(label: 'Read messages', onPress: () {}),
+  title: const Text('Notification'),
+  subtitle: const Text('You have 3 unread messages.'),
+  child: FButton(label: const Text('Read messages'), onPress: () {}),
 );
 ```
 

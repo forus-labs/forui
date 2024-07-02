@@ -20,10 +20,10 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
-                  label: 'Button',
+                  label: const Text('Button'),
                   style: variant,
-                  prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
-                  suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
+                  prefix: FButtonIcon(icon: FAssets.icons.circlePlay),
+                  suffix: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: () {},
                 ),
               ),
@@ -32,7 +32,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name-$variant-enabled-button-content.png'),
+            matchesGoldenFile('button/$name-$variant-enabled-content-button.png'),
           );
         });
 
@@ -43,10 +43,10 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FButton(
-                  label: 'Button',
+                  label: const Text('Button'),
                   style: variant,
-                  prefixIcon: FButtonIcon(icon: FAssets.icons.circlePlay),
-                  suffixIcon: FButtonIcon(icon: FAssets.icons.circleStop),
+                  prefix: FButtonIcon(icon: FAssets.icons.circlePlay),
+                  suffix: FButtonIcon(icon: FAssets.icons.circleStop),
                   onPress: null,
                 ),
               ),
@@ -55,7 +55,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name-$variant-disabled-button-content.png'),
+            matchesGoldenFile('button/$name-$variant-disabled-content-button.png'),
           );
         });
 
@@ -94,7 +94,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name-$variant-enabled-raw-content.png'),
+            matchesGoldenFile('button/$name-$variant-enabled-raw-button.png'),
           );
         });
 
@@ -133,7 +133,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name-$variant-disabled-raw-content.png'),
+            matchesGoldenFile('button/$name-$variant-disabled-raw-button.png'),
           );
         });
       }

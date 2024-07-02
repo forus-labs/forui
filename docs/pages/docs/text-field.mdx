@@ -15,7 +15,7 @@ in a form.
       enabled: enabled,
       label: 'Email',
       hint: 'john@doe.com',
-      footer: Text('Enter your email associated with your Forui account.'),
+      footer: const Text('Enter your email associated with your Forui account.'),
     );
     ```
   </Tabs.Tab>
@@ -28,9 +28,9 @@ in a form.
 ```dart
 FTextField(
   enabled: true,
-  label: Text('Email'),
+  label: const Text('Email'),
   hint: 'john@doe.com',
-  footer: Text('Enter your email associated with your Forui account.'),
+  footer: const Text('Enter your email associated with your Forui account.'),
   keyboardType: TextInputType.emailAddress,
   textCapitalization: TextCapitalization.none,
 );
@@ -41,7 +41,7 @@ FTextField(
 ```dart
 FTextField.email(
   hint: 'john@doe.com',
-  footer: Text('Enter your email associated with your Forui account.'),
+  footer: const Text('Enter your email associated with your Forui account.'),
 );
 ```
 
@@ -49,7 +49,7 @@ FTextField.email(
 
 ```dart
 FTextField.password(
-  footer: Text('Your password must be at least 8 characters long.'),
+  footer: const Text('Your password must be at least 8 characters long.'),
 );
 ```
 
@@ -57,9 +57,9 @@ FTextField.password(
 
 ```dart
 FTextField.multiline(
-  label: Text('Description'),
+  label: const Text('Description'),
   hint: 'Enter a description...',
-  footer: Text('Enter a description of the item.'),
+  footer: const Text('Enter a description of the item.'),
 );
 ```
 
@@ -123,7 +123,7 @@ FTextField.multiline(
   <Tabs.Tab>
     ```dart
     FTextField.multiline(
-      label: Text('Leave a review'),
+      label: const Text('Leave a review'),
       maxLines: 4,
     );
     ```
@@ -172,7 +172,7 @@ FTextField.multiline(
             ),
             const SizedBox(height: 30),
             FButton(
-              rawLabel: const Text('Login'),
+              label: const Text('Login'),
               onPress: () {
                 if (!_formKey.currentState!.validate()) {
                   // Handle errors here.

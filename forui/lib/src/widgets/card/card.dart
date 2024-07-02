@@ -26,32 +26,21 @@ final class FCard extends StatelessWidget {
   /// The card's layout is as follows:
   /// ```
   /// |---------------------------|
-  /// |  [title]/[rawTitle]       |
-  /// |  [subtitle]/[rawSubTitle] |
+  /// |  [title]                  |
+  /// |  [subtitle]               |
   /// |                           |
   /// |  [child]                  |
   /// |---------------------------|
   /// ```
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * [title] and [rawTitle] are both not null.
-  /// * [subtitle] and [rawSubtitle] are both not null.
   FCard({
-    String? title,
-    Widget? rawTitle,
-    String? subtitle,
-    Widget? rawSubtitle,
+    Widget? title,
+    Widget? subtitle,
     Widget? child,
     this.style,
     super.key,
-  })  : assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
-        assert(subtitle == null || rawSubtitle == null, 'Cannot provide both a subtitle and a rawSubtitle.'),
-        child = FCardContent(
+  }) : child = _FCardContent(
           title: title,
-          rawTitle: rawTitle,
           subtitle: subtitle,
-          rawSubtitle: rawSubtitle,
           style: style?.content,
           child: child,
         );
@@ -77,7 +66,7 @@ final class FCardStyle with Diagnosticable {
   /// The decoration.
   final BoxDecoration decoration;
 
-  /// The [FCardContent] style.
+  /// The card content's style.
   final FCardContentStyle content;
 
   /// Creates a [FCardStyle].
