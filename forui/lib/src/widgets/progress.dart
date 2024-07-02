@@ -126,12 +126,13 @@ final class FProgressStyle with Diagnosticable {
   /// print(style.progressDecoration == copy.progressDecoration); // false
   /// ```
   @useResult
-  FProgressStyle copyWith(
-          {BoxDecoration? backgroundDecoration,
-          BoxDecoration? progressDecoration,
-          BoxConstraints? constraints,
-          Duration? animationDuration,
-          Curve? curve}) =>
+  FProgressStyle copyWith({
+    BoxDecoration? backgroundDecoration,
+    BoxDecoration? progressDecoration,
+    BoxConstraints? constraints,
+    Duration? animationDuration,
+    Curve? curve,
+  }) =>
       FProgressStyle(
         backgroundDecoration: backgroundDecoration ?? this.backgroundDecoration,
         progressDecoration: progressDecoration ?? this.progressDecoration,
