@@ -17,7 +17,7 @@
 <p align="center">
   <a href="https://forui.dev/docs">📚 Documentation</a> •
   <a href="https://forui.dev/docs/badge">🖼️ Widgets</a> •
-  <a href="https://github.com/schultek/jaspr/tree/main/examples/">🤓 API Reference</a>
+  <a href="https://pub.dev/documentation/forui">🤓 API Reference</a>
 </p>
 
 <p align="center">
