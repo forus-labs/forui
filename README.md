@@ -14,7 +14,9 @@
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/forus-labs/forui?style=flat&logo=github">
 </p>
 
-**Forui** is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by [shadcn/ui](https://ui.shadcn.com/).
+<p align="center">
+  Forui is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by <a href="https://ui.shadcn.com/">shadcn/ui</a>.
+</p>
 
 <br />
 <div align="center">
