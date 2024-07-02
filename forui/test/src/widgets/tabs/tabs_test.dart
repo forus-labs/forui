@@ -15,7 +15,7 @@ void main() {
             data: FThemes.zinc.light,
             child: FTabs(
               tabs: [
-                FTabEntry(label: 'Account', content: Container(height: 100)),
+                FTabEntry(label: const Text('Account'), content: Container(height: 100)),
               ],
             ),
           ),
@@ -32,7 +32,7 @@ void main() {
             data: FThemes.zinc.light,
             child: FTabs(
               tabs: [
-                FTabEntry(label: 'Account', content: Container(height: 100)),
+                FTabEntry(label: const Text('Account'), content: Container(height: 100)),
               ],
             ),
           ),
@@ -48,7 +48,7 @@ void main() {
           data: FThemes.zinc.light,
           child: FTabs(
             tabs: [
-              FTabEntry(label: 'Account', content: Container(height: 100)),
+              FTabEntry(label: const Text('Account'), content: Container(height: 100)),
             ],
           ),
         ),
@@ -70,7 +70,7 @@ void main() {
             data: FThemes.zinc.light,
             child: FTabs(
               tabs: [
-                FTabEntry(label: 'Account', content: Container(height: 100)),
+                FTabEntry(label: const Text('Account'), content: Container(height: 100)),
               ],
             ),
           ),
@@ -79,29 +79,5 @@ void main() {
 
       expect(tester.takeException(), null);
     });
-
-    for (final (string, raw) in [
-      ('', null),
-      (null, const Text('test')),
-    ]) {
-      testWidgets('constructor does not throw error', (tester) async {
-        expect(
-          () => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()),
-          returnsNormally,
-        );
-      });
-    }
-
-    for (final (string, raw) in [
-      (null, null),
-      ('', const Text('test')),
-    ]) {
-      testWidgets('constructor throws assertion error', (tester) async {
-        expect(
-          () => FTabEntry(label: string, rawLabel: raw, content: const SizedBox()),
-          throwsAssertionError,
-        );
-      });
-    }
   });
 }

@@ -32,8 +32,8 @@ class ScaffoldPage extends SampleScaffold {
                 children: [
                   const SizedBox(height: 5),
                   FCard(
-                    title: 'Account',
-                    subtitle: 'Make changes to your account here. Click save when you are done.',
+                    title: const Text('Account'),
+                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Column(
@@ -50,7 +50,7 @@ class ScaffoldPage extends SampleScaffold {
                           Padding(
                             padding: const EdgeInsets.only(top: 24, bottom: 16),
                             child: FButton(
-                              label: 'Save',
+                              label: const Text('Save'),
                               onPress: () {},
                             ),
                           ),

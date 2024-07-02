@@ -42,12 +42,12 @@ final class FTextField extends StatelessWidget {
   /// See [InputDecoration.hintText] for more information.
   final String? hint;
 
-  /// The raw help text.
+  /// The help text.
   ///
   /// See [InputDecoration.helper] for more information.
   final Widget? help;
 
-  /// The raw error text.
+  /// The error text.
   ///
   /// See [InputDecoration.error] for more information.
   final Widget? error;

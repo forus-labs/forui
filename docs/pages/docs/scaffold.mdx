@@ -23,25 +23,25 @@ Creates a visual scaffold for Forui widgets.
       content: ListView(
         children: [
           FCard(
-            title: 'Account',
-            subtitle: 'Make changes to your account here. Click save when you are done.',
+            title: const Text('Account'),
+            subtitle: const Text('Make changes to your account here. Click save when you are done.'),
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Column(
                 children: [
                   const FTextField(
-                    label: 'Name',
+                    label: Text('Name'),
                     hint: 'John Renalo',
                   ),
                   const SizedBox(height: 10),
                   const FTextField(
-                    label: 'Email',
+                    label: Text('Email'),
                     hint: 'john@doe.com',
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 24, bottom: 16),
                     child: FButton(
-                      label: 'Save',
+                      label: const Text('Save'),
                       onPress: () {},
                     ),
                   ),
@@ -75,9 +75,9 @@ FScaffold(
   content: Column(
     children: [
       FCard(
-        title: 'Notification',
-        subtitle: 'You have 3 unread messages.',
-        child: FButton(label: 'Read messages', onPress: () {}),
+        title: const Text('Notification'),
+        subtitle: const Text('You have 3 unread messages.'),
+        child: FButton(label: const Text('Read messages'), onPress: () {}),
       ),
     ],
   ),

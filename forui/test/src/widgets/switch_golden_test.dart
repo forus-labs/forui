@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  group('FSeparator', () {
+  group('FSwitch', () {
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final (checked, value) in [('checked', true), ('unchecked', false)]) {
         testWidgets('$name - $checked - unfocused', (tester) async {
@@ -27,7 +27,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('switch/$name-$checked-unfocused.png'),
+            matchesGoldenFile('switch/$name-$checked-unfocused-switch.png'),
           );
         });
 
@@ -47,7 +47,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('switch/$name-$checked-focused.png'),
+            matchesGoldenFile('switch/$name-$checked-focused-switch.png'),
           );
         });
 
@@ -67,7 +67,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('switch/$name-$checked-disabled.png'),
+            matchesGoldenFile('switch/$name-$checked-disabled-switch.png'),
           );
         });
       }

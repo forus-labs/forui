@@ -37,7 +37,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('scaffold/$name.png'),
+          matchesGoldenFile('scaffold/$name-scaffold.png'),
         );
       });
     }

@@ -1,81 +1,61 @@
 part of 'dialog.dart';
 
-@internal
-sealed class FDialogContent extends StatelessWidget {
+sealed class _FDialogContent extends StatelessWidget {
   final FDialogContentStyle style;
   final CrossAxisAlignment alignment;
-  final String? title;
+  final Widget? title;
   final TextAlign titleTextAlign;
-  final Widget? rawTitle;
-  final String? body;
+  final Widget? body;
   final TextAlign bodyTextAlign;
-  final Widget? rawBody;
   final List<Widget> actions;
 
-  const FDialogContent({
+  const _FDialogContent({
     required this.style,
     required this.alignment,
     required this.title,
     required this.titleTextAlign,
-    required this.rawTitle,
     required this.body,
     required this.bodyTextAlign,
-    required this.rawBody,
     required this.actions,
-    super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final title = switch ((this.title, rawTitle)) {
-      (final String title, _) => Text(title),
-      (_, final Widget title) => title,
-      _ => null,
-    };
-
-    final body = switch ((this.body, rawBody)) {
-      (final String body, _) => Text(body),
-      (_, final Widget body) => body,
-      _ => null,
-    };
-
-    return IntrinsicWidth(
-      child: Padding(
-        padding: style.padding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: alignment,
-          children: [
-            if (title != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: Semantics(
-                  container: true,
-                  child: DefaultTextStyle.merge(
-                    textAlign: titleTextAlign,
-                    style: style.titleTextStyle,
-                    child: title,
+  Widget build(BuildContext context) => IntrinsicWidth(
+        child: Padding(
+          padding: style.padding,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: alignment,
+            children: [
+              if (title != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Semantics(
+                    container: true,
+                    child: DefaultTextStyle.merge(
+                      textAlign: titleTextAlign,
+                      style: style.titleTextStyle,
+                      child: title!,
+                    ),
                   ),
                 ),
-              ),
-            if (body != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Semantics(
-                  container: true,
-                  child: DefaultTextStyle.merge(
-                    textAlign: bodyTextAlign,
-                    style: style.bodyTextStyle,
-                    child: body,
+              if (body != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Semantics(
+                    container: true,
+                    child: DefaultTextStyle.merge(
+                      textAlign: bodyTextAlign,
+                      style: style.bodyTextStyle,
+                      child: body!,
+                    ),
                   ),
                 ),
-              ),
-            _actions(context),
-          ],
+              _actions(context),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   Widget _actions(BuildContext context);
 
@@ -85,24 +65,18 @@ sealed class FDialogContent extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(StringProperty('title', title))
       ..add(DiagnosticsProperty('titleTextAlign', titleTextAlign))
-      ..add(StringProperty('body', body))
       ..add(DiagnosticsProperty('bodyTextAlign', bodyTextAlign))
       ..add(IterableProperty('actions', actions));
   }
 }
 
-@internal
-class FHorizontalDialogContent extends FDialogContent {
-  const FHorizontalDialogContent({
+class _FHorizontalDialogContent extends _FDialogContent {
+  const _FHorizontalDialogContent({
     required super.style,
     required super.title,
-    required super.rawTitle,
     required super.body,
-    required super.rawBody,
     required super.actions,
-    super.key,
   }) : super(alignment: CrossAxisAlignment.start, titleTextAlign: TextAlign.start, bodyTextAlign: TextAlign.start);
 
   @override
@@ -117,16 +91,12 @@ class FHorizontalDialogContent extends FDialogContent {
       );
 }
 
-@internal
-class FVerticalDialogContent extends FDialogContent {
-  const FVerticalDialogContent({
+class _FVerticalDialogContent extends _FDialogContent {
+  const _FVerticalDialogContent({
     required super.style,
     required super.title,
-    required super.rawTitle,
     required super.body,
-    required super.rawBody,
     required super.actions,
-    super.key,
   }) : super(alignment: CrossAxisAlignment.center, titleTextAlign: TextAlign.center, bodyTextAlign: TextAlign.center);
 
   @override
@@ -139,7 +109,7 @@ class FVerticalDialogContent extends FDialogContent {
       );
 }
 
-/// The dialog content's style.
+/// [FDialog] content's style.
 final class FDialogContentStyle with Diagnosticable {
   /// The title's [TextStyle].
   final TextStyle titleTextStyle;
@@ -212,4 +182,17 @@ final class FDialogContentStyle with Diagnosticable {
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DoubleProperty('actionPadding', actionPadding));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FDialogContentStyle &&
+          runtimeType == other.runtimeType &&
+          titleTextStyle == other.titleTextStyle &&
+          bodyTextStyle == other.bodyTextStyle &&
+          padding == other.padding &&
+          actionPadding == other.actionPadding;
+
+  @override
+  int get hashCode => titleTextStyle.hashCode ^ bodyTextStyle.hashCode ^ padding.hashCode ^ actionPadding.hashCode;
 }

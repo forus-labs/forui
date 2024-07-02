@@ -54,9 +54,9 @@ class FDialog extends StatelessWidget {
   /// The [Axis.vertical] layout with two possibles actions is:
   /// ```
   /// |--------------------|
-  /// | [title]/[rawTitle] |
+  /// | [title]            |
   /// |                    |
-  /// | [body]/[rawBody]   |
+  /// | [body]             |
   /// |                    |
   /// | [first action]     |
   /// | [second action]    |
@@ -66,47 +66,33 @@ class FDialog extends StatelessWidget {
   /// The [Axis.horizontal] layout with two possibles actions is:
   /// ```
   /// |--------------------------------------------|
-  /// | [title]/[rawTitle]                         |
+  /// | [title]                                    |
   /// |                                            |
-  /// | [body]/[rawBody]                           |
+  /// | [body]                                     |
   /// |                                            |
   /// |             [first action] [second action] |
   /// |--------------------------------------------|
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * [title] and [rawTitle] are both not null
-  /// * [body] and [rawBody] are both not null
   FDialog({
     required List<Widget> actions,
     this.style,
     this.insetAnimationDuration = _defaultDuration,
     this.insetAnimationCurve = Curves.decelerate,
-    String? semanticLabel,
-    String? title,
-    Widget? rawTitle,
-    String? body,
-    Widget? rawBody,
+    this.semanticLabel,
+    Widget? title,
+    Widget? body,
     Axis direction = Axis.vertical,
     super.key,
-  })  : assert(title == null || rawTitle == null, 'Cannot provide both a title and a rawTitle.'),
-        assert(body == null || rawBody == null, 'Cannot provide both a body and a rawBody.'),
-        semanticLabel = semanticLabel ?? title,
-        builder = switch (direction) {
-          Axis.horizontal => (context, style) => FHorizontalDialogContent(
+  }) : builder = switch (direction) {
+          Axis.horizontal => (context, style) => _FHorizontalDialogContent(
                 style: style.horizontal,
                 title: title,
-                rawTitle: rawTitle,
                 body: body,
-                rawBody: rawBody,
                 actions: actions,
               ),
-          Axis.vertical => (context, style) => FVerticalDialogContent(
+          Axis.vertical => (context, style) => _FVerticalDialogContent(
                 style: style.vertical,
                 title: title,
-                rawTitle: rawTitle,
                 body: body,
-                rawBody: rawBody,
                 actions: actions,
               ),
         };
@@ -271,4 +257,25 @@ final class FDialogStyle with Diagnosticable {
       ..add(DoubleProperty('minWidth', minWidth, defaultValue: 280))
       ..add(DoubleProperty('maxWidth', maxWidth, defaultValue: 560));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FDialogStyle &&
+          runtimeType == other.runtimeType &&
+          decoration == other.decoration &&
+          insetPadding == other.insetPadding &&
+          horizontal == other.horizontal &&
+          vertical == other.vertical &&
+          minWidth == other.minWidth &&
+          maxWidth == other.maxWidth;
+
+  @override
+  int get hashCode =>
+      decoration.hashCode ^
+      insetPadding.hashCode ^
+      horizontal.hashCode ^
+      vertical.hashCode ^
+      minWidth.hashCode ^
+      maxWidth.hashCode;
 }

@@ -26,7 +26,7 @@ class ButtonTextPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
         child: FButton(
-          label: label,
+          label: Text(label),
           style: variant,
           onPress: () {},
         ),
@@ -45,8 +45,8 @@ class ButtonIconPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
         child: FButton(
-          prefixIcon: FButtonIcon(icon: FAssets.icons.mail),
-          label: 'Login with Email',
+          prefix: FButtonIcon(icon: FAssets.icons.mail),
+          label: const Text('Login with Email'),
           style: variant,
           onPress: () {},
         ),

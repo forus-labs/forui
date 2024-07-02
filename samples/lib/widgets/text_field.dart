@@ -117,7 +117,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 30),
             FButton(
-              rawLabel: const Text('Login'),
+              label: const Text('Login'),
               onPress: () => _formKey.currentState!.validate(),
             ),
           ],

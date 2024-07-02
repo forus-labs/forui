@@ -152,6 +152,18 @@ class FHeaderActionStyle with Diagnosticable {
       ..add(ColorProperty('disabledColor', disabledColor))
       ..add(DoubleProperty('size', size));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FHeaderActionStyle &&
+          runtimeType == other.runtimeType &&
+          enabledColor == other.enabledColor &&
+          disabledColor == other.disabledColor &&
+          size == other.size;
+
+  @override
+  int get hashCode => enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode;
 }
 
 class _InheritedActionStyle extends InheritedWidget {

@@ -15,16 +15,16 @@ A modal dialog interrupts the user with important content and expects a response
       children: [
         IntrinsicWidth(
           child: FButton(
-            label: 'Show Dialog',
+            label: const Text('Show Dialog'),
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
                 direction: Axis.horizontal,
-                title: 'Are you absolutely sure?',
-                body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                title: const Text('Are you absolutely sure?'),
+                body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                 actions: [
-                  FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
-                  FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+                  FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+                  FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
                 ],
               ),
             ),
@@ -43,11 +43,11 @@ A modal dialog interrupts the user with important content and expects a response
 ```dart
 FDialog(
   direction: Axis.horizontal,
-  title: 'Are you absolutely sure?',
-  body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+  title: const Text('Are you absolutely sure?'),
+  body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
   actions: [
-    FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
-    FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+    FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+    FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
   ],
 );
 ```
@@ -74,16 +74,16 @@ FDialog.raw(
       children: [
         IntrinsicWidth(
           child: FButton(
-            label: 'Show Dialog',
+            label: const Text('Show Dialog'),
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
                 direction: Axis.horizontal,
-                title: 'Are you absolutely sure?',
-                body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                title: const Text('Are you absolutely sure?'),
+                body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                 actions: [
-                  FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
-                  FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+                  FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+                  FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
                 ],
               ),
             ),
@@ -108,16 +108,16 @@ FDialog.raw(
         children: [
           IntrinsicWidth(
             child: FButton(
-              label: 'Show Dialog',
+              label: const Text('Show Dialog'),
               onPress: () => showAdaptiveDialog(
                 context: context,
                 builder: (context) => FDialog(
                   direction: Axis.vertical,
-                  title: 'Are you absolutely sure?',
-                  body: 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                  title: const Text('Are you absolutely sure?'),
+                  body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                   actions: [
-                    FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
-                    FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
+                    FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+                    FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
                   ],
                 ),
               ),

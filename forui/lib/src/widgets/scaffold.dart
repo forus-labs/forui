@@ -112,4 +112,18 @@ final class FScaffoldStyle with Diagnosticable {
       ..add(DiagnosticsProperty('headerDecoration', headerDecoration))
       ..add(DiagnosticsProperty('footerDecoration', footerDecoration));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FScaffoldStyle &&
+          runtimeType == other.runtimeType &&
+          backgroundColor == other.backgroundColor &&
+          contentPadding == other.contentPadding &&
+          headerDecoration == other.headerDecoration &&
+          footerDecoration == other.footerDecoration;
+
+  @override
+  int get hashCode =>
+      backgroundColor.hashCode ^ contentPadding.hashCode ^ headerDecoration.hashCode ^ footerDecoration.hashCode;
 }

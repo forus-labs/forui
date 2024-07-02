@@ -24,19 +24,12 @@ class FBadge extends StatelessWidget {
   /// The builder used to build the badge's content.
   final Widget Function(BuildContext, FBadgeCustomStyle) builder;
 
-  /// Creates a [FBadge] that contains a [label] or a [rawLabel].
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * both [label] and [rawLabel] are not null
-  /// * both [label] and [rawLabel] are null
+  /// Creates a [FBadge] that contains a [label].
   FBadge({
-    String? label,
-    Widget? rawLabel,
+    required Widget label,
     this.style = FBadgeStyle.primary,
     super.key,
-  })  : assert((label == null) ^ (rawLabel == null), 'Either "label" or "rawLabel" must be provided, but not both.'),
-        builder = ((context, style) => FBadgeContent(rawLabel: rawLabel, label: label, style: style));
+  }) : builder = ((context, style) => _FBadgeContent(label: label, style: style));
 
   /// Creates a [FBadge] with custom content.
   const FBadge.raw({

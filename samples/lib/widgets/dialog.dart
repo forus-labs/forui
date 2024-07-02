@@ -17,8 +17,8 @@ class DialogPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) {
     final actions = [
-      FButton(style: FButtonStyle.outline, label: 'Cancel', onPress: () => Navigator.of(context).pop()),
-      FButton(label: 'Continue', onPress: () => Navigator.of(context).pop()),
+      FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+      FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
     ];
 
     return Column(
@@ -26,14 +26,15 @@ class DialogPage extends SampleScaffold {
       children: [
         IntrinsicWidth(
           child: FButton(
-            label: 'Show Dialog',
+            label: const Text('Show Dialog'),
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
                 direction: direction,
-                title: 'Are you absolutely sure?',
-                body:
-                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                title: const Text('Are you absolutely sure?'),
+                body: const Text(
+                  'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                ),
                 actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
               ),
             ),

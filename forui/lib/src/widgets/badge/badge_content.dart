@@ -1,16 +1,12 @@
 part of 'badge.dart';
 
-@internal
-final class FBadgeContent extends StatelessWidget {
+final class _FBadgeContent extends StatelessWidget {
   final FBadgeCustomStyle style;
-  final String? label;
-  final Widget? rawLabel;
+  final Widget label;
 
-  const FBadgeContent({
+  const _FBadgeContent({
     required this.style,
-    this.label,
-    this.rawLabel,
-    super.key,
+    required this.label,
   });
 
   @override
@@ -19,11 +15,7 @@ final class FBadgeContent extends StatelessWidget {
           padding: style.content.padding,
           child: DefaultTextStyle.merge(
             style: style.content.labelTextStyle,
-            child: switch ((label, rawLabel)) {
-              (final String label, _) => Text(label),
-              (_, final Widget label) => label,
-              _ => const Placeholder(),
-            },
+            child: label,
           ),
         ),
       );
@@ -31,13 +23,11 @@ final class FBadgeContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('label', label));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
-/// A badge content's style.
+/// [FBadge] content's style.
 final class FBadgeContentStyle with Diagnosticable {
   static const _defaultPadding = EdgeInsets.symmetric(horizontal: 14, vertical: 2);
 

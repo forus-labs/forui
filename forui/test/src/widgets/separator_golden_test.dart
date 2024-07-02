@@ -50,7 +50,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('separator/$name-$orientation.png'),
+            matchesGoldenFile('separator/$name-$orientation-separator.png'),
           );
         });
       }

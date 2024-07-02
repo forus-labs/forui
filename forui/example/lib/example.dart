@@ -25,10 +25,10 @@ class _ExampleState extends State<Example> {
             child: FTabs(
               tabs: [
                 FTabEntry(
-                  label: 'Account',
+                  label: const Text('Account'),
                   content: FCard(
-                    title: 'Account',
-                    subtitle: 'Make changes to your account here. Click save when you are done.',
+                    title: const Text('Account'),
+                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
                     child: Column(
                       children: [
                         Container(
@@ -40,10 +40,10 @@ class _ExampleState extends State<Example> {
                   ),
                 ),
                 FTabEntry(
-                  label: 'Password',
+                  label: const Text('Password'),
                   content: FCard(
-                    title: 'Password',
-                    subtitle: 'Change your password here. After saving, you will be logged out.',
+                    title: const Text('Password'),
+                    subtitle: const Text('Change your password here. After saving, you will be logged out.'),
                     child: Column(
                       children: [
                         Container(

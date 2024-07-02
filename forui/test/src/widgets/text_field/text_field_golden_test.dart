@@ -43,7 +43,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/default-$theme-$focused-$text.png'),
+              matchesGoldenFile('text_field/default-$theme-$focused-$text-text-field.png'),
             );
           });
 
@@ -71,7 +71,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/error-$theme-$focused-$text.png'),
+              matchesGoldenFile('text_field/error-$theme-$focused-$text-text-field.png'),
             );
           });
 
@@ -97,7 +97,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/email-$theme-$focused-$text.png'),
+              matchesGoldenFile('text_field/email-$theme-$focused-$text-text-field.png'),
             );
           });
 
@@ -123,7 +123,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/password-$theme-$focused-$text.png'),
+              matchesGoldenFile('text_field/password-$theme-$focused-$text-text-field.png'),
             );
           });
         }
@@ -152,7 +152,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/multiline-$theme-$focused-$text.png'),
+              matchesGoldenFile('text_field/multiline-$theme-$focused-$text-text-field.png'),
             );
           });
         }
