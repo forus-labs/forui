@@ -20,45 +20,11 @@ class _ExampleState extends State<Example> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(color: Colors.red,height: 100,),
-          Container(color:Colors.blue,height:100, width: 100, child: FProgress.circular()),
-          const SizedBox(height: 10),
-          Expanded(
-            child: FTabs(
-              tabs: [
-                FTabEntry(
-                  label: 'Account',
-                  content: FCard(
-                    title: 'Account',
-                    subtitle: 'Make changes to your account here. Click save when you are done.',
-                    child: Column(
-                      children: [
-                        Container(
-                          color: Colors.red,
-                          height: 100,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                FTabEntry(
-                  label: 'Password',
-                  content: FCard(
-                    title: 'Password',
-                    subtitle: 'Change your password here. After saving, you will be logged out.',
-                    child: Column(
-                      children: [
-                        Container(
-                          color: Colors.blue,
-                          height: 100,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          Container(
+            height: 100,
           ),
+          const FProgress(value: 0.9),
+          const SizedBox(height: 10),
         ],
       );
 }
