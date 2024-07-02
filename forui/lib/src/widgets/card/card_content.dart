@@ -38,10 +38,8 @@ final class _FCardContent extends StatelessWidget {
                 child: subtitle!,
               ),
             ),
-          if (title != null && subtitle != null)
-            const SizedBox(height: 8),
-          if (child != null)
-            child!,
+          if (title != null && subtitle != null) const SizedBox(height: 8),
+          if (child != null) child!,
         ],
       ),
     );

@@ -51,8 +51,7 @@ sealed class _FDialogContent extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (title != null && body != null)
-                const SizedBox(height: 8),
+              if (title != null && body != null) const SizedBox(height: 8),
               _actions(context),
             ],
           ),
