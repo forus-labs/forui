@@ -6,6 +6,10 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// A widget that shows progress on a line.
+///
+/// See:
+/// * https://forui.dev/docs/progress for working examples.
+/// * [FProgressStyle] for customizing a separator's appearance.
 class FProgress extends StatelessWidget {
   /// If non-null, the value of this progress indicator.
   ///
