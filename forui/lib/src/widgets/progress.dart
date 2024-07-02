@@ -119,7 +119,7 @@ final class FProgressStyle with Diagnosticable {
       ..add(DiagnosticsProperty('backgroundDecoration', backgroundDecoration))
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('animationDuration', animationDuration))
-      ..add(DiagnosticsProperty<Curve>('curve', curve));
+      ..add(DiagnosticsProperty('curve', curve));
   }
 
   /// Returns a copy of this [FProgressStyle] with the given properties replaced.
