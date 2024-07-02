@@ -2,7 +2,6 @@ import 'package:flutter/material.dart' hide DialogRoute;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:forui/forui.dart';
 
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample_scaffold.dart';
@@ -29,90 +28,8 @@ class ForuiSamples extends StatelessWidget {
 @RoutePage()
 class EmptyPage extends SampleScaffold {
   @override
-  Widget child(BuildContext context) {
-    final notifier = ValueNotifier(true);
-    return Row(
-      children: [
-        ValueListenableBuilder(
-          valueListenable: notifier,
-          builder: (context, value, __) => FCheckBox(
-            value: value,
-            // onChanged: (value) => notifier.value = value,
-          ),
-        ),
-        SizedBox(width: 10),
-        Text('I accept the terms and conditions'),
-      ],
-    );
-  }
+  Widget child(BuildContext context) => const Placeholder();
 }
-
-
-class FCheckBox extends StatefulWidget {
-  final String? semanticLabel;
-  final bool value;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
-
-  const FCheckBox({
-    required this.value,
-    this.semanticLabel,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    super.key,
-  });
-
-  @override
-  State<FCheckBox> createState() => _FCheckBoxState();
-}
-
-class _FCheckBoxState extends State<FCheckBox> {
-  @override
-  Widget build(BuildContext context) {
-    final FThemeData(:style, :colorScheme) = context.theme;
-
-    return Semantics(
-      label: widget.semanticLabel,
-      checked: widget.value,
-      child: SizedBox.square(
-        dimension: 18,
-        child: FocusableActionDetector(
-          autofocus: widget.autofocus,
-          focusNode: widget.focusNode,
-          onFocusChange: widget.onFocusChange,
-          child: MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(
-                  color: colorScheme.foreground,
-                  width: 0.6,
-                ),
-                color: widget.value ? colorScheme.foreground : colorScheme.background,
-              ),
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 100),
-                child: widget.value ?
-                  FAssets.icons.check(
-                    height: 14,
-                    width: 14,
-                    colorFilter:  ColorFilter.mode(
-                      colorScheme.background,
-                      BlendMode.srcIn,
-                    ),
-                  ) : null,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 
 @AutoRouterConfig()
 class _AppRouter extends $_AppRouter {
@@ -137,6 +54,10 @@ class _AppRouter extends $_AppRouter {
         AutoRoute(
           path: '/card/default',
           page: CardRoute.page,
+        ),
+        AutoRoute(
+          path: '/check-box/default',
+          page: CheckBoxRoute.page,
         ),
         AutoRoute(
           path: '/dialog/default',

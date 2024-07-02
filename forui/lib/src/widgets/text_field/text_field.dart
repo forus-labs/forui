@@ -61,7 +61,7 @@ final class FTextField extends StatelessWidget {
   /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
 
-  /// Defines the keyboard focus for this
+  /// Defines the keyboard focus for this [FTextField].
   ///
   /// See [TextField.focusNode] for more information.
   final FocusNode? focusNode;

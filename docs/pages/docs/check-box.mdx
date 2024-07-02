@@ -1,0 +1,45 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Check box
+A control that allows the user to toggle between checked and not checked. It can also be used in a form.
+
+On touch devices, it is recommended to use a [switch](/docs/switch) instead in most cases.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='check-box' query={{enabled: "true"}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FCheckBox();
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FCheckBox(...)`
+
+```dart
+FCheckBox(
+  enabled: true,
+  initialValue: true,
+);
+```
+
+## Examples
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='check-box' query={{enabled: "false"}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FCheckBox();
+        ```
+    </Tabs.Tab>
+</Tabs>
+
