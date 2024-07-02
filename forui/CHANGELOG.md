@@ -11,6 +11,7 @@
 * Fix missing `key` parameter in `FTextField` constructors.
 * **Breaking** `FButton.prefixIcon` and `FButton.suffixIcon` have been renamed to `FButton.prefix` and `FButton.suffix`.
 * Split exports in `forui.dart` into sub-libraries.
+* Fix padding inconsistencies in `FCard` and `FDialog`.
 
 ## 0.1.0
 
