@@ -15,6 +15,12 @@
 </p>
 
 <p align="center">
+  <a href="https://forui.dev/docs">📚 Documentation</a> •
+  <a href="https://forui.dev/docs/badge">🖼️ Widgets</a> •
+  <a href="https://github.com/schultek/jaspr/tree/main/examples/">🤓 API Reference</a>
+</p>
+
+<p align="center">
   Forui is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by <a href="https://ui.shadcn.com/">shadcn/ui</a>.
 </p>
 
