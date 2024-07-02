@@ -7,10 +7,12 @@
   </h1>
 </a>
 
-[![Forui Build](https://github.com/forus-labs/forui/actions/workflows/forui_build.yaml/badge.svg)](https://github.com/forus-labs/forui/actions/workflows/forui_build.yaml)
-![Pub Version](https://img.shields.io/pub/v/forui)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/forus-labs/forui)
-![GitHub Repo stars](https://img.shields.io/github/stars/forus-labs/forui)
+<p align="center">
+  <img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/forus-labs/forui/forui_build.yaml?branch=main&style=flat&logo=github&label=main">
+  <img alt="Pub Version" src="https://img.shields.io/pub/v/forui?style=flat&logo=dart&label=pub.dev&color=00589B">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/forus-labs/forui?style=flat&logo=github&color=8957e5&link=https%3A%2F%2Fgithub.com%2Fforus-labs%2Fforui">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/forus-labs/forui?style=flat&logo=github">
+</p>
 
 **Forui** is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by [shadcn/ui](https://ui.shadcn.com/).
 
