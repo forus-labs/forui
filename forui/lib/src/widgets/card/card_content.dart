@@ -46,14 +46,11 @@ final class _FCardContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('subtitle', subtitle))
-      ..add(DiagnosticsProperty('style', style));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
-/// A card content's style.
+/// [FCard] content's style.
 final class FCardContentStyle with Diagnosticable {
   /// The title's [TextStyle].
   final TextStyle titleTextStyle;

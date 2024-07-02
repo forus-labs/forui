@@ -35,15 +35,9 @@ final class _FButtonContent extends StatelessWidget {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('label', label));
-  }
 }
 
-/// [_FButtonContent]'s style.
+/// [FButton] content's style.
 class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is enabled.
   final TextStyle enabledTextStyle;

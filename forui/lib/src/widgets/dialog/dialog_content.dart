@@ -65,9 +65,7 @@ sealed class _FDialogContent extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('titleTextAlign', titleTextAlign))
-      ..add(DiagnosticsProperty('body', body))
       ..add(DiagnosticsProperty('bodyTextAlign', bodyTextAlign))
       ..add(IterableProperty('actions', actions));
   }
@@ -111,7 +109,7 @@ class _FVerticalDialogContent extends _FDialogContent {
       );
 }
 
-/// The dialog content's style.
+/// [FDialog] content's style.
 final class FDialogContentStyle with Diagnosticable {
   /// The title's [TextStyle].
   final TextStyle titleTextStyle;

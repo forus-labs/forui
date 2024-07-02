@@ -23,13 +23,11 @@ final class _FBadgeContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('label', label));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
-/// A badge content's style.
+/// [FBadge] content's style.
 final class FBadgeContentStyle with Diagnosticable {
   static const _defaultPadding = EdgeInsets.symmetric(horizontal: 14, vertical: 2);
 

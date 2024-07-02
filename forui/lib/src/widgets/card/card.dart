@@ -66,7 +66,7 @@ final class FCardStyle with Diagnosticable {
   /// The decoration.
   final BoxDecoration decoration;
 
-  /// The [_FCardContent] style.
+  /// The card content's style.
   final FCardContentStyle content;
 
   /// Creates a [FCardStyle].

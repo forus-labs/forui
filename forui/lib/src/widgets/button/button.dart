@@ -76,9 +76,9 @@ class FButton extends StatelessWidget {
   ///
   /// The button layout is as follows, assuming the locale is read from left to right:
   /// ```
-  /// |---------------------------------------------------|
-  /// | [prefixIcon]   [label]   [suffixIcon]  |
-  /// |---------------------------------------------------|
+  /// |---------------------------------------------|
+  /// | [prefixIcon]   [label]   [suffixIcon]       |
+  /// |---------------------------------------------|
   /// ```
   ///
   /// [FButtonIcon] provides a convenient way to transform a bundled SVG icon into a [prefix] and [suffix].
