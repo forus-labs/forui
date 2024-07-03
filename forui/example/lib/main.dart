@@ -15,7 +15,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        home: FTheme(
+        builder: (context, child) => FTheme(
           data: FThemes.zinc.light,
           child: FScaffold(
             header: FHeader(
@@ -27,8 +27,9 @@ class Application extends StatelessWidget {
                 ),
               ],
             ),
-            content: const Example(),
+            content: child ?? const SizedBox(),
           ),
         ),
+        home: const Example(),
       );
 }

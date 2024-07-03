@@ -16,6 +16,14 @@ abstract class SampleScaffold extends StatelessWidget {
     super.key,
   }) : theme = themes[theme]!;
 
+  // In most cases, we should create FTheme inside MaterialApp.builder(...) instead. Otherwise FDialog will not inherit
+  // from FTheme since it is in a different route.
+  //
+  // We do not does that in this project since the theme is determined by a query parameter upon navigating to each page.
+  // This requires us to immediately set the state of the page's parent widget that stores the theme data. Doing so
+  // is extremely hacky and prone to infinite build cycles.
+  //
+  // That said, I'm open to suggestions on how to fix this issue.
   @override
   Widget build(BuildContext context) => FTheme(
         data: theme,
@@ -23,7 +31,9 @@ abstract class SampleScaffold extends StatelessWidget {
           content: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 400),
-              child: child(context),
+              child: Builder(
+                builder: child,
+              ),
             ),
           ),
         ),

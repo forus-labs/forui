@@ -73,9 +73,10 @@ This is especially useful when you need to use a Material/Cupertino widget that 
 @override
 Widget build(BuildContext context) => MaterialApp(
   // Other configurations...
-  home: FTheme(
+  builder: (context, child) => FTheme(
     data: FThemes.zinc.light,
-    child: const FScaffold(...),
+    child: c
   ),
+  home: const FScaffold(...)
 );
 ```

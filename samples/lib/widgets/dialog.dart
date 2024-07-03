@@ -21,6 +21,7 @@ class DialogPage extends SampleScaffold {
       FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
     ];
 
+    final style = context.theme.dialogStyle;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -30,6 +31,7 @@ class DialogPage extends SampleScaffold {
             onPress: () => showAdaptiveDialog(
               context: context,
               builder: (context) => FDialog(
+                style: style,
                 direction: direction,
                 title: const Text('Are you absolutely sure?'),
                 body: const Text(
