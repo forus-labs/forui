@@ -1,3 +1,13 @@
+## 0.2.0+3
+
+### Fixes
+* Fix broken images in README.md (yet again).
+
+## 0.2.0+2
+
+### Fixes
+* Fix broken images in README.md.
+
 ## 0.2.0+1
 
 ### Fixes
