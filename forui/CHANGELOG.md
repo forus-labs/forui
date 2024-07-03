@@ -1,7 +1,7 @@
 ## 0.2.0+1
 
 ### Fixes
-* 
+* Fix broken images in README.md.
 
 ## 0.2.0
 

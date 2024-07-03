@@ -1,8 +1,8 @@
 <a href="https://forui.dev">
   <h1 align="center">
     <picture>
-      <source width="400" media="(prefers-color-scheme: dark)" srcset="../docs/public/dark_logo.png">
-      <img width="400" alt="Forui" src="../docs/public/light_logo.png">
+      <source width="400" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/forus-labs/forui/main/docs/public/dark_logo.png">
+      <img width="400" alt="Forui" src="https://raw.githubusercontent.com/forus-labs/forui/main/docs/public/light_logo.png">
     </picture>
   </h1>
 </a>
@@ -26,7 +26,7 @@
 
 <br />
 <div align="center">
- <img width="800" alt="Forui" src="../docs/public/banner-020724.png">
+ <img width="800" alt="Forui" src="https://raw.githubusercontent.com/forus-labs/forui/main/docs/public/banner-020724.png">
 </div>
 
 ## Documentation
