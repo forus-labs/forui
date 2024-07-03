@@ -134,11 +134,12 @@ class FSwitch extends StatelessWidget {
           toggled: value,
           child: CupertinoSwitch(
             value: value,
-            onChanged: enabled ?
-              (value) {
-                state.didChange(value);
-                onChange?.call(!value);
-              } : null,
+            onChanged: enabled
+                ? (value) {
+                    state.didChange(value);
+                    onChange?.call(!value);
+                  }
+                : null,
             activeColor: style.checkedColor,
             trackColor: style.uncheckedColor,
             thumbColor: style.thumbColor,
