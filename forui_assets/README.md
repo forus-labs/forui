@@ -7,7 +7,7 @@ It includes icons from [Lucide Icons](https://lucide.dev/icons/).
 
 ## Documentation
 
-Visit [forui.dev](https://forui.dev) to view the documentation.
+Visit [forui.dev/docs](https://forui.dev/docs) to view the documentation.
 
 ## Contributing
 
