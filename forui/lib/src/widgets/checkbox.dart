@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,18 +6,18 @@ import 'package:forui/forui.dart';
 
 /// A checkbox control that allows the user to toggle between checked and not checked.
 ///
-/// On touch devices, it is recommended to use a [FSwitch] instead in most cases. A [FCheckbox] is internally a
-/// [FormField], therefore it can be used in a form.
+/// A [FCheckbox] is internally a [FormField], therefore it can be used in a form.
+///
+/// On touch devices, it is recommended to use a [FSwitch] instead of a [FCheckbox] in most cases.
 ///
 /// See:
 /// * https://forui.dev/docs/checkbox for working examples.
 /// * [FCheckboxStyle] for customizing a checkbox's appearance.
 class FCheckbox extends StatelessWidget {
-  /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the dialog
-  /// is opened and closed.
-  ///
-  /// See also:
-  ///  * [SemanticsConfiguration.namesRoute], for a description of how this value is used.
+  /// The style. Defaults to [FThemeData.checkboxStyle].
+  final FCheckboxStyle? style;
+
+  /// The semantic label of the checkbox used by accessibility frameworks.
   final String? semanticLabel;
 
   /// Called when the user initiates a change to the FCheckBox's value: when they have checked or unchecked this box.
@@ -44,27 +43,27 @@ class FCheckbox extends StatelessWidget {
   /// The returned value is exposed by the [FormFieldState.errorText] property.
   final FormFieldValidator<bool>? validator;
 
-  /// An optional value to initialize the form field to, or null otherwise.
+  /// An optional value to initialize the checkbox. Defaults to false.
   final bool initialValue;
 
   /// Whether the form is able to receive user input.
   ///
-  /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the field will be auto validated.
+  /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the checkbox will be auto validated.
   /// Likewise, if this field is false, the widget will not be validated regardless of [autovalidateMode].
   final bool enabled;
 
-  /// Used to enable/disable this form field auto validation and update its error text.
+  /// Used to enable/disable this checkbox auto validation and update its error text.
   ///
   /// Defaults to [AutovalidateMode.disabled].
   ///
-  /// If [AutovalidateMode.onUserInteraction], this FormField will only auto-validate after its content changes. If
+  /// If [AutovalidateMode.onUserInteraction], this checkbox will only auto-validate after its content changes. If
   /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
   /// auto-validation will be disabled.
   final AutovalidateMode? autovalidateMode;
 
-  /// Restoration ID to save and restore the state of the form field.
+  /// Restoration ID to save and restore the state of the checkbox.
   ///
-  /// Setting the restoration ID to a non-null value results in whether or not the form field validation persists.
+  /// Setting the restoration ID to a non-null value results in whether or not the checkbox validation persists.
   ///
   /// The state of this widget is persisted in a [RestorationBucket] claimed from the surrounding [RestorationScope]
   /// using the provided restoration ID.
@@ -75,6 +74,7 @@ class FCheckbox extends StatelessWidget {
 
   /// Creates a [FCheckbox].
   const FCheckbox({
+    this.style,
     this.semanticLabel,
     this.onChange,
     this.autofocus = false,
@@ -91,7 +91,7 @@ class FCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = context.theme.checkBoxStyle;
+    final style = this.style ?? context.theme.checkboxStyle;
     final stateStyle = enabled ? style.enabledStyle : style.disabledStyle;
 
     return FocusableActionDetector(
@@ -160,6 +160,7 @@ class FCheckbox extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(DiagnosticsProperty('autofocus', autofocus))

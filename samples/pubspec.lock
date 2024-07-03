@@ -267,14 +267,14 @@ packages:
       path: "../forui"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.2.0+3"
   forui_assets:
     dependency: "direct overridden"
     description:
       path: "../forui_assets"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.2.0"
   frontend_server_client:
     dependency: transitive
     description:

@@ -6,19 +6,11 @@ A switch that allows the user to toggle between checked and unchecked.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='switch' query={{}}/>
+    <Widget name='switch' query={{enabled: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
-    final notifier = ValueNotifier(false);
-
-    ValueListenableBuilder(
-      valueListenable: notifier,
-      builder: (context, value, __) => FSwitch(
-        value: value,
-        onChanged: (value) => notifier.value = value,
-      ),
-    );
+    FSwitch();
     ```
   </Tabs.Tab>
 </Tabs>
@@ -29,8 +21,92 @@ A switch that allows the user to toggle between checked and unchecked.
 
 ```dart
 FSwitch(
-  value: true,
+  enabled: true,
+  initialValue: true,
   autofocus: true,
   onChanged: (value) {},
 );
 ```
+
+## Examples
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='switch' query={{enabled: 'false'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FSwitch(
+      enabled: false,
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='switch' variant='form' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    class LoginForm extends StatefulWidget {
+      const LoginForm({super.key});
+
+      @override
+      State<LoginForm> createState() => _LoginFormState();
+    }
+
+    class _LoginFormState extends State<LoginForm> {
+      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+      @override
+      void initState() {
+        super.initState();
+      }
+
+      @override
+      Widget build(BuildContext context) => Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FTextField.email(
+              hint: 'janedoe@foruslabs.com',
+              help: const Text(''),
+              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+            ),
+            const SizedBox(height: 4),
+            FTextField.password(
+              hint: '',
+              help: const Text(''),
+              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+            ),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                const FSwitch(),
+                const SizedBox(width: 7),
+                Text('Remember password?', style: context.theme.typography.sm),
+              ],
+            ),
+            const SizedBox(height: 30),
+            FButton(
+              label: const Text('Login'),
+              onPress: () => {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+              },
+            ),
+          ],
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

@@ -1,3 +1,13 @@
+## Next
+
+### Enhancements
+* **Breaking** Change `FSwitch` to be usable in `Form`s.
+* **Breaking** Rename `FThemeData.checkBoxStyle` to `FThemeData.checkboxStyle` for consistency.
+
+### Fixes
+* Fix missing `style` parameter for `FCheckbox`.
+
+
 ## 0.2.0+3
 
 ### Fixes
