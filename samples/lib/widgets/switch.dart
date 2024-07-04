@@ -17,9 +17,7 @@ class SwitchPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => Padding(
       padding: const EdgeInsets.all(16),
-      child: FSwitch(
-        enabled: enabled,
-      ),
+      child: FSwitch(enabled: enabled),
     );
 }
 
