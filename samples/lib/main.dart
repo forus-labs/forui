@@ -6,6 +6,7 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample_scaffold.dart';
+import 'package:sugar/sugar.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -29,8 +30,54 @@ class ForuiSamples extends StatelessWidget {
 @RoutePage()
 class EmptyPage extends SampleScaffold {
   @override
-  Widget child(BuildContext context) => Day(
-    date: DateTime.now(),
+  Widget child(BuildContext context) => const Testing();
+}
+
+class Testing extends StatelessWidget {
+  const Testing({super.key});
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      SizedBox(
+            height: 36,
+            width: 36,
+            child: EnabledDay(
+              style: FDayStateStyle(
+                decoration: const BoxDecoration(),
+                textStyle: context.theme.typography.sm.copyWith(
+                  color: context.theme.colorScheme.mutedForeground.withOpacity(0.5),
+                ),
+                focusedTextStyle: context.theme.typography.sm.copyWith(
+                  color: context.theme.colorScheme.mutedForeground,
+                ),
+              ),
+              date: DateTime(2024, 3, 31),
+              onPress: print,
+              today: true,
+              selected: true,
+            ),
+          ),
+      SizedBox(
+        height: 36,
+        width: 36,
+        child: EnabledDay(
+          style: FDayStateStyle(
+            decoration: const BoxDecoration(),
+            textStyle: context.theme.typography.sm.copyWith(
+              color: context.theme.colorScheme.mutedForeground.withOpacity(0.5),
+            ),
+            // focusedTextStyle: context.theme.typography.sm.copyWith(
+            //   color: context.theme.colorScheme.mutedForeground,
+            // ),
+          ),
+          date: DateTime(2024, 4),
+          onPress: print,
+          today: true,
+          selected: true,
+        ),
+      ),
+    ],
   );
 }
 

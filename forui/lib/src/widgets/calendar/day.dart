@@ -11,21 +11,9 @@ part of 'calendar.dart';
 // previous month, selected
 // previous month, disabled
 
-// class DayStyle {
-//   final DayStateStyle unselected;
-//   final DayStateStyle today;
-//   final DayStateStyle selected;
-//
-//   DayStyle({
-//     required this.unselected,
-//     required this.today,
-//     required this.selected,
-//   });
-// }
-
 @internal
 class EnabledDay extends StatefulWidget {
-  final FDayStyle style;
+  final FDayStateStyle style;
   final DateTime date;
   final ValueChanged<DateTime> onPress;
   final bool today;
@@ -68,12 +56,15 @@ class _EnabledDayState extends State<EnabledDay> {
           button: true,
           selected: widget.selected,
           excludeSemantics: true,
-          child: DecoratedBox(
-            decoration: focused ? widget.style.focusedDecoration : widget.style.decoration,
-            child: Center(
-              child: Text(
-                '${widget.date.day}', // TODO: localization
-                style: focused ? widget.style.focusedTextStyle : widget.style.textStyle,
+          child: GestureDetector(
+            onTap: () => widget.onPress(widget.date),
+            child: DecoratedBox(
+              decoration: focused ? widget.style.focusedDecoration : widget.style.decoration,
+              child: Center(
+                child: Text(
+                  '${widget.date.day}', // TODO: localization
+                  style: focused ? widget.style.focusedTextStyle : widget.style.textStyle,
+                ),
               ),
             ),
           ),
@@ -89,7 +80,7 @@ class _EnabledDayState extends State<EnabledDay> {
 
 @internal
 class DisabledDay extends StatelessWidget {
-  final FDayStyle style;
+  final FDayStateStyle style;
   final DateTime date;
 
   const DisabledDay({
@@ -117,34 +108,120 @@ class DisabledDay extends StatelessWidget {
   }
 }
 
+final class FMonthStyle {
+  final ({FDayStyle enabled, FDayStyle disabled}) current;
+  final ({FDayStyle enabled, FDayStyle disabled}) enclosing;
 
+  FMonthStyle({
+    required this.current,
+    required this.enclosing,
+  });
 
-/// A calendar day's style.
+  // factory FMonthStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
+  //   final currentEnabledTextStyle = typography.sm.copyWith(color: colorScheme.foreground);
+  //   final currentDisabledTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground);
+  //   return FMonthStyle(
+  //     current: (
+  //       enabled: FDayStyle(
+  //         todayStyle: FDayStateStyle(
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(4),
+  //             color: colorScheme.secondary,
+  //           ),
+  //           textStyle: currentEnabledTextStyle,
+  //         ),
+  //         unselectedStyle: FDayStateStyle(
+  //           decoration: const BoxDecoration(),
+  //           textStyle: currentEnabledTextStyle,
+  //           focusedDecoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(4),
+  //             color: colorScheme.secondary,
+  //           ),
+  //         ),
+  //         selectedStyle: FDayStateStyle(
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(4),
+  //             color: colorScheme.foreground,
+  //           ),
+  //           textStyle: typography.sm.copyWith(color: colorScheme.background),
+  //         ),
+  //       ),
+  //       disabled: FDayStyle(
+  //         todayStyle: FDayStateStyle(
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(4),
+  //             color: colorScheme.primaryForeground,
+  //           ),
+  //           textStyle: currentDisabledTextStyle,
+  //           focusedTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+  //         ),
+  //         unselectedStyle: FDayStateStyle(
+  //           decoration: const BoxDecoration(),
+  //           textStyle: currentDisabledTextStyle,
+  //         ),
+  //         selectedStyle: FDayStateStyle(
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(4),
+  //             color: colorScheme.primaryForeground,
+  //           ),
+  //           textStyle: currentDisabledTextStyle,
+  //           focusedTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+  //         ),
+  //       ),
+  //     ),
+  //     enclosing: (
+  //       enabled:
+  //     ),
+  //   );
+  // }
+}
+
+/// A calender day's style.
 class FDayStyle {
+  /// The current date's style.
+  final FDayStateStyle todayStyle;
+
+  /// The unselected dates' style.
+  final FDayStateStyle unselectedStyle;
+
+  /// The selected dates' style.
+  final FDayStateStyle selectedStyle;
+
+  /// Creates a [FDayStyle].
+  FDayStyle({
+    required this.todayStyle,
+    required this.unselectedStyle,
+    required this.selectedStyle,
+  });
+}
+
+/// A calendar day state's style.
+final class FDayStateStyle {
   /// The unfocused day's decoration.
   final BoxDecoration decoration;
 
   /// The unfocused day's text style.
   final TextStyle textStyle;
 
-  /// The focused day's decoration.
+  /// The focused day's decoration. Defaults to [decoration].
   final BoxDecoration focusedDecoration;
 
-  /// The focused day's text style.
+  /// The focused day's text style. Defaults to [textStyle].
   final TextStyle focusedTextStyle;
 
-  /// Creates a [FDayStyle].
-  const FDayStyle({
+  /// Creates a [FDayStateStyle].
+  FDayStateStyle({
     required this.decoration,
     required this.textStyle,
-    required this.focusedDecoration,
-    required this.focusedTextStyle,
-  });
+    BoxDecoration? focusedDecoration,
+    TextStyle? focusedTextStyle,
+  })  : focusedDecoration = focusedDecoration ?? decoration,
+        focusedTextStyle = focusedTextStyle ?? textStyle;
 
-  /// Creates a copy of this [FDayStyle] but with the given fields replaced with the new values.
+  /// Creates a copy of this [FDayStateStyle] but with the given fields replaced with the new values.
   ///
   /// ```dart
-  /// final style = FDayStyle(
+  /// final style = FDayStateStyle(
   ///   decoration: ...,
   ///   textStyle: ...,
   /// );
@@ -156,13 +233,13 @@ class FDayStyle {
   /// print(style.decoration == copy.decoration); // true
   /// print(style.textStyle == copy.textStyle); // false
   /// ```
-  FDayStyle copyWith({
+  FDayStateStyle copyWith({
     BoxDecoration? decoration,
     TextStyle? textStyle,
     BoxDecoration? focusedDecoration,
     TextStyle? focusedTextStyle,
   }) =>
-      FDayStyle(
+      FDayStateStyle(
         decoration: decoration ?? this.decoration,
         textStyle: textStyle ?? this.textStyle,
         focusedDecoration: focusedDecoration ?? this.focusedDecoration,
@@ -172,7 +249,7 @@ class FDayStyle {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FDayStyle &&
+      other is FDayStateStyle &&
           runtimeType == other.runtimeType &&
           decoration == other.decoration &&
           textStyle == other.textStyle &&
