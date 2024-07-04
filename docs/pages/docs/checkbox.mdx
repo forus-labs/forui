@@ -8,7 +8,7 @@ On touch devices, it is recommended to use a [switch](/docs/switch) instead in m
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='checkbox' query={{enabled: "true"}}/>
+        <Widget name='checkbox' query={{enabled: 'true'}}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
@@ -25,6 +25,8 @@ On touch devices, it is recommended to use a [switch](/docs/switch) instead in m
 FCheckbox(
   enabled: true,
   initialValue: true,
+  autofocus: true,
+  onChanged: (value) {},
 );
 ```
 
@@ -33,25 +35,25 @@ FCheckbox(
 ### Disabled
 
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='checkbox' query={{enabled: "false"}}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart
-        FCheckbox(
-          enabled: false,
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name='checkbox' query={{enabled: 'false'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FCheckbox(
+      enabled: false,
+    );
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Form
 
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='checkbox' variant='form' query={{enabled: "true"}}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name='checkbox' variant='form' query={{}} height={550}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
     ```dart
     class LoginForm extends StatefulWidget {
       const LoginForm({super.key});
@@ -96,12 +98,17 @@ FCheckbox(
             const SizedBox(height: 30),
             FButton(
               label: const Text('Login'),
-              onPress: () => _formKey.currentState!.validate(),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+              },
             ),
           ],
         ),
       );
     }
     ```
-    </Tabs.Tab>
+  </Tabs.Tab>
 </Tabs>

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/services.dart';
 
 import 'package:meta/meta.dart';
 
@@ -8,7 +9,8 @@ import 'package:forui/forui.dart';
 
 /// A control that allows the user to toggle between checked and unchecked.
 ///
-/// Typically used to toggle the on/off state of a single setting.
+/// Typically used to toggle the on/off state of a single setting. A [FSwitch] is internally a [FormField], therefore
+/// it can be used in a form.
 ///
 /// See:
 /// * https://forui.dev/docs/switch for working examples.
@@ -17,32 +19,14 @@ class FSwitch extends StatelessWidget {
   /// The style. Defaults to [FThemeData.switchStyle].
   final FSwitchStyle? style;
 
-  /// True if this switch is checked, and false if unchecked.
-  final bool value;
+  /// The semantic label of the switch used by accessibility frameworks.
+  final String? semanticLabel;
 
   /// Called when the user toggles the switch on or off.
   ///
-  /// The switch passes the new value to the callback but does not actually
-  /// change state until the parent widget rebuilds the switch with the new
-  /// value.
-  ///
-  /// If null, the switch will be displayed as disabled, which has a reduced opacity.
-  ///
-  /// The callback provided to onChanged should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
-  ///
-  /// ```dart
-  /// FSwitch(
-  ///   value: _giveVerse,
-  ///   onChanged: (bool newValue) {
-  ///     setState(() {
-  ///       _giveVerse = newValue;
-  ///     });
-  ///   },
-  /// )
-  /// ```
-  final ValueChanged<bool>? onChanged;
+  /// The switch passes the new value to the callback but does not actually change state until the parent widget
+  /// rebuilds the switch with the new value.
+  final ValueChanged<bool>? onChange;
 
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
   ///
@@ -82,32 +66,91 @@ class FSwitch extends StatelessWidget {
   /// By default, the drag start behavior is [DragStartBehavior.start].
   final DragStartBehavior dragStartBehavior;
 
+  /// An optional method to call with the final value when the form is saved via [FormState.save].
+  final FormFieldSetter<bool>? onSave;
+
+  /// An optional method that validates an input. Returns an error string to display if the input is invalid, or null
+  /// otherwise.
+  ///
+  /// The returned value is exposed by the [FormFieldState.errorText] property.
+  final FormFieldValidator<bool>? validator;
+
+  /// An optional value to initialize the checkbox. Defaults to false.
+  final bool initialValue;
+
+  /// Whether the form is able to receive user input.
+  ///
+  /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the checkbox will be auto validated.
+  /// Likewise, if this field is false, the widget will not be validated regardless of [autovalidateMode].
+  final bool enabled;
+
+  /// Used to enable/disable this switch auto validation and update its error text.
+  ///
+  /// Defaults to [AutovalidateMode.disabled].
+  ///
+  /// If [AutovalidateMode.onUserInteraction], this switch will only auto-validate after its content changes. If
+  /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
+  /// auto-validation will be disabled.
+  final AutovalidateMode? autovalidateMode;
+
+  /// Restoration ID to save and restore the state of the switch.
+  ///
+  /// Setting the restoration ID to a non-null value results in whether or not the switch validation persists.
+  ///
+  /// The state of this widget is persisted in a [RestorationBucket] claimed from the surrounding [RestorationScope]
+  /// using the provided restoration ID.
+  ///
+  /// See also:
+  ///  * [RestorationManager], which explains how state restoration works in Flutter.
+  final String? restorationId;
+
   /// Creates a [FSwitch].
   const FSwitch({
-    required this.value,
-    required this.onChanged,
     this.style,
+    this.semanticLabel,
+    this.onChange,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.onSave,
+    this.validator,
+    this.initialValue = false,
+    this.enabled = true,
+    this.autovalidateMode,
+    this.restorationId,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.switchStyle;
-    return CupertinoSwitch(
-      value: value,
-      onChanged: onChanged,
-      activeColor: style.checkedColor,
-      trackColor: style.uncheckedColor,
-      thumbColor: style.thumbColor,
-      focusColor: style.focusColor,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      dragStartBehavior: dragStartBehavior,
+    return FormField<bool>(
+      builder: (state) {
+        final value = state.value ?? initialValue;
+        return Semantics(
+          label: semanticLabel,
+          enabled: enabled,
+          toggled: value,
+          child: CupertinoSwitch(
+            value: value,
+            onChanged: enabled
+                ? (value) {
+                    state.didChange(value);
+                    onChange?.call(!value);
+                  }
+                : null,
+            activeColor: style.checkedColor,
+            trackColor: style.uncheckedColor,
+            thumbColor: style.thumbColor,
+            focusColor: style.focusColor,
+            autofocus: autofocus,
+            focusNode: focusNode,
+            onFocusChange: onFocusChange,
+            dragStartBehavior: dragStartBehavior,
+          ),
+        );
+      },
     );
   }
 
@@ -116,12 +159,18 @@ class FSwitch extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('value', value: value))
+      ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start))
-      ..add(DiagnosticsProperty('onChanged', onChanged))
+      ..add(DiagnosticsProperty('onChange', onChange))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(DiagnosticsProperty('onFocusChange', onFocusChange));
+      ..add(DiagnosticsProperty('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onSave', onSave))
+      ..add(ObjectFlagProperty.has('validator', validator))
+      ..add(DiagnosticsProperty('initialValue', initialValue))
+      ..add(DiagnosticsProperty('enabled', enabled))
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(StringProperty('restorationId', restorationId));
   }
 }
 
@@ -167,7 +216,7 @@ final class FSwitchStyle with Diagnosticable {
   /// Returns a copy of this [FSwitchStyle] with the given properties replaced.
   ///
   /// ```dart
-  /// final style = FSwitch(
+  /// final style = FSwitchStyle(
   ///   checkedColor: Colors.black,
   ///   uncheckedColor: Colors.white,
   ///   // Other arguments omitted for brevity

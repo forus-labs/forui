@@ -18,8 +18,7 @@ void main() {
               data: theme,
               child: Center(
                 child: FSwitch(
-                  value: value,
-                  onChanged: (_) {},
+                  initialValue: value,
                 ),
               ),
             ),
@@ -37,9 +36,8 @@ void main() {
               data: theme,
               child: Center(
                 child: FSwitch(
-                  value: value,
+                  initialValue: value,
                   autofocus: true,
-                  onChanged: (_) {},
                 ),
               ),
             ),
@@ -57,9 +55,9 @@ void main() {
               data: theme,
               child: Center(
                 child: FSwitch(
-                  value: value,
+                  enabled: false,
+                  initialValue: value,
                   autofocus: true,
-                  onChanged: null,
                 ),
               ),
             ),

@@ -115,5 +115,9 @@ class _AppRouter extends $_AppRouter {
           path: '/switch/default',
           page: SwitchRoute.page,
         ),
+        AutoRoute(
+          path: '/switch/form',
+          page: FormSwitchRoute.page,
+        ),
       ];
 }
