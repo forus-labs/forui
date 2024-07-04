@@ -16,9 +16,9 @@ class SwitchPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Padding(
-      padding: const EdgeInsets.all(16),
-      child: FSwitch(enabled: enabled),
-    );
+        padding: const EdgeInsets.all(16),
+        child: FSwitch(enabled: enabled),
+      );
 }
 
 @RoutePage()
@@ -29,9 +29,9 @@ class FormSwitchPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => const Padding(
-    padding: EdgeInsets.all(15.0),
-    child: LoginForm(),
-  );
+        padding: EdgeInsets.all(15.0),
+        child: LoginForm(),
+      );
 }
 
 class LoginForm extends StatefulWidget {
@@ -51,35 +51,35 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) => Form(
-    key: _formKey,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FTextField.email(
-          hint: 'janedoe@foruslabs.com',
-          help: const Text(''),
-          validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-        ),
-        const SizedBox(height: 4),
-        FTextField.password(
-          hint: '',
-          help: const Text(''),
-          validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-        ),
-        const SizedBox(height: 4),
-        Row(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FSwitch(),
-            const SizedBox(width: 7),
-            Text('Remember password?', style: context.theme.typography.sm),
+            FTextField.email(
+              hint: 'janedoe@foruslabs.com',
+              help: const Text(''),
+              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+            ),
+            const SizedBox(height: 4),
+            FTextField.password(
+              hint: '',
+              help: const Text(''),
+              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+            ),
+            const SizedBox(height: 4),
+            Row(
+              children: [
+                const FSwitch(),
+                const SizedBox(width: 7),
+                Text('Remember password?', style: context.theme.typography.sm),
+              ],
+            ),
+            const SizedBox(height: 30),
+            FButton(
+              label: const Text('Login'),
+              onPress: () => _formKey.currentState!.validate(),
+            ),
           ],
         ),
-        const SizedBox(height: 30),
-        FButton(
-          label: const Text('Login'),
-          onPress: () => _formKey.currentState!.validate(),
-        ),
-      ],
-    ),
-  );
+      );
 }
