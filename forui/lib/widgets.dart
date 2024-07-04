@@ -4,6 +4,7 @@ library forui.widgets;
 export 'src/widgets/badge/badge.dart' hide Variant;
 export 'src/widgets/button/button.dart' hide Variant;
 export 'src/widgets/card/card.dart';
+export 'src/widgets/calendar/calendar.dart';
 export 'src/widgets/checkbox.dart';
 export 'src/widgets/dialog/dialog.dart';
 export 'src/widgets/header/header.dart';
