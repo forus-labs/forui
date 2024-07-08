@@ -12,7 +12,7 @@ abstract class SampleScaffold extends StatelessWidget {
   final FThemeData theme;
 
   SampleScaffold({
-    String theme = 'zinc-dark',
+    String theme = 'zinc-light',
     super.key,
   }) : theme = themes[theme]!;
 

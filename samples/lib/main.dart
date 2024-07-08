@@ -37,48 +37,49 @@ class Testing extends StatelessWidget {
   const Testing({super.key});
 
   @override
-  Widget build(BuildContext context) => Row(
-    children: [
-      SizedBox(
-            height: 36,
-            width: 36,
-            child: EnabledDay(
-              style: FDayStateStyle(
-                decoration: const BoxDecoration(),
-                textStyle: context.theme.typography.sm.copyWith(
-                  color: context.theme.colorScheme.mutedForeground.withOpacity(0.5),
-                ),
-                focusedTextStyle: context.theme.typography.sm.copyWith(
-                  color: context.theme.colorScheme.mutedForeground,
-                ),
-              ),
-              date: DateTime(2024, 3, 31),
-              onPress: print,
-              today: true,
-              selected: true,
-            ),
+  Widget build(BuildContext context) {
+    final style = FMonthStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography);
+    return Row(
+      children: [
+        SizedBox(
+          height: 36,
+          width: 36,
+          child: EnabledDay(
+            style: style.current.disabled.todayStyle,
+            date: DateTime(2024, 3, 31),
+            onPress: print,
+            onLongPress: print,
+            today: true,
+            selected: true,
           ),
-      SizedBox(
-        height: 36,
-        width: 36,
-        child: EnabledDay(
-          style: FDayStateStyle(
-            decoration: const BoxDecoration(),
-            textStyle: context.theme.typography.sm.copyWith(
-              color: context.theme.colorScheme.mutedForeground.withOpacity(0.5),
-            ),
-            // focusedTextStyle: context.theme.typography.sm.copyWith(
-            //   color: context.theme.colorScheme.mutedForeground,
-            // ),
-          ),
-          date: DateTime(2024, 4),
-          onPress: print,
-          today: true,
-          selected: true,
         ),
-      ),
-    ],
-  );
+        SizedBox(
+          height: 36,
+          width: 36,
+          child: EnabledDay(
+            style: style.current.disabled.unselectedStyle,
+            date: DateTime(2024, 4),
+            onPress: print,
+            onLongPress: print,
+            today: true,
+            selected: true,
+          ),
+        ),
+        SizedBox(
+          height: 36,
+          width: 36,
+          child: EnabledDay(
+            style: style.current.disabled.unselectedStyle,
+            date: DateTime(2024, 4),
+            onPress: print,
+            onLongPress: print,
+            today: true,
+            selected: true,
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 @AutoRouterConfig()

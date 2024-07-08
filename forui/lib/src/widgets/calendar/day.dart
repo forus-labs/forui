@@ -112,108 +112,6 @@ class DisabledDay extends StatelessWidget {
   }
 }
 
-/// A month's style.
-final class FMonthStyle with Diagnosticable {
-  /// The enabled and disabled styles for the current month on display.
-  final ({FDayStyle enabled, FDayStyle disabled}) current;
-
-  /// The enabled and disabled styles for the months enclosing the current month on display.
-  final ({FDayStyle enabled, FDayStyle disabled}) enclosing;
-
-  /// Creates a [FMonthStyle].
-  const FMonthStyle({
-    required this.current,
-    required this.enclosing,
-  });
-
-  /// Creates a [FMonthStyle] that inherits from the given [colorScheme] and [typography].
-  factory FMonthStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
-    final textStyle = typography.sm.copyWith(color: colorScheme.foreground);
-    final mutedTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground);
-
-    final disabled = FDayStyle(
-      todayStyle: FDayStateStyle.inherit(
-        color: colorScheme.primaryForeground,
-        textStyle: mutedTextStyle,
-      ),
-      unselectedStyle: FDayStateStyle.inherit(
-        textStyle: mutedTextStyle,
-      ),
-      selectedStyle: FDayStateStyle.inherit(
-        color: colorScheme.primaryForeground,
-        textStyle: mutedTextStyle,
-      ),
-    );
-
-    return FMonthStyle(
-      current: (
-        enabled: FDayStyle(
-          todayStyle: FDayStateStyle.inherit(
-            color: colorScheme.secondary,
-            textStyle: textStyle,
-          ),
-          unselectedStyle: FDayStateStyle.inherit(
-            textStyle: textStyle,
-            focusedColor: colorScheme.secondary,
-          ),
-          selectedStyle: FDayStateStyle.inherit(
-            color: colorScheme.foreground,
-            textStyle: typography.sm.copyWith(color: colorScheme.background),
-          ),
-        ),
-        disabled: disabled,
-      ),
-      enclosing: (
-        enabled: FDayStyle(
-          todayStyle: FDayStateStyle.inherit(
-            color: colorScheme.primaryForeground,
-            textStyle: mutedTextStyle,
-            focusedTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-          ),
-          unselectedStyle: FDayStateStyle.inherit(
-            textStyle: mutedTextStyle,
-          ),
-          selectedStyle: FDayStateStyle.inherit(
-            color: colorScheme.primaryForeground,
-            textStyle: mutedTextStyle,
-            focusedTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-          ),
-        ),
-        disabled: disabled,
-      ),
-    );
-  }
-
-  /// Returns a copy of this [FMonthStyle] but with the given fields replaced with the new values.
-  FMonthStyle copyWith({
-    FDayStyle? currentEnabled,
-    FDayStyle? currentDisabled,
-    FDayStyle? enclosingEnabled,
-    FDayStyle? enclosingDisabled,
-  }) =>
-      FMonthStyle(
-        current: (
-          enabled: currentEnabled ?? current.enabled,
-          disabled: currentDisabled ?? current.disabled,
-        ),
-        enclosing: (
-          enabled: enclosingEnabled ?? enclosing.enabled,
-          disabled: enclosingDisabled ?? enclosing.disabled,
-        ),
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FMonthStyle &&
-          runtimeType == other.runtimeType &&
-          current == other.current &&
-          enclosing == other.enclosing;
-
-  @override
-  int get hashCode => current.hashCode ^ enclosing.hashCode;
-}
-
 /// A calender day's style.
 final class FDayStyle with Diagnosticable {
   /// The current date's style.
@@ -310,18 +208,22 @@ final class FDayStateStyle with Diagnosticable {
     Color? color,
     Color? focusedColor,
     TextStyle? focusedTextStyle,
-  }): this(
-    decoration: color == null ? const BoxDecoration() : BoxDecoration(
-      borderRadius: BorderRadius.circular(4),
-      color: color,
-    ),
-    textStyle: textStyle,
-    focusedDecoration: (focusedColor ?? color) == null ? const BoxDecoration(): BoxDecoration(
-      borderRadius: BorderRadius.circular(4),
-      color: focusedColor ?? color,
-    ),
-    focusedTextStyle: focusedTextStyle ?? textStyle,
-  );
+  }) : this(
+          decoration: color == null
+              ? const BoxDecoration()
+              : BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: color,
+                ),
+          textStyle: textStyle,
+          focusedDecoration: (focusedColor ?? color) == null
+              ? const BoxDecoration()
+              : BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: focusedColor ?? color,
+                ),
+          focusedTextStyle: focusedTextStyle ?? textStyle,
+        );
 
   /// Returns a copy of this [FDayStateStyle] but with the given fields replaced with the new values.
   ///
