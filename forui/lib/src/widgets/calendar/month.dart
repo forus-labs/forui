@@ -1,5 +1,8 @@
 part of 'calendar.dart';
 
+const _maxMonthRows = 6; // A 31 day month that starts on Saturday.
+const _monthDayDimension = 40.0;
+
 @internal
 class Month extends StatefulWidget {
   final FMonthStyle style;
@@ -48,7 +51,7 @@ class _MonthState extends State<Month> {
   void initState() {
     super.initState();
     _dayFocusNodes = [
-      for (int i = 1; i < widget.month.daysInMonth; i++) FocusNode(skipTraversal: true, debugLabel: 'Day $i'),
+      for (int i = 0; i < (DateTime.daysPerWeek * _maxMonthRows); i++) FocusNode(skipTraversal: true, debugLabel: 'Day $i'),
     ];
   }
 
@@ -56,16 +59,18 @@ class _MonthState extends State<Month> {
   Widget build(BuildContext context) {
     final (first, last) = _range(context);
     return GridView.custom(
-      physics: const ClampingScrollPhysics(),
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const _GridDelegate(),
       childrenDelegate: SliverChildListDelegate(
         [
           ..._headers(context),
-          for (var date = first; date.isBefore(last) || date.isAtSameMomentAs(last); date = date.plus(days: 1))
+          for (var date = first, i = 0; date.isBefore(last) || date.isAtSameMomentAs(last); date = date.plus(days: 1), i++)
             day(
               widget.style,
               date,
-              _dayFocusNodes[date.day - 1],
+              _dayFocusNodes[i],
               widget.onPress,
               widget.onLongPress,
               enabled: widget.enabledPredicate(date),
@@ -118,7 +123,7 @@ class _MonthState extends State<Month> {
     super.didChangeDependencies();
     final focused = widget.focused;
     if (focused != null && focused.month == widget.month.month) {
-      _dayFocusNodes[focused.day - 1].requestFocus();
+      _dayFocusNodes[focused.day - 1].requestFocus(); // TODO: fix this
     }
   }
 
@@ -133,26 +138,17 @@ class _MonthState extends State<Month> {
 
 /// Based on Material [CalendarDatePicker]'s _DayPickerGridDelegate.
 class _GridDelegate extends SliverGridDelegate {
-  static const _dayPickerRowHeight = 42.0;
-  static const _maxDayPickerRowCount = 6; // A 31 day month that starts on Saturday.
-
   const _GridDelegate();
 
   @override
-  SliverGridLayout getLayout(SliverConstraints constraints) {
-    final tileDimension = min(
-      _dayPickerRowHeight,
-      constraints.viewportMainAxisExtent / (_maxDayPickerRowCount + 1),
-    );
-    return SliverGridRegularTileLayout(
-      childCrossAxisExtent: tileDimension,
-      childMainAxisExtent: tileDimension,
+  SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
+      childCrossAxisExtent: _monthDayDimension,
+      childMainAxisExtent: _monthDayDimension,
       crossAxisCount: DateTime.daysPerWeek,
-      crossAxisStride: tileDimension,
-      mainAxisStride: tileDimension,
+      crossAxisStride: _monthDayDimension,
+      mainAxisStride: _monthDayDimension,
       reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
     );
-  }
 
   @override
   bool shouldRelayout(_GridDelegate oldDelegate) => false;
@@ -192,8 +188,8 @@ final class FMonthStyle with Diagnosticable {
 
   /// Creates a [FMonthStyle] that inherits from the given [colorScheme] and [typography].
   factory FMonthStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
-    final textStyle = typography.sm.copyWith(color: colorScheme.foreground);
-    final mutedTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground);
+    final textStyle = typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
+    final mutedTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
 
     final disabled = FDayStyle(
       todayStyle: FDayStateStyle.inherit(
@@ -210,7 +206,7 @@ final class FMonthStyle with Diagnosticable {
     );
 
     return FMonthStyle(
-      headerTextStyle: typography.sm.copyWith(color: colorScheme.secondaryForeground),
+      headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
       enabled: (
         current: FDayStyle(
           todayStyle: FDayStateStyle.inherit(
@@ -223,7 +219,7 @@ final class FMonthStyle with Diagnosticable {
           ),
           selectedStyle: FDayStateStyle.inherit(
             color: colorScheme.foreground,
-            textStyle: typography.sm.copyWith(color: colorScheme.background),
+            textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
           ),
         ),
         enclosing: FDayStyle(

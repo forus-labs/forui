@@ -37,18 +37,7 @@ class Testing extends StatelessWidget {
   const Testing({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final style = FMonthStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography);
-    return Month(
-      style: style,
-      month: DateTime.now().minus(months: 1),
-      today: DateTime(2024, 7 , 8),
-      enabledPredicate: (_) => true,
-      selectedPredicate: (_) => false,
-      onPress: print,
-      onLongPress: print,
-    );
-  }
+  Widget build(BuildContext context) => PagedMonth(initialDate: DateTime(2024, 7, 8));
 }
 
 @AutoRouterConfig()

@@ -30,6 +30,10 @@ class Application extends StatelessWidget {
             content: child ?? const SizedBox(),
           ),
         ),
-        home: const Example(),
+        home: Column(
+          children: [
+            PagedMonth(initialDate: DateTime(2024, 7, 8)),
+          ],
+        ),
       );
 }
