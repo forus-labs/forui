@@ -16,7 +16,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         builder: (context, child) => FTheme(
-          data: FThemes.zinc.light,
+          data: FThemes.zinc.dark,
           child: FScaffold(
             header: FHeader(
               title: const Text('Example Example Example Example'),
@@ -30,6 +30,25 @@ class Application extends StatelessWidget {
             content: child ?? const SizedBox(),
           ),
         ),
-        home: const Example(),
+        home: const Testing(),
+      );
+}
+
+class Testing extends StatelessWidget {
+  const Testing({super.key});
+
+  @override
+  Widget build(BuildContext context) => EnabledDay(
+        style: FDayStateStyle(
+          decoration: BoxDecoration(
+            borderRadius: context.theme.style.borderRadius,
+            color: context.theme.colorScheme.border,
+          ),
+          textStyle: context.theme.typography.base,
+        ),
+        date: DateTime.now(),
+        onPress: print,
+        today: true,
+        selected: true,
       );
 }
