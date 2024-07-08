@@ -6,4 +6,5 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 part 'day.dart';
+part 'header.dart';
 part 'month.dart';

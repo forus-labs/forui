@@ -1,20 +1,46 @@
 part of 'calendar.dart';
 
-// Possible states
-// current month, unselected
-// current month, today/focused/hovered
-// current month, selected
-// current month, disabled
+@internal
+/// Returns the [date].
+Widget day(
+  FMonthStyle monthStyle,
+  DateTime date,
+  FocusNode focusNode,
+  ValueChanged<DateTime> onPress,
+  ValueChanged<DateTime> onLongPress, {
+  required bool enabled,
+  required bool current,
+  required bool today,
+  required bool selected,
+}) {
+  final styles = enabled ? monthStyle.enabled : monthStyle.disabled;
+  final dayStyle = current ? styles.current : styles.enclosing;
+  final style = switch ((today, selected)) {
+    (true, _) => dayStyle.todayStyle,
+    (_, true) => dayStyle.selectedStyle,
+    (_, false) => dayStyle.unselectedStyle,
+  };
 
-// previous month, unselected
-// previous month, today/focused/hovered
-// previous month, selected
-// previous month, disabled
+  if (enabled) {
+    return EnabledDay(
+      style: style,
+      date: date,
+      focusNode: focusNode,
+      onPress: onPress,
+      onLongPress: onLongPress,
+      today: today,
+      selected: selected,
+    );
+  } else {
+    return DisabledDay(style: style, date: date);
+  }
+}
 
 @internal
 class EnabledDay extends StatefulWidget {
   final FDayStateStyle style;
   final DateTime date;
+  final FocusNode focusNode;
   final ValueChanged<DateTime> onPress;
   final ValueChanged<DateTime> onLongPress;
   final bool today;
@@ -23,6 +49,7 @@ class EnabledDay extends StatefulWidget {
   const EnabledDay({
     required this.style,
     required this.date,
+    required this.focusNode,
     required this.onPress,
     required this.onLongPress,
     required this.today,
@@ -39,6 +66,7 @@ class EnabledDay extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('date', date, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('focusNode', focusNode, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onLongPress', onLongPress, level: DiagnosticLevel.debug))
       ..add(FlagProperty('today', value: today, ifTrue: 'today', level: DiagnosticLevel.debug))
@@ -50,24 +78,27 @@ class _EnabledDayState extends State<EnabledDay> {
   bool focused = false;
 
   @override
-  Widget build(BuildContext context) => MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => setState(() => focused = true),
-        onExit: (_) => setState(() => focused = false),
-        child: Semantics(
-          label: '${widget.date}${widget.today ? ', Today' : ''}', // TODO: localization
-          button: true,
-          selected: widget.selected,
-          excludeSemantics: true,
-          child: GestureDetector(
-            onTap: () => widget.onPress(widget.date),
-            onLongPress: () => widget.onLongPress(widget.date),
-            child: DecoratedBox(
-              decoration: focused ? widget.style.focusedDecoration : widget.style.decoration,
-              child: Center(
-                child: Text(
-                  '${widget.date.day}', // TODO: localization
-                  style: focused ? widget.style.focusedTextStyle : widget.style.textStyle,
+  Widget build(BuildContext context) => Focus(
+        focusNode: widget.focusNode,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => setState(() => focused = true),
+          onExit: (_) => setState(() => focused = false),
+          child: Semantics(
+            label: '${widget.date}${widget.today ? ', Today' : ''}', // TODO: localization
+            button: true,
+            selected: widget.selected,
+            excludeSemantics: true,
+            child: GestureDetector(
+              onTap: () => widget.onPress(widget.date),
+              onLongPress: () => widget.onLongPress(widget.date),
+              child: DecoratedBox(
+                decoration: focused ? widget.style.focusedDecoration : widget.style.decoration,
+                child: Center(
+                  child: Text(
+                    '${widget.date.day}', // TODO: localization
+                    style: focused ? widget.style.focusedTextStyle : widget.style.textStyle,
+                  ),
                 ),
               ),
             ),
@@ -117,8 +148,10 @@ class DisabledDay extends StatelessWidget {
 /// [todayStyle] takes precedence over [unselectedStyle] and [selectedStyle]. For example, if the current date is
 /// selected, [todayStyle] will be applied.
 final class FDayStyle with Diagnosticable {
-  /// The current date's style. This style takes precedence over [unselectedStyle] and [selectedStyle]. For example, if
-  /// the current date is selected, [todayStyle] will be applied.
+  /// The current date's style.
+  ///
+  /// This style takes precedence over [unselectedStyle] and [selectedStyle]. For example, if the current date is
+  /// selected, [todayStyle] will be applied.
   final FDayStateStyle todayStyle;
 
   /// The unselected dates' style.
