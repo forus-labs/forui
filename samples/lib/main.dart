@@ -39,45 +39,14 @@ class Testing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = FMonthStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography);
-    return Row(
-      children: [
-        SizedBox(
-          height: 36,
-          width: 36,
-          child: EnabledDay(
-            style: style.current.disabled.todayStyle,
-            date: DateTime(2024, 3, 31),
-            onPress: print,
-            onLongPress: print,
-            today: true,
-            selected: true,
-          ),
-        ),
-        SizedBox(
-          height: 36,
-          width: 36,
-          child: EnabledDay(
-            style: style.current.disabled.unselectedStyle,
-            date: DateTime(2024, 4),
-            onPress: print,
-            onLongPress: print,
-            today: true,
-            selected: true,
-          ),
-        ),
-        SizedBox(
-          height: 36,
-          width: 36,
-          child: EnabledDay(
-            style: style.current.disabled.unselectedStyle,
-            date: DateTime(2024, 4),
-            onPress: print,
-            onLongPress: print,
-            today: true,
-            selected: true,
-          ),
-        ),
-      ],
+    return Month(
+      style: style,
+      month: DateTime.now().minus(months: 1),
+      today: DateTime(2024, 7 , 8),
+      enabledPredicate: (_) => true,
+      selectedPredicate: (_) => false,
+      onPress: print,
+      onLongPress: print,
     );
   }
 }

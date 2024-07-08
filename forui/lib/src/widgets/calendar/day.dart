@@ -113,8 +113,12 @@ class DisabledDay extends StatelessWidget {
 }
 
 /// A calender day's style.
+///
+/// [todayStyle] takes precedence over [unselectedStyle] and [selectedStyle]. For example, if the current date is
+/// selected, [todayStyle] will be applied.
 final class FDayStyle with Diagnosticable {
-  /// The current date's style.
+  /// The current date's style. This style takes precedence over [unselectedStyle] and [selectedStyle]. For example, if
+  /// the current date is selected, [todayStyle] will be applied.
   final FDayStateStyle todayStyle;
 
   /// The unselected dates' style.
@@ -161,9 +165,9 @@ final class FDayStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty<FDayStateStyle>('todayStyle', todayStyle))
-      ..add(DiagnosticsProperty<FDayStateStyle>('unselectedStyle', unselectedStyle))
-      ..add(DiagnosticsProperty<FDayStateStyle>('selectedStyle', selectedStyle));
+      ..add(DiagnosticsProperty('todayStyle', todayStyle))
+      ..add(DiagnosticsProperty('unselectedStyle', unselectedStyle))
+      ..add(DiagnosticsProperty('selectedStyle', selectedStyle));
   }
 
   @override
