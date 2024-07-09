@@ -9,5 +9,5 @@ import 'package:sugar/sugar.dart';
 
 part 'day.dart';
 part 'header.dart';
-part 'month.dart';
+part 'day_picker.dart';
 part 'paged_month.dart';

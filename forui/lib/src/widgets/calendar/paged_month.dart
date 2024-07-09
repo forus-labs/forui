@@ -14,7 +14,7 @@ class PagedMonth extends StatefulWidget {
 class _PagedMonthState extends State<PagedMonth> {
   @override
   Widget build(BuildContext context) {
-    final style = FMonthStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography);
+    final style = FCalendarDayPickerStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography);
     return DecoratedBox(
       decoration: BoxDecoration(
           borderRadius: context.theme.style.borderRadius,
@@ -29,13 +29,7 @@ class _PagedMonthState extends State<PagedMonth> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Header(
-                style: FCalendarHeaderStyle(
-                  headerTextStyle: context.theme.typography.sm.copyWith(
-                    color: context.theme.colorScheme.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  iconColor: context.theme.colorScheme.mutedForeground,
-                ),
+                style: FCalendarHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
                 month: widget.initialDate,
                 onPrevious: () {},
                 onNext: () {},
@@ -43,7 +37,7 @@ class _PagedMonthState extends State<PagedMonth> {
               SizedBox(
                 height: dayDimension * maxMonthRows,
                 child: PageView.builder(
-                  itemBuilder: (context, index) => Month(
+                  itemBuilder: (context, index) => DayPicker(
                     focused: null,
                     style: style,
                     month: widget.initialDate.toLocalDate(),

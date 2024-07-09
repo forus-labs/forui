@@ -3,7 +3,7 @@ part of 'calendar.dart';
 /// Returns the [date].
 @internal
 Widget day(
-  FMonthStyle monthStyle,
+  FCalendarDayPickerStyle monthStyle,
   LocalDate date,
   FocusNode focusNode,
   ValueChanged<DateTime> onPress,
@@ -38,7 +38,7 @@ Widget day(
 
 @internal
 class EnabledDay extends StatefulWidget {
-  final FDayStateStyle style;
+  final FCalendarDayStateStyle style;
   final LocalDate date;
   final FocusNode focusNode;
   final ValueChanged<DateTime> onPress;
@@ -75,15 +75,30 @@ class EnabledDay extends StatefulWidget {
 }
 
 class _EnabledDayState extends State<EnabledDay> {
-  bool focused = false;
+  bool _focused = false;
+  bool _hovered = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    widget.focusNode.addListener(_updateFocused);
+  }
+
+  @override
+  void didUpdateWidget(EnabledDay old) {
+    super.didUpdateWidget(old);
+    old.focusNode.removeListener(_updateFocused);
+    widget.focusNode.addListener(_updateFocused);
+  }
 
   @override
   Widget build(BuildContext context) => Focus(
         focusNode: widget.focusNode,
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
-          onEnter: (_) => setState(() => focused = true),
-          onExit: (_) => setState(() => focused = false),
+          onEnter: (_) => setState(() => _hovered = true),
+          onExit: (_) => setState(() => _hovered = false),
           child: Semantics(
             label: '${widget.date}${widget.today ? ', Today' : ''}', // TODO: localization
             button: true,
@@ -93,11 +108,11 @@ class _EnabledDayState extends State<EnabledDay> {
               onTap: () => widget.onPress(widget.date.toNative()),
               onLongPress: () => widget.onLongPress(widget.date.toNative()),
               child: DecoratedBox(
-                decoration: focused ? widget.style.focusedDecoration : widget.style.decoration,
+                decoration: _focused || _hovered ? widget.style.focusedDecoration : widget.style.decoration,
                 child: Center(
                   child: Text(
                     '${widget.date.day}', // TODO: localization
-                    style: focused ? widget.style.focusedTextStyle : widget.style.textStyle,
+                    style: _focused || _hovered ? widget.style.focusedTextStyle : widget.style.textStyle,
                   ),
                 ),
               ),
@@ -106,16 +121,25 @@ class _EnabledDayState extends State<EnabledDay> {
         ),
       );
 
+
+  @override
+  void dispose() {
+    widget.focusNode.removeListener(_updateFocused);
+    super.dispose();
+  }
+
+  void _updateFocused() => setState(() => _focused = widget.focusNode.hasFocus);
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(FlagProperty('focused', value: focused, ifTrue: 'focused'));
+    properties.add(FlagProperty('focused', value: _hovered, ifTrue: 'focused'));
   }
 }
 
 @internal
 class DisabledDay extends StatelessWidget {
-  final FDayStateStyle style;
+  final FCalendarDayStateStyle style;
   final LocalDate date;
 
   const DisabledDay({
@@ -147,27 +171,27 @@ class DisabledDay extends StatelessWidget {
 ///
 /// [todayStyle] takes precedence over [unselectedStyle] and [selectedStyle]. For example, if the current date is
 /// selected, [todayStyle] will be applied.
-final class FDayStyle with Diagnosticable {
+final class FCalendarDayStyle with Diagnosticable {
   /// The current date's style.
   ///
   /// This style takes precedence over [unselectedStyle] and [selectedStyle]. For example, if the current date is
   /// selected, [todayStyle] will be applied.
-  final FDayStateStyle todayStyle;
+  final FCalendarDayStateStyle todayStyle;
 
   /// The unselected dates' style.
-  final FDayStateStyle unselectedStyle;
+  final FCalendarDayStateStyle unselectedStyle;
 
   /// The selected dates' style.
-  final FDayStateStyle selectedStyle;
+  final FCalendarDayStateStyle selectedStyle;
 
-  /// Creates a [FDayStyle].
-  const FDayStyle({
+  /// Creates a [FCalendarDayStyle].
+  const FCalendarDayStyle({
     required this.todayStyle,
     required this.unselectedStyle,
     required this.selectedStyle,
   });
 
-  /// Returns a copy of this [FDayStyle] but with the given fields replaced with the new values.
+  /// Returns a copy of this [FCalendarDayStyle] but with the given fields replaced with the new values.
   ///
   /// ```dart
   /// final style = FDayStyle(
@@ -183,12 +207,12 @@ final class FDayStyle with Diagnosticable {
   /// print(style.todayStyle == copy.todayStyle); // true
   /// print(style.unselectedStyle == copy.unselectedStyle); // false
   /// ```
-  FDayStyle copyWith({
-    FDayStateStyle? todayStyle,
-    FDayStateStyle? unselectedStyle,
-    FDayStateStyle? selectedStyle,
+  FCalendarDayStyle copyWith({
+    FCalendarDayStateStyle? todayStyle,
+    FCalendarDayStateStyle? unselectedStyle,
+    FCalendarDayStateStyle? selectedStyle,
   }) =>
-      FDayStyle(
+      FCalendarDayStyle(
         todayStyle: todayStyle ?? this.todayStyle,
         unselectedStyle: unselectedStyle ?? this.unselectedStyle,
         selectedStyle: selectedStyle ?? this.selectedStyle,
@@ -206,7 +230,7 @@ final class FDayStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FDayStyle &&
+      other is FCalendarDayStyle &&
           runtimeType == other.runtimeType &&
           todayStyle == other.todayStyle &&
           unselectedStyle == other.unselectedStyle &&
@@ -217,7 +241,7 @@ final class FDayStyle with Diagnosticable {
 }
 
 /// A calendar day state's style.
-final class FDayStateStyle with Diagnosticable {
+final class FCalendarDayStateStyle with Diagnosticable {
   /// The unfocused day's decoration.
   final BoxDecoration decoration;
 
@@ -230,8 +254,8 @@ final class FDayStateStyle with Diagnosticable {
   /// The focused day's text style. Defaults to [textStyle].
   final TextStyle focusedTextStyle;
 
-  /// Creates a [FDayStateStyle].
-  FDayStateStyle({
+  /// Creates a [FCalendarDayStateStyle].
+  FCalendarDayStateStyle({
     required this.decoration,
     required this.textStyle,
     BoxDecoration? focusedDecoration,
@@ -239,8 +263,8 @@ final class FDayStateStyle with Diagnosticable {
   })  : focusedDecoration = focusedDecoration ?? decoration,
         focusedTextStyle = focusedTextStyle ?? textStyle;
 
-  /// Creates a [FDayStateStyle] that inherits the given colors.
-  FDayStateStyle.inherit({
+  /// Creates a [FCalendarDayStateStyle] that inherits the given colors.
+  FCalendarDayStateStyle.inherit({
     required TextStyle textStyle,
     Color? color,
     Color? focusedColor,
@@ -262,7 +286,7 @@ final class FDayStateStyle with Diagnosticable {
           focusedTextStyle: focusedTextStyle ?? textStyle,
         );
 
-  /// Returns a copy of this [FDayStateStyle] but with the given fields replaced with the new values.
+  /// Returns a copy of this [FCalendarDayStateStyle] but with the given fields replaced with the new values.
   ///
   /// ```dart
   /// final style = FDayStateStyle(
@@ -277,13 +301,13 @@ final class FDayStateStyle with Diagnosticable {
   /// print(style.decoration == copy.decoration); // true
   /// print(style.textStyle == copy.textStyle); // false
   /// ```
-  FDayStateStyle copyWith({
+  FCalendarDayStateStyle copyWith({
     BoxDecoration? decoration,
     TextStyle? textStyle,
     BoxDecoration? focusedDecoration,
     TextStyle? focusedTextStyle,
   }) =>
-      FDayStateStyle(
+      FCalendarDayStateStyle(
         decoration: decoration ?? this.decoration,
         textStyle: textStyle ?? this.textStyle,
         focusedDecoration: focusedDecoration ?? this.focusedDecoration,
@@ -303,7 +327,7 @@ final class FDayStateStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FDayStateStyle &&
+      other is FCalendarDayStateStyle &&
           runtimeType == other.runtimeType &&
           decoration == other.decoration &&
           textStyle == other.textStyle &&

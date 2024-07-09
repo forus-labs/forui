@@ -4,13 +4,13 @@ part of 'calendar.dart';
 @internal
 const maxMonthRows = 6;
 
-/// The height & width of a day in a [Month].
+/// The height & width of a day in a [DayPicker].
 @internal
 const dayDimension = 40.0;
 
 @internal
-class Month extends StatefulWidget {
-  final FMonthStyle style;
+class DayPicker extends StatefulWidget {
+  final FCalendarDayPickerStyle style;
   final LocalDate month;
   final LocalDate today;
   final LocalDate? focused;
@@ -19,7 +19,7 @@ class Month extends StatefulWidget {
   final ValueChanged<DateTime> onPress;
   final ValueChanged<DateTime> onLongPress;
 
-  const Month({
+  const DayPicker({
     required this.style,
     required this.month,
     required this.today,
@@ -32,7 +32,7 @@ class Month extends StatefulWidget {
   });
 
   @override
-  State createState() => _MonthState();
+  State createState() => _DayPickerState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -49,7 +49,7 @@ class Month extends StatefulWidget {
   }
 }
 
-class _MonthState extends State<Month> {
+class _DayPickerState extends State<DayPicker> {
   final SplayTreeMap<LocalDate, FocusNode> _days = SplayTreeMap();
 
   @override
@@ -101,7 +101,7 @@ class _MonthState extends State<Month> {
   }
 
   @override
-  void didUpdateWidget(Month old) {
+  void didUpdateWidget(DayPicker old) {
     super.didUpdateWidget(old);
     if (old.month != widget.month) {
       _updateMonth();
@@ -164,16 +164,16 @@ class _GridDelegate extends SliverGridDelegate {
   bool shouldRelayout(_GridDelegate oldDelegate) => false;
 }
 
-/// A month's style.
-final class FMonthStyle with Diagnosticable {
+/// A day picker's style.
+final class FCalendarDayPickerStyle with Diagnosticable {
   /// The text style for the day of th week headers.
   final TextStyle headerTextStyle;
 
   /// The styles of the current month on display and the enclosing months, when enabled.
-  final ({FDayStyle current, FDayStyle enclosing}) enabled;
+  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) enabled;
 
   /// The styles of the current month on display and the enclosing months, when disabled.
-  final ({FDayStyle current, FDayStyle enclosing}) disabled;
+  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) disabled;
 
   /// The starting day of the week. Defaults to the current locale's preferred starting day of the week if null.
   ///
@@ -185,8 +185,8 @@ final class FMonthStyle with Diagnosticable {
   /// * [DateTime.sunday] < [startDayOfWeek]
   final int? startDayOfWeek;
 
-  /// Creates a [FMonthStyle].
-  const FMonthStyle({
+  /// Creates a [FCalendarDayPickerStyle].
+  const FCalendarDayPickerStyle({
     required this.headerTextStyle,
     required this.enabled,
     required this.disabled,
@@ -196,53 +196,53 @@ final class FMonthStyle with Diagnosticable {
           'startDayOfWeek must be between DateTime.monday (1) and DateTime.sunday (7).',
         );
 
-  /// Creates a [FMonthStyle] that inherits from the given [colorScheme] and [typography].
-  factory FMonthStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
+  /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
+  factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
     final textStyle = typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
     final mutedTextStyle =
         typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
 
-    final disabled = FDayStyle(
-      todayStyle: FDayStateStyle.inherit(
+    final disabled = FCalendarDayStyle(
+      todayStyle: FCalendarDayStateStyle.inherit(
         color: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
       ),
-      unselectedStyle: FDayStateStyle.inherit(
+      unselectedStyle: FCalendarDayStateStyle.inherit(
         textStyle: mutedTextStyle,
       ),
-      selectedStyle: FDayStateStyle.inherit(
+      selectedStyle: FCalendarDayStateStyle.inherit(
         color: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
       ),
     );
 
-    return FMonthStyle(
+    return FCalendarDayPickerStyle(
       headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
       enabled: (
-        current: FDayStyle(
-          todayStyle: FDayStateStyle.inherit(
+        current: FCalendarDayStyle(
+          todayStyle: FCalendarDayStateStyle.inherit(
             color: colorScheme.secondary,
             textStyle: textStyle,
           ),
-          unselectedStyle: FDayStateStyle.inherit(
+          unselectedStyle: FCalendarDayStateStyle.inherit(
             textStyle: textStyle,
             focusedColor: colorScheme.secondary,
           ),
-          selectedStyle: FDayStateStyle.inherit(
+          selectedStyle: FCalendarDayStateStyle.inherit(
             color: colorScheme.foreground,
             textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
           ),
         ),
-        enclosing: FDayStyle(
-          todayStyle: FDayStateStyle.inherit(
+        enclosing: FCalendarDayStyle(
+          todayStyle: FCalendarDayStateStyle.inherit(
             color: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
           ),
-          unselectedStyle: FDayStateStyle.inherit(
+          unselectedStyle: FCalendarDayStateStyle.inherit(
             textStyle: mutedTextStyle,
             focusedColor: colorScheme.primaryForeground,
           ),
-          selectedStyle: FDayStateStyle.inherit(
+          selectedStyle: FCalendarDayStateStyle.inherit(
             color: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
           ),
@@ -255,7 +255,7 @@ final class FMonthStyle with Diagnosticable {
     );
   }
 
-  /// Returns a copy of this [FMonthStyle] but with the given fields replaced with the new values.
+  /// Returns a copy of this [FCalendarDayPickerStyle] but with the given fields replaced with the new values.
   ///
   /// ```dart
   /// final style = FMonthStyle(
@@ -271,15 +271,15 @@ final class FMonthStyle with Diagnosticable {
   /// print(style.headerTextStyle == copy.headerTextStyle); // true
   /// print(style.enabled.current == copy.enabled.current); // false
   /// ```
-  FMonthStyle copyWith({
+  FCalendarDayPickerStyle copyWith({
     TextStyle? headerTextStyle,
-    FDayStyle? enabledCurrent,
-    FDayStyle? enabledEnclosing,
-    FDayStyle? disabledCurrent,
-    FDayStyle? disabledEnclosing,
+    FCalendarDayStyle? enabledCurrent,
+    FCalendarDayStyle? enabledEnclosing,
+    FCalendarDayStyle? disabledCurrent,
+    FCalendarDayStyle? disabledEnclosing,
     int? startDayOfWeek,
   }) =>
-      FMonthStyle(
+      FCalendarDayPickerStyle(
         headerTextStyle: headerTextStyle ?? this.headerTextStyle,
         enabled: (
           current: enabledCurrent ?? enabled.current,
@@ -307,7 +307,7 @@ final class FMonthStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FMonthStyle &&
+      other is FCalendarDayPickerStyle &&
           runtimeType == other.runtimeType &&
           headerTextStyle == other.headerTextStyle &&
           enabled == other.enabled &&
