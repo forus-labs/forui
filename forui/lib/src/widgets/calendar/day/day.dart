@@ -1,4 +1,4 @@
-part of 'calendar.dart';
+part of '../calendar.dart';
 
 /// Returns the [date].
 @internal

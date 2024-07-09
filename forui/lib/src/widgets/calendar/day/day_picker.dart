@@ -1,4 +1,4 @@
-part of 'calendar.dart';
+part of '../calendar.dart';
 
 /// The maximum number of rows in a month. In this case, a 31 day month that starts on Saturday.
 @internal
@@ -60,7 +60,6 @@ class _DayPickerState extends State<DayPicker> {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-      height: maxMonthRows * dayDimension,
       width: DateTime.daysPerWeek * dayDimension,
       child: GridView.custom(
         padding: EdgeInsets.zero,

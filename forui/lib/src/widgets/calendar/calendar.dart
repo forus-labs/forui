@@ -7,7 +7,9 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
-part 'day.dart';
+part 'day/day.dart';
+part 'day/day_picker.dart';
+part 'day/paged_day_picker.dart';
+
 part 'header.dart';
-part 'day_picker.dart';
 part 'paged_month.dart';
