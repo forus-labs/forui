@@ -1,10 +1,10 @@
 part of 'calendar.dart';
 
-@internal
 /// Returns the [date].
+@internal
 Widget day(
   FMonthStyle monthStyle,
-  DateTime date,
+  LocalDate date,
   FocusNode focusNode,
   ValueChanged<DateTime> onPress,
   ValueChanged<DateTime> onLongPress, {
@@ -39,7 +39,7 @@ Widget day(
 @internal
 class EnabledDay extends StatefulWidget {
   final FDayStateStyle style;
-  final DateTime date;
+  final LocalDate date;
   final FocusNode focusNode;
   final ValueChanged<DateTime> onPress;
   final ValueChanged<DateTime> onLongPress;
@@ -90,8 +90,8 @@ class _EnabledDayState extends State<EnabledDay> {
             selected: widget.selected,
             excludeSemantics: true,
             child: GestureDetector(
-              onTap: () => widget.onPress(widget.date),
-              onLongPress: () => widget.onLongPress(widget.date),
+              onTap: () => widget.onPress(widget.date.toNative()),
+              onLongPress: () => widget.onLongPress(widget.date.toNative()),
               child: DecoratedBox(
                 decoration: focused ? widget.style.focusedDecoration : widget.style.decoration,
                 child: Center(
@@ -116,7 +116,7 @@ class _EnabledDayState extends State<EnabledDay> {
 @internal
 class DisabledDay extends StatelessWidget {
   final FDayStateStyle style;
-  final DateTime date;
+  final LocalDate date;
 
   const DisabledDay({
     required this.style,

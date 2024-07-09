@@ -24,7 +24,7 @@ class _PagedMonthState extends State<PagedMonth> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
         child: SizedBox(
-          width: _monthDayDimension * DateTime.daysPerWeek,
+          width: dayDimension * DateTime.daysPerWeek,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -41,13 +41,13 @@ class _PagedMonthState extends State<PagedMonth> {
                 onNext: () {},
               ),
               SizedBox(
-                height: _monthDayDimension * _maxMonthRows,
+                height: dayDimension * maxMonthRows,
                 child: PageView.builder(
                   itemBuilder: (context, index) => Month(
                     focused: null,
                     style: style,
-                    month: widget.initialDate,
-                    today: DateTime(2024, 7, 8),
+                    month: widget.initialDate.toLocalDate(),
+                    today: DateTime(2024, 7, 8).toLocalDate(),
                     enabledPredicate: (_) => true,
                     selectedPredicate: (_) => false,
                     onPress: print,

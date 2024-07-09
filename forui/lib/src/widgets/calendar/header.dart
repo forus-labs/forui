@@ -3,7 +3,7 @@ part of 'calendar.dart';
 @internal
 class Header extends StatelessWidget {
   final FCalendarHeaderStyle style;
-  final DateTime month;
+  final LocalDate month;
   final VoidCallback? onPrevious;
   final VoidCallback? onNext;
 
@@ -31,6 +31,7 @@ class Header extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 7),
             child: FButton.raw(
+              // TODO: Replace with FButton.icon.
               style: effectiveButtonStyle,
               onPress: onPrevious,
               child: Padding(
@@ -49,6 +50,7 @@ class Header extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 7),
             child: FButton.raw(
+              // TODO: Replace with FButton.icon.
               style: effectiveButtonStyle,
               onPress: onNext,
               child: Padding(
@@ -92,6 +94,16 @@ final class FCalendarHeaderStyle {
     required this.headerTextStyle,
     required this.iconColor,
   });
+
+  /// Creates a [FCalendarHeaderStyle] that inherits its values from the given [colorScheme] and [typography].
+  FCalendarHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+      : this(
+          headerTextStyle: typography.sm.copyWith(
+            color: colorScheme.primary,
+            fontWeight: FontWeight.w600,
+          ),
+          iconColor: colorScheme.mutedForeground,
+        );
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   ///

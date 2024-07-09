@@ -1,14 +1,19 @@
 part of 'calendar.dart';
 
-const _maxMonthRows = 6; // A 31 day month that starts on Saturday.
-const _monthDayDimension = 40.0;
+/// The maximum number of rows in a month. In this case, a 31 day month that starts on Saturday.
+@internal
+const maxMonthRows = 6;
+
+/// The height & width of a day in a [Month].
+@internal
+const dayDimension = 40.0;
 
 @internal
 class Month extends StatefulWidget {
   final FMonthStyle style;
-  final DateTime month;
-  final DateTime today;
-  final DateTime? focused;
+  final LocalDate month;
+  final LocalDate today;
+  final LocalDate? focused;
   final bool Function(DateTime day) enabledPredicate;
   final bool Function(DateTime day) selectedPredicate;
   final ValueChanged<DateTime> onPress;
@@ -45,46 +50,69 @@ class Month extends StatefulWidget {
 }
 
 class _MonthState extends State<Month> {
-  List<FocusNode> _dayFocusNodes = [];
+  final SplayTreeMap<LocalDate, FocusNode> _days = SplayTreeMap();
 
   @override
   void initState() {
     super.initState();
-    _dayFocusNodes = [
-      for (int i = 0; i < (DateTime.daysPerWeek * _maxMonthRows); i++) FocusNode(skipTraversal: true, debugLabel: 'Day $i'),
+    _updateMonth();
+  }
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+      height: maxMonthRows * dayDimension,
+      width: DateTime.daysPerWeek * dayDimension,
+      child: GridView.custom(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const _GridDelegate(),
+        childrenDelegate: SliverChildListDelegate(
+          [
+            ..._headers(context),
+            for (final MapEntry(key: date, value: focusNode) in _days.entries)
+              day(
+                widget.style,
+                date,
+                focusNode,
+                widget.onPress,
+                widget.onLongPress,
+                enabled: widget.enabledPredicate(date.toNative()),
+                current: date.month == widget.month.month,
+                today: date == widget.today,
+                selected: widget.selectedPredicate(date.toNative()),
+              ),
+          ],
+          addRepaintBoundaries: false,
+        ),
+      ),
+    );
+
+  List<Widget> _headers(BuildContext context) {
+    final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
+    final narrowWeekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']; // TODO: Localization
+
+    return [
+      for (int i = firstDayOfWeek, j = 0; j < DateTime.daysPerWeek; i = (i + 1) % DateTime.daysPerWeek, j++)
+        ExcludeSemantics(
+          child: Center(child: Text(narrowWeekdays[i - 1], style: widget.style.headerTextStyle)),
+        ),
     ];
   }
 
   @override
-  Widget build(BuildContext context) {
-    final (first, last) = _range(context);
-    return GridView.custom(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const _GridDelegate(),
-      childrenDelegate: SliverChildListDelegate(
-        [
-          ..._headers(context),
-          for (var date = first, i = 0; date.isBefore(last) || date.isAtSameMomentAs(last); date = date.plus(days: 1), i++)
-            day(
-              widget.style,
-              date,
-              _dayFocusNodes[i],
-              widget.onPress,
-              widget.onLongPress,
-              enabled: widget.enabledPredicate(date),
-              current: date.month == widget.month.month,
-              today: date == widget.today,
-              selected: widget.selectedPredicate(date),
-            ),
-        ],
-        addRepaintBoundaries: false,
-      ),
-    );
+  void didUpdateWidget(Month old) {
+    super.didUpdateWidget(old);
+    if (old.month != widget.month) {
+      _updateMonth();
+    }
+
+    if (_days[widget.focused] case final focusNode? when old.focused != widget.focused) {
+      focusNode.requestFocus();
+    }
   }
 
-  (DateTime, DateTime) _range(BuildContext context) {
+  void _updateMonth() {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
     final firstDayOfMonth = widget.month.firstDayOfMonth;
     var difference = firstDayOfMonth.weekday - firstDayOfWeek;
@@ -103,33 +131,15 @@ class _MonthState extends State<Month> {
 
     final last = lastDayOfMonth.plus(days: difference);
 
-    return (first, last);
-  }
-
-  List<Widget> _headers(BuildContext context) {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
-    final narrowWeekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']; // TODO: Localization
-
-    return [
-      for (int i = firstDayOfWeek, j = 0; j < DateTime.daysPerWeek; i = (i + 1) % DateTime.daysPerWeek, j++)
-        ExcludeSemantics(
-          child: Center(child: Text(narrowWeekdays[i - 1], style: widget.style.headerTextStyle)),
-        ),
-    ];
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final focused = widget.focused;
-    if (focused != null && focused.month == widget.month.month) {
-      _dayFocusNodes[focused.day - 1].requestFocus(); // TODO: fix this
+    _days.clear();
+    for (var date = first; date <= last; date = date.tomorrow) {
+      _days[date] = FocusNode(skipTraversal: true, debugLabel: '$date');
     }
   }
 
   @override
   void dispose() {
-    for (final node in _dayFocusNodes) {
+    for (final node in _days.values) {
       node.dispose();
     }
     super.dispose();
@@ -142,13 +152,13 @@ class _GridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-      childCrossAxisExtent: _monthDayDimension,
-      childMainAxisExtent: _monthDayDimension,
-      crossAxisCount: DateTime.daysPerWeek,
-      crossAxisStride: _monthDayDimension,
-      mainAxisStride: _monthDayDimension,
-      reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
-    );
+        childCrossAxisExtent: dayDimension,
+        childMainAxisExtent: dayDimension,
+        crossAxisCount: DateTime.daysPerWeek,
+        crossAxisStride: dayDimension,
+        mainAxisStride: dayDimension,
+        reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
+      );
 
   @override
   bool shouldRelayout(_GridDelegate oldDelegate) => false;
@@ -189,7 +199,8 @@ final class FMonthStyle with Diagnosticable {
   /// Creates a [FMonthStyle] that inherits from the given [colorScheme] and [typography].
   factory FMonthStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
     final textStyle = typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
-    final mutedTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
+    final mutedTextStyle =
+        typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
 
     final disabled = FDayStyle(
       todayStyle: FDayStateStyle.inherit(
