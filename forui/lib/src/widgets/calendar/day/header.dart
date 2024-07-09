@@ -1,4 +1,4 @@
-part of 'calendar.dart';
+part of '../calendar.dart';
 
 @internal
 class Header extends StatelessWidget {
@@ -35,9 +35,9 @@ class Header extends StatelessWidget {
               style: effectiveButtonStyle,
               onPress: onPrevious,
               child: Padding(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(7),
                 child: FAssets.icons.chevronLeft(
-                  height: 16,
+                  height: 17,
                   colorFilter: ColorFilter.mode(
                     style.iconColor,
                     BlendMode.srcIn,
@@ -46,7 +46,7 @@ class Header extends StatelessWidget {
               ),
             ),
           ),
-          Text('July ${month.year}', style: style.headerTextStyle), // TODO: Localization
+          Text('${month.month} ${month.year}', style: style.headerTextStyle), // TODO: Localization
           Padding(
             padding: const EdgeInsets.only(right: 7),
             child: FButton.raw(
@@ -54,9 +54,9 @@ class Header extends StatelessWidget {
               style: effectiveButtonStyle,
               onPress: onNext,
               child: Padding(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(7),
                 child: FAssets.icons.chevronRight(
-                  height: 16,
+                  height: 17,
                   colorFilter: ColorFilter.mode(
                     style.iconColor,
                     BlendMode.srcIn,

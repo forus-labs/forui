@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-import 'package:forui_example/example.dart';
+import 'package:sugar/sugar.dart';
 
 void main() {
   runApp(const Application());
@@ -16,7 +16,7 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         builder: (context, child) => FTheme(
-          data: FThemes.zinc.dark,
+          data: FThemes.zinc.light,
           child: FScaffold(
             header: FHeader(
               title: const Text('Example Example Example Example'),
@@ -32,8 +32,33 @@ class Application extends StatelessWidget {
         ),
         home: Column(
           children: [
-            PagedMonth(initialDate: DateTime(2024, 7, 8)),
+            const Testing(),
+            // FHeaderAction(
+            //   icon: FAssets.icons.plus,
+            //   onPress: () => showDatePicker(context: context, firstDate: DateTime(2024, 7, 1), lastDate: DateTime(2024, 7, 31), initialDate: DateTime(2024, 7, 8)),
+            // ),
           ],
         ),
       );
 }
+
+class Testing extends StatelessWidget {
+  const Testing({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PagedDayPicker(
+      style: FCalendarStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography, style: context.theme.style),
+      start: LocalDate(2023, 1, 8),
+      end: LocalDate(2025, 7, 10),
+      today: LocalDate.now(),
+      initialMonth: LocalDate(2024, 7),
+      enabledPredicate: (_) => true,
+      selectedPredicate: (a) => a == LocalDate(2024, 7, 11),
+      onMonthChange: print,
+      onPress: print,
+      onLongPress: print,
+    );
+  }
+}
+

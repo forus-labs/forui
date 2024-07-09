@@ -6,8 +6,8 @@ Widget day(
   FCalendarDayPickerStyle monthStyle,
   LocalDate date,
   FocusNode focusNode,
-  ValueChanged<DateTime> onPress,
-  ValueChanged<DateTime> onLongPress, {
+  ValueChanged<LocalDate> onPress,
+  ValueChanged<LocalDate> onLongPress, {
   required bool enabled,
   required bool current,
   required bool today,
@@ -16,9 +16,9 @@ Widget day(
   final styles = enabled ? monthStyle.enabled : monthStyle.disabled;
   final dayStyle = current ? styles.current : styles.enclosing;
   final style = switch ((today, selected)) {
-    (true, _) => dayStyle.todayStyle,
     (_, true) => dayStyle.selectedStyle,
-    (_, false) => dayStyle.unselectedStyle,
+    (false, _) => dayStyle.unselectedStyle,
+    (true, _) => dayStyle.todayStyle,
   };
 
   if (enabled) {
@@ -41,8 +41,8 @@ class EnabledDay extends StatefulWidget {
   final FCalendarDayStateStyle style;
   final LocalDate date;
   final FocusNode focusNode;
-  final ValueChanged<DateTime> onPress;
-  final ValueChanged<DateTime> onLongPress;
+  final ValueChanged<LocalDate> onPress;
+  final ValueChanged<LocalDate> onLongPress;
   final bool today;
   final bool selected;
 
@@ -105,8 +105,8 @@ class _EnabledDayState extends State<EnabledDay> {
             selected: widget.selected,
             excludeSemantics: true,
             child: GestureDetector(
-              onTap: () => widget.onPress(widget.date.toNative()),
-              onLongPress: () => widget.onLongPress(widget.date.toNative()),
+              onTap: () => widget.onPress(widget.date),
+              onLongPress: () => widget.onLongPress(widget.date),
               child: DecoratedBox(
                 decoration: _focused || _hovered ? widget.style.focusedDecoration : widget.style.decoration,
                 child: Center(
@@ -169,19 +169,19 @@ class DisabledDay extends StatelessWidget {
 
 /// A calender day's style.
 ///
-/// [todayStyle] takes precedence over [unselectedStyle] and [selectedStyle]. For example, if the current date is
-/// selected, [todayStyle] will be applied.
+/// [selectedStyle] takes precedence over [unselectedStyle] and [todayStyle]. For example, if the current date is
+/// selected, [selectedStyle] will be applied.
 final class FCalendarDayStyle with Diagnosticable {
   /// The current date's style.
-  ///
-  /// This style takes precedence over [unselectedStyle] and [selectedStyle]. For example, if the current date is
-  /// selected, [todayStyle] will be applied.
   final FCalendarDayStateStyle todayStyle;
 
   /// The unselected dates' style.
   final FCalendarDayStateStyle unselectedStyle;
 
   /// The selected dates' style.
+  ///
+  /// This style takes precedence over [unselectedStyle] and [todayStyle]. For example, if the current date is
+  /// selected, [todayStyle] will be applied.
   final FCalendarDayStateStyle selectedStyle;
 
   /// Creates a [FCalendarDayStyle].

@@ -6,7 +6,7 @@ const maxMonthRows = 6;
 
 /// The height & width of a day in a [DayPicker].
 @internal
-const dayDimension = 40.0;
+const dayDimension = 42.0;
 
 @internal
 class DayPicker extends StatefulWidget {
@@ -14,10 +14,10 @@ class DayPicker extends StatefulWidget {
   final LocalDate month;
   final LocalDate today;
   final LocalDate? focused;
-  final bool Function(DateTime day) enabledPredicate;
-  final bool Function(DateTime day) selectedPredicate;
-  final ValueChanged<DateTime> onPress;
-  final ValueChanged<DateTime> onLongPress;
+  final bool Function(LocalDate day) enabledPredicate;
+  final bool Function(LocalDate day) selectedPredicate;
+  final ValueChanged<LocalDate> onPress;
+  final ValueChanged<LocalDate> onLongPress;
 
   const DayPicker({
     required this.style,
@@ -76,10 +76,10 @@ class _DayPickerState extends State<DayPicker> {
                 focusNode,
                 widget.onPress,
                 widget.onLongPress,
-                enabled: widget.enabledPredicate(date.toNative()),
+                enabled: widget.enabledPredicate(date),
                 current: date.month == widget.month.month,
                 today: date == widget.today,
-                selected: widget.selectedPredicate(date.toNative()),
+                selected: widget.selectedPredicate(date),
               ),
           ],
           addRepaintBoundaries: false,
