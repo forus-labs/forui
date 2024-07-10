@@ -3,7 +3,7 @@ part of '../calendar.dart';
 /// Returns the [date].
 @internal
 Widget day(
-  FCalendarDayPickerStyle monthStyle,
+  FCalendarDayPickerStyle pickerStyle,
   LocalDate date,
   FocusNode focusNode,
   bool Function(LocalDate day) selectedPredicate,
@@ -14,7 +14,7 @@ Widget day(
   required bool today,
   required bool selected,
 }) {
-  final styles = enabled ? monthStyle.enabled : monthStyle.disabled;
+  final styles = enabled ? pickerStyle.enabledStyles : pickerStyle.disabledStyles;
   final dayStyle = current ? styles.current : styles.enclosing;
   final style = selected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 

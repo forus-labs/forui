@@ -43,22 +43,23 @@ class Application extends StatelessWidget {
 }
 
 class Testing extends StatelessWidget {
+
+  static final _selected = { LocalDate(2024, 7, 16), LocalDate(2024, 7, 17), LocalDate(2024, 7, 18),  LocalDate(2024, 7, 29)};
+
   const Testing({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return PagedDayPicker(
+  Widget build(BuildContext context) => Calendar(
       style: FCalendarStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography, style: context.theme.style),
-      start: LocalDate(2023, 1, 8),
-      end: LocalDate(2025, 7, 10),
+      start: LocalDate(1900, 1, 8),
+      end: LocalDate(2024, 7, 10),
       today: LocalDate.now(),
       initialMonth: LocalDate(2024, 7),
       enabledPredicate: (_) => true,
-      selectedPredicate: (a) => a == LocalDate(2024, 7, 11),
+      selectedPredicate: _selected.contains,
       onMonthChange: print,
       onPress: print,
       onLongPress: print,
     );
-  }
 }
 

@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart' hide DialogRoute;
-
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart' hide DialogRoute;
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:forui/forui.dart';
-
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample_scaffold.dart';
-import 'package:sugar/sugar.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -30,14 +26,7 @@ class ForuiSamples extends StatelessWidget {
 @RoutePage()
 class EmptyPage extends SampleScaffold {
   @override
-  Widget child(BuildContext context) => const Testing();
-}
-
-class Testing extends StatelessWidget {
-  const Testing({super.key});
-
-  @override
-  Widget build(BuildContext context) => PagedMonth(initialDate: DateTime(2024, 7, 8));
+  Widget child(BuildContext context) => const Placeholder();
 }
 
 @AutoRouterConfig()

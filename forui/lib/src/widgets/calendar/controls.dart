@@ -1,15 +1,13 @@
-part of '../calendar.dart';
+part of 'calendar.dart';
 
 @internal
-class Header extends StatelessWidget {
+class Controls extends StatelessWidget {
   final FCalendarHeaderStyle style;
-  final LocalDate month;
   final VoidCallback? onPrevious;
   final VoidCallback? onNext;
 
-  const Header({
+  const Controls({
     required this.style,
-    required this.month,
     required this.onPrevious,
     required this.onNext,
     super.key,
@@ -25,47 +23,50 @@ class Header extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 7),
-            child: FButton.raw(
-              // TODO: Replace with FButton.icon.
-              style: effectiveButtonStyle,
-              onPress: onPrevious,
-              child: Padding(
-                padding: const EdgeInsets.all(7),
-                child: FAssets.icons.chevronLeft(
-                  height: 17,
-                  colorFilter: ColorFilter.mode(
-                    style.iconColor,
-                    BlendMode.srcIn,
+      child: SizedBox(
+        height: toggleHeight,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 7),
+              child: FButton.raw(
+                // TODO: Replace with FButton.icon.
+                style: effectiveButtonStyle,
+                onPress: onPrevious,
+                child: Padding(
+                  padding: const EdgeInsets.all(7),
+                  child: FAssets.icons.chevronLeft(
+                    height: 17,
+                    colorFilter: ColorFilter.mode(
+                      style.iconColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Text('${month.month} ${month.year}', style: style.headerTextStyle), // TODO: Localization
-          Padding(
-            padding: const EdgeInsets.only(right: 7),
-            child: FButton.raw(
-              // TODO: Replace with FButton.icon.
-              style: effectiveButtonStyle,
-              onPress: onNext,
-              child: Padding(
-                padding: const EdgeInsets.all(7),
-                child: FAssets.icons.chevronRight(
-                  height: 17,
-                  colorFilter: ColorFilter.mode(
-                    style.iconColor,
-                    BlendMode.srcIn,
+            const Expanded(child: SizedBox()),
+            Padding(
+              padding: const EdgeInsets.only(right: 7),
+              child: FButton.raw(
+                // TODO: Replace with FButton.icon.
+                style: effectiveButtonStyle,
+                onPress: onNext,
+                child: Padding(
+                  padding: const EdgeInsets.all(7),
+                  child: FAssets.icons.chevronRight(
+                    height: 17,
+                    colorFilter: ColorFilter.mode(
+                      style.iconColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -75,7 +76,6 @@ class Header extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('onPrevious', onPrevious))
       ..add(DiagnosticsProperty('onNext', onNext));
   }

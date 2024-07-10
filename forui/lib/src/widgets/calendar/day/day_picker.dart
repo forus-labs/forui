@@ -167,10 +167,10 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   final TextStyle headerTextStyle;
 
   /// The styles of the current month on display and the enclosing months, when enabled.
-  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) enabled;
+  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) enabledStyles;
 
   /// The styles of the current month on display and the enclosing months, when disabled.
-  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) disabled;
+  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) disabledStyles;
 
   /// The starting day of the week. Defaults to the current locale's preferred starting day of the week if null.
   ///
@@ -185,8 +185,8 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// Creates a [FCalendarDayPickerStyle].
   const FCalendarDayPickerStyle({
     required this.headerTextStyle,
-    required this.enabled,
-    required this.disabled,
+    required this.enabledStyles,
+    required this.disabledStyles,
     this.startDayOfWeek,
   }) : assert(
           startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
@@ -212,7 +212,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
 
     return FCalendarDayPickerStyle(
       headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
-      enabled: (
+      enabledStyles: (
         current: FCalendarDayStyle(
           selectedStyle: FCalendarDayStateStyle.inherit(
             backgroundColor: colorScheme.foreground,
@@ -236,7 +236,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           ),
         ),
       ),
-      disabled: (
+      disabledStyles: (
         current: disabled,
         enclosing: disabled,
       ),
@@ -269,13 +269,13 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   }) =>
       FCalendarDayPickerStyle(
         headerTextStyle: headerTextStyle ?? this.headerTextStyle,
-        enabled: (
-          current: enabledCurrent ?? enabled.current,
-          enclosing: enabledEnclosing ?? enabled.enclosing,
+        enabledStyles: (
+          current: enabledCurrent ?? enabledStyles.current,
+          enclosing: enabledEnclosing ?? enabledStyles.enclosing,
         ),
-        disabled: (
-          current: disabledCurrent ?? disabled.current,
-          enclosing: disabledEnclosing ?? disabled.enclosing,
+        disabledStyles: (
+          current: disabledCurrent ?? disabledStyles.current,
+          enclosing: disabledEnclosing ?? disabledStyles.enclosing,
         ),
         startDayOfWeek: startDayOfWeek ?? this.startDayOfWeek,
       );
@@ -285,10 +285,10 @@ final class FCalendarDayPickerStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('headerTextStyle', headerTextStyle))
-      ..add(DiagnosticsProperty('enabled.current', enabled.current))
-      ..add(DiagnosticsProperty('enabled.enclosing', enabled.enclosing))
-      ..add(DiagnosticsProperty('disabled.current', disabled.current))
-      ..add(DiagnosticsProperty('disabled.enclosing', disabled.enclosing))
+      ..add(DiagnosticsProperty('enabled.current', enabledStyles.current))
+      ..add(DiagnosticsProperty('enabled.enclosing', enabledStyles.enclosing))
+      ..add(DiagnosticsProperty('disabled.current', disabledStyles.current))
+      ..add(DiagnosticsProperty('disabled.enclosing', disabledStyles.enclosing))
       ..add(IntProperty('startDayOfWeek', startDayOfWeek));
   }
 
@@ -298,10 +298,10 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       other is FCalendarDayPickerStyle &&
           runtimeType == other.runtimeType &&
           headerTextStyle == other.headerTextStyle &&
-          enabled == other.enabled &&
-          disabled == other.disabled &&
+          enabledStyles == other.enabledStyles &&
+          disabledStyles == other.disabledStyles &&
           startDayOfWeek == other.startDayOfWeek;
 
   @override
-  int get hashCode => headerTextStyle.hashCode ^ enabled.hashCode ^ disabled.hashCode ^ startDayOfWeek.hashCode;
+  int get hashCode => headerTextStyle.hashCode ^ enabledStyles.hashCode ^ disabledStyles.hashCode ^ startDayOfWeek.hashCode;
 }
