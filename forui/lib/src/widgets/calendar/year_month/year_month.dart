@@ -5,6 +5,7 @@ part of '../calendar.dart';
 Widget yearMonth(
   FCalendarYearMonthPickerStyle pickerStyle,
   LocalDate date,
+  FocusNode focusNode,
   ValueChanged<LocalDate> onPress,
   String Function(LocalDate) localize, {
   required bool enabled,
@@ -15,6 +16,7 @@ Widget yearMonth(
     return EnabledYearMonth(
       style: style,
       date: date,
+      focusNode: focusNode,
       onPress: onPress,
       localize: localize,
       current: current,
@@ -33,6 +35,7 @@ Widget yearMonth(
 class EnabledYearMonth extends StatefulWidget {
   final FCalendarYearMonthPickerStateStyle style;
   final LocalDate date;
+  final FocusNode focusNode;
   final bool current;
   final ValueChanged<LocalDate> onPress;
   final String Function(LocalDate) localize;
@@ -40,6 +43,7 @@ class EnabledYearMonth extends StatefulWidget {
   const EnabledYearMonth({
     required this.style,
     required this.date,
+    required this.focusNode,
     required this.current,
     required this.onPress,
     required this.localize,
@@ -55,6 +59,7 @@ class EnabledYearMonth extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('date', date, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('focusNode', focusNode, level: DiagnosticLevel.debug))
       ..add(FlagProperty('current', value: current, ifTrue: 'current', level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('localize', localize, level: DiagnosticLevel.debug));
@@ -62,35 +67,60 @@ class EnabledYearMonth extends StatefulWidget {
 }
 
 class _EnabledYearMonthState extends State<EnabledYearMonth> {
+  bool _focused = false;
   bool _hovered = false;
 
   @override
+  void initState() {
+    super.initState();
+    widget.focusNode.addListener(_updateFocused);
+  }
+
+  @override
+  void didUpdateWidget(EnabledYearMonth old) {
+    super.didUpdateWidget(old);
+    old.focusNode.removeListener(_updateFocused);
+    widget.focusNode.addListener(_updateFocused);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var textStyle = _hovered ? widget.style.focusedTextStyle : widget.style.textStyle;
+    var textStyle = _focused || _hovered ? widget.style.focusedTextStyle : widget.style.textStyle;
     if (widget.current) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      child: Semantics(
-        label: widget.localize(widget.date),
-        button: true,
-        excludeSemantics: true,
-        child: GestureDetector(
-          onTap: () => widget.onPress(widget.date),
-          child: DecoratedBox(
-            decoration: _hovered ? widget.style.focusedDecoration : widget.style.decoration,
-            child: Center(
-              child: Text(widget.localize(widget.date), style: textStyle),
+    return Focus(
+      focusNode: widget.focusNode,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        child: Semantics(
+          label: widget.localize(widget.date),
+          button: true,
+          excludeSemantics: true,
+          child: GestureDetector(
+            onTap: () => widget.onPress(widget.date),
+            child: DecoratedBox(
+              decoration: _focused || _hovered ? widget.style.focusedDecoration : widget.style.decoration,
+              child: Center(
+                child: Text(widget.localize(widget.date), style: textStyle),
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    widget.focusNode.removeListener(_updateFocused);
+    super.dispose();
+  }
+
+  void _updateFocused() => setState(() => _focused = widget.focusNode.hasFocus);
 }
 
 @internal
@@ -148,7 +178,7 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
             decoration: const BoxDecoration(),
             textStyle: typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
             focusedDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(8),
               color: colorScheme.secondary,
             ),
           ),

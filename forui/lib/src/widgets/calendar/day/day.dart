@@ -91,7 +91,7 @@ class _EnabledDayState extends State<EnabledDay> {
     old.focusNode.removeListener(_updateFocused);
     widget.focusNode.addListener(_updateFocused);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     var textStyle = _focused || _hovered ? widget.style.focusedTextStyle : widget.style.textStyle;
@@ -100,37 +100,36 @@ class _EnabledDayState extends State<EnabledDay> {
     }
 
     return Focus(
-        focusNode: widget.focusNode,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          onEnter: (_) => setState(() => _hovered = true),
-          onExit: (_) => setState(() => _hovered = false),
-          child: Semantics(
-            label: '${widget.date}${widget.today ? ', Today' : ''}', // TODO: localization
-            button: true,
-            selected: widget.selected,
-            excludeSemantics: true,
-            child: GestureDetector(
-              onTap: () => widget.onPress(widget.date),
-              onLongPress: () => widget.onLongPress(widget.date),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.horizontal(
-                    left: widget.selectedPredicate(widget.date.yesterday) ? Radius.zero : const Radius.circular(4),
-                    right: widget.selectedPredicate(widget.date.tomorrow) ? Radius.zero : const Radius.circular(4),
-                  ),
-                  color: _focused || _hovered ? widget.style.focusedBackgroundColor : widget.style.backgroundColor,
+      focusNode: widget.focusNode,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        child: Semantics(
+          label: '${widget.date}${widget.today ? ', Today' : ''}', // TODO: localization
+          button: true,
+          selected: widget.selected,
+          excludeSemantics: true,
+          child: GestureDetector(
+            onTap: () => widget.onPress(widget.date),
+            onLongPress: () => widget.onLongPress(widget.date),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.horizontal(
+                  left: widget.selectedPredicate(widget.date.yesterday) ? Radius.zero : const Radius.circular(4),
+                  right: widget.selectedPredicate(widget.date.tomorrow) ? Radius.zero : const Radius.circular(4),
                 ),
-                child: Center(
-                  child: Text('${widget.date.day}', style: textStyle), // TODO: localization
-                ),
+                color: _focused || _hovered ? widget.style.focusedBackgroundColor : widget.style.backgroundColor,
+              ),
+              child: Center(
+                child: Text('${widget.date.day}', style: textStyle), // TODO: localization
               ),
             ),
           ),
         ),
-      );
+      ),
+    );
   }
-
 
   @override
   void dispose() {
@@ -139,12 +138,6 @@ class _EnabledDayState extends State<EnabledDay> {
   }
 
   void _updateFocused() => setState(() => _focused = widget.focusNode.hasFocus);
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(FlagProperty('focused', value: _hovered, ifTrue: 'focused'));
-  }
 }
 
 @internal
@@ -170,19 +163,19 @@ class DisabledDay extends StatelessWidget {
     }
 
     return ExcludeSemantics(
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.horizontal(
-              left: selectedPredicate(date.yesterday) ? Radius.zero : const Radius.circular(4),
-              right: selectedPredicate(date.tomorrow) ? Radius.zero : const Radius.circular(4),
-            ),
-            color: style.backgroundColor,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.horizontal(
+            left: selectedPredicate(date.yesterday) ? Radius.zero : const Radius.circular(4),
+            right: selectedPredicate(date.tomorrow) ? Radius.zero : const Radius.circular(4),
           ),
-          child: Center(
-            child: Text('${date.day}', style: textStyle), // TODO: localization
-          ),
+          color: style.backgroundColor,
         ),
-      );
+        child: Center(
+          child: Text('${date.day}', style: textStyle), // TODO: localization
+        ),
+      ),
+    );
   }
 
   @override
@@ -200,6 +193,7 @@ class DisabledDay extends StatelessWidget {
 final class FCalendarDayStyle with Diagnosticable {
   /// The selected dates' style.
   final FCalendarDayStateStyle selectedStyle;
+
   /// The unselected dates' style.
   final FCalendarDayStateStyle unselectedStyle;
 
@@ -339,5 +333,6 @@ final class FCalendarDayStateStyle with Diagnosticable {
           focusedTextStyle == other.focusedTextStyle;
 
   @override
-  int get hashCode => backgroundColor.hashCode ^ textStyle.hashCode ^ focusedBackgroundColor.hashCode ^ focusedTextStyle.hashCode;
+  int get hashCode =>
+      backgroundColor.hashCode ^ textStyle.hashCode ^ focusedBackgroundColor.hashCode ^ focusedTextStyle.hashCode;
 }

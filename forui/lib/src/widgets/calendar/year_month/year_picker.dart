@@ -1,18 +1,34 @@
 part of '../calendar.dart';
 
+/// The number of columns in a year & month picker.
+@internal
+const yearMonthPickerColumns = 3;
+
+/// The number of rows in a year & month picker.
+@internal
+const yearMonthPickerRows = 4;
+
+/// The total number of items in a year & month picker.
+@internal
+const yearMonthPickerItems = yearMonthPickerColumns * yearMonthPickerRows;
+
 @internal
 class YearPicker extends StatefulWidget {
-  final FCalendarStyle style;
+  final FCalendarYearMonthPickerStyle style;
+  final LocalDate startYear;
   final LocalDate start;
   final LocalDate end;
-  final LocalDate current;
+  final LocalDate today;
+  final LocalDate? focused;
   final ValueChanged<LocalDate> onPress;
 
   const YearPicker({
     required this.style,
+    required this.startYear,
     required this.start,
     required this.end,
-    required this.current,
+    required this.today,
+    required this.focused,
     required this.onPress,
     super.key,
   });
@@ -22,87 +38,66 @@ class YearPicker extends StatefulWidget {
 }
 
 class _YearPickerState extends State<YearPicker> {
-  static const _columns = 3;
-
-  static int delta(LocalDate start, LocalDate end) => ((end.year - start.year + 1) / 12).ceil();
-
-  final GlobalKey key = GlobalKey();
-  late LocalDate _current;
-  late PageController _controller;
+  late List<FocusNode> _years;
 
   @override
   void initState() {
     super.initState();
-    _current = widget.current.truncate(to: DateUnit.years);
-    _controller = PageController(initialPage: delta(widget.start, widget.end));
+    _years = List.generate(yearMonthPickerItems, (i) => FocusNode(skipTraversal: true, debugLabel: '$i'));
+
+    final focused = widget.focused;
+
+
+    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: yearMonthPickerItems) <= focused) {
+      return;
+    }
+
+    _years[focused.year - widget.startYear.year].requestFocus();
   }
 
   @override
-  Widget build(BuildContext context) {
-    final initial = widget.start.truncate(to: DateUnit.years);
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Controls(
-            style: widget.style.headerStyle,
-            onPrevious: _first ? null : _handlePrevious,
-            onNext: _last ? null : _handleNext,
-          ),
+  Widget build(BuildContext context) => GridView(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: yearMonthPickerColumns,
+          childAspectRatio: 1.618,
         ),
-        Expanded(
-          child: PageView.builder(
-            key: key,
-            controller: _controller,
-            itemBuilder: (context, index) => GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 1.618,
-              ),
-              children: [
-                for (var year = initial.plus(years: index * 12), i = 0; i < 12; year = year.plus(years: 1), i++)
-                  yearMonth(
-                    widget.style.yearMonthPickerStyle,
-                    year,
-                    widget.onPress,
-                    (date) => '${date.year}', // TODO: localize
-                    enabled: widget.start <= year && year <= widget.end,
-                    current: widget.current.year == year.year,
-                  )
-              ],
+        children: [
+          for (var year = widget.startYear, i = 0; i < yearMonthPickerItems; year = year.plus(years: 1), i++)
+            yearMonth(
+              widget.style,
+              year,
+              _years[i],
+              widget.onPress,
+              (date) => '${date.year}', // TODO: localize
+              enabled: widget.start <= year && year <= widget.end,
+              current: widget.today.year == year.year,
             ),
-            itemCount: delta(widget.start, widget.end),
-          ),
-        ),
-      ],
+        ],
+      );
+
+  @override
+  void didUpdateWidget(YearPicker old) {
+    super.didUpdateWidget(old);
+    assert(
+      old.startYear == widget.startYear,
+      'We assumed that a new YearPicker is created each time we navigate to a years page.',
     );
-  }
 
-  /// Navigate to the next month.
-  void _handleNext() {
-    if (!_last) {
-      _controller.nextPage(
-        duration: widget.style.pageAnimationDuration,
-        curve: Curves.ease,
-      );
+    final focused = widget.focused;
+    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: yearMonthPickerItems) <= focused) {
+      return;
+    }
+
+    if (_years[focused.year - widget.startYear.year] case final focusNode when old.focused != widget.focused) {
+      focusNode.requestFocus();
     }
   }
 
-  /// Navigate to the previous month.
-  void _handlePrevious() {
-    if (!_first) {
-      _controller.previousPage(
-        duration: widget.style.pageAnimationDuration,
-        curve: Curves.ease,
-      );
+  @override
+  void dispose() {
+    for (final node in _years) {
+      node.dispose();
     }
-  }
-
-  /// True if the earliest allowable years are displayed.
-  bool get _first => delta(widget.start, _current) == 0;
-
-  /// True if the latest allowable years are displayed.
-  bool get _last {
-    return delta(widget.start, _current) == delta(widget.start, widget.end);
+    super.dispose();
   }
 }

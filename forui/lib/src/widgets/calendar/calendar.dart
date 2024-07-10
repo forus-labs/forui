@@ -11,12 +11,13 @@ import 'package:sugar/time.dart';
 
 part 'day/day.dart';
 part 'day/day_picker.dart';
-part 'controls.dart';
 part 'day/paged_day_picker.dart';
 
+part 'year_month/paged_year_picker.dart';
 part 'year_month/year_month.dart';
 part 'year_month/year_picker.dart';
 
+part 'controls.dart';
 part 'paged_picker.dart';
 part 'toggle.dart';
 
@@ -65,7 +66,7 @@ class _CalendarState extends State<Calendar> {
   @override
   void initState() {
     super.initState();
-    mode = FCalendarPickerMode.day; // TODO:
+    mode = FCalendarPickerMode.yearMonth; // TODO:
     month = widget.initialMonth;
   }
 
@@ -75,8 +76,8 @@ class _CalendarState extends State<Calendar> {
         child: Padding(
           padding: widget.style.padding,
           child: SizedBox(
-            height: dayDimension * maxGridRows,
-            width: dayDimension * DateTime.daysPerWeek,
+            height: (maxDayPickerTileDimension * maxDayPickerGridRows) + toggleHeight + 5,
+            width: maxDayPickerTileDimension * DateTime.daysPerWeek,
             child: Stack(
               alignment: Alignment.topCenter,
               children: [
@@ -86,18 +87,19 @@ class _CalendarState extends State<Calendar> {
                       start: widget.start,
                       end: widget.end,
                       today: widget.today,
-                      initialMonth: widget.initialMonth,
+                      initial: widget.initialMonth.truncate(to: DateUnit.months),
                       enabledPredicate: widget.enabledPredicate,
                       selectedPredicate: widget.selectedPredicate,
                       onMonthChange: widget.onMonthChange,
                       onPress: widget.onPress,
                       onLongPress: widget.onLongPress,
                     ),
-                  FCalendarPickerMode.year => YearPicker(
+                  FCalendarPickerMode.yearMonth => PagedYearPicker(
                       style: widget.style,
                       start: widget.start,
                       end: widget.end,
-                      current: widget.today,
+                      today: widget.today,
+                      initial: widget.initialMonth.truncate(to: DateUnit.years),
                       onPress: print,
                     ),
                 },

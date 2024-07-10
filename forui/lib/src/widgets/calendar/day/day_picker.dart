@@ -2,11 +2,11 @@ part of '../calendar.dart';
 
 /// The maximum number of rows in a month. In this case, a 31 day month that starts on Saturday.
 @internal
-const maxGridRows = 7;
+const maxDayPickerGridRows = 7;
 
 /// The height & width of a day in a [DayPicker].
 @internal
-const dayDimension = 42.0;
+const maxDayPickerTileDimension = 42.0;
 
 @internal
 class DayPicker extends StatefulWidget {
@@ -84,7 +84,7 @@ class _DayPickerState extends State<DayPicker> {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-      width: DateTime.daysPerWeek * dayDimension,
+      width: DateTime.daysPerWeek * maxDayPickerTileDimension,
       child: GridView.custom(
         padding: EdgeInsets.zero,
         shrinkWrap: true,
@@ -149,11 +149,11 @@ class _GridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-        childCrossAxisExtent: dayDimension,
-        childMainAxisExtent: dayDimension,
+        childCrossAxisExtent: maxDayPickerTileDimension,
+        childMainAxisExtent: maxDayPickerTileDimension,
         crossAxisCount: DateTime.daysPerWeek,
-        crossAxisStride: dayDimension,
-        mainAxisStride: dayDimension,
+        crossAxisStride: maxDayPickerTileDimension,
+        mainAxisStride: maxDayPickerTileDimension,
         reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
       );
 

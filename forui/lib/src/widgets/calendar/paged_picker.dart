@@ -27,14 +27,14 @@ abstract class PagedPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
-      ..add(DiagnosticsProperty('initial', initial));
+      ..add(DiagnosticsProperty('initial', initial))
+      ..add(DiagnosticsProperty('enabledPredicate', enabledPredicate));
   }
 }
 
 // Most of the traversal logic is copied from Material's _MonthPickerState.
 @internal
 abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
-
   static const _shortcuts = <ShortcutActivator, Intent>{
     SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(TraversalDirection.left),
     SingleActivator(LogicalKeyboardKey.arrowRight): DirectionalFocusIntent(TraversalDirection.right),
@@ -42,12 +42,12 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(TraversalDirection.up),
   };
 
-  final GlobalKey _pageViewKey = GlobalKey();
   late LocalDate current;
+  LocalDate? focusedDate;
+  final GlobalKey _pageViewKey = GlobalKey();
   late PageController _controller;
   late Map<Type, Action<Intent>> _actions;
   late FocusNode _gridFocusNode;
-  LocalDate? _focused;
 
   @override
   void initState() {
@@ -64,31 +64,31 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
   @override
   Widget build(BuildContext context) => Column(
-    children: [
-      Controls(
-        style: widget.style.headerStyle,
-        onPrevious: _first ? null : _handlePrevious,
-        onNext: _last ? null : _handleNext,
-      ),
-      Expanded(
-        child: FocusableActionDetector(
-          shortcuts: _shortcuts,
-          actions: _actions,
-          focusNode: _gridFocusNode,
-          onFocusChange: handleGridFocusChange,
-          child: PageView.builder(
-            key: _pageViewKey,
-            controller: _controller,
-            itemBuilder: buildItem,
-            itemCount: delta(widget.start, widget.end),
-            onPageChanged: handlePageChange,
+        children: [
+          Controls(
+            style: widget.style.headerStyle,
+            onPrevious: _first ? null : _handlePrevious,
+            onNext: _last ? null : _handleNext,
           ),
-        ),
-      ),
-    ],
-  );
+          Expanded(
+            child: FocusableActionDetector(
+              shortcuts: _shortcuts,
+              actions: _actions,
+              focusNode: _gridFocusNode,
+              onFocusChange: handleGridFocusChange,
+              child: PageView.builder(
+                key: _pageViewKey,
+                controller: _controller,
+                itemBuilder: buildItem,
+                itemCount: delta(widget.start, widget.end) + 1,
+                onPageChanged: handlePageChange,
+              ),
+            ),
+          ),
+        ],
+      );
 
-  Widget buildItem(BuildContext context, int index);
+  Widget buildItem(BuildContext context, int page);
 
   @override
   void dispose() {
@@ -97,6 +97,14 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     super.dispose();
   }
 
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('current', current))
+      ..add(DiagnosticsProperty('focusedDate', focusedDate))
+      ..add(DiagnosticsProperty('directionOffset', directionOffset));
+  }
 
   void _handleNext() {
     if (!_last) {
@@ -132,7 +140,6 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
   void handleGridFocusChange(bool focused);
 
-
   /// Move focus to the next element after the day grid.
   void _handleGridNextFocus(NextFocusIntent intent) {
     _gridFocusNode
@@ -147,7 +154,6 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
       ..previousFocus();
   }
 
-
   /// Move the internal focus date in the direction of the given intent.
   ///
   /// This will attempt to move the focused day to the next selectable day in
@@ -158,13 +164,14 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   /// on the current [TextDirection]). For vertical directions it will move up and
   /// down a week at a time.
   void _handleDirectionFocus(DirectionalFocusIntent intent) {
-    assert(_focused != null, 'Cannot move focus without a focused day.');
+    assert(focusedDate != null, 'Cannot move focus without a focused day.');
     setState(() {
-      final nextDate = _nextDateInDirection(_focused!, intent.direction);
+      final nextDate = _nextDateInDirection(focusedDate!, intent.direction);
       if (nextDate != null) {
-        _focused = nextDate;
-        if (delta(widget.start, _focused!) != delta(widget.start, current)) {
-          _showPage(_focused!);
+        focusedDate = nextDate;
+        print(focusedDate);
+        if (delta(widget.start, focusedDate!) != delta(widget.start, current)) {
+          _showPage(focusedDate!);
         }
       }
     });
@@ -192,7 +199,6 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
     return null;
   }
-
 
   int delta(LocalDate start, LocalDate end);
 

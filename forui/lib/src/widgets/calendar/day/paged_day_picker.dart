@@ -7,7 +7,7 @@ class PagedDayPicker extends PagedPicker {
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate> onLongPress;
 
-  const PagedDayPicker({
+  PagedDayPicker({
     required this.selectedPredicate,
     required this.onMonthChange,
     required this.onPress,
@@ -17,9 +17,11 @@ class PagedDayPicker extends PagedPicker {
     required super.end,
     required super.today,
     required super.initial,
-    required super.enabledPredicate,
+    required bool Function(LocalDate) enabledPredicate,
     super.key,
-  });
+  }) : super(
+          enabledPredicate: (date) => start <= date && date <= end && enabledPredicate(date),
+        );
 
   @override
   State<PagedDayPicker> createState() => _PageDayPickerState();
@@ -39,19 +41,19 @@ class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
   late TextDirection _textDirection;
 
   @override
-  Widget buildItem(BuildContext context, int index) => DayPicker(
-        focused: _focused,
+  Widget buildItem(BuildContext context, int page) => DayPicker(
+        focused: focusedDate,
         style: widget.style.dayPickerStyle,
-        month: widget.start.truncate(to: DateUnit.months).plus(months: index),
+        month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
-        enabledPredicate: (date) => widget.start <= date && date <= widget.end && widget.enabledPredicate(date),
+        enabledPredicate: widget.enabledPredicate,
         selectedPredicate: widget.selectedPredicate,
         onPress: (date) {
-          setState(() => _focused = date);
+          setState(() => focusedDate = date);
           widget.onPress(date);
         },
         onLongPress: (date) {
-          setState(() => _focused = date);
+          setState(() => focusedDate = date);
           widget.onLongPress(date);
         },
       );
@@ -66,10 +68,34 @@ class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   void handleGridFocusChange(bool focused) {
     setState(() {
-      if (focused && _focused == null) {
+      if (focused && focusedDate == null) {
         final preferred = widget.today.truncate(to: DateUnit.months) == current ? widget.today.day : 1;
-        _focused = _focusableDayForMonth(current, preferred);
+        focusedDate = _focusableDayForMonth(current, preferred);
       }
+    });
+  }
+
+  @override
+  void handlePageChange(int page) {
+    setState(() {
+      final changed = widget.start.truncate(to: DateUnit.months).plus(months: page);
+      if (current == changed) {
+        return;
+      }
+
+      current = changed;
+      widget.onMonthChange?.call(current.toNative());
+      if (focusedDate case final focused? when focused.truncate(to: DateUnit.months) == current) {
+        // We have navigated to a new month with the grid focused, but the
+        // focused day is not in this month. Choose a new one trying to keep
+        // the same day of the month.
+        focusedDate = _focusableDayForMonth(current, focusedDate!.day);
+      }
+
+      SemanticsService.announce(
+        current.toString(), // TODO: localization
+        _textDirection,
+      );
     });
   }
 
@@ -95,30 +121,6 @@ class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
     }
 
     return null;
-  }
-
-  @override
-  void handlePageChange(int page) {
-    setState(() {
-      final changed = widget.start.truncate(to: DateUnit.months).plus(months: page);
-      if (current == changed) {
-        return;
-      }
-
-      current = changed;
-      widget.onMonthChange?.call(current.toNative());
-      if (_focused case final focused? when focused.truncate(to: DateUnit.months) == current) {
-        // We have navigated to a new month with the grid focused, but the
-        // focused day is not in this month. Choose a new one trying to keep
-        // the same day of the month.
-        _focused = _focusableDayForMonth(current, _focused!.day);
-      }
-
-      SemanticsService.announce(
-        current.toString(), // TODO: localization
-        _textDirection,
-      );
-    });
   }
 
   @override
