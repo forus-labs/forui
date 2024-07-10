@@ -200,16 +200,12 @@ final class FCalendarDayPickerStyle with Diagnosticable {
         typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
 
     final disabled = FCalendarDayStyle(
-      todayStyle: FCalendarDayStateStyle.inherit(
+      selectedStyle: FCalendarDayStateStyle.inherit(
         backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
       ),
       unselectedStyle: FCalendarDayStateStyle.inherit(
         backgroundColor: colorScheme.background,
-        textStyle: mutedTextStyle,
-      ),
-      selectedStyle: FCalendarDayStateStyle.inherit(
-        backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
       ),
     );
@@ -218,22 +214,18 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
       enabled: (
         current: FCalendarDayStyle(
-          todayStyle: FCalendarDayStateStyle.inherit(
-            backgroundColor: colorScheme.secondary,
-            textStyle: textStyle,
+          selectedStyle: FCalendarDayStateStyle.inherit(
+            backgroundColor: colorScheme.foreground,
+            textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
           ),
           unselectedStyle: FCalendarDayStateStyle.inherit(
             backgroundColor: colorScheme.background,
             textStyle: textStyle,
             focusedBackgroundColor: colorScheme.secondary,
           ),
-          selectedStyle: FCalendarDayStateStyle.inherit(
-            backgroundColor: colorScheme.foreground,
-            textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
-          ),
         ),
         enclosing: FCalendarDayStyle(
-          todayStyle: FCalendarDayStateStyle.inherit(
+          selectedStyle: FCalendarDayStateStyle.inherit(
             backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
           ),
@@ -241,10 +233,6 @@ final class FCalendarDayPickerStyle with Diagnosticable {
             backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
             focusedBackgroundColor: colorScheme.primaryForeground,
-          ),
-          selectedStyle: FCalendarDayStateStyle.inherit(
-            backgroundColor: colorScheme.primaryForeground,
-            textStyle: mutedTextStyle,
           ),
         ),
       ),

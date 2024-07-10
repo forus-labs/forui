@@ -16,11 +16,7 @@ Widget day(
 }) {
   final styles = enabled ? monthStyle.enabled : monthStyle.disabled;
   final dayStyle = current ? styles.current : styles.enclosing;
-  final style = switch ((today, selected)) {
-    (_, true) => dayStyle.selectedStyle,
-    (false, _) => dayStyle.unselectedStyle,
-    (true, _) => dayStyle.todayStyle,
-  };
+  final style = selected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
   if (enabled) {
     return EnabledDay(
@@ -34,7 +30,7 @@ Widget day(
       selected: selected,
     );
   } else {
-    return DisabledDay(style: style, date: date, selectedPredicate: selectedPredicate);
+    return DisabledDay(style: style, date: date, today: today, selectedPredicate: selectedPredicate);
   }
 }
 
@@ -97,7 +93,13 @@ class _EnabledDayState extends State<EnabledDay> {
   }
   
   @override
-  Widget build(BuildContext context) => Focus(
+  Widget build(BuildContext context) {
+    var textStyle = _focused || _hovered ? widget.style.focusedTextStyle : widget.style.textStyle;
+    if (widget.today) {
+      textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
+    }
+
+    return Focus(
         focusNode: widget.focusNode,
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
@@ -120,16 +122,14 @@ class _EnabledDayState extends State<EnabledDay> {
                   color: _focused || _hovered ? widget.style.focusedBackgroundColor : widget.style.backgroundColor,
                 ),
                 child: Center(
-                  child: Text(
-                    '${widget.date.day}', // TODO: localization
-                    style: _focused || _hovered ? widget.style.focusedTextStyle : widget.style.textStyle,
-                  ),
+                  child: Text('${widget.date.day}', style: textStyle), // TODO: localization
                 ),
               ),
             ),
           ),
         ),
       );
+  }
 
 
   @override
@@ -151,27 +151,39 @@ class _EnabledDayState extends State<EnabledDay> {
 class DisabledDay extends StatelessWidget {
   final FCalendarDayStateStyle style;
   final LocalDate date;
+  final bool today;
   final bool Function(LocalDate day) selectedPredicate;
 
   const DisabledDay({
     required this.style,
     required this.date,
+    required this.today,
     required this.selectedPredicate,
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) => ExcludeSemantics(
+  Widget build(BuildContext context) {
+    var textStyle = style.textStyle;
+    if (today) {
+      textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
+    }
+
+    return ExcludeSemantics(
         child: DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.horizontal(
+              left: selectedPredicate(date.yesterday) ? Radius.zero : const Radius.circular(4),
+              right: selectedPredicate(date.tomorrow) ? Radius.zero : const Radius.circular(4),
+            ),
             color: style.backgroundColor,
           ),
           child: Center(
-            child: Text('${date.day}', style: style.textStyle), // TODO: localization
+            child: Text('${date.day}', style: textStyle), // TODO: localization
           ),
         ),
       );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -179,30 +191,20 @@ class DisabledDay extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('date', date, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('selectedPredicate', selectedPredicate));
   }
 }
 
 /// A calender day's style.
-///
-/// [selectedStyle] takes precedence over [unselectedStyle] and [todayStyle]. For example, if the current date is
-/// selected, [selectedStyle] will be applied.
 final class FCalendarDayStyle with Diagnosticable {
-  /// The current date's style.
-  final FCalendarDayStateStyle todayStyle;
-
+  /// The selected dates' style.
+  final FCalendarDayStateStyle selectedStyle;
   /// The unselected dates' style.
   final FCalendarDayStateStyle unselectedStyle;
 
-  /// The selected dates' style.
-  ///
-  /// This style takes precedence over [unselectedStyle] and [todayStyle]. For example, if the current date is
-  /// selected, [todayStyle] will be applied.
-  final FCalendarDayStateStyle selectedStyle;
-
   /// Creates a [FCalendarDayStyle].
   const FCalendarDayStyle({
-    required this.todayStyle,
     required this.unselectedStyle,
     required this.selectedStyle,
   });
@@ -211,7 +213,7 @@ final class FCalendarDayStyle with Diagnosticable {
   ///
   /// ```dart
   /// final style = FDayStyle(
-  ///   todayStyle: ...,
+  ///   selectedStyle: ...,
   ///   unselectedStyle: ...,
   ///   // Other arguments omitted for brevity
   /// );
@@ -220,27 +222,24 @@ final class FCalendarDayStyle with Diagnosticable {
   ///   unselectedStyle: ...,
   /// );
   ///
-  /// print(style.todayStyle == copy.todayStyle); // true
+  /// print(style.selectedStyle == copy.selectedStyle); // true
   /// print(style.unselectedStyle == copy.unselectedStyle); // false
   /// ```
   FCalendarDayStyle copyWith({
-    FCalendarDayStateStyle? todayStyle,
-    FCalendarDayStateStyle? unselectedStyle,
     FCalendarDayStateStyle? selectedStyle,
+    FCalendarDayStateStyle? unselectedStyle,
   }) =>
       FCalendarDayStyle(
-        todayStyle: todayStyle ?? this.todayStyle,
-        unselectedStyle: unselectedStyle ?? this.unselectedStyle,
         selectedStyle: selectedStyle ?? this.selectedStyle,
+        unselectedStyle: unselectedStyle ?? this.unselectedStyle,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('todayStyle', todayStyle))
-      ..add(DiagnosticsProperty('unselectedStyle', unselectedStyle))
-      ..add(DiagnosticsProperty('selectedStyle', selectedStyle));
+      ..add(DiagnosticsProperty('selectedStyle', selectedStyle))
+      ..add(DiagnosticsProperty('unselectedStyle', unselectedStyle));
   }
 
   @override
@@ -248,12 +247,11 @@ final class FCalendarDayStyle with Diagnosticable {
       identical(this, other) ||
       other is FCalendarDayStyle &&
           runtimeType == other.runtimeType &&
-          todayStyle == other.todayStyle &&
           unselectedStyle == other.unselectedStyle &&
           selectedStyle == other.selectedStyle;
 
   @override
-  int get hashCode => todayStyle.hashCode ^ unselectedStyle.hashCode ^ selectedStyle.hashCode;
+  int get hashCode => unselectedStyle.hashCode ^ selectedStyle.hashCode;
 }
 
 /// A calendar day state's style.
