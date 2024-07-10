@@ -40,6 +40,7 @@ final class FCalendarStyle with Diagnosticable {
             border: Border.all(
               color: colorScheme.border,
             ),
+            color: colorScheme.background,
           ),
         );
 }

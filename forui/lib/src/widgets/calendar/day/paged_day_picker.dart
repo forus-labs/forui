@@ -244,11 +244,8 @@ class _PageDayPickerState extends State<PagedDayPicker> {
   void _handleGridFocusChange(bool focused) {
     setState(() {
       if (focused && _focusedDay == null) {
-        if (widget.today.truncate(to: DateUnit.months) == _currentMonth) {
-          _focusedDay = _focusableDayForMonth(_currentMonth, widget.today.day);
-        } else {
-          _focusedDay = _focusableDayForMonth(_currentMonth, 1);
-        }
+        final preferred = widget.today.truncate(to: DateUnit.months) == _currentMonth ? widget.today.day : 1;
+        _focusedDay = _focusableDayForMonth(_currentMonth, preferred);
       }
     });
   }

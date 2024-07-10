@@ -98,6 +98,7 @@ class _DayPickerState extends State<DayPicker> {
                 widget.style,
                 date,
                 focusNode,
+                widget.selectedPredicate,
                 widget.onPress,
                 widget.onLongPress,
                 enabled: widget.enabledPredicate(date),
@@ -200,14 +201,15 @@ final class FCalendarDayPickerStyle with Diagnosticable {
 
     final disabled = FCalendarDayStyle(
       todayStyle: FCalendarDayStateStyle.inherit(
-        color: colorScheme.primaryForeground,
+        backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
       ),
       unselectedStyle: FCalendarDayStateStyle.inherit(
+        backgroundColor: colorScheme.background,
         textStyle: mutedTextStyle,
       ),
       selectedStyle: FCalendarDayStateStyle.inherit(
-        color: colorScheme.primaryForeground,
+        backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
       ),
     );
@@ -217,29 +219,31 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       enabled: (
         current: FCalendarDayStyle(
           todayStyle: FCalendarDayStateStyle.inherit(
-            color: colorScheme.secondary,
+            backgroundColor: colorScheme.secondary,
             textStyle: textStyle,
           ),
           unselectedStyle: FCalendarDayStateStyle.inherit(
+            backgroundColor: colorScheme.background,
             textStyle: textStyle,
-            focusedColor: colorScheme.secondary,
+            focusedBackgroundColor: colorScheme.secondary,
           ),
           selectedStyle: FCalendarDayStateStyle.inherit(
-            color: colorScheme.foreground,
+            backgroundColor: colorScheme.foreground,
             textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
           ),
         ),
         enclosing: FCalendarDayStyle(
           todayStyle: FCalendarDayStateStyle.inherit(
-            color: colorScheme.primaryForeground,
+            backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
           ),
           unselectedStyle: FCalendarDayStateStyle.inherit(
+            backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
-            focusedColor: colorScheme.primaryForeground,
+            focusedBackgroundColor: colorScheme.primaryForeground,
           ),
           selectedStyle: FCalendarDayStateStyle.inherit(
-            color: colorScheme.primaryForeground,
+            backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
           ),
         ),

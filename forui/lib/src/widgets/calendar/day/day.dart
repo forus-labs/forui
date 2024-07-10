@@ -6,6 +6,7 @@ Widget day(
   FCalendarDayPickerStyle monthStyle,
   LocalDate date,
   FocusNode focusNode,
+  bool Function(LocalDate day) selectedPredicate,
   ValueChanged<LocalDate> onPress,
   ValueChanged<LocalDate> onLongPress, {
   required bool enabled,
@@ -26,13 +27,14 @@ Widget day(
       style: style,
       date: date,
       focusNode: focusNode,
+      selectedPredicate: selectedPredicate,
       onPress: onPress,
       onLongPress: onLongPress,
       today: today,
       selected: selected,
     );
   } else {
-    return DisabledDay(style: style, date: date);
+    return DisabledDay(style: style, date: date, selectedPredicate: selectedPredicate);
   }
 }
 
@@ -41,6 +43,7 @@ class EnabledDay extends StatefulWidget {
   final FCalendarDayStateStyle style;
   final LocalDate date;
   final FocusNode focusNode;
+  final bool Function(LocalDate day) selectedPredicate;
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate> onLongPress;
   final bool today;
@@ -50,6 +53,7 @@ class EnabledDay extends StatefulWidget {
     required this.style,
     required this.date,
     required this.focusNode,
+    required this.selectedPredicate,
     required this.onPress,
     required this.onLongPress,
     required this.today,
@@ -67,6 +71,7 @@ class EnabledDay extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('date', date, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('focusNode', focusNode, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('selectedPredicate', selectedPredicate, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onLongPress', onLongPress, level: DiagnosticLevel.debug))
       ..add(FlagProperty('today', value: today, ifTrue: 'today', level: DiagnosticLevel.debug))
@@ -77,7 +82,6 @@ class EnabledDay extends StatefulWidget {
 class _EnabledDayState extends State<EnabledDay> {
   bool _focused = false;
   bool _hovered = false;
-
 
   @override
   void initState() {
@@ -91,7 +95,7 @@ class _EnabledDayState extends State<EnabledDay> {
     old.focusNode.removeListener(_updateFocused);
     widget.focusNode.addListener(_updateFocused);
   }
-
+  
   @override
   Widget build(BuildContext context) => Focus(
         focusNode: widget.focusNode,
@@ -108,7 +112,13 @@ class _EnabledDayState extends State<EnabledDay> {
               onTap: () => widget.onPress(widget.date),
               onLongPress: () => widget.onLongPress(widget.date),
               child: DecoratedBox(
-                decoration: _focused || _hovered ? widget.style.focusedDecoration : widget.style.decoration,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.horizontal(
+                    left: widget.selectedPredicate(widget.date.yesterday) ? Radius.zero : const Radius.circular(4),
+                    right: widget.selectedPredicate(widget.date.tomorrow) ? Radius.zero : const Radius.circular(4),
+                  ),
+                  color: _focused || _hovered ? widget.style.focusedBackgroundColor : widget.style.backgroundColor,
+                ),
                 child: Center(
                   child: Text(
                     '${widget.date.day}', // TODO: localization
@@ -141,17 +151,22 @@ class _EnabledDayState extends State<EnabledDay> {
 class DisabledDay extends StatelessWidget {
   final FCalendarDayStateStyle style;
   final LocalDate date;
+  final bool Function(LocalDate day) selectedPredicate;
 
   const DisabledDay({
     required this.style,
     required this.date,
+    required this.selectedPredicate,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
         child: DecoratedBox(
-          decoration: style.decoration,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: style.backgroundColor,
+          ),
           child: Center(
             child: Text('${date.day}', style: style.textStyle), // TODO: localization
           ),
@@ -163,7 +178,8 @@ class DisabledDay extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('date', date, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty('date', date, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('selectedPredicate', selectedPredicate));
   }
 }
 
@@ -242,47 +258,37 @@ final class FCalendarDayStyle with Diagnosticable {
 
 /// A calendar day state's style.
 final class FCalendarDayStateStyle with Diagnosticable {
-  /// The unfocused day's decoration.
-  final BoxDecoration decoration;
+  /// The unfocused day's background color.
+  final Color backgroundColor;
 
   /// The unfocused day's text style.
   final TextStyle textStyle;
 
-  /// The focused day's decoration. Defaults to [decoration].
-  final BoxDecoration focusedDecoration;
+  /// The focused day's background color. Defaults to [backgroundColor].
+  final Color focusedBackgroundColor;
 
   /// The focused day's text style. Defaults to [textStyle].
   final TextStyle focusedTextStyle;
 
   /// Creates a [FCalendarDayStateStyle].
   FCalendarDayStateStyle({
-    required this.decoration,
+    required this.backgroundColor,
     required this.textStyle,
-    BoxDecoration? focusedDecoration,
+    Color? focusedBackgroundColor,
     TextStyle? focusedTextStyle,
-  })  : focusedDecoration = focusedDecoration ?? decoration,
+  })  : focusedBackgroundColor = focusedBackgroundColor ?? backgroundColor,
         focusedTextStyle = focusedTextStyle ?? textStyle;
 
   /// Creates a [FCalendarDayStateStyle] that inherits the given colors.
   FCalendarDayStateStyle.inherit({
+    required Color backgroundColor,
     required TextStyle textStyle,
-    Color? color,
-    Color? focusedColor,
+    Color? focusedBackgroundColor,
     TextStyle? focusedTextStyle,
   }) : this(
-          decoration: color == null
-              ? const BoxDecoration()
-              : BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: color,
-                ),
+          backgroundColor: backgroundColor,
           textStyle: textStyle,
-          focusedDecoration: (focusedColor ?? color) == null
-              ? const BoxDecoration()
-              : BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: focusedColor ?? color,
-                ),
+          focusedBackgroundColor: focusedBackgroundColor ?? backgroundColor,
           focusedTextStyle: focusedTextStyle ?? textStyle,
         );
 
@@ -290,7 +296,7 @@ final class FCalendarDayStateStyle with Diagnosticable {
   ///
   /// ```dart
   /// final style = FDayStateStyle(
-  ///   decoration: ...,
+  ///   backgroundColor: ...,
   ///   textStyle: ...,
   /// );
   ///
@@ -298,19 +304,19 @@ final class FCalendarDayStateStyle with Diagnosticable {
   ///   textStyle: ...,
   /// );
   ///
-  /// print(style.decoration == copy.decoration); // true
+  /// print(style.backgroundColor == copy.backgroundColor); // true
   /// print(style.textStyle == copy.textStyle); // false
   /// ```
   FCalendarDayStateStyle copyWith({
-    BoxDecoration? decoration,
+    Color? backgroundColor,
     TextStyle? textStyle,
-    BoxDecoration? focusedDecoration,
+    Color? focusedBackgroundColor,
     TextStyle? focusedTextStyle,
   }) =>
       FCalendarDayStateStyle(
-        decoration: decoration ?? this.decoration,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
         textStyle: textStyle ?? this.textStyle,
-        focusedDecoration: focusedDecoration ?? this.focusedDecoration,
+        focusedBackgroundColor: focusedBackgroundColor ?? this.focusedBackgroundColor,
         focusedTextStyle: focusedTextStyle ?? this.focusedTextStyle,
       );
 
@@ -318,9 +324,9 @@ final class FCalendarDayStateStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('decoration', decoration))
+      ..add(DiagnosticsProperty('backgroundColor', backgroundColor))
       ..add(DiagnosticsProperty('textStyle', textStyle))
-      ..add(DiagnosticsProperty('focusedDecoration', focusedDecoration))
+      ..add(DiagnosticsProperty('focusedBackgroundColor', focusedBackgroundColor))
       ..add(DiagnosticsProperty('focusedTextStyle', focusedTextStyle));
   }
 
@@ -329,11 +335,11 @@ final class FCalendarDayStateStyle with Diagnosticable {
       identical(this, other) ||
       other is FCalendarDayStateStyle &&
           runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
+          backgroundColor == other.backgroundColor &&
           textStyle == other.textStyle &&
-          focusedDecoration == other.focusedDecoration &&
+          focusedBackgroundColor == other.focusedBackgroundColor &&
           focusedTextStyle == other.focusedTextStyle;
 
   @override
-  int get hashCode => decoration.hashCode ^ textStyle.hashCode ^ focusedDecoration.hashCode ^ focusedTextStyle.hashCode;
+  int get hashCode => backgroundColor.hashCode ^ textStyle.hashCode ^ focusedBackgroundColor.hashCode ^ focusedTextStyle.hashCode;
 }
