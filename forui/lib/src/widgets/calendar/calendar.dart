@@ -18,12 +18,14 @@ final class FCalendarStyle with Diagnosticable {
   final FCalendarDayPickerStyle dayPickerStyle;
   final BoxDecoration decoration;
   final EdgeInsets padding;
+  final Duration animationDuration;
 
   FCalendarStyle({
     required this.headerStyle,
     required this.dayPickerStyle,
     required this.decoration,
     this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+    this.animationDuration = const Duration(milliseconds: 200),
   });
 
   FCalendarStyle.inherit({

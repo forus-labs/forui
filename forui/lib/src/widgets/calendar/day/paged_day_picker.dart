@@ -1,7 +1,5 @@
 part of '../calendar.dart';
 
-const Duration _monthScrollDuration = Duration(milliseconds: 200);
-
 @internal
 class PagedDayPicker extends StatefulWidget {
   final FCalendarStyle style;
@@ -105,7 +103,7 @@ class _PageDayPickerState extends State<PagedDayPicker> {
                   onNext: _last ? null : _handleNextMonth,
                 ),
                 SizedBox(
-                  height: dayDimension * maxMonthRows,
+                  height: dayDimension * maxGridRows,
                   child: FocusableActionDetector(
                     shortcuts: _shortcuts,
                     actions: _actions,
@@ -115,22 +113,22 @@ class _PageDayPickerState extends State<PagedDayPicker> {
                       key: _pageViewKey,
                       controller: _controller,
                       itemBuilder: (context, index) => DayPicker(
-                        focused: _focusedDay,
-                        style: widget.style.dayPickerStyle,
-                        month: _currentMonth,
-                        today: widget.today,
-                        enabledPredicate: (date) =>
-                            widget.start <= date && date <= widget.end && widget.enabledPredicate(date),
-                        selectedPredicate: widget.selectedPredicate,
-                        onPress: (date) {
-                          setState(() => _focusedDay = date);
-                          widget.onPress(date);
-                        },
-                        onLongPress: (date) {
-                          setState(() => _focusedDay = date);
-                          widget.onLongPress(date);
-                        },
-                      ),
+                          focused: _focusedDay,
+                          style: widget.style.dayPickerStyle,
+                          month: widget.start.truncate(to: DateUnit.months).plus(months: index),
+                          today: widget.today,
+                          enabledPredicate: (date) =>
+                              widget.start <= date && date <= widget.end && widget.enabledPredicate(date),
+                          selectedPredicate: widget.selectedPredicate,
+                          onPress: (date) {
+                            setState(() => _focusedDay = date);
+                            widget.onPress(date);
+                          },
+                          onLongPress: (date) {
+                            setState(() => _focusedDay = date);
+                            widget.onLongPress(date);
+                          },
+                        ),
                       itemCount: delta(widget.start, widget.end),
                       onPageChanged: _handleMonthPageChanged,
                     ),
@@ -159,7 +157,7 @@ class _PageDayPickerState extends State<PagedDayPicker> {
   void _handleNextMonth() {
     if (!_last) {
       _controller.nextPage(
-        duration: _monthScrollDuration,
+        duration: widget.style.animationDuration,
         curve: Curves.ease,
       );
     }
@@ -169,7 +167,7 @@ class _PageDayPickerState extends State<PagedDayPicker> {
   void _handlePreviousMonth() {
     if (!_first) {
       _controller.previousPage(
-        duration: _monthScrollDuration,
+        duration: widget.style.animationDuration,
         curve: Curves.ease,
       );
     }
@@ -189,7 +187,7 @@ class _PageDayPickerState extends State<PagedDayPicker> {
     } else {
       _controller.animateToPage(
         page,
-        duration: _monthScrollDuration,
+        duration: widget.style.animationDuration,
         curve: Curves.ease,
       );
     }

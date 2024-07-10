@@ -2,7 +2,7 @@ part of '../calendar.dart';
 
 /// The maximum number of rows in a month. In this case, a 31 day month that starts on Saturday.
 @internal
-const maxMonthRows = 6;
+const maxGridRows = 7;
 
 /// The height & width of a day in a [DayPicker].
 @internal
@@ -55,7 +55,31 @@ class _DayPickerState extends State<DayPicker> {
   @override
   void initState() {
     super.initState();
-    _updateMonth();
+
+    final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
+    final firstDayOfMonth = widget.month.firstDayOfMonth;
+    var difference = firstDayOfMonth.weekday - firstDayOfWeek;
+    if (difference < 0) {
+      difference += 7;
+    }
+
+    final first = firstDayOfMonth.minus(days: difference);
+
+    final lastDayOfWeek = firstDayOfWeek == DateTime.monday ? DateTime.sunday : firstDayOfWeek - 1;
+    final lastDayOfMonth = widget.month.lastDayOfMonth;
+    difference = lastDayOfWeek - lastDayOfMonth.weekday;
+    if (difference < 0) {
+      difference += 7;
+    }
+
+    final last = lastDayOfMonth.plus(days: difference);
+    for (var date = first; date <= last; date = date.tomorrow) {
+      _days[date] = FocusNode(skipTraversal: true, debugLabel: '$date');
+    }
+
+    if (_days[widget.focused] case final focusNode?) {
+      focusNode.requestFocus();
+    }
   }
 
   @override
@@ -102,37 +126,10 @@ class _DayPickerState extends State<DayPicker> {
   @override
   void didUpdateWidget(DayPicker old) {
     super.didUpdateWidget(old);
-    if (old.month != widget.month) {
-      _updateMonth();
-    }
+    assert(old.month == widget.month, 'We assumed that a new DayPicker is created each time we navigate to a new month.');
 
     if (_days[widget.focused] case final focusNode? when old.focused != widget.focused) {
       focusNode.requestFocus();
-    }
-  }
-
-  void _updateMonth() {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
-    final firstDayOfMonth = widget.month.firstDayOfMonth;
-    var difference = firstDayOfMonth.weekday - firstDayOfWeek;
-    if (difference < 0) {
-      difference += 7;
-    }
-
-    final first = firstDayOfMonth.minus(days: difference);
-
-    final lastDayOfWeek = firstDayOfWeek == DateTime.monday ? DateTime.sunday : firstDayOfWeek - 1;
-    final lastDayOfMonth = widget.month.lastDayOfMonth;
-    difference = lastDayOfWeek - lastDayOfMonth.weekday;
-    if (difference < 0) {
-      difference += 7;
-    }
-
-    final last = lastDayOfMonth.plus(days: difference);
-
-    _days.clear();
-    for (var date = first; date <= last; date = date.tomorrow) {
-      _days[date] = FocusNode(skipTraversal: true, debugLabel: '$date');
     }
   }
 
