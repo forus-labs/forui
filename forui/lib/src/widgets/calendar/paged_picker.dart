@@ -32,7 +32,8 @@ abstract class PagedPicker extends StatefulWidget {
 }
 
 // Most of the traversal logic is copied from Material's _MonthPickerState.
-abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
+@internal
+abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
   static const _shortcuts = <ShortcutActivator, Intent>{
     SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(TraversalDirection.left),
@@ -42,9 +43,8 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
   };
 
   final GlobalKey _pageViewKey = GlobalKey();
-  late LocalDate _current;
+  late LocalDate current;
   late PageController _controller;
-  late TextDirection _textDirection;
   late Map<Type, Action<Intent>> _actions;
   late FocusNode _gridFocusNode;
   LocalDate? _focused;
@@ -52,8 +52,8 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
   @override
   void initState() {
     super.initState();
-    _current = widget.initial;
-    _controller = PageController(initialPage: _delta(widget.start, widget.initial));
+    current = widget.initial;
+    _controller = PageController(initialPage: delta(widget.start, widget.initial));
     _actions = {
       NextFocusIntent: CallbackAction<NextFocusIntent>(onInvoke: _handleGridNextFocus),
       PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(onInvoke: _handleGridPreviousFocus),
@@ -64,7 +64,6 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
     children: [
       Controls(
         style: widget.style.headerStyle,
@@ -76,26 +75,20 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
           shortcuts: _shortcuts,
           actions: _actions,
           focusNode: _gridFocusNode,
-          onFocusChange: _handleGridFocusChange,
+          onFocusChange: handleGridFocusChange,
           child: PageView.builder(
             key: _pageViewKey,
             controller: _controller,
-            itemBuilder: _item,
-            itemCount: _delta(widget.start, widget.end),
-            onPageChanged: _handlePageChange,
+            itemBuilder: buildItem,
+            itemCount: delta(widget.start, widget.end),
+            onPageChanged: handlePageChange,
           ),
         ),
       ),
     ],
   );
 
-  Widget _item(BuildContext context, int index);
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _textDirection = Directionality.of(context);
-  }
+  Widget buildItem(BuildContext context, int index);
 
   @override
   void dispose() {
@@ -117,13 +110,13 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
     }
   }
 
-  bool get _first;
+  bool get _first => delta(widget.start, current) == 0;
 
-  bool get _last;
+  bool get _last => delta(widget.start, current) == delta(widget.start, widget.end);
 
   /// Navigate to the given month.
   void _showPage(LocalDate date, {bool jump = false}) {
-    final page = _delta(widget.start, date);
+    final page = delta(widget.start, date);
     if (jump) {
       _controller.jumpToPage(page);
     } else {
@@ -135,9 +128,9 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
     }
   }
 
-  void _handlePageChange(int page);
+  void handlePageChange(int page);
 
-  void _handleGridFocusChange(bool focused);
+  void handleGridFocusChange(bool focused);
 
 
   /// Move focus to the next element after the day grid.
@@ -170,7 +163,7 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
       final nextDate = _nextDateInDirection(_focused!, intent.direction);
       if (nextDate != null) {
         _focused = nextDate;
-        if (_delta(widget.start, _focused!) != _delta(widget.start, _current)) {
+        if (delta(widget.start, _focused!) != delta(widget.start, current)) {
           _showPage(_focused!);
         }
       }
@@ -179,7 +172,7 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
 
   // Swap left and right if the text direction if RTL
   Period _adjustDirectionOffset(TraversalDirection traversalDirection, TextDirection textDirection) =>
-      _directionOffset[switch ((traversalDirection, textDirection)) {
+      directionOffset[switch ((traversalDirection, textDirection)) {
         (TraversalDirection.left, TextDirection.rtl) => TraversalDirection.right,
         (TraversalDirection.right, TextDirection.rtl) => TraversalDirection.left,
         _ => traversalDirection,
@@ -201,7 +194,7 @@ abstract class _PagedPickerState<T extends PagedPicker> extends State<T> {
   }
 
 
-  int _delta(LocalDate start, LocalDate end);
+  int delta(LocalDate start, LocalDate end);
 
-  Map<TraversalDirection, Period> get _directionOffset;
+  Map<TraversalDirection, Period> get directionOffset;
 }
