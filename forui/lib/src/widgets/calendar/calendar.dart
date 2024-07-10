@@ -17,6 +17,7 @@ part 'day/paged_day_picker.dart';
 part 'year_month/year_month.dart';
 part 'year_month/year_picker.dart';
 
+part 'paged_picker.dart';
 part 'toggle.dart';
 
 enum FCalendarPickerMode {
