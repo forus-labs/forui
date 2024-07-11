@@ -1,16 +1,4 @@
-part of '../calendar.dart';
-
-/// The number of columns in a year & month picker.
-@internal
-const yearMonthPickerColumns = 3;
-
-/// The number of rows in a year & month picker.
-@internal
-const yearMonthPickerRows = 4;
-
-/// The total number of items in a year & month picker.
-@internal
-const yearMonthPickerItems = yearMonthPickerColumns * yearMonthPickerRows;
+part of '../../calendar.dart';
 
 @internal
 class YearPicker extends StatefulWidget {
@@ -35,6 +23,18 @@ class YearPicker extends StatefulWidget {
 
   @override
   State<YearPicker> createState() => _YearPickerState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('startYear', startYear, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('start', start, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('today', today, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('focused', focused, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug));
+  }
 }
 
 class _YearPickerState extends State<YearPicker> {
@@ -46,8 +46,6 @@ class _YearPickerState extends State<YearPicker> {
     _years = List.generate(yearMonthPickerItems, (i) => FocusNode(skipTraversal: true, debugLabel: '$i'));
 
     final focused = widget.focused;
-
-
     if (focused == null || focused < widget.startYear || widget.startYear.plus(years: yearMonthPickerItems) <= focused) {
       return;
     }

@@ -1,4 +1,4 @@
-part of '../calendar.dart';
+part of '../../calendar.dart';
 
 @internal
 class PagedYearPicker extends PagedPicker {
@@ -51,8 +51,6 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   @override
   void handlePageChange(int page) {
     setState(() {
-      print('handled');
-
       final changed = widget.start.truncate(to: DateUnit.years).plus(years: page * yearMonthPickerItems);
       if (current == changed) {
         return;

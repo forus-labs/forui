@@ -166,30 +166,6 @@ class DisabledYearMonth extends StatelessWidget {
   }
 }
 
-final class FCalendarYearMonthPickerStyle with Diagnosticable {
-  final FCalendarYearMonthPickerStateStyle enabledStyle;
-  final FCalendarYearMonthPickerStateStyle disabledStyle;
-
-  FCalendarYearMonthPickerStyle({required this.enabledStyle, required this.disabledStyle});
-
-  FCalendarYearMonthPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          enabledStyle: FCalendarYearMonthPickerStateStyle(
-            decoration: const BoxDecoration(),
-            textStyle: typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
-            focusedDecoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: colorScheme.secondary,
-            ),
-          ),
-          disabledStyle: FCalendarYearMonthPickerStateStyle(
-            decoration: const BoxDecoration(),
-            textStyle: typography.sm
-                .copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500),
-          ),
-        );
-}
-
 final class FCalendarYearMonthPickerStateStyle with Diagnosticable {
   final BoxDecoration decoration;
   final TextStyle textStyle;

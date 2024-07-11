@@ -54,7 +54,7 @@ class Testing extends StatelessWidget {
       start: LocalDate(1900, 1, 8),
       end: LocalDate(2024, 7, 10),
       today: LocalDate.now(),
-      initialMonth: LocalDate(2024, 7),
+      initialMonth: LocalDate(2023, 7),
       enabledPredicate: (_) => true,
       selectedPredicate: _selected.contains,
       onMonthChange: print,
