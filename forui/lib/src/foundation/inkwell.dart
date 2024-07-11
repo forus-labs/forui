@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 @internal
 class FInkWell extends StatefulWidget {
   final FocusNode? focusNode;
-  final String semanticLabel;
+  final String? semanticLabel;
   final bool selected;
   final VoidCallback? onPress;
   final VoidCallback? onLongPress;
@@ -13,9 +13,9 @@ class FInkWell extends StatefulWidget {
   final Widget? child;
 
   const FInkWell({
-    required this.semanticLabel,
     required this.builder,
     this.focusNode,
+    this.semanticLabel,
     this.selected = false,
     this.onPress,
     this.onLongPress,
