@@ -1,4 +1,9 @@
-part of '../../calendar.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/calendar/month/month_picker.dart';
+import 'package:forui/src/widgets/calendar/shared/paged_picker.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class PagedMonthPicker extends PagedPicker {
@@ -12,15 +17,19 @@ class PagedMonthPicker extends PagedPicker {
     required super.today,
     required super.initial,
     super.key,
-  }) : super(enabledPredicate: (date) => start <= date && date <= end);
+  });
 
   @override
   State<PagedMonthPicker> createState() => _PagedMonthPickerState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('onPress', onPress));
+  }
 }
 
 class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
-  late TextDirection _textDirection;
-
   @override
   Widget buildItem(BuildContext context, int page) => MonthPicker(
     style: widget.style.yearMonthPickerStyle,
@@ -33,41 +42,15 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
   );
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _textDirection = Directionality.of(context);
-  }
+  void onPageChange(int page) {} // Months will only appear on a single page.
 
   @override
-  void handleGridFocusChange(bool focused) {
+  void onGridFocusChange(bool focused) {
     setState(() {
       if (focused && focusedDate == null) {
         final currentMonth = widget.today.truncate(to: DateUnit.months);
         focusedDate = _focusableMonth(widget.initial.year == widget.today.year ? currentMonth : current);
       }
-    });
-  }
-
-  @override
-  void handlePageChange(int page) {
-    setState(() {
-      print('handlePageChange');
-      // final changed = widget.start.truncate(to: DateUnit.years).plus(years: page * yearMonthPickerItems);
-      // if (current == changed) {
-      //   return;
-      // }
-      //
-      // current = changed;
-      // if (focusedDate case final focused? when focused.truncate(to: DateUnit.years) == current) {
-      //   // We have navigated to a new page with the grid focused, but the
-      //   // focused year is not in this page. Choose a new one.
-      //   focusedDate = _focusableMonth(current, focusedDate!);
-      // }
-
-      SemanticsService.announce(
-        current.toString(), // TODO: localization
-        _textDirection,
-      );
     });
   }
 
@@ -78,7 +61,7 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
     }
 
     for (var newFocus = widget.initial; newFocus < end; newFocus = newFocus.plus(months: 1)) {
-      if (widget.enabledPredicate(newFocus)) {
+      if (widget.enabled(newFocus)) {
         return newFocus;
       }
     }
@@ -91,9 +74,9 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-    TraversalDirection.up: Period(months: -yearMonthPickerColumns),
+    TraversalDirection.up: Period(months: -MonthPicker.columns),
     TraversalDirection.right: Period(months: 1),
-    TraversalDirection.down: Period(months: yearMonthPickerColumns),
+    TraversalDirection.down: Period(months: MonthPicker.columns),
     TraversalDirection.left: Period(months: -1),
   };
 }

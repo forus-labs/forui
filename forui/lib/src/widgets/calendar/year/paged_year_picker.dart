@@ -1,4 +1,9 @@
-part of '../../calendar.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/calendar/shared/paged_picker.dart';
+import 'package:forui/src/widgets/calendar/year/year_picker.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class PagedYearPicker extends PagedPicker {
@@ -12,19 +17,23 @@ class PagedYearPicker extends PagedPicker {
     required super.today,
     required super.initial,
     super.key,
-  }) : super(enabledPredicate: (date) => start <= date && date <= end);
+  });
 
   @override
   State<PagedYearPicker> createState() => _PagedYearPickerState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('onPress', onPress));
+  }
 }
 
 class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
-  late TextDirection _textDirection;
-
   @override
   Widget buildItem(BuildContext context, int page) => YearPicker(
         style: widget.style.yearMonthPickerStyle,
-        startYear: widget.start.truncate(to: DateUnit.years).plus(years: page * yearMonthPickerItems),
+        startYear: widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items),
         start: widget.start,
         end: widget.end,
         today: widget.today,
@@ -33,13 +42,7 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
       );
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _textDirection = Directionality.of(context);
-  }
-
-  @override
-  void handleGridFocusChange(bool focused) {
+  void onGridFocusChange(bool focused) {
     setState(() {
       if (focused && focusedDate == null) {
         final currentYear = widget.today.truncate(to: DateUnit.years);
@@ -49,9 +52,9 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   }
 
   @override
-  void handlePageChange(int page) {
+  void onPageChange(int page) {
     setState(() {
-      final changed = widget.start.truncate(to: DateUnit.years).plus(years: page * yearMonthPickerItems);
+      final changed = widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items);
       if (current == changed) {
         return;
       }
@@ -63,22 +66,18 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
         focusedDate = _focusableYear(current, focusedDate!);
       }
 
-      SemanticsService.announce(
-        current.toString(), // TODO: localization
-        _textDirection,
-      );
+      SemanticsService.announce(current.toString(), textDirection);
     });
   }
 
   LocalDate? _focusableYear(LocalDate startYear, LocalDate preferredYear) {
-    final endYear = startYear.plus(years: yearMonthPickerItems);
+    final endYear = startYear.plus(years: YearPicker.items);
     if (startYear <= preferredYear && preferredYear < endYear) {
       return preferredYear;
     }
 
-    // Start at the 1st and take the first enabled date.
     for (var newFocus = startYear; newFocus < endYear; newFocus = newFocus.plus(years: 1)) {
-      if (widget.enabledPredicate(newFocus)) {
+      if (widget.enabled(newFocus)) {
         return newFocus;
       }
     }
@@ -87,13 +86,13 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   }
 
   @override
-  int delta(LocalDate start, LocalDate end) => ((end.year - start.year) / yearMonthPickerItems).floor();
+  int delta(LocalDate start, LocalDate end) => ((end.year - start.year) / YearPicker.items).floor();
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-        TraversalDirection.up: Period(years: -yearMonthPickerColumns),
+        TraversalDirection.up: Period(years: -YearPicker.columns),
         TraversalDirection.right: Period(years: 1),
-        TraversalDirection.down: Period(years: yearMonthPickerColumns),
+        TraversalDirection.down: Period(years: YearPicker.columns),
         TraversalDirection.left: Period(years: -1),
       };
 }

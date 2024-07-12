@@ -1,21 +1,24 @@
-part of '../calendar.dart';
+import 'dart:collection';
 
-/// The maximum number of rows in a month. In this case, a 31 day month that starts on Saturday.
-@internal
-const maxDayPickerGridRows = 7;
-
-/// The height & width of a day in a [DayPicker].
-@internal
-const maxDayPickerTileDimension = 42.0;
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/calendar/shared/entry.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class DayPicker extends StatefulWidget {
+  static const maxRows = 7;
+  static const tileDimension = 42.0;
+  
   final FCalendarDayPickerStyle style;
   final LocalDate month;
   final LocalDate today;
   final LocalDate? focused;
-  final bool Function(LocalDate day) enabledPredicate;
-  final bool Function(LocalDate day) selectedPredicate;
+  final Predicate<LocalDate> enabled;
+  final Predicate<LocalDate> selected;
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate> onLongPress;
 
@@ -24,8 +27,8 @@ class DayPicker extends StatefulWidget {
     required this.month,
     required this.today,
     required this.focused,
-    required this.enabledPredicate,
-    required this.selectedPredicate,
+    required this.enabled,
+    required this.selected,
     required this.onPress,
     required this.onLongPress,
     super.key,
@@ -42,10 +45,10 @@ class DayPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
-      ..add(ObjectFlagProperty('enabledPredicate', enabledPredicate, ifNull: 'null'))
-      ..add(ObjectFlagProperty('selectedPredicate', selectedPredicate, ifNull: 'null'))
-      ..add(ObjectFlagProperty('onPress', onPress, ifNull: 'null'))
-      ..add(ObjectFlagProperty('onLongPress', onLongPress, ifNull: 'null'));
+      ..add(DiagnosticsProperty('enabledPredicate', enabled, ifNull: 'all enabled'))
+      ..add(DiagnosticsProperty('selectedPredicate', selected, ifNull: 'none selected'))
+      ..add(DiagnosticsProperty('onPress', onPress))
+      ..add(DiagnosticsProperty('onLongPress', onLongPress));
   }
 }
 
@@ -56,6 +59,17 @@ class _DayPickerState extends State<DayPicker> {
   void initState() {
     super.initState();
 
+    final (first, last) = _range;
+    for (var date = first; date <= last; date = date.tomorrow) {
+      _days[date] = FocusNode(skipTraversal: true, debugLabel: '$date');
+    }
+
+    if (_days[widget.focused] case final focusNode?) {
+      focusNode.requestFocus();
+    }
+  }
+
+  (LocalDate, LocalDate) get _range {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
     final firstDayOfMonth = widget.month.firstDayOfMonth;
     var difference = firstDayOfMonth.weekday - firstDayOfWeek;
@@ -73,44 +87,39 @@ class _DayPickerState extends State<DayPicker> {
     }
 
     final last = lastDayOfMonth.plus(days: difference);
-    for (var date = first; date <= last; date = date.tomorrow) {
-      _days[date] = FocusNode(skipTraversal: true, debugLabel: '$date');
-    }
 
-    if (_days[widget.focused] case final focusNode?) {
-      focusNode.requestFocus();
-    }
+    return (first, last);
   }
+
 
   @override
   Widget build(BuildContext context) => SizedBox(
-      width: DateTime.daysPerWeek * maxDayPickerTileDimension,
-      child: GridView.custom(
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const _GridDelegate(),
-        childrenDelegate: SliverChildListDelegate(
-          [
-            ..._headers(context),
-            for (final MapEntry(key: date, value: focusNode) in _days.entries)
-              day(
-                widget.style,
-                date,
-                focusNode,
-                widget.selectedPredicate,
-                widget.onPress,
-                widget.onLongPress,
-                enabled: widget.enabledPredicate(date),
-                current: date.month == widget.month.month,
-                today: date == widget.today,
-                selected: widget.selectedPredicate(date),
-              ),
-          ],
-          addRepaintBoundaries: false,
-        ),
+    width: DateTime.daysPerWeek * DayPicker.tileDimension,
+    child: GridView.custom(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const _GridDelegate(),
+      childrenDelegate: SliverChildListDelegate(
+        addRepaintBoundaries: false,
+        [
+          ..._headers(context),
+          for (final MapEntry(key: date, value: focusNode) in _days.entries)
+            Entry.day(
+              style: widget.style,
+              date: date,
+              focusNode: focusNode,
+              current: date.month == widget.month.month,
+              today: date == widget.today,
+              enabled: widget.enabled,
+              selected: widget.selected,
+              onPress: widget.onPress,
+              onLongPress: widget.onLongPress,
+            ),
+        ],
       ),
-    );
+    ),
+  );
 
   List<Widget> _headers(BuildContext context) {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
@@ -127,7 +136,7 @@ class _DayPickerState extends State<DayPicker> {
   @override
   void didUpdateWidget(DayPicker old) {
     super.didUpdateWidget(old);
-    assert(old.month == widget.month, 'We assumed that a new DayPicker is created each time we navigate to a new month.');
+    assert(old.month == widget.month, 'current month must not change.');
 
     if (_days[widget.focused] case final focusNode? when old.focused != widget.focused) {
       focusNode.requestFocus();
@@ -149,17 +158,18 @@ class _GridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-        childCrossAxisExtent: maxDayPickerTileDimension,
-        childMainAxisExtent: maxDayPickerTileDimension,
-        crossAxisCount: DateTime.daysPerWeek,
-        crossAxisStride: maxDayPickerTileDimension,
-        mainAxisStride: maxDayPickerTileDimension,
-        reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
-      );
+    childCrossAxisExtent: DayPicker.tileDimension,
+    childMainAxisExtent: DayPicker.tileDimension,
+    crossAxisCount: DateTime.daysPerWeek,
+    crossAxisStride: DayPicker.tileDimension,
+    mainAxisStride: DayPicker.tileDimension,
+    reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
+  );
 
   @override
   bool shouldRelayout(_GridDelegate oldDelegate) => false;
 }
+
 
 /// A day picker's style.
 final class FCalendarDayPickerStyle with Diagnosticable {
@@ -200,11 +210,11 @@ final class FCalendarDayPickerStyle with Diagnosticable {
         typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
 
     final disabled = FCalendarDayStyle(
-      selectedStyle: FCalendarDayStateStyle.inherit(
+      selectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
       ),
-      unselectedStyle: FCalendarDayStateStyle.inherit(
+      unselectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.background,
         textStyle: mutedTextStyle,
       ),
@@ -214,32 +224,29 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
       enabledStyles: (
         current: FCalendarDayStyle(
-          selectedStyle: FCalendarDayStateStyle.inherit(
+          selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.foreground,
             textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
           ),
-          unselectedStyle: FCalendarDayStateStyle.inherit(
+          unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: textStyle,
             focusedBackgroundColor: colorScheme.secondary,
           ),
         ),
         enclosing: FCalendarDayStyle(
-          selectedStyle: FCalendarDayStateStyle.inherit(
+          selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
           ),
-          unselectedStyle: FCalendarDayStateStyle.inherit(
+          unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
             focusedBackgroundColor: colorScheme.primaryForeground,
           ),
         ),
       ),
-      disabledStyles: (
-        current: disabled,
-        enclosing: disabled,
-      ),
+      disabledStyles: (current: disabled, enclosing: disabled),
     );
   }
 
@@ -303,5 +310,65 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           startDayOfWeek == other.startDayOfWeek;
 
   @override
-  int get hashCode => headerTextStyle.hashCode ^ enabledStyles.hashCode ^ disabledStyles.hashCode ^ startDayOfWeek.hashCode;
+  int get hashCode =>
+      headerTextStyle.hashCode ^ enabledStyles.hashCode ^ disabledStyles.hashCode ^ startDayOfWeek.hashCode;
+}
+
+/// A calender day's style.
+final class FCalendarDayStyle with Diagnosticable {
+  /// The selected dates' style.
+  final FCalendarEntryStyle selectedStyle;
+
+  /// The unselected dates' style.
+  final FCalendarEntryStyle unselectedStyle;
+
+  /// Creates a [FCalendarDayStyle].
+  const FCalendarDayStyle({
+    required this.unselectedStyle,
+    required this.selectedStyle,
+  });
+
+  /// Returns a copy of this [FCalendarDayStyle] but with the given fields replaced with the new values.
+  ///
+  /// ```dart
+  /// final style = FCalendarDayStyle(
+  ///   selectedStyle: ...,
+  ///   unselectedStyle: ...,
+  ///   // Other arguments omitted for brevity
+  /// );
+  ///
+  /// final copy = style.copyWith(
+  ///   unselectedStyle: ...,
+  /// );
+  ///
+  /// print(style.selectedStyle == copy.selectedStyle); // true
+  /// print(style.unselectedStyle == copy.unselectedStyle); // false
+  /// ```
+  FCalendarDayStyle copyWith({
+    FCalendarEntryStyle? selectedStyle,
+    FCalendarEntryStyle? unselectedStyle,
+  }) =>
+      FCalendarDayStyle(
+        selectedStyle: selectedStyle ?? this.selectedStyle,
+        unselectedStyle: unselectedStyle ?? this.unselectedStyle,
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('selectedStyle', selectedStyle))
+      ..add(DiagnosticsProperty('unselectedStyle', unselectedStyle));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is FCalendarDayStyle &&
+              runtimeType == other.runtimeType &&
+              unselectedStyle == other.unselectedStyle &&
+              selectedStyle == other.selectedStyle;
+
+  @override
+  int get hashCode => unselectedStyle.hashCode ^ selectedStyle.hashCode;
 }

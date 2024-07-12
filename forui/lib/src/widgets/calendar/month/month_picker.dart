@@ -1,7 +1,17 @@
-part of '../../calendar.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/calendar/shared/entry.dart';
+import 'package:forui/src/widgets/calendar/year_month_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
+final _yMMMM = DateFormat.yMMMM();
 
 @internal
 class MonthPicker extends StatefulWidget {
+  static const columns = 3;
+
   final FCalendarYearMonthPickerStyle style;
   final LocalDate currentYear;
   final LocalDate start;
@@ -10,7 +20,7 @@ class MonthPicker extends StatefulWidget {
   final LocalDate? focused;
   final ValueChanged<LocalDate> onPress;
 
-  const MonthPicker({
+  MonthPicker({
     required this.style,
     required this.currentYear,
     required this.start,
@@ -19,7 +29,7 @@ class MonthPicker extends StatefulWidget {
     required this.focused,
     required this.onPress,
     super.key,
-  });
+  }): assert(currentYear == currentYear.truncate(to: DateUnit.years), 'currentYear must be truncated to years');
 
   @override
   State<MonthPicker> createState() => _MonthPickerState();
@@ -45,28 +55,27 @@ class _MonthPickerState extends State<MonthPicker> {
     super.initState();
     _months = List.generate(12, (i) => FocusNode(skipTraversal: true, debugLabel: '$i'));
 
-    final focused = widget.focused;
-    if (focused != null) {
-      _months[focused.month - 1].requestFocus();
+    if (widget.focused != null) {
+      _months[widget.focused!.month - 1].requestFocus();
     }
   }
 
   @override
   Widget build(BuildContext context) => GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: yearMonthPickerColumns,
+          crossAxisCount: MonthPicker.columns,
           childAspectRatio: 1.618,
         ),
         children: [
           for (var month = widget.currentYear, i = 0; i < 12; month = month.plus(months: 1), i++)
-            yearMonth(
-              widget.style,
-              month,
-              _months[i],
-              widget.onPress,
-              (date) => '${date.month}', // TODO: localize
-              enabled: widget.start <= month && month <= widget.end,
+            Entry.yearMonth(
+              style: widget.style,
+              date: month,
+              focusNode: _months[i],
               current: widget.today.truncate(to: DateUnit.months) == month,
+              enabled: widget.start <= month && month <= widget.end,
+              format: (date) => _yMMMM.format(date.toNative()), // TODO: localize
+              onPress: widget.onPress,
             ),
         ],
       );
@@ -74,10 +83,7 @@ class _MonthPickerState extends State<MonthPicker> {
   @override
   void didUpdateWidget(MonthPicker old) {
     super.didUpdateWidget(old);
-    assert(
-      old.currentYear == widget.currentYear,
-      'We assumed that a new YearPicker is created each time we navigate to a years page.',
-    );
+    assert(old.currentYear == widget.currentYear, 'currentYear must not change.');
 
     final focused = widget.focused;
     if (focused == null || focused < widget.currentYear || widget.currentYear.plus(years: 1) <= focused) {

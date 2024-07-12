@@ -1,7 +1,16 @@
-part of '../../calendar.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/calendar/shared/entry.dart';
+import 'package:forui/src/widgets/calendar/year_month_picker.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class YearPicker extends StatefulWidget {
+  static const columns = 3;
+  static const rows = 4;
+  static const items = columns * rows;
+
   final FCalendarYearMonthPickerStyle style;
   final LocalDate startYear;
   final LocalDate start;
@@ -23,6 +32,7 @@ class YearPicker extends StatefulWidget {
 
   @override
   State<YearPicker> createState() => _YearPickerState();
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -43,10 +53,10 @@ class _YearPickerState extends State<YearPicker> {
   @override
   void initState() {
     super.initState();
-    _years = List.generate(yearMonthPickerItems, (i) => FocusNode(skipTraversal: true, debugLabel: '$i'));
+    _years = List.generate(YearPicker.items, (i) => FocusNode(skipTraversal: true, debugLabel: '$i'));
 
     final focused = widget.focused;
-    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: yearMonthPickerItems) <= focused) {
+    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: YearPicker.items) <= focused) {
       return;
     }
 
@@ -56,19 +66,19 @@ class _YearPickerState extends State<YearPicker> {
   @override
   Widget build(BuildContext context) => GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: yearMonthPickerColumns,
+          crossAxisCount: YearPicker.columns,
           childAspectRatio: 1.618,
         ),
         children: [
-          for (var year = widget.startYear, i = 0; i < yearMonthPickerItems; year = year.plus(years: 1), i++)
-            yearMonth(
-              widget.style,
-              year,
-              _years[i],
-              widget.onPress,
-              (date) => '${date.year}', // TODO: localize
-              enabled: widget.start <= year && year <= widget.end,
+          for (var year = widget.startYear, i = 0; i < YearPicker.items; year = year.plus(years: 1), i++)
+            Entry.yearMonth(
+              style: widget.style,
+              date: year,
+              focusNode: _years[i],
               current: widget.today.year == year.year,
+              enabled: widget.start <= year && year <= widget.end,
+              format: (date) => '${date.year}', // TODO: localization
+              onPress: widget.onPress,
             ),
         ],
       );
@@ -76,13 +86,10 @@ class _YearPickerState extends State<YearPicker> {
   @override
   void didUpdateWidget(YearPicker old) {
     super.didUpdateWidget(old);
-    assert(
-      old.startYear == widget.startYear,
-      'We assumed that a new YearPicker is created each time we navigate to a years page.',
-    );
+    assert(old.startYear == widget.startYear, 'startYear must noe change.');
 
     final focused = widget.focused;
-    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: yearMonthPickerItems) <= focused) {
+    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: YearPicker.items) <= focused) {
       return;
     }
 

@@ -1,14 +1,20 @@
-part of '../calendar.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/calendar/day/day_picker.dart';
+import 'package:forui/src/widgets/calendar/shared/paged_picker.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class PagedDayPicker extends PagedPicker {
-  final bool Function(LocalDate day) selectedPredicate;
-  final ValueChanged<DateTime>? onMonthChange;
+  final Predicate<LocalDate> selected;
+  final ValueChanged<LocalDate>? onMonthChange;
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate> onLongPress;
 
   PagedDayPicker({
-    required this.selectedPredicate,
+    required this.selected,
     required this.onMonthChange,
     required this.onPress,
     required this.onLongPress,
@@ -17,37 +23,33 @@ class PagedDayPicker extends PagedPicker {
     required super.end,
     required super.today,
     required super.initial,
-    required bool Function(LocalDate) enabledPredicate,
+    required super.enabled,
     super.key,
-  }) : super(
-          enabledPredicate: (date) => start <= date && date <= end && enabledPredicate(date),
-        );
+  });
 
   @override
-  State<PagedDayPicker> createState() => _PageDayPickerState();
+  State<PagedDayPicker> createState() => _PagedDayPickerState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selectedPredicate', selectedPredicate))
+      ..add(DiagnosticsProperty('selectedPredicate', selected))
       ..add(DiagnosticsProperty('onMonthChange', onMonthChange))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));
   }
 }
 
-class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
-  late TextDirection _textDirection;
-
+class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   Widget buildItem(BuildContext context, int page) => DayPicker(
-        focused: focusedDate,
         style: widget.style.dayPickerStyle,
         month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
-        enabledPredicate: widget.enabledPredicate,
-        selectedPredicate: widget.selectedPredicate,
+        focused: focusedDate,
+        enabled: widget.enabled,
+        selected: widget.selected,
         onPress: (date) {
           setState(() => focusedDate = date);
           widget.onPress(date);
@@ -59,24 +61,7 @@ class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
       );
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _textDirection = Directionality.of(context);
-  }
-
-  /// Handler for when the overall day grid obtains or loses focus.
-  @override
-  void handleGridFocusChange(bool focused) {
-    setState(() {
-      if (focused && focusedDate == null) {
-        final preferred = widget.today.truncate(to: DateUnit.months) == current ? widget.today.day : 1;
-        focusedDate = _focusableDayForMonth(current, preferred);
-      }
-    });
-  }
-
-  @override
-  void handlePageChange(int page) {
+  void onPageChange(int page) {
     setState(() {
       final changed = widget.start.truncate(to: DateUnit.months).plus(months: page);
       if (current == changed) {
@@ -84,7 +69,7 @@ class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
       }
 
       current = changed;
-      widget.onMonthChange?.call(current.toNative());
+      widget.onMonthChange?.call(current);
       if (focusedDate case final focused? when focused.truncate(to: DateUnit.months) == current) {
         // We have navigated to a new month with the grid focused, but the
         // focused day is not in this month. Choose a new one trying to keep
@@ -92,10 +77,17 @@ class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
         focusedDate = _focusableDayForMonth(current, focusedDate!.day);
       }
 
-      SemanticsService.announce(
-        current.toString(), // TODO: localization
-        _textDirection,
-      );
+      SemanticsService.announce(current.toString(), textDirection); // TODO: localization
+    });
+  }
+
+  @override
+  void onGridFocusChange(bool focused) {
+    setState(() {
+      if (focused && focusedDate == null) {
+        final preferred = widget.today.truncate(to: DateUnit.months) == current ? widget.today.day : 1;
+        focusedDate = _focusableDayForMonth(current, preferred);
+      }
     });
   }
 
@@ -108,14 +100,14 @@ class _PageDayPickerState extends PagedPickerState<PagedDayPicker> {
     // Can we use the preferred day in this month?
     if (preferredDay <= month.daysInMonth) {
       final newFocus = month.copyWith(day: preferredDay);
-      if (widget.enabledPredicate(newFocus)) {
+      if (widget.enabled(newFocus)) {
         return newFocus;
       }
     }
 
     // Start at the 1st and take the first enabled date.
     for (var newFocus = month; newFocus.month == month.month; newFocus = newFocus.tomorrow) {
-      if (widget.enabledPredicate(newFocus)) {
+      if (widget.enabled(newFocus)) {
         return newFocus;
       }
     }
