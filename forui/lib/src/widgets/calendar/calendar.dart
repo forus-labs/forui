@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
@@ -10,6 +11,7 @@ import 'package:sugar/sugar.dart';
 export 'day/day_picker.dart' show FCalendarDayPickerStyle, FCalendarDayStyle;
 export 'shared/entry.dart' show FCalendarEntryStyle;
 export 'shared/header.dart' show FCalendarHeaderStyle, FCalendarPickerType;
+export 'calendar_controller.dart';
 export 'year_month_picker.dart' show FCalendarYearMonthPickerStyle;
 
 /// A calendar.
@@ -22,6 +24,9 @@ class FCalendar extends StatelessWidget {
 
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
+
+  /// A controller that determines if a date is selected.
+  final FCalendarController controller;
 
   /// The start date. It is truncated to the nearest date.
   ///
@@ -43,9 +48,6 @@ class FCalendar extends StatelessWidget {
   /// Defaults to returning true for all dates.
   final Predicate<DateTime> enabled;
 
-  /// A predicate that determines if a date is selected. It may be called more than once for a single date.
-  final Predicate<DateTime> selected;
-
   /// A callback for when the displayed month changes.
   final ValueChanged<DateTime>? onMonthChange;
 
@@ -57,13 +59,13 @@ class FCalendar extends StatelessWidget {
   final ValueNotifier<FCalendarPickerType> _type;
   final ValueNotifier<LocalDate> _month;
 
-  /// Creates a [FCalendar] with custom date selection.
+  /// Creates a [FCalendar].
   ///
   /// [initialDate] defaults to [today]. It is truncated to the nearest date.
-  FCalendar.raw({
+  FCalendar({
+    required this.controller,
     required this.start,
     required this.end,
-    required this.selected,
     this.style,
     this.enabled = _true,
     this.onMonthChange,
@@ -102,21 +104,28 @@ class FCalendar extends StatelessWidget {
               ValueListenableBuilder(
                 valueListenable: _type,
                 builder: (context, value, child) => switch (value) {
-                  FCalendarPickerType.day => PagedDayPicker(
+                  FCalendarPickerType.day => ValueListenableBuilder(
+                    valueListenable: controller,
+                    builder: (context, _, __) =>  PagedDayPicker(
                       style: style,
                       start: start.toLocalDate(),
                       end: end.toLocalDate(),
                       today: today.toLocalDate(),
                       initial: _month.value,
                       enabled: (date) => enabled(date.toNative()),
-                      selected: (date) => selected(date.toNative()),
+                      selected: (date) => controller.contains(date.toNative()),
                       onMonthChange: (date) {
                         _month.value = date;
                         onMonthChange?.call(date.toNative());
                       },
-                      onPress: (date) => onPress?.call(date.toNative()),
+                      onPress: (date) {
+                        final native = date.toNative();
+                        controller.onPress(native);
+                        onPress?.call(native);
+                      },
                       onLongPress: (date) => onLongPress?.call(date.toNative()),
                     ),
+                  ),
                   FCalendarPickerType.yearMonth => YearMonthPicker(
                       style: style,
                       start: start.toLocalDate(),
@@ -141,13 +150,11 @@ class FCalendar extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
-      ..add(DiagnosticsProperty('type', _type))
-      ..add(DiagnosticsProperty('month', _month))
       ..add(DiagnosticsProperty('enabled', enabled))
-      ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('onMonthChange', onMonthChange))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));

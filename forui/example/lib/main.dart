@@ -47,9 +47,9 @@ class Testing extends StatelessWidget {
   const Testing({super.key});
 
   @override
-  Widget build(BuildContext context) => FCalendar.raw(
+  Widget build(BuildContext context) => FCalendar(
         start: DateTime(1900, 1, 8),
         end: DateTime(2024, 7, 10),
-        selected: _selected.contains,
+        controller: FCalendarMultiValueController(),
       );
 }
