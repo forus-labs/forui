@@ -36,32 +36,35 @@ final class _FNestedHeader extends FHeader {
 
     return SafeArea(
       bottom: false,
-      child: Padding(
-        padding: style.padding,
-        child: Stack(
-          children: [
-            _InheritedActionStyle(
-              style: style.actionStyle,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(children: leftActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
-                  Row(children: rightActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
-                ],
-              ),
-            ),
-            Positioned.fill(
-              child: Align(
-                child: DefaultTextStyle.merge(
-                  overflow: TextOverflow.fade,
-                  maxLines: 1,
-                  softWrap: false,
-                  style: style.titleTextStyle,
-                  child: title,
+      child: Semantics(
+        header: true,
+        child: Padding(
+          padding: style.padding,
+          child: Stack(
+            children: [
+              _InheritedActionStyle(
+                style: style.actionStyle,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(children: leftActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
+                    Row(children: rightActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Positioned.fill(
+                child: Align(
+                  child: DefaultTextStyle.merge(
+                    overflow: TextOverflow.fade,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: style.titleTextStyle,
+                    child: title,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

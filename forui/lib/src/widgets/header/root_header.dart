@@ -32,25 +32,28 @@ final class _FRootHeader extends FHeader {
 
     return SafeArea(
       bottom: false,
-      child: Padding(
-        padding: style.padding,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: DefaultTextStyle.merge(
-                overflow: TextOverflow.fade,
-                maxLines: 1,
-                softWrap: false,
-                style: style.titleTextStyle,
-                child: title,
+      child: Semantics(
+        header: true,
+        child: Padding(
+          padding: style.padding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: DefaultTextStyle.merge(
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
+                  style: style.titleTextStyle,
+                  child: title,
+                ),
               ),
-            ),
-            _InheritedActionStyle(
-              style: style.actionStyle,
-              child: Row(children: actions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
-            ),
-          ],
+              _InheritedActionStyle(
+                style: style.actionStyle,
+                child: Row(children: actions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
+              ),
+            ],
+          ),
         ),
       ),
     );
