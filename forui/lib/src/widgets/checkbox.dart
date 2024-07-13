@@ -17,7 +17,7 @@ class FCheckbox extends StatelessWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 
-  /// The semantic label of the checkbox used by accessibility frameworks.
+  /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
   /// Called when the user initiates a change to the FCheckBox's value: when they have checked or unchecked this box.

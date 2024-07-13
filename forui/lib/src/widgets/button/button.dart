@@ -35,6 +35,9 @@ class FButton extends StatelessWidget {
   /// Although typically one of the pre-defined styles in [FButtonStyle], it can also be a [FButtonCustomStyle].
   final FButtonStyle style;
 
+  /// The semantic label used by accessibility frameworks.
+  final String? semanticLabel;
+
   /// A callback for when the button is pressed.
   ///
   /// The button will be disabled if both [onPress] and [onLongPress] are null.
@@ -86,6 +89,7 @@ class FButton extends StatelessWidget {
     required this.onPress,
     required Widget label,
     this.style = Variant.primary,
+    this.semanticLabel,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -104,6 +108,7 @@ class FButton extends StatelessWidget {
     required this.onPress,
     required this.child,
     this.style = Variant.primary,
+    this.semanticLabel,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -126,6 +131,7 @@ class FButton extends StatelessWidget {
     return Semantics(
       container: true,
       button: true,
+      label: semanticLabel,
       enabled: enabled,
       child: FocusableActionDetector(
         autofocus: autofocus,
@@ -154,6 +160,7 @@ class FButton extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))

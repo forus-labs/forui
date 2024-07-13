@@ -19,7 +19,7 @@ class FSwitch extends StatelessWidget {
   /// The style. Defaults to [FThemeData.switchStyle].
   final FSwitchStyle? style;
 
-  /// The semantic label of the switch used by accessibility frameworks.
+  /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
   /// Called when the user toggles the switch on or off.

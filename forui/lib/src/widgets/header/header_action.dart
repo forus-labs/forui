@@ -7,6 +7,9 @@ class FHeaderAction extends StatelessWidget {
   /// The style.
   final FHeaderActionStyle? style;
 
+  /// The semantic label used by accessibility frameworks.
+  final String? semanticLabel;
+
   /// The icon.
   final SvgAsset icon;
 
@@ -26,6 +29,7 @@ class FHeaderAction extends StatelessWidget {
     required this.onPress,
     this.onLongPress,
     this.style,
+    this.semanticLabel,
     super.key,
   });
 
@@ -33,12 +37,14 @@ class FHeaderAction extends StatelessWidget {
   factory FHeaderAction.back({
     required VoidCallback? onPress,
     FHeaderActionStyle? style,
+    String? semanticLabel,
     Key? key,
   }) =>
       FHeaderAction(
         icon: FAssets.icons.arrowLeft,
         onPress: onPress,
         style: style,
+        semanticLabel: semanticLabel,
         key: key,
       );
 
@@ -63,6 +69,7 @@ class FHeaderAction extends StatelessWidget {
     return Semantics(
       button: true,
       enabled: enabled,
+      label: semanticLabel,
       child: MouseRegion(
         cursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
         child: FTappable(
@@ -82,6 +89,7 @@ class FHeaderAction extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('icon', icon))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));
