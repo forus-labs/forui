@@ -7,97 +7,134 @@ import 'package:forui/src/widgets/calendar/shared/header.dart';
 import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 import 'package:sugar/sugar.dart';
 
+export 'day/day_picker.dart' show FCalendarDayPickerStyle, FCalendarDayStyle;
+export 'shared/entry.dart' show FCalendarEntryStyle;
+export 'shared/header.dart' show FCalendarHeaderStyle, FCalendarPickerType;
+export 'year_month_picker.dart' show FCalendarYearMonthPickerStyle;
+
+/// A calendar.
+///
+/// See:
+/// * https://forui.dev/docs/calendar for working examples.
+/// * [FCalendarDayStyle] for customizing a card's appearance.
 class FCalendar extends StatelessWidget {
+  static bool _true(DateTime _) => true;
+
+  /// The style. Defaults to [FThemeData.calendarStyle].
+  final FCalendarStyle? style;
+
+  /// The start date. It is truncated to the nearest date.
+  ///
+  /// ## Contract:
+  /// Throws an [AssertionError] if [end] <= [start]
+  final DateTime start;
+
+  /// The end date. It is truncated to the nearest date.
+  ///
+  /// ## Contract:
+  /// Throws an [AssertionError] if [end] <= [start]
+  final DateTime end;
+
+  /// The current date. It is truncated to the nearest date. Defaults to the [DateTime.now].
+  final DateTime today;
+
+  /// A predicate that determines if a date can be selected. It may be called more than once for a single date.
+  ///
+  /// Defaults to returning true for all dates.
+  final Predicate<DateTime> enabled;
+
+  /// A predicate that determines if a date is selected. It may be called more than once for a single date.
+  final Predicate<DateTime> selected;
+
+  /// A callback for when the displayed month changes.
+  final ValueChanged<DateTime>? onMonthChange;
+
+  /// A callback for when a date in a [FCalendarPickerType.day] picker is pressed.
+  final ValueChanged<DateTime>? onPress;
+
+  /// A callback for when a date in a [FCalendarPickerType.day] picker is long pressed.
+  final ValueChanged<DateTime>? onLongPress;
+  final ValueNotifier<FCalendarPickerType> _type;
+  final ValueNotifier<LocalDate> _month;
+
+  /// Creates a [FCalendar] with custom date selection.
+  ///
+  /// [initialDate] defaults to [today]. It is truncated to the nearest date.
+  FCalendar.raw({
+    required this.start,
+    required this.end,
+    required this.selected,
+    this.style,
+    this.enabled = _true,
+    this.onMonthChange,
+    this.onPress,
+    this.onLongPress,
+    FCalendarPickerType initialType = FCalendarPickerType.day,
+    DateTime? today,
+    DateTime? initialDate,
+    super.key,
+  })  : assert(start.toLocalDate() < end.toLocalDate(), 'end date must be greater than start date'),
+        today = today ?? DateTime.now(),
+        _type = ValueNotifier(initialType),
+        _month = ValueNotifier((initialDate ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months));
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
-
-}
-
-class _Calendar extends StatelessWidget {
-  final FCalendarStyle style;
-  final LocalDate start;
-  final LocalDate end;
-  final LocalDate today;
-  final ValueNotifier<FCalendarPickerType> type;
-  final ValueNotifier<LocalDate> month;
-  final Predicate<LocalDate> enabled;
-  final Predicate<LocalDate> selected;
-  final ValueChanged<LocalDate> onMonthChange;
-  final ValueChanged<LocalDate> onPress;
-  final ValueChanged<LocalDate> onLongPress;
-
-  const _Calendar({
-    required this.style,
-    required this.start,
-    required this.end,
-    required this.today,
-    required this.type,
-    required this.month,
-    required this.enabled,
-    required this.selected,
-    required this.onMonthChange,
-    required this.onPress,
-    required this.onLongPress,
-  });
-
-  @override
-  Widget build(BuildContext context) => DecoratedBox(
-        decoration: style.decoration,
-        child: Padding(
-          padding: style.padding,
-          child: SizedBox(
-            height: (DayPicker.maxRows * DayPicker.tileDimension) + Header.height + 5,
-            width: DateTime.daysPerWeek * DayPicker.tileDimension,
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                ValueListenableBuilder(
-                  valueListenable: month,
-                  builder: (context, month, child) => Header(
-                    style: style.headerStyle,
-                    type: type,
-                    month: month,
-                  ),
+    final style = this.style ?? context.theme.calendarStyle;
+    return DecoratedBox(
+      decoration: style.decoration,
+      child: Padding(
+        padding: style.padding,
+        child: SizedBox(
+          height: (DayPicker.maxRows * DayPicker.tileDimension) + Header.height + 5,
+          width: DateTime.daysPerWeek * DayPicker.tileDimension,
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              ValueListenableBuilder(
+                valueListenable: _month,
+                builder: (context, month, child) => Header(
+                  style: style.headerStyle,
+                  type: _type,
+                  month: month,
                 ),
-                ValueListenableBuilder(
-                  valueListenable: type,
-                  builder: (context, value, child) => switch (value) {
-                    FCalendarPickerType.day => PagedDayPicker(
-                        style: style,
-                        start: start,
-                        end: end,
-                        today: today,
-                        initial: month.value.truncate(to: DateUnit.months),
-                        enabled: enabled,
-                        selected: selected,
-                        onMonthChange: (date) {
-                          month.value = date;
-                          onMonthChange(date);
-                        },
-                        onPress: onPress,
-                        onLongPress: onLongPress,
-                      ),
-                    FCalendarPickerType.yearMonth => YearMonthPicker(
-                        style: style,
-                        start: start,
-                        end: end,
-                        today: today,
-                        onChange: (date) {
-                          month.value = date;
-                          type.value = FCalendarPickerType.day;
-                        },
-                      ),
-                  },
-                ),
-              ],
-            ),
+              ),
+              ValueListenableBuilder(
+                valueListenable: _type,
+                builder: (context, value, child) => switch (value) {
+                  FCalendarPickerType.day => PagedDayPicker(
+                      style: style,
+                      start: start.toLocalDate(),
+                      end: end.toLocalDate(),
+                      today: today.toLocalDate(),
+                      initial: _month.value,
+                      enabled: (date) => enabled(date.toNative()),
+                      selected: (date) => selected(date.toNative()),
+                      onMonthChange: (date) {
+                        _month.value = date;
+                        onMonthChange?.call(date.toNative());
+                      },
+                      onPress: (date) => onPress?.call(date.toNative()),
+                      onLongPress: (date) => onLongPress?.call(date.toNative()),
+                    ),
+                  FCalendarPickerType.yearMonth => YearMonthPicker(
+                      style: style,
+                      start: start.toLocalDate(),
+                      end: end.toLocalDate(),
+                      today: today.toLocalDate(),
+                      onChange: (date) {
+                        _month.value = date;
+                        _type.value = FCalendarPickerType.day;
+                      },
+                    ),
+                },
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -107,8 +144,8 @@ class _Calendar extends StatelessWidget {
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
-      ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('month', month))
+      ..add(DiagnosticsProperty('type', _type))
+      ..add(DiagnosticsProperty('month', _month))
       ..add(DiagnosticsProperty('enabled', enabled))
       ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('onMonthChange', onMonthChange))

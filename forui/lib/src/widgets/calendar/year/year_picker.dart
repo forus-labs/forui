@@ -19,7 +19,7 @@ class YearPicker extends StatefulWidget {
   final LocalDate? focused;
   final ValueChanged<LocalDate> onPress;
 
-  const YearPicker({
+  YearPicker({
     required this.style,
     required this.startYear,
     required this.start,
@@ -28,7 +28,7 @@ class YearPicker extends StatefulWidget {
     required this.focused,
     required this.onPress,
     super.key,
-  });
+  }): assert(startYear == startYear.truncate(to: DateUnit.years), 'startYear must be truncated to years.');
 
   @override
   State<YearPicker> createState() => _YearPickerState();

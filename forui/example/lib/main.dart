@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-import 'package:sugar/sugar.dart';
 
 void main() {
   runApp(const Application());
@@ -43,22 +42,14 @@ class Application extends StatelessWidget {
 }
 
 class Testing extends StatelessWidget {
-
-  static final _selected = { LocalDate(2024, 7, 16), LocalDate(2024, 7, 17), LocalDate(2024, 7, 18),  LocalDate(2024, 7, 29)};
+  static final _selected = {DateTime(2024, 7, 16), DateTime(2024, 7, 17), DateTime(2024, 7, 18), DateTime(2024, 7, 29)};
 
   const Testing({super.key});
 
   @override
-  Widget build(BuildContext context) => Calendar(
-      style: FCalendarStyle.inherit(colorScheme: context.theme.colorScheme, typography: context.theme.typography, style: context.theme.style),
-      start: LocalDate(1900, 1, 8),
-      end: LocalDate(2024, 7, 10),
-      current: LocalDate.now(),
-      initialMonth: LocalDate(2023, 7),
-      enabled: (_) => true,
-      selected: _selected.contains,
-      date: print,
-      onPress: print,
-      onLongPress: print,
-    );
+  Widget build(BuildContext context) => FCalendar.raw(
+        start: DateTime(1900, 1, 8),
+        end: DateTime(2024, 7, 10),
+        selected: _selected.contains,
+      );
 }
