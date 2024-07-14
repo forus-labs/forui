@@ -51,8 +51,9 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.style.animationDuration);
     widget.type.addListener(_animate);
+    _controller = AnimationController(vsync: this, duration: widget.style.animationDuration);
+    _controller.value = widget.type.value == FCalendarPickerType.day ? 0.0 : 1.0;
   }
 
   @override
@@ -60,8 +61,8 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
         height: Header.height,
         child: FInkWell(
           onPress: () => widget.type.value = switch (widget.type.value) {
-            FCalendarPickerType.day => FCalendarPickerType.day,
-            FCalendarPickerType.yearMonth => FCalendarPickerType.yearMonth,
+            FCalendarPickerType.day => FCalendarPickerType.yearMonth,
+            FCalendarPickerType.yearMonth => FCalendarPickerType.day,
           },
           builder: (context, _, child) => child!,
           child: Row(
@@ -98,10 +99,14 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   }
 
   void _animate() {
-    if (_controller.isCompleted) {
-      _controller.reverse();
-    } else {
-      _controller.forward();
+    // we check the picker type to prevent de-syncs
+    switch ((widget.type.value, _controller.isCompleted)) {
+      case (FCalendarPickerType.yearMonth, false):
+        _controller.forward();
+      case (FCalendarPickerType.day, true):
+        _controller.reverse();
+
+      case _:
     }
   }
 }

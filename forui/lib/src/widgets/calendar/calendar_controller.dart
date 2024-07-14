@@ -3,6 +3,11 @@ import 'package:forui/forui.dart';
 import 'package:sugar/sugar.dart';
 
 /// A controller that controls date selection in a calendar.
+///
+/// This class should be extended to customize date selection. By default, the following controllers are provided:
+/// * [FCalendarSingleValueController] for selecting a single date.
+/// * [FCalendarMultiValueController] for selecting multiple date.
+/// * [FCalendarSingleRangeController] for selecting a single range.
 abstract class FCalendarController<T> extends ValueNotifier<T> {
   /// Creates a [FCalendarController] with the given initial [value].
   FCalendarController(super._value);
@@ -30,13 +35,7 @@ final class FCalendarSingleValueController extends FCalendarController<DateTime?
   bool contains(DateTime date) => value?.toLocalDate() == date.toLocalDate();
 
   @override
-  void onPress(DateTime date) {
-    if (value?.toLocalDate() == date.toLocalDate()) {
-      value = null;
-    } else {
-      value = date;
-    }
-  }
+  void onPress(DateTime date) => value = value?.toLocalDate() == date.toLocalDate() ? null : date;
 }
 
 /// A date selection controller that allows multiple dates to be selected.
@@ -47,14 +46,15 @@ final class FCalendarMultiValueController extends FCalendarController<Set<DateTi
   ///
   /// ## Contract:
   /// Throws an [AssertionError] if the given dates in [value] is not in UTC timezone.
-  FCalendarMultiValueController([super.value = const {}]) : assert(value.every((d) => d.isUtc), 'dates must be in UTC timezone');
+  FCalendarMultiValueController([super.value = const {}])
+      : assert(value.every((d) => d.isUtc), 'dates must be in UTC timezone');
 
   @override
   bool contains(DateTime date) => value.contains(date);
 
   @override
   void onPress(DateTime date) {
-    final copy = { ...value };
+    final copy = {...value};
     value = copy..toggle(date);
   }
 }
@@ -67,9 +67,15 @@ final class FCalendarSingleRangeController extends FCalendarController<(DateTime
   /// Creates a [FCalendarSingleRangeController] with the given initial [value].
   ///
   /// ## Contract:
-  /// Throws an [AssertionError] if the given [value] is not in UTC timezone.
+  /// Throws an [AssertionError] if:
+  /// * the given dates in [value] is not in UTC timezone.
+  /// * the end date is less than start date.
   FCalendarSingleRangeController([super.value])
-      : assert(value == null || (value.$1.isUtc && value.$2.isUtc), 'value must be in UTC timezone');
+      : assert(value == null || (value.$1.isUtc && value.$2.isUtc), 'value must be in UTC timezone'),
+        assert(
+          value == null || (value.$1.isBefore(value.$2) || value.$1.isAtSameMomentAs(value.$2)),
+          'end date must be greater than or equal to start date',
+        );
 
   @override
   bool contains(DateTime date) {
@@ -98,7 +104,7 @@ final class FCalendarSingleRangeController extends FCalendarController<(DateTime
       case (final first, final last) when pressed < first:
         value = (pressed.toNative(), last.toNative());
 
-      case (final first,  _):
+      case (final first, _):
         value = (first.toNative(), pressed.toNative());
     }
   }

@@ -6,7 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
-final _yMMMM = DateFormat.yMMMM();
+// ignore: non_constant_identifier_names
+final _MMM = DateFormat.MMM();
 
 @internal
 class MonthPicker extends StatefulWidget {
@@ -74,7 +75,7 @@ class _MonthPickerState extends State<MonthPicker> {
               focusNode: _months[i],
               current: widget.today.truncate(to: DateUnit.months) == month,
               enabled: widget.start <= month && month <= widget.end,
-              format: (date) => _yMMMM.format(date.toNative()), // TODO: localize
+              format: (date) => _MMM.format(date.toNative()), // TODO: localize
               onPress: widget.onPress,
             ),
         ],

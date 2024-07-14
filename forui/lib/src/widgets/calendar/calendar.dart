@@ -16,6 +16,9 @@ export 'year_month_picker.dart' show FCalendarYearMonthPickerStyle;
 
 /// A calendar.
 ///
+/// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing
+/// left and right swipes to transition between pages.
+///
 /// See:
 /// * https://forui.dev/docs/calendar for working examples.
 /// * [FCalendarDayStyle] for customizing a card's appearance.
@@ -104,9 +107,7 @@ class FCalendar extends StatelessWidget {
               ValueListenableBuilder(
                 valueListenable: _type,
                 builder: (context, value, child) => switch (value) {
-                  FCalendarPickerType.day => ValueListenableBuilder(
-                    valueListenable: controller,
-                    builder: (context, _, __) =>  PagedDayPicker(
+                  FCalendarPickerType.day => PagedDayPicker(
                       style: style,
                       start: start.toLocalDate(),
                       end: end.toLocalDate(),
@@ -125,12 +126,12 @@ class FCalendar extends StatelessWidget {
                       },
                       onLongPress: (date) => onLongPress?.call(date.toNative()),
                     ),
-                  ),
                   FCalendarPickerType.yearMonth => YearMonthPicker(
                       style: style,
                       start: start.toLocalDate(),
                       end: end.toLocalDate(),
                       today: today.toLocalDate(),
+                      initial: _month.value,
                       onChange: (date) {
                         _month.value = date;
                         _type.value = FCalendarPickerType.day;

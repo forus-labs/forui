@@ -12,6 +12,7 @@ class YearMonthPicker extends StatefulWidget {
   final LocalDate start;
   final LocalDate end;
   final LocalDate today;
+  final LocalDate initial;
   final ValueChanged<LocalDate> onChange;
 
   const YearMonthPicker({
@@ -19,6 +20,7 @@ class YearMonthPicker extends StatefulWidget {
     required this.start,
     required this.end,
     required this.today,
+    required this.initial,
     required this.onChange,
     super.key,
   });
@@ -34,6 +36,7 @@ class YearMonthPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
+      ..add(DiagnosticsProperty('initial', initial))
       ..add(DiagnosticsProperty('onChange', onChange));
   }
 }
@@ -54,7 +57,7 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
         start: widget.start,
         end: widget.end,
         today: widget.today,
-        initial: widget.today.truncate(to: DateUnit.years),
+        initial: widget.initial.truncate(to: DateUnit.years),
         onPress: (year) => setState(() => _date = year),
       );
     } else {
