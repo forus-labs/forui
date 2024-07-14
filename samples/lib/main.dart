@@ -1,6 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart' hide DialogRoute;
+
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample_scaffold.dart';
 
