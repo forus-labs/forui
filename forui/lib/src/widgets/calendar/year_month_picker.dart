@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/month/paged_month_picker.dart';
 import 'package:forui/src/widgets/calendar/year/paged_year_picker.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 @internal
 class YearMonthPicker extends StatefulWidget {
@@ -73,11 +75,11 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
   }
 }
 
-
 /// The year/month picker's style.
 final class FCalendarYearMonthPickerStyle with Diagnosticable {
   /// The enabled years/months' styles.
   final FCalendarEntryStyle enabledStyle;
+
   /// The disabled years/months' styles.
   final FCalendarEntryStyle disabledStyle;
 
@@ -115,10 +117,11 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
   FCalendarYearMonthPickerStyle copyWith({
     FCalendarEntryStyle? enabledStyle,
     FCalendarEntryStyle? disabledStyle,
-  }) => FCalendarYearMonthPickerStyle(
-    enabledStyle: enabledStyle ?? this.enabledStyle,
-    disabledStyle: disabledStyle ?? this.disabledStyle,
-  );
+  }) =>
+      FCalendarYearMonthPickerStyle(
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -131,8 +134,10 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FCalendarYearMonthPickerStyle && runtimeType == other.runtimeType &&
-              enabledStyle == other.enabledStyle && disabledStyle == other.disabledStyle;
+      other is FCalendarYearMonthPickerStyle &&
+          runtimeType == other.runtimeType &&
+          enabledStyle == other.enabledStyle &&
+          disabledStyle == other.disabledStyle;
 
   @override
   int get hashCode => enabledStyle.hashCode ^ disabledStyle.hashCode;

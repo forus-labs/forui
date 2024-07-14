@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:forui_example/example.dart';
 
-
 void main() {
   runApp(const Application());
 }

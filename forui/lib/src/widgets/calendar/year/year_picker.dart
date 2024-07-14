@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/calendar/shared/entry.dart';
-import 'package:forui/src/widgets/calendar/year_month_picker.dart';
+
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/src/widgets/calendar/shared/entry.dart';
+import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
 @internal
 class YearPicker extends StatefulWidget {
@@ -28,7 +30,7 @@ class YearPicker extends StatefulWidget {
     required this.focused,
     required this.onPress,
     super.key,
-  }): assert(startYear == startYear.truncate(to: DateUnit.years), 'startYear must be truncated to years.');
+  }) : assert(startYear == startYear.truncate(to: DateUnit.years), 'startYear must be truncated to years.');
 
   @override
   State<YearPicker> createState() => _YearPickerState();

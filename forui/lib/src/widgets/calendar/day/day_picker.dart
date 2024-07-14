@@ -3,16 +3,18 @@ import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/shared/entry.dart';
+
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/calendar/shared/entry.dart';
 
 @internal
 class DayPicker extends StatefulWidget {
   static const maxRows = 7;
   static const tileDimension = 42.0;
-  
+
   final FCalendarDayPickerStyle style;
   final LocalDate month;
   final LocalDate today;
@@ -91,35 +93,34 @@ class _DayPickerState extends State<DayPicker> {
     return (first, last);
   }
 
-
   @override
   Widget build(BuildContext context) => SizedBox(
-    width: DateTime.daysPerWeek * DayPicker.tileDimension,
-    child: GridView.custom(
-      padding: EdgeInsets.zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const _GridDelegate(),
-      childrenDelegate: SliverChildListDelegate(
-        addRepaintBoundaries: false,
-        [
-          ..._headers(context),
-          for (final MapEntry(key: date, value: focusNode) in _days.entries)
-            Entry.day(
-              style: widget.style,
-              date: date,
-              focusNode: focusNode,
-              current: date.month == widget.month.month,
-              today: date == widget.today,
-              enabled: widget.enabled,
-              selected: widget.selected,
-              onPress: widget.onPress,
-              onLongPress: widget.onLongPress,
-            ),
-        ],
-      ),
-    ),
-  );
+        width: DateTime.daysPerWeek * DayPicker.tileDimension,
+        child: GridView.custom(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const _GridDelegate(),
+          childrenDelegate: SliverChildListDelegate(
+            addRepaintBoundaries: false,
+            [
+              ..._headers(context),
+              for (final MapEntry(key: date, value: focusNode) in _days.entries)
+                Entry.day(
+                  style: widget.style,
+                  date: date,
+                  focusNode: focusNode,
+                  current: date.month == widget.month.month,
+                  today: date == widget.today,
+                  enabled: widget.enabled,
+                  selected: widget.selected,
+                  onPress: widget.onPress,
+                  onLongPress: widget.onLongPress,
+                ),
+            ],
+          ),
+        ),
+      );
 
   List<Widget> _headers(BuildContext context) {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
@@ -158,18 +159,17 @@ class _GridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-    childCrossAxisExtent: DayPicker.tileDimension,
-    childMainAxisExtent: DayPicker.tileDimension,
-    crossAxisCount: DateTime.daysPerWeek,
-    crossAxisStride: DayPicker.tileDimension,
-    mainAxisStride: DayPicker.tileDimension,
-    reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
-  );
+        childCrossAxisExtent: DayPicker.tileDimension,
+        childMainAxisExtent: DayPicker.tileDimension,
+        crossAxisCount: DateTime.daysPerWeek,
+        crossAxisStride: DayPicker.tileDimension,
+        mainAxisStride: DayPicker.tileDimension,
+        reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
+      );
 
   @override
   bool shouldRelayout(_GridDelegate oldDelegate) => false;
 }
-
 
 /// A day picker's style.
 final class FCalendarDayPickerStyle with Diagnosticable {
@@ -364,10 +364,10 @@ final class FCalendarDayStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FCalendarDayStyle &&
-              runtimeType == other.runtimeType &&
-              unselectedStyle == other.unselectedStyle &&
-              selectedStyle == other.selectedStyle;
+      other is FCalendarDayStyle &&
+          runtimeType == other.runtimeType &&
+          unselectedStyle == other.unselectedStyle &&
+          selectedStyle == other.selectedStyle;
 
   @override
   int get hashCode => unselectedStyle.hashCode ^ selectedStyle.hashCode;

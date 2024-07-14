@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/calendar/shared/entry.dart';
-import 'package:forui/src/widgets/calendar/year_month_picker.dart';
+
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/src/widgets/calendar/shared/entry.dart';
+import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
 // ignore: non_constant_identifier_names
 final _MMM = DateFormat.MMM();
@@ -30,7 +32,7 @@ class MonthPicker extends StatefulWidget {
     required this.focused,
     required this.onPress,
     super.key,
-  }): assert(currentYear == currentYear.truncate(to: DateUnit.years), 'currentYear must be truncated to years');
+  }) : assert(currentYear == currentYear.truncate(to: DateUnit.years), 'currentYear must be truncated to years');
 
   @override
   State<MonthPicker> createState() => _MonthPickerState();

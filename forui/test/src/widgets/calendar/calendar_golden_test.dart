@@ -107,7 +107,6 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('Feb')));
           await tester.pumpAndSettle();
 
-
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/month-picker/$name-default.png'),
