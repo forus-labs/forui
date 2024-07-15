@@ -7,6 +7,8 @@ import 'package:forui/forui.dart';
 
 part 'card_content.dart';
 
+part 'alert_content.dart';
+
 /// A card.
 ///
 /// Card are typically used to group related information together.
@@ -14,7 +16,7 @@ part 'card_content.dart';
 /// See:
 /// * https://forui.dev/docs/card for working examples.
 /// * [FCardStyle] for customizing a card's appearance.
-final class FCard extends StatelessWidget {
+class FCard extends StatelessWidget {
   /// The style. Defaults to [FThemeData.cardStyle].
   final FCardStyle? style;
 
@@ -48,6 +50,20 @@ final class FCard extends StatelessWidget {
   /// Creates a [FCard] with custom content.
   const FCard.raw({required this.child, this.style, super.key});
 
+  FCard.alert({
+    Widget? icon,
+    Widget? title,
+    Widget? subtitle,
+    Widget? child,
+    this.style,
+  }) : child = _FAlertCardContent(
+    icon: icon,
+          title: title,
+          subtitle: subtitle,
+          style: style?.alertContent,
+          child: child,
+        );
+
   @override
   Widget build(BuildContext context) => DecoratedBox(
         decoration: (style ?? context.theme.cardStyle).decoration,
@@ -69,8 +85,11 @@ final class FCardStyle with Diagnosticable {
   /// The card content's style.
   final FCardContentStyle content;
 
+  /// The alert variant content's style.
+  final FAlertContentStyle alertContent;
+
   /// Creates a [FCardStyle].
-  FCardStyle({required this.decoration, required this.content});
+  FCardStyle({required this.decoration, required this.content, required this.alertContent});
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme], [typography] and [style].
   FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
@@ -79,7 +98,8 @@ final class FCardStyle with Diagnosticable {
           borderRadius: style.borderRadius,
           color: colorScheme.background,
         ),
-        content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography);
+        content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+        alertContent = FAlertContentStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
 
   /// Returns a copy of this [FCardStyle] with the given properties replaced.
   ///
@@ -95,17 +115,24 @@ final class FCardStyle with Diagnosticable {
   /// print(style.content == copy.content); // false
   /// ```
   @useResult
-  FCardStyle copyWith({BoxDecoration? decoration, FCardContentStyle? content}) => FCardStyle(
+  FCardStyle copyWith({
+    BoxDecoration? decoration,
+    FCardContentStyle? content,
+    FAlertContentStyle? alertContent,
+  }) =>
+      FCardStyle(
         decoration: decoration ?? this.decoration,
         content: content ?? this.content,
+        alertContent: alertContent ?? this.alertContent,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('decoration', decoration))
       ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('decoration', decoration));
+      ..add(DiagnosticsProperty<FAlertContentStyle>('alertContent', alertContent));
   }
 
   @override
@@ -114,8 +141,9 @@ final class FCardStyle with Diagnosticable {
       other is FCardStyle &&
           runtimeType == other.runtimeType &&
           decoration == other.decoration &&
-          content == other.content;
+          content == other.content &&
+          alertContent == other.alertContent;
 
   @override
-  int get hashCode => decoration.hashCode ^ content.hashCode;
+  int get hashCode => decoration.hashCode ^ content.hashCode ^ alertContent.hashCode;
 }
