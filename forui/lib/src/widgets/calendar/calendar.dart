@@ -178,7 +178,7 @@ final class FCalendarStyle with Diagnosticable {
   /// The decoration surrounding the header & picker.
   final BoxDecoration decoration;
 
-  /// The padding surrounding the header & picker. Defaults to `const EdgeInsets.symmetric(horizontal: 12, vertical: 16)`.
+  /// The padding surrounding the header & picker. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 16)`.
   final EdgeInsets padding;
 
   /// The duration of the page switch animation. Defaults to 200 milliseconds.
