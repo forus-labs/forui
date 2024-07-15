@@ -38,7 +38,7 @@ abstract class Entry extends StatelessWidget {
     Widget builder(BuildContext context, bool focused, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
-            left: selected(date.yesterday) ? Radius.zero :  entryStyle.radius,
+            left: selected(date.yesterday) ? Radius.zero : entryStyle.radius,
             right: selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
           text: '${date.day}', // TODO: localization
