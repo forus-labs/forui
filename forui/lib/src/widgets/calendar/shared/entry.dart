@@ -38,8 +38,8 @@ abstract class Entry extends StatelessWidget {
     Widget builder(BuildContext context, bool focused, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
-            left: selected(date.yesterday) ? Radius.zero : const Radius.circular(4),
-            right: selected(date.tomorrow) ? Radius.zero : const Radius.circular(4),
+            left: selected(date.yesterday) ? Radius.zero :  entryStyle.radius,
+            right: selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
           text: '${date.day}', // TODO: localization
           focused: focused,
@@ -76,7 +76,7 @@ abstract class Entry extends StatelessWidget {
     // ignore: avoid_positional_boolean_parameters
     Widget builder(BuildContext context, bool focused, Widget? child) => _Content(
           style: entryStyle,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.all(entryStyle.radius),
           text: format(date),
           focused: focused,
           current: current,
@@ -221,10 +221,14 @@ final class FCalendarEntryStyle with Diagnosticable {
   /// The focused day's text style. Defaults to [textStyle].
   final TextStyle focusedTextStyle;
 
+  /// The entry border's radius. Defaults to `Radius.circular(4)`.
+  final Radius radius;
+
   /// Creates a [FCalendarEntryStyle].
   FCalendarEntryStyle({
     required this.backgroundColor,
     required this.textStyle,
+    required this.radius,
     Color? focusedBackgroundColor,
     TextStyle? focusedTextStyle,
   })  : focusedBackgroundColor = focusedBackgroundColor ?? backgroundColor,
@@ -250,12 +254,14 @@ final class FCalendarEntryStyle with Diagnosticable {
     TextStyle? textStyle,
     Color? focusedBackgroundColor,
     TextStyle? focusedTextStyle,
+    Radius? radius,
   }) =>
       FCalendarEntryStyle(
         backgroundColor: backgroundColor ?? this.backgroundColor,
         textStyle: textStyle ?? this.textStyle,
         focusedBackgroundColor: focusedBackgroundColor ?? this.focusedBackgroundColor,
         focusedTextStyle: focusedTextStyle ?? this.focusedTextStyle,
+        radius: radius ?? this.radius,
       );
 
   @override
@@ -265,7 +271,8 @@ final class FCalendarEntryStyle with Diagnosticable {
       ..add(ColorProperty('backgroundColor', backgroundColor))
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ColorProperty('focusedBackgroundColor', focusedBackgroundColor))
-      ..add(DiagnosticsProperty('focusedTextStyle', focusedTextStyle));
+      ..add(DiagnosticsProperty('focusedTextStyle', focusedTextStyle))
+      ..add(DiagnosticsProperty('radius', radius));
   }
 
   @override
@@ -276,9 +283,14 @@ final class FCalendarEntryStyle with Diagnosticable {
           backgroundColor == other.backgroundColor &&
           textStyle == other.textStyle &&
           focusedBackgroundColor == other.focusedBackgroundColor &&
-          focusedTextStyle == other.focusedTextStyle;
+          focusedTextStyle == other.focusedTextStyle &&
+          radius == other.radius;
 
   @override
   int get hashCode =>
-      backgroundColor.hashCode ^ textStyle.hashCode ^ focusedBackgroundColor.hashCode ^ focusedTextStyle.hashCode;
+      backgroundColor.hashCode ^
+      textStyle.hashCode ^
+      focusedBackgroundColor.hashCode ^
+      focusedTextStyle.hashCode ^
+      radius.hashCode;
 }
