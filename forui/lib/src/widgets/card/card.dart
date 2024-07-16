@@ -95,7 +95,11 @@ final class FCardStyle with Diagnosticable {
   /// print(style.content == copy.content); // false
   /// ```
   @useResult
-  FCardStyle copyWith({BoxDecoration? decoration, FCardContentStyle? content}) => FCardStyle(
+  FCardStyle copyWith({
+    BoxDecoration? decoration,
+    FCardContentStyle? content,
+  }) =>
+      FCardStyle(
         decoration: decoration ?? this.decoration,
         content: content ?? this.content,
       );
@@ -104,8 +108,8 @@ final class FCardStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('decoration', decoration));
+      ..add(DiagnosticsProperty('decoration', decoration))
+      ..add(DiagnosticsProperty('content', content));
   }
 
   @override

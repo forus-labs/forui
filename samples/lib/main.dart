@@ -40,6 +40,10 @@ class _AppRouter extends $_AppRouter {
           initial: true,
         ),
         AutoRoute(
+          path: '/alert/default',
+          page: AlertRoute.page,
+        ),
+        AutoRoute(
           path: '/badge/default',
           page: BadgeRoute.page,
         ),

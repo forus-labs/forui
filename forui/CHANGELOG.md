@@ -1,6 +1,7 @@
 ## Next
 
 ### Additions
+* Add `FAlert`
 * Add `FCalendar`
 * Add `FBottomNavigationBar`
 
