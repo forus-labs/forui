@@ -44,6 +44,10 @@ class _AppRouter extends $_AppRouter {
           page: BadgeRoute.page,
         ),
         AutoRoute(
+          path: '/bottom-navigation-bar/default',
+          page: BottomNavigationBarRoute.page,
+        ),
+        AutoRoute(
           path: '/button/text',
           page: ButtonTextRoute.page,
         ),

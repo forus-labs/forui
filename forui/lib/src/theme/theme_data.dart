@@ -28,6 +28,9 @@ final class FThemeData with Diagnosticable {
   /// The badge styles.
   final FBadgeStyles badgeStyles;
 
+  /// The bottom navigation bar style.
+  final FBottomNavigationBarStyle bottomNavigationBarStyle;
+
   /// The button styles.
   final FButtonStyles buttonStyles;
 
@@ -73,6 +76,7 @@ final class FThemeData with Diagnosticable {
   FThemeData({
     required this.colorScheme,
     required this.badgeStyles,
+    required this.bottomNavigationBarStyle,
     required this.buttonStyles,
     required this.calendarStyle,
     required this.cardStyle,
@@ -102,6 +106,7 @@ final class FThemeData with Diagnosticable {
       typography: typography,
       style: style,
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -139,6 +144,7 @@ final class FThemeData with Diagnosticable {
     FTypography? typography,
     FStyle? style,
     FBadgeStyles? badgeStyles,
+    FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FButtonStyles? buttonStyles,
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
@@ -157,6 +163,7 @@ final class FThemeData with Diagnosticable {
         typography: typography ?? this.typography,
         style: style ?? this.style,
         badgeStyles: badgeStyles ?? this.badgeStyles,
+        bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
         buttonStyles: buttonStyles ?? this.buttonStyles,
         calendarStyle: calendarStyle ?? this.calendarStyle,
         cardStyle: cardStyle ?? this.cardStyle,
@@ -179,6 +186,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('calendarStyle', calendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
@@ -202,6 +210,7 @@ final class FThemeData with Diagnosticable {
           typography == other.typography &&
           style == other.style &&
           badgeStyles == other.badgeStyles &&
+          bottomNavigationBarStyle == other.bottomNavigationBarStyle &&
           buttonStyles == other.buttonStyles &&
           calendarStyle == other.calendarStyle &&
           cardStyle == other.cardStyle &&
@@ -221,6 +230,7 @@ final class FThemeData with Diagnosticable {
       typography.hashCode ^
       style.hashCode ^
       badgeStyles.hashCode ^
+      bottomNavigationBarStyle.hashCode ^
       buttonStyles.hashCode ^
       calendarStyle.hashCode ^
       cardStyle.hashCode ^

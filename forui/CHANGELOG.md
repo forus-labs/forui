@@ -2,6 +2,7 @@
 
 ### Additions
 * Add `FCalendar`
+* Add `FBottomNavigationBar`
 
 ### Enhancements
 * **Breaking** Change `FSwitch` to be usable in `Form`s.

@@ -19,6 +19,7 @@ library forui.widgets;
 import 'package:forui/forui.dart';
 
 export 'src/widgets/badge/badge.dart' hide Variant;
+export 'src/widgets/bottom_navigation_bar/bottom_navigation_bar.dart';
 export 'src/widgets/button/button.dart' hide Variant;
 export 'src/widgets/calendar/calendar.dart';
 export 'src/widgets/card/card.dart';
