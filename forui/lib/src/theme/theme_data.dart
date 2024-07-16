@@ -34,6 +34,9 @@ final class FThemeData with Diagnosticable {
   /// The button styles.
   final FButtonStyles buttonStyles;
 
+  /// The calendar style.
+  final FCalendarStyle calendarStyle;
+
   /// The card style.
   final FCardStyle cardStyle;
 
@@ -75,6 +78,7 @@ final class FThemeData with Diagnosticable {
     required this.badgeStyles,
     required this.bottomNavigationBarStyle,
     required this.buttonStyles,
+    required this.calendarStyle,
     required this.cardStyle,
     required this.checkboxStyle,
     required this.dialogStyle,
@@ -104,6 +108,7 @@ final class FThemeData with Diagnosticable {
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -141,6 +146,7 @@ final class FThemeData with Diagnosticable {
     FBadgeStyles? badgeStyles,
     FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FButtonStyles? buttonStyles,
+    FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
     FDialogStyle? dialogStyle,
@@ -159,6 +165,7 @@ final class FThemeData with Diagnosticable {
         badgeStyles: badgeStyles ?? this.badgeStyles,
         bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
         buttonStyles: buttonStyles ?? this.buttonStyles,
+        calendarStyle: calendarStyle ?? this.calendarStyle,
         cardStyle: cardStyle ?? this.cardStyle,
         checkboxStyle: checkboxStyle ?? this.checkboxStyle,
         dialogStyle: dialogStyle ?? this.dialogStyle,
@@ -181,6 +188,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('calendarStyle', calendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
@@ -204,6 +212,7 @@ final class FThemeData with Diagnosticable {
           badgeStyles == other.badgeStyles &&
           bottomNavigationBarStyle == other.bottomNavigationBarStyle &&
           buttonStyles == other.buttonStyles &&
+          calendarStyle == other.calendarStyle &&
           cardStyle == other.cardStyle &&
           checkboxStyle == other.checkboxStyle &&
           dialogStyle == other.dialogStyle &&
@@ -223,6 +232,7 @@ final class FThemeData with Diagnosticable {
       badgeStyles.hashCode ^
       bottomNavigationBarStyle.hashCode ^
       buttonStyles.hashCode ^
+      calendarStyle.hashCode ^
       cardStyle.hashCode ^
       checkboxStyle.hashCode ^
       dialogStyle.hashCode ^

@@ -4,7 +4,7 @@ import { Widget } from "../../components/widget";
 # Checkbox
 A control that allows the user to toggle between checked and not checked. It can also be used in a form.
 
-On touch devices, it is recommended to use a [switch](/docs/switch) instead in most cases.
+For touch devices, a [switch](/docs/switch) is generally recommended over a checkbox.
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
@@ -74,6 +74,7 @@ FCheckbox(
       Widget build(BuildContext context) => Form(
         key: _formKey,
         child: Column(
+          mainAxisAlignment: MainAxiAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FTextField.email(

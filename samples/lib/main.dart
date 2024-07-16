@@ -56,6 +56,18 @@ class _AppRouter extends $_AppRouter {
           page: ButtonIconRoute.page,
         ),
         AutoRoute(
+          path: '/calendar/default',
+          page: CalendarRoute.page,
+        ),
+        AutoRoute(
+          path: '/calendar/multi-value',
+          page: MultiValueCalendarRoute.page,
+        ),
+        AutoRoute(
+          path: '/calendar/single-range',
+          page: SingleRangeCalendarRoute.page,
+        ),
+        AutoRoute(
           path: '/card/default',
           page: CardRoute.page,
         ),
