@@ -25,20 +25,20 @@ class FBottomNavigationBar extends StatelessWidget {
   final List<Widget> items;
 
   /// A callback for when an item is selected.
-  final ValueChanged<int>? onSelect;
+  final ValueChanged<int>? onChange;
 
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
   FBottomNavigationBar({
     required List<FBottomNavigationBarItem> items,
     this.style,
-    this.onSelect,
-    int activeIndex = -1,
+    this.onChange,
+    int index = -1,
     super.key,
   }) : items = items
             .mapIndexed(
-              (index, item) => _FBottomNavigationBarWidget(
+              (currentIndex, item) => _FBottomNavigationBarItem(
                 item: item,
-                active: index == activeIndex,
+                current: index == currentIndex,
                 style: style?.item,
               ),
             )
@@ -48,7 +48,7 @@ class FBottomNavigationBar extends StatelessWidget {
   const FBottomNavigationBar.raw({
     required this.items,
     this.style,
-    this.onSelect,
+    this.onChange,
     super.key,
   });
 
@@ -72,9 +72,7 @@ class FBottomNavigationBar extends StatelessWidget {
                   (index, item) => Expanded(
                     child: FTappable(
                       child: item,
-                      onTap: () {
-                        onSelect?.call(index);
-                      },
+                      onTap: () => onChange?.call(index),
                     ),
                   ),
                 )
@@ -91,7 +89,7 @@ class FBottomNavigationBar extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(IterableProperty('items', items))
-      ..add(ObjectFlagProperty.has('onSelect', onSelect));
+      ..add(ObjectFlagProperty.has('onSelect', onChange));
   }
 }
 

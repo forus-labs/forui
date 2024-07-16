@@ -1,15 +1,15 @@
 part of 'bottom_navigation_bar.dart';
 
-class _FBottomNavigationBarWidget extends StatelessWidget {
+class _FBottomNavigationBarItem extends StatelessWidget {
   final FBottomNavigationBarItemStyle? style;
 
   final FBottomNavigationBarItem item;
 
-  final bool active;
+  final bool current;
 
-  const _FBottomNavigationBarWidget({
+  const _FBottomNavigationBarItem({
     required this.item,
-    required this.active,
+    required this.current,
     this.style,
   });
 
@@ -27,7 +27,7 @@ class _FBottomNavigationBarWidget extends StatelessWidget {
             item.icon(
               height: style.iconSize,
               colorFilter: ColorFilter.mode(
-                active ? style.activeIconColor : style.inactiveIconColor,
+                current ? style.activeIconColor : style.inactiveIconColor,
                 BlendMode.srcIn,
               ),
             ),
@@ -35,7 +35,7 @@ class _FBottomNavigationBarWidget extends StatelessWidget {
             Text(
               item.label,
               overflow: TextOverflow.ellipsis,
-              style: active ? style.activeTextStyle : style.inactiveTextStyle,
+              style: current ? style.activeTextStyle : style.inactiveTextStyle,
             ),
           ],
         ),
@@ -49,7 +49,7 @@ class _FBottomNavigationBarWidget extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('item', item))
-      ..add(FlagProperty('active', value: active, ifTrue: 'active'));
+      ..add(FlagProperty('active', value: current, ifTrue: 'active'));
   }
 }
 

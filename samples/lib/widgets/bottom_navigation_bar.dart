@@ -30,8 +30,8 @@ class _DemoState extends State<_Demo> {
 
   @override
   Widget build(BuildContext context) => FBottomNavigationBar(
-        activeIndex: index,
-        onSelect: (index) => setState(() => this.index = index),
+        index: index,
+        onChange: (index) => setState(() => this.index = index),
         items: [
           FBottomNavigationBarItem(
             icon: FAssets.icons.home,

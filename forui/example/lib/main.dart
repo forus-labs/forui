@@ -34,8 +34,8 @@ class _ApplicationState extends State<Application> {
             ),
             content: child ?? const SizedBox(),
             footer: FBottomNavigationBar(
-              activeIndex: index,
-              onSelect: (index) => setState(() => this.index = index),
+              index: index,
+              onChange: (index) => setState(() => this.index = index),
               items: [
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.home,

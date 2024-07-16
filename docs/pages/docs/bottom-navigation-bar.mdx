@@ -25,8 +25,8 @@ It is used to navigate between a small number of views, typically between three 
 
         @override
         Widget build(BuildContext context) => FBottomNavigationBar(
-              activeIndex: index,
-              onSelect: (index) => setState(() => this.index = index),
+              index: index,
+              onChange: (index) => setState(() => this.index = index),
               items: [
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.home,
@@ -65,8 +65,8 @@ It is used to navigate between a small number of views, typically between three 
 
 ```dart
 FBottomNavigationBar(
-    activeIndex: 0,
-    onSelect: (index) => {},
+    index: 0,
+    onChange: (index) => {},
     items: [
       FBottomNavigationBarItem(
         icon: FAssets.icons.home,

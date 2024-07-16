@@ -95,8 +95,8 @@ class _DemoState extends State<_Demo> {
         header: headers[index],
         content: contents[index],
         footer: FBottomNavigationBar(
-          activeIndex: index,
-          onSelect: (index) => setState(() => this.index = index),
+          index: index,
+          onChange: (index) => setState(() => this.index = index),
           items: [
             FBottomNavigationBarItem(
               icon: FAssets.icons.home,

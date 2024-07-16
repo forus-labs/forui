@@ -15,7 +15,7 @@ void main() {
             data: theme,
             background: background,
             child: FBottomNavigationBar(
-              activeIndex: 2,
+              index: 2,
               items: [
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.home,
