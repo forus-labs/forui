@@ -18,13 +18,13 @@ part 'alert_icon.dart';
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
   @useResult
-  static _Data _of(BuildContext context) {
+  static FAlertCustomStyle _of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedData>();
-    return theme?.data ?? (style: context.theme.alertStyles.primary);
+    return theme?.style ?? context.theme.alertStyles.primary;
   }
 
   /// The icon. Defaults to [FAssets.icons.circleAlert].
-  final Widget? icon;
+  final Widget icon;
 
   /// The title.
   final Widget title;
@@ -46,13 +46,13 @@ class FAlert extends StatelessWidget {
   /// |          [subtitle]       |
   /// |---------------------------|
   /// ```
-  const FAlert({
+  FAlert({
     required this.title,
-    this.icon,
+    Widget? icon,
     this.subtitle,
     this.style = FAlertStyle.primary,
     super.key,
-  });
+  }) : icon = icon ?? FAlertIcon(icon: FAssets.icons.circleAlert);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,6 @@ class FAlert extends StatelessWidget {
       Variant.primary => context.theme.alertStyles.primary,
       Variant.destructive => context.theme.alertStyles.destructive,
     };
-    final icon = this.icon ?? FAlertIcon(icon: FAssets.icons.circleAlert);
 
     return DecoratedBox(
       decoration: style.decoration,
@@ -72,7 +71,7 @@ class FAlert extends StatelessWidget {
           children: [
             Row(
               children: [
-                _InheritedData(data: (style: style), child: icon),
+                _InheritedData(style: style, child: icon),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -189,22 +188,20 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
       decoration.hashCode ^ padding.hashCode ^ icon.hashCode ^ titleTextStyle.hashCode ^ subtitleTextStyle.hashCode;
 }
 
-typedef _Data = ({FAlertCustomStyle style});
-
 class _InheritedData extends InheritedWidget {
-  final _Data data;
+  final FAlertCustomStyle style;
 
   const _InheritedData({
-    required this.data,
+    required this.style,
     required super.child,
   });
 
   @override
-  bool updateShouldNotify(covariant _InheritedData old) => data != old.data;
+  bool updateShouldNotify(covariant _InheritedData old) => style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', data.style));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }

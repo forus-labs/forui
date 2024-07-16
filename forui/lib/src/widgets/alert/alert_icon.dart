@@ -10,7 +10,7 @@ class FAlertIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (style: FAlertCustomStyle(:icon),) = FAlert._of(context);
+    final FAlertCustomStyle(:icon) = FAlert._of(context);
 
     return this.icon(
       height: icon.height,

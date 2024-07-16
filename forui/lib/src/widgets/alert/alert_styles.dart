@@ -18,19 +18,20 @@ class FAlertStyles with Diagnosticable {
   /// [style].
   FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FAlertCustomStyle(
-            padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-            titleTextStyle: typography.base.copyWith(
-              fontWeight: FontWeight.w500,
-              color: colorScheme.foreground,
-              height: 1.2,
-            ),
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
-            decoration: BoxDecoration(
-              border: Border.all(color: colorScheme.border),
-              borderRadius: style.borderRadius,
-              color: colorScheme.background,
-            ),
-            icon: FAlertIconStyle(color: colorScheme.foreground)),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+          titleTextStyle: typography.base.copyWith(
+            fontWeight: FontWeight.w500,
+            color: colorScheme.foreground,
+            height: 1.2,
+          ),
+          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
+          decoration: BoxDecoration(
+            border: Border.all(color: colorScheme.border),
+            borderRadius: style.borderRadius,
+            color: colorScheme.background,
+          ),
+          icon: FAlertIconStyle(color: colorScheme.foreground),
+        ),
         destructive = FAlertCustomStyle(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
           titleTextStyle: typography.base.copyWith(
