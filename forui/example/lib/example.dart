@@ -24,8 +24,8 @@ class _ExampleState extends State<Example> {
           FProgress(value: 0.9),
           const SizedBox(height: 10),
           FAlert(
-            title: Text('Heads Up! Forui is coming to flutter!'),
-            subtitle: Text('You can add components dfijsoi djfosfj  to your app using the cli.'),
+            title: const Text('Heads Up! Forui is coming to flutter!'),
+            subtitle: const Text('You can add components dfijsoi djfosfj  to your app using the cli.'),
           )
         ],
       );
