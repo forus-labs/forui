@@ -28,6 +28,9 @@ final class FThemeData with Diagnosticable {
   /// The badge styles.
   final FBadgeStyles badgeStyles;
 
+  /// The bottom navigation bar style.
+  final FBottomNavigationBarStyle bottomNavigationBarStyle;
+
   /// The button styles.
   final FButtonStyles buttonStyles;
 
@@ -70,6 +73,7 @@ final class FThemeData with Diagnosticable {
   FThemeData({
     required this.colorScheme,
     required this.badgeStyles,
+    required this.bottomNavigationBarStyle,
     required this.buttonStyles,
     required this.cardStyle,
     required this.checkboxStyle,
@@ -98,6 +102,7 @@ final class FThemeData with Diagnosticable {
       typography: typography,
       style: style,
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme),
@@ -134,6 +139,7 @@ final class FThemeData with Diagnosticable {
     FTypography? typography,
     FStyle? style,
     FBadgeStyles? badgeStyles,
+    FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FButtonStyles? buttonStyles,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
@@ -151,6 +157,7 @@ final class FThemeData with Diagnosticable {
         typography: typography ?? this.typography,
         style: style ?? this.style,
         badgeStyles: badgeStyles ?? this.badgeStyles,
+        bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
         buttonStyles: buttonStyles ?? this.buttonStyles,
         cardStyle: cardStyle ?? this.cardStyle,
         checkboxStyle: checkboxStyle ?? this.checkboxStyle,
@@ -172,6 +179,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle, level: DiagnosticLevel.debug))
@@ -194,6 +202,7 @@ final class FThemeData with Diagnosticable {
           typography == other.typography &&
           style == other.style &&
           badgeStyles == other.badgeStyles &&
+          bottomNavigationBarStyle == other.bottomNavigationBarStyle &&
           buttonStyles == other.buttonStyles &&
           cardStyle == other.cardStyle &&
           checkboxStyle == other.checkboxStyle &&
@@ -212,6 +221,7 @@ final class FThemeData with Diagnosticable {
       typography.hashCode ^
       style.hashCode ^
       badgeStyles.hashCode ^
+      bottomNavigationBarStyle.hashCode ^
       buttonStyles.hashCode ^
       cardStyle.hashCode ^
       checkboxStyle.hashCode ^

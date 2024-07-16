@@ -8,10 +8,15 @@ void main() {
   runApp(const Application());
 }
 
-/// The application widget.
-class Application extends StatelessWidget {
-  /// Creates an application widget.
+class Application extends StatefulWidget {
   const Application({super.key});
+
+  @override
+  State<Application> createState() => _ApplicationState();
+}
+
+class _ApplicationState extends State<Application> {
+  int index = 1;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -19,7 +24,7 @@ class Application extends StatelessWidget {
           data: FThemes.zinc.light,
           child: FScaffold(
             header: FHeader(
-              title: const Text('Example Example Example Example'),
+              title: const Text('Example'),
               actions: [
                 FHeaderAction(
                   icon: FAssets.icons.plus,
@@ -28,6 +33,28 @@ class Application extends StatelessWidget {
               ],
             ),
             content: child ?? const SizedBox(),
+            footer: FBottomNavigationBar(
+              activeIndex: index,
+              onSelect: (index) => setState(() => this.index = index),
+              items: [
+                FBottomNavigationBarItem(
+                  icon: FAssets.icons.home,
+                  label: 'Home',
+                ),
+                FBottomNavigationBarItem(
+                  icon: FAssets.icons.layoutGrid,
+                  label: 'Categories',
+                ),
+                FBottomNavigationBarItem(
+                  icon: FAssets.icons.search,
+                  label: 'Search',
+                ),
+                FBottomNavigationBarItem(
+                  icon: FAssets.icons.settings,
+                  label: 'Settings',
+                ),
+              ],
+            ),
           ),
         ),
         home: const Example(),

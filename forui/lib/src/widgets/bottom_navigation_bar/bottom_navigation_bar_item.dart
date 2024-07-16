@@ -1,6 +1,8 @@
 part of 'bottom_navigation_bar.dart';
 
 class _FBottomNavigationBarWidget extends StatelessWidget {
+  final FBottomNavigationBarItemStyle? style;
+
   final FBottomNavigationBarItem item;
 
   final bool active;
@@ -8,29 +10,35 @@ class _FBottomNavigationBarWidget extends StatelessWidget {
   const _FBottomNavigationBarWidget({
     required this.item,
     required this.active,
-    super.key,
+    this.style,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = item.style!; // TODO: fix.
+    final style = item.style ?? this.style ?? context.theme.bottomNavigationBarStyle.item;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: Column(
-        children: [
-          item.icon(
-            height: style.iconSize,
-            colorFilter: ColorFilter.mode(
-              active ? style.activeIconColor : style.inactiveIconColor,
-              BlendMode.srcIn,
+      child: Padding(
+        padding: style.padding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            item.icon(
+              height: style.iconSize,
+              colorFilter: ColorFilter.mode(
+                active ? style.activeIconColor : style.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
             ),
-          ),
-          Text(
-            item.label,
-            style: active ? style.activeTextStyle : style.inactiveTextStyle,
-          ),
-        ],
+            const SizedBox(height: 2),
+            Text(
+              item.label,
+              overflow: TextOverflow.ellipsis,
+              style: active ? style.activeTextStyle : style.inactiveTextStyle,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -39,6 +47,7 @@ class _FBottomNavigationBarWidget extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('item', item))
       ..add(FlagProperty('active', value: active, ifTrue: 'active'));
   }
@@ -65,14 +74,14 @@ class FBottomNavigationBarItem {
 
 /// [FBottomNavigationBarItem]'s style.
 class FBottomNavigationBarItemStyle with Diagnosticable {
+  /// The icon's size. Defaults to `28`.
+  final double iconSize;
+
   /// The icon's color when this item is active.
   final Color activeIconColor;
 
   /// The icon's color when this item is inactive.
   final Color inactiveIconColor;
-
-  /// The icon's size. Defaults to `24`.
-  final double iconSize;
 
   /// The text's style when this item is active.
   final TextStyle activeTextStyle;
@@ -80,22 +89,33 @@ class FBottomNavigationBarItemStyle with Diagnosticable {
   /// The text's style when this item is inactive.
   final TextStyle inactiveTextStyle;
 
+  /// The padding. Defaults to `EdgeInsets.all(5)`.
+  final EdgeInsets padding;
+
   /// Creates a [FBottomNavigationBarItemStyle].
   FBottomNavigationBarItemStyle({
     required this.activeIconColor,
     required this.inactiveIconColor,
-    required this.iconSize,
     required this.activeTextStyle,
     required this.inactiveTextStyle,
+    this.iconSize = 28,
+    this.padding = const EdgeInsets.all(5),
   });
 
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
   FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : activeIconColor = colorScheme.primary,
+      : iconSize = 24,
+        activeIconColor = colorScheme.primary,
         inactiveIconColor = colorScheme.foreground.withOpacity(0.5),
-        iconSize = 24,
-        activeTextStyle = typography.sm.copyWith(color: colorScheme.primary),
-        inactiveTextStyle = typography.sm.copyWith(color: colorScheme.foreground.withOpacity(0.5));
+        activeTextStyle = typography.base.copyWith(
+          color: colorScheme.primary,
+          fontSize: 10,
+        ),
+        inactiveTextStyle = typography.base.copyWith(
+          color: colorScheme.foreground.withOpacity(0.5),
+          fontSize: 10,
+        ),
+        padding = const EdgeInsets.all(5);
 
   /// Returns a copy of this [FBottomNavigationBarItemStyle] with the given properties replaced.
   ///
@@ -115,29 +135,32 @@ class FBottomNavigationBarItemStyle with Diagnosticable {
   /// ```
   @useResult
   FBottomNavigationBarItemStyle copyWith({
+    double? iconSize,
     Color? activeIconColor,
     Color? inactiveIconColor,
-    double? iconSize,
     TextStyle? activeTextStyle,
     TextStyle? inactiveTextStyle,
+    EdgeInsets? padding,
   }) =>
       FBottomNavigationBarItemStyle(
+        iconSize: iconSize ?? this.iconSize,
         activeIconColor: activeIconColor ?? this.activeIconColor,
         inactiveIconColor: inactiveIconColor ?? this.inactiveIconColor,
-        iconSize: iconSize ?? this.iconSize,
         activeTextStyle: activeTextStyle ?? this.activeTextStyle,
         inactiveTextStyle: inactiveTextStyle ?? this.inactiveTextStyle,
+        padding: padding ?? this.padding,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('iconSize', iconSize))
       ..add(ColorProperty('activeIconColor', activeIconColor))
       ..add(ColorProperty('inactiveIconColor', inactiveIconColor))
-      ..add(DiagnosticsProperty('iconSize', iconSize))
       ..add(DiagnosticsProperty('activeTextStyle', activeTextStyle))
-      ..add(DiagnosticsProperty('inactiveTextStyle', inactiveTextStyle));
+      ..add(DiagnosticsProperty('inactiveTextStyle', inactiveTextStyle))
+      ..add(DiagnosticsProperty('padding', padding));
   }
 
   @override
@@ -145,17 +168,19 @@ class FBottomNavigationBarItemStyle with Diagnosticable {
       identical(this, other) ||
       other is FBottomNavigationBarItemStyle &&
           runtimeType == other.runtimeType &&
+          iconSize == other.iconSize &&
           activeIconColor == other.activeIconColor &&
           inactiveIconColor == other.inactiveIconColor &&
-          iconSize == other.iconSize &&
           activeTextStyle == other.activeTextStyle &&
-          inactiveTextStyle == other.inactiveTextStyle;
+          inactiveTextStyle == other.inactiveTextStyle &&
+          padding == other.padding;
 
   @override
   int get hashCode =>
+      iconSize.hashCode ^
       activeIconColor.hashCode ^
       inactiveIconColor.hashCode ^
-      iconSize.hashCode ^
       activeTextStyle.hashCode ^
-      inactiveTextStyle.hashCode;
+      inactiveTextStyle.hashCode ^
+      padding.hashCode;
 }
