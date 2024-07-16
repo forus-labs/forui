@@ -103,6 +103,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) => Form(
         key: _formKey,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FTextField.email(
               hint: 'janedoe@foruslabs.com',

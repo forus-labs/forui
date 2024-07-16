@@ -60,6 +60,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) => Form(
         key: _formKey,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FTextField.email(

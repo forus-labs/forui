@@ -1,5 +1,22 @@
 /// The Forui widgets and their corresponding styles.
+///
+/// Widgets:
+/// * [FBadge]
+/// * [FButton]
+/// * [FCalendar]
+/// * [FCard]
+/// * [FCheckbox]
+/// * [FDialog]
+/// * [FHeader]
+/// * [FProgress]
+/// * [FTabs]
+/// * [FTextField]
+/// * [FScaffold]
+/// * [FSeparator]
+/// * [FSwitch]
 library forui.widgets;
+
+import 'package:forui/forui.dart';
 
 export 'src/widgets/badge/badge.dart' hide Variant;
 export 'src/widgets/button/button.dart' hide Variant;
