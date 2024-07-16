@@ -13,9 +13,9 @@ class BottomNavigationBarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => const Padding(
-    padding: EdgeInsets.all(15.0),
-    child: _Demo(),
-  );
+        padding: EdgeInsets.all(15.0),
+        child: _Demo(),
+      );
 }
 
 class _Demo extends StatefulWidget {

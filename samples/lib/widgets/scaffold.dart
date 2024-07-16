@@ -18,7 +18,7 @@ class ScaffoldPage extends SampleScaffold {
           SizedBox(
             height: 500,
             child: _Demo(),
-          )
+          ),
         ],
       );
 }
@@ -81,7 +81,7 @@ final contents = [
 ];
 
 class _Demo extends StatefulWidget {
-  const _Demo({super.key});
+  const _Demo();
 
   @override
   State<_Demo> createState() => _DemoState();
