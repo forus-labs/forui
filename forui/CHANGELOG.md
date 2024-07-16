@@ -1,5 +1,8 @@
 ## Next
 
+### Additions
+* Add `FCalendar`
+
 ### Enhancements
 * **Breaking** Change `FSwitch` to be usable in `Form`s.
 * **Breaking** Rename `FThemeData.checkBoxStyle` to `FThemeData.checkboxStyle` for consistency.
