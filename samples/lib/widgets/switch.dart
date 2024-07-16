@@ -30,18 +30,18 @@ class FormSwitchPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => const Padding(
         padding: EdgeInsets.all(15.0),
-        child: LoginForm(),
+        child: NotificationForm(),
       );
 }
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class NotificationForm extends StatefulWidget {
+  const NotificationForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<NotificationForm> createState() => _NotificationFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _NotificationFormState extends State<NotificationForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -50,37 +50,91 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   @override
-  Widget build(BuildContext context) => Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FTextField.email(
-              hint: 'janedoe@foruslabs.com',
-              help: const Text(''),
-              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Email Notifications',
+            style: theme.typography.xl2.copyWith(
+              fontWeight: FontWeight.w600,
+              color: theme.colorScheme.foreground,
+              height: 1.5,
             ),
-            const SizedBox(height: 4),
-            FTextField.password(
-              hint: '',
-              help: const Text(''),
-              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+          ),
+          const SizedBox(height: 15),
+          FCard.raw(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Marketing Emails',
+                          style: theme.typography.base.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: theme.colorScheme.foreground,
+                            height: 1.5,
+                          ),
+                        ),
+                        Text(
+                          'Receive emails about new products, features, and more.',
+                          style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const FSwitch(),
+                ],
+              ),
             ),
-            const SizedBox(height: 4),
-            Row(
-              children: [
-                const FSwitch(),
-                const SizedBox(width: 7),
-                Text('Remember password?', style: context.theme.typography.sm),
-              ],
+          ),
+          const SizedBox(height: 12),
+          FCard.raw(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Security emails',
+                          style: theme.typography.base.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: theme.colorScheme.foreground,
+                            height: 1.5,
+                          ),
+                        ),
+                        Text(
+                          'Receive emails about your account security.',
+                          style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const FSwitch(initialValue: true),
+                ],
+              ),
             ),
-            const SizedBox(height: 30),
-            FButton(
-              label: const Text('Login'),
-              onPress: () => _formKey.currentState!.validate(),
-            ),
-          ],
-        ),
-      );
+          ),
+          const SizedBox(height: 30),
+          FButton(
+            label: const Text('Submit'),
+            onPress: () => _formKey.currentState!.validate(),
+          ),
+        ],
+      ),
+    );
+  }
 }
