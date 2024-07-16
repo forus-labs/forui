@@ -20,7 +20,7 @@ class FAlertStyles with Diagnosticable {
       : primary = FAlertCustomStyle(
           iconSize: 20,
           iconColor: colorScheme.foreground,
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
           titleTextStyle: typography.base.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.foreground,
@@ -36,7 +36,7 @@ class FAlertStyles with Diagnosticable {
         destructive = FAlertCustomStyle(
           iconSize: 20,
           iconColor: colorScheme.destructive,
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
           titleTextStyle: typography.base.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.destructive,

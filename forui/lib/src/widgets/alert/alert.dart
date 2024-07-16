@@ -18,7 +18,7 @@ class FAlert extends StatelessWidget {
   final SvgAsset? icon;
 
   /// The title.
-  final Widget? title;
+  final Widget title;
 
   /// The subtitle.
   final Widget? subtitle;
@@ -38,8 +38,8 @@ class FAlert extends StatelessWidget {
   /// |---------------------------|
   /// ```
   const FAlert({
+    required this.title,
     this.icon,
-    this.title,
     this.subtitle,
     this.style = Variant.primary,
     super.key,
@@ -72,16 +72,16 @@ class FAlert extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8),
                     child: DefaultTextStyle.merge(
                       style: style.titleTextStyle,
-                      child: title!,
+                      child: title,
                     ),
                   ),
                 ),
               ],
             ),
-            Row(
-              children: [
-                SizedBox(width: style.iconSize),
-                if (subtitle != null)
+            if (subtitle != null)
+              Row(
+                children: [
+                  SizedBox(width: style.iconSize),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
@@ -91,8 +91,8 @@ class FAlert extends StatelessWidget {
                       ),
                     ),
                   ),
-              ],
-            ),
+                ],
+              ),
           ],
         ),
       ),
@@ -102,7 +102,9 @@ class FAlert extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('icon', icon));
   }
 }
 
