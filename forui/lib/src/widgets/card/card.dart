@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -15,7 +14,7 @@ part 'card_content.dart';
 /// See:
 /// * https://forui.dev/docs/card for working examples.
 /// * [FCardStyle] for customizing a card's appearance.
-class FCard extends StatelessWidget {
+final class FCard extends StatelessWidget {
   /// The style. Defaults to [FThemeData.cardStyle].
   final FCardStyle? style;
 

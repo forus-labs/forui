@@ -41,7 +41,7 @@ class FAlert extends StatelessWidget {
     required this.title,
     this.icon,
     this.subtitle,
-    this.style = Variant.primary,
+    this.style = FAlertStyle.primary,
     super.key,
   });
 
