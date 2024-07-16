@@ -14,8 +14,8 @@ part 'alert_styles.dart';
 /// * https://forui.dev/docs/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
-  /// The icon.
-  final Widget? icon;
+  /// The icon. Defaults to [FAssets.icons.circleAlert].
+  final SvgAsset? icon;
 
   /// The title.
   final Widget? title;
@@ -52,20 +52,21 @@ class FAlert extends StatelessWidget {
       Variant.primary => context.theme.alertStyles.primary,
       Variant.destructive => context.theme.alertStyles.destructive,
     };
-    final icon = this.icon ??
-        FAssets.icons.circleAlert(
-          height: style.iconSize,
-          colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
-        );
+    final icon = this.icon ?? FAssets.icons.circleAlert;
+
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(
         padding: style.padding,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Row(
               children: [
-                icon,
+                icon(
+                  height: style.iconSize,
+                  colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
+                ),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
