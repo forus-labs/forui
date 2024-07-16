@@ -25,6 +25,9 @@ final class FThemeData with Diagnosticable {
   /// The style. It is used to configure the miscellaneous properties, such as border radii, of Forui widgets.
   final FStyle style;
 
+  /// The alert styles.
+  final FAlertStyles alertStyles;
+
   /// The badge styles.
   final FBadgeStyles badgeStyles;
 
@@ -80,6 +83,7 @@ final class FThemeData with Diagnosticable {
     required this.buttonStyles,
     required this.calendarStyle,
     required this.cardStyle,
+    required this.alertStyles,
     required this.checkboxStyle,
     required this.dialogStyle,
     required this.headerStyle,
@@ -105,6 +109,7 @@ final class FThemeData with Diagnosticable {
       colorScheme: colorScheme,
       typography: typography,
       style: style,
+      alertStyles: FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -143,6 +148,7 @@ final class FThemeData with Diagnosticable {
     FColorScheme? colorScheme,
     FTypography? typography,
     FStyle? style,
+    FAlertStyles? alertStyles,
     FBadgeStyles? badgeStyles,
     FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FButtonStyles? buttonStyles,
@@ -162,6 +168,7 @@ final class FThemeData with Diagnosticable {
         colorScheme: colorScheme ?? this.colorScheme,
         typography: typography ?? this.typography,
         style: style ?? this.style,
+        alertStyles: alertStyles ?? this.alertStyles,
         badgeStyles: badgeStyles ?? this.badgeStyles,
         bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
         buttonStyles: buttonStyles ?? this.buttonStyles,
@@ -185,6 +192,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('colorScheme', colorScheme, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
@@ -209,6 +217,7 @@ final class FThemeData with Diagnosticable {
           colorScheme == other.colorScheme &&
           typography == other.typography &&
           style == other.style &&
+          alertStyles == other.alertStyles &&
           badgeStyles == other.badgeStyles &&
           bottomNavigationBarStyle == other.bottomNavigationBarStyle &&
           buttonStyles == other.buttonStyles &&
@@ -229,6 +238,7 @@ final class FThemeData with Diagnosticable {
       colorScheme.hashCode ^
       typography.hashCode ^
       style.hashCode ^
+      alertStyles.hashCode ^
       badgeStyles.hashCode ^
       bottomNavigationBarStyle.hashCode ^
       buttonStyles.hashCode ^
