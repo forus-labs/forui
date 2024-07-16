@@ -6,6 +6,8 @@ import 'package:meta/meta.dart';
 
 part 'alert_styles.dart';
 
+part 'alert_icon.dart';
+
 /// An alert.
 ///
 /// Displays a callout for user attention.
@@ -14,8 +16,14 @@ part 'alert_styles.dart';
 /// * https://forui.dev/docs/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
+  @useResult
+  static _Data _of(BuildContext context) {
+    final theme = context.dependOnInheritedWidgetOfExactType<_InheritedData>();
+    return theme?.data ?? (style: context.theme.alertStyles.primary);
+  }
+
   /// The icon. Defaults to [FAssets.icons.circleAlert].
-  final SvgAsset? icon;
+  final Widget? icon;
 
   /// The title.
   final Widget title;
@@ -52,7 +60,7 @@ class FAlert extends StatelessWidget {
       Variant.primary => context.theme.alertStyles.primary,
       Variant.destructive => context.theme.alertStyles.destructive,
     };
-    final icon = this.icon ?? FAssets.icons.circleAlert;
+    final icon = this.icon ?? FAlertIcon(icon: FAssets.icons.circleAlert);
 
     return DecoratedBox(
       decoration: style.decoration,
@@ -63,10 +71,7 @@ class FAlert extends StatelessWidget {
           children: [
             Row(
               children: [
-                icon(
-                  height: style.iconSize,
-                  colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
-                ),
+                _InheritedData(data: (style: style), child: icon),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -81,7 +86,7 @@ class FAlert extends StatelessWidget {
             if (subtitle != null)
               Row(
                 children: [
-                  SizedBox(width: style.iconSize),
+                  SizedBox(width: style.icon.height),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
@@ -138,11 +143,8 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
   /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 16)`.
   final EdgeInsets padding;
 
-  /// The icon's size.
-  final double iconSize;
-
-  /// The icon's color.
-  final Color iconColor;
+  /// The icon's style.
+  final FAlertIconStyle icon;
 
   /// The title's [TextStyle].
   final TextStyle titleTextStyle;
@@ -153,8 +155,7 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
   /// Creates a [FAlertCustomStyle].
   FAlertCustomStyle({
     required this.decoration,
-    required this.iconSize,
-    required this.iconColor,
+    required this.icon,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
     this.padding = const EdgeInsets.all(16),
@@ -166,8 +167,7 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('decoration', decoration))
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(ColorProperty('iconColor', iconColor))
+      ..add(DiagnosticsProperty('icon', icon))
       ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
       ..add(DiagnosticsProperty('subtitleTextStyle', subtitleTextStyle));
   }
@@ -179,17 +179,31 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           decoration == other.decoration &&
           padding == other.padding &&
-          iconSize == other.iconSize &&
-          iconColor == other.iconColor &&
+          icon == other.icon &&
           titleTextStyle == other.titleTextStyle &&
           subtitleTextStyle == other.subtitleTextStyle;
 
   @override
   int get hashCode =>
-      decoration.hashCode ^
-      padding.hashCode ^
-      iconSize.hashCode ^
-      iconColor.hashCode ^
-      titleTextStyle.hashCode ^
-      subtitleTextStyle.hashCode;
+      decoration.hashCode ^ padding.hashCode ^ icon.hashCode ^ titleTextStyle.hashCode ^ subtitleTextStyle.hashCode;
+}
+
+typedef _Data = ({FAlertCustomStyle style});
+
+class _InheritedData extends InheritedWidget {
+  final _Data data;
+
+  const _InheritedData({
+    required this.data,
+    required super.child,
+  });
+
+  @override
+  bool updateShouldNotify(covariant _InheritedData old) => data != old.data;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', data.style));
+  }
 }
