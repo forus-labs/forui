@@ -2,16 +2,15 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:sugar/sugar.dart';
 
 import 'package:forui_samples/sample_scaffold.dart';
-import 'package:sugar/sugar.dart';
 
 DateTime get selected {
   final today = DateTime.now().toLocalDate();
   final before = today.minus(days: 2);
   if (before == today) {
     return before.toNative();
-
   } else {
     return today.plus(days: 2).toNative();
   }
