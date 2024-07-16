@@ -107,9 +107,7 @@ class FAlert extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('icon', icon));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
