@@ -4,6 +4,18 @@ import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample_scaffold.dart';
+import 'package:sugar/sugar.dart';
+
+DateTime get selected {
+  final today = DateTime.now().toLocalDate();
+  final before = today.minus(days: 2);
+  if (before == today) {
+    return before.toNative();
+
+  } else {
+    return today.plus(days: 2).toNative();
+  }
+}
 
 @RoutePage()
 class CalendarPage extends SampleScaffold {
@@ -13,8 +25,8 @@ class CalendarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FCalendar(
-        controller: FCalendarSingleValueController(),
-        start: DateTime.utc(2024),
+        controller: FCalendarSingleValueController(selected),
+        start: DateTime.utc(2000),
         end: DateTime.utc(2030),
       );
 }
@@ -27,8 +39,8 @@ class MultiValueCalendarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FCalendar(
-        controller: FCalendarMultiValueController(),
-        start: DateTime.utc(2024),
+        controller: FCalendarMultiValueController({selected}),
+        start: DateTime.utc(2000),
         end: DateTime.utc(2030),
       );
 }
@@ -41,8 +53,8 @@ class SingleRangeCalendarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FCalendar(
-        controller: FCalendarSingleRangeController(),
-        start: DateTime.utc(2024),
+        controller: FCalendarSingleRangeController((selected, selected)),
+        start: DateTime.utc(2000),
         end: DateTime.utc(2030),
       );
 }

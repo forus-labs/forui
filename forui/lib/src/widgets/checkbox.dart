@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 ///
 /// A [FCheckbox] is internally a [FormField], therefore it can be used in a form.
 ///
-/// On touch devices, it is recommended to use a [FSwitch] instead of a [FCheckbox] in most cases.
+/// For touch devices, a [FSwitch] is generally recommended over a [FCheckbox].
 ///
 /// See:
 /// * https://forui.dev/docs/checkbox for working examples.
