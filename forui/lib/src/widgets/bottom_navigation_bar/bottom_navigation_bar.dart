@@ -70,9 +70,9 @@ class FBottomNavigationBar extends StatelessWidget {
             children: items
                 .mapIndexed(
                   (index, item) => Expanded(
-                    child: FTappable(
+                    child: FTappable.animated(
+                      onPress: () => onChange?.call(index),
                       child: item,
-                      onTap: () => onChange?.call(index),
                     ),
                   ),
                 )

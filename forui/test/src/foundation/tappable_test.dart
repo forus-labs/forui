@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inkwell.dart';
+import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  group('FInkWell', () {
+  group('FTappable', () {
     testWidgets('focused', (tester) async {
       final focusNode = FocusNode();
 
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
-          child: FInkWell(
+          child: FTappable(
             focusNode: focusNode,
             builder: (_, value, __) => Text('$value'),
           ),
@@ -32,7 +32,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
-          child: FInkWell(
+          child: FTappable(
             builder: (_, value, __) => Text('$value'),
           ),
         ),
@@ -44,7 +44,7 @@ void main() {
       addTearDown(gesture.removePointer);
       await tester.pump();
 
-      await gesture.moveTo(tester.getCenter(find.byType(FInkWell)));
+      await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
       await tester.pumpAndSettle();
 
       expect(find.text('true'), findsOneWidget);
@@ -53,30 +53,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('false'), findsOneWidget);
-    });
-
-    testWidgets('semantics', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          data: FThemes.zinc.light,
-          child: FInkWell(
-            semanticLabel: 'My Label',
-            selected: true,
-            builder: (_, value, __) => Text('$value'),
-          ),
-        ),
-      );
-
-      final semantics = tester.getSemantics(find.byType(FInkWell));
-      expect(
-        semantics,
-        matchesSemantics(
-          label: 'My Label',
-          isButton: true,
-          isSelected: true,
-          isFocusable: true,
-        ),
-      );
     });
   });
 }

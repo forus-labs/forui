@@ -66,20 +66,13 @@ class FHeaderAction extends StatelessWidget {
     final style = FHeaderActionStyle._of(context);
     final enabled = onPress != null || onLongPress != null;
 
-    return Semantics(
-      button: true,
-      enabled: enabled,
-      label: semanticLabel,
-      child: MouseRegion(
-        cursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
-        child: FTappable(
-          onTap: onPress,
-          onLongPress: onLongPress,
-          child: icon(
-            height: style.size,
-            colorFilter: ColorFilter.mode(onPress == null ? style.disabledColor : style.enabledColor, BlendMode.srcIn),
-          ),
-        ),
+    return FTappable.animated(
+      semanticLabel: semanticLabel,
+      onPress: onPress,
+      onLongPress: onLongPress,
+      child: icon(
+        height: style.size,
+        colorFilter: ColorFilter.mode(enabled ? style.enabledColor : style.disabledColor, BlendMode.srcIn),
       ),
     );
   }

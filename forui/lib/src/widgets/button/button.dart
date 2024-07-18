@@ -122,28 +122,17 @@ class FButton extends StatelessWidget {
     };
 
     final enabled = onPress != null || onLongPress != null;
-
-    return Semantics(
-      container: true,
-      button: true,
-      enabled: enabled,
-      child: FocusableActionDetector(
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        child: MouseRegion(
-          cursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
-          child: FTappable(
-            onTap: onPress,
-            onLongPress: onLongPress,
-            child: DecoratedBox(
-              decoration: enabled ? style.enabledBoxDecoration : style.disabledBoxDecoration,
-              child: _InheritedData(
-                data: (style: style, enabled: enabled),
-                child: child,
-              ),
-            ),
-          ),
+    return FTappable.animated(
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      onPress: onPress,
+      onLongPress: onLongPress,
+      child: DecoratedBox(
+        decoration: enabled ? style.enabledBoxDecoration : style.disabledBoxDecoration,
+        child: _InheritedData(
+          data: (style: style, enabled: enabled),
+          child: child,
         ),
       ),
     );
