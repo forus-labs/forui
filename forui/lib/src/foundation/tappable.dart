@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 @internal
@@ -80,33 +81,33 @@ class _FTappableState extends State<FTappable> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) => Semantics(
-      enabled: widget.enabled,
-      label: widget.semanticLabel,
-      container: true,
-      button: true,
-      selected: widget.selected,
-      excludeSemantics: widget.excludeSemantics,
-      child: Focus(
-        autofocus: widget.autofocus,
-        focusNode: widget.focusNode,
-        onFocusChange: (focused) {
-          setState(() => _focused = focused);
-          widget.onFocusChange?.call(focused);
-        },
-        child: MouseRegion(
-          cursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
-          onEnter: (_) => setState(() => _hovered = true),
-          onExit: (_) => setState(() => _hovered = false),
-          child: _child,
+        enabled: widget.enabled,
+        label: widget.semanticLabel,
+        container: true,
+        button: true,
+        selected: widget.selected,
+        excludeSemantics: widget.excludeSemantics,
+        child: Focus(
+          autofocus: widget.autofocus,
+          focusNode: widget.focusNode,
+          onFocusChange: (focused) {
+            setState(() => _focused = focused);
+            widget.onFocusChange?.call(focused);
+          },
+          child: MouseRegion(
+            cursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
+            onEnter: (_) => setState(() => _hovered = true),
+            onExit: (_) => setState(() => _hovered = false),
+            child: _child,
+          ),
         ),
-      ),
-    );
-  
+      );
+
   Widget get _child => GestureDetector(
-    onTap: widget.onPress,
-    onLongPress: widget.onLongPress,
-    child: widget.builder(context, _focused || _hovered, widget.child),
-  );
+        onTap: widget.onPress,
+        onLongPress: widget.onLongPress,
+        child: widget.builder(context, _focused || _hovered, widget.child),
+      );
 }
 
 class _AnimatedTappable extends FTappable {
@@ -131,7 +132,7 @@ class _AnimatedTappable extends FTappable {
 class _AnimatedTappableState extends _FTappableState {
   late final AnimationController _controller;
   late final Animation<double> _animation;
-  
+
   @override
   void initState() {
     super.initState();
@@ -143,22 +144,22 @@ class _AnimatedTappableState extends _FTappableState {
         }
       });
   }
-  
+
   @override
   Widget get _child => ScaleTransition(
-    scale: _animation,
-    child: GestureDetector(
-      onTap: widget.onPress == null
-          ? null
-          : () {
-        widget.onPress!();
-        _controller.forward();
-      },
-      onLongPress: widget.onLongPress,
-      child: widget.builder(context, _focused || _hovered, widget.child),
-    ),
-  );
-  
+        scale: _animation,
+        child: GestureDetector(
+          onTap: widget.onPress == null
+              ? null
+              : () {
+                  widget.onPress!();
+                  _controller.forward();
+                },
+          onLongPress: widget.onLongPress,
+          child: widget.builder(context, _focused || _hovered, widget.child),
+        ),
+      );
+
   @override
   void dispose() {
     _controller.dispose();
