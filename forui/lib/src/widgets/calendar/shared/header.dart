@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inkwell.dart';
 
 /// The current picker type.
 enum FCalendarPickerType {
@@ -61,12 +61,12 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => SizedBox(
         height: Header.height,
-        child: FInkWell(
+        child: FTappable(
           onPress: () => widget.type.value = switch (widget.type.value) {
             FCalendarPickerType.day => FCalendarPickerType.yearMonth,
             FCalendarPickerType.yearMonth => FCalendarPickerType.day,
           },
-          builder: (context, _, child) => child!,
+          excludeSemantics: true,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

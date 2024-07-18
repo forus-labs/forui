@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/collection.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 part 'button_content.dart';
 
@@ -122,28 +122,17 @@ class FButton extends StatelessWidget {
     };
 
     final enabled = onPress != null || onLongPress != null;
-
-    return Semantics(
-      container: true,
-      button: true,
-      enabled: enabled,
-      child: FocusableActionDetector(
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        child: MouseRegion(
-          cursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
-          child: FTappable(
-            onTap: onPress,
-            onLongPress: onLongPress,
-            child: DecoratedBox(
-              decoration: enabled ? style.enabledBoxDecoration : style.disabledBoxDecoration,
-              child: _InheritedData(
-                data: (style: style, enabled: enabled),
-                child: child,
-              ),
-            ),
-          ),
+    return FTappable.animated(
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      onPress: onPress,
+      onLongPress: onLongPress,
+      child: DecoratedBox(
+        decoration: enabled ? style.enabledBoxDecoration : style.disabledBoxDecoration,
+        child: _InheritedData(
+          data: (style: style, enabled: enabled),
+          child: child,
         ),
       ),
     );

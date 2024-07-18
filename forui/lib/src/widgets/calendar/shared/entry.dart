@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
-import 'package:forui/src/foundation/inkwell.dart';
+import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
@@ -130,10 +130,11 @@ class _EnabledEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => FInkWell(
-        focusNode: focusNode,
+  Widget build(BuildContext context) => FTappable(
         semanticLabel: semanticLabel,
+        focusNode: focusNode,
         selected: selected,
+        excludeSemantics: true,
         onPress: () => onPress(date),
         onLongPress: () => onLongPress?.call(date),
         builder: builder,
