@@ -23,7 +23,7 @@
 
 <br />
 <div align="center">
- <img width="800" alt="Forui" src="https://raw.githubusercontent.com/forus-labs/forui/main/docs/public/banner-020724.png">
+ <img width="800" alt="Forui" src="https://raw.githubusercontent.com/forus-labs/forui/main/docs/public/banner-160724.png">
 </div>
 
 ## Documentation

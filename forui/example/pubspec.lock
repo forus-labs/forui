@@ -238,7 +238,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.2.0+3"
+    version: "0.3.0"
   forui_assets:
     dependency: "direct overridden"
     description:
