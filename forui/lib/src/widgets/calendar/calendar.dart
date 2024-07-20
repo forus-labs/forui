@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
 
 import 'package:sugar/sugar.dart';
 
@@ -224,6 +225,7 @@ final class FCalendarStyle with Diagnosticable {
   /// print(style.headerStyle == copy.headerStyle); // true
   /// print(style.dayPickerStyle == copy.dayPickerStyle); // false
   /// ```
+  @useResult
   FCalendarStyle copyWith({
     FCalendarHeaderStyle? headerStyle,
     FCalendarDayPickerStyle? dayPickerStyle,

@@ -83,6 +83,7 @@ final class FTabsStyle with Diagnosticable {
         spacing = 10;
 
   /// Creates a copy of this [FCardStyle] with the given properties replaced.
+  @useResult
   FTabsStyle copyWith({
     EdgeInsets? padding,
     BoxDecoration? decoration,

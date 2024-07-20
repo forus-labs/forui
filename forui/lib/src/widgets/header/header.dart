@@ -81,6 +81,7 @@ final class FHeaderStyles with Diagnosticable {
   /// print(style.rootStyle == copy.rootStyle); // true
   /// print(style.nestedStyle == copy.nestedStyle); // false
   /// ```
+  @useResult
   FHeaderStyles copyWith({
     FRootHeaderStyle? rootStyle,
     FNestedHeaderStyle? nestedStyle,

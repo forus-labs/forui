@@ -80,6 +80,7 @@ final class FSeparatorStyles with Diagnosticable {
   /// print(style.horizontal == copy.horizontal); // true
   /// print(style.vertical == copy.vertical); // false
   /// ```
+  @useResult
   FSeparatorStyles copyWith({FSeparatorStyle? horizontal, FSeparatorStyle? vertical}) => FSeparatorStyles(
         horizontal: horizontal ?? this.horizontal,
         vertical: vertical ?? this.vertical,
