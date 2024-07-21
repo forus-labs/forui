@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/resizable_box/old/resizable_box_controller.dart';
+import 'package:forui/src/widgets/resizable_box/resizable_box_controller.dart';
 import 'package:meta/meta.dart';
 
 @internal
@@ -21,8 +21,8 @@ sealed class Slider extends StatelessWidget {
     required this.index,
     super.key,
   }) : assert(
-          0 <= index && index < controller.controllers.length,
-          'Index should be in the range: 0 <= index < ${controller.controllers.length}, but it is $index.',
+          0 <= index && index < controller.resizables.length,
+          'Index should be in the range: 0 <= index < ${controller.resizables.length}, but it is $index.',
         );
 
   @override
