@@ -4,7 +4,9 @@ import 'package:forui/src/widgets/resizable_box/resizable_controller.dart';
 import 'package:forui/src/widgets/resizable_box/resized.dart';
 import 'package:meta/meta.dart';
 
+/// Possible ways for a user to interact with a [FResizableBox].
 sealed class FResizableInteraction {
+  /// Allows the user to interact with a [FResizableBox] by
   const factory FResizableInteraction.selectAndResize(int index) = SelectAndResize;
 
   const factory FResizableInteraction.resize() = Resize;

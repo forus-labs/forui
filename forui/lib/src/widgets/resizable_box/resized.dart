@@ -8,7 +8,7 @@ final class Resized {
   /// Throws an [AssertionError] if [index] < 0.
   final int index;
 
-  /// True if the resized region is selected. // TODO: always false if interaction
+  /// True if the resized region is selected. Always false if [FResizableBox.interaction] is [F
   final bool selected;
 
   /// The containing resizable box's minimum and maximum height/width along the resizable axis.
