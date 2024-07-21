@@ -18,7 +18,7 @@ class FProgress extends StatelessWidget {
   /// A value of 0.0 means no progress and 1.0 means that progress is complete.
   /// The value will be clamped to be in the range 0.0-1.0.
   ///
-  /// ## Contract:
+  /// ## Contract
   /// Throws [AssertionError] if:
   /// * [value] is NaN
   final double value;

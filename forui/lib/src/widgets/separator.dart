@@ -122,7 +122,7 @@ final class FSeparatorStyle with Diagnosticable {
 
   /// The width of the separating line. Defaults to 1.
   ///
-  /// ## Contract:
+  /// ## Contract
   /// Throws [AssertionError] if:
   /// * `width` <= 0.0
   /// * `width` is Nan

@@ -1,20 +1,20 @@
 import 'package:meta/meta.dart';
 
-/// A resizable's information.
+/// A [FResizable]'s
 final class Resized {
   /// The resized region's index.
   ///
-  /// ## Contract:
-  /// Throws an [AssertionError] if [index] < 0.
+  /// ## Contract
+  /// Throws [AssertionError] if [index] < 0.
   final int index;
 
-  /// True if the resized region is selected. Always false if [FResizableBox.interaction] is [F
+  /// True if the resized region is selected. Always false if [FResizableBox.interaction] is [FResizable
   final bool selected;
 
   /// The containing resizable box's minimum and maximum height/width along the resizable axis.
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * min <= 0
   /// * max <= 0
   /// * max <= min
@@ -24,7 +24,7 @@ final class Resized {
   /// [constraints].
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * min < 0
   /// * max < 0
   /// * max <= min

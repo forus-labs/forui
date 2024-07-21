@@ -15,7 +15,7 @@ class FResizable {
 
   /// The initial height or width of this region.
   ///
-  /// ## Contract:
+  /// ## Contract
   /// Throws a [AssertionError] if [initialSize] is not positive.
   final double initialSize;
 
@@ -27,7 +27,7 @@ class FResizable {
   /// A larger [sliderSize] will increase the minimum region size.
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if [sliderSize] is not positive.
+  /// Throws [AssertionError] if [sliderSize] is not positive.
   final double sliderSize;
 
   /// The builder used to create a child to display in this region.

@@ -186,8 +186,8 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   ///
   /// Specifying [startDayOfWeek] will override the current locale's preferred starting day of the week.
   ///
-  /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// ## Contract
+  /// Throws [AssertionError] if:
   /// * [startDayOfWeek] < [DateTime.monday]
   /// * [DateTime.sunday] < [startDayOfWeek]
   final int? startDayOfWeek;

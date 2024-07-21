@@ -121,7 +121,7 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
 
   /// The border width (thickness).
   ///
-  /// ## Contract:
+  /// ## Contract
   /// Throws [AssertionError] if:
   /// * `borderWidth` <= 0.0
   /// * `borderWidth` is Nan

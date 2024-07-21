@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/resizable_box/resizable_box_controller.dart';
+import 'package:forui/src/widgets/resizable_box/old/resizable_box_controller.dart';
 import 'package:meta/meta.dart';
 
 @internal

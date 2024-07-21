@@ -45,7 +45,7 @@ class FResizableThumbStyle with Diagnosticable {
   /// * 29 when horizontally resizable
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * [height] <= 0
   /// * [height] is [double.nan]
   final double height;
@@ -57,7 +57,7 @@ class FResizableThumbStyle with Diagnosticable {
   /// * 4.7 when horizontally resizable
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if:
+  /// Throws [AssertionError] if:
   /// * [width] <= 0
   /// * [width] is [double.nan]
   final double width;
