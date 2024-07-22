@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class Example extends StatefulWidget {
   const Example({super.key});
 
