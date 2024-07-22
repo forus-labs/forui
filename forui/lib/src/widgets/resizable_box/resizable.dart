@@ -6,6 +6,9 @@ import 'package:forui/src/widgets/resizable_box/slider.dart';
 import 'package:sugar/sugar.dart';
 
 /// A resizable that can be resized along an axis. It should always be in a [FResizableBox].
+///
+/// See:
+/// * https://forui.dev/docs/resizable-box for working examples.
 class FResizable extends StatelessWidget {
   static double _platform(double? slider) =>
       slider ??
@@ -14,25 +17,27 @@ class FResizable extends StatelessWidget {
         _ => 5,
       };
 
-  /// The initial height or width of this region.
+  /// The initial height/width.
   ///
   /// ## Contract
-  /// Throws a [AssertionError] if [initialSize] is not positive.
+  /// Throws a [AssertionError] if:
+  /// * [initialSize] is not positive
+  /// * [initialSize] < [minSize]
   final double initialSize;
 
   /// The minimum height/width along the resizable axis.
   ///
   /// The minimum size is either the given minimum size or 2 * [sliderSize], whichever is larger. Defaults to
-  /// 2 * [sliderSize] if not given. A larger [sliderSize] may increase the minimum region size.
+  /// 2 * [sliderSize] if not given.
   final double minSize;
 
-  /// The sliders' height/width along the resizable axis.
+  /// The sliders' height/width along the resizable axis. A larger [sliderSize] may increase [minSize] if it is not
+  /// given.
   ///
   /// Defaults to `50` on Android and iOS, and `5` on other platforms.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [sliderSize] is not positive.
+  /// Throws [AssertionError] if [sliderSize] is not positive.
   final double sliderSize;
 
   /// The builder used to create a child to display in this region.
@@ -53,23 +58,26 @@ class FResizable extends StatelessWidget {
     this.child,
     super.key,
   })  : assert(0 < initialSize, 'The initial size should be positive, but it is $initialSize.'),
+        assert(minSize == null || 0 < minSize, 'The min size should be positive, but it is $minSize.'),
+        assert(sliderSize == null || 0 < sliderSize, 'The slider size should be positive, but it is $sliderSize.'),
         minSize = max(minSize ?? 0, 2 * (sliderSize ?? _platform(sliderSize))),
         sliderSize = sliderSize ?? _platform(sliderSize) {
     assert(
-      2 * this.sliderSize <= initialSize,
-      'The initial size, $initialSize is less than the required minimum size, ${2 * this.sliderSize}.',
+      this.minSize <= initialSize,
+      'The initial size, $initialSize is less than the required minimum size, ${this.minSize}.',
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final InheritedData(:controller, :data) = InheritedData.of(context);
+    final enabled = controller.interaction is Resize || data.selected;
     return Semantics(
       container: true,
-      enabled: controller.interaction is Resize || data.selected,
+      enabled: enabled,
       selected: data.selected,
       child: MouseRegion(
-        cursor: controller.interaction is Resize || data.selected ? MouseCursor.defer : SystemMouseCursors.click,
+        cursor: enabled ? MouseCursor.defer : SystemMouseCursors.click,
         child: GestureDetector(
           onTap: switch (controller.interaction) {
             SelectAndResize _ => () {

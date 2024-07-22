@@ -19,44 +19,50 @@ class _ExampleState extends State<Example> {
   @override
   Widget build(BuildContext context) => FResizableBox(
         axis: Axis.vertical,
-        interaction: const FResizableInteraction.selectAndResize(1),
+        crossAxisExtent: 400,
+        interaction: const FResizableInteraction.selectAndResize(0),
         children: [
-          FResizable(
+          FResizable.raw(
             initialSize: 200,
+            minSize: 150,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.primary : colorScheme.border,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+                  color: data.selected ? colorScheme.primary : colorScheme.muted,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                  // border: Border.all(color: colorScheme.border)
                 ),
                 child: Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
               );
             },
           ),
-          FResizable(
+          FResizable.raw(
             initialSize: 200,
+            minSize: 150,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.primary : colorScheme.border,
+                  color: data.selected ? colorScheme.primary : colorScheme.muted,
                 ),
                 child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
               );
             },
           ),
-          FResizable(
+          FResizable.raw(
             initialSize: 200,
+            minSize: 150,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.primary : colorScheme.border,
-                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(12)),
+                  color: data.selected ? colorScheme.foreground : colorScheme.muted,
+                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
+                  // border: Border.all(color: colorScheme.border),
                 ),
                 child: Label(data: data, icon: FAssets.icons.moon, label: 'Night'),
               );
@@ -78,7 +84,7 @@ class Label extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FThemeData(:colorScheme, :typography) = context.theme;
-    final color = data.selected ? colorScheme.primaryForeground : colorScheme.primary;
+    final color = data.selected ? colorScheme.background : colorScheme.foreground;
     final start =
         DateTime.fromMillisecondsSinceEpoch((data.percentage.min * Duration.millisecondsPerDay).round(), isUtc: true);
     final end =
@@ -88,11 +94,12 @@ class Label extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             icon(height: 15, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
             const SizedBox(width: 3),
-            Text(label, style: typography.xs.copyWith(color: color)),
+            Text(label, style: typography.sm.copyWith(color: color)),
           ],
         ),
         const SizedBox(height: 5),

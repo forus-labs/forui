@@ -9,24 +9,26 @@ export '/src/widgets/resizable_box/resizable.dart';
 export '/src/widgets/resizable_box/resizable_box_controller.dart' hide ResizableBoxController, Resize, SelectAndResize;
 export '/src/widgets/resizable_box/resizable_data.dart' hide UpdatableResizableData;
 
-/// A box which children can all be resized either horizontally or vertically.
+/// A box which children can be resized along either the horizontal or vertical axis.
 ///
-/// Each child is a [FResizable].
+/// Each child is a [FResizable] has a initial size and minimum size. Setting an initial size less than the minimum size
+/// will result in undefined behaviour.
 ///
-/// ## Contract
-/// Each child has a minimum size determined by its slider size multiplied by 2. Setting an initial size smaller than
-/// the required minimum size will result in undefined behaviour.
+/// It is recommended that a [FResizableBox] contains at least 2 resizables.
 ///
-/// A [FResizableBox] should contain at least two children. Passing it less than 2 children will result in undefined
-/// behaviour.
+/// See:
+/// * https://forui.dev/docs/resizable-box for working examples.
 class FResizableBox extends StatefulWidget {
-  /// The axis that the [children] can be resized along.
+  /// The axis along which the [children] can be resized.
   final Axis axis;
 
   /// The allowed way for the user to interact with this resizable box.
   final FResizableInteraction interaction;
 
   /// The number of pixels in the non-resizable axis.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [crossAxisExtent] is not positive.
   final double? crossAxisExtent;
 
   /// The minimum velocity, inclusive, of a drag gesture for haptic feedback to be performed
@@ -40,7 +42,7 @@ class FResizableBox extends StatefulWidget {
   /// result in undefined behaviour.
   final double _hapticFeedbackVelocity = 6.5; // TODO: haptic feedback
 
-  /// The children which may be resized.
+  /// The children that may be resized.
   final List<FResizable> children;
 
   /// A function that is called when a resizable is selected.
@@ -60,7 +62,6 @@ class FResizableBox extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * [interaction] is a [FResizableInteraction.selectAndResize] and index is index < 0 or `children.length` <= index.
-  /// * less than two [children] are given.
   FResizableBox({
     required this.axis,
     required this.interaction,
@@ -70,7 +71,10 @@ class FResizableBox extends StatefulWidget {
     this.onResizeUpdate,
     this.onResizeEnd,
     super.key,
-  }) : assert(2 <= children.length, 'FResizableBox should have at least 2 FResizables.') {
+  }) : assert(
+          crossAxisExtent == null || 0 < crossAxisExtent,
+          'The crossAxisExtent should be positive, but it is $crossAxisExtent.',
+        ) {
     if (interaction case SelectAndResize(:final index)) {
       assert(
         0 <= index && index < children.length,
@@ -154,7 +158,7 @@ class _FResizableBoxState extends State<FResizableBox> {
   Widget build(BuildContext context) {
     assert(
       controller.resizables.length == widget.children.length,
-      'The number of FResizableData should be equal to the number of children.',
+      'The number of FResizableData should be equal to the number of children. Please file a bug report.',
     );
 
     if (widget.axis == Axis.horizontal) {
@@ -217,7 +221,7 @@ class InheritedData extends InheritedWidget {
 
   static InheritedData of(BuildContext context) {
     final InheritedData? result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
-    assert(result != null, 'No InheritedController found in context. Is there an ancestor ResizableBox?');
+    assert(result != null, 'No InheritedData found in context. Is there a parent FResizableBox?');
     return result!;
   }
 

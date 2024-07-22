@@ -153,13 +153,12 @@ extension UpdatableResizableData on FResizableData {
 
   (FResizableData, double) _resize(AxisDirection direction, double min, double max) {
     final size = max - min;
+    assert(0 <= min, '$min should be non-negative.');
     assert(size <= constraints.max, '$size should be less than ${constraints.max}.');
 
     if (constraints.min <= size) {
       return (copyWith(minOffset: min, maxOffset: max), 0);
     }
-
-
 
     switch (direction) {
       case AxisDirection.left || AxisDirection.up when offsets.min < (max - constraints.min):
@@ -169,7 +168,7 @@ extension UpdatableResizableData on FResizableData {
         return (copyWith(maxOffset: min + constraints.min), size - constraints.min);
 
       case _:
-        return (this, 0);
+        return (this, size - constraints.min);
     }
   }
 }

@@ -5,10 +5,10 @@ import 'package:meta/meta.dart';
 
 /// Possible ways for a user to interact with a [FResizableBox].
 sealed class FResizableInteraction {
-  /// Allows the user to interact with a resizable by selecting before resizing it.
+  /// Allows the user to interact with a [FResizable] by selecting before resizing it.
   const factory FResizableInteraction.selectAndResize(int initialIndex) = SelectAndResize;
 
-  /// Allows the user to interact with a resizable by resizing it without selecting it first.
+  /// Allows the user to interact with a [FResizable] by resizing it without selecting it first.
   const factory FResizableInteraction.resize() = Resize;
 }
 
@@ -56,8 +56,7 @@ class ResizableBoxController extends ChangeNotifier {
     required void Function(FResizableData, FResizableData)? onResizeUpdate,
     required void Function(FResizableData, FResizableData)? onResizeEnd,
     required FResizableInteraction interaction,
-  })  : assert(2 <= resizables.length, 'ResizableBox should have at least 2 Resizables.'),
-        _onPress = onPress,
+  })  : _onPress = onPress,
         _onResizeUpdate = onResizeUpdate,
         _onResizeEnd = onResizeEnd,
         _interaction = interaction,
@@ -125,7 +124,7 @@ class ResizableBoxController extends ChangeNotifier {
   }
 
   bool select(int value) {
-    if (_interaction case SelectAndResize(index:final old) when old != value) {
+    if (_interaction case SelectAndResize(index: final old) when old != value) {
       _onPress?.call(value);
       _interaction = SelectAndResize(value);
       resizables[old] = resizables[old].copyWith(selected: false);
