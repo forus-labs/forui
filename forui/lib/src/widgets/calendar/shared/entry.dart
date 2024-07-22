@@ -160,7 +160,8 @@ class _DisabledEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => ExcludeSemantics(child: builder(context, (focused: false, hovered: false), null));
+  Widget build(BuildContext context) =>
+      ExcludeSemantics(child: builder(context, (focused: false, hovered: false), null));
 }
 
 class _Content extends StatelessWidget {
