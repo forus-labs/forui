@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/src/widgets/avatar.dart';
 
 import 'package:meta/meta.dart';
 

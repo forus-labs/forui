@@ -23,10 +23,15 @@ class _ExampleState extends State<Example> {
           const SizedBox(height: 100),
           FProgress(value: 0.9),
           const SizedBox(height: 10),
-          FAlert(
-            title: const Text('Heads Up! Forui is coming to flutter!'),
-            subtitle: const Text('You can add components dfijsoi djfosfj  to your app using the cli.'),
-          )
+          const FAvatar(
+            child: Text('DC'),
+            //backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
+          ),
+          const SizedBox(height: 20),
+          const CircleAvatar(
+            backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
+            child: Text('DC'),
+          ),
         ],
       );
 }

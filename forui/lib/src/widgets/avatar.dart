@@ -69,13 +69,9 @@ class FAvatar extends StatelessWidget {
       child: child == null
           ? null
           : Center(
-              // Need to disable text scaling here so that the text doesn't
-              // escape the avatar when the textScaleFactor is large.
-              child: MediaQuery.withNoTextScaling(
-                child: DefaultTextStyle(
-                  style: style.text,
-                  child: child!,
-                ),
+              child: DefaultTextStyle(
+                style: style.text,
+                child:  child!,
               ),
             ),
     );
@@ -113,7 +109,10 @@ final class FAvatarStyle with Diagnosticable {
   FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : backgroundColor = colorScheme.muted,
         constraints = const BoxConstraints(minHeight: 40.0, minWidth: 40.0, maxHeight: 40.0, maxWidth: 40.0),
-        text = typography.base.copyWith(color: colorScheme.mutedForeground);
+        text = typography.base.copyWith(
+          color: colorScheme.mutedForeground,
+          height: 0,
+        );
 
   /// Returns a copy of this [FAvatarStyle] with the given properties replaced.
   ///
