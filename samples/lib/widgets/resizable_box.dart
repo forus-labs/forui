@@ -1,8 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
-import 'package:forui_samples/sample_scaffold.dart';
 import 'package:intl/intl.dart';
+
+import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
 class ResizableBoxPage extends SampleScaffold {
@@ -12,59 +14,59 @@ class ResizableBoxPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FResizableBox(
-    axis: Axis.vertical,
-    crossAxisExtent: 400,
-    interaction: const FResizableInteraction.selectAndResize(0),
-    children: [
-      FResizable.raw(
-        initialSize: 200,
-        minSize: 100,
-        builder: (context, data, _) {
-          final colorScheme = context.theme.colorScheme;
-          return Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: data.selected ? colorScheme.foreground : colorScheme.background,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-              border: Border.all(color: colorScheme.border),
-            ),
-            child: Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-          );
-        },
-      ),
-      FResizable.raw(
-        initialSize: 200,
-        minSize: 100,
-        builder: (context, data, _) {
-          final colorScheme = context.theme.colorScheme;
-          return Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: data.selected ? colorScheme.foreground : colorScheme.background,
-              border: Border.all(color: colorScheme.border),
-            ),
-            child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-          );
-        },
-      ),
-      FResizable.raw(
-        initialSize: 200,
-        minSize: 100,
-        builder: (context, data, _) {
-          final colorScheme = context.theme.colorScheme;
-          return Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: data.selected ? colorScheme.foreground : colorScheme.background,
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-              border: Border.all(color: colorScheme.border),
-            ),
-            child: Label(data: data, icon: FAssets.icons.moon, label: 'Night'),
-          );
-        },
-      ),
-    ],
-  );
+        axis: Axis.vertical,
+        crossAxisExtent: 400,
+        interaction: const FResizableInteraction.selectAndResize(0),
+        children: [
+          FResizable.raw(
+            initialSize: 200,
+            minSize: 100,
+            builder: (context, data, _) {
+              final colorScheme = context.theme.colorScheme;
+              return Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                  border: Border.all(color: colorScheme.border),
+                ),
+                child: Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
+              );
+            },
+          ),
+          FResizable.raw(
+            initialSize: 200,
+            minSize: 100,
+            builder: (context, data, _) {
+              final colorScheme = context.theme.colorScheme;
+              return Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  border: Border.all(color: colorScheme.border),
+                ),
+                child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+              );
+            },
+          ),
+          FResizable.raw(
+            initialSize: 200,
+            minSize: 100,
+            builder: (context, data, _) {
+              final colorScheme = context.theme.colorScheme;
+              return Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
+                  border: Border.all(color: colorScheme.border),
+                ),
+                child: Label(data: data, icon: FAssets.icons.moon, label: 'Night'),
+              );
+            },
+          ),
+        ],
+      );
 }
 
 class Label extends StatelessWidget {
@@ -81,9 +83,9 @@ class Label extends StatelessWidget {
     final FThemeData(:colorScheme, :typography) = context.theme;
     final color = data.selected ? colorScheme.background : colorScheme.foreground;
     final start =
-    DateTime.fromMillisecondsSinceEpoch((data.percentage.min * Duration.millisecondsPerDay).round(), isUtc: true);
+        DateTime.fromMillisecondsSinceEpoch((data.percentage.min * Duration.millisecondsPerDay).round(), isUtc: true);
     final end =
-    DateTime.fromMillisecondsSinceEpoch((data.percentage.max * Duration.millisecondsPerDay).round(), isUtc: true);
+        DateTime.fromMillisecondsSinceEpoch((data.percentage.max * Duration.millisecondsPerDay).round(), isUtc: true);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -112,41 +114,41 @@ class HorizontalResizableBoxPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FResizableBox(
-    axis: Axis.horizontal,
-    crossAxisExtent: 300,
-    interaction: const FResizableInteraction.resize(),
-    children: [
-      FResizable.raw(
-        initialSize: 100,
-        minSize: 100,
-        builder: (context, data, _) {
-          final colorScheme = context.theme.colorScheme;
-          return Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: data.selected ? colorScheme.foreground : colorScheme.background,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-              border: Border.all(color: colorScheme.border),
-            ),
-            child: Text('Sidebar', style: context.theme.typography.sm)
-          );
-        },
-      ),
-      FResizable.raw(
-        initialSize: 300,
-        minSize: 100,
-        builder: (context, data, _) {
-          final colorScheme = context.theme.colorScheme;
-          return Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-              border: Border.all(color: colorScheme.border),
-            ),
-            child: Text('Content', style: context.theme.typography.sm),
-          );
-        },
-      ),
-    ],
-  );
+        axis: Axis.horizontal,
+        crossAxisExtent: 300,
+        interaction: const FResizableInteraction.resize(),
+        children: [
+          FResizable.raw(
+            initialSize: 100,
+            minSize: 100,
+            builder: (context, data, _) {
+              final colorScheme = context.theme.colorScheme;
+              return Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                  border: Border.all(color: colorScheme.border),
+                ),
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              );
+            },
+          ),
+          FResizable.raw(
+            initialSize: 300,
+            minSize: 100,
+            builder: (context, data, _) {
+              final colorScheme = context.theme.colorScheme;
+              return Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
+                  border: Border.all(color: colorScheme.border),
+                ),
+                child: Text('Content', style: context.theme.typography.sm),
+              );
+            },
+          ),
+        ],
+      );
 }
