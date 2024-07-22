@@ -92,7 +92,7 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
           enabledStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
-            focusedBackgroundColor: colorScheme.secondary,
+            hoveredBackgroundColor: colorScheme.secondary,
             radius: const Radius.circular(8),
           ),
           disabledStyle: FCalendarEntryStyle(

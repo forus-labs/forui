@@ -25,15 +25,18 @@
 ### Fixes
 * Fix broken images in README.md (yet again).
 
+
 ## 0.2.0+2
 
 ### Fixes
 * Fix broken images in README.md.
 
+
 ## 0.2.0+1
 
 ### Fixes
 * Fix broken images in README.md.
+
 
 ## 0.2.0
 
@@ -57,6 +60,7 @@
 * Fix missing `key` parameter in `FTextField` constructors.
 * **Breaking** `FButton.prefixIcon` and `FButton.suffixIcon` have been renamed to `FButton.prefix` and `FButton.suffix`.
 * Fix padding inconsistencies in `FCard` and `FDialog`.
+
 
 ## 0.1.0
 

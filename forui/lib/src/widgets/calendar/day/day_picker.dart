@@ -234,7 +234,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: textStyle,
-            focusedBackgroundColor: colorScheme.secondary,
+            hoveredBackgroundColor: colorScheme.secondary,
             radius: const Radius.circular(4),
           ),
         ),
@@ -247,7 +247,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
-            focusedBackgroundColor: colorScheme.primaryForeground,
+            hoveredBackgroundColor: colorScheme.primaryForeground,
             radius: const Radius.circular(4),
           ),
         ),
