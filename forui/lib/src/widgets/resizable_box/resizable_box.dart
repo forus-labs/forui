@@ -12,7 +12,8 @@ export '/src/widgets/resizable_box/resizable_data.dart' hide UpdatableResizableD
 /// A box which children can be resized along either the horizontal or vertical axis.
 ///
 /// Each child is a [FResizable] has a initial size and minimum size. Setting an initial size less than the minimum size
-/// will result in undefined behaviour.
+/// will result in undefined behaviour. The children are arranged from top to bottom, or left to right, depending on
+/// the [axis].
 ///
 /// It is recommended that a [FResizableBox] contains at least 2 resizables.
 ///
