@@ -3,6 +3,11 @@ import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
+// TODO: Remove redundant comment when flutter fixes its lint issue.
+///
+@internal
+typedef FTappableState = ({bool focused, bool hovered});
+
 @internal
 class FTappable extends StatefulWidget {
   final bool enabled;
@@ -14,7 +19,7 @@ class FTappable extends StatefulWidget {
   final ValueChanged<bool>? onFocusChange;
   final VoidCallback? onPress;
   final VoidCallback? onLongPress;
-  final ValueWidgetBuilder<bool> builder;
+  final ValueWidgetBuilder<FTappableState> builder;
   final Widget? child;
 
   factory FTappable.animated({
@@ -26,7 +31,7 @@ class FTappable extends StatefulWidget {
     ValueChanged<bool>? onFocusChange,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<bool>? builder,
+    ValueWidgetBuilder<FTappableState>? builder,
     Widget? child,
     Key? key,
   }) = _AnimatedTappable;
@@ -40,7 +45,7 @@ class FTappable extends StatefulWidget {
     this.onFocusChange,
     this.onPress,
     this.onLongPress,
-    ValueWidgetBuilder<bool>? builder,
+    ValueWidgetBuilder<FTappableState>? builder,
     this.child,
     super.key,
   })  : assert(builder != null || child != null, 'Either builder or child must be provided.'),
@@ -106,7 +111,7 @@ class _FTappableState extends State<FTappable> with SingleTickerProviderStateMix
   Widget get _child => GestureDetector(
         onTap: widget.onPress,
         onLongPress: widget.onLongPress,
-        child: widget.builder(context, _focused || _hovered, widget.child),
+        child: widget.builder(context, (focused: _focused, hovered: _hovered), widget.child),
       );
 }
 
@@ -156,7 +161,7 @@ class _AnimatedTappableState extends _FTappableState {
                   _controller.forward();
                 },
           onLongPress: widget.onLongPress,
-          child: widget.builder(context, _focused || _hovered, widget.child),
+          child: widget.builder(context, (focused: _focused, hovered: _hovered), widget.child),
         ),
       );
 

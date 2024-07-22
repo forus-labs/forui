@@ -17,7 +17,7 @@ void main() {
           data: FThemes.zinc.light,
           child: FTappable(
             focusNode: focusNode,
-            builder: (_, value, __) => Text('$value'),
+            builder: (_, value, __) => Text('${value.focused}'),
           ),
         ),
       );
@@ -33,7 +33,7 @@ void main() {
         TestScaffold(
           data: FThemes.zinc.light,
           child: FTappable(
-            builder: (_, value, __) => Text('$value'),
+            builder: (_, value, __) => Text('${value.hovered}'),
           ),
         ),
       );

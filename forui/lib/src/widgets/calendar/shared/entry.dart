@@ -14,7 +14,7 @@ final _yMMMMd = DateFormat.yMMMMd();
 @internal
 abstract class Entry extends StatelessWidget {
   final FCalendarEntryStyle style;
-  final ValueWidgetBuilder<bool> builder;
+  final ValueWidgetBuilder<FTappableState> builder;
 
   factory Entry.day({
     required FCalendarDayPickerStyle style,
@@ -35,14 +35,14 @@ abstract class Entry extends StatelessWidget {
     final entryStyle = select ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
     // ignore: avoid_positional_boolean_parameters
-    Widget builder(BuildContext context, bool focused, Widget? child) => _Content(
+    Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
             left: selected(date.yesterday) ? Radius.zero : entryStyle.radius,
             right: selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
           text: '${date.day}', // TODO: localization
-          focused: focused,
+          focused: state.focused,
           current: today,
         );
 
@@ -74,11 +74,11 @@ abstract class Entry extends StatelessWidget {
     final entryStyle = enabled ? style.enabledStyle : style.disabledStyle;
 
     // ignore: avoid_positional_boolean_parameters
-    Widget builder(BuildContext context, bool focused, Widget? child) => _Content(
+    Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.all(entryStyle.radius),
           text: format(date),
-          focused: focused,
+          focused: state.focused,
           current: current,
         );
 
@@ -160,7 +160,7 @@ class _DisabledEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => ExcludeSemantics(child: builder(context, false, null));
+  Widget build(BuildContext context) => ExcludeSemantics(child: builder(context, (focused: false, hovered: false), null));
 }
 
 class _Content extends StatelessWidget {
