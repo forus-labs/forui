@@ -73,7 +73,7 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
-    - assets/avatar.jpg
+    - assets/avatar.png
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
