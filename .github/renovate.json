@@ -40,7 +40,7 @@
       "groupName": "Forui Gradle - Minor Revisions",
       "matchPaths": ["forui/example/android/**"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": false
+      "automerge": true
     },
 
     {
