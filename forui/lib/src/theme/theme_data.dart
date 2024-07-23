@@ -28,7 +28,7 @@ final class FThemeData with Diagnosticable {
   /// The alert styles.
   final FAlertStyles alertStyles;
 
-  /// The avatar styles.
+  /// The avatar style.
   final FAvatarStyle avatarStyle;
 
   /// The badge styles.

@@ -97,7 +97,7 @@ class FAvatar extends StatelessWidget {
       ..add(DiagnosticsProperty('image', image))
       ..add(DoubleProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty<Widget Function(BuildContext p1)?>.has('placeholderBuilder', placeholderBuilder));
+      ..add(ObjectFlagProperty.has('placeholderBuilder', placeholderBuilder));
   }
 }
 
