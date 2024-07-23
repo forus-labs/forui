@@ -1,0 +1,50 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboard": false,
+  "addLabels": ["dependencies"],
+
+  "packageRules": [
+    {
+      "groupName": "GitHub Actions - Major Revisions",
+      "matchPaths": [".github/**"],
+      "matchUpdateTypes": ["major"],
+      "automerge": true
+    },
+    {
+      "groupName": "GitHub Actions - Minor Revisions",
+      "matchPaths": [".github/**"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+
+
+    {
+      "groupName": "Forui - Major Revisions",
+      "matchPaths": ["forui/**"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+
+    {
+      "groupName": "Forui - Minor Revisions",
+      "matchPaths": ["forui/**"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+
+
+    {
+      "groupName": "Forui Assets - Major Revisions",
+      "matchPaths": ["forui_assets/**"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+
+    {
+      "groupName": "Forui Assets- Minor Revisions",
+      "matchPaths": ["forui_assets/**"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
+}
