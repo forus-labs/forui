@@ -82,10 +82,14 @@ class Label extends StatelessWidget {
   Widget build(BuildContext context) {
     final FThemeData(:colorScheme, :typography) = context.theme;
     final color = data.selected ? colorScheme.background : colorScheme.foreground;
-    final start =
-        DateTime.fromMillisecondsSinceEpoch((data.offsetPercentage.min * Duration.millisecondsPerDay).round(), isUtc: true);
-    final end =
-        DateTime.fromMillisecondsSinceEpoch((data.offsetPercentage.max * Duration.millisecondsPerDay).round(), isUtc: true);
+    final start = DateTime.fromMillisecondsSinceEpoch(
+      (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
+      isUtc: true,
+    );
+    final end = DateTime.fromMillisecondsSinceEpoch(
+      (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),
+      isUtc: true,
+    );
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
