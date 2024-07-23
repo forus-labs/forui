@@ -10,29 +10,29 @@ import 'package:forui/forui.dart';
 /// Typically used with a user's profile image, or, in the absence of
 /// such an image, the user's initials.
 ///
-/// If [image] fails then [placeholder] is used.
+/// If [image] fails then [placeholderBuilder] is used.
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;
 
   /// The background image of the circle.
   ///
-  /// If the [FAvatar] is to have the user's initials, use [placeholder] instead.
+  /// If the [FAvatar] is to have the user's initials, use [placeholderBuilder] instead.
   final ImageProvider image;
 
   /// The fallback widget if [image] cannot be displayed.
   ///
   /// If the avatar is to just have the user's initials, they are typically
-  /// provided using a [Text] widget as the [placeholder] with a [FAvatarStyle.backgroundColor]
+  /// provided using a [Text] widget in the [placeholderBuilder] with a [FAvatarStyle.backgroundColor]
   ///
   /// If the [FAvatar] is to have an image, use [image] instead.
-  final Widget? placeholder;
+  final Widget Function(BuildContext)? placeholderBuilder;
 
   /// Creates an [FAvatar].
   const FAvatar({
     required this.image,
     this.style,
-    this.placeholder,
+    this.placeholderBuilder,
     super.key,
   });
 
@@ -49,11 +49,33 @@ class FAvatar extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Center(
         child: Image(
+          filterQuality: FilterQuality.medium,
           image: image,
           errorBuilder: (context, exception, stacktrace) => DefaultTextStyle(
             style: style.text,
-            child: placeholder ?? const _Placeholder(),
+            child: placeholderBuilder != null ? placeholderBuilder!(context) : const _Placeholder(),
           ),
+          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+            if (wasSynchronouslyLoaded) {
+              return child;
+            }
+            if (frame == null) {
+              return DefaultTextStyle(
+                style: style.text,
+                child: placeholderBuilder != null ? placeholderBuilder!(context) : const _Placeholder(),
+              );
+            }
+            return child;
+          },
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return DefaultTextStyle(
+              style: style.text,
+              child: placeholderBuilder != null ? placeholderBuilder!(context) : const _Placeholder(),
+            );
+          },
           fit: BoxFit.cover,
         ),
       ),
@@ -65,7 +87,8 @@ class FAvatar extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('image', image));
+      ..add(DiagnosticsProperty('image', image))
+      ..add(ObjectFlagProperty<Widget Function(BuildContext p1)?>.has('placeholderBuilder', placeholderBuilder));
   }
 }
 

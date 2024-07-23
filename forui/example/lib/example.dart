@@ -23,10 +23,9 @@ class _ExampleState extends State<Example> {
           const SizedBox(height: 100),
           FProgress(value: 0.9),
           const SizedBox(height: 10),
-          const FAvatar(
-            image: NetworkImage('https://picsum.photos/'),
-            //backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
-            placeholder: Text('DC'),
+           FAvatar(
+            image: const NetworkImage('https://picsum.photos/'),
+            placeholderBuilder: (_) => const Text('DC'),
           ),
           const SizedBox(height: 20),
         ],
