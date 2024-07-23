@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
@@ -6,74 +9,55 @@ import 'package:meta/meta.dart';
 /// An image element with a fallback for representing the user.
 ///
 /// Typically used with a user's profile image, or, in the absence of
-/// such an image, the user's initials. A given user's initials should
-/// always be paired with the same background color, for consistency.
+/// such an image, the user's initials.
 ///
-/// If [backgroundImage] fails then [FAvatarStyle.backgroundColor] is used.
-///
-/// The [onBackgroundImageError] parameter must be null if the [backgroundImage]
-/// is null.
-///
+/// If [image] fails then [placeholder] is used.
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;
 
-  /// The background image of the circle. Changing the background
-  /// image will cause the avatar to animate to the new image.
+  /// The background image of the circle.
   ///
-  /// If the [FAvatar] is to have the user's initials, use [child] instead.
-  final ImageProvider? backgroundImage;
+  /// If the [FAvatar] is to have the user's initials, use [placeholder] instead.
+  final ImageProvider image;
 
-  /// An optional error callback for errors emitted when loading
-  /// [backgroundImage].
-  final ImageErrorListener? onBackgroundImageError;
-
-  /// The widget below this widget in the tree.
+  /// The fallback widget if [image] cannot be displayed.
   ///
   /// If the avatar is to just have the user's initials, they are typically
-  /// provided using a [Text] widget as the [child] and a [backgroundColor]:
+  /// provided using a [Text] widget as the [placeholder] with a [FAvatarStyle.backgroundColor]:
   ///
-  /// If the [FAvatar] is to have an image, use [backgroundImage] instead.
-  final Widget? child;
+  /// If the [FAvatar] is to have an image, use [image] instead.
+  final Widget? placeholder;
 
   /// Creates an [FAvatar].
   const FAvatar({
-    super.key,
+    required this.image,
     this.style,
-    this.backgroundImage,
-    this.onBackgroundImageError,
-    this.child,
-  }) : assert(
-          backgroundImage != null || onBackgroundImageError == null,
-          'The [onBackgroundImageError] parameter must be null if the [backgroundImage] is null.',
-        );
+    this.placeholder,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.avatarStyle;
 
-    return AnimatedContainer(
+    return Container(
       constraints: style.constraints,
-      duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         color: style.backgroundColor,
-        image: backgroundImage != null
-            ? DecorationImage(
-                image: backgroundImage!,
-                onError: onBackgroundImageError,
-                fit: BoxFit.cover,
-              )
-            : null,
         shape: BoxShape.circle,
       ),
-      child: child == null
-          ? null
-          : Center(
-              child: DefaultTextStyle(
-                style: style.text,
-                child:  child!,
-              ),
-            ),
+      clipBehavior: Clip.hardEdge,
+      child: Center(
+        child: Image(
+          image: image,
+          errorBuilder: (context, exception, stacktrace) => DefaultTextStyle(
+            style: style.text,
+            child: placeholder ?? const _Placeholder(),
+          ),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 
@@ -82,8 +66,7 @@ class FAvatar extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('backgroundImage', backgroundImage))
-      ..add(ObjectFlagProperty<ImageErrorListener?>.has('onBackgroundImageError', onBackgroundImageError));
+      ..add(DiagnosticsProperty('image', image));
   }
 }
 
@@ -95,7 +78,7 @@ final class FAvatarStyle with Diagnosticable {
   /// The box constraints.
   final BoxConstraints constraints;
 
-  /// The text style for the
+  /// The text style for the placeholder text.
   final TextStyle text;
 
   /// Creates a [FAvatarStyle].
@@ -159,4 +142,18 @@ final class FAvatarStyle with Diagnosticable {
 
   @override
   int get hashCode => backgroundColor.hashCode ^ constraints.hashCode ^ text.hashCode;
+}
+
+class _Placeholder extends StatelessWidget {
+  const _Placeholder();
+
+  @override
+  Widget build(BuildContext context) {
+    final style = context.theme;
+
+    return FAssets.icons.userRound(
+      height: style.avatarStyle.constraints.maxHeight / 2,
+      colorFilter: ColorFilter.mode(style.colorScheme.mutedForeground, BlendMode.srcIn),
+    );
+  }
 }

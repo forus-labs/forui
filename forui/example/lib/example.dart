@@ -24,14 +24,11 @@ class _ExampleState extends State<Example> {
           FProgress(value: 0.9),
           const SizedBox(height: 10),
           const FAvatar(
-            child: Text('DC'),
+            image: NetworkImage('https://picsum.photos/'),
             //backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
+            placeholder: Text('DC'),
           ),
           const SizedBox(height: 20),
-          const CircleAvatar(
-            backgroundImage: NetworkImage('https://picsum.photos/250?image=9'),
-            child: Text('DC'),
-          ),
         ],
       );
 }
