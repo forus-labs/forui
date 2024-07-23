@@ -45,26 +45,17 @@ final class FResizableRegionData with Diagnosticable {
     required ({double min, double max, double allRegions}) size,
     required this.offset,
   })  : assert(0 <= index, 'Index should be non-negative, but is $index.'),
-        assert(
-          0 < size.min,
-          'Minimum size should be positive, but is ${size.min}',
-        ),
+        assert(0 < size.min, 'Minimum size should be positive, but is ${size.min}'),
         assert(
           size.min < size.max,
-          'Minimum size should be less than the maximum size, but minimum is ${size.min} and maximum is ${size.max}',
+          'Min size should be less than the min size, but min is ${size.min} and maximum is ${size.max}',
         ),
         assert(
           size.max <= size.allRegions,
           'Maximum size should be less than or equal to all regions size, but maximum is ${size.max} and all regions is ${size.allRegions}',
         ),
-        assert(
-          0 <= offset.min,
-          'Min offset should be non-negative, but is ${offset.min}',
-        ),
-        assert(
-          0 < offset.max,
-          'Max offset should be non-negative, but is ${offset.max}',
-        ),
+        assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),
+        assert(0 < offset.max, 'Max offset should be non-negative, but is ${offset.max}'),
         assert(
           offset.min < offset.max,
           'Min offset should be less than the max offset, but min is ${offset.min} and max is ${offset.max}',
@@ -130,14 +121,7 @@ final class FResizableRegionData with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(IntProperty('index', index))
-      ..add(
-        FlagProperty(
-          'selected',
-          value: selected,
-          ifTrue: 'selected',
-          ifFalse: 'not selected',
-        ),
-      )
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected', ifFalse: 'not selected'))
       ..add(DoubleProperty('minSize', size.min))
       ..add(DoubleProperty('currentSize', size.current))
       ..add(DoubleProperty('maxSize', size.max))
@@ -176,11 +160,7 @@ extension UpdatableResizableRegionData on FResizableRegionData {
     }
   }
 
-  (FResizableRegionData, double) _resize(
-    AxisDirection direction,
-    double min,
-    double max,
-  ) {
+  (FResizableRegionData, double) _resize(AxisDirection direction, double min, double max) {
     final newSize = max - min;
     assert(0 <= min, '$min should be non-negative.');
     assert(newSize <= size.max, '$newSize should be less than ${size.max}.');

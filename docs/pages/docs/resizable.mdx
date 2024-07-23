@@ -6,18 +6,18 @@ A box which children can be resized along either the horizontal or vertical axis
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='resizable-box' query={{}} height={700}/>
+    <Widget name='resizable' query={{}} height={700}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
     class TimeOfDay extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FResizableBox(
+      Widget build(BuildContext context) => FResizable(
         axis: Axis.vertical,
         crossAxisExtent: 400,
-        interaction: const FResizableInteraction.selectAndResize(0),
+        interaction: const FResizableRegionInteraction.selectAndResize(0),
         children: [
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -33,7 +33,7 @@ A box which children can be resized along either the horizontal or vertical axis
               );
             },
           ),
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -48,7 +48,7 @@ A box which children can be resized along either the horizontal or vertical axis
               );
             },
           ),
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -71,7 +71,7 @@ A box which children can be resized along either the horizontal or vertical axis
     class Label extends StatelessWidget {
       static final DateFormat format = DateFormat.jm(); // Requires package:intl
 
-      final FResizableData data;
+      final FResizableRegionData data;
       final SvgAsset icon;
       final String label;
 
@@ -110,15 +110,15 @@ A box which children can be resized along either the horizontal or vertical axis
 
 ## Usage
 
-### `FResizableBox(...)`
+### `FResizable(...)`
 
 ```dart
-FResizableBox(
+FResizable(
   axis: Axis.vertical,
   crossAxisExtent: 400,
-  interaction: const FResizableInteraction.selectAndResize(0),
+  interaction: const FResizableRegionInteraction.selectAndResize(0),
   children: [
-    FResizable.raw(
+    FResizableRegion.raw(
       initialSize: 200,
       minSize: 100,
       onPress: (index) {},
@@ -137,17 +137,16 @@ FResizableBox(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='resizable-box' variant='horizontal' query={{}} height={400}/>
+    <Widget name='resizable' variant='horizontal' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
     @override
-    Widget build(BuildContext context) => FResizableBox(
+    Widget build(BuildContext context) => FResizable(
       axis: Axis.horizontal,
       crossAxisExtent: 300,
-      interaction: const FResizableInteraction.resize(),
       children: [
-        FResizable.raw(
+        FResizableRegion.raw(
           initialSize: 100,
           minSize: 100,
           builder: (context, data, _) {
@@ -163,7 +162,7 @@ FResizableBox(
             );
           },
         ),
-        FResizable.raw(
+        FResizableRegion.raw(
           initialSize: 300,
           minSize: 100,
           builder: (context, data, _) {

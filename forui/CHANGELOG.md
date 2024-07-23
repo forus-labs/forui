@@ -1,7 +1,7 @@
 ## Next
 
 ### Additions
-* Add `FResizableBox`
+* Add `FResizable`
 
 
 ## 0.3.0

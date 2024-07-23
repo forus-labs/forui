@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
-class ResizableBoxPage extends SampleScaffold {
-  ResizableBoxPage({
+class ResizablePage extends SampleScaffold {
+  ResizablePage({
     @queryParam super.theme,
   });
 
@@ -107,8 +107,8 @@ class Label extends StatelessWidget {
 }
 
 @RoutePage()
-class HorizontalResizableBoxPage extends SampleScaffold {
-  HorizontalResizableBoxPage({
+class HorizontalResizablePage extends SampleScaffold {
+  HorizontalResizablePage({
     @queryParam super.theme,
   });
 

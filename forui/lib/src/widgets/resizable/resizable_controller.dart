@@ -113,10 +113,7 @@ class ResizableController extends ChangeNotifier {
     notifyListeners();
   }
 
-  (FResizableRegionData resized, FResizableRegionData neighbour) _find(
-    int index,
-    AxisDirection direction,
-  ) {
+  (FResizableRegionData resized, FResizableRegionData neighbour) _find(int index, AxisDirection direction) {
     final resized = regions[index];
     final neighbour = switch (direction) {
       AxisDirection.left || AxisDirection.up => regions[index - 1],

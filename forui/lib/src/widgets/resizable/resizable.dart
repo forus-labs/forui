@@ -230,10 +230,7 @@ class InheritedData extends InheritedWidget {
 
   static InheritedData of(BuildContext context) {
     final InheritedData? result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
-    assert(
-      result != null,
-      'No InheritedData found in context. Is there a parent FResizableBox?',
-    );
+    assert(result != null, 'No InheritedData found in context. Is there a parent FResizableBox?');
     return result!;
   }
 
