@@ -1,35 +1,93 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/src/widgets/resizable_box/resizable_data.dart';
+import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 
 void main() {
-  group('FResizableData', () {
+  group('FResizableRegionData', () {
     for (final (index, function) in [
-      () => FResizableData(index: 1, selected: false, constraints: (min: 1, max: -2), offsets: (min: 1, max: 2)),
-      () => FResizableData(index: 1, selected: false, constraints: (min: -1, max: 2), offsets: (min: 1, max: 2)),
-      () => FResizableData(index: 1, selected: false, constraints: (min: 1, max: 1), offsets: (min: 1, max: 2)),
-      () => FResizableData(index: 1, selected: false, constraints: (min: 2, max: 1), offsets: (min: 1, max: 2)),
-      () => FResizableData(index: 1, selected: false, constraints: (min: 1, max: 5), offsets: (min: 1, max: 1)),
-      () => FResizableData(index: 1, selected: false, constraints: (min: 1, max: 5), offsets: (min: 2, max: 1)),
-      () => FResizableData(index: 1, selected: false, constraints: (min: 1, max: 5), offsets: (min: 1, max: 1)),
-      () => FResizableData(index: 1, selected: false, constraints: (min: 1, max: 5), offsets: (min: 1, max: 10)),
-      () => FResizableData(index: -1, selected: false, constraints: (min: 1, max: 5), offsets: (min: 1, max: 3)),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: 1, max: -2, allRegions: 10),
+            offset: (min: 1, max: 2),
+          ),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: -1, max: 2, allRegions: 10),
+            offset: (min: 1, max: 2),
+          ),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: 1, max: 1, allRegions: 10),
+            offset: (min: 1, max: 2),
+          ),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: 2, max: 1, allRegions: 10),
+            offset: (min: 1, max: 2),
+          ),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: 1, max: 5, allRegions: 10),
+            offset: (min: 1, max: 1),
+          ),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: 1, max: 5, allRegions: 10),
+            offset: (min: 2, max: 1),
+          ),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: 1, max: 5, allRegions: 10),
+            offset: (min: 1, max: 1),
+          ),
+      () => FResizableRegionData(
+            index: 1,
+            selected: false,
+            size: (min: 1, max: 5, allRegions: 10),
+            offset: (min: 1, max: 10),
+          ),
+      () => FResizableRegionData(
+            index: -1,
+            selected: false,
+            size: (min: 1, max: 5, allRegions: 10),
+            offset: (min: 1, max: 3),
+          ),
     ].indexed) {
-      test('[$index] constructor throws error', () => expect(function, throwsAssertionError));
+      test(
+        '[$index] constructor throws error',
+        () => expect(function, throwsAssertionError),
+      );
     }
 
     test(
       'percentage',
       () => expect(
-        FResizableData(index: 1, selected: false, constraints: (min: 1, max: 10), offsets: (min: 0, max: 5)).percentage,
-        (min: 0, max: 0.5),
+        FResizableRegionData(
+          index: 1,
+          selected: false,
+          size: (min: 1, max: 10, allRegions: 100),
+          offset: (min: 0, max: 5),
+        ).offsetPercentage,
+        (min: 0, max: 0.05),
       ),
     );
 
     test(
       'size',
       () => expect(
-        FResizableData(index: 1, selected: false, constraints: (min: 1, max: 10), offsets: (min: 0, max: 5)).size,
+        FResizableRegionData(
+          index: 1,
+          selected: false,
+          size: (min: 1, max: 10, allRegions: 100),
+          offset: (min: 0, max: 5),
+        ).size.current,
         5,
       ),
     );
@@ -54,29 +112,32 @@ void main() {
       (AxisDirection.down, const Offset(0, -50), const Offset(0, -20), 20.0, 30.0),
     ].indexed) {
       test('[$index] update(...)', () {
-        final data = FResizableData(
+        final data = FResizableRegionData(
           index: 0,
           selected: true,
-          constraints: (min: 10, max: 100),
-          offsets: (min: 20, max: 50),
+          size: (min: 10, max: 100, allRegions: 100),
+          offset: (min: 20, max: 50),
         );
 
         final (updated, updatedDelta) = data.update(direction, delta);
 
-        expect(updated.offsets, (min: min, max: max));
+        expect(updated.offset, (min: min, max: max));
         expect(updatedDelta, translated);
       });
     }
 
     test('update(...) throws error', () {
-      final data = FResizableData(
+      final data = FResizableRegionData(
         index: 0,
         selected: true,
-        constraints: (min: 10, max: 100),
-        offsets: (min: 0, max: 30),
+        size: (min: 10, max: 100, allRegions: 100),
+        offset: (min: 0, max: 30),
       );
 
-      expect(() => data.update(AxisDirection.left, const Offset(-10, 0)), throwsAssertionError);
+      expect(
+        () => data.update(AxisDirection.left, const Offset(-10, 0)),
+        throwsAssertionError,
+      );
     });
 
     for (final (index, (direction, delta, min, max)) in [
@@ -89,12 +150,16 @@ void main() {
       (AxisDirection.down, const Offset(0, -10), 10.0, 20.0),
       (AxisDirection.down, const Offset(0, -50), 10.0, 20.0),
     ].indexed) {
-      test('[$index] update(...) beyond min/max constraint', () {
-        final data =
-            FResizableData(index: 0, selected: true, constraints: (min: 10, max: 100), offsets: (min: min, max: max));
+      test('[$index] update(...) beyond min/max size', () {
+        final data = FResizableRegionData(
+          index: 0,
+          selected: true,
+          size: (min: 10, max: 100, allRegions: 100),
+          offset: (min: min, max: max),
+        );
         final (updated, updatedDelta) = data.update(direction, delta);
 
-        expect(updated.offsets, (min: min, max: max));
+        expect(updated.offset, (min: min, max: max));
         expect(updatedDelta, Offset.zero);
       });
     }
@@ -102,11 +167,11 @@ void main() {
     test(
       'update(...) beyond total',
       () => expect(
-        () => FResizableData(
+        () => FResizableRegionData(
           index: 0,
           selected: true,
-          constraints: (min: 1, max: 5),
-          offsets: (min: 0, max: 2),
+          size: (min: 1, max: 5, allRegions: 100),
+          offset: (min: 0, max: 2),
         ).update(AxisDirection.right, const Offset(4, 0)),
         throwsAssertionError,
       ),

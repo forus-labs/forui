@@ -1,14 +1,14 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable_box/resizable_data.dart';
+import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 import 'package:meta/meta.dart';
 
-/// Possible ways for a user to interact with a [FResizableBox].
+/// Possible ways for a user to interact with a [FResizable].
 sealed class FResizableInteraction {
-  /// Allows the user to interact with a [FResizable] by selecting before resizing it.
+  /// Allows the user to interact with a [FResizableRegion] by selecting before resizing it.
   const factory FResizableInteraction.selectAndResize(int initialIndex) = SelectAndResize;
 
-  /// Allows the user to interact with a [FResizable] by resizing it without selecting it first.
+  /// Allows the user to interact with a [FResizableRegion] by resizing it without selecting it first.
   const factory FResizableInteraction.resize() = Resize;
 }
 
@@ -38,23 +38,23 @@ final class Resize implements FResizableInteraction {
 }
 
 @internal
-class ResizableBoxController extends ChangeNotifier {
-  final List<FResizableData> resizables;
+class ResizableController extends ChangeNotifier {
+  final List<FResizableRegionData> regions;
   final Axis axis;
   final double? hapticFeedbackVelocity;
   final void Function(int)? _onPress;
-  final void Function(FResizableData, FResizableData)? _onResizeUpdate;
-  final void Function(FResizableData, FResizableData)? _onResizeEnd;
+  final void Function(FResizableRegionData, FResizableRegionData)? _onResizeUpdate;
+  final void Function(FResizableRegionData, FResizableRegionData)? _onResizeEnd;
   FResizableInteraction _interaction;
   bool _haptic;
 
-  ResizableBoxController({
-    required this.resizables,
+  ResizableController({
+    required this.regions,
     required this.axis,
     required this.hapticFeedbackVelocity,
     required void Function(int)? onPress,
-    required void Function(FResizableData, FResizableData)? onResizeUpdate,
-    required void Function(FResizableData, FResizableData)? onResizeEnd,
+    required void Function(FResizableRegionData, FResizableRegionData)? onResizeUpdate,
+    required void Function(FResizableRegionData, FResizableRegionData)? onResizeEnd,
     required FResizableInteraction interaction,
   })  : _onPress = onPress,
         _onResizeUpdate = onResizeUpdate,
@@ -86,10 +86,10 @@ class ResizableBoxController extends ChangeNotifier {
     };
 
     final (shrunk, adjusted) = shrink.update(shrinkDirection, delta);
-    if (shrink.offsets != shrunk.offsets) {
+    if (shrink.offset != shrunk.offset) {
       final (expanded, _) = expand.update(expandDirection, adjusted);
-      resizables[shrunk.index] = shrunk;
-      resizables[expanded.index] = expanded;
+      regions[shrunk.index] = shrunk;
+      regions[expanded.index] = expanded;
 
       _onResizeUpdate?.call(selected, neighbour);
       _haptic = true;
@@ -113,11 +113,14 @@ class ResizableBoxController extends ChangeNotifier {
     notifyListeners();
   }
 
-  (FResizableData resized, FResizableData neighbour) _find(int index, AxisDirection direction) {
-    final resized = resizables[index];
+  (FResizableRegionData resized, FResizableRegionData neighbour) _find(
+    int index,
+    AxisDirection direction,
+  ) {
+    final resized = regions[index];
     final neighbour = switch (direction) {
-      AxisDirection.left || AxisDirection.up => resizables[index - 1],
-      AxisDirection.right || AxisDirection.down => resizables[index + 1],
+      AxisDirection.left || AxisDirection.up => regions[index - 1],
+      AxisDirection.right || AxisDirection.down => regions[index + 1],
     };
 
     return (resized, neighbour);
@@ -127,8 +130,8 @@ class ResizableBoxController extends ChangeNotifier {
     if (_interaction case SelectAndResize(index: final old) when old != value) {
       _onPress?.call(value);
       _interaction = SelectAndResize(value);
-      resizables[old] = resizables[old].copyWith(selected: false);
-      resizables[value] = resizables[value].copyWith(selected: true);
+      regions[old] = regions[old].copyWith(selected: false);
+      regions[value] = regions[value].copyWith(selected: true);
 
       notifyListeners();
       return true;

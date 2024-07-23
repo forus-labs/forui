@@ -1,25 +1,29 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable_box/resizable_box_controller.dart';
-import 'package:forui/src/widgets/resizable_box/slider.dart';
+import 'package:forui/src/widgets/resizable/resizable_controller.dart';
+import 'package:forui/src/widgets/resizable/slider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'slider_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<ResizableBoxController>()])
+@GenerateNiceMocks([MockSpec<ResizableController>()])
 void main() {
   provideDummy(const FResizableInteraction.resize());
 
-  late MockResizableBoxController controller;
-  late FResizableData resizable;
+  late MockResizableController controller;
+  late FResizableRegionData data;
 
   setUp(() {
-    resizable =
-        FResizableData(index: 0, selected: true, constraints: (min: 10, max: 100), offsets: (min: 10, max: 100));
-    controller = MockResizableBoxController();
-    when(controller.resizables).thenReturn([resizable]);
+    data = FResizableRegionData(
+      index: 0,
+      selected: true,
+      size: (min: 10, max: 100, allRegions: 100),
+      offset: (min: 10, max: 100),
+    );
+    controller = MockResizableController();
+    when(controller.regions).thenReturn([data]);
     when(controller.hapticFeedbackVelocity).thenReturn(0.0);
   });
 
@@ -34,7 +38,10 @@ void main() {
     () => VerticalSlider.up(controller: controller, index: 1, size: 500),
     () => VerticalSlider.down(controller: controller, index: 1, size: 500),
   ].indexed) {
-    test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));
+    test(
+      '[$index] constructor throws error',
+      () => expect(constructor, throwsAssertionError),
+    );
   }
 
   for (final (index, (function, direction)) in [

@@ -13,12 +13,12 @@ class ResizableBoxPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => FResizableBox(
+  Widget child(BuildContext context) => FResizable(
         axis: Axis.vertical,
         crossAxisExtent: 400,
         interaction: const FResizableInteraction.selectAndResize(0),
         children: [
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -34,7 +34,7 @@ class ResizableBoxPage extends SampleScaffold {
               );
             },
           ),
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -49,7 +49,7 @@ class ResizableBoxPage extends SampleScaffold {
               );
             },
           ),
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -72,7 +72,7 @@ class ResizableBoxPage extends SampleScaffold {
 class Label extends StatelessWidget {
   static final DateFormat format = DateFormat.jm(); // Requires package:intl
 
-  final FResizableData data;
+  final FResizableRegionData data;
   final SvgAsset icon;
   final String label;
 
@@ -83,9 +83,9 @@ class Label extends StatelessWidget {
     final FThemeData(:colorScheme, :typography) = context.theme;
     final color = data.selected ? colorScheme.background : colorScheme.foreground;
     final start =
-        DateTime.fromMillisecondsSinceEpoch((data.percentage.min * Duration.millisecondsPerDay).round(), isUtc: true);
+        DateTime.fromMillisecondsSinceEpoch((data.offsetPercentage.min * Duration.millisecondsPerDay).round(), isUtc: true);
     final end =
-        DateTime.fromMillisecondsSinceEpoch((data.percentage.max * Duration.millisecondsPerDay).round(), isUtc: true);
+        DateTime.fromMillisecondsSinceEpoch((data.offsetPercentage.max * Duration.millisecondsPerDay).round(), isUtc: true);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -113,12 +113,11 @@ class HorizontalResizableBoxPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => FResizableBox(
+  Widget child(BuildContext context) => FResizable(
         axis: Axis.horizontal,
         crossAxisExtent: 300,
-        interaction: const FResizableInteraction.resize(),
         children: [
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 100,
             minSize: 100,
             builder: (context, data, _) {
@@ -134,7 +133,7 @@ class HorizontalResizableBoxPage extends SampleScaffold {
               );
             },
           ),
-          FResizable.raw(
+          FResizableRegion.raw(
             initialSize: 300,
             minSize: 100,
             builder: (context, data, _) {

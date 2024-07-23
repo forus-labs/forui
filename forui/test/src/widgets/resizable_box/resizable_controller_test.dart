@@ -1,19 +1,19 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable_box/resizable_box_controller.dart';
+import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
 void main() {
-  late ResizableBoxController controller;
+  late ResizableController controller;
 
-  late FResizableData top;
-  late FResizableData middle;
-  late FResizableData bottom;
+  late FResizableRegionData top;
+  late FResizableRegionData middle;
+  late FResizableRegionData bottom;
 
   late int selectedIndex;
   late int count;
-  (FResizableData, FResizableData)? resizeUpdate;
-  (FResizableData, FResizableData)? resizeEnd;
+  (FResizableRegionData, FResizableRegionData)? resizeUpdate;
+  (FResizableRegionData, FResizableRegionData)? resizeEnd;
 
   setUp(() {
     selectedIndex = 0;
@@ -21,12 +21,27 @@ void main() {
     resizeUpdate = null;
     resizeEnd = null;
 
-    top = FResizableData(index: 0, selected: true, constraints: (min: 10, max: 60), offsets: (min: 0, max: 25));
-    middle = FResizableData(index: 1, selected: false, constraints: (min: 10, max: 60), offsets: (min: 25, max: 40));
-    bottom = FResizableData(index: 2, selected: false, constraints: (min: 10, max: 60), offsets: (min: 40, max: 60));
+    top = FResizableRegionData(
+      index: 0,
+      selected: true,
+      size: (min: 10, max: 40, allRegions: 60),
+      offset: (min: 0, max: 25),
+    );
+    middle = FResizableRegionData(
+      index: 1,
+      selected: false,
+      size: (min: 10, max: 40, allRegions: 60),
+      offset: (min: 25, max: 40),
+    );
+    bottom = FResizableRegionData(
+      index: 2,
+      selected: false,
+      size: (min: 10, max: 40, allRegions: 60),
+      offset: (min: 40, max: 60),
+    );
 
-    controller = ResizableBoxController(
-      resizables: [top, middle, bottom],
+    controller = ResizableController(
+      regions: [top, middle, bottom],
       axis: Axis.vertical,
       hapticFeedbackVelocity: 0.0,
       onPress: (index) => selectedIndex = index,
@@ -52,9 +67,15 @@ void main() {
     test('[$i] update(...) direction', () {
       expect(controller.update(index, direction, offset), maximized);
 
-      expect(controller.resizables[0].offsets, (min: topOffsets.$1, max: topOffsets.$2));
-      expect(controller.resizables[1].offsets, (min: middleOffsets.$1, max: middleOffsets.$2));
-      expect(controller.resizables[2].offsets, (min: 40, max: 60));
+      expect(
+        controller.regions[0].offset,
+        (min: topOffsets.$1, max: topOffsets.$2),
+      );
+      expect(
+        controller.regions[1].offset,
+        (min: middleOffsets.$1, max: middleOffsets.$2),
+      );
+      expect(controller.regions[2].offset, (min: 40, max: 60));
 
       expect(count, 1);
       expect(resizeUpdate?.$1.index, index);
@@ -91,9 +112,9 @@ void main() {
     expect(selectedIndex, 0);
     expect(count, 0);
 
-    expect(controller.resizables[0].selected, true);
-    expect(controller.resizables[1].selected, false);
-    expect(controller.resizables[2].selected, false);
+    expect(controller.regions[0].selected, true);
+    expect(controller.regions[1].selected, false);
+    expect(controller.regions[2].selected, false);
   });
 
   test('selected bottom when interaction is SelectAndResize', () {
@@ -106,14 +127,14 @@ void main() {
     expect(selectedIndex, 2);
     expect(count, 1);
 
-    expect(controller.resizables[0].selected, false);
-    expect(controller.resizables[1].selected, false);
-    expect(controller.resizables[2].selected, true);
+    expect(controller.regions[0].selected, false);
+    expect(controller.regions[1].selected, false);
+    expect(controller.regions[2].selected, true);
   });
 
   test('selected bottom when interaction is Resize', () {
-    controller = ResizableBoxController(
-      resizables: [top.copyWith(selected: false), middle, bottom],
+    controller = ResizableController(
+      regions: [top.copyWith(selected: false), middle, bottom],
       axis: Axis.vertical,
       hapticFeedbackVelocity: 0.0,
       onPress: (index) => selectedIndex = index,
@@ -132,8 +153,8 @@ void main() {
     expect(selectedIndex, -1);
     expect(count, 0);
 
-    expect(controller.resizables[0].selected, false);
-    expect(controller.resizables[1].selected, false);
-    expect(controller.resizables[2].selected, false);
+    expect(controller.regions[0].selected, false);
+    expect(controller.regions[1].selected, false);
+    expect(controller.regions[2].selected, false);
   });
 }

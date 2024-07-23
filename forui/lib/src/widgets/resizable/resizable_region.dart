@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/resizable_box/resizable_box.dart';
-import 'package:forui/src/widgets/resizable_box/resizable_box_controller.dart';
-import 'package:forui/src/widgets/resizable_box/slider.dart';
+import 'package:forui/src/widgets/resizable/resizable.dart';
+import 'package:forui/src/widgets/resizable/resizable_controller.dart';
+import 'package:forui/src/widgets/resizable/slider.dart';
 import 'package:sugar/sugar.dart';
 
-/// A resizable that can be resized along an axis. It should always be in a [FResizableBox].
+/// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
 ///
 /// See:
-/// * https://forui.dev/docs/resizable-box for working examples.
-class FResizable extends StatelessWidget {
+/// * https://forui.dev/docs/resizable for working examples.
+class FResizableRegion extends StatelessWidget {
   static double _platform(double? slider) =>
       slider ??
       switch (const Runtime().type) {
@@ -17,7 +17,7 @@ class FResizable extends StatelessWidget {
         _ => 5,
       };
 
-  /// The initial height/width.
+  /// The initial height/width, in logical pixels.
   ///
   /// ## Contract
   /// Throws a [AssertionError] if:
@@ -25,7 +25,7 @@ class FResizable extends StatelessWidget {
   /// * [initialSize] < [minSize]
   final double initialSize;
 
-  /// The minimum height/width along the resizable axis.
+  /// The minimum height/width along the resizable axis, in logical pixels.
   ///
   /// The minimum size is either the given minimum size or 2 * [sliderSize], whichever is larger. Defaults to
   /// 2 * [sliderSize] if not given.
@@ -41,7 +41,7 @@ class FResizable extends StatelessWidget {
   final double sliderSize;
 
   /// The builder used to create a child to display in this region.
-  final ValueWidgetBuilder<FResizableData> builder;
+  final ValueWidgetBuilder<FResizableRegionData> builder;
 
   /// A height/width-independent widget which is passed back to the [builder].
   ///
@@ -49,17 +49,26 @@ class FResizable extends StatelessWidget {
   /// the region.
   final Widget? child;
 
-  /// Creates a [FResizable].
-  FResizable.raw({
+  /// Creates a [FResizableRegion].
+  FResizableRegion.raw({
     required this.initialSize,
     required this.builder,
     double? minSize,
     double? sliderSize,
     this.child,
     super.key,
-  })  : assert(0 < initialSize, 'The initial size should be positive, but it is $initialSize.'),
-        assert(minSize == null || 0 < minSize, 'The min size should be positive, but it is $minSize.'),
-        assert(sliderSize == null || 0 < sliderSize, 'The slider size should be positive, but it is $sliderSize.'),
+  })  : assert(
+          0 < initialSize,
+          'The initial size should be positive, but it is $initialSize.',
+        ),
+        assert(
+          minSize == null || 0 < minSize,
+          'The min size should be positive, but it is $minSize.',
+        ),
+        assert(
+          sliderSize == null || 0 < sliderSize,
+          'The slider size should be positive, but it is $sliderSize.',
+        ),
         minSize = max(minSize ?? 0, 2 * (sliderSize ?? _platform(sliderSize))),
         sliderSize = sliderSize ?? _platform(sliderSize) {
     assert(
@@ -89,24 +98,42 @@ class FResizable extends StatelessWidget {
           },
           child: switch (controller.axis) {
             Axis.horizontal => SizedBox(
-                width: data.size,
+                width: data.size.current,
                 child: Stack(
                   children: [
                     builder(context, data, child),
-                    if (data.index > 0) HorizontalSlider.left(controller: controller, index: data.index, size: sliderSize),
-                    if (data.index < controller.resizables.length - 1)
-                      HorizontalSlider.right(controller: controller, index: data.index, size: sliderSize),
+                    if (data.index > 0)
+                      HorizontalSlider.left(
+                        controller: controller,
+                        index: data.index,
+                        size: sliderSize,
+                      ),
+                    if (data.index < controller.regions.length - 1)
+                      HorizontalSlider.right(
+                        controller: controller,
+                        index: data.index,
+                        size: sliderSize,
+                      ),
                   ],
                 ),
               ),
             Axis.vertical => SizedBox(
-                height: data.size,
+                height: data.size.current,
                 child: Stack(
                   children: [
                     builder(context, data, child),
-                    if (data.index > 0) VerticalSlider.up(controller: controller, index: data.index, size: sliderSize),
-                    if (data.index < controller.resizables.length - 1)
-                      VerticalSlider.down(controller: controller, index: data.index, size: sliderSize),
+                    if (data.index > 0)
+                      VerticalSlider.up(
+                        controller: controller,
+                        index: data.index,
+                        size: sliderSize,
+                      ),
+                    if (data.index < controller.regions.length - 1)
+                      VerticalSlider.down(
+                        controller: controller,
+                        index: data.index,
+                        size: sliderSize,
+                      ),
                   ],
                 ),
               ),
