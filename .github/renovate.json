@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "dependencyDashboard": false,
+  "dependencyDashboard": true,
   "addLabels": ["dependencies"],
 
   "packageRules": [
