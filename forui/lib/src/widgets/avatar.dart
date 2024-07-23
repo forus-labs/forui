@@ -133,13 +133,13 @@ final class FAvatarStyle with Diagnosticable {
   /// ```dart
   /// final style = FAvatarStyle(
   ///   backgroundColor: ...,
-  ///   constraints: ...,
+  ///   fadeInDuration: ...,
   /// );
   ///
-  /// final copy = style.copyWith(constraints: ...);
+  /// final copy = style.copyWith(fadeInDuration: ...);
   ///
   /// print(style.backgroundColor == copy.backgroundColor); // true
-  /// print(style.constraints == copy.constraints); // false
+  /// print(style.fadeInDuration == copy.fadeInDuration); // false
   /// ```
   @useResult
   FAvatarStyle copyWith({

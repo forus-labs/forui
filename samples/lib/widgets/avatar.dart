@@ -16,7 +16,8 @@ class AvatarPage extends SampleScaffold {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAvatar(
-            image: const NetworkImage('https://picsum.photos/250?image=9'),
+            size: 70,
+            image: const AssetImage('avatar.png'),
             placeholderBuilder: (_) => const Text('MN'),
           ),
         ],
