@@ -250,6 +250,7 @@ final class FCalendarEntryStyle with Diagnosticable {
   /// print(style.backgroundColor == copy.backgroundColor); // true
   /// print(style.textStyle == copy.textStyle); // false
   /// ```
+  @useResult
   FCalendarEntryStyle copyWith({
     Color? backgroundColor,
     TextStyle? textStyle,

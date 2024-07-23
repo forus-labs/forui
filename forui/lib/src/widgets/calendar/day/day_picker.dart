@@ -186,8 +186,8 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   ///
   /// Specifying [startDayOfWeek] will override the current locale's preferred starting day of the week.
   ///
-  /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// ## Contract
+  /// Throws [AssertionError] if:
   /// * [startDayOfWeek] < [DateTime.monday]
   /// * [DateTime.sunday] < [startDayOfWeek]
   final int? startDayOfWeek;
@@ -272,6 +272,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// print(style.headerTextStyle == copy.headerTextStyle); // true
   /// print(style.enabled.current == copy.enabled.current); // false
   /// ```
+  @useResult
   FCalendarDayPickerStyle copyWith({
     TextStyle? headerTextStyle,
     FCalendarDayStyle? enabledCurrent,
@@ -350,6 +351,7 @@ final class FCalendarDayStyle with Diagnosticable {
   /// print(style.selectedStyle == copy.selectedStyle); // true
   /// print(style.unselectedStyle == copy.unselectedStyle); // false
   /// ```
+  @useResult
   FCalendarDayStyle copyWith({
     FCalendarEntryStyle? selectedStyle,
     FCalendarEntryStyle? unselectedStyle,

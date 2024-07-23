@@ -80,6 +80,7 @@ final class FSeparatorStyles with Diagnosticable {
   /// print(style.horizontal == copy.horizontal); // true
   /// print(style.vertical == copy.vertical); // false
   /// ```
+  @useResult
   FSeparatorStyles copyWith({FSeparatorStyle? horizontal, FSeparatorStyle? vertical}) => FSeparatorStyles(
         horizontal: horizontal ?? this.horizontal,
         vertical: vertical ?? this.vertical,
@@ -121,7 +122,7 @@ final class FSeparatorStyle with Diagnosticable {
 
   /// The width of the separating line. Defaults to 1.
   ///
-  /// ## Contract:
+  /// ## Contract
   /// Throws [AssertionError] if:
   /// * `width` <= 0.0
   /// * `width` is Nan

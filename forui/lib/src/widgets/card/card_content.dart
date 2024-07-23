@@ -93,6 +93,7 @@ final class FCardContentStyle with Diagnosticable {
   /// print(style.titleTextStyle == copy.titleTextStyle); // true
   /// print(style.subtitleTextStyle == copy.subtitleTextStyle); // false
   /// ```
+  @useResult
   FCardContentStyle copyWith({
     TextStyle? titleTextStyle,
     TextStyle? subtitleTextStyle,

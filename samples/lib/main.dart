@@ -108,6 +108,14 @@ class _AppRouter extends $_AppRouter {
           page: ProgressRoute.page,
         ),
         AutoRoute(
+          path: '/resizable/default',
+          page: ResizableRoute.page,
+        ),
+        AutoRoute(
+          path: '/resizable/horizontal',
+          page: HorizontalResizableRoute.page,
+        ),
+        AutoRoute(
           path: '/tabs/default',
           page: TabsRoute.page,
         ),

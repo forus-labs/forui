@@ -229,6 +229,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
   /// print(style.headerTextStyle == copy.headerTextStyle); // true
   /// print(style.iconColor == copy.iconColor); // false
   /// ```
+  @useResult
   FCalendarHeaderStyle copyWith({
     TextStyle? headerTextStyle,
     Color? iconColor,

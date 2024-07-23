@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 
 /// A checkbox control that allows the user to toggle between checked and not checked.
@@ -234,6 +236,7 @@ final class FCheckboxStyle with Diagnosticable {
   /// print(style.animationDuration); // const Duration(minutes: 1)
   /// print(copy.curve); // Curves.bounceIn
   /// ```
+  @useResult
   FCheckboxStyle copyWith({
     Duration? animationDuration,
     Curve? curve,
@@ -309,6 +312,7 @@ final class FCheckboxStateStyle with Diagnosticable {
   /// print(style.iconColor == copy.iconColor); // true
   /// print(style.checkedBackgroundColor == copy.checkedBackgroundColor); // false
   /// ```
+  @useResult
   FCheckboxStateStyle copyWith({
     Color? borderColor,
     Color? iconColor,
