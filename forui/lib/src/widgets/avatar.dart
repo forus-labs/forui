@@ -21,7 +21,7 @@ class FAvatar extends StatelessWidget {
   /// If the user's initials are used, use [placeholderBuilder] instead.
   final ImageProvider image;
 
-  /// The size of the circle.
+  /// The circle's size.
   final double size;
 
   /// The fallback widget displayed if [image] fails to load.
@@ -103,7 +103,7 @@ class FAvatar extends StatelessWidget {
 
 /// [FAvatar]'s style.
 final class FAvatarStyle with Diagnosticable {
-  /// The background color.
+  /// The placeholder's background color.
   final Color backgroundColor;
 
   /// Duration for the transition animation.
