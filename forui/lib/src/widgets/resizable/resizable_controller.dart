@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
-import 'package:meta/meta.dart';
 
 /// Possible ways for a user to interact with a [FResizable].
 sealed class FResizableInteraction {

@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
+
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
 export '/src/widgets/resizable/resizable_region.dart';
 export '/src/widgets/resizable/resizable_controller.dart' hide ResizableController, Resize, SelectAndResize;

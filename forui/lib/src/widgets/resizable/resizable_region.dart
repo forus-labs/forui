@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/src/widgets/resizable/resizable.dart';
 import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 import 'package:forui/src/widgets/resizable/slider.dart';
-import 'package:sugar/sugar.dart';
 
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
 ///

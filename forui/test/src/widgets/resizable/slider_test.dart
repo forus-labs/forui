@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
-import 'package:forui/src/widgets/resizable/slider.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/resizable/resizable_controller.dart';
+import 'package:forui/src/widgets/resizable/slider.dart';
 import 'slider_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<ResizableController>()])
