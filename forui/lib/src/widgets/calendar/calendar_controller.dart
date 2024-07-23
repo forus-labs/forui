@@ -29,8 +29,8 @@ abstract class FCalendarController<T> extends ValueNotifier<T> {
 final class FCalendarSingleValueController extends FCalendarController<DateTime?> {
   /// Creates a [FCalendarSingleValueController] with the given initial [value].
   ///
-  /// ## Contract:
-  /// Throws an [AssertionError] if the given [value] is not in UTC timezone.
+  /// ## Contract
+  /// Throws [AssertionError] if the given [value] is not in UTC timezone.
   FCalendarSingleValueController([super.value]) : assert(value?.isUtc ?? true, 'value must be in UTC timezone');
 
   @override
@@ -46,8 +46,8 @@ final class FCalendarSingleValueController extends FCalendarController<DateTime?
 final class FCalendarMultiValueController extends FCalendarController<Set<DateTime>> {
   /// Creates a [FCalendarMultiValueController] with the given initial [value].
   ///
-  /// ## Contract:
-  /// Throws an [AssertionError] if the given dates in [value] is not in UTC timezone.
+  /// ## Contract
+  /// Throws [AssertionError] if the given dates in [value] is not in UTC timezone.
   FCalendarMultiValueController([super.value = const {}])
       : assert(value.every((d) => d.isUtc), 'dates must be in UTC timezone');
 
@@ -68,8 +68,8 @@ final class FCalendarMultiValueController extends FCalendarController<Set<DateTi
 final class FCalendarSingleRangeController extends FCalendarController<(DateTime, DateTime)?> {
   /// Creates a [FCalendarSingleRangeController] with the given initial [value].
   ///
-  /// ## Contract:
-  /// Throws an [AssertionError] if:
+  /// ## Contract
+  /// Throws [AssertionError] if:
   /// * the given dates in [value] is not in UTC timezone.
   /// * the end date is less than start date.
   FCalendarSingleRangeController([super.value])

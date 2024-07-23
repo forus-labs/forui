@@ -30,3 +30,4 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 build/
 test/golden/failures/
+test/**/*_test.mocks.dart

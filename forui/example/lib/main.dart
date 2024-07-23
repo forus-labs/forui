@@ -21,7 +21,7 @@ class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) => MaterialApp(
         builder: (context, child) => FTheme(
-          data: FThemes.zinc.light,
+          data: FThemes.zinc.dark,
           child: FScaffold(
             header: FHeader(
               title: const Text('Example'),
@@ -32,7 +32,7 @@ class _ApplicationState extends State<Application> {
                 ),
               ],
             ),
-            content: child ?? const SizedBox(),
+            content: const Example(),
             footer: FBottomNavigationBar(
               index: index,
               onChange: (index) => setState(() => this.index = index),

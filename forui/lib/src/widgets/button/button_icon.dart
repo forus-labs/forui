@@ -38,7 +38,7 @@ final class FButtonIconStyle with Diagnosticable {
 
   /// Creates a [FButtonIconStyle].
   ///
-  /// ## Contract:
+  /// ## Contract
   /// Throws [AssertionError] if:
   /// * `height` <= 0.0
   /// * `height` is Nan

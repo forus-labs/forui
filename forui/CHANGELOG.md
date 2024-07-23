@@ -1,3 +1,9 @@
+## Next
+
+### Additions
+* Add `FResizable`
+
+
 ## 0.3.0
 
 ### Additions

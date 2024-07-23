@@ -116,6 +116,7 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
   /// print(style.enabledStyle == copy.enabledStyle); // true
   /// print(style.disabledStyle == copy.disabledStyle); // false
   /// ```
+  @useResult
   FCalendarYearMonthPickerStyle copyWith({
     FCalendarEntryStyle? enabledStyle,
     FCalendarEntryStyle? disabledStyle,

@@ -131,6 +131,7 @@ final class FNestedHeaderStyle with Diagnosticable {
   /// print(style.titleTextStyle == copy.titleTextStyle); // true
   /// print(style.leftAction == copy.leftAction); // false
   /// ```
+  @useResult
   FNestedHeaderStyle copyWith({
     TextStyle? titleTextStyle,
     FHeaderActionStyle? actionStyle,
