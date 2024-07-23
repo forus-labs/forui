@@ -17,14 +17,12 @@
       "automerge": true
     },
 
-
     {
       "groupName": "Forui - Major Revisions",
       "matchPaths": ["forui/**"],
       "matchUpdateTypes": ["major"],
       "automerge": false
     },
-
     {
       "groupName": "Forui - Minor Revisions",
       "matchPaths": ["forui/**"],
@@ -32,6 +30,18 @@
       "automerge": true
     },
 
+    {
+      "groupName": "Forui Gradle - Major Revisions",
+      "matchPaths": ["forui/example/android/**"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "groupName": "Forui Gradle - Minor Revisions",
+      "matchPaths": ["forui/example/android/**"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": false
+    },
 
     {
       "groupName": "Forui Assets - Major Revisions",
@@ -39,7 +49,6 @@
       "matchUpdateTypes": ["major"],
       "automerge": false
     },
-
     {
       "groupName": "Forui Assets- Minor Revisions",
       "matchPaths": ["forui_assets/**"],
