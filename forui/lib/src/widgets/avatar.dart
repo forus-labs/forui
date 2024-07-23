@@ -7,31 +7,36 @@ import 'package:forui/forui.dart';
 
 /// An image element with a fallback for representing the user.
 ///
-/// Typically used with a user's profile image, or, in the absence of
-/// such an image, the user's initials.
+/// Typically used with a user's profile image. If the image fails to load,
+/// [placeholderBuilder] is used instead, which usually displays the user's initials.
 ///
-/// If [image] fails then [placeholderBuilder] is used.
+/// If the user's profile has no image, use [placeholderBuilder] to provide
+/// the initials using a [Text] widget styled with [FAvatarStyle.backgroundColor].
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;
 
-  /// The background image of the circle.
+  /// The profile image displayed within the circle.
   ///
-  /// If the [FAvatar] is to have the user's initials, use [placeholderBuilder] instead.
+  /// If the user's initials are used, use [placeholderBuilder] instead.
   final ImageProvider image;
 
-  /// The fallback widget if [image] cannot be displayed.
+  /// The size of the circle.
+  final double size;
+
+  /// The fallback widget displayed if [image] fails to load.
   ///
-  /// If the avatar is to just have the user's initials, they are typically
-  /// provided using a [Text] widget in the [placeholderBuilder] with a [FAvatarStyle.backgroundColor]
+  /// Typically used to display the user's initials using a [Text] widget
+  /// styled with [FAvatarStyle.backgroundColor].
   ///
-  /// If the [FAvatar] is to have an image, use [image] instead.
+  /// Use [image] to display an image; use [placeholderBuilder] for initials.
   final Widget Function(BuildContext)? placeholderBuilder;
 
   /// Creates an [FAvatar].
   const FAvatar({
     required this.image,
     this.style,
+    this.size = 40.0,
     this.placeholderBuilder,
     super.key,
   });
@@ -41,7 +46,8 @@ class FAvatar extends StatelessWidget {
     final style = this.style ?? context.theme.avatarStyle;
 
     return Container(
-      constraints: style.constraints,
+      height: size,
+      width: size,
       decoration: BoxDecoration(
         color: style.backgroundColor,
         shape: BoxShape.circle,
@@ -53,19 +59,21 @@ class FAvatar extends StatelessWidget {
           image: image,
           errorBuilder: (context, exception, stacktrace) => DefaultTextStyle(
             style: style.text,
-            child: placeholderBuilder != null ? placeholderBuilder!(context) : const _Placeholder(),
+            child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
           ),
           frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
             if (wasSynchronouslyLoaded) {
               return child;
             }
-            if (frame == null) {
-              return DefaultTextStyle(
-                style: style.text,
-                child: placeholderBuilder != null ? placeholderBuilder!(context) : const _Placeholder(),
-              );
-            }
-            return child;
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: frame == null
+                  ? DefaultTextStyle(
+                      style: style.text,
+                      child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
+                    )
+                  : child,
+            );
           },
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) {
@@ -73,7 +81,7 @@ class FAvatar extends StatelessWidget {
             }
             return DefaultTextStyle(
               style: style.text,
-              child: placeholderBuilder != null ? placeholderBuilder!(context) : const _Placeholder(),
+              child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
             );
           },
           fit: BoxFit.cover,
@@ -86,8 +94,9 @@ class FAvatar extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('image', image))
+      ..add(DoubleProperty('size', size))
+      ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty<Widget Function(BuildContext p1)?>.has('placeholderBuilder', placeholderBuilder));
   }
 }
@@ -97,8 +106,8 @@ final class FAvatarStyle with Diagnosticable {
   /// The background color.
   final Color backgroundColor;
 
-  /// The box constraints.
-  final BoxConstraints constraints;
+  /// Duration for the transition animation.
+  final Duration fadeInDuration;
 
   /// The text style for the placeholder text.
   final TextStyle text;
@@ -106,14 +115,14 @@ final class FAvatarStyle with Diagnosticable {
   /// Creates a [FAvatarStyle].
   FAvatarStyle({
     required this.backgroundColor,
-    required this.constraints,
+    required this.fadeInDuration,
     required this.text,
   });
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
   FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : backgroundColor = colorScheme.muted,
-        constraints = const BoxConstraints(minHeight: 40.0, minWidth: 40.0, maxHeight: 40.0, maxWidth: 40.0),
+        fadeInDuration = const Duration(milliseconds: 500),
         text = typography.base.copyWith(
           color: colorScheme.mutedForeground,
           height: 0,
@@ -135,12 +144,12 @@ final class FAvatarStyle with Diagnosticable {
   @useResult
   FAvatarStyle copyWith({
     Color? backgroundColor,
-    BoxConstraints? constraints,
+    Duration? fadeInDuration,
     TextStyle? text,
   }) =>
       FAvatarStyle(
         backgroundColor: backgroundColor ?? this.backgroundColor,
-        constraints: constraints ?? this.constraints,
+        fadeInDuration: fadeInDuration ?? this.fadeInDuration,
         text: text ?? this.text,
       );
 
@@ -149,7 +158,7 @@ final class FAvatarStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('backgroundColor', backgroundColor))
-      ..add(DiagnosticsProperty('constraints', constraints))
+      ..add(DiagnosticsProperty('fadeInDuration', fadeInDuration))
       ..add(DiagnosticsProperty('text', text));
   }
 
@@ -159,23 +168,31 @@ final class FAvatarStyle with Diagnosticable {
       other is FAvatarStyle &&
           runtimeType == other.runtimeType &&
           backgroundColor == other.backgroundColor &&
-          constraints == other.constraints &&
+          fadeInDuration == other.fadeInDuration &&
           text == other.text;
 
   @override
-  int get hashCode => backgroundColor.hashCode ^ constraints.hashCode ^ text.hashCode;
+  int get hashCode => backgroundColor.hashCode ^ fadeInDuration.hashCode ^ text.hashCode;
 }
 
 class _Placeholder extends StatelessWidget {
-  const _Placeholder();
+  final double size;
+
+  const _Placeholder({required this.size});
 
   @override
   Widget build(BuildContext context) {
     final style = context.theme;
 
     return FAssets.icons.userRound(
-      height: style.avatarStyle.constraints.maxHeight / 2,
+      height: size / 2,
       colorFilter: ColorFilter.mode(style.colorScheme.mutedForeground, BlendMode.srcIn),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('size', size));
   }
 }
