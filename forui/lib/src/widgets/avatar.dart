@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// An image element with a fallback for representing the user.
 ///
@@ -24,7 +23,7 @@ class FAvatar extends StatelessWidget {
   /// The fallback widget if [image] cannot be displayed.
   ///
   /// If the avatar is to just have the user's initials, they are typically
-  /// provided using a [Text] widget as the [placeholder] with a [FAvatarStyle.backgroundColor]:
+  /// provided using a [Text] widget as the [placeholder] with a [FAvatarStyle.backgroundColor]
   ///
   /// If the [FAvatar] is to have an image, use [image] instead.
   final Widget? placeholder;
