@@ -18,6 +18,19 @@
     },
 
     {
+      "groupName": "Docs - Major Revisions",
+      "matchPaths": ["docs/**"],
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    },
+    {
+      "groupName": "Docs - Minor Revisions",
+      "matchPaths": ["docs/**"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+
+    {
       "groupName": "Forui - Major Revisions",
       "matchPaths": ["forui/**"],
       "matchUpdateTypes": ["major"],
