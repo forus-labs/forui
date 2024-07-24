@@ -7,11 +7,11 @@ import 'package:forui/forui.dart';
 
 /// An image element with a fallback for representing the user.
 ///
-/// use [image] to provide a profile image displayed within the circle.
+/// use image property to provide a profile image displayed within the circle.
 /// Typically used with a user's profile image. If the image fails to load,
-/// [placeholderBuilder] is used instead, which usually displays the user's initials.
+/// the placeholderBuilder property is used instead, which usually displays the user's initials.
 ///
-/// If the user's profile has no image, use [placeholderBuilder] to provide
+/// If the user's profile has no image, use the placeholderBuilder property to provide
 /// the initials using a [Text] widget styled with [FAvatarStyle.backgroundColor].
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
