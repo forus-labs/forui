@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/src/foundation/tappable.dart';
-import 'package:forui/src/widgets/calendar/day/day_picker.dart';
-import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
 final _yMMMMd = DateFormat.yMMMMd();
 
@@ -34,7 +33,6 @@ abstract class Entry extends StatelessWidget {
     final dayStyle = current ? styles.current : styles.enclosing;
     final entryStyle = select ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
-    // ignore: avoid_positional_boolean_parameters
     Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
@@ -42,7 +40,7 @@ abstract class Entry extends StatelessWidget {
             right: selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
           text: '${date.day}', // TODO: localization
-          hovered: state.hovered,
+          state: state,
           current: today,
         );
 
@@ -78,7 +76,7 @@ abstract class Entry extends StatelessWidget {
           style: entryStyle,
           borderRadius: BorderRadius.all(entryStyle.radius),
           text: format(date),
-          hovered: state.hovered,
+          state: state,
           current: current,
         );
 
@@ -168,28 +166,29 @@ class _Content extends StatelessWidget {
   final FCalendarEntryStyle style;
   final BorderRadius borderRadius;
   final String text;
-  final bool hovered;
+  final FTappableState state;
   final bool current;
 
   const _Content({
     required this.style,
     required this.borderRadius,
     required this.text,
-    required this.hovered,
+    required this.state,
     required this.current,
   });
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = hovered ? style.hoveredTextStyle : style.textStyle;
+    var textStyle = state.hovered ? style.hoveredTextStyle : style.textStyle;
     if (current) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }
 
     return DecoratedBox(
       decoration: BoxDecoration(
+        border: state.focused ? Border.all(color: context.theme.colorScheme.foreground) : null,
         borderRadius: borderRadius,
-        color: hovered ? style.hoveredBackgroundColor : style.backgroundColor,
+        color: state.hovered ? style.hoveredBackgroundColor : style.backgroundColor,
       ),
       child: Center(
         child: Text(text, style: textStyle),
@@ -204,7 +203,7 @@ class _Content extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
       ..add(StringProperty('text', text))
-      ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered'))
+      ..add(DiagnosticsProperty('state', state.toString()))
       ..add(FlagProperty('current', value: current, ifTrue: 'current'));
   }
 }
@@ -223,6 +222,9 @@ final class FCalendarEntryStyle with Diagnosticable {
   /// The hovered day's text style. Defaults to [textStyle].
   final TextStyle hoveredTextStyle;
 
+  /// The border color when an entry is focused.
+  final Color focusedBorderColor;
+
   /// The entry border's radius. Defaults to `Radius.circular(4)`.
   final Radius radius;
 
@@ -230,6 +232,7 @@ final class FCalendarEntryStyle with Diagnosticable {
   FCalendarEntryStyle({
     required this.backgroundColor,
     required this.textStyle,
+    required this.focusedBorderColor,
     required this.radius,
     Color? hoveredBackgroundColor,
     TextStyle? hoveredTextStyle,
@@ -257,6 +260,7 @@ final class FCalendarEntryStyle with Diagnosticable {
     TextStyle? textStyle,
     Color? hoveredBackgroundColor,
     TextStyle? hoveredTextStyle,
+    Color? focusedBorderColor,
     Radius? radius,
   }) =>
       FCalendarEntryStyle(
@@ -264,6 +268,7 @@ final class FCalendarEntryStyle with Diagnosticable {
         textStyle: textStyle ?? this.textStyle,
         hoveredBackgroundColor: hoveredBackgroundColor ?? this.hoveredBackgroundColor,
         hoveredTextStyle: hoveredTextStyle ?? this.hoveredTextStyle,
+        focusedBorderColor: focusedBorderColor ?? this.focusedBorderColor,
         radius: radius ?? this.radius,
       );
 
@@ -275,6 +280,7 @@ final class FCalendarEntryStyle with Diagnosticable {
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ColorProperty('hoveredBackgroundColor', hoveredBackgroundColor))
       ..add(DiagnosticsProperty('hoveredTextStyle', hoveredTextStyle))
+      ..add(ColorProperty('focusedBorderColor', focusedBorderColor))
       ..add(DiagnosticsProperty('radius', radius));
   }
 
@@ -287,6 +293,7 @@ final class FCalendarEntryStyle with Diagnosticable {
           textStyle == other.textStyle &&
           hoveredBackgroundColor == other.hoveredBackgroundColor &&
           hoveredTextStyle == other.hoveredTextStyle &&
+          focusedBorderColor == other.focusedBorderColor &&
           radius == other.radius;
 
   @override
@@ -295,5 +302,6 @@ final class FCalendarEntryStyle with Diagnosticable {
       textStyle.hashCode ^
       hoveredBackgroundColor.hashCode ^
       hoveredTextStyle.hashCode ^
+      focusedBorderColor.hashCode ^
       radius.hashCode;
 }

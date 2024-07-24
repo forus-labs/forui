@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -10,7 +12,6 @@ typedef FTappableState = ({bool focused, bool hovered});
 
 @internal
 class FTappable extends StatefulWidget {
-  final bool enabled;
   final String? semanticLabel;
   final bool selected;
   final bool excludeSemantics;
@@ -49,8 +50,9 @@ class FTappable extends StatefulWidget {
     this.child,
     super.key,
   })  : assert(builder != null || child != null, 'Either builder or child must be provided.'),
-        builder = builder ?? ((_, __, child) => child!),
-        enabled = onPress != null || onLongPress != null;
+        builder = builder ?? ((_, __, child) => child!);
+
+  bool get enabled => onPress != null || onLongPress != null;
 
   @override
   State<FTappable> createState() => _FTappableState();
@@ -85,28 +87,46 @@ class _FTappableState extends State<FTappable> with SingleTickerProviderStateMix
   bool _hovered = false;
 
   @override
-  Widget build(BuildContext context) => Semantics(
-        enabled: widget.enabled,
-        label: widget.semanticLabel,
-        container: true,
-        button: true,
-        selected: widget.selected,
-        excludeSemantics: widget.excludeSemantics,
-        child: Focus(
-          autofocus: widget.autofocus,
-          focusNode: widget.focusNode,
-          onFocusChange: (focused) {
-            setState(() => _focused = focused);
-            widget.onFocusChange?.call(focused);
-          },
-          child: MouseRegion(
-            cursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
-            onEnter: (_) => setState(() => _hovered = true),
-            onExit: (_) => setState(() => _hovered = false),
-            child: _child,
-          ),
+  Widget build(BuildContext context) {
+    final tappable = Semantics(
+      enabled: widget.enabled,
+      label: widget.semanticLabel,
+      container: true,
+      button: true,
+      selected: widget.selected,
+      excludeSemantics: widget.excludeSemantics,
+      child: Focus(
+        autofocus: widget.autofocus,
+        focusNode: widget.focusNode,
+        onFocusChange: (focused) {
+          setState(() => _focused = focused);
+          widget.onFocusChange?.call(focused);
+        },
+        child: MouseRegion(
+          cursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
+          onEnter: (_) => setState(() => _hovered = true),
+          onExit: (_) => setState(() => _hovered = false),
+          child: _child,
         ),
-      );
+      ),
+    );
+
+    if (widget.onPress == null) {
+      return tappable;
+    }
+
+    return Shortcuts(
+      shortcuts: const {
+        SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+      },
+      child: Actions(
+        actions: {
+          ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!()),
+        },
+        child: tappable,
+      ),
+    );
+  }
 
   Widget get _child => GestureDetector(
         onTap: widget.onPress,

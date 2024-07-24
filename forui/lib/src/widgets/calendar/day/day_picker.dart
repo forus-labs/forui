@@ -213,11 +213,13 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       selectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
+        focusedBorderColor: colorScheme.primaryForeground,
         radius: const Radius.circular(4),
       ),
       unselectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.background,
         textStyle: mutedTextStyle,
+        focusedBorderColor: colorScheme.background,
         radius: const Radius.circular(4),
       ),
     );
@@ -229,12 +231,14 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.foreground,
             textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: textStyle,
             hoveredBackgroundColor: colorScheme.secondary,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
         ),
@@ -242,12 +246,14 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
             hoveredBackgroundColor: colorScheme.primaryForeground,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
         ),

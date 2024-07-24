@@ -17,15 +17,15 @@ void main() {
           data: FThemes.zinc.light,
           child: FTappable(
             focusNode: focusNode,
-            builder: (_, value, __) => Text('${value.focused}'),
+            builder: (_, value, __) => Text('$value'),
           ),
         ),
       );
-      expect(find.text('false'), findsOneWidget);
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
       focusNode.requestFocus();
       await tester.pumpAndSettle();
-      expect(find.text('true'), findsOneWidget);
+      expect(find.text((focused: true, hovered: false).toString()), findsOneWidget);
     });
 
     testWidgets('hovered', (tester) async {
@@ -33,11 +33,11 @@ void main() {
         TestScaffold(
           data: FThemes.zinc.light,
           child: FTappable(
-            builder: (_, value, __) => Text('${value.hovered}'),
+            builder: (_, value, __) => Text('$value'),
           ),
         ),
       );
-      expect(find.text('false'), findsOneWidget);
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
       final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
       await gesture.addPointer(location: Offset.zero);
@@ -47,12 +47,12 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
       await tester.pumpAndSettle();
 
-      expect(find.text('true'), findsOneWidget);
+      expect(find.text((focused: false, hovered: true).toString()), findsOneWidget);
 
       await gesture.moveTo(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(find.text('false'), findsOneWidget);
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
     });
   });
 }

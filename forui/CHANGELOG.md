@@ -2,9 +2,16 @@
 
 ### Additions
 * Add `FAvatar`
+* **Breaking** Add `FCalendarEntryStyle.focusedBorderColor`
 * Add `FResizable`
 
+### Changes
+* **Breaking** Rename `FCalendarEntryStyle.focusedBackgroundColor` to `FCalendarEntryStyle.hoveredBackgroundColor`.
+* **Breaking** Rename `FCalendarEntryStyle.focusedTextStyle` to `FCalendarEntryStyle.hoveredTextStyle`.
 
+### Fixes
+* Fix `FCalendar` dates not being toggleable using `Enter` key.
+* Fix `FCalendar` dates sometimes not being navigable using arrow keys.
 
 ## 0.3.0
 
