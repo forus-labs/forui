@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "dependencyDashboard": true,
   "addLabels": ["dependencies"],
-  "schedule": ["every Wednesday"],
+  "schedule": ["on wednesday"],
 
   "packageRules": [
     {
