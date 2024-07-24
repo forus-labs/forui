@@ -2,19 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "dependencyDashboard": true,
   "addLabels": ["dependencies"],
+  "schedule": ["every Wednesday"],
 
   "packageRules": [
     {
       "groupName": "GitHub Actions - Major Revisions",
       "matchPaths": [".github/**"],
       "matchUpdateTypes": ["major"],
-      "automerge": true
+      "automerge": false
     },
     {
       "groupName": "GitHub Actions - Minor Revisions",
       "matchPaths": [".github/**"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": false
     },
 
     {
@@ -27,7 +28,7 @@
       "groupName": "Docs - Minor Revisions",
       "matchPaths": ["docs/**"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": false
     },
 
     {
@@ -40,7 +41,7 @@
       "groupName": "Forui - Minor Revisions",
       "matchPaths": ["forui/**"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": false
     },
 
     {
@@ -53,7 +54,7 @@
       "groupName": "Forui Gradle - Minor Revisions",
       "matchPaths": ["forui/example/android/**"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": false
     },
 
     {
@@ -66,7 +67,7 @@
       "groupName": "Forui Assets- Minor Revisions",
       "matchPaths": ["forui_assets/**"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": false
     }
   ]
 }
