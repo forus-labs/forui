@@ -28,6 +28,9 @@ final class FThemeData with Diagnosticable {
   /// The alert styles.
   final FAlertStyles alertStyles;
 
+  /// The avatar style.
+  final FAvatarStyle avatarStyle;
+
   /// The badge styles.
   final FBadgeStyles badgeStyles;
 
@@ -78,12 +81,13 @@ final class FThemeData with Diagnosticable {
   /// widget styles.
   FThemeData({
     required this.colorScheme,
+    required this.alertStyles,
+    required this.avatarStyle,
     required this.badgeStyles,
     required this.bottomNavigationBarStyle,
     required this.buttonStyles,
     required this.calendarStyle,
     required this.cardStyle,
-    required this.alertStyles,
     required this.checkboxStyle,
     required this.dialogStyle,
     required this.headerStyle,
@@ -110,6 +114,7 @@ final class FThemeData with Diagnosticable {
       typography: typography,
       style: style,
       alertStyles: FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      avatarStyle: FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -149,6 +154,7 @@ final class FThemeData with Diagnosticable {
     FTypography? typography,
     FStyle? style,
     FAlertStyles? alertStyles,
+    FAvatarStyle? avatarStyle,
     FBadgeStyles? badgeStyles,
     FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FButtonStyles? buttonStyles,
@@ -169,6 +175,7 @@ final class FThemeData with Diagnosticable {
         typography: typography ?? this.typography,
         style: style ?? this.style,
         alertStyles: alertStyles ?? this.alertStyles,
+        avatarStyle: avatarStyle ?? this.avatarStyle,
         badgeStyles: badgeStyles ?? this.badgeStyles,
         bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
         buttonStyles: buttonStyles ?? this.buttonStyles,
@@ -193,6 +200,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('avatarStyle', avatarStyle))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
@@ -218,6 +226,7 @@ final class FThemeData with Diagnosticable {
           typography == other.typography &&
           style == other.style &&
           alertStyles == other.alertStyles &&
+          avatarStyle == other.avatarStyle &&
           badgeStyles == other.badgeStyles &&
           bottomNavigationBarStyle == other.bottomNavigationBarStyle &&
           buttonStyles == other.buttonStyles &&
@@ -239,6 +248,7 @@ final class FThemeData with Diagnosticable {
       typography.hashCode ^
       style.hashCode ^
       alertStyles.hashCode ^
+      avatarStyle.hashCode ^
       badgeStyles.hashCode ^
       bottomNavigationBarStyle.hashCode ^
       buttonStyles.hashCode ^

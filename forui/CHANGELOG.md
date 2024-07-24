@@ -1,6 +1,7 @@
 ## Next
 
 ### Additions
+* Add `FAvatar`
 * Add `FResizable`
 
 

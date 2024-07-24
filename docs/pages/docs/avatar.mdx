@@ -1,0 +1,32 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+
+# Avatar
+An image element with a fallback for representing the user.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+      <Widget name='avatar' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+      ```dart
+      FAvatar(
+        image: const NetworkImage('https://picsum.photos/250?image=9'),
+        placeholderBuilder: (_) => const Text('MN'),
+      ),
+      ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FAvatar(...)`
+
+```dart
+FAvatar(
+  image: const NetworkImage('https://picsum.photos/250?image=9'),
+  size: 60,
+  placeholderBuilder: (_) => const Text('MN'),
+),
+```
+
