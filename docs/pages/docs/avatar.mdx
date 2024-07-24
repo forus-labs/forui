@@ -11,7 +11,7 @@ An image element with a fallback for representing the user.
   <Tabs.Tab>
       ```dart
       FAvatar(
-        image: const NetworkImage('https://picsum.photos/250?image=9'),
+        image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
         placeholderBuilder: (_) => const Text('MN'),
       ),
       ```
@@ -24,9 +24,50 @@ An image element with a fallback for representing the user.
 
 ```dart
 FAvatar(
-  image: const NetworkImage('https://picsum.photos/250?image=9'),
-  size: 60,
+  image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
   placeholderBuilder: (_) => const Text('MN'),
 ),
 ```
+
+### `FAvatar.raw(...)`
+
+```dart
+FButton.raw(
+  child: const Text('MN'),
+  size: 60,
+);
+```
+
+
+## Examples
+
+### Invalid image with Placeholder
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='avatar' query={{image: 'error'}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FAvatar(
+          image: const NetworkImage(''),
+          placeholderBuilder: (_) => const Text('MN'),
+        ),
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Invalid image without Placeholder
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='avatar' query={{image: 'error', child: 'empty'}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FAvatar(
+          image: const NetworkImage(''),
+        ),
+        ```
+    </Tabs.Tab>
+</Tabs>
+
 

@@ -7,6 +7,7 @@ import 'package:forui/forui.dart';
 
 /// An image element with a fallback for representing the user.
 ///
+/// use [image] to provide a profile image displayed within the circle.
 /// Typically used with a user's profile image. If the image fails to load,
 /// [placeholderBuilder] is used instead, which usually displays the user's initials.
 ///
@@ -16,28 +17,31 @@ class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;
 
-  /// The profile image displayed within the circle.
-  ///
-  /// If the user's initials are used, use [placeholderBuilder] instead.
-  final ImageProvider image;
-
   /// The circle's size.
   final double size;
 
-  /// The fallback widget displayed if [image] fails to load.
-  ///
-  /// Typically used to display the user's initials using a [Text] widget
-  /// styled with [FAvatarStyle.backgroundColor].
-  ///
-  /// Use [image] to display an image; use [placeholderBuilder] for initials.
-  final Widget Function(BuildContext)? placeholderBuilder;
+  /// The child.
+  final Widget child;
 
   /// Creates an [FAvatar].
-  const FAvatar({
-    required this.image,
-    this.style,
+  FAvatar({
+    required ImageProvider image,
+    Widget Function(BuildContext)? placeholderBuilder,
     this.size = 40.0,
-    this.placeholderBuilder,
+    this.style,
+    super.key,
+  }) : child = _Avatar(
+          style: style,
+          size: size,
+          image: image,
+          placeholderBuilder: placeholderBuilder,
+        );
+
+  /// Creates a [FAvatar] with custom child.
+  const FAvatar.raw({
+    required this.child,
+    this.size = 40.0,
+    this.style,
     super.key,
   });
 
@@ -53,40 +57,7 @@ class FAvatar extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       clipBehavior: Clip.hardEdge,
-      child: Center(
-        child: Image(
-          filterQuality: FilterQuality.medium,
-          image: image,
-          errorBuilder: (context, exception, stacktrace) => DefaultTextStyle(
-            style: style.text,
-            child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
-          ),
-          frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-            if (wasSynchronouslyLoaded) {
-              return child;
-            }
-            return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: frame == null
-                  ? DefaultTextStyle(
-                      style: style.text,
-                      child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
-                    )
-                  : child,
-            );
-          },
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) {
-              return child;
-            }
-            return DefaultTextStyle(
-              style: style.text,
-              child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
-            );
-          },
-          fit: BoxFit.cover,
-        ),
-      ),
+      child: child,
     );
   }
 
@@ -94,10 +65,8 @@ class FAvatar extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('image', image))
       ..add(DoubleProperty('size', size))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('placeholderBuilder', placeholderBuilder));
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -113,7 +82,7 @@ final class FAvatarStyle with Diagnosticable {
   final TextStyle text;
 
   /// Creates a [FAvatarStyle].
-  FAvatarStyle({
+  const FAvatarStyle({
     required this.backgroundColor,
     required this.fadeInDuration,
     required this.text,
@@ -173,6 +142,83 @@ final class FAvatarStyle with Diagnosticable {
 
   @override
   int get hashCode => backgroundColor.hashCode ^ fadeInDuration.hashCode ^ text.hashCode;
+}
+
+class _Avatar extends StatelessWidget {
+  final FAvatarStyle? style;
+
+  /// The circle's size.
+  final double size;
+
+  /// The profile image displayed within the circle.
+  ///
+  /// If the user's initials are used, use [placeholderBuilder] instead.
+  final ImageProvider image;
+
+  /// The fallback widget displayed if [image] fails to load.
+  ///
+  /// Typically used to display the user's initials using a [Text] widget
+  /// styled with [FAvatarStyle.backgroundColor].
+  ///
+  /// Use [image] to display an image; use [placeholderBuilder] for initials.
+  final Widget Function(BuildContext)? placeholderBuilder;
+
+  const _Avatar({
+    required this.style,
+    required this.size,
+    required this.image,
+    required this.placeholderBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final style = this.style ?? context.theme.avatarStyle;
+    return Center(
+      child: Image(
+        filterQuality: FilterQuality.medium,
+        image: image,
+        errorBuilder: (context, exception, stacktrace) => DefaultTextStyle(
+          style: style.text,
+          child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
+        ),
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded) {
+            return child;
+          }
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            child: frame == null
+                ? DefaultTextStyle(
+                    style: style.text,
+                    child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
+                  )
+                : child,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) {
+            return child;
+          }
+          return DefaultTextStyle(
+            style: style.text,
+            child: placeholderBuilder != null ? placeholderBuilder!(context) : _Placeholder(size: size),
+          );
+        },
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('placeholderBuilder', placeholderBuilder))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DoubleProperty('size', size))
+      ..add(DiagnosticsProperty('style', style));
+  }
 }
 
 class _Placeholder extends StatelessWidget {
