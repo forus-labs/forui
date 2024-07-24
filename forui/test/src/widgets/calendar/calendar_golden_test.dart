@@ -163,7 +163,7 @@ void main() {
           addTearDown(gesture.removePointer);
           await tester.pump();
 
-          await gesture.moveTo(tester.getCenter(find.text('1991')));
+          await gesture.moveTo(tester.getCenter(find.text('1989')));
           await tester.pumpAndSettle();
 
           await expectLater(

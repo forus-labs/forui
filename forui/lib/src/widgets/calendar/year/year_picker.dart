@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
@@ -10,7 +11,7 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 @internal
 class YearPicker extends StatefulWidget {
   static const columns = 3;
-  static const rows = 4;
+  static const rows = 5;
   static const items = columns * rows;
 
   final FCalendarYearMonthPickerStyle style;
@@ -66,23 +67,27 @@ class _YearPickerState extends State<YearPicker> {
   }
 
   @override
-  Widget build(BuildContext context) => GridView(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: YearPicker.columns,
-          childAspectRatio: 1.618,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: YearPicker.columns,
+            mainAxisExtent: ((DayPicker.tileDimension - 5.0) * DayPicker.maxRows) / YearPicker.rows,
+            mainAxisSpacing: 5.0,
+          ),
+          children: [
+            for (var year = widget.startYear, i = 0; i < YearPicker.items; year = year.plus(years: 1), i++)
+              Entry.yearMonth(
+                style: widget.style,
+                date: year,
+                focusNode: _years[i],
+                current: widget.today.year == year.year,
+                enabled: widget.start <= year && year <= widget.end,
+                format: (date) => '${date.year}', // TODO: localization
+                onPress: widget.onPress,
+              ),
+          ],
         ),
-        children: [
-          for (var year = widget.startYear, i = 0; i < YearPicker.items; year = year.plus(years: 1), i++)
-            Entry.yearMonth(
-              style: widget.style,
-              date: year,
-              focusNode: _years[i],
-              current: widget.today.year == year.year,
-              enabled: widget.start <= year && year <= widget.end,
-              format: (date) => '${date.year}', // TODO: localization
-              onPress: widget.onPress,
-            ),
-        ],
       );
 
   @override

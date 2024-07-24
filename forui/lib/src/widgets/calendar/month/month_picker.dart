@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/calendar/day/day_picker.dart';
+import 'package:forui/src/widgets/calendar/year/year_picker.dart';
 
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
@@ -64,24 +66,28 @@ class _MonthPickerState extends State<MonthPicker> {
   }
 
   @override
-  Widget build(BuildContext context) => GridView(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: MonthPicker.columns,
-          childAspectRatio: 1.618,
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 5.0),
+    child: GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: YearPicker.columns,
+            mainAxisExtent: ((DayPicker.tileDimension - 5.0) * DayPicker.maxRows) / YearPicker.rows,
+            mainAxisSpacing: 5.0,
+          ),
+          children: [
+            for (var month = widget.currentYear, i = 0; i < 12; month = month.plus(months: 1), i++)
+              Entry.yearMonth(
+                style: widget.style,
+                date: month,
+                focusNode: _months[i],
+                current: widget.today.truncate(to: DateUnit.months) == month,
+                enabled: widget.start <= month && month <= widget.end,
+                format: (date) => _MMM.format(date.toNative()), // TODO: localize
+                onPress: widget.onPress,
+              ),
+          ],
         ),
-        children: [
-          for (var month = widget.currentYear, i = 0; i < 12; month = month.plus(months: 1), i++)
-            Entry.yearMonth(
-              style: widget.style,
-              date: month,
-              focusNode: _months[i],
-              current: widget.today.truncate(to: DateUnit.months) == month,
-              enabled: widget.start <= month && month <= widget.end,
-              format: (date) => _MMM.format(date.toNative()), // TODO: localize
-              onPress: widget.onPress,
-            ),
-        ],
-      );
+  );
 
   @override
   void didUpdateWidget(MonthPicker old) {

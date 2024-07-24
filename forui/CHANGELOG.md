@@ -6,6 +6,7 @@
 * Add `FResizable`
 
 ### Changes
+* Change number of years displayed per page in `FCalendar` from 12 to 15.
 * **Breaking** Rename `FCalendarEntryStyle.focusedBackgroundColor` to `FCalendarEntryStyle.hoveredBackgroundColor`.
 * **Breaking** Rename `FCalendarEntryStyle.focusedTextStyle` to `FCalendarEntryStyle.hoveredTextStyle`.
 
