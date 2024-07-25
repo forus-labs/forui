@@ -16,23 +16,23 @@ class AvatarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        FAvatar(
-          image: AssetImage(path('avatar.png')),
-          placeholder: const Text('MN'),
-        ),
-        const SizedBox(width: 10),
-        FAvatar(
-          image: const AssetImage(''),
-          placeholder: const Text('MN'),
-        ),
-        const SizedBox(width: 10),
-        FAvatar(
-          image: const AssetImage(''),
-        ),
-      ],
-    );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FAvatar(
+            image: AssetImage(path('avatar.png')),
+            placeholder: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const AssetImage(''),
+            placeholder: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const AssetImage(''),
+          ),
+        ],
+      );
 }
 
 @RoutePage()
@@ -43,17 +43,17 @@ class AvatarRawPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        FAvatar.raw(),
-        const SizedBox(width: 10),
-        FAvatar.raw(
-          child: FAssets.icons.baby(
-            colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FAvatar.raw(),
+          const SizedBox(width: 10),
+          FAvatar.raw(
+            child: FAssets.icons.baby(
+              colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+            ),
           ),
-        ),
-        const SizedBox(width: 10),
-        FAvatar.raw(child: const Text('MN')),
-      ],
-    );
+          const SizedBox(width: 10),
+          FAvatar.raw(child: const Text('MN')),
+        ],
+      );
 }
