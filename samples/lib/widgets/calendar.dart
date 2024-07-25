@@ -55,16 +55,15 @@ class UnselectableCalendarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FCalendar(
-    controller: FCalendarMultiValueController(
-      initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
-      canSelect: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
-    ),
-    start: DateTime.utc(2000),
-    today: DateTime.utc(2024, 7, 15),
-    end: DateTime.utc(2030),
-  );
+        controller: FCalendarMultiValueController(
+          initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
+          canSelect: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+        ),
+        start: DateTime.utc(2000),
+        today: DateTime.utc(2024, 7, 15),
+        end: DateTime.utc(2030),
+      );
 }
-
 
 @RoutePage()
 class RangeCalendarPage extends SampleScaffold {
