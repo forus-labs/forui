@@ -6,14 +6,28 @@ An image element with a fallback for representing the user.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='avatar' query={{}}/>
+      <Widget name='avatar' variant='default' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
-      FAvatar(
-        image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-        placeholderBuilder: (_) => const Text('MN'),
-      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FAvatar(
+            image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+            placeholder: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const NetworkImage(''),
+            placeholder: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const NetworkImage(''),
+          ),
+        ],
+      );
       ```
   </Tabs.Tab>
 </Tabs>
@@ -23,51 +37,45 @@ An image element with a fallback for representing the user.
 ### `FAvatar(...)`
 
 ```dart
+// Default constructor - Valid image
 FAvatar(
   image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-  placeholderBuilder: (_) => const Text('MN'),
+  placeholder: const Text('MN'),
+),
+
+// Default constructor - Invalid image with placeholder
+FAvatar(
+  image: const NetworkImage(''),
+  placeholder: const Text('MN'),
+),
+
+// Default constructor - Invalid image without placeholder
+FAvatar.raw(
+  image: const NetworkImage(''),
 ),
 ```
 
 ### `FAvatar.raw(...)`
-
-```dart
-FButton.raw(
-  child: const Text('MN'),
-  size: 60,
-);
-```
-
-
-## Examples
-
-### Invalid image with Placeholder
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='avatar' query={{image: 'error'}}/>
+        <Widget name='avatar' variant='raw' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
-        FAvatar(
-          image: const NetworkImage(''),
-          placeholderBuilder: (_) => const Text('MN'),
+        // Raw constructor - without child
+        FAvatar.raw(),
+
+        // Raw constructor - with child
+        FAvatar.raw(
+          child: FAssets.icons.baby(
+          colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+          ),
+        ),
+
+        // Raw constructor - with text
+        FAvatar.raw(
+          child: const Text('MN'),
         ),
         ```
     </Tabs.Tab>
 </Tabs>
-
-### Invalid image without Placeholder
-<Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='avatar' query={{image: 'error', child: 'empty'}}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart
-        FAvatar(
-          image: const NetworkImage(''),
-        ),
-        ```
-    </Tabs.Tab>
-</Tabs>
-
-

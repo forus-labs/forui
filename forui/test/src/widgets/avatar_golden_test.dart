@@ -3,11 +3,13 @@ library;
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/avatar.dart';
 import '../test_scaffold.dart';
 
 void main() {
@@ -19,12 +21,9 @@ void main() {
           final testWidget = MaterialApp(
             home: TestScaffold(
               data: theme,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: FAvatar(
-                  image: FileImage(File('./test/resources/pante.jpg')),
-                  placeholderBuilder: (_) => const Text('MN'),
-                ),
+              child: FAvatar(
+                image: FileImage(File('./test/resources/pante.jpg')),
+                placeholder: const Text('MN'),
               ),
             ),
           );
@@ -48,6 +47,27 @@ void main() {
 
         /// We will not be testing for the fallback behavior due to this issue on flutter
         /// https://github.com/flutter/flutter/issues/107416
+
+        testWidgets('$name with raw content', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              child: FAvatar.raw(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: FAssets.icons.baby(
+                    colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('avatar/$name-raw-content.png'),
+          );
+        });
       }
     },
   );
