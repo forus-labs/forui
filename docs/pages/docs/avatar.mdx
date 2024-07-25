@@ -62,20 +62,28 @@ FAvatar.raw(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
-        // Raw constructor - without child
-        FAvatar.raw(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
 
-        // Raw constructor - with child
-        FAvatar.raw(
-          child: FAssets.icons.baby(
-          colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
-          ),
-        ),
+            // Raw constructor - without child
+            FAvatar.raw(),
 
-        // Raw constructor - with text
-        FAvatar.raw(
-          child: const Text('MN'),
-        ),
+            const SizedBox(width: 10),
+
+            // Raw constructor - with child
+            FAvatar.raw(
+              child: FAssets.icons.baby(
+              colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+              ),
+            ),
+
+            const SizedBox(width: 10),
+
+            // Raw constructor - with text
+            FAvatar.raw(child: const Text('MN')),
+          ],
+        );
         ```
     </Tabs.Tab>
 </Tabs>
