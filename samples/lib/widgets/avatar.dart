@@ -19,7 +19,7 @@ class AvatarPage extends SampleScaffold {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAvatar(
-            image: AssetImage('avatar.png'),
+            image: AssetImage(path('avatar.png')),
             placeholder: const Text('MN'),
           ),
           const SizedBox(width: 10),
