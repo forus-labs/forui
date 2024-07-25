@@ -81,7 +81,7 @@ class _MonthPickerState extends State<MonthPicker> {
                 date: month,
                 focusNode: _months[i],
                 current: widget.today.truncate(to: DateUnit.months) == month,
-                enabled: widget.start <= month && month <= widget.end,
+                selectable: widget.start <= month && month <= widget.end,
                 format: (date) => _MMM.format(date.toNative()), // TODO: localize
                 onPress: widget.onPress,
               ),

@@ -21,12 +21,14 @@ export 'year_month_picker.dart' show FCalendarYearMonthPickerStyle;
 /// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing
 /// left and right swipes to transition between pages.
 ///
+/// All [DateTime]s are in UTC timezone. A [FCalendarController] is used to customize the date selection behavior.
+/// [DateTime]s outside [start] and [end] are unselectable regardless of the [FCalendarController] used.
+///
 /// See:
 /// * https://forui.dev/docs/calendar for working examples.
-/// * [FCalendarDayStyle] for customizing a card's appearance.
+/// *  for customizing a calendar's date selection behavior.
+/// * [FCalendarDayStyle] for customizing a calendar's appearance.
 class FCalendar extends StatelessWidget {
-  static bool _true(DateTime _) => true;
-
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
 
@@ -48,11 +50,6 @@ class FCalendar extends StatelessWidget {
   /// The current date. It is truncated to the nearest date. Defaults to the [DateTime.now].
   final DateTime today;
 
-  /// A predicate that determines if a date can be selected. It may be called more than once for a single date.
-  ///
-  /// Defaults to returning true for all dates.
-  final Predicate<DateTime> enabled;
-
   /// A callback for when the displayed month changes.
   final ValueChanged<DateTime>? onMonthChange;
 
@@ -61,29 +58,29 @@ class FCalendar extends StatelessWidget {
 
   /// A callback for when a date in a [FCalendarPickerType.day] picker is long pressed.
   final ValueChanged<DateTime>? onLongPress;
+
   final ValueNotifier<FCalendarPickerType> _type;
   final ValueNotifier<LocalDate> _month;
 
   /// Creates a [FCalendar].
   ///
-  /// [initialDate] defaults to [today]. It is truncated to the nearest date.
+  /// [initialMonth] defaults to [today]. It is truncated to the nearest date.
   FCalendar({
     required this.controller,
     required this.start,
     required this.end,
     this.style,
-    this.enabled = _true,
     this.onMonthChange,
     this.onPress,
     this.onLongPress,
     FCalendarPickerType initialType = FCalendarPickerType.day,
     DateTime? today,
-    DateTime? initialDate,
+    DateTime? initialMonth,
     super.key,
   })  : assert(start.toLocalDate() < end.toLocalDate(), 'end date must be greater than start date'),
         today = today ?? DateTime.now(),
         _type = ValueNotifier(initialType),
-        _month = ValueNotifier((initialDate ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months));
+        _month = ValueNotifier((initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months));
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +112,7 @@ class FCalendar extends StatelessWidget {
                       end: end.toLocalDate(),
                       today: today.toLocalDate(),
                       initial: _month.value,
-                      enabled: (date) => enabled(date.toNative()),
+                      selectable: (date) => controller.canSelect(date.toNative()),
                       selected: (date) => controller.contains(date.toNative()),
                       onMonthChange: (date) {
                         _month.value = date;
@@ -123,7 +120,7 @@ class FCalendar extends StatelessWidget {
                       },
                       onPress: (date) {
                         final native = date.toNative();
-                        controller.onPress(native);
+                        controller.select(native);
                         onPress?.call(native);
                       },
                       onLongPress: (date) => onLongPress?.call(date.toNative()),
@@ -157,7 +154,6 @@ class FCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
-      ..add(DiagnosticsProperty('enabled', enabled))
       ..add(DiagnosticsProperty('onMonthChange', onMonthChange))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));

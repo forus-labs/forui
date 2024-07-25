@@ -4,8 +4,11 @@ import { Widget } from "../../components/widget";
 # Calendar
 A date field component that allows users to enter and edit date.
 
-The calendar pages are designed to be navigable through swipe gestures on mobile platforms, allowing left and right swipes
-to transition between pages.
+The calendar pages are designed to be navigable through swipe gestures on mobile platforms, allowing left and right
+swipes to transition between pages.
+
+A [FCalendarController](https://pub.dev/documentation/forui/latest/forui.widgets/FCalendarController-class.html) is used
+to customize the date selection behavior.
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
@@ -14,7 +17,7 @@ to transition between pages.
     <Tabs.Tab>
         ```dart
         FCalendar(
-          controller: FCalendarSingleRangeController(),
+          controller: FCalendarValueController(initialSelection: selected),
           start: DateTime.utc(2000),
           end: DateTime.utc(2030),
         );
@@ -28,13 +31,16 @@ to transition between pages.
 
 ```dart
 FCalendar(
-  controller: FCalendarSingleRangeController(),
+  controller: FCalendarValueController(
+    initialSelection: DateTime.utc(2024, 9, 13),
+    canSelect: (date) => true,
+  ),
   start: DateTime.utc(2024),
   end: DateTime.utc(2030),
   today: DateTime.utc(2024, 7, 14),
-  initalType = FCalendarPickerType.yearMonth,
+  initialType = FCalendarPickerType.yearMonth,
   initialDate = DateTime.utc(2024, 9, 12),
-  enabled: (date) => allowed.contains(date),
+  enabled:
   onMonthChange: (date) => print(date),
   onPress: (date) => print(date),
   onLongPress: (date) => print(date),
@@ -58,7 +64,7 @@ FCalendar(
     </Tabs.Tab>
 </Tabs>
 
-### Multiple Dates
+### Multiple Dates with Initial Selections
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='calendar' variant='multi-value' query={{}} height={500}/>
@@ -66,26 +72,51 @@ FCalendar(
     <Tabs.Tab>
         ```dart
         FCalendar(
-          controller: FCalendarMultiValueController(),
+          controller: FCalendarMultiValueController(
+            initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
+          ),
           start: DateTime.utc(2000),
+          today: DateTime.utc(2024, 7, 15),
           end: DateTime.utc(2030),
         );
         ```
     </Tabs.Tab>
 </Tabs>
 
-### Single Range
+### Unselectable Dates
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='calendar' variant='single-range' query={{}} height={500}/>
+        <Widget name='calendar' variant='unselectable' query={{}} height={500}/>
+    </Tabs.Tab>
+      ```dart
+      FCalendar(
+        controller: FCalendarMultiValueController(
+          initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
+          canSelect: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+        ),
+        start: DateTime.utc(2000),
+        today: DateTime.utc(2024, 7, 15),
+        end: DateTime.utc(2030),
+      );
+      ```
+    </Tabs.Tab>
+</Tabs>
+
+### Range Selection with Initial Range
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='calendar' variant='range' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
         FCalendar(
-          controller: FCalendarSingleRangeController(),
+          controller: FCalendarRangeController(
+            initialSelection: (DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)),
+          ),
           start: DateTime.utc(2000),
+          today: DateTime.utc(2024, 7, 15),
           end: DateTime.utc(2030),
-        )
+        );
         ```
     </Tabs.Tab>
 </Tabs>

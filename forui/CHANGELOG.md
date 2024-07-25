@@ -2,17 +2,27 @@
 
 ### Additions
 * Add `FAvatar`
-* **Breaking** Add `FCalendarEntryStyle.focusedBorderColor`
+* **Breaking:** Add `FCalendarEntryStyle.focusedBorderColor`. This only affects users that customized `FCalendarEntryStyle`.
 * Add `FResizable`
 
 ### Changes
 * Change number of years displayed per page in `FCalendar` from 12 to 15.
-* **Breaking** Rename `FCalendarEntryStyle.focusedBackgroundColor` to `FCalendarEntryStyle.hoveredBackgroundColor`.
-* **Breaking** Rename `FCalendarEntryStyle.focusedTextStyle` to `FCalendarEntryStyle.hoveredTextStyle`.
+* **Breaking:** Move `FCalendar.enabled` to `FCalendarController.canSelect(...)`.
+
+* **Breaking:** Rename `FCalendarEntryStyle.focusedBackgroundColor` to `FCalendarEntryStyle.hoveredBackgroundColor`.
+  This only affects users that customized `FCalendarEntryStyle`.
+
+* **Breaking:** Rename `FCalendarEntryStyle.focusedTextStyle` to `FCalendarEntryStyle.hoveredTextStyle`.
+  This only affects users that customized `FCalendarEntryStyle`.
+
+* **Breaking:** Rename `FCalendarSingleValueController` to `FCalendarValueController`.
+
+* **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController`.
 
 ### Fixes
 * Fix `FCalendar` dates not being toggleable using `Enter` key.
 * Fix `FCalendar` dates sometimes not being navigable using arrow keys.
+
 
 ## 0.3.0
 

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
@@ -25,7 +26,7 @@ class PagedDayPicker extends PagedPicker {
     required super.end,
     required super.today,
     required super.initial,
-    required super.enabled,
+    required super.selectable,
     super.key,
   });
 
@@ -36,7 +37,7 @@ class PagedDayPicker extends PagedPicker {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selectedPredicate', selected))
+      ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('onMonthChange', onMonthChange))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));
@@ -50,7 +51,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
         month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
         focused: focusedDate,
-        enabled: widget.enabled,
+        selectable: widget.selectable,
         selected: widget.selected,
         onPress: (date) {
           setState(() => focusedDate = date);
@@ -102,14 +103,14 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
     // Can we use the preferred day in this month?
     if (preferredDay <= month.daysInMonth) {
       final newFocus = month.copyWith(day: preferredDay);
-      if (widget.enabled(newFocus)) {
+      if (widget.selectable(newFocus)) {
         return newFocus;
       }
     }
 
     // Start at the 1st and take the first enabled date.
     for (var newFocus = month; newFocus.month == month.month; newFocus = newFocus.tomorrow) {
-      if (widget.enabled(newFocus)) {
+      if (widget.selectable(newFocus)) {
         return newFocus;
       }
     }

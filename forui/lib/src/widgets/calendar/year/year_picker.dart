@@ -82,7 +82,7 @@ class _YearPickerState extends State<YearPicker> {
                 date: year,
                 focusNode: _years[i],
                 current: widget.today.year == year.year,
-                enabled: widget.start <= year && year <= widget.end,
+                selectable: widget.start <= year && year <= widget.end,
                 format: (date) => '${date.year}', // TODO: localization
                 onPress: widget.onPress,
               ),

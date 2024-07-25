@@ -21,17 +21,17 @@ abstract class Entry extends StatelessWidget {
     required FocusNode focusNode,
     required bool current,
     required bool today,
-    required Predicate<LocalDate> enabled,
+    required Predicate<LocalDate> selectable,
     required Predicate<LocalDate> selected,
     required ValueChanged<LocalDate> onPress,
     required ValueChanged<LocalDate> onLongPress,
   }) {
-    final enable = enabled(date);
-    final select = selected(date);
+    final canSelect = selectable(date);
+    final isSelected = selected(date);
 
-    final styles = enable ? style.enabledStyles : style.disabledStyles;
+    final styles = canSelect ? style.selectableStyles : style.unselectableStyles;
     final dayStyle = current ? styles.current : styles.enclosing;
-    final entryStyle = select ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
+    final entryStyle = isSelected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
     Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
@@ -44,19 +44,19 @@ abstract class Entry extends StatelessWidget {
           current: today,
         );
 
-    if (enabled(date)) {
-      return _EnabledEntry(
+    if (isSelected) {
+      return _SelectableEntry(
         focusNode: focusNode,
         date: date,
         semanticLabel: '${_yMMMMd.format(date.toNative())}${today ? ', Today' : ''}',
-        selected: selected(date),
+        selected: isSelected,
         onPress: onPress,
         onLongPress: onLongPress,
         style: entryStyle,
         builder: builder,
       );
     } else {
-      return _DisabledEntry(style: entryStyle, builder: builder);
+      return _UnselectableEntry(style: entryStyle, builder: builder);
     }
   }
 
@@ -65,13 +65,12 @@ abstract class Entry extends StatelessWidget {
     required LocalDate date,
     required FocusNode focusNode,
     required bool current,
-    required bool enabled,
+    required bool selectable,
     required ValueChanged<LocalDate> onPress,
     required String Function(LocalDate) format,
   }) {
-    final entryStyle = enabled ? style.enabledStyle : style.disabledStyle;
+    final entryStyle = selectable ? style.enabledStyle : style.disabledStyle;
 
-    // ignore: avoid_positional_boolean_parameters
     Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.all(entryStyle.radius),
@@ -80,8 +79,8 @@ abstract class Entry extends StatelessWidget {
           current: current,
         );
 
-    if (enabled) {
-      return _EnabledEntry(
+    if (selectable) {
+      return _SelectableEntry(
         focusNode: focusNode,
         date: date,
         semanticLabel: format(date),
@@ -90,7 +89,7 @@ abstract class Entry extends StatelessWidget {
         builder: builder,
       );
     } else {
-      return _DisabledEntry(style: entryStyle, builder: builder);
+      return _UnselectableEntry(style: entryStyle, builder: builder);
     }
   }
 
@@ -108,7 +107,7 @@ abstract class Entry extends StatelessWidget {
   }
 }
 
-class _EnabledEntry extends Entry {
+class _SelectableEntry extends Entry {
   final FocusNode focusNode;
   final LocalDate date;
   final String semanticLabel;
@@ -116,7 +115,7 @@ class _EnabledEntry extends Entry {
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate>? onLongPress;
 
-  const _EnabledEntry({
+  const _SelectableEntry({
     required this.focusNode,
     required this.date,
     required this.semanticLabel,
@@ -151,8 +150,8 @@ class _EnabledEntry extends Entry {
   }
 }
 
-class _DisabledEntry extends Entry {
-  const _DisabledEntry({
+class _UnselectableEntry extends Entry {
+  const _UnselectableEntry({
     required super.style,
     required super.builder,
   }) : super._();
