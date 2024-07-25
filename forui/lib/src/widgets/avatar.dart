@@ -20,12 +20,12 @@ class FAvatar extends StatelessWidget {
   /// The circle's size.
   final double size;
 
-  /// The fallback widget displayed if [image] fails to load.
+  /// The fallback widget displayed if image parameter fails to load.
   ///
   /// Typically used to display the user's initials using a [Text] widget
   /// styled with [FAvatarStyle.backgroundColor].
   ///
-  /// Use [image] to display an image; use [placeholderBuilder] for initials.
+  /// Use image parameter to display an image; use [placeholderBuilder] for initials.
   final Widget Function(BuildContext, FAvatarStyle) placeholderBuilder;
 
   /// Creates an [FAvatar].
