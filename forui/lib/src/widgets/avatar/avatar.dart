@@ -62,6 +62,7 @@ class FAvatar extends StatelessWidget {
     final style = this.style ?? context.theme.avatarStyle;
 
     return Container(
+      alignment: Alignment.center,
       height: size,
       width: size,
       decoration: BoxDecoration(
@@ -69,11 +70,9 @@ class FAvatar extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       clipBehavior: Clip.hardEdge,
-      child: Center(
-        child: DefaultTextStyle(
-          style: style.text,
-          child: placeholderBuilder(context, style),
-        ),
+      child: DefaultTextStyle(
+        style: style.text,
+        child: placeholderBuilder(context, style),
       ),
     );
   }
