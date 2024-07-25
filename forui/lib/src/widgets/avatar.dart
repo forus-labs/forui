@@ -48,7 +48,12 @@ class FAvatar extends StatelessWidget {
     this.size = 40.0,
     this.style,
     super.key,
-  }) : placeholderBuilder = ((context, style) => child ?? _IconPlaceholder(style: style, size: size,));
+  }) : placeholderBuilder = ((context, style) =>
+            child ??
+            _IconPlaceholder(
+              style: style,
+              size: size,
+            ));
 
   @override
   Widget build(BuildContext context) {
