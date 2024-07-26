@@ -51,7 +51,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
         month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
         focused: focusedDate,
-        selectable: widget.selectable,
+        canSelect: widget.selectable,
         selected: widget.selected,
         onPress: (date) {
           setState(() => focusedDate = date);

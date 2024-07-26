@@ -21,17 +21,17 @@ abstract class Entry extends StatelessWidget {
     required FocusNode focusNode,
     required bool current,
     required bool today,
-    required Predicate<LocalDate> selectable,
+    required Predicate<LocalDate> canSelect,
     required Predicate<LocalDate> selected,
     required ValueChanged<LocalDate> onPress,
     required ValueChanged<LocalDate> onLongPress,
   }) {
-    final canSelect = selectable(date);
-    final isSelected = selected(date);
+    final selectable = canSelect(date);
+    final select = selected(date);
 
-    final styles = canSelect ? style.selectableStyles : style.unselectableStyles;
+    final styles = selectable ? style.selectableStyles : style.unselectableStyles;
     final dayStyle = current ? styles.current : styles.enclosing;
-    final entryStyle = isSelected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
+    final entryStyle = select ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
     Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
@@ -44,12 +44,12 @@ abstract class Entry extends StatelessWidget {
           current: today,
         );
 
-    if (isSelected) {
+    if (select) {
       return _SelectableEntry(
         focusNode: focusNode,
         date: date,
         semanticLabel: '${_yMMMMd.format(date.toNative())}${today ? ', Today' : ''}',
-        selected: isSelected,
+        selected: select,
         onPress: onPress,
         onLongPress: onLongPress,
         style: entryStyle,

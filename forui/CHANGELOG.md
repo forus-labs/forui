@@ -9,6 +9,8 @@
 * Change number of years displayed per page in `FCalendar` from 12 to 15.
 * **Breaking:** Move `FCalendar.enabled` to `FCalendarController.canSelect(...)`.
 
+* **Breaking:** Rename `FCalendarController.onPress(...)` to `FCalendarController.select(...)`.
+
 * **Breaking:** Rename `FCalendarEntryStyle.focusedBackgroundColor` to `FCalendarEntryStyle.hoveredBackgroundColor`.
   This only affects users that customized `FCalendarEntryStyle`.
 
