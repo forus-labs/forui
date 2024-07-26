@@ -16,9 +16,8 @@ class ResizablePage extends SampleScaffold {
   Widget child(BuildContext context) => FResizable(
         axis: Axis.vertical,
         crossAxisExtent: 400,
-        interaction: const FResizableInteraction.selectAndResize(0),
         children: [
-          FResizableRegion.raw(
+          FResizableRegion(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -26,7 +25,7 @@ class ResizablePage extends SampleScaffold {
               return Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  color: colorScheme.foreground,
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                   border: Border.all(color: colorScheme.border),
                 ),
@@ -34,7 +33,7 @@ class ResizablePage extends SampleScaffold {
               );
             },
           ),
-          FResizableRegion.raw(
+          FResizableRegion(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -42,14 +41,14 @@ class ResizablePage extends SampleScaffold {
               return Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  color: colorScheme.foreground,
                   border: Border.all(color: colorScheme.border),
                 ),
                 child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
               );
             },
           ),
-          FResizableRegion.raw(
+          FResizableRegion(
             initialSize: 200,
             minSize: 100,
             builder: (context, data, _) {
@@ -57,7 +56,7 @@ class ResizablePage extends SampleScaffold {
               return Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  color: colorScheme.foreground,
                   borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
                   border: Border.all(color: colorScheme.border),
                 ),
@@ -81,7 +80,6 @@ class Label extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FThemeData(:colorScheme, :typography) = context.theme;
-    final color = data.selected ? colorScheme.background : colorScheme.foreground;
     final start = DateTime.fromMillisecondsSinceEpoch(
       (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
       isUtc: true,
@@ -98,13 +96,16 @@ class Label extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            icon(height: 15, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
+            icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.background, BlendMode.srcIn)),
             const SizedBox(width: 3),
-            Text(label, style: typography.sm.copyWith(color: color)),
+            Text(label, style: typography.sm.copyWith(color: colorScheme.background)),
           ],
         ),
         const SizedBox(height: 5),
-        Text('${format.format(start)} - ${format.format(end)}', style: typography.sm.copyWith(color: color)),
+        Text(
+          '${format.format(start)} - ${format.format(end)}',
+          style: typography.sm.copyWith(color: colorScheme.background),
+        ),
       ],
     );
   }
@@ -121,7 +122,7 @@ class HorizontalResizablePage extends SampleScaffold {
         axis: Axis.horizontal,
         crossAxisExtent: 300,
         children: [
-          FResizableRegion.raw(
+          FResizableRegion(
             initialSize: 100,
             minSize: 100,
             builder: (context, data, _) {
@@ -129,7 +130,7 @@ class HorizontalResizablePage extends SampleScaffold {
               return Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
+                  color: colorScheme.foreground,
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                   border: Border.all(color: colorScheme.border),
                 ),
@@ -137,7 +138,7 @@ class HorizontalResizablePage extends SampleScaffold {
               );
             },
           ),
-          FResizableRegion.raw(
+          FResizableRegion(
             initialSize: 300,
             minSize: 100,
             builder: (context, data, _) {

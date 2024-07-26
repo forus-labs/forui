@@ -28,27 +28,18 @@ sealed class Slider extends StatelessWidget {
         );
 
   @override
-  Widget build(BuildContext context) {
-    final enabled = switch (controller.interaction) {
-      Resize _ => true,
-      SelectAndResize(:final index) when index == this.index => true,
-      _ => false,
-    };
-
-    return Align(
+  Widget build(BuildContext context) => Align(
       alignment: alignment,
       child: MouseRegion(
-        cursor: enabled ? cursor : MouseCursor.defer,
+        cursor: cursor,
         child: Semantics(
-          enabled: enabled,
           slider: true,
-          child: _child(enabled: enabled),
+          child: _child,
         ),
       ),
     );
-  }
 
-  Widget _child({required bool enabled});
+  Widget get _child;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -89,12 +80,12 @@ final class HorizontalSlider extends Slider {
         );
 
   @override
-  Widget _child({required bool enabled}) => SizedBox(
+  Widget get _child => SizedBox(
         width: size,
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onHorizontalDragUpdate: (details) {
-            if (!enabled || details.delta.dx == 0.0) {
+            if (details.delta.dx == 0.0) {
               return;
             }
 
@@ -135,12 +126,12 @@ final class VerticalSlider extends Slider {
         );
 
   @override
-  Widget _child({required bool enabled}) => SizedBox(
+  Widget get _child => SizedBox(
         height: size,
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onVerticalDragUpdate: (details) {
-            if (!enabled || details.delta.dy == 0.0) {
+            if (details.delta.dy == 0.0) {
               return;
             }
 

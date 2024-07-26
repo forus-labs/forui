@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/src/widgets/resizable/resizable.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 import 'package:forui/src/widgets/resizable/slider.dart';
 
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
@@ -52,7 +51,7 @@ class FResizableRegion extends StatelessWidget {
   final Widget? child;
 
   /// Creates a [FResizableRegion].
-  FResizableRegion.raw({
+  FResizableRegion({
     required this.initialSize,
     required this.builder,
     double? minSize,
@@ -82,65 +81,52 @@ class FResizableRegion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:controller, :data) = InheritedData.of(context);
-    final enabled = controller.interaction is Resize || data.selected;
     return Semantics(
       container: true,
-      enabled: enabled,
-      selected: data.selected,
-      child: MouseRegion(
-        cursor: enabled ? MouseCursor.defer : SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: switch (controller.interaction) {
-            SelectAndResize _ => () {
-                if (controller.select(data.index) && controller.hapticFeedbackVelocity != null) {
-                  // TODO: haptic feedback
-                }
-              },
-            Resize _ => null,
-          },
-          child: switch (controller.axis) {
-            Axis.horizontal => SizedBox(
-                width: data.size.current,
-                child: Stack(
-                  children: [
-                    builder(context, data, child),
-                    if (data.index > 0)
-                      HorizontalSlider.left(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                    if (data.index < controller.regions.length - 1)
-                      HorizontalSlider.right(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                  ],
-                ),
+      enabled: true,
+      child: GestureDetector(
+        child: switch (controller.axis) {
+          Axis.horizontal => SizedBox(
+              width: data.size.current,
+              child: Stack(
+                children: [
+                  builder(context, data, child),
+                  if (data.index > 0)
+                    HorizontalSlider.left(
+                      controller: controller,
+                      index: data.index,
+                      size: sliderSize,
+                    ),
+                  if (data.index < controller.regions.length - 1)
+                    HorizontalSlider.right(
+                      controller: controller,
+                      index: data.index,
+                      size: sliderSize,
+                    ),
+                ],
               ),
-            Axis.vertical => SizedBox(
-                height: data.size.current,
-                child: Stack(
-                  children: [
-                    builder(context, data, child),
-                    if (data.index > 0)
-                      VerticalSlider.up(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                    if (data.index < controller.regions.length - 1)
-                      VerticalSlider.down(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                  ],
-                ),
+            ),
+          Axis.vertical => SizedBox(
+              height: data.size.current,
+              child: Stack(
+                children: [
+                  builder(context, data, child),
+                  if (data.index > 0)
+                    VerticalSlider.up(
+                      controller: controller,
+                      index: data.index,
+                      size: sliderSize,
+                    ),
+                  if (data.index < controller.regions.length - 1)
+                    VerticalSlider.down(
+                      controller: controller,
+                      index: data.index,
+                      size: sliderSize,
+                    ),
+                ],
               ),
-          },
-        ),
+            ),
+        },
       ),
     );
   }

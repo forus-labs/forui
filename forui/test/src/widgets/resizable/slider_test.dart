@@ -17,12 +17,7 @@ void main() {
   late FResizableRegionData data;
 
   setUp(() {
-    data = FResizableRegionData(
-      index: 0,
-      selected: true,
-      size: (min: 10, max: 100, allRegions: 100),
-      offset: (min: 10, max: 100),
-    );
+    data = FResizableRegionData(index: 0, size: (min: 10, max: 100, allRegions: 100), offset: (min: 10, max: 100));
     controller = MockResizableController();
     when(controller.regions).thenReturn([data]);
     when(controller.hapticFeedbackVelocity).thenReturn(0.0);
@@ -66,8 +61,7 @@ void main() {
         const Offset(100, 0),
         const Offset(-100, 0),
       ].indexed) {
-        testWidgets('[$index] enabled horizontal drag, causes haptic feedback', (tester) async {
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
+        testWidgets('[$index] horizontal drag, causes haptic feedback', (tester) async {
           when(controller.update(any, any, any)).thenReturn(true);
 
           await tester.pumpWidget(slider);
@@ -76,18 +70,7 @@ void main() {
           verify(controller.update(0, direction, any));
         });
 
-        testWidgets('[$index] enabled horizontal drag, causes haptic feedback', (tester) async {
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
-          when(controller.update(any, any, any)).thenReturn(true);
-
-          await tester.pumpWidget(slider);
-          await tester.drag(find.byType(GestureDetector), offset);
-
-          verify(controller.update(0, direction, any));
-        });
-
-        testWidgets('[$index] enabled horizontal drag, haptic feedback disabled', (tester) async {
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
+        testWidgets('[$index] horizontal drag, haptic feedback disabled', (tester) async {
           when(controller.hapticFeedbackVelocity).thenReturn(null);
           when(controller.update(any, any, any)).thenReturn(true);
 
@@ -96,24 +79,13 @@ void main() {
 
           verify(controller.update(0, direction, any));
         });
-
-        testWidgets('[$index] disabled horizontal drag', (tester) async {
-          when(controller.update(any, any, any)).thenReturn(true);
-          when(controller.interaction).thenReturn(const SelectAndResize(1));
-
-          await tester.pumpWidget(slider);
-          await tester.drag(find.byType(GestureDetector), offset);
-
-          verifyNever(controller.update(0, direction, any));
-        });
       }
 
       for (final (index, offset) in [
         const Offset(0, 1000),
         const Offset(0, -1000),
       ].indexed) {
-        testWidgets('[$index] enabled vertical drag, causes haptic feedback', (tester) async {
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
+        testWidgets('[$index] vertical drag, causes haptic feedback', (tester) async {
           when(controller.update(any, any, any)).thenReturn(true);
 
           await tester.pumpWidget(slider);
@@ -148,7 +120,6 @@ void main() {
       ].indexed) {
         testWidgets('[$index] enabled vertical drag', (tester) async {
           when(controller.update(any, any, any)).thenReturn(true);
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
 
           await tester.pumpWidget(slider);
           await tester.drag(find.byType(GestureDetector), offset);
@@ -156,9 +127,8 @@ void main() {
           verify(controller.update(0, direction, any));
         });
 
-        testWidgets('[$index] enabled horizontal drag, causes haptic feedback', (tester) async {
+        testWidgets('[$index] horizontal drag, causes haptic feedback', (tester) async {
           when(controller.update(any, any, any)).thenReturn(true);
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
 
           await tester.pumpWidget(slider);
           await tester.drag(find.byType(GestureDetector), offset);
@@ -166,8 +136,7 @@ void main() {
           verify(controller.update(0, direction, any));
         });
 
-        testWidgets('[$index] enabled horizontal drag, haptic feedback disabled', (tester) async {
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
+        testWidgets('[$index] horizontal drag, haptic feedback disabled', (tester) async {
           when(controller.hapticFeedbackVelocity).thenReturn(null);
           when(controller.update(any, any, any)).thenReturn(true);
 
@@ -176,25 +145,14 @@ void main() {
 
           verify(controller.update(0, direction, any));
         });
-
-        testWidgets('[$index] disabled vertical drag', (tester) async {
-          when(controller.update(any, any, any)).thenReturn(true);
-          when(controller.interaction).thenReturn(const SelectAndResize(1));
-
-          await tester.pumpWidget(slider);
-          await tester.drag(find.byType(GestureDetector), offset);
-
-          verifyNever(controller.update(0, direction, any));
-        });
       }
 
       for (final (index, offset) in [
         const Offset(100, 0),
         const Offset(-100, 0),
       ].indexed) {
-        testWidgets('[$index] enabled horizontal drag', (tester) async {
+        testWidgets('[$index] horizontal drag', (tester) async {
           when(controller.update(any, any, any)).thenReturn(true);
-          when(controller.interaction).thenReturn(const SelectAndResize(0));
 
           await tester.pumpWidget(slider);
           await tester.drag(find.byType(GestureDetector), offset);

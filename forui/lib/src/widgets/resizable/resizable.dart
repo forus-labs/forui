@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
 export '/src/widgets/resizable/resizable_region.dart';
-export '/src/widgets/resizable/resizable_controller.dart' hide ResizableController, Resize, SelectAndResize;
+export '/src/widgets/resizable/resizable_controller.dart' hide ResizableController, Resize;
 export '/src/widgets/resizable/resizable_region_data.dart' hide UpdatableResizableRegionData;
 
 /// A resizable which children can be resized along either the horizontal or vertical main axis.
@@ -43,14 +43,11 @@ class FResizable extends StatefulWidget {
   /// ## Contract
   /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
   /// result in undefined behaviour.
+  // ignore: avoid_field_initializers_in_const_classes
   final double _hapticFeedbackVelocity = 6.5; // TODO: haptic feedback
 
   /// The children that may be resized.
   final List<FResizableRegion> children;
-
-  /// A function that is called when a resizable region is selected. This will only be called if [interaction] is
-  /// [FResizableInteraction.selectAndResize].
-  final void Function(int index)? onPress;
 
   /// A function that is called when a resizable region and its neighbour are being resized.
   ///
@@ -68,30 +65,18 @@ class FResizable extends StatefulWidget {
   )? onResizeEnd;
 
   /// Creates a [FResizable].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [interaction] is a [FResizableInteraction.selectAndResize] and index is index < 0 or `children.length` <= index.
-  FResizable({
+  const FResizable({
     required this.axis,
     required this.children,
     this.interaction = const FResizableInteraction.resize(),
     this.crossAxisExtent,
-    this.onPress,
     this.onResizeUpdate,
     this.onResizeEnd,
     super.key,
   }) : assert(
           crossAxisExtent == null || 0 < crossAxisExtent,
           'The crossAxisExtent should be positive, but it is $crossAxisExtent.',
-        ) {
-    if (interaction case SelectAndResize(:final index)) {
-      assert(
-        0 <= index && index < children.length,
-        'The initial index should be in 0 <= initialIndex < ${children.length}, but it is $index.',
-      );
-    }
-  }
+        );
 
   @override
   State<StatefulWidget> createState() => _FResizableState();
@@ -105,7 +90,6 @@ class FResizable extends StatefulWidget {
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DoubleProperty('_hapticFeedbackVelocity', _hapticFeedbackVelocity))
       ..add(IterableProperty('children', children))
-      ..add(ObjectFlagProperty('onPress', onPress))
       ..add(ObjectFlagProperty('onResizeUpdate', onResizeUpdate))
       ..add(ObjectFlagProperty('onResizeEnd', onResizeEnd));
   }
@@ -127,7 +111,6 @@ class _FResizableState extends State<FResizable> {
         widget.interaction != old.interaction ||
         widget.crossAxisExtent != old.crossAxisExtent ||
         widget._hapticFeedbackVelocity != old._hapticFeedbackVelocity ||
-        widget.onPress != widget.onPress ||
         widget.onResizeUpdate != widget.onResizeUpdate ||
         widget.onResizeEnd != widget.onResizeEnd ||
         !widget.children.equals(old.children)) {
@@ -136,21 +119,15 @@ class _FResizableState extends State<FResizable> {
   }
 
   void _update(FResizableInteraction interaction) {
-    final selected = switch (interaction) {
-      SelectAndResize(:final index) => index,
-      Resize _ => null,
-    };
-
-    var minoffset = 0.0;
+    var minOffset = 0.0;
     final allRegionsMin = widget.children.sum((child) => child.minSize, initial: 0.0);
     final allRegions = widget.children.sum((child) => child.initialSize, initial: 0.0);
     final regions = [
       for (final (index, region) in widget.children.indexed)
         FResizableRegionData(
           index: index,
-          selected: selected == index,
           size: (min: region.minSize, max: allRegions - allRegionsMin + region.minSize, allRegions: allRegions),
-          offset: (min: minoffset, max: minoffset += region.initialSize),
+          offset: (min: minOffset, max: minOffset += region.initialSize),
         ),
     ];
 
@@ -158,7 +135,6 @@ class _FResizableState extends State<FResizable> {
       regions: regions,
       axis: widget.axis,
       hapticFeedbackVelocity: widget._hapticFeedbackVelocity,
-      onPress: widget.onPress,
       onResizeUpdate: widget.onResizeUpdate,
       onResizeEnd: widget.onResizeEnd,
       interaction: interaction,

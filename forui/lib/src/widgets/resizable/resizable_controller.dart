@@ -7,25 +7,8 @@ import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 
 /// Possible ways for a user to interact with a [FResizable].
 sealed class FResizableInteraction {
-  /// Allows the user to interact with a [FResizableRegion] by selecting before resizing it.
-  const factory FResizableInteraction.selectAndResize(int initialIndex) = SelectAndResize;
-
   /// Allows the user to interact with a [FResizableRegion] by resizing it without selecting it first.
   const factory FResizableInteraction.resize() = Resize;
-}
-
-@internal
-final class SelectAndResize implements FResizableInteraction {
-  final int index;
-
-  const SelectAndResize(this.index);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is SelectAndResize && runtimeType == other.runtimeType && index == other.index;
-
-  @override
-  int get hashCode => index.hashCode;
 }
 
 @internal
@@ -44,22 +27,19 @@ class ResizableController extends ChangeNotifier {
   final List<FResizableRegionData> regions;
   final Axis axis;
   final double? hapticFeedbackVelocity;
-  final void Function(int)? _onPress;
   final void Function(FResizableRegionData, FResizableRegionData)? _onResizeUpdate;
   final void Function(FResizableRegionData, FResizableRegionData)? _onResizeEnd;
-  FResizableInteraction _interaction;
+  final FResizableInteraction _interaction;
   bool _haptic;
 
   ResizableController({
     required this.regions,
     required this.axis,
     required this.hapticFeedbackVelocity,
-    required void Function(int)? onPress,
     required void Function(FResizableRegionData, FResizableRegionData)? onResizeUpdate,
     required void Function(FResizableRegionData, FResizableRegionData)? onResizeEnd,
     required FResizableInteraction interaction,
-  })  : _onPress = onPress,
-        _onResizeUpdate = onResizeUpdate,
+  })  : _onResizeUpdate = onResizeUpdate,
         _onResizeEnd = onResizeEnd,
         _interaction = interaction,
         _haptic = false;
@@ -123,20 +103,6 @@ class ResizableController extends ChangeNotifier {
     };
 
     return (resized, neighbour);
-  }
-
-  bool select(int value) {
-    if (_interaction case SelectAndResize(index: final old) when old != value) {
-      _onPress?.call(value);
-      _interaction = SelectAndResize(value);
-      regions[old] = regions[old].copyWith(selected: false);
-      regions[value] = regions[value].copyWith(selected: true);
-
-      notifyListeners();
-      return true;
-    } else {
-      return false;
-    }
   }
 
   FResizableInteraction get interaction => _interaction;

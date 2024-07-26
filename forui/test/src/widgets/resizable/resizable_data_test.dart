@@ -7,60 +7,15 @@ import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 void main() {
   group('FResizableRegionData', () {
     for (final (index, function) in [
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: 1, max: -2, allRegions: 10),
-            offset: (min: 1, max: 2),
-          ),
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: -1, max: 2, allRegions: 10),
-            offset: (min: 1, max: 2),
-          ),
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: 1, max: 1, allRegions: 10),
-            offset: (min: 1, max: 2),
-          ),
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: 2, max: 1, allRegions: 10),
-            offset: (min: 1, max: 2),
-          ),
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: 1, max: 5, allRegions: 10),
-            offset: (min: 1, max: 1),
-          ),
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: 1, max: 5, allRegions: 10),
-            offset: (min: 2, max: 1),
-          ),
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: 1, max: 5, allRegions: 10),
-            offset: (min: 1, max: 1),
-          ),
-      () => FResizableRegionData(
-            index: 1,
-            selected: false,
-            size: (min: 1, max: 5, allRegions: 10),
-            offset: (min: 1, max: 10),
-          ),
-      () => FResizableRegionData(
-            index: -1,
-            selected: false,
-            size: (min: 1, max: 5, allRegions: 10),
-            offset: (min: 1, max: 3),
-          ),
+      () => FResizableRegionData(index: 1, size: (min: 1, max: -2, allRegions: 10), offset: (min: 1, max: 2)),
+      () => FResizableRegionData(index: 1, size: (min: -1, max: 2, allRegions: 10), offset: (min: 1, max: 2)),
+      () => FResizableRegionData(index: 1, size: (min: 1, max: 1, allRegions: 10), offset: (min: 1, max: 2)),
+      () => FResizableRegionData(index: 1, size: (min: 2, max: 1, allRegions: 10), offset: (min: 1, max: 2)),
+      () => FResizableRegionData(index: 1, size: (min: 1, max: 5, allRegions: 10), offset: (min: 1, max: 1)),
+      () => FResizableRegionData(index: 1, size: (min: 1, max: 5, allRegions: 10), offset: (min: 2, max: 1)),
+      () => FResizableRegionData(index: 1, size: (min: 1, max: 5, allRegions: 10), offset: (min: 1, max: 1)),
+      () => FResizableRegionData(index: 1, size: (min: 1, max: 5, allRegions: 10), offset: (min: 1, max: 10)),
+      () => FResizableRegionData(index: -1, size: (min: 1, max: 5, allRegions: 10), offset: (min: 1, max: 3)),
     ].indexed) {
       test(
         '[$index] constructor throws error',
@@ -71,12 +26,8 @@ void main() {
     test(
       'percentage',
       () => expect(
-        FResizableRegionData(
-          index: 1,
-          selected: false,
-          size: (min: 1, max: 10, allRegions: 100),
-          offset: (min: 0, max: 5),
-        ).offsetPercentage,
+        FResizableRegionData(index: 1, size: (min: 1, max: 10, allRegions: 100), offset: (min: 0, max: 5))
+            .offsetPercentage,
         (min: 0, max: 0.05),
       ),
     );
@@ -84,12 +35,7 @@ void main() {
     test(
       'size',
       () => expect(
-        FResizableRegionData(
-          index: 1,
-          selected: false,
-          size: (min: 1, max: 10, allRegions: 100),
-          offset: (min: 0, max: 5),
-        ).size.current,
+        FResizableRegionData(index: 1, size: (min: 1, max: 10, allRegions: 100), offset: (min: 0, max: 5)).size.current,
         5,
       ),
     );
@@ -114,12 +60,8 @@ void main() {
       (AxisDirection.down, const Offset(0, -50), const Offset(0, -20), 20.0, 30.0),
     ].indexed) {
       test('[$index] update(...)', () {
-        final data = FResizableRegionData(
-          index: 0,
-          selected: true,
-          size: (min: 10, max: 100, allRegions: 100),
-          offset: (min: 20, max: 50),
-        );
+        final data =
+            FResizableRegionData(index: 0, size: (min: 10, max: 100, allRegions: 100), offset: (min: 20, max: 50));
 
         final (updated, updatedDelta) = data.update(direction, delta);
 
@@ -129,12 +71,8 @@ void main() {
     }
 
     test('update(...) throws error', () {
-      final data = FResizableRegionData(
-        index: 0,
-        selected: true,
-        size: (min: 10, max: 100, allRegions: 100),
-        offset: (min: 0, max: 30),
-      );
+      final data =
+          FResizableRegionData(index: 0, size: (min: 10, max: 100, allRegions: 100), offset: (min: 0, max: 30));
 
       expect(
         () => data.update(AxisDirection.left, const Offset(-10, 0)),
@@ -153,12 +91,8 @@ void main() {
       (AxisDirection.down, const Offset(0, -50), 10.0, 20.0),
     ].indexed) {
       test('[$index] update(...) beyond min/max size', () {
-        final data = FResizableRegionData(
-          index: 0,
-          selected: true,
-          size: (min: 10, max: 100, allRegions: 100),
-          offset: (min: min, max: max),
-        );
+        final data =
+            FResizableRegionData(index: 0, size: (min: 10, max: 100, allRegions: 100), offset: (min: min, max: max));
         final (updated, updatedDelta) = data.update(direction, delta);
 
         expect(updated.offset, (min: min, max: max));
@@ -169,12 +103,8 @@ void main() {
     test(
       'update(...) beyond total',
       () => expect(
-        () => FResizableRegionData(
-          index: 0,
-          selected: true,
-          size: (min: 1, max: 5, allRegions: 100),
-          offset: (min: 0, max: 2),
-        ).update(AxisDirection.right, const Offset(4, 0)),
+        () => FResizableRegionData(index: 0, size: (min: 1, max: 5, allRegions: 100), offset: (min: 0, max: 2))
+            .update(AxisDirection.right, const Offset(4, 0)),
         throwsAssertionError,
       ),
     );

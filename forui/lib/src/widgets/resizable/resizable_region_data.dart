@@ -13,10 +13,6 @@ final class FResizableRegionData with Diagnosticable {
   /// Throws [AssertionError] if [index] < 0.
   final int index;
 
-  /// True if this resized region is selected. Always false if [FResizable.interaction] is
-  /// [FResizableInteraction.resize].
-  final bool selected;
-
   /// This region's minimum and maximum height/width, in logical pixels, along the main resizable axis.
   ///
   /// The minimum height/width is determined by [FResizableRegion.minSize].
@@ -43,7 +39,6 @@ final class FResizableRegionData with Diagnosticable {
   /// Creates a [FResizableRegionData].
   FResizableRegionData({
     required this.index,
-    required this.selected,
     required ({double min, double max, double allRegions}) size,
     required this.offset,
   })  : assert(0 <= index, 'Index should be non-negative, but is $index.'),
@@ -84,7 +79,6 @@ final class FResizableRegionData with Diagnosticable {
   @useResult
   FResizableRegionData copyWith({
     int? index,
-    bool? selected,
     double? minSize,
     double? maxSize,
     double? allRegionsSize,
@@ -93,7 +87,6 @@ final class FResizableRegionData with Diagnosticable {
   }) =>
       FResizableRegionData(
         index: index ?? this.index,
-        selected: selected ?? this.selected,
         size: (min: minSize ?? size.min, max: maxSize ?? size.max, allRegions: allRegionsSize ?? size.allRegions),
         offset: (min: minOffset ?? offset.min, max: maxOffset ?? offset.max),
       );
@@ -111,19 +104,17 @@ final class FResizableRegionData with Diagnosticable {
       other is FResizableRegionData &&
           runtimeType == other.runtimeType &&
           index == other.index &&
-          selected == other.selected &&
           size == other.size &&
           offset == other.offset;
 
   @override
-  int get hashCode => index.hashCode ^ selected.hashCode ^ size.hashCode ^ offset.hashCode;
+  int get hashCode => index.hashCode ^ size.hashCode ^ offset.hashCode;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(IntProperty('index', index))
-      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected', ifFalse: 'not selected'))
       ..add(DoubleProperty('minSize', size.min))
       ..add(DoubleProperty('currentSize', size.current))
       ..add(DoubleProperty('maxSize', size.max))

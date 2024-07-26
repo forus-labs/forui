@@ -5,36 +5,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
 void main() {
-  final top = FResizableRegion.raw(
+  final top = FResizableRegion(
     initialSize: 30,
     sliderSize: 10,
     builder: (context, snapshot, child) => const SizedBox(),
   );
 
-  final bottom = FResizableRegion.raw(
+  final bottom = FResizableRegion(
     initialSize: 70,
     sliderSize: 10,
     builder: (context, snapshot, child) => const SizedBox(),
   );
 
   for (final (index, constructor) in [
-    () => FResizable(
-          crossAxisExtent: 0,
-          axis: Axis.vertical,
-          children: [top, bottom],
-        ),
-    () => FResizable(
-          crossAxisExtent: 10,
-          axis: Axis.vertical,
-          interaction: const FResizableInteraction.selectAndResize(-1),
-          children: [top, bottom],
-        ),
-    () => FResizable(
-          crossAxisExtent: 10,
-          axis: Axis.vertical,
-          interaction: const FResizableInteraction.selectAndResize(2),
-          children: [top, bottom],
-        ),
+    () => FResizable(crossAxisExtent: 0, axis: Axis.vertical, children: [top, bottom]),
   ].indexed) {
     test(
       '[$index] constructor throws error',
@@ -73,45 +57,10 @@ void main() {
     );
   });
 
-  testWidgets('no vertical drag when disabled', (tester) async {
-    final vertical = FResizable(
-      crossAxisExtent: 50,
-      axis: Axis.vertical,
-      interaction: const FResizableInteraction.selectAndResize(1),
-      children: [top, bottom],
-    );
-
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: ThemeData(useMaterial3: true),
-        home: Scaffold(body: Center(child: vertical)),
-      ),
-    );
-
-    await tester.tap(find.byType(GestureDetector).at(3));
-
-    await tester.timedDrag(
-      find.byType(GestureDetector).at(1),
-      const Offset(0, 100),
-      const Duration(seconds: 1),
-    );
-    await tester.pumpAndSettle();
-
-    expect(
-      tester.getSize(find.byType(FResizableRegion).first),
-      const Size(50, 30),
-    );
-    expect(
-      tester.getSize(find.byType(FResizableRegion).last),
-      const Size(50, 70),
-    );
-  });
-
   testWidgets('vertical drag upwards', (tester) async {
     final vertical = FResizable(
       crossAxisExtent: 50,
       axis: Axis.vertical,
-      interaction: const FResizableInteraction.selectAndResize(0),
       children: [top, bottom],
     );
 
@@ -143,7 +92,6 @@ void main() {
     final horizontal = FResizable(
       crossAxisExtent: 50,
       axis: Axis.horizontal,
-      interaction: const FResizableInteraction.selectAndResize(0),
       children: [top, bottom],
     );
 
@@ -175,7 +123,6 @@ void main() {
     final horizontal = FResizable(
       crossAxisExtent: 50,
       axis: Axis.horizontal,
-      interaction: const FResizableInteraction.selectAndResize(0),
       children: [top, bottom],
     );
 
@@ -203,11 +150,10 @@ void main() {
     );
   });
 
-  testWidgets('horizontal drag when disabled', (tester) async {
+  testWidgets('horizontal drag right', (tester) async {
     final horizontal = FResizable(
       crossAxisExtent: 50,
       axis: Axis.horizontal,
-      interaction: const FResizableInteraction.selectAndResize(0),
       children: [top, bottom],
     );
 
@@ -232,40 +178,6 @@ void main() {
     expect(
       tester.getSize(find.byType(FResizableRegion).last),
       const Size(20, 50),
-    );
-  });
-
-  testWidgets('no horizontal drag when disabled', (tester) async {
-    final horizontal = FResizable(
-      crossAxisExtent: 50,
-      axis: Axis.horizontal,
-      interaction: const FResizableInteraction.selectAndResize(1),
-      children: [top, bottom],
-    );
-
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: ThemeData(useMaterial3: true),
-        home: Scaffold(body: Center(child: horizontal)),
-      ),
-    );
-
-    await tester.tap(find.byType(GestureDetector).at(3));
-
-    await tester.timedDrag(
-      find.byType(GestureDetector).at(1),
-      const Offset(-100, 0),
-      const Duration(seconds: 1),
-    );
-    await tester.pumpAndSettle();
-
-    expect(
-      tester.getSize(find.byType(FResizableRegion).first),
-      const Size(30, 50),
-    );
-    expect(
-      tester.getSize(find.byType(FResizableRegion).last),
-      const Size(70, 50),
     );
   });
 }
