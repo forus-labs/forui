@@ -52,6 +52,10 @@ class _AppRouter extends $_AppRouter {
           page: AvatarRawRoute.page,
         ),
         AutoRoute(
+          path: '/avatar/invalid',
+          page: AvatarInvalidRoute.page,
+        ),
+        AutoRoute(
           path: '/badge/default',
           page: BadgeRoute.page,
         ),

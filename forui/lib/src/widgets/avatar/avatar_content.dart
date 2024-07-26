@@ -20,6 +20,8 @@ class _AvatarContent extends StatelessWidget {
     final placeholder = this.placeholder ?? _IconPlaceholder(style: style, size: size);
 
     return Image(
+      height: size,
+      width: size,
       filterQuality: FilterQuality.medium,
       image: image,
       errorBuilder: (context, exception, stacktrace) => placeholder,

@@ -27,8 +27,8 @@ class FAvatar extends StatelessWidget {
   /// Typically used to display the user's initials using a [Text] widget
   /// styled with [FAvatarStyle.backgroundColor].
   ///
-  /// Use image parameter to display an image; use [placeholderBuilder] for initials.
-  final Widget Function(BuildContext, FAvatarStyle) placeholderBuilder;
+  /// Use image parameter to display an image; use [placeholder] for initials.
+  final Widget placeholder;
 
   /// Creates an [FAvatar].
   FAvatar({
@@ -37,12 +37,12 @@ class FAvatar extends StatelessWidget {
     this.size = 40.0,
     Widget? placeholder,
     super.key,
-  }) : placeholderBuilder = ((context, style) => _AvatarContent(
-              image: image,
-              style: style,
-              size: size,
-              placeholder: placeholder,
-            ));
+  }) : placeholder = _AvatarContent(
+          image: image,
+          style: style,
+          size: size,
+          placeholder: placeholder,
+        );
 
   /// Creates a [FAvatar] with custom child.
   FAvatar.raw({
@@ -50,12 +50,7 @@ class FAvatar extends StatelessWidget {
     this.style,
     this.size = 40.0,
     super.key,
-  }) : placeholderBuilder = ((context, style) =>
-            child ??
-            _IconPlaceholder(
-              style: style,
-              size: size,
-            ));
+  }) : placeholder = child ?? _IconPlaceholder(style: style, size: size);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +67,7 @@ class FAvatar extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: DefaultTextStyle(
         style: style.text,
-        child: placeholderBuilder(context, style),
+        child: placeholder,
       ),
     );
   }
@@ -82,8 +77,7 @@ class FAvatar extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DoubleProperty('size', size))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('placeholderBuilder', placeholderBuilder));
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 

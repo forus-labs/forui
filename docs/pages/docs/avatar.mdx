@@ -13,19 +13,22 @@ An image element with a fallback for representing the user.
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // With Valid image.
           FAvatar(
             image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
             placeholder: const Text('MN'),
           ),
           const SizedBox(width: 10),
+
+          // With Invalid image and placeholder.
           FAvatar(
             image: const NetworkImage(''),
             placeholder: const Text('MN'),
           ),
           const SizedBox(width: 10),
-          FAvatar(
-            image: const NetworkImage(''),
-          ),
+
+          // With Invalid image without placeholder.
+          FAvatar(image: const NetworkImage('')),
         ],
       );
       ```
@@ -37,25 +40,54 @@ An image element with a fallback for representing the user.
 ### `FAvatar(...)`
 
 ```dart
-// Default constructor - Valid image
 FAvatar(
   image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
   placeholder: const Text('MN'),
-),
-
-// Default constructor - Invalid image with placeholder
-FAvatar(
-  image: const NetworkImage(''),
-  placeholder: const Text('MN'),
-),
-
-// Default constructor - Invalid image without placeholder
-FAvatar.raw(
-  image: const NetworkImage(''),
-),
+);
 ```
 
 ### `FAvatar.raw(...)`
+
+```dart
+// Raw constructor - with icon
+FAvatar.raw(
+  child: FAssets.icons.baby(
+    colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+  ),
+);
+
+// Raw constructor - with text
+FAvatar.raw(child: const Text('MN'));
+```
+
+## Examples
+
+### Invalid image
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='avatar' variant='invalid' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // With placeholder widget.
+            FAvatar(
+              image: const AssetImage(''),
+              placeholder: const Text('MN'),
+            ),
+            const SizedBox(width: 10),
+
+            // Without placeholder widget.
+            FAvatar(image: const AssetImage('')),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### With Child widget without fallback
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='avatar' variant='raw' query={{}}/>
@@ -65,19 +97,19 @@ FAvatar.raw(
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Raw constructor - without child
+            // Raw constructor - without child.
             FAvatar.raw(),
             const SizedBox(width: 10),
 
-            // Raw constructor - with child
+            // Raw constructor - with child.
             FAvatar.raw(
               child: FAssets.icons.baby(
-              colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
               ),
             ),
             const SizedBox(width: 10),
 
-            // Raw constructor - with text
+            // Raw constructor - with text.
             FAvatar.raw(child: const Text('MN')),
           ],
         );

@@ -57,3 +57,25 @@ class AvatarRawPage extends SampleScaffold {
         ],
       );
 }
+
+@RoutePage()
+class AvatarInvalidPage extends SampleScaffold {
+  AvatarInvalidPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FAvatar(
+        image: const AssetImage(''),
+        placeholder: const Text('MN'),
+      ),
+      const SizedBox(width: 10),
+      FAvatar(
+        image: const AssetImage(''),
+      ),
+    ],
+  );
+}
