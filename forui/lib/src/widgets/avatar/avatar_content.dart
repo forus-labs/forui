@@ -1,20 +1,9 @@
 part of 'avatar.dart';
 
 class _AvatarContent extends StatelessWidget {
-  /// The profile image displayed within the circle.
-  ///
-  /// If the user's initials are used, use [placeholder] instead.
-  final ImageProvider image;
-
   final FAvatarStyle? style;
-
-  /// The circle's size.
+  final ImageProvider image;
   final double size;
-
-  /// The fallback widget displayed if [image] fails to load.
-  ///
-  /// Typically used to display the user's initials using a [Text] widget
-  /// styled with [FAvatarStyle.backgroundColor].
   final Widget? placeholder;
 
   const _AvatarContent({
