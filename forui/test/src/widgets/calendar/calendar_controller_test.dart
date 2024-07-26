@@ -72,7 +72,6 @@ void main() {
       (null, DateTime.utc(2023), false),
     ]) {
       test('selected(...)', () {
-      test('selected(...)', () {
         final controller = FCalendarRangeController(initialSelection: initial);
         expect(controller.selected(date), expected);
       });
