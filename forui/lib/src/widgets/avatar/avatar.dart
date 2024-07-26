@@ -44,7 +44,7 @@ class FAvatar extends StatelessWidget {
           fallback: fallback,
         );
 
-  /// Creates a [FAvatar] with custom child.
+  /// Creates a [FAvatar] without a fallback.
   FAvatar.raw({
     Widget? child,
     this.style,
