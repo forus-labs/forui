@@ -20,12 +20,12 @@ class AvatarPage extends SampleScaffold {
         children: [
           FAvatar(
             image: AssetImage(path('avatar.png')),
-            placeholder: const Text('MN'),
+            fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
           FAvatar(
             image: const AssetImage(''),
-            placeholder: const Text('MN'),
+            fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
           FAvatar(
@@ -70,7 +70,7 @@ class AvatarInvalidPage extends SampleScaffold {
         children: [
           FAvatar(
             image: const AssetImage(''),
-            placeholder: const Text('MN'),
+            fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
           FAvatar(

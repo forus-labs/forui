@@ -1,44 +1,44 @@
 part of 'avatar.dart';
 
 class _AvatarContent extends StatelessWidget {
-  final FAvatarStyle? style;
   final ImageProvider image;
   final double size;
-  final Widget? placeholder;
+  final FAvatarStyle? style;
+  final Widget? fallback;
 
   const _AvatarContent({
     required this.image,
-    required this.style,
     required this.size,
-    this.placeholder,
+    this.style,
+    this.fallback,
   });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.avatarStyle;
 
-    final placeholder = this.placeholder ?? _IconPlaceholder(style: style, size: size);
+    final fallback = this.fallback ?? _Placeholder(style: style, size: size);
 
     return Image(
       height: size,
       width: size,
       filterQuality: FilterQuality.medium,
       image: image,
-      errorBuilder: (context, exception, stacktrace) => placeholder,
+      errorBuilder: (context, exception, stacktrace) => fallback,
       frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) {
           return child;
         }
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
-          child: frame == null ? placeholder : child,
+          child: frame == null ? fallback : child,
         );
       },
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) {
           return child;
         }
-        return placeholder;
+        return fallback;
       },
       fit: BoxFit.cover,
     );
@@ -48,17 +48,17 @@ class _AvatarContent extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('image', image))
       ..add(DoubleProperty('size', size))
-      ..add(DiagnosticsProperty('image', image));
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
-class _IconPlaceholder extends StatelessWidget {
+class _Placeholder extends StatelessWidget {
   final double size;
   final FAvatarStyle? style;
 
-  const _IconPlaceholder({required this.size, this.style});
+  const _Placeholder({required this.size, this.style});
 
   @override
   Widget build(BuildContext context) {

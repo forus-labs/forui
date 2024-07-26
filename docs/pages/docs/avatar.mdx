@@ -16,18 +16,18 @@ An image element with a fallback for representing the user.
           // With Valid image.
           FAvatar(
             image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-            placeholder: const Text('MN'),
+            fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
 
-          // With Invalid image and placeholder.
+          // With Invalid image and fallback.
           FAvatar(
             image: const NetworkImage(''),
-            placeholder: const Text('MN'),
+            fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
 
-          // With Invalid image without placeholder.
+          // With Invalid image without fallback.
           FAvatar(image: const NetworkImage('')),
         ],
       );
@@ -42,7 +42,7 @@ An image element with a fallback for representing the user.
 ```dart
 FAvatar(
   image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-  placeholder: const Text('MN'),
+  fallback: const Text('MN'),
 );
 ```
 
@@ -72,14 +72,14 @@ FAvatar.raw(child: const Text('MN'));
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // With placeholder widget.
+            // With fallback widget.
             FAvatar(
               image: const AssetImage(''),
-              placeholder: const Text('MN'),
+              fallback: const Text('MN'),
             ),
             const SizedBox(width: 10),
 
-            // Without placeholder widget.
+            // Without fallback widget.
             FAvatar(image: const AssetImage('')),
           ],
         );
@@ -87,7 +87,7 @@ FAvatar.raw(child: const Text('MN'));
     </Tabs.Tab>
 </Tabs>
 
-### With Child widget without fallback
+### Without fallback
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='avatar' variant='raw' query={{}}/>

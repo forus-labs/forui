@@ -11,9 +11,9 @@ part 'avatar_content.dart';
 ///
 /// use image property to provide a profile image displayed within the circle.
 /// Typically used with a user's profile image. If the image fails to load,
-/// the placeholderBuilder property is used instead, which usually displays the user's initials.
+/// the fallback widget is used instead, which usually displays the user's initials.
 ///
-/// If the user's profile has no image, use the placeholderBuilder property to provide
+/// If the user's profile has no image, use the fallback property to provide
 /// the initials using a [Text] widget styled with [FAvatarStyle.backgroundColor].
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
@@ -27,21 +27,21 @@ class FAvatar extends StatelessWidget {
   /// Typically used to display the user's initials using a [Text] widget
   /// styled with [FAvatarStyle.backgroundColor].
   ///
-  /// Use image parameter to display an image; use [placeholder] for initials.
-  final Widget placeholder;
+  /// Use image parameter to display an image; use [fallback] for initials.
+  final Widget fallback;
 
   /// Creates an [FAvatar].
   FAvatar({
     required ImageProvider image,
     this.style,
     this.size = 40.0,
-    Widget? placeholder,
+    Widget? fallback,
     super.key,
-  }) : placeholder = _AvatarContent(
+  }) : fallback = _AvatarContent(
           image: image,
           style: style,
           size: size,
-          placeholder: placeholder,
+          fallback: fallback,
         );
 
   /// Creates a [FAvatar] with custom child.
@@ -50,7 +50,7 @@ class FAvatar extends StatelessWidget {
     this.style,
     this.size = 40.0,
     super.key,
-  }) : placeholder = child ?? _IconPlaceholder(style: style, size: size);
+  }) : fallback = child ?? _Placeholder(style: style, size: size);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class FAvatar extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: DefaultTextStyle(
         style: style.text,
-        child: placeholder,
+        child: fallback,
       ),
     );
   }
@@ -83,16 +83,16 @@ class FAvatar extends StatelessWidget {
 
 /// [FAvatar]'s style.
 final class FAvatarStyle with Diagnosticable {
-  /// The placeholder's background color.
+  /// The fallback's background color.
   final Color backgroundColor;
 
-  /// The placeholder's color.
+  /// The fallback's color.
   final Color foregroundColor;
 
   /// Duration for the transition animation.
   final Duration fadeInDuration;
 
-  /// The text style for the placeholder text.
+  /// The text style for the fallback text.
   final TextStyle text;
 
   /// Creates a [FAvatarStyle].

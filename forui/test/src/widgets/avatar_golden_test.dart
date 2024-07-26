@@ -21,7 +21,7 @@ void main() {
               data: theme,
               child: FAvatar(
                 image: FileImage(File('./test/resources/pante.jpg')),
-                placeholder: const Text('MN'),
+                fallback: const Text('MN'),
               ),
             ),
           );
