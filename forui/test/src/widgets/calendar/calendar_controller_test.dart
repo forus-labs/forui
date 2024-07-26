@@ -15,7 +15,7 @@ void main() {
     ]) {
       test('contains(...) contains date', () {
         final controller = FCalendarValueController(initialSelection: DateTime.utc(2024, 5, 4));
-        expect(controller.contains(date), expected);
+        expect(controller.selected(date), expected);
       });
     }
 
@@ -39,7 +39,7 @@ void main() {
     ]) {
       test('contains(...)', () {
         final controller = FCalendarMultiValueController(initialSelections: {DateTime.utc(2024)});
-        expect(controller.contains(date), expected);
+        expect(controller.selected(date), expected);
       });
     }
 
@@ -71,9 +71,10 @@ void main() {
       ((DateTime.utc(2024), DateTime.utc(2025)), DateTime.utc(2026), false),
       (null, DateTime.utc(2023), false),
     ]) {
-      test('contains(...)', () {
+      test('selected(...)', () {
+      test('selected(...)', () {
         final controller = FCalendarRangeController(initialSelection: initial);
-        expect(controller.contains(date), expected);
+        expect(controller.selected(date), expected);
       });
     }
 

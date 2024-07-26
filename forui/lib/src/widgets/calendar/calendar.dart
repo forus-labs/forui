@@ -112,8 +112,8 @@ class FCalendar extends StatelessWidget {
                       end: end.toLocalDate(),
                       today: today.toLocalDate(),
                       initial: _month.value,
-                      selectable: (date) => controller.canSelect(date.toNative()),
-                      selected: (date) => controller.contains(date.toNative()),
+                      selectable: (date) => controller.selectable(date.toNative()),
+                      selected: (date) => controller.selected(date.toNative()),
                       onMonthChange: (date) {
                         _month.value = date;
                         onMonthChange?.call(date.toNative());

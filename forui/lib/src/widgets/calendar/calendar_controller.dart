@@ -23,12 +23,12 @@ abstract class FCalendarController<T> extends ValueNotifier<T> {
   /// ## Note
   /// It is unsafe for this function to have side effects since it may be called more than once for a single date. As it
   /// is called frequently, it should not be computationally expensive.
-  bool canSelect(DateTime date);
+  bool selectable(DateTime date);
 
   /// Returns true if the given [date] is selected.
   ///
   /// [date] should always in UTC timezone and truncated to the nearest day.
-  bool contains(DateTime date);
+  bool selected(DateTime date);
 
   /// Selects the given [date].
   ///
@@ -40,26 +40,26 @@ abstract class FCalendarController<T> extends ValueNotifier<T> {
 ///
 /// The [DateTime]s are always in UTC timezone and truncated to the nearest date.
 class FCalendarValueController extends FCalendarController<DateTime?> {
-  final Predicate<DateTime> _canSelect;
+  final Predicate<DateTime> _selectable;
 
   /// Creates a [FCalendarValueController] with the given initially selected date.
   ///
-  /// [canSelect] will always return true if not given.
+  /// [selectable] will always return true if not given.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [initialSelection] is not in UTC timezone.
   FCalendarValueController({
     DateTime? initialSelection,
-    Predicate<DateTime>? canSelect,
+    Predicate<DateTime>? selectable,
   })  : assert(initialSelection?.isUtc ?? true, 'value must be in UTC timezone'),
-        _canSelect = canSelect ?? _true,
+        _selectable = selectable ?? _true,
         super(initialSelection);
 
   @override
-  bool canSelect(DateTime date) => _canSelect(date);
+  bool selectable(DateTime date) => _selectable(date);
 
   @override
-  bool contains(DateTime date) => value?.toLocalDate() == date.toLocalDate();
+  bool selected(DateTime date) => value?.toLocalDate() == date.toLocalDate();
 
   @override
   void select(DateTime date) => value = value?.toLocalDate() == date.toLocalDate() ? null : date;
@@ -70,7 +70,7 @@ class FCalendarValueController extends FCalendarController<DateTime?> {
 ///
 /// The [DateTime]s are always in UTC timezone and truncated to the nearest day.
 class FCalendarMultiValueController extends FCalendarController<Set<DateTime>> {
-  final Predicate<DateTime> _canSelect;
+  final Predicate<DateTime> _selectable;
 
   /// Creates a [FCalendarMultiValueController] with the given initial [value].
   ///
@@ -80,14 +80,14 @@ class FCalendarMultiValueController extends FCalendarController<Set<DateTime>> {
     Set<DateTime> initialSelections = const {},
     Predicate<DateTime>? canSelect,
   })  : assert(initialSelections.every((d) => d.isUtc), 'dates must be in UTC timezone'),
-        _canSelect = canSelect ?? _true,
+        _selectable = canSelect ?? _true,
         super(initialSelections);
 
   @override
-  bool canSelect(DateTime date) => _canSelect(date);
+  bool selectable(DateTime date) => _selectable(date);
 
   @override
-  bool contains(DateTime date) => value.contains(date);
+  bool selected(DateTime date) => value.contains(date);
 
   @override
   void select(DateTime date) {
@@ -101,7 +101,7 @@ class FCalendarMultiValueController extends FCalendarController<Set<DateTime>> {
 /// Both the start and end dates of the range is inclusive. The selected dates are always in UTC timezone and truncated
 /// to the nearest day. Unselectable dates within the selected range are selected regardless.
 class FCalendarRangeController extends FCalendarController<(DateTime, DateTime)?> {
-  final Predicate<DateTime> _canSelect;
+  final Predicate<DateTime> _selectable;
 
   /// Creates a [FCalendarRangeController] with the given initial [value].
   ///
@@ -122,14 +122,14 @@ class FCalendarRangeController extends FCalendarController<(DateTime, DateTime)?
                   initialSelection.$1.isAtSameMomentAs(initialSelection.$2)),
           'end date must be greater than or equal to start date',
         ),
-        _canSelect = canSelect ?? _true,
+        _selectable = canSelect ?? _true,
         super(initialSelection);
 
   @override
-  bool canSelect(DateTime date) => _canSelect(date);
+  bool selectable(DateTime date) => _selectable(date);
 
   @override
-  bool contains(DateTime date) {
+  bool selected(DateTime date) {
     if (value case (final first, final last)) {
       final current = date.toLocalDate();
       return first.toLocalDate() <= current && current <= last.toLocalDate();

@@ -33,7 +33,7 @@ to customize the date selection behavior.
 FCalendar(
   controller: FCalendarValueController(
     initialSelection: DateTime.utc(2024, 9, 13),
-    canSelect: (date) => true,
+    selectable: (date) => allowedDates.contains(date),
   ),
   start: DateTime.utc(2024),
   end: DateTime.utc(2030),
@@ -91,7 +91,7 @@ FCalendar(
       FCalendar(
         controller: FCalendarMultiValueController(
           initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
-          canSelect: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+          selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
         ),
         start: DateTime.utc(2000),
         today: DateTime.utc(2024, 7, 15),

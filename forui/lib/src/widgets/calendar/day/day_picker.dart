@@ -19,7 +19,7 @@ class DayPicker extends StatefulWidget {
   final LocalDate month;
   final LocalDate today;
   final LocalDate? focused;
-  final Predicate<LocalDate> canSelect;
+  final Predicate<LocalDate> selectable;
   final Predicate<LocalDate> selected;
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate> onLongPress;
@@ -29,7 +29,7 @@ class DayPicker extends StatefulWidget {
     required this.month,
     required this.today,
     required this.focused,
-    required this.canSelect,
+    required this.selectable,
     required this.selected,
     required this.onPress,
     required this.onLongPress,
@@ -47,7 +47,7 @@ class DayPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
-      ..add(DiagnosticsProperty('selectable', canSelect))
+      ..add(DiagnosticsProperty('selectable', selectable))
       ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));
@@ -112,7 +112,7 @@ class _DayPickerState extends State<DayPicker> {
                   focusNode: focusNode,
                   current: date.month == widget.month.month,
                   today: date == widget.today,
-                  canSelect: widget.canSelect,
+                  selectable: widget.selectable,
                   selected: widget.selected,
                   onPress: widget.onPress,
                   onLongPress: widget.onLongPress,
