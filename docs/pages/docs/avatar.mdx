@@ -6,14 +6,31 @@ An image element with a fallback for representing the user.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='avatar' query={{}}/>
+      <Widget name='avatar' variant='default' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
-      FAvatar(
-        image: const NetworkImage('https://picsum.photos/250?image=9'),
-        placeholderBuilder: (_) => const Text('MN'),
-      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // With Valid image.
+          FAvatar(
+            image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+            fallback: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+
+          // With Invalid image and fallback.
+          FAvatar(
+            image: const NetworkImage(''),
+            fallback: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+
+          // With Invalid image without fallback.
+          FAvatar(image: const NetworkImage('')),
+        ],
+      );
       ```
   </Tabs.Tab>
 </Tabs>
@@ -24,9 +41,78 @@ An image element with a fallback for representing the user.
 
 ```dart
 FAvatar(
-  image: const NetworkImage('https://picsum.photos/250?image=9'),
-  size: 60,
-  placeholderBuilder: (_) => const Text('MN'),
-),
+  image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+  fallback: const Text('MN'),
+);
 ```
 
+### `FAvatar.raw(...)`
+
+```dart
+// Raw constructor - with icon
+FAvatar.raw(
+  child: FAssets.icons.baby(
+    colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+  ),
+);
+
+// Raw constructor - with text
+FAvatar.raw(child: const Text('MN'));
+```
+
+## Examples
+
+### Invalid image
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='avatar' variant='invalid' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // With fallback widget.
+            FAvatar(
+              image: const AssetImage(''),
+              fallback: const Text('MN'),
+            ),
+            const SizedBox(width: 10),
+
+            // Without fallback widget.
+            FAvatar(image: const AssetImage('')),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Without fallback
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='avatar' variant='raw' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Raw constructor - without child.
+            FAvatar.raw(),
+            const SizedBox(width: 10),
+
+            // Raw constructor - with child.
+            FAvatar.raw(
+              child: FAssets.icons.baby(
+                colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+              ),
+            ),
+            const SizedBox(width: 10),
+
+            // Raw constructor - with text.
+            FAvatar.raw(child: const Text('MN')),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
