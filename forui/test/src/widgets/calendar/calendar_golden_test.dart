@@ -31,7 +31,7 @@ void main() {
                 child: FCalendar(
                   controller: FCalendarMultiValueController(
                     initialSelections: selected,
-                    canSelect: (date) => date != DateTime.utc(2024, 7, 2),
+                    selectable: (date) => date != DateTime.utc(2024, 7, 2),
                   ),
                   start: DateTime(1900, 1, 8),
                   end: DateTime(2024, 7, 10),

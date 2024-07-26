@@ -78,9 +78,9 @@ class FCalendarMultiValueController extends FCalendarController<Set<DateTime>> {
   /// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone.
   FCalendarMultiValueController({
     Set<DateTime> initialSelections = const {},
-    Predicate<DateTime>? canSelect,
+    Predicate<DateTime>? selectable,
   })  : assert(initialSelections.every((d) => d.isUtc), 'dates must be in UTC timezone'),
-        _selectable = canSelect ?? _true,
+        _selectable = selectable ?? _true,
         super(initialSelections);
 
   @override
@@ -111,7 +111,7 @@ class FCalendarRangeController extends FCalendarController<(DateTime, DateTime)?
   /// * the end date is less than start date.
   FCalendarRangeController({
     (DateTime, DateTime)? initialSelection,
-    Predicate<DateTime>? canSelect,
+    Predicate<DateTime>? selectable,
   })  : assert(
           initialSelection == null || (initialSelection.$1.isUtc && initialSelection.$2.isUtc),
           'value must be in UTC timezone',
@@ -122,7 +122,7 @@ class FCalendarRangeController extends FCalendarController<(DateTime, DateTime)?
                   initialSelection.$1.isAtSameMomentAs(initialSelection.$2)),
           'end date must be greater than or equal to start date',
         ),
-        _selectable = canSelect ?? _true,
+        _selectable = selectable ?? _true,
         super(initialSelection);
 
   @override

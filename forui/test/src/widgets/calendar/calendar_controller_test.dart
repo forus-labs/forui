@@ -13,7 +13,7 @@ void main() {
       (DateTime.utc(2024, 5, 4), true),
       (DateTime.utc(2024, 5, 5), false),
     ]) {
-      test('contains(...) contains date', () {
+      test('selected(...) contains date', () {
         final controller = FCalendarValueController(initialSelection: DateTime.utc(2024, 5, 4));
         expect(controller.selected(date), expected);
       });
@@ -37,7 +37,7 @@ void main() {
       (DateTime.utc(2024), true),
       (DateTime.utc(2025), false),
     ]) {
-      test('contains(...)', () {
+      test('selected(...)', () {
         final controller = FCalendarMultiValueController(initialSelections: {DateTime.utc(2024)});
         expect(controller.selected(date), expected);
       });

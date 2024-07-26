@@ -7,7 +7,7 @@
 
 ### Changes
 * Change number of years displayed per page in `FCalendar` from 12 to 15.
-* **Breaking:** Move `FCalendar.enabled` to `FCalendarController.canSelect(...)`.
+* **Breaking:** Move `FCalendar.enabled` to `FCalendarController.selectable(...)`.
 
 * **Breaking:** Rename `FCalendarController.contains(...)` to `FCalendarController.selected(...)`.
 * **Breaking:** Rename `FCalendarController.onPress(...)` to `FCalendarController.select(...)`.
