@@ -7,8 +7,8 @@ import 'package:sugar/sugar.dart';
 
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
-import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 import 'package:forui/src/widgets/calendar/year/year_picker.dart';
+import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
 // ignore: non_constant_identifier_names
 final _MMM = DateFormat.MMM();
@@ -67,8 +67,8 @@ class _MonthPickerState extends State<MonthPicker> {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 5.0),
-    child: GridView(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: GridView(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: YearPicker.columns,
             mainAxisExtent: ((DayPicker.tileDimension - 5.0) * DayPicker.maxRows) / YearPicker.rows,
@@ -87,7 +87,7 @@ class _MonthPickerState extends State<MonthPicker> {
               ),
           ],
         ),
-  );
+      );
 
   @override
   void didUpdateWidget(MonthPicker old) {
