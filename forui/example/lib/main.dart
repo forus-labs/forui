@@ -32,7 +32,7 @@ class _ApplicationState extends State<Application> {
                 ),
               ],
             ),
-            content: const Example(),
+            content: child!,
             footer: FBottomNavigationBar(
               index: index,
               onChange: (index) => setState(() => this.index = index),

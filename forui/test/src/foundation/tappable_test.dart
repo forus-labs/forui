@@ -21,11 +21,11 @@ void main() {
           ),
         ),
       );
-      expect(find.text('false'), findsOneWidget);
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
       focusNode.requestFocus();
       await tester.pumpAndSettle();
-      expect(find.text('true'), findsOneWidget);
+      expect(find.text((focused: true, hovered: false).toString()), findsOneWidget);
     });
 
     testWidgets('hovered', (tester) async {
@@ -37,7 +37,7 @@ void main() {
           ),
         ),
       );
-      expect(find.text('false'), findsOneWidget);
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
       final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
       await gesture.addPointer(location: Offset.zero);
@@ -47,12 +47,12 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
       await tester.pumpAndSettle();
 
-      expect(find.text('true'), findsOneWidget);
+      expect(find.text((focused: false, hovered: true).toString()), findsOneWidget);
 
       await gesture.moveTo(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(find.text('false'), findsOneWidget);
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
     });
   });
 }

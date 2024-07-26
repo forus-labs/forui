@@ -68,6 +68,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
           },
           excludeSemantics: true,
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(_yMMMM.format(widget.month.toNative()), style: widget.style.headerTextStyle), // TODO: Localization

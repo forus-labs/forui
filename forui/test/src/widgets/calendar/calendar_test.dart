@@ -11,8 +11,7 @@ void main() {
           TestScaffold(
             data: FThemes.zinc.light,
             child: FCalendar(
-              controller: FCalendarMultiValueController(),
-              enabled: (date) => date != DateTime.utc(2024, 7, 2),
+              controller: FCalendarMultiValueController(canSelect: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -33,8 +32,7 @@ void main() {
           TestScaffold(
             data: FThemes.zinc.light,
             child: FCalendar(
-              controller: FCalendarMultiValueController(),
-              enabled: (date) => date != DateTime.utc(2024, 7, 2),
+              controller: FCalendarMultiValueController(canSelect: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(2024, 7),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -57,8 +55,7 @@ void main() {
           TestScaffold(
             data: FThemes.zinc.light,
             child: FCalendar(
-              controller: FCalendarMultiValueController(),
-              enabled: (date) => date != DateTime.utc(2024, 7, 2),
+              controller: FCalendarMultiValueController(canSelect: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 8, 10),
               today: DateTime(2024, 7, 14),
@@ -79,8 +76,7 @@ void main() {
           TestScaffold(
             data: FThemes.zinc.light,
             child: FCalendar(
-              controller: FCalendarMultiValueController(),
-              enabled: (date) => date != DateTime.utc(2024, 7, 2),
+              controller: FCalendarMultiValueController(canSelect: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(2024),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),

@@ -2,60 +2,95 @@ import 'package:flutter/widgets.dart';
 
 import 'package:sugar/sugar.dart';
 
-import 'package:forui/forui.dart';
+bool _true(DateTime _) => true;
 
 /// A controller that controls date selection in a calendar.
 ///
+/// The [DateTime]s are always in UTC timezone and truncated to the nearest day.
+///
 /// This class should be extended to customize date selection. By default, the following controllers are provided:
-/// * [FCalendarSingleValueController] for selecting a single date.
+/// * [FCalendarValueController] for selecting a single date.
 /// * [FCalendarMultiValueController] for selecting multiple date.
-/// * [FCalendarSingleRangeController] for selecting a single range.
+/// * [FCalendarRangeController] for selecting a single range.
 abstract class FCalendarController<T> extends ValueNotifier<T> {
   /// Creates a [FCalendarController] with the given initial [value].
   FCalendarController(super._value);
 
-  /// Called when the given [date] in a [FCalendarPickerType.day] picker is pressed.
+  /// Returns true if the given [date] can be selected/unselected.
   ///
-  /// [date] is always in UTC timezone and truncated to the nearest date.
-  void onPress(DateTime date);
+  /// [date] should always in UTC timezone and truncated to the nearest day.
+  ///
+  /// ## Note
+  /// It is unsafe for this function to have side effects since it may be called more than once for a single date. As it
+  /// is called frequently, it should not be computationally expensive.
+  bool selectable(DateTime date);
 
   /// Returns true if the given [date] is selected.
-  bool contains(DateTime date);
+  ///
+  /// [date] should always in UTC timezone and truncated to the nearest day.
+  bool selected(DateTime date);
+
+  /// Selects the given [date].
+  ///
+  /// [date] should always in UTC timezone and truncated to the nearest day.
+  void select(DateTime date);
 }
 
-/// A date selection controller that allows only a single date to be selected.
+/// A controller that allows only a single date to be selected.
 ///
-/// The selected date is always in UTC timezone and truncated to the nearest date.
-final class FCalendarSingleValueController extends FCalendarController<DateTime?> {
-  /// Creates a [FCalendarSingleValueController] with the given initial [value].
+/// The [DateTime]s are always in UTC timezone and truncated to the nearest date.
+class FCalendarValueController extends FCalendarController<DateTime?> {
+  final Predicate<DateTime> _selectable;
+
+  /// Creates a [FCalendarValueController] with the given initially selected date.
+  ///
+  /// [selectable] will always return true if not given.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if the given [value] is not in UTC timezone.
-  FCalendarSingleValueController([super.value]) : assert(value?.isUtc ?? true, 'value must be in UTC timezone');
+  /// Throws [AssertionError] if [initialSelection] is not in UTC timezone.
+  FCalendarValueController({
+    DateTime? initialSelection,
+    Predicate<DateTime>? selectable,
+  })  : assert(initialSelection?.isUtc ?? true, 'value must be in UTC timezone'),
+        _selectable = selectable ?? _true,
+        super(initialSelection);
 
   @override
-  bool contains(DateTime date) => value?.toLocalDate() == date.toLocalDate();
+  bool selectable(DateTime date) => _selectable(date);
 
   @override
-  void onPress(DateTime date) => value = value?.toLocalDate() == date.toLocalDate() ? null : date;
+  bool selected(DateTime date) => value?.toLocalDate() == date.toLocalDate();
+
+  @override
+  void select(DateTime date) => value = value?.toLocalDate() == date.toLocalDate() ? null : date;
 }
 
-/// A date selection controller that allows multiple dates to be selected.
+/// A controller that allows multiple dates to be selected. The maximum number of dates that can be selected is
+/// determined by [max].
 ///
-/// The selected dates are always in UTC timezone and truncated to the nearest date.
-final class FCalendarMultiValueController extends FCalendarController<Set<DateTime>> {
+/// The [DateTime]s are always in UTC timezone and truncated to the nearest day.
+class FCalendarMultiValueController extends FCalendarController<Set<DateTime>> {
+  final Predicate<DateTime> _selectable;
+
   /// Creates a [FCalendarMultiValueController] with the given initial [value].
   ///
   /// ## Contract
-  /// Throws [AssertionError] if the given dates in [value] is not in UTC timezone.
-  FCalendarMultiValueController([super.value = const {}])
-      : assert(value.every((d) => d.isUtc), 'dates must be in UTC timezone');
+  /// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone.
+  FCalendarMultiValueController({
+    Set<DateTime> initialSelections = const {},
+    Predicate<DateTime>? canSelect,
+  })  : assert(initialSelections.every((d) => d.isUtc), 'dates must be in UTC timezone'),
+        _selectable = canSelect ?? _true,
+        super(initialSelections);
 
   @override
-  bool contains(DateTime date) => value.contains(date);
+  bool selectable(DateTime date) => _selectable(date);
 
   @override
-  void onPress(DateTime date) {
+  bool selected(DateTime date) => value.contains(date);
+
+  @override
+  void select(DateTime date) {
     final copy = {...value};
     value = copy..toggle(date);
   }
@@ -64,23 +99,37 @@ final class FCalendarMultiValueController extends FCalendarController<Set<DateTi
 /// A date selection controller that allows a single range to be selected.
 ///
 /// Both the start and end dates of the range is inclusive. The selected dates are always in UTC timezone and truncated
-/// to the nearest date.
-final class FCalendarSingleRangeController extends FCalendarController<(DateTime, DateTime)?> {
-  /// Creates a [FCalendarSingleRangeController] with the given initial [value].
+/// to the nearest day. Unselectable dates within the selected range are selected regardless.
+class FCalendarRangeController extends FCalendarController<(DateTime, DateTime)?> {
+  final Predicate<DateTime> _selectable;
+
+  /// Creates a [FCalendarRangeController] with the given initial [value].
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * the given dates in [value] is not in UTC timezone.
   /// * the end date is less than start date.
-  FCalendarSingleRangeController([super.value])
-      : assert(value == null || (value.$1.isUtc && value.$2.isUtc), 'value must be in UTC timezone'),
+  FCalendarRangeController({
+    (DateTime, DateTime)? initialSelection,
+    Predicate<DateTime>? canSelect,
+  })  : assert(
+          initialSelection == null || (initialSelection.$1.isUtc && initialSelection.$2.isUtc),
+          'value must be in UTC timezone',
+        ),
         assert(
-          value == null || (value.$1.isBefore(value.$2) || value.$1.isAtSameMomentAs(value.$2)),
+          initialSelection == null ||
+              (initialSelection.$1.isBefore(initialSelection.$2) ||
+                  initialSelection.$1.isAtSameMomentAs(initialSelection.$2)),
           'end date must be greater than or equal to start date',
-        );
+        ),
+        _selectable = canSelect ?? _true,
+        super(initialSelection);
 
   @override
-  bool contains(DateTime date) {
+  bool selectable(DateTime date) => _selectable(date);
+
+  @override
+  bool selected(DateTime date) {
     if (value case (final first, final last)) {
       final current = date.toLocalDate();
       return first.toLocalDate() <= current && current <= last.toLocalDate();
@@ -90,7 +139,7 @@ final class FCalendarSingleRangeController extends FCalendarController<(DateTime
   }
 
   @override
-  void onPress(DateTime date) {
+  void select(DateTime date) {
     if (value == null) {
       value = (date, date);
       return;

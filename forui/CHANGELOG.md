@@ -2,7 +2,29 @@
 
 ### Additions
 * Add `FAvatar`
+* **Breaking:** Add `FCalendarEntryStyle.focusedBorderColor`. This only affects users that customized `FCalendarEntryStyle`.
 * Add `FResizable`
+
+### Changes
+* Change number of years displayed per page in `FCalendar` from 12 to 15.
+* **Breaking:** Move `FCalendar.enabled` to `FCalendarController.canSelect(...)`.
+
+* **Breaking:** Rename `FCalendarController.contains(...)` to `FCalendarController.selected(...)`.
+* **Breaking:** Rename `FCalendarController.onPress(...)` to `FCalendarController.select(...)`.
+
+* **Breaking:** Rename `FCalendarEntryStyle.focusedBackgroundColor` to `FCalendarEntryStyle.hoveredBackgroundColor`.
+  This only affects users that customized `FCalendarEntryStyle`.
+
+* **Breaking:** Rename `FCalendarEntryStyle.focusedTextStyle` to `FCalendarEntryStyle.hoveredTextStyle`.
+  This only affects users that customized `FCalendarEntryStyle`.
+
+* **Breaking:** Rename `FCalendarSingleValueController` to `FCalendarValueController`.
+
+* **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController`.
+
+### Fixes
+* Fix `FCalendar` dates not being toggleable using `Enter` key.
+* Fix `FCalendar` dates sometimes not being navigable using arrow keys.
 
 
 ## 0.3.0
@@ -25,15 +47,18 @@
 ### Fixes
 * Fix broken images in README.md (yet again).
 
+
 ## 0.2.0+2
 
 ### Fixes
 * Fix broken images in README.md.
 
+
 ## 0.2.0+1
 
 ### Fixes
 * Fix broken images in README.md.
+
 
 ## 0.2.0
 
@@ -57,6 +82,7 @@
 * Fix missing `key` parameter in `FTextField` constructors.
 * **Breaking** `FButton.prefixIcon` and `FButton.suffixIcon` have been renamed to `FButton.prefix` and `FButton.suffix`.
 * Fix padding inconsistencies in `FCard` and `FDialog`.
+
 
 ## 0.1.0
 

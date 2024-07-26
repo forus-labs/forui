@@ -5,16 +5,15 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
-import 'package:forui/src/widgets/calendar/day/day_picker.dart';
-import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
 final _yMMMMd = DateFormat.yMMMMd();
 
 @internal
 abstract class Entry extends StatelessWidget {
   final FCalendarEntryStyle style;
-  final ValueWidgetBuilder<bool> builder;
+  final ValueWidgetBuilder<FTappableState> builder;
 
   factory Entry.day({
     required FCalendarDayPickerStyle style,
@@ -22,43 +21,42 @@ abstract class Entry extends StatelessWidget {
     required FocusNode focusNode,
     required bool current,
     required bool today,
-    required Predicate<LocalDate> enabled,
+    required Predicate<LocalDate> selectable,
     required Predicate<LocalDate> selected,
     required ValueChanged<LocalDate> onPress,
     required ValueChanged<LocalDate> onLongPress,
   }) {
-    final enable = enabled(date);
-    final select = selected(date);
+    final canSelect = selectable(date);
+    final isSelected = selected(date);
 
-    final styles = enable ? style.enabledStyles : style.disabledStyles;
+    final styles = canSelect ? style.selectableStyles : style.unselectableStyles;
     final dayStyle = current ? styles.current : styles.enclosing;
-    final entryStyle = select ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
+    final entryStyle = isSelected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
-    // ignore: avoid_positional_boolean_parameters
-    Widget builder(BuildContext context, bool focused, Widget? child) => _Content(
+    Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
             left: selected(date.yesterday) ? Radius.zero : entryStyle.radius,
             right: selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
           text: '${date.day}', // TODO: localization
-          focused: focused,
+          state: state,
           current: today,
         );
 
-    if (enabled(date)) {
-      return _EnabledEntry(
+    if (canSelect) {
+      return _SelectableEntry(
         focusNode: focusNode,
         date: date,
         semanticLabel: '${_yMMMMd.format(date.toNative())}${today ? ', Today' : ''}',
-        selected: selected(date),
+        selected: isSelected,
         onPress: onPress,
         onLongPress: onLongPress,
         style: entryStyle,
         builder: builder,
       );
     } else {
-      return _DisabledEntry(style: entryStyle, builder: builder);
+      return _UnselectableEntry(style: entryStyle, builder: builder);
     }
   }
 
@@ -67,23 +65,22 @@ abstract class Entry extends StatelessWidget {
     required LocalDate date,
     required FocusNode focusNode,
     required bool current,
-    required bool enabled,
+    required bool selectable,
     required ValueChanged<LocalDate> onPress,
     required String Function(LocalDate) format,
   }) {
-    final entryStyle = enabled ? style.enabledStyle : style.disabledStyle;
+    final entryStyle = selectable ? style.enabledStyle : style.disabledStyle;
 
-    // ignore: avoid_positional_boolean_parameters
-    Widget builder(BuildContext context, bool focused, Widget? child) => _Content(
+    Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.all(entryStyle.radius),
           text: format(date),
-          focused: focused,
+          state: state,
           current: current,
         );
 
-    if (enabled) {
-      return _EnabledEntry(
+    if (selectable) {
+      return _SelectableEntry(
         focusNode: focusNode,
         date: date,
         semanticLabel: format(date),
@@ -92,7 +89,7 @@ abstract class Entry extends StatelessWidget {
         builder: builder,
       );
     } else {
-      return _DisabledEntry(style: entryStyle, builder: builder);
+      return _UnselectableEntry(style: entryStyle, builder: builder);
     }
   }
 
@@ -110,7 +107,7 @@ abstract class Entry extends StatelessWidget {
   }
 }
 
-class _EnabledEntry extends Entry {
+class _SelectableEntry extends Entry {
   final FocusNode focusNode;
   final LocalDate date;
   final String semanticLabel;
@@ -118,7 +115,7 @@ class _EnabledEntry extends Entry {
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate>? onLongPress;
 
-  const _EnabledEntry({
+  const _SelectableEntry({
     required this.focusNode,
     required this.date,
     required this.semanticLabel,
@@ -153,42 +150,44 @@ class _EnabledEntry extends Entry {
   }
 }
 
-class _DisabledEntry extends Entry {
-  const _DisabledEntry({
+class _UnselectableEntry extends Entry {
+  const _UnselectableEntry({
     required super.style,
     required super.builder,
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => ExcludeSemantics(child: builder(context, false, null));
+  Widget build(BuildContext context) =>
+      ExcludeSemantics(child: builder(context, (focused: false, hovered: false), null));
 }
 
 class _Content extends StatelessWidget {
   final FCalendarEntryStyle style;
   final BorderRadius borderRadius;
   final String text;
-  final bool focused;
+  final FTappableState state;
   final bool current;
 
   const _Content({
     required this.style,
     required this.borderRadius,
     required this.text,
-    required this.focused,
+    required this.state,
     required this.current,
   });
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = focused ? style.focusedTextStyle : style.textStyle;
+    var textStyle = state.hovered ? style.hoveredTextStyle : style.textStyle;
     if (current) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }
 
     return DecoratedBox(
       decoration: BoxDecoration(
+        border: state.focused ? Border.all(color: context.theme.colorScheme.foreground) : null,
         borderRadius: borderRadius,
-        color: focused ? style.focusedBackgroundColor : style.backgroundColor,
+        color: state.hovered ? style.hoveredBackgroundColor : style.backgroundColor,
       ),
       child: Center(
         child: Text(text, style: textStyle),
@@ -203,24 +202,27 @@ class _Content extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
       ..add(StringProperty('text', text))
-      ..add(FlagProperty('focused', value: focused, ifTrue: 'focused'))
+      ..add(DiagnosticsProperty('state', state.toString()))
       ..add(FlagProperty('current', value: current, ifTrue: 'current'));
   }
 }
 
 /// A calendar entry's style.
 final class FCalendarEntryStyle with Diagnosticable {
-  /// The unfocused day's background color.
+  /// The day's background color.
   final Color backgroundColor;
 
-  /// The unfocused day's text style.
+  /// The day's text style.
   final TextStyle textStyle;
 
-  /// The focused day's background color. Defaults to [backgroundColor].
-  final Color focusedBackgroundColor;
+  /// The hovered day's background color. Defaults to [backgroundColor].
+  final Color hoveredBackgroundColor;
 
-  /// The focused day's text style. Defaults to [textStyle].
-  final TextStyle focusedTextStyle;
+  /// The hovered day's text style. Defaults to [textStyle].
+  final TextStyle hoveredTextStyle;
+
+  /// The border color when an entry is focused.
+  final Color focusedBorderColor;
 
   /// The entry border's radius. Defaults to `Radius.circular(4)`.
   final Radius radius;
@@ -229,11 +231,12 @@ final class FCalendarEntryStyle with Diagnosticable {
   FCalendarEntryStyle({
     required this.backgroundColor,
     required this.textStyle,
+    required this.focusedBorderColor,
     required this.radius,
-    Color? focusedBackgroundColor,
-    TextStyle? focusedTextStyle,
-  })  : focusedBackgroundColor = focusedBackgroundColor ?? backgroundColor,
-        focusedTextStyle = focusedTextStyle ?? textStyle;
+    Color? hoveredBackgroundColor,
+    TextStyle? hoveredTextStyle,
+  })  : hoveredBackgroundColor = hoveredBackgroundColor ?? backgroundColor,
+        hoveredTextStyle = hoveredTextStyle ?? textStyle;
 
   /// Returns a copy of this [FCalendarEntryStyle] but with the given fields replaced with the new values.
   ///
@@ -254,15 +257,17 @@ final class FCalendarEntryStyle with Diagnosticable {
   FCalendarEntryStyle copyWith({
     Color? backgroundColor,
     TextStyle? textStyle,
-    Color? focusedBackgroundColor,
-    TextStyle? focusedTextStyle,
+    Color? hoveredBackgroundColor,
+    TextStyle? hoveredTextStyle,
+    Color? focusedBorderColor,
     Radius? radius,
   }) =>
       FCalendarEntryStyle(
         backgroundColor: backgroundColor ?? this.backgroundColor,
         textStyle: textStyle ?? this.textStyle,
-        focusedBackgroundColor: focusedBackgroundColor ?? this.focusedBackgroundColor,
-        focusedTextStyle: focusedTextStyle ?? this.focusedTextStyle,
+        hoveredBackgroundColor: hoveredBackgroundColor ?? this.hoveredBackgroundColor,
+        hoveredTextStyle: hoveredTextStyle ?? this.hoveredTextStyle,
+        focusedBorderColor: focusedBorderColor ?? this.focusedBorderColor,
         radius: radius ?? this.radius,
       );
 
@@ -272,8 +277,9 @@ final class FCalendarEntryStyle with Diagnosticable {
     properties
       ..add(ColorProperty('backgroundColor', backgroundColor))
       ..add(DiagnosticsProperty('textStyle', textStyle))
-      ..add(ColorProperty('focusedBackgroundColor', focusedBackgroundColor))
-      ..add(DiagnosticsProperty('focusedTextStyle', focusedTextStyle))
+      ..add(ColorProperty('hoveredBackgroundColor', hoveredBackgroundColor))
+      ..add(DiagnosticsProperty('hoveredTextStyle', hoveredTextStyle))
+      ..add(ColorProperty('focusedBorderColor', focusedBorderColor))
       ..add(DiagnosticsProperty('radius', radius));
   }
 
@@ -284,15 +290,17 @@ final class FCalendarEntryStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           backgroundColor == other.backgroundColor &&
           textStyle == other.textStyle &&
-          focusedBackgroundColor == other.focusedBackgroundColor &&
-          focusedTextStyle == other.focusedTextStyle &&
+          hoveredBackgroundColor == other.hoveredBackgroundColor &&
+          hoveredTextStyle == other.hoveredTextStyle &&
+          focusedBorderColor == other.focusedBorderColor &&
           radius == other.radius;
 
   @override
   int get hashCode =>
       backgroundColor.hashCode ^
       textStyle.hashCode ^
-      focusedBackgroundColor.hashCode ^
-      focusedTextStyle.hashCode ^
+      hoveredBackgroundColor.hashCode ^
+      hoveredTextStyle.hashCode ^
+      focusedBorderColor.hashCode ^
       radius.hashCode;
 }

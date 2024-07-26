@@ -15,7 +15,7 @@ abstract class PagedPicker extends StatefulWidget {
   final LocalDate end;
   final LocalDate today;
   final LocalDate initial;
-  final Predicate<LocalDate> enabled;
+  final Predicate<LocalDate> selectable;
 
   PagedPicker({
     required this.style,
@@ -23,9 +23,9 @@ abstract class PagedPicker extends StatefulWidget {
     required this.end,
     required this.today,
     required this.initial,
-    Predicate<LocalDate>? enabled,
+    Predicate<LocalDate>? selectable,
     super.key,
-  }) : enabled = ((date) => start <= date && date <= end && (enabled?.call(date) ?? true));
+  }) : selectable = ((date) => start <= date && date <= end && (selectable?.call(date) ?? true));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -36,7 +36,7 @@ abstract class PagedPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('initial', initial))
-      ..add(DiagnosticsProperty('enabledPredicate', enabled));
+      ..add(DiagnosticsProperty('selectable', selectable));
   }
 }
 
@@ -197,7 +197,7 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
     var next = date + offset;
     while (widget.start <= next && next <= widget.end) {
-      if (widget.enabled(next)) {
+      if (widget.selectable(next)) {
         return next;
       }
 

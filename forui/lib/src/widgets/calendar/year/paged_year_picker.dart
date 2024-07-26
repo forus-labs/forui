@@ -79,7 +79,7 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
     }
 
     for (var newFocus = startYear; newFocus < endYear; newFocus = newFocus.plus(years: 1)) {
-      if (widget.enabled(newFocus)) {
+      if (widget.selectable(newFocus)) {
         return newFocus;
       }
     }

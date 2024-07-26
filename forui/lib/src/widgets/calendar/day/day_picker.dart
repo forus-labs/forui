@@ -19,7 +19,7 @@ class DayPicker extends StatefulWidget {
   final LocalDate month;
   final LocalDate today;
   final LocalDate? focused;
-  final Predicate<LocalDate> enabled;
+  final Predicate<LocalDate> selectable;
   final Predicate<LocalDate> selected;
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate> onLongPress;
@@ -29,7 +29,7 @@ class DayPicker extends StatefulWidget {
     required this.month,
     required this.today,
     required this.focused,
-    required this.enabled,
+    required this.selectable,
     required this.selected,
     required this.onPress,
     required this.onLongPress,
@@ -47,8 +47,8 @@ class DayPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
-      ..add(DiagnosticsProperty('enabledPredicate', enabled, ifNull: 'all enabled'))
-      ..add(DiagnosticsProperty('selectedPredicate', selected, ifNull: 'none selected'))
+      ..add(DiagnosticsProperty('selectable', selectable))
+      ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));
   }
@@ -112,7 +112,7 @@ class _DayPickerState extends State<DayPicker> {
                   focusNode: focusNode,
                   current: date.month == widget.month.month,
                   today: date == widget.today,
-                  enabled: widget.enabled,
+                  selectable: widget.selectable,
                   selected: widget.selected,
                   onPress: widget.onPress,
                   onLongPress: widget.onLongPress,
@@ -176,11 +176,11 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// The text style for the day of th week headers.
   final TextStyle headerTextStyle;
 
-  /// The styles of the current month on display and the enclosing months, when enabled.
-  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) enabledStyles;
+  /// The styles of selectable dates in the current month on display and the enclosing months.
+  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) selectableStyles;
 
-  /// The styles of the current month on display and the enclosing months, when disabled.
-  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) disabledStyles;
+  /// The styles of unselectable dates in the current month on display and the enclosing months.
+  final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) unselectableStyles;
 
   /// The starting day of the week. Defaults to the current locale's preferred starting day of the week if null.
   ///
@@ -195,8 +195,8 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// Creates a [FCalendarDayPickerStyle].
   const FCalendarDayPickerStyle({
     required this.headerTextStyle,
-    required this.enabledStyles,
-    required this.disabledStyles,
+    required this.selectableStyles,
+    required this.unselectableStyles,
     this.startDayOfWeek,
   }) : assert(
           startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
@@ -213,28 +213,32 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       selectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
+        focusedBorderColor: colorScheme.primaryForeground,
         radius: const Radius.circular(4),
       ),
       unselectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.background,
         textStyle: mutedTextStyle,
+        focusedBorderColor: colorScheme.background,
         radius: const Radius.circular(4),
       ),
     );
 
     return FCalendarDayPickerStyle(
       headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
-      enabledStyles: (
+      selectableStyles: (
         current: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.foreground,
             textStyle: typography.sm.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: textStyle,
-            focusedBackgroundColor: colorScheme.secondary,
+            hoveredBackgroundColor: colorScheme.secondary,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
         ),
@@ -242,17 +246,19 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
-            focusedBackgroundColor: colorScheme.primaryForeground,
+            hoveredBackgroundColor: colorScheme.primaryForeground,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
         ),
       ),
-      disabledStyles: (current: disabled, enclosing: disabled),
+      unselectableStyles: (current: disabled, enclosing: disabled),
     );
   }
 
@@ -261,35 +267,35 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// ```dart
   /// final style = FMonthStyle(
   ///   headerTextStyle: ...,
-  ///   enabledCurrent: ...,
+  ///   selectableCurrent: ...,
   ///   // Other arguments omitted for brevity.
   /// );
   ///
   /// final copy = style.copyWith(
-  ///   enabledCurrent: ...,
+  ///   selectableCurrent: ...,
   /// );
   ///
   /// print(style.headerTextStyle == copy.headerTextStyle); // true
-  /// print(style.enabled.current == copy.enabled.current); // false
+  /// print(style.selectableStyles.current == copy.selectableStyles.current); // false
   /// ```
   @useResult
   FCalendarDayPickerStyle copyWith({
     TextStyle? headerTextStyle,
-    FCalendarDayStyle? enabledCurrent,
-    FCalendarDayStyle? enabledEnclosing,
-    FCalendarDayStyle? disabledCurrent,
-    FCalendarDayStyle? disabledEnclosing,
+    FCalendarDayStyle? selectableCurrent,
+    FCalendarDayStyle? selectableEnclosing,
+    FCalendarDayStyle? unselectableCurrent,
+    FCalendarDayStyle? unselectableEnclosing,
     int? startDayOfWeek,
   }) =>
       FCalendarDayPickerStyle(
         headerTextStyle: headerTextStyle ?? this.headerTextStyle,
-        enabledStyles: (
-          current: enabledCurrent ?? enabledStyles.current,
-          enclosing: enabledEnclosing ?? enabledStyles.enclosing,
+        selectableStyles: (
+          current: selectableCurrent ?? selectableStyles.current,
+          enclosing: selectableEnclosing ?? selectableStyles.enclosing,
         ),
-        disabledStyles: (
-          current: disabledCurrent ?? disabledStyles.current,
-          enclosing: disabledEnclosing ?? disabledStyles.enclosing,
+        unselectableStyles: (
+          current: unselectableCurrent ?? unselectableStyles.current,
+          enclosing: unselectableEnclosing ?? unselectableStyles.enclosing,
         ),
         startDayOfWeek: startDayOfWeek ?? this.startDayOfWeek,
       );
@@ -299,10 +305,10 @@ final class FCalendarDayPickerStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('headerTextStyle', headerTextStyle))
-      ..add(DiagnosticsProperty('enabled.current', enabledStyles.current))
-      ..add(DiagnosticsProperty('enabled.enclosing', enabledStyles.enclosing))
-      ..add(DiagnosticsProperty('disabled.current', disabledStyles.current))
-      ..add(DiagnosticsProperty('disabled.enclosing', disabledStyles.enclosing))
+      ..add(DiagnosticsProperty('selectableStyles.current', selectableStyles.current))
+      ..add(DiagnosticsProperty('selectableStyles.enclosing', selectableStyles.enclosing))
+      ..add(DiagnosticsProperty('unselectableStyles.current', unselectableStyles.current))
+      ..add(DiagnosticsProperty('unselectableStyles.enclosing', unselectableStyles.enclosing))
       ..add(IntProperty('startDayOfWeek', startDayOfWeek));
   }
 
@@ -312,13 +318,13 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       other is FCalendarDayPickerStyle &&
           runtimeType == other.runtimeType &&
           headerTextStyle == other.headerTextStyle &&
-          enabledStyles == other.enabledStyles &&
-          disabledStyles == other.disabledStyles &&
+          selectableStyles == other.selectableStyles &&
+          unselectableStyles == other.unselectableStyles &&
           startDayOfWeek == other.startDayOfWeek;
 
   @override
   int get hashCode =>
-      headerTextStyle.hashCode ^ enabledStyles.hashCode ^ disabledStyles.hashCode ^ startDayOfWeek.hashCode;
+      headerTextStyle.hashCode ^ selectableStyles.hashCode ^ unselectableStyles.hashCode ^ startDayOfWeek.hashCode;
 }
 
 /// A calender day's style.

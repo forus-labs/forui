@@ -24,7 +24,7 @@ class CalendarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FCalendar(
-        controller: FCalendarSingleValueController(selected),
+        controller: FCalendarValueController(initialSelection: selected),
         start: DateTime.utc(2000),
         end: DateTime.utc(2030),
       );
@@ -38,22 +38,46 @@ class MultiValueCalendarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FCalendar(
-        controller: FCalendarMultiValueController({selected}),
+        controller: FCalendarMultiValueController(
+          initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
+        ),
         start: DateTime.utc(2000),
+        today: DateTime.utc(2024, 7, 15),
         end: DateTime.utc(2030),
       );
 }
 
 @RoutePage()
-class SingleRangeCalendarPage extends SampleScaffold {
-  SingleRangeCalendarPage({
+class UnselectableCalendarPage extends SampleScaffold {
+  UnselectableCalendarPage({
     @queryParam super.theme,
   });
 
   @override
   Widget child(BuildContext context) => FCalendar(
-        controller: FCalendarSingleRangeController((selected, selected)),
+        controller: FCalendarMultiValueController(
+          initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
+          canSelect: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+        ),
         start: DateTime.utc(2000),
+        today: DateTime.utc(2024, 7, 15),
+        end: DateTime.utc(2030),
+      );
+}
+
+@RoutePage()
+class RangeCalendarPage extends SampleScaffold {
+  RangeCalendarPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => FCalendar(
+        controller: FCalendarRangeController(
+          initialSelection: (DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)),
+        ),
+        start: DateTime.utc(2000),
+        today: DateTime.utc(2024, 7, 15),
         end: DateTime.utc(2030),
       );
 }

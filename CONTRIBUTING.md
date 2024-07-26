@@ -1,5 +1,16 @@
 # Contributing to Forui
 
+Before starting work on a pull request, please check if a similar issue already exists, or create one to discuss the 
+proposed changes.
+
+This helps to:
+
+* Ensure that the proposed changes align with the project's goals and direction.
+* Avoid duplicate efforts by informing other contributors about ongoing work.
+* Provide a platform for maintainers and the community to offer feedback and suggestions.
+
+Doing so saves time and effort by identifying potential problems early in the development process.
+
 ## Design Guidelines
 
 ### Be agnostic about state management

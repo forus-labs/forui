@@ -63,7 +63,7 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
     }
 
     for (var newFocus = widget.initial; newFocus < end; newFocus = newFocus.plus(months: 1)) {
-      if (widget.enabled(newFocus)) {
+      if (widget.selectable(newFocus)) {
         return newFocus;
       }
     }
