@@ -79,6 +79,8 @@ class _CascadingController extends FResizableController {
     };
 
     final (shrunk, adjusted) = shrink.update(shrinkDirection, delta);
+    // print(delta.dy);
+    // print(adjusted.dy);
     if (shrink.offset != shrunk.offset) {
       final (expanded, _) = expand.update(expandDirection, adjusted);
       regions[shrunk.index] = shrunk;

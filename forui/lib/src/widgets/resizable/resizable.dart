@@ -128,8 +128,7 @@ class _FResizableState extends State<FResizable> {
         width: widget.crossAxisExtent,
         child: ListenableBuilder(
           listenable: widget.controller,
-          builder: (context, _) {
-            return Column(
+          builder: (context, _) => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 for (var i = 0; i < widget.children.length; i++)
@@ -140,8 +139,7 @@ class _FResizableState extends State<FResizable> {
                     child: widget.children[i],
                   ),
               ],
-            );
-          },
+            ),
         ),
       );
     }

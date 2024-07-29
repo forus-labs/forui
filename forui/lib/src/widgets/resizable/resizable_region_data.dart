@@ -136,38 +136,38 @@ extension UpdatableResizableRegionData on FResizableRegionData {
 
     switch (direction) {
       case AxisDirection.left:
-        final (data, x) = _resize(direction, min + dx, max);
+        final (data, x) = _resize(direction, min + dx, max, delta);
         return (data, delta.translate(x, 0));
 
       case AxisDirection.right:
-        final (data, x) = _resize(direction, min, max + dx);
+        final (data, x) = _resize(direction, min, max + dx, delta);
         return (data, delta.translate(-x, 0));
 
       case AxisDirection.up:
-        final (data, y) = _resize(direction, min + dy, max);
+        final (data, y) = _resize(direction, min + dy, max, delta);
         return (data, delta.translate(0, y));
 
       case AxisDirection.down:
-        final (data, y) = _resize(direction, min, max + dy);
+        final (data, y) = _resize(direction, min, max + dy, delta);
         return (data, delta.translate(0, -y));
     }
   }
 
-  (FResizableRegionData, double) _resize(AxisDirection direction, double min, double max) {
-    final newSize = max - min;
-    assert(0 <= min, '$min should be non-negative.');
+  (FResizableRegionData, double) _resize(AxisDirection direction, double minOffset, double maxOffset, Offset delta) {
+    final newSize = maxOffset - minOffset;
+    assert(0 <= minOffset, '$minOffset should be non-negative.');
     assert(newSize <= size.max, '$newSize should be less than ${size.max}.');
 
     if (size.min <= newSize) {
-      return (copyWith(minOffset: min, maxOffset: max), 0);
+      return (copyWith(minOffset: minOffset, maxOffset: maxOffset), 0);
     }
 
     switch (direction) {
-      case AxisDirection.left || AxisDirection.up when offset.min < (max - size.min):
-        return (copyWith(minOffset: max - size.min), newSize - size.min);
+      case AxisDirection.left || AxisDirection.up:
+        return (copyWith(minOffset: maxOffset - size.min), newSize - size.min);
 
-      case AxisDirection.right || AxisDirection.down when (min + size.min) < offset.max:
-        return (copyWith(maxOffset: min + size.min), newSize - size.min);
+      case AxisDirection.right || AxisDirection.down:
+        return (copyWith(maxOffset: minOffset + size.min), newSize - size.min);
 
       case _:
         return (this, newSize - size.min);
