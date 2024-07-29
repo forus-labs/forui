@@ -7,7 +7,7 @@ import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
 @internal
 sealed class Slider extends StatelessWidget {
-  final ResizableController controller;
+  final FResizableController controller;
   final Alignment alignment;
   final AxisDirection direction;
   final MouseCursor cursor;
@@ -89,11 +89,8 @@ final class HorizontalSlider extends Slider {
               return;
             }
 
-            final hitBoundary = controller.update(index, direction, details.delta);
-            final aboveVelocity = (controller.hapticFeedbackVelocity ?? double.infinity) <= details.delta.distance;
-            if (hitBoundary && aboveVelocity) {
-              // TODO: haptic feedback
-            }
+            controller.update(index, direction, details.delta);
+            // TODO: haptic feedback
           },
           onHorizontalDragEnd: (details) => controller.end(index, direction),
         ),
@@ -135,11 +132,8 @@ final class VerticalSlider extends Slider {
               return;
             }
 
-            final hitBoundary = controller.update(index, direction, details.delta);
-            final aboveVelocity = (controller.hapticFeedbackVelocity ?? double.infinity) <= details.delta.distance;
-            if (hitBoundary && aboveVelocity) {
-              // TODO: haptic feedback
-            }
+            controller.update(index, direction, details.delta);
+            // TODO: haptic feedback
           },
           onVerticalDragEnd: (details) => controller.end(index, direction),
         ),

@@ -9,18 +9,15 @@ import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 import 'package:forui/src/widgets/resizable/slider.dart';
 import 'slider_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<ResizableController>()])
+@GenerateNiceMocks([MockSpec<FResizableController>()])
 void main() {
-  provideDummy(const FResizableInteraction.resize());
-
-  late MockResizableController controller;
+  late MockFResizableController controller;
   late FResizableRegionData data;
 
   setUp(() {
     data = FResizableRegionData(index: 0, size: (min: 10, max: 100, allRegions: 100), offset: (min: 10, max: 100));
-    controller = MockResizableController();
+    controller = MockFResizableController();
     when(controller.regions).thenReturn([data]);
-    when(controller.hapticFeedbackVelocity).thenReturn(0.0);
   });
 
   for (final (index, constructor) in [
@@ -71,7 +68,6 @@ void main() {
         });
 
         testWidgets('[$index] horizontal drag, haptic feedback disabled', (tester) async {
-          when(controller.hapticFeedbackVelocity).thenReturn(null);
           when(controller.update(any, any, any)).thenReturn(true);
 
           await tester.pumpWidget(slider);
@@ -137,7 +133,6 @@ void main() {
         });
 
         testWidgets('[$index] horizontal drag, haptic feedback disabled', (tester) async {
-          when(controller.hapticFeedbackVelocity).thenReturn(null);
           when(controller.update(any, any, any)).thenReturn(true);
 
           await tester.pumpWidget(slider);

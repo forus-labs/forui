@@ -3,10 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
 void main() {
-  late ResizableController controller;
+  late FResizableController controller;
 
   late FResizableRegionData top;
   late FResizableRegionData middle;
@@ -25,13 +24,11 @@ void main() {
     middle = FResizableRegionData(index: 1, size: (min: 10, max: 40, allRegions: 60), offset: (min: 25, max: 40));
     bottom = FResizableRegionData(index: 2, size: (min: 10, max: 40, allRegions: 60), offset: (min: 40, max: 60));
 
-    controller = ResizableController(
+    controller = FResizableController(
       regions: [top, middle, bottom],
-      axis: Axis.vertical,
       hapticFeedbackVelocity: 0.0,
       onResizeUpdate: (selected, neighbour) => resizeUpdate = (selected, neighbour),
       onResizeEnd: (selected, neighbour) => resizeEnd = (selected, neighbour),
-      interaction: const FResizableInteraction.resize(),
     )..addListener(() => count++);
   });
 

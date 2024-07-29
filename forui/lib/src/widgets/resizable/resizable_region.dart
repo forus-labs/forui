@@ -80,12 +80,12 @@ class FResizableRegion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:controller, :data) = InheritedData.of(context);
+    final InheritedData(:axis, :controller, :data) = InheritedData.of(context);
     return Semantics(
       container: true,
       enabled: true,
       child: GestureDetector(
-        child: switch (controller.axis) {
+        child: switch (axis) {
           Axis.horizontal => SizedBox(
               width: data.size.current,
               child: Stack(

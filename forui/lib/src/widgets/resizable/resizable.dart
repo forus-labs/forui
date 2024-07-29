@@ -5,10 +5,9 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
 export '/src/widgets/resizable/resizable_region.dart';
-export '/src/widgets/resizable/resizable_controller.dart' hide ResizableController, Resize;
+export '/src/widgets/resizable/resizable_controller.dart';
 export '/src/widgets/resizable/resizable_region_data.dart' hide UpdatableResizableRegionData;
 
 /// A resizable which children can be resized along either the horizontal or vertical main axis.
@@ -22,11 +21,11 @@ export '/src/widgets/resizable/resizable_region_data.dart' hide UpdatableResizab
 /// See:
 /// * https://forui.dev/docs/resizable for working examples.
 class FResizable extends StatefulWidget {
+  /// The controller that manages the resizing of regions in this resizable.
+  final FResizableController controller;
+
   /// The main axis along which the [children] can be resized.
   final Axis axis;
-
-  /// The allowed way for the user to interact with this resizable box. Defaults to [FResizableInteraction.resize].
-  final FResizableInteraction interaction;
 
   /// The number of pixels in the non-resizable axis.
   ///
@@ -34,44 +33,15 @@ class FResizable extends StatefulWidget {
   /// Throws [AssertionError] if [crossAxisExtent] is not positive.
   final double? crossAxisExtent;
 
-  /// The minimum velocity, inclusive, of a drag gesture for haptic feedback to be performed
-  /// on collision between two regions, defaults to 6.5.
-  ///
-  /// Setting it to `null` disables haptic feedback while setting it to 0 will cause
-  /// haptic feedback to always be performed.
-  ///
-  /// ## Contract
-  /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
-  /// result in undefined behaviour.
-  // ignore: avoid_field_initializers_in_const_classes
-  final double _hapticFeedbackVelocity = 6.5; // TODO: haptic feedback
-
   /// The children that may be resized.
   final List<FResizableRegion> children;
 
-  /// A function that is called when a resizable region and its neighbour are being resized.
-  ///
-  /// This function is called *while* the regions are being resized. Most users should prefer [onResizeEnd], which is
-  /// called only when the regions have finished resizing.
-  final void Function(
-    FResizableRegionData resized,
-    FResizableRegionData neighbour,
-  )? onResizeUpdate;
-
-  /// A function that is called after a resizable region and its neighbour have been resized.
-  final void Function(
-    FResizableRegionData resized,
-    FResizableRegionData neighbour,
-  )? onResizeEnd;
-
   /// Creates a [FResizable].
   const FResizable({
+    required this.controller,
     required this.axis,
     required this.children,
-    this.interaction = const FResizableInteraction.resize(),
     this.crossAxisExtent,
-    this.onResizeUpdate,
-    this.onResizeEnd,
     super.key,
   }) : assert(
           crossAxisExtent == null || 0 < crossAxisExtent,
@@ -85,40 +55,32 @@ class FResizable extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('controller', controller))
       ..add(EnumProperty('axis', axis))
-      ..add(DiagnosticsProperty('interaction', interaction))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
-      ..add(DoubleProperty('_hapticFeedbackVelocity', _hapticFeedbackVelocity))
-      ..add(IterableProperty('children', children))
-      ..add(ObjectFlagProperty('onResizeUpdate', onResizeUpdate))
-      ..add(ObjectFlagProperty('onResizeEnd', onResizeEnd));
+      ..add(IterableProperty('children', children));
   }
 }
 
 class _FResizableState extends State<FResizable> {
-  late ResizableController controller;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _update(widget.interaction);
+    _update();
   }
 
   @override
   void didUpdateWidget(FResizable old) {
     super.didUpdateWidget(old);
     if (widget.axis != old.axis ||
-        widget.interaction != old.interaction ||
         widget.crossAxisExtent != old.crossAxisExtent ||
-        widget._hapticFeedbackVelocity != old._hapticFeedbackVelocity ||
-        widget.onResizeUpdate != widget.onResizeUpdate ||
-        widget.onResizeEnd != widget.onResizeEnd ||
+        widget.controller != old.controller ||
         !widget.children.equals(old.children)) {
-      _update(controller.interaction);
+      _update();
     }
   }
 
-  void _update(FResizableInteraction interaction) {
+  void _update() {
     var minOffset = 0.0;
     final allRegionsMin = widget.children.sum((child) => child.minSize, initial: 0.0);
     final allRegions = widget.children.sum((child) => child.initialSize, initial: 0.0);
@@ -131,20 +93,14 @@ class _FResizableState extends State<FResizable> {
         ),
     ];
 
-    controller = ResizableController(
-      regions: regions,
-      axis: widget.axis,
-      hapticFeedbackVelocity: widget._hapticFeedbackVelocity,
-      onResizeUpdate: widget.onResizeUpdate,
-      onResizeEnd: widget.onResizeEnd,
-      interaction: interaction,
-    );
+    widget.controller.regions.clear();
+    widget.controller.regions.addAll(regions);
   }
 
   @override
   Widget build(BuildContext context) {
     assert(
-      controller.regions.length == widget.children.length,
+      widget.controller.regions.length == widget.children.length,
       'The number of FResizableData should be equal to the number of children. Please file a bug report.',
     );
 
@@ -152,14 +108,15 @@ class _FResizableState extends State<FResizable> {
       return SizedBox(
         height: widget.crossAxisExtent,
         child: ListenableBuilder(
-          listenable: controller,
+          listenable: widget.controller,
           builder: (context, _) => Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               for (var i = 0; i < widget.children.length; i++)
                 InheritedData(
-                  controller: controller,
-                  data: controller.regions[i],
+                  axis: widget.axis,
+                  controller: widget.controller,
+                  data: widget.controller.regions[i],
                   child: widget.children[i],
                 ),
             ],
@@ -170,55 +127,55 @@ class _FResizableState extends State<FResizable> {
       return SizedBox(
         width: widget.crossAxisExtent,
         child: ListenableBuilder(
-          listenable: controller,
-          builder: (context, _) => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (var i = 0; i < widget.children.length; i++)
-                InheritedData(
-                  controller: controller,
-                  data: controller.regions[i],
-                  child: widget.children[i],
-                ),
-            ],
-          ),
+          listenable: widget.controller,
+          builder: (context, _) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (var i = 0; i < widget.children.length; i++)
+                  InheritedData(
+                    axis: widget.axis,
+                    controller: widget.controller,
+                    data: widget.controller.regions[i],
+                    child: widget.children[i],
+                  ),
+              ],
+            );
+          },
         ),
       );
     }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', controller));
   }
 }
 
 @internal
 class InheritedData extends InheritedWidget {
-  final ResizableController controller;
-  final FResizableRegionData data;
-
-  const InheritedData({
-    required this.controller,
-    required this.data,
-    required super.child,
-    super.key,
-  });
-
   static InheritedData of(BuildContext context) {
     final InheritedData? result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
     assert(result != null, 'No InheritedData found in context. Is there a parent FResizableBox?');
     return result!;
   }
 
+  final Axis axis;
+  final FResizableController controller;
+  final FResizableRegionData data;
+
+  const InheritedData({
+    required this.axis,
+    required this.controller,
+    required this.data,
+    required super.child,
+    super.key,
+  });
+
   @override
-  bool updateShouldNotify(InheritedData old) => controller != old.controller || data != old.data;
+  bool updateShouldNotify(InheritedData old) => axis != old.axis || controller != old.controller || data != old.data;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(EnumProperty('axis', axis))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('data', data));
   }
