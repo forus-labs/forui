@@ -128,49 +128,53 @@ final class FResizableRegionData with Diagnosticable {
 
 @internal
 extension UpdatableResizableRegionData on FResizableRegionData {
-  /// Updates the current height/width, returning an offset with any shrinkage beyond the minimum height/width removed.
+  /// Returns a copy of this data with an updated height/width, and an offset with any shrinkage beyond the minimum
+  /// height/width removed.
   @useResult
-  (FResizableRegionData, Offset) update(AxisDirection direction, Offset delta) {
+  (FResizableRegionData, Offset translated) update(AxisDirection direction, Offset delta) {
     final (:min, :max) = offset;
     final Offset(:dx, :dy) = delta;
 
     switch (direction) {
       case AxisDirection.left:
-        final (data, x) = _resize(direction, min + dx, max, delta);
+        final (data, x) = _translate(direction, min + dx, max);
         return (data, delta.translate(x, 0));
 
       case AxisDirection.right:
-        final (data, x) = _resize(direction, min, max + dx, delta);
+        final (data, x) = _translate(direction, min, max + dx);
         return (data, delta.translate(-x, 0));
 
       case AxisDirection.up:
-        final (data, y) = _resize(direction, min + dy, max, delta);
+        final (data, y) = _translate(direction, min + dy, max);
         return (data, delta.translate(0, y));
 
       case AxisDirection.down:
-        final (data, y) = _resize(direction, min, max + dy, delta);
+        final (data, y) = _translate(direction, min, max + dy);
         return (data, delta.translate(0, -y));
     }
   }
 
-  (FResizableRegionData, double) _resize(AxisDirection direction, double minOffset, double maxOffset, Offset delta) {
-    final newSize = maxOffset - minOffset;
-    assert(0 <= minOffset, '$minOffset should be non-negative.');
-    assert(newSize <= size.max, '$newSize should be less than ${size.max}.');
+  /// Expands the region if the new size is less than the minimum size allowed.
+  (FResizableRegionData, double translation) _translate(AxisDirection direction, double offsetMin, double offsetMax) {
+    final sizeNew = offsetMax - offsetMin;
+    assert(0 <= offsetMin, '$offsetMin should be non-negative.');
+    assert(sizeNew <= size.max, '$sizeNew should be less than ${size.max}.');
 
-    if (size.min <= newSize) {
-      return (copyWith(minOffset: minOffset, maxOffset: maxOffset), 0);
+    if (size.min <= sizeNew) {
+      return (copyWith(minOffset: offsetMin, maxOffset: offsetMax), 0);
+    }
+
+    // This prevents unnecessary copies since the size is already at the minimum.
+    if (size.min == size.current) {
+      return (this, 0);
     }
 
     switch (direction) {
       case AxisDirection.left || AxisDirection.up:
-        return (copyWith(minOffset: maxOffset - size.min), newSize - size.min);
+        return (copyWith(minOffset: offsetMax - size.min), sizeNew - size.min);
 
       case AxisDirection.right || AxisDirection.down:
-        return (copyWith(maxOffset: minOffset + size.min), newSize - size.min);
-
-      case _:
-        return (this, newSize - size.min);
+        return (copyWith(maxOffset: offsetMin + size.min), sizeNew - size.min);
     }
   }
 }

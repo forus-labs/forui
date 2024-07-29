@@ -3,6 +3,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/resizable.dart';
 
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
+import 'package:sugar/collection_aggregate.dart';
 
 /// A controller that manages the resizing of regions in a [FResizable].
 abstract class FResizableController extends ChangeNotifier {
@@ -54,11 +55,14 @@ class _CascadingController extends FResizableController {
   _CascadingController({
     this.onResizeUpdate,
     this.onResizeEnd,
-  }): super._();
+  }) : super._();
 
   @override
   bool update(int index, AxisDirection direction, Offset delta) {
     final (selected, neighbour) = _find(index, direction);
+
+    // print(regions.sum((r) => r.size.current, initial: 0));
+    assert(regions.sum((r) => r.size.current, initial: 0) == 600.0);
 
     // We always want to resize the shrunken region first. This allows us to remove any overlaps caused by shrinking
     // a region beyond the minimum size.
@@ -89,6 +93,11 @@ class _CascadingController extends FResizableController {
       onResizeUpdate?.call([selected, neighbour]);
       _haptic = true;
       notifyListeners();
+
+      assert(
+        regions.sum((r) => r.size.current, initial: 0.0) == regions[0].size.allRegions,
+        'current total size: ${regions.sum((r) => r.size.current, initial: 0.0)} != initial total size: ${regions[0].size.allRegions}',
+      );
 
       return false;
     }
