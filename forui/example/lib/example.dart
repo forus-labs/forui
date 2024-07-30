@@ -70,22 +70,6 @@ class _ExampleState extends State<Example> {
                   );
                 },
               ),
-              FResizableRegion(
-                initialSize: 200,
-                minSize: 100,
-                builder: (context, data, _) {
-                  final colorScheme = context.theme.colorScheme;
-                  return Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: colorScheme.foreground,
-                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-                      border: Border.all(color: colorScheme.border),
-                    ),
-                    child: Label(data: data, icon: FAssets.icons.moon, label: 'Night'),
-                  );
-                },
-              ),
             ],
           ),
         ],

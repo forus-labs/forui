@@ -5,7 +5,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 import 'package:forui/src/widgets/resizable/slider.dart';
 import 'slider_test.mocks.dart';
 

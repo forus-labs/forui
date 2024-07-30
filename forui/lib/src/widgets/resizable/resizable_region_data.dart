@@ -172,6 +172,14 @@ extension UpdatableResizableRegionData on FResizableRegionData {
       return (this, newSize - size.min);
     }
 
+    // In theory, the translation isn't accurate when performing cascading resizes. Given a sufficiently large delta,
+    // the returned translation will be large enough to cancel out the delta and cause the cascading resize to end
+    // prematurely.
+    //
+    // This isn't an issue in practice since a subsequent delta will be emitted out almost immediately after the first
+    // delta.
+    //
+    // It isn't ideal but it works and I'm too dumb & lazy to address this issue properly.
     switch (side) {
       case AxisDirection.left || AxisDirection.up:
         return (copyWith(minOffset: maxOffset - size.min), newSize - size.min);
