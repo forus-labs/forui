@@ -25,11 +25,11 @@ void main() {
     bottom = FResizableRegionData(index: 2, size: (min: 10, max: 40, allRegions: 60), offset: (min: 40, max: 60));
 
     controller = FResizableController(
-      regions: [top, middle, bottom],
-      hapticFeedbackVelocity: 0.0,
       onResizeUpdate: (selected, neighbour) => resizeUpdate = (selected, neighbour),
       onResizeEnd: (selected, neighbour) => resizeEnd = (selected, neighbour),
-    )..addListener(() => count++);
+    )
+      ..addListener(() => count++)
+      ..regions.addAll([top, middle, bottom]);
   });
 
   for (final (i, (index, direction, offset, topOffsets, middleOffsets, maximized)) in [

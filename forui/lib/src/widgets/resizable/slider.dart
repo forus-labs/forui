@@ -9,7 +9,7 @@ import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 sealed class Slider extends StatelessWidget {
   final FResizableController controller;
   final Alignment alignment;
-  final AxisDirection direction;
+  final AxisDirection side;
   final MouseCursor cursor;
   final double size;
   final int index;
@@ -17,7 +17,7 @@ sealed class Slider extends StatelessWidget {
   Slider({
     required this.controller,
     required this.alignment,
-    required this.direction,
+    required this.side,
     required this.cursor,
     required this.size,
     required this.index,
@@ -47,7 +47,7 @@ sealed class Slider extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(DiagnosticsProperty('direction', direction))
+      ..add(DiagnosticsProperty('side', side))
       ..add(DiagnosticsProperty('cursor', cursor))
       ..add(DoubleProperty('size', size))
       ..add(IntProperty('index', index));
@@ -64,7 +64,7 @@ final class HorizontalSlider extends Slider {
     super.key,
   }) : super(
           alignment: Alignment.centerLeft,
-          direction: AxisDirection.left,
+          side: AxisDirection.left,
           cursor: SystemMouseCursors.resizeLeftRight,
         );
 
@@ -75,7 +75,7 @@ final class HorizontalSlider extends Slider {
     super.key,
   }) : super(
           alignment: Alignment.centerRight,
-          direction: AxisDirection.right,
+          side: AxisDirection.right,
           cursor: SystemMouseCursors.resizeLeftRight,
         );
 
@@ -89,10 +89,10 @@ final class HorizontalSlider extends Slider {
               return;
             }
 
-            controller.update(index, direction, details.delta);
+            controller.update(index, side, details.delta);
             // TODO: haptic feedback
           },
-          onHorizontalDragEnd: (details) => controller.end(index, direction),
+          onHorizontalDragEnd: (details) => controller.end(index, side),
         ),
       );
 }
@@ -107,7 +107,7 @@ final class VerticalSlider extends Slider {
     super.key,
   }) : super(
           alignment: Alignment.topCenter,
-          direction: AxisDirection.up,
+          side: AxisDirection.up,
           cursor: SystemMouseCursors.resizeUpDown,
         );
 
@@ -118,7 +118,7 @@ final class VerticalSlider extends Slider {
     super.key,
   }) : super(
           alignment: Alignment.bottomCenter,
-          direction: AxisDirection.down,
+          side: AxisDirection.down,
           cursor: SystemMouseCursors.resizeUpDown,
         );
 
@@ -132,10 +132,10 @@ final class VerticalSlider extends Slider {
               return;
             }
 
-            controller.update(index, direction, details.delta);
+            controller.update(index, side, details.delta);
             // TODO: haptic feedback
           },
-          onVerticalDragEnd: (details) => controller.end(index, direction),
+          onVerticalDragEnd: (details) => controller.end(index, side),
         ),
       );
 }

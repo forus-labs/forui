@@ -20,7 +20,7 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) => Column(
         children: [
           FResizable(
-            controller: FResizableController(),
+            controller: FResizableController.cascade(),
             axis: Axis.vertical,
             crossAxisExtent: 400,
             children: [
@@ -52,6 +52,21 @@ class _ExampleState extends State<Example> {
                       border: Border.all(color: colorScheme.border),
                     ),
                     child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+                  );
+                },
+              ),
+              FResizableRegion(
+                initialSize: 200,
+                minSize: 100,
+                builder: (context, data, _) {
+                  final colorScheme = context.theme.colorScheme;
+                  return Container(
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: colorScheme.foreground,
+                      border: Border.all(color: colorScheme.border),
+                    ),
+                    child: Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
                   );
                 },
               ),

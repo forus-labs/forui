@@ -130,51 +130,54 @@ final class FResizableRegionData with Diagnosticable {
 extension UpdatableResizableRegionData on FResizableRegionData {
   /// Returns a copy of this data with an updated height/width, and an offset with any shrinkage beyond the minimum
   /// height/width removed.
+  ///
+  /// This method assumes that shrinking regions are updated before expanding regions.
   @useResult
-  (FResizableRegionData, Offset translated) update(AxisDirection direction, Offset delta) {
+  (FResizableRegionData, Offset translated) update(AxisDirection side, Offset delta) {
     final (:min, :max) = offset;
     final Offset(:dx, :dy) = delta;
 
-    switch (direction) {
+    switch (side) {
       case AxisDirection.left:
-        final (data, x) = _translate(direction, min + dx, max);
+        final (data, x) = _translate(side, min + dx, max);
         return (data, delta.translate(x, 0));
 
       case AxisDirection.right:
-        final (data, x) = _translate(direction, min, max + dx);
+        final (data, x) = _translate(side, min, max + dx);
         return (data, delta.translate(-x, 0));
 
       case AxisDirection.up:
-        final (data, y) = _translate(direction, min + dy, max);
+        final (data, y) = _translate(side, min + dy, max);
         return (data, delta.translate(0, y));
 
       case AxisDirection.down:
-        final (data, y) = _translate(direction, min, max + dy);
+        final (data, y) = _translate(side, min, max + dy);
         return (data, delta.translate(0, -y));
     }
   }
 
-  /// Expands the region if the new size is less than the minimum size allowed.
-  (FResizableRegionData, double translation) _translate(AxisDirection direction, double offsetMin, double offsetMax) {
-    final sizeNew = offsetMax - offsetMin;
-    assert(0 <= offsetMin, '$offsetMin should be non-negative.');
-    assert(sizeNew <= size.max, '$sizeNew should be less than ${size.max}.');
+  /// Expands the region if the new size is less than the minimum size allowed. It returns a translation for the drag
+  /// gesture's delta along the resizable axis.
+  (FResizableRegionData, double translation) _translate(AxisDirection side, double minOffset, double maxOffset) {
+    final newSize = maxOffset - minOffset;
+    assert(0 <= minOffset, '$minOffset should be non-negative.');
+    assert(newSize <= size.max, '$newSize should be less than ${size.max}.');
 
-    if (size.min <= sizeNew) {
-      return (copyWith(minOffset: offsetMin, maxOffset: offsetMax), 0);
+    if (size.min <= newSize) {
+      return (copyWith(minOffset: minOffset, maxOffset: maxOffset), 0);
     }
 
     // This prevents unnecessary copies since the size is already at the minimum.
     if (size.min == size.current) {
-      return (this, 0);
+      return (this, newSize - size.min);
     }
 
-    switch (direction) {
+    switch (side) {
       case AxisDirection.left || AxisDirection.up:
-        return (copyWith(minOffset: offsetMax - size.min), sizeNew - size.min);
+        return (copyWith(minOffset: maxOffset - size.min), newSize - size.min);
 
       case AxisDirection.right || AxisDirection.down:
-        return (copyWith(maxOffset: offsetMin + size.min), sizeNew - size.min);
+        return (copyWith(maxOffset: minOffset + size.min), newSize - size.min);
     }
   }
 }

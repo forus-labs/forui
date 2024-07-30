@@ -7,7 +7,7 @@ import 'package:sugar/sugar.dart';
 import 'package:forui/forui.dart';
 
 export '/src/widgets/resizable/resizable_region.dart';
-export '/src/widgets/resizable/resizable_controller.dart';
+export 'resizable_controller.dart';
 export '/src/widgets/resizable/resizable_region_data.dart' hide UpdatableResizableRegionData;
 
 /// A resizable which children can be resized along either the horizontal or vertical main axis.
@@ -21,7 +21,7 @@ export '/src/widgets/resizable/resizable_region_data.dart' hide UpdatableResizab
 /// See:
 /// * https://forui.dev/docs/resizable for working examples.
 class FResizable extends StatefulWidget {
-  /// The controller that manages the resizing of regions in this resizable.
+  /// The controller that manages the resizing of regions in this resizable. Defaults to [FResizableController.new].
   final FResizableController controller;
 
   /// The main axis along which the [children] can be resized.
@@ -37,16 +37,17 @@ class FResizable extends StatefulWidget {
   final List<FResizableRegion> children;
 
   /// Creates a [FResizable].
-  const FResizable({
-    required this.controller,
+  FResizable({
     required this.axis,
     required this.children,
     this.crossAxisExtent,
+    FResizableController? controller,
     super.key,
-  }) : assert(
+  })  : assert(
           crossAxisExtent == null || 0 < crossAxisExtent,
           'The crossAxisExtent should be positive, but it is $crossAxisExtent.',
-        );
+        ),
+        controller = controller ?? FResizableController();
 
   @override
   State<StatefulWidget> createState() => _FResizableState();
@@ -129,17 +130,17 @@ class _FResizableState extends State<FResizable> {
         child: ListenableBuilder(
           listenable: widget.controller,
           builder: (context, _) => Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (var i = 0; i < widget.children.length; i++)
-                  InheritedData(
-                    axis: widget.axis,
-                    controller: widget.controller,
-                    data: widget.controller.regions[i],
-                    child: widget.children[i],
-                  ),
-              ],
-            ),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (var i = 0; i < widget.children.length; i++)
+                InheritedData(
+                  axis: widget.axis,
+                  controller: widget.controller,
+                  data: widget.controller.regions[i],
+                  child: widget.children[i],
+                ),
+            ],
+          ),
         ),
       );
     }
