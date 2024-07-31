@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 @internal
 class ResizeUpIntent extends Intent {
@@ -133,9 +135,9 @@ class HorizontalDivider extends Divider {
 
   @override
   Map<ShortcutActivator, Intent> get shortcuts => const {
-    SingleActivator(LogicalKeyboardKey.arrowLeft): ResizeUpIntent(),
-    SingleActivator(LogicalKeyboardKey.arrowRight): ResizeDownIntent(),
-  };
+        SingleActivator(LogicalKeyboardKey.arrowLeft): ResizeUpIntent(),
+        SingleActivator(LogicalKeyboardKey.arrowRight): ResizeDownIntent(),
+      };
 }
 
 @internal
@@ -191,9 +193,9 @@ class VerticalDivider extends Divider {
 
   @override
   Map<ShortcutActivator, Intent> get shortcuts => const {
-    SingleActivator(LogicalKeyboardKey.arrowUp): ResizeUpIntent(),
-    SingleActivator(LogicalKeyboardKey.arrowDown): ResizeDownIntent(),
-  };
+        SingleActivator(LogicalKeyboardKey.arrowUp): ResizeUpIntent(),
+        SingleActivator(LogicalKeyboardKey.arrowDown): ResizeDownIntent(),
+      };
 }
 
 class _Thumb extends StatelessWidget {

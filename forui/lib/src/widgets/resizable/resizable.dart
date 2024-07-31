@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/resizable/divider.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/resizable/divider.dart';
 
 export 'divider.dart' hide Divider, HorizontalDivider, ResizeDownIntent, ResizeUpIntent, VerticalDivider;
 export 'resizable_controller.dart';

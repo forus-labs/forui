@@ -1,11 +1,12 @@
 import 'dart:collection';
 
 import 'package:flutter/widgets.dart';
+
+import 'package:sugar/collection_aggregate.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/resizable.dart';
-
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
-import 'package:sugar/collection_aggregate.dart';
 
 /// A controller that manages the resizing of regions in a [FResizable].
 abstract interface class FResizableController extends ChangeNotifier {
