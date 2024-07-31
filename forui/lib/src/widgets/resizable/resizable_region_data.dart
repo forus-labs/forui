@@ -12,7 +12,7 @@ final class FResizableRegionData with Diagnosticable {
   /// Throws [AssertionError] if [index] < 0.
   final int index;
 
-  /// This region's minimum and maximum extent, in logical pixels, along the main resizable axis.
+  /// This region's minimum and maximum extent along the main resizable axis, in logical pixels.
   ///
   /// The minimum extent is determined by [FResizableRegion.minExtent].
   /// The maximum extent is determined by the [FResizable]'s size - the minimum size of all regions.
@@ -20,11 +20,10 @@ final class FResizableRegionData with Diagnosticable {
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * min <= 0
-  /// * max <= 0
   /// * max <= min
   final ({double min, double current, double max, double total}) extent;
 
-  /// This region's current minimum and maximum offset, in logical pixels, along the main resizable axis.
+  /// This region's current minimum and maximum offset along the main resizable axis., in logical pixels
   ///
   /// Both offsets are relative to the top/left side of the parent [FResizable], or, in other words, relative to 0.
   ///
@@ -41,26 +40,24 @@ final class FResizableRegionData with Diagnosticable {
     required ({double min, double max, double total}) extent,
     required this.offset,
   })  : assert(0 <= index, 'Index should be non-negative, but is $index.'),
-        assert(0 < extent.min, 'Minimum size should be positive, but is ${extent.min}'),
+        assert(0 < extent.min, 'Min extent should be positive, but is ${extent.min}'),
         assert(
           extent.min < extent.max,
-          'Min size should be less than the min size, but min is ${extent.min} and maximum is ${extent.max}',
+          'Min extent should be less than the max extent, but min is ${extent.min} and max is ${extent.max}',
         ),
         assert(
           extent.max <= extent.total,
-          'Maximum size should be less than or equal to all regions size, but maximum is ${extent.max} and all regions '
-          'is ${extent.total}',
+          'Max extent should be less than or equal to the total extent, but max is ${extent.max} and total is ${extent.total}',
         ),
         assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),
-        assert(0 < offset.max, 'Max offset should be non-negative, but is ${offset.max}'),
         assert(
           offset.min < offset.max,
           'Min offset should be less than the max offset, but min is ${offset.min} and max is ${offset.max}',
         ),
         assert(
           0 <= offset.max - offset.min && offset.max - offset.min <= extent.max,
-          'Current size should be non-negative and less than or equal to the maximum size, but current size is '
-          '${offset.max - offset.min}and maximum size is ${extent.max}.',
+          'Current extent should be non-negative and less than or equal to the max extent, but current is '
+          '${offset.max - offset.min} and max is ${extent.max}.',
         ),
         extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
 

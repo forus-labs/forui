@@ -60,7 +60,7 @@ abstract interface class FResizableController extends ChangeNotifier {
   /// be performed.
   bool update(int left, int right, double delta);
 
-  /// Notifies the region at the index that they and their neighbours that they has been resized.
+  /// Notifies the region at the indexes that they and their neighbours have been resized.
   void end(int left, int right);
 }
 

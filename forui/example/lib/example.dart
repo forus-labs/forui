@@ -28,7 +28,7 @@ class _ExampleState extends State<Example> {
               controller: FResizableController.cascade(),
               axis: Axis.vertical,
               divider: FResizableDivider.dividerThumb,
-              crossAxisExtent: 400,
+              crossAxisExtent: 300,
               children: [
                 FResizableRegion(
                   initialExtent: 200,

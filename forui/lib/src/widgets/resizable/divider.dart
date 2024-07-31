@@ -227,13 +227,13 @@ class _Thumb extends StatelessWidget {
 
 /// The type of dividers between [FResizableRegion]s.
 enum FResizableDivider {
-  /// No dividers.
+  /// No divider.
   none,
 
-  /// Dividers without thumbs.
+  /// Divider without thumb.
   divider,
 
-  /// Dividers with thumbs.
+  /// Divider with thumb.
   dividerThumb,
 }
 
@@ -245,7 +245,7 @@ final class FResizableDividerStyle with Diagnosticable {
   /// The divider's thickness. Defaults to `0.5`.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if 0 < [thickness].
+  /// Throws [AssertionError] if [thickness] <= 0.
   final double thickness;
 
   /// The divider thumb's style.
@@ -256,7 +256,7 @@ final class FResizableDividerStyle with Diagnosticable {
     required this.color,
     required this.thumbStyle,
     this.thickness = 0.5,
-  }) : assert(0 < thickness, 'Thickness should be greater than 0, but it is $thickness.');
+  }) : assert(0 < thickness, 'Thickness should be positive, but is $thickness.');
 
   /// Returns a copy of this but with the given fields replaced with the new values.
   ///
@@ -331,8 +331,8 @@ final class FResizableDividerThumbStyle with Diagnosticable {
     required this.foregroundColor,
     required this.height,
     required this.width,
-  })  : assert(0 < height, 'Height should be greater than 0, but it is $height.'),
-        assert(0 < width, 'Width should be greater than 0, but it is $width.');
+  })  : assert(0 < height, 'Height should be positive, but is $height.'),
+        assert(0 < width, 'Width should be positive, but is $width.');
 
   /// Returns a copy of this but with the given fields replaced with the new values.
   @useResult

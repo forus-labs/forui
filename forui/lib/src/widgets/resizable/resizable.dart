@@ -7,29 +7,30 @@ import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 
-export 'divider.dart' hide Divider, HorizontalDivider, VerticalDivider;
+export 'divider.dart' hide Divider, HorizontalDivider, ResizeDownIntent, ResizeUpIntent, VerticalDivider;
 export 'resizable_controller.dart';
 export 'resizable_region.dart';
 export 'resizable_region_data.dart' hide UpdatableResizableRegionData;
 
 /// A resizable which children can be resized along either the horizontal or vertical main axis.
 ///
-/// Each child is a [FResizableRegion] has a initial size and minimum size. Setting an initial size less than the
-/// minimum size will result in undefined behaviour. The children are arranged from top to bottom, or left to right,
+/// Each child is a [FResizableRegion] has a initial and minimum extent. Setting an initial extent less than the
+/// minimum extent will result in undefined behaviour. The children are arranged from top to bottom, or left to right,
 /// depending on the main [axis].
 ///
 /// Although not required, it is recommended that a [FResizable] contains at least 2 [FResizable] regions.
 ///
 /// See:
 /// * https://forui.dev/docs/resizable for working examples.
+/// * [FResizableStyle] for customizing a resizable's appearance.
 class FResizable extends StatefulWidget {
   static double _platform(double? hitRegion) => switch (const Runtime().type) {
         _ when hitRegion != null => hitRegion,
-        PlatformType.android || PlatformType.ios => 40,
+        PlatformType.android || PlatformType.ios => 60,
         _ => 10,
       };
 
-  /// The controller that manages the resizing of regions in this resizable. Defaults to [FResizableController.new].
+  /// The controller that manages the resizing of regions. Defaults to [FResizableController.new].
   final FResizableController controller;
 
   /// The resizable' style.
@@ -41,17 +42,17 @@ class FResizable extends StatefulWidget {
   /// The divider between the resizable regions. Defaults to [FResizableDivider.divider].
   final FResizableDivider divider;
 
-  /// The number of pixels in the non-resizable axis.
+  /// The extent in the non-resizable axis, in logical pixels.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [crossAxisExtent] is not positive.
   final double? crossAxisExtent;
 
-  /// The resizing gesture's hit region height/width along the resizable axis, in logical pixels.
+  /// The resizing gesture's hit region extent along the resizable axis, in logical pixels.
   ///
-  /// It is centered between [FResizableRegion]s.
+  /// Hit regions are centered between [FResizableRegion]s.
   ///
-  /// Defaults to `40` on Android and iOS, and `10` on other platforms.
+  /// Defaults to `60` on Android and iOS, and `10` on other platforms.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [hitRegionExtent] <= 0.
@@ -72,11 +73,11 @@ class FResizable extends StatefulWidget {
     super.key,
   })  : assert(
           crossAxisExtent == null || 0 < crossAxisExtent,
-          'The crossAxisExtent should be positive, but it is $crossAxisExtent.',
+          'The crossAxisExtent should be positive, but is $crossAxisExtent.',
         ),
         assert(
           hitRegionExtent == null || 0 < hitRegionExtent,
-          'The hit region extent should be positive, but it is $hitRegionExtent.',
+          'The hitRegionExtent should be positive, but is $hitRegionExtent.',
         ),
         controller = controller ?? FResizableController(),
         hitRegionExtent = hitRegionExtent ?? _platform(hitRegionExtent);
@@ -142,7 +143,7 @@ class _FResizableState extends State<FResizable> {
   Widget build(BuildContext context) {
     assert(
       widget.controller.regions.length == widget.children.length,
-      'The number of FResizableData should be equal to the number of children. Please file a bug report.',
+      'The number of FResizableData should be equal to the number of children.',
     );
 
     final (:horizontal, :vertical) = (widget.style ?? context.theme.resizableStyle).dividerStyles;

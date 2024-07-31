@@ -8,7 +8,7 @@ import 'package:forui/src/widgets/resizable/resizable.dart';
 /// See:
 /// * https://forui.dev/docs/resizable for working examples.
 class FResizableRegion extends StatelessWidget {
-  /// The initial height/width, in logical pixels.
+  /// The initial extent along the resizable axis, in logical pixels.
   ///
   /// ## Contract
   /// Throws a [AssertionError] if:
@@ -16,7 +16,7 @@ class FResizableRegion extends StatelessWidget {
   /// * [initialExtent] < [minExtent]
   final double initialExtent;
 
-  /// The minimum height/width along the resizable axis, in logical pixels.
+  /// The minimum extent along the resizable axis, in logical pixels.
   ///
   /// The effective minimum size is either the given minimum size or [FResizable.hitRegionExtent], whichever is larger.
   /// Defaults to [FResizable.hitRegionExtent] if not given.
@@ -40,15 +40,15 @@ class FResizableRegion extends StatelessWidget {
     super.key,
   })  : assert(
           0 < initialExtent,
-          'The initial size should be positive, but it is $initialExtent.',
+          'The initial extent should be positive, but it is $initialExtent.',
         ),
         assert(
           minExtent == null || 0 < minExtent,
-          'The min size should be positive, but it is $minExtent.',
+          'The min extent should be positive, but it is $minExtent.',
         ),
         assert(
           minExtent == null || minExtent <= initialExtent,
-          'The initial size, $initialExtent is less than the required minimum size, $minExtent.',
+          'The initial extent, $initialExtent is less than the min extent, $minExtent.',
         );
 
   @override
