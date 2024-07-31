@@ -12,60 +12,33 @@ A box which children can be resized along either the horizontal or vertical axis
     ```dart
     class TimeOfDay extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FResizable(
-        axis: Axis.vertical,
-        crossAxisExtent: 400,
-        interaction: const FResizableRegionInteraction.selectAndResize(0),
-        children: [
-          FResizableRegion.raw(
-            initialSize: 200,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-                  border: Border.all(color: colorScheme.border),
+      Widget build(BuildContext context) => DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: context.theme.colorScheme.border),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: FResizable(
+              axis: Axis.vertical,
+              crossAxisExtent: 300,
+              children: [
+                FResizableRegion(
+                  initialExtent: 200,
+                  minExtent: 100,
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
                 ),
-                child: Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-              );
-            },
-          ),
-          FResizableRegion.raw(
-            initialSize: 200,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
-                  border: Border.all(color: colorScheme.border),
+                FResizableRegion(
+                  initialExtent: 200,
+                  minExtent: 100,
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
                 ),
-                child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-              );
-            },
-          ),
-          FResizableRegion.raw(
-            initialSize: 200,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-                  border: Border.all(color: colorScheme.border),
+                FResizableRegion(
+                  initialExtent: 200,
+                  minExtent: 100,
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
                 ),
-                child: Label(data: data, icon: FAssets.icons.moon, label: 'Night'),
-              );
-            },
-          ),
-        ],
-      );
+              ],
+            ),
+          );
     }
 
     class Label extends StatelessWidget {
@@ -80,27 +53,36 @@ A box which children can be resized along either the horizontal or vertical axis
       @override
       Widget build(BuildContext context) {
         final FThemeData(:colorScheme, :typography) = context.theme;
-        final color = data.selected ? colorScheme.background : colorScheme.foreground;
-        final start =
-        DateTime.fromMillisecondsSinceEpoch((data.percentage.min * Duration.millisecondsPerDay).round(), isUtc: true);
-        final end =
-        DateTime.fromMillisecondsSinceEpoch((data.percentage.max * Duration.millisecondsPerDay).round(), isUtc: true);
+        final start = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
 
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                icon(height: 15, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
-                const SizedBox(width: 3),
-                Text(label, style: typography.sm.copyWith(color: color)),
-              ],
-            ),
-            const SizedBox(height: 5),
-            Text('${format.format(start)} - ${format.format(end)}', style: typography.sm.copyWith(color: color)),
-          ],
+        final end = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
+
+        return Align(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
+                  const SizedBox(width: 3),
+                  Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text(
+                '${format.format(start)} - ${format.format(end)}',
+                style: typography.sm.copyWith(color: colorScheme.foreground),
+              ),
+            ],
+          ),
         );
       }
     }
@@ -114,16 +96,17 @@ A box which children can be resized along either the horizontal or vertical axis
 
 ```dart
 FResizable(
+  controller: FResizableController.cascade(
+    onResizeUpdate: (regions) => print(regions),
+    onResizeEnd: (regions) => print(regions),
+  ),
   axis: Axis.vertical,
+  divider: FResizableDivider.dividerThumb,
   crossAxisExtent: 400,
-  interaction: const FResizableRegionInteraction.selectAndResize(0),
   children: [
-    FResizableRegion.raw(
+    FResizableRegion(
       initialSize: 200,
       minSize: 100,
-      onPress: (index) {},
-      onResizeUpdate: (selected, neighbour) {},
-      onResizeEnd: (selected, neighbour) {},
       builder: (context, data, child) => child!,
       child: const Placeholder(),
     ),
@@ -133,7 +116,95 @@ FResizable(
 
 ## Examples
 
-### Resize without selecting
+### Cascading
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='resizable' variant='cascading' query={{}} height={700}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    class TimeOfDay extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: context.theme.colorScheme.border),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: FResizable(
+              axis: Axis.vertical,
+              crossAxisExtent: 300,
+              children: [
+                FResizableRegion(
+                  initialExtent: 200,
+                  minExtent: 100,
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
+                ),
+                FResizableRegion(
+                  initialExtent: 200,
+                  minExtent: 100,
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+                ),
+                FResizableRegion(
+                  initialExtent: 200,
+                  minExtent: 100,
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+                ),
+              ],
+            ),
+          );
+    }
+
+    class Label extends StatelessWidget {
+      static final DateFormat format = DateFormat.jm(); // Requires package:intl
+
+      final FResizableRegionData data;
+      final SvgAsset icon;
+      final String label;
+
+      const Label({required this.data, required this.icon, required this.label, super.key});
+
+      @override
+      Widget build(BuildContext context) {
+        final FThemeData(:colorScheme, :typography) = context.theme;
+        final start = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
+
+        final end = DateTime.fromMillisecondsSinceEpoch(
+          (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),
+          isUtc: true,
+        );
+
+        return Align(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
+                  const SizedBox(width: 3),
+                  Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
+                ],
+              ),
+              const SizedBox(height: 5),
+              Text(
+                '${format.format(start)} - ${format.format(end)}',
+                style: typography.sm.copyWith(color: colorScheme.foreground),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Horizontal
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -141,46 +212,110 @@ FResizable(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
-    @override
-    Widget build(BuildContext context) => FResizable(
-      axis: Axis.horizontal,
-      crossAxisExtent: 300,
-      children: [
-        FResizableRegion.raw(
-          initialSize: 100,
-          minSize: 100,
-          builder: (context, data, _) {
-            final colorScheme = context.theme.colorScheme;
-            return Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: data.selected ? colorScheme.foreground : colorScheme.background,
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-                border: Border.all(color: colorScheme.border),
+    Widget build(BuildContext context) => DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colorScheme.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
               ),
-              child: Text('Sidebar', style: context.theme.typography.sm)
-            );
-          },
-        ),
-        FResizableRegion.raw(
-          initialSize: 300,
-          minSize: 100,
-          builder: (context, data, _) {
-            final colorScheme = context.theme.colorScheme;
-            return Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-                border: Border.all(color: colorScheme.border),
-              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
               child: Text('Content', style: context.theme.typography.sm),
-            );
-          },
-        ),
-      ],
+            ),
+          ),
+        ],
+      ),
     );
     ```
   </Tabs.Tab>
 </Tabs>
 
+### Divider with thumb
 
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='resizable' variant='thumb' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    Widget build(BuildContext context) => DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colorScheme.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        divider: FResizableDivider.dividerThumb,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### No divider
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='resizable' variant='no-divider' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    Widget build(BuildContext context) => DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colorScheme.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        divider: FResizableDivider.none,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>

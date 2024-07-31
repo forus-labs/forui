@@ -117,7 +117,7 @@ class HorizontalDivider extends Divider {
               child: GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onHorizontalDragUpdate: (details) {
-                  if (details.delta.dy == 0.0) {
+                  if (details.delta.dx == 0.0) {
                     return;
                   }
 

@@ -124,8 +124,20 @@ class _AppRouter extends $_AppRouter {
           page: ResizableRoute.page,
         ),
         AutoRoute(
+          path: '/resizable/cascading',
+          page: CascadingResizableRoute.page,
+        ),
+        AutoRoute(
           path: '/resizable/horizontal',
           page: HorizontalResizableRoute.page,
+        ),
+        AutoRoute(
+          path: '/resizable/thumb',
+          page: ThumbResizableRoute.page,
+        ),
+        AutoRoute(
+          path: '/resizable/no-divider',
+          page: NoDividerResizableRoute.page,
         ),
         AutoRoute(
           path: '/tabs/default',
