@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -21,9 +19,9 @@ void main() {
     resizeUpdate = null;
     resizeEnd = null;
 
-    top = FResizableRegionData(index: 0, size: (min: 10, max: 40, allRegions: 60), offset: (min: 0, max: 25));
-    middle = FResizableRegionData(index: 1, size: (min: 10, max: 40, allRegions: 60), offset: (min: 25, max: 40));
-    bottom = FResizableRegionData(index: 2, size: (min: 10, max: 40, allRegions: 60), offset: (min: 40, max: 60));
+    top = FResizableRegionData(index: 0, extent: (min: 10, max: 40, total: 60), offset: (min: 0, max: 25));
+    middle = FResizableRegionData(index: 1, extent: (min: 10, max: 40, total: 60), offset: (min: 25, max: 40));
+    bottom = FResizableRegionData(index: 2, extent: (min: 10, max: 40, total: 60), offset: (min: 40, max: 60));
   });
 
   group('_ResizableController', () {
@@ -36,21 +34,12 @@ void main() {
         ..regions.addAll([top, middle, bottom]);
     });
 
-    for (final (i, (index, direction, offset, topOffsets, middleOffsets, maximized)) in [
-      (1, AxisDirection.left, const Offset(-100, 0), (0, 10), (10, 40), false),
-      (1, AxisDirection.left, const Offset(100, 0), (0, 30), (30, 40), false),
-      //
-      (0, AxisDirection.right, const Offset(-100, 0), (0, 10), (10, 40), false),
-      (0, AxisDirection.right, const Offset(100, 0), (0, 30), (30, 40), false),
-      //
-      (1, AxisDirection.up, const Offset(0, -100), (0, 10), (10, 40), false),
-      (1, AxisDirection.up, const Offset(0, 100), (0, 30), (30, 40), false),
-      //
-      (0, AxisDirection.down, const Offset(0, -100), (0, 10), (10, 40), false),
-      (0, AxisDirection.down, const Offset(0, 100), (0, 30), (30, 40), false),
+    for (final (i, (offset, topOffsets, middleOffsets, maximized)) in [
+      (-100.0, (0, 10), (10, 40), false),
+      (100.0, (0, 30), (30, 40), false),
     ].indexed) {
       test('[$i] update(...) direction', () {
-        expect(controller.update(index, direction, offset), maximized);
+        expect(controller.update(0, 1, offset), maximized);
 
         expect(controller.regions[0].offset, (min: topOffsets.$1, max: topOffsets.$2));
         expect(controller.regions[1].offset, (min: middleOffsets.$1, max: middleOffsets.$2));
@@ -64,20 +53,15 @@ void main() {
       });
     }
 
-    for (final (i, (selected, direction)) in [
-      (1, AxisDirection.left),
-      (0, AxisDirection.right),
-      (1, AxisDirection.up),
-      (0, AxisDirection.down),
-    ].indexed) {
-      test('[$i] end calls callback', () {
-        controller.end(selected, direction);
+    test('end(...) calls callback', () {
+      controller.end(0, 1);
 
-        expect(count, 0);
-        expect(resizeEnd?.length, 2);
-        expect(resizeEnd?.associate(by: (e) => e.index).length, 2);
-      });
-    }
+      expect(count, 0);
+      expect(resizeEnd?.length, 2);
+      expect(resizeEnd?.associate(by: (e) => e.index).length, 2);
+      expect(resizeEnd?[0].index, anyOf(0, 1));
+      expect(resizeEnd?[0].index, anyOf(0, 1));
+    });
   });
 
   group('_CascadeController', () {
@@ -90,27 +74,15 @@ void main() {
         ..regions.addAll([top, middle, bottom]);
     });
 
-    for (final (i, (index, direction, offset, topOffset, middleOffset, bottomOffset, length)) in [
-      (1, AxisDirection.left, const Offset(-100, 0), (0, 10), (10, 40), (40, 60), 2),
-      (1, AxisDirection.left, const Offset(100, 0), (0, 40), (40, 50), (50, 60), 3),
-      (1, AxisDirection.left, const Offset(1, 0), (0, 27), (27, 40), (40, 60), 2),
-      //
-      (0, AxisDirection.right, const Offset(-100, 0), (0, 10), (10, 40), (40, 60), 2),
-      (0, AxisDirection.right, const Offset(100, 0), (0, 40), (40, 50), (50, 60), 3),
-      (0, AxisDirection.right, const Offset(1, 0), (0, 27), (27, 40), (40, 60), 2),
-      //
-      (1, AxisDirection.up, const Offset(0, -100), (0, 10), (10, 40), (40, 60), 2),
-      (1, AxisDirection.up, const Offset(0, 100), (0, 40), (40, 50), (50, 60), 3),
-      (1, AxisDirection.up, const Offset(0, 1), (0, 27), (27, 40), (40, 60), 2),
-      //
-      (0, AxisDirection.down, const Offset(0, -100), (0, 10), (10, 40), (40, 60), 2),
-      (0, AxisDirection.down, const Offset(0, 100), (0, 40), (40, 50), (50, 60), 3),
-      (0, AxisDirection.down, const Offset(0, 1), (0, 27), (27, 40), (40, 60), 2),
+    for (final (i, (offset, topOffset, middleOffset, bottomOffset, length)) in [
+      (-100.0, (0, 10), (10, 40), (40, 60), 2),
+      (100.0, (0, 40), (40, 50), (50, 60), 3),
+      (1.0, (0, 27), (27, 40), (40, 60), 2),
     ].indexed) {
       test('[$i] update(...) direction', () {
         controller
-          ..update(index, direction, offset)
-          ..update(index, direction, offset);
+          ..update(0, 1, offset)
+          ..update(0, 1, offset);
 
         expect(controller.regions[0].offset, (min: topOffset.$1, max: topOffset.$2));
         expect(controller.regions[1].offset, (min: middleOffset.$1, max: middleOffset.$2));
@@ -121,21 +93,14 @@ void main() {
       });
     }
 
-    for (final (i, (selected, direction)) in [
-      (1, AxisDirection.left),
-      (0, AxisDirection.right),
-      (1, AxisDirection.up),
-      (0, AxisDirection.down),
-    ].indexed) {
-      test('[$i] end calls callback', () {
-        controller.end(selected, direction);
+    test('end(...) calls callback', () {
+      controller.end(0, 1);
 
-        expect(count, 0);
-        expect(resizeEnd?.length, 3);
-        expect(resizeEnd?.associate(by: (e) => e.index).length, 3);
-        expect(resizeEnd?[0].index, anyOf(0, 1));
-        expect(resizeEnd?[0].index, anyOf(0, 1));
-      });
-    }
+      expect(count, 0);
+      expect(resizeEnd?.length, 3);
+      expect(resizeEnd?.associate(by: (e) => e.index).length, 3);
+      expect(resizeEnd?[0].index, anyOf(0, 1));
+      expect(resizeEnd?[0].index, anyOf(0, 1));
+    });
   });
 }

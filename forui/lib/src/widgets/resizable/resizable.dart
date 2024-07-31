@@ -118,16 +118,17 @@ class _FResizableState extends State<FResizable> {
 
   void _update() {
     var minOffset = 0.0;
-    final allRegionsMin = widget.children.sum((child) => max(child.minExtent ?? 0,  widget.hitRegionExtent), initial: 0.0);
-    final allRegions = widget.children.sum((child) => child.initialExtent, initial: 0.0);
+    final minTotalExtent =
+        widget.children.sum((child) => max(child.minExtent ?? 0, widget.hitRegionExtent), initial: 0.0);
+    final totalExtent = widget.children.sum((child) => child.initialExtent, initial: 0.0);
     final regions = [
       for (final (index, region) in widget.children.indexed)
         FResizableRegionData(
           index: index,
-          size: (
+          extent: (
             min: region.minExtent ?? widget.hitRegionExtent,
-            max: allRegions - allRegionsMin + max(region.minExtent ?? 0,  widget.hitRegionExtent),
-            allRegions: allRegions
+            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
+            total: totalExtent
           ),
           offset: (min: minOffset, max: minOffset += region.initialExtent),
         ),
@@ -169,7 +170,7 @@ class _FResizableState extends State<FResizable> {
                   controller: widget.controller,
                   style: horizontal,
                   type: widget.divider,
-                  indexes: (first: i, second: i + 1),
+                  indexes: (left: i, right: i + 1),
                   crossAxisExtent: widget.crossAxisExtent,
                   hitRegionExtent: widget.hitRegionExtent,
                   cursor: SystemMouseCursors.resizeRow,
@@ -202,7 +203,7 @@ class _FResizableState extends State<FResizable> {
                   controller: widget.controller,
                   style: vertical,
                   type: widget.divider,
-                  indexes: (first: i, second: i + 1),
+                  indexes: (left: i, right: i + 1),
                   crossAxisExtent: widget.crossAxisExtent,
                   hitRegionExtent: widget.hitRegionExtent,
                   cursor: SystemMouseCursors.resizeRow,
@@ -217,6 +218,7 @@ class _FResizableState extends State<FResizable> {
 
 /// A [FResizable]'s style.
 final class FResizableStyle with Diagnosticable {
+  /// The divider styles.
   final ({FResizableDividerStyle horizontal, FResizableDividerStyle vertical}) dividerStyles;
 
   /// Creates a [FResizableStyle].

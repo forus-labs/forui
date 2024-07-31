@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -13,17 +12,17 @@ final class FResizableRegionData with Diagnosticable {
   /// Throws [AssertionError] if [index] < 0.
   final int index;
 
-  /// This region's minimum and maximum height/width, in logical pixels, along the main resizable axis.
+  /// This region's minimum and maximum extent, in logical pixels, along the main resizable axis.
   ///
-  /// The minimum height/width is determined by [FResizableRegion.minExtent].
-  /// The maximum height/width is determined by the [FResizable]'s size - the minimum size of all regions.
+  /// The minimum extent is determined by [FResizableRegion.minExtent].
+  /// The maximum extent is determined by the [FResizable]'s size - the minimum size of all regions.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * min <= 0
   /// * max <= 0
   /// * max <= min
-  final ({double min, double current, double max, double allRegions}) size;
+  final ({double min, double current, double max, double total}) extent;
 
   /// This region's current minimum and maximum offset, in logical pixels, along the main resizable axis.
   ///
@@ -33,23 +32,24 @@ final class FResizableRegionData with Diagnosticable {
   /// Throws [AssertionError] if:
   /// * min < 0
   /// * max <= min
-  /// * allRegions <= max
+  /// * `extent.total` <= max
   final ({double min, double max}) offset;
 
   /// Creates a [FResizableRegionData].
   FResizableRegionData({
     required this.index,
-    required ({double min, double max, double allRegions}) size,
+    required ({double min, double max, double total}) extent,
     required this.offset,
   })  : assert(0 <= index, 'Index should be non-negative, but is $index.'),
-        assert(0 < size.min, 'Minimum size should be positive, but is ${size.min}'),
+        assert(0 < extent.min, 'Minimum size should be positive, but is ${extent.min}'),
         assert(
-          size.min < size.max,
-          'Min size should be less than the min size, but min is ${size.min} and maximum is ${size.max}',
+          extent.min < extent.max,
+          'Min size should be less than the min size, but min is ${extent.min} and maximum is ${extent.max}',
         ),
         assert(
-          size.max <= size.allRegions,
-          'Maximum size should be less than or equal to all regions size, but maximum is ${size.max} and all regions is ${size.allRegions}',
+          extent.max <= extent.total,
+          'Maximum size should be less than or equal to all regions size, but maximum is ${extent.max} and all regions '
+          'is ${extent.total}',
         ),
         assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),
         assert(0 < offset.max, 'Max offset should be non-negative, but is ${offset.max}'),
@@ -58,10 +58,11 @@ final class FResizableRegionData with Diagnosticable {
           'Min offset should be less than the max offset, but min is ${offset.min} and max is ${offset.max}',
         ),
         assert(
-          0 <= offset.max - offset.min && offset.max - offset.min <= size.max,
-          'Current size should be non-negative and less than or equal to the maximum size, but current size is ${offset.max - offset.min} and maximum size is ${size.max}.',
+          0 <= offset.max - offset.min && offset.max - offset.min <= extent.max,
+          'Current size should be non-negative and less than or equal to the maximum size, but current size is '
+          '${offset.max - offset.min}and maximum size is ${extent.max}.',
         ),
-        size = (min: size.min, current: offset.max - offset.min, max: size.max, allRegions: size.allRegions);
+        extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
 
   /// Returns a copy of this [FResizableRegionData] with the given fields replaced by the new values.
   ///
@@ -79,15 +80,15 @@ final class FResizableRegionData with Diagnosticable {
   @useResult
   FResizableRegionData copyWith({
     int? index,
-    double? minSize,
-    double? maxSize,
-    double? allRegionsSize,
+    double? minExtent,
+    double? maxExtent,
+    double? totalExtent,
     double? minOffset,
     double? maxOffset,
   }) =>
       FResizableRegionData(
         index: index ?? this.index,
-        size: (min: minSize ?? size.min, max: maxSize ?? size.max, allRegions: allRegionsSize ?? size.allRegions),
+        extent: (min: minExtent ?? extent.min, max: maxExtent ?? extent.max, total: totalExtent ?? extent.total),
         offset: (min: minOffset ?? offset.min, max: maxOffset ?? offset.max),
       );
 
@@ -95,8 +96,7 @@ final class FResizableRegionData with Diagnosticable {
   ///
   /// For example, if the offsets are `(200, 400)`, and the [FResizable]'s size is 500, [offsetPercentage] will be
   /// `(0.4, 0.8)`.
-  ({double min, double max}) get offsetPercentage =>
-      (min: offset.min / size.allRegions, max: offset.max / size.allRegions);
+  ({double min, double max}) get offsetPercentage => (min: offset.min / extent.total, max: offset.max / extent.total);
 
   @override
   bool operator ==(Object other) =>
@@ -104,72 +104,45 @@ final class FResizableRegionData with Diagnosticable {
       other is FResizableRegionData &&
           runtimeType == other.runtimeType &&
           index == other.index &&
-          size == other.size &&
+          extent == other.extent &&
           offset == other.offset;
 
   @override
-  int get hashCode => index.hashCode ^ size.hashCode ^ offset.hashCode;
+  int get hashCode => index.hashCode ^ extent.hashCode ^ offset.hashCode;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(IntProperty('index', index))
-      ..add(DoubleProperty('minSize', size.min))
-      ..add(DoubleProperty('currentSize', size.current))
-      ..add(DoubleProperty('maxSize', size.max))
-      ..add(DoubleProperty('allRegionsSize', size.allRegions))
-      ..add(DoubleProperty('minOffset', offset.min))
-      ..add(DoubleProperty('maxOffset', offset.max))
-      ..add(DoubleProperty('minOffsetPercentage', offsetPercentage.min))
-      ..add(DoubleProperty('maxOffsetPercentage', offsetPercentage.max));
+      ..add(DoubleProperty('extent.min', extent.min))
+      ..add(DoubleProperty('extent.current', extent.current))
+      ..add(DoubleProperty('extent.max', extent.max))
+      ..add(DoubleProperty('extent.total', extent.total))
+      ..add(DoubleProperty('offset.min', offset.min))
+      ..add(DoubleProperty('offset.max', offset.max))
+      ..add(DoubleProperty('offsetPercentage.min', offsetPercentage.min))
+      ..add(DoubleProperty('offsetPercentage.max', offsetPercentage.max));
   }
 }
 
 @internal
 extension UpdatableResizableRegionData on FResizableRegionData {
-  /// Returns a copy of this data with an updated height/width, and an offset with any shrinkage beyond the minimum
+  /// Returns a copy of this data with an updated extent, and an offset with any shrinkage beyond the minimum
   /// height/width removed.
   ///
-  /// This method assumes that shrinking regions are updated before expanding regions.
+  /// This method assumes that shrinking regions are computed before expanding regions.
   @useResult
-  (FResizableRegionData, Offset translated) update(AxisDirection side, Offset delta) {
-    final (:min, :max) = offset;
-    final Offset(:dx, :dy) = delta;
+  (FResizableRegionData, double translated) update(double delta, {required bool lhs}) {
+    var (:min, :max) = offset;
+    lhs ? min += delta : max += delta;
+    final newExtent = max - min;
 
-    switch (side) {
-      case AxisDirection.left:
-        final (data, x) = _translate(side, min + dx, max);
-        return (data, delta.translate(x, 0));
+    assert(0 <= min, '$min should be non-negative.');
+    assert(newExtent <= extent.max, '$newExtent should be less than ${extent.max}.');
 
-      case AxisDirection.right:
-        final (data, x) = _translate(side, min, max + dx);
-        return (data, delta.translate(-x, 0));
-
-      case AxisDirection.up:
-        final (data, y) = _translate(side, min + dy, max);
-        return (data, delta.translate(0, y));
-
-      case AxisDirection.down:
-        final (data, y) = _translate(side, min, max + dy);
-        return (data, delta.translate(0, -y));
-    }
-  }
-
-  /// Expands the region if the new size is less than the minimum size allowed. It returns a translation for the drag
-  /// gesture's delta along the resizable axis.
-  (FResizableRegionData, double translation) _translate(AxisDirection side, double minOffset, double maxOffset) {
-    final newSize = maxOffset - minOffset;
-    assert(0 <= minOffset, '$minOffset should be non-negative.');
-    assert(newSize <= size.max, '$newSize should be less than ${size.max}.');
-
-    if (size.min <= newSize) {
-      return (copyWith(minOffset: minOffset, maxOffset: maxOffset), 0);
-    }
-
-    // This prevents unnecessary copies since the size is already at the minimum.
-    if (size.min == size.current) {
-      return (this, newSize - size.min);
+    if (extent.min <= newExtent) {
+      return (copyWith(minOffset: min, maxOffset: max), delta);
     }
 
     // In theory, the translation isn't accurate when performing cascading resizes. Given a sufficiently large delta,
@@ -180,12 +153,16 @@ extension UpdatableResizableRegionData on FResizableRegionData {
     // delta.
     //
     // It isn't ideal but it works and I'm too dumb & lazy to address this issue properly.
-    switch (side) {
-      case AxisDirection.left || AxisDirection.up:
-        return (copyWith(minOffset: maxOffset - size.min), newSize - size.min);
-
-      case AxisDirection.right || AxisDirection.down:
-        return (copyWith(maxOffset: minOffset + size.min), newSize - size.min);
+    if (lhs) {
+      return (
+        extent.min == extent.current ? this : copyWith(minOffset: max - extent.min),
+        delta + newExtent - extent.min,
+      );
+    } else {
+      return (
+        extent.min == extent.current ? this : copyWith(maxOffset: min + extent.min),
+        delta - newExtent + extent.min,
+      );
     }
   }
 }

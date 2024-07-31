@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:sugar/sugar.dart';
-
 import 'package:forui/src/widgets/resizable/resizable.dart';
 
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
@@ -55,18 +53,18 @@ class FResizableRegion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:axis, :controller, :data) = InheritedData.of(context);
+    final InheritedData(:axis, :data) = InheritedData.of(context);
     return Semantics(
       container: true,
       enabled: true,
       child: GestureDetector(
         child: switch (axis) {
           Axis.horizontal => SizedBox(
-              width: data.size.current,
+              width: data.extent.current,
               child: builder(context, data, child),
             ),
           Axis.vertical => SizedBox(
-              height: data.size.current,
+              height: data.extent.current,
               child: builder(context, data, child),
             ),
         },

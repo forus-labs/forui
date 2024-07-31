@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable.dart';
 import 'package:meta/meta.dart';
 
 @internal
@@ -9,12 +8,12 @@ sealed class Divider extends StatelessWidget {
   final FResizableController controller;
   final FResizableDividerStyle style;
   final FResizableDivider type;
-  final ({int first, int second}) indexes;
+  final ({int left, int right}) indexes;
   final double? crossAxisExtent;
   final double hitRegionExtent;
   final MouseCursor cursor;
 
-  const Divider({
+  Divider({
     required this.controller,
     required this.style,
     required this.type,
@@ -23,7 +22,9 @@ sealed class Divider extends StatelessWidget {
     required this.hitRegionExtent,
     required this.cursor,
     super.key,
-  });
+  }):
+    assert(0 <= indexes.left, 'Left should be non-negative, but is ${indexes.left}.'),
+    assert(indexes.left + 1 == indexes.right, 'Left and right should be next to each other.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -41,7 +42,7 @@ sealed class Divider extends StatelessWidget {
 
 @internal
 class HorizontalDivider extends Divider {
-  const HorizontalDivider({
+  HorizontalDivider({
     required super.controller,
     required super.style,
     required super.type,
@@ -54,42 +55,46 @@ class HorizontalDivider extends Divider {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: controller.regions[indexes.first].offset.max - (hitRegionExtent / 2),
+        left: controller.regions[indexes.left].offset.max - (hitRegionExtent / 2),
         child: MouseRegion(
           cursor: cursor,
-          child: Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
-                ColoredBox(
-                  color: style.color,
-                  child: SizedBox(
-                    height: crossAxisExtent,
-                    width: style.thickness,
+          child: Semantics(
+            slider: true,
+            excludeSemantics: true,
+            child: Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
+                  ColoredBox(
+                    color: style.color,
+                    child: SizedBox(
+                      height: crossAxisExtent,
+                      width: style.thickness,
+                    ),
+                  ),
+                if (type == FResizableDivider.dividerThumb)
+                  _Thumb(
+                    style: style.thumbStyle,
+                    icon: FAssets.icons.gripVertical,
+                  ),
+                SizedBox(
+                  height: crossAxisExtent,
+                  width: hitRegionExtent,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onHorizontalDragUpdate: (details) {
+                      if (details.delta.dy == 0.0) {
+                        return;
+                      }
+
+                      controller.update(indexes.left, indexes.right, details.delta.dx);
+                      // TODO: haptic feedback
+                    },
+                    onHorizontalDragEnd: (details) => controller.end(indexes.left, indexes.right),
                   ),
                 ),
-              if (type == FResizableDivider.dividerThumb)
-                _Thumb(
-                  style: style.thumbStyle,
-                  icon: FAssets.icons.gripVertical,
-                ),
-              SizedBox(
-                height: crossAxisExtent,
-                width: hitRegionExtent,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onHorizontalDragUpdate: (details) {
-                    if (details.delta.dy == 0.0) {
-                      return;
-                    }
-
-                    // controller.update(index, side, details.delta);
-                    // TODO: haptic feedback
-                  },
-                  // onHorizontalDragEnd: (details) => controller.end(index, side),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
@@ -97,7 +102,7 @@ class HorizontalDivider extends Divider {
 
 @internal
 class VerticalDivider extends Divider {
-  const VerticalDivider({
+  VerticalDivider({
     required super.controller,
     required super.style,
     required super.type,
@@ -110,7 +115,7 @@ class VerticalDivider extends Divider {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        top: controller.regions[indexes.first].offset.max - (hitRegionExtent / 2),
+        top: controller.regions[indexes.left].offset.max - (hitRegionExtent / 2),
         child: MouseRegion(
           cursor: cursor,
           child: Stack(
@@ -139,10 +144,10 @@ class VerticalDivider extends Divider {
                       return;
                     }
 
-                    // controller.update(index, side, details.delta);
+                    controller.update(indexes.left, indexes.right, details.delta.dy);
                     // TODO: haptic feedback
                   },
-                  // onVerticalDragEnd: (details) => controller.end(index, side),
+                  onVerticalDragEnd: (details) => controller.end(indexes.left, indexes.right),
                 ),
               ),
             ],
@@ -288,6 +293,21 @@ final class FResizableDividerThumbStyle with Diagnosticable {
     required this.width,
   })  : assert(0 < height, 'Height should be greater than 0, but it is $height.'),
         assert(0 < width, 'Width should be greater than 0, but it is $width.');
+
+  /// Returns a copy of this but with the given fields replaced with the new values.
+  @useResult
+  FResizableDividerThumbStyle copyWith({
+    Color? backgroundColor,
+    Color? foregroundColor,
+    double? height,
+    double? width,
+  }) =>
+      FResizableDividerThumbStyle(
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        foregroundColor: foregroundColor ?? this.foregroundColor,
+        height: height ?? this.height,
+        width: width ?? this.width,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
