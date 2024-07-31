@@ -28,7 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  auto_route: ^8.2.0
+  auto_route: ^9.0.0
   cupertino_icons: ^1.0.6
   flutter:
     sdk: flutter
