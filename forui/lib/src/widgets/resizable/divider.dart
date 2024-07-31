@@ -1,7 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+@internal
+class ResizeUpIntent extends Intent {
+  const ResizeUpIntent();
+}
+
+@internal
+class ResizeDownIntent extends Intent {
+  const ResizeDownIntent();
+}
 
 @internal
 sealed class Divider extends StatelessWidget {
@@ -22,9 +34,36 @@ sealed class Divider extends StatelessWidget {
     required this.hitRegionExtent,
     required this.cursor,
     super.key,
-  }):
-    assert(0 <= indexes.left, 'Left should be non-negative, but is ${indexes.left}.'),
-    assert(indexes.left + 1 == indexes.right, 'Left and right should be next to each other.');
+  })  : assert(0 <= indexes.left, 'Left should be non-negative, but is ${indexes.left}.'),
+        assert(indexes.left + 1 == indexes.right, 'Left and right should be next to each other.');
+
+  Widget focusableActionDetector({required List<Widget> children}) => MouseRegion(
+        cursor: cursor,
+        child: Semantics(
+          slider: true,
+          child: Shortcuts(
+            shortcuts: shortcuts,
+            child: Actions(
+              actions: {
+                ResizeUpIntent: CallbackAction<ResizeUpIntent>(
+                  onInvoke: (intent) => controller.update(indexes.left, indexes.right, -3),
+                ),
+                ResizeDownIntent: CallbackAction<ResizeDownIntent>(
+                  onInvoke: (intent) => controller.update(indexes.left, indexes.right, 3),
+                ),
+              },
+              child: Focus(
+                child: Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: children,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+  Map<ShortcutActivator, Intent> get shortcuts;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -36,7 +75,8 @@ sealed class Divider extends StatelessWidget {
       ..add(DiagnosticsProperty('indexes', indexes))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
-      ..add(DiagnosticsProperty('cursor', cursor));
+      ..add(DiagnosticsProperty('cursor', cursor))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts));
   }
 }
 
@@ -56,48 +96,46 @@ class HorizontalDivider extends Divider {
   @override
   Widget build(BuildContext context) => Positioned(
         left: controller.regions[indexes.left].offset.max - (hitRegionExtent / 2),
-        child: MouseRegion(
-          cursor: cursor,
-          child: Semantics(
-            slider: true,
-            excludeSemantics: true,
-            child: Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
-                  ColoredBox(
-                    color: style.color,
-                    child: SizedBox(
-                      height: crossAxisExtent,
-                      width: style.thickness,
-                    ),
-                  ),
-                if (type == FResizableDivider.dividerThumb)
-                  _Thumb(
-                    style: style.thumbStyle,
-                    icon: FAssets.icons.gripVertical,
-                  ),
-                SizedBox(
+        child: focusableActionDetector(
+          children: [
+            if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
+              ColoredBox(
+                color: style.color,
+                child: SizedBox(
                   height: crossAxisExtent,
-                  width: hitRegionExtent,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onHorizontalDragUpdate: (details) {
-                      if (details.delta.dy == 0.0) {
-                        return;
-                      }
-
-                      controller.update(indexes.left, indexes.right, details.delta.dx);
-                      // TODO: haptic feedback
-                    },
-                    onHorizontalDragEnd: (details) => controller.end(indexes.left, indexes.right),
-                  ),
+                  width: style.thickness,
                 ),
-              ],
+              ),
+            if (type == FResizableDivider.dividerThumb)
+              _Thumb(
+                style: style.thumbStyle,
+                icon: FAssets.icons.gripVertical,
+              ),
+            SizedBox(
+              height: crossAxisExtent,
+              width: hitRegionExtent,
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onHorizontalDragUpdate: (details) {
+                  if (details.delta.dy == 0.0) {
+                    return;
+                  }
+
+                  controller.update(indexes.left, indexes.right, details.delta.dx);
+                  // TODO: haptic feedback
+                },
+                onHorizontalDragEnd: (details) => controller.end(indexes.left, indexes.right),
+              ),
             ),
-          ),
+          ],
         ),
       );
+
+  @override
+  Map<ShortcutActivator, Intent> get shortcuts => const {
+    SingleActivator(LogicalKeyboardKey.arrowLeft): ResizeUpIntent(),
+    SingleActivator(LogicalKeyboardKey.arrowRight): ResizeDownIntent(),
+  };
 }
 
 @internal
@@ -116,44 +154,46 @@ class VerticalDivider extends Divider {
   @override
   Widget build(BuildContext context) => Positioned(
         top: controller.regions[indexes.left].offset.max - (hitRegionExtent / 2),
-        child: MouseRegion(
-          cursor: cursor,
-          child: Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
-                ColoredBox(
-                  color: style.color,
-                  child: SizedBox(
-                    height: style.thickness,
-                    width: crossAxisExtent,
-                  ),
-                ),
-              if (type == FResizableDivider.dividerThumb)
-                _Thumb(
-                  style: style.thumbStyle,
-                  icon: FAssets.icons.gripHorizontal,
-                ),
-              SizedBox(
-                height: hitRegionExtent,
-                width: crossAxisExtent,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onVerticalDragUpdate: (details) {
-                    if (details.delta.dy == 0.0) {
-                      return;
-                    }
-
-                    controller.update(indexes.left, indexes.right, details.delta.dy);
-                    // TODO: haptic feedback
-                  },
-                  onVerticalDragEnd: (details) => controller.end(indexes.left, indexes.right),
+        child: focusableActionDetector(
+          children: [
+            if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
+              ColoredBox(
+                color: style.color,
+                child: SizedBox(
+                  height: style.thickness,
+                  width: crossAxisExtent,
                 ),
               ),
-            ],
-          ),
+            if (type == FResizableDivider.dividerThumb)
+              _Thumb(
+                style: style.thumbStyle,
+                icon: FAssets.icons.gripHorizontal,
+              ),
+            SizedBox(
+              height: hitRegionExtent,
+              width: crossAxisExtent,
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onVerticalDragUpdate: (details) {
+                  if (details.delta.dy == 0.0) {
+                    return;
+                  }
+
+                  controller.update(indexes.left, indexes.right, details.delta.dy);
+                  // TODO: haptic feedback
+                },
+                onVerticalDragEnd: (details) => controller.end(indexes.left, indexes.right),
+              ),
+            ),
+          ],
         ),
       );
+
+  @override
+  Map<ShortcutActivator, Intent> get shortcuts => const {
+    SingleActivator(LogicalKeyboardKey.arrowUp): ResizeUpIntent(),
+    SingleActivator(LogicalKeyboardKey.arrowDown): ResizeDownIntent(),
+  };
 }
 
 class _Thumb extends StatelessWidget {

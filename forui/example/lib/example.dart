@@ -20,7 +20,10 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) => Column(
         children: [
           DecoratedBox(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(
+              border: Border.all(color: context.theme.colorScheme.border),
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: FResizable(
               controller: FResizableController.cascade(),
               axis: Axis.vertical,
@@ -30,46 +33,17 @@ class _ExampleState extends State<Example> {
                 FResizableRegion(
                   initialExtent: 200,
                   minExtent: 100,
-                  builder: (context, data, _) {
-                    final colorScheme = context.theme.colorScheme;
-                    return Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-                        color: colorScheme.background,
-                      ),
-                      child: Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-                    );
-                  },
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
                 ),
                 FResizableRegion(
                   initialExtent: 200,
                   minExtent: 100,
-                  builder: (context, data, _) {
-                    final colorScheme = context.theme.colorScheme;
-                    return Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: colorScheme.background,
-                      ),
-                      child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-                    );
-                  },
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
                 ),
                 FResizableRegion(
                   initialExtent: 200,
                   minExtent: 100,
-                  builder: (context, data, _) {
-                    final colorScheme = context.theme.colorScheme;
-                    return Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-                        color: colorScheme.background,
-                      ),
-                      child: Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
-                    );
-                  },
+                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
                 ),
               ],
             ),
@@ -94,29 +68,32 @@ class Label extends StatelessWidget {
       (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
       isUtc: true,
     );
+
     final end = DateTime.fromMillisecondsSinceEpoch(
       (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),
       isUtc: true,
     );
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
-            const SizedBox(width: 3),
-            Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
-          ],
-        ),
-        const SizedBox(height: 5),
-        Text(
-          '${format.format(start)} - ${format.format(end)}',
-          style: typography.sm.copyWith(color: colorScheme.foreground),
-        ),
-      ],
+    return Align(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
+              const SizedBox(width: 3),
+              Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
+            ],
+          ),
+          const SizedBox(height: 5),
+          Text(
+            '${format.format(start)} - ${format.format(end)}',
+            style: typography.sm.copyWith(color: colorScheme.foreground),
+          ),
+        ],
+      ),
     );
   }
 }
