@@ -6,14 +6,14 @@ import 'package:forui/forui.dart';
 
 void main() {
   final top = FResizableRegion(
-    initialSize: 30,
-    sliderSize: 10,
+    initialExtent: 30,
+    minExtent: 10,
     builder: (context, snapshot, child) => const SizedBox(),
   );
 
   final bottom = FResizableRegion(
-    initialSize: 70,
-    sliderSize: 10,
+    initialExtent: 70,
+    minExtent: 10,
     builder: (context, snapshot, child) => const SizedBox(),
   );
 

@@ -18,8 +18,8 @@ class ResizablePage extends SampleScaffold {
         crossAxisExtent: 400,
         children: [
           FResizableRegion(
-            initialSize: 200,
-            minSize: 100,
+            initialExtent: 200,
+            minExtent: 100,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(
@@ -34,8 +34,8 @@ class ResizablePage extends SampleScaffold {
             },
           ),
           FResizableRegion(
-            initialSize: 200,
-            minSize: 100,
+            initialExtent: 200,
+            minExtent: 100,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(
@@ -49,8 +49,8 @@ class ResizablePage extends SampleScaffold {
             },
           ),
           FResizableRegion(
-            initialSize: 200,
-            minSize: 100,
+            initialExtent: 200,
+            minExtent: 100,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(
@@ -123,8 +123,8 @@ class HorizontalResizablePage extends SampleScaffold {
         crossAxisExtent: 300,
         children: [
           FResizableRegion(
-            initialSize: 100,
-            minSize: 100,
+            initialExtent: 100,
+            minExtent: 100,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(
@@ -139,8 +139,8 @@ class HorizontalResizablePage extends SampleScaffold {
             },
           ),
           FResizableRegion(
-            initialSize: 300,
-            minSize: 100,
+            initialExtent: 300,
+            minExtent: 100,
             builder: (context, data, _) {
               final colorScheme = context.theme.colorScheme;
               return Container(

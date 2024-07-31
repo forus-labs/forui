@@ -15,7 +15,7 @@ final class FResizableRegionData with Diagnosticable {
 
   /// This region's minimum and maximum height/width, in logical pixels, along the main resizable axis.
   ///
-  /// The minimum height/width is determined by [FResizableRegion.minSize].
+  /// The minimum height/width is determined by [FResizableRegion.minExtent].
   /// The maximum height/width is determined by the [FResizable]'s size - the minimum size of all regions.
   ///
   /// ## Contract
