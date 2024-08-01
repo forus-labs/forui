@@ -9,12 +9,11 @@ part 'avatar_content.dart';
 
 /// An image element with a fallback for representing the user.
 ///
-/// use image property to provide a profile image displayed within the circle.
-/// Typically used with a user's profile image. If the image fails to load,
-/// the fallback widget is used instead, which usually displays the user's initials.
+/// Typically used with a user's profile image. If the image fails to load, the fallback widget is used instead, which
+/// usually displays the user's initials.
 ///
-/// If the user's profile has no image, use the fallback property to provide
-/// the initials using a [Text] widget styled with [FAvatarStyle.backgroundColor].
+/// If the user's profile has no image, use the fallback property to display the initials using a [Text] widget styled
+/// with [FAvatarStyle.backgroundColor].
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;
@@ -23,9 +22,6 @@ class FAvatar extends StatelessWidget {
   final double size;
 
   /// The child, typically an image.
-  ///
-  /// If the image fails to load, a fallback widget, typically a [Text] widget used to display the user's initials
-  /// styled with [FAvatarStyle.backgroundColor] is displayed.
   final Widget child;
 
   /// Creates an [FAvatar].

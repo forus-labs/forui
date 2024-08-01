@@ -5,16 +5,16 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A divider. dividers visually separate content.
+/// A divider. Dividers visually separate content.
 ///
 /// See:
 /// * https://forui.dev/docs/divider for working examples.
-/// * [FDividerStyle] for customizing a separator's appearance.
+/// * [FDividerStyle] for customizing a divider's appearance.
 final class FDivider extends StatelessWidget {
-  /// The separator's style. Defaults to the appropriate style in [FThemeData.dividerStyles].
+  /// The divider's style. Defaults to the appropriate style in [FThemeData.dividerStyles].
   final FDividerStyle? style;
 
-  /// True if this separator is vertical. Defaults to false (horizontal).
+  /// True if this divider is vertical. Defaults to false (horizontal).
   final bool vertical;
 
   /// Creates a [FDivider].
@@ -45,10 +45,10 @@ final class FDivider extends StatelessWidget {
 
 /// The [FDivider] styles.
 final class FDividerStyles with Diagnosticable {
-  /// The horizontal separator's style.
+  /// The horizontal divider's style.
   final FDividerStyle horizontal;
 
-  /// The vertical separator's style.
+  /// The vertical divider's style.
   final FDividerStyle vertical;
 
   /// Creates a [FDividerStyles].
@@ -108,7 +108,7 @@ final class FDividerStyles with Diagnosticable {
 
 /// [FDivider]'s style.
 final class FDividerStyle with Diagnosticable {
-  /// The default padding for horizontal and vertical separators.
+  /// The default padding for horizontal and vertical dividers.
   static const defaultPadding = (
     horizontal: EdgeInsets.symmetric(vertical: 20),
     vertical: EdgeInsets.symmetric(horizontal: 20),

@@ -241,13 +241,13 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('separatorStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
 
