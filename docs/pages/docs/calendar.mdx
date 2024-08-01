@@ -7,7 +7,7 @@ A date field component that allows users to enter and edit date.
 The calendar pages are designed to be navigable through swipe gestures on mobile platforms, allowing left and right
 swipes to transition between pages.
 
-A [FCalendarController](https://pub.dev/documentation/forui/latest/forui.widgets/FCalendarController-class.html) is used
+A [`FCalendarController`](https://pub.dev/documentation/forui/latest/forui.widgets/FCalendarController-class.html) is used
 to customize the date selection behavior.
 
 <Tabs items={['Preview', 'Code']}>
@@ -53,7 +53,7 @@ FCalendar(
         <Widget name='calendar' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart {2}
         FCalendar(
           controller: FCalendarController.date(),
           start: DateTime.utc(2000),
@@ -69,7 +69,7 @@ FCalendar(
         <Widget name='calendar' variant='dates' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart {2-4}
         FCalendar(
           controller: FCalendarController.dates(
             initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
@@ -88,7 +88,7 @@ FCalendar(
         <Widget name='calendar' variant='unselectable' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-      ```dart
+      ```dart {4}
       FCalendar(
         controller: FCalendarController.dates(
           initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
@@ -108,7 +108,7 @@ FCalendar(
         <Widget name='calendar' variant='range' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart {2-4}
         FCalendar(
           controller: FCalendarController.range(
             initialSelection: (DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)),
