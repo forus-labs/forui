@@ -104,6 +104,10 @@ class _AppRouter extends RootStackRouter {
           page: DialogRoute.page,
         ),
         AutoRoute(
+          path: '/divider/default',
+          page: DividerRoute.page,
+        ),
+        AutoRoute(
           path: '/header/default',
           page: RootHeaderRoute.page,
         ),
@@ -162,10 +166,6 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(
           path: '/scaffold/default',
           page: ScaffoldRoute.page,
-        ),
-        AutoRoute(
-          path: '/separator/default',
-          page: SeparatorRoute.page,
         ),
         AutoRoute(
           path: '/switch/default',

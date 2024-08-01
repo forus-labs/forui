@@ -5,25 +5,25 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A separator. Separators visually separate content.
+/// A divider. dividers visually separate content.
 ///
 /// See:
-/// * https://forui.dev/docs/separator for working examples.
-/// * [FSeparatorStyle] for customizing a separator's appearance.
-final class FSeparator extends StatelessWidget {
-  /// The separator's style. Defaults to the appropriate style in [FThemeData.separatorStyles].
-  final FSeparatorStyle? style;
+/// * https://forui.dev/docs/divider for working examples.
+/// * [FDividerStyle] for customizing a separator's appearance.
+final class FDivider extends StatelessWidget {
+  /// The separator's style. Defaults to the appropriate style in [FThemeData.dividerStyles].
+  final FDividerStyle? style;
 
   /// True if this separator is vertical. Defaults to false (horizontal).
   final bool vertical;
 
-  /// Creates a [FSeparator].
-  const FSeparator({this.style, this.vertical = false, super.key});
+  /// Creates a [FDivider].
+  const FDivider({this.style, this.vertical = false, super.key});
 
   @override
   Widget build(BuildContext context) {
     final style =
-        this.style ?? (vertical ? context.theme.separatorStyles.vertical : context.theme.separatorStyles.horizontal);
+        this.style ?? (vertical ? context.theme.dividerStyles.vertical : context.theme.dividerStyles.horizontal);
     final (height, width) = vertical ? (null, style.width) : (style.width, null);
 
     return Container(
@@ -43,34 +43,34 @@ final class FSeparator extends StatelessWidget {
   }
 }
 
-/// The [FSeparator] styles.
-final class FSeparatorStyles with Diagnosticable {
+/// The [FDivider] styles.
+final class FDividerStyles with Diagnosticable {
   /// The horizontal separator's style.
-  final FSeparatorStyle horizontal;
+  final FDividerStyle horizontal;
 
   /// The vertical separator's style.
-  final FSeparatorStyle vertical;
+  final FDividerStyle vertical;
 
-  /// Creates a [FSeparatorStyles].
-  FSeparatorStyles({required this.horizontal, required this.vertical});
+  /// Creates a [FDividerStyles].
+  FDividerStyles({required this.horizontal, required this.vertical});
 
-  /// Creates a [FSeparatorStyles] that inherits its properties from [colorScheme] and [style].
-  FSeparatorStyles.inherit({required FColorScheme colorScheme, required FStyle style})
-      : horizontal = FSeparatorStyle.inherit(
+  /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [style].
+  FDividerStyles.inherit({required FColorScheme colorScheme, required FStyle style})
+      : horizontal = FDividerStyle.inherit(
           colorScheme: colorScheme,
           style: style,
-          padding: FSeparatorStyle.defaultPadding.horizontal,
+          padding: FDividerStyle.defaultPadding.horizontal,
         ),
-        vertical = FSeparatorStyle.inherit(
+        vertical = FDividerStyle.inherit(
           colorScheme: colorScheme,
           style: style,
-          padding: FSeparatorStyle.defaultPadding.vertical,
+          padding: FDividerStyle.defaultPadding.vertical,
         );
 
-  /// Returns a copy of this [FSeparatorStyles] with the given properties replaced.
+  /// Returns a copy of this [FDividerStyles] with the given properties replaced.
   ///
   /// ```dart
-  /// final style = FSeparatorStyles(
+  /// final style = FDividerStyles(
   ///   horizontal: ...,
   ///   vertical: ...,
   /// );
@@ -81,7 +81,7 @@ final class FSeparatorStyles with Diagnosticable {
   /// print(style.vertical == copy.vertical); // false
   /// ```
   @useResult
-  FSeparatorStyles copyWith({FSeparatorStyle? horizontal, FSeparatorStyle? vertical}) => FSeparatorStyles(
+  FDividerStyles copyWith({FDividerStyle? horizontal, FDividerStyle? vertical}) => FDividerStyles(
         horizontal: horizontal ?? this.horizontal,
         vertical: vertical ?? this.vertical,
       );
@@ -97,7 +97,7 @@ final class FSeparatorStyles with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FSeparatorStyles &&
+      other is FDividerStyles &&
           runtimeType == other.runtimeType &&
           horizontal == other.horizontal &&
           vertical == other.vertical;
@@ -106,15 +106,15 @@ final class FSeparatorStyles with Diagnosticable {
   int get hashCode => horizontal.hashCode ^ vertical.hashCode;
 }
 
-/// [FSeparator]'s style.
-final class FSeparatorStyle with Diagnosticable {
+/// [FDivider]'s style.
+final class FDividerStyle with Diagnosticable {
   /// The default padding for horizontal and vertical separators.
   static const defaultPadding = (
     horizontal: EdgeInsets.symmetric(vertical: 20),
     vertical: EdgeInsets.symmetric(horizontal: 20),
   );
 
-  /// The color of the separating line..
+  /// The color of the separating line.
   final Color color;
 
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
@@ -129,21 +129,21 @@ final class FSeparatorStyle with Diagnosticable {
   /// * `width` is Nan
   final double width;
 
-  /// Creates a [FSeparatorStyle].
-  FSeparatorStyle({required this.color, required this.padding, this.width = 1})
+  /// Creates a [FDividerStyle].
+  FDividerStyle({required this.color, required this.padding, this.width = 1})
       : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
 
-  /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme], [style], and [padding].
-  FSeparatorStyle.inherit({
+  /// Creates a [FDividerStyle] that inherits its properties from [colorScheme], [style], and [padding].
+  FDividerStyle.inherit({
     required FColorScheme colorScheme,
     required FStyle style,
     required EdgeInsetsGeometry padding,
   }) : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
-  /// Returns a copy of this [FSeparatorStyle] with the given properties replaced.
+  /// Returns a copy of this [FDividerStyle] with the given properties replaced.
   ///
   /// ```dart
-  /// final style = FSeparatorStyle(
+  /// final style = FDividerStyle(
   ///   color: Colors.black,
   ///   width: 1,
   ///   // Other arguments omitted for brevity
@@ -155,7 +155,7 @@ final class FSeparatorStyle with Diagnosticable {
   /// print(copy.width); // 2
   /// ```
   @useResult
-  FSeparatorStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FSeparatorStyle(
+  FDividerStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FDividerStyle(
         color: color ?? this.color,
         padding: padding ?? this.padding,
         width: width ?? this.width,
@@ -173,7 +173,7 @@ final class FSeparatorStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FSeparatorStyle &&
+      other is FDividerStyle &&
           runtimeType == other.runtimeType &&
           color == other.color &&
           padding == other.padding &&

@@ -22,7 +22,7 @@ void main() {
                 border: Border.all(color: theme.colorScheme.secondary),
               ),
             ),
-            FSeparator(vertical: value),
+            FDivider(vertical: value),
             Container(
               width: 100,
               height: 100,

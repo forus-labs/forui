@@ -12,7 +12,7 @@
 /// * [FTabs]
 /// * [FTextField]
 /// * [FScaffold]
-/// * [FSeparator]
+/// * [FDivider]
 /// * [FSwitch]
 library forui.widgets;
 
@@ -33,5 +33,5 @@ export 'src/widgets/tabs/tabs.dart';
 export 'src/widgets/text_field/text_field.dart';
 export 'src/widgets/resizable/resizable.dart' hide InheritedData;
 export 'src/widgets/scaffold.dart';
-export 'src/widgets/separator.dart';
+export 'src/widgets/divider.dart';
 export 'src/widgets/switch.dart';

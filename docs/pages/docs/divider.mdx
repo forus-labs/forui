@@ -1,12 +1,12 @@
 import { Tabs } from 'nextra/components';
 import { Widget } from "../../components/widget";
 
-# Separator
+# Divider
 Visually or semantically separates content.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='separator' query={{}} height={300}/>
+    <Widget name='divider' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
@@ -31,7 +31,7 @@ Visually or semantically separates content.
             'An open-source widget library.',
             style: typography.sm.copyWith(color: colorScheme.mutedForeground),
           ),
-          const FSeparator(),
+          const FDivider(),
           SizedBox(
             height: 30,
             child: Row(
@@ -40,12 +40,12 @@ Visually or semantically separates content.
                   'Blog',
                   style: typography.sm.copyWith(color: colorScheme.foreground),
                 ),
-                const FSeparator(vertical: true),
+                const FDivider(vertical: true),
                 Text(
                   'Docs',
                   style: typography.sm.copyWith(color: colorScheme.foreground),
                 ),
-                const FSeparator(vertical: true),
+                const FDivider(vertical: true),
                 Text(
                   'Source',
                   style: typography.sm.copyWith(color: colorScheme.foreground),

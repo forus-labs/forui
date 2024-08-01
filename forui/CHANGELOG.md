@@ -22,6 +22,8 @@
 
 * **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController`.
 
+* **Breaking:** Rename `FSeparator` to `FDivider`.
+
 * **Breaking:** Remove `colorScheme`, `typography` and `style` parameters from `FThemeData.copyWith(...)`.
   The problem was widget-specific styles not being re-created after the removed parameters were updated.
   This led to unintuitive behavior where the style of a widget was not updated when the `FThemeData` was updated.
