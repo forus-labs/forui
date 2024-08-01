@@ -13,7 +13,7 @@ An image element with a fallback for representing the user.
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // With Valid image.
+          // With valid image.
           FAvatar(
             image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
             fallback: const Text('MN'),
@@ -27,7 +27,7 @@ An image element with a fallback for representing the user.
           ),
           const SizedBox(width: 10),
 
-          // With Invalid image without fallback.
+          // With invalid image without fallback.
           FAvatar(image: const NetworkImage('')),
         ],
       );
