@@ -99,7 +99,7 @@ class HorizontalDivider extends Divider {
         left: controller.regions[indexes.left].offset.max - (hitRegionExtent / 2),
         child: focusableActionDetector(
           children: [
-            if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
+            if (type == FResizableDivider.divider || type == FResizableDivider.dividerWithThumb)
               ColoredBox(
                 color: style.color,
                 child: SizedBox(
@@ -107,7 +107,7 @@ class HorizontalDivider extends Divider {
                   width: style.thickness,
                 ),
               ),
-            if (type == FResizableDivider.dividerThumb)
+            if (type == FResizableDivider.dividerWithThumb)
               _Thumb(
                 style: style.thumbStyle,
                 icon: FAssets.icons.gripVertical,
@@ -157,7 +157,7 @@ class VerticalDivider extends Divider {
         top: controller.regions[indexes.left].offset.max - (hitRegionExtent / 2),
         child: focusableActionDetector(
           children: [
-            if (type == FResizableDivider.divider || type == FResizableDivider.dividerThumb)
+            if (type == FResizableDivider.divider || type == FResizableDivider.dividerWithThumb)
               ColoredBox(
                 color: style.color,
                 child: SizedBox(
@@ -165,7 +165,7 @@ class VerticalDivider extends Divider {
                   width: crossAxisExtent,
                 ),
               ),
-            if (type == FResizableDivider.dividerThumb)
+            if (type == FResizableDivider.dividerWithThumb)
               _Thumb(
                 style: style.thumbStyle,
                 icon: FAssets.icons.gripHorizontal,
@@ -235,7 +235,7 @@ enum FResizableDivider {
   divider,
 
   /// Divider with thumb.
-  dividerThumb,
+  dividerWithThumb,
 }
 
 /// The style of the dividers between [FResizableRegion]s.

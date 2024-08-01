@@ -128,16 +128,16 @@ class _AppRouter extends RootStackRouter {
           page: ResizableRoute.page,
         ),
         AutoRoute(
-          path: '/resizable/cascading',
-          page: CascadingResizableRoute.page,
+          path: '/resizable/no-cascading',
+          page: NoCascadingResizableRoute.page,
         ),
         AutoRoute(
           path: '/resizable/horizontal',
           page: HorizontalResizableRoute.page,
         ),
         AutoRoute(
-          path: '/resizable/thumb',
-          page: ThumbResizableRoute.page,
+          path: '/resizable/no-thumb',
+          page: NoThumbResizableRoute.page,
         ),
         AutoRoute(
           path: '/resizable/no-divider',

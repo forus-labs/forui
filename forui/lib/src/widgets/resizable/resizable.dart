@@ -30,7 +30,7 @@ class FResizable extends StatefulWidget {
         _ => 10,
       };
 
-  /// The controller that manages the resizing of regions. Defaults to [FResizableController.new].
+  /// The controller that manages the resizing of regions. Defaults to [FResizableController.cascade].
   final FResizableController controller;
 
   /// The resizable' style.
@@ -39,7 +39,7 @@ class FResizable extends StatefulWidget {
   /// The main axis along which the [children] can be resized.
   final Axis axis;
 
-  /// The divider between the resizable regions. Defaults to [FResizableDivider.divider].
+  /// The divider between the resizable regions. Defaults to [FResizableDivider.dividerWithThumb].
   final FResizableDivider divider;
 
   /// The extent in the non-resizable axis, in logical pixels.
@@ -66,7 +66,7 @@ class FResizable extends StatefulWidget {
     required this.axis,
     required this.children,
     this.style,
-    this.divider = FResizableDivider.divider,
+    this.divider = FResizableDivider.dividerWithThumb,
     this.crossAxisExtent,
     FResizableController? controller,
     double? hitRegionExtent,
@@ -79,7 +79,7 @@ class FResizable extends StatefulWidget {
           hitRegionExtent == null || 0 < hitRegionExtent,
           'The hitRegionExtent should be positive, but is $hitRegionExtent.',
         ),
-        controller = controller ?? FResizableController(),
+        controller = controller ?? FResizableController.cascade(),
         hitRegionExtent = hitRegionExtent ?? _platform(hitRegionExtent);
 
   @override
