@@ -76,8 +76,8 @@ class _AppRouter extends RootStackRouter {
           page: CalendarRoute.page,
         ),
         AutoRoute(
-          path: '/calendar/multi-value',
-          page: MultiValueCalendarRoute.page,
+          path: '/calendar/dates',
+          page: DatesCalendarRoute.page,
         ),
         AutoRoute(
           path: '/calendar/unselectable',

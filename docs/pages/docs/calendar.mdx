@@ -17,7 +17,7 @@ to customize the date selection behavior.
     <Tabs.Tab>
         ```dart
         FCalendar(
-          controller: FCalendarValueController(initialSelection: selected),
+          controller: FCalendarController.date(initialSelection: selected),
           start: DateTime.utc(2000),
           end: DateTime.utc(2030),
         );
@@ -31,7 +31,7 @@ to customize the date selection behavior.
 
 ```dart
 FCalendar(
-  controller: FCalendarValueController(
+  controller: FCalendarController.date(
     initialSelection: DateTime.utc(2024, 9, 13),
     selectable: (date) => allowedDates.contains(date),
   ),
@@ -55,7 +55,7 @@ FCalendar(
     <Tabs.Tab>
         ```dart
         FCalendar(
-          controller: FCalendarSingleValueController(),
+          controller: FCalendarController.date(),
           start: DateTime.utc(2000),
           end: DateTime.utc(2030),
         );
@@ -66,12 +66,12 @@ FCalendar(
 ### Multiple Dates with Initial Selections
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='calendar' variant='multi-value' query={{}} height={500}/>
+        <Widget name='calendar' variant='dates' query={{}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
         FCalendar(
-          controller: FCalendarMultiValueController(
+          controller: FCalendarController.dates(
             initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
           ),
           start: DateTime.utc(2000),
@@ -90,7 +90,7 @@ FCalendar(
     <Tabs.Tab>
       ```dart
       FCalendar(
-        controller: FCalendarMultiValueController(
+        controller: FCalendarController.dates(
           initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
           selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
         ),
@@ -110,7 +110,7 @@ FCalendar(
     <Tabs.Tab>
         ```dart
         FCalendar(
-          controller: FCalendarRangeController(
+          controller: FCalendarController.range(
             initialSelection: (DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)),
           ),
           start: DateTime.utc(2000),

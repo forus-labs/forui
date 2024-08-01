@@ -199,7 +199,7 @@ final class FThemeData with Diagnosticable {
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
     FScaffoldStyle? scaffoldStyle,
-    FDividerStyles? separatorStyles,
+    FDividerStyles? dividerStyles,
     FSwitchStyle? switchStyle,
   }) =>
       FThemeData(
@@ -215,13 +215,13 @@ final class FThemeData with Diagnosticable {
         cardStyle: cardStyle ?? this.cardStyle,
         checkboxStyle: checkboxStyle ?? this.checkboxStyle,
         dialogStyle: dialogStyle ?? this.dialogStyle,
+        dividerStyles: dividerStyles ?? this.dividerStyles,
         headerStyle: headerStyle ?? this.headerStyle,
         progressStyle: progressStyle ?? this.progressStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
-        dividerStyles: separatorStyles ?? this.dividerStyles,
         switchStyle: switchStyle ?? this.switchStyle,
       );
 

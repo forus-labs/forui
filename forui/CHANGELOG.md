@@ -18,9 +18,11 @@
 * **Breaking:** Rename `FCalendarEntryStyle.focusedTextStyle` to `FCalendarEntryStyle.hoveredTextStyle`.
   This only affects users that customized `FCalendarEntryStyle`.
 
-* **Breaking:** Rename `FCalendarSingleValueController` to `FCalendarValueController`.
+* **Breaking:** Move `FCalendarSingleValueController` to `FCalendarController.date(...)`.
 
-* **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController`.
+* **Breaking:** Move `FCalendarMultiValueController` to `FCalendarController.dates(...)`.
+
+* **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController.range(...)`.
 
 * **Breaking:** Rename `FSeparator` to `FDivider`.
 

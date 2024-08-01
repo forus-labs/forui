@@ -3,10 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
 void main() {
-  group('FCalendarValueController', () {
+  group('FCalendarController.date(...)', () {
     test(
       'constructor throws error',
-      () => expect(() => FCalendarValueController(initialSelection: DateTime.now()), throwsAssertionError),
+      () => expect(() => FCalendarController.date(initialSelection: DateTime.now()), throwsAssertionError),
     );
 
     for (final (date, expected) in [
@@ -14,7 +14,7 @@ void main() {
       (DateTime.utc(2024, 5, 5), false),
     ]) {
       test('selected(...) contains date', () {
-        final controller = FCalendarValueController(initialSelection: DateTime.utc(2024, 5, 4));
+        final controller = FCalendarController.date(initialSelection: DateTime.utc(2024, 5, 4));
         expect(controller.selected(date), expected);
       });
     }
@@ -26,19 +26,19 @@ void main() {
       (DateTime.utc(2024), DateTime.utc(2024), null),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarValueController(initialSelection: initial)..select(date);
+        final controller = FCalendarController.date(initialSelection: initial)..select(date);
         expect(controller.value, expected);
       });
     }
   });
 
-  group('FCalendarMultiValueController', () {
+  group('FCalendarController.dates', () {
     for (final (date, expected) in [
       (DateTime.utc(2024), true),
       (DateTime.utc(2025), false),
     ]) {
       test('selected(...)', () {
-        final controller = FCalendarMultiValueController(initialSelections: {DateTime.utc(2024)});
+        final controller = FCalendarController.dates(initialSelections: {DateTime.utc(2024)});
         expect(controller.selected(date), expected);
       });
     }
@@ -49,17 +49,17 @@ void main() {
       ({DateTime.utc(2024)}, DateTime.utc(2025), {DateTime.utc(2024), DateTime.utc(2025)}),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarMultiValueController(initialSelections: initial)..select(date);
+        final controller = FCalendarController.dates(initialSelections: initial)..select(date);
         expect(controller.value, expected);
       });
     }
   });
 
-  group('FCalendarRangeController', () {
+  group('FCalendarController.range(...)', () {
     test(
       'constructor throws error',
       () => expect(
-        () => FCalendarRangeController(initialSelection: (DateTime(2025), DateTime(2024))),
+        () => FCalendarController.range(initialSelection: (DateTime(2025), DateTime(2024))),
         throwsAssertionError,
       ),
     );
@@ -72,7 +72,7 @@ void main() {
       (null, DateTime.utc(2023), false),
     ]) {
       test('selected(...)', () {
-        final controller = FCalendarRangeController(initialSelection: initial);
+        final controller = FCalendarController.range(initialSelection: initial);
         expect(controller.selected(date), expected);
       });
     }
@@ -86,7 +86,7 @@ void main() {
       (null, DateTime.utc(2023), (DateTime.utc(2023), DateTime.utc(2023))),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarRangeController(initialSelection: initial)..select(date);
+        final controller = FCalendarController.range(initialSelection: initial)..select(date);
         expect(controller.value, expected);
       });
     }
