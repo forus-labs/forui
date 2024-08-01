@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -307,7 +306,7 @@ final class FResizableDividerStyle with Diagnosticable {
   int get hashCode => color.hashCode ^ thickness.hashCode ^ thumbStyle.hashCode;
 }
 
-/// The style of the  of the dividers' thumbs between [FResizableRegion]s.
+/// The style of the dividers' thumbs between [FResizableRegion]s.
 final class FResizableDividerThumbStyle with Diagnosticable {
   /// The background color.
   final Color backgroundColor;
