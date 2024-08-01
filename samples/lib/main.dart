@@ -32,7 +32,7 @@ class EmptyPage extends SampleScaffold {
 }
 
 @AutoRouterConfig()
-class _AppRouter extends $_AppRouter {
+class _AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
