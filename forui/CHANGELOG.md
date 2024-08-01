@@ -22,6 +22,11 @@
 
 * **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController`.
 
+* **Breaking:** Remove `colorScheme`, `typography` and `style` parameters from `FThemeData.copyWith(...)`.
+  The problem was widget-specific styles not being re-created after the removed parameters were updated.
+  This led to unintuitive behavior where the style of a widget was not updated when the `FThemeData` was updated.
+  This should only affect people that customize `FThemeData`. Use the `FThemeData.inherit(...)` constructor instead.
+
 ### Fixes
 * Fix `FCalendar` dates not being toggleable using `Enter` key.
 * Fix `FCalendar` dates sometimes not being navigable using arrow keys.
