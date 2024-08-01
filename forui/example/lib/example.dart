@@ -18,27 +18,28 @@ class _ExampleState extends State<Example> {
 
   @override
   Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      CircleAvatar(
-        child: Image.network('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-      ),
-      FAvatar(
-        image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-        semanticLabel: 'My profile picture',
-        fallback: const Text('MN'),
-      ),
-      const SizedBox(width: 10),
-      FAvatar(
-        image: const AssetImage(''),
-        fallback: const Text('MN'),
-      ),
-      const SizedBox(width: 10),
-      FAvatar(
-        image: const AssetImage(''),
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            child: Image.network('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+          ),
+          FAvatar(
+            image:
+                const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+            semanticLabel: 'My profile picture',
+            fallback: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const AssetImage(''),
+            fallback: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const AssetImage(''),
+          ),
+        ],
+      );
 }
 
 class Label extends StatelessWidget {
