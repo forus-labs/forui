@@ -58,6 +58,9 @@ final class FThemeData with Diagnosticable {
   /// The progress styles.
   final FProgressStyle progressStyle;
 
+  /// The resizable style.
+  final FResizableStyle resizableStyle;
+
   /// The tabs styles.
   final FTabsStyle tabsStyle;
 
@@ -92,6 +95,7 @@ final class FThemeData with Diagnosticable {
     required this.dialogStyle,
     required this.headerStyle,
     required this.progressStyle,
+    required this.resizableStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
     required this.scaffoldStyle,
@@ -124,6 +128,7 @@ final class FThemeData with Diagnosticable {
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
+      resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
@@ -164,6 +169,7 @@ final class FThemeData with Diagnosticable {
     FDialogStyle? dialogStyle,
     FHeaderStyles? headerStyle,
     FProgressStyle? progressStyle,
+    FResizableStyle? resizableStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
     FScaffoldStyle? scaffoldStyle,
@@ -185,6 +191,7 @@ final class FThemeData with Diagnosticable {
         dialogStyle: dialogStyle ?? this.dialogStyle,
         headerStyle: headerStyle ?? this.headerStyle,
         progressStyle: progressStyle ?? this.progressStyle,
+        resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
@@ -210,6 +217,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle))
+      ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
@@ -236,6 +244,7 @@ final class FThemeData with Diagnosticable {
           dialogStyle == other.dialogStyle &&
           headerStyle == other.headerStyle &&
           progressStyle == other.progressStyle &&
+          resizableStyle == other.resizableStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
           scaffoldStyle == other.scaffoldStyle &&
@@ -258,6 +267,7 @@ final class FThemeData with Diagnosticable {
       dialogStyle.hashCode ^
       headerStyle.hashCode ^
       progressStyle.hashCode ^
+      resizableStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
       scaffoldStyle.hashCode ^

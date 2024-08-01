@@ -1,99 +1,105 @@
+import 'dart:collection';
+
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
+import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/resizable/resizable.dart';
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 
-/// Possible ways for a user to interact with a [FResizable].
-sealed class FResizableInteraction {
-  /// Allows the user to interact with a [FResizableRegion] by selecting before resizing it.
-  const factory FResizableInteraction.selectAndResize(int initialIndex) = SelectAndResize;
+/// A controller that manages the resizing of regions in a [FResizable].
+abstract interface class FResizableController extends ChangeNotifier {
+  /// The resizable regions. The regions are ordered from top to bottom, or left to right, depending on the resizable
+  /// axis.
+  ///
+  /// ## Contract
+  /// Modifying the regions outside of [update] and [end] will result in undefined behaviour.
+  final List<FResizableRegionData> regions = [];
 
-  /// Allows the user to interact with a [FResizableRegion] by resizing it without selecting it first.
-  const factory FResizableInteraction.resize() = Resize;
+  /// The minimum velocity, inclusive, of a drag gesture for haptic feedback to be performed on collision between two
+  /// regions, defaults to 6.5.
+  ///
+  /// Setting it to `null` disables haptic feedback while setting it to 0 will cause haptic feedback to always be
+  /// performed.
+  ///
+  /// ## Contract
+  /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
+  /// result in undefined behaviour.
+  // ignore: avoid_field_initializers_in_const_classes
+  final double _hapticFeedbackVelocity = 6.5; // ignore: unused_field, TODO: haptic feedback
+
+  bool _haptic = false;
+
+  /// Creates a [FResizableController].
+  ///
+  /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
+  /// prefer [onResizeEnd], which is called only after the regions have bee resized.
+  ///
+  /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
+  factory FResizableController({
+    void Function(List<FResizableRegionData> resized)? onResizeUpdate,
+    void Function(List<FResizableRegionData> resized)? onResizeEnd,
+  }) = _ResizableController;
+
+  /// Creates a [FResizableController] that cascades shrinking of a region below their minimum sizes to its neighbours.
+  ///
+  /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
+  /// prefer [onResizeEnd], which is called only after the regions have bee resized.
+  ///
+  /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
+  ///
+  /// See https://forui.dev/docs/resizable#cascading for a working example.
+  factory FResizableController.cascade({
+    void Function(List<FResizableRegionData> resized)? onResizeUpdate,
+    void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd,
+  }) = _CascadeController;
+
+  FResizableController._();
+
+  /// Updates the regions at the given indexes in addition to their neighbours. Returns true if haptic feedback should
+  /// be performed.
+  bool update(int left, int right, double delta);
+
+  /// Notifies the region at the indexes that they and their neighbours have been resized.
+  void end(int left, int right);
 }
 
-@internal
-final class SelectAndResize implements FResizableInteraction {
-  final int index;
+/// A non-cascading [FResizableController].
+final class _ResizableController extends FResizableController {
+  final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
+  final void Function(List<FResizableRegionData> resized)? onResizeEnd;
 
-  const SelectAndResize(this.index);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is SelectAndResize && runtimeType == other.runtimeType && index == other.index;
-
-  @override
-  int get hashCode => index.hashCode;
-}
-
-@internal
-final class Resize implements FResizableInteraction {
-  const Resize();
+  _ResizableController({
+    this.onResizeUpdate,
+    this.onResizeEnd,
+  }) : super._();
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is Resize && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => 0;
-}
-
-@internal
-class ResizableController extends ChangeNotifier {
-  final List<FResizableRegionData> regions;
-  final Axis axis;
-  final double? hapticFeedbackVelocity;
-  final void Function(int)? _onPress;
-  final void Function(FResizableRegionData, FResizableRegionData)? _onResizeUpdate;
-  final void Function(FResizableRegionData, FResizableRegionData)? _onResizeEnd;
-  FResizableInteraction _interaction;
-  bool _haptic;
-
-  ResizableController({
-    required this.regions,
-    required this.axis,
-    required this.hapticFeedbackVelocity,
-    required void Function(int)? onPress,
-    required void Function(FResizableRegionData, FResizableRegionData)? onResizeUpdate,
-    required void Function(FResizableRegionData, FResizableRegionData)? onResizeEnd,
-    required FResizableInteraction interaction,
-  })  : _onPress = onPress,
-        _onResizeUpdate = onResizeUpdate,
-        _onResizeEnd = onResizeEnd,
-        _interaction = interaction,
-        _haptic = false;
-
-  /// Updates the resizable and its neighbours' sizes at the given index, and returns true if the resizable has been
-  /// minimized or maximized.
-  bool update(int index, AxisDirection direction, Offset delta) {
-    final (selected, neighbour) = _find(index, direction);
-
-    // We always want to resize the shrunken region first. This allows us to remove any overlaps caused by shrinking
-    // a region beyond the minimum size.
-    final Offset(:dx, :dy) = delta;
-    final opposite = switch (direction) {
-      AxisDirection.left => AxisDirection.right,
-      AxisDirection.up => AxisDirection.down,
-      AxisDirection.right => AxisDirection.left,
-      AxisDirection.down => AxisDirection.up,
+  bool update(int left, int right, double delta) {
+    final (shrink, expand, lhs) = switch (delta) {
+      < 0 => (regions[left], regions[right], false),
+      _ => (regions[right], regions[left], true),
     };
 
-    final (shrink, shrinkDirection, expand, expandDirection) = switch (direction) {
-      AxisDirection.left when 0 < dx => (selected, direction, neighbour, opposite),
-      AxisDirection.up when 0 < dy => (selected, direction, neighbour, opposite),
-      AxisDirection.right when dx < 0 => (selected, direction, neighbour, opposite),
-      AxisDirection.down when dy < 0 => (selected, direction, neighbour, opposite),
-      _ => (neighbour, opposite, selected, direction),
-    };
-
-    final (shrunk, adjusted) = shrink.update(shrinkDirection, delta);
+    // We always want to resize the shrunken region first. This allows us to remove any overlaps caused by shrinking a
+    // region beyond the minimum size.
+    final (shrunk, translated) = shrink.update(delta, lhs: lhs);
     if (shrink.offset != shrunk.offset) {
-      final (expanded, _) = expand.update(expandDirection, adjusted);
+      final (expanded, _) = expand.update(translated, lhs: !lhs);
       regions[shrunk.index] = shrunk;
       regions[expanded.index] = expanded;
 
-      _onResizeUpdate?.call(selected, neighbour);
+      assert(
+        regions.sum((r) => r.extent.current, initial: 0.0) == regions[0].extent.total,
+        'Current total extent: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total extent: '
+        '${regions[0].extent.total}. This is likely a bug in Forui. Please file a bug report: '
+        'https://github.com/forus-labs/forui/issues/new?template=bug_report.md',
+      );
+
+      if (onResizeUpdate case final onResizeUpdate?) {
+        onResizeUpdate([shrunk, expanded]);
+      }
       _haptic = true;
       notifyListeners();
 
@@ -108,36 +114,97 @@ class ResizableController extends ChangeNotifier {
     }
   }
 
-  /// Notifies the region at the [index] and its neighbour that it has been resized.
-  void end(int index, AxisDirection direction) {
-    final (resized, neighbour) = _find(index, direction);
-    _onResizeEnd?.call(resized, neighbour);
-    notifyListeners();
-  }
-
-  (FResizableRegionData resized, FResizableRegionData neighbour) _find(int index, AxisDirection direction) {
-    final resized = regions[index];
-    final neighbour = switch (direction) {
-      AxisDirection.left || AxisDirection.up => regions[index - 1],
-      AxisDirection.right || AxisDirection.down => regions[index + 1],
-    };
-
-    return (resized, neighbour);
-  }
-
-  bool select(int value) {
-    if (_interaction case SelectAndResize(index: final old) when old != value) {
-      _onPress?.call(value);
-      _interaction = SelectAndResize(value);
-      regions[old] = regions[old].copyWith(selected: false);
-      regions[value] = regions[value].copyWith(selected: true);
-
-      notifyListeners();
-      return true;
-    } else {
-      return false;
+  @override
+  void end(int left, int right) {
+    if (onResizeEnd case final onResizeEnd?) {
+      onResizeEnd([regions[left], regions[right]]);
     }
   }
+}
 
-  FResizableInteraction get interaction => _interaction;
+/// A cascading [FResizableController].
+final class _CascadeController extends FResizableController {
+  final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
+  final void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd;
+
+  _CascadeController({
+    this.onResizeUpdate,
+    this.onResizeEnd,
+  }) : super._();
+
+  @override
+  bool update(int left, int right, double delta) {
+    final (shrinks, expand, lhs) = switch (delta) {
+      < 0 => (regions.sublist(0, right).reversed.toList(), regions[right], false),
+      _ => (regions.sublist(right), regions[left], true),
+    };
+
+    // We always want to resize the shrunken region first. This allows us to remove any overlaps caused by shrinking a
+    // region beyond the minimum size.
+    late FResizableRegionData shrunk;
+    late double translated;
+
+    // Shrink affected regions without updating offsets.
+    final shrunks = <FResizableRegionData>[];
+    for (final shrink in shrinks) {
+      (shrunk, translated) = shrink.update(delta, lhs: lhs);
+      shrunks.add(shrunk);
+
+      // Currently shrunk region is not at minimum size. No need to continue cascade.
+      if (translated != 0) {
+        break;
+      }
+    }
+
+    // All shrunk regions are already at minimum size. No need to rebuild.
+    if (translated == 0) {
+      final haptic = _haptic;
+      _haptic = false;
+      return haptic;
+    }
+
+    // Update all affected regions' offsets.
+    final (expanded, _) = expand.update(translated, lhs: !lhs);
+    var (:min, :max) = expanded.offset;
+
+    regions[expanded.index] = expanded;
+    final moved = onResizeUpdate == null ? null : [expanded];
+
+    if (lhs) {
+      for (final region in shrunks) {
+        final updated = region.copyWith(minOffset: max, maxOffset: max + region.extent.current);
+        (:min, :max) = updated.offset;
+
+        regions[updated.index] = updated;
+        moved?.add(updated);
+      }
+    } else {
+      for (final region in shrunks) {
+        final updated = region.copyWith(minOffset: min - region.extent.current, maxOffset: min);
+        (:min, :max) = updated.offset;
+
+        regions[updated.index] = updated;
+        moved?.add(updated);
+      }
+    }
+
+    assert(
+      regions.sum((r) => r.extent.current, initial: 0.0) == regions[0].extent.total,
+      'Current total size: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total size: ${regions[0].extent.total}. '
+      'This is likely a bug in Forui. Please file a bug report: https://github.com/forus-labs/forui/issues/new?template=bug_report.md',
+    );
+
+    onResizeUpdate?.call(moved!);
+    _haptic = true;
+    notifyListeners();
+
+    return false;
+  }
+
+  @override
+  void end(int left, int right) {
+    if (onResizeEnd case final onResizeEnd?) {
+      onResizeEnd(UnmodifiableListView(regions));
+    }
+  }
 }

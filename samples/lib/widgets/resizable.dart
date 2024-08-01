@@ -13,59 +13,69 @@ class ResizablePage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => FResizable(
-        axis: Axis.vertical,
-        crossAxisExtent: 400,
-        interaction: const FResizableInteraction.selectAndResize(0),
-        children: [
-          FResizableRegion.raw(
-            initialSize: 200,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-                  border: Border.all(color: colorScheme.border),
-                ),
-                child: Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-              );
-            },
-          ),
-          FResizableRegion.raw(
-            initialSize: 200,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
-                  border: Border.all(color: colorScheme.border),
-                ),
-                child: Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-              );
-            },
-          ),
-          FResizableRegion.raw(
-            initialSize: 200,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-                  border: Border.all(color: colorScheme.border),
-                ),
-                child: Label(data: data, icon: FAssets.icons.moon, label: 'Night'),
-              );
-            },
-          ),
-        ],
+  Widget child(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colorScheme.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.vertical,
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
+            ),
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+            ),
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+            ),
+          ],
+        ),
+      );
+}
+
+@RoutePage()
+class CascadingResizablePage extends SampleScaffold {
+  CascadingResizablePage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colorScheme.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.vertical,
+          controller: FResizableController.cascade(),
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 250,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
+            ),
+            FResizableRegion(
+              initialExtent: 100,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+            ),
+            FResizableRegion(
+              initialExtent: 250,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+            ),
+          ],
+        ),
       );
 }
 
@@ -81,31 +91,36 @@ class Label extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FThemeData(:colorScheme, :typography) = context.theme;
-    final color = data.selected ? colorScheme.background : colorScheme.foreground;
     final start = DateTime.fromMillisecondsSinceEpoch(
       (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
       isUtc: true,
     );
+
     final end = DateTime.fromMillisecondsSinceEpoch(
       (data.offsetPercentage.max * Duration.millisecondsPerDay).round(),
       isUtc: true,
     );
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon(height: 15, colorFilter: ColorFilter.mode(color, BlendMode.srcIn)),
-            const SizedBox(width: 3),
-            Text(label, style: typography.sm.copyWith(color: color)),
-          ],
-        ),
-        const SizedBox(height: 5),
-        Text('${format.format(start)} - ${format.format(end)}', style: typography.sm.copyWith(color: color)),
-      ],
+    return Align(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
+              const SizedBox(width: 3),
+              Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
+            ],
+          ),
+          const SizedBox(height: 5),
+          Text(
+            '${format.format(start)} - ${format.format(end)}',
+            style: typography.sm.copyWith(color: colorScheme.foreground),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -117,41 +132,102 @@ class HorizontalResizablePage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => FResizable(
-        axis: Axis.horizontal,
-        crossAxisExtent: 300,
-        children: [
-          FResizableRegion.raw(
-            initialSize: 100,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: data.selected ? colorScheme.foreground : colorScheme.background,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-                  border: Border.all(color: colorScheme.border),
-                ),
+  Widget child(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colorScheme.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.horizontal,
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 100,
+              minExtent: 100,
+              builder: (context, data, _) => Align(
                 child: Text('Sidebar', style: context.theme.typography.sm),
-              );
-            },
-          ),
-          FResizableRegion.raw(
-            initialSize: 300,
-            minSize: 100,
-            builder: (context, data, _) {
-              final colorScheme = context.theme.colorScheme;
-              return Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
-                  border: Border.all(color: colorScheme.border),
-                ),
+              ),
+            ),
+            FResizableRegion(
+              initialExtent: 300,
+              minExtent: 100,
+              builder: (context, data, _) => Align(
                 child: Text('Content', style: context.theme.typography.sm),
-              );
-            },
-          ),
-        ],
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+@RoutePage()
+class ThumbResizablePage extends SampleScaffold {
+  ThumbResizablePage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colorScheme.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.horizontal,
+          divider: FResizableDivider.dividerThumb,
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 100,
+              minExtent: 100,
+              builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+            ),
+            FResizableRegion(
+              initialExtent: 300,
+              minExtent: 100,
+              builder: (context, data, _) => Align(
+                child: Text('Content', style: context.theme.typography.sm),
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+@RoutePage()
+class NoDividerResizablePage extends SampleScaffold {
+  NoDividerResizablePage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colorScheme.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.horizontal,
+          divider: FResizableDivider.none,
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 100,
+              minExtent: 100,
+              builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+            ),
+            FResizableRegion(
+              initialExtent: 300,
+              minExtent: 100,
+              builder: (context, data, _) => Align(
+                child: Text('Content', style: context.theme.typography.sm),
+              ),
+            ),
+          ],
+        ),
       );
 }

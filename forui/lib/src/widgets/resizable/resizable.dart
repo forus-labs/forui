@@ -5,93 +5,82 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
+import 'package:forui/src/widgets/resizable/divider.dart';
 
-export '/src/widgets/resizable/resizable_region.dart';
-export '/src/widgets/resizable/resizable_controller.dart' hide ResizableController, Resize, SelectAndResize;
-export '/src/widgets/resizable/resizable_region_data.dart' hide UpdatableResizableRegionData;
+export 'divider.dart' hide Divider, HorizontalDivider, ResizeDownIntent, ResizeUpIntent, VerticalDivider;
+export 'resizable_controller.dart';
+export 'resizable_region.dart';
+export 'resizable_region_data.dart' hide UpdatableResizableRegionData;
 
 /// A resizable which children can be resized along either the horizontal or vertical main axis.
 ///
-/// Each child is a [FResizableRegion] has a initial size and minimum size. Setting an initial size less than the
-/// minimum size will result in undefined behaviour. The children are arranged from top to bottom, or left to right,
+/// Each child is a [FResizableRegion] has a initial and minimum extent. Setting an initial extent less than the
+/// minimum extent will result in undefined behaviour. The children are arranged from top to bottom, or left to right,
 /// depending on the main [axis].
 ///
 /// Although not required, it is recommended that a [FResizable] contains at least 2 [FResizable] regions.
 ///
 /// See:
 /// * https://forui.dev/docs/resizable for working examples.
+/// * [FResizableStyle] for customizing a resizable's appearance.
 class FResizable extends StatefulWidget {
+  static double _platform(double? hitRegion) => switch (const Runtime().type) {
+        _ when hitRegion != null => hitRegion,
+        PlatformType.android || PlatformType.ios => 60,
+        _ => 10,
+      };
+
+  /// The controller that manages the resizing of regions. Defaults to [FResizableController.new].
+  final FResizableController controller;
+
+  /// The resizable' style.
+  final FResizableStyle? style;
+
   /// The main axis along which the [children] can be resized.
   final Axis axis;
 
-  /// The allowed way for the user to interact with this resizable box. Defaults to [FResizableInteraction.resize].
-  final FResizableInteraction interaction;
+  /// The divider between the resizable regions. Defaults to [FResizableDivider.divider].
+  final FResizableDivider divider;
 
-  /// The number of pixels in the non-resizable axis.
+  /// The extent in the non-resizable axis, in logical pixels.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [crossAxisExtent] is not positive.
   final double? crossAxisExtent;
 
-  /// The minimum velocity, inclusive, of a drag gesture for haptic feedback to be performed
-  /// on collision between two regions, defaults to 6.5.
+  /// The resizing gesture's hit region extent along the resizable axis, in logical pixels.
   ///
-  /// Setting it to `null` disables haptic feedback while setting it to 0 will cause
-  /// haptic feedback to always be performed.
+  /// Hit regions are centered between [FResizableRegion]s.
+  ///
+  /// Defaults to `60` on Android and iOS, and `10` on other platforms.
   ///
   /// ## Contract
-  /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
-  /// result in undefined behaviour.
-  final double _hapticFeedbackVelocity = 6.5; // TODO: haptic feedback
+  /// Throws [AssertionError] if [hitRegionExtent] <= 0.
+  final double hitRegionExtent;
 
   /// The children that may be resized.
   final List<FResizableRegion> children;
 
-  /// A function that is called when a resizable region is selected. This will only be called if [interaction] is
-  /// [FResizableInteraction.selectAndResize].
-  final void Function(int index)? onPress;
-
-  /// A function that is called when a resizable region and its neighbour are being resized.
-  ///
-  /// This function is called *while* the regions are being resized. Most users should prefer [onResizeEnd], which is
-  /// called only when the regions have finished resizing.
-  final void Function(
-    FResizableRegionData resized,
-    FResizableRegionData neighbour,
-  )? onResizeUpdate;
-
-  /// A function that is called after a resizable region and its neighbour have been resized.
-  final void Function(
-    FResizableRegionData resized,
-    FResizableRegionData neighbour,
-  )? onResizeEnd;
-
   /// Creates a [FResizable].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [interaction] is a [FResizableInteraction.selectAndResize] and index is index < 0 or `children.length` <= index.
   FResizable({
     required this.axis,
     required this.children,
-    this.interaction = const FResizableInteraction.resize(),
+    this.style,
+    this.divider = FResizableDivider.divider,
     this.crossAxisExtent,
-    this.onPress,
-    this.onResizeUpdate,
-    this.onResizeEnd,
+    FResizableController? controller,
+    double? hitRegionExtent,
     super.key,
-  }) : assert(
+  })  : assert(
           crossAxisExtent == null || 0 < crossAxisExtent,
-          'The crossAxisExtent should be positive, but it is $crossAxisExtent.',
-        ) {
-    if (interaction case SelectAndResize(:final index)) {
-      assert(
-        0 <= index && index < children.length,
-        'The initial index should be in 0 <= initialIndex < ${children.length}, but it is $index.',
-      );
-    }
-  }
+          'The crossAxisExtent should be positive, but is $crossAxisExtent.',
+        ),
+        assert(
+          hitRegionExtent == null || 0 < hitRegionExtent,
+          'The hitRegionExtent should be positive, but is $hitRegionExtent.',
+        ),
+        controller = controller ?? FResizableController(),
+        hitRegionExtent = hitRegionExtent ?? _platform(hitRegionExtent);
 
   @override
   State<StatefulWidget> createState() => _FResizableState();
@@ -100,91 +89,92 @@ class FResizable extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('axis', axis))
-      ..add(DiagnosticsProperty('interaction', interaction))
+      ..add(EnumProperty('divider', divider))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
-      ..add(DoubleProperty('_hapticFeedbackVelocity', _hapticFeedbackVelocity))
-      ..add(IterableProperty('children', children))
-      ..add(ObjectFlagProperty('onPress', onPress))
-      ..add(ObjectFlagProperty('onResizeUpdate', onResizeUpdate))
-      ..add(ObjectFlagProperty('onResizeEnd', onResizeEnd));
+      ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
+      ..add(IterableProperty('children', children));
   }
 }
 
 class _FResizableState extends State<FResizable> {
-  late ResizableController controller;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _update(widget.interaction);
+    _update();
   }
 
   @override
   void didUpdateWidget(FResizable old) {
     super.didUpdateWidget(old);
     if (widget.axis != old.axis ||
-        widget.interaction != old.interaction ||
         widget.crossAxisExtent != old.crossAxisExtent ||
-        widget._hapticFeedbackVelocity != old._hapticFeedbackVelocity ||
-        widget.onPress != widget.onPress ||
-        widget.onResizeUpdate != widget.onResizeUpdate ||
-        widget.onResizeEnd != widget.onResizeEnd ||
+        widget.controller != old.controller ||
         !widget.children.equals(old.children)) {
-      _update(controller.interaction);
+      _update();
     }
   }
 
-  void _update(FResizableInteraction interaction) {
-    final selected = switch (interaction) {
-      SelectAndResize(:final index) => index,
-      Resize _ => null,
-    };
-
-    var minoffset = 0.0;
-    final allRegionsMin = widget.children.sum((child) => child.minSize, initial: 0.0);
-    final allRegions = widget.children.sum((child) => child.initialSize, initial: 0.0);
+  void _update() {
+    var minOffset = 0.0;
+    final minTotalExtent =
+        widget.children.sum((child) => max(child.minExtent ?? 0, widget.hitRegionExtent), initial: 0.0);
+    final totalExtent = widget.children.sum((child) => child.initialExtent, initial: 0.0);
     final regions = [
       for (final (index, region) in widget.children.indexed)
         FResizableRegionData(
           index: index,
-          selected: selected == index,
-          size: (min: region.minSize, max: allRegions - allRegionsMin + region.minSize, allRegions: allRegions),
-          offset: (min: minoffset, max: minoffset += region.initialSize),
+          extent: (
+            min: region.minExtent ?? widget.hitRegionExtent,
+            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
+            total: totalExtent
+          ),
+          offset: (min: minOffset, max: minOffset += region.initialExtent),
         ),
     ];
 
-    controller = ResizableController(
-      regions: regions,
-      axis: widget.axis,
-      hapticFeedbackVelocity: widget._hapticFeedbackVelocity,
-      onPress: widget.onPress,
-      onResizeUpdate: widget.onResizeUpdate,
-      onResizeEnd: widget.onResizeEnd,
-      interaction: interaction,
-    );
+    widget.controller.regions.clear();
+    widget.controller.regions.addAll(regions);
   }
 
   @override
   Widget build(BuildContext context) {
     assert(
-      controller.regions.length == widget.children.length,
-      'The number of FResizableData should be equal to the number of children. Please file a bug report.',
+      widget.controller.regions.length == widget.children.length,
+      'The number of FResizableData should be equal to the number of children.',
     );
 
+    final (:horizontal, :vertical) = (widget.style ?? context.theme.resizableStyle).dividerStyles;
     if (widget.axis == Axis.horizontal) {
       return SizedBox(
         height: widget.crossAxisExtent,
         child: ListenableBuilder(
-          listenable: controller,
-          builder: (context, _) => Row(
-            mainAxisSize: MainAxisSize.min,
+          listenable: widget.controller,
+          builder: (context, _) => Stack(
             children: [
-              for (var i = 0; i < widget.children.length; i++)
-                InheritedData(
-                  controller: controller,
-                  data: controller.regions[i],
-                  child: widget.children[i],
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (var i = 0; i < widget.children.length; i++)
+                    InheritedData(
+                      controller: widget.controller,
+                      axis: widget.axis,
+                      data: widget.controller.regions[i],
+                      child: widget.children[i],
+                    ),
+                ],
+              ),
+              for (var i = 0; i < widget.children.length - 1; i++)
+                HorizontalDivider(
+                  controller: widget.controller,
+                  style: horizontal,
+                  type: widget.divider,
+                  indexes: (left: i, right: i + 1),
+                  crossAxisExtent: widget.crossAxisExtent,
+                  hitRegionExtent: widget.hitRegionExtent,
+                  cursor: SystemMouseCursors.resizeLeftRight,
                 ),
             ],
           ),
@@ -194,15 +184,30 @@ class _FResizableState extends State<FResizable> {
       return SizedBox(
         width: widget.crossAxisExtent,
         child: ListenableBuilder(
-          listenable: controller,
-          builder: (context, _) => Column(
-            mainAxisSize: MainAxisSize.min,
+          listenable: widget.controller,
+          builder: (context, _) => Stack(
             children: [
-              for (var i = 0; i < widget.children.length; i++)
-                InheritedData(
-                  controller: controller,
-                  data: controller.regions[i],
-                  child: widget.children[i],
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (var i = 0; i < widget.children.length; i++)
+                    InheritedData(
+                      axis: widget.axis,
+                      controller: widget.controller,
+                      data: widget.controller.regions[i],
+                      child: widget.children[i],
+                    ),
+                ],
+              ),
+              for (var i = 0; i < widget.children.length - 1; i++)
+                VerticalDivider(
+                  controller: widget.controller,
+                  style: vertical,
+                  type: widget.divider,
+                  indexes: (left: i, right: i + 1),
+                  crossAxisExtent: widget.crossAxisExtent,
+                  hitRegionExtent: widget.hitRegionExtent,
+                  cursor: SystemMouseCursors.resizeUpDown,
                 ),
             ],
           ),
@@ -210,40 +215,107 @@ class _FResizableState extends State<FResizable> {
       );
     }
   }
+}
+
+/// A [FResizable]'s style.
+final class FResizableStyle with Diagnosticable {
+  /// The divider styles.
+  final ({FResizableDividerStyle horizontal, FResizableDividerStyle vertical}) dividerStyles;
+
+  /// Creates a [FResizableStyle].
+  FResizableStyle({required this.dividerStyles});
+
+  /// Creates a [FResizableStyle] that inherits its properties from [colorScheme].
+  FResizableStyle.inherit({required FColorScheme colorScheme})
+      : dividerStyles = (
+          horizontal: FResizableDividerStyle(
+            color: colorScheme.border,
+            thumbStyle: FResizableDividerThumbStyle(
+              backgroundColor: colorScheme.border,
+              foregroundColor: colorScheme.foreground,
+              height: 20,
+              width: 10,
+            ),
+          ),
+          vertical: FResizableDividerStyle(
+            color: colorScheme.border,
+            thumbStyle: FResizableDividerThumbStyle(
+              backgroundColor: colorScheme.border,
+              foregroundColor: colorScheme.foreground,
+              height: 10,
+              width: 20,
+            ),
+          ),
+        );
+
+  /// Returns a copy of this [FResizableStyle] with the given properties replaced.
+  ///
+  /// ```dart
+  /// final style = FResizableStyle(
+  ///   dividerStyles: (
+  ///     horizontal: ...,
+  ///     vertical: ...,
+  ///   ),
+  /// );
+  ///
+  /// final copy = style.copyWith(vertical: ...);
+  /// print(style.horizontal == copy.horizontal); // true
+  /// print(style.vertical == copy.vertical); // false
+  /// ```
+  @useResult
+  FResizableStyle copyWith({FResizableDividerStyle? horizontal, FResizableDividerStyle? vertical}) => FResizableStyle(
+        dividerStyles: (
+          horizontal: horizontal ?? dividerStyles.horizontal,
+          vertical: vertical ?? dividerStyles.vertical,
+        ),
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', controller));
+    properties
+      ..add(DiagnosticsProperty('dividerStyles.horizontal', dividerStyles.horizontal))
+      ..add(DiagnosticsProperty('dividerStyles.vertical', dividerStyles.vertical));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FResizableStyle && runtimeType == other.runtimeType && dividerStyles == other.dividerStyles;
+
+  @override
+  int get hashCode => dividerStyles.hashCode;
 }
 
 @internal
 class InheritedData extends InheritedWidget {
-  final ResizableController controller;
-  final FResizableRegionData data;
-
-  const InheritedData({
-    required this.controller,
-    required this.data,
-    required super.child,
-    super.key,
-  });
-
   static InheritedData of(BuildContext context) {
     final InheritedData? result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
     assert(result != null, 'No InheritedData found in context. Is there a parent FResizableBox?');
     return result!;
   }
 
+  final FResizableController controller;
+  final Axis axis;
+  final FResizableRegionData data;
+
+  const InheritedData({
+    required this.controller,
+    required this.axis,
+    required this.data,
+    required super.child,
+    super.key,
+  });
+
   @override
-  bool updateShouldNotify(InheritedData old) => controller != old.controller || data != old.data;
+  bool updateShouldNotify(InheritedData old) => controller != old.controller || axis != old.axis || data != old.data;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(EnumProperty('axis', axis))
       ..add(DiagnosticsProperty('data', data));
   }
 }

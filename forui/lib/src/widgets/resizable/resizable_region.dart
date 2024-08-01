@@ -1,46 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:sugar/sugar.dart';
-
 import 'package:forui/src/widgets/resizable/resizable.dart';
-import 'package:forui/src/widgets/resizable/resizable_controller.dart';
-import 'package:forui/src/widgets/resizable/slider.dart';
 
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
 ///
 /// See:
 /// * https://forui.dev/docs/resizable for working examples.
 class FResizableRegion extends StatelessWidget {
-  static double _platform(double? slider) =>
-      slider ??
-      switch (const Runtime().type) {
-        PlatformType.android || PlatformType.ios => 50,
-        _ => 5,
-      };
-
-  /// The initial height/width, in logical pixels.
+  /// The initial extent along the resizable axis, in logical pixels.
   ///
   /// ## Contract
   /// Throws a [AssertionError] if:
-  /// * [initialSize] is not positive
-  /// * [initialSize] < [minSize]
-  final double initialSize;
+  /// * [initialExtent] is not positive
+  /// * [initialExtent] < [minExtent]
+  final double initialExtent;
 
-  /// The minimum height/width along the resizable axis, in logical pixels.
+  /// The minimum extent along the resizable axis, in logical pixels.
   ///
-  /// The minimum size is either the given minimum size or 2 * [sliderSize], whichever is larger. Defaults to
-  /// 2 * [sliderSize] if not given.
-  final double minSize;
-
-  /// The sliders' height/width along the resizable axis. A larger [sliderSize] may increase [minSize] if it is not
-  /// given.
-  ///
-  /// Defaults to `50` on Android and iOS, and `5` on other platforms.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [sliderSize] is not positive.
-  final double sliderSize;
+  /// The effective minimum size is either the given minimum size or [FResizable.hitRegionExtent], whichever is larger.
+  /// Defaults to [FResizable.hitRegionExtent] if not given.
+  final double? minExtent;
 
   /// The builder used to create a child to display in this region.
   final ValueWidgetBuilder<FResizableRegionData> builder;
@@ -52,95 +32,42 @@ class FResizableRegion extends StatelessWidget {
   final Widget? child;
 
   /// Creates a [FResizableRegion].
-  FResizableRegion.raw({
-    required this.initialSize,
+  const FResizableRegion({
+    required this.initialExtent,
     required this.builder,
-    double? minSize,
-    double? sliderSize,
+    this.minExtent,
     this.child,
     super.key,
   })  : assert(
-          0 < initialSize,
-          'The initial size should be positive, but it is $initialSize.',
+          0 < initialExtent,
+          'The initial extent should be positive, but it is $initialExtent.',
         ),
         assert(
-          minSize == null || 0 < minSize,
-          'The min size should be positive, but it is $minSize.',
+          minExtent == null || 0 < minExtent,
+          'The min extent should be positive, but it is $minExtent.',
         ),
         assert(
-          sliderSize == null || 0 < sliderSize,
-          'The slider size should be positive, but it is $sliderSize.',
-        ),
-        minSize = max(minSize ?? 0, 2 * (sliderSize ?? _platform(sliderSize))),
-        sliderSize = sliderSize ?? _platform(sliderSize) {
-    assert(
-      this.minSize <= initialSize,
-      'The initial size, $initialSize is less than the required minimum size, ${this.minSize}.',
-    );
-  }
+          minExtent == null || minExtent <= initialExtent,
+          'The initial extent, $initialExtent is less than the min extent, $minExtent.',
+        );
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:controller, :data) = InheritedData.of(context);
-    final enabled = controller.interaction is Resize || data.selected;
+    final InheritedData(:axis, :data) = InheritedData.of(context);
     return Semantics(
       container: true,
-      enabled: enabled,
-      selected: data.selected,
-      child: MouseRegion(
-        cursor: enabled ? MouseCursor.defer : SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: switch (controller.interaction) {
-            SelectAndResize _ => () {
-                if (controller.select(data.index) && controller.hapticFeedbackVelocity != null) {
-                  // TODO: haptic feedback
-                }
-              },
-            Resize _ => null,
-          },
-          child: switch (controller.axis) {
-            Axis.horizontal => SizedBox(
-                width: data.size.current,
-                child: Stack(
-                  children: [
-                    builder(context, data, child),
-                    if (data.index > 0)
-                      HorizontalSlider.left(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                    if (data.index < controller.regions.length - 1)
-                      HorizontalSlider.right(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                  ],
-                ),
-              ),
-            Axis.vertical => SizedBox(
-                height: data.size.current,
-                child: Stack(
-                  children: [
-                    builder(context, data, child),
-                    if (data.index > 0)
-                      VerticalSlider.up(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                    if (data.index < controller.regions.length - 1)
-                      VerticalSlider.down(
-                        controller: controller,
-                        index: data.index,
-                        size: sliderSize,
-                      ),
-                  ],
-                ),
-              ),
-          },
-        ),
+      enabled: true,
+      child: GestureDetector(
+        child: switch (axis) {
+          Axis.horizontal => SizedBox(
+              width: data.extent.current,
+              child: builder(context, data, child),
+            ),
+          Axis.vertical => SizedBox(
+              height: data.extent.current,
+              child: builder(context, data, child),
+            ),
+        },
       ),
     );
   }
@@ -149,9 +76,8 @@ class FResizableRegion extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('initialSize', initialSize))
-      ..add(DoubleProperty('minSize', minSize))
-      ..add(DoubleProperty('sliderSize', sliderSize))
+      ..add(DoubleProperty('initialSize', initialExtent))
+      ..add(DoubleProperty('minSize', minExtent))
       ..add(DiagnosticsProperty('builder', builder))
       ..add(DiagnosticsProperty('child', child));
   }

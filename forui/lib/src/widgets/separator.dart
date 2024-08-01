@@ -120,6 +120,7 @@ final class FSeparatorStyle with Diagnosticable {
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
   final EdgeInsetsGeometry padding;
 
+  // TODO: Rename to thickness.
   /// The width of the separating line. Defaults to 1.
   ///
   /// ## Contract
