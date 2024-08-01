@@ -140,24 +140,18 @@ final class FThemeData with Diagnosticable {
   /// Returns a copy of this [FThemeData] with the given properties replaced.
   ///
   /// ```dart
-  /// final foo = FTypography();
-  /// final bar = FTypography();
-  ///
-  /// final theme = FThemeData.inherit(
-  ///   colorScheme: FColorScheme(...),
-  ///   typography: foo,
+  /// final theme = FThemeData(
+  ///   alertStyles: ...,
+  ///   avatarStyle: ...,
   /// );
   ///
-  /// final copy = theme.copyWith(typography: bar);
+  /// final copy = theme.copyWith(avatarStyle: bar);
   ///
-  /// print(theme.colorScheme == copy.colorScheme); // true
-  /// print(copy.typography); // bar
+  /// print(theme.alertStyles == copy.alertStyles); // true
+  /// print(theme.avatarStyle == copy.avatarStyle); // false
   /// ```
   @useResult
   FThemeData copyWith({
-    FColorScheme? colorScheme,
-    FTypography? typography,
-    FStyle? style,
     FAlertStyles? alertStyles,
     FAvatarStyle? avatarStyle,
     FBadgeStyles? badgeStyles,
@@ -177,9 +171,9 @@ final class FThemeData with Diagnosticable {
     FSwitchStyle? switchStyle,
   }) =>
       FThemeData(
-        colorScheme: colorScheme ?? this.colorScheme,
-        typography: typography ?? this.typography,
-        style: style ?? this.style,
+        colorScheme: colorScheme,
+        typography: typography,
+        style: style,
         alertStyles: alertStyles ?? this.alertStyles,
         avatarStyle: avatarStyle ?? this.avatarStyle,
         badgeStyles: badgeStyles ?? this.badgeStyles,
