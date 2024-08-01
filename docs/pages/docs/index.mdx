@@ -19,10 +19,10 @@ flutter pub add forui
 ### Forui Icons
 
 <Callout type="info">
-    Forui Icons is bundled with forui package. You don't need to install it separately if you installed `forui`.
+    Forui Icons is bundled with the forui package. You don't need to install it separately if you install `forui`.
 </Callout>
 
-If you would like to only use the icon package, run the following command from your Flutter project directory.
+If you would like to only use the icons, run the following command from your Flutter project's directory.
 
 ```bash filename="bash"
 flutter pub add forui_assets
@@ -31,7 +31,8 @@ flutter pub add forui_assets
 
 ## Usage
 
-To use Forui widgets in your Flutter app, import the Forui package and place the `FTheme` widget at the root of the widget tree.
+To use Forui widgets in your Flutter app, import the Forui package and place the
+[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget at the root of the widget tree.
 
 ```dart filename="main.dart" {3,12-16}
 import 'package:flutter/widgets.dart';
@@ -75,7 +76,7 @@ Widget build(BuildContext context) => MaterialApp(
   // Other configurations...
   builder: (context, child) => FTheme(
     data: FThemes.zinc.light,
-    child: child,
+    child: child!,
   ),
   home: const FScaffold(...)
 );
