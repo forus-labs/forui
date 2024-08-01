@@ -20,7 +20,7 @@ Our theming solution is designed to help you get started quickly while offering 
 
 <Callout type="info">
     Forui does not manage the theme brightness (light or dark) automatically.
-    You need to specify the theme explicitly in `FTheme()`.
+    You need to specify the theme explicitly in `FTheme(...)`.
 
     ```dart filename="main.dart" {3}
     @override
@@ -75,10 +75,10 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 
 ## Customize Themes
 
-It's recommended to use the predefined themes as a starting point and customize them with the `inhert(...)` constructor
-and copyWith(...)` method to suit your needs.
+It's recommended to use the predefined themes as a starting point and customize them with the `inhert(...)`[] constructor
+and `copyWith(...)` method to suit your needs.
 
-```dart filename="main.dart" {3-4, 8, 11, 14}
+```dart filename="main.dart" {3-14, 17-23}
 @override
 Widget build(BuildContext context) {
   final theme = FThemeData.inherit(
