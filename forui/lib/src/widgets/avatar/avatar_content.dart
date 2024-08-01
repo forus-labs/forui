@@ -1,16 +1,18 @@
 part of 'avatar.dart';
 
 class _AvatarContent extends StatelessWidget {
-  final ImageProvider image;
-  final double size;
   final FAvatarStyle? style;
+  final double size;
+  final ImageProvider image;
+  final String? semanticLabel;
   final Widget? fallback;
 
   const _AvatarContent({
-    required this.image,
+    required this.style,
     required this.size,
-    this.style,
-    this.fallback,
+    required this.image,
+    required this.semanticLabel,
+    required this.fallback,
   });
 
   @override
@@ -24,6 +26,7 @@ class _AvatarContent extends StatelessWidget {
       width: size,
       filterQuality: FilterQuality.medium,
       image: image,
+      semanticLabel: semanticLabel,
       errorBuilder: (context, exception, stacktrace) => fallback,
       frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) {
@@ -48,15 +51,17 @@ class _AvatarContent extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('size', size))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('image', image))
+      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(DiagnosticsProperty('fallback', fallback));
   }
 }
 
 class _Placeholder extends StatelessWidget {
-  final double size;
   final FAvatarStyle? style;
+  final double size;
 
   const _Placeholder({required this.size, this.style});
 
@@ -73,7 +78,7 @@ class _Placeholder extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('size', size))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DoubleProperty('size', size));
   }
 }

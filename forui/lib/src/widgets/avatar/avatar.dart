@@ -22,25 +22,25 @@ class FAvatar extends StatelessWidget {
   /// The circle's size.
   final double size;
 
-  /// The fallback widget displayed if image parameter fails to load.
+  /// The child, typically an image.
   ///
-  /// Typically used to display the user's initials using a [Text] widget
-  /// styled with [FAvatarStyle.backgroundColor].
-  ///
-  /// Use image parameter to display an image; use [fallback] for initials.
-  final Widget fallback;
+  /// If the image fails to load, a fallback widget, typically a [Text] widget used to display the user's initials
+  /// styled with [FAvatarStyle.backgroundColor] is displayed.
+  final Widget child;
 
   /// Creates an [FAvatar].
   FAvatar({
     required ImageProvider image,
     this.style,
     this.size = 40.0,
+    String? semanticLabel,
     Widget? fallback,
     super.key,
-  }) : fallback = _AvatarContent(
-          image: image,
+  }) : child = _AvatarContent(
           style: style,
           size: size,
+          image: image,
+          semanticLabel: semanticLabel,
           fallback: fallback,
         );
 
@@ -50,7 +50,7 @@ class FAvatar extends StatelessWidget {
     this.style,
     this.size = 40.0,
     super.key,
-  }) : fallback = child ?? _Placeholder(style: style, size: size);
+  }) : child = child ?? _Placeholder(style: style, size: size);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class FAvatar extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: DefaultTextStyle(
         style: style.text,
-        child: fallback,
+        child: child,
       ),
     );
   }
