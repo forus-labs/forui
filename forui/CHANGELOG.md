@@ -18,9 +18,13 @@
 * **Breaking:** Rename `FCalendarEntryStyle.focusedTextStyle` to `FCalendarEntryStyle.hoveredTextStyle`.
   This only affects users that customized `FCalendarEntryStyle`.
 
-* **Breaking:** Rename `FCalendarSingleValueController` to `FCalendarValueController`.
+* **Breaking:** Move `FCalendarSingleValueController` to `FCalendarController.date(...)`.
 
-* **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController`.
+* **Breaking:** Move `FCalendarMultiValueController` to `FCalendarController.dates(...)`.
+
+* **Breaking:** Rename `FCalendarSingleRangeController` to `FCalendarRangeController.range(...)`.
+
+* **Breaking:** Rename `FSeparator` to `FDivider`.
 
 * **Breaking:** Remove `colorScheme`, `typography` and `style` parameters from `FThemeData.copyWith(...)`.
   The problem was widget-specific styles not being re-created after the removed parameters were updated.

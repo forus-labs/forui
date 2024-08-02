@@ -13,21 +13,21 @@ An image element with a fallback for representing the user.
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // With Valid image.
+          // With valid image.
           FAvatar(
             image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
             fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
 
-          // With Invalid image and fallback.
+          // With invalid image and fallback.
           FAvatar(
             image: const NetworkImage(''),
             fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
 
-          // With Invalid image without fallback.
+          // With invalid image without fallback.
           FAvatar(image: const NetworkImage('')),
         ],
       );
@@ -62,7 +62,7 @@ FAvatar.raw(child: const Text('MN'));
 
 ## Examples
 
-### Invalid image
+### Invalid Image
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='avatar' variant='invalid' query={{}}/>
@@ -87,7 +87,7 @@ FAvatar.raw(child: const Text('MN'));
     </Tabs.Tab>
 </Tabs>
 
-### Without fallback
+### Raw Constructor
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='avatar' variant='raw' query={{}}/>

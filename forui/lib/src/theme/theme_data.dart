@@ -52,6 +52,9 @@ final class FThemeData with Diagnosticable {
   /// The dialog style.
   final FDialogStyle dialogStyle;
 
+  /// The divider styles.
+  final FDividerStyles dividerStyles;
+
   /// The header styles.
   final FHeaderStyles headerStyle;
 
@@ -69,9 +72,6 @@ final class FThemeData with Diagnosticable {
 
   /// The scaffold style.
   final FScaffoldStyle scaffoldStyle;
-
-  /// The separator styles.
-  final FSeparatorStyles separatorStyles;
 
   /// The switch style.
   final FSwitchStyle switchStyle;
@@ -99,7 +99,7 @@ final class FThemeData with Diagnosticable {
     required this.tabsStyle,
     required this.textFieldStyle,
     required this.scaffoldStyle,
-    required this.separatorStyles,
+    required this.dividerStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
     this.style = const FStyle(),
@@ -132,7 +132,7 @@ final class FThemeData with Diagnosticable {
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
-      separatorStyles: FSeparatorStyles.inherit(colorScheme: colorScheme, style: style),
+      dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme),
     );
   }
@@ -150,6 +150,38 @@ final class FThemeData with Diagnosticable {
   /// print(theme.alertStyles == copy.alertStyles); // true
   /// print(theme.avatarStyle == copy.avatarStyle); // false
   /// ```
+  ///
+  /// To modify [colorScheme], [typography], and/or [style], create a new `FThemeData` using [FThemeData.inherit] first.
+  /// This allows the global theme data to propagate to widget-specific theme data.
+  ///
+  /// ```dart
+  /// @override
+  /// Widget build(BuildContext context) {
+  ///   final theme = FThemeData.inherit(
+  ///     colorScheme: FThemes.zinc.light.colorScheme.copyWith(
+  ///       primary: const Color(0xFF0D47A1), // dark blue
+  ///       primaryForeground: const Color(0xFFFFFFFF), // white
+  ///     ),
+  ///     typography: FThemes.zinc.light.typography.copyWith(
+  ///       defaultFontFamily: 'Roboto',
+  ///     ).scale(sizeScalar: 0.8),
+  ///     style: FThemes.zinc.light.style.copyWith(
+  ///       borderRadius: BorderRadius.zero,
+  ///     ),
+  ///   );
+  ///
+  ///   return FTheme(
+  ///     data: theme.copyWith(
+  ///       cardStyle: theme.cardStyle.copyWith(
+  ///         decoration: theme.cardStyle.decoration.copyWith(
+  ///           borderRadius: const BorderRadius.all(Radius.circular(8)),
+  ///         ),
+  ///       ),
+  ///     ),
+  ///     child: const FScaffold(...),
+  ///   );
+  /// }
+  ///```
   @useResult
   FThemeData copyWith({
     FAlertStyles? alertStyles,
@@ -167,7 +199,7 @@ final class FThemeData with Diagnosticable {
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
     FScaffoldStyle? scaffoldStyle,
-    FSeparatorStyles? separatorStyles,
+    FDividerStyles? dividerStyles,
     FSwitchStyle? switchStyle,
   }) =>
       FThemeData(
@@ -183,13 +215,13 @@ final class FThemeData with Diagnosticable {
         cardStyle: cardStyle ?? this.cardStyle,
         checkboxStyle: checkboxStyle ?? this.checkboxStyle,
         dialogStyle: dialogStyle ?? this.dialogStyle,
+        dividerStyles: dividerStyles ?? this.dividerStyles,
         headerStyle: headerStyle ?? this.headerStyle,
         progressStyle: progressStyle ?? this.progressStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
-        separatorStyles: separatorStyles ?? this.separatorStyles,
         switchStyle: switchStyle ?? this.switchStyle,
       );
 
@@ -209,13 +241,13 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('separatorStyles', separatorStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
 
@@ -242,7 +274,7 @@ final class FThemeData with Diagnosticable {
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
           scaffoldStyle == other.scaffoldStyle &&
-          separatorStyles == other.separatorStyles &&
+          dividerStyles == other.dividerStyles &&
           switchStyle == other.switchStyle;
 
   @override
@@ -265,6 +297,6 @@ final class FThemeData with Diagnosticable {
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
       scaffoldStyle.hashCode ^
-      separatorStyles.hashCode ^
+      dividerStyles.hashCode ^
       switchStyle.hashCode;
 }

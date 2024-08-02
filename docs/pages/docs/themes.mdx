@@ -49,7 +49,8 @@ The color schemes are heavily inspired by [shadcn/ui themes](https://ui.shadcn.c
 
 ## Usage
 
-`FTheme` uses inherited widgets to provide the `FThemeData` to all widgets in the subtree.
+[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) uses inherited widgets to provide the
+[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) to all widgets in the subtree.
 Forui provides an extension on `BuildContext` which allows for direct access to `FThemeData` through `context.theme`.
 
 ```dart {3-6}
@@ -65,18 +66,19 @@ Widget build(BuildContext context) {
 ```
 
 A high level overview of the theme data structure is as follows:
-- **`FThemeData`** contains `FColorScheme`, `FTypography`, `FStyle`, and widget styles (eg. `FCardStyle`).
-- **`FColorScheme`** contains the color scheme (eg. `background`, `foreground`, and `primary`).
-- **`FTypography`** contains the `defaultFontFamily` and various `TextStyle`s.
-- **`FStyle`** contains other miscellaneous styling options (eg. `borderRadius`).
+- [**`FThemeData`**](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) contains `FColorScheme`, `FTypography`, `FStyle`, and widget styles (eg. `FCardStyle`).
+- [**`FColorScheme`**](https://pub.dev/documentation/forui/latest/forui.theme/FColorScheme-class.html) contains the color scheme (eg. `background`, `foreground`, and `primary`).
+- [**`FTypography`**](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html) contains the `defaultFontFamily` and various `TextStyle`s.
+- [**`FStyle`**](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html) contains other miscellaneous styling options (eg. `borderRadius`).
 
 A more detailed explanation of each class can be found in the [Class Diagram](#class-diagram) section.
 
 
 ## Customize Themes
 
-It's recommended to use the predefined themes as a starting point and customize them with the `inhert(...)`[] constructor
-and `copyWith(...)` method to suit your needs.
+It's recommended to use the predefined themes as a starting point and customize them with the
+[`inhert(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/FThemeData.inherit.html) constructor
+and [`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html) method to suit your needs.
 
 ```dart filename="main.dart" {3-14, 17-23}
 @override
@@ -113,6 +115,24 @@ The example above uses `FThemes.zinc.light` theme as a starting point and custom
 - Change the default font family to `Roboto` and scale the font size by `2`.
 - Remove the `borderRadius` through the style.
 - Although we removed the `borderRadius` for all widgets, override the `borderRadius` to `8` for the `FCard()` widget.
+
+<Callout type="warning">
+    It's important to use the newly created `theme` instead of `FThemes.zinc.light`. This allows `colorScheme`,
+    `typography`, and `style` to be inherited by widget-specific themes.
+
+    ```dart {3-4}
+    return FTheme(
+      data: theme.copyWith(
+        cardStyle: theme.cardStyle.copyWith(
+          decoration: theme.cardStyle.decoration.copyWith(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+          ),
+        ),
+      ),
+      child: const FScaffold(...),
+    );
+    ```
+</Callout>
 
 While the example may seem overwhelming, most use cases will only require customizations to the `FColorScheme`, `FTypography`, and `FStyle` class.
 Sensible defaults for each Forui widget will be automatically inherited.

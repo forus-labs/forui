@@ -17,36 +17,26 @@ class _ExampleState extends State<Example> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(color: context.theme.colorScheme.border),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: FResizable(
-              controller: FResizableController.cascade(),
-              axis: Axis.vertical,
-              divider: FResizableDivider.dividerThumb,
-              crossAxisExtent: 300,
-              children: [
-                FResizableRegion(
-                  initialExtent: 200,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-                ),
-                FResizableRegion(
-                  initialExtent: 200,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-                ),
-                FResizableRegion(
-                  initialExtent: 200,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
-                ),
-              ],
-            ),
+          CircleAvatar(
+            child: Image.network('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+          ),
+          FAvatar(
+            image:
+                const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+            semanticLabel: 'My profile picture',
+            fallback: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const AssetImage(''),
+            fallback: const Text('MN'),
+          ),
+          const SizedBox(width: 10),
+          FAvatar(
+            image: const AssetImage(''),
           ),
         ],
       );

@@ -23,43 +23,6 @@ class ResizablePage extends SampleScaffold {
           crossAxisExtent: 300,
           children: [
             FResizableRegion(
-              initialExtent: 200,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-            ),
-            FResizableRegion(
-              initialExtent: 200,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-            ),
-            FResizableRegion(
-              initialExtent: 200,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
-            ),
-          ],
-        ),
-      );
-}
-
-@RoutePage()
-class CascadingResizablePage extends SampleScaffold {
-  CascadingResizablePage({
-    @queryParam super.theme,
-  });
-
-  @override
-  Widget child(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.border),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: FResizable(
-          axis: Axis.vertical,
-          controller: FResizableController.cascade(),
-          crossAxisExtent: 300,
-          children: [
-            FResizableRegion(
               initialExtent: 250,
               minExtent: 100,
               builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
@@ -71,6 +34,43 @@ class CascadingResizablePage extends SampleScaffold {
             ),
             FResizableRegion(
               initialExtent: 250,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+            ),
+          ],
+        ),
+      );
+}
+
+@RoutePage()
+class NoCascadingResizablePage extends SampleScaffold {
+  NoCascadingResizablePage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colorScheme.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.vertical,
+          controller: FResizableController(),
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
+            ),
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+            ),
+            FResizableRegion(
+              initialExtent: 200,
               minExtent: 100,
               builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
             ),
@@ -161,8 +161,8 @@ class HorizontalResizablePage extends SampleScaffold {
 }
 
 @RoutePage()
-class ThumbResizablePage extends SampleScaffold {
-  ThumbResizablePage({
+class NoThumbResizablePage extends SampleScaffold {
+  NoThumbResizablePage({
     @queryParam super.theme,
   });
 
@@ -174,7 +174,7 @@ class ThumbResizablePage extends SampleScaffold {
         ),
         child: FResizable(
           axis: Axis.horizontal,
-          divider: FResizableDivider.dividerThumb,
+          divider: FResizableDivider.divider,
           crossAxisExtent: 300,
           children: [
             FResizableRegion(

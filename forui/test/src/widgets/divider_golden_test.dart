@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  group('FSeparator', () {
+  group('FDivider', () {
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final (orientation, value) in [('horizontal', false), ('vertical', true)]) {
         testWidgets('$name - $orientation', (tester) async {
@@ -22,7 +22,7 @@ void main() {
                 border: Border.all(color: theme.colorScheme.secondary),
               ),
             ),
-            FSeparator(vertical: value),
+            FDivider(vertical: value),
             Container(
               width: 100,
               height: 100,
@@ -50,7 +50,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('separator/$name-$orientation-separator.png'),
+            matchesGoldenFile('divider/$name-$orientation.png'),
           );
         });
       }

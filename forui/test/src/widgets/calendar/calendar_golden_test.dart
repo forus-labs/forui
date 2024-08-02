@@ -29,7 +29,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: FCalendar(
-                  controller: FCalendarMultiValueController(
+                  controller: FCalendarController.dates(
                     initialSelections: selected,
                     selectable: (date) => date != DateTime.utc(2024, 7, 2),
                   ),
@@ -63,7 +63,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: FCalendar(
-                  controller: FCalendarMultiValueController(initialSelections: selected),
+                  controller: FCalendarController.dates(initialSelections: selected),
                   start: DateTime(1900, 1, 8),
                   end: DateTime(2024, 7, 10),
                   today: DateTime(2024, 6, 14),
@@ -88,7 +88,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: FCalendar(
-                  controller: FCalendarMultiValueController(initialSelections: selected),
+                  controller: FCalendarController.dates(initialSelections: selected),
                   start: DateTime(1900, 1, 8),
                   end: DateTime(2024, 7, 10),
                   today: DateTime(2024, 7, 14),
@@ -125,7 +125,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: FCalendar(
-                  controller: FCalendarMultiValueController(initialSelections: selected),
+                  controller: FCalendarController.dates(initialSelections: selected),
                   start: DateTime(1900, 1, 8),
                   end: DateTime(2024, 7, 10),
                   today: DateTime(2024, 7, 14),
@@ -149,7 +149,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: FCalendar(
-                  controller: FCalendarMultiValueController(initialSelections: selected),
+                  controller: FCalendarController.dates(initialSelections: selected),
                   start: DateTime(1900, 1, 8),
                   end: DateTime(2024, 7, 10),
                   today: DateTime(2024, 7, 14),

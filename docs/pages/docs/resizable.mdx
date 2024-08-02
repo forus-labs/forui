@@ -1,7 +1,7 @@
 import { Tabs } from 'nextra/components';
 import { Widget } from "../../components/widget";
 
-# Resizable box
+# Resizable
 A box which children can be resized along either the horizontal or vertical axis.
 
 <Tabs items={['Preview', 'Code']}>
@@ -22,17 +22,17 @@ A box which children can be resized along either the horizontal or vertical axis
               crossAxisExtent: 300,
               children: [
                 FResizableRegion(
-                  initialExtent: 200,
+                  initialExtent: 250,
                   minExtent: 100,
                   builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
                 ),
                 FResizableRegion(
-                  initialExtent: 200,
+                  initialExtent: 100,
                   minExtent: 100,
                   builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
                 ),
                 FResizableRegion(
-                  initialExtent: 200,
+                  initialExtent: 250,
                   minExtent: 100,
                   builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
                 ),
@@ -101,7 +101,7 @@ FResizable(
     onResizeEnd: (regions) => print(regions),
   ),
   axis: Axis.vertical,
-  divider: FResizableDivider.dividerThumb,
+  divider: FResizableDivider.dividerWithThumb,
   crossAxisExtent: 400,
   children: [
     FResizableRegion(
@@ -116,14 +116,14 @@ FResizable(
 
 ## Examples
 
-### Cascading
+### Without Cascading
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='resizable' variant='cascading' query={{}} height={700}/>
+    <Widget name='resizable' variant='no-cascading' query={{}} height={700}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {10}
     class TimeOfDay extends StatelessWidget {
       @override
       Widget build(BuildContext context) => DecoratedBox(
@@ -133,6 +133,7 @@ FResizable(
             ),
             child: FResizable(
               axis: Axis.vertical,
+              controller: FResizableController(),
               crossAxisExtent: 300,
               children: [
                 FResizableRegion(
@@ -211,7 +212,7 @@ FResizable(
     <Widget name='resizable' variant='horizontal' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {7}
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colorScheme.border),
@@ -242,14 +243,14 @@ FResizable(
   </Tabs.Tab>
 </Tabs>
 
-### Divider with thumb
+### Divider with No Thumb
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='resizable' variant='thumb' query={{}} height={400}/>
+    <Widget name='resizable' variant='no-thumb' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {8}
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colorScheme.border),
@@ -257,7 +258,7 @@ FResizable(
       ),
       child: FResizable(
         axis: Axis.horizontal,
-        divider: FResizableDivider.dividerThumb,
+        divider: FResizableDivider.divider,
         crossAxisExtent: 300,
         children: [
           FResizableRegion(
@@ -281,14 +282,14 @@ FResizable(
   </Tabs.Tab>
 </Tabs>
 
-### No divider
+### Without Divider
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='resizable' variant='no-divider' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {8}
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colorScheme.border),

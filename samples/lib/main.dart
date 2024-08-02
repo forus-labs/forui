@@ -76,8 +76,8 @@ class _AppRouter extends RootStackRouter {
           page: CalendarRoute.page,
         ),
         AutoRoute(
-          path: '/calendar/multi-value',
-          page: MultiValueCalendarRoute.page,
+          path: '/calendar/dates',
+          page: DatesCalendarRoute.page,
         ),
         AutoRoute(
           path: '/calendar/unselectable',
@@ -104,6 +104,10 @@ class _AppRouter extends RootStackRouter {
           page: DialogRoute.page,
         ),
         AutoRoute(
+          path: '/divider/default',
+          page: DividerRoute.page,
+        ),
+        AutoRoute(
           path: '/header/default',
           page: RootHeaderRoute.page,
         ),
@@ -124,16 +128,16 @@ class _AppRouter extends RootStackRouter {
           page: ResizableRoute.page,
         ),
         AutoRoute(
-          path: '/resizable/cascading',
-          page: CascadingResizableRoute.page,
+          path: '/resizable/no-cascading',
+          page: NoCascadingResizableRoute.page,
         ),
         AutoRoute(
           path: '/resizable/horizontal',
           page: HorizontalResizableRoute.page,
         ),
         AutoRoute(
-          path: '/resizable/thumb',
-          page: ThumbResizableRoute.page,
+          path: '/resizable/no-thumb',
+          page: NoThumbResizableRoute.page,
         ),
         AutoRoute(
           path: '/resizable/no-divider',
@@ -162,10 +166,6 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(
           path: '/scaffold/default',
           page: ScaffoldRoute.page,
-        ),
-        AutoRoute(
-          path: '/separator/default',
-          page: SeparatorRoute.page,
         ),
         AutoRoute(
           path: '/switch/default',

@@ -9,12 +9,11 @@ part 'avatar_content.dart';
 
 /// An image element with a fallback for representing the user.
 ///
-/// use image property to provide a profile image displayed within the circle.
-/// Typically used with a user's profile image. If the image fails to load,
-/// the fallback widget is used instead, which usually displays the user's initials.
+/// Typically used with a user's profile image. If the image fails to load, the fallback widget is used instead, which
+/// usually displays the user's initials.
 ///
-/// If the user's profile has no image, use the fallback property to provide
-/// the initials using a [Text] widget styled with [FAvatarStyle.backgroundColor].
+/// If the user's profile has no image, use the fallback property to display the initials using a [Text] widget styled
+/// with [FAvatarStyle.backgroundColor].
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;
@@ -22,25 +21,22 @@ class FAvatar extends StatelessWidget {
   /// The circle's size.
   final double size;
 
-  /// The fallback widget displayed if image parameter fails to load.
-  ///
-  /// Typically used to display the user's initials using a [Text] widget
-  /// styled with [FAvatarStyle.backgroundColor].
-  ///
-  /// Use image parameter to display an image; use [fallback] for initials.
-  final Widget fallback;
+  /// The child, typically an image.
+  final Widget child;
 
   /// Creates an [FAvatar].
   FAvatar({
     required ImageProvider image,
     this.style,
     this.size = 40.0,
+    String? semanticLabel,
     Widget? fallback,
     super.key,
-  }) : fallback = _AvatarContent(
-          image: image,
+  }) : child = _AvatarContent(
           style: style,
           size: size,
+          image: image,
+          semanticLabel: semanticLabel,
           fallback: fallback,
         );
 
@@ -50,7 +46,7 @@ class FAvatar extends StatelessWidget {
     this.style,
     this.size = 40.0,
     super.key,
-  }) : fallback = child ?? _Placeholder(style: style, size: size);
+  }) : child = child ?? _Placeholder(style: style, size: size);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +63,7 @@ class FAvatar extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: DefaultTextStyle(
         style: style.text,
-        child: fallback,
+        child: child,
       ),
     );
   }

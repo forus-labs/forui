@@ -6,8 +6,8 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
-class SeparatorPage extends SampleScaffold {
-  SeparatorPage({
+class DividerPage extends SampleScaffold {
+  DividerPage({
     @queryParam super.theme,
   });
 
@@ -35,7 +35,7 @@ class SeparatorPage extends SampleScaffold {
               'An open-source widget library.',
               style: typography.sm.copyWith(color: colorScheme.mutedForeground),
             ),
-            const FSeparator(),
+            const FDivider(),
             SizedBox(
               height: 30,
               child: Row(
@@ -46,12 +46,12 @@ class SeparatorPage extends SampleScaffold {
                     'Blog',
                     style: typography.sm.copyWith(color: colorScheme.foreground),
                   ),
-                  const FSeparator(vertical: true),
+                  const FDivider(vertical: true),
                   Text(
                     'Docs',
                     style: typography.sm.copyWith(color: colorScheme.foreground),
                   ),
-                  const FSeparator(vertical: true),
+                  const FDivider(vertical: true),
                   Text(
                     'Source',
                     style: typography.sm.copyWith(color: colorScheme.foreground),
