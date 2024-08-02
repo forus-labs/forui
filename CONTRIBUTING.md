@@ -1,7 +1,7 @@
 # Contributing to Forui
 
 Before starting work on a pull request, please check if a similar issue already exists, or create one to discuss the 
-proposed changes.
+proposed changes. After which, please leave a comment on the issue to indicate that you're working on it.
 
 This helps to:
 
@@ -10,6 +10,22 @@ This helps to:
 * Provide a platform for maintainers and the community to offer feedback and suggestions.
 
 Doing so saves time and effort by identifying potential problems early in the development process.
+
+If you're stuck or unsure about anything, feel free to ask for help in our [discord](https://discord.gg/UEky7WkXd6) server.
+
+## First Time Contributors
+
+We recommend that first time contributors start with [issues that are labelled with `difficulty: easy` and/or `duration: tiny`](https://github.com/forus-labs/forui/issues?q=is%3Aopen+is%3Aissue+label%3A%22difficulty%3A+easy%22%2C%22duration%3A+tiny%22+).
+
+## Submitting a Pull Request
+
+If your submitted pull request contains new widgets/changes to existing widgets, please:
+* Include a brief description of the changes.
+* Add/update the unit and/or golden tests if relevant.
+* Add/update the corresponding sample under the [samples](./samples) project.
+* Add/update the corresponding documentation under the [docs](./docs) project.
+
+Dart format & linting is enforced by the CI pipeline. You don't have to manually format your code.
 
 ## Design Guidelines
 
