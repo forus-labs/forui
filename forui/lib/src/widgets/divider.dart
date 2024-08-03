@@ -168,6 +168,8 @@ final class FDividerStyle with Diagnosticable {
       ..add(DiagnosticsProperty('padding', padding))
       ..add(ColorProperty('color', color))
       ..add(DoubleProperty('width', width));
+
+    FButton.icon(onPress: (){}, icon: FButtonIcon(icon: FAssets.icons.arrowRight),);
   }
 
   @override

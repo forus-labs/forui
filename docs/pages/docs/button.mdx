@@ -103,7 +103,7 @@ FButton.raw(
   </Tabs.Tab>
 </Tabs>
 
-### With Icon
+### With Text+Icon
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='button' variant='icon' query={{}}/>
@@ -118,3 +118,19 @@ FButton.raw(
     ```
   </Tabs.Tab>
 </Tabs>
+
+### With Only Icon
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='only-icon' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {2}
+    FButton.icon(
+      icon: FButtonIcon(icon: FAssets.icons.chevronRight),
+      onPress: () {},
+    ),
+    ```
+  </Tabs.Tab>
+</Tabs>
+
