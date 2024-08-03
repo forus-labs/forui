@@ -18,7 +18,9 @@ final class _FButtonContent extends StatelessWidget {
     return Padding(
       padding: style.content.padding,
       child: DefaultTextStyle.merge(
-        style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
+        style: enabled
+            ? style.content.enabledTextStyle
+            : style.content.disabledTextStyle,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: separate(
@@ -33,6 +35,22 @@ final class _FButtonContent extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+final class _FButtonIconContent extends StatelessWidget {
+  final Widget icon;
+
+  const _FButtonIconContent({required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    final (:style, enabled: _) = FButton._of(context);
+
+    return Padding(
+      padding: style.content.padding,
+      child: icon,
     );
   }
 }
@@ -121,5 +139,6 @@ class FButtonContentStyle with Diagnosticable {
           padding == other.padding;
 
   @override
-  int get hashCode => enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
+  int get hashCode =>
+      enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
 }
