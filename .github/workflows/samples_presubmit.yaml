@@ -6,6 +6,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/samples_presubmit.yaml
+  pull_request_target:
+    branches: [ main ]
+    paths:
       - samples/**
 
 concurrency:

@@ -6,6 +6,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/forui_presubmit.yaml
+  pull_request_target:
+    branches: [ main ]
+    paths:
       - forui/**
 
 concurrency:
