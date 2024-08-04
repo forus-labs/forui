@@ -27,7 +27,7 @@ class FButton extends StatelessWidget {
   @useResult
   static _Data _of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedData>();
-    return theme?.data ?? (style: context.theme.buttonStyles.primary, enabled: true);
+    return theme?.data ?? (style: context.theme.buttonStyles.primary, enabled: true,);
   }
 
   /// The style. Defaults to [FButtonStyle.primary].
