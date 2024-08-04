@@ -5,6 +5,11 @@ on:
   push:
     paths:
       - .github/workflows/samples_build.yaml
+      - forui/**
+      - samples/**
+  pull_request_target:
+    paths:
+      - forui/**
       - samples/**
 
 jobs:
