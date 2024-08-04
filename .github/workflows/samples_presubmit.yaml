@@ -6,6 +6,9 @@ on:
     branches: [ main ]
     paths:
       - .github/workflows/samples_presubmit.yaml
+  pull_request_target:
+    branches: [ main ]
+    paths:
       - samples/**
 
 concurrency:
@@ -31,6 +34,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
 
       - uses: subosito/flutter-action@v2.16.0
