@@ -31,6 +31,7 @@ final class _FCardContent extends StatelessWidget {
             ),
           if ((title != null || subtitle != null || child != null) && image != null) const SizedBox(height: 10),
           if (title != null)
+            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
             merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
@@ -40,6 +41,7 @@ final class _FCardContent extends StatelessWidget {
               child: title!,
             ),
           if (subtitle != null)
+            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
             merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
@@ -72,7 +74,7 @@ final class FCardContentStyle with Diagnosticable {
   /// The subtitle's [TextStyle].
   final TextStyle subtitleTextStyle;
 
-  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 16, 16, 16)`.
+  /// The padding. Defaults to `EdgeInsets.all(16)`.
   final EdgeInsets padding;
 
   /// Creates a [FCardContentStyle].
