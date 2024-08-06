@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample_scaffold.dart';
+
+String path(String str) => kIsWeb ? 'assets/$str' : str;
 
 @RoutePage()
 class CardPage extends SampleScaffold {
@@ -16,8 +19,18 @@ class CardPage extends SampleScaffold {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FCard(
-            title: const Text('Notifications'),
-            subtitle: const Text('You have 3 unread messages.'),
+            image: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(path('avatar.png')),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              height: 200,
+            ),
+            title: const Text('Gratitude'),
+            subtitle:
+                const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
           ),
         ],
       );
