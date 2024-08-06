@@ -6,13 +6,22 @@ A card, typically with a title, subtitle, and child widget.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='card' query={{}}/>
+      <Widget name='card' query={{}}  height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
       FCard(
-          title: const Text('Notification'),
-          subtitle: const Text('You have 3 unread messages.'),
+        image: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(path('avatar.png')),
+              fit: BoxFit.cover,
+            ),
+          ),
+          height: 200,
+        ),
+        title: const Text('Gratitude'),
+        subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
       );
       ```
   </Tabs.Tab>

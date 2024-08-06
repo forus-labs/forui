@@ -27,8 +27,8 @@ final class _FCardContent extends StatelessWidget {
           if (image != null)
             Padding(
               padding: EdgeInsets.only(
-                top: (title == null || subtitle != null) ? 4 : 8,
-                bottom: (title != null || subtitle != null) ? 10 : 0,
+                top: (title != null && subtitle == null) ? 8 : 4,
+                bottom: (title == null && subtitle == null) ? 0 : 10,
               ),
               child: ClipRRect(
                 borderRadius: context.theme.style.borderRadius,
