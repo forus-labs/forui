@@ -26,6 +26,8 @@ final class FCard extends StatelessWidget {
   /// The card's layout is as follows:
   /// ```
   /// |---------------------------|
+  /// |  [image]                  |
+  /// |                           |
   /// |  [title]                  |
   /// |  [subtitle]               |
   /// |                           |
@@ -33,12 +35,14 @@ final class FCard extends StatelessWidget {
   /// |---------------------------|
   /// ```
   FCard({
+    Widget? image,
     Widget? title,
     Widget? subtitle,
     Widget? child,
     this.style,
     super.key,
   }) : child = _FCardContent(
+          image: image,
           title: title,
           subtitle: subtitle,
           style: style?.content,

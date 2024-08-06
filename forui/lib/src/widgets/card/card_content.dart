@@ -1,12 +1,14 @@
 part of 'card.dart';
 
 final class _FCardContent extends StatelessWidget {
+  final Widget? image;
   final Widget? title;
   final Widget? subtitle;
   final Widget? child;
   final FCardContentStyle? style;
 
   const _FCardContent({
+    this.image,
     this.title,
     this.subtitle,
     this.child,
@@ -22,6 +24,17 @@ final class _FCardContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (image != null)
+            Padding(
+              padding: EdgeInsets.only(
+                top: (title == null || subtitle != null) ? 4 : 8,
+                bottom: (title != null || subtitle != null) ? 10 : 0,
+              ),
+              child: ClipRRect(
+                borderRadius: context.theme.style.borderRadius,
+                child: image,
+              ),
+            ),
           if (title != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 2),
@@ -38,7 +51,7 @@ final class _FCardContent extends StatelessWidget {
                 child: subtitle!,
               ),
             ),
-          if (title != null && subtitle != null) const SizedBox(height: 8),
+          if (title != null && subtitle != null && image == null) const SizedBox(height: 8),
           if (child != null) child!,
         ],
       ),
@@ -48,7 +61,9 @@ final class _FCardContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('image', image));
   }
 }
 
