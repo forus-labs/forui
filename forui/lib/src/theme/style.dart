@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/theme.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/theme.dart';
 
 /// A set of miscellaneous properties that is part of a [FThemeData].
 ///
@@ -39,12 +39,11 @@ final class FStyle with Diagnosticable {
     required FColorScheme colorScheme,
     required FTypography typography,
   }) : this(
-    formFieldStyle: FFormFieldStyle.inherit(
-      colorScheme: colorScheme,
-      typography: typography,
-    ),
-  );
-
+          formFieldStyle: FFormFieldStyle.inherit(
+            colorScheme: colorScheme,
+            typography: typography,
+          ),
+        );
 
   /// Returns a copy of this [FStyle] with the given properties replaced.
   ///
