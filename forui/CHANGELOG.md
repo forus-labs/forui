@@ -4,6 +4,7 @@
 * Add `FAvatar`.
 * **Breaking:** Add `FCalendarEntryStyle.focusedBorderColor`. This only affects users that customized `FCalendarEntryStyle`.
 * Add `FResizable`.
+* Add `image` parameter to `FCard`.
 
 ### Changes
 * Change number of years displayed per page in `FCalendar` from 12 to 15.
