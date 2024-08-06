@@ -84,6 +84,7 @@ final class FThemeData with Diagnosticable {
   /// widget styles.
   FThemeData({
     required this.colorScheme,
+    required this.style,
     required this.alertStyles,
     required this.avatarStyle,
     required this.badgeStyles,
@@ -102,17 +103,16 @@ final class FThemeData with Diagnosticable {
     required this.dividerStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
-    this.style = const FStyle(),
   });
 
   /// Creates a [FThemeData] that configures the widget styles using the given properties.
   factory FThemeData.inherit({
     required FColorScheme colorScheme,
-    FStyle style = const FStyle(),
+    FStyle? style,
     FTypography? typography,
   }) {
     typography ??= FTypography.inherit(colorScheme: colorScheme);
-
+    style ??= FStyle.inherit(colorScheme: colorScheme, typography: typography);
     return FThemeData(
       colorScheme: colorScheme,
       typography: typography,

@@ -21,12 +21,12 @@ class _Field extends FormField<String> {
             hintStyle: stateStyle.hintTextStyle,
             helper: parent.help == null
                 ? null
-                : DefaultTextStyle.merge(style: stateStyle.footerTextStyle, child: parent.help!),
-            helperStyle: stateStyle.footerTextStyle,
+                : DefaultTextStyle.merge(style: stateStyle.descriptionTextStyle, child: parent.help!),
+            helperStyle: stateStyle.descriptionTextStyle,
             error: parent.error == null
                 ? null
-                : DefaultTextStyle.merge(style: stateStyle.footerTextStyle, child: parent.error!),
-            errorStyle: stateStyle.footerTextStyle,
+                : DefaultTextStyle.merge(style: stateStyle.descriptionTextStyle, child: parent.error!),
+            errorStyle: stateStyle.descriptionTextStyle,
             disabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: style.disabledStyle.unfocusedStyle.color,
