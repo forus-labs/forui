@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-/// A Scaffold.
+/// A scaffold.
 ///
 /// A scaffold is a layout structure that contains a header, content, and footer.
 /// It is highly recommended to use a scaffold when creating a page even if a header and footer are not required.
