@@ -33,7 +33,11 @@ class FTabEntry {
   int get hashCode => label.hashCode ^ content.hashCode;
 }
 
-/// A [FTabs] that allows switching between tabs.
+/// Allows switching between widgets through tabs.
+///
+/// See:
+/// * https://forui.dev/docs/tabs for working examples.
+/// * [FTabsStyle] for customizing a switch's appearance.
 class FTabs extends StatefulWidget {
   /// The tab and it's corresponding view.
   final List<FTabEntry> tabs;

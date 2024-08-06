@@ -7,6 +7,8 @@ import 'package:forui/forui.dart';
 
 part 'avatar_content.dart';
 
+/// {@category Widgets}
+///
 /// An image element with a fallback for representing the user.
 ///
 /// Typically used with a user's profile image. If the image fails to load, the fallback widget is used instead, which
