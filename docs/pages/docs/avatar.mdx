@@ -55,14 +55,14 @@ FAvatar(
 ### `FAvatar.raw(...)`
 
 ```dart
-// Raw constructor - with icon
+// Raw constructor - with icon.
 FAvatar.raw(
   child: FAssets.icons.baby(
     colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
   ),
 );
 
-// Raw constructor - with text
+// Raw constructor - with text.
 FAvatar.raw(child: const Text('MN'));
 ```
 
@@ -74,18 +74,18 @@ FAvatar.raw(child: const Text('MN'));
         <Widget name='avatar' variant='invalid' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart {7}
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // With fallback widget.
+            // With fallback.
             FAvatar(
               image: const AssetImage(''),
               fallback: const Text('MN'),
             ),
             const SizedBox(width: 10),
 
-            // Without fallback widget.
+            // Without fallback.
             FAvatar(image: const AssetImage('')),
           ],
         );
@@ -107,7 +107,7 @@ FAvatar.raw(child: const Text('MN'));
             FAvatar.raw(),
             const SizedBox(width: 10),
 
-            // Raw constructor - with child.
+            // Raw constructor - with icon.
             FAvatar.raw(
               child: FAssets.icons.baby(
                 colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
