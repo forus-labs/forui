@@ -57,32 +57,29 @@ final class FTextFieldStyle with Diagnosticable {
         contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         scrollPadding = const EdgeInsets.all(20.0),
         enabledStyle = FTextFieldStateStyle.inherit(
-          labelColor: colorScheme.primary,
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,
-          footerColor: colorScheme.mutedForeground,
           focusedBorderColor: colorScheme.primary,
           unfocusedBorderColor: colorScheme.border,
+          formFieldStateStyle: style.formFieldStyle.enabledStyle,
           typography: typography,
           style: style,
         ),
         disabledStyle = FTextFieldStateStyle.inherit(
-          labelColor: colorScheme.primary.withOpacity(0.7),
           contentColor: colorScheme.primary.withOpacity(0.7),
           hintColor: colorScheme.border.withOpacity(0.7),
-          footerColor: colorScheme.border.withOpacity(0.7),
           focusedBorderColor: colorScheme.border.withOpacity(0.7),
           unfocusedBorderColor: colorScheme.border.withOpacity(0.7),
+          formFieldStateStyle: style.formFieldStyle.disabledStyle,
           typography: typography,
           style: style,
         ),
         errorStyle = FTextFieldStateStyle.inherit(
-          labelColor: colorScheme.primary,
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,
-          footerColor: colorScheme.error,
           focusedBorderColor: colorScheme.error,
           unfocusedBorderColor: colorScheme.error,
+          formFieldStateStyle: style.formFieldStyle.errorStyle,
           typography: typography,
           style: style,
         );
@@ -172,7 +169,7 @@ final class FTextFieldStateStyle with Diagnosticable {
   final TextStyle hintTextStyle;
 
   /// The help/error's [TextStyle].
-  final TextStyle footerTextStyle;
+  final TextStyle descriptionTextStyle;
 
   /// The border's color when focused.
   final FTextFieldBorderStyle focusedStyle;
@@ -185,25 +182,22 @@ final class FTextFieldStateStyle with Diagnosticable {
     required this.labelTextStyle,
     required this.contentTextStyle,
     required this.hintTextStyle,
-    required this.footerTextStyle,
+    required this.descriptionTextStyle,
     required this.focusedStyle,
     required this.unfocusedStyle,
   });
 
   /// Creates a [FTextFieldStateStyle] that inherits its properties.
   FTextFieldStateStyle.inherit({
-    required Color labelColor,
     required Color contentColor,
     required Color hintColor,
-    required Color footerColor,
     required Color focusedBorderColor,
     required Color unfocusedBorderColor,
+    required FFormFieldStateStyle formFieldStateStyle,
     required FTypography typography,
     required FStyle style,
-  })  : labelTextStyle = typography.sm.copyWith(
-          color: labelColor,
-          fontWeight: FontWeight.w600,
-        ),
+  })  :
+        labelTextStyle = formFieldStateStyle.labelTextStyle,
         contentTextStyle = typography.sm.copyWith(
           fontFamily: typography.defaultFontFamily,
           color: contentColor,
@@ -212,10 +206,7 @@ final class FTextFieldStateStyle with Diagnosticable {
           fontFamily: typography.defaultFontFamily,
           color: hintColor,
         ),
-        footerTextStyle = typography.sm.copyWith(
-          fontFamily: typography.defaultFontFamily,
-          color: footerColor,
-        ),
+        descriptionTextStyle = formFieldStateStyle.descriptionTextStyle,
         focusedStyle = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
         unfocusedStyle = FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style);
 
@@ -240,7 +231,7 @@ final class FTextFieldStateStyle with Diagnosticable {
     TextStyle? labelTextStyle,
     TextStyle? contentTextStyle,
     TextStyle? hintTextStyle,
-    TextStyle? footerTextStyle,
+    TextStyle? descriptionTextStyle,
     FTextFieldBorderStyle? focusedStyle,
     FTextFieldBorderStyle? unfocusedStyle,
   }) =>
@@ -248,7 +239,7 @@ final class FTextFieldStateStyle with Diagnosticable {
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         contentTextStyle: contentTextStyle ?? this.contentTextStyle,
         hintTextStyle: hintTextStyle ?? this.hintTextStyle,
-        footerTextStyle: footerTextStyle ?? this.footerTextStyle,
+        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
         focusedStyle: focusedStyle ?? this.focusedStyle,
         unfocusedStyle: unfocusedStyle ?? this.unfocusedStyle,
       );
@@ -260,7 +251,7 @@ final class FTextFieldStateStyle with Diagnosticable {
       ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
       ..add(DiagnosticsProperty('contentTextStyle', contentTextStyle))
       ..add(DiagnosticsProperty('hintTextStyle', hintTextStyle))
-      ..add(DiagnosticsProperty('footerTextStyle', footerTextStyle))
+      ..add(DiagnosticsProperty('descriptionTextStyle', descriptionTextStyle))
       ..add(DiagnosticsProperty('focusedStyle', focusedStyle))
       ..add(DiagnosticsProperty('unfocusedStyle', unfocusedStyle));
   }
@@ -273,6 +264,7 @@ final class FTextFieldStateStyle with Diagnosticable {
           labelTextStyle == other.labelTextStyle &&
           contentTextStyle == other.contentTextStyle &&
           hintTextStyle == other.hintTextStyle &&
+          descriptionTextStyle == other.descriptionTextStyle &&
           focusedStyle == other.focusedStyle &&
           unfocusedStyle == other.unfocusedStyle;
 
@@ -281,6 +273,7 @@ final class FTextFieldStateStyle with Diagnosticable {
       labelTextStyle.hashCode ^
       contentTextStyle.hashCode ^
       hintTextStyle.hashCode ^
+      descriptionTextStyle.hashCode ^
       focusedStyle.hashCode ^
       unfocusedStyle.hashCode;
 }
