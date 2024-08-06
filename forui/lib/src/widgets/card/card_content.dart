@@ -25,31 +25,28 @@ final class _FCardContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (image != null)
-            Padding(
-              padding: EdgeInsets.only(
-                top: (title != null && subtitle == null) ? 8 : 4,
-                bottom: (title == null && subtitle == null) ? 0 : 10,
-              ),
-              child: ClipRRect(
-                borderRadius: context.theme.style.borderRadius,
-                child: image,
-              ),
+            ClipRRect(
+              borderRadius: context.theme.style.borderRadius,
+              child: image,
             ),
+          if ((title != null || subtitle != null || child != null) && image != null) const SizedBox(height: 10),
           if (title != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 2),
-              child: DefaultTextStyle.merge(
-                style: style.titleTextStyle,
-                child: title!,
+            merge(
+              textHeightBehavior: const TextHeightBehavior(
+                applyHeightToFirstAscent: false,
+                applyHeightToLastDescent: false,
               ),
+              style: style.titleTextStyle,
+              child: title!,
             ),
           if (subtitle != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 2),
-              child: DefaultTextStyle.merge(
-                style: style.subtitleTextStyle,
-                child: subtitle!,
+            merge(
+              textHeightBehavior: const TextHeightBehavior(
+                applyHeightToFirstAscent: false,
+                applyHeightToLastDescent: false,
               ),
+              style: style.subtitleTextStyle,
+              child: subtitle!,
             ),
           if (title != null && subtitle != null && image == null) const SizedBox(height: 8),
           if (child != null) child!,
@@ -75,7 +72,7 @@ final class FCardContentStyle with Diagnosticable {
   /// The subtitle's [TextStyle].
   final TextStyle subtitleTextStyle;
 
-  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 16)`.
+  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 16, 16, 16)`.
   final EdgeInsets padding;
 
   /// Creates a [FCardContentStyle].
@@ -93,7 +90,7 @@ final class FCardContentStyle with Diagnosticable {
           height: 1.5,
         ),
         subtitleTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground),
-        padding = const EdgeInsets.fromLTRB(16, 12, 16, 16);
+        padding = const EdgeInsets.all(16);
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
   ///
