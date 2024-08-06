@@ -5,7 +5,9 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A divider. Dividers visually separate content.
+/// A divider.
+///
+/// Dividers visually separate content.
 ///
 /// See:
 /// * https://forui.dev/docs/divider for working examples.
