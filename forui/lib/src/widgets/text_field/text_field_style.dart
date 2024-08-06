@@ -196,8 +196,7 @@ final class FTextFieldStateStyle with Diagnosticable {
     required FFormFieldStateStyle formFieldStateStyle,
     required FTypography typography,
     required FStyle style,
-  })  :
-        labelTextStyle = formFieldStateStyle.labelTextStyle,
+  })  : labelTextStyle = formFieldStateStyle.labelTextStyle,
         contentTextStyle = typography.sm.copyWith(
           fontFamily: typography.defaultFontFamily,
           color: contentColor,

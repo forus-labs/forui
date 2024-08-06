@@ -6,7 +6,8 @@ class _Field extends FormField<String> {
     FTextField parent,
     FTextFieldStyle style,
     FTextFieldStateStyle stateStyle,
-  ) => InputDecoration(
+  ) =>
+      InputDecoration(
         suffixIcon: parent.suffix,
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
         prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
