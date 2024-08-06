@@ -34,7 +34,7 @@ class FAvatar extends StatelessWidget {
     String? semanticLabel,
     Widget? fallback,
     super.key,
-  }) : child = _AvatarContent(
+  }) : child = _FAvatarContent(
           style: style,
           size: size,
           image: image,
