@@ -78,17 +78,13 @@ final class FCardStyle with Diagnosticable {
   FCardStyle({required this.decoration, required this.content});
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme], [typography] and [style].
-  FCardStyle.inherit(
-      {required FColorScheme colorScheme,
-      required FTypography typography,
-      required FStyle style})
+  FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : decoration = BoxDecoration(
           border: Border.all(color: colorScheme.border),
           borderRadius: style.borderRadius,
           color: colorScheme.background,
         ),
-        content = FCardContentStyle.inherit(
-            colorScheme: colorScheme, typography: typography);
+        content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography);
 
   /// Returns a copy of this [FCardStyle] with the given properties replaced.
   ///
