@@ -42,15 +42,10 @@ final class FTextField extends StatelessWidget {
   /// See [InputDecoration.hintText] for more information.
   final String? hint;
 
-  /// The help text.
+  /// The description text.
   ///
   /// See [InputDecoration.helper] for more information.
-  final Widget? help;
-
-  /// The error text.
-  ///
-  /// See [InputDecoration.error] for more information.
-  final Widget? error;
+  final Widget? description;
 
   /// The configuration for the magnifier of this text field.
   ///
@@ -458,12 +453,12 @@ final class FTextField extends StatelessWidget {
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
   ///
-  /// The returned value is exposed by the [FormFieldState.errorText] property. [_Field] transform the text
-  /// using [...] before using the returned widget to override [error].
+  /// The returned value is exposed by the [FormFieldState.errorText] property. It transforms the text using
+  /// [errorBuilder].
   ///
   /// Alternating between error and normal state can cause the height of the [_Field] to change if no other
   /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
-  /// error is displayed, either wrap the [_Field] in a fixed height parent like [SizedBox], or set the [help]
+  /// error is displayed, either wrap the [_Field] in a fixed height parent like [SizedBox], or set the [description]
   /// parameter to a space.
   final FormFieldValidator<String>? validator;
 
@@ -481,7 +476,7 @@ final class FTextField extends StatelessWidget {
 
   /// A builder that transforms a [FormFieldState.errorText] into a widget. Defaults to a [Text] widget.
   ///
-  /// The builder is called whenever [validator] returns an error text. It replaces [error] if it was provided.
+  /// The builder is called whenever [validator] returns an error text.
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// Creates a [FTextField].
@@ -489,8 +484,7 @@ final class FTextField extends StatelessWidget {
     this.style,
     this.label,
     this.hint,
-    this.help,
-    this.error,
+    this.description,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -548,8 +542,7 @@ final class FTextField extends StatelessWidget {
     this.style,
     this.label = const Text('Email'),
     this.hint,
-    this.help,
-    this.error,
+    this.description,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -610,8 +603,7 @@ final class FTextField extends StatelessWidget {
     this.style,
     this.label = const Text('Password'),
     this.hint,
-    this.help,
-    this.error,
+    this.description,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -673,8 +665,7 @@ final class FTextField extends StatelessWidget {
     this.style,
     this.label,
     this.hint,
-    this.help,
-    this.error,
+    this.description,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -731,48 +722,29 @@ final class FTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     final style = this.style ?? theme.textFieldStyle;
-    final stateStyle = switch (this) {
-      _ when !enabled => style.disabledStyle,
-      _ when error != null => style.errorStyle,
-      _ => style.enabledStyle,
-    };
 
     final textFormField = MergeSemantics(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (label != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 4, bottom: 7),
-              child: DefaultTextStyle.merge(
-                style: stateStyle.labelTextStyle,
-                child: label!,
-              ),
+      child: Material(
+        color: Colors.transparent,
+        child: Theme(
+          // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
+          // for overriding selectionHandleColor.
+          data: Theme.of(context).copyWith(
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: style.cursorColor,
+              selectionColor: style.cursorColor.withOpacity(0.4),
+              selectionHandleColor: style.cursorColor,
             ),
-          Material(
-            color: Colors.transparent,
-            child: Theme(
-              // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
-              // for overriding selectionHandleColor.
-              data: Theme.of(context).copyWith(
-                textSelectionTheme: TextSelectionThemeData(
-                  cursorColor: style.cursorColor,
-                  selectionColor: style.cursorColor.withOpacity(0.4),
-                  selectionHandleColor: style.cursorColor,
-                ),
-                cupertinoOverrideTheme: CupertinoThemeData(
-                  primaryColor: style.cursorColor,
-                ),
-              ),
-              child: _Field(
-                parent: this,
-                style: style,
-                stateStyle: stateStyle,
-                key: key,
-              ),
+            cupertinoOverrideTheme: CupertinoThemeData(
+              primaryColor: style.cursorColor,
             ),
           ),
-        ],
+          child: _Field(
+            parent: this,
+            style: style,
+            key: key,
+          ),
+        ),
       ),
     );
 
