@@ -1,4 +1,4 @@
-## Next
+## 0.4.0
 
 ### Additions
 * Add `FAvatar`.
