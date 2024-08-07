@@ -37,6 +37,22 @@ final class _FButtonContent extends StatelessWidget {
   }
 }
 
+final class _FButtonIconContent extends StatelessWidget {
+  final Widget icon;
+
+  const _FButtonIconContent({required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    final (:style, enabled: _) = FButton._of(context);
+
+    return Padding(
+      padding: style.content.padding,
+      child: icon,
+    );
+  }
+}
+
 /// [FButton] content's style.
 class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is enabled.

@@ -72,6 +72,10 @@ class _AppRouter extends RootStackRouter {
           page: ButtonIconRoute.page,
         ),
         AutoRoute(
+          path: '/button/only-icon',
+          page: ButtonOnlyIconRoute.page,
+        ),
+        AutoRoute(
           path: '/calendar/default',
           page: CalendarRoute.page,
         ),

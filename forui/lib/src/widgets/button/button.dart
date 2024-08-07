@@ -99,6 +99,18 @@ class FButton extends StatelessWidget {
           label: label,
         );
 
+  /// Creates a [FButton] that contains only an [icon]
+  FButton.icon({
+    required this.onPress,
+    required Widget icon,
+    this.style = Variant.outline,
+    this.onLongPress,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    super.key,
+  }) : child = _FButtonIconContent(icon: icon);
+
   /// Creates a [FButton] with custom content.
   const FButton.raw({
     required this.onPress,
