@@ -7,7 +7,13 @@
 
 * Change `FTextFieldStyle` to inherit from `FFormFieldStyle`.
 
+* Change `FTextField` to display error under description instead of replacing it.
+
 * **Breaking:** Remove `FTextField.error`.
+
+* **Breaking:** Change `FTextField.help` to `FTextField.description`.
+
+* **Breaking:** Change how `FTextFieldStyle` stores various state-dependent styles.
 
 ### Fixes
 

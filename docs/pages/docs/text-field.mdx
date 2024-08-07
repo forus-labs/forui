@@ -168,16 +168,22 @@ FTextField.multiline(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FTextField.email(
-              hint: 'janedoe@foruslabs.com',
-              help: const Text(''),
-              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+            SizedBox(
+              height: 110,
+              child: FTextField.email(
+                hint: 'janedoe@foruslabs.com',
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+              ),
             ),
             const SizedBox(height: 4),
-            FTextField.password(
-              hint: '',
-              help: const Text(''),
-              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+            SizedBox(
+              height: 110,
+              child: FTextField.password(
+                hint: '',
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+              ),
             ),
             const SizedBox(height: 30),
             FButton(

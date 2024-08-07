@@ -27,6 +27,8 @@ final class FTextFieldStyle with Diagnosticable {
   /// after the scroll.
   final EdgeInsets scrollPadding;
 
+
+
   /// The style when this text field is enabled.
   final FTextFieldNormalStyle enabledStyle;
 

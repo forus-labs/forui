@@ -21,7 +21,6 @@ part 'text_form_field.dart';
 /// See:
 /// * https://forui.dev/docs/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
-/// * [_Field] for a text field that integrates with a [Form].
 /// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget {
   static Widget _contextMenuBuilder(
@@ -457,10 +456,9 @@ final class FTextField extends StatelessWidget {
   /// The returned value is exposed by the [FormFieldState.errorText] property. It transforms the text using
   /// [errorBuilder].
   ///
-  /// Alternating between error and normal state can cause the height of the [_Field] to change if no other
+  /// Alternating between error and normal state can cause the height of the [FTextField] to change if no other
   /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
-  /// error is displayed, either wrap the [_Field] in a fixed height parent like [SizedBox], or set the [description]
-  /// parameter to a space.
+  /// error is displayed, wrap the [FTextField] in a fixed height parent like [SizedBox].
   final FormFieldValidator<String>? validator;
 
   /// An optional value to initialize the form field to, or null otherwise.

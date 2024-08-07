@@ -149,6 +149,11 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
   /// The error's [TextStyle].
   final TextStyle errorTextStyle;
 
+  /// The duration of the error fade-in animation.
+  ///
+  /// Defaults to 100 milliseconds.
+  final Duration animationDuration;
+
   /// Creates a [FTextFieldErrorStyle].
   FTextFieldErrorStyle({
     required this.errorTextStyle,
@@ -158,6 +163,7 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
     required super.descriptionTextStyle,
     required super.focusedStyle,
     required super.unfocusedStyle,
+    this.animationDuration = const Duration(milliseconds: 100),
   });
 
   /// Creates a [FTextFieldErrorStyle] that inherits its properties.
@@ -170,6 +176,7 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
     required super.typography,
     required super.style,
   })  : errorTextStyle = formFieldErrorStyle.errorTextStyle,
+        animationDuration = const Duration(milliseconds: 100),
         super.inherit(formFieldStateStyle: formFieldErrorStyle);
 
   /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
@@ -197,6 +204,7 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
     TextStyle? descriptionTextStyle,
     FTextFieldBorderStyle? focusedStyle,
     FTextFieldBorderStyle? unfocusedStyle,
+    Duration? animationDuration,
   }) =>
       FTextFieldErrorStyle(
         errorTextStyle: errorTextStyle ?? this.errorTextStyle,
@@ -206,12 +214,15 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
         descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
         focusedStyle: focusedStyle ?? this.focusedStyle,
         unfocusedStyle: unfocusedStyle ?? this.unfocusedStyle,
+        animationDuration: animationDuration ?? this.animationDuration,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('errorTextStyle', errorTextStyle));
+    properties
+      ..add(DiagnosticsProperty('errorTextStyle', errorTextStyle))
+      ..add(DiagnosticsProperty('animationDuration', animationDuration));
   }
 
   @override
@@ -225,7 +236,8 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
           descriptionTextStyle == other.descriptionTextStyle &&
           focusedStyle == other.focusedStyle &&
           unfocusedStyle == other.unfocusedStyle &&
-          errorTextStyle == other.errorTextStyle;
+          errorTextStyle == other.errorTextStyle &&
+          animationDuration == other.animationDuration;
 
   @override
   int get hashCode =>
@@ -235,7 +247,8 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
       descriptionTextStyle.hashCode ^
       focusedStyle.hashCode ^
       unfocusedStyle.hashCode ^
-      errorTextStyle.hashCode;
+      errorTextStyle.hashCode ^
+      animationDuration.hashCode;
 }
 
 /// A [FTextField] border's style.
