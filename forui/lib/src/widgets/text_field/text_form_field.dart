@@ -6,7 +6,8 @@ class _Field extends FormField<String> {
     FTextField parent,
     FTextFieldStyle style,
     FTextFieldStateStyle stateStyle,
-  ) => InputDecoration(
+  ) =>
+      InputDecoration(
         suffixIcon: parent.suffix,
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
         prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
@@ -146,12 +147,12 @@ class _Field extends FormField<String> {
                     child: switch (state.errorText) {
                       null => const SizedBox(),
                       final error => Padding(
-                        padding: const EdgeInsets.only(top: 7, bottom: 4),
-                        child: DefaultTextStyle.merge(
-                          style: style.errorStyle.errorTextStyle,
-                          child: Text(error),
+                          padding: const EdgeInsets.only(top: 7, bottom: 4),
+                          child: DefaultTextStyle.merge(
+                            style: style.errorStyle.errorTextStyle,
+                            child: Text(error),
+                          ),
                         ),
-                      ),
                     },
                   ),
                 ],
