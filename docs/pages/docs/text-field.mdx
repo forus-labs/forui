@@ -21,7 +21,8 @@ in a form.
       enabled: enabled,
       label: 'Email',
       hint: 'john@doe.com',
-      footer: const Text('Enter your email associated with your Forui account.'),
+      description: const Text('Enter your email associated with your Forui account.'),
+      maxLines: 1,
     );
     ```
   </Tabs.Tab>
@@ -36,9 +37,10 @@ FTextField(
   enabled: true,
   label: const Text('Email'),
   hint: 'john@doe.com',
-  footer: const Text('Enter your email associated with your Forui account.'),
+  description: const Text('Enter your email associated with your Forui account.'),
   keyboardType: TextInputType.emailAddress,
   textCapitalization: TextCapitalization.none,
+  maxLines: 1,
 );
 ```
 
@@ -47,7 +49,7 @@ FTextField(
 ```dart
 FTextField.email(
   hint: 'john@doe.com',
-  footer: const Text('Enter your email associated with your Forui account.'),
+  description: const Text('Enter your email associated with your Forui account.'),
 );
 ```
 
@@ -55,7 +57,7 @@ FTextField.email(
 
 ```dart
 FTextField.password(
-  footer: const Text('Your password must be at least 8 characters long.'),
+  description: const Text('Your password must be at least 8 characters long.'),
 );
 ```
 
@@ -65,7 +67,7 @@ FTextField.password(
 FTextField.multiline(
   label: const Text('Description'),
   hint: 'Enter a description...',
-  footer: const Text('Enter a description of the item.'),
+  description: const Text('Enter a description of the item.'),
 );
 ```
 
@@ -166,16 +168,22 @@ FTextField.multiline(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FTextField.email(
-              hint: 'janedoe@foruslabs.com',
-              help: const Text(''),
-              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+            SizedBox(
+              height: 110,
+              child: FTextField.email(
+                hint: 'janedoe@foruslabs.com',
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+              ),
             ),
             const SizedBox(height: 4),
-            FTextField.password(
-              hint: '',
-              help: const Text(''),
-              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+            SizedBox(
+              height: 110,
+              child: FTextField.password(
+                hint: '',
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+              ),
             ),
             const SizedBox(height: 30),
             FButton(

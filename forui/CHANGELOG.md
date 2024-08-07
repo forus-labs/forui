@@ -1,3 +1,25 @@
+## 0.5.0
+
+### Additions
+* Add `FFormFieldStyle`.
+
+### Changes
+
+* Change `FTextFieldStyle` to inherit from `FFormFieldStyle`.
+
+* Change `FTextField` to display error under description instead of replacing it.
+
+* **Breaking:** Remove `FTextField.error`.
+
+* **Breaking:** Change `FTextField.help` to `FTextField.description`.
+
+* **Breaking:** Change how `FTextFieldStyle` stores various state-dependent styles.
+
+### Fixes
+
+* Fix `FTextField` not changing error text color when an error occurs.
+
+
 ## 0.4.0
 
 ### Additions
@@ -33,7 +55,7 @@
   This should only affect people that customize `FThemeData`. Use the `FThemeData.inherit(...)` constructor instead.
 
 ### Fixes
-* Fix `FCalendar` dates not being toggleable using `Enter` key.
+* Fix `FCalendar` dates & `FButton`s not being toggleable using `Enter` key.
 * Fix `FCalendar` dates sometimes not being navigable using arrow keys.
 
 

@@ -24,7 +24,6 @@ class _FAvatarContent extends StatelessWidget {
     return Image(
       height: size,
       width: size,
-      filterQuality: FilterQuality.medium,
       image: image,
       semanticLabel: semanticLabel,
       errorBuilder: (context, exception, stacktrace) => fallback,
