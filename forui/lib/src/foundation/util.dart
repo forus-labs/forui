@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+// TODO: Remove this function once DefaultTextStyle.merge(...) exposes TextHeightBehavior? textHeightBehavior.
+
 /// Creates a default text style that overrides the text styles in scope at
 /// this point in the widget tree.
 ///

@@ -9,6 +9,8 @@
 
 * Change `FTextField` to display error under description instead of replacing it.
 
+* **Breaking:** Rename `FDivider.width` to `FDivder.thickness`.
+
 * **Breaking:** Remove `FTextField.error`.
 
 * **Breaking:** Change `FTextField.help` to `FTextField.description`.
