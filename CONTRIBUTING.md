@@ -248,7 +248,7 @@ class ButtonTextPage extends SampleScaffold { // - (1)
 2. The current theme, provided as a URL query parameter.
 
 The samples website uses `auto_route` to generate a route for each sample. In general, each sample has its own page and
-URL. Generate the route by running `flutter pub run build_runner --delete-conflicting-outputs`. After which, 
+URL. Generate the route by running `dart pub run build_runner build --delete-conflicting-outputs`. After which, 
 register the route with [`_AppRouter` in main.dart](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/main.dart#L67).
 
 A route's path should follow the format `/<widget-name>/<variant>` in kebab-case. In this case, the button route's path 
