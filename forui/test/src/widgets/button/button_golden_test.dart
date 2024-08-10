@@ -32,8 +32,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-                'button/$name-$variant-enabled-content-button.png'),
+            matchesGoldenFile('button/$name-$variant-enabled-content-button.png'),
           );
         });
 
@@ -56,8 +55,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-                'button/$name-$variant-disabled-content-button.png'),
+            matchesGoldenFile('button/$name-$variant-disabled-content-button.png'),
           );
         });
 
@@ -151,7 +149,6 @@ void main() {
                   icon: FButtonIcon(
                     icon: FAssets.icons.chevronRight,
                   ),
-
                 ),
               ),
             ),
@@ -177,7 +174,6 @@ void main() {
                   icon: FButtonIcon(
                     icon: FAssets.icons.chevronRight,
                   ),
-
                 ),
               ),
             ),
