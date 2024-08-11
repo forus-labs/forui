@@ -100,7 +100,7 @@ class FButton extends StatelessWidget {
           label: label,
         );
 
-  /// Creates a [FButton] that contains only an icon
+  /// Creates a [FButton] that contains only an icon.
   FButton.icon({
     required this.onPress,
     required Widget child,
