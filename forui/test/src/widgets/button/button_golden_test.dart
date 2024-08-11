@@ -148,7 +148,7 @@ void main() {
                 child: FButton.icon(
                   onPress: () {},
                   style: variant,
-                  icon: FButtonIcon(
+                  child: FButtonIcon(
                     icon: FAssets.icons.chevronRight,
                   ),
 
@@ -174,7 +174,7 @@ void main() {
                 child: FButton.icon(
                   onPress: null,
                   style: variant,
-                  icon: FButtonIcon(
+                  child: FButtonIcon(
                     icon: FAssets.icons.chevronRight,
                   ),
 

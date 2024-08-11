@@ -62,7 +62,7 @@ class ButtonOnlyIconPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
         child: FButton.icon(
-          icon: FButtonIcon(icon: FAssets.icons.chevronRight),
+          child: FButtonIcon(icon: FAssets.icons.chevronRight),
           onPress: () {},
         ),
       );

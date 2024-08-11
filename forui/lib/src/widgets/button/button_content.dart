@@ -40,9 +40,9 @@ final class _FButtonContent extends StatelessWidget {
 }
 
 final class _FButtonIconContent extends StatelessWidget {
-  final Widget icon;
+  final Widget child;
 
-  const _FButtonIconContent({required this.icon});
+  const _FButtonIconContent({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ final class _FButtonIconContent extends StatelessWidget {
 
     return Padding(
       padding: style.content.padding,
-      child: icon,
+      child: child,
     );
   }
 }
