@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
 
 import 'package:meta/meta.dart';
 
@@ -64,6 +65,9 @@ final class FThemeData with Diagnosticable {
   /// The popover's style.
   final FPopoverStyle popoverStyle;
 
+  /// The line calendar styles.
+  final FLineCalendarStyle lineCalendarStyle;
+
   /// The progress styles.
   final FProgressStyle progressStyle;
 
@@ -116,6 +120,7 @@ final class FThemeData with Diagnosticable {
     required this.headerStyle,
     required this.labelStyles,
     required this.popoverStyle,
+    required this.lineCalendarStyle,
     required this.progressStyle,
     required this.radioStyle,
     required this.resizableStyle,
@@ -154,6 +159,7 @@ final class FThemeData with Diagnosticable {
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
+      lineCalendarStyle: FLineCalendarStyle.inherit(style: style, colorScheme: colorScheme, typography: typography),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       radioStyle: FRadioStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
@@ -227,6 +233,7 @@ final class FThemeData with Diagnosticable {
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
     FPopoverStyle? popoverStyle,
+    FLineCalendarStyle? lineCalendarStyle,
     FProgressStyle? progressStyle,
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
@@ -255,6 +262,7 @@ final class FThemeData with Diagnosticable {
         headerStyle: headerStyle ?? this.headerStyle,
         labelStyles: labelStyles ?? this.labelStyles,
         popoverStyle: popoverStyle ?? this.popoverStyle,
+        lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
         progressStyle: progressStyle ?? this.progressStyle,
         radioStyle: radioStyle ?? this.radioStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
@@ -290,6 +298,9 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty<FLineCalendarStyle>('lineCalendarStyle', lineCalendarStyle))
+      ..add(DiagnosticsProperty('progressStyle', progressStyle))
+      ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
@@ -320,6 +331,7 @@ final class FThemeData with Diagnosticable {
           headerStyle == other.headerStyle &&
           labelStyles == other.labelStyles &&
           popoverStyle == other.popoverStyle &&
+          lineCalendarStyle == other.lineCalendarStyle &&
           progressStyle == other.progressStyle &&
           radioStyle == other.radioStyle &&
           resizableStyle == other.resizableStyle &&
@@ -349,6 +361,7 @@ final class FThemeData with Diagnosticable {
       headerStyle.hashCode ^
       labelStyles.hashCode ^
       popoverStyle.hashCode ^
+      lineCalendarStyle.hashCode ^
       progressStyle.hashCode ^
       radioStyle.hashCode ^
       resizableStyle.hashCode ^
