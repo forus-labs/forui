@@ -18,7 +18,9 @@ final class _FButtonContent extends StatelessWidget {
     return Padding(
       padding: style.content.padding,
       child: DefaultTextStyle.merge(
-        style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
+        style: enabled
+            ? style.content.enabledTextStyle
+            : style.content.disabledTextStyle,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: separate(
@@ -44,12 +46,51 @@ final class _FButtonIconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (:style, enabled: _) = FButton._of(context);
+    final FButtonIconContentStyle contentStyle = FButtonIconContentStyle();
 
     return Padding(
-      padding: style.content.padding,
+      padding: contentStyle.padding,
       child: child,
     );
+  }
+}
+
+/// [FButton] icon's style.
+class FButtonIconContentStyle with Diagnosticable {
+  /// The padding.
+  final EdgeInsets padding;
+
+  /// Creates a [FButtonIconContentStyle].
+  FButtonIconContentStyle({
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 12.5,
+    ),
+  });
+
+  /// Returns a copy of this [FButtonIconContentStyle] with the given properties replaced.
+  @useResult
+  FButtonIconContentStyle copyWith({
+    EdgeInsets? padding,
+  }) =>
+      FButtonIconContentStyle(
+        padding: padding ?? this.padding,
+      );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FButtonIconContentStyle &&
+          runtimeType == other.runtimeType &&
+          padding == other.padding;
+
+  @override
+  int get hashCode => padding.hashCode;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<EdgeInsets>('padding', padding));
   }
 }
 
@@ -137,5 +178,6 @@ class FButtonContentStyle with Diagnosticable {
           padding == other.padding;
 
   @override
-  int get hashCode => enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
+  int get hashCode =>
+      enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
 }
