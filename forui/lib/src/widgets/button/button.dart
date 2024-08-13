@@ -27,8 +27,7 @@ class FButton extends StatelessWidget {
   @useResult
   static _Data _of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedData>();
-    return theme?.data ??
-        (style: context.theme.buttonStyles.primary, enabled: true);
+    return theme?.data ?? (style: context.theme.buttonStyles.primary, enabled: true);
   }
 
   /// The style. Defaults to [FButtonStyle.primary].
@@ -142,8 +141,7 @@ class FButton extends StatelessWidget {
       onPress: onPress,
       onLongPress: onLongPress,
       child: DecoratedBox(
-        decoration:
-            enabled ? style.enabledBoxDecoration : style.disabledBoxDecoration,
+        decoration: enabled ? style.enabledBoxDecoration : style.disabledBoxDecoration,
         child: _InheritedData(
           data: (style: style, enabled: enabled),
           child: child,
@@ -159,8 +157,7 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress))
-      ..add(FlagProperty('autofocus',
-          value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('onFocusChange', onFocusChange))
       ..add(DiagnosticsProperty('builder', child));
@@ -248,8 +245,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   }) =>
       FButtonCustomStyle(
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
-        disabledBoxDecoration:
-            disabledBoxDecoration ?? this.disabledBoxDecoration,
+        disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
         content: content ?? this.content,
         icon: icon ?? this.icon,
       );
@@ -275,11 +271,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
           icon == other.icon;
 
   @override
-  int get hashCode =>
-      enabledBoxDecoration.hashCode ^
-      disabledBoxDecoration.hashCode ^
-      content.hashCode ^
-      icon.hashCode;
+  int get hashCode => enabledBoxDecoration.hashCode ^ disabledBoxDecoration.hashCode ^ content.hashCode ^ icon.hashCode;
 }
 
 /// [FButton] style for icon-button.
@@ -329,8 +321,7 @@ class FButtonIconStyle extends FButtonStyle with Diagnosticable {
   }) =>
       FButtonIconStyle(
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
-        disabledBoxDecoration:
-            disabledBoxDecoration ?? this.disabledBoxDecoration,
+        disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
         content: content ?? this.content,
         icon: icon ?? this.icon,
       );
@@ -356,11 +347,7 @@ class FButtonIconStyle extends FButtonStyle with Diagnosticable {
           icon == other.icon;
 
   @override
-  int get hashCode =>
-      enabledBoxDecoration.hashCode ^
-      disabledBoxDecoration.hashCode ^
-      content.hashCode ^
-      icon.hashCode;
+  int get hashCode => enabledBoxDecoration.hashCode ^ disabledBoxDecoration.hashCode ^ content.hashCode ^ icon.hashCode;
 }
 
 typedef _Data = ({FButtonCustomStyle style, bool enabled});
