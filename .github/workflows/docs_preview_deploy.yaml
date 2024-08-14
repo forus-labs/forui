@@ -71,6 +71,7 @@ jobs:
         with:
           template: .github/deployment_preview_template.md
           vars: |
+            sha: ${{ github.sha }}
             id: ${{ steps.publish_docs.outputs.id }}
             url: ${{ steps.publish_docs.outputs.url }}
       - uses: peter-evans/create-or-update-comment@v4
