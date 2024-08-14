@@ -11,6 +11,7 @@ jobs:
   docs:
     name: Deploy Docs
     runs-on: ubuntu-latest
+    environment: docs-development
     steps:
       - uses: actions/checkout@v4
         with:
