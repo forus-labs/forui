@@ -4,4 +4,4 @@
 |:------------------------------|:------------|
 | Preview URL                   | {{ .url }}  |
 
-You're seeing this because the docs/samples was updated in this PR.
+You're seeing this because the docs/samples were updated.
