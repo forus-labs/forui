@@ -59,13 +59,13 @@ jobs:
       - uses: tibdex/github-app-token@v2
         id: generate_token
         with:
-          app_id: ${{ secrets.TOKEN_MINT_APP_ID }}
-          private_key: ${{ secrets.TOKEN_MINT_PRIVATE_KEY }}
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
       - uses: peter-evans/find-comment@v3
         id: find_comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          comment-author: 'forus-labs-token-mint[bot]'
+          comment-author: 'auto-maid[bot]'
       - uses: chuhlomin/render-template@v1.10
         id: render_markdown
         with:
