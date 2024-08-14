@@ -46,10 +46,10 @@ final class _FButtonIconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonIconContentStyle contentStyle = FButtonIconContentStyle();
+    final (:style, enabled: _) = FButton._of(context);
 
     return Padding(
-      padding: contentStyle.padding,
+      padding: style.iconContent.padding,
       child: child,
     );
   }

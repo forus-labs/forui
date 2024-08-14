@@ -215,12 +215,16 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   /// The icon's style.
   final FButtonIconStyle icon;
 
+  /// The icon-content's style
+  final FButtonIconContentStyle iconContent;
+
   /// Creates a [FButtonCustomStyle].
   FButtonCustomStyle({
     required this.enabledBoxDecoration,
     required this.disabledBoxDecoration,
     required this.content,
     required this.icon,
+    required this.iconContent,
   });
 
   /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
@@ -245,6 +249,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     BoxDecoration? disabledBoxDecoration,
     FButtonContentStyle? content,
     FButtonIconStyle? icon,
+    FButtonIconContentStyle? iconContent,
   }) =>
       FButtonCustomStyle(
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
@@ -252,6 +257,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
             disabledBoxDecoration ?? this.disabledBoxDecoration,
         content: content ?? this.content,
         icon: icon ?? this.icon,
+        iconContent: iconContent ?? this.iconContent,
       );
 
   @override
@@ -261,7 +267,11 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledBoxDecoration', enabledBoxDecoration))
       ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
       ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('icon', icon));
+      ..add(DiagnosticsProperty('icon', icon))
+      ..add(
+        DiagnosticsProperty<FButtonIconContentStyle>(
+            'iconContent', iconContent),
+      );
   }
 
   @override
@@ -272,14 +282,16 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
           enabledBoxDecoration == other.enabledBoxDecoration &&
           disabledBoxDecoration == other.disabledBoxDecoration &&
           content == other.content &&
-          icon == other.icon;
+          icon == other.icon &&
+          iconContent == other.iconContent;
 
   @override
   int get hashCode =>
       enabledBoxDecoration.hashCode ^
       disabledBoxDecoration.hashCode ^
       content.hashCode ^
-      icon.hashCode;
+      icon.hashCode ^
+      iconContent.hashCode;
 }
 
 /// [FButton] style for icon-button.
