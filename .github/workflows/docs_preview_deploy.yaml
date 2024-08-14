@@ -7,6 +7,10 @@ on:
       - 'docs/**'
       - 'samples/**'
 
+concurrency:
+  group: docs
+  cancel-in-progress: false
+
 jobs:
   docs:
     name: Deploy Docs
