@@ -7,10 +7,6 @@ on:
       - 'docs/**'
       - 'samples/**'
 
-concurrency:
-  group: docs
-  cancel-in-progress: false
-
 jobs:
   docs:
     name: Deploy Docs
@@ -61,16 +57,16 @@ jobs:
 
       # Create/update comment with link to preview
       - uses: tibdex/github-app-token@v2
-        id: generate-token
+        id: generate_token
         with:
           app_id: ${{ secrets.TOKEN_MINT_APP_ID }}
           private_key: ${{ secrets.TOKEN_MINT_PRIVATE_KEY }}
       - uses: peter-evans/find-comment@v3
         id: find_comment
         with:
-          issue-number: ${{ github.event.pull_request_target.number }}
+          issue-number: ${{ github.event.pull_request.number }}
           comment-author: 'forus-labs-token-mint[bot]'
-      - uses: chuhlomin/render-template@v1.4
+      - uses: chuhlomin/render-template@v1.10
         id: render_markdown
         with:
           template: .github/deployment_preview_template.md
@@ -79,7 +75,8 @@ jobs:
             url: ${{ steps.publish_docs.outputs.url }}
       - uses: peter-evans/create-or-update-comment@v4
         with:
+          token: ${{ steps.generate_token.outputs.token }}
           comment-id: ${{ steps.find_comment.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request_target.number }}
+          issue-number: ${{ github.event.pull_request.number }}
           body: ${{ steps.render_markdown.outputs.result }}
           edit-mode: replace
