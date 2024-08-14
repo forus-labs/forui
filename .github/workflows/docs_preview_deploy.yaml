@@ -65,7 +65,7 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request_target.number }}
           comment-author: 'forus-labs-token-mint[bot]'
-      - uses: chuhlomin/render-template@v1.4
+      - uses: chuhlomin/render-template@v1.10
         id: render_markdown
         with:
           template: .github/deployment_preview_template.md
