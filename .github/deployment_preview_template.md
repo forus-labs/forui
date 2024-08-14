@@ -4,4 +4,4 @@
 |:------------------------------|:------------|
 | Preview URL                   | {{ .url }}  |
 
-You're seeing this because you've updated the documentation/samples in you pull request.
+You're seeing this because the docs/samples was updated in this PR.
