@@ -1,8 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
-import 'package:meta/meta.dart';
 
 import 'package:sugar/sugar.dart';
 
@@ -41,10 +40,11 @@ class _FLineCalendarState extends State<FLineCalendar> {
 
   @override
   void initState() {
-    final width = MediaQuery.of(context).size.width / 5;
-    final offset = (widget.selected.value.difference(widget.epoch).inDays - 2) * width;
+    widget.selected.addListener(() => setState(() {}));
+    final mediaQuery = (context.getElementForInheritedWidgetOfExactType<MediaQuery>()!.widget as MediaQuery).data;
+    _width = mediaQuery.size.width / 5;
+    final offset = (widget.selected.value.difference(widget.epoch).inDays - 2) * _width;
     _controller = ScrollController(initialScrollOffset: offset);
-
     super.initState();
   }
 
@@ -67,6 +67,12 @@ class _FLineCalendarState extends State<FLineCalendar> {
           ),
         ),
       );
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 }
 
 class _Tile extends StatelessWidget {
@@ -81,9 +87,9 @@ class _Tile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.lineCalendarStyle;
-
     final selected = this.selected.value == date;
-    return FTappable(
+
+    return FTappable.animated(
       onPress: () => this.selected.value = date,
       child: Container(
         alignment: Alignment.center,
@@ -93,16 +99,16 @@ class _Tile extends StatelessWidget {
         decoration: selected ? style.selectedDecoration : null,
         child: Column(
           children: [
-            Text(
-              _days[date.weekday - 1],
-              style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
-            ),
-            const SizedBox(height: 5),
             _Date(
               date: date,
               selected: selected,
               underline: underline,
               style: style,
+            ),
+            const SizedBox(height: 5),
+            Text(
+              _days[date.weekday - 1],
+              style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
             ),
           ],
         ),
@@ -171,7 +177,6 @@ final class FLineCalendarStyle with Diagnosticable {
         dateDecoration = BoxDecoration(
           color: colorScheme.foreground,
           borderRadius: style.borderRadius,
-          border: Border.all(color: colorScheme.border),
         ),
         selectedDecoration = BoxDecoration(
           color: colorScheme.primary,
