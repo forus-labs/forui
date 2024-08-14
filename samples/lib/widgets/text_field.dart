@@ -20,15 +20,44 @@ class TextFieldPage extends SampleScaffold {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-            child: FTextField(
-              enabled: enabled,
-              label: const Text('Email'),
-              hint: 'john@doe.com',
-              maxLines: 1,
-            ),
+            child: DefaultTextField(enabled: enabled),
           ),
         ],
       );
+}
+
+class DefaultTextField extends StatefulWidget {
+  final bool enabled;
+
+  const DefaultTextField({required this.enabled, super.key});
+
+  @override
+  State<DefaultTextField> createState() => _DefaultTextFieldState();
+}
+
+class _DefaultTextFieldState extends State<DefaultTextField> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => FTextField(
+    controller: _controller,
+    enabled: widget.enabled,
+    label: const Text('Email'),
+    hint: 'john@doe.com',
+    description: const Text('Please enter your email.'),
+    maxLines: 1,
+  );
 }
 
 @RoutePage()
@@ -94,10 +123,19 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -106,27 +144,28 @@ class _LoginFormState extends State<LoginForm> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 110,
-              child: FTextField.email(
-                hint: 'janedoe@foruslabs.com',
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-              ),
+            FTextField.email(
+              controller: _emailController,
+              hint: 'janedoe@foruslabs.com',
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
             ),
-            const SizedBox(height: 4),
-            SizedBox(
-              height: 110,
-              child: FTextField.password(
-                hint: '',
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-              ),
+            const SizedBox(height: 10),
+            FTextField.password(
+              controller: _passwordController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             FButton(
               label: const Text('Login'),
-              onPress: () => _formKey.currentState!.validate(),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  return; // Form is invalid.
+                }
+
+                // Form is valid, do something.
+              },
             ),
           ],
         ),

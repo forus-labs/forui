@@ -18,7 +18,11 @@ class _Field extends FormField<String> {
             ? null
             : DefaultTextStyle.merge(style: stateStyle.descriptionTextStyle, child: parent.description!),
         helperStyle: stateStyle.descriptionTextStyle,
-        error: state.errorText == null ? null : const SizedBox(),
+        error: switch ((state.errorText, parent.description)) {
+          (null, _) => null,
+          (_, null) => const SizedBox(),
+          (_, final description?) => DefaultTextStyle.merge(style: stateStyle.descriptionTextStyle, child: description),
+        },
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: style.disabledStyle.unfocusedStyle.color,

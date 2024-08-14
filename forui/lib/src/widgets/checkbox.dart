@@ -19,6 +19,12 @@ class FCheckbox extends StatelessWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 
+  /// The label displayed next to the checkbox.
+  final Widget? label;
+
+  /// The description displayed below the label.
+  final Widget? description;
+
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
@@ -77,6 +83,8 @@ class FCheckbox extends StatelessWidget {
   /// Creates a [FCheckbox].
   const FCheckbox({
     this.style,
+    this.label,
+    this.description,
     this.semanticLabel,
     this.onChange,
     this.autofocus = false,
@@ -94,7 +102,6 @@ class FCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.checkboxStyle;
-    final stateStyle = enabled ? style.enabledStyle : style.disabledStyle;
 
     return FocusableActionDetector(
       autofocus: autofocus,
@@ -110,6 +117,7 @@ class FCheckbox extends StatelessWidget {
           autovalidateMode: autovalidateMode,
           restorationId: restorationId,
           builder: (state) {
+            final stateStyle = enabled ? style.enabledStyle : style.disabledStyle;
             final value = state.value ?? initialValue;
             return Semantics(
               label: semanticLabel,
@@ -122,31 +130,42 @@ class FCheckbox extends StatelessWidget {
                         onChange?.call(!value);
                       }
                     : null,
-                child: AnimatedSwitcher(
-                  duration: style.animationDuration,
-                  switchInCurve: style.curve,
-                  child: SizedBox.square(
-                    key: ValueKey(value),
-                    dimension: 20,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(
-                          color: stateStyle.borderColor,
-                          width: 0.6,
+                child: FLabel(
+                  axis: Axis.horizontal,
+                  state: switch ((enabled, state.hasError)) {
+                    (true, false) => FLabelState.enabled,
+                    (false, false) => FLabelState.disabled,
+                    (_, true) => FLabelState.error,
+                  },
+                  label: label,
+                  description: description,
+                  error: Text(state.errorText ?? ''),
+                  child: AnimatedSwitcher(
+                    duration: style.animationDuration,
+                    switchInCurve: style.curve,
+                    child: SizedBox.square(
+                      key: ValueKey(value),
+                      dimension: 20,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          border: Border.all(
+                            color: stateStyle.borderColor,
+                            width: 0.6,
+                          ),
+                          color: value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
                         ),
-                        color: value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
+                        child: value
+                            ? FAssets.icons.check(
+                                height: 15,
+                                width: 15,
+                                colorFilter: ColorFilter.mode(
+                                  stateStyle.iconColor,
+                                  BlendMode.srcIn,
+                                ),
+                              )
+                            : const SizedBox(),
                       ),
-                      child: value
-                          ? FAssets.icons.check(
-                              height: 15,
-                              width: 15,
-                              colorFilter: ColorFilter.mode(
-                                stateStyle.iconColor,
-                                BlendMode.srcIn,
-                              ),
-                            )
-                          : const SizedBox(),
                     ),
                   ),
                 ),
@@ -204,7 +223,7 @@ final class FCheckboxStyle with Diagnosticable {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties from the given [FColorScheme].
-  FCheckboxStyle.inherit({required FColorScheme colorScheme})
+  FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : animationDuration = const Duration(milliseconds: 100),
         curve = Curves.linear,
         enabledStyle = FCheckboxStateStyle(
@@ -212,12 +231,16 @@ final class FCheckboxStyle with Diagnosticable {
           iconColor: colorScheme.background,
           checkedBackgroundColor: colorScheme.primary,
           uncheckedBackgroundColor: colorScheme.background,
+          labelTextStyle: style.formFieldStyle.enabledStyle.labelTextStyle,
+          descriptionTextStyle: style.formFieldStyle.enabledStyle.descriptionTextStyle,
         ),
         disabledStyle = FCheckboxStateStyle(
           borderColor: colorScheme.primary.withOpacity(0.5),
           iconColor: colorScheme.background.withOpacity(0.5),
           checkedBackgroundColor: colorScheme.primary.withOpacity(0.5),
           uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
+          labelTextStyle: style.formFieldStyle.disabledStyle.labelTextStyle,
+          descriptionTextStyle: style.formFieldStyle.disabledStyle.descriptionTextStyle,
         );
 
   /// Returns a copy of this [FCheckboxStyle] with the given properties replaced.
@@ -288,12 +311,20 @@ final class FCheckboxStateStyle with Diagnosticable {
   /// The unchecked checkbox's background color.
   final Color uncheckedBackgroundColor;
 
+  /// The label's text style.
+  final TextStyle labelTextStyle;
+
+  /// The description's text style.
+  final TextStyle descriptionTextStyle;
+
   /// Creates a [FCheckboxStateStyle].
   const FCheckboxStateStyle({
     required this.borderColor,
     required this.iconColor,
     required this.checkedBackgroundColor,
     required this.uncheckedBackgroundColor,
+    required this.labelTextStyle,
+    required this.descriptionTextStyle,
   });
 
   /// Returns a copy of this [FCheckboxStateStyle] with the given properties replaced.
@@ -318,12 +349,16 @@ final class FCheckboxStateStyle with Diagnosticable {
     Color? iconColor,
     Color? checkedBackgroundColor,
     Color? uncheckedBackgroundColor,
+    TextStyle? labelTextStyle,
+    TextStyle? descriptionTextStyle,
   }) =>
       FCheckboxStateStyle(
         borderColor: borderColor ?? this.borderColor,
         iconColor: iconColor ?? this.iconColor,
         checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
         uncheckedBackgroundColor: uncheckedBackgroundColor ?? this.uncheckedBackgroundColor,
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
       );
 
   @override
@@ -333,7 +368,9 @@ final class FCheckboxStateStyle with Diagnosticable {
       ..add(ColorProperty('borderColor', borderColor))
       ..add(ColorProperty('checkedIconColor', iconColor))
       ..add(ColorProperty('checkedBackgroundColor', checkedBackgroundColor))
-      ..add(ColorProperty('uncheckedBackgroundColor', uncheckedBackgroundColor));
+      ..add(ColorProperty('uncheckedBackgroundColor', uncheckedBackgroundColor))
+      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
+      ..add(DiagnosticsProperty('descriptionTextStyle', descriptionTextStyle));
   }
 
   @override
@@ -344,9 +381,16 @@ final class FCheckboxStateStyle with Diagnosticable {
           borderColor == other.borderColor &&
           iconColor == other.iconColor &&
           checkedBackgroundColor == other.checkedBackgroundColor &&
-          uncheckedBackgroundColor == other.uncheckedBackgroundColor;
+          uncheckedBackgroundColor == other.uncheckedBackgroundColor &&
+          labelTextStyle == other.labelTextStyle &&
+          descriptionTextStyle == other.descriptionTextStyle;
 
   @override
   int get hashCode =>
-      borderColor.hashCode ^ iconColor.hashCode ^ checkedBackgroundColor.hashCode ^ uncheckedBackgroundColor.hashCode;
+      borderColor.hashCode ^
+      iconColor.hashCode ^
+      checkedBackgroundColor.hashCode ^
+      uncheckedBackgroundColor.hashCode ^
+      labelTextStyle.hashCode ^
+      descriptionTextStyle.hashCode;
 }
