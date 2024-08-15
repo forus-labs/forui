@@ -18,9 +18,7 @@ final class _FButtonContent extends StatelessWidget {
     return Padding(
       padding: style.content.padding,
       child: DefaultTextStyle.merge(
-        style: enabled
-            ? style.content.enabledTextStyle
-            : style.content.disabledTextStyle,
+        style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: separate(
@@ -86,9 +84,7 @@ class FButtonIconContentStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FButtonIconContentStyle &&
-          runtimeType == other.runtimeType &&
-          padding == other.padding;
+      other is FButtonIconContentStyle && runtimeType == other.runtimeType && padding == other.padding;
 
   @override
   int get hashCode => padding.hashCode;
@@ -178,6 +174,5 @@ class FButtonContentStyle with Diagnosticable {
           padding == other.padding;
 
   @override
-  int get hashCode =>
-      enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
+  int get hashCode => enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
 }
