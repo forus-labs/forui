@@ -7,7 +7,7 @@ on:
       - .github/workflows/samples_build.yaml
       - forui/**
       - samples/**
-  pull_request_target:
+  pull_request:
     paths:
       - forui/**
       - samples/**
