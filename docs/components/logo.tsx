@@ -6,7 +6,7 @@ interface Props {
 }
 
 export default function Logo({className = "w-24 h-auto"}: Props) {
-    const {resolvedTheme} = useTheme();
+    const { resolvedTheme } = useTheme();
 
     return <Image
         src={resolvedTheme == 'dark' ? '/dark_logo.svg' : '/light_logo.svg'}

@@ -1,4 +1,12 @@
 dartdoc:
+  categories:
+    Core:
+      name: "Core"
+    Widgets:
+      name: "Widgets"
+  categoryOrder:
+    - Core
+    - Widgets
   ignore:
     - ambiguous-reexport
   linkToSource:

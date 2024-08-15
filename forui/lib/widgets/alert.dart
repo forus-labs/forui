@@ -1,0 +1,8 @@
+/// {@category Widgets}
+///
+/// Displays a callout for user attention.
+///
+/// See https://forui.dev/docs/alert for working examples.
+library forui.widgets.alert;
+
+export '../src/widgets/alert/alert.dart' hide Variant;

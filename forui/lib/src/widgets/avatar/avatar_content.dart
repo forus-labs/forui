@@ -1,13 +1,13 @@
 part of 'avatar.dart';
 
-class _AvatarContent extends StatelessWidget {
+class _FAvatarContent extends StatelessWidget {
   final FAvatarStyle? style;
   final double size;
   final ImageProvider image;
   final String? semanticLabel;
   final Widget? fallback;
 
-  const _AvatarContent({
+  const _FAvatarContent({
     required this.style,
     required this.size,
     required this.image,
@@ -24,7 +24,6 @@ class _AvatarContent extends StatelessWidget {
     return Image(
       height: size,
       width: size,
-      filterQuality: FilterQuality.medium,
       image: image,
       semanticLabel: semanticLabel,
       errorBuilder: (context, exception, stacktrace) => fallback,

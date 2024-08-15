@@ -6,7 +6,7 @@ on:
     paths:
       - .github/workflows/forui_build.yaml
       - forui/**
-  pull_request_target:
+  pull_request:
     paths:
       - forui/**
 
@@ -22,6 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0
         with:
+          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
           cache: true
       - run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
@@ -42,6 +43,7 @@ jobs:
           java-version: 17
       - uses: subosito/flutter-action@v2.16.0
         with:
+          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
           cache: true
 
       - run: flutter pub get
@@ -60,6 +62,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0
         with:
+          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
           cache: true
 
       - run: flutter pub get

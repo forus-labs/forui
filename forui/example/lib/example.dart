@@ -17,27 +17,25 @@ class _ExampleState extends State<Example> {
   }
 
   @override
-  Widget build(BuildContext context) => Row(
+  Widget build(BuildContext context) => const Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircleAvatar(
-            child: Image.network('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-          ),
-          FAvatar(
-            image:
-                const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-            semanticLabel: 'My profile picture',
-            fallback: const Text('MN'),
-          ),
-          const SizedBox(width: 10),
-          FAvatar(
-            image: const AssetImage(''),
-            fallback: const Text('MN'),
-          ),
-          const SizedBox(width: 10),
-          FAvatar(
-            image: const AssetImage(''),
-          ),
+          SizedBox(
+            width: 100,
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Positioned(top: 1, left: 10, child: Align(child: Text('Hiqdqdqdqd'))),
+                SizedBox(
+                  width: 10,
+                  height: 100,
+                  child: ColoredBox(
+                    color: Colors.white30,
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       );
 }

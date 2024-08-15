@@ -34,6 +34,34 @@ void main() {
         );
       });
 
+      testWidgets('$name with image', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            data: theme,
+            background: background,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FCard(
+                  image: Container(
+                    color: Colors.blue,
+                    height: 100,
+                    width: 200,
+                  ),
+                  title: const Text('Notifications'),
+                  subtitle: const Text('You have 3 unread messages.'),
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('card/$name-content-image.png'),
+        );
+      });
+
       testWidgets('$name with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
