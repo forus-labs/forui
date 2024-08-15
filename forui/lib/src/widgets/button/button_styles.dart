@@ -24,7 +24,10 @@ class FButtonStyles with Diagnosticable {
 
   /// Creates a [FButtonCustomStyle] that inherits its properties from the provided [colorScheme], [typography], and
   /// [style].
-  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FButtonStyles.inherit(
+      {required FColorScheme colorScheme,
+      required FTypography typography,
+      required FStyle style})
       : primary = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -43,6 +46,7 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.primaryForeground,
             disabledColor: colorScheme.primaryForeground.withOpacity(0.5),
           ),
+          iconContent: FButtonIconContentStyle(),
         ),
         secondary = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -62,6 +66,7 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.secondaryForeground,
             disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
+          iconContent: FButtonIconContentStyle(),
         ),
         destructive = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -81,6 +86,7 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.destructiveForeground,
             disabledColor: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
+          iconContent: FButtonIconContentStyle(),
         ),
         outline = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -104,6 +110,7 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.secondaryForeground,
             disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
+          iconContent: FButtonIconContentStyle(),
         );
 
   /// Returns a copy of this [FButtonStyles] with the given properties replaced.
@@ -155,5 +162,9 @@ class FButtonStyles with Diagnosticable {
           outline == other.outline;
 
   @override
-  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outline.hashCode;
+  int get hashCode =>
+      primary.hashCode ^
+      secondary.hashCode ^
+      destructive.hashCode ^
+      outline.hashCode;
 }
