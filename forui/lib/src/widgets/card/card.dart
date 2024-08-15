@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/util.dart';
 
 part 'card_content.dart';
 
@@ -26,6 +27,8 @@ final class FCard extends StatelessWidget {
   /// The card's layout is as follows:
   /// ```
   /// |---------------------------|
+  /// |  [image]                  |
+  /// |                           |
   /// |  [title]                  |
   /// |  [subtitle]               |
   /// |                           |
@@ -33,12 +36,14 @@ final class FCard extends StatelessWidget {
   /// |---------------------------|
   /// ```
   FCard({
+    Widget? image,
     Widget? title,
     Widget? subtitle,
     Widget? child,
     this.style,
     super.key,
   }) : child = _FCardContent(
+          image: image,
           title: title,
           subtitle: subtitle,
           style: style?.content,

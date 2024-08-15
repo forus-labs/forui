@@ -1,76 +1,66 @@
 part of 'text_field.dart';
 
 class _Field extends FormField<String> {
+  static InputDecoration _decoration(
+    _State state,
+    FTextField parent,
+    FTextFieldStyle style,
+    FTextFieldStateStyle stateStyle,
+  ) =>
+      InputDecoration(
+        suffixIcon: parent.suffix,
+        // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
+        prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
+        contentPadding: style.contentPadding.copyWith(left: 0),
+        hintText: parent.hint,
+        hintStyle: stateStyle.hintTextStyle,
+        helper: parent.description == null
+            ? null
+            : DefaultTextStyle.merge(style: stateStyle.descriptionTextStyle, child: parent.description!),
+        helperStyle: stateStyle.descriptionTextStyle,
+        error: state.errorText == null ? null : const SizedBox(),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.disabledStyle.unfocusedStyle.color,
+            width: style.disabledStyle.unfocusedStyle.width,
+          ),
+          borderRadius: style.disabledStyle.unfocusedStyle.radius,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.enabledStyle.unfocusedStyle.color,
+            width: style.enabledStyle.unfocusedStyle.width,
+          ),
+          borderRadius: style.enabledStyle.unfocusedStyle.radius,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.enabledStyle.focusedStyle.color,
+            width: style.enabledStyle.focusedStyle.width,
+          ),
+          borderRadius: stateStyle.focusedStyle.radius,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.errorStyle.unfocusedStyle.color,
+            width: style.errorStyle.unfocusedStyle.width,
+          ),
+          borderRadius: style.errorStyle.unfocusedStyle.radius,
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: style.errorStyle.focusedStyle.color,
+            width: style.errorStyle.focusedStyle.width,
+          ),
+          borderRadius: style.errorStyle.focusedStyle.radius,
+        ),
+      );
+
   final FTextField parent;
 
   _Field({
-    required FTextField parent,
-    required FTextFieldStyle style,
-    required FTextFieldStateStyle stateStyle,
-    required Key? key,
-  }) : this._(
-          parent: parent,
-          style: style,
-          stateStyle: stateStyle,
-          decoration: InputDecoration(
-            suffixIcon: parent.suffix,
-            // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-            prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
-            contentPadding: style.contentPadding.copyWith(left: 0),
-            hintText: parent.hint,
-            hintStyle: stateStyle.hintTextStyle,
-            helper: parent.help == null
-                ? null
-                : DefaultTextStyle.merge(style: stateStyle.footerTextStyle, child: parent.help!),
-            helperStyle: stateStyle.footerTextStyle,
-            error: parent.error == null
-                ? null
-                : DefaultTextStyle.merge(style: stateStyle.footerTextStyle, child: parent.error!),
-            errorStyle: stateStyle.footerTextStyle,
-            disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: style.disabledStyle.unfocusedStyle.color,
-                width: style.disabledStyle.unfocusedStyle.width,
-              ),
-              borderRadius: style.disabledStyle.unfocusedStyle.radius,
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: style.enabledStyle.unfocusedStyle.color,
-                width: style.enabledStyle.unfocusedStyle.width,
-              ),
-              borderRadius: style.enabledStyle.unfocusedStyle.radius,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: style.enabledStyle.focusedStyle.color,
-                width: style.enabledStyle.focusedStyle.width,
-              ),
-              borderRadius: stateStyle.focusedStyle.radius,
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: style.errorStyle.unfocusedStyle.color,
-                width: style.errorStyle.unfocusedStyle.width,
-              ),
-              borderRadius: style.errorStyle.unfocusedStyle.radius,
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: style.errorStyle.focusedStyle.color,
-                width: style.errorStyle.focusedStyle.width,
-              ),
-              borderRadius: style.errorStyle.focusedStyle.radius,
-            ),
-          ),
-          key: key,
-        );
-
-  _Field._({
     required this.parent,
     required FTextFieldStyle style,
-    required FTextFieldStateStyle stateStyle,
-    required InputDecoration decoration,
     super.key,
   }) : super(
           onSaved: parent.onSave,
@@ -81,61 +71,91 @@ class _Field extends FormField<String> {
           restorationId: parent.restorationId,
           builder: (field) {
             final state = field as _State;
+            final stateStyle = switch (parent) {
+              _ when !parent.enabled => style.disabledStyle,
+              _ when state.errorText != null => style.errorStyle,
+              _ => style.enabledStyle,
+            };
+
             return UnmanagedRestorationScope(
               bucket: state.bucket,
-              child: TextField(
-                controller: state._effectiveController,
-                decoration: decoration.copyWith(
-                  error: state.errorText == null ? null : parent.errorBuilder(state.context, state.errorText!),
-                ),
-                focusNode: parent.focusNode,
-                undoController: parent.undoController,
-                cursorErrorColor: style.cursorColor,
-                keyboardType: parent.keyboardType,
-                textInputAction: parent.textInputAction,
-                textCapitalization: parent.textCapitalization,
-                style: stateStyle.contentTextStyle,
-                textAlign: parent.textAlign,
-                textAlignVertical: parent.textAlignVertical,
-                textDirection: parent.textDirection,
-                readOnly: parent.readOnly,
-                showCursor: parent.showCursor,
-                autofocus: parent.autofocus,
-                statesController: parent.statesController,
-                obscureText: parent.obscureText,
-                autocorrect: parent.autocorrect,
-                smartDashesType: parent.smartDashesType,
-                smartQuotesType: parent.smartQuotesType,
-                enableSuggestions: parent.enableSuggestions,
-                maxLines: parent.maxLines,
-                minLines: parent.minLines,
-                expands: parent.expands,
-                maxLength: parent.maxLength,
-                maxLengthEnforcement: parent.maxLengthEnforcement,
-                onChanged: (value) {
-                  field.didChange(value);
-                  parent.onChange?.call(value);
-                },
-                onEditingComplete: parent.onEditingComplete,
-                onSubmitted: parent.onSubmit,
-                onAppPrivateCommand: parent.onAppPrivateCommand,
-                inputFormatters: parent.inputFormatters,
-                enabled: parent.enabled,
-                ignorePointers: parent.ignorePointers,
-                keyboardAppearance: style.keyboardAppearance,
-                scrollPadding: style.scrollPadding,
-                dragStartBehavior: parent.dragStartBehavior,
-                selectionControls: parent.selectionControls,
-                scrollController: parent.scrollController,
-                scrollPhysics: parent.scrollPhysics,
-                autofillHints: parent.autofillHints,
-                restorationId: parent.restorationId,
-                scribbleEnabled: parent.scribbleEnabled,
-                enableIMEPersonalizedLearning: parent.enableIMEPersonalizedLearning,
-                contextMenuBuilder: parent.contextMenuBuilder,
-                canRequestFocus: parent.canRequestFocus,
-                spellCheckConfiguration: parent.spellCheckConfiguration,
-                magnifierConfiguration: parent.magnifierConfiguration,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (parent.label case final label?)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4, bottom: 7),
+                      child: DefaultTextStyle.merge(
+                        style: stateStyle.labelTextStyle,
+                        child: label,
+                      ),
+                    ),
+                  TextField(
+                    controller: state._effectiveController,
+                    decoration: _decoration(state, parent, style, stateStyle),
+                    focusNode: parent.focusNode,
+                    undoController: parent.undoController,
+                    cursorErrorColor: style.cursorColor,
+                    keyboardType: parent.keyboardType,
+                    textInputAction: parent.textInputAction,
+                    textCapitalization: parent.textCapitalization,
+                    style: stateStyle.contentTextStyle,
+                    textAlign: parent.textAlign,
+                    textAlignVertical: parent.textAlignVertical,
+                    textDirection: parent.textDirection,
+                    readOnly: parent.readOnly,
+                    showCursor: parent.showCursor,
+                    autofocus: parent.autofocus,
+                    statesController: parent.statesController,
+                    obscureText: parent.obscureText,
+                    autocorrect: parent.autocorrect,
+                    smartDashesType: parent.smartDashesType,
+                    smartQuotesType: parent.smartQuotesType,
+                    enableSuggestions: parent.enableSuggestions,
+                    maxLines: parent.maxLines,
+                    minLines: parent.minLines,
+                    expands: parent.expands,
+                    maxLength: parent.maxLength,
+                    maxLengthEnforcement: parent.maxLengthEnforcement,
+                    onChanged: (value) {
+                      field.didChange(value);
+                      parent.onChange?.call(value);
+                    },
+                    onEditingComplete: parent.onEditingComplete,
+                    onSubmitted: parent.onSubmit,
+                    onAppPrivateCommand: parent.onAppPrivateCommand,
+                    inputFormatters: parent.inputFormatters,
+                    enabled: parent.enabled,
+                    ignorePointers: parent.ignorePointers,
+                    keyboardAppearance: style.keyboardAppearance,
+                    scrollPadding: style.scrollPadding,
+                    dragStartBehavior: parent.dragStartBehavior,
+                    selectionControls: parent.selectionControls,
+                    scrollController: parent.scrollController,
+                    scrollPhysics: parent.scrollPhysics,
+                    autofillHints: parent.autofillHints,
+                    restorationId: parent.restorationId,
+                    scribbleEnabled: parent.scribbleEnabled,
+                    enableIMEPersonalizedLearning: parent.enableIMEPersonalizedLearning,
+                    contextMenuBuilder: parent.contextMenuBuilder,
+                    canRequestFocus: parent.canRequestFocus,
+                    spellCheckConfiguration: parent.spellCheckConfiguration,
+                    magnifierConfiguration: parent.magnifierConfiguration,
+                  ),
+                  AnimatedSwitcher(
+                    duration: style.errorStyle.animationDuration,
+                    child: switch (state.errorText) {
+                      null => const SizedBox(),
+                      final error => Padding(
+                          padding: const EdgeInsets.only(top: 7, bottom: 4),
+                          child: DefaultTextStyle.merge(
+                            style: style.errorStyle.errorTextStyle,
+                            child: Text(error),
+                          ),
+                        ),
+                    },
+                  ),
+                ],
               ),
             );
           },

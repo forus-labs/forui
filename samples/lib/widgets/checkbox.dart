@@ -65,13 +65,13 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             FTextField.email(
               hint: 'janedoe@foruslabs.com',
-              help: const Text(''),
+              description: const Text(''),
               validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
             ),
             const SizedBox(height: 4),
             FTextField.password(
               hint: '',
-              help: const Text(''),
+              description: const Text(''),
               validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
             ),
             const SizedBox(height: 4),

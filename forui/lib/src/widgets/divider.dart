@@ -5,7 +5,9 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A divider. Dividers visually separate content.
+/// A divider.
+///
+/// Dividers visually separate content.
 ///
 /// See:
 /// * https://forui.dev/docs/divider for working examples.
@@ -24,7 +26,7 @@ final class FDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     final style =
         this.style ?? (vertical ? context.theme.dividerStyles.vertical : context.theme.dividerStyles.horizontal);
-    final (height, width) = vertical ? (null, style.width) : (style.width, null);
+    final (height, width) = vertical ? (null, style.thickness) : (style.thickness, null);
 
     return Container(
       margin: style.padding,
@@ -120,25 +122,24 @@ final class FDividerStyle with Diagnosticable {
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
   final EdgeInsetsGeometry padding;
 
-  // TODO: Rename to thickness.
-  /// The width of the separating line. Defaults to 1.
+  /// The thickness of the separating line. Defaults to 1.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * `width` <= 0.0
-  /// * `width` is Nan
-  final double width;
+  /// * `thickness` <= 0.0
+  /// * `thickness` is Nan
+  final double thickness;
 
   /// Creates a [FDividerStyle].
-  FDividerStyle({required this.color, required this.padding, this.width = 1})
-      : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
+  FDividerStyle({required this.color, required this.padding, this.thickness = 1})
+      : assert(0 < thickness, 'The thickness is $thickness, but it should be in the range "0 < thickness".');
 
   /// Creates a [FDividerStyle] that inherits its properties from [colorScheme], [style], and [padding].
   FDividerStyle.inherit({
     required FColorScheme colorScheme,
     required FStyle style,
     required EdgeInsetsGeometry padding,
-  }) : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
+  }) : this(color: colorScheme.secondary, padding: padding, thickness: style.borderWidth);
 
   /// Returns a copy of this [FDividerStyle] with the given properties replaced.
   ///
@@ -155,10 +156,10 @@ final class FDividerStyle with Diagnosticable {
   /// print(copy.width); // 2
   /// ```
   @useResult
-  FDividerStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FDividerStyle(
+  FDividerStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? thickness}) => FDividerStyle(
         color: color ?? this.color,
         padding: padding ?? this.padding,
-        width: width ?? this.width,
+        thickness: thickness ?? this.thickness,
       );
 
   @override
@@ -167,7 +168,7 @@ final class FDividerStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('padding', padding))
       ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('width', width));
+      ..add(DoubleProperty('thickness', thickness));
   }
 
   @override
@@ -177,8 +178,8 @@ final class FDividerStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           color == other.color &&
           padding == other.padding &&
-          width == other.width;
+          thickness == other.thickness;
 
   @override
-  int get hashCode => color.hashCode ^ padding.hashCode ^ width.hashCode;
+  int get hashCode => color.hashCode ^ padding.hashCode ^ thickness.hashCode;
 }

@@ -1,18 +1,33 @@
 import { Tabs } from 'nextra/components';
 import { Widget } from "../../components/widget";
+import LinkBadge from "../../components/link-badge/link-badge";
+import LinkBadgeGroup from "../../components/link-badge/link-badge-group";
 
 # Card
 A card, typically with a title, subtitle, and child widget.
 
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.card/forui.widgets.card-library.html"/>
+</LinkBadgeGroup>
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='card' query={{}}/>
+      <Widget name='card' query={{}}  height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart
       FCard(
-          title: const Text('Notification'),
-          subtitle: const Text('You have 3 unread messages.'),
+        image: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(path('avatar.png')),
+              fit: BoxFit.cover,
+            ),
+          ),
+          height: 200,
+        ),
+        title: const Text('Gratitude'),
+        subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
       );
       ```
   </Tabs.Tab>

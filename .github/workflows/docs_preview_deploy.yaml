@@ -1,0 +1,85 @@
+name: Docs Preview Deploy
+on:
+  pull_request_target:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/docs_preview_deploy.yaml'
+      - 'docs/**'
+      - 'samples/**'
+
+jobs:
+  docs:
+    name: Deploy Docs
+    runs-on: ubuntu-latest
+    environment: docs-development
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      # Publish samples
+      - uses: subosito/flutter-action@v2.16.0
+        with:
+          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
+          cache: true
+      - working-directory: ./samples
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+          flutter build web
+      - uses: cloudflare/pages-action@v1
+        id: publish-samples
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }}
+          directory: ./samples/build/web
+
+      # Publish docs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/configure-pages@v5
+      - working-directory: ./docs
+        run: |
+          pnpm install
+          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.url }} pnpm run export
+      - uses: cloudflare/pages-action@v1
+        id: publish-docs
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }}
+          branch: ${{ github.event.pull_request.head.ref }}
+          directory: ./docs/out
+
+      # Create/update comment with link to preview
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
+      - uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'auto-maid[bot]'
+      - uses: chuhlomin/render-template@v1.10
+        id: render-markdown
+        with:
+          template: .github/deployment_preview_template.md
+          vars: |
+            sha: ${{ github.event.pull_request.head.sha }}
+            url: ${{ steps.publish-docs.outputs.url }}
+      - uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{ steps.render-markdown.outputs.result }}
+          edit-mode: replace

@@ -1,12 +1,14 @@
 part of 'card.dart';
 
 final class _FCardContent extends StatelessWidget {
+  final Widget? image;
   final Widget? title;
   final Widget? subtitle;
   final Widget? child;
   final FCardContentStyle? style;
 
   const _FCardContent({
+    this.image,
     this.title,
     this.subtitle,
     this.child,
@@ -22,23 +24,33 @@ final class _FCardContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (image != null)
+            ClipRRect(
+              borderRadius: context.theme.style.borderRadius,
+              child: image,
+            ),
+          if ((title != null || subtitle != null || child != null) && image != null) const SizedBox(height: 10),
           if (title != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 2),
-              child: DefaultTextStyle.merge(
-                style: style.titleTextStyle,
-                child: title!,
+            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+            merge(
+              textHeightBehavior: const TextHeightBehavior(
+                applyHeightToFirstAscent: false,
+                applyHeightToLastDescent: false,
               ),
+              style: style.titleTextStyle,
+              child: title!,
             ),
           if (subtitle != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 2),
-              child: DefaultTextStyle.merge(
-                style: style.subtitleTextStyle,
-                child: subtitle!,
+            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+            merge(
+              textHeightBehavior: const TextHeightBehavior(
+                applyHeightToFirstAscent: false,
+                applyHeightToLastDescent: false,
               ),
+              style: style.subtitleTextStyle,
+              child: subtitle!,
             ),
-          if (title != null && subtitle != null) const SizedBox(height: 8),
+          if (title != null && subtitle != null && image == null) const SizedBox(height: 8),
           if (child != null) child!,
         ],
       ),
@@ -48,7 +60,9 @@ final class _FCardContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('image', image));
   }
 }
 
@@ -60,7 +74,7 @@ final class FCardContentStyle with Diagnosticable {
   /// The subtitle's [TextStyle].
   final TextStyle subtitleTextStyle;
 
-  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 16)`.
+  /// The padding. Defaults to `EdgeInsets.all(16)`.
   final EdgeInsets padding;
 
   /// Creates a [FCardContentStyle].
@@ -78,7 +92,7 @@ final class FCardContentStyle with Diagnosticable {
           height: 1.5,
         ),
         subtitleTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground),
-        padding = const EdgeInsets.fromLTRB(16, 12, 16, 16);
+        padding = const EdgeInsets.all(16);
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
   ///
