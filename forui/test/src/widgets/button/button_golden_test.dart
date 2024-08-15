@@ -190,5 +190,3 @@ void main() {
     }
   });
 }
-
-//flutter test --update-goldens /Users/somyemahajan/Projects/forui/forui/test/src/widgets/button/button_golden_test.dart

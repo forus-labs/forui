@@ -215,7 +215,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   /// The icon's style.
   final FButtonIconStyle icon;
 
-  /// The icon-content's style
+  /// The icon content's style.
   final FButtonIconContentStyle iconContent;
 
   /// Creates a [FButtonCustomStyle].
@@ -268,10 +268,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
       ..add(DiagnosticsProperty('content', content))
       ..add(DiagnosticsProperty('icon', icon))
-      ..add(
-        DiagnosticsProperty<FButtonIconContentStyle>(
-            'iconContent', iconContent),
-      );
+      ..add(DiagnosticsProperty('iconContent', iconContent));
   }
 
   @override
