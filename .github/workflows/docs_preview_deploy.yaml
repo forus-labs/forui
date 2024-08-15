@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     environment: docs-development
     steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
           token: ${{ steps.generate-token.outputs.token }}
@@ -59,11 +64,6 @@ jobs:
           directory: ./docs/out
 
       # Create/update comment with link to preview
-      - uses: tibdex/github-app-token@v2
-        id: generate-token
-        with:
-          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
-          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
       - uses: peter-evans/find-comment@v3
         id: find-comment
         with:
