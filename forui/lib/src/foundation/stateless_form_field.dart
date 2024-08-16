@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 /// A stateless single form field.
@@ -53,6 +54,7 @@ abstract class FStatelessFormField<T> extends StatelessWidget {
   ///  * [RestorationManager], which explains how state restoration works in Flutter.
   final String? restorationId;
 
+  /// Creates a [FStatelessFormField].
   const FStatelessFormField({
     required this.initialValue,
     this.onSave,
@@ -76,6 +78,7 @@ abstract class FStatelessFormField<T> extends StatelessWidget {
         builder: (state) => builder(context, state),
       );
 
+  /// The builder for the [FormField].
   Widget builder(BuildContext context, FormFieldState<T> state);
 
   @override

@@ -116,6 +116,7 @@ final class FLabel extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('axis', axis))
       ..add(EnumProperty('state', state));
   }

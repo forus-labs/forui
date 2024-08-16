@@ -12,7 +12,7 @@ void main() {
   group('FLabel', () {
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final state in FLabelState.values) {
-        testWidgets('$name horizontal with ${state}', (tester) async {
+        testWidgets('$name horizontal with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
@@ -20,11 +20,11 @@ void main() {
                 width: 300,
                 child: FLabel(
                   axis: Axis.horizontal,
-                  label: Text('Email'),
-                  description: Text('Enter your email address.'),
-                  error: Text('Please enter a valid email address.'),
+                  label: const Text('Email'),
+                  description: const Text('Enter your email address.'),
+                  error: const Text('Please enter a valid email address.'),
                   state: state,
-                  child: DecoratedBox(
+                  child: const DecoratedBox(
                     decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                     child: SizedBox(width: 16, height: 16),
                   ),
@@ -35,23 +35,23 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('label/$name-horizontal-${state}.png'),
+            matchesGoldenFile('label/$name-horizontal-$state.png'),
           );
         });
       }
 
       for (final state in FLabelState.values) {
-        testWidgets('$name vertical with ${state}', (tester) async {
+        testWidgets('$name vertical with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
               child: FLabel(
                 axis: Axis.vertical,
-                label: Text('Email'),
-                description: Text('Enter your email address.'),
-                error: Text('Please enter a valid email address.'),
+                label: const Text('Email'),
+                description: const Text('Enter your email address.'),
+                error: const Text('Please enter a valid email address.'),
                 state: state,
-                child: DecoratedBox(
+                child: const DecoratedBox(
                   decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                   child: SizedBox(width: 200, height: 30),
                 ),
@@ -61,7 +61,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('label/$name-vertical-${state}.png'),
+            matchesGoldenFile('label/$name-vertical-$state.png'),
           );
         });
       }

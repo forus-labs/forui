@@ -21,7 +21,7 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$name with ${enabled ? 'enabled' : 'disabled'}, ${initialValue.toString() + ' value'} & ${error ? 'with error' : 'without error'}',
+            '$name with ${enabled ? 'enabled' : 'disabled'}, ${'$initialValue value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -43,7 +43,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'check-box/$name-${enabled ? 'enabled' : 'disabled'}-${initialValue}${error ? '-error' : ''}.png',
+              'check-box/$name-${enabled ? 'enabled' : 'disabled'}-$initialValue${error ? '-error' : ''}.png',
             ),
           );
         });
@@ -62,7 +62,7 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${initialValue.toString() + ' value'} & ${error ? 'with error' : 'without error'}',
+            '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${'$initialValue value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -84,7 +84,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'check-box/$name-label-${enabled ? 'enabled' : 'disabled'}-${initialValue}${error ? '-error' : ''}.png',
+              'check-box/$name-label-${enabled ? 'enabled' : 'disabled'}-$initialValue${error ? '-error' : ''}.png',
             ),
           );
         });
