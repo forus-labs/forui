@@ -24,10 +24,7 @@ class FButtonStyles with Diagnosticable {
 
   /// Creates a [FButtonCustomStyle] that inherits its properties from the provided [colorScheme], [typography], and
   /// [style].
-  FButtonStyles.inherit(
-      {required FColorScheme colorScheme,
-      required FTypography typography,
-      required FStyle style})
+  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -158,9 +155,5 @@ class FButtonStyles with Diagnosticable {
           outline == other.outline;
 
   @override
-  int get hashCode =>
-      primary.hashCode ^
-      secondary.hashCode ^
-      destructive.hashCode ^
-      outline.hashCode;
+  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outline.hashCode;
 }
