@@ -69,8 +69,7 @@ abstract class FStatelessFormField<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FormField<T>(
         onSaved: onSave,
-        forceErrorText: forceErrorText,
-        validator: validator,
+        validator: forceErrorText == null ? validator : (_) => forceErrorText,
         initialValue: initialValue,
         enabled: enabled,
         autovalidateMode: autovalidateMode,
