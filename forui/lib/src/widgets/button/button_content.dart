@@ -59,7 +59,7 @@ class FButtonIconContentStyle with Diagnosticable {
   final EdgeInsets padding;
 
   /// Creates a [FButtonIconContentStyle].
-  FButtonIconContentStyle({
+  const FButtonIconContentStyle({
     this.padding = const EdgeInsets.symmetric(
       horizontal: 16,
       vertical: 12.5,

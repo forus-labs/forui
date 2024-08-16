@@ -46,7 +46,6 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.primaryForeground,
             disabledColor: colorScheme.primaryForeground.withOpacity(0.5),
           ),
-          iconContent: FButtonIconContentStyle(),
         ),
         secondary = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -66,7 +65,6 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.secondaryForeground,
             disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
-          iconContent: FButtonIconContentStyle(),
         ),
         destructive = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -86,7 +84,6 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.destructiveForeground,
             disabledColor: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
-          iconContent: FButtonIconContentStyle(),
         ),
         outline = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
@@ -110,7 +107,6 @@ class FButtonStyles with Diagnosticable {
             enabledColor: colorScheme.secondaryForeground,
             disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
-          iconContent: FButtonIconContentStyle(),
         );
 
   /// Returns a copy of this [FButtonStyles] with the given properties replaced.
