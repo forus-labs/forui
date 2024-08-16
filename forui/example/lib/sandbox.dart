@@ -22,8 +22,8 @@ class _SandboxState extends State<Sandbox> {
           FCheckbox(
             label: Text('Remember me'),
             description: Text('Remember me on this device.'),
-            // forceErrorText: 'Please check the box to continue.',
-            // initialValue: true,
+            forceErrorText: 'Please check the box to continue.',
+            initialValue: true,
             enabled: false,
           ),
           SizedBox(height: 20),

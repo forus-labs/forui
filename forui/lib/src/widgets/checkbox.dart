@@ -57,7 +57,7 @@ class FCheckbox extends FStatelessFormField<bool> {
     super.forceErrorText,
     super.validator,
     super.initialValue = false,
-    super.enabled = false,
+    super.enabled = true,
     super.autovalidateMode,
     super.restorationId,
     super.key,
@@ -117,8 +117,8 @@ class FCheckbox extends FStatelessFormField<bool> {
                   ),
                   child: value
                       ? FAssets.icons.check(
-                    height: 15,
-                    width: 15,
+                    height: 14,
+                    width: 14,
                     colorFilter: ColorFilter.mode(
                       stateStyle.iconColor,
                       BlendMode.srcIn,
