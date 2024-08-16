@@ -34,11 +34,11 @@ final class FFormFieldStyle with Diagnosticable {
         ),
         disabledStyle = FFormFieldNormalStyle.inherit(
           labelColor: colorScheme.primary.withOpacity(0.7),
-          descriptionColor: colorScheme.border.withOpacity(0.7),
+          descriptionColor: colorScheme.mutedForeground.withOpacity(0.7),
           typography: typography,
         ),
         errorStyle = FFormFieldErrorStyle.inherit(
-          labelColor: colorScheme.primary,
+          labelColor: colorScheme.error,
           descriptionColor: colorScheme.mutedForeground,
           errorColor: colorScheme.error,
           typography: typography,

@@ -11,6 +11,8 @@
 
 * Fix `FTextField` error message replacing the description text.
 
+* Fix `FCheckboxStyle.inherit` icon color inheriting from the wrong color.
+
 
 ## 0.5.0
 

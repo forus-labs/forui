@@ -18,11 +18,37 @@ class _SandboxState extends State<Sandbox> {
   @override
   Widget build(BuildContext context) => ListView(
         padding: EdgeInsets.zero,
-        children: [
+        children: const [
           FCheckbox(
             label: Text('Remember me'),
             description: Text('Remember me on this device.'),
-            initialValue: true,
+            // forceErrorText: 'Please check the box to continue.',
+            // initialValue: true,
+            enabled: false,
+          ),
+          SizedBox(height: 20),
+          FLabel(
+            axis: Axis.vertical,
+            label: Text('Email'),
+            description: Text('Enter your email address.'),
+            error: Text('Please enter a valid email address.'),
+            state: FLabelState.error,
+            child: DecoratedBox(
+              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+              child: SizedBox(width: 200, height: 30),
+            ),
+          ),
+          SizedBox(height: 20),
+          FLabel(
+            axis: Axis.horizontal,
+            label: Text('Email'),
+            description: Text('Enter your email address.'),
+            error: Text('Please enter a valid email address.'),
+            state: FLabelState.error,
+            child: DecoratedBox(
+              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+              child: SizedBox(width: 16, height: 16),
+            ),
           ),
         ],
       );

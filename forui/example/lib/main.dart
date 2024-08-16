@@ -24,7 +24,7 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  int index = 1;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) => MaterialApp(

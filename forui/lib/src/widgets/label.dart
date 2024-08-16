@@ -266,6 +266,7 @@ class _FVerticalLabel extends StatelessWidget {
             padding: style.labelPadding,
             child: DefaultTextStyle(
               style: stateStyle.labelTextStyle,
+              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
               child: label!,
             ),
           ),
@@ -278,6 +279,7 @@ class _FVerticalLabel extends StatelessWidget {
             padding: style.descriptionPadding,
             child: DefaultTextStyle(
               style: stateStyle.descriptionTextStyle,
+              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
               child: description!,
             ),
           ),
@@ -286,6 +288,7 @@ class _FVerticalLabel extends StatelessWidget {
             padding: style.errorPadding,
             child: DefaultTextStyle(
               style: style.formFieldStyle.errorStyle.errorTextStyle,
+              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
               child: error!,
             ),
           ),
@@ -320,9 +323,16 @@ final class FLabelStyles with Diagnosticable {
   FLabelStyles.inherit({required FStyle style})
       : horizontal = FLabelStyle(
           formFieldStyle: style.formFieldStyle,
-          childPadding: const EdgeInsets.only(right: 10),
+          childPadding: const EdgeInsets.only(right: 8),
+          descriptionPadding: const EdgeInsets.only(top: 2),
+          errorPadding: const EdgeInsets.only(top: 2),
         ),
-        vertical = FLabelStyle(formFieldStyle: style.formFieldStyle);
+        vertical = FLabelStyle(
+          formFieldStyle: style.formFieldStyle,
+          labelPadding: const EdgeInsets.only(bottom: 5),
+          descriptionPadding: const EdgeInsets.only(top: 5),
+          errorPadding: const EdgeInsets.only(top: 5),
+        );
 
   /// Returns a copy of this [FLabelStyles] with the given properties replaced.
   ///
