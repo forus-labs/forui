@@ -57,5 +57,41 @@ void main() {
         }
       }
     }
+
+    // testWidgets('expanded', (tester) async {
+    //   await tester.pumpWidget(
+    //     TestScaffold(
+    //       data: FThemes.zinc.light,
+    //       child: DecoratedBox(
+    //         decoration: BoxDecoration(
+    //           border: Border.all(
+    //             color: theme.colorScheme.border,
+    //           ),
+    //           borderRadius: BorderRadius.circular(8),
+    //         ),
+    //         child: FResizable(
+    //           axis: Axis.horizontal,
+    //           divider: divider,
+    //           children: [
+    //             FResizableRegion(
+    //               initialExtent: 150,
+    //               builder: (_, __, child) => child!,
+    //               child: const Align(
+    //                 child: Text('A'),
+    //               ),
+    //             ),
+    //             FResizableRegion(
+    //               initialExtent: 300,
+    //               builder: (_, __, child) => child!,
+    //               child: const Align(
+    //                 child: Text('B'),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   );
+    // });
   });
 }
