@@ -23,7 +23,7 @@ class FCheckbox extends FStatelessFormField<bool> {
   /// The label displayed next to the checkbox.
   final Widget? label;
 
-  /// The description displayed below the label.
+  /// The description displayed below the [label].
   final Widget? description;
 
   /// The semantic label used by accessibility frameworks.
