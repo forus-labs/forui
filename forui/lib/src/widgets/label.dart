@@ -306,7 +306,7 @@ class _FVerticalLabel extends StatelessWidget {
   }
 }
 
-/// The [FLabel]'s styles containing [FLabelStyle].
+/// The [FLabel]'s styles.
 final class FLabelStyles with Diagnosticable {
   /// The horizontal label's style.
   final FLabelStyle horizontal;
@@ -336,18 +336,6 @@ final class FLabelStyles with Diagnosticable {
         );
 
   /// Returns a copy of this [FLabelStyles] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FLabelStyles(
-  ///   horizontal: ...,
-  ///   vertical: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(vertical: ...);
-  ///
-  /// print(style.horizontal == copy.horizontal); // true
-  /// print(style.vertical == copy.vertical); // false
-  /// ```
   @useResult
   FLabelStyles copyWith({
     FLabelStyle? horizontal,
@@ -405,19 +393,6 @@ final class FLabelStyle with Diagnosticable {
   });
 
   /// Returns a copy of this [FLabelStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FLabelStyle(
-  ///   formFieldStyle: ...,
-  ///   labelPadding: ...,
-  ///   ...
-  /// );
-  ///
-  /// final copy = style.copyWith(labelPadding: ...);
-  ///
-  /// print(style.formFieldStyle == copy.formFieldStyle); // true
-  /// print(style.labelPadding == copy.labelPadding); // false
-  /// ```
   @useResult
   FLabelStyle copyWith({
     FFormFieldStyle? formFieldStyle,
