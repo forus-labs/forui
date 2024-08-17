@@ -136,6 +136,56 @@ void main() {
             matchesGoldenFile('button/$name-$variant-disabled-raw-button.png'),
           );
         });
+
+        testWidgets('$name with enabled icon', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton.icon(
+                  onPress: () {},
+                  style: variant,
+                  child: FButtonIcon(
+                    icon: FAssets.icons.chevronRight,
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'button/$name-$variant-icon-enabled-button.png',
+            ),
+          );
+        });
+
+        testWidgets('$name with disabled icon', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton.icon(
+                  onPress: null,
+                  style: variant,
+                  child: FButtonIcon(
+                    icon: FAssets.icons.chevronRight,
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'button/$name-$variant-icon-disabled-button.png',
+            ),
+          );
+        });
       }
     }
   });
