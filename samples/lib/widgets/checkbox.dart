@@ -46,17 +46,17 @@ class RawCheckboxPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 300),
-        child: FCheckbox(
-          onChange: (value) {}, // Do something.
-          enabled: enabled,
-        ),
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 300),
+            child: FCheckbox(
+              onChange: (value) {}, // Do something.
+              enabled: enabled,
+            ),
+          ),
+        ],
+      );
 }
 
 @RoutePage()

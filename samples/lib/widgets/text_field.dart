@@ -51,13 +51,13 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
 
   @override
   Widget build(BuildContext context) => FTextField(
-    controller: _controller,
-    enabled: widget.enabled,
-    label: const Text('Email'),
-    hint: 'john@doe.com',
-    description: const Text('Please enter your email.'),
-    maxLines: 1,
-  );
+        controller: _controller,
+        enabled: widget.enabled,
+        label: const Text('Email'),
+        hint: 'john@doe.com',
+        description: const Text('Please enter your email.'),
+        maxLines: 1,
+      );
 }
 
 @RoutePage()
