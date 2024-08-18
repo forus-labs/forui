@@ -5,8 +5,7 @@ import 'package:forui/src/widgets/resizable/resizable.dart';
 
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
 ///
-/// See:
-/// * https://forui.dev/docs/resizable for working examples.
+/// See https://forui.dev/docs/resizable for working examples.
 class FResizableRegion extends StatelessWidget {
   /// The initial extent along the resizable axis, in logical pixels.
   ///
@@ -18,8 +17,8 @@ class FResizableRegion extends StatelessWidget {
 
   /// The minimum extent along the resizable axis, in logical pixels.
   ///
-  /// The effective minimum size is either the given minimum size or [FResizable.hitRegionExtent], whichever is larger.
-  /// Defaults to [FResizable.hitRegionExtent] if not given.
+  /// The effective minimum extent is either the given minimum extent or [FResizable.hitRegionExtent], whichever is
+  /// larger. Defaults to [FResizable.hitRegionExtent] if not given.
   final double? minExtent;
 
   /// The builder used to create a child to display in this region.
@@ -38,14 +37,8 @@ class FResizableRegion extends StatelessWidget {
     this.minExtent,
     this.child,
     super.key,
-  })  : assert(
-          0 < initialExtent,
-          'The initial extent should be positive, but it is $initialExtent.',
-        ),
-        assert(
-          minExtent == null || 0 < minExtent,
-          'The min extent should be positive, but it is $minExtent.',
-        ),
+  })  : assert(0 < initialExtent, 'The initial extent should be positive, but it is $initialExtent.'),
+        assert(minExtent == null || 0 < minExtent, 'The min extent should be positive, but it is $minExtent.'),
         assert(
           minExtent == null || minExtent <= initialExtent,
           'The initial extent, $initialExtent is less than the min extent, $minExtent.',
@@ -56,7 +49,6 @@ class FResizableRegion extends StatelessWidget {
     final InheritedData(:axis, :data) = InheritedData.of(context);
     return Semantics(
       container: true,
-      enabled: true,
       child: GestureDetector(
         child: switch (axis) {
           Axis.horizontal => SizedBox(
@@ -78,7 +70,6 @@ class FResizableRegion extends StatelessWidget {
     properties
       ..add(DoubleProperty('initialSize', initialExtent))
       ..add(DoubleProperty('minSize', minExtent))
-      ..add(DiagnosticsProperty('builder', builder))
-      ..add(DiagnosticsProperty('child', child));
+      ..add(DiagnosticsProperty('builder', builder));
   }
 }
