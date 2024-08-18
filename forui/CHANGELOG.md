@@ -1,42 +1,40 @@
-## Next
+## 0.5.0 (Next)
 
 ### Additions
 
+* Add `FButton.icon(...)`.
+
+* Add `FFormFieldStyle`.
+
+* Add `FResizable.semanticFormatterCallback`.
+
 * Add `FLabel`.
+
 * Add label and description to `FCheckbox`.
 
 ### Changes
 
-### Fixes
-
-* Fix `FTextField` error message replacing the description text.
-
-* Fix `FCheckboxStyle.inherit(...)` icon color inheriting from the wrong color.
-
-
-## 0.5.0
-
-### Additions
-
-* Add `FFormFieldStyle`.
-
-### Changes
+* Change `FResizable` to resize by `FResizable.resizePercentage` when using a keyboard.
 
 * Change `FTextFieldStyle` to inherit from `FFormFieldStyle`.
 
 * Change `FTextField` to display error under description instead of replacing it.
 
-* **Breaking:** Rename `FDivider.width` to `FDivder.thickness`.
-
-* **Breaking:** Remove `FTextField.error`.
-
 * **Breaking:** Change `FTextField.help` to `FTextField.description`.
 
 * **Breaking:** Change how `FTextFieldStyle` stores various state-dependent styles.
 
+* **Breaking:** Remove `FTextField.error`.
+
 ### Fixes
 
+* Fix `FResizable` not rendering properly in an expanded widget when its crossAxisExtent is null.
+
 * Fix `FTextField` not changing error text color when an error occurs.
+
+* Fix `FTextField` error message replacing the description text.
+
+* Fix `FCheckboxStyle.inherit(...)` icon color inheriting from the wrong color.
 
 
 ## 0.4.0

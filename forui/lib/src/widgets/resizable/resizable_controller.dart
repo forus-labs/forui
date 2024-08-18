@@ -44,7 +44,7 @@ abstract interface class FResizableController extends ChangeNotifier {
     void Function(List<FResizableRegionData> resized)? onResizeEnd,
   }) = _ResizableController;
 
-  /// Creates a [FResizableController] that cascades shrinking of a region below their minimum sizes to its neighbours.
+  /// Creates a [FResizableController] that cascades shrinking of a region below their minimum extents to its neighbours.
   ///
   /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
   /// prefer [onResizeEnd], which is called only after the regions have bee resized.
@@ -72,10 +72,7 @@ final class _ResizableController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(List<FResizableRegionData> resized)? onResizeEnd;
 
-  _ResizableController({
-    this.onResizeUpdate,
-    this.onResizeEnd,
-  }) : super._();
+  _ResizableController({this.onResizeUpdate, this.onResizeEnd}) : super._();
 
   @override
   bool update(int left, int right, double delta) {

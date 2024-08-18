@@ -6,7 +6,7 @@ on:
     paths:
       - .github/workflows/forui_build.yaml
       - forui/**
-  pull_request_target:
+  pull_request:
     paths:
       - forui/**
 

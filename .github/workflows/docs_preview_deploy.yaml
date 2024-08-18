@@ -13,9 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: docs-development
     steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
 
       # Publish samples
       - uses: subosito/flutter-action@v2.16.0
@@ -28,7 +35,7 @@ jobs:
           flutter pub run build_runner build --delete-conflicting-outputs
           flutter build web
       - uses: cloudflare/pages-action@v1
-        id: publish_samples
+        id: publish-samples
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
@@ -46,37 +53,33 @@ jobs:
       - working-directory: ./docs
         run: |
           pnpm install
-          NEXT_PUBLIC_DEMO_URL=${{ steps.publish_samples.outputs.url }} pnpm run export
+          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.url }} pnpm run export
       - uses: cloudflare/pages-action@v1
-        id: publish_docs
+        id: publish-docs
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }}
+          branch: ${{ github.event.pull_request.head.ref }}
           directory: ./docs/out
 
       # Create/update comment with link to preview
-      - uses: tibdex/github-app-token@v2
-        id: generate_token
-        with:
-          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
-          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
       - uses: peter-evans/find-comment@v3
-        id: find_comment
+        id: find-comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: 'auto-maid[bot]'
       - uses: chuhlomin/render-template@v1.10
-        id: render_markdown
+        id: render-markdown
         with:
           template: .github/deployment_preview_template.md
           vars: |
             sha: ${{ github.event.pull_request.head.sha }}
-            url: ${{ steps.publish_docs.outputs.url }}
+            url: ${{ steps.publish-docs.outputs.url }}
       - uses: peter-evans/create-or-update-comment@v4
         with:
-          token: ${{ steps.generate_token.outputs.token }}
-          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          token: ${{ steps.generate-token.outputs.token }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
-          body: ${{ steps.render_markdown.outputs.result }}
+          body: ${{ steps.render-markdown.outputs.result }}
           edit-mode: replace

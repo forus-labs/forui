@@ -57,5 +57,49 @@ void main() {
         }
       }
     }
+
+    for (final axis in Axis.values) {
+      testWidgets('expanded - $axis', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            data: FThemes.zinc.light,
+            child: FScaffold(
+              content: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: FThemes.zinc.light.colorScheme.border,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: FResizable(
+                  axis: axis,
+                  children: [
+                    FResizableRegion(
+                      initialExtent: 150,
+                      builder: (_, __, child) => child!,
+                      child: const Align(
+                        child: Text('A'),
+                      ),
+                    ),
+                    FResizableRegion(
+                      initialExtent: 300,
+                      builder: (_, __, child) => child!,
+                      child: const Align(
+                        child: Text('B'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(
+          find.byType(FResizable),
+          matchesGoldenFile('resizable/expanded-$axis.png'),
+        );
+      });
+    }
   });
 }

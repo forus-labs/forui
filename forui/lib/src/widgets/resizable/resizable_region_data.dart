@@ -15,7 +15,7 @@ final class FResizableRegionData with Diagnosticable {
   /// This region's minimum and maximum extent along the main resizable axis, in logical pixels.
   ///
   /// The minimum extent is determined by [FResizableRegion.minExtent].
-  /// The maximum extent is determined by the [FResizable]'s size - the minimum size of all regions.
+  /// The maximum extent is determined by the [FResizable]'s total extent - the minimum extent of all regions.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
@@ -23,15 +23,15 @@ final class FResizableRegionData with Diagnosticable {
   /// * max <= min
   final ({double min, double current, double max, double total}) extent;
 
-  /// This region's current minimum and maximum offset along the main resizable axis., in logical pixels
+  /// This region's current minimum and maximum offset along the main resizable axis, in logical pixels
   ///
-  /// Both offsets are relative to the top/left side of the parent [FResizable], or, in other words, relative to 0.
+  /// Both offsets are relative to the top/left side of the parent [FResizable].
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * min < 0
   /// * max <= min
-  /// * `extent.total` <= max
+  /// * `extent.total` <= `offset.max`
   final ({double min, double max}) offset;
 
   /// Creates a [FResizableRegionData].
@@ -62,30 +62,17 @@ final class FResizableRegionData with Diagnosticable {
         extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
 
   /// Returns a copy of this [FResizableRegionData] with the given fields replaced by the new values.
-  ///
-  /// ```dart
-  /// final data = FResizableData(
-  ///   index: 1,
-  ///   selected: false,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = data.copyWith(selected: true);
-  /// print(copy.index); // 1
-  /// print(copy.selected); // true
-  /// ```
   @useResult
   FResizableRegionData copyWith({
     int? index,
     double? minExtent,
     double? maxExtent,
-    double? totalExtent,
     double? minOffset,
     double? maxOffset,
   }) =>
       FResizableRegionData(
         index: index ?? this.index,
-        extent: (min: minExtent ?? extent.min, max: maxExtent ?? extent.max, total: totalExtent ?? extent.total),
+        extent: (min: minExtent ?? extent.min, max: maxExtent ?? extent.max, total: extent.total),
         offset: (min: minOffset ?? offset.min, max: maxOffset ?? offset.max),
       );
 

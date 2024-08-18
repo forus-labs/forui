@@ -52,3 +52,18 @@ class ButtonIconPage extends SampleScaffold {
         ),
       );
 }
+
+@RoutePage()
+class ButtonOnlyIconPage extends SampleScaffold {
+  ButtonOnlyIconPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => IntrinsicWidth(
+        child: FButton.icon(
+          child: FButtonIcon(icon: FAssets.icons.chevronRight),
+          onPress: () {},
+        ),
+      );
+}
