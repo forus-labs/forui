@@ -12,7 +12,7 @@ import 'divider_test.mocks.dart';
 void main() {
   final style = FResizableDividerStyle(
     color: const Color(0xFF000000),
-    thickness: 2,
+    width: 2,
     thumbStyle: FResizableDividerThumbStyle(
       backgroundColor: const Color(0xFF000000),
       foregroundColor: const Color(0xFF000000),
