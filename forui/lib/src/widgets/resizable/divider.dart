@@ -115,7 +115,7 @@ class HorizontalDivider extends Divider {
                 color: style.color,
                 child: SizedBox(
                   height: crossAxisExtent,
-                  width: style.thickness,
+                  width: style.width,
                 ),
               ),
             if (type == FResizableDivider.dividerWithThumb)
@@ -172,7 +172,7 @@ class VerticalDivider extends Divider {
               ColoredBox(
                 color: style.color,
                 child: SizedBox(
-                  height: style.thickness,
+                  height: style.width,
                   width: crossAxisExtent,
                 ),
               ),
@@ -247,11 +247,11 @@ final class FResizableDividerStyle with Diagnosticable {
   /// The divider's color.
   final Color color;
 
-  /// The divider's thickness. Defaults to `0.5`.
+  /// The divider's width (thickness). Defaults to `0.5`.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [thickness] <= 0.
-  final double thickness;
+  /// Throws [AssertionError] if [width] <= 0.
+  final double width;
 
   /// The divider thumb's style.
   final FResizableDividerThumbStyle thumbStyle;
@@ -260,31 +260,19 @@ final class FResizableDividerStyle with Diagnosticable {
   FResizableDividerStyle({
     required this.color,
     required this.thumbStyle,
-    this.thickness = 0.5,
-  }) : assert(0 < thickness, 'Thickness should be positive, but is $thickness.');
+    this.width = 0.5,
+  }) : assert(0 < width, 'Thickness should be positive, but is $width.');
 
   /// Returns a copy of this but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FResizableDividerStyle(
-  ///   color: ...,
-  ///   thickness: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(thickness: ...);
-  ///
-  /// print(style.color == copy.color); // true
-  /// print(style.thickness == copy.thickness); // false
-  /// ```
   @useResult
   FResizableDividerStyle copyWith({
     Color? color,
-    double? thickness,
+    double? width,
     FResizableDividerThumbStyle? thumbStyle,
   }) =>
       FResizableDividerStyle(
         color: color ?? this.color,
-        thickness: thickness ?? this.thickness,
+        width: width ?? this.width,
         thumbStyle: thumbStyle ?? this.thumbStyle,
       );
 
@@ -293,7 +281,7 @@ final class FResizableDividerStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('thickness', thickness))
+      ..add(DoubleProperty('width', width))
       ..add(DiagnosticsProperty('thumbStyle', thumbStyle));
   }
 
@@ -303,11 +291,11 @@ final class FResizableDividerStyle with Diagnosticable {
       other is FResizableDividerStyle &&
           runtimeType == other.runtimeType &&
           color == other.color &&
-          thickness == other.thickness &&
+          width == other.width &&
           thumbStyle == other.thumbStyle;
 
   @override
-  int get hashCode => color.hashCode ^ thickness.hashCode ^ thumbStyle.hashCode;
+  int get hashCode => color.hashCode ^ width.hashCode ^ thumbStyle.hashCode;
 }
 
 /// The style of the dividers' thumbs between [FResizableRegion]s.

@@ -71,13 +71,13 @@ constitute a breaking change.
 ✅ Prefer this:
 ```dart
 class Foo extends StatelessWidget {
-  final int _someKnobWeDontKnowIfUsefulToUsers = ...;
+  final int _someKnobWeDontKnowIfUsefulToUsers = 42;
   
   const Foo() {}
   
   @override
   void build(BuildContext context) {
-    ...
+    return Placeholder();
   }
 }
 ```
@@ -85,13 +85,13 @@ class Foo extends StatelessWidget {
 ❌ Instead of:
 ```dart
 class Foo extends StatelessWidget {
-  final int someKnobWeDontKnowIfUsefulToUsers = ...;
+  final int someKnobWeDontKnowIfUsefulToUsers = 42;
   
   const Foo(this.someKnobWeDontKnowIfUsefulToUsers) {}
   
   @override
   void build(BuildContext context) {
-    ...
+    return Placeholder();
   }
 }
 ```
@@ -102,6 +102,10 @@ class Foo extends StatelessWidget {
 Subclasses can interact with Forui in unforeseen ways, and cause potential issues. It is not breaking to initially mark
 classes as `final`, and subsequently unmark it. The inverse isn't true. Favor composition over inheritance.
 
+
+### Minimize dependency on Cupertino/Material
+
+Cupertino and Material specific widgets should be avoided when possible.
 
 ### Minimize dependency on 3rd party packages
 
@@ -155,12 +159,15 @@ They should:
 4. override [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html).
 5. implement `operator ==` and `hashCode`.
 
+Lastly, the order of the fields and methods should be as shown above.
 
 ## Writing Golden Tests
 
 Golden images are generated in the `test/golden` directory instead of relative to the test file. 
 
 Only the `Inter` font is loaded by default.
+
+### Configuring Golden Test Threshold
 
 By default, `matchesGoldenFile(...)` has a 0.5% threshold. In other words, images that differ by 0.5% or less will be 
 considered a match. Due to how different platforms render the images differently, this threshold may need to be adjusted.
