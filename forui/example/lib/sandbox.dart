@@ -41,9 +41,9 @@ class _SandboxState extends State<Sandbox> {
           SizedBox(height: 20),
           FLabel(
             axis: Axis.horizontal,
-            label: Text('Email'),
-            description: Text('Enter your email address.'),
-            error: Text('Please enter a valid email address.'),
+            label: Text('Accept terms and conditions'),
+            description: Text('You agree to our terms and conditions.'),
+            error: Text('Please accept the terms and conditions.'),
             state: FLabelState.error,
             child: DecoratedBox(
               decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),

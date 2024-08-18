@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/stateless_form_field.dart';
+import 'package:forui/src/foundation/form_field.dart';
 
 import 'package:meta/meta.dart';
 
@@ -16,7 +16,7 @@ import 'package:forui/forui.dart';
 /// See:
 /// * https://forui.dev/docs/checkbox for working examples.
 /// * [FCheckboxStyle] for customizing a checkbox's appearance.
-class FCheckbox extends FStatelessFormField<bool> {
+class FCheckbox extends FFormField<bool> {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 

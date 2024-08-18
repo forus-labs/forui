@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:meta/meta.dart';
 
 /// A stateless single form field.
 ///
 /// This widget is meant to be extended by other form field widgets.
-abstract class FStatelessFormField<T> extends StatelessWidget {
+@internal
+abstract class FFormField<T> extends StatelessWidget {
   /// An optional method to call with the final value when the form is saved via [FormState.save].
   final FormFieldSetter<T>? onSave;
 
@@ -54,8 +56,8 @@ abstract class FStatelessFormField<T> extends StatelessWidget {
   ///  * [RestorationManager], which explains how state restoration works in Flutter.
   final String? restorationId;
 
-  /// Creates a [FStatelessFormField].
-  const FStatelessFormField({
+  /// Creates a [FFormField].
+  const FFormField({
     required this.initialValue,
     this.onSave,
     this.forceErrorText,

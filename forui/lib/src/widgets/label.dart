@@ -139,38 +139,6 @@ final class _FHorizontalLabel extends StatelessWidget {
     required this.child,
   });
 
-  Widget _buildLabelCell(FLabelStyle style, FFormFieldStateStyle stateStyle) {
-    if (label == null) {
-      return const TableCell(child: SizedBox());
-    }
-
-    return TableCell(
-      child: Padding(
-        padding: style.labelPadding,
-        child: DefaultTextStyle(
-          style: stateStyle.labelTextStyle,
-          child: label!,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDescriptionCell(FLabelStyle style, FFormFieldStateStyle stateStyle) {
-    if (description == null) {
-      return const TableCell(child: SizedBox());
-    }
-
-    return TableCell(
-      child: Padding(
-        padding: style.descriptionPadding,
-        child: DefaultTextStyle(
-          style: stateStyle.descriptionTextStyle,
-          child: description!,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final stateStyle = switch (state) {
@@ -195,14 +163,29 @@ final class _FHorizontalLabel extends StatelessWidget {
                 child: child,
               ),
             ),
-            if (label != null) _buildLabelCell(style, stateStyle) else _buildDescriptionCell(style, stateStyle),
+            if (label != null)
+              _buildCell(
+                padding: style.labelPadding,
+                textStyle: stateStyle.labelTextStyle,
+                child: label,
+              )
+            else
+              _buildCell(
+                padding: style.descriptionPadding,
+                textStyle: stateStyle.descriptionTextStyle,
+                child: description,
+              ),
           ],
         ),
         if (label != null && description != null)
           TableRow(
             children: [
               const TableCell(child: SizedBox()),
-              _buildDescriptionCell(style, stateStyle),
+              _buildCell(
+                padding: style.descriptionPadding,
+                textStyle: stateStyle.descriptionTextStyle,
+                child: description,
+              ),
             ],
           ),
         if (error != null && state == FLabelState.error)
@@ -221,6 +204,26 @@ final class _FHorizontalLabel extends StatelessWidget {
             ],
           ),
       ],
+    );
+  }
+
+  Widget _buildCell({
+    required EdgeInsets padding,
+    required TextStyle textStyle,
+    Widget? child,
+  }) {
+    if (child == null) {
+      return const TableCell(child: SizedBox());
+    }
+
+    return TableCell(
+      child: Padding(
+        padding: padding,
+        child: DefaultTextStyle(
+          style: textStyle,
+          child: child,
+        ),
+      ),
     );
   }
 

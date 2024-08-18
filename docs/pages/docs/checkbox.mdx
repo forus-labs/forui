@@ -18,7 +18,12 @@ For touch devices, a [switch](/docs/switch) is generally recommended over a chec
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
-        FCheckBox();
+        FCheckbox(
+          label: const Text('Accept terms and conditions'),
+          description: const Text('You agree to our terms and conditions.'),
+          semanticLabel: 'Accept terms and conditions',
+          onChange: (value) {}, // Do something.
+        );
         ```
     </Tabs.Tab>
 </Tabs>
@@ -29,6 +34,9 @@ For touch devices, a [switch](/docs/switch) is generally recommended over a chec
 
 ```dart
 FCheckbox(
+  label: const Text('Accept terms and conditions'),
+  description: const Text('You agree to our terms and conditions.'),
+  semanticLabel: 'Accept terms and conditions',
   enabled: true,
   initialValue: true,
   autofocus: true,
@@ -45,12 +53,52 @@ FCheckbox(
     <Widget name='checkbox' query={{enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2}
+    ```dart {6}
     FCheckbox(
+      label: const Text('Accept terms and conditions'),
+      description: const Text('You agree to our terms and conditions.'),
+      semanticLabel: 'Accept terms and conditions',
+      onChange: (value) {}, // Do something.
       enabled: false,
     );
     ```
   </Tabs.Tab>
+</Tabs>
+
+### Force Error
+Force an error state without using the `validator` function.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='checkbox' query={{ forceErrorText: 'Please accept the terms and conditions.' }}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {6}
+    FCheckbox(
+      label: const Text('Accept terms and conditions'),
+      description: const Text('You agree to our terms and conditions.'),
+      semanticLabel: 'Accept terms and conditions',
+      onChange: (value) {}, // Do something.
+      forceErrorText: 'Please accept the terms and conditions.',
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Without Label
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='checkbox' variant='raw' query={{ }}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FCheckbox(
+          onChange: (value) {}, // Do something.
+          enabled: enabled,
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>
 
 ### Form
@@ -60,15 +108,15 @@ FCheckbox(
     <Widget name='checkbox' variant='form' query={{}} height={550}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {37}
-    class LoginForm extends StatefulWidget {
-      const LoginForm({super.key});
+    ```dart {32-36}
+    class RegisterForm extends StatefulWidget {
+      const RegisterForm({super.key});
 
       @override
-      State<LoginForm> createState() => _LoginFormState();
+      State<RegisterForm> createState() => _RegisterFormState();
     }
 
-    class _LoginFormState extends State<LoginForm> {
+    class _RegisterFormState extends State<RegisterForm> {
       final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
       @override
@@ -78,43 +126,39 @@ FCheckbox(
 
       @override
       Widget build(BuildContext context) => Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxiAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FTextField.email(
-              hint: 'janedoe@foruslabs.com',
-              help: const Text(''),
-              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-            ),
-            const SizedBox(height: 4),
-            FTextField.password(
-              hint: '',
-              help: const Text(''),
-              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-            ),
-            const SizedBox(height: 4),
-            Row(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const FCheckbox(),
-                const SizedBox(width: 7),
-                Text('Remember password?', style: context.theme.typography.sm),
+                FTextField.email(
+                  hint: 'janedoe@foruslabs.com',
+                  validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+                ),
+                const SizedBox(height: 12),
+                FTextField.password(
+                  validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+                ),
+                const SizedBox(height: 15),
+                FCheckbox(
+                  label: const Text('Accept terms and conditions'),
+                  description: const Text('You agree to our terms and conditions.'),
+                  validator: (value) => (value ?? false) ? null : 'Please accept the terms and conditions.',
+                ),
+                const SizedBox(height: 20),
+                FButton(
+                  label: const Text('Register'),
+                  onPress: () {
+                    if (!_formKey.currentState!.validate()) {
+                      // Handle errors here.
+                      return;
+                    }
+                    // Do something.
+                  },
+                ),
               ],
             ),
-            const SizedBox(height: 30),
-            FButton(
-              label: const Text('Login'),
-              onPress: () {
-                if (!_formKey.currentState!.validate()) {
-                  // Handle errors here.
-                  return;
-                }
-              },
-            ),
-          ],
-        ),
-      );
+          );
     }
     ```
   </Tabs.Tab>
