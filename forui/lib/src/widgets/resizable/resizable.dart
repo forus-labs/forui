@@ -7,11 +7,6 @@ import 'package:sugar/sugar.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
-export 'divider.dart' hide Divider, HorizontalDivider, VerticalDivider;
-export 'resizable_controller.dart';
-export 'resizable_region.dart';
-export 'resizable_region_data.dart' hide UpdatableResizableRegionData;
-
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
 ///
 /// Each child is a [FResizableRegion] has a initial and minimum extent. Setting an initial extent less than the

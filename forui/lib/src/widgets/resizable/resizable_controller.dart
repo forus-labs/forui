@@ -31,6 +31,8 @@ abstract interface class FResizableController extends ChangeNotifier {
 
   bool _haptic = false;
 
+  FResizableController._();
+
   /// Creates a [FResizableController].
   ///
   /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
@@ -56,8 +58,6 @@ abstract interface class FResizableController extends ChangeNotifier {
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd,
   }) = _CascadeController;
-
-  FResizableController._();
 
   /// Updates the regions at the given indexes in addition to their neighbours. Returns true if haptic feedback should
   /// be performed.
