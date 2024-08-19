@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 /// A stateless single form field.
@@ -75,7 +76,8 @@ abstract class FFormField<T> extends StatelessWidget {
         validator: forceErrorText == null ? validator : (_) => forceErrorText,
         initialValue: initialValue,
         enabled: enabled,
-        autovalidateMode: forceErrorText == null ? autovalidateMode : AutovalidateMode.always, // Workaround for forceErrorText.
+        autovalidateMode:
+            forceErrorText == null ? autovalidateMode : AutovalidateMode.always, // Workaround for forceErrorText.
         restorationId: restorationId,
         builder: (state) {
           if (forceErrorText != null && !state.hasError) {

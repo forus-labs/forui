@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/form_field.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/form_field.dart';
 
 /// A checkbox control that allows the user to toggle between checked and not checked.
 ///
@@ -86,9 +86,9 @@ class FCheckbox extends FFormField<bool> {
         child: GestureDetector(
           onTap: enabled
               ? () {
-            state.didChange(!value);
-            onChange?.call(!value);
-          }
+                  state.didChange(!value);
+                  onChange?.call(!value);
+                }
               : null,
           child: FLabel(
             axis: Axis.horizontal,
@@ -117,13 +117,13 @@ class FCheckbox extends FFormField<bool> {
                   ),
                   child: value
                       ? FAssets.icons.check(
-                    height: 14,
-                    width: 14,
-                    colorFilter: ColorFilter.mode(
-                      stateStyle.iconColor,
-                      BlendMode.srcIn,
-                    ),
-                  )
+                          height: 14,
+                          width: 14,
+                          colorFilter: ColorFilter.mode(
+                            stateStyle.iconColor,
+                            BlendMode.srcIn,
+                          ),
+                        )
                       : const SizedBox(),
                 ),
               ),
@@ -349,8 +349,5 @@ final class FCheckboxStateStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      borderColor.hashCode ^
-      iconColor.hashCode ^
-      checkedBackgroundColor.hashCode ^
-      uncheckedBackgroundColor.hashCode;
+      borderColor.hashCode ^ iconColor.hashCode ^ checkedBackgroundColor.hashCode ^ uncheckedBackgroundColor.hashCode;
 }
