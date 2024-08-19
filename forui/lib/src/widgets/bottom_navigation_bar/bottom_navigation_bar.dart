@@ -103,6 +103,7 @@ class FBottomNavigationBarData extends InheritedWidget {
 
   /// The item's style.
   final FBottomNavigationBarItemStyle itemStyle;
+
   /// Whether the item is currently selected.
   final bool selected;
 

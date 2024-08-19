@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/alert/alert.dart';
-import 'package:meta/meta.dart';
 
 /// A [FAlert]'s icon.
 class FAlertIcon extends StatelessWidget {

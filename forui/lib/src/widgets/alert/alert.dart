@@ -157,13 +157,14 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
     FAlertIconStyle? icon,
     TextStyle? titleTextStyle,
     TextStyle? subtitleTextStyle,
-  }) => FAlertCustomStyle(
-      decoration: decoration ?? this.decoration,
-      padding: padding ?? this.padding,
-      icon: icon ?? this.icon,
-      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-      subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
-    );
+  }) =>
+      FAlertCustomStyle(
+        decoration: decoration ?? this.decoration,
+        padding: padding ?? this.padding,
+        icon: icon ?? this.icon,
+        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+        subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

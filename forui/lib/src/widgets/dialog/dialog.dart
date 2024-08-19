@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
-import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
 /// A modal dialog.
 ///

@@ -129,39 +129,39 @@ class Navigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: SizedBox(
-        height: Header.height,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 7),
-              child: FButton.icon(
-                style: style.buttonStyle,
-                onPress: onPrevious,
-                child: FAssets.icons.chevronLeft(
-                  height: 17,
-                  colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
+        padding: const EdgeInsets.only(bottom: 5),
+        child: SizedBox(
+          height: Header.height,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 7),
+                child: FButton.icon(
+                  style: style.buttonStyle,
+                  onPress: onPrevious,
+                  child: FAssets.icons.chevronLeft(
+                    height: 17,
+                    colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
+                  ),
                 ),
               ),
-            ),
-            const Expanded(child: SizedBox()),
-            Padding(
-              padding: const EdgeInsets.only(right: 7),
-              child: FButton.icon(
-                style: style.buttonStyle,
-                onPress: onNext,
-                child: FAssets.icons.chevronRight(
-                  height: 17,
-                  colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
+              const Expanded(child: SizedBox()),
+              Padding(
+                padding: const EdgeInsets.only(right: 7),
+                child: FButton.icon(
+                  style: style.buttonStyle,
+                  onPress: onNext,
+                  child: FAssets.icons.chevronRight(
+                    height: 17,
+                    colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

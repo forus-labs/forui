@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/badge/badge_content.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/badge/badge_content.dart';
 
 /// A badge. Badges are typically used to draw attention to specific information, such as labels and counts.
 ///
