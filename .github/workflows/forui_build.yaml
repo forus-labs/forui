@@ -17,12 +17,14 @@ jobs:
     defaults:
       run:
         working-directory: forui
-
+    strategy:
+      matrix:
+        flutter-version: [ 3.22.x, 3.x ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0
         with:
-          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
+          flutter-version: ${{ matrix.flutter-version }}
           cache: true
       - run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
@@ -32,6 +34,9 @@ jobs:
   build-android:
     name: Build Android
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flutter-version: [ 3.22.x, 3.x ]
     defaults:
       run:
         working-directory: forui/example
@@ -43,13 +48,11 @@ jobs:
           java-version: 17
       - uses: subosito/flutter-action@v2.16.0
         with:
-          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
+          flutter-version: ${{ matrix.flutter-version }}
           cache: true
 
       - run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
-      - run: flutter analyze
-      - run: flutter test
       - run: flutter build appbundle --debug --no-pub --no-tree-shake-icons
 
   build-ios:
@@ -58,17 +61,18 @@ jobs:
     defaults:
       run:
         working-directory: forui/example
+    strategy:
+      matrix:
+        flutter-version: [ 3.22.x, 3.x ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0
         with:
-          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
+          flutter-version: ${{ matrix.flutter-version }}
           cache: true
 
       - run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
-      - run: flutter analyze
-      - run: flutter test
       - run: pod repo update
         working-directory: forui/example/ios
       - run: flutter build ios --debug --no-codesign --no-pub

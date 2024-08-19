@@ -39,7 +39,6 @@ jobs:
 
       - uses: subosito/flutter-action@v2.16.0
         with:
-          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
           cache: true
 
       - run: flutter pub get

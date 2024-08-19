@@ -70,18 +70,6 @@ final class FDividerStyles with Diagnosticable {
         );
 
   /// Returns a copy of this [FDividerStyles] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FDividerStyles(
-  ///   horizontal: ...,
-  ///   vertical: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(vertical: ...);
-  ///
-  /// print(style.horizontal == copy.horizontal); // true
-  /// print(style.vertical == copy.vertical); // false
-  /// ```
   @useResult
   FDividerStyles copyWith({FDividerStyle? horizontal, FDividerStyle? vertical}) => FDividerStyles(
         horizontal: horizontal ?? this.horizontal,
@@ -126,13 +114,13 @@ final class FDividerStyle with Diagnosticable {
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * `thickness` <= 0.0
-  /// * `thickness` is Nan
+  /// * `width` <= 0.0
+  /// * `width` is Nan
   final double width;
 
   /// Creates a [FDividerStyle].
   FDividerStyle({required this.color, required this.padding, this.width = 1})
-      : assert(0 < width, 'The thickness is $width, but it should be in the range "0 < thickness".');
+      : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
 
   /// Creates a [FDividerStyle] that inherits its properties from [colorScheme], [style], and [padding].
   FDividerStyle.inherit({
@@ -142,19 +130,6 @@ final class FDividerStyle with Diagnosticable {
   }) : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 
   /// Returns a copy of this [FDividerStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FDividerStyle(
-  ///   color: Colors.black,
-  ///   width: 1,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(width: 2);
-  ///
-  /// print(copy.color); // black
-  /// print(copy.width); // 2
-  /// ```
   @useResult
   FDividerStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FDividerStyle(
         color: color ?? this.color,

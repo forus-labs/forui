@@ -16,6 +16,8 @@
 
 * Change `FResizable` to resize by `FResizable.resizePercentage` when using a keyboard.
 
+* **Breaking:** Change `FResiableDividerStyle.thickness` to `FResizableDividerStyle.width`.
+
 * Change `FTextFieldStyle` to inherit from `FFormFieldStyle`.
 
 * Change `FTextField` to display error under description instead of replacing it.
