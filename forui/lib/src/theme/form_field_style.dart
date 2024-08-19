@@ -34,11 +34,11 @@ final class FFormFieldStyle with Diagnosticable {
         ),
         disabledStyle = FFormFieldNormalStyle.inherit(
           labelColor: colorScheme.primary.withOpacity(0.7),
-          descriptionColor: colorScheme.border.withOpacity(0.7),
+          descriptionColor: colorScheme.mutedForeground.withOpacity(0.7),
           typography: typography,
         ),
         errorStyle = FFormFieldErrorStyle.inherit(
-          labelColor: colorScheme.primary,
+          labelColor: colorScheme.error,
           descriptionColor: colorScheme.mutedForeground,
           errorColor: colorScheme.error,
           typography: typography,
@@ -112,13 +112,9 @@ sealed class FFormFieldStateStyle with Diagnosticable {
     required FTypography typography,
   })  : labelTextStyle = typography.sm.copyWith(
           color: labelColor,
-          fontFamily: typography.defaultFontFamily,
           fontWeight: FontWeight.w600,
         ),
-        descriptionTextStyle = typography.sm.copyWith(
-          color: descriptionColor,
-          fontFamily: typography.defaultFontFamily,
-        );
+        descriptionTextStyle = typography.sm.copyWith(color: descriptionColor);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -196,7 +192,7 @@ final class FFormFieldErrorStyle extends FFormFieldStateStyle {
     required super.typography,
   })  : errorTextStyle = typography.sm.copyWith(
           color: errorColor,
-          fontFamily: typography.defaultFontFamily,
+          fontWeight: FontWeight.w600,
         ),
         super.inherit();
 

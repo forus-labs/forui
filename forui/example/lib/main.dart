@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-import 'package:forui_example/example.dart';
+import 'package:forui_example/sandbox.dart';
 
 void main() {
   runApp(const Application());
 }
+
+const List<Widget> _pages = [
+  Text('Home'),
+  Text('Categories'),
+  Text('Search'),
+  Text('Settings'),
+  Sandbox(),
+];
 
 class Application extends StatefulWidget {
   const Application({super.key});
@@ -16,7 +24,7 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  int index = 1;
+  int index = 0;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -53,10 +61,14 @@ class _ApplicationState extends State<Application> {
                   icon: FAssets.icons.settings,
                   label: 'Settings',
                 ),
+                FBottomNavigationBarItem(
+                  icon: FAssets.icons.castle,
+                  label: 'Sandbox',
+                ),
               ],
             ),
           ),
         ),
-        home: const Example(),
+        home: _pages[index],
       );
 }
