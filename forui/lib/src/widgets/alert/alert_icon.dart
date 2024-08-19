@@ -73,7 +73,7 @@ final class FAlertIconStyle with Diagnosticable {
       other is FButtonIconStyle &&
           runtimeType == other.runtimeType &&
           color == other.enabledColor &&
-          size == other.height;
+          size == other.size;
 
   @override
   int get hashCode => color.hashCode ^ size.hashCode;

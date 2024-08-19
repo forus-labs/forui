@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
 /// [FAlertCustomStyle]'s style.
-class FAlertStyles with Diagnosticable {
+final class FAlertStyles with Diagnosticable {
   /// The primary alert style.
   final FAlertCustomStyle primary;
 

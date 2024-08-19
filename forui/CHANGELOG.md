@@ -4,7 +4,9 @@
 
 * Add `FButton.icon(...)`.
 
-* Add `FBottomNavigationBar.of(...)`
+* Add `FBottomNavigationBar.of(...)`.
+
+* Add `FButton.of(...)`.
 
 * Add `FFormFieldStyle`.
 
@@ -21,6 +23,8 @@
 * **Breaking:** Rename `FBottomNavigationBar.items` to `FBottomNavigationBar.children`.
 
 * **Breaking:** Remove `FBottomNavigationBar.raw(...)` - use the default constructor instead.
+
+* **Breaking:** Rename `FButtonIconStyle.height` to `FButtonIconStyle.size`.
 
 * Change `FResizable` to resize by `FResizable.resizePercentage` when using a keyboard.
 

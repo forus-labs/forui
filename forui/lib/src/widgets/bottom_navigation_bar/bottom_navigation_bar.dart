@@ -24,7 +24,7 @@ class FBottomNavigationBar extends StatelessWidget {
   @useResult
   static FBottomNavigationBarData of(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>();
-    assert(result != null, 'No _InheritedData found in context');
+    assert(result != null, 'No FBottomNavigationBarData found in context');
     return result!;
   }
 

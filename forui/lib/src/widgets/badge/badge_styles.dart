@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
 /// The [FBadgeCustomStyle]s.
-class FBadgeStyles with Diagnosticable {
+final class FBadgeStyles with Diagnosticable {
   /// The primary badge style.
   final FBadgeCustomStyle primary;
 

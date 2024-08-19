@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
 @internal
-class Content extends StatelessWidget {
+final class Content extends StatelessWidget {
   final FAvatarStyle? style;
   final double size;
   final ImageProvider image;
@@ -58,7 +58,7 @@ class Content extends StatelessWidget {
 }
 
 @internal
-class PlaceholderContent extends StatelessWidget {
+final class PlaceholderContent extends StatelessWidget {
   final FAvatarStyle? style;
   final double size;
 

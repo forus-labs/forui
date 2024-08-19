@@ -70,7 +70,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 }
 
 /// [FBottomNavigationBarItem]'s style.
-class FBottomNavigationBarItemStyle with Diagnosticable {
+final class FBottomNavigationBarItemStyle with Diagnosticable {
   /// The icon's size. Defaults to `28`.
   final double iconSize;
 
@@ -137,7 +137,7 @@ class FBottomNavigationBarItemStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('iconSize', iconSize))
+      ..add(DoubleProperty('iconSize', iconSize))
       ..add(ColorProperty('activeIconColor', activeIconColor))
       ..add(ColorProperty('inactiveIconColor', inactiveIconColor))
       ..add(DiagnosticsProperty('activeTextStyle', activeTextStyle))
