@@ -76,7 +76,7 @@ class FAlert extends StatelessWidget {
             if (subtitle != null)
               Row(
                 children: [
-                  SizedBox(width: style.icon.dimension),
+                  SizedBox(width: style.icon.size),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
@@ -128,7 +128,7 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
   /// The decoration.
   final BoxDecoration decoration;
 
-  /// The padding.
+  /// The padding. Defaults to `const EdgeInsets.all(16)`.
   final EdgeInsets padding;
 
   /// The icon's style.

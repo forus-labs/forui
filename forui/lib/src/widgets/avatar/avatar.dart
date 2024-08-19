@@ -1,14 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/avatar/avatar_content.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'avatar_content.dart';
-
-/// {@category Widgets}
-///
 /// An image element with a fallback for representing the user.
 ///
 /// Typically used with a user's profile image. If the image fails to load, the fallback widget is used instead, which
@@ -20,7 +17,7 @@ class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;
 
-  /// The circle's size.
+  /// The circle's size. Defaults to 40.
   final double size;
 
   /// The child, typically an image.
@@ -34,7 +31,7 @@ class FAvatar extends StatelessWidget {
     String? semanticLabel,
     Widget? fallback,
     super.key,
-  }) : child = _FAvatarContent(
+  }) : child = Content(
           style: style,
           size: size,
           image: image,
@@ -48,7 +45,7 @@ class FAvatar extends StatelessWidget {
     this.style,
     this.size = 40.0,
     super.key,
-  }) : child = child ?? _Placeholder(style: style, size: size);
+  }) : child = child ?? PlaceholderContent(style: style, size: size);
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +71,8 @@ class FAvatar extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('size', size))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DoubleProperty('size', size));
   }
 }
 
@@ -112,18 +109,6 @@ final class FAvatarStyle with Diagnosticable {
         );
 
   /// Returns a copy of this [FAvatarStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FAvatarStyle(
-  ///   backgroundColor: ...,
-  ///   fadeInDuration: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(fadeInDuration: ...);
-  ///
-  /// print(style.backgroundColor == copy.backgroundColor); // true
-  /// print(style.fadeInDuration == copy.fadeInDuration); // false
-  /// ```
   @useResult
   FAvatarStyle copyWith({
     Color? backgroundColor,

@@ -14,7 +14,7 @@
 
 ### Changes
 
-* **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.dimension`.
+* **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.size`.
 
 * Change `FResizable` to resize by `FResizable.resizePercentage` when using a keyboard.
 
