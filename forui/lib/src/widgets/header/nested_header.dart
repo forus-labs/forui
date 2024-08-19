@@ -42,8 +42,8 @@ final class _FNestedHeader extends FHeader {
           padding: style.padding,
           child: Stack(
             children: [
-              _InheritedActionStyle(
-                style: style.actionStyle,
+              FHeaderData(
+                actionStyle: style.actionStyle,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -117,20 +117,6 @@ final class FNestedHeaderStyle with Diagnosticable {
         padding = style.pagePadding.copyWith(bottom: 15);
 
   /// Returns a copy of this [FNestedHeaderStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FNestedHeaderStyle(
-  ///   titleTextStyle: ...,
-  ///   leftAction: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   leftAction: ...,
-  /// );
-  ///
-  /// print(style.titleTextStyle == copy.titleTextStyle); // true
-  /// print(style.leftAction == copy.leftAction); // false
-  /// ```
   @useResult
   FNestedHeaderStyle copyWith({
     TextStyle? titleTextStyle,
@@ -151,7 +137,7 @@ final class FNestedHeaderStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
       ..add(DiagnosticsProperty('actionStyle', actionStyle))
-      ..add(DiagnosticsProperty('actionSpacing', actionSpacing))
+      ..add(DoubleProperty('actionSpacing', actionSpacing))
       ..add(DiagnosticsProperty('padding', padding));
   }
 

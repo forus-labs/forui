@@ -13,7 +13,7 @@ class FButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonCustomStyle(:icon), :enabled) = FButton.of(context);
+    final FButtonData(style: FButtonCustomStyle(:icon), :enabled) = FButtonData.of(context);
 
     return this.icon(
       height: icon.size,

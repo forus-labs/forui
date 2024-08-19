@@ -4,13 +4,15 @@
 
 * Add `FButton.icon(...)`.
 
-* Add `FBottomNavigationBar.of(...)`.
+* Add `FBottomNavigationBarData`.
 
-* Add `FButton.of(...)`.
+* Add `FButtonData`.
 
 * Add `FCalendarHeaderStyle.buttonStyle`.
 
 * Add `FFormFieldStyle`.
+
+* Add `FHeaderData`.
 
 * Add `FResizable.semanticFormatterCallback`.
 

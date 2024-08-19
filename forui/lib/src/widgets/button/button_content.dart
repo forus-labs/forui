@@ -19,7 +19,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonCustomStyle(:content), :enabled) = FButton.of(context);
+    final FButtonData(style: FButtonCustomStyle(:content), :enabled) = FButtonData.of(context);
 
     return Padding(
       padding: content.padding,
@@ -51,7 +51,7 @@ class IconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(:style, enabled: _) = FButton.of(context);
+    final FButtonData(:style, enabled: _) = FButtonData.of(context);
 
     return Padding(
       padding: style.iconContent.padding,

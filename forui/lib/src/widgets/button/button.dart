@@ -19,17 +19,6 @@ import 'package:forui/src/widgets/button/button_content.dart';
 /// * https://forui.dev/docs/button for working examples.
 /// * [FButtonCustomStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
-  /// Returns the [FButtonData] of the [FButton] in the given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FButton] in the given [context].
-  @useResult
-  static FButtonData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FButtonData>();
-    assert(data != null, 'No FButtonData found in context');
-    return data!;
-  }
-
   /// The style. Defaults to [FButtonStyle.primary].
   ///
   /// Although typically one of the pre-defined styles in [FButtonStyle], it can also be a [FButtonCustomStyle].
@@ -274,6 +263,17 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
 
 /// A button's data.
 class FButtonData extends InheritedWidget {
+  /// Returns the [FButtonData] of the [FButton] in the given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FButton] in the given [context].
+  @useResult
+  static FButtonData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FButtonData>();
+    assert(data != null, 'No FButtonData found in context');
+    return data!;
+  }
+
   /// The button's style.
   final FButtonCustomStyle style;
 

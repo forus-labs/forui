@@ -16,18 +16,6 @@ import 'package:forui/src/foundation/tappable.dart';
 /// * [FBottomNavigationBarStyle] for customizing a bottom navigation bar's appearance.
 /// * [FBottomNavigationBarItem] for the items in a bottom navigation bar.
 class FBottomNavigationBar extends StatelessWidget {
-  /// Returns the [FBottomNavigationBarItemStyle] and currently selected index of the [FBottomNavigationBar] in the
-  /// given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FBottomNavigationBar] in the given [context].
-  @useResult
-  static FBottomNavigationBarData of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>();
-    assert(result != null, 'No FBottomNavigationBarData found in context');
-    return result!;
-  }
-
   /// The style.
   final FBottomNavigationBarStyle? style;
 
@@ -101,6 +89,18 @@ class FBottomNavigationBar extends StatelessWidget {
 
 /// AFBottomNavigationBar]'s data.
 class FBottomNavigationBarData extends InheritedWidget {
+  /// Returns the [FBottomNavigationBarItemStyle] and currently selected index of the [FBottomNavigationBar] in the
+  /// given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FBottomNavigationBar] in the given [context].
+  @useResult
+  static FBottomNavigationBarData of(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>();
+    assert(result != null, 'No FBottomNavigationBarData found in context');
+    return result!;
+  }
+
   /// The item's style.
   final FBottomNavigationBarItemStyle itemStyle;
   /// Whether the item is currently selected.

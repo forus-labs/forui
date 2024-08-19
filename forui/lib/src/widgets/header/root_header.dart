@@ -48,8 +48,8 @@ final class _FRootHeader extends FHeader {
                   child: title,
                 ),
               ),
-              _InheritedActionStyle(
-                style: style.actionStyle,
+              FHeaderData(
+                actionStyle: style.actionStyle,
                 child: Row(children: actions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
               ),
             ],
@@ -106,20 +106,6 @@ final class FRootHeaderStyle with Diagnosticable {
         padding = style.pagePadding.copyWith(bottom: 15);
 
   /// Returns a copy of this [FRootHeaderStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FHeaderStyle(
-  ///   titleTextStyle: ...,
-  ///   action: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   action: ...,
-  /// );
-  ///
-  /// print(style.titleTextStyle == copy.titleTextStyle); // true
-  /// print(style.action == copy.action); // false
-  /// ```
   @useResult
   FRootHeaderStyle copyWith({
     TextStyle? titleTextStyle,
@@ -140,7 +126,7 @@ final class FRootHeaderStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
       ..add(DiagnosticsProperty('action', actionStyle))
-      ..add(DiagnosticsProperty('actionSpacing', actionSpacing))
+      ..add(DoubleProperty('actionSpacing', actionSpacing))
       ..add(DiagnosticsProperty('padding', padding));
   }
 

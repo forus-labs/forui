@@ -24,7 +24,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBar.of(context);
+    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBarData.of(context);
     final style = this.style ?? itemStyle;
 
     return Semantics(
