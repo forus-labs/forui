@@ -10,12 +10,6 @@ import 'package:forui/src/widgets/calendar/day/paged_day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/header.dart';
 import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
-export 'day/day_picker.dart' show FCalendarDayPickerStyle, FCalendarDayStyle;
-export 'shared/entry.dart' show FCalendarEntryStyle;
-export 'shared/header.dart' show FCalendarHeaderStyle, FCalendarPickerType;
-export 'calendar_controller.dart';
-export 'year_month_picker.dart' show FCalendarYearMonthPickerStyle;
-
 /// A calendar.
 ///
 /// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing
@@ -154,9 +148,9 @@ class FCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
-      ..add(DiagnosticsProperty('onMonthChange', onMonthChange))
-      ..add(DiagnosticsProperty('onPress', onPress))
-      ..add(DiagnosticsProperty('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('onMonthChange', onMonthChange))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }
 }
 
@@ -196,7 +190,7 @@ final class FCalendarStyle with Diagnosticable {
     required FTypography typography,
     required FStyle style,
   }) : this(
-          headerStyle: FCalendarHeaderStyle.inherit(colorScheme: colorScheme, typography: typography),
+          headerStyle: FCalendarHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           dayPickerStyle: FCalendarDayPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
           yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
           decoration: BoxDecoration(
@@ -207,19 +201,6 @@ final class FCalendarStyle with Diagnosticable {
         );
 
   /// Returns a copy of this [FCalendarStyle] but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FCalendarStyle(
-  ///   headerStyle: ...,
-  ///   dayPickerStyle: ...,
-  ///   // Other arguments omitted for brevity.
-  /// );
-  ///
-  /// final copy = style.copyWith(dayPickerStyle: ...);
-  ///
-  /// print(style.headerStyle == copy.headerStyle); // true
-  /// print(style.dayPickerStyle == copy.dayPickerStyle); // false
-  /// ```
   @useResult
   FCalendarStyle copyWith({
     FCalendarHeaderStyle? headerStyle,

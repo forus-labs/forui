@@ -137,7 +137,7 @@ class _DayPickerState extends State<DayPicker> {
   @override
   void didUpdateWidget(DayPicker old) {
     super.didUpdateWidget(old);
-    assert(old.month == widget.month, 'current month must not change.');
+    assert(old.month == widget.month, 'Current month must not change.');
 
     if (_days[widget.focused] case final focusNode? when old.focused != widget.focused) {
       focusNode.requestFocus();
@@ -263,21 +263,6 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   }
 
   /// Returns a copy of this [FCalendarDayPickerStyle] but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FMonthStyle(
-  ///   headerTextStyle: ...,
-  ///   selectableCurrent: ...,
-  ///   // Other arguments omitted for brevity.
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   selectableCurrent: ...,
-  /// );
-  ///
-  /// print(style.headerTextStyle == copy.headerTextStyle); // true
-  /// print(style.selectableStyles.current == copy.selectableStyles.current); // false
-  /// ```
   @useResult
   FCalendarDayPickerStyle copyWith({
     TextStyle? headerTextStyle,
@@ -342,21 +327,6 @@ final class FCalendarDayStyle with Diagnosticable {
   });
 
   /// Returns a copy of this [FCalendarDayStyle] but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FCalendarDayStyle(
-  ///   selectedStyle: ...,
-  ///   unselectedStyle: ...,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   unselectedStyle: ...,
-  /// );
-  ///
-  /// print(style.selectedStyle == copy.selectedStyle); // true
-  /// print(style.unselectedStyle == copy.unselectedStyle); // false
-  /// ```
   @useResult
   FCalendarDayStyle copyWith({
     FCalendarEntryStyle? selectedStyle,

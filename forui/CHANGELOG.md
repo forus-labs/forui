@@ -8,6 +8,8 @@
 
 * Add `FButton.of(...)`.
 
+* Add `FCalendarHeaderStyle.buttonStyle`.
+
 * Add `FFormFieldStyle`.
 
 * Add `FResizable.semanticFormatterCallback`.

@@ -60,38 +60,6 @@ class IconContent extends StatelessWidget {
   }
 }
 
-/// [FButton] icon content's style.
-final class FButtonIconContentStyle with Diagnosticable {
-  /// The padding.
-  final EdgeInsets padding;
-
-  /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({
-    this.padding = const EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: 12.5,
-    ),
-  });
-
-  /// Returns a copy of this [FButtonIconContentStyle] with the given properties replaced.
-  @useResult
-  FButtonIconContentStyle copyWith({EdgeInsets? padding}) => FButtonIconContentStyle(padding: padding ?? this.padding);
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FButtonIconContentStyle && runtimeType == other.runtimeType && padding == other.padding;
-
-  @override
-  int get hashCode => padding.hashCode;
-}
-
 /// [FButton] content's style.
 final class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is enabled.
@@ -163,4 +131,31 @@ final class FButtonContentStyle with Diagnosticable {
 
   @override
   int get hashCode => enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
+}
+
+/// [FButton] icon content's style.
+final class FButtonIconContentStyle with Diagnosticable {
+  /// The padding.
+  final EdgeInsets padding;
+
+  /// Creates a [FButtonIconContentStyle].
+  const FButtonIconContentStyle({this.padding = const EdgeInsets.all(7.5)});
+
+  /// Returns a copy of this [FButtonIconContentStyle] with the given properties replaced.
+  @useResult
+  FButtonIconContentStyle copyWith({EdgeInsets? padding}) => FButtonIconContentStyle(padding: padding ?? this.padding);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('padding', padding));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is FButtonIconContentStyle && runtimeType == other.runtimeType && padding == other.padding;
+
+  @override
+  int get hashCode => padding.hashCode;
 }

@@ -145,8 +145,8 @@ class _SelectableEntry extends Entry {
       ..add(DiagnosticsProperty('date', date))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
-      ..add(DiagnosticsProperty('onPress', onPress))
-      ..add(DiagnosticsProperty('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }
 }
 
@@ -157,8 +157,9 @@ class _UnselectableEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) =>
-      ExcludeSemantics(child: builder(context, (focused: false, hovered: false), null));
+  Widget build(BuildContext context) => ExcludeSemantics(
+        child: builder(context, (focused: false, hovered: false), null),
+      );
 }
 
 class _Content extends StatelessWidget {
@@ -239,20 +240,6 @@ final class FCalendarEntryStyle with Diagnosticable {
         hoveredTextStyle = hoveredTextStyle ?? textStyle;
 
   /// Returns a copy of this [FCalendarEntryStyle] but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FCalendarEntryStyle(
-  ///   backgroundColor: ...,
-  ///   textStyle: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   textStyle: ...,
-  /// );
-  ///
-  /// print(style.backgroundColor == copy.backgroundColor); // true
-  /// print(style.textStyle == copy.textStyle); // false
-  /// ```
   @useResult
   FCalendarEntryStyle copyWith({
     Color? backgroundColor,
