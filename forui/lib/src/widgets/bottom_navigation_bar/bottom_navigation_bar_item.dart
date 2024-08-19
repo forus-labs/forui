@@ -1,60 +1,10 @@
-part of 'bottom_navigation_bar.dart';
-
-class _FBottomNavigationBarItem extends StatelessWidget {
-  final FBottomNavigationBarItemStyle? style;
-
-  final FBottomNavigationBarItem item;
-
-  final bool current;
-
-  const _FBottomNavigationBarItem({
-    required this.item,
-    required this.current,
-    this.style,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final style = item.style ?? this.style ?? context.theme.bottomNavigationBarStyle.item;
-
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: Padding(
-        padding: style.padding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            item.icon(
-              height: style.iconSize,
-              colorFilter: ColorFilter.mode(
-                current ? style.activeIconColor : style.inactiveIconColor,
-                BlendMode.srcIn,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              item.label,
-              overflow: TextOverflow.ellipsis,
-              style: current ? style.activeTextStyle : style.inactiveTextStyle,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('item', item))
-      ..add(FlagProperty('active', value: current, ifTrue: 'active'));
-  }
-}
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A [FBottomNavigationBar] item.
-class FBottomNavigationBarItem {
+class FBottomNavigationBarItem extends StatelessWidget {
   /// The style.
   final FBottomNavigationBarItemStyle? style;
 
@@ -69,7 +19,48 @@ class FBottomNavigationBarItem {
     required this.icon,
     required this.label,
     this.style,
+    super.key,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    final (:itemStyle, :current) = FBottomNavigationBar.of(context);
+    final style = this.style ?? itemStyle;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Padding(
+        padding: style.padding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            icon(
+              height: style.iconSize,
+              colorFilter: ColorFilter.mode(
+                current ? style.activeIconColor : style.inactiveIconColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              style: current ? style.activeTextStyle : style.inactiveTextStyle,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('icon', icon))
+      ..add(StringProperty('label', label));
+  }
 }
 
 /// [FBottomNavigationBarItem]'s style.
@@ -118,21 +109,6 @@ class FBottomNavigationBarItemStyle with Diagnosticable {
         padding = const EdgeInsets.all(5);
 
   /// Returns a copy of this [FBottomNavigationBarItemStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FBottomNavigationBarItemStyle(
-  ///   activeIconColor: Colors.black,
-  ///   inactiveIconColor: Colors.white,
-  ///   ...
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   inactiveIconColor: Colors.blue,
-  /// );
-  ///
-  /// print(copy.activeIconColor); // black
-  /// print(copy.inactiveIconColor); // blue
-  /// ```
   @useResult
   FBottomNavigationBarItemStyle copyWith({
     double? iconSize,
