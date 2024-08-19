@@ -1,12 +1,17 @@
-part of 'badge.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
-final class _FBadgeContent extends StatelessWidget {
+@internal
+final class Content extends StatelessWidget {
   final FBadgeCustomStyle style;
   final Widget label;
 
-  const _FBadgeContent({
+  const Content({
     required this.style,
     required this.label,
+    super.key,
   });
 
   @override
@@ -29,33 +34,19 @@ final class _FBadgeContent extends StatelessWidget {
 
 /// [FBadge] content's style.
 final class FBadgeContentStyle with Diagnosticable {
-  static const _defaultPadding = EdgeInsets.symmetric(horizontal: 14, vertical: 2);
-
   /// The label's [TextStyle].
   final TextStyle labelTextStyle;
 
-  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 14, vertical: 2)`.
+  /// The padding.
   final EdgeInsets padding;
 
   /// Creates a [FBadgeContentStyle].
   FBadgeContentStyle({
     required this.labelTextStyle,
-    this.padding = _defaultPadding,
+    this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
   });
 
   /// Returns a copy of this [FBadgeContentStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FBadgeContentStyle(
-  ///   labelTextStyle: TextStyle(...),
-  ///   padding = EdgeInsets.zero,
-  /// );
-  ///
-  /// final copy = style.copyWith(padding: EdgeInsets.symmetric(vertical: 10));
-  ///
-  /// print(style.labelTextStyle == copy.labelTextStyle); // true
-  /// print(style.padding == copy.padding); // false
-  /// ```
   @useResult
   FBadgeContentStyle copyWith({TextStyle? labelTextStyle, EdgeInsets? padding}) => FBadgeContentStyle(
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
@@ -67,7 +58,7 @@ final class FBadgeContentStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
-      ..add(DiagnosticsProperty('padding', padding, defaultValue: _defaultPadding));
+      ..add(DiagnosticsProperty('padding', padding));
   }
 
   @override
