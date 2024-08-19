@@ -128,8 +128,7 @@ class Navigation extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
+  Widget build(BuildContext context) => Padding(
       padding: const EdgeInsets.only(bottom: 5),
       child: SizedBox(
         height: Header.height,
@@ -163,7 +162,6 @@ class Navigation extends StatelessWidget {
         ),
       ),
     );
-  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -177,6 +175,7 @@ class Navigation extends StatelessWidget {
 
 /// The calendar header's style.
 final class FCalendarHeaderStyle with Diagnosticable {
+  /// The button style.
   final FButtonCustomStyle buttonStyle;
 
   /// The header's text style.

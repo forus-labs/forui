@@ -20,7 +20,7 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/calendar for working examples.
-/// *  for customizing a calendar's date selection behavior.
+/// * [FCalendarController] for customizing a calendar's date selection behavior.
 /// * [FCalendarDayStyle] for customizing a calendar's appearance.
 class FCalendar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.calendarStyle].

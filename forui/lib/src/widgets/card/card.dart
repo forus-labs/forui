@@ -4,9 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/util.dart';
 
-part 'card_content.dart';
+import 'package:forui/src/widgets/card/card_content.dart';
 
 /// A card.
 ///
@@ -42,7 +41,7 @@ final class FCard extends StatelessWidget {
     Widget? child,
     this.style,
     super.key,
-  }) : child = _FCardContent(
+  }) : child = Content(
           image: image,
           title: title,
           subtitle: subtitle,
@@ -87,18 +86,6 @@ final class FCardStyle with Diagnosticable {
         content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography);
 
   /// Returns a copy of this [FCardStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FCardStyle(
-  ///   decoration: ...,
-  ///   content: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(content: ...);
-  ///
-  /// print(style.decoration == copy.decoration); // true
-  /// print(style.content == copy.content); // false
-  /// ```
   @useResult
   FCardStyle copyWith({
     BoxDecoration? decoration,
