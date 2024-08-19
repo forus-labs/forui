@@ -1,4 +1,8 @@
-part of 'alert.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/alert/alert.dart';
+import 'package:meta/meta.dart';
 
 /// A [FAlert]'s icon.
 class FAlertIcon extends StatelessWidget {
@@ -10,10 +14,10 @@ class FAlertIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FAlertCustomStyle(:icon) = FAlert._of(context);
+    final FAlertCustomStyle(:icon) = InheritedData.of(context);
 
     return this.icon(
-      height: icon.height,
+      height: icon.dimension,
       colorFilter: ColorFilter.mode(icon.color, BlendMode.srcIn),
     );
   }
@@ -30,8 +34,8 @@ final class FAlertIconStyle with Diagnosticable {
   /// The icon's color.
   final Color color;
 
-  /// The icon's height. Defaults to 20.
-  final double height;
+  /// The icon's dimension. Defaults to 20.
+  final double dimension;
 
   /// Creates a [FButtonIconStyle].
   ///
@@ -41,32 +45,18 @@ final class FAlertIconStyle with Diagnosticable {
   /// * `height` is Nan
   FAlertIconStyle({
     required this.color,
-    this.height = 20,
-  }) : assert(0 < height, 'The height is $height, but it should be in the range "0 < height".');
+    this.dimension = 20,
+  }) : assert(0 < dimension, 'The dimension is $dimension, but it should be positive.');
 
   /// Returns a copy of this [FAlertIconStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FAlertIconStyle(
-  ///   height: 20,
-  ///   color: Colors.red,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   color: Colors.blue,
-  /// );
-  ///
-  /// print(copy.color); // Colors.blue
-  /// print(copy.height); // 20
-  /// ```
   @useResult
   FAlertIconStyle copyWith({
     Color? color,
-    double? height,
+    double? dimension,
   }) =>
       FAlertIconStyle(
         color: color ?? this.color,
-        height: height ?? this.height,
+        dimension: dimension ?? this.dimension,
       );
 
   @override
@@ -74,7 +64,7 @@ final class FAlertIconStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('height', height, defaultValue: 20));
+      ..add(DoubleProperty('dimension', dimension, defaultValue: 20));
   }
 
   @override
@@ -83,8 +73,8 @@ final class FAlertIconStyle with Diagnosticable {
       other is FButtonIconStyle &&
           runtimeType == other.runtimeType &&
           color == other.enabledColor &&
-          height == other.height;
+          dimension == other.height;
 
   @override
-  int get hashCode => color.hashCode ^ height.hashCode;
+  int get hashCode => color.hashCode ^ dimension.hashCode;
 }

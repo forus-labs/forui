@@ -5,10 +5,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'alert_styles.dart';
-
-part 'alert_icon.dart';
-
 /// An alert.
 ///
 /// Displays a callout for user attention.
@@ -17,12 +13,6 @@ part 'alert_icon.dart';
 /// * https://forui.dev/docs/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
-  @useResult
-  static FAlertCustomStyle _of(BuildContext context) {
-    final theme = context.dependOnInheritedWidgetOfExactType<_InheritedData>();
-    return theme?.style ?? context.theme.alertStyles.primary;
-  }
-
   /// The icon. Defaults to [FAssets.icons.circleAlert].
   final Widget icon;
 
@@ -71,7 +61,7 @@ class FAlert extends StatelessWidget {
           children: [
             Row(
               children: [
-                _InheritedData(style: style, child: icon),
+                InheritedData(style: style, child: icon),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -86,7 +76,7 @@ class FAlert extends StatelessWidget {
             if (subtitle != null)
               Row(
                 children: [
-                  SizedBox(width: style.icon.height),
+                  SizedBox(width: style.icon.dimension),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
@@ -138,7 +128,7 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
   /// The decoration.
   final BoxDecoration decoration;
 
-  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 16)`.
+  /// The padding.
   final EdgeInsets padding;
 
   /// The icon's style.
@@ -158,6 +148,22 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
     required this.subtitleTextStyle,
     this.padding = const EdgeInsets.all(16),
   });
+
+  /// Returns a copy of this [FAlertCustomStyle] with the given properties replaced.
+  @useResult
+  FAlertCustomStyle copyWith({
+    BoxDecoration? decoration,
+    EdgeInsets? padding,
+    FAlertIconStyle? icon,
+    TextStyle? titleTextStyle,
+    TextStyle? subtitleTextStyle,
+  }) => FAlertCustomStyle(
+      decoration: decoration ?? this.decoration,
+      padding: padding ?? this.padding,
+      icon: icon ?? this.icon,
+      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
+    );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -186,16 +192,24 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
       decoration.hashCode ^ padding.hashCode ^ icon.hashCode ^ titleTextStyle.hashCode ^ subtitleTextStyle.hashCode;
 }
 
-class _InheritedData extends InheritedWidget {
+@internal
+class InheritedData extends InheritedWidget {
+  @useResult
+  static FAlertCustomStyle of(BuildContext context) {
+    final theme = context.dependOnInheritedWidgetOfExactType<InheritedData>();
+    return theme?.style ?? context.theme.alertStyles.primary;
+  }
+
   final FAlertCustomStyle style;
 
-  const _InheritedData({
+  const InheritedData({
     required this.style,
     required super.child,
+    super.key,
   });
 
   @override
-  bool updateShouldNotify(covariant _InheritedData old) => style != old.style;
+  bool updateShouldNotify(covariant InheritedData old) => style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
