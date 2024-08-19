@@ -24,30 +24,36 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (:itemStyle, :current) = FBottomNavigationBar.of(context);
+    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBar.of(context);
     final style = this.style ?? itemStyle;
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: Padding(
-        padding: style.padding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            icon(
-              height: style.iconSize,
-              colorFilter: ColorFilter.mode(
-                current ? style.activeIconColor : style.inactiveIconColor,
-                BlendMode.srcIn,
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: label,
+      excludeSemantics: true,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: Padding(
+          padding: style.padding,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              icon(
+                height: style.iconSize,
+                colorFilter: ColorFilter.mode(
+                  selected ? style.activeIconColor : style.inactiveIconColor,
+                  BlendMode.srcIn,
+                ),
               ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-              style: current ? style.activeTextStyle : style.inactiveTextStyle,
-            ),
-          ],
+              const SizedBox(height: 2),
+              Text(
+                label,
+                overflow: TextOverflow.ellipsis,
+                style: selected ? style.activeTextStyle : style.inactiveTextStyle,
+              ),
+            ],
+          ),
         ),
       ),
     );

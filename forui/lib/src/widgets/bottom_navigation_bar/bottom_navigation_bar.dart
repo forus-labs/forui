@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -15,16 +14,18 @@ import 'package:forui/src/foundation/tappable.dart';
 /// See:
 /// * https://forui.dev/docs/bottom-navigation-bar for working examples.
 /// * [FBottomNavigationBarStyle] for customizing a bottom navigation bar's appearance.
+/// * [FBottomNavigationBarItem] for the items in a bottom navigation bar.
 class FBottomNavigationBar extends StatelessWidget {
   /// Returns the [FBottomNavigationBarItemStyle] and currently selected index of the [FBottomNavigationBar] in the
   /// given [context].
   ///
   /// ## Contract
   /// Throws [AssertionError] if there is no ancestor [FBottomNavigationBar] in the given [context].
-  static ({FBottomNavigationBarItemStyle itemStyle, bool current}) of(BuildContext context) {
-    final _InheritedData? result = context.dependOnInheritedWidgetOfExactType<_InheritedData>();
+  @useResult
+  static FBottomNavigationBarData of(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>();
     assert(result != null, 'No _InheritedData found in context');
-    return (itemStyle: result!.itemStyle, current: result.current);
+    return result!;
   }
 
   /// The style.
@@ -34,19 +35,24 @@ class FBottomNavigationBar extends StatelessWidget {
   final ValueChanged<int>? onChange;
 
   /// The index.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [index] is not null and is negative.
   final int? index;
 
   /// The children.
   final List<Widget> children;
 
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
+  ///
+  /// See [FBottomNavigationBarItem] for the items in a bottom navigation bar.
   const FBottomNavigationBar({
     required this.children,
     this.style,
     this.onChange,
     this.index,
     super.key,
-  });
+  }) : assert(index == null || 0 <= index, 'index must be null or non-negative.');
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +75,9 @@ class FBottomNavigationBar extends StatelessWidget {
                     onPress: () {
                       onChange?.call(i);
                     },
-                    child: _InheritedData(
+                    child: FBottomNavigationBarData(
                       itemStyle: style.itemStyle,
-                      current: index == i,
+                      selected: index == i,
                       child: child,
                     ),
                   ),
@@ -93,25 +99,30 @@ class FBottomNavigationBar extends StatelessWidget {
   }
 }
 
-class _InheritedData extends InheritedWidget {
+/// AFBottomNavigationBar]'s data.
+class FBottomNavigationBarData extends InheritedWidget {
+  /// The item's style.
   final FBottomNavigationBarItemStyle itemStyle;
-  final bool current;
+  /// Whether the item is currently selected.
+  final bool selected;
 
-  const _InheritedData({
+  /// Creates a [FBottomNavigationBarData].
+  const FBottomNavigationBarData({
     required this.itemStyle,
-    required this.current,
+    required this.selected,
     required super.child,
+    super.key,
   });
 
   @override
-  bool updateShouldNotify(_InheritedData old) => old.itemStyle != itemStyle || old.current != current;
+  bool updateShouldNotify(FBottomNavigationBarData old) => old.itemStyle != itemStyle || old.selected != selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', itemStyle))
-      ..add(FlagProperty('current', value: current, ifTrue: 'current'));
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'));
   }
 }
 
@@ -150,12 +161,12 @@ class FBottomNavigationBarStyle with Diagnosticable {
   FBottomNavigationBarStyle copyWith({
     BoxDecoration? decoration,
     EdgeInsets? padding,
-    FBottomNavigationBarItemStyle? item,
+    FBottomNavigationBarItemStyle? itemStyle,
   }) =>
       FBottomNavigationBarStyle(
         decoration: decoration ?? this.decoration,
         padding: padding ?? this.padding,
-        itemStyle: item ?? this.itemStyle,
+        itemStyle: itemStyle ?? this.itemStyle,
       );
 
   @override
