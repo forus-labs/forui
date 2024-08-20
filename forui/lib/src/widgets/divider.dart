@@ -33,7 +33,7 @@ final class FDivider extends StatelessWidget {
       margin: style.padding,
       color: style.color,
       height: axis == Axis.horizontal ? style.width : null,
-      width: axis == Axis.vertical ? style.width : null,
+      width: axis == Axis.horizontal ? null : style.width,
     );
   }
 
