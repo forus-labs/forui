@@ -23,10 +23,7 @@ class FBottomNavigationBar extends StatelessWidget {
   final ValueChanged<int>? onChange;
 
   /// The index.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [index] is not null and is negative.
-  final int? index;
+  final int index;
 
   /// The children.
   final List<Widget> children;
@@ -38,9 +35,9 @@ class FBottomNavigationBar extends StatelessWidget {
     required this.children,
     this.style,
     this.onChange,
-    this.index,
+    this.index = -1,
     super.key,
-  }) : assert(index == null || 0 <= index, 'index must be null or non-negative.');
+  });
 
   @override
   Widget build(BuildContext context) {
