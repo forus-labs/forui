@@ -46,12 +46,12 @@ class DividerPage extends SampleScaffold {
                     'Blog',
                     style: typography.sm.copyWith(color: colorScheme.foreground),
                   ),
-                  const FDivider(axis : Axis.vertical),
+                  const FDivider(axis: Axis.vertical),
                   Text(
                     'Docs',
                     style: typography.sm.copyWith(color: colorScheme.foreground),
                   ),
-                  const FDivider(axis : Axis.vertical),
+                  const FDivider(axis: Axis.vertical),
                   Text(
                     'Source',
                     style: typography.sm.copyWith(color: colorScheme.foreground),
