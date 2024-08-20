@@ -1,4 +1,7 @@
-part of 'text_field.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// [FTextFieldStyle]'s style.
 final class FTextFieldStyle with Diagnosticable {
@@ -85,21 +88,6 @@ final class FTextFieldStyle with Diagnosticable {
         );
 
   /// Returns a copy of this [FTextFieldStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FTextFieldStyle(
-  ///   enabledStyle: ...,
-  ///   disabledStyle: ...,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   disabledStyle: ...,
-  /// );
-  ///
-  /// print(style.enabledStyle == copy.enabledStyle); // true
-  /// print(style.disabledStyle == copy.disabledStyle); // false
-  /// ```
   @useResult
   FTextFieldStyle copyWith({
     Brightness? keyboardAppearance,

@@ -3,15 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
-
-part 'text_field_state_style.dart';
-part 'text_field_style.dart';
-part 'text_form_field.dart';
+import 'package:forui/src/widgets/text_field/field.dart';
 
 /// A text field.
 ///
@@ -738,7 +732,7 @@ final class FTextField extends StatelessWidget {
               primaryColor: style.cursorColor,
             ),
           ),
-          child: _Field(
+          child: Field(
             parent: this,
             style: style,
             key: key,

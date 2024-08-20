@@ -1,4 +1,7 @@
-part of 'text_field.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A [FTextField] state's style.
 sealed class FTextFieldStateStyle with Diagnosticable {
@@ -89,21 +92,6 @@ final class FTextFieldNormalStyle extends FTextFieldStateStyle {
   }) : super.inherit(formFieldStateStyle: formFieldNormaStyle);
 
   /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FTextFieldNormalStyle(
-  ///   labelTextStyle: ...,
-  ///   contentTextStyle: ...,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   contentTextStyle: ...,
-  /// );
-  ///
-  /// print(style.labelTextStyle == copy.labelTextStyle); // true
-  /// print(style.contentTextStyle == copy.contentTextStyle); // false
-  /// ```
   @useResult
   FTextFieldNormalStyle copyWith({
     TextStyle? labelTextStyle,
@@ -180,21 +168,6 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
         super.inherit(formFieldStateStyle: formFieldErrorStyle);
 
   /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FTextFieldErrorStyle(
-  ///   labelTextStyle: ...,
-  ///   contentTextStyle: ...,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   contentTextStyle: ...,
-  /// );
-  ///
-  /// print(style.labelTextStyle == copy.labelTextStyle); // true
-  /// print(style.contentTextStyle == copy.contentTextStyle); // false
-  /// ```
   @useResult
   FTextFieldErrorStyle copyWith({
     TextStyle? errorTextStyle,
