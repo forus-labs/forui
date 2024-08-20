@@ -1,24 +1,32 @@
-part of 'button.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
-final class _FButtonContent extends StatelessWidget {
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
+
+@internal
+class Content extends StatelessWidget {
   final Widget? prefix;
   final Widget? suffix;
   final Widget label;
 
-  const _FButtonContent({
+  const Content({
     required this.label,
     this.prefix,
     this.suffix,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final (:style, :enabled) = FButton._of(context);
+    final FButtonData(style: FButtonCustomStyle(:content), :enabled) = FButtonData.of(context);
 
     return Padding(
-      padding: style.content.padding,
+      padding: content.padding,
       child: DefaultTextStyle.merge(
-        style: enabled ? style.content.enabledTextStyle : style.content.disabledTextStyle,
+        style: enabled ? content.enabledTextStyle : content.disabledTextStyle,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: separate(
@@ -37,14 +45,15 @@ final class _FButtonContent extends StatelessWidget {
   }
 }
 
-final class _FButtonIconContent extends StatelessWidget {
+@internal
+class IconContent extends StatelessWidget {
   final Widget child;
 
-  const _FButtonIconContent({required this.child});
+  const IconContent({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final (:style, enabled: _) = FButton._of(context);
+    final FButtonData(:style, enabled: _) = FButtonData.of(context);
 
     return Padding(
       padding: style.iconContent.padding,
@@ -53,45 +62,8 @@ final class _FButtonIconContent extends StatelessWidget {
   }
 }
 
-/// [FButton] icon content's style.
-class FButtonIconContentStyle with Diagnosticable {
-  /// The padding.
-  final EdgeInsets padding;
-
-  /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({
-    this.padding = const EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: 12.5,
-    ),
-  });
-
-  /// Returns a copy of this [FButtonIconContentStyle] with the given properties replaced.
-  @useResult
-  FButtonIconContentStyle copyWith({
-    EdgeInsets? padding,
-  }) =>
-      FButtonIconContentStyle(
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FButtonIconContentStyle && runtimeType == other.runtimeType && padding == other.padding;
-
-  @override
-  int get hashCode => padding.hashCode;
-}
-
 /// [FButton] content's style.
-class FButtonContentStyle with Diagnosticable {
+final class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is enabled.
   final TextStyle enabledTextStyle;
 
@@ -129,20 +101,6 @@ class FButtonContentStyle with Diagnosticable {
         );
 
   /// Returns a copy of this [FButtonContentStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FButtonContentStyle(
-  ///   enabledTextStyle: ...,
-  ///   disabledTextStyle: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   disabledTextStyle: ...,
-  /// );
-  ///
-  /// print(style.enabledTextStyle == copy.enabledTextStyle); // true
-  /// print(style.disabledTextStyle == copy.disabledTextStyle); // false
-  /// ```
   @useResult
   FButtonContentStyle copyWith({
     TextStyle? enabledTextStyle,
@@ -175,4 +133,31 @@ class FButtonContentStyle with Diagnosticable {
 
   @override
   int get hashCode => enabledTextStyle.hashCode ^ disabledTextStyle.hashCode ^ padding.hashCode;
+}
+
+/// [FButton] icon content's style.
+final class FButtonIconContentStyle with Diagnosticable {
+  /// The padding.
+  final EdgeInsets padding;
+
+  /// Creates a [FButtonIconContentStyle].
+  const FButtonIconContentStyle({this.padding = const EdgeInsets.all(7.5)});
+
+  /// Returns a copy of this [FButtonIconContentStyle] with the given properties replaced.
+  @useResult
+  FButtonIconContentStyle copyWith({EdgeInsets? padding}) => FButtonIconContentStyle(padding: padding ?? this.padding);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('padding', padding));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FButtonIconContentStyle && runtimeType == other.runtimeType && padding == other.padding;
+
+  @override
+  int get hashCode => padding.hashCode;
 }

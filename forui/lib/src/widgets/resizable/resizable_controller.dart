@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/resizable/resizable.dart';
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 
 /// A controller that manages the resizing of regions in a [FResizable].
@@ -30,6 +29,8 @@ abstract interface class FResizableController extends ChangeNotifier {
   final double _hapticFeedbackVelocity = 6.5; // ignore: unused_field, TODO: haptic feedback
 
   bool _haptic = false;
+
+  FResizableController._();
 
   /// Creates a [FResizableController].
   ///
@@ -56,8 +57,6 @@ abstract interface class FResizableController extends ChangeNotifier {
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd,
   }) = _CascadeController;
-
-  FResizableController._();
 
   /// Updates the regions at the given indexes in addition to their neighbours. Returns true if haptic feedback should
   /// be performed.

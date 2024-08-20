@@ -98,7 +98,7 @@ class _DateController extends FCalendarController<DateTime?> {
   void select(DateTime date) => value = value?.toLocalDate() == date.toLocalDate() ? null : date;
 }
 
-class _DatesController extends FCalendarController<Set<DateTime>> {
+final class _DatesController extends FCalendarController<Set<DateTime>> {
   final Predicate<DateTime> _selectable;
 
   _DatesController({
@@ -121,7 +121,7 @@ class _DatesController extends FCalendarController<Set<DateTime>> {
   }
 }
 
-class _RangeController extends FCalendarController<(DateTime, DateTime)?> {
+final class _RangeController extends FCalendarController<(DateTime, DateTime)?> {
   final Predicate<DateTime> _selectable;
 
   _RangeController({

@@ -1,7 +1,12 @@
-part of 'button.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// [FButtonCustomStyle]'s style.
-class FButtonStyles with Diagnosticable {
+final class FButtonStyles with Diagnosticable {
   /// The primary button style.
   final FButtonCustomStyle primary;
 
@@ -107,19 +112,6 @@ class FButtonStyles with Diagnosticable {
         );
 
   /// Returns a copy of this [FButtonStyles] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FButtonStyles(
-  ///   primary: ...,
-  ///   secondary: ...,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(secondary: ...);
-  ///
-  /// print(style.primary == copy.primary); // true
-  /// print(style.secondary == copy.secondary); // false
-  /// ```
   @useResult
   FButtonStyles copyWith({
     FButtonCustomStyle? primary,

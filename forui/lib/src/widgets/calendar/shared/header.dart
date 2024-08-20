@@ -128,56 +128,40 @@ class Navigation extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final buttonStyle = context.theme.buttonStyles.outline;
-    final effectiveButtonStyle = buttonStyle.copyWith(
-      enabledBoxDecoration: buttonStyle.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-      disabledBoxDecoration: buttonStyle.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-    );
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: SizedBox(
-        height: Header.height,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 7),
-              child: FButton.raw(
-                // TODO: Replace with FButton.icon.
-                style: effectiveButtonStyle,
-                onPress: onPrevious,
-                child: Padding(
-                  padding: const EdgeInsets.all(7),
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(bottom: 5),
+        child: SizedBox(
+          height: Header.height,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 7),
+                child: FButton.icon(
+                  style: style.buttonStyle,
+                  onPress: onPrevious,
                   child: FAssets.icons.chevronLeft(
                     height: 17,
                     colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
                   ),
                 ),
               ),
-            ),
-            const Expanded(child: SizedBox()),
-            Padding(
-              padding: const EdgeInsets.only(right: 7),
-              child: FButton.raw(
-                // TODO: Replace with FButton.icon.
-                style: effectiveButtonStyle,
-                onPress: onNext,
-                child: Padding(
-                  padding: const EdgeInsets.all(7),
+              const Expanded(child: SizedBox()),
+              Padding(
+                padding: const EdgeInsets.only(right: 7),
+                child: FButton.icon(
+                  style: style.buttonStyle,
+                  onPress: onNext,
                   child: FAssets.icons.chevronRight(
                     height: 17,
                     colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -191,6 +175,9 @@ class Navigation extends StatelessWidget {
 
 /// The calendar header's style.
 final class FCalendarHeaderStyle with Diagnosticable {
+  /// The button style.
+  final FButtonCustomStyle buttonStyle;
+
   /// The header's text style.
   final TextStyle headerTextStyle;
 
@@ -202,34 +189,30 @@ final class FCalendarHeaderStyle with Diagnosticable {
 
   /// Creates a [FCalendarHeaderStyle].
   FCalendarHeaderStyle({
+    required this.buttonStyle,
     required this.headerTextStyle,
     required this.iconColor,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
   /// Creates a [FCalendarHeaderStyle] that inherits its values from the given [colorScheme] and [typography].
-  FCalendarHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          headerTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-          iconColor: colorScheme.mutedForeground,
-        );
+  factory FCalendarHeaderStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+    required FStyle style,
+  }) {
+    final outline = FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style).outline;
+    return FCalendarHeaderStyle(
+      buttonStyle: outline.copyWith(
+        enabledBoxDecoration: outline.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+        disabledBoxDecoration: outline.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+      ),
+      headerTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+      iconColor: colorScheme.mutedForeground,
+    );
+  }
 
   /// Creates a copy of this but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FCalendarHeaderStyle(
-  ///   headerTextStyle: ...,
-  ///   iconColor:...,
-  ///   // Other arguments omitted for brevity.
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   iconColor: ...,
-  /// );
-  ///
-  /// print(style.headerTextStyle == copy.headerTextStyle); // true
-  /// print(style.iconColor == copy.iconColor); // false
-  /// ```
   @useResult
   FCalendarHeaderStyle copyWith({
     TextStyle? headerTextStyle,
@@ -237,6 +220,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
     Duration? animationDuration,
   }) =>
       FCalendarHeaderStyle(
+        buttonStyle: buttonStyle,
         headerTextStyle: headerTextStyle ?? this.headerTextStyle,
         iconColor: iconColor ?? this.iconColor,
         animationDuration: animationDuration ?? this.animationDuration,
@@ -246,6 +230,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('buttonStyle', buttonStyle))
       ..add(DiagnosticsProperty('headerTextStyle', headerTextStyle))
       ..add(ColorProperty('iconColor', iconColor))
       ..add(DiagnosticsProperty('animationDuration', animationDuration));

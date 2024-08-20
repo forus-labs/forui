@@ -1,7 +1,12 @@
-part of 'alert.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// [FAlertCustomStyle]'s style.
-class FAlertStyles with Diagnosticable {
+final class FAlertStyles with Diagnosticable {
   /// The primary alert style.
   final FAlertCustomStyle primary;
 
@@ -14,8 +19,7 @@ class FAlertStyles with Diagnosticable {
     required this.destructive,
   });
 
-  /// Creates a [FAlertStyles] that inherits its properties from the provided [colorScheme], [typography], and
-  /// [style].
+  /// Creates a [FAlertStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FAlertCustomStyle(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
@@ -57,18 +61,6 @@ class FAlertStyles with Diagnosticable {
   }
 
   /// Returns a copy of this [FAlertStyles] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FAlertStyles(
-  ///   primary: ...,
-  ///   destructive: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(destructive: ...);
-  ///
-  /// print(style.primary == copy.primary); // true
-  /// print(style.destructive == copy.destructive); // false
-  /// ```
   @useResult
   FAlertStyles copyWith({
     FAlertCustomStyle? primary,

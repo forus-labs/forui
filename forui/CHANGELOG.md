@@ -4,7 +4,15 @@
 
 * Add `FButton.icon(...)`.
 
+* Add `FBottomNavigationBarData`.
+
+* Add `FButtonData`.
+
+* Add `FCalendarHeaderStyle.buttonStyle`.
+
 * Add `FFormFieldStyle`.
+
+* Add `FHeaderData`.
 
 * Add `FResizable.semanticFormatterCallback`.
 
@@ -13,6 +21,14 @@
 * Add label and description to `FCheckbox`.
 
 ### Changes
+
+* **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.size`.
+
+* **Breaking:** Rename `FBottomNavigationBar.items` to `FBottomNavigationBar.children`.
+
+* **Breaking:** Remove `FBottomNavigationBar.raw(...)` - use the default constructor instead.
+
+* **Breaking:** Rename `FButtonIconStyle.height` to `FButtonIconStyle.size`.
 
 * Change `FResizable` to resize by `FResizable.resizePercentage` when using a keyboard.
 
@@ -26,7 +42,7 @@
 
 * **Breaking:** Change how `FTextFieldStyle` stores various state-dependent styles.
 
-* **Breaking:** Remove `FTextField.error`.
+* **Breaking:** Remove `FTextField.error` - use `FTextField.forceErrorText` instead.
 
 ### Fixes
 

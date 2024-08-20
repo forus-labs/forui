@@ -32,7 +32,7 @@ It is used to navigate between a small number of views, typically between three 
         Widget build(BuildContext context) => FBottomNavigationBar(
               index: index,
               onChange: (index) => setState(() => this.index = index),
-              items: [
+              children: [
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.home,
                   label: 'Home',
@@ -72,7 +72,7 @@ It is used to navigate between a small number of views, typically between three 
 FBottomNavigationBar(
     index: 0,
     onChange: (index) => {},
-    items: [
+    children: [
       FBottomNavigationBarItem(
         icon: FAssets.icons.home,
         label: 'Home',

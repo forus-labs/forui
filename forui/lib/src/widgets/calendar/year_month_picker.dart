@@ -106,18 +106,6 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
         );
 
   /// Returns a copy of this [FCalendarYearMonthPickerStyle] but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FCalendarYearMonthPickerStyle(
-  ///   enabledStyle: ...,
-  ///   disabledStyle: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(disabledStyle: ...);
-  ///
-  /// print(style.enabledStyle == copy.enabledStyle); // true
-  /// print(style.disabledStyle == copy.disabledStyle); // false
-  /// ```
   @useResult
   FCalendarYearMonthPickerStyle copyWith({
     FCalendarEntryStyle? enabledStyle,

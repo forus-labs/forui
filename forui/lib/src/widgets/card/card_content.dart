@@ -1,18 +1,26 @@
-part of 'card.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
-final class _FCardContent extends StatelessWidget {
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/util.dart';
+
+@internal
+class Content extends StatelessWidget {
   final Widget? image;
   final Widget? title;
   final Widget? subtitle;
   final Widget? child;
   final FCardContentStyle? style;
 
-  const _FCardContent({
+  const Content({
     this.image,
     this.title,
     this.subtitle,
     this.child,
     this.style,
+    super.key,
   });
 
   @override
@@ -95,18 +103,6 @@ final class FCardContentStyle with Diagnosticable {
         padding = const EdgeInsets.all(16);
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FCardContentStyle(
-  ///   titleTextStyle: ...,
-  ///   subtitleTextStyle: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(titleTextStyle: ...);
-  ///
-  /// print(style.titleTextStyle == copy.titleTextStyle); // true
-  /// print(style.subtitleTextStyle == copy.subtitleTextStyle); // false
-  /// ```
   @useResult
   FCardContentStyle copyWith({
     TextStyle? titleTextStyle,

@@ -12,8 +12,6 @@ part 'root_header.dart';
 
 part 'nested_header.dart';
 
-/// A header.
-///
 /// A header contains the page's title and actions.
 ///
 /// See:
@@ -44,6 +42,39 @@ sealed class FHeader extends StatelessWidget {
   }) = _FNestedHeader;
 }
 
+/// A header's data.
+class FHeaderData extends InheritedWidget {
+  /// Returns the [FHeaderData] of the [FHeader] in the given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FHeader] in the given [context].
+  @useResult
+  static FHeaderData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FHeaderData>();
+    assert(data != null, 'No FHeaderActionData found in context');
+    return data!;
+  }
+
+  /// The action's style.
+  final FHeaderActionStyle actionStyle;
+
+  /// Creates a [FHeaderData].
+  const FHeaderData({
+    required this.actionStyle,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(FHeaderData oldWidget) => actionStyle != oldWidget.actionStyle;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('actionStyle', actionStyle));
+  }
+}
+
 /// [FHeader]'s styles.
 final class FHeaderStyles with Diagnosticable {
   /// The root header's style.
@@ -67,20 +98,6 @@ final class FHeaderStyles with Diagnosticable {
         nestedStyle = FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
 
   /// Returns a copy of this [FHeaderStyles] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FHeaderStyle(
-  ///   rootStyle: ...,
-  ///   nestedStyle: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   nestedStyle: ...,
-  /// );
-  ///
-  /// print(style.rootStyle == copy.rootStyle); // true
-  /// print(style.nestedStyle == copy.nestedStyle); // false
-  /// ```
   @useResult
   FHeaderStyles copyWith({
     FRootHeaderStyle? rootStyle,

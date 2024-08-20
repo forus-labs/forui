@@ -1,7 +1,12 @@
-part of 'badge.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
+
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// The [FBadgeCustomStyle]s.
-class FBadgeStyles with Diagnosticable {
+final class FBadgeStyles with Diagnosticable {
   /// The primary badge style.
   final FBadgeCustomStyle primary;
 
@@ -70,18 +75,6 @@ class FBadgeStyles with Diagnosticable {
         );
 
   /// Returns a copy of this [FBadgeStyles] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final styles = FBadgeStyles(
-  ///   primary: ...,
-  ///   secondary: ...,
-  /// );
-  ///
-  /// final copy = styles.copyWith(secondary: ...);
-  ///
-  /// print(styles.primary == copy.primary); // true
-  /// print(styles.secondary == copy.secondary); // false
-  /// ```
   @useResult
   FBadgeStyles copyWith({
     FBadgeCustomStyle? primary,

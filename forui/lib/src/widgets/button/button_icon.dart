@@ -1,4 +1,9 @@
-part of 'button.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A [FButton]'s icon.
 class FButtonIcon extends StatelessWidget {
@@ -10,10 +15,10 @@ class FButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (style: FButtonCustomStyle(:icon), :enabled) = FButton._of(context);
+    final FButtonData(style: FButtonCustomStyle(:icon), :enabled) = FButtonData.of(context);
 
     return this.icon(
-      height: icon.height,
+      height: icon.size,
       colorFilter: ColorFilter.mode(enabled ? icon.enabledColor : icon.disabledColor, BlendMode.srcIn),
     );
   }
@@ -33,46 +38,32 @@ final class FButtonIconStyle with Diagnosticable {
   /// The icon's color when this button is disabled.
   final Color disabledColor;
 
-  /// The icon's height. Defaults to 20.
-  final double height;
+  /// The icon's size. Defaults to 20.
+  final double size;
 
   /// Creates a [FButtonIconStyle].
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * `height` <= 0.0
-  /// * `height` is Nan
+  /// * `size` <= 0.0
+  /// * `size` is Nan
   FButtonIconStyle({
     required this.enabledColor,
     required this.disabledColor,
-    this.height = 20,
-  }) : assert(0 < height, 'The height is $height, but it should be in the range "0 < height".');
+    this.size = 20,
+  }) : assert(0 < size, 'The size is $size, but it should be in the range "0 < size".');
 
   /// Returns a copy of this [FBadgeContentStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FButtonIconStyle(
-  ///   enabledColor: Colors.red,
-  ///   disabledColor: Colors.black,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   disabledColor: Colors.blue,
-  /// );
-  ///
-  /// print(copy.enabledColor); // Colors.blue
-  /// print(copy.disabledColor); // Colors.black
-  /// ```
   @useResult
   FButtonIconStyle copyWith({
     Color? enabledColor,
     Color? disabledColor,
-    double? height,
+    double? size,
   }) =>
       FButtonIconStyle(
         enabledColor: enabledColor ?? this.enabledColor,
         disabledColor: disabledColor ?? this.disabledColor,
-        height: height ?? this.height,
+        size: size ?? this.size,
       );
 
   @override
@@ -81,7 +72,7 @@ final class FButtonIconStyle with Diagnosticable {
     properties
       ..add(ColorProperty('enabledColor', enabledColor))
       ..add(ColorProperty('disabledColor', disabledColor))
-      ..add(DoubleProperty('height', height, defaultValue: 20));
+      ..add(DoubleProperty('size', size, defaultValue: 20));
   }
 
   @override
@@ -91,8 +82,8 @@ final class FButtonIconStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           enabledColor == other.enabledColor &&
           disabledColor == other.disabledColor &&
-          height == other.height;
+          size == other.size;
 
   @override
-  int get hashCode => enabledColor.hashCode ^ disabledColor.hashCode ^ height.hashCode;
+  int get hashCode => enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode;
 }

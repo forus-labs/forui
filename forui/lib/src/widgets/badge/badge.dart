@@ -4,9 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-
-part 'badge_content.dart';
-part 'badge_styles.dart';
+import 'package:forui/src/widgets/badge/badge_content.dart';
 
 /// A badge. Badges are typically used to draw attention to specific information, such as labels and counts.
 ///
@@ -29,7 +27,7 @@ class FBadge extends StatelessWidget {
     required Widget label,
     this.style = FBadgeStyle.primary,
     super.key,
-  }) : builder = ((context, style) => _FBadgeContent(label: label, style: style));
+  }) : builder = ((context, style) => Content(label: label, style: style));
 
   /// Creates a [FBadge] with custom content.
   const FBadge.raw({
@@ -76,8 +74,8 @@ class FBadge extends StatelessWidget {
 
 /// A [FBadge]'s style.
 ///
-/// A style can be either one of the pre-defined styles in [FBadgeStyle] or a [FBadgeCustomStyle]. The pre-defined styles
-/// are a convenient shorthand for the various [FBadgeCustomStyle]s in the current context's [FBadgeStyles].
+/// A style can be either one of the pre-defined styles in [FBadgeStyle] or a [FBadgeCustomStyle]. The pre-defined
+/// styles are a convenient shorthand for the various [FBadgeCustomStyle]s in the current context's [FBadgeStyles].
 sealed class FBadgeStyle {
   /// The badge's primary style.
   ///
@@ -131,7 +129,7 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   final FBadgeContentStyle content;
 
   /// Creates a [FBadgeCustomStyle].
-  FBadgeCustomStyle({
+  const FBadgeCustomStyle({
     required this.backgroundColor,
     required this.borderColor,
     required this.content,
@@ -149,21 +147,6 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
         borderWidth = style.borderWidth;
 
   /// Returns a copy of this [FBadgeCustomStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FBadgeCustomStyle(
-  ///   backgroundColor: Colors.red,
-  ///   borderColor: Colors.black,
-  ///   // other properties omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   backgroundColor: Colors.blue,
-  /// );
-  ///
-  /// print(copy.backgroundColor); // Colors.blue
-  /// print(copy.borderColor); // Colors.black
-  /// ```
   @useResult
   FBadgeCustomStyle copyWith({
     Color? backgroundColor,

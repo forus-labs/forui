@@ -63,7 +63,7 @@ class FHeaderAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = FHeaderActionStyle._of(context);
+    final style = this.style ?? FHeaderData.of(context).actionStyle;
     final enabled = onPress != null || onLongPress != null;
 
     return FTappable.animated(
@@ -90,12 +90,7 @@ class FHeaderAction extends StatelessWidget {
 }
 
 /// [FHeaderAction]'s style.
-class FHeaderActionStyle with Diagnosticable {
-  @useResult
-  static FHeaderActionStyle _of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<_InheritedActionStyle>()?.style ??
-      context.theme.headerStyle.rootStyle.actionStyle;
-
+final class FHeaderActionStyle with Diagnosticable {
   /// The icon's color when this action is enabled.
   final Color enabledColor;
 
@@ -122,20 +117,6 @@ class FHeaderActionStyle with Diagnosticable {
         disabledColor = colorScheme.foreground.withOpacity(0.5);
 
   /// Returns a copy of this [FHeaderActionStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FHeaderActionStyle(
-  ///   enabledColor: Colors.black,
-  ///   disabledColor: Colors.white,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   disabledColor: Colors.blue,
-  /// );
-  ///
-  /// print(copy.enabledColor); // black
-  /// print(copy.disabledColor); // blue
-  /// ```
   @useResult
   FHeaderActionStyle copyWith({
     Color? enabledColor,
@@ -169,22 +150,4 @@ class FHeaderActionStyle with Diagnosticable {
 
   @override
   int get hashCode => enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode;
-}
-
-class _InheritedActionStyle extends InheritedWidget {
-  final FHeaderActionStyle style;
-
-  const _InheritedActionStyle({
-    required this.style,
-    required super.child,
-  });
-
-  @override
-  bool updateShouldNotify(_InheritedActionStyle oldWidget) => style != oldWidget.style;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
-  }
 }

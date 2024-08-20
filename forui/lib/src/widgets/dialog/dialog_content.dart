@@ -1,6 +1,13 @@
-part of 'dialog.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
-sealed class _FDialogContent extends StatelessWidget {
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
+
+@internal
+sealed class Content extends StatelessWidget {
   final FDialogContentStyle style;
   final CrossAxisAlignment alignment;
   final Widget? title;
@@ -9,7 +16,7 @@ sealed class _FDialogContent extends StatelessWidget {
   final TextAlign bodyTextAlign;
   final List<Widget> actions;
 
-  const _FDialogContent({
+  const Content({
     required this.style,
     required this.alignment,
     required this.title,
@@ -17,6 +24,7 @@ sealed class _FDialogContent extends StatelessWidget {
     required this.body,
     required this.bodyTextAlign,
     required this.actions,
+    super.key,
   });
 
   @override
@@ -65,19 +73,21 @@ sealed class _FDialogContent extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(DiagnosticsProperty('titleTextAlign', titleTextAlign))
-      ..add(DiagnosticsProperty('bodyTextAlign', bodyTextAlign))
+      ..add(EnumProperty('alignment', alignment))
+      ..add(EnumProperty('titleTextAlign', titleTextAlign))
+      ..add(EnumProperty('bodyTextAlign', bodyTextAlign))
       ..add(IterableProperty('actions', actions));
   }
 }
 
-class _FHorizontalDialogContent extends _FDialogContent {
-  const _FHorizontalDialogContent({
+@internal
+class HorizontalContent extends Content {
+  const HorizontalContent({
     required super.style,
     required super.title,
     required super.body,
     required super.actions,
+    super.key,
   }) : super(alignment: CrossAxisAlignment.start, titleTextAlign: TextAlign.start, bodyTextAlign: TextAlign.start);
 
   @override
@@ -92,12 +102,14 @@ class _FHorizontalDialogContent extends _FDialogContent {
       );
 }
 
-class _FVerticalDialogContent extends _FDialogContent {
-  const _FVerticalDialogContent({
+@internal
+class VerticalContent extends Content {
+  const VerticalContent({
     required super.style,
     required super.title,
     required super.body,
     required super.actions,
+    super.key,
   }) : super(alignment: CrossAxisAlignment.center, titleTextAlign: TextAlign.center, bodyTextAlign: TextAlign.center);
 
   @override
@@ -145,21 +157,6 @@ final class FDialogContentStyle with Diagnosticable {
         bodyTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground);
 
   /// Returns a copy of this [FDialogContentStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FDialogContentStyle(
-  ///   titleTextStyle: ...,
-  ///   bodyTextStyle: ...,
-  ///   // other properties omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   bodyTextStyle: ...,
-  /// );
-  ///
-  /// print(style.titleTextStyle == copy.titleTextStyle); // true
-  /// print(style.bodyTextStyle == copy.bodyTextStyle); // false
-  /// ```
   @useResult
   FDialogContentStyle copyWith({
     TextStyle? titleTextStyle,

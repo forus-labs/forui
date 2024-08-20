@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
 import 'package:meta/meta.dart';
-import 'package:sugar/collection.dart';
 
 import 'package:forui/forui.dart';
-
-part 'dialog_content.dart';
+import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
 /// A modal dialog.
 ///
@@ -83,13 +81,13 @@ class FDialog extends StatelessWidget {
     Axis direction = Axis.vertical,
     super.key,
   }) : builder = switch (direction) {
-          Axis.horizontal => (context, style) => _FHorizontalDialogContent(
+          Axis.horizontal => (context, style) => HorizontalContent(
                 style: style.horizontal,
                 title: title,
                 body: body,
                 actions: actions,
               ),
-          Axis.vertical => (context, style) => _FVerticalDialogContent(
+          Axis.vertical => (context, style) => VerticalContent(
                 style: style.vertical,
                 title: title,
                 body: body,
@@ -213,21 +211,6 @@ final class FDialogStyle with Diagnosticable {
         maxWidth = 560;
 
   /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FDialogStyle(
-  ///   minWidth: 1,
-  ///   maxWidth: 2,
-  ///   // other properties omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   maxWidth: 3,
-  /// );
-  ///
-  /// print(copy.minWidth); // 1
-  /// print(copy.maxWidth); // 3
-  /// ```
   @useResult
   FDialogStyle copyWith({
     BoxDecoration? decoration,

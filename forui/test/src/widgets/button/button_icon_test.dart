@@ -9,7 +9,7 @@ void main() {
     test('invalid height', () {
       expect(
         () => FButtonIconStyle(
-          height: 0,
+          size: 0,
           enabledColor: Colors.white,
           disabledColor: Colors.white,
         ),
@@ -20,7 +20,7 @@ void main() {
     test('valid height', () {
       expect(
         () => FButtonIconStyle(
-          height: 1,
+          size: 1,
           enabledColor: Colors.white,
           disabledColor: Colors.white,
         ),

@@ -118,7 +118,7 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     properties
       ..add(DiagnosticsProperty('current', current))
       ..add(DiagnosticsProperty('focusedDate', focusedDate))
-      ..add(DiagnosticsProperty('textDirection', textDirection))
+      ..add(EnumProperty('textDirection', textDirection))
       ..add(DiagnosticsProperty('directionOffset', directionOffset));
   }
 

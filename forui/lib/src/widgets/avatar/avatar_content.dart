@@ -1,47 +1,49 @@
-part of 'avatar.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
-class _FAvatarContent extends StatelessWidget {
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
+
+@internal
+final class Content extends StatelessWidget {
   final FAvatarStyle? style;
   final double size;
   final ImageProvider image;
   final String? semanticLabel;
   final Widget? fallback;
 
-  const _FAvatarContent({
+  const Content({
     required this.style,
     required this.size,
     required this.image,
     required this.semanticLabel,
     required this.fallback,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.avatarStyle;
-
-    final fallback = this.fallback ?? _Placeholder(style: style, size: size);
+    final fallback = this.fallback ?? PlaceholderContent(style: style, size: size);
 
     return Image(
       height: size,
       width: size,
       image: image,
       semanticLabel: semanticLabel,
-      errorBuilder: (context, exception, stacktrace) => fallback,
+      errorBuilder: (context, _, __) => fallback,
       frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) {
           return child;
         }
+
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           child: frame == null ? fallback : child,
         );
       },
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress == null) {
-          return child;
-        }
-        return fallback;
-      },
+      loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : fallback,
       fit: BoxFit.cover,
     );
   }
@@ -53,16 +55,16 @@ class _FAvatarContent extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('size', size))
       ..add(DiagnosticsProperty('image', image))
-      ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(DiagnosticsProperty('fallback', fallback));
+      ..add(StringProperty('semanticLabel', semanticLabel));
   }
 }
 
-class _Placeholder extends StatelessWidget {
+@internal
+final class PlaceholderContent extends StatelessWidget {
   final FAvatarStyle? style;
   final double size;
 
-  const _Placeholder({required this.size, this.style});
+  const PlaceholderContent({required this.size, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
