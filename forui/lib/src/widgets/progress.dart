@@ -13,25 +13,24 @@ import 'package:forui/forui.dart';
 /// * https://forui.dev/docs/progress for working examples.
 /// * [FProgressStyle] for customizing a progress's appearance.
 class FProgress extends StatelessWidget {
+  /// The style. Defaults to [FThemeData.progressStyle].
+  final FProgressStyle? style;
+
   /// If non-null, the value of this progress indicator.
   ///
   /// A value of 0.0 means no progress and 1.0 means that progress is complete.
-  /// The value will be clamped to be in the range 0.0-1.0.
+  /// The value will be clamped to be in the range, `[0.0, 1.0]`.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [value] is NaN
+  /// Throws [AssertionError] if [value] is NaN
   final double value;
-
-  /// The style. Defaults to [FThemeData.progressStyle].
-  final FProgressStyle? style;
 
   /// Creates a [FProgress].
   FProgress({
     required this.value,
     this.style,
     super.key,
-  }) : assert(!value.isNaN, 'Cannot provide a NaN value');
+  }) : assert(!value.isNaN, 'Cannot provide a NaN value.');
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +67,8 @@ class FProgress extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('value', value))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DoubleProperty('value', value));
   }
 }
 
@@ -113,30 +112,7 @@ final class FProgressStyle with Diagnosticable {
         animationDuration = const Duration(milliseconds: 500),
         curve = Curves.ease;
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('progressDecoration', progressDecoration))
-      ..add(DiagnosticsProperty('backgroundDecoration', backgroundDecoration))
-      ..add(DiagnosticsProperty('constraints', constraints))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration))
-      ..add(DiagnosticsProperty('curve', curve));
-  }
-
   /// Returns a copy of this [FProgressStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FProgressStyle(
-  ///   backgroundDecoration: ...,
-  ///   progressDecoration: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(progressDecoration: ...);
-  ///
-  /// print(style.backgroundDecoration == copy.backgroundDecoration); // true
-  /// print(style.progressDecoration == copy.progressDecoration); // false
-  /// ```
   @useResult
   FProgressStyle copyWith({
     BoxDecoration? backgroundDecoration,
@@ -152,6 +128,17 @@ final class FProgressStyle with Diagnosticable {
         animationDuration: animationDuration ?? this.animationDuration,
         curve: curve ?? this.curve,
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('progressDecoration', progressDecoration))
+      ..add(DiagnosticsProperty('backgroundDecoration', backgroundDecoration))
+      ..add(DiagnosticsProperty('constraints', constraints))
+      ..add(DiagnosticsProperty('animationDuration', animationDuration))
+      ..add(DiagnosticsProperty('curve', curve));
+  }
 
   @override
   bool operator ==(Object other) =>

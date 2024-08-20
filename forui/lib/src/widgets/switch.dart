@@ -162,9 +162,9 @@ class FSwitch extends StatelessWidget {
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start))
-      ..add(DiagnosticsProperty('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(DiagnosticsProperty('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onSave', onSave))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(DiagnosticsProperty('initialValue', initialValue))
@@ -203,30 +203,7 @@ final class FSwitchStyle with Diagnosticable {
         thumbColor = colorScheme.background,
         focusColor = colorScheme.primary;
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('checkedColor', checkedColor))
-      ..add(ColorProperty('uncheckedColor', uncheckedColor))
-      ..add(ColorProperty('thumbColor', thumbColor))
-      ..add(ColorProperty('focusColor', focusColor));
-  }
-
   /// Returns a copy of this [FSwitchStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FSwitchStyle(
-  ///   checkedColor: Colors.black,
-  ///   uncheckedColor: Colors.white,
-  ///   // Other arguments omitted for brevity
-  /// );
-  ///
-  /// final copy = style.copyWith(uncheckedColor: Colors.blue);
-  ///
-  /// print(copy.checkedColor); // black
-  /// print(copy.uncheckedColor); // blue
-  /// ```
   @useResult
   FSwitchStyle copyWith({
     Color? checkedColor,
@@ -240,6 +217,16 @@ final class FSwitchStyle with Diagnosticable {
         thumbColor: thumbColor ?? this.thumbColor,
         focusColor: focusColor ?? this.focusColor,
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ColorProperty('checkedColor', checkedColor))
+      ..add(ColorProperty('uncheckedColor', uncheckedColor))
+      ..add(ColorProperty('thumbColor', thumbColor))
+      ..add(ColorProperty('focusColor', focusColor));
+  }
 
   @override
   bool operator ==(Object other) =>

@@ -30,6 +30,8 @@
 
 * **Breaking:** Rename `FButtonIconStyle.height` to `FButtonIconStyle.size`.
 
+* **Breaking:** Change `FDivider.vertical` to `FDivider.axis`.
+
 * Change `FResizable` to resize by `FResizable.resizePercentage` when using a keyboard.
 
 * **Breaking:** Change `FResiableDividerStyle.thickness` to `FResizableDividerStyle.width`.

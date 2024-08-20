@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A scaffold.
 ///
@@ -62,8 +63,8 @@ class FScaffold extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('pad', value: contentPad, defaultValue: true, ifTrue: 'pad'))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('contentPad', value: contentPad, defaultValue: true, ifTrue: 'pad'));
   }
 }
 
@@ -102,6 +103,20 @@ final class FScaffoldStyle with Diagnosticable {
             ),
           ),
         );
+
+  /// Returns a copy of this style with the provided properties replaced.
+  @useResult
+  FScaffoldStyle copyWith({
+    Color? backgroundColor,
+    EdgeInsets? contentPadding,
+    BoxDecoration? headerDecoration,
+    BoxDecoration? footerDecoration,
+  }) => FScaffoldStyle(
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      contentPadding: contentPadding ?? this.contentPadding,
+      headerDecoration: headerDecoration ?? this.headerDecoration,
+      footerDecoration: footerDecoration ?? this.footerDecoration,
+    );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -66,10 +66,10 @@ class FCheckbox extends FFormField<bool> {
   @override
   Widget builder(BuildContext context, FormFieldState<bool> state) {
     final style = this.style ?? context.theme.checkboxStyle;
-    final stateStyle = switch ((enabled, state.hasError)) {
-      (true, false) => style.enabledStyle,
-      (false, false) => style.disabledStyle,
-      (_, true) => style.errorStyle,
+    final (labelState, stateStyle) = switch ((enabled, state.hasError)) {
+      (true, false) => (FLabelState.enabled, style.enabledStyle),
+      (false, false) => (FLabelState.disabled, style.disabledStyle),
+      (_, true) => (FLabelState.error, style.errorStyle),
     };
     final value = state.value ?? initialValue;
 
@@ -92,11 +92,7 @@ class FCheckbox extends FFormField<bool> {
               : null,
           child: FLabel(
             axis: Axis.horizontal,
-            state: switch ((enabled, state.hasError)) {
-              (true, false) => FLabelState.enabled,
-              (false, false) => FLabelState.disabled,
-              (_, true) => FLabelState.error,
-            },
+            state: labelState,
             label: label,
             description: description,
             error: Text(state.errorText ?? ''),
@@ -206,21 +202,6 @@ final class FCheckboxStyle with Diagnosticable {
         );
 
   /// Returns a copy of this [FCheckboxStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FCheckboxStyle(
-  ///   animationDuration: const Duration(minutes: 1),
-  ///   curve: Curves.linear,
-  ///   // Other arguments omitted for brevity.
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   curve: Curves.bounceIn,
-  /// );
-  ///
-  /// print(style.animationDuration); // const Duration(minutes: 1)
-  /// print(copy.curve); // Curves.bounceIn
-  /// ```
   @useResult
   FCheckboxStyle copyWith({
     Duration? animationDuration,
@@ -296,21 +277,6 @@ final class FCheckboxStateStyle with Diagnosticable {
   });
 
   /// Returns a copy of this [FCheckboxStateStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FCheckBoxStateStyle(
-  ///   iconColor: ...,
-  ///   checkedBackgroundColor: ...,
-  ///   // Other arguments omitted for brevity.
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   checkedBackgroundColor: ...,
-  /// );
-  ///
-  /// print(style.iconColor == copy.iconColor); // true
-  /// print(style.checkedBackgroundColor == copy.checkedBackgroundColor); // false
-  /// ```
   @useResult
   FCheckboxStateStyle copyWith({
     Color? borderColor,
