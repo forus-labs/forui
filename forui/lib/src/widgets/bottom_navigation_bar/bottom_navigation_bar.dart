@@ -84,7 +84,7 @@ class FBottomNavigationBar extends StatelessWidget {
   }
 }
 
-/// AFBottomNavigationBar]'s data.
+/// A FBottomNavigationBar]'s data.
 class FBottomNavigationBarData extends InheritedWidget {
   /// Returns the [FBottomNavigationBarItemStyle] and currently selected index of the [FBottomNavigationBar] in the
   /// given [context].

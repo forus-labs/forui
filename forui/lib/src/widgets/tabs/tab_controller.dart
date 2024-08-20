@@ -1,7 +1,7 @@
 part of 'tabs.dart';
 
-/// An object that controls selection in a [FTabs]
-class FTabController implements Listenable {
+/// A controller that controls selection in a [FTabs].
+final class FTabController implements ChangeNotifier {
   final TabController _controller;
 
   /// Creates a [FTabController].
@@ -11,34 +11,40 @@ class FTabController implements Listenable {
     int initialIndex = 0,
     Duration? animationDuration,
   }) : _controller = TabController(
-          initialIndex: initialIndex,
-          length: length,
-          animationDuration: animationDuration,
-          vsync: vsync,
-        );
+    initialIndex: initialIndex,
+    length: length,
+    animationDuration: animationDuration,
+    vsync: vsync,
+  );
+
+  /// Animates to the given [index].
+  void animateTo(
+      int index, {
+        Duration? duration,
+        Curve curve = Curves.ease,
+      }) =>
+      _controller.animateTo(index, duration: duration, curve: curve);
 
   @override
   void addListener(VoidCallback listener) => _controller.addListener(listener);
 
   @override
+  void notifyListeners() => _controller.notifyListeners();
+
+  @override
   void removeListener(VoidCallback listener) => _controller.removeListener(listener);
 
-  /// Discards any resources used by the object. After this is called, the
-  /// object is not in a usable state and should be discarded (calls to
-  /// [addListener] will throw after the object is disposed).
-  ///
-  /// This method should only be called by the object's owner.
-  ///
-  /// This method does not notify listeners, and clears the listener list once
-  /// it is called. Consumers of this class must decide on whether to notify
-  /// listeners or not immediately before disposal.
+  /// The index of the selected tab.
+  int get index => _controller.index;
+
+  set index(int value) => _controller.index = value;
+
+  /// The number of tabs.
+  int get length => _controller.length;
+
+  @override
+  bool get hasListeners => _controller.hasListeners;
+
+  @override
   void dispose() => _controller.dispose();
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FTabController && runtimeType == other.runtimeType && _controller == other._controller;
-
-  @override
-  int get hashCode => _controller.hashCode;
 }
