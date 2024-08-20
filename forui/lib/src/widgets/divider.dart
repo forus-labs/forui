@@ -24,10 +24,11 @@ final class FDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? switch (axis) {
-      Axis.horizontal => context.theme.dividerStyles.horizontal,
-      Axis.vertical => context.theme.dividerStyles.vertical,
-    };
+    final style = this.style ??
+        switch (axis) {
+          Axis.horizontal => context.theme.dividerStyles.horizontal,
+          Axis.vertical => context.theme.dividerStyles.vertical,
+        };
 
     return Container(
       margin: style.padding,

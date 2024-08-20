@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A scaffold.
 ///
@@ -111,12 +112,13 @@ final class FScaffoldStyle with Diagnosticable {
     EdgeInsets? contentPadding,
     BoxDecoration? headerDecoration,
     BoxDecoration? footerDecoration,
-  }) => FScaffoldStyle(
-      backgroundColor: backgroundColor ?? this.backgroundColor,
-      contentPadding: contentPadding ?? this.contentPadding,
-      headerDecoration: headerDecoration ?? this.headerDecoration,
-      footerDecoration: footerDecoration ?? this.footerDecoration,
-    );
+  }) =>
+      FScaffoldStyle(
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        contentPadding: contentPadding ?? this.contentPadding,
+        headerDecoration: headerDecoration ?? this.headerDecoration,
+        footerDecoration: footerDecoration ?? this.footerDecoration,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
