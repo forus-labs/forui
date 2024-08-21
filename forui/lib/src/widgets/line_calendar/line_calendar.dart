@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
@@ -70,14 +71,14 @@ class _FLineCalendarState extends State<FLineCalendar> {
           final offset = (widget.selected.value.difference(widget.epoch).inDays - 2) * _width;
           _controller = ScrollController(initialScrollOffset: offset);
           return SizedBox(
-            height: 70,
+            height: _width*0.9,
             child: ListView.builder(
               controller: _controller,
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.zero,
               itemExtent: _width,
               itemBuilder: (context, index) => Container(
-                padding: EdgeInsets.symmetric(horizontal: (_width - 55) / 2),
+                padding: EdgeInsets.symmetric(horizontal: (_width * 0.2) / 2),
                 child: _Tile(
                   style: widget.style,
                   selected: widget.selected,
@@ -130,9 +131,9 @@ class _Tile extends StatelessWidget {
           children: [
             Text(
               date.day.toString(),
-              style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
+              style: selected ? style.selectedDateTextStyle : style.unselectedDateTextStyle,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Text(
               _days[date.weekday - 1],
               style: _style(context, selected),
@@ -162,6 +163,18 @@ final class FLineCalendarStyle with Diagnosticable {
   /// The box decoration for an unselected date.
   final BoxDecoration unselectedDecoration;
 
+  /// The box decoration for an unselected date.
+  final BoxDecoration unselectedDateDecoration;
+
+  /// The box decoration for a selected date.
+  final BoxDecoration selectedDateDecoration;
+
+  /// The text style for the selected date.
+  final TextStyle selectedDateTextStyle;
+
+  /// The text style for an unselected date.
+  final TextStyle unselectedDateTextStyle;
+
   /// The text style for the selected date.
   final TextStyle selectedTextStyle;
 
@@ -170,8 +183,12 @@ final class FLineCalendarStyle with Diagnosticable {
 
   /// Creates a [FLineCalendarStyle].
   const FLineCalendarStyle({
-    required this.unselectedDecoration,
     required this.selectedDecoration,
+    required this.unselectedDecoration,
+    required this.selectedDateDecoration,
+    required this.unselectedDateDecoration,
+    required this.selectedDateTextStyle,
+    required this.unselectedDateTextStyle,
     required this.selectedTextStyle,
     required this.unselectedTextStyle,
   });
@@ -190,12 +207,33 @@ final class FLineCalendarStyle with Diagnosticable {
           borderRadius: style.borderRadius,
           border: Border.all(color: colorScheme.border),
         ),
-        selectedTextStyle = typography.base.copyWith(
+        selectedDateDecoration = BoxDecoration(
+          color: colorScheme.background,
+          borderRadius: style.borderRadius,
+          border: Border.all(color: colorScheme.border),
+        ),
+        unselectedDateDecoration = BoxDecoration(
+          color: colorScheme.background,
+          borderRadius: style.borderRadius,
+        ),
+        selectedDateTextStyle = typography.xl.copyWith(
           color: colorScheme.primaryForeground,
+          fontWeight: FontWeight.w500,
           height: 0,
         ),
-        unselectedTextStyle = typography.base.copyWith(
+        unselectedDateTextStyle = typography.xl.copyWith(
           color: colorScheme.primary,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
+        selectedTextStyle = typography.xs.copyWith(
+          color: colorScheme.primaryForeground,
+          fontWeight: FontWeight.w600,
+          height: 0,
+        ),
+        unselectedTextStyle = typography.xs.copyWith(
+          color: colorScheme.primary,
+          fontWeight: FontWeight.w600,
           height: 0,
         );
 
@@ -226,12 +264,20 @@ final class FLineCalendarStyle with Diagnosticable {
   FLineCalendarStyle copyWith({
     BoxDecoration? selectedDecoration,
     BoxDecoration? unselectedDecoration,
+    BoxDecoration? selectedDateDecoration,
+    BoxDecoration? unselectedDateDecoration,
+    TextStyle? selectedDateTextStyle,
+    TextStyle? unselectedDateTextStyle,
     TextStyle? selectedTextStyle,
     TextStyle? unselectedTextStyle,
   }) =>
       FLineCalendarStyle(
         selectedDecoration: selectedDecoration ?? this.selectedDecoration,
         unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
+        selectedDateDecoration: selectedDateDecoration ?? this.selectedDateDecoration,
+        unselectedDateDecoration: unselectedDateDecoration ?? this.unselectedDateDecoration,
+        selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
+        unselectedDateTextStyle: unselectedDateTextStyle ?? this.unselectedDateTextStyle,
         selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
         unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
       );
@@ -243,6 +289,8 @@ final class FLineCalendarStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           selectedDecoration == other.selectedDecoration &&
           unselectedDecoration == other.unselectedDecoration &&
+          selectedDateDecoration == other.selectedDateDecoration &&
+          unselectedDateDecoration == other.unselectedDateDecoration &&
           selectedTextStyle == other.selectedTextStyle &&
           unselectedTextStyle == other.unselectedTextStyle;
 
@@ -250,6 +298,8 @@ final class FLineCalendarStyle with Diagnosticable {
   int get hashCode =>
       selectedDecoration.hashCode ^
       unselectedDecoration.hashCode ^
+      selectedDateDecoration.hashCode ^
+      unselectedDateDecoration.hashCode ^
       selectedTextStyle.hashCode ^
       unselectedTextStyle.hashCode;
 }
