@@ -30,6 +30,8 @@
 
 * **Breaking:** Rename `FButtonIconStyle.height` to `FButtonIconStyle.size`.
 
+* **Breaking:** Change `FDivider.vertical` to `FDivider.axis`.
+
 * Change `FResizable` to resize by `FResizable.resizePercentage` when using a keyboard.
 
 * **Breaking:** Change `FResiableDividerStyle.thickness` to `FResizableDividerStyle.width`.
@@ -44,6 +46,8 @@
 
 * **Breaking:** Remove `FTextField.error` - use `FTextField.forceErrorText` instead.
 
+* Change `FTabController` to implement `ChangeNotifier` instead of `Listenable`.
+
 ### Fixes
 
 * Fix `FResizable` not rendering properly in an expanded widget when its crossAxisExtent is null.
@@ -53,6 +57,8 @@
 * Fix `FTextField` error message replacing the description text.
 
 * Fix `FCheckboxStyle.inherit(...)` icon color inheriting from the wrong color.
+
+* Fix `FTabs` not handling indexes properly.
 
 
 ## 0.4.0

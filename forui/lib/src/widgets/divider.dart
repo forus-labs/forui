@@ -16,23 +16,25 @@ final class FDivider extends StatelessWidget {
   /// The divider's style. Defaults to the appropriate style in [FThemeData.dividerStyles].
   final FDividerStyle? style;
 
-  /// True if this divider is vertical. Defaults to false (horizontal).
-  final bool vertical;
+  /// The axis. Defaults to horizontal.
+  final Axis axis;
 
   /// Creates a [FDivider].
-  const FDivider({this.style, this.vertical = false, super.key});
+  const FDivider({this.style, this.axis = Axis.horizontal, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style =
-        this.style ?? (vertical ? context.theme.dividerStyles.vertical : context.theme.dividerStyles.horizontal);
-    final (height, width) = vertical ? (null, style.width) : (style.width, null);
+    final style = this.style ??
+        switch (axis) {
+          Axis.horizontal => context.theme.dividerStyles.horizontal,
+          Axis.vertical => context.theme.dividerStyles.vertical,
+        };
 
     return Container(
       margin: style.padding,
       color: style.color,
-      height: height,
-      width: width,
+      height: axis == Axis.horizontal ? style.width : null,
+      width: axis == Axis.horizontal ? null : style.width,
     );
   }
 
@@ -40,8 +42,8 @@ final class FDivider extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('vertical', value: vertical, defaultValue: false, ifTrue: 'vertical'))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('axis', axis));
   }
 }
 
@@ -110,7 +112,7 @@ final class FDividerStyle with Diagnosticable {
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
   final EdgeInsetsGeometry padding;
 
-  /// The width of the separating line. Defaults to 1.
+  /// The width (thickness) of the separating line. Defaults to 1.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:

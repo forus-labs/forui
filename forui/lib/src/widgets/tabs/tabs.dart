@@ -20,8 +20,8 @@ class FTabEntry {
 
   /// Creates a [FTabs].
   const FTabEntry({
-    required this.content,
     required this.label,
+    required this.content,
   });
 
   @override
@@ -37,32 +37,37 @@ class FTabEntry {
 ///
 /// See:
 /// * https://forui.dev/docs/tabs for working examples.
-/// * [FTabsStyle] for customizing a switch's appearance.
+/// * [FTabsStyle] for customizing tabs' appearance.
 class FTabs extends StatefulWidget {
-  /// The tab and it's corresponding view.
-  final List<FTabEntry> tabs;
-
-  /// The initial tab that is selected.
-  final int initialIndex;
-
-  /// Whether this tab bar can be scrolled horizontally.
-  ///
-  /// If [scrollable] is true, then each tab is as wide as needed for its label
-  /// and the entire [TabBar] is scrollable. Otherwise each tab gets an equal
-  /// share of the available space.
-  final bool scrollable;
-
   /// The tab controller.
   final FTabController? controller;
 
   /// The style.
   final FTabsStyle? style;
 
+  /// The initial tab that is selected.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * [initialIndex] is not within the range '0 <= initialIndex < tabs.length`.
+  final int initialIndex;
+
+  /// Whether this tab bar can be scrolled horizontally.
+  ///
+  /// If [scrollable] is true, then each tab is as wide as needed for its label and the entire [TabBar] is scrollable.
+  /// Otherwise each tab gets an equal share of the available space.
+  final bool scrollable;
+
   /// A callback that returns the tab that was tapped.
   final ValueChanged<int>? onPress;
 
+  /// The tab and it's corresponding view.
+  final List<FTabEntry> tabs;
+
   /// Creates a [FTabs].
-  const FTabs({
+  ///
+  /// ## Throws
+  FTabs({
     required this.tabs,
     this.initialIndex = 0,
     this.scrollable = false,
@@ -70,18 +75,27 @@ class FTabs extends StatefulWidget {
     this.style,
     this.onPress,
     super.key,
-  }) : assert(0 < tabs.length, 'Must have at least 1 tab provided');
+  })  : assert(tabs.isNotEmpty, 'Must have at least 1 tab provided.'),
+        assert(0 <= initialIndex && initialIndex < tabs.length, 'Initial index must be within the range of tabs.'),
+        assert(
+          controller == null || controller.index == initialIndex,
+          'Controller index must match the initial index.',
+        ),
+        assert(
+          controller == null || controller.length == tabs.length,
+          'Controller length must match the number of tabs.',
+        );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty('tabs', tabs))
-      ..add(IntProperty('initialIndex', initialIndex))
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(ObjectFlagProperty.has('controller', controller))
       ..add(DiagnosticsProperty('style', style))
+      ..add(IntProperty('initialIndex', initialIndex))
+      ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'));
+      ..add(IterableProperty('tabs', tabs));
   }
 
   @override
@@ -89,24 +103,38 @@ class FTabs extends StatefulWidget {
 }
 
 class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
-  late int _index;
-  late final FTabController _controller;
+  late FTabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _index = widget.initialIndex;
-    _controller = FTabController(length: widget.tabs.length, vsync: this);
+    _controller = _createController();
   }
+
+  @override
+  void didUpdateWidget(covariant FTabs old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      _controller.dispose();
+      _controller = _createController();
+    }
+  }
+
+  FTabController _createController() =>
+      widget.controller ??
+      FTabController(
+        initialIndex: widget.initialIndex,
+        length: widget.tabs.length,
+        vsync: this,
+      );
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
     final style = widget.style ?? context.theme.tabsStyle;
-    final tabs = widget.tabs;
-    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+    final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
-    final child = Material(
+    final tabs = Material(
       color: Colors.transparent,
       child: Column(
         children: [
@@ -114,13 +142,13 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
             decoration: style.decoration,
             child: TabBar(
               tabs: [
-                for (final tab in tabs)
+                for (final tab in widget.tabs)
                   Tab(
                     height: style.height,
                     child: tab.label,
                   ),
               ],
-              controller: (widget.controller ?? _controller)._controller,
+              controller: _controller._controller,
               isScrollable: widget.scrollable,
               padding: style.padding,
               indicator: style.indicator,
@@ -128,37 +156,34 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabel,
               unselectedLabelStyle: style.unselectedLabel,
-              onTap: (index) {
-                setState(() => _index = index);
-                widget.onPress?.call(_index);
-              },
+              onTap: (index) => widget.onPress?.call(index),
             ),
           ),
           SizedBox(height: style.spacing),
-          // A workaround to ensure any widgets under Tabs do not revert to material text style
-          // TODO: abstract out logic
           DefaultTextStyle(
             style: theme.typography.base.copyWith(
               fontFamily: theme.typography.defaultFontFamily,
               color: theme.colorScheme.foreground,
             ),
-            child: tabs[_index].content,
+            child: widget.tabs[_controller.index].content,
           ),
         ],
       ),
     );
 
-    return materialLocalizations == null
-        ? Localizations(
-            locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-            delegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            child: child,
-          )
-        : child;
+    if (localizations == null) {
+      return Localizations(
+        locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+        delegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        child: tabs,
+      );
+    }
+
+    return tabs;
   }
 
   @override

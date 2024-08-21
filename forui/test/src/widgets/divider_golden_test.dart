@@ -11,8 +11,8 @@ import '../test_scaffold.dart';
 void main() {
   group('FDivider', () {
     for (final (name, theme, _) in TestScaffold.themes) {
-      for (final (orientation, value) in [('horizontal', false), ('vertical', true)]) {
-        testWidgets('$name - $orientation', (tester) async {
+      for (final axis in Axis.values) {
+        testWidgets('$name - $axis', (tester) async {
           final children = [
             Container(
               width: 100,
@@ -22,7 +22,7 @@ void main() {
                 border: Border.all(color: theme.colorScheme.secondary),
               ),
             ),
-            FDivider(vertical: value),
+            FDivider(axis: axis),
             Container(
               width: 100,
               height: 100,
@@ -36,7 +36,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               data: theme,
-              child: value
+              child: axis == Axis.vertical
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: children,
@@ -50,7 +50,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('divider/$name-$orientation.png'),
+            matchesGoldenFile('divider/$name-$axis.png'),
           );
         });
       }

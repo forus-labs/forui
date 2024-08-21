@@ -1,6 +1,11 @@
-part of 'text_field.dart';
+import 'package:flutter/material.dart';
 
-class _Field extends FormField<String> {
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
+
+@internal
+class Field extends FormField<String> {
   static InputDecoration _decoration(
     _State state,
     FTextField parent,
@@ -62,7 +67,7 @@ class _Field extends FormField<String> {
 
   final FTextField parent;
 
-  _Field({
+  Field({
     required this.parent,
     required FTextFieldStyle style,
     super.key,
@@ -204,7 +209,7 @@ class _State extends FormFieldState<String> {
   }
 
   @override
-  void didUpdateWidget(_Field old) {
+  void didUpdateWidget(Field old) {
     super.didUpdateWidget(old);
     if (widget.parent.controller == old.parent.controller) {
       return;
@@ -262,7 +267,7 @@ class _State extends FormFieldState<String> {
   }
 
   @override
-  _Field get widget => super.widget as _Field;
+  Field get widget => super.widget as Field;
 
   TextEditingController get _effectiveController => widget.parent.controller ?? _controller!.value;
 }

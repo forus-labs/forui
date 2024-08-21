@@ -26,11 +26,11 @@ final class FTabsStyle with Diagnosticable {
   /// The padding.
   final EdgeInsets padding;
 
-  /// The [TextStyle] of the label
-  final TextStyle unselectedLabel;
-
-  /// The [TextStyle] of the label
+  /// The [TextStyle] of the label.
   final TextStyle selectedLabel;
+
+  /// The [TextStyle] of the label.
+  final TextStyle unselectedLabel;
 
   /// The indicator.
   final BoxDecoration indicator;
@@ -48,8 +48,8 @@ final class FTabsStyle with Diagnosticable {
   FTabsStyle({
     required this.decoration,
     required this.padding,
-    required this.unselectedLabel,
     required this.selectedLabel,
+    required this.unselectedLabel,
     required this.indicator,
     required this.indicatorSize,
     required this.height,
@@ -64,15 +64,15 @@ final class FTabsStyle with Diagnosticable {
           color: colorScheme.muted,
         ),
         padding = const EdgeInsets.all(4),
-        unselectedLabel = typography.sm.copyWith(
-          fontWeight: FontWeight.w500,
-          fontFamily: typography.defaultFontFamily,
-          color: colorScheme.mutedForeground,
-        ),
         selectedLabel = typography.sm.copyWith(
           fontWeight: FontWeight.w500,
           fontFamily: typography.defaultFontFamily,
           color: colorScheme.foreground,
+        ),
+        unselectedLabel = typography.sm.copyWith(
+          fontWeight: FontWeight.w500,
+          fontFamily: typography.defaultFontFamily,
+          color: colorScheme.mutedForeground,
         ),
         indicatorSize = FTabBarIndicatorSize.tab,
         indicator = BoxDecoration(
@@ -111,8 +111,8 @@ final class FTabsStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('decoration', decoration))
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('unselectedLabel', unselectedLabel))
       ..add(DiagnosticsProperty('selectedLabel', selectedLabel))
+      ..add(DiagnosticsProperty('unselectedLabel', unselectedLabel))
       ..add(EnumProperty('indicatorSize', indicatorSize))
       ..add(DiagnosticsProperty('indicator', indicator))
       ..add(DoubleProperty('height', height))
