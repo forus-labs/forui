@@ -5,6 +5,9 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
+/// The [FLabel]'s style.
+typedef FLabelStyle = ({FLabelLayoutStyle layout, FLabelStateStyle state});
+
 /// The label's state.
 enum FLabelState {
   /// The label is enabled.
@@ -88,7 +91,7 @@ final class FLabel extends StatelessWidget {
 
     if (label == null && description == null) {
       return Padding(
-        padding: style.childPadding,
+        padding: style.layout.childPadding,
         child: child,
       );
     }
@@ -143,9 +146,9 @@ final class _FHorizontalLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stateStyle = switch (state) {
-      FLabelState.enabled => style.formFieldStyle.enabledStyle,
-      FLabelState.disabled => style.formFieldStyle.disabledStyle,
-      FLabelState.error => style.formFieldStyle.errorStyle,
+      FLabelState.enabled => style.state.enabledStyle,
+      FLabelState.disabled => style.state.disabledStyle,
+      FLabelState.error => style.state.errorStyle,
     };
 
     return Table(
@@ -160,19 +163,19 @@ final class _FHorizontalLabel extends StatelessWidget {
           children: [
             TableCell(
               child: Padding(
-                padding: style.childPadding,
+                padding: style.layout.childPadding,
                 child: child,
               ),
             ),
             if (label != null)
               _buildCell(
-                padding: style.labelPadding,
+                padding: style.layout.labelPadding,
                 textStyle: stateStyle.labelTextStyle,
                 child: label,
               )
             else
               _buildCell(
-                padding: style.descriptionPadding,
+                padding: style.layout.descriptionPadding,
                 textStyle: stateStyle.descriptionTextStyle,
                 child: description,
               ),
@@ -183,7 +186,7 @@ final class _FHorizontalLabel extends StatelessWidget {
             children: [
               const TableCell(child: SizedBox()),
               _buildCell(
-                padding: style.descriptionPadding,
+                padding: style.layout.descriptionPadding,
                 textStyle: stateStyle.descriptionTextStyle,
                 child: description,
               ),
@@ -195,9 +198,9 @@ final class _FHorizontalLabel extends StatelessWidget {
               const TableCell(child: SizedBox()),
               TableCell(
                 child: Padding(
-                  padding: style.errorPadding,
+                  padding: style.layout.errorPadding,
                   child: DefaultTextStyle(
-                    style: style.formFieldStyle.errorStyle.errorTextStyle,
+                    style: style.state.errorStyle.errorTextStyle,
                     child: error!,
                   ),
                 ),
@@ -257,9 +260,9 @@ class _FVerticalLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stateStyle = switch (state) {
-      FLabelState.enabled => style.formFieldStyle.enabledStyle,
-      FLabelState.disabled => style.formFieldStyle.disabledStyle,
-      FLabelState.error => style.formFieldStyle.errorStyle,
+      FLabelState.enabled => style.state.enabledStyle,
+      FLabelState.disabled => style.state.disabledStyle,
+      FLabelState.error => style.state.errorStyle,
     };
 
     return Column(
@@ -268,7 +271,7 @@ class _FVerticalLabel extends StatelessWidget {
       children: [
         if (label != null)
           Padding(
-            padding: style.labelPadding,
+            padding: style.layout.labelPadding,
             child: DefaultTextStyle(
               style: stateStyle.labelTextStyle,
               textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
@@ -276,12 +279,12 @@ class _FVerticalLabel extends StatelessWidget {
             ),
           ),
         Padding(
-          padding: style.childPadding,
+          padding: style.layout.childPadding,
           child: child,
         ),
         if (description != null)
           Padding(
-            padding: style.descriptionPadding,
+            padding: style.layout.descriptionPadding,
             child: DefaultTextStyle(
               style: stateStyle.descriptionTextStyle,
               textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
@@ -290,9 +293,9 @@ class _FVerticalLabel extends StatelessWidget {
           ),
         if (error != null && state == FLabelState.error)
           Padding(
-            padding: style.errorPadding,
+            padding: style.layout.errorPadding,
             child: DefaultTextStyle(
-              style: style.formFieldStyle.errorStyle.errorTextStyle,
+              style: style.state.errorStyle.errorTextStyle,
               textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
               child: error!,
             ),
@@ -326,17 +329,21 @@ final class FLabelStyles with Diagnosticable {
 
   /// Creates a [FLabelStyles] that inherits its properties from the given [style].
   FLabelStyles.inherit({required FStyle style})
-      : horizontal = FLabelStyle(
-          formFieldStyle: style.formFieldStyle,
-          childPadding: const EdgeInsets.only(right: 8),
-          descriptionPadding: const EdgeInsets.only(top: 2),
-          errorPadding: const EdgeInsets.only(top: 2),
+      : horizontal = (
+          layout: const FLabelLayoutStyle(
+            childPadding: EdgeInsets.only(right: 8),
+            descriptionPadding: EdgeInsets.only(top: 2),
+            errorPadding: EdgeInsets.only(top: 2),
+          ),
+          state: FLabelStateStyle.inherit(style: style),
         ),
-        vertical = FLabelStyle(
-          formFieldStyle: style.formFieldStyle,
-          labelPadding: const EdgeInsets.only(bottom: 5),
-          descriptionPadding: const EdgeInsets.only(top: 5),
-          errorPadding: const EdgeInsets.only(top: 5),
+        vertical = (
+        layout: const FLabelLayoutStyle(
+            labelPadding: EdgeInsets.only(bottom: 5),
+            descriptionPadding: EdgeInsets.only(top: 5),
+            errorPadding: EdgeInsets.only(top: 5),
+          ),
+        state: FLabelStateStyle.inherit(style: style)
         );
 
   /// Returns a copy of this [FLabelStyles] with the given properties replaced.
@@ -370,11 +377,8 @@ final class FLabelStyles with Diagnosticable {
   int get hashCode => horizontal.hashCode ^ vertical.hashCode;
 }
 
-/// The [FLabel]'s style.
-final class FLabelStyle with Diagnosticable {
-  /// The form field's style.
-  final FFormFieldStyle formFieldStyle;
-
+/// The [FLabel]'s layout style.
+final class FLabelLayoutStyle with Diagnosticable {
   /// The label's padding.
   final EdgeInsets labelPadding;
 
@@ -387,26 +391,23 @@ final class FLabelStyle with Diagnosticable {
   /// The child's padding.
   final EdgeInsets childPadding;
 
-  /// Creates a [FLabelStyle].
-  const FLabelStyle({
-    required this.formFieldStyle,
+  /// Creates a [FLabelLayoutStyle].
+  const FLabelLayoutStyle({
     this.labelPadding = EdgeInsets.zero,
     this.descriptionPadding = EdgeInsets.zero,
     this.errorPadding = EdgeInsets.zero,
     this.childPadding = EdgeInsets.zero,
   });
 
-  /// Returns a copy of this [FLabelStyle] with the given properties replaced.
+  /// Returns a copy of this [FLabelLayoutStyle] with the given properties replaced.
   @useResult
-  FLabelStyle copyWith({
-    FFormFieldStyle? formFieldStyle,
+  FLabelLayoutStyle copyWith({
     EdgeInsets? labelPadding,
     EdgeInsets? descriptionPadding,
     EdgeInsets? errorPadding,
     EdgeInsets? childPadding,
   }) =>
-      FLabelStyle(
-        formFieldStyle: formFieldStyle ?? this.formFieldStyle,
+      FLabelLayoutStyle(
         labelPadding: labelPadding ?? this.labelPadding,
         descriptionPadding: descriptionPadding ?? this.descriptionPadding,
         errorPadding: errorPadding ?? this.errorPadding,
@@ -417,7 +418,6 @@ final class FLabelStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('formFieldStyle', formFieldStyle))
       ..add(DiagnosticsProperty('labelPadding', labelPadding))
       ..add(DiagnosticsProperty('descriptionPadding', descriptionPadding))
       ..add(DiagnosticsProperty('errorPadding', errorPadding))
@@ -427,9 +427,8 @@ final class FLabelStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FLabelStyle &&
+      other is FLabelLayoutStyle &&
           runtimeType == other.runtimeType &&
-          formFieldStyle == other.formFieldStyle &&
           labelPadding == other.labelPadding &&
           descriptionPadding == other.descriptionPadding &&
           errorPadding == other.errorPadding &&
@@ -437,9 +436,51 @@ final class FLabelStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      formFieldStyle.hashCode ^
-      labelPadding.hashCode ^
-      descriptionPadding.hashCode ^
-      errorPadding.hashCode ^
-      childPadding.hashCode;
+      labelPadding.hashCode ^ descriptionPadding.hashCode ^ errorPadding.hashCode ^ childPadding.hashCode;
+}
+
+/// The [FLabel]'s state style.
+class FLabelStateStyle with Diagnosticable {
+  /// The style for the form field when it is enabled.
+  final FFormFieldStyle enabledStyle;
+
+  /// The style for the form field when it is disabled.
+  final FFormFieldStyle disabledStyle;
+
+  /// The style for the form field when it has an error.
+  final FFormFieldErrorStyle errorStyle;
+
+  /// Creates a [FLabelStateStyle].
+  FLabelStateStyle({
+    required this.enabledStyle,
+    required this.disabledStyle,
+    required this.errorStyle,
+  });
+
+  /// Creates a [FLabelStateStyle] that inherits its properties from [style].
+  FLabelStateStyle.inherit({required FStyle style})
+      : enabledStyle = style.enabledFormFieldStyle,
+        disabledStyle = style.disabledFormFieldStyle,
+        errorStyle = style.errorFormFieldStyle;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
+      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
+      ..add(DiagnosticsProperty('errorStyle', errorStyle));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FLabelStateStyle &&
+          runtimeType == other.runtimeType &&
+          enabledStyle == other.enabledStyle &&
+          disabledStyle == other.disabledStyle &&
+          errorStyle == other.errorStyle;
+
+  @override
+  int get hashCode => enabledStyle.hashCode ^ disabledStyle.hashCode ^ errorStyle.hashCode;
 }

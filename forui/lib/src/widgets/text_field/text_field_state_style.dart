@@ -41,7 +41,7 @@ sealed class FTextFieldStateStyle with Diagnosticable {
     required Color hintColor,
     required Color focusedBorderColor,
     required Color unfocusedBorderColor,
-    required FFormFieldStateStyle formFieldStateStyle,
+    required FFormFieldStyle formFieldStateStyle,
     required FTypography typography,
     required FStyle style,
   })  : labelTextStyle = formFieldStateStyle.labelTextStyle,
