@@ -212,7 +212,7 @@ final class FCheckboxStyle with Diagnosticable {
   FCheckboxStyle copyWith({
     Duration? animationDuration,
     Curve? curve,
-    FLabelLayoutStyle? labelStyle,
+    FLabelLayoutStyle? labelLayoutStyle,
     FCheckboxStateStyle? enabledStyle,
     FCheckboxStateStyle? disabledStyle,
     FCheckboxStateStyle? errorStyle,
@@ -220,7 +220,7 @@ final class FCheckboxStyle with Diagnosticable {
       FCheckboxStyle(
         animationDuration: animationDuration ?? this.animationDuration,
         curve: curve ?? this.curve,
-        labelLayoutStyle: labelStyle ?? this.labelLayoutStyle,
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
         enabledStyle: enabledStyle ?? this.enabledStyle,
         disabledStyle: disabledStyle ?? this.disabledStyle,
         errorStyle: errorStyle ?? this.errorStyle,
@@ -232,7 +232,7 @@ final class FCheckboxStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('animationDuration', animationDuration))
       ..add(DiagnosticsProperty('curve', curve))
-      ..add(DiagnosticsProperty('labelStyle', labelLayoutStyle))
+      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle));

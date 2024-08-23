@@ -62,7 +62,7 @@ final class FStyle with Diagnosticable {
               descriptionColor: colorScheme.mutedForeground,
               errorColor: colorScheme.error,
               typography: typography,
-            ));
+            ),);
 
   /// Returns a copy of this [FStyle] with the given properties replaced.
   @useResult
