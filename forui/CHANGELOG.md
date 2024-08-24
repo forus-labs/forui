@@ -48,6 +48,9 @@
 
 * Change `FTabController` to implement `ChangeNotifier` instead of `Listenable`.
 
+* **Breaking:** Flattened `FStyle.formFieldStyle` - use `FStyle.enabledFormFieldStyle`, `FStyle.disabledFormFieldStyle`,
+and`FStyle.errorFormFieldStyle`.
+
 ### Fixes
 
 * Fix `FResizable` not rendering properly in an expanded widget when its crossAxisExtent is null.

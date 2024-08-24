@@ -156,7 +156,7 @@ final class FCheckboxStyle with Diagnosticable {
   final Curve curve;
 
   /// The [FLabel]'s style.
-  final FLabelStyle? labelStyle;
+  final FLabelLayoutStyle? labelLayoutStyle;
 
   /// The checkbox's style when it's enabled.
   final FCheckboxStateStyle enabledStyle;
@@ -174,27 +174,33 @@ final class FCheckboxStyle with Diagnosticable {
     required this.errorStyle,
     this.animationDuration = const Duration(milliseconds: 100),
     this.curve = Curves.linear,
-    this.labelStyle,
+    this.labelLayoutStyle,
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties from the given [FColorScheme].
   FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : animationDuration = const Duration(milliseconds: 100),
         curve = Curves.linear,
-        labelStyle = FLabelStyles.inherit(style: style).horizontal,
+        labelLayoutStyle = FLabelStyles.inherit(style: style).horizontal.layout,
         enabledStyle = FCheckboxStateStyle(
+          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
           borderColor: colorScheme.primary,
           iconColor: colorScheme.primaryForeground,
           checkedBackgroundColor: colorScheme.primary,
           uncheckedBackgroundColor: colorScheme.background,
         ),
         disabledStyle = FCheckboxStateStyle(
+          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
           borderColor: colorScheme.primary.withOpacity(0.5),
           iconColor: colorScheme.primaryForeground.withOpacity(0.5),
           checkedBackgroundColor: colorScheme.primary.withOpacity(0.5),
           uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
         ),
         errorStyle = FCheckboxStateStyle(
+          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           borderColor: colorScheme.error,
           iconColor: colorScheme.errorForeground,
           checkedBackgroundColor: colorScheme.error,
@@ -206,7 +212,7 @@ final class FCheckboxStyle with Diagnosticable {
   FCheckboxStyle copyWith({
     Duration? animationDuration,
     Curve? curve,
-    FLabelStyle? labelStyle,
+    FLabelLayoutStyle? labelLayoutStyle,
     FCheckboxStateStyle? enabledStyle,
     FCheckboxStateStyle? disabledStyle,
     FCheckboxStateStyle? errorStyle,
@@ -214,7 +220,7 @@ final class FCheckboxStyle with Diagnosticable {
       FCheckboxStyle(
         animationDuration: animationDuration ?? this.animationDuration,
         curve: curve ?? this.curve,
-        labelStyle: labelStyle ?? this.labelStyle,
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
         enabledStyle: enabledStyle ?? this.enabledStyle,
         disabledStyle: disabledStyle ?? this.disabledStyle,
         errorStyle: errorStyle ?? this.errorStyle,
@@ -226,7 +232,7 @@ final class FCheckboxStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('animationDuration', animationDuration))
       ..add(DiagnosticsProperty('curve', curve))
-      ..add(DiagnosticsProperty('labelStyle', labelStyle))
+      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle));
@@ -239,7 +245,7 @@ final class FCheckboxStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           animationDuration == other.animationDuration &&
           curve == other.curve &&
-          labelStyle == other.labelStyle &&
+          labelLayoutStyle == other.labelLayoutStyle &&
           enabledStyle == other.enabledStyle &&
           disabledStyle == other.disabledStyle &&
           errorStyle == other.errorStyle;
@@ -248,14 +254,15 @@ final class FCheckboxStyle with Diagnosticable {
   int get hashCode =>
       animationDuration.hashCode ^
       curve.hashCode ^
-      labelStyle.hashCode ^
+      labelLayoutStyle.hashCode ^
       enabledStyle.hashCode ^
       disabledStyle.hashCode ^
       errorStyle.hashCode;
 }
 
 /// A checkbox state's style.
-final class FCheckboxStateStyle with Diagnosticable {
+// ignore: avoid_implementing_value_types
+class FCheckboxStateStyle with Diagnosticable implements FFormFieldStyle {
   /// The checkbox's border color.
   final Color borderColor;
 
@@ -268,15 +275,24 @@ final class FCheckboxStateStyle with Diagnosticable {
   /// The unchecked checkbox's background color.
   final Color uncheckedBackgroundColor;
 
+  @override
+  final TextStyle labelTextStyle;
+
+  @override
+  final TextStyle descriptionTextStyle;
+
   /// Creates a [FCheckboxStateStyle].
   const FCheckboxStateStyle({
     required this.borderColor,
     required this.iconColor,
     required this.checkedBackgroundColor,
     required this.uncheckedBackgroundColor,
+    required this.labelTextStyle,
+    required this.descriptionTextStyle,
   });
 
   /// Returns a copy of this [FCheckboxStateStyle] with the given properties replaced.
+  @override
   @useResult
   FCheckboxStateStyle copyWith({
     Color? borderColor,
@@ -291,6 +307,8 @@ final class FCheckboxStateStyle with Diagnosticable {
         iconColor: iconColor ?? this.iconColor,
         checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
         uncheckedBackgroundColor: uncheckedBackgroundColor ?? this.uncheckedBackgroundColor,
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
       );
 
   @override
@@ -311,9 +329,74 @@ final class FCheckboxStateStyle with Diagnosticable {
           borderColor == other.borderColor &&
           iconColor == other.iconColor &&
           checkedBackgroundColor == other.checkedBackgroundColor &&
-          uncheckedBackgroundColor == other.uncheckedBackgroundColor;
+          uncheckedBackgroundColor == other.uncheckedBackgroundColor &&
+          labelTextStyle == other.labelTextStyle &&
+          descriptionTextStyle == other.descriptionTextStyle;
 
   @override
   int get hashCode =>
-      borderColor.hashCode ^ iconColor.hashCode ^ checkedBackgroundColor.hashCode ^ uncheckedBackgroundColor.hashCode;
+      borderColor.hashCode ^
+      iconColor.hashCode ^
+      checkedBackgroundColor.hashCode ^
+      uncheckedBackgroundColor.hashCode ^
+      labelTextStyle.hashCode ^
+      descriptionTextStyle.hashCode;
+}
+
+/// A checkbox's error state style.
+// ignore: avoid_implementing_value_types
+final class FCheckboxErrorStyle extends FCheckboxStateStyle implements FFormFieldErrorStyle {
+  @override
+  final TextStyle errorTextStyle;
+
+  /// Creates a [FCheckboxErrorStyle].
+  FCheckboxErrorStyle({
+    required this.errorTextStyle,
+    required super.borderColor,
+    required super.iconColor,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.checkedBackgroundColor,
+    required super.uncheckedBackgroundColor,
+  });
+
+  /// Returns a copy of this [FCheckboxErrorStyle] with the given properties replaced.
+  @override
+  FCheckboxErrorStyle copyWith({
+    TextStyle? labelTextStyle,
+    TextStyle? descriptionTextStyle,
+    TextStyle? errorTextStyle,
+    Color? borderColor,
+    Color? iconColor,
+    Color? checkedBackgroundColor,
+    Color? uncheckedBackgroundColor,
+  }) =>
+      FCheckboxErrorStyle(
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
+        errorTextStyle: errorTextStyle ?? this.errorTextStyle,
+        borderColor: borderColor ?? this.borderColor,
+        iconColor: iconColor ?? this.iconColor,
+        checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
+        uncheckedBackgroundColor: uncheckedBackgroundColor ?? this.uncheckedBackgroundColor,
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
+      ..add(DiagnosticsProperty('descriptionTextStyle', descriptionTextStyle));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is FCheckboxErrorStyle &&
+          runtimeType == other.runtimeType &&
+          errorTextStyle == other.errorTextStyle;
+
+  @override
+  int get hashCode => super.hashCode ^ errorTextStyle.hashCode;
 }

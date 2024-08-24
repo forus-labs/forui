@@ -6,18 +6,21 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// A [FTextField] state's style.
-sealed class FTextFieldStateStyle with Diagnosticable {
+// ignore: avoid_implementing_value_types
+class FTextFieldStateStyle with Diagnosticable implements FFormFieldStyle {
   /// The label's [TextStyle].
+  @override
   final TextStyle labelTextStyle;
+
+  /// The help/error's [TextStyle].
+  @override
+  final TextStyle descriptionTextStyle;
 
   /// The content's [TextStyle].
   final TextStyle contentTextStyle;
 
   /// The hint's [TextStyle].
   final TextStyle hintTextStyle;
-
-  /// The help/error's [TextStyle].
-  final TextStyle descriptionTextStyle;
 
   /// The border's color when focused.
   final FTextFieldBorderStyle focusedStyle;
@@ -41,10 +44,10 @@ sealed class FTextFieldStateStyle with Diagnosticable {
     required Color hintColor,
     required Color focusedBorderColor,
     required Color unfocusedBorderColor,
-    required FFormFieldStateStyle formFieldStateStyle,
+    required FFormFieldStyle formFieldStyle,
     required FTypography typography,
     required FStyle style,
-  })  : labelTextStyle = formFieldStateStyle.labelTextStyle,
+  })  : labelTextStyle = formFieldStyle.labelTextStyle,
         contentTextStyle = typography.sm.copyWith(
           fontFamily: typography.defaultFontFamily,
           color: contentColor,
@@ -53,9 +56,29 @@ sealed class FTextFieldStateStyle with Diagnosticable {
           fontFamily: typography.defaultFontFamily,
           color: hintColor,
         ),
-        descriptionTextStyle = formFieldStateStyle.descriptionTextStyle,
+        descriptionTextStyle = formFieldStyle.descriptionTextStyle,
         focusedStyle = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
         unfocusedStyle = FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style);
+
+  /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
+  @override
+  @useResult
+  FTextFieldStateStyle copyWith({
+    TextStyle? labelTextStyle,
+    TextStyle? contentTextStyle,
+    TextStyle? hintTextStyle,
+    TextStyle? descriptionTextStyle,
+    FTextFieldBorderStyle? focusedStyle,
+    FTextFieldBorderStyle? unfocusedStyle,
+  }) =>
+      FTextFieldStateStyle(
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+        contentTextStyle: contentTextStyle ?? this.contentTextStyle,
+        hintTextStyle: hintTextStyle ?? this.hintTextStyle,
+        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
+        focusedStyle: focusedStyle ?? this.focusedStyle,
+        unfocusedStyle: unfocusedStyle ?? this.unfocusedStyle,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -68,75 +91,34 @@ sealed class FTextFieldStateStyle with Diagnosticable {
       ..add(DiagnosticsProperty('focusedStyle', focusedStyle))
       ..add(DiagnosticsProperty('unfocusedStyle', unfocusedStyle));
   }
-}
-
-/// A [FTextField] normal state's style.
-final class FTextFieldNormalStyle extends FTextFieldStateStyle {
-  /// Creates a [FTextFieldNormalStyle].
-  FTextFieldNormalStyle({
-    required super.labelTextStyle,
-    required super.contentTextStyle,
-    required super.hintTextStyle,
-    required super.descriptionTextStyle,
-    required super.focusedStyle,
-    required super.unfocusedStyle,
-  });
-
-  /// Creates a [FTextFieldNormalStyle] that inherits its properties.
-  FTextFieldNormalStyle.inherit({
-    required FFormFieldNormalStyle formFieldNormaStyle,
-    required super.contentColor,
-    required super.hintColor,
-    required super.focusedBorderColor,
-    required super.unfocusedBorderColor,
-    required super.typography,
-    required super.style,
-  }) : super.inherit(formFieldStateStyle: formFieldNormaStyle);
-
-  /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
-  @useResult
-  FTextFieldNormalStyle copyWith({
-    TextStyle? labelTextStyle,
-    TextStyle? contentTextStyle,
-    TextStyle? hintTextStyle,
-    TextStyle? descriptionTextStyle,
-    FTextFieldBorderStyle? focusedStyle,
-    FTextFieldBorderStyle? unfocusedStyle,
-  }) =>
-      FTextFieldNormalStyle(
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        contentTextStyle: contentTextStyle ?? this.contentTextStyle,
-        hintTextStyle: hintTextStyle ?? this.hintTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-        focusedStyle: focusedStyle ?? this.focusedStyle,
-        unfocusedStyle: unfocusedStyle ?? this.unfocusedStyle,
-      );
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FTextFieldNormalStyle &&
+      other is FTextFieldStateStyle &&
           runtimeType == other.runtimeType &&
           labelTextStyle == other.labelTextStyle &&
+          descriptionTextStyle == other.descriptionTextStyle &&
           contentTextStyle == other.contentTextStyle &&
           hintTextStyle == other.hintTextStyle &&
-          descriptionTextStyle == other.descriptionTextStyle &&
           focusedStyle == other.focusedStyle &&
           unfocusedStyle == other.unfocusedStyle;
 
   @override
   int get hashCode =>
       labelTextStyle.hashCode ^
+      descriptionTextStyle.hashCode ^
       contentTextStyle.hashCode ^
       hintTextStyle.hashCode ^
-      descriptionTextStyle.hashCode ^
       focusedStyle.hashCode ^
       unfocusedStyle.hashCode;
 }
 
 /// A [FTextField] error state's style.
-final class FTextFieldErrorStyle extends FTextFieldStateStyle {
+// ignore: avoid_implementing_value_types
+final class FTextFieldErrorStyle extends FTextFieldStateStyle implements FFormFieldErrorStyle {
   /// The error's [TextStyle].
+  @override
   final TextStyle errorTextStyle;
 
   /// The duration of the error fade-in animation.
@@ -167,9 +149,10 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle {
     required super.style,
   })  : errorTextStyle = formFieldErrorStyle.errorTextStyle,
         animationDuration = const Duration(milliseconds: 100),
-        super.inherit(formFieldStateStyle: formFieldErrorStyle);
+        super.inherit(formFieldStyle: formFieldErrorStyle);
 
   /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
+  @override
   @useResult
   FTextFieldErrorStyle copyWith({
     TextStyle? errorTextStyle,
@@ -252,20 +235,6 @@ final class FTextFieldBorderStyle with Diagnosticable {
         radius = style.borderRadius;
 
   /// Returns a copy of this border style but with the given fields replaced with the new values.
-  ///
-  /// ```dart
-  /// final style = FTextFieldBorderStyle(
-  ///   color: Colors.black,
-  ///   width: 1,
-  /// );
-  ///
-  /// final copy = style.copyWith(
-  ///   width: 2,
-  /// );
-  ///
-  /// print(copy.color); // black
-  /// print(copy.width); // 2
-  /// ```
   @useResult
   FTextFieldBorderStyle copyWith({
     Color? color,
