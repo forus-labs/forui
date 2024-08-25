@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 
 /// A portal renders a follower widget that "floats" on top of a target widget.

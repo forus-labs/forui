@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 /// A portal's target.
@@ -10,7 +11,6 @@ typedef FPortalFollower = ({Size size, Alignment anchor});
 
 /// Provides various follower shifting strategies for when a follower overflows out of the viewport.
 extension FPortalFollowerShift on Never {
-
   /// Flips the follower to the opposite side of the target if it does not cause the follower to overflow out of the
   /// viewport. Otherwise shifts the follower along the target's edge.
   static Offset flip(Size view, FPortalTarget target, FPortalFollower follower) {

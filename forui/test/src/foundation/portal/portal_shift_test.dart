@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/src/foundation/portal/portal_shift.dart';
 
 void main() {
@@ -78,7 +80,7 @@ void main() {
 
         expect(FPortalFollowerShift.along(view, target, follower), const Offset(-10, 50));
       });
-      
+
       test('outside left side', () {
         const target = (offset: Offset(20, 30), size: Size(50, 50), anchor: Alignment.topLeft);
         const follower = (size: Size(70, 10), anchor: Alignment.bottomRight);

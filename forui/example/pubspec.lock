@@ -240,11 +240,12 @@ packages:
     source: path
     version: "0.4.0"
   forui_assets:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../forui_assets"
-      relative: true
-    source: path
+      name: forui_assets
+      sha256: "69575b73e96f509c2f54c1a7eff47b6034d0a55b6083a0ffc894f4ef071bfd9d"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.2.0"
   frontend_server_client:
     dependency: transitive
@@ -687,10 +688,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
+      sha256: "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d"
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.4"
+    version: "14.2.5"
   watcher:
     dependency: transitive
     description:
