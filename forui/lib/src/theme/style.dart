@@ -47,22 +47,23 @@ final class FStyle with Diagnosticable {
     required FColorScheme colorScheme,
     required FTypography typography,
   }) : this(
-            enabledFormFieldStyle: FFormFieldStyle.inherit(
-              labelColor: colorScheme.primary,
-              descriptionColor: colorScheme.mutedForeground,
-              typography: typography,
-            ),
-            disabledFormFieldStyle: FFormFieldStyle.inherit(
-              labelColor: colorScheme.primary.withOpacity(0.7),
-              descriptionColor: colorScheme.mutedForeground.withOpacity(0.7),
-              typography: typography,
-            ),
-            errorFormFieldStyle: FFormFieldErrorStyle.inherit(
-              labelColor: colorScheme.error,
-              descriptionColor: colorScheme.mutedForeground,
-              errorColor: colorScheme.error,
-              typography: typography,
-            ),);
+          enabledFormFieldStyle: FFormFieldStyle.inherit(
+            labelColor: colorScheme.primary,
+            descriptionColor: colorScheme.mutedForeground,
+            typography: typography,
+          ),
+          disabledFormFieldStyle: FFormFieldStyle.inherit(
+            labelColor: colorScheme.primary.withOpacity(0.7),
+            descriptionColor: colorScheme.mutedForeground.withOpacity(0.7),
+            typography: typography,
+          ),
+          errorFormFieldStyle: FFormFieldErrorStyle.inherit(
+            labelColor: colorScheme.error,
+            descriptionColor: colorScheme.mutedForeground,
+            errorColor: colorScheme.error,
+            typography: typography,
+          ),
+        );
 
   /// Returns a copy of this [FStyle] with the given properties replaced.
   @useResult
