@@ -104,29 +104,39 @@ class FTabs extends StatefulWidget {
 
 class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   late FTabController _controller;
+  late bool _internal;
 
   @override
   void initState() {
     super.initState();
-    _controller = _createController();
+    _create();
   }
 
   @override
   void didUpdateWidget(covariant FTabs old) {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
-      _controller.dispose();
-      _controller = _createController();
+      if (_internal) {
+        _controller.dispose();
+      }
+
+      _create();
     }
   }
 
-  FTabController _createController() =>
-      widget.controller ??
-      FTabController(
+  void _create() {
+    if (widget.controller case final controller?) {
+      _controller = controller;
+      _internal = false;
+    } else {
+      _controller = FTabController(
         initialIndex: widget.initialIndex,
         length: widget.tabs.length,
         vsync: this,
       );
+      _internal = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -188,7 +198,9 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (_internal) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 }

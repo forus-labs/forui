@@ -61,6 +61,9 @@ final class FThemeData with Diagnosticable {
   /// The label styles.
   final FLabelStyles labelStyles;
 
+  /// The popover's style.
+  final FPopoverStyle popoverStyle;
+
   /// The progress styles.
   final FProgressStyle progressStyle;
 
@@ -99,6 +102,7 @@ final class FThemeData with Diagnosticable {
     required this.dialogStyle,
     required this.headerStyle,
     required this.labelStyles,
+    required this.popoverStyle,
     required this.progressStyle,
     required this.resizableStyle,
     required this.tabsStyle,
@@ -132,6 +136,7 @@ final class FThemeData with Diagnosticable {
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
+      popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -200,6 +205,7 @@ final class FThemeData with Diagnosticable {
     FDialogStyle? dialogStyle,
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
+    FPopoverStyle? popoverStyle,
     FProgressStyle? progressStyle,
     FResizableStyle? resizableStyle,
     FTabsStyle? tabsStyle,
@@ -224,6 +230,7 @@ final class FThemeData with Diagnosticable {
         dividerStyles: dividerStyles ?? this.dividerStyles,
         headerStyle: headerStyle ?? this.headerStyle,
         labelStyles: labelStyles ?? this.labelStyles,
+        popoverStyle: popoverStyle ?? this.popoverStyle,
         progressStyle: progressStyle ?? this.progressStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
@@ -251,6 +258,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
@@ -279,6 +287,7 @@ final class FThemeData with Diagnosticable {
           dividerStyles == other.dividerStyles &&
           headerStyle == other.headerStyle &&
           labelStyles == other.labelStyles &&
+          popoverStyle == other.popoverStyle &&
           progressStyle == other.progressStyle &&
           resizableStyle == other.resizableStyle &&
           tabsStyle == other.tabsStyle &&
@@ -303,6 +312,7 @@ final class FThemeData with Diagnosticable {
       dividerStyles.hashCode ^
       headerStyle.hashCode ^
       labelStyles.hashCode ^
+      popoverStyle.hashCode ^
       progressStyle.hashCode ^
       resizableStyle.hashCode ^
       tabsStyle.hashCode ^
