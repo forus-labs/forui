@@ -29,7 +29,7 @@ class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) => MaterialApp(
         builder: (context, child) => FTheme(
-          data: FThemes.zinc.dark,
+          data: FThemes.zinc.light,
           child: FScaffold(
             header: FHeader(
               title: const Text('Example'),

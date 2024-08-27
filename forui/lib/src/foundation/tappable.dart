@@ -161,7 +161,7 @@ class _AnimatedTappableState extends _FTappableState {
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    _animation = Tween(begin: 1.0, end: 0.95).animate(_controller)
+    _animation = Tween(begin: 1.0, end: 0.97).animate(_controller)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _controller.reverse();
