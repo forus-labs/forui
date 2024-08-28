@@ -1,6 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+
 import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
@@ -17,43 +19,42 @@ class PopoverPage extends StatelessWidget {
     @queryParam String axis = 'vertical',
     @queryParam String hideOnTapOutside = 'true',
     @queryParam String shift = 'flip',
-  }) :
-    theme = themes[theme]!,
-    alignment = switch (alignment) {
-      'topCenter' => Alignment.topCenter,
-      'bottomCenter' => Alignment.bottomCenter,
-      _ => Alignment.center,
-    },
-    axis = switch (axis) {
-      'horizontal' => Axis.horizontal,
-      _ => Axis.vertical,
-    },
-    hideOnTapOutside = bool.tryParse(hideOnTapOutside) ?? true,
-    shift = switch (shift) {
-      'flip' => FPortalFollowerShift.flip,
-      'along' => FPortalFollowerShift.along,
-      _ => FPortalFollowerShift.none,
-    };
+  })  : theme = themes[theme]!,
+        alignment = switch (alignment) {
+          'topCenter' => Alignment.topCenter,
+          'bottomCenter' => Alignment.bottomCenter,
+          _ => Alignment.center,
+        },
+        axis = switch (axis) {
+          'horizontal' => Axis.horizontal,
+          _ => Axis.vertical,
+        },
+        hideOnTapOutside = bool.tryParse(hideOnTapOutside) ?? true,
+        shift = switch (shift) {
+          'flip' => FPortalFollowerShift.flip,
+          'along' => FPortalFollowerShift.along,
+          _ => FPortalFollowerShift.none,
+        };
 
   @override
   Widget build(BuildContext context) => FTheme(
-    data: theme,
-    child: FScaffold(
-      content: Align(
-        alignment: alignment,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
-          child: Builder(
-            builder: (context) => _Popover(
-              axis: axis,
-              hideOnTapOutside: hideOnTapOutside,
-              shift: shift,
+        data: theme,
+        child: FScaffold(
+          content: Align(
+            alignment: alignment,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
+              child: Builder(
+                builder: (context) => _Popover(
+                  axis: axis,
+                  hideOnTapOutside: hideOnTapOutside,
+                  shift: shift,
+                ),
+              ),
             ),
           ),
         ),
-      ),
-    ),
-  );
+      );
 }
 
 class _Popover extends StatefulWidget {
