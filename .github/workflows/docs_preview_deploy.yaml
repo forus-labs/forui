@@ -27,7 +27,7 @@ jobs:
       # Publish samples
       - uses: subosito/flutter-action@v2.16.0
         with:
-          flutter-version: ${{ vars.ACTUALLY_WORKING_FLUTTER_VERSION }}
+          flutter-version: 3.24.x
           cache: true
       - working-directory: ./samples
         run: |
