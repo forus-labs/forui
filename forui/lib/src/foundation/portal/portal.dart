@@ -17,11 +17,11 @@ class FPortal extends StatefulWidget {
   /// The controller that shows and hides the follower. It initially hides the follower.
   final OverlayPortalController controller;
 
-  /// The anchor of the follower to which the [childAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  /// The anchor of the follower to which the [targetAnchor] is aligned to. Defaults to [Alignment.topCenter].
   final Alignment followerAnchor;
 
   /// The anchor of the target to which the [followerAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
-  final Alignment childAnchor;
+  final Alignment targetAnchor;
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
   /// [FPortalFollowerShift.flip].
@@ -39,7 +39,7 @@ class FPortal extends StatefulWidget {
     required this.follower,
     required this.child,
     this.followerAnchor = Alignment.topCenter,
-    this.childAnchor = Alignment.bottomCenter,
+    this.targetAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
     super.key,
   });
@@ -53,7 +53,7 @@ class FPortal extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('childAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
       ..add(DiagnosticsProperty('follower', follower))
       ..add(DiagnosticsProperty('child', child));
@@ -79,7 +79,7 @@ class _State extends State<FPortal> {
             child: _Alignment(
               link: _link,
               followerAnchor: widget.followerAnchor,
-              targetAnchor: widget.childAnchor,
+              targetAnchor: widget.targetAnchor,
               shift: widget.shift,
               child: widget.follower(context),
             ),
