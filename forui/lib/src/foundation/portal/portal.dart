@@ -152,31 +152,30 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    if ((child, link.leader?.offset, link.leaderSize) case (final child?, final offset?, final leaderSize?)) {
-      context.paintChild(
-        child,
-        _shift(
-          size,
-          (offset: offset, size: leaderSize, anchor: targetAnchor),
-          (size: child.size, anchor: followerAnchor),
-        ),
+    final tuple = (child, child?.parentData, link.leader?.offset, link.leaderSize);
+    if (tuple case (final child?, final BoxParentData data?, final offset?, final leaderSize?)) {
+      data.offset = _shift(
+        size,
+        (offset: offset, size: leaderSize, anchor: targetAnchor),
+        (size: child.size, anchor: followerAnchor),
       );
+      context.paintChild(child, data.offset);
     }
   }
 
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) {
-    if ((child, link.leader?.offset, link.leaderSize) case (final child?, final offset?, final leaderSize?)) {
-      return result.addWithPaintOffset(
-        offset: _shift(
-          size,
-          (offset: offset, size: leaderSize, anchor: targetAnchor),
-          (size: child.size, anchor: followerAnchor),
-        ),
+    if ((child, child?.parentData) case (final child?, final BoxParentData data?)) {
+      if (result.addWithPaintOffset(
+        offset: data.offset,
         position: position,
         hitTest: (result, transformed) => child.hitTest(result, position: transformed),
-      );
+      )) {
+        result.add(BoxHitTestEntry(this, position));
+        return true;
+      }
     }
+
     return false;
   }
 
