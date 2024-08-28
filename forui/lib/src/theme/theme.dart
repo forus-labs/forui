@@ -103,7 +103,8 @@ class FTheme extends StatelessWidget {
         data: data,
         child: Directionality(
           textDirection: textDirection ?? Directionality.of(context),
-          child: Overlay(  // TODO: temporary until we create FApp.
+          child: Overlay(
+            // TODO: temporary until we create FApp.
             initialEntries: [
               OverlayEntry(
                 builder: (context) => DefaultTextStyle(
