@@ -22,7 +22,7 @@ void main() {
               data: theme,
               child: FPopover(
                 controller: controller,
-                follower: (context, style, _) => const SizedBox.square(dimension: 100),
+                followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
                 target: const ColoredBox(
                   color: Colors.yellow,
                   child: SizedBox.square(
@@ -46,7 +46,7 @@ void main() {
               data: theme,
               child: FPopover(
                 controller: controller,
-                follower: (context, style, _) => const SizedBox.square(dimension: 100),
+                followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
                 target: const ColoredBox(
                   color: Colors.yellow,
                   child: SizedBox.square(

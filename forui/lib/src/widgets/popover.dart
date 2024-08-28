@@ -112,7 +112,7 @@ class FPopover extends StatefulWidget {
   final ValueChanged<bool>? onFocusChange;
 
   /// The follower.
-  final ValueWidgetBuilder<FPopoverStyle> follower;
+  final ValueWidgetBuilder<FPopoverStyle> followerBuilder;
 
   /// The target.
   final Widget target;
@@ -120,7 +120,7 @@ class FPopover extends StatefulWidget {
   /// Creates a popover.
   const FPopover({
     required this.controller,
-    required this.follower,
+    required this.followerBuilder,
     required this.target,
     this.style,
     this.followerAnchor = Alignment.topCenter,
@@ -151,7 +151,7 @@ class FPopover extends StatefulWidget {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(DiagnosticsProperty('follower', follower));
+      ..add(DiagnosticsProperty('follower', followerBuilder));
   }
 }
 
@@ -166,7 +166,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       followerAnchor: widget.followerAnchor,
       targetAnchor: widget.targetAnchor,
       shift: widget.shift,
-      follower: (context) => CallbackShortcuts(
+      followerBuilder: (context) => CallbackShortcuts(
         bindings: {
           const SingleActivator(LogicalKeyboardKey.escape): widget.controller.hide,
         },
@@ -185,7 +185,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                     onTapOutside: widget.hideOnTapOutside ? (_) => widget.controller.hide() : null,
                     child: DecoratedBox(
                       decoration: style.decoration,
-                      child: widget.follower(context, style, null),
+                      child: widget.followerBuilder(context, style, null),
                     ),
                   ),
                 ),

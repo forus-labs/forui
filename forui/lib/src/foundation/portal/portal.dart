@@ -28,7 +28,7 @@ class FPortal extends StatefulWidget {
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
   /// The follower.
-  final WidgetBuilder follower;
+  final WidgetBuilder followerBuilder;
 
   /// The target.
   final Widget child;
@@ -36,7 +36,7 @@ class FPortal extends StatefulWidget {
   /// Creates a portal.
   const FPortal({
     required this.controller,
-    required this.follower,
+    required this.followerBuilder,
     required this.child,
     this.followerAnchor = Alignment.topCenter,
     this.targetAnchor = Alignment.bottomCenter,
@@ -55,7 +55,7 @@ class FPortal extends StatefulWidget {
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
       ..add(DiagnosticsProperty('childAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
-      ..add(DiagnosticsProperty('follower', follower))
+      ..add(DiagnosticsProperty('follower', followerBuilder))
       ..add(DiagnosticsProperty('child', child));
   }
 }
@@ -81,7 +81,7 @@ class _State extends State<FPortal> {
               followerAnchor: widget.followerAnchor,
               targetAnchor: widget.targetAnchor,
               shift: widget.shift,
-              child: widget.follower(context),
+              child: widget.followerBuilder(context),
             ),
           ),
           child: widget.child,
@@ -192,28 +192,36 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   LayerLink get link => _link;
 
   set link(LayerLink value) {
-    _link = value;
-    markNeedsPaint();
+    if (_link != value) {
+      _link = value;
+      markNeedsPaint();
+    }
   }
 
   Alignment get targetAnchor => _targetAnchor;
 
   set targetAnchor(Alignment value) {
-    _targetAnchor = value;
-    markNeedsPaint();
+    if (_targetAnchor != value) {
+      _targetAnchor = value;
+      markNeedsPaint();
+    }
   }
 
   Alignment get followerAnchor => _followerAnchor;
 
   set followerAnchor(Alignment value) {
-    _followerAnchor = value;
-    markNeedsPaint();
+    if (_followerAnchor != value) {
+      _followerAnchor = value;
+      markNeedsPaint();
+    }
   }
 
   Offset Function(Size, FPortalTarget, FPortalFollower) get shift => _shift;
 
   set shift(Offset Function(Size, FPortalTarget, FPortalFollower) value) {
-    _shift = value;
-    markNeedsPaint();
+    if (_shift != value) {
+      _shift = value;
+      markNeedsPaint();
+    }
   }
 }

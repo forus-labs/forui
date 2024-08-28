@@ -18,7 +18,7 @@ void main() {
           data: FThemes.zinc.light,
           child: FPortal(
             controller: controller,
-            follower: (context) => const ColoredBox(
+            followerBuilder: (context) => const ColoredBox(
               color: Colors.red,
               child: SizedBox.square(
                 dimension: 100,

@@ -16,7 +16,7 @@ void main() {
             data: FThemes.zinc.light,
             child: FPopover(
               controller: controller,
-              follower: (context, style, _) => const Text('follower'),
+              followerBuilder: (context, style, _) => const Text('follower'),
               target: FButton(
                 onPress: controller.toggle,
                 label: const Text('target'),
@@ -47,7 +47,7 @@ void main() {
             child: FPopover(
               controller: controller,
               hideOnTapOutside: false,
-              follower: (context, style, _) => const Text('follower'),
+              followerBuilder: (context, style, _) => const Text('follower'),
               target: FButton(
                 onPress: controller.toggle,
                 label: const Text('target'),
@@ -78,7 +78,7 @@ void main() {
             child: FPopover(
               controller: controller,
               hideOnTapOutside: false,
-              follower: (context, style, _) => const Text('follower'),
+              followerBuilder: (context, style, _) => const Text('follower'),
               target: FButton(
                 onPress: controller.toggle,
                 label: const Text('target'),

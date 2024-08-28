@@ -22,7 +22,7 @@ void main() {
               followerAnchor: Alignment.topRight,
               targetAnchor: Alignment.bottomLeft,
               controller: controller,
-              follower: (context) => Padding(
+              followerBuilder: (context) => Padding(
                 padding: const EdgeInsets.all(5),
                 child: ColoredBox(
                   color: Colors.red,
