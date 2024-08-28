@@ -32,16 +32,9 @@ flutter pub add forui_assets
 ## Usage
 
 To use Forui widgets in your Flutter app, import the Forui package and place the
-[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget near the root of the widget
-tree, beneath a
-[`CupertinoApp`](https://api.flutter.dev/flutter/cupertino/CupertinoApp-class.html),
-[`MaterialApp`](https://api.flutter.dev/flutter/material/MaterialApp-class.html), or
-[`WidgetsApp`](https://api.flutter.dev/flutter/widgets/WidgetsApp-class.html).
+[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget at the root of the widget tree.
 
-It's perfectly safe to use Forui widgets alongside Material/Cupertino widgets. This is especially useful when you need
-to use a Material/Cupertino widget that is not available in Forui or require it for routing.
-
-```dart filename="main.dart" {3,15-18}
+```dart filename="main.dart" {3,12-16}
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -54,13 +47,9 @@ class Application extends StatelessWidget {
   const Application({super.key});
 
   @override
-  Widget build(BuildContext context) => MaterialApp( // Replace MaterialApp with WidgetsApp/CupertinoApp respectively.
-    // Other configurations...
-    builder: (context, child) => FTheme(
-      data: FThemes.zinc.light,
-      child: child!,
-    ),
-    home: const FScaffold(...)
+  Widget build(BuildContext context) => FTheme(
+    data: FThemes.zinc.light,
+    child: const FScaffold(...),
   );
 }
 ```
@@ -73,3 +62,22 @@ In the example above, we used the `FThemes.zinc.light` theme, which is a light t
 
 Themes are a very powerful building block in Forui, allowing you to customize the look and feel of your app.
 To learn more about themes, refer to the [Themes](/docs/themes) page.
+
+
+### With Material/Cupertino
+
+It's perfectly safe to use Forui widgets alongside Material/Cupertino widgets.
+This is especially useful when you need to use a Material/Cupertino widget that is not available in Forui or require it for routing.
+(eg. `MaterialApp.router` or `CupertinoApp.router`)
+
+```dart filename="main.dart"
+@override
+Widget build(BuildContext context) => MaterialApp(
+  // Other configurations...
+  builder: (context, child) => FTheme(
+    data: FThemes.zinc.light,
+    child: child!,
+  ),
+  home: const FScaffold(...)
+);
+```
