@@ -2,6 +2,7 @@
 library forui;
 
 export 'assets.dart';
+export 'foundation.dart';
 export 'theme.dart';
 
 export 'widgets/alert.dart';

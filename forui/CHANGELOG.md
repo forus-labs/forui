@@ -20,6 +20,8 @@
 
 * Add label and description to `FCheckbox`.
 
+* Add `FPortal`.
+
 ### Changes
 
 * **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.size`.

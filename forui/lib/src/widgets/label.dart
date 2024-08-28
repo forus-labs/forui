@@ -338,12 +338,12 @@ final class FLabelStyles with Diagnosticable {
           state: FLabelStateStyle.inherit(style: style),
         ),
         vertical = (
-        layout: const FLabelLayoutStyle(
+          layout: const FLabelLayoutStyle(
             labelPadding: EdgeInsets.only(bottom: 5),
             descriptionPadding: EdgeInsets.only(top: 5),
             errorPadding: EdgeInsets.only(top: 5),
           ),
-        state: FLabelStateStyle.inherit(style: style)
+          state: FLabelStateStyle.inherit(style: style)
         );
 
   /// Returns a copy of this [FLabelStyles] with the given properties replaced.
