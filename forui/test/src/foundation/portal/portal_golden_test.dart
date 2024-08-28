@@ -45,7 +45,7 @@ void main() {
           data: FThemes.zinc.light,
           child: FPortal(
             controller: controller,
-            follower: (context) => const Padding(
+            followerBuilder: (context) => const Padding(
               padding: EdgeInsets.all(5),
               child: ColoredBox(
                 color: Colors.red,
