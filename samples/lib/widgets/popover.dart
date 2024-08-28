@@ -118,7 +118,7 @@ class _State extends State<_Popover> with SingleTickerProviderStateMixin {
                         ],
                       ),
                       const SizedBox(height: 7),
-                    ]
+                    ],
                   ],
                 ),
               ),
