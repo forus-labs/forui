@@ -41,25 +41,23 @@ void main() {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            data: FThemes.zinc.light,
-            child: FPortal(
-              controller: controller,
-              follower: (context) => const Padding(
-                padding: EdgeInsets.all(5),
-                child: ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(
-                    dimension: 100,
-                  ),
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: FPortal(
+            controller: controller,
+            follower: (context) => const Padding(
+              padding: EdgeInsets.all(5),
+              child: ColoredBox(
+                color: Colors.red,
+                child: SizedBox.square(
+                  dimension: 100,
                 ),
               ),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 50,
-                ),
+            ),
+            child: const ColoredBox(
+              color: Colors.yellow,
+              child: SizedBox.square(
+                dimension: 50,
               ),
             ),
           ),
