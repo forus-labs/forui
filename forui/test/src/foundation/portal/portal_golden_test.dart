@@ -67,7 +67,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(MaterialApp), matchesGoldenFile('portal/shown.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shown.png'));
     });
   });
 }
