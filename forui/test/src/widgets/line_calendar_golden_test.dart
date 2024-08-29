@@ -4,9 +4,9 @@ library;
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sugar/sugar.dart';
 
 import 'package:forui/src/widgets/line_calendar.dart';
-import 'package:sugar/sugar.dart';
 import '../test_scaffold.dart';
 
 void main() {
