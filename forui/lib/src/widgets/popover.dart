@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
-import 'package:sugar/sugar.dart' hide Offset;
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends ChangeNotifier {
@@ -71,9 +71,9 @@ final class FPopoverController extends ChangeNotifier {
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
   static ({Alignment follower, Alignment target}) get _platform => switch (const Runtime().type) {
-      PlatformType.android || PlatformType.ios => (follower: Alignment.bottomCenter, target: Alignment.topCenter),
-      _ => (follower: Alignment.topCenter, target: Alignment.bottomCenter),
-    };
+        PlatformType.android || PlatformType.ios => (follower: Alignment.bottomCenter, target: Alignment.topCenter),
+        _ => (follower: Alignment.topCenter, target: Alignment.bottomCenter),
+      };
 
   /// The controller that shows and hides the follower. It initially hides the follower.
   final FPopoverController controller;
@@ -146,10 +146,8 @@ class FPopover extends StatefulWidget {
     Alignment? followerAnchor,
     Alignment? targetAnchor,
     super.key,
-  }):
-    followerAnchor = followerAnchor ?? _platform.follower,
-    targetAnchor = targetAnchor ?? _platform.target;
-
+  })  : followerAnchor = followerAnchor ?? _platform.follower,
+        targetAnchor = targetAnchor ?? _platform.target;
 
   @override
   State<FPopover> createState() => _State();
