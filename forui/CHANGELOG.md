@@ -22,6 +22,8 @@
 
 * Add `FPortal`.
 
+* Add `FPopover`.
+
 ### Changes
 
 * **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.size`.
