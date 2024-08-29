@@ -53,9 +53,9 @@ class FPortal extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
-      ..add(DiagnosticsProperty('childAnchor', targetAnchor))
+      ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
-      ..add(DiagnosticsProperty('follower', followerBuilder))
+      ..add(DiagnosticsProperty('followerBuilder', followerBuilder))
       ..add(DiagnosticsProperty('child', child));
   }
 }
@@ -192,36 +192,44 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   LayerLink get link => _link;
 
   set link(LayerLink value) {
-    if (_link != value) {
-      _link = value;
-      markNeedsPaint();
+    if (_link == value) {
+      return;
     }
+
+    _link = value;
+    markNeedsPaint();
   }
 
   Alignment get targetAnchor => _targetAnchor;
 
   set targetAnchor(Alignment value) {
-    if (_targetAnchor != value) {
-      _targetAnchor = value;
-      markNeedsPaint();
+    if (_targetAnchor == value) {
+      return;
     }
+
+    _targetAnchor = value;
+    markNeedsPaint();
   }
 
   Alignment get followerAnchor => _followerAnchor;
 
   set followerAnchor(Alignment value) {
-    if (_followerAnchor != value) {
-      _followerAnchor = value;
-      markNeedsPaint();
+    if (_followerAnchor == value) {
+      return;
     }
+
+    _followerAnchor = value;
+    markNeedsPaint();
   }
 
   Offset Function(Size, FPortalTarget, FPortalFollower) get shift => _shift;
 
   set shift(Offset Function(Size, FPortalTarget, FPortalFollower) value) {
-    if (_shift != value) {
-      _shift = value;
-      markNeedsPaint();
+    if (_shift == value) {
+      return;
     }
+
+    _shift = value;
+    markNeedsPaint();
   }
 }

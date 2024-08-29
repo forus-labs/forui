@@ -84,8 +84,8 @@ class _State extends State<_Popover> with SingleTickerProviderStateMixin {
           const SizedBox(height: 30),
           FPopover(
             controller: controller,
-            followerAnchor: widget.axis == Axis.horizontal ? Alignment.topLeft : Alignment.bottomCenter,
-            targetAnchor: widget.axis == Axis.horizontal ? Alignment.topRight : Alignment.topCenter,
+            followerAnchor: widget.axis == Axis.horizontal ? Alignment.topLeft : Alignment.topCenter,
+            targetAnchor: widget.axis == Axis.horizontal ? Alignment.topRight : Alignment.bottomCenter,
             hideOnTapOutside: widget.hideOnTapOutside,
             shift: widget.shift,
             followerBuilder: (context, style, _) => Padding(

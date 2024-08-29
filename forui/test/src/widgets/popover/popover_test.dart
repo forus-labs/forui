@@ -98,7 +98,5 @@ void main() {
 
       expect(find.text('follower'), findsNothing);
     });
-
-    testWidgets('', (tester) async {});
   });
 }

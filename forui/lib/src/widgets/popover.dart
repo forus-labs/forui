@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:sugar/sugar.dart' hide Offset;
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends ChangeNotifier {
@@ -37,6 +38,7 @@ final class FPopoverController extends ChangeNotifier {
   Future<void> show() async {
     _overlay.show();
     await _animation.forward();
+    notifyListeners();
   }
 
   /// Hides the popover.
@@ -48,6 +50,7 @@ final class FPopoverController extends ChangeNotifier {
   Future<void> hide() async {
     await _animation.reverse();
     _overlay.hide();
+    notifyListeners();
   }
 
   /// True if the popover is currently being shown. False if it is hidden.
@@ -67,16 +70,25 @@ final class FPopoverController extends ChangeNotifier {
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
+  static ({Alignment follower, Alignment target}) get _platform => switch (const Runtime().type) {
+      PlatformType.android || PlatformType.ios => (follower: Alignment.bottomCenter, target: Alignment.topCenter),
+      _ => (follower: Alignment.topCenter, target: Alignment.bottomCenter),
+    };
+
   /// The controller that shows and hides the follower. It initially hides the follower.
   final FPopoverController controller;
 
   /// The popover's style.
   final FPopoverStyle? style;
 
-  /// The anchor of the follower to which the [targetAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  /// The anchor of the follower to which the [targetAnchor] is aligned to.
+  ///
+  /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
   final Alignment followerAnchor;
 
-  /// The anchor of the target to which the [followerAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
+  /// The anchor of the target to which the [followerAnchor] is aligned to.
+  ///
+  /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
   final Alignment targetAnchor;
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
@@ -120,21 +132,24 @@ class FPopover extends StatefulWidget {
   final Widget target;
 
   /// Creates a popover.
-  const FPopover({
+  FPopover({
     required this.controller,
     required this.followerBuilder,
     required this.target,
     this.style,
-    this.followerAnchor = Alignment.topCenter,
-    this.targetAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    Alignment? followerAnchor,
+    Alignment? targetAnchor,
     super.key,
-  });
+  }):
+    followerAnchor = followerAnchor ?? _platform.follower,
+    targetAnchor = targetAnchor ?? _platform.target;
+
 
   @override
   State<FPopover> createState() => _State();
@@ -210,6 +225,22 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
 /// The popover's style.
 final class FPopoverStyle with Diagnosticable {
+  /// The default popover shadow.
+  static const shadow = [
+    BoxShadow(
+      color: Color(0x1a000000),
+      offset: Offset(0, 4),
+      blurRadius: 6,
+      spreadRadius: -1,
+    ),
+    BoxShadow(
+      color: Color(0x1a000000),
+      offset: Offset(0, 2),
+      blurRadius: 4,
+      spreadRadius: -2,
+    ),
+  ];
+
   /// The popover's decoration.
   final BoxDecoration decoration;
 
@@ -232,21 +263,7 @@ final class FPopoverStyle with Diagnosticable {
               width: style.borderWidth,
               color: colorScheme.border,
             ),
-            boxShadow: const [
-              // TODO: add constants for shadows.
-              BoxShadow(
-                color: Color(0x1a000000),
-                offset: Offset(0, 4),
-                blurRadius: 6,
-                spreadRadius: -1,
-              ),
-              BoxShadow(
-                color: Color(0x1a000000),
-                offset: Offset(0, 2),
-                blurRadius: 4,
-                spreadRadius: -2,
-              ),
-            ],
+            boxShadow: shadow,
           ),
         );
 
@@ -254,7 +271,6 @@ final class FPopoverStyle with Diagnosticable {
   @useResult
   FPopoverStyle copyWith({
     BoxDecoration? decoration,
-    EdgeInsets? margin,
     EdgeInsets? padding,
   }) =>
       FPopoverStyle(
