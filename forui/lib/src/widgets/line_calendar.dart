@@ -302,29 +302,27 @@ final class FLineCalendarStyle with Diagnosticable {
   FLineCalendarStyle copyWith({
     double? heightPadding,
     double? itemPadding,
-    Color? primary,
-    Color? primaryForeground,
+    Color? selectedCurrentDateIndicatorColor,
+    Color? unselectedCurrentDateIndicatorColor,
     BoxDecoration? selectedDecoration,
     BoxDecoration? unselectedDecoration,
     TextStyle? selectedDateTextStyle,
     TextStyle? unselectedDateTextStyle,
-    TextStyle? selectedTextStyle,
-    TextStyle? unselectedTextStyle,
+    TextStyle? selectedDayTextStyle,
+    TextStyle? unselectedDayTextStyle,
   }) =>
       FLineCalendarStyle(
         heightPadding: heightPadding ?? this.heightPadding,
         itemPadding: itemPadding ?? this.itemPadding,
-
-        selectedCurrentDateIndicatorColor: primary ?? this.selectedCurrentDateIndicatorColor,
-        unselectedCurrentDateIndicatorColor: primaryForeground ?? this.unselectedCurrentDateIndicatorColor,
-
-
+        selectedCurrentDateIndicatorColor: selectedCurrentDateIndicatorColor ?? this.selectedCurrentDateIndicatorColor,
+        unselectedCurrentDateIndicatorColor:
+            unselectedCurrentDateIndicatorColor ?? this.unselectedCurrentDateIndicatorColor,
         selectedDecoration: selectedDecoration ?? this.selectedDecoration,
         unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
         selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
         unselectedDateTextStyle: unselectedDateTextStyle ?? this.unselectedDateTextStyle,
-        selectedDayTextStyle: selectedTextStyle ?? this.selectedDayTextStyle,
-        unselectedDayTextStyle: unselectedTextStyle ?? this.unselectedDayTextStyle,
+        selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
+        unselectedDayTextStyle: unselectedDayTextStyle ?? this.unselectedDayTextStyle,
       );
 
   @override
