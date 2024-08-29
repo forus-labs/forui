@@ -60,6 +60,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/header/nested-x', page: XNestedHeaderRoute.page),
         AutoRoute(path: '/label/vertical', page: VerticalLabelRoute.page),
         AutoRoute(path: '/label/horizontal', page: HorizontalLabelRoute.page),
+        AutoRoute(path: '/popover/default', page: PopoverRoute.page),
         AutoRoute(path: '/progress/default', page: ProgressRoute.page),
         AutoRoute(path: '/resizable/default', page: ResizableRoute.page),
         AutoRoute(path: '/resizable/no-cascading', page: NoCascadingResizableRoute.page),

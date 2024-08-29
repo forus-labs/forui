@@ -20,9 +20,9 @@ void main() {
             data: FThemes.zinc.light,
             child: FPortal(
               followerAnchor: Alignment.topRight,
-              childAnchor: Alignment.bottomLeft,
+              targetAnchor: Alignment.bottomLeft,
               controller: controller,
-              follower: (context) => Padding(
+              followerBuilder: (context) => Padding(
                 padding: const EdgeInsets.all(5),
                 child: ColoredBox(
                   color: Colors.red,

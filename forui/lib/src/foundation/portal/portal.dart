@@ -17,18 +17,18 @@ class FPortal extends StatefulWidget {
   /// The controller that shows and hides the follower. It initially hides the follower.
   final OverlayPortalController controller;
 
-  /// The anchor of the follower to which the [childAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  /// The anchor of the follower to which the [targetAnchor] is aligned to. Defaults to [Alignment.topCenter].
   final Alignment followerAnchor;
 
   /// The anchor of the target to which the [followerAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
-  final Alignment childAnchor;
+  final Alignment targetAnchor;
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
   /// [FPortalFollowerShift.flip].
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
   /// The follower.
-  final WidgetBuilder follower;
+  final WidgetBuilder followerBuilder;
 
   /// The target.
   final Widget child;
@@ -36,10 +36,10 @@ class FPortal extends StatefulWidget {
   /// Creates a portal.
   const FPortal({
     required this.controller,
-    required this.follower,
+    required this.followerBuilder,
     required this.child,
     this.followerAnchor = Alignment.topCenter,
-    this.childAnchor = Alignment.bottomCenter,
+    this.targetAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
     super.key,
   });
@@ -53,9 +53,9 @@ class FPortal extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
-      ..add(DiagnosticsProperty('follower', follower))
+      ..add(DiagnosticsProperty('followerBuilder', followerBuilder))
       ..add(DiagnosticsProperty('child', child));
   }
 }
@@ -79,9 +79,9 @@ class _State extends State<FPortal> {
             child: _Alignment(
               link: _link,
               followerAnchor: widget.followerAnchor,
-              targetAnchor: widget.childAnchor,
+              targetAnchor: widget.targetAnchor,
               shift: widget.shift,
-              child: widget.follower(context),
+              child: widget.followerBuilder(context),
             ),
           ),
           child: widget.child,
@@ -192,6 +192,10 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   LayerLink get link => _link;
 
   set link(LayerLink value) {
+    if (_link == value) {
+      return;
+    }
+
     _link = value;
     markNeedsPaint();
   }
@@ -199,6 +203,10 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   Alignment get targetAnchor => _targetAnchor;
 
   set targetAnchor(Alignment value) {
+    if (_targetAnchor == value) {
+      return;
+    }
+
     _targetAnchor = value;
     markNeedsPaint();
   }
@@ -206,6 +214,10 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   Alignment get followerAnchor => _followerAnchor;
 
   set followerAnchor(Alignment value) {
+    if (_followerAnchor == value) {
+      return;
+    }
+
     _followerAnchor = value;
     markNeedsPaint();
   }
@@ -213,6 +225,10 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   Offset Function(Size, FPortalTarget, FPortalFollower) get shift => _shift;
 
   set shift(Offset Function(Size, FPortalTarget, FPortalFollower) value) {
+    if (_shift == value) {
+      return;
+    }
+
     _shift = value;
     markNeedsPaint();
   }
