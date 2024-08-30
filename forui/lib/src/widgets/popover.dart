@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
 
@@ -70,8 +69,8 @@ final class FPopoverController extends ChangeNotifier {
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
-  static ({Alignment follower, Alignment target}) get _platform => switch (const Runtime().type) {
-        PlatformType.android || PlatformType.ios => (follower: Alignment.bottomCenter, target: Alignment.topCenter),
+  static ({Alignment follower, Alignment target}) get _platform => switch (defaultTargetPlatform) {
+        TargetPlatform.android || TargetPlatform.iOS => (follower: Alignment.bottomCenter, target: Alignment.topCenter),
         _ => (follower: Alignment.topCenter, target: Alignment.bottomCenter),
       };
 
@@ -93,6 +92,8 @@ class FPopover extends StatefulWidget {
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
   /// [FPortalFollowerShift.flip].
+  ///
+  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
@@ -125,7 +126,7 @@ class FPopover extends StatefulWidget {
   /// Called with true if the follower's node gains focus, and false if it loses focus.
   final ValueChanged<bool>? onFocusChange;
 
-  /// The follower.
+  /// The follower builder. The child passed to [followerBuilder] will always be null.
   final ValueWidgetBuilder<FPopoverStyle> followerBuilder;
 
   /// The target.
@@ -221,9 +222,9 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   }
 }
 
-/// The popover's style.
+/// A [FPopover]'s style.
 final class FPopoverStyle with Diagnosticable {
-  /// The default popover shadow.
+  /// The popover's default shadow in [FPopoverStyle.inherit].
   static const shadow = [
     BoxShadow(
       color: Color(0x1a000000),

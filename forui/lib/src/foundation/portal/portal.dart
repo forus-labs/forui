@@ -25,6 +25,8 @@ class FPortal extends StatefulWidget {
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
   /// [FPortalFollowerShift.flip].
+  ///
+  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
   /// The follower.

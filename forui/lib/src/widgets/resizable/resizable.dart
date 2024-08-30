@@ -84,7 +84,8 @@ class FResizable extends StatefulWidget {
           'The hitRegionExtent should be positive, but is $hitRegionExtent.',
         ),
         controller = controller ?? FResizableController.cascade(),
-        hitRegionExtent = hitRegionExtent ?? (const Runtime().android || const Runtime().ios ? 60 : 10);
+        hitRegionExtent = hitRegionExtent ??
+            (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS ? 60 : 10);
 
   @override
   State<StatefulWidget> createState() => _FResizableState();
