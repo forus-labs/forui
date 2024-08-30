@@ -17,17 +17,15 @@ void main() {
         final controller = FPopoverController(vsync: const TestVSync());
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              data: theme,
-              child: FPopover(
-                controller: controller,
-                followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-                target: const ColoredBox(
-                  color: Colors.yellow,
-                  child: SizedBox.square(
-                    dimension: 100,
-                  ),
+          TestScaffold(
+            data: theme,
+            child: FPopover(
+              controller: controller,
+              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              target: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(
+                  dimension: 100,
                 ),
               ),
             ),
@@ -41,17 +39,15 @@ void main() {
         final controller = FPopoverController(vsync: const TestVSync());
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              data: theme,
-              child: FPopover(
-                controller: controller,
-                followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-                target: const ColoredBox(
-                  color: Colors.yellow,
-                  child: SizedBox.square(
-                    dimension: 100,
-                  ),
+          TestScaffold(
+            data: theme,
+            child: FPopover(
+              controller: controller,
+              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              target: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(
+                  dimension: 100,
                 ),
               ),
             ),
@@ -61,7 +57,7 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(MaterialApp), matchesGoldenFile('popover/$name-shown.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/$name-shown.png'));
       });
     });
   }
