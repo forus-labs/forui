@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -8,6 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 
+//TODO: localizations.
 const _days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 final _epoch = LocalDate(2000);
 const _textSpacing = 2.0;
@@ -51,18 +53,42 @@ class FLineCalendar extends StatefulWidget {
 }
 
 class _FLineCalendarState extends State<FLineCalendar> {
-  late ScrollController _controller = ScrollController();
+  ScrollController _controller = ScrollController();
+
+  @override
+  void didUpdateWidget(covariant FLineCalendar oldWidget) {
+    if (oldWidget.selected != widget.selected) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final textDirection = Directionality.of(context);
+        oldWidget.selected.removeListener(() => onDateChange(textDirection));
+        widget.selected.addListener(() => onDateChange(textDirection));
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   void initState() {
-    widget.selected.addListener(() => setState(() {}));
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final textDirection = Directionality.of(context);
+      widget.selected.addListener(() => onDateChange(textDirection));
+    });
+  }
+
+  void onDateChange(TextDirection textDirection) {
+    setState(() {
+      //TODO: localizations.
+      SemanticsService.announce(widget.selected.value.toString(), textDirection);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.lineCalendarStyle;
 
+    // TODO: calculate width of items based on the text font size.
     final textScalor = MediaQuery.textScalerOf(context);
     final dateTextSize = textScalor.scale(style.unselectedDateTextStyle.fontSize!);
     final dayTextSize = textScalor.scale(style.unselectedDayTextStyle.fontSize!);
@@ -82,7 +108,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
         itemBuilder: (context, index) => Container(
           padding: EdgeInsets.symmetric(horizontal: style.itemPadding),
           child: _Tile(
-            style: widget.style,
+            style: style,
             selected: widget.selected,
             date: widget.epoch.add(Duration(days: index)),
             today: widget.today,
@@ -94,36 +120,39 @@ class _FLineCalendarState extends State<FLineCalendar> {
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 }
 
 class _Tile extends StatelessWidget {
-  final FLineCalendarStyle? style;
+  final FLineCalendarStyle style;
   final ValueNotifier<LocalDate> selected;
   final LocalDate date;
   final bool today;
 
-  const _Tile({required this.selected, required this.date, required LocalDate today, this.style})
-      : today = date == today;
+  const _Tile({
+    required this.style,
+    required this.selected,
+    required this.date,
+    required LocalDate today,
+  }) : today = date == today;
 
-  Color _style(BuildContext context, bool selected) {
-    final style = this.style ?? context.theme.lineCalendarStyle;
-    return switch ((selected, today)) {
-      (true, true) => style.selectedCurrentDateIndicatorColor,
-      (true, false) => const Color(0x00000000),
-      (false, true) => style.unselectedCurrentDateIndicatorColor,
-      (false, false) => const Color(0x00000000),
-    };
-  }
+  Color _style(BuildContext context, bool selected) => switch ((selected, today)) {
+        (true, true) => style.selectedCurrentDateIndicatorColor,
+        (true, false) => const Color(0x00000000),
+        (false, true) => style.unselectedCurrentDateIndicatorColor,
+        (false, false) => const Color(0x00000000),
+      };
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.lineCalendarStyle;
     final selected = this.selected.value == date;
 
+    //TODO: Localization.
     return FTappable.animated(
+      semanticLabel: date.toString(),
+      selected: selected,
       onPress: () => this.selected.value = date,
       child: Stack(
         children: [
@@ -140,7 +169,8 @@ class _Tile extends StatelessWidget {
                       applyHeightToLastDescent: false,
                     ),
                     style: selected ? style.selectedDateTextStyle : style.unselectedDateTextStyle,
-                    child: Text(date.day.toString()),
+                    //TODO: Localization.
+                    child: Text('${date.day}'),
                   ),
                   const SizedBox(height: _textSpacing),
                   // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
@@ -180,11 +210,11 @@ class _Tile extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('underline', today));
+      ..add(DiagnosticsProperty('today', today));
   }
 }
 
-/// [FAvatar]'s style.
+/// [FLineCalendar]'s style.
 final class FLineCalendarStyle with Diagnosticable {
   /// The vertical padding around the text in the calendar items.
   final double heightPadding;
@@ -286,18 +316,6 @@ final class FLineCalendarStyle with Diagnosticable {
   }
 
   /// Returns a copy of this [FLineCalendarStyle] with the given properties replaced.
-  ///
-  /// ```dart
-  /// final style = FLineCalendarStyle(
-  ///   selectedDecoration: ...,
-  ///   unselectedDecoration: ...,
-  /// );
-  ///
-  /// final copy = style.copyWith(unselectedDecoration: ...);
-  ///
-  /// print(style.selectedDecoration == copy.selectedDecoration); // true
-  /// print(style.unselectedDecoration == copy.unselectedDecoration); // false
-  /// ```
   @useResult
   FLineCalendarStyle copyWith({
     double? heightPadding,
