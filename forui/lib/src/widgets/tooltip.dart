@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/platform.dart';
+import 'package:meta/meta.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FTooltipController extends ChangeNotifier {
@@ -58,6 +61,17 @@ final class FTooltipController extends ChangeNotifier {
   }
 }
 
+/// A tooltip displays information related to a widget when focused, hovered over on desktop, and long pressed on
+/// Android, Fuchsia and iOS.
+///
+/// **Note**:
+/// On Android, Fuchsia and iOS, the tooltip will not be shown when long pressed if the [child] contains a
+/// [GestureDetector] that has a long-press callback.
+///
+/// See:
+/// * https://forui.dev/docs/tooltip for working examples.
+/// * [FTooltipController] for controlling a tooltip.
+/// * [FTooltipStyle] for customizing a tooltip's appearance.
 class FTooltip extends StatefulWidget {
   /// The tooltip's controller.
   final FTooltipController? controller;
@@ -80,13 +94,32 @@ class FTooltip extends StatefulWidget {
   /// True if the tooltip can only be shown manually by calling [FTooltipController.show].
   final bool manual;
 
+  /// The duration to wait before showing the tooltip after the user hovers over the target. Defaults to 0.5 seconds.
+  ///
+  /// This duration only applies to hovering over the target. It has no affect on pressing the target on Android,
+  /// Fuchsia and iOS.
+  final Duration hoverEnterDuration;
+
+  /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target. Defaults to 0.
+  ///
+  /// This duration only applies to hovering over the target. It has no affect on pressing the target on Android,
+  /// Fuchsia and iOS
+  final Duration hoverExitDuration;
+
+  /// The duration to wait before hiding the tooltip after the user has stopped pressing the target. Defaults to 1.5
+  /// seconds.
+  ///
+  /// This duration only applies to presses on Android, Fuchsia and iOS. It has no affect on hovering over the target.
+  final Duration pressExitDuration;
+
   /// The tip builder. The child passed to [tipBuilder] will always be null.
   final ValueWidgetBuilder<FTooltipStyle> tipBuilder;
 
   /// The child.
   final Widget child;
 
-  /// Creates a tooltip that is automatically shown when hovered over on desktop, or long pressed on Android and iOS.
+  /// Creates a tooltip that is automatically shown when hovered over on desktop, or long pressed on Android, Fuchsia
+  /// and iOS.
   const FTooltip({
     required this.tipBuilder,
     required this.child,
@@ -95,6 +128,9 @@ class FTooltip extends StatefulWidget {
     this.tipAnchor = Alignment.bottomCenter,
     this.childAnchor = Alignment.topCenter,
     this.shift = FPortalFollowerShift.flip,
+    this.hoverEnterDuration = const Duration(milliseconds: 500),
+    this.hoverExitDuration = Duration.zero,
+    this.pressExitDuration = const Duration(milliseconds: 1500),
     super.key,
   }) : manual = false;
 
@@ -108,22 +144,40 @@ class FTooltip extends StatefulWidget {
     this.childAnchor = Alignment.topCenter,
     this.shift = FPortalFollowerShift.flip,
     super.key,
-  })  : manual = true;
+  })  : manual = true,
+        hoverEnterDuration = const Duration(milliseconds: 500),
+        hoverExitDuration = Duration.zero,
+        pressExitDuration = const Duration(milliseconds: 1500);
 
   @override
   State<FTooltip> createState() => _FTooltipState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('tipAnchor', tipAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('shift', shift))
+      ..add(DiagnosticsProperty('manual', manual))
+      ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
+      ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
+      ..add(DiagnosticsProperty('pressExitDuration', pressExitDuration))
+      ..add(DiagnosticsProperty('tipBuilder', tipBuilder));
+  }
 }
 
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
   late FTooltipController _controller;
-  bool _hovered = false;
+  Key _fencingToken = UniqueKey();
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? FTooltipController(vsync: this);
   }
-
 
   @override
   void didUpdateWidget(covariant FTooltip old) {
@@ -139,25 +193,49 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style!; // TODO: get style from context.
+    final style = widget.style ?? context.theme.tooltipStyle;
 
     var child = widget.child;
     if (!widget.manual) {
-      child = MouseRegion(
-        onEnter: (_) async {
-          _hovered = true;
-          // TODO: waitDuration and showDuration
-          await _controller.show();
+      child = CallbackShortcuts(
+        bindings: {
+          LogicalKeySet(LogicalKeyboardKey.escape): _exit,
         },
-        onExit: (_) async {
-          _hovered = false;
-          // TODO: exitDuration
-          await _controller.hide();
-        },
-        child: GestureDetector( // TODO: haptic feedback.
-          child: widget.child,
+        child: Focus(
+          onFocusChange: (focused) async => focused ? _enter() : _exit(),
+          child: child,
         ),
       );
+
+      // TODO: haptic feedback.
+      if (touchPlatforms.contains(defaultTargetPlatform)) {
+        child = GestureDetector(
+          onLongPressStart: (_) async {
+            _fencingToken = UniqueKey();
+            await _controller.show();
+          },
+          onLongPressEnd: (_) async {
+            final fencingToken = _fencingToken = UniqueKey();
+            await Future.delayed(widget.pressExitDuration);
+
+            if (fencingToken == _fencingToken) {
+              await _controller.hide();
+            }
+          },
+          child: child,
+        );
+      } else {
+        child = MouseRegion(
+          onEnter: (_) => _enter(),
+          onExit: (_) => _exit(),
+          // We have to use a Listener as GestureDetector's arena implementation allows only 1 gesture to win. It is
+          // problematic if the child is a button. See https://github.com/flutter/flutter/issues/92103.
+          child: Listener(
+            onPointerDown: (_) => _exit(),
+            child: child,
+          ),
+        );
+      }
     }
 
     return FPortal(
@@ -165,19 +243,22 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       targetAnchor: widget.childAnchor,
       followerAnchor: widget.tipAnchor,
       shift: widget.shift,
-      followerBuilder: (context) => FadeTransition(
-        opacity: _controller._fade,
-        child: ScaleTransition(
-          scale: _controller._scale,
-          child: Padding(
-            padding: style.margin,
-            child: DecoratedBox(
-              decoration: style.decoration,
-              child: Padding(
-                padding: style.padding,
-                child: DefaultTextStyle(
-                  style: style.textStyle,
-                  child: widget.tipBuilder(context, style, null),
+      followerBuilder: (context) => Semantics(
+        container: true,
+        child: FadeTransition(
+          opacity: _controller._fade,
+          child: ScaleTransition(
+            scale: _controller._scale,
+            child: Padding(
+              padding: style.margin,
+              child: DecoratedBox(
+                decoration: style.decoration,
+                child: Padding(
+                  padding: style.padding,
+                  child: DefaultTextStyle(
+                    style: style.textStyle,
+                    child: widget.tipBuilder(context, style, null),
+                  ),
                 ),
               ),
             ),
@@ -186,6 +267,24 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       ),
       child: child,
     );
+  }
+
+  Future<void> _enter() async {
+    final fencingToken = _fencingToken = UniqueKey();
+    await Future.delayed(widget.hoverEnterDuration);
+
+    if (fencingToken == _fencingToken) {
+      await _controller.show();
+    }
+  }
+
+  Future<void> _exit() async {
+    final fencingToken = _fencingToken = UniqueKey();
+    await Future.delayed(widget.hoverExitDuration);
+
+    if (fencingToken == _fencingToken) {
+      await _controller.hide();
+    }
   }
 
   @override
@@ -199,7 +298,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
 /// A [FTooltip]'s style.
 final class FTooltipStyle with Diagnosticable {
-  /// The tooltip's default shadow in [FTooltip.inherit].
+  /// The tooltip's default shadow in [FTooltipStyle.inherit].
   static const shadow = [
     BoxShadow(
       color: Color(0x1a000000),
@@ -226,4 +325,65 @@ final class FTooltipStyle with Diagnosticable {
 
   /// The tooltip's default text style.
   final TextStyle textStyle;
+
+  /// Creates a [FTooltipStyle].
+  const FTooltipStyle({
+    required this.decoration,
+    required this.textStyle,
+    this.margin = const EdgeInsets.all(4),
+    this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+  });
+
+  /// Creates a [FTooltipStyle] that inherits its properties from the given [colorScheme], [typography], and [style].
+  FTooltipStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+      : this(
+          decoration: BoxDecoration(
+            color: colorScheme.background,
+            borderRadius: style.borderRadius,
+            border: Border.all(
+              width: style.borderWidth,
+              color: colorScheme.border,
+            ),
+            boxShadow: shadow,
+          ),
+          textStyle: typography.sm,
+        );
+
+  /// Returns a copy of this [FTooltipStyle] with the given properties replaced.
+  @useResult
+  FTooltipStyle copyWith({
+    BoxDecoration? decoration,
+    TextStyle? textStyle,
+    EdgeInsets? margin,
+    EdgeInsets? padding,
+  }) =>
+      FTooltipStyle(
+        decoration: decoration ?? this.decoration,
+        textStyle: textStyle ?? this.textStyle,
+        margin: margin ?? this.margin,
+        padding: padding ?? this.padding,
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('decoration', decoration))
+      ..add(DiagnosticsProperty('textStyle', textStyle))
+      ..add(DiagnosticsProperty('margin', margin))
+      ..add(DiagnosticsProperty('padding', padding));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FTooltipStyle &&
+          runtimeType == other.runtimeType &&
+          decoration == other.decoration &&
+          margin == other.margin &&
+          padding == other.padding &&
+          textStyle == other.textStyle;
+
+  @override
+  int get hashCode => decoration.hashCode ^ margin.hashCode ^ padding.hashCode ^ textStyle.hashCode;
 }

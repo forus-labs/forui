@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/platform.dart';
 
 import 'package:meta/meta.dart';
 
@@ -69,10 +70,9 @@ final class FPopoverController extends ChangeNotifier {
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
-  static ({Alignment follower, Alignment target}) get _platform => switch (defaultTargetPlatform) {
-        TargetPlatform.android || TargetPlatform.iOS => (follower: Alignment.bottomCenter, target: Alignment.topCenter),
-        _ => (follower: Alignment.topCenter, target: Alignment.bottomCenter),
-      };
+  static ({Alignment follower, Alignment target}) get _platform => touchPlatforms.contains(defaultTargetPlatform)
+      ? (follower: Alignment.bottomCenter, target: Alignment.topCenter)
+      : (follower: Alignment.topCenter, target: Alignment.bottomCenter);
 
   /// The controller that shows and hides the follower. It initially hides the follower.
   final FPopoverController controller;

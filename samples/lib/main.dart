@@ -72,6 +72,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/text-field/password', page: PasswordTextFieldRoute.page),
         AutoRoute(path: '/text-field/multiline', page: MultilineTextFieldRoute.page),
         AutoRoute(path: '/text-field/form', page: FormTextFieldRoute.page),
+        AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
         AutoRoute(path: '/scaffold/default', page: ScaffoldRoute.page),
         AutoRoute(path: '/switch/default', page: SwitchRoute.page),
         AutoRoute(path: '/switch/form', page: FormSwitchRoute.page),

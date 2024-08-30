@@ -32,13 +32,13 @@ class FCalendar extends StatelessWidget {
   /// The start date. It is truncated to the nearest date.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [end] <= [start]
+  /// Throws [AssertionError] if [end] <= [start].
   final DateTime start;
 
   /// The end date. It is truncated to the nearest date.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [end] <= [start]
+  /// Throws [AssertionError] if [end] <= [start].
   final DateTime end;
 
   /// The current date. It is truncated to the nearest date. Defaults to the [DateTime.now].

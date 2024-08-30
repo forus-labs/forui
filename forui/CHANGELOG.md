@@ -24,6 +24,8 @@
 
 * Add `FPopover`.
 
+* Add `FTooltip`.
+
 ### Changes
 
 * **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.size`.
@@ -54,6 +56,8 @@
 
 * **Breaking:** Flattened `FStyle.formFieldStyle` - use `FStyle.enabledFormFieldStyle`, `FStyle.disabledFormFieldStyle`,
 and`FStyle.errorFormFieldStyle`.
+
+* Improve platform detection for web when initializing platform-specific variables.
 
 ### Fixes
 

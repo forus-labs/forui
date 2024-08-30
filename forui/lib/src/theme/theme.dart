@@ -103,8 +103,7 @@ class FTheme extends StatelessWidget {
         data: data,
         child: Directionality(
           textDirection: textDirection ?? Directionality.of(context),
-          child: Overlay(
-            // TODO: temporary until we create FApp.
+          child: Overlay.maybeOf(context) == null ? Overlay( // TODO: temporary until we create FApp.
             initialEntries: [
               OverlayEntry(
                 builder: (context) => DefaultTextStyle(
@@ -116,6 +115,12 @@ class FTheme extends StatelessWidget {
                 ),
               ),
             ],
+          ) : DefaultTextStyle(
+            style: data.typography.base.copyWith(
+              fontFamily: data.typography.defaultFontFamily,
+              color: data.colorScheme.foreground,
+            ),
+            child: child,
           ),
         ),
       );

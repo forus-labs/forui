@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/platform.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
@@ -84,8 +85,7 @@ class FResizable extends StatefulWidget {
           'The hitRegionExtent should be positive, but is $hitRegionExtent.',
         ),
         controller = controller ?? FResizableController.cascade(),
-        hitRegionExtent = hitRegionExtent ??
-            (defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.iOS ? 60 : 10);
+        hitRegionExtent = hitRegionExtent ?? (touchPlatforms.contains(defaultTargetPlatform) ? 60 : 10);
 
   @override
   State<StatefulWidget> createState() => _FResizableState();

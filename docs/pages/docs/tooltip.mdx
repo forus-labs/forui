@@ -1,0 +1,80 @@
+import { Callout } from "nextra/components";
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+import LinkBadge from "../../components/link-badge/link-badge";
+import LinkBadgeGroup from "../../components/link-badge/link-badge-group";
+
+# Tooltip
+A tooltip displays information related to a widget when focused, hovered over on desktop, and long pressed on Android,
+Fuchsia and iOS.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/forui.widgets.tooltip-library.html"/>
+</LinkBadgeGroup>
+
+<Callout type="info">
+    The examples will behave differently on desktop and mobile.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tooltip' height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTooltip(
+      tipBuilder: (context, style, _) => const Text('Add to library'),
+      child: IntrinsicWidth(
+        child: FButton(
+          style: FButtonStyle.outline,
+          onPress: () {},
+          label: Text('Long press/Hover'),
+        ),
+      ),
+    ),
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTooltip(...)`
+
+```dart
+FTooltip(
+  controller: _controller, // FTooltipController
+  tipAnchor: Alignment.bottomCenter,
+  childAnchor: Alignment.topCenter,
+  shift: FPortalFollowerShift.flip,
+  tipBuilder: (context, style, _) => const Text('Tooltip'),
+  child: const Placeholder(),
+);
+```
+
+## Examples
+
+### Horizontal Alignment
+
+You can change how the tooltip is aligned to the button.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tooltip' query={{axis: 'horizontal'}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {2-3}
+    FTooltip(
+      tipAnchor: Alignment.topLeft,
+      childAnchor: Alignment.topRight,
+      tipBuilder: (context, style, _) => const Text('Add to library'),
+      child: IntrinsicWidth(
+        child: FButton(
+          style: FButtonStyle.outline,
+          onPress: () {},
+          label: Text('Long press/Hover'),
+        ),
+      ),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
