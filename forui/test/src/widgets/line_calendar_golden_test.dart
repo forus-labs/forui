@@ -12,7 +12,7 @@ import '../test_scaffold.dart';
 void main() {
   group('FLineCalendar', () {
     for (final (name, theme, _) in TestScaffold.themes) {
-      for (final (lineCalendar, value) in [('default', ValueNotifier(LocalDate(2024,8,29)))]) {
+      for (final (lineCalendar, value) in [('default', ValueNotifier(LocalDate(2024, 8, 29)))]) {
         testWidgets('$name - $lineCalendar', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
