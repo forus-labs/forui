@@ -45,7 +45,7 @@ void main() {
           TestScaffold(
             data: FThemes.zinc.light,
             child: FTooltip(
-              pressExitDuration: duration,
+              longPressExitDuration: duration,
               tipBuilder: (context, style, _) => const Text('tip'),
               child: FButton(
                 onPress: () {},
@@ -72,7 +72,7 @@ void main() {
           TestScaffold(
             data: FThemes.zinc.light,
             child: FTooltip(
-              pressExitDuration: duration,
+              longPressExitDuration: duration,
               tipBuilder: (context, style, _) => const Text('tip'),
               child: FButton(
                 onPress: () {},

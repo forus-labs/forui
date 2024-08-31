@@ -61,12 +61,21 @@ final class FTooltipController extends ChangeNotifier {
   }
 }
 
-/// A tooltip displays information related to a widget when focused, hovered over on desktop, and long pressed on
-/// Android, Fuchsia and iOS.
+/// The tooltip's behavior.
+enum FToolTipBehavior {
+  /// Denotes that the tooltip is shown when hovered over.
+  hover,
+  /// Denotes that the tooltip is shown when hovered over or long pressed.
+  hoverOrLongPress,
+  /// Denotes that the tooltip is shown when long pressed.
+  longPress,
+}
+
+/// A tooltip displays information related to a widget when focused, hovered over and/or long pressed.
 ///
 /// **Note**:
-/// On Android, Fuchsia and iOS, the tooltip will not be shown when long pressed if the [child] contains a
-/// [GestureDetector] that has a long-press callback.
+/// The tooltip will not be shown when long pressed if the [child] contains a [GestureDetector] that has a long-press
+/// callback.
 ///
 /// See:
 /// * https://forui.dev/docs/tooltip for working examples.
@@ -91,26 +100,18 @@ class FTooltip extends StatefulWidget {
   /// See [FPortalFollowerShift] for more information on the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
-  /// True if the tooltip can only be shown manually by calling [FTooltipController.show].
-  final bool manual;
+  /// The tooltip's behavior. Defaults to [FToolTipBehavior.hoverOrLongPress].
+  final FToolTipBehavior? behavior;
 
   /// The duration to wait before showing the tooltip after the user hovers over the target. Defaults to 0.5 seconds.
-  ///
-  /// This duration only applies to hovering over the target. It has no affect on pressing the target on Android,
-  /// Fuchsia and iOS.
   final Duration hoverEnterDuration;
 
   /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target. Defaults to 0.
-  ///
-  /// This duration only applies to hovering over the target. It has no affect on pressing the target on Android,
-  /// Fuchsia and iOS
   final Duration hoverExitDuration;
 
   /// The duration to wait before hiding the tooltip after the user has stopped pressing the target. Defaults to 1.5
   /// seconds.
-  ///
-  /// This duration only applies to presses on Android, Fuchsia and iOS. It has no affect on hovering over the target.
-  final Duration pressExitDuration;
+  final Duration longPressExitDuration;
 
   /// The tip builder. The child passed to [tipBuilder] will always be null.
   final ValueWidgetBuilder<FTooltipStyle> tipBuilder;
@@ -128,11 +129,12 @@ class FTooltip extends StatefulWidget {
     this.tipAnchor = Alignment.bottomCenter,
     this.childAnchor = Alignment.topCenter,
     this.shift = FPortalFollowerShift.flip,
+    FToolTipBehavior this.behavior = FToolTipBehavior.hoverOrLongPress,
     this.hoverEnterDuration = const Duration(milliseconds: 500),
     this.hoverExitDuration = Duration.zero,
-    this.pressExitDuration = const Duration(milliseconds: 1500),
+    this.longPressExitDuration = const Duration(milliseconds: 1500),
     super.key,
-  }) : manual = false;
+  });
 
   /// Creates a tooltip that is manually shown only through its controller.
   const FTooltip.manual({
@@ -144,10 +146,10 @@ class FTooltip extends StatefulWidget {
     this.childAnchor = Alignment.topCenter,
     this.shift = FPortalFollowerShift.flip,
     super.key,
-  })  : manual = true,
+  })  : behavior = null,
         hoverEnterDuration = const Duration(milliseconds: 500),
         hoverExitDuration = Duration.zero,
-        pressExitDuration = const Duration(milliseconds: 1500);
+        longPressExitDuration = const Duration(milliseconds: 1500);
 
   @override
   State<FTooltip> createState() => _FTooltipState();
@@ -161,10 +163,10 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('tipAnchor', tipAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('shift', shift))
-      ..add(DiagnosticsProperty('manual', manual))
+      ..add(DiagnosticsProperty('behavior', behavior))
       ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
       ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
-      ..add(DiagnosticsProperty('pressExitDuration', pressExitDuration))
+      ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration))
       ..add(DiagnosticsProperty('tipBuilder', tipBuilder));
   }
 }
@@ -196,7 +198,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     final style = widget.style ?? context.theme.tooltipStyle;
 
     var child = widget.child;
-    if (!widget.manual) {
+    if (widget.behavior != null) {
       child = CallbackShortcuts(
         bindings: {
           LogicalKeySet(LogicalKeyboardKey.escape): _exit,
@@ -206,36 +208,38 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
           child: child,
         ),
       );
+    }
 
-      // TODO: haptic feedback.
-      if (touchPlatforms.contains(defaultTargetPlatform)) {
-        child = GestureDetector(
-          onLongPressStart: (_) async {
-            _fencingToken = UniqueKey();
-            await _controller.show();
-          },
-          onLongPressEnd: (_) async {
-            final fencingToken = _fencingToken = UniqueKey();
-            await Future.delayed(widget.pressExitDuration);
-
-            if (fencingToken == _fencingToken) {
-              await _controller.hide();
-            }
-          },
+    if (widget.behavior == FToolTipBehavior.hover || widget.behavior == FToolTipBehavior.hoverAndLongPress) {
+      child = MouseRegion(
+        onEnter: (_) => _enter(),
+        onExit: (_) => _exit(),
+        // We have to use a Listener as GestureDetector's arena implementation allows only 1 gesture to win. It is
+        // problematic if the child is a button. See https://github.com/flutter/flutter/issues/92103.
+        child: Listener(
+          onPointerDown: (_) => _exit(),
           child: child,
-        );
-      } else {
-        child = MouseRegion(
-          onEnter: (_) => _enter(),
-          onExit: (_) => _exit(),
-          // We have to use a Listener as GestureDetector's arena implementation allows only 1 gesture to win. It is
-          // problematic if the child is a button. See https://github.com/flutter/flutter/issues/92103.
-          child: Listener(
-            onPointerDown: (_) => _exit(),
-            child: child,
-          ),
-        );
-      }
+        ),
+      );
+    }
+
+    // TODO: haptic feedback.
+    if (widget.behavior == FToolTipBehavior.longPress || widget.behavior == FToolTipBehavior.hoverAndLongPress) {
+      child = GestureDetector(
+        onLongPressStart: (_) async {
+          _fencingToken = UniqueKey();
+          await _controller.show();
+        },
+        onLongPressEnd: (_) async {
+          final fencingToken = _fencingToken = UniqueKey();
+          await Future.delayed(widget.longPressExitDuration);
+
+          if (fencingToken == _fencingToken) {
+            await _controller.hide();
+          }
+        },
+        child: child,
+      );
     }
 
     return FPortal(
