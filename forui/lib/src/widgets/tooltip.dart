@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/platform.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FTooltipController extends ChangeNotifier {
@@ -67,8 +66,10 @@ final class FTooltipController extends ChangeNotifier {
 enum FToolTipBehavior {
   /// Denotes that the tooltip is shown when hovered over.
   hover,
+
   /// Denotes that the tooltip is shown when hovered over or long pressed.
   hoverOrLongPress,
+
   /// Denotes that the tooltip is shown when long pressed.
   longPress,
 }
