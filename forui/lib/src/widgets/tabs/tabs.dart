@@ -108,11 +108,12 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FTabController(
-      initialIndex: widget.initialIndex,
-      length: widget.tabs.length,
-      vsync: this,
-    );
+    _controller = widget.controller ??
+        FTabController(
+          initialIndex: widget.initialIndex,
+          length: widget.tabs.length,
+          vsync: this,
+        );
   }
 
   @override
@@ -123,11 +124,12 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? FTabController(
-        initialIndex: widget.initialIndex,
-        length: widget.tabs.length,
-        vsync: this,
-      );
+      _controller = widget.controller ??
+          FTabController(
+            initialIndex: widget.initialIndex,
+            length: widget.tabs.length,
+            vsync: this,
+          );
     }
   }
 
