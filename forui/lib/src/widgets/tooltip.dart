@@ -213,7 +213,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       );
     }
 
-    if (widget.behavior == FToolTipBehavior.hover || widget.behavior == FToolTipBehavior.hoverAndLongPress) {
+    if (widget.behavior == FToolTipBehavior.hover || widget.behavior == FToolTipBehavior.hoverOrLongPress) {
       child = MouseRegion(
         onEnter: (_) => _enter(),
         onExit: (_) => _exit(),
@@ -227,7 +227,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     }
 
     // TODO: haptic feedback.
-    if (widget.behavior == FToolTipBehavior.longPress || widget.behavior == FToolTipBehavior.hoverAndLongPress) {
+    if (widget.behavior == FToolTipBehavior.longPress || widget.behavior == FToolTipBehavior.hoverOrLongPress) {
       child = GestureDetector(
         onLongPressStart: (_) async {
           _fencingToken = UniqueKey();
