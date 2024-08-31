@@ -102,8 +102,6 @@ void main() {
 
     group('hover', () {
       testWidgets('hover shows tooltip', (tester) async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
         await tester.pumpWidget(
           TestScaffold(
             data: FThemes.zinc.light,
