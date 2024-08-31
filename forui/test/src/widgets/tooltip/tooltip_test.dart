@@ -9,36 +9,38 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FTooltip', () {
-    group('mobile', () {
-      testWidgets('manual does nothing', (tester) async {
-        final controller = FTooltipController(vsync: const TestVSync());
+    testWidgets('manual does nothing', (tester) async {
+      final controller = FTooltipController(vsync: const TestVSync());
 
-        await tester.pumpWidget(
-          TestScaffold(
-            data: FThemes.zinc.light,
-            child: FTooltip.manual(
-              controller: controller,
-              tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(
-                onPress: () {},
-                label: const Text('button'),
-              ),
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: FTooltip.manual(
+            controller: controller,
+            tipBuilder: (context, style, _) => const Text('tip'),
+            child: FButton(
+              onPress: () {},
+              label: const Text('button'),
             ),
           ),
-        );
+        ),
+      );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
-        await tester.pump();
+      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await gesture.addPointer(location: Offset.zero);
+      addTearDown(gesture.removePointer);
+      await tester.pump();
 
-        await gesture.moveTo(tester.getCenter(find.byType(FButton)));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
+      await gesture.moveTo(tester.getCenter(find.byType(FButton)));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        expect(find.text('tip'), findsNothing);
-      });
+      expect(find.text('tip'), findsNothing);
 
-      testWidgets('long-press shows tooltip', (tester) async {
+      debugDefaultTargetPlatformOverride = null;
+    });
+
+    group('long press', () {
+      testWidgets('shows tooltip', (tester) async {
         const duration = Duration(milliseconds: 1000);
 
         await tester.pumpWidget(
@@ -65,7 +67,7 @@ void main() {
         expect(find.text('tip'), findsNothing);
       });
 
-      testWidgets('long-press and re-long-press shows resets hoverEnterDuration', (tester) async {
+      testWidgets('re-long-press shows resets longPressExitDuration', (tester) async {
         const duration = Duration(milliseconds: 1000);
 
         await tester.pumpWidget(
@@ -98,39 +100,7 @@ void main() {
       });
     });
 
-    group('desktop', () {
-      testWidgets('manual does nothing', (tester) async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
-        final controller = FTooltipController(vsync: const TestVSync());
-
-        await tester.pumpWidget(
-          TestScaffold(
-            data: FThemes.zinc.light,
-            child: FTooltip.manual(
-              controller: controller,
-              tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(
-                onPress: () {},
-                label: const Text('button'),
-              ),
-            ),
-          ),
-        );
-
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
-        await tester.pump();
-
-        await gesture.moveTo(tester.getCenter(find.byType(FButton)));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-
-        expect(find.text('tip'), findsNothing);
-
-        debugDefaultTargetPlatformOverride = null;
-      });
-
+    group('hover', () {
       testWidgets('hover shows tooltip', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.linux;
 
@@ -161,13 +131,9 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('tip'), findsNothing);
-
-        debugDefaultTargetPlatformOverride = null;
       });
 
       testWidgets('hover enter and re-enter resets hoverEnterDuration', (tester) async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
         await tester.pumpWidget(
           TestScaffold(
             data: FThemes.zinc.light,
@@ -201,13 +167,9 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
         expect(find.text('tip'), findsOneWidget);
-
-        debugDefaultTargetPlatformOverride = null;
       });
 
       testWidgets('hover exit and re-exit resets hoverExitDuration', (tester) async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
         await tester.pumpWidget(
           TestScaffold(
             data: FThemes.zinc.light,
@@ -245,13 +207,9 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
         expect(find.text('tip'), findsNothing);
-
-        debugDefaultTargetPlatformOverride = null;
       });
 
       testWidgets('tap hides tooltip even if child is GestureDetector', (tester) async {
-        debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
         await tester.pumpWidget(
           TestScaffold(
             data: FThemes.zinc.light,
@@ -279,8 +237,6 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('tip'), findsNothing);
-
-        debugDefaultTargetPlatformOverride = null;
       });
     });
   });
