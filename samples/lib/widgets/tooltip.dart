@@ -8,19 +8,18 @@ import 'package:forui_samples/sample_scaffold.dart';
 @RoutePage()
 class TooltipPage extends StatelessWidget {
   final FThemeData theme;
-  final FToolTipBehavior behavior;
+  final bool hover;
+  final bool longPress;
   final Axis axis;
 
   TooltipPage({
     @queryParam String theme = 'zinc-light',
-    @queryParam String behavior = 'hover-or-long-press',
+    @queryParam String hover = 'true',
+    @queryParam String longPress = 'true',
     @queryParam String axis = 'vertical',
   })  : theme = themes[theme]!,
-        behavior = switch (behavior) {
-          'long-press' => FToolTipBehavior.longPress,
-          'hover' => FToolTipBehavior.hover,
-          _ => FToolTipBehavior.hoverOrLongPress,
-        },
+        hover = bool.tryParse(hover) ?? true,
+        longPress = bool.tryParse(longPress) ?? true,
         axis = switch (axis) {
           'horizontal' => Axis.horizontal,
           _ => Axis.vertical,
@@ -39,7 +38,8 @@ class TooltipPage extends StatelessWidget {
                   children: [
                     const SizedBox(height: 30),
                     FTooltip(
-                      behavior: behavior,
+                      hover: hover,
+                      longPress: longPress,
                       tipAnchor: axis == Axis.horizontal ? Alignment.topLeft : Alignment.bottomCenter,
                       childAnchor: axis == Axis.horizontal ? Alignment.topRight : Alignment.topCenter,
                       tipBuilder: (context, style, _) => const Text('Add to library'),

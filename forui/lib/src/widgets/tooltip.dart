@@ -62,18 +62,6 @@ final class FTooltipController extends ChangeNotifier {
   }
 }
 
-/// The tooltip's behavior.
-enum FToolTipBehavior {
-  /// Denotes that the tooltip is shown when hovered over.
-  hover,
-
-  /// Denotes that the tooltip is shown when hovered over or long pressed.
-  hoverOrLongPress,
-
-  /// Denotes that the tooltip is shown when long pressed.
-  longPress,
-}
-
 /// A tooltip displays information related to a widget when focused, hovered over and/or long pressed.
 ///
 /// **Note**:
@@ -103,14 +91,17 @@ class FTooltip extends StatefulWidget {
   /// See [FPortalFollowerShift] for more information on the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
-  /// The tooltip's behavior. Defaults to [FToolTipBehavior.hoverOrLongPress].
-  final FToolTipBehavior? behavior;
+  /// True if the tooltip should be shown when hovered over. Defaults to true.
+  final bool hover;
 
   /// The duration to wait before showing the tooltip after the user hovers over the target. Defaults to 0.5 seconds.
   final Duration hoverEnterDuration;
 
   /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target. Defaults to 0.
   final Duration hoverExitDuration;
+
+  /// True if the tooltip should be shown when long pressed. Defaults to true.
+  final bool longPress;
 
   /// The duration to wait before hiding the tooltip after the user has stopped pressing the target. Defaults to 1.5
   /// seconds.
@@ -122,8 +113,7 @@ class FTooltip extends StatefulWidget {
   /// The child.
   final Widget child;
 
-  /// Creates a tooltip that is automatically shown when hovered over on desktop, or long pressed on Android, Fuchsia
-  /// and iOS.
+  /// Creates a tooltip.
   const FTooltip({
     required this.tipBuilder,
     required this.child,
@@ -132,27 +122,13 @@ class FTooltip extends StatefulWidget {
     this.tipAnchor = Alignment.bottomCenter,
     this.childAnchor = Alignment.topCenter,
     this.shift = FPortalFollowerShift.flip,
-    FToolTipBehavior this.behavior = FToolTipBehavior.hoverOrLongPress,
+    this.hover = true,
     this.hoverEnterDuration = const Duration(milliseconds: 500),
     this.hoverExitDuration = Duration.zero,
+    this.longPress = true,
     this.longPressExitDuration = const Duration(milliseconds: 1500),
     super.key,
   });
-
-  /// Creates a tooltip that is manually shown only through its controller.
-  const FTooltip.manual({
-    required this.tipBuilder,
-    required this.child,
-    required FTooltipController this.controller,
-    this.style,
-    this.tipAnchor = Alignment.bottomCenter,
-    this.childAnchor = Alignment.topCenter,
-    this.shift = FPortalFollowerShift.flip,
-    super.key,
-  })  : behavior = null,
-        hoverEnterDuration = const Duration(milliseconds: 500),
-        hoverExitDuration = Duration.zero,
-        longPressExitDuration = const Duration(milliseconds: 1500);
 
   @override
   State<FTooltip> createState() => _FTooltipState();
@@ -166,9 +142,10 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('tipAnchor', tipAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('shift', shift))
-      ..add(DiagnosticsProperty('behavior', behavior))
+      ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
       ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
+      ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration))
       ..add(DiagnosticsProperty('tipBuilder', tipBuilder));
   }
@@ -201,7 +178,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     final style = widget.style ?? context.theme.tooltipStyle;
 
     var child = widget.child;
-    if (widget.behavior != null) {
+    if (widget.hover || widget.longPress) {
       child = CallbackShortcuts(
         bindings: {
           LogicalKeySet(LogicalKeyboardKey.escape): _exit,
@@ -213,7 +190,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       );
     }
 
-    if (widget.behavior == FToolTipBehavior.hover || widget.behavior == FToolTipBehavior.hoverOrLongPress) {
+    if (widget.hover) {
       child = MouseRegion(
         onEnter: (_) => _enter(),
         onExit: (_) => _exit(),
@@ -227,7 +204,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     }
 
     // TODO: haptic feedback.
-    if (widget.behavior == FToolTipBehavior.longPress || widget.behavior == FToolTipBehavior.hoverOrLongPress) {
+    if (widget.longPress) {
       child = GestureDetector(
         onLongPressStart: (_) async {
           _fencingToken = UniqueKey();

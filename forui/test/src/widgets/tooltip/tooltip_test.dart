@@ -9,14 +9,16 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FTooltip', () {
-    testWidgets('manual does nothing', (tester) async {
+    testWidgets('does nothing', (tester) async {
       final controller = FTooltipController(vsync: const TestVSync());
 
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
-          child: FTooltip.manual(
+          child: FTooltip(
             controller: controller,
+            hover: false,
+            longPress: false,
             tipBuilder: (context, style, _) => const Text('tip'),
             child: FButton(
               onPress: () {},

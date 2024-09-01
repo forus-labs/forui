@@ -37,7 +37,8 @@ A tooltip displays information related to a widget when focused, hovered over, a
 ```dart
 FTooltip(
   controller: _controller, // FTooltipController
-  behavior: FTooltipBehavior.hoverOrLongPress,
+  hover: true,
+  longPress: true,
   tipAnchor: Alignment.bottomCenter,
   childAnchor: Alignment.topCenter,
   shift: FPortalFollowerShift.flip,
@@ -78,12 +79,13 @@ You can change how the tooltip is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tooltip' query={{behavior: 'long-press'}} height={300}/>
+    <Widget name='tooltip' query={{hover: 'false'}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2}
+    ```dart {2-3}
     FTooltip(
-      behavior: FTooltipBehavior.longPress,
+      hover: false,
+      longPress: true,
       tipBuilder: (context, style, _) => const Text('Add to library'),
       child: IntrinsicWidth(
         child: FButton(
