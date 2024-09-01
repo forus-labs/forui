@@ -24,3 +24,4 @@ export 'widgets/scaffold.dart';
 export 'widgets/switch.dart';
 export 'widgets/tabs.dart';
 export 'widgets/text_field.dart';
+export 'widgets/tooltip.dart';

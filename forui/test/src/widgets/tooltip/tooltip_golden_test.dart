@@ -12,17 +12,17 @@ import '../../test_scaffold.dart';
 
 void main() {
   for (final (name, theme, _) in TestScaffold.themes) {
-    group('FPopover', () {
+    group('FTooltip', () {
       testWidgets('$name hidden ', (tester) async {
-        final controller = FPopoverController(vsync: const TestVSync());
+        final controller = FTooltipController(vsync: const TestVSync());
 
         await tester.pumpWidget(
           TestScaffold(
             data: theme,
-            child: FPopover(
+            child: FTooltip(
               controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
+              tipBuilder: (context, style, _) => const Text('Lorem'),
+              child: const ColoredBox(
                 color: Colors.yellow,
                 child: SizedBox.square(
                   dimension: 100,
@@ -32,19 +32,19 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/$name-hidden.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/$name-hidden.png'));
       });
 
       testWidgets('$name shown', (tester) async {
-        final controller = FPopoverController(vsync: const TestVSync());
+        final controller = FTooltipController(vsync: const TestVSync());
 
         await tester.pumpWidget(
           TestScaffold(
             data: theme,
-            child: FPopover(
+            child: FTooltip(
               controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
+              tipBuilder: (context, style, _) => const Text('Lorem'),
+              child: const ColoredBox(
                 color: Colors.yellow,
                 child: SizedBox.square(
                   dimension: 100,
@@ -57,7 +57,7 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/$name-shown.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/$name-shown.png'));
       });
     });
   }
