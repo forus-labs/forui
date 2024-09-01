@@ -11,7 +11,7 @@ import 'package:forui/src/foundation/util.dart';
 
 //TODO: localizations.
 const _days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-final _epoch = LocalDate(2000);
+final _start = LocalDate(1900);
 const _textSpacing = 2.0;
 
 /// A calendar that can be scrolled horizontally.
@@ -22,21 +22,22 @@ class FLineCalendar extends StatefulWidget {
   /// The currently selected [LocalDate].
   final ValueNotifier<LocalDate> selected;
 
-  /// The first date in this calendar carousel. Defaults to 1st January 2000.
-  final LocalDate epoch;
+  /// The first date in this calendar carousel. Defaults to 1st January 1900.
+  final LocalDate start;
 
   /// Today's date. Defaults to the [LocalDate.now].
   final LocalDate today;
 
   /// Creates a [FLineCalendar].
   FLineCalendar({
-    required this.selected,
-    LocalDate? epoch,
-    LocalDate? today,
+    required ValueNotifier<DateTime> selected,
+    DateTime? start,
+    DateTime? today,
     this.style,
     super.key,
-  })  : epoch = epoch ?? _epoch,
-        today = today ?? LocalDate.now();
+  })  : selected = ValueNotifier(selected.value.toLocalDate()),
+        start = start != null ? LocalDate(start.year, start.month, start.day) : _start,
+        today = today != null ? LocalDate(today.year, today.month, today.day) : LocalDate.now();
 
   @override
   State<FLineCalendar> createState() => _FLineCalendarState();
@@ -47,7 +48,7 @@ class FLineCalendar extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('selected', selected))
-      ..add(DiagnosticsProperty('epoch', epoch))
+      ..add(DiagnosticsProperty('epoch', start))
       ..add(DiagnosticsProperty('today', today));
   }
 }
@@ -56,25 +57,10 @@ class _FLineCalendarState extends State<FLineCalendar> {
   ScrollController _controller = ScrollController();
 
   @override
-  void didUpdateWidget(covariant FLineCalendar oldWidget) {
-    if (oldWidget.selected != widget.selected) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final textDirection = Directionality.of(context);
-        oldWidget.selected.removeListener(() => onDateChange(textDirection));
-        widget.selected.addListener(() => onDateChange(textDirection));
-      });
-    }
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final textDirection = Directionality.of(context);
-      widget.selected.addListener(() => onDateChange(textDirection));
-    });
+  void didChangeDependencies() {
+    final textDirection = Directionality.of(context);
+    widget.selected.addListener(() => onDateChange(textDirection));
+    super.didChangeDependencies();
   }
 
   void onDateChange(TextDirection textDirection) {
@@ -90,11 +76,11 @@ class _FLineCalendarState extends State<FLineCalendar> {
 
     // TODO: calculate width of items based on the text font size.
     final textScalor = MediaQuery.textScalerOf(context);
-    final dateTextSize = textScalor.scale(style.unselectedDateTextStyle.fontSize!);
-    final dayTextSize = textScalor.scale(style.unselectedDayTextStyle.fontSize!);
-    final size = dateTextSize + dayTextSize + _textSpacing + (style.heightPadding * 2);
+    final dateTextSize = textScalor.scale(style.content.unselectedDateTextStyle.fontSize!);
+    final dayTextSize = textScalor.scale(style.content.unselectedDayTextStyle.fontSize!);
+    final size = dateTextSize + dayTextSize + _textSpacing + (style.content.verticalPadding * 2);
 
-    final offset = (widget.selected.value.difference(widget.epoch).inDays - 2) * size + style.itemPadding;
+    final offset = (widget.selected.value.difference(widget.start).inDays - 2) * size + style.itemPadding;
     _controller = ScrollController(initialScrollOffset: offset);
 
     return SizedBox(
@@ -110,7 +96,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
           child: _Tile(
             style: style,
             selected: widget.selected,
-            date: widget.epoch.add(Duration(days: index)),
+            date: widget.start.add(Duration(days: index)),
             today: widget.today,
           ),
         ),
@@ -146,62 +132,64 @@ class _Tile extends StatelessWidget {
       };
 
   @override
-  Widget build(BuildContext context) {
-    final selected = this.selected.value == date;
-
-    //TODO: Localization.
-    return FTappable.animated(
-      semanticLabel: date.toString(),
-      selected: selected,
-      onPress: () => this.selected.value = date,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: DecoratedBox(
-              decoration: selected ? style.selectedDecoration : style.unselectedDecoration,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-                  merge(
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
+  Widget build(BuildContext context) => ValueListenableBuilder(
+        valueListenable: selected,
+        builder: (context, selectedDate, _) {
+          final isSelected = selectedDate == date;
+          return FTappable.animated(
+            semanticLabel: date.toString(),
+            selected: isSelected,
+            onPress: () => selected.value = date,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: isSelected ? style.selectedDecoration : style.unselectedDecoration,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+                        merge(
+                          textHeightBehavior: const TextHeightBehavior(
+                            applyHeightToFirstAscent: false,
+                            applyHeightToLastDescent: false,
+                          ),
+                          style:
+                              isSelected ? style.content.selectedDateTextStyle : style.content.unselectedDateTextStyle,
+                          //TODO: Localization.
+                          child: Text('${date.day}'),
+                        ),
+                        const SizedBox(height: _textSpacing),
+                        // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+                        merge(
+                          textHeightBehavior: const TextHeightBehavior(
+                            applyHeightToFirstAscent: false,
+                            applyHeightToLastDescent: false,
+                          ),
+                          style: isSelected ? style.content.selectedDayTextStyle : style.content.unselectedDayTextStyle,
+                          child: Text(_days[date.weekday - 1]),
+                        ),
+                      ],
                     ),
-                    style: selected ? style.selectedDateTextStyle : style.unselectedDateTextStyle,
-                    //TODO: Localization.
-                    child: Text('${date.day}'),
                   ),
-                  const SizedBox(height: _textSpacing),
-                  // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-                  merge(
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
+                ),
+                Positioned(
+                  top: 6,
+                  right: 6,
+                  child: Container(
+                    height: 4,
+                    width: 4,
+                    decoration: BoxDecoration(
+                      color: _style(context, isSelected),
+                      shape: BoxShape.circle,
                     ),
-                    style: selected ? style.selectedDayTextStyle : style.unselectedDayTextStyle,
-                    child: Text(_days[date.weekday - 1]),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-          Positioned(
-            top: 6,
-            right: 6,
-            child: Container(
-              height: 4,
-              width: 4,
-              decoration: BoxDecoration(
-                color: _style(context, selected),
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+          );
+        },
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -216,10 +204,7 @@ class _Tile extends StatelessWidget {
 
 /// [FLineCalendar]'s style.
 final class FLineCalendarStyle with Diagnosticable {
-  /// The vertical padding around the text in the calendar items.
-  final double heightPadding;
-
-  /// The horizontal padding around the text in the calendar items.
+  /// The horizontal padding around each calendar item.
   final double itemPadding;
 
   /// The box decoration for a selected date.
@@ -234,6 +219,97 @@ final class FLineCalendarStyle with Diagnosticable {
   /// The color of the indicator for the unselected current date.
   final Color unselectedCurrentDateIndicatorColor;
 
+  /// The content's style.
+  final FLineCalendarContentStyle content;
+
+  /// Creates a [FLineCalendarStyle].
+  const FLineCalendarStyle({
+    required this.itemPadding,
+    required this.selectedCurrentDateIndicatorColor,
+    required this.unselectedCurrentDateIndicatorColor,
+    required this.selectedDecoration,
+    required this.unselectedDecoration,
+    required this.content,
+  });
+
+  /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
+  FLineCalendarStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+    required FStyle style,
+  })  : itemPadding = 6.5,
+        selectedCurrentDateIndicatorColor = colorScheme.primaryForeground,
+        unselectedCurrentDateIndicatorColor = colorScheme.primary,
+        selectedDecoration = BoxDecoration(
+          color: colorScheme.primary,
+          borderRadius: style.borderRadius,
+        ),
+        unselectedDecoration = BoxDecoration(
+          color: colorScheme.background,
+          borderRadius: style.borderRadius,
+          border: Border.all(color: colorScheme.border),
+        ),
+        content = FLineCalendarContentStyle.inherit(colorScheme: colorScheme, typography: typography);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('itemPadding', itemPadding))
+      ..add(DiagnosticsProperty('selectedCurrentDateIndicatorColor', selectedCurrentDateIndicatorColor))
+      ..add(DiagnosticsProperty('unselectedCurrentDateIndicatorColor', unselectedCurrentDateIndicatorColor))
+      ..add(DiagnosticsProperty('selectedDecoration', selectedDecoration))
+      ..add(DiagnosticsProperty('unselectedDecoration', unselectedDecoration))
+      ..add(DiagnosticsProperty('content', content));
+  }
+
+  /// Returns a copy of this [FLineCalendarStyle] with the given properties replaced.
+  @useResult
+  FLineCalendarStyle copyWith({
+    double? itemPadding,
+    Color? selectedCurrentDateIndicatorColor,
+    Color? unselectedCurrentDateIndicatorColor,
+    BoxDecoration? selectedDecoration,
+    BoxDecoration? unselectedDecoration,
+    FLineCalendarContentStyle? content,
+  }) =>
+      FLineCalendarStyle(
+        itemPadding: itemPadding ?? this.itemPadding,
+        selectedCurrentDateIndicatorColor: selectedCurrentDateIndicatorColor ?? this.selectedCurrentDateIndicatorColor,
+        unselectedCurrentDateIndicatorColor:
+            unselectedCurrentDateIndicatorColor ?? this.unselectedCurrentDateIndicatorColor,
+        selectedDecoration: selectedDecoration ?? this.selectedDecoration,
+        unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
+        content: content ?? this.content,
+      );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FLineCalendarStyle &&
+          runtimeType == other.runtimeType &&
+          itemPadding == other.itemPadding &&
+          selectedCurrentDateIndicatorColor == other.selectedCurrentDateIndicatorColor &&
+          unselectedCurrentDateIndicatorColor == other.unselectedCurrentDateIndicatorColor &&
+          selectedDecoration == other.selectedDecoration &&
+          unselectedDecoration == other.unselectedDecoration &&
+          content == other.content;
+
+  @override
+  int get hashCode =>
+      itemPadding.hashCode ^
+      selectedCurrentDateIndicatorColor.hashCode ^
+      unselectedCurrentDateIndicatorColor.hashCode ^
+      selectedDecoration.hashCode ^
+      unselectedDecoration.hashCode ^
+      content.hashCode;
+}
+
+/// A line calendar's content style.
+final class FLineCalendarContentStyle with Diagnosticable {
+  /// The vertical padding around the text in the calendar items.
+  final double verticalPadding;
+
   /// The text style for the selected date.
   final TextStyle selectedDateTextStyle;
 
@@ -246,14 +322,9 @@ final class FLineCalendarStyle with Diagnosticable {
   /// The text style for the unselected day of the week.
   final TextStyle unselectedDayTextStyle;
 
-  /// Creates a [FLineCalendarStyle].
-  const FLineCalendarStyle({
-    required this.heightPadding,
-    required this.itemPadding,
-    required this.selectedCurrentDateIndicatorColor,
-    required this.unselectedCurrentDateIndicatorColor,
-    required this.selectedDecoration,
-    required this.unselectedDecoration,
+  /// Creates a [FLineCalendarContentStyle].
+  const FLineCalendarContentStyle({
+    required this.verticalPadding,
     required this.selectedDateTextStyle,
     required this.unselectedDateTextStyle,
     required this.selectedDayTextStyle,
@@ -261,23 +332,10 @@ final class FLineCalendarStyle with Diagnosticable {
   });
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
-  FLineCalendarStyle.inherit({
+  FLineCalendarContentStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
-    required FStyle style,
-  })  : heightPadding = 15.5,
-        itemPadding = 6.5,
-        selectedCurrentDateIndicatorColor = colorScheme.primaryForeground,
-        unselectedCurrentDateIndicatorColor = colorScheme.primary,
-        selectedDecoration = BoxDecoration(
-          color: colorScheme.primary,
-          borderRadius: style.borderRadius,
-        ),
-        unselectedDecoration = BoxDecoration(
-          color: colorScheme.background,
-          borderRadius: style.borderRadius,
-          border: Border.all(color: colorScheme.border),
-        ),
+  })  : verticalPadding = 15.5,
         selectedDateTextStyle = typography.xl.copyWith(
           color: colorScheme.primaryForeground,
           fontWeight: FontWeight.w500,
@@ -303,40 +361,24 @@ final class FLineCalendarStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selectedDecoration', selectedDecoration))
-      ..add(DiagnosticsProperty('unselectedDecoration', unselectedDecoration))
-      ..add(DiagnosticsProperty('selectedTextStyle', selectedDayTextStyle))
-      ..add(DiagnosticsProperty('unselectedTextStyle', unselectedDayTextStyle))
-      ..add(ColorProperty('primary', selectedCurrentDateIndicatorColor))
-      ..add(DoubleProperty('heightPadding', heightPadding))
-      ..add(DoubleProperty('itemPadding', itemPadding))
-      ..add(ColorProperty('unselectedIndicatorColor', unselectedCurrentDateIndicatorColor))
+      ..add(DiagnosticsProperty('verticalPadding', verticalPadding))
       ..add(DiagnosticsProperty('selectedDateTextStyle', selectedDateTextStyle))
-      ..add(DiagnosticsProperty('unselectedDateTextStyle', unselectedDateTextStyle));
+      ..add(DiagnosticsProperty('unselectedDateTextStyle', unselectedDateTextStyle))
+      ..add(DiagnosticsProperty('selectedDayTextStyle', selectedDayTextStyle))
+      ..add(DiagnosticsProperty('unselectedDayTextStyle', unselectedDayTextStyle));
   }
 
-  /// Returns a copy of this [FLineCalendarStyle] with the given properties replaced.
+  /// Returns a copy of this [FLineCalendarContentStyle] with the given properties replaced.
   @useResult
-  FLineCalendarStyle copyWith({
-    double? heightPadding,
-    double? itemPadding,
-    Color? selectedCurrentDateIndicatorColor,
-    Color? unselectedCurrentDateIndicatorColor,
-    BoxDecoration? selectedDecoration,
-    BoxDecoration? unselectedDecoration,
+  FLineCalendarContentStyle copyWith({
+    double? verticalPadding,
     TextStyle? selectedDateTextStyle,
     TextStyle? unselectedDateTextStyle,
     TextStyle? selectedDayTextStyle,
     TextStyle? unselectedDayTextStyle,
   }) =>
-      FLineCalendarStyle(
-        heightPadding: heightPadding ?? this.heightPadding,
-        itemPadding: itemPadding ?? this.itemPadding,
-        selectedCurrentDateIndicatorColor: selectedCurrentDateIndicatorColor ?? this.selectedCurrentDateIndicatorColor,
-        unselectedCurrentDateIndicatorColor:
-            unselectedCurrentDateIndicatorColor ?? this.unselectedCurrentDateIndicatorColor,
-        selectedDecoration: selectedDecoration ?? this.selectedDecoration,
-        unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
+      FLineCalendarContentStyle(
+        verticalPadding: verticalPadding ?? this.verticalPadding,
         selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
         unselectedDateTextStyle: unselectedDateTextStyle ?? this.unselectedDateTextStyle,
         selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
@@ -346,25 +388,19 @@ final class FLineCalendarStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FLineCalendarStyle &&
+      other is FLineCalendarContentStyle &&
           runtimeType == other.runtimeType &&
-          heightPadding == other.heightPadding &&
-          itemPadding == other.itemPadding &&
-          selectedCurrentDateIndicatorColor == other.selectedCurrentDateIndicatorColor &&
-          unselectedCurrentDateIndicatorColor == other.unselectedCurrentDateIndicatorColor &&
-          selectedDecoration == other.selectedDecoration &&
-          unselectedDecoration == other.unselectedDecoration &&
+          verticalPadding == other.verticalPadding &&
+          selectedDateTextStyle == other.selectedDateTextStyle &&
+          unselectedDateTextStyle == other.unselectedDateTextStyle &&
           selectedDayTextStyle == other.selectedDayTextStyle &&
           unselectedDayTextStyle == other.unselectedDayTextStyle;
 
   @override
   int get hashCode =>
-      heightPadding.hashCode ^
-      itemPadding.hashCode ^
-      selectedCurrentDateIndicatorColor.hashCode ^
-      unselectedCurrentDateIndicatorColor.hashCode ^
-      selectedDecoration.hashCode ^
-      unselectedDecoration.hashCode ^
+      verticalPadding.hashCode ^
+      selectedDateTextStyle.hashCode ^
+      unselectedDateTextStyle.hashCode ^
       selectedDayTextStyle.hashCode ^
       unselectedDayTextStyle.hashCode;
 }
