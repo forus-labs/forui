@@ -17,15 +17,17 @@ void main() {
         final controller = FPopoverController(vsync: const TestVSync());
 
         await tester.pumpWidget(
-          TestScaffold(
-            data: theme,
-            child: FPopover(
-              controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
+          MaterialApp(
+            home: TestScaffold(
+              data: theme,
+              child: FPopover(
+                controller: controller,
+                followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+                target: const ColoredBox(
+                  color: Colors.yellow,
+                  child: SizedBox.square(
+                    dimension: 100,
+                  ),
                 ),
               ),
             ),
@@ -39,15 +41,17 @@ void main() {
         final controller = FPopoverController(vsync: const TestVSync());
 
         await tester.pumpWidget(
-          TestScaffold(
-            data: theme,
-            child: FPopover(
-              controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
+          MaterialApp(
+            home: TestScaffold(
+              data: theme,
+              child: FPopover(
+                controller: controller,
+                followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+                target: const ColoredBox(
+                  color: Colors.yellow,
+                  child: SizedBox.square(
+                    dimension: 100,
+                  ),
                 ),
               ),
             ),
