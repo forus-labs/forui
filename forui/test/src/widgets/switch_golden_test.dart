@@ -17,11 +17,14 @@ void main() {
             TestScaffold(
               data: theme,
               child: Center(
-                child: FSwitch(
-                  label: const Text('Airplane Mode'),
-                  description: const Text('Disable all wireless connections.'),
-                  semanticLabel: 'Airplane Mode',
-                  initialValue: value,
+                child: SizedBox(
+                  width: 300,
+                  child: FSwitch(
+                    label: const Text('Airplane Mode'),
+                    description: const Text('Disable all wireless connections.'),
+                    semanticLabel: 'Airplane Mode',
+                    initialValue: value,
+                  ),
                 ),
               ),
             ),
@@ -38,12 +41,15 @@ void main() {
             TestScaffold(
               data: theme,
               child: Center(
-                child: FSwitch(
-                  label: const Text('Airplane Mode'),
-                  description: const Text('Disable all wireless connections.'),
-                  semanticLabel: 'Airplane Mode',
-                  initialValue: value,
-                  autofocus: true,
+                child: SizedBox(
+                  width: 300,
+                  child: FSwitch(
+                    label: const Text('Airplane Mode'),
+                    description: const Text('Disable all wireless connections.'),
+                    semanticLabel: 'Airplane Mode',
+                    initialValue: value,
+                    autofocus: true,
+                  ),
                 ),
               ),
             ),
@@ -60,13 +66,16 @@ void main() {
             TestScaffold(
               data: theme,
               child: Center(
-                child: FSwitch(
-                  label: const Text('Airplane Mode'),
-                  description: const Text('Disable all wireless connections.'),
-                  semanticLabel: 'Airplane Mode',
-                  enabled: false,
-                  initialValue: value,
-                  autofocus: true,
+                child: SizedBox(
+                  width: 300,
+                  child: FSwitch(
+                    label: const Text('Airplane Mode'),
+                    description: const Text('Disable all wireless connections.'),
+                    semanticLabel: 'Airplane Mode',
+                    enabled: false,
+                    initialValue: value,
+                    autofocus: true,
+                  ),
                 ),
               ),
             ),
