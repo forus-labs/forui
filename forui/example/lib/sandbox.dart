@@ -19,6 +19,12 @@ class _SandboxState extends State<Sandbox> {
   Widget build(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const FSwitch(
+            label: Text('Accept terms and conditions'),
+            description: Text('You agree to our terms and conditions.'),
+            semanticLabel: 'Accept terms and conditions',
+            enabled: true,
+          ),
           FTooltip(
             longPressExitDuration: const Duration(seconds: 5000),
             tipBuilder: (context, style, _) => const Text('Add to library'),

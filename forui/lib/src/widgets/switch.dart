@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/form_field.dart';
 
 /// A control that allows the user to toggle between checked and unchecked.
 ///
@@ -15,9 +16,15 @@ import 'package:forui/forui.dart';
 /// See:
 /// * https://forui.dev/docs/switch for working examples.
 /// * [FSwitchStyle] for customizing a switch's appearance.
-class FSwitch extends StatelessWidget {
+class FSwitch extends FFormField<bool> {
   /// The style. Defaults to [FThemeData.switchStyle].
   final FSwitchStyle? style;
+
+  /// The label displayed next to the checkbox.
+  final Widget? label;
+
+  /// The description displayed below the [label].
+  final Widget? description;
 
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
@@ -66,91 +73,71 @@ class FSwitch extends StatelessWidget {
   /// By default, the drag start behavior is [DragStartBehavior.start].
   final DragStartBehavior dragStartBehavior;
 
-  /// An optional method to call with the final value when the form is saved via [FormState.save].
-  final FormFieldSetter<bool>? onSave;
-
-  /// An optional method that validates an input. Returns an error string to display if the input is invalid, or null
-  /// otherwise.
-  ///
-  /// The returned value is exposed by the [FormFieldState.errorText] property.
-  final FormFieldValidator<bool>? validator;
-
-  /// An optional value to initialize the checkbox. Defaults to false.
-  final bool initialValue;
-
-  /// Whether the form is able to receive user input.
-  ///
-  /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the checkbox will be auto validated.
-  /// Likewise, if this field is false, the widget will not be validated regardless of [autovalidateMode].
-  final bool enabled;
-
-  /// Used to enable/disable this switch auto validation and update its error text.
-  ///
-  /// Defaults to [AutovalidateMode.disabled].
-  ///
-  /// If [AutovalidateMode.onUserInteraction], this switch will only auto-validate after its content changes. If
-  /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
-  /// auto-validation will be disabled.
-  final AutovalidateMode? autovalidateMode;
-
-  /// Restoration ID to save and restore the state of the switch.
-  ///
-  /// Setting the restoration ID to a non-null value results in whether or not the switch validation persists.
-  ///
-  /// The state of this widget is persisted in a [RestorationBucket] claimed from the surrounding [RestorationScope]
-  /// using the provided restoration ID.
-  ///
-  /// See also:
-  ///  * [RestorationManager], which explains how state restoration works in Flutter.
-  final String? restorationId;
-
   /// Creates a [FSwitch].
   const FSwitch({
     this.style,
+    this.label,
+    this.description,
     this.semanticLabel,
     this.onChange,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.dragStartBehavior = DragStartBehavior.start,
-    this.onSave,
-    this.validator,
-    this.initialValue = false,
-    this.enabled = true,
-    this.autovalidateMode,
-    this.restorationId,
+    super.onSave,
+    super.validator,
+    super.initialValue = false,
+    super.enabled = true,
+    super.autovalidateMode,
+    super.restorationId,
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder(BuildContext context, FormFieldState<bool> state) {
     final style = this.style ?? context.theme.switchStyle;
-    return FormField<bool>(
-      builder: (state) {
-        final value = state.value ?? initialValue;
-        return Semantics(
-          label: semanticLabel,
-          enabled: enabled,
-          toggled: value,
-          child: CupertinoSwitch(
-            value: value,
-            onChanged: enabled
-                ? (value) {
-                    state.didChange(value);
-                    onChange?.call(!value);
-                  }
-                : null,
-            activeColor: style.checkedColor,
-            trackColor: style.uncheckedColor,
-            thumbColor: style.thumbColor,
-            focusColor: style.focusColor,
-            autofocus: autofocus,
-            focusNode: focusNode,
-            onFocusChange: onFocusChange,
-            dragStartBehavior: dragStartBehavior,
-          ),
-        );
-      },
+    final (labelState, switchStyle) = switch ((enabled, state.hasError)) {
+      (true, false) => (FLabelState.enabled, style.enabledStyle),
+      (false, false) => (FLabelState.disabled, style.disabledStyle),
+      (_, true) => (
+          FLabelState.error,
+          style.enabledStyle
+        ), // `enabledStyle` is used as error style doesn't contain any switch styles.
+    };
+
+    final value = state.value ?? initialValue;
+
+    return Semantics(
+      label: semanticLabel,
+      enabled: enabled,
+      toggled: value,
+      child: FLabel(
+        axis: Axis.horizontal,
+        state: labelState,
+        label: label,
+        description: description,
+        error: Text(state.errorText ?? ''),
+        child: CupertinoSwitch(
+          value: value,
+          onChanged: (value) {
+            if (!enabled) {
+              return;
+            }
+
+            state.didChange(value);
+            onChange?.call(!value);
+          },
+          applyTheme: false,
+          activeColor: switchStyle.checkedColor,
+          trackColor: switchStyle.uncheckedColor,
+          thumbColor: switchStyle.thumbColor,
+          focusColor: style.focusColor,
+          autofocus: autofocus,
+          focusNode: focusNode,
+          onFocusChange: onFocusChange,
+          dragStartBehavior: dragStartBehavior,
+        ),
+      ),
     );
   }
 
@@ -160,22 +147,126 @@ class FSwitch extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
-      ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start))
       ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(ObjectFlagProperty.has('onSave', onSave))
-      ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(DiagnosticsProperty('initialValue', initialValue))
-      ..add(DiagnosticsProperty('enabled', enabled))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(StringProperty('restorationId', restorationId));
+      ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start));
   }
 }
 
 /// [FSwitch]'s style.
 final class FSwitchStyle with Diagnosticable {
+  /// This [FSwitch]'s color when focused.
+  final Color focusColor;
+
+  /// The [FLabel]'s style.
+  final FLabelLayoutStyle labelLayoutStyle;
+
+  /// The [FSwitch]'s style when it's enabled.
+  final FSwitchStateStyle enabledStyle;
+
+  /// The [FSwitch]'s style when it's disabled.
+  final FSwitchStateStyle disabledStyle;
+
+  /// The [FSwitch]'s style when it has an error.
+  final FSwitchErrorStyle errorStyle;
+
+  /// Creates a [FSwitchStyle].
+  const FSwitchStyle({
+    required this.focusColor,
+    required this.labelLayoutStyle,
+    required this.enabledStyle,
+    required this.disabledStyle,
+    required this.errorStyle,
+  });
+
+  /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
+  FSwitchStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+      : focusColor = colorScheme.primary,
+        labelLayoutStyle = FLabelStyles.inherit(style: style).horizontal.layout,
+        enabledStyle = FSwitchStateStyle(
+          checkedColor: colorScheme.primary,
+          uncheckedColor: colorScheme.border,
+          thumbColor: colorScheme.background,
+          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+        ),
+        disabledStyle = FSwitchStateStyle(
+          checkedColor: colorScheme.primary.withOpacity(0.5),
+          uncheckedColor: colorScheme.border.withOpacity(0.5),
+          thumbColor: colorScheme.background,
+          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+        ),
+        errorStyle = FSwitchErrorStyle(
+          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+        );
+
+  /// The [FLabel]'s style.
+  FLabelStyle get labelStyle => (
+        layout: labelLayoutStyle,
+        state: FLabelStateStyle(
+          enabledStyle: enabledStyle,
+          disabledStyle: disabledStyle,
+          errorStyle: errorStyle,
+        ),
+      );
+
+  /// Returns a copy of this [FSwitchStyle] with the given properties replaced.
+  @useResult
+  FSwitchStyle copyWith({
+    Color? focusColor,
+    FLabelLayoutStyle? labelLayoutStyle,
+    FSwitchStateStyle? enabledStyle,
+    FSwitchStateStyle? disabledStyle,
+    FSwitchErrorStyle? errorStyle,
+  }) =>
+      FSwitchStyle(
+        focusColor: focusColor ?? this.focusColor,
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+        errorStyle: errorStyle ?? this.errorStyle,
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ColorProperty('focusColor', focusColor))
+      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
+      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
+      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
+      ..add(DiagnosticsProperty('errorStyle', errorStyle))
+      ..add(DiagnosticsProperty('labelStyle', labelStyle));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FSwitchStyle &&
+          runtimeType == other.runtimeType &&
+          focusColor == other.focusColor &&
+          labelLayoutStyle == other.labelLayoutStyle &&
+          enabledStyle == other.enabledStyle &&
+          disabledStyle == other.disabledStyle &&
+          errorStyle == other.errorStyle;
+
+  @override
+  int get hashCode =>
+      focusColor.hashCode ^
+      labelLayoutStyle.hashCode ^
+      enabledStyle.hashCode ^
+      disabledStyle.hashCode ^
+      errorStyle.hashCode;
+}
+
+/// [FSwitch]'s state style.
+// ignore: avoid_implementing_value_types
+final class FSwitchStateStyle with Diagnosticable implements FFormFieldStyle {
   /// The track's color when checked.
   final Color checkedColor;
 
@@ -185,37 +276,35 @@ final class FSwitchStyle with Diagnosticable {
   /// The thumb's color.
   final Color thumbColor;
 
-  /// This switch's color when focused.
-  final Color focusColor;
+  @override
+  final TextStyle labelTextStyle;
 
-  /// Creates a [FSwitchStyle].
-  const FSwitchStyle({
+  @override
+  final TextStyle descriptionTextStyle;
+
+  /// Creates a [FSwitchStateStyle].
+  FSwitchStateStyle({
     required this.checkedColor,
     required this.uncheckedColor,
     required this.thumbColor,
-    required this.focusColor,
+    required this.labelTextStyle,
+    required this.descriptionTextStyle,
   });
 
-  /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
-  FSwitchStyle.inherit({required FColorScheme colorScheme})
-      : checkedColor = colorScheme.primary,
-        uncheckedColor = colorScheme.border,
-        thumbColor = colorScheme.background,
-        focusColor = colorScheme.primary;
-
-  /// Returns a copy of this [FSwitchStyle] with the given properties replaced.
-  @useResult
-  FSwitchStyle copyWith({
+  @override
+  FFormFieldStyle copyWith({
     Color? checkedColor,
     Color? uncheckedColor,
     Color? thumbColor,
-    Color? focusColor,
+    TextStyle? labelTextStyle,
+    TextStyle? descriptionTextStyle,
   }) =>
-      FSwitchStyle(
+      FSwitchStateStyle(
         checkedColor: checkedColor ?? this.checkedColor,
         uncheckedColor: uncheckedColor ?? this.uncheckedColor,
         thumbColor: thumbColor ?? this.thumbColor,
-        focusColor: focusColor ?? this.focusColor,
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
       );
 
   @override
@@ -224,20 +313,69 @@ final class FSwitchStyle with Diagnosticable {
     properties
       ..add(ColorProperty('checkedColor', checkedColor))
       ..add(ColorProperty('uncheckedColor', uncheckedColor))
-      ..add(ColorProperty('thumbColor', thumbColor))
-      ..add(ColorProperty('focusColor', focusColor));
+      ..add(ColorProperty('thumbColor', thumbColor));
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FSwitchStyle &&
+      other is FSwitchStateStyle &&
           runtimeType == other.runtimeType &&
           checkedColor == other.checkedColor &&
           uncheckedColor == other.uncheckedColor &&
           thumbColor == other.thumbColor &&
-          focusColor == other.focusColor;
+          labelTextStyle == other.labelTextStyle &&
+          descriptionTextStyle == other.descriptionTextStyle;
 
   @override
-  int get hashCode => checkedColor.hashCode ^ uncheckedColor.hashCode ^ thumbColor.hashCode ^ focusColor.hashCode;
+  int get hashCode =>
+      checkedColor.hashCode ^
+      uncheckedColor.hashCode ^
+      thumbColor.hashCode ^
+      labelTextStyle.hashCode ^
+      descriptionTextStyle.hashCode;
+}
+
+/// [FSwitch]'s error style.
+// ignore: avoid_implementing_value_types
+final class FSwitchErrorStyle with Diagnosticable implements FFormFieldErrorStyle {
+  @override
+  final TextStyle labelTextStyle;
+
+  @override
+  final TextStyle descriptionTextStyle;
+
+  @override
+  final TextStyle errorTextStyle;
+
+  /// Creates a [FSwitchErrorStyle].
+  FSwitchErrorStyle({
+    required this.labelTextStyle,
+    required this.descriptionTextStyle,
+    required this.errorTextStyle,
+  });
+
+  @override
+  FSwitchErrorStyle copyWith({
+    TextStyle? labelTextStyle,
+    TextStyle? descriptionTextStyle,
+    TextStyle? errorTextStyle,
+  }) =>
+      FSwitchErrorStyle(
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
+        errorTextStyle: errorTextStyle ?? this.errorTextStyle,
+      );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FSwitchErrorStyle &&
+          runtimeType == other.runtimeType &&
+          labelTextStyle == other.labelTextStyle &&
+          descriptionTextStyle == other.descriptionTextStyle &&
+          errorTextStyle == other.errorTextStyle;
+
+  @override
+  int get hashCode => labelTextStyle.hashCode ^ descriptionTextStyle.hashCode ^ errorTextStyle.hashCode;
 }

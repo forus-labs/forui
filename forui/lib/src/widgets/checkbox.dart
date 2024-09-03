@@ -93,6 +93,7 @@ class FCheckbox extends FFormField<bool> {
           child: FLabel(
             axis: Axis.horizontal,
             state: labelState,
+            style: style.labelStyle,
             label: label,
             description: description,
             error: Text(state.errorText ?? ''),
@@ -156,25 +157,25 @@ final class FCheckboxStyle with Diagnosticable {
   final Curve curve;
 
   /// The [FLabel]'s style.
-  final FLabelLayoutStyle? labelLayoutStyle;
+  final FLabelLayoutStyle labelLayoutStyle;
 
-  /// The checkbox's style when it's enabled.
+  /// The [FCheckbox]'s style when it's enabled.
   final FCheckboxStateStyle enabledStyle;
 
-  /// The checkbox's style when it's disabled.
+  /// The [FCheckbox]'s style when it's disabled.
   final FCheckboxStateStyle disabledStyle;
 
-  /// The checkbox's style when it's in an error state.
-  final FCheckboxStateStyle errorStyle;
+  /// The [FCheckbox]'s style when it's in an error state.
+  final FCheckboxErrorStyle errorStyle;
 
   /// Creates a [FCheckboxStyle].
   FCheckboxStyle({
+    required this.labelLayoutStyle,
     required this.enabledStyle,
     required this.disabledStyle,
     required this.errorStyle,
     this.animationDuration = const Duration(milliseconds: 100),
     this.curve = Curves.linear,
-    this.labelLayoutStyle,
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties from the given [FColorScheme].
@@ -198,14 +199,25 @@ final class FCheckboxStyle with Diagnosticable {
           checkedBackgroundColor: colorScheme.primary.withOpacity(0.5),
           uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
         ),
-        errorStyle = FCheckboxStateStyle(
+        errorStyle = FCheckboxErrorStyle(
           labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
           borderColor: colorScheme.error,
           iconColor: colorScheme.errorForeground,
           checkedBackgroundColor: colorScheme.error,
           uncheckedBackgroundColor: colorScheme.background,
         );
+
+  /// The [FLabel]'s style.
+  FLabelStyle get labelStyle => (
+        layout: labelLayoutStyle,
+        state: FLabelStateStyle(
+          enabledStyle: enabledStyle,
+          disabledStyle: disabledStyle,
+          errorStyle: errorStyle,
+        ),
+      );
 
   /// Returns a copy of this [FCheckboxStyle] with the given properties replaced.
   @useResult
@@ -215,7 +227,7 @@ final class FCheckboxStyle with Diagnosticable {
     FLabelLayoutStyle? labelLayoutStyle,
     FCheckboxStateStyle? enabledStyle,
     FCheckboxStateStyle? disabledStyle,
-    FCheckboxStateStyle? errorStyle,
+    FCheckboxErrorStyle? errorStyle,
   }) =>
       FCheckboxStyle(
         animationDuration: animationDuration ?? this.animationDuration,
@@ -235,7 +247,8 @@ final class FCheckboxStyle with Diagnosticable {
       ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
-      ..add(DiagnosticsProperty('errorStyle', errorStyle));
+      ..add(DiagnosticsProperty('errorStyle', errorStyle))
+      ..add(DiagnosticsProperty('labelStyle', labelStyle));
   }
 
   @override
@@ -263,16 +276,16 @@ final class FCheckboxStyle with Diagnosticable {
 /// A checkbox state's style.
 // ignore: avoid_implementing_value_types
 class FCheckboxStateStyle with Diagnosticable implements FFormFieldStyle {
-  /// The checkbox's border color.
+  /// The [FCheckbox]'s border color.
   final Color borderColor;
 
-  /// The checked checkbox's icon's color.
+  /// The checked [FCheckbox]'s icon's color.
   final Color iconColor;
 
-  /// The checked checkbox's background color.
+  /// The checked [FCheckbox]'s background color.
   final Color checkedBackgroundColor;
 
-  /// The unchecked checkbox's background color.
+  /// The unchecked [FCheckbox]'s background color.
   final Color uncheckedBackgroundColor;
 
   @override

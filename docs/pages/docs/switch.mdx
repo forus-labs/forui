@@ -16,7 +16,11 @@ A switch that allows the user to toggle between checked and unchecked. It can al
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
-    FSwitch();
+    FSwitch(
+      label: const Text('Airplane Mode'),
+      semanticLabel: 'Airplane Mode',
+      onChanged: (value) {},
+    );
     ```
   </Tabs.Tab>
 </Tabs>
@@ -27,6 +31,8 @@ A switch that allows the user to toggle between checked and unchecked. It can al
 
 ```dart
 FSwitch(
+  label: const Text('Airplane Mode'),
+  semanticLabel: 'Airplane Mode',
   enabled: true,
   initialValue: true,
   autofocus: true,
@@ -43,9 +49,12 @@ FSwitch(
     <Widget name='switch' query={{enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2}
+    ```dart {4}
     FSwitch(
+      label: const Text('Airplane Mode'),
+      semanticLabel: 'Airplane Mode',
       enabled: false,
+      onChanged: (value) {},
     );
     ```
   </Tabs.Tab>
