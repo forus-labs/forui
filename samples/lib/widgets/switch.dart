@@ -17,7 +17,11 @@ class SwitchPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => Padding(
         padding: const EdgeInsets.all(16),
-        child: FSwitch(enabled: enabled),
+        child: FSwitch(
+          label: const Text('Airplane Mode'),
+          semanticLabel: 'Airplane Mode',
+          enabled: enabled,
+        ),
       );
 }
 

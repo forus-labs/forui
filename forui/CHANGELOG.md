@@ -20,6 +20,8 @@
 
 * Add label and description to `FCheckbox`.
 
+* Add label and description to `FSwitch`.
+
 * Add `FPortal`.
 
 * Add `FPopover`.

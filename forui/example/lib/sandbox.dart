@@ -19,6 +19,11 @@ class _SandboxState extends State<Sandbox> {
   Widget build(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const FSwitch(
+            label: Text('Airplane Mode'),
+            description: Text('Disable all wireless connections.'),
+            semanticLabel: 'Airplane Mode',
+          ),
           FTooltip(
             longPressExitDuration: const Duration(seconds: 5000),
             tipBuilder: (context, style, _) => const Text('Add to library'),

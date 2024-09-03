@@ -17,8 +17,14 @@ void main() {
             TestScaffold(
               data: theme,
               child: Center(
-                child: FSwitch(
-                  initialValue: value,
+                child: SizedBox(
+                  width: 300,
+                  child: FSwitch(
+                    label: const Text('Airplane Mode'),
+                    description: const Text('Disable all wireless connections.'),
+                    semanticLabel: 'Airplane Mode',
+                    initialValue: value,
+                  ),
                 ),
               ),
             ),
@@ -35,9 +41,15 @@ void main() {
             TestScaffold(
               data: theme,
               child: Center(
-                child: FSwitch(
-                  initialValue: value,
-                  autofocus: true,
+                child: SizedBox(
+                  width: 300,
+                  child: FSwitch(
+                    label: const Text('Airplane Mode'),
+                    description: const Text('Disable all wireless connections.'),
+                    semanticLabel: 'Airplane Mode',
+                    initialValue: value,
+                    autofocus: true,
+                  ),
                 ),
               ),
             ),
@@ -54,10 +66,16 @@ void main() {
             TestScaffold(
               data: theme,
               child: Center(
-                child: FSwitch(
-                  enabled: false,
-                  initialValue: value,
-                  autofocus: true,
+                child: SizedBox(
+                  width: 300,
+                  child: FSwitch(
+                    label: const Text('Airplane Mode'),
+                    description: const Text('Disable all wireless connections.'),
+                    semanticLabel: 'Airplane Mode',
+                    enabled: false,
+                    initialValue: value,
+                    autofocus: true,
+                  ),
                 ),
               ),
             ),
@@ -66,6 +84,33 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('switch/$name-$checked-disabled-switch.png'),
+          );
+        });
+
+        testWidgets('$name - $checked - error', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              child: Center(
+                child: SizedBox(
+                  width: 300,
+                  child: FSwitch(
+                    label: const Text('Airplane Mode'),
+                    description: const Text('Disable all wireless connections.'),
+                    semanticLabel: 'Airplane Mode',
+                    enabled: false,
+                    initialValue: value,
+                    autofocus: true,
+                    forceErrorText: 'Please enable to continue.',
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('switch/$name-$checked-error-switch.png'),
           );
         });
       }
