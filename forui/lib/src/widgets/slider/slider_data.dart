@@ -16,8 +16,8 @@ final class FSliderData with Diagnosticable {
 
   /// This filled region's current minimum and maximum offset along the main axis, in logical pixels.
   ///
-  /// Both offsets are relative to the origin of the slider, determined by [FSlider.layout]. For example, a slider with
-  /// [Layout.rtl] will start from the right edge of the slider.
+  /// Both offsets are relative to the origin of the slider, determined by [FSlider.layout]. For example, the offsets in
+  /// a slider with [Layout.rtl] will start from the right edge of the slider.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
