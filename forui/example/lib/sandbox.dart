@@ -20,10 +20,9 @@ class _SandboxState extends State<Sandbox> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const FSwitch(
-            label: Text('Accept terms and conditions'),
-            description: Text('You agree to our terms and conditions.'),
-            semanticLabel: 'Accept terms and conditions',
-            enabled: true,
+            label: Text('Airplane Mode'),
+            description: Text('Disable all wireless connections.'),
+            semanticLabel: 'Airplane Mode',
           ),
           FTooltip(
             longPressExitDuration: const Duration(seconds: 5000),
