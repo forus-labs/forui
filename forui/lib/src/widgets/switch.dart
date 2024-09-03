@@ -85,6 +85,7 @@ class FSwitch extends FFormField<bool> {
     this.onFocusChange,
     this.dragStartBehavior = DragStartBehavior.start,
     super.onSave,
+    super.forceErrorText,
     super.validator,
     super.initialValue = false,
     super.enabled = true,
