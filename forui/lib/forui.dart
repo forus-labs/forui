@@ -21,6 +21,7 @@ export 'widgets/popover.dart';
 export 'widgets/progress.dart';
 export 'widgets/resizable.dart';
 export 'widgets/scaffold.dart';
+export 'widgets/select_group.dart';
 export 'widgets/switch.dart';
 export 'widgets/tabs.dart';
 export 'widgets/text_field.dart';
