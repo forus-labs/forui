@@ -31,26 +31,19 @@ class FCheckbox extends FFormField<bool> {
     Key? key,
   }) => FSelectGroupItem<T>(
       value: value,
-      builder: (context, onChange, selected) {
-        print('$semanticLabel selected: $selected');
-        return FCheckbox(
+      builder: ({context, onChange, selected}) => FCheckbox(
           style: style,
           label: label,
           description: description,
           semanticLabel: semanticLabel,
-          onChange: (state) {
-            onChange(value, state);
-            state.didChange(selected);
-            print('onChange: $value, $state');
-          },
+          onChange: (state) => onChange(value, state),
           autofocus: autofocus,
           focusNode: focusNode,
           onFocusChange: onFocusChange,
           initialValue: selected,
           enabled: enabled,
           key: key,
-        );
-      },
+        ),
     );
 
   /// The style. Defaults to [FThemeData.checkboxStyle].
@@ -98,6 +91,8 @@ class FCheckbox extends FFormField<bool> {
     super.restorationId,
     super.key,
   });
+
+
 
   @override
   Widget builder(BuildContext context, FormFieldState<bool> state) {

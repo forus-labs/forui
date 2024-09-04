@@ -21,7 +21,6 @@ class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
         ..add(value);
     }
 
-    print('onChange: $_values');
     notifyListeners();
   }
 }

@@ -22,13 +22,10 @@ class FSelectGroup<T> extends FFormField<Set<T>> {
   /// The description displayed below the [label].
   final Widget? description;
 
-  /// The semantic label used by accessibility frameworks.
-  final String? semanticLabel;
-
-  /// The controller that manages the selection.
+  /// The controller.
   final FSelectGroupController<T> controller;
 
-  /// The items that represent the selection.
+  /// The items.
   final List<FSelectGroupItem<T>> items;
 
   /// Creates a [FSelectGroup].
@@ -38,7 +35,6 @@ class FSelectGroup<T> extends FFormField<Set<T>> {
     this.style,
     this.label,
     this.description,
-    this.semanticLabel,
     super.onSave,
     super.forceErrorText,
     super.validator,
@@ -68,18 +64,17 @@ class FSelectGroup<T> extends FFormField<Set<T>> {
       child: ListenableBuilder(
         listenable: controller,
         builder: (context, child) => Column(
-            children: items.map((item) {
-              final selected = value.contains(item.value);
-              print('$item selected: $selected');
-              return item.builder(
-                context,
-                    (value, selected) {
-                  controller.onChange(value, selected);
-                  state.didChange(controller.values);
-                },
-                selected,
-              );
-            }).toList(),
+            children: [
+              for (final item in items)
+                item.builder(
+                  context,
+                      (value, selected) {
+                    controller.onChange(value, selected);
+                    state.didChange(controller.values);
+                  },
+                  value.contains(item.value),
+                )
+            ]
           ),
       ),
     );
@@ -90,7 +85,6 @@ class FSelectGroup<T> extends FFormField<Set<T>> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(IterableProperty('items', items));
   }
