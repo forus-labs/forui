@@ -119,7 +119,7 @@ class FBottomNavigationBarData extends InheritedWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', itemStyle))
+      ..add(DiagnosticsProperty('itemStyle', itemStyle))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'));
   }
 }
