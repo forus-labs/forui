@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:math' as math;
 
@@ -82,7 +83,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
               widget.onExpanded();
             },
             child: Container(
-              padding: style.padding,
+              padding: style.titlePadding,
               child: Row(
                 children: [
                   Expanded(
@@ -111,9 +112,9 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
             ),
           ),
         ),
-        SizedBox(
-          height: animation.value / 100.0 * widget.childHeight,
-          child: animation.value >= widget.removeChildAnimationPercentage ? widget.child : Container(),
+        _Size(
+          percentage: animation.value / 100.0,
+          child:  widget.child,
         ),
         FDivider(
           style: context.theme.dividerStyles.horizontal
@@ -132,31 +133,37 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
 
 /// The [FAccordion] styles.
 final class FAccordionStyle with Diagnosticable {
-  /// The horizontal divider's style.
+  /// The title's text style.
   final TextStyle title;
 
-  /// The vertical divider's style.
-  final EdgeInsets padding;
+  /// The padding of the title.
+  final EdgeInsets titlePadding;
+
+  /// The padding of the content.
+  final EdgeInsets contentPadding;
 
   /// Creates a [FAccordionStyle].
-  FAccordionStyle({required this.title, required this.padding});
+  FAccordionStyle({required this.title, required this.titlePadding, required this.contentPadding});
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [style].
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
       : title = typography.base.copyWith(
           fontWeight: FontWeight.w500,
         ),
-        padding = const EdgeInsets.symmetric(vertical: 15);
+        titlePadding = const EdgeInsets.symmetric(vertical: 15),
+        contentPadding = const EdgeInsets.only(bottom: 15);
 
   /// Returns a copy of this [FAccordionStyle] with the given properties replaced.
   @useResult
   FAccordionStyle copyWith({
     TextStyle? title,
-    EdgeInsets? padding,
+    EdgeInsets? titlePadding,
+    EdgeInsets? contentPadding,
   }) =>
       FAccordionStyle(
         title: title ?? this.title,
-        padding: padding ?? this.padding,
+        titlePadding: titlePadding ?? this.titlePadding,
+        contentPadding: contentPadding ?? this.contentPadding,
       );
 
   @override
@@ -164,14 +171,80 @@ final class FAccordionStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('padding', padding));
+      ..add(DiagnosticsProperty('padding', titlePadding))
+      ..add(DiagnosticsProperty('contentPadding', contentPadding));
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FAccordionStyle && runtimeType == other.runtimeType && title == other.title && padding == other.padding;
+      other is FAccordionStyle &&
+          runtimeType == other.runtimeType &&
+          title == other.title &&
+          titlePadding == other.titlePadding &&
+          contentPadding == other.contentPadding;
 
   @override
-  int get hashCode => title.hashCode ^ padding.hashCode;
+  int get hashCode => title.hashCode ^ titlePadding.hashCode ^ contentPadding.hashCode;
+}
+
+class _Size extends SingleChildRenderObjectWidget {
+  final double _percentage;
+
+  const _Size({
+    required Widget child,
+    required double percentage,
+  })  : _percentage = percentage,
+        super(child: child);
+
+  @override
+  RenderObject createRenderObject(BuildContext context) => _RenderBox(percentage: _percentage);
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderBox renderObject) {
+    renderObject.percentage = _percentage;
+  }
+}
+
+class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
+  double _percentage;
+
+  _RenderBox({
+    required double percentage,
+  }) : _percentage = percentage;
+
+  @override
+  void performLayout() {
+    if (child case final child?) {
+      child.layout(constraints.normalize(), parentUsesSize: true);
+      size = Size(child.size.width, child.size.height * _percentage);
+      child.layout(BoxConstraints.tight(size));
+    } else {
+      size = constraints.smallest;
+    }
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    if (child case final child?) {
+      context.paintChild(child, offset);
+    }
+  }
+
+  double get percentage => _percentage;
+
+  set percentage(double value) {
+    if (_percentage == value) {
+      return;
+    }
+
+    _percentage = value;
+    markNeedsLayout();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('percentage', percentage));
+  }
 }
