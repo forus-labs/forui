@@ -17,6 +17,42 @@ import 'package:forui/src/foundation/form_field.dart';
 /// * https://forui.dev/docs/checkbox for working examples.
 /// * [FCheckboxStyle] for customizing a checkbox's appearance.
 class FCheckbox extends FFormField<bool> {
+  /// Creates a [FSelectGroupItem] with a [FCheckbox] as the builder.
+  static FSelectGroupItem<T> item<T>({
+    required T value,
+    FCheckboxStyle? style,
+    Widget? label,
+    Widget? description,
+    String? semanticLabel,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    bool enabled = true,
+    Key? key,
+  }) => FSelectGroupItem<T>(
+      value: value,
+      builder: (context, onChange, selected) {
+        print('$semanticLabel selected: $selected');
+        return FCheckbox(
+          style: style,
+          label: label,
+          description: description,
+          semanticLabel: semanticLabel,
+          onChange: (state) {
+            onChange(value, state);
+            state.didChange(selected);
+            print('onChange: $value, $state');
+          },
+          autofocus: autofocus,
+          focusNode: focusNode,
+          onFocusChange: onFocusChange,
+          initialValue: selected,
+          enabled: enabled,
+          key: key,
+        );
+      },
+    );
+
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 
@@ -178,7 +214,7 @@ final class FCheckboxStyle with Diagnosticable {
     this.curve = Curves.linear,
   });
 
-  /// Creates a [FCheckboxStyle] that inherits its properties from the given [FColorScheme].
+  /// Creates a [FCheckboxStyle] that inherits its properties from the given parameters.
   FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : animationDuration = const Duration(milliseconds: 100),
         curve = Curves.linear,
