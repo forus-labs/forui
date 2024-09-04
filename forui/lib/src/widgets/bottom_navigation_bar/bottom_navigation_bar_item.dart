@@ -30,32 +30,27 @@ class FBottomNavigationBarItem extends StatelessWidget {
     final style = this.style ?? itemStyle;
 
     return Semantics(
-      button: true,
-      selected: selected,
       label: label,
       excludeSemantics: true,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Padding(
-          padding: style.padding,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              icon(
-                height: style.iconSize,
-                colorFilter: ColorFilter.mode(
-                  selected ? style.activeIconColor : style.inactiveIconColor,
-                  BlendMode.srcIn,
-                ),
+      child: Padding(
+        padding: style.padding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            icon(
+              height: style.iconSize,
+              colorFilter: ColorFilter.mode(
+                selected ? style.activeIconColor : style.inactiveIconColor,
+                BlendMode.srcIn,
               ),
-              const SizedBox(height: 2),
-              Text(
-                label,
-                overflow: TextOverflow.ellipsis,
-                style: selected ? style.activeTextStyle : style.inactiveTextStyle,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              label,
+              overflow: TextOverflow.ellipsis,
+              style: selected ? style.activeTextStyle : style.inactiveTextStyle,
+            ),
+          ],
         ),
       ),
     );

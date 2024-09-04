@@ -30,45 +30,45 @@ class _ApplicationState extends State<Application> {
   Widget build(BuildContext context) => MaterialApp(
         builder: (context, child) => FTheme(
           data: FThemes.zinc.light,
-          child: FScaffold(
-            header: FHeader(
-              title: const Text('Example'),
-              actions: [
-                FHeaderAction(
-                  icon: FAssets.icons.plus,
-                  onPress: () {},
-                ),
-              ],
-            ),
-            content: child!,
-            footer: FBottomNavigationBar(
-              index: index,
-              onChange: (index) => setState(() => this.index = index),
-              children: [
-                FBottomNavigationBarItem(
-                  icon: FAssets.icons.home,
-                  label: 'Home',
-                ),
-                FBottomNavigationBarItem(
-                  icon: FAssets.icons.layoutGrid,
-                  label: 'Categories',
-                ),
-                FBottomNavigationBarItem(
-                  icon: FAssets.icons.search,
-                  label: 'Search',
-                ),
-                FBottomNavigationBarItem(
-                  icon: FAssets.icons.settings,
-                  label: 'Settings',
-                ),
-                FBottomNavigationBarItem(
-                  icon: FAssets.icons.castle,
-                  label: 'Sandbox',
-                ),
-              ],
-            ),
+          child: child!,
+        ),
+        home: FScaffold(
+          header: FHeader(
+            title: const Text('Example'),
+            actions: [
+              FHeaderAction(
+                icon: FAssets.icons.plus,
+                onPress: () {},
+              ),
+            ],
+          ),
+          content: _pages[index],
+          footer: FBottomNavigationBar(
+            index: index,
+            onChange: (index) => setState(() => this.index = index),
+            children: [
+              FBottomNavigationBarItem(
+                icon: FAssets.icons.home,
+                label: 'Home',
+              ),
+              FBottomNavigationBarItem(
+                icon: FAssets.icons.layoutGrid,
+                label: 'Categories',
+              ),
+              FBottomNavigationBarItem(
+                icon: FAssets.icons.search,
+                label: 'Search',
+              ),
+              FBottomNavigationBarItem(
+                icon: FAssets.icons.settings,
+                label: 'Settings',
+              ),
+              FBottomNavigationBarItem(
+                icon: FAssets.icons.castle,
+                label: 'Sandbox',
+              ),
+            ],
           ),
         ),
-        home: _pages[index],
       );
 }
