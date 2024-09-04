@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/form_field.dart';
 
 /// A checkbox control that allows the user to toggle between checked and not checked.
 ///
@@ -16,36 +15,7 @@ import 'package:forui/src/foundation/form_field.dart';
 /// See:
 /// * https://forui.dev/docs/checkbox for working examples.
 /// * [FCheckboxStyle] for customizing a checkbox's appearance.
-class FCheckbox extends FFormField<bool> {
-  /// Creates a [FSelectGroupItem] with a [FCheckbox] as the builder.
-  static FSelectGroupItem<T> item<T>({
-    required T value,
-    FCheckboxStyle? style,
-    Widget? label,
-    Widget? description,
-    String? semanticLabel,
-    bool autofocus = false,
-    FocusNode? focusNode,
-    ValueChanged<bool>? onFocusChange,
-    bool enabled = true,
-    Key? key,
-  }) => FSelectGroupItem<T>(
-      value: value,
-      builder: ({context, onChange, selected}) => FCheckbox(
-          style: style,
-          label: label,
-          description: description,
-          semanticLabel: semanticLabel,
-          onChange: (state) => onChange(value, state),
-          autofocus: autofocus,
-          focusNode: focusNode,
-          onFocusChange: onFocusChange,
-          initialValue: selected,
-          enabled: enabled,
-          key: key,
-        ),
-    );
-
+class FCheckbox extends StatelessWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 
@@ -58,8 +28,19 @@ class FCheckbox extends FFormField<bool> {
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
+  /// The error displayed below the [description].
+  ///
+  /// If the value is present, the checkbox is in an error state.
+  final Widget? error;
+
+  /// The current value of the checkbox.
+  final bool value;
+
   /// Called when the user initiates a change to the FCheckBox's value: when they have checked or unchecked this box.
   final ValueChanged<bool>? onChange;
+
+  /// Whether this checkbox is enabled. Defaults to true.
+  final bool enabled;
 
   /// Whether this checkbox should focus itself if nothing else is already focused. Defaults to false.
   final bool autofocus;
@@ -78,31 +59,24 @@ class FCheckbox extends FFormField<bool> {
     this.label,
     this.description,
     this.semanticLabel,
+    this.error,
+    this.value = false,
     this.onChange,
+    this.enabled = true,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    super.onSave,
-    super.forceErrorText,
-    super.validator,
-    super.initialValue = false,
-    super.enabled = true,
-    super.autovalidateMode,
-    super.restorationId,
     super.key,
   });
 
-
-
   @override
-  Widget builder(BuildContext context, FormFieldState<bool> state) {
+  Widget build(BuildContext context) {
     final style = this.style ?? context.theme.checkboxStyle;
-    final (labelState, stateStyle) = switch ((enabled, state.hasError)) {
+    final (labelState, stateStyle) = switch ((enabled, error != null)) {
       (true, false) => (FLabelState.enabled, style.enabledStyle),
       (false, false) => (FLabelState.disabled, style.disabledStyle),
       (_, true) => (FLabelState.error, style.errorStyle),
     };
-    final value = state.value ?? initialValue;
 
     return FocusableActionDetector(
       enabled: enabled,
@@ -115,19 +89,14 @@ class FCheckbox extends FFormField<bool> {
         enabled: enabled,
         checked: value,
         child: GestureDetector(
-          onTap: enabled
-              ? () {
-                  state.didChange(!value);
-                  onChange?.call(!value);
-                }
-              : null,
+          onTap: enabled ? () => onChange?.call(!value) : null,
           child: FLabel(
             axis: Axis.horizontal,
             state: labelState,
             style: style.labelStyle,
             label: label,
             description: description,
-            error: Text(state.errorText ?? ''),
+            error: error,
             child: AnimatedSwitcher(
               duration: style.animationDuration,
               switchInCurve: style.curve,
@@ -168,7 +137,9 @@ class FCheckbox extends FFormField<bool> {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(ObjectFlagProperty('value', value))
       ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty('enabled', enabled))
       ..add(DiagnosticsProperty('autofocus', autofocus))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
@@ -176,7 +147,7 @@ class FCheckbox extends FFormField<bool> {
 }
 
 /// A [FCheckbox]'s style.
-final class FCheckboxStyle with Diagnosticable {
+class FCheckboxStyle with Diagnosticable {
   /// The duration of the animation when the checkbox's switches between checked and unchecked.
   ///
   /// Defaults to `const Duration(milliseconds: 100)`.

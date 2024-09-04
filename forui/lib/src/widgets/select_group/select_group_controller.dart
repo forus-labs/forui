@@ -1,41 +1,66 @@
 import 'package:flutter/widgets.dart';
 
+/// A controller for a select group.
 abstract class FSelectGroupController<T> with ChangeNotifier {
   final Set<T> _values;
 
-  FSelectGroupController({Set<T> values = const {}}) : _values = values;
+  /// Creates a [FSelectGroupController].
+  FSelectGroupController({Set<T> values = const {}}) : _values = {...values};
 
+  /// Handles a change in the selection.
+  // ignore: avoid_positional_boolean_parameters
   void onChange(T value, bool selected);
 
+  /// The values that are shallow copied.
   Set<T> get values => {..._values};
+
+  /// Whether a value is selected.
+  bool contains(T value) => _values.contains(value);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FSelectGroupController && runtimeType == other.runtimeType && _values == other._values;
+
+  @override
+  int get hashCode => _values.hashCode;
 }
 
+/// A [FSelectGroupController] that allows only one selection mimicking the behaviour of radio buttons.
 class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
+  /// Creates a [FRadioSelectGroupController].
   FRadioSelectGroupController({T? value}) : super(values: value == null ? {} : {value});
 
   @override
   void onChange(T value, bool selected) {
-    if (selected) {
-      _values
-        ..clear()
-        ..add(value);
+    if (!selected || contains(value)) {
+      return;
     }
+
+    _values
+      ..clear()
+      ..add(value);
 
     notifyListeners();
   }
 }
 
+/// A [FSelectGroupController] that allows multiple selections.
 class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
-  int _min;
-  int _max;
+  final int _min;
+  final int _max;
 
+  /// Creates a [FMultiSelectGroupController].
+  ///
+  /// The [min] and [max] values are the minimum and maximum number of selections allowed. The [min] value must be
+  /// greater than or equal to 0. If the [max] value is negative, there is no maximum.
   FMultiSelectGroupController({
-    Set<T> values = const {},
     int min = 0,
     int max = -1,
+    super.values,
   })  : _min = min,
         _max = max,
-        super(values: values);
+        assert(min >= 0, 'The min value must be greater than or equal to 0.');
 
   @override
   void onChange(T value, bool selected) {
@@ -55,4 +80,15 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
 
     notifyListeners();
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FMultiSelectGroupController &&
+          runtimeType == other.runtimeType &&
+          _min == other._min &&
+          _max == other._max;
+
+  @override
+  int get hashCode => _min.hashCode ^ _max.hashCode;
 }

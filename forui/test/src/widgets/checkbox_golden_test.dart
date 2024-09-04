@@ -11,7 +11,7 @@ import '../test_scaffold.dart';
 void main() {
   group('FCheckBox', () {
     for (final (name, theme, background) in TestScaffold.themes) {
-      for (final (enabled, initialValue, error) in [
+      for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
         (true, false, false),
@@ -22,7 +22,7 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$name with ${enabled ? 'enabled' : 'disabled'}, ${'$initialValue value'} & ${error ? 'with error' : 'without error'}',
+            '$name with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -31,12 +31,12 @@ void main() {
               child: error
                   ? FCheckbox(
                       enabled: enabled,
-                      initialValue: initialValue,
-                      forceErrorText: '',
+                      value: value,
+                      error: const Text(''),
                     )
                   : FCheckbox(
                       enabled: enabled,
-                      initialValue: initialValue,
+                      value: value,
                     ),
             ),
           );
@@ -44,7 +44,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'check-box/$name-${enabled ? 'enabled' : 'disabled'}-$initialValue${error ? '-error' : ''}.png',
+              'check-box/$name-${enabled ? 'enabled' : 'disabled'}-$value${error ? '-error' : ''}.png',
             ),
           );
         });
@@ -52,7 +52,7 @@ void main() {
     }
 
     for (final (name, theme, background) in TestScaffold.themes) {
-      for (final (enabled, initialValue, error) in [
+      for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
         (true, false, false),
@@ -63,7 +63,7 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${'$initialValue value'} & ${error ? 'with error' : 'without error'}',
+            '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -74,9 +74,9 @@ void main() {
                 child: FCheckbox(
                   label: const Text('Terms and Conditions'),
                   description: const Text('I agree to the terms and conditions.'),
+                  error: error ? const Text('Please check the agree to continue.') : null,
+                  value: value,
                   enabled: enabled,
-                  initialValue: initialValue,
-                  forceErrorText: error ? 'Please check the agree to continue.' : null,
                 ),
               ),
             ),
@@ -85,7 +85,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'check-box/$name-label-${enabled ? 'enabled' : 'disabled'}-$initialValue${error ? '-error' : ''}.png',
+              'check-box/$name-label-${enabled ? 'enabled' : 'disabled'}-$value${error ? '-error' : ''}.png',
             ),
           );
         });
