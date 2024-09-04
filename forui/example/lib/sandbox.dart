@@ -22,11 +22,11 @@ class _SandboxState extends State<Sandbox> {
           FSelectGroup(
             label: const Text('Select Group'),
             description: const Text('Select Group Description'),
-            controller: FRadioSelectGroupController(value: 1),
+            controller: FMultiSelectGroupController(min: 1, max: 2),
             items: [
-              FCheckbox.item(value: 1, label: const Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
-              FCheckbox.item(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
-              FCheckbox.item(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
+              FSelectGroupItem.checkbox(value: 1, label: const Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
+              FSelectGroupItem.checkbox(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
+              FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
             ],
           ),
           const SizedBox(height: 20),
