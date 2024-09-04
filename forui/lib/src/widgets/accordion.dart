@@ -241,6 +241,16 @@ class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox
     }
   }
 
+  @override
+  bool hitTest(BoxHitTestResult result, {required Offset position}) {
+    if (size.contains(position) && child!.hitTest(result, position: position)) {
+      result.add(BoxHitTestEntry(this, position));
+      return true;
+    }
+
+    return false;
+  }
+
   double get percentage => _percentage;
 
   set percentage(double value) {
