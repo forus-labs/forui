@@ -112,9 +112,18 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
             ),
           ),
         ),
-        _Size(
+        // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
+        // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
+        // child to layout at a smaller size while the amount of padding remains the same.
+        _Expandable(
           percentage: animation.value / 100.0,
-          child:  widget.child,
+          child: ClipRect(
+            clipper: _Clipper(percentage: animation.value / 100.0),
+            child: Padding(
+              padding: style.contentPadding,
+              child: widget.child,
+            ),
+          ),
         ),
         FDivider(
           style: context.theme.dividerStyles.horizontal
@@ -188,28 +197,29 @@ final class FAccordionStyle with Diagnosticable {
   int get hashCode => title.hashCode ^ titlePadding.hashCode ^ contentPadding.hashCode;
 }
 
-class _Size extends SingleChildRenderObjectWidget {
+
+class _Expandable extends SingleChildRenderObjectWidget {
   final double _percentage;
 
-  const _Size({
+  const _Expandable({
     required Widget child,
     required double percentage,
   })  : _percentage = percentage,
         super(child: child);
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderBox(percentage: _percentage);
+  RenderObject createRenderObject(BuildContext context) => _ExpandableBox(percentage: _percentage);
 
   @override
-  void updateRenderObject(BuildContext context, _RenderBox renderObject) {
+  void updateRenderObject(BuildContext context, _ExpandableBox renderObject) {
     renderObject.percentage = _percentage;
   }
 }
 
-class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
+class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   double _percentage;
 
-  _RenderBox({
+  _ExpandableBox({
     required double percentage,
   }) : _percentage = percentage;
 
@@ -218,7 +228,7 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     if (child case final child?) {
       child.layout(constraints.normalize(), parentUsesSize: true);
       size = Size(child.size.width, child.size.height * _percentage);
-      child.layout(BoxConstraints.tight(size));
+
     } else {
       size = constraints.smallest;
     }
@@ -241,10 +251,16 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     _percentage = value;
     markNeedsLayout();
   }
+}
+
+class _Clipper extends CustomClipper<Rect> {
+  final double percentage;
+
+  _Clipper({required this.percentage});
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('percentage', percentage));
-  }
+  Rect getClip(Size size) => Offset.zero & Size(size.width, size.height * percentage);
+
+  @override
+  bool shouldReclip(covariant _Clipper oldClipper) => oldClipper.percentage != percentage;
 }
