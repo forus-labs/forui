@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/platform.dart';
 import 'package:forui/src/widgets/slider/slider_mark.dart';
 import 'package:forui/widgets/slider.dart';
@@ -27,17 +28,28 @@ class FSliderController extends ChangeNotifier {
   static FSliderInteraction get _platform =>
       touchPlatforms.contains(defaultTargetPlatform) ? FSliderInteraction.slide : FSliderInteraction.tapAndSlideThumb;
 
+  /// The slider thumb's tooltip controller.
+  final FTooltipController tooltip;
+
   /// The slider's allowed interaction.
   ///
   /// Defaults to [FSliderInteraction.slide] on Android, Fuchsia and iOS, and [FSliderInteraction.tapAndSlideThumb] on
   /// other platforms.
   final FSliderInteraction allowedInteraction;
 
-  /// Whether the slider is growable at the min and max edges.
+  /// Whether the slider is growable/shrinkable at the min and max edges.
   final ({bool min, bool max}) growable;
 
   /// True if the slider has discrete steps, and false if it is continuous. Defaults to false.
   final bool discrete;
+
+  /// The percentage to move the slider edge by when the user presses the left or right arrow keys. Defaults to 0.01.
+  ///
+  /// Only used when [discrete] is false. The slider is always moved to the nearest mark when [discrete] is true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if it is not between 0 and 1, inclusive.
+  final double traversePercentage;
 
   /// The slider's marks.
   ///
@@ -52,10 +64,17 @@ class FSliderController extends ChangeNotifier {
 
   /// Creates a [FSliderController].
   FSliderController({
+    required TickerProvider vsync,
     FSliderInteraction? allowedInteraction,
     this.growable = (min: false, max: true),
     this.discrete = false,
-  })  : allowedInteraction = allowedInteraction ?? _platform,
+    this.traversePercentage = 0.01,
+  })  : assert(
+          0 <= traversePercentage && traversePercentage <= 1,
+          'The grow percentage must be between 0 and 1, but is $traversePercentage.',
+        ),
+        tooltip = FTooltipController(vsync: vsync),
+        allowedInteraction = allowedInteraction ?? _platform,
         marks = [],
         _marks = SplayTreeMap();
 
@@ -74,7 +93,11 @@ class FSliderController extends ChangeNotifier {
     }
   }
 
-  // TODO: tooltip?
+  void traverse({required bool min, required bool grow}) {
+    if (discrete) {
+
+    }
+  }
 
   /// Called when the slider has been slid by the given [delta] on the [min] side, in logical pixels, along the main
   /// axis.
@@ -119,7 +142,7 @@ class FSliderController extends ChangeNotifier {
     }
   }
 
-  /// Returns the slider's [min] edge adjusted from the [current] offset to the [next] offset.
+  /// Returns the slider's min or max edge adjusted to the given [next] offset, in logical pixels, along the main axis.
   @useResult
   FSliderData adjust(double current, double next, {required bool min}) =>
       discrete ? adjustDiscrete(current, next, min: min) : adjustContinuous(current, next, min: min);
@@ -138,21 +161,55 @@ class FSliderController extends ChangeNotifier {
 }
 
 @internal
-extension Adjustment on FSliderController {
+extension KeyboardAdjustment on FSliderController {
+  @useResult
+  FSliderData traverseDiscrete({required bool min, required bool grow}) {
+    final current = min ? data.offset.min : data.offset.max;
+    final mark = (min ^ grow) ? _marks.firstKeyAfter(current) : _marks.lastKeyBefore(current);
+    if (mark == null) {
+      return data;
+    }
+
+    var adjusted = mark * data.extent.total;
+    // Prevents min and max from becoming reversed.
+    if (min ? data.offset.max < adjusted : adjusted < data.offset.min) {
+      adjusted = current;
+    }
+
+    return data.copyWith(
+      minOffset: min ? adjusted : null,
+      maxOffset: min ? null : adjusted,
+    );
+  }
+
+  @useResult
+  FSliderData traverseContinuous({required bool min, required bool grow}) {
+    final current = min ? data.offset.min : data.offset.max;
+    final traverse = data.extent.total * traversePercentage;
+
+    return adjustContinuous(current, current + ((min ^ grow) ? traverse : -traverse), min: min);
+  }
+}
+
+/// Provides methods for adjusting the slider's min and max edges through gestures.
+@internal
+extension GestureAdjustment on FSliderController {
   @useResult
   FSliderData adjustDiscrete(double current, double next, {required bool min}) {
     final before = _marks.lastKeyBefore(next);
     final after = _marks.firstKeyAfter(next);
 
     var adjusted = switch (min ^ (current < next)) {
-      // Assuming LTR and points between current, handle leftward movement.
+      // Min edge is growing/max edge is shrinking, and current < after. Prevents counter-intuitive behavior where
+      // the edge moves in the opposite direction of the user's gesture.
       true when after == null || current < after => before ?? current,
-      // Assuming LTR and points between current, handle rightward movement.
+      // Min edge is shrinking/max edge is growing, and before < current. Prevents counter-intuitive behavior where
+      // the edge moves in the opposite direction of the user's gesture.
       false when before == null || before < current => after ?? current,
       _ => _closer(next, before, after),
     };
 
-    // Prevent the reversing of min & max.
+    // Prevents min and max from becoming reversed.
     if (min ? data.offset.max < adjusted : adjusted < data.offset.min) {
       adjusted = current;
     }
