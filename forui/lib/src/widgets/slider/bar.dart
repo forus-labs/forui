@@ -10,7 +10,8 @@ class Bar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:controller, :style, :layout, :enabled) = InheritedData.of(context);
-    final FSliderStyle(:activeColor, :inactiveColor, :borderRadius, :crossAxisExtent, :markStyle, :thumbStyle) = style;
+    final FSliderStyle(:activeColor, :inactiveColor, :borderRadius, :crossAxisExtent, :markStyles, :thumbStyle) = style;
+    final markStyle = layout.vertical ? markStyles.vertical : markStyles.horizontal;
     final (height, width) = layout.vertical ? (crossAxisExtent, null) : (null, crossAxisExtent);
 
     // We use the thumb style's dimension as the bar's padding.

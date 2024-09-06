@@ -43,48 +43,55 @@ class _FSliderState extends State<FSlider> {
   Widget build(BuildContext context) {
     final styles = context.theme.sliderStyles;
     final style = widget.style ?? (widget.enabled ? styles.enabledStyle : styles.disabledStyle);
+    final markStyle = widget.layout.vertical ? style.markStyles.vertical : style.markStyles.horizontal;
 
-    return Semantics(
-      slider: true,
-      child: InheritedData(
-        controller: widget.controller,
-        style: style,
-        layout: widget.layout,
-        enabled: widget.enabled,
-        child: LayoutBuilder(
-          builder: (context, constraints) => CustomMultiChildLayout(
-            delegate: _SliderLayoutDelegate(),
-            children: [
-              for (final mark in widget.controller.marks)
-                if (mark case FSliderMark(style: final markStyle, :final label?))
+    return InheritedData(
+      controller: widget.controller,
+      style: style,
+      layout: widget.layout,
+      enabled: widget.enabled,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          widget.controller.data = FSliderData(extent: null
+            
+          );
+          return Semantics(
+            slider: true,
+            value: widget.semanticFormatterCallback(widget.controller.data),
+            child: CustomMultiChildLayout(
+              delegate: _SliderLayoutDelegate(),
+              children: [
+                for (final mark in widget.controller.marks)
+                  if (mark case FSliderMark(:final style, :final label?))
+                    LayoutId(
+                      id: mark,
+                      child: DefaultTextStyle(
+                        style: (style ?? markStyle).labelTextStyle,
+                        child: label,
+                      ),
+                    ),
+                LayoutId(
+                  id: _SliderLayoutDelegate._bar,
+                  child: const Bar(),
+                ),
+                if (widget.controller.growable.min)
                   LayoutId(
-                    id: mark,
-                    child: DefaultTextStyle(
-                      style: (markStyle ?? style.markStyle).labelTextStyle,
-                      child: label,
+                    id: _SliderLayoutDelegate._minThumb,
+                    child: const Thumb(
+                      min: true,
                     ),
                   ),
-              LayoutId(
-                id: _SliderLayoutDelegate._bar,
-                child: const Bar(),
-              ),
-              if (widget.controller.growable.min)
-                LayoutId(
-                  id: _SliderLayoutDelegate._minThumb,
-                  child: const Thumb(
-                    min: true,
+                if (widget.controller.growable.max)
+                  LayoutId(
+                    id: _SliderLayoutDelegate._maxThumb,
+                    child: const Thumb(
+                      min: false,
+                    ),
                   ),
-                ),
-              if (widget.controller.growable.max)
-                LayoutId(
-                  id: _SliderLayoutDelegate._maxThumb,
-                  child: const Thumb(
-                    min: false,
-                  ),
-                ),
-            ],
-          ),
-        ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -97,7 +104,14 @@ class _SliderLayoutDelegate extends MultiChildLayoutDelegate {
 
   @override
   void performLayout(Size size) {
-    // TODO: implement performLayout
+    final bar = layoutChild(_bar, BoxConstraints.tight(size));
+    positionChild(_bar, Offset.zero);
+
+    final minThumb = layoutChild(_minThumb, BoxConstraints.loose(size));
+    positionChild(_minThumb, Offset(0, size.height / 2 - minThumb.height / 2));
+
+    final maxThumb = layoutChild(_maxThumb, BoxConstraints.loose(size));
+    positionChild(_maxThumb, Offset(size.width - maxThumb.width, size.height / 2 - maxThumb.height / 2));
   }
 
   @override
@@ -126,11 +140,19 @@ final class FSliderStyles with Diagnosticable {
       : enabledStyle = FSliderStyle(
           activeColor: colorScheme.primary,
           inactiveColor: colorScheme.secondary,
-          markStyle: FSliderMarkStyle(
-            color: colorScheme.mutedForeground,
-            labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
-            labelAnchor: Alignment.center,
-            labelCrossAxisOffset: 10,
+          markStyles: (
+            horizontal: FSliderMarkStyle(
+              color: colorScheme.mutedForeground,
+              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+              labelAnchor: Alignment.topCenter,
+              labelCrossAxisOffset: 10,
+            ),
+            vertical: FSliderMarkStyle(
+              color: colorScheme.mutedForeground,
+              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+              labelAnchor: Alignment.centerRight,
+              labelCrossAxisOffset: -10,
+            ),
           ),
           thumbStyle: FSliderThumbStyle(
             color: colorScheme.primaryForeground,
@@ -140,11 +162,19 @@ final class FSliderStyles with Diagnosticable {
         disabledStyle = FSliderStyle(
           activeColor: colorScheme.primary.withOpacity(0.7),
           inactiveColor: colorScheme.secondary,
-          markStyle: FSliderMarkStyle(
-            color: colorScheme.mutedForeground.withOpacity(0.7),
-            labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground.withOpacity(0.7)),
-            labelAnchor: Alignment.center,
-            labelCrossAxisOffset: 10,
+          markStyles: (
+            horizontal: FSliderMarkStyle(
+              color: colorScheme.mutedForeground,
+              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground.withOpacity(0.7)),
+              labelAnchor: Alignment.topCenter,
+              labelCrossAxisOffset: 10,
+            ),
+            vertical: FSliderMarkStyle(
+              color: colorScheme.mutedForeground,
+              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground.withOpacity(0.7)),
+              labelAnchor: Alignment.centerRight,
+              labelCrossAxisOffset: -10,
+            ),
           ),
           thumbStyle: FSliderThumbStyle(
             color: colorScheme.primaryForeground.withOpacity(0.7),
@@ -189,8 +219,8 @@ final class FSliderStyle with Diagnosticable {
   /// The slider's border radius.
   final BorderRadius borderRadius;
 
-  /// The slider marks' style.
-  final FSliderMarkStyle markStyle; // TODO: vertical and horizontal?
+  /// The slider marks' styles.
+  final ({FSliderMarkStyle horizontal, FSliderMarkStyle vertical}) markStyles;
 
   /// The slider thumb's style.
   final FSliderThumbStyle thumbStyle;
@@ -201,7 +231,7 @@ final class FSliderStyle with Diagnosticable {
   FSliderStyle({
     required this.activeColor,
     required this.inactiveColor,
-    required this.markStyle,
+    required this.markStyles,
     required this.thumbStyle,
     this.crossAxisExtent = 8,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
@@ -215,7 +245,7 @@ final class FSliderStyle with Diagnosticable {
     double? mainAxisPadding,
     double? crossAxisExtent,
     BorderRadius? borderRadius,
-    FSliderMarkStyle? markStyle,
+    ({FSliderMarkStyle horizontal, FSliderMarkStyle vertical})? markStyles,
     FSliderThumbStyle? thumbStyle,
   }) =>
       FSliderStyle(
@@ -223,7 +253,7 @@ final class FSliderStyle with Diagnosticable {
         inactiveColor: inactiveColor ?? this.inactiveColor,
         crossAxisExtent: crossAxisExtent ?? this.crossAxisExtent,
         borderRadius: borderRadius ?? this.borderRadius,
-        markStyle: markStyle ?? this.markStyle,
+        markStyles: markStyles ?? this.markStyles,
         thumbStyle: thumbStyle ?? this.thumbStyle,
       );
 
@@ -235,7 +265,8 @@ final class FSliderStyle with Diagnosticable {
       ..add(ColorProperty('inactiveColor', inactiveColor))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
-      ..add(DiagnosticsProperty('markStyle', markStyle))
+      ..add(DiagnosticsProperty('markStyles.horizontal', markStyles.horizontal))
+      ..add(DiagnosticsProperty('markStyles.vertical', markStyles.vertical))
       ..add(DiagnosticsProperty('thumbStyle', thumbStyle));
   }
 
@@ -248,7 +279,7 @@ final class FSliderStyle with Diagnosticable {
           inactiveColor == other.inactiveColor &&
           crossAxisExtent == other.crossAxisExtent &&
           borderRadius == other.borderRadius &&
-          markStyle == other.markStyle &&
+          markStyles == other.markStyles &&
           thumbStyle == other.thumbStyle;
 
   @override
@@ -257,7 +288,7 @@ final class FSliderStyle with Diagnosticable {
       inactiveColor.hashCode ^
       crossAxisExtent.hashCode ^
       borderRadius.hashCode ^
-      markStyle.hashCode ^
+      markStyles.hashCode ^
       thumbStyle.hashCode;
 }
 
