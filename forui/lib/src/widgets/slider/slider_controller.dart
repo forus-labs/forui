@@ -5,8 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/platform.dart';
-import 'package:forui/src/widgets/slider/slider_mark.dart';
-import 'package:forui/widgets/slider.dart';
 import 'package:meta/meta.dart';
 
 /// Possible ways for a user to interact with a slider.
@@ -54,49 +52,49 @@ class FSliderController extends ChangeNotifier {
   /// The slider's marks.
   ///
   /// ## Contract
-  /// Modifying the regions outside of [attach] will result in undefined behaviour.
-  ///
   /// Throws [AssertionError] if [discrete] is true and [marks] is empty.
   final List<FSliderMark> marks;
 
   final SplayTreeMap<double, void> _marks;
-  late FSliderData _data;
+  FSliderData? _data;
 
-  /// Creates a [FSliderController].
+  /// Creates a [FSliderController] for a slider that is growable at a single edge.
   FSliderController({
     required TickerProvider vsync,
-    FSliderInteraction? allowedInteraction,
-    this.growable = (min: false, max: true),
     this.discrete = false,
     this.traversePercentage = 0.01,
+    this.marks = const [],
+    FSliderInteraction? allowedInteraction,
+    bool min = false,
   })  : assert(
           0 <= traversePercentage && traversePercentage <= 1,
           'The grow percentage must be between 0 and 1, but is $traversePercentage.',
         ),
+        assert(!(discrete && marks.isEmpty), 'Discrete sliders must have at least one mark.'),
         tooltip = FTooltipController(vsync: vsync),
         allowedInteraction = allowedInteraction ?? _platform,
-        marks = [],
-        _marks = SplayTreeMap();
+        growable = min ? (min: true, max: false) : (min: false, max: true),
+        _marks = SplayTreeMap.fromIterable(marks.map((mark) => mark.percentage), value: (_) {});
 
-  /// Attaches the slider's [FSliderData] and [FSliderMark]s to the controller.
-  ///
-  /// The other methods in this controller will throw an error until this method is called.
-  void attach(FSliderData data, List<FSliderMark> marks) {
-    assert(!(discrete && marks.isEmpty), 'Discrete sliders must have at least one mark.');
+  /// Creates a [FSliderController] for a range slider that is growable at both edges.
+  FSliderController.range({
+    required TickerProvider vsync,
+    this.discrete = false,
+    this.traversePercentage = 0.01,
+    this.marks = const [],
+  })  : assert(
+          0 <= traversePercentage && traversePercentage <= 1,
+          'The grow percentage must be between 0 and 1, but is $traversePercentage.',
+        ),
+        assert(!(discrete && marks.isEmpty), 'Discrete sliders must have at least one mark.'),
+        tooltip = FTooltipController(vsync: vsync),
+        allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+        growable = (min: true, max: true),
+        _marks = SplayTreeMap.fromIterable(marks.map((mark) => mark.percentage), value: (_) {});
 
-    this.marks.clear();
-    this.marks.addAll(marks);
-
-    _marks.clear();
-    for (final mark in this.marks) {
-      _marks[mark.percentage] = null;
-    }
-  }
-
+  /// Called when the slider edge has been grown or shrunk using the arrow keys.
   void traverse({required bool min, required bool grow}) {
-    if (discrete) {
-
-    }
+    data = discrete ? traverseDiscrete(min: min, grow: grow) : traverseContinuous(min: min, grow: grow);
   }
 
   /// Called when the slider has been slid by the given [delta] on the [min] side, in logical pixels, along the main
@@ -148,15 +146,19 @@ class FSliderController extends ChangeNotifier {
       discrete ? adjustDiscrete(current, next, min: min) : adjustContinuous(current, next, min: min);
 
   /// The slider's data.
-  FSliderData get data => _data;
+  FSliderData get data => _data!;
 
   set data(FSliderData value) {
     if (_data == value) {
       return;
     }
 
+    final previous = _data;
     _data = value;
-    notifyListeners();
+
+    if (previous != null) {
+      notifyListeners();
+    }
   }
 }
 

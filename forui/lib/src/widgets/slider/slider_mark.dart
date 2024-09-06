@@ -42,12 +42,12 @@ class FSliderMark with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FSliderMark &&
-              runtimeType == other.runtimeType &&
-              style == other.style &&
-              percentage == other.percentage &&
-              visible == other.visible &&
-              label == other.label;
+      other is FSliderMark &&
+          runtimeType == other.runtimeType &&
+          style == other.style &&
+          percentage == other.percentage &&
+          visible == other.visible &&
+          label == other.label;
 
   @override
   int get hashCode => style.hashCode ^ percentage.hashCode ^ visible.hashCode ^ label.hashCode;
@@ -63,6 +63,9 @@ final class FSliderMarkStyle with Diagnosticable {
   /// ## Contract
   /// Throws [AssertionError] if it is not positive.
   final double dimension;
+
+  /// The label's text style.
+  final TextStyle labelTextStyle;
 
   /// The label's anchor to which the [labelCrossAxisOffset] is applied.
   final Alignment labelAnchor;
@@ -99,6 +102,7 @@ final class FSliderMarkStyle with Diagnosticable {
   /// Creates a [FSliderMarkStyle].
   const FSliderMarkStyle({
     required this.color,
+    required this.labelTextStyle,
     required this.labelAnchor,
     required this.labelCrossAxisOffset,
     this.dimension = 3,
@@ -109,12 +113,14 @@ final class FSliderMarkStyle with Diagnosticable {
   FSliderMarkStyle copyWith({
     Color? color,
     double? dimension,
+    TextStyle? labelTextStyle,
     Alignment? labelAnchor,
     double? labelCrossAxisOffset,
   }) =>
       FSliderMarkStyle(
         color: color ?? this.color,
         dimension: dimension ?? this.dimension,
+        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         labelAnchor: labelAnchor ?? this.labelAnchor,
         labelCrossAxisOffset: labelCrossAxisOffset ?? this.labelCrossAxisOffset,
       );
@@ -125,6 +131,7 @@ final class FSliderMarkStyle with Diagnosticable {
     properties
       ..add(ColorProperty('color', color))
       ..add(DoubleProperty('dimension', dimension))
+      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
       ..add(DiagnosticsProperty('labelAnchor', labelAnchor))
       ..add(DoubleProperty('labelCrossAxisOffset', labelCrossAxisOffset));
   }
@@ -136,9 +143,15 @@ final class FSliderMarkStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           color == other.color &&
           dimension == other.dimension &&
+          labelTextStyle == other.labelTextStyle &&
           labelAnchor == other.labelAnchor &&
           labelCrossAxisOffset == other.labelCrossAxisOffset;
 
   @override
-  int get hashCode => color.hashCode ^ dimension.hashCode ^ labelAnchor.hashCode ^ labelCrossAxisOffset.hashCode;
+  int get hashCode =>
+      color.hashCode ^
+      dimension.hashCode ^
+      labelTextStyle.hashCode ^
+      labelAnchor.hashCode ^
+      labelCrossAxisOffset.hashCode;
 }

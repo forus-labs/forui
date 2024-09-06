@@ -15,19 +15,9 @@ class _GrowIntent extends Intent {
 
 @internal
 class Thumb extends StatefulWidget {
-  final double hitRegionExtent;
-  final FocusNode? focusNode;
-  final bool autofocus;
-  final ValueChanged<bool>? onFocusChange;
-  final double adjustment;
   final bool min;
 
   const Thumb({
-    required this.hitRegionExtent,
-    required this.focusNode,
-    required this.autofocus,
-    required this.onFocusChange,
-    required this.adjustment,
     required this.min,
     super.key,
   });
@@ -38,13 +28,7 @@ class Thumb extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(ObjectFlagProperty('onFocusChange', onFocusChange, ifPresent: 'onFocusChange'))
-      ..add(DoubleProperty('adjustment', adjustment))
-      ..add(FlagProperty('min', value: min, ifTrue: 'min', ifFalse: 'max'));
+    properties.add(FlagProperty('min', value: min, ifTrue: 'min', ifFalse: 'max'));
   }
 }
 
@@ -61,9 +45,6 @@ class _ThumbState extends State<Thumb> {
         _GrowIntent: CallbackAction(onInvoke: (_) => controller.traverse(min: widget.min, grow: true)),
         _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.traverse(min: widget.min, grow: false)),
       },
-      focusNode: widget.focusNode,
-      autofocus: widget.autofocus,
-      onFocusChange: widget.onFocusChange,
       enabled: enabled,
       mouseCursor: enabled ? _cursor : MouseCursor.defer,
       child: DecoratedBox(
@@ -83,6 +64,7 @@ class _ThumbState extends State<Thumb> {
 
     if (enabled) {
       // TODO: tooltip
+
       final (horizontal, vertical) = _gestures(controller, layout);
       thumb = GestureDetector(
         onTapDown: (_) => setState(() => _cursor = SystemMouseCursors.grabbing),
@@ -90,14 +72,7 @@ class _ThumbState extends State<Thumb> {
         onTapCancel: () => setState(() => _cursor = SystemMouseCursors.grab),
         onHorizontalDragUpdate: horizontal,
         onVerticalDragUpdate: vertical,
-        child: widget.hitRegionExtent == 0
-            ? thumb
-            : SizedBox.square(
-                dimension: thumbStyle.dimension + widget.hitRegionExtent,
-                child: Align(
-                  child: thumb,
-                ),
-              ),
+        child: thumb,
       );
     }
 
@@ -123,13 +98,18 @@ class _ThumbState extends State<Thumb> {
           },
       };
 
-  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _gestures(FSliderController controller, Layout layout) =>
-      switch (layout) {
-        Layout.ltr => ((details) => controller.slide(details.delta.dx, min: widget.min), null),
-        Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: widget.min), null),
-        Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: widget.min)),
-        Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: widget.min)),
-      };
+  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _gestures(FSliderController controller, Layout layout) {
+    if (controller.allowedInteraction == FSliderInteraction.tap) {
+      return (null, null);
+    }
+
+    return switch (layout) {
+      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: widget.min), null),
+      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: widget.min), null),
+      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: widget.min)),
+      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: widget.min)),
+    };
+  }
 }
 
 /// A slider thumb's style.

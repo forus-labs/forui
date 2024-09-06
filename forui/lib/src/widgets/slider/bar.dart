@@ -72,19 +72,43 @@ class Bar extends StatelessWidget {
     );
 
     if (enabled) {
+      const tappable = {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb};
+      final (horizontal, vertical) = _gestures(controller, layout);
       bar = GestureDetector(
-        onTapDown: (details) => controller.tap(
-          switch (layout.translate(details.localPosition)) {
-            < 0 => 0,
-            final translated when controller.data.extent.total < translated => controller.data.extent.total,
-            final translated => translated,
-          },
-        ),
+        onTapDown: tappable.contains(controller.allowedInteraction)
+            ? (details) => controller.tap(
+                  switch (layout.translate(details.localPosition)) {
+                    < 0 => 0,
+                    final translated when controller.data.extent.total < translated => controller.data.extent.total,
+                    final translated => translated,
+                  },
+                )
+            : null,
+        onHorizontalDragUpdate: horizontal,
+        onVerticalDragUpdate: vertical,
         child: bar,
       );
     }
 
     return bar;
+  }
+
+  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _gestures(FSliderController controller, Layout layout) {
+    if (controller.allowedInteraction != FSliderInteraction.slide) {
+      return (null, null);
+    }
+
+    assert(
+      !(controller.growable.min && controller.growable.max),
+      'Slider cannot be growable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
+    );
+
+    return switch (layout) {
+      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: controller.growable.min), null),
+      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: controller.growable.min), null),
+      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: controller.growable.min)),
+      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: controller.growable.min)),
+    };
   }
 }
 
