@@ -82,6 +82,7 @@ class _ThumbState extends State<Thumb> {
     );
 
     if (enabled) {
+      // TODO: tooltip
       final (horizontal, vertical) = _gestures(controller, layout);
       thumb = GestureDetector(
         onTapDown: (_) => setState(() => _cursor = SystemMouseCursors.grabbing),
