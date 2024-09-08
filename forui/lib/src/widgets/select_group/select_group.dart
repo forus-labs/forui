@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 /// A group of form fields that represent a single selection.
 ///
-/// A [FSelectGroup] is internally a [FormField], therefore it can be used in a form.
+/// Typically used to group multiple [FSelectGroupItem.checkbox]s.
 ///
 /// See:
 /// * https://forui.dev/docs/select-group for working examples.
