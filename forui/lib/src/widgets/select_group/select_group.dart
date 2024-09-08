@@ -34,7 +34,6 @@ class FSelectGroup<T> extends StatelessWidget {
   /// If the value is present, the select group is in an error state.
   final Widget? error;
 
-
   /// The items.
   final List<FSelectGroupItem<T>> items;
 
