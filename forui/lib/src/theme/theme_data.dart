@@ -82,6 +82,9 @@ final class FThemeData with Diagnosticable {
   /// The scaffold style.
   final FScaffoldStyle scaffoldStyle;
 
+  /// The select group style.
+  final FSelectGroupStyle selectGroupStyle;
+
   /// The switch style.
   final FSwitchStyle switchStyle;
 
@@ -112,6 +115,7 @@ final class FThemeData with Diagnosticable {
     required this.textFieldStyle,
     required this.tooltipStyle,
     required this.scaffoldStyle,
+    required this.selectGroupStyle,
     required this.dividerStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
@@ -147,6 +151,7 @@ final class FThemeData with Diagnosticable {
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
+      selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
     );
@@ -217,6 +222,7 @@ final class FThemeData with Diagnosticable {
     FTextFieldStyle? textFieldStyle,
     FTooltipStyle? tooltipStyle,
     FScaffoldStyle? scaffoldStyle,
+    FSelectGroupStyle? selectGroupStyle,
     FDividerStyles? dividerStyles,
     FSwitchStyle? switchStyle,
   }) =>
@@ -243,6 +249,7 @@ final class FThemeData with Diagnosticable {
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         tooltipStyle: tooltipStyle ?? this.tooltipStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
+        selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
         switchStyle: switchStyle ?? this.switchStyle,
       );
 
@@ -272,6 +279,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
 
@@ -302,6 +310,7 @@ final class FThemeData with Diagnosticable {
           textFieldStyle == other.textFieldStyle &&
           tooltipStyle == other.tooltipStyle &&
           scaffoldStyle == other.scaffoldStyle &&
+          selectGroupStyle == other.selectGroupStyle &&
           switchStyle == other.switchStyle;
 
   @override
@@ -328,5 +337,6 @@ final class FThemeData with Diagnosticable {
       textFieldStyle.hashCode ^
       tooltipStyle.hashCode ^
       scaffoldStyle.hashCode ^
+      selectGroupStyle.hashCode ^
       switchStyle.hashCode;
 }

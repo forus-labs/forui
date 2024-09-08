@@ -17,13 +17,26 @@ For touch devices, a [switch](/docs/switch) is generally recommended over a chec
         <Widget name='checkbox' query={{enabled: 'true'}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
-        FCheckbox(
-          label: const Text('Accept terms and conditions'),
-          description: const Text('You agree to our terms and conditions.'),
-          semanticLabel: 'Accept terms and conditions',
-          onChange: (value) {}, // Do something.
-        );
+        ```dart {12-20}
+        class Page extends StatefulWidget {
+          const Page();
+
+          @override
+          State<Page> createState() => PageState();
+        }
+
+        class PageState extends State<Page> {
+          bool state = false;
+
+          @override
+          Widget build(BuildContext context) => FCheckbox(
+            label: const Text('Accept terms and conditions'),
+            description: const Text('You agree to our terms and conditions.'),
+            semanticLabel: 'Accept terms and conditions',
+            value: state,
+            onChange: (value) => setState(() => state = value),
+          );
+        }
         ```
     </Tabs.Tab>
 </Tabs>
@@ -36,11 +49,12 @@ For touch devices, a [switch](/docs/switch) is generally recommended over a chec
 FCheckbox(
   label: const Text('Accept terms and conditions'),
   description: const Text('You agree to our terms and conditions.'),
+  error: const Text('Please accept the terms and conditions.'),
   semanticLabel: 'Accept terms and conditions',
-  enabled: true,
-  initialValue: true,
-  autofocus: true,
+  value: true,
   onChanged: (value) {},
+  enabled: true,
+  autofocus: true,
 );
 ```
 
@@ -50,37 +64,62 @@ FCheckbox(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='checkbox' query={{enabled: 'false'}}/>
+    <Widget name='checkbox' query={{initialValue: 'true', enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {6}
-    FCheckbox(
-      label: const Text('Accept terms and conditions'),
-      description: const Text('You agree to our terms and conditions.'),
-      semanticLabel: 'Accept terms and conditions',
-      onChange: (value) {}, // Do something.
-      enabled: false,
-    );
+    ```dart {20}
+    class Page extends StatefulWidget {
+      const Page();
+
+      @override
+      State<Page> createState() => PageState();
+    }
+
+    class PageState extends State<Page> {
+      bool state =  true;
+
+      @override
+      Widget build(BuildContext context) => FCheckbox(
+        label: const Text('Accept terms and conditions'),
+        description: const Text('You agree to our terms and conditions.'),
+        semanticLabel: 'Accept terms and conditions',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+        enabled: false,
+      );
+    }
     ```
   </Tabs.Tab>
 </Tabs>
 
-### Force Error
-Force an error state without using the `validator` function.
+### Error
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='checkbox' query={{ forceErrorText: 'Please accept the terms and conditions.' }}/>
+    <Widget name='checkbox' query={{ error: 'Please accept the terms and conditions.' }}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {6}
-    FCheckbox(
-      label: const Text('Accept terms and conditions'),
-      description: const Text('You agree to our terms and conditions.'),
-      semanticLabel: 'Accept terms and conditions',
-      onChange: (value) {}, // Do something.
-      forceErrorText: 'Please accept the terms and conditions.',
-    );
+    ```dart {15}
+    class Page extends StatefulWidget {
+      const Page();
+
+      @override
+      State<Page> createState() => PageState();
+    }
+
+    class PageState extends State<Page> {
+      bool state = false;
+
+      @override
+      Widget build(BuildContext context) => FCheckbox(
+        label: const Text('Accept terms and conditions'),
+        description: const Text('You agree to our terms and conditions.'),
+        error: const Text('Please accept the terms and conditions.'),
+        semanticLabel: 'Accept terms and conditions',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+      );
+    }
     ```
   </Tabs.Tab>
 </Tabs>
@@ -92,11 +131,25 @@ Force an error state without using the `validator` function.
         <Widget name='checkbox' variant='raw' query={{ }}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
-        FCheckbox(
-          onChange: (value) {}, // Do something.
-          enabled: enabled,
-        );
+        ```dart {12-17}
+        class Page extends StatefulWidget {
+          const Page();
+
+          @override
+          State<Page> createState() => PageState();
+        }
+
+        class PageState extends State<Page> {
+          bool state = false;
+
+          @override
+          Widget build(BuildContext context) => FCheckbox(
+            value: state,
+            onChange: (value) {
+              setState(() => state = value);
+            },
+          );
+        }
         ```
     </Tabs.Tab>
 </Tabs>
@@ -108,7 +161,7 @@ Force an error state without using the `validator` function.
     <Widget name='checkbox' variant='form' query={{}} height={550}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {32-36}
+    ```dart {32-47}
     class RegisterForm extends StatefulWidget {
       const RegisterForm({super.key});
 
@@ -140,10 +193,19 @@ Force an error state without using the `validator` function.
                   validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
                 ),
                 const SizedBox(height: 15),
-                FCheckbox(
-                  label: const Text('Accept terms and conditions'),
-                  description: const Text('You agree to our terms and conditions.'),
+                FormField(
+                  initialValue: false,
+                  onSaved: (value) {
+                    // Save values somewhere.
+                  },
                   validator: (value) => (value ?? false) ? null : 'Please accept the terms and conditions.',
+                  builder: (state) => FCheckbox(
+                    label: const Text('Accept terms and conditions'),
+                    description: const Text('You agree to our terms and conditions.'),
+                    error: state.errorText != null ? Text(state.errorText!) : null,
+                    value: state.value ?? false,
+                    onChange: (value) => state.didChange(value),
+                  ),
                 ),
                 const SizedBox(height: 20),
                 FButton(
@@ -153,6 +215,8 @@ Force an error state without using the `validator` function.
                       // Handle errors here.
                       return;
                     }
+
+                    _formKey.currentState!.save();
                     // Do something.
                   },
                 ),

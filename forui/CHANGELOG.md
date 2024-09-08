@@ -28,6 +28,8 @@
 
 * Add `FTooltip`.
 
+* Add `FSelectGroup`.
+
 ### Changes
 
 * **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.size`.
@@ -60,6 +62,9 @@
 and`FStyle.errorFormFieldStyle`.
 
 * Improve platform detection for web when initializing platform-specific variables.
+
+* **Breaking:** `FCheckbox` and `FSwitch` no longer wraps `FormField` - consider wrapping them in a `FormField` if 
+required.
 
 ### Fixes
 
