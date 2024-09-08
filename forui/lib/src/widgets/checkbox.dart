@@ -137,9 +137,9 @@ class FCheckbox extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(ObjectFlagProperty('value', value))
+      ..add(FlagProperty('value', value: value))
       ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(ObjectFlagProperty('enabled', enabled))
+      ..add(FlagProperty('enabled', value: enabled))
       ..add(DiagnosticsProperty('autofocus', autofocus))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));

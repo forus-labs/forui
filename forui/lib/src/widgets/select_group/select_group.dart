@@ -13,10 +13,17 @@ import 'package:forui/forui.dart';
 /// * https://forui.dev/docs/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends StatelessWidget {
+  /// The controller.
+  ///
+  /// See:
+  /// * [FRadioSelectGroupController] for a single radio button like selection.
+  /// * [FMultiSelectGroupController] for multiple selections.
+  final FSelectGroupController<T> controller;
+
   /// The style. Defaults to [FThemeData.selectGroupStyle].
   final FSelectGroupStyle? style;
 
-  /// The label displayed next to the checkbox.
+  /// The label displayed next to the select group.
   final Widget? label;
 
   /// The description displayed below the [label].
@@ -27,12 +34,6 @@ class FSelectGroup<T> extends StatelessWidget {
   /// If the value is present, the select group is in an error state.
   final Widget? error;
 
-  /// The controller.
-  ///
-  /// See:
-  /// * [FRadioSelectGroupController] for a single radio button like selection.
-  /// * [FMultiSelectGroupController] for multiple selections.
-  final FSelectGroupController<T> controller;
 
   /// The items.
   final List<FSelectGroupItem<T>> items;
@@ -67,7 +68,7 @@ class FSelectGroup<T> extends StatelessWidget {
             for (final item in items)
               item.builder(
                 context,
-                controller.onChange,
+                controller.select,
                 controller.contains(item.value),
               ),
           ],

@@ -34,9 +34,7 @@ For touch devices, a [switch](/docs/switch) is generally recommended over a chec
             description: const Text('You agree to our terms and conditions.'),
             semanticLabel: 'Accept terms and conditions',
             value: state,
-            onChange: (value) {
-              setState(() => state = value);
-            },
+            onChange: (value) => setState(() => state = value),
           );
         }
         ```
@@ -86,9 +84,7 @@ FCheckbox(
         description: const Text('You agree to our terms and conditions.'),
         semanticLabel: 'Accept terms and conditions',
         value: state,
-        onChange: (value) {
-          setState(() => state = value);
-        },
+        onChange: (value) => setState(() => state = value),
         enabled: false,
       );
     }
@@ -121,9 +117,7 @@ FCheckbox(
         error: const Text('Please accept the terms and conditions.'),
         semanticLabel: 'Accept terms and conditions',
         value: state,
-        onChange: (value) {
-          setState(() => state = value);
-        },
+        onChange: (value) => setState(() => state = value),
       );
     }
     ```
@@ -210,9 +204,7 @@ FCheckbox(
                     description: const Text('You agree to our terms and conditions.'),
                     error: state.errorText != null ? Text(state.errorText!) : null,
                     value: state.value ?? false,
-                    onChange: (value) {
-                      state.didChange(value);
-                    },
+                    onChange: (value) => state.didChange(value),
                   ),
                 ),
                 const SizedBox(height: 20),

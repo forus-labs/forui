@@ -65,9 +65,7 @@ class _CheckboxState extends State<_Checkbox> {
         error: widget.error != null ? Text(widget.error!) : null,
         semanticLabel: 'Accept terms and conditions',
         value: state,
-        onChange: (value) {
-          setState(() => state = value);
-        },
+        onChange: (value) => setState(() => state = value),
         enabled: widget.enabled,
       );
 }
@@ -108,9 +106,7 @@ class _RawCheckboxState extends State<_RawCheckbox> {
   @override
   Widget build(BuildContext context) => FCheckbox(
         value: state,
-        onChange: (value) {
-          setState(() => state = value);
-        },
+        onChange: (value) => setState(() => state = value),
         enabled: widget.enabled,
       );
 }
@@ -170,9 +166,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 description: const Text('You agree to our terms and conditions.'),
                 error: state.errorText != null ? Text(state.errorText!) : null,
                 value: state.value ?? false,
-                onChange: (value) {
-                  state.didChange(value);
-                },
+                onChange: (value) => state.didChange(value),
               ),
             ),
             const SizedBox(height: 20),

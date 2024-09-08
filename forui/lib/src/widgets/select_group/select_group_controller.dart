@@ -9,12 +9,12 @@ abstract class FSelectGroupController<T> with ChangeNotifier {
 
   /// Handles a change in the selection.
   // ignore: avoid_positional_boolean_parameters
-  void onChange(T value, bool selected);
+  void select(T value, bool selected);
 
-  /// The values that are shallow copied.
   /// Returns true if a value is selected.
   bool contains(T value) => _values.contains(value);
 
+  /// The currently selected values.
   Set<T> get values => {..._values};
 
   @override
@@ -32,7 +32,7 @@ class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
   FRadioSelectGroupController({T? value}) : super(values: value == null ? {} : {value});
 
   @override
-  void onChange(T value, bool selected) {
+  void select(T value, bool selected) {
     if (!selected || contains(value)) {
       return;
     }
@@ -48,25 +48,30 @@ class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
 /// A [FSelectGroupController] that allows multiple selections.
 class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
   final int _min;
-  final int _max;
+  final int? _max;
 
   /// Creates a [FMultiSelectGroupController].
   ///
   /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum or maximum.
-  /// # Contract
-  /// Throws [AssertionError] if [min] < 0 or [max] < [min].
+  ///
+  /// # Contract:
+  /// * Throws [AssertionError] if [min] < 0.
+  /// * Throws [AssertionError] if [max] < 0.
+  /// * Throws [AssertionError] if [min] > [max].
   FMultiSelectGroupController({
     int min = 0,
-    int max = -1,
+    int? max,
     super.values,
   })  : _min = min,
         _max = max,
-        assert(min >= 0, 'The min value must be greater than or equal to 0.');
+        assert(min >= 0, 'The min value must be greater than or equal to 0.'),
+        assert(max == null || max >= 0, 'The max value must be greater than or equal to 0.'),
+        assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   @override
-  void onChange(T value, bool selected) {
+  void select(T value, bool selected) {
     if (selected) {
-      if (_max > -1 && _values.length >= _max) {
+      if (_max != null && _values.length >= _max) {
         return;
       }
 
