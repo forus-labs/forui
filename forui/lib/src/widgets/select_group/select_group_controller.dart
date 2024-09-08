@@ -53,7 +53,7 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
   /// Creates a [FMultiSelectGroupController].
   ///
   /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum or maximum.
-  /// # Contract 
+  /// # Contract
   /// Throws [AssertionError] if [min] < 0 or [max] < [min].
   FMultiSelectGroupController({
     int min = 0,
