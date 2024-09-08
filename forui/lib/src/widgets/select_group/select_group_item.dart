@@ -18,7 +18,7 @@ class FSelectGroupItem<T> with Diagnosticable {
     required this.builder,
   });
 
-  /// Creates a [FSelectGroupItem] with a [FCheckbox] as the builder.
+  /// Creates a [FSelectGroupItem] that wraps a [FCheckbox].
   factory FSelectGroupItem.checkbox({
     required T value,
     FCheckboxSelectGroupStyle? style,
@@ -32,7 +32,7 @@ class FSelectGroupItem<T> with Diagnosticable {
     ValueChanged<bool>? onFocusChange,
     Key? key,
   }) =>
-      FSelectGroupItem<T>(
+      FSelectGroupItem(
         value: value,
         builder: (context, onChange, selected) {
           final computedStyle = style ?? context.theme.selectGroupStyle.checkboxStyle;

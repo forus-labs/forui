@@ -12,10 +12,10 @@ abstract class FSelectGroupController<T> with ChangeNotifier {
   void onChange(T value, bool selected);
 
   /// The values that are shallow copied.
-  Set<T> get values => {..._values};
-
-  /// Whether a value is selected.
+  /// Returns true if a value is selected.
   bool contains(T value) => _values.contains(value);
+
+  Set<T> get values => {..._values};
 
   @override
   bool operator ==(Object other) =>
@@ -52,8 +52,9 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
 
   /// Creates a [FMultiSelectGroupController].
   ///
-  /// The [min] and [max] values are the minimum and maximum number of selections allowed. The [min] value must be
-  /// greater than or equal to 0. If the [max] value is negative, there is no maximum.
+  /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum or maximum.
+  /// # Contract 
+  /// Throws [AssertionError] if [min] < 0 or [max] < [min].
   FMultiSelectGroupController({
     int min = 0,
     int max = -1,

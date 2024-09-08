@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A group of form fields that represent a single selection.
+/// A set of items that are treated as a single selection.
 ///
 /// Typically used to group multiple [FSelectGroupItem.checkbox]s.
 ///
@@ -61,7 +61,7 @@ class FSelectGroup<T> extends StatelessWidget {
       error: error,
       child: ListenableBuilder(
         listenable: controller,
-        builder: (context, child) => Column(
+        builder: (context, _) => Column(
           children: [
             for (final item in items)
               item.builder(
