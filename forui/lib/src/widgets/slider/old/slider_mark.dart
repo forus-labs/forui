@@ -8,13 +8,13 @@ class FSliderMark with Diagnosticable {
   /// The mark's style.
   final FSliderMarkStyle? style;
 
-  /// The percentage in the slider's bar at which to position this mark.
+  /// The offset in the slider's bar at which to position this mark, in percentage.
   ///
   /// For example, if the percentage is `0.5`, the mark will be positioned in the middle of the slider's bar.
   ///
   /// ## Contract
   /// Throws [AssertionError] if it is not between `0` and `1`, inclusive.
-  final double percentage;
+  final double offset;
 
   /// Whether the mark is visible in the slider's bar. Defaults to true.
   final bool visible;
@@ -24,18 +24,18 @@ class FSliderMark with Diagnosticable {
 
   /// Creates a [FSliderMark] at the given percentage in a slider.
   const FSliderMark({
-    required this.percentage,
+    required this.offset,
     this.style,
     this.visible = true,
     this.label,
-  }) : assert(0 <= percentage && percentage <= 1, 'Percentage must be between 0 and 1, but is $percentage.');
+  }) : assert(0 <= offset && offset <= 1, 'Percentage must be between 0 and 1, but is $offset.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('percentage', percentage))
+      ..add(DoubleProperty('percentage', offset))
       ..add(FlagProperty('visible', value: visible, ifTrue: 'visible'));
   }
 
@@ -45,12 +45,12 @@ class FSliderMark with Diagnosticable {
       other is FSliderMark &&
           runtimeType == other.runtimeType &&
           style == other.style &&
-          percentage == other.percentage &&
+          offset == other.offset &&
           visible == other.visible &&
           label == other.label;
 
   @override
-  int get hashCode => style.hashCode ^ percentage.hashCode ^ visible.hashCode ^ label.hashCode;
+  int get hashCode => style.hashCode ^ offset.hashCode ^ visible.hashCode ^ label.hashCode;
 }
 
 /// The style of a mark in a [FSlider].

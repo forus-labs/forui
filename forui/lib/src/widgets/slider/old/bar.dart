@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/slider/slider.dart';
+import 'package:forui/src/widgets/slider/old/slider.dart';
 import 'package:meta/meta.dart';
 
 @internal
@@ -29,10 +29,10 @@ class Bar extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            for (final FSliderMark(:style, :percentage, :visible) in controller.marks)
+            for (final FSliderMark(:style, offset:percentage, :visible) in controller.marks)
               if (visible)
                 position(
-                  offset: percentage * controller.data.extent.total + half - ((style ?? markStyle).dimension / 2),
+                  offset: percentage * controller.data.rawExtent.total + half - ((style ?? markStyle).dimension / 2),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
@@ -54,7 +54,7 @@ class Bar extends StatelessWidget {
                     ? (_, __) => position(
                           offset: controller.data.offset.min,
                           child: SizedBox(
-                            height: controller.data.extent.current + half,
+                            height: controller.data.rawExtent.current + half,
                             width: crossAxisExtent,
                           ),
                         )
@@ -62,7 +62,7 @@ class Bar extends StatelessWidget {
                           offset: controller.data.offset.min,
                           child: SizedBox(
                             height: crossAxisExtent,
-                            width: controller.data.extent.current + half,
+                            width: controller.data.rawExtent.current + half,
                           ),
                         ),
               ),
@@ -80,7 +80,7 @@ class Bar extends StatelessWidget {
             ? (details) => controller.tap(
                   switch (layout.translate(details.localPosition)) {
                     < 0 => 0,
-                    final translated when controller.data.extent.total < translated => controller.data.extent.total,
+                    final translated when controller.data.rawExtent.total < translated => controller.data.rawExtent.total,
                     final translated => translated,
                   },
                 )

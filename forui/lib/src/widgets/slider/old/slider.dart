@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/slider/bar.dart';
-import 'package:forui/src/widgets/slider/thumb.dart';
+import 'package:forui/src/widgets/slider/old/bar.dart';
+import 'package:forui/src/widgets/slider/old/thumb.dart';
 import 'package:meta/meta.dart';
 
 class FSlider extends StatefulWidget {
@@ -51,11 +51,7 @@ class _FSliderState extends State<FSlider> {
       layout: widget.layout,
       enabled: widget.enabled,
       child: LayoutBuilder(
-        builder: (context, constraints) {
-          widget.controller.data = FSliderData(extent: null
-            
-          );
-          return Semantics(
+        builder: (context, constraints) => Semantics(
             slider: true,
             value: widget.semanticFormatterCallback(widget.controller.data),
             child: CustomMultiChildLayout(
@@ -90,8 +86,7 @@ class _FSliderState extends State<FSlider> {
                   ),
               ],
             ),
-          );
-        },
+          ),
       ),
     );
   }

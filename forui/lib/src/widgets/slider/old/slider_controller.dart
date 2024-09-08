@@ -22,7 +22,7 @@ enum FSliderInteraction {
   tap,
 }
 
-class FSliderController extends ChangeNotifier {
+class FSliderController extends ValueNotifier<FSliderValue> {
   static FSliderInteraction get _platform =>
       touchPlatforms.contains(defaultTargetPlatform) ? FSliderInteraction.slide : FSliderInteraction.tapAndSlideThumb;
 
@@ -56,11 +56,11 @@ class FSliderController extends ChangeNotifier {
   final List<FSliderMark> marks;
 
   final SplayTreeMap<double, void> _marks;
-  FSliderData? _data;
 
   /// Creates a [FSliderController] for a slider that is growable at a single edge.
   FSliderController({
     required TickerProvider vsync,
+    required FSliderValue value,
     this.discrete = false,
     this.traversePercentage = 0.01,
     this.marks = const [],
@@ -68,29 +68,32 @@ class FSliderController extends ChangeNotifier {
     bool min = false,
   })  : assert(
           0 <= traversePercentage && traversePercentage <= 1,
-          'The grow percentage must be between 0 and 1, but is $traversePercentage.',
+          'traversePercentage must be between 0 and 1, but is $traversePercentage.',
         ),
         assert(!(discrete && marks.isEmpty), 'Discrete sliders must have at least one mark.'),
         tooltip = FTooltipController(vsync: vsync),
         allowedInteraction = allowedInteraction ?? _platform,
         growable = min ? (min: true, max: false) : (min: false, max: true),
-        _marks = SplayTreeMap.fromIterable(marks.map((mark) => mark.percentage), value: (_) {});
+        _marks = SplayTreeMap.fromIterable(marks.map((mark) => mark.offset), value: (_) {}),
+        super(value);
 
   /// Creates a [FSliderController] for a range slider that is growable at both edges.
   FSliderController.range({
     required TickerProvider vsync,
+    required FSliderValue value,
     this.discrete = false,
     this.traversePercentage = 0.01,
     this.marks = const [],
   })  : assert(
           0 <= traversePercentage && traversePercentage <= 1,
-          'The grow percentage must be between 0 and 1, but is $traversePercentage.',
+          'traversePercentage must be between 0 and 1, but is $traversePercentage.',
         ),
         assert(!(discrete && marks.isEmpty), 'Discrete sliders must have at least one mark.'),
         tooltip = FTooltipController(vsync: vsync),
         allowedInteraction = FSliderInteraction.tapAndSlideThumb,
         growable = (min: true, max: true),
-        _marks = SplayTreeMap.fromIterable(marks.map((mark) => mark.percentage), value: (_) {});
+        _marks = SplayTreeMap.fromIterable(marks.map((mark) => mark.offset), value: (_) {}),
+        super(value);
 
   /// Called when the slider edge has been grown or shrunk using the arrow keys.
   void traverse({required bool min, required bool grow}) {
@@ -172,7 +175,7 @@ extension KeyboardAdjustment on FSliderController {
       return data;
     }
 
-    var adjusted = mark * data.extent.total;
+    var adjusted = mark * data.rawExtent.total;
     // Prevents min and max from becoming reversed.
     if (min ? data.offset.max < adjusted : adjusted < data.offset.min) {
       adjusted = current;
@@ -187,7 +190,7 @@ extension KeyboardAdjustment on FSliderController {
   @useResult
   FSliderData traverseContinuous({required bool min, required bool grow}) {
     final current = min ? data.offset.min : data.offset.max;
-    final traverse = data.extent.total * traversePercentage;
+    final traverse = data.rawExtent.total * traversePercentage;
 
     return adjustContinuous(current, current + ((min ^ grow) ? traverse : -traverse), min: min);
   }
