@@ -115,14 +115,14 @@ final class FSliderMarkStyle with Diagnosticable {
     double? tickDimension,
     TextStyle? labelTextStyle,
     Alignment? labelAnchor,
-    double? labelCrossAxisOffset,
+    double? labelOffset,
   }) =>
       FSliderMarkStyle(
         tickColor: tickColor ?? this.tickColor,
         tickDimension: tickDimension ?? this.tickDimension,
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         labelAnchor: labelAnchor ?? this.labelAnchor,
-        labelOffset: labelCrossAxisOffset ?? this.labelOffset,
+        labelOffset: labelOffset ?? this.labelOffset,
       );
 
   @override

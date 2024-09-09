@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 /// A [FSlider]'s active track/selection.
 sealed class FSliderSelection with Diagnosticable {
@@ -164,6 +165,20 @@ final class ContinuousSelection extends FSliderSelection {
       rawOffset: (min: minOffset, max: maxOffset),
     );
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ContinuousSelection &&
+          runtimeType == other.runtimeType &&
+          extent == other.extent &&
+          offset == other.offset &&
+          rawExtent == other.rawExtent &&
+          rawOffset == other.rawOffset &&
+          _step == other._step;
+
+  @override
+  int get hashCode => extent.hashCode ^ offset.hashCode ^ rawExtent.hashCode ^ rawOffset.hashCode ^ _step.hashCode;
 }
 
 @internal
@@ -249,6 +264,26 @@ final class DiscreteSelection extends FSliderSelection {
       rawExtent: rawExtent,
     );
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('ticks', _ticks));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DiscreteSelection &&
+          runtimeType == other.runtimeType &&
+          extent == other.extent &&
+          offset == other.offset &&
+          rawExtent == other.rawExtent &&
+          rawOffset == other.rawOffset &&
+          _ticks.equals(other._ticks);
+
+  @override
+  int get hashCode => extent.hashCode ^ offset.hashCode ^ rawExtent.hashCode ^ rawOffset.hashCode ^ _ticks.hashCode;
 }
 
 extension on SplayTreeMap<double, void> {

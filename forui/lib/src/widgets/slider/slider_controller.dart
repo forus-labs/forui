@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/platform.dart';
 import 'package:forui/src/widgets/slider/slider_selection.dart';
-import 'package:meta/meta.dart';
 
 /// Possible ways for a user to interact with a slider.
 enum FSliderInteraction {
@@ -158,24 +157,17 @@ class FContinuousSliderController extends FSliderController {
 
   @override
   void attach(double extent, List<FSliderMark> _) {
-    if (_selection == null) {
-      _selection = ContinuousSelection(
-        step: stepPercentage,
-        mainAxisExtent: extent,
-        extent: _initialSelection.extent,
-        offset: _initialSelection.offset,
-      );
-      return;
-    }
+    final proposed = ContinuousSelection(
+      step: stepPercentage,
+      mainAxisExtent: extent,
+      extent: _initialSelection.extent,
+      offset: _initialSelection.offset,
+    );
 
-    if (_selection case final selection? when selection.rawExtent.total != extent) {
-      _selection = ContinuousSelection(
-        step: stepPercentage,
-        mainAxisExtent: extent,
-        extent: selection.extent,
-        offset: selection.offset,
-      );
-      notifyListeners();
+    if (_selection == null) {
+      _selection = proposed;
+    } else {
+      _set(proposed);
     }
   }
 }
@@ -201,24 +193,19 @@ class FDiscreteSliderController extends FSliderController {
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
-    if (_selection == null) {
-      _selection = DiscreteSelection(
-        mainAxisExtent: extent,
-        extent: _initialSelection.extent,
-        offset: _initialSelection.offset,
-        ticks: SplayTreeMap.fromIterable(marks.map((mark) => mark.offset), value: (_) {}),
-      );
-      return;
-    }
+    assert(marks.isNotEmpty, 'At least one mark is required.');
 
-    if (_selection case final selection? when selection.rawExtent.total != extent) {
-      _selection = DiscreteSelection(
-        mainAxisExtent: extent,
-        extent: selection.extent,
-        offset: selection.offset,
-        ticks: SplayTreeMap.fromIterable(marks.map((mark) => mark.offset), value: (_) {}),
-      );
-      notifyListeners();
+    final proposed = DiscreteSelection(
+      mainAxisExtent: extent,
+      extent: selection.extent,
+      offset: selection.offset,
+      ticks: SplayTreeMap.fromIterable(marks.map((mark) => mark.offset), value: (_) {}),
+    );
+
+    if (_selection == null) {
+      _selection = proposed;
+    } else {
+      _set(proposed);
     }
   }
 }

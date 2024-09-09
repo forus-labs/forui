@@ -10,6 +10,9 @@ class InheritedData extends InheritedWidget {
   final FSliderStyle style;
   final Layout layout;
   final List<FSliderMark> marks;
+  final String Function(FSliderSelection) semanticFormatterCallback;
+  // ignore: avoid_positional_boolean_parameters
+  final String Function(FSliderSelection, bool) semanticValueFormatterCallback;
   final bool enabled;
 
   static InheritedData of(BuildContext context) {
@@ -23,6 +26,8 @@ class InheritedData extends InheritedWidget {
     required this.style,
     required this.layout,
     required this.marks,
+    required this.semanticFormatterCallback,
+    required this.semanticValueFormatterCallback,
     required this.enabled,
     required super.child,
     super.key,
@@ -33,7 +38,9 @@ class InheritedData extends InheritedWidget {
       controller != old.controller ||
       style != old.style ||
       layout != old.layout ||
-      marks.equals(marks) ||
+      !marks.equals(marks) ||
+      semanticFormatterCallback != old.semanticFormatterCallback ||
+      semanticValueFormatterCallback != old.semanticValueFormatterCallback ||
       enabled != old.enabled;
 
   @override
@@ -44,6 +51,8 @@ class InheritedData extends InheritedWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticValueFormatterCallback))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
   }
 }

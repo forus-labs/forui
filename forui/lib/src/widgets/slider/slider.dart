@@ -1,7 +1,103 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/slider/layout_builder.dart';
+import 'package:forui/src/widgets/slider/thumb.dart';
+import 'package:forui/src/widgets/slider/track.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/src/widgets/slider/inherited_data.dart';
+
+class FSlider extends StatefulWidget {
+  static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {
+        (min: true, max: false) => (selection) => '${selection.offset.min}%',
+        (min: false, max: true) => (selection) => '${selection.offset.max}%',
+        (min: true, max: true) || (min: false, max: false) => (selection) =>
+            '${selection.offset.min}% - ${selection.offset.max}%',
+      };
+
+  static String _semanticValueFormatter(FSliderSelection selection, bool min) =>
+      '${min ? selection.offset.min : selection.offset.max}%';
+
+  /// The controller.
+  final FSliderController controller;
+
+  /// The style.
+  final FSliderStyle? style;
+
+  /// The layout. Defaults to [Layout.ltr].
+  final Layout layout;
+
+  /// The marks.
+  final List<FSliderMark> marks;
+
+  /// True if this slider is enabled. Defaults to true.
+  final bool enabled;
+
+  /// A callback that formats the semantic label for the slider. Defaults to announcing the percentages the active track
+  /// occupies.
+  final String Function(FSliderSelection) semanticFormatterCallback;
+
+  /// A callback that formats the semantic label for the slider's thumb. Defaults to announcing the percentage.
+  ///
+  /// In practice, this is mostly useful for range sliders.
+  // ignore: avoid_positional_boolean_parameters
+  final String Function(FSliderSelection, bool) semanticValueFormatterCallback;
+
+  /// Creates a [FSlider].
+  FSlider({
+    required this.controller,
+    this.style,
+    this.layout = Layout.ltr,
+    this.marks = const [],
+    this.enabled = true,
+    this.semanticValueFormatterCallback = _semanticValueFormatter,
+    String Function(FSliderSelection)? semanticFormatterCallback,
+    super.key,
+  }) : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller);
+
+  @override
+  State<FSlider> createState() => _FSliderState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('layout', layout))
+      ..add(IterableProperty('marks', marks))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
+      ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback));
+  }
+}
+
+class _FSliderState extends State<FSlider> {
+  @override
+  Widget build(BuildContext context) {
+    final styles = context.theme.sliderStyles;
+    final style = widget.style ?? (widget.enabled ? styles.enabledStyle : styles.disabledStyle);
+
+    return InheritedData(
+      controller: widget.controller,
+      style: style,
+      layout: widget.layout,
+      marks: widget.marks,
+      enabled: widget.enabled,
+      semanticFormatterCallback: widget.semanticFormatterCallback,
+      semanticValueFormatterCallback: widget.semanticValueFormatterCallback,
+      child: LayoutBuilder(
+        builder: (context, constraints) => SliderLayoutBuilder(
+          controller: widget.controller,
+          layout: widget.layout,
+          marks: widget.marks,
+          constraints: constraints,
+        ),
+      ),
+    );
+  }
+}
 
 /// A slider's styles.
 final class FSliderStyles with Diagnosticable {

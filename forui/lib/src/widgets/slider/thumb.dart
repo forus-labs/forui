@@ -38,27 +38,46 @@ class _ThumbState extends State<Thumb> {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:controller, style: FSliderStyle(:thumbStyle), :layout, :enabled) = InheritedData.of(context);
+    final InheritedData(
+      style: FSliderStyle(:thumbStyle),
+      :controller,
+      :layout,
+      :semanticValueFormatterCallback,
+      :enabled,
+    ) = InheritedData.of(context);
 
-    Widget thumb = FocusableActionDetector(
-      shortcuts: _shortcuts(layout),
-      actions: {
-        _ExtendIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: true)),
-        _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: false)),
-      },
+    Widget thumb = Semantics(
       enabled: enabled,
-      mouseCursor: enabled ? _cursor : MouseCursor.defer,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: thumbStyle.color,
-          border: Border.all(
-            color: thumbStyle.borderColor,
-            width: thumbStyle.borderWidth,
+      value: semanticValueFormatterCallback(controller.selection, widget.min),
+      increasedValue: semanticValueFormatterCallback(
+        controller.selection.step(min: widget.min, extend: !widget.min),
+        widget.min,
+      ),
+      decreasedValue: semanticValueFormatterCallback(
+        controller.selection.step(min: widget.min, extend: widget.min),
+        widget.min,
+      ),
+      child: FocusableActionDetector(
+        shortcuts: _shortcuts(layout),
+        actions: {
+          _ExtendIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: true)),
+          _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: false)),
+        },
+        enabled: enabled,
+        mouseCursor: enabled ? _cursor : MouseCursor.defer,
+        includeFocusSemantics: false,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: thumbStyle.color,
+            border: Border.all(
+              color: thumbStyle.borderColor,
+              width: thumbStyle.borderWidth,
+            ),
           ),
-        ),
-        child: SizedBox.square(
-          dimension: thumbStyle.dimension,
+          child: SizedBox.square(
+            dimension: thumbStyle.dimension,
+          ),
         ),
       ),
     );
