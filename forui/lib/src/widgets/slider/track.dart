@@ -1,15 +1,16 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/slider/old/slider.dart';
 import 'package:meta/meta.dart';
 
+import 'package:forui/src/widgets/slider/inherited_data.dart';
+
 @internal
-class Bar extends StatelessWidget {
-  const Bar({super.key});
+class Track extends StatelessWidget {
+  const Track({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:controller, :style, :layout, :enabled) = InheritedData.of(context);
+    final InheritedData(:controller, :style, :layout, :marks, :enabled) = InheritedData.of(context);
     final FSliderStyle(:activeColor, :inactiveColor, :borderRadius, :crossAxisExtent, :markStyles, :thumbStyle) = style;
     final markStyle = layout.vertical ? markStyles.vertical : markStyles.horizontal;
     final (height, width) = layout.vertical ? (crossAxisExtent, null) : (null, crossAxisExtent);
@@ -29,17 +30,18 @@ class Bar extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            for (final FSliderMark(:style, offset:percentage, :visible) in controller.marks)
-              if (visible)
+            for (final FSliderMark(:style, :offset, :tick) in marks)
+              if (tick)
                 position(
-                  offset: percentage * controller.data.rawExtent.total + half - ((style ?? markStyle).dimension / 2),
+                  offset:
+                      offset * controller.selection.rawExtent.total + half - ((style ?? markStyle).tickDimension / 2),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: (style ?? markStyle).color,
+                      color: (style ?? markStyle).tickColor,
                     ),
                     child: SizedBox.square(
-                      dimension: (style ?? markStyle).dimension,
+                      dimension: (style ?? markStyle).tickDimension,
                     ),
                   ),
                 ),
@@ -52,17 +54,17 @@ class Bar extends StatelessWidget {
                 listenable: controller,
                 builder: layout.vertical
                     ? (_, __) => position(
-                          offset: controller.data.offset.min,
+                          offset: controller.selection.rawOffset.min,
                           child: SizedBox(
-                            height: controller.data.rawExtent.current + half,
+                            height: controller.selection.rawExtent.current + half,
                             width: crossAxisExtent,
                           ),
                         )
                     : (_, __) => position(
-                          offset: controller.data.offset.min,
+                          offset: controller.selection.offset.min,
                           child: SizedBox(
                             height: crossAxisExtent,
-                            width: controller.data.rawExtent.current + half,
+                            width: controller.selection.rawExtent.current + half,
                           ),
                         ),
               ),
@@ -80,7 +82,8 @@ class Bar extends StatelessWidget {
             ? (details) => controller.tap(
                   switch (layout.translate(details.localPosition)) {
                     < 0 => 0,
-                    final translated when controller.data.rawExtent.total < translated => controller.data.rawExtent.total,
+                    final translated when controller.selection.rawExtent.total < translated =>
+                      controller.selection.rawExtent.total,
                     final translated => translated,
                   },
                 )
@@ -100,15 +103,15 @@ class Bar extends StatelessWidget {
     }
 
     assert(
-      !(controller.growable.min && controller.growable.max),
-      'Slider cannot be growable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
+      !(controller.extendable.min && controller.extendable.max),
+      'Slider cannot be extendable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
     );
 
     return switch (layout) {
-      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: controller.growable.min), null),
-      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: controller.growable.min), null),
-      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: controller.growable.min)),
-      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: controller.growable.min)),
+      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: controller.extendable.min), null),
+      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: controller.extendable.min), null),
+      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: controller.extendable.min)),
+      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: controller.extendable.min)),
     };
   }
 }

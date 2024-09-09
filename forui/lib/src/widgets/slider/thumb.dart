@@ -2,15 +2,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/slider/old/slider.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 class _ShrinkIntent extends Intent {
   const _ShrinkIntent();
 }
 
-class _GrowIntent extends Intent {
-  const _GrowIntent();
+class _ExtendIntent extends Intent {
+  const _ExtendIntent();
 }
 
 @internal
@@ -42,8 +43,8 @@ class _ThumbState extends State<Thumb> {
     Widget thumb = FocusableActionDetector(
       shortcuts: _shortcuts(layout),
       actions: {
-        _GrowIntent: CallbackAction(onInvoke: (_) => controller.traverse(min: widget.min, grow: true)),
-        _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.traverse(min: widget.min, grow: false)),
+        _ExtendIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: true)),
+        _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: false)),
       },
       enabled: enabled,
       mouseCursor: enabled ? _cursor : MouseCursor.defer,
@@ -81,20 +82,20 @@ class _ThumbState extends State<Thumb> {
 
   Map<ShortcutActivator, Intent> _shortcuts(Layout layout) => switch ((layout, widget.min)) {
         (Layout.ltr, true) || (Layout.rtl, false) => const {
-            SingleActivator(LogicalKeyboardKey.arrowLeft): _GrowIntent(),
+            SingleActivator(LogicalKeyboardKey.arrowLeft): _ExtendIntent(),
             SingleActivator(LogicalKeyboardKey.arrowRight): _ShrinkIntent(),
           },
         (Layout.ltr, false) || (Layout.rtl, true) => const {
             SingleActivator(LogicalKeyboardKey.arrowLeft): _ShrinkIntent(),
-            SingleActivator(LogicalKeyboardKey.arrowRight): _GrowIntent(),
+            SingleActivator(LogicalKeyboardKey.arrowRight): _ExtendIntent(),
           },
         (Layout.ttb, true) || (Layout.btt, false) => const {
-            SingleActivator(LogicalKeyboardKey.arrowUp): _GrowIntent(),
+            SingleActivator(LogicalKeyboardKey.arrowUp): _ExtendIntent(),
             SingleActivator(LogicalKeyboardKey.arrowDown): _ShrinkIntent(),
           },
         (Layout.ttb, false) || (Layout.btt, true) => const {
             SingleActivator(LogicalKeyboardKey.arrowUp): _ShrinkIntent(),
-            SingleActivator(LogicalKeyboardKey.arrowDown): _GrowIntent(),
+            SingleActivator(LogicalKeyboardKey.arrowDown): _ExtendIntent(),
           },
       };
 

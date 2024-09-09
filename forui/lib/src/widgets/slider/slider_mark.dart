@@ -3,21 +3,21 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-/// A mark in a [FSlider].
-class FSliderMark with Diagnosticable {
+/// A mark in a [FSlider]. It is a combination of a tick - a visual indicator along the track, and a label.
+final class FSliderMark with Diagnosticable {
   /// The mark's style.
   final FSliderMarkStyle? style;
 
-  /// The offset in the slider's bar at which to position this mark, in percentage.
+  /// The offset in the slider's track at which to position this mark, in percentage.
   ///
-  /// For example, if the percentage is `0.5`, the mark will be positioned in the middle of the slider's bar.
+  /// For example, if the offset is `0.5`, the mark will be positioned in the middle of the slider's bar.
   ///
   /// ## Contract
   /// Throws [AssertionError] if it is not between `0` and `1`, inclusive.
   final double offset;
 
-  /// Whether the mark is visible in the slider's bar. Defaults to true.
-  final bool visible;
+  /// True if a tick should be shown. Defaults to true.
+  final bool tick;
 
   /// The mark's label.
   final Widget? label;
@@ -26,17 +26,17 @@ class FSliderMark with Diagnosticable {
   const FSliderMark({
     required this.offset,
     this.style,
-    this.visible = true,
+    this.tick = true,
     this.label,
-  }) : assert(0 <= offset && offset <= 1, 'Percentage must be between 0 and 1, but is $offset.');
+  }) : assert(0 <= offset && offset <= 1, 'offset must be between 0 and 1, but is $offset.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('percentage', offset))
-      ..add(FlagProperty('visible', value: visible, ifTrue: 'visible'));
+      ..add(DoubleProperty('offset', offset))
+      ..add(FlagProperty('tick', value: tick, ifTrue: 'tick'));
   }
 
   @override
@@ -46,31 +46,31 @@ class FSliderMark with Diagnosticable {
           runtimeType == other.runtimeType &&
           style == other.style &&
           offset == other.offset &&
-          visible == other.visible &&
+          tick == other.tick &&
           label == other.label;
 
   @override
-  int get hashCode => style.hashCode ^ offset.hashCode ^ visible.hashCode ^ label.hashCode;
+  int get hashCode => style.hashCode ^ offset.hashCode ^ tick.hashCode ^ label.hashCode;
 }
 
-/// The style of a mark in a [FSlider].
+/// A [Flisder] mark's style.
 final class FSliderMarkStyle with Diagnosticable {
-  /// The mark's color.
-  final Color color;
+  /// The tick's color.
+  final Color tickColor;
 
-  /// The mark's dimension. Defaults to 3.
+  /// The tick's dimension. Defaults to 3.
   ///
   /// ## Contract
   /// Throws [AssertionError] if it is not positive.
-  final double dimension;
+  final double tickDimension;
 
-  /// The label's text style.
+  /// The label's default text style.
   final TextStyle labelTextStyle;
 
-  /// The label's anchor to which the [labelCrossAxisOffset] is applied.
+  /// The label's anchor to which the [labelOffset] is applied.
   final Alignment labelAnchor;
 
-  /// The label's offset from the slider along the cross axis, in logical pixels. The top-left corner is always the
+  /// The label's offset from the slider, along its cross axis, in logical pixels. The top-left corner is always the
   /// origin, regardless of the layout.
   ///
   /// For example, if the layout is [Layout.ltr] and the cross axis offset is 3, the label will be 3 pixels below the
@@ -78,7 +78,7 @@ final class FSliderMarkStyle with Diagnosticable {
   ///
   /// ```
   /// |--------------------------|
-  /// |----------[mark]----------|
+  /// |----------[tick]----------|
   /// |__________________________|
   ///              (1)
   ///              (2)
@@ -94,46 +94,46 @@ final class FSliderMarkStyle with Diagnosticable {
   ///              (2)
   ///              (1)
   /// |--------------------------|
-  /// |----------[mark]----------|
+  /// |----------[tick]----------|
   /// |__________________________|
   /// ```
-  final double labelCrossAxisOffset;
+  final double labelOffset;
 
   /// Creates a [FSliderMarkStyle].
   const FSliderMarkStyle({
-    required this.color,
+    required this.tickColor,
     required this.labelTextStyle,
     required this.labelAnchor,
-    required this.labelCrossAxisOffset,
-    this.dimension = 3,
-  }) : assert(0 < dimension, 'Dimension must be positive, but is $dimension.');
+    required this.labelOffset,
+    this.tickDimension = 3,
+  }) : assert(0 < tickDimension, 'tickDimension must be positive, but is $tickDimension.');
 
   /// Returns a copy of this [FSliderMarkStyle] but with the given fields replaced with the new values.
   @useResult
   FSliderMarkStyle copyWith({
-    Color? color,
-    double? dimension,
+    Color? tickColor,
+    double? tickDimension,
     TextStyle? labelTextStyle,
     Alignment? labelAnchor,
     double? labelCrossAxisOffset,
   }) =>
       FSliderMarkStyle(
-        color: color ?? this.color,
-        dimension: dimension ?? this.dimension,
+        tickColor: tickColor ?? this.tickColor,
+        tickDimension: tickDimension ?? this.tickDimension,
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         labelAnchor: labelAnchor ?? this.labelAnchor,
-        labelCrossAxisOffset: labelCrossAxisOffset ?? this.labelCrossAxisOffset,
+        labelOffset: labelCrossAxisOffset ?? this.labelOffset,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('dimension', dimension))
+      ..add(ColorProperty('tickColor', tickColor))
+      ..add(DoubleProperty('tickDimension', tickDimension))
       ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
       ..add(DiagnosticsProperty('labelAnchor', labelAnchor))
-      ..add(DoubleProperty('labelCrossAxisOffset', labelCrossAxisOffset));
+      ..add(DoubleProperty('labelCrossAxisOffset', labelOffset));
   }
 
   @override
@@ -141,17 +141,17 @@ final class FSliderMarkStyle with Diagnosticable {
       identical(this, other) ||
       other is FSliderMarkStyle &&
           runtimeType == other.runtimeType &&
-          color == other.color &&
-          dimension == other.dimension &&
+          tickColor == other.tickColor &&
+          tickDimension == other.tickDimension &&
           labelTextStyle == other.labelTextStyle &&
           labelAnchor == other.labelAnchor &&
-          labelCrossAxisOffset == other.labelCrossAxisOffset;
+          labelOffset == other.labelOffset;
 
   @override
   int get hashCode =>
-      color.hashCode ^
-      dimension.hashCode ^
+      tickColor.hashCode ^
+      tickDimension.hashCode ^
       labelTextStyle.hashCode ^
       labelAnchor.hashCode ^
-      labelCrossAxisOffset.hashCode;
+      labelOffset.hashCode;
 }
