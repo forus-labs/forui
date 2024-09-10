@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/src/widgets/slider/inherited_data.dart';
@@ -10,16 +11,93 @@ class Track extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:controller, :style, :layout, :marks, :enabled) = InheritedData.of(context);
-    final FSliderStyle(:activeColor, :inactiveColor, :borderRadius, :crossAxisExtent, :markStyles, :thumbStyle) = style;
+    final InheritedData(:style, :layout, :enabled, :semanticFormatterCallback) = InheritedData.of(context);
+    final controller = InheritedController.of(context);
+
+    Widget track = Semantics(
+      slider: true,
+      enabled: enabled,
+      value: semanticFormatterCallback(controller.selection),
+      child: const _Track(),
+    );
+
+    if (enabled) {
+      final (down, up) = _tapGestures(controller, layout, style);
+      final (horizontal, vertical) = _dragGestures(controller, layout);
+      track = GestureDetector(
+        onTapDown: down,
+        onTapUp: up,
+        onHorizontalDragUpdate: horizontal,
+        onHorizontalDragEnd: (_) => controller.tooltip.hide(),
+        onVerticalDragUpdate: vertical,
+        onVerticalDragEnd: (_) => controller.tooltip.hide(),
+        child: track,
+      );
+    }
+
+    return track;
+  }
+
+  (GestureTapDownCallback, GestureTapUpCallback) _tapGestures(
+    FSliderController controller,
+    Layout layout,
+    FSliderStyle style,
+  ) {
+    if (const {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb}.contains(controller.allowedInteraction)) {
+      return (
+        (details) {
+          controller.tooltip.show();
+          controller.tap(
+            switch (layout.translate(details.localPosition) - style.thumbStyle.dimension / 2) {
+              < 0 => 0,
+              final translated when controller.selection.rawExtent.total < translated =>
+                controller.selection.rawExtent.total,
+              final translated => translated,
+            },
+          );
+        },
+        (_) => controller.tooltip.hide(),
+      );
+    } else {
+      return ((_) => controller.tooltip.show(), (_) => controller.tooltip.hide());
+    }
+  }
+
+  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _dragGestures(FSliderController controller, Layout layout) {
+    if (controller.allowedInteraction != FSliderInteraction.slide) {
+      return (null, null);
+    }
+
+    assert(
+      !(controller.extendable.min && controller.extendable.max),
+      'Slider cannot be extendable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
+    );
+
+    return switch (layout) {
+      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: controller.extendable.min), null),
+      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: controller.extendable.min), null),
+      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: controller.extendable.min)),
+      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: controller.extendable.min)),
+    };
+  }
+}
+
+class _Track extends StatelessWidget {
+  const _Track();
+
+  @override
+  Widget build(BuildContext context) {
+    final InheritedData(:style, :layout, :marks, :enabled) = InheritedData.of(context);
+    final FSliderStyle(:inactiveColor, :borderRadius, :crossAxisExtent, :markStyles, :thumbStyle) = style;
     final markStyle = layout.vertical ? markStyles.vertical : markStyles.horizontal;
+
+    final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
+
+    final position = layout.position;
+    final half = thumbStyle.dimension / 2;
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
-    // We use the thumb style's dimension as the bar's padding.
-    final half = thumbStyle.dimension / 2;
-    final position = layout.position;
-
-    Widget track = DecoratedBox(
+    return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: borderRadius,
         color: inactiveColor,
@@ -30,102 +108,53 @@ class Track extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            for (final FSliderMark(:style, :offset, :tick) in marks)
+            for (var FSliderMark(:style, :offset, :tick) in marks)
               if (tick)
                 position(
-                  offset:
-                      offset * controller.selection.rawExtent.total + half - ((style ?? markStyle).tickDimension / 2),
+                  offset: offset * extent + half - ((style ??= markStyle).tickDimension / 2),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: (style ?? markStyle).tickColor,
+                      color: style.tickColor,
                     ),
                     child: SizedBox.square(
-                      dimension: (style ?? markStyle).tickDimension,
+                      dimension: style.tickDimension,
                     ),
                   ),
                 ),
-            ListenableBuilder(
-              listenable: controller,
-              builder: layout.vertical
-                  ? (_, __) => position(
-                        offset: controller.selection.rawOffset.min,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            borderRadius: borderRadius,
-                            color: activeColor,
-                          ),
-                          child: SizedBox(
-                            height: controller.selection.rawOffset.max - controller.selection.rawOffset.min + half,
-                            width: crossAxisExtent,
-                          ),
-                        ),
-                      )
-                  : (_, __) => position(
-                        offset: controller.selection.offset.min,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            borderRadius: borderRadius,
-                            color: activeColor,
-                          ),
-                          child: SizedBox(
-                            height: crossAxisExtent,
-                            width: controller.selection.rawOffset.max - controller.selection.rawOffset.min + half,
-                          ),
-                        ),
-                      ),
-            ),
+            const _ActiveTrack(),
           ],
         ),
       ),
     );
-
-    if (enabled) {
-      final (horizontal, vertical) = _dragGestures(controller, layout);
-      track = GestureDetector(
-        onTapDown: _tapGesture(controller, layout),
-        onHorizontalDragUpdate: horizontal,
-        onVerticalDragUpdate: vertical,
-        child: track,
-      );
-    }
-
-    return track;
   }
+}
 
-  GestureTapDownCallback? _tapGesture(FSliderController controller, Layout layout) {
-    if (const {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb}.contains(controller.allowedInteraction)) {
-      return (details) {
-        controller.tap(
-          switch (layout.translate(details.localPosition)) {
-            < 0 => 0,
-            final translated when controller.selection.rawExtent.total < translated =>
-            controller.selection.rawExtent.total,
-            final translated => translated,
-          },
-        );
-      };
-    } else {
-      return null;
-    }
-  }
+class _ActiveTrack extends StatelessWidget {
+  const _ActiveTrack();
 
-  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _dragGestures(FSliderController controller, Layout layout) {
-    if (controller.allowedInteraction != FSliderInteraction.slide) {
-      return (null, null);
-    }
+  @override
+  Widget build(BuildContext context) {
+    final InheritedData(:style, :layout) = InheritedData.of(context);
+    final FSliderStyle(:activeColor, :borderRadius, :crossAxisExtent, :thumbStyle) = style;
+    final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
 
-    assert(
-    !(controller.extendable.min && controller.extendable.max),
-    'Slider cannot be extendable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
+    final mainAxisExtent = rawOffset.max - rawOffset.min + thumbStyle.dimension / 2;
+    final (height, width) = layout.vertical ? (mainAxisExtent, crossAxisExtent) : (crossAxisExtent, mainAxisExtent);
+
+    return layout.position(
+      offset: rawOffset.min,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
+          color: activeColor,
+        ),
+        child: SizedBox(
+          height: height,
+          width: width,
+        ),
+      ),
     );
-
-    return switch (layout) {
-      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: controller.extendable.min), null),
-      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: controller.extendable.min), null),
-      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: controller.extendable.min)),
-      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: controller.extendable.min)),
-    };
   }
 }
 

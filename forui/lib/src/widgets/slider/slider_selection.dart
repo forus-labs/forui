@@ -135,7 +135,7 @@ final class ContinuousSelection extends FSliderSelection {
 
   @override
   ContinuousSelection step({required bool min, required bool extend}) {
-    final edge = min ? rawOffset.max : rawOffset.min;
+    final edge = min ? rawOffset.min : rawOffset.max;
     final step = rawExtent.total * _step;
 
     return move(min: min, to: edge + ((min ^ extend) ? step : -step));
@@ -145,10 +145,10 @@ final class ContinuousSelection extends FSliderSelection {
   ContinuousSelection move({required bool min, required double to}) {
     final (minOffset, maxOffset) = switch (min) {
       true when rawExtent.max - to < rawExtent.min => (rawOffset.max - rawExtent.min, rawOffset.max),
-      true when rawExtent.max - to > rawExtent.max => (rawOffset.max - rawExtent.min, rawOffset.max),
+      true when rawExtent.max - to > rawExtent.max => (rawOffset.max - rawExtent.max, rawOffset.max),
       true => (to, rawOffset.max),
       false when to - rawExtent.min < rawExtent.min => (rawOffset.min, rawOffset.min + rawExtent.min),
-      false when to - rawExtent.min > rawExtent.max => (rawOffset.min, rawOffset.min + rawExtent.min),
+      false when to - rawExtent.min > rawExtent.max => (rawOffset.min, rawOffset.min + rawExtent.max),
       false => (rawOffset.min, to),
     };
 

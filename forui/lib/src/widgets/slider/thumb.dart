@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/src/widgets/slider/inherited_data.dart';
@@ -38,25 +39,32 @@ class _ThumbState extends State<Thumb> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = InheritedController.of(context);
     final InheritedData(
       style: FSliderStyle(:thumbStyle),
-      :controller,
       :layout,
+      :tooltipBuilder,
       :semanticValueFormatterCallback,
       :enabled,
     ) = InheritedData.of(context);
 
+    String? increasedValue;
+    if (controller.selection.step(min: widget.min, extend: !widget.min) case final selection
+        when controller.selection != selection) {
+      increasedValue = semanticValueFormatterCallback(offset(selection));
+    }
+
+    String? decreasedValue;
+    if (controller.selection.step(min: widget.min, extend: widget.min) case final selection
+    when controller.selection != selection) {
+      decreasedValue = semanticValueFormatterCallback(offset(selection));
+    }
+
     Widget thumb = Semantics(
       enabled: enabled,
-      value: semanticValueFormatterCallback(controller.selection, widget.min),
-      increasedValue: semanticValueFormatterCallback(
-        controller.selection.step(min: widget.min, extend: !widget.min),
-        widget.min,
-      ),
-      decreasedValue: semanticValueFormatterCallback(
-        controller.selection.step(min: widget.min, extend: widget.min),
-        widget.min,
-      ),
+      value: semanticValueFormatterCallback(offset(controller.selection)),
+      increasedValue: increasedValue,
+      decreasedValue: decreasedValue,
       child: FocusableActionDetector(
         shortcuts: _shortcuts(layout),
         actions: {
@@ -83,21 +91,35 @@ class _ThumbState extends State<Thumb> {
     );
 
     if (enabled) {
-      // TODO: tooltip
-
       final (horizontal, vertical) = _gestures(controller, layout);
-      thumb = GestureDetector(
-        onTapDown: (_) => setState(() => _cursor = SystemMouseCursors.grabbing),
-        onTapUp: (_) => setState(() => _cursor = SystemMouseCursors.grab),
-        onTapCancel: () => setState(() => _cursor = SystemMouseCursors.grab),
-        onHorizontalDragUpdate: horizontal,
-        onVerticalDragUpdate: vertical,
-        child: thumb,
+      thumb = FTooltip(
+        controller: controller.tooltip,
+        tipBuilder: (context, style, _) => tooltipBuilder(style, offset(controller.selection)),
+        longPress: false,
+        hover: false,
+        child: GestureDetector(
+          onTapDown: (_) {
+            setState(() => _cursor = SystemMouseCursors.grabbing);
+            controller.tooltip.show();
+          },
+          onTapUp: (_) {
+            setState(() => _cursor = SystemMouseCursors.grab);
+            controller.tooltip.hide();
+          },
+          onTapCancel: () => setState(() => _cursor = SystemMouseCursors.grab),
+          onHorizontalDragUpdate: horizontal,
+          onHorizontalDragEnd: (_) => controller.tooltip.hide(),
+          onVerticalDragUpdate: vertical,
+          onVerticalDragEnd: (_) => controller.tooltip.hide(),
+          child: thumb,
+        ),
       );
     }
 
     return thumb;
   }
+
+  double offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
 
   Map<ShortcutActivator, Intent> _shortcuts(Layout layout) => switch ((layout, widget.min)) {
         (Layout.ltr, true) || (Layout.rtl, false) => const {

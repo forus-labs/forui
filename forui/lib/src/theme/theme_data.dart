@@ -162,7 +162,7 @@ final class FThemeData with Diagnosticable {
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography),
+      sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
     );
   }

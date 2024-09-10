@@ -7,15 +7,16 @@ import 'package:meta/meta.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 class FSlider extends StatefulWidget {
+  static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(1)}%');
+
   static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {
-        (min: true, max: false) => (selection) => '${selection.offset.min}%',
-        (min: false, max: true) => (selection) => '${selection.offset.max}%',
+        (min: true, max: false) => (selection) => '${(selection.offset.min * 100).toStringAsFixed(1)}%',
+        (min: false, max: true) => (selection) => '${(selection.offset.max * 100).toStringAsFixed(1)}%',
         (min: true, max: true) || (min: false, max: false) => (selection) =>
-            '${selection.offset.min}% - ${selection.offset.max}%',
+            '${(selection.offset.min * 100).toStringAsFixed(1)}% - ${(selection.offset.max * 100).toStringAsFixed(1)}%',
       };
 
-  static String _semanticValueFormatter(FSliderSelection selection, bool min) =>
-      '${min ? selection.offset.min : selection.offset.max}%';
+  static String _semanticValueFormatter(double value) => '${(value * 100).toStringAsFixed(1)}%';
 
   /// The controller.
   final FSliderController controller;
@@ -32,6 +33,9 @@ class FSlider extends StatefulWidget {
   /// True if this slider is enabled. Defaults to true.
   final bool enabled;
 
+  /// A builder that creates the tooltip. Defaults to printing the current percentage.
+  final Widget Function(FTooltipStyle, double) tooltipBuilder;
+
   /// A callback that formats the semantic label for the slider. Defaults to announcing the percentages the active track
   /// occupies.
   final String Function(FSliderSelection) semanticFormatterCallback;
@@ -40,7 +44,7 @@ class FSlider extends StatefulWidget {
   ///
   /// In practice, this is mostly useful for range sliders.
   // ignore: avoid_positional_boolean_parameters
-  final String Function(FSliderSelection, bool) semanticValueFormatterCallback;
+  final String Function(double) semanticValueFormatterCallback;
 
   /// Creates a [FSlider].
   FSlider({
@@ -49,6 +53,7 @@ class FSlider extends StatefulWidget {
     this.layout = Layout.ltr,
     this.marks = const [],
     this.enabled = true,
+    this.tooltipBuilder = _tooltipBuilder,
     this.semanticValueFormatterCallback = _semanticValueFormatter,
     String Function(FSliderSelection)? semanticFormatterCallback,
     super.key,
@@ -66,6 +71,7 @@ class FSlider extends StatefulWidget {
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback));
   }
@@ -78,16 +84,17 @@ class _FSliderState extends State<FSlider> {
     final style = widget.style ?? (widget.enabled ? styles.enabledStyle : styles.disabledStyle);
 
     return InheritedData(
-      controller: widget.controller,
       style: style,
       layout: widget.layout,
       marks: widget.marks,
       enabled: widget.enabled,
+      tooltipBuilder: widget.tooltipBuilder,
       semanticFormatterCallback: widget.semanticFormatterCallback,
       semanticValueFormatterCallback: widget.semanticValueFormatterCallback,
       child: LayoutBuilder(
         builder: (context, constraints) => SliderLayout(
           controller: widget.controller,
+          style: style,
           layout: widget.layout,
           marks: widget.marks,
           constraints: constraints,
@@ -112,7 +119,7 @@ final class FSliderStyles with Diagnosticable {
   });
 
   /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
-  FSliderStyles.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FSliderStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : enabledStyle = FSliderStyle(
           activeColor: colorScheme.primary,
           inactiveColor: colorScheme.secondary,
@@ -130,6 +137,7 @@ final class FSliderStyles with Diagnosticable {
               labelOffset: -10,
             ),
           ),
+          tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           thumbStyle: FSliderThumbStyle(
             color: colorScheme.primaryForeground,
             borderColor: colorScheme.primary,
@@ -152,6 +160,7 @@ final class FSliderStyles with Diagnosticable {
               labelOffset: -10,
             ),
           ),
+          tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           thumbStyle: FSliderThumbStyle(
             color: colorScheme.primaryForeground.withOpacity(0.7),
             borderColor: colorScheme.primary.withOpacity(0.7),
@@ -201,7 +210,8 @@ final class FSliderStyle with Diagnosticable {
   /// The slider thumb's style.
   final FSliderThumbStyle thumbStyle;
 
-  // TODO: tooltip style?
+  /// The tooltip's style.
+  final FTooltipStyle tooltipStyle;
 
   /// Creates a [FSliderStyle].
   FSliderStyle({
@@ -209,6 +219,7 @@ final class FSliderStyle with Diagnosticable {
     required this.inactiveColor,
     required this.markStyles,
     required this.thumbStyle,
+    required this.tooltipStyle,
     this.crossAxisExtent = 8,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
   });
@@ -223,6 +234,7 @@ final class FSliderStyle with Diagnosticable {
     BorderRadius? borderRadius,
     ({FSliderMarkStyle horizontal, FSliderMarkStyle vertical})? markStyles,
     FSliderThumbStyle? thumbStyle,
+    FTooltipStyle? tooltipStyle,
   }) =>
       FSliderStyle(
         activeColor: activeColor ?? this.activeColor,
@@ -231,6 +243,7 @@ final class FSliderStyle with Diagnosticable {
         borderRadius: borderRadius ?? this.borderRadius,
         markStyles: markStyles ?? this.markStyles,
         thumbStyle: thumbStyle ?? this.thumbStyle,
+        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
       );
 
   @override
@@ -243,7 +256,8 @@ final class FSliderStyle with Diagnosticable {
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
       ..add(DiagnosticsProperty('markStyles.horizontal', markStyles.horizontal))
       ..add(DiagnosticsProperty('markStyles.vertical', markStyles.vertical))
-      ..add(DiagnosticsProperty('thumbStyle', thumbStyle));
+      ..add(DiagnosticsProperty('thumbStyle', thumbStyle))
+      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle));
   }
 
   @override
@@ -256,7 +270,8 @@ final class FSliderStyle with Diagnosticable {
           crossAxisExtent == other.crossAxisExtent &&
           borderRadius == other.borderRadius &&
           markStyles == other.markStyles &&
-          thumbStyle == other.thumbStyle;
+          thumbStyle == other.thumbStyle &&
+          tooltipStyle == other.tooltipStyle;
 
   @override
   int get hashCode =>
@@ -265,5 +280,6 @@ final class FSliderStyle with Diagnosticable {
       crossAxisExtent.hashCode ^
       borderRadius.hashCode ^
       markStyles.hashCode ^
-      thumbStyle.hashCode;
+      thumbStyle.hashCode ^
+      tooltipStyle.hashCode;
 }

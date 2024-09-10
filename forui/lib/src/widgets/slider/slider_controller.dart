@@ -160,8 +160,8 @@ class FContinuousSliderController extends FSliderController {
     final proposed = ContinuousSelection(
       step: stepPercentage,
       mainAxisExtent: extent,
-      extent: _initialSelection.extent,
-      offset: _initialSelection.offset,
+      extent: selection.extent,
+      offset: selection.offset,
     );
 
     if (_selection == null) {
