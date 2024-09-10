@@ -11,18 +11,73 @@ class SwitchPage extends SampleScaffold {
 
   SwitchPage({
     @queryParam super.theme,
-    @queryParam this.enabled = false,
+    @queryParam this.enabled = true,
   });
 
   @override
-  Widget child(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(16),
-        child: FSwitch(
-          label: const Text('Airplane Mode'),
-          semanticLabel: 'Airplane Mode',
-          enabled: enabled,
-        ),
+  Widget child(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 170),
+            child: _Switch(
+              initialValue: false,
+              enabled: enabled,
+            ),
+          ),
+        ],
       );
+}
+
+class _Switch extends StatefulWidget {
+  final bool initialValue;
+  final bool enabled;
+
+  const _Switch({
+    required this.initialValue,
+    required this.enabled,
+  });
+
+  @override
+  State<_Switch> createState() => _SwitchState();
+}
+
+class _SwitchState extends State<_Switch> {
+  bool state = false;
+
+  @override
+  void initState() {
+    super.initState();
+    state = widget.initialValue;
+  }
+
+  @override
+  Widget build(BuildContext context) => FSwitch(
+        label: const Text('Airplane Mode'),
+        semanticLabel: 'Airplane Mode',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+        enabled: widget.enabled,
+      );
+}
+
+class Page extends StatefulWidget {
+  const Page();
+
+  @override
+  State<Page> createState() => PageState();
+}
+
+class PageState extends State<Page> {
+  bool state = false;
+
+  @override
+  Widget build(BuildContext context) => FSwitch(
+    label: const Text('Airplane Mode'),
+    semanticLabel: 'Airplane Mode',
+    value: state,
+    onChange: (value) => setState(() => state = value),
+  );
 }
 
 @RoutePage()
@@ -47,11 +102,6 @@ class NotificationForm extends StatefulWidget {
 
 class _NotificationFormState extends State<NotificationForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +146,17 @@ class _NotificationFormState extends State<NotificationForm> {
                       ],
                     ),
                   ),
-                  const FSwitch(),
+                  FormField(
+                    initialValue: false,
+                    onSaved: (value) {
+                      // Save values somewhere.
+                    },
+                    validator: (value) => null, // No validation required.
+                    builder: (state) => FSwitch(
+                      value: state.value ?? false,
+                      onChange: (value) => state.didChange(value),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -127,7 +187,17 @@ class _NotificationFormState extends State<NotificationForm> {
                       ],
                     ),
                   ),
-                  const FSwitch(initialValue: true),
+                  FormField(
+                    initialValue: true,
+                    onSaved: (value) {
+                      // Save values somewhere.
+                    },
+                    validator: (value) => null, // No validation required.
+                    builder: (state) => FSwitch(
+                      value: state.value ?? false,
+                      onChange: (value) => state.didChange(value),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -135,7 +205,15 @@ class _NotificationFormState extends State<NotificationForm> {
           const SizedBox(height: 30),
           FButton(
             label: const Text('Submit'),
-            onPress: () => _formKey.currentState!.validate(),
+            onPress: () {
+              if (!_formKey.currentState!.validate()) {
+                // Handle errors here.
+                return;
+              }
+
+              _formKey.currentState!.save();
+              // Do something.
+            },
           ),
         ],
       ),

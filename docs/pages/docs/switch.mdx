@@ -15,12 +15,25 @@ A switch that allows the user to toggle between checked and unchecked. It can al
     <Widget name='switch' query={{enabled: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
-    FSwitch(
-      label: const Text('Airplane Mode'),
-      semanticLabel: 'Airplane Mode',
-      onChanged: (value) {},
-    );
+    ```dart {12-17}
+    class Page extends StatefulWidget {
+      const Page({super.key});
+
+      @override
+      State<Page> createState() => PageState();
+    }
+
+    class PageState extends State<Page> {
+      bool state = false;
+
+      @override
+      Widget build(BuildContext context) => FSwitch(
+        label: const Text('Airplane Mode'),
+        semanticLabel: 'Airplane Mode',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+      );
+    }
     ```
   </Tabs.Tab>
 </Tabs>
@@ -32,11 +45,13 @@ A switch that allows the user to toggle between checked and unchecked. It can al
 ```dart
 FSwitch(
   label: const Text('Airplane Mode'),
+  description: const Text('Turn on airplane mode to disable all wireless connections.'),
+  error: const Text('Please turn on airplane mode.'),
   semanticLabel: 'Airplane Mode',
-  enabled: true,
-  initialValue: true,
-  autofocus: true,
+  value: true,
   onChanged: (value) {},
+  enabled: true,
+  autofocus: true,
 );
 ```
 
@@ -49,13 +64,26 @@ FSwitch(
     <Widget name='switch' query={{enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4}
-    FSwitch(
-      label: const Text('Airplane Mode'),
-      semanticLabel: 'Airplane Mode',
-      enabled: false,
-      onChanged: (value) {},
-    );
+    ```dart {17}
+    class Page extends StatefulWidget {
+      const Page({super.key});
+
+      @override
+      State<Page> createState() => PageState();
+    }
+
+    class PageState extends State<Page> {
+      bool state = false;
+
+      @override
+      Widget build(BuildContext context) => FSwitch(
+        label: const Text('Airplane Mode'),
+        semanticLabel: 'Airplane Mode',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+        enabled: false,
+      );
+    }
     ```
   </Tabs.Tab>
 </Tabs>
@@ -67,7 +95,7 @@ FSwitch(
     <Widget name='switch' variant='form' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {59, 90}
+    ```dart {54-64, 95-105}
     class NotificationForm extends StatefulWidget {
       const NotificationForm({super.key});
 
@@ -77,11 +105,6 @@ FSwitch(
 
     class _NotificationFormState extends State<NotificationForm> {
       final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-      @override
-      void initState() {
-        super.initState();
-      }
 
       @override
       Widget build(BuildContext context) {
@@ -126,7 +149,17 @@ FSwitch(
                           ],
                         ),
                       ),
-                      const FSwitch(),
+                      FormField(
+                        initialValue: false,
+                        onSaved: (value) {
+                          // Save values somewhere.
+                        },
+                        validator: (value) => null, // No validation required.
+                        builder: (state) => FSwitch(
+                          value: state.value ?? false,
+                          onChange: (value) => state.didChange(value),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -157,7 +190,17 @@ FSwitch(
                           ],
                         ),
                       ),
-                      const FSwitch(initialValue: true),
+                      FormField(
+                        initialValue: true,
+                        onSaved: (value) {
+                          // Save values somewhere.
+                        },
+                        validator: (value) => null, // No validation required.
+                        builder: (state) => FSwitch(
+                          value: state.value ?? false,
+                          onChange: (value) => state.didChange(value),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -165,7 +208,15 @@ FSwitch(
               const SizedBox(height: 30),
               FButton(
                 label: const Text('Submit'),
-                onPress: () => _formKey.currentState!.validate(),
+                onPress: () {
+                  if (!_formKey.currentState!.validate()) {
+                    // Handle errors here.
+                    return;
+                  }
+
+                  _formKey.currentState!.save();
+                  // Do something.
+                },
               ),
             ],
           ),

@@ -25,13 +25,13 @@ class FCheckbox extends StatelessWidget {
   /// The description displayed below the [label].
   final Widget? description;
 
-  /// The semantic label used by accessibility frameworks.
-  final String? semanticLabel;
-
   /// The error displayed below the [description].
   ///
   /// If the value is present, the checkbox is in an error state.
   final Widget? error;
+
+  /// The semantic label used by accessibility frameworks.
+  final String? semanticLabel;
 
   /// The current value of the checkbox.
   final bool value;
@@ -58,8 +58,8 @@ class FCheckbox extends StatelessWidget {
     this.style,
     this.label,
     this.description,
-    this.semanticLabel,
     this.error,
+    this.semanticLabel,
     this.value = false,
     this.onChange,
     this.enabled = true,
@@ -78,18 +78,18 @@ class FCheckbox extends StatelessWidget {
       (_, true) => (FLabelState.error, style.errorStyle),
     };
 
-    return FocusableActionDetector(
-      enabled: enabled,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      mouseCursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
-      child: Semantics(
-        label: semanticLabel,
+    return GestureDetector(
+      onTap: enabled ? () => onChange?.call(!value) : null,
+      child: FocusableActionDetector(
         enabled: enabled,
-        checked: value,
-        child: GestureDetector(
-          onTap: enabled ? () => onChange?.call(!value) : null,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        mouseCursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
+        child: Semantics(
+          label: semanticLabel,
+          enabled: enabled,
+          checked: value,
           child: FLabel(
             axis: Axis.horizontal,
             state: labelState,

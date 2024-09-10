@@ -10,6 +10,8 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> {
+  bool value = false;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,13 @@ class _SandboxState extends State<Sandbox> {
               FSelectGroupItem.checkbox(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
               FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
             ],
+          ),
+          const SizedBox(height: 20),
+          FSwitch(
+            label: const Text('Switch'),
+            description: const Text('Switch Description'),
+            value: value,
+            onChange: (value) => setState(() => this.value = value),
           ),
           const SizedBox(height: 20),
           FTooltip(

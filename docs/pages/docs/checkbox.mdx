@@ -19,7 +19,7 @@ For touch devices, a [switch](/docs/switch) is generally recommended over a chec
     <Tabs.Tab>
         ```dart {12-20}
         class Page extends StatefulWidget {
-          const Page();
+          const Page({super.key});
 
           @override
           State<Page> createState() => PageState();
@@ -69,7 +69,7 @@ FCheckbox(
   <Tabs.Tab>
     ```dart {20}
     class Page extends StatefulWidget {
-      const Page();
+      const Page({super.key});
 
       @override
       State<Page> createState() => PageState();
@@ -101,7 +101,7 @@ FCheckbox(
   <Tabs.Tab>
     ```dart {15}
     class Page extends StatefulWidget {
-      const Page();
+      const Page({super.key});
 
       @override
       State<Page> createState() => PageState();
@@ -133,7 +133,7 @@ FCheckbox(
     <Tabs.Tab>
         ```dart {12-17}
         class Page extends StatefulWidget {
-          const Page();
+          const Page({super.key});
 
           @override
           State<Page> createState() => PageState();
