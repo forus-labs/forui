@@ -128,7 +128,7 @@ abstract class FSliderController extends ChangeNotifier {
 
 /// A controller that manages a slider's active track which represents a continuous range/value.
 class FContinuousSliderController extends FSliderController {
-  /// The percentage of the track that represents a single step.
+  /// The percentage of the track that represents a single step. Defaults to 0.05.
   ///
   /// ## Contract
   /// Throws [AssertionError] if it is not between 0 and 1, inclusive.
@@ -138,7 +138,7 @@ class FContinuousSliderController extends FSliderController {
   FContinuousSliderController({
     required TickerProvider vsync,
     required super.selection,
-    required this.stepPercentage,
+    this.stepPercentage = 0.05,
     FSliderInteraction? allowedInteraction,
     super.minExtendable,
   })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
@@ -151,7 +151,7 @@ class FContinuousSliderController extends FSliderController {
   FContinuousSliderController.range({
     required TickerProvider vsync,
     required super.selection,
-    required this.stepPercentage,
+    this.stepPercentage = 0.05,
   })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
         super.range(tooltip: FTooltipController(vsync: vsync));
 

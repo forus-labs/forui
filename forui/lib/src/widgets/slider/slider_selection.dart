@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
+import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
@@ -27,34 +28,29 @@ sealed class FSliderSelection with Diagnosticable {
   final ({double min, double max}) offset;
 
   /// The selection's minimum and maximum extent along the slider's track, in logical pixels.
-  final ({double min, double max, double current, double total}) rawExtent;
+  final ({double min, double max, double total}) rawExtent;
 
   /// The selection's current minimum and maximum offset along the slider's track, in logical pixels.
   final ({double min, double max}) rawOffset;
 
   /// Creates a [FSliderSelection].
   factory FSliderSelection({
-    required ({double min, double max}) extent,
     required ({double min, double max}) offset,
+    ({double min, double max}) extent,
   }) = _Selection;
 
-  FSliderSelection._initial({
+  FSliderSelection._({
     required double mainAxisExtent,
     required ({double min, double max}) extent,
     required ({double min, double max}) offset,
-  }) : this._(
+  }) : this._copy(
           extent: extent,
           offset: offset,
-          rawExtent: (
-            min: extent.min * mainAxisExtent,
-            max: extent.max * mainAxisExtent,
-            current: offset.max * mainAxisExtent - offset.min * mainAxisExtent,
-            total: mainAxisExtent,
-          ),
+          rawExtent: (min: extent.min * mainAxisExtent, max: extent.max * mainAxisExtent, total: mainAxisExtent),
           rawOffset: (min: offset.min * mainAxisExtent, max: offset.max * mainAxisExtent),
         );
 
-  FSliderSelection._({
+  FSliderSelection._copy({
     required this.extent,
     required this.offset,
     required this.rawExtent,
@@ -105,9 +101,9 @@ sealed class FSliderSelection with Diagnosticable {
 
 final class _Selection extends FSliderSelection {
   _Selection({
-    required super.extent,
     required super.offset,
-  }) : super._(rawExtent: (min: 0, max: 0, current: 0, total: 0), rawOffset: (min: 0, max: 0));
+    super.extent = (min: 0, max: 1),
+  }) : super._copy(rawExtent: (min: 0, max: 0, total: 0), rawOffset: (min: 0, max: 0));
 
   @override
   FSliderSelection step({required bool min, required bool extend}) => this;
@@ -127,7 +123,7 @@ final class ContinuousSelection extends FSliderSelection {
     required super.offset,
   })  : assert(0 < step && step <= 1, 'step must be > 0 and <= 1, but is $step.'),
         _step = step,
-        super._initial();
+        super._();
 
   ContinuousSelection._({
     required double step,
@@ -135,9 +131,7 @@ final class ContinuousSelection extends FSliderSelection {
     required super.rawExtent,
     required super.rawOffset,
   })  : _step = step,
-        super._(
-          offset: (min: rawOffset.min / rawExtent.total, max: rawOffset.max / rawExtent.total),
-        );
+        super._copy(offset: (min: rawOffset.min / rawExtent.total, max: rawOffset.max / rawExtent.total));
 
   @override
   ContinuousSelection step({required bool min, required bool extend}) {
@@ -161,7 +155,7 @@ final class ContinuousSelection extends FSliderSelection {
     return ContinuousSelection._(
       step: _step,
       extent: extent,
-      rawExtent: rawExtent,
+      rawExtent: (min: rawExtent.min, max: rawExtent.max, total: rawExtent.total),
       rawOffset: (min: minOffset, max: maxOffset),
     );
   }
@@ -193,7 +187,7 @@ final class DiscreteSelection extends FSliderSelection {
   })  : assert(ticks.isNotEmpty, 'ticks must not be empty.'),
         assert(ticks.keys.every((tick) => 0 <= tick && tick <= 1), 'Every tick must be >= 0 and <= 1.'),
         _ticks = ticks,
-        super._initial(offset: (min: ticks.round(offset.min), max: ticks.round(offset.max)));
+        super._(offset: (min: ticks.round(offset.min), max: ticks.round(offset.max)));
 
   DiscreteSelection._({
     required SplayTreeMap<double, void> ticks,
@@ -201,7 +195,7 @@ final class DiscreteSelection extends FSliderSelection {
     required super.extent,
     required super.rawExtent,
   })  : _ticks = ticks,
-        super._(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
+        super._copy(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
 
   @override
   DiscreteSelection step({required bool min, required bool extend}) => _move(

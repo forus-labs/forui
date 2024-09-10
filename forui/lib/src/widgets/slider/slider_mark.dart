@@ -53,7 +53,7 @@ final class FSliderMark with Diagnosticable {
   int get hashCode => style.hashCode ^ offset.hashCode ^ tick.hashCode ^ label.hashCode;
 }
 
-/// A [Flisder] mark's style.
+/// A [FSlider] mark's style.
 final class FSliderMarkStyle with Diagnosticable {
   /// The tick's color.
   final Color tickColor;

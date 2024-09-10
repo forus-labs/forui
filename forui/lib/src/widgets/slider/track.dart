@@ -13,13 +13,13 @@ class Track extends StatelessWidget {
     final InheritedData(:controller, :style, :layout, :marks, :enabled) = InheritedData.of(context);
     final FSliderStyle(:activeColor, :inactiveColor, :borderRadius, :crossAxisExtent, :markStyles, :thumbStyle) = style;
     final markStyle = layout.vertical ? markStyles.vertical : markStyles.horizontal;
-    final (height, width) = layout.vertical ? (crossAxisExtent, null) : (null, crossAxisExtent);
+    final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     // We use the thumb style's dimension as the bar's padding.
     final half = thumbStyle.dimension / 2;
     final position = layout.position;
 
-    Widget bar = DecoratedBox(
+    Widget track = DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: borderRadius,
         color: inactiveColor,
@@ -45,29 +45,35 @@ class Track extends StatelessWidget {
                     ),
                   ),
                 ),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: borderRadius,
-                color: activeColor,
-              ),
-              child: ListenableBuilder(
-                listenable: controller,
-                builder: layout.vertical
-                    ? (_, __) => position(
-                          offset: controller.selection.rawOffset.min,
+            ListenableBuilder(
+              listenable: controller,
+              builder: layout.vertical
+                  ? (_, __) => position(
+                        offset: controller.selection.rawOffset.min,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            borderRadius: borderRadius,
+                            color: activeColor,
+                          ),
                           child: SizedBox(
-                            height: controller.selection.rawExtent.current + half,
+                            height: controller.selection.rawOffset.max - controller.selection.rawOffset.min + half,
                             width: crossAxisExtent,
                           ),
-                        )
-                    : (_, __) => position(
-                          offset: controller.selection.offset.min,
+                        ),
+                      )
+                  : (_, __) => position(
+                        offset: controller.selection.offset.min,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            borderRadius: borderRadius,
+                            color: activeColor,
+                          ),
                           child: SizedBox(
                             height: crossAxisExtent,
-                            width: controller.selection.rawExtent.current + half,
+                            width: controller.selection.rawOffset.max - controller.selection.rawOffset.min + half,
                           ),
                         ),
-              ),
+                      ),
             ),
           ],
         ),
@@ -75,36 +81,43 @@ class Track extends StatelessWidget {
     );
 
     if (enabled) {
-      const tappable = {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb};
-      final (horizontal, vertical) = _gestures(controller, layout);
-      bar = GestureDetector(
-        onTapDown: tappable.contains(controller.allowedInteraction)
-            ? (details) => controller.tap(
-                  switch (layout.translate(details.localPosition)) {
-                    < 0 => 0,
-                    final translated when controller.selection.rawExtent.total < translated =>
-                      controller.selection.rawExtent.total,
-                    final translated => translated,
-                  },
-                )
-            : null,
+      final (horizontal, vertical) = _dragGestures(controller, layout);
+      track = GestureDetector(
+        onTapDown: _tapGesture(controller, layout),
         onHorizontalDragUpdate: horizontal,
         onVerticalDragUpdate: vertical,
-        child: bar,
+        child: track,
       );
     }
 
-    return bar;
+    return track;
   }
 
-  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _gestures(FSliderController controller, Layout layout) {
+  GestureTapDownCallback? _tapGesture(FSliderController controller, Layout layout) {
+    if (const {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb}.contains(controller.allowedInteraction)) {
+      return (details) {
+        controller.tap(
+          switch (layout.translate(details.localPosition)) {
+            < 0 => 0,
+            final translated when controller.selection.rawExtent.total < translated =>
+            controller.selection.rawExtent.total,
+            final translated => translated,
+          },
+        );
+      };
+    } else {
+      return null;
+    }
+  }
+
+  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _dragGestures(FSliderController controller, Layout layout) {
     if (controller.allowedInteraction != FSliderInteraction.slide) {
       return (null, null);
     }
 
     assert(
-      !(controller.extendable.min && controller.extendable.max),
-      'Slider cannot be extendable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
+    !(controller.extendable.min && controller.extendable.max),
+    'Slider cannot be extendable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
     );
 
     return switch (layout) {

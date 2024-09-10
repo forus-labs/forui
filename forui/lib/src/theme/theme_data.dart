@@ -124,7 +124,6 @@ final class FThemeData with Diagnosticable {
     required this.tooltipStyle,
     required this.scaffoldStyle,
     required this.selectGroupStyle,
-    required this.dividerStyles,
     required this.sliderStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
@@ -163,7 +162,6 @@ final class FThemeData with Diagnosticable {
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
     );
@@ -237,7 +235,6 @@ final class FThemeData with Diagnosticable {
     FTooltipStyle? tooltipStyle,
     FScaffoldStyle? scaffoldStyle,
     FSelectGroupStyle? selectGroupStyle,
-    FDividerStyles? dividerStyles,
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
   }) =>
