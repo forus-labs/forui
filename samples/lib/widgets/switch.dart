@@ -73,11 +73,11 @@ class PageState extends State<Page> {
 
   @override
   Widget build(BuildContext context) => FSwitch(
-    label: const Text('Airplane Mode'),
-    semanticLabel: 'Airplane Mode',
-    value: state,
-    onChange: (value) => setState(() => state = value),
-  );
+        label: const Text('Airplane Mode'),
+        semanticLabel: 'Airplane Mode',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+      );
 }
 
 @RoutePage()
