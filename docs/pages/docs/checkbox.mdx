@@ -17,7 +17,7 @@ For touch devices, a [switch](/docs/switch) is generally recommended over a chec
         <Widget name='checkbox' query={{enabled: 'true'}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {12-20}
+        ```dart {12-18}
         class Page extends StatefulWidget {
           const Page({super.key});
 
@@ -67,7 +67,7 @@ FCheckbox(
     <Widget name='checkbox' query={{initialValue: 'true', enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {20}
+    ```dart {18}
     class Page extends StatefulWidget {
       const Page({super.key});
 
@@ -161,7 +161,7 @@ FCheckbox(
     <Widget name='checkbox' variant='form' query={{}} height={550}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {32-47}
+    ```dart {27-40}
     class RegisterForm extends StatefulWidget {
       const RegisterForm({super.key});
 
@@ -171,11 +171,6 @@ FCheckbox(
 
     class _RegisterFormState extends State<RegisterForm> {
       final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-      @override
-      void initState() {
-        super.initState();
-      }
 
       @override
       Widget build(BuildContext context) => Form(
