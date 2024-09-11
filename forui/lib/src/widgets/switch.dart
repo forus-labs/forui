@@ -6,17 +6,15 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/form_field.dart';
 
 /// A control that allows the user to toggle between checked and unchecked.
 ///
-/// Typically used to toggle the on/off state of a single setting. A [FSwitch] is internally a [FormField], therefore
-/// it can be used in a form.
+/// Typically used to toggle the on/off state of a single setting.
 ///
 /// See:
 /// * https://forui.dev/docs/switch for working examples.
 /// * [FSwitchStyle] for customizing a switch's appearance.
-class FSwitch extends FFormField<bool> {
+class FSwitch extends StatelessWidget {
   /// The style. Defaults to [FThemeData.switchStyle].
   final FSwitchStyle? style;
 
@@ -26,14 +24,25 @@ class FSwitch extends FFormField<bool> {
   /// The description displayed below the [label].
   final Widget? description;
 
+  /// The error displayed below the [description].
+  ///
+  /// If the value is present, the checkbox is in an error state.
+  final Widget? error;
+
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
+
+  /// The current value of the checkbox.
+  final bool value;
 
   /// Called when the user toggles the switch on or off.
   ///
   /// The switch passes the new value to the callback but does not actually change state until the parent widget
   /// rebuilds the switch with the new value.
   final ValueChanged<bool>? onChange;
+
+  /// Whether this checkbox is enabled. Defaults to true.
+  final bool enabled;
 
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
   ///
@@ -78,26 +87,22 @@ class FSwitch extends FFormField<bool> {
     this.style,
     this.label,
     this.description,
+    this.error,
     this.semanticLabel,
+    this.value = false,
     this.onChange,
+    this.enabled = true,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.dragStartBehavior = DragStartBehavior.start,
-    super.onSave,
-    super.forceErrorText,
-    super.validator,
-    super.initialValue = false,
-    super.enabled = true,
-    super.autovalidateMode,
-    super.restorationId,
     super.key,
   });
 
   @override
-  Widget builder(BuildContext context, FormFieldState<bool> state) {
+  Widget build(BuildContext context) {
     final style = this.style ?? context.theme.switchStyle;
-    final (labelState, switchStyle) = switch ((enabled, state.hasError)) {
+    final (labelState, switchStyle) = switch ((enabled, error != null)) {
       (true, false) => (FLabelState.enabled, style.enabledStyle),
       (false, false) => (FLabelState.disabled, style.disabledStyle),
       (_, true) => (
@@ -106,37 +111,44 @@ class FSwitch extends FFormField<bool> {
         ), // `enabledStyle` is used as error style doesn't contain any switch styles.
     };
 
-    final value = state.value ?? initialValue;
+    return GestureDetector(
+      onTap: enabled ? () => onChange?.call(!value) : null,
+      child: FocusableActionDetector(
+        enabled: enabled,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        mouseCursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
+        child: Semantics(
+          label: semanticLabel,
+          enabled: enabled,
+          toggled: value,
+          child: FLabel(
+            axis: Axis.horizontal,
+            state: labelState,
+            label: label,
+            description: description,
+            error: error,
+            child: CupertinoSwitch(
+              value: value,
+              onChanged: (value) {
+                if (!enabled) {
+                  return;
+                }
 
-    return Semantics(
-      label: semanticLabel,
-      enabled: enabled,
-      toggled: value,
-      child: FLabel(
-        axis: Axis.horizontal,
-        state: labelState,
-        label: label,
-        description: description,
-        error: Text(state.errorText ?? ''),
-        child: CupertinoSwitch(
-          value: value,
-          onChanged: (value) {
-            if (!enabled) {
-              return;
-            }
-
-            state.didChange(value);
-            onChange?.call(!value);
-          },
-          applyTheme: false,
-          activeColor: switchStyle.checkedColor,
-          trackColor: switchStyle.uncheckedColor,
-          thumbColor: switchStyle.thumbColor,
-          focusColor: style.focusColor,
-          autofocus: autofocus,
-          focusNode: focusNode,
-          onFocusChange: onFocusChange,
-          dragStartBehavior: dragStartBehavior,
+                onChange?.call(value);
+              },
+              applyTheme: false,
+              activeColor: switchStyle.checkedColor,
+              trackColor: switchStyle.uncheckedColor,
+              thumbColor: switchStyle.thumbColor,
+              focusColor: style.focusColor,
+              autofocus: autofocus,
+              focusNode: focusNode,
+              onFocusChange: onFocusChange,
+              dragStartBehavior: dragStartBehavior,
+            ),
+          ),
         ),
       ),
     );
@@ -149,6 +161,7 @@ class FSwitch extends FFormField<bool> {
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(FlagProperty('enabled', value: enabled))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
