@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/src/widgets/accordion.dart';
 
 import 'package:meta/meta.dart';
 
@@ -146,7 +145,7 @@ final class FThemeData with Diagnosticable {
       colorScheme: colorScheme,
       typography: typography,
       style: style,
-      accordionStyle: FAccordionStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+      accordionStyle: FAccordionStyle.inherit(colorScheme: colorScheme, typography: typography),
       alertStyles: FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       avatarStyle: FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -306,7 +305,6 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
-
   }
 
   @override

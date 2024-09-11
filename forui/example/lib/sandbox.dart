@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/accordion.dart';
 
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
@@ -25,17 +24,22 @@ class _SandboxState extends State<Sandbox> {
         children: [
           FAccordion(
             title: 'Is it Accessible?',
-            childHeight: 100,
-            initiallyExpanded: false,
-            onExpanded: () {},
-            child: const Text('Yes. It adheres to the WAI-ARIA design pattern', textAlign: TextAlign.left,),
+            controller: FAccordionController(initiallyExpanded: false),
+            child: const Text(
+              'Yes. It adheres to the WAI-ARIA design pattern',
+              textAlign: TextAlign.left,
+            ),
           ),
-          FAccordion(
-            title: 'Is it Accessible?',
-            childHeight: 100,
-            initiallyExpanded: false,
-            onExpanded: () {},
-            child: const Text('Yes. It adheres to the WAI-ARIA design pattern', textAlign: TextAlign.left,),
+          const SizedBox(height: 20),
+          FSelectGroup(
+            label: const Text('Select Group'),
+            description: const Text('Select Group Description'),
+            controller: FMultiSelectGroupController(min: 1, max: 2, values: {1}),
+            items: [
+              FSelectGroupItem.checkbox(value: 1, label: const Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
+              FSelectGroupItem.checkbox(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
+              FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
+            ],
           ),
           FAccordion(
             title: 'Is it Accessible?',

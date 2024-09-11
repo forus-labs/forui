@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 
 import 'package:forui/forui.dart';
@@ -9,44 +10,78 @@ import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 import 'package:meta/meta.dart';
 
+/// A controller that stores the expanded state of an [FAccordion].
+class FAccordionController extends ValueNotifier<bool> {
+  bool _expanded;
+
+  /// Creates a [FAccordionController].
+  FAccordionController({
+    bool? initiallyExpanded,
+  })  : _expanded = initiallyExpanded ?? true,
+        super(initiallyExpanded ?? true);
+
+  /// whether the accordion is expanded.
+  bool get expanded => _expanded;
+
+  /// Toggles the expansion state of the accordion.
+  bool toggle() {
+    _expanded = !_expanded;
+    notifyListeners();
+    return _expanded;
+  }
+}
+
+/// A vertically stacked set of interactive headings that each reveal a section of content.
+///
+/// See:
+/// * https://forui.dev/docs/accordion for working examples.
 class FAccordion extends StatefulWidget {
-  /// The divider's style. Defaults to the appropriate style in [FThemeData.dividerStyles].
+  /// The accordion's style. Defaults to the appropriate style in [FThemeData.accordionStyle].
   final FAccordionStyle? style;
+
+  /// The title.
   final String title;
-  final bool initiallyExpanded;
-  final VoidCallback onExpanded;
-  final double childHeight;
-  final double removeChildAnimationPercentage;
+
+  /// The accordion's controller.
+  final FAccordionController controller;
+
+  /// The child.
   final Widget child;
 
+  /// Creates an [FAccordion].
   const FAccordion({
     required this.child,
-    required this.childHeight,
-    required this.initiallyExpanded,
-    required this.onExpanded,
+    required this.controller,
     this.title = '',
     this.style,
-    this.removeChildAnimationPercentage = 0,
     super.key,
   });
 
   @override
+  //ignore:library_private_types_in_public_api
   _FAccordionState createState() => _FAccordionState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('title', title))
+      ..add(DiagnosticsProperty('controller', controller));
+  }
 }
 
 class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
-  bool _isExpanded = false;
   bool _hovered = false;
 
   @override
   void initState() {
     super.initState();
-    _isExpanded = widget.initiallyExpanded;
     controller = AnimationController(
       duration: const Duration(milliseconds: 500),
-      value: _isExpanded ? 1.0 : 0.0,
+      value: widget.controller.expanded ? 1.0 : 0.0,
       vsync: this,
     );
     animation = Tween<double>(
@@ -60,8 +95,6 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
     )..addListener(() {
         setState(() {});
       });
-
-    _isExpanded ? controller.forward() : controller.reverse();
   }
 
   @override
@@ -73,15 +106,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
           onEnter: (_) => setState(() => _hovered = true),
           onExit: (_) => setState(() => _hovered = false),
           child: FTappable(
-            onPress: () {
-              if (_isExpanded) {
-                controller.reverse();
-              } else {
-                controller.forward();
-              }
-              setState(() => _isExpanded = !_isExpanded);
-              widget.onExpanded();
-            },
+            onPress: () => widget.controller.toggle() ? controller.forward() : controller.reverse(),
             child: Container(
               padding: style.titlePadding,
               child: Row(
@@ -102,10 +127,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
                   ),
                   Transform.rotate(
                     angle: (animation.value / 100 * -180 + 90) * math.pi / 180.0,
-                    child: FAssets.icons.chevronRight(
-                      height: 20,
-                      colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
-                    ),
+                    child: style.icon,
                   ),
                 ],
               ),
@@ -126,8 +148,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
           ),
         ),
         FDivider(
-          style: context.theme.dividerStyles.horizontal
-              .copyWith(padding: EdgeInsets.zero, color: context.theme.colorScheme.border),
+          style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: style.dividerColor),
         ),
       ],
     );
@@ -137,6 +158,14 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('animation', animation))
+      ..add(DiagnosticsProperty('controller', controller));
   }
 }
 
@@ -151,16 +180,33 @@ final class FAccordionStyle with Diagnosticable {
   /// The padding of the content.
   final EdgeInsets contentPadding;
 
-  /// Creates a [FAccordionStyle].
-  FAccordionStyle({required this.title, required this.titlePadding, required this.contentPadding});
+  /// The icon.
+  final SvgPicture icon;
 
-  /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [style].
-  FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
+  /// The divider's color.
+  final Color dividerColor;
+
+  /// Creates a [FAccordionStyle].
+  FAccordionStyle({
+    required this.title,
+    required this.titlePadding,
+    required this.contentPadding,
+    required this.icon,
+    required this.dividerColor,
+  });
+
+  /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
+  FAccordionStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : title = typography.base.copyWith(
           fontWeight: FontWeight.w500,
         ),
         titlePadding = const EdgeInsets.symmetric(vertical: 15),
-        contentPadding = const EdgeInsets.only(bottom: 15);
+        contentPadding = const EdgeInsets.only(bottom: 15),
+        icon = FAssets.icons.chevronRight(
+          height: 20,
+          colorFilter: ColorFilter.mode(colorScheme.primary, BlendMode.srcIn),
+        ),
+        dividerColor = colorScheme.border;
 
   /// Returns a copy of this [FAccordionStyle] with the given properties replaced.
   @useResult
@@ -168,11 +214,15 @@ final class FAccordionStyle with Diagnosticable {
     TextStyle? title,
     EdgeInsets? titlePadding,
     EdgeInsets? contentPadding,
+    SvgPicture? icon,
+    Color? dividerColor,
   }) =>
       FAccordionStyle(
         title: title ?? this.title,
         titlePadding: titlePadding ?? this.titlePadding,
         contentPadding: contentPadding ?? this.contentPadding,
+        icon: icon ?? this.icon,
+        dividerColor: dividerColor ?? this.dividerColor,
       );
 
   @override
@@ -181,7 +231,8 @@ final class FAccordionStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('padding', titlePadding))
-      ..add(DiagnosticsProperty('contentPadding', contentPadding));
+      ..add(DiagnosticsProperty('contentPadding', contentPadding))
+      ..add(ColorProperty('dividerColor', dividerColor));
   }
 
   @override
@@ -191,12 +242,14 @@ final class FAccordionStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           title == other.title &&
           titlePadding == other.titlePadding &&
-          contentPadding == other.contentPadding;
+          contentPadding == other.contentPadding &&
+          icon == other.icon &&
+          dividerColor == other.dividerColor;
 
   @override
-  int get hashCode => title.hashCode ^ titlePadding.hashCode ^ contentPadding.hashCode;
+  int get hashCode =>
+      title.hashCode ^ titlePadding.hashCode ^ contentPadding.hashCode ^ icon.hashCode ^ dividerColor.hashCode;
 }
-
 
 class _Expandable extends SingleChildRenderObjectWidget {
   final double _percentage;
@@ -228,7 +281,6 @@ class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox
     if (child case final child?) {
       child.layout(constraints.normalize(), parentUsesSize: true);
       size = Size(child.size.width, child.size.height * _percentage);
-
     } else {
       size = constraints.smallest;
     }
@@ -260,6 +312,12 @@ class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox
 
     _percentage = value;
     markNeedsLayout();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('percentage', percentage));
   }
 }
 

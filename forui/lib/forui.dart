@@ -5,6 +5,7 @@ export 'assets.dart';
 export 'foundation.dart';
 export 'theme.dart';
 
+export 'widgets/accordion.dart';
 export 'widgets/alert.dart';
 export 'widgets/avatar.dart';
 export 'widgets/badge.dart';
