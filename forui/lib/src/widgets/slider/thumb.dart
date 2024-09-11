@@ -240,3 +240,14 @@ final class FSliderThumbStyle with Diagnosticable {
   @override
   int get hashCode => color.hashCode ^ dimension.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode;
 }
+
+@internal
+extension Layouts on Layout {
+  double Function(Offset) translate(FSliderStyle style) => switch (this) {
+    Layout.ltr => (offset) => offset.dx - style.thumbStyle.dimension / 2,
+    Layout.rtl => (offset) => -offset.dx + style.thumbStyle.dimension / 2,
+    Layout.ttb => (offset) => offset.dy - style.thumbStyle.dimension / 2,
+    Layout.btt => (offset) => -offset.dy + style.thumbStyle.dimension / 2,
+  };
+}
+

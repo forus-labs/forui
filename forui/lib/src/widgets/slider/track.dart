@@ -188,7 +188,15 @@ class _ActiveTrack extends StatelessWidget {
   }
 }
 
-extension on Layout {
+@internal
+extension Layouts on Layout {
+  double Function(Offset) translate(FSliderStyle style) => switch (this) {
+        Layout.ltr => (offset) => offset.dx - style.thumbStyle.dimension / 2,
+        Layout.rtl => (offset) =>  -offset.dx,
+        Layout.ttb => (offset) => offset.dy - style.thumbStyle.dimension / 2,
+        Layout.btt => (offset) => -offset.dy,
+      };
+
   Positioned Function({required double offset, required Widget child}) get position => switch (this) {
         Layout.ltr => ({required offset, required child}) => Positioned(left: offset, child: child),
         Layout.rtl => ({required offset, required child}) => Positioned(right: offset, child: child),
