@@ -31,6 +31,7 @@ class InheritedController extends InheritedModel<UniqueKey> {
 
   @override
   bool updateShouldNotifyDependent(covariant InheritedController old, Set<UniqueKey> dependencies) =>
+      controller != old.controller ||
       dependencies.contains(rawOffset) && _selection.rawOffset != old._selection.rawOffset ||
       dependencies.contains(rawExtent) && _selection.rawExtent != old._selection.rawExtent ||
       dependencies.contains(extendable) && controller.extendable != old.controller.extendable;

@@ -36,12 +36,13 @@ class Thumb extends StatefulWidget {
 
 class _ThumbState extends State<Thumb> {
   MouseCursor _cursor = SystemMouseCursors.grab;
+  ({double min, double max})? _origin;
 
   @override
   Widget build(BuildContext context) {
     final controller = InheritedController.of(context);
     final InheritedData(
-      style: FSliderStyle(:thumbStyle),
+      :style,
       :layout,
       :tooltipBuilder,
       :semanticValueFormatterCallback,
@@ -56,7 +57,7 @@ class _ThumbState extends State<Thumb> {
 
     String? decreasedValue;
     if (controller.selection.step(min: widget.min, extend: widget.min) case final selection
-    when controller.selection != selection) {
+        when controller.selection != selection) {
       decreasedValue = semanticValueFormatterCallback(offset(selection));
     }
 
@@ -77,42 +78,55 @@ class _ThumbState extends State<Thumb> {
         child: DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: thumbStyle.color,
+            color: style.thumbStyle.color,
             border: Border.all(
-              color: thumbStyle.borderColor,
-              width: thumbStyle.borderWidth,
+              color: style.thumbStyle.borderColor,
+              width: style.thumbStyle.borderWidth,
             ),
           ),
           child: SizedBox.square(
-            dimension: thumbStyle.dimension,
+            dimension: style.thumbStyle.dimension,
           ),
         ),
       ),
     );
 
     if (enabled) {
-      final (horizontal, vertical) = _gestures(controller, layout);
+      final (horizontal, vertical) = _gestures(controller, style, layout);
+      thumb = GestureDetector(
+        onTapDown: (_) {
+          setState(() => _cursor = SystemMouseCursors.grabbing);
+          controller.tooltip?.show();
+        },
+        onTapUp: (_) {
+          setState(() => _cursor = SystemMouseCursors.grab);
+          controller.tooltip?.hide();
+        },
+        onHorizontalDragStart: (_) => _origin = controller.selection.rawOffset,
+        onHorizontalDragUpdate: horizontal,
+        onHorizontalDragEnd: (_) {
+          setState(() => _cursor = SystemMouseCursors.grab);
+          _origin = null;
+          controller.tooltip?.hide();
+        },
+        onVerticalDragStart: (_) => _origin = controller.selection.rawOffset,
+        onVerticalDragUpdate: vertical,
+        onVerticalDragEnd: (_) {
+          setState(() => _cursor = SystemMouseCursors.grab);
+          _origin = null;
+          controller.tooltip?.hide();
+        },
+        child: thumb,
+      );
+    }
+
+    if (controller.tooltip != null) {
       thumb = FTooltip(
         controller: controller.tooltip,
         tipBuilder: (context, style, _) => tooltipBuilder(style, offset(controller.selection)),
         longPress: false,
         hover: false,
-        child: GestureDetector(
-          onTapDown: (_) {
-            setState(() => _cursor = SystemMouseCursors.grabbing);
-            controller.tooltip.show();
-          },
-          onTapUp: (_) {
-            setState(() => _cursor = SystemMouseCursors.grab);
-            controller.tooltip.hide();
-          },
-          onTapCancel: () => setState(() => _cursor = SystemMouseCursors.grab),
-          onHorizontalDragUpdate: horizontal,
-          onHorizontalDragEnd: (_) => controller.tooltip.hide(),
-          onVerticalDragUpdate: vertical,
-          onVerticalDragEnd: (_) => controller.tooltip.hide(),
-          child: thumb,
-        ),
+        child: thumb,
       );
     }
 
@@ -140,17 +154,22 @@ class _ThumbState extends State<Thumb> {
           },
       };
 
-  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _gestures(FSliderController controller, Layout layout) {
+  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _gestures(
+    FSliderController controller,
+    FSliderStyle style,
+    Layout layout,
+  ) {
     if (controller.allowedInteraction == FSliderInteraction.tap) {
       return (null, null);
     }
 
-    return switch (layout) {
-      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: widget.min), null),
-      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: widget.min), null),
-      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: widget.min)),
-      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: widget.min)),
-    };
+    final translate = layout.translate(style);
+    void drag(DragUpdateDetails details) {
+      final origin = widget.min ? _origin!.min : _origin!.max;
+      controller.slide(origin + translate(details.localPosition), min: widget.min);
+    }
+
+    return layout.vertical ? (null, drag) : (drag, null);
   }
 }
 

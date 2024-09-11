@@ -6,8 +6,16 @@ import 'package:meta/meta.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 @internal
-class Track extends StatelessWidget {
+class Track extends StatefulWidget {
   const Track({super.key});
+
+  @override
+  State<Track> createState() => _TrackState();
+}
+
+class _TrackState extends State<Track> {
+  ({double min, double max})? _origin;
+  Offset? _pointerOrigin;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +30,31 @@ class Track extends StatelessWidget {
     );
 
     if (enabled) {
-      final (down, up) = _tapGestures(controller, layout, style);
-      final (horizontal, vertical) = _dragGestures(controller, layout);
+      final (down, up) = _tapGestures(controller, style, layout);
+      final (horizontal, vertical) = _dragGestures(controller, style, layout);
       track = GestureDetector(
         onTapDown: down,
         onTapUp: up,
+        onHorizontalDragStart: (details) {
+          _origin = controller.selection.rawOffset;
+          _pointerOrigin = details.localPosition;
+        },
         onHorizontalDragUpdate: horizontal,
-        onHorizontalDragEnd: (_) => controller.tooltip.hide(),
+        onHorizontalDragEnd: (_) {
+          _origin = null;
+          _pointerOrigin = null;
+          controller.tooltip?.hide();
+        },
+        onVerticalDragStart: (details) {
+          _origin = controller.selection.rawOffset;
+          _pointerOrigin = details.localPosition;
+        },
         onVerticalDragUpdate: vertical,
-        onVerticalDragEnd: (_) => controller.tooltip.hide(),
+        onVerticalDragEnd: (_) {
+          _origin = null;
+          _pointerOrigin = null;
+          controller.tooltip?.hide();
+        },
         child: track,
       );
     }
@@ -40,30 +64,35 @@ class Track extends StatelessWidget {
 
   (GestureTapDownCallback, GestureTapUpCallback) _tapGestures(
     FSliderController controller,
-    Layout layout,
     FSliderStyle style,
+    Layout layout,
   ) {
-    if (const {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb}.contains(controller.allowedInteraction)) {
-      return (
-        (details) {
-          controller.tooltip.show();
-          controller.tap(
-            switch (layout.translate(details.localPosition) - style.thumbStyle.dimension / 2) {
-              < 0 => 0,
-              final translated when controller.selection.rawExtent.total < translated =>
-                controller.selection.rawExtent.total,
-              final translated => translated,
-            },
-          );
+    const tappable = {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb};
+
+    final translate = layout.translate(style);
+    void tap(TapDownDetails details) {
+      controller.tooltip?.show();
+      controller.tap(
+        switch (translate(details.localPosition)) {
+          < 0 => 0,
+          final translated when controller.selection.rawExtent.total < translated =>
+            controller.selection.rawExtent.total,
+          final translated => translated,
         },
-        (_) => controller.tooltip.hide(),
       );
-    } else {
-      return ((_) => controller.tooltip.show(), (_) => controller.tooltip.hide());
     }
+
+    return (
+      tappable.contains(controller.allowedInteraction) ? tap : (_) => controller.tooltip?.show(),
+      (_) => controller.tooltip?.hide(),
+    );
   }
 
-  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _dragGestures(FSliderController controller, Layout layout) {
+  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _dragGestures(
+    FSliderController controller,
+    FSliderStyle style,
+    Layout layout,
+  ) {
     if (controller.allowedInteraction != FSliderInteraction.slide) {
       return (null, null);
     }
@@ -73,12 +102,13 @@ class Track extends StatelessWidget {
       'Slider cannot be extendable at both edges when the allowed interaction is ${controller.allowedInteraction}.',
     );
 
-    return switch (layout) {
-      Layout.ltr => ((details) => controller.slide(details.delta.dx, min: controller.extendable.min), null),
-      Layout.rtl => ((details) => controller.slide(-details.delta.dx, min: controller.extendable.min), null),
-      Layout.ttb => (null, (details) => controller.slide(details.delta.dy, min: controller.extendable.min)),
-      Layout.btt => (null, (details) => controller.slide(-details.delta.dy, min: controller.extendable.min)),
-    };
+    final translate = layout.translate(style);
+    void drag(DragUpdateDetails details) {
+      final origin = controller.extendable.min ? _origin!.min : _origin!.max;
+      controller.slide(origin + translate(details.localPosition - _pointerOrigin!), min: controller.extendable.min);
+    }
+
+    return layout.vertical ? (null, drag) : (drag, null);
   }
 }
 

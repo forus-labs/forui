@@ -203,7 +203,7 @@ final class DiscreteSelection extends FSliderSelection {
         to: switch ((min, extend)) {
           (true, true) => _ticks.lastKeyBefore(offset.min) ?? offset.min,
           (true, false) => _ticks.firstKeyAfter(offset.min) ?? offset.min,
-          (false, true) => _ticks.lastKeyBefore(offset.max) ?? offset.max,
+          (false, true) => _ticks.firstKeyAfter(offset.max) ?? offset.max,
           (false, false) => _ticks.lastKeyBefore(offset.max) ?? offset.max,
         },
       );

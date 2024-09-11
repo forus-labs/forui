@@ -32,8 +32,8 @@ abstract class FSliderController extends ChangeNotifier {
   static FSliderInteraction get _platform =>
       touchPlatforms.contains(defaultTargetPlatform) ? FSliderInteraction.slide : FSliderInteraction.tapAndSlideThumb;
 
-  /// The slider thumb's tooltip controller.
-  final FTooltipController tooltip;
+  /// The slider thumb's tooltip controller, or null if the tooltip is disabled.
+  final FTooltipController? tooltip;
 
   /// The allowed ways to interaction with the slider.
   ///
@@ -76,10 +76,10 @@ abstract class FSliderController extends ChangeNotifier {
     }
   }
 
-  /// Slides the active track by the given [delta] on the [min] edge, in logical pixels.
+  /// Slides the active track to the given [offset] on the [min] edge, in logical pixels.
   ///
   /// The delta is relative to the origin defined by [FSlider.layout].
-  void slide(double delta, {required bool min}) {
+  void slide(double offset, {required bool min}) {
     if (allowedInteraction == FSliderInteraction.tap) {
       return;
     }
@@ -87,8 +87,7 @@ abstract class FSliderController extends ChangeNotifier {
     assert(min ? extendable.min : extendable.max, 'Slider is not extendable at the ${min ? 'min' : 'max'} edge.');
 
     if (_selection case final selection?) {
-      final current = min ? selection.rawOffset.min : selection.rawOffset.max;
-      _set(selection.move(min: min, to: current + delta));
+      _set(selection.move(min: min, to: offset));
     }
   }
 
@@ -136,24 +135,24 @@ class FContinuousSliderController extends FSliderController {
 
   /// Creates a [FContinuousSliderController] for selecting a single value.
   FContinuousSliderController({
-    required TickerProvider vsync,
     required super.selection,
     this.stepPercentage = 0.05,
+    TickerProvider? vsync,
     FSliderInteraction? allowedInteraction,
     super.minExtendable,
   })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
         super(
-          tooltip: FTooltipController(vsync: vsync),
+          tooltip: vsync == null ? null : FTooltipController(vsync: vsync),
           allowedInteraction: allowedInteraction ?? FSliderController._platform,
         );
 
   /// Creates a [FContinuousSliderController] for selecting a range.
   FContinuousSliderController.range({
-    required TickerProvider vsync,
     required super.selection,
     this.stepPercentage = 0.05,
+    TickerProvider? vsync,
   })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
-        super.range(tooltip: FTooltipController(vsync: vsync));
+        super.range(tooltip: vsync == null ? null : FTooltipController(vsync: vsync));
 
   @override
   void attach(double extent, List<FSliderMark> _) {
@@ -176,20 +175,20 @@ class FContinuousSliderController extends FSliderController {
 class FDiscreteSliderController extends FSliderController {
   /// Creates a [FDiscreteSliderController] for selecting a single value.
   FDiscreteSliderController({
-    required TickerProvider vsync,
     required super.selection,
+    TickerProvider? vsync,
     FSliderInteraction? allowedInteraction,
     super.minExtendable,
   }) : super(
-          tooltip: FTooltipController(vsync: vsync),
+          tooltip: vsync == null ? null : FTooltipController(vsync: vsync),
           allowedInteraction: allowedInteraction ?? FSliderController._platform,
         );
 
   /// Creates a [FDiscreteSliderController] for selecting a range.
   FDiscreteSliderController.range({
-    required TickerProvider vsync,
     required super.selection,
-  }) : super.range(tooltip: FTooltipController(vsync: vsync));
+    TickerProvider? vsync,
+  }) : super.range(tooltip: vsync == null ? null : FTooltipController(vsync: vsync));
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
