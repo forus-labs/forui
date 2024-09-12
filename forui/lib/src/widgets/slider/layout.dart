@@ -77,7 +77,7 @@ class _SliderLayoutState extends State<SliderLayout> {
         child: child!,
       ),
       child: CustomMultiChildLayout(
-        delegate: _SliderLayoutDelegate(widget.controller),
+        delegate: _SliderLayoutDelegate(widget.controller, widget.layout),
         children: [
           // for (final mark in widget.marks)
           // if (mark case FSliderMark(:final style, :final label?))
@@ -92,16 +92,7 @@ class _SliderLayoutState extends State<SliderLayout> {
             id: _SliderLayoutDelegate._track,
             child: const Track(),
           ),
-          if (widget.controller.extendable.min)
-            LayoutId(
-              id: _SliderLayoutDelegate._minThumb,
-              child: const Thumb(min: true),
-            ),
-          if (widget.controller.extendable.max)
-            LayoutId(
-              id: _SliderLayoutDelegate._maxThumb,
-              child: const Thumb(min: false),
-            ),
+
         ],
       ),
     );
@@ -110,24 +101,18 @@ class _SliderLayoutState extends State<SliderLayout> {
 
 class _SliderLayoutDelegate extends MultiChildLayoutDelegate {
   static final _track = UniqueKey();
-  static final _minThumb = UniqueKey();
-  static final _maxThumb = UniqueKey();
 
   final FSliderController controller;
+  final Layout layout;
 
-  _SliderLayoutDelegate(this.controller);
+  _SliderLayoutDelegate(this.controller, this.layout);
 
   @override
   void performLayout(Size size) {
     final track = layoutChild(_track, BoxConstraints.loose(size));
-    final thumb = layoutChild(_maxThumb, BoxConstraints.loose(size));
-
-    if (track.height < thumb.height) {
-      positionChild(_track, Offset(0, (thumb.height - track.height) / 2));
-      positionChild(_maxThumb, Offset(controller.selection.rawExtent.total * controller.selection.offset.max, 0));
-    }
+    positionChild(_track, Offset.zero);
   }
 
   @override
-  bool shouldRelayout(covariant MultiChildLayoutDelegate oldDelegate) => true;
+  bool shouldRelayout(covariant _SliderLayoutDelegate old) => controller != old.controller || layout != old.layout;
 }
