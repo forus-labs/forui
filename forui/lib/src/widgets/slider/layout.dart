@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
-import 'package:forui/src/widgets/slider/thumb.dart';
 import 'package:forui/src/widgets/slider/track.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart' hide Offset;

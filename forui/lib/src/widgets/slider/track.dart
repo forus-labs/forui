@@ -74,19 +74,19 @@ class _GestureDetectorState extends State<_GestureDetector> {
     void start(DragStartDetails details) {
       _origin = controller.selection.rawOffset;
       _pointerOrigin = details.localPosition;
-      controller.tooltip?.show();
+      controller.tooltips.show();
     }
 
     void end(DragEndDetails details) {
       _origin = null;
       _pointerOrigin = null;
-      controller.tooltip?.hide();
+      controller.tooltips.hide();
     }
 
     if (layout.vertical) {
       return GestureDetector(
         onTapDown: _tap(controller, style, layout),
-        onTapUp: (_) => controller.tooltip?.hide(),
+        onTapUp: (_) => controller.tooltips.hide(),
         onVerticalDragStart: start,
         onVerticalDragUpdate: _drag(controller, style, layout),
         onVerticalDragEnd: end,
@@ -95,7 +95,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     } else {
       return GestureDetector(
         onTapDown: _tap(controller, style, layout),
-        onTapUp: (_) => controller.tooltip?.hide(),
+        onTapUp: (_) => controller.tooltips.hide(),
         onHorizontalDragStart: start,
         onHorizontalDragUpdate: _drag(controller, style, layout),
         onHorizontalDragEnd: end,
@@ -114,12 +114,13 @@ class _GestureDetectorState extends State<_GestureDetector> {
         final translated => translated,
       };
 
-      controller.tooltip?.show();
-      controller.tap(offset);
+      controller
+        ..tooltips.show()
+        ..tap(offset);
     }
 
     const tappable = {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb};
-    return tappable.contains(controller.allowedInteraction) ? down : (_) => controller.tooltip?.show();
+    return tappable.contains(controller.allowedInteraction) ? down : (_) => controller.tooltips.show();
   }
 
   GestureDragUpdateCallback? _drag(FSliderController controller, FSliderStyle style, Layout layout) {

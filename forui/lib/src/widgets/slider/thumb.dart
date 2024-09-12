@@ -34,13 +34,26 @@ class Thumb extends StatefulWidget {
   }
 }
 
-class _ThumbState extends State<Thumb> {
+class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
+  late FSliderController _controller;
+  late final FTooltipController _tooltip;
   MouseCursor _cursor = SystemMouseCursors.grab;
   ({double min, double max})? _origin;
 
   @override
+  void initState() {
+    super.initState();
+    _tooltip = FTooltipController(vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _controller = InheritedController.of(context)..tooltips.add(_tooltip);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final controller = InheritedController.of(context);
     final InheritedData(
       :style,
       :layout,
@@ -50,27 +63,29 @@ class _ThumbState extends State<Thumb> {
     ) = InheritedData.of(context);
 
     String? increasedValue;
-    if (controller.selection.step(min: widget.min, extend: !widget.min) case final selection
-        when controller.selection != selection) {
+    if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
+        when _controller.selection != selection) {
       increasedValue = semanticValueFormatterCallback(offset(selection));
     }
 
     String? decreasedValue;
-    if (controller.selection.step(min: widget.min, extend: widget.min) case final selection
-        when controller.selection != selection) {
+    if (_controller.selection.step(min: widget.min, extend: widget.min) case final selection
+        when _controller.selection != selection) {
       decreasedValue = semanticValueFormatterCallback(offset(selection));
+      print(offset(_controller.selection));
+      print(offset(selection));
     }
 
     Widget thumb = Semantics(
       enabled: enabled,
-      value: semanticValueFormatterCallback(offset(controller.selection)),
+      value: semanticValueFormatterCallback(offset(_controller.selection)),
       increasedValue: increasedValue,
       decreasedValue: decreasedValue,
       child: FocusableActionDetector(
         shortcuts: _shortcuts(layout),
         actions: {
-          _ExtendIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: true)),
-          _ShrinkIntent: CallbackAction(onInvoke: (_) => controller.step(min: widget.min, extend: false)),
+          _ExtendIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: true)),
+          _ShrinkIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: false)),
         },
         enabled: enabled,
         mouseCursor: enabled ? _cursor : MouseCursor.defer,
@@ -92,38 +107,38 @@ class _ThumbState extends State<Thumb> {
     );
 
     if (enabled) {
-      final (horizontal, vertical) = _gestures(controller, style, layout);
+      final (horizontal, vertical) = _gestures(_controller, style, layout);
       thumb = GestureDetector(
         onTapDown: (_) {
           setState(() => _cursor = SystemMouseCursors.grabbing);
-          controller.tooltip?.show();
+          _controller.tooltips.show();
         },
         onTapUp: (_) {
           setState(() => _cursor = SystemMouseCursors.grab);
-          controller.tooltip?.hide();
+          _controller.tooltips.show();
         },
-        onHorizontalDragStart: (_) => _origin = controller.selection.rawOffset,
+        onHorizontalDragStart: (_) => _origin = _controller.selection.rawOffset,
         onHorizontalDragUpdate: horizontal,
         onHorizontalDragEnd: (_) {
           setState(() => _cursor = SystemMouseCursors.grab);
           _origin = null;
-          controller.tooltip?.hide();
+          _controller.tooltips.hide();
         },
-        onVerticalDragStart: (_) => _origin = controller.selection.rawOffset,
+        onVerticalDragStart: (_) => _origin = _controller.selection.rawOffset,
         onVerticalDragUpdate: vertical,
         onVerticalDragEnd: (_) {
           setState(() => _cursor = SystemMouseCursors.grab);
           _origin = null;
-          controller.tooltip?.hide();
+          _controller.tooltips.hide();
         },
         child: thumb,
       );
     }
 
-    if (controller.tooltip != null) {
+    if (_controller.tooltips.enabled) {
       thumb = FTooltip(
-        controller: controller.tooltip,
-        tipBuilder: (context, style, _) => tooltipBuilder(style, offset(controller.selection)),
+        controller: _tooltip,
+        tipBuilder: (context, style, _) => tooltipBuilder(style, offset(_controller.selection)),
         longPress: false,
         hover: false,
         child: thumb,
@@ -170,6 +185,13 @@ class _ThumbState extends State<Thumb> {
     }
 
     return layout.vertical ? (null, drag) : (drag, null);
+  }
+
+  @override
+  void dispose() {
+    _controller.tooltips.remove(_tooltip);
+    _tooltip.dispose();
+    super.dispose();
   }
 }
 
@@ -244,10 +266,9 @@ final class FSliderThumbStyle with Diagnosticable {
 @internal
 extension Layouts on Layout {
   double Function(Offset) translate(FSliderStyle style) => switch (this) {
-    Layout.ltr => (offset) => offset.dx - style.thumbStyle.dimension / 2,
-    Layout.rtl => (offset) => -offset.dx + style.thumbStyle.dimension / 2,
-    Layout.ttb => (offset) => offset.dy - style.thumbStyle.dimension / 2,
-    Layout.btt => (offset) => -offset.dy + style.thumbStyle.dimension / 2,
-  };
+        Layout.ltr => (offset) => offset.dx - style.thumbStyle.dimension / 2,
+        Layout.rtl => (offset) => -offset.dx + style.thumbStyle.dimension / 2,
+        Layout.ttb => (offset) => offset.dy - style.thumbStyle.dimension / 2,
+        Layout.btt => (offset) => -offset.dy + style.thumbStyle.dimension / 2,
+      };
 }
-

@@ -1,6 +1,5 @@
 import 'dart:collection';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/platform.dart';
@@ -32,8 +31,8 @@ abstract class FSliderController extends ChangeNotifier {
   static FSliderInteraction get _platform =>
       touchPlatforms.contains(defaultTargetPlatform) ? FSliderInteraction.slide : FSliderInteraction.tapAndSlideThumb;
 
-  /// The slider thumb's tooltip controller, or null if the tooltip is disabled.
-  final FTooltipController? tooltip;
+  /// True if the registered tooltip(s) should be shown when the user interacts with the slider. Defaults to true.
+  final FSliderTooltipsController tooltips;
 
   /// The allowed ways to interaction with the slider.
   ///
@@ -51,22 +50,26 @@ abstract class FSliderController extends ChangeNotifier {
 
   /// Creates a [FSliderController] for selecting a single value.
   FSliderController({
-    required this.tooltip,
     required this.allowedInteraction,
     required FSliderSelection selection,
+    bool tooltips = true,
     bool minExtendable = false,
-  })  : extendable = (min: minExtendable, max: !minExtendable),
+  })  : tooltips = FSliderTooltipsController(enabled: tooltips),
+        extendable = (min: minExtendable, max: !minExtendable),
         _initialSelection = selection;
 
   /// Creates a [FSliderController] for selecting a range.
   FSliderController.range({
-    required this.tooltip,
     required FSliderSelection selection,
-  })  : allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+    bool tooltips = true,
+  })  : tooltips = FSliderTooltipsController(enabled: tooltips),
+        allowedInteraction = FSliderInteraction.tapAndSlideThumb,
         extendable = (min: true, max: true),
         _initialSelection = selection;
 
-  /// Attaches the controller to a slider with the given extent and marks.
+  /// Registers the controller to a slider with the given extent and marks.
+  ///
+  /// A controller can only be attached to a single slider at a time.
   void attach(double extent, List<FSliderMark> marks);
 
   /// Moves the active track on the [min] edge to the previous/next step.
@@ -137,22 +140,19 @@ class FContinuousSliderController extends FSliderController {
   FContinuousSliderController({
     required super.selection,
     this.stepPercentage = 0.05,
-    TickerProvider? vsync,
+    super.tooltips = true,
     FSliderInteraction? allowedInteraction,
     super.minExtendable,
   })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
-        super(
-          tooltip: vsync == null ? null : FTooltipController(vsync: vsync),
-          allowedInteraction: allowedInteraction ?? FSliderController._platform,
-        );
+        super(allowedInteraction: allowedInteraction ?? FSliderController._platform);
 
   /// Creates a [FContinuousSliderController] for selecting a range.
   FContinuousSliderController.range({
     required super.selection,
     this.stepPercentage = 0.05,
-    TickerProvider? vsync,
+    super.tooltips = true,
   })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
-        super.range(tooltip: vsync == null ? null : FTooltipController(vsync: vsync));
+        super.range();
 
   @override
   void attach(double extent, List<FSliderMark> _) {
@@ -176,19 +176,16 @@ class FDiscreteSliderController extends FSliderController {
   /// Creates a [FDiscreteSliderController] for selecting a single value.
   FDiscreteSliderController({
     required super.selection,
-    TickerProvider? vsync,
     FSliderInteraction? allowedInteraction,
+    super.tooltips = true,
     super.minExtendable,
-  }) : super(
-          tooltip: vsync == null ? null : FTooltipController(vsync: vsync),
-          allowedInteraction: allowedInteraction ?? FSliderController._platform,
-        );
+  }) : super(allowedInteraction: allowedInteraction ?? FSliderController._platform);
 
   /// Creates a [FDiscreteSliderController] for selecting a range.
   FDiscreteSliderController.range({
     required super.selection,
-    TickerProvider? vsync,
-  }) : super.range(tooltip: vsync == null ? null : FTooltipController(vsync: vsync));
+    super.tooltips = true,
+  }) : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
