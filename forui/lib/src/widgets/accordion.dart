@@ -11,23 +11,63 @@ import 'package:forui/src/foundation/util.dart';
 import 'package:meta/meta.dart';
 
 /// A controller that stores the expanded state of an [FAccordion].
-class FAccordionController extends ValueNotifier<bool> {
-  bool _expanded;
+class FAccordionController extends ChangeNotifier {
+  late final AnimationController _animation;
+  late final Animation<double> _expand;
 
   /// Creates a [FAccordionController].
   FAccordionController({
+    required TickerProvider vsync,
+    duration = const Duration(milliseconds: 500),
     bool? initiallyExpanded,
-  })  : _expanded = initiallyExpanded ?? true,
-        super(initiallyExpanded ?? true);
+  }) {
+    _animation = AnimationController(
+      duration: duration,
+      value: initiallyExpanded ?? true ? 1.0 : 0.0,
+      vsync: vsync,
+    );
+    _expand = Tween<double>(
+      begin: 0,
+      end: 100,
+    ).animate(
+      CurvedAnimation(
+        curve: Curves.ease,
+        parent: _animation,
+      ),
+    )..addListener(notifyListeners);
+  }
 
-  /// whether the accordion is expanded.
-  bool get expanded => _expanded;
+  /// Convenience method for toggling the current [expanded] status.
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> toggle() async => expanded ? close() : expand();
 
-  /// Toggles the expansion state of the accordion.
-  bool toggle() {
-    _expanded = !_expanded;
+  /// Expands the accordion.
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> expand() async {
+    await _animation.forward();
     notifyListeners();
-    return _expanded;
+  }
+
+  /// closes the accordion.
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> close() async {
+    await _animation.reverse();
+    notifyListeners();
+  }
+
+  /// True if the accordion is expanded. False if it is closed.
+  bool get expanded => _animation.value == 1.0;
+
+  /// The animation value.
+  double get value => _expand.value;
+
+  @override
+  void dispose() {
+    _animation.dispose();
+    super.dispose();
   }
 }
 
@@ -43,7 +83,7 @@ class FAccordion extends StatefulWidget {
   final String title;
 
   /// The accordion's controller.
-  final FAccordionController controller;
+  final FAccordionController? controller;
 
   /// The child.
   final Widget child;
@@ -51,9 +91,9 @@ class FAccordion extends StatefulWidget {
   /// Creates an [FAccordion].
   const FAccordion({
     required this.child,
-    required this.controller,
-    this.title = '',
     this.style,
+    this.controller,
+    this.title = '',
     super.key,
   });
 
@@ -72,100 +112,99 @@ class FAccordion extends StatefulWidget {
 }
 
 class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController controller;
+  late FAccordionController _controller;
   bool _hovered = false;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      value: widget.controller.expanded ? 1.0 : 0.0,
-      vsync: this,
-    );
-    animation = Tween<double>(
-      begin: 0,
-      end: 100,
-    ).animate(
-      CurvedAnimation(
-        curve: Curves.ease,
-        parent: controller,
-      ),
-    )..addListener(() {
-        setState(() {});
-      });
+    _controller = widget.controller ?? FAccordionController(vsync: this);
+  }
+
+  @override
+  void didUpdateWidget(covariant FAccordion old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      }
+
+      _controller = widget.controller ?? FAccordionController(vsync: this);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.accordionStyle;
-    return Column(
-      children: [
-        MouseRegion(
-          onEnter: (_) => setState(() => _hovered = true),
-          onExit: (_) => setState(() => _hovered = false),
-          child: FTappable(
-            onPress: () => widget.controller.toggle() ? controller.forward() : controller.reverse(),
-            child: Container(
-              padding: style.titlePadding,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: merge(
-                      // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-                      textHeightBehavior: const TextHeightBehavior(
-                        applyHeightToFirstAscent: false,
-                        applyHeightToLastDescent: false,
-                      ),
-                      style: TextStyle(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
-                      child: Text(
-                        widget.title,
-                        style: style.title,
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) => Column(
+        children: [
+          MouseRegion(
+            onEnter: (_) => setState(() => _hovered = true),
+            onExit: (_) => setState(() => _hovered = false),
+            child: FTappable(
+              onPress: () => _controller.toggle(),
+              child: Container(
+                padding: style.titlePadding,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: merge(
+                        // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+                        textHeightBehavior: const TextHeightBehavior(
+                          applyHeightToFirstAscent: false,
+                          applyHeightToLastDescent: false,
+                        ),
+                        style: TextStyle(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
+                        child: Text(
+                          widget.title,
+                          style: style.title,
+                        ),
                       ),
                     ),
-                  ),
-                  Transform.rotate(
-                    angle: (animation.value / 100 * -180 + 90) * math.pi / 180.0,
-                    child: style.icon,
-                  ),
-                ],
+                    Transform.rotate(
+                      angle: (_controller.value / 100 * -180 + 90) * math.pi / 180.0,
+                      child: style.icon,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
-        // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
-        // child to layout at a smaller size while the amount of padding remains the same.
-        _Expandable(
-          percentage: animation.value / 100.0,
-          child: ClipRect(
-            clipper: _Clipper(percentage: animation.value / 100.0),
-            child: Padding(
-              padding: style.contentPadding,
-              child: widget.child,
+          // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
+          // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
+          // child to layout at a smaller size while the amount of padding remains the same.
+          _Expandable(
+            percentage: _controller.value / 100.0,
+            child: ClipRect(
+              clipper: _Clipper(percentage: _controller.value / 100.0),
+              child: Padding(
+                padding: style.contentPadding,
+                child: widget.child,
+              ),
             ),
           ),
-        ),
-        FDivider(
-          style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: style.dividerColor),
-        ),
-      ],
+          FDivider(
+            style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: style.dividerColor),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('animation', animation))
-      ..add(DiagnosticsProperty('controller', controller));
+    properties.add(DiagnosticsProperty('controller', _controller));
   }
 }
 
