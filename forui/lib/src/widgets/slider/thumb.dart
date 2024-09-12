@@ -54,31 +54,24 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(
-      :style,
-      :layout,
-      :tooltipBuilder,
-      :semanticValueFormatterCallback,
-      :enabled,
-    ) = InheritedData.of(context);
+    final InheritedData(:style, :layout, :tooltipBuilder, :semanticValueFormatterCallback, :enabled) =
+        InheritedData.of(context);
 
     String? increasedValue;
     if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
         when _controller.selection != selection) {
-      increasedValue = semanticValueFormatterCallback(offset(selection));
+      increasedValue = semanticValueFormatterCallback(_offset(selection));
     }
 
     String? decreasedValue;
     if (_controller.selection.step(min: widget.min, extend: widget.min) case final selection
         when _controller.selection != selection) {
-      decreasedValue = semanticValueFormatterCallback(offset(selection));
-      print(offset(_controller.selection));
-      print(offset(selection));
+      decreasedValue = semanticValueFormatterCallback(_offset(selection));
     }
 
     Widget thumb = Semantics(
       enabled: enabled,
-      value: semanticValueFormatterCallback(offset(_controller.selection)),
+      value: semanticValueFormatterCallback(_offset(_controller.selection)),
       increasedValue: increasedValue,
       decreasedValue: decreasedValue,
       child: FocusableActionDetector(
@@ -106,49 +99,65 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
       ),
     );
 
-    if (enabled) {
-      final (horizontal, vertical) = _gestures(_controller, style, layout);
-      thumb = GestureDetector(
-        onTapDown: (_) {
-          setState(() => _cursor = SystemMouseCursors.grabbing);
-          _controller.tooltips.show();
-        },
-        onTapUp: (_) {
-          setState(() => _cursor = SystemMouseCursors.grab);
-          _controller.tooltips.show();
-        },
-        onHorizontalDragStart: (_) => _origin = _controller.selection.rawOffset,
-        onHorizontalDragUpdate: horizontal,
-        onHorizontalDragEnd: (_) {
-          setState(() => _cursor = SystemMouseCursors.grab);
-          _origin = null;
-          _controller.tooltips.hide();
-        },
-        onVerticalDragStart: (_) => _origin = _controller.selection.rawOffset,
-        onVerticalDragUpdate: vertical,
-        onVerticalDragEnd: (_) {
-          setState(() => _cursor = SystemMouseCursors.grab);
-          _origin = null;
-          _controller.tooltips.hide();
-        },
-        child: thumb,
-      );
+    if (!enabled) {
+      return thumb;
     }
 
     if (_controller.tooltips.enabled) {
       thumb = FTooltip(
         controller: _tooltip,
-        tipBuilder: (context, style, _) => tooltipBuilder(style, offset(_controller.selection)),
+        tipBuilder: (context, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
         longPress: false,
         hover: false,
         child: thumb,
       );
     }
 
-    return thumb;
+    void down(TapDownDetails details) {
+      setState(() => _cursor = SystemMouseCursors.grabbing);
+      _controller.tooltips.show();
+    }
+
+    void up(TapUpDetails details) {
+      setState(() => _cursor = SystemMouseCursors.grab);
+      _controller.tooltips.hide();
+    }
+
+    void start(DragStartDetails details) {
+      setState(() => _cursor = SystemMouseCursors.grabbing);
+      _origin = null;
+      _origin = _controller.selection.rawOffset;
+      _controller.tooltips.show();
+    }
+
+    void end(DragEndDetails details) {
+      setState(() => _cursor = SystemMouseCursors.grab);
+      _origin = null;
+      _controller.tooltips.hide();
+    }
+
+    if (layout.vertical) {
+      return GestureDetector(
+        onTapDown: down,
+        onTapUp: up,
+        onVerticalDragStart: start,
+        onVerticalDragUpdate: _drag(_controller, style, layout),
+        onVerticalDragEnd: end,
+        child: thumb,
+      );
+    } else {
+      return GestureDetector(
+        onTapDown: down,
+        onTapUp: up,
+        onHorizontalDragStart: start,
+        onHorizontalDragUpdate: _drag(_controller, style, layout),
+        onHorizontalDragEnd: end,
+        child: thumb,
+      );
+    }
   }
 
-  double offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
+  double _offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
 
   Map<ShortcutActivator, Intent> _shortcuts(Layout layout) => switch ((layout, widget.min)) {
         (Layout.ltr, true) || (Layout.rtl, false) => const {
@@ -169,22 +178,19 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           },
       };
 
-  (GestureDragUpdateCallback?, GestureDragUpdateCallback?) _gestures(
-    FSliderController controller,
-    FSliderStyle style,
-    Layout layout,
-  ) {
+  GestureDragUpdateCallback? _drag(FSliderController controller, FSliderStyle style, Layout layout) {
     if (controller.allowedInteraction == FSliderInteraction.tap) {
-      return (null, null);
+      return null;
     }
 
-    final translate = layout.translate(style);
+    final translate = layout.translateThumbDrag(style);
+
     void drag(DragUpdateDetails details) {
       final origin = widget.min ? _origin!.min : _origin!.max;
       controller.slide(origin + translate(details.localPosition), min: widget.min);
     }
 
-    return layout.vertical ? (null, drag) : (drag, null);
+    return drag;
   }
 
   @override
@@ -265,10 +271,10 @@ final class FSliderThumbStyle with Diagnosticable {
 
 @internal
 extension Layouts on Layout {
-  double Function(Offset) translate(FSliderStyle style) => switch (this) {
-        Layout.ltr => (offset) => offset.dx - style.thumbStyle.dimension / 2,
-        Layout.rtl => (offset) => -offset.dx + style.thumbStyle.dimension / 2,
-        Layout.ttb => (offset) => offset.dy - style.thumbStyle.dimension / 2,
-        Layout.btt => (offset) => -offset.dy + style.thumbStyle.dimension / 2,
+  double Function(Offset) translateThumbDrag(FSliderStyle style) => switch (this) {
+        Layout.ltr => (delta) => delta.dx - style.thumbStyle.dimension / 2,
+        Layout.rtl => (delta) => -delta.dx + style.thumbStyle.dimension / 2,
+        Layout.ttb => (delta) => delta.dy - style.thumbStyle.dimension / 2,
+        Layout.btt => (delta) => -delta.dy + style.thumbStyle.dimension / 2,
       };
 }

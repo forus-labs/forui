@@ -59,7 +59,7 @@ sealed class FSliderSelection with Diagnosticable {
         assert(extent.max >= extent.min, 'Max extent must be > min extent, but is ${extent.max}.'),
         assert(extent.max <= 1, 'Max extent must be <= 1, but is ${extent.max}.'),
         assert(offset.min >= 0, 'Min offset must be >= 0, but is ${offset.min}.'),
-        assert(offset.max >= offset.min, 'Max offset must be > min offset, but is ${offset.max}.'),
+        assert(offset.max >= offset.min, 'Max offset must be > min offset, but is ${offset.max} and ${offset.min}.'),
         assert(offset.max <= 1, 'Max offset must be <=> 1, but is ${offset.max}.');
 
   /// Returns a [FSliderSelection] which [min] edge is extended/shrunk to the previous/next step.
@@ -143,12 +143,16 @@ final class ContinuousSelection extends FSliderSelection {
 
   @override
   ContinuousSelection move({required bool min, required double to}) {
+    if ((min && to < 0) || (!min && rawExtent.total < to) || (min ? rawOffset.max < to : to < rawOffset.min)) {
+      return this;
+    }
+
     final (minOffset, maxOffset) = switch (min) {
-      true when rawExtent.max - to < rawExtent.min => (rawOffset.max - rawExtent.min, rawOffset.max),
-      true when rawExtent.max - to > rawExtent.max => (rawOffset.max - rawExtent.max, rawOffset.max),
+      true when rawOffset.max - to < rawExtent.min => (rawOffset.max - rawExtent.min, rawOffset.max),
+      true when rawOffset.max - to > rawExtent.max => (rawOffset.max - rawExtent.max, rawOffset.max),
       true => (to, rawOffset.max),
-      false when to - rawExtent.min < rawExtent.min => (rawOffset.min, rawOffset.min + rawExtent.min),
-      false when to - rawExtent.min > rawExtent.max => (rawOffset.min, rawOffset.min + rawExtent.max),
+      false when to - rawOffset.min < rawExtent.min => (rawOffset.min, rawOffset.min + rawExtent.min),
+      false when to - rawOffset.min > rawExtent.max => (rawOffset.min, rawOffset.min + rawExtent.max),
       false => (rawOffset.min, to),
     };
 
@@ -250,6 +254,10 @@ final class DiscreteSelection extends FSliderSelection {
         ),
       false => (offset.min, to),
     };
+
+    if (maxOffset < minOffset) {
+      return this;
+    }
 
     return DiscreteSelection._(
       ticks: _ticks,

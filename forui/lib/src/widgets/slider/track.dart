@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
-import 'package:forui/src/widgets/slider/thumb.dart' hide Layouts;
+import 'package:forui/src/widgets/slider/thumb.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/src/widgets/slider/inherited_data.dart';
@@ -105,7 +105,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
   }
 
   GestureTapDownCallback _tap(FSliderController controller, FSliderStyle style, Layout layout) {
-    final translate = layout.translate(style);
+    final translate = layout.translateTrackTap(controller.selection.rawExtent.total, style);
 
     void down(TapDownDetails details) {
       final offset = switch (translate(details.localPosition)) {
@@ -133,7 +133,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       'Slider must be extendable at one edge when ${controller.allowedInteraction}.',
     );
 
-    final translate = layout.translate(style);
+    final translate = layout.translateTrackDrag(style);
 
     void drag(DragUpdateDetails details) {
       final origin = controller.extendable.min ? _origin!.min : _origin!.max;
@@ -222,11 +222,18 @@ class _ActiveTrack extends StatelessWidget {
 
 @internal
 extension Layouts on Layout {
-  double Function(Offset) translate(FSliderStyle style) => switch (this) {
+  double Function(Offset) translateTrackTap(double extent, FSliderStyle style) => switch (this) {
         Layout.ltr => (offset) => offset.dx - style.thumbStyle.dimension / 2,
-        Layout.rtl => (offset) => -offset.dx,
+        Layout.rtl => (offset) => extent - offset.dx + style.thumbStyle.dimension / 2,
         Layout.ttb => (offset) => offset.dy - style.thumbStyle.dimension / 2,
-        Layout.btt => (offset) => -offset.dy,
+        Layout.btt => (offset) => extent - offset.dy + style.thumbStyle.dimension / 2,
+      };
+
+  double Function(Offset) translateTrackDrag(FSliderStyle style) => switch (this) {
+        Layout.ltr => (delta) => delta.dx - style.thumbStyle.dimension / 2,
+        Layout.rtl => (delta) => -delta.dx,
+        Layout.ttb => (delta) => delta.dy - style.thumbStyle.dimension / 2,
+        Layout.btt => (delta) => -delta.dy,
       };
 
   Positioned Function({required double offset, required Widget child}) get position => switch (this) {
