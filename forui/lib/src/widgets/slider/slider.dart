@@ -126,15 +126,15 @@ final class FSliderStyles with Diagnosticable {
           markStyles: (
             horizontal: FSliderMarkStyle(
               tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
               labelAnchor: Alignment.topCenter,
-              labelOffset: 10,
+              labelOffset: 7.5,
             ),
             vertical: FSliderMarkStyle(
               tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
               labelAnchor: Alignment.centerRight,
-              labelOffset: -10,
+              labelOffset: -7.5,
             ),
           ),
           tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -149,15 +149,15 @@ final class FSliderStyles with Diagnosticable {
           markStyles: (
             horizontal: FSliderMarkStyle(
               tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground.withOpacity(0.7)),
+              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
               labelAnchor: Alignment.topCenter,
-              labelOffset: 10,
+              labelOffset: 7.5,
             ),
             vertical: FSliderMarkStyle(
               tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground.withOpacity(0.7)),
+              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
               labelAnchor: Alignment.centerRight,
-              labelOffset: -10,
+              labelOffset: -7.5,
             ),
           ),
           tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
