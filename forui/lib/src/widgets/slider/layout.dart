@@ -157,7 +157,6 @@ class _SliderLayoutDelegate extends MultiChildLayoutDelegate {
   }
 
   Rect _rect(BoxConstraints constraints, FSliderMark mark, Offset anchor, FSliderMarkStyle markStyle) {
-    print(mark);
     final size = layoutChild(mark, constraints);
     final rect = anchor & size;
     return rect.shift(anchor - markStyle.labelAnchor.relative(to: size, origin: anchor));

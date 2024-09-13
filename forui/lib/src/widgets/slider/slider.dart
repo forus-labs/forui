@@ -162,7 +162,7 @@ final class FSliderStyles with Diagnosticable {
           ),
           tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           thumbStyle: FSliderThumbStyle(
-            color: colorScheme.primaryForeground.withOpacity(0.7),
+            color: colorScheme.primaryForeground,
             borderColor: colorScheme.primary.withOpacity(0.7),
           ),
         );
@@ -213,6 +213,12 @@ final class FSliderStyle with Diagnosticable {
   /// The tooltip's style.
   final FTooltipStyle tooltipStyle;
 
+  //// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
+  final Alignment tooltipTipAnchor;
+
+  /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  final Alignment tooltipThumbAnchor;
+
   /// Creates a [FSliderStyle].
   FSliderStyle({
     required this.activeColor,
@@ -220,6 +226,8 @@ final class FSliderStyle with Diagnosticable {
     required this.markStyles,
     required this.thumbStyle,
     required this.tooltipStyle,
+    this.tooltipTipAnchor = Alignment.bottomCenter,
+    this.tooltipThumbAnchor = Alignment.topCenter,
     this.crossAxisExtent = 8,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
   });
@@ -235,6 +243,8 @@ final class FSliderStyle with Diagnosticable {
     ({FSliderMarkStyle horizontal, FSliderMarkStyle vertical})? markStyles,
     FSliderThumbStyle? thumbStyle,
     FTooltipStyle? tooltipStyle,
+    Alignment? tooltipTipAnchor,
+    Alignment? tooltipThumbAnchor,
   }) =>
       FSliderStyle(
         activeColor: activeColor ?? this.activeColor,
@@ -244,6 +254,8 @@ final class FSliderStyle with Diagnosticable {
         markStyles: markStyles ?? this.markStyles,
         thumbStyle: thumbStyle ?? this.thumbStyle,
         tooltipStyle: tooltipStyle ?? this.tooltipStyle,
+        tooltipTipAnchor: tooltipTipAnchor ?? this.tooltipTipAnchor,
+        tooltipThumbAnchor: tooltipThumbAnchor ?? this.tooltipThumbAnchor,
       );
 
   @override
@@ -257,7 +269,9 @@ final class FSliderStyle with Diagnosticable {
       ..add(DiagnosticsProperty('markStyles.horizontal', markStyles.horizontal))
       ..add(DiagnosticsProperty('markStyles.vertical', markStyles.vertical))
       ..add(DiagnosticsProperty('thumbStyle', thumbStyle))
-      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle));
+      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle))
+      ..add(DiagnosticsProperty('tooltipTipAnchor', tooltipTipAnchor))
+      ..add(DiagnosticsProperty('tooltipThumbAnchor', tooltipThumbAnchor));
   }
 
   @override
@@ -271,7 +285,9 @@ final class FSliderStyle with Diagnosticable {
           borderRadius == other.borderRadius &&
           markStyles == other.markStyles &&
           thumbStyle == other.thumbStyle &&
-          tooltipStyle == other.tooltipStyle;
+          tooltipStyle == other.tooltipStyle &&
+          tooltipTipAnchor == other.tooltipTipAnchor &&
+          tooltipThumbAnchor == other.tooltipThumbAnchor;
 
   @override
   int get hashCode =>
@@ -281,5 +297,7 @@ final class FSliderStyle with Diagnosticable {
       borderRadius.hashCode ^
       markStyles.hashCode ^
       thumbStyle.hashCode ^
-      tooltipStyle.hashCode;
+      tooltipStyle.hashCode ^
+      tooltipTipAnchor.hashCode ^
+      tooltipThumbAnchor.hashCode;
 }

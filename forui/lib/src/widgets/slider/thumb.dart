@@ -37,19 +37,22 @@ class Thumb extends StatefulWidget {
 class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   late FSliderController _controller;
   late final FTooltipController _tooltip;
+  late final UniqueKey _key;
   MouseCursor _cursor = SystemMouseCursors.grab;
   ({double min, double max})? _origin;
+  bool _gesture = false;
 
   @override
   void initState() {
     super.initState();
     _tooltip = FTooltipController(vsync: this);
+    _key = widget.min ? FSliderTooltipsController.min : FSliderTooltipsController.max;
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _controller = InheritedController.of(context)..tooltips.add(_tooltip);
+    _controller = InheritedController.of(context)..tooltips.add(_key, _tooltip);
   }
 
   @override
@@ -104,36 +107,50 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
     }
 
     if (_controller.tooltips.enabled) {
-      thumb = FTooltip(
-        controller: _tooltip,
-        tipBuilder: (context, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
-        longPress: false,
-        hover: false,
-        child: thumb,
+      thumb = MouseRegion(
+        onEnter: (_) => _controller.tooltips.show(_key),
+        onExit: (_) {
+          if (!_gesture) {
+            _controller.tooltips.hide(_key);
+          }
+        },
+        child: FTooltip(
+          controller: _tooltip,
+          tipAnchor: style.tooltipTipAnchor,
+          childAnchor: style.tooltipThumbAnchor,
+          tipBuilder: (context, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
+          longPress: false,
+          hover: false,
+          child: thumb,
+        ),
       );
     }
 
     void down(TapDownDetails details) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
-      _controller.tooltips.show();
+      _gesture = true;
+      _controller.tooltips.show(_key);
     }
 
     void up(TapUpDetails details) {
       setState(() => _cursor = SystemMouseCursors.grab);
-      _controller.tooltips.hide();
+      _gesture = false;
+      _controller.tooltips.hide(_key);
     }
 
     void start(DragStartDetails details) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _origin = null;
       _origin = _controller.selection.rawOffset;
-      _controller.tooltips.show();
+      _gesture = true;
+      _controller.tooltips.show(_key);
     }
 
     void end(DragEndDetails details) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _origin = null;
-      _controller.tooltips.hide();
+      _gesture = false;
+      _controller.tooltips.hide(_key);
     }
 
     if (layout.vertical) {
@@ -195,7 +212,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _controller.tooltips.remove(_tooltip);
+    _controller.tooltips.remove(_key);
     _tooltip.dispose();
     super.dispose();
   }

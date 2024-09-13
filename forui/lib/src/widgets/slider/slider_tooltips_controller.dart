@@ -1,47 +1,69 @@
+import 'package:flutter/cupertino.dart';
 import 'package:forui/forui.dart';
 
 /// The controller for a slider's registered tooltips.
 final class FSliderTooltipsController {
+  /// The key for the min thumb.
+  static final min = UniqueKey();
+
+  /// The key for the max thumb.
+  static final max = UniqueKey();
+
   /// True if the registered tooltip(s) should be shown when the user interacts with the slider. Defaults to true.
   final bool enabled;
 
-  final Set<FTooltipController> _tooltips;
+  final Map<UniqueKey, FTooltipController> _tooltips;
 
   /// Creates a [FSliderTooltipsController].
   FSliderTooltipsController({required this.enabled}) : _tooltips = {};
 
   /// Registers the tooltip to the slider.
-  void add(FTooltipController controller) {
+  void add(UniqueKey key, FTooltipController controller) {
     if (enabled) {
-      _tooltips.add(controller);
+      _tooltips[key] = controller;
     }
   }
 
-  /// Toggles the visibility of the registered tooltips.
-  void toggle() {
-    for (final tooltip in _tooltips) {
+  /// Toggles the visibility of the tooltip with the given key, or all tooltips if none is specified.
+  void toggle([UniqueKey? key]) {
+    if (key != null) {
+      _tooltips[key]?.toggle();
+      return;
+    }
+
+    for (final tooltip in _tooltips.values) {
       tooltip.toggle();
     }
   }
 
-  /// Shows the registered tooltips.
-  void show() {
-    for (final tooltip in _tooltips) {
+  /// Shows the tooltip with the given key, or all tooltips if none is specified.
+  void show([UniqueKey? key]) {
+    if (key != null) {
+      _tooltips[key]?.show();
+      return;
+    }
+
+    for (final tooltip in _tooltips.values) {
       tooltip.show();
     }
   }
 
-  /// Hides the registered tooltips.
-  void hide() {
-    for (final tooltip in _tooltips) {
+  /// Hides the tooltip with the given key, or all tooltips if none is specified.
+  void hide([UniqueKey? key]) {
+    if (key != null) {
+      _tooltips[key]?.hide();
+      return;
+    }
+
+    for (final tooltip in _tooltips.values) {
       tooltip.hide();
     }
   }
 
   /// Removes the tooltip from the slider.
-  void remove(FTooltipController controller) {
+  void remove(UniqueKey? key) {
     if (enabled) {
-      _tooltips.remove(controller);
+      _tooltips.remove(key);
     }
   }
 }
