@@ -1,23 +1,22 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A checkbox control that allows the user to toggle between checked and not checked.
+/// A radio button that typically allows the user to choose only one of a predefined set of options.
 ///
-/// For touch devices, a [FSwitch] is generally recommended over a [FCheckbox].
+/// It is recommended to use [FSelectGroup] in conjunction with [FSelectGroupItem.radio] to create a group of radio
+/// buttons.
 ///
 /// See:
-/// * https://forui.dev/docs/checkbox for working examples.
-/// * [FCheckboxStyle] for customizing a checkbox's appearance.
-class FCheckbox extends StatelessWidget {
-  /// The style. Defaults to [FThemeData.checkboxStyle].
-  final FCheckboxStyle? style;
+/// * https://forui.dev/docs/radio for working examples.
+/// * [FRadioStyle] for customizing a radio's appearance.
+class FRadio extends StatelessWidget {
+  /// The style. Defaults to [FThemeData.radioStyle].
+  final FRadioStyle? style;
 
-  /// The label displayed next to the checkbox.
+  /// The label displayed next to the radio.
   final Widget? label;
 
   /// The description displayed below the [label].
@@ -25,25 +24,25 @@ class FCheckbox extends StatelessWidget {
 
   /// The error displayed below the [description].
   ///
-  /// If the value is present, the checkbox is in an error state.
+  /// If the value is present, the radio is in an error state.
   final Widget? error;
 
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
-  /// The current value of the checkbox.
+  /// The current value of the radio.
   final bool value;
 
-  /// Called when the user initiates a change to the FCheckBox's value: when they have checked or unchecked this box.
+  /// Called when the user initiates a change to the Fradio's value: when they have checked or unchecked this box.
   final ValueChanged<bool>? onChange;
 
-  /// Whether this checkbox is enabled. Defaults to true.
+  /// Whether this radio is enabled. Defaults to true.
   final bool enabled;
 
-  /// Whether this checkbox should focus itself if nothing else is already focused. Defaults to false.
+  /// Whether this radio should focus itself if nothing else is already focused. Defaults to false.
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this checkbox.
+  /// Defines the [FocusNode] for this radio.
   final FocusNode? focusNode;
 
   /// Handler called when the focus changes.
@@ -51,8 +50,8 @@ class FCheckbox extends StatelessWidget {
   /// Called with true if this widget's node gains focus, and false if it loses focus.
   final ValueChanged<bool>? onFocusChange;
 
-  /// Creates a [FCheckbox].
-  const FCheckbox({
+  /// Creates a [FRadio].
+  const FRadio({
     this.style,
     this.label,
     this.description,
@@ -69,7 +68,7 @@ class FCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.checkboxStyle;
+    final style = this.style ?? context.theme.radioStyle;
     final (labelState, stateStyle) = switch ((enabled, error != null)) {
       (true, false) => (FLabelState.enabled, style.enabledStyle),
       (false, false) => (FLabelState.disabled, style.disabledStyle),
@@ -95,33 +94,30 @@ class FCheckbox extends StatelessWidget {
             label: label,
             description: description,
             error: error,
-            child: AnimatedSwitcher(
-              duration: style.animationDuration,
-              switchInCurve: style.curve,
-              child: SizedBox.square(
-                key: ValueKey(value),
-                dimension: 16,
-                child: DecoratedBox(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(
-                      color: stateStyle.borderColor,
-                      width: 0.6,
-                    ),
-                    color: value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
+                    border: Border.all(color: stateStyle.borderColor),
+                    color: stateStyle.backgroundColor,
+                    shape: BoxShape.circle,
                   ),
-                  child: value
-                      ? FAssets.icons.check(
-                          height: 14,
-                          width: 14,
-                          colorFilter: ColorFilter.mode(
-                            stateStyle.iconColor,
-                            BlendMode.srcIn,
-                          ),
-                        )
-                      : const SizedBox(),
+                  child: const SizedBox.square(dimension: 10),
                 ),
-              ),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: stateStyle.selectedColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: AnimatedSize(
+                    duration: style.animationDuration,
+                    curve: style.curve,
+                    child: value ? const SizedBox.square(dimension:9) : const SizedBox.shrink(),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -144,14 +140,14 @@ class FCheckbox extends StatelessWidget {
   }
 }
 
-/// A [FCheckbox]'s style.
-class FCheckboxStyle with Diagnosticable {
-  /// The duration of the animation when the checkbox's switches between checked and unchecked.
+/// A [FRadio]'s style.
+class FRadioStyle with Diagnosticable {
+  /// The duration of the animation when the radio's switches between selected and unselected.
   ///
   /// Defaults to `const Duration(milliseconds: 100)`.
   final Duration animationDuration;
 
-  /// The curve of the animation when the checkbox's switches between checked and unchecked.
+  /// The curve of the animation when the radio's switches between selected and unselected.
   ///
   /// Defaults to [Curves.linear].
   final Curve curve;
@@ -159,54 +155,51 @@ class FCheckboxStyle with Diagnosticable {
   /// The [FLabel]'s style.
   final FLabelLayoutStyle labelLayoutStyle;
 
-  /// The [FCheckbox]'s style when it's enabled.
-  final FCheckboxStateStyle enabledStyle;
+  /// The [FRadio]'s when the radio is enabled.
+  final FRadioStateStyle enabledStyle;
 
-  /// The [FCheckbox]'s style when it's disabled.
-  final FCheckboxStateStyle disabledStyle;
+  /// The [FRadio]'s when the radio is disabled.
+  final FRadioStateStyle disabledStyle;
 
-  /// The [FCheckbox]'s style when it's in an error state.
-  final FCheckboxErrorStyle errorStyle;
+  /// The [FRadio]'s when the radio is in an error state.
+  final FRadioErrorStyle errorStyle;
 
-  /// Creates a [FCheckboxStyle].
-  FCheckboxStyle({
+  /// Creates a [FRadioStyle].
+  FRadioStyle({
+    required this.animationDuration,
+    required this.curve,
     required this.labelLayoutStyle,
     required this.enabledStyle,
     required this.disabledStyle,
     required this.errorStyle,
-    this.animationDuration = const Duration(milliseconds: 100),
-    this.curve = Curves.linear,
   });
 
-  /// Creates a [FCheckboxStyle] that inherits its properties from the given parameters.
-  FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
+  FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : animationDuration = const Duration(milliseconds: 100),
-        curve = Curves.linear,
+        curve = Curves.easeOutCirc,
         labelLayoutStyle = FLabelStyles.inherit(style: style).horizontal.layout,
-        enabledStyle = FCheckboxStateStyle(
+        enabledStyle = FRadioStateStyle(
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
           borderColor: colorScheme.primary,
-          iconColor: colorScheme.primaryForeground,
-          checkedBackgroundColor: colorScheme.primary,
-          uncheckedBackgroundColor: colorScheme.background,
+          selectedColor: colorScheme.primary,
+          backgroundColor: colorScheme.background,
         ),
-        disabledStyle = FCheckboxStateStyle(
+        disabledStyle = FRadioStateStyle(
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
           borderColor: colorScheme.primary.withOpacity(0.5),
-          iconColor: colorScheme.primaryForeground.withOpacity(0.5),
-          checkedBackgroundColor: colorScheme.primary.withOpacity(0.5),
-          uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
+          selectedColor: colorScheme.primary.withOpacity(0.5),
+          backgroundColor: colorScheme.background,
         ),
-        errorStyle = FCheckboxErrorStyle(
+        errorStyle = FRadioErrorStyle(
           labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
           borderColor: colorScheme.error,
-          iconColor: colorScheme.errorForeground,
-          checkedBackgroundColor: colorScheme.error,
-          uncheckedBackgroundColor: colorScheme.background,
+          selectedColor: colorScheme.error,
+          backgroundColor: colorScheme.background,
         );
 
   /// The [FLabel]'s style.
@@ -219,17 +212,17 @@ class FCheckboxStyle with Diagnosticable {
         ),
       );
 
-  /// Returns a copy of this [FCheckboxStyle] with the given properties replaced.
+  /// Returns a copy of this [FRadioStyle] with the given properties replaced.
   @useResult
-  FCheckboxStyle copyWith({
+  FRadioStyle copyWith({
     Duration? animationDuration,
     Curve? curve,
     FLabelLayoutStyle? labelLayoutStyle,
-    FCheckboxStateStyle? enabledStyle,
-    FCheckboxStateStyle? disabledStyle,
-    FCheckboxErrorStyle? errorStyle,
+    FRadioStateStyle? enabledStyle,
+    FRadioStateStyle? disabledStyle,
+    FRadioErrorStyle? errorStyle,
   }) =>
-      FCheckboxStyle(
+      FRadioStyle(
         animationDuration: animationDuration ?? this.animationDuration,
         curve: curve ?? this.curve,
         labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
@@ -254,7 +247,7 @@ class FCheckboxStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FCheckboxStyle &&
+      other is FRadioStyle &&
           runtimeType == other.runtimeType &&
           animationDuration == other.animationDuration &&
           curve == other.curve &&
@@ -273,20 +266,17 @@ class FCheckboxStyle with Diagnosticable {
       errorStyle.hashCode;
 }
 
-/// A checkbox state's style.
+/// A [FRadio]'s state style.
 // ignore: avoid_implementing_value_types
-class FCheckboxStateStyle with Diagnosticable implements FFormFieldStyle {
-  /// The [FCheckbox]'s border color.
+class FRadioStateStyle with Diagnosticable implements FFormFieldStyle {
+  /// The border color.
   final Color borderColor;
 
-  /// The checked [FCheckbox]'s icon's color.
-  final Color iconColor;
+  /// The selected color.
+  final Color selectedColor;
 
-  /// The checked [FCheckbox]'s background color.
-  final Color checkedBackgroundColor;
-
-  /// The unchecked [FCheckbox]'s background color.
-  final Color uncheckedBackgroundColor;
+  /// The background color.
+  final Color backgroundColor;
 
   @override
   final TextStyle labelTextStyle;
@@ -294,32 +284,29 @@ class FCheckboxStateStyle with Diagnosticable implements FFormFieldStyle {
   @override
   final TextStyle descriptionTextStyle;
 
-  /// Creates a [FCheckboxStateStyle].
-  const FCheckboxStateStyle({
+  /// Creates a [FRadioStateStyle].
+  FRadioStateStyle({
     required this.borderColor,
-    required this.iconColor,
-    required this.checkedBackgroundColor,
-    required this.uncheckedBackgroundColor,
+    required this.selectedColor,
+    required this.backgroundColor,
     required this.labelTextStyle,
     required this.descriptionTextStyle,
   });
 
-  /// Returns a copy of this [FCheckboxStateStyle] with the given properties replaced.
+  /// Returns a copy of this [FRadioStateStyle] with the given properties replaced.
   @override
   @useResult
-  FCheckboxStateStyle copyWith({
+  FRadioStateStyle copyWith({
     Color? borderColor,
-    Color? iconColor,
-    Color? checkedBackgroundColor,
-    Color? uncheckedBackgroundColor,
+    Color? selectedColor,
+    Color? backgroundColor,
     TextStyle? labelTextStyle,
     TextStyle? descriptionTextStyle,
   }) =>
-      FCheckboxStateStyle(
+      FRadioStateStyle(
         borderColor: borderColor ?? this.borderColor,
-        iconColor: iconColor ?? this.iconColor,
-        checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
-        uncheckedBackgroundColor: uncheckedBackgroundColor ?? this.uncheckedBackgroundColor,
+        selectedColor: selectedColor ?? this.selectedColor,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
       );
@@ -329,79 +316,71 @@ class FCheckboxStateStyle with Diagnosticable implements FFormFieldStyle {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('borderColor', borderColor))
-      ..add(ColorProperty('checkedIconColor', iconColor))
-      ..add(ColorProperty('checkedBackgroundColor', checkedBackgroundColor))
-      ..add(ColorProperty('uncheckedBackgroundColor', uncheckedBackgroundColor));
+      ..add(ColorProperty('selectedColor', selectedColor))
+      ..add(ColorProperty('backgroundColor', backgroundColor));
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FCheckboxStateStyle &&
+      other is FRadioStateStyle &&
           runtimeType == other.runtimeType &&
           borderColor == other.borderColor &&
-          iconColor == other.iconColor &&
-          checkedBackgroundColor == other.checkedBackgroundColor &&
-          uncheckedBackgroundColor == other.uncheckedBackgroundColor &&
+          selectedColor == other.selectedColor &&
+          backgroundColor == other.backgroundColor &&
           labelTextStyle == other.labelTextStyle &&
           descriptionTextStyle == other.descriptionTextStyle;
 
   @override
   int get hashCode =>
       borderColor.hashCode ^
-      iconColor.hashCode ^
-      checkedBackgroundColor.hashCode ^
-      uncheckedBackgroundColor.hashCode ^
+      selectedColor.hashCode ^
+      backgroundColor.hashCode ^
       labelTextStyle.hashCode ^
       descriptionTextStyle.hashCode;
 }
 
-/// A checkbox's error state style.
+/// A [FRadio]'s error style.
 // ignore: avoid_implementing_value_types
-final class FCheckboxErrorStyle extends FCheckboxStateStyle implements FFormFieldErrorStyle {
+final class FRadioErrorStyle extends FRadioStateStyle implements FFormFieldErrorStyle {
   @override
   final TextStyle errorTextStyle;
 
-  /// Creates a [FCheckboxErrorStyle].
-  FCheckboxErrorStyle({
-    required this.errorTextStyle,
+  /// Creates a [FRadioErrorStyle].
+  FRadioErrorStyle({
     required super.borderColor,
-    required super.iconColor,
+    required super.selectedColor,
+    required super.backgroundColor,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
-    required super.checkedBackgroundColor,
-    required super.uncheckedBackgroundColor,
+    required this.errorTextStyle,
   });
 
-  /// Returns a copy of this [FCheckboxErrorStyle] with the given properties replaced.
+  /// Returns a copy of this [FRadioErrorStyle] with the given properties replaced.
   @override
-  FCheckboxErrorStyle copyWith({
+  @useResult
+  FRadioErrorStyle copyWith({
+    Color? borderColor,
+    Color? selectedColor,
+    Color? backgroundColor,
     TextStyle? labelTextStyle,
     TextStyle? descriptionTextStyle,
     TextStyle? errorTextStyle,
-    Color? borderColor,
-    Color? iconColor,
-    Color? checkedBackgroundColor,
-    Color? uncheckedBackgroundColor,
   }) =>
-      FCheckboxErrorStyle(
+      FRadioErrorStyle(
+        borderColor: borderColor ?? this.borderColor,
+        selectedColor: selectedColor ?? this.selectedColor,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
         errorTextStyle: errorTextStyle ?? this.errorTextStyle,
-        borderColor: borderColor ?? this.borderColor,
-        iconColor: iconColor ?? this.iconColor,
-        checkedBackgroundColor: checkedBackgroundColor ?? this.checkedBackgroundColor,
-        uncheckedBackgroundColor: uncheckedBackgroundColor ?? this.uncheckedBackgroundColor,
       );
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      super == other &&
-          other is FCheckboxErrorStyle &&
-          runtimeType == other.runtimeType &&
-          errorTextStyle == other.errorTextStyle;
+      other is FRadioErrorStyle && runtimeType == other.runtimeType && errorTextStyle == other.errorTextStyle;
 
   @override
-  int get hashCode => super.hashCode ^ errorTextStyle.hashCode;
+  int get hashCode => errorTextStyle.hashCode;
 }

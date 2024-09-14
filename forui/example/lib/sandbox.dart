@@ -11,6 +11,7 @@ class Sandbox extends StatefulWidget {
 
 class _SandboxState extends State<Sandbox> {
   bool value = false;
+  FSelectGroupController selectGroupController = FRadioSelectGroupController(value: 1);
 
   @override
   void initState() {
@@ -24,17 +25,17 @@ class _SandboxState extends State<Sandbox> {
           FSelectGroup(
             label: const Text('Select Group'),
             description: const Text('Select Group Description'),
-            controller: FMultiSelectGroupController(min: 1, max: 2, values: {1}),
+            controller: selectGroupController,
             items: [
-              FSelectGroupItem.checkbox(value: 1, label: const Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
-              FSelectGroupItem.checkbox(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
-              FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
+              FSelectGroupItem.radio(value: 1, label: const Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
+              FSelectGroupItem.radio(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
+              FSelectGroupItem.radio(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
             ],
           ),
           const SizedBox(height: 20),
-          FSwitch(
-            label: const Text('Switch'),
-            description: const Text('Switch Description'),
+          FRadio(
+            label: const Text('Radio'),
+            description: const Text('Radio Description'),
             value: value,
             onChange: (value) => setState(() => this.value = value),
           ),

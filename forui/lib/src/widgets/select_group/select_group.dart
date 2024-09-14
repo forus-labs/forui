@@ -165,6 +165,9 @@ class FSelectGroupStyle with Diagnosticable {
   /// The [FSelectGroupItem.checkbox]'s style.
   final FCheckboxSelectGroupStyle checkboxStyle;
 
+  /// The [FSelectGroupItem.radio]'s style.
+  final FRadioSelectGroupStyle radioStyle;
+
   /// Creates a [FSelectGroupStyle].
   const FSelectGroupStyle({
     required this.labelLayoutStyle,
@@ -172,6 +175,7 @@ class FSelectGroupStyle with Diagnosticable {
     required this.disabledStyle,
     required this.errorStyle,
     required this.checkboxStyle,
+    required this.radioStyle,
   });
 
   /// Creates a [FSelectGroupStyle] that inherits its properties from the given parameters.
@@ -211,6 +215,37 @@ class FSelectGroupStyle with Diagnosticable {
       ),
     );
 
+    final radioStyle = FRadioStyle.inherit(colorScheme: colorScheme, style: style);
+    final radioSelectGroupStyle = FRadioSelectGroupStyle.inherit(
+      style: radioStyle.copyWith(
+        enabledStyle: radioStyle.enabledStyle.copyWith(
+          labelTextStyle: typography.sm.copyWith(
+            color: colorScheme.primary,
+            fontWeight: FontWeight.w500,
+          ),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+        ),
+        disabledStyle: radioStyle.disabledStyle.copyWith(
+          labelTextStyle: typography.sm.copyWith(
+            color: colorScheme.primary.withOpacity(0.7),
+            fontWeight: FontWeight.w500,
+          ),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
+        ),
+        errorStyle: radioStyle.errorStyle.copyWith(
+          labelTextStyle: typography.sm.copyWith(
+            color: colorScheme.primary,
+            fontWeight: FontWeight.w500,
+          ),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          errorTextStyle: typography.sm.copyWith(
+            color: colorScheme.error,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+
     return FSelectGroupStyle(
       labelLayoutStyle: FLabelStyles.inherit(style: style).vertical.layout,
       enabledStyle: FSelectGroupStateStyle(
@@ -227,6 +262,7 @@ class FSelectGroupStyle with Diagnosticable {
         errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
       ),
       checkboxStyle: checkboxSelectGroupStyle,
+      radioStyle: radioSelectGroupStyle,
     );
   }
 
@@ -248,6 +284,7 @@ class FSelectGroupStyle with Diagnosticable {
     FSelectGroupStateStyle? disabledStyle,
     FSelectGroupErrorStyle? errorStyle,
     FCheckboxSelectGroupStyle? checkboxStyle,
+    FRadioSelectGroupStyle? radioStyle,
   }) =>
       FSelectGroupStyle(
         labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
@@ -255,6 +292,7 @@ class FSelectGroupStyle with Diagnosticable {
         disabledStyle: disabledStyle ?? this.disabledStyle,
         errorStyle: errorStyle ?? this.errorStyle,
         checkboxStyle: checkboxStyle ?? this.checkboxStyle,
+        radioStyle: radioStyle ?? this.radioStyle,
       );
 
   @override
@@ -266,7 +304,8 @@ class FSelectGroupStyle with Diagnosticable {
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle))
       ..add(DiagnosticsProperty('labelStyle', labelStyle))
-      ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle));
+      ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle))
+      ..add(DiagnosticsProperty('radioStyle', radioStyle));
   }
 
   @override
@@ -278,7 +317,8 @@ class FSelectGroupStyle with Diagnosticable {
           enabledStyle == other.enabledStyle &&
           disabledStyle == other.disabledStyle &&
           errorStyle == other.errorStyle &&
-          checkboxStyle == other.checkboxStyle;
+          checkboxStyle == other.checkboxStyle &&
+          radioStyle == other.radioStyle;
 
   @override
   int get hashCode =>
@@ -286,7 +326,8 @@ class FSelectGroupStyle with Diagnosticable {
       enabledStyle.hashCode ^
       disabledStyle.hashCode ^
       errorStyle.hashCode ^
-      checkboxStyle.hashCode;
+      checkboxStyle.hashCode ^
+      radioStyle.hashCode;
 }
 
 /// [FSelectGroup]'s state style.
