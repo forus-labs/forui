@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,7 +14,7 @@ import 'package:forui/forui.dart';
 /// See:
 /// * https://forui.dev/docs/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
-class FSelectGroup<T> extends StatelessWidget {
+class FSelectGroup<T> extends FormField<Set<T>> {
   /// The controller.
   ///
   /// See:
@@ -38,43 +40,53 @@ class FSelectGroup<T> extends StatelessWidget {
   final List<FSelectGroupItem<T>> items;
 
   /// Creates a [FSelectGroup].
-  const FSelectGroup({
+  FSelectGroup({
     required this.controller,
     required this.items,
     this.style,
     this.label,
     this.description,
     this.error,
+    super.onSaved,
+    super.validator,
+    super.initialValue,
+    super.enabled = true,
+    super.autovalidateMode,
+    super.restorationId,
     super.key,
-  });
+  }): super(
+    builder: (field) {
+      final state = field as _State;
+      final groupStyle = style ?? state.context.theme.selectGroupStyle;
+      final labelState = switch (state) {
+        _ when !enabled => FLabelState.disabled,
+        _ when state.errorText != null => FLabelState.error,
+        _ => FLabelState.enabled,
+      };
 
-  @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.selectGroupStyle;
-    final labelState = error != null ? FLabelState.error : FLabelState.enabled;
-
-    return FLabel(
-      axis: Axis.vertical,
-      state: labelState,
-      style: style.labelStyle,
-      label: label,
-      description: description,
-      error: error,
-      child: ListenableBuilder(
-        listenable: controller,
-        builder: (context, _) => Column(
+      return FLabel(
+        axis: Axis.vertical,
+        state: labelState,
+        style: groupStyle.labelStyle,
+        label: label,
+        description: description,
+        error: error,
+        child: Column(
           children: [
             for (final item in items)
               item.builder(
-                context,
+                state.context,
                 controller.select,
                 controller.contains(item.value),
               ),
           ],
         ),
-      ),
-    );
-  }
+      );
+    },
+  );
+
+  @override
+  FormFieldState<Set<T>> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -84,6 +96,54 @@ class FSelectGroup<T> extends StatelessWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(IterableProperty('items', items));
   }
+}
+
+class _State<T> extends FormFieldState<Set<T>> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_handleControllerChanged);
+  }
+
+  @override
+  void didUpdateWidget(covariant FSelectGroup<T> old) {
+    super.didUpdateWidget(old);
+    if (widget.controller == old.controller) {
+      return;
+    }
+
+    widget.controller.addListener(_handleControllerChanged);
+    old.controller.removeListener(_handleControllerChanged);
+  }
+
+  @override
+  void didChange(Set<T>? values) {
+    super.didChange(values);
+    if (!setEquals(widget.controller.values, values)) {
+      widget.controller.values = values ?? {};
+    }
+  }
+
+  @override
+  void reset() {
+    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
+    widget.controller.values = widget.initialValue ?? {};
+    super.reset();
+  }
+
+  void _handleControllerChanged() {
+    // Suppress changes that originated from within this class.
+    //
+    // In the case where a controller has been passed in to this widget, we register this change listener. In these
+    // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
+    // reset() method. In such cases, the FormField value will already have been set.
+    if (widget.controller.values != value) {
+      didChange(widget.controller.values);
+    }
+  }
+
+  @override
+  FSelectGroup<T> get widget => super.widget as FSelectGroup<T>;
 }
 
 /// [FSelectGroup]'s style.
