@@ -18,11 +18,11 @@ abstract class FSelectGroupController<T> with ChangeNotifier {
   Set<T> get values => {..._values};
 
   @protected
-  set values (Set<T> values) => {
-    _values.clear(),
-    _values.addAll(values),
-    notifyListeners(),
-  };
+  set values(Set<T> values) => {
+        _values.clear(),
+        _values.addAll(values),
+        notifyListeners(),
+      };
 
   @override
   bool operator ==(Object other) =>

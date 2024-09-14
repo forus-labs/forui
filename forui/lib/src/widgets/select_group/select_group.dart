@@ -54,36 +54,36 @@ class FSelectGroup<T> extends FormField<Set<T>> {
     super.autovalidateMode,
     super.restorationId,
     super.key,
-  }): super(
-    builder: (field) {
-      final state = field as _State;
-      final groupStyle = style ?? state.context.theme.selectGroupStyle;
-      final labelState = switch (state) {
-        _ when !enabled => FLabelState.disabled,
-        _ when state.errorText != null => FLabelState.error,
-        _ => FLabelState.enabled,
-      };
+  }) : super(
+          builder: (field) {
+            final state = field as _State;
+            final groupStyle = style ?? state.context.theme.selectGroupStyle;
+            final labelState = switch (state) {
+              _ when !enabled => FLabelState.disabled,
+              _ when state.errorText != null => FLabelState.error,
+              _ => FLabelState.enabled,
+            };
 
-      return FLabel(
-        axis: Axis.vertical,
-        state: labelState,
-        style: groupStyle.labelStyle,
-        label: label,
-        description: description,
-        error: error,
-        child: Column(
-          children: [
-            for (final item in items)
-              item.builder(
-                state.context,
-                controller.select,
-                controller.contains(item.value),
+            return FLabel(
+              axis: Axis.vertical,
+              state: labelState,
+              style: groupStyle.labelStyle,
+              label: label,
+              description: description,
+              error: error,
+              child: Column(
+                children: [
+                  for (final item in items)
+                    item.builder(
+                      state.context,
+                      controller.select,
+                      controller.contains(item.value),
+                    ),
+                ],
               ),
-          ],
-        ),
-      );
-    },
-  );
+            );
+          },
+        );
 
   @override
   FormFieldState<Set<T>> createState() => _State();
