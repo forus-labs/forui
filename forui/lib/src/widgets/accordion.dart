@@ -78,7 +78,7 @@ class FAccordionController extends ChangeNotifier {
 /// See:
 /// * https://forui.dev/docs/accordion for working examples.
 class FAccordion extends StatefulWidget {
-  /// The accordion's style. Defaults to the appropriate style in [FThemeData.accordionStyle].
+  /// The accordion's style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
 
   /// The title.
