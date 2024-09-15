@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,18 +12,36 @@ import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 
 /// A controller that stores the expanded state of an [_Item].
-class FAccordionController extends ChangeNotifier {
+interface class FAccordionController extends ChangeNotifier {
   final Duration duration;
   final List<(AnimationController, Animation)> _controllers;
-  final int? min;
-  final int? max;
+  final int _min;
+  final int? _max;
 
   /// Creates a [FAccordionController].
-  FAccordionController();
+  ///
+  /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum or maximum.
+  ///
+  /// # Contract:
+  /// * Throws [AssertionError] if [min] < 0.
+  /// * Throws [AssertionError] if [max] < 0.
+  /// * Throws [AssertionError] if [min] > [max].
+  FAccordionController({
+    int min = 0,
+    int? max,
+    this.duration = const Duration(milliseconds: 500),
+  })  : _min = min,
+        _max = max,
+        _controllers = [],
+        assert(min >= 0, 'The min value must be greater than or equal to 0.'),
+        assert(max == null || max >= 0, 'The max value must be greater than or equal to 0.'),
+        assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   void addItem(int index, AnimationController controller, Animation expand) {
     _controllers[index] = (controller, expand);
   }
+
+  void removeItem(int index) => _controllers.remove(index);
 
   /// Convenience method for toggling the current [expanded] status.
   ///
@@ -40,15 +57,56 @@ class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> collapse(int index) async {}
-
-  void removeItem(int index) => _controllers.remove(index);
 }
+
+// class RadioAccordionController implements FAccordionController {
+//   final Duration duration;
+//   final List<(AnimationController, Animation)> _controllers;
+//   final int? min;
+//   final int? max;
+//
+//   RadioAccordionController({
+//     this.duration = const Duration(milliseconds: 500),
+//   }) : super(duration: duration);
+//
+//   @override
+//   void addItem(int index, AnimationController controller, Animation expand) {
+//     _controllers[index] = (controller, expand);
+//   }
+//
+//   @override
+//   void removeItem(int index) => _controllers.remove(index);
+//
+//   @override
+//   Future<void> toggle(int index) async {
+//     final controller = _controllers[index].item;
+//     controller.isCompleted ? controller.reverse() : controller.forward();
+//   }
+//
+//   @override
+//   Future<void> expand(int index) async {
+//     final controller = _controllers[index].item;
+//     controller.forward();
+//   }
+//
+//   @override
+//   Future<void> collapse(int index) async {
+//     final controller = _controllers[index].item1;
+//     controller.reverse();
+//   }
+// }
 
 class FAccordion extends StatefulWidget {
   final FAccordionController? controller;
   final List<FAccordionItem> items;
+  final FAccordionStyle? style;
 
-  const FAccordion({super.key});
+  const FAccordion({
+    required this.items,
+    this.controller,
+    this.style,
+    super.key,
+  });
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -58,9 +116,26 @@ class _FAccordionState extends State<FAccordion> {
   late final FAccordionController _controller;
 
   @override
-  Widget build(BuildContext context) => Column(children: [
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? FAccordionController();
+  }
 
-  ],);
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style ?? context.theme.accordionStyle;
+    return Column(
+      children: [
+        for (var i = 0; i < widget.items.length; i++)
+          _Item(
+            style: style,
+            index: i,
+            item: widget.items[i],
+            controller: _controller,
+          ),
+      ],
+    );
+  }
 }
 
 class FAccordionItem {
@@ -70,11 +145,11 @@ class FAccordionItem {
   /// The child.
   final Widget child;
 
+  /// Whether the item is initially expanded.
   final bool initiallyExpanded;
 
   FAccordionItem({required this.title, required this.child, this.initiallyExpanded = false});
 }
-
 
 /// An interactive heading that reveals a section of content.
 ///
@@ -95,6 +170,8 @@ class _Item extends StatefulWidget {
   const _Item({
     required this.style,
     required this.index,
+    required this.item,
+    required this.controller,
   });
 
   @override
@@ -119,19 +196,18 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
     super.initState();
     _controller = AnimationController(
       duration: _controller.duration,
-      value: widget.initiallyExpanded ? 1.0 : 0.0,
+      value: widget.item.initiallyExpanded ? 1.0 : 0.0,
       vsync: this,
     );
     _expand = Tween<double>(
-        begin: 0,
-        end: 100,
-      ).animate(
-        CurvedAnimation(
-          curve: Curves.ease,
-          parent: _controller._controllers,
-        ),
-      );
-
+      begin: 0,
+      end: 100,
+    ).animate(
+      CurvedAnimation(
+        curve: Curves.ease,
+        parent: _controller,
+      ),
+    );
     widget.controller.addItem(widget.index, _controller, _expand);
   }
 
@@ -141,7 +217,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
     if (widget.controller != old.controller) {
       _controller = AnimationController(
         duration: _controller.duration,
-        value: widget.initiallyExpanded ? 1.0 : 0.0,
+        value: widget.item.initiallyExpanded ? 1.0 : 0.0,
         vsync: this,
       );
       _expand = Tween<double>(
@@ -150,7 +226,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
       ).animate(
         CurvedAnimation(
           curve: Curves.ease,
-          parent: _controller._controllers,
+          parent: _controller,
         ),
       );
 
@@ -163,14 +239,20 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.accordionStyle;
     return AnimatedBuilder(
-      animation: _controller._controllers,
+      animation: _controller,
       builder: (context, _) => Column(
         children: [
           MouseRegion(
             onEnter: (_) => setState(() => _hovered = true),
             onExit: (_) => setState(() => _hovered = false),
             child: FTappable(
-              onPress: () => _controller.toggle(),
+              onPress: () {
+                if (_controller.value == 1) {
+                  _controller.reverse();
+                } else {
+                  _controller.forward();
+                }
+              },
               child: Container(
                 padding: style.titlePadding,
                 child: Row(
@@ -184,11 +266,11 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
                         ),
                         style: style.titleTextStyle
                             .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
-                        child: widget.title,
+                        child: widget.item.title,
                       ),
                     ),
                     Transform.rotate(
-                      angle: (_controller.percentage / 100 * -180 + 90) * math.pi / 180.0,
+                      angle: (_controller.value / 100 * -180 + 90) * math.pi / 180.0,
                       child: style.icon,
                     ),
                   ],
@@ -200,12 +282,12 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
           // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
           // child to layout at a smaller size while the amount of padding remains the same.
           _Expandable(
-            percentage: _controller.percentage / 100.0,
+            percentage: _controller.value / 100.0,
             child: ClipRect(
-              clipper: _Clipper(percentage: _controller.percentage / 100.0),
+              clipper: _Clipper(percentage: _controller.value / 100.0),
               child: Padding(
                 padding: style.contentPadding,
-                child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
+                child: DefaultTextStyle(style: style.childTextStyle, child: widget.item.child),
               ),
             ),
           ),
@@ -219,9 +301,6 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
     super.dispose();
   }
 }

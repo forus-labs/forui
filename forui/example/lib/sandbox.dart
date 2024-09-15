@@ -22,12 +22,23 @@ class _SandboxState extends State<Sandbox> {
   Widget build(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const FAccordion(
-            title: Text('Is it Accessible?'),
-            child: Text(
-              'Yes. It adheres to the WAI-ARIA design pattern',
-              textAlign: TextAlign.left,
-            ),
+          FAccordion(
+            items: [
+              FAccordionItem(
+                title: const Text('Title 1'),
+                child: const Text(
+                  'Yes. It adheres to the WAI-ARIA design pattern',
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              FAccordionItem(
+                title: const Text('Title 2'),
+                child: const Text(
+                  'Yes. It adheres to the WAI-ARIA design pattern',
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 20),
           FSelectGroup(
