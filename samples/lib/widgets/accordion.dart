@@ -16,14 +16,14 @@ class AccordionPage extends SampleScaffold {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAccordion(
-            title: 'Is it Styled?',
+            title: Text('Is it Styled?'),
             child: Text(
               "Yes. It comes with default styles that matches the other components' aesthetics",
               textAlign: TextAlign.left,
             ),
           ),
           FAccordion(
-            title: 'Is it Animated?',
+            title: Text('Is it Animated?'),
             initiallyExpanded: false,
             child: Text(
               'Yes. It is animated by default, but you can disable it if you prefer',

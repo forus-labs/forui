@@ -42,20 +42,20 @@ class FAccordionController extends ChangeNotifier {
   /// Convenience method for toggling the current [expanded] status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async => expanded ? close() : expand();
+  Future<void> toggle() async => expanded ? hide() : show();
 
-  /// Expands the accordion.
+  /// Shows the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> expand() async {
+  Future<void> show() async {
     await _animation.forward();
     notifyListeners();
   }
 
-  /// closes the accordion.
+  /// Hides the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> close() async {
+  Future<void> hide() async {
     await _animation.reverse();
     notifyListeners();
   }
@@ -63,8 +63,8 @@ class FAccordionController extends ChangeNotifier {
   /// True if the accordion is expanded. False if it is closed.
   bool get expanded => _animation.value == 1.0;
 
-  /// The animation value.
-  double get value => _expand.value;
+  /// The percentage value of the animation.
+  double get percentage => _expand.value;
 
   @override
   void dispose() {
@@ -82,12 +82,14 @@ class FAccordion extends StatefulWidget {
   final FAccordionStyle? style;
 
   /// The title.
-  final String title;
+  final Widget title;
 
   /// The accordion's controller.
   final FAccordionController? controller;
 
   /// Whether the accordion is initially expanded. Defaults to true.
+  ///
+  /// This flag will be ignored if a [controller] is provided.
   final bool initiallyExpanded;
 
   /// The child.
@@ -97,24 +99,24 @@ class FAccordion extends StatefulWidget {
   const FAccordion({
     required this.child,
     this.style,
-    this.title = '',
+    this.title = const Text(''),
     this.controller,
     this.initiallyExpanded = true,
     super.key,
   });
 
   @override
-  //ignore:library_private_types_in_public_api
-  _FAccordionState createState() => _FAccordionState();
+  State<FAccordion> createState() => _FAccordionState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('title', title))
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('initiallyExpanded', initiallyExpanded));
+      ..add(
+        FlagProperty('initiallyExpanded', value: initiallyExpanded, defaultValue: true, ifTrue: 'initiallyExpanded'),
+      );
   }
 }
 
@@ -167,15 +169,13 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
                           applyHeightToFirstAscent: false,
                           applyHeightToLastDescent: false,
                         ),
-                        style: TextStyle(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
-                        child: Text(
-                          widget.title,
-                          style: style.titleTextStyle,
-                        ),
+                        style: style.titleTextStyle
+                            .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
+                        child: widget.title,
                       ),
                     ),
                     Transform.rotate(
-                      angle: (_controller.value / 100 * -180 + 90) * math.pi / 180.0,
+                      angle: (_controller.percentage / 100 * -180 + 90) * math.pi / 180.0,
                       child: style.icon,
                     ),
                   ],
@@ -187,9 +187,9 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
           // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
           // child to layout at a smaller size while the amount of padding remains the same.
           _Expandable(
-            percentage: _controller.value / 100.0,
+            percentage: _controller.percentage / 100.0,
             child: ClipRect(
-              clipper: _Clipper(percentage: _controller.value / 100.0),
+              clipper: _Clipper(percentage: _controller.percentage / 100.0),
               child: Padding(
                 padding: style.contentPadding,
                 child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
@@ -211,6 +211,88 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
     }
     super.dispose();
   }
+}
+
+class _Expandable extends SingleChildRenderObjectWidget {
+  final double _percentage;
+
+  const _Expandable({
+    required Widget child,
+    required double percentage,
+  })  : _percentage = percentage,
+        super(child: child);
+
+  @override
+  RenderObject createRenderObject(BuildContext context) => _ExpandableBox(percentage: _percentage);
+
+  @override
+  void updateRenderObject(BuildContext context, _ExpandableBox renderObject) {
+    renderObject.percentage = _percentage;
+  }
+}
+
+class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
+  double _percentage;
+
+  _ExpandableBox({
+    required double percentage,
+  }) : _percentage = percentage;
+
+  @override
+  void performLayout() {
+    if (child case final child?) {
+      child.layout(constraints.normalize(), parentUsesSize: true);
+      size = Size(child.size.width, child.size.height * _percentage);
+    } else {
+      size = constraints.smallest;
+    }
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    if (child case final child?) {
+      context.paintChild(child, offset);
+    }
+  }
+
+  @override
+  bool hitTest(BoxHitTestResult result, {required Offset position}) {
+    if (size.contains(position) && child!.hitTest(result, position: position)) {
+      result.add(BoxHitTestEntry(this, position));
+      return true;
+    }
+
+    return false;
+  }
+
+  double get percentage => _percentage;
+
+  set percentage(double value) {
+    if (_percentage == value) {
+      return;
+    }
+
+    _percentage = value;
+    markNeedsLayout();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('percentage', percentage));
+  }
+}
+
+class _Clipper extends CustomClipper<Rect> {
+  final double percentage;
+
+  _Clipper({required this.percentage});
+
+  @override
+  Rect getClip(Size size) => Offset.zero & Size(size.width, size.height * percentage);
+
+  @override
+  bool shouldReclip(covariant _Clipper oldClipper) => oldClipper.percentage != percentage;
 }
 
 /// The [FAccordion] styles.
@@ -310,86 +392,4 @@ final class FAccordionStyle with Diagnosticable {
       contentPadding.hashCode ^
       icon.hashCode ^
       dividerColor.hashCode;
-}
-
-class _Expandable extends SingleChildRenderObjectWidget {
-  final double _percentage;
-
-  const _Expandable({
-    required Widget child,
-    required double percentage,
-  })  : _percentage = percentage,
-        super(child: child);
-
-  @override
-  RenderObject createRenderObject(BuildContext context) => _ExpandableBox(percentage: _percentage);
-
-  @override
-  void updateRenderObject(BuildContext context, _ExpandableBox renderObject) {
-    renderObject.percentage = _percentage;
-  }
-}
-
-class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
-  double _percentage;
-
-  _ExpandableBox({
-    required double percentage,
-  }) : _percentage = percentage;
-
-  @override
-  void performLayout() {
-    if (child case final child?) {
-      child.layout(constraints.normalize(), parentUsesSize: true);
-      size = Size(child.size.width, child.size.height * _percentage);
-    } else {
-      size = constraints.smallest;
-    }
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    if (child case final child?) {
-      context.paintChild(child, offset);
-    }
-  }
-
-  @override
-  bool hitTest(BoxHitTestResult result, {required Offset position}) {
-    if (size.contains(position) && child!.hitTest(result, position: position)) {
-      result.add(BoxHitTestEntry(this, position));
-      return true;
-    }
-
-    return false;
-  }
-
-  double get percentage => _percentage;
-
-  set percentage(double value) {
-    if (_percentage == value) {
-      return;
-    }
-
-    _percentage = value;
-    markNeedsLayout();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DoubleProperty('percentage', percentage));
-  }
-}
-
-class _Clipper extends CustomClipper<Rect> {
-  final double percentage;
-
-  _Clipper({required this.percentage});
-
-  @override
-  Rect getClip(Size size) => Offset.zero & Size(size.width, size.height * percentage);
-
-  @override
-  bool shouldReclip(covariant _Clipper oldClipper) => oldClipper.percentage != percentage;
 }

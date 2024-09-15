@@ -23,7 +23,7 @@ class _SandboxState extends State<Sandbox> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const FAccordion(
-            title: 'Is it Accessible?',
+            title: Text('Is it Accessible?'),
             child: Text(
               'Yes. It adheres to the WAI-ARIA design pattern',
               textAlign: TextAlign.left,

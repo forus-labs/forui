@@ -10,7 +10,7 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FAccordion', () {
-    testWidgets('expanded', (tester) async {
+    testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
@@ -19,7 +19,7 @@ void main() {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
-                  title: 'Title',
+                  title: Text('Title'),
                   child: ColoredBox(
                     color: Colors.yellow,
                     child: SizedBox.square(
@@ -33,10 +33,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/expanded.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/shown.png'));
     });
 
-    testWidgets('closed', (tester) async {
+    testWidgets('hidden', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
@@ -45,7 +45,7 @@ void main() {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
-                  title: 'Title',
+                  title: Text('Title'),
                   child: ColoredBox(
                     color: Colors.yellow,
                     child: SizedBox.square(
@@ -62,7 +62,7 @@ void main() {
       await tester.tap(find.text('Title'));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/closed.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/hidden.png'));
     });
   });
 }
