@@ -14,30 +14,13 @@ import 'package:forui/src/foundation/util.dart';
 
 /// A controller that stores the expanded state of an [FAccordion].
 class FAccordionController extends ChangeNotifier {
-  late final AnimationController _animation;
-  late final Animation<double> _expand;
+  AnimationController? _animation;
+  Animation<double>? _expand;
 
   /// Creates a [FAccordionController].
   FAccordionController({
-    required TickerProvider vsync,
     duration = const Duration(milliseconds: 500),
-    bool initiallyExpanded = true,
-  }) {
-    _animation = AnimationController(
-      duration: duration,
-      value: initiallyExpanded ? 1.0 : 0.0,
-      vsync: vsync,
-    );
-    _expand = Tween<double>(
-      begin: 0,
-      end: 100,
-    ).animate(
-      CurvedAnimation(
-        curve: Curves.ease,
-        parent: _animation,
-      ),
-    )..addListener(notifyListeners);
-  }
+  });
 
   /// Convenience method for toggling the current [expanded] status.
   ///
@@ -48,7 +31,7 @@ class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
-    await _animation.forward();
+    await _animation?.forward();
     notifyListeners();
   }
 
@@ -56,19 +39,19 @@ class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> hide() async {
-    await _animation.reverse();
+    await _animation?.reverse();
     notifyListeners();
   }
 
   /// True if the accordion is expanded. False if it is closed.
-  bool get expanded => _animation.value == 1.0;
+  bool get expanded => _animation?.value == 1.0;
 
   /// The percentage value of the animation.
   double get percentage => _expand.value;
 
   @override
   void dispose() {
-    _animation.dispose();
+    _animation?.dispose();
     super.dispose();
   }
 }
@@ -127,11 +110,21 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
-        FAccordionController(
-          vsync: this,
-          initiallyExpanded: widget.initiallyExpanded,
-        );
+    _controller = widget.controller ?? FAccordionController(initiallyExpanded: widget.initiallyExpanded);
+    _controller._animation = AnimationController(
+      duration: duration,
+      value: initiallyExpanded ? 1.0 : 0.0,
+      vsync: this,
+    );
+    _controller._expand = Tween<double>(
+      begin: 0,
+      end: 100,
+    ).animate(
+      CurvedAnimation(
+        curve: Curves.ease,
+        parent: _animation,
+      ),
+    );
   }
 
   @override
@@ -142,7 +135,21 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? FAccordionController(vsync: this);
+      _controller = widget.controller ?? FAccordionController(initiallyExpanded: widget.initiallyExpanded);
+      _controller._animation = AnimationController(
+        duration: duration,
+        value: initiallyExpanded ? 1.0 : 0.0,
+        vsync: this,
+      );
+      _controller._expand = Tween<double>(
+        begin: 0,
+        end: 100,
+      ).animate(
+        CurvedAnimation(
+          curve: Curves.ease,
+          parent: _animation,
+        ),
+      );
     }
   }
 
@@ -150,7 +157,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.accordionStyle;
     return AnimatedBuilder(
-      animation: _controller,
+      animation: _controller._animation,
       builder: (context, _) => Column(
         children: [
           MouseRegion(
