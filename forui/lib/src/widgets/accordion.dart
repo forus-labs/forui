@@ -15,7 +15,7 @@ import 'package:forui/src/foundation/util.dart';
 /// A controller that stores the expanded state of an [_Item].
 class FAccordionController extends ChangeNotifier {
   final Duration duration;
-  final Map<int, (AnimationController, Animation)> _controllers;
+  final List<(AnimationController, Animation)> _controllers;
   final int? min;
   final int? max;
 
