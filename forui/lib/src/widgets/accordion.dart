@@ -14,23 +14,24 @@ import 'package:forui/src/foundation/util.dart';
 
 /// A controller that stores the expanded state of an [FAccordion].
 class FAccordionController extends ChangeNotifier {
+  final Duration duration;
   AnimationController? _animation;
   Animation<double>? _expand;
 
   /// Creates a [FAccordionController].
   FAccordionController({
-    duration = const Duration(milliseconds: 500),
+    this.duration = const Duration(milliseconds: 500),
   });
 
   /// Convenience method for toggling the current [expanded] status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async => expanded ? hide() : show();
+  Future<void> toggle() async => expanded ? collapse() : expand();
 
   /// Shows the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> show() async {
+  Future<void> expand() async {
     await _animation?.forward();
     notifyListeners();
   }
@@ -38,7 +39,7 @@ class FAccordionController extends ChangeNotifier {
   /// Hides the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> hide() async {
+  Future<void> collapse() async {
     await _animation?.reverse();
     notifyListeners();
   }
@@ -47,7 +48,7 @@ class FAccordionController extends ChangeNotifier {
   bool get expanded => _animation?.value == 1.0;
 
   /// The percentage value of the animation.
-  double get percentage => _expand.value;
+  double get percentage => _expand!.value;
 
   @override
   void dispose() {
@@ -110,21 +111,22 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FAccordionController(initiallyExpanded: widget.initiallyExpanded);
-    _controller._animation = AnimationController(
-      duration: duration,
-      value: initiallyExpanded ? 1.0 : 0.0,
-      vsync: this,
-    );
-    _controller._expand = Tween<double>(
-      begin: 0,
-      end: 100,
-    ).animate(
-      CurvedAnimation(
-        curve: Curves.ease,
-        parent: _animation,
-      ),
-    );
+    _controller = widget.controller ?? FAccordionController();
+    _controller
+      .._animation = AnimationController(
+        duration: _controller.duration,
+        value: widget.initiallyExpanded ? 1.0 : 0.0,
+        vsync: this,
+      )
+      .._expand = Tween<double>(
+        begin: 0,
+        end: 100,
+      ).animate(
+        CurvedAnimation(
+          curve: Curves.ease,
+          parent: _controller._animation,
+        ),
+      );
   }
 
   @override
@@ -135,21 +137,22 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? FAccordionController(initiallyExpanded: widget.initiallyExpanded);
-      _controller._animation = AnimationController(
-        duration: duration,
-        value: initiallyExpanded ? 1.0 : 0.0,
-        vsync: this,
-      );
-      _controller._expand = Tween<double>(
-        begin: 0,
-        end: 100,
-      ).animate(
-        CurvedAnimation(
-          curve: Curves.ease,
-          parent: _animation,
-        ),
-      );
+      _controller = widget.controller ?? FAccordionController();
+      _controller
+        .._animation = AnimationController(
+          duration: _controller.duration,
+          value: widget.initiallyExpanded ? 1.0 : 0.0,
+          vsync: this,
+        )
+        .._expand = Tween<double>(
+          begin: 0,
+          end: 100,
+        ).animate(
+          CurvedAnimation(
+            curve: Curves.ease,
+            parent: _controller._animation,
+          ),
+        );
     }
   }
 
