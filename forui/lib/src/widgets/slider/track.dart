@@ -158,8 +158,7 @@ class _Track extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :enabled) = InheritedData.of(context);
-    final FSliderStyle(:inactiveColor, :borderRadius, :crossAxisExtent, :markStyles, :thumbStyle) = style;
-    final markStyle = layout.vertical ? markStyles.vertical : markStyles.horizontal;
+    final FSliderStyle(:inactiveColor, :borderRadius, :crossAxisExtent, :markStyle, :thumbStyle) = style;
 
     final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
 

@@ -34,6 +34,7 @@ class SliderLayout extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
       ..add(DiagnosticsProperty('constraints', constraints));
@@ -68,7 +69,7 @@ class _SliderLayoutState extends State<SliderLayout> {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :semanticFormatterCallback, :enabled) = InheritedData.of(context);
-    final markStyle = widget.layout.vertical ? style.markStyles.vertical : style.markStyles.horizontal;
+    final markStyle = style.markStyle;
     final marks = widget.marks.where((mark) => mark.label != null).toList();
 
     return ListenableBuilder(
@@ -112,7 +113,7 @@ class _SliderLayoutDelegate extends MultiChildLayoutDelegate {
   @override
   void performLayout(Size size) {
     final constraints = BoxConstraints.loose(size);
-    final defaultMarkStyle = (layout.vertical ? style.markStyles.vertical : style.markStyles.horizontal);
+    final defaultMarkStyle = style.markStyle;
 
     final Rect Function(FSliderMark, FSliderMarkStyle) position = switch (layout) {
       Layout.ltr => (mark, style) {

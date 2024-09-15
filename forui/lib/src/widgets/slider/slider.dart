@@ -81,7 +81,12 @@ class _FSliderState extends State<FSlider> {
   @override
   Widget build(BuildContext context) {
     final styles = context.theme.sliderStyles;
-    final style = widget.style ?? (widget.enabled ? styles.enabledStyle : styles.disabledStyle);
+    final style = widget.style ?? switch ((widget.enabled, widget.layout.vertical)) {
+      (true, false) => styles.enabledHorizontalStyle,
+      (true, true) => styles.enabledVerticalStyle,
+      (false, false) => styles.disabledHorizontalStyle,
+      (false, true) => styles.disabledVerticalStyle,
+    };
 
     return InheritedData(
       style: style,
@@ -106,84 +111,101 @@ class _FSliderState extends State<FSlider> {
 
 /// A slider's styles.
 final class FSliderStyles with Diagnosticable {
-  /// The enabled slider's style.
-  final FSliderStyle enabledStyle;
+  /// The enabled slider's horizontal style.
+  final FSliderStyle enabledHorizontalStyle;
 
-  /// The disabled slider's style.
-  final FSliderStyle disabledStyle;
+  /// The enabled slider's vertical style.
+  final FSliderStyle enabledVerticalStyle;
+
+  /// The disabled slider's horizontal style.
+  final FSliderStyle disabledHorizontalStyle;
+
+  /// The disabled slider's vertical style.
+  final FSliderStyle disabledVerticalStyle;
 
   /// Creates a [FSliderStyles].
   FSliderStyles({
-    required this.enabledStyle,
-    required this.disabledStyle,
+    required this.enabledHorizontalStyle,
+    required this.enabledVerticalStyle,
+    required this.disabledHorizontalStyle,
+    required this.disabledVerticalStyle,
   });
 
   /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
-  FSliderStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : enabledStyle = FSliderStyle(
-          activeColor: colorScheme.primary,
-          inactiveColor: colorScheme.secondary,
-          markStyles: (
-            horizontal: FSliderMarkStyle(
-              tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
-              labelAnchor: Alignment.topCenter,
-              labelOffset: 7.5,
-            ),
-            vertical: FSliderMarkStyle(
-              tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
-              labelAnchor: Alignment.centerRight,
-              labelOffset: -7.5,
-            ),
-          ),
-          tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-          thumbStyle: FSliderThumbStyle(
-            color: colorScheme.primaryForeground,
-            borderColor: colorScheme.primary,
-          ),
-        ),
-        disabledStyle = FSliderStyle(
-          activeColor: colorScheme.primary.withOpacity(0.7),
-          inactiveColor: colorScheme.secondary,
-          markStyles: (
-            horizontal: FSliderMarkStyle(
-              tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
-              labelAnchor: Alignment.topCenter,
-              labelOffset: 7.5,
-            ),
-            vertical: FSliderMarkStyle(
-              tickColor: colorScheme.mutedForeground,
-              labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
-              labelAnchor: Alignment.centerRight,
-              labelOffset: -7.5,
-            ),
-          ),
-          tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-          thumbStyle: FSliderThumbStyle(
-            color: colorScheme.primaryForeground,
-            borderColor: colorScheme.primary.withOpacity(0.7),
-          ),
-        );
+  factory FSliderStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style,}) {
+    final enabledHorizontalStyle = FSliderStyle(
+      activeColor: colorScheme.primary,
+      inactiveColor: colorScheme.secondary,
+      markStyle: FSliderMarkStyle(
+        tickColor: colorScheme.mutedForeground,
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
+        labelAnchor: Alignment.topCenter,
+        labelOffset: 7.5,
+      ),
+      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      thumbStyle: FSliderThumbStyle(
+        color: colorScheme.primaryForeground,
+        borderColor: colorScheme.primary,
+      ),
+    );
+
+    final disabledHorizontalStyle = FSliderStyle(
+      activeColor: colorScheme.primary.withOpacity(0.7),
+      inactiveColor: colorScheme.secondary,
+      markStyle: FSliderMarkStyle(
+        tickColor: colorScheme.mutedForeground,
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
+        labelAnchor: Alignment.topCenter,
+        labelOffset: 7.5,
+      ),
+      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      thumbStyle: FSliderThumbStyle(
+        color: colorScheme.primaryForeground,
+        borderColor: colorScheme.primary.withOpacity(0.7),
+      ),
+    );
+
+    return FSliderStyles(
+        enabledHorizontalStyle: enabledHorizontalStyle,
+        enabledVerticalStyle: enabledHorizontalStyle.copyWith(markStyle: FSliderMarkStyle(
+          tickColor: colorScheme.mutedForeground,
+          labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
+          labelAnchor: Alignment.centerRight,
+          labelOffset: -7.5,
+        ),),
+        disabledHorizontalStyle: disabledHorizontalStyle,
+        disabledVerticalStyle: disabledHorizontalStyle.copyWith(markStyle: FSliderMarkStyle(
+          tickColor: colorScheme.mutedForeground,
+          labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
+          labelAnchor: Alignment.centerRight,
+          labelOffset: -7.5,
+        )),
+    );
+  }
 
   /// Returns a copy of this [FSliderStyles] but with the given fields replaced with the new values.
   @useResult
   FSliderStyles copyWith({
-    FSliderStyle? enabledStyle,
-    FSliderStyle? disabledStyle,
+    FSliderStyle? enabledHorizontalStyle,
+    FSliderStyle? enabledVerticalStyle,
+    FSliderStyle? disabledHorizontalStyle,
+    FSliderStyle? disabledVerticalStyle,
   }) =>
       FSliderStyles(
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
+        enabledHorizontalStyle: enabledHorizontalStyle ?? this.enabledHorizontalStyle,
+        enabledVerticalStyle: enabledVerticalStyle ?? this.enabledVerticalStyle,
+        disabledHorizontalStyle: disabledHorizontalStyle ?? this.disabledHorizontalStyle,
+        disabledVerticalStyle: disabledVerticalStyle ?? this.disabledVerticalStyle,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
-      ..add(DiagnosticsProperty('disabledStyle', disabledStyle));
+      ..add(DiagnosticsProperty('enabledHorizontalStyle', enabledHorizontalStyle))
+      ..add(DiagnosticsProperty('enabledVerticalStyle', enabledVerticalStyle))
+      ..add(DiagnosticsProperty('disabledHorizontalStyle', disabledHorizontalStyle))
+      ..add(DiagnosticsProperty('disabledVerticalStyle', disabledVerticalStyle));
   }
 }
 
@@ -204,8 +226,8 @@ final class FSliderStyle with Diagnosticable {
   /// The slider's border radius.
   final BorderRadius borderRadius;
 
-  /// The slider marks' styles.
-  final ({FSliderMarkStyle horizontal, FSliderMarkStyle vertical}) markStyles;
+  /// The slider marks' style.
+  final FSliderMarkStyle markStyle;
 
   /// The slider thumb's style.
   final FSliderThumbStyle thumbStyle;
@@ -223,7 +245,7 @@ final class FSliderStyle with Diagnosticable {
   FSliderStyle({
     required this.activeColor,
     required this.inactiveColor,
-    required this.markStyles,
+    required this.markStyle,
     required this.thumbStyle,
     required this.tooltipStyle,
     this.tooltipTipAnchor = Alignment.bottomCenter,
@@ -240,7 +262,7 @@ final class FSliderStyle with Diagnosticable {
     double? mainAxisPadding,
     double? crossAxisExtent,
     BorderRadius? borderRadius,
-    ({FSliderMarkStyle horizontal, FSliderMarkStyle vertical})? markStyles,
+    FSliderMarkStyle? markStyle,
     FSliderThumbStyle? thumbStyle,
     FTooltipStyle? tooltipStyle,
     Alignment? tooltipTipAnchor,
@@ -251,7 +273,7 @@ final class FSliderStyle with Diagnosticable {
         inactiveColor: inactiveColor ?? this.inactiveColor,
         crossAxisExtent: crossAxisExtent ?? this.crossAxisExtent,
         borderRadius: borderRadius ?? this.borderRadius,
-        markStyles: markStyles ?? this.markStyles,
+        markStyle: markStyle ?? this.markStyle,
         thumbStyle: thumbStyle ?? this.thumbStyle,
         tooltipStyle: tooltipStyle ?? this.tooltipStyle,
         tooltipTipAnchor: tooltipTipAnchor ?? this.tooltipTipAnchor,
@@ -266,8 +288,7 @@ final class FSliderStyle with Diagnosticable {
       ..add(ColorProperty('inactiveColor', inactiveColor))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
-      ..add(DiagnosticsProperty('markStyles.horizontal', markStyles.horizontal))
-      ..add(DiagnosticsProperty('markStyles.vertical', markStyles.vertical))
+      ..add(DiagnosticsProperty('markStyle', markStyle))
       ..add(DiagnosticsProperty('thumbStyle', thumbStyle))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle))
       ..add(DiagnosticsProperty('tooltipTipAnchor', tooltipTipAnchor))
@@ -283,7 +304,7 @@ final class FSliderStyle with Diagnosticable {
           inactiveColor == other.inactiveColor &&
           crossAxisExtent == other.crossAxisExtent &&
           borderRadius == other.borderRadius &&
-          markStyles == other.markStyles &&
+          markStyle == other.markStyle &&
           thumbStyle == other.thumbStyle &&
           tooltipStyle == other.tooltipStyle &&
           tooltipTipAnchor == other.tooltipTipAnchor &&
@@ -295,7 +316,7 @@ final class FSliderStyle with Diagnosticable {
       inactiveColor.hashCode ^
       crossAxisExtent.hashCode ^
       borderRadius.hashCode ^
-      markStyles.hashCode ^
+      markStyle.hashCode ^
       thumbStyle.hashCode ^
       tooltipStyle.hashCode ^
       tooltipTipAnchor.hashCode ^
