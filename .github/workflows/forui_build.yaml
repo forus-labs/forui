@@ -19,7 +19,7 @@ jobs:
         working-directory: forui
     strategy:
       matrix:
-        flutter-version: [ 3.22.x, 3.x ]
+        flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        flutter-version: [ 3.22.x, 3.x ]
+        flutter-version: [ 3.x ]
     defaults:
       run:
         working-directory: forui/example
@@ -63,7 +63,7 @@ jobs:
         working-directory: forui/example
     strategy:
       matrix:
-        flutter-version: [ 3.22.x, 3.x ]
+        flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2.16.0

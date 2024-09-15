@@ -17,6 +17,13 @@ abstract class FSelectGroupController<T> with ChangeNotifier {
   /// The currently selected values.
   Set<T> get values => {..._values};
 
+  @protected
+  set values(Set<T> values) => {
+        _values.clear(),
+        _values.addAll(values),
+        notifyListeners(),
+      };
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

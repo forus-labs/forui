@@ -1,5 +1,7 @@
 ## 0.5.0 (Next)
 
+The minimum Flutter version has been increased from `3.19.0` to `3.24.0`.
+
 ### Additions
 
 * Add `FButton.icon(...)`.
