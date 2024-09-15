@@ -75,7 +75,7 @@ abstract class FFormField<T> extends StatelessWidget {
         validator: validator,
         initialValue: initialValue,
         enabled: enabled,
-        autovalidateMode: autovalidateMode, // Workaround for forceErrorText.
+        autovalidateMode: autovalidateMode,
         restorationId: restorationId,
         builder: (state) => builder(context, state),
       );
