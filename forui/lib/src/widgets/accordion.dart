@@ -110,6 +110,14 @@ class FAccordion extends StatefulWidget {
 
   @override
   State<FAccordion> createState() => _FAccordionState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<FAccordionController?>('controller', controller));
+    properties.add(IterableProperty<FAccordionItem>('items', items));
+    properties.add(DiagnosticsProperty<FAccordionStyle?>('style', style));
+  }
 }
 
 class _FAccordionState extends State<FAccordion> {
@@ -183,6 +191,8 @@ class _Item extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller));
+    properties.add(DiagnosticsProperty<FAccordionItem>('item', item));
+    properties.add(IntProperty('index', index));
   }
 }
 
@@ -297,11 +307,6 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }
 
