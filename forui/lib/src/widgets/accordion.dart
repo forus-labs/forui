@@ -12,145 +12,150 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 
-/// A controller that stores the expanded state of an [FAccordion].
+/// A controller that stores the expanded state of an [_Item].
 class FAccordionController extends ChangeNotifier {
   final Duration duration;
-  AnimationController? _animation;
-  Animation<double>? _expand;
+  final Map<int, (AnimationController, Animation)> _controllers;
+  final int? min;
+  final int? max;
 
   /// Creates a [FAccordionController].
   FAccordionController();
 
+  void addItem(int index, AnimationController controller, Animation expand) {
+    _controllers[index] = (controller, expand);
+  }
+
   /// Convenience method for toggling the current [expanded] status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async => expanded ? collapse() : expand();
+  Future<void> toggle(int index) async {}
 
   /// Shows the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> expand() async {
-    await _animation?.forward();
-    notifyListeners();
-  }
+  Future<void> expand(int index) async {}
 
   /// Hides the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> collapse() async {
-    await _animation?.reverse();
-    notifyListeners();
-  }
+  Future<void> collapse(int index) async {}
 
-  /// True if the accordion is expanded. False if it is closed.
-  bool get expanded => _animation?.value == 1.0;
+  void removeItem(int index) => _controllers.remove(index);
+}
 
-  /// The percentage value of the animation.
-  double get percentage => _expand!.value;
+class FAccordion extends StatefulWidget {
+  final FAccordionController? controller;
+  final List<FAccordionItem> items;
+
+  const FAccordion({super.key});
 
   @override
-  void dispose() {
-    _animation?.dispose();
-    super.dispose();
-  }
+  State<FAccordion> createState() => _FAccordionState();
 }
+
+class _FAccordionState extends State<FAccordion> {
+  late final FAccordionController _controller;
+
+  @override
+  Widget build(BuildContext context) => Column(children: [
+
+  ],);
+}
+
+class FAccordionItem {
+  /// The title.
+  final Widget title;
+
+  /// The child.
+  final Widget child;
+
+  final bool initiallyExpanded;
+
+  FAccordionItem({required this.title, required this.child, this.initiallyExpanded = false});
+}
+
 
 /// An interactive heading that reveals a section of content.
 ///
 /// See:
 /// * https://forui.dev/docs/accordion for working examples.
-class FAccordion extends StatefulWidget {
+class _Item extends StatefulWidget {
   /// The accordion's style. Defaults to [FThemeData.accordionStyle].
-  final FAccordionStyle? style;
-
-  /// The title.
-  final Widget title;
+  final FAccordionStyle style;
 
   /// The accordion's controller.
-  final FAccordionController? controller;
+  final FAccordionController controller;
 
-  /// Whether the accordion is initially expanded. Defaults to true.
-  ///
-  /// This flag will be ignored if a [controller] is provided.
-  final bool initiallyExpanded;
+  final FAccordionItem item;
 
-  /// The child.
-  final Widget child;
+  final int index;
 
-  /// Creates an [FAccordion].
-  const FAccordion({
-    required this.child,
-    this.style,
-    this.title = const Text(''),
-    this.controller,
-    this.initiallyExpanded = true,
-    super.key,
+  /// Creates an [_Item].
+  const _Item({
+    required this.style,
+    required this.index,
   });
 
   @override
-  State<FAccordion> createState() => _FAccordionState();
+  State<_Item> createState() => _ItemState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(
-        FlagProperty('initiallyExpanded', value: initiallyExpanded, defaultValue: true, ifTrue: 'initiallyExpanded'),
-      );
+      ..add(DiagnosticsProperty('controller', controller));
   }
 }
 
-class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateMixin {
-  late FAccordionController _controller;
+class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _expand;
   bool _hovered = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FAccordionController();
-    _controller
-      .._animation = AnimationController(
-        duration: _controller.duration,
-        value: widget.initiallyExpanded ? 1.0 : 0.0,
-        vsync: this,
-      )
-      .._expand = Tween<double>(
+    _controller = AnimationController(
+      duration: _controller.duration,
+      value: widget.initiallyExpanded ? 1.0 : 0.0,
+      vsync: this,
+    );
+    _expand = Tween<double>(
         begin: 0,
         end: 100,
       ).animate(
         CurvedAnimation(
           curve: Curves.ease,
-          parent: _controller._animation,
+          parent: _controller._controllers,
         ),
       );
+
+    widget.controller.addItem(widget.index, _controller, _expand);
   }
 
   @override
-  void didUpdateWidget(covariant FAccordion old) {
+  void didUpdateWidget(covariant _Item old) {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      }
+      _controller = AnimationController(
+        duration: _controller.duration,
+        value: widget.initiallyExpanded ? 1.0 : 0.0,
+        vsync: this,
+      );
+      _expand = Tween<double>(
+        begin: 0,
+        end: 100,
+      ).animate(
+        CurvedAnimation(
+          curve: Curves.ease,
+          parent: _controller._controllers,
+        ),
+      );
 
-      _controller = widget.controller ?? FAccordionController();
-      _controller
-        .._animation = AnimationController(
-          duration: _controller.duration,
-          value: widget.initiallyExpanded ? 1.0 : 0.0,
-          vsync: this,
-        )
-        .._expand = Tween<double>(
-          begin: 0,
-          end: 100,
-        ).animate(
-          CurvedAnimation(
-            curve: Curves.ease,
-            parent: _controller._animation,
-          ),
-        );
+      old.controller.removeItem(old.index);
+      widget.controller.addItem(widget.index, _controller, _expand);
     }
   }
 
@@ -158,7 +163,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.accordionStyle;
     return AnimatedBuilder(
-      animation: _controller._animation,
+      animation: _controller._controllers,
       builder: (context, _) => Column(
         children: [
           MouseRegion(
@@ -303,7 +308,7 @@ class _Clipper extends CustomClipper<Rect> {
   bool shouldReclip(covariant _Clipper oldClipper) => oldClipper.percentage != percentage;
 }
 
-/// The [FAccordion] styles.
+/// The [_Item] styles.
 final class FAccordionStyle with Diagnosticable {
   /// The title's text style.
   final TextStyle titleTextStyle;
