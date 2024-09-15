@@ -19,11 +19,11 @@ class FAccordionController extends ChangeNotifier {
   FAccordionController({
     required TickerProvider vsync,
     duration = const Duration(milliseconds: 500),
-    bool? initiallyExpanded,
+    bool initiallyExpanded = true,
   }) {
     _animation = AnimationController(
       duration: duration,
-      value: initiallyExpanded ?? true ? 1.0 : 0.0,
+      value: initiallyExpanded ? 1.0 : 0.0,
       vsync: vsync,
     );
     _expand = Tween<double>(
@@ -85,6 +85,9 @@ class FAccordion extends StatefulWidget {
   /// The accordion's controller.
   final FAccordionController? controller;
 
+  /// Whether the accordion is initially expanded. Defaults to true.
+  final bool initiallyExpanded;
+
   /// The child.
   final Widget child;
 
@@ -92,8 +95,9 @@ class FAccordion extends StatefulWidget {
   const FAccordion({
     required this.child,
     this.style,
-    this.controller,
     this.title = '',
+    this.controller,
+    this.initiallyExpanded = true,
     super.key,
   });
 
@@ -107,7 +111,8 @@ class FAccordion extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('title', title))
-      ..add(DiagnosticsProperty('controller', controller));
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('initiallyExpanded', initiallyExpanded));
   }
 }
 
@@ -118,7 +123,11 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FAccordionController(vsync: this);
+    _controller = widget.controller ??
+        FAccordionController(
+          vsync: this,
+          initiallyExpanded: widget.initiallyExpanded,
+        );
   }
 
   @override
@@ -159,7 +168,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
                         style: TextStyle(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
                         child: Text(
                           widget.title,
-                          style: style.title,
+                          style: style.titleTextStyle,
                         ),
                       ),
                     ),
@@ -181,7 +190,7 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
               clipper: _Clipper(percentage: _controller.value / 100.0),
               child: Padding(
                 padding: style.contentPadding,
-                child: widget.child,
+                child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
               ),
             ),
           ),
@@ -211,7 +220,10 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
 /// The [FAccordion] styles.
 final class FAccordionStyle with Diagnosticable {
   /// The title's text style.
-  final TextStyle title;
+  final TextStyle titleTextStyle;
+
+  /// The child's default text style.
+  final TextStyle childTextStyle;
 
   /// The padding of the title.
   final EdgeInsets titlePadding;
@@ -227,7 +239,8 @@ final class FAccordionStyle with Diagnosticable {
 
   /// Creates a [FAccordionStyle].
   FAccordionStyle({
-    required this.title,
+    required this.titleTextStyle,
+    required this.childTextStyle,
     required this.titlePadding,
     required this.contentPadding,
     required this.icon,
@@ -236,8 +249,12 @@ final class FAccordionStyle with Diagnosticable {
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : title = typography.base.copyWith(
+      : titleTextStyle = typography.base.copyWith(
           fontWeight: FontWeight.w500,
+          color: colorScheme.foreground,
+        ),
+        childTextStyle = typography.sm.copyWith(
+          color: colorScheme.foreground,
         ),
         titlePadding = const EdgeInsets.symmetric(vertical: 15),
         contentPadding = const EdgeInsets.only(bottom: 15),
@@ -250,14 +267,16 @@ final class FAccordionStyle with Diagnosticable {
   /// Returns a copy of this [FAccordionStyle] with the given properties replaced.
   @useResult
   FAccordionStyle copyWith({
-    TextStyle? title,
+    TextStyle? titleTextStyle,
+    TextStyle? childTextStyle,
     EdgeInsets? titlePadding,
     EdgeInsets? contentPadding,
     SvgPicture? icon,
     Color? dividerColor,
   }) =>
       FAccordionStyle(
-        title: title ?? this.title,
+        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+        childTextStyle: childTextStyle ?? this.childTextStyle,
         titlePadding: titlePadding ?? this.titlePadding,
         contentPadding: contentPadding ?? this.contentPadding,
         icon: icon ?? this.icon,
@@ -268,7 +287,8 @@ final class FAccordionStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('title', titleTextStyle))
+      ..add(DiagnosticsProperty('childTextStyle', childTextStyle))
       ..add(DiagnosticsProperty('padding', titlePadding))
       ..add(DiagnosticsProperty('contentPadding', contentPadding))
       ..add(ColorProperty('dividerColor', dividerColor));
@@ -279,7 +299,8 @@ final class FAccordionStyle with Diagnosticable {
       identical(this, other) ||
       other is FAccordionStyle &&
           runtimeType == other.runtimeType &&
-          title == other.title &&
+          titleTextStyle == other.titleTextStyle &&
+          childTextStyle == other.childTextStyle &&
           titlePadding == other.titlePadding &&
           contentPadding == other.contentPadding &&
           icon == other.icon &&
@@ -287,7 +308,12 @@ final class FAccordionStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      title.hashCode ^ titlePadding.hashCode ^ contentPadding.hashCode ^ icon.hashCode ^ dividerColor.hashCode;
+      titleTextStyle.hashCode ^
+      childTextStyle.hashCode ^
+      titlePadding.hashCode ^
+      contentPadding.hashCode ^
+      icon.hashCode ^
+      dividerColor.hashCode;
 }
 
 class _Expandable extends SingleChildRenderObjectWidget {

@@ -1,0 +1,55 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+import LinkBadge from "../../components/link-badge/link-badge";
+import LinkBadgeGroup from "../../components/link-badge/link-badge-group";
+
+# Accordion
+A vertically stacked set of interactive headings that each reveal a section of content.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.accordion/forui.widgets.accordion-library.html"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='accordion' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FAccordion(
+              title: 'Is it Styled?',
+              child: Text(
+                "Yes. It comes with default styles that matches the other components' aesthetics",
+                textAlign: TextAlign.left,
+              ),
+            ),
+            FAccordion(
+              title: 'Is it Animated?',
+              initiallyExpanded: false,
+              child: Text(
+                'Yes. It is animated by default, but you can disable it if you prefer',
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FAccordion(...)`
+
+```dart
+FAccordion(
+  title: 'Is it Styled?',
+  child: Text(
+    "Yes. It comes with default styles that matches the other components' aesthetics",
+    textAlign: TextAlign.left,
+  ),
+);
+```

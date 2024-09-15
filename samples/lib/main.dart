@@ -36,6 +36,7 @@ class _AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: EmptyRoute.page, initial: true),
+        AutoRoute(path: '/accordion/default', page: AccordionRoute.page),
         AutoRoute(path: '/alert/default', page: AlertRoute.page),
         AutoRoute(path: '/avatar/default', page: AvatarRoute.page),
         AutoRoute(path: '/avatar/raw', page: AvatarRawRoute.page),
