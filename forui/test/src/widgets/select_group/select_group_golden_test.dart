@@ -68,7 +68,7 @@ void main() {
                   child: FSelectGroup(
                     label: const Text('Select Group'),
                     description: const Text('Select Group Description'),
-                    error: const Text('Some error message.'),
+                    forceErrorText: 'Some error message.',
                     controller: FMultiSelectGroupController(values: {1}),
                     items: [
                       FSelectGroupItem.checkbox(

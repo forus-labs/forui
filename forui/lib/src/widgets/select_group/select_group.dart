@@ -15,6 +15,8 @@ import 'package:forui/forui.dart';
 /// * https://forui.dev/docs/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends FormField<Set<T>> {
+  static Widget _defaultErrorBuilder(BuildContext context, String error) => Text(error);
+
   /// The controller.
   ///
   /// See:
@@ -31,10 +33,8 @@ class FSelectGroup<T> extends FormField<Set<T>> {
   /// The description displayed below the [label].
   final Widget? description;
 
-  /// The error displayed below the [description].
-  ///
-  /// If the value is present, the select group is in an error state.
-  final Widget? error;
+  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  final Widget Function(BuildContext, String) errorBuilder;
 
   /// The items.
   final List<FSelectGroupItem<T>> items;
@@ -46,10 +46,11 @@ class FSelectGroup<T> extends FormField<Set<T>> {
     this.style,
     this.label,
     this.description,
-    this.error,
+    this.errorBuilder = _defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.initialValue,
+    super.forceErrorText,
     super.enabled = true,
     super.autovalidateMode,
     super.restorationId,
@@ -70,7 +71,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
               style: groupStyle.labelStyle,
               label: label,
               description: description,
-              error: error,
+              error: labelState == FLabelState.error ? errorBuilder(state.context, state.errorText!) : null,
               child: Column(
                 children: [
                   for (final item in items)
@@ -94,6 +95,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(IterableProperty('items', items));
   }
 }

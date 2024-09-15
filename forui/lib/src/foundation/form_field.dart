@@ -72,20 +72,12 @@ abstract class FFormField<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FormField<T>(
         onSaved: onSave,
-        // TODO: Directly use forceErrorText when available. https://api.flutter.dev/flutter/widgets/FormField/forceErrorText.html
-        validator: forceErrorText == null ? validator : (_) => forceErrorText,
+        validator: validator,
         initialValue: initialValue,
         enabled: enabled,
-        autovalidateMode:
-            forceErrorText == null ? autovalidateMode : AutovalidateMode.always, // Workaround for forceErrorText.
+        autovalidateMode: autovalidateMode, // Workaround for forceErrorText.
         restorationId: restorationId,
-        builder: (state) {
-          if (forceErrorText != null && !state.hasError) {
-            state.validate(); // TODO: Remove workaround when forceErrorText is available.
-          }
-
-          return builder(context, state);
-        },
+        builder: (state) => builder(context, state),
       );
 
   /// The builder for the [FormField].
