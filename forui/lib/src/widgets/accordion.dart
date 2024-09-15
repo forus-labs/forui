@@ -19,9 +19,7 @@ class FAccordionController extends ChangeNotifier {
   Animation<double>? _expand;
 
   /// Creates a [FAccordionController].
-  FAccordionController({
-    this.duration = const Duration(milliseconds: 500),
-  });
+  FAccordionController();
 
   /// Convenience method for toggling the current [expanded] status.
   ///
