@@ -71,7 +71,7 @@ class FAccordionController extends ChangeNotifier {
   }
 }
 
-/// A vertically stacked set of interactive headings that each reveal a section of content.
+/// An interactive heading that reveals a section of content.
 ///
 /// See:
 /// * https://forui.dev/docs/accordion for working examples.
