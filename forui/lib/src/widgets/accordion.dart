@@ -210,11 +210,6 @@ class _FAccordionState extends State<FAccordion> with SingleTickerProviderStateM
     super.dispose();
   }
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', _controller));
-  }
 }
 
 /// The [FAccordion] styles.
