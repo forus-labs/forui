@@ -27,7 +27,7 @@ interface class FAccordionController extends ChangeNotifier {
   /// * Throws [AssertionError] if [max] < 0.
   /// * Throws [AssertionError] if [min] > [max].
   FAccordionController({
-    int min = 0,
+    int min = 1,
     int? max,
     this.duration = const Duration(milliseconds: 500),
   })  : _min = min,
@@ -46,17 +46,39 @@ interface class FAccordionController extends ChangeNotifier {
   /// Convenience method for toggling the current [expanded] status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle(int index) async {}
+  Future<void> toggle(int index) async {
+    if (_max != null && _controllers.length >= _max) {
+      print('Cannot expand more than $_max items.');
+      return;
+    }
+
+    if (_controllers.length <= _min) {
+      print('Cannot collapse more than $_min items.');
+      return;
+    }
+
+    return await _controllers[index].$2.value == 100 ? collapse(index) : expand(index);
+  }
 
   /// Shows the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> expand(int index) async {}
+  Future<void> expand(int index) async {
+    final controller = _controllers[index].$1;
+    await controller.forward();
+    notifyListeners();
+  }
 
   /// Hides the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> collapse(int index) async {}
+  Future<void> collapse(int index) async {
+    final controller = _controllers[index].$1;
+    await controller.reverse();
+    notifyListeners();
+  }
+
+  double percentage(int index) => _controllers[index].$2.value / 100;
 }
 
 // class RadioAccordionController implements FAccordionController {
@@ -188,9 +210,9 @@ class _Item extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller));
-    properties.add(DiagnosticsProperty<FAccordionItem>('item', item));
-    properties.add(IntProperty('index', index));
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('item', item))
+      ..add(IntProperty('index', index));
   }
 }
 
@@ -245,65 +267,60 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
-      animation: _controller,
-      builder: (context, _) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Should all content in the accordion be left-aligned?
-        children: [
-          FTappable(
-            onPress: () {
-              if (_controller.value == 1) {
-                _controller.reverse();
-              } else {
-                _controller.forward();
-              }
-            },
-            child: MouseRegion(
-              onEnter: (_) => setState(() => _hovered = true),
-              onExit: (_) => setState(() => _hovered = false),
-              child: Container(
-                padding: widget.style.titlePadding,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: merge(
-                        // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-                        textHeightBehavior: const TextHeightBehavior(
-                          applyHeightToFirstAscent: false,
-                          applyHeightToLastDescent: false,
+        animation: widget.controller._controllers[widget.index].$2,
+        builder: (context, _) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start, //TODO: Should all content in the accordion be left-aligned?
+          children: [
+            FTappable(
+              onPress: () => widget.controller.toggle(widget.index),
+              child: MouseRegion(
+                onEnter: (_) => setState(() => _hovered = true),
+                onExit: (_) => setState(() => _hovered = false),
+                child: Container(
+                  padding: widget.style.titlePadding,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: merge(
+                          // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+                          textHeightBehavior: const TextHeightBehavior(
+                            applyHeightToFirstAscent: false,
+                            applyHeightToLastDescent: false,
+                          ),
+                          style: widget.style.titleTextStyle
+                              .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
+                          child: widget.item.title,
                         ),
-                        style: widget.style.titleTextStyle
-                            .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
-                        child: widget.item.title,
                       ),
-                    ),
-                    Transform.rotate(
-                      angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0,
-                      child: widget.style.icon,
-                    ),
-                  ],
+                      Transform.rotate(
+                        angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0, //TODO: use FAccordionController to get the percentage
+                        child: widget.style.icon,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
-          // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
-          // child to layout at a smaller size while the amount of padding remains the same.
-          _Expandable(
-            percentage: _expand.value / 100.0,
-            child: ClipRect(
-              clipper: _Clipper(percentage: _expand.value / 100.0),
-              child: Padding(
-                padding: widget.style.contentPadding,
-                child: DefaultTextStyle(style: widget.style.childTextStyle, child: widget.item.child),
+            // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
+            // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
+            // child to layout at a smaller size while the amount of padding remains the same.
+            _Expandable(
+              percentage: _expand.value / 100, //TODO: use FAccordionController to get the percentage
+              child: ClipRect(
+                clipper: _Clipper(percentage: _expand.value / 100), //TODO: use FAccordionController to get the percentage
+                child: Padding(
+                  padding: widget.style.contentPadding,
+                  child: DefaultTextStyle(style: widget.style.childTextStyle, child: widget.item.child),
+                ),
               ),
             ),
-          ),
-          FDivider(
-            style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: widget.style.dividerColor),
-          ),
-        ],
-      ),
-    );
+            FDivider(
+              style: context.theme.dividerStyles.horizontal
+                  .copyWith(padding: EdgeInsets.zero, color: widget.style.dividerColor),
+            ),
+          ],
+        ),
+      );
 }
 
 class _Expandable extends SingleChildRenderObjectWidget {
