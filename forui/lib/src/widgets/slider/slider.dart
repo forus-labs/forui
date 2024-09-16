@@ -6,17 +6,26 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 
+/// An input where the user selects a value from within a given range.
+///
+/// See:
+/// * https://forui.dev/docs/slider for working examples.
+/// * [FContinuousSliderController.new] for selecting a single continuous value.
+/// * [FContinuousSliderController.range] for selecting continuous range.
+/// * [FDiscreteSliderController.new] for selecting a discrete value.
+/// * [FDiscreteSliderController.range] for selecting a discrete range.
+/// * [FSliderStyles] for customizing a slider's appearance.
 class FSlider extends StatefulWidget {
-  static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(1)}%');
+  static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
   static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {
-        (min: true, max: false) => (selection) => '${(selection.offset.min * 100).toStringAsFixed(1)}%',
-        (min: false, max: true) => (selection) => '${(selection.offset.max * 100).toStringAsFixed(1)}%',
+        (min: true, max: false) => (selection) => '${(selection.offset.min * 100).toStringAsFixed(0)}%',
+        (min: false, max: true) => (selection) => '${(selection.offset.max * 100).toStringAsFixed(0)}%',
         (min: true, max: true) || (min: false, max: false) => (selection) =>
-            '${(selection.offset.min * 100).toStringAsFixed(1)}% - ${(selection.offset.max * 100).toStringAsFixed(1)}%',
+            '${(selection.offset.min * 100).toStringAsFixed(0)}% - ${(selection.offset.max * 100).toStringAsFixed(0)}%',
       };
 
-  static String _semanticValueFormatter(double value) => '${(value * 100).toStringAsFixed(1)}%';
+  static String _semanticValueFormatter(double value) => '${(value * 100).toStringAsFixed(0)}%';
 
   /// The controller.
   final FSliderController controller;
@@ -81,12 +90,13 @@ class _FSliderState extends State<FSlider> {
   @override
   Widget build(BuildContext context) {
     final styles = context.theme.sliderStyles;
-    final style = widget.style ?? switch ((widget.enabled, widget.layout.vertical)) {
-      (true, false) => styles.enabledHorizontalStyle,
-      (true, true) => styles.enabledVerticalStyle,
-      (false, false) => styles.disabledHorizontalStyle,
-      (false, true) => styles.disabledVerticalStyle,
-    };
+    final style = widget.style ??
+        switch ((widget.enabled, widget.layout.vertical)) {
+          (true, false) => styles.enabledHorizontalStyle,
+          (true, true) => styles.enabledVerticalStyle,
+          (false, false) => styles.disabledHorizontalStyle,
+          (false, true) => styles.disabledVerticalStyle,
+        };
 
     return InheritedData(
       style: style,
@@ -132,7 +142,11 @@ final class FSliderStyles with Diagnosticable {
   });
 
   /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
-  factory FSliderStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style,}) {
+  factory FSliderStyles.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+    required FStyle style,
+  }) {
     final enabledHorizontalStyle = FSliderStyle(
       activeColor: colorScheme.primary,
       inactiveColor: colorScheme.secondary,
@@ -166,20 +180,24 @@ final class FSliderStyles with Diagnosticable {
     );
 
     return FSliderStyles(
-        enabledHorizontalStyle: enabledHorizontalStyle,
-        enabledVerticalStyle: enabledHorizontalStyle.copyWith(markStyle: FSliderMarkStyle(
+      enabledHorizontalStyle: enabledHorizontalStyle,
+      enabledVerticalStyle: enabledHorizontalStyle.copyWith(
+        markStyle: FSliderMarkStyle(
           tickColor: colorScheme.mutedForeground,
           labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
           labelAnchor: Alignment.centerRight,
           labelOffset: -7.5,
-        ),),
-        disabledHorizontalStyle: disabledHorizontalStyle,
-        disabledVerticalStyle: disabledHorizontalStyle.copyWith(markStyle: FSliderMarkStyle(
+        ),
+      ),
+      disabledHorizontalStyle: disabledHorizontalStyle,
+      disabledVerticalStyle: disabledHorizontalStyle.copyWith(
+        markStyle: FSliderMarkStyle(
           tickColor: colorScheme.mutedForeground,
           labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
           labelAnchor: Alignment.centerRight,
           labelOffset: -7.5,
-        )),
+        ),
+      ),
     );
   }
 

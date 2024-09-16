@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/alignment.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
@@ -52,7 +53,6 @@ class _SliderLayoutState extends State<SliderLayout> {
   @override
   void didUpdateWidget(covariant SliderLayout old) {
     super.didUpdateWidget(old);
-
     final mainAxisExtent = (widget.layout.vertical ? widget.constraints.maxHeight : widget.constraints.maxWidth) -
         widget.style.thumbStyle.dimension;
     final oldMainAxisExtent =
@@ -78,91 +78,198 @@ class _SliderLayoutState extends State<SliderLayout> {
         controller: widget.controller,
         child: child!,
       ),
-      child: CustomMultiChildLayout(
-        delegate: _SliderLayoutDelegate(widget.controller, widget.style, widget.layout, marks),
+      child: _Slider(
+        style: widget.style,
+        layout: widget.layout,
+        marks: marks,
         children: [
+          const Track(),
           for (final mark in marks)
             if (mark case FSliderMark(:final style, :final label?))
-              LayoutId(
-                id: mark,
-                child: DefaultTextStyle(
-                  style: (style ?? markStyle).labelTextStyle,
-                  child: label,
-                ),
+              DefaultTextStyle(
+                style: (style ?? markStyle).labelTextStyle,
+                child: label,
               ),
-          LayoutId(
-            id: _SliderLayoutDelegate._track,
-            child: const Track(),
-          ),
         ],
       ),
     );
   }
 }
 
-class _SliderLayoutDelegate extends MultiChildLayoutDelegate {
-  static final _track = UniqueKey();
-
-  final FSliderController controller;
+class _Slider extends MultiChildRenderObjectWidget {
   final FSliderStyle style;
   final Layout layout;
   final List<FSliderMark> marks;
 
-  _SliderLayoutDelegate(this.controller, this.style, this.layout, this.marks);
+  const _Slider({
+    required this.style,
+    required this.layout,
+    required this.marks,
+    required super.children,
+  });
 
   @override
-  void performLayout(Size size) {
-    final constraints = BoxConstraints.loose(size);
-    final defaultMarkStyle = style.markStyle;
+  RenderObject createRenderObject(BuildContext context) => _RenderSlider(style, layout, marks);
 
-    final Rect Function(FSliderMark, FSliderMarkStyle) position = switch (layout) {
-      Layout.ltr => (mark, style) {
-          final offset = _anchor(constraints.maxWidth, mark.offset, style);
-          return _rect(constraints, mark, Offset(offset.$1, offset.$2), style);
+  @override
+  void updateRenderObject(BuildContext context, covariant _RenderSlider renderObject) {
+    renderObject
+      ..style = style
+      ..sliderLayout = layout
+      ..marks = marks;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('layout', layout))
+      ..add(IterableProperty('marks', marks));
+  }
+}
+
+class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
+
+class _RenderSlider extends RenderBox
+    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+  FSliderStyle _style;
+  Layout _layout;
+  List<FSliderMark> _marks;
+
+  _RenderSlider(this._style, this._layout, this._marks);
+
+  @override
+  void setupParentData(covariant RenderObject child) {
+    child.parentData = _Data();
+  }
+
+  @override
+  void performLayout() {
+    final loosened = constraints.loosen();
+    final Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) position = switch (_layout) {
+      Layout.ltr => (track, label, mark, style) {
+          final offset = _anchor(track.size.width, mark.offset, style);
+          return _rect(label, mark, Offset(offset.$1, offset.$2), style);
         },
-      Layout.rtl => (mark, style) {
-          final offset = _anchor(constraints.maxWidth, 1 - mark.offset, style);
-          return _rect(constraints, mark, Offset(offset.$1, offset.$2), style);
+      Layout.rtl => (track, size, mark, style) {
+          final offset = _anchor(track.size.width, 1 - mark.offset, style);
+          return _rect(size, mark, Offset(offset.$1, offset.$2), style);
         },
-      Layout.ttb => (mark, style) {
-          final offset = _anchor(constraints.maxHeight, mark.offset, style);
-          return _rect(constraints, mark, Offset(offset.$2, offset.$1), style);
+      Layout.ttb => (track, size, mark, style) {
+          final offset = _anchor(track.size.height, mark.offset, style);
+          return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
-      Layout.btt => (mark, style) {
-          final offset = _anchor(constraints.maxHeight, 1 - mark.offset, style);
-          return _rect(constraints, mark, Offset(offset.$2, offset.$1), style);
+      Layout.btt => (track, size, mark, style) {
+          final offset = _anchor(track.size.height, 1 - mark.offset, style);
+          return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
     };
 
-    final rects = marks.map((mark) => (mark, position(mark, mark.style ?? defaultMarkStyle))).toList();
-    final origin = switch (layout.vertical) {
-      true => Offset(rects.map((offset) => offset.$2.left).where((x) => x.isNegative).min?.abs() ?? 0, 0),
-      false => Offset(0, rects.map((offset) => offset.$2.top).where((x) => x.isNegative).min?.abs() ?? 0),
-    };
+    final track = firstChild!..layout(loosened, parentUsesSize: true);
 
-    layoutChild(_track, constraints);
-    positionChild(_track, origin);
+    final labels = <RenderBox, Rect>{};
+    var label = childAfter(track);
+    var minX = 0.0;
+    var minY = 0.0;
+    var maxX = track.size.width;
+    var maxY = track.size.height;
 
-    for (final (mark, rect) in rects) {
-      positionChild(mark, rect.topLeft + origin);
+    for (final mark in _marks) {
+      if (label == null) {
+        break;
+      }
+
+      label.layout(loosened, parentUsesSize: true);
+
+      final rect = position(track, label.size, mark, mark.style ?? _style.markStyle);
+      labels[label] = rect;
+
+      minX = min(minX, rect.left);
+      maxX = max(maxX, rect.right);
+      minY = min(minY, rect.top);
+      maxY = max(maxY, rect.bottom);
+
+      label = childAfter(label);
     }
+
+    final origin = switch (_layout.vertical) {
+      true => Offset(labels.values.map((rect) => rect.left).where((x) => x.isNegative).min?.abs() ?? 0, 0),
+      false => Offset(0, labels.values.map((rect) => rect.top).where((x) => x.isNegative).min?.abs() ?? 0),
+    };
+
+    (track.parentData! as _Data).offset = origin;
+
+    for (final MapEntry(key: label, value: rect) in labels.entries) {
+      (label.parentData! as _Data).offset = rect.topLeft + origin;
+    }
+
+    // size = constraints.biggest;
+    //
+    // print(Size(maxX - minX, maxY - minY));
+    size = constraints.constrain(Size(maxX - minX, maxY - minY));
   }
 
   (double, double) _anchor(double extent, double offset, FSliderMarkStyle markStyle) {
-    final thumb = style.thumbStyle.dimension;
+    final thumb = _style.thumbStyle.dimension;
     final trackMainAxis = (extent - thumb) * offset;
     final anchorMainAxis = (thumb / 2) + trackMainAxis;
-    final anchorCrossAxis = markStyle.labelOffset + (markStyle.labelOffset < 0 ? 0.0 : style.crossAxisExtent * 2);
+    final anchorCrossAxis = markStyle.labelOffset + (markStyle.labelOffset < 0 ? 0.0 : _style.crossAxisExtent * 2);
 
     return (anchorMainAxis, anchorCrossAxis);
   }
 
-  Rect _rect(BoxConstraints constraints, FSliderMark mark, Offset anchor, FSliderMarkStyle markStyle) {
-    final size = layoutChild(mark, constraints);
+  Rect _rect(Size size, FSliderMark mark, Offset anchor, FSliderMarkStyle markStyle) {
     final rect = anchor & size;
     return rect.shift(anchor - markStyle.labelAnchor.relative(to: size, origin: anchor));
   }
 
   @override
-  bool shouldRelayout(covariant _SliderLayoutDelegate old) => controller != old.controller || layout != old.layout;
+  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
+
+  @override
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
+      defaultHitTestChildren(result, position: position);
+
+  FSliderStyle get style => _style;
+
+  set style(FSliderStyle value) {
+    if (_style == value) {
+      return;
+    }
+
+    _style = value;
+    markNeedsLayout();
+  }
+
+  Layout get sliderLayout => _layout;
+
+  set sliderLayout(Layout value) {
+    if (_layout == value) {
+      return;
+    }
+
+    _layout = value;
+    markNeedsLayout();
+  }
+
+  List<FSliderMark> get marks => _marks;
+
+  set marks(List<FSliderMark> value) {
+    if (_marks.equals(value)) {
+      return;
+    }
+
+    _marks = value;
+    markNeedsLayout();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('layout', sliderLayout))
+      ..add(IterableProperty('marks', marks));
+  }
 }
