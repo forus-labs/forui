@@ -26,6 +26,7 @@ class _SandboxState extends State<Sandbox> {
             items: [
               FAccordionItem(
                 title: const Text('Title 1'),
+                initiallyExpanded: true,
                 child: const Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,

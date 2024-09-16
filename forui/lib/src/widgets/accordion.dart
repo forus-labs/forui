@@ -38,7 +38,7 @@ interface class FAccordionController extends ChangeNotifier {
         assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   void addItem(int index, AnimationController controller, Animation expand) {
-    _controllers[index] = (controller, expand);
+    _controllers.add((controller, expand));
   }
 
   void removeItem(int index) => _controllers.remove(index);
@@ -115,8 +115,6 @@ class FAccordion extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<FAccordionController?>('controller', controller));
-    properties.add(IterableProperty<FAccordionItem>('items', items));
-    properties.add(DiagnosticsProperty<FAccordionStyle?>('style', style));
   }
 }
 
@@ -205,7 +203,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: _controller.duration,
+      duration: widget.controller.duration,
       value: widget.item.initiallyExpanded ? 1.0 : 0.0,
       vsync: this,
     );
@@ -226,7 +224,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
       _controller = AnimationController(
-        duration: _controller.duration,
+        duration: widget.controller.duration,
         value: widget.item.initiallyExpanded ? 1.0 : 0.0,
         vsync: this,
       );
@@ -246,25 +244,24 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.accordionStyle;
-    return AnimatedBuilder(
+  Widget build(BuildContext context) => AnimatedBuilder(
       animation: _controller,
       builder: (context, _) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start, // Should all content in the accordion be left-aligned?
         children: [
-          MouseRegion(
-            onEnter: (_) => setState(() => _hovered = true),
-            onExit: (_) => setState(() => _hovered = false),
-            child: FTappable(
-              onPress: () {
-                if (_controller.value == 1) {
-                  _controller.reverse();
-                } else {
-                  _controller.forward();
-                }
-              },
+          FTappable(
+            onPress: () {
+              if (_controller.value == 1) {
+                _controller.reverse();
+              } else {
+                _controller.forward();
+              }
+            },
+            child: MouseRegion(
+              onEnter: (_) => setState(() => _hovered = true),
+              onExit: (_) => setState(() => _hovered = false),
               child: Container(
-                padding: style.titlePadding,
+                padding: widget.style.titlePadding,
                 child: Row(
                   children: [
                     Expanded(
@@ -274,14 +271,14 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
                           applyHeightToFirstAscent: false,
                           applyHeightToLastDescent: false,
                         ),
-                        style: style.titleTextStyle
+                        style: widget.style.titleTextStyle
                             .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
                         child: widget.item.title,
                       ),
                     ),
                     Transform.rotate(
-                      angle: (_controller.value / 100 * -180 + 90) * math.pi / 180.0,
-                      child: style.icon,
+                      angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0,
+                      child: widget.style.icon,
                     ),
                   ],
                 ),
@@ -292,22 +289,21 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
           // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
           // child to layout at a smaller size while the amount of padding remains the same.
           _Expandable(
-            percentage: _controller.value / 100.0,
+            percentage: _expand.value / 100.0,
             child: ClipRect(
-              clipper: _Clipper(percentage: _controller.value / 100.0),
+              clipper: _Clipper(percentage: _expand.value / 100.0),
               child: Padding(
-                padding: style.contentPadding,
-                child: DefaultTextStyle(style: style.childTextStyle, child: widget.item.child),
+                padding: widget.style.contentPadding,
+                child: DefaultTextStyle(style: widget.style.childTextStyle, child: widget.item.child),
               ),
             ),
           ),
           FDivider(
-            style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: style.dividerColor),
+            style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: widget.style.dividerColor),
           ),
         ],
       ),
     );
-  }
 }
 
 class _Expandable extends SingleChildRenderObjectWidget {
