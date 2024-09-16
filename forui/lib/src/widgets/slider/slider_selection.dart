@@ -3,7 +3,6 @@ import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 /// A [FSlider]'s active track/selection.
 sealed class FSliderSelection with Diagnosticable {
@@ -35,7 +34,8 @@ sealed class FSliderSelection with Diagnosticable {
 
   /// Creates a [FSliderSelection].
   factory FSliderSelection({
-    required ({double min, double max}) offset,
+    required double max,
+    double min,
     ({double min, double max}) extent,
   }) = _Selection;
 
@@ -101,9 +101,14 @@ sealed class FSliderSelection with Diagnosticable {
 
 final class _Selection extends FSliderSelection {
   _Selection({
-    required super.offset,
+    required double max,
+    double min = 0,
     super.extent = (min: 0, max: 1),
-  }) : super._copy(rawExtent: (min: 0, max: 0, total: 0), rawOffset: (min: 0, max: 0));
+  }) : super._copy(
+          offset: (min: min, max: max),
+          rawExtent: (min: 0, max: 0, total: 0),
+          rawOffset: (min: 0, max: 0),
+        );
 
   @override
   FSliderSelection step({required bool min, required bool extend}) => this;
@@ -143,8 +148,10 @@ final class ContinuousSelection extends FSliderSelection {
 
   @override
   ContinuousSelection move({required bool min, required double to}) {
-    if ((min && to < 0) || (!min && rawExtent.total < to) || (min ? rawOffset.max < to : to < rawOffset.min)) {
-      return this;
+    if (to < 0) {
+      to = 0;
+    } else if (rawExtent.total < to) {
+      to = rawExtent.total;
     }
 
     final (minOffset, maxOffset) = switch (min) {
@@ -282,13 +289,14 @@ final class DiscreteSelection extends FSliderSelection {
           offset == other.offset &&
           rawExtent == other.rawExtent &&
           rawOffset == other.rawOffset &&
-          _ticks.equals(other._ticks);
+          mapEquals(_ticks, other._ticks);
 
   @override
   int get hashCode => extent.hashCode ^ offset.hashCode ^ rawExtent.hashCode ^ rawOffset.hashCode ^ _ticks.hashCode;
 }
 
-extension on SplayTreeMap<double, void> {
+@internal
+extension SplayTreeMaps on SplayTreeMap<double, void> {
   Iterable<double> firstKeysAfter(double value) sync* {
     var current = value;
     while (true) {
