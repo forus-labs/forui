@@ -230,41 +230,37 @@ final class DiscreteSelection extends FSliderSelection {
     // Round to the nearest tick that satisfy the extent constraints.
     to = _ticks.round(to);
     final (minOffset, maxOffset) = switch (min) {
-      true when extent.max - to < extent.min => (
+      true when offset.max - to < extent.min => (
           _ticks
               .lastKeysBefore(to)
               .takeWhile((tick) => offset.min < tick)
-              .firstWhere((tick) => extent.min <= extent.max - tick, orElse: () => offset.min),
+              .firstWhere((tick) => extent.min <= offset.max - tick, orElse: () => offset.min),
           offset.max,
         ),
-      true when extent.max < extent.max - to => (
+      true when extent.max < offset.max - to => (
           _ticks
               .firstKeysAfter(to)
               .takeWhile((tick) => tick < offset.min)
-              .firstWhere((tick) => extent.max - tick <= extent.max, orElse: () => offset.min),
+              .firstWhere((tick) => offset.max - tick <= extent.max, orElse: () => offset.min),
           offset.max,
         ),
       true => (to, offset.max),
-      false when to - extent.min < extent.min => (
+      false when to - offset.min < extent.min => (
           offset.min,
           _ticks
               .firstKeysAfter(to)
               .takeWhile((tick) => tick < offset.max)
-              .firstWhere((tick) => extent.min <= extent.min + tick, orElse: () => offset.max),
+              .firstWhere((tick) => extent.min <= tick - offset.min, orElse: () => offset.max),
         ),
-      false when extent.max < to - extent.min => (
+      false when extent.max < to - offset.min => (
           offset.min,
           _ticks
               .lastKeysBefore(to)
               .takeWhile((tick) => offset.max < tick)
-              .firstWhere((tick) => extent.min + tick <= extent.max, orElse: () => offset.max),
+              .firstWhere((tick) => tick - offset.min <= extent.max, orElse: () => offset.max),
         ),
       false => (offset.min, to),
     };
-
-    if (maxOffset < minOffset) {
-      return this;
-    }
 
     return DiscreteSelection._(
       ticks: _ticks,
