@@ -131,10 +131,10 @@ class FRadio extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(FlagProperty('value', value: value))
+      ..add(FlagProperty('value', value: value, ifTrue: 'checked'))
       ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(FlagProperty('enabled', value: enabled))
-      ..add(DiagnosticsProperty('autofocus', autofocus))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
