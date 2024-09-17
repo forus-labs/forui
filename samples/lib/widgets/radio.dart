@@ -7,11 +7,10 @@ import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
 class RadioPage extends SampleScaffold {
-  RadioPage({ @queryParam super.theme });
+  RadioPage({@queryParam super.theme});
 
   @override
-  Widget child(BuildContext context) =>
-      Column(
+  Widget child(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ConstrainedBox(
