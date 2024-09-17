@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 
 /// A set of items that are treated as a single selection.
 ///
-/// Typically used to group multiple [FSelectGroupItem.checkbox]s.
+/// Typically used to group multiple [FSelectGroupItem.checkbox]s or [FSelectGroupItem.radio]s.
 ///
 /// See:
 /// * https://forui.dev/docs/select-group for working examples.
