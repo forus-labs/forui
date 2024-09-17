@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -176,30 +177,30 @@ class FRadioStyle with Diagnosticable {
 
   /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
   factory FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style}) => FRadioStyle(
-      labelLayoutStyle: FLabelStyles.inherit(style: style).horizontal.layout,
-      enabledStyle: FRadioStateStyle(
-        labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-        descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-        borderColor: colorScheme.primary,
-        selectedColor: colorScheme.primary,
-        backgroundColor: colorScheme.background,
-      ),
-      disabledStyle: FRadioStateStyle(
-        labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-        descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-        borderColor: colorScheme.primary.withOpacity(0.5),
-        selectedColor: colorScheme.primary.withOpacity(0.5),
-        backgroundColor: colorScheme.background,
-      ),
-      errorStyle: FRadioErrorStyle(
-        labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-        descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-        errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-        borderColor: colorScheme.error,
-        selectedColor: colorScheme.error,
-        backgroundColor: colorScheme.background,
-      ),
-    );
+        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontal.layout,
+        enabledStyle: FRadioStateStyle(
+          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+          borderColor: colorScheme.primary,
+          selectedColor: colorScheme.primary,
+          backgroundColor: colorScheme.background,
+        ),
+        disabledStyle: FRadioStateStyle(
+          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+          borderColor: colorScheme.primary.withOpacity(0.5),
+          selectedColor: colorScheme.primary.withOpacity(0.5),
+          backgroundColor: colorScheme.background,
+        ),
+        errorStyle: FRadioErrorStyle(
+          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+          borderColor: colorScheme.error,
+          selectedColor: colorScheme.error,
+          backgroundColor: colorScheme.background,
+        ),
+      );
 
   /// The [FLabel]'s style.
   FLabelStyle get labelStyle => (
