@@ -1,0 +1,29 @@
+import 'package:flutter/rendering.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:forui/forui.dart';
+
+void main() {
+  group('FSliderMark', () {
+    for (final constructor in [
+      () => FSliderMark(value: -0.1),
+      () => FSliderMark(value: 1.1),
+    ]) {
+      test('constructor', () => expect(constructor, throwsAssertionError));
+    }
+  });
+
+  group('FSliderMarkStyle', () {
+    test('constructor', () {
+      expect(
+        () => FSliderMarkStyle(
+          tickColor: const Color(0xFF000000),
+          tickDimension: -1,
+          labelTextStyle: const TextStyle(),
+          labelAnchor: Alignment.center,
+          labelOffset: 0.0,
+        ),
+        throwsAssertionError,
+      );
+    });
+  });
+}

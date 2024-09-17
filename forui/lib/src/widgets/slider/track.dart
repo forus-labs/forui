@@ -177,10 +177,10 @@ class _Track extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            for (var FSliderMark(:style, :offset, :tick) in marks)
+            for (var FSliderMark(:style, :value, :tick) in marks)
               if (tick)
                 position(
-                  offset: offset * extent + half - ((style ??= markStyle).tickDimension / 2),
+                  offset: value * extent + half - ((style ??= markStyle).tickDimension / 2),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,

@@ -213,7 +213,7 @@ class FDiscreteSliderController extends FSliderController {
       mainAxisExtent: extent,
       extent: selection.extent,
       offset: selection.offset,
-      ticks: SplayTreeMap.fromIterable(marks.map((mark) => mark.offset), value: (_) {}),
+      ticks: SplayTreeMap.fromIterable(marks.map((mark) => mark.value), value: (_) {}),
     );
 
     if (_selection == null) {

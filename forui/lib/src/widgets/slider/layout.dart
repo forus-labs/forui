@@ -149,19 +149,19 @@ class _RenderSlider extends RenderBox
     final loosened = constraints.loosen();
     final Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) position = switch (_layout) {
       Layout.ltr => (track, label, mark, style) {
-          final offset = _anchor(track.size.width, mark.offset, style);
+          final offset = _anchor(track.size.width, mark.value, style);
           return _rect(label, mark, Offset(offset.$1, offset.$2), style);
         },
       Layout.rtl => (track, size, mark, style) {
-          final offset = _anchor(track.size.width, 1 - mark.offset, style);
+          final offset = _anchor(track.size.width, 1 - mark.value, style);
           return _rect(size, mark, Offset(offset.$1, offset.$2), style);
         },
       Layout.ttb => (track, size, mark, style) {
-          final offset = _anchor(track.size.height, mark.offset, style);
+          final offset = _anchor(track.size.height, mark.value, style);
           return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
       Layout.btt => (track, size, mark, style) {
-          final offset = _anchor(track.size.height, 1 - mark.offset, style);
+          final offset = _anchor(track.size.height, 1 - mark.value, style);
           return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
     };

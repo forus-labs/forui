@@ -69,39 +69,41 @@ class FSlider extends FormField<FSliderSelection> {
     super.restorationId,
     super.key,
   })  : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller),
-        super(builder: (field) {
-          final state = field as _State;
-          final styles = state.context.theme.sliderStyles;
-          final sliderStyle = style ??
-              switch ((state.hasError, enabled, layout.vertical)) {
-                (true, _, false) => styles.errorHorizontalStyle,
-                (true, _, true) => styles.errorVerticalStyle,
-                (false, true, false) => styles.enabledHorizontalStyle,
-                (false, true, true) => styles.enabledVerticalStyle,
-                (false, false, false) => styles.disabledHorizontalStyle,
-                (false, false, true) => styles.disabledVerticalStyle,
-              };
+        super(
+          builder: (field) {
+            final state = field as _State;
+            final styles = state.context.theme.sliderStyles;
+            final sliderStyle = style ??
+                switch ((state.hasError, enabled, layout.vertical)) {
+                  (true, _, false) => styles.errorHorizontalStyle,
+                  (true, _, true) => styles.errorVerticalStyle,
+                  (false, true, false) => styles.enabledHorizontalStyle,
+                  (false, true, true) => styles.enabledVerticalStyle,
+                  (false, false, false) => styles.disabledHorizontalStyle,
+                  (false, false, true) => styles.disabledVerticalStyle,
+                };
 
-          // TODO wrap in FLabel.
-          return InheritedData(
-            style: sliderStyle,
-            layout: layout,
-            marks: marks,
-            enabled: enabled,
-            tooltipBuilder: tooltipBuilder,
-            semanticFormatterCallback: semanticFormatterCallback ?? _formatter(controller),
-            semanticValueFormatterCallback: semanticValueFormatterCallback,
-            child: LayoutBuilder(
-              builder: (context, constraints) => SliderLayout(
-                controller: controller,
-                style: sliderStyle,
-                layout: layout,
-                marks: marks,
-                constraints: constraints,
+            // TODO wrap in FLabel.
+            return InheritedData(
+              style: sliderStyle,
+              layout: layout,
+              marks: marks,
+              enabled: enabled,
+              tooltipBuilder: tooltipBuilder,
+              semanticFormatterCallback: semanticFormatterCallback ?? _formatter(controller),
+              semanticValueFormatterCallback: semanticValueFormatterCallback,
+              child: LayoutBuilder(
+                builder: (context, constraints) => SliderLayout(
+                  controller: controller,
+                  style: sliderStyle,
+                  layout: layout,
+                  marks: marks,
+                  constraints: constraints,
+                ),
               ),
-            ),
-          );
-        });
+            );
+          },
+        );
 
   @override
   FormFieldState<FSliderSelection> createState() => _State();

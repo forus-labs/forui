@@ -10,11 +10,11 @@ final class FSliderMark with Diagnosticable {
 
   /// The offset in the slider's track at which to position this mark, in percentage.
   ///
-  /// For example, if the offset is `0.5`, the mark will be positioned in the middle of the slider's bar.
+  /// For example, if the value is `0.5`, the mark will be positioned in the middle of the slider's bar.
   ///
   /// ## Contract
   /// Throws [AssertionError] if it is not between `0` and `1`, inclusive.
-  final double offset;
+  final double value;
 
   /// True if a tick should be shown. Defaults to true.
   final bool tick;
@@ -24,18 +24,18 @@ final class FSliderMark with Diagnosticable {
 
   /// Creates a [FSliderMark] at the given percentage in a slider.
   const FSliderMark({
-    required this.offset,
+    required this.value,
     this.style,
     this.tick = true,
     this.label,
-  }) : assert(0 <= offset && offset <= 1, 'offset must be between 0 and 1, but is $offset.');
+  }) : assert(0 <= value && value <= 1, 'offset must be between 0 and 1, but is $value.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('offset', offset))
+      ..add(DoubleProperty('offset', value))
       ..add(FlagProperty('tick', value: tick, ifTrue: 'tick'));
   }
 
@@ -45,12 +45,12 @@ final class FSliderMark with Diagnosticable {
       other is FSliderMark &&
           runtimeType == other.runtimeType &&
           style == other.style &&
-          offset == other.offset &&
+          value == other.value &&
           tick == other.tick &&
           label == other.label;
 
   @override
-  int get hashCode => style.hashCode ^ offset.hashCode ^ tick.hashCode ^ label.hashCode;
+  int get hashCode => style.hashCode ^ value.hashCode ^ tick.hashCode ^ label.hashCode;
 }
 
 /// A [FSlider] mark's style.
