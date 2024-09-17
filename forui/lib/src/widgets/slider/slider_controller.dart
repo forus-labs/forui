@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/platform.dart';
 import 'package:forui/src/widgets/slider/slider_selection.dart';
+import 'package:meta/meta.dart';
 
 /// Possible ways for a user to interact with a slider.
 enum FSliderInteraction {
@@ -70,12 +71,13 @@ abstract class FSliderController extends ChangeNotifier {
   /// Registers the controller to a slider with the given extent and marks.
   ///
   /// A controller can only be attached to a single slider at a time.
+  @internal
   void attach(double extent, List<FSliderMark> marks);
 
   /// Moves the active track on the [min] edge to the previous/next step.
   void step({required bool min, required bool extend}) {
     if (_selection case final selection?) {
-      _set(selection.step(min: min, extend: extend));
+      this.selection = selection.step(min: min, extend: extend);
     }
   }
 
@@ -90,7 +92,7 @@ abstract class FSliderController extends ChangeNotifier {
     assert(min ? extendable.min : extendable.max, 'Slider is not extendable at the ${min ? 'min' : 'max'} edge.');
 
     if (_selection case final selection?) {
-      _set(selection.move(min: min, to: offset));
+      this.selection = selection.move(min: min, to: offset);
     }
   }
 
@@ -103,19 +105,24 @@ abstract class FSliderController extends ChangeNotifier {
     }
 
     if (_selection case final selection?) {
-      _set(
-        switch (extendable) {
-          (min: true, max: true) when offset < selection.rawOffset.min => selection.move(min: true, to: offset),
-          (min: true, max: true) when selection.rawOffset.max < offset => selection.move(min: false, to: offset),
-          (min: true, max: false) => selection.move(min: true, to: offset),
-          (min: false, max: true) => selection.move(min: false, to: offset),
-          _ => null,
-        },
-      );
+      this.selection = switch (extendable) {
+        (min: true, max: true) when offset < selection.rawOffset.min => selection.move(min: true, to: offset),
+        (min: true, max: true) when selection.rawOffset.max < offset => selection.move(min: false, to: offset),
+        (min: true, max: false) => selection.move(min: true, to: offset),
+        (min: false, max: true) => selection.move(min: false, to: offset),
+        _ => null,
+      };
     }
   }
 
-  void _set(FSliderSelection? selection) {
+  /// Resets the controller to its initial state.
+  void reset();
+
+  /// The slider's active track/selection.
+  FSliderSelection get selection => _selection ?? _initialSelection;
+
+  @internal
+  set selection(FSliderSelection? selection) {
     if (selection == null || _selection == selection) {
       return;
     }
@@ -123,9 +130,6 @@ abstract class FSliderController extends ChangeNotifier {
     _selection = selection;
     notifyListeners();
   }
-
-  /// The slider's active track/selection.
-  FSliderSelection get selection => _selection ?? _initialSelection;
 }
 
 /// A controller that manages a slider's active track which represents a continuous range/value.
@@ -155,6 +159,7 @@ class FContinuousSliderController extends FSliderController {
         super.range();
 
   @override
+  @internal
   void attach(double extent, List<FSliderMark> _) {
     final proposed = ContinuousSelection(
       step: stepPercentage,
@@ -164,9 +169,21 @@ class FContinuousSliderController extends FSliderController {
     );
 
     if (_selection == null) {
-      _selection = proposed;
+      _selection = proposed; // We don't want to notify listeners when performing initialization.
     } else {
-      _set(proposed);
+      selection = proposed;
+    }
+  }
+
+  @override
+  void reset() {
+    if (_selection case final selection?) {
+      this.selection = ContinuousSelection(
+        step: stepPercentage,
+        mainAxisExtent: selection.rawExtent.total,
+        extent: _initialSelection.extent,
+        offset: _initialSelection.offset,
+      );
     }
   }
 }
@@ -188,6 +205,7 @@ class FDiscreteSliderController extends FSliderController {
   }) : super.range();
 
   @override
+  @internal
   void attach(double extent, List<FSliderMark> marks) {
     assert(marks.isNotEmpty, 'At least one mark is required.');
 
@@ -199,9 +217,21 @@ class FDiscreteSliderController extends FSliderController {
     );
 
     if (_selection == null) {
-      _selection = proposed;
+      _selection = proposed; // We don't want to notify listeners when performing initialization.
     } else {
-      _set(proposed);
+      selection = proposed;
+    }
+  }
+
+  @override
+  void reset() {
+    if (_selection case final DiscreteSelection selection?) {
+      this.selection = DiscreteSelection(
+        ticks: selection.ticks,
+        mainAxisExtent: selection.rawExtent.total,
+        extent: _initialSelection.extent,
+        offset: _initialSelection.offset,
+      );
     }
   }
 }

@@ -15,7 +15,7 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 /// * [FDiscreteSliderController.new] for selecting a discrete value.
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 /// * [FSliderStyles] for customizing a slider's appearance.
-class FSlider extends StatefulWidget {
+class FSlider extends FormField<FSliderSelection> {
   static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
   static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {
@@ -39,9 +39,6 @@ class FSlider extends StatefulWidget {
   /// The marks.
   final List<FSliderMark> marks;
 
-  /// True if this slider is enabled. Defaults to true.
-  final bool enabled;
-
   /// A builder that creates the tooltip. Defaults to printing the current percentage.
   final Widget Function(FTooltipStyle, double) tooltipBuilder;
 
@@ -61,15 +58,53 @@ class FSlider extends StatefulWidget {
     this.style,
     this.layout = Layout.ltr,
     this.marks = const [],
-    this.enabled = true,
     this.tooltipBuilder = _tooltipBuilder,
     this.semanticValueFormatterCallback = _semanticValueFormatter,
     String Function(FSliderSelection)? semanticFormatterCallback,
+    super.onSaved,
+    super.validator,
+    super.forceErrorText,
+    super.enabled = true,
+    super.autovalidateMode,
+    super.restorationId,
     super.key,
-  }) : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller);
+  })  : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller),
+        super(builder: (field) {
+          final state = field as _State;
+          final styles = state.context.theme.sliderStyles;
+          final sliderStyle = style ??
+              switch ((state.hasError, enabled, layout.vertical)) {
+                (true, _, false) => styles.errorHorizontalStyle,
+                (true, _, true) => styles.errorVerticalStyle,
+                (false, true, false) => styles.enabledHorizontalStyle,
+                (false, true, true) => styles.enabledVerticalStyle,
+                (false, false, false) => styles.disabledHorizontalStyle,
+                (false, false, true) => styles.disabledVerticalStyle,
+              };
+
+          // TODO wrap in FLabel.
+          return InheritedData(
+            style: sliderStyle,
+            layout: layout,
+            marks: marks,
+            enabled: enabled,
+            tooltipBuilder: tooltipBuilder,
+            semanticFormatterCallback: semanticFormatterCallback ?? _formatter(controller),
+            semanticValueFormatterCallback: semanticValueFormatterCallback,
+            child: LayoutBuilder(
+              builder: (context, constraints) => SliderLayout(
+                controller: controller,
+                style: sliderStyle,
+                layout: layout,
+                marks: marks,
+                constraints: constraints,
+              ),
+            ),
+          );
+        });
 
   @override
-  State<FSlider> createState() => _FSliderState();
+  FormFieldState<FSliderSelection> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -86,37 +121,55 @@ class FSlider extends StatefulWidget {
   }
 }
 
-class _FSliderState extends State<FSlider> {
+class _State extends FormFieldState<FSliderSelection> {
   @override
-  Widget build(BuildContext context) {
-    final styles = context.theme.sliderStyles;
-    final style = widget.style ??
-        switch ((widget.enabled, widget.layout.vertical)) {
-          (true, false) => styles.enabledHorizontalStyle,
-          (true, true) => styles.enabledVerticalStyle,
-          (false, false) => styles.disabledHorizontalStyle,
-          (false, true) => styles.disabledVerticalStyle,
-        };
-
-    return InheritedData(
-      style: style,
-      layout: widget.layout,
-      marks: widget.marks,
-      enabled: widget.enabled,
-      tooltipBuilder: widget.tooltipBuilder,
-      semanticFormatterCallback: widget.semanticFormatterCallback,
-      semanticValueFormatterCallback: widget.semanticValueFormatterCallback,
-      child: LayoutBuilder(
-        builder: (context, constraints) => SliderLayout(
-          controller: widget.controller,
-          style: style,
-          layout: widget.layout,
-          marks: widget.marks,
-          constraints: constraints,
-        ),
-      ),
-    );
+  void initState() {
+    super.initState();
+    widget.controller.addListener(_handleControllerChanged);
   }
+
+  @override
+  void didUpdateWidget(covariant FSlider old) {
+    super.didUpdateWidget(old);
+    if (widget.controller == old.controller) {
+      return;
+    }
+
+    widget.controller.addListener(_handleControllerChanged);
+    old.controller.removeListener(_handleControllerChanged);
+  }
+
+  @override
+  void didChange(FSliderSelection? value) {
+    super.didChange(value);
+    // This is not 100% accurate since a controller's selection can never be null. However, users will have to go out
+    // of their way to obtain a FormFieldState<FSliderSelection> via a GlobalKey AND call didChange(null).
+    assert(value != null, "A slider's selection cannot be null.");
+    if (widget.controller.selection != value) {
+      widget.controller.selection = value;
+    }
+  }
+
+  @override
+  void reset() {
+    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
+    widget.controller.reset();
+    super.reset();
+  }
+
+  void _handleControllerChanged() {
+    // Suppress changes that originated from within this class.
+    //
+    // In the case where a controller has been passed in to this widget, we register this change listener. In these
+    // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
+    // reset() method. In such cases, the FormField value will already have been set.
+    if (widget.controller.selection != value) {
+      didChange(widget.controller.selection);
+    }
+  }
+
+  @override
+  FSlider get widget => super.widget as FSlider;
 }
 
 /// A slider's styles.
@@ -133,12 +186,20 @@ final class FSliderStyles with Diagnosticable {
   /// The disabled slider's vertical style.
   final FSliderStyle disabledVerticalStyle;
 
+  /// The error slider's horizontal style.
+  final FSliderStyle errorHorizontalStyle;
+
+  /// The error slider's vertical style.
+  final FSliderStyle errorVerticalStyle;
+
   /// Creates a [FSliderStyles].
   FSliderStyles({
     required this.enabledHorizontalStyle,
     required this.enabledVerticalStyle,
     required this.disabledHorizontalStyle,
     required this.disabledVerticalStyle,
+    required this.errorHorizontalStyle,
+    required this.errorVerticalStyle,
   });
 
   /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
@@ -179,6 +240,22 @@ final class FSliderStyles with Diagnosticable {
       ),
     );
 
+    final errorHorizontalStyle = FSliderStyle(
+      activeColor: colorScheme.error,
+      inactiveColor: colorScheme.secondary,
+      markStyle: FSliderMarkStyle(
+        tickColor: colorScheme.mutedForeground,
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.error),
+        labelAnchor: Alignment.topCenter,
+        labelOffset: 7.5,
+      ),
+      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      thumbStyle: FSliderThumbStyle(
+        color: colorScheme.errorForeground,
+        borderColor: colorScheme.error,
+      ),
+    );
+
     return FSliderStyles(
       enabledHorizontalStyle: enabledHorizontalStyle,
       enabledVerticalStyle: enabledHorizontalStyle.copyWith(
@@ -198,6 +275,15 @@ final class FSliderStyles with Diagnosticable {
           labelOffset: -7.5,
         ),
       ),
+      errorHorizontalStyle: errorHorizontalStyle,
+      errorVerticalStyle: errorHorizontalStyle.copyWith(
+        markStyle: FSliderMarkStyle(
+          tickColor: colorScheme.mutedForeground,
+          labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
+          labelAnchor: Alignment.centerRight,
+          labelOffset: -7.5,
+        ),
+      ),
     );
   }
 
@@ -208,12 +294,16 @@ final class FSliderStyles with Diagnosticable {
     FSliderStyle? enabledVerticalStyle,
     FSliderStyle? disabledHorizontalStyle,
     FSliderStyle? disabledVerticalStyle,
+    FSliderStyle? errorHorizontalStyle,
+    FSliderStyle? errorVerticalStyle,
   }) =>
       FSliderStyles(
         enabledHorizontalStyle: enabledHorizontalStyle ?? this.enabledHorizontalStyle,
         enabledVerticalStyle: enabledVerticalStyle ?? this.enabledVerticalStyle,
         disabledHorizontalStyle: disabledHorizontalStyle ?? this.disabledHorizontalStyle,
         disabledVerticalStyle: disabledVerticalStyle ?? this.disabledVerticalStyle,
+        errorHorizontalStyle: errorHorizontalStyle ?? this.errorHorizontalStyle,
+        errorVerticalStyle: errorVerticalStyle ?? this.errorVerticalStyle,
       );
 
   @override
@@ -223,8 +313,31 @@ final class FSliderStyles with Diagnosticable {
       ..add(DiagnosticsProperty('enabledHorizontalStyle', enabledHorizontalStyle))
       ..add(DiagnosticsProperty('enabledVerticalStyle', enabledVerticalStyle))
       ..add(DiagnosticsProperty('disabledHorizontalStyle', disabledHorizontalStyle))
-      ..add(DiagnosticsProperty('disabledVerticalStyle', disabledVerticalStyle));
+      ..add(DiagnosticsProperty('disabledVerticalStyle', disabledVerticalStyle))
+      ..add(DiagnosticsProperty('errorHorizontalStyle', errorHorizontalStyle))
+      ..add(DiagnosticsProperty('errorVerticalStyle', errorVerticalStyle));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FSliderStyles &&
+          runtimeType == other.runtimeType &&
+          enabledHorizontalStyle == other.enabledHorizontalStyle &&
+          enabledVerticalStyle == other.enabledVerticalStyle &&
+          disabledHorizontalStyle == other.disabledHorizontalStyle &&
+          disabledVerticalStyle == other.disabledVerticalStyle &&
+          errorHorizontalStyle == other.errorHorizontalStyle &&
+          errorVerticalStyle == other.errorVerticalStyle;
+
+  @override
+  int get hashCode =>
+      enabledHorizontalStyle.hashCode ^
+      enabledVerticalStyle.hashCode ^
+      disabledHorizontalStyle.hashCode ^
+      disabledVerticalStyle.hashCode ^
+      errorHorizontalStyle.hashCode ^
+      errorVerticalStyle.hashCode;
 }
 
 /// A slider's style.

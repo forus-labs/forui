@@ -188,34 +188,32 @@ final class ContinuousSelection extends FSliderSelection {
 
 @internal
 final class DiscreteSelection extends FSliderSelection {
-  final SplayTreeMap<double, void> _ticks;
+  final SplayTreeMap<double, void> ticks;
 
   DiscreteSelection({
-    required SplayTreeMap<double, void> ticks,
+    required this.ticks,
     required ({double min, double max}) offset,
     required super.mainAxisExtent,
     required super.extent,
   })  : assert(ticks.isNotEmpty, 'ticks must not be empty.'),
         assert(ticks.keys.every((tick) => 0 <= tick && tick <= 1), 'Every tick must be >= 0 and <= 1.'),
-        _ticks = ticks,
         super._(offset: (min: ticks.round(offset.min), max: ticks.round(offset.max)));
 
   DiscreteSelection._({
-    required SplayTreeMap<double, void> ticks,
+    required this.ticks,
     required super.offset,
     required super.extent,
     required super.rawExtent,
-  })  : _ticks = ticks,
-        super._copy(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
+  })  : super._copy(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
 
   @override
   DiscreteSelection step({required bool min, required bool extend}) => _move(
         min: min,
         to: switch ((min, extend)) {
-          (true, true) => _ticks.lastKeyBefore(offset.min) ?? offset.min,
-          (true, false) => _ticks.firstKeyAfter(offset.min) ?? offset.min,
-          (false, true) => _ticks.firstKeyAfter(offset.max) ?? offset.max,
-          (false, false) => _ticks.lastKeyBefore(offset.max) ?? offset.max,
+          (true, true) => ticks.lastKeyBefore(offset.min) ?? offset.min,
+          (true, false) => ticks.firstKeyAfter(offset.min) ?? offset.min,
+          (false, true) => ticks.firstKeyAfter(offset.max) ?? offset.max,
+          (false, false) => ticks.lastKeyBefore(offset.max) ?? offset.max,
         },
       );
 
@@ -228,17 +226,17 @@ final class DiscreteSelection extends FSliderSelection {
     }
 
     // Round to the nearest tick that satisfy the extent constraints.
-    to = _ticks.round(to);
+    to = ticks.round(to);
     final (minOffset, maxOffset) = switch (min) {
       true when offset.max - to < extent.min => (
-          _ticks
+          ticks
               .lastKeysBefore(to)
               .takeWhile((tick) => offset.min < tick)
               .firstWhere((tick) => extent.min <= offset.max - tick, orElse: () => offset.min),
           offset.max,
         ),
       true when extent.max < offset.max - to => (
-          _ticks
+          ticks
               .firstKeysAfter(to)
               .takeWhile((tick) => tick < offset.min)
               .firstWhere((tick) => offset.max - tick <= extent.max, orElse: () => offset.min),
@@ -247,14 +245,14 @@ final class DiscreteSelection extends FSliderSelection {
       true => (to, offset.max),
       false when to - offset.min < extent.min => (
           offset.min,
-          _ticks
+          ticks
               .firstKeysAfter(to)
               .takeWhile((tick) => tick < offset.max)
               .firstWhere((tick) => extent.min <= tick - offset.min, orElse: () => offset.max),
         ),
       false when extent.max < to - offset.min => (
           offset.min,
-          _ticks
+          ticks
               .lastKeysBefore(to)
               .takeWhile((tick) => offset.max < tick)
               .firstWhere((tick) => tick - offset.min <= extent.max, orElse: () => offset.max),
@@ -263,7 +261,7 @@ final class DiscreteSelection extends FSliderSelection {
     };
 
     return DiscreteSelection._(
-      ticks: _ticks,
+      ticks: ticks,
       offset: (min: minOffset, max: maxOffset),
       extent: extent,
       rawExtent: rawExtent,
@@ -273,7 +271,7 @@ final class DiscreteSelection extends FSliderSelection {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('ticks', _ticks));
+    properties.add(DiagnosticsProperty('ticks', ticks));
   }
 
   @override
@@ -285,10 +283,10 @@ final class DiscreteSelection extends FSliderSelection {
           offset == other.offset &&
           rawExtent == other.rawExtent &&
           rawOffset == other.rawOffset &&
-          mapEquals(_ticks, other._ticks);
+          mapEquals(ticks, other.ticks);
 
   @override
-  int get hashCode => extent.hashCode ^ offset.hashCode ^ rawExtent.hashCode ^ rawOffset.hashCode ^ _ticks.hashCode;
+  int get hashCode => extent.hashCode ^ offset.hashCode ^ rawExtent.hashCode ^ rawOffset.hashCode ^ ticks.hashCode;
 }
 
 @internal
