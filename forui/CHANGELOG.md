@@ -32,6 +32,8 @@ The minimum Flutter version has been increased from `3.19.0` to `3.24.0`.
 
 * Add `FSelectGroup`.
 
+* Add `FRadio`.
+
 ### Changes
 
 * **Breaking:** Change `FAlertIconStyle.height` to `FAlertIconStyle.size`.
