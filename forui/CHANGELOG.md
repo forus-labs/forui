@@ -1,4 +1,4 @@
-## 0.5.0 (Next)
+## 0.5.0
 
 The minimum Flutter version has been increased from `3.19.0` to `3.24.0`.
 
