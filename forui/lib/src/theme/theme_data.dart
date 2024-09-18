@@ -67,6 +67,9 @@ final class FThemeData with Diagnosticable {
   /// The progress styles.
   final FProgressStyle progressStyle;
 
+  /// The radio style.
+  final FRadioStyle radioStyle;
+
   /// The resizable style.
   final FResizableStyle resizableStyle;
 
@@ -110,6 +113,7 @@ final class FThemeData with Diagnosticable {
     required this.labelStyles,
     required this.popoverStyle,
     required this.progressStyle,
+    required this.radioStyle,
     required this.resizableStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
@@ -146,6 +150,7 @@ final class FThemeData with Diagnosticable {
       labelStyles: FLabelStyles.inherit(style: style),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
+      radioStyle: FRadioStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -217,6 +222,7 @@ final class FThemeData with Diagnosticable {
     FLabelStyles? labelStyles,
     FPopoverStyle? popoverStyle,
     FProgressStyle? progressStyle,
+    FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
@@ -244,6 +250,7 @@ final class FThemeData with Diagnosticable {
         labelStyles: labelStyles ?? this.labelStyles,
         popoverStyle: popoverStyle ?? this.popoverStyle,
         progressStyle: progressStyle ?? this.progressStyle,
+        radioStyle: radioStyle ?? this.radioStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
@@ -261,7 +268,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('avatarStyle', avatarStyle))
+      ..add(DiagnosticsProperty('avatarStyle', avatarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
@@ -273,8 +280,9 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('progressStyle', progressStyle))
-      ..add(DiagnosticsProperty('resizableStyle', resizableStyle))
+      ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
@@ -305,6 +313,7 @@ final class FThemeData with Diagnosticable {
           labelStyles == other.labelStyles &&
           popoverStyle == other.popoverStyle &&
           progressStyle == other.progressStyle &&
+          radioStyle == other.radioStyle &&
           resizableStyle == other.resizableStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
@@ -332,6 +341,7 @@ final class FThemeData with Diagnosticable {
       labelStyles.hashCode ^
       popoverStyle.hashCode ^
       progressStyle.hashCode ^
+      radioStyle.hashCode ^
       resizableStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^

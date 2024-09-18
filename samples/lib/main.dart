@@ -62,6 +62,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/label/horizontal', page: HorizontalLabelRoute.page),
         AutoRoute(path: '/popover/default', page: PopoverRoute.page),
         AutoRoute(path: '/progress/default', page: ProgressRoute.page),
+        AutoRoute(path: '/radio/default', page: RadioRoute.page),
         AutoRoute(path: '/resizable/default', page: ResizableRoute.page),
         AutoRoute(path: '/resizable/no-cascading', page: NoCascadingResizableRoute.page),
         AutoRoute(path: '/resizable/horizontal', page: HorizontalResizableRoute.page),
@@ -74,6 +75,9 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/text-field/form', page: FormTextFieldRoute.page),
         AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
         AutoRoute(path: '/scaffold/default', page: ScaffoldRoute.page),
+        AutoRoute(path: '/select-group/default', page: SelectGroupRoute.page),
+        AutoRoute(path: '/select-group/checkbox-form', page: SelectGroupCheckboxFormRoute.page),
+        AutoRoute(path: '/select-group/radio-form', page: SelectGroupRadioFormRoute.page),
         AutoRoute(path: '/switch/default', page: SwitchRoute.page),
         AutoRoute(path: '/switch/form', page: FormSwitchRoute.page),
       ];

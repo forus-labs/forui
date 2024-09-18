@@ -19,6 +19,7 @@ export 'widgets/header.dart';
 export 'widgets/label.dart';
 export 'widgets/popover.dart';
 export 'widgets/progress.dart';
+export 'widgets/radio.dart';
 export 'widgets/resizable.dart';
 export 'widgets/scaffold.dart';
 export 'widgets/select_group.dart';
