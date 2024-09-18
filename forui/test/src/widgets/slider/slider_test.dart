@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart' hide Thumb;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -9,973 +11,77 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('value slider tooltip', () {
-    late Widget slider;
-
-    group('FSliderInteraction.slide', () {
-      setUp(() {
-        slider = TestScaffold.app(
+    Widget slider({FSliderSelection? selection, FSliderInteraction? interaction}) => TestScaffold.app(
           data: FThemes.zinc.light,
-          // background: background,
           child: FSlider(
             controller: FContinuousSliderController(
-              allowedInteraction: FSliderInteraction.slide,
-              selection: FSliderSelection(max: 0.75),
+              selection: selection ?? FSliderSelection(max: 0.75),
+              allowedInteraction: interaction,
             ),
           ),
         );
-      });
 
-      testWidgets('long press track', (tester) async {
-        await tester.pumpWidget(slider);
+    for (final (interaction, expected) in [
+      (FSliderInteraction.slide, findsNothing),
+      (FSliderInteraction.slideThumb, findsNothing),
+      (FSliderInteraction.tap, findsOneWidget),
+      (FSliderInteraction.tapAndSlideThumb, findsOneWidget),
+    ]) {
+      testWidgets('long press track - $interaction', (tester) async {
+        await tester.pumpWidget(slider(interaction: interaction));
         expect(find.byType(Text), findsNothing);
 
         final track = tester.getRect(find.byType(Track));
 
         await tester.longPressAt(track.center);
-        expect(find.byType(Text), findsNothing);
+        expect(find.byType(Text), expected);
 
         await tester.longPressAt(track.centerRight.translate(-50, 0));
-        expect(find.byType(Text), findsNothing);
+        expect(find.byType(Text), expected);
       });
+    }
 
-      testWidgets('long press thumb', (tester) async {
-        await tester.pumpWidget(slider);
+    for (final interaction in FSliderInteraction.values) {
+      testWidgets('long press thumb - $interaction', (tester) async {
+        await tester.pumpWidget(slider(interaction: interaction));
         expect(find.byType(Text), findsNothing);
 
         await tester.longPress(find.byType(Thumb));
         expect(find.byType(Text), findsOneWidget);
       });
+    }
 
-      testWidgets('drag active track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
+    group('drag track', () {
+      for (final (interaction, expected) in [
+        (FSliderInteraction.slide, findsOneWidget),
+        (FSliderInteraction.slideThumb, findsNothing),
+        (FSliderInteraction.tap, findsNothing),
+        (FSliderInteraction.tapAndSlideThumb, findsNothing),
+      ]) {
+        testWidgets('drag active track - $interaction', (tester) async {
+          await tester.pumpWidget(slider(interaction: interaction));
+          expect(find.byType(Text), findsNothing);
 
-        await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsOneWidget);
-      });
+          await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
+          await tester.pump(const Duration(seconds: 1));
+          expect(find.byType(Text), expected);
+        });
 
-      testWidgets('drag inactive track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
+        testWidgets('drag inactive track - $interaction', (tester) async {
+          await tester.pumpWidget(slider(interaction: interaction));
+          expect(find.byType(Text), findsNothing);
 
-        final track = tester.getRect(find.byType(ActiveTrack));
-        await tester.flingFrom(track.centerRight.translate(-50, 0), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsOneWidget);
-      });
-    });
-
-    group('FSliderInteraction.slideThumb', () {
-      setUp(() {
-        slider = TestScaffold.app(
-          data: FThemes.zinc.light,
-          // background: background,
-          child: FSlider(
-            controller: FContinuousSliderController(
-              allowedInteraction: FSliderInteraction.slideThumb,
-              selection: FSliderSelection(max: 0.75),
-            ),
-          ),
-        );
-      });
-
-      testWidgets('long press track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        final track = tester.getRect(find.byType(Track));
-
-        await tester.pumpAndSettle();
-        await tester.longPressAt(track.center);
-        expect(find.byType(Text), findsNothing);
-
-        await tester.pumpAndSettle();
-        await tester.longPressAt(track.centerRight.translate(-50, 0));
-        expect(find.byType(Text), findsNothing);
-      });
-
-      testWidgets('long press thumb', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        await tester.longPress(find.byType(Thumb));
-        expect(find.byType(Text), findsOneWidget);
-      });
-
-      testWidgets('drag active track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsNothing);
-      });
-
-      testWidgets('drag inactive track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        final track = tester.getRect(find.byType(ActiveTrack));
-        await tester.flingFrom(track.centerRight.translate(-50, 0), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsNothing);
-      });
-    });
-
-    group('FSliderInteraction.tap', () {
-      setUp(() {
-        slider = TestScaffold.app(
-          data: FThemes.zinc.light,
-          // background: background,
-          child: FSlider(
-            controller: FContinuousSliderController(
-              allowedInteraction: FSliderInteraction.tap,
-              selection: FSliderSelection(max: 0.75, extent: (min: 0.70, max: 0.75)),
-            ),
-          ),
-        );
-      });
-
-      testWidgets('long press track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        final track = tester.getRect(find.byType(Track));
-
-        await tester.pumpAndSettle();
-        await tester.longPressAt(track.center);
-        expect(find.byType(Text), findsOneWidget);
-
-        await tester.pumpAndSettle();
-        await tester.longPressAt(track.centerRight.translate(-50, 0));
-        expect(find.byType(Text), findsOneWidget);
-      });
-
-      testWidgets('long press thumb', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        await tester.longPress(find.byType(Thumb));
-        expect(find.byType(Text), findsOneWidget);
-      });
-
-      testWidgets('drag active track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsNothing);
-      });
-
-      testWidgets('drag inactive track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        final track = tester.getRect(find.byType(ActiveTrack));
-        await tester.flingFrom(track.centerRight.translate(-50, 0), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsNothing);
-      });
-    });
-
-    group('FSliderInteraction.tapAndSlideThumb', () {
-      setUp(() {
-        slider = TestScaffold.app(
-          data: FThemes.zinc.light,
-          // background: background,
-          child: FSlider(
-            controller: FContinuousSliderController(
-              allowedInteraction: FSliderInteraction.tapAndSlideThumb,
-              selection: FSliderSelection(max: 0.75, extent: (min: 0.70, max: 0.75)),
-            ),
-          ),
-        );
-      });
-
-      testWidgets('long press track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        final track = tester.getRect(find.byType(Track));
-
-        await tester.pumpAndSettle();
-        await tester.longPressAt(track.center);
-        expect(find.byType(Text), findsOneWidget);
-
-        await tester.pumpAndSettle();
-        await tester.longPressAt(track.centerRight.translate(-50, 0));
-        expect(find.byType(Text), findsOneWidget);
-      });
-
-      testWidgets('long press thumb', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        await tester.longPress(find.byType(Thumb));
-        expect(find.byType(Text), findsOneWidget);
-      });
-
-      testWidgets('drag active track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsNothing);
-      });
-
-      testWidgets('drag inactive track', (tester) async {
-        await tester.pumpWidget(slider);
-        expect(find.byType(Text), findsNothing);
-
-        final track = tester.getRect(find.byType(ActiveTrack));
-        await tester.flingFrom(track.centerRight.translate(-50, 0), const Offset(-300, 0), 10);
-        await tester.pump(const Duration(seconds: 1));
-        expect(find.byType(Text), findsNothing);
-      });
+          final track = tester.getRect(find.byType(ActiveTrack));
+          await tester.flingFrom(track.centerRight.translate(-50, 0), const Offset(-300, 0), 10);
+          await tester.pump(const Duration(seconds: 1));
+          expect(find.byType(Text), expected);
+        });
+      }
     });
   });
 
   for (final layout in Layout.values) {
-    group('continuous value selection - $layout', () {
-      late FContinuousSliderController controller;
-      late Widget slider;
-
-      group('FSliderInteraction.slide', () {
-        setUp(() {
-          controller = FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.slide,
-            selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-            ),
-          );
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset.min, 0);
-          expect(controller.selection.offset.max, greaterThan(0.75));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset.min, 0);
-          expect(controller.selection.offset.max, lessThan(0.75));
-        });
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-      });
-
-      group('FSliderInteraction.slideThumb', () {
-        setUp(() {
-          controller = FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.slideThumb,
-            selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-            ),
-          );
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset.min, 0);
-          expect(controller.selection.offset.max, greaterThan(0.75));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset.min, 0);
-          expect(controller.selection.offset.max, lessThan(0.75));
-        });
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-        });
-      });
-
-      group('FSliderInteraction.tap', () {
-        setUp(() {
-          controller = FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.tap,
-            selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-            ),
-          );
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-        });
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          // Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          /// Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-        });
-      });
-
-      group('FSliderInteraction.tapAndSlideThumb', () {
-        setUp(() {
-          controller = FContinuousSliderController(
-            allowedInteraction: FSliderInteraction.tapAndSlideThumb,
-            selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-            ),
-          );
-        });
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset.min, 0);
-          expect(controller.selection.offset.max, greaterThan(0.75));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset.min, 0);
-          expect(controller.selection.offset.max, lessThan(0.75));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          // Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          /// Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.8));
-        });
-      });
-    });
-
-    group('continuous range selection - $layout', () {
-      late FContinuousSliderController controller;
-      late Widget slider;
-
-      setUp(() {
-        controller = FContinuousSliderController.range(
-          selection: FSliderSelection(min: 0.25, max: 0.75, extent: (min: 0.3, max: 0.8)),
-        );
-
-        slider = TestScaffold.app(
-          data: FThemes.zinc.light,
-          // background: background,
-          child: FSlider(
-            layout: layout,
-            controller: controller,
-          ),
-        );
-      });
-
-      testWidgets('tap active track', (tester) async {
-        await tester.pumpWidget(slider);
-
-        final track = tester.getRect(find.byType(ActiveTrack));
-
-        await tester.tapAt(track.center);
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
-      });
-
-      testWidgets('tap inactive track', (tester) async {
-        await tester.pumpWidget(slider);
-
-        final track = tester.getRect(find.byType(ActiveTrack));
-
-        await tester.tapAt(track.min(layout) + layout.directional(-50));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset.min, lessThan(0.25));
-        expect(controller.selection.offset.max, 0.75);
-
-        await tester.tapAt(track.max(layout) + layout.directional(50));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset.min, lessThan(0.25));
-        expect(controller.selection.offset.max, greaterThan(0.75));
-      });
-
-      testWidgets('drag thumbs', (tester) async {
-        await tester.pumpWidget(slider);
-
-        await tester.drag(find.byType(Thumb).first, layout.directional(100));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset.min, greaterThan(0.25));
-        expect(controller.selection.offset.max, 0.75);
-
-        await tester.drag(find.byType(Thumb).first, layout.directional(-200));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset.min, lessThan(0.25));
-        expect(controller.selection.offset.max, 0.75);
-
-        await tester.drag(find.byType(Thumb).last, layout.directional(100));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset.min, lessThan(0.25));
-        expect(controller.selection.offset.max, greaterThan(0.75));
-
-        await tester.drag(find.byType(Thumb).last, layout.directional(-200));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset.min, lessThan(0.25));
-        expect(controller.selection.offset.max, lessThan(0.75));
-      });
-
-      testWidgets('drag active track', (tester) async {
-        await tester.pumpWidget(slider);
-
-        await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
-
-        await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
-      });
-    });
-
-    group('discrete value selection - $layout', () {
-      late FDiscreteSliderController controller;
-      late Widget slider;
-
-      group('FSliderInteraction.slide', () {
-        setUp(() {
-          controller = FDiscreteSliderController(
-            allowedInteraction: FSliderInteraction.slide,
-            selection: FSliderSelection(max: 0.5, extent: (min: 0.5, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-              marks: const [
-                FSliderMark(value: 0),
-                FSliderMark(value: 0.25),
-                FSliderMark(value: 0.5),
-                FSliderMark(value: 0.75),
-                FSliderMark(value: 1),
-              ],
-            ),
-          );
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-      });
-
-      group('FSliderInteraction.slideThumb', () {
-        setUp(() {
-          controller = FDiscreteSliderController(
-            allowedInteraction: FSliderInteraction.slideThumb,
-            selection: FSliderSelection(max: 0.5, extent: (min: 0.5, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-              marks: const [
-                FSliderMark(value: 0),
-                FSliderMark(value: 0.25),
-                FSliderMark(value: 0.5),
-                FSliderMark(value: 0.75),
-                FSliderMark(value: 1),
-              ],
-            ),
-          );
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-      });
-
-      group('FSliderInteraction.tap', () {
-        setUp(() {
-          controller = FDiscreteSliderController(
-            allowedInteraction: FSliderInteraction.tap,
-            selection: FSliderSelection(max: 0.5, extent: (min: 0.25, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-              marks: const [
-                FSliderMark(value: 0),
-                FSliderMark(value: 0.25),
-                FSliderMark(value: 0.5),
-                FSliderMark(value: 0.75),
-                FSliderMark(value: 1),
-              ],
-            ),
-          );
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.25));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          // Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.25));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.25));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          /// Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-      });
-
-      group('FSliderInteraction.tapAndSlideThumb', () {
-        setUp(() {
-          controller = FDiscreteSliderController(
-            allowedInteraction: FSliderInteraction.tapAndSlideThumb,
-            selection: FSliderSelection(max: 0.5, extent: (min: 0.25, max: 0.8)),
-          );
-
-          slider = TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              layout: layout,
-              controller: controller,
-              marks: const [
-                FSliderMark(value: 0),
-                FSliderMark(value: 0.25),
-                FSliderMark(value: 0.5),
-                FSliderMark(value: 0.75),
-                FSliderMark(value: 1),
-              ],
-            ),
-          );
-        });
-
-
-        testWidgets('tap track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          final track = tester.getRect(find.byType(ActiveTrack));
-
-          await tester.tapAt(track.center);
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.25));
-
-          await tester.tapAt(track.max(layout) + layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-        });
-
-        testWidgets('drag thumb', (tester) async {
-          await tester.pumpWidget(slider);
-
-          await tester.drag(find.byType(Thumb), layout.directional(100));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.75));
-
-          await tester.drag(find.byType(Thumb), layout.directional(-200));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-
-        testWidgets('drag active track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          // Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.25));
-
-          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.25));
-        });
-
-        testWidgets('drag inactive track', (tester) async {
-          await tester.pumpWidget(slider);
-
-          /// Drag gestures will cause the active track to shrink since they are composed of tap + drag events.
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-
-          await tester.dragFrom(
-            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
-            layout.directional(-500),
-          );
-          await tester.pumpAndSettle();
-          expect(controller.selection.offset, (min: 0, max: 0.5));
-        });
-      });
-    });
-
-    group('discrete range selection - $layout', () {
-      late FDiscreteSliderController controller;
-      late Widget slider;
-
-      setUp(() {
-        controller = FDiscreteSliderController.range(
-          selection: FSliderSelection(min: 0.25, max: 0.75),
-        );
-
-        slider = TestScaffold.app(
+    Widget slider(FSliderController controller) => TestScaffold.app(
           data: FThemes.zinc.light,
           // background: background,
           child: FSlider(
@@ -990,63 +96,213 @@ void main() {
             ],
           ),
         );
-      });
 
-      testWidgets('tap active track', (tester) async {
-        await tester.pumpWidget(slider);
+    group('value selection - $layout', () {
+      FSliderController continuous(FSliderInteraction interaction) => FContinuousSliderController(
+            allowedInteraction: interaction,
+            selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
+          );
 
-        final track = tester.getRect(find.byType(ActiveTrack));
+      FSliderController discrete(FSliderInteraction interaction) => FDiscreteSliderController(
+            allowedInteraction: interaction,
+            selection: FSliderSelection(max: 0.5, extent: (min: 0.25, max: 0.8)),
+          );
 
-        await tester.tapAt(track.center);
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
-      });
+      for (final (con, interaction, expandExpected, shrinkExpected) in [
+        (true, FSliderInteraction.slide, greaterThan(0.75), lessThan(0.75)),
+        (true, FSliderInteraction.slideThumb, greaterThan(0.75), lessThan(0.75)),
+        (true, FSliderInteraction.tap, 0.75, 0.75),
+        (true, FSliderInteraction.tapAndSlideThumb, greaterThan(0.75), lessThan(0.75)),
+        (false, FSliderInteraction.slide, 0.75, 0.5),
+        (false, FSliderInteraction.slideThumb, 0.75, 0.5),
+        (false, FSliderInteraction.tap, 0.5, 0.5),
+        (false, FSliderInteraction.tapAndSlideThumb, 0.75, 0.5),
+      ]) {
+        testWidgets('drag thumb - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-      testWidgets('tap inactive track', (tester) async {
-        await tester.pumpWidget(slider);
+          await tester.drag(find.byType(Thumb), layout.directional(100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, 0);
+          expect(controller.selection.offset.max, expandExpected);
 
-        final track = tester.getRect(find.byType(ActiveTrack));
+          await tester.drag(find.byType(Thumb), layout.directional(-200));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, 0);
+          expect(controller.selection.offset.max, shrinkExpected);
+        });
+      }
 
-        await tester.tapAt(track.min(layout) + layout.directional(-100));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0, max: 0.75));
+      for (final (con, interaction, shrinkExpected, expandExpected) in [
+        (true, FSliderInteraction.slide, 0.75, 0.75),
+        (true, FSliderInteraction.slideThumb, 0.75, 0.75),
+        (true, FSliderInteraction.tap, 0.5, 0.8),
+        (true, FSliderInteraction.tapAndSlideThumb, 0.5, 0.8),
+        (false, FSliderInteraction.slide, 0.5, 0.5),
+        (false, FSliderInteraction.slideThumb, 0.5, 0.5),
+        (false, FSliderInteraction.tap, 0.25, 0.75),
+        (false, FSliderInteraction.tapAndSlideThumb, 0.25, 0.75),
+      ]) {
+        testWidgets('tap track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-        await tester.tapAt(track.max(layout) + layout.directional(100));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0, max: 1));
-      });
+          final track = tester.getRect(find.byType(ActiveTrack));
 
-      testWidgets('drag thumbs', (tester) async {
-        await tester.pumpWidget(slider);
+          await tester.tapAt(track.center);
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: shrinkExpected));
 
-        await tester.drag(find.byType(Thumb).first, layout.directional(100));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.5, max: 0.75));
+          await tester.tapAt(track.max(layout) + layout.directional(100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: expandExpected));
+        });
+      }
 
-        await tester.drag(find.byType(Thumb).first, layout.directional(-200));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
+      for (final (con, interaction, expandExpected, shrinkExpected) in [
+        (true, FSliderInteraction.slide, 0.8, 0.5),
+        (true, FSliderInteraction.slideThumb, 0.75, 0.75),
+        (true, FSliderInteraction.tap, 0.5, 0.5),
+        (true, FSliderInteraction.tapAndSlideThumb, 0.5, 0.5),
+        (false, FSliderInteraction.slide, 0.75, 0.25),
+        (false, FSliderInteraction.slideThumb, 0.5, 0.5),
+        (false, FSliderInteraction.tap, 0.25, 0.25),
+        (false, FSliderInteraction.tapAndSlideThumb, 0.25, 0.25),
+      ]) {
+        testWidgets('drag active track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-        await tester.drag(find.byType(Thumb).last, layout.directional(100));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 1));
+          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: expandExpected));
 
-        await tester.drag(find.byType(Thumb).last, layout.directional(-200));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
-      });
+          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: shrinkExpected));
+        });
+      }
 
-      testWidgets('drag active track', (tester) async {
-        await tester.pumpWidget(slider);
+      for (final (con, interaction, expandExpected, shrinkExpected) in [
+        (true, FSliderInteraction.slide, 0.8, 0.5),
+        (true, FSliderInteraction.slideThumb, 0.75, 0.75),
+        (true, FSliderInteraction.tap, 0.8, 0.8),
+        (true, FSliderInteraction.tapAndSlideThumb, 0.8, 0.8),
+        (false, FSliderInteraction.slide, 0.75, 0.25),
+        (false, FSliderInteraction.slideThumb, 0.5, 0.5),
+        (false, FSliderInteraction.tap, 0.5, 0.5),
+        (false, FSliderInteraction.tapAndSlideThumb, 0.5, 0.5),
+      ]) {
+        testWidgets('drag inactive track - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-        await tester.drag(find.byType(ActiveTrack), layout.directional(500));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
+          await tester.dragFrom(
+            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
+            layout.directional(500),
+          );
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: expandExpected));
 
-        await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
-        await tester.pumpAndSettle();
-        expect(controller.selection.offset, (min: 0.25, max: 0.75));
-      });
+          await tester.dragFrom(
+            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
+            layout.directional(-500),
+          );
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: shrinkExpected));
+        });
+      }
+    });
+
+    group('range selection - $layout', () {
+      FSliderController continuous() => FContinuousSliderController.range(
+            selection: FSliderSelection(min: 0.25, max: 0.75, extent: (min: 0.3, max: 0.8)),
+          );
+
+      FSliderController discrete() => FDiscreteSliderController.range(
+            selection: FSliderSelection(min: 0.25, max: 0.75),
+          );
+
+      for (final (index, constructor) in [continuous, discrete].indexed) {
+        testWidgets('tap active track - $index', (tester) async {
+          final controller = constructor();
+          await tester.pumpWidget(slider(controller));
+
+          final track = tester.getRect(find.byType(ActiveTrack));
+
+          await tester.tapAt(track.center);
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0.25, max: 0.75));
+        });
+      }
+
+      for (final (index, (constructor, minExpected, maxExpected)) in [
+        (continuous, lessThan(0.25), greaterThan(0.75)),
+        (discrete, 0, 1)
+      ].indexed) {
+        testWidgets('tap inactive track - $index', (tester) async {
+          final controller = constructor();
+          await tester.pumpWidget(slider(controller));
+
+          final track = tester.getRect(find.byType(ActiveTrack));
+
+          await tester.tapAt(track.min(layout) + layout.directional(-100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, minExpected);
+          expect(controller.selection.offset.max, 0.75);
+
+          await tester.tapAt(track.max(layout) + layout.directional(100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, minExpected);
+          expect(controller.selection.offset.max, maxExpected);
+        });
+      }
+
+      for (final (index, (constructor, minShrink, minExpand, maxExpand, maxShrink)) in [
+        (continuous, greaterThan(0.25), lessThan(0.25), greaterThan(0.75), lessThan(0.75)),
+        (discrete, 0.5, 0.25, 1, 0.75),
+      ].indexed) {
+        testWidgets('drag thumbs - $index', (tester) async {
+          final controller = constructor();
+          await tester.pumpWidget(slider(controller));
+
+          await tester.drag(find.byType(Thumb).first, layout.directional(100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, minShrink);
+          expect(controller.selection.offset.max, 0.75);
+
+          await tester.drag(find.byType(Thumb).first, layout.directional(-200));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, minExpand);
+          expect(controller.selection.offset.max, 0.75);
+
+          await tester.drag(find.byType(Thumb).last, layout.directional(100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, minExpand);
+          expect(controller.selection.offset.max, maxExpand);
+
+          await tester.drag(find.byType(Thumb).last, layout.directional(-200));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, minExpand);
+          expect(controller.selection.offset.max, maxShrink);
+        });
+      }
+
+      for (final (index, constructor) in [continuous, discrete].indexed) {
+        testWidgets('drag active track - $index', (tester) async {
+          final controller = constructor();
+          await tester.pumpWidget(slider(controller));
+
+          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0.25, max: 0.75));
+
+          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0.25, max: 0.75));
+        });
+      }
     });
   }
 }
