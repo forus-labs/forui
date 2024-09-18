@@ -21,7 +21,7 @@ void main() {
                 data: theme,
                 // background: background,
                 child: FSlider(
-                  controller: FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.50)),
+                  controller: FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
                   layout: layout,
                   enabled: enabled,
                   marks: const [
@@ -62,7 +62,7 @@ void main() {
               child: FSlider(
                 controller: FContinuousSliderController(
                   minExtendable: min,
-                  selection: FSliderSelection(min: 0.25, max: 0.50),
+                  selection: FSliderSelection(min: 0.30, max: 0.60),
                 ),
                 layout: layout,
                 marks: const [
@@ -104,15 +104,15 @@ void main() {
               // background: background,
               child: FSlider(
                 controller: FContinuousSliderController(
-                  selection: FSliderSelection(min: 0.25, max: 0.50),
+                  selection: FSliderSelection(min: 0.30, max: 0.60),
                 ),
                 layout: layout,
                 marks: [
-                  FSliderMark(value: 0.0, label: Text('0'), style: style),
-                  FSliderMark(value: 0.25, label: Text('25'), style: style, tick: false),
-                  FSliderMark(value: 0.5, label: Text('50'), style: style),
-                  FSliderMark(value: 0.75, label: Text('75'), style: style, tick: false),
-                  FSliderMark(value: 1.0, label: Text('100'), style: style),
+                  FSliderMark(value: 0.0, label: const Text('0'), style: style),
+                  FSliderMark(value: 0.25, label: const Text('25'), style: style, tick: false),
+                  FSliderMark(value: 0.5, label: const Text('50'), style: style),
+                  FSliderMark(value: 0.75, label: const Text('75'), style: style, tick: false),
+                  FSliderMark(value: 1.0, label: const Text('100'), style: style),
                 ],
               ),
             ),

@@ -73,7 +73,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       return track;
     }
 
-    if (tappable.contains(controller.allowedInteraction)) {
+    if (controller.allowedInteraction != FSliderInteraction.slide) {
       return GestureDetector(
         onTapDown: _tap(controller, style, layout),
         onTapUp: (_) => controller.tooltips.hide(),
@@ -125,7 +125,13 @@ class _GestureDetectorState extends State<_GestureDetector> {
         final translated => translated,
       };
 
-      controller.tap(offset);
+      switch (controller.tap(offset)) {
+        case true:
+          controller.tooltips.show(FSliderTooltipsController.min);
+        case false:
+          controller.tooltips.show(FSliderTooltipsController.max);
+        default:
+      }
     }
 
     return tappable.contains(controller.allowedInteraction) ? down : null;
@@ -191,7 +197,7 @@ class _Track extends StatelessWidget {
                     ),
                   ),
                 ),
-            const _ActiveTrack(),
+            const ActiveTrack(),
           ],
         ),
       ),
@@ -199,8 +205,9 @@ class _Track extends StatelessWidget {
   }
 }
 
-class _ActiveTrack extends StatelessWidget {
-  const _ActiveTrack();
+@internal
+class ActiveTrack extends StatelessWidget {
+  const ActiveTrack({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -237,9 +244,9 @@ extension Layouts on Layout {
       };
 
   double Function(Offset) translateTrackDrag(FSliderStyle style) => switch (this) {
-        Layout.ltr => (delta) => delta.dx - style.thumbStyle.size / 2,
+        Layout.ltr => (delta) => delta.dx,
         Layout.rtl => (delta) => -delta.dx,
-        Layout.ttb => (delta) => delta.dy - style.thumbStyle.size / 2,
+        Layout.ttb => (delta) => delta.dy,
         Layout.btt => (delta) => -delta.dy,
       };
 

@@ -98,21 +98,34 @@ abstract class FSliderController extends ChangeNotifier {
 
   /// Taps the slider at given offset, in logical pixels, along the track.
   ///
+  /// Returns:
+  /// * true if the offset moves the min edge
+  /// * false if the offset moves the max edge
+  /// * null if the offset did not move either edge
+  ///
   /// The offset is relative to the origin defined by [FSlider.layout].
-  void tap(double offset) {
+  bool? tap(double offset) {
     if (allowedInteraction == FSliderInteraction.slide || allowedInteraction == FSliderInteraction.slideThumb) {
-      return;
+      return null;
     }
 
     if (_selection case final selection?) {
-      this.selection = switch (extendable) {
-        (min: true, max: true) when offset < selection.rawOffset.min => selection.move(min: true, to: offset),
-        (min: true, max: true) when selection.rawOffset.max < offset => selection.move(min: false, to: offset),
-        (min: true, max: false) => selection.move(min: true, to: offset),
-        (min: false, max: true) => selection.move(min: false, to: offset),
+      final min = switch (extendable) {
+        (min: true, max: true) when offset < selection.rawOffset.min => true,
+        (min: true, max: true) when selection.rawOffset.max < offset => false,
+        (min: true, max: false) => true,
+        (min: false, max: true) => false,
         _ => null,
       };
+
+      if (min != null) {
+        this.selection = selection.move(min: min, to: offset);
+      }
+
+      return min;
     }
+
+    return null;
   }
 
   /// Resets the controller to its initial state.
