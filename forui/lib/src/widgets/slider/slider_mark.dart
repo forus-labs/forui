@@ -58,11 +58,11 @@ final class FSliderMarkStyle with Diagnosticable {
   /// The tick's color.
   final Color tickColor;
 
-  /// The tick's dimension. Defaults to 3.
+  /// The tick's size. Defaults to 3.
   ///
   /// ## Contract
   /// Throws [AssertionError] if it is not positive.
-  final double tickDimension;
+  final double tickSize;
 
   /// The label's default text style.
   final TextStyle labelTextStyle;
@@ -105,21 +105,21 @@ final class FSliderMarkStyle with Diagnosticable {
     required this.labelTextStyle,
     required this.labelAnchor,
     required this.labelOffset,
-    this.tickDimension = 3,
-  }) : assert(0 < tickDimension, 'tickDimension must be positive, but is $tickDimension.');
+    this.tickSize = 3,
+  }) : assert(0 < tickSize, 'tickDimension must be positive, but is $tickSize.');
 
   /// Returns a copy of this [FSliderMarkStyle] but with the given fields replaced with the new values.
   @useResult
   FSliderMarkStyle copyWith({
     Color? tickColor,
-    double? tickDimension,
+    double? tickSize,
     TextStyle? labelTextStyle,
     Alignment? labelAnchor,
     double? labelOffset,
   }) =>
       FSliderMarkStyle(
         tickColor: tickColor ?? this.tickColor,
-        tickDimension: tickDimension ?? this.tickDimension,
+        tickSize: tickSize ?? this.tickSize,
         labelTextStyle: labelTextStyle ?? this.labelTextStyle,
         labelAnchor: labelAnchor ?? this.labelAnchor,
         labelOffset: labelOffset ?? this.labelOffset,
@@ -130,7 +130,7 @@ final class FSliderMarkStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('tickColor', tickColor))
-      ..add(DoubleProperty('tickDimension', tickDimension))
+      ..add(DoubleProperty('tickSize', tickSize))
       ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
       ..add(DiagnosticsProperty('labelAnchor', labelAnchor))
       ..add(DoubleProperty('labelCrossAxisOffset', labelOffset));
@@ -142,7 +142,7 @@ final class FSliderMarkStyle with Diagnosticable {
       other is FSliderMarkStyle &&
           runtimeType == other.runtimeType &&
           tickColor == other.tickColor &&
-          tickDimension == other.tickDimension &&
+          tickSize == other.tickSize &&
           labelTextStyle == other.labelTextStyle &&
           labelAnchor == other.labelAnchor &&
           labelOffset == other.labelOffset;
@@ -150,7 +150,7 @@ final class FSliderMarkStyle with Diagnosticable {
   @override
   int get hashCode =>
       tickColor.hashCode ^
-      tickDimension.hashCode ^
+      tickSize.hashCode ^
       labelTextStyle.hashCode ^
       labelAnchor.hashCode ^
       labelOffset.hashCode;

@@ -17,7 +17,7 @@ void main() {
       expect(
         () => FSliderMarkStyle(
           tickColor: const Color(0xFF000000),
-          tickDimension: -1,
+          tickSize: -1,
           labelTextStyle: const TextStyle(),
           labelAnchor: Alignment.center,
           labelOffset: 0.0,

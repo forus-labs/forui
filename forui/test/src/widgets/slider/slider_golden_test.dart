@@ -91,5 +91,47 @@ void main() {
         });
       }
     }
+
+    for (final layout in Layout.values) {
+      for (final labelOffset in [-20.0, 20.0]) {
+        testWidgets('label offset - $layout - $labelOffset', (tester) async {
+          final sliderStyle = FThemes.zinc.light.sliderStyles.enabledHorizontalStyle;
+          final style = sliderStyle.markStyle.copyWith(labelOffset: labelOffset);
+
+          await tester.pumpWidget(
+            TestScaffold.app(
+              data: FThemes.zinc.light,
+              // background: background,
+              child: FSlider(
+                controller: FContinuousSliderController(
+                  selection: FSliderSelection(min: 0.25, max: 0.50),
+                ),
+                layout: layout,
+                marks: [
+                  FSliderMark(value: 0.0, label: Text('0'), style: style),
+                  FSliderMark(value: 0.25, label: Text('25'), style: style, tick: false),
+                  FSliderMark(value: 0.5, label: Text('50'), style: style),
+                  FSliderMark(value: 0.75, label: Text('75'), style: style, tick: false),
+                  FSliderMark(value: 1.0, label: Text('100'), style: style),
+                ],
+              ),
+            ),
+          );
+
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+          await gesture.addPointer(location: Offset.zero);
+          addTearDown(gesture.removePointer);
+          await tester.pump();
+
+          await gesture.moveTo(tester.getCenter(find.byType(Thumb).first));
+          await tester.pumpAndSettle(const Duration(seconds: 1));
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('slider/label-offset-$layout-$labelOffset.png'),
+          );
+        });
+      }
+    }
   });
 }

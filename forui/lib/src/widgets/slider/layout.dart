@@ -47,16 +47,16 @@ class _SliderLayoutState extends State<SliderLayout> {
   void initState() {
     super.initState();
     final mainAxisExtent = widget.layout.vertical ? widget.constraints.maxHeight : widget.constraints.maxWidth;
-    widget.controller.attach(mainAxisExtent - widget.style.thumbStyle.dimension, widget.marks);
+    widget.controller.attach(mainAxisExtent - widget.style.thumbStyle.size, widget.marks);
   }
 
   @override
   void didUpdateWidget(covariant SliderLayout old) {
     super.didUpdateWidget(old);
     final mainAxisExtent = (widget.layout.vertical ? widget.constraints.maxHeight : widget.constraints.maxWidth) -
-        widget.style.thumbStyle.dimension;
+        widget.style.thumbStyle.size;
     final oldMainAxisExtent =
-        (old.layout.vertical ? old.constraints.maxHeight : old.constraints.maxWidth) - old.style.thumbStyle.dimension;
+        (old.layout.vertical ? old.constraints.maxHeight : old.constraints.maxWidth) - old.style.thumbStyle.size;
 
     if (widget.controller != old.controller ||
         widget.layout != old.layout ||
@@ -208,7 +208,7 @@ class _RenderSlider extends RenderBox
   }
 
   (double, double) _anchor(double extent, double offset, FSliderMarkStyle markStyle) {
-    final thumb = _style.thumbStyle.dimension;
+    final thumb = _style.thumbStyle.size;
     final trackMainAxis = (extent - thumb) * offset;
     final anchorMainAxis = (thumb / 2) + trackMainAxis;
     final anchorCrossAxis = markStyle.labelOffset + (markStyle.labelOffset < 0 ? 0.0 : _style.crossAxisExtent * 2);

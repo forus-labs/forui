@@ -96,7 +96,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
             ),
           ),
           child: SizedBox.square(
-            dimension: style.thumbStyle.dimension,
+            dimension: style.thumbStyle.size,
           ),
         ),
       ),
@@ -223,11 +223,11 @@ final class FSliderThumbStyle with Diagnosticable {
   /// The thumb's color.
   final Color color;
 
-  /// The thumb's dimension, inclusive of [borderWidth]. Defaults to `20`.
+  /// The thumb's size, inclusive of [borderWidth]. Defaults to `20`.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [dimension] is not positive.
-  final double dimension;
+  /// Throws [AssertionError] if [size] is not positive.
+  final double size;
 
   /// The border's color.
   final Color borderColor;
@@ -242,22 +242,22 @@ final class FSliderThumbStyle with Diagnosticable {
   FSliderThumbStyle({
     required this.color,
     required this.borderColor,
-    this.dimension = 20,
+    this.size = 20,
     this.borderWidth = 2,
-  })  : assert(0 < dimension, 'The diameter must be positive'),
+  })  : assert(0 < size, 'The diameter must be positive'),
         assert(0 < borderWidth, 'The border width must be positive');
 
   /// Returns a copy of this [FSliderThumbStyle] but with the given fields replaced with the new values.
   @useResult
   FSliderThumbStyle copyWith({
     Color? color,
-    double? dimension,
+    double? size,
     Color? borderColor,
     double? borderWidth,
   }) =>
       FSliderThumbStyle(
         color: color ?? this.color,
-        dimension: dimension ?? this.dimension,
+        size: size ?? this.size,
         borderColor: borderColor ?? this.borderColor,
         borderWidth: borderWidth ?? this.borderWidth,
       );
@@ -267,7 +267,7 @@ final class FSliderThumbStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('dimension', dimension))
+      ..add(DoubleProperty('size', size))
       ..add(ColorProperty('borderColor', borderColor))
       ..add(DoubleProperty('borderWidth', borderWidth));
   }
@@ -278,20 +278,20 @@ final class FSliderThumbStyle with Diagnosticable {
       other is FSliderThumbStyle &&
           runtimeType == other.runtimeType &&
           color == other.color &&
-          dimension == other.dimension &&
+          size == other.size &&
           borderColor == other.borderColor &&
           borderWidth == other.borderWidth;
 
   @override
-  int get hashCode => color.hashCode ^ dimension.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode;
+  int get hashCode => color.hashCode ^ size.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode;
 }
 
 @internal
 extension Layouts on Layout {
   double Function(Offset) translateThumbDrag(FSliderStyle style) => switch (this) {
-        Layout.ltr => (delta) => delta.dx - style.thumbStyle.dimension / 2,
-        Layout.rtl => (delta) => -delta.dx + style.thumbStyle.dimension / 2,
-        Layout.ttb => (delta) => delta.dy - style.thumbStyle.dimension / 2,
-        Layout.btt => (delta) => -delta.dy + style.thumbStyle.dimension / 2,
+        Layout.ltr => (delta) => delta.dx - style.thumbStyle.size / 2,
+        Layout.rtl => (delta) => -delta.dx + style.thumbStyle.size / 2,
+        Layout.ttb => (delta) => delta.dy - style.thumbStyle.size / 2,
+        Layout.btt => (delta) => -delta.dy + style.thumbStyle.size / 2,
       };
 }

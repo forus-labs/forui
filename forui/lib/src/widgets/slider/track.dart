@@ -18,7 +18,7 @@ class Track extends StatelessWidget {
     final controller = InheritedController.of(context);
     final position = layout.position;
 
-    final crossAxisExtent = max(style.thumbStyle.dimension, style.crossAxisExtent);
+    final crossAxisExtent = max(style.thumbStyle.size, style.crossAxisExtent);
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return SizedBox(
@@ -163,7 +163,7 @@ class _Track extends StatelessWidget {
     final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
 
     final position = layout.position;
-    final half = thumbStyle.dimension / 2;
+    final half = thumbStyle.size / 2;
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return DecoratedBox(
@@ -180,14 +180,14 @@ class _Track extends StatelessWidget {
             for (var FSliderMark(:style, :value, :tick) in marks)
               if (tick)
                 position(
-                  offset: value * extent + half - ((style ??= markStyle).tickDimension / 2),
+                  offset: value * extent + half - ((style ??= markStyle).tickSize / 2),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: style.tickColor,
                     ),
                     child: SizedBox.square(
-                      dimension: style.tickDimension,
+                      dimension: style.tickSize,
                     ),
                   ),
                 ),
@@ -208,7 +208,7 @@ class _ActiveTrack extends StatelessWidget {
     final FSliderStyle(:activeColor, :borderRadius, :crossAxisExtent, :thumbStyle) = style;
     final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
 
-    final mainAxisExtent = rawOffset.max - rawOffset.min + thumbStyle.dimension / 2;
+    final mainAxisExtent = rawOffset.max - rawOffset.min + thumbStyle.size / 2;
     final (height, width) = layout.vertical ? (mainAxisExtent, crossAxisExtent) : (crossAxisExtent, mainAxisExtent);
 
     return layout.position(
@@ -230,16 +230,16 @@ class _ActiveTrack extends StatelessWidget {
 @internal
 extension Layouts on Layout {
   double Function(Offset) translateTrackTap(double extent, FSliderStyle style) => switch (this) {
-        Layout.ltr => (offset) => offset.dx - style.thumbStyle.dimension / 2,
-        Layout.rtl => (offset) => extent - offset.dx + style.thumbStyle.dimension / 2,
-        Layout.ttb => (offset) => offset.dy - style.thumbStyle.dimension / 2,
-        Layout.btt => (offset) => extent - offset.dy + style.thumbStyle.dimension / 2,
+        Layout.ltr => (offset) => offset.dx - style.thumbStyle.size / 2,
+        Layout.rtl => (offset) => extent - offset.dx + style.thumbStyle.size / 2,
+        Layout.ttb => (offset) => offset.dy - style.thumbStyle.size / 2,
+        Layout.btt => (offset) => extent - offset.dy + style.thumbStyle.size / 2,
       };
 
   double Function(Offset) translateTrackDrag(FSliderStyle style) => switch (this) {
-        Layout.ltr => (delta) => delta.dx - style.thumbStyle.dimension / 2,
+        Layout.ltr => (delta) => delta.dx - style.thumbStyle.size / 2,
         Layout.rtl => (delta) => -delta.dx,
-        Layout.ttb => (delta) => delta.dy - style.thumbStyle.dimension / 2,
+        Layout.ttb => (delta) => delta.dy - style.thumbStyle.size / 2,
         Layout.btt => (delta) => -delta.dy,
       };
 
