@@ -25,39 +25,35 @@ final class FSliderTooltipsController {
   }
 
   /// Toggles the visibility of the tooltip with the given key, or all tooltips if none is specified.
-  void toggle([UniqueKey? key]) {
+  Future<void> toggle([UniqueKey? key]) async {
     if (key != null) {
-      _tooltips[key]?.toggle();
+      await _tooltips[key]?.toggle();
       return;
     }
 
-    for (final tooltip in _tooltips.values) {
-      tooltip.toggle();
-    }
+    await Future.wait([
+      for (final tooltip in _tooltips.values) tooltip.toggle(),
+    ]);
   }
 
   /// Shows the tooltip with the given key, or all tooltips if none is specified.
-  void show([UniqueKey? key]) {
+  Future<void> show([UniqueKey? key]) async {
     if (key != null) {
-      _tooltips[key]?.show();
+      await _tooltips[key]?.show();
       return;
     }
 
-    for (final tooltip in _tooltips.values) {
-      tooltip.show();
-    }
+    await Future.wait([for (final tooltip in _tooltips.values) tooltip.show()]);
   }
 
   /// Hides the tooltip with the given key, or all tooltips if none is specified.
-  void hide([UniqueKey? key]) {
+  Future<void> hide([UniqueKey? key]) async {
     if (key != null) {
-      _tooltips[key]?.hide();
+      await _tooltips[key]?.hide();
       return;
     }
 
-    for (final tooltip in _tooltips.values) {
-      tooltip.hide();
-    }
+    await Future.wait([for (final tooltip in _tooltips.values) tooltip.hide()]);
   }
 
   /// Removes the tooltip from the slider.
