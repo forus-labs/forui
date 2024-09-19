@@ -35,6 +35,10 @@ final class FButtonStyles with Diagnosticable {
             borderRadius: style.borderRadius,
             color: colorScheme.primary,
           ),
+          enabledHoverBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.primary.withOpacity(0.9),
+          ),
           disabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
             color: colorScheme.primary.withOpacity(0.5),
@@ -54,6 +58,10 @@ final class FButtonStyles with Diagnosticable {
             borderRadius: style.borderRadius,
             color: colorScheme.secondary,
           ),
+          enabledHoverBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.secondary.withOpacity(0.9),
+          ),
           disabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
             color: colorScheme.secondary.withOpacity(0.5),
@@ -72,6 +80,10 @@ final class FButtonStyles with Diagnosticable {
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
             color: colorScheme.destructive,
+          ),
+          enabledHoverBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.destructive.withOpacity(0.9),
           ),
           disabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -94,6 +106,10 @@ final class FButtonStyles with Diagnosticable {
             ),
             borderRadius: style.borderRadius,
             color: colorScheme.background,
+          ),
+          enabledHoverBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.secondary,
           ),
           disabledBoxDecoration: BoxDecoration(
             border: Border.all(color: colorScheme.border.withOpacity(0.5)),
