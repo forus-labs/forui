@@ -25,7 +25,7 @@ final class FThemeData with Diagnosticable {
   /// The style. It is used to configure the miscellaneous properties, such as border radii, of Forui widgets.
   final FStyle style;
 
-  /// The accordion styles.
+  /// The accordion style.
   final FAccordionStyle accordionStyle;
 
   /// The alert styles.
