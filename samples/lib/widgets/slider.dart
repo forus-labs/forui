@@ -7,23 +7,29 @@ import 'package:forui_samples/sample_scaffold.dart';
 class SliderPage extends SampleScaffold {
   final bool enabled;
   final FSliderInteraction interaction;
+  final ({double min, double max}) extent;
 
   SliderPage({
     @queryParam super.theme,
     @queryParam String enabled = 'true',
     @queryParam String interaction = 'tapAndSlideThumb',
+    @queryParam String extent = 'false',
   })  : enabled = bool.tryParse(enabled) ?? true,
         interaction = switch (interaction) {
           'slide' => FSliderInteraction.slide,
           'slideThumb' => FSliderInteraction.slideThumb,
           'tap' => FSliderInteraction.tap,
           _ => FSliderInteraction.tapAndSlideThumb,
-        };
+        },
+        extent = bool.tryParse(extent) ?? false ? (min: 0, max: 1) : (min: 0.25, max: 0.75);
 
   @override
   Widget child(BuildContext context) => FSlider(
         controller: FContinuousSliderController(
-          selection: FSliderSelection(max: 0.6),
+          selection: FSliderSelection(
+              max: 0.6,
+              extent: extent,
+          ),
           allowedInteraction: interaction,
         ),
         enabled: enabled,

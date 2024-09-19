@@ -159,6 +159,26 @@ describes the mark's value.
   </Tabs.Tab>
 </Tabs>
 
+#### Min & Max Selection Extent
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{extent: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {5}
+        FSlider(
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(
+                max: 0.6,
+                extent: (min: 0.25, max: 0.75),
+            ),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
 #### Vertical Layout
 
 <Tabs items={['Preview', 'Code']}>
