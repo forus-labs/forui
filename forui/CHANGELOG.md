@@ -1,3 +1,6 @@
+## 0.6.0 (Next)
+
+
 ## 0.5.0
 
 The minimum Flutter version has been increased from `3.19.0` to `3.24.0`.
@@ -69,6 +72,8 @@ and`FStyle.errorFormFieldStyle`.
 
 * **Breaking:** `FCheckbox` and `FSwitch` no longer wraps `FormField` - consider wrapping them in a `FormField` if 
 required.
+
+* **Breaking:** Require `FTheme` to be wrapped in a `CupertinoApp`, `MaterialApp` or `WidgetsApp`.
 
 ### Fixes
 
