@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart' hide Thumb;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -239,7 +237,7 @@ void main() {
 
       for (final (index, (constructor, minExpected, maxExpected)) in [
         (continuous, lessThan(0.25), greaterThan(0.75)),
-        (discrete, 0, 1)
+        (discrete, 0, 1),
       ].indexed) {
         testWidgets('tap inactive track - $index', (tester) async {
           final controller = constructor();
