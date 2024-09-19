@@ -1,6 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+
 import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
@@ -27,8 +29,8 @@ class SliderPage extends SampleScaffold {
   Widget child(BuildContext context) => FSlider(
         controller: FContinuousSliderController(
           selection: FSliderSelection(
-              max: 0.6,
-              extent: extent,
+            max: 0.6,
+            extent: extent,
           ),
           allowedInteraction: interaction,
         ),
@@ -68,8 +70,8 @@ class MarksSliderPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 35),
-    child: FSlider(
+        padding: const EdgeInsets.symmetric(vertical: 35),
+        child: FSlider(
           layout: layout,
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           marks: const [
@@ -80,7 +82,7 @@ class MarksSliderPage extends SampleScaffold {
             FSliderMark(value: 1, label: Text('100%')),
           ],
         ),
-  );
+      );
 }
 
 @RoutePage()
