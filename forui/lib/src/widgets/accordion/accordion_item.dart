@@ -1,11 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
-
-import 'dart:math' as math;
 
 /// An item that represents a header in a [FAccordion].
 class FAccordionData extends InheritedWidget{

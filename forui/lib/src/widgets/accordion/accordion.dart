@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_svg/svg.dart';
+import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:meta/meta.dart';
 
 /// A vertically stacked set of interactive headings that each reveal a section of content.
 ///
@@ -113,9 +114,9 @@ final class FAccordionStyle with Diagnosticable {
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : titleTextStyle = typography.base.copyWith(
-    fontWeight: FontWeight.w500,
-    color: colorScheme.foreground,
-  ),
+          fontWeight: FontWeight.w500,
+          color: colorScheme.foreground,
+        ),
         childTextStyle = typography.sm.copyWith(
           color: colorScheme.foreground,
         ),
@@ -160,14 +161,14 @@ final class FAccordionStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FAccordionStyle &&
-              runtimeType == other.runtimeType &&
-              titleTextStyle == other.titleTextStyle &&
-              childTextStyle == other.childTextStyle &&
-              titlePadding == other.titlePadding &&
-              contentPadding == other.contentPadding &&
-              icon == other.icon &&
-              dividerColor == other.dividerColor;
+      other is FAccordionStyle &&
+          runtimeType == other.runtimeType &&
+          titleTextStyle == other.titleTextStyle &&
+          childTextStyle == other.childTextStyle &&
+          titlePadding == other.titlePadding &&
+          contentPadding == other.contentPadding &&
+          icon == other.icon &&
+          dividerColor == other.dividerColor;
 
   @override
   int get hashCode =>
