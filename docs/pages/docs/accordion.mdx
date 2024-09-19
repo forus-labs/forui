@@ -20,19 +20,25 @@ A vertically stacked set of interactive headings that each reveal a section of c
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FAccordion(
-              title: Text('Is it Styled?'),
-              child: Text(
-                "Yes. It comes with default styles that matches the other components' aesthetics",
-                textAlign: TextAlign.left,
-              ),
-            ),
-            FAccordion(
-              title: Text('Is it Animated?'),
-              initiallyExpanded: false,
-              child: Text(
-                'Yes. It is animated by default, but you can disable it if you prefer',
-                textAlign: TextAlign.left,
-              ),
+              items: [
+                FAccordionItem(
+                  title: const Text('Is it accessible?'),
+                  child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+                ),
+                FAccordionItem(
+                  title: const Text('Is it Styled?'),
+                  initiallyExpanded: true,
+                  child: const Text(
+                    "Yes. It comes with default styles that matches the other components' aesthetics",
+                  ),
+                ),
+                FAccordionItem(
+                  title: const Text('Is it Animated?'),
+                  child: const Text(
+                    'Yes. It is animated by default, but you can disable it if you prefer',
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -46,10 +52,52 @@ A vertically stacked set of interactive headings that each reveal a section of c
 
 ```dart
 FAccordion(
-  title: Text('Is it Styled?'),
-  child: Text(
-    "Yes. It comes with default styles that matches the other components' aesthetics",
-    textAlign: TextAlign.left,
-  ),
-);
+  controller: FAccordionController(), // or FRadioAccordionController()
+  items: [
+    FAccordionItem(
+      title: const Text('Is it accessible?'),
+      child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+    ),
+  ],
+),
 ```
+
+## Examples
+
+### With FRadioAccordionController
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='accordion' query={{controller: 'radio'}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FAccordion(
+              controller: FRadioAccordionController(),
+              items: [
+                FAccordionItem(
+                  title: const Text('Is it accessible?'),
+                  child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+                ),
+                FAccordionItem(
+                  title: const Text('Is it Styled?'),
+                  initiallyExpanded: true,
+                  child: const Text(
+                    "Yes. It comes with default styles that matches the other components' aesthetics",
+                  ),
+                ),
+                FAccordionItem(
+                  title: const Text('Is it Animated?'),
+                  child: const Text(
+                    'Yes. It is animated by default, but you can disable it if you prefer',
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>

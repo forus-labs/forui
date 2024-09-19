@@ -28,12 +28,29 @@ class _SandboxState extends State<Sandbox> {
                 title: const Text('Title 1'),
                 initiallyExpanded: true,
                 child: const Text(
+                  'Yes. It adheres to the WAI-ARIA design pattern, wfihwe fdhfiwf dfhwiodf dfwhoif',
+                ),
+              ),
+              FAccordionItem(
+                title: const Text('Title 2'),
+                child: Container(
+                  width: 100,
+                  color: Colors.yellow,
+                  child: const Text(
+                    'Yes. It adheres to the WAI-ARIA design pattern geg wjfiweo dfjiowjf dfjio',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              FAccordionItem(
+                title: const Text('Title 3'),
+                child: const Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,
                 ),
               ),
               FAccordionItem(
-                title: const Text('Title 2'),
+                title: const Text('Title 4'),
                 child: const Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,

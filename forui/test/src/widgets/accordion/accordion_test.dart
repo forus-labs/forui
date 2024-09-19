@@ -18,11 +18,16 @@ void main() {
           home: TestScaffold(
             data: FThemes.zinc.light,
             child: FAccordion(
-              title: const Text('Title'),
-              child: FButton(
-                onPress: () => taps++,
-                label: const Text('button'),
-              ),
+              items: [
+                FAccordionItem(
+                  title: const Text('Title'),
+                  initiallyExpanded: true,
+                  child: FButton(
+                    onPress: () => taps++,
+                    label: const Text('button'),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

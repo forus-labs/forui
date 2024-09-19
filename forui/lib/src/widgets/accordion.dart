@@ -13,8 +13,10 @@ import 'package:forui/src/foundation/util.dart';
 
 /// A controller that stores the expanded state of an [_Item].
 interface class FAccordionController extends ChangeNotifier {
+  /// The duration of the expansion and collapse animations.
   final Duration duration;
   final List<(AnimationController, Animation)> _controllers;
+  final Set<int> _values;
   final int _min;
   final int? _max;
 
@@ -27,37 +29,50 @@ interface class FAccordionController extends ChangeNotifier {
   /// * Throws [AssertionError] if [max] < 0.
   /// * Throws [AssertionError] if [min] > [max].
   FAccordionController({
-    int min = 1,
+    int min = 0,
     int? max,
+    Set<int>? values,
     this.duration = const Duration(milliseconds: 500),
   })  : _min = min,
         _max = max,
         _controllers = [],
+        _values = values ?? {},
         assert(min >= 0, 'The min value must be greater than or equal to 0.'),
         assert(max == null || max >= 0, 'The max value must be greater than or equal to 0.'),
         assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
+  /// Adds an item to the accordion.
   void addItem(int index, AnimationController controller, Animation expand) {
     _controllers.add((controller, expand));
+    if (controller.value == 1.0) {
+      _values.add(index);
+    }
   }
 
-  void removeItem(int index) => _controllers.remove(index);
+  /// Removes an item from the accordion.
+  void removeItem(int index) {
+    _controllers.removeAt(index);
+    _values.remove(index);
+  }
 
-  /// Convenience method for toggling the current [expanded] status.
+  /// Convenience method for toggling the current expanded status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> toggle(int index) async {
-    if (_max != null && _controllers.length >= _max) {
-      print('Cannot expand more than $_max items.');
-      return;
+    if (_controllers[index].$2.value == 100) {
+      if (_values.length <= _min) {
+        return;
+      }
+      _values.remove(index);
+      await collapse(index);
+    } else {
+      if (_max != null && _values.length >= _max) {
+        return;
+      }
+      _values.add(index);
+      await expand(index);
     }
-
-    if (_controllers.length <= _min) {
-      print('Cannot collapse more than $_min items.');
-      return;
-    }
-
-    return await _controllers[index].$2.value == 100 ? collapse(index) : expand(index);
+    notifyListeners();
   }
 
   /// Shows the content in the accordion.
@@ -77,52 +92,48 @@ interface class FAccordionController extends ChangeNotifier {
     await controller.reverse();
     notifyListeners();
   }
-
-  double percentage(int index) => _controllers[index].$2.value / 100;
 }
 
-// class RadioAccordionController implements FAccordionController {
-//   final Duration duration;
-//   final List<(AnimationController, Animation)> _controllers;
-//   final int? min;
-//   final int? max;
-//
-//   RadioAccordionController({
-//     this.duration = const Duration(milliseconds: 500),
-//   }) : super(duration: duration);
-//
-//   @override
-//   void addItem(int index, AnimationController controller, Animation expand) {
-//     _controllers[index] = (controller, expand);
-//   }
-//
-//   @override
-//   void removeItem(int index) => _controllers.remove(index);
-//
-//   @override
-//   Future<void> toggle(int index) async {
-//     final controller = _controllers[index].item;
-//     controller.isCompleted ? controller.reverse() : controller.forward();
-//   }
-//
-//   @override
-//   Future<void> expand(int index) async {
-//     final controller = _controllers[index].item;
-//     controller.forward();
-//   }
-//
-//   @override
-//   Future<void> collapse(int index) async {
-//     final controller = _controllers[index].item1;
-//     controller.reverse();
-//   }
-// }
+/// An [FAccordionController] that allows one section to be expanded at a time.
+class FRadioAccordionController extends FAccordionController {
+  /// Creates a [FRadioAccordionController].
+  FRadioAccordionController({
+    int? value,
+    super.duration,
+    super.min,
+    int super.max = 1,
+  }) : super(values: value == null ? {} : {value});
 
+  @override
+  Future<void> toggle(int index) async {
+    final toggle = <Future>[];
+    if (!(_values.length <= _min)) {
+      if (!_values.contains(index) && _values.length >= _max!) {
+        toggle.add(collapse(_values.first));
+        _values.remove(_values.first);
+      }
+    }
+    toggle.add(super.toggle(index));
+    await Future.wait(toggle);
+  }
+}
+
+/// A vertically stacked set of interactive headings that each reveal a section of content.
 class FAccordion extends StatefulWidget {
+  /// The controller.
+  ///
+  /// See:
+  /// * [FRadioAccordionController] for a single radio like selection.
+  /// * [FAccordionController] for default multiple selections.
   final FAccordionController? controller;
+
+  /// The items.
   final List<FAccordionItem> items;
+
+  /// The style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
 
+  /// Creates a [FAccordion].
   const FAccordion({
     required this.items,
     this.controller,
@@ -136,7 +147,10 @@ class FAccordion extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FAccordionController?>('controller', controller));
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(IterableProperty('items', items));
   }
 }
 
@@ -166,6 +180,7 @@ class _FAccordionState extends State<FAccordion> {
   }
 }
 
+/// An item that represents a header in a [FAccordion].
 class FAccordionItem {
   /// The title.
   final Widget title;
@@ -176,6 +191,7 @@ class FAccordionItem {
   /// Whether the item is initially expanded.
   final bool initiallyExpanded;
 
+  ///
   FAccordionItem({required this.title, required this.child, this.initiallyExpanded = false});
 }
 
@@ -269,7 +285,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) => AnimatedBuilder(
         animation: widget.controller._controllers[widget.index].$2,
         builder: (context, _) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start, //TODO: Should all content in the accordion be left-aligned?
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             FTappable(
               onPress: () => widget.controller.toggle(widget.index),
@@ -293,7 +309,9 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       Transform.rotate(
-                        angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0, //TODO: use FAccordionController to get the percentage
+                        //TODO: Should I be getting the percentage value from the controller or from its local state?
+                        angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0,
+
                         child: widget.style.icon,
                       ),
                     ],
@@ -305,9 +323,11 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
             // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
             // child to layout at a smaller size while the amount of padding remains the same.
             _Expandable(
-              percentage: _expand.value / 100, //TODO: use FAccordionController to get the percentage
+              //TODO: Should I be getting the percentage value from the controller or from its local state?
+              percentage: _expand.value / 100,
               child: ClipRect(
-                clipper: _Clipper(percentage: _expand.value / 100), //TODO: use FAccordionController to get the percentage
+                //TODO: Should I be getting the percentage value from the controller or from its local state?
+                clipper: _Clipper(percentage: _expand.value / 100),
                 child: Padding(
                   padding: widget.style.contentPadding,
                   child: DefaultTextStyle(style: widget.style.childTextStyle, child: widget.item.child),

@@ -15,17 +15,22 @@ void main() {
         MaterialApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
-                  title: Text('Title'),
-                  child: ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(
-                      dimension: 50,
+                  items: [
+                    FAccordionItem(
+                      title: const Text('Title'),
+                      initiallyExpanded: true,
+                      child: const ColoredBox(
+                        color: Colors.yellow,
+                        child: SizedBox.square(
+                          dimension: 50,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
@@ -41,17 +46,22 @@ void main() {
         MaterialApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
-                  title: Text('Title'),
-                  child: ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(
-                      dimension: 50,
+                  items: [
+                    FAccordionItem(
+                      title: const Text('Title'),
+                      initiallyExpanded: true,
+                      child: const ColoredBox(
+                        color: Colors.yellow,
+                        child: SizedBox.square(
+                          dimension: 50,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
