@@ -101,12 +101,13 @@ final class FButtonStyles with Diagnosticable {
         ),
         outline = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
+            border: Border.all(
+              color: colorScheme.border,
+            ),
             borderRadius: style.borderRadius,
             color: colorScheme.background,
           ),
           enabledHoverBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
             borderRadius: style.borderRadius,
             color: colorScheme.secondary,
           ),

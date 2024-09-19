@@ -122,7 +122,6 @@ class FButton extends StatelessWidget {
     };
 
     final enabled = onPress != null || onLongPress != null;
-
     return FTappable.animated(
       autofocus: autofocus,
       focusNode: focusNode,
@@ -130,7 +129,7 @@ class FButton extends StatelessWidget {
       onPress: onPress,
       onLongPress: onLongPress,
       builder: (context, state, child) => DecoratedBox(
-        decoration: switch ((enabled, state.hovered || state.longPressed)) {
+        decoration: switch ((enabled, state.hovered)) {
           (true, false) => style.enabledBoxDecoration,
           (true, true) => style.enabledHoverBoxDecoration,
           (false, _) => style.disabledBoxDecoration,
