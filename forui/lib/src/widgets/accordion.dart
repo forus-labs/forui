@@ -11,11 +11,11 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 
-/// A controller that stores the expanded state of an [_Item].
+/// A controller that controls which sections are shown and hidden.
 interface class FAccordionController extends ChangeNotifier {
   /// The duration of the expansion and collapse animations.
   final Duration duration;
-  final List<(AnimationController, Animation)> _controllers;
+  final List<({AnimationController controller, Animation animation})> _controllers;
   final Set<int> _values;
   final int _min;
   final int? _max;
@@ -31,7 +31,7 @@ interface class FAccordionController extends ChangeNotifier {
   FAccordionController({
     int min = 0,
     int? max,
-    Set<int>? values,
+    Set<int> values = {},
     this.duration = const Duration(milliseconds: 500),
   })  : _min = min,
         _max = max,
@@ -42,7 +42,7 @@ interface class FAccordionController extends ChangeNotifier {
         assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   /// Adds an item to the accordion.
-  void addItem(int index, AnimationController controller, Animation expand) {
+  void addItem(int index, AnimationController controller, Animation animation) {
     _controllers.add((controller, expand));
     if (controller.value == 1.0) {
       _values.add(index);
