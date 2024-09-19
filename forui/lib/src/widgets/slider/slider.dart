@@ -8,6 +8,8 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 /// An input where the user selects a value from within a given range.
 ///
+/// A slider is a form field and therefore can be used within a [Form] widget.
+///
 /// See:
 /// * https://forui.dev/docs/slider for working examples.
 /// * [FContinuousSliderController.new] for selecting a single continuous value.

@@ -1,0 +1,261 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../components/widget";
+import LinkBadge from "../../components/link-badge/link-badge";
+import LinkBadgeGroup from "../../components/link-badge/link-badge-group";
+
+# Slider
+An input where the user selects a value from within a given range.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.slider/forui.widgets.slider-library.html"/>
+</LinkBadgeGroup>
+
+## Usage
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart
+        FSlider(
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(max: 0.6),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### `FSlider(...)`
+
+```dart
+FSlider(
+  layout: Layout.rtl,
+  tooltipBuilder: (style, value) => Text('${(value.toStringAsFixed(2)}%'),
+  controller: FContinuousSliderController(
+    allowedInteraction: FSliderInteraction.tap,
+    selection: FSliderSelection(max: 0.75, extent: (min: 0, max: 0.6)),
+  ),
+  marks: const [
+    FSliderMark(value: 0, label: const Text('0%')),
+    FSliderMark(value: 0.5, label: const Text('50%')),
+    FSliderMark(value: 1, label: const Text('100%')),
+  ],
+);
+```
+
+## Examples
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{enabled: 'false'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {5}
+        FSlider(
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(max: 0.6),
+          ),
+          enabled: false,
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+
+### Tooltip
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' variant='tooltip'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {5-8}
+        FSlider(
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(max: 0.6),
+          ),
+          tooltipBuilder: (style, value) {
+            final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
+            return Text('0x$hex');
+          },
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Marks
+
+A mark consists of a tick - a visual indicator of the mark's position on the slider - and a label - a text that
+describes the mark's value.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' variant='marks'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {5-11}
+        FSlider(
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(max: 0.35),
+          ),
+          marks: const [
+            FSliderMark(value: 0, label: Text('0%')),
+            FSliderMark(value: 0.25, tick: false),
+            FSliderMark(value: 0.5),
+            FSliderMark(value: 0.75, tick: false),
+            FSliderMark(value: 1, label: Text('100%')),
+          ],
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Discrete Selection
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' variant='discrete'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {2-4}
+        FSlider(
+          controller: FDiscreteSliderController(
+            selection: FSliderSelection(max: 0.25),
+          ),
+          marks: const [
+            FSliderMark(value: 0, label: Text('0%')),
+            FSliderMark(value: 0.25, tick: false),
+            FSliderMark(value: 0.5),
+            FSliderMark(value: 0.75, tick: false),
+            FSliderMark(value: 1, label: Text('100%')),
+          ],
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Range Selection
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' variant='range'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {2-4}
+        FSlider(
+          controller: FContinuousSliderController.range(
+            selection: FSliderSelection(min: 0.25, max: 0.75),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Vertical Layout
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' variant='marks' query={{layout: 'btt'}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {2}
+        FSlider(
+          layout: Layout.btt,
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(max: 0.6),
+          ),
+          marks: const [
+            FSliderMark(value: 0, label: Text('0%')),
+            FSliderMark(value: 0.25, tick: false),
+            FSliderMark(value: 0.5),
+            FSliderMark(value: 0.75, tick: false),
+            FSliderMark(value: 1, label: Text('100%')),
+          ],
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Slide Track
+
+Slide anywhere on the track or thumb to select a value.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{interaction: 'slide'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {3}
+        FSlider(
+          controller: FContinuousSliderController(
+            allowedInteraction: FSliderInteraction.slide,
+            selection: FSliderSelection(max: 0.6),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Slide Thumb
+
+Slide the thumb to select a value.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{interaction: 'slideThumb'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {3}
+        FSlider(
+          controller: FContinuousSliderController(
+            allowedInteraction: FSliderInteraction.slideThumb,
+            selection: FSliderSelection(max: 0.6),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Tap
+
+Tap anywhere on the track to select a value.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{interaction: 'tap'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {3}
+        FSlider(
+          controller: FContinuousSliderController(
+            allowedInteraction: FSliderInteraction.tap,
+            selection: FSliderSelection(max: 0.6),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+### Tap and Slide Thumb
+
+Tap anywhere or slide the thumb to select a value.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{interaction: 'tapAndSlideThumb'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {3}
+        FSlider(
+          controller: FContinuousSliderController(
+            allowedInteraction: FSliderInteraction.tapAndSlideThumb,
+            selection: FSliderSelection(max: 0.6),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
