@@ -1,3 +1,6 @@
+## 0.6.0 (Next)
+
+
 ## 0.5.1
 
 ###
@@ -77,6 +80,8 @@ and`FStyle.errorFormFieldStyle`.
 
 * **Breaking:** `FCheckbox` and `FSwitch` no longer wraps `FormField` - consider wrapping them in a `FormField` if 
 required.
+
+* **Breaking:** Require `FTheme` to be wrapped in a `CupertinoApp`, `MaterialApp` or `WidgetsApp`.
 
 ### Fixes
 
