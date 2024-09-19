@@ -1,5 +1,14 @@
 ## 0.6.0 (Next)
 
+### Additions
+
+* Add `FButtonCustomStyle.enabledHoverBoxDecoration`.
+
+
+### Changes
+
+* Change button to change color when hovering over it.
+
 
 ## 0.5.0
 
