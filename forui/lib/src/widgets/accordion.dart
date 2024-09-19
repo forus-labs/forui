@@ -12,11 +12,11 @@ import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 
 /// A controller that controls which sections are shown and hidden.
-interface class FAccordionController extends ChangeNotifier {
+base class FAccordionController extends ChangeNotifier {
   /// The duration of the expansion and collapse animations.
-  final Duration duration;
+  final Duration animationDuration;
   final List<({AnimationController controller, Animation animation})> _controllers;
-  final Set<int> _values;
+  final Set<int> _expanded;
   final int _min;
   final int? _max;
 
@@ -31,45 +31,45 @@ interface class FAccordionController extends ChangeNotifier {
   FAccordionController({
     int min = 0,
     int? max,
-    Set<int> values = {},
-    this.duration = const Duration(milliseconds: 500),
+    this.animationDuration = const Duration(milliseconds: 500),
   })  : _min = min,
         _max = max,
         _controllers = [],
-        _values = values ?? {},
+        _expanded = {},
         assert(min >= 0, 'The min value must be greater than or equal to 0.'),
         assert(max == null || max >= 0, 'The max value must be greater than or equal to 0.'),
         assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   /// Adds an item to the accordion.
-  void addItem(int index, AnimationController controller, Animation animation) {
-    _controllers.add((controller, expand));
-    if (controller.value == 1.0) {
-      _values.add(index);
+  // ignore: avoid_positional_boolean_parameters
+  void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
+    _controllers.add((controller: controller, animation: animation));
+    if (initiallyExpanded) {
+      _expanded.add(index);
     }
   }
 
   /// Removes an item from the accordion.
   void removeItem(int index) {
     _controllers.removeAt(index);
-    _values.remove(index);
+    _expanded.remove(index);
   }
 
   /// Convenience method for toggling the current expanded status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> toggle(int index) async {
-    if (_controllers[index].$2.value == 100) {
-      if (_values.length <= _min) {
+    if (_controllers[index].controller.value == 1) {
+      if (_expanded.length <= _min) {
         return;
       }
-      _values.remove(index);
+      _expanded.remove(index);
       await collapse(index);
     } else {
-      if (_max != null && _values.length >= _max) {
+      if (_max != null && _expanded.length >= _max) {
         return;
       }
-      _values.add(index);
+      _expanded.add(index);
       await expand(index);
     }
     notifyListeners();
@@ -79,7 +79,7 @@ interface class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> expand(int index) async {
-    final controller = _controllers[index].$1;
+    final controller = _controllers[index].controller;
     await controller.forward();
     notifyListeners();
   }
@@ -88,29 +88,37 @@ interface class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> collapse(int index) async {
-    final controller = _controllers[index].$1;
+    final controller = _controllers[index].controller;
     await controller.reverse();
     notifyListeners();
   }
 }
 
 /// An [FAccordionController] that allows one section to be expanded at a time.
-class FRadioAccordionController extends FAccordionController {
+final class FRadioAccordionController extends FAccordionController {
   /// Creates a [FRadioAccordionController].
   FRadioAccordionController({
-    int? value,
-    super.duration,
+    super.animationDuration,
     super.min,
     int super.max = 1,
-  }) : super(values: value == null ? {} : {value});
+  });
+
+  @override
+  void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
+    if (_expanded.length > _max!) {
+      super.addItem(index, controller, animation, false);
+    } else {
+      super.addItem(index, controller, animation, initiallyExpanded);
+    }
+  }
 
   @override
   Future<void> toggle(int index) async {
     final toggle = <Future>[];
-    if (!(_values.length <= _min)) {
-      if (!_values.contains(index) && _values.length >= _max!) {
-        toggle.add(collapse(_values.first));
-        _values.remove(_values.first);
+    if (_expanded.length > _min) {
+      if (!_expanded.contains(index) && _expanded.length >= _max!) {
+        toggle.add(collapse(_expanded.first));
+        _expanded.remove(_expanded.first);
       }
     }
     toggle.add(super.toggle(index));
@@ -160,7 +168,7 @@ class _FAccordionState extends State<FAccordion> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FAccordionController();
+    _controller = widget.controller ?? FRadioAccordionController(min: 1, max: 2);
   }
 
   @override
@@ -168,11 +176,11 @@ class _FAccordionState extends State<FAccordion> {
     final style = widget.style ?? context.theme.accordionStyle;
     return Column(
       children: [
-        for (var i = 0; i < widget.items.length; i++)
+        for (final (index, widget) in widget.items.indexed)
           _Item(
             style: style,
-            index: i,
-            item: widget.items[i],
+            index: index,
+            item: widget,
             controller: _controller,
           ),
       ],
@@ -191,7 +199,7 @@ class FAccordionItem {
   /// Whether the item is initially expanded.
   final bool initiallyExpanded;
 
-  ///
+  /// Creates an [FAccordionItem].
   FAccordionItem({required this.title, required this.child, this.initiallyExpanded = false});
 }
 
@@ -241,7 +249,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: widget.controller.duration,
+      duration: widget.controller.animationDuration,
       value: widget.item.initiallyExpanded ? 1.0 : 0.0,
       vsync: this,
     );
@@ -254,7 +262,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
         parent: _controller,
       ),
     );
-    widget.controller.addItem(widget.index, _controller, _expand);
+    widget.controller.addItem(widget.index, _controller, _expand, widget.item.initiallyExpanded);
   }
 
   @override
@@ -262,7 +270,7 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
       _controller = AnimationController(
-        duration: widget.controller.duration,
+        duration: widget.controller.animationDuration,
         value: widget.item.initiallyExpanded ? 1.0 : 0.0,
         vsync: this,
       );
@@ -277,13 +285,13 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
       );
 
       old.controller.removeItem(old.index);
-      widget.controller.addItem(widget.index, _controller, _expand);
+      widget.controller.addItem(widget.index, _controller, _expand, widget.item.initiallyExpanded);
     }
   }
 
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
-        animation: widget.controller._controllers[widget.index].$2,
+        animation: widget.controller._controllers[widget.index].animation,
         builder: (context, _) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
