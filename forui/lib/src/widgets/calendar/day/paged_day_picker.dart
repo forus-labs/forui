@@ -44,6 +44,8 @@ class PagedDayPicker extends PagedPicker {
 }
 
 class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
+  bool _gridFocused = false;
+
   @override
   Widget buildItem(BuildContext context, int page) => DayPicker(
         style: widget.style.dayPickerStyle,
@@ -53,13 +55,14 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
         selectable: widget.selectable,
         selected: widget.selected,
         onPress: (date) {
-          setState(() => focusedDate = date);
+          setState(() {
+            if (_gridFocused) {
+              focusedDate = date;
+            }
+          });
           widget.onPress(date);
         },
-        onLongPress: (date) {
-          setState(() => focusedDate = date);
-          widget.onLongPress(date);
-        },
+        onLongPress: (date) => widget.onLongPress(date),
       );
 
   @override
@@ -86,9 +89,12 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   void onGridFocusChange(bool focused) {
     setState(() {
+      _gridFocused = focused;
       if (focused && focusedDate == null) {
         final preferred = widget.today.truncate(to: DateUnit.months) == current ? widget.today.day : 1;
         focusedDate = _focusableDayForMonth(current, preferred);
+      } else if (!focused) {
+        focusedDate = null;
       }
     });
   }

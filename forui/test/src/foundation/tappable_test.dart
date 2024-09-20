@@ -21,11 +21,11 @@ void main() {
           ),
         ),
       );
-      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+      expect(find.text((focused: false, hovered: false, longPressed: false).toString()), findsOneWidget);
 
       focusNode.requestFocus();
       await tester.pumpAndSettle();
-      expect(find.text((focused: true, hovered: false).toString()), findsOneWidget);
+      expect(find.text((focused: true, hovered: false, longPressed: false).toString()), findsOneWidget);
     });
 
     testWidgets('hovered', (tester) async {
@@ -37,7 +37,7 @@ void main() {
           ),
         ),
       );
-      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+      expect(find.text((focused: false, hovered: false, longPressed: false).toString()), findsOneWidget);
 
       final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
       await gesture.addPointer(location: Offset.zero);
@@ -47,12 +47,30 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
       await tester.pumpAndSettle();
 
-      expect(find.text((focused: false, hovered: true).toString()), findsOneWidget);
+      expect(find.text((focused: false, hovered: true, longPressed: false).toString()), findsOneWidget);
 
       await gesture.moveTo(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+      expect(find.text((focused: false, hovered: false, longPressed: false).toString()), findsOneWidget);
+    });
+
+    testWidgets('long pressed', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: FTappable(
+            builder: (_, value, __) => Text('$value'),
+          ),
+        ),
+      );
+      expect(find.text((focused: false, hovered: false, longPressed: false).toString()), findsOneWidget);
+
+      await tester.longPress(find.byType(FTappable));
+      expect(find.text((focused: false, hovered: false, longPressed: true).toString()), findsOneWidget);
+
+      await tester.pumpAndSettle();
+      expect(find.text((focused: false, hovered: false, longPressed: false).toString()), findsOneWidget);
     });
   });
 }

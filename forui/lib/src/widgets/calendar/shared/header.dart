@@ -207,7 +207,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
         enabledBoxDecoration: outline.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
         disabledBoxDecoration: outline.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
       ),
-      headerTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+      headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
       iconColor: colorScheme.mutedForeground,
     );
   }

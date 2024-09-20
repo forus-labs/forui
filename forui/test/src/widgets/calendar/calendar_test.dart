@@ -43,7 +43,7 @@ void main() {
         expect(find.text('July 2024'), findsOneWidget);
 
         await tester.tap(find.byType(FButton).first);
-        await tester.pumpAndSettle();
+        await tester.pumpAndSettle(const Duration(seconds: 1));
 
         expect(find.text('June 2024'), findsNothing);
       });

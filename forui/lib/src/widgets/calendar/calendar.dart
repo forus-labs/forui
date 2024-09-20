@@ -124,11 +124,8 @@ class FCalendar extends StatelessWidget {
                       start: start.toLocalDate(),
                       end: end.toLocalDate(),
                       today: today.toLocalDate(),
-                      initial: _month.value,
-                      onChange: (date) {
-                        _month.value = date;
-                        _type.value = FCalendarPickerType.day;
-                      },
+                      month: _month,
+                      type: _type,
                     ),
                 },
               ),
