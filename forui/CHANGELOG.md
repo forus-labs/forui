@@ -13,6 +13,7 @@
 
 ### Fixes
 
+* Fix `FBottomNavigationBar` items hit region being smaller than intended.
 * Fix `FCalendar` showing focused outline when pressing and long pressing a date.
 * Fix `FCalendar` year and month picker applying incorrect initial top padding.
 * Fix `FCalendar` year and month picker incorrectly calculating start and end dates.

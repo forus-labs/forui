@@ -57,6 +57,7 @@ class FBottomNavigationBar extends StatelessWidget {
               for (final (i, child) in children.indexed)
                 Expanded(
                   child: FTappable.animated(
+                    behavior: HitTestBehavior.translucent,
                     onPress: () {
                       onChange?.call(i);
                     },
