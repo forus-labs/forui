@@ -68,16 +68,16 @@ class EmailTextFieldPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => const Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: FTextField.email(
-          initialValue: 'jane@doe.com',
-        ),
-      ),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: FTextField.email(
+              initialValue: 'jane@doe.com',
+            ),
+          ),
+        ],
+      );
 }
 
 @RoutePage()
@@ -87,11 +87,11 @@ class PasswordTextFieldPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => Column(
+  Widget child(BuildContext context) => const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: FTextField.password(
               initialValue: 'My password',
             ),
