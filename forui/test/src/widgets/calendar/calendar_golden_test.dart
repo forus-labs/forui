@@ -123,7 +123,7 @@ void main() {
                   controller: FCalendarController.dates(
                     initialSelections: { DateTime.utc(2024, 7, 13) },
                   ),
-                  start: DateTime(2024, 7, 1),
+                  start: DateTime(2024, 7),
                   end: DateTime(2024, 8, 10),
                   today: DateTime(2024, 7, 14),
                 ),

@@ -173,16 +173,18 @@ void main() {
         (2025, 'May'),
       ]) {
         testWidgets('select year where current month out of range', (tester) async {
-          await tester.pumpWidget(TestScaffold(
-            data: FThemes.zinc.light,
-            child: FCalendar(
-              initialType: FCalendarPickerType.yearMonth,
-              controller: FCalendarController.dates(),
-              start: DateTime(2023, 9, 8),
-              end: DateTime(2025, 5, 10),
-              today: DateTime(2024, 7, 14),
+          await tester.pumpWidget(
+            TestScaffold(
+              data: FThemes.zinc.light,
+              child: FCalendar(
+                initialType: FCalendarPickerType.yearMonth,
+                controller: FCalendarController.dates(),
+                start: DateTime(2023, 9, 8),
+                end: DateTime(2025, 5, 10),
+                today: DateTime(2024, 7, 14),
+              ),
             ),
-          ));
+          );
 
           expect(find.text('July 2024'), findsOneWidget);
 

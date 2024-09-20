@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -78,6 +77,7 @@ class FTappable extends StatefulWidget {
       )
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus', level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onFocusChange', onFocusChange, level: DiagnosticLevel.debug))
+      ..add(EnumProperty('behavior', behavior, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onLongPress', onLongPress, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('builder', builder, level: DiagnosticLevel.debug))
