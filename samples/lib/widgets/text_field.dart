@@ -44,20 +44,40 @@ class _DefaultTextFieldState extends State<DefaultTextField> {
   }
 
   @override
+  Widget build(BuildContext context) => FTextField(
+        controller: _controller,
+        enabled: widget.enabled,
+        label: const Text('Username'),
+        hint: 'JaneDoe',
+        description: const Text('Please enter your username.'),
+        maxLines: 1,
+      );
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+}
+
+@RoutePage()
+class EmailTextFieldPage extends SampleScaffold {
+  EmailTextFieldPage({
+    @queryParam super.theme,
+  });
 
   @override
-  Widget build(BuildContext context) => FTextField(
-        controller: _controller,
-        enabled: widget.enabled,
-        label: const Text('Email'),
-        hint: 'john@doe.com',
-        description: const Text('Please enter your email.'),
-        maxLines: 1,
-      );
+  Widget child(BuildContext context) => const Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: FTextField.email(
+          initialValue: 'jane@doe.com',
+        ),
+      ),
+    ],
+  );
 }
 
 @RoutePage()
@@ -73,7 +93,7 @@ class PasswordTextFieldPage extends SampleScaffold {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: FTextField.password(
-              controller: TextEditingController(text: 'My password'),
+              initialValue: 'My password',
             ),
           ),
         ],
