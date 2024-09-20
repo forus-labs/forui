@@ -18,6 +18,7 @@ class FTappable extends StatefulWidget {
   final bool autofocus;
   final FocusNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
+  final HitTestBehavior? behavior;
   final VoidCallback? onPress;
   final VoidCallback? onLongPress;
   final ValueWidgetBuilder<FTappableState> builder;
@@ -30,6 +31,7 @@ class FTappable extends StatefulWidget {
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
     ValueWidgetBuilder<FTappableState>? builder,
@@ -44,6 +46,7 @@ class FTappable extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.behavior,
     this.onPress,
     this.onLongPress,
     ValueWidgetBuilder<FTappableState>? builder,
@@ -83,7 +86,7 @@ class FTappable extends StatefulWidget {
 }
 
 class _FTappableState extends State<FTappable> {
-  late UniqueKey _fencingToken;
+  int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
   bool _longPressed = false;
@@ -113,14 +116,14 @@ class _FTappableState extends State<FTappable> {
           // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
           child: Listener(
             onPointerDown: (_) async {
-              final token = _fencingToken = UniqueKey();
+              final count = ++_monotonic;
               await Future.delayed(const Duration(milliseconds: 200));
-              if (token == _fencingToken) {
+              if (count == _monotonic) {
                 setState(() => _longPressed = true);
               }
             },
             onPointerUp: (_) {
-              _fencingToken = UniqueKey();
+              _monotonic++;
               if (_longPressed) {
                 setState(() => _longPressed = false);
               }
@@ -149,6 +152,7 @@ class _FTappableState extends State<FTappable> {
   }
 
   Widget get _child => GestureDetector(
+        behavior: widget.behavior,
         onTap: widget.onPress,
         onLongPress: widget.onLongPress,
         child: widget.builder(context, (focused: _focused, hovered: _hovered, longPressed: _longPressed), widget.child),
@@ -163,6 +167,7 @@ class _AnimatedTappable extends FTappable {
     super.autofocus = false,
     super.focusNode,
     super.onFocusChange,
+    super.behavior,
     super.onPress,
     super.onLongPress,
     super.builder,
@@ -194,6 +199,7 @@ class _AnimatedTappableState extends _FTappableState with SingleTickerProviderSt
   Widget get _child => ScaleTransition(
         scale: _animation,
         child: GestureDetector(
+          behavior: widget.behavior,
           onTap: widget.onPress == null
               ? null
               : () {

@@ -51,8 +51,8 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
     if (_year) {
       return PagedYearPicker(
         style: widget.style,
-        start: widget.start,
-        end: widget.end,
+        start: widget.start.truncate(to: DateUnit.years),
+        end: widget.end.truncate(to: DateUnit.years),
         today: widget.today,
         initial: widget.month.value.truncate(to: DateUnit.years),
         onPress: (date) {
@@ -70,8 +70,8 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
     } else {
       return PagedMonthPicker(
         style: widget.style,
-        start: widget.start,
-        end: widget.end,
+        start: widget.start.truncate(to: DateUnit.months),
+        end: widget.end.truncate(to: DateUnit.months),
         today: widget.today,
         initial: widget.month.value.truncate(to: DateUnit.years),
         onPress: (date) {
