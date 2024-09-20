@@ -108,6 +108,9 @@ final class FButtonStyles with Diagnosticable {
             color: colorScheme.background,
           ),
           enabledHoverBoxDecoration: BoxDecoration(
+            border: Border.all(
+              color: colorScheme.border,
+            ),
             borderRadius: style.borderRadius,
             color: colorScheme.secondary,
           ),

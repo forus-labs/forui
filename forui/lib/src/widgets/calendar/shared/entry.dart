@@ -158,7 +158,7 @@ class _UnselectableEntry extends Entry {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-        child: builder(context, (focused: false, hovered: false), null),
+        child: builder(context, (focused: false, hovered: false, longPressed: false), null),
       );
 }
 

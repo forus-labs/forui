@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,7 +8,7 @@ import 'package:meta/meta.dart';
 // TODO: Remove redundant comment when flutter fixes its lint issue.
 ///
 @internal
-typedef FTappableState = ({bool focused, bool hovered});
+typedef FTappableState = ({bool focused, bool hovered, bool longPressed});
 
 @internal
 class FTappable extends StatefulWidget {
@@ -81,9 +82,11 @@ class FTappable extends StatefulWidget {
   }
 }
 
-class _FTappableState extends State<FTappable> with SingleTickerProviderStateMixin {
+class _FTappableState extends State<FTappable> {
+  late UniqueKey _fencingToken;
   bool _focused = false;
   bool _hovered = false;
+  bool _longPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +108,25 @@ class _FTappableState extends State<FTappable> with SingleTickerProviderStateMix
           cursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
           onEnter: (_) => setState(() => _hovered = true),
           onExit: (_) => setState(() => _hovered = false),
-          child: _child,
+          // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
+          // "GestureArena" and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
+          // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
+          child: Listener(
+            onPointerDown: (_) async {
+              final token = _fencingToken = UniqueKey();
+              await Future.delayed(const Duration(milliseconds: 200));
+              if (token == _fencingToken) {
+                setState(() => _longPressed = true);
+              }
+            },
+            onPointerUp: (_) {
+              _fencingToken = UniqueKey();
+              if (_longPressed) {
+                setState(() => _longPressed = false);
+              }
+            },
+            child: _child,
+          ),
         ),
       ),
     );
@@ -130,7 +151,7 @@ class _FTappableState extends State<FTappable> with SingleTickerProviderStateMix
   Widget get _child => GestureDetector(
         onTap: widget.onPress,
         onLongPress: widget.onLongPress,
-        child: widget.builder(context, (focused: _focused, hovered: _hovered), widget.child),
+        child: widget.builder(context, (focused: _focused, hovered: _hovered, longPressed: _longPressed), widget.child),
       );
 }
 
@@ -153,7 +174,7 @@ class _AnimatedTappable extends FTappable {
   State<FTappable> createState() => _AnimatedTappableState();
 }
 
-class _AnimatedTappableState extends _FTappableState {
+class _AnimatedTappableState extends _FTappableState with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
 
@@ -180,7 +201,7 @@ class _AnimatedTappableState extends _FTappableState {
                   _controller.forward();
                 },
           onLongPress: widget.onLongPress,
-          child: widget.builder(context, (focused: _focused, hovered: _hovered), widget.child),
+          child: widget.builder(context, (focused: _focused, hovered: _hovered, longPressed: _longPressed), widget.child),
         ),
       );
 
