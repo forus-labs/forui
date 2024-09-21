@@ -4,6 +4,12 @@
 
 * Add `FButtonCustomStyle.enabledHoverBoxDecoration`.
 
+* Add `FTextField.contentInsertionConfiguration`.
+
+* Add `FTextField.mouseCursor`.
+
+* Add `FTextField.forceErrorText`.
+
 ### Changes
 
 * Change `FCalendar` year  picker to update the header whenever a year is selected.

@@ -374,7 +374,8 @@ final class FTextField extends StatelessWidget {
   ///  * [DragGestureRecognizer.dragStartBehavior], which gives an example for the different behaviors.
   final DragStartBehavior dragStartBehavior;
 
-  // TODO: MouseCursor? mouseCursor;
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
+  final MouseCursor? mouseCursor;
 
   // TODO: InputCounterWidgetBuilder? buildCounter;
 
@@ -409,7 +410,22 @@ final class FTextField extends StatelessWidget {
   /// See [TextField.enableIMEPersonalizedLearning] for more information.
   final bool enableIMEPersonalizedLearning;
 
-  // TODO: ContentInsertionConfiguration? contentInsertionConfiguration
+  /// Configuration of handler for media content inserted via the system input method.
+  ///
+  /// Defaults to null in which case media content insertion will be disabled, and the system will display a message
+  /// informing the user that the text field
+  /// does not support inserting media content.
+  ///
+  /// Set [ContentInsertionConfiguration.onContentInserted] to provide a handler. Additionally,
+  /// set [ContentInsertionConfiguration.allowedMimeTypes] to limit the allowable mime types for inserted content.
+  ///
+  /// If [contentInsertionConfiguration] is not provided, by default an empty list of mime types will be sent to the
+  /// Flutter Engine. A handler function must be provided in order to customize the allowable mime types for inserted
+  /// content.
+  ///
+  /// If rich content is inserted without a handler, the system will display a message informing the user that the
+  /// current text input does not support inserting rich content.
+  final ContentInsertionConfiguration? contentInsertionConfiguration;
 
   /// Builds the text selection toolbar when requested by the user.
   ///
@@ -469,6 +485,18 @@ final class FTextField extends StatelessWidget {
   /// auto-validation will be disabled.
   final AutovalidateMode? autovalidateMode;
 
+  /// An optional property that forces the [FormFieldState] into an error state
+  /// by directly setting the [FormFieldState.errorText] property without
+  /// running the validator function.
+  ///
+  /// When the [forceErrorText] property is provided, the [FormFieldState.errorText]
+  /// will be set to the provided value, causing the form field to be considered
+  /// invalid and to display the error message specified.
+  ///
+  /// When [validator] is provided, [forceErrorText] will override any error that it
+  /// returns. [validator] will not be called unless [forceErrorText] is null.
+  final String? forceErrorText;
+
   /// A builder that transforms a [FormFieldState.errorText] into a widget. Defaults to a [Text] widget.
   ///
   /// The builder is called whenever [validator] returns an error text.
@@ -513,12 +541,14 @@ final class FTextField extends StatelessWidget {
     this.enableInteractSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.mouseCursor,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
+    this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
@@ -528,6 +558,7 @@ final class FTextField extends StatelessWidget {
     this.validator,
     this.initialValue,
     this.autovalidateMode,
+    this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
   });
@@ -571,12 +602,14 @@ final class FTextField extends StatelessWidget {
     this.enableInteractSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.mouseCursor,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints = const [AutofillHints.email],
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
+    this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
@@ -586,6 +619,7 @@ final class FTextField extends StatelessWidget {
     this.validator,
     this.initialValue,
     this.autovalidateMode,
+    this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
   });
@@ -632,12 +666,14 @@ final class FTextField extends StatelessWidget {
     this.enableInteractSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.mouseCursor,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints = const [AutofillHints.password],
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
+    this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
@@ -647,6 +683,7 @@ final class FTextField extends StatelessWidget {
     this.validator,
     this.initialValue,
     this.autovalidateMode,
+    this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
   });
@@ -694,12 +731,14 @@ final class FTextField extends StatelessWidget {
     this.enableInteractSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.mouseCursor,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
+    this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
@@ -709,6 +748,7 @@ final class FTextField extends StatelessWidget {
     this.validator,
     this.initialValue,
     this.autovalidateMode,
+    this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
   });
@@ -796,6 +836,7 @@ final class FTextField extends StatelessWidget {
       ..add(FlagProperty('enableInteractSelection', value: enableInteractSelection, ifTrue: 'enableInteractSelection'))
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
+      ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(IterableProperty('autofillHints', autofillHints))
@@ -808,6 +849,7 @@ final class FTextField extends StatelessWidget {
           ifTrue: 'enableIMEPersonalizedLearning',
         ),
       )
+      ..add(DiagnosticsProperty('contentInsertionConfiguration', contentInsertionConfiguration))
       ..add(DiagnosticsProperty('contextMenuBuilder', contextMenuBuilder))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('undoController', undoController))
@@ -817,6 +859,7 @@ final class FTextField extends StatelessWidget {
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialValue', initialValue))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }

@@ -54,6 +54,7 @@ class Field extends FormField<String> {
           initialValue: parent.initialValue,
           enabled: parent.enabled,
           autovalidateMode: parent.autovalidateMode,
+          forceErrorText: parent.forceErrorText,
           restorationId: parent.restorationId,
           builder: (field) {
             final state = field as _State;
@@ -115,6 +116,7 @@ class Field extends FormField<String> {
                   keyboardAppearance: style.keyboardAppearance,
                   scrollPadding: style.scrollPadding,
                   dragStartBehavior: parent.dragStartBehavior,
+                  mouseCursor: parent.mouseCursor,
                   selectionControls: parent.selectionControls,
                   scrollController: parent.scrollController,
                   scrollPhysics: parent.scrollPhysics,
@@ -122,6 +124,7 @@ class Field extends FormField<String> {
                   restorationId: parent.restorationId,
                   scribbleEnabled: parent.scribbleEnabled,
                   enableIMEPersonalizedLearning: parent.enableIMEPersonalizedLearning,
+                  contentInsertionConfiguration: parent.contentInsertionConfiguration,
                   contextMenuBuilder: parent.contextMenuBuilder,
                   canRequestFocus: parent.canRequestFocus,
                   spellCheckConfiguration: parent.spellCheckConfiguration,
