@@ -11,7 +11,8 @@ class Field extends FormField<String> {
     FTextField parent,
     FTextFieldStateStyle stateStyle,
     EdgeInsets contentPadding,
-  ) => InputDecoration(
+  ) =>
+      InputDecoration(
         isDense: true,
         suffixIcon: parent.suffix,
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield

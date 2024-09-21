@@ -169,8 +169,7 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle implements FFormFi
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      .add(DiagnosticsProperty('errorTextStyle', errorTextStyle));
+    properties.add(DiagnosticsProperty('errorTextStyle', errorTextStyle));
   }
 
   @override
