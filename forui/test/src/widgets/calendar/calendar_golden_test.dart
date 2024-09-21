@@ -77,6 +77,65 @@ void main() {
             matchesGoldenFile('calendar/day-picker/$name-max-rows.png'),
           );
         });
+
+        testWidgets('hovered and selected dates next to each other - $name', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              background: background,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: FCalendar(
+                  controller: FCalendarController.dates(),
+                  start: DateTime(1900, 1, 8),
+                  end: DateTime(2024, 8, 10),
+                  today: DateTime(2024, 7, 14),
+                ),
+              ),
+            ),
+          );
+
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+          await gesture.addPointer(location: Offset.zero);
+          addTearDown(gesture.removePointer);
+          await tester.pump();
+
+          await gesture.moveTo(tester.getCenter(find.text('12')));
+          await tester.pumpAndSettle();
+
+          await tester.tap(find.text('13'));
+          await tester.pumpAndSettle(const Duration(seconds: 1));
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('calendar/day-picker/$name-hovered-selected.png'),
+          );
+        });
+
+        testWidgets('disabled previous icon - $name', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              background: background,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: FCalendar(
+                  controller: FCalendarController.dates(
+                    initialSelections: {DateTime.utc(2024, 7, 13)},
+                  ),
+                  start: DateTime(2024, 7),
+                  end: DateTime(2024, 8, 10),
+                  today: DateTime(2024, 7, 14),
+                ),
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('calendar/day-picker/$name-disabled-previous.png'),
+          );
+        });
       });
 
       group('month picker', () {

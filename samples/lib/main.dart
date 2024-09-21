@@ -70,6 +70,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/resizable/no-divider', page: NoDividerResizableRoute.page),
         AutoRoute(path: '/tabs/default', page: TabsRoute.page),
         AutoRoute(path: '/text-field/default', page: TextFieldRoute.page),
+        AutoRoute(path: '/text-field/email', page: EmailTextFieldRoute.page),
         AutoRoute(path: '/text-field/password', page: PasswordTextFieldRoute.page),
         AutoRoute(path: '/text-field/multiline', page: MultilineTextFieldRoute.page),
         AutoRoute(path: '/text-field/form', page: FormTextFieldRoute.page),

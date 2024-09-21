@@ -33,19 +33,19 @@ in a form.
       }
 
       @override
+      Widget build(BuildContext context) => FTextField(
+        controller: _controller,
+        label: const Text('Username'),
+        hint: 'JaneDoe',
+        description: const Text('Please enter your username.'),
+        maxLines: 1,
+      );
+
+      @override
       void dispose() {
         _controller.dispose();
         super.dispose();
       }
-
-      @override
-      Widget build(BuildContext context) => FTextField(
-        controller: _controller,
-        label: const Text('Email'),
-        hint: 'john@doe.com',
-        description: const Text('Please enter your email.'),
-        maxLines: 1,
-      );
     }
     ```
   </Tabs.Tab>
@@ -68,40 +68,12 @@ FTextField(
 );
 ```
 
-### `FTextField.email(...)`
-
-```dart
-FTextField.email(
-  controller: _controller, // TextEditingController
-  hint: 'john@doe.com',
-  description: const Text('Enter your email associated with your Forui account.'),
-);
-```
-
-### `FTextField.password(...)`
-
-```dart
-FTextField.password(
-  controller: _controller, // TextEditingController
-  description: const Text('Your password must be at least 8 characters long.'),
-);
-```
-
-### `FTextField.multiline(...)`
-
-```dart
-FTextField.multiline(
-  controller: _controller, // TextEditingController
-  label: const Text('Description'),
-  hint: 'Enter a description...',
-  description: const Text('Enter a description of the item.'),
-);
-```
-
 
 ## Examples
 
-### Enabled
+### States
+
+#### Enabled
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -109,11 +81,11 @@ FTextField.multiline(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
-    FTextField.email(
+    FTextField(
       controller: _controller, // TextEditingController
-      label: const Text('Email'),
-      hint: 'john@doe.com',
-      description: const Text('Please enter your email.'),
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
       maxLines: 1,
     );
     ```
@@ -121,7 +93,7 @@ FTextField.multiline(
 </Tabs>
 
 
-### Disabled
+#### Disabled
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -129,20 +101,36 @@ FTextField.multiline(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {3}
-    FTextField.email(
+    FTextField(
       controller: _controller, // TextEditingController
-      enabled: false,
-      label: const Text('Email'),
-      hint: 'john@doe.com',
-      description: const Text('Please enter your email.'),
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
       maxLines: 1,
     );
     ```
   </Tabs.Tab>
 </Tabs>
 
+### Presets
 
-### Password
+#### Email
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='email' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTextField.email(
+      initialValue: 'jane@doe.com',
+      controller: _controller, // TextEditingController
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Password
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -157,7 +145,7 @@ FTextField.multiline(
   </Tabs.Tab>
 </Tabs>
 
-### Multiline
+#### Multiline
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>

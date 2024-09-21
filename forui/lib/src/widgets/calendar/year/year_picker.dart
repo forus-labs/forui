@@ -70,6 +70,7 @@ class _YearPickerState extends State<YearPicker> {
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.only(top: 5.0),
         child: GridView(
+          padding: EdgeInsets.zero,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: YearPicker.columns,
             mainAxisExtent: ((DayPicker.tileDimension - 5.0) * DayPicker.maxRows) / YearPicker.rows,

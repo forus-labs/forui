@@ -153,7 +153,7 @@ class FTooltip extends StatefulWidget {
 
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
   late FTooltipController _controller;
-  Key _fencingToken = UniqueKey();
+  int _monotonic = 0;
 
   @override
   void initState() {
@@ -207,14 +207,14 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     if (widget.longPress) {
       child = GestureDetector(
         onLongPressStart: (_) async {
-          _fencingToken = UniqueKey();
+          _monotonic++;
           await _controller.show();
         },
         onLongPressEnd: (_) async {
-          final fencingToken = _fencingToken = UniqueKey();
+          final count = ++_monotonic;
           await Future.delayed(widget.longPressExitDuration);
 
-          if (fencingToken == _fencingToken) {
+          if (count == _monotonic) {
             await _controller.hide();
           }
         },
@@ -254,19 +254,19 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   }
 
   Future<void> _enter() async {
-    final fencingToken = _fencingToken = UniqueKey();
+    final fencingToken = ++_monotonic;
     await Future.delayed(widget.hoverEnterDuration);
 
-    if (fencingToken == _fencingToken) {
+    if (fencingToken == _monotonic) {
       await _controller.show();
     }
   }
 
   Future<void> _exit() async {
-    final fencingToken = _fencingToken = UniqueKey();
+    final count = ++_monotonic;
     await Future.delayed(widget.hoverExitDuration);
 
-    if (fencingToken == _fencingToken) {
+    if (count == _monotonic) {
       await _controller.hide();
     }
   }
