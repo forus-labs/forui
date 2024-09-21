@@ -207,7 +207,8 @@ class _AnimatedTappableState extends _FTappableState with SingleTickerProviderSt
                   _controller.forward();
                 },
           onLongPress: widget.onLongPress,
-          child: widget.builder(context, (focused: _focused, hovered: _hovered, longPressed: _longPressed), widget.child),
+          child:
+              widget.builder(context, (focused: _focused, hovered: _hovered, longPressed: _longPressed), widget.child),
         ),
       );
 
