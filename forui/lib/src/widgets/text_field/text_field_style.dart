@@ -32,6 +32,9 @@ final class FTextFieldStyle with Diagnosticable {
   /// after the scroll.
   final EdgeInsets scrollPadding;
 
+  /// The label's layout style.
+  final FLabelLayoutStyle labelLayoutStyle;
+
   /// The style when this text field is enabled.
   final FTextFieldStateStyle enabledStyle;
 
@@ -44,6 +47,7 @@ final class FTextFieldStyle with Diagnosticable {
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
     required this.keyboardAppearance,
+    required this.labelLayoutStyle,
     required this.enabledStyle,
     required this.disabledStyle,
     required this.errorStyle,
@@ -61,6 +65,7 @@ final class FTextFieldStyle with Diagnosticable {
         cursorColor = CupertinoColors.activeBlue,
         contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         scrollPadding = const EdgeInsets.all(20.0),
+        labelLayoutStyle = FLabelStyles.inherit(style: style).vertical.layout,
         enabledStyle = FTextFieldStateStyle.inherit(
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,
@@ -96,6 +101,7 @@ final class FTextFieldStyle with Diagnosticable {
     Color? cursorColor,
     EdgeInsets? contentPadding,
     EdgeInsets? scrollPadding,
+    FLabelLayoutStyle? labelLayoutStyle,
     FTextFieldStateStyle? enabledStyle,
     FTextFieldStateStyle? disabledStyle,
     FTextFieldErrorStyle? errorStyle,
@@ -105,9 +111,20 @@ final class FTextFieldStyle with Diagnosticable {
         cursorColor: cursorColor ?? this.cursorColor,
         contentPadding: contentPadding ?? this.contentPadding,
         scrollPadding: scrollPadding ?? this.scrollPadding,
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
         enabledStyle: enabledStyle ?? this.enabledStyle,
         disabledStyle: disabledStyle ?? this.disabledStyle,
         errorStyle: errorStyle ?? this.errorStyle,
+      );
+
+  /// The label style.
+  FLabelStyle get labelStyle => (
+        layout: labelLayoutStyle,
+        state: FLabelStateStyle(
+          enabledStyle: enabledStyle,
+          disabledStyle: disabledStyle,
+          errorStyle: errorStyle,
+        ),
       );
 
   @override
@@ -118,6 +135,8 @@ final class FTextFieldStyle with Diagnosticable {
       ..add(ColorProperty('cursorColor', cursorColor, defaultValue: CupertinoColors.activeBlue))
       ..add(DiagnosticsProperty('contentPadding', contentPadding))
       ..add(DiagnosticsProperty('scrollPadding', scrollPadding))
+      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
+      ..add(DiagnosticsProperty('labelStyle', labelStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle));
@@ -132,6 +151,7 @@ final class FTextFieldStyle with Diagnosticable {
           cursorColor == other.cursorColor &&
           contentPadding == other.contentPadding &&
           scrollPadding == other.scrollPadding &&
+          labelLayoutStyle == other.labelLayoutStyle &&
           enabledStyle == other.enabledStyle &&
           disabledStyle == other.disabledStyle &&
           errorStyle == other.errorStyle;
@@ -142,6 +162,7 @@ final class FTextFieldStyle with Diagnosticable {
       cursorColor.hashCode ^
       contentPadding.hashCode ^
       scrollPadding.hashCode ^
+      labelLayoutStyle.hashCode ^
       enabledStyle.hashCode ^
       disabledStyle.hashCode ^
       errorStyle.hashCode;

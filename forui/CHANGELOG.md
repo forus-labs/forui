@@ -7,16 +7,29 @@
 ### Changes
 
 * Change `FCalendar` year  picker to update the header whenever a year is selected.
+
 * Increase `FCalendar`'s default text size from `FTypography.sm` to `FTypography.base`.
+
 * **Breaking** Split `FCalendarHeaderStyle.iconColor` into `FCalendarHeaderStyle.enabledIconColor` and
   `FCalendarHeaderStyle.disabledIconColor`.
+
+* **Breaking** Change `FTextField` to use `FLabel`.
+
+* **Breaking** Remove `FTextFieldErrorStyle.animatioDuration`.
 
 ### Fixes
 
 * Fix `FBottomNavigationBar` items hit region being smaller than intended.
+
 * Fix `FCalendar` showing focused outline when pressing and long pressing a date.
+
 * Fix `FCalendar` year and month picker applying incorrect initial top padding.
+
 * Fix `FCalendar` year and month picker incorrectly calculating start and end dates.
+
+* Fix `FTextfield` being vertically larger than intended.
+
+* Fix `FTextfield` description text's odd transition animation whenever an error occurs.
 
 
 ### Changes
