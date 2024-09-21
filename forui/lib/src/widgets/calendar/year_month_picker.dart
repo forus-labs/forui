@@ -14,16 +14,16 @@ class YearMonthPicker extends StatefulWidget {
   final LocalDate start;
   final LocalDate end;
   final LocalDate today;
-  final LocalDate initial;
-  final ValueChanged<LocalDate> onChange;
+  final ValueNotifier<LocalDate> month;
+  final ValueNotifier<FCalendarPickerType> type;
 
   const YearMonthPicker({
     required this.style,
     required this.start,
     required this.end,
     required this.today,
-    required this.initial,
-    required this.onChange,
+    required this.month,
+    required this.type,
     super.key,
   });
 
@@ -38,38 +38,51 @@ class YearMonthPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
-      ..add(DiagnosticsProperty('initial', initial))
-      ..add(DiagnosticsProperty('onChange', onChange));
+      ..add(DiagnosticsProperty('month', month))
+      ..add(DiagnosticsProperty('type', type));
   }
 }
 
 class _YearMonthPickerState extends State<YearMonthPicker> {
-  LocalDate? _date;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  bool _year = true;
 
   @override
   Widget build(BuildContext context) {
-    if (_date == null) {
+    if (_year) {
       return PagedYearPicker(
         style: widget.style,
-        start: widget.start,
-        end: widget.end,
+        start: widget.start.truncate(to: DateUnit.years),
+        end: widget.end.truncate(to: DateUnit.years),
         today: widget.today,
-        initial: widget.initial.truncate(to: DateUnit.years),
-        onPress: (year) => setState(() => _date = year),
+        initial: widget.month.value.truncate(to: DateUnit.years),
+        onPress: (date) {
+          widget.month.value = switch (widget.month.value.copyWith(year: date.year)) {
+            final proposed when proposed < widget.start => widget.start,
+            final proposed when widget.end < proposed => widget.end,
+            final proposed => proposed,
+          };
+
+          setState(() {
+            _year = false;
+          });
+        },
       );
     } else {
       return PagedMonthPicker(
         style: widget.style,
-        start: widget.start,
-        end: widget.end,
+        start: widget.start.truncate(to: DateUnit.months),
+        end: widget.end.truncate(to: DateUnit.months),
         today: widget.today,
-        initial: _date!,
-        onPress: widget.onChange,
+        initial: widget.month.value.truncate(to: DateUnit.years),
+        onPress: (date) {
+          widget.month.value = switch (widget.month.value.copyWith(month: date.month)) {
+            final proposed when proposed < widget.start => widget.start,
+            final proposed when widget.end < proposed => widget.end,
+            final proposed => proposed,
+          };
+
+          widget.type.value = FCalendarPickerType.day;
+        },
       );
     }
   }
@@ -91,14 +104,14 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
       : this(
           enabledStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
-            textStyle: typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
+            textStyle: typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
             hoveredBackgroundColor: colorScheme.secondary,
             focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(8),
           ),
           disabledStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
-            textStyle: typography.sm
+            textStyle: typography.base
                 .copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500),
             focusedBorderColor: colorScheme.background,
             radius: const Radius.circular(8),

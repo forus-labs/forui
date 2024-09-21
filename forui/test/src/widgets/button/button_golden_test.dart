@@ -68,6 +68,37 @@ void main() {
           );
         });
 
+        testWidgets('$name enabled and long pressed', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              data: theme,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton(
+                  label: const Text('Button'),
+                  style: variant,
+                  prefix: FButtonIcon(icon: FAssets.icons.circlePlay),
+                  suffix: FButtonIcon(icon: FAssets.icons.circleStop),
+                  onPress: () {},
+                ),
+              ),
+            ),
+          );
+
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+          await gesture.addPointer(location: Offset.zero);
+          addTearDown(gesture.removePointer);
+          await tester.pump();
+
+          await gesture.moveTo(tester.getCenter(find.byType(FButton)));
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/$name-$variant-enabled-hovered-button.png'),
+          );
+        });
+
         testWidgets('$name disabled with FButtonContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(

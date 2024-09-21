@@ -36,8 +36,8 @@ abstract class Entry extends StatelessWidget {
     Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
-            left: selected(date.yesterday) ? Radius.zero : entryStyle.radius,
-            right: selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
+            left: isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius,
+            right: isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
           text: '${date.day}', // TODO: localization
           state: state,
@@ -158,7 +158,7 @@ class _UnselectableEntry extends Entry {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-        child: builder(context, (focused: false, hovered: false), null),
+        child: builder(context, (focused: false, hovered: false, longPressed: false), null),
       );
 }
 
@@ -179,7 +179,8 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textStyle = state.hovered ? style.hoveredTextStyle : style.textStyle;
+    final hovered = state.hovered || state.longPressed;
+    var textStyle = hovered ? style.hoveredTextStyle : style.textStyle;
     if (current) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }
@@ -188,7 +189,7 @@ class _Content extends StatelessWidget {
       decoration: BoxDecoration(
         border: state.focused ? Border.all(color: context.theme.colorScheme.foreground) : null,
         borderRadius: borderRadius,
-        color: state.hovered ? style.hoveredBackgroundColor : style.backgroundColor,
+        color: hovered ? style.hoveredBackgroundColor : style.backgroundColor,
       ),
       child: Center(
         child: Text(text, style: textStyle),

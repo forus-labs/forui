@@ -59,30 +59,34 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        height: Header.height,
-        child: FTappable(
-          onPress: () => widget.type.value = switch (widget.type.value) {
-            FCalendarPickerType.day => FCalendarPickerType.yearMonth,
-            FCalendarPickerType.yearMonth => FCalendarPickerType.day,
-          },
-          excludeSemantics: true,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(_yMMMM.format(widget.month.toNative()), style: widget.style.headerTextStyle), // TODO: Localization
-              RotationTransition(
-                turns: Tween(begin: 0.0, end: 0.25).animate(_controller),
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: FAssets.icons.chevronRight(
-                    height: 15,
-                    colorFilter: ColorFilter.mode(context.theme.colorScheme.primary, BlendMode.srcIn),
+  Widget build(BuildContext context) => FTappable(
+        behavior: HitTestBehavior.translucent,
+        onPress: () => widget.type.value = switch (widget.type.value) {
+          FCalendarPickerType.day => FCalendarPickerType.yearMonth,
+          FCalendarPickerType.yearMonth => FCalendarPickerType.day,
+        },
+        excludeSemantics: true,
+        child: SizedBox(
+          height: Header.height,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(_yMMMM.format(widget.month.toNative()), style: widget.style.headerTextStyle), // TODO: Localization
+                RotationTransition(
+                  turns: Tween(begin: 0.0, end: 0.25).animate(_controller),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: FAssets.icons.chevronRight(
+                      height: 15,
+                      colorFilter: ColorFilter.mode(context.theme.colorScheme.primary, BlendMode.srcIn),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
@@ -142,7 +146,10 @@ class Navigation extends StatelessWidget {
                   onPress: onPrevious,
                   child: FAssets.icons.chevronLeft(
                     height: 17,
-                    colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(
+                      onPrevious == null ? style.disabledIconColor : style.enabledIconColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
@@ -154,7 +161,10 @@ class Navigation extends StatelessWidget {
                   onPress: onNext,
                   child: FAssets.icons.chevronRight(
                     height: 17,
-                    colorFilter: ColorFilter.mode(style.iconColor, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(
+                      onNext == null ? style.disabledIconColor : style.enabledIconColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
@@ -181,8 +191,11 @@ final class FCalendarHeaderStyle with Diagnosticable {
   /// The header's text style.
   final TextStyle headerTextStyle;
 
-  /// The header icons' color.
-  final Color iconColor;
+  /// The header icons' enabled color.
+  final Color enabledIconColor;
+
+  /// The header icons' disabled color.
+  final Color disabledIconColor;
 
   /// The arrow turn animation's duration. Defaults to `Duration(milliseconds: 200)`.
   final Duration animationDuration;
@@ -191,7 +204,8 @@ final class FCalendarHeaderStyle with Diagnosticable {
   FCalendarHeaderStyle({
     required this.buttonStyle,
     required this.headerTextStyle,
-    required this.iconColor,
+    required this.enabledIconColor,
+    required this.disabledIconColor,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
@@ -207,8 +221,9 @@ final class FCalendarHeaderStyle with Diagnosticable {
         enabledBoxDecoration: outline.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
         disabledBoxDecoration: outline.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
       ),
-      headerTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-      iconColor: colorScheme.mutedForeground,
+      headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+      enabledIconColor: colorScheme.mutedForeground,
+      disabledIconColor: colorScheme.mutedForeground.withOpacity(0.5),
     );
   }
 
@@ -216,13 +231,15 @@ final class FCalendarHeaderStyle with Diagnosticable {
   @useResult
   FCalendarHeaderStyle copyWith({
     TextStyle? headerTextStyle,
-    Color? iconColor,
+    Color? enabledIconColor,
+    Color? disabledIconColor,
     Duration? animationDuration,
   }) =>
       FCalendarHeaderStyle(
         buttonStyle: buttonStyle,
         headerTextStyle: headerTextStyle ?? this.headerTextStyle,
-        iconColor: iconColor ?? this.iconColor,
+        enabledIconColor: enabledIconColor ?? this.enabledIconColor,
+        disabledIconColor: disabledIconColor ?? this.disabledIconColor,
         animationDuration: animationDuration ?? this.animationDuration,
       );
 
@@ -232,7 +249,8 @@ final class FCalendarHeaderStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('buttonStyle', buttonStyle))
       ..add(DiagnosticsProperty('headerTextStyle', headerTextStyle))
-      ..add(ColorProperty('iconColor', iconColor))
+      ..add(ColorProperty('enabledIconColor', enabledIconColor))
+      ..add(ColorProperty('disabledIconColor', disabledIconColor))
       ..add(DiagnosticsProperty('animationDuration', animationDuration));
   }
 
@@ -242,9 +260,11 @@ final class FCalendarHeaderStyle with Diagnosticable {
       other is FCalendarHeaderStyle &&
           runtimeType == other.runtimeType &&
           headerTextStyle == other.headerTextStyle &&
-          iconColor == other.iconColor &&
+          enabledIconColor == other.enabledIconColor &&
+          disabledIconColor == other.disabledIconColor &&
           animationDuration == other.animationDuration;
 
   @override
-  int get hashCode => headerTextStyle.hashCode ^ iconColor.hashCode ^ animationDuration.hashCode;
+  int get hashCode =>
+      headerTextStyle.hashCode ^ enabledIconColor.hashCode ^ disabledIconColor.hashCode ^ animationDuration.hashCode;
 }
