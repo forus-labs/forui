@@ -9,59 +9,41 @@ class Field extends FormField<String> {
   static InputDecoration _decoration(
     _State state,
     FTextField parent,
-    FTextFieldStyle style,
     FTextFieldStateStyle stateStyle,
-  ) =>
-      InputDecoration(
+    EdgeInsets contentPadding,
+  ) => InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        isDense: true,
         suffixIcon: parent.suffix,
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-        prefix: Padding(padding: EdgeInsets.only(left: style.contentPadding.left)),
-        contentPadding: style.contentPadding.copyWith(left: 0),
+        prefix: Padding(padding: EdgeInsets.only(left: contentPadding.left)),
+        contentPadding: contentPadding.copyWith(left: 0),
         hintText: parent.hint,
         hintStyle: stateStyle.hintTextStyle,
         helper: parent.description == null
             ? null
             : DefaultTextStyle.merge(style: stateStyle.descriptionTextStyle, child: parent.description!),
         helperStyle: stateStyle.descriptionTextStyle,
-        error: switch ((state.errorText, parent.description)) {
-          (null, _) => null,
-          (_, null) => const SizedBox(),
-          (_, final description?) => DefaultTextStyle.merge(style: stateStyle.descriptionTextStyle, child: description),
-        },
         disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: style.disabledStyle.unfocusedStyle.color,
-            width: style.disabledStyle.unfocusedStyle.width,
+            color: stateStyle.unfocusedStyle.color,
+            width: stateStyle.unfocusedStyle.width,
           ),
-          borderRadius: style.disabledStyle.unfocusedStyle.radius,
+          borderRadius: stateStyle.unfocusedStyle.radius,
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: style.enabledStyle.unfocusedStyle.color,
-            width: style.enabledStyle.unfocusedStyle.width,
+            color: stateStyle.unfocusedStyle.color,
+            width: stateStyle.unfocusedStyle.width,
           ),
-          borderRadius: style.enabledStyle.unfocusedStyle.radius,
+          borderRadius: stateStyle.unfocusedStyle.radius,
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: style.enabledStyle.focusedStyle.color,
-            width: style.enabledStyle.focusedStyle.width,
+            color: stateStyle.focusedStyle.color,
+            width: stateStyle.focusedStyle.width,
           ),
           borderRadius: stateStyle.focusedStyle.radius,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: style.errorStyle.unfocusedStyle.color,
-            width: style.errorStyle.unfocusedStyle.width,
-          ),
-          borderRadius: style.errorStyle.unfocusedStyle.radius,
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: style.errorStyle.focusedStyle.color,
-            width: style.errorStyle.focusedStyle.width,
-          ),
-          borderRadius: style.errorStyle.focusedStyle.radius,
         ),
       );
 
@@ -101,7 +83,7 @@ class Field extends FormField<String> {
                     ),
                   TextField(
                     controller: state._effectiveController,
-                    decoration: _decoration(state, parent, style, stateStyle),
+                    decoration: _decoration(state, parent, stateStyle, style.contentPadding),
                     focusNode: parent.focusNode,
                     undoController: parent.undoController,
                     cursorErrorColor: style.cursorColor,
