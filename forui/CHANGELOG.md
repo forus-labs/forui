@@ -31,6 +31,8 @@
 
 * Fix `FTextfield` description text's odd transition animation whenever an error occurs.
 
+* Fix `FSwitch` not using correct label style.
+
 
 ### Changes
 

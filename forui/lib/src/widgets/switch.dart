@@ -126,6 +126,7 @@ class FSwitch extends StatelessWidget {
           child: FLabel(
             axis: Axis.horizontal,
             state: labelState,
+            style: style.labelStyle,
             label: label,
             description: description,
             error: error,
