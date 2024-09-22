@@ -7,4 +7,4 @@ library forui.widgets.accordion;
 
 export '../src/widgets/accordion/accordion.dart';
 export '../src/widgets/accordion/accordion_controller.dart';
-export '../src/widgets/accordion/accordion_item.dart';
+export '../src/widgets/accordion/accordion_item.dart' hide FAccordionItemData;

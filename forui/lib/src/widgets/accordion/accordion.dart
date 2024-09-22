@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:forui/src/widgets/accordion/accordion_item.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -55,26 +56,39 @@ class _FAccordionState extends State<FAccordion> {
   void initState() {
     super.initState();
     _controller = widget.controller ?? FRadioAccordionController();
-    // TODO: check no.of widget.items and make sure they correspond with min and max
+
+    final expandedLength = widget.items.where((item) => item.initiallyExpanded).length;
+
+    if (!_controller.validate(expandedLength)) {
+      throw StateError('number of expanded items must be within the min and max.');
+    }
   }
 
   @override
   void didUpdateWidget(covariant FAccordion oldWidget) {
-    // TODO: check no.of widget.items and make sure they correspond with min and max
     super.didUpdateWidget(oldWidget);
+
+    if (widget.controller != oldWidget.controller) {
+      _controller = widget.controller ?? FRadioAccordionController();
+      final expandedLength = widget.items.where((item) => item.initiallyExpanded).length;
+
+      if (!_controller.validate(expandedLength)) {
+        throw StateError('number of expanded items must be within the min and max.');
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) => Column(
-      children: [
-        for (final (index, widget) in widget.items.indexed)
-          FAccordionItemData(
-            index: index,
-            controller: _controller,
-            child: widget,
-          ),
-      ],
-    );
+        children: [
+          for (final (index, widget) in widget.items.indexed)
+            FAccordionItemData(
+              index: index,
+              controller: _controller,
+              child: widget,
+            ),
+        ],
+      );
 }
 
 /// The [FAccordion] style.

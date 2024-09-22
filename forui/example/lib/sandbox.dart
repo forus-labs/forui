@@ -25,9 +25,9 @@ class _SandboxState extends State<Sandbox> {
           FAccordion(
             items: [
               const FAccordionItem(
-                title:  Text('Title 1'),
+                title: Text('Title 1'),
                 initiallyExpanded: true,
-                child:  Text(
+                child: Text(
                   'Yes. It adheres to the WAI-ARIA design pattern, wfihwe fdhfiwf dfhwiodf dfwhoif',
                 ),
               ),
@@ -43,15 +43,15 @@ class _SandboxState extends State<Sandbox> {
                 ),
               ),
               const FAccordionItem(
-                title:  Text('Title 3'),
-                child:  Text(
+                title: Text('Title 3'),
+                child: Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,
                 ),
               ),
               const FAccordionItem(
-                title:  Text('Title 4'),
-                child:  Text(
+                title: Text('Title 4'),
+                child: Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,
                 ),
@@ -69,39 +69,6 @@ class _SandboxState extends State<Sandbox> {
               FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
             ],
           ),
-          FAccordion(
-            title: 'Is it Accessible?',
-            childHeight: 100,
-            initiallyExpanded: false,
-            onExpanded: () {},
-            child: const Text('Yes. It adheres to the WAI-ARIA design pattern', textAlign: TextAlign.left,),
-          ),
-          FAccordion(
-            title: 'Is it Accessible?',
-            childHeight: 100,
-            initiallyExpanded: false,
-            onExpanded: () {},
-            child: const Text('Yes. It adheres to the WAI-ARIA design pattern', textAlign: TextAlign.left,),
-          ),
-          FAccordion(
-            title: 'Is it Accessible?',
-            childHeight: 100,
-            initiallyExpanded: false,
-            onExpanded: () {},
-            child: const Text('Yes. It adheres to the WAI-ARIA design pattern', textAlign: TextAlign.left,),
-          ),
-          SizedBox(height: 20),
-          FTooltip(
-            longPressExitDuration: const Duration(seconds: 5000),
-            tipBuilder: (context, style, _) => const Text('Add to library'),
-            child: FButton(
-              style: FButtonStyle.outline,
-              onPress: () {},
-              label: const Text('Hover'),
-            ),
-          ),
-          const SizedBox(height: 20),
-          const FTextField.password(),
         ],
       );
 }

@@ -11,7 +11,10 @@ abstract base class FAccordionController extends ChangeNotifier {
   final int _min;
   final int? _max;
 
-  /// Creates a [FAccordionController].
+  /// Creates a multi-select [FAccordionController].
+  factory FAccordionController({int min, int? max, Duration animationDuration}) = _MultiSelectAccordionController;
+
+  /// Creates a base [FAccordionController].
   ///
   /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum or maximum.
   ///
@@ -19,9 +22,7 @@ abstract base class FAccordionController extends ChangeNotifier {
   /// * Throws [AssertionError] if [min] < 0.
   /// * Throws [AssertionError] if [max] < 0.
   /// * Throws [AssertionError] if [min] > [max].
-  factory FAccordionController({int min, int? max, Duration animationDuration}) = _MultiSelectAccordionController;
-
-  FAccordionController._({
+  FAccordionController.base({
     int min = 0,
     int? max,
     this.animationDuration = const Duration(milliseconds: 500),
@@ -38,7 +39,7 @@ abstract base class FAccordionController extends ChangeNotifier {
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded);
 
   /// Removes an item from the accordion.
-  void removeItem(int index);
+  bool removeItem(int index);
 
   /// Convenience method for toggling the current expanded status.
   ///
@@ -54,6 +55,9 @@ abstract base class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> collapse(int index);
+
+  /// Validate if the number of expanded items is within the min and max.
+  bool validate(int length);
 }
 
 final class _MultiSelectAccordionController extends FAccordionController {
@@ -61,35 +65,27 @@ final class _MultiSelectAccordionController extends FAccordionController {
     super.min,
     super.max,
     super.animationDuration,
-  }) : super._();
+  }) : super.base();
 
-  /// Adds an item to the accordion.
-  // ignore: avoid_positional_boolean_parameters
   @override
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
     controllers[index] = (controller: controller, animation: animation);
-    if (initiallyExpanded && _expanded.length < _max!) {
-      //TODO: check min, max items
+    if (initiallyExpanded && validate(_expanded.length)) {
       _expanded.add(index);
     }
   }
 
-  /// Removes an item from the accordion.
   @override
-  void removeItem(int index) {
-    controllers.remove(index);
+  bool removeItem(int index) {
+    final removed = controllers.remove(index);
     _expanded.remove(index);
+
+    return removed != null;
   }
 
-  /// Convenience method for toggling the current expanded status.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
   @override
   Future<void> toggle(int index) async => controllers[index]?.animation.value == 100 ? collapse(index) : expand(index);
 
-  /// Shows the content in the accordion.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
   @override
   Future<void> expand(int index) async {
     if (_max != null && _expanded.length >= _max) {
@@ -103,9 +99,6 @@ final class _MultiSelectAccordionController extends FAccordionController {
     notifyListeners();
   }
 
-  /// Hides the content in the accordion.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
   @override
   Future<void> collapse(int index) async {
     if (_expanded.length <= _min) {
@@ -118,37 +111,39 @@ final class _MultiSelectAccordionController extends FAccordionController {
     await controller?.reverse();
     notifyListeners();
   }
+
+  @override
+  bool validate(int length) => length >= _min && (_max == null || length <= _max);
 }
 
-/// An [FAccordionController] that allows one section to be expanded at a time.
+/// An [FAccordionController] that allows only one section to be expanded at a time.
 final class FRadioAccordionController extends FAccordionController {
   /// Creates a [FRadioAccordionController].
   FRadioAccordionController({
     super.animationDuration,
     super.min,
     int super.max = 1,
-  }) : super._();
+  }) : super.base();
 
   @override
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
-
     controllers[index] = (controller: controller, animation: animation);
 
-    if (initiallyExpanded) {
-      //TODO: check min, max items
+    if (initiallyExpanded && validate(_expanded.length)) {
       _expanded.add(index);
     }
   }
 
   @override
-  void removeItem(int index) {
-    controllers.remove(index);
+  bool removeItem(int index) {
+    final removed = controllers.remove(index);
     _expanded.remove(index);
+
+    return removed != null;
   }
 
   @override
   Future<void> toggle(int index) async => controllers[index]?.animation.value == 100 ? collapse(index) : expand(index);
-
 
   @override
   Future<void> collapse(int index) async {
@@ -166,9 +161,9 @@ final class FRadioAccordionController extends FAccordionController {
   @override
   Future<void> expand(int index) async {
     final expand = <Future<void>>[];
-    if (_expanded.length > _min && _expanded.length >= _max!) {
 
-      if(_expanded.contains(index)) {
+    if (_expanded.length > _min && _max != null && _expanded.length >= _max) {
+      if (_expanded.contains(index)) {
         return;
       }
       expand.add(collapse(_expanded.first));
@@ -177,11 +172,14 @@ final class FRadioAccordionController extends FAccordionController {
     _expanded.add(index);
 
     final controller = controllers[index]?.controller;
-
-    expand.add(controller!.forward() as Future<void>);
+    if (controller != null) {
+      expand.add(controller.forward());
+    }
     await Future.wait(expand);
 
     notifyListeners();
-
   }
+
+  @override
+  bool validate(int length) => length >= _min && (_max == null || length <= _max);
 }

@@ -8,6 +8,7 @@ import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 import 'package:meta/meta.dart';
 
+@internal
 /// An item that represents a header in a [FAccordion].
 class FAccordionItemData extends InheritedWidget {
   /// Returns the [FAccordionItemData] of the [FAccordionItem] in the given [context].
@@ -93,12 +94,17 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
   bool _hovered = false;
 
   @override
-  void initState() {
-    super.initState();
-    final data = context.getInheritedWidgetOfExactType<FAccordionItemData>();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final data = FAccordionItemData.of(context);
+
+    final removed = data.controller.removeItem(data.index);
+    if (removed) {
+      _controller.dispose();
+    }
 
     _controller = AnimationController(
-      duration: data?.controller.animationDuration,
+      duration: data.controller.animationDuration,
       value: widget.initiallyExpanded ? 1.0 : 0.0,
       vsync: this,
     );
@@ -111,34 +117,9 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
         parent: _controller,
       ),
     );
-    data?.controller.addItem(data.index, _controller, _expand, widget.initiallyExpanded);
+
+    data.controller.addItem(data.index, _controller, _expand, widget.initiallyExpanded);
   }
-  //
-  //
-  // @override
-  // void didUpdateWidget(covariant FAccordionItem old) {
-  //   super.didUpdateWidget(old);
-  //
-  //   if (widget.controller != old.controller) {
-  //     _controller = AnimationController(
-  //       duration: widget.controller.animationDuration,
-  //       value: widget.item.initiallyExpanded ? 1.0 : 0.0,
-  //       vsync: this,
-  //     );
-  //     _expand = Tween<double>(
-  //       begin: 0,
-  //       end: 100,
-  //     ).animate(
-  //       CurvedAnimation(
-  //         curve: Curves.ease,
-  //         parent: _controller,
-  //       ),
-  //     );
-  //
-  //     old.controller.removeItem(old.index);
-  //     widget.controller.addItem(widget.index, _controller, _expand, widget.item.initiallyExpanded);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

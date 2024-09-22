@@ -22,9 +22,12 @@ void main() {
                 FAccordionItem(
                   title: const Text('Title'),
                   initiallyExpanded: true,
-                  child: FButton(
-                    onPress: () => taps++,
-                    label: const Text('button'),
+                  child: SizedBox.square(
+                    dimension: 1,
+                    child: GestureDetector(
+                      onTap: () => taps++,
+                      child: const Text('button'),
+                    ),
                   ),
                 ),
               ],
@@ -35,12 +38,12 @@ void main() {
 
       await tester.tap(find.text('Title'));
       await tester.pumpAndSettle();
-      await tester.tap(find.byType(FButton), warnIfMissed: false);
+      await tester.tap(find.text('button'), warnIfMissed: false);
       expect(taps, 0);
 
       await tester.tap(find.text('Title'));
       await tester.pumpAndSettle();
-      await tester.tap(find.byType(FButton));
+      await tester.tap(find.text('button'));
       expect(taps, 1);
     });
   });
