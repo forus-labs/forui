@@ -27,19 +27,19 @@ class AccordionPage extends SampleScaffold {
             controller: controller,
             items: const [
               FAccordionItem(
-                title:  Text('Is it accessible?'),
-                child:  Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+                title: Text('Is it accessible?'),
+                child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),
               ),
               FAccordionItem(
-                title:  Text('Is it Styled?'),
+                title: Text('Is it Styled?'),
                 initiallyExpanded: true,
-                child:  Text(
+                child: Text(
                   "Yes. It comes with default styles that matches the other components' aesthetics",
                 ),
               ),
               FAccordionItem(
-                title:  Text('Is it Animated?'),
-                child:  Text(
+                title: Text('Is it Animated?'),
+                child: Text(
                   'Yes. It is animated by default, but you can disable it if you prefer',
                 ),
               ),
