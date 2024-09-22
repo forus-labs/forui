@@ -8,7 +8,7 @@ import 'package:forui/src/foundation/util.dart';
 import 'dart:math' as math;
 
 /// An item that represents a header in a [FAccordion].
-class FAccordionItem {
+class FAccordionData extends InheritedWidget{
   /// The title.
   final Widget title;
 
@@ -26,7 +26,7 @@ class FAccordionItem {
 ///
 /// See:
 /// * https://forui.dev/docs/accordion for working examples.
-class _Item extends StatefulWidget {
+class FAccordionItem extends StatefulWidget {
   /// The accordion's style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle style;
 

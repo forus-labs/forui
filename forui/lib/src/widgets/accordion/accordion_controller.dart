@@ -1,14 +1,17 @@
 import 'package:flutter/widgets.dart';
 
 /// A controller that controls which sections are shown and hidden.
-base class FAccordionController extends ChangeNotifier {
+abstract base class FAccordionController extends ChangeNotifier {
   /// The duration of the expansion and collapse animations.
   final Duration animationDuration;
+
   /// A list of controllers for each of the headers in the accordion.
-  final List<({AnimationController controller, Animation animation})> controllers;
+  final Map<int, ({AnimationController controller, Animation animation})> controllers;
   final Set<int> _expanded;
   final int _min;
   final int? _max;
+
+  factory => _MultiselectAccordionController();
 
   /// Creates a [FAccordionController].
   ///
@@ -24,7 +27,7 @@ base class FAccordionController extends ChangeNotifier {
     this.animationDuration = const Duration(milliseconds: 500),
   })  : _min = min,
         _max = max,
-        controllers = [],
+        controllers = {},
         _expanded = {},
         assert(min >= 0, 'The min value must be greater than or equal to 0.'),
         assert(max == null || max >= 0, 'The max value must be greater than or equal to 0.'),
@@ -33,17 +36,16 @@ base class FAccordionController extends ChangeNotifier {
   /// Adds an item to the accordion.
   // ignore: avoid_positional_boolean_parameters
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
-    controllers.add((controller: controller, animation: animation));
+    controllers[index] = (controller: controller, animation: animation);
     if (initiallyExpanded) {
+      //TODO: check min, max items
       _expanded.add(index);
     }
   }
 
   /// Removes an item from the accordion.
   void removeItem(int index) {
-    if (controllers.length <= index) {
-      controllers.removeAt(index);
-    }
+    controllers.removeWhere(index);
     _expanded.remove(index);
   }
 
@@ -59,21 +61,21 @@ base class FAccordionController extends ChangeNotifier {
       _expanded.remove(index);
       await collapse(index);
     } else {
-      if (_max != null && _expanded.length >= _max) {
-        return;
-      }
 
-      _expanded.add(index);
-      await expand(index);
+
+      // Expand Accordion
     }
-
-    notifyListeners();
   }
 
   /// Shows the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> expand(int index) async {
+
+    if (_max != null && _expanded.length >= _max) {
+      return;
+    }
+    _expanded.add(index);
     final controller = controllers[index].controller;
     await controller.forward();
     notifyListeners();
@@ -112,10 +114,14 @@ final class FRadioAccordionController extends FAccordionController {
     final toggle = <Future>[];
     if (_expanded.length > _min) {
       if (!_expanded.contains(index) && _expanded.length >= _max!) {
+
         toggle.add(collapse(_expanded.first));
         _expanded.remove(_expanded.first);
       }
     }
+
+    /// super.toggle
+
     toggle.add(super.toggle(index));
     await Future.wait(toggle);
   }

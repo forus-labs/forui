@@ -54,6 +54,13 @@ class _FAccordionState extends State<FAccordion> {
   void initState() {
     super.initState();
     _controller = widget.controller ?? FRadioAccordionController();
+    // TODO: check no.of widget.items and make sure they correspond with min and max
+  }
+
+  @override
+  void didUpdateWidget(covariant FAccordion oldWidget) {
+    // TODO: check no.of widget.items and make sure they correspond with min and max
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
