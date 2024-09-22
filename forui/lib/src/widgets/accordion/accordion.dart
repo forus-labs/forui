@@ -65,20 +65,16 @@ class _FAccordionState extends State<FAccordion> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.accordionStyle;
-    return Column(
+  Widget build(BuildContext context) => Column(
       children: [
         for (final (index, widget) in widget.items.indexed)
-          _Item(
-            style: style,
+          FAccordionItemData(
             index: index,
-            item: widget,
             controller: _controller,
+            child: widget,
           ),
       ],
     );
-  }
 }
 
 /// The [FAccordion] style.

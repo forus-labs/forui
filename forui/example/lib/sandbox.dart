@@ -24,10 +24,10 @@ class _SandboxState extends State<Sandbox> {
         children: [
           FAccordion(
             items: [
-              FAccordionItem(
-                title: const Text('Title 1'),
+              const FAccordionItem(
+                title:  Text('Title 1'),
                 initiallyExpanded: true,
-                child: const Text(
+                child:  Text(
                   'Yes. It adheres to the WAI-ARIA design pattern, wfihwe fdhfiwf dfhwiodf dfwhoif',
                 ),
               ),
@@ -42,16 +42,16 @@ class _SandboxState extends State<Sandbox> {
                   ),
                 ),
               ),
-              FAccordionItem(
-                title: const Text('Title 3'),
-                child: const Text(
+              const FAccordionItem(
+                title:  Text('Title 3'),
+                child:  Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,
                 ),
               ),
-              FAccordionItem(
-                title: const Text('Title 4'),
-                child: const Text(
+              const FAccordionItem(
+                title:  Text('Title 4'),
+                child:  Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,
                 ),

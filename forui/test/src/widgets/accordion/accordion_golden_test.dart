@@ -15,15 +15,15 @@ void main() {
         MaterialApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
                   items: [
                     FAccordionItem(
-                      title: const Text('Title'),
+                      title: Text('Title'),
                       initiallyExpanded: true,
-                      child: const ColoredBox(
+                      child: ColoredBox(
                         color: Colors.yellow,
                         child: SizedBox.square(
                           dimension: 50,
@@ -46,15 +46,15 @@ void main() {
         MaterialApp(
           home: TestScaffold(
             data: FThemes.zinc.light,
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
                   items: [
                     FAccordionItem(
-                      title: const Text('Title'),
+                      title: Text('Title'),
                       initiallyExpanded: true,
-                      child: const ColoredBox(
+                      child: ColoredBox(
                         color: Colors.yellow,
                         child: SizedBox.square(
                           dimension: 50,

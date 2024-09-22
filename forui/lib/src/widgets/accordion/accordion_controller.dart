@@ -11,8 +11,6 @@ abstract base class FAccordionController extends ChangeNotifier {
   final int _min;
   final int? _max;
 
-  factory => _MultiselectAccordionController();
-
   /// Creates a [FAccordionController].
   ///
   /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum or maximum.
@@ -21,7 +19,9 @@ abstract base class FAccordionController extends ChangeNotifier {
   /// * Throws [AssertionError] if [min] < 0.
   /// * Throws [AssertionError] if [max] < 0.
   /// * Throws [AssertionError] if [min] > [max].
-  FAccordionController({
+  factory FAccordionController({int min, int? max, Duration animationDuration}) = _MultiSelectAccordionController;
+
+  FAccordionController._({
     int min = 0,
     int? max,
     this.animationDuration = const Duration(milliseconds: 500),
@@ -35,58 +35,87 @@ abstract base class FAccordionController extends ChangeNotifier {
 
   /// Adds an item to the accordion.
   // ignore: avoid_positional_boolean_parameters
+  void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded);
+
+  /// Removes an item from the accordion.
+  void removeItem(int index);
+
+  /// Convenience method for toggling the current expanded status.
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> toggle(int index);
+
+  /// Shows the content in the accordion.
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> expand(int index);
+
+  /// Hides the content in the accordion.
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> collapse(int index);
+}
+
+final class _MultiSelectAccordionController extends FAccordionController {
+  _MultiSelectAccordionController({
+    super.min,
+    super.max,
+    super.animationDuration,
+  }) : super._();
+
+  /// Adds an item to the accordion.
+  // ignore: avoid_positional_boolean_parameters
+  @override
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
     controllers[index] = (controller: controller, animation: animation);
-    if (initiallyExpanded) {
+    if (initiallyExpanded && _expanded.length < _max!) {
       //TODO: check min, max items
       _expanded.add(index);
     }
   }
 
   /// Removes an item from the accordion.
+  @override
   void removeItem(int index) {
-    controllers.removeWhere(index);
+    controllers.remove(index);
     _expanded.remove(index);
   }
 
   /// Convenience method for toggling the current expanded status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle(int index) async {
-    if (controllers[index].controller.value == 1) {
-      if (_expanded.length <= _min) {
-        return;
-      }
-
-      _expanded.remove(index);
-      await collapse(index);
-    } else {
-
-
-      // Expand Accordion
-    }
-  }
+  @override
+  Future<void> toggle(int index) async => controllers[index]?.animation.value == 100 ? collapse(index) : expand(index);
 
   /// Shows the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
+  @override
   Future<void> expand(int index) async {
-
     if (_max != null && _expanded.length >= _max) {
       return;
     }
+
     _expanded.add(index);
-    final controller = controllers[index].controller;
-    await controller.forward();
+
+    final controller = controllers[index]?.controller;
+    await controller?.forward();
     notifyListeners();
   }
 
   /// Hides the content in the accordion.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
+  @override
   Future<void> collapse(int index) async {
-    final controller = controllers[index].controller;
-    await controller.reverse();
+    if (_expanded.length <= _min) {
+      return;
+    }
+
+    _expanded.remove(index);
+
+    final controller = controllers[index]?.controller;
+    await controller?.reverse();
     notifyListeners();
   }
 }
@@ -98,31 +127,61 @@ final class FRadioAccordionController extends FAccordionController {
     super.animationDuration,
     super.min,
     int super.max = 1,
-  });
+  }) : super._();
 
   @override
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
-    if (_expanded.length > _max!) {
-      super.addItem(index, controller, animation, false);
-    } else {
-      super.addItem(index, controller, animation, initiallyExpanded);
+
+    controllers[index] = (controller: controller, animation: animation);
+
+    if (initiallyExpanded) {
+      //TODO: check min, max items
+      _expanded.add(index);
     }
   }
 
   @override
-  Future<void> toggle(int index) async {
-    final toggle = <Future>[];
-    if (_expanded.length > _min) {
-      if (!_expanded.contains(index) && _expanded.length >= _max!) {
+  void removeItem(int index) {
+    controllers.remove(index);
+    _expanded.remove(index);
+  }
 
-        toggle.add(collapse(_expanded.first));
-        _expanded.remove(_expanded.first);
-      }
+  @override
+  Future<void> toggle(int index) async => controllers[index]?.animation.value == 100 ? collapse(index) : expand(index);
+
+
+  @override
+  Future<void> collapse(int index) async {
+    if (_expanded.length <= _min) {
+      return;
     }
 
-    /// super.toggle
+    _expanded.remove(index);
 
-    toggle.add(super.toggle(index));
-    await Future.wait(toggle);
+    final controller = controllers[index]?.controller;
+    await controller?.reverse();
+    notifyListeners();
+  }
+
+  @override
+  Future<void> expand(int index) async {
+    final expand = <Future<void>>[];
+    if (_expanded.length > _min && _expanded.length >= _max!) {
+
+      if(_expanded.contains(index)) {
+        return;
+      }
+      expand.add(collapse(_expanded.first));
+    }
+
+    _expanded.add(index);
+
+    final controller = controllers[index]?.controller;
+
+    expand.add(controller!.forward() as Future<void>);
+    await Future.wait(expand);
+
+    notifyListeners();
+
   }
 }

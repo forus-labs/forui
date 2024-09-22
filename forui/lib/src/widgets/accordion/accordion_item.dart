@@ -6,20 +6,45 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
+import 'package:meta/meta.dart';
 
 /// An item that represents a header in a [FAccordion].
-class FAccordionData extends InheritedWidget{
-  /// The title.
-  final Widget title;
+class FAccordionItemData extends InheritedWidget {
+  /// Returns the [FAccordionItemData] of the [FAccordionItem] in the given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FAccordionItem] in the given [context].
+  @useResult
+  static FAccordionItemData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
+    assert(data != null, 'No FAccordionData found in context');
+    return data!;
+  }
 
-  /// The child.
-  final Widget child;
+  /// The item's index.
+  final int index;
 
-  /// Whether the item is initially expanded.
-  final bool initiallyExpanded;
+  /// The accordion's controller.
+  final FAccordionController controller;
 
-  /// Creates an [FAccordionItem].
-  FAccordionItem({required this.title, required this.child, this.initiallyExpanded = false});
+  /// Creates an [FAccordionItemData].
+  const FAccordionItemData({
+    required this.index,
+    required this.controller,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(covariant FAccordionItemData old) => index != old.index || controller != old.controller;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('index', index))
+      ..add(DiagnosticsProperty('controller', controller));
+  }
 }
 
 /// An interactive heading that reveals a section of content.
@@ -28,38 +53,41 @@ class FAccordionData extends InheritedWidget{
 /// * https://forui.dev/docs/accordion for working examples.
 class FAccordionItem extends StatefulWidget {
   /// The accordion's style. Defaults to [FThemeData.accordionStyle].
-  final FAccordionStyle style;
+  final FAccordionStyle? style;
 
-  /// The accordion's controller.
-  final FAccordionController controller;
+  /// The title.
+  final Widget title;
 
-  final FAccordionItem item;
+  /// Whether the item is initially expanded.
+  final bool initiallyExpanded;
 
-  final int index;
+  /// The child.
+  final Widget child;
 
-  /// Creates an [_Item].
-  const _Item({
-    required this.style,
-    required this.index,
-    required this.item,
-    required this.controller,
+  /// Creates an [FAccordionItem].
+  const FAccordionItem({
+    required this.title,
+    required this.child,
+    this.style,
+    this.initiallyExpanded = false,
+    super.key,
   });
 
   @override
-  State<_Item> createState() => _ItemState();
+  State<FAccordionItem> createState() => _FAccordionItemState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('item', item))
-      ..add(IntProperty('index', index));
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('initiallyExpanded', initiallyExpanded))
+      ..add(DiagnosticsProperty('child', child));
   }
 }
 
-class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
+class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _expand;
   bool _hovered = false;
@@ -67,9 +95,11 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    final data = context.getInheritedWidgetOfExactType<FAccordionItemData>();
+
     _controller = AnimationController(
-      duration: widget.controller.animationDuration,
-      value: widget.item.initiallyExpanded ? 1.0 : 0.0,
+      duration: data?.controller.animationDuration,
+      value: widget.initiallyExpanded ? 1.0 : 0.0,
       vsync: this,
     );
     _expand = Tween<double>(
@@ -81,93 +111,99 @@ class _ItemState extends State<_Item> with SingleTickerProviderStateMixin {
         parent: _controller,
       ),
     );
-    widget.controller.addItem(widget.index, _controller, _expand, widget.item.initiallyExpanded);
+    data?.controller.addItem(data.index, _controller, _expand, widget.initiallyExpanded);
   }
+  //
+  //
+  // @override
+  // void didUpdateWidget(covariant FAccordionItem old) {
+  //   super.didUpdateWidget(old);
+  //
+  //   if (widget.controller != old.controller) {
+  //     _controller = AnimationController(
+  //       duration: widget.controller.animationDuration,
+  //       value: widget.item.initiallyExpanded ? 1.0 : 0.0,
+  //       vsync: this,
+  //     );
+  //     _expand = Tween<double>(
+  //       begin: 0,
+  //       end: 100,
+  //     ).animate(
+  //       CurvedAnimation(
+  //         curve: Curves.ease,
+  //         parent: _controller,
+  //       ),
+  //     );
+  //
+  //     old.controller.removeItem(old.index);
+  //     widget.controller.addItem(widget.index, _controller, _expand, widget.item.initiallyExpanded);
+  //   }
+  // }
 
   @override
-  void didUpdateWidget(covariant _Item old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      _controller = AnimationController(
-        duration: widget.controller.animationDuration,
-        value: widget.item.initiallyExpanded ? 1.0 : 0.0,
-        vsync: this,
-      );
-      _expand = Tween<double>(
-        begin: 0,
-        end: 100,
-      ).animate(
-        CurvedAnimation(
-          curve: Curves.ease,
-          parent: _controller,
-        ),
-      );
+  Widget build(BuildContext context) {
+    final FAccordionItemData(:index, :controller) = FAccordionItemData.of(context);
 
-      old.controller.removeItem(old.index);
-      widget.controller.addItem(widget.index, _controller, _expand, widget.item.initiallyExpanded);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => AnimatedBuilder(
-        animation: widget.controller.controllers[widget.index].animation,
-        builder: (context, _) => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            FTappable(
-              onPress: () => widget.controller.toggle(widget.index),
-              child: MouseRegion(
-                onEnter: (_) => setState(() => _hovered = true),
-                onExit: (_) => setState(() => _hovered = false),
-                child: Container(
-                  padding: widget.style.titlePadding,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: merge(
-                          // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-                          textHeightBehavior: const TextHeightBehavior(
-                            applyHeightToFirstAscent: false,
-                            applyHeightToLastDescent: false,
-                          ),
-                          style: widget.style.titleTextStyle
-                              .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
-                          child: widget.item.title,
+    final style = widget.style ?? context.theme.accordionStyle;
+    return AnimatedBuilder(
+      animation: _expand,
+      builder: (context, _) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          FTappable(
+            onPress: () => controller.toggle(index),
+            child: MouseRegion(
+              onEnter: (_) => setState(() => _hovered = true),
+              onExit: (_) => setState(() => _hovered = false),
+              child: Container(
+                padding: style.titlePadding,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: merge(
+                        // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+                        textHeightBehavior: const TextHeightBehavior(
+                          applyHeightToFirstAscent: false,
+                          applyHeightToLastDescent: false,
                         ),
+                        style: style.titleTextStyle
+                            .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
+                        child: widget.title,
                       ),
-                      Transform.rotate(
-                        //TODO: Should I be getting the percentage value from the controller or from its local state?
-                        angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0,
+                    ),
+                    Transform.rotate(
+                      //TODO: Should I be getting the percentage value from the controller or from its local state?
+                      angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0,
 
-                        child: widget.style.icon,
-                      ),
-                    ],
-                  ),
+                      child: style.icon,
+                    ),
+                  ],
                 ),
               ),
             ),
-            // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
-            // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
-            // child to layout at a smaller size while the amount of padding remains the same.
-            _Expandable(
+          ),
+          // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
+          // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
+          // child to layout at a smaller size while the amount of padding remains the same.
+          _Expandable(
+            //TODO: Should I be getting the percentage value from the controller or from its local state?
+            percentage: _expand.value / 100,
+            child: ClipRect(
               //TODO: Should I be getting the percentage value from the controller or from its local state?
-              percentage: _expand.value / 100,
-              child: ClipRect(
-                //TODO: Should I be getting the percentage value from the controller or from its local state?
-                clipper: _Clipper(percentage: _expand.value / 100),
-                child: Padding(
-                  padding: widget.style.contentPadding,
-                  child: DefaultTextStyle(style: widget.style.childTextStyle, child: widget.item.child),
-                ),
+              clipper: _Clipper(percentage: _expand.value / 100),
+              child: Padding(
+                padding: style.contentPadding,
+                child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
               ),
             ),
-            FDivider(
-              style: context.theme.dividerStyles.horizontal
-                  .copyWith(padding: EdgeInsets.zero, color: widget.style.dividerColor),
-            ),
-          ],
-        ),
-      );
+          ),
+          FDivider(
+            style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: style.dividerColor),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _Expandable extends SingleChildRenderObjectWidget {
