@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_svg/svg.dart';
-import 'package:forui/src/widgets/accordion/accordion_item.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/accordion/accordion_item.dart';
 
 /// A vertically stacked set of interactive headings that each reveal a section of content.
 ///

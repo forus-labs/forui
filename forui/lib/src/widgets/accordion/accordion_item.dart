@@ -3,12 +3,14 @@ import 'dart:math' as math;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
-import 'package:meta/meta.dart';
 
 @internal
+
 /// An item that represents a header in a [FAccordion].
 class FAccordionItemData extends InheritedWidget {
   /// Returns the [FAccordionItemData] of the [FAccordionItem] in the given [context].
