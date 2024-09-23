@@ -22,7 +22,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final ValueWidgetBuilder<FBottomNavigationBarData> iconBuilder;
 
   /// The label.
-  final String label;
+  final Widget label;
 
   /// Creates a [FBottomNavigationBarItem].
   FBottomNavigationBarItem({
@@ -33,7 +33,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   }) : iconBuilder = _icon(icon);
 
   /// Creates a [FBottomNavigationBarItem] with a custom icon.
-  const FBottomNavigationBarItem.customIcon({
+  const FBottomNavigationBarItem.custom({
     required this.label,
     required this.iconBuilder,
     this.style,
@@ -46,23 +46,19 @@ class FBottomNavigationBarItem extends StatelessWidget {
     final FBottomNavigationBarData(:itemStyle, :selected) = data;
     final style = this.style ?? itemStyle;
 
-    return Semantics(
-      label: label,
-      excludeSemantics: true,
-      child: Padding(
-        padding: style.padding,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            iconBuilder(context, data, null),
-            const SizedBox(height: 2),
-            Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-              style: selected ? style.activeTextStyle : style.inactiveTextStyle,
-            ),
-          ],
-        ),
+    return Padding(
+      padding: style.padding,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ExcludeSemantics(child: iconBuilder(context, data, null)),
+          const SizedBox(height: 2),
+          DefaultTextStyle.merge(
+            style: selected ? style.activeTextStyle : style.inactiveTextStyle,
+            overflow: TextOverflow.ellipsis,
+            child: label,
+          ),
+        ],
       ),
     );
   }
@@ -72,8 +68,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('iconBuilder', iconBuilder))
-      ..add(StringProperty('label', label));
+      ..add(ObjectFlagProperty.has('iconBuilder', iconBuilder));
   }
 }
 

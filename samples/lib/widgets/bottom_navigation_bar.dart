@@ -35,23 +35,23 @@ class _DemoState extends State<_Demo> {
         children: [
           FBottomNavigationBarItem(
             icon: FAssets.icons.home,
-            label: 'Home',
+            label: const Text('Home'),
           ),
           FBottomNavigationBarItem(
             icon: FAssets.icons.layoutGrid,
-            label: 'Browse',
+            label: const Text('Browse'),
           ),
           FBottomNavigationBarItem(
             icon: FAssets.icons.radio,
-            label: 'Radio',
+            label: const Text('Radio'),
           ),
           FBottomNavigationBarItem(
             icon: FAssets.icons.libraryBig,
-            label: 'Library',
+            label: const Text('Library'),
           ),
           FBottomNavigationBarItem(
             icon: FAssets.icons.search,
-            label: 'Search',
+            label: const Text('Search'),
           ),
         ],
       );
@@ -85,45 +85,45 @@ class _CustomDemoState extends State<_CustomDemo> {
     index: index,
     onChange: (index) => setState(() => this.index = index),
     children: [
-      FBottomNavigationBarItem.customIcon(
+      FBottomNavigationBarItem.custom(
         iconBuilder: (_, data, __) => Icon(
           Icons.home_outlined,
           size: data.itemStyle.iconSize,
           color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
         ),
-        label: 'Home',
+        label: const Text('Home'),
       ),
-      FBottomNavigationBarItem.customIcon(
+      FBottomNavigationBarItem.custom(
         iconBuilder: (_, data, __) => Icon(
           Icons.browse_gallery_outlined,
           size: data.itemStyle.iconSize,
           color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
         ),
-        label: 'Browse',
+        label: const Text('Browse'),
       ),
-      FBottomNavigationBarItem.customIcon(
+      FBottomNavigationBarItem.custom(
         iconBuilder: (_, data, __) => Icon(
           Icons.radio_outlined,
           size: data.itemStyle.iconSize,
           color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
         ),
-        label: 'Radio',
+        label: const Text('Radio'),
       ),
-      FBottomNavigationBarItem.customIcon(
+      FBottomNavigationBarItem.custom(
         iconBuilder: (_, data, __) => Icon(
           Icons.library_books_outlined,
           size: data.itemStyle.iconSize,
           color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
         ),
-        label: 'Library',
+        label: const Text('Library'),
       ),
-      FBottomNavigationBarItem.customIcon(
+      FBottomNavigationBarItem.custom(
         iconBuilder: (_, data, __) => Icon(
           Icons.search_outlined,
           size: data.itemStyle.iconSize,
           color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
         ),
-        label: 'Search',
+        label: const Text('Search'),
       ),
     ],
   );

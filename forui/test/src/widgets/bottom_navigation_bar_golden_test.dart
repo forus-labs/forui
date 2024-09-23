@@ -20,23 +20,23 @@ void main() {
               children: [
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.home,
-                  label: 'Home',
+                  label: const Text('Home'),
                 ),
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.layoutGrid,
-                  label: 'Browse',
+                  label: const Text('Browse'),
                 ),
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.radio,
-                  label: 'Radio',
+                  label: const Text('Radio'),
                 ),
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.libraryBig,
-                  label: 'Library',
+                  label: const Text('Library'),
                 ),
                 FBottomNavigationBarItem(
                   icon: FAssets.icons.search,
-                  label: 'Search',
+                  label: const Text('Search'),
                 ),
               ],
             ),
@@ -63,25 +63,25 @@ void main() {
             child: FBottomNavigationBar(
               index: 2,
               children: [
-                FBottomNavigationBarItem.customIcon(
+                FBottomNavigationBarItem.custom(
                   iconBuilder: icon,
-                  label: 'Home',
+                  label: const Text('Home'),
                 ),
-                FBottomNavigationBarItem.customIcon(
+                FBottomNavigationBarItem.custom(
                   iconBuilder: icon,
-                  label: 'Browse',
+                  label: const Text('Browse'),
                 ),
-                FBottomNavigationBarItem.customIcon(
+                FBottomNavigationBarItem.custom(
                   iconBuilder: icon,
-                  label: 'Radio',
+                  label: const Text('Radio'),
                 ),
-                FBottomNavigationBarItem.customIcon(
+                FBottomNavigationBarItem.custom(
                   iconBuilder: icon,
-                  label: 'Library',
+                  label: const Text('Library'),
                 ),
-                FBottomNavigationBarItem.customIcon(
+                FBottomNavigationBarItem.custom(
                   iconBuilder: icon,
-                  label: 'Search',
+                  label: const Text('Search'),
                 ),
               ],
             ),
