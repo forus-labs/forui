@@ -11,8 +11,52 @@ import 'package:forui/src/foundation/util.dart';
 
 //TODO: localizations.
 const _days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-final _start = LocalDate(1900);
+final _start = (DateTime(1900), null);
 const _textSpacing = 2.0;
+
+bool _true(DateTime _) => true;
+
+typedef FlineSelection = (DateTime start, DateTime? end);
+
+class FlineController extends FCalendarController<DateTime?> {
+  final Predicate<DateTime> _selectable;
+  final FlineSelection? _period;
+
+  FlineController({
+    FlineSelection? period,
+    DateTime? initialSelection,
+    Predicate<DateTime>? selectable,
+  })  : assert(
+          period == null || (period.$1.isUtc && (period.$2?.isUtc ?? true)),
+          'value must be in UTC timezone',
+        ),
+        assert(
+          () {
+            if (period == null) {
+              return true;
+            }
+            final start = period.$1;
+            final end = period.$2;
+            if (end == null) {
+              return true;
+            }
+            return start.isBefore(end) || start.isAtSameMomentAs(end);
+          }(),
+          'end date must be greater than or equal to start date',
+        ),
+        _selectable = selectable ?? _true,
+        _period = period ?? _start,
+        super(initialSelection ?? DateTime.now());
+
+  @override
+  bool selectable(DateTime date) => _selectable(date);
+
+  @override
+  void select(DateTime date) => value = value?.toLocalDate() == date.toLocalDate() ? null : date;
+
+  @override
+  bool selected(DateTime date) => value?.toLocalDate() == date.toLocalDate();
+}
 
 /// A calendar that can be scrolled horizontally.
 class FLineCalendar extends StatefulWidget {
@@ -47,7 +91,6 @@ class FLineCalendar extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('epoch', start))
       ..add(DiagnosticsProperty('today', today));
   }
