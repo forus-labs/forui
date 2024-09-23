@@ -79,6 +79,11 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/select-group/default', page: SelectGroupRoute.page),
         AutoRoute(path: '/select-group/checkbox-form', page: SelectGroupCheckboxFormRoute.page),
         AutoRoute(path: '/select-group/radio-form', page: SelectGroupRadioFormRoute.page),
+        AutoRoute(path: '/slider/default', page: SliderRoute.page),
+        AutoRoute(path: '/slider/tooltip', page: TooltipSliderRoute.page),
+        AutoRoute(path: '/slider/marks', page: MarksSliderRoute.page),
+        AutoRoute(path: '/slider/discrete', page: DiscreteSliderRoute.page),
+        AutoRoute(path: '/slider/range', page: RangeSliderRoute.page),
         AutoRoute(path: '/switch/default', page: SwitchRoute.page),
         AutoRoute(path: '/switch/form', page: FormSwitchRoute.page),
       ];

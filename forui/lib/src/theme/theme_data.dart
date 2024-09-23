@@ -88,6 +88,9 @@ final class FThemeData with Diagnosticable {
   /// The select group style.
   final FSelectGroupStyle selectGroupStyle;
 
+  /// The slider styles.
+  final FSliderStyles sliderStyles;
+
   /// The switch style.
   final FSwitchStyle switchStyle;
 
@@ -109,6 +112,7 @@ final class FThemeData with Diagnosticable {
     required this.cardStyle,
     required this.checkboxStyle,
     required this.dialogStyle,
+    required this.dividerStyles,
     required this.headerStyle,
     required this.labelStyles,
     required this.popoverStyle,
@@ -120,7 +124,7 @@ final class FThemeData with Diagnosticable {
     required this.tooltipStyle,
     required this.scaffoldStyle,
     required this.selectGroupStyle,
-    required this.dividerStyles,
+    required this.sliderStyles,
     required this.switchStyle,
     this.typography = const FTypography(),
   });
@@ -146,6 +150,7 @@ final class FThemeData with Diagnosticable {
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme, style: style),
       dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
@@ -157,7 +162,7 @@ final class FThemeData with Diagnosticable {
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
+      sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
     );
   }
@@ -218,6 +223,7 @@ final class FThemeData with Diagnosticable {
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
     FDialogStyle? dialogStyle,
+    FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
     FPopoverStyle? popoverStyle,
@@ -229,7 +235,7 @@ final class FThemeData with Diagnosticable {
     FTooltipStyle? tooltipStyle,
     FScaffoldStyle? scaffoldStyle,
     FSelectGroupStyle? selectGroupStyle,
-    FDividerStyles? dividerStyles,
+    FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
   }) =>
       FThemeData(
@@ -257,6 +263,7 @@ final class FThemeData with Diagnosticable {
         tooltipStyle: tooltipStyle ?? this.tooltipStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
         selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
+        sliderStyles: sliderStyles ?? this.sliderStyles,
         switchStyle: switchStyle ?? this.switchStyle,
       );
 
@@ -288,6 +295,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
   }
 
@@ -320,6 +328,7 @@ final class FThemeData with Diagnosticable {
           tooltipStyle == other.tooltipStyle &&
           scaffoldStyle == other.scaffoldStyle &&
           selectGroupStyle == other.selectGroupStyle &&
+          sliderStyles == other.sliderStyles &&
           switchStyle == other.switchStyle;
 
   @override
@@ -348,5 +357,6 @@ final class FThemeData with Diagnosticable {
       tooltipStyle.hashCode ^
       scaffoldStyle.hashCode ^
       selectGroupStyle.hashCode ^
+      sliderStyles.hashCode ^
       switchStyle.hashCode;
 }
