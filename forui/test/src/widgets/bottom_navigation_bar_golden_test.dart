@@ -2,6 +2,7 @@
 library;
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -51,10 +52,10 @@ void main() {
 
       testWidgets('custom icon - $name', (tester) async {
         Widget icon(BuildContext _, FBottomNavigationBarData data, Widget? __) => Container(
-          height: data.itemStyle.iconSize,
-          width: data.itemStyle.iconSize,
-          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
-        );
+              height: data.itemStyle.iconSize,
+              width: data.itemStyle.iconSize,
+              color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+            );
 
         await tester.pumpWidget(
           TestScaffold(
