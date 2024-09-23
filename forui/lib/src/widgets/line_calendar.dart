@@ -93,6 +93,7 @@ class FLineCalendar extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('epoch', start))
       ..add(DiagnosticsProperty('today', today));
+    properties.add(DiagnosticsProperty<ValueNotifier<LocalDate>>('selected', selected));
   }
 }
 
