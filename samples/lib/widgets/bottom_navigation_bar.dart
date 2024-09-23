@@ -56,3 +56,75 @@ class _DemoState extends State<_Demo> {
         ],
       );
 }
+
+@RoutePage()
+class CustomBottomNavigationBarPage extends SampleScaffold {
+  CustomBottomNavigationBarPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => const Padding(
+    padding: EdgeInsets.all(15.0),
+    child: _CustomDemo(),
+  );
+}
+
+class _CustomDemo extends StatefulWidget {
+  const _CustomDemo();
+
+  @override
+  State<_CustomDemo> createState() => _CustomDemoState();
+}
+
+class _CustomDemoState extends State<_CustomDemo> {
+  int index = 1;
+
+  @override
+  Widget build(BuildContext context) => FBottomNavigationBar(
+    index: index,
+    onChange: (index) => setState(() => this.index = index),
+    children: [
+      FBottomNavigationBarItem.customIcon(
+        iconBuilder: (_, data, __) => Icon(
+          Icons.home_outlined,
+          size: data.itemStyle.iconSize,
+          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+        ),
+        label: 'Home',
+      ),
+      FBottomNavigationBarItem.customIcon(
+        iconBuilder: (_, data, __) => Icon(
+          Icons.browse_gallery_outlined,
+          size: data.itemStyle.iconSize,
+          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+        ),
+        label: 'Browse',
+      ),
+      FBottomNavigationBarItem.customIcon(
+        iconBuilder: (_, data, __) => Icon(
+          Icons.radio_outlined,
+          size: data.itemStyle.iconSize,
+          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+        ),
+        label: 'Radio',
+      ),
+      FBottomNavigationBarItem.customIcon(
+        iconBuilder: (_, data, __) => Icon(
+          Icons.library_books_outlined,
+          size: data.itemStyle.iconSize,
+          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+        ),
+        label: 'Library',
+      ),
+      FBottomNavigationBarItem.customIcon(
+        iconBuilder: (_, data, __) => Icon(
+          Icons.search_outlined,
+          size: data.itemStyle.iconSize,
+          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+        ),
+        label: 'Search',
+      ),
+    ],
+  );
+}

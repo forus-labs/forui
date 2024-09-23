@@ -3,6 +3,8 @@
 ### Additions
 * Add `FSlider`
 
+* Add `FBottomNavigationBarItem.customItem(...)`.
+
 * Add `FButtonCustomStyle.enabledHoverBoxDecoration`.
 
 * Add `FTextField.contentInsertionConfiguration`.

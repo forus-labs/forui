@@ -7,26 +7,43 @@ import 'package:forui/forui.dart';
 
 /// A [FBottomNavigationBar] item.
 class FBottomNavigationBarItem extends StatelessWidget {
+  static ValueWidgetBuilder<FBottomNavigationBarData> _icon(SvgAsset icon) => (_, data, __) => icon(
+        height: data.itemStyle.iconSize,
+        colorFilter: ColorFilter.mode(
+          data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+          BlendMode.srcIn,
+        ),
+      );
+
   /// The style.
   final FBottomNavigationBarItemStyle? style;
 
-  /// The icon.
-  final SvgAsset icon;
+  /// The icon's builder.
+  final ValueWidgetBuilder<FBottomNavigationBarData> iconBuilder;
 
   /// The label.
   final String label;
 
   /// Creates a [FBottomNavigationBarItem].
-  const FBottomNavigationBarItem({
-    required this.icon,
+  FBottomNavigationBarItem({
     required this.label,
+    required SvgAsset icon,
+    this.style,
+    super.key,
+  }) : iconBuilder = _icon(icon);
+
+  /// Creates a [FBottomNavigationBarItem] with a custom icon.
+  const FBottomNavigationBarItem.customIcon({
+    required this.label,
+    required this.iconBuilder,
     this.style,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBarData.of(context);
+    final data = FBottomNavigationBarData.of(context);
+    final FBottomNavigationBarData(:itemStyle, :selected) = data;
     final style = this.style ?? itemStyle;
 
     return Semantics(
@@ -37,13 +54,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            icon(
-              height: style.iconSize,
-              colorFilter: ColorFilter.mode(
-                selected ? style.activeIconColor : style.inactiveIconColor,
-                BlendMode.srcIn,
-              ),
-            ),
+            iconBuilder(context, data, null),
             const SizedBox(height: 2),
             Text(
               label,
@@ -61,7 +72,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('icon', icon))
+      ..add(ObjectFlagProperty.has('iconBuilder', iconBuilder))
       ..add(StringProperty('label', label));
   }
 }
