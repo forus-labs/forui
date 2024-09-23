@@ -1,8 +1,7 @@
 @Tags(['golden'])
 library;
 
-import 'dart:async';
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -17,17 +16,15 @@ void main() {
         final controller = FTooltipController(vsync: const TestVSync());
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              data: theme,
-              child: FTooltip(
-                controller: controller,
-                tipBuilder: (context, style, _) => const Text('Lorem'),
-                child: const ColoredBox(
-                  color: Colors.yellow,
-                  child: SizedBox.square(
-                    dimension: 100,
-                  ),
+          TestScaffold.app(
+            data: theme,
+            child: FTooltip(
+              controller: controller,
+              tipBuilder: (context, style, _) => const Text('Lorem'),
+              child: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(
+                  dimension: 100,
                 ),
               ),
             ),
@@ -41,25 +38,28 @@ void main() {
         final controller = FTooltipController(vsync: const TestVSync());
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              data: theme,
-              child: FTooltip(
-                controller: controller,
-                tipBuilder: (context, style, _) => const Text('Lorem'),
-                child: const ColoredBox(
-                  color: Colors.yellow,
-                  child: SizedBox.square(
-                    dimension: 100,
-                  ),
+          TestScaffold.app(
+            data: theme,
+            child: FTooltip(
+              controller: controller,
+              tipBuilder: (context, style, _) => const Text('Lorem'),
+              child: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(
+                  dimension: 100,
                 ),
               ),
             ),
           ),
         );
 
-        unawaited(controller.show());
-        await tester.pumpAndSettle();
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        await gesture.addPointer(location: Offset.zero);
+        addTearDown(gesture.removePointer);
+        await tester.pump();
+
+        await gesture.moveTo(tester.getCenter(find.byType(ColoredBox).first));
+        await tester.pumpAndSettle(const Duration(seconds: 5));
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/$name-shown.png'));
       });

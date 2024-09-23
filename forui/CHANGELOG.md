@@ -1,6 +1,7 @@
 ## 0.6.0 (Next)
 
 ### Additions
+* Add `FSlider`
 
 * Add `FButtonCustomStyle.enabledHoverBoxDecoration`.
 

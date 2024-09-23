@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
-final class FTooltipController extends ChangeNotifier {
+class FTooltipController extends ChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
   static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
 
