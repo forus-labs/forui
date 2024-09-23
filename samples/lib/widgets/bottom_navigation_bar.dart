@@ -65,9 +65,9 @@ class CustomBottomNavigationBarPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => const Padding(
-    padding: EdgeInsets.all(15.0),
-    child: _CustomDemo(),
-  );
+        padding: EdgeInsets.all(15.0),
+        child: _CustomDemo(),
+      );
 }
 
 class _CustomDemo extends StatefulWidget {
@@ -82,49 +82,49 @@ class _CustomDemoState extends State<_CustomDemo> {
 
   @override
   Widget build(BuildContext context) => FBottomNavigationBar(
-    index: index,
-    onChange: (index) => setState(() => this.index = index),
-    children: [
-      FBottomNavigationBarItem.custom(
-        iconBuilder: (_, data, __) => Icon(
-          Icons.home_outlined,
-          size: data.itemStyle.iconSize,
-          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
-        ),
-        label: const Text('Home'),
-      ),
-      FBottomNavigationBarItem.custom(
-        iconBuilder: (_, data, __) => Icon(
-          Icons.browse_gallery_outlined,
-          size: data.itemStyle.iconSize,
-          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
-        ),
-        label: const Text('Browse'),
-      ),
-      FBottomNavigationBarItem.custom(
-        iconBuilder: (_, data, __) => Icon(
-          Icons.radio_outlined,
-          size: data.itemStyle.iconSize,
-          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
-        ),
-        label: const Text('Radio'),
-      ),
-      FBottomNavigationBarItem.custom(
-        iconBuilder: (_, data, __) => Icon(
-          Icons.library_books_outlined,
-          size: data.itemStyle.iconSize,
-          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
-        ),
-        label: const Text('Library'),
-      ),
-      FBottomNavigationBarItem.custom(
-        iconBuilder: (_, data, __) => Icon(
-          Icons.search_outlined,
-          size: data.itemStyle.iconSize,
-          color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
-        ),
-        label: const Text('Search'),
-      ),
-    ],
-  );
+        index: index,
+        onChange: (index) => setState(() => this.index = index),
+        children: [
+          FBottomNavigationBarItem.custom(
+            iconBuilder: (_, data, __) => Icon(
+              Icons.home_outlined,
+              size: data.itemStyle.iconSize,
+              color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+            ),
+            label: const Text('Home'),
+          ),
+          FBottomNavigationBarItem.custom(
+            iconBuilder: (_, data, __) => Icon(
+              Icons.browse_gallery_outlined,
+              size: data.itemStyle.iconSize,
+              color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+            ),
+            label: const Text('Browse'),
+          ),
+          FBottomNavigationBarItem.custom(
+            iconBuilder: (_, data, __) => Icon(
+              Icons.radio_outlined,
+              size: data.itemStyle.iconSize,
+              color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+            ),
+            label: const Text('Radio'),
+          ),
+          FBottomNavigationBarItem.custom(
+            iconBuilder: (_, data, __) => Icon(
+              Icons.library_books_outlined,
+              size: data.itemStyle.iconSize,
+              color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+            ),
+            label: const Text('Library'),
+          ),
+          FBottomNavigationBarItem.custom(
+            iconBuilder: (_, data, __) => Icon(
+              Icons.search_outlined,
+              size: data.itemStyle.iconSize,
+              color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+            ),
+            label: const Text('Search'),
+          ),
+        ],
+      );
 }
