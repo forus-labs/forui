@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:forui/forui.dart';
 import 'slider_tooltips_controller_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FTooltipController>()])
@@ -70,7 +71,9 @@ void main() {
       });
 
       test('remove', () {
-        controller..remove(key2)..toggle();
+        controller
+          ..remove(key2)
+          ..toggle();
 
         verify(tooltip1.toggle()).called(1);
         verifyNever(tooltip2.toggle());
@@ -131,7 +134,9 @@ void main() {
       });
 
       test('remove', () {
-        controller..remove(key2)..toggle();
+        controller
+          ..remove(key2)
+          ..toggle();
 
         verifyNever(tooltip1.toggle());
         verifyNever(tooltip2.toggle());

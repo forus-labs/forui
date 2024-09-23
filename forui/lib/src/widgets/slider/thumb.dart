@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/slider/inherited_controller.dart';
+
 import 'package:meta/meta.dart';
 
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 class _ShrinkIntent extends Intent {

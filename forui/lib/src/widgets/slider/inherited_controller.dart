@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 @internal
 class InheritedController extends InheritedModel<UniqueKey> {
@@ -24,7 +26,7 @@ class InheritedController extends InheritedModel<UniqueKey> {
     required this.controller,
     required super.child,
     super.key,
-  }): _selection = controller.selection;
+  }) : _selection = controller.selection;
 
   @override
   bool updateShouldNotify(InheritedController old) => _selection != old._selection || controller != old.controller;

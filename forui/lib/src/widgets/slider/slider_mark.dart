@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A mark in a [FSlider]. It is a combination of a tick - a visual indicator along the track, and a label.
 final class FSliderMark with Diagnosticable {
@@ -149,9 +151,5 @@ final class FSliderMarkStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      tickColor.hashCode ^
-      tickSize.hashCode ^
-      labelTextStyle.hashCode ^
-      labelAnchor.hashCode ^
-      labelOffset.hashCode;
+      tickColor.hashCode ^ tickSize.hashCode ^ labelTextStyle.hashCode ^ labelAnchor.hashCode ^ labelOffset.hashCode;
 }

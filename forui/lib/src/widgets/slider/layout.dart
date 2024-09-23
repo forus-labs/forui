@@ -1,14 +1,15 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/alignment.dart';
-import 'package:forui/src/widgets/slider/inherited_controller.dart';
-import 'package:forui/src/widgets/slider/track.dart';
+import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart' hide Offset;
 
+import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/alignment.dart';
+import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
+import 'package:forui/src/widgets/slider/track.dart';
 
 @internal
 class SliderLayout extends StatefulWidget {

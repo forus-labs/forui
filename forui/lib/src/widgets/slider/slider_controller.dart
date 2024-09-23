@@ -1,10 +1,12 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/platform.dart';
 import 'package:forui/src/widgets/slider/slider_selection.dart';
-import 'package:meta/meta.dart';
 
 /// Possible ways for a user to interact with a slider.
 enum FSliderInteraction {

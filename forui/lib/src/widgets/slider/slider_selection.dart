@@ -1,8 +1,10 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A [FSlider]'s active track/selection.
 sealed class FSliderSelection with Diagnosticable {
@@ -204,7 +206,7 @@ final class DiscreteSelection extends FSliderSelection {
     required super.offset,
     required super.extent,
     required super.rawExtent,
-  })  : super._copy(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
+  }) : super._copy(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
 
   @override
   DiscreteSelection step({required bool min, required bool extend}) => _move(

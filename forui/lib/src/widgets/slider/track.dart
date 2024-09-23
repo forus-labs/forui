@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/slider/inherited_controller.dart';
-import 'package:forui/src/widgets/slider/thumb.dart';
+
 import 'package:meta/meta.dart';
 
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
+import 'package:forui/src/widgets/slider/thumb.dart';
 
 @internal
 class Track extends StatelessWidget {
