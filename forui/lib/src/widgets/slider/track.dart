@@ -60,27 +60,27 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :enabled, :semanticFormatterCallback) = InheritedData.of(context);
+    final data = InheritedData.of(context);
+    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled, :semanticFormatterCallback,) = data;
     final controller = InheritedController.of(context);
+
+    final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbStyle.size, style.crossAxisExtent);
+    final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     final track = Semantics(
       slider: true,
       enabled: enabled,
       value: semanticFormatterCallback(controller.selection),
-      child: const _Track(),
+      child: Container(
+        height: height,
+        width: width,
+        color: const Color(0x00000000),
+        child: const Center(child: _Track()),
+      ),
     );
 
     if (!enabled) {
       return track;
-    }
-
-    if (controller.allowedInteraction != FSliderInteraction.slide) {
-      return GestureDetector(
-        onTapDown: _tap(controller, style, layout),
-        onTapUp: (_) => controller.tooltips.hide(),
-        onTapCancel: controller.tooltips.hide,
-        child: track,
-      );
     }
 
     void start(DragStartDetails details) {

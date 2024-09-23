@@ -42,6 +42,11 @@ class FSlider extends FormField<FSliderSelection> {
   /// The marks.
   final List<FSliderMark> marks;
 
+  /// The extent of the track's hit region in the cross-axis direction.
+  ///
+  /// Defaults to the either the tracker the thumb's cross extent , whichever is larger.
+  final double? trackHitRegionCrossExtent;
+
   /// A builder that creates the tooltip. Defaults to printing the current percentage.
   final Widget Function(FTooltipStyle, double) tooltipBuilder;
 
@@ -61,6 +66,7 @@ class FSlider extends FormField<FSliderSelection> {
     this.style,
     this.layout = Layout.ltr,
     this.marks = const [],
+    this.trackHitRegionCrossExtent,
     this.tooltipBuilder = _tooltipBuilder,
     this.semanticValueFormatterCallback = _semanticValueFormatter,
     String Function(FSliderSelection)? semanticFormatterCallback,
@@ -91,6 +97,7 @@ class FSlider extends FormField<FSliderSelection> {
               style: sliderStyle,
               layout: layout,
               marks: marks,
+              trackHitRegionCrossExtent: trackHitRegionCrossExtent,
               enabled: enabled,
               tooltipBuilder: tooltipBuilder,
               semanticFormatterCallback: semanticFormatterCallback ?? _formatter(controller),
@@ -119,6 +126,7 @@ class FSlider extends FormField<FSliderSelection> {
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
+      ..add(DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
@@ -220,7 +228,7 @@ final class FSliderStyles with Diagnosticable {
         tickColor: colorScheme.mutedForeground,
         labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
         labelAnchor: Alignment.topCenter,
-        labelOffset: 7.5,
+        labelOffset: 10,
       ),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
@@ -236,7 +244,7 @@ final class FSliderStyles with Diagnosticable {
         tickColor: colorScheme.mutedForeground,
         labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
         labelAnchor: Alignment.topCenter,
-        labelOffset: 7.5,
+        labelOffset: 10,
       ),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
@@ -252,7 +260,7 @@ final class FSliderStyles with Diagnosticable {
         tickColor: colorScheme.mutedForeground,
         labelTextStyle: typography.xs.copyWith(color: colorScheme.error),
         labelAnchor: Alignment.topCenter,
-        labelOffset: 7.5,
+        labelOffset: 10,
       ),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
@@ -268,7 +276,7 @@ final class FSliderStyles with Diagnosticable {
           tickColor: colorScheme.mutedForeground,
           labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
           labelAnchor: Alignment.centerRight,
-          labelOffset: -7.5,
+          labelOffset: -10,
         ),
       ),
       disabledHorizontalStyle: disabledHorizontalStyle,
@@ -277,7 +285,7 @@ final class FSliderStyles with Diagnosticable {
           tickColor: colorScheme.mutedForeground,
           labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
           labelAnchor: Alignment.centerRight,
-          labelOffset: -7.5,
+          labelOffset: -10,
         ),
       ),
       errorHorizontalStyle: errorHorizontalStyle,
@@ -286,7 +294,7 @@ final class FSliderStyles with Diagnosticable {
           tickColor: colorScheme.mutedForeground,
           labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
           labelAnchor: Alignment.centerRight,
-          labelOffset: -7.5,
+          labelOffset: -10,
         ),
       ),
     );

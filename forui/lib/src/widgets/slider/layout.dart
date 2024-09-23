@@ -212,7 +212,10 @@ class _RenderSlider extends RenderBox
     final thumb = _style.thumbStyle.size;
     final trackMainAxis = (extent - thumb) * offset;
     final anchorMainAxis = (thumb / 2) + trackMainAxis;
-    final anchorCrossAxis = markStyle.labelOffset + (markStyle.labelOffset < 0 ? 0.0 : _style.crossAxisExtent * 2);
+
+    final adjustment = _style.crossAxisExtent < thumb ? (thumb - _style.crossAxisExtent) / 2 : 0;
+    final crossAxisOffset = (markStyle.labelOffset < 0 ? 0.0 : _style.crossAxisExtent + adjustment);
+    final anchorCrossAxis = markStyle.labelOffset + crossAxisOffset;
 
     return (anchorMainAxis, anchorCrossAxis);
   }
@@ -223,7 +226,15 @@ class _RenderSlider extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
+  void paint(PaintingContext context, Offset offset) {
+    // We paint the labels first, then the track so that the thumb is painted on top of the labels.
+    var child = lastChild;
+    while (child != null) {
+      final childParentData = child.parentData! as _Data;
+      context.paintChild(child, childParentData.offset + offset);
+      child = childParentData.previousSibling;
+    }
+  }
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>

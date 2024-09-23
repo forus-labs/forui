@@ -17,6 +17,7 @@ final class InheritedData extends InheritedWidget {
   final FSliderStyle style;
   final Layout layout;
   final List<FSliderMark> marks;
+  final double? trackHitRegionCrossExtent;
   final Widget Function(FTooltipStyle, double) tooltipBuilder;
   final String Function(FSliderSelection) semanticFormatterCallback;
   final String Function(double) semanticValueFormatterCallback;
@@ -26,6 +27,7 @@ final class InheritedData extends InheritedWidget {
     required this.style,
     required this.layout,
     required this.marks,
+    required this.trackHitRegionCrossExtent,
     required this.tooltipBuilder,
     required this.semanticFormatterCallback,
     required this.semanticValueFormatterCallback,
@@ -39,6 +41,7 @@ final class InheritedData extends InheritedWidget {
       style != old.style ||
       layout != old.layout ||
       !marks.equals(marks) ||
+      trackHitRegionCrossExtent != old.trackHitRegionCrossExtent ||
       tooltipBuilder != old.tooltipBuilder ||
       semanticFormatterCallback != old.semanticFormatterCallback ||
       semanticValueFormatterCallback != old.semanticValueFormatterCallback ||
@@ -51,6 +54,7 @@ final class InheritedData extends InheritedWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
+      ..add(DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticValueFormatterCallback))

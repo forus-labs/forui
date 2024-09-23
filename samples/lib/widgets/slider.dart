@@ -23,7 +23,7 @@ class SliderPage extends SampleScaffold {
           'tap' => FSliderInteraction.tap,
           _ => FSliderInteraction.tapAndSlideThumb,
         },
-        extent = bool.tryParse(extent) ?? false ? (min: 0, max: 1) : (min: 0.25, max: 0.75);
+        extent = bool.tryParse(extent) ?? false ?  (min: 0.25, max: 0.75) : (min: 0, max: 1);
 
   @override
   Widget child(BuildContext context) => FSlider(
