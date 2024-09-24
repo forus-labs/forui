@@ -161,7 +161,10 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabel,
               unselectedLabelStyle: style.unselectedLabel,
-              onTap: (index) => widget.onPress?.call(index),
+              onTap: (index) {
+                setState(() {});
+                widget.onPress?.call(index);
+              },
             ),
           ),
           SizedBox(height: style.spacing),

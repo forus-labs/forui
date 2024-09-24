@@ -1,3 +1,11 @@
+## 0.5.1
+
+###
+
+* Fix `FTabs` not showing correct tab entry when switching tabs. 
+ [Issue #203](https://github.com/forus-labs/forui/issues/203).
+
+
 ## 0.5.0
 
 The minimum Flutter version has been increased from `3.19.0` to `3.24.0`.

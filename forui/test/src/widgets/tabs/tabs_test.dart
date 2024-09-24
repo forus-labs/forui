@@ -79,5 +79,79 @@ void main() {
 
       expect(tester.takeException(), null);
     });
+
+    testWidgets('tap on current entry', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: TestScaffold(
+            data: FThemes.zinc.light,
+            child: FTabs(
+              tabs: const [
+                FTabEntry(label: Text('foo'), content: Text('foo content')),
+                FTabEntry(label: Text('bar'), content: Text('bar content')),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+
+      await tester.tap(find.text('foo'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+    });
+
+    testWidgets('using internal controller and tapping on tab switches tab entry', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: TestScaffold(
+            data: FThemes.zinc.light,
+            child: FTabs(
+              tabs: const [
+                FTabEntry(label: Text('foo'), content: Text('foo content')),
+                FTabEntry(label: Text('bar'), content: Text('bar content')),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('bar content'), findsNothing);
+
+      await tester.tap(find.text('bar'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('bar content'), findsOneWidget);
+    });
+
+    testWidgets('using external controller and tapping on tab switches tab entry', (tester) async {
+      final controller = FTabController(length: 2, vsync: tester);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: TestScaffold(
+            data: FThemes.zinc.light,
+            child: FTabs(
+              controller: controller,
+              tabs: const [
+                FTabEntry(label: Text('foo'), content: Text('foo content')),
+                FTabEntry(label: Text('bar'), content: Text('bar content')),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('bar content'), findsNothing);
+
+      await tester.tap(find.text('bar'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('bar content'), findsOneWidget);
+    });
   });
 }
