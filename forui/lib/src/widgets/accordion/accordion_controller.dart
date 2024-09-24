@@ -16,7 +16,7 @@ abstract base class FAccordionController extends ChangeNotifier {
 
   /// Creates a base [FAccordionController].
   ///
-  /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum or maximum.
+  /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum and maximum.
   ///
   /// # Contract:
   /// * Throws [AssertionError] if [min] < 0.

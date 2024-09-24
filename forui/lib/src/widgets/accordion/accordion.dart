@@ -57,9 +57,7 @@ class _FAccordionState extends State<FAccordion> {
     super.initState();
     _controller = widget.controller ?? FRadioAccordionController();
 
-    final expandedLength = widget.items.where((item) => item.initiallyExpanded).length;
-
-    if (!_controller.validate(expandedLength)) {
+    if (!_controller.validate(widget.items.where((item) => item.initiallyExpanded).length)) {
       throw StateError('number of expanded items must be within the min and max.');
     }
   }

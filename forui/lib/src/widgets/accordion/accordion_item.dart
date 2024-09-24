@@ -11,12 +11,7 @@ import 'package:forui/src/foundation/util.dart';
 
 @internal
 
-/// An item that represents a header in a [FAccordion].
 class FAccordionItemData extends InheritedWidget {
-  /// Returns the [FAccordionItemData] of the [FAccordionItem] in the given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FAccordionItem] in the given [context].
   @useResult
   static FAccordionItemData of(BuildContext context) {
     final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
@@ -24,13 +19,10 @@ class FAccordionItemData extends InheritedWidget {
     return data!;
   }
 
-  /// The item's index.
   final int index;
 
-  /// The accordion's controller.
   final FAccordionController controller;
 
-  /// Creates an [FAccordionItemData].
   const FAccordionItemData({
     required this.index,
     required this.controller,
@@ -61,7 +53,7 @@ class FAccordionItem extends StatefulWidget {
   /// The title.
   final Widget title;
 
-  /// Whether the item is initially expanded.
+  /// True if the item is initially expanded.
   final bool initiallyExpanded;
 
   /// The child.
@@ -100,8 +92,7 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
     super.didChangeDependencies();
     final data = FAccordionItemData.of(context);
 
-    final removed = data.controller.removeItem(data.index);
-    if (removed) {
+    if (data.controller.removeItem(data.index)) {
       _controller.dispose();
     }
 
