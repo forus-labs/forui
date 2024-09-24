@@ -170,7 +170,7 @@ final class FRadioAccordionController extends FAccordionController {
 
     _expanded.add(index);
 
-    final future = controllers[index]?.controller?.forward();
+    final future = controllers[index]?.controller.forward();
     if (future != null) {
       futures.add(future);
     }
