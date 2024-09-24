@@ -19,7 +19,7 @@ void main() {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
-                  items: [
+                  children: [
                     FAccordionItem(
                       title: Text('Title'),
                       initiallyExpanded: true,
@@ -50,7 +50,7 @@ void main() {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FAccordion(
-                  items: [
+                  children: [
                     FAccordionItem(
                       title: Text('Title'),
                       initiallyExpanded: true,

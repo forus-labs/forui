@@ -18,7 +18,7 @@ void main() {
           home: TestScaffold(
             data: FThemes.zinc.light,
             child: FAccordion(
-              items: [
+              children: [
                 FAccordionItem(
                   title: const Text('Title'),
                   initiallyExpanded: true,

@@ -9,39 +9,6 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 
-@internal
-
-class FAccordionItemData extends InheritedWidget {
-  @useResult
-  static FAccordionItemData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
-    assert(data != null, 'No FAccordionData found in context');
-    return data!;
-  }
-
-  final int index;
-
-  final FAccordionController controller;
-
-  const FAccordionItemData({
-    required this.index,
-    required this.controller,
-    required super.child,
-    super.key,
-  });
-
-  @override
-  bool updateShouldNotify(covariant FAccordionItemData old) => index != old.index || controller != old.controller;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(IntProperty('index', index))
-      ..add(DiagnosticsProperty('controller', controller));
-  }
-}
-
 /// An interactive heading that reveals a section of content.
 ///
 /// See:
@@ -110,14 +77,12 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
         parent: _controller,
       ),
     );
-
     data.controller.addItem(data.index, _controller, _expand, widget.initiallyExpanded);
   }
 
   @override
   Widget build(BuildContext context) {
     final FAccordionItemData(:index, :controller) = FAccordionItemData.of(context);
-
     final style = widget.style ?? context.theme.accordionStyle;
     return AnimatedBuilder(
       animation: _expand,
@@ -166,7 +131,7 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
               //TODO: Should I be getting the percentage value from the controller or from its local state?
               clipper: _Clipper(percentage: _expand.value / 100),
               child: Padding(
-                padding: style.contentPadding,
+                padding: style.childPadding,
                 child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
               ),
             ),
@@ -177,6 +142,11 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
         ],
       ),
     );
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
 

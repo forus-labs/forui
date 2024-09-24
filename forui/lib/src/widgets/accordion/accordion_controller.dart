@@ -38,7 +38,7 @@ abstract base class FAccordionController extends ChangeNotifier {
   // ignore: avoid_positional_boolean_parameters
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded);
 
-  /// Removes an item from the accordion.
+  /// Removes an item from the accordion. Returns true if the item was removed.
   bool removeItem(int index);
 
   /// Convenience method for toggling the current expanded status.
@@ -56,8 +56,11 @@ abstract base class FAccordionController extends ChangeNotifier {
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> collapse(int index);
 
-  /// Validate if the number of expanded items is within the min and max.
+  /// Returns true if the number of expanded items is within the allowed range.
   bool validate(int length);
+
+  /// The currently selected values.
+  Set<int> get expanded => {..._expanded};
 }
 
 final class _MultiSelectAccordionController extends FAccordionController {
@@ -70,7 +73,10 @@ final class _MultiSelectAccordionController extends FAccordionController {
   @override
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
     controllers[index] = (controller: controller, animation: animation);
-    if (initiallyExpanded && validate(_expanded.length)) {
+    if (initiallyExpanded) {
+      if (_max != null && _expanded.length >= _max) {
+        return;
+      }
       _expanded.add(index);
     }
   }
@@ -88,27 +94,23 @@ final class _MultiSelectAccordionController extends FAccordionController {
 
   @override
   Future<void> expand(int index) async {
-    if (_max != null && _expanded.length >= _max) {
+    if ((_max != null && _expanded.length >= _max) || _expanded.contains(index)) {
       return;
     }
-
     _expanded.add(index);
-
-    final controller = controllers[index]?.controller;
-    await controller?.forward();
+    await controllers[index]?.controller.forward();
     notifyListeners();
   }
 
   @override
   Future<void> collapse(int index) async {
-    if (_expanded.length <= _min) {
+    if (_expanded.length <= _min || !_expanded.contains(index)) {
       return;
     }
 
     _expanded.remove(index);
 
-    final controller = controllers[index]?.controller;
-    await controller?.reverse();
+    await controllers[index]?.controller.reverse();
     notifyListeners();
   }
 
@@ -129,7 +131,10 @@ final class FRadioAccordionController extends FAccordionController {
   void addItem(int index, AnimationController controller, Animation animation, bool initiallyExpanded) {
     controllers[index] = (controller: controller, animation: animation);
 
-    if (initiallyExpanded && validate(_expanded.length)) {
+    if (initiallyExpanded) {
+      if (_max != null && _expanded.length >= _max) {
+        return;
+      }
       _expanded.add(index);
     }
   }
@@ -147,37 +152,41 @@ final class FRadioAccordionController extends FAccordionController {
 
   @override
   Future<void> collapse(int index) async {
-    if (_expanded.length <= _min) {
-      return;
-    }
-
-    _expanded.remove(index);
-
-    final controller = controllers[index]?.controller;
-    await controller?.reverse();
+    await _collapse(index);
     notifyListeners();
   }
 
   @override
   Future<void> expand(int index) async {
-    final expand = <Future<void>>[];
+    final futures = <Future<void>>[];
 
     if (_expanded.length > _min && _max != null && _expanded.length >= _max) {
       if (_expanded.contains(index)) {
         return;
       }
-      expand.add(collapse(_expanded.first));
+
+      futures.add(_collapse(_expanded.first));
     }
 
     _expanded.add(index);
 
-    final controller = controllers[index]?.controller;
-    if (controller != null) {
-      expand.add(controller.forward());
+    final future = controllers[index]?.controller?.forward();
+    if (future != null) {
+      futures.add(future);
     }
-    await Future.wait(expand);
+    await Future.wait(futures);
 
     notifyListeners();
+  }
+
+  Future<void> _collapse(int index) async {
+    if (_expanded.length <= _min || !_expanded.contains(index)) {
+      return;
+    }
+
+    _expanded.remove(index);
+
+    await controllers[index]?.controller.reverse();
   }
 
   @override

@@ -23,7 +23,8 @@ class _SandboxState extends State<Sandbox> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAccordion(
-            items: [
+            controller: FRadioAccordionController(min: 1, max: 3),
+            children: [
               const FAccordionItem(
                 title: Text('Title 1'),
                 initiallyExpanded: true,

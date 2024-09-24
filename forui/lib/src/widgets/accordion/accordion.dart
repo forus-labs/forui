@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/accordion/accordion_item.dart';
 
 /// A vertically stacked set of interactive headings that each reveal a section of content.
 ///
@@ -13,24 +12,25 @@ import 'package:forui/src/widgets/accordion/accordion_item.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/FAccordion for working examples.
+/// * [FAccordionController] for customizing the accordion's selection behavior.
 /// * [FAccordionStyle] for customizing a select group's appearance.
 class FAccordion extends StatefulWidget {
   /// The controller.
   ///
   /// See:
-  /// * [FRadioAccordionController] for a single radio like selection.
+  /// * [FRadioAccordionController] for a radio-like selection.
   /// * [FAccordionController] for default multiple selections.
   final FAccordionController? controller;
 
   /// The items.
-  final List<FAccordionItem> items;
+  final List<FAccordionItem> children;
 
   /// The style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
 
   /// Creates a [FAccordion].
   const FAccordion({
-    required this.items,
+    required this.children,
     this.controller,
     this.style,
     super.key,
@@ -45,7 +45,7 @@ class FAccordion extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(IterableProperty('items', items));
+      ..add(IterableProperty('items', children));
   }
 }
 
@@ -55,9 +55,9 @@ class _FAccordionState extends State<FAccordion> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FRadioAccordionController();
+    _controller = widget.controller ?? FAccordionController();
 
-    if (!_controller.validate(widget.items.where((item) => item.initiallyExpanded).length)) {
+    if (!_controller.validate(widget.children.where((child) => child.initiallyExpanded).length)) {
       throw StateError('number of expanded items must be within the min and max.');
     }
   }
@@ -67,10 +67,9 @@ class _FAccordionState extends State<FAccordion> {
     super.didUpdateWidget(oldWidget);
 
     if (widget.controller != oldWidget.controller) {
-      _controller = widget.controller ?? FRadioAccordionController();
-      final expandedLength = widget.items.where((item) => item.initiallyExpanded).length;
+      _controller = widget.controller ?? FAccordionController();
 
-      if (!_controller.validate(expandedLength)) {
+      if (!_controller.validate(widget.children.where((child) => child.initiallyExpanded).length)) {
         throw StateError('number of expanded items must be within the min and max.');
       }
     }
@@ -79,11 +78,11 @@ class _FAccordionState extends State<FAccordion> {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          for (final (index, widget) in widget.items.indexed)
+          for (final (index, child) in widget.children.indexed)
             FAccordionItemData(
               index: index,
               controller: _controller,
-              child: widget,
+              child: child,
             ),
         ],
       );
@@ -97,11 +96,11 @@ final class FAccordionStyle with Diagnosticable {
   /// The child's default text style.
   final TextStyle childTextStyle;
 
-  /// The padding of the title.
+  /// The padding around the title.
   final EdgeInsets titlePadding;
 
-  /// The padding of the content.
-  final EdgeInsets contentPadding;
+  /// The padding around the content.
+  final EdgeInsets childPadding;
 
   /// The icon.
   final SvgPicture icon;
@@ -114,7 +113,7 @@ final class FAccordionStyle with Diagnosticable {
     required this.titleTextStyle,
     required this.childTextStyle,
     required this.titlePadding,
-    required this.contentPadding,
+    required this.childPadding,
     required this.icon,
     required this.dividerColor,
   });
@@ -129,7 +128,7 @@ final class FAccordionStyle with Diagnosticable {
           color: colorScheme.foreground,
         ),
         titlePadding = const EdgeInsets.symmetric(vertical: 15),
-        contentPadding = const EdgeInsets.only(bottom: 15),
+        childPadding = const EdgeInsets.only(bottom: 15),
         icon = FAssets.icons.chevronRight(
           height: 20,
           colorFilter: ColorFilter.mode(colorScheme.primary, BlendMode.srcIn),
@@ -142,7 +141,7 @@ final class FAccordionStyle with Diagnosticable {
     TextStyle? titleTextStyle,
     TextStyle? childTextStyle,
     EdgeInsets? titlePadding,
-    EdgeInsets? contentPadding,
+    EdgeInsets? childPadding,
     SvgPicture? icon,
     Color? dividerColor,
   }) =>
@@ -150,7 +149,7 @@ final class FAccordionStyle with Diagnosticable {
         titleTextStyle: titleTextStyle ?? this.titleTextStyle,
         childTextStyle: childTextStyle ?? this.childTextStyle,
         titlePadding: titlePadding ?? this.titlePadding,
-        contentPadding: contentPadding ?? this.contentPadding,
+        childPadding: childPadding ?? this.childPadding,
         icon: icon ?? this.icon,
         dividerColor: dividerColor ?? this.dividerColor,
       );
@@ -162,7 +161,7 @@ final class FAccordionStyle with Diagnosticable {
       ..add(DiagnosticsProperty('title', titleTextStyle))
       ..add(DiagnosticsProperty('childTextStyle', childTextStyle))
       ..add(DiagnosticsProperty('padding', titlePadding))
-      ..add(DiagnosticsProperty('contentPadding', contentPadding))
+      ..add(DiagnosticsProperty('contentPadding', childPadding))
       ..add(ColorProperty('dividerColor', dividerColor));
   }
 
@@ -174,7 +173,7 @@ final class FAccordionStyle with Diagnosticable {
           titleTextStyle == other.titleTextStyle &&
           childTextStyle == other.childTextStyle &&
           titlePadding == other.titlePadding &&
-          contentPadding == other.contentPadding &&
+          childPadding == other.childPadding &&
           icon == other.icon &&
           dividerColor == other.dividerColor;
 
@@ -183,7 +182,39 @@ final class FAccordionStyle with Diagnosticable {
       titleTextStyle.hashCode ^
       childTextStyle.hashCode ^
       titlePadding.hashCode ^
-      contentPadding.hashCode ^
+      childPadding.hashCode ^
       icon.hashCode ^
       dividerColor.hashCode;
+}
+
+@internal
+class FAccordionItemData extends InheritedWidget {
+  @useResult
+  static FAccordionItemData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
+    assert(data != null, 'No FAccordionData found in context');
+    return data!;
+  }
+
+  final int index;
+
+  final FAccordionController controller;
+
+  const FAccordionItemData({
+    required this.index,
+    required this.controller,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(covariant FAccordionItemData old) => index != old.index || controller != old.controller;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('index', index))
+      ..add(DiagnosticsProperty('controller', controller));
+  }
 }
