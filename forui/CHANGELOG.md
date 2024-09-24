@@ -3,6 +3,8 @@
 ### Additions
 * Add `FSlider`
 
+* Add `FBottomNavigationBarItem.custom(...)`.
+
 * Add `FButtonCustomStyle.enabledHoverBoxDecoration`.
 
 * Add `FTextField.contentInsertionConfiguration`.
@@ -13,9 +15,13 @@
 
 ### Changes
 
+* Change button to change color when hovering over it.
+
 * Change `FCalendar` year  picker to update the header whenever a year is selected.
 
 * Increase `FCalendar`'s default text size from `FTypography.sm` to `FTypography.base`.
+
+* **Breaking** Change `FBottomNavigationBarItem.label` from `String` to `Widget`.
 
 * **Breaking** Split `FCalendarHeaderStyle.iconColor` into `FCalendarHeaderStyle.enabledIconColor` and
   `FCalendarHeaderStyle.disabledIconColor`.
@@ -39,11 +45,6 @@
 * Fix `FTextfield` description text's odd transition animation whenever an error occurs.
 
 * Fix `FSwitch` not using correct label style.
-
-
-### Changes
-
-* Change button to change color when hovering over it.
 
 
 ## 0.5.1

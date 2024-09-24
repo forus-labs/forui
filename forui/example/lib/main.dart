@@ -49,23 +49,23 @@ class _ApplicationState extends State<Application> {
             children: [
               FBottomNavigationBarItem(
                 icon: FAssets.icons.home,
-                label: 'Home',
+                label: const Text('Home'),
               ),
               FBottomNavigationBarItem(
                 icon: FAssets.icons.layoutGrid,
-                label: 'Categories',
+                label: const Text('Categories'),
               ),
               FBottomNavigationBarItem(
                 icon: FAssets.icons.search,
-                label: 'Search',
+                label: const Text('Search'),
               ),
               FBottomNavigationBarItem(
                 icon: FAssets.icons.settings,
-                label: 'Settings',
+                label: const Text('Settings'),
               ),
               FBottomNavigationBarItem(
                 icon: FAssets.icons.castle,
-                label: 'Sandbox',
+                label: const Text('Sandbox'),
               ),
             ],
           ),
