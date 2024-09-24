@@ -8,6 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/thumb.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 @internal
 class Track extends StatelessWidget {
@@ -15,7 +16,7 @@ class Track extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout) = InheritedData.of(context);
+    final InheritedData(:style, :layout, :semanticFormatterCallback) = InheritedData.of(context);
     final controller = InheritedController.of(context);
     final position = layout.position;
 
@@ -25,21 +26,27 @@ class Track extends StatelessWidget {
     return SizedBox(
       height: height,
       width: width,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          const _GestureDetector(),
-          if (controller.extendable.min)
-            position(
-              offset: controller.selection.offset.min * controller.selection.rawExtent.total,
-              child: const Thumb(min: true),
-            ),
-          if (controller.extendable.max)
-            position(
-              offset: controller.selection.offset.max * controller.selection.rawExtent.total,
-              child: const Thumb(min: false),
-            ),
-        ],
+      child: Semantics(
+        container: true,
+        slider: true,
+        enabled: true,
+        value: semanticFormatterCallback(controller.selection),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            const _GestureDetector(),
+            if (controller.extendable.min)
+              position(
+                offset: controller.selection.offset.min * controller.selection.rawExtent.total,
+                child: const Thumb(min: true),
+              ),
+            if (controller.extendable.max)
+              position(
+                offset: controller.selection.offset.max * controller.selection.rawExtent.total,
+                child: const Thumb(min: false),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -60,27 +67,25 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
   @override
   Widget build(BuildContext context) {
-    final data = InheritedData.of(context);
-    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled, :semanticFormatterCallback,) = data;
+    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = InheritedData.of(context);
     final controller = InheritedController.of(context);
 
-    final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbStyle.size, style.crossAxisExtent);
-    final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
-
-    final track = Semantics(
-      slider: true,
-      enabled: enabled,
-      value: semanticFormatterCallback(controller.selection),
-      child: Container(
-        height: height,
-        width: width,
-        color: const Color(0x00000000),
-        child: const Center(child: _Track()),
-      ),
-    );
+    Widget track = const Center(child: _Track());
 
     if (!enabled) {
       return track;
+    }
+
+    if (Touch.primary || trackHitRegionCrossExtent != null) {
+      final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbStyle.size, style.crossAxisExtent);
+      final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
+
+      track = Container(
+        height: height,
+        width: width,
+        color: const Color(0x00000000),
+        child: track,
+      );
     }
 
     void start(DragStartDetails details) {

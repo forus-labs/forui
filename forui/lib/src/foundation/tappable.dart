@@ -1,13 +1,36 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/gestures.dart';
 
 import 'package:meta/meta.dart';
 
-// TODO: Remove redundant comment when flutter fixes its lint issue.
-///
 @internal
-typedef FTappableState = ({bool focused, bool hovered, bool longPressed});
+extension Touch on Never {
+  /// The platforms that uses touch as the primary input. It isn't 100% accurate as there are hybrid devices that uses
+  /// both touch and keyboard/mouse input, i.e. Windows Surface laptops.
+  static const platforms = {TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.fuchsia};
+
+  static bool? _primary;
+
+  /// True if the current platform uses touch as the primary input.
+  static bool get primary => _primary ?? platforms.contains(defaultTargetPlatform);
+
+  @visibleForTesting
+  static set primary(bool? value) {
+    if (!kDebugMode) {
+      throw UnsupportedError('Setting Touch.primary is only available in debug mode.');
+    }
+
+    _primary = value;
+  }
+}
+
+/// The [FTappableState]'s current state.
+///
+/// Short pressed is fired 200 ms after a tap is first detected. This is faster than long press's [kLongPressTimeout].
+@internal
+typedef FTappableState = ({bool focused, bool hovered, bool shortPressed});
 
 @internal
 class FTappable extends StatefulWidget {
@@ -89,7 +112,7 @@ class _FTappableState extends State<FTappable> {
   int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
-  bool _longPressed = false;
+  bool _shortPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -119,13 +142,13 @@ class _FTappableState extends State<FTappable> {
               final count = ++_monotonic;
               await Future.delayed(const Duration(milliseconds: 200));
               if (count == _monotonic) {
-                setState(() => _longPressed = true);
+                setState(() => _shortPressed = true);
               }
             },
             onPointerUp: (_) {
               _monotonic++;
-              if (_longPressed) {
-                setState(() => _longPressed = false);
+              if (_shortPressed) {
+                setState(() => _shortPressed = false);
               }
             },
             child: _child,
@@ -155,7 +178,7 @@ class _FTappableState extends State<FTappable> {
         behavior: widget.behavior,
         onTap: widget.onPress,
         onLongPress: widget.onLongPress,
-        child: widget.builder(context, (focused: _focused, hovered: _hovered, longPressed: _longPressed), widget.child),
+        child: widget.builder(context, (focused: _focused, hovered: _hovered, shortPressed: _shortPressed), widget.child),
       );
 }
 
@@ -208,7 +231,7 @@ class _AnimatedTappableState extends _FTappableState with SingleTickerProviderSt
                 },
           onLongPress: widget.onLongPress,
           child:
-              widget.builder(context, (focused: _focused, hovered: _hovered, longPressed: _longPressed), widget.child),
+              widget.builder(context, (focused: _focused, hovered: _hovered, shortPressed: _shortPressed), widget.child),
         ),
       );
 

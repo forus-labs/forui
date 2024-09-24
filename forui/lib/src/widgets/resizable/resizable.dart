@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/platform.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
@@ -85,7 +85,7 @@ class FResizable extends StatefulWidget {
           'The hitRegionExtent should be positive, but is $hitRegionExtent.',
         ),
         controller = controller ?? FResizableController.cascade(),
-        hitRegionExtent = hitRegionExtent ?? (touchPlatforms.contains(defaultTargetPlatform) ? 60 : 10);
+        hitRegionExtent = hitRegionExtent ?? (Touch.primary ? 60 : 10);
 
   @override
   State<StatefulWidget> createState() => _FResizableState();

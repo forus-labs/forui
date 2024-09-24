@@ -44,7 +44,9 @@ class FSlider extends FormField<FSliderSelection> {
 
   /// The extent of the track's hit region in the cross-axis direction.
   ///
-  /// Defaults to the either the tracker the thumb's cross extent , whichever is larger.
+  /// Defaults to
+  /// * either the tracker the thumb's cross extent, whichever is larger, on primarily touch devices.
+  /// * 0 on non-primarily touch devices.
   final double? trackHitRegionCrossExtent;
 
   /// A builder that creates the tooltip. Defaults to printing the current percentage.
@@ -226,7 +228,7 @@ final class FSliderStyles with Diagnosticable {
       inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
         tickColor: colorScheme.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
@@ -242,7 +244,7 @@ final class FSliderStyles with Diagnosticable {
       inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
         tickColor: colorScheme.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
@@ -274,7 +276,7 @@ final class FSliderStyles with Diagnosticable {
       enabledVerticalStyle: enabledHorizontalStyle.copyWith(
         markStyle: FSliderMarkStyle(
           tickColor: colorScheme.mutedForeground,
-          labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
+          labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
           labelAnchor: Alignment.centerRight,
           labelOffset: -10,
         ),
@@ -283,7 +285,7 @@ final class FSliderStyles with Diagnosticable {
       disabledVerticalStyle: disabledHorizontalStyle.copyWith(
         markStyle: FSliderMarkStyle(
           tickColor: colorScheme.mutedForeground,
-          labelTextStyle: typography.xs.copyWith(color: colorScheme.primary.withOpacity(0.7)),
+          labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
           labelAnchor: Alignment.centerRight,
           labelOffset: -10,
         ),
@@ -292,7 +294,7 @@ final class FSliderStyles with Diagnosticable {
       errorVerticalStyle: errorHorizontalStyle.copyWith(
         markStyle: FSliderMarkStyle(
           tickColor: colorScheme.mutedForeground,
-          labelTextStyle: typography.xs.copyWith(color: colorScheme.primary),
+          labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
           labelAnchor: Alignment.centerRight,
           labelOffset: -10,
         ),

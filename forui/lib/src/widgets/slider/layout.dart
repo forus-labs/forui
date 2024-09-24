@@ -79,19 +79,28 @@ class _SliderLayoutState extends State<SliderLayout> {
         controller: widget.controller,
         child: child!,
       ),
-      child: _Slider(
-        style: widget.style,
-        layout: widget.layout,
-        marks: marks,
-        children: [
-          const Track(),
-          for (final mark in marks)
-            if (mark case FSliderMark(:final style, :final label?))
-              DefaultTextStyle(
-                style: (style ?? markStyle).labelTextStyle,
-                child: label,
-              ),
-        ],
+      child: FLabel(
+        axis: Axis.vertical,
+        // state: FLabelState.error,
+        label: const Text('Volume'),
+        description: const Text('Change the volume of the ambient music.'),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 0.0),
+          child: _Slider(
+            style: widget.style,
+            layout: widget.layout,
+            marks: marks,
+            children: [
+              const Track(),
+              for (final mark in marks)
+                if (mark case FSliderMark(:final style, :final label?))
+                  DefaultTextStyle(
+                    style: (style ?? markStyle).labelTextStyle,
+                    child: label,
+                  ),
+            ],
+          ),
+        ),
       ),
     );
   }

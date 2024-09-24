@@ -112,7 +112,7 @@ final class FLabel extends StatelessWidget {
           error: error,
           state: state,
           child: child,
-        )
+        ),
     };
   }
 

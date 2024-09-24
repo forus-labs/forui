@@ -243,7 +243,7 @@ final class FSliderThumbStyle with Diagnosticable {
   FSliderThumbStyle({
     required this.color,
     required this.borderColor,
-    this.size = 30,
+    this.size = 25,
     this.borderWidth = 2,
   })  : assert(0 < size, 'The diameter must be positive'),
         assert(0 < borderWidth, 'The border width must be positive');
