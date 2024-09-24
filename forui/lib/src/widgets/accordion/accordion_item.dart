@@ -9,6 +9,38 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 
+@internal
+class FAccordionItemData extends InheritedWidget {
+  @useResult
+  static FAccordionItemData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
+    assert(data != null, 'No FAccordionData found in context');
+    return data!;
+  }
+
+  final int index;
+
+  final FAccordionController controller;
+
+  const FAccordionItemData({
+    required this.index,
+    required this.controller,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(covariant FAccordionItemData old) => index != old.index || controller != old.controller;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('index', index))
+      ..add(DiagnosticsProperty('controller', controller));
+  }
+}
+
 /// An interactive heading that reveals a section of content.
 ///
 /// See:
