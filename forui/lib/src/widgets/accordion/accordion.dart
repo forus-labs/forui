@@ -18,8 +18,8 @@ class FAccordion extends StatefulWidget {
   /// The controller.
   ///
   /// See:
-  /// * [FRadioAccordionController] for a radio-like selection.
   /// * [FAccordionController] for default multiple selections.
+  /// * [FAccordionController.radio] for a radio-like selection.
   final FAccordionController? controller;
 
   /// The items.
@@ -50,7 +50,7 @@ class FAccordion extends StatefulWidget {
 }
 
 class _FAccordionState extends State<FAccordion> {
-  late final FAccordionController _controller;
+  late FAccordionController _controller;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _FAccordionState extends State<FAccordion> {
     _controller = widget.controller ?? FAccordionController();
 
     if (!_controller.validate(widget.children.where((child) => child.initiallyExpanded).length)) {
-      throw StateError('number of expanded items must be within the min and max.');
+      throw StateError('number of expanded items must be within the allowed range.');
     }
   }
 

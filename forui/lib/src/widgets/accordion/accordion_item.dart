@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
+import 'package:forui/src/widgets/accordion/accordion.dart';
 
 @internal
 class FAccordionItemData extends InheritedWidget {
@@ -80,9 +81,8 @@ class FAccordionItem extends StatefulWidget {
 }
 
 class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  late final AnimationController _controller;
   late Animation<double> _expand;
-  bool _hovered = false;
 
   @override
   void didChangeDependencies() {
@@ -107,7 +107,7 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
         parent: _controller,
       ),
     );
-    data.controller.addItem(data.index, _controller, _expand, widget.initiallyExpanded);
+    data.controller.addItem(data.index, _controller, _expand, initiallyExpanded: widget.initiallyExpanded);
   }
 
   @override
@@ -120,45 +120,40 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           FTappable(
+            behavior: HitTestBehavior.translucent,
             onPress: () => controller.toggle(index),
-            child: MouseRegion(
-              onEnter: (_) => setState(() => _hovered = true),
-              onExit: (_) => setState(() => _hovered = false),
-              child: Container(
-                padding: style.titlePadding,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: merge(
-                        // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-                        textHeightBehavior: const TextHeightBehavior(
-                          applyHeightToFirstAscent: false,
-                          applyHeightToLastDescent: false,
-                        ),
-                        style: style.titleTextStyle
-                            .copyWith(decoration: _hovered ? TextDecoration.underline : TextDecoration.none),
-                        child: widget.title,
+            builder: (context, state, child) => Container(
+              padding: style.titlePadding,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: merge(
+                      // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+                      textHeightBehavior: const TextHeightBehavior(
+                        applyHeightToFirstAscent: false,
+                        applyHeightToLastDescent: false,
                       ),
+                      style: style.titleTextStyle.copyWith(
+                        decoration: state.hovered || state.longPressed ? TextDecoration.underline : TextDecoration.none,
+                      ),
+                      child: widget.title,
                     ),
-                    Transform.rotate(
-                      //TODO: Should I be getting the percentage value from the controller or from its local state?
-                      angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0,
-
-                      child: style.icon,
-                    ),
-                  ],
-                ),
+                  ),
+                  child!,
+                ],
               ),
+            ),
+            child: Transform.rotate(
+              angle: (_expand.value / 100 * -180 + 90) * math.pi / 180.0,
+              child: style.icon,
             ),
           ),
           // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
           // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
           // child to layout at a smaller size while the amount of padding remains the same.
           _Expandable(
-            //TODO: Should I be getting the percentage value from the controller or from its local state?
             percentage: _expand.value / 100,
             child: ClipRect(
-              //TODO: Should I be getting the percentage value from the controller or from its local state?
               clipper: _Clipper(percentage: _expand.value / 100),
               child: Padding(
                 padding: style.childPadding,

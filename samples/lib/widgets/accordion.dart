@@ -7,7 +7,7 @@ import 'package:forui_samples/sample_scaffold.dart';
 
 final controllers = {
   'default': FAccordionController(),
-  'radio': FRadioAccordionController(),
+  'radio': FAccordionController.radio(),
 };
 
 @RoutePage()
@@ -17,7 +17,7 @@ class AccordionPage extends SampleScaffold {
   AccordionPage({
     @queryParam super.theme,
     @queryParam String controller = 'default',
-  }) : controller = controllers[controller] ?? FRadioAccordionController();
+  }) : controller = controllers[controller] ?? FAccordionController();
 
   @override
   Widget child(BuildContext context) => Column(

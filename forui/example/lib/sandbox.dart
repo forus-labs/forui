@@ -20,10 +20,9 @@ class _SandboxState extends State<Sandbox> {
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAccordion(
-            controller: FRadioAccordionController(min: 1, max: 3),
+            controller: FAccordionController(max: 2),
             children: [
               const FAccordionItem(
                 title: Text('Title 1'),
