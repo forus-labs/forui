@@ -1,10 +1,10 @@
 import 'package:flutter/animation.dart';
-import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/forui.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:forui/forui.dart';
 import 'accordion_controller_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AnimationController>()])
@@ -201,7 +201,6 @@ void main() {
       expect(controller.removeItem(2), true);
 
       // removeItem() doesn't know if the total length of initialExpanded items is within the allowed range
-
     });
 
     test('toggle(...)', () async {
