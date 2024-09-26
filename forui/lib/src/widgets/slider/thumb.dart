@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 import 'package:meta/meta.dart';
 
@@ -224,7 +225,7 @@ final class FSliderThumbStyle with Diagnosticable {
   /// The thumb's color.
   final Color color;
 
-  /// The thumb's size, inclusive of [borderWidth]. Defaults to `20`.
+  /// The thumb's size, inclusive of [borderWidth]. Defaults to `25` on touch platforms and `20` on non-touch platforms.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [size] is not positive.
@@ -243,10 +244,11 @@ final class FSliderThumbStyle with Diagnosticable {
   FSliderThumbStyle({
     required this.color,
     required this.borderColor,
-    this.size = 25,
+    double? size,
     this.borderWidth = 2,
-  })  : assert(0 < size, 'The diameter must be positive'),
-        assert(0 < borderWidth, 'The border width must be positive');
+  })  : assert(size == null || 0 < size, 'The diameter must be positive'),
+        assert(0 < borderWidth, 'The border width must be positive'),
+        size = size ?? (Touch.primary ? 25 : 20);
 
   /// Returns a copy of this [FSliderThumbStyle] but with the given fields replaced with the new values.
   @useResult

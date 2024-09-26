@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 import 'package:meta/meta.dart';
 
@@ -381,10 +382,16 @@ final class FSliderStyle with Diagnosticable {
   /// The tooltip's style.
   final FTooltipStyle tooltipStyle;
 
-  //// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
+  /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned to.
+  ///
+  /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
+  /// devices.
   final Alignment tooltipTipAnchor;
 
-  /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned to.
+  ///
+  /// Defaults to [Alignment.topCenter] on primarily touch devices and [Alignment.centerRight] on non-primarily touch
+  /// devices.
   final Alignment tooltipThumbAnchor;
 
   /// Creates a [FSliderStyle].
@@ -394,11 +401,13 @@ final class FSliderStyle with Diagnosticable {
     required this.markStyle,
     required this.thumbStyle,
     required this.tooltipStyle,
-    this.tooltipTipAnchor = Alignment.bottomCenter,
-    this.tooltipThumbAnchor = Alignment.topCenter,
+    Alignment? tooltipTipAnchor,
+    Alignment? tooltipThumbAnchor,
     this.crossAxisExtent = 8,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
-  });
+  }):
+    tooltipTipAnchor = tooltipTipAnchor ?? (Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft),
+    tooltipThumbAnchor = tooltipThumbAnchor ?? (Touch.primary ? Alignment.topCenter : Alignment.centerRight);
 
   /// Returns a copy of this [FSliderStyle] but with the given fields replaced with the new values.
   @useResult

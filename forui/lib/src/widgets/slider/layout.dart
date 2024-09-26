@@ -41,29 +41,39 @@ class SliderLayout extends StatefulWidget {
       ..add(IterableProperty('marks', marks))
       ..add(DiagnosticsProperty('constraints', constraints));
   }
+
+  double get _mainAxisExtent {
+    final extent = layout.vertical ? constraints.maxHeight : constraints.maxWidth;
+    if (extent.isInfinite) {
+      throw FlutterError(
+        switch (layout.vertical) {
+          true => 'A horizontal FSlider was given an infinite width although it needs a finite width. To fix this, '
+              'consider placing FSlider in a SizedBox.',
+          false => 'A vertical FSlider was given an infinite height although it needs a finite height. To fix this, '
+              'consider placing FSlider in a SizedBox.',
+        },
+      );
+    }
+
+    return extent - style.thumbStyle.size;
+  }
 }
 
 class _SliderLayoutState extends State<SliderLayout> {
   @override
   void initState() {
     super.initState();
-    final mainAxisExtent = widget.layout.vertical ? widget.constraints.maxHeight : widget.constraints.maxWidth;
-    widget.controller.attach(mainAxisExtent - widget.style.thumbStyle.size, widget.marks);
+    widget.controller.attach(widget._mainAxisExtent, widget.marks);
   }
 
   @override
   void didUpdateWidget(covariant SliderLayout old) {
     super.didUpdateWidget(old);
-    final mainAxisExtent = (widget.layout.vertical ? widget.constraints.maxHeight : widget.constraints.maxWidth) -
-        widget.style.thumbStyle.size;
-    final oldMainAxisExtent =
-        (old.layout.vertical ? old.constraints.maxHeight : old.constraints.maxWidth) - old.style.thumbStyle.size;
-
     if (widget.controller != old.controller ||
         widget.layout != old.layout ||
-        mainAxisExtent != oldMainAxisExtent ||
+        widget._mainAxisExtent != old._mainAxisExtent ||
         !widget.marks.equals(old.marks)) {
-      widget.controller.attach(mainAxisExtent, widget.marks);
+      widget.controller.attach(widget._mainAxisExtent, widget.marks);
     }
   }
 
@@ -81,11 +91,11 @@ class _SliderLayoutState extends State<SliderLayout> {
       ),
       child: FLabel(
         axis: Axis.vertical,
-        // state: FLabelState.error,
+        state: FLabelState.error,
         label: const Text('Volume'),
         description: const Text('Change the volume of the ambient music.'),
         child: Padding(
-          padding: const EdgeInsets.only(top: 0.0),
+          padding: EdgeInsets.zero,
           child: _Slider(
             style: widget.style,
             layout: widget.layout,
