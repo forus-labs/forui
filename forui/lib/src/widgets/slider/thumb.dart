@@ -59,7 +59,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :tooltipBuilder, :semanticValueFormatterCallback, :enabled) =
+    final InheritedData(:style, :stateStyle, :layout, :tooltipBuilder, :semanticValueFormatterCallback, :enabled) =
         InheritedData.of(context);
 
     String? increasedValue;
@@ -91,14 +91,14 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         child: DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: style.thumbStyle.color,
+            color: stateStyle.thumbStyle.color,
             border: Border.all(
-              color: style.thumbStyle.borderColor,
-              width: style.thumbStyle.borderWidth,
+              color: stateStyle.thumbStyle.borderColor,
+              width: stateStyle.thumbStyle.borderWidth,
             ),
           ),
           child: SizedBox.square(
-            dimension: style.thumbStyle.size,
+            dimension: stateStyle.thumbStyle.size,
           ),
         ),
       ),
@@ -160,7 +160,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(_controller, style, layout),
+        onVerticalDragUpdate: _drag(_controller, stateStyle, layout),
         onVerticalDragEnd: end,
         child: thumb,
       );
@@ -169,7 +169,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(_controller, style, layout),
+        onHorizontalDragUpdate: _drag(_controller, stateStyle, layout),
         onHorizontalDragEnd: end,
         child: thumb,
       );
@@ -197,7 +197,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           },
       };
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, FSliderStyle style, Layout layout) {
+  GestureDragUpdateCallback? _drag(FSliderController controller, FSliderStateStyle style, Layout layout) {
     if (controller.allowedInteraction == FSliderInteraction.tap) {
       return null;
     }
@@ -291,7 +291,7 @@ final class FSliderThumbStyle with Diagnosticable {
 
 @internal
 extension Layouts on Layout {
-  double Function(Offset) translateThumbDrag(FSliderStyle style) => switch (this) {
+  double Function(Offset) translateThumbDrag(FSliderStateStyle style) => switch (this) {
         Layout.ltr => (delta) => delta.dx - style.thumbStyle.size / 2,
         Layout.rtl => (delta) => -delta.dx + style.thumbStyle.size / 2,
         Layout.ttb => (delta) => delta.dy - style.thumbStyle.size / 2,

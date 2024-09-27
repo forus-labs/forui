@@ -95,7 +95,7 @@ void main() {
     for (final layout in Layout.values) {
       for (final labelOffset in [-20.0, 20.0]) {
         testWidgets('label offset - $layout - $labelOffset', (tester) async {
-          final sliderStyle = FThemes.zinc.light.sliderStyles.enabledHorizontalStyle;
+          final sliderStyle = FThemes.zinc.light.sliderStyles.horizontalStyle.enabledStyle;
           final style = sliderStyle.markStyle.copyWith(labelOffset: labelOffset);
 
           await tester.pumpWidget(

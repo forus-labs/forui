@@ -30,6 +30,8 @@
 
 * **Breaking** Remove `FTextFieldErrorStyle.animatioDuration`.
 
+* **Breaking** Rename `FLabelStateStyle` to `FLabelStateStyles`.
+
 ### Fixes
 
 * Fix `FBottomNavigationBar` items hit region being smaller than intended.

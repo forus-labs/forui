@@ -16,11 +16,11 @@ class Track extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :semanticFormatterCallback) = InheritedData.of(context);
+    final InheritedData(:style, :stateStyle, :layout, :semanticFormatterCallback) = InheritedData.of(context);
     final controller = InheritedController.of(context);
     final position = layout.position;
 
-    final crossAxisExtent = max(style.thumbStyle.size, style.crossAxisExtent);
+    final crossAxisExtent = max(stateStyle.thumbStyle.size, style.crossAxisExtent);
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return SizedBox(
@@ -67,7 +67,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = InheritedData.of(context);
+    final InheritedData(:style, :stateStyle, :layout, :trackHitRegionCrossExtent, :enabled) = InheritedData.of(context);
     final controller = InheritedController.of(context);
 
     Widget track = const Center(child: _Track());
@@ -77,7 +77,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
 
     if (Touch.primary || trackHitRegionCrossExtent != null) {
-      final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbStyle.size, style.crossAxisExtent);
+      final crossAxisExtent = trackHitRegionCrossExtent ?? max(stateStyle.thumbStyle.size, style.crossAxisExtent);
       final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
       track = Container(
@@ -102,26 +102,26 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
     if (layout.vertical) {
       return GestureDetector(
-        onTapDown: _tap(controller, style, layout),
+        onTapDown: _tap(controller, stateStyle, layout),
         onTapUp: (_) => controller.tooltips.hide(),
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(controller, style, layout),
+        onVerticalDragUpdate: _drag(controller, stateStyle, layout),
         onVerticalDragEnd: end,
         child: track,
       );
     } else {
       return GestureDetector(
-        onTapDown: _tap(controller, style, layout),
+        onTapDown: _tap(controller, stateStyle, layout),
         onTapUp: (_) => controller.tooltips.hide(),
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(controller, style, layout),
+        onHorizontalDragUpdate: _drag(controller, stateStyle, layout),
         onHorizontalDragEnd: end,
         child: track,
       );
     }
   }
 
-  GestureTapDownCallback? _tap(FSliderController controller, FSliderStyle style, Layout layout) {
+  GestureTapDownCallback? _tap(FSliderController controller, FSliderStateStyle style, Layout layout) {
     final translate = layout.translateTrackTap(controller.selection.rawExtent.total, style);
 
     void down(TapDownDetails details) {
@@ -143,7 +143,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     return tappable.contains(controller.allowedInteraction) ? down : null;
   }
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, FSliderStyle style, Layout layout) {
+  GestureDragUpdateCallback? _drag(FSliderController controller, FSliderStateStyle style, Layout layout) {
     if (controller.allowedInteraction != FSliderInteraction.slide) {
       return null;
     }
@@ -169,8 +169,9 @@ class _Track extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :marks, :enabled) = InheritedData.of(context);
-    final FSliderStyle(:inactiveColor, :borderRadius, :crossAxisExtent, :markStyle, :thumbStyle) = style;
+    final InheritedData(:style, :stateStyle, :layout, :marks, :enabled) = InheritedData.of(context);
+    final FSliderStateStyle(:inactiveColor, :borderRadius, :markStyle, :thumbStyle) = stateStyle;
+    final crossAxisExtent = style.crossAxisExtent;
 
     final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
 
@@ -217,8 +218,9 @@ class ActiveTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout) = InheritedData.of(context);
-    final FSliderStyle(:activeColor, :borderRadius, :crossAxisExtent, :thumbStyle) = style;
+    final InheritedData(:style, :stateStyle, :layout) = InheritedData.of(context);
+    final FSliderStateStyle(:activeColor, :borderRadius, :thumbStyle) = stateStyle;
+    final crossAxisExtent = style.crossAxisExtent;
     final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
 
     final mainAxisExtent = rawOffset.max - rawOffset.min + thumbStyle.size / 2;
@@ -242,14 +244,14 @@ class ActiveTrack extends StatelessWidget {
 
 @internal
 extension Layouts on Layout {
-  double Function(Offset) translateTrackTap(double extent, FSliderStyle style) => switch (this) {
+  double Function(Offset) translateTrackTap(double extent, FSliderStateStyle style) => switch (this) {
         Layout.ltr => (offset) => offset.dx - style.thumbStyle.size / 2,
         Layout.rtl => (offset) => extent - offset.dx + style.thumbStyle.size / 2,
         Layout.ttb => (offset) => offset.dy - style.thumbStyle.size / 2,
         Layout.btt => (offset) => extent - offset.dy + style.thumbStyle.size / 2,
       };
 
-  double Function(Offset) translateTrackDrag(FSliderStyle style) => switch (this) {
+  double Function(Offset) translateTrackDrag(FSliderStateStyle style) => switch (this) {
         Layout.ltr => (delta) => delta.dx,
         Layout.rtl => (delta) => -delta.dx,
         Layout.ttb => (delta) => delta.dy,

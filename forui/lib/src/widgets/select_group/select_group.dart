@@ -269,7 +269,7 @@ class FSelectGroupStyle with Diagnosticable {
   /// The [FLabel]'s style.
   FLabelStyle get labelStyle => (
         layout: labelLayoutStyle,
-        state: FLabelStateStyle(
+        state: FLabelStateStyles(
           enabledStyle: enabledStyle,
           disabledStyle: disabledStyle,
           errorStyle: errorStyle,

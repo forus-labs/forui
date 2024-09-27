@@ -1,8 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/tappable.dart';
-
-import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
@@ -20,6 +17,8 @@ import 'package:forui/src/widgets/slider/layout.dart';
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 /// * [FSliderStyles] for customizing a slider's appearance.
 class FSlider extends FormField<FSliderSelection> {
+  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
+
   static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
   static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {
@@ -40,12 +39,28 @@ class FSlider extends FormField<FSliderSelection> {
   /// The layout. Defaults to [Layout.ltr].
   final Layout layout;
 
+  /// The label.
+  final Widget? label;
+
+  /// The description.
+  final Widget? description;
+
+  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  final Widget Function(BuildContext, String) errorBuilder;
+
   /// The marks.
   final List<FSliderMark> marks;
 
+  /// The extent of the track along the main axis. Defaults to occupying the maximum amount of space possible along the
+  /// main axis.
+  ///
+  /// **Contract**:
+  /// Throws [AssertionError] if [trackMainAxisExtent] is not positive.
+  final double? trackMainAxisExtent;
+
   /// The extent of the track's hit region in the cross-axis direction.
   ///
-  /// Defaults to
+  /// Defaults to:
   /// * either the tracker the thumb's cross extent, whichever is larger, on primarily touch devices.
   /// * 0 on non-primarily touch devices.
   final double? trackHitRegionCrossExtent;
@@ -68,7 +83,11 @@ class FSlider extends FormField<FSliderSelection> {
     required this.controller,
     this.style,
     this.layout = Layout.ltr,
+    this.label,
+    this.description,
+    this.errorBuilder = _errorBuilder,
     this.marks = const [],
+    this.trackMainAxisExtent,
     this.trackHitRegionCrossExtent,
     this.tooltipBuilder = _tooltipBuilder,
     this.semanticValueFormatterCallback = _semanticValueFormatter,
@@ -85,19 +104,16 @@ class FSlider extends FormField<FSliderSelection> {
           builder: (field) {
             final state = field as _State;
             final styles = state.context.theme.sliderStyles;
-            final sliderStyle = style ??
-                switch ((state.hasError, enabled, layout.vertical)) {
-                  (true, _, false) => styles.errorHorizontalStyle,
-                  (true, _, true) => styles.errorVerticalStyle,
-                  (false, true, false) => styles.enabledHorizontalStyle,
-                  (false, true, true) => styles.enabledVerticalStyle,
-                  (false, false, false) => styles.disabledHorizontalStyle,
-                  (false, false, true) => styles.disabledVerticalStyle,
-                };
+            final sliderStyle = style ?? (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
+            final (labelState, stateStyle) = switch ((state.hasError, enabled)) {
+              (false, true) => (FLabelState.enabled, sliderStyle.enabledStyle),
+              (false, false) => (FLabelState.disabled, sliderStyle.disabledStyle),
+              (true, _) => (FLabelState.error, sliderStyle.errorStyle),
+            };
 
-            // TODO wrap in FLabel.
             return InheritedData(
               style: sliderStyle,
+              stateStyle: stateStyle,
               layout: layout,
               marks: marks,
               trackHitRegionCrossExtent: trackHitRegionCrossExtent,
@@ -108,10 +124,40 @@ class FSlider extends FormField<FSliderSelection> {
               child: LayoutBuilder(
                 builder: (context, constraints) => SliderLayout(
                   controller: controller,
-                  style: sliderStyle,
+                  layoutStyle: sliderStyle.labelLayoutStyle,
+                  stateStyle: stateStyle,
+                  state: labelState,
                   layout: layout,
+                  label: label == null
+                      ? const SizedBox()
+                      : DefaultTextStyle(
+                          style: stateStyle.labelTextStyle,
+                          child: Padding(
+                            padding: sliderStyle.labelLayoutStyle.labelPadding,
+                            child: label,
+                          ),
+                        ),
+                  description: description == null
+                      ? const SizedBox()
+                      : DefaultTextStyle.merge(
+                          style: stateStyle.descriptionTextStyle,
+                          child: Padding(
+                            padding: sliderStyle.labelLayoutStyle.descriptionPadding,
+                            child: description,
+                          ),
+                        ),
+                  error: state.errorText == null
+                      ? const SizedBox()
+                      : DefaultTextStyle.merge(
+                    style: (stateStyle as FSliderErrorStyle).errorTextStyle,
+                        child: Padding(
+                            padding: sliderStyle.labelLayoutStyle.errorPadding,
+                            child: errorBuilder(context, state.errorText!),
+                          ),
+                      ),
                   marks: marks,
                   constraints: constraints,
+                  mainAxisExtent: trackMainAxisExtent,
                 ),
               ),
             );
@@ -129,6 +175,7 @@ class FSlider extends FormField<FSliderSelection> {
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
+      ..add(DoubleProperty('trackMainAxisExtent', trackMainAxisExtent))
       ..add(DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
@@ -157,10 +204,11 @@ class _State extends FormFieldState<FSliderSelection> {
 
   @override
   void didChange(FSliderSelection? value) {
-    super.didChange(value);
+    // TODO: fix bug when resizing window.
     // This is not 100% accurate since a controller's selection can never be null. However, users will have to go out
     // of their way to obtain a FormFieldState<FSliderSelection> via a GlobalKey AND call didChange(null).
     assert(value != null, "A slider's selection cannot be null.");
+    super.didChange(value);
     if (widget.controller.selection != value) {
       widget.controller.selection = value;
     }
@@ -186,294 +234,4 @@ class _State extends FormFieldState<FSliderSelection> {
 
   @override
   FSlider get widget => super.widget as FSlider;
-}
-
-/// A slider's styles.
-final class FSliderStyles with Diagnosticable {
-  /// The enabled slider's horizontal style.
-  final FSliderStyle enabledHorizontalStyle;
-
-  /// The enabled slider's vertical style.
-  final FSliderStyle enabledVerticalStyle;
-
-  /// The disabled slider's horizontal style.
-  final FSliderStyle disabledHorizontalStyle;
-
-  /// The disabled slider's vertical style.
-  final FSliderStyle disabledVerticalStyle;
-
-  /// The error slider's horizontal style.
-  final FSliderStyle errorHorizontalStyle;
-
-  /// The error slider's vertical style.
-  final FSliderStyle errorVerticalStyle;
-
-  /// Creates a [FSliderStyles].
-  FSliderStyles({
-    required this.enabledHorizontalStyle,
-    required this.enabledVerticalStyle,
-    required this.disabledHorizontalStyle,
-    required this.disabledVerticalStyle,
-    required this.errorHorizontalStyle,
-    required this.errorVerticalStyle,
-  });
-
-  /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
-  factory FSliderStyles.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) {
-    final enabledHorizontalStyle = FSliderStyle(
-      activeColor: colorScheme.primary,
-      inactiveColor: colorScheme.secondary,
-      markStyle: FSliderMarkStyle(
-        tickColor: colorScheme.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
-        labelAnchor: Alignment.topCenter,
-        labelOffset: 10,
-      ),
-      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      thumbStyle: FSliderThumbStyle(
-        color: colorScheme.primaryForeground,
-        borderColor: colorScheme.primary,
-      ),
-    );
-
-    final disabledHorizontalStyle = FSliderStyle(
-      activeColor: colorScheme.primary.withOpacity(0.7),
-      inactiveColor: colorScheme.secondary,
-      markStyle: FSliderMarkStyle(
-        tickColor: colorScheme.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
-        labelAnchor: Alignment.topCenter,
-        labelOffset: 10,
-      ),
-      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      thumbStyle: FSliderThumbStyle(
-        color: colorScheme.primaryForeground,
-        borderColor: colorScheme.primary.withOpacity(0.7),
-      ),
-    );
-
-    final errorHorizontalStyle = FSliderStyle(
-      activeColor: colorScheme.error,
-      inactiveColor: colorScheme.secondary,
-      markStyle: FSliderMarkStyle(
-        tickColor: colorScheme.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.error),
-        labelAnchor: Alignment.topCenter,
-        labelOffset: 10,
-      ),
-      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      thumbStyle: FSliderThumbStyle(
-        color: colorScheme.errorForeground,
-        borderColor: colorScheme.error,
-      ),
-    );
-
-    return FSliderStyles(
-      enabledHorizontalStyle: enabledHorizontalStyle,
-      enabledVerticalStyle: enabledHorizontalStyle.copyWith(
-        markStyle: FSliderMarkStyle(
-          tickColor: colorScheme.mutedForeground,
-          labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
-          labelAnchor: Alignment.centerRight,
-          labelOffset: -10,
-        ),
-      ),
-      disabledHorizontalStyle: disabledHorizontalStyle,
-      disabledVerticalStyle: disabledHorizontalStyle.copyWith(
-        markStyle: FSliderMarkStyle(
-          tickColor: colorScheme.mutedForeground,
-          labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
-          labelAnchor: Alignment.centerRight,
-          labelOffset: -10,
-        ),
-      ),
-      errorHorizontalStyle: errorHorizontalStyle,
-      errorVerticalStyle: errorHorizontalStyle.copyWith(
-        markStyle: FSliderMarkStyle(
-          tickColor: colorScheme.mutedForeground,
-          labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
-          labelAnchor: Alignment.centerRight,
-          labelOffset: -10,
-        ),
-      ),
-    );
-  }
-
-  /// Returns a copy of this [FSliderStyles] but with the given fields replaced with the new values.
-  @useResult
-  FSliderStyles copyWith({
-    FSliderStyle? enabledHorizontalStyle,
-    FSliderStyle? enabledVerticalStyle,
-    FSliderStyle? disabledHorizontalStyle,
-    FSliderStyle? disabledVerticalStyle,
-    FSliderStyle? errorHorizontalStyle,
-    FSliderStyle? errorVerticalStyle,
-  }) =>
-      FSliderStyles(
-        enabledHorizontalStyle: enabledHorizontalStyle ?? this.enabledHorizontalStyle,
-        enabledVerticalStyle: enabledVerticalStyle ?? this.enabledVerticalStyle,
-        disabledHorizontalStyle: disabledHorizontalStyle ?? this.disabledHorizontalStyle,
-        disabledVerticalStyle: disabledVerticalStyle ?? this.disabledVerticalStyle,
-        errorHorizontalStyle: errorHorizontalStyle ?? this.errorHorizontalStyle,
-        errorVerticalStyle: errorVerticalStyle ?? this.errorVerticalStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('enabledHorizontalStyle', enabledHorizontalStyle))
-      ..add(DiagnosticsProperty('enabledVerticalStyle', enabledVerticalStyle))
-      ..add(DiagnosticsProperty('disabledHorizontalStyle', disabledHorizontalStyle))
-      ..add(DiagnosticsProperty('disabledVerticalStyle', disabledVerticalStyle))
-      ..add(DiagnosticsProperty('errorHorizontalStyle', errorHorizontalStyle))
-      ..add(DiagnosticsProperty('errorVerticalStyle', errorVerticalStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSliderStyles &&
-          runtimeType == other.runtimeType &&
-          enabledHorizontalStyle == other.enabledHorizontalStyle &&
-          enabledVerticalStyle == other.enabledVerticalStyle &&
-          disabledHorizontalStyle == other.disabledHorizontalStyle &&
-          disabledVerticalStyle == other.disabledVerticalStyle &&
-          errorHorizontalStyle == other.errorHorizontalStyle &&
-          errorVerticalStyle == other.errorVerticalStyle;
-
-  @override
-  int get hashCode =>
-      enabledHorizontalStyle.hashCode ^
-      enabledVerticalStyle.hashCode ^
-      disabledHorizontalStyle.hashCode ^
-      disabledVerticalStyle.hashCode ^
-      errorHorizontalStyle.hashCode ^
-      errorVerticalStyle.hashCode;
-}
-
-/// A slider's style.
-final class FSliderStyle with Diagnosticable {
-  /// The slider's active color.
-  final Color activeColor;
-
-  /// The slider inactive color.
-  final Color inactiveColor;
-
-  /// The slider's cross-axis extent. Defaults to 8.
-  ///
-  /// ## Contract:
-  /// Throws [AssertionError] if it is not positive.
-  final double crossAxisExtent;
-
-  /// The slider's border radius.
-  final BorderRadius borderRadius;
-
-  /// The slider marks' style.
-  final FSliderMarkStyle markStyle;
-
-  /// The slider thumb's style.
-  final FSliderThumbStyle thumbStyle;
-
-  /// The tooltip's style.
-  final FTooltipStyle tooltipStyle;
-
-  /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned to.
-  ///
-  /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
-  /// devices.
-  final Alignment tooltipTipAnchor;
-
-  /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned to.
-  ///
-  /// Defaults to [Alignment.topCenter] on primarily touch devices and [Alignment.centerRight] on non-primarily touch
-  /// devices.
-  final Alignment tooltipThumbAnchor;
-
-  /// Creates a [FSliderStyle].
-  FSliderStyle({
-    required this.activeColor,
-    required this.inactiveColor,
-    required this.markStyle,
-    required this.thumbStyle,
-    required this.tooltipStyle,
-    Alignment? tooltipTipAnchor,
-    Alignment? tooltipThumbAnchor,
-    this.crossAxisExtent = 8,
-    this.borderRadius = const BorderRadius.all(Radius.circular(4)),
-  }):
-    tooltipTipAnchor = tooltipTipAnchor ?? (Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft),
-    tooltipThumbAnchor = tooltipThumbAnchor ?? (Touch.primary ? Alignment.topCenter : Alignment.centerRight);
-
-  /// Returns a copy of this [FSliderStyle] but with the given fields replaced with the new values.
-  @useResult
-  FSliderStyle copyWith({
-    Color? activeColor,
-    Color? inactiveColor,
-    double? mainAxisPadding,
-    double? crossAxisExtent,
-    BorderRadius? borderRadius,
-    FSliderMarkStyle? markStyle,
-    FSliderThumbStyle? thumbStyle,
-    FTooltipStyle? tooltipStyle,
-    Alignment? tooltipTipAnchor,
-    Alignment? tooltipThumbAnchor,
-  }) =>
-      FSliderStyle(
-        activeColor: activeColor ?? this.activeColor,
-        inactiveColor: inactiveColor ?? this.inactiveColor,
-        crossAxisExtent: crossAxisExtent ?? this.crossAxisExtent,
-        borderRadius: borderRadius ?? this.borderRadius,
-        markStyle: markStyle ?? this.markStyle,
-        thumbStyle: thumbStyle ?? this.thumbStyle,
-        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
-        tooltipTipAnchor: tooltipTipAnchor ?? this.tooltipTipAnchor,
-        tooltipThumbAnchor: tooltipThumbAnchor ?? this.tooltipThumbAnchor,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('activeColor', activeColor))
-      ..add(ColorProperty('inactiveColor', inactiveColor))
-      ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius))
-      ..add(DiagnosticsProperty('markStyle', markStyle))
-      ..add(DiagnosticsProperty('thumbStyle', thumbStyle))
-      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle))
-      ..add(DiagnosticsProperty('tooltipTipAnchor', tooltipTipAnchor))
-      ..add(DiagnosticsProperty('tooltipThumbAnchor', tooltipThumbAnchor));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSliderStyle &&
-          runtimeType == other.runtimeType &&
-          activeColor == other.activeColor &&
-          inactiveColor == other.inactiveColor &&
-          crossAxisExtent == other.crossAxisExtent &&
-          borderRadius == other.borderRadius &&
-          markStyle == other.markStyle &&
-          thumbStyle == other.thumbStyle &&
-          tooltipStyle == other.tooltipStyle &&
-          tooltipTipAnchor == other.tooltipTipAnchor &&
-          tooltipThumbAnchor == other.tooltipThumbAnchor;
-
-  @override
-  int get hashCode =>
-      activeColor.hashCode ^
-      inactiveColor.hashCode ^
-      crossAxisExtent.hashCode ^
-      borderRadius.hashCode ^
-      markStyle.hashCode ^
-      thumbStyle.hashCode ^
-      tooltipStyle.hashCode ^
-      tooltipTipAnchor.hashCode ^
-      tooltipThumbAnchor.hashCode;
 }
