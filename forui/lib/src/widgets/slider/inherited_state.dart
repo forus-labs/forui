@@ -12,7 +12,7 @@ class InheritedState extends InheritedWidget {
   }
 
   final FSliderStateStyle style;
-  final FLabelStateStyles state;
+  final FLabelState state;
 
   const InheritedState({
     required this.style,

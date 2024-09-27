@@ -460,7 +460,7 @@ final class FTextField extends StatelessWidget{
   final Widget? suffix;
 
   /// An optional method to call with the final value when the form is saved via [FormState.save].
-  final FormFieldSetter<String>? onSave;
+  final FormFieldSetter<String>? onSaved;
 
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
@@ -554,7 +554,7 @@ final class FTextField extends StatelessWidget{
     this.undoController,
     this.spellCheckConfiguration,
     this.suffix,
-    this.onSave,
+    this.onSaved,
     this.validator,
     this.initialValue,
     this.autovalidateMode,
@@ -615,7 +615,7 @@ final class FTextField extends StatelessWidget{
     this.undoController,
     this.spellCheckConfiguration,
     this.suffix,
-    this.onSave,
+    this.onSaved,
     this.validator,
     this.initialValue,
     this.autovalidateMode,
@@ -679,7 +679,7 @@ final class FTextField extends StatelessWidget{
     this.undoController,
     this.spellCheckConfiguration,
     this.suffix,
-    this.onSave,
+    this.onSaved,
     this.validator,
     this.initialValue,
     this.autovalidateMode,
@@ -744,7 +744,7 @@ final class FTextField extends StatelessWidget{
     this.undoController,
     this.spellCheckConfiguration,
     this.suffix,
-    this.onSave,
+    this.onSaved,
     this.validator,
     this.initialValue,
     this.autovalidateMode,
@@ -855,7 +855,7 @@ final class FTextField extends StatelessWidget{
       ..add(DiagnosticsProperty('undoController', undoController))
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(DiagnosticsProperty('suffixIcon', suffix))
-      ..add(ObjectFlagProperty.has('onSave', onSave))
+      ..add(ObjectFlagProperty.has('onSave', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialValue', initialValue))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))

@@ -32,6 +32,8 @@
 
 * **Breaking** Rename `FLabelStateStyle` to `FLabelStateStyles`.
 
+* **Breaking** Rename `FTextField.onSave` to `FTextField.onSaved`.
+
 ### Fixes
 
 * Fix `FBottomNavigationBar` items hit region being smaller than intended.
