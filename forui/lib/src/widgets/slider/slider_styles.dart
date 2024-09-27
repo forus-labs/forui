@@ -179,6 +179,17 @@ final class FSliderStyle with Diagnosticable {
   /// Throws [AssertionError] if it is not positive.
   final double crossAxisExtent;
 
+  /// The thumb's size, inclusive of . Defaults to `25` on touch platforms and `20` on non-touch platforms.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [thumbSize] is not positive.
+  ///
+  /// ## Implementation details
+  /// This unfortunately has to be placed outside of FSliderThumbStyle because [FSliderThumbStyle] is inside
+  /// [FSliderStateStyle]. Putting the thumb size inside [FSliderThumbStyle] will cause a cyclic rebuild to occur
+  /// whenever the window is resized due to some bad interaction between an internal LayoutBuilder and SliderFormField.
+  final double thumbSize;
+
   /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned to.
   ///
   /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
@@ -198,9 +209,11 @@ final class FSliderStyle with Diagnosticable {
     required this.disabledStyle,
     required this.errorStyle,
     this.crossAxisExtent = 8,
+    double? thumbSize,
     this.tooltipTipAnchor = Alignment.bottomCenter,
     this.tooltipThumbAnchor = Alignment.topCenter,
-  });
+  }): assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
+        thumbSize = thumbSize ?? (Touch.primary ? 25 : 20);
 
   /// Returns a copy of this [FSliderStyle] but with the given fields replaced with the new values.
   @useResult
@@ -209,6 +222,7 @@ final class FSliderStyle with Diagnosticable {
     FSliderStateStyle? enabledStyle,
     FSliderStateStyle? disabledStyle,
     FSliderErrorStyle? errorStyle,
+    double? thumbSize,
     double? crossAxisExtent,
     Alignment? tooltipTipAnchor,
     Alignment? tooltipThumbAnchor,
@@ -218,6 +232,7 @@ final class FSliderStyle with Diagnosticable {
         enabledStyle: enabledStyle ?? this.enabledStyle,
         disabledStyle: disabledStyle ?? this.disabledStyle,
         errorStyle: errorStyle ?? this.errorStyle,
+        thumbSize: thumbSize ?? this.thumbSize,
         crossAxisExtent: crossAxisExtent ?? this.crossAxisExtent,
         tooltipTipAnchor: tooltipTipAnchor ?? this.tooltipTipAnchor,
         tooltipThumbAnchor: tooltipThumbAnchor ?? this.tooltipThumbAnchor,
@@ -231,13 +246,14 @@ final class FSliderStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle))
-      ..add(DiagnosticsProperty('labelStyle', labelStyle))
+      ..add(DiagnosticsProperty('thumbSize', thumbSize))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DiagnosticsProperty('tooltipTipAnchor', tooltipTipAnchor))
       ..add(DiagnosticsProperty('tooltipThumbAnchor', tooltipThumbAnchor));
   }
 
   /// The label style.
+  // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
         layout: labelLayoutStyle,
         state: FLabelStateStyles(

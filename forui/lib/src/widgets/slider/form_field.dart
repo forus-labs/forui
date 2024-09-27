@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
-import 'package:forui/src/widgets/slider/slider_render_object_wdget.dart';
+import 'package:forui/src/widgets/slider/slider_render_object.dart';
 import 'package:forui/src/widgets/slider/track.dart';
 import 'package:meta/meta.dart';
 

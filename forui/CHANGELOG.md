@@ -50,6 +50,8 @@
 
 * Fix `FSwitch` not using correct label style.
 
+* Fix `FCheckbox`, `FRadio`, `FSelectGroup`, `FSwitch` and `FTextField` styles causing the widget inspector to crash.
+
 
 ## 0.5.1
 

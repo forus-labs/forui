@@ -18,11 +18,10 @@ class Track extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :semanticFormatterCallback) = InheritedData.of(context);
-    final thumbStyle = InheritedState.of(context).style.thumbStyle;
     final controller = InheritedController.of(context);
     final position = layout.position;
 
-    final crossAxisExtent = max(thumbStyle.size, style.crossAxisExtent);
+    final crossAxisExtent = max(style.thumbSize, style.crossAxisExtent);
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return SizedBox(
@@ -70,7 +69,6 @@ class _GestureDetectorState extends State<_GestureDetector> {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = InheritedData.of(context);
-    final thumbStyle = InheritedState.of(context).style.thumbStyle;
     final controller = InheritedController.of(context);
 
     Widget track = const Center(child: _Track());
@@ -80,7 +78,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
 
     if (Touch.primary || trackHitRegionCrossExtent != null) {
-      final crossAxisExtent = trackHitRegionCrossExtent ?? max(thumbStyle.size, style.crossAxisExtent);
+      final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbSize, style.crossAxisExtent);
       final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
       track = Container(
@@ -105,7 +103,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
     if (layout.vertical) {
       return GestureDetector(
-        onTapDown: _tap(controller, thumbStyle, layout),
+        onTapDown: _tap(controller, style.thumbSize, layout),
         onTapUp: (_) => controller.tooltips.hide(),
         onVerticalDragStart: start,
         onVerticalDragUpdate: _drag(controller, layout),
@@ -114,7 +112,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       );
     } else {
       return GestureDetector(
-        onTapDown: _tap(controller, thumbStyle, layout),
+        onTapDown: _tap(controller, style.thumbSize, layout),
         onTapUp: (_) => controller.tooltips.hide(),
         onHorizontalDragStart: start,
         onHorizontalDragUpdate: _drag(controller, layout),
@@ -124,8 +122,8 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
   }
 
-  GestureTapDownCallback? _tap(FSliderController controller, FSliderThumbStyle style, Layout layout) {
-    final translate = layout.translateTrackTap(controller.selection.rawExtent.total, style);
+  GestureTapDownCallback? _tap(FSliderController controller, double thumbSize, Layout layout) {
+    final translate = layout.translateTrackTap(controller.selection.rawExtent.total, thumbSize);
 
     void down(TapDownDetails details) {
       final offset = switch (translate(details.localPosition)) {
@@ -177,7 +175,7 @@ class _Track extends StatelessWidget {
     final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
 
     final position = layout.position;
-    final half = thumbStyle.size / 2;
+    final half = style.thumbSize / 2;
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return DecoratedBox(
@@ -224,7 +222,7 @@ class ActiveTrack extends StatelessWidget {
     final crossAxisExtent = style.crossAxisExtent;
     final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
 
-    final mainAxisExtent = rawOffset.max - rawOffset.min + thumbStyle.size / 2;
+    final mainAxisExtent = rawOffset.max - rawOffset.min + style.thumbSize / 2;
     final (height, width) = layout.vertical ? (mainAxisExtent, crossAxisExtent) : (crossAxisExtent, mainAxisExtent);
 
     return layout.position(
@@ -245,11 +243,11 @@ class ActiveTrack extends StatelessWidget {
 
 @internal
 extension Layouts on Layout {
-  double Function(Offset) translateTrackTap(double extent, FSliderThumbStyle style) => switch (this) {
-        Layout.ltr => (offset) => offset.dx - style.size / 2,
-        Layout.rtl => (offset) => extent - offset.dx + style.size / 2,
-        Layout.ttb => (offset) => offset.dy - style.size / 2,
-        Layout.btt => (offset) => extent - offset.dy + style.size / 2,
+  double Function(Offset) translateTrackTap(double extent, double thumbSize) => switch (this) {
+        Layout.ltr => (offset) => offset.dx - thumbSize / 2,
+        Layout.rtl => (offset) => extent - offset.dx + thumbSize / 2,
+        Layout.ttb => (offset) => offset.dy - thumbSize / 2,
+        Layout.btt => (offset) => extent - offset.dy + thumbSize / 2,
       };
 
   double Function(Offset) translateTrackDrag() => switch (this) {

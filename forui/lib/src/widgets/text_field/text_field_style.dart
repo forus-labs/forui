@@ -118,6 +118,7 @@ final class FTextFieldStyle with Diagnosticable {
       );
 
   /// The label style.
+  // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
         layout: labelLayoutStyle,
         state: FLabelStateStyles(
@@ -136,7 +137,6 @@ final class FTextFieldStyle with Diagnosticable {
       ..add(DiagnosticsProperty('contentPadding', contentPadding))
       ..add(DiagnosticsProperty('scrollPadding', scrollPadding))
       ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
-      ..add(DiagnosticsProperty('labelStyle', labelStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle));

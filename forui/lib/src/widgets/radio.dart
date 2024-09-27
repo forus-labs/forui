@@ -203,6 +203,8 @@ class FRadioStyle with Diagnosticable {
       );
 
   /// The [FLabel]'s style.
+
+  // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
         layout: labelLayoutStyle,
         state: FLabelStateStyles(
@@ -240,8 +242,7 @@ class FRadioStyle with Diagnosticable {
       ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
-      ..add(DiagnosticsProperty('errorStyle', errorStyle))
-      ..add(DiagnosticsProperty('labelStyle', labelStyle));
+      ..add(DiagnosticsProperty('errorStyle', errorStyle));
   }
 
   @override

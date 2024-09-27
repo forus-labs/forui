@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
 
 import 'package:meta/meta.dart';
@@ -63,9 +62,9 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final style = InheritedState.of(context).style.thumbStyle;
+    final thumbStyle = InheritedState.of(context).style.thumbStyle;
     final InheritedData(
-      style: FSliderStyle(:tooltipTipAnchor, :tooltipThumbAnchor),
+      :style,
       :layout,
       :tooltipBuilder,
       :semanticValueFormatterCallback,
@@ -101,14 +100,14 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         child: DecoratedBox(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: style.color,
+            color: thumbStyle.color,
             border: Border.all(
-              color: style.borderColor,
-              width: style.borderWidth,
+              color: thumbStyle.borderColor,
+              width: thumbStyle.borderWidth,
             ),
           ),
           child: SizedBox.square(
-            dimension: style.size,
+            dimension: style.thumbSize,
           ),
         ),
       ),
@@ -128,8 +127,8 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         },
         child: FTooltip(
           controller: _tooltip,
-          tipAnchor: tooltipTipAnchor,
-          childAnchor: tooltipThumbAnchor,
+          tipAnchor: style.tooltipTipAnchor,
+          childAnchor: style.tooltipThumbAnchor,
           tipBuilder: (context, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
           longPress: false,
           hover: false,
@@ -170,7 +169,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(_controller, style, layout),
+        onVerticalDragUpdate: _drag(_controller, style.thumbSize, layout),
         onVerticalDragEnd: end,
         child: thumb,
       );
@@ -179,7 +178,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(_controller, style, layout),
+        onHorizontalDragUpdate: _drag(_controller, style.thumbSize, layout),
         onHorizontalDragEnd: end,
         child: thumb,
       );
@@ -207,12 +206,12 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           },
       };
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, FSliderThumbStyle style, Layout layout) {
+  GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, Layout layout) {
     if (controller.allowedInteraction == FSliderInteraction.tap) {
       return null;
     }
 
-    final translate = layout.translateThumbDrag(style);
+    final translate = layout.translateThumbDrag(thumbSize);
 
     void drag(DragUpdateDetails details) {
       final origin = widget.min ? _origin!.min : _origin!.max;
@@ -231,15 +230,13 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 }
 
 /// A slider thumb's style.
+///
+/// **Note**:
+/// The thumb size can be configured inside [FSliderStyle] instead. This is due to an unfortunate limitation of the
+/// implementation.
 final class FSliderThumbStyle with Diagnosticable {
   /// The thumb's color.
   final Color color;
-
-  /// The thumb's size, inclusive of [borderWidth]. Defaults to `25` on touch platforms and `20` on non-touch platforms.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [size] is not positive.
-  final double size;
 
   /// The border's color.
   final Color borderColor;
@@ -254,23 +251,18 @@ final class FSliderThumbStyle with Diagnosticable {
   FSliderThumbStyle({
     required this.color,
     required this.borderColor,
-    double? size,
     this.borderWidth = 2,
-  })  : assert(size == null || 0 < size, 'The diameter must be positive'),
-        assert(0 < borderWidth, 'The border width must be positive'),
-        size = size ?? (Touch.primary ? 25 : 20);
+  })  : assert(0 < borderWidth, 'The border width must be positive');
 
   /// Returns a copy of this [FSliderThumbStyle] but with the given fields replaced with the new values.
   @useResult
   FSliderThumbStyle copyWith({
     Color? color,
-    double? size,
     Color? borderColor,
     double? borderWidth,
   }) =>
       FSliderThumbStyle(
         color: color ?? this.color,
-        size: size ?? this.size,
         borderColor: borderColor ?? this.borderColor,
         borderWidth: borderWidth ?? this.borderWidth,
       );
@@ -280,7 +272,6 @@ final class FSliderThumbStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('size', size))
       ..add(ColorProperty('borderColor', borderColor))
       ..add(DoubleProperty('borderWidth', borderWidth));
   }
@@ -291,20 +282,19 @@ final class FSliderThumbStyle with Diagnosticable {
       other is FSliderThumbStyle &&
           runtimeType == other.runtimeType &&
           color == other.color &&
-          size == other.size &&
           borderColor == other.borderColor &&
           borderWidth == other.borderWidth;
 
   @override
-  int get hashCode => color.hashCode ^ size.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode;
+  int get hashCode => color.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode;
 }
 
 @internal
 extension Layouts on Layout {
-  double Function(Offset) translateThumbDrag(FSliderThumbStyle style) => switch (this) {
-        Layout.ltr => (delta) => delta.dx - style.size / 2,
-        Layout.rtl => (delta) => -delta.dx + style.size / 2,
-        Layout.ttb => (delta) => delta.dy - style.size / 2,
-        Layout.btt => (delta) => -delta.dy + style.size / 2,
+  double Function(Offset) translateThumbDrag(double thumbSize) => switch (this) {
+        Layout.ltr => (delta) => delta.dx - thumbSize / 2,
+        Layout.rtl => (delta) => -delta.dx + thumbSize / 2,
+        Layout.ttb => (delta) => delta.dy - thumbSize / 2,
+        Layout.btt => (delta) => -delta.dy + thumbSize / 2,
       };
 }

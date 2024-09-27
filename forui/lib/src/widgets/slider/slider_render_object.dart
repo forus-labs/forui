@@ -78,7 +78,7 @@ class _RenderHorizontalSlider extends _RenderSlider {
     // Check whether the marks are larger than the largest label/description/error.
     final sliderOffset = Offset(
       0,
-      label.size.height + (slider.marks.values.map((rect) => rect.top).where((y) => y.isNegative).min.abs()),
+      label.size.height + (slider.marks.values.map((r) => r.top).where((y) => y.isNegative).minOrNull?.abs() ?? 0),
     );
 
     paddedTrack.data.offset = sliderOffset;
@@ -122,7 +122,7 @@ class _RenderVerticalSlider extends _RenderSlider {
 
     // Check whether the marks are larger than the largest label/description/error.
     final largestMiddleOffset = largest.size.bottomCenter(Offset.zero).dx;
-    final marksOffset = slider.marks.values.map((rect) => rect.left).where((x) => x.isNegative).min.abs();
+    final marksOffset = slider.marks.values.map((rect) => rect.left).where((x) => x.isNegative).minOrNull?.abs() ?? 0;
 
     final double middle;
     final double largestOffset;
@@ -211,6 +211,7 @@ abstract class _RenderSlider extends RenderBox
     var maxX = paddedTrack.size.width;
     var maxY = paddedTrack.size.height;
 
+    final positionMark = _positionMark;
     for (final mark in _marks) {
       if (label == null) {
         break;
@@ -218,7 +219,7 @@ abstract class _RenderSlider extends RenderBox
 
       label.layout(constraints, parentUsesSize: true);
 
-      final rect = _positionMark(paddedTrack, label.size, mark, mark.style ?? _stateStyle.markStyle);
+      final rect = positionMark(paddedTrack, label.size, mark, mark.style ?? _stateStyle.markStyle);
       marks[label] = rect;
 
       minX = min(minX, rect.left);
@@ -235,35 +236,27 @@ abstract class _RenderSlider extends RenderBox
   Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) get _position {
     final insets = _style.labelLayoutStyle.childPadding;
     return switch (_layout) {
-      Layout.ltr => (track, size, mark, style) {
+      Layout.ltr => (track, label, mark, style) {
           final offset = _anchor(track.size.width - insets.left - insets.right, insets.left, mark.value, style);
-          final anchor = Offset(offset.$1, offset.$2 + insets.top);
-
-          return (anchor & size).shift(anchor - style.labelAnchor.relative(to: size, origin: anchor));
+          return _rect(label, mark, Offset(offset.$1, offset.$2 + insets.top), style);
         },
       Layout.rtl => (track, size, mark, style) {
           final offset = _anchor(track.size.width - insets.left - insets.right, insets.left, 1 - mark.value, style);
-          final anchor = Offset(offset.$1, offset.$2 + insets.top);
-
-          return (anchor & size).shift(anchor - style.labelAnchor.relative(to: size, origin: anchor));
+          return _rect(size, mark, Offset(offset.$1, offset.$2 + insets.top), style);
         },
       Layout.ttb => (track, size, mark, style) {
           final offset = _anchor(track.size.height - insets.top - insets.bottom, insets.top, mark.value, style);
-          final anchor = Offset(offset.$2, offset.$1);
-
-          return (anchor & size).shift(anchor - style.labelAnchor.relative(to: size, origin: anchor));
+          return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
       Layout.btt => (track, size, mark, style) {
           final offset = _anchor(track.size.height - insets.top - insets.bottom, insets.top, 1 - mark.value, style);
-          final anchor = Offset(offset.$2, offset.$1);
-
-          return (anchor & size).shift(anchor - style.labelAnchor.relative(to: size, origin: anchor));
+          return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
     };
   }
 
   (double, double) _anchor(double extent, double padding, double offset, FSliderMarkStyle markStyle) {
-    final thumb = _stateStyle.thumbStyle.size;
+    final thumb = _style.thumbSize;
     final trackMainAxis = (extent - thumb) * offset;
     final anchorMainAxis = (thumb / 2) + trackMainAxis + padding;
 
@@ -272,6 +265,11 @@ abstract class _RenderSlider extends RenderBox
     final anchorCrossAxis = markStyle.labelOffset + crossAxisOffset;
 
     return (anchorMainAxis, anchorCrossAxis);
+  }
+
+  Rect _rect(Size size, FSliderMark mark, Offset anchor, FSliderMarkStyle markStyle) {
+    final rect = anchor & size;
+    return rect.shift(anchor - markStyle.labelAnchor.relative(to: size, origin: anchor));
   }
 
   @override

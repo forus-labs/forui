@@ -58,6 +58,9 @@ class FSlider extends StatelessWidget {
   ///
   /// **Contract**:
   /// Throws [AssertionError] if [trackMainAxisExtent] is not positive.
+  ///
+  /// Throws [StateError] if [trackMainAxisExtent], either [label], [description], or [forceErrorText] is given,
+  /// and [layout] is vertical.
   final double? trackMainAxisExtent;
 
   /// The extent of the track's hit region in the cross-axis direction.
@@ -81,7 +84,7 @@ class FSlider extends StatelessWidget {
   final String Function(double) semanticValueFormatterCallback;
 
   /// An optional method to call with the final value when the form is saved via [FormState.save].
-  final FormFieldSetter<String>? onSaved;
+  final FormFieldSetter<FSliderSelection>? onSaved;
 
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
@@ -92,7 +95,7 @@ class FSlider extends StatelessWidget {
   /// Alternating between error and normal state can cause the height of the [FTextField] to change if no other
   /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
   /// error is displayed, wrap the [FTextField] in a fixed height parent like [SizedBox].
-  final FormFieldValidator<String>? validator;
+  final FormFieldValidator<FSliderSelection>? validator;
 
   /// Used to enable/disable this form field auto validation and update its error text.
   ///
@@ -138,7 +141,16 @@ class FSlider extends StatelessWidget {
     this.enabled = true,
     this.autovalidateMode,
     super.key,
-  }) : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller);
+  }) : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller) {
+    if (trackMainAxisExtent == null &&
+        (label != null || description != null || forceErrorText != null) &&
+        layout.vertical) {
+      throw StateError(
+        'A vertical FSlider was given a label, description, or forceErrorText although it needs a trackMainAxisExtent. '
+        'To fix this, consider supplying a trackMainAxisExtent or changing the layout to horizontal.',
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +177,11 @@ class FSlider extends StatelessWidget {
           marks: marks,
           constraints: constraints,
           mainAxisExtent: trackMainAxisExtent,
+          onSaved: onSaved,
+          validator: validator,
+          autovalidateMode: autovalidateMode,
+          forceErrorText: forceErrorText,
+          enabled: enabled,
         ),
       ),
     );
@@ -202,6 +219,11 @@ class _Slider extends StatefulWidget {
   final List<FSliderMark> marks;
   final BoxConstraints constraints;
   final double? mainAxisExtent;
+  final FormFieldSetter<FSliderSelection>? onSaved;
+  final FormFieldValidator<FSliderSelection>? validator;
+  final AutovalidateMode? autovalidateMode;
+  final String? forceErrorText;
+  final bool enabled;
 
   const _Slider({
     required this.controller,
@@ -213,6 +235,11 @@ class _Slider extends StatefulWidget {
     required this.marks,
     required this.constraints,
     required this.mainAxisExtent,
+    required this.onSaved,
+    required this.validator,
+    required this.autovalidateMode,
+    required this.forceErrorText,
+    required this.enabled,
   });
 
   @override
@@ -237,7 +264,7 @@ class _Slider extends StatefulWidget {
       );
     }
 
-    return extent;
+    return extent - style.thumbSize;
   }
 
   @override
@@ -250,7 +277,12 @@ class _Slider extends StatefulWidget {
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(IterableProperty('marks', marks))
       ..add(DiagnosticsProperty('constraints', constraints))
-      ..add(DoubleProperty('mainAxisExtent', mainAxisExtent));
+      ..add(DoubleProperty('mainAxisExtent', mainAxisExtent))
+      ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('validator', validator))
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(ObjectFlagProperty.has('forceErrorText', forceErrorText))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
   }
 }
 
@@ -274,16 +306,21 @@ class _SliderState extends State<_Slider> {
 
   @override
   Widget build(BuildContext context) => ListenableBuilder(
-    listenable: widget.controller,
-    builder: (context, _) => InheritedController(
-      controller: widget.controller,
-      child: SliderFormField(
-        controller: widget.controller,
-        constraints: widget.constraints,
-        label: widget.label,
-        description: widget.description,
-        errorBuilder: widget.errorBuilder,
-      ),
-    ),
-  );
+        listenable: widget.controller,
+        builder: (context, _) => InheritedController(
+          controller: widget.controller,
+          child: SliderFormField(
+            controller: widget.controller,
+            constraints: widget.constraints,
+            label: widget.label,
+            description: widget.description,
+            errorBuilder: widget.errorBuilder,
+            onSaved: widget.onSaved,
+            validator: widget.validator,
+            autovalidateMode: widget.autovalidateMode,
+            forceErrorText: widget.forceErrorText,
+            enabled: widget.enabled,
+          ),
+        ),
+      );
 }
