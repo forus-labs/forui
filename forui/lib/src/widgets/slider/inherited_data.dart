@@ -15,7 +15,6 @@ final class InheritedData extends InheritedWidget {
   }
 
   final FSliderStyle style;
-  final FSliderStateStyle stateStyle;
   final Layout layout;
   final List<FSliderMark> marks;
   final double? trackHitRegionCrossExtent;
@@ -26,7 +25,6 @@ final class InheritedData extends InheritedWidget {
 
   const InheritedData({
     required this.style,
-    required this.stateStyle,
     required this.layout,
     required this.marks,
     required this.trackHitRegionCrossExtent,
@@ -41,7 +39,6 @@ final class InheritedData extends InheritedWidget {
   @override
   bool updateShouldNotify(covariant InheritedData old) =>
       style != old.style ||
-      stateStyle != old.stateStyle ||
       layout != old.layout ||
       !marks.equals(marks) ||
       trackHitRegionCrossExtent != old.trackHitRegionCrossExtent ||
@@ -55,7 +52,6 @@ final class InheritedData extends InheritedWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('stateStyle', stateStyle))
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
       ..add(DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent))

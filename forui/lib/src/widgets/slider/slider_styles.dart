@@ -24,10 +24,9 @@ final class FSliderStyles with Diagnosticable {
     required FTypography typography,
     required FStyle style,
   }) {
-    final labelStyle = FLabelStyles.inherit(style: style).vertical;
     final enabledHorizontalStyle = FSliderStateStyle(
-      labelTextStyle: labelStyle.state.enabledStyle.labelTextStyle,
-      descriptionTextStyle: labelStyle.state.enabledStyle.descriptionTextStyle,
+      labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
       activeColor: colorScheme.primary,
       inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
@@ -44,8 +43,8 @@ final class FSliderStyles with Diagnosticable {
     );
 
     final disabledHorizontalStyle = FSliderStateStyle(
-      labelTextStyle: labelStyle.state.disabledStyle.labelTextStyle,
-      descriptionTextStyle: labelStyle.state.disabledStyle.descriptionTextStyle,
+      labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
       activeColor: colorScheme.primary.withOpacity(0.7),
       inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
@@ -62,9 +61,9 @@ final class FSliderStyles with Diagnosticable {
     );
 
     final errorHorizontalStyle = FSliderErrorStyle(
-      labelTextStyle: labelStyle.state.errorStyle.labelTextStyle,
-      descriptionTextStyle: labelStyle.state.errorStyle.descriptionTextStyle,
-      errorTextStyle: labelStyle.state.errorStyle.errorTextStyle,
+      labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
       activeColor: colorScheme.error,
       inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
@@ -82,16 +81,22 @@ final class FSliderStyles with Diagnosticable {
 
     return FSliderStyles(
       horizontalStyle: FSliderStyle(
-        labelLayoutStyle: labelStyle.layout.copyWith(
-          childPadding: const EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
+        labelLayoutStyle: const FLabelLayoutStyle(
+          labelPadding: EdgeInsets.only(bottom: 5),
+          childPadding: EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
+          descriptionPadding: EdgeInsets.only(top: 5),
+          errorPadding: EdgeInsets.only(top: 5),
         ),
         enabledStyle: enabledHorizontalStyle,
         disabledStyle: disabledHorizontalStyle,
         errorStyle: errorHorizontalStyle,
       ),
       verticalStyle: FSliderStyle(
-        labelLayoutStyle: labelStyle.layout.copyWith(
-          childPadding: const EdgeInsets.all(10),
+        labelLayoutStyle: const FLabelLayoutStyle(
+          labelPadding: EdgeInsets.only(bottom: 5),
+          childPadding: EdgeInsets.all(10),
+          descriptionPadding: EdgeInsets.only(top: 5),
+          errorPadding: EdgeInsets.only(top: 5),
         ),
         enabledStyle: enabledHorizontalStyle.copyWith(
           markStyle: FSliderMarkStyle(
@@ -117,8 +122,8 @@ final class FSliderStyles with Diagnosticable {
             labelOffset: -10,
           ),
         ),
-        tooltipTipAnchor: (Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft),
-        tooltipThumbAnchor: (Touch.primary ? Alignment.topCenter : Alignment.centerRight),
+        tooltipTipAnchor: Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
+        tooltipThumbAnchor: Touch.primary ? Alignment.topCenter : Alignment.centerRight,
       ),
     );
   }
