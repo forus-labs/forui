@@ -14,7 +14,7 @@ class FAccordionController extends ChangeNotifier {
   /// An [FAccordionController] that allows only one section to be expanded at a time.
   factory FAccordionController.radio({Duration? animationDuration}) => FAccordionController(
         max: 1,
-        animationDuration: animationDuration ?? const Duration(milliseconds: 100),
+        animationDuration: animationDuration ?? const Duration(milliseconds: 200),
       );
 
   /// Creates a base [FAccordionController].
@@ -39,6 +39,10 @@ class FAccordionController extends ChangeNotifier {
 
   /// Adds an item to the accordion.
   void addItem(int index, AnimationController controller, Animation animation, {required bool initiallyExpanded}) {
+    controller
+      ..value = initiallyExpanded ? 1 : 0
+      ..duration = animationDuration;
+
     controllers[index] = (controller: controller, animation: animation);
 
     if (initiallyExpanded) {
@@ -53,7 +57,6 @@ class FAccordionController extends ChangeNotifier {
   bool removeItem(int index) {
     final removed = controllers.remove(index);
     _expanded.remove(index);
-
     return removed != null;
   }
 

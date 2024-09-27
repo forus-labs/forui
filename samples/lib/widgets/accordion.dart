@@ -7,6 +7,7 @@ import 'package:forui_samples/sample_scaffold.dart';
 
 final controllers = {
   'default': FAccordionController(),
+  'default-max': FAccordionController(max: 2),
   'radio': FAccordionController.radio(),
 };
 
@@ -21,30 +22,30 @@ class AccordionPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FAccordion(
-            controller: controller,
-            children: const [
-              FAccordionItem(
-                title: Text('Is it accessible?'),
-                child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),
-              ),
-              FAccordionItem(
-                title: Text('Is it Styled?'),
-                initiallyExpanded: true,
-                child: Text(
-                  "Yes. It comes with default styles that matches the other components' aesthetics",
-                ),
-              ),
-              FAccordionItem(
-                title: Text('Is it Animated?'),
-                child: Text(
-                  'Yes. It is animated by default, but you can disable it if you prefer',
-                ),
-              ),
-            ],
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FAccordion(
+        controller: controller,
+        children: const [
+          FAccordionItem(
+            title: Text('Is it accessible?'),
+            child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+          ),
+          FAccordionItem(
+            title: Text('Is it Styled?'),
+            initiallyExpanded: true,
+            child: Text(
+              "Yes. It comes with default styles that matches the other components' aesthetics",
+            ),
+          ),
+          FAccordionItem(
+            title: Text('Is it Animated?'),
+            child: Text(
+              'Yes. It is animated by default, but you can disable it if you prefer',
+            ),
           ),
         ],
-      );
+      ),
+    ],
+  );
 }

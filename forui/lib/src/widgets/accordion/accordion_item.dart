@@ -80,8 +80,8 @@ class FAccordionItem extends StatefulWidget {
   }
 }
 
-class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
+class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
+  late AnimationController _controller;
   late Animation<double> _expand;
 
   @override
@@ -93,11 +93,7 @@ class _FAccordionItemState extends State<FAccordionItem> with SingleTickerProvid
       _controller.dispose();
     }
 
-    _controller = AnimationController(
-      duration: data.controller.animationDuration,
-      value: widget.initiallyExpanded ? 1.0 : 0.0,
-      vsync: this,
-    );
+    _controller = AnimationController(vsync: this);
     _expand = Tween<double>(
       begin: 0,
       end: 100,
