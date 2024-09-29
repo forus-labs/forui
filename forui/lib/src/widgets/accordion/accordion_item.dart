@@ -73,7 +73,6 @@ class FAccordionItem extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('initiallyExpanded', initiallyExpanded))
       ..add(DiagnosticsProperty('child', child));
   }

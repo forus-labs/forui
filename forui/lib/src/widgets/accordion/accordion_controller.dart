@@ -74,15 +74,16 @@ class FAccordionController extends ChangeNotifier {
     value == 100 ? await collapse(index) : await expand(index);
   }
 
-  /// Shows the content in the accordion.
+  /// Expands the item at the given [index].
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> expand(int index) async {
     if (_expanded.contains(index)) {
       return;
     }
+    
     final futures = <Future<void>>[];
-    if (_expanded.length > _min && _max != null && _expanded.length >= _max) {
+    if (_max != null && _expanded.length >= _max) {
       futures.add(_collapse(_expanded.first));
     }
 
@@ -108,7 +109,7 @@ class FAccordionController extends ChangeNotifier {
     return true;
   }
 
-  /// Hides the content in the accordion.
+  /// Collapses the item at the given [index].
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> collapse(int index) async {
