@@ -7,12 +7,18 @@ import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
 class SliderPage extends SampleScaffold {
+  final String? label;
+  final String? description;
+  final String? error;
   final bool enabled;
   final FSliderInteraction interaction;
   final ({double min, double max}) extent;
 
   SliderPage({
     @queryParam super.theme,
+    @queryParam this.label,
+    @queryParam this.description,
+    @queryParam this.error,
     @queryParam String enabled = 'true',
     @queryParam String interaction = 'tapAndSlideThumb',
     @queryParam String extent = 'false',
@@ -27,6 +33,9 @@ class SliderPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => FSlider(
+        label: label != null ? Text(label!) : null,
+        description: description != null ? Text(description!) : null,
+        forceErrorText: error,
         controller: FContinuousSliderController(
           selection: FSliderSelection(
             max: 0.6,
@@ -56,23 +65,14 @@ class TooltipSliderPage extends SampleScaffold {
 
 @RoutePage()
 class MarksSliderPage extends SampleScaffold {
-  final Layout layout;
-
   MarksSliderPage({
     @queryParam super.theme,
-    @queryParam String layout = 'ltr',
-  }) : layout = switch (layout) {
-          'rtl' => Layout.rtl,
-          'ttb' => Layout.ttb,
-          'btt' => Layout.btt,
-          _ => Layout.ltr,
-        };
+  });
 
   @override
   Widget child(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 35),
         child: FSlider(
-          layout: layout,
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
@@ -114,4 +114,31 @@ class RangeSliderPage extends SampleScaffold {
   Widget child(BuildContext context) => FSlider(
         controller: FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75)),
       );
+}
+
+@RoutePage()
+class VerticalSliderPage extends SampleScaffold {
+
+  VerticalSliderPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(vertical: 35),
+    child: FSlider(
+      label: const Text('Volume'),
+      description: const Text('Adjust the volume by dragging the slider.'),
+      layout: Layout.btt,
+      controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
+      trackMainAxisExtent: 350,
+      marks: const [
+        FSliderMark(value: 0),
+        FSliderMark(value: 0.25, tick: false),
+        FSliderMark(value: 0.5),
+        FSliderMark(value: 0.75, tick: false),
+        FSliderMark(value: 1),
+      ],
+    ),
+  );
 }

@@ -49,19 +49,60 @@ FSlider(
 
 ### Appearance
 
+#### Labelled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {2-3}
+        FSlider(
+          label: const Text('Volume'),
+          description: const Text('Adjust the volume by dragging the slider.'),
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(max: 0.6),
+          ),
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
 #### Disabled
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='slider' query={{enabled: 'false'}}/>
+    <Widget name='slider' query={{enabled: 'false', label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {5}
+        ```dart {7}
         FSlider(
+          label: const Text('Volume'),
+          description: const Text('Adjust the volume by dragging the slider.'),
           controller: FContinuousSliderController(
             selection: FSliderSelection(max: 0.6),
           ),
           enabled: false,
+        );
+        ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Error
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.', error: 'Volume is too high.'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+        ```dart {4}
+        FSlider(
+          label: const Text('Volume'),
+          description: const Text('Adjust the volume by dragging the slider.'),
+          forceErrorText: 'Volume is too high.',
+          controller: FContinuousSliderController(
+            selection: FSliderSelection(max: 0.6),
+          ),
         );
         ```
   </Tabs.Tab>
@@ -183,23 +224,24 @@ describes the mark's value.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='slider' variant='marks' query={{layout: 'btt'}} height={400}/>
+    <Widget name='slider' variant='vertical' height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2}
+        ```dart {4}
         FSlider(
+          label: const Text('Volume'),
+          description: const Text('Adjust the volume by dragging the slider.'),
           layout: Layout.btt,
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
+          trackMainAxisExtent: 350,
           marks: const [
-            FSliderMark(value: 0, label: Text('0%')),
+            FSliderMark(value: 0),
             FSliderMark(value: 0.25, tick: false),
             FSliderMark(value: 0.5),
             FSliderMark(value: 0.75, tick: false),
-            FSliderMark(value: 1, label: Text('100%')),
+            FSliderMark(value: 1),
           ],
-        );
+        ),
         ```
   </Tabs.Tab>
 </Tabs>
