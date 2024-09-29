@@ -237,31 +237,41 @@ abstract class _RenderSlider extends RenderBox
     final insets = _style.labelLayoutStyle.childPadding;
     return switch (_layout) {
       Layout.ltr => (track, label, mark, style) {
-          final offset = _anchor(track.size.width - insets.left - insets.right, insets.left, mark.value, style);
-          return _rect(label, mark, Offset(offset.$1, offset.$2 + insets.top), style);
+          final extent = track.size.width - insets.left - insets.right;
+          final offset = _anchor(extent, mark.value, insets.left, insets.top, style);
+          return _rect(label, mark, Offset(offset.$1, offset.$2), style);
         },
       Layout.rtl => (track, size, mark, style) {
-          final offset = _anchor(track.size.width - insets.left - insets.right, insets.left, 1 - mark.value, style);
-          return _rect(size, mark, Offset(offset.$1, offset.$2 + insets.top), style);
+          final extent = track.size.width - insets.left - insets.right;
+          final offset = _anchor(extent, 1 - mark.value, insets.left, insets.top, style);
+          return _rect(size, mark, Offset(offset.$1, offset.$2), style);
         },
       Layout.ttb => (track, size, mark, style) {
-          final offset = _anchor(track.size.height - insets.top - insets.bottom, insets.top, mark.value, style);
+          final extent = track.size.height - insets.top - insets.bottom;
+          final offset = _anchor(extent, mark.value, insets.top, insets.left, style);
           return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
       Layout.btt => (track, size, mark, style) {
-          final offset = _anchor(track.size.height - insets.top - insets.bottom, insets.top, 1 - mark.value, style);
+          final extent = track.size.height - insets.top - insets.bottom;
+          final offset = _anchor(extent, 1 - mark.value, insets.top, insets.left, style);
           return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
     };
   }
 
-  (double, double) _anchor(double extent, double padding, double offset, FSliderMarkStyle markStyle) {
+  (double, double) _anchor(
+    double extent,
+    double offset,
+    double mainAxisPadding,
+    double crossAxisPadding,
+    FSliderMarkStyle markStyle,
+  ) {
     final thumb = _style.thumbSize;
     final trackMainAxis = (extent - thumb) * offset;
-    final anchorMainAxis = (thumb / 2) + trackMainAxis + padding;
+    final anchorMainAxis = (thumb / 2) + trackMainAxis + mainAxisPadding;
 
-    final adjustment = _style.crossAxisExtent < thumb ? (thumb - _style.crossAxisExtent) / 2 : 0;
-    final crossAxisOffset = (markStyle.labelOffset < 0 ? 0.0 : _style.crossAxisExtent + adjustment);
+    final crossAxisExtent = _style.crossAxisExtent < thumb ? thumb : _style.crossAxisExtent;
+    final crossAxisOffset = crossAxisPadding + (markStyle.labelOffset < 0 ? 0.0 : crossAxisExtent);
     final anchorCrossAxis = markStyle.labelOffset + crossAxisOffset;
 
     return (anchorMainAxis, anchorCrossAxis);
