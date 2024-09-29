@@ -8,12 +8,12 @@ import 'package:forui/forui.dart';
 
 /// A vertically stacked set of interactive headings that each reveal a section of content.
 ///
-/// Typically used to group multiple [FAccordionItem]s.
 ///
 /// See:
 /// * https://forui.dev/docs/FAccordion for working examples.
 /// * [FAccordionController] for customizing the accordion's selection behavior.
-/// * [FAccordionStyle] for customizing a select group's appearance.
+/// * [FAccordionItem] for adding items to an accordion.
+/// * [FAccordionStyle] for customizing an accordion's appearance.
 class FAccordion extends StatefulWidget {
   /// The controller.
   ///
@@ -88,9 +88,9 @@ class _FAccordionState extends State<FAccordion> {
       );
 }
 
-/// The [FAccordion] style.
+/// The [FAccordion]'s style.
 final class FAccordionStyle with Diagnosticable {
-  /// The title's text style.
+  /// The title's default text style.
   final TextStyle titleTextStyle;
 
   /// The child's default text style.
@@ -192,7 +192,7 @@ class FAccordionItemData extends InheritedWidget {
   @useResult
   static FAccordionItemData of(BuildContext context) {
     final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
-    assert(data != null, 'No FAccordionData found in context');
+    assert(data != null, 'No FAccordionItemData found in context');
     return data!;
   }
 

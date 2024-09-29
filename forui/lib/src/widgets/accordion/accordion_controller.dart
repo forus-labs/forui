@@ -2,10 +2,11 @@ import 'package:flutter/widgets.dart';
 
 /// A controller that controls which sections are shown and hidden.
 class FAccordionController extends ChangeNotifier {
-  /// The duration of the expansion and collapse animations.
+  /// The duration of the expanding and collapsing animations.
   final Duration animationDuration;
 
-  /// A list of controllers for each of the headers in the accordion.
+  /// The animation controllers for each of the sections in the accordion.
+  @internal
   final Map<int, ({AnimationController controller, Animation animation})> controllers;
   final Set<int> _expanded;
   final int _min;
@@ -17,7 +18,7 @@ class FAccordionController extends ChangeNotifier {
         animationDuration: animationDuration ?? const Duration(milliseconds: 200),
       );
 
-  /// Creates a base [FAccordionController].
+  /// Creates a [FAccordionController].
   ///
   /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum and maximum.
   ///
@@ -53,14 +54,14 @@ class FAccordionController extends ChangeNotifier {
     }
   }
 
-  /// Removes an item from the accordion. Returns true if the item was removed.
+  /// Removes the item at the given [index] from the accordion. Returns true if the item was removed.
   bool removeItem(int index) {
     final removed = controllers.remove(index);
     _expanded.remove(index);
     return removed != null;
   }
 
-  /// Convenience method for toggling the current expanded status.
+  /// Convenience method for toggling the current expansion status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> toggle(int index) async {
