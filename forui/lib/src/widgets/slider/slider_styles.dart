@@ -45,18 +45,18 @@ final class FSliderStyles with Diagnosticable {
     final disabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-      activeColor: colorScheme.primary.withOpacity(0.7),
+      activeColor: colorScheme.disable(colorScheme.primary),
       inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
         tickColor: colorScheme.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
         color: colorScheme.primaryForeground,
-        borderColor: colorScheme.primary.withOpacity(0.7),
+        borderColor: colorScheme.disable(colorScheme.primary),
       ),
     );
 
@@ -212,7 +212,7 @@ final class FSliderStyle with Diagnosticable {
     double? thumbSize,
     this.tooltipTipAnchor = Alignment.bottomCenter,
     this.tooltipThumbAnchor = Alignment.topCenter,
-  }): assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
+  })  : assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
         thumbSize = thumbSize ?? (Touch.primary ? 25 : 20);
 
   /// Returns a copy of this [FSliderStyle] but with the given fields replaced with the new values.

@@ -13,6 +13,9 @@
 
 * Add `FTextField.forceErrorText`.
 
+* **Breaking** Add `FColorScheme.disabledColorBrightness` - this will only affect users that create a `FColorScheme`
+  from scratch.
+
 ### Changes
 
 * Change button to change color when hovering over it.

@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/alignment.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
 import 'package:meta/meta.dart';
