@@ -93,72 +93,131 @@ void main() {
     }
 
     for (final layout in Layout.values) {
-      testWidgets('label offset - $layout', (tester) async {
-        final sliderStyles = FThemes.zinc.light.sliderStyles;
-        final sliderStyle = layout.vertical ? sliderStyles.verticalStyle : sliderStyles.horizontalStyle;
+      group('label offset - $layout', () {
+        late FSliderStyle sliderStyle;
+        late Alignment positive;
+        late Alignment negative;
 
-        final positive = layout.vertical ? Alignment.centerLeft : Alignment.topCenter;
-        final negative = layout.vertical ? Alignment.centerRight : Alignment.bottomCenter;
+        setUp(() {
+          final sliderStyles = FThemes.zinc.light.sliderStyles;
+          sliderStyle = layout.vertical ? sliderStyles.verticalStyle : sliderStyles.horizontalStyle;
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            data: FThemes.zinc.light,
-            // background: background,
-            child: FSlider(
-              controller: FContinuousSliderController(
-                selection: FSliderSelection(min: 0.30, max: 0.60),
+          positive = layout.vertical ? Alignment.centerLeft : Alignment.topCenter;
+          negative = layout.vertical ? Alignment.centerRight : Alignment.bottomCenter;
+        });
+
+        testWidgets('symmetric padding', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              data: FThemes.zinc.light,
+              // background: background,
+              child: FSlider(
+                controller: FContinuousSliderController(
+                  selection: FSliderSelection(min: 0.30, max: 0.60),
+                ),
+                layout: layout,
+                marks: [
+                  FSliderMark(
+                    value: 0.0,
+                    label: const Text('0'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: 20,
+                      labelAnchor: positive,
+                    ),
+                  ),
+                  FSliderMark(
+                    value: 0.25,
+                    label: const Text('25'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: 1,
+                      labelAnchor: positive,
+                    ),
+                  ),
+                  FSliderMark(
+                    value: 0.75,
+                    label: const Text('75'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: -1,
+                      labelAnchor: negative,
+                    ),
+                  ),
+                  FSliderMark(
+                    value: 1.0,
+                    label: const Text('100'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: -20,
+                      labelAnchor: negative,
+                    ),
+                  ),
+                ],
               ),
-              layout: layout,
-              marks: [
-                FSliderMark(
-                  value: 0.0,
-                  label: const Text('0'),
-                  style: sliderStyle.enabledStyle.markStyle.copyWith(
-                    labelOffset: 20,
-                    labelAnchor: positive,
-                  ),
-                ),
-                FSliderMark(
-                  value: 0.25,
-                  label: const Text('25'),
-                  style: sliderStyle.enabledStyle.markStyle.copyWith(
-                    labelOffset: 1,
-                    labelAnchor: positive,
-                  ),
-                ),
-                FSliderMark(
-                  value: 0.75,
-                  label: const Text('75'),
-                  style: sliderStyle.enabledStyle.markStyle.copyWith(
-                    labelOffset: -1,
-                    labelAnchor: negative,
-                  ),
-                ),
-                FSliderMark(
-                  value: 1.0,
-                  label: const Text('100'),
-                  style: sliderStyle.enabledStyle.markStyle.copyWith(
-                    labelOffset: -20,
-                    labelAnchor: negative,
-                  ),
-                ),
-              ],
             ),
-          ),
-        );
+          );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
-        await tester.pump();
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('slider/label-offset-$layout-symmetric.png'),
+          );
+        });
 
-        await gesture.moveTo(tester.getCenter(find.byType(Thumb).first));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
+        testWidgets('asymmetric cross axis padding - $layout', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              data: FThemes.zinc.light,
+              // background: background,
+              child: FSlider(
+                style: sliderStyle.copyWith(
+                  labelLayoutStyle: sliderStyle.labelLayoutStyle.copyWith(
+                    childPadding: const EdgeInsets.only(left: 20, top: 40, right: 10, bottom: 30),
+                  ),
+                ),
+                controller: FContinuousSliderController(
+                  selection: FSliderSelection(min: 0.30, max: 0.60),
+                ),
+                layout: layout,
+                marks: [
+                  FSliderMark(
+                    value: 0.0,
+                    label: const Text('0'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: 20,
+                      labelAnchor: positive,
+                    ),
+                  ),
+                  FSliderMark(
+                    value: 0.25,
+                    label: const Text('25'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: 1,
+                      labelAnchor: positive,
+                    ),
+                  ),
+                  FSliderMark(
+                    value: 0.75,
+                    label: const Text('75'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: -1,
+                      labelAnchor: negative,
+                    ),
+                  ),
+                  FSliderMark(
+                    value: 1.0,
+                    label: const Text('100'),
+                    style: sliderStyle.enabledStyle.markStyle.copyWith(
+                      labelOffset: -20,
+                      labelAnchor: negative,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('slider/label-offset-$layout.png'),
-        );
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('slider/label-offset-$layout-asymmetric.png'),
+          );
+        });
       });
     }
   });
