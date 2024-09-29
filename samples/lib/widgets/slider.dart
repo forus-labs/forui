@@ -29,7 +29,7 @@ class SliderPage extends SampleScaffold {
           'tap' => FSliderInteraction.tap,
           _ => FSliderInteraction.tapAndSlideThumb,
         },
-        extent = bool.tryParse(extent) ?? false ?  (min: 0.25, max: 0.75) : (min: 0, max: 1);
+        extent = bool.tryParse(extent) ?? false ? (min: 0.25, max: 0.75) : (min: 0, max: 1);
 
   @override
   Widget child(BuildContext context) => FSlider(
@@ -118,27 +118,26 @@ class RangeSliderPage extends SampleScaffold {
 
 @RoutePage()
 class VerticalSliderPage extends SampleScaffold {
-
   VerticalSliderPage({
     @queryParam super.theme,
   });
 
   @override
   Widget child(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 35),
-    child: FSlider(
-      label: const Text('Volume'),
-      description: const Text('Adjust the volume by dragging the slider.'),
-      layout: Layout.btt,
-      controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
-      trackMainAxisExtent: 350,
-      marks: const [
-        FSliderMark(value: 0),
-        FSliderMark(value: 0.25, tick: false),
-        FSliderMark(value: 0.5),
-        FSliderMark(value: 0.75, tick: false),
-        FSliderMark(value: 1),
-      ],
-    ),
-  );
+        padding: const EdgeInsets.symmetric(vertical: 35),
+        child: FSlider(
+          label: const Text('Volume'),
+          description: const Text('Adjust the volume by dragging the slider.'),
+          layout: Layout.btt,
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
+          trackMainAxisExtent: 350,
+          marks: const [
+            FSliderMark(value: 0),
+            FSliderMark(value: 0.25, tick: false),
+            FSliderMark(value: 0.5),
+            FSliderMark(value: 0.75, tick: false),
+            FSliderMark(value: 1),
+          ],
+        ),
+      );
 }
