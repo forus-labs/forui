@@ -119,7 +119,6 @@ void main() {
           await tester.pumpWidget(
             TestScaffold.app(
               data: FThemes.zinc.light,
-              // background: background,
               child: FSlider(
                 controller: FContinuousSliderController(
                   minExtendable: min,
@@ -158,6 +157,7 @@ void main() {
         late FSliderStyle sliderStyle;
         late Alignment positive;
         late Alignment negative;
+        late List<FSliderMark> marks;
 
         setUp(() {
           final sliderStyles = FThemes.zinc.light.sliderStyles;
@@ -165,52 +165,52 @@ void main() {
 
           positive = layout.vertical ? Alignment.centerLeft : Alignment.topCenter;
           negative = layout.vertical ? Alignment.centerRight : Alignment.bottomCenter;
+          marks = [
+            FSliderMark(
+              value: 0.0,
+              label: const Text('0'),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(
+                labelOffset: 20,
+                labelAnchor: positive,
+              ),
+            ),
+            FSliderMark(
+              value: 0.25,
+              label: const Text('25'),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(
+                labelOffset: 1,
+                labelAnchor: positive,
+              ),
+            ),
+            FSliderMark(
+              value: 0.75,
+              label: const Text('75'),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(
+                labelOffset: -1,
+                labelAnchor: negative,
+              ),
+            ),
+            FSliderMark(
+              value: 1.0,
+              label: const Text('100'),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(
+                labelOffset: -20,
+                labelAnchor: negative,
+              ),
+            ),
+          ];
         });
 
         testWidgets('symmetric padding', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
               data: FThemes.zinc.light,
-              // background: background,
               child: FSlider(
                 controller: FContinuousSliderController(
                   selection: FSliderSelection(min: 0.30, max: 0.60),
                 ),
                 layout: layout,
-                marks: [
-                  FSliderMark(
-                    value: 0.0,
-                    label: const Text('0'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: 20,
-                      labelAnchor: positive,
-                    ),
-                  ),
-                  FSliderMark(
-                    value: 0.25,
-                    label: const Text('25'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: 1,
-                      labelAnchor: positive,
-                    ),
-                  ),
-                  FSliderMark(
-                    value: 0.75,
-                    label: const Text('75'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: -1,
-                      labelAnchor: negative,
-                    ),
-                  ),
-                  FSliderMark(
-                    value: 1.0,
-                    label: const Text('100'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: -20,
-                      labelAnchor: negative,
-                    ),
-                  ),
-                ],
+                marks: marks,
               ),
             ),
           );
@@ -225,7 +225,6 @@ void main() {
           await tester.pumpWidget(
             TestScaffold.app(
               data: FThemes.zinc.light,
-              // background: background,
               child: FSlider(
                 style: sliderStyle.copyWith(
                   labelLayoutStyle: sliderStyle.labelLayoutStyle.copyWith(
@@ -236,40 +235,7 @@ void main() {
                   selection: FSliderSelection(min: 0.30, max: 0.60),
                 ),
                 layout: layout,
-                marks: [
-                  FSliderMark(
-                    value: 0.0,
-                    label: const Text('0'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: 20,
-                      labelAnchor: positive,
-                    ),
-                  ),
-                  FSliderMark(
-                    value: 0.25,
-                    label: const Text('25'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: 1,
-                      labelAnchor: positive,
-                    ),
-                  ),
-                  FSliderMark(
-                    value: 0.75,
-                    label: const Text('75'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: -1,
-                      labelAnchor: negative,
-                    ),
-                  ),
-                  FSliderMark(
-                    value: 1.0,
-                    label: const Text('100'),
-                    style: sliderStyle.enabledStyle.markStyle.copyWith(
-                      labelOffset: -20,
-                      labelAnchor: negative,
-                    ),
-                  ),
-                ],
+                marks: marks,
               ),
             ),
           );
@@ -277,6 +243,29 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('slider/label-offset/$layout-asymmetric.png'),
+          );
+        });
+
+        testWidgets('labelled', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              data: FThemes.zinc.light,
+              child: FSlider(
+                label: const Text('Label'),
+                description: const Text('Description'),
+                trackMainAxisExtent: 300,
+                controller: FContinuousSliderController(
+                  selection: FSliderSelection(min: 0.30, max: 0.60),
+                ),
+                layout: layout,
+                marks: marks,
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('slider/label-offset/$layout-labelled.png'),
           );
         });
       });
