@@ -855,7 +855,7 @@ final class FTextField extends StatelessWidget {
       ..add(DiagnosticsProperty('undoController', undoController))
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(DiagnosticsProperty('suffixIcon', suffix))
-      ..add(ObjectFlagProperty.has('onSave', onSaved))
+      ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialValue', initialValue))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
