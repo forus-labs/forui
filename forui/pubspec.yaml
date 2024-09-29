@@ -34,14 +34,7 @@ dev_dependencies:
   flint: ^2.8.1
   flutter_test:
     sdk: flutter
-  leak_tracker_flutter_testing: any
   mockito: ^5.4.4
-
-#dependency_overrides:
-#  forui_assets:
-#    path: ../forui_assets
-
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
