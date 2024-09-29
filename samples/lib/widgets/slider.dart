@@ -132,11 +132,73 @@ class VerticalSliderPage extends SampleScaffold {
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           trackMainAxisExtent: 350,
           marks: const [
-            FSliderMark(value: 0),
+            FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),
-            FSliderMark(value: 0.5),
+            FSliderMark(value: 0.5, label: Text('50%')),
             FSliderMark(value: 0.75, tick: false),
-            FSliderMark(value: 1),
+            FSliderMark(value: 1, label: Text('100%')),
+          ],
+        ),
+      );
+}
+
+@RoutePage()
+class SliderFormPage extends SampleScaffold {
+  SliderFormPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 300),
+        child: const SliderForm(),
+      );
+}
+
+class SliderForm extends StatefulWidget {
+  const SliderForm({super.key});
+
+  @override
+  State<SliderForm> createState() => SliderFormState();
+}
+
+class SliderFormState extends State<SliderForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) => Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FSlider(
+              label: const Text('Brightness'),
+              description: const Text('Adjust the brightness level.'),
+              controller: FContinuousSliderController(
+                selection: FSliderSelection(max: 0.35),
+              ),
+              marks: const [
+                FSliderMark(value: 0, label: Text('0%')),
+                FSliderMark(value: 0.25, tick: false),
+                FSliderMark(value: 0.5, label: Text('50%')),
+                FSliderMark(value: 0.75, tick: false),
+                FSliderMark(value: 1, label: Text('100%')),
+              ],
+            ),
+            const SizedBox(height: 20),
+            FButton(
+              label: const Text('Save'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
+            ),
           ],
         ),
       );

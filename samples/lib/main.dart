@@ -86,6 +86,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/slider/discrete', page: DiscreteSliderRoute.page),
         AutoRoute(path: '/slider/range', page: RangeSliderRoute.page),
         AutoRoute(path: '/slider/vertical', page: VerticalSliderRoute.page),
+        AutoRoute(path: '/slider/form', page: SliderFormRoute.page),
         AutoRoute(path: '/switch/default', page: SwitchRoute.page),
         AutoRoute(path: '/switch/form', page: FormSwitchRoute.page),
       ];

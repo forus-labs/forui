@@ -18,8 +18,9 @@ class HorizontalSliderRenderObject extends _SliderRenderObject {
   @override
   RenderObject createRenderObject(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = InheritedData.of(context);
+    final labelledMarks = marks.where((mark) => mark.label != null).toList();
     final stateStyle = InheritedState.of(context).style;
-    return _RenderHorizontalSlider(style, stateStyle, layout, marks, trackMainAxisExtent);
+    return _RenderHorizontalSlider(style, stateStyle, layout, labelledMarks, trackMainAxisExtent);
   }
 }
 
@@ -30,8 +31,9 @@ class VerticalSliderRenderObject extends _SliderRenderObject {
   @override
   RenderObject createRenderObject(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = InheritedData.of(context);
+    final labelledMarks = marks.where((mark) => mark.label != null).toList();
     final stateStyle = InheritedState.of(context).style;
-    return _RenderVerticalSlider(style, stateStyle, layout, marks, trackMainAxisExtent);
+    return _RenderVerticalSlider(style, stateStyle, layout, labelledMarks, trackMainAxisExtent);
   }
 }
 
@@ -47,7 +49,7 @@ abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
       ..style = style
       ..stateStyle = stateStyle
       ..sliderLayout = layout
-      ..marks = marks
+      ..marks = marks.where((mark) => mark.label != null).toList()
       ..mainAxisExtent = trackMainAxisExtent;
   }
 }

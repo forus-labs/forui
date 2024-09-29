@@ -270,6 +270,31 @@ void main() {
         });
       });
     }
+
+    testWidgets('interweaving marks with no labels', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          data: FThemes.zinc.light,
+          child: FSlider(
+            controller: FContinuousSliderController(
+              selection: FSliderSelection(min: 0.30, max: 0.60),
+            ),
+            marks: const [
+              FSliderMark(value: 0, label: Text('0%')),
+              FSliderMark(value: 0.25, tick: false),
+              FSliderMark(value: 0.5, label: Text('50%')),
+              FSliderMark(value: 0.75, tick: false),
+              FSliderMark(value: 1, label: Text('100%')),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('slider/interweaving-marks.png'),
+      );
+    });
   });
 
   tearDown(() => Touch.primary = null);
