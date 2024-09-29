@@ -87,7 +87,7 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-non-touch-device-$name.png'));
       });
-      
+
       tearDown(() => Touch.primary = null);
     });
   }

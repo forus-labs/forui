@@ -153,7 +153,7 @@ class FContinuousSliderController extends FSliderController {
     super.tooltips = true,
     super.allowedInteraction,
     super.minExtendable,
-  })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.');
+  }) : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.');
 
   /// Creates a [FContinuousSliderController] for selecting a range.
   FContinuousSliderController.range({

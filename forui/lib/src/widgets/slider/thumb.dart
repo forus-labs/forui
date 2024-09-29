@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/slider/inherited_state.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
+import 'package:forui/src/widgets/slider/inherited_state.dart';
 
 class _ShrinkIntent extends Intent {
   const _ShrinkIntent();
@@ -63,13 +63,8 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final thumbStyle = InheritedState.of(context).style.thumbStyle;
-    final InheritedData(
-      :style,
-      :layout,
-      :tooltipBuilder,
-      :semanticValueFormatterCallback,
-      :enabled
-    ) = InheritedData.of(context);
+    final InheritedData(:style, :layout, :tooltipBuilder, :semanticValueFormatterCallback, :enabled) =
+        InheritedData.of(context);
 
     String? increasedValue;
     if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
@@ -252,7 +247,7 @@ final class FSliderThumbStyle with Diagnosticable {
     required this.color,
     required this.borderColor,
     this.borderWidth = 2,
-  })  : assert(0 < borderWidth, 'The border width must be positive');
+  }) : assert(0 < borderWidth, 'The border width must be positive');
 
   /// Returns a copy of this [FSliderThumbStyle] but with the given fields replaced with the new values.
   @useResult

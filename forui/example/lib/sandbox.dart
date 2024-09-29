@@ -20,6 +20,6 @@ class _SandboxState extends State<Sandbox> {
 
   @override
   Widget build(BuildContext context) => FSlider(
-      controller: FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.35)),
-    );
+        controller: FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.35)),
+      );
 }

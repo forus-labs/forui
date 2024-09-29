@@ -18,7 +18,7 @@ import 'package:forui/src/widgets/text_field/field.dart';
 /// * https://forui.dev/docs/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
-final class FTextField extends StatelessWidget{
+final class FTextField extends StatelessWidget {
   static Widget _contextMenuBuilder(
     BuildContext context,
     EditableTextState state,
