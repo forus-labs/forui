@@ -84,7 +84,7 @@ final class FSliderStyles with Diagnosticable {
         labelLayoutStyle: const FLabelLayoutStyle(
           labelPadding: EdgeInsets.only(bottom: 5),
           childPadding: EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
-          descriptionPadding: EdgeInsets.only(top: 5),
+          descriptionPadding: EdgeInsets.only(top: 10),
           errorPadding: EdgeInsets.only(top: 5),
         ),
         enabledStyle: enabledHorizontalStyle,
