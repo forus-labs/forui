@@ -103,7 +103,7 @@ final class FAccordionStyle with Diagnosticable {
   final EdgeInsets childPadding;
 
   /// The icon.
-  final SvgPicture icon;
+  final Widget icon;
 
   /// The divider's color.
   final Color dividerColor;

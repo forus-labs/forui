@@ -6,38 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
-
-@internal
-class FAccordionItemData extends InheritedWidget {
-  @useResult
-  static FAccordionItemData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
-    assert(data != null, 'No FAccordionData found in context');
-    return data!;
-  }
-
-  final int index;
-
-  final FAccordionController controller;
-
-  const FAccordionItemData({
-    required this.index,
-    required this.controller,
-    required super.child,
-    super.key,
-  });
-
-  @override
-  bool updateShouldNotify(covariant FAccordionItemData old) => index != old.index || controller != old.controller;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(IntProperty('index', index))
-      ..add(DiagnosticsProperty('controller', controller));
-  }
-}
+import 'package:forui/src/widgets/accordion/accordion.dart';
 
 /// An interactive heading that reveals a section of content.
 ///
@@ -73,8 +42,7 @@ class FAccordionItem extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('initiallyExpanded', initiallyExpanded))
-      ..add(DiagnosticsProperty('child', child));
+      ..add(DiagnosticsProperty('initiallyExpanded', initiallyExpanded));
   }
 }
 
@@ -148,7 +116,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
           _Expandable(
             percentage: _expand.value / 100,
             child: ClipRect(
-              clipper: _Clipper(percentage: _expand.value / 100),
+              clipper: _Clipper(_expand.value / 100),
               child: Padding(
                 padding: style.childPadding,
                 child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
@@ -174,26 +142,21 @@ class _Expandable extends SingleChildRenderObjectWidget {
   final double _percentage;
 
   const _Expandable({
-    required Widget child,
+    required super.child,
     required double percentage,
-  })  : _percentage = percentage,
-        super(child: child);
+  }) : _percentage = percentage;
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _ExpandableBox(percentage: _percentage);
+  RenderObject createRenderObject(BuildContext context) => _ExpandableBox(_percentage);
 
   @override
-  void updateRenderObject(BuildContext context, _ExpandableBox renderObject) {
-    renderObject.percentage = _percentage;
-  }
+  void updateRenderObject(BuildContext context, _ExpandableBox renderObject) => renderObject..percentage = _percentage;
 }
 
 class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   double _percentage;
 
-  _ExpandableBox({
-    required double percentage,
-  }) : _percentage = percentage;
+  _ExpandableBox(double percentage) : _percentage = percentage;
 
   @override
   void performLayout() {
@@ -243,7 +206,7 @@ class _ExpandableBox extends RenderBox with RenderObjectWithChildMixin<RenderBox
 class _Clipper extends CustomClipper<Rect> {
   final double percentage;
 
-  _Clipper({required this.percentage});
+  _Clipper(this.percentage);
 
   @override
   Rect getClip(Size size) => Offset.zero & Size(size.width, size.height * percentage);

@@ -6,7 +6,6 @@ class FAccordionController extends ChangeNotifier {
   final Duration animationDuration;
 
   /// The animation controllers for each of the sections in the accordion.
-  @internal
   final Map<int, ({AnimationController controller, Animation animation})> controllers;
   final Set<int> _expanded;
   final int _min;
@@ -81,7 +80,7 @@ class FAccordionController extends ChangeNotifier {
     if (_expanded.contains(index)) {
       return;
     }
-    
+
     final futures = <Future<void>>[];
     if (_max != null && _expanded.length >= _max) {
       futures.add(_collapse(_expanded.first));
@@ -98,6 +97,15 @@ class FAccordionController extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Collapses the item at the given [index].
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> collapse(int index) async {
+    if (await _collapse(index)) {
+      notifyListeners();
+    }
+  }
+
   Future<bool> _collapse(int index) async {
     if (_expanded.length <= _min || !_expanded.contains(index)) {
       return false;
@@ -107,15 +115,6 @@ class FAccordionController extends ChangeNotifier {
 
     await controllers[index]?.controller.reverse();
     return true;
-  }
-
-  /// Collapses the item at the given [index].
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> collapse(int index) async {
-    if (await _collapse(index)) {
-      notifyListeners();
-    }
   }
 
   /// Returns true if the number of expanded items is within the allowed range.

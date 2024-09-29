@@ -10,6 +10,30 @@ import 'accordion_controller_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AnimationController>()])
 @GenerateNiceMocks([MockSpec<Animation>()])
+void _setup(List<AnimationController> animationControllers, List<Animation<int>> animations) {
+  animations.clear();
+  animationControllers.clear();
+
+  for (int i = 0; i < 4; i++) {
+    animationControllers.add(MockAnimationController());
+    animations.add(Tween(begin: 0, end: 100).animate(animationControllers[i]));
+    when(animationControllers[i].forward()).thenAnswer((_) {
+      when(animationControllers[i].value).thenReturn(1.0);
+      return TickerFuture.complete();
+    });
+    when(animationControllers[i].reverse()).thenAnswer((_) {
+      when(animationControllers[i].value).thenReturn(0.0);
+      return TickerFuture.complete();
+    });
+  }
+}
+
+void _tearDown(List<AnimationController> animationControllers) {
+  for (int i = 0; i < 4; i++) {
+    animationControllers[i].dispose();
+  }
+}
+
 void main() {
   group('FAccordionController', () {
     late FAccordionController controller;
@@ -19,22 +43,7 @@ void main() {
 
     setUp(() {
       count = 0;
-      animations.clear();
-      animationControllers.clear();
-
-      for (int i = 0; i < 4; i++) {
-        animationControllers.add(MockAnimationController());
-        animations.add(Tween(begin: 0, end: 100).animate(animationControllers[i]));
-        when(animationControllers[i].forward()).thenAnswer((_) {
-          when(animationControllers[i].value).thenReturn(1.0);
-          return TickerFuture.complete();
-        });
-        when(animationControllers[i].reverse()).thenAnswer((_) {
-          when(animationControllers[i].value).thenReturn(0.0);
-          return TickerFuture.complete();
-        });
-      }
-
+      _setup(animationControllers, animations);
       controller = FAccordionController(min: 1, max: 3)
         ..addListener(() {
           count++;
@@ -42,9 +51,7 @@ void main() {
     });
 
     tearDown(() {
-      for (int i = 0; i < 4; i++) {
-        animationControllers[i].dispose();
-      }
+      _tearDown(animationControllers);
       controller.dispose();
     });
 
@@ -148,22 +155,7 @@ void main() {
 
     setUp(() {
       count = 0;
-      animations.clear();
-      animationControllers.clear();
-
-      for (int i = 0; i < 4; i++) {
-        animationControllers.add(MockAnimationController());
-        animations.add(Tween(begin: 0, end: 100).animate(animationControllers[i]));
-        when(animationControllers[i].forward()).thenAnswer((_) {
-          when(animationControllers[i].value).thenReturn(1.0);
-          return TickerFuture.complete();
-        });
-        when(animationControllers[i].reverse()).thenAnswer((_) {
-          when(animationControllers[i].value).thenReturn(0.0);
-          return TickerFuture.complete();
-        });
-      }
-
+      _setup(animationControllers, animations);
       controller = FAccordionController.radio()
         ..addListener(() {
           count++;
@@ -171,9 +163,7 @@ void main() {
     });
 
     tearDown(() {
-      for (int i = 0; i < 4; i++) {
-        animationControllers[i].dispose();
-      }
+      _tearDown(animationControllers);
       controller.dispose();
     });
 
