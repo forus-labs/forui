@@ -81,7 +81,7 @@ class FAccordionController extends ChangeNotifier {
     if (_expanded.contains(index)) {
       return;
     }
-    
+
     final futures = <Future<void>>[];
     if (_max != null && _expanded.length >= _max) {
       futures.add(_collapse(_expanded.first));
