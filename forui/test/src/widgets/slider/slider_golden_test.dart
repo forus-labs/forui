@@ -93,45 +93,73 @@ void main() {
     }
 
     for (final layout in Layout.values) {
-      for (final labelOffset in [-20.0, 20.0]) {
-        testWidgets('label offset - $layout - $labelOffset', (tester) async {
-          final sliderStyle = FThemes.zinc.light.sliderStyles.horizontalStyle.enabledStyle;
-          final style = sliderStyle.markStyle.copyWith(labelOffset: labelOffset);
+      testWidgets('label offset - $layout', (tester) async {
+        final sliderStyles = FThemes.zinc.light.sliderStyles;
+        final sliderStyle = layout.vertical ? sliderStyles.verticalStyle : sliderStyles.horizontalStyle;
 
-          await tester.pumpWidget(
-            TestScaffold.app(
-              data: FThemes.zinc.light,
-              // background: background,
-              child: FSlider(
-                controller: FContinuousSliderController(
-                  selection: FSliderSelection(min: 0.30, max: 0.60),
-                ),
-                layout: layout,
-                marks: [
-                  FSliderMark(value: 0.0, label: const Text('0'), style: style),
-                  FSliderMark(value: 0.25, label: const Text('25'), style: style, tick: false),
-                  FSliderMark(value: 0.5, label: const Text('50'), style: style),
-                  FSliderMark(value: 0.75, label: const Text('75'), style: style, tick: false),
-                  FSliderMark(value: 1.0, label: const Text('100'), style: style),
-                ],
+        final positive = layout.vertical ? Alignment.centerLeft : Alignment.topCenter;
+        final negative = layout.vertical ? Alignment.centerRight : Alignment.bottomCenter;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            data: FThemes.zinc.light,
+            // background: background,
+            child: FSlider(
+              controller: FContinuousSliderController(
+                selection: FSliderSelection(min: 0.30, max: 0.60),
               ),
+              layout: layout,
+              marks: [
+                FSliderMark(
+                  value: 0.0,
+                  label: const Text('0'),
+                  style: sliderStyle.enabledStyle.markStyle.copyWith(
+                    labelOffset: 20,
+                    labelAnchor: positive,
+                  ),
+                ),
+                FSliderMark(
+                  value: 0.25,
+                  label: const Text('25'),
+                  style: sliderStyle.enabledStyle.markStyle.copyWith(
+                    labelOffset: 1,
+                    labelAnchor: positive,
+                  ),
+                ),
+                FSliderMark(
+                  value: 0.75,
+                  label: const Text('75'),
+                  style: sliderStyle.enabledStyle.markStyle.copyWith(
+                    labelOffset: -1,
+                    labelAnchor: negative,
+                  ),
+                ),
+                FSliderMark(
+                  value: 1.0,
+                  label: const Text('100'),
+                  style: sliderStyle.enabledStyle.markStyle.copyWith(
+                    labelOffset: -20,
+                    labelAnchor: negative,
+                  ),
+                ),
+              ],
             ),
-          );
+          ),
+        );
 
-          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-          await gesture.addPointer(location: Offset.zero);
-          addTearDown(gesture.removePointer);
-          await tester.pump();
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        await gesture.addPointer(location: Offset.zero);
+        addTearDown(gesture.removePointer);
+        await tester.pump();
 
-          await gesture.moveTo(tester.getCenter(find.byType(Thumb).first));
-          await tester.pumpAndSettle(const Duration(seconds: 1));
+        await gesture.moveTo(tester.getCenter(find.byType(Thumb).first));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/label-offset-$layout-$labelOffset.png'),
-          );
-        });
-      }
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('slider/label-offset-$layout.png'),
+        );
+      });
     }
   });
 }
