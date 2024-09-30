@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -39,8 +38,6 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
       expect(find.text('tip'), findsNothing);
-
-      debugDefaultTargetPlatformOverride = null;
     });
 
     group('long press', () {

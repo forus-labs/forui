@@ -13,9 +13,9 @@ void main() {
   ];
 
   for (final constructor in [
-    (selection, [FSliderInteraction? interaction, bool min = false]) =>
+    (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, bool min = false]) =>
         FContinuousSliderController(selection: selection, allowedInteraction: interaction, minExtendable: min),
-    (selection, [FSliderInteraction? interaction, bool min = false]) =>
+    (selection, [FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb, bool min = false]) =>
         FDiscreteSliderController(selection: selection, allowedInteraction: interaction, minExtendable: min),
   ]) {
     group('FSlider', () {

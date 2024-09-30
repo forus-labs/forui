@@ -13,6 +13,9 @@
 
 * Add `FTextField.forceErrorText`.
 
+* **Breaking** Add `FColorScheme.disabledColorBrightness` - this will only affect users that create a `FColorScheme`
+  from scratch.
+
 ### Changes
 
 * Change button to change color when hovering over it.
@@ -30,6 +33,10 @@
 
 * **Breaking** Remove `FTextFieldErrorStyle.animatioDuration`.
 
+* **Breaking** Rename `FLabelStateStyle` to `FLabelStateStyles`.
+
+* **Breaking** Rename `FTextField.onSave` to `FTextField.onSaved`.
+
 ### Fixes
 
 * Fix `FBottomNavigationBar` items hit region being smaller than intended.
@@ -45,6 +52,8 @@
 * Fix `FTextfield` description text's odd transition animation whenever an error occurs.
 
 * Fix `FSwitch` not using correct label style.
+
+* Fix `FCheckbox`, `FRadio`, `FSelectGroup`, `FSwitch` and `FTextField` styles causing the widget inspector to crash.
 
 
 ## 0.5.1

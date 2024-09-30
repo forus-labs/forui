@@ -50,7 +50,7 @@ class Field extends FormField<String> {
     required FTextFieldStyle style,
     super.key,
   }) : super(
-          onSaved: parent.onSave,
+          onSaved: parent.onSaved,
           validator: parent.validator,
           initialValue: parent.initialValue,
           enabled: parent.enabled,
