@@ -45,6 +45,7 @@ class FTappable extends StatefulWidget {
   final Duration touchHoverExitDuration;
   final VoidCallback? onPress;
   final VoidCallback? onLongPress;
+  final Duration shortPressDelay;
   final ValueWidgetBuilder<FTappableState> builder;
   final Widget? child;
 
@@ -77,6 +78,7 @@ class FTappable extends StatefulWidget {
     this.touchHoverExitDuration = Duration.zero,
     this.onPress,
     this.onLongPress,
+    this.shortPressDelay = const Duration(milliseconds: 200),
     ValueWidgetBuilder<FTappableState>? builder,
     this.child,
     super.key,

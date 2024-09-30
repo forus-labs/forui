@@ -76,15 +76,6 @@ final class FThemeData with Diagnosticable {
   /// The resizable style.
   final FResizableStyle resizableStyle;
 
-  /// The tabs styles.
-  final FTabsStyle tabsStyle;
-
-  /// The text field style.
-  final FTextFieldStyle textFieldStyle;
-
-  /// The tooltip style.
-  final FTooltipStyle tooltipStyle;
-
   /// The scaffold style.
   final FScaffoldStyle scaffoldStyle;
 
@@ -96,6 +87,18 @@ final class FThemeData with Diagnosticable {
 
   /// The switch style.
   final FSwitchStyle switchStyle;
+
+  /// The tabs styles.
+  final FTabsStyle tabsStyle;
+
+  /// The text field style.
+  final FTextFieldStyle textFieldStyle;
+
+  /// The tile style.
+  final FTileStyle tileStyle;
+
+  /// The tooltip style.
+  final FTooltipStyle tooltipStyle;
 
   /// Creates a [FThemeData].
   ///
@@ -123,13 +126,14 @@ final class FThemeData with Diagnosticable {
     required this.progressStyle,
     required this.radioStyle,
     required this.resizableStyle,
-    required this.tabsStyle,
-    required this.textFieldStyle,
-    required this.tooltipStyle,
     required this.scaffoldStyle,
     required this.selectGroupStyle,
     required this.sliderStyles,
     required this.switchStyle,
+    required this.tabsStyle,
+    required this.textFieldStyle,
+    required this.tooltipStyle,
+    required this.tileStyle,
     this.typography = const FTypography(),
   });
 
@@ -162,13 +166,14 @@ final class FThemeData with Diagnosticable {
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       radioStyle: FRadioStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
-      tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
+      tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
     );
   }
 
@@ -236,13 +241,14 @@ final class FThemeData with Diagnosticable {
     FProgressStyle? progressStyle,
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
-    FTabsStyle? tabsStyle,
-    FTextFieldStyle? textFieldStyle,
-    FTooltipStyle? tooltipStyle,
     FScaffoldStyle? scaffoldStyle,
     FSelectGroupStyle? selectGroupStyle,
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
+    FTabsStyle? tabsStyle,
+    FTextFieldStyle? textFieldStyle,
+    FTileStyle? tileStyle,
+    FTooltipStyle? tooltipStyle,
   }) =>
       FThemeData(
         colorScheme: colorScheme,
@@ -265,13 +271,14 @@ final class FThemeData with Diagnosticable {
         progressStyle: progressStyle ?? this.progressStyle,
         radioStyle: radioStyle ?? this.radioStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
-        tabsStyle: tabsStyle ?? this.tabsStyle,
-        textFieldStyle: textFieldStyle ?? this.textFieldStyle,
-        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
         selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
         sliderStyles: sliderStyles ?? this.sliderStyles,
         switchStyle: switchStyle ?? this.switchStyle,
+        tabsStyle: tabsStyle ?? this.tabsStyle,
+        textFieldStyle: textFieldStyle ?? this.textFieldStyle,
+        tileStyle: tileStyle ?? this.tileStyle,
+        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
       );
 
   @override
@@ -298,13 +305,14 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('tileStyle', tileStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug));
   }
 
   @override
@@ -332,13 +340,14 @@ final class FThemeData with Diagnosticable {
           progressStyle == other.progressStyle &&
           radioStyle == other.radioStyle &&
           resizableStyle == other.resizableStyle &&
-          tabsStyle == other.tabsStyle &&
-          textFieldStyle == other.textFieldStyle &&
-          tooltipStyle == other.tooltipStyle &&
           scaffoldStyle == other.scaffoldStyle &&
           selectGroupStyle == other.selectGroupStyle &&
           sliderStyles == other.sliderStyles &&
-          switchStyle == other.switchStyle;
+          switchStyle == other.switchStyle &&
+          tabsStyle == other.tabsStyle &&
+          textFieldStyle == other.textFieldStyle &&
+          tileStyle == other.tileStyle &&
+          tooltipStyle == other.tooltipStyle;
 
   @override
   int get hashCode =>
@@ -362,11 +371,12 @@ final class FThemeData with Diagnosticable {
       progressStyle.hashCode ^
       radioStyle.hashCode ^
       resizableStyle.hashCode ^
-      tabsStyle.hashCode ^
-      textFieldStyle.hashCode ^
-      tooltipStyle.hashCode ^
       scaffoldStyle.hashCode ^
       selectGroupStyle.hashCode ^
       sliderStyles.hashCode ^
-      switchStyle.hashCode;
+      switchStyle.hashCode ^
+      tabsStyle.hashCode ^
+      textFieldStyle.hashCode ^
+      tileStyle.hashCode ^
+      tooltipStyle.hashCode;
 }
