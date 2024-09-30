@@ -356,6 +356,7 @@ Tap anywhere or slide the thumb to select a value.
                     FSlider(
                       label: const Text('Brightness'),
                       description: const Text('Adjust the brightness level.'),
+                      // validator: (value) => 'An error text.',
                       controller: FContinuousSliderController(
                         selection: FSliderSelection(max: 0.35),
                       ),
