@@ -23,6 +23,7 @@ final class FAlertStyles with Diagnosticable {
   FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FAlertCustomStyle(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+          iconColor: colorScheme.foreground,
           titleTextStyle: typography.base.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.foreground,
@@ -34,10 +35,10 @@ final class FAlertStyles with Diagnosticable {
             borderRadius: style.borderRadius,
             color: colorScheme.background,
           ),
-          icon: FAlertIconStyle(color: colorScheme.foreground),
         ),
         destructive = FAlertCustomStyle(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+          iconColor: colorScheme.destructive,
           titleTextStyle: typography.base.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.destructive,
@@ -49,7 +50,6 @@ final class FAlertStyles with Diagnosticable {
             borderRadius: style.borderRadius,
             color: colorScheme.background,
           ),
-          icon: FAlertIconStyle(color: colorScheme.destructive),
         );
 
   @override

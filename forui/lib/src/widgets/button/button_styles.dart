@@ -48,9 +48,9 @@ final class FButtonStyles with Diagnosticable {
             enabled: colorScheme.primaryForeground,
             disabled: colorScheme.primaryForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle(
-            enabledColor: colorScheme.primaryForeground,
-            disabledColor: colorScheme.primaryForeground.withOpacity(0.5),
+          iconContent: FButtonIconContentStyle(
+            enabled: colorScheme.primaryForeground,
+            disabled: colorScheme.primaryForeground.withOpacity(0.5),
           ),
         ),
         secondary = FButtonCustomStyle(
@@ -71,9 +71,9 @@ final class FButtonStyles with Diagnosticable {
             enabled: colorScheme.secondaryForeground,
             disabled: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle(
-            enabledColor: colorScheme.secondaryForeground,
-            disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
+          iconContent: FButtonIconContentStyle(
+            enabled: colorScheme.secondaryForeground,
+            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
         ),
         destructive = FButtonCustomStyle(
@@ -94,9 +94,9 @@ final class FButtonStyles with Diagnosticable {
             enabled: colorScheme.destructiveForeground,
             disabled: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle(
-            enabledColor: colorScheme.destructiveForeground,
-            disabledColor: colorScheme.destructiveForeground.withOpacity(0.5),
+          iconContent: FButtonIconContentStyle(
+            enabled: colorScheme.destructiveForeground,
+            disabled: colorScheme.destructiveForeground.withOpacity(0.5),
           ),
         ),
         outline = FButtonCustomStyle(
@@ -120,9 +120,9 @@ final class FButtonStyles with Diagnosticable {
             enabled: colorScheme.secondaryForeground,
             disabled: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
-          icon: FButtonIconStyle(
-            enabledColor: colorScheme.secondaryForeground,
-            disabledColor: colorScheme.secondaryForeground.withOpacity(0.5),
+          iconContent: FButtonIconContentStyle(
+            enabled: colorScheme.secondaryForeground,
+            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
           ),
         );
 

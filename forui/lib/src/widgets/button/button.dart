@@ -62,14 +62,14 @@ class FButton extends StatelessWidget {
 
   /// Creates a [FButton] that contains a [prefix], [label], and [suffix].
   ///
+  /// [prefix] and [suffix] are wrapped in [FIconData], and therefore works with [FIcon]s.
+  ///
   /// The button layout is as follows, assuming the locale is read from left to right:
   /// ```
   /// |---------------------------------------|
   /// |  [prefixIcon]  [label]  [suffixIcon]  |
   /// |---------------------------------------|
   /// ```
-  ///
-  /// [FButtonIcon] provides a convenient way to transform a bundled SVG icon into a [prefix] and [suffix].
   FButton({
     required this.onPress,
     required Widget label,
@@ -81,11 +81,7 @@ class FButton extends StatelessWidget {
     Widget? prefix,
     Widget? suffix,
     super.key,
-  }) : child = Content(
-          prefix: prefix,
-          suffix: suffix,
-          label: label,
-        );
+  }) : child = Content(prefix: prefix, suffix: suffix, label: label);
 
   /// Creates a [FButton] that contains only an icon.
   FButton.icon({
@@ -206,9 +202,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   /// The content's style.
   final FButtonContentStyle content;
 
-  /// The icon's style.
-  final FButtonIconStyle icon;
-
   /// The icon content's style.
   final FButtonIconContentStyle iconContent;
 
@@ -218,8 +211,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     required this.enabledHoverBoxDecoration,
     required this.disabledBoxDecoration,
     required this.content,
-    required this.icon,
-    this.iconContent = const FButtonIconContentStyle(),
+    required this.iconContent,
   });
 
   /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
@@ -229,7 +221,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     BoxDecoration? enabledHoverBoxDecoration,
     BoxDecoration? disabledBoxDecoration,
     FButtonContentStyle? content,
-    FButtonIconStyle? icon,
     FButtonIconContentStyle? iconContent,
   }) =>
       FButtonCustomStyle(
@@ -237,7 +228,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
         enabledHoverBoxDecoration: enabledHoverBoxDecoration ?? this.enabledHoverBoxDecoration,
         disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
         content: content ?? this.content,
-        icon: icon ?? this.icon,
         iconContent: iconContent ?? this.iconContent,
       );
 
@@ -249,7 +239,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledHoverBoxDecoration', enabledHoverBoxDecoration))
       ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
       ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('icon', icon))
       ..add(DiagnosticsProperty('iconContent', iconContent));
   }
 
@@ -262,7 +251,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
           enabledHoverBoxDecoration == other.enabledHoverBoxDecoration &&
           disabledBoxDecoration == other.disabledBoxDecoration &&
           content == other.content &&
-          icon == other.icon &&
           iconContent == other.iconContent;
 
   @override
@@ -271,7 +259,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       enabledHoverBoxDecoration.hashCode ^
       disabledBoxDecoration.hashCode ^
       content.hashCode ^
-      icon.hashCode ^
       iconContent.hashCode;
 }
 

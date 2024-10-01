@@ -41,7 +41,7 @@ void main() {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: FAlert(
-                  icon: FAlertIcon(icon: FAssets.icons.badgeAlert),
+                  icon: FIcon(FAssets.icons.badgeAlert),
                   title: const Text('Alert Title'),
                   subtitle: const Text('Alert description with extra text'),
                   style: variant,

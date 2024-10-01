@@ -16,6 +16,8 @@
 * **Breaking** Add `FColorScheme.disabledColorBrightness` - this will only affect users that create a `FColorScheme`
   from scratch.
 
+* Add `FIcon`.
+
 ### Changes
 
 * Change button to change color when hovering over it.
@@ -36,6 +38,13 @@
 * **Breaking** Rename `FLabelStateStyle` to `FLabelStateStyles`.
 
 * **Breaking** Rename `FTextField.onSave` to `FTextField.onSaved`.
+
+* **Breaking** Remove FAlertIcon & FAlertIconStyle - use `FIcon` instead.
+
+* **Breaking** Remove FButtonIcon & FAlertIconStyle  - use `FIcon` instead.
+
+* * **Breaking** Change FButtonCustomStyle to better represent the style's layout - this will only affect users that 
+  create a custom `FButtonCustomStyle`.
 
 ### Fixes
 

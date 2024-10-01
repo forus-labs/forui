@@ -7,5 +7,4 @@ library forui.widgets.button;
 
 export '../src/widgets/button/button.dart' hide Variant;
 export '../src/widgets/button/button_content.dart' hide Content, IconContent;
-export '../src/widgets/button/button_icon.dart';
 export '../src/widgets/button/button_styles.dart';
