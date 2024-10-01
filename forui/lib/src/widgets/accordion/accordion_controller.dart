@@ -11,7 +11,7 @@ class FAccordionController extends ChangeNotifier {
   final int _min;
   final int? _max;
 
-  /// An [FAccordionController] that allows only one section to be expanded at a time.
+  /// Creates an [FAccordionController] that allows only one section to be expanded at a time.
   factory FAccordionController.radio({Duration? animationDuration}) => FAccordionController(
         max: 1,
         animationDuration: animationDuration ?? const Duration(milliseconds: 200),
@@ -19,7 +19,8 @@ class FAccordionController extends ChangeNotifier {
 
   /// Creates a [FAccordionController].
   ///
-  /// The [min] and [max] values are the minimum and maximum number of selections allowed. Defaults to no minimum and maximum.
+  /// The [min], inclusive, and [max], inclusive, values are the minimum and maximum number of selections allowed.
+  /// Defaults to no minimum and maximum.
   ///
   /// # Contract:
   /// * Throws [AssertionError] if [min] < 0.
@@ -28,7 +29,7 @@ class FAccordionController extends ChangeNotifier {
   FAccordionController({
     int min = 0,
     int? max,
-    this.animationDuration = const Duration(milliseconds: 100),
+    this.animationDuration = const Duration(milliseconds: 200),
   })  : _min = min,
         _max = max,
         controllers = {},
@@ -38,7 +39,12 @@ class FAccordionController extends ChangeNotifier {
         assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   /// Adds an item to the accordion.
-  void addItem(int index, AnimationController controller, Animation animation, {required bool initiallyExpanded}) {
+  Future<void> addItem(
+    int index,
+    AnimationController controller,
+    Animation animation, {
+    required bool initiallyExpanded,
+  }) async {
     controller
       ..value = initiallyExpanded ? 1 : 0
       ..duration = animationDuration;
@@ -47,7 +53,9 @@ class FAccordionController extends ChangeNotifier {
 
     if (initiallyExpanded) {
       if (_max != null && _expanded.length >= _max) {
-        return;
+        if (!await _collapse(expanded.first)) {
+          return;
+        }
       }
       _expanded.add(index);
     }
@@ -55,6 +63,9 @@ class FAccordionController extends ChangeNotifier {
 
   /// Removes the item at the given [index] from the accordion. Returns true if the item was removed.
   bool removeItem(int index) {
+    if (_expanded.length <= _min && _expanded.contains(index)) {
+      return false;
+    }
     final removed = controllers.remove(index);
     _expanded.remove(index);
     return removed != null;
@@ -77,7 +88,7 @@ class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> expand(int index) async {
-    if (_expanded.contains(index)) {
+    if (_expanded.contains(index) || controllers[index] == null) {
       return;
     }
 
@@ -122,4 +133,10 @@ class FAccordionController extends ChangeNotifier {
 
   /// The currently selected values.
   Set<int> get expanded => {..._expanded};
+
+  /// Removes all objects from the expanded and controller list;
+  void clear() {
+    _expanded.clear();
+    controllers.clear();
+  }
 }

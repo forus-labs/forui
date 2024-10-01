@@ -51,7 +51,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   late Animation<double> _expand;
 
   @override
-  void didChangeDependencies() {
+  Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
     final data = FAccordionItemData.of(context);
 
@@ -69,7 +69,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
         parent: _controller,
       ),
     );
-    data.controller.addItem(data.index, _controller, _expand, initiallyExpanded: widget.initiallyExpanded);
+    await data.controller.addItem(data.index, _controller, _expand, initiallyExpanded: widget.initiallyExpanded);
   }
 
   @override
