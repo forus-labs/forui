@@ -267,9 +267,10 @@ class FSelectGroupStyle with Diagnosticable {
   }
 
   /// The [FLabel]'s style.
+  // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
         layout: labelLayoutStyle,
-        state: FLabelStateStyle(
+        state: FLabelStateStyles(
           enabledStyle: enabledStyle,
           disabledStyle: disabledStyle,
           errorStyle: errorStyle,
@@ -303,7 +304,6 @@ class FSelectGroupStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle))
-      ..add(DiagnosticsProperty('labelStyle', labelStyle))
       ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle))
       ..add(DiagnosticsProperty('radioStyle', radioStyle));
   }
