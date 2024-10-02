@@ -92,11 +92,13 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             data: theme,
-            child: FIcon.raw(builder: (context, style, _) => Container(
-              color: style.color,
-              height: style.size,
-              width: style.size,
-            )),
+            child: FIcon.raw(
+              builder: (context, style, _) => Container(
+                color: style.color,
+                height: style.size,
+                width: style.size,
+              ),
+            ),
           ),
         );
 
