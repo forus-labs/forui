@@ -9,20 +9,19 @@ const config: DocsThemeConfig = {
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any"/>
       </>
   ),
-  // TODO: Fix.
-  // useNextSeoProps() {
-  //   const {asPath} = useRouter();
-  //
-  //   if (asPath == '/') {
-  //     return {
-  //       title: 'Forui - Minimalistic Flutter UI Library',
-  //     };
-  //   }
-  //
-  //   return {
-  //     titleTemplate: '%s – Forui'
-  //   };
-  // },
+  useNextSeoProps() {
+    const {asPath} = useRouter();
+
+    if (asPath == '/') {
+      return {
+        title: 'Forui - Minimalistic Flutter UI Library',
+      };
+    }
+
+    return {
+      titleTemplate: '%s – Forui'
+    };
+  },
   project: {
     link: 'https://github.com/forus-labs/forui',
   },
@@ -31,10 +30,9 @@ const config: DocsThemeConfig = {
     prev: true,
     next: true
   },
-  // TODO: Fix.
-  // footer: {
-  //   text: 'A Forus Labs initiative.',
-  // }
+  footer: {
+    text: 'A Forus Labs initiative.',
+  }
 }
 
 export default config
