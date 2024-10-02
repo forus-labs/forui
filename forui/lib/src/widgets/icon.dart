@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
 /// The [FIconStyle] that this [FInheritedIconStyle]'s widget subtree should inherit.
@@ -127,7 +128,7 @@ abstract class FIcon extends StatelessWidget {
   }) = _ImageProviderIcon;
 
   /// Creates a [FIcon] from a [ValueWidgetBuilder].
-  /// 
+  ///
   /// To access widget-specific data, i.e. [FButtonData] inside a [FButton]:
   /// ```dart
   /// FButton.icon(
@@ -139,8 +140,7 @@ abstract class FIcon extends StatelessWidget {
   ///     },
   /// );
   /// ```
-  const factory FIcon.raw({required ValueWidgetBuilder<FIconStyle> builder, Widget? child, Key? key}) =
-      _BuilderIcon;
+  const factory FIcon.raw({required ValueWidgetBuilder<FIconStyle> builder, Widget? child, Key? key}) = _BuilderIcon;
 
   const FIcon._({required this.color, this.size, this.semanticLabel, super.key});
 
