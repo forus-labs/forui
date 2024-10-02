@@ -8,11 +8,9 @@ import 'package:mockito/mockito.dart';
 import 'package:forui/forui.dart';
 import 'accordion_controller_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<AnimationController>()])
-@GenerateNiceMocks([MockSpec<Animation>()])
-void _setup(List<AnimationController> animationControllers, List<Animation<int>> animations, int length) {
-  animations.clear();
-  animationControllers.clear();
+(List<AnimationController>, List) _setup(int length) {
+  final animationControllers = <AnimationController>[];
+  final animations = [];
 
   for (int i = 0; i < length; i++) {
     animationControllers.add(MockAnimationController());
@@ -27,26 +25,32 @@ void _setup(List<AnimationController> animationControllers, List<Animation<int>>
       return TickerFuture.complete();
     });
   }
+
+  return (animationControllers, animations);
 }
 
-void _tearDown(List<AnimationController> animationControllers, length) {
-  for (int i = 0; i < length; i++) {
-    animationControllers[i].dispose();
+void _tearDown(List<AnimationController> animationControllers) {
+  for (final controller in animationControllers) {
+    controller.dispose();
   }
 }
 
+@GenerateNiceMocks([MockSpec<AnimationController>()])
+@GenerateNiceMocks([MockSpec<Animation>()])
 void main() {
   group('FAccordionController', () {
     late FAccordionController controller;
-    final List<AnimationController> animationControllers = [];
-    final List<Animation<int>> animations = [];
+    List<AnimationController> animationControllers = [];
+    List<Animation<int>> animations = [];
     int count = 0;
     int length = 3;
 
     setUp(() {
       count = 0;
       length = 3;
-      _setup(animationControllers, animations, length);
+      final record = _setup(length);
+      animationControllers = List.from(record.$1);
+      animations = List.from(record.$2);
       controller = FAccordionController(min: 1, max: 2)
         ..addListener(() {
           count++;
@@ -54,7 +58,7 @@ void main() {
     });
 
     tearDown(() {
-      _tearDown(animationControllers, length);
+      _tearDown(animationControllers);
       controller.dispose();
     });
 
@@ -62,6 +66,7 @@ void main() {
       test('sets animation controller value based on initiallyExpanded', () async {
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         verify(animationControllers[0].value = 0);
+
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
         verify(animationControllers[0].value = 1);
       });
@@ -69,6 +74,7 @@ void main() {
       test('adds to expanded list', () {
         controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         expect(controller.expanded.length, 0);
+
         controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
         expect(controller.expanded.length, 1);
         expect(controller.controllers.length, 1);
@@ -85,7 +91,9 @@ void main() {
     group('removeItem(...)', () {
       setUp(() {
         length = 1;
-        _setup(animationControllers, animations, length);
+        final record = _setup(length);
+        animationControllers = List.from(record.$1);
+        animations = List.from(record.$2);
         controller = FAccordionController(min: 1, max: 2)
           ..addListener(() {
             count++;
@@ -93,13 +101,14 @@ void main() {
       });
 
       tearDown(() {
-        _tearDown(animationControllers, length);
+        _tearDown(animationControllers);
       });
       test('removes from the expanded list', () {
         controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         expect(controller.removeItem(0), true);
         expect(controller.removeItem(0), false);
       });
+
       test('aware of min limit', () {
         controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
         expect(controller.removeItem(0), false);
@@ -110,6 +119,7 @@ void main() {
       test('expands an item', () async {
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         expect(controller.controllers[0]?.animation.value, 0);
+
         await controller.toggle(0);
         expect(controller.controllers[0]?.animation.value, 100);
       });
@@ -119,6 +129,7 @@ void main() {
         await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
         await animationControllers[0].forward();
         expect(controller.controllers[0]?.animation.value, 100);
+
         await controller.toggle(0);
         expect(controller.controllers[0]?.animation.value, 0);
       });
@@ -127,6 +138,7 @@ void main() {
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         await controller.toggle(1);
         expect(count, 0);
+
         await controller.toggle(0);
         expect(count, 1);
       });
@@ -161,6 +173,7 @@ void main() {
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         await controller.expand(0);
         expect(controller.expanded, {0});
+
         await controller.expand(0);
         expect(count, 1);
         await controller.expand(1);
@@ -179,7 +192,9 @@ void main() {
     group('collapse(...)', () {
       setUp(() {
         length = 2;
-        _setup(animationControllers, animations, length);
+        final record = _setup(length);
+        animationControllers = List.from(record.$1);
+        animations = List.from(record.$2);
         controller = FAccordionController(min: 1, max: 2)
           ..addListener(() {
             count++;
@@ -187,7 +202,7 @@ void main() {
       });
 
       tearDown(() {
-        _tearDown(animationControllers, length);
+        _tearDown(animationControllers);
       });
 
       test('does not call notifyListener on invalid index', () async {
@@ -195,6 +210,7 @@ void main() {
         await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
         await controller.collapse(0);
         expect(controller.expanded, {1});
+
         await controller.collapse(0);
         expect(count, 1);
         await controller.collapse(2);
@@ -218,15 +234,17 @@ void main() {
 
   group('FAccordionController.radio', () {
     late FAccordionController controller;
-    final List<AnimationController> animationControllers = [];
-    final List<Animation<int>> animations = [];
+    List<AnimationController> animationControllers = [];
+    List<Animation<int>> animations = [];
     int count = 0;
     int length = 2;
 
     setUp(() {
       count = 0;
       length = 2;
-      _setup(animationControllers, animations, length);
+      final record = _setup(length);
+      animationControllers = List.from(record.$1);
+      animations = List.from(record.$2);
       controller = FAccordionController.radio()
         ..addListener(() {
           count++;
@@ -234,7 +252,7 @@ void main() {
     });
 
     tearDown(() {
-      _tearDown(animationControllers, length);
+      _tearDown(animationControllers);
       controller.dispose();
     });
 
@@ -242,6 +260,7 @@ void main() {
       test('adds to expanded list', () {
         controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         expect(controller.expanded.length, 0);
+
         controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
         expect(controller.expanded.length, 1);
         expect(controller.controllers.length, 1);
@@ -256,7 +275,9 @@ void main() {
     group('removeItem(...)', () {
       setUp(() {
         length = 1;
-        _setup(animationControllers, animations, length);
+        final record = _setup(length);
+        animationControllers = List.from(record.$1);
+        animations = List.from(record.$2);
         controller = FAccordionController.radio()
           ..addListener(() {
             count++;
@@ -264,7 +285,7 @@ void main() {
       });
 
       tearDown(() {
-        _tearDown(animationControllers, length);
+        _tearDown(animationControllers);
       });
 
       test('removes from the expanded list', () {
@@ -282,6 +303,7 @@ void main() {
       test('expands an item', () async {
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         expect(controller.controllers[0]?.animation.value, 0);
+
         await controller.toggle(0);
         expect(controller.controllers[0]?.animation.value, 100);
       });
@@ -290,6 +312,7 @@ void main() {
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
         await animationControllers[0].forward();
         expect(controller.controllers[0]?.animation.value, 100);
+
         await controller.toggle(0);
         expect(controller.controllers[0]?.animation.value, 0);
       });
@@ -297,6 +320,7 @@ void main() {
       test('invalid index', () async {
         await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
         await controller.toggle(1);
+
         expect(count, 0);
         await controller.toggle(0);
         expect(count, 1);

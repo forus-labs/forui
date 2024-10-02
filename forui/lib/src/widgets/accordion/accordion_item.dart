@@ -42,7 +42,7 @@ class FAccordionItem extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('initiallyExpanded', initiallyExpanded));
+      ..add(FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'Initially expanded'));
   }
 }
 
@@ -125,7 +125,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
             ),
           ),
           FDivider(
-            style: context.theme.dividerStyles.horizontal.copyWith(padding: EdgeInsets.zero, color: style.dividerColor),
+            style: style.divider,
           ),
         ],
       ),

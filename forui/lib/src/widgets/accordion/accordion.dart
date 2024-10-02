@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 ///
 ///
 /// See:
-/// * https://forui.dev/docs/FAccordion for working examples.
+/// * https://forui.dev/docs/accordion for working examples.
 /// * [FAccordionController] for customizing the accordion's selection behavior.
 /// * [FAccordionItem] for adding items to an accordion.
 /// * [FAccordionStyle] for customizing an accordion's appearance.
@@ -106,7 +106,7 @@ final class FAccordionStyle with Diagnosticable {
   final Widget icon;
 
   /// The divider's color.
-  final Color dividerColor;
+  final FDividerStyle divider;
 
   /// Creates a [FAccordionStyle].
   FAccordionStyle({
@@ -115,7 +115,7 @@ final class FAccordionStyle with Diagnosticable {
     required this.titlePadding,
     required this.childPadding,
     required this.icon,
-    required this.dividerColor,
+    required this.divider,
   });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
@@ -133,7 +133,7 @@ final class FAccordionStyle with Diagnosticable {
           height: 20,
           colorFilter: ColorFilter.mode(colorScheme.primary, BlendMode.srcIn),
         ),
-        dividerColor = colorScheme.border;
+        divider = FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero);
 
   /// Returns a copy of this [FAccordionStyle] with the given properties replaced.
   @useResult
@@ -143,7 +143,7 @@ final class FAccordionStyle with Diagnosticable {
     EdgeInsets? titlePadding,
     EdgeInsets? childPadding,
     SvgPicture? icon,
-    Color? dividerColor,
+    FDividerStyle? divider,
   }) =>
       FAccordionStyle(
         titleTextStyle: titleTextStyle ?? this.titleTextStyle,
@@ -151,7 +151,7 @@ final class FAccordionStyle with Diagnosticable {
         titlePadding: titlePadding ?? this.titlePadding,
         childPadding: childPadding ?? this.childPadding,
         icon: icon ?? this.icon,
-        dividerColor: dividerColor ?? this.dividerColor,
+        divider: divider ?? this.divider,
       );
 
   @override
@@ -162,7 +162,7 @@ final class FAccordionStyle with Diagnosticable {
       ..add(DiagnosticsProperty('childTextStyle', childTextStyle))
       ..add(DiagnosticsProperty('padding', titlePadding))
       ..add(DiagnosticsProperty('contentPadding', childPadding))
-      ..add(ColorProperty('dividerColor', dividerColor));
+      ..add(DiagnosticsProperty('divider', divider));
   }
 
   @override
@@ -175,7 +175,7 @@ final class FAccordionStyle with Diagnosticable {
           titlePadding == other.titlePadding &&
           childPadding == other.childPadding &&
           icon == other.icon &&
-          dividerColor == other.dividerColor;
+          divider == other.divider;
 
   @override
   int get hashCode =>
@@ -184,7 +184,7 @@ final class FAccordionStyle with Diagnosticable {
       titlePadding.hashCode ^
       childPadding.hashCode ^
       icon.hashCode ^
-      dividerColor.hashCode;
+      divider.hashCode;
 }
 
 @internal
