@@ -31,10 +31,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/$name-hidden.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/hidden-$name.png'));
       });
 
-      testWidgets('$name shown', (tester) async {
+      testWidgets('$name shown on touch devices', (tester) async {
         final controller = FTooltipController(vsync: const TestVSync());
 
         await tester.pumpWidget(
@@ -61,7 +61,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(ColoredBox).first));
         await tester.pumpAndSettle(const Duration(seconds: 5));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/$name-shown.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/shown-$name.png'));
       });
     });
   }

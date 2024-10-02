@@ -27,6 +27,9 @@ final class FColorScheme with Diagnosticable {
   /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
   final Brightness brightness;
 
+  /// The percentage, between `0` and `1`, used to set a color's lightness to derive a disabled color.
+  final double disabledColorLightness;
+
   /// The background color.
   ///
   /// Typically used as a background for [foreground] colored widgets.
@@ -96,6 +99,7 @@ final class FColorScheme with Diagnosticable {
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
   const FColorScheme({
     required this.brightness,
+    required this.disabledColorLightness,
     required this.background,
     required this.foreground,
     required this.primary,
@@ -110,6 +114,12 @@ final class FColorScheme with Diagnosticable {
     required this.errorForeground,
     required this.border,
   });
+
+  /// Creates a disabled color from the given [color].
+  ///
+  /// See:
+  /// * [disabledColorLightness].
+  Color disable(Color color) => HSLColor.fromColor(color).withLightness(disabledColorLightness).toColor();
 
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   ///
@@ -128,6 +138,7 @@ final class FColorScheme with Diagnosticable {
   @useResult
   FColorScheme copyWith({
     Brightness? brightness,
+    double? disabledColorLightness,
     Color? background,
     Color? foreground,
     Color? primary,
@@ -144,6 +155,7 @@ final class FColorScheme with Diagnosticable {
   }) =>
       FColorScheme(
         brightness: brightness ?? this.brightness,
+        disabledColorLightness: disabledColorLightness ?? this.disabledColorLightness,
         background: background ?? this.background,
         foreground: foreground ?? this.foreground,
         primary: primary ?? this.primary,
@@ -164,6 +176,7 @@ final class FColorScheme with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty('brightness', brightness))
+      ..add(DoubleProperty('disabledColorLightness', disabledColorLightness))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))
       ..add(ColorProperty('primary', primary))
@@ -184,6 +197,7 @@ final class FColorScheme with Diagnosticable {
       identical(this, other) ||
       other is FColorScheme &&
           brightness == other.brightness &&
+          disabledColorLightness == other.disabledColorLightness &&
           background == other.background &&
           foreground == other.foreground &&
           primary == other.primary &&
@@ -201,6 +215,7 @@ final class FColorScheme with Diagnosticable {
   @override
   int get hashCode =>
       brightness.hashCode ^
+      disabledColorLightness.hashCode ^
       background.hashCode ^
       foreground.hashCode ^
       primary.hashCode ^

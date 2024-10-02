@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 import 'package:forui_example/sandbox.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  WakelockPlus.enable();
+
   runApp(const Application());
 }
 
@@ -24,7 +28,7 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  int index = 0;
+  int index = 4;
 
   @override
   Widget build(BuildContext context) => MaterialApp(

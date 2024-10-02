@@ -1,13 +1,67 @@
 ## 0.6.0 (Next)
 
 ### Additions
+* Add `FSlider`
+
+* Add `FBottomNavigationBarItem.custom(...)`.
 
 * Add `FButtonCustomStyle.enabledHoverBoxDecoration`.
 
+* Add `FTextField.contentInsertionConfiguration`.
+
+* Add `FTextField.mouseCursor`.
+
+* Add `FTextField.forceErrorText`.
+
+* **Breaking** Add `FColorScheme.disabledColorBrightness` - this will only affect users that create a `FColorScheme`
+  from scratch.
 
 ### Changes
 
 * Change button to change color when hovering over it.
+
+* Change `FCalendar` year  picker to update the header whenever a year is selected.
+
+* Increase `FCalendar`'s default text size from `FTypography.sm` to `FTypography.base`.
+
+* **Breaking** Change `FBottomNavigationBarItem.label` from `String` to `Widget`.
+
+* **Breaking** Split `FCalendarHeaderStyle.iconColor` into `FCalendarHeaderStyle.enabledIconColor` and
+  `FCalendarHeaderStyle.disabledIconColor`.
+
+* **Breaking** Change `FTextField` to use `FLabel`.
+
+* **Breaking** Remove `FTextFieldErrorStyle.animatioDuration`.
+
+* **Breaking** Rename `FLabelStateStyle` to `FLabelStateStyles`.
+
+* **Breaking** Rename `FTextField.onSave` to `FTextField.onSaved`.
+
+### Fixes
+
+* Fix `FBottomNavigationBar` items hit region being smaller than intended.
+
+* Fix `FCalendar` showing focused outline when pressing and long pressing a date.
+
+* Fix `FCalendar` year and month picker applying incorrect initial top padding.
+
+* Fix `FCalendar` year and month picker incorrectly calculating start and end dates.
+
+* Fix `FTextfield` being vertically larger than intended.
+
+* Fix `FTextfield` description text's odd transition animation whenever an error occurs.
+
+* Fix `FSwitch` not using correct label style.
+
+* Fix `FCheckbox`, `FRadio`, `FSelectGroup`, `FSwitch` and `FTextField` styles causing the widget inspector to crash.
+
+
+## 0.5.1
+
+###
+
+* Fix `FTabs` not showing correct tab entry when switching tabs.
+  [Issue #203](https://github.com/forus-labs/forui/issues/203).
 
 
 ## 0.5.0
@@ -75,12 +129,12 @@ The minimum Flutter version has been increased from `3.19.0` to `3.24.0`.
 * Change `FTabController` to implement `ChangeNotifier` instead of `Listenable`.
 
 * **Breaking:** Flattened `FStyle.formFieldStyle` - use `FStyle.enabledFormFieldStyle`, `FStyle.disabledFormFieldStyle`,
-and`FStyle.errorFormFieldStyle`.
+  and`FStyle.errorFormFieldStyle`.
 
 * Improve platform detection for web when initializing platform-specific variables.
 
-* **Breaking:** `FCheckbox` and `FSwitch` no longer wraps `FormField` - consider wrapping them in a `FormField` if 
-required.
+* **Breaking:** `FCheckbox` and `FSwitch` no longer wraps `FormField` - consider wrapping them in a `FormField` if
+  required.
 
 * **Breaking:** Require `FTheme` to be wrapped in a `CupertinoApp`, `MaterialApp` or `WidgetsApp`.
 
@@ -203,10 +257,10 @@ required.
 
 * **Breaking** Move `FHeaderActionStyle.padding` to `FRootHeaderStyle.actionSpacing`.
 
-* **Breaking** Suffix style parameters with `Style`, i.e. `FRootHeaderStyle.action` has been renamed to 
+* **Breaking** Suffix style parameters with `Style`, i.e. `FRootHeaderStyle.action` has been renamed to
   `FRootHeaderStyle.actionStyle`.
 
-* **Breaking** Raw fields have been removed, wrap strings with the Text() widget. E.g. `FButton(label: 'Hello')` or 
+* **Breaking** Raw fields have been removed, wrap strings with the Text() widget. E.g. `FButton(label: 'Hello')` or
   `FButton(rawLabel: 'Hello')` should be replaced with `FButton(label: Text('Hello'))`.
 
 * Change `FTextField` to be usable in `Form`s.

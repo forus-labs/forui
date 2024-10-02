@@ -36,6 +36,7 @@ class _AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: EmptyRoute.page, initial: true),
+        AutoRoute(path: '/accordion/default', page: AccordionRoute.page),
         AutoRoute(path: '/alert/default', page: AlertRoute.page),
         AutoRoute(path: '/avatar/default', page: AvatarRoute.page),
         AutoRoute(path: '/avatar/raw', page: AvatarRawRoute.page),
@@ -85,6 +86,8 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/slider/marks', page: MarksSliderRoute.page),
         AutoRoute(path: '/slider/discrete', page: DiscreteSliderRoute.page),
         AutoRoute(path: '/slider/range', page: RangeSliderRoute.page),
+        AutoRoute(path: '/slider/vertical', page: VerticalSliderRoute.page),
+        AutoRoute(path: '/slider/form', page: SliderFormRoute.page),
         AutoRoute(path: '/switch/default', page: SwitchRoute.page),
         AutoRoute(path: '/switch/form', page: FormSwitchRoute.page),
       ];

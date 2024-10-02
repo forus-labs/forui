@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/platform.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends ChangeNotifier {
@@ -70,7 +70,7 @@ final class FPopoverController extends ChangeNotifier {
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
-  static ({Alignment follower, Alignment target}) get _platform => touchPlatforms.contains(defaultTargetPlatform)
+  static ({Alignment follower, Alignment target}) get _platform => Touch.primary
       ? (follower: Alignment.bottomCenter, target: Alignment.topCenter)
       : (follower: Alignment.topCenter, target: Alignment.bottomCenter);
 

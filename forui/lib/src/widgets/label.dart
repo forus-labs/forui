@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// The [FLabel]'s style.
-typedef FLabelStyle = ({FLabelLayoutStyle layout, FLabelStateStyle state});
+typedef FLabelStyle = ({FLabelLayoutStyle layout, FLabelStateStyles state});
 
 /// The label's state.
 enum FLabelState {
@@ -112,7 +112,7 @@ final class FLabel extends StatelessWidget {
           error: error,
           state: state,
           child: child,
-        )
+        ),
     };
   }
 
@@ -335,7 +335,7 @@ final class FLabelStyles with Diagnosticable {
             descriptionPadding: EdgeInsets.only(top: 2),
             errorPadding: EdgeInsets.only(top: 2),
           ),
-          state: FLabelStateStyle.inherit(style: style),
+          state: FLabelStateStyles.inherit(style: style),
         ),
         vertical = (
           layout: const FLabelLayoutStyle(
@@ -343,7 +343,7 @@ final class FLabelStyles with Diagnosticable {
             descriptionPadding: EdgeInsets.only(top: 5),
             errorPadding: EdgeInsets.only(top: 5),
           ),
-          state: FLabelStateStyle.inherit(style: style)
+          state: FLabelStateStyles.inherit(style: style)
         );
 
   /// Returns a copy of this [FLabelStyles] with the given properties replaced.
@@ -439,8 +439,8 @@ final class FLabelLayoutStyle with Diagnosticable {
       labelPadding.hashCode ^ descriptionPadding.hashCode ^ errorPadding.hashCode ^ childPadding.hashCode;
 }
 
-/// The [FLabel]'s state style.
-class FLabelStateStyle with Diagnosticable {
+/// The [FLabel]'s state styles.
+class FLabelStateStyles with Diagnosticable {
   /// The style for the form field when it is enabled.
   final FFormFieldStyle enabledStyle;
 
@@ -450,15 +450,15 @@ class FLabelStateStyle with Diagnosticable {
   /// The style for the form field when it has an error.
   final FFormFieldErrorStyle errorStyle;
 
-  /// Creates a [FLabelStateStyle].
-  FLabelStateStyle({
+  /// Creates a [FLabelStateStyles].
+  FLabelStateStyles({
     required this.enabledStyle,
     required this.disabledStyle,
     required this.errorStyle,
   });
 
-  /// Creates a [FLabelStateStyle] that inherits its properties from [style].
-  FLabelStateStyle.inherit({required FStyle style})
+  /// Creates a [FLabelStateStyles] that inherits its properties from [style].
+  FLabelStateStyles.inherit({required FStyle style})
       : enabledStyle = style.enabledFormFieldStyle,
         disabledStyle = style.disabledFormFieldStyle,
         errorStyle = style.errorFormFieldStyle;
@@ -475,7 +475,7 @@ class FLabelStateStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FLabelStateStyle &&
+      other is FLabelStateStyles &&
           runtimeType == other.runtimeType &&
           enabledStyle == other.enabledStyle &&
           disabledStyle == other.disabledStyle &&

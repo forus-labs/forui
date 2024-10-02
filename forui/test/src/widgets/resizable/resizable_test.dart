@@ -1,9 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide VerticalDivider;
 
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
 void main() {
@@ -19,6 +19,10 @@ void main() {
     builder: (context, snapshot, child) => const Align(child: Text('B')),
   );
 
+  setUp(() {
+    Touch.primary = false;
+  });
+
   for (final (index, constructor) in [
     () => FResizable(crossAxisExtent: 0, axis: Axis.vertical, children: [top, bottom]),
   ].indexed) {
@@ -26,8 +30,6 @@ void main() {
   }
 
   testWidgets('vertical drag downwards', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
     final vertical = FResizable(
       crossAxisExtent: 50,
       axis: Axis.vertical,
@@ -50,13 +52,9 @@ void main() {
 
     expect(tester.getSize(find.byType(FResizableRegion).first), const Size(50, 80));
     expect(tester.getSize(find.byType(FResizableRegion).last), const Size(50, 20));
-
-    debugDefaultTargetPlatformOverride = null; // This cannot be called in tearDown, Flutter is dumb.
   });
 
   testWidgets('vertical drag upwards', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
     final vertical = FResizable(
       crossAxisExtent: 50,
       axis: Axis.vertical,
@@ -85,13 +83,9 @@ void main() {
       tester.getSize(find.byType(FResizableRegion).last),
       const Size(50, 80),
     );
-
-    debugDefaultTargetPlatformOverride = null; // This cannot be called in tearDown, Flutter is dumb.
   });
 
   testWidgets('horizontal drag right', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
     final horizontal = FResizable(
       crossAxisExtent: 50,
       axis: Axis.horizontal,
@@ -120,13 +114,9 @@ void main() {
       tester.getSize(find.byType(FResizableRegion).last),
       const Size(20, 50),
     );
-
-    debugDefaultTargetPlatformOverride = null; // This cannot be called in tearDown, Flutter is dumb.
   });
 
   testWidgets('horizontal drag left', (tester) async {
-    debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-
     final horizontal = FResizable(
       crossAxisExtent: 50,
       axis: Axis.horizontal,
@@ -155,7 +145,7 @@ void main() {
       tester.getSize(find.byType(FResizableRegion).last),
       const Size(80, 50),
     );
-
-    debugDefaultTargetPlatformOverride = null; // This cannot be called in tearDown, Flutter is dumb.
   });
+
+  tearDown(() => Touch.primary = null);
 }

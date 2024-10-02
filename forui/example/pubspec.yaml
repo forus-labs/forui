@@ -29,6 +29,7 @@ dependencies:
     path: ../
   intl: ^0.19.0
   sugar: ^3.1.0
+  wakelock_plus: ^1.2.8
 
 dev_dependencies:
   build_runner: ^2.4.0

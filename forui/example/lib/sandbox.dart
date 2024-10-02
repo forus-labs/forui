@@ -23,14 +23,7 @@ class _SandboxState extends State<Sandbox> {
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FTextField.email(
-            autovalidateMode: AutovalidateMode.always,
-            description: const Text('Description'),
-            validator: (value) => value?.length == 5 ? 'Error message' : null,
-          ),
-          const SizedBox(height: 20),
           const FTextField.password(),
           FLineCalendar(selected: selected),
           const SizedBox(height: 20),

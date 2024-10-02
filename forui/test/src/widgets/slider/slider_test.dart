@@ -9,7 +9,11 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('value slider tooltip', () {
-    Widget slider({FSliderSelection? selection, FSliderInteraction? interaction}) => TestScaffold.app(
+    Widget slider({
+      FSliderSelection? selection,
+      FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
+    }) =>
+        TestScaffold.app(
           data: FThemes.zinc.light,
           child: FSlider(
             controller: FContinuousSliderController(
@@ -52,16 +56,16 @@ void main() {
     group('drag track', () {
       for (final (interaction, expected) in [
         (FSliderInteraction.slide, findsOneWidget),
-        (FSliderInteraction.slideThumb, findsNothing),
-        (FSliderInteraction.tap, findsNothing),
-        (FSliderInteraction.tapAndSlideThumb, findsNothing),
+        (FSliderInteraction.slideThumb, findsOneWidget),
+        (FSliderInteraction.tap, findsOneWidget),
+        (FSliderInteraction.tapAndSlideThumb, findsOneWidget),
       ]) {
         testWidgets('drag active track - $interaction', (tester) async {
           await tester.pumpWidget(slider(interaction: interaction));
           expect(find.byType(Text), findsNothing);
 
           await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
-          await tester.pump(const Duration(seconds: 1));
+          await tester.pump();
           expect(find.byType(Text), expected);
         });
 
@@ -161,12 +165,12 @@ void main() {
       for (final (con, interaction, expandExpected, shrinkExpected) in [
         (true, FSliderInteraction.slide, 0.8, 0.5),
         (true, FSliderInteraction.slideThumb, 0.75, 0.75),
-        (true, FSliderInteraction.tap, 0.5, 0.5),
-        (true, FSliderInteraction.tapAndSlideThumb, 0.5, 0.5),
+        (true, FSliderInteraction.tap, 0.75, 0.75),
+        (true, FSliderInteraction.tapAndSlideThumb, 0.75, 0.75),
         (false, FSliderInteraction.slide, 0.75, 0.25),
         (false, FSliderInteraction.slideThumb, 0.5, 0.5),
-        (false, FSliderInteraction.tap, 0.25, 0.25),
-        (false, FSliderInteraction.tapAndSlideThumb, 0.25, 0.25),
+        (false, FSliderInteraction.tap, 0.5, 0.5),
+        (false, FSliderInteraction.tapAndSlideThumb, 0.5, 0.5),
       ]) {
         testWidgets('drag active track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
           final controller = con ? continuous(interaction) : discrete(interaction);
@@ -185,14 +189,14 @@ void main() {
       for (final (con, interaction, expandExpected, shrinkExpected) in [
         (true, FSliderInteraction.slide, 0.8, 0.5),
         (true, FSliderInteraction.slideThumb, 0.75, 0.75),
-        (true, FSliderInteraction.tap, 0.8, 0.8),
-        (true, FSliderInteraction.tapAndSlideThumb, 0.8, 0.8),
+        (true, FSliderInteraction.tap, 0.75, 0.75),
+        (true, FSliderInteraction.tapAndSlideThumb, 0.75, 0.75),
         (false, FSliderInteraction.slide, 0.75, 0.25),
         (false, FSliderInteraction.slideThumb, 0.5, 0.5),
         (false, FSliderInteraction.tap, 0.5, 0.5),
         (false, FSliderInteraction.tapAndSlideThumb, 0.5, 0.5),
       ]) {
-        testWidgets('drag inactive track - $interaction', (tester) async {
+        testWidgets('drag inactive track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
           final controller = con ? continuous(interaction) : discrete(interaction);
           await tester.pumpWidget(slider(controller));
 

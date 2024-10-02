@@ -58,9 +58,15 @@ final class FSliderTooltipsController {
   }
 
   /// Removes the tooltip from the slider.
-  void remove(UniqueKey? key) {
-    if (enabled) {
+  void remove(UniqueKey? key, [FTooltipController? controller]) {
+    if (!enabled) {
+      return;
+    }
+
+    if (controller == null) {
       _tooltips.remove(key);
+    } else {
+      _tooltips.removeWhere((key, controller) => key == key && controller == controller);
     }
   }
 }

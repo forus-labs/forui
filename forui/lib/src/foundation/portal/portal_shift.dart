@@ -1,7 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/src/foundation/alignment.dart';
+import 'package:forui/src/foundation/rendering.dart';
 
 /// A portal's target.
 typedef FPortalTarget = ({Offset offset, Size size, Alignment anchor});
