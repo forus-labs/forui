@@ -25,6 +25,9 @@ final class FThemeData with Diagnosticable {
   /// The style. It is used to configure the miscellaneous properties, such as border radii, of Forui widgets.
   final FStyle style;
 
+  /// The accordion style.
+  final FAccordionStyle accordionStyle;
+
   /// The alert styles.
   final FAlertStyles alertStyles;
 
@@ -103,6 +106,7 @@ final class FThemeData with Diagnosticable {
   FThemeData({
     required this.colorScheme,
     required this.style,
+    required this.accordionStyle,
     required this.alertStyles,
     required this.avatarStyle,
     required this.badgeStyles,
@@ -141,6 +145,7 @@ final class FThemeData with Diagnosticable {
       colorScheme: colorScheme,
       typography: typography,
       style: style,
+      accordionStyle: FAccordionStyle.inherit(colorScheme: colorScheme, typography: typography),
       alertStyles: FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       avatarStyle: FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -214,6 +219,7 @@ final class FThemeData with Diagnosticable {
   ///```
   @useResult
   FThemeData copyWith({
+    FAccordionStyle? accordionStyle,
     FAlertStyles? alertStyles,
     FAvatarStyle? avatarStyle,
     FBadgeStyles? badgeStyles,
@@ -242,6 +248,7 @@ final class FThemeData with Diagnosticable {
         colorScheme: colorScheme,
         typography: typography,
         style: style,
+        accordionStyle: accordionStyle ?? this.accordionStyle,
         alertStyles: alertStyles ?? this.alertStyles,
         avatarStyle: avatarStyle ?? this.avatarStyle,
         badgeStyles: badgeStyles ?? this.badgeStyles,
@@ -274,6 +281,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('colorScheme', colorScheme, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('accordionStyle', accordionStyle))
       ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('avatarStyle', avatarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
@@ -307,6 +315,7 @@ final class FThemeData with Diagnosticable {
           colorScheme == other.colorScheme &&
           typography == other.typography &&
           style == other.style &&
+          accordionStyle == other.accordionStyle &&
           alertStyles == other.alertStyles &&
           avatarStyle == other.avatarStyle &&
           badgeStyles == other.badgeStyles &&
@@ -336,6 +345,7 @@ final class FThemeData with Diagnosticable {
       colorScheme.hashCode ^
       typography.hashCode ^
       style.hashCode ^
+      accordionStyle.hashCode ^
       alertStyles.hashCode ^
       avatarStyle.hashCode ^
       badgeStyles.hashCode ^
