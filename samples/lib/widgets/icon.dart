@@ -35,19 +35,22 @@ class ComparisonIconPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        FButton.icon(
-          style: FButtonStyle.primary,
-          child: FIcon(FAssets.icons.bird),
-          onPress: () {},
-        ),
-        const SizedBox(width: 10),
-        FButton.icon(
-          style: FButtonStyle.secondary,
-          child: FIcon(FAssets.icons.bird),
-          onPress: () {},
-        ),
-      ]);
+  Widget child(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FButton.icon(
+            style: FButtonStyle.primary,
+            child: FIcon(FAssets.icons.bird),
+            onPress: () {},
+          ),
+          const SizedBox(width: 10),
+          FButton.icon(
+            style: FButtonStyle.secondary,
+            child: FIcon(FAssets.icons.bird),
+            onPress: () {},
+          ),
+        ],
+      );
 }
 
 @RoutePage()
@@ -84,10 +87,12 @@ class CustomIconPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
         child: FButton.icon(
-          child: FIcon.raw(builder: (context, style, child) {
-            final FButtonData(:enabled) = FButtonData.of(context);
-            return enabled ? _Icon(style: style) : const FIcon.data(Icons.menu);
-          }),
+          child: FIcon.raw(
+            builder: (context, style, child) {
+              final FButtonData(:enabled) = FButtonData.of(context);
+              return enabled ? _Icon(style: style) : const FIcon.data(Icons.menu);
+            },
+          ),
           onPress: () {},
         ),
       );
