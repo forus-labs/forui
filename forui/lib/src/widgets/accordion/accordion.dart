@@ -22,11 +22,11 @@ class FAccordion extends StatefulWidget {
   /// * [FAccordionController.radio] for a radio-like selection.
   final FAccordionController? controller;
 
-  /// The items.
-  final List<FAccordionItem> children;
-
   /// The style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
+  
+  /// The items.
+  final List<FAccordionItem> children;
 
   /// Creates a [FAccordion].
   const FAccordion({
