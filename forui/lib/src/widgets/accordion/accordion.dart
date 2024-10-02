@@ -24,7 +24,7 @@ class FAccordion extends StatefulWidget {
 
   /// The style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
-  
+
   /// The items.
   final List<FAccordionItem> children;
 
