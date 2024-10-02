@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/theme.dart';
 
 /// A set of miscellaneous properties that is part of a [FThemeData].
 ///
@@ -19,6 +18,9 @@ final class FStyle with Diagnosticable {
 
   /// The style for the form field when it has an error.
   final FFormFieldErrorStyle errorFormFieldStyle;
+
+  /// The icon style.
+  final FIconStyle iconStyle;
 
   /// The border radius. Defaults to `BorderRadius.circular(8)`.
   final BorderRadius borderRadius;
@@ -37,6 +39,7 @@ final class FStyle with Diagnosticable {
     required this.enabledFormFieldStyle,
     required this.disabledFormFieldStyle,
     required this.errorFormFieldStyle,
+    required this.iconStyle,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -63,6 +66,10 @@ final class FStyle with Diagnosticable {
             errorColor: colorScheme.error,
             typography: typography,
           ),
+          iconStyle: FIconStyle(
+            color: colorScheme.primary,
+            size: 20,
+          ),
         );
 
   /// Returns a copy of this [FStyle] with the given properties replaced.
@@ -71,6 +78,7 @@ final class FStyle with Diagnosticable {
     FFormFieldStyle? enabledFormFieldStyle,
     FFormFieldStyle? disabledFormFieldStyle,
     FFormFieldErrorStyle? errorFormFieldStyle,
+    FIconStyle? iconStyle,
     BorderRadius? borderRadius,
     double? borderWidth,
     EdgeInsets? pagePadding,
@@ -79,6 +87,7 @@ final class FStyle with Diagnosticable {
         enabledFormFieldStyle: enabledFormFieldStyle ?? this.enabledFormFieldStyle,
         disabledFormFieldStyle: disabledFormFieldStyle ?? this.disabledFormFieldStyle,
         errorFormFieldStyle: errorFormFieldStyle ?? this.errorFormFieldStyle,
+        iconStyle: iconStyle ?? this.iconStyle,
         borderRadius: borderRadius ?? this.borderRadius,
         borderWidth: borderWidth ?? this.borderWidth,
         pagePadding: pagePadding ?? this.pagePadding,
@@ -91,6 +100,7 @@ final class FStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledFormFieldStyle', enabledFormFieldStyle))
       ..add(DiagnosticsProperty('disabledFormFieldStyle', disabledFormFieldStyle))
       ..add(DiagnosticsProperty('errorFormFieldStyle', errorFormFieldStyle))
+      ..add(DiagnosticsProperty('iconStyle', iconStyle))
       ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(8)))
       ..add(DoubleProperty('borderWidth', borderWidth, defaultValue: 1))
       ..add(DiagnosticsProperty('pagePadding', pagePadding, defaultValue: const EdgeInsets.all(4)));
@@ -104,6 +114,7 @@ final class FStyle with Diagnosticable {
           enabledFormFieldStyle == other.enabledFormFieldStyle &&
           disabledFormFieldStyle == other.disabledFormFieldStyle &&
           errorFormFieldStyle == other.errorFormFieldStyle &&
+          iconStyle == other.iconStyle &&
           borderRadius == other.borderRadius &&
           borderWidth == other.borderWidth &&
           pagePadding == other.pagePadding;
@@ -113,6 +124,7 @@ final class FStyle with Diagnosticable {
       enabledFormFieldStyle.hashCode ^
       disabledFormFieldStyle.hashCode ^
       errorFormFieldStyle.hashCode ^
+      iconStyle.hashCode ^
       borderRadius.hashCode ^
       borderWidth.hashCode ^
       pagePadding.hashCode;

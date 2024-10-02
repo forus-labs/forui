@@ -22,13 +22,13 @@ void main() {
                 leftActions: [
                   FHeaderAction.back(onPress: () {}),
                   FHeaderAction(
-                    icon: FAssets.icons.alarmClock,
+                    icon: FIcon(FAssets.icons.alarmClock),
                     onPress: null,
                   ),
                 ],
                 rightActions: [
                   FHeaderAction(
-                    icon: FAssets.icons.plus,
+                    icon: FIcon(FAssets.icons.plus),
                     onPress: () {},
                   ),
                   FHeaderAction.x(onPress: () {}),

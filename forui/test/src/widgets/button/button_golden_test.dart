@@ -23,6 +23,7 @@ void main() {
                 child: FButton(
                   label: const Text('Button'),
                   style: variant,
+                  // We don't have access to widget specific fields :(
                   prefix: FIcon(FAssets.icons.circlePlay),
                   suffix: FIcon(FAssets.icons.circleStop),
                   onPress: () {},

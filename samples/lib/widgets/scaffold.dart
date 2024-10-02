@@ -31,7 +31,7 @@ final headers = [
     title: const Text('Settings'),
     actions: [
       FHeaderAction(
-        icon: FAssets.icons.ellipsis,
+        icon: FIcon(FAssets.icons.ellipsis),
         onPress: () {},
       ),
     ],
@@ -99,19 +99,19 @@ class _DemoState extends State<_Demo> {
           onChange: (index) => setState(() => this.index = index),
           children: [
             FBottomNavigationBarItem(
-              icon: FAssets.icons.home,
+              icon: FIcon(FAssets.icons.home),
               label: const Text('Home'),
             ),
             FBottomNavigationBarItem(
-              icon: FAssets.icons.layoutGrid,
+              icon: FIcon(FAssets.icons.layoutGrid),
               label: const Text('Categories'),
             ),
             FBottomNavigationBarItem(
-              icon: FAssets.icons.search,
+              icon: FIcon(FAssets.icons.search),
               label: const Text('Search'),
             ),
             FBottomNavigationBarItem(
-              icon: FAssets.icons.settings,
+              icon: FIcon(FAssets.icons.settings),
               label: const Text('Settings'),
             ),
           ],

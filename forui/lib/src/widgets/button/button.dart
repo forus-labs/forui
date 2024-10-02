@@ -62,7 +62,7 @@ class FButton extends StatelessWidget {
 
   /// Creates a [FButton] that contains a [prefix], [label], and [suffix].
   ///
-  /// [prefix] and [suffix] are wrapped in [FIconData], and therefore works with [FIcon]s.
+  /// [prefix] and [suffix] are wrapped in [FIconStyle], and therefore works with [FIcon]s.
   ///
   /// The button layout is as follows, assuming the locale is read from left to right:
   /// ```
@@ -84,6 +84,8 @@ class FButton extends StatelessWidget {
   }) : child = Content(prefix: prefix, suffix: suffix, label: label);
 
   /// Creates a [FButton] that contains only an icon.
+  ///
+  /// [child] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
   FButton.icon({
     required this.onPress,
     required Widget child,

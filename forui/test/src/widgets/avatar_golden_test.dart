@@ -37,6 +37,7 @@ void main() {
               await tester.pumpAndSettle();
             }
           });
+
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('avatar/$name-with-image.png'),
@@ -45,7 +46,6 @@ void main() {
 
         /// We will not be testing for the fallback behavior due to this issue on flutter
         /// https://github.com/flutter/flutter/issues/107416
-
         testWidgets('$name with raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(

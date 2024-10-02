@@ -27,9 +27,11 @@ class Content extends StatelessWidget {
       padding: content.padding,
       child: DefaultTextStyle.merge(
         style: enabled ? content.enabledTextStyle : content.disabledTextStyle,
-        child: FIconData(
-          color: enabled ? content.enabledIconColor : content.disabledIconColor,
-          size: content.iconSize,
+        child: FInheritedIconStyle(
+          style: FIconStyle(
+            color: enabled ? content.enabledIconColor : content.disabledIconColor,
+            size: content.iconSize,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: separate(
@@ -61,9 +63,11 @@ class IconContent extends StatelessWidget {
 
     return Padding(
       padding: style.iconContent.padding,
-      child: FIconData(
-        color: enabled ? style.iconContent.enabled : style.iconContent.disabled,
-        size: style.iconContent.size,
+      child: FInheritedIconStyle(
+        style: FIconStyle(
+          color: enabled ? style.iconContent.enabled : style.iconContent.disabled,
+          size: style.iconContent.size,
+        ),
         child: child,
       ),
     );

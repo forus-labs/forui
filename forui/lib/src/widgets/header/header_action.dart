@@ -11,7 +11,9 @@ class FHeaderAction extends StatelessWidget {
   final String? semanticLabel;
 
   /// The icon.
-  final SvgAsset icon;
+  ///
+  /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  final Widget icon;
 
   /// A callback for when the button is pressed.
   ///
@@ -41,7 +43,7 @@ class FHeaderAction extends StatelessWidget {
     Key? key,
   }) =>
       FHeaderAction(
-        icon: FAssets.icons.arrowLeft,
+        icon: FIcon(FAssets.icons.arrowLeft),
         onPress: onPress,
         style: style,
         semanticLabel: semanticLabel,
@@ -55,7 +57,7 @@ class FHeaderAction extends StatelessWidget {
     Key? key,
   }) =>
       FHeaderAction(
-        icon: FAssets.icons.x,
+        icon: FIcon(FAssets.icons.x),
         onPress: onPress,
         style: style,
         key: key,
@@ -70,9 +72,12 @@ class FHeaderAction extends StatelessWidget {
       semanticLabel: semanticLabel,
       onPress: onPress,
       onLongPress: onLongPress,
-      child: icon(
-        height: style.size,
-        colorFilter: ColorFilter.mode(enabled ? style.enabledColor : style.disabledColor, BlendMode.srcIn),
+      child: FInheritedIconStyle(
+        style: FIconStyle(
+          color: enabled ? style.enabledColor : style.disabledColor,
+          size: style.size,
+        ),
+        child: icon,
       ),
     );
   }

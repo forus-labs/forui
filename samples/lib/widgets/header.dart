@@ -16,11 +16,11 @@ class RootHeaderPage extends SampleScaffold {
         title: const Text('Edit Alarm'),
         actions: [
           FHeaderAction(
-            icon: FAssets.icons.alarmClock,
+            icon: FIcon(FAssets.icons.alarmClock),
             onPress: () {},
           ),
           FHeaderAction(
-            icon: FAssets.icons.plus,
+            icon: FIcon(FAssets.icons.plus),
             onPress: () {},
           ),
         ],
@@ -41,11 +41,11 @@ class NestedHeaderPage extends SampleScaffold {
         ],
         rightActions: [
           FHeaderAction(
-            icon: FAssets.icons.info,
+            icon: FIcon(FAssets.icons.info),
             onPress: () {},
           ),
           FHeaderAction(
-            icon: FAssets.icons.plus,
+            icon: FIcon(FAssets.icons.plus),
             onPress: () {},
           ),
         ],
@@ -63,11 +63,11 @@ class XNestedHeaderPage extends SampleScaffold {
         title: const Text('Climate'),
         leftActions: [
           FHeaderAction(
-            icon: FAssets.icons.thermometer,
+            icon: FIcon(FAssets.icons.thermometer),
             onPress: () {},
           ),
           FHeaderAction(
-            icon: FAssets.icons.wind,
+            icon: FIcon(FAssets.icons.wind),
             onPress: null,
           ),
         ],
