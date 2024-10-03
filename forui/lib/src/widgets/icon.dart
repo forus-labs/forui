@@ -160,7 +160,6 @@ class _Icon extends FIcon {
   final AlignmentGeometry alignment;
   final bool allowDrawingOutsideViewBox;
   final WidgetBuilder? placeholderBuilder;
-  final bool excludeFromSemantics;
   final Clip clipBehavior;
 
   const _Icon(
@@ -211,7 +210,6 @@ class _Icon extends FIcon {
       )
       ..add(ObjectFlagProperty.has('placeholderBuilder', placeholderBuilder))
       ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(FlagProperty('excludeFromSemantics', value: excludeFromSemantics, ifTrue: 'exclude from semantics'))
       ..add(EnumProperty('clipBehavior', clipBehavior));
   }
 }
