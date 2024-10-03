@@ -179,17 +179,19 @@ class _Icon extends FIcon {
   @override
   Widget build(BuildContext context) {
     final data = FIconStyle.of(context);
-    return icon.call(
-      matchTextDirection: matchTextDirection,
-      semanticsLabel: semanticLabel,
-      fit: fit,
-      alignment: alignment,
-      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
-      placeholderBuilder: placeholderBuilder,
-      excludeFromSemantics: true,
-      clipBehavior: clipBehavior,
-      colorFilter: ColorFilter.mode(color ?? data.color, BlendMode.srcIn),
-      height: size ?? data.size,
+    return Semantics(
+      label: semanticLabel,
+      child: icon.call(
+        matchTextDirection: matchTextDirection,
+        fit: fit,
+        alignment: alignment,
+        allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+        placeholderBuilder: placeholderBuilder,
+        excludeFromSemantics: true,
+        clipBehavior: clipBehavior,
+        colorFilter: ColorFilter.mode(color ?? data.color, BlendMode.srcIn),
+        height: size ?? data.size,
+      ),
     );
   }
 
