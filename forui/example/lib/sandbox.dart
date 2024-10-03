@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/line_calendar.dart';
 
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
@@ -13,6 +14,8 @@ class _SandboxState extends State<Sandbox> {
   bool value = false;
   FSelectGroupController selectGroupController = FRadioSelectGroupController(value: 1);
 
+  final selected = ValueNotifier(DateTime.now());
+
   @override
   void initState() {
     super.initState();
@@ -21,53 +24,26 @@ class _SandboxState extends State<Sandbox> {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          FAccordion(
-            controller: FAccordionController(max: 2),
-            children: [
-              const FAccordionItem(
-                title: Text('Title 1'),
-                initiallyExpanded: true,
-                child: Text(
-                  'Yes. It adheres to the WAI-ARIA design pattern, wfihwe fdhfiwf dfhwiodf dfwhoif',
-                ),
-              ),
-              FAccordionItem(
-                title: const Text('Title 2'),
-                child: Container(
-                  width: 100,
-                  color: Colors.yellow,
-                  child: const Text(
-                    'Yes. It adheres to the WAI-ARIA design pattern geg wjfiweo dfjiowjf dfjio',
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              const FAccordionItem(
-                title: Text('Title 3'),
-                child: Text(
-                  'Yes. It adheres to the WAI-ARIA design pattern',
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              const FAccordionItem(
-                title: Text('Title 4'),
-                child: Text(
-                  'Yes. It adheres to the WAI-ARIA design pattern',
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ],
-          ),
+          const FTextField.password(),
+          FLineCalendar(selected: selected),
           const SizedBox(height: 20),
-          FSelectGroup(
-            label: const Text('Select Group'),
-            description: const Text('Select Group Description'),
-            controller: FMultiSelectGroupController(min: 1, max: 2, values: {1}),
-            items: [
-              FSelectGroupItem.checkbox(value: 1, label: const Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
-              FSelectGroupItem.checkbox(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
-              FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
-            ],
+          FTooltip(
+            longPressExitDuration: const Duration(seconds: 5000),
+            tipBuilder: (context, style, _) => const Text('Add to library'),
+            child: FButton(
+              style: FButtonStyle.outline,
+              onPress: () {},
+              label: const Text('Hover'),
+            ),
+          ),
+          Tooltip(
+            message: 'Add to library 2',
+            showDuration: const Duration(seconds: 5000),
+            child: FButton(
+              style: FButtonStyle.outline,
+              onPress: () {},
+              label: const Text('Hover 2'),
+            ),
           ),
         ],
       );
