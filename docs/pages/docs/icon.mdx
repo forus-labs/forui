@@ -52,6 +52,11 @@ FIcon(
 
 ### `FIcon.data(...)`
 
+<Callout type="info">
+    This should be used with icons in other libraries, such as Cupertino and Material, that embed their icons as
+    `IconData`s.
+</Callout>
+
 ```dart
 FIcon.data(
   Icons.abc,
@@ -106,6 +111,8 @@ FIcon.raw(
 </Tabs>
 
 ### `IconData`
+
+
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -164,7 +171,7 @@ FIcon.raw(
     <Widget name='icon'  variant='custom' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {23-34}
+    ```dart {24-35}
     class _Example extends StatefulWidget {
       @override
       State<_Example> createState() => _ExampleState();
