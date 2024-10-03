@@ -16,7 +16,7 @@ A vertically stacked set of interactive headings that each reveal a section of c
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
-        const Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FAccordion(
@@ -72,7 +72,7 @@ FAccordion(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {5}
-        const Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FAccordion(
@@ -83,17 +83,13 @@ FAccordion(
                   child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
                 ),
                 FAccordionItem(
-                  title: const Text('Is it Styled?'),
                   initiallyExpanded: true,
-                  child: const Text(
-                    "Yes. It comes with default styles that matches the other components' aesthetics",
-                  ),
+                  title: const Text('Is it Styled?'),
+                  child: const Text("Yes. It comes with default styles that matches the other components' aesthetics"),
                 ),
                 FAccordionItem(
                   title: const Text('Is it Animated?'),
-                  child: const Text(
-                    'Yes. It is animated by default, but you can disable it if you prefer',
-                  ),
+                  child: const Text('Yes. It is animated by default, but you can disable it if you prefer'),
                 ),
               ],
             ),
@@ -110,7 +106,7 @@ FAccordion(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {5}
-        const Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FAccordion(
@@ -123,15 +119,11 @@ FAccordion(
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: const Text('Is it Styled?'),
-                  child: const Text(
-                    "Yes. It comes with default styles that matches the other components' aesthetics",
-                  ),
+                  child: const Text("Yes. It comes with default styles that matches the other components' aesthetics"),
                 ),
                 FAccordionItem(
                   title: const Text('Is it Animated?'),
-                  child: const Text(
-                    'Yes. It is animated by default, but you can disable it if you prefer',
-                  ),
+                  child: const Text('Yes. It is animated by default, but you can disable it if you prefer'),
                 ),
               ],
             ),
