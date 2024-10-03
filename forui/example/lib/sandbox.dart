@@ -12,7 +12,7 @@ class Sandbox extends StatefulWidget {
 class _SandboxState extends State<Sandbox> {
   bool value = false;
   FSelectGroupController selectGroupController = FRadioSelectGroupController(value: 1);
-  FAccordionController controller =  FAccordionController(min: 1, max: 3);
+  FAccordionController controller = FAccordionController(min: 1, max: 3);
 
   @override
   void initState() {

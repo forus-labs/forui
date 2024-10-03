@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 /// A controller that controls which sections are shown and hidden.
