@@ -1,49 +1,221 @@
-import {Callout} from "nextra/components";
-
+import { Tabs } from 'nextra/components';
+import { Callout } from "nextra/components";
+import { Widget } from "../../components/widget";
+import LinkBadge from "../../components/link-badge/link-badge";
+import LinkBadgeGroup from "../../components/link-badge/link-badge-group";
 
 # Icon
+An icon that inherits its style from an enclosing, supported widget, such as a [button](/docs/button).
 
-Forui Icons is flutter library that provides a set of high-quality icons from [Lucide](https://lucide.dev/).
+<LinkBadgeGroup>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.icon/forui.widgets.icon-library.html"/>
+</LinkBadgeGroup>
 
-
-## Installation
-
-<Callout type="info">
-    Forui Icons is bundled with forui package. You don't need to install it separately if you installed `forui`.
-</Callout>
-
-From your Flutter project directory, run the following command to install Forui Icon.
-
-```bash filename="bash"
-flutter pub install forui_assets
-```
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='icon' variant='comparison' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    Row(
+      children: [
+        FButton.icon(
+          style: FButtonStyle.primary,
+          child: FIcon(FAssets.icons.bird),
+          onPress: () {},
+        ),
+        const SizedBox(width: 10),
+        FButton.icon(
+          style: FButtonStyle.secondary,
+          child: FIcon(FAssets.icons.bird),
+          onPress: () {},
+        ),
+      ]
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 
 ## Usage
 
+### `FIcon(...)`
+
+```dart
+FIcon(
+  FAssets.icons.bird,
+  color: Colors.red,
+  size: 24,
+  semanticLabel: 'Label',
+);
+```
+
+### `FIcon.data(...)`
+
 <Callout type="info">
-    The best way to find a list of icons is to visit the [Lucide](https://lucide.dev/icons/) website.
-    We periodically update the icons in the Forui Icons package.
-    If you notice a missing icon in Forui Icons, please [open an issue](https://github.com/forus-labs/forui/issues/new).
+    This should be used with icons in other libraries, such as Cupertino and Material, that embed their icons as
+    `IconData`s.
 </Callout>
 
 ```dart
-import 'package:forui/forui.dart';
-
-// alternatively; if you've only installed forui_assets.
-import 'package:forui_assets/forui_assets.dart';
-
-// Bird icon as a Widget.
-final birdIconWidget = FAssets.icons.bird();
-
-// White cat icon with a size of 24x24.
-final catIconWidget = FAssets.icons.cat(
-  width: 24,
-  height: 24,
-  colorFilter: const ColorFilter.mode(Color(0xFFFFFFFF), BlendMode.srcIn),
+FIcon.data(
+  Icons.abc,
+  color: Colors.red,
+  size: 24,
+  semanticLabel: 'Label',
 );
-
-// Saving an icon to a variable for later use.
-final rabbitSvgAsset = FAssets.icons.rabbit;
-final rabbitIconWidget = rabbitSvgAsset();
 ```
+
+### `FIcon.image(...)`
+
+```dart
+FIcon.image(
+  NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
+  color: Colors.red,
+  size: 24,
+  semanticLabel: 'Label',
+);
+```
+
+### `FIcon.raw(...)`
+
+```dart
+FIcon.raw(
+  builder: (context, style, child) => Container(
+    color: style.color,
+    height: style.size,
+    width: style.size,
+    child: child!,
+  ),
+  child: const Text('Button'),
+);
+```
+
+## Examples
+
+### Bundled/SVG
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='icon'  query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {3}
+    FButton.icon(
+      style: FButtonStyle.secondary,
+      child: FIcon(FAssets.icons.wifi),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### `IconData`
+
+
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='icon'  query={{variant: 'data'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {3}
+    FButton.icon(
+      style: FButtonStyle.secondary,
+      child: const FIcon.data(Icons.wifi),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Image
+
+<Callout type="warning">
+    It is important that the image's background is transparent. An image with a non-transparent background will be
+    completely filled with a single color.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='icon' variant='image'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {7, 14}
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Original color
+        FButton.icon(
+          style: FButtonStyle.primary,
+          child: FIcon.image(AssetImage(path('forus-labs.png')), color: Colors.transparent),
+          onPress: () {},
+        ),
+        const SizedBox(width: 10),
+        // Recolored
+        FButton.icon(
+          style: FButtonStyle.primary,
+          child: FIcon.image(AssetImage(path('forus-labs.png'))),
+          onPress: () {},
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Raw
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='icon'  variant='custom' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {24-35}
+    class _Example extends StatefulWidget {
+      @override
+      State<_Example> createState() => _ExampleState();
+    }
+
+    class _ExampleState extends State<_Example> with SingleTickerProviderStateMixin {
+      late AnimationController controller;
+      late Animation<double> animation;
+
+      @override
+      void initState() {
+        super.initState();
+        controller = AnimationController(
+          vsync: this,
+          duration: const Duration(seconds: 3),
+        )
+          ..forward()
+          ..repeat(reverse: true);
+        animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
+      }
+
+      @override
+      Widget build(BuildContext context) => FButton.icon(
+        child: FIcon.raw(builder: (context, style, child) {
+          // You can access widget specific inherited data inside here.
+          final FButtonData(:enabled) = FButtonData.of(context);
+          return enabled ?
+            AnimatedIcon(
+              icon: AnimatedIcons.home_menu,
+              progress: animation,
+              color: style.color,
+              size: style.size,
+              semanticLabel: 'Home menu',
+            ) : const FIcon.data(Icons.menu);
+        }),
+        onPress: () {},
+      );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

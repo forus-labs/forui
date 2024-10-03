@@ -7,35 +7,21 @@ import 'package:forui/forui.dart';
 
 /// A [FBottomNavigationBar] item.
 class FBottomNavigationBarItem extends StatelessWidget {
-  static ValueWidgetBuilder<FBottomNavigationBarData> _icon(SvgAsset icon) => (_, data, __) => icon(
-        height: data.itemStyle.iconSize,
-        colorFilter: ColorFilter.mode(
-          data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
-          BlendMode.srcIn,
-        ),
-      );
-
   /// The style.
   final FBottomNavigationBarItemStyle? style;
 
-  /// The icon's builder.
-  final ValueWidgetBuilder<FBottomNavigationBarData> iconBuilder;
+  /// The icon.
+  ///
+  /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  final Widget icon;
 
   /// The label.
   final Widget label;
 
   /// Creates a [FBottomNavigationBarItem].
-  FBottomNavigationBarItem({
+  const FBottomNavigationBarItem({
     required this.label,
-    required SvgAsset icon,
-    this.style,
-    super.key,
-  }) : iconBuilder = _icon(icon);
-
-  /// Creates a [FBottomNavigationBarItem] with a custom icon.
-  const FBottomNavigationBarItem.custom({
-    required this.label,
-    required this.iconBuilder,
+    required this.icon,
     this.style,
     super.key,
   });
@@ -51,7 +37,15 @@ class FBottomNavigationBarItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ExcludeSemantics(child: iconBuilder(context, data, null)),
+          ExcludeSemantics(
+            child: FInheritedIconStyle(
+              style: FIconStyle(
+                color: data.selected ? data.itemStyle.activeIconColor : data.itemStyle.inactiveIconColor,
+                size: data.itemStyle.iconSize,
+              ),
+              child: icon,
+            ),
+          ),
           const SizedBox(height: 2),
           DefaultTextStyle.merge(
             style: selected ? style.activeTextStyle : style.inactiveTextStyle,
@@ -66,9 +60,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('iconBuilder', iconBuilder));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 

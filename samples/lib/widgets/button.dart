@@ -45,7 +45,7 @@ class ButtonIconPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
         child: FButton(
-          prefix: FButtonIcon(icon: FAssets.icons.mail),
+          prefix: FIcon(FAssets.icons.mail),
           label: const Text('Login with Email'),
           style: variant,
           onPress: () {},
@@ -62,7 +62,7 @@ class ButtonOnlyIconPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
         child: FButton.icon(
-          child: FButtonIcon(icon: FAssets.icons.chevronRight),
+          child: FIcon(FAssets.icons.chevronRight),
           onPress: () {},
         ),
       );

@@ -23,8 +23,9 @@ void main() {
                 child: FButton(
                   label: const Text('Button'),
                   style: variant,
-                  prefix: FButtonIcon(icon: FAssets.icons.circlePlay),
-                  suffix: FButtonIcon(icon: FAssets.icons.circleStop),
+                  // We don't have access to widget specific fields :(
+                  prefix: FIcon(FAssets.icons.circlePlay),
+                  suffix: FIcon(FAssets.icons.circleStop),
                   onPress: () {},
                 ),
               ),
@@ -46,8 +47,8 @@ void main() {
                 child: FButton(
                   label: const Text('Button'),
                   style: variant,
-                  prefix: FButtonIcon(icon: FAssets.icons.circlePlay),
-                  suffix: FButtonIcon(icon: FAssets.icons.circleStop),
+                  prefix: FIcon(FAssets.icons.circlePlay),
+                  suffix: FIcon(FAssets.icons.circleStop),
                   onPress: () {},
                 ),
               ),
@@ -77,8 +78,8 @@ void main() {
                 child: FButton(
                   label: const Text('Button'),
                   style: variant,
-                  prefix: FButtonIcon(icon: FAssets.icons.circlePlay),
-                  suffix: FButtonIcon(icon: FAssets.icons.circleStop),
+                  prefix: FIcon(FAssets.icons.circlePlay),
+                  suffix: FIcon(FAssets.icons.circleStop),
                   onPress: () {},
                 ),
               ),
@@ -108,8 +109,8 @@ void main() {
                 child: FButton(
                   label: const Text('Button'),
                   style: variant,
-                  prefix: FButtonIcon(icon: FAssets.icons.circlePlay),
-                  suffix: FButtonIcon(icon: FAssets.icons.circleStop),
+                  prefix: FIcon(FAssets.icons.circlePlay),
+                  suffix: FIcon(FAssets.icons.circleStop),
                   onPress: null,
                 ),
               ),
@@ -209,9 +210,7 @@ void main() {
                 child: FButton.icon(
                   onPress: () {},
                   style: variant,
-                  child: FButtonIcon(
-                    icon: FAssets.icons.chevronRight,
-                  ),
+                  child: FIcon(FAssets.icons.chevronRight),
                 ),
               ),
             ),
@@ -234,9 +233,7 @@ void main() {
                 child: FButton.icon(
                   onPress: null,
                   style: variant,
-                  child: FButtonIcon(
-                    icon: FAssets.icons.chevronRight,
-                  ),
+                  child: FIcon(FAssets.icons.chevronRight),
                 ),
               ),
             ),

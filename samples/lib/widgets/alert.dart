@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:forui/src/widgets/alert/alert.dart';
+import 'package:forui/src/widgets/alert.dart';
 
 import 'package:forui_samples/sample_scaffold.dart';
 

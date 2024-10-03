@@ -41,7 +41,7 @@ class _ApplicationState extends State<Application> {
             title: const Text('Example'),
             actions: [
               FHeaderAction(
-                icon: FAssets.icons.plus,
+                icon: FIcon(FAssets.icons.plus),
                 onPress: () {},
               ),
             ],
@@ -52,23 +52,23 @@ class _ApplicationState extends State<Application> {
             onChange: (index) => setState(() => this.index = index),
             children: [
               FBottomNavigationBarItem(
-                icon: FAssets.icons.home,
+                icon: FIcon(FAssets.icons.home),
                 label: const Text('Home'),
               ),
               FBottomNavigationBarItem(
-                icon: FAssets.icons.layoutGrid,
+                icon: FIcon(FAssets.icons.layoutGrid),
                 label: const Text('Categories'),
               ),
               FBottomNavigationBarItem(
-                icon: FAssets.icons.search,
+                icon: FIcon(FAssets.icons.search),
                 label: const Text('Search'),
               ),
               FBottomNavigationBarItem(
-                icon: FAssets.icons.settings,
+                icon: FIcon(FAssets.icons.settings),
                 label: const Text('Settings'),
               ),
               FBottomNavigationBarItem(
-                icon: FAssets.icons.castle,
+                icon: FIcon(FAssets.icons.castle),
                 label: const Text('Sandbox'),
               ),
             ],

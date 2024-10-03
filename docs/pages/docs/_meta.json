@@ -1,7 +1,7 @@
 {
   "index": "Getting Started",
   "themes": "Themes",
-  "icon": "Icon",
+  "icon-library": "Icon",
   "api_reference": {
     "title": "API Reference ↗",
     "href": "https://pub.dev/documentation/forui",

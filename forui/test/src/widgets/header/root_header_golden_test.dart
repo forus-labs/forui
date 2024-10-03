@@ -24,11 +24,11 @@ void main() {
                 title: const Text(title),
                 actions: [
                   FHeaderAction(
-                    icon: FAssets.icons.alarmClock,
+                    icon: FIcon(FAssets.icons.alarmClock),
                     onPress: null,
                   ),
                   FHeaderAction(
-                    icon: FAssets.icons.plus,
+                    icon: FIcon(FAssets.icons.plus),
                     onPress: () {},
                   ),
                 ],
