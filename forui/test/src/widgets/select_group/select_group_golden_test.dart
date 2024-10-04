@@ -44,7 +44,7 @@ void main() {
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('blue-screen.png'));
     });
-    
+
     for (final (name, theme, background) in TestScaffold.themes) {
       testWidgets('$name with checkbox', (tester) async {
         await tester.pumpWidget(
