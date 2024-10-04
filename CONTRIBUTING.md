@@ -167,6 +167,31 @@ Golden images are generated in the `test/golden` directory instead of relative t
 
 Only the `Inter` font is loaded by default.
 
+### Blue Screen Test
+
+All widgets should have a blue screen test. This uses a special theme that is all blue. It allows us to verify
+that custom/inherited themes are being applied correctly. The resultant image should be completely blue if applied
+correctly, hence the name.
+
+Example
+```dart
+testWidgets('blue screen', (tester) async {
+  await tester.pumpWidget(
+    TestScaffold.blue( // (1) Always use the TestScaffold.blue(...) constructor.
+      child: FSelectGroup(
+        style: TestScaffold.blueScreen.selectGroupStyle, // (2) Always use the TestScaffold.blueScreen theme.
+        children: [
+          FSelectGroupItem.checkbox(value: 1),
+        ],
+      ),
+    ),
+  );
+
+  // (3) Always match against blue-screen.png.
+  await expectLater(find.byType(TestScaffold), matchesGoldenFile('blue-screen.png'));
+});
+```
+
 ### Configuring Golden Test Threshold
 
 By default, `matchesGoldenFile(...)` has a 0.5% threshold. In other words, images that differ by 0.5% or less will be 

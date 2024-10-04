@@ -48,6 +48,8 @@
 
 * **Breaking** Change `FHeaderAction.icon` from `SvgAsset` to `Widget` - wrap the asset in ` FIcon` instead.
 
+* **Breaking** Change `FSelectGroup.builder` parameters.
+
 ### Fixes
 
 * Fix `FBottomNavigationBar` items hit region being smaller than intended.
@@ -65,6 +67,8 @@
 * Fix `FSwitch` not using correct label style.
 
 * Fix `FCheckbox`, `FRadio`, `FSelectGroup`, `FSwitch` and `FTextField` styles causing the widget inspector to crash.
+
+* Fix `FSelectGroup` not applying correct style if a custom widget-specific style is given.
 
 
 ## 0.5.1

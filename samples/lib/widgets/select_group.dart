@@ -21,7 +21,7 @@ class SelectGroupPage extends SampleScaffold {
               controller: FMultiSelectGroupController(values: {Sidebar.recents}),
               label: const Text('Sidebar'),
               description: const Text('These will be shown in the sidebar.'),
-              items: [
+              children: [
                 FSelectGroupItem.checkbox(
                   value: Sidebar.recents,
                   label: const Text('Recents'),
@@ -78,7 +78,7 @@ class CheckboxFormState extends State<CheckboxForm> {
               label: const Text('Favorite Languages'),
               description: const Text('Your favorite language.'),
               validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
-              items: [
+              children: [
                 FSelectGroupItem.checkbox(
                   value: Language.dart,
                   label: const Text('Dart'),
@@ -152,7 +152,7 @@ class RadioFormState extends State<RadioForm> {
               label: const Text('Notifications'),
               description: const Text('Select the notifications.'),
               validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-              items: [
+              children: [
                 FSelectGroupItem.radio(
                   value: Notification.all,
                   label: const Text('All new messages'),

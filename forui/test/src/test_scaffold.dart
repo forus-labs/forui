@@ -4,6 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 class TestScaffold extends StatelessWidget {
+  static final blueScreen = FThemeData.inherit(
+    colorScheme: const FColorScheme(
+      brightness: Brightness.light,
+      disabledColorLightness: 0.1,
+      background: Colors.lightBlue,
+      foreground: Colors.lightBlue,
+      primary: Colors.lightBlue,
+      primaryForeground: Colors.lightBlue,
+      secondary: Colors.lightBlue,
+      secondaryForeground: Colors.lightBlue,
+      muted: Colors.lightBlue,
+      mutedForeground: Colors.lightBlue,
+      destructive: Colors.lightBlue,
+      destructiveForeground: Colors.lightBlue,
+      error: Colors.lightBlue,
+      errorForeground: Colors.lightBlue,
+      border: Colors.lightBlue,
+    ),
+  );
+
   static List<(String, FThemeData, Color)> get themes => [
         ('zinc-light', FThemes.zinc.light, const Color(0xFFD5FFFF)),
         ('zinc-dark', FThemes.zinc.dark, const Color(0xFF104963)),
@@ -17,6 +37,11 @@ class TestScaffold extends StatelessWidget {
   const TestScaffold({required this.data, required this.child, this.background, super.key}) : wrapped = false;
 
   const TestScaffold.app({required this.data, required this.child, this.background, super.key}) : wrapped = true;
+
+  TestScaffold.blue({required this.child, super.key})
+      : data = blueScreen,
+        background = blueScreen.colorScheme.background,
+        wrapped = false;
 
   @override
   Widget build(BuildContext context) {
