@@ -37,7 +37,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
   /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
   final Widget Function(BuildContext, String) errorBuilder;
 
-  /// The children.
+  /// The items.
   final List<FSelectGroupItem<T>> items;
 
   /// Creates a [FSelectGroup].
