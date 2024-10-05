@@ -109,7 +109,12 @@ class _Builder<T> extends FSelectGroupItem<T> {
   final ValueWidgetBuilder<FSelectGroupItemState<T>> builder;
   final Widget? child;
 
-  const _Builder({required this.builder, required super.value, this.child, super.key}) : super._();
+  const _Builder({
+    required this.builder,
+    required super.value,
+    this.child,
+    super.key,
+  }) : super._();
 
   @override
   Widget build(BuildContext context) {

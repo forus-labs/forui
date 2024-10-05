@@ -23,7 +23,7 @@ void main() {
                   label: const Text('Select Group'),
                   description: const Text('Select Group Description'),
                   controller: FMultiSelectGroupController(values: {1}),
-                  children: [
+                  items: [
                     FSelectGroupItem.checkbox(
                       value: 1,
                       label: const Text('Checkbox 1'),
@@ -60,7 +60,7 @@ void main() {
                     label: const Text('Select Group'),
                     description: const Text('Select Group Description'),
                     controller: FMultiSelectGroupController(values: {1}),
-                    children: [
+                    items: [
                       FSelectGroupItem.checkbox(
                         value: 1,
                         label: const Text('Checkbox 1'),
@@ -102,7 +102,7 @@ void main() {
                     description: const Text('Select Group Description'),
                     forceErrorText: 'Some error message.',
                     controller: FMultiSelectGroupController(values: {1}),
-                    children: [
+                    items: [
                       FSelectGroupItem.checkbox(
                         value: 1,
                         label: const Text('Checkbox 1'),
@@ -147,7 +147,7 @@ void main() {
                     label: const Text('Select Group'),
                     description: const Text('Select Group Description'),
                     controller: FRadioSelectGroupController(value: 1),
-                    children: [
+                    items: [
                       FSelectGroupItem.radio(
                         value: 1,
                         label: const Text('Radio 1'),
@@ -189,7 +189,7 @@ void main() {
                     description: const Text('Select Group Description'),
                     forceErrorText: 'Some error message.',
                     controller: FRadioSelectGroupController(value: 1),
-                    children: [
+                    items: [
                       FSelectGroupItem.radio(
                         value: 1,
                         label: const Text('Radio 1'),

@@ -38,12 +38,12 @@ class FSelectGroup<T> extends FormField<Set<T>> {
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// The children.
-  final List<FSelectGroupItem<T>> children;
+  final List<FSelectGroupItem<T>> items;
 
   /// Creates a [FSelectGroup].
   FSelectGroup({
     required this.controller,
-    required this.children,
+    required this.items,
     this.style,
     this.label,
     this.description,
@@ -75,7 +75,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
               error: error,
               child: Column(
                 children: [
-                  for (final child in children)
+                  for (final child in items)
                     FSelectGroupItemData<T>(
                       controller: controller,
                       style: groupStyle,
@@ -99,7 +99,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(DiagnosticsProperty('testing', (1, 2, 3)))
-      ..add(IterableProperty('items', children));
+      ..add(IterableProperty('items', items));
   }
 }
 
