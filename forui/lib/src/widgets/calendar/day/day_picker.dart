@@ -204,7 +204,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
         );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
-  factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
+  factory FCalendarDayPickerStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography}) {
     final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
     final mutedTextStyle =
         typography.base.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);

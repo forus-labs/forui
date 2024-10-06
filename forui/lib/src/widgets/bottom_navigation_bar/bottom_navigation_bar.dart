@@ -142,7 +142,7 @@ class FBottomNavigationBarStyle with Diagnosticable {
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties from [colorScheme] and [typography].
-  FBottomNavigationBarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FBottomNavigationBarStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
       : decoration = BoxDecoration(
           border: Border(top: BorderSide(color: colorScheme.border)),
           color: colorScheme.background,

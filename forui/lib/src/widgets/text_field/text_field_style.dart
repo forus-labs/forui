@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 /// [FTextFieldStyle]'s style.
 final class FTextFieldStyle with Diagnosticable {
-  /// The appearance of the keyboard. Defaults to [FColorScheme.brightness].
+  /// The appearance of the keyboard. Defaults to [FStateColorScheme.brightness].
   ///
   /// This setting is only honored on iOS devices.
   final Brightness keyboardAppearance;
@@ -58,7 +58,7 @@ final class FTextFieldStyle with Diagnosticable {
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
   FTextFieldStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   })  : keyboardAppearance = colorScheme.brightness,

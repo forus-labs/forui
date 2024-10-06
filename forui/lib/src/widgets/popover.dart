@@ -253,7 +253,7 @@ final class FPopoverStyle with Diagnosticable {
   });
 
   /// Creates a [FPopoverStyle] that inherits its properties from [colorScheme] and [style].
-  FPopoverStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  FPopoverStyle.inherit({required FStateColorScheme colorScheme, required FStyle style})
       : this(
           decoration: BoxDecoration(
             color: colorScheme.background,

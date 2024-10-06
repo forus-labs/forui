@@ -197,7 +197,7 @@ final class FSwitchStyle with Diagnosticable {
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
-  FSwitchStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  FSwitchStyle.inherit({required FStateColorScheme colorScheme, required FStyle style})
       : focusColor = colorScheme.primary,
         labelLayoutStyle = FLabelStyles.inherit(style: style).horizontal.layout,
         enabledStyle = FSwitchStateStyle(

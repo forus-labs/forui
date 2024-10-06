@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 
 class TestScaffold extends StatelessWidget {
   static final blueScreen = FThemeData.inherit(
-    colorScheme: const FColorScheme(
+    colorScheme: const FStateColorScheme(
       brightness: Brightness.light,
       disabledColorLightness: 0.1,
       background: Color(0xFF03A9F4),

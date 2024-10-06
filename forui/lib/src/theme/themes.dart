@@ -5,10 +5,121 @@ import 'package:forui/forui.dart';
 
 /// The Forui themes.
 extension FThemes on Never {
+  static const lightZinc = FColorScheme(
+    brightness: Brightness.light,
+    enabled: FStateColorScheme(
+      brightness: Brightness.light,
+      disabledColorLightness: 0.4,
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF09090B),
+      primary: Color(0xFF18181B),
+      primaryForeground: Color(0xFFFAFAFA),
+      secondary: Color(0xFFF4F4F5),
+      secondaryForeground: Color(0xFF18181B),
+      muted: Color(0xFFF4F4F5),
+      mutedForeground: Color(0xFF71717A),
+      destructive: Color(0xFFEF4444),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFEF4444),
+      errorForeground: Color(0xFFFAFAFA),
+      border: Color(0xFFE4E4E7),
+    ),
+    enabledHovered: FStateColorScheme(
+      brightness: Brightness.light,
+      disabledColorLightness: 0.4,
+      background: Color(0xFFFFFFFF),  // Keeping background the same
+      foreground: Color(0xFF0A0A0C),  // Slightly lighter foreground
+      primary: Color(0xFF202023),     // Slightly lighter primary for hover effect
+      primaryForeground: Color(0xFFFAFAFA),  // Kept the same for clarity
+      secondary: Color(0xFFFAFAFA),   // Lighter secondary for hover
+      secondaryForeground: Color(0xFF1A1A1D),  // Slightly lighter secondary foreground
+      muted: Color(0xFFFAFAFA),       // Lighter muted color
+      mutedForeground: Color(0xFF787880),  // Slightly lighter muted foreground
+      destructive: Color(0xFFFF5A5A),  // Lighter red for hover effect
+      destructiveForeground: Color(0xFFFAFAFA),  // Kept the same
+      error: Color(0xFFFF5A5A),       // Same as destructive for consistency
+      errorForeground: Color(0xFFFAFAFA),  // Kept the same
+      border: Color(0xFFEDEDED),      // Slightly lighter border for hover
+    ),
+    disabled: FStateColorScheme(
+      brightness: Brightness.light,
+      disabledColorLightness: 0.4,
+      background: Color(0xFFF7F7F7),
+      foreground: Color(0xFFB3B3B5),
+      primary: Color(0xFF6E6E72),
+      primaryForeground: Color(0xFFE0E0E0),
+      secondary: Color(0xFFEBEBEC),
+      secondaryForeground: Color(0xFF8D8D91),
+      muted: Color(0xFFEAEAEA),
+      mutedForeground: Color(0xFF9E9EA4),
+      destructive: Color(0xFFEE7F7F),
+      destructiveForeground: Color(0xFFEAEAEA),
+      error: Color(0xFFEE7F7F),
+      errorForeground: Color(0xFFEAEAEA),
+      border: Color(0xFFDADADD),
+    ),
+  );
+
+  static const darkZinc = FColorScheme(
+    brightness: Brightness.light,
+    enabled: FStateColorScheme(
+      brightness: Brightness.light,
+      disabledColorLightness: 0.4,
+      background: Color(0xFF09090B),
+      foreground: Color(0xFFFAFAFA),
+      primary: Color(0xFFFAFAFA),
+      primaryForeground: Color(0xFF18181B),
+      secondary: Color(0xFF27272A),
+      secondaryForeground: Color(0xFFFAFAFA),
+      muted: Color(0xFF27272A),
+      mutedForeground: Color(0xFFA1A1AA),
+      destructive: Color(0xFF7F1D1D),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFF7F1D1D),
+      errorForeground: Color(0xFFFAFAFA),
+      border: Color(0xFF27272A),
+    ),
+    enabledHovered: FStateColorScheme(
+      brightness: Brightness.dark,
+      disabledColorLightness: 0.8,
+      background: Color(0xFF070709),  // Darkened background for hover
+      foreground: Color(0xFFE5E5E5),  // Slightly darker foreground
+      primary: Color(0xFFE5E5E5),     // Darkened primary for hover effect
+      primaryForeground: Color(0xFF121212),  // Slightly darker for contrast
+      secondary: Color(0xFF1F1F21),   // Darker secondary for hover
+      secondaryForeground: Color(0xFFE5E5E5),  // Slightly darker foreground
+      muted: Color(0xFF1F1F21),       // Darkened muted color
+      mutedForeground: Color(0xFF8A8A94),  // Darkened muted foreground
+      destructive: Color(0xFF6B1717),  // Darker red for destructive actions
+      destructiveForeground: Color(0xFFE5E5E5),  // Darkened for consistency
+      error: Color(0xFF6B1717),       // Same as destructive for consistency
+      errorForeground: Color(0xFFE5E5E5),  // Darkened error foreground
+      border: Color(0xFF1F1F21),      // Darkened border for hover effect
+    ),
+    disabled: FStateColorScheme(
+      brightness: Brightness.dark,
+      disabledColorLightness: 0.8,
+      background: Color(0xFF1A1A1C),  // Muted, faded version of the background
+      foreground: Color(0xFF737373),  // Faded, desaturated foreground
+      primary: Color(0xFF4D4D4F),     // Desaturated primary color
+      primaryForeground: Color(0xFF2B2B2D),  // Muted foreground for disabled
+      secondary: Color(0xFF3B3B3E),   // Desaturated and faded secondary color
+      secondaryForeground: Color(0xFF737373),  // Desaturated secondary foreground
+      muted: Color(0xFF3B3B3E),       // Faded version of muted color
+      mutedForeground: Color(0xFF8D8D94),  // Muted foreground for text
+      destructive: Color(0xFF663434), // Desaturated red for destructive actions
+      destructiveForeground: Color(0xFF8E8E8E),  // Faded destructive foreground
+      error: Color(0xFF663434),       // Same as destructive for consistency
+      errorForeground: Color(0xFF8E8E8E),  // Muted error foreground
+      border: Color(0xFF3B3B3E),      // Desaturated and faded border
+    ),
+  );
+
+
   /// The light and dark variants of the [Zinc](https://ui.shadcn.com/themes) theme.
   static final zinc = (
     light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
+      colorScheme: const FStateColorScheme(
         brightness: Brightness.light,
         disabledColorLightness: 0.4,
         background: Color(0xFFFFFFFF),
@@ -27,7 +138,7 @@ extension FThemes on Never {
       ),
     ),
     dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
+      colorScheme: const FStateColorScheme(
         brightness: Brightness.dark,
         disabledColorLightness: 0.8,
         background: Color(0xFF09090B),
@@ -47,339 +158,339 @@ extension FThemes on Never {
     ),
   );
 
-  /// The light and dark variants of the [Slate](https://ui.shadcn.com/themes) theme.
-  static final slate = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF020817),
-        primary: Color(0xFF0F172A),
-        primaryForeground: Color(0xFFF8FAFC),
-        secondary: Color(0xFFF1F5F9),
-        secondaryForeground: Color(0xFF0F172A),
-        muted: Color(0xFFF1F5F9),
-        mutedForeground: Color(0xFF64748B),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFF8FAFC),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFF8FAFC),
-        border: Color(0xFFE2E8F0),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF020817),
-        foreground: Color(0xFFF8FAFC),
-        primary: Color(0xFFF8FAFC),
-        primaryForeground: Color(0xFF0F172A),
-        secondary: Color(0xFF1E293B),
-        secondaryForeground: Color(0xFFF8FAFC),
-        muted: Color(0xFF1E293B),
-        mutedForeground: Color(0xFF94A3B8),
-        destructive: Color(0xFF7F1D1D),
-        destructiveForeground: Color(0xFFF8FAFC),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFF8FAFC),
-        border: Color(0xFF1E293B),
-      ),
-    ),
-  );
-
-  /// The light and dark variants of the [Red](https://ui.shadcn.com/themes) theme.
-  static final red = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFFDC2626),
-        primaryForeground: Color(0xFFFEF2F2),
-        secondary: Color(0xFFF5F5F5),
-        secondaryForeground: Color(0xFF171717),
-        muted: Color(0xFFF5F5F5),
-        mutedForeground: Color(0xFF71717A),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFFAFAFA),
-        border: Color(0xFFE5E5E5),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF0A0A0A),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFFDC2626),
-        primaryForeground: Color(0xFFFEF2F2),
-        secondary: Color(0xFF262626),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF262626),
-        mutedForeground: Color(0xFFA3A3A3),
-        destructive: Color(0xFF7F1D1D),
-        destructiveForeground: Color(0xFFFEF2F2),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFFEF2F2),
-        border: Color(0xFF262626),
-      ),
-    ),
-  );
-
-  /// The light and dark variants of the [Rose](https://ui.shadcn.com/themes) theme.
-  static final rose = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFFE11D48),
-        primaryForeground: Color(0xFFFFF1F2),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717A),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFFAFAFA),
-        border: Color(0xFFE4E4E7),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF0C0A09),
-        foreground: Color(0xFFF2F2F2),
-        primary: Color(0xFFE11D48),
-        primaryForeground: Color(0xFFFFF1F2),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF262626),
-        mutedForeground: Color(0xFFA1A1AA),
-        destructive: Color(0xFF7F1D1D),
-        destructiveForeground: Color(0xFFFEF2F2),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFFEF2F2),
-        border: Color(0xFF27272A),
-      ),
-    ),
-  );
-
-  /// The light and dark variants of the [Orange](https://ui.shadcn.com/themes) theme.
-  static final orange = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF0C0A09),
-        primary: Color(0xFFF97316),
-        primaryForeground: Color(0xFFFFF1F2),
-        secondary: Color(0xFFF5F5F4),
-        secondaryForeground: Color(0xFF1C1917),
-        muted: Color(0xFFF5F5F4),
-        mutedForeground: Color(0xFF78716C),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFFAFAF9),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFFAFAF9),
-        border: Color(0xFFE4E4E7),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF0C0A09),
-        foreground: Color(0xFFFAFAF9),
-        primary: Color(0xFFEA580C),
-        primaryForeground: Color(0xFFFAFAF9),
-        secondary: Color(0xFF292524),
-        secondaryForeground: Color(0xFFFAFAF9),
-        muted: Color(0xFF292524),
-        mutedForeground: Color(0xFFA8A29E),
-        destructive: Color(0xFFDC2626),
-        destructiveForeground: Color(0xFFFAFAF9),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFFAFAF9),
-        border: Color(0xFF292524),
-      ),
-    ),
-  );
-
-  /// The light and dark variants of the [Green](https://ui.shadcn.com/themes) theme.
-  static final green = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFF16A34A),
-        primaryForeground: Color(0xFFFFF1F2),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717A),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFFAFAFA),
-        border: Color(0xFFE4E4E7),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF0C0A09),
-        foreground: Color(0xFFF2F2F2),
-        primary: Color(0xFF22C55E),
-        primaryForeground: Color(0xFF052E16),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF262626),
-        mutedForeground: Color(0xFFA1A1AA),
-        destructive: Color(0xFF7F1D1D),
-        destructiveForeground: Color(0xFFFEF2F2),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFFEF2F2),
-        border: Color(0xFF27272A),
-      ),
-    ),
-  );
-
-  /// The light and dark variants of the [Blue](https://ui.shadcn.com/themes) theme.
-  static final blue = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF020817),
-        primary: Color(0xFF2563EB),
-        primaryForeground: Color(0xFFF8FAFC),
-        secondary: Color(0xFFF1F5F9),
-        secondaryForeground: Color(0xFF0F172A),
-        muted: Color(0xFFF1F5F9),
-        mutedForeground: Color(0xFF64748B),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFF8FAFC),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFF8FAFC),
-        border: Color(0xFFE2E8F0),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF020817),
-        foreground: Color(0xFFF8FAFC),
-        primary: Color(0xFF3B82F6),
-        primaryForeground: Color(0xFF0F172A),
-        secondary: Color(0xFF1E293B),
-        secondaryForeground: Color(0xFFF8FAFC),
-        muted: Color(0xFF1E293B),
-        mutedForeground: Color(0xFF94A3B8),
-        destructive: Color(0xFF7F1D1D),
-        destructiveForeground: Color(0xFFF8FAFC),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFF8FAFC),
-        border: Color(0xFF1E293B),
-      ),
-    ),
-  );
-
-  /// The light and dark variants of the [Yellow](https://ui.shadcn.com/themes) theme.
-  static final yellow = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF0C0A09),
-        primary: Color(0xFFFACC15),
-        primaryForeground: Color(0xFF422006),
-        secondary: Color(0xFFF5F5F4),
-        secondaryForeground: Color(0xFF1C1917),
-        muted: Color(0xFFF5F5F4),
-        mutedForeground: Color(0xFF78716C),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFFAFAF9),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFFAFAF9),
-        border: Color(0xFFE7E5E4),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF0C0A09),
-        foreground: Color(0xFFFAFAF9),
-        primary: Color(0xFFFACC15),
-        primaryForeground: Color(0xFF422006),
-        secondary: Color(0xFF292524),
-        secondaryForeground: Color(0xFFFAFAF9),
-        muted: Color(0xFF292524),
-        mutedForeground: Color(0xFFA8A29E),
-        destructive: Color(0xFF7F1D1D),
-        destructiveForeground: Color(0xFFFAFAF9),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFFAFAF9),
-        border: Color(0xFF292524),
-      ),
-    ),
-  );
-
-  /// The light and dark variants of the [Violet](https://ui.shadcn.com/themes) theme.
-  static final violet = (
-    light: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.light,
-        disabledColorLightness: 0.4,
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF030712),
-        primary: Color(0xFF7C3AED),
-        primaryForeground: Color(0xFFF9FAFB),
-        secondary: Color(0xFFF3F4F6),
-        secondaryForeground: Color(0xFF111827),
-        muted: Color(0xFFF3F4F6),
-        mutedForeground: Color(0xFF6B7280),
-        destructive: Color(0xFFEF4444),
-        destructiveForeground: Color(0xFFF9FAFB),
-        error: Color(0xFFEF4444),
-        errorForeground: Color(0xFFF9FAFB),
-        border: Color(0xFFE5E7EB),
-      ),
-    ),
-    dark: FThemeData.inherit(
-      colorScheme: const FColorScheme(
-        brightness: Brightness.dark,
-        disabledColorLightness: 0.8,
-        background: Color(0xFF030712),
-        foreground: Color(0xFFF9FAFB),
-        primary: Color(0xFF6D28D9),
-        primaryForeground: Color(0xFFF9FAFB),
-        secondary: Color(0xFF1F2937),
-        secondaryForeground: Color(0xFFF9FAFB),
-        muted: Color(0xFF1F2937),
-        mutedForeground: Color(0xFF9CA3AF),
-        destructive: Color(0xFF7F1D1D),
-        destructiveForeground: Color(0xFFF9FAFB),
-        error: Color(0xFF7F1D1D),
-        errorForeground: Color(0xFFF9FAFB),
-        border: Color(0xFF1F2937),
-      ),
-    ),
-  );
+  // /// The light and dark variants of the [Slate](https://ui.shadcn.com/themes) theme.
+  // static final slate = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF020817),
+  //       primary: Color(0xFF0F172A),
+  //       primaryForeground: Color(0xFFF8FAFC),
+  //       secondary: Color(0xFFF1F5F9),
+  //       secondaryForeground: Color(0xFF0F172A),
+  //       muted: Color(0xFFF1F5F9),
+  //       mutedForeground: Color(0xFF64748B),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFF8FAFC),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFF8FAFC),
+  //       border: Color(0xFFE2E8F0),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF020817),
+  //       foreground: Color(0xFFF8FAFC),
+  //       primary: Color(0xFFF8FAFC),
+  //       primaryForeground: Color(0xFF0F172A),
+  //       secondary: Color(0xFF1E293B),
+  //       secondaryForeground: Color(0xFFF8FAFC),
+  //       muted: Color(0xFF1E293B),
+  //       mutedForeground: Color(0xFF94A3B8),
+  //       destructive: Color(0xFF7F1D1D),
+  //       destructiveForeground: Color(0xFFF8FAFC),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFF8FAFC),
+  //       border: Color(0xFF1E293B),
+  //     ),
+  //   ),
+  // );
+  //
+  // /// The light and dark variants of the [Red](https://ui.shadcn.com/themes) theme.
+  // static final red = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF09090B),
+  //       primary: Color(0xFFDC2626),
+  //       primaryForeground: Color(0xFFFEF2F2),
+  //       secondary: Color(0xFFF5F5F5),
+  //       secondaryForeground: Color(0xFF171717),
+  //       muted: Color(0xFFF5F5F5),
+  //       mutedForeground: Color(0xFF71717A),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFFAFAFA),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFFAFAFA),
+  //       border: Color(0xFFE5E5E5),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF0A0A0A),
+  //       foreground: Color(0xFFFAFAFA),
+  //       primary: Color(0xFFDC2626),
+  //       primaryForeground: Color(0xFFFEF2F2),
+  //       secondary: Color(0xFF262626),
+  //       secondaryForeground: Color(0xFFFAFAFA),
+  //       muted: Color(0xFF262626),
+  //       mutedForeground: Color(0xFFA3A3A3),
+  //       destructive: Color(0xFF7F1D1D),
+  //       destructiveForeground: Color(0xFFFEF2F2),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFFEF2F2),
+  //       border: Color(0xFF262626),
+  //     ),
+  //   ),
+  // );
+  //
+  // /// The light and dark variants of the [Rose](https://ui.shadcn.com/themes) theme.
+  // static final rose = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF09090B),
+  //       primary: Color(0xFFE11D48),
+  //       primaryForeground: Color(0xFFFFF1F2),
+  //       secondary: Color(0xFFF4F4F5),
+  //       secondaryForeground: Color(0xFF18181B),
+  //       muted: Color(0xFFF4F4F5),
+  //       mutedForeground: Color(0xFF71717A),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFFAFAFA),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFFAFAFA),
+  //       border: Color(0xFFE4E4E7),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF0C0A09),
+  //       foreground: Color(0xFFF2F2F2),
+  //       primary: Color(0xFFE11D48),
+  //       primaryForeground: Color(0xFFFFF1F2),
+  //       secondary: Color(0xFF27272A),
+  //       secondaryForeground: Color(0xFFFAFAFA),
+  //       muted: Color(0xFF262626),
+  //       mutedForeground: Color(0xFFA1A1AA),
+  //       destructive: Color(0xFF7F1D1D),
+  //       destructiveForeground: Color(0xFFFEF2F2),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFFEF2F2),
+  //       border: Color(0xFF27272A),
+  //     ),
+  //   ),
+  // );
+  //
+  // /// The light and dark variants of the [Orange](https://ui.shadcn.com/themes) theme.
+  // static final orange = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF0C0A09),
+  //       primary: Color(0xFFF97316),
+  //       primaryForeground: Color(0xFFFFF1F2),
+  //       secondary: Color(0xFFF5F5F4),
+  //       secondaryForeground: Color(0xFF1C1917),
+  //       muted: Color(0xFFF5F5F4),
+  //       mutedForeground: Color(0xFF78716C),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFFAFAF9),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFFAFAF9),
+  //       border: Color(0xFFE4E4E7),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF0C0A09),
+  //       foreground: Color(0xFFFAFAF9),
+  //       primary: Color(0xFFEA580C),
+  //       primaryForeground: Color(0xFFFAFAF9),
+  //       secondary: Color(0xFF292524),
+  //       secondaryForeground: Color(0xFFFAFAF9),
+  //       muted: Color(0xFF292524),
+  //       mutedForeground: Color(0xFFA8A29E),
+  //       destructive: Color(0xFFDC2626),
+  //       destructiveForeground: Color(0xFFFAFAF9),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFFAFAF9),
+  //       border: Color(0xFF292524),
+  //     ),
+  //   ),
+  // );
+  //
+  // /// The light and dark variants of the [Green](https://ui.shadcn.com/themes) theme.
+  // static final green = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF09090B),
+  //       primary: Color(0xFF16A34A),
+  //       primaryForeground: Color(0xFFFFF1F2),
+  //       secondary: Color(0xFFF4F4F5),
+  //       secondaryForeground: Color(0xFF18181B),
+  //       muted: Color(0xFFF4F4F5),
+  //       mutedForeground: Color(0xFF71717A),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFFAFAFA),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFFAFAFA),
+  //       border: Color(0xFFE4E4E7),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF0C0A09),
+  //       foreground: Color(0xFFF2F2F2),
+  //       primary: Color(0xFF22C55E),
+  //       primaryForeground: Color(0xFF052E16),
+  //       secondary: Color(0xFF27272A),
+  //       secondaryForeground: Color(0xFFFAFAFA),
+  //       muted: Color(0xFF262626),
+  //       mutedForeground: Color(0xFFA1A1AA),
+  //       destructive: Color(0xFF7F1D1D),
+  //       destructiveForeground: Color(0xFFFEF2F2),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFFEF2F2),
+  //       border: Color(0xFF27272A),
+  //     ),
+  //   ),
+  // );
+  //
+  // /// The light and dark variants of the [Blue](https://ui.shadcn.com/themes) theme.
+  // static final blue = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF020817),
+  //       primary: Color(0xFF2563EB),
+  //       primaryForeground: Color(0xFFF8FAFC),
+  //       secondary: Color(0xFFF1F5F9),
+  //       secondaryForeground: Color(0xFF0F172A),
+  //       muted: Color(0xFFF1F5F9),
+  //       mutedForeground: Color(0xFF64748B),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFF8FAFC),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFF8FAFC),
+  //       border: Color(0xFFE2E8F0),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF020817),
+  //       foreground: Color(0xFFF8FAFC),
+  //       primary: Color(0xFF3B82F6),
+  //       primaryForeground: Color(0xFF0F172A),
+  //       secondary: Color(0xFF1E293B),
+  //       secondaryForeground: Color(0xFFF8FAFC),
+  //       muted: Color(0xFF1E293B),
+  //       mutedForeground: Color(0xFF94A3B8),
+  //       destructive: Color(0xFF7F1D1D),
+  //       destructiveForeground: Color(0xFFF8FAFC),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFF8FAFC),
+  //       border: Color(0xFF1E293B),
+  //     ),
+  //   ),
+  // );
+  //
+  // /// The light and dark variants of the [Yellow](https://ui.shadcn.com/themes) theme.
+  // static final yellow = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF0C0A09),
+  //       primary: Color(0xFFFACC15),
+  //       primaryForeground: Color(0xFF422006),
+  //       secondary: Color(0xFFF5F5F4),
+  //       secondaryForeground: Color(0xFF1C1917),
+  //       muted: Color(0xFFF5F5F4),
+  //       mutedForeground: Color(0xFF78716C),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFFAFAF9),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFFAFAF9),
+  //       border: Color(0xFFE7E5E4),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF0C0A09),
+  //       foreground: Color(0xFFFAFAF9),
+  //       primary: Color(0xFFFACC15),
+  //       primaryForeground: Color(0xFF422006),
+  //       secondary: Color(0xFF292524),
+  //       secondaryForeground: Color(0xFFFAFAF9),
+  //       muted: Color(0xFF292524),
+  //       mutedForeground: Color(0xFFA8A29E),
+  //       destructive: Color(0xFF7F1D1D),
+  //       destructiveForeground: Color(0xFFFAFAF9),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFFAFAF9),
+  //       border: Color(0xFF292524),
+  //     ),
+  //   ),
+  // );
+  //
+  // /// The light and dark variants of the [Violet](https://ui.shadcn.com/themes) theme.
+  // static final violet = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.light,
+  //       disabledColorLightness: 0.4,
+  //       background: Color(0xFFFFFFFF),
+  //       foreground: Color(0xFF030712),
+  //       primary: Color(0xFF7C3AED),
+  //       primaryForeground: Color(0xFFF9FAFB),
+  //       secondary: Color(0xFFF3F4F6),
+  //       secondaryForeground: Color(0xFF111827),
+  //       muted: Color(0xFFF3F4F6),
+  //       mutedForeground: Color(0xFF6B7280),
+  //       destructive: Color(0xFFEF4444),
+  //       destructiveForeground: Color(0xFFF9FAFB),
+  //       error: Color(0xFFEF4444),
+  //       errorForeground: Color(0xFFF9FAFB),
+  //       border: Color(0xFFE5E7EB),
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: const FStateColorScheme(
+  //       brightness: Brightness.dark,
+  //       disabledColorLightness: 0.8,
+  //       background: Color(0xFF030712),
+  //       foreground: Color(0xFFF9FAFB),
+  //       primary: Color(0xFF6D28D9),
+  //       primaryForeground: Color(0xFFF9FAFB),
+  //       secondary: Color(0xFF1F2937),
+  //       secondaryForeground: Color(0xFFF9FAFB),
+  //       muted: Color(0xFF1F2937),
+  //       mutedForeground: Color(0xFF9CA3AF),
+  //       destructive: Color(0xFF7F1D1D),
+  //       destructiveForeground: Color(0xFFF9FAFB),
+  //       error: Color(0xFF7F1D1D),
+  //       errorForeground: Color(0xFFF9FAFB),
+  //       border: Color(0xFF1F2937),
+  //     ),
+  //   ),
+  // );
 }

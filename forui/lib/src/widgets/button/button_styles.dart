@@ -29,7 +29,7 @@ final class FButtonStyles with Diagnosticable {
 
   /// Creates a [FButtonCustomStyle] that inherits its properties from the provided [colorScheme], [typography], and
   /// [style].
-  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FButtonStyles.inherit({required FStateColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FButtonCustomStyle(
           enabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -37,7 +37,7 @@ final class FButtonStyles with Diagnosticable {
           ),
           enabledHoverBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.primary.withOpacity(0.9),
+            color: colorScheme.primary.withLightness(0.15),
           ),
           disabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -60,7 +60,7 @@ final class FButtonStyles with Diagnosticable {
           ),
           enabledHoverBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.secondary.withOpacity(0.9),
+            color: colorScheme.secondary.withLightness(0.15),
           ),
           disabledBoxDecoration: BoxDecoration(
             borderRadius: style.borderRadius,

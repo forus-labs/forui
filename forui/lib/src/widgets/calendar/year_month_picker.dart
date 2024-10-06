@@ -100,7 +100,7 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
   FCalendarYearMonthPickerStyle({required this.enabledStyle, required this.disabledStyle});
 
   /// Creates a new year/month picker style that inherits the color scheme and typography.
-  FCalendarYearMonthPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FCalendarYearMonthPickerStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
       : this(
           enabledStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,

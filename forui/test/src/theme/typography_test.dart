@@ -50,7 +50,7 @@ void main() {
     });
 
     group('inherit constructor', () {
-      const colorScheme = FColorScheme(
+      const colorScheme = FStateColorScheme(
         brightness: Brightness.light,
         disabledColorLightness: 0.5,
         background: Colors.black,

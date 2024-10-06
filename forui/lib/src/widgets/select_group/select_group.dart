@@ -183,7 +183,7 @@ class FSelectGroupStyle with Diagnosticable {
 
   /// Creates a [FSelectGroupStyle] that inherits its properties from the given parameters.
   factory FSelectGroupStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   }) {

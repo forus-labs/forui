@@ -99,7 +99,7 @@ final class FAvatarStyle with Diagnosticable {
   });
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
-  FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FAvatarStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
       : backgroundColor = colorScheme.muted,
         foregroundColor = colorScheme.mutedForeground,
         fadeInDuration = const Duration(milliseconds: 500),

@@ -122,7 +122,7 @@ final class FTypography with Diagnosticable {
 
   /// Creates a [FTypography] that inherits its properties from [colorScheme].
   FTypography.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     this.defaultFontFamily = 'packages/forui/Inter',
   })  : xs = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
         sm = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),

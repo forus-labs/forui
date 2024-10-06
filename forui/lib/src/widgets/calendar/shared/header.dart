@@ -211,7 +211,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
 
   /// Creates a [FCalendarHeaderStyle] that inherits its values from the given [colorScheme] and [typography].
   factory FCalendarHeaderStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   }) {

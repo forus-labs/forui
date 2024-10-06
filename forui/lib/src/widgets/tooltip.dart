@@ -319,7 +319,7 @@ final class FTooltipStyle with Diagnosticable {
   });
 
   /// Creates a [FTooltipStyle] that inherits its properties from the given [colorScheme], [typography], and [style].
-  FTooltipStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FTooltipStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
           decoration: BoxDecoration(
             color: colorScheme.background,

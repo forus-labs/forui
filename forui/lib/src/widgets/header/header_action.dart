@@ -116,8 +116,8 @@ final class FHeaderActionStyle with Diagnosticable {
     required this.size,
   });
 
-  /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
-  FHeaderActionStyle.inherit({required FColorScheme colorScheme, required this.size})
+  /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FStateColorScheme].
+  FHeaderActionStyle.inherit({required FStateColorScheme colorScheme, required this.size})
       : enabledColor = colorScheme.foreground,
         disabledColor = colorScheme.foreground.withOpacity(0.5);
 

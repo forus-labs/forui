@@ -91,9 +91,9 @@ final class FRootHeaderStyle with Diagnosticable {
     required this.padding,
   });
 
-  /// Creates a [FRootHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
+  /// Creates a [FRootHeaderStyle] that inherits its properties from the given [FStateColorScheme], [FTypography] and [FStyle].
   FRootHeaderStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   })  : titleTextStyle = typography.xl3.copyWith(

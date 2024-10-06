@@ -136,7 +136,7 @@ final class FAccordionStyle with Diagnosticable {
   }) : assert(0 < iconSize, 'iconSize should be positive.');
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
-  FAccordionStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FAccordionStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
       : this(
           titleTextStyle: typography.base.copyWith(
             fontWeight: FontWeight.w500,

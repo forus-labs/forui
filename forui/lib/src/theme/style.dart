@@ -45,9 +45,9 @@ final class FStyle with Diagnosticable {
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
   });
 
-  /// Creates an [FStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
+  /// Creates an [FStyle] that inherits its properties from the given [FStateColorScheme] and [FTypography].
   FStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
   }) : this(
           enabledFormFieldStyle: FFormFieldStyle.inherit(

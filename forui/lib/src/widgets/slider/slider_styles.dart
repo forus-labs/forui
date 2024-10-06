@@ -20,9 +20,9 @@ final class FSliderStyles with Diagnosticable {
     required this.verticalStyle,
   });
 
-  /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
+  /// Creates a [FSliderStyles] that inherits its properties from the given [FStateColorScheme].
   factory FSliderStyles.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   }) {

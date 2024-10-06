@@ -183,7 +183,7 @@ final class FCalendarStyle with Diagnosticable {
 
   /// Creates a [FCalendarStyle] that inherits the color scheme and typography.
   FCalendarStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   }) : this(

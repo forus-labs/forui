@@ -102,9 +102,9 @@ final class FNestedHeaderStyle with Diagnosticable {
     required this.padding,
   });
 
-  /// Creates a [FNestedHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
+  /// Creates a [FNestedHeaderStyle] that inherits its properties from the given [FStateColorScheme], [FTypography] and [FStyle].
   FNestedHeaderStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   })  : titleTextStyle = typography.xl.copyWith(

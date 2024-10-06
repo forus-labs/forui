@@ -28,7 +28,7 @@ final class FBadgeStyles with Diagnosticable {
   });
 
   /// Creates a [FBadgeStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
-  FBadgeStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FBadgeStyles.inherit({required FStateColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FBadgeCustomStyle.inherit(
           style: style,
           backgroundColor: colorScheme.primary,

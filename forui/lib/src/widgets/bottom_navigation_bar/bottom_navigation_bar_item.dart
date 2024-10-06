@@ -94,8 +94,8 @@ final class FBottomNavigationBarItemStyle with Diagnosticable {
     this.padding = const EdgeInsets.all(5),
   });
 
-  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
-  FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FStateColorScheme] and [FTypography].
+  FBottomNavigationBarItemStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
       : iconSize = 24,
         activeIconColor = colorScheme.primary,
         inactiveIconColor = colorScheme.foreground.withOpacity(0.5),

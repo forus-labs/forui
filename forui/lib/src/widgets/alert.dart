@@ -121,7 +121,7 @@ final class FAlertStyles with Diagnosticable {
   });
 
   /// Creates a [FAlertStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
-  FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FAlertStyles.inherit({required FStateColorScheme colorScheme, required FTypography typography, required FStyle style})
       : primary = FAlertCustomStyle(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
           iconColor: colorScheme.foreground,

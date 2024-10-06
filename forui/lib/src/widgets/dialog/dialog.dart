@@ -189,7 +189,7 @@ final class FDialogStyle with Diagnosticable {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties from the given [style], [colorScheme], and [typography].
-  FDialogStyle.inherit({required FStyle style, required FColorScheme colorScheme, required FTypography typography})
+  FDialogStyle.inherit({required FStyle style, required FStateColorScheme colorScheme, required FTypography typography})
       : decoration = BoxDecoration(
           borderRadius: style.borderRadius,
           color: colorScheme.background,

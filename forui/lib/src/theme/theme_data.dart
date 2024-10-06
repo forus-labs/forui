@@ -17,7 +17,7 @@ import 'package:forui/forui.dart';
 /// widget style using the defaults provided by the [colorScheme], [typography], and [style].
 final class FThemeData with Diagnosticable {
   /// The color scheme. It is used to configure the color properties of Forui widgets.
-  final FColorScheme colorScheme;
+  final FStateColorScheme colorScheme;
 
   /// The typography data. It is used to configure the [TextStyle]s of Forui widgets.
   final FTypography typography;
@@ -135,7 +135,7 @@ final class FThemeData with Diagnosticable {
 
   /// Creates a [FThemeData] that configures the widget styles using the given properties.
   factory FThemeData.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     FStyle? style,
     FTypography? typography,
   }) {

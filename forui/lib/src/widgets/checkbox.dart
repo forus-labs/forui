@@ -179,7 +179,7 @@ class FCheckboxStyle with Diagnosticable {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties from the given parameters.
-  FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  FCheckboxStyle.inherit({required FStateColorScheme colorScheme, required FStyle style})
       : animationDuration = const Duration(milliseconds: 100),
         curve = Curves.linear,
         labelLayoutStyle = FLabelStyles.inherit(style: style).horizontal.layout,

@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 void main() {
   group('FColorScheme', () {
-    const scheme = FColorScheme(
+    const scheme = FStateColorScheme(
       brightness: Brightness.light,
       disabledColorLightness: 0.5,
       background: Colors.black,

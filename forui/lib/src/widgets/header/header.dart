@@ -89,9 +89,9 @@ final class FHeaderStyles with Diagnosticable {
     required this.nestedStyle,
   });
 
-  /// Creates a [FHeaderStyles] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
+  /// Creates a [FHeaderStyles] that inherits its properties from the given [FStateColorScheme], [FTypography] and [FStyle].
   FHeaderStyles.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   })  : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),

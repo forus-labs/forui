@@ -93,7 +93,7 @@ final class FCardContentStyle with Diagnosticable {
   });
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
-  FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FCardContentStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
       : titleTextStyle = typography.xl2.copyWith(
           fontWeight: FontWeight.w600,
           color: colorScheme.foreground,

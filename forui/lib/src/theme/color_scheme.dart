@@ -5,7 +5,78 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A set of colors that is part of a [FThemeData]. It is used to configure the color properties of Forui widgets.
+/// A set of color schemes for different states that is part of a [FThemeData]. It is used to configure the color
+/// properties of Forui widgets.
+///
+/// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding colors
+/// of widget styles configured via `inherit(...)` constructors.
+///
+/// See:
+/// * [FThemes] for predefined themes and color schemes.
+/// * [FStateColorScheme] for more information.
+final class FColorScheme with Diagnosticable {
+  /// The system brightness.
+  ///
+  /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
+  final Brightness brightness;
+
+  /// The color scheme for enabled widgets, typically the default state.
+  final FStateColorScheme enabled;
+
+  /// The color scheme for enabled widgets that are hovered over.
+  final FStateColorScheme enabledHovered;
+
+  /// The color scheme for disabled widgets.
+  final FStateColorScheme disabled;
+
+  /// Creates a [FColorScheme].
+  const FColorScheme({
+    required this.brightness,
+    required this.enabled,
+    required this.enabledHovered,
+    required this.disabled,
+  });
+
+  /// Returns a copy of this [FColorScheme] with the given properties replaced.
+  @useResult
+  FColorScheme copyWith({
+    Brightness? brightness,
+    FStateColorScheme? enabled,
+    FStateColorScheme? enabledHovered,
+    FStateColorScheme? disabled,
+  }) =>
+      FColorScheme(
+        brightness: brightness ?? this.brightness,
+        enabled: enabled ?? this.enabled,
+        enabledHovered: enabledHovered ?? this.enabledHovered,
+        disabled: disabled ?? this.disabled,
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(EnumProperty('brightness', brightness))
+      ..add(DiagnosticsProperty('enabled', enabled))
+      ..add(DiagnosticsProperty('enabledHovered', enabledHovered))
+      ..add(DiagnosticsProperty('disabled', disabled));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FColorScheme &&
+          runtimeType == other.runtimeType &&
+          brightness == other.brightness &&
+          enabled == other.enabled &&
+          enabledHovered == other.enabledHovered &&
+          disabled == other.disabled;
+
+  @override
+  int get hashCode => brightness.hashCode ^ enabled.hashCode ^ enabledHovered.hashCode ^ disabled.hashCode;
+}
+
+/// A set of colors that is part of a [FColorScheme].
 ///
 /// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding colors
 /// of widget styles configured via `inherit(...)` constructors.
@@ -21,12 +92,14 @@ import 'package:forui/forui.dart';
 /// visual elements on top of their respective background colors.
 ///
 /// See [FThemes] for predefined themes and color schemes.
-final class FColorScheme with Diagnosticable {
+final class FStateColorScheme with Diagnosticable {
+  // TODO: REMOVE
   /// The system brightness.
   ///
   /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
   final Brightness brightness;
 
+  // TODO: REMOVE
   /// The percentage, between `0` and `1`, used to set a color's lightness to derive a disabled color.
   final double disabledColorLightness;
 
@@ -93,11 +166,11 @@ final class FColorScheme with Diagnosticable {
   /// The border color.
   final Color border;
 
-  /// Creates a [FColorScheme].
+  /// Creates a [FStateColorScheme].
   ///
   /// **Note:**
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
-  const FColorScheme({
+  const FStateColorScheme({
     required this.brightness,
     required this.disabledColorLightness,
     required this.background,
@@ -115,6 +188,7 @@ final class FColorScheme with Diagnosticable {
     required this.border,
   });
 
+  // TODO: REMOVE
   /// Creates a disabled color from the given [color].
   ///
   /// See:
@@ -124,7 +198,7 @@ final class FColorScheme with Diagnosticable {
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   ///
   /// ```dart
-  /// final scheme = FColorScheme(
+  /// final scheme = FStateColorScheme(
   ///   brightness: Brightness.light,
   ///   background: Colors.blue,
   ///   // Other arguments omitted for brevity
@@ -136,7 +210,7 @@ final class FColorScheme with Diagnosticable {
   /// print(copy.background); // Colors.blue
   /// ```
   @useResult
-  FColorScheme copyWith({
+  FStateColorScheme copyWith({
     Brightness? brightness,
     double? disabledColorLightness,
     Color? background,
@@ -153,7 +227,7 @@ final class FColorScheme with Diagnosticable {
     Color? errorForeground,
     Color? border,
   }) =>
-      FColorScheme(
+      FStateColorScheme(
         brightness: brightness ?? this.brightness,
         disabledColorLightness: disabledColorLightness ?? this.disabledColorLightness,
         background: background ?? this.background,
@@ -195,7 +269,7 @@ final class FColorScheme with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FColorScheme &&
+      other is FStateColorScheme &&
           brightness == other.brightness &&
           disabledColorLightness == other.disabledColorLightness &&
           background == other.background &&
@@ -229,4 +303,9 @@ final class FColorScheme with Diagnosticable {
       error.hashCode ^
       errorForeground.hashCode ^
       border.hashCode;
+}
+
+extension Lightness on Color {
+  /// Returns a copy of this color with the lightness set to the given value.
+  Color withLightness(double lightness) => HSLColor.fromColor(this).withLightness(lightness).toColor();
 }

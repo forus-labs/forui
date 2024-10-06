@@ -176,7 +176,7 @@ class FRadioStyle with Diagnosticable {
   });
 
   /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
-  factory FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style}) => FRadioStyle(
+  factory FRadioStyle.inherit({required FStateColorScheme colorScheme, required FStyle style}) => FRadioStyle(
         labelLayoutStyle: FLabelStyles.inherit(style: style).horizontal.layout,
         enabledStyle: FRadioStateStyle(
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,

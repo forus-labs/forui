@@ -146,7 +146,7 @@ final class FDialogContentStyle with Diagnosticable {
 
   /// Creates a [FDialogContentStyle] that inherits its properties from [colorScheme] and [typography].
   FDialogContentStyle.inherit({
-    required FColorScheme colorScheme,
+    required FStateColorScheme colorScheme,
     required FTypography typography,
     required this.padding,
     required this.actionPadding,

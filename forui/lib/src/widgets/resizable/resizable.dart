@@ -242,7 +242,7 @@ final class FResizableStyle with Diagnosticable {
   FResizableStyle({required this.dividerStyles});
 
   /// Creates a [FResizableStyle] that inherits its properties from [colorScheme].
-  FResizableStyle.inherit({required FColorScheme colorScheme})
+  FResizableStyle.inherit({required FStateColorScheme colorScheme})
       : this(
           dividerStyles: (
             horizontal: FResizableDividerStyle(
