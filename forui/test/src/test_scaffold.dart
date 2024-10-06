@@ -4,6 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 class TestScaffold extends StatelessWidget {
+  static final blueScreen = FThemeData.inherit(
+    colorScheme: const FColorScheme(
+      brightness: Brightness.light,
+      disabledColorLightness: 0.1,
+      background: Color(0xFF03A9F4),
+      foreground: Color(0xFF03A9F4),
+      primary: Color(0xFF03A9F4),
+      primaryForeground: Color(0xFF03A9F4),
+      secondary: Color(0xFF03A9F4),
+      secondaryForeground: Color(0xFF03A9F4),
+      muted: Color(0xFF03A9F4),
+      mutedForeground: Color(0xFF03A9F4),
+      destructive: Color(0xFF03A9F4),
+      destructiveForeground: Color(0xFF03A9F4),
+      error: Color(0xFF03A9F4),
+      errorForeground: Color(0xFF03A9F4),
+      border: Color(0xFF03A9F4),
+    ),
+  );
+
   static List<(String, FThemeData, Color)> get themes => [
         ('zinc-light', FThemes.zinc.light, const Color(0xFFD5FFFF)),
         ('zinc-dark', FThemes.zinc.dark, const Color(0xFF104963)),
@@ -17,6 +37,11 @@ class TestScaffold extends StatelessWidget {
   const TestScaffold({required this.data, required this.child, this.background, super.key}) : wrapped = false;
 
   const TestScaffold.app({required this.data, required this.child, this.background, super.key}) : wrapped = true;
+
+  TestScaffold.blue({required this.child, super.key})
+      : data = blueScreen,
+        background = blueScreen.colorScheme.background,
+        wrapped = false;
 
   @override
   Widget build(BuildContext context) {

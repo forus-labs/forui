@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/select_group/select_group_item.dart';
 
 /// A set of items that are treated as a single selection.
 ///
@@ -15,7 +16,7 @@ import 'package:forui/forui.dart';
 /// * https://forui.dev/docs/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends FormField<Set<T>> {
-  static Widget _defaultErrorBuilder(BuildContext context, String error) => Text(error);
+  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
 
   /// The controller.
   ///
@@ -46,7 +47,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
     this.style,
     this.label,
     this.description,
-    this.errorBuilder = _defaultErrorBuilder,
+    this.errorBuilder = _errorBuilder,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -59,10 +60,10 @@ class FSelectGroup<T> extends FormField<Set<T>> {
           builder: (field) {
             final state = field as _State;
             final groupStyle = style ?? state.context.theme.selectGroupStyle;
-            final labelState = switch (state) {
-              _ when !enabled => FLabelState.disabled,
-              _ when state.errorText != null => FLabelState.error,
-              _ => FLabelState.enabled,
+            final (labelState, error) = switch (state.errorText) {
+              _ when !enabled => (FLabelState.disabled, null),
+              final text? => (FLabelState.error, errorBuilder(state.context, text)),
+              null => (FLabelState.enabled, null),
             };
 
             return FLabel(
@@ -71,14 +72,15 @@ class FSelectGroup<T> extends FormField<Set<T>> {
               style: groupStyle.labelStyle,
               label: label,
               description: description,
-              error: labelState == FLabelState.error ? errorBuilder(state.context, state.errorText!) : null,
+              error: error,
               child: Column(
                 children: [
-                  for (final item in items)
-                    item.builder(
-                      state.context,
-                      controller.select,
-                      controller.contains(item.value),
+                  for (final child in items)
+                    FSelectGroupItemData<T>(
+                      controller: controller,
+                      style: groupStyle,
+                      selected: controller.contains(child.value),
+                      child: child,
                     ),
                 ],
               ),
@@ -96,6 +98,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(DiagnosticsProperty('testing', (1, 2, 3)))
       ..add(IterableProperty('items', items));
   }
 }
