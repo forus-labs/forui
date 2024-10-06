@@ -2,386 +2,214 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import 'package:forui/forui.dart';
-import 'accordion_controller_test.mocks.dart';
 
-(List<AnimationController>, List) _setup(int length) {
-  final animationControllers = <AnimationController>[];
-  final animations = [];
-
-  for (int i = 0; i < length; i++) {
-    animationControllers.add(MockAnimationController());
-    animations.add(Tween(begin: 0, end: 100).animate(animationControllers[i]));
-    when(animationControllers[i].forward()).thenAnswer((_) {
-      when(animationControllers[i].value).thenReturn(1.0);
-      return TickerFuture.complete();
-    });
-
-    when(animationControllers[i].reverse()).thenAnswer((_) {
-      when(animationControllers[i].value).thenReturn(0.0);
-      return TickerFuture.complete();
-    });
-  }
-
-  return (animationControllers, animations);
-}
-
-void _tearDown(List<AnimationController> animationControllers) {
-  for (final controller in animationControllers) {
-    controller.dispose();
-  }
-}
-
-@GenerateNiceMocks([MockSpec<AnimationController>()])
-@GenerateNiceMocks([MockSpec<Animation>()])
 void main() {
   group('FAccordionController', () {
     late FAccordionController controller;
-    List<AnimationController> animationControllers = [];
-    List<Animation<int>> animations = [];
+    late AnimationController first;
+    late AnimationController second;
     int count = 0;
-    int length = 3;
 
     setUp(() {
       count = 0;
-      length = 3;
-      final record = _setup(length);
-      animationControllers = List.from(record.$1);
-      animations = List.from(record.$2);
-      controller = FAccordionController(min: 1, max: 2)
-        ..addListener(() {
-          count++;
-        });
-    });
-
-    tearDown(() {
-      _tearDown(animationControllers);
-      controller.dispose();
+      controller = FAccordionController(max: 2)..addListener(() => count++);
+      first = AnimationController(vsync: const TestVSync());
+      second = AnimationController(vsync: const TestVSync());
     });
 
     group('addItem(...)', () {
-      test('sets animation controller value based on initiallyExpanded', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        verify(animationControllers[0].value = 0);
+      test('expanded', () {
+        first.value = 1;
 
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        verify(animationControllers[0].value = 1);
-      });
-
-      test('adds to expanded list', () {
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        expect(controller.expanded.length, 0);
-
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        expect(controller.expanded.length, 1);
+        expect(controller.addItem(2, first), true);
         expect(controller.controllers.length, 1);
+        expect(controller.expanded.length, 1);
       });
 
-      test('aware of max limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
-        await controller.addItem(2, animationControllers[2], animations[2], initiallyExpanded: true);
-        expect(controller.expanded, {1, 2});
+      test('not expanded', () {
+        expect(controller.addItem(2, first), true);
+        expect(controller.controllers.length, 1);
+        expect(controller.expanded.length, 0);
+      });
+
+      test('over max - expanded', () {
+        final controller = FAccordionController(max: 0);
+        first.value = 1;
+
+        expect(controller.addItem(2, first), false);
+        expect(controller.controllers.length, 0);
+        expect(controller.expanded.length, 0);
+      });
+
+      test('over max - not expanded', () {
+        final controller = FAccordionController(max: 0);
+
+        expect(controller.addItem(2, first), true);
+        expect(controller.controllers.length, 1);
+        expect(controller.expanded.length, 0);
       });
     });
 
     group('removeItem(...)', () {
-      setUp(() {
-        length = 1;
-        final record = _setup(length);
-        animationControllers = List.from(record.$1);
-        animations = List.from(record.$2);
-        controller = FAccordionController(min: 1, max: 2)
-          ..addListener(() {
-            count++;
-          });
-      });
+      test('unknown index', () {
+        first.value = 1;
+        final controller = FAccordionController()..addItem(2, first);
 
-      tearDown(() {
-        _tearDown(animationControllers);
-      });
-      test('removes from the expanded list', () {
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        expect(controller.removeItem(0), true);
-        expect(controller.removeItem(0), false);
-      });
-
-      test('aware of min limit', () {
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        expect(controller.removeItem(0), false);
-      });
-    });
-
-    group('toggle(...)', () {
-      test('expands an item', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        expect(controller.controllers[0]?.animation.value, 0);
-
-        await controller.toggle(0);
-        expect(controller.controllers[0]?.animation.value, 100);
-      });
-
-      test('collapses an item', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
-        await animationControllers[0].forward();
-        expect(controller.controllers[0]?.animation.value, 100);
-
-        await controller.toggle(0);
-        expect(controller.controllers[0]?.animation.value, 0);
-      });
-
-      test('invalid index', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        await controller.toggle(1);
-        expect(count, 0);
-
-        await controller.toggle(0);
-        expect(count, 1);
-      });
-
-      test('aware of max limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
-        await controller.addItem(2, animationControllers[2], animations[2], initiallyExpanded: false);
-        await animationControllers[0].forward();
-        await animationControllers[1].forward();
-        expect(controller.controllers[0]?.animation.value, 100);
-        expect(controller.controllers[1]?.animation.value, 100);
-
-        await controller.toggle(2);
-        expect(controller.controllers[0]?.animation.value, 0);
-      });
-
-      test('aware of min limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: false);
-        await controller.addItem(2, animationControllers[2], animations[2], initiallyExpanded: true);
-        await animationControllers[2].forward();
-        expect(controller.controllers[2]?.animation.value, 100);
-
-        await controller.toggle(2);
-        expect(controller.controllers[2]?.animation.value, 100);
-      });
-    });
-
-    group('expand(...)', () {
-      test('does not call notifyListener on invalid index', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        await controller.expand(0);
-        expect(controller.expanded, {0});
-
-        await controller.expand(0);
-        expect(count, 1);
-        await controller.expand(1);
-        expect(count, 1);
-      });
-
-      test('aware of max limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
-        await controller.addItem(2, animationControllers[2], animations[2], initiallyExpanded: false);
-        await controller.expand(2);
-        expect(controller.expanded, {1, 2});
-      });
-    });
-
-    group('collapse(...)', () {
-      setUp(() {
-        length = 2;
-        final record = _setup(length);
-        animationControllers = List.from(record.$1);
-        animations = List.from(record.$2);
-        controller = FAccordionController(min: 1, max: 2)
-          ..addListener(() {
-            count++;
-          });
-      });
-
-      tearDown(() {
-        _tearDown(animationControllers);
-      });
-
-      test('does not call notifyListener on invalid index', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
-        await controller.collapse(0);
-        expect(controller.expanded, {1});
-
-        await controller.collapse(0);
-        expect(count, 1);
-        await controller.collapse(2);
-        expect(count, 1);
-      });
-
-      test('aware of min limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.collapse(0);
-        expect(controller.expanded, {0});
-      });
-    });
-
-    test('validate(...)', () {
-      expect(controller.validate(0), false);
-      expect(controller.validate(1), true);
-      expect(controller.validate(2), true);
-      expect(controller.validate(3), false);
-    });
-  });
-
-  group('FAccordionController.radio', () {
-    late FAccordionController controller;
-    List<AnimationController> animationControllers = [];
-    List<Animation<int>> animations = [];
-    int count = 0;
-    int length = 2;
-
-    setUp(() {
-      count = 0;
-      length = 2;
-      final record = _setup(length);
-      animationControllers = List.from(record.$1);
-      animations = List.from(record.$2);
-      controller = FAccordionController.radio()
-        ..addListener(() {
-          count++;
-        });
-    });
-
-    tearDown(() {
-      _tearDown(animationControllers);
-      controller.dispose();
-    });
-
-    group('addItem(...)', () {
-      test('adds to expanded list', () {
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        expect(controller.expanded.length, 0);
-
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        expect(controller.expanded.length, 1);
+        expect(controller.removeItem(3), false);
         expect(controller.controllers.length, 1);
-      });
-      test('aware of max limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: true);
-        expect(controller.expanded, {1});
-      });
-    });
-
-    group('removeItem(...)', () {
-      setUp(() {
-        length = 1;
-        final record = _setup(length);
-        animationControllers = List.from(record.$1);
-        animations = List.from(record.$2);
-        controller = FAccordionController.radio()
-          ..addListener(() {
-            count++;
-          });
+        expect(controller.expanded.length, 1);
       });
 
-      tearDown(() {
-        _tearDown(animationControllers);
+      test('expanded', () {
+        first.value = 1;
+        final controller = FAccordionController()..addItem(2, first);
+
+        expect(controller.removeItem(2), true);
+        expect(controller.controllers.length, 0);
+        expect(controller.expanded.length, 0);
       });
 
-      test('removes from the expanded list', () {
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        expect(controller.removeItem(0), true);
-        expect(controller.removeItem(0), false);
-      });
-      test('aware of min limit', () {
-        controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        expect(controller.removeItem(0), true);
-      });
-    });
+      test('not expanded', () {
+        final controller = FAccordionController()..addItem(2, first);
 
-    group('toggle(...)', () {
-      test('expands an item', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        expect(controller.controllers[0]?.animation.value, 0);
-
-        await controller.toggle(0);
-        expect(controller.controllers[0]?.animation.value, 100);
+        expect(controller.removeItem(2), true);
+        expect(controller.controllers.length, 0);
+        expect(controller.expanded.length, 0);
       });
 
-      test('collapses an item', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await animationControllers[0].forward();
-        expect(controller.controllers[0]?.animation.value, 100);
+      test('under min - expanded', () {
+        first.value = 1;
+        final controller = FAccordionController(min: 1)..addItem(2, first);
 
-        await controller.toggle(0);
-        expect(controller.controllers[0]?.animation.value, 0);
+        expect(controller.removeItem(2), false);
+        expect(controller.controllers.length, 1);
+        expect(controller.expanded.length, 1);
       });
 
-      test('invalid index', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        await controller.toggle(1);
+      test('under min - not expanded', () {
+        final controller = FAccordionController(min: 1)..addItem(2, first);
 
-        expect(count, 0);
-        await controller.toggle(0);
-        expect(count, 1);
-      });
-
-      test('aware of max limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: false);
-        await animationControllers[0].forward();
-        expect(controller.controllers[0]?.animation.value, 100);
-
-        await controller.toggle(1);
-        expect(controller.controllers[0]?.animation.value, 0);
-      });
-
-      test('aware of min limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await animationControllers[0].forward();
-        expect(controller.controllers[0]?.animation.value, 100);
-
-        await controller.toggle(0);
-        expect(controller.controllers[0]?.animation.value, 0);
+        expect(controller.removeItem(2), true);
+        expect(controller.controllers.length, 0);
+        expect(controller.expanded.length, 0);
       });
     });
 
     group('expand(...)', () {
-      test('does not call notifyListener on invalid index', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.expand(0);
-        expect(count, 0);
+      test('unknown index', () async {
+        controller.addItem(2, first);
 
-        await controller.expand(1);
+        expect(await controller.expand(3), false);
+        expect(first.value, 0);
         expect(count, 0);
       });
 
-      test('aware of max limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.addItem(1, animationControllers[1], animations[1], initiallyExpanded: false);
-        await controller.expand(1);
-        expect(controller.expanded, {1});
+      test('already expanded', () async {
+        first.value = 1;
+        controller.addItem(2, first);
+
+        expect(await controller.expand(2), false);
+        expect(first.value, 1);
+        expect(count, 0);
+      });
+
+      test('max reached, cannot collapse', () async {
+        final controller = FAccordionController(max: 0)..addItem(2, first);
+
+        expect(await controller.expand(2), false);
+        expect(first.value, 0);
+        expect(count, 0);
+      });
+
+      testWidgets('max reached, collapse existing', (tester) async {
+        first.duration = const Duration(milliseconds: 1);
+        second
+          ..duration = const Duration(milliseconds: 1)
+          ..value = 1;
+
+        final controller = FAccordionController(min: 1, max: 1)
+          ..addListener(() => count++)
+          ..addItem(0, first)
+          ..addItem(1, second);
+
+        final future = controller.expand(0);
+        await tester.pumpAndSettle();
+
+        expect(await future, true);
+        expect(first.value, 1);
+        expect(second.value, 0);
+        expect(count, 1);
+      });
+
+      testWidgets('collapsed', (tester) async {
+        first.duration = const Duration(milliseconds: 1);
+        controller.addItem(2, first);
+
+        final future = controller.expand(2);
+        await tester.pumpAndSettle();
+
+        expect(await future, true);
+        expect(first.value, 1);
+        expect(count, 1);
       });
     });
 
     group('collapse(...)', () {
-      test('does not call notifyListener on invalid index', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: false);
-        await controller.collapse(0);
+      test('unknown index', () async {
+        first.value = 1;
+        controller.addItem(2, first);
+
+        expect(await controller.collapse(0), false);
+        expect(first.value, 1);
         expect(count, 0);
       });
 
-      test('aware of min limit', () async {
-        await controller.addItem(0, animationControllers[0], animations[0], initiallyExpanded: true);
-        await controller.collapse(0);
-        expect(controller.expanded.isEmpty, true);
+      test('already collapsed', () async {
+        first.value = 0;
+        controller.addItem(2, first);
+
+        expect(await controller.collapse(2), false);
+        expect(first.value, 0);
+        expect(count, 0);
+      });
+
+      test('under min', () async {
+        first.value = 1;
+        final controller = FAccordionController(min: 1)
+          ..addListener(() => count++)
+          ..addItem(2, first);
+
+        expect(await controller.collapse(2), false);
+        expect(first.value, 1);
+        expect(count, 0);
+      });
+
+      testWidgets('expanded', (tester) async {
+        first
+          ..value = 1
+          ..duration = const Duration(milliseconds: 1);
+
+        controller.addItem(2, first);
+
+        final future = controller.collapse(2);
+        await tester.pumpAndSettle();
+
+        expect(await future, true);
+        expect(first.value, 0);
+        expect(count, 1);
       });
     });
 
-    test('validate(...)', () {
-      expect(controller.validate(0), true);
-      expect(controller.validate(1), true);
-      expect(controller.validate(2), false);
-    });
+    for (final (length, expected) in [
+      (-1, false),
+      (0, true),
+      (1, true),
+      (2, true),
+      (3, false),
+    ]) {
+      test('validate $length', () => expect(controller.validate(length), expected));
+    }
   });
 }

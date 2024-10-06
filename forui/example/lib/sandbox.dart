@@ -12,6 +12,7 @@ class Sandbox extends StatefulWidget {
 class _SandboxState extends State<Sandbox> {
   bool value = false;
   FSelectGroupController selectGroupController = FRadioSelectGroupController(value: 1);
+  FAccordionController controller = FAccordionController(min: 1, max: 3);
 
   @override
   void initState() {
@@ -24,10 +25,10 @@ class _SandboxState extends State<Sandbox> {
           FAccordion(
             controller: FAccordionController(max: 2),
             children: [
-              const FAccordionItem(
-                title: Text('Title 1'),
+              FAccordionItem(
+                title: const Text('Title 1'),
                 initiallyExpanded: true,
-                child: Text(
+                child: const Text(
                   'Yes. It adheres to the WAI-ARIA design pattern, wfihwe fdhfiwf dfhwiodf dfwhoif',
                 ),
               ),
@@ -42,16 +43,16 @@ class _SandboxState extends State<Sandbox> {
                   ),
                 ),
               ),
-              const FAccordionItem(
-                title: Text('Title 3'),
-                child: Text(
+              FAccordionItem(
+                title: const Text('Title 3'),
+                child: const Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,
                 ),
               ),
-              const FAccordionItem(
-                title: Text('Title 4'),
-                child: Text(
+              FAccordionItem(
+                title: const Text('Title 4'),
+                child: const Text(
                   'Yes. It adheres to the WAI-ARIA design pattern',
                   textAlign: TextAlign.left,
                 ),

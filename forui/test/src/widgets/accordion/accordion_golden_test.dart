@@ -14,15 +14,15 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           data: FThemes.zinc.light,
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FAccordion(
                 children: [
                   FAccordionItem(
-                    title: Text('Title'),
                     initiallyExpanded: true,
-                    child: ColoredBox(
+                    title: const Text('Title'),
+                    child: const ColoredBox(
                       color: Colors.yellow,
                       child: SizedBox.square(
                         dimension: 50,
@@ -43,15 +43,15 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           data: FThemes.zinc.light,
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FAccordion(
                 children: [
                   FAccordionItem(
-                    title: Text('Title'),
                     initiallyExpanded: true,
-                    child: ColoredBox(
+                    title: const Text('Title'),
+                    child: const ColoredBox(
                       color: Colors.yellow,
                       child: SizedBox.square(
                         dimension: 50,
