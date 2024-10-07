@@ -142,15 +142,16 @@ class FBottomNavigationBarStyle with Diagnosticable {
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties from [colorScheme] and [typography].
-  FBottomNavigationBarStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
-      : decoration = BoxDecoration(
-          border: Border(top: BorderSide(color: colorScheme.border)),
-          color: colorScheme.background,
-        ),
-        padding = const EdgeInsets.all(5),
-        itemStyle = FBottomNavigationBarItemStyle.inherit(
-          colorScheme: colorScheme,
-          typography: typography,
+  FBottomNavigationBarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+      : this(
+          decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: colorScheme.enabled.border)),
+            color: colorScheme.enabled.background,
+          ),
+          itemStyle: FBottomNavigationBarItemStyle.inherit(
+            colorScheme: colorScheme,
+            typography: typography,
+          ),
         );
 
   /// Returns a copy of this [FBottomNavigationBarStyle] with the given properties replaced.

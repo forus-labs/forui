@@ -16,6 +16,8 @@
 
 * Add `FIcon`.
 
+* Add `FStateColorScheme`.
+
 ### Changes
 
 * Change button to change color when hovering over it.
@@ -41,7 +43,7 @@
 
 * **Breaking** Remove FButtonIcon & FAlertIconStyle  - use `FIcon` instead.
 
-* * **Breaking** Change FButtonCustomStyle to better represent the style's layout - this will only affect users that 
+* **Breaking** Change FButtonCustomStyle to better represent the style's layout - this will only affect users that 
   create a custom `FButtonCustomStyle`.
 
 * **Breaking** Change `FBottomNavigationBarItem.icon` from `SvgAsset` to `Widget` - wrap the asset in ` FIcon` instead.
@@ -49,6 +51,12 @@
 * **Breaking** Change `FHeaderAction.icon` from `SvgAsset` to `Widget` - wrap the asset in ` FIcon` instead.
 
 * **Breaking** Change `FSelectGroup.builder` parameters.
+
+* **Breaking** Change `FBadgeCustomStyle.content` to `FBadgeCustomStyle.contentStyle`.
+
+* **Breaking** Change `FAvatarStyle.text` to `FAvatarStyle.textStyle`.
+
+* **Breaking:** Change `FColorScheme` to support different color scheme variants for different states.
 
 ### Fixes
 

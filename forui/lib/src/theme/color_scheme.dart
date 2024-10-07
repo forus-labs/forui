@@ -37,6 +37,60 @@ final class FColorScheme with Diagnosticable {
     required this.disabled,
   });
 
+  // /// Creates a [FColorScheme] by deriving the color schemes for the other states from the given [enabled] color scheme.
+  // ///
+  // /// ## Contract
+  // /// Throws [AssertionError] if:
+  // /// * [enabledHoverLightness] is not between `0` and `1`.
+  // /// * [disabledLightness] is not between `0` and `1`.
+  // factory FColorScheme.inherit({
+  //   required Brightness brightness,
+  //   required FStateColorScheme enabled,
+  //   required double enabledHoverLightness,
+  //   required double disabledLightness,
+  // }) {
+  //   // TODO: tweak recoloring algorithm.
+  //   assert(0 <= enabledHoverLightness && enabledHoverLightness <= 1, 'enabledHoverLightness must be between 0 and 1');
+  //   assert(0 <= disabledLightness && disabledLightness <= 1, 'disabledLightness must be between 0 and 1');
+  //
+  //   return FColorScheme(
+  //     brightness: brightness,
+  //     enabled: enabled,
+  //     enabledHovered: enabled.copyWith(
+  //       brightness: brightness,
+  //       background: enabled.background.withLightness(enabledHoverLightness),
+  //       foreground: enabled.foreground.withLightness(enabledHoverLightness),
+  //       primary: enabled.primary.withLightness(enabledHoverLightness),
+  //       primaryForeground: enabled.primaryForeground.withLightness(enabledHoverLightness),
+  //       secondary: enabled.secondary.withLightness(enabledHoverLightness),
+  //       secondaryForeground: enabled.secondaryForeground.withLightness(enabledHoverLightness),
+  //       muted: enabled.muted.withLightness(enabledHoverLightness),
+  //       mutedForeground: enabled.mutedForeground.withLightness(enabledHoverLightness),
+  //       destructive: enabled.destructive.withLightness(enabledHoverLightness),
+  //       destructiveForeground: enabled.destructiveForeground.withLightness(enabledHoverLightness),
+  //       error: enabled.error.withLightness(enabledHoverLightness),
+  //       errorForeground: enabled.errorForeground.withLightness(enabledHoverLightness),
+  //       border: enabled.border.withLightness(enabledHoverLightness),
+  //     ),
+  //     disabled: enabled.copyWith(
+  //       brightness: brightness,
+  //       background: enabled.background.withLightness(disabledLightness),
+  //       foreground: enabled.foreground.withLightness(disabledLightness),
+  //       primary: enabled.primary.withLightness(disabledLightness),
+  //       primaryForeground: enabled.primaryForeground.withLightness(disabledLightness),
+  //       secondary: enabled.secondary.withLightness(disabledLightness),
+  //       secondaryForeground: enabled.secondaryForeground.withLightness(disabledLightness),
+  //       muted: enabled.muted.withLightness(disabledLightness),
+  //       mutedForeground: enabled.mutedForeground.withLightness(disabledLightness),
+  //       destructive: enabled.destructive.withLightness(disabledLightness),
+  //       destructiveForeground: enabled.destructiveForeground.withLightness(disabledLightness),
+  //       error: enabled.error.withLightness(disabledLightness),
+  //       errorForeground: enabled.errorForeground.withLightness(disabledLightness),
+  //       border: enabled.border.withLightness(disabledLightness),
+  //     ),
+  //   );
+  // }
+
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   @useResult
   FColorScheme copyWith({
@@ -93,16 +147,6 @@ final class FColorScheme with Diagnosticable {
 ///
 /// See [FThemes] for predefined themes and color schemes.
 final class FStateColorScheme with Diagnosticable {
-  // TODO: REMOVE
-  /// The system brightness.
-  ///
-  /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
-  final Brightness brightness;
-
-  // TODO: REMOVE
-  /// The percentage, between `0` and `1`, used to set a color's lightness to derive a disabled color.
-  final double disabledColorLightness;
-
   /// The background color.
   ///
   /// Typically used as a background for [foreground] colored widgets.
@@ -171,8 +215,6 @@ final class FStateColorScheme with Diagnosticable {
   /// **Note:**
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
   const FStateColorScheme({
-    required this.brightness,
-    required this.disabledColorLightness,
     required this.background,
     required this.foreground,
     required this.primary,
@@ -187,13 +229,6 @@ final class FStateColorScheme with Diagnosticable {
     required this.errorForeground,
     required this.border,
   });
-
-  // TODO: REMOVE
-  /// Creates a disabled color from the given [color].
-  ///
-  /// See:
-  /// * [disabledColorLightness].
-  Color disable(Color color) => HSLColor.fromColor(color).withLightness(disabledColorLightness).toColor();
 
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   ///
@@ -211,8 +246,6 @@ final class FStateColorScheme with Diagnosticable {
   /// ```
   @useResult
   FStateColorScheme copyWith({
-    Brightness? brightness,
-    double? disabledColorLightness,
     Color? background,
     Color? foreground,
     Color? primary,
@@ -228,8 +261,6 @@ final class FStateColorScheme with Diagnosticable {
     Color? border,
   }) =>
       FStateColorScheme(
-        brightness: brightness ?? this.brightness,
-        disabledColorLightness: disabledColorLightness ?? this.disabledColorLightness,
         background: background ?? this.background,
         foreground: foreground ?? this.foreground,
         primary: primary ?? this.primary,
@@ -249,8 +280,6 @@ final class FStateColorScheme with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(EnumProperty('brightness', brightness))
-      ..add(DoubleProperty('disabledColorLightness', disabledColorLightness))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))
       ..add(ColorProperty('primary', primary))
@@ -270,8 +299,6 @@ final class FStateColorScheme with Diagnosticable {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is FStateColorScheme &&
-          brightness == other.brightness &&
-          disabledColorLightness == other.disabledColorLightness &&
           background == other.background &&
           foreground == other.foreground &&
           primary == other.primary &&
@@ -288,8 +315,6 @@ final class FStateColorScheme with Diagnosticable {
 
   @override
   int get hashCode =>
-      brightness.hashCode ^
-      disabledColorLightness.hashCode ^
       background.hashCode ^
       foreground.hashCode ^
       primary.hashCode ^
@@ -303,9 +328,4 @@ final class FStateColorScheme with Diagnosticable {
       error.hashCode ^
       errorForeground.hashCode ^
       border.hashCode;
-}
-
-extension Lightness on Color {
-  /// Returns a copy of this color with the lightness set to the given value.
-  Color withLightness(double lightness) => HSLColor.fromColor(this).withLightness(lightness).toColor();
 }

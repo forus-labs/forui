@@ -126,25 +126,16 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   final double borderWidth;
 
   /// The badge content's style.
-  final FBadgeContentStyle content;
+  final FBadgeContentStyle contentStyle;
 
   /// Creates a [FBadgeCustomStyle].
   const FBadgeCustomStyle({
     required this.backgroundColor,
     required this.borderColor,
-    required this.content,
+    required this.borderWidth,
+    required this.contentStyle,
     this.borderRadius = const BorderRadius.all(Radius.circular(100)),
-    this.borderWidth = 1,
   }) : assert(0 < borderWidth, 'The borderWidth is $borderWidth, but it should be in the range "0 < borderWidth".');
-
-  /// Creates a [FBadgeCustomStyle] that inherits its properties from [style].
-  FBadgeCustomStyle.inherit({
-    required FStyle style,
-    required this.backgroundColor,
-    required this.borderColor,
-    required this.content,
-  })  : borderRadius = BorderRadius.circular(100),
-        borderWidth = style.borderWidth;
 
   /// Returns a copy of this [FBadgeCustomStyle] with the given properties replaced.
   @useResult
@@ -153,14 +144,14 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
     Color? borderColor,
     BorderRadius? borderRadius,
     double? borderWidth,
-    FBadgeContentStyle? content,
+    FBadgeContentStyle? contentStyle,
   }) =>
       FBadgeCustomStyle(
         backgroundColor: backgroundColor ?? this.backgroundColor,
         borderColor: borderColor ?? this.borderColor,
         borderRadius: borderRadius ?? this.borderRadius,
         borderWidth: borderWidth ?? this.borderWidth,
-        content: content ?? this.content,
+        contentStyle: contentStyle ?? this.contentStyle,
       );
 
   @override
@@ -171,7 +162,7 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
       ..add(ColorProperty('borderColor', borderColor))
       ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(100)))
       ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(DiagnosticsProperty('content', content));
+      ..add(DiagnosticsProperty('contentStyle', contentStyle));
   }
 
   @override
@@ -183,9 +174,13 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
           borderColor == other.borderColor &&
           borderRadius == other.borderRadius &&
           borderWidth == other.borderWidth &&
-          content == other.content;
+          contentStyle == other.contentStyle;
 
   @override
   int get hashCode =>
-      backgroundColor.hashCode ^ borderColor.hashCode ^ borderRadius.hashCode ^ borderWidth.hashCode ^ content.hashCode;
+      backgroundColor.hashCode ^
+      borderColor.hashCode ^
+      borderRadius.hashCode ^
+      borderWidth.hashCode ^
+      contentStyle.hashCode;
 }

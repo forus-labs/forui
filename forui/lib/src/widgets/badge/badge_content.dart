@@ -19,9 +19,9 @@ final class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
         child: Padding(
-          padding: style.content.padding,
+          padding: style.contentStyle.padding,
           child: DefaultTextStyle.merge(
-            style: style.content.labelTextStyle,
+            style: style.contentStyle.labelTextStyle,
             child: label,
           ),
         ),

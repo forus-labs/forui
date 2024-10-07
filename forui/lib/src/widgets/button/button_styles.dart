@@ -29,100 +29,60 @@ final class FButtonStyles with Diagnosticable {
 
   /// Creates a [FButtonCustomStyle] that inherits its properties from the provided [colorScheme], [typography], and
   /// [style].
-  FButtonStyles.inherit({required FStateColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : primary = FButtonCustomStyle(
-          enabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.primary,
-          ),
-          enabledHoverBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.primary.withLightness(0.15),
-          ),
-          disabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.primary.withOpacity(0.5),
-          ),
-          content: FButtonContentStyle.inherit(
+  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+      : this(
+          primary: FButtonCustomStyle.inherit(
+            style: style,
             typography: typography,
-            enabled: colorScheme.primaryForeground,
-            disabled: colorScheme.primaryForeground.withOpacity(0.5),
+            enabledBoxColor: colorScheme.enabled.primary,
+            enabledHoveredBoxColor: colorScheme.enabledHovered.primary,
+            disabledBoxColor: colorScheme.disabled.primary,
+            enabledContentColor: colorScheme.enabled.primaryForeground,
+            disabledContentColor: colorScheme.disabled.primaryForeground,
           ),
-          iconContent: FButtonIconContentStyle(
-            enabled: colorScheme.primaryForeground,
-            disabled: colorScheme.primaryForeground.withOpacity(0.5),
-          ),
-        ),
-        secondary = FButtonCustomStyle(
-          enabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.secondary,
-          ),
-          enabledHoverBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.secondary.withLightness(0.15),
-          ),
-          disabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.secondary.withOpacity(0.5),
-          ),
-          content: FButtonContentStyle.inherit(
+          secondary: FButtonCustomStyle.inherit(
+            style: style,
             typography: typography,
-            enabled: colorScheme.secondaryForeground,
-            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
+            enabledBoxColor: colorScheme.enabled.secondary,
+            enabledHoveredBoxColor: colorScheme.enabledHovered.secondary,
+            disabledBoxColor: colorScheme.disabled.secondary,
+            enabledContentColor: colorScheme.enabled.secondaryForeground,
+            disabledContentColor: colorScheme.disabled.secondaryForeground,
           ),
-          iconContent: FButtonIconContentStyle(
-            enabled: colorScheme.secondaryForeground,
-            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
-          ),
-        ),
-        destructive = FButtonCustomStyle(
-          enabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.destructive,
-          ),
-          enabledHoverBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.destructive.withOpacity(0.9),
-          ),
-          disabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.destructive.withOpacity(0.5),
-          ),
-          content: FButtonContentStyle.inherit(
+          destructive: FButtonCustomStyle.inherit(
+            style: style,
             typography: typography,
-            enabled: colorScheme.destructiveForeground,
-            disabled: colorScheme.destructiveForeground.withOpacity(0.5),
+            enabledBoxColor: colorScheme.enabled.destructive,
+            enabledHoveredBoxColor: colorScheme.enabledHovered.destructive,
+            disabledBoxColor: colorScheme.disabled.destructive,
+            enabledContentColor: colorScheme.enabled.destructiveForeground,
+            disabledContentColor: colorScheme.disabled.destructiveForeground,
           ),
-          iconContent: FButtonIconContentStyle(
-            enabled: colorScheme.destructiveForeground,
-            disabled: colorScheme.destructiveForeground.withOpacity(0.5),
-          ),
-        ),
-        outline = FButtonCustomStyle(
-          enabledBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
-          ),
-          enabledHoverBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
-            borderRadius: style.borderRadius,
-            color: colorScheme.secondary,
-          ),
-          disabledBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border.withOpacity(0.5)),
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
-          ),
-          content: FButtonContentStyle.inherit(
-            typography: typography,
-            enabled: colorScheme.secondaryForeground,
-            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
-          ),
-          iconContent: FButtonIconContentStyle(
-            enabled: colorScheme.secondaryForeground,
-            disabled: colorScheme.secondaryForeground.withOpacity(0.5),
+          outline: FButtonCustomStyle(
+            enabledBoxDecoration: BoxDecoration(
+              border: Border.all(color: colorScheme.enabled.border),
+              borderRadius: style.borderRadius,
+              color: colorScheme.enabled.background,
+            ),
+            enabledHoverBoxDecoration: BoxDecoration(
+              border: Border.all(color: colorScheme.enabled.border),
+              borderRadius: style.borderRadius,
+              color: colorScheme.enabled.secondary,
+            ),
+            disabledBoxDecoration: BoxDecoration(
+              border: Border.all(color: colorScheme.disabled.border),
+              borderRadius: style.borderRadius,
+              color: colorScheme.enabled.background,
+            ),
+            contentStyle: FButtonContentStyle.inherit(
+              typography: typography,
+              enabled: colorScheme.enabled.secondaryForeground,
+              disabled: colorScheme.disabled.secondaryForeground,
+            ),
+            iconContentStyle: FButtonIconContentStyle(
+              enabledColor: colorScheme.enabled.secondaryForeground,
+              disabledColor: colorScheme.disabled.secondaryForeground,
+            ),
           ),
         );
 
