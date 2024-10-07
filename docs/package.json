@@ -17,8 +17,8 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.447.0",
     "next": "^14.2.14",
-    "nextra": "^3.0.2",
-    "nextra-theme-docs": "^3.0.2",
+    "nextra": "^3.0.5",
+    "nextra-theme-docs": "^3.0.5",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "tailwind-merge": "^2.5.2"

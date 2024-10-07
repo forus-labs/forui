@@ -1,7 +1,7 @@
 export default {
   index: 'Getting Started',
   themes: 'Themes',
-  icon: 'Icon',
+  'icon-library': 'Icon Library',
   api_reference: {
     title: 'API Reference ↗',
     href: 'https://pub.dev/documentation/forui',
@@ -16,5 +16,7 @@ export default {
     type: 'separator',
     title: 'Widgets'
   },
-  '*': 'All Widgets',
+  // '*': {
+  //   type: 'page'
+  // },
 };
