@@ -183,7 +183,7 @@ class FSelectGroupStyle with Diagnosticable {
 
   /// Creates a [FSelectGroupStyle] that inherits its properties from the given parameters.
   factory FSelectGroupStyle.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   }) {
@@ -192,26 +192,26 @@ class FSelectGroupStyle with Diagnosticable {
       style: checkboxStyle.copyWith(
         enabledStyle: checkboxStyle.enabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary,
+            color: colorScheme.enabled.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
         ),
         disabledStyle: checkboxStyle.disabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary.withOpacity(0.7),
+            color: colorScheme.disabled.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
         ),
         errorStyle: checkboxStyle.errorStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary,
+            color: colorScheme.enabled.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
           errorTextStyle: typography.sm.copyWith(
-            color: colorScheme.error,
+            color: colorScheme.enabled.error,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -223,26 +223,26 @@ class FSelectGroupStyle with Diagnosticable {
       style: radioStyle.copyWith(
         enabledStyle: radioStyle.enabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary,
+            color: colorScheme.enabled.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
         ),
         disabledStyle: radioStyle.disabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary.withOpacity(0.7),
+            color: colorScheme.disabled.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disabled.mutedForeground),
         ),
         errorStyle: radioStyle.errorStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary,
+            color: colorScheme.enabled.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
           errorTextStyle: typography.sm.copyWith(
-            color: colorScheme.error,
+            color: colorScheme.enabled.error,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -250,7 +250,7 @@ class FSelectGroupStyle with Diagnosticable {
     );
 
     return FSelectGroupStyle(
-      labelLayoutStyle: FLabelStyles.inherit(style: style).vertical.layout,
+      labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
       enabledStyle: FSelectGroupStateStyle(
         labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
         descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,

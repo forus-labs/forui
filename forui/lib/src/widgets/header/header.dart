@@ -36,8 +36,8 @@ sealed class FHeader extends StatelessWidget {
   const factory FHeader.nested({
     required Widget title,
     FNestedHeaderStyle? style,
-    List<Widget> leftActions,
-    List<Widget> rightActions,
+    List<Widget> prefixActions,
+    List<Widget> suffixActions,
     Key? key,
   }) = _FNestedHeader;
 }
@@ -89,9 +89,9 @@ final class FHeaderStyles with Diagnosticable {
     required this.nestedStyle,
   });
 
-  /// Creates a [FHeaderStyles] that inherits its properties from the given [FStateColorScheme], [FTypography] and [FStyle].
+  /// Creates a [FHeaderStyles] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
   FHeaderStyles.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   })  : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),

@@ -20,7 +20,7 @@ void main() {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: theme.colorScheme.border,
+                      color: theme.colorScheme.enabled.border,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -67,7 +67,7 @@ void main() {
               content: DecoratedBox(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: FThemes.zinc.light.colorScheme.border,
+                    color: FThemes.zinc.light.colorScheme.enabled.border,
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),

@@ -11,9 +11,6 @@
 
 * Add `FTextField.forceErrorText`.
 
-* **Breaking** Add `FColorScheme.disabledColorBrightness` - this will only affect users that create a `FColorScheme`
-  from scratch.
-
 * Add `FIcon`.
 
 * Add `FStateColorScheme`.
@@ -56,7 +53,28 @@
 
 * **Breaking** Change `FAvatarStyle.text` to `FAvatarStyle.textStyle`.
 
-* **Breaking:** Change `FColorScheme` to support different color scheme variants for different states.
+* **Breaking** Change `FDialogStyle.horizontal` to `FDialogStyle.horizontalStyle`.
+
+* **Breaking** Change `FDialogStyle.selectedLabel` to `FDialogStyle.selectedLabelTextStyle`.
+
+* **Breaking** Change `FDialogStyle.unselectedLabel` to `FDialogStyle.unselectedLabelTextStyle`.
+
+* **Breaking** Change `FDividerStyle.horizontal` to `FDividerStyle.horizontalStyle`.
+
+* **Breaking** Change `FDividerStyle.vertical` to `FDividerStyle.verticalStyle`.
+
+* **Breaking** Change `FDialogStyle.indicator` to `FDialogStyle.indicatorDecoration`.
+
+* **Breaking** Change `FHeader.leftActions` to `FHeader.prefixActions`.
+
+* **Breaking** Change `FHeader.rightActions` to `FHeader.suffixActions`.
+
+
+* **Breaking** Change `FLabelStyle.horizontal` to `FLabelStyle.horizontalStyle`.
+
+* **Breaking** Change `FLabelStyle.vertical` to `FLabelStyle.verticalStyle`.
+
+* **Breaking** Change `FColorScheme` to support different color scheme variants for different states.
 
 ### Fixes
 

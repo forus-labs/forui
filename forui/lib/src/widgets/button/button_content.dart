@@ -26,7 +26,7 @@ class Content extends StatelessWidget {
       padding: contentStyle.padding,
       child: DefaultTextStyle.merge(
         style: enabled ? contentStyle.enabledTextStyle : contentStyle.disabledTextStyle,
-        child: FInheritedIconStyle(
+        child: FIconStyleData(
           style: FIconStyle(
             color: enabled ? contentStyle.enabledIconColor : contentStyle.disabledIconColor,
             size: contentStyle.iconSize,
@@ -62,7 +62,7 @@ class IconContent extends StatelessWidget {
 
     return Padding(
       padding: style.iconContentStyle.padding,
-      child: FInheritedIconStyle(
+      child: FIconStyleData(
         style: FIconStyle(
           color: enabled ? style.iconContentStyle.enabledColor : style.iconContentStyle.disabledColor,
           size: style.iconContentStyle.size,

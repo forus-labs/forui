@@ -49,7 +49,7 @@ class AvatarRawPage extends SampleScaffold {
           const SizedBox(width: 10),
           FAvatar.raw(
             child: FAssets.icons.baby(
-              colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(theme.colorScheme.enabled.mutedForeground, BlendMode.srcIn),
             ),
           ),
           const SizedBox(width: 10),

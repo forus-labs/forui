@@ -29,7 +29,6 @@ final class _FRootHeader extends FHeader {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.headerStyle.rootStyle;
-
     return SafeArea(
       bottom: false,
       child: Semantics(
@@ -77,7 +76,7 @@ final class FRootHeaderStyle with Diagnosticable {
   /// The [FHeaderAction]'s style.
   final FHeaderActionStyle actionStyle;
 
-  /// The spacing between [FHeaderAction]s.
+  /// The spacing between [FHeaderAction]s. Defaults to 10.
   final double actionSpacing;
 
   /// The padding.
@@ -87,23 +86,25 @@ final class FRootHeaderStyle with Diagnosticable {
   FRootHeaderStyle({
     required this.titleTextStyle,
     required this.actionStyle,
-    required this.actionSpacing,
     required this.padding,
+    this.actionSpacing = 10,
   });
 
-  /// Creates a [FRootHeaderStyle] that inherits its properties from the given [FStateColorScheme], [FTypography] and [FStyle].
+  /// Creates a [FRootHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and
+  /// [FStyle].
   FRootHeaderStyle.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  })  : titleTextStyle = typography.xl3.copyWith(
-          color: colorScheme.foreground,
-          fontWeight: FontWeight.w700,
-          height: 1,
-        ),
-        actionStyle = FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 30),
-        actionSpacing = 10,
-        padding = style.pagePadding.copyWith(bottom: 15);
+  }): this(
+    titleTextStyle: typography.xl3.copyWith(
+      color: colorScheme.enabled.foreground,
+      fontWeight: FontWeight.w700,
+      height: 1,
+    ),
+    actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 30),
+    padding: style.pagePadding.copyWith(bottom: 15),
+  );
 
   /// Returns a copy of this [FRootHeaderStyle] with the given properties replaced.
   @useResult

@@ -197,27 +197,29 @@ final class FSwitchStyle with Diagnosticable {
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
-  FSwitchStyle.inherit({required FStateColorScheme colorScheme, required FStyle style})
-      : focusColor = colorScheme.primary,
-        labelLayoutStyle = FLabelStyles.inherit(style: style).horizontal.layout,
-        enabledStyle = FSwitchStateStyle(
-          checkedColor: colorScheme.primary,
-          uncheckedColor: colorScheme.border,
-          thumbColor: colorScheme.background,
-          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-        ),
-        disabledStyle = FSwitchStateStyle(
-          checkedColor: colorScheme.primary.withOpacity(0.5),
-          uncheckedColor: colorScheme.border.withOpacity(0.5),
-          thumbColor: colorScheme.background,
-          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-        ),
-        errorStyle = FSwitchErrorStyle(
-          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+  FSwitchStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+      : this(
+          focusColor: colorScheme.enabled.primary,
+          labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
+          enabledStyle: FSwitchStateStyle(
+            checkedColor: colorScheme.enabled.primary,
+            uncheckedColor: colorScheme.enabled.border,
+            thumbColor: colorScheme.enabled.background,
+            labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+            descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+          ),
+          disabledStyle: FSwitchStateStyle(
+            checkedColor: colorScheme.disabled.primary,
+            uncheckedColor: colorScheme.disabled.border,
+            thumbColor: colorScheme.enabled.background,
+            labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+            descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+          ),
+          errorStyle: FSwitchErrorStyle(
+            labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+            descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+            errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+          ),
         );
 
   /// The [FLabel]'s style.

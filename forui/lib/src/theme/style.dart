@@ -45,29 +45,29 @@ final class FStyle with Diagnosticable {
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
   });
 
-  /// Creates an [FStyle] that inherits its properties from the given [FStateColorScheme] and [FTypography].
+  /// Creates an [FStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
   FStyle.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
   }) : this(
           enabledFormFieldStyle: FFormFieldStyle.inherit(
-            labelColor: colorScheme.primary,
-            descriptionColor: colorScheme.mutedForeground,
+            labelColor: colorScheme.enabled.primary,
+            descriptionColor: colorScheme.enabled.mutedForeground,
             typography: typography,
           ),
           disabledFormFieldStyle: FFormFieldStyle.inherit(
-            labelColor: colorScheme.primary.withOpacity(0.7),
-            descriptionColor: colorScheme.mutedForeground.withOpacity(0.7),
+            labelColor: colorScheme.disabled.primary,
+            descriptionColor: colorScheme.disabled.mutedForeground,
             typography: typography,
           ),
           errorFormFieldStyle: FFormFieldErrorStyle.inherit(
-            labelColor: colorScheme.error,
-            descriptionColor: colorScheme.mutedForeground,
-            errorColor: colorScheme.error,
+            labelColor: colorScheme.enabled.error,
+            descriptionColor: colorScheme.enabled.mutedForeground,
+            errorColor: colorScheme.enabled.error,
             typography: typography,
           ),
           iconStyle: FIconStyle(
-            color: colorScheme.primary,
+            color: colorScheme.enabled.primary,
             size: 20,
           ),
         );

@@ -116,7 +116,7 @@ class _NotificationFormState extends State<NotificationForm> {
             'Email Notifications',
             style: theme.typography.xl2.copyWith(
               fontWeight: FontWeight.w600,
-              color: theme.colorScheme.foreground,
+              color: theme.colorScheme.enabled.foreground,
               height: 1.5,
             ),
           ),
@@ -135,13 +135,13 @@ class _NotificationFormState extends State<NotificationForm> {
                           'Marketing Emails',
                           style: theme.typography.base.copyWith(
                             fontWeight: FontWeight.w500,
-                            color: theme.colorScheme.foreground,
+                            color: theme.colorScheme.enabled.foreground,
                             height: 1.5,
                           ),
                         ),
                         Text(
                           'Receive emails about new products, features, and more.',
-                          style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                          style: theme.typography.sm.copyWith(color: theme.colorScheme.enabled.mutedForeground),
                         ),
                       ],
                     ),
@@ -176,13 +176,13 @@ class _NotificationFormState extends State<NotificationForm> {
                           'Security emails',
                           style: theme.typography.base.copyWith(
                             fontWeight: FontWeight.w500,
-                            color: theme.colorScheme.foreground,
+                            color: theme.colorScheme.enabled.foreground,
                             height: 1.5,
                           ),
                         ),
                         Text(
                           'Receive emails about your account security.',
-                          style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                          style: theme.typography.sm.copyWith(color: theme.colorScheme.enabled.mutedForeground),
                         ),
                       ],
                     ),

@@ -156,11 +156,11 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               controller: _controller._controller,
               isScrollable: widget.scrollable,
               padding: style.padding,
-              indicator: style.indicator,
+              indicator: style.indicatorDecoration,
               indicatorSize: style.indicatorSize._value,
               dividerColor: Colors.transparent,
-              labelStyle: style.selectedLabel,
-              unselectedLabelStyle: style.unselectedLabel,
+              labelStyle: style.selectedLabelTextStyle,
+              unselectedLabelStyle: style.unselectedLabelTextStyle,
               onTap: (index) {
                 setState(() {});
                 widget.onPress?.call(index);
@@ -171,7 +171,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           DefaultTextStyle(
             style: theme.typography.base.copyWith(
               fontFamily: theme.typography.defaultFontFamily,
-              color: theme.colorScheme.foreground,
+              color: theme.colorScheme.enabled.foreground,
             ),
             child: widget.tabs[_controller.index].content,
           ),

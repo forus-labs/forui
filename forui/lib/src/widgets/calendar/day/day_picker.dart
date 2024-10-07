@@ -153,7 +153,7 @@ class _DayPickerState extends State<DayPicker> {
   }
 }
 
-/// Based on Material [CalendarDatePicker]'s _DayPickerGridDelegate.
+// Based on Material [CalendarDatePicker]'s _DayPickerGridDelegate.
 class _GridDelegate extends SliverGridDelegate {
   const _GridDelegate();
 
@@ -204,56 +204,56 @@ final class FCalendarDayPickerStyle with Diagnosticable {
         );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
-  factory FCalendarDayPickerStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography}) {
-    final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
+  factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
+    final textStyle = typography.base.copyWith(color: colorScheme.enabled.foreground, fontWeight: FontWeight.w500);
     final mutedTextStyle =
-        typography.base.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
+        typography.base.copyWith(color: colorScheme.disabled.mutedForeground, fontWeight: FontWeight.w500);
 
     final disabled = FCalendarDayStyle(
       selectedStyle: FCalendarEntryStyle(
-        backgroundColor: colorScheme.primaryForeground,
+        backgroundColor: colorScheme.enabled.primaryForeground,
         textStyle: mutedTextStyle,
-        focusedBorderColor: colorScheme.primaryForeground,
+        focusedBorderColor: colorScheme.enabled.primaryForeground,
         radius: const Radius.circular(4),
       ),
       unselectedStyle: FCalendarEntryStyle(
-        backgroundColor: colorScheme.background,
+        backgroundColor: colorScheme.enabled.background,
         textStyle: mutedTextStyle,
-        focusedBorderColor: colorScheme.background,
+        focusedBorderColor: colorScheme.enabled.background,
         radius: const Radius.circular(4),
       ),
     );
 
     return FCalendarDayPickerStyle(
-      headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
+      headerTextStyle: typography.xs.copyWith(color: colorScheme.enabled.mutedForeground),
       selectableStyles: (
         current: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.foreground,
-            textStyle: typography.base.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
-            focusedBorderColor: colorScheme.foreground,
+            backgroundColor: colorScheme.enabled.foreground,
+            textStyle: typography.base.copyWith(color: colorScheme.enabled.background, fontWeight: FontWeight.w500),
+            focusedBorderColor: colorScheme.enabled.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.background,
+            backgroundColor: colorScheme.enabled.background,
             textStyle: textStyle,
-            hoveredBackgroundColor: colorScheme.secondary,
-            focusedBorderColor: colorScheme.foreground,
+            hoveredBackgroundColor: colorScheme.enabled.secondary,
+            focusedBorderColor: colorScheme.enabled.foreground,
             radius: const Radius.circular(4),
           ),
         ),
         enclosing: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.primaryForeground,
+            backgroundColor: colorScheme.enabled.primaryForeground,
             textStyle: mutedTextStyle,
-            focusedBorderColor: colorScheme.foreground,
+            focusedBorderColor: colorScheme.enabled.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.background,
+            backgroundColor: colorScheme.enabled.background,
             textStyle: mutedTextStyle,
-            hoveredBackgroundColor: colorScheme.primaryForeground,
-            focusedBorderColor: colorScheme.foreground,
+            hoveredBackgroundColor: colorScheme.enabled.primaryForeground,
+            focusedBorderColor: colorScheme.enabled.foreground,
             radius: const Radius.circular(4),
           ),
         ),

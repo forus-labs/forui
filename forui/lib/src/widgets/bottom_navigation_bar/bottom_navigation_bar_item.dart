@@ -38,7 +38,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ExcludeSemantics(
-            child: FInheritedIconStyle(
+            child: FIconStyleData(
               style: FIconStyle(
                 color: data.selected ? style.activeIconColor : style.inactiveIconColor,
                 size: style.iconSize,
@@ -94,7 +94,8 @@ final class FBottomNavigationBarItemStyle with Diagnosticable {
     this.padding = const EdgeInsets.all(5),
   });
 
-  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FStateColorScheme] and [FTypography].
+  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and
+  /// [FTypography].
   FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography}):
       this(
         activeIconColor: colorScheme.enabled.primary,

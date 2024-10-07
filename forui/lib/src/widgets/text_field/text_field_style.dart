@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 /// [FTextFieldStyle]'s style.
 final class FTextFieldStyle with Diagnosticable {
-  /// The appearance of the keyboard. Defaults to [FStateColorScheme.brightness].
+  /// The appearance of the keyboard. Defaults to [FColorScheme.brightness].
   ///
   /// This setting is only honored on iOS devices.
   final Brightness keyboardAppearance;
@@ -58,40 +58,39 @@ final class FTextFieldStyle with Diagnosticable {
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
   FTextFieldStyle.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  })  : keyboardAppearance = colorScheme.brightness,
-        cursorColor = CupertinoColors.activeBlue,
-        contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-        scrollPadding = const EdgeInsets.all(20.0),
-        labelLayoutStyle = FLabelStyles.inherit(style: style).vertical.layout,
-        enabledStyle = FTextFieldStateStyle.inherit(
-          contentColor: colorScheme.primary,
-          hintColor: colorScheme.mutedForeground,
-          focusedBorderColor: colorScheme.primary,
-          unfocusedBorderColor: colorScheme.border,
-          formFieldStyle: style.enabledFormFieldStyle,
-          typography: typography,
-          style: style,
-        ),
-        disabledStyle = FTextFieldStateStyle.inherit(
-          contentColor: colorScheme.primary.withOpacity(0.7),
-          hintColor: colorScheme.border.withOpacity(0.7),
-          focusedBorderColor: colorScheme.border.withOpacity(0.7),
-          unfocusedBorderColor: colorScheme.border.withOpacity(0.7),
-          formFieldStyle: style.disabledFormFieldStyle,
-          typography: typography,
-          style: style,
-        ),
-        errorStyle = FTextFieldErrorStyle.inherit(
-          contentColor: colorScheme.primary,
-          hintColor: colorScheme.mutedForeground,
-          focusedBorderColor: colorScheme.error,
-          unfocusedBorderColor: colorScheme.error,
-          formFieldErrorStyle: style.errorFormFieldStyle,
-          typography: typography,
-          style: style,
+  }) : this(
+          keyboardAppearance: colorScheme.brightness,
+          labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
+          enabledStyle: FTextFieldStateStyle.inherit(
+            contentColor: colorScheme.enabled.primary,
+            hintColor: colorScheme.enabled.mutedForeground,
+            focusedBorderColor: colorScheme.enabled.primary,
+            unfocusedBorderColor: colorScheme.enabled.border,
+            formFieldStyle: style.enabledFormFieldStyle,
+            typography: typography,
+            style: style,
+          ),
+          disabledStyle: FTextFieldStateStyle.inherit(
+            contentColor: colorScheme.disabled.primary,
+            hintColor: colorScheme.disabled.border,
+            focusedBorderColor: colorScheme.disabled.border,
+            unfocusedBorderColor: colorScheme.disabled.border,
+            formFieldStyle: style.disabledFormFieldStyle,
+            typography: typography,
+            style: style,
+          ),
+          errorStyle: FTextFieldErrorStyle.inherit(
+            contentColor: colorScheme.enabled.primary,
+            hintColor: colorScheme.enabled.mutedForeground,
+            focusedBorderColor: colorScheme.enabled.error,
+            unfocusedBorderColor: colorScheme.enabled.error,
+            formFieldErrorStyle: style.errorFormFieldStyle,
+            typography: typography,
+            style: style,
+          ),
         );
 
   /// Returns a copy of this [FTextFieldStyle] with the given properties replaced.

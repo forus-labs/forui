@@ -54,7 +54,7 @@ void main() {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: FAssets.icons.baby(
-                    colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
+                    colorFilter: ColorFilter.mode(theme.colorScheme.enabled.mutedForeground, BlendMode.srcIn),
                   ),
                 ),
               ),

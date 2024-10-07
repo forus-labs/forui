@@ -146,9 +146,7 @@ class FCheckbox extends StatelessWidget {
 
 /// A [FCheckbox]'s style.
 class FCheckboxStyle with Diagnosticable {
-  /// The duration of the animation when the checkbox's switches between checked and unchecked.
-  ///
-  /// Defaults to `const Duration(milliseconds: 100)`.
+  /// The duration of the animation when the checkbox's switches between checked and unchecked. Defaults to 100ms.
   final Duration animationDuration;
 
   /// The curve of the animation when the checkbox's switches between checked and unchecked.
@@ -179,34 +177,34 @@ class FCheckboxStyle with Diagnosticable {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties from the given parameters.
-  FCheckboxStyle.inherit({required FStateColorScheme colorScheme, required FStyle style})
-      : animationDuration = const Duration(milliseconds: 100),
-        curve = Curves.linear,
-        labelLayoutStyle = FLabelStyles.inherit(style: style).horizontal.layout,
-        enabledStyle = FCheckboxStateStyle(
-          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.primary,
-          iconColor: colorScheme.primaryForeground,
-          checkedBackgroundColor: colorScheme.primary,
-          uncheckedBackgroundColor: colorScheme.background,
-        ),
-        disabledStyle = FCheckboxStateStyle(
-          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.primary.withOpacity(0.5),
-          iconColor: colorScheme.primaryForeground.withOpacity(0.5),
-          checkedBackgroundColor: colorScheme.primary.withOpacity(0.5),
-          uncheckedBackgroundColor: colorScheme.background.withOpacity(0.5),
-        ),
-        errorStyle = FCheckboxErrorStyle(
-          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: colorScheme.error,
-          iconColor: colorScheme.errorForeground,
-          checkedBackgroundColor: colorScheme.error,
-          uncheckedBackgroundColor: colorScheme.background,
+  FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+      : this(
+          labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
+          enabledStyle: FCheckboxStateStyle(
+            labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+            descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+            borderColor: colorScheme.enabled.primary,
+            iconColor: colorScheme.enabled.primaryForeground,
+            checkedBackgroundColor: colorScheme.enabled.primary,
+            uncheckedBackgroundColor: colorScheme.enabled.background,
+          ),
+          disabledStyle: FCheckboxStateStyle(
+            labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+            descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+            borderColor: colorScheme.disabled.primary,
+            iconColor: colorScheme.disabled.primaryForeground,
+            checkedBackgroundColor: colorScheme.disabled.primary,
+            uncheckedBackgroundColor: colorScheme.disabled.background,
+          ),
+          errorStyle: FCheckboxErrorStyle(
+            labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+            descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+            errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+            borderColor: colorScheme.enabled.error,
+            iconColor: colorScheme.enabled.errorForeground,
+            checkedBackgroundColor: colorScheme.enabled.error,
+            uncheckedBackgroundColor: colorScheme.enabled.background,
+          ),
         );
 
   /// The [FLabel]'s style.
@@ -329,7 +327,7 @@ class FCheckboxStateStyle with Diagnosticable implements FFormFieldStyle {
     super.debugFillProperties(properties);
     properties
       ..add(ColorProperty('borderColor', borderColor))
-      ..add(ColorProperty('checkedIconColor', iconColor))
+      ..add(ColorProperty('iconColor', iconColor))
       ..add(ColorProperty('checkedBackgroundColor', checkedBackgroundColor))
       ..add(ColorProperty('uncheckedBackgroundColor', uncheckedBackgroundColor));
   }

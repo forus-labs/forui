@@ -183,7 +183,7 @@ final class FCalendarStyle with Diagnosticable {
 
   /// Creates a [FCalendarStyle] that inherits the color scheme and typography.
   FCalendarStyle.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   }) : this(
@@ -192,8 +192,8 @@ final class FCalendarStyle with Diagnosticable {
           yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
           decoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            border: Border.all(color: colorScheme.border),
-            color: colorScheme.background,
+            border: Border.all(color: colorScheme.enabled.border),
+            color: colorScheme.enabled.background,
           ),
         );
 

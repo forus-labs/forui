@@ -25,7 +25,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.cardStyle.content;
+    final style = this.style ?? context.theme.cardStyle.contentStyle;
 
     return Padding(
       padding: style.padding,
@@ -93,14 +93,14 @@ final class FCardContentStyle with Diagnosticable {
   });
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
-  FCardContentStyle.inherit({required FStateColorScheme colorScheme, required FTypography typography})
-      : titleTextStyle = typography.xl2.copyWith(
-          fontWeight: FontWeight.w600,
-          color: colorScheme.foreground,
-          height: 1.5,
-        ),
-        subtitleTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground),
-        padding = const EdgeInsets.all(16);
+  FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography}): this(
+    titleTextStyle: typography.xl2.copyWith(
+      fontWeight: FontWeight.w600,
+      color: colorScheme.enabled.foreground,
+      height: 1.5,
+    ),
+    subtitleTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+  );
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.
   @useResult

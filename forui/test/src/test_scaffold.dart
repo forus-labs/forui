@@ -4,23 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 class TestScaffold extends StatelessWidget {
+  static const _blue = FStateColorScheme(
+    background: Color(0xFF03A9F4),
+    foreground: Color(0xFF03A9F4),
+    primary: Color(0xFF03A9F4),
+    primaryForeground: Color(0xFF03A9F4),
+    secondary: Color(0xFF03A9F4),
+    secondaryForeground: Color(0xFF03A9F4),
+    muted: Color(0xFF03A9F4),
+    mutedForeground: Color(0xFF03A9F4),
+    destructive: Color(0xFF03A9F4),
+    destructiveForeground: Color(0xFF03A9F4),
+    error: Color(0xFF03A9F4),
+    errorForeground: Color(0xFF03A9F4),
+    border: Color(0xFF03A9F4),
+  );
+
   static final blueScreen = FThemeData.inherit(
-    colorScheme: const FStateColorScheme(
+    colorScheme: const FColorScheme(
       brightness: Brightness.light,
-      disabledColorLightness: 0.1,
-      background: Color(0xFF03A9F4),
-      foreground: Color(0xFF03A9F4),
-      primary: Color(0xFF03A9F4),
-      primaryForeground: Color(0xFF03A9F4),
-      secondary: Color(0xFF03A9F4),
-      secondaryForeground: Color(0xFF03A9F4),
-      muted: Color(0xFF03A9F4),
-      mutedForeground: Color(0xFF03A9F4),
-      destructive: Color(0xFF03A9F4),
-      destructiveForeground: Color(0xFF03A9F4),
-      error: Color(0xFF03A9F4),
-      errorForeground: Color(0xFF03A9F4),
-      border: Color(0xFF03A9F4),
+      enabled: _blue,
+      enabledHovered: _blue,
+      disabled: _blue,
     ),
   );
 
@@ -40,7 +45,7 @@ class TestScaffold extends StatelessWidget {
 
   TestScaffold.blue({required this.child, super.key})
       : data = blueScreen,
-        background = blueScreen.colorScheme.background,
+        background = blueScreen.colorScheme.enabled.background,
         wrapped = false;
 
   @override
@@ -52,7 +57,7 @@ class TestScaffold extends StatelessWidget {
           textDirection: TextDirection.ltr,
           child: Container(
             // We use a fixed background color to ensure that widgets set their background properly.
-            color: background ?? data.colorScheme.background,
+            color: background ?? data.colorScheme.enabled.background,
             alignment: Alignment.center,
             child: child!,
           ),
@@ -65,7 +70,7 @@ class TestScaffold extends StatelessWidget {
         textDirection: TextDirection.ltr,
         child: Container(
           // We use a fixed background color to ensure that widgets set their background properly.
-          color: background ?? data.colorScheme.background,
+          color: background ?? data.colorScheme.enabled.background,
           alignment: Alignment.center,
           child: child,
         ),

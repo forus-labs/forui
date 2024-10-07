@@ -16,17 +16,17 @@ final class _FNestedHeader extends FHeader {
   final Widget title;
 
   /// The actions, aligned to the left. Defaults to an empty list.
-  final List<Widget> leftActions;
+  final List<Widget> prefixActions;
 
   /// The actions, aligned to the right. Defaults to an empty list.
-  final List<Widget> rightActions;
+  final List<Widget> suffixActions;
 
   /// Creates a [_FNestedHeader].
   const _FNestedHeader({
     required this.title,
     this.style,
-    this.leftActions = const [],
-    this.rightActions = const [],
+    this.prefixActions = const [],
+    this.suffixActions = const [],
     super.key,
   }) : super._();
 
@@ -47,8 +47,8 @@ final class _FNestedHeader extends FHeader {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(children: leftActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
-                    Row(children: rightActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
+                    Row(children: prefixActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
+                    Row(children: suffixActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
                   ],
                 ),
               ),
@@ -75,8 +75,8 @@ final class _FNestedHeader extends FHeader {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(IterableProperty('leftActions', leftActions))
-      ..add(IterableProperty('rightActions', rightActions));
+      ..add(IterableProperty('leftActions', prefixActions))
+      ..add(IterableProperty('rightActions', suffixActions));
   }
 }
 
@@ -88,7 +88,7 @@ final class FNestedHeaderStyle with Diagnosticable {
   /// The [FHeaderAction]s' style.
   final FHeaderActionStyle actionStyle;
 
-  /// The spacing between [FHeaderAction]s.
+  /// The spacing between [FHeaderAction]s. Defaults to 10.
   final double actionSpacing;
 
   /// The padding.
@@ -98,23 +98,25 @@ final class FNestedHeaderStyle with Diagnosticable {
   const FNestedHeaderStyle({
     required this.titleTextStyle,
     required this.actionStyle,
-    required this.actionSpacing,
     required this.padding,
+    this.actionSpacing = 10,
   });
 
-  /// Creates a [FNestedHeaderStyle] that inherits its properties from the given [FStateColorScheme], [FTypography] and [FStyle].
+  /// Creates a [FNestedHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and
+  /// [FStyle].
   FNestedHeaderStyle.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  })  : titleTextStyle = typography.xl.copyWith(
-          color: colorScheme.foreground,
-          fontWeight: FontWeight.w600,
-          height: 1,
-        ),
-        actionStyle = FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 25),
-        actionSpacing = 10,
-        padding = style.pagePadding.copyWith(bottom: 15);
+  }) : this(
+          titleTextStyle: typography.xl.copyWith(
+            color: colorScheme.enabled.foreground,
+            fontWeight: FontWeight.w600,
+            height: 1,
+          ),
+          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 25),
+          padding: style.pagePadding.copyWith(bottom: 15),
+        );
 
   /// Returns a copy of this [FNestedHeaderStyle] with the given properties replaced.
   @useResult

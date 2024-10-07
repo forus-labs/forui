@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -37,59 +39,48 @@ final class FColorScheme with Diagnosticable {
     required this.disabled,
   });
 
-  // /// Creates a [FColorScheme] by deriving the color schemes for the other states from the given [enabled] color scheme.
-  // ///
-  // /// ## Contract
-  // /// Throws [AssertionError] if:
-  // /// * [enabledHoverLightness] is not between `0` and `1`.
-  // /// * [disabledLightness] is not between `0` and `1`.
-  // factory FColorScheme.inherit({
-  //   required Brightness brightness,
-  //   required FStateColorScheme enabled,
-  //   required double enabledHoverLightness,
-  //   required double disabledLightness,
-  // }) {
-  //   // TODO: tweak recoloring algorithm.
-  //   assert(0 <= enabledHoverLightness && enabledHoverLightness <= 1, 'enabledHoverLightness must be between 0 and 1');
-  //   assert(0 <= disabledLightness && disabledLightness <= 1, 'disabledLightness must be between 0 and 1');
-  //
-  //   return FColorScheme(
-  //     brightness: brightness,
-  //     enabled: enabled,
-  //     enabledHovered: enabled.copyWith(
-  //       brightness: brightness,
-  //       background: enabled.background.withLightness(enabledHoverLightness),
-  //       foreground: enabled.foreground.withLightness(enabledHoverLightness),
-  //       primary: enabled.primary.withLightness(enabledHoverLightness),
-  //       primaryForeground: enabled.primaryForeground.withLightness(enabledHoverLightness),
-  //       secondary: enabled.secondary.withLightness(enabledHoverLightness),
-  //       secondaryForeground: enabled.secondaryForeground.withLightness(enabledHoverLightness),
-  //       muted: enabled.muted.withLightness(enabledHoverLightness),
-  //       mutedForeground: enabled.mutedForeground.withLightness(enabledHoverLightness),
-  //       destructive: enabled.destructive.withLightness(enabledHoverLightness),
-  //       destructiveForeground: enabled.destructiveForeground.withLightness(enabledHoverLightness),
-  //       error: enabled.error.withLightness(enabledHoverLightness),
-  //       errorForeground: enabled.errorForeground.withLightness(enabledHoverLightness),
-  //       border: enabled.border.withLightness(enabledHoverLightness),
-  //     ),
-  //     disabled: enabled.copyWith(
-  //       brightness: brightness,
-  //       background: enabled.background.withLightness(disabledLightness),
-  //       foreground: enabled.foreground.withLightness(disabledLightness),
-  //       primary: enabled.primary.withLightness(disabledLightness),
-  //       primaryForeground: enabled.primaryForeground.withLightness(disabledLightness),
-  //       secondary: enabled.secondary.withLightness(disabledLightness),
-  //       secondaryForeground: enabled.secondaryForeground.withLightness(disabledLightness),
-  //       muted: enabled.muted.withLightness(disabledLightness),
-  //       mutedForeground: enabled.mutedForeground.withLightness(disabledLightness),
-  //       destructive: enabled.destructive.withLightness(disabledLightness),
-  //       destructiveForeground: enabled.destructiveForeground.withLightness(disabledLightness),
-  //       error: enabled.error.withLightness(disabledLightness),
-  //       errorForeground: enabled.errorForeground.withLightness(disabledLightness),
-  //       border: enabled.border.withLightness(disabledLightness),
-  //     ),
-  //   );
-  // }
+  /// Creates a [FColorScheme] by deriving the color schemes for the other states from the given [enabled] color scheme.
+  FColorScheme.inherit({
+    required Brightness brightness,
+    required FStateColorScheme enabled,
+    required double enabledHoveredSaturation,
+    required double enabledHoveredValue,
+    required double disabledSaturation,
+    required double disabledValue,
+  }): this(
+    brightness: brightness,
+    enabled: enabled,
+    enabledHovered: enabled.copyWith(
+      background: enabled.background.linear(enabledHoveredSaturation, enabledHoveredValue),
+      foreground: enabled.foreground.linear(enabledHoveredSaturation, enabledHoveredValue),
+      primary: enabled.primary.linear(enabledHoveredSaturation, enabledHoveredValue),
+      primaryForeground: enabled.primaryForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
+      secondary: enabled.secondary.linear(enabledHoveredSaturation, enabledHoveredValue),
+      secondaryForeground: enabled.secondaryForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
+      muted: enabled.muted.linear(enabledHoveredSaturation, enabledHoveredValue),
+      mutedForeground: enabled.mutedForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
+      destructive: enabled.destructive.linear(enabledHoveredSaturation, enabledHoveredValue),
+      destructiveForeground: enabled.destructiveForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
+      error: enabled.error.linear(enabledHoveredSaturation, enabledHoveredValue),
+      errorForeground: enabled.errorForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
+      border: enabled.border.linear(enabledHoveredSaturation, enabledHoveredValue),
+    ),
+    disabled: enabled.copyWith(
+      background: enabled.background.linear(disabledSaturation, disabledValue),
+      foreground: enabled.foreground.linear(disabledSaturation, disabledValue),
+      primary: enabled.primary.linear(disabledSaturation, disabledValue),
+      primaryForeground: enabled.primaryForeground.linear(disabledSaturation, disabledValue),
+      secondary: enabled.secondary.linear(disabledSaturation, disabledValue),
+      secondaryForeground: enabled.secondaryForeground.linear(disabledSaturation, disabledValue),
+      muted: enabled.muted.linear(disabledSaturation, disabledValue),
+      mutedForeground: enabled.mutedForeground.linear(disabledSaturation, disabledValue),
+      destructive: enabled.destructive.linear(disabledSaturation, disabledValue),
+      destructiveForeground: enabled.destructiveForeground.linear(disabledSaturation, disabledValue),
+      error: enabled.error.linear(disabledSaturation, disabledValue),
+      errorForeground: enabled.errorForeground.linear(disabledSaturation, disabledValue),
+      border: enabled.border.linear(disabledSaturation, disabledValue),
+    ),
+  );
 
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   @useResult
@@ -328,4 +319,22 @@ final class FStateColorScheme with Diagnosticable {
       error.hashCode ^
       errorForeground.hashCode ^
       border.hashCode;
+}
+
+extension on Color {
+  // Color nonLinear(double saturation, double saturationGamma, double value, double valueGamma) {
+  //   final original = HSVColor.fromColor(this);
+  //   return original
+  //       .withSaturation(clampDouble(pow(original.saturation + saturation, saturationGamma).toDouble(), 0, 1))
+  //       .withValue(clampDouble(pow(original.value + value, valueGamma).toDouble(), 0, 1))
+  //       .toColor();
+  // }
+
+  Color linear(double saturation, double value) {
+    final original = HSVColor.fromColor(this);
+    return original
+        .withSaturation(clampDouble(original.saturation * saturation, 0, 1))
+        .withValue(clampDouble(original.value * value, 0, 1))
+        .toColor();
+  }
 }

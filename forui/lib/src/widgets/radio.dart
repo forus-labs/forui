@@ -143,9 +143,7 @@ class FRadio extends StatelessWidget {
 
 /// A [FRadio]'s style.
 class FRadioStyle with Diagnosticable {
-  /// The duration of the animation when the radio's switches between selected and unselected.
-  ///
-  /// Defaults to `const Duration(milliseconds: 100)`.
+  /// The duration of the animation when the radio's switches between selected and unselected. Defaults to 100ms.
   final Duration animationDuration;
 
   /// The curve of the animation when the radio's switches between selected and unselected.
@@ -176,29 +174,29 @@ class FRadioStyle with Diagnosticable {
   });
 
   /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
-  factory FRadioStyle.inherit({required FStateColorScheme colorScheme, required FStyle style}) => FRadioStyle(
-        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontal.layout,
+  FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style}): this(
+        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
         enabledStyle: FRadioStateStyle(
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.primary,
-          selectedColor: colorScheme.primary,
-          backgroundColor: colorScheme.background,
+          borderColor: colorScheme.enabled.primary,
+          selectedColor: colorScheme.enabled.primary,
+          backgroundColor: colorScheme.enabled.background,
         ),
         disabledStyle: FRadioStateStyle(
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.primary.withOpacity(0.5),
-          selectedColor: colorScheme.primary.withOpacity(0.5),
-          backgroundColor: colorScheme.background,
+          borderColor: colorScheme.disabled.primary,
+          selectedColor: colorScheme.disabled.primary,
+          backgroundColor: colorScheme.enabled.background,
         ),
         errorStyle: FRadioErrorStyle(
           labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: colorScheme.error,
-          selectedColor: colorScheme.error,
-          backgroundColor: colorScheme.background,
+          borderColor: colorScheme.enabled.error,
+          selectedColor: colorScheme.enabled.error,
+          backgroundColor: colorScheme.enabled.background,
         ),
       );
 

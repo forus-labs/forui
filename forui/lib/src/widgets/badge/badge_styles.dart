@@ -73,7 +73,7 @@ final class FBadgeStyles with Diagnosticable {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-            ));
+            ),);
 
   /// Returns a copy of this [FBadgeStyles] with the given properties replaced.
   @useResult

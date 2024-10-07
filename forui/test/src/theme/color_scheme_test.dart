@@ -6,10 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
 void main() {
-  group('FColorScheme', () {
+  group('FStateColorScheme', () {
     const scheme = FStateColorScheme(
-      brightness: Brightness.light,
-      disabledColorLightness: 0.5,
       background: Colors.black,
       foreground: Colors.black12,
       primary: Colors.black26,
@@ -30,8 +28,6 @@ void main() {
 
       test('all arguments', () {
         final copy = scheme.copyWith(
-          brightness: Brightness.dark,
-          disabledColorLightness: 0.75,
           background: Colors.red,
           foreground: Colors.greenAccent,
           primary: Colors.yellow,
@@ -47,8 +43,6 @@ void main() {
           border: Colors.lime,
         );
 
-        expect(copy.brightness, equals(Brightness.dark));
-        expect(copy.disabledColorLightness, equals(0.75));
         expect(copy.background, equals(Colors.red));
         expect(copy.foreground, equals(Colors.greenAccent));
         expect(copy.primary, equals(Colors.yellow));

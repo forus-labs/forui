@@ -6,13 +6,62 @@ import 'package:forui/forui.dart';
 /// The Forui themes.
 extension FThemes on Never {
   /// The light and dark variants of the [Zinc](https://ui.shadcn.com/themes) theme.
+  // static final zinc = (
+  //   light: FThemeData.inherit(
+  //     colorScheme: FColorScheme.inherit(
+  //       brightness: Brightness.light,
+  //       enabled: const FStateColorScheme(
+  //         background: Color(0xFFFFFFFF),
+  //         foreground: Color(0xFF09090B),
+  //         primary: Color(0xFF18181B),
+  //         primaryForeground: Color(0xFFFAFAFA),
+  //         secondary: Color(0xFFF4F4F5),
+  //         secondaryForeground: Color(0xFF18181B),
+  //         muted: Color(0xFFF4F4F5),
+  //         mutedForeground: Color(0xFF71717A),
+  //         destructive: Color(0xFFEF4444),
+  //         destructiveForeground: Color(0xFFFAFAFA),
+  //         error: Color(0xFFEF4444),
+  //         errorForeground: Color(0xFFFAFAFA),
+  //         border: Color(0xFFE4E4E7),
+  //       ),
+  //       enabledHoveredSaturation: 1.2,
+  //       enabledHoveredValue: 1.1,
+  //       disabledSaturation: 0.5,
+  //       disabledValue: 0.8,
+  //     ),
+  //   ),
+  //   dark: FThemeData.inherit(
+  //     colorScheme: FColorScheme.inherit(
+  //       brightness: Brightness.dark,
+  //       enabled: const FStateColorScheme(
+  //         background: Color(0xFF09090B),
+  //         foreground: Color(0xFFFAFAFA),
+  //         primary: Color(0xFFFAFAFA),
+  //         primaryForeground: Color(0xFF18181B),
+  //         secondary: Color(0xFF27272A),
+  //         secondaryForeground: Color(0xFFFAFAFA),
+  //         muted: Color(0xFF27272A),
+  //         mutedForeground: Color(0xFFA1A1AA),
+  //         destructive: Color(0xFF7F1D1D),
+  //         destructiveForeground: Color(0xFFFAFAFA),
+  //         error: Color(0xFF7F1D1D),
+  //         errorForeground: Color(0xFFFAFAFA),
+  //         border: Color(0xFF27272A),
+  //       ),
+  //       enabledHoveredSaturation: 1.2,
+  //       enabledHoveredValue: 0.15,
+  //       disabledSaturation: 0.5,
+  //       disabledValue: 0.75,
+  //     ),
+  //   ),
+  // );
+
   static final zinc = (
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
         enabled: FStateColorScheme(
-          brightness: Brightness.light,
-          disabledColorLightness: 0.4,
           background: Color(0xFFFFFFFF),
           foreground: Color(0xFF09090B),
           primary: Color(0xFF18181B),
@@ -28,8 +77,6 @@ extension FThemes on Never {
           border: Color(0xFFE4E4E7),
         ),
         enabledHovered: FStateColorScheme(
-          brightness: Brightness.light,
-          disabledColorLightness: 0.4,
           background: Color(0xFFFFFFFF),
           foreground: Color(0xFF0A0A0C),
           primary: Color(0xFF202023),
@@ -45,8 +92,6 @@ extension FThemes on Never {
           border: Color(0xFFEDEDED),
         ),
         disabled: FStateColorScheme(
-          brightness: Brightness.light,
-          disabledColorLightness: 0.4,
           background: Color(0xFFF7F7F7),
           foreground: Color(0xFFB3B3B5),
           primary: Color(0xFF6E6E72),
@@ -67,8 +112,6 @@ extension FThemes on Never {
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
         enabled: FStateColorScheme(
-          brightness: Brightness.light,
-          disabledColorLightness: 0.4,
           background: Color(0xFF09090B),
           foreground: Color(0xFFFAFAFA),
           primary: Color(0xFFFAFAFA),
@@ -84,25 +127,21 @@ extension FThemes on Never {
           border: Color(0xFF27272A),
         ),
         enabledHovered: FStateColorScheme(
-          brightness: Brightness.dark,
-          disabledColorLightness: 0.8,
           background: Color(0xFF070709),
           foreground: Color(0xFFE5E5E5),
           primary: Color(0xFFE5E5E5),
           primaryForeground: Color(0xFF121212),
-          secondary: Color(0xFF1F1F21),
+          secondary: Color(0xFF232325),
           secondaryForeground: Color(0xFFE5E5E5),
           muted: Color(0xFF1F1F21),
           mutedForeground: Color(0xFF8A8A94),
           destructive: Color(0xFF6B1717),
           destructiveForeground: Color(0xFFE5E5E5),
-          error: Color(0xFF6B1717),
+          error: Color(0xFF731A1A),
           errorForeground: Color(0xFFE5E5E5),
           border: Color(0xFF1F1F21),
         ),
         disabled: FStateColorScheme(
-          brightness: Brightness.dark,
-          disabledColorLightness: 0.8,
           background: Color(0xFF1A1A1C),
           foreground: Color(0xFF737373),
           primary: Color(0xFF4D4D4F),

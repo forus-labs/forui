@@ -152,7 +152,7 @@ class _FResizableState extends State<FResizable> {
       'The number of FResizableData should be equal to the number of children.',
     );
 
-    final (:horizontal, :vertical) = (widget.style ?? context.theme.resizableStyle).dividerStyles;
+    final style = widget.style ?? context.theme.resizableStyle;
     if (widget.axis == Axis.horizontal) {
       return SizedBox(
         height: widget.crossAxisExtent,
@@ -176,7 +176,7 @@ class _FResizableState extends State<FResizable> {
                 for (var i = 0; i < widget.children.length - 1; i++)
                   HorizontalDivider(
                     controller: widget.controller,
-                    style: horizontal,
+                    style: style.horizontalDividerStyle,
                     type: widget.divider,
                     left: i,
                     right: i + 1,
@@ -214,7 +214,7 @@ class _FResizableState extends State<FResizable> {
                 for (var i = 0; i < widget.children.length - 1; i++)
                   VerticalDivider(
                     controller: widget.controller,
-                    style: vertical,
+                    style: style.verticalDividerStyle,
                     type: widget.divider,
                     left: i,
                     right: i + 1,
@@ -235,61 +235,70 @@ class _FResizableState extends State<FResizable> {
 
 /// A [FResizable]'s style.
 final class FResizableStyle with Diagnosticable {
-  /// The divider styles.
-  final ({FResizableDividerStyle horizontal, FResizableDividerStyle vertical}) dividerStyles;
+  /// The horizontal divider style.
+  final FResizableDividerStyle horizontalDividerStyle;
+
+  /// The vertical divider style.
+  final FResizableDividerStyle verticalDividerStyle;
 
   /// Creates a [FResizableStyle].
-  FResizableStyle({required this.dividerStyles});
+  FResizableStyle({
+    required this.horizontalDividerStyle,
+    required this.verticalDividerStyle,
+  });
 
   /// Creates a [FResizableStyle] that inherits its properties from [colorScheme].
-  FResizableStyle.inherit({required FStateColorScheme colorScheme})
+  FResizableStyle.inherit({required FColorScheme colorScheme})
       : this(
-          dividerStyles: (
-            horizontal: FResizableDividerStyle(
-              color: colorScheme.border,
-              thumbStyle: FResizableDividerThumbStyle(
-                backgroundColor: colorScheme.border,
-                foregroundColor: colorScheme.foreground,
-                height: 20,
-                width: 10,
-              ),
+          horizontalDividerStyle: FResizableDividerStyle(
+            color: colorScheme.enabled.border,
+            thumbStyle: FResizableDividerThumbStyle(
+              backgroundColor: colorScheme.enabled.border,
+              foregroundColor: colorScheme.enabled.foreground,
+              height: 20,
+              width: 10,
             ),
-            vertical: FResizableDividerStyle(
-              color: colorScheme.border,
-              thumbStyle: FResizableDividerThumbStyle(
-                backgroundColor: colorScheme.border,
-                foregroundColor: colorScheme.foreground,
-                height: 10,
-                width: 20,
-              ),
+          ),
+          verticalDividerStyle: FResizableDividerStyle(
+            color: colorScheme.enabled.border,
+            thumbStyle: FResizableDividerThumbStyle(
+              backgroundColor: colorScheme.enabled.border,
+              foregroundColor: colorScheme.enabled.foreground,
+              height: 10,
+              width: 20,
             ),
           ),
         );
 
   /// Returns a copy of this [FResizableStyle] with the given properties replaced.
   @useResult
-  FResizableStyle copyWith({FResizableDividerStyle? horizontal, FResizableDividerStyle? vertical}) => FResizableStyle(
-        dividerStyles: (
-          horizontal: horizontal ?? dividerStyles.horizontal,
-          vertical: vertical ?? dividerStyles.vertical,
-        ),
+  FResizableStyle copyWith({
+    FResizableDividerStyle? horizontalDividerStyle,
+    FResizableDividerStyle? verticalDividerStyle,
+  }) =>
+      FResizableStyle(
+        horizontalDividerStyle: horizontalDividerStyle ?? this.horizontalDividerStyle,
+        verticalDividerStyle: verticalDividerStyle ?? this.verticalDividerStyle,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('dividerStyles.horizontal', dividerStyles.horizontal))
-      ..add(DiagnosticsProperty('dividerStyles.vertical', dividerStyles.vertical));
+      ..add(DiagnosticsProperty('horizontalDividerStyle', horizontalDividerStyle))
+      ..add(DiagnosticsProperty('verticalDividerStyle', verticalDividerStyle));
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FResizableStyle && runtimeType == other.runtimeType && dividerStyles == other.dividerStyles;
+      other is FResizableStyle &&
+          runtimeType == other.runtimeType &&
+          horizontalDividerStyle == other.horizontalDividerStyle &&
+          verticalDividerStyle == other.verticalDividerStyle;
 
   @override
-  int get hashCode => dividerStyles.hashCode;
+  int get hashCode => horizontalDividerStyle.hashCode ^ verticalDividerStyle.hashCode;
 }
 
 @internal

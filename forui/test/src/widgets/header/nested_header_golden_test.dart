@@ -19,14 +19,14 @@ void main() {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FHeader.nested(
                 title: const Text('Title'),
-                leftActions: [
+                prefixActions: [
                   FHeaderAction.back(onPress: () {}),
                   FHeaderAction(
                     icon: FIcon(FAssets.icons.alarmClock),
                     onPress: null,
                   ),
                 ],
-                rightActions: [
+                suffixActions: [
                   FHeaderAction(
                     icon: FIcon(FAssets.icons.plus),
                     onPress: () {},

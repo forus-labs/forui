@@ -81,7 +81,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                     padding: const EdgeInsets.all(2.0),
                     child: FAssets.icons.chevronRight(
                       height: 15,
-                      colorFilter: ColorFilter.mode(context.theme.colorScheme.primary, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(widget.style.enabledIconColor, BlendMode.srcIn),
                     ),
                   ),
                 ),
@@ -197,7 +197,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
   /// The header icons' disabled color.
   final Color disabledIconColor;
 
-  /// The arrow turn animation's duration. Defaults to `Duration(milliseconds: 200)`.
+  /// The arrow turn animation's duration. Defaults to 200ms.
   final Duration animationDuration;
 
   /// Creates a [FCalendarHeaderStyle].
@@ -211,7 +211,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
 
   /// Creates a [FCalendarHeaderStyle] that inherits its values from the given [colorScheme] and [typography].
   factory FCalendarHeaderStyle.inherit({
-    required FStateColorScheme colorScheme,
+    required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
   }) {
@@ -219,24 +219,26 @@ final class FCalendarHeaderStyle with Diagnosticable {
     return FCalendarHeaderStyle(
       buttonStyle: outline.copyWith(
         enabledBoxDecoration: outline.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+        enabledHoverBoxDecoration: outline.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
         disabledBoxDecoration: outline.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
       ),
-      headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-      enabledIconColor: colorScheme.mutedForeground,
-      disabledIconColor: colorScheme.mutedForeground.withOpacity(0.5),
+      headerTextStyle: typography.base.copyWith(color: colorScheme.enabled.primary, fontWeight: FontWeight.w600),
+      enabledIconColor: colorScheme.enabled.mutedForeground,
+      disabledIconColor: colorScheme.disabled.mutedForeground,
     );
   }
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   @useResult
   FCalendarHeaderStyle copyWith({
+    FButtonCustomStyle? buttonStyle,
     TextStyle? headerTextStyle,
     Color? enabledIconColor,
     Color? disabledIconColor,
     Duration? animationDuration,
   }) =>
       FCalendarHeaderStyle(
-        buttonStyle: buttonStyle,
+        buttonStyle: buttonStyle ?? this.buttonStyle,
         headerTextStyle: headerTextStyle ?? this.headerTextStyle,
         enabledIconColor: enabledIconColor ?? this.enabledIconColor,
         disabledIconColor: disabledIconColor ?? this.disabledIconColor,

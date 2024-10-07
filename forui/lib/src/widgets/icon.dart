@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-/// The [FIconStyle] that this [FInheritedIconStyle]'s widget subtree should inherit.
-class FInheritedIconStyle extends InheritedWidget {
+/// The [FIconStyle] that this [FIconStyleData]'s widget subtree should inherit.
+class FIconStyleData extends InheritedWidget {
   /// The icon's data.
   final FIconStyle style;
 
   /// Creates a [FIconStyle].
-  const FInheritedIconStyle({
+  const FIconStyleData({
     required this.style,
     required super.child,
     super.key,
   });
 
   @override
-  bool updateShouldNotify(FInheritedIconStyle old) => style != old.style;
+  bool updateShouldNotify(FIconStyleData old) => style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -27,10 +27,10 @@ class FInheritedIconStyle extends InheritedWidget {
 
 /// The default properties of [FIcon]s in a widget subtree.
 class FIconStyle with Diagnosticable {
-  /// The icon style from the closest instance of [FInheritedIconStyle] that encloses the given context, or
+  /// The icon style from the closest instance of [FIconStyleData] that encloses the given context, or
   /// [FStyle.iconStyle] otherwise.
   static FIconStyle of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<FInheritedIconStyle>()?.style ?? context.theme.style.iconStyle;
+      context.dependOnInheritedWidgetOfExactType<FIconStyleData>()?.style ?? context.theme.style.iconStyle;
 
   /// The icon's color.
   final Color color;
