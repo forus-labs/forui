@@ -115,17 +115,17 @@ final class FColorScheme with Diagnosticable {
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color hover(Color foreground, [Color? background]) => Color.alphaBlend(
-    foreground.withOpacity(0.9),
-    background ?? this.background,
-  );
+        foreground.withOpacity(0.9),
+        background ?? this.background,
+      );
 
   /// Returns a disabled color for the [foreground] on the [background].
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color disable(Color foreground, [Color? background]) => Color.alphaBlend(
-    foreground.withOpacity(0.5),
-    background ?? this.background,
-  );
+        foreground.withOpacity(0.5),
+        background ?? this.background,
+      );
 
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   ///
@@ -198,21 +198,21 @@ final class FColorScheme with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FColorScheme &&
-              brightness == other.brightness &&
-              background == other.background &&
-              foreground == other.foreground &&
-              primary == other.primary &&
-              primaryForeground == other.primaryForeground &&
-              secondary == other.secondary &&
-              secondaryForeground == other.secondaryForeground &&
-              muted == other.muted &&
-              mutedForeground == other.mutedForeground &&
-              destructive == other.destructive &&
-              destructiveForeground == other.destructiveForeground &&
-              error == other.error &&
-              errorForeground == other.errorForeground &&
-              border == other.border;
+      other is FColorScheme &&
+          brightness == other.brightness &&
+          background == other.background &&
+          foreground == other.foreground &&
+          primary == other.primary &&
+          primaryForeground == other.primaryForeground &&
+          secondary == other.secondary &&
+          secondaryForeground == other.secondaryForeground &&
+          muted == other.muted &&
+          mutedForeground == other.mutedForeground &&
+          destructive == other.destructive &&
+          destructiveForeground == other.destructiveForeground &&
+          error == other.error &&
+          errorForeground == other.errorForeground &&
+          border == other.border;
 
   @override
   int get hashCode =>

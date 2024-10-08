@@ -96,19 +96,19 @@ final class FBottomNavigationBarItemStyle with Diagnosticable {
 
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and
   /// [FTypography].
-  FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography}):
-      this(
-        activeIconColor: colorScheme.primary,
-        inactiveIconColor: colorScheme.disable(colorScheme.foreground),
-        activeTextStyle: typography.base.copyWith(
-          color: colorScheme.primary,
-          fontSize: 10,
-        ),
-        inactiveTextStyle: typography.base.copyWith(
-          color: colorScheme.disable(colorScheme.foreground),
-          fontSize: 10,
-        ),
-      );
+  FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+      : this(
+          activeIconColor: colorScheme.primary,
+          inactiveIconColor: colorScheme.disable(colorScheme.foreground),
+          activeTextStyle: typography.base.copyWith(
+            color: colorScheme.primary,
+            fontSize: 10,
+          ),
+          inactiveTextStyle: typography.base.copyWith(
+            color: colorScheme.disable(colorScheme.foreground),
+            fontSize: 10,
+          ),
+        );
 
   /// Returns a copy of this [FBottomNavigationBarItemStyle] with the given properties replaced.
   @useResult

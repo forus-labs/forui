@@ -96,15 +96,15 @@ final class FRootHeaderStyle with Diagnosticable {
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  }): this(
-    titleTextStyle: typography.xl3.copyWith(
-      color: colorScheme.foreground,
-      fontWeight: FontWeight.w700,
-      height: 1,
-    ),
-    actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 30),
-    padding: style.pagePadding.copyWith(bottom: 15),
-  );
+  }) : this(
+          titleTextStyle: typography.xl3.copyWith(
+            color: colorScheme.foreground,
+            fontWeight: FontWeight.w700,
+            height: 1,
+          ),
+          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 30),
+          padding: style.pagePadding.copyWith(bottom: 15),
+        );
 
   /// Returns a copy of this [FRootHeaderStyle] with the given properties replaced.
   @useResult

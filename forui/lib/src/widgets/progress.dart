@@ -99,16 +99,17 @@ final class FProgressStyle with Diagnosticable {
   });
 
   /// Creates a [FProgressStyle] that inherits its properties from [colorScheme] and [style].
-  FProgressStyle.inherit({required FColorScheme colorScheme, required FStyle style}): this(
-      backgroundDecoration: BoxDecoration(
-        borderRadius: style.borderRadius,
-        color: colorScheme.secondary,
-      ),
-      progressDecoration: BoxDecoration(
-        borderRadius: style.borderRadius,
-        color: colorScheme.primary,
-      ),
-  );
+  FProgressStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+      : this(
+          backgroundDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.secondary,
+          ),
+          progressDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.primary,
+          ),
+        );
 
   /// Returns a copy of this [FProgressStyle] with the given properties replaced.
   @useResult

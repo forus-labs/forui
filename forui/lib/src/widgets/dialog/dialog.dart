@@ -193,22 +193,23 @@ final class FDialogStyle with Diagnosticable {
     required FColorScheme colorScheme,
     required FTypography typography,
   }) : this(
-            decoration: BoxDecoration(
-              borderRadius: style.borderRadius,
-              color: colorScheme.background,
-            ),
-            horizontalStyle: FDialogContentStyle.inherit(
-              colorScheme: colorScheme,
-              typography: typography,
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-              actionPadding: 7,
-            ),
-            verticalStyle: FDialogContentStyle.inherit(
-              colorScheme: colorScheme,
-              typography: typography,
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-              actionPadding: 8,
-            ),);
+          decoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.background,
+          ),
+          horizontalStyle: FDialogContentStyle.inherit(
+            colorScheme: colorScheme,
+            typography: typography,
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+            actionPadding: 7,
+          ),
+          verticalStyle: FDialogContentStyle.inherit(
+            colorScheme: colorScheme,
+            typography: typography,
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+            actionPadding: 8,
+          ),
+        );
 
   /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
   @useResult

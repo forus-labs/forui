@@ -183,8 +183,8 @@ void main() {
 
       test(
         'blank font family',
-            () => expect(
-              () => FTypography.inherit(
+        () => expect(
+          () => FTypography.inherit(
             colorScheme: colorScheme,
             defaultFontFamily: '',
           ),
