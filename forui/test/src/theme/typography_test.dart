@@ -50,7 +50,8 @@ void main() {
     });
 
     group('inherit constructor', () {
-      const stateColorScheme = FStateColorScheme(
+      const colorScheme = FColorScheme(
+        brightness: Brightness.light,
         background: Colors.black,
         foreground: Colors.black12,
         primary: Colors.black26,
@@ -66,13 +67,6 @@ void main() {
         border: Colors.lightBlue,
       );
 
-      const colorScheme = FColorScheme(
-        brightness: Brightness.light,
-        enabled: stateColorScheme,
-        enabledHovered: stateColorScheme,
-        disabled: stateColorScheme,
-      );
-
       test('no arguments', () {
         typography = FTypography.inherit(colorScheme: colorScheme);
 
@@ -80,7 +74,7 @@ void main() {
         expect(
           typography.xs,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 12,
             height: 1,
@@ -89,7 +83,7 @@ void main() {
         expect(
           typography.sm,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 14,
             height: 1.25,
@@ -98,7 +92,7 @@ void main() {
         expect(
           typography.base,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 16,
             height: 1.5,
@@ -107,7 +101,7 @@ void main() {
         expect(
           typography.lg,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 18,
             height: 1.75,
@@ -116,7 +110,7 @@ void main() {
         expect(
           typography.xl,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 20,
             height: 1.75,
@@ -125,7 +119,7 @@ void main() {
         expect(
           typography.xl2,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 22,
             height: 2,
@@ -134,7 +128,7 @@ void main() {
         expect(
           typography.xl3,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 30,
             height: 2.25,
@@ -143,7 +137,7 @@ void main() {
         expect(
           typography.xl4,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 36,
             height: 2.5,
@@ -152,7 +146,7 @@ void main() {
         expect(
           typography.xl5,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 48,
             height: 1,
@@ -161,7 +155,7 @@ void main() {
         expect(
           typography.xl6,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 60,
             height: 1,
@@ -170,7 +164,7 @@ void main() {
         expect(
           typography.xl7,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 72,
             height: 1,
@@ -179,7 +173,7 @@ void main() {
         expect(
           typography.xl8,
           TextStyle(
-            color: stateColorScheme.foreground,
+            color: colorScheme.foreground,
             fontFamily: typography.defaultFontFamily,
             fontSize: 96,
             height: 1,
@@ -189,8 +183,8 @@ void main() {
 
       test(
         'blank font family',
-        () => expect(
-          () => FTypography.inherit(
+            () => expect(
+              () => FTypography.inherit(
             colorScheme: colorScheme,
             defaultFontFamily: '',
           ),

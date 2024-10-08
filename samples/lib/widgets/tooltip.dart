@@ -47,7 +47,12 @@ class TooltipPage extends StatelessWidget {
                         child: FButton(
                           style: FButtonStyle.outline,
                           onPress: () {},
-                          label: const Text('Long press/Hover'),
+                          label: Text(
+                            [
+                              if (longPress) 'Long press',
+                              if (hover) 'Hover',
+                            ].join('/'),
+                          ),
                         ),
                       ),
                     ),

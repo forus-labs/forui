@@ -13,7 +13,9 @@
 
 * Add `FIcon`.
 
-* Add `FStateColorScheme`.
+* Add `FColorScheme.disable(...)`.
+
+* Add `FColorScheme.hover(...)`.
 
 ### Changes
 
@@ -73,8 +75,6 @@
 * **Breaking** Change `FLabelStyle.horizontal` to `FLabelStyle.horizontalStyle`.
 
 * **Breaking** Change `FLabelStyle.vertical` to `FLabelStyle.verticalStyle`.
-
-* **Breaking** Change `FColorScheme` to support different color scheme variants for different states.
 
 ### Fixes
 

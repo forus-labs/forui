@@ -124,31 +124,31 @@ final class FAlertStyles with Diagnosticable {
   FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
           primary: FAlertCustomStyle(
-            iconColor: colorScheme.enabled.foreground,
+            iconColor: colorScheme.foreground,
             titleTextStyle: typography.base.copyWith(
               fontWeight: FontWeight.w500,
-              color: colorScheme.enabled.foreground,
+              color: colorScheme.foreground,
               height: 1.2,
             ),
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.enabled.foreground),
+            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
             decoration: BoxDecoration(
-              border: Border.all(color: colorScheme.enabled.border),
+              border: Border.all(color: colorScheme.border),
               borderRadius: style.borderRadius,
-              color: colorScheme.enabled.background,
+              color: colorScheme.background,
             ),
           ),
           destructive: FAlertCustomStyle(
-            iconColor: colorScheme.enabled.destructive,
+            iconColor: colorScheme.destructive,
             titleTextStyle: typography.base.copyWith(
               fontWeight: FontWeight.w500,
-              color: colorScheme.enabled.destructive,
+              color: colorScheme.destructive,
               height: 1.2,
             ),
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.enabled.destructive),
+            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.destructive),
             decoration: BoxDecoration(
-              border: Border.all(color: colorScheme.enabled.destructive),
+              border: Border.all(color: colorScheme.destructive),
               borderRadius: style.borderRadius,
-              color: colorScheme.enabled.background,
+              color: colorScheme.background,
             ),
           ),
         );

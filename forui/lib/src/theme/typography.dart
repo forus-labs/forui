@@ -124,24 +124,18 @@ final class FTypography with Diagnosticable {
   FTypography.inherit({
     required FColorScheme colorScheme,
     this.defaultFontFamily = 'packages/forui/Inter',
-  })  : xs = TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
-        sm =
-            TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
-        base =
-            TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
-        lg =
-            TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 18, height: 1.75),
-        xl =
-            TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 20, height: 1.75),
-        xl2 = TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 22, height: 2),
-        xl3 =
-            TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 30, height: 2.25),
-        xl4 =
-            TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 36, height: 2.5),
-        xl5 = TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 48, height: 1),
-        xl6 = TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 60, height: 1),
-        xl7 = TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 72, height: 1),
-        xl8 = TextStyle(color: colorScheme.enabled.foreground, fontFamily: defaultFontFamily, fontSize: 96, height: 1),
+  })  : xs = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
+        sm = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
+        base = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
+        lg = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 18, height: 1.75),
+        xl = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 20, height: 1.75),
+        xl2 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 22, height: 2),
+        xl3 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 30, height: 2.25),
+        xl4 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 36, height: 2.5),
+        xl5 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 48, height: 1),
+        xl6 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 60, height: 1),
+        xl7 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 72, height: 1),
+        xl8 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 96, height: 1),
         assert(defaultFontFamily.isNotEmpty, 'The defaultFontFamily should not be empty.');
 
   /// Scales the fields of this [FTypography] by the given fields.

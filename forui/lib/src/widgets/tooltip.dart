@@ -322,11 +322,11 @@ final class FTooltipStyle with Diagnosticable {
   FTooltipStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
           decoration: BoxDecoration(
-            color: colorScheme.enabled.background,
+            color: colorScheme.background,
             borderRadius: style.borderRadius,
             border: Border.all(
               width: style.borderWidth,
-              color: colorScheme.enabled.border,
+              color: colorScheme.border,
             ),
             boxShadow: shadow,
           ),

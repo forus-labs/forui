@@ -99,14 +99,12 @@ final class FAvatarStyle with Diagnosticable {
   });
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
-  FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography}): this(
-    backgroundColor: colorScheme.enabled.muted,
-    foregroundColor: colorScheme.enabled.mutedForeground,
-    textStyle: typography.base.copyWith(
-      color: colorScheme.enabled.mutedForeground,
-      height: 0,
-    ),
-  );
+  FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+      : this(
+          backgroundColor: colorScheme.muted,
+          foregroundColor: colorScheme.mutedForeground,
+          textStyle: typography.base.copyWith(color: colorScheme.mutedForeground, height: 0),
+        );
 
   /// Returns a copy of this [FAvatarStyle] with the given properties replaced.
   @useResult
@@ -144,5 +142,6 @@ final class FAvatarStyle with Diagnosticable {
           textStyle == other.textStyle;
 
   @override
-  int get hashCode => backgroundColor.hashCode ^ foregroundColor.hashCode ^ fadeInDuration.hashCode ^ textStyle.hashCode;
+  int get hashCode =>
+      backgroundColor.hashCode ^ foregroundColor.hashCode ^ fadeInDuration.hashCode ^ textStyle.hashCode;
 }

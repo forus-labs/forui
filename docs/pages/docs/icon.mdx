@@ -68,6 +68,11 @@ FIcon.data(
 
 ### `FIcon.image(...)`
 
+<Callout type="warning">
+    It is important that the image's background is transparent. An image with a non-transparent background will be
+    completely filled with a single color.
+</Callout>
+
 ```dart
 FIcon.image(
   NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
@@ -130,11 +135,6 @@ FIcon.raw(
 </Tabs>
 
 ### Image
-
-<Callout type="warning">
-    It is important that the image's background is transparent. An image with a non-transparent background will be
-    completely filled with a single color.
-</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>

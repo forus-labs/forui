@@ -51,23 +51,23 @@ final class FStyle with Diagnosticable {
     required FTypography typography,
   }) : this(
           enabledFormFieldStyle: FFormFieldStyle.inherit(
-            labelColor: colorScheme.enabled.primary,
-            descriptionColor: colorScheme.enabled.mutedForeground,
+            labelColor: colorScheme.primary,
+            descriptionColor: colorScheme.mutedForeground,
             typography: typography,
           ),
           disabledFormFieldStyle: FFormFieldStyle.inherit(
-            labelColor: colorScheme.disabled.primary,
-            descriptionColor: colorScheme.disabled.mutedForeground,
+            labelColor: colorScheme.disable(colorScheme.primary),
+            descriptionColor: colorScheme.disable(colorScheme.mutedForeground),
             typography: typography,
           ),
           errorFormFieldStyle: FFormFieldErrorStyle.inherit(
-            labelColor: colorScheme.enabled.error,
-            descriptionColor: colorScheme.enabled.mutedForeground,
-            errorColor: colorScheme.enabled.error,
+            labelColor: colorScheme.error,
+            descriptionColor: colorScheme.mutedForeground,
+            errorColor: colorScheme.error,
             typography: typography,
           ),
           iconStyle: FIconStyle(
-            color: colorScheme.enabled.primary,
+            color: colorScheme.primary,
             size: 20,
           ),
         );

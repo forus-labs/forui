@@ -251,19 +251,19 @@ final class FResizableStyle with Diagnosticable {
   FResizableStyle.inherit({required FColorScheme colorScheme})
       : this(
           horizontalDividerStyle: FResizableDividerStyle(
-            color: colorScheme.enabled.border,
+            color: colorScheme.border,
             thumbStyle: FResizableDividerThumbStyle(
-              backgroundColor: colorScheme.enabled.border,
-              foregroundColor: colorScheme.enabled.foreground,
+              backgroundColor: colorScheme.border,
+              foregroundColor: colorScheme.foreground,
               height: 20,
               width: 10,
             ),
           ),
           verticalDividerStyle: FResizableDividerStyle(
-            color: colorScheme.enabled.border,
+            color: colorScheme.border,
             thumbStyle: FResizableDividerThumbStyle(
-              backgroundColor: colorScheme.enabled.border,
-              foregroundColor: colorScheme.enabled.foreground,
+              backgroundColor: colorScheme.border,
+              foregroundColor: colorScheme.foreground,
               height: 10,
               width: 20,
             ),

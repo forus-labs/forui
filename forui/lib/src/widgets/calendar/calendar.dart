@@ -192,8 +192,8 @@ final class FCalendarStyle with Diagnosticable {
           yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
           decoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            border: Border.all(color: colorScheme.enabled.border),
-            color: colorScheme.enabled.background,
+            border: Border.all(color: colorScheme.border),
+            color: colorScheme.background,
           ),
         );
 

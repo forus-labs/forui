@@ -106,7 +106,7 @@ class FTheme extends StatelessWidget {
           child: DefaultTextStyle(
             style: data.typography.base.copyWith(
               fontFamily: data.typography.defaultFontFamily,
-              color: data.colorScheme.enabled.foreground,
+              color: data.colorScheme.foreground,
             ),
             child: child,
           ),

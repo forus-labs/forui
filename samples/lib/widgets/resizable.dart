@@ -15,7 +15,7 @@ class ResizablePage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.enabled.border),
+          border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
         ),
         child: FResizable(
@@ -51,7 +51,7 @@ class NoCascadingResizablePage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.enabled.border),
+          border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
         ),
         child: FResizable(
@@ -109,15 +109,15 @@ class Label extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.enabled.foreground, BlendMode.srcIn)),
+              icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
               const SizedBox(width: 3),
-              Text(label, style: typography.sm.copyWith(color: colorScheme.enabled.foreground)),
+              Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
             ],
           ),
           const SizedBox(height: 5),
           Text(
             '${format.format(start)} - ${format.format(end)}',
-            style: typography.sm.copyWith(color: colorScheme.enabled.foreground),
+            style: typography.sm.copyWith(color: colorScheme.foreground),
           ),
         ],
       ),
@@ -134,7 +134,7 @@ class HorizontalResizablePage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.enabled.border),
+          border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
         ),
         child: FResizable(
@@ -169,7 +169,7 @@ class NoThumbResizablePage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.enabled.border),
+          border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
         ),
         child: FResizable(
@@ -205,7 +205,7 @@ class NoDividerResizablePage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.enabled.border),
+          border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
         ),
         child: FResizable(

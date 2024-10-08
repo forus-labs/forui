@@ -59,18 +59,19 @@ final class FDividerStyles with Diagnosticable {
   FDividerStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [style].
-  FDividerStyles.inherit({required FColorScheme colorScheme, required FStyle style}): this(
-      horizontalStyle: FDividerStyle.inherit(
-        colorScheme: colorScheme,
-        style: style,
-        padding: FDividerStyle.defaultPadding.horizontalStyle,
-      ),
-      verticalStyle: FDividerStyle.inherit(
-        colorScheme: colorScheme,
-        style: style,
-        padding: FDividerStyle.defaultPadding.verticalStyle,
-      ),
-  );
+  FDividerStyles.inherit({required FColorScheme colorScheme, required FStyle style})
+      : this(
+          horizontalStyle: FDividerStyle.inherit(
+            colorScheme: colorScheme,
+            style: style,
+            padding: FDividerStyle.defaultPadding.horizontalStyle,
+          ),
+          verticalStyle: FDividerStyle.inherit(
+            colorScheme: colorScheme,
+            style: style,
+            padding: FDividerStyle.defaultPadding.verticalStyle,
+          ),
+        );
 
   /// Returns a copy of this [FDividerStyles] with the given properties replaced.
   @useResult
@@ -130,7 +131,11 @@ final class FDividerStyle with Diagnosticable {
     required FColorScheme colorScheme,
     required FStyle style,
     required EdgeInsetsGeometry padding,
-  }) : this(color: colorScheme.enabled.secondary, padding: padding, width: style.borderWidth);
+  }) : this(
+          color: colorScheme.secondary,
+          padding: padding,
+          width: style.borderWidth,
+        );
 
   /// Returns a copy of this [FDividerStyle] with the given properties replaced.
   @useResult

@@ -81,7 +81,10 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                     padding: const EdgeInsets.all(2.0),
                     child: FAssets.icons.chevronRight(
                       height: 15,
-                      colorFilter: ColorFilter.mode(widget.style.enabledIconColor, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                        widget.style.headerTextStyle.color ?? widget.style.enabledIconColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
@@ -222,9 +225,9 @@ final class FCalendarHeaderStyle with Diagnosticable {
         enabledHoverBoxDecoration: outline.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
         disabledBoxDecoration: outline.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
       ),
-      headerTextStyle: typography.base.copyWith(color: colorScheme.enabled.primary, fontWeight: FontWeight.w600),
-      enabledIconColor: colorScheme.enabled.mutedForeground,
-      disabledIconColor: colorScheme.disabled.mutedForeground,
+      headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+      enabledIconColor: colorScheme.mutedForeground,
+      disabledIconColor: colorScheme.disable(colorScheme.mutedForeground),
     );
   }
 

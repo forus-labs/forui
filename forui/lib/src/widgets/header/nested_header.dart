@@ -110,7 +110,7 @@ final class FNestedHeaderStyle with Diagnosticable {
     required FStyle style,
   }) : this(
           titleTextStyle: typography.xl.copyWith(
-            color: colorScheme.enabled.foreground,
+            color: colorScheme.foreground,
             fontWeight: FontWeight.w600,
             height: 1,
           ),

@@ -98,7 +98,7 @@ final class FRootHeaderStyle with Diagnosticable {
     required FStyle style,
   }): this(
     titleTextStyle: typography.xl3.copyWith(
-      color: colorScheme.enabled.foreground,
+      color: colorScheme.foreground,
       fontWeight: FontWeight.w700,
       height: 1,
     ),

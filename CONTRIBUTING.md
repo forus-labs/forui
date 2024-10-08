@@ -58,6 +58,13 @@ If you're stuck or unsure about anything, feel free to ask for help in our [disc
 
 ## Design Guidelines
 
+### Avoid translucent colors
+
+Translucent colors may not render as expected on different backgrounds. They are usually used as disabled and hovered
+states. Instead, `FColorScheme.disable` functions to generate colors for hover and disabled states respectively.
+
+Alternatively, use alpha-blending to generate an equivalent solid color.
+
 ### Be agnostic about state management
 
 There is a wide variety of competing state management packages. Picking one may discourage users of the other packages

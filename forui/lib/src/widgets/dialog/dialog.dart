@@ -121,19 +121,22 @@ class FDialog extends StatelessWidget {
         removeBottom: true,
         context: context,
         child: Align(
-          child: Semantics(
-            scopesRoute: true,
-            explicitChildNodes: true,
-            namesRoute: true,
-            label: semanticLabel,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minWidth: style.minWidth,
-                maxWidth: style.maxWidth,
-              ),
-              child: DecoratedBox(
-                decoration: style.decoration,
-                child: builder(context, style),
+          child: DefaultTextStyle(
+            style: context.theme.typography.base.copyWith(color: theme.colorScheme.foreground),
+            child: Semantics(
+              scopesRoute: true,
+              explicitChildNodes: true,
+              namesRoute: true,
+              label: semanticLabel,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: style.minWidth,
+                  maxWidth: style.maxWidth,
+                ),
+                child: DecoratedBox(
+                  decoration: style.decoration,
+                  child: builder(context, style),
+                ),
               ),
             ),
           ),
@@ -192,7 +195,7 @@ final class FDialogStyle with Diagnosticable {
   }) : this(
             decoration: BoxDecoration(
               borderRadius: style.borderRadius,
-              color: colorScheme.enabled.background,
+              color: colorScheme.background,
             ),
             horizontalStyle: FDialogContentStyle.inherit(
               colorScheme: colorScheme,

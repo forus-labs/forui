@@ -98,14 +98,14 @@ final class FBottomNavigationBarItemStyle with Diagnosticable {
   /// [FTypography].
   FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography}):
       this(
-        activeIconColor: colorScheme.enabled.primary,
-        inactiveIconColor: colorScheme.disabled.foreground,
+        activeIconColor: colorScheme.primary,
+        inactiveIconColor: colorScheme.disable(colorScheme.foreground),
         activeTextStyle: typography.base.copyWith(
-          color: colorScheme.enabled.primary,
+          color: colorScheme.primary,
           fontSize: 10,
         ),
         inactiveTextStyle: typography.base.copyWith(
-          color: colorScheme.disabled.foreground,
+          color: colorScheme.disable(colorScheme.foreground),
           fontSize: 10,
         ),
       );

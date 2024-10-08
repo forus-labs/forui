@@ -192,26 +192,26 @@ class FSelectGroupStyle with Diagnosticable {
       style: checkboxStyle.copyWith(
         enabledStyle: checkboxStyle.enabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.enabled.primary,
+            color: colorScheme.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
         ),
         disabledStyle: checkboxStyle.disabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.disabled.primary,
+            color: colorScheme.disable(colorScheme.primary),
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
         ),
         errorStyle: checkboxStyle.errorStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.enabled.primary,
+            color: colorScheme.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
           errorTextStyle: typography.sm.copyWith(
-            color: colorScheme.enabled.error,
+            color: colorScheme.error,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -223,26 +223,26 @@ class FSelectGroupStyle with Diagnosticable {
       style: radioStyle.copyWith(
         enabledStyle: radioStyle.enabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.enabled.primary,
+            color: colorScheme.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
         ),
         disabledStyle: radioStyle.disabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.disabled.primary,
+            color: colorScheme.disable(colorScheme.primary),
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disabled.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
         ),
         errorStyle: radioStyle.errorStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.enabled.primary,
+            color: colorScheme.primary,
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
           errorTextStyle: typography.sm.copyWith(
-            color: colorScheme.enabled.error,
+            color: colorScheme.error,
             fontWeight: FontWeight.w500,
           ),
         ),

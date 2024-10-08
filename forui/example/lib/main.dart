@@ -31,10 +31,9 @@ class _ApplicationState extends State<Application> {
   int index = 4;
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
       builder: (context, child) => FTheme(
-        data: FThemes.zinc.dark,
+        data: FThemes.zinc.light,
         child: child!,
       ),
       home: FScaffold(
@@ -76,5 +75,4 @@ class _ApplicationState extends State<Application> {
         ),
       ),
     );
-  }
 }

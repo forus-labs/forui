@@ -199,19 +199,19 @@ final class FSwitchStyle with Diagnosticable {
   /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
   FSwitchStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : this(
-          focusColor: colorScheme.enabled.primary,
+          focusColor: colorScheme.primary,
           labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
           enabledStyle: FSwitchStateStyle(
-            checkedColor: colorScheme.enabled.primary,
-            uncheckedColor: colorScheme.enabled.border,
-            thumbColor: colorScheme.enabled.background,
+            checkedColor: colorScheme.primary,
+            uncheckedColor: colorScheme.border,
+            thumbColor: colorScheme.background,
             labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
             descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
           ),
           disabledStyle: FSwitchStateStyle(
-            checkedColor: colorScheme.disabled.primary,
-            uncheckedColor: colorScheme.disabled.border,
-            thumbColor: colorScheme.enabled.background,
+            checkedColor: colorScheme.disable(colorScheme.primary),
+            uncheckedColor: colorScheme.disable(colorScheme.border),
+            thumbColor: colorScheme.background,
             labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
             descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
           ),

@@ -60,22 +60,22 @@ final class FTabsStyle with Diagnosticable {
   FTabsStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
           decoration: BoxDecoration(
-            border: Border.all(color: colorScheme.enabled.muted),
+            border: Border.all(color: colorScheme.muted),
             borderRadius: style.borderRadius,
-            color: colorScheme.enabled.muted,
+            color: colorScheme.muted,
           ),
           selectedLabelTextStyle: typography.sm.copyWith(
             fontWeight: FontWeight.w500,
             fontFamily: typography.defaultFontFamily,
-            color: colorScheme.enabled.foreground,
+            color: colorScheme.foreground,
           ),
           unselectedLabelTextStyle: typography.sm.copyWith(
             fontWeight: FontWeight.w500,
             fontFamily: typography.defaultFontFamily,
-            color: colorScheme.enabled.mutedForeground,
+            color: colorScheme.mutedForeground,
           ),
           indicatorDecoration: BoxDecoration(
-            color: colorScheme.enabled.background,
+            color: colorScheme.background,
             borderRadius: style.borderRadius,
           ),
         );

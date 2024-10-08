@@ -79,9 +79,9 @@ final class FCardStyle with Diagnosticable {
   FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style}):
       this(
         decoration: BoxDecoration(
-          border: Border.all(color: colorScheme.enabled.border),
+          border: Border.all(color: colorScheme.border),
           borderRadius: style.borderRadius,
-          color: colorScheme.enabled.background,
+          color: colorScheme.background,
         ),
           contentStyle: FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
       );

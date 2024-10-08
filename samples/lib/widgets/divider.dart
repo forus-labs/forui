@@ -27,13 +27,13 @@ class DividerPage extends SampleScaffold {
             Text(
               'Flutter Forui',
               style: typography.xl2.copyWith(
-                color: colorScheme.enabled.foreground,
+                color: colorScheme.foreground,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Text(
               'An open-source widget library.',
-              style: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+              style: typography.sm.copyWith(color: colorScheme.mutedForeground),
             ),
             const FDivider(),
             SizedBox(
@@ -44,17 +44,17 @@ class DividerPage extends SampleScaffold {
                 children: [
                   Text(
                     'Blog',
-                    style: typography.sm.copyWith(color: colorScheme.enabled.foreground),
+                    style: typography.sm.copyWith(color: colorScheme.foreground),
                   ),
                   const FDivider(axis: Axis.vertical),
                   Text(
                     'Docs',
-                    style: typography.sm.copyWith(color: colorScheme.enabled.foreground),
+                    style: typography.sm.copyWith(color: colorScheme.foreground),
                   ),
                   const FDivider(axis: Axis.vertical),
                   Text(
                     'Source',
-                    style: typography.sm.copyWith(color: colorScheme.enabled.foreground),
+                    style: typography.sm.copyWith(color: colorScheme.foreground),
                   ),
                 ],
               ),

@@ -171,7 +171,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           DefaultTextStyle(
             style: theme.typography.base.copyWith(
               fontFamily: theme.typography.defaultFontFamily,
-              color: theme.colorScheme.enabled.foreground,
+              color: theme.colorScheme.foreground,
             ),
             child: widget.tabs[_controller.index].content,
           ),

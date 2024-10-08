@@ -205,55 +205,57 @@ final class FCalendarDayPickerStyle with Diagnosticable {
 
   /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
   factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
-    final textStyle = typography.base.copyWith(color: colorScheme.enabled.foreground, fontWeight: FontWeight.w500);
-    final mutedTextStyle =
-        typography.base.copyWith(color: colorScheme.disabled.mutedForeground, fontWeight: FontWeight.w500);
+    final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
+    final mutedTextStyle = typography.base.copyWith(
+      color: colorScheme.disable(colorScheme.mutedForeground),
+      fontWeight: FontWeight.w500,
+    );
 
     final disabled = FCalendarDayStyle(
       selectedStyle: FCalendarEntryStyle(
-        backgroundColor: colorScheme.enabled.primaryForeground,
+        backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
-        focusedBorderColor: colorScheme.enabled.primaryForeground,
+        focusedBorderColor: colorScheme.primaryForeground,
         radius: const Radius.circular(4),
       ),
       unselectedStyle: FCalendarEntryStyle(
-        backgroundColor: colorScheme.enabled.background,
+        backgroundColor: colorScheme.background,
         textStyle: mutedTextStyle,
-        focusedBorderColor: colorScheme.enabled.background,
+        focusedBorderColor: colorScheme.background,
         radius: const Radius.circular(4),
       ),
     );
 
     return FCalendarDayPickerStyle(
-      headerTextStyle: typography.xs.copyWith(color: colorScheme.enabled.mutedForeground),
+      headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
       selectableStyles: (
         current: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.enabled.foreground,
-            textStyle: typography.base.copyWith(color: colorScheme.enabled.background, fontWeight: FontWeight.w500),
-            focusedBorderColor: colorScheme.enabled.foreground,
+            backgroundColor: colorScheme.foreground,
+            textStyle: typography.base.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.enabled.background,
+            backgroundColor: colorScheme.background,
             textStyle: textStyle,
-            hoveredBackgroundColor: colorScheme.enabled.secondary,
-            focusedBorderColor: colorScheme.enabled.foreground,
+            hoveredBackgroundColor: colorScheme.secondary,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
         ),
         enclosing: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.enabled.primaryForeground,
+            backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
-            focusedBorderColor: colorScheme.enabled.foreground,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
           unselectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.enabled.background,
+            backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
-            hoveredBackgroundColor: colorScheme.enabled.primaryForeground,
-            focusedBorderColor: colorScheme.enabled.foreground,
+            hoveredBackgroundColor: colorScheme.secondary,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),
         ),

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,121 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A set of color schemes for different states that is part of a [FThemeData]. It is used to configure the color
-/// properties of Forui widgets.
-///
-/// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding colors
-/// of widget styles configured via `inherit(...)` constructors.
-///
-/// See:
-/// * [FThemes] for predefined themes and color schemes.
-/// * [FStateColorScheme] for more information.
-final class FColorScheme with Diagnosticable {
-  /// The system brightness.
-  ///
-  /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
-  final Brightness brightness;
-
-  /// The color scheme for enabled widgets, typically the default state.
-  final FStateColorScheme enabled;
-
-  /// The color scheme for enabled widgets that are hovered over.
-  final FStateColorScheme enabledHovered;
-
-  /// The color scheme for disabled widgets.
-  final FStateColorScheme disabled;
-
-  /// Creates a [FColorScheme].
-  const FColorScheme({
-    required this.brightness,
-    required this.enabled,
-    required this.enabledHovered,
-    required this.disabled,
-  });
-
-  /// Creates a [FColorScheme] by deriving the color schemes for the other states from the given [enabled] color scheme.
-  FColorScheme.inherit({
-    required Brightness brightness,
-    required FStateColorScheme enabled,
-    required double enabledHoveredSaturation,
-    required double enabledHoveredValue,
-    required double disabledSaturation,
-    required double disabledValue,
-  }): this(
-    brightness: brightness,
-    enabled: enabled,
-    enabledHovered: enabled.copyWith(
-      background: enabled.background.linear(enabledHoveredSaturation, enabledHoveredValue),
-      foreground: enabled.foreground.linear(enabledHoveredSaturation, enabledHoveredValue),
-      primary: enabled.primary.linear(enabledHoveredSaturation, enabledHoveredValue),
-      primaryForeground: enabled.primaryForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
-      secondary: enabled.secondary.linear(enabledHoveredSaturation, enabledHoveredValue),
-      secondaryForeground: enabled.secondaryForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
-      muted: enabled.muted.linear(enabledHoveredSaturation, enabledHoveredValue),
-      mutedForeground: enabled.mutedForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
-      destructive: enabled.destructive.linear(enabledHoveredSaturation, enabledHoveredValue),
-      destructiveForeground: enabled.destructiveForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
-      error: enabled.error.linear(enabledHoveredSaturation, enabledHoveredValue),
-      errorForeground: enabled.errorForeground.linear(enabledHoveredSaturation, enabledHoveredValue),
-      border: enabled.border.linear(enabledHoveredSaturation, enabledHoveredValue),
-    ),
-    disabled: enabled.copyWith(
-      background: enabled.background.linear(disabledSaturation, disabledValue),
-      foreground: enabled.foreground.linear(disabledSaturation, disabledValue),
-      primary: enabled.primary.linear(disabledSaturation, disabledValue),
-      primaryForeground: enabled.primaryForeground.linear(disabledSaturation, disabledValue),
-      secondary: enabled.secondary.linear(disabledSaturation, disabledValue),
-      secondaryForeground: enabled.secondaryForeground.linear(disabledSaturation, disabledValue),
-      muted: enabled.muted.linear(disabledSaturation, disabledValue),
-      mutedForeground: enabled.mutedForeground.linear(disabledSaturation, disabledValue),
-      destructive: enabled.destructive.linear(disabledSaturation, disabledValue),
-      destructiveForeground: enabled.destructiveForeground.linear(disabledSaturation, disabledValue),
-      error: enabled.error.linear(disabledSaturation, disabledValue),
-      errorForeground: enabled.errorForeground.linear(disabledSaturation, disabledValue),
-      border: enabled.border.linear(disabledSaturation, disabledValue),
-    ),
-  );
-
-  /// Returns a copy of this [FColorScheme] with the given properties replaced.
-  @useResult
-  FColorScheme copyWith({
-    Brightness? brightness,
-    FStateColorScheme? enabled,
-    FStateColorScheme? enabledHovered,
-    FStateColorScheme? disabled,
-  }) =>
-      FColorScheme(
-        brightness: brightness ?? this.brightness,
-        enabled: enabled ?? this.enabled,
-        enabledHovered: enabledHovered ?? this.enabledHovered,
-        disabled: disabled ?? this.disabled,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(EnumProperty('brightness', brightness))
-      ..add(DiagnosticsProperty('enabled', enabled))
-      ..add(DiagnosticsProperty('enabledHovered', enabledHovered))
-      ..add(DiagnosticsProperty('disabled', disabled));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FColorScheme &&
-          runtimeType == other.runtimeType &&
-          brightness == other.brightness &&
-          enabled == other.enabled &&
-          enabledHovered == other.enabledHovered &&
-          disabled == other.disabled;
-
-  @override
-  int get hashCode => brightness.hashCode ^ enabled.hashCode ^ enabledHovered.hashCode ^ disabled.hashCode;
-}
-
-/// A set of colors that is part of a [FColorScheme].
+/// A set of colors that is part of a [FThemeData]. It is used to configure the color properties of Forui widgets.
 ///
 /// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding colors
 /// of widget styles configured via `inherit(...)` constructors.
@@ -137,7 +21,12 @@ final class FColorScheme with Diagnosticable {
 /// visual elements on top of their respective background colors.
 ///
 /// See [FThemes] for predefined themes and color schemes.
-final class FStateColorScheme with Diagnosticable {
+final class FColorScheme with Diagnosticable {
+  /// The system brightness.
+  ///
+  /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
+  final Brightness brightness;
+
   /// The background color.
   ///
   /// Typically used as a background for [foreground] colored widgets.
@@ -201,11 +90,12 @@ final class FStateColorScheme with Diagnosticable {
   /// The border color.
   final Color border;
 
-  /// Creates a [FStateColorScheme].
+  /// Creates a [FColorScheme].
   ///
   /// **Note:**
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
-  const FStateColorScheme({
+  const FColorScheme({
+    required this.brightness,
     required this.background,
     required this.foreground,
     required this.primary,
@@ -221,10 +111,26 @@ final class FStateColorScheme with Diagnosticable {
     required this.border,
   });
 
+  /// Returns a hovered color for the [foreground] on the [background].
+  ///
+  /// [FColorScheme.background] is used if [background] is not given.
+  Color hover(Color foreground, [Color? background]) => Color.alphaBlend(
+    foreground.withOpacity(0.9),
+    background ?? this.background,
+  );
+
+  /// Returns a disabled color for the [foreground] on the [background].
+  ///
+  /// [FColorScheme.background] is used if [background] is not given.
+  Color disable(Color foreground, [Color? background]) => Color.alphaBlend(
+    foreground.withOpacity(0.5),
+    background ?? this.background,
+  );
+
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   ///
   /// ```dart
-  /// final scheme = FStateColorScheme(
+  /// final scheme = FColorScheme(
   ///   brightness: Brightness.light,
   ///   background: Colors.blue,
   ///   // Other arguments omitted for brevity
@@ -236,7 +142,8 @@ final class FStateColorScheme with Diagnosticable {
   /// print(copy.background); // Colors.blue
   /// ```
   @useResult
-  FStateColorScheme copyWith({
+  FColorScheme copyWith({
+    Brightness? brightness,
     Color? background,
     Color? foreground,
     Color? primary,
@@ -251,7 +158,8 @@ final class FStateColorScheme with Diagnosticable {
     Color? errorForeground,
     Color? border,
   }) =>
-      FStateColorScheme(
+      FColorScheme(
+        brightness: brightness ?? this.brightness,
         background: background ?? this.background,
         foreground: foreground ?? this.foreground,
         primary: primary ?? this.primary,
@@ -271,6 +179,7 @@ final class FStateColorScheme with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(EnumProperty('brightness', brightness))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))
       ..add(ColorProperty('primary', primary))
@@ -289,23 +198,25 @@ final class FStateColorScheme with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FStateColorScheme &&
-          background == other.background &&
-          foreground == other.foreground &&
-          primary == other.primary &&
-          primaryForeground == other.primaryForeground &&
-          secondary == other.secondary &&
-          secondaryForeground == other.secondaryForeground &&
-          muted == other.muted &&
-          mutedForeground == other.mutedForeground &&
-          destructive == other.destructive &&
-          destructiveForeground == other.destructiveForeground &&
-          error == other.error &&
-          errorForeground == other.errorForeground &&
-          border == other.border;
+          other is FColorScheme &&
+              brightness == other.brightness &&
+              background == other.background &&
+              foreground == other.foreground &&
+              primary == other.primary &&
+              primaryForeground == other.primaryForeground &&
+              secondary == other.secondary &&
+              secondaryForeground == other.secondaryForeground &&
+              muted == other.muted &&
+              mutedForeground == other.mutedForeground &&
+              destructive == other.destructive &&
+              destructiveForeground == other.destructiveForeground &&
+              error == other.error &&
+              errorForeground == other.errorForeground &&
+              border == other.border;
 
   @override
   int get hashCode =>
+      brightness.hashCode ^
       background.hashCode ^
       foreground.hashCode ^
       primary.hashCode ^
@@ -319,22 +230,4 @@ final class FStateColorScheme with Diagnosticable {
       error.hashCode ^
       errorForeground.hashCode ^
       border.hashCode;
-}
-
-extension on Color {
-  // Color nonLinear(double saturation, double saturationGamma, double value, double valueGamma) {
-  //   final original = HSVColor.fromColor(this);
-  //   return original
-  //       .withSaturation(clampDouble(pow(original.saturation + saturation, saturationGamma).toDouble(), 0, 1))
-  //       .withValue(clampDouble(pow(original.value + value, valueGamma).toDouble(), 0, 1))
-  //       .toColor();
-  // }
-
-  Color linear(double saturation, double value) {
-    final original = HSVColor.fromColor(this);
-    return original
-        .withSaturation(clampDouble(original.saturation * saturation, 0, 1))
-        .withValue(clampDouble(original.value * value, 0, 1))
-        .toColor();
-  }
 }

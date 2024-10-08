@@ -179,24 +179,24 @@ class FRadioStyle with Diagnosticable {
         enabledStyle: FRadioStateStyle(
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.enabled.primary,
-          selectedColor: colorScheme.enabled.primary,
-          backgroundColor: colorScheme.enabled.background,
+          borderColor: colorScheme.primary,
+          selectedColor: colorScheme.primary,
+          backgroundColor: colorScheme.background,
         ),
         disabledStyle: FRadioStateStyle(
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.disabled.primary,
-          selectedColor: colorScheme.disabled.primary,
-          backgroundColor: colorScheme.enabled.background,
+          borderColor: colorScheme.disable(colorScheme.primary),
+          selectedColor: colorScheme.disable(colorScheme.primary),
+          backgroundColor: colorScheme.background,
         ),
         errorStyle: FRadioErrorStyle(
           labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: colorScheme.enabled.error,
-          selectedColor: colorScheme.enabled.error,
-          backgroundColor: colorScheme.enabled.background,
+          borderColor: colorScheme.error,
+          selectedColor: colorScheme.error,
+          backgroundColor: colorScheme.background,
         ),
       );
 

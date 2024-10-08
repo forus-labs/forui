@@ -96,10 +96,10 @@ final class FCardContentStyle with Diagnosticable {
   FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography}): this(
     titleTextStyle: typography.xl2.copyWith(
       fontWeight: FontWeight.w600,
-      color: colorScheme.enabled.foreground,
+      color: colorScheme.foreground,
       height: 1.5,
     ),
-    subtitleTextStyle: typography.sm.copyWith(color: colorScheme.enabled.mutedForeground),
+    subtitleTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
   );
 
   /// Returns a copy of this [FCardContentStyle] with the given properties replaced.

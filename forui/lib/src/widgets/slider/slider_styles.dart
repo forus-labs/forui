@@ -29,36 +29,36 @@ final class FSliderStyles with Diagnosticable {
     final enabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-      activeColor: colorScheme.enabled.primary,
-      inactiveColor: colorScheme.enabled.secondary,
+      activeColor: colorScheme.primary,
+      inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
-        tickColor: colorScheme.enabled.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.enabled.mutedForeground),
+        tickColor: colorScheme.mutedForeground,
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
-        color: colorScheme.enabled.primaryForeground,
-        borderColor: colorScheme.enabled.primary,
+        color: colorScheme.primaryForeground,
+        borderColor: colorScheme.primary,
       ),
     );
 
     final disabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-      activeColor: colorScheme.disabled.primary,
-      inactiveColor: colorScheme.enabled.secondary,
+      activeColor: colorScheme.disable(colorScheme.primary, colorScheme.secondary),
+      inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
-        tickColor: colorScheme.enabled.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.disabled.mutedForeground),
+        tickColor: colorScheme.mutedForeground,
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
-        color: colorScheme.enabled.primaryForeground,
-        borderColor: colorScheme.disabled.primary,
+        color: colorScheme.primaryForeground,
+        borderColor: colorScheme.disable(colorScheme.primary),
       ),
     );
 
@@ -66,18 +66,18 @@ final class FSliderStyles with Diagnosticable {
       labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
       errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-      activeColor: colorScheme.enabled.error,
-      inactiveColor: colorScheme.enabled.secondary,
+      activeColor: colorScheme.error,
+      inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
-        tickColor: colorScheme.enabled.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.enabled.error),
+        tickColor: colorScheme.mutedForeground,
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.error),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
-        color: colorScheme.enabled.errorForeground,
-        borderColor: colorScheme.enabled.error,
+        color: colorScheme.errorForeground,
+        borderColor: colorScheme.error,
       ),
     );
 

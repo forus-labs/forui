@@ -101,7 +101,7 @@ class _State extends State<_Popover> with SingleTickerProviderStateMixin {
                     Text(
                       'Set the dimensions for the layer.',
                       style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colorScheme.enabled.mutedForeground,
+                        color: context.theme.colorScheme.mutedForeground,
                         fontWeight: FontWeight.w300,
                       ),
                     ),

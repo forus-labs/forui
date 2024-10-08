@@ -102,11 +102,11 @@ final class FProgressStyle with Diagnosticable {
   FProgressStyle.inherit({required FColorScheme colorScheme, required FStyle style}): this(
       backgroundDecoration: BoxDecoration(
         borderRadius: style.borderRadius,
-        color: colorScheme.enabled.secondary,
+        color: colorScheme.secondary,
       ),
       progressDecoration: BoxDecoration(
         borderRadius: style.borderRadius,
-        color: colorScheme.enabled.primary,
+        color: colorScheme.primary,
       ),
   );
 
