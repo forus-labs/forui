@@ -38,7 +38,10 @@ final class FButtonStyles with Diagnosticable {
             enabledHoveredBoxColor: colorScheme.hover(colorScheme.primary),
             disabledBoxColor: colorScheme.disable(colorScheme.primary),
             enabledContentColor: colorScheme.primaryForeground,
-            disabledContentColor: colorScheme.disable(colorScheme.primaryForeground, colorScheme.primary),
+            disabledContentColor: colorScheme.disable(
+              colorScheme.primaryForeground,
+              colorScheme.disable(colorScheme.primary),
+            ),
           ),
           secondary: FButtonCustomStyle.inherit(
             style: style,
@@ -47,7 +50,10 @@ final class FButtonStyles with Diagnosticable {
             enabledHoveredBoxColor: colorScheme.hover(colorScheme.secondary),
             disabledBoxColor: colorScheme.disable(colorScheme.secondary),
             enabledContentColor: colorScheme.secondaryForeground,
-            disabledContentColor: colorScheme.disable(colorScheme.secondaryForeground, colorScheme.secondary),
+            disabledContentColor: colorScheme.disable(
+              colorScheme.secondaryForeground,
+              colorScheme.disable(colorScheme.secondary),
+            ),
           ),
           destructive: FButtonCustomStyle.inherit(
             style: style,
@@ -56,7 +62,10 @@ final class FButtonStyles with Diagnosticable {
             enabledHoveredBoxColor: colorScheme.hover(colorScheme.destructive),
             disabledBoxColor: colorScheme.disable(colorScheme.destructive),
             enabledContentColor: colorScheme.destructiveForeground,
-            disabledContentColor: colorScheme.disable(colorScheme.destructiveForeground, colorScheme.destructive),
+            disabledContentColor: colorScheme.disable(
+              colorScheme.destructiveForeground,
+              colorScheme.disable(colorScheme.destructive),
+            ),
           ),
           outline: FButtonCustomStyle(
             enabledBoxDecoration: BoxDecoration(
