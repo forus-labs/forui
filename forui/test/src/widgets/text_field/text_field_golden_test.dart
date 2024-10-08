@@ -16,6 +16,28 @@ const _longText =
 
 void main() {
   group('FTextField', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: TestScaffold.blue(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: FTextField(
+                style: TestScaffold.blueScreen.textFieldStyle,
+                label: const Text('My Label'),
+                hint: 'hint',
+                description: const Text('Some help text.'),
+                forceErrorText: 'Error',
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(MaterialApp), isBlueScreen);
+    });
+
     for (final (theme, theme_, _) in TestScaffold.themes) {
       for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
         for (final (text, text_) in [('text', 'short text'), ('no-text', null)]) {

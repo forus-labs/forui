@@ -10,6 +10,22 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FRadio', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FRadio(
+            style: TestScaffold.blueScreen.radioStyle,
+            value: true,
+            label: const Text('Direct messages and mentions'),
+            description: const Text('Only send me direct messages and mentions.'),
+            error: const Text('An option must be selected.'),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, background) in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),

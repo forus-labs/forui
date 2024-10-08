@@ -10,6 +10,24 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FAccordion', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FAccordion(
+            style: TestScaffold.blueScreen.accordionStyle,
+            items: [
+              FAccordionItem(
+                title: const Text('Title'),
+                child: const SizedBox(),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

@@ -19,6 +19,53 @@ void main() {
   };
 
   group('FCalendar', () {
+    group('blue screen', () {
+      testWidgets('day picker', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.blue(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: FCalendar(
+                style: TestScaffold.blueScreen.calendarStyle,
+                controller: FCalendarController.dates(
+                  initialSelections: selected,
+                  selectable: (date) => date != DateTime.utc(2024, 7, 2),
+                ),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 7, 14),
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), isBlueScreen);
+      });
+
+      testWidgets('year picker', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.blue(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: FCalendar(
+                style: TestScaffold.blueScreen.calendarStyle,
+                initialType: FCalendarPickerType.yearMonth,
+                controller: FCalendarController.dates(
+                  initialSelections: selected,
+                  selectable: (date) => date != DateTime.utc(2024, 7, 2),
+                ),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 7, 14),
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), isBlueScreen);
+      });
+    });
+
     for (final (name, theme, background) in TestScaffold.themes) {
       group('day picker', () {
         testWidgets('default - $name', (tester) async {

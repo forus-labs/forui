@@ -10,6 +10,27 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FLabel', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: SizedBox(
+            width: 300,
+            child: FLabel(
+              style: TestScaffold.blueScreen.labelStyles.horizontalStyle,
+              axis: Axis.horizontal,
+              label: const Text('Email'),
+              description: const Text('Enter your email address.'),
+              error: const Text('Please enter a valid email address.'),
+              state: FLabelState.error,
+              child: const SizedBox(width: 16, height: 16),
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final state in FLabelState.values) {
         testWidgets('$name horizontal with $state', (tester) async {

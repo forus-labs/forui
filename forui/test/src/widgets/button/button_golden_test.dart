@@ -12,6 +12,44 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FButton', () {
+    group('blue screen', () {
+      testWidgets('FButtonContent', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.blue(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: FButton(
+                label: const Text('Button'),
+                style: TestScaffold.blueScreen.buttonStyles.primary,
+                prefix: FIcon(FAssets.icons.circlePlay),
+                suffix: FIcon(FAssets.icons.circleStop),
+                onPress: () {},
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), isBlueScreen);
+      });
+
+      testWidgets('FButtonIconContent', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.blue(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: FButton.icon(
+                style: TestScaffold.blueScreen.buttonStyles.primary,
+                child: FIcon(FAssets.icons.circleStop),
+                onPress: () {},
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), isBlueScreen);
+      });
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final variant in Variant.values) {
         testWidgets('$name enabled with FButtonContent', (tester) async {
@@ -23,7 +61,6 @@ void main() {
                 child: FButton(
                   label: const Text('Button'),
                   style: variant,
-                  // We don't have access to widget specific fields :(
                   prefix: FIcon(FAssets.icons.circlePlay),
                   suffix: FIcon(FAssets.icons.circleStop),
                   onPress: () {},

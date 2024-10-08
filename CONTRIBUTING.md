@@ -174,11 +174,11 @@ Golden images are generated in the `test/golden` directory instead of relative t
 
 Only the `Inter` font is loaded by default.
 
-### Blue Screen Test
+### Blue Screen Tests
 
-All widgets should have a blue screen test. This uses a special theme that is all blue. It allows us to verify
-that custom/inherited themes are being applied correctly. The resultant image should be completely blue if applied
-correctly, hence the name.
+Blue screen tests are a special type of golden tests. All widgets should have a blue screen test. It uses a special 
+theme that is all blue. This allows us to verify that custom/inherited themes are being applied correctly. The resultant 
+image should be completely blue if applied correctly, hence the name.
 
 Example
 ```dart
@@ -194,8 +194,8 @@ testWidgets('blue screen', (tester) async {
     ),
   );
 
-  // (3) Always match against blue-screen.png.
-  await expectLater(find.byType(TestScaffold), matchesGoldenFile('blue-screen.png'));
+  // (3) Always use the isBlueScreen matcher.
+  await expectLater(find.byType(TestScaffold), isBlueScreen);
 });
 ```
 

@@ -13,6 +13,29 @@ const title =
 
 void main() {
   group('FRootHeader', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FHeader(
+              style: TestScaffold.blueScreen.headerStyle.rootStyle,
+              title: const Text('Title'),
+              actions: [
+                FHeaderAction.back(onPress: () {}),
+                FHeaderAction(
+                  icon: FIcon(FAssets.icons.alarmClock),
+                  onPress: null,
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       testWidgets('$name with FRootHeader actions', (tester) async {
         await tester.pumpWidget(

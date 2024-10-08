@@ -10,6 +10,22 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FCheckBox', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FCheckbox(
+            style: TestScaffold.blueScreen.checkboxStyle,
+            label: const Text('Terms and Conditions'),
+            description: const Text('I agree to the terms and conditions.'),
+            error: const Text('Please check the agree to continue.'),
+            value: true,
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, background) in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),
