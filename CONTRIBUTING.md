@@ -61,7 +61,8 @@ If you're stuck or unsure about anything, feel free to ask for help in our [disc
 ### Avoid translucent colors
 
 Translucent colors may not render as expected on different backgrounds. They are usually used as disabled and hovered
-states. Instead, `FColorScheme.disable` functions to generate colors for hover and disabled states respectively.
+states. Instead, use the `FColorScheme.disable` and `FColorScheme.hover` functions to generate colors for disabled and
+hovered states respectively.
 
 Alternatively, use alpha-blending to generate an equivalent solid color.
 

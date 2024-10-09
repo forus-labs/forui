@@ -43,6 +43,8 @@ void main() {
           error: Colors.blueAccent,
           errorForeground: Colors.blueGrey,
           border: Colors.lime,
+          disabledOpacity: 0.1,
+          enabledHoveredOpacity: 0.2,
         );
 
         expect(copy.brightness, equals(Brightness.dark));
@@ -59,6 +61,8 @@ void main() {
         expect(copy.error, equals(Colors.blueAccent));
         expect(copy.errorForeground, equals(Colors.blueGrey));
         expect(copy.border, equals(Colors.lime));
+        expect(copy.disabledOpacity, 0.1);
+        expect(copy.enabledHoveredOpacity, 0.2);
       });
     });
 
@@ -83,6 +87,8 @@ void main() {
           ColorProperty('error', Colors.red),
           ColorProperty('errorForeground', Colors.redAccent),
           ColorProperty('border', Colors.lightBlue),
+          DoubleProperty('enabledHoveredOpacity', 0.9),
+          DoubleProperty('disabledOpacity', 0.5),
         ].map((p) => p.toString()),
       );
     });

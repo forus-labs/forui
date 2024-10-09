@@ -17,7 +17,7 @@ class SelectGroupPage extends SampleScaffold {
         children: [
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 250),
-            child: FSelectGroup(
+            child: FSelectGroup<Sidebar>(
               controller: FMultiSelectGroupController(values: {Sidebar.recents}),
               label: const Text('Sidebar'),
               description: const Text('These will be shown in the sidebar.'),

@@ -15,7 +15,11 @@
 
 * Add `FColorScheme.disable(...)`.
 
+* Add `FColorScheme.disableOpacity`.
+
 * Add `FColorScheme.hover(...)`.
+
+* Add `FColorScheme.enabledHoveredOpacity`.
 
 ### Changes
 

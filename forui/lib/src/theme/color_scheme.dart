@@ -20,6 +20,9 @@ import 'package:forui/forui.dart';
 /// Each color group includes a `-Foreground` suffixed color, i.e. [primaryForeground], used to color text and other
 /// visual elements on top of their respective background colors.
 ///
+/// Hovered and disabled colors are derived by adjusting the opacity. To derive these colors, use the [hover] and
+/// [disable] methods. The opacity can be adjusted with [enabledHoveredOpacity] and [disabledOpacity].
+///
 /// See [FThemes] for predefined themes and color schemes.
 final class FColorScheme with Diagnosticable {
   /// The system brightness.
