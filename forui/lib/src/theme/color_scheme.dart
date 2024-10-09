@@ -90,6 +90,18 @@ final class FColorScheme with Diagnosticable {
   /// The border color.
   final Color border;
 
+  /// The opacity of the foreground color when a widget is hovered and enabled. Defaults to 0.9.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if the value is less than 0 or greater than 1.
+  final double enabledHoveredOpacity;
+
+  /// The opacity of the foreground color when a widget is disabled. Defaults to 0.5.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if the value is less than 0 or greater than 1.
+  final double disabledOpacity;
+
   /// Creates a [FColorScheme].
   ///
   /// **Note:**
@@ -109,13 +121,19 @@ final class FColorScheme with Diagnosticable {
     required this.error,
     required this.errorForeground,
     required this.border,
-  });
+    this.enabledHoveredOpacity = 0.9,
+    this.disabledOpacity = 0.5,
+  })  : assert(
+          0 <= enabledHoveredOpacity && enabledHoveredOpacity <= 1,
+          'The enabledHoveredOpacity must be between 0 and 1.',
+        ),
+        assert(0 <= disabledOpacity && disabledOpacity <= 1, 'The disabledOpacity must be between 0 and 1.');
 
   /// Returns a hovered color for the [foreground] on the [background].
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color hover(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withOpacity(0.9),
+        foreground.withOpacity(enabledHoveredOpacity),
         background ?? this.background,
       );
 
@@ -123,7 +141,7 @@ final class FColorScheme with Diagnosticable {
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color disable(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withOpacity(0.5),
+        foreground.withOpacity(disabledOpacity),
         background ?? this.background,
       );
 
@@ -157,6 +175,8 @@ final class FColorScheme with Diagnosticable {
     Color? error,
     Color? errorForeground,
     Color? border,
+    double? enabledHoveredOpacity,
+    double? disabledOpacity,
   }) =>
       FColorScheme(
         brightness: brightness ?? this.brightness,
@@ -173,6 +193,8 @@ final class FColorScheme with Diagnosticable {
         error: error ?? this.error,
         errorForeground: errorForeground ?? this.errorForeground,
         border: border ?? this.border,
+        enabledHoveredOpacity: enabledHoveredOpacity ?? this.enabledHoveredOpacity,
+        disabledOpacity: disabledOpacity ?? this.disabledOpacity,
       );
 
   @override
@@ -192,7 +214,9 @@ final class FColorScheme with Diagnosticable {
       ..add(ColorProperty('destructiveForeground', destructiveForeground))
       ..add(ColorProperty('error', error))
       ..add(ColorProperty('errorForeground', errorForeground))
-      ..add(ColorProperty('border', border));
+      ..add(ColorProperty('border', border))
+      ..add(DoubleProperty('enabledHoveredOpacity', enabledHoveredOpacity))
+      ..add(DoubleProperty('disabledOpacity', disabledOpacity));
   }
 
   @override
@@ -212,7 +236,9 @@ final class FColorScheme with Diagnosticable {
           destructiveForeground == other.destructiveForeground &&
           error == other.error &&
           errorForeground == other.errorForeground &&
-          border == other.border;
+          border == other.border &&
+          enabledHoveredOpacity == other.enabledHoveredOpacity &&
+          disabledOpacity == other.disabledOpacity;
 
   @override
   int get hashCode =>
@@ -229,5 +255,7 @@ final class FColorScheme with Diagnosticable {
       destructiveForeground.hashCode ^
       error.hashCode ^
       errorForeground.hashCode ^
-      border.hashCode;
+      border.hashCode ^
+      enabledHoveredOpacity.hashCode ^
+      disabledOpacity.hashCode;
 }
