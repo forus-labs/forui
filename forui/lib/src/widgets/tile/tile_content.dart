@@ -34,25 +34,15 @@ class FTileContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final FTileData(:style, :index, :length, :divider) = FTileData.maybeOf(context)!;
     final contentStyle = style.contentStyle;
-    Widget content(FTileContentStateStyle style, BoxDecoration decoration) => switch (divider) {
-          FTileDivider.full || FTileDivider.none => _Content(
-              style: style,
-              decoration: decoration,
-              prefixIcon: prefixIcon,
-              title: title,
-              subtitle: subtitle,
-              details: details,
-              suffixIcon: suffixIcon,
-            ),
-          FTileDivider.title => _TitleAlignedContent(
-              style: style,
-              prefixIcon: prefixIcon,
-              title: title,
-              subtitle: subtitle,
-              details: details,
-              suffixIcon: suffixIcon,
-            ),
-        };
+    Widget content(FTileContentStateStyle style, Color background) => _Content(
+          style: style,
+          background: background,
+          prefixIcon: prefixIcon,
+          title: title,
+          subtitle: subtitle,
+          details: details,
+          suffixIcon: suffixIcon,
+        );
 
     if (enabled && onPress != null || onLongPress != null) {
       return FTappable(
@@ -60,10 +50,9 @@ class FTileContent extends StatelessWidget {
         semanticLabel: semanticLabel,
         onPress: onPress,
         onLongPress: onLongPress,
-        shortPressDelay: Duration.zero,
         builder: (_, state, __) => switch (state.hovered || state.shortPressed) {
-          true => content(contentStyle.enabledHoveredStyle, style.enabledHoverDecoration),
-          false => content(contentStyle.enabledStyle, style.enabledDecoration),
+          true => content(contentStyle.enabledHoveredStyle, style.enabledHoveredBackgroundColor),
+          false => content(contentStyle.enabledStyle, style.enabledBackgroundColor),
         },
       );
     } else {
@@ -71,8 +60,8 @@ class FTileContent extends StatelessWidget {
         container: true,
         label: semanticLabel,
         child: switch (enabled) {
-          true => content(contentStyle.enabledStyle, style.enabledDecoration),
-          false => content(contentStyle.disabledStyle, style.disabledDecoration),
+          true => content(contentStyle.enabledStyle, style.enabledBackgroundColor),
+          false => content(contentStyle.disabledStyle, style.disabledBackgroundColor),
         },
       );
     }
@@ -91,7 +80,7 @@ class FTileContent extends StatelessWidget {
 
 class _Content extends StatelessWidget {
   final FTileContentStateStyle style;
-  final BoxDecoration decoration;
+  final Color background;
   final Widget? prefixIcon;
   final Widget title;
   final Widget? subtitle;
@@ -100,7 +89,7 @@ class _Content extends StatelessWidget {
 
   const _Content({
     required this.style,
-    required this.decoration,
+    required this.background,
     required this.prefixIcon,
     required this.title,
     required this.subtitle,
@@ -112,72 +101,106 @@ class _Content extends StatelessWidget {
   Widget build(BuildContext context) {
     final FTileData(style: tileStyle, :index, :length, :divider) = FTileData.maybeOf(context)!;
     final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
-    assert(divider != FTileDivider.title, 'FTileDivider.title is not supported in _Content.');
-
-    Widget tile = Padding(
-      padding: contentStyle.padding,
+    return DecoratedBox(
+      // This is necessary because Flutter doesn't inset the borders of a ColoredBox inside a DecoratedBox correctly.
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.only(
+          topLeft: index == 0 ? tileStyle.borderRadius.topLeft : Radius.zero,
+          topRight: index == 0 ? tileStyle.borderRadius.topRight : Radius.zero,
+          bottomLeft: index == length - 1 ? tileStyle.borderRadius.bottomLeft : Radius.zero,
+          bottomRight: index == length - 1 ? tileStyle.borderRadius.bottomLeft : Radius.zero,
+        ),
+      ),
       child: Row(
         children: [
-          if (prefixIcon case final prefixIcon?)
-            Padding(
-              padding: EdgeInsets.only(right: contentStyle.prefixIconSpacing),
-              child: FIconStyleData(
-                style: style.prefixIconStyle,
-                child: prefixIcon,
-              ),
+          IntrinsicWidth(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (prefixIcon case final prefixIcon?)
+                  Padding(
+                    padding: contentStyle.padding.copyWith(right: contentStyle.prefixIconSpacing),
+                    child: FIconStyleData(
+                      style: style.prefixIconStyle,
+                      child: prefixIcon,
+                    ),
+                  )
+                else
+                  SizedBox(width: contentStyle.padding.left),
+                if (index < length - 1 && divider == FTileDivider.full) FDivider(style: dividerStyle),
+              ],
             ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DefaultTextStyle.merge(
-                style: style.titleTextStyle,
-                overflow: TextOverflow.ellipsis,
-                child: title,
-              ),
-              if (subtitle case final subtitle?)
+          ),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 Padding(
-                  padding: EdgeInsets.only(top: contentStyle.titleSpacing),
-                  child: DefaultTextStyle.merge(
-                    style: style.subtitleTextStyle,
-                    overflow: TextOverflow.ellipsis,
-                    child: subtitle,
+                  padding: contentStyle.padding.copyWith(left: 0),
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          merge(
+                            style: style.titleTextStyle,
+                            textHeightBehavior: const TextHeightBehavior(
+                              applyHeightToFirstAscent: false,
+                              applyHeightToLastDescent: false,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            child: title,
+                          ),
+                          if (subtitle case final subtitle?)
+                            Padding(
+                              padding: EdgeInsets.only(top: contentStyle.titleSpacing),
+                              child: merge(
+                                style: style.subtitleTextStyle,
+                                textHeightBehavior: const TextHeightBehavior(
+                                  applyHeightToFirstAscent: false,
+                                  applyHeightToLastDescent: false,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                child: subtitle,
+                              ),
+                            ),
+                        ],
+                      ),
+                      const Spacer(),
+                      if (details case final details?)
+                        merge(
+                          style: style.detailsTextStyle,
+                          textHeightBehavior: const TextHeightBehavior(
+                            applyHeightToFirstAscent: false,
+                            applyHeightToLastDescent: false,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          child: details,
+                        ),
+                      if (suffixIcon case final suffixIcon?)
+                        Padding(
+                          padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
+                          child: FIconStyleData(
+                            style: style.suffixIconStyle,
+                            child: suffixIcon,
+                          ),
+                        ),
+                    ],
                   ),
                 ),
-            ],
+                if (index < length - 1 && (divider == FTileDivider.full || divider == FTileDivider.title))
+                  FDivider(style: dividerStyle),
+              ],
+            ),
           ),
-          const Spacer(),
-          if (details case final details?)
-            DefaultTextStyle.merge(
-              style: style.detailsTextStyle,
-              overflow: TextOverflow.ellipsis,
-              child: details,
-            ),
-          if (suffixIcon case final suffixIcon?)
-            Padding(
-              padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
-              child: FIconStyleData(
-                style: style.suffixIconStyle,
-                child: suffixIcon,
-              ),
-            ),
         ],
       ),
     );
-
-    if (divider == FTileDivider.full && index < length - 1) {
-      tile = Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [tile, FDivider(style: dividerStyle)],
-      );
-    } else if (length == 1) {
-      tile = DecoratedBox(
-        decoration: decoration,
-        child: tile,
-      );
-    }
-
-    return tile;
   }
 
   @override
@@ -185,108 +208,7 @@ class _Content extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('decoration', decoration));
-  }
-}
-
-class _TitleAlignedContent extends StatelessWidget {
-  final FTileContentStateStyle style;
-  final Widget? prefixIcon;
-  final Widget title;
-  final Widget? subtitle;
-  final Widget? details;
-  final Widget? suffixIcon;
-
-  const _TitleAlignedContent({
-    required this.style,
-    required this.prefixIcon,
-    required this.title,
-    required this.subtitle,
-    required this.details,
-    required this.suffixIcon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final FTileData(style: tileStyle, :index, :length, :divider) = FTileData.maybeOf(context)!;
-    final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
-    assert(divider == FTileDivider.title, 'Only FTileDivider.title is supported in _TitleAlignedContent.');
-
-    return Row(
-      children: [
-        if (prefixIcon case final prefixIcon?)
-          Padding(
-            padding: contentStyle.padding.copyWith(right: contentStyle.prefixIconSpacing),
-            child: FIconStyleData(
-              style: style.prefixIconStyle,
-              child: prefixIcon,
-            ),
-          )
-        else
-          SizedBox(width: contentStyle.padding.left),
-        Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: contentStyle.padding.copyWith(left: 0),
-                child: Row(
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        merge(
-                          style: style.titleTextStyle,
-                          textHeightBehavior: const TextHeightBehavior(
-                            applyHeightToFirstAscent: false,
-                            applyHeightToLastDescent: false,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          child: title,
-                        ),
-                        if (subtitle case final subtitle?)
-                          Padding(
-                            padding: EdgeInsets.only(top: contentStyle.titleSpacing),
-                            child: DefaultTextStyle.merge(
-                              style: style.subtitleTextStyle,
-                              overflow: TextOverflow.ellipsis,
-                              child: subtitle,
-                            ),
-                          ),
-                      ],
-                    ),
-                    const Spacer(),
-                    if (details case final details?)
-                      DefaultTextStyle.merge(
-                        style: style.detailsTextStyle,
-                        overflow: TextOverflow.ellipsis,
-                        child: details,
-                      ),
-                    if (suffixIcon case final suffixIcon?)
-                      Padding(
-                        padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
-                        child: FIconStyleData(
-                          style: style.suffixIconStyle,
-                          child: suffixIcon,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              if (index < length - 1) FDivider(style: dividerStyle),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('decoration', background));
   }
 }
 
@@ -301,7 +223,7 @@ final class FTileContentStyle with Diagnosticable {
   /// Throws [AssertionError] if [prefixIconSpacing] is negative.
   final double prefixIconSpacing;
 
-  /// The vertical spacing between the title and the subtitle. Defaults to 5.
+  /// The vertical spacing between the title and the subtitle. Defaults to 4.
   final double titleSpacing;
 
   /// The horizontal spacing between the details and suffix icon. Defaults to 10.
@@ -324,10 +246,10 @@ final class FTileContentStyle with Diagnosticable {
     required this.enabledStyle,
     required this.enabledHoveredStyle,
     required this.disabledStyle,
-    this.padding = const EdgeInsets.only(left: 15, top: 8, right: 10, bottom: 8),
+    this.padding = const EdgeInsets.only(left: 15, top: 10, right: 10, bottom: 10),
     this.prefixIconSpacing = 10,
-    this.titleSpacing = 5,
-    this.suffixIconSpacing = 10,
+    this.titleSpacing = 4,
+    this.suffixIconSpacing = 5,
   });
 
   /// Creates a [FTileContentStyle] that inherits from the given [colorScheme] and [typography].
@@ -336,21 +258,21 @@ final class FTileContentStyle with Diagnosticable {
           enabledStyle: FTileContentStateStyle(
             prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
             titleTextStyle: typography.base,
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+            subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
             detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
             suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
           ),
           enabledHoveredStyle: FTileContentStateStyle(
             prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
             titleTextStyle: typography.base,
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+            subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
             detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
             suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
           ),
           disabledStyle: FTileContentStateStyle(
             prefixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.primary), size: 18),
             titleTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.primary)),
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
+            subtitleTextStyle: typography.xs.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
             detailsTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
             suffixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.mutedForeground), size: 18),
           ),

@@ -4,18 +4,6 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/tile/tile_content.dart';
 import 'package:meta/meta.dart';
 
-/// The divider between tiles in a group.
-enum FTileDivider {
-  /// A divider that spans the entire tile horizontally.
-  full,
-
-  /// A divider that spans the tile horizontally from the title's left edge to the tile's right edge.
-  title,
-
-  /// No divider.
-  none,
-}
-
 /// A tile.
 ///
 /// Multiple tiles can be grouped together in a [FTileGroup]. Tiles grouped together will be separated by a divider,
@@ -69,12 +57,22 @@ class FTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = FTileData.maybeOf(context);
     if (data == null) {
+      final style = this.style ?? context.theme.tileStyle;
       return FTileData(
-        style: style ?? context.theme.tileStyle,
+        style: style,
         divider: FTileDivider.full,
         index: 0,
         length: 1,
-        child: child,
+        // DecoratedBox doesn't inset the child, resulting in an invisible border.
+        // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
+        child: Container(
+          decoration: BoxDecoration(
+            border: style.border,
+            borderRadius: style.borderRadius,
+            color: style.enabledBackgroundColor,
+          ),
+          child: child,
+        ),
       );
     }
 
@@ -145,14 +143,20 @@ class FTileData extends InheritedWidget {
 
 /// A [FTile]'s style.
 final class FTileStyle with Diagnosticable {
-  /// The box decoration for an enabled tile.
-  final BoxDecoration enabledDecoration;
+  /// The tile's border.
+  final Border border;
 
-  /// Th box decoration for an enabled tile when hovered.
-  final BoxDecoration enabledHoverDecoration;
+  /// The tile's border radius.
+  final BorderRadius borderRadius;
 
-  /// The box decoration for a disabled tile.
-  final BoxDecoration disabledDecoration;
+  /// The background color when the tile is enabled.
+  final Color enabledBackgroundColor;
+
+  /// The background color when the tile is enabled and hovered.
+  final Color enabledHoveredBackgroundColor;
+
+  /// The background color when the tile is disabled.
+  final Color disabledBackgroundColor;
 
   /// The divider's style.
   final FDividerStyle dividerStyle;
@@ -162,9 +166,11 @@ final class FTileStyle with Diagnosticable {
 
   /// Creates a [FTileStyle].
   FTileStyle({
-    required this.enabledDecoration,
-    required this.enabledHoverDecoration,
-    required this.disabledDecoration,
+    required this.border,
+    required this.borderRadius,
+    required this.enabledBackgroundColor,
+    required this.enabledHoveredBackgroundColor,
+    required this.disabledBackgroundColor,
     required this.dividerStyle,
     required this.contentStyle,
   });
@@ -172,44 +178,32 @@ final class FTileStyle with Diagnosticable {
   /// Creates a [FTileStyle] that inherits from the given [colorScheme] and [typography].
   FTileStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
-          enabledDecoration: BoxDecoration(
-            color: colorScheme.background,
-            borderRadius: style.borderRadius,
-            border: Border.all(
-              color: colorScheme.border,
-            ),
-          ),
-          enabledHoverDecoration: BoxDecoration(
-            color: colorScheme.secondary,
-            borderRadius: style.borderRadius,
-            border: Border.all(
-              color: colorScheme.border,
-            ),
-          ),
-          disabledDecoration: BoxDecoration(
-            color: colorScheme.disable(colorScheme.secondary),
-            borderRadius: style.borderRadius,
-            border: Border.all(
-              color: colorScheme.disable(colorScheme.border),
-            ),
-          ),
-          dividerStyle: FDividerStyle.inherit(colorScheme: colorScheme, style: style, padding: EdgeInsets.zero),
+          border: Border.all(width: style.borderWidth, color: colorScheme.border),
+          borderRadius: style.borderRadius,
+          enabledBackgroundColor: colorScheme.background,
+          enabledHoveredBackgroundColor: colorScheme.secondary,
+          disabledBackgroundColor: colorScheme.disable(colorScheme.secondary),
+          dividerStyle: FDividerStyle(color: colorScheme.border, width: style.borderWidth, padding: EdgeInsets.zero),
           contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
         );
 
   /// Returns a copy of this [FTileStyle] with the given fields replaced with the new values.
   @useResult
   FTileStyle copyWith({
-    BoxDecoration? enabledDecoration,
-    BoxDecoration? enabledHoverDecoration,
-    BoxDecoration? disabledDecoration,
+    Border? border,
+    BorderRadius? borderRadius,
+    Color? enabledBackgroundColor,
+    Color? enabledHoveredBackgroundColor,
+    Color? disabledBackgroundColor,
     FDividerStyle? dividerStyle,
     FTileContentStyle? contentStyle,
   }) =>
       FTileStyle(
-        enabledDecoration: enabledDecoration ?? this.enabledDecoration,
-        enabledHoverDecoration: enabledHoverDecoration ?? this.enabledHoverDecoration,
-        disabledDecoration: disabledDecoration ?? this.disabledDecoration,
+        border: border ?? this.border,
+        borderRadius: borderRadius ?? this.borderRadius,
+        enabledBackgroundColor: enabledBackgroundColor ?? this.enabledBackgroundColor,
+        enabledHoveredBackgroundColor: enabledHoveredBackgroundColor ?? this.enabledHoveredBackgroundColor,
+        disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
         dividerStyle: dividerStyle ?? this.dividerStyle,
         contentStyle: contentStyle ?? this.contentStyle,
       );
@@ -218,9 +212,11 @@ final class FTileStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('enabledDecoration', enabledDecoration))
-      ..add(DiagnosticsProperty('enabledHoverDecoration', enabledHoverDecoration))
-      ..add(DiagnosticsProperty('disabledDecoration', disabledDecoration))
+      ..add(DiagnosticsProperty('border', border))
+      ..add(DiagnosticsProperty('borderRadius', borderRadius))
+      ..add(ColorProperty('enabledBackgroundColor', enabledBackgroundColor))
+      ..add(ColorProperty('enabledHoveredBackgroundColor', enabledHoveredBackgroundColor))
+      ..add(ColorProperty('disabledBackgroundColor', disabledBackgroundColor))
       ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
       ..add(DiagnosticsProperty('contentStyle', contentStyle));
   }
@@ -230,17 +226,21 @@ final class FTileStyle with Diagnosticable {
       identical(this, other) ||
       other is FTileStyle &&
           runtimeType == other.runtimeType &&
-          enabledDecoration == other.enabledDecoration &&
-          enabledHoverDecoration == other.enabledHoverDecoration &&
-          disabledDecoration == other.disabledDecoration &&
+          border == other.border &&
+          borderRadius == other.borderRadius &&
+          enabledBackgroundColor == other.enabledBackgroundColor &&
+          enabledHoveredBackgroundColor == other.enabledHoveredBackgroundColor &&
+          disabledBackgroundColor == other.disabledBackgroundColor &&
           dividerStyle == other.dividerStyle &&
           contentStyle == other.contentStyle;
 
   @override
   int get hashCode =>
-      enabledDecoration.hashCode ^
-      enabledHoverDecoration.hashCode ^
-      disabledDecoration.hashCode ^
+      border.hashCode ^
+      borderRadius.hashCode ^
+      enabledBackgroundColor.hashCode ^
+      enabledHoveredBackgroundColor.hashCode ^
+      disabledBackgroundColor.hashCode ^
       dividerStyle.hashCode ^
       contentStyle.hashCode;
 }
