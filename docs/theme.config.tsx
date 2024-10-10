@@ -1,26 +1,25 @@
-import {DocsThemeConfig, useTheme} from 'nextra-theme-docs'
+import { DocsThemeConfig, useConfig, useTheme } from 'nextra-theme-docs';
 import {useRouter} from "next/router";
 import Logo from "./components/logo";
 
 const config: DocsThemeConfig = {
   logo: <Logo />,
-  head: (
-      <>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any"/>
-      </>
-  ),
-  useNextSeoProps() {
-    const {asPath} = useRouter();
+  head() {
+    const { asPath } = useRouter();
+    const config = useConfig();
 
-    if (asPath == '/') {
-      return {
-        title: 'Forui - Minimalistic Flutter UI Library',
-      };
+    let title = 'Forui - Minimalistic Flutter UI Library';
+
+    if (asPath != '/') {
+      title = `${config.title} – Forui`;
     }
 
-    return {
-      titleTemplate: '%s – Forui'
-    };
+    return (
+      <>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any"/>
+        <title>{title}</title>
+      </>
+    );
   },
   project: {
     link: 'https://github.com/forus-labs/forui',
@@ -31,8 +30,8 @@ const config: DocsThemeConfig = {
     next: true
   },
   footer: {
-    text: 'A Forus Labs initiative.',
+    content: 'A Forus Labs initiative.',
   }
 }
 
-export default config
+export default config;
