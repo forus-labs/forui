@@ -23,15 +23,15 @@ void main() {
                   label: const Text('Select Group'),
                   description: const Text('Select Group Description'),
                   controller: FMultiSelectGroupController(values: {1}),
-                  items: [
+                  items: const [
                     FSelectGroupItem.checkbox(
                       value: 1,
-                      label: const Text('Checkbox 1'),
+                      label: Text('Checkbox 1'),
                       semanticLabel: 'Checkbox 1',
                     ),
                     FSelectGroupItem.radio(
                       value: 2,
-                      label: const Text('Checkbox 2'),
+                      label: Text('Checkbox 2'),
                       semanticLabel: 'Checkbox 2',
                     ),
                   ],
@@ -60,20 +60,20 @@ void main() {
                     label: const Text('Select Group'),
                     description: const Text('Select Group Description'),
                     controller: FMultiSelectGroupController(values: {1}),
-                    items: [
+                    items: const [
                       FSelectGroupItem.checkbox(
                         value: 1,
-                        label: const Text('Checkbox 1'),
+                        label: Text('Checkbox 1'),
                         semanticLabel: 'Checkbox 1',
                       ),
                       FSelectGroupItem.checkbox(
                         value: 2,
-                        label: const Text('Checkbox 2'),
+                        label: Text('Checkbox 2'),
                         semanticLabel: 'Checkbox 2',
                       ),
                       FSelectGroupItem.checkbox(
                         value: 3,
-                        label: const Text('Checkbox 3'),
+                        label: Text('Checkbox 3'),
                         semanticLabel: 'Checkbox 3',
                       ),
                     ],
@@ -102,20 +102,20 @@ void main() {
                     description: const Text('Select Group Description'),
                     forceErrorText: 'Some error message.',
                     controller: FMultiSelectGroupController(values: {1}),
-                    items: [
+                    items: const [
                       FSelectGroupItem.checkbox(
                         value: 1,
-                        label: const Text('Checkbox 1'),
+                        label: Text('Checkbox 1'),
                         semanticLabel: 'Checkbox 1',
                       ),
                       FSelectGroupItem.checkbox(
                         value: 2,
-                        label: const Text('Checkbox 2'),
+                        label: Text('Checkbox 2'),
                         semanticLabel: 'Checkbox 2',
                       ),
                       FSelectGroupItem.checkbox(
                         value: 3,
-                        label: const Text('Checkbox 3'),
+                        label: Text('Checkbox 3'),
                         semanticLabel: 'Checkbox 3',
                       ),
                     ],
@@ -147,20 +147,20 @@ void main() {
                     label: const Text('Select Group'),
                     description: const Text('Select Group Description'),
                     controller: FRadioSelectGroupController(value: 1),
-                    items: [
+                    items: const [
                       FSelectGroupItem.radio(
                         value: 1,
-                        label: const Text('Radio 1'),
+                        label: Text('Radio 1'),
                         semanticLabel: 'Radio 1',
                       ),
                       FSelectGroupItem.radio(
                         value: 2,
-                        label: const Text('Radio 2'),
+                        label: Text('Radio 2'),
                         semanticLabel: 'Radio 2',
                       ),
                       FSelectGroupItem.radio(
                         value: 3,
-                        label: const Text('Radio 3'),
+                        label: Text('Radio 3'),
                         semanticLabel: 'Radio 3',
                       ),
                     ],
@@ -189,20 +189,20 @@ void main() {
                     description: const Text('Select Group Description'),
                     forceErrorText: 'Some error message.',
                     controller: FRadioSelectGroupController(value: 1),
-                    items: [
+                    items: const [
                       FSelectGroupItem.radio(
                         value: 1,
-                        label: const Text('Radio 1'),
+                        label: Text('Radio 1'),
                         semanticLabel: 'Radio 1',
                       ),
                       FSelectGroupItem.radio(
                         value: 2,
-                        label: const Text('Radio 2'),
+                        label: Text('Radio 2'),
                         semanticLabel: 'Radio 2',
                       ),
                       FSelectGroupItem.radio(
                         value: 3,
-                        label: const Text('Radio 3'),
+                        label: Text('Radio 3'),
                         semanticLabel: 'Radio 3',
                       ),
                     ],

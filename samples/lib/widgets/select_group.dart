@@ -17,22 +17,22 @@ class SelectGroupPage extends SampleScaffold {
         children: [
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 250),
-            child: FSelectGroup<Sidebar>(
+            child: FSelectGroup(
               controller: FMultiSelectGroupController(values: {Sidebar.recents}),
               label: const Text('Sidebar'),
               description: const Text('These will be shown in the sidebar.'),
-              items: [
+              items: const [
                 FSelectGroupItem.checkbox(
                   value: Sidebar.recents,
-                  label: const Text('Recents'),
+                  label: Text('Recents'),
                 ),
                 FSelectGroupItem.checkbox(
                   value: Sidebar.home,
-                  label: const Text('Home'),
+                  label: Text('Home'),
                 ),
                 FSelectGroupItem.checkbox(
                   value: Sidebar.applications,
-                  label: const Text('Applications'),
+                  label: Text('Applications'),
                 ),
               ],
             ),
@@ -78,22 +78,22 @@ class CheckboxFormState extends State<CheckboxForm> {
               label: const Text('Favorite Languages'),
               description: const Text('Your favorite language.'),
               validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
-              items: [
+              items: const [
                 FSelectGroupItem.checkbox(
                   value: Language.dart,
-                  label: const Text('Dart'),
+                  label: Text('Dart'),
                 ),
                 FSelectGroupItem.checkbox(
                   value: Language.java,
-                  label: const Text('Java'),
+                  label: Text('Java'),
                 ),
                 FSelectGroupItem.checkbox(
                   value: Language.rust,
-                  label: const Text('Rust'),
+                  label: Text('Rust'),
                 ),
                 FSelectGroupItem.checkbox(
                   value: Language.python,
-                  label: const Text('Python'),
+                  label: Text('Python'),
                 ),
               ],
             ),
@@ -152,18 +152,18 @@ class RadioFormState extends State<RadioForm> {
               label: const Text('Notifications'),
               description: const Text('Select the notifications.'),
               validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-              items: [
+              items: const [
                 FSelectGroupItem.radio(
                   value: Notification.all,
-                  label: const Text('All new messages'),
+                  label: Text('All new messages'),
                 ),
                 FSelectGroupItem.radio(
                   value: Notification.direct,
-                  label: const Text('Direct messages and mentions'),
+                  label: Text('Direct messages and mentions'),
                 ),
                 FSelectGroupItem.radio(
                   value: Notification.nothing,
-                  label: const Text('Nothing'),
+                  label: Text('Nothing'),
                 ),
               ],
             ),

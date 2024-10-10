@@ -113,6 +113,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onLongPress', onLongPress, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('shortPressDelay', shortPressDelay, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('builder', builder, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('child', child, level: DiagnosticLevel.debug));
   }
@@ -173,13 +174,9 @@ class _FTappableState extends State<FTappable> {
     }
 
     return Shortcuts(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-      },
+      shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
       child: Actions(
-        actions: {
-          ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!()),
-        },
+        actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
         child: tappable,
       ),
     );
