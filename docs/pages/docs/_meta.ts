@@ -17,6 +17,6 @@ export default {
     title: 'Widgets'
   },
   // '*': {
-  //   type: 'page'
+  //   title: ''
   // },
 };
