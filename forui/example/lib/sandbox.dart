@@ -22,28 +22,34 @@ class _SandboxState extends State<Sandbox> {
   @override
   Widget build(BuildContext context) => Column(
         children: [
-          FTile(
-            prefixIcon: FIcon(FAssets.icons.wifi),
-            title: const Text('WiFi'),
-            // details: const Text('Forus Labs (5G)'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+          FTileGroup(
+            children: [
+              FTile(
+                prefixIcon: FIcon(FAssets.icons.wifi),
+                title: const Text('WiFi'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () => print('WiFi'),
+              ),
+              FTile(
+                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () => print('Bluetooth'),
+              ),
+            ],
           ),
           const SizedBox(height: 10,),
           FTile(
             prefixIcon: FIcon(FAssets.icons.bluetooth),
             title: const Text('Bluetooth'),
-            // details: const Text('AirPods'),
+            subtitle: const Text('Fee, Fo, Fum'),
+            details: const Text('Forus Labs (5G)'),
             suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () => print('Bluetooth'),
           ),
-          FIcon(
-            color: context.theme.colorScheme.secondary,
-            FAssets.icons.arrowRight,
-          ),
-          Container(
-            height: 100,
-            width: 100,
-            color: context.theme.colorScheme.secondary,
-          )
         ],
       );
 }
