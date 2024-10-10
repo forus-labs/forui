@@ -23,19 +23,27 @@ class _SandboxState extends State<Sandbox> {
   Widget build(BuildContext context) => Column(
         children: [
           FTile(
-            icon: FAssets.icons.globe(
-              height: 18,
-              // width: 18,
-            ),
+            prefixIcon: FIcon(FAssets.icons.wifi),
+            title: const Text('WiFi'),
+            // details: const Text('Forus Labs (5G)'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
           ),
+          const SizedBox(height: 10,),
           FTile(
-            icon: FAssets.icons.bluetooth(
-              height: 18,
-              // width: 18,
-            ),
+            prefixIcon: FIcon(FAssets.icons.bluetooth),
+            title: const Text('Bluetooth'),
+            // details: const Text('AirPods'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
           ),
-          const SizedBox(height: 20),
-          FButton(onPress: () {}, label: const Text('hi')),
+          FIcon(
+            color: context.theme.colorScheme.secondary,
+            FAssets.icons.arrowRight,
+          ),
+          Container(
+            height: 100,
+            width: 100,
+            color: context.theme.colorScheme.secondary,
+          )
         ],
       );
 }
