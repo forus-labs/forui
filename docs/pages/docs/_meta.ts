@@ -12,11 +12,16 @@ export default {
     href: 'https://pub.dev/packages/forui',
     newWindow: true
   },
+
   '-- widgets': {
     type: 'separator',
     title: 'Widgets'
   },
-  // '*': {
-  //   title: ''
-  // },
+  // TODO: Workaround for a seperator bug. Remove when patched.
+  // A page need to be listed after a separator or else the order will be messed up.
+  accordion: 'Accordion',
+  '*': {
+    title: ''
+  },
+
 };
