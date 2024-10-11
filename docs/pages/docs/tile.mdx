@@ -1,0 +1,123 @@
+import {Callout, Tabs} from 'nextra/components';
+import { Widget } from "../../components/widget";
+import LinkBadge from "../../components/link-badge/link-badge";
+import LinkBadgeGroup from "../../components/link-badge/link-badge-group";
+
+# Tile
+A tile that is typically used to group related information together.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/forui.widgets.tile-library.html"/>
+</LinkBadgeGroup>
+
+Tiles can be grouped together inside a [tile group](/docs/tile-group).
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='default' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTile(
+      prefixIcon: FIcon(FAssets.icons.user),
+      title: const Text('Personalization'),
+      suffixIcon: FIcon(FAssets.icons.chevronRight),
+      onPress: () { },
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTile(...)`
+
+```dart
+FTile(
+  prefixIcon: FIcon(FAssets.icons.globe),
+  title: const Text('Title'),
+  subtitle: const Text('subtitle'),
+  details: const Text('details'),
+  suffixIcon: FIcon(FAssets.icons.chevronRight),
+  semanticLabel: 'Label',
+  enabled: true,
+  onPress: () {},
+  onLongPress: () {},
+);
+```
+
+## Examples
+
+### Untappable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='default' query={{tappable: false}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTile(
+      prefixIcon: FIcon(FAssets.icons.user),
+      title: const Text('Personalization'),
+      suffixIcon: FIcon(FAssets.icons.chevronRight),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='default' query={{enabled: false}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {2}
+    FTile(
+      enabled: false
+      prefixIcon: FIcon(FAssets.icons.user),
+      title: const Text('Personalization'),
+      suffixIcon: FIcon(FAssets.icons.chevronRight),
+      onPress: () { },
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### With Subtitle
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='subtitle' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4}
+    FTile(
+      prefixIcon: FIcon(FAssets.icons.bell),
+      title: const Text('Notifications'),
+      subtitle: const Text('Banners, Sounds, Badges'),
+      suffixIcon: FIcon(FAssets.icons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### With Details
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile' variant='details' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4}
+    FTile(
+      prefixIcon: FIcon(FAssets.icons.wifi),
+      title: const Text('WiFi'),
+      details: const Text('Forus Labs (5G)'),
+      suffixIcon: FIcon(FAssets.icons.chevronRight),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>

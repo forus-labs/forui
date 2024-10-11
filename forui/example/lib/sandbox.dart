@@ -23,13 +23,14 @@ class _SandboxState extends State<Sandbox> {
   Widget build(BuildContext context) => Column(
         children: [
           FTileGroup(
+            label: const Text('Network'),
             children: [
               FTile(
                 prefixIcon: FIcon(FAssets.icons.wifi),
                 title: const Text('WiFi'),
                 details: const Text('Forus Labs (5G)'),
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () => print('WiFi'),
+                onPress: () {},
               ),
               FTile(
                 prefixIcon: FIcon(FAssets.icons.bluetooth),
@@ -37,7 +38,7 @@ class _SandboxState extends State<Sandbox> {
                 subtitle: const Text('Fee, Fo, Fum'),
                 details: const Text('Forus Labs (5G)'),
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () => print('Bluetooth'),
+                onPress: () {},
               ),
             ],
           ),
@@ -48,7 +49,7 @@ class _SandboxState extends State<Sandbox> {
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('Forus Labs (5G)'),
             suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () => print('Bluetooth'),
+            onPress: () {},
           ),
         ],
       );

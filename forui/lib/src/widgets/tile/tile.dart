@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/tile/tile_content.dart';
 import 'package:meta/meta.dart';
 
-/// A tile.
+/// A tile that is typically used to group related information together.
 ///
 /// Multiple tiles can be grouped together in a [FTileGroup]. Tiles grouped together will be separated by a divider,
 /// specified by a [FTileDivider].
