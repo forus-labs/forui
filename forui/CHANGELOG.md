@@ -33,6 +33,10 @@
 
 * Add `FValueNotifier`.
 
+* Add `FTile`.
+
+* Add `FTileGroup`.
+
 ### Changes
 
 * Change button to change color when hovering over it.
