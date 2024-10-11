@@ -42,7 +42,9 @@ class _SandboxState extends State<Sandbox> {
               ),
             ],
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           FTile(
             prefixIcon: FIcon(FAssets.icons.bluetooth),
             title: const Text('Bluetooth'),
