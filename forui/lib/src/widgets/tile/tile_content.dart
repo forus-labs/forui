@@ -34,17 +34,49 @@ class FTileContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final FTileData(:style, :index, :length, :divider) = FTileData.maybeOf(context)!;
     final contentStyle = style.contentStyle;
-    Widget content(FTileContentStateStyle style, Color background) => _Content(
-          style: style,
-          background: background,
-          prefixIcon: prefixIcon,
-          title: title,
-          subtitle: subtitle,
-          details: details,
-          suffixIcon: suffixIcon,
-        );
 
-    if (enabled && onPress != null || onLongPress != null) {
+    // This is necessary because Flutter doesn't inset the borders of a ColoredBox inside a DecoratedBox correctly.
+    Widget content(FTileContentStateStyle stateStyle, Color background) {
+      Widget content = switch (divider) {
+        FTileDivider.full => _Content(
+            style: stateStyle,
+            background: background,
+            prefixIcon: prefixIcon,
+            title: title,
+            subtitle: subtitle,
+            details: details,
+            suffixIcon: suffixIcon,
+          ),
+        FTileDivider.partial => _TitleAlignedContent(
+            style: stateStyle,
+            background: background,
+            prefixIcon: prefixIcon,
+            title: title,
+            subtitle: subtitle,
+            details: details,
+            suffixIcon: suffixIcon,
+          ),
+      };
+
+      if (1 < length) {
+        content = DecoratedBox(
+          decoration: BoxDecoration(
+            color: background,
+            borderRadius: BorderRadius.only(
+              topLeft: index == 0 ? style.borderRadius.topLeft : Radius.zero,
+              topRight: index == 0 ? style.borderRadius.topRight : Radius.zero,
+              bottomLeft: index == length - 1 ? style.borderRadius.bottomLeft : Radius.zero,
+              bottomRight: index == length - 1 ? style.borderRadius.bottomLeft : Radius.zero,
+            ),
+          ),
+          child: content,
+        );
+      }
+
+      return content;
+    }
+
+    if (enabled && (onPress != null || onLongPress != null)) {
       return FTappable(
         behavior: HitTestBehavior.translucent,
         semanticLabel: semanticLabel,
@@ -101,105 +133,192 @@ class _Content extends StatelessWidget {
   Widget build(BuildContext context) {
     final FTileData(style: tileStyle, :index, :length, :divider) = FTileData.maybeOf(context)!;
     final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
-    return DecoratedBox(
-      // This is necessary because Flutter doesn't inset the borders of a ColoredBox inside a DecoratedBox correctly.
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.only(
-          topLeft: index == 0 ? tileStyle.borderRadius.topLeft : Radius.zero,
-          topRight: index == 0 ? tileStyle.borderRadius.topRight : Radius.zero,
-          bottomLeft: index == length - 1 ? tileStyle.borderRadius.bottomLeft : Radius.zero,
-          bottomRight: index == length - 1 ? tileStyle.borderRadius.bottomLeft : Radius.zero,
-        ),
-      ),
+
+    Widget tile = Padding(
+      padding: contentStyle.padding,
       child: Row(
         children: [
-          IntrinsicWidth(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (prefixIcon case final prefixIcon?)
-                  Padding(
-                    padding: contentStyle.padding.copyWith(right: contentStyle.prefixIconSpacing),
-                    child: FIconStyleData(
-                      style: style.prefixIconStyle,
-                      child: prefixIcon,
-                    ),
-                  )
-                else
-                  SizedBox(width: contentStyle.padding.left),
-                if (index < length - 1 && divider == FTileDivider.full) FDivider(style: dividerStyle),
-              ],
+          if (prefixIcon case final prefixIcon?)
+            Padding(
+              padding: EdgeInsets.only(right: contentStyle.prefixIconSpacing),
+              child: FIconStyleData(
+                style: style.prefixIconStyle,
+                child: prefixIcon,
+              ),
             ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              merge(
+                style: style.titleTextStyle,
+                textHeightBehavior: const TextHeightBehavior(
+                  applyHeightToFirstAscent: false,
+                  applyHeightToLastDescent: false,
+                ),
+                overflow: TextOverflow.ellipsis,
+                child: title,
+              ),
+              if (subtitle case final subtitle?)
                 Padding(
-                  padding: contentStyle.padding.copyWith(left: 0),
-                  child: Row(
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          merge(
-                            style: style.titleTextStyle,
-                            textHeightBehavior: const TextHeightBehavior(
-                              applyHeightToFirstAscent: false,
-                              applyHeightToLastDescent: false,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            child: title,
-                          ),
-                          if (subtitle case final subtitle?)
-                            Padding(
-                              padding: EdgeInsets.only(top: contentStyle.titleSpacing),
-                              child: merge(
-                                style: style.subtitleTextStyle,
-                                textHeightBehavior: const TextHeightBehavior(
-                                  applyHeightToFirstAscent: false,
-                                  applyHeightToLastDescent: false,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                child: subtitle,
-                              ),
-                            ),
-                        ],
-                      ),
-                      const Spacer(),
-                      if (details case final details?)
+                  padding: EdgeInsets.only(top: contentStyle.titleSpacing),
+                  child: merge(
+                    style: style.subtitleTextStyle,
+                    textHeightBehavior: const TextHeightBehavior(
+                      applyHeightToFirstAscent: false,
+                      applyHeightToLastDescent: false,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    child: subtitle,
+                  ),
+                ),
+            ],
+          ),
+          const Spacer(),
+          if (details case final details?)
+            merge(
+              style: style.detailsTextStyle,
+              textHeightBehavior: const TextHeightBehavior(
+                applyHeightToFirstAscent: false,
+                applyHeightToLastDescent: false,
+              ),
+              overflow: TextOverflow.ellipsis,
+              child: details,
+            ),
+          if (suffixIcon case final suffixIcon?)
+            Padding(
+              padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
+              child: FIconStyleData(
+                style: style.suffixIconStyle,
+                child: suffixIcon,
+              ),
+            ),
+        ],
+      ),
+    );
+
+    if (divider == FTileDivider.full && index < length - 1) {
+      tile = Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [tile, FDivider(style: dividerStyle)],
+      );
+    }
+
+    return tile;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(ColorProperty('background', background));
+  }
+}
+
+class _TitleAlignedContent extends StatelessWidget {
+  final FTileContentStateStyle style;
+  final Color background;
+  final Widget? prefixIcon;
+  final Widget title;
+  final Widget? subtitle;
+  final Widget? details;
+  final Widget? suffixIcon;
+
+  const _TitleAlignedContent({
+    required this.style,
+    required this.background,
+    required this.prefixIcon,
+    required this.title,
+    required this.subtitle,
+    required this.details,
+    required this.suffixIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final FTileData(style: tileStyle, :index, :length, :divider) = FTileData.maybeOf(context)!;
+    final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
+    assert(divider == FTileDivider.partial, 'FTileDivider.title is required in _TitleAlignedContent.');
+
+    return Row(
+      children: [
+        if (prefixIcon case final prefixIcon?)
+          Padding(
+            padding: contentStyle.padding.copyWith(right: contentStyle.prefixIconSpacing),
+            child: FIconStyleData(
+              style: style.prefixIconStyle,
+              child: prefixIcon,
+            ),
+          )
+        else
+          SizedBox(width: contentStyle.padding.left),
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: contentStyle.padding.copyWith(left: 0),
+                child: Row(
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         merge(
-                          style: style.detailsTextStyle,
+                          style: style.titleTextStyle,
                           textHeightBehavior: const TextHeightBehavior(
                             applyHeightToFirstAscent: false,
                             applyHeightToLastDescent: false,
                           ),
                           overflow: TextOverflow.ellipsis,
-                          child: details,
+                          child: title,
                         ),
-                      if (suffixIcon case final suffixIcon?)
-                        Padding(
-                          padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
-                          child: FIconStyleData(
-                            style: style.suffixIconStyle,
-                            child: suffixIcon,
+                        if (subtitle case final subtitle?)
+                          Padding(
+                            padding: EdgeInsets.only(top: contentStyle.titleSpacing),
+                            child: merge(
+                              style: style.subtitleTextStyle,
+                              textHeightBehavior: const TextHeightBehavior(
+                                applyHeightToFirstAscent: false,
+                                applyHeightToLastDescent: false,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              child: subtitle,
+                            ),
                           ),
+                      ],
+                    ),
+                    const Spacer(),
+                    if (details case final details?)
+                      merge(
+                        style: style.detailsTextStyle,
+                        textHeightBehavior: const TextHeightBehavior(
+                          applyHeightToFirstAscent: false,
+                          applyHeightToLastDescent: false,
                         ),
-                    ],
-                  ),
+                        overflow: TextOverflow.ellipsis,
+                        child: details,
+                      ),
+                    if (suffixIcon case final suffixIcon?)
+                      Padding(
+                        padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
+                        child: FIconStyleData(
+                          style: style.suffixIconStyle,
+                          child: suffixIcon,
+                        ),
+                      ),
+                  ],
                 ),
-                if (index < length - 1 && (divider == FTileDivider.full || divider == FTileDivider.title))
-                  FDivider(style: dividerStyle),
-              ],
-            ),
+              ),
+              if (index < length - 1) FDivider(style: dividerStyle),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

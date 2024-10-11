@@ -1,23 +1,45 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/util.dart';
 
 /// The divider between tiles in a group.
 enum FTileDivider {
-  /// A divider that spans the entire tile horizontally.
+  /// Represents a divider that spans the entire tile horizontally.
   full,
 
-  /// A divider that spans the tile horizontally from the title's left edge to the tile's right edge.
-  title,
-
-  /// No divider.
-  none,
+  /// Represents a divider that partially spans the tile horizontally. A tile is always responsible for the divider
+  /// directly below it.
+  ///
+  /// For [FTile.new], the divider spans from the title's left edge to the tile's right edge. It is always aligned to
+  /// the title of the tile above the divider.
+  /// ```
+  /// -----------------------------
+  /// | [prefixIcon] [title]      | <- Tile A
+  /// |              ------------ |
+  /// | [title]                   | <- Tile B
+  /// -----------------------------
+  /// ```
+  partial,
 }
 
+/// A tile group that groups multiple [FTile]s.
+///
+/// Tiles grouped together will be separated by a divider, specified by [divider].
+///
+/// See:
+/// * https://forui.dev/docs/tile for working examples.
+/// * [FTileGroup] for grouping tiles together.
+/// * [FTileStyle] for customizing a tile's appearance.
 class FTileGroup extends StatelessWidget {
-  final FTileStyle? style;
+  /// The style.
+  final FTileGroupStyle? style;
 
   /// The divider between tiles in a group.
   final FTileDivider divider;
+
+  /// The group's label.
+  final Widget? label;
 
   /// The tiles in the group.
   final List<Widget> children;
@@ -26,34 +48,96 @@ class FTileGroup extends StatelessWidget {
   const FTileGroup({
     required this.children,
     this.style,
-    this.divider = FTileDivider.title,
+    this.divider = FTileDivider.partial,
+    this.label,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.tileStyle;
-    // DecoratedBox doesn't inset the child, resulting in an invisible border.
-    // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
-    return Container(
-      decoration: BoxDecoration(
-        color: style.enabledBackgroundColor,
-        borderRadius: style.borderRadius,
-        border: style.border,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          for (final (index, child) in children.indexed)
-            FTileData(
-              style: style,
-              divider: divider,
-              index: index,
-              length: children.length,
-              child: child,
+    final style = this.style ?? context.theme.tileGroupStyle;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (label case final label?)
+          Padding(
+            padding: style.labelPadding,
+            child: merge(
+              style: style.labelTextStyle,
+              textHeightBehavior: const TextHeightBehavior(
+                applyHeightToFirstAscent: false,
+                applyHeightToLastDescent: false,
+              ),
+              overflow: TextOverflow.ellipsis,
+              child: label,
             ),
-        ],
-      ),
+          ),
+        // DecoratedBox doesn't inset the child, resulting in an invisible border.
+        // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: style.tileStyle.borderRadius,
+            border: style.tileStyle.border,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final (index, child) in children.indexed)
+                FTileData(
+                  style: style.tileStyle,
+                  divider: divider,
+                  index: index,
+                  length: children.length,
+                  child: child,
+                ),
+            ],
+          ),
+        ),
+      ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('divider', divider));
+  }
+}
+
+/// A [FTileGroup]'s style.
+class FTileGroupStyle with Diagnosticable {
+  /// The label's padding.
+  final EdgeInsets labelPadding;
+
+  /// The label's text style.
+  final TextStyle labelTextStyle;
+
+  /// The tile's style.
+  final FTileStyle tileStyle;
+
+  /// Creates a [FTileGroupStyle].
+  FTileGroupStyle({
+    required this.labelTextStyle,
+    required this.tileStyle,
+    this.labelPadding = const EdgeInsets.symmetric(vertical: 7.5),
+  });
+
+  /// Creates a [FTileGroupStyle] that inherits from the given arguments.
+  FTileGroupStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+      : this(
+          labelTextStyle: typography.base,
+          tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('labelPadding', labelPadding))
+      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
+      ..add(DiagnosticsProperty('tileStyle', tileStyle));
   }
 }
