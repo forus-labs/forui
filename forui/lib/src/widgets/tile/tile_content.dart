@@ -36,30 +36,7 @@ class FTileContent extends StatelessWidget {
     final contentStyle = style.contentStyle;
 
     // This is necessary because Flutter doesn't inset the borders of a ColoredBox inside a DecoratedBox correctly.
-    Widget content(FTileContentStateStyle stateStyle, Color background) {
-      Widget content = switch (divider) {
-        FTileDivider.full => _Content(
-            style: stateStyle,
-            background: background,
-            prefixIcon: prefixIcon,
-            title: title,
-            subtitle: subtitle,
-            details: details,
-            suffixIcon: suffixIcon,
-          ),
-        FTileDivider.partial => _TitleAlignedContent(
-            style: stateStyle,
-            background: background,
-            prefixIcon: prefixIcon,
-            title: title,
-            subtitle: subtitle,
-            details: details,
-            suffixIcon: suffixIcon,
-          ),
-      };
-
-      if (1 < length) {
-        content = DecoratedBox(
+    Widget content(FTileContentStateStyle stateStyle, Color background) => DecoratedBox(
           decoration: BoxDecoration(
             color: background,
             borderRadius: BorderRadius.only(
@@ -69,12 +46,27 @@ class FTileContent extends StatelessWidget {
               bottomRight: index == length - 1 ? style.borderRadius.bottomLeft : Radius.zero,
             ),
           ),
-          child: content,
+          child: switch (divider) {
+            FTileDivider.full => _Content(
+                style: stateStyle,
+                background: background,
+                prefixIcon: prefixIcon,
+                title: title,
+                subtitle: subtitle,
+                details: details,
+                suffixIcon: suffixIcon,
+              ),
+            FTileDivider.partial => _TitleAlignedContent(
+                style: stateStyle,
+                background: background,
+                prefixIcon: prefixIcon,
+                title: title,
+                subtitle: subtitle,
+                details: details,
+                suffixIcon: suffixIcon,
+              ),
+          },
         );
-      }
-
-      return content;
-    }
 
     if (enabled && (onPress != null || onLongPress != null)) {
       return FTappable(

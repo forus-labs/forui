@@ -38,6 +38,9 @@ class FTileGroup extends StatelessWidget {
   /// The divider between tiles in a group.
   final FTileDivider divider;
 
+  /// The group's semantic label.
+  final String? semanticLabel;
+
   /// The group's label.
   final Widget? label;
 
@@ -49,6 +52,7 @@ class FTileGroup extends StatelessWidget {
     required this.children,
     this.style,
     this.divider = FTileDivider.partial,
+    this.semanticLabel,
     this.label,
     super.key,
   });
@@ -56,45 +60,49 @@ class FTileGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.tileGroupStyle;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (label case final label?)
-          Padding(
-            padding: style.labelPadding,
-            child: merge(
-              style: style.labelTextStyle,
-              textHeightBehavior: const TextHeightBehavior(
-                applyHeightToFirstAscent: false,
-                applyHeightToLastDescent: false,
+    return Semantics(
+      label: semanticLabel,
+      container: true,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (label case final label?)
+            Padding(
+              padding: style.labelPadding,
+              child: merge(
+                style: style.labelTextStyle,
+                textHeightBehavior: const TextHeightBehavior(
+                  applyHeightToFirstAscent: false,
+                  applyHeightToLastDescent: false,
+                ),
+                overflow: TextOverflow.ellipsis,
+                child: label,
               ),
-              overflow: TextOverflow.ellipsis,
-              child: label,
+            ),
+          // DecoratedBox doesn't inset the child, resulting in an invisible border.
+          // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: style.tileStyle.borderRadius,
+              border: style.tileStyle.border,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final (index, child) in children.indexed)
+                  FTileData(
+                    style: style.tileStyle,
+                    divider: divider,
+                    index: index,
+                    length: children.length,
+                    child: child,
+                  ),
+              ],
             ),
           ),
-        // DecoratedBox doesn't inset the child, resulting in an invisible border.
-        // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: style.tileStyle.borderRadius,
-            border: style.tileStyle.border,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final (index, child) in children.indexed)
-                FTileData(
-                  style: style.tileStyle,
-                  divider: divider,
-                  index: index,
-                  length: children.length,
-                  child: child,
-                ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -128,7 +136,7 @@ class FTileGroupStyle with Diagnosticable {
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   FTileGroupStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
-          labelTextStyle: typography.base,
+          labelTextStyle: typography.base.copyWith(fontWeight: FontWeight.w600),
           tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         );
 
