@@ -111,7 +111,8 @@ class FTileGroup extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('divider', divider));
+      ..add(EnumProperty('divider', divider))
+      ..add(StringProperty('semanticLabel', semanticLabel));
   }
 }
 
