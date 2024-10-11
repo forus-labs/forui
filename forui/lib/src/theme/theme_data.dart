@@ -94,8 +94,8 @@ final class FThemeData with Diagnosticable {
   /// The text field style.
   final FTextFieldStyle textFieldStyle;
 
-  /// The tile style.
-  final FTileStyle tileStyle;
+  /// The tile group's style.
+  final FTileGroupStyle tileGroupStyle;
 
   /// The tooltip style.
   final FTooltipStyle tooltipStyle;
@@ -133,7 +133,7 @@ final class FThemeData with Diagnosticable {
     required this.tabsStyle,
     required this.textFieldStyle,
     required this.tooltipStyle,
-    required this.tileStyle,
+    required this.tileGroupStyle,
     this.typography = const FTypography(),
   });
 
@@ -173,7 +173,7 @@ final class FThemeData with Diagnosticable {
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tileGroupStyle: FTileGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
     );
   }
 
@@ -247,7 +247,7 @@ final class FThemeData with Diagnosticable {
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
-    FTileStyle? tileStyle,
+    FTileGroupStyle? tileGroupStyle,
     FTooltipStyle? tooltipStyle,
   }) =>
       FThemeData(
@@ -277,7 +277,7 @@ final class FThemeData with Diagnosticable {
         switchStyle: switchStyle ?? this.switchStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
-        tileStyle: tileStyle ?? this.tileStyle,
+        tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
         tooltipStyle: tooltipStyle ?? this.tooltipStyle,
       );
 
@@ -311,7 +311,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tileStyle', tileStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug));
   }
 
@@ -346,7 +346,7 @@ final class FThemeData with Diagnosticable {
           switchStyle == other.switchStyle &&
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
-          tileStyle == other.tileStyle &&
+          tileGroupStyle == other.tileGroupStyle &&
           tooltipStyle == other.tooltipStyle;
 
   @override
@@ -377,6 +377,6 @@ final class FThemeData with Diagnosticable {
       switchStyle.hashCode ^
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
-      tileStyle.hashCode ^
+      tileGroupStyle.hashCode ^
       tooltipStyle.hashCode;
 }

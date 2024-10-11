@@ -11,9 +11,10 @@ import 'package:meta/meta.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/tile for working examples.
+/// * [FTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a tile's appearance.
 class FTile extends StatelessWidget {
-  /// The tile's style. Defaults to the ancestor tile group's style if present, and [FThemeData.tileStyle] otherwise.
+  /// The tile's style. Defaults to the ancestor tile group's style if present, and [FThemeData.tileGroupStyle] otherwise.
   ///
   /// Provide a style to prevent inheriting from the ancestor tile group's style.
   final FTileStyle? style;
@@ -57,7 +58,7 @@ class FTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = FTileData.maybeOf(context);
     if (data == null) {
-      final style = this.style ?? context.theme.tileStyle;
+      final style = this.style ?? context.theme.tileGroupStyle.tileStyle;
       return FTileData(
         style: style,
         divider: FTileDivider.full,
