@@ -56,8 +56,8 @@ final class FStyle with Diagnosticable {
             typography: typography,
           ),
           disabledFormFieldStyle: FFormFieldStyle.inherit(
-            labelColor: colorScheme.primary.withOpacity(0.7),
-            descriptionColor: colorScheme.mutedForeground.withOpacity(0.7),
+            labelColor: colorScheme.disable(colorScheme.primary),
+            descriptionColor: colorScheme.disable(colorScheme.mutedForeground),
             typography: typography,
           ),
           errorFormFieldStyle: FFormFieldErrorStyle.inherit(

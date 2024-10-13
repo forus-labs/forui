@@ -13,6 +13,28 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FSlider', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSlider(
+            style: TestScaffold.blueScreen.sliderStyles.horizontalStyle,
+            controller: FContinuousSliderController(
+              selection: FSliderSelection(min: 0.30, max: 0.60),
+            ),
+            marks: const [
+              FSliderMark(value: 0.0, label: Text('0')),
+              FSliderMark(value: 0.25, label: Text('25'), tick: false),
+              FSliderMark(value: 0.5, label: Text('50')),
+              FSliderMark(value: 0.75, label: Text('75'), tick: false),
+              FSliderMark(value: 1.0, label: Text('100')),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final layout in Layout.values) {
         for (final touch in [true, false]) {

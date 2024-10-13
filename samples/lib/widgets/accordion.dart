@@ -26,7 +26,7 @@ class AccordionPage extends SampleScaffold {
         children: [
           FAccordion(
             controller: controller,
-            children: [
+            items: [
               FAccordionItem(
                 title: const Text('Is it accessible?'),
                 child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),

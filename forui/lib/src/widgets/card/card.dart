@@ -44,7 +44,7 @@ final class FCard extends StatelessWidget {
           image: image,
           title: title,
           subtitle: subtitle,
-          style: style?.content,
+          style: style?.contentStyle,
           child: child,
         );
 
@@ -70,29 +70,31 @@ final class FCardStyle with Diagnosticable {
   final BoxDecoration decoration;
 
   /// The card content's style.
-  final FCardContentStyle content;
+  final FCardContentStyle contentStyle;
 
   /// Creates a [FCardStyle].
-  FCardStyle({required this.decoration, required this.content});
+  FCardStyle({required this.decoration, required this.contentStyle});
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme], [typography] and [style].
   FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : decoration = BoxDecoration(
-          border: Border.all(color: colorScheme.border),
-          borderRadius: style.borderRadius,
-          color: colorScheme.background,
-        ),
-        content = FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography);
+      : this(
+          decoration: BoxDecoration(
+            border: Border.all(color: colorScheme.border),
+            borderRadius: style.borderRadius,
+            color: colorScheme.background,
+          ),
+          contentStyle: FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+        );
 
   /// Returns a copy of this [FCardStyle] with the given properties replaced.
   @useResult
   FCardStyle copyWith({
     BoxDecoration? decoration,
-    FCardContentStyle? content,
+    FCardContentStyle? contentStyle,
   }) =>
       FCardStyle(
         decoration: decoration ?? this.decoration,
-        content: content ?? this.content,
+        contentStyle: contentStyle ?? this.contentStyle,
       );
 
   @override
@@ -100,7 +102,7 @@ final class FCardStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('content', content));
+      ..add(DiagnosticsProperty('contentStyle', contentStyle));
   }
 
   @override
@@ -109,8 +111,8 @@ final class FCardStyle with Diagnosticable {
       other is FCardStyle &&
           runtimeType == other.runtimeType &&
           decoration == other.decoration &&
-          content == other.content;
+          contentStyle == other.contentStyle;
 
   @override
-  int get hashCode => decoration.hashCode ^ content.hashCode;
+  int get hashCode => decoration.hashCode ^ contentStyle.hashCode;
 }

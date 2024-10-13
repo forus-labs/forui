@@ -63,7 +63,7 @@ class FAlert extends StatelessWidget {
           children: [
             Row(
               children: [
-                FInheritedIconStyle(
+                FIconStyleData(
                   style: FIconStyle(color: style.iconColor, size: style.iconSize),
                   child: icon,
                 ),
@@ -122,34 +122,34 @@ final class FAlertStyles with Diagnosticable {
 
   /// Creates a [FAlertStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : primary = FAlertCustomStyle(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-          iconColor: colorScheme.foreground,
-          titleTextStyle: typography.base.copyWith(
-            fontWeight: FontWeight.w500,
-            color: colorScheme.foreground,
-            height: 1.2,
+      : this(
+          primary: FAlertCustomStyle(
+            iconColor: colorScheme.foreground,
+            titleTextStyle: typography.base.copyWith(
+              fontWeight: FontWeight.w500,
+              color: colorScheme.foreground,
+              height: 1.2,
+            ),
+            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
+            decoration: BoxDecoration(
+              border: Border.all(color: colorScheme.border),
+              borderRadius: style.borderRadius,
+              color: colorScheme.background,
+            ),
           ),
-          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
-          decoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
-          ),
-        ),
-        destructive = FAlertCustomStyle(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-          iconColor: colorScheme.destructive,
-          titleTextStyle: typography.base.copyWith(
-            fontWeight: FontWeight.w500,
-            color: colorScheme.destructive,
-            height: 1.2,
-          ),
-          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.destructive),
-          decoration: BoxDecoration(
-            border: Border.all(color: colorScheme.destructive),
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
+          destructive: FAlertCustomStyle(
+            iconColor: colorScheme.destructive,
+            titleTextStyle: typography.base.copyWith(
+              fontWeight: FontWeight.w500,
+              color: colorScheme.destructive,
+              height: 1.2,
+            ),
+            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.destructive),
+            decoration: BoxDecoration(
+              border: Border.all(color: colorScheme.destructive),
+              borderRadius: style.borderRadius,
+              color: colorScheme.background,
+            ),
           ),
         );
 
@@ -211,7 +211,7 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
   /// The decoration.
   final BoxDecoration decoration;
 
-  /// The padding. Defaults to `const EdgeInsets.all(16)`.
+  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 12)`.
   final EdgeInsets padding;
 
   /// The icon's color.
@@ -237,7 +237,7 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
     required this.iconColor,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    this.padding = const EdgeInsets.all(16),
+    this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 12),
     this.iconSize = 20,
   }) : assert(0 < iconSize, 'iconSize is $iconSize, but it should be positive.');
 
@@ -266,8 +266,8 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('decoration', decoration))
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('iconColor', iconColor))
-      ..add(DiagnosticsProperty('iconSize', iconSize))
+      ..add(ColorProperty('iconColor', iconColor))
+      ..add(DoubleProperty('iconSize', iconSize))
       ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
       ..add(DiagnosticsProperty('subtitleTextStyle', subtitleTextStyle));
   }

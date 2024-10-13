@@ -18,7 +18,7 @@ A set of items that are treated as a single selection.
     ```dart
     enum Sidebar { recents, home, applications }
 
-    FSelectGroup(
+    FSelectGroup<Sidebar>(
       controller: FMultiSelectGroupController(values: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
@@ -46,7 +46,7 @@ A set of items that are treated as a single selection.
 ### `FSelectGroup(...)`
 
 ```dart
-FSelectGroup(
+FSelectGroup<Value>(
   controller: FMultiSelectGroupController(), // or FRadioSelectGroupController()
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
@@ -92,7 +92,7 @@ FSelectGroup(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FSelectGroup(
+                    FSelectGroup<Language>(
                       controller: FMultiSelectGroupController(),
                       label: const Text('Favorite Languages'),
                       description: const Text('Your favorite language.'),
@@ -163,7 +163,7 @@ FSelectGroup(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FSelectGroup(
+                FSelectGroup<Notification>(
                   controller: FRadioSelectGroupController(),
                   label: const Text('Notifications'),
                   description: const Text('Select the notifications.'),

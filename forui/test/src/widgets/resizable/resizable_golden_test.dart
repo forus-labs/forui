@@ -10,6 +10,36 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FResizable', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FResizable(
+            style: TestScaffold.blueScreen.resizableStyle,
+            axis: Axis.vertical,
+            crossAxisExtent: 100,
+            children: [
+              FResizableRegion(
+                initialExtent: 150,
+                builder: (_, __, child) => child!,
+                child: const Align(
+                  child: Text(''),
+                ),
+              ),
+              FResizableRegion(
+                initialExtent: 300,
+                builder: (_, __, child) => child!,
+                child: const Align(
+                  child: Text(''),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final axis in Axis.values) {
         for (final divider in FResizableDivider.values) {

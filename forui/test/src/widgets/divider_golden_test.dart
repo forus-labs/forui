@@ -10,6 +10,19 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FDivider', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FDivider(
+            style: TestScaffold.blueScreen.dividerStyles.verticalStyle,
+            axis: Axis.vertical,
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final axis in Axis.values) {
         testWidgets('$name - $axis', (tester) async {

@@ -85,8 +85,8 @@ final class FLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ??
         switch (axis) {
-          Axis.horizontal => context.theme.labelStyles.horizontal,
-          Axis.vertical => context.theme.labelStyles.vertical,
+          Axis.horizontal => context.theme.labelStyles.horizontalStyle,
+          Axis.vertical => context.theme.labelStyles.verticalStyle,
         };
 
     if (label == null && description == null) {
@@ -316,20 +316,20 @@ class _FVerticalLabel extends StatelessWidget {
 /// The [FLabel]'s styles.
 final class FLabelStyles with Diagnosticable {
   /// The horizontal label's style.
-  final FLabelStyle horizontal;
+  final FLabelStyle horizontalStyle;
 
   /// The vertical label's style.
-  final FLabelStyle vertical;
+  final FLabelStyle verticalStyle;
 
   /// Creates a [FLabelStyles].
   const FLabelStyles({
-    required this.horizontal,
-    required this.vertical,
+    required this.horizontalStyle,
+    required this.verticalStyle,
   });
 
   /// Creates a [FLabelStyles] that inherits its properties from the given [style].
   FLabelStyles.inherit({required FStyle style})
-      : horizontal = (
+      : horizontalStyle = (
           layout: const FLabelLayoutStyle(
             childPadding: EdgeInsets.only(right: 8),
             descriptionPadding: EdgeInsets.only(top: 2),
@@ -337,7 +337,7 @@ final class FLabelStyles with Diagnosticable {
           ),
           state: FLabelStateStyles.inherit(style: style),
         ),
-        vertical = (
+        verticalStyle = (
           layout: const FLabelLayoutStyle(
             labelPadding: EdgeInsets.only(bottom: 5),
             descriptionPadding: EdgeInsets.only(top: 5),
@@ -349,20 +349,20 @@ final class FLabelStyles with Diagnosticable {
   /// Returns a copy of this [FLabelStyles] with the given properties replaced.
   @useResult
   FLabelStyles copyWith({
-    FLabelStyle? horizontal,
-    FLabelStyle? vertical,
+    FLabelStyle? horizontalStyle,
+    FLabelStyle? verticalStyle,
   }) =>
       FLabelStyles(
-        horizontal: horizontal ?? this.horizontal,
-        vertical: vertical ?? this.vertical,
+        horizontalStyle: horizontalStyle ?? this.horizontalStyle,
+        verticalStyle: verticalStyle ?? this.verticalStyle,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('horizontal', horizontal))
-      ..add(DiagnosticsProperty('vertical', vertical));
+      ..add(DiagnosticsProperty('horizontalStyle', horizontalStyle))
+      ..add(DiagnosticsProperty('verticalStyle', verticalStyle));
   }
 
   @override
@@ -370,11 +370,11 @@ final class FLabelStyles with Diagnosticable {
       identical(this, other) ||
       other is FLabelStyles &&
           runtimeType == other.runtimeType &&
-          horizontal == other.horizontal &&
-          vertical == other.vertical;
+          horizontalStyle == other.horizontalStyle &&
+          verticalStyle == other.verticalStyle;
 
   @override
-  int get hashCode => horizontal.hashCode ^ vertical.hashCode;
+  int get hashCode => horizontalStyle.hashCode ^ verticalStyle.hashCode;
 }
 
 /// The [FLabel]'s layout style.
@@ -459,9 +459,11 @@ class FLabelStateStyles with Diagnosticable {
 
   /// Creates a [FLabelStateStyles] that inherits its properties from [style].
   FLabelStateStyles.inherit({required FStyle style})
-      : enabledStyle = style.enabledFormFieldStyle,
-        disabledStyle = style.disabledFormFieldStyle,
-        errorStyle = style.errorFormFieldStyle;
+      : this(
+          enabledStyle: style.enabledFormFieldStyle,
+          disabledStyle: style.disabledFormFieldStyle,
+          errorStyle: style.errorFormFieldStyle,
+        );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

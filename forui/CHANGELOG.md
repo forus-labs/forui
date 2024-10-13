@@ -11,10 +11,15 @@
 
 * Add `FTextField.forceErrorText`.
 
-* **Breaking** Add `FColorScheme.disabledColorBrightness` - this will only affect users that create a `FColorScheme`
-  from scratch.
-
 * Add `FIcon`.
+
+* Add `FColorScheme.disable(...)`.
+
+* Add `FColorScheme.disableOpacity`.
+
+* Add `FColorScheme.hover(...)`.
+
+* Add `FColorScheme.enabledHoveredOpacity`.
 
 ### Changes
 
@@ -41,7 +46,7 @@
 
 * **Breaking** Remove FButtonIcon & FAlertIconStyle  - use `FIcon` instead.
 
-* * **Breaking** Change FButtonCustomStyle to better represent the style's layout - this will only affect users that 
+* **Breaking** Change FButtonCustomStyle to better represent the style's layout - this will only affect users that 
   create a custom `FButtonCustomStyle`.
 
 * **Breaking** Change `FBottomNavigationBarItem.icon` from `SvgAsset` to `Widget` - wrap the asset in ` FIcon` instead.
@@ -49,6 +54,31 @@
 * **Breaking** Change `FHeaderAction.icon` from `SvgAsset` to `Widget` - wrap the asset in ` FIcon` instead.
 
 * **Breaking** Change `FSelectGroup.builder` parameters.
+
+* **Breaking** Change `FBadgeCustomStyle.content` to `FBadgeCustomStyle.contentStyle`.
+
+* **Breaking** Change `FAvatarStyle.text` to `FAvatarStyle.textStyle`.
+
+* **Breaking** Change `FDialogStyle.horizontal` to `FDialogStyle.horizontalStyle`.
+
+* **Breaking** Change `FDialogStyle.selectedLabel` to `FDialogStyle.selectedLabelTextStyle`.
+
+* **Breaking** Change `FDialogStyle.unselectedLabel` to `FDialogStyle.unselectedLabelTextStyle`.
+
+* **Breaking** Change `FDividerStyle.horizontal` to `FDividerStyle.horizontalStyle`.
+
+* **Breaking** Change `FDividerStyle.vertical` to `FDividerStyle.verticalStyle`.
+
+* **Breaking** Change `FDialogStyle.indicator` to `FDialogStyle.indicatorDecoration`.
+
+* **Breaking** Change `FHeader.leftActions` to `FHeader.prefixActions`.
+
+* **Breaking** Change `FHeader.rightActions` to `FHeader.suffixActions`.
+
+
+* **Breaking** Change `FLabelStyle.horizontal` to `FLabelStyle.horizontalStyle`.
+
+* **Breaking** Change `FLabelStyle.vertical` to `FLabelStyle.verticalStyle`.
 
 ### Fixes
 

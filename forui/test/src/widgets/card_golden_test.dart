@@ -10,6 +10,25 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FCard', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FCard(
+                style: TestScaffold.blueScreen.cardStyle,
+                title: const Text('Notifications'),
+                subtitle: const Text('You have 3 unread messages.'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, background) in TestScaffold.themes) {
       testWidgets('$name with FCardContent', (tester) async {
         await tester.pumpWidget(

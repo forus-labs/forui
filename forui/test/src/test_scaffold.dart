@@ -1,13 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
+import 'threshold_file_comparator.dart';
+
+MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
 
 class TestScaffold extends StatelessWidget {
   static final blueScreen = FThemeData.inherit(
     colorScheme: const FColorScheme(
       brightness: Brightness.light,
-      disabledColorLightness: 0.1,
       background: Color(0xFF03A9F4),
       foreground: Color(0xFF03A9F4),
       primary: Color(0xFF03A9F4),
@@ -39,7 +43,7 @@ class TestScaffold extends StatelessWidget {
   const TestScaffold.app({required this.data, required this.child, this.background, super.key}) : wrapped = true;
 
   TestScaffold.blue({required this.child, super.key})
-      : data = blueScreen,
+      : data = FThemes.zinc.light,
         background = blueScreen.colorScheme.background,
         wrapped = false;
 

@@ -23,12 +23,12 @@ class FAccordion extends StatefulWidget {
   /// The style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
 
-  /// The children.
-  final List<FAccordionItem> children;
+  /// The items.
+  final List<FAccordionItem> items;
 
   /// Creates a [FAccordion].
   const FAccordion({
-    required this.children,
+    required this.items,
     this.controller,
     this.style,
     super.key,
@@ -43,7 +43,7 @@ class FAccordion extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(IterableProperty('items', children));
+      ..add(IterableProperty('items', items));
   }
 }
 
@@ -74,7 +74,7 @@ class _FAccordionState extends State<FAccordion> {
     final style = widget.style ?? FTheme.of(context).accordionStyle;
     return Column(
       children: [
-        for (final (index, child) in widget.children.indexed)
+        for (final (index, child) in widget.items.indexed)
           FAccordionItemData(
             index: index,
             controller: _controller,
@@ -102,10 +102,10 @@ final class FAccordionStyle with Diagnosticable {
   /// The child's default text style.
   final TextStyle childTextStyle;
 
-  /// The padding around the title.
+  /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
   final EdgeInsets titlePadding;
 
-  /// The padding around the content.
+  /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 15)`.
   final EdgeInsets childPadding;
 
   /// The icon's color.
@@ -120,17 +120,17 @@ final class FAccordionStyle with Diagnosticable {
   /// The divider's color.
   final FDividerStyle dividerStyle;
 
-  /// The expanding/collapsing animation duration.
+  /// The expanding/collapsing animation duration. Defaults to 200ms.
   final Duration animationDuration;
 
   /// Creates a [FAccordionStyle].
   FAccordionStyle({
     required this.titleTextStyle,
     required this.childTextStyle,
-    required this.titlePadding,
-    required this.childPadding,
     required this.iconColor,
     required this.dividerStyle,
+    this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
+    this.childPadding = const EdgeInsets.only(bottom: 15),
     this.iconSize = 20,
     this.animationDuration = const Duration(milliseconds: 200),
   }) : assert(0 < iconSize, 'iconSize should be positive.');
@@ -138,15 +138,8 @@ final class FAccordionStyle with Diagnosticable {
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : this(
-          titleTextStyle: typography.base.copyWith(
-            fontWeight: FontWeight.w500,
-            color: colorScheme.foreground,
-          ),
-          childTextStyle: typography.sm.copyWith(
-            color: colorScheme.foreground,
-          ),
-          titlePadding: const EdgeInsets.symmetric(vertical: 15),
-          childPadding: const EdgeInsets.only(bottom: 15),
+          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
+          childTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
           iconColor: colorScheme.primary,
           dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
         );

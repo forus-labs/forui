@@ -36,8 +36,8 @@ sealed class FHeader extends StatelessWidget {
   const factory FHeader.nested({
     required Widget title,
     FNestedHeaderStyle? style,
-    List<Widget> leftActions,
-    List<Widget> rightActions,
+    List<Widget> prefixActions,
+    List<Widget> suffixActions,
     Key? key,
   }) = _FNestedHeader;
 }

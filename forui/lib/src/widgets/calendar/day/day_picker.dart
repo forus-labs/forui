@@ -153,7 +153,7 @@ class _DayPickerState extends State<DayPicker> {
   }
 }
 
-/// Based on Material [CalendarDatePicker]'s _DayPickerGridDelegate.
+// Based on Material [CalendarDatePicker]'s _DayPickerGridDelegate.
 class _GridDelegate extends SliverGridDelegate {
   const _GridDelegate();
 
@@ -206,8 +206,10 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
   factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
     final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
-    final mutedTextStyle =
-        typography.base.copyWith(color: colorScheme.mutedForeground.withOpacity(0.5), fontWeight: FontWeight.w500);
+    final mutedTextStyle = typography.base.copyWith(
+      color: colorScheme.disable(colorScheme.mutedForeground),
+      fontWeight: FontWeight.w500,
+    );
 
     final disabled = FCalendarDayStyle(
       selectedStyle: FCalendarEntryStyle(
@@ -252,7 +254,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
-            hoveredBackgroundColor: colorScheme.primaryForeground,
+            hoveredBackgroundColor: colorScheme.secondary,
             focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
           ),

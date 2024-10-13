@@ -16,7 +16,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
-          child: FInheritedIconStyle(
+          child: FIconStyleData(
             style: const FIconStyle(color: Colors.red, size: 48),
             child: FIcon(FAssets.icons.laugh),
           ),

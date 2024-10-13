@@ -21,16 +21,15 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonCustomStyle(:content), :enabled) = FButtonData.of(context);
-
+    final FButtonData(style: FButtonCustomStyle(:contentStyle), :enabled) = FButtonData.of(context);
     return Padding(
-      padding: content.padding,
+      padding: contentStyle.padding,
       child: DefaultTextStyle.merge(
-        style: enabled ? content.enabledTextStyle : content.disabledTextStyle,
-        child: FInheritedIconStyle(
+        style: enabled ? contentStyle.enabledTextStyle : contentStyle.disabledTextStyle,
+        child: FIconStyleData(
           style: FIconStyle(
-            color: enabled ? content.enabledIconColor : content.disabledIconColor,
-            size: content.iconSize,
+            color: enabled ? contentStyle.enabledIconColor : contentStyle.disabledIconColor,
+            size: contentStyle.iconSize,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -62,11 +61,11 @@ class IconContent extends StatelessWidget {
     final FButtonData(:style, :enabled) = FButtonData.of(context);
 
     return Padding(
-      padding: style.iconContent.padding,
-      child: FInheritedIconStyle(
+      padding: style.iconContentStyle.padding,
+      child: FIconStyleData(
         style: FIconStyle(
-          color: enabled ? style.iconContent.enabled : style.iconContent.disabled,
-          size: style.iconContent.size,
+          color: enabled ? style.iconContentStyle.enabledColor : style.iconContentStyle.disabledColor,
+          size: style.iconContentStyle.size,
         ),
         child: child,
       ),
@@ -82,7 +81,7 @@ final class FButtonContentStyle with Diagnosticable {
   /// The [TextStyle] when this button is disabled.
   final TextStyle disabledTextStyle;
 
-  /// The padding.
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
   final EdgeInsets padding;
 
   /// The icon's color when this button is enabled.
@@ -98,9 +97,9 @@ final class FButtonContentStyle with Diagnosticable {
   FButtonContentStyle({
     required this.enabledTextStyle,
     required this.disabledTextStyle,
-    required this.padding,
     required this.enabledIconColor,
     required this.disabledIconColor,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
     this.iconSize = 20,
   });
 
@@ -109,23 +108,20 @@ final class FButtonContentStyle with Diagnosticable {
     required FTypography typography,
     required Color enabled,
     required Color disabled,
-  })  : enabledTextStyle = typography.base.copyWith(
-          color: enabled,
-          fontWeight: FontWeight.w500,
-          height: 1,
-        ),
-        disabledTextStyle = typography.base.copyWith(
-          color: disabled,
-          fontWeight: FontWeight.w500,
-          height: 1,
-        ),
-        padding = const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12.5,
-        ),
-        enabledIconColor = enabled,
-        disabledIconColor = disabled,
-        iconSize = 20;
+  }) : this(
+          enabledTextStyle: typography.base.copyWith(
+            color: enabled,
+            fontWeight: FontWeight.w500,
+            height: 1,
+          ),
+          disabledTextStyle: typography.base.copyWith(
+            color: disabled,
+            fontWeight: FontWeight.w500,
+            height: 1,
+          ),
+          enabledIconColor: enabled,
+          disabledIconColor: disabled,
+        );
 
   /// Returns a copy of this [FButtonContentStyle] with the given properties replaced.
   @useResult
@@ -182,33 +178,39 @@ final class FButtonContentStyle with Diagnosticable {
 
 /// [FButton] icon content's style.
 final class FButtonIconContentStyle with Diagnosticable {
-  /// The padding.
+  /// The padding. Defaults to `EdgeInsets.all(7.5)`.
   final EdgeInsets padding;
 
   /// The icon's color when this button is enabled.
-  final Color enabled;
+  final Color enabledColor;
 
   /// The icon's color when this button is disabled.
-  final Color disabled;
+  final Color disabledColor;
 
   /// The icon's size. Defaults to 20.
   final double size;
 
   /// Creates a [FButtonIconContentStyle].
   const FButtonIconContentStyle({
-    required this.enabled,
-    required this.disabled,
+    required this.enabledColor,
+    required this.disabledColor,
     this.padding = const EdgeInsets.all(7.5),
     this.size = 20,
   });
 
   /// Returns a copy of this [FButtonIconContentStyle] with the given properties replaced.
   @useResult
-  FButtonIconContentStyle copyWith({EdgeInsets? padding}) => FButtonIconContentStyle(
+  FButtonIconContentStyle copyWith({
+    EdgeInsets? padding,
+    Color? enabledColor,
+    Color? disabledColor,
+    double? size,
+  }) =>
+      FButtonIconContentStyle(
         padding: padding ?? this.padding,
-        enabled: enabled,
-        disabled: disabled,
-        size: size,
+        enabledColor: enabledColor ?? this.enabledColor,
+        disabledColor: disabledColor ?? this.disabledColor,
+        size: size ?? this.size,
       );
 
   @override
@@ -216,8 +218,8 @@ final class FButtonIconContentStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(ColorProperty('enabledColor', enabled))
-      ..add(ColorProperty('disabledColor', disabled))
+      ..add(ColorProperty('enabledColor', enabledColor))
+      ..add(ColorProperty('disabledColor', disabledColor))
       ..add(DoubleProperty('size', size, defaultValue: 20));
   }
 
@@ -227,10 +229,10 @@ final class FButtonIconContentStyle with Diagnosticable {
       other is FButtonIconContentStyle &&
           runtimeType == other.runtimeType &&
           padding == other.padding &&
-          enabled == other.enabled &&
-          disabled == other.disabled &&
+          enabledColor == other.enabledColor &&
+          disabledColor == other.disabledColor &&
           size == other.size;
 
   @override
-  int get hashCode => padding.hashCode ^ enabled.hashCode ^ disabled.hashCode ^ size.hashCode;
+  int get hashCode => padding.hashCode ^ enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode;
 }

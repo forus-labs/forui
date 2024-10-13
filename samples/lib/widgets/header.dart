@@ -36,10 +36,10 @@ class NestedHeaderPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => FHeader.nested(
         title: const Text('Appointment'),
-        leftActions: [
+        prefixActions: [
           FHeaderAction.back(onPress: () {}),
         ],
-        rightActions: [
+        suffixActions: [
           FHeaderAction(
             icon: FIcon(FAssets.icons.info),
             onPress: () {},
@@ -61,7 +61,7 @@ class XNestedHeaderPage extends SampleScaffold {
   @override
   Widget child(BuildContext context) => FHeader.nested(
         title: const Text('Climate'),
-        leftActions: [
+        prefixActions: [
           FHeaderAction(
             icon: FIcon(FAssets.icons.thermometer),
             onPress: () {},
@@ -71,7 +71,7 @@ class XNestedHeaderPage extends SampleScaffold {
             onPress: null,
           ),
         ],
-        rightActions: [
+        suffixActions: [
           FHeaderAction.x(onPress: () {}),
         ],
       );

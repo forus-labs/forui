@@ -10,6 +10,19 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FBadge', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FBadge(
+            label: const Text('Badge'),
+            style: TestScaffold.blueScreen.badgeStyles.primary,
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, background) in TestScaffold.themes) {
       for (final variant in Variant.values) {
         testWidgets('$name with FBadgeContent', (tester) async {

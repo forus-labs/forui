@@ -80,37 +80,36 @@ final class FProgressStyle with Diagnosticable {
   /// The progress's color.
   final BoxDecoration progressDecoration;
 
-  /// The constraints for the progress bar.
+  /// The constraints for the progress bar. Defaults to a height of 15.0.
   final BoxConstraints constraints;
 
-  /// The animation duration.
+  /// The animation duration. Defaults to 500ms.
   final Duration animationDuration;
 
-  /// The animation curve.
+  /// The animation curve. Defaults to [Curves.ease].
   final Curve curve;
 
   /// Creates a [FProgressStyle].
   const FProgressStyle({
     required this.backgroundDecoration,
     required this.progressDecoration,
-    required this.constraints,
-    required this.animationDuration,
-    required this.curve,
+    this.constraints = const BoxConstraints(minHeight: 15.0, maxHeight: 15.0),
+    this.animationDuration = const Duration(milliseconds: 500),
+    this.curve = Curves.ease,
   });
 
   /// Creates a [FProgressStyle] that inherits its properties from [colorScheme] and [style].
   FProgressStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : backgroundDecoration = BoxDecoration(
-          borderRadius: style.borderRadius,
-          color: colorScheme.secondary,
-        ),
-        progressDecoration = BoxDecoration(
-          borderRadius: style.borderRadius,
-          color: colorScheme.primary,
-        ),
-        constraints = const BoxConstraints(minHeight: 15.0, maxHeight: 15.0),
-        animationDuration = const Duration(milliseconds: 500),
-        curve = Curves.ease;
+      : this(
+          backgroundDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.secondary,
+          ),
+          progressDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.primary,
+          ),
+        );
 
   /// Returns a copy of this [FProgressStyle] with the given properties replaced.
   @useResult

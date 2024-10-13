@@ -47,11 +47,11 @@ final class FSliderStyles with Diagnosticable {
     final disabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-      activeColor: colorScheme.disable(colorScheme.primary),
+      activeColor: colorScheme.disable(colorScheme.primary, colorScheme.secondary),
       inactiveColor: colorScheme.secondary,
       markStyle: FSliderMarkStyle(
         tickColor: colorScheme.mutedForeground,
-        labelTextStyle: typography.xs.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
+        labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
@@ -101,25 +101,19 @@ final class FSliderStyles with Diagnosticable {
           errorPadding: EdgeInsets.only(top: 5),
         ),
         enabledStyle: enabledHorizontalStyle.copyWith(
-          markStyle: FSliderMarkStyle(
-            tickColor: colorScheme.mutedForeground,
-            labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
+          markStyle: enabledHorizontalStyle.markStyle.copyWith(
             labelAnchor: Alignment.centerRight,
             labelOffset: -10,
           ),
         ),
         disabledStyle: disabledHorizontalStyle.copyWith(
-          markStyle: FSliderMarkStyle(
-            tickColor: colorScheme.mutedForeground,
-            labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
+          markStyle: disabledHorizontalStyle.markStyle.copyWith(
             labelAnchor: Alignment.centerRight,
             labelOffset: -10,
           ),
         ),
         errorStyle: errorHorizontalStyle.copyWith(
-          markStyle: FSliderMarkStyle(
-            tickColor: colorScheme.mutedForeground,
-            labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
+          markStyle: errorHorizontalStyle.markStyle.copyWith(
             labelAnchor: Alignment.centerRight,
             labelOffset: -10,
           ),
@@ -300,10 +294,10 @@ final class FSliderStateStyle with Diagnosticable implements FFormFieldStyle {
   @override
   final TextStyle descriptionTextStyle;
 
-  /// The slider's active color.
+  /// The slider's active track color.
   final Color activeColor;
 
-  /// The slider inactive color.
+  /// The slider's inactive track color.
   final Color inactiveColor;
 
   /// The slider's border radius.

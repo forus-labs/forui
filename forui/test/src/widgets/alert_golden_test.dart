@@ -11,6 +11,23 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FAlert', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: FAlert(
+              title: const Text('Alert Title'),
+              subtitle: const Text('Alert description with extra text'),
+              style: TestScaffold.blueScreen.alertStyles.primary,
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final variant in Variant.values) {
         testWidgets('$name with default icon', (tester) async {

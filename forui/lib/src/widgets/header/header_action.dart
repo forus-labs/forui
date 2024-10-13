@@ -72,7 +72,7 @@ class FHeaderAction extends StatelessWidget {
       semanticLabel: semanticLabel,
       onPress: onPress,
       onLongPress: onLongPress,
-      child: FInheritedIconStyle(
+      child: FIconStyleData(
         style: FIconStyle(
           color: enabled ? style.enabledColor : style.disabledColor,
           size: style.size,
@@ -119,7 +119,7 @@ final class FHeaderActionStyle with Diagnosticable {
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
   FHeaderActionStyle.inherit({required FColorScheme colorScheme, required this.size})
       : enabledColor = colorScheme.foreground,
-        disabledColor = colorScheme.foreground.withOpacity(0.5);
+        disabledColor = colorScheme.disable(colorScheme.foreground);
 
   /// Returns a copy of this [FHeaderActionStyle] with the given properties replaced.
   @useResult
@@ -127,7 +127,6 @@ final class FHeaderActionStyle with Diagnosticable {
     Color? enabledColor,
     Color? disabledColor,
     double? size,
-    EdgeInsets? padding,
   }) =>
       FHeaderActionStyle(
         enabledColor: enabledColor ?? this.enabledColor,

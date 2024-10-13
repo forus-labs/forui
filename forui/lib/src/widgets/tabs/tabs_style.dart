@@ -27,13 +27,13 @@ final class FTabsStyle with Diagnosticable {
   final EdgeInsets padding;
 
   /// The [TextStyle] of the label.
-  final TextStyle selectedLabel;
+  final TextStyle selectedLabelTextStyle;
 
   /// The [TextStyle] of the label.
-  final TextStyle unselectedLabel;
+  final TextStyle unselectedLabelTextStyle;
 
   /// The indicator.
-  final BoxDecoration indicator;
+  final BoxDecoration indicatorDecoration;
 
   /// The indicator size.
   final FTabBarIndicatorSize indicatorSize;
@@ -47,49 +47,47 @@ final class FTabsStyle with Diagnosticable {
   /// Creates a [FTabsStyle].
   FTabsStyle({
     required this.decoration,
-    required this.padding,
-    required this.selectedLabel,
-    required this.unselectedLabel,
-    required this.indicator,
-    required this.indicatorSize,
-    required this.height,
-    required this.spacing,
+    required this.selectedLabelTextStyle,
+    required this.unselectedLabelTextStyle,
+    required this.indicatorDecoration,
+    this.padding = const EdgeInsets.all(4),
+    this.indicatorSize = FTabBarIndicatorSize.tab,
+    this.height = 35,
+    this.spacing = 10,
   });
 
   /// Creates a [FTabsStyle] that inherits its properties from [colorScheme].
   FTabsStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : decoration = BoxDecoration(
-          border: Border.all(color: colorScheme.muted),
-          borderRadius: style.borderRadius,
-          color: colorScheme.muted,
-        ),
-        padding = const EdgeInsets.all(4),
-        selectedLabel = typography.sm.copyWith(
-          fontWeight: FontWeight.w500,
-          fontFamily: typography.defaultFontFamily,
-          color: colorScheme.foreground,
-        ),
-        unselectedLabel = typography.sm.copyWith(
-          fontWeight: FontWeight.w500,
-          fontFamily: typography.defaultFontFamily,
-          color: colorScheme.mutedForeground,
-        ),
-        indicatorSize = FTabBarIndicatorSize.tab,
-        indicator = BoxDecoration(
-          color: colorScheme.background,
-          borderRadius: style.borderRadius,
-        ),
-        height = 35,
-        spacing = 10;
+      : this(
+          decoration: BoxDecoration(
+            border: Border.all(color: colorScheme.muted),
+            borderRadius: style.borderRadius,
+            color: colorScheme.muted,
+          ),
+          selectedLabelTextStyle: typography.sm.copyWith(
+            fontWeight: FontWeight.w500,
+            fontFamily: typography.defaultFontFamily,
+            color: colorScheme.foreground,
+          ),
+          unselectedLabelTextStyle: typography.sm.copyWith(
+            fontWeight: FontWeight.w500,
+            fontFamily: typography.defaultFontFamily,
+            color: colorScheme.mutedForeground,
+          ),
+          indicatorDecoration: BoxDecoration(
+            color: colorScheme.background,
+            borderRadius: style.borderRadius,
+          ),
+        );
 
   /// Creates a copy of this [FCardStyle] with the given properties replaced.
   @useResult
   FTabsStyle copyWith({
     EdgeInsets? padding,
     BoxDecoration? decoration,
-    TextStyle? selectedLabel,
-    TextStyle? unselectedLabel,
-    BoxDecoration? indicator,
+    TextStyle? selectedLabelTextStyle,
+    TextStyle? unselectedLabelTextStyle,
+    BoxDecoration? indicatorDecoration,
     FTabBarIndicatorSize? indicatorSize,
     double? height,
     double? spacing,
@@ -97,10 +95,10 @@ final class FTabsStyle with Diagnosticable {
       FTabsStyle(
         padding: padding ?? this.padding,
         decoration: decoration ?? this.decoration,
-        selectedLabel: selectedLabel ?? this.selectedLabel,
-        unselectedLabel: unselectedLabel ?? this.unselectedLabel,
+        selectedLabelTextStyle: selectedLabelTextStyle ?? this.selectedLabelTextStyle,
+        unselectedLabelTextStyle: unselectedLabelTextStyle ?? this.unselectedLabelTextStyle,
         indicatorSize: indicatorSize ?? this.indicatorSize,
-        indicator: indicator ?? this.indicator,
+        indicatorDecoration: indicatorDecoration ?? this.indicatorDecoration,
         height: height ?? this.height,
         spacing: spacing ?? this.spacing,
       );
@@ -111,10 +109,10 @@ final class FTabsStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('decoration', decoration))
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('selectedLabel', selectedLabel))
-      ..add(DiagnosticsProperty('unselectedLabel', unselectedLabel))
+      ..add(DiagnosticsProperty('selectedLabelTextStyle', selectedLabelTextStyle))
+      ..add(DiagnosticsProperty('unselectedLabelTextStyle', unselectedLabelTextStyle))
       ..add(EnumProperty('indicatorSize', indicatorSize))
-      ..add(DiagnosticsProperty('indicator', indicator))
+      ..add(DiagnosticsProperty('indicator', indicatorDecoration))
       ..add(DoubleProperty('height', height))
       ..add(DoubleProperty('spacing', spacing));
   }
@@ -126,9 +124,9 @@ final class FTabsStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           decoration == other.decoration &&
           padding == other.padding &&
-          unselectedLabel == other.unselectedLabel &&
-          selectedLabel == other.selectedLabel &&
-          indicator == other.indicator &&
+          unselectedLabelTextStyle == other.unselectedLabelTextStyle &&
+          selectedLabelTextStyle == other.selectedLabelTextStyle &&
+          indicatorDecoration == other.indicatorDecoration &&
           indicatorSize == other.indicatorSize &&
           height == other.height &&
           spacing == other.spacing;
@@ -137,9 +135,9 @@ final class FTabsStyle with Diagnosticable {
   int get hashCode =>
       decoration.hashCode ^
       padding.hashCode ^
-      unselectedLabel.hashCode ^
-      selectedLabel.hashCode ^
-      indicator.hashCode ^
+      unselectedLabelTextStyle.hashCode ^
+      selectedLabelTextStyle.hashCode ^
+      indicatorDecoration.hashCode ^
       indicatorSize.hashCode ^
       height.hashCode ^
       spacing.hashCode;

@@ -10,6 +10,29 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FBottomNavigationBar', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FBottomNavigationBar(
+            style: TestScaffold.blueScreen.bottomNavigationBarStyle,
+            index: 2,
+            children: [
+              FBottomNavigationBarItem(
+                icon: FIcon(FAssets.icons.home),
+                label: const Text('Home'),
+              ),
+              FBottomNavigationBarItem(
+                icon: FIcon(FAssets.icons.layoutGrid),
+                label: const Text('Browse'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, background) in TestScaffold.themes) {
       testWidgets('forui icon - $name', (tester) async {
         await tester.pumpWidget(

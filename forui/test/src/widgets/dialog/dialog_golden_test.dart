@@ -49,6 +49,24 @@ class UnderTest extends StatelessWidget {
 
 void main() {
   group('FDialog', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FDialog(
+            style: TestScaffold.blueScreen.dialogStyle,
+            direction: Axis.horizontal,
+            title: const Text('Are you absolutely sure?'),
+            body: const Text(
+              'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            ),
+            actions: const [],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, background) in TestScaffold.themes) {
       for (final direction in Axis.values) {
         testWidgets('$name with $direction FDialogContent', (tester) async {

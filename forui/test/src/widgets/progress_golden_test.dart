@@ -10,6 +10,19 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FProgress', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FProgress(
+            style: TestScaffold.blueScreen.progressStyle,
+            value: 0.5,
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
+    });
+
     for (final (name, theme, _) in TestScaffold.themes) {
       for (final (progress, value) in [('positive', 17.0), ('negative', -4.0), ('expected', 0.3)]) {
         testWidgets('$name - $progress', (tester) async {

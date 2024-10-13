@@ -24,7 +24,7 @@ class _SandboxState extends State<Sandbox> {
         children: [
           FAccordion(
             controller: FAccordionController(max: 2),
-            children: [
+            items: [
               FAccordionItem(
                 title: const Text('Title 1'),
                 initiallyExpanded: true,

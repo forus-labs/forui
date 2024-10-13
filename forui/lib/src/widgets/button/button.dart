@@ -202,19 +202,52 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   final BoxDecoration disabledBoxDecoration;
 
   /// The content's style.
-  final FButtonContentStyle content;
+  final FButtonContentStyle contentStyle;
 
   /// The icon content's style.
-  final FButtonIconContentStyle iconContent;
+  final FButtonIconContentStyle iconContentStyle;
 
   /// Creates a [FButtonCustomStyle].
   FButtonCustomStyle({
     required this.enabledBoxDecoration,
     required this.enabledHoverBoxDecoration,
     required this.disabledBoxDecoration,
-    required this.content,
-    required this.iconContent,
+    required this.contentStyle,
+    required this.iconContentStyle,
   });
+
+  /// Creates a [FButtonCustomStyle] that inherits its properties from the given arguments.
+  FButtonCustomStyle.inherit({
+    required FTypography typography,
+    required FStyle style,
+    required Color enabledBoxColor,
+    required Color enabledHoveredBoxColor,
+    required Color disabledBoxColor,
+    required Color enabledContentColor,
+    required Color disabledContentColor,
+  }) : this(
+          enabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: enabledBoxColor,
+          ),
+          enabledHoverBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: enabledHoveredBoxColor,
+          ),
+          disabledBoxDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: disabledBoxColor,
+          ),
+          contentStyle: FButtonContentStyle.inherit(
+            typography: typography,
+            enabled: enabledContentColor,
+            disabled: disabledContentColor,
+          ),
+          iconContentStyle: FButtonIconContentStyle(
+            enabledColor: enabledContentColor,
+            disabledColor: disabledContentColor,
+          ),
+        );
 
   /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
   @useResult
@@ -222,15 +255,15 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     BoxDecoration? enabledBoxDecoration,
     BoxDecoration? enabledHoverBoxDecoration,
     BoxDecoration? disabledBoxDecoration,
-    FButtonContentStyle? content,
-    FButtonIconContentStyle? iconContent,
+    FButtonContentStyle? contentStyle,
+    FButtonIconContentStyle? iconContentStyle,
   }) =>
       FButtonCustomStyle(
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
         enabledHoverBoxDecoration: enabledHoverBoxDecoration ?? this.enabledHoverBoxDecoration,
         disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
-        content: content ?? this.content,
-        iconContent: iconContent ?? this.iconContent,
+        contentStyle: contentStyle ?? this.contentStyle,
+        iconContentStyle: iconContentStyle ?? this.iconContentStyle,
       );
 
   @override
@@ -240,8 +273,8 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledBoxDecoration', enabledBoxDecoration))
       ..add(DiagnosticsProperty('enabledHoverBoxDecoration', enabledHoverBoxDecoration))
       ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
-      ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('iconContent', iconContent));
+      ..add(DiagnosticsProperty('contentStyle', contentStyle))
+      ..add(DiagnosticsProperty('iconContentStyle', iconContentStyle));
   }
 
   @override
@@ -252,16 +285,16 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
           enabledBoxDecoration == other.enabledBoxDecoration &&
           enabledHoverBoxDecoration == other.enabledHoverBoxDecoration &&
           disabledBoxDecoration == other.disabledBoxDecoration &&
-          content == other.content &&
-          iconContent == other.iconContent;
+          contentStyle == other.contentStyle &&
+          iconContentStyle == other.iconContentStyle;
 
   @override
   int get hashCode =>
       enabledBoxDecoration.hashCode ^
       enabledHoverBoxDecoration.hashCode ^
       disabledBoxDecoration.hashCode ^
-      content.hashCode ^
-      iconContent.hashCode;
+      contentStyle.hashCode ^
+      iconContentStyle.hashCode;
 }
 
 /// A button's data.

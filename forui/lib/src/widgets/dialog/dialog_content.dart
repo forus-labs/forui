@@ -148,13 +148,14 @@ final class FDialogContentStyle with Diagnosticable {
   FDialogContentStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
-    required this.padding,
-    required this.actionPadding,
-  })  : titleTextStyle = typography.lg.copyWith(
-          fontWeight: FontWeight.w600,
-          color: colorScheme.foreground,
-        ),
-        bodyTextStyle = typography.sm.copyWith(color: colorScheme.mutedForeground);
+    required EdgeInsets padding,
+    required double actionPadding,
+  }) : this(
+          titleTextStyle: typography.lg.copyWith(fontWeight: FontWeight.w600, color: colorScheme.foreground),
+          bodyTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          padding: padding,
+          actionPadding: actionPadding,
+        );
 
   /// Returns a copy of this [FDialogContentStyle] with the given properties replaced.
   @useResult

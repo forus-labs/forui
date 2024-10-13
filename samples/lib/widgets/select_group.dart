@@ -17,7 +17,7 @@ class SelectGroupPage extends SampleScaffold {
         children: [
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 250),
-            child: FSelectGroup(
+            child: FSelectGroup<Sidebar>(
               controller: FMultiSelectGroupController(values: {Sidebar.recents}),
               label: const Text('Sidebar'),
               description: const Text('These will be shown in the sidebar.'),
@@ -73,7 +73,7 @@ class CheckboxFormState extends State<CheckboxForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FSelectGroup(
+            FSelectGroup<Language>(
               controller: FMultiSelectGroupController(),
               label: const Text('Favorite Languages'),
               description: const Text('Your favorite language.'),
@@ -147,7 +147,7 @@ class RadioFormState extends State<RadioForm> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FSelectGroup(
+            FSelectGroup<Notification>(
               controller: FRadioSelectGroupController(),
               label: const Text('Notifications'),
               description: const Text('Select the notifications.'),

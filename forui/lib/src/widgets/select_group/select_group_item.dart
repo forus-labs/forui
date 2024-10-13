@@ -9,7 +9,11 @@ import 'package:forui/forui.dart';
 class FSelectGroupItemData<T> extends InheritedWidget {
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
     final FSelectGroupItemData<T>? result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
-    assert(result != null, 'No FSelectGroupItemData found in context');
+    assert(
+      result != null,
+      "No FSelectGroupItemData found in context. This likely because FSelectGroup's type parameter could not be inferred. "
+      'It is currently inferred as $T. To fix this, provide the type parameter explicitly, i.e. FSelectGroup<MyType>.',
+    );
     return result!;
   }
 

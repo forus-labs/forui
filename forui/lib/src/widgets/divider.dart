@@ -26,8 +26,8 @@ final class FDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ??
         switch (axis) {
-          Axis.horizontal => context.theme.dividerStyles.horizontal,
-          Axis.vertical => context.theme.dividerStyles.vertical,
+          Axis.horizontal => context.theme.dividerStyles.horizontalStyle,
+          Axis.vertical => context.theme.dividerStyles.verticalStyle,
         };
 
     return Container(
@@ -50,40 +50,42 @@ final class FDivider extends StatelessWidget {
 /// The [FDivider] styles.
 final class FDividerStyles with Diagnosticable {
   /// The horizontal divider's style.
-  final FDividerStyle horizontal;
+  final FDividerStyle horizontalStyle;
 
   /// The vertical divider's style.
-  final FDividerStyle vertical;
+  final FDividerStyle verticalStyle;
 
   /// Creates a [FDividerStyles].
-  FDividerStyles({required this.horizontal, required this.vertical});
+  FDividerStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [style].
   FDividerStyles.inherit({required FColorScheme colorScheme, required FStyle style})
-      : horizontal = FDividerStyle.inherit(
-          colorScheme: colorScheme,
-          style: style,
-          padding: FDividerStyle.defaultPadding.horizontal,
-        ),
-        vertical = FDividerStyle.inherit(
-          colorScheme: colorScheme,
-          style: style,
-          padding: FDividerStyle.defaultPadding.vertical,
+      : this(
+          horizontalStyle: FDividerStyle.inherit(
+            colorScheme: colorScheme,
+            style: style,
+            padding: FDividerStyle.defaultPadding.horizontalStyle,
+          ),
+          verticalStyle: FDividerStyle.inherit(
+            colorScheme: colorScheme,
+            style: style,
+            padding: FDividerStyle.defaultPadding.verticalStyle,
+          ),
         );
 
   /// Returns a copy of this [FDividerStyles] with the given properties replaced.
   @useResult
-  FDividerStyles copyWith({FDividerStyle? horizontal, FDividerStyle? vertical}) => FDividerStyles(
-        horizontal: horizontal ?? this.horizontal,
-        vertical: vertical ?? this.vertical,
+  FDividerStyles copyWith({FDividerStyle? horizontalStyle, FDividerStyle? verticalStyle}) => FDividerStyles(
+        horizontalStyle: horizontalStyle ?? this.horizontalStyle,
+        verticalStyle: verticalStyle ?? this.verticalStyle,
       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('horizontal', horizontal))
-      ..add(DiagnosticsProperty('vertical', vertical));
+      ..add(DiagnosticsProperty('horizontalStyle', horizontalStyle))
+      ..add(DiagnosticsProperty('verticalStyle', verticalStyle));
   }
 
   @override
@@ -91,19 +93,19 @@ final class FDividerStyles with Diagnosticable {
       identical(this, other) ||
       other is FDividerStyles &&
           runtimeType == other.runtimeType &&
-          horizontal == other.horizontal &&
-          vertical == other.vertical;
+          horizontalStyle == other.horizontalStyle &&
+          verticalStyle == other.verticalStyle;
 
   @override
-  int get hashCode => horizontal.hashCode ^ vertical.hashCode;
+  int get hashCode => horizontalStyle.hashCode ^ verticalStyle.hashCode;
 }
 
 /// [FDivider]'s style.
 final class FDividerStyle with Diagnosticable {
   /// The default padding for horizontal and vertical dividers.
   static const defaultPadding = (
-    horizontal: EdgeInsets.symmetric(vertical: 20),
-    vertical: EdgeInsets.symmetric(horizontal: 20),
+    horizontalStyle: EdgeInsets.symmetric(vertical: 20),
+    verticalStyle: EdgeInsets.symmetric(horizontal: 20),
   );
 
   /// The color of the separating line.
@@ -129,7 +131,11 @@ final class FDividerStyle with Diagnosticable {
     required FColorScheme colorScheme,
     required FStyle style,
     required EdgeInsetsGeometry padding,
-  }) : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
+  }) : this(
+          color: colorScheme.secondary,
+          padding: padding,
+          width: style.borderWidth,
+        );
 
   /// Returns a copy of this [FDividerStyle] with the given properties replaced.
   @useResult

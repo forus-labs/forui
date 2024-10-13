@@ -61,7 +61,7 @@ class FAvatar extends StatelessWidget {
       ),
       clipBehavior: Clip.hardEdge,
       child: DefaultTextStyle(
-        style: style.text,
+        style: style.textStyle,
         child: child,
       ),
     );
@@ -84,28 +84,26 @@ final class FAvatarStyle with Diagnosticable {
   /// The fallback's color.
   final Color foregroundColor;
 
-  /// Duration for the transition animation.
-  final Duration fadeInDuration;
-
   /// The text style for the fallback text.
-  final TextStyle text;
+  final TextStyle textStyle;
+
+  /// Duration for the transition animation. Defaults to 500ms.
+  final Duration fadeInDuration;
 
   /// Creates a [FAvatarStyle].
   const FAvatarStyle({
     required this.backgroundColor,
     required this.foregroundColor,
-    required this.fadeInDuration,
-    required this.text,
+    required this.textStyle,
+    this.fadeInDuration = const Duration(milliseconds: 500),
   });
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
   FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : backgroundColor = colorScheme.muted,
-        foregroundColor = colorScheme.mutedForeground,
-        fadeInDuration = const Duration(milliseconds: 500),
-        text = typography.base.copyWith(
-          color: colorScheme.mutedForeground,
-          height: 0,
+      : this(
+          backgroundColor: colorScheme.muted,
+          foregroundColor: colorScheme.mutedForeground,
+          textStyle: typography.base.copyWith(color: colorScheme.mutedForeground, height: 0),
         );
 
   /// Returns a copy of this [FAvatarStyle] with the given properties replaced.
@@ -113,14 +111,14 @@ final class FAvatarStyle with Diagnosticable {
   FAvatarStyle copyWith({
     Color? backgroundColor,
     Color? foregroundColor,
+    TextStyle? textStyle,
     Duration? fadeInDuration,
-    TextStyle? text,
   }) =>
       FAvatarStyle(
         backgroundColor: backgroundColor ?? this.backgroundColor,
         foregroundColor: foregroundColor ?? this.foregroundColor,
+        textStyle: textStyle ?? this.textStyle,
         fadeInDuration: fadeInDuration ?? this.fadeInDuration,
-        text: text ?? this.text,
       );
 
   @override
@@ -129,8 +127,8 @@ final class FAvatarStyle with Diagnosticable {
     properties
       ..add(ColorProperty('backgroundColor', backgroundColor))
       ..add(ColorProperty('foregroundColor', foregroundColor))
-      ..add(DiagnosticsProperty('fadeInDuration', fadeInDuration))
-      ..add(DiagnosticsProperty('text', text));
+      ..add(DiagnosticsProperty('textStyle', textStyle))
+      ..add(DiagnosticsProperty('fadeInDuration', fadeInDuration));
   }
 
   @override
@@ -141,8 +139,9 @@ final class FAvatarStyle with Diagnosticable {
           backgroundColor == other.backgroundColor &&
           foregroundColor == other.foregroundColor &&
           fadeInDuration == other.fadeInDuration &&
-          text == other.text;
+          textStyle == other.textStyle;
 
   @override
-  int get hashCode => backgroundColor.hashCode ^ foregroundColor.hashCode ^ fadeInDuration.hashCode ^ text.hashCode;
+  int get hashCode =>
+      backgroundColor.hashCode ^ foregroundColor.hashCode ^ fadeInDuration.hashCode ^ textStyle.hashCode;
 }

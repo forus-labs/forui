@@ -199,10 +199,10 @@ class FSelectGroupStyle with Diagnosticable {
         ),
         disabledStyle: checkboxStyle.disabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary.withOpacity(0.7),
+            color: colorScheme.disable(colorScheme.primary),
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
         ),
         errorStyle: checkboxStyle.errorStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
@@ -230,10 +230,10 @@ class FSelectGroupStyle with Diagnosticable {
         ),
         disabledStyle: radioStyle.disabledStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
-            color: colorScheme.primary.withOpacity(0.7),
+            color: colorScheme.disable(colorScheme.primary),
             fontWeight: FontWeight.w500,
           ),
-          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground.withOpacity(0.7)),
+          descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
         ),
         errorStyle: radioStyle.errorStyle.copyWith(
           labelTextStyle: typography.sm.copyWith(
@@ -250,7 +250,7 @@ class FSelectGroupStyle with Diagnosticable {
     );
 
     return FSelectGroupStyle(
-      labelLayoutStyle: FLabelStyles.inherit(style: style).vertical.layout,
+      labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
       enabledStyle: FSelectGroupStateStyle(
         labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
         descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,

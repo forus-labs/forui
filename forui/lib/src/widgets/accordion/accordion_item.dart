@@ -109,7 +109,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
             ),
             child: Transform.rotate(
               angle: (_controller.value * -180 + 90) * math.pi / 180.0,
-              child: FInheritedIconStyle(
+              child: FIconStyleData(
                 style: FIconStyle(color: style.iconColor, size: style.iconSize),
                 child: widget.icon,
               ),

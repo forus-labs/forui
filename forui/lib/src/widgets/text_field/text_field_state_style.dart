@@ -47,18 +47,20 @@ class FTextFieldStateStyle with Diagnosticable implements FFormFieldStyle {
     required FFormFieldStyle formFieldStyle,
     required FTypography typography,
     required FStyle style,
-  })  : labelTextStyle = formFieldStyle.labelTextStyle,
-        contentTextStyle = typography.sm.copyWith(
-          fontFamily: typography.defaultFontFamily,
-          color: contentColor,
-        ),
-        hintTextStyle = typography.sm.copyWith(
-          fontFamily: typography.defaultFontFamily,
-          color: hintColor,
-        ),
-        descriptionTextStyle = formFieldStyle.descriptionTextStyle,
-        focusedStyle = FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
-        unfocusedStyle = FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style);
+  }) : this(
+          labelTextStyle: formFieldStyle.labelTextStyle,
+          contentTextStyle: typography.sm.copyWith(
+            fontFamily: typography.defaultFontFamily,
+            color: contentColor,
+          ),
+          hintTextStyle: typography.sm.copyWith(
+            fontFamily: typography.defaultFontFamily,
+            color: hintColor,
+          ),
+          descriptionTextStyle: formFieldStyle.descriptionTextStyle,
+          focusedStyle: FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
+          unfocusedStyle: FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style),
+        );
 
   /// Returns a copy of this [FTextFieldStateStyle] with the given properties replaced.
   @override
@@ -216,10 +218,13 @@ final class FTextFieldBorderStyle with Diagnosticable {
 
   /// Creates a [FTextFieldBorderStyle] that inherits its properties from [style].
   FTextFieldBorderStyle.inherit({
-    required this.color,
+    required Color color,
     required FStyle style,
-  })  : width = style.borderWidth,
-        radius = style.borderRadius;
+  }) : this(
+          color: color,
+          width: style.borderWidth,
+          radius: style.borderRadius,
+        );
 
   /// Returns a copy of this border style but with the given fields replaced with the new values.
   @useResult

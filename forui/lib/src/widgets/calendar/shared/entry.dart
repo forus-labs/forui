@@ -187,7 +187,7 @@ class _Content extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: state.focused ? Border.all(color: context.theme.colorScheme.foreground) : null,
+        border: state.focused ? Border.all(color: style.focusedBorderColor) : null,
         borderRadius: borderRadius,
         color: hovered ? style.hoveredBackgroundColor : style.backgroundColor,
       ),
