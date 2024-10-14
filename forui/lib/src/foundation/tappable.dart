@@ -120,6 +120,7 @@ class _FTappableState extends State<FTappable> {
   int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
+  bool _touchHovered = false;
 
   @override
   Widget build(BuildContext context) {
@@ -148,15 +149,15 @@ class _FTappableState extends State<FTappable> {
             onPointerDown: (_) async {
               final count = ++_monotonic;
               await Future.delayed(widget.touchHoverEnterDuration);
-              if (count == _monotonic && !_hovered) {
-                setState(() => _hovered = true);
+              if (count == _monotonic && !_touchHovered) {
+                setState(() => _touchHovered = true);
               }
             },
             onPointerUp: (_) async {
               final count = ++_monotonic;
               await Future.delayed(widget.touchHoverExitDuration);
-              if (count == _monotonic && _hovered) {
-                setState(() => _hovered = false);
+              if (count == _monotonic && _touchHovered) {
+                setState(() => _touchHovered = false);
               }
             },
             child: _child,
@@ -186,7 +187,7 @@ class _FTappableState extends State<FTappable> {
         behavior: widget.behavior,
         onTap: widget.onPress,
         onLongPress: widget.onLongPress,
-        child: widget.builder(context, (focused: _focused, hovered: _hovered), widget.child),
+        child: widget.builder(context, (focused: _focused, hovered: _hovered || _touchHovered), widget.child),
       );
 }
 
