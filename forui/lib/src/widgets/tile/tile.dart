@@ -68,14 +68,7 @@ class FTile extends StatelessWidget {
         length: 1,
         // DecoratedBox doesn't inset the child, resulting in an invisible border.
         // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
-        child: Container(
-          decoration: BoxDecoration(
-            border: style.border,
-            borderRadius: style.borderRadius,
-            color: style.enabledBackgroundColor,
-          ),
-          child: child,
-        ),
+        child: child,
       );
     }
 
