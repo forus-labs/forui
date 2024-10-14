@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/util.dart';
 
@@ -21,7 +20,7 @@ enum FTileDivider {
   /// | [title]                   | <- Tile B
   /// -----------------------------
   /// ```
-  partial,
+  indented,
 }
 
 /// A tile group that groups multiple [FTile]s.
@@ -52,7 +51,7 @@ class FTileGroup extends StatelessWidget {
   const FTileGroup({
     required this.children,
     this.style,
-    this.divider = FTileDivider.partial,
+    this.divider = FTileDivider.indented,
     this.semanticLabel,
     this.label,
     super.key,
@@ -88,6 +87,8 @@ class FTileGroup extends StatelessWidget {
                 FTileData(
                   style: style.tileStyle,
                   divider: divider,
+                  enabled: true,
+                  hovered: false,
                   index: index,
                   length: children.length,
                   child: child,
@@ -130,9 +131,9 @@ class FTileGroupStyle with Diagnosticable {
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   FTileGroupStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
-          labelTextStyle: typography.base.copyWith(fontWeight: FontWeight.w600),
-          tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        );
+    labelTextStyle: typography.base.copyWith(fontWeight: FontWeight.w600),
+    tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

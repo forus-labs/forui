@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/tile/tile_content.dart';
+import 'package:forui/src/foundation/tappable.dart';
+import 'package:meta/meta.dart';
 
 /// A tile that is typically used to group related information together.
 ///
@@ -21,74 +19,93 @@ class FTile extends StatelessWidget {
   /// Provide a style to prevent inheriting from the ancestor tile group's style.
   final FTileStyle? style;
 
+  /// Whether the FTile is enabled. Defaults to true.
+  final bool enabled;
+
+  /// The semantic label.
+  final String? semanticLabel;
+
+  /// A callback for when the tile is pressed.
+  ///
+  /// The tile is not hoverable if both [onPress] and [onLongPress] are null.
+  final VoidCallback? onPress;
+
+  /// A callback for when the tile is long pressed.
+  ///
+  /// The tile is not hoverable if both [onPress] and [onLongPress] are null.
+  final VoidCallback? onLongPress;
+
   /// The child.
   final Widget child;
 
-  /// Creates a [FTile].
-  ///
-  /// ```
-  /// -----------------------------------------------------
-  /// | [prefixIcon] [title]       [details] [suffixIcon] |
-  /// |              [subtitle]                           |
-  /// ----------------------------------------------------
-  /// ```
-  FTile({
-    required Widget title,
-    this.style,
-    Widget? prefixIcon,
-    Widget? subtitle,
-    Widget? details,
-    Widget? suffixIcon,
-    String? semanticLabel,
-    bool enabled = true,
-    VoidCallback? onPress,
-    VoidCallback? onLongPress,
-    super.key,
-  }) : child = FTileContent(
-          title: title,
-          prefixIcon: prefixIcon,
-          subtitle: subtitle,
-          details: details,
-          suffixIcon: suffixIcon,
-          semanticLabel: semanticLabel,
-          enabled: enabled,
-          onPress: onPress,
-          onLongPress: onLongPress,
-        );
+  const FTile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final data = FTileData.maybeOf(context);
-    if (data == null) {
-      final style = this.style ?? context.theme.tileGroupStyle.tileStyle;
-      return FTileData(
-        style: style,
-        divider: FTileDivider.full,
-        index: 0,
-        length: 1,
-        // DecoratedBox doesn't inset the child, resulting in an invisible border.
-        // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
-        child: child,
-      );
-    }
+    final inherited = FTileData.maybeOf(context);
+    final style = this.style ?? inherited?.style ?? context.theme.tileGroupStyle.tileStyle;
+    final divider = inherited?.divider ?? FTileDivider.full;
+    final index = inherited?.index ?? 0;
+    final length = inherited?.length ?? 1;
 
-    if (style case final style?) {
-      return FTileData(
-        style: style,
-        divider: data.divider,
-        index: data.index,
-        length: data.length,
-        child: child,
-      );
-    }
+    Widget content({required bool hovered}) => DecoratedBox(
+          decoration: BoxDecoration(
+            color: switch ((enabled, hovered)) {
+              (true, true) => style.enabledHoveredBackgroundColor,
+              (true, false) => style.enabledBackgroundColor,
+              (false, _) => style.disabledBackgroundColor,
+            },
+            border: Border(
+              top: index == 0 ? style.border.top : BorderSide.none,
+              left: style.border.left,
+              right: style.border.right,
+              bottom: index == length - 1 ? style.border.top : BorderSide.none,
+            ),
+            borderRadius: BorderRadius.only(
+              topLeft: index == 0 ? style.borderRadius.topLeft : Radius.zero,
+              topRight: index == 0 ? style.borderRadius.topRight : Radius.zero,
+              bottomLeft: index == length - 1 ? style.borderRadius.bottomLeft : Radius.zero,
+              bottomRight: index == length - 1 ? style.borderRadius.bottomLeft : Radius.zero,
+            ),
+          ),
+          child: FTileData(
+            style: style,
+            divider: divider,
+            enabled: enabled,
+            hovered: hovered,
+            index: index,
+            length: length,
+            child: child,
+          ),
+        );
 
-    return child;
+    return enabled && (onPress != null || onLongPress != null)
+        ? FTappable(
+            behavior: HitTestBehavior.translucent,
+            semanticLabel: semanticLabel,
+            touchHoverEnterDuration: style.touchHoverEnterDuration,
+            touchHoverExitDuration: style.touchHoverExitDuration,
+            onPress: onPress,
+            onLongPress: onLongPress,
+            builder: (_, state, __) => content(hovered: state.hovered),
+          )
+        : Semantics(
+            container: true,
+            enabled: enabled,
+            label: semanticLabel,
+            child: content(hovered: false),
+          );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
+      ..add(StringProperty('semanticLabel', semanticLabel, defaultValue: null, quoted: false))
+      ..add(ObjectFlagProperty('onPress', onPress, ifPresent: 'onPress', level: DiagnosticLevel.debug))
+      ..add(ObjectFlagProperty('onLongPress', onLongPress, ifPresent: 'onLongPress', level: DiagnosticLevel.debug));
   }
 }
 
@@ -106,6 +123,12 @@ class FTileData extends InheritedWidget {
   /// The divider if there are more than 1 tiles in the current group.
   final FTileDivider divider;
 
+  /// True if the tile is enabled.
+  final bool enabled;
+
+  /// True if the tile is hovered over.
+  final bool hovered;
+
   /// The tile's index in the current group.
   final int index;
 
@@ -116,6 +139,8 @@ class FTileData extends InheritedWidget {
   const FTileData({
     required this.style,
     required this.divider,
+    required this.enabled,
+    required this.hovered,
     required this.index,
     required this.length,
     required super.child,
@@ -124,7 +149,12 @@ class FTileData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(FTileData old) =>
-      style != old.style || divider != old.divider || index != old.index || length != old.length;
+      style != old.style ||
+      divider != old.divider ||
+      enabled != old.enabled ||
+      hovered != old.hovered ||
+      index != old.index ||
+      length != old.length;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -132,6 +162,8 @@ class FTileData extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('divider', divider))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
+      ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered', level: DiagnosticLevel.debug))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length));
   }
@@ -154,6 +186,12 @@ final class FTileStyle with Diagnosticable {
   /// The background color when the tile is disabled.
   final Color disabledBackgroundColor;
 
+  /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 0 seconds.
+  final Duration touchHoverEnterDuration;
+
+  /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 25ms.
+  final Duration touchHoverExitDuration;
+
   /// The divider's style.
   final FDividerStyle dividerStyle;
 
@@ -169,6 +207,8 @@ final class FTileStyle with Diagnosticable {
     required this.disabledBackgroundColor,
     required this.dividerStyle,
     required this.contentStyle,
+    this.touchHoverEnterDuration = Duration.zero,
+    this.touchHoverExitDuration = const Duration(milliseconds: 25),
   });
 
   /// Creates a [FTileStyle] that inherits from the given [colorScheme] and [typography].
@@ -191,6 +231,8 @@ final class FTileStyle with Diagnosticable {
     Color? enabledBackgroundColor,
     Color? enabledHoveredBackgroundColor,
     Color? disabledBackgroundColor,
+    Duration? touchHoverEnterDuration,
+    Duration? touchHoverExitDuration,
     FDividerStyle? dividerStyle,
     FTileContentStyle? contentStyle,
   }) =>
@@ -200,6 +242,8 @@ final class FTileStyle with Diagnosticable {
         enabledBackgroundColor: enabledBackgroundColor ?? this.enabledBackgroundColor,
         enabledHoveredBackgroundColor: enabledHoveredBackgroundColor ?? this.enabledHoveredBackgroundColor,
         disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
+        touchHoverEnterDuration: touchHoverEnterDuration ?? this.touchHoverEnterDuration,
+        touchHoverExitDuration: touchHoverExitDuration ?? this.touchHoverExitDuration,
         dividerStyle: dividerStyle ?? this.dividerStyle,
         contentStyle: contentStyle ?? this.contentStyle,
       );
@@ -213,6 +257,8 @@ final class FTileStyle with Diagnosticable {
       ..add(ColorProperty('enabledBackgroundColor', enabledBackgroundColor))
       ..add(ColorProperty('enabledHoveredBackgroundColor', enabledHoveredBackgroundColor))
       ..add(ColorProperty('disabledBackgroundColor', disabledBackgroundColor))
+      ..add(DiagnosticsProperty('touchHoverEnterDuration', touchHoverEnterDuration))
+      ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration))
       ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
       ..add(DiagnosticsProperty('contentStyle', contentStyle));
   }
@@ -227,6 +273,8 @@ final class FTileStyle with Diagnosticable {
           enabledBackgroundColor == other.enabledBackgroundColor &&
           enabledHoveredBackgroundColor == other.enabledHoveredBackgroundColor &&
           disabledBackgroundColor == other.disabledBackgroundColor &&
+          touchHoverEnterDuration == other.touchHoverEnterDuration &&
+          touchHoverExitDuration == other.touchHoverExitDuration &&
           dividerStyle == other.dividerStyle &&
           contentStyle == other.contentStyle;
 
@@ -237,6 +285,8 @@ final class FTileStyle with Diagnosticable {
       enabledBackgroundColor.hashCode ^
       enabledHoveredBackgroundColor.hashCode ^
       disabledBackgroundColor.hashCode ^
+      touchHoverEnterDuration.hashCode ^
+      touchHoverExitDuration.hashCode ^
       dividerStyle.hashCode ^
       contentStyle.hashCode;
 }
