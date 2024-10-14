@@ -79,6 +79,22 @@ FButton.raw(
   </Tabs.Tab>
 </Tabs>
 
+#### Destructive
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='button' variant='text' query={{style: 'destructive'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {3}
+    FButton(
+      label: const Text('Button'),
+      style: FButtonStyle.destructive,
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 #### Outline
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -95,16 +111,16 @@ FButton.raw(
   </Tabs.Tab>
 </Tabs>
 
-#### Destructive
+#### Ghost
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='button' variant='text' query={{style: 'destructive'}}/>
+    <Widget name='button' variant='text' query={{style: 'ghost'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {3}
     FButton(
       label: const Text('Button'),
-      style: FButtonStyle.destructive,
+      style: FButtonStyle.ghost,
       onPress: () {},
     );
     ```

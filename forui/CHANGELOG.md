@@ -1,7 +1,11 @@
 ## 0.6.0 (Next)
 
 ### Additions
-* Add `FSlider`
+* Add `FAccordion`.
+
+* Add `FSlider`.
+
+* Add `FButtonStyles.ghost`.
 
 * Add `FButtonCustomStyle.enabledHoverBoxDecoration`.
 
@@ -75,10 +79,11 @@
 
 * **Breaking** Change `FHeader.rightActions` to `FHeader.suffixActions`.
 
-
 * **Breaking** Change `FLabelStyle.horizontal` to `FLabelStyle.horizontalStyle`.
 
 * **Breaking** Change `FLabelStyle.vertical` to `FLabelStyle.verticalStyle`.
+
+* **Breaking** Change `FButtonStyles.outline`'s background to transparent.
 
 ### Fixes
 
