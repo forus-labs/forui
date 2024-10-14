@@ -101,6 +101,8 @@ final class FDividerStyles with Diagnosticable {
 }
 
 /// [FDivider]'s style.
+///
+/// The [padding] property can be used to indent the start and end of the separating line.
 final class FDividerStyle with Diagnosticable {
   /// The default padding for horizontal and vertical dividers.
   static const defaultPadding = (
@@ -112,6 +114,8 @@ final class FDividerStyle with Diagnosticable {
   final Color color;
 
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
+  ///
+  /// This property can be used to indent the start and end of the separating line.
   final EdgeInsetsGeometry padding;
 
   /// The width (thickness) of the separating line. Defaults to 1.

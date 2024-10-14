@@ -41,7 +41,6 @@ abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
   const _SliderRenderObject({super.key, super.children});
 
   @override
-  // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext context, covariant _RenderSlider renderObject) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = InheritedData.of(context);
     final stateStyle = InheritedState.of(context).style;
