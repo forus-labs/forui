@@ -158,7 +158,7 @@ class _UnselectableEntry extends Entry {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-        child: builder(context, (focused: false, hovered: false, shortPressed: false), null),
+        child: builder(context, (focused: false, hovered: false), null),
       );
 }
 
@@ -179,7 +179,7 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hovered = state.hovered || state.shortPressed;
+    final hovered = state.hovered;
     var textStyle = hovered ? style.hoveredTextStyle : style.textStyle;
     if (current) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);

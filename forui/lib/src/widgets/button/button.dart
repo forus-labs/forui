@@ -115,8 +115,9 @@ class FButton extends StatelessWidget {
       final FButtonCustomStyle style => style,
       Variant.primary => context.theme.buttonStyles.primary,
       Variant.secondary => context.theme.buttonStyles.secondary,
-      Variant.outline => context.theme.buttonStyles.outline,
       Variant.destructive => context.theme.buttonStyles.destructive,
+      Variant.outline => context.theme.buttonStyles.outline,
+      Variant.ghost => context.theme.buttonStyles.ghost,
     };
 
     final enabled = onPress != null || onLongPress != null;
@@ -128,7 +129,7 @@ class FButton extends StatelessWidget {
       onPress: onPress,
       onLongPress: onLongPress,
       builder: (context, state, child) => DecoratedBox(
-        decoration: switch ((enabled, state.hovered || state.shortPressed)) {
+        decoration: switch ((enabled, state.hovered)) {
           (true, false) => style.enabledBoxDecoration,
           (true, true) => style.enabledHoverBoxDecoration,
           (false, _) => style.disabledBoxDecoration,
@@ -171,23 +172,29 @@ sealed class FButtonStyle {
   /// Shorthand for the current context's [FButtonStyles.secondary] style.
   static const FButtonStyle secondary = Variant.secondary;
 
+  /// The button's destructive style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.destructive] style.
+  static const FButtonStyle destructive = Variant.destructive;
+
   /// The button's outline style.
   ///
   /// Shorthand for the current context's [FButtonStyles.outline] style.
   static const FButtonStyle outline = Variant.outline;
 
-  /// The button's destructive style.
+  /// The button's ghost style.
   ///
-  /// Shorthand for the current context's [FButtonStyles.destructive] style.
-  static const FButtonStyle destructive = Variant.destructive;
+  /// Shorthand for the current context's [FButtonStyles.ghost] style.
+  static const FButtonStyle ghost = Variant.ghost;
 }
 
 @internal
 enum Variant implements FButtonStyle {
   primary,
   secondary,
-  outline,
   destructive,
+  outline,
+  ghost,
 }
 
 /// A custom [FButton] style.

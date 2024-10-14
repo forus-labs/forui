@@ -19,12 +19,16 @@ final class FButtonStyles with Diagnosticable {
   /// The outlined button style.
   final FButtonCustomStyle outline;
 
+  /// The ghost button style.
+  final FButtonCustomStyle ghost;
+
   /// Creates a [FButtonCustomStyle].
   const FButtonStyles({
     required this.primary,
     required this.secondary,
     required this.destructive,
     required this.outline,
+    required this.ghost,
   });
 
   /// Creates a [FButtonCustomStyle] that inherits its properties from the provided [colorScheme], [typography], and
@@ -71,7 +75,6 @@ final class FButtonStyles with Diagnosticable {
             enabledBoxDecoration: BoxDecoration(
               border: Border.all(color: colorScheme.border),
               borderRadius: style.borderRadius,
-              color: colorScheme.background,
             ),
             enabledHoverBoxDecoration: BoxDecoration(
               border: Border.all(color: colorScheme.border),
@@ -81,7 +84,27 @@ final class FButtonStyles with Diagnosticable {
             disabledBoxDecoration: BoxDecoration(
               border: Border.all(color: colorScheme.disable(colorScheme.border)),
               borderRadius: style.borderRadius,
-              color: colorScheme.background,
+            ),
+            contentStyle: FButtonContentStyle.inherit(
+              typography: typography,
+              enabled: colorScheme.secondaryForeground,
+              disabled: colorScheme.disable(colorScheme.secondaryForeground),
+            ),
+            iconContentStyle: FButtonIconContentStyle(
+              enabledColor: colorScheme.secondaryForeground,
+              disabledColor: colorScheme.disable(colorScheme.secondaryForeground),
+            ),
+          ),
+          ghost: FButtonCustomStyle(
+            enabledBoxDecoration: BoxDecoration(
+              borderRadius: style.borderRadius,
+            ),
+            enabledHoverBoxDecoration: BoxDecoration(
+              borderRadius: style.borderRadius,
+              color: colorScheme.secondary,
+            ),
+            disabledBoxDecoration: BoxDecoration(
+              borderRadius: style.borderRadius,
             ),
             contentStyle: FButtonContentStyle.inherit(
               typography: typography,
@@ -102,12 +125,14 @@ final class FButtonStyles with Diagnosticable {
     FButtonCustomStyle? secondary,
     FButtonCustomStyle? destructive,
     FButtonCustomStyle? outline,
+    FButtonCustomStyle? ghost,
   }) =>
       FButtonStyles(
         primary: primary ?? this.primary,
         secondary: secondary ?? this.secondary,
         destructive: destructive ?? this.destructive,
         outline: outline ?? this.outline,
+        ghost: ghost ?? this.ghost,
       );
 
   @override
@@ -117,7 +142,8 @@ final class FButtonStyles with Diagnosticable {
       ..add(DiagnosticsProperty('primary', primary))
       ..add(DiagnosticsProperty('secondary', secondary))
       ..add(DiagnosticsProperty('destructive', destructive))
-      ..add(DiagnosticsProperty('outlined', outline));
+      ..add(DiagnosticsProperty('outlined', outline))
+      ..add(DiagnosticsProperty('ghost', ghost));
   }
 
   @override
@@ -128,8 +154,9 @@ final class FButtonStyles with Diagnosticable {
           primary == other.primary &&
           secondary == other.secondary &&
           destructive == other.destructive &&
-          outline == other.outline;
+          outline == other.outline &&
+          ghost == other.ghost;
 
   @override
-  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outline.hashCode;
+  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outline.hashCode ^ ghost.hashCode;
 }

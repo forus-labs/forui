@@ -30,7 +30,7 @@ extension Touch on Never {
 ///
 /// Short pressed is fired 200 ms after a tap is first detected. This is faster than long press's [kLongPressTimeout].
 @internal
-typedef FTappableState = ({bool focused, bool hovered, bool shortPressed});
+typedef FTappableState = ({bool focused, bool hovered});
 
 @internal
 class FTappable extends StatefulWidget {
@@ -41,6 +41,8 @@ class FTappable extends StatefulWidget {
   final FocusNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
   final HitTestBehavior? behavior;
+  final Duration touchHoverEnterDuration;
+  final Duration touchHoverExitDuration;
   final VoidCallback? onPress;
   final VoidCallback? onLongPress;
   final ValueWidgetBuilder<FTappableState> builder;
@@ -54,6 +56,8 @@ class FTappable extends StatefulWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     HitTestBehavior behavior,
+    Duration touchHoverEnterDuration,
+    Duration touchHoverExitDuration,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
     ValueWidgetBuilder<FTappableState>? builder,
@@ -69,6 +73,8 @@ class FTappable extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.behavior,
+    this.touchHoverEnterDuration = const Duration(milliseconds: 200),
+    this.touchHoverExitDuration = Duration.zero,
     this.onPress,
     this.onLongPress,
     ValueWidgetBuilder<FTappableState>? builder,
@@ -112,7 +118,6 @@ class _FTappableState extends State<FTappable> {
   int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
-  bool _shortPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -140,15 +145,16 @@ class _FTappableState extends State<FTappable> {
           child: Listener(
             onPointerDown: (_) async {
               final count = ++_monotonic;
-              await Future.delayed(const Duration(milliseconds: 200));
-              if (count == _monotonic) {
-                setState(() => _shortPressed = true);
+              await Future.delayed(widget.touchHoverEnterDuration);
+              if (count == _monotonic && !_hovered) {
+                setState(() => _hovered = true);
               }
             },
-            onPointerUp: (_) {
-              _monotonic++;
-              if (_shortPressed) {
-                setState(() => _shortPressed = false);
+            onPointerUp: (_) async {
+              final count = ++_monotonic;
+              await Future.delayed(widget.touchHoverExitDuration);
+              if (count == _monotonic && _hovered) {
+                setState(() => _hovered = false);
               }
             },
             child: _child,
@@ -178,8 +184,7 @@ class _FTappableState extends State<FTappable> {
         behavior: widget.behavior,
         onTap: widget.onPress,
         onLongPress: widget.onLongPress,
-        child:
-            widget.builder(context, (focused: _focused, hovered: _hovered, shortPressed: _shortPressed), widget.child),
+        child: widget.builder(context, (focused: _focused, hovered: _hovered), widget.child),
       );
 }
 
@@ -192,6 +197,8 @@ class _AnimatedTappable extends FTappable {
     super.focusNode,
     super.onFocusChange,
     super.behavior,
+    super.touchHoverEnterDuration,
+    super.touchHoverExitDuration,
     super.onPress,
     super.onLongPress,
     super.builder,
@@ -231,11 +238,7 @@ class _AnimatedTappableState extends _FTappableState with SingleTickerProviderSt
                   _controller.forward();
                 },
           onLongPress: widget.onLongPress,
-          child: widget.builder(
-            context,
-            (focused: _focused, hovered: _hovered, shortPressed: _shortPressed),
-            widget.child,
-          ),
+          child: widget.builder(context, (focused: _focused, hovered: _hovered), widget.child),
         ),
       );
 

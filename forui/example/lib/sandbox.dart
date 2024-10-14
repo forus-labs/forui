@@ -70,6 +70,8 @@ class _SandboxState extends State<Sandbox> {
               FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
             ],
           ),
+          const SizedBox(height: 20),
+          FButton(onPress: () {}, label: const Text('Hi')),
         ],
       );
 }
