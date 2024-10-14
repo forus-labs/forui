@@ -32,10 +32,36 @@ class _SandboxState extends State<Sandbox> {
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 45.0),
+                child: FDivider(style: context.theme.tileGroupStyle.tileStyle.dividerStyle),
+              ),
               FTile(
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                prefixIcon: FIcon(FAssets.icons.bluetooth, size: 30,),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 45.0),
+                child: FDivider(style: context.theme.tileGroupStyle.tileStyle.dividerStyle),
+              ),
+              FTile(
+                prefixIcon: const FIcon.data(Icons.add_circle_outline),
+                title: const Text('WiFi'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 45.0),
+                child: FDivider(style: context.theme.tileGroupStyle.tileStyle.dividerStyle),
+              ),
+              FTile(
+                prefixIcon: FIcon(FAssets.icons.ghost),
+                title: const Text('WiFi'),
                 details: const Text('Forus Labs (5G)'),
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
@@ -47,12 +73,13 @@ class _SandboxState extends State<Sandbox> {
           ),
           FTile(
             prefixIcon: FIcon(FAssets.icons.bluetooth),
-            title: const Text('Bluetooth'),
-            subtitle: const Text('Fee, Fo, Fum'),
+            title: const Text('Title'),
+            subtitle: const Text('L                                         ong'),
             details: const Text('Forus Labs (5G)'),
             suffixIcon: FIcon(FAssets.icons.chevronRight),
             onPress: () {},
           ),
+          FButton(onPress: () {}, label: const Text('Forus Labs (5G)')),
         ],
       );
 }

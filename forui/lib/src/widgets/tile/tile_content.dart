@@ -41,6 +41,12 @@ class FTileContent extends StatelessWidget {
     Widget content(FTileContentStateStyle stateStyle, Color background) => DecoratedBox(
           decoration: BoxDecoration(
             color: background,
+            border: Border(
+              top: index == 0 ? style.border.top : BorderSide.none,
+              left: style.border.left,
+              right: style.border.right,
+              bottom: index == length - 1 ? style.border.top : BorderSide.none,
+            ),
             borderRadius: BorderRadius.only(
               topLeft: index == 0 ? style.borderRadius.topLeft : Radius.zero,
               topRight: index == 0 ? style.borderRadius.topRight : Radius.zero,
@@ -74,9 +80,11 @@ class FTileContent extends StatelessWidget {
       return FTappable(
         behavior: HitTestBehavior.translucent,
         semanticLabel: semanticLabel,
+        touchHoverEnterDuration: Duration.zero,
+        touchHoverExitDuration: const Duration(milliseconds: 25),
         onPress: onPress,
         onLongPress: onLongPress,
-        builder: (_, state, __) => switch (state.hovered || state.shortPressed) {
+        builder: (_, state, __) => switch (state.hovered) {
           true => content(contentStyle.enabledHoveredStyle, style.enabledHoveredBackgroundColor),
           false => content(contentStyle.enabledStyle, style.enabledBackgroundColor),
         },
@@ -140,46 +148,57 @@ class _Content extends StatelessWidget {
                 child: prefixIcon,
               ),
             ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              merge(
-                style: style.titleTextStyle,
-                textHeightBehavior: const TextHeightBehavior(
-                  applyHeightToFirstAscent: false,
-                  applyHeightToLastDescent: false,
-                ),
-                overflow: TextOverflow.ellipsis,
-                child: title,
-              ),
-              if (subtitle case final subtitle?)
-                Padding(
-                  padding: EdgeInsets.only(top: contentStyle.titleSpacing),
-                  child: merge(
-                    style: style.subtitleTextStyle,
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    child: subtitle,
+          Expanded(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      merge(
+                        style: style.titleTextStyle,
+                        textHeightBehavior: const TextHeightBehavior(
+                          applyHeightToFirstAscent: false,
+                          applyHeightToLastDescent: false,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        child: title,
+                      ),
+                      if (subtitle case final subtitle?)
+                        Padding(
+                          padding: EdgeInsets.only(top: contentStyle.titleSpacing),
+                          child: merge(
+                            style: style.subtitleTextStyle,
+                            textHeightBehavior: const TextHeightBehavior(
+                              applyHeightToFirstAscent: false,
+                              applyHeightToLastDescent: false,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            child: subtitle,
+                          ),
+                        ),
+                    ],
                   ),
                 ),
-            ],
-          ),
-          const Spacer(),
-          if (details case final details?)
-            merge(
-              style: style.detailsTextStyle,
-              textHeightBehavior: const TextHeightBehavior(
-                applyHeightToFirstAscent: false,
-                applyHeightToLastDescent: false,
-              ),
-              overflow: TextOverflow.ellipsis,
-              child: details,
+                if (details case final details?)
+                  Flexible(
+                    child: merge(
+                      style: style.detailsTextStyle,
+                      textHeightBehavior: const TextHeightBehavior(
+                        applyHeightToFirstAscent: false,
+                        applyHeightToLastDescent: false,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      child: details,
+                    ),
+                  ),
+              ],
             ),
+          ),
           if (suffixIcon case final suffixIcon?)
             Padding(
               padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
@@ -192,12 +211,12 @@ class _Content extends StatelessWidget {
       ),
     );
 
-    if (divider == FTileDivider.full && index < length - 1) {
-      tile = Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [tile, FDivider(style: dividerStyle)],
-      );
-    }
+    // if (divider == FTileDivider.full && index < length - 1) {
+    //   tile = Column(
+    //     mainAxisSize: MainAxisSize.min,
+    //     children: [tile, FDivider(style: dividerStyle)],
+    //   );
+    // }
 
     return tile;
   }
@@ -256,59 +275,70 @@ class _TitleAlignedContent extends StatelessWidget {
               Padding(
                 padding: contentStyle.padding.copyWith(left: 0),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        merge(
-                          style: style.titleTextStyle,
-                          textHeightBehavior: const TextHeightBehavior(
-                            applyHeightToFirstAscent: false,
-                            applyHeightToLastDescent: false,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          child: title,
-                        ),
-                        if (subtitle case final subtitle?)
-                          Padding(
-                            padding: EdgeInsets.only(top: contentStyle.titleSpacing),
-                            child: merge(
-                              style: style.subtitleTextStyle,
-                              textHeightBehavior: const TextHeightBehavior(
-                                applyHeightToFirstAscent: false,
-                                applyHeightToLastDescent: false,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              child: subtitle,
+                    Flexible(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          merge(
+                            style: style.titleTextStyle,
+                            textHeightBehavior: const TextHeightBehavior(
+                              applyHeightToFirstAscent: false,
+                              applyHeightToLastDescent: false,
                             ),
+                            overflow: TextOverflow.ellipsis,
+                            child: title,
                           ),
-                      ],
+                          if (subtitle case final subtitle?)
+                            Padding(
+                              padding: EdgeInsets.only(top: contentStyle.titleSpacing),
+                              child: merge(
+                                style: style.subtitleTextStyle,
+                                textHeightBehavior: const TextHeightBehavior(
+                                  applyHeightToFirstAscent: false,
+                                  applyHeightToLastDescent: false,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                child: subtitle,
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
-                    const Spacer(),
-                    if (details case final details?)
-                      merge(
-                        style: style.detailsTextStyle,
-                        textHeightBehavior: const TextHeightBehavior(
-                          applyHeightToFirstAscent: false,
-                          applyHeightToLastDescent: false,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        child: details,
+                    Flexible(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          if (details case final details?)
+                            Flexible(
+                              child: merge(
+                                style: style.detailsTextStyle,
+                                textHeightBehavior: const TextHeightBehavior(
+                                  applyHeightToFirstAscent: false,
+                                  applyHeightToLastDescent: false,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                child: details,
+                              ),
+                            ),
+                          if (suffixIcon case final suffixIcon?)
+                            Padding(
+                              padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
+                              child: FIconStyleData(
+                                style: style.suffixIconStyle,
+                                child: suffixIcon,
+                              ),
+                            ),
+                        ],
                       ),
-                    if (suffixIcon case final suffixIcon?)
-                      Padding(
-                        padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
-                        child: FIconStyleData(
-                          style: style.suffixIconStyle,
-                          child: suffixIcon,
-                        ),
-                      ),
+                    ),
                   ],
                 ),
               ),
-              if (index < length - 1) FDivider(style: dividerStyle),
+              // if (index < length - 1) FDivider(style: dividerStyle),
             ],
           ),
         ),

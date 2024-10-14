@@ -81,26 +81,18 @@ class FTileGroup extends StatelessWidget {
                 child: label,
               ),
             ),
-          // DecoratedBox doesn't inset the child, resulting in an invisible border.
-          // ignore: use_decorated_box - https://github.com/flutter/flutter/issues/2386
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: style.tileStyle.borderRadius,
-              border: style.tileStyle.border,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (final (index, child) in children.indexed)
-                  FTileData(
-                    style: style.tileStyle,
-                    divider: divider,
-                    index: index,
-                    length: children.length,
-                    child: child,
-                  ),
-              ],
-            ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final (index, child) in children.indexed)
+                FTileData(
+                  style: style.tileStyle,
+                  divider: divider,
+                  index: index,
+                  length: children.length,
+                  child: child,
+                ),
+            ],
           ),
         ],
       ),

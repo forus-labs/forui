@@ -186,7 +186,7 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byType(FTile)));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/unhovered.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/unhoverable.png'));
     });
 
     testWidgets('no subtitle', (tester) async {
@@ -207,6 +207,52 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
+    });
+
+    testWidgets('overflowing title', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: SizedBox(
+            width: 300,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTile(
+                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                title: const Text('L                                         ong'),
+                details: const Text('FL (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/overflowing-title.png'));
+    });
+
+    testWidgets('overflowing subtitle', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: SizedBox(
+            width: 300,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTile(
+                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                title: const Text('Title'),
+                subtitle: const Text('L                                         ong'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/overflowing-subtitle.png'));
     });
 
     testWidgets('minimal', (tester) async {
