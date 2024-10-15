@@ -25,6 +25,10 @@
 
 * Add `FColorScheme.enabledHoveredOpacity`.
 
+* Add `FChangeNotifier`.
+
+* Add `FValueNotifier`.
+
 ### Changes
 
 * Change button to change color when hovering over it.

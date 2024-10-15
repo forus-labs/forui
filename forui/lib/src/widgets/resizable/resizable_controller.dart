@@ -1,14 +1,12 @@
 import 'dart:collection';
 
-import 'package:flutter/widgets.dart';
-
 import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 
 /// A controller that manages the resizing of regions in a [FResizable].
-abstract interface class FResizableController extends ChangeNotifier {
+abstract interface class FResizableController extends FChangeNotifier {
   /// The resizable regions. The regions are ordered from top to bottom, or left to right, depending on the resizable
   /// axis.
   ///
@@ -75,6 +73,8 @@ final class _ResizableController extends FResizableController {
 
   @override
   bool update(int left, int right, double delta) {
+    debugAssertNotDisposed();
+
     final (shrink, expand, lhs) = switch (delta) {
       < 0 => (regions[left], regions[right], false),
       _ => (regions[right], regions[left], true),
@@ -114,6 +114,8 @@ final class _ResizableController extends FResizableController {
 
   @override
   void end(int left, int right) {
+    debugAssertNotDisposed();
+
     if (onResizeEnd case final onResizeEnd?) {
       onResizeEnd([regions[left], regions[right]]);
     }
@@ -132,6 +134,8 @@ final class _CascadeController extends FResizableController {
 
   @override
   bool update(int left, int right, double delta) {
+    debugAssertNotDisposed();
+
     final (shrinks, expand, lhs) = switch (delta) {
       < 0 => (regions.sublist(0, right).reversed.toList(), regions[right], false),
       _ => (regions.sublist(right), regions[left], true),
@@ -201,6 +205,8 @@ final class _CascadeController extends FResizableController {
 
   @override
   void end(int left, int right) {
+    debugAssertNotDisposed();
+
     if (onResizeEnd case final onResizeEnd?) {
       onResizeEnd(UnmodifiableListView(regions));
     }

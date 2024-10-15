@@ -149,14 +149,14 @@ class _FTappableState extends State<FTappable> {
             onPointerDown: (_) async {
               final count = ++_monotonic;
               await Future.delayed(widget.touchHoverEnterDuration);
-              if (count == _monotonic && !_touchHovered) {
+              if (mounted && count == _monotonic && !_touchHovered) {
                 setState(() => _touchHovered = true);
               }
             },
             onPointerUp: (_) async {
               final count = ++_monotonic;
               await Future.delayed(widget.touchHoverExitDuration);
-              if (count == _monotonic && _touchHovered) {
+              if (mounted && count == _monotonic && _touchHovered) {
                 setState(() => _touchHovered = false);
               }
             },

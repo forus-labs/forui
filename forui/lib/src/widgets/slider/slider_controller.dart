@@ -1,7 +1,4 @@
 import 'dart:collection';
-
-import 'package:flutter/foundation.dart';
-
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -29,7 +26,7 @@ enum FSliderInteraction {
 /// * [FContinuousSliderController.range] for selecting continuous range.
 /// * [FDiscreteSliderController.new] for selecting a discrete value.
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
-abstract class FSliderController extends ChangeNotifier {
+abstract class FSliderController extends FChangeNotifier {
   /// True if the registered tooltip(s) should be shown when the user interacts with the slider. Defaults to true.
   final FSliderTooltipsController tooltips;
 
@@ -69,6 +66,7 @@ abstract class FSliderController extends ChangeNotifier {
 
   /// Moves the active track on the [min] edge to the previous/next step.
   void step({required bool min, required bool extend}) {
+    debugAssertNotDisposed();
     if (_selection case final selection?) {
       this.selection = selection.step(min: min, extend: extend);
     }
@@ -78,6 +76,7 @@ abstract class FSliderController extends ChangeNotifier {
   ///
   /// The delta is relative to the origin defined by [FSlider.layout].
   void slide(double offset, {required bool min}) {
+    debugAssertNotDisposed();
     if (allowedInteraction == FSliderInteraction.tap) {
       return;
     }
@@ -98,6 +97,7 @@ abstract class FSliderController extends ChangeNotifier {
   ///
   /// The offset is relative to the origin defined by [FSlider.layout].
   bool? tap(double offset) {
+    debugAssertNotDisposed();
     if (allowedInteraction == FSliderInteraction.slide || allowedInteraction == FSliderInteraction.slideThumb) {
       return null;
     }
@@ -166,6 +166,7 @@ class FContinuousSliderController extends FSliderController {
   @override
   @internal
   void attach(double extent, List<FSliderMark> _) {
+    debugAssertNotDisposed();
     final proposed = ContinuousSelection(
       step: stepPercentage,
       mainAxisExtent: extent,
@@ -182,6 +183,7 @@ class FContinuousSliderController extends FSliderController {
 
   @override
   void reset() {
+    debugAssertNotDisposed();
     if (_selection case final selection?) {
       this.selection = ContinuousSelection(
         step: stepPercentage,
@@ -212,6 +214,7 @@ class FDiscreteSliderController extends FSliderController {
   @override
   @internal
   void attach(double extent, List<FSliderMark> marks) {
+    debugAssertNotDisposed();
     assert(marks.isNotEmpty, 'At least one mark is required.');
 
     final proposed = DiscreteSelection(
@@ -230,6 +233,7 @@ class FDiscreteSliderController extends FSliderController {
 
   @override
   void reset() {
+    debugAssertNotDisposed();
     if (_selection case final DiscreteSelection selection?) {
       this.selection = DiscreteSelection(
         ticks: selection.ticks,

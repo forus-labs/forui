@@ -71,7 +71,7 @@ class _SandboxState extends State<Sandbox> {
             ],
           ),
           const SizedBox(height: 20),
-          FButton(onPress: () {}, label: const Text('Hi')),
+          FButton(onPress: () {}, label: const Text('hi')),
         ],
       );
 }

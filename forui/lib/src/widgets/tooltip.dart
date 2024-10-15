@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
-class FTooltipController extends ChangeNotifier {
+class FTooltipController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
   static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
 
@@ -35,6 +35,7 @@ class FTooltipController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
+    debugAssertNotDisposed();
     _overlay.show();
     await _animation.forward();
     notifyListeners();
@@ -47,6 +48,7 @@ class FTooltipController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> hide() async {
+    debugAssertNotDisposed();
     await _animation.reverse();
     _overlay.hide();
     notifyListeners();
@@ -214,7 +216,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
           final count = ++_monotonic;
           await Future.delayed(widget.longPressExitDuration);
 
-          if (count == _monotonic) {
+          if (count == _monotonic && !_controller.disposed) {
             await _controller.hide();
           }
         },
@@ -257,7 +259,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     final fencingToken = ++_monotonic;
     await Future.delayed(widget.hoverEnterDuration);
 
-    if (fencingToken == _monotonic) {
+    if (fencingToken == _monotonic && !_controller.disposed) {
       await _controller.show();
     }
   }
@@ -266,7 +268,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     final count = ++_monotonic;
     await Future.delayed(widget.hoverExitDuration);
 
-    if (count == _monotonic) {
+    if (count == _monotonic && !_controller.disposed) {
       await _controller.hide();
     }
   }

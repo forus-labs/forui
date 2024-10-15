@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 
 /// A controller for a select group.
-abstract class FSelectGroupController<T> with ChangeNotifier {
+abstract class FSelectGroupController<T> extends FChangeNotifier {
   final Set<T> _values;
 
   /// Creates a [FSelectGroupController].
@@ -40,6 +41,7 @@ class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
 
   @override
   void select(T value, bool selected) {
+    debugAssertNotDisposed();
     if (!selected || contains(value)) {
       return;
     }
@@ -77,6 +79,7 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
 
   @override
   void select(T value, bool selected) {
+    debugAssertNotDisposed();
     if (selected) {
       if (_max != null && _values.length >= _max) {
         return;

@@ -1,9 +1,10 @@
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 
 import 'package:meta/meta.dart';
 
 /// A controller that controls which sections are shown and hidden.
-class FAccordionController extends ChangeNotifier {
+class FAccordionController extends FChangeNotifier {
   /// The animation controllers for each of the sections in the accordion.
   final Map<int, AnimationController> controllers;
   final Set<int> _expanded;
@@ -73,6 +74,8 @@ class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> expand(int index) async {
+    debugAssertNotDisposed();
+
     final controller = controllers[index];
     if (_expanded.contains(index) || controller == null) {
       return false;
@@ -102,6 +105,8 @@ class FAccordionController extends ChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> collapse(int index) async {
+    debugAssertNotDisposed();
+
     if (_expanded.length <= _min || !_expanded.contains(index)) {
       return false;
     }
