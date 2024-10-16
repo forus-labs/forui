@@ -63,6 +63,7 @@ class FIconStyle with Diagnosticable {
 /// [FStyle.iconStyle] otherwise.
 ///
 /// See:
+/// * https://forui.dev/docs/data/icon for working examples.
 /// * [FIconStyle] for the properties that can be inherited.
 /// * [FAssets.icons] for bundled Forui icons.
 abstract class FIcon extends StatelessWidget {

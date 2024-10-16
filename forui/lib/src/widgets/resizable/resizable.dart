@@ -17,7 +17,7 @@ import 'package:forui/src/widgets/resizable/divider.dart';
 /// It is recommended that a [FResizable] contains at least 2 [FResizableRegion]s.
 ///
 /// See:
-/// * https://forui.dev/docs/resizable for working examples.
+/// * https://forui.dev/docs/layout/resizable for working examples.
 /// * [FResizableStyle] for customizing a resizable's appearance.
 class FResizable extends StatefulWidget {
   static String _label(FResizableRegionData left, FResizableRegionData right) =>

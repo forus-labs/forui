@@ -11,7 +11,7 @@ import 'package:forui/src/widgets/badge/badge_content.dart';
 /// The constants in [FBadgeStyle] provide a convenient way to style a badge.
 ///
 /// See:
-/// * https://forui.dev/docs/badge for working examples.
+/// * https://forui.dev/docs/data/badge for working examples.
 /// * [FBadgeCustomStyle] for customizing a badge's appearance.
 class FBadge extends StatelessWidget {
   /// The style. Defaults to [FBadgeStyle.primary].

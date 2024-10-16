@@ -36,7 +36,7 @@ class FTabEntry {
 /// Allows switching between widgets through tabs.
 ///
 /// See:
-/// * https://forui.dev/docs/tabs for working examples.
+/// * https://forui.dev/docs/navigation/tabs for working examples.
 /// * [FTabsStyle] for customizing tabs' appearance.
 class FTabs extends StatefulWidget {
   /// The tab controller.

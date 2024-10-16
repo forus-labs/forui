@@ -69,7 +69,7 @@ class FTooltipController extends FChangeNotifier {
 /// callback.
 ///
 /// See:
-/// * https://forui.dev/docs/tooltip for working examples.
+/// * https://forui.dev/docs/overlay/tooltip for working examples.
 /// * [FTooltipController] for controlling a tooltip.
 /// * [FTooltipStyle] for customizing a tooltip's appearance.
 class FTooltip extends StatefulWidget {

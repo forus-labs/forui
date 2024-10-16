@@ -66,7 +66,7 @@ final class FPopoverController extends FChangeNotifier {
 /// A popover displays rich content in a portal that is aligned to a target.
 ///
 /// See:
-/// * https://forui.dev/docs/popover for working examples.
+/// * https://forui.dev/docs/overlay/popover for working examples.
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {

@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 /// buttons.
 ///
 /// See:
-/// * https://forui.dev/docs/radio for working examples.
+/// * https://forui.dev/docs/form/radio for working examples.
 /// * [FRadioStyle] for customizing a radio's appearance.
 class FRadio extends StatelessWidget {
   /// The style. Defaults to [FThemeData.radioStyle].

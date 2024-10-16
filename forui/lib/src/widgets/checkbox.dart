@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 /// For touch devices, a [FSwitch] is generally recommended over a [FCheckbox].
 ///
 /// See:
-/// * https://forui.dev/docs/checkbox for working examples.
+/// * https://forui.dev/docs/form/checkbox for working examples.
 /// * [FCheckboxStyle] for customizing a checkbox's appearance.
 class FCheckbox extends StatelessWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].

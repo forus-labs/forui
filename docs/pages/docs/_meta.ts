@@ -19,9 +19,13 @@ export default {
   },
   // TODO: Workaround for a seperator bug. Remove when patched.
   // A page need to be listed after a separator or else the order will be messed up.
-  accordion: 'Accordion',
+  layout: 'Layout',
+  form: 'Form',
+  data: 'Data Presentation',
+  navigation: 'Navigation',
+  feedback: 'Feedback',
+  overlay: 'Overlay',
   '*': {
     title: ''
   },
-
 };

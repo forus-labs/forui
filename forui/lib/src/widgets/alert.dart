@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 /// Displays a callout for user attention.
 ///
 /// See:
-/// * https://forui.dev/docs/alert for working examples.
+/// * https://forui.dev/docs/navigation/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
   /// The icon. Defaults to [FAssets.icons.circleAlert].

@@ -13,7 +13,7 @@ import 'package:forui/src/widgets/dialog/dialog_content.dart';
 /// [showAdaptiveDialog] and [showDialog].
 ///
 /// See:
-/// * https://forui.dev/docs/dialog for working examples.
+/// * https://forui.dev/docs/overlay/dialog for working examples.
 /// * [FDialogStyle] for customizing a dialog's appearance.
 class FDialog extends StatelessWidget {
   static const _defaultDuration = Duration(milliseconds: 100);

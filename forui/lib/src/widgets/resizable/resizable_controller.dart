@@ -37,7 +37,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   ///
   /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
   ///
-  /// See https://forui.dev/docs/resizable#no-cascading for a working example.
+  /// See https://forui.dev/docs/layout/resizable#no-cascading for a working example.
   factory FResizableController({
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(List<FResizableRegionData> resized)? onResizeEnd,
@@ -50,7 +50,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   ///
   /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
   ///
-  /// See https://forui.dev/docs/resizable for a working example.
+  /// See https://forui.dev/docs/layout/resizable for a working example.
   factory FResizableController.cascade({
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd,

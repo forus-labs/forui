@@ -12,7 +12,7 @@ import 'package:forui/forui.dart';
 /// Typically used to toggle the on/off state of a single setting.
 ///
 /// See:
-/// * https://forui.dev/docs/switch for working examples.
+/// * https://forui.dev/docs/form/switch for working examples.
 /// * [FSwitchStyle] for customizing a switch's appearance.
 class FSwitch extends StatelessWidget {
   /// The style. Defaults to [FThemeData.switchStyle].

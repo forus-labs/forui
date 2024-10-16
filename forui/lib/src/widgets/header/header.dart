@@ -15,7 +15,7 @@ part 'nested_header.dart';
 /// A header contains the page's title and actions.
 ///
 /// See:
-/// * https://forui.dev/docs/header for working examples.
+/// * https://forui.dev/docs/navigation/header for working examples.
 /// * [FRootHeaderStyle] and [FNestedHeaderStyle] for customizing a header's appearance.
 sealed class FHeader extends StatelessWidget {
   const FHeader._({super.key});
