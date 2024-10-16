@@ -361,6 +361,13 @@ class $FAssetsIcons {
         'assets/icons/ampersands.svg',
       );
 
+  /// The `assets/icons/amphora.svg`.
+  SvgAsset get amphora => const SvgAsset(
+        'forui_assets',
+        'amphora',
+        'assets/icons/amphora.svg',
+      );
+
   /// The `assets/icons/anchor.svg`.
   SvgAsset get anchor => const SvgAsset(
         'forui_assets',
@@ -443,13 +450,6 @@ class $FAssetsIcons {
         'forui_assets',
         'archive',
         'assets/icons/archive.svg',
-      );
-
-  /// The `assets/icons/area-chart.svg`.
-  SvgAsset get areaChart => const SvgAsset(
-        'forui_assets',
-        'area-chart',
-        'assets/icons/area-chart.svg',
       );
 
   /// The `assets/icons/armchair.svg`.
@@ -970,60 +970,18 @@ class $FAssetsIcons {
         'assets/icons/banana.svg',
       );
 
+  /// The `assets/icons/bandage.svg`.
+  SvgAsset get bandage => const SvgAsset(
+        'forui_assets',
+        'bandage',
+        'assets/icons/bandage.svg',
+      );
+
   /// The `assets/icons/banknote.svg`.
   SvgAsset get banknote => const SvgAsset(
         'forui_assets',
         'banknote',
         'assets/icons/banknote.svg',
-      );
-
-  /// The `assets/icons/bar-chart-2.svg`.
-  SvgAsset get barChart2 => const SvgAsset(
-        'forui_assets',
-        'bar-chart-2',
-        'assets/icons/bar-chart-2.svg',
-      );
-
-  /// The `assets/icons/bar-chart-3.svg`.
-  SvgAsset get barChart3 => const SvgAsset(
-        'forui_assets',
-        'bar-chart-3',
-        'assets/icons/bar-chart-3.svg',
-      );
-
-  /// The `assets/icons/bar-chart-4.svg`.
-  SvgAsset get barChart4 => const SvgAsset(
-        'forui_assets',
-        'bar-chart-4',
-        'assets/icons/bar-chart-4.svg',
-      );
-
-  /// The `assets/icons/bar-chart-big.svg`.
-  SvgAsset get barChartBig => const SvgAsset(
-        'forui_assets',
-        'bar-chart-big',
-        'assets/icons/bar-chart-big.svg',
-      );
-
-  /// The `assets/icons/bar-chart-horizontal-big.svg`.
-  SvgAsset get barChartHorizontalBig => const SvgAsset(
-        'forui_assets',
-        'bar-chart-horizontal-big',
-        'assets/icons/bar-chart-horizontal-big.svg',
-      );
-
-  /// The `assets/icons/bar-chart-horizontal.svg`.
-  SvgAsset get barChartHorizontal => const SvgAsset(
-        'forui_assets',
-        'bar-chart-horizontal',
-        'assets/icons/bar-chart-horizontal.svg',
-      );
-
-  /// The `assets/icons/bar-chart.svg`.
-  SvgAsset get barChart => const SvgAsset(
-        'forui_assets',
-        'bar-chart',
-        'assets/icons/bar-chart.svg',
       );
 
   /// The `assets/icons/barcode.svg`.
@@ -1229,6 +1187,13 @@ class $FAssetsIcons {
         'assets/icons/between-vertical-start.svg',
       );
 
+  /// The `assets/icons/biceps-flexed.svg`.
+  SvgAsset get bicepsFlexed => const SvgAsset(
+        'forui_assets',
+        'biceps-flexed',
+        'assets/icons/biceps-flexed.svg',
+      );
+
   /// The `assets/icons/bike.svg`.
   SvgAsset get bike => const SvgAsset(
         'forui_assets',
@@ -1241,6 +1206,13 @@ class $FAssetsIcons {
         'forui_assets',
         'binary',
         'assets/icons/binary.svg',
+      );
+
+  /// The `assets/icons/binoculars.svg`.
+  SvgAsset get binoculars => const SvgAsset(
+        'forui_assets',
+        'binoculars',
+        'assets/icons/binoculars.svg',
       );
 
   /// The `assets/icons/biohazard.svg`.
@@ -1572,13 +1544,6 @@ class $FAssetsIcons {
         'assets/icons/bot.svg',
       );
 
-  /// The `assets/icons/box-select.svg`.
-  SvgAsset get boxSelect => const SvgAsset(
-        'forui_assets',
-        'box-select',
-        'assets/icons/box-select.svg',
-      );
-
   /// The `assets/icons/box.svg`.
   SvgAsset get box => const SvgAsset(
         'forui_assets',
@@ -1640,6 +1605,13 @@ class $FAssetsIcons {
         'forui_assets',
         'briefcase-business',
         'assets/icons/briefcase-business.svg',
+      );
+
+  /// The `assets/icons/briefcase-conveyor-belt.svg`.
+  SvgAsset get briefcaseConveyorBelt => const SvgAsset(
+        'forui_assets',
+        'briefcase-conveyor-belt',
+        'assets/icons/briefcase-conveyor-belt.svg',
       );
 
   /// The `assets/icons/briefcase-medical.svg`.
@@ -1754,6 +1726,20 @@ class $FAssetsIcons {
         'assets/icons/calculator.svg',
       );
 
+  /// The `assets/icons/calendar-arrow-down.svg`.
+  SvgAsset get calendarArrowDown => const SvgAsset(
+        'forui_assets',
+        'calendar-arrow-down',
+        'assets/icons/calendar-arrow-down.svg',
+      );
+
+  /// The `assets/icons/calendar-arrow-up.svg`.
+  SvgAsset get calendarArrowUp => const SvgAsset(
+        'forui_assets',
+        'calendar-arrow-up',
+        'assets/icons/calendar-arrow-up.svg',
+      );
+
   /// The `assets/icons/calendar-check-2.svg`.
   SvgAsset get calendarCheck2 => const SvgAsset(
         'forui_assets',
@@ -1773,6 +1759,13 @@ class $FAssetsIcons {
         'forui_assets',
         'calendar-clock',
         'assets/icons/calendar-clock.svg',
+      );
+
+  /// The `assets/icons/calendar-cog.svg`.
+  SvgAsset get calendarCog => const SvgAsset(
+        'forui_assets',
+        'calendar-cog',
+        'assets/icons/calendar-cog.svg',
       );
 
   /// The `assets/icons/calendar-days.svg`.
@@ -1878,13 +1871,6 @@ class $FAssetsIcons {
         'forui_assets',
         'camera',
         'assets/icons/camera.svg',
-      );
-
-  /// The `assets/icons/candlestick-chart.svg`.
-  SvgAsset get candlestickChart => const SvgAsset(
-        'forui_assets',
-        'candlestick-chart',
-        'assets/icons/candlestick-chart.svg',
       );
 
   /// The `assets/icons/candy-cane.svg`.
@@ -2020,6 +2006,167 @@ class $FAssetsIcons {
         'assets/icons/cctv.svg',
       );
 
+  /// The `assets/icons/chart-area.svg`.
+  SvgAsset get chartArea => const SvgAsset(
+        'forui_assets',
+        'chart-area',
+        'assets/icons/chart-area.svg',
+      );
+
+  /// The `assets/icons/chart-bar-big.svg`.
+  SvgAsset get chartBarBig => const SvgAsset(
+        'forui_assets',
+        'chart-bar-big',
+        'assets/icons/chart-bar-big.svg',
+      );
+
+  /// The `assets/icons/chart-bar-decreasing.svg`.
+  SvgAsset get chartBarDecreasing => const SvgAsset(
+        'forui_assets',
+        'chart-bar-decreasing',
+        'assets/icons/chart-bar-decreasing.svg',
+      );
+
+  /// The `assets/icons/chart-bar-increasing.svg`.
+  SvgAsset get chartBarIncreasing => const SvgAsset(
+        'forui_assets',
+        'chart-bar-increasing',
+        'assets/icons/chart-bar-increasing.svg',
+      );
+
+  /// The `assets/icons/chart-bar-stacked.svg`.
+  SvgAsset get chartBarStacked => const SvgAsset(
+        'forui_assets',
+        'chart-bar-stacked',
+        'assets/icons/chart-bar-stacked.svg',
+      );
+
+  /// The `assets/icons/chart-bar.svg`.
+  SvgAsset get chartBar => const SvgAsset(
+        'forui_assets',
+        'chart-bar',
+        'assets/icons/chart-bar.svg',
+      );
+
+  /// The `assets/icons/chart-candlestick.svg`.
+  SvgAsset get chartCandlestick => const SvgAsset(
+        'forui_assets',
+        'chart-candlestick',
+        'assets/icons/chart-candlestick.svg',
+      );
+
+  /// The `assets/icons/chart-column-big.svg`.
+  SvgAsset get chartColumnBig => const SvgAsset(
+        'forui_assets',
+        'chart-column-big',
+        'assets/icons/chart-column-big.svg',
+      );
+
+  /// The `assets/icons/chart-column-decreasing.svg`.
+  SvgAsset get chartColumnDecreasing => const SvgAsset(
+        'forui_assets',
+        'chart-column-decreasing',
+        'assets/icons/chart-column-decreasing.svg',
+      );
+
+  /// The `assets/icons/chart-column-increasing.svg`.
+  SvgAsset get chartColumnIncreasing => const SvgAsset(
+        'forui_assets',
+        'chart-column-increasing',
+        'assets/icons/chart-column-increasing.svg',
+      );
+
+  /// The `assets/icons/chart-column-stacked.svg`.
+  SvgAsset get chartColumnStacked => const SvgAsset(
+        'forui_assets',
+        'chart-column-stacked',
+        'assets/icons/chart-column-stacked.svg',
+      );
+
+  /// The `assets/icons/chart-column.svg`.
+  SvgAsset get chartColumn => const SvgAsset(
+        'forui_assets',
+        'chart-column',
+        'assets/icons/chart-column.svg',
+      );
+
+  /// The `assets/icons/chart-gantt.svg`.
+  SvgAsset get chartGantt => const SvgAsset(
+        'forui_assets',
+        'chart-gantt',
+        'assets/icons/chart-gantt.svg',
+      );
+
+  /// The `assets/icons/chart-line.svg`.
+  SvgAsset get chartLine => const SvgAsset(
+        'forui_assets',
+        'chart-line',
+        'assets/icons/chart-line.svg',
+      );
+
+  /// The `assets/icons/chart-network.svg`.
+  SvgAsset get chartNetwork => const SvgAsset(
+        'forui_assets',
+        'chart-network',
+        'assets/icons/chart-network.svg',
+      );
+
+  /// The `assets/icons/chart-no-axes-column-decreasing.svg`.
+  SvgAsset get chartNoAxesColumnDecreasing => const SvgAsset(
+        'forui_assets',
+        'chart-no-axes-column-decreasing',
+        'assets/icons/chart-no-axes-column-decreasing.svg',
+      );
+
+  /// The `assets/icons/chart-no-axes-column-increasing.svg`.
+  SvgAsset get chartNoAxesColumnIncreasing => const SvgAsset(
+        'forui_assets',
+        'chart-no-axes-column-increasing',
+        'assets/icons/chart-no-axes-column-increasing.svg',
+      );
+
+  /// The `assets/icons/chart-no-axes-column.svg`.
+  SvgAsset get chartNoAxesColumn => const SvgAsset(
+        'forui_assets',
+        'chart-no-axes-column',
+        'assets/icons/chart-no-axes-column.svg',
+      );
+
+  /// The `assets/icons/chart-no-axes-combined.svg`.
+  SvgAsset get chartNoAxesCombined => const SvgAsset(
+        'forui_assets',
+        'chart-no-axes-combined',
+        'assets/icons/chart-no-axes-combined.svg',
+      );
+
+  /// The `assets/icons/chart-no-axes-gantt.svg`.
+  SvgAsset get chartNoAxesGantt => const SvgAsset(
+        'forui_assets',
+        'chart-no-axes-gantt',
+        'assets/icons/chart-no-axes-gantt.svg',
+      );
+
+  /// The `assets/icons/chart-pie.svg`.
+  SvgAsset get chartPie => const SvgAsset(
+        'forui_assets',
+        'chart-pie',
+        'assets/icons/chart-pie.svg',
+      );
+
+  /// The `assets/icons/chart-scatter.svg`.
+  SvgAsset get chartScatter => const SvgAsset(
+        'forui_assets',
+        'chart-scatter',
+        'assets/icons/chart-scatter.svg',
+      );
+
+  /// The `assets/icons/chart-spline.svg`.
+  SvgAsset get chartSpline => const SvgAsset(
+        'forui_assets',
+        'chart-spline',
+        'assets/icons/chart-spline.svg',
+      );
+
   /// The `assets/icons/check-check.svg`.
   SvgAsset get checkCheck => const SvgAsset(
         'forui_assets',
@@ -2102,6 +2249,13 @@ class $FAssetsIcons {
         'forui_assets',
         'chevrons-down',
         'assets/icons/chevrons-down.svg',
+      );
+
+  /// The `assets/icons/chevrons-left-right-ellipsis.svg`.
+  SvgAsset get chevronsLeftRightEllipsis => const SvgAsset(
+        'forui_assets',
+        'chevrons-left-right-ellipsis',
+        'assets/icons/chevrons-left-right-ellipsis.svg',
       );
 
   /// The `assets/icons/chevrons-left-right.svg`.
@@ -2326,6 +2480,13 @@ class $FAssetsIcons {
         'forui_assets',
         'circle-equal',
         'assets/icons/circle-equal.svg',
+      );
+
+  /// The `assets/icons/circle-fading-arrow-up.svg`.
+  SvgAsset get circleFadingArrowUp => const SvgAsset(
+        'forui_assets',
+        'circle-fading-arrow-up',
+        'assets/icons/circle-fading-arrow-up.svg',
       );
 
   /// The `assets/icons/circle-fading-plus.svg`.
@@ -2641,6 +2802,27 @@ class $FAssetsIcons {
         'forui_assets',
         'clock-9',
         'assets/icons/clock-9.svg',
+      );
+
+  /// The `assets/icons/clock-alert.svg`.
+  SvgAsset get clockAlert => const SvgAsset(
+        'forui_assets',
+        'clock-alert',
+        'assets/icons/clock-alert.svg',
+      );
+
+  /// The `assets/icons/clock-arrow-down.svg`.
+  SvgAsset get clockArrowDown => const SvgAsset(
+        'forui_assets',
+        'clock-arrow-down',
+        'assets/icons/clock-arrow-down.svg',
+      );
+
+  /// The `assets/icons/clock-arrow-up.svg`.
+  SvgAsset get clockArrowUp => const SvgAsset(
+        'forui_assets',
+        'clock-arrow-up',
+        'assets/icons/clock-arrow-up.svg',
       );
 
   /// The `assets/icons/clock.svg`.
@@ -3147,6 +3329,13 @@ class $FAssetsIcons {
         'assets/icons/cylinder.svg',
       );
 
+  /// The `assets/icons/dam.svg`.
+  SvgAsset get dam => const SvgAsset(
+        'forui_assets',
+        'dam',
+        'assets/icons/dam.svg',
+      );
+
   /// The `assets/icons/database-backup.svg`.
   SvgAsset get databaseBackup => const SvgAsset(
         'forui_assets',
@@ -3532,6 +3721,13 @@ class $FAssetsIcons {
         'assets/icons/eraser.svg',
       );
 
+  /// The `assets/icons/ethernet-port.svg`.
+  SvgAsset get ethernetPort => const SvgAsset(
+        'forui_assets',
+        'ethernet-port',
+        'assets/icons/ethernet-port.svg',
+      );
+
   /// The `assets/icons/euro.svg`.
   SvgAsset get euro => const SvgAsset(
         'forui_assets',
@@ -3551,6 +3747,13 @@ class $FAssetsIcons {
         'forui_assets',
         'external-link',
         'assets/icons/external-link.svg',
+      );
+
+  /// The `assets/icons/eye-closed.svg`.
+  SvgAsset get eyeClosed => const SvgAsset(
+        'forui_assets',
+        'eye-closed',
+        'assets/icons/eye-closed.svg',
       );
 
   /// The `assets/icons/eye-off.svg`.
@@ -3665,25 +3868,39 @@ class $FAssetsIcons {
         'assets/icons/file-badge.svg',
       );
 
-  /// The `assets/icons/file-bar-chart-2.svg`.
-  SvgAsset get fileBarChart2 => const SvgAsset(
-        'forui_assets',
-        'file-bar-chart-2',
-        'assets/icons/file-bar-chart-2.svg',
-      );
-
-  /// The `assets/icons/file-bar-chart.svg`.
-  SvgAsset get fileBarChart => const SvgAsset(
-        'forui_assets',
-        'file-bar-chart',
-        'assets/icons/file-bar-chart.svg',
-      );
-
   /// The `assets/icons/file-box.svg`.
   SvgAsset get fileBox => const SvgAsset(
         'forui_assets',
         'file-box',
         'assets/icons/file-box.svg',
+      );
+
+  /// The `assets/icons/file-chart-column-increasing.svg`.
+  SvgAsset get fileChartColumnIncreasing => const SvgAsset(
+        'forui_assets',
+        'file-chart-column-increasing',
+        'assets/icons/file-chart-column-increasing.svg',
+      );
+
+  /// The `assets/icons/file-chart-column.svg`.
+  SvgAsset get fileChartColumn => const SvgAsset(
+        'forui_assets',
+        'file-chart-column',
+        'assets/icons/file-chart-column.svg',
+      );
+
+  /// The `assets/icons/file-chart-line.svg`.
+  SvgAsset get fileChartLine => const SvgAsset(
+        'forui_assets',
+        'file-chart-line',
+        'assets/icons/file-chart-line.svg',
+      );
+
+  /// The `assets/icons/file-chart-pie.svg`.
+  SvgAsset get fileChartPie => const SvgAsset(
+        'forui_assets',
+        'file-chart-pie',
+        'assets/icons/file-chart-pie.svg',
       );
 
   /// The `assets/icons/file-check-2.svg`.
@@ -3798,13 +4015,6 @@ class $FAssetsIcons {
         'assets/icons/file-key.svg',
       );
 
-  /// The `assets/icons/file-line-chart.svg`.
-  SvgAsset get fileLineChart => const SvgAsset(
-        'forui_assets',
-        'file-line-chart',
-        'assets/icons/file-line-chart.svg',
-      );
-
   /// The `assets/icons/file-lock-2.svg`.
   SvgAsset get fileLock2 => const SvgAsset(
         'forui_assets',
@@ -3859,13 +4069,6 @@ class $FAssetsIcons {
         'forui_assets',
         'file-pen',
         'assets/icons/file-pen.svg',
-      );
-
-  /// The `assets/icons/file-pie-chart.svg`.
-  SvgAsset get filePieChart => const SvgAsset(
-        'forui_assets',
-        'file-pie-chart',
-        'assets/icons/file-pie-chart.svg',
       );
 
   /// The `assets/icons/file-plus-2.svg`.
@@ -3971,6 +4174,13 @@ class $FAssetsIcons {
         'forui_assets',
         'file-up',
         'assets/icons/file-up.svg',
+      );
+
+  /// The `assets/icons/file-user.svg`.
+  SvgAsset get fileUser => const SvgAsset(
+        'forui_assets',
+        'file-user',
+        'assets/icons/file-user.svg',
       );
 
   /// The `assets/icons/file-video-2.svg`.
@@ -4260,6 +4470,13 @@ class $FAssetsIcons {
         'assets/icons/folder-closed.svg',
       );
 
+  /// The `assets/icons/folder-code.svg`.
+  SvgAsset get folderCode => const SvgAsset(
+        'forui_assets',
+        'folder-code',
+        'assets/icons/folder-code.svg',
+      );
+
   /// The `assets/icons/folder-cog.svg`.
   SvgAsset get folderCog => const SvgAsset(
         'forui_assets',
@@ -4547,13 +4764,6 @@ class $FAssetsIcons {
         'assets/icons/gamepad.svg',
       );
 
-  /// The `assets/icons/gantt-chart.svg`.
-  SvgAsset get ganttChart => const SvgAsset(
-        'forui_assets',
-        'gantt-chart',
-        'assets/icons/gantt-chart.svg',
-      );
-
   /// The `assets/icons/gauge.svg`.
   SvgAsset get gauge => const SvgAsset(
         'forui_assets',
@@ -4769,6 +4979,13 @@ class $FAssetsIcons {
         'forui_assets',
         'grid-2x2-check',
         'assets/icons/grid-2x2-check.svg',
+      );
+
+  /// The `assets/icons/grid-2x2-plus.svg`.
+  SvgAsset get grid2x2Plus => const SvgAsset(
+        'forui_assets',
+        'grid-2x2-plus',
+        'assets/icons/grid-2x2-plus.svg',
       );
 
   /// The `assets/icons/grid-2x2-x.svg`.
@@ -4988,6 +5205,13 @@ class $FAssetsIcons {
         'assets/icons/heading.svg',
       );
 
+  /// The `assets/icons/headphone-off.svg`.
+  SvgAsset get headphoneOff => const SvgAsset(
+        'forui_assets',
+        'headphone-off',
+        'assets/icons/headphone-off.svg',
+      );
+
   /// The `assets/icons/headphones.svg`.
   SvgAsset get headphones => const SvgAsset(
         'forui_assets',
@@ -5065,13 +5289,6 @@ class $FAssetsIcons {
         'assets/icons/history.svg',
       );
 
-  /// The `assets/icons/home.svg`.
-  SvgAsset get home => const SvgAsset(
-        'forui_assets',
-        'home',
-        'assets/icons/home.svg',
-      );
-
   /// The `assets/icons/hop-off.svg`.
   SvgAsset get hopOff => const SvgAsset(
         'forui_assets',
@@ -5107,6 +5324,27 @@ class $FAssetsIcons {
         'assets/icons/hourglass.svg',
       );
 
+  /// The `assets/icons/house-plug.svg`.
+  SvgAsset get housePlug => const SvgAsset(
+        'forui_assets',
+        'house-plug',
+        'assets/icons/house-plug.svg',
+      );
+
+  /// The `assets/icons/house-plus.svg`.
+  SvgAsset get housePlus => const SvgAsset(
+        'forui_assets',
+        'house-plus',
+        'assets/icons/house-plus.svg',
+      );
+
+  /// The `assets/icons/house.svg`.
+  SvgAsset get house => const SvgAsset(
+        'forui_assets',
+        'house',
+        'assets/icons/house.svg',
+      );
+
   /// The `assets/icons/ice-cream-bowl.svg`.
   SvgAsset get iceCreamBowl => const SvgAsset(
         'forui_assets',
@@ -5119,6 +5357,13 @@ class $FAssetsIcons {
         'forui_assets',
         'ice-cream-cone',
         'assets/icons/ice-cream-cone.svg',
+      );
+
+  /// The `assets/icons/id-card.svg`.
+  SvgAsset get idCard => const SvgAsset(
+        'forui_assets',
+        'id-card',
+        'assets/icons/id-card.svg',
       );
 
   /// The `assets/icons/image-down.svg`.
@@ -5499,6 +5744,20 @@ class $FAssetsIcons {
         'assets/icons/leafy-green.svg',
       );
 
+  /// The `assets/icons/lectern.svg`.
+  SvgAsset get lectern => const SvgAsset(
+        'forui_assets',
+        'lectern',
+        'assets/icons/lectern.svg',
+      );
+
+  /// The `assets/icons/letter-text.svg`.
+  SvgAsset get letterText => const SvgAsset(
+        'forui_assets',
+        'letter-text',
+        'assets/icons/letter-text.svg',
+      );
+
   /// The `assets/icons/library-big.svg`.
   SvgAsset get libraryBig => const SvgAsset(
         'forui_assets',
@@ -5541,13 +5800,6 @@ class $FAssetsIcons {
         'assets/icons/lightbulb.svg',
       );
 
-  /// The `assets/icons/line-chart.svg`.
-  SvgAsset get lineChart => const SvgAsset(
-        'forui_assets',
-        'line-chart',
-        'assets/icons/line-chart.svg',
-      );
-
   /// The `assets/icons/link-2-off.svg`.
   SvgAsset get link2Off => const SvgAsset(
         'forui_assets',
@@ -5574,6 +5826,13 @@ class $FAssetsIcons {
         'forui_assets',
         'linkedin',
         'assets/icons/linkedin.svg',
+      );
+
+  /// The `assets/icons/list-check.svg`.
+  SvgAsset get listCheck => const SvgAsset(
+        'forui_assets',
+        'list-check',
+        'assets/icons/list-check.svg',
       );
 
   /// The `assets/icons/list-checks.svg`.
@@ -5765,6 +6024,13 @@ class $FAssetsIcons {
         'assets/icons/log-out.svg',
       );
 
+  /// The `assets/icons/logs.svg`.
+  SvgAsset get logs => const SvgAsset(
+        'forui_assets',
+        'logs',
+        'assets/icons/logs.svg',
+      );
+
   /// The `assets/icons/lollipop.svg`.
   SvgAsset get lollipop => const SvgAsset(
         'forui_assets',
@@ -5863,11 +6129,74 @@ class $FAssetsIcons {
         'assets/icons/mails.svg',
       );
 
+  /// The `assets/icons/map-pin-check-inside.svg`.
+  SvgAsset get mapPinCheckInside => const SvgAsset(
+        'forui_assets',
+        'map-pin-check-inside',
+        'assets/icons/map-pin-check-inside.svg',
+      );
+
+  /// The `assets/icons/map-pin-check.svg`.
+  SvgAsset get mapPinCheck => const SvgAsset(
+        'forui_assets',
+        'map-pin-check',
+        'assets/icons/map-pin-check.svg',
+      );
+
+  /// The `assets/icons/map-pin-house.svg`.
+  SvgAsset get mapPinHouse => const SvgAsset(
+        'forui_assets',
+        'map-pin-house',
+        'assets/icons/map-pin-house.svg',
+      );
+
+  /// The `assets/icons/map-pin-minus-inside.svg`.
+  SvgAsset get mapPinMinusInside => const SvgAsset(
+        'forui_assets',
+        'map-pin-minus-inside',
+        'assets/icons/map-pin-minus-inside.svg',
+      );
+
+  /// The `assets/icons/map-pin-minus.svg`.
+  SvgAsset get mapPinMinus => const SvgAsset(
+        'forui_assets',
+        'map-pin-minus',
+        'assets/icons/map-pin-minus.svg',
+      );
+
   /// The `assets/icons/map-pin-off.svg`.
   SvgAsset get mapPinOff => const SvgAsset(
         'forui_assets',
         'map-pin-off',
         'assets/icons/map-pin-off.svg',
+      );
+
+  /// The `assets/icons/map-pin-plus-inside.svg`.
+  SvgAsset get mapPinPlusInside => const SvgAsset(
+        'forui_assets',
+        'map-pin-plus-inside',
+        'assets/icons/map-pin-plus-inside.svg',
+      );
+
+  /// The `assets/icons/map-pin-plus.svg`.
+  SvgAsset get mapPinPlus => const SvgAsset(
+        'forui_assets',
+        'map-pin-plus',
+        'assets/icons/map-pin-plus.svg',
+      );
+
+  /// The `assets/icons/map-pin-x-inside.svg`.
+  SvgAsset get mapPinXInside => const SvgAsset(
+        'forui_assets',
+        'map-pin-x-inside',
+        'assets/icons/map-pin-x-inside.svg',
+      );
+
+  /// The `assets/icons/map-pin-x.svg`.
+  SvgAsset get mapPinX => const SvgAsset(
+        'forui_assets',
+        'map-pin-x',
+        'assets/icons/map-pin-x.svg',
       );
 
   /// The `assets/icons/map-pin.svg`.
@@ -6073,6 +6402,13 @@ class $FAssetsIcons {
         'assets/icons/message-square-heart.svg',
       );
 
+  /// The `assets/icons/message-square-lock.svg`.
+  SvgAsset get messageSquareLock => const SvgAsset(
+        'forui_assets',
+        'message-square-lock',
+        'assets/icons/message-square-lock.svg',
+      );
+
   /// The `assets/icons/message-square-more.svg`.
   SvgAsset get messageSquareMore => const SvgAsset(
         'forui_assets',
@@ -6171,6 +6507,13 @@ class $FAssetsIcons {
         'assets/icons/mic.svg',
       );
 
+  /// The `assets/icons/microchip.svg`.
+  SvgAsset get microchip => const SvgAsset(
+        'forui_assets',
+        'microchip',
+        'assets/icons/microchip.svg',
+      );
+
   /// The `assets/icons/microscope.svg`.
   SvgAsset get microscope => const SvgAsset(
         'forui_assets',
@@ -6232,6 +6575,13 @@ class $FAssetsIcons {
         'forui_assets',
         'monitor-check',
         'assets/icons/monitor-check.svg',
+      );
+
+  /// The `assets/icons/monitor-cog.svg`.
+  SvgAsset get monitorCog => const SvgAsset(
+        'forui_assets',
+        'monitor-cog',
+        'assets/icons/monitor-cog.svg',
       );
 
   /// The `assets/icons/monitor-dot.svg`.
@@ -6619,6 +6969,13 @@ class $FAssetsIcons {
         'assets/icons/octagon-alert.svg',
       );
 
+  /// The `assets/icons/octagon-minus.svg`.
+  SvgAsset get octagonMinus => const SvgAsset(
+        'forui_assets',
+        'octagon-minus',
+        'assets/icons/octagon-minus.svg',
+      );
+
   /// The `assets/icons/octagon-pause.svg`.
   SvgAsset get octagonPause => const SvgAsset(
         'forui_assets',
@@ -6638,6 +6995,13 @@ class $FAssetsIcons {
         'forui_assets',
         'octagon',
         'assets/icons/octagon.svg',
+      );
+
+  /// The `assets/icons/omega.svg`.
+  SvgAsset get omega => const SvgAsset(
+        'forui_assets',
+        'omega',
+        'assets/icons/omega.svg',
       );
 
   /// The `assets/icons/option.svg`.
@@ -6731,11 +7095,11 @@ class $FAssetsIcons {
         'assets/icons/paint-roller.svg',
       );
 
-  /// The `assets/icons/paintbrush-2.svg`.
-  SvgAsset get paintbrush2 => const SvgAsset(
+  /// The `assets/icons/paintbrush-vertical.svg`.
+  SvgAsset get paintbrushVertical => const SvgAsset(
         'forui_assets',
-        'paintbrush-2',
-        'assets/icons/paintbrush-2.svg',
+        'paintbrush-vertical',
+        'assets/icons/paintbrush-vertical.svg',
       );
 
   /// The `assets/icons/paintbrush.svg`.
@@ -6941,6 +7305,13 @@ class $FAssetsIcons {
         'assets/icons/pen-line.svg',
       );
 
+  /// The `assets/icons/pen-off.svg`.
+  SvgAsset get penOff => const SvgAsset(
+        'forui_assets',
+        'pen-off',
+        'assets/icons/pen-off.svg',
+      );
+
   /// The `assets/icons/pen-tool.svg`.
   SvgAsset get penTool => const SvgAsset(
         'forui_assets',
@@ -6960,6 +7331,13 @@ class $FAssetsIcons {
         'forui_assets',
         'pencil-line',
         'assets/icons/pencil-line.svg',
+      );
+
+  /// The `assets/icons/pencil-off.svg`.
+  SvgAsset get pencilOff => const SvgAsset(
+        'forui_assets',
+        'pencil-off',
+        'assets/icons/pencil-off.svg',
       );
 
   /// The `assets/icons/pencil-ruler.svg`.
@@ -6995,6 +7373,13 @@ class $FAssetsIcons {
         'forui_assets',
         'person-standing',
         'assets/icons/person-standing.svg',
+      );
+
+  /// The `assets/icons/philippine-peso.svg`.
+  SvgAsset get philippinePeso => const SvgAsset(
+        'forui_assets',
+        'philippine-peso',
+        'assets/icons/philippine-peso.svg',
       );
 
   /// The `assets/icons/phone-call.svg`.
@@ -7081,13 +7466,6 @@ class $FAssetsIcons {
         'assets/icons/picture-in-picture.svg',
       );
 
-  /// The `assets/icons/pie-chart.svg`.
-  SvgAsset get pieChart => const SvgAsset(
-        'forui_assets',
-        'pie-chart',
-        'assets/icons/pie-chart.svg',
-      );
-
   /// The `assets/icons/piggy-bank.svg`.
   SvgAsset get piggyBank => const SvgAsset(
         'forui_assets',
@@ -7114,6 +7492,13 @@ class $FAssetsIcons {
         'forui_assets',
         'pilcrow',
         'assets/icons/pilcrow.svg',
+      );
+
+  /// The `assets/icons/pill-bottle.svg`.
+  SvgAsset get pillBottle => const SvgAsset(
+        'forui_assets',
+        'pill-bottle',
+        'assets/icons/pill-bottle.svg',
       );
 
   /// The `assets/icons/pill.svg`.
@@ -7184,13 +7569,6 @@ class $FAssetsIcons {
         'forui_assets',
         'plug-2',
         'assets/icons/plug-2.svg',
-      );
-
-  /// The `assets/icons/plug-zap-2.svg`.
-  SvgAsset get plugZap2 => const SvgAsset(
-        'forui_assets',
-        'plug-zap-2',
-        'assets/icons/plug-zap-2.svg',
       );
 
   /// The `assets/icons/plug-zap.svg`.
@@ -7289,6 +7667,13 @@ class $FAssetsIcons {
         'forui_assets',
         'presentation',
         'assets/icons/presentation.svg',
+      );
+
+  /// The `assets/icons/printer-check.svg`.
+  SvgAsset get printerCheck => const SvgAsset(
+        'forui_assets',
+        'printer-check',
+        'assets/icons/printer-check.svg',
       );
 
   /// The `assets/icons/printer.svg`.
@@ -7809,6 +8194,13 @@ class $FAssetsIcons {
         'assets/icons/save-all.svg',
       );
 
+  /// The `assets/icons/save-off.svg`.
+  SvgAsset get saveOff => const SvgAsset(
+        'forui_assets',
+        'save-off',
+        'assets/icons/save-off.svg',
+      );
+
   /// The `assets/icons/save.svg`.
   SvgAsset get save => const SvgAsset(
         'forui_assets',
@@ -7865,6 +8257,13 @@ class $FAssetsIcons {
         'assets/icons/scan-line.svg',
       );
 
+  /// The `assets/icons/scan-qr-code.svg`.
+  SvgAsset get scanQrCode => const SvgAsset(
+        'forui_assets',
+        'scan-qr-code',
+        'assets/icons/scan-qr-code.svg',
+      );
+
   /// The `assets/icons/scan-search.svg`.
   SvgAsset get scanSearch => const SvgAsset(
         'forui_assets',
@@ -7884,13 +8283,6 @@ class $FAssetsIcons {
         'forui_assets',
         'scan',
         'assets/icons/scan.svg',
-      );
-
-  /// The `assets/icons/scatter-chart.svg`.
-  SvgAsset get scatterChart => const SvgAsset(
-        'forui_assets',
-        'scatter-chart',
-        'assets/icons/scatter-chart.svg',
       );
 
   /// The `assets/icons/school.svg`.
@@ -7975,6 +8367,13 @@ class $FAssetsIcons {
         'forui_assets',
         'search',
         'assets/icons/search.svg',
+      );
+
+  /// The `assets/icons/section.svg`.
+  SvgAsset get section => const SvgAsset(
+        'forui_assets',
+        'section',
+        'assets/icons/section.svg',
       );
 
   /// The `assets/icons/send-horizontal.svg`.
@@ -8283,6 +8682,13 @@ class $FAssetsIcons {
         'forui_assets',
         'signal',
         'assets/icons/signal.svg',
+      );
+
+  /// The `assets/icons/signature.svg`.
+  SvgAsset get signature => const SvgAsset(
+        'forui_assets',
+        'signature',
+        'assets/icons/signature.svg',
       );
 
   /// The `assets/icons/signpost-big.svg`.
@@ -8614,6 +9020,13 @@ class $FAssetsIcons {
         'assets/icons/square-bottom-dashed-scissors.svg',
       );
 
+  /// The `assets/icons/square-chart-gantt.svg`.
+  SvgAsset get squareChartGantt => const SvgAsset(
+        'forui_assets',
+        'square-chart-gantt',
+        'assets/icons/square-chart-gantt.svg',
+      );
+
   /// The `assets/icons/square-check-big.svg`.
   SvgAsset get squareCheckBig => const SvgAsset(
         'forui_assets',
@@ -8691,6 +9104,13 @@ class $FAssetsIcons {
         'assets/icons/square-dashed-mouse-pointer.svg',
       );
 
+  /// The `assets/icons/square-dashed.svg`.
+  SvgAsset get squareDashed => const SvgAsset(
+        'forui_assets',
+        'square-dashed',
+        'assets/icons/square-dashed.svg',
+      );
+
   /// The `assets/icons/square-divide.svg`.
   SvgAsset get squareDivide => const SvgAsset(
         'forui_assets',
@@ -8717,13 +9137,6 @@ class $FAssetsIcons {
         'forui_assets',
         'square-function',
         'assets/icons/square-function.svg',
-      );
-
-  /// The `assets/icons/square-gantt-chart.svg`.
-  SvgAsset get squareGanttChart => const SvgAsset(
-        'forui_assets',
-        'square-gantt-chart',
-        'assets/icons/square-gantt-chart.svg',
       );
 
   /// The `assets/icons/square-kanban.svg`.
@@ -8871,6 +9284,13 @@ class $FAssetsIcons {
         'forui_assets',
         'square-split-vertical',
         'assets/icons/square-split-vertical.svg',
+      );
+
+  /// The `assets/icons/square-square.svg`.
+  SvgAsset get squareSquare => const SvgAsset(
+        'forui_assets',
+        'square-square',
+        'assets/icons/square-square.svg',
       );
 
   /// The `assets/icons/square-stack.svg`.
@@ -9151,6 +9571,13 @@ class $FAssetsIcons {
         'forui_assets',
         'table-columns-split',
         'assets/icons/table-columns-split.svg',
+      );
+
+  /// The `assets/icons/table-of-contents.svg`.
+  SvgAsset get tableOfContents => const SvgAsset(
+        'forui_assets',
+        'table-of-contents',
+        'assets/icons/table-of-contents.svg',
       );
 
   /// The `assets/icons/table-properties.svg`.
@@ -9440,6 +9867,20 @@ class $FAssetsIcons {
         'assets/icons/ticket.svg',
       );
 
+  /// The `assets/icons/tickets-plane.svg`.
+  SvgAsset get ticketsPlane => const SvgAsset(
+        'forui_assets',
+        'tickets-plane',
+        'assets/icons/tickets-plane.svg',
+      );
+
+  /// The `assets/icons/tickets.svg`.
+  SvgAsset get tickets => const SvgAsset(
+        'forui_assets',
+        'tickets',
+        'assets/icons/tickets.svg',
+      );
+
   /// The `assets/icons/timer-off.svg`.
   SvgAsset get timerOff => const SvgAsset(
         'forui_assets',
@@ -9615,6 +10056,13 @@ class $FAssetsIcons {
         'assets/icons/trending-down.svg',
       );
 
+  /// The `assets/icons/trending-up-down.svg`.
+  SvgAsset get trendingUpDown => const SvgAsset(
+        'forui_assets',
+        'trending-up-down',
+        'assets/icons/trending-up-down.svg',
+      );
+
   /// The `assets/icons/trending-up.svg`.
   SvgAsset get trendingUp => const SvgAsset(
         'forui_assets',
@@ -9664,11 +10112,18 @@ class $FAssetsIcons {
         'assets/icons/turtle.svg',
       );
 
-  /// The `assets/icons/tv-2.svg`.
-  SvgAsset get tv2 => const SvgAsset(
+  /// The `assets/icons/tv-minimal-play.svg`.
+  SvgAsset get tvMinimalPlay => const SvgAsset(
         'forui_assets',
-        'tv-2',
-        'assets/icons/tv-2.svg',
+        'tv-minimal-play',
+        'assets/icons/tv-minimal-play.svg',
+      );
+
+  /// The `assets/icons/tv-minimal.svg`.
+  SvgAsset get tvMinimal => const SvgAsset(
+        'forui_assets',
+        'tv-minimal',
+        'assets/icons/tv-minimal.svg',
       );
 
   /// The `assets/icons/tv.svg`.
@@ -9690,6 +10145,13 @@ class $FAssetsIcons {
         'forui_assets',
         'twitter',
         'assets/icons/twitter.svg',
+      );
+
+  /// The `assets/icons/type-outline.svg`.
+  SvgAsset get typeOutline => const SvgAsset(
+        'forui_assets',
+        'type-outline',
+        'assets/icons/type-outline.svg',
       );
 
   /// The `assets/icons/type.svg`.
@@ -9825,6 +10287,13 @@ class $FAssetsIcons {
         'assets/icons/user-minus.svg',
       );
 
+  /// The `assets/icons/user-pen.svg`.
+  SvgAsset get userPen => const SvgAsset(
+        'forui_assets',
+        'user-pen',
+        'assets/icons/user-pen.svg',
+      );
+
   /// The `assets/icons/user-plus.svg`.
   SvgAsset get userPlus => const SvgAsset(
         'forui_assets',
@@ -9851,6 +10320,13 @@ class $FAssetsIcons {
         'forui_assets',
         'user-round-minus',
         'assets/icons/user-round-minus.svg',
+      );
+
+  /// The `assets/icons/user-round-pen.svg`.
+  SvgAsset get userRoundPen => const SvgAsset(
+        'forui_assets',
+        'user-round-pen',
+        'assets/icons/user-round-pen.svg',
       );
 
   /// The `assets/icons/user-round-plus.svg`.
@@ -10014,6 +10490,13 @@ class $FAssetsIcons {
         'assets/icons/voicemail.svg',
       );
 
+  /// The `assets/icons/volleyball.svg`.
+  SvgAsset get volleyball => const SvgAsset(
+        'forui_assets',
+        'volleyball',
+        'assets/icons/volleyball.svg',
+      );
+
   /// The `assets/icons/volume-1.svg`.
   SvgAsset get volume1 => const SvgAsset(
         'forui_assets',
@@ -10026,6 +10509,13 @@ class $FAssetsIcons {
         'forui_assets',
         'volume-2',
         'assets/icons/volume-2.svg',
+      );
+
+  /// The `assets/icons/volume-off.svg`.
+  SvgAsset get volumeOff => const SvgAsset(
+        'forui_assets',
+        'volume-off',
+        'assets/icons/volume-off.svg',
       );
 
   /// The `assets/icons/volume-x.svg`.
@@ -10175,11 +10665,32 @@ class $FAssetsIcons {
         'assets/icons/whole-word.svg',
       );
 
+  /// The `assets/icons/wifi-high.svg`.
+  SvgAsset get wifiHigh => const SvgAsset(
+        'forui_assets',
+        'wifi-high',
+        'assets/icons/wifi-high.svg',
+      );
+
+  /// The `assets/icons/wifi-low.svg`.
+  SvgAsset get wifiLow => const SvgAsset(
+        'forui_assets',
+        'wifi-low',
+        'assets/icons/wifi-low.svg',
+      );
+
   /// The `assets/icons/wifi-off.svg`.
   SvgAsset get wifiOff => const SvgAsset(
         'forui_assets',
         'wifi-off',
         'assets/icons/wifi-off.svg',
+      );
+
+  /// The `assets/icons/wifi-zero.svg`.
+  SvgAsset get wifiZero => const SvgAsset(
+        'forui_assets',
+        'wifi-zero',
+        'assets/icons/wifi-zero.svg',
       );
 
   /// The `assets/icons/wifi.svg`.
@@ -10497,6 +11008,11 @@ class $FAssetsIcons {
           'ampersands',
           'assets/icons/ampersands.svg',
         ),
+        'amphora': const SvgAsset(
+          'forui_assets',
+          'amphora',
+          'assets/icons/amphora.svg',
+        ),
         'anchor': const SvgAsset(
           'forui_assets',
           'anchor',
@@ -10556,11 +11072,6 @@ class $FAssetsIcons {
           'forui_assets',
           'archive',
           'assets/icons/archive.svg',
-        ),
-        'area-chart': const SvgAsset(
-          'forui_assets',
-          'area-chart',
-          'assets/icons/area-chart.svg',
         ),
         'armchair': const SvgAsset(
           'forui_assets',
@@ -10932,45 +11443,15 @@ class $FAssetsIcons {
           'banana',
           'assets/icons/banana.svg',
         ),
+        'bandage': const SvgAsset(
+          'forui_assets',
+          'bandage',
+          'assets/icons/bandage.svg',
+        ),
         'banknote': const SvgAsset(
           'forui_assets',
           'banknote',
           'assets/icons/banknote.svg',
-        ),
-        'bar-chart-2': const SvgAsset(
-          'forui_assets',
-          'bar-chart-2',
-          'assets/icons/bar-chart-2.svg',
-        ),
-        'bar-chart-3': const SvgAsset(
-          'forui_assets',
-          'bar-chart-3',
-          'assets/icons/bar-chart-3.svg',
-        ),
-        'bar-chart-4': const SvgAsset(
-          'forui_assets',
-          'bar-chart-4',
-          'assets/icons/bar-chart-4.svg',
-        ),
-        'bar-chart-big': const SvgAsset(
-          'forui_assets',
-          'bar-chart-big',
-          'assets/icons/bar-chart-big.svg',
-        ),
-        'bar-chart-horizontal-big': const SvgAsset(
-          'forui_assets',
-          'bar-chart-horizontal-big',
-          'assets/icons/bar-chart-horizontal-big.svg',
-        ),
-        'bar-chart-horizontal': const SvgAsset(
-          'forui_assets',
-          'bar-chart-horizontal',
-          'assets/icons/bar-chart-horizontal.svg',
-        ),
-        'bar-chart': const SvgAsset(
-          'forui_assets',
-          'bar-chart',
-          'assets/icons/bar-chart.svg',
         ),
         'barcode': const SvgAsset(
           'forui_assets',
@@ -11117,6 +11598,11 @@ class $FAssetsIcons {
           'between-vertical-start',
           'assets/icons/between-vertical-start.svg',
         ),
+        'biceps-flexed': const SvgAsset(
+          'forui_assets',
+          'biceps-flexed',
+          'assets/icons/biceps-flexed.svg',
+        ),
         'bike': const SvgAsset(
           'forui_assets',
           'bike',
@@ -11126,6 +11612,11 @@ class $FAssetsIcons {
           'forui_assets',
           'binary',
           'assets/icons/binary.svg',
+        ),
+        'binoculars': const SvgAsset(
+          'forui_assets',
+          'binoculars',
+          'assets/icons/binoculars.svg',
         ),
         'biohazard': const SvgAsset(
           'forui_assets',
@@ -11362,11 +11853,6 @@ class $FAssetsIcons {
           'bot',
           'assets/icons/bot.svg',
         ),
-        'box-select': const SvgAsset(
-          'forui_assets',
-          'box-select',
-          'assets/icons/box-select.svg',
-        ),
         'box': const SvgAsset(
           'forui_assets',
           'box',
@@ -11411,6 +11897,11 @@ class $FAssetsIcons {
           'forui_assets',
           'briefcase-business',
           'assets/icons/briefcase-business.svg',
+        ),
+        'briefcase-conveyor-belt': const SvgAsset(
+          'forui_assets',
+          'briefcase-conveyor-belt',
+          'assets/icons/briefcase-conveyor-belt.svg',
         ),
         'briefcase-medical': const SvgAsset(
           'forui_assets',
@@ -11492,6 +11983,16 @@ class $FAssetsIcons {
           'calculator',
           'assets/icons/calculator.svg',
         ),
+        'calendar-arrow-down': const SvgAsset(
+          'forui_assets',
+          'calendar-arrow-down',
+          'assets/icons/calendar-arrow-down.svg',
+        ),
+        'calendar-arrow-up': const SvgAsset(
+          'forui_assets',
+          'calendar-arrow-up',
+          'assets/icons/calendar-arrow-up.svg',
+        ),
         'calendar-check-2': const SvgAsset(
           'forui_assets',
           'calendar-check-2',
@@ -11506,6 +12007,11 @@ class $FAssetsIcons {
           'forui_assets',
           'calendar-clock',
           'assets/icons/calendar-clock.svg',
+        ),
+        'calendar-cog': const SvgAsset(
+          'forui_assets',
+          'calendar-cog',
+          'assets/icons/calendar-cog.svg',
         ),
         'calendar-days': const SvgAsset(
           'forui_assets',
@@ -11581,11 +12087,6 @@ class $FAssetsIcons {
           'forui_assets',
           'camera',
           'assets/icons/camera.svg',
-        ),
-        'candlestick-chart': const SvgAsset(
-          'forui_assets',
-          'candlestick-chart',
-          'assets/icons/candlestick-chart.svg',
         ),
         'candy-cane': const SvgAsset(
           'forui_assets',
@@ -11682,6 +12183,121 @@ class $FAssetsIcons {
           'cctv',
           'assets/icons/cctv.svg',
         ),
+        'chart-area': const SvgAsset(
+          'forui_assets',
+          'chart-area',
+          'assets/icons/chart-area.svg',
+        ),
+        'chart-bar-big': const SvgAsset(
+          'forui_assets',
+          'chart-bar-big',
+          'assets/icons/chart-bar-big.svg',
+        ),
+        'chart-bar-decreasing': const SvgAsset(
+          'forui_assets',
+          'chart-bar-decreasing',
+          'assets/icons/chart-bar-decreasing.svg',
+        ),
+        'chart-bar-increasing': const SvgAsset(
+          'forui_assets',
+          'chart-bar-increasing',
+          'assets/icons/chart-bar-increasing.svg',
+        ),
+        'chart-bar-stacked': const SvgAsset(
+          'forui_assets',
+          'chart-bar-stacked',
+          'assets/icons/chart-bar-stacked.svg',
+        ),
+        'chart-bar': const SvgAsset(
+          'forui_assets',
+          'chart-bar',
+          'assets/icons/chart-bar.svg',
+        ),
+        'chart-candlestick': const SvgAsset(
+          'forui_assets',
+          'chart-candlestick',
+          'assets/icons/chart-candlestick.svg',
+        ),
+        'chart-column-big': const SvgAsset(
+          'forui_assets',
+          'chart-column-big',
+          'assets/icons/chart-column-big.svg',
+        ),
+        'chart-column-decreasing': const SvgAsset(
+          'forui_assets',
+          'chart-column-decreasing',
+          'assets/icons/chart-column-decreasing.svg',
+        ),
+        'chart-column-increasing': const SvgAsset(
+          'forui_assets',
+          'chart-column-increasing',
+          'assets/icons/chart-column-increasing.svg',
+        ),
+        'chart-column-stacked': const SvgAsset(
+          'forui_assets',
+          'chart-column-stacked',
+          'assets/icons/chart-column-stacked.svg',
+        ),
+        'chart-column': const SvgAsset(
+          'forui_assets',
+          'chart-column',
+          'assets/icons/chart-column.svg',
+        ),
+        'chart-gantt': const SvgAsset(
+          'forui_assets',
+          'chart-gantt',
+          'assets/icons/chart-gantt.svg',
+        ),
+        'chart-line': const SvgAsset(
+          'forui_assets',
+          'chart-line',
+          'assets/icons/chart-line.svg',
+        ),
+        'chart-network': const SvgAsset(
+          'forui_assets',
+          'chart-network',
+          'assets/icons/chart-network.svg',
+        ),
+        'chart-no-axes-column-decreasing': const SvgAsset(
+          'forui_assets',
+          'chart-no-axes-column-decreasing',
+          'assets/icons/chart-no-axes-column-decreasing.svg',
+        ),
+        'chart-no-axes-column-increasing': const SvgAsset(
+          'forui_assets',
+          'chart-no-axes-column-increasing',
+          'assets/icons/chart-no-axes-column-increasing.svg',
+        ),
+        'chart-no-axes-column': const SvgAsset(
+          'forui_assets',
+          'chart-no-axes-column',
+          'assets/icons/chart-no-axes-column.svg',
+        ),
+        'chart-no-axes-combined': const SvgAsset(
+          'forui_assets',
+          'chart-no-axes-combined',
+          'assets/icons/chart-no-axes-combined.svg',
+        ),
+        'chart-no-axes-gantt': const SvgAsset(
+          'forui_assets',
+          'chart-no-axes-gantt',
+          'assets/icons/chart-no-axes-gantt.svg',
+        ),
+        'chart-pie': const SvgAsset(
+          'forui_assets',
+          'chart-pie',
+          'assets/icons/chart-pie.svg',
+        ),
+        'chart-scatter': const SvgAsset(
+          'forui_assets',
+          'chart-scatter',
+          'assets/icons/chart-scatter.svg',
+        ),
+        'chart-spline': const SvgAsset(
+          'forui_assets',
+          'chart-spline',
+          'assets/icons/chart-spline.svg',
+        ),
         'check-check': const SvgAsset(
           'forui_assets',
           'check-check',
@@ -11741,6 +12357,11 @@ class $FAssetsIcons {
           'forui_assets',
           'chevrons-down',
           'assets/icons/chevrons-down.svg',
+        ),
+        'chevrons-left-right-ellipsis': const SvgAsset(
+          'forui_assets',
+          'chevrons-left-right-ellipsis',
+          'assets/icons/chevrons-left-right-ellipsis.svg',
         ),
         'chevrons-left-right': const SvgAsset(
           'forui_assets',
@@ -11901,6 +12522,11 @@ class $FAssetsIcons {
           'forui_assets',
           'circle-equal',
           'assets/icons/circle-equal.svg',
+        ),
+        'circle-fading-arrow-up': const SvgAsset(
+          'forui_assets',
+          'circle-fading-arrow-up',
+          'assets/icons/circle-fading-arrow-up.svg',
         ),
         'circle-fading-plus': const SvgAsset(
           'forui_assets',
@@ -12126,6 +12752,21 @@ class $FAssetsIcons {
           'forui_assets',
           'clock-9',
           'assets/icons/clock-9.svg',
+        ),
+        'clock-alert': const SvgAsset(
+          'forui_assets',
+          'clock-alert',
+          'assets/icons/clock-alert.svg',
+        ),
+        'clock-arrow-down': const SvgAsset(
+          'forui_assets',
+          'clock-arrow-down',
+          'assets/icons/clock-arrow-down.svg',
+        ),
+        'clock-arrow-up': const SvgAsset(
+          'forui_assets',
+          'clock-arrow-up',
+          'assets/icons/clock-arrow-up.svg',
         ),
         'clock': const SvgAsset(
           'forui_assets',
@@ -12487,6 +13128,11 @@ class $FAssetsIcons {
           'cylinder',
           'assets/icons/cylinder.svg',
         ),
+        'dam': const SvgAsset(
+          'forui_assets',
+          'dam',
+          'assets/icons/dam.svg',
+        ),
         'database-backup': const SvgAsset(
           'forui_assets',
           'database-backup',
@@ -12762,6 +13408,11 @@ class $FAssetsIcons {
           'eraser',
           'assets/icons/eraser.svg',
         ),
+        'ethernet-port': const SvgAsset(
+          'forui_assets',
+          'ethernet-port',
+          'assets/icons/ethernet-port.svg',
+        ),
         'euro': const SvgAsset(
           'forui_assets',
           'euro',
@@ -12776,6 +13427,11 @@ class $FAssetsIcons {
           'forui_assets',
           'external-link',
           'assets/icons/external-link.svg',
+        ),
+        'eye-closed': const SvgAsset(
+          'forui_assets',
+          'eye-closed',
+          'assets/icons/eye-closed.svg',
         ),
         'eye-off': const SvgAsset(
           'forui_assets',
@@ -12857,20 +13513,30 @@ class $FAssetsIcons {
           'file-badge',
           'assets/icons/file-badge.svg',
         ),
-        'file-bar-chart-2': const SvgAsset(
-          'forui_assets',
-          'file-bar-chart-2',
-          'assets/icons/file-bar-chart-2.svg',
-        ),
-        'file-bar-chart': const SvgAsset(
-          'forui_assets',
-          'file-bar-chart',
-          'assets/icons/file-bar-chart.svg',
-        ),
         'file-box': const SvgAsset(
           'forui_assets',
           'file-box',
           'assets/icons/file-box.svg',
+        ),
+        'file-chart-column-increasing': const SvgAsset(
+          'forui_assets',
+          'file-chart-column-increasing',
+          'assets/icons/file-chart-column-increasing.svg',
+        ),
+        'file-chart-column': const SvgAsset(
+          'forui_assets',
+          'file-chart-column',
+          'assets/icons/file-chart-column.svg',
+        ),
+        'file-chart-line': const SvgAsset(
+          'forui_assets',
+          'file-chart-line',
+          'assets/icons/file-chart-line.svg',
+        ),
+        'file-chart-pie': const SvgAsset(
+          'forui_assets',
+          'file-chart-pie',
+          'assets/icons/file-chart-pie.svg',
         ),
         'file-check-2': const SvgAsset(
           'forui_assets',
@@ -12952,11 +13618,6 @@ class $FAssetsIcons {
           'file-key',
           'assets/icons/file-key.svg',
         ),
-        'file-line-chart': const SvgAsset(
-          'forui_assets',
-          'file-line-chart',
-          'assets/icons/file-line-chart.svg',
-        ),
         'file-lock-2': const SvgAsset(
           'forui_assets',
           'file-lock-2',
@@ -12996,11 +13657,6 @@ class $FAssetsIcons {
           'forui_assets',
           'file-pen',
           'assets/icons/file-pen.svg',
-        ),
-        'file-pie-chart': const SvgAsset(
-          'forui_assets',
-          'file-pie-chart',
-          'assets/icons/file-pie-chart.svg',
         ),
         'file-plus-2': const SvgAsset(
           'forui_assets',
@@ -13076,6 +13732,11 @@ class $FAssetsIcons {
           'forui_assets',
           'file-up',
           'assets/icons/file-up.svg',
+        ),
+        'file-user': const SvgAsset(
+          'forui_assets',
+          'file-user',
+          'assets/icons/file-user.svg',
         ),
         'file-video-2': const SvgAsset(
           'forui_assets',
@@ -13282,6 +13943,11 @@ class $FAssetsIcons {
           'folder-closed',
           'assets/icons/folder-closed.svg',
         ),
+        'folder-code': const SvgAsset(
+          'forui_assets',
+          'folder-code',
+          'assets/icons/folder-code.svg',
+        ),
         'folder-cog': const SvgAsset(
           'forui_assets',
           'folder-cog',
@@ -13487,11 +14153,6 @@ class $FAssetsIcons {
           'gamepad',
           'assets/icons/gamepad.svg',
         ),
-        'gantt-chart': const SvgAsset(
-          'forui_assets',
-          'gantt-chart',
-          'assets/icons/gantt-chart.svg',
-        ),
         'gauge': const SvgAsset(
           'forui_assets',
           'gauge',
@@ -13646,6 +14307,11 @@ class $FAssetsIcons {
           'forui_assets',
           'grid-2x2-check',
           'assets/icons/grid-2x2-check.svg',
+        ),
+        'grid-2x2-plus': const SvgAsset(
+          'forui_assets',
+          'grid-2x2-plus',
+          'assets/icons/grid-2x2-plus.svg',
         ),
         'grid-2x2-x': const SvgAsset(
           'forui_assets',
@@ -13802,6 +14468,11 @@ class $FAssetsIcons {
           'heading',
           'assets/icons/heading.svg',
         ),
+        'headphone-off': const SvgAsset(
+          'forui_assets',
+          'headphone-off',
+          'assets/icons/headphone-off.svg',
+        ),
         'headphones': const SvgAsset(
           'forui_assets',
           'headphones',
@@ -13857,11 +14528,6 @@ class $FAssetsIcons {
           'history',
           'assets/icons/history.svg',
         ),
-        'home': const SvgAsset(
-          'forui_assets',
-          'home',
-          'assets/icons/home.svg',
-        ),
         'hop-off': const SvgAsset(
           'forui_assets',
           'hop-off',
@@ -13887,6 +14553,21 @@ class $FAssetsIcons {
           'hourglass',
           'assets/icons/hourglass.svg',
         ),
+        'house-plug': const SvgAsset(
+          'forui_assets',
+          'house-plug',
+          'assets/icons/house-plug.svg',
+        ),
+        'house-plus': const SvgAsset(
+          'forui_assets',
+          'house-plus',
+          'assets/icons/house-plus.svg',
+        ),
+        'house': const SvgAsset(
+          'forui_assets',
+          'house',
+          'assets/icons/house.svg',
+        ),
         'ice-cream-bowl': const SvgAsset(
           'forui_assets',
           'ice-cream-bowl',
@@ -13896,6 +14577,11 @@ class $FAssetsIcons {
           'forui_assets',
           'ice-cream-cone',
           'assets/icons/ice-cream-cone.svg',
+        ),
+        'id-card': const SvgAsset(
+          'forui_assets',
+          'id-card',
+          'assets/icons/id-card.svg',
         ),
         'image-down': const SvgAsset(
           'forui_assets',
@@ -14167,6 +14853,16 @@ class $FAssetsIcons {
           'leafy-green',
           'assets/icons/leafy-green.svg',
         ),
+        'lectern': const SvgAsset(
+          'forui_assets',
+          'lectern',
+          'assets/icons/lectern.svg',
+        ),
+        'letter-text': const SvgAsset(
+          'forui_assets',
+          'letter-text',
+          'assets/icons/letter-text.svg',
+        ),
         'library-big': const SvgAsset(
           'forui_assets',
           'library-big',
@@ -14197,11 +14893,6 @@ class $FAssetsIcons {
           'lightbulb',
           'assets/icons/lightbulb.svg',
         ),
-        'line-chart': const SvgAsset(
-          'forui_assets',
-          'line-chart',
-          'assets/icons/line-chart.svg',
-        ),
         'link-2-off': const SvgAsset(
           'forui_assets',
           'link-2-off',
@@ -14221,6 +14912,11 @@ class $FAssetsIcons {
           'forui_assets',
           'linkedin',
           'assets/icons/linkedin.svg',
+        ),
+        'list-check': const SvgAsset(
+          'forui_assets',
+          'list-check',
+          'assets/icons/list-check.svg',
         ),
         'list-checks': const SvgAsset(
           'forui_assets',
@@ -14357,6 +15053,11 @@ class $FAssetsIcons {
           'log-out',
           'assets/icons/log-out.svg',
         ),
+        'logs': const SvgAsset(
+          'forui_assets',
+          'logs',
+          'assets/icons/logs.svg',
+        ),
         'lollipop': const SvgAsset(
           'forui_assets',
           'lollipop',
@@ -14427,10 +15128,55 @@ class $FAssetsIcons {
           'mails',
           'assets/icons/mails.svg',
         ),
+        'map-pin-check-inside': const SvgAsset(
+          'forui_assets',
+          'map-pin-check-inside',
+          'assets/icons/map-pin-check-inside.svg',
+        ),
+        'map-pin-check': const SvgAsset(
+          'forui_assets',
+          'map-pin-check',
+          'assets/icons/map-pin-check.svg',
+        ),
+        'map-pin-house': const SvgAsset(
+          'forui_assets',
+          'map-pin-house',
+          'assets/icons/map-pin-house.svg',
+        ),
+        'map-pin-minus-inside': const SvgAsset(
+          'forui_assets',
+          'map-pin-minus-inside',
+          'assets/icons/map-pin-minus-inside.svg',
+        ),
+        'map-pin-minus': const SvgAsset(
+          'forui_assets',
+          'map-pin-minus',
+          'assets/icons/map-pin-minus.svg',
+        ),
         'map-pin-off': const SvgAsset(
           'forui_assets',
           'map-pin-off',
           'assets/icons/map-pin-off.svg',
+        ),
+        'map-pin-plus-inside': const SvgAsset(
+          'forui_assets',
+          'map-pin-plus-inside',
+          'assets/icons/map-pin-plus-inside.svg',
+        ),
+        'map-pin-plus': const SvgAsset(
+          'forui_assets',
+          'map-pin-plus',
+          'assets/icons/map-pin-plus.svg',
+        ),
+        'map-pin-x-inside': const SvgAsset(
+          'forui_assets',
+          'map-pin-x-inside',
+          'assets/icons/map-pin-x-inside.svg',
+        ),
+        'map-pin-x': const SvgAsset(
+          'forui_assets',
+          'map-pin-x',
+          'assets/icons/map-pin-x.svg',
         ),
         'map-pin': const SvgAsset(
           'forui_assets',
@@ -14577,6 +15323,11 @@ class $FAssetsIcons {
           'message-square-heart',
           'assets/icons/message-square-heart.svg',
         ),
+        'message-square-lock': const SvgAsset(
+          'forui_assets',
+          'message-square-lock',
+          'assets/icons/message-square-lock.svg',
+        ),
         'message-square-more': const SvgAsset(
           'forui_assets',
           'message-square-more',
@@ -14647,6 +15398,11 @@ class $FAssetsIcons {
           'mic',
           'assets/icons/mic.svg',
         ),
+        'microchip': const SvgAsset(
+          'forui_assets',
+          'microchip',
+          'assets/icons/microchip.svg',
+        ),
         'microscope': const SvgAsset(
           'forui_assets',
           'microscope',
@@ -14691,6 +15447,11 @@ class $FAssetsIcons {
           'forui_assets',
           'monitor-check',
           'assets/icons/monitor-check.svg',
+        ),
+        'monitor-cog': const SvgAsset(
+          'forui_assets',
+          'monitor-cog',
+          'assets/icons/monitor-cog.svg',
         ),
         'monitor-dot': const SvgAsset(
           'forui_assets',
@@ -14967,6 +15728,11 @@ class $FAssetsIcons {
           'octagon-alert',
           'assets/icons/octagon-alert.svg',
         ),
+        'octagon-minus': const SvgAsset(
+          'forui_assets',
+          'octagon-minus',
+          'assets/icons/octagon-minus.svg',
+        ),
         'octagon-pause': const SvgAsset(
           'forui_assets',
           'octagon-pause',
@@ -14981,6 +15747,11 @@ class $FAssetsIcons {
           'forui_assets',
           'octagon',
           'assets/icons/octagon.svg',
+        ),
+        'omega': const SvgAsset(
+          'forui_assets',
+          'omega',
+          'assets/icons/omega.svg',
         ),
         'option': const SvgAsset(
           'forui_assets',
@@ -15047,10 +15818,10 @@ class $FAssetsIcons {
           'paint-roller',
           'assets/icons/paint-roller.svg',
         ),
-        'paintbrush-2': const SvgAsset(
+        'paintbrush-vertical': const SvgAsset(
           'forui_assets',
-          'paintbrush-2',
-          'assets/icons/paintbrush-2.svg',
+          'paintbrush-vertical',
+          'assets/icons/paintbrush-vertical.svg',
         ),
         'paintbrush': const SvgAsset(
           'forui_assets',
@@ -15197,6 +15968,11 @@ class $FAssetsIcons {
           'pen-line',
           'assets/icons/pen-line.svg',
         ),
+        'pen-off': const SvgAsset(
+          'forui_assets',
+          'pen-off',
+          'assets/icons/pen-off.svg',
+        ),
         'pen-tool': const SvgAsset(
           'forui_assets',
           'pen-tool',
@@ -15211,6 +15987,11 @@ class $FAssetsIcons {
           'forui_assets',
           'pencil-line',
           'assets/icons/pencil-line.svg',
+        ),
+        'pencil-off': const SvgAsset(
+          'forui_assets',
+          'pencil-off',
+          'assets/icons/pencil-off.svg',
         ),
         'pencil-ruler': const SvgAsset(
           'forui_assets',
@@ -15236,6 +16017,11 @@ class $FAssetsIcons {
           'forui_assets',
           'person-standing',
           'assets/icons/person-standing.svg',
+        ),
+        'philippine-peso': const SvgAsset(
+          'forui_assets',
+          'philippine-peso',
+          'assets/icons/philippine-peso.svg',
         ),
         'phone-call': const SvgAsset(
           'forui_assets',
@@ -15297,11 +16083,6 @@ class $FAssetsIcons {
           'picture-in-picture',
           'assets/icons/picture-in-picture.svg',
         ),
-        'pie-chart': const SvgAsset(
-          'forui_assets',
-          'pie-chart',
-          'assets/icons/pie-chart.svg',
-        ),
         'piggy-bank': const SvgAsset(
           'forui_assets',
           'piggy-bank',
@@ -15321,6 +16102,11 @@ class $FAssetsIcons {
           'forui_assets',
           'pilcrow',
           'assets/icons/pilcrow.svg',
+        ),
+        'pill-bottle': const SvgAsset(
+          'forui_assets',
+          'pill-bottle',
+          'assets/icons/pill-bottle.svg',
         ),
         'pill': const SvgAsset(
           'forui_assets',
@@ -15371,11 +16157,6 @@ class $FAssetsIcons {
           'forui_assets',
           'plug-2',
           'assets/icons/plug-2.svg',
-        ),
-        'plug-zap-2': const SvgAsset(
-          'forui_assets',
-          'plug-zap-2',
-          'assets/icons/plug-zap-2.svg',
         ),
         'plug-zap': const SvgAsset(
           'forui_assets',
@@ -15446,6 +16227,11 @@ class $FAssetsIcons {
           'forui_assets',
           'presentation',
           'assets/icons/presentation.svg',
+        ),
+        'printer-check': const SvgAsset(
+          'forui_assets',
+          'printer-check',
+          'assets/icons/printer-check.svg',
         ),
         'printer': const SvgAsset(
           'forui_assets',
@@ -15817,6 +16603,11 @@ class $FAssetsIcons {
           'save-all',
           'assets/icons/save-all.svg',
         ),
+        'save-off': const SvgAsset(
+          'forui_assets',
+          'save-off',
+          'assets/icons/save-off.svg',
+        ),
         'save': const SvgAsset(
           'forui_assets',
           'save',
@@ -15857,6 +16648,11 @@ class $FAssetsIcons {
           'scan-line',
           'assets/icons/scan-line.svg',
         ),
+        'scan-qr-code': const SvgAsset(
+          'forui_assets',
+          'scan-qr-code',
+          'assets/icons/scan-qr-code.svg',
+        ),
         'scan-search': const SvgAsset(
           'forui_assets',
           'scan-search',
@@ -15871,11 +16667,6 @@ class $FAssetsIcons {
           'forui_assets',
           'scan',
           'assets/icons/scan.svg',
-        ),
-        'scatter-chart': const SvgAsset(
-          'forui_assets',
-          'scatter-chart',
-          'assets/icons/scatter-chart.svg',
         ),
         'school': const SvgAsset(
           'forui_assets',
@@ -15936,6 +16727,11 @@ class $FAssetsIcons {
           'forui_assets',
           'search',
           'assets/icons/search.svg',
+        ),
+        'section': const SvgAsset(
+          'forui_assets',
+          'section',
+          'assets/icons/section.svg',
         ),
         'send-horizontal': const SvgAsset(
           'forui_assets',
@@ -16156,6 +16952,11 @@ class $FAssetsIcons {
           'forui_assets',
           'signal',
           'assets/icons/signal.svg',
+        ),
+        'signature': const SvgAsset(
+          'forui_assets',
+          'signature',
+          'assets/icons/signature.svg',
         ),
         'signpost-big': const SvgAsset(
           'forui_assets',
@@ -16392,6 +17193,11 @@ class $FAssetsIcons {
           'square-bottom-dashed-scissors',
           'assets/icons/square-bottom-dashed-scissors.svg',
         ),
+        'square-chart-gantt': const SvgAsset(
+          'forui_assets',
+          'square-chart-gantt',
+          'assets/icons/square-chart-gantt.svg',
+        ),
         'square-check-big': const SvgAsset(
           'forui_assets',
           'square-check-big',
@@ -16447,6 +17253,11 @@ class $FAssetsIcons {
           'square-dashed-mouse-pointer',
           'assets/icons/square-dashed-mouse-pointer.svg',
         ),
+        'square-dashed': const SvgAsset(
+          'forui_assets',
+          'square-dashed',
+          'assets/icons/square-dashed.svg',
+        ),
         'square-divide': const SvgAsset(
           'forui_assets',
           'square-divide',
@@ -16466,11 +17277,6 @@ class $FAssetsIcons {
           'forui_assets',
           'square-function',
           'assets/icons/square-function.svg',
-        ),
-        'square-gantt-chart': const SvgAsset(
-          'forui_assets',
-          'square-gantt-chart',
-          'assets/icons/square-gantt-chart.svg',
         ),
         'square-kanban': const SvgAsset(
           'forui_assets',
@@ -16576,6 +17382,11 @@ class $FAssetsIcons {
           'forui_assets',
           'square-split-vertical',
           'assets/icons/square-split-vertical.svg',
+        ),
+        'square-square': const SvgAsset(
+          'forui_assets',
+          'square-square',
+          'assets/icons/square-square.svg',
         ),
         'square-stack': const SvgAsset(
           'forui_assets',
@@ -16776,6 +17587,11 @@ class $FAssetsIcons {
           'forui_assets',
           'table-columns-split',
           'assets/icons/table-columns-split.svg',
+        ),
+        'table-of-contents': const SvgAsset(
+          'forui_assets',
+          'table-of-contents',
+          'assets/icons/table-of-contents.svg',
         ),
         'table-properties': const SvgAsset(
           'forui_assets',
@@ -16982,6 +17798,16 @@ class $FAssetsIcons {
           'ticket',
           'assets/icons/ticket.svg',
         ),
+        'tickets-plane': const SvgAsset(
+          'forui_assets',
+          'tickets-plane',
+          'assets/icons/tickets-plane.svg',
+        ),
+        'tickets': const SvgAsset(
+          'forui_assets',
+          'tickets',
+          'assets/icons/tickets.svg',
+        ),
         'timer-off': const SvgAsset(
           'forui_assets',
           'timer-off',
@@ -17107,6 +17933,11 @@ class $FAssetsIcons {
           'trending-down',
           'assets/icons/trending-down.svg',
         ),
+        'trending-up-down': const SvgAsset(
+          'forui_assets',
+          'trending-up-down',
+          'assets/icons/trending-up-down.svg',
+        ),
         'trending-up': const SvgAsset(
           'forui_assets',
           'trending-up',
@@ -17142,10 +17973,15 @@ class $FAssetsIcons {
           'turtle',
           'assets/icons/turtle.svg',
         ),
-        'tv-2': const SvgAsset(
+        'tv-minimal-play': const SvgAsset(
           'forui_assets',
-          'tv-2',
-          'assets/icons/tv-2.svg',
+          'tv-minimal-play',
+          'assets/icons/tv-minimal-play.svg',
+        ),
+        'tv-minimal': const SvgAsset(
+          'forui_assets',
+          'tv-minimal',
+          'assets/icons/tv-minimal.svg',
         ),
         'tv': const SvgAsset(
           'forui_assets',
@@ -17161,6 +17997,11 @@ class $FAssetsIcons {
           'forui_assets',
           'twitter',
           'assets/icons/twitter.svg',
+        ),
+        'type-outline': const SvgAsset(
+          'forui_assets',
+          'type-outline',
+          'assets/icons/type-outline.svg',
         ),
         'type': const SvgAsset(
           'forui_assets',
@@ -17257,6 +18098,11 @@ class $FAssetsIcons {
           'user-minus',
           'assets/icons/user-minus.svg',
         ),
+        'user-pen': const SvgAsset(
+          'forui_assets',
+          'user-pen',
+          'assets/icons/user-pen.svg',
+        ),
         'user-plus': const SvgAsset(
           'forui_assets',
           'user-plus',
@@ -17276,6 +18122,11 @@ class $FAssetsIcons {
           'forui_assets',
           'user-round-minus',
           'assets/icons/user-round-minus.svg',
+        ),
+        'user-round-pen': const SvgAsset(
+          'forui_assets',
+          'user-round-pen',
+          'assets/icons/user-round-pen.svg',
         ),
         'user-round-plus': const SvgAsset(
           'forui_assets',
@@ -17392,6 +18243,11 @@ class $FAssetsIcons {
           'voicemail',
           'assets/icons/voicemail.svg',
         ),
+        'volleyball': const SvgAsset(
+          'forui_assets',
+          'volleyball',
+          'assets/icons/volleyball.svg',
+        ),
         'volume-1': const SvgAsset(
           'forui_assets',
           'volume-1',
@@ -17401,6 +18257,11 @@ class $FAssetsIcons {
           'forui_assets',
           'volume-2',
           'assets/icons/volume-2.svg',
+        ),
+        'volume-off': const SvgAsset(
+          'forui_assets',
+          'volume-off',
+          'assets/icons/volume-off.svg',
         ),
         'volume-x': const SvgAsset(
           'forui_assets',
@@ -17507,10 +18368,25 @@ class $FAssetsIcons {
           'whole-word',
           'assets/icons/whole-word.svg',
         ),
+        'wifi-high': const SvgAsset(
+          'forui_assets',
+          'wifi-high',
+          'assets/icons/wifi-high.svg',
+        ),
+        'wifi-low': const SvgAsset(
+          'forui_assets',
+          'wifi-low',
+          'assets/icons/wifi-low.svg',
+        ),
         'wifi-off': const SvgAsset(
           'forui_assets',
           'wifi-off',
           'assets/icons/wifi-off.svg',
+        ),
+        'wifi-zero': const SvgAsset(
+          'forui_assets',
+          'wifi-zero',
+          'assets/icons/wifi-zero.svg',
         ),
         'wifi': const SvgAsset(
           'forui_assets',
