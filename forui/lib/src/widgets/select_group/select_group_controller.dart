@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 
+import 'package:forui/forui.dart';
+
 /// A controller for a select group.
-abstract class FSelectGroupController<T> with ChangeNotifier {
+abstract class FSelectGroupController<T> extends FChangeNotifier {
   final Set<T> _values;
 
   /// Creates a [FSelectGroupController].

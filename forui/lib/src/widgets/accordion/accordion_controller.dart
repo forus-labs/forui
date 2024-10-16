@@ -2,8 +2,10 @@ import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
+import 'package:forui/forui.dart';
+
 /// A controller that controls which sections are shown and hidden.
-class FAccordionController extends ChangeNotifier {
+class FAccordionController extends FChangeNotifier {
   /// The animation controllers for each of the sections in the accordion.
   final Map<int, AnimationController> controllers;
   final Set<int> _expanded;

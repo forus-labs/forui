@@ -1,7 +1,7 @@
 part of 'tabs.dart';
 
 /// A controller that controls selection in a [FTabs].
-final class FTabController implements ChangeNotifier {
+final class FTabController extends FChangeNotifier {
   final TabController _controller;
 
   /// Creates a [FTabController].
@@ -22,8 +22,9 @@ final class FTabController implements ChangeNotifier {
     int index, {
     Duration? duration,
     Curve curve = Curves.ease,
-  }) =>
-      _controller.animateTo(index, duration: duration, curve: curve);
+  }) {
+    _controller.animateTo(index, duration: duration, curve: curve);
+  }
 
   @override
   void addListener(VoidCallback listener) => _controller.addListener(listener);
@@ -46,5 +47,8 @@ final class FTabController implements ChangeNotifier {
   bool get hasListeners => _controller.hasListeners;
 
   @override
-  void dispose() => _controller.dispose();
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }

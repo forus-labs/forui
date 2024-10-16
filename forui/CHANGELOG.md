@@ -1,4 +1,4 @@
-## 0.6.0 (Next)
+## 0.6.0
 
 ### Additions
 * Add `FAccordion`.
@@ -24,6 +24,10 @@
 * Add `FColorScheme.hover(...)`.
 
 * Add `FColorScheme.enabledHoveredOpacity`.
+
+* Add `FChangeNotifier`.
+
+* Add `FValueNotifier`.
 
 ### Changes
 

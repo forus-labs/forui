@@ -18,7 +18,7 @@ void main() {
             index: 2,
             children: [
               FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.home),
+                icon: FIcon(FAssets.icons.house),
                 label: const Text('Home'),
               ),
               FBottomNavigationBarItem(
@@ -43,7 +43,7 @@ void main() {
               index: 2,
               children: [
                 FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.home),
+                  icon: FIcon(FAssets.icons.house),
                   label: const Text('Home'),
                 ),
                 FBottomNavigationBarItem(

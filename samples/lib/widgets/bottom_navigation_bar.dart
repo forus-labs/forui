@@ -34,7 +34,7 @@ class _DemoState extends State<_Demo> {
         onChange: (index) => setState(() => this.index = index),
         children: [
           FBottomNavigationBarItem(
-            icon: FIcon(FAssets.icons.home),
+            icon: FIcon(FAssets.icons.house),
             label: const Text('Home'),
           ),
           FBottomNavigationBarItem(

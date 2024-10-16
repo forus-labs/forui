@@ -1,6 +1,6 @@
-import 'package:flutter/widgets.dart';
-
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
 
 bool _true(DateTime _) => true;
 
@@ -12,7 +12,7 @@ bool _true(DateTime _) => true;
 /// * [FCalendarController.date] for selecting a single date.
 /// * [FCalendarController.dates] for selecting multiple date.
 /// * [FCalendarController.range] for selecting a single range.
-abstract class FCalendarController<T> extends ValueNotifier<T> {
+abstract class FCalendarController<T> extends FValueNotifier<T> {
   /// Creates a [FCalendarController] that allows only a single date to be selected, with the given initially selected
   /// date.
   ///
@@ -95,7 +95,9 @@ class _DateController extends FCalendarController<DateTime?> {
   bool selected(DateTime date) => value?.toLocalDate() == date.toLocalDate();
 
   @override
-  void select(DateTime date) => value = value?.toLocalDate() == date.toLocalDate() ? null : date;
+  void select(DateTime date) {
+    value = value?.toLocalDate() == date.toLocalDate() ? null : date;
+  }
 }
 
 final class _DatesController extends FCalendarController<Set<DateTime>> {

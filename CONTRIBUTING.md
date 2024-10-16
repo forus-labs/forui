@@ -104,6 +104,9 @@ class Foo extends StatelessWidget {
 }
 ```
 
+### Extend `FChangeNotifier` & `FValueNotifier<T>` instead of `ChangeNotifier` & `ValueNotifier<T>`
+
+These subclasses have additional life-cycle tracking capabilities baked-in.
 
 ### Mark widgets as final when sensible
 

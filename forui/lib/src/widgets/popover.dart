@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
-final class FPopoverController extends ChangeNotifier {
+final class FPopoverController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
   static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
 

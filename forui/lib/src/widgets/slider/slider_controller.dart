@@ -1,7 +1,5 @@
 import 'dart:collection';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -29,7 +27,7 @@ enum FSliderInteraction {
 /// * [FContinuousSliderController.range] for selecting continuous range.
 /// * [FDiscreteSliderController.new] for selecting a discrete value.
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
-abstract class FSliderController extends ChangeNotifier {
+abstract class FSliderController extends FChangeNotifier {
   /// True if the registered tooltip(s) should be shown when the user interacts with the slider. Defaults to true.
   final FSliderTooltipsController tooltips;
 
