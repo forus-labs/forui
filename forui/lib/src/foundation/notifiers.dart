@@ -11,14 +11,6 @@ class FChangeNotifier with ChangeNotifier {
     }
   }
 
-  /// Asserts that this notifier has not been disposed.
-  @nonVirtual
-  @protected
-  void debugAssertNotDisposed() {
-    // ignore: prefer_asserts_with_message
-    assert(ChangeNotifier.debugAssertNotDisposed(this));
-  }
-
   /// True if this notifier has been disposed.
   bool get disposed => _disposed;
 
@@ -36,14 +28,6 @@ class FValueNotifier<T> extends ValueNotifier<T> {
 
   /// Creates a [FValueNotifier].
   FValueNotifier(super._value);
-
-  /// Asserts that this notifier has not been disposed.
-  @nonVirtual
-  @protected
-  void debugAssertNotDisposed() {
-    // ignore: prefer_asserts_with_message
-    assert(ChangeNotifier.debugAssertNotDisposed(this));
-  }
 
   /// True if this notifier has been disposed.
   bool get disposed => _disposed;

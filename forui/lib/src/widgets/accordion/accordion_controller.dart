@@ -75,8 +75,6 @@ class FAccordionController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> expand(int index) async {
-    debugAssertNotDisposed();
-
     final controller = controllers[index];
     if (_expanded.contains(index) || controller == null) {
       return false;
@@ -106,8 +104,6 @@ class FAccordionController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> collapse(int index) async {
-    debugAssertNotDisposed();
-
     if (_expanded.length <= _min || !_expanded.contains(index)) {
       return false;
     }

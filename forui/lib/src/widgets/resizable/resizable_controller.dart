@@ -73,8 +73,6 @@ final class _ResizableController extends FResizableController {
 
   @override
   bool update(int left, int right, double delta) {
-    debugAssertNotDisposed();
-
     final (shrink, expand, lhs) = switch (delta) {
       < 0 => (regions[left], regions[right], false),
       _ => (regions[right], regions[left], true),
@@ -114,8 +112,6 @@ final class _ResizableController extends FResizableController {
 
   @override
   void end(int left, int right) {
-    debugAssertNotDisposed();
-
     if (onResizeEnd case final onResizeEnd?) {
       onResizeEnd([regions[left], regions[right]]);
     }
@@ -134,8 +130,6 @@ final class _CascadeController extends FResizableController {
 
   @override
   bool update(int left, int right, double delta) {
-    debugAssertNotDisposed();
-
     final (shrinks, expand, lhs) = switch (delta) {
       < 0 => (regions.sublist(0, right).reversed.toList(), regions[right], false),
       _ => (regions.sublist(right), regions[left], true),
@@ -205,8 +199,6 @@ final class _CascadeController extends FResizableController {
 
   @override
   void end(int left, int right) {
-    debugAssertNotDisposed();
-
     if (onResizeEnd case final onResizeEnd?) {
       onResizeEnd(UnmodifiableListView(regions));
     }

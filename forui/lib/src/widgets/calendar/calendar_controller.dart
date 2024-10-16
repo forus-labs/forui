@@ -96,7 +96,6 @@ class _DateController extends FCalendarController<DateTime?> {
 
   @override
   void select(DateTime date) {
-    debugAssertNotDisposed();
     value = value?.toLocalDate() == date.toLocalDate() ? null : date;
   }
 }
@@ -119,7 +118,6 @@ final class _DatesController extends FCalendarController<Set<DateTime>> {
 
   @override
   void select(DateTime date) {
-    debugAssertNotDisposed();
     final copy = {...value};
     value = copy..toggle(date);
   }
@@ -159,7 +157,6 @@ final class _RangeController extends FCalendarController<(DateTime, DateTime)?> 
 
   @override
   void select(DateTime date) {
-    debugAssertNotDisposed();
     if (value == null) {
       value = (date, date);
       return;

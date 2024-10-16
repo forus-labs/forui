@@ -42,7 +42,6 @@ class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
 
   @override
   void select(T value, bool selected) {
-    debugAssertNotDisposed();
     if (!selected || contains(value)) {
       return;
     }
@@ -80,7 +79,6 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
 
   @override
   void select(T value, bool selected) {
-    debugAssertNotDisposed();
     if (selected) {
       if (_max != null && _values.length >= _max) {
         return;

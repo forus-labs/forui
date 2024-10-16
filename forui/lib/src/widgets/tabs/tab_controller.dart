@@ -23,7 +23,6 @@ final class FTabController extends FChangeNotifier {
     Duration? duration,
     Curve curve = Curves.ease,
   }) {
-    debugAssertNotDisposed();
     _controller.animateTo(index, duration: duration, curve: curve);
   }
 

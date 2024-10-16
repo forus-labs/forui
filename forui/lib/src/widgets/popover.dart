@@ -36,7 +36,6 @@ final class FPopoverController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
-    debugAssertNotDisposed();
     _overlay.show();
     await _animation.forward();
     notifyListeners();
@@ -49,7 +48,6 @@ final class FPopoverController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> hide() async {
-    debugAssertNotDisposed();
     await _animation.reverse();
     _overlay.hide();
     notifyListeners();
