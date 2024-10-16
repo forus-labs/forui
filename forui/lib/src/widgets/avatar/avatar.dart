@@ -13,6 +13,9 @@ import 'package:forui/src/widgets/avatar/avatar_content.dart';
 ///
 /// If the user's profile has no image, use the fallback property to display the initials using a [Text] widget styled
 /// with [FAvatarStyle.backgroundColor].
+///
+/// See:
+/// * https://forui.dev/docs/data/avatar for working examples.
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   final FAvatarStyle? style;

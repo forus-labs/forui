@@ -6,7 +6,7 @@ part of 'header.dart';
 /// It is typically used on pages at the root of the navigation stack.
 ///
 /// See:
-/// * https://forui.dev/docs/header for working examples.
+/// * https://forui.dev/docs/navigation/header for working examples.
 /// * [FRootHeaderStyle] for customizing a header's appearance.
 final class _FRootHeader extends FHeader {
   /// The header's style. Defaults to [FThemeData.headerStyle.rootStyle].

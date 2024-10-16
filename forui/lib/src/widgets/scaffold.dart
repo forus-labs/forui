@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 /// It is highly recommended to use a scaffold when creating a page even if a header and footer are not required.
 ///
 /// See:
-/// * https://forui.dev/docs/scaffold for working examples.
+/// * https://forui.dev/docs/layout/scaffold for working examples.
 /// * [FScaffoldStyle] for customizing a scaffold's appearance.
 class FScaffold extends StatelessWidget {
   /// The content.

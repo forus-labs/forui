@@ -15,7 +15,7 @@ import 'package:forui/src/widgets/button/button_content.dart';
 /// The constants in [FButtonStyle] provide a convenient way to style a badge.
 ///
 /// See:
-/// * https://forui.dev/docs/button for working examples.
+/// * https://forui.dev/docs/form/button for working examples.
 /// * [FButtonCustomStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
   /// The style. Defaults to [FButtonStyle.primary].

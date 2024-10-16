@@ -6,7 +6,7 @@ import 'package:forui/src/widgets/resizable/resizable.dart';
 
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
 ///
-/// See https://forui.dev/docs/resizable for working examples.
+/// See https://forui.dev/docs/layout/resizable for working examples.
 class FResizableRegion extends StatelessWidget {
   /// The initial extent along the resizable axis, in logical pixels.
   ///

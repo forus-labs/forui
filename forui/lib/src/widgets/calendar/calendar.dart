@@ -19,7 +19,7 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 /// [DateTime]s outside [start] and [end] are unselectable regardless of the [FCalendarController] used.
 ///
 /// See:
-/// * https://forui.dev/docs/calendar for working examples.
+/// * https://forui.dev/docs/form/calendar for working examples.
 /// * [FCalendarController] for customizing a calendar's date selection behavior.
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatelessWidget {

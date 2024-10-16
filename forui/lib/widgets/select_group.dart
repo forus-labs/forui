@@ -2,7 +2,7 @@
 ///
 /// A group of form fields that represent a single selection.
 ///
-/// See https://forui.dev/docs/select-group for working examples.
+/// See https://forui.dev/docs/form/select-group for working examples.
 library forui.widgets.select_group;
 
 export '../src/widgets/select_group/select_group.dart';

@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 /// Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 ///
 /// See:
-/// * https://forui.dev/docs/progress for working examples.
+/// * https://forui.dev/docs/navigation/progress for working examples.
 /// * [FProgressStyle] for customizing a progress's appearance.
 class FProgress extends StatelessWidget {
   /// The style. Defaults to [FThemeData.progressStyle].

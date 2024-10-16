@@ -13,7 +13,7 @@ import 'package:forui/src/widgets/select_group/select_group_item.dart';
 /// Typically used to group multiple [FSelectGroupItem.checkbox]s or [FSelectGroupItem.radio]s.
 ///
 /// See:
-/// * https://forui.dev/docs/select-group for working examples.
+/// * https://forui.dev/docs/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends FormField<Set<T>> {
   static Widget _errorBuilder(BuildContext context, String error) => Text(error);

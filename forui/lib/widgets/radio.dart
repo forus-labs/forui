@@ -5,7 +5,7 @@
 /// It is recommended to use [FSelectGroup] in conjunction with [FSelectGroupItem.radio] to create a group of radio
 /// buttons.
 ///
-/// See https://forui.dev/docs/radio for working examples.
+/// See https://forui.dev/docs/form/radio for working examples.
 library forui.widgets.radio;
 
 import 'package:forui/forui.dart';

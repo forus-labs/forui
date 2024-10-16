@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 /// Dividers visually separate content.
 ///
 /// See:
-/// * https://forui.dev/docs/divider for working examples.
+/// * https://forui.dev/docs/layout/divider for working examples.
 /// * [FDividerStyle] for customizing a divider's appearance.
 final class FDivider extends StatelessWidget {
   /// The divider's style. Defaults to the appropriate style in [FThemeData.dividerStyles].

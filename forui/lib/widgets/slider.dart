@@ -2,7 +2,7 @@
 ///
 /// An input where the user selects a value from within a given range.
 ///
-/// See https://forui.dev/docs/slider for working examples.
+/// See https://forui.dev/docs/form/slider for working examples.
 library forui.widgets.slider;
 
 export '../src/widgets/slider/slider.dart';

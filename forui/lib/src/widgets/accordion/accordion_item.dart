@@ -11,7 +11,7 @@ import 'package:forui/src/widgets/accordion/accordion.dart';
 /// An interactive heading that reveals a section of content.
 ///
 /// See:
-/// * https://forui.dev/docs/accordion for working examples.
+/// * https://forui.dev/docs/data/accordion for working examples.
 class FAccordionItem extends StatefulWidget {
   /// The accordion's style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;

@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 /// A vertically stacked set of interactive headings that each reveal a section of content.
 ///
 /// See:
-/// * https://forui.dev/docs/accordion for working examples.
+/// * https://forui.dev/docs/data/accordion for working examples.
 /// * [FAccordionController] for customizing the accordion's behavior.
 /// * [FAccordionItem] for adding items to an accordion.
 /// * [FAccordionStyle] for customizing an accordion's appearance.
