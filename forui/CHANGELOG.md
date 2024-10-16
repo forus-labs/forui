@@ -1,4 +1,4 @@
-## 0.6.0 (Next)
+## 0.6.0
 
 ### Additions
 * Add `FAccordion`.
