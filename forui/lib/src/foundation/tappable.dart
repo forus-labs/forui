@@ -45,6 +45,7 @@ class FTappable extends StatefulWidget {
   final Duration touchHoverExitDuration;
   final VoidCallback? onPress;
   final VoidCallback? onLongPress;
+  final Duration shortPressDelay;
   final ValueWidgetBuilder<FTappableState> builder;
   final Widget? child;
 
@@ -77,6 +78,7 @@ class FTappable extends StatefulWidget {
     this.touchHoverExitDuration = Duration.zero,
     this.onPress,
     this.onLongPress,
+    this.shortPressDelay = const Duration(milliseconds: 200),
     ValueWidgetBuilder<FTappableState>? builder,
     this.child,
     super.key,
@@ -111,6 +113,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('onLongPress', onLongPress, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('shortPressDelay', shortPressDelay, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('builder', builder, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('child', child, level: DiagnosticLevel.debug));
   }
@@ -171,13 +174,9 @@ class _FTappableState extends State<FTappable> {
     }
 
     return Shortcuts(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-      },
+      shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
       child: Actions(
-        actions: {
-          ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!()),
-        },
+        actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
         child: tappable,
       ),
     );

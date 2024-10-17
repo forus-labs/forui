@@ -22,6 +22,7 @@ export default {
   layout: 'Layout',
   form: 'Form',
   data: 'Data Presentation',
+  tile: 'Tile',
   navigation: 'Navigation',
   feedback: 'Feedback',
   overlay: 'Overlay',

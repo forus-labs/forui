@@ -1,3 +1,12 @@
+## 0.7.0 (Next)
+
+### Additions
+
+* Add `FTile`.
+
+* Add `FTileGroup`.
+
+
 ## 0.6.1
 
 * Fix range slider not displaying tooltip for minimum thumb.
