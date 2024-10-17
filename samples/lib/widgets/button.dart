@@ -76,6 +76,6 @@ class ButtonSpinnerPage extends SampleScaffold {
 
   @override
   Widget child(BuildContext context) => IntrinsicWidth(
-    child: FButton(prefix: const FButtonSpinner(), onPress: null, label: const Text('Please wait')),
-  );
+        child: FButton(prefix: const FButtonSpinner(), onPress: null, label: const Text('Please wait')),
+      );
 }
