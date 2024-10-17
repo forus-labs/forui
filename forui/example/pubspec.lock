@@ -256,7 +256,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.6.0"
+    version: "0.6.1"
   forui_assets:
     dependency: transitive
     description:
