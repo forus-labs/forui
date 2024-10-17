@@ -1,3 +1,7 @@
+## 0.6.1
+
+* Fix range slider not displaying tooltip for minimum thumb.
+
 ## 0.6.0
 
 ### Additions
