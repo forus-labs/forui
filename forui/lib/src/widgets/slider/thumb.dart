@@ -55,8 +55,6 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _controller = InheritedController.of(context);
-    _controller.tooltips.remove(_key, _tooltip);
-    _key = widget.min ? FSliderTooltipsController.min : FSliderTooltipsController.max;
     _controller.tooltips.add(_key, _tooltip);
   }
 
