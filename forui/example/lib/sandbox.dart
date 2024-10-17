@@ -32,10 +32,6 @@ class _SandboxState extends State<Sandbox> {
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 45.0),
-                child: FDivider(style: context.theme.tileGroupStyle.tileStyle.dividerStyle),
-              ),
               FTile(
                 prefixIcon: FIcon(FAssets.icons.bluetooth, size: 30,),
                 title: const Text('Bluetooth'),
@@ -44,10 +40,6 @@ class _SandboxState extends State<Sandbox> {
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 45.0),
-                child: FDivider(style: context.theme.tileGroupStyle.tileStyle.dividerStyle),
-              ),
               FTile(
                 prefixIcon: const FIcon.data(Icons.add_circle_outline),
                 title: const Text('WiFi'),
@@ -55,14 +47,10 @@ class _SandboxState extends State<Sandbox> {
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 45.0),
-                child: FDivider(style: context.theme.tileGroupStyle.tileStyle.dividerStyle),
-              ),
               FTile(
                 prefixIcon: FIcon(FAssets.icons.ghost),
-                title: const Text('WiFi'),
-                details: const Text('Forus Labs (5G)'),
+                title: const Text('Extremely Long Verbose Wide Title'),
+                details: const FSwitch(),
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
               ),
@@ -79,7 +67,6 @@ class _SandboxState extends State<Sandbox> {
             suffixIcon: FIcon(FAssets.icons.chevronRight),
             onPress: () {},
           ),
-          FButton(onPress: () {}, label: const Text('Forus Labs (5G)')),
         ],
       );
 }

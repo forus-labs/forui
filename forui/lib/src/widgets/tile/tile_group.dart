@@ -21,6 +21,9 @@ enum FTileDivider {
   /// -----------------------------
   /// ```
   indented,
+
+  /// No divider between tiles.
+  none,
 }
 
 /// A tile group that groups multiple [FTile]s.
@@ -28,7 +31,7 @@ enum FTileDivider {
 /// Tiles grouped together will be separated by a divider, specified by [divider].
 ///
 /// See:
-/// * https://forui.dev/docs/tile for working examples.
+/// * https://forui.dev/docs/tile/tile-group for working examples.
 /// * [FTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a tile's appearance.
 class FTileGroup extends StatelessWidget {

@@ -14,7 +14,8 @@ class TileGroupPage extends SampleScaffold {
     @queryParam String divider = 'partial',
   }) : divider = switch (divider) {
           'full' => FTileDivider.full,
-          _ => FTileDivider.partial,
+          'none' => FTileDivider.none,
+          _ => FTileDivider.indented,
         };
 
   @override

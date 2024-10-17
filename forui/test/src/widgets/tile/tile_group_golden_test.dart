@@ -155,7 +155,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/enabled-$name-$divider.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$name/enabled/$divider.png'));
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
@@ -201,7 +201,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('tile/group/hovered-$name-$divider-$position.png'),
+              matchesGoldenFile('tile/group/$name/hovered/$divider-$position.png'),
             );
           });
 
@@ -241,7 +241,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('tile/group/disabled-$name-$divider-$position.png'),
+              matchesGoldenFile('tile/group/$name/disabled/$divider-$position.png'),
             );
           });
         }
