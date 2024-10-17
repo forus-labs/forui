@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
+import 'package:forui/src/widgets/tile/tile_content.dart';
 import 'package:meta/meta.dart';
 
 /// A tile that is typically used to group related information together.
@@ -10,7 +11,7 @@ import 'package:meta/meta.dart';
 /// specified by a [FTileDivider].
 ///
 /// See:
-/// * https://forui.dev/docs/tile for working examples.
+/// * https://forui.dev/docs/tile/tile for working examples.
 /// * [FTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a tile's appearance.
 class FTile extends StatelessWidget {
@@ -38,7 +39,37 @@ class FTile extends StatelessWidget {
   /// The child.
   final Widget child;
 
-  const FTile({super.key});
+  /// Creates a [FTile].
+  ///
+  /// ```
+  /// -----------------------------------------------------
+  /// | [prefixIcon] [title]       [details] [suffixIcon] |
+  /// |              [subtitle]                           |
+  /// ----------------------------------------------------
+  /// ```
+  ///
+  /// ## Overflow behavior
+  /// If the tile's content overflows and `details` is text, it'll be truncated first. Otherwise, `title` and `subtitle`
+  /// will be truncated first.
+  FTile({
+    required Widget title,
+    this.style,
+    this.enabled = true,
+    this.semanticLabel,
+    this.onPress,
+    this.onLongPress,
+    Widget? prefixIcon,
+    Widget? subtitle,
+    Widget? details,
+    Widget? suffixIcon,
+    super.key,
+  }) : child = FTileContent(
+          title: title,
+          prefixIcon: prefixIcon,
+          subtitle: subtitle,
+          details: details,
+          suffixIcon: suffixIcon,
+        );
 
   @override
   Widget build(BuildContext context) {

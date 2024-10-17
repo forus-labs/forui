@@ -92,5 +92,23 @@ void main() {
       expect(press, 0);
       expect(longPress, 0);
     });
+
+    testWidgets('child hit test', (tester) async {
+      var count = 0;
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: FTile(
+            title: const Text('Bluetooth'),
+            details: FButton(onPress: () => count++, label: const Text('child')),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('child'));
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      expect(count, 1);
+    });
   });
 }

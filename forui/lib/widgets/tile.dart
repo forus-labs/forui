@@ -1,8 +1,8 @@
 /// {@category Widgets}
 ///
-/// A tile.
+/// The numerous tile variants.
 ///
-/// See https://forui.dev/docs/tile for working examples.
+/// See https://forui.dev/tile for working examples.
 library forui.widgets.tile;
 
 export '../src/widgets/tile/tile.dart';

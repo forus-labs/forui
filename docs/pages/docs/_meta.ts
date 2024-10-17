@@ -21,6 +21,7 @@ export default {
   // A page need to be listed after a separator or else the order will be messed up.
   layout: 'Layout',
   form: 'Form',
+  tile: 'Tile',
   data: 'Data Presentation',
   navigation: 'Navigation',
   feedback: 'Feedback',

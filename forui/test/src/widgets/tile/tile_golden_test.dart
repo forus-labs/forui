@@ -189,6 +189,46 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/unhoverable.png'));
     });
 
+    testWidgets('utilize all space', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 225),
+              child: FTile(
+                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                title: const Text('Bluetooth'),
+                details: const Text('FL (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/utilize-all-space.png'));
+    });
+
+    testWidgets('minimal', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FTile(
+              title: const Text('Bluetooth'),
+              onPress: () {},
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
+    });
+
     testWidgets('no subtitle', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
@@ -209,7 +249,26 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
     });
 
-    testWidgets('overflowing title', (tester) async {
+    testWidgets('no suffix icon', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          data: FThemes.zinc.light,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FTile(
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Bluetooth'),
+              details: const Text('FL (5G)'),
+              onPress: () {},
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
+    });
+
+    testWidgets('prioritize title', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
@@ -219,7 +278,7 @@ void main() {
               padding: const EdgeInsets.all(8.0),
               child: FTile(
                 prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('L                                         ong'),
+                title: const Text('L                               ong'),
                 details: const Text('FL (5G)'),
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
@@ -229,10 +288,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/overflowing-title.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-title.png'));
     });
 
-    testWidgets('overflowing subtitle', (tester) async {
+    testWidgets('prioritize subtitle', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
@@ -243,7 +302,8 @@ void main() {
               child: FTile(
                 prefixIcon: FIcon(FAssets.icons.bluetooth),
                 title: const Text('Title'),
-                subtitle: const Text('L                                         ong'),
+                subtitle: const Text('L                                     ong'),
+                details: const Text('FL (5G)'),
                 suffixIcon: FIcon(FAssets.icons.chevronRight),
                 onPress: () {},
               ),
@@ -252,24 +312,31 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/overflowing-subtitle.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-subtitle.png'));
     });
 
-    testWidgets('minimal', (tester) async {
+    testWidgets('prioritize details', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           data: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTile(
-              title: const Text('Bluetooth'),
-              onPress: () {},
+          child: SizedBox(
+            width: 300,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTile(
+                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                title: const Text('Title'),
+                subtitle: const Text('L                                     ong'),
+                details: const FSwitch(),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
             ),
           ),
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-details.png'));
     });
   });
 }
