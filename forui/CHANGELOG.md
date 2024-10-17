@@ -3,6 +3,8 @@
 ### Additions
 * Add `FAccordion`.
 
+* Add `FButtonSpinner`.
+
 * Add `FSlider`.
 
 * Add `FButtonStyles.ghost`.

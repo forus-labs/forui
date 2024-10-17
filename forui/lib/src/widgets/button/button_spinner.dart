@@ -3,7 +3,17 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+/// An animated spinner icon.
+///
+/// Typically used with an [FButton] as a prefixIcon. The spinner will rotate indefinitely.
+/// The spinner's color and size are determined by the parent button's [FButtonCustomStyle].
+///
+/// See:
+/// * https://forui.dev/docs/form/button for working examples.
+/// * [FButton] for creating a button.
+/// * [FButtonCustomStyle] for customizing a button's appearance.
 class FButtonSpinner extends StatefulWidget {
+  /// Creates a button spinner.
   const FButtonSpinner({super.key});
 
   @override
@@ -39,14 +49,14 @@ class _ExampleState extends State<FButtonSpinner> with SingleTickerProviderState
         FAssets.icons.loaderCircle,
         color: enabled ? style.contentStyle.enabledIconColor : style.contentStyle.disabledIconColor,
         size: style.contentStyle.iconSize,
-        semanticLabel: 'Spinner',
+        semanticLabel: 'Button Spinner',
       ),
     );
   }
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 }
