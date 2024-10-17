@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/util.dart';
 
@@ -134,9 +135,9 @@ class FTileGroupStyle with Diagnosticable {
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   FTileGroupStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
-    labelTextStyle: typography.base.copyWith(fontWeight: FontWeight.w600),
-    tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-  );
+          labelTextStyle: typography.base.copyWith(fontWeight: FontWeight.w600),
+          tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

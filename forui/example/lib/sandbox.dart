@@ -33,7 +33,10 @@ class _SandboxState extends State<Sandbox> {
                 onPress: () {},
               ),
               FTile(
-                prefixIcon: FIcon(FAssets.icons.bluetooth, size: 30,),
+                prefixIcon: FIcon(
+                  FAssets.icons.bluetooth,
+                  size: 30,
+                ),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
                 details: const Text('Forus Labs (5G)'),

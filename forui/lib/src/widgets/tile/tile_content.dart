@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/util.dart';
 import 'package:forui/src/widgets/tile/tile_render_object.dart';
-import 'package:meta/meta.dart';
 
 @internal
 class FTileContent extends StatelessWidget {
@@ -154,11 +156,10 @@ final class FTileContentStyle with Diagnosticable {
     this.titleSpacing = 4,
     this.middleSpacing = 4,
     this.suffixIconSpacing = 5,
-  }):
-    assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.'),
-    assert(0 <= titleSpacing, 'titleSpacing must be non-negative.'),
-    assert(0 <= middleSpacing, 'middleSpacing must be non-negative.'),
-    assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
+  })  : assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.'),
+        assert(0 <= titleSpacing, 'titleSpacing must be non-negative.'),
+        assert(0 <= middleSpacing, 'middleSpacing must be non-negative.'),
+        assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
 
   /// Creates a [FTileContentStyle] that inherits from the given [colorScheme] and [typography].
   FTileContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
