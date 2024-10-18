@@ -28,7 +28,7 @@ void main() {
         testWidgets('$name with FBadgeContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: FBadge(
                 label: const Text('Badge'),
@@ -37,16 +37,13 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('badge/$name-$variant-content-badge.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/$name/$variant-content.png'));
         });
 
         testWidgets('$name with raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: FBadge.raw(
                 style: variant,
@@ -73,10 +70,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('badge/$name-$variant-raw-badge.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/$name/$variant-raw.png'));
         });
       }
     }

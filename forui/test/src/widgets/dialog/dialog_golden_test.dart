@@ -73,7 +73,7 @@ void main() {
           await tester.pumpWidget(
             MaterialApp(
               home: TestScaffold(
-                data: theme,
+                theme: theme,
                 background: background,
                 child: UnderTest(direction: direction),
               ),
@@ -90,7 +90,7 @@ void main() {
       testWidgets('$name with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

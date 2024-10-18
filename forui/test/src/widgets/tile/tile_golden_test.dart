@@ -89,7 +89,7 @@ void main() {
       testWidgets('enabled - $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -111,7 +111,7 @@ void main() {
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -141,7 +141,7 @@ void main() {
       testWidgets('disabled - $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -165,7 +165,7 @@ void main() {
     testWidgets('does not hover', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTile(
@@ -192,7 +192,7 @@ void main() {
     testWidgets('utilize all space', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ConstrainedBox(
@@ -215,7 +215,7 @@ void main() {
     testWidgets('minimal', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTile(
@@ -232,7 +232,7 @@ void main() {
     testWidgets('no subtitle', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTile(
@@ -252,7 +252,7 @@ void main() {
     testWidgets('no suffix icon', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTile(
@@ -271,7 +271,7 @@ void main() {
     testWidgets('prioritize title', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: SizedBox(
             width: 300,
             child: Padding(
@@ -294,7 +294,7 @@ void main() {
     testWidgets('prioritize subtitle', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: SizedBox(
             width: 300,
             child: Padding(
@@ -318,7 +318,7 @@ void main() {
     testWidgets('prioritize details', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: SizedBox(
             width: 300,
             child: Padding(

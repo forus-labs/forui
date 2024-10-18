@@ -17,7 +17,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FPortal(
               followerAnchor: Alignment.topRight,
               targetAnchor: Alignment.bottomLeft,

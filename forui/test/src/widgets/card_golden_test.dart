@@ -33,7 +33,7 @@ void main() {
       testWidgets('$name with FCardContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -47,16 +47,13 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('card/$name-content-card.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$name/content.png'));
       });
 
       testWidgets('$name with image', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -75,16 +72,13 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('card/$name-content-image.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$name/content-image.png'));
       });
 
       testWidgets('$name with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -100,10 +94,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('card/$name-raw-card.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$name/raw.png'));
       });
     }
   });

@@ -36,7 +36,7 @@ void main() {
         testWidgets('$name horizontal with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: SizedBox(
                 width: 300,
                 child: FLabel(
@@ -56,7 +56,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('label/$name-horizontal-$state.png'),
+            matchesGoldenFile('label/$name/horizontal-$state.png'),
           );
         });
       }
@@ -65,7 +65,7 @@ void main() {
         testWidgets('$name vertical with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: FLabel(
                 axis: Axis.vertical,
                 label: const Text('Email'),
@@ -82,7 +82,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('label/$name-vertical-$state.png'),
+            matchesGoldenFile('label/$name/vertical-$state.png'),
           );
         });
       }

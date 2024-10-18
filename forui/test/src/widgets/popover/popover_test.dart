@@ -13,7 +13,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const Text('follower'),
@@ -43,7 +43,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FPopover(
               controller: controller,
               hideOnTapOutside: false,
@@ -74,7 +74,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FPopover(
               controller: controller,
               hideOnTapOutside: false,

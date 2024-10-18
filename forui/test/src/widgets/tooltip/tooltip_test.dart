@@ -14,7 +14,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FTooltip(
               controller: controller,
               hover: false,
@@ -47,7 +47,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: TestScaffold(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FTooltip(
                 longPressExitDuration: duration,
                 tipBuilder: (context, style, _) => const Text('tip'),
@@ -76,7 +76,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: TestScaffold(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FTooltip(
                 longPressExitDuration: duration,
                 tipBuilder: (context, style, _) => const Text('tip'),
@@ -110,7 +110,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: TestScaffold(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FTooltip(
                 tipBuilder: (context, style, _) => const Text('tip'),
                 child: FButton(
@@ -142,7 +142,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: TestScaffold(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FTooltip(
                 hoverEnterDuration: const Duration(seconds: 1),
                 tipBuilder: (context, style, _) => const Text('tip'),
@@ -180,7 +180,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: TestScaffold(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FTooltip(
                 hoverEnterDuration: Duration.zero,
                 hoverExitDuration: const Duration(seconds: 1),
@@ -222,7 +222,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: TestScaffold(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FTooltip(
                 tipBuilder: (context, style, _) => const Text('tip'),
                 child: FButton(

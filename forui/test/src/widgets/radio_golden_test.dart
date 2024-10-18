@@ -42,7 +42,7 @@ void main() {
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: error
                   ? FRadio(
@@ -60,7 +60,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'radio/$name-${enabled ? 'enabled' : 'disabled'}-$value${error ? '-error' : ''}.png',
+              'radio/$name/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });
@@ -83,7 +83,7 @@ void main() {
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: SizedBox(
                 width: 300,
@@ -101,7 +101,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'radio/$name-label-${enabled ? 'enabled' : 'disabled'}-$value${error ? '-error' : ''}.png',
+              'radio/$name/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });

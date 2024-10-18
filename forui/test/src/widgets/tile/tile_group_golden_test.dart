@@ -126,7 +126,7 @@ void main() {
         testWidgets('enabled - $name - $divider', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -162,7 +162,7 @@ void main() {
           testWidgets('hovered - $name - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
-                data: theme,
+                theme: theme,
                 background: background,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -208,7 +208,7 @@ void main() {
           testWidgets('disabled - $name - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
-                data: theme,
+                theme: theme,
                 background: background,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -251,7 +251,7 @@ void main() {
     testWidgets('single tile', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTileGroup(
@@ -276,7 +276,7 @@ void main() {
     testWidgets('empty tile group', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: const Padding(
             padding: EdgeInsets.all(8.0),
             child: FTileGroup(
@@ -293,7 +293,7 @@ void main() {
     testWidgets('tile style overrides group style', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTileGroup(

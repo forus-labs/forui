@@ -42,14 +42,14 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('blue-screen.png'));
+      await expectLater(find.byType(TestScaffold), isBlueScreen);
     });
 
     for (final (name, theme, background) in TestScaffold.themes) {
       testWidgets('$name with checkbox', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -84,13 +84,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name-checkbox.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/checkbox.png'));
       });
 
       testWidgets('$name with checkbox error', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +126,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name-checkbox-error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/checkbox-error.png'));
       });
     }
   });
@@ -136,7 +136,7 @@ void main() {
       testWidgets('$name with radio', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -171,13 +171,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name-radio.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/radio.png'));
       });
 
       testWidgets('$name with radio error', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +213,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name-radio-error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/radio-error.png'));
       });
     }
   });

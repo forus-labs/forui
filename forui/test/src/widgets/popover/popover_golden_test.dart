@@ -12,14 +12,15 @@ import 'package:forui/src/foundation/tappable.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  for (final (name, theme, _) in TestScaffold.themes) {
+  for (final (name, theme, background) in TestScaffold.themes) {
     group('FPopover', () {
       testWidgets('$name hidden ', (tester) async {
         final controller = FPopoverController(vsync: const TestVSync());
 
         await tester.pumpWidget(
           TestScaffold.app(
-            data: theme,
+            theme: theme,
+            background: background,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -42,7 +43,8 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold.app(
-            data: theme,
+            theme: theme,
+            background: background,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -68,7 +70,8 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold.app(
-            data: theme,
+            theme: theme,
+            background: background,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),

@@ -28,65 +28,67 @@ void main() {
       await expectLater(find.byType(TestScaffold), isBlueScreen);
     });
 
-    testWidgets('shown', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          data: FThemes.zinc.light,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FAccordion(
-                items: [
-                  FAccordionItem(
-                    initiallyExpanded: true,
-                    title: const Text('Title'),
-                    child: const ColoredBox(
-                      color: Colors.yellow,
-                      child: SizedBox.square(
-                        dimension: 50,
+    for (final (name, theme, _) in TestScaffold.themes) {
+      testWidgets('shown', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FAccordion(
+                  items: [
+                    FAccordionItem(
+                      initiallyExpanded: true,
+                      title: const Text('Title'),
+                      child: const ColoredBox(
+                        color: Colors.yellow,
+                        child: SizedBox.square(
+                          dimension: 50,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      );
+        );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/shown.png'));
-    });
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$name/shown.png'));
+      });
 
-    testWidgets('hidden', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          data: FThemes.zinc.light,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FAccordion(
-                items: [
-                  FAccordionItem(
-                    initiallyExpanded: true,
-                    title: const Text('Title'),
-                    child: const ColoredBox(
-                      color: Colors.yellow,
-                      child: SizedBox.square(
-                        dimension: 50,
+      testWidgets('hidden', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FAccordion(
+                  items: [
+                    FAccordionItem(
+                      initiallyExpanded: true,
+                      title: const Text('Title'),
+                      child: const ColoredBox(
+                        color: Colors.yellow,
+                        child: SizedBox.square(
+                          dimension: 50,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('Title'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('Title'));
+        await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/hidden.png'));
-    });
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$name/hidden.png'));
+      });
+    }
   });
 }

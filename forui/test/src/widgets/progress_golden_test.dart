@@ -24,11 +24,11 @@ void main() {
     });
 
     for (final (name, theme, _) in TestScaffold.themes) {
-      for (final (progress, value) in [('positive', 17.0), ('negative', -4.0), ('expected', 0.3)]) {
+      for (final (progress, value) in [('positive', 17.0), ('negative', -4.0), ('clamped', 0.3)]) {
         testWidgets('$name - $progress', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -38,10 +38,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('progress/$name-$progress.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/$name-$progress.png'));
         });
       }
     }
