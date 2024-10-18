@@ -214,6 +214,9 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   /// The icon content's style.
   final FButtonIconContentStyle iconContentStyle;
 
+  /// The spinner's style.
+  final FButtonSpinnerStyle spinnerStyle;
+
   /// Creates a [FButtonCustomStyle].
   FButtonCustomStyle({
     required this.enabledBoxDecoration,
@@ -221,6 +224,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     required this.disabledBoxDecoration,
     required this.contentStyle,
     required this.iconContentStyle,
+    required this.spinnerStyle,
   });
 
   /// Creates a [FButtonCustomStyle] that inherits its properties from the given arguments.
@@ -254,6 +258,10 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
             enabledColor: enabledContentColor,
             disabledColor: disabledContentColor,
           ),
+          spinnerStyle: FButtonSpinnerStyle.inherit(
+            enabled: enabledContentColor,
+            disabled: disabledContentColor,
+          ),
         );
 
   /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
@@ -264,6 +272,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     BoxDecoration? disabledBoxDecoration,
     FButtonContentStyle? contentStyle,
     FButtonIconContentStyle? iconContentStyle,
+    FButtonSpinnerStyle? spinnerStyle,
   }) =>
       FButtonCustomStyle(
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
@@ -271,6 +280,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
         disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
         contentStyle: contentStyle ?? this.contentStyle,
         iconContentStyle: iconContentStyle ?? this.iconContentStyle,
+        spinnerStyle: spinnerStyle ?? this.spinnerStyle,
       );
 
   @override
@@ -281,7 +291,8 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledHoverBoxDecoration', enabledHoverBoxDecoration))
       ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
       ..add(DiagnosticsProperty('contentStyle', contentStyle))
-      ..add(DiagnosticsProperty('iconContentStyle', iconContentStyle));
+      ..add(DiagnosticsProperty('iconContentStyle', iconContentStyle))
+      ..add(DiagnosticsProperty('spinnerStyle', spinnerStyle));
   }
 
   @override
@@ -293,7 +304,8 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
           enabledHoverBoxDecoration == other.enabledHoverBoxDecoration &&
           disabledBoxDecoration == other.disabledBoxDecoration &&
           contentStyle == other.contentStyle &&
-          iconContentStyle == other.iconContentStyle;
+          iconContentStyle == other.iconContentStyle &&
+          spinnerStyle == other.spinnerStyle;
 
   @override
   int get hashCode =>
@@ -301,7 +313,8 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       enabledHoverBoxDecoration.hashCode ^
       disabledBoxDecoration.hashCode ^
       contentStyle.hashCode ^
-      iconContentStyle.hashCode;
+      iconContentStyle.hashCode ^
+      spinnerStyle.hashCode;
 }
 
 /// A button's data.

@@ -94,6 +94,10 @@ final class FButtonStyles with Diagnosticable {
               enabledColor: colorScheme.secondaryForeground,
               disabledColor: colorScheme.disable(colorScheme.secondaryForeground),
             ),
+            spinnerStyle: FButtonSpinnerStyle.inherit(
+              enabled: colorScheme.secondaryForeground,
+              disabled: colorScheme.disable(colorScheme.secondaryForeground),
+            ),
           ),
           ghost: FButtonCustomStyle(
             enabledBoxDecoration: BoxDecoration(
@@ -114,6 +118,10 @@ final class FButtonStyles with Diagnosticable {
             iconContentStyle: FButtonIconContentStyle(
               enabledColor: colorScheme.secondaryForeground,
               disabledColor: colorScheme.disable(colorScheme.secondaryForeground),
+            ),
+            spinnerStyle: FButtonSpinnerStyle.inherit(
+              enabled: colorScheme.secondaryForeground,
+              disabled: colorScheme.disable(colorScheme.secondaryForeground),
             ),
           ),
         );
