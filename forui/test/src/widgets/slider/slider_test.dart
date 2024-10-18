@@ -84,13 +84,13 @@ void main() {
 
   group('range slider tooltip', () {
     Widget slider({FSliderSelection? selection}) => TestScaffold.app(
-      theme: FThemes.zinc.light,
-      child: FSlider(
-        controller: FContinuousSliderController.range(
-          selection: selection ?? FSliderSelection(max: 0.75),
-        ),
-      ),
-    );
+          theme: FThemes.zinc.light,
+          child: FSlider(
+            controller: FContinuousSliderController.range(
+              selection: selection ?? FSliderSelection(max: 0.75),
+            ),
+          ),
+        );
 
     testWidgets('long press thumb', (tester) async {
       await tester.pumpWidget(slider());
