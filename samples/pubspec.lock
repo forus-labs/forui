@@ -272,7 +272,7 @@ packages:
       path: "../forui"
       relative: true
     source: path
-    version: "0.6.0"
+    version: "0.6.1"
   forui_assets:
     dependency: "direct overridden"
     description:
