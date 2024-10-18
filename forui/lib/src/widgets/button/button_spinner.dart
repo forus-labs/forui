@@ -1,23 +1,39 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// An animated spinner icon.
 ///
 /// Typically used with an [FButton] as a prefixIcon. The spinner will rotate indefinitely.
-/// The spinner's color and size are determined by the parent button's [FButtonCustomStyle].
+/// The spinner's color and size defaults to the parent button's [FButtonStyle].
 ///
 /// See:
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButton] for creating a button.
 /// * [FButtonCustomStyle] for customizing a button's appearance.
 class FButtonSpinner extends StatefulWidget {
+  /// The style. Defaults to the parent button's [FButtonSpinnerStyle].
+  ///
+  /// Typically used to change the size and animation duration of the spinner.
+  final FButtonSpinnerStyle? style;
+
   /// Creates a button spinner.
-  const FButtonSpinner({super.key});
+  const FButtonSpinner({
+    this.style,
+    super.key,
+  });
 
   @override
   State<FButtonSpinner> createState() => _FButtonSpinnerState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
+  }
 }
 
 class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProviderStateMixin {
@@ -25,11 +41,12 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
   late Animation<double> _animation;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final FButtonData(:style) = FButtonData.of(context);
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: widget.style?.animationDuration ?? style.spinnerStyle.animationDuration,
     )
       ..forward()
       ..repeat();
@@ -38,7 +55,8 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(:enabled, :style) = FButtonData.of(context);
+    final data = FButtonData.of(context);
+    final style = widget.style ?? data.style.spinnerStyle;
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, child) => Transform.rotate(
@@ -47,8 +65,8 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
       ),
       child: FIcon(
         FAssets.icons.loaderCircle,
-        color: enabled ? style.contentStyle.enabledIconColor : style.contentStyle.disabledIconColor,
-        size: style.contentStyle.iconSize,
+        color: data.enabled ? style.enabledSpinnerColor : style.enabledSpinnerColor,
+        size: style.spinnerSize,
         semanticLabel: 'Button Spinner',
       ),
     );
@@ -59,4 +77,75 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
     _controller.dispose();
     super.dispose();
   }
+}
+
+/// [FButton] spinner's style.
+final class FButtonSpinnerStyle with Diagnosticable {
+  /// The animation duration. Defaults to `Duration(seconds: 1)`.
+  final Duration animationDuration;
+
+  /// The spinner's color when this button is enabled.
+  final Color enabledSpinnerColor;
+
+  /// The spinner's color when this button is disabled.
+  final Color disabledSpinnerColor;
+
+  /// The spinner's size. Defaults to 20.
+  final double spinnerSize;
+
+  /// Creates a [FButtonSpinnerStyle].
+  FButtonSpinnerStyle({
+    required this.enabledSpinnerColor,
+    required this.disabledSpinnerColor,
+    this.animationDuration = const Duration(seconds: 1),
+    this.spinnerSize = 20,
+  });
+
+  /// Creates a [FButtonSpinnerStyle] that inherits its properties from the given [enabled] and [disabled].
+  FButtonSpinnerStyle.inherit({
+    required Color enabled,
+    required Color disabled,
+  }) : this(
+          enabledSpinnerColor: enabled,
+          disabledSpinnerColor: disabled,
+        );
+
+  /// Returns a copy of this [FButtonSpinnerStyle] with the given properties replaced.
+  @useResult
+  FButtonSpinnerStyle copyWith({
+    Duration? animationDuration,
+    Color? enabledSpinnerColor,
+    Color? disabledSpinnerColor,
+    double? spinnerSize,
+  }) =>
+      FButtonSpinnerStyle(
+        animationDuration: animationDuration ?? this.animationDuration,
+        enabledSpinnerColor: enabledSpinnerColor ?? this.enabledSpinnerColor,
+        disabledSpinnerColor: disabledSpinnerColor ?? this.disabledSpinnerColor,
+        spinnerSize: spinnerSize ?? this.spinnerSize,
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('animationDuration', animationDuration))
+      ..add(ColorProperty('enabledColor', enabledSpinnerColor))
+      ..add(ColorProperty('disabledColor', disabledSpinnerColor))
+      ..add(DoubleProperty('size', spinnerSize, defaultValue: 20));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FButtonSpinnerStyle &&
+          runtimeType == other.runtimeType &&
+          animationDuration == other.animationDuration &&
+          enabledSpinnerColor == other.enabledSpinnerColor &&
+          disabledSpinnerColor == other.disabledSpinnerColor &&
+          spinnerSize == other.spinnerSize;
+
+  @override
+  int get hashCode =>
+      animationDuration.hashCode ^ enabledSpinnerColor.hashCode ^ disabledSpinnerColor.hashCode ^ spinnerSize.hashCode;
 }
