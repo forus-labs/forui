@@ -82,6 +82,41 @@ void main() {
     });
   });
 
+  group('range slider tooltip', () {
+    Widget slider({FSliderSelection? selection}) => TestScaffold.app(
+      data: FThemes.zinc.light,
+      child: FSlider(
+        controller: FContinuousSliderController.range(
+          selection: selection ?? FSliderSelection(max: 0.75),
+        ),
+      ),
+    );
+
+    testWidgets('long press thumb', (tester) async {
+      await tester.pumpWidget(slider());
+
+      await tester.longPress(find.byType(Thumb).first);
+      expect(find.byType(Text), findsOneWidget);
+
+      await tester.longPress(find.byType(Thumb).last);
+      expect(find.byType(Text), findsOneWidget);
+    });
+
+    testWidgets('press active track', (tester) async {
+      await tester.pumpWidget(slider());
+
+      await tester.press(find.byType(ActiveTrack));
+      expect(find.byType(Text), findsNothing);
+    });
+
+    testWidgets('press inactive track', (tester) async {
+      await tester.pumpWidget(slider(selection: FSliderSelection(max: 0.25)));
+
+      await tester.press(find.byType(Track));
+      expect(find.byType(Text), findsNothing);
+    });
+  });
+
   for (final layout in Layout.values) {
     Widget slider(FSliderController controller) => TestScaffold.app(
           data: FThemes.zinc.light,
