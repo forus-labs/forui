@@ -1,7 +1,13 @@
+
 ## 0.7.0
 
 ### Additions
 * Add `FButtonSpinner`.
+
+
+## 0.6.1
+
+* Fix range slider not displaying tooltip for minimum thumb.
 
 ## 0.6.0
 
