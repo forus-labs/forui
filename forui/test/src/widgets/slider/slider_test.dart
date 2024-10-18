@@ -14,7 +14,7 @@ void main() {
       FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
     }) =>
         TestScaffold.app(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: FSlider(
             controller: FContinuousSliderController(
               selection: selection ?? FSliderSelection(max: 0.75),
@@ -84,7 +84,7 @@ void main() {
 
   group('range slider tooltip', () {
     Widget slider({FSliderSelection? selection}) => TestScaffold.app(
-      data: FThemes.zinc.light,
+      theme: FThemes.zinc.light,
       child: FSlider(
         controller: FContinuousSliderController.range(
           selection: selection ?? FSliderSelection(max: 0.75),
@@ -119,8 +119,7 @@ void main() {
 
   for (final layout in Layout.values) {
     Widget slider(FSliderController controller) => TestScaffold.app(
-          data: FThemes.zinc.light,
-          // background: background,
+          theme: FThemes.zinc.light,
           child: FSlider(
             layout: layout,
             controller: controller,

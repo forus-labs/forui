@@ -14,7 +14,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: FTappable(
             focusNode: focusNode,
             builder: (_, value, __) => Text('$value'),
@@ -31,7 +31,7 @@ void main() {
     testWidgets('hovered', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: FTappable(
             builder: (_, value, __) => Text('$value'),
           ),
@@ -58,7 +58,7 @@ void main() {
     testWidgets('long pressed', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: FTappable(
             builder: (_, value, __) => Text('$value'),
           ),
