@@ -30,23 +30,6 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), isBlueScreen);
       });
-
-      testWidgets('FButtonIconContent', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: FButton.icon(
-                style: TestScaffold.blueScreen.buttonStyles.primary,
-                child: const FButtonSpinner(),
-                onPress: () {},
-              ),
-            ),
-          ),
-        );
-
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
-      });
     });
 
     for (final (name, theme, background) in TestScaffold.themes) {

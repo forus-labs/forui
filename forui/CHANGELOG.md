@@ -1,9 +1,12 @@
+## 0.7.0
+
+### Additions
+* Add `FButtonSpinner`.
+
 ## 0.6.0
 
 ### Additions
 * Add `FAccordion`.
-
-* Add `FButtonSpinner`.
 
 * Add `FSlider`.
 

@@ -17,10 +17,10 @@ class FButtonSpinner extends StatefulWidget {
   const FButtonSpinner({super.key});
 
   @override
-  State<FButtonSpinner> createState() => _ExampleState();
+  State<FButtonSpinner> createState() => _FButtonSpinnerState();
 }
 
-class _ExampleState extends State<FButtonSpinner> with SingleTickerProviderStateMixin {
+class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
