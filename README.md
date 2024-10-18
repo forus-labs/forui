@@ -12,6 +12,7 @@
   <a href="https://pub.dev/packages/forui"><img alt="Pub Version" src="https://img.shields.io/pub/v/forui?style=flat&logo=dart&label=pub.dev&color=00589B"></a>
   <a href="https://github.com/forus-labs/forui"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/forus-labs/forui?style=flat&logo=github&color=8957e5&link=https%3A%2F%2Fgithub.com%2Fforus-labs%2Fforui"></a>
   <a href="https://github.com/forus-labs/forui"><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/forus-labs/forui?style=flat&logo=github"></a>
+  <a href="https://discord.gg/jrw3qHksjE"><img alt="Discord Server" src="https://dcbadge.limes.pink/api/server/https://discord.gg/jrw3qHksjE?style=flat&theme=default-inverted"></a>
 </p>
 
 <p align="center">
