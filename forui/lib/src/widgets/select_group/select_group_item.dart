@@ -62,13 +62,10 @@ abstract class FSelectGroupItem<T> extends StatelessWidget {
     required ValueWidgetBuilder<FSelectGroupItemState<T>> builder,
     Widget? child,
     Key? key,
-  }) = _Builder;
+  }) = _Builder<T>;
 
   /// Creates a checkbox wrapped in a [FSelectGroupItem].
-  // TODO: Making this const causes a false positive in the list_element_type_not_assignable lint when declared
-  //       in a const list inside FSelectGroup. I still can't replicate this issue in other cases.
-  // ignore: prefer_const_constructors_in_immutables
-  factory FSelectGroupItem.checkbox({
+  const factory FSelectGroupItem.checkbox({
     required T value,
     FCheckboxSelectGroupStyle? style,
     Widget? label,
@@ -80,13 +77,10 @@ abstract class FSelectGroupItem<T> extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     Key? key,
-  }) = _Checkbox;
+  }) = _Checkbox<T>;
 
   /// Creates a radio button wrapped in a [FSelectGroupItem].
-  // TODO: Making this const causes a false positive in the list_element_type_not_assignable lint when declared
-  //       in a const list inside FSelectGroup. I still can't replicate this issue in other cases.
-  // ignore: prefer_const_constructors_in_immutables
-  factory FSelectGroupItem.radio({
+  const factory FSelectGroupItem.radio({
     required T value,
     FRadioSelectGroupStyle? style,
     Widget? label,
@@ -98,7 +92,7 @@ abstract class FSelectGroupItem<T> extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     Key? key,
-  }) = _Radio;
+  }) = _Radio<T>;
 
   const FSelectGroupItem._({required this.value, super.key});
 
