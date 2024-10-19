@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: [
                 FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -29,7 +29,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: [
                 FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -45,7 +45,7 @@ void main() {
     testWidgets('not embedded in any App', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: FTabs(
             tabs: [
               FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -67,7 +67,7 @@ void main() {
             DefaultWidgetsLocalizations.delegate,
           ],
           child: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: [
                 FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -84,7 +84,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: const [
                 FTabEntry(label: Text('foo'), content: Text('foo content')),
@@ -109,7 +109,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: const [
                 FTabEntry(label: Text('foo'), content: Text('foo content')),
@@ -134,7 +134,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FTabs(
               controller: controller,
               tabs: const [

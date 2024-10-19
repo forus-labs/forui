@@ -25,7 +25,7 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: FScaffold(
               header: buildColor(Colors.red),
@@ -35,10 +35,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('scaffold/$name-scaffold.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/$name-scaffold.png'));
       });
     }
   });

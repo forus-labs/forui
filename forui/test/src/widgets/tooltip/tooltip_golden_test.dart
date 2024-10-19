@@ -10,14 +10,15 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  for (final (name, theme, _) in TestScaffold.themes) {
+  for (final (name, theme, background) in TestScaffold.themes) {
     group('FTooltip', () {
       testWidgets('$name hidden ', (tester) async {
         final controller = FTooltipController(vsync: const TestVSync());
 
         await tester.pumpWidget(
           TestScaffold.app(
-            data: theme,
+            theme: theme,
+            background: background,
             child: FTooltip(
               controller: controller,
               tipBuilder: (context, style, _) => const Text('Lorem'),
@@ -31,7 +32,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/hidden-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/$name-hidden.png'));
       });
 
       testWidgets('$name shown on touch devices', (tester) async {
@@ -39,7 +40,8 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold.app(
-            data: theme,
+            theme: theme,
+            background: background,
             child: FTooltip(
               controller: controller,
               tipBuilder: (context, style, _) => const Text('Lorem'),
@@ -61,7 +63,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(ColoredBox).first));
         await tester.pumpAndSettle(const Duration(seconds: 5));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/shown-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/$name-shown.png'));
       });
     });
   }
