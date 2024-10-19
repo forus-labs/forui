@@ -13,7 +13,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            data: FThemes.zinc.light,
+            theme: FThemes.zinc.light,
             child: FAccordion(
               items: [
                 FAccordionItem(

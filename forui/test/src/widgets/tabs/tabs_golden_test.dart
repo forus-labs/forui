@@ -42,11 +42,12 @@ void main() {
       await expectLater(find.byType(TestScaffold), isBlueScreen);
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final (name, theme, background) in TestScaffold.themes) {
       testWidgets('default - $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
-            data: theme,
+            theme: theme,
+            background: background,
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

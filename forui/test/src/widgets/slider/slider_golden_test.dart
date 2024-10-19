@@ -49,7 +49,7 @@ void main() {
 
               await tester.pumpWidget(
                 TestScaffold.app(
-                  data: theme,
+                  theme: theme,
                   child: FSlider(
                     style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                     label: const Text('Label'),
@@ -80,7 +80,7 @@ void main() {
               await expectLater(
                 find.byType(TestScaffold),
                 matchesGoldenFile(
-                  'slider/range-slider/$name-$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
+                  'slider/range-slider/$name/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
                 ),
               );
             });
@@ -96,7 +96,7 @@ void main() {
 
             await tester.pumpWidget(
               TestScaffold.app(
-                data: theme,
+                theme: theme,
                 child: FSlider(
                   style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                   label: const Text('Label'),
@@ -127,7 +127,7 @@ void main() {
             await expectLater(
               find.byType(TestScaffold),
               matchesGoldenFile(
-                'slider/range-slider/$name-$layout-${touch ? 'touch' : 'desktop'}-error.png',
+                'slider/range-slider/$name/$layout-${touch ? 'touch' : 'desktop'}-error.png',
               ),
             );
           });
@@ -140,7 +140,7 @@ void main() {
         testWidgets('single value - $layout - ${min ? 'min' : 'max'}', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FSlider(
                 controller: FContinuousSliderController(
                   minExtendable: min,
@@ -226,7 +226,7 @@ void main() {
         testWidgets('symmetric padding', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FSlider(
                 controller: FContinuousSliderController(
                   selection: FSliderSelection(min: 0.30, max: 0.60),
@@ -246,7 +246,7 @@ void main() {
         testWidgets('asymmetric cross axis padding - $layout', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FSlider(
                 style: sliderStyle.copyWith(
                   labelLayoutStyle: sliderStyle.labelLayoutStyle.copyWith(
@@ -271,7 +271,7 @@ void main() {
         testWidgets('labelled', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              data: FThemes.zinc.light,
+              theme: FThemes.zinc.light,
               child: FSlider(
                 label: const Text('Label'),
                 description: const Text('Description'),
@@ -296,7 +296,7 @@ void main() {
     testWidgets('interweaving marks with no labels', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          data: FThemes.zinc.light,
+          theme: FThemes.zinc.light,
           child: FSlider(
             controller: FContinuousSliderController(
               selection: FSliderSelection(min: 0.30, max: 0.60),

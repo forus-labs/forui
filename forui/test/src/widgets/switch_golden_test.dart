@@ -15,7 +15,7 @@ void main() {
         testWidgets('$name - $checked - unfocused', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: Center(
                 child: SizedBox(
                   width: 300,
@@ -32,14 +32,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('switch/$name-$checked-unfocused-switch.png'),
+            matchesGoldenFile('switch/$name/$checked-unfocused.png'),
           );
         });
 
         testWidgets('$name - $checked - focused', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: Center(
                 child: SizedBox(
                   width: 300,
@@ -57,14 +57,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('switch/$name-$checked-focused-switch.png'),
+            matchesGoldenFile('switch/$name/$checked-focused.png'),
           );
         });
 
         testWidgets('$name - $checked - disabled', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: Center(
                 child: SizedBox(
                   width: 300,
@@ -83,14 +83,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('switch/$name-$checked-disabled-switch.png'),
+            matchesGoldenFile('switch/$name/$checked-disabled.png'),
           );
         });
 
         testWidgets('$name - $checked - error', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: Center(
                 child: SizedBox(
                   width: 300,
@@ -110,7 +110,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('switch/$name-$checked-error-switch.png'),
+            matchesGoldenFile('switch/$name/$checked-error.png'),
           );
         });
       }
