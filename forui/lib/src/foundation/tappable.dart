@@ -151,6 +151,7 @@ class _FTappableState extends State<FTappable> {
           child: Listener(
             onPointerDown: (_) async {
               final count = ++_monotonic;
+              onPointerDown();
               await Future.delayed(widget.touchHoverEnterDuration);
               if (mounted && count == _monotonic && !_touchHovered) {
                 setState(() => _touchHovered = true);
@@ -158,6 +159,7 @@ class _FTappableState extends State<FTappable> {
             },
             onPointerUp: (_) async {
               final count = ++_monotonic;
+              onPointerUp();
               await Future.delayed(widget.touchHoverExitDuration);
               if (mounted && count == _monotonic && _touchHovered) {
                 setState(() => _touchHovered = false);
@@ -181,6 +183,10 @@ class _FTappableState extends State<FTappable> {
       ),
     );
   }
+
+  void onPointerDown() {}
+
+  void onPointerUp() {}
 
   Widget get _child => GestureDetector(
         behavior: widget.behavior,
@@ -220,25 +226,21 @@ class _AnimatedTappableState extends _FTappableState with SingleTickerProviderSt
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    _animation = Tween(begin: 1.0, end: 0.97).animate(_controller)
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          _controller.reverse();
-        }
-      });
+    _animation = Tween(begin: 1.0, end: 0.97).animate(_controller);
   }
+
+  @override
+  void onPointerDown() => _controller.forward();
+
+  @override
+  void onPointerUp() => _controller.reverse();
 
   @override
   Widget get _child => ScaleTransition(
         scale: _animation,
         child: GestureDetector(
           behavior: widget.behavior,
-          onTap: widget.onPress == null
-              ? null
-              : () {
-                  widget.onPress!();
-                  _controller.forward();
-                },
+          onTap: widget.onPress,
           onLongPress: widget.onLongPress,
           child: widget.builder(context, (focused: _focused, hovered: _hovered || _touchHovered), widget.child),
         ),

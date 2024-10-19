@@ -20,56 +20,37 @@ class _SandboxState extends State<Sandbox> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          FTileGroup(
-            label: const Text('Network'),
-            children: [
-              FTile(
-                prefixIcon: FIcon(FAssets.icons.wifi),
-                title: const Text('WiFi'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
-              FTile(
-                prefixIcon: FIcon(
-                  FAssets.icons.bluetooth,
-                  size: 30,
-                ),
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
-              FTile(
-                prefixIcon: const FIcon.data(Icons.add_circle_outline),
-                title: const Text('WiFi'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
-              FTile(
-                prefixIcon: FIcon(FAssets.icons.ghost),
-                title: const Text('Extremely Long Verbose Wide Title'),
-                details: const FSwitch(),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
-            ],
+  Widget build(BuildContext context) {
+    final actions = [
+      FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+      FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+    ];
+
+    final style = context.theme.dialogStyle;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IntrinsicWidth(
+          child: FButton(
+            label: const Text('Show Dialog'),
+            onPress: () => showAdaptiveDialog(
+              context: context,
+              builder: (context) {
+                final direction = MediaQuery.sizeOf(context).width < 600 ? Axis.vertical : Axis.horizontal;
+                return FDialog(
+                  style: style,
+                  direction: direction,
+                  title: const Text('Are you absolutely sure?'),
+                  body: const Text(
+                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                  ),
+                  actions: actions,
+                );
+              },
+            ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          FTile(
-            prefixIcon: FIcon(FAssets.icons.bluetooth),
-            title: const Text('Title'),
-            subtitle: const Text('L                                         ong'),
-            details: const Text('Forus Labs (5G)'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () {},
-          ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 }
