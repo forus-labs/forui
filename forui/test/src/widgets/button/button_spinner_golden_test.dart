@@ -37,7 +37,7 @@ void main() {
         testWidgets('$name with enabled button spinner', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -60,7 +60,7 @@ void main() {
         testWidgets('$name with disabled button spinner', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
