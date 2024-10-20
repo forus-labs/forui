@@ -4,6 +4,8 @@
 
 * Add `FButtonSpinner`.
 
+* Add `FBreakpoints`.
+
 * Add `FTile`.
 
 * Add `FTileGroup`.
