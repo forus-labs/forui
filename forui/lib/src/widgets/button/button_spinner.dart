@@ -44,7 +44,6 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
   late FButtonSpinnerStyle _style;
   late FButtonData _data;
 
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
