@@ -41,12 +41,16 @@ class FButtonSpinner extends StatefulWidget {
 class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
-  late final FButtonSpinnerStyle _style;
+  late FButtonSpinnerStyle _style;
+  late FButtonData _data;
+
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _style = widget.style ?? FButtonData.of(context).style.spinnerStyle;
+    _data = FButtonData.of(context);
+    _style = widget.style ?? _data.style.spinnerStyle;
+
     _controller = AnimationController(
       vsync: this,
       duration: _style.animationDuration,
@@ -65,7 +69,7 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
         ),
         child: FIcon(
           FAssets.icons.loaderCircle,
-          color: FButtonData.of(context).enabled ? _style.enabledSpinnerColor : _style.enabledSpinnerColor,
+          color: _data.enabled ? _style.enabledSpinnerColor : _style.enabledSpinnerColor,
           size: _style.spinnerSize,
           semanticLabel: 'Button Spinner',
         ),
