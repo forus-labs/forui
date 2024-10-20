@@ -15,7 +15,7 @@ void main() {
         testWidgets('$name - $lineCalendar', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
