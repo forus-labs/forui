@@ -6,13 +6,9 @@ import 'package:forui/src/widgets/line_calendar/line_calendar_tile.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
-import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
-import 'package:forui/src/foundation/util.dart';
+import 'package:forui/forui.dart' hide FLineCalendar, FLineCalendarContentStyle, FLineCalendarStyle;
 
-final _start = (DateTime(1900), null);
 const _textSpacing = 2.0;
-
 
 /// A calendar that can be scrolled horizontally.
 class FLineCalendar extends StatefulWidget {
@@ -20,24 +16,14 @@ class FLineCalendar extends StatefulWidget {
   final FLineCalendarStyle? style;
 
   /// The currently selected [LocalDate].
-  final ValueNotifier<LocalDate> selected;
-
-  /// The first date in this calendar carousel. Defaults to 1st January 1900.
-  final LocalDate start;
-
-  /// Today's date. Defaults to the [LocalDate.now].
-  final LocalDate today;
+  final FLineCalendarController controller;
 
   /// Creates a [FLineCalendar].
-  FLineCalendar({
-    required ValueNotifier<DateTime> selected,
-    DateTime? start,
-    DateTime? today,
+  const FLineCalendar({
+    required this.controller,
     this.style,
     super.key,
-  })  : selected = ValueNotifier(selected.value.toLocalDate()),
-        start = start != null ? LocalDate(start.year, start.month, start.day) : _start,
-        today = today != null ? LocalDate(today.year, today.month, today.day) : LocalDate.now();
+  });
 
   @override
   State<FLineCalendar> createState() => _FLineCalendarState();
@@ -47,62 +33,68 @@ class FLineCalendar extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('epoch', start))
-      ..add(DiagnosticsProperty('today', today));
-    properties.add(DiagnosticsProperty<ValueNotifier<LocalDate>>('selected', selected));
+      ..add(DiagnosticsProperty('controller', controller));
   }
 }
 
 class _FLineCalendarState extends State<FLineCalendar> {
-  ScrollController _controller = ScrollController();
+  late ScrollController _controller;
+  late double _size;
+  late FLineCalendarStyle _style;
 
   @override
   void didChangeDependencies() {
+    _style = widget.style ?? FTheme.of(context).lineCalendarStyle;
+    _size = _calculateSize(context, _style);
+
+    // TODO: calculate the initial offset based on the selected date. Should this be placed in the controller?
+    final offset =
+        (widget.controller.value.difference(widget.controller.start).inDays - 2) * _size + _style.itemPadding;
+    _controller = ScrollController(initialScrollOffset: offset);
+
     final textDirection = Directionality.of(context);
-    widget.selected.addListener(() => onDateChange(textDirection));
+    widget.controller.addListener(() => _onDateChange(textDirection));
+
     super.didChangeDependencies();
   }
 
-  void onDateChange(TextDirection textDirection) {
+  // TODO: calculate width of items based on the text font size.
+  double _calculateSize(BuildContext context, FLineCalendarStyle style) {
+    final textScalor = MediaQuery.textScalerOf(context);
+    final dateTextSize = textScalor.scale(style.content.unselectedDateTextStyle.fontSize!);
+    final dayTextSize = textScalor.scale(style.content.unselectedDayTextStyle.fontSize!);
+    return dateTextSize + dayTextSize + _textSpacing + (style.content.verticalPadding * 2);
+  }
+
+  void _onDateChange(TextDirection textDirection) {
     setState(() {
       //TODO: localizations.
-      SemanticsService.announce(widget.selected.value.toString(), textDirection);
+      SemanticsService.announce(widget.controller.value.toString(), textDirection);
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.lineCalendarStyle;
-
-    // TODO: calculate width of items based on the text font size.
-    final textScalor = MediaQuery.textScalerOf(context);
-    final dateTextSize = textScalor.scale(style.content.unselectedDateTextStyle.fontSize!);
-    final dayTextSize = textScalor.scale(style.content.unselectedDayTextStyle.fontSize!);
-    final size = dateTextSize + dayTextSize + _textSpacing + (style.content.verticalPadding * 2);
-
-    final offset = (widget.selected.value.difference(widget.start).inDays - 2) * size + style.itemPadding;
-    _controller = ScrollController(initialScrollOffset: offset);
-
-    return SizedBox(
-      height: size,
-      child: ListView.builder(
-        controller: _controller,
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.zero,
-        // TODO: calculate width of items based on the text font size.
-        itemExtent: size,
-        itemBuilder: (context, index) => Container(
-          padding: EdgeInsets.symmetric(horizontal: style.itemPadding),
-          child: FlineCalendarTile(
-            style: style,
-            selected: widget.selected,
-            date: widget.start.add(Duration(days: index)),
-            today: widget.today,
-          ),
+  Widget build(BuildContext context) => SizedBox(
+        height: _size,
+        child: ListView.builder(
+          controller: _controller,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.zero,
+          itemExtent: _size,
+          itemBuilder: (context, index) {
+            final date = widget.controller.start.add(Duration(days: index));
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: _style.itemPadding),
+              child: FlineCalendarTile(
+                style: _style,
+                controller: widget.controller,
+                date: date,
+                isToday: widget.controller.isToday(date),
+              ),
+            );
+          },
         ),
-      ),
-    );
-  }
+      );
 
   @override
   void dispose() {
@@ -110,7 +102,6 @@ class _FLineCalendarState extends State<FLineCalendar> {
     super.dispose();
   }
 }
-
 
 /// [FLineCalendar]'s style.
 final class FLineCalendarStyle with Diagnosticable {
