@@ -67,3 +67,15 @@ class ButtonOnlyIconPage extends SampleScaffold {
         ),
       );
 }
+
+@RoutePage()
+class ButtonSpinnerPage extends SampleScaffold {
+  ButtonSpinnerPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => IntrinsicWidth(
+        child: FButton(prefix: const FButtonSpinner(), onPress: null, label: const Text('Please wait')),
+      );
+}

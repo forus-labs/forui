@@ -2,6 +2,8 @@
 
 ### Additions
 
+* Add `FButtonSpinner`.
+
 * Add `FTile`.
 
 * Add `FTileGroup`.
@@ -11,7 +13,6 @@
 * Change FButton's animation to only start on mouse down and up.
   [Reddit Comment](https://www.reddit.com/r/FlutterDev/comments/1g5tmu5/comment/lsm4gsd/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button).
 
-
 ## 0.6.1
 
 * Fix range slider not displaying tooltip for minimum thumb.
@@ -19,6 +20,7 @@
 ## 0.6.0
 
 ### Additions
+
 * Add `FAccordion`.
 
 * Add `FSlider`.
@@ -51,7 +53,7 @@
 
 * Change button to change color when hovering over it.
 
-* Change `FCalendar` year  picker to update the header whenever a year is selected.
+* Change `FCalendar` year picker to update the header whenever a year is selected.
 
 * Increase `FCalendar`'s default text size from `FTypography.sm` to `FTypography.base`.
 
@@ -70,9 +72,9 @@
 
 * **Breaking** Remove FAlertIcon & FAlertIconStyle - use `FIcon` instead.
 
-* **Breaking** Remove FButtonIcon & FAlertIconStyle  - use `FIcon` instead.
+* **Breaking** Remove FButtonIcon & FAlertIconStyle - use `FIcon` instead.
 
-* **Breaking** Change FButtonCustomStyle to better represent the style's layout - this will only affect users that 
+* **Breaking** Change FButtonCustomStyle to better represent the style's layout - this will only affect users that
   create a custom `FButtonCustomStyle`.
 
 * **Breaking** Change `FBottomNavigationBarItem.icon` from `SvgAsset` to `Widget` - wrap the asset in ` FIcon` instead.
@@ -127,14 +129,12 @@
 
 * Fix `FSelectGroup` not applying correct style if a custom widget-specific style is given.
 
-
 ## 0.5.1
 
 ###
 
-* Fix `FTabs` not showing correct tab entry when switching tabs. 
- [Issue #203](https://github.com/forus-labs/forui/issues/203).
-
+* Fix `FTabs` not showing correct tab entry when switching tabs.
+  [Issue #203](https://github.com/forus-labs/forui/issues/203).
 
 ## 0.5.0
 
@@ -201,12 +201,12 @@ The minimum Flutter version has been increased from `3.19.0` to `3.24.0`.
 * Change `FTabController` to implement `ChangeNotifier` instead of `Listenable`.
 
 * **Breaking:** Flattened `FStyle.formFieldStyle` - use `FStyle.enabledFormFieldStyle`, `FStyle.disabledFormFieldStyle`,
-and`FStyle.errorFormFieldStyle`.
+  and`FStyle.errorFormFieldStyle`.
 
 * Improve platform detection for web when initializing platform-specific variables.
 
-* **Breaking:** `FCheckbox` and `FSwitch` no longer wraps `FormField` - consider wrapping them in a `FormField` if 
-required.
+* **Breaking:** `FCheckbox` and `FSwitch` no longer wraps `FormField` - consider wrapping them in a `FormField` if
+  required.
 
 * **Breaking:** Require `FTheme` to be wrapped in a `CupertinoApp`, `MaterialApp` or `WidgetsApp`.
 
@@ -222,14 +222,14 @@ required.
 
 * Fix `FTabs` not handling indexes properly.
 
-
 ## 0.4.0
 
 ### Additions
 
 * Add `FAvatar`.
 
-* **Breaking:** Add `FCalendarEntryStyle.focusedBorderColor`. This only affects users that customized `FCalendarEntryStyle`.
+* **Breaking:** Add `FCalendarEntryStyle.focusedBorderColor`. This only affects users that
+  customized `FCalendarEntryStyle`.
 
 * Add `FResizable`.
 
@@ -270,7 +270,6 @@ required.
 
 * Fix `FCalendar` dates sometimes not being navigable using arrow keys.
 
-
 ## 0.3.0
 
 ### Additions
@@ -291,13 +290,11 @@ required.
 
 * Fix missing `style` parameter for `FCheckbox`.
 
-
 ## 0.2.0+3
 
 ### Fixes
 
 * Fix broken images in README.md (yet again).
-
 
 ## 0.2.0+2
 
@@ -305,13 +302,11 @@ required.
 
 * Fix broken images in README.md.
 
-
 ## 0.2.0+1
 
 ### Fixes
 
 * Fix broken images in README.md.
-
 
 ## 0.2.0
 
@@ -329,10 +324,10 @@ required.
 
 * **Breaking** Move `FHeaderActionStyle.padding` to `FRootHeaderStyle.actionSpacing`.
 
-* **Breaking** Suffix style parameters with `Style`, i.e. `FRootHeaderStyle.action` has been renamed to 
+* **Breaking** Suffix style parameters with `Style`, i.e. `FRootHeaderStyle.action` has been renamed to
   `FRootHeaderStyle.actionStyle`.
 
-* **Breaking** Raw fields have been removed, wrap strings with the Text() widget. E.g. `FButton(label: 'Hello')` or 
+* **Breaking** Raw fields have been removed, wrap strings with the Text() widget. E.g. `FButton(label: 'Hello')` or
   `FButton(rawLabel: 'Hello')` should be replaced with `FButton(label: Text('Hello'))`.
 
 * Change `FTextField` to be usable in `Form`s.
@@ -348,7 +343,6 @@ required.
 * **Breaking** `FButton.prefixIcon` and `FButton.suffixIcon` have been renamed to `FButton.prefix` and `FButton.suffix`.
 
 * Fix padding inconsistencies in `FCard` and `FDialog`.
-
 
 ## 0.1.0
 
