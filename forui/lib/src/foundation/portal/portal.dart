@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 /// relative to the target.
 ///
 /// See:
-/// * [FPortalFollowerShift] for the various follower shifting strategies.
+/// * [FPortalFollowerShift] for shifting strategies when a follower overflows outside of the viewport.
 /// * [OverlayPortalController] for controlling the follower's visibility.
 /// * [OverlayPortal] for the underlying widget.
 class FPortal extends StatefulWidget {
@@ -26,7 +26,7 @@ class FPortal extends StatefulWidget {
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
   /// [FPortalFollowerShift.flip].
   ///
-  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
+  /// See [FPortalFollowerShift] for the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
   /// The follower.
@@ -63,13 +63,7 @@ class FPortal extends StatefulWidget {
 }
 
 class _State extends State<FPortal> {
-  late LayerLink _link;
-
-  @override
-  void initState() {
-    super.initState();
-    _link = LayerLink();
-  }
+  final LayerLink _link = LayerLink();
 
   @override
   Widget build(BuildContext context) => CompositedTransformTarget(

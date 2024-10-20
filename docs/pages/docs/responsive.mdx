@@ -1,0 +1,58 @@
+# Responsive
+
+Forui contains responsive breakpoints based on [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
+
+## Predefine Breakpoints
+
+| Breakpoint | 	Minimum width   | Accessor                     |
+|:-----------|:-----------------|:-----------------------------|
+| `xs`       | 0                | `FThemeData.breakpoints.xs`  |
+| `sm`       | 640              | `FThemeData.breakpoints.sm`  |
+| `md`       | 768              | `FThemeData.breakpoints.md`  |
+| `lg`       | 1024             | `FThemeData.breakpoints.lg`  |
+| `xl`       | 1280             | `FThemeData.breakpoints.xl`  |
+| `xl2`      | 1536             | `FThemeData.breakpoints.xl2` |
+
+## Usage
+
+```dart
+@override
+Widget build(BuildContext context) {
+  final theme = context.theme; // FThemeData
+  final size = MediaQuery.sizeOf(context); // Size
+
+  if (theme.breakpoints.sm.contains(size)) {
+    // Do something when the sm breakpoint is active.
+    return SizedBox.square(dimension: 100);
+    
+  } else {
+    return SizedBox.square(dimension: 500);
+  }
+}
+```
+
+## Custom Breakpoints
+
+Additional custom breakpoints can be added via an extension on the `FBreakpoints`:
+```dart
+extension CustomBreakpoints on FBreakpoints {
+  FBreakpoint get custom => const FBreakpoint(min: 100, max: 200);
+}
+```
+
+After which, the custom breakpoint can be accessed like so:
+```dart {6}
+@override
+Widget build(BuildContext context) {
+  final theme = context.theme; // FThemeData
+  final size = MediaQuery.sizeOf(context); // Size
+
+  if (theme.breakpoints.custom.contains(size)) {
+    // Do something when the custom breakpoint is active.
+    return SizedBox.square(dimension: 100);
+
+  } else {
+    return SizedBox.square(dimension: 500);
+  }
+}
+```
