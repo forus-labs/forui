@@ -40,7 +40,7 @@ void main() {
       testWidgets('$name with FRootHeader actions', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FHeader(

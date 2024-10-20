@@ -71,7 +71,7 @@ void main() {
         testWidgets('default - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -98,14 +98,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/day-picker/$name-default.png'),
+            matchesGoldenFile('calendar/$name/day-picker/default.png'),
           );
         });
 
         testWidgets('max rows - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -121,14 +121,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/day-picker/$name-max-rows.png'),
+            matchesGoldenFile('calendar/$name/day-picker/max-rows.png'),
           );
         });
 
         testWidgets('hovered and selected dates next to each other - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -155,14 +155,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/day-picker/$name-hovered-selected.png'),
+            matchesGoldenFile('calendar/$name/day-picker/hovered-selected.png'),
           );
         });
 
         testWidgets('disabled previous icon - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -180,7 +180,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/day-picker/$name-disabled-previous.png'),
+            matchesGoldenFile('calendar/$name/day-picker/disabled-previous.png'),
           );
         });
       });
@@ -189,7 +189,7 @@ void main() {
         testWidgets('default - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -217,7 +217,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/month-picker/$name-default.png'),
+            matchesGoldenFile('calendar/$name/month-picker/default.png'),
           );
         });
       });
@@ -226,7 +226,7 @@ void main() {
         testWidgets('default - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -243,14 +243,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/year-picker/$name-default.png'),
+            matchesGoldenFile('calendar/$name/year-picker/default.png'),
           );
         });
 
         testWidgets('initial date different from today - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              data: theme,
+              theme: theme,
               background: background,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -276,7 +276,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/year-picker/$name-initial-date.png'),
+            matchesGoldenFile('calendar/$name/year-picker/initial-date.png'),
           );
         });
       });

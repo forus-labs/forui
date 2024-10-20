@@ -37,7 +37,7 @@ void main() {
       testWidgets('forui icon - $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            data: theme,
+            theme: theme,
             background: background,
             child: FBottomNavigationBar(
               index: 2,
@@ -69,7 +69,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('bottom-navigation-bar/forui-icon-$name.png'),
+          matchesGoldenFile('bottom-navigation-bar/$name-forui-icon.png'),
         );
       });
     }

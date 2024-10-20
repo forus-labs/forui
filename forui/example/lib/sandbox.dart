@@ -20,58 +20,37 @@ class _SandboxState extends State<Sandbox> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          FAccordion(
-            controller: FAccordionController(max: 2),
-            items: [
-              FAccordionItem(
-                title: const Text('Title 1'),
-                initiallyExpanded: true,
-                child: const Text(
-                  'Yes. It adheres to the WAI-ARIA design pattern, wfihwe fdhfiwf dfhwiodf dfwhoif',
-                ),
-              ),
-              FAccordionItem(
-                title: const Text('Title 2'),
-                child: Container(
-                  width: 100,
-                  color: Colors.yellow,
-                  child: const Text(
-                    'Yes. It adheres to the WAI-ARIA design pattern geg wjfiweo dfjiowjf dfjio',
-                    textAlign: TextAlign.center,
+  Widget build(BuildContext context) {
+    final actions = [
+      FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+      FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+    ];
+
+    final style = context.theme.dialogStyle;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IntrinsicWidth(
+          child: FButton(
+            label: const Text('Show Dialog'),
+            onPress: () => showAdaptiveDialog(
+              context: context,
+              builder: (context) {
+                final direction = MediaQuery.sizeOf(context).width < 600 ? Axis.vertical : Axis.horizontal;
+                return FDialog(
+                  style: style,
+                  direction: direction,
+                  title: const Text('Are you absolutely sure?'),
+                  body: const Text(
+                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                   ),
-                ),
-              ),
-              FAccordionItem(
-                title: const Text('Title 3'),
-                child: const Text(
-                  'Yes. It adheres to the WAI-ARIA design pattern',
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              FAccordionItem(
-                title: const Text('Title 4'),
-                child: const Text(
-                  'Yes. It adheres to the WAI-ARIA design pattern',
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ],
+                  actions: actions,
+                );
+              },
+            ),
           ),
-          const SizedBox(height: 20),
-          FSelectGroup(
-            label: const Text('Select Group'),
-            description: const Text('Select Group Description'),
-            controller: FMultiSelectGroupController(min: 1, max: 2, values: {1}),
-            items: [
-              FSelectGroupItem.checkbox(value: 1, label: const Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
-              FSelectGroupItem.checkbox(value: 2, label: const Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
-              FSelectGroupItem.checkbox(value: 3, label: const Text('Checkbox 3'), semanticLabel: 'Checkbox 3'),
-            ],
-          ),
-          const SizedBox(height: 20),
-          FButton(prefix: const FButtonSpinner(), onPress: null, label: const Text('Hi')),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 }
