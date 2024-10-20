@@ -38,7 +38,7 @@ class FLineCalendar extends StatefulWidget {
 }
 
 class _FLineCalendarState extends State<FLineCalendar> {
-  late ScrollController _controller;
+  late FLineCalendarController _controller;
   late double _size;
   late FLineCalendarStyle _style;
 
@@ -46,11 +46,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
   void didChangeDependencies() {
     _style = widget.style ?? FTheme.of(context).lineCalendarStyle;
     _size = _calculateSize(context, _style);
-
-    // TODO: calculate the initial offset based on the selected date. Should this be placed in the controller?
-    final offset =
-        (widget.controller.value.difference(widget.controller.start).inDays - 2) * _size + _style.itemPadding;
-    _controller = ScrollController(initialScrollOffset: offset);
+    _controller = widget.controller.withInitialScrollOffset(_size, _style.itemPadding);
 
     final textDirection = Directionality.of(context);
     widget.controller.addListener(() => _onDateChange(textDirection));
@@ -77,7 +73,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
   Widget build(BuildContext context) => SizedBox(
         height: _size,
         child: ListView.builder(
-          controller: _controller,
+          controller: _controller.scrollController,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.zero,
           itemExtent: _size,
