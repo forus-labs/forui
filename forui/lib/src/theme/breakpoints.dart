@@ -22,7 +22,7 @@ import 'package:flutter/widgets.dart';
 /// }
 /// ```
 ///
-/// Additional custom breakpoints can be added via an extension on this class:
+/// Additional breakpoints can be added via an extension on this class:
 /// ```dart
 /// extension CustomBreakpoints on FBreakpoints {
 ///   FBreakpoint get custom => const FBreakpoint(min: 100, max: 200);
