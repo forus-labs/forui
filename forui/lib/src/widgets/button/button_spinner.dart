@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 
 /// An animated spinner icon.
 ///
-/// Typically used with an [FButton] as a prefixIcon. The spinner will rotate indefinitely.
+/// Should only be used with an [FButton] as a prefixIcon. The spinner will rotate indefinitely.
 /// The spinner's color and size defaults to the parent button's [FButtonStyle].
 ///
 /// See:
@@ -41,14 +41,15 @@ class FButtonSpinner extends StatefulWidget {
 class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+  late final FButtonSpinnerStyle _style;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final FButtonData(:style) = FButtonData.of(context);
+    _style = widget.style ?? FButtonData.of(context).style.spinnerStyle;
     _controller = AnimationController(
       vsync: this,
-      duration: widget.style?.animationDuration ?? style.spinnerStyle.animationDuration,
+      duration: _style.animationDuration,
     )
       ..forward()
       ..repeat();
@@ -56,23 +57,19 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
   }
 
   @override
-  Widget build(BuildContext context) {
-    final data = FButtonData.of(context);
-    final style = widget.style ?? data.style.spinnerStyle;
-    return AnimatedBuilder(
-      animation: _animation,
-      builder: (_, child) => Transform.rotate(
-        angle: _controller.value * 2 * math.pi,
-        child: child,
-      ),
-      child: FIcon(
-        FAssets.icons.loaderCircle,
-        color: data.enabled ? style.enabledSpinnerColor : style.enabledSpinnerColor,
-        size: style.spinnerSize,
-        semanticLabel: 'Button Spinner',
-      ),
-    );
-  }
+  Widget build(BuildContext context) => AnimatedBuilder(
+        animation: _animation,
+        builder: (_, child) => Transform.rotate(
+          angle: _controller.value * 2 * math.pi,
+          child: child,
+        ),
+        child: FIcon(
+          FAssets.icons.loaderCircle,
+          color: FButtonData.of(context).enabled ? _style.enabledSpinnerColor : _style.enabledSpinnerColor,
+          size: _style.spinnerSize,
+          semanticLabel: 'Button Spinner',
+        ),
+      );
 
   @override
   void dispose() {
@@ -83,7 +80,7 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
 
 /// [FButton] spinner's style.
 final class FButtonSpinnerStyle with Diagnosticable {
-  /// The animation duration. Defaults to `Duration(seconds: 1)`.
+  /// The animation duration. Defaults to 1 second`.
   final Duration animationDuration;
 
   /// The spinner's color when this button is enabled.
