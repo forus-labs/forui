@@ -17,7 +17,7 @@
 
 <p align="center">
   <a href="https://forui.dev/docs">📚 Documentation</a> •
-  <a href="https://forui.dev/docs/badge">🖼️ Widgets</a> •
+  <a href="https://forui.dev/docs/layout/divider">🖼️ Widgets</a> •
   <a href="https://pub.dev/documentation/forui">🤓 API Reference</a> •
   <a href="https://github.com/orgs/forus-labs/projects/9">🗺️ Road Map</a>
 </p>
