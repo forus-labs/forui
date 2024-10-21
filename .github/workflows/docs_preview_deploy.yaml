@@ -83,3 +83,7 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: ${{ steps.render-markdown.outputs.result }}
           edit-mode: replace
+
+      # Check that all relative URLs are working. We don't check external links due to rate limiting.
+      - run: go install github.com/raviqqe/muffet/v2@latest
+      - run: muffet ${{ steps.publish-docs.outputs.url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)"
