@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:forui/src/foundation/touch.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 /// A slider's styles.
 final class FSliderStyles with Diagnosticable {

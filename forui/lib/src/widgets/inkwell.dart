@@ -4,12 +4,15 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+/// The ink well's current data.
+typedef FInkwellData = ({bool focused, bool hovered});
+
 /// An area that responds to touch.
 ///
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FInkWell extends StatefulWidget {
-  static Widget _builder(BuildContext _, ({bool focused, bool hovered}) __, Widget? child) => child!;
+  static Widget _builder(_,  __, Widget? child) => child!;
 
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
@@ -55,7 +58,8 @@ class FInkWell extends StatefulWidget {
 
   /// The child.
   ///
-  /// This argument is optional and can be null if the entire widget subtree the [builder] builds depends on its state.
+  /// This argument is optional and can be null if the entire widget subtree the [builder] builds reacts to focus and
+  /// hover changes.
   final Widget? child;
 
   /// Creates an animated [FInkWell].
@@ -161,7 +165,12 @@ class _FInkWellState extends State<FInkWell> {
               setState(() => _touched = false);
             }
           },
-          child: inkwell,
+          child: GestureDetector(
+            behavior: widget.behavior,
+            onTap: widget.onPress,
+            onLongPress: widget.onLongPress,
+            child: inkwell,
+          ),
         ),
       );
     }

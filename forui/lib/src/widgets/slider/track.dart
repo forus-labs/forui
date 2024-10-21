@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/touch.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';

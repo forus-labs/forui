@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 /// The current picker type.
 enum FCalendarPickerType {
@@ -59,8 +58,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => FTappable(
-        behavior: HitTestBehavior.translucent,
+  Widget build(BuildContext context) => FInkWell(
         onPress: () => widget.type.value = switch (widget.type.value) {
           FCalendarPickerType.day => FCalendarPickerType.yearMonth,
           FCalendarPickerType.yearMonth => FCalendarPickerType.day,
