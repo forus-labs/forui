@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/theme/breakpoints.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
@@ -16,6 +17,9 @@ import 'package:forui/forui.dart';
 /// [FThemeData] and widget styles provide an `inherit(...)` constructor. The constructor configures the theme data/
 /// widget style using the defaults provided by the [colorScheme], [typography], and [style].
 final class FThemeData with Diagnosticable {
+  /// The responsive breakpoints.
+  final FBreakpoints breakpoints;
+
   /// The color scheme. It is used to configure the color properties of Forui widgets.
   final FColorScheme colorScheme;
 
@@ -134,6 +138,7 @@ final class FThemeData with Diagnosticable {
     required this.textFieldStyle,
     required this.tooltipStyle,
     required this.tileGroupStyle,
+    this.breakpoints = const FBreakpoints(),
     this.typography = const FTypography(),
   });
 
@@ -285,6 +290,7 @@ final class FThemeData with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('breakpoints', breakpoints, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('colorScheme', colorScheme, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
@@ -320,6 +326,7 @@ final class FThemeData with Diagnosticable {
       identical(this, other) ||
       other is FThemeData &&
           runtimeType == other.runtimeType &&
+          breakpoints == other.breakpoints &&
           colorScheme == other.colorScheme &&
           typography == other.typography &&
           style == other.style &&
@@ -351,6 +358,7 @@ final class FThemeData with Diagnosticable {
 
   @override
   int get hashCode =>
+      breakpoints.hashCode ^
       colorScheme.hashCode ^
       typography.hashCode ^
       style.hashCode ^

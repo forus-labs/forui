@@ -1,6 +1,7 @@
 export default {
   index: 'Getting Started',
   themes: 'Themes',
+  responsive: 'Responsive',
   'icon-library': 'Icon Library',
   api_reference: {
     title: 'API Reference ↗',
