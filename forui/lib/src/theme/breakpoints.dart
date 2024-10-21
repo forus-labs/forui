@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 /// ```dart
 /// @override
 /// Widget build(BuildContext context) {
-///   final theme = context.theme; // FThemeData
+///   final breakpoints = context.theme.breakpoints; // FBreakpoints
 ///   final width = MediaQuery.sizeOf(context).width; // double
 ///
 ///   return switch (width) {
@@ -31,7 +31,7 @@ import 'package:flutter/foundation.dart';
 /// ```dart
 /// @override
 /// Widget build(BuildContext context) {
-///   final theme = context.theme; // FThemeData
+///   final breakpoints = context.theme.breakpoints; // FBreakpoints
 ///   final width = MediaQuery.sizeOf(context).width; // double
 ///
 ///   return switch (width) {
