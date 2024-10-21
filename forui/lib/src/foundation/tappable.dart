@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -27,8 +26,6 @@ extension Touch on Never {
 }
 
 /// The [FTappableState]'s current state.
-///
-/// Short pressed is fired 200 ms after a tap is first detected. This is faster than long press's [kLongPressTimeout].
 @internal
 typedef FTappableState = ({bool focused, bool hovered});
 
