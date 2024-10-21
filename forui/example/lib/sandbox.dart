@@ -21,6 +21,21 @@ class _SandboxState extends State<Sandbox> {
 
   @override
   Widget build(BuildContext context) {
+    return FAccordion(
+      items: [
+        FAccordionItem(
+          initiallyExpanded: true,
+          title: const Text('Title'),
+          child: const ColoredBox(
+            color: Colors.yellow,
+            child: SizedBox.square(
+              dimension: 50,
+            ),
+          ),
+        ),
+      ],
+    );
+
     final actions = [
       FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
       FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),

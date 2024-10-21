@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 
 /// A button.
@@ -122,7 +121,7 @@ class FButton extends StatelessWidget {
 
     final enabled = onPress != null || onLongPress != null;
 
-    return FTappable.animated(
+    return FInkWell.animated(
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,

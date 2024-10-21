@@ -6,14 +6,13 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 final _yMMMMd = DateFormat.yMMMMd();
 
 @internal
 abstract class Entry extends StatelessWidget {
   final FCalendarEntryStyle style;
-  final ValueWidgetBuilder<FTappableState> builder;
+  final ValueWidgetBuilder<FInkwellData> builder;
 
   factory Entry.day({
     required FCalendarDayPickerStyle style,
@@ -33,14 +32,14 @@ abstract class Entry extends StatelessWidget {
     final dayStyle = current ? styles.current : styles.enclosing;
     final entryStyle = isSelected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
-    Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
+    Widget builder(BuildContext context, FInkwellData data, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
             left: isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius,
             right: isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
           text: '${date.day}', // TODO: localization
-          state: state,
+          data: data,
           current: today,
         );
 
@@ -71,11 +70,11 @@ abstract class Entry extends StatelessWidget {
   }) {
     final entryStyle = selectable ? style.enabledStyle : style.disabledStyle;
 
-    Widget builder(BuildContext context, FTappableState state, Widget? child) => _Content(
+    Widget builder(BuildContext context, FInkwellData data, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.all(entryStyle.radius),
           text: format(date),
-          state: state,
+          data: data,
           current: current,
         );
 
@@ -127,10 +126,10 @@ class _SelectableEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => FTappable(
+  Widget build(BuildContext context) => FInkWell(
         semanticLabel: semanticLabel,
+        semanticSelected: selected,
         focusNode: focusNode,
-        selected: selected,
         excludeSemantics: true,
         onPress: () => onPress(date),
         onLongPress: () => onLongPress?.call(date),
@@ -166,20 +165,20 @@ class _Content extends StatelessWidget {
   final FCalendarEntryStyle style;
   final BorderRadius borderRadius;
   final String text;
-  final FTappableState state;
+  final FInkwellData data;
   final bool current;
 
   const _Content({
     required this.style,
     required this.borderRadius,
     required this.text,
-    required this.state,
+    required this.data,
     required this.current,
   });
 
   @override
   Widget build(BuildContext context) {
-    final hovered = state.hovered;
+    final hovered = data.hovered;
     var textStyle = hovered ? style.hoveredTextStyle : style.textStyle;
     if (current) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
@@ -187,7 +186,7 @@ class _Content extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: state.focused ? Border.all(color: style.focusedBorderColor) : null,
+        border: data.focused ? Border.all(color: style.focusedBorderColor) : null,
         borderRadius: borderRadius,
         color: hovered ? style.hoveredBackgroundColor : style.backgroundColor,
       ),
@@ -204,7 +203,7 @@ class _Content extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
       ..add(StringProperty('text', text))
-      ..add(DiagnosticsProperty('state', state.toString()))
+      ..add(DiagnosticsProperty('state', data.toString()))
       ..add(FlagProperty('current', value: current, ifTrue: 'current'));
   }
 }

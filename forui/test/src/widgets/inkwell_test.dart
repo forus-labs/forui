@@ -58,13 +58,38 @@ void main() {
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
       });
 
-      testWidgets('long pressed', (tester) async {
+      testWidgets('press', (tester) async {
+        var pressCount = 0;
+        var longPressCount = 0;
+
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
             child: FInkWell(
               builder: (_, value, __) => Text('$value'),
-              onPress: enabled ? () {} : null,
+              onPress: enabled ? () => pressCount++ : null,
+              onLongPress: enabled ? () => longPressCount++ : null,
+            ),
+          ),
+        );
+
+        await tester.tap(find.byType(FInkWell));
+        await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+        expect(pressCount, enabled ? 1 : 0);
+        expect(longPressCount, 0);
+      });
+
+      testWidgets('long press', (tester) async {
+        var pressCount = 0;
+        var longPressCount = 0;
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: FThemes.zinc.light,
+            child: FInkWell(
+              builder: (_, value, __) => Text('$value'),
+              onPress: enabled ? () => pressCount++ : null,
+              onLongPress: enabled ? () => longPressCount++ : null,
             ),
           ),
         );
@@ -75,6 +100,9 @@ void main() {
 
         await tester.pumpAndSettle();
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+
+        expect(pressCount, 0);
+        expect(longPressCount, enabled ? 1 : 0);
       });
     }
   });
@@ -129,12 +157,55 @@ void main() {
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
       });
 
-      testWidgets('long pressed - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
+      testWidgets('press', (tester) async {
+        var pressCount = 0;
+        var longPressCount = 0;
+
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: FThemes.zinc.light,
+            child: FInkWell.animated(
+              builder: (_, value, __) => Text('$value'),
+              onPress: enabled ? () => pressCount++ : null,
+              onLongPress: enabled ? () => longPressCount++ : null,
+            ),
+          ),
+        );
+
+        await tester.tap(find.byType(AnimatedInkWell));
+        await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+        expect(pressCount, enabled ? 1 : 0);
+        expect(longPressCount, 0);
+      });
+
+      testWidgets('long press', (tester) async {
+        var pressCount = 0;
+        var longPressCount = 0;
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: FThemes.zinc.light,
+            child: FInkWell.animated(
+              builder: (_, value, __) => Text('$value'),
+              onPress: enabled ? () => pressCount++ : null,
+              onLongPress: enabled ? () => longPressCount++ : null,
+            ),
+          ),
+        );
+        expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+
+        await tester.longPress(find.byType(AnimatedInkWell));
+        expect(find.text((focused: false, hovered: enabled).toString()), findsOneWidget);
+
+        await tester.pumpAndSettle();
+        expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+
+        expect(pressCount, 0);
+        expect(longPressCount, enabled ? 1 : 0);
+      });
+
+      testWidgets('press and hold - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         final key = GlobalKey<AnimatedInkWellState>();
-        final gesture = await tester.createGesture();
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
-        await tester.pump();
 
         await tester.pumpWidget(
           TestScaffold(
@@ -149,7 +220,7 @@ void main() {
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
         expect(key.currentState!.animation.value, 1);
 
-        await gesture.down(tester.getCenter(find.byType(AnimatedInkWell)));
+        final gesture = await tester.press(find.byType(AnimatedInkWell));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
         expect(find.text((focused: false, hovered: enabled).toString()), findsOneWidget);
         expect(key.currentState!.animation.value, enabled ? 0.97 : 1.0);
