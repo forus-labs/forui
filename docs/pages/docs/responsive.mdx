@@ -20,7 +20,7 @@ devices are typically larger than than `md` (768) and lg` (1024) respectively.
 ```dart
 @override
 Widget build(BuildContext context) {
-  final theme = context.theme; // FThemeData
+  final breakpoints = context.theme.breakpoints; // FBreakpoints
   final width = MediaQuery.sizeOf(context).width; // double
 
   return switch (width) {
@@ -44,7 +44,7 @@ After which, the custom breakpoint can be accessed like so:
 ```dart {7}
 @override
 Widget build(BuildContext context) {
-  final theme = context.theme; // FThemeData
+  final breakpoints = context.theme.breakpoints; // FBreakpoints
   final width = MediaQuery.sizeOf(context).width; // double
 
   return switch (width) {
