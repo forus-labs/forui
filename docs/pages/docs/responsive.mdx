@@ -4,9 +4,11 @@ Forui contains responsive breakpoints based on [Tailwind CSS](https://tailwindcs
 
 ## Predefine Breakpoints
 
+All breakpoints are in logical pixels. Mobile devices are typically smaller than `sm` (640), while tablet and desktop
+devices are typically larger than than `md` (768) and lg` (1024) respectively.
+
 | Breakpoint | 	Minimum width   | Accessor                     |
 |:-----------|:-----------------|:-----------------------------|
-| `xs`       | 0                | `FThemeData.breakpoints.xs`  |
 | `sm`       | 640              | `FThemeData.breakpoints.sm`  |
 | `md`       | 768              | `FThemeData.breakpoints.md`  |
 | `lg`       | 1024             | `FThemeData.breakpoints.lg`  |
@@ -19,15 +21,13 @@ Forui contains responsive breakpoints based on [Tailwind CSS](https://tailwindcs
 @override
 Widget build(BuildContext context) {
   final theme = context.theme; // FThemeData
-  final size = MediaQuery.sizeOf(context); // Size
+  final width = MediaQuery.sizeOf(context).width; // double
 
-  if (theme.breakpoints.sm.contains(size)) {
-    // Do something when the sm breakpoint is active.
-    return SizedBox.square(dimension: 100);
-    
-  } else {
-    return SizedBox.square(dimension: 500);
-  }
+  return switch (width) {
+    _ when width < breakpoints.sm => MobileWidget(),
+    _ when width < breakpoints.lg => TabletWidget(),
+    _ => DesktopWidget(),
+  };
 }
 ```
 
@@ -36,23 +36,22 @@ Widget build(BuildContext context) {
 Additional breakpoints can be added via an extension on `FBreakpoints`:
 ```dart
 extension CustomBreakpoints on FBreakpoints {
-  FBreakpoint get custom => const FBreakpoint(min: 100, max: 200);
+  double get custom => 42;
 }
 ```
 
 After which, the custom breakpoint can be accessed like so:
-```dart {6}
+```dart {7}
 @override
 Widget build(BuildContext context) {
   final theme = context.theme; // FThemeData
-  final size = MediaQuery.sizeOf(context); // Size
+  final width = MediaQuery.sizeOf(context).width; // double
 
-  if (theme.breakpoints.custom.contains(size)) {
-    // Do something when the custom breakpoint is active.
-    return SizedBox.square(dimension: 100);
-
-  } else {
-    return SizedBox.square(dimension: 500);
-  }
+  return switch (width) {
+    _ when width < breakpoints.custom => SuperSmallWidget(),
+    _ when width < breakpoints.sm => MobileWidget(),
+    _ when width < breakpoints.lg => TabletWidget(),
+    _ => DesktopWidget(),
+  };
 }
 ```
