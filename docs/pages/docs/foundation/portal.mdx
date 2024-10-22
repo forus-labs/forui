@@ -1,0 +1,54 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Portal
+A portal renders a follower widget that "floats" on top of a target widget.
+
+It is typically used to create other high-level widgets, i.e. [popover](../overlay/popover) or
+[tooltip](../overlay/tooltip). You should prefer those high-level widgets unless you're creating a custom widget.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FPortal-class.html"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='portal' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    final controller = OverlayPortalController();
+
+    FPortal(
+      controller: controller,
+      followerBuilder: (context) => const ColoredBox(
+        color: Colors.red,
+        child: SizedBox.square(
+          dimension: 100,
+        ),
+      ),
+      child: FButton(
+        label: const Text('Target'),
+        onPressed: () => controller.toggle(),
+      ),
+    ),
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FPortal(...)`
+
+```dart
+FPortal(
+  controller: OverlayPortalController(),
+  shift: FPortalFollowerShift.flip,
+  followerAnchor: Alignment.topCenter,
+  followerBuilder: (context) => const Text('follower'),
+  targetAnchor: Alignment.bottomCenter,
+  child: const Text('target'),
+);
+```

@@ -20,8 +20,7 @@ class _SandboxState extends State<Sandbox> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return FAccordion(
+  Widget build(BuildContext context) => FAccordion(
       items: [
         FAccordionItem(
           initiallyExpanded: true,
@@ -35,37 +34,4 @@ class _SandboxState extends State<Sandbox> {
         ),
       ],
     );
-
-    final actions = [
-      FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
-      FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-    ];
-
-    final style = context.theme.dialogStyle;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        IntrinsicWidth(
-          child: FButton(
-            label: const Text('Show Dialog'),
-            onPress: () => showAdaptiveDialog(
-              context: context,
-              builder: (context) {
-                final direction = MediaQuery.sizeOf(context).width < 600 ? Axis.vertical : Axis.horizontal;
-                return FDialog(
-                  style: style,
-                  direction: direction,
-                  title: const Text('Are you absolutely sure?'),
-                  body: const Text(
-                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                  ),
-                  actions: actions,
-                );
-              },
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }

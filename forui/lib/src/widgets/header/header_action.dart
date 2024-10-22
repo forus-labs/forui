@@ -68,7 +68,7 @@ class FHeaderAction extends StatelessWidget {
     final style = this.style ?? FHeaderData.of(context).actionStyle;
     final enabled = onPress != null || onLongPress != null;
 
-    return FInkWell.animated(
+    return FInkwell.animated(
       semanticLabel: semanticLabel,
       onPress: onPress,
       onLongPress: onLongPress,

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/touch.dart';
+import 'package:forui/src/foundation/inkwell.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';

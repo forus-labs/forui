@@ -3,7 +3,7 @@ import 'package:flutter/material.dart' hide VerticalDivider;
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/touch.dart';
+import 'package:forui/src/foundation/inkwell.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
 void main() {

@@ -55,7 +55,7 @@ class FBottomNavigationBar extends StatelessWidget {
             children: [
               for (final (i, child) in children.indexed)
                 Expanded(
-                  child: FInkWell.animated(
+                  child: FInkwell.animated(
                     onPress: () => onChange?.call(i),
                     child: FBottomNavigationBarData(
                       itemStyle: style.itemStyle,

@@ -30,4 +30,5 @@ export default {
   '*': {
     title: ''
   },
+  foundation: 'Foundation',
 };

@@ -4,20 +4,41 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-/// The ink well's current data.
+@internal
+extension Touch on Never {
+  /// The platforms that uses touch as the primary input. It isn't 100% accurate as there are hybrid devices that uses
+  /// both touch and keyboard/mouse input, i.e. Windows Surface laptops.
+  static const platforms = {TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.fuchsia};
+
+  static bool? _primary;
+
+  /// True if the current platform uses touch as the primary input.
+  static bool get primary => _primary ?? platforms.contains(defaultTargetPlatform);
+
+  @visibleForTesting
+  static set primary(bool? value) {
+    if (!kDebugMode) {
+      throw UnsupportedError('Setting Touch.primary is only available in debug mode.');
+    }
+
+    _primary = value;
+  }
+}
+
+/// The inkwell's current data.
 typedef FInkwellData = ({bool focused, bool hovered});
 
 /// An area that responds to touch.
 ///
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
-class FInkWell extends StatefulWidget {
+class FInkwell extends StatefulWidget {
   static Widget _builder(_,  __, Widget? child) => child!;
 
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
-  /// Used by accessibility frameworks to determine whether this ink well has been selected. Defaults to false.
+  /// Used by accessibility frameworks to determine whether this inkwell has been selected. Defaults to false.
   final bool semanticSelected;
 
   /// Whether to replace all child semantics with this node. Defaults to false.
@@ -40,17 +61,17 @@ class FInkWell extends StatefulWidget {
   /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 0s.
   final Duration touchHoverExitDuration;
 
-  /// The ink well's hit test behavior. Defaults to [HitTestBehavior.translucent].
+  /// The inkwell's hit test behavior. Defaults to [HitTestBehavior.translucent].
   final HitTestBehavior behavior;
 
-  /// A callback for when the ink well is pressed.
+  /// A callback for when the inkwell is pressed.
   ///
-  /// The ink well will be disabled if both [onPress] and [onLongPress] are null.
+  /// The inkwell will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onPress;
 
-  /// A callback for when the ink well is long pressed.
+  /// A callback for when the inkwell is long pressed.
   ///
-  /// The ink well will be disabled if both [onPress] and [onLongPress] are null.
+  /// The inkwell will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
   /// The builder used to build to create a child with the current state.
@@ -62,11 +83,11 @@ class FInkWell extends StatefulWidget {
   /// hover changes.
   final Widget? child;
 
-  /// Creates an animated [FInkWell].
+  /// Creates an animated [FInkwell].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const factory FInkWell.animated({
+  const factory FInkwell.animated({
     String? semanticLabel,
     bool semanticSelected,
     bool excludeSemantics,
@@ -78,16 +99,16 @@ class FInkWell extends StatefulWidget {
     Duration touchHoverExitDuration,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<({bool focused, bool hovered})>? builder,
+    ValueWidgetBuilder<FInkwellData>? builder,
     Widget? child,
     Key? key,
-  }) = AnimatedInkWell;
+  }) = AnimatedInkwell;
 
-  /// Creates a [FInkWell].
+  /// Creates a [FInkwell].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FInkWell({
+  const FInkwell({
     this.semanticLabel,
     this.semanticSelected = false,
     this.excludeSemantics = false,
@@ -100,13 +121,13 @@ class FInkWell extends StatefulWidget {
     this.onPress,
     this.onLongPress,
     this.child,
-    ValueWidgetBuilder<({bool focused, bool hovered})>? builder,
+    ValueWidgetBuilder<FInkwellData>? builder,
     super.key,
   })  : assert(builder != null || child != null, 'Either builder or child must be provided.'),
         builder = builder ?? _builder;
 
   @override
-  State<FInkWell> createState() => _FInkWellState();
+  State<FInkwell> createState() => _FInkwellState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -127,7 +148,7 @@ class FInkWell extends StatefulWidget {
   }
 }
 
-class _FInkWellState extends State<FInkWell> {
+class _FInkwellState extends State<FInkwell> {
   int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
@@ -214,8 +235,8 @@ class _FInkWellState extends State<FInkWell> {
 }
 
 @internal
-class AnimatedInkWell extends FInkWell {
-  const AnimatedInkWell({
+class AnimatedInkwell extends FInkwell {
+  const AnimatedInkwell({
     super.semanticLabel,
     super.semanticSelected = false,
     super.excludeSemantics = false,
@@ -233,11 +254,11 @@ class AnimatedInkWell extends FInkWell {
   });
 
   @override
-  State<FInkWell> createState() => AnimatedInkWellState();
+  State<FInkwell> createState() => AnimatedInkwellState();
 }
 
 @internal
-class AnimatedInkWellState extends _FInkWellState with SingleTickerProviderStateMixin {
+class AnimatedInkwellState extends _FInkwellState with SingleTickerProviderStateMixin {
   late final AnimationController controller;
   late final Animation<double> animation;
 

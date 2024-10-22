@@ -126,7 +126,7 @@ class _SelectableEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => FInkWell(
+  Widget build(BuildContext context) => FInkwell(
         semanticLabel: semanticLabel,
         semanticSelected: selected,
         focusNode: focusNode,

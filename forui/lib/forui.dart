@@ -18,7 +18,6 @@ export 'widgets/dialog.dart';
 export 'widgets/divider.dart';
 export 'widgets/header.dart';
 export 'widgets/icon.dart';
-export 'widgets/inkwell.dart';
 export 'widgets/label.dart';
 export 'widgets/popover.dart';
 export 'widgets/progress.dart';

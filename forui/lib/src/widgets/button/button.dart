@@ -121,7 +121,7 @@ class FButton extends StatelessWidget {
 
     final enabled = onPress != null || onLongPress != null;
 
-    return FInkWell.animated(
+    return FInkwell.animated(
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
