@@ -34,13 +34,12 @@ jobs:
           flutter pub get
           flutter pub run build_runner build --delete-conflicting-outputs
           flutter build web
-      - uses: cloudflare/pages-action@v1
+      - uses: cloudflare/wrangler-action@v3
         id: publish-samples
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }}
-          directory: ./samples/build/web
+          command: pages deploy ./samples/build/web --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=main
 
       # Publish docs
       - uses: actions/setup-node@v4
@@ -53,15 +52,13 @@ jobs:
       - working-directory: ./docs
         run: |
           pnpm install
-          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.url }} pnpm run export
-      - uses: cloudflare/pages-action@v1
+          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.deployment-url }} pnpm run export
+      - uses: cloudflare/wrangler-action@v3
         id: publish-docs
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }}
-          branch: ${{ github.event.pull_request.head.ref }}
-          directory: ./docs/out
+          command: pages deploy ./docs/out --project-name=${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }} --branch=${{ github.event.pull_request.head.ref }}
 
       # Create/update comment with link to preview
       - uses: peter-evans/find-comment@v3
@@ -75,7 +72,7 @@ jobs:
           template: .github/deployment_preview_template.md
           vars: |
             sha: ${{ github.event.pull_request.head.sha }}
-            url: ${{ steps.publish-docs.outputs.url }}
+            url: ${{ steps.publish-docs.outputs.deployment-url }}
       - uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ steps.generate-token.outputs.token }}
@@ -87,4 +84,4 @@ jobs:
       # Check that all relative URLs are working. We don't check external links due to rate limiting.
       - uses: actions/setup-go@v5
       - run: go install github.com/raviqqe/muffet/v2@latest
-      - run: muffet ${{ steps.publish-docs.outputs.url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)"
+      - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)"
