@@ -64,7 +64,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/icon/comparison', page: ComparisonIconRoute.page),
         AutoRoute(path: '/icon/custom', page: CustomIconRoute.page),
         AutoRoute(path: '/icon/image', page: ImageIconRoute.page),
-        AutoRoute(path: '/inkwell/default', page: InkWellRoute.page),
+        AutoRoute(path: '/inkwell/default', page: InkwellRoute.page),
         AutoRoute(path: '/label/vertical', page: VerticalLabelRoute.page),
         AutoRoute(path: '/label/horizontal', page: HorizontalLabelRoute.page),
         AutoRoute(path: '/popover/default', page: PopoverRoute.page),
