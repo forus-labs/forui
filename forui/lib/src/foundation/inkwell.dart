@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 @internal
 extension Touch on Never {
@@ -33,7 +35,7 @@ typedef FInkwellData = ({bool focused, bool hovered});
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FInkwell extends StatefulWidget {
-  static Widget _builder(_,  __, Widget? child) => child!;
+  static Widget _builder(_, __, Widget? child) => child!;
 
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
