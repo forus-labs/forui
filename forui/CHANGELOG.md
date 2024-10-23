@@ -6,7 +6,7 @@
 
 * Add `FBreakpoints`.
 
-* Add `FInkWell`.
+* Add `FTappable`.
 
 * Add `FTile`.
 
