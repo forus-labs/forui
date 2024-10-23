@@ -1,0 +1,183 @@
+import {Callout} from "nextra/components";
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Tile Groups
+A special group that groups multiple tile groups together.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/forui.widgets.tile-library.html"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile-groups' variant='default' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTileGroups(
+      label: const Text('Settings'),
+      children: [
+        FTileGroup(
+          children: [
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.user),
+              title: const Text('Personalization'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.wifi),
+              title: const Text('WiFi'),
+              details: const Text('Forus Labs (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ],
+        ),
+        FTileGroup(
+          children: [
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.check),
+              title: const Text('List View'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+            FTile(
+              prefixIcon: const SizedBox.square(
+                dimension: 17,
+              ),
+              title: const Text('Grid View'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ],
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTileGroups(...)`
+
+```dart
+FTileGroups(
+  label: const Text('Settings'),
+  semanticLabel: 'Settings',
+  divider: FTileDivider.indented,
+  children: [],
+);
+```
+
+## Examples
+
+### Indented Divider
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile-groups' variant='default' query={{divider: 'indented'}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {3}
+    FTileGroups(
+      label: const Text('Settings'),
+      divider: FTileDivider.indented,
+      children: [
+        FTileGroup(
+          children: [
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.user),
+              title: const Text('Personalization'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.wifi),
+              title: const Text('WiFi'),
+              details: const Text('Forus Labs (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ],
+        ),
+        FTileGroup(
+          children: [
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.check),
+              title: const Text('List View'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+            FTile(
+              prefixIcon: const SizedBox.square(
+                dimension: 17,
+              ),
+              title: const Text('Grid View'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ],
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### No Divider
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile-groups' variant='default' query={{divider: 'none'}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {3}
+    FTileGroups(
+      label: const Text('Settings'),
+      divider: FTileDivider.none,
+      children: [
+        FTileGroup(
+          children: [
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.user),
+              title: const Text('Personalization'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.wifi),
+              title: const Text('WiFi'),
+              details: const Text('Forus Labs (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ],
+        ),
+        FTileGroup(
+          children: [
+            FTile(
+              prefixIcon: FIcon(FAssets.icons.check),
+              title: const Text('List View'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+            FTile(
+              prefixIcon: const SizedBox.square(
+                dimension: 17,
+              ),
+              title: const Text('Grid View'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ],
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
