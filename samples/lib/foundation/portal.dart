@@ -39,7 +39,7 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
           child: Container(
             decoration: BoxDecoration(
               color: context.theme.colorScheme.background,
-              border: Border.all(color: context.theme.colorScheme.border, width: 1),
+              border: Border.all(color: context.theme.colorScheme.border),
               borderRadius: BorderRadius.circular(4),
             ),
             padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
