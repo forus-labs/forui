@@ -4,6 +4,7 @@ library;
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_controller.dart';
@@ -19,7 +20,7 @@ void main() {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FLineCalendar(
                 style: TestScaffold.blueScreen.lineCalendarStyle,
-                controller: FLineCalendarController(),
+                controller: FCalendarController.date(),
               ),
             ),
           ),
@@ -40,7 +41,7 @@ void main() {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: FLineCalendar(controller: controller),
+                  child: FLineCalendar(controller: FCalendarController.date()),
                 ),
               ),
             ),
