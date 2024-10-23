@@ -11,7 +11,7 @@ const _textSpacing = 2.0;
 
 class FlineCalendarTile extends StatelessWidget {
   final FLineCalendarStyle style;
-  final FLineCalendarController controller;
+  final FCalendarController controller;
   final DateTime date;
   final bool isToday;
 

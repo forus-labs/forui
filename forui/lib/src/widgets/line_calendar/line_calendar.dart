@@ -15,15 +15,36 @@ class FLineCalendar extends StatefulWidget {
   /// The style. Defaults to [FThemeData.lineCalendarStyle].
   final FLineCalendarStyle? style;
 
-  /// The currently selected [LocalDate].
-  final FLineCalendarController controller;
+  /// The controller.
+  final FCalendarController controller;
+
+  /// The start date. It is truncated to the nearest date.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [end] <= [start].
+  final DateTime start;
+
+  /// The end date. It is truncated to the nearest date.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [end] <= [start].
+  final DateTime? end;
+
+  /// The current date. It is truncated to the nearest date. Defaults to the [DateTime.now].
+  final DateTime today;
 
   /// Creates a [FLineCalendar].
-  const FLineCalendar({
+  FLineCalendar({
     required this.controller,
     this.style,
+    this.end,
+    DateTime? start,
+    DateTime? today,
     super.key,
-  });
+  })  : start = start ?? DateTime(1900).toUtc(),
+        assert(start == null || end == null || start.toLocalDate() < end.toLocalDate(),
+            'end date must be greater than start date'),
+        today = today ?? DateTime.now();
 
   @override
   State<FLineCalendar> createState() => _FLineCalendarState();
@@ -38,7 +59,7 @@ class FLineCalendar extends StatefulWidget {
 }
 
 class _FLineCalendarState extends State<FLineCalendar> {
-  late FLineCalendarController _controller;
+  late ScrollController _controller;
   late double _size;
   late FLineCalendarStyle _style;
 
@@ -46,7 +67,9 @@ class _FLineCalendarState extends State<FLineCalendar> {
   void didChangeDependencies() {
     _style = widget.style ?? FTheme.of(context).lineCalendarStyle;
     _size = _calculateSize(context, _style);
-    _controller = widget.controller.withInitialScrollOffset(_size, _style.itemPadding);
+    final offset = (widget.controller.value.toLocalDate().difference(widget.start.toLocalDate()).inDays - 2) * _size +
+        _style.itemPadding;
+    _controller = ScrollController(initialScrollOffset: offset);
 
     final textDirection = Directionality.of(context);
     widget.controller.addListener(() => _onDateChange(textDirection));
@@ -73,19 +96,19 @@ class _FLineCalendarState extends State<FLineCalendar> {
   Widget build(BuildContext context) => SizedBox(
         height: _size,
         child: ListView.builder(
-          controller: _controller.scrollController,
+          controller: _controller,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.zero,
           itemExtent: _size,
           itemBuilder: (context, index) {
-            final date = widget.controller.start.add(Duration(days: index));
+            final date = widget.start.add(Duration(days: index));
             return Container(
               padding: EdgeInsets.symmetric(horizontal: _style.itemPadding),
               child: FlineCalendarTile(
                 style: _style,
                 controller: widget.controller,
                 date: date,
-                isToday: widget.controller.isToday(date),
+                isToday: widget.today == date,
               ),
             );
           },

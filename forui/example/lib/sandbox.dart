@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/line_calendar.dart';
+import 'package:forui/widgets/line_calendar.dart';
 
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
@@ -32,7 +32,7 @@ class _SandboxState extends State<Sandbox> {
           ),
           const SizedBox(height: 20),
           const FTextField.password(),
-          FLineCalendar(selected: selected),
+          FLineCalendar(controller: FCalendarController.date()),
           const SizedBox(height: 20),
           FTooltip(
             longPressExitDuration: const Duration(seconds: 5000),
