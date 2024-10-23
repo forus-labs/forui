@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/tile/tile_group.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/tile/tile_content.dart';
+import 'package:forui/src/widgets/tile/tile_group.dart';
 
 /// The divider between tiles in a group.
 enum FTileDivider {
@@ -167,10 +167,10 @@ class FTile extends StatelessWidget with FTileMixin {
 /// Extracts the data from the given [FTileData].
 @internal
 ({int index, int length, FTileDivider divider}) extractTile(FTileData? data) => (
-    index: data?.index ?? 0,
-    length: data?.length ?? 1,
-    divider: data?.divider ?? FTileDivider.indented,
-  );
+      index: data?.index ?? 0,
+      length: data?.length ?? 1,
+      divider: data?.divider ?? FTileDivider.indented,
+    );
 
 /// A tile's data.
 class FTileData extends InheritedWidget {
