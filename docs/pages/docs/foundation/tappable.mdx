@@ -1,0 +1,83 @@
+import { Callout, Tabs } from 'nextra/components';
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Tappable
+An area that responds to touch.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FTappable-class.html"/>
+</LinkBadgeGroup>
+
+<Callout type="info">
+  This widget is typically used to create other high-level widgets, i.e. [button](../form/button). You should prefer
+  those high-level widgets unless you're creating a custom widget.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tappable' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTappable.animated(
+      builder: (context, data, child) => Container(
+        decoration: BoxDecoration(
+          color: data.hovered ? context.theme.colorScheme.secondary : context.theme.colorScheme.background,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: context.theme.colorScheme.border,
+          )
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+        child: child!,
+      ),
+      child: const Text('Tappable'),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTappable(...)`
+
+```dart
+const FTappable(
+  semanticLabel: 'Label',
+  semanticSelected: false,
+  excludeSemantics: false,
+  this.autofocus: false,
+  focusNode: FocusNode(),
+  onFocusChange: (focused) {},
+  touchHoverEnterDuration: const Duration(milliseconds: 200),
+  touchHoverExitDuration: Duration.zero,
+  behavior: HitTestBehavior.translucent,
+  onPress: () {},
+  onLongPress: () {},
+  builder: (context, state, child) => child!,
+  child: const Text('Tappable'),
+);
+```
+
+### `FTappable.animated(...)`
+
+```dart
+const FTappable.animated(
+  semanticLabel: 'Label',
+  semanticSelected: false,
+  excludeSemantics: false,
+  this.autofocus: false,
+  focusNode: FocusNode(),
+  onFocusChange: (focused) {},
+  touchHoverEnterDuration: const Duration(milliseconds: 200),
+  touchHoverExitDuration: Duration.zero,
+  behavior: HitTestBehavior.translucent,
+  onPress: () {},
+  onLongPress: () {},
+  builder: (context, state, child) => child!,
+  child: const Text('Tappable'),
+);
+```

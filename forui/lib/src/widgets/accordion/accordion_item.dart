@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 import 'package:forui/src/widgets/accordion/accordion.dart';
 
@@ -84,7 +83,6 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           FTappable(
-            behavior: HitTestBehavior.translucent,
             onPress: () => controller.toggle(index),
             builder: (context, state, child) => Padding(
               padding: style.titlePadding,

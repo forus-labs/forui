@@ -6,6 +6,8 @@
 
 * Add `FBreakpoints`.
 
+* Add `FTappable`.
+
 * Add `FTile`.
 
 * Add `FTileGroup`.
@@ -13,7 +15,6 @@
 ### Fixes
 
 * Change FButton's animation to only start on mouse down and up.
-  [Reddit Comment](https://www.reddit.com/r/FlutterDev/comments/1g5tmu5/comment/lsm4gsd/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button).
 
 ## 0.6.1
 

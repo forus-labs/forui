@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 /// A bottom navigation bar.
 ///
@@ -57,7 +56,6 @@ class FBottomNavigationBar extends StatelessWidget {
               for (final (i, child) in children.indexed)
                 Expanded(
                   child: FTappable.animated(
-                    behavior: HitTestBehavior.translucent,
                     onPress: () => onChange?.call(i),
                     child: FBottomNavigationBarData(
                       itemStyle: style.itemStyle,

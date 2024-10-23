@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 
 /// A button.

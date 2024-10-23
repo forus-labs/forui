@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 @internal
 extension Touch on Never {
@@ -26,32 +27,71 @@ extension Touch on Never {
   }
 }
 
-/// The [FTappableState]'s current state.
-///
-/// Short pressed is fired 200 ms after a tap is first detected. This is faster than long press's [kLongPressTimeout].
-@internal
-typedef FTappableState = ({bool focused, bool hovered});
+/// The tappable's current data.
+typedef FTappableData = ({bool focused, bool hovered});
 
-@internal
+/// An area that responds to touch.
+///
+/// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
+/// you should use those high-level widgets instead.
 class FTappable extends StatefulWidget {
+  static Widget _builder(_, __, Widget? child) => child!;
+
+  /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
-  final bool selected;
+
+  /// Used by accessibility frameworks to determine whether this tappable has been selected. Defaults to false.
+  final bool semanticSelected;
+
+  /// Whether to replace all child semantics with this node. Defaults to false.
   final bool excludeSemantics;
+
+  /// Whether this radio should focus itself if nothing else is already focused. Defaults to false.
   final bool autofocus;
+
+  /// Defines the [FocusNode] for this radio.
   final FocusNode? focusNode;
+
+  /// Handler called when the focus changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
   final ValueChanged<bool>? onFocusChange;
-  final HitTestBehavior? behavior;
+
+  /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 200ms.
   final Duration touchHoverEnterDuration;
+
+  /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 0s.
   final Duration touchHoverExitDuration;
+
+  /// The tappable's hit test behavior. Defaults to [HitTestBehavior.translucent].
+  final HitTestBehavior behavior;
+
+  /// A callback for when the tappable is pressed.
+  ///
+  /// The tappable will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onPress;
+
+  /// A callback for when the tappable is long pressed.
+  ///
+  /// The tappable will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
-  final Duration shortPressDelay;
-  final ValueWidgetBuilder<FTappableState> builder;
+
+  /// The builder used to build to create a child with the current state.
+  final ValueWidgetBuilder<({bool focused, bool hovered})> builder;
+
+  /// The child.
+  ///
+  /// This argument is optional and can be null if the entire widget subtree the [builder] builds reacts to focus and
+  /// hover changes.
   final Widget? child;
 
-  factory FTappable.animated({
+  /// Creates an animated [FTappable].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [builder] and [child] are both null.
+  const factory FTappable.animated({
     String? semanticLabel,
-    bool selected,
+    bool semanticSelected,
     bool excludeSemantics,
     bool autofocus,
     FocusNode? focusNode,
@@ -61,31 +101,32 @@ class FTappable extends StatefulWidget {
     Duration touchHoverExitDuration,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<FTappableState>? builder,
+    ValueWidgetBuilder<FTappableData>? builder,
     Widget? child,
     Key? key,
-  }) = _AnimatedTappable;
+  }) = AnimatedTappable;
 
-  FTappable({
+  /// Creates a [FTappable].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [builder] and [child] are both null.
+  const FTappable({
     this.semanticLabel,
-    this.selected = false,
+    this.semanticSelected = false,
     this.excludeSemantics = false,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    this.behavior,
     this.touchHoverEnterDuration = const Duration(milliseconds: 200),
     this.touchHoverExitDuration = Duration.zero,
+    this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
-    this.shortPressDelay = const Duration(milliseconds: 200),
-    ValueWidgetBuilder<FTappableState>? builder,
     this.child,
+    ValueWidgetBuilder<FTappableData>? builder,
     super.key,
   })  : assert(builder != null || child != null, 'Either builder or child must be provided.'),
-        builder = builder ?? ((_, __, child) => child!);
-
-  bool get enabled => onPress != null || onLongPress != null;
+        builder = builder ?? _builder;
 
   @override
   State<FTappable> createState() => _FTappableState();
@@ -94,28 +135,18 @@ class FTappable extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('semanticLabel', semanticLabel, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('focusNode', focusNode, level: DiagnosticLevel.debug))
-      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected', level: DiagnosticLevel.debug))
-      ..add(
-        FlagProperty(
-          'excludeSemantics',
-          value: excludeSemantics,
-          ifTrue: 'excludeSemantics',
-          level: DiagnosticLevel.debug,
-        ),
-      )
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus', level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('onFocusChange', onFocusChange, level: DiagnosticLevel.debug))
-      ..add(EnumProperty('behavior', behavior, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('touchHoverEnterDuration', touchHoverEnterDuration, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('onLongPress', onLongPress, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('shortPressDelay', shortPressDelay, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('builder', builder, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('child', child, level: DiagnosticLevel.debug));
+      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(FlagProperty('semanticsSelected', value: semanticSelected, ifTrue: 'selected'))
+      ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(DiagnosticsProperty('touchHoverEnterDuration', touchHoverEnterDuration))
+      ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration))
+      ..add(EnumProperty('behavior', behavior))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -123,16 +154,66 @@ class _FTappableState extends State<FTappable> {
   int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
-  bool _touchHovered = false;
+  bool _touched = false;
 
   @override
   Widget build(BuildContext context) {
-    final tappable = Semantics(
-      enabled: widget.enabled,
+    var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
+    tappable = _decorate(context, tappable);
+
+    if (_enabled) {
+      tappable = MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _hovered = true),
+        onExit: (_) => setState(() => _hovered = false),
+        // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
+        // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
+        // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
+        child: Listener(
+          onPointerDown: (_) async {
+            final count = ++_monotonic;
+            _onPointerDown();
+
+            await Future.delayed(widget.touchHoverEnterDuration);
+            if (mounted && count == _monotonic && !_touched) {
+              setState(() => _touched = true);
+            }
+          },
+          onPointerUp: (_) async {
+            final count = ++_monotonic;
+            _onPointerUp();
+
+            await Future.delayed(widget.touchHoverExitDuration);
+            if (mounted && count == _monotonic && _touched) {
+              setState(() => _touched = false);
+            }
+          },
+          child: GestureDetector(
+            behavior: widget.behavior,
+            onTap: widget.onPress,
+            onLongPress: widget.onLongPress,
+            child: tappable,
+          ),
+        ),
+      );
+    }
+
+    if (widget.onPress != null) {
+      tappable = Shortcuts(
+        shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+        child: Actions(
+          actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
+          child: tappable,
+        ),
+      );
+    }
+
+    return Semantics(
+      enabled: _enabled,
       label: widget.semanticLabel,
       container: true,
       button: true,
-      selected: widget.selected,
+      selected: widget.semanticSelected,
       excludeSemantics: widget.excludeSemantics,
       child: Focus(
         autofocus: widget.autofocus,
@@ -141,65 +222,25 @@ class _FTappableState extends State<FTappable> {
           setState(() => _focused = focused);
           widget.onFocusChange?.call(focused);
         },
-        child: MouseRegion(
-          cursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
-          onEnter: (_) => setState(() => _hovered = true),
-          onExit: (_) => setState(() => _hovered = false),
-          // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
-          // "GestureArena" and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
-          // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
-          child: Listener(
-            onPointerDown: (_) async {
-              final count = ++_monotonic;
-              onPointerDown();
-              await Future.delayed(widget.touchHoverEnterDuration);
-              if (mounted && count == _monotonic && !_touchHovered) {
-                setState(() => _touchHovered = true);
-              }
-            },
-            onPointerUp: (_) async {
-              final count = ++_monotonic;
-              onPointerUp();
-              await Future.delayed(widget.touchHoverExitDuration);
-              if (mounted && count == _monotonic && _touchHovered) {
-                setState(() => _touchHovered = false);
-              }
-            },
-            child: _child,
-          ),
-        ),
-      ),
-    );
-
-    if (widget.onPress == null) {
-      return tappable;
-    }
-
-    return Shortcuts(
-      shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-      child: Actions(
-        actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
         child: tappable,
       ),
     );
   }
 
-  void onPointerDown() {}
+  Widget _decorate(BuildContext context, Widget child) => child;
 
-  void onPointerUp() {}
+  void _onPointerDown() {}
 
-  Widget get _child => GestureDetector(
-        behavior: widget.behavior,
-        onTap: widget.onPress,
-        onLongPress: widget.onLongPress,
-        child: widget.builder(context, (focused: _focused, hovered: _hovered || _touchHovered), widget.child),
-      );
+  void _onPointerUp() {}
+
+  bool get _enabled => widget.onPress != null || widget.onLongPress != null;
 }
 
-class _AnimatedTappable extends FTappable {
-  _AnimatedTappable({
+@internal
+class AnimatedTappable extends FTappable {
+  const AnimatedTappable({
     super.semanticLabel,
-    super.selected = false,
+    super.semanticSelected = false,
     super.excludeSemantics = false,
     super.autofocus = false,
     super.focusNode,
@@ -215,40 +256,44 @@ class _AnimatedTappable extends FTappable {
   });
 
   @override
-  State<FTappable> createState() => _AnimatedTappableState();
+  State<FTappable> createState() => AnimatedTappableState();
 }
 
-class _AnimatedTappableState extends _FTappableState with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
+@internal
+class AnimatedTappableState extends _FTappableState with SingleTickerProviderStateMixin {
+  late final AnimationController controller;
+  late final Animation<double> animation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    _animation = Tween(begin: 1.0, end: 0.97).animate(_controller);
+    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
+    animation = Tween(begin: 1.0, end: 0.97).animate(controller);
   }
 
   @override
-  void onPointerDown() => _controller.forward();
+  void _onPointerDown() => controller.forward();
 
   @override
-  void onPointerUp() => _controller.reverse();
+  void _onPointerUp() => controller.reverse();
 
   @override
-  Widget get _child => ScaleTransition(
-        scale: _animation,
-        child: GestureDetector(
-          behavior: widget.behavior,
-          onTap: widget.onPress,
-          onLongPress: widget.onLongPress,
-          child: widget.builder(context, (focused: _focused, hovered: _hovered || _touchHovered), widget.child),
-        ),
+  Widget _decorate(BuildContext context, Widget child) => ScaleTransition(
+        scale: animation,
+        child: child,
       );
 
   @override
   void dispose() {
-    _controller.dispose();
+    controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('animation', animation));
   }
 }

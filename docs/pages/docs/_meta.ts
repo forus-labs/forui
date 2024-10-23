@@ -27,6 +27,7 @@ export default {
   navigation: 'Navigation',
   feedback: 'Feedback',
   overlay: 'Overlay',
+  foundation: 'Foundation',
   '*': {
     title: ''
   },

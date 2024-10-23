@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/tile/tile_content.dart';
 
 /// A tile that is typically used to group related information together.
@@ -58,14 +57,16 @@ class FTile extends StatelessWidget {
     this.style,
     this.enabled = true,
     this.semanticLabel,
-    this.onPress,
-    this.onLongPress,
+    VoidCallback? onPress,
+    VoidCallback? onLongPress,
     Widget? prefixIcon,
     Widget? subtitle,
     Widget? details,
     Widget? suffixIcon,
     super.key,
-  }) : child = FTileContent(
+  })  : onPress = enabled ? onPress : null,
+        onLongPress = enabled ? onLongPress : null,
+        child = FTileContent(
           title: title,
           prefixIcon: prefixIcon,
           subtitle: subtitle,
@@ -112,22 +113,14 @@ class FTile extends StatelessWidget {
           ),
         );
 
-    return enabled && (onPress != null || onLongPress != null)
-        ? FTappable(
-            behavior: HitTestBehavior.translucent,
-            semanticLabel: semanticLabel,
-            touchHoverEnterDuration: style.touchHoverEnterDuration,
-            touchHoverExitDuration: style.touchHoverExitDuration,
-            onPress: onPress,
-            onLongPress: onLongPress,
-            builder: (_, state, __) => content(hovered: state.hovered),
-          )
-        : Semantics(
-            container: true,
-            enabled: enabled,
-            label: semanticLabel,
-            child: content(hovered: false),
-          );
+    return FTappable(
+      semanticLabel: semanticLabel,
+      touchHoverEnterDuration: style.touchHoverEnterDuration,
+      touchHoverExitDuration: style.touchHoverExitDuration,
+      onPress: onPress,
+      onLongPress: onLongPress,
+      builder: (_, data, __) => content(hovered: data.hovered),
+    );
   }
 
   @override
