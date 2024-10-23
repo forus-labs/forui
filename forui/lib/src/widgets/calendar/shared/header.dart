@@ -58,7 +58,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => FInkwell(
+  Widget build(BuildContext context) => FTappable(
         onPress: () => widget.type.value = switch (widget.type.value) {
           FCalendarPickerType.day => FCalendarPickerType.yearMonth,
           FCalendarPickerType.yearMonth => FCalendarPickerType.day,

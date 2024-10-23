@@ -34,14 +34,50 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => FPortal(
         controller: controller,
-        followerBuilder: (context) => const ColoredBox(
-          color: Colors.red,
-          child: SizedBox.square(
-            dimension: 100,
+        followerBuilder: (context) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: context.theme.colorScheme.background,
+              border: Border.all(color: context.theme.colorScheme.border, width: 1),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+            child: SizedBox(
+              width: 288,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Dimensions', style: context.theme.typography.base),
+                  const SizedBox(height: 7),
+                  Text(
+                    'Set the dimensions for the layer.',
+                    style: context.theme.typography.sm.copyWith(
+                      color: context.theme.colorScheme.mutedForeground,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  for (final (label, value) in [
+                    ('Width', '100%'),
+                    ('Max. Width', '300px'),
+                  ]) ...[
+                    Row(
+                      children: [
+                        Expanded(child: Text(label, style: context.theme.typography.sm)),
+                        Expanded(flex: 2, child: FTextField(initialValue: value)),
+                      ],
+                    ),
+                    const SizedBox(height: 7),
+                  ],
+                ],
+              ),
+            ),
           ),
         ),
         child: FButton(
-          label: const Text('Target'),
+          label: const Text('Portal'),
           onPress: () => controller.toggle(),
         ),
       );

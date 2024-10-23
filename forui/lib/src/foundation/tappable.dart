@@ -27,20 +27,20 @@ extension Touch on Never {
   }
 }
 
-/// The inkwell's current data.
-typedef FInkwellData = ({bool focused, bool hovered});
+/// The tappable's current data.
+typedef FTappableData = ({bool focused, bool hovered});
 
 /// An area that responds to touch.
 ///
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
-class FInkwell extends StatefulWidget {
+class FTappable extends StatefulWidget {
   static Widget _builder(_, __, Widget? child) => child!;
 
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
-  /// Used by accessibility frameworks to determine whether this inkwell has been selected. Defaults to false.
+  /// Used by accessibility frameworks to determine whether this tappable has been selected. Defaults to false.
   final bool semanticSelected;
 
   /// Whether to replace all child semantics with this node. Defaults to false.
@@ -63,17 +63,17 @@ class FInkwell extends StatefulWidget {
   /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 0s.
   final Duration touchHoverExitDuration;
 
-  /// The inkwell's hit test behavior. Defaults to [HitTestBehavior.translucent].
+  /// The tappable's hit test behavior. Defaults to [HitTestBehavior.translucent].
   final HitTestBehavior behavior;
 
-  /// A callback for when the inkwell is pressed.
+  /// A callback for when the tappable is pressed.
   ///
-  /// The inkwell will be disabled if both [onPress] and [onLongPress] are null.
+  /// The tappable will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onPress;
 
-  /// A callback for when the inkwell is long pressed.
+  /// A callback for when the tappable is long pressed.
   ///
-  /// The inkwell will be disabled if both [onPress] and [onLongPress] are null.
+  /// The tappable will be disabled if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
   /// The builder used to build to create a child with the current state.
@@ -85,11 +85,11 @@ class FInkwell extends StatefulWidget {
   /// hover changes.
   final Widget? child;
 
-  /// Creates an animated [FInkwell].
+  /// Creates an animated [FTappable].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const factory FInkwell.animated({
+  const factory FTappable.animated({
     String? semanticLabel,
     bool semanticSelected,
     bool excludeSemantics,
@@ -101,16 +101,16 @@ class FInkwell extends StatefulWidget {
     Duration touchHoverExitDuration,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<FInkwellData>? builder,
+    ValueWidgetBuilder<FTappableData>? builder,
     Widget? child,
     Key? key,
-  }) = AnimatedInkwell;
+  }) = AnimatedTappable;
 
-  /// Creates a [FInkwell].
+  /// Creates a [FTappable].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FInkwell({
+  const FTappable({
     this.semanticLabel,
     this.semanticSelected = false,
     this.excludeSemantics = false,
@@ -123,13 +123,13 @@ class FInkwell extends StatefulWidget {
     this.onPress,
     this.onLongPress,
     this.child,
-    ValueWidgetBuilder<FInkwellData>? builder,
+    ValueWidgetBuilder<FTappableData>? builder,
     super.key,
   })  : assert(builder != null || child != null, 'Either builder or child must be provided.'),
         builder = builder ?? _builder;
 
   @override
-  State<FInkwell> createState() => _FInkwellState();
+  State<FTappable> createState() => _FTappableState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -150,7 +150,7 @@ class FInkwell extends StatefulWidget {
   }
 }
 
-class _FInkwellState extends State<FInkwell> {
+class _FTappableState extends State<FTappable> {
   int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
@@ -158,11 +158,11 @@ class _FInkwellState extends State<FInkwell> {
 
   @override
   Widget build(BuildContext context) {
-    var inkwell = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
-    inkwell = _decorate(context, inkwell);
+    var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
+    tappable = _decorate(context, tappable);
 
     if (_enabled) {
-      inkwell = MouseRegion(
+      tappable = MouseRegion(
         cursor: SystemMouseCursors.click,
         onEnter: (_) => setState(() => _hovered = true),
         onExit: (_) => setState(() => _hovered = false),
@@ -192,18 +192,18 @@ class _FInkwellState extends State<FInkwell> {
             behavior: widget.behavior,
             onTap: widget.onPress,
             onLongPress: widget.onLongPress,
-            child: inkwell,
+            child: tappable,
           ),
         ),
       );
     }
 
     if (widget.onPress != null) {
-      inkwell = Shortcuts(
+      tappable = Shortcuts(
         shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
         child: Actions(
           actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
-          child: inkwell,
+          child: tappable,
         ),
       );
     }
@@ -222,7 +222,7 @@ class _FInkwellState extends State<FInkwell> {
           setState(() => _focused = focused);
           widget.onFocusChange?.call(focused);
         },
-        child: inkwell,
+        child: tappable,
       ),
     );
   }
@@ -237,8 +237,8 @@ class _FInkwellState extends State<FInkwell> {
 }
 
 @internal
-class AnimatedInkwell extends FInkwell {
-  const AnimatedInkwell({
+class AnimatedTappable extends FTappable {
+  const AnimatedTappable({
     super.semanticLabel,
     super.semanticSelected = false,
     super.excludeSemantics = false,
@@ -256,11 +256,11 @@ class AnimatedInkwell extends FInkwell {
   });
 
   @override
-  State<FInkwell> createState() => AnimatedInkwellState();
+  State<FTappable> createState() => AnimatedTappableState();
 }
 
 @internal
-class AnimatedInkwellState extends _FInkwellState with SingleTickerProviderStateMixin {
+class AnimatedTappableState extends _FTappableState with SingleTickerProviderStateMixin {
   late final AnimationController controller;
   late final Animation<double> animation;
 

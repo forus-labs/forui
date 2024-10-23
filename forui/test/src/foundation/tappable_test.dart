@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inkwell.dart';
+import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  group('FInkWell', () {
+  group('FTappable', () {
     for (final enabled in [true, false]) {
       testWidgets('focused - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         final focusNode = FocusNode();
@@ -16,7 +16,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell(
+            child: FTappable(
               focusNode: focusNode,
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () {} : null,
@@ -34,7 +34,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell(
+            child: FTappable(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () {} : null,
             ),
@@ -47,7 +47,7 @@ void main() {
         addTearDown(gesture.removePointer);
         await tester.pump();
 
-        await gesture.moveTo(tester.getCenter(find.byType(FInkwell)));
+        await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
         await tester.pumpAndSettle();
 
         expect(find.text((focused: false, hovered: enabled).toString()), findsOneWidget);
@@ -65,7 +65,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell(
+            child: FTappable(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
@@ -73,7 +73,7 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(FInkwell));
+        await tester.tap(find.byType(FTappable));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
         expect(pressCount, enabled ? 1 : 0);
@@ -86,7 +86,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell(
+            child: FTappable(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
@@ -95,7 +95,7 @@ void main() {
         );
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
-        await tester.longPress(find.byType(FInkwell));
+        await tester.longPress(find.byType(FTappable));
         expect(find.text((focused: false, hovered: enabled).toString()), findsOneWidget);
 
         await tester.pumpAndSettle();
@@ -107,7 +107,7 @@ void main() {
     }
   });
 
-  group('AnimatedInkWell', () {
+  group('AnimatedTappable', () {
     for (final enabled in [true, false]) {
       testWidgets('focused - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         final focusNode = FocusNode();
@@ -115,7 +115,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell.animated(
+            child: FTappable.animated(
               focusNode: focusNode,
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () {} : null,
@@ -133,7 +133,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell.animated(
+            child: FTappable.animated(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () {} : null,
             ),
@@ -146,7 +146,7 @@ void main() {
         addTearDown(gesture.removePointer);
         await tester.pump();
 
-        await gesture.moveTo(tester.getCenter(find.byType(AnimatedInkwell)));
+        await gesture.moveTo(tester.getCenter(find.byType(AnimatedTappable)));
         await tester.pumpAndSettle();
 
         expect(find.text((focused: false, hovered: enabled).toString()), findsOneWidget);
@@ -164,7 +164,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell.animated(
+            child: FTappable.animated(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
@@ -172,7 +172,7 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(AnimatedInkwell));
+        await tester.tap(find.byType(AnimatedTappable));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
         expect(pressCount, enabled ? 1 : 0);
@@ -185,7 +185,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell.animated(
+            child: FTappable.animated(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
@@ -194,7 +194,7 @@ void main() {
         );
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
-        await tester.longPress(find.byType(AnimatedInkwell));
+        await tester.longPress(find.byType(AnimatedTappable));
         expect(find.text((focused: false, hovered: enabled).toString()), findsOneWidget);
 
         await tester.pumpAndSettle();
@@ -205,12 +205,12 @@ void main() {
       });
 
       testWidgets('press and hold - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
-        final key = GlobalKey<AnimatedInkwellState>();
+        final key = GlobalKey<AnimatedTappableState>();
 
         await tester.pumpWidget(
           TestScaffold(
             theme: FThemes.zinc.light,
-            child: FInkwell.animated(
+            child: FTappable.animated(
               key: key,
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () {} : null,
@@ -220,7 +220,7 @@ void main() {
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
         expect(key.currentState!.animation.value, 1);
 
-        final gesture = await tester.press(find.byType(AnimatedInkwell));
+        final gesture = await tester.press(find.byType(AnimatedTappable));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
         expect(find.text((focused: false, hovered: enabled).toString()), findsOneWidget);
         expect(key.currentState!.animation.value, enabled ? 0.97 : 1.0);

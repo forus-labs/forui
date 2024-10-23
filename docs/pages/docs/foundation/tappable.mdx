@@ -1,25 +1,27 @@
-import { Tabs } from 'nextra/components';
+import { Callout, Tabs } from 'nextra/components';
 import { Widget } from "../../../components/widget.tsx";
 import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
 
-# Inkwell
+# Tappable
 An area that responds to touch.
 
-It is typically used to create other high-level widgets, i.e. [button](../form/button). You should prefer those
-high-level widgets unless you're creating a custom widget.
-
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FInkwell-class.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FTappable-class.html"/>
 </LinkBadgeGroup>
+
+<Callout type="info">
+  This widget is typically used to create other high-level widgets, i.e. [button](../form/button). You should prefer
+  those high-level widgets unless you're creating a custom widget.
+</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='inkwell' query={{}} height={300}/>
+    <Widget name='tappable' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
-    FInkwell.animated(
+    FTappable.animated(
       builder: (context, data, child) => Container(
         decoration: BoxDecoration(
           color: data.hovered ? context.theme.colorScheme.secondary : context.theme.colorScheme.background,
@@ -31,7 +33,7 @@ high-level widgets unless you're creating a custom widget.
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
         child: child!,
       ),
-      child: const Text('Ink Well'),
+      child: const Text('Tappable'),
       onPress: () {},
     );
     ```
@@ -40,10 +42,10 @@ high-level widgets unless you're creating a custom widget.
 
 ## Usage
 
-### `FInkwell(...)`
+### `FTappable(...)`
 
 ```dart
-const FInkwell(
+const FTappable(
   semanticLabel: 'Label',
   semanticSelected: false,
   excludeSemantics: false,
@@ -56,14 +58,14 @@ const FInkwell(
   onPress: () {},
   onLongPress: () {},
   builder: (context, state, child) => child!,
-  child: const Text('child'),
+  child: const Text('Tappable'),
 );
 ```
 
-### `FInkwell.animated(...)`
+### `FTappable.animated(...)`
 
 ```dart
-const FInkwell.animated(
+const FTappable.animated(
   semanticLabel: 'Label',
   semanticSelected: false,
   excludeSemantics: false,
@@ -76,6 +78,6 @@ const FInkwell.animated(
   onPress: () {},
   onLongPress: () {},
   builder: (context, state, child) => child!,
-  child: const Text('child'),
+  child: const Text('Tappable'),
 );
 ```

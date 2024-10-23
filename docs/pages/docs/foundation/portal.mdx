@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components';
+import { Callout, Tabs } from 'nextra/components';
 import { Widget } from "../../../components/widget.tsx";
 import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
@@ -6,16 +6,18 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 # Portal
 A portal renders a follower widget that "floats" on top of a target widget.
 
-It is typically used to create other high-level widgets, i.e. [popover](../overlay/popover) or
-[tooltip](../overlay/tooltip). You should prefer those high-level widgets unless you're creating a custom widget.
-
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FPortal-class.html"/>
 </LinkBadgeGroup>
 
+<Callout type="info">
+  This widget is typically used to create other high-level widgets, i.e. [popover](../overlay/popover) or
+  [tooltip](../overlay/tooltip). You should prefer those high-level widgets unless you're creating a custom widget.
+</Callout>
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='portal' query={{}} height={300}/>
+    <Widget name='portal' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
@@ -23,14 +25,50 @@ It is typically used to create other high-level widgets, i.e. [popover](../overl
 
     FPortal(
       controller: controller,
-      followerBuilder: (context) => const ColoredBox(
-        color: Colors.red,
-        child: SizedBox.square(
-          dimension: 100,
+      followerBuilder: (context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.theme.colorScheme.background,
+            border: Border.all(color: context.theme.colorScheme.border, width: 1),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colorScheme.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialValue: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ],
+              ],
+            ),
+          ),
         ),
       ),
       child: FButton(
-        label: const Text('Target'),
+        label: const Text('Portal'),
         onPressed: () => controller.toggle(),
       ),
     ),

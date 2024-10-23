@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inkwell.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends FChangeNotifier {

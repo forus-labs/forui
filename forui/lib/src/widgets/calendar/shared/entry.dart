@@ -12,7 +12,7 @@ final _yMMMMd = DateFormat.yMMMMd();
 @internal
 abstract class Entry extends StatelessWidget {
   final FCalendarEntryStyle style;
-  final ValueWidgetBuilder<FInkwellData> builder;
+  final ValueWidgetBuilder<FTappableData> builder;
 
   factory Entry.day({
     required FCalendarDayPickerStyle style,
@@ -32,7 +32,7 @@ abstract class Entry extends StatelessWidget {
     final dayStyle = current ? styles.current : styles.enclosing;
     final entryStyle = isSelected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
-    Widget builder(BuildContext context, FInkwellData data, Widget? child) => _Content(
+    Widget builder(BuildContext context, FTappableData data, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.horizontal(
             left: isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius,
@@ -70,7 +70,7 @@ abstract class Entry extends StatelessWidget {
   }) {
     final entryStyle = selectable ? style.enabledStyle : style.disabledStyle;
 
-    Widget builder(BuildContext context, FInkwellData data, Widget? child) => _Content(
+    Widget builder(BuildContext context, FTappableData data, Widget? child) => _Content(
           style: entryStyle,
           borderRadius: BorderRadius.all(entryStyle.radius),
           text: format(date),
@@ -126,7 +126,7 @@ class _SelectableEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => FInkwell(
+  Widget build(BuildContext context) => FTappable(
         semanticLabel: semanticLabel,
         semanticSelected: selected,
         focusNode: focusNode,
@@ -165,7 +165,7 @@ class _Content extends StatelessWidget {
   final FCalendarEntryStyle style;
   final BorderRadius borderRadius;
   final String text;
-  final FInkwellData data;
+  final FTappableData data;
   final bool current;
 
   const _Content({

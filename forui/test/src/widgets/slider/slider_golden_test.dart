@@ -7,7 +7,7 @@ import 'package:flutter/material.dart' hide Thumb;
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inkwell.dart';
+import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/slider/thumb.dart';
 import '../../test_scaffold.dart';
 

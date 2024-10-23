@@ -82,7 +82,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       builder: (context, _) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          FInkwell(
+          FTappable(
             onPress: () => controller.toggle(index),
             builder: (context, state, child) => Padding(
               padding: style.titlePadding,

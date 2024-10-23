@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inkwell.dart';
+import 'package:forui/src/foundation/tappable.dart';
 
 /// A slider's styles.
 final class FSliderStyles with Diagnosticable {

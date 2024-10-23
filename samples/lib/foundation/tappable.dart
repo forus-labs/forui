@@ -6,13 +6,13 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample_scaffold.dart';
 
 @RoutePage()
-class InkwellPage extends SampleScaffold {
-  InkwellPage({
+class TappablePage extends SampleScaffold {
+  TappablePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FInkwell.animated(
+  Widget child(BuildContext context) => FTappable.animated(
         builder: (context, data, child) => Container(
           decoration: BoxDecoration(
             color: data.hovered ? context.theme.colorScheme.secondary : context.theme.colorScheme.background,
@@ -24,7 +24,7 @@ class InkwellPage extends SampleScaffold {
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
           child: child!,
         ),
-        child: const Text('Ink Well'),
+        child: const Text('Tappable'),
         onPress: () {},
       );
 }

@@ -113,7 +113,7 @@ class FTile extends StatelessWidget {
           ),
         );
 
-    return FInkwell(
+    return FTappable(
       semanticLabel: semanticLabel,
       touchHoverEnterDuration: style.touchHoverEnterDuration,
       touchHoverExitDuration: style.touchHoverExitDuration,
