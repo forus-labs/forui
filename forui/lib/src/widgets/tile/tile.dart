@@ -1,10 +1,37 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/tile/tile_group.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/tile/tile_content.dart';
+
+/// The divider between tiles in a group.
+enum FTileDivider {
+  /// Represents a divider that spans the entire tile horizontally.
+  full,
+
+  /// Represents a divider that partially spans the tile horizontally. A tile is always responsible for the divider
+  /// directly below it.
+  ///
+  /// For [FTile.new], the divider spans from the title's left edge to the tile's right edge. It is always aligned to
+  /// the title of the tile above the divider.
+  /// ```
+  /// -----------------------------
+  /// | [prefixIcon] [title]      | <- Tile A
+  /// |              ------------ |
+  /// | [title]                   | <- Tile B
+  /// -----------------------------
+  /// ```
+  indented,
+
+  /// No divider between tiles.
+  none,
+}
+
+/// A marker interface which denotes that mixed-in widgets can be used in a [FTileGroup].
+mixin FTileMixin on Widget {}
 
 /// A tile that is typically used to group related information together.
 ///
@@ -15,7 +42,7 @@ import 'package:forui/src/widgets/tile/tile_content.dart';
 /// * https://forui.dev/docs/tile/tile for working examples.
 /// * [FTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a tile's appearance.
-class FTile extends StatelessWidget {
+class FTile extends StatelessWidget with FTileMixin {
   /// The tile's style. Defaults to the ancestor tile group's style if present, and [FThemeData.tileGroupStyle] otherwise.
   ///
   /// Provide a style to prevent inheriting from the ancestor tile group's style.
@@ -78,9 +105,11 @@ class FTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final inherited = FTileData.maybeOf(context);
     final style = this.style ?? inherited?.style ?? context.theme.tileGroupStyle.tileStyle;
-    final divider = inherited?.divider ?? FTileDivider.full;
-    final index = inherited?.index ?? 0;
-    final length = inherited?.length ?? 1;
+
+    final group = extractTileGroup(FTileGroupData.maybeOf(context));
+    final tile = extractTile(inherited);
+    final curveTop = group.index == 0 && tile.index == 0;
+    final curveBottom = group.index == group.length - 1 && tile.index == tile.length - 1;
 
     Widget content({required bool hovered}) => DecoratedBox(
           decoration: BoxDecoration(
@@ -90,25 +119,25 @@ class FTile extends StatelessWidget {
               (false, _) => style.disabledBackgroundColor,
             },
             border: Border(
-              top: index == 0 ? style.border.top : BorderSide.none,
+              top: curveTop ? style.border.top : BorderSide.none,
               left: style.border.left,
               right: style.border.right,
-              bottom: index == length - 1 ? style.border.top : BorderSide.none,
+              bottom: curveBottom ? style.border.top : BorderSide.none,
             ),
             borderRadius: BorderRadius.only(
-              topLeft: index == 0 ? style.borderRadius.topLeft : Radius.zero,
-              topRight: index == 0 ? style.borderRadius.topRight : Radius.zero,
-              bottomLeft: index == length - 1 ? style.borderRadius.bottomLeft : Radius.zero,
-              bottomRight: index == length - 1 ? style.borderRadius.bottomLeft : Radius.zero,
+              topLeft: curveTop ? style.borderRadius.topLeft : Radius.zero,
+              topRight: curveTop ? style.borderRadius.topRight : Radius.zero,
+              bottomLeft: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
+              bottomRight: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
             ),
           ),
           child: FTileData(
             style: style,
-            divider: divider,
+            divider: tile.divider,
             enabled: enabled,
             hovered: hovered,
-            index: index,
-            length: length,
+            index: tile.index,
+            length: tile.length,
             child: child,
           ),
         );
@@ -134,6 +163,14 @@ class FTile extends StatelessWidget {
       ..add(ObjectFlagProperty('onLongPress', onLongPress, ifPresent: 'onLongPress', level: DiagnosticLevel.debug));
   }
 }
+
+/// Extracts the data from the given [FTileData].
+@internal
+({int index, int length, FTileDivider divider}) extractTile(FTileData? data) => (
+    index: data?.index ?? 0,
+    length: data?.length ?? 1,
+    divider: data?.divider ?? FTileDivider.indented,
+  );
 
 /// A tile's data.
 class FTileData extends InheritedWidget {
@@ -171,7 +208,7 @@ class FTileData extends InheritedWidget {
     required this.length,
     required super.child,
     super.key,
-  }) : super();
+  });
 
   @override
   bool updateShouldNotify(FTileData old) =>

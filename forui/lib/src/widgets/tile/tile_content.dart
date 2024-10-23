@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/tile/tile_group.dart';
 
 import 'package:meta/meta.dart';
 
@@ -27,16 +28,26 @@ class FTileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FTileData(style: tileStyle, :index, :length, :divider, :enabled, :hovered) = FTileData.maybeOf(context)!;
+    final tile = FTileData.maybeOf(context)!;
+    final FTileData(style: tileStyle, :enabled, :hovered) = tile;
+
+    final group = extractTileGroup(FTileGroupData.maybeOf(context));
+
     final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
     final style = switch ((enabled, hovered)) {
       (true, true) => contentStyle.enabledHoveredStyle,
       (true, false) => contentStyle.enabledStyle,
       (false, _) => contentStyle.disabledStyle,
     };
+    final divider = switch (tile) {
+      _ when tile.divider != FTileDivider.none && tile.index != tile.length - 1 => tile.divider,
+      _ when group.divider != FTileDivider.none && group.index != group.length - 1 => group.divider,
+      _ => FTileDivider.none,
+    };
 
     return TileRenderObject(
       style: contentStyle,
+      divider: divider,
       children: [
         if (prefixIcon case final prefixIcon?)
           Padding(
@@ -102,7 +113,7 @@ class FTileContent extends StatelessWidget {
           )
         else
           const SizedBox(),
-        if (divider == FTileDivider.none || index == length - 1) const SizedBox() else FDivider(style: dividerStyle),
+        if (divider == FTileDivider.none) const SizedBox() else FDivider(style: dividerStyle),
       ],
     );
   }
@@ -110,7 +121,7 @@ class FTileContent extends StatelessWidget {
 
 /// A [FTile] content's style.
 final class FTileContentStyle with Diagnosticable {
-  /// The content's padding. Defaults to `EdgeInsets.only(left: 15, top: 8, right: 10, bottom: 8)`.
+  /// The content's padding. Defaults to `EdgeInsets.only(left: 15, top: 13, right: 10, bottom: 13)`.
   final EdgeInsets padding;
 
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
@@ -151,7 +162,7 @@ final class FTileContentStyle with Diagnosticable {
     required this.enabledStyle,
     required this.enabledHoveredStyle,
     required this.disabledStyle,
-    this.padding = const EdgeInsets.only(left: 15, top: 10, right: 10, bottom: 10),
+    this.padding = const EdgeInsets.only(left: 15, top: 13, right: 10, bottom: 13),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 4,
     this.middleSpacing = 4,
