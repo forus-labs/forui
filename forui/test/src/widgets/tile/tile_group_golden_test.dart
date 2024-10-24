@@ -142,6 +142,13 @@ void main() {
                       onPress: () {},
                     ),
                     FTile(
+                      prefixIcon: FIcon(FAssets.icons.mail),
+                      title: const Text('Mail'),
+                      details: const Text('42'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                    FTile(
                       prefixIcon: FIcon(FAssets.icons.bluetooth),
                       title: const Text('Bluetooth'),
                       subtitle: const Text('Fee, Fo'),

@@ -11,27 +11,27 @@ import 'package:forui/src/foundation/rendering.dart';
 @internal
 class TileRenderObject extends MultiChildRenderObjectWidget {
   final FTileContentStyle style;
+  final FTileDivider divider;
 
-  const TileRenderObject({required this.style, super.key, super.children});
+  const TileRenderObject({required this.style, required this.divider, super.key, super.children});
 
   @override
-  RenderObject createRenderObject(BuildContext context) {
-    final FTileData(:divider) = FTileData.maybeOf(context)!;
-    return _RenderTile(style, divider);
-  }
+  RenderObject createRenderObject(BuildContext context) => _RenderTile(style, divider);
 
   @override
   // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext context, covariant _RenderTile renderObject) {
     renderObject
       ..style = style
-      ..divider = FTileData.maybeOf(context)!.divider;
+      ..divider = divider;
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('divider', divider));
   }
 }
 

@@ -11,9 +11,9 @@ class TileGroupPage extends SampleScaffold {
 
   TileGroupPage({
     @queryParam super.theme,
-    @queryParam String divider = 'partial',
+    @queryParam String divider = 'indented',
   }) : divider = switch (divider) {
-          'full' => FTileDivider.full,
+          'indented' => FTileDivider.indented,
           'none' => FTileDivider.none,
           _ => FTileDivider.indented,
         };
