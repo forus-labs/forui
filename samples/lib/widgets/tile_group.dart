@@ -15,7 +15,7 @@ class TileGroupPage extends SampleScaffold {
   }) : divider = switch (divider) {
           'indented' => FTileDivider.indented,
           'none' => FTileDivider.none,
-          _ => FTileDivider.indented,
+          _ => FTileDivider.full,
         };
 
   @override
