@@ -99,7 +99,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/tile/subtitle', page: TileSubtitleRoute.page),
         AutoRoute(path: '/tile/details', page: TileDetailsRoute.page),
         AutoRoute(path: '/tile-group/default', page: TileGroupRoute.page),
-        AutoRoute(path: '/tile-groups/default', page: TileGroupsRoute.page),
+        AutoRoute(path: '/tile-group/merge', page: MergeTileGroup.page),
         AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
       ];
 }

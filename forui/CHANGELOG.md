@@ -12,8 +12,6 @@
 
 * Add `FTileGroup`.
 
-* Add `FTileGroups`.
-
 ### Fixes
 
 * Change FButton's animation to only start on mouse down and up.

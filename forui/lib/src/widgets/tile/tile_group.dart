@@ -4,42 +4,61 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/util.dart';
+import 'package:forui/src/foundation/util.dart' as util;
 
-/// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroups].
-mixin FTileGroupMixin on Widget {}
+/// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [_MergeTileGroups].
+mixin FTileGroupMixin<T extends Widget> on Widget {}
 
-/// A tile group that groups multiple [FTile]s.
+/// A tile group that groups multiple [FTileMixin]s and [FTileGroupMixin]s together.
 ///
 /// Tiles grouped together will be separated by a divider, specified by [divider].
 ///
 /// See:
 /// * https://forui.dev/docs/tile/tile-group for working examples.
-/// * [FTileGroups] for grouping groups together.
 /// * [FTileGroupStyle] for customizing a tile's appearance.
-class FTileGroup extends StatelessWidget with FTileGroupMixin {
+class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The style.
   final FTileGroupStyle? style;
 
   /// The divider between tiles. Defaults tp [FTileDivider.indented].
   final FTileDivider divider;
 
-  /// The group's semantic label.
-  final String? semanticLabel;
-
   /// The group's label. It is ignored if the group is part of a [FTileGroup]s.
   final Widget? label;
 
+  /// The group's semantic label.
+  final String? semanticLabel;
+
   /// The tiles in the group.
   final List<FTileMixin> children;
+
+  /// Creates a [FTileGroup] that merges multiple [FTileMixin]s together.
+  ///
+  /// All group labels will be ignored.
+  static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
+    required List<FTileGroupMixin<FTileMixin>> children,
+    FTileGroupStyle? style,
+    FTileDivider divider = FTileDivider.full,
+    Widget? label,
+    String? semanticLabel,
+    Key? key,
+  }) =>
+      _MergeTileGroups(
+        style: style,
+        divider: divider,
+        label: label,
+        semanticLabel: semanticLabel,
+        key: key,
+        children: children,
+      );
 
   /// Creates a [FTileGroup].
   const FTileGroup({
     required this.children,
     this.style,
     this.divider = FTileDivider.indented,
-    this.semanticLabel,
     this.label,
+    this.semanticLabel,
     super.key,
   });
 
@@ -58,7 +77,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
           if (label case final label? when data == null)
             Padding(
               padding: style.labelPadding,
-              child: merge(
+              child: util.merge(
                 style: style.labelTextStyle,
                 textHeightBehavior: const TextHeightBehavior(
                   applyHeightToFirstAscent: false,
@@ -74,6 +93,69 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
               divider: divider,
               enabled: true,
               hovered: false,
+              index: index,
+              length: children.length,
+              child: child,
+            ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('divider', divider))
+      ..add(StringProperty('semanticLabel', semanticLabel));
+  }
+}
+
+class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
+  final FTileGroupStyle? style;
+  final FTileDivider divider;
+  final String? semanticLabel;
+  final Widget? label;
+  final List<FTileGroupMixin> children;
+
+  const _MergeTileGroups({
+    required this.children,
+    this.style,
+    this.divider = FTileDivider.full,
+    this.semanticLabel,
+    this.label,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final style = this.style ?? context.theme.tileGroupStyle;
+
+    return Semantics(
+      label: semanticLabel,
+      container: true,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (label case final label?)
+            Padding(
+              padding: style.labelPadding,
+              child: util.merge(
+                style: style.labelTextStyle,
+                textHeightBehavior: const TextHeightBehavior(
+                  applyHeightToFirstAscent: false,
+                  applyHeightToLastDescent: false,
+                ),
+                overflow: TextOverflow.ellipsis,
+                child: label,
+              ),
+            ),
+          for (final (index, child) in children.indexed)
+            FTileGroupData(
+              style: style,
+              divider: divider,
               index: index,
               length: children.length,
               child: child,
