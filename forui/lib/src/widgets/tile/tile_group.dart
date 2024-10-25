@@ -32,7 +32,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The tiles in the group.
   final List<FTileMixin> children;
 
-  /// Creates a [FTileGroup] that merges multiple [FTileMixin]s together.
+  /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
   ///
   /// All group labels will be ignored.
   static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
