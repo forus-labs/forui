@@ -97,9 +97,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(DiagnosticsProperty('testing', (1, 2, 3)))
-      ..add(IterableProperty('items', items));
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }
 

@@ -48,11 +48,22 @@ class FTile extends StatelessWidget with FTileMixin {
   /// Provide a style to prevent inheriting from the ancestor tile group's style.
   final FTileStyle? style;
 
-  /// Whether the FTile is enabled. Defaults to true.
+  /// Whether the `FTile` is enabled. Defaults to true.
   final bool enabled;
 
   /// The semantic label.
   final String? semanticLabel;
+
+  /// Whether this tile should focus itself if nothing else is already focused. Defaults to false.
+  final bool autofocus;
+
+  /// Defines the [FocusNode] for this tile.
+  final FocusNode? focusNode;
+
+  /// Handler called when the focus changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  final ValueChanged<bool>? onFocusChange;
 
   /// A callback for when the tile is pressed.
   ///
@@ -84,6 +95,9 @@ class FTile extends StatelessWidget with FTileMixin {
     this.style,
     this.enabled = true,
     this.semanticLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
     Widget? prefixIcon,
@@ -146,6 +160,9 @@ class FTile extends StatelessWidget with FTileMixin {
       semanticLabel: semanticLabel,
       touchHoverEnterDuration: style.touchHoverEnterDuration,
       touchHoverExitDuration: style.touchHoverExitDuration,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
       onPress: onPress,
       onLongPress: onLongPress,
       builder: (_, data, __) => content(hovered: data.hovered),
@@ -159,6 +176,9 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
       ..add(StringProperty('semanticLabel', semanticLabel, defaultValue: null, quoted: false))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty('onPress', onPress, ifPresent: 'onPress', level: DiagnosticLevel.debug))
       ..add(ObjectFlagProperty('onLongPress', onLongPress, ifPresent: 'onLongPress', level: DiagnosticLevel.debug));
   }

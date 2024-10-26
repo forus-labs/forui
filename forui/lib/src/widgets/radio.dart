@@ -34,7 +34,7 @@ class FRadio extends StatelessWidget {
   /// The current value of the radio.
   final bool value;
 
-  /// Called when the user initiates a change to the Fradio's value: when they have checked or unchecked this box.
+  /// Called when the user initiates a change to the [FRadio]'s value: when they have checked or unchecked this box.
   final ValueChanged<bool>? onChange;
 
   /// Whether this radio is enabled. Defaults to true.

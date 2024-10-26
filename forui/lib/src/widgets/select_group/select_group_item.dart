@@ -154,7 +154,7 @@ class _Checkbox<T> extends FSelectGroupItem<T> {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectGroupItemData(:controller, :style) = FSelectGroupItemData.of<T>(context);
+    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
     final checkboxStyle = this.style ?? style.checkboxStyle;
 
     return Padding(
@@ -165,7 +165,7 @@ class _Checkbox<T> extends FSelectGroupItem<T> {
         description: description,
         semanticLabel: semanticLabel,
         error: error,
-        value: controller.contains(value),
+        value: selected,
         onChange: (state) => controller.select(value, state),
         enabled: enabled,
         autofocus: autofocus,
@@ -216,7 +216,7 @@ class _Radio<T> extends FSelectGroupItem<T> {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectGroupItemData(:controller, :style) = FSelectGroupItemData.of<T>(context);
+    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
     final radioStyle = this.style ?? style.radioStyle;
 
     return Padding(
@@ -227,7 +227,7 @@ class _Radio<T> extends FSelectGroupItem<T> {
         description: description,
         semanticLabel: semanticLabel,
         error: error,
-        value: controller.contains(value),
+        value: selected,
         onChange: (state) => controller.select(value, state),
         enabled: enabled,
         autofocus: autofocus,
