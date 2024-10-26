@@ -11,11 +11,11 @@ class TileGroupPage extends SampleScaffold {
 
   TileGroupPage({
     @queryParam super.theme,
-    @queryParam String divider = 'partial',
+    @queryParam String divider = 'indented',
   }) : divider = switch (divider) {
-          'full' => FTileDivider.full,
+          'indented' => FTileDivider.indented,
           'none' => FTileDivider.none,
-          _ => FTileDivider.indented,
+          _ => FTileDivider.full,
         };
 
   @override
@@ -40,6 +40,71 @@ class TileGroupPage extends SampleScaffold {
                   details: const Text('Forus Labs (5G)'),
                   suffixIcon: FIcon(FAssets.icons.chevronRight),
                   onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+}
+
+@RoutePage()
+class MergeTileGroup extends SampleScaffold {
+  final FTileDivider divider;
+
+  MergeTileGroup({
+    @queryParam super.theme,
+    @queryParam String divider = 'full',
+  }) : divider = switch (divider) {
+          'indented' => FTileDivider.indented,
+          'none' => FTileDivider.none,
+          _ => FTileDivider.full,
+        };
+
+  @override
+  Widget child(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: FTileGroup.merge(
+              label: const Text('Settings'),
+              divider: divider,
+              children: [
+                FTileGroup(
+                  children: [
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.user),
+                      title: const Text('Personalization'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      title: const Text('WiFi'),
+                      details: const Text('Forus Labs (5G)'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+                FTileGroup(
+                  children: [
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.check),
+                      title: const Text('List View'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      prefixIcon: const SizedBox.square(
+                        dimension: 17,
+                      ),
+                      title: const Text('Grid View'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                  ],
                 ),
               ],
             ),

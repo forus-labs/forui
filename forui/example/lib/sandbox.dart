@@ -20,17 +20,21 @@ class _SandboxState extends State<Sandbox> {
   }
 
   @override
-  Widget build(BuildContext context) => FAccordion(
-        items: [
-          FAccordionItem(
-            initiallyExpanded: true,
-            title: const Text('Title'),
-            child: const ColoredBox(
-              color: Colors.yellow,
-              child: SizedBox.square(
-                dimension: 50,
-              ),
+  Widget build(BuildContext context) => FTileGroup(
+        children: [
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.check),
+            title: const Text('List View'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+          FTile(
+            prefixIcon: const SizedBox.square(
+              dimension: 17,
             ),
+            title: const Text('Grid View'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
           ),
         ],
       );

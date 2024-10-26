@@ -84,4 +84,4 @@ jobs:
       # Check that all relative URLs are working. We don't check external links due to rate limiting.
       - uses: actions/setup-go@v5
       - run: go install github.com/raviqqe/muffet/v2@latest
-      - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)"
+      - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)|(shadcn.com)"
