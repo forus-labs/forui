@@ -49,7 +49,7 @@ class FTile extends StatelessWidget with FTileMixin {
   final FTileStyle? style;
 
   /// Whether the `FTile` is enabled. Defaults to true.
-  final bool enabled;
+  final bool? enabled;
 
   /// The semantic label.
   final String? semanticLabel;
@@ -93,7 +93,7 @@ class FTile extends StatelessWidget with FTileMixin {
   FTile({
     required Widget title,
     this.style,
-    this.enabled = true,
+    this.enabled,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -105,8 +105,8 @@ class FTile extends StatelessWidget with FTileMixin {
     Widget? details,
     Widget? suffixIcon,
     super.key,
-  })  : onPress = enabled ? onPress : null,
-        onLongPress = enabled ? onLongPress : null,
+  })  : onPress = (enabled ?? true) ? onPress : null,
+        onLongPress = (enabled ?? true) ? onLongPress : null,
         child = FTileContent(
           title: title,
           prefixIcon: prefixIcon,
@@ -122,6 +122,7 @@ class FTile extends StatelessWidget with FTileMixin {
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
     final tile = extractTile(inherited);
+    final enabled = this.enabled ?? tile.enabled;
     final curveTop = group.index == 0 && tile.index == 0;
     final curveBottom = group.index == group.length - 1 && tile.index == tile.length - 1;
 
@@ -186,7 +187,8 @@ class FTile extends StatelessWidget with FTileMixin {
 
 /// Extracts the data from the given [FTileData].
 @internal
-({int index, int length, FTileDivider divider}) extractTile(FTileData? data) => (
+({int index, int length, FTileDivider divider, bool enabled}) extractTile(FTileData? data) => (
+      enabled: data?.enabled ?? true,
       index: data?.index ?? 0,
       length: data?.length ?? 1,
       divider: data?.divider ?? FTileDivider.indented,
@@ -245,8 +247,8 @@ class FTileData extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('divider', divider))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
-      ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered', level: DiagnosticLevel.debug))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
+      ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered'))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length));
   }

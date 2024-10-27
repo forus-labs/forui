@@ -132,6 +132,8 @@ void main() {
                 padding: const EdgeInsets.all(8.0),
                 child: FTileGroup(
                   label: const Text('Network'),
+                  description: const Text('Configure your network'),
+                  error: const Text('This should not appear'),
                   divider: divider,
                   children: [
                     FTile(
@@ -221,6 +223,9 @@ void main() {
                   padding: const EdgeInsets.all(8.0),
                   child: FTileGroup(
                     label: const Text('Network'),
+                    description: const Text('Configure your network'),
+                    error: const Text('This should not appear'),
+                    state: FLabelState.disabled,
                     divider: divider,
                     children: [
                       FTile(
@@ -253,6 +258,43 @@ void main() {
           });
         }
       }
+
+      testWidgets('error - $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme,
+            background: background,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTileGroup(
+                label: const Text('Network'),
+                description: const Text('Configure your network'),
+                error: const Text('This should appear'),
+                state: FLabelState.error,
+                children: [
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    title: const Text('WiFi'),
+                    details: const Text('FL (5G)'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.bluetooth),
+                    title: const Text('Bluetooth'),
+                    subtitle: const Text('Fee, Fo'),
+                    details: const Text('FL (5G)'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$name/error.png'));
+      });
     }
 
     testWidgets('single tile', (tester) async {
@@ -327,7 +369,41 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/override.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/override-style.png'));
+    });
+
+    testWidgets('tile state overrides group state', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: FThemes.zinc.light,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FTileGroup(
+              label: const Text('Network'),
+              state: FLabelState.disabled,
+              children: [
+                FTile(
+                  enabled: true,
+                  prefixIcon: FIcon(FAssets.icons.wifi),
+                  title: const Text('WiFi'),
+                  details: const Text('FL (5G)'),
+                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  onPress: () {},
+                ),
+                FTile(
+                  prefixIcon: FIcon(FAssets.icons.bluetooth),
+                  title: const Text('Bluetooth'),
+                  subtitle: const Text('Fee, Fo'),
+                  details: const Text('FL (5G)'),
+                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/override-state.png'));
     });
   });
 
@@ -449,6 +525,8 @@ void main() {
                 padding: const EdgeInsets.all(8.0),
                 child: FTileGroup.merge(
                   label: const Text('Network'),
+                  description: const Text('Configure your network'),
+                  error: const Text('This should not appear'),
                   divider: divider,
                   children: [
                     FTileGroup(
@@ -524,6 +602,94 @@ void main() {
           await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/$name/$divider.png'));
         });
       }
+
+      testWidgets('disabled - $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme,
+            background: background,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTileGroup.merge(
+                label: const Text('Network'),
+                description: const Text('Configure your network'),
+                error: const Text('This should not appear'),
+                state: FLabelState.disabled,
+                children: [
+                  FTileGroup(
+                    children: [
+                      FTile(
+                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        title: const Text('WiFi'),
+                        details: const Text('FL (5G)'),
+                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
+                  FTileGroup(
+                    children: [
+                      FTile(
+                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        title: const Text('WiFi'),
+                        details: const Text('FL (5G)'),
+                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/$name/disabled.png'));
+      });
+
+      testWidgets('error - $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme,
+            background: background,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTileGroup.merge(
+                label: const Text('Network'),
+                description: const Text('Configure your network'),
+                error: const Text('This should not appear'),
+                state: FLabelState.error,
+                children: [
+                  FTileGroup(
+                    children: [
+                      FTile(
+                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        title: const Text('WiFi'),
+                        details: const Text('FL (5G)'),
+                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
+                  FTileGroup(
+                    children: [
+                      FTile(
+                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        title: const Text('WiFi'),
+                        details: const Text('FL (5G)'),
+                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/$name/error.png'));
+      });
     }
 
     testWidgets('single group', (tester) async {
@@ -582,6 +748,8 @@ void main() {
               children: [
                 FTileGroup(
                   label: const Text('Nested'),
+                  description: const Text('Configure your network'),
+                  error: const Text('This should not appear'),
                   children: [
                     FTile(
                       prefixIcon: FIcon(FAssets.icons.wifi),
@@ -612,6 +780,8 @@ void main() {
               children: [
                 FTileGroup(
                   label: const Text('Child 1'),
+                  description: const Text('Configure your network'),
+                  error: const Text('This should not appear'),
                   children: [
                     FTile(
                       prefixIcon: FIcon(FAssets.icons.wifi),
@@ -624,6 +794,8 @@ void main() {
                 ),
                 FTileGroup(
                   label: const Text('Child 2'),
+                  description: const Text('Configure your network'),
+                  error: const Text('This should not appear'),
                   children: [
                     FTile(
                       prefixIcon: FIcon(FAssets.icons.wifi),
@@ -643,7 +815,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/ignore-group-labels.png'));
     });
 
-    testWidgets('styles are overridden', (tester) async {
+    testWidgets('group style overrides group style', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           theme: FThemes.zinc.light,
@@ -688,7 +860,55 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/override.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/override-style.png'));
+    });
+
+    testWidgets('group state overrides group state', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: FThemes.zinc.light,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FTileGroup.merge(
+              state: FLabelState.disabled,
+              children: [
+                FTileGroup(
+                  children: [
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      title: const Text('WiFi'),
+                      details: const Text('FL (5G)'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.bluetooth),
+                      title: const Text('Bluetooth'),
+                      subtitle: const Text('Fee, Fo'),
+                      details: const Text('FL (5G)'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    ),
+                  ],
+                ),
+                FTileGroup(
+                  state: FLabelState.enabled,
+                  children: [
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      title: const Text('WiFi'),
+                      details: const Text('FL (5G)'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/override-state.png'));
     });
   });
 }
