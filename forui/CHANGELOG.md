@@ -12,13 +12,19 @@
 
 * Add `FTileGroup`.
 
+* Add `FSelectTile`.
+
+* Add `FSelectTileGroup`.
+
 ### Fixes
 
 * Change FButton's animation to only start on mouse down and up.
 
+
 ## 0.6.1
 
 * Fix range slider not displaying tooltip for minimum thumb.
+
 
 ## 0.6.0
 

@@ -211,7 +211,7 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
     required super.disabledStyle,
     required super.errorStyle,
     this.labelLayoutStyle = const FLabelLayoutStyle(
-      labelPadding: EdgeInsets.symmetric(vertical: 7.5),
+      labelPadding: EdgeInsets.symmetric(vertical: 7.7),
       descriptionPadding: EdgeInsets.only(top: 7.5),
       errorPadding: EdgeInsets.only(top: 5),
     ),
@@ -223,7 +223,6 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
     required FTypography typography,
     required FStyle style,
   }) : this(
-          // en: typography.base.copyWith(fontWeight: FontWeight.w600),
           tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           enabledStyle: FFormFieldStyle(
             labelTextStyle: typography.base.copyWith(
@@ -232,7 +231,6 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
             ),
             descriptionTextStyle: typography.xs.copyWith(
               color: style.enabledFormFieldStyle.descriptionTextStyle.color,
-              fontWeight: FontWeight.w600,
             ),
           ),
           disabledStyle: FFormFieldStyle(
@@ -242,7 +240,6 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
             ),
             descriptionTextStyle: typography.xs.copyWith(
               color: style.disabledFormFieldStyle.descriptionTextStyle.color,
-              fontWeight: FontWeight.w600,
             ),
           ),
           errorStyle: FFormFieldErrorStyle(
@@ -252,7 +249,6 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
             ),
             descriptionTextStyle: typography.xs.copyWith(
               color: style.errorFormFieldStyle.descriptionTextStyle.color,
-              fontWeight: FontWeight.w600,
             ),
             errorTextStyle: typography.xs.copyWith(
               color: style.errorFormFieldStyle.errorTextStyle.color,

@@ -22,6 +22,7 @@ class _SandboxState extends State<Sandbox> {
   @override
   Widget build(BuildContext context) => FTileGroup.merge(
     label: const Text('Settings'),
+    description: const Text('Personalize your experience by configuring your settings. You can change your preferences at any time.'),
     children: [
       FTileGroup(
         children: [
@@ -46,6 +47,7 @@ class _SandboxState extends State<Sandbox> {
           FSelectTile.suffix(
             prefixIcon: FIcon(FAssets.icons.list),
             title: const Text('List View'),
+            subtitle: const Text('A simple list view'),
             value: 1,
           ),
           FSelectTile.suffix(

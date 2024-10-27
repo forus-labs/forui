@@ -657,7 +657,7 @@ void main() {
               child: FTileGroup.merge(
                 label: const Text('Network'),
                 description: const Text('Configure your network'),
-                error: const Text('This should not appear'),
+                error: const Text('This should appear'),
                 state: FLabelState.error,
                 children: [
                   FTileGroup(

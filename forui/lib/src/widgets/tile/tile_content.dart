@@ -164,7 +164,7 @@ final class FTileContentStyle with Diagnosticable {
     required this.disabledStyle,
     this.padding = const EdgeInsets.only(left: 15, top: 13, right: 10, bottom: 13),
     this.prefixIconSpacing = 10,
-    this.titleSpacing = 4,
+    this.titleSpacing = 3,
     this.middleSpacing = 4,
     this.suffixIconSpacing = 5,
   })  : assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.'),
