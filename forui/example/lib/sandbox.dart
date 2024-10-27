@@ -21,42 +21,43 @@ class _SandboxState extends State<Sandbox> {
 
   @override
   Widget build(BuildContext context) => FTileGroup.merge(
-    label: const Text('Settings'),
-    description: const Text('Personalize your experience by configuring your settings. You can change your preferences at any time.'),
-    children: [
-      FTileGroup(
+        label: const Text('Settings'),
+        description: const Text(
+            'Personalize your experience by configuring your settings. You can change your preferences at any time.'),
         children: [
-          FTile(
-            prefixIcon: FIcon(FAssets.icons.user),
-            title: const Text('Personalization'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () {},
+          FTileGroup(
+            children: [
+              FTile(
+                prefixIcon: FIcon(FAssets.icons.user),
+                title: const Text('Personalization'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+              FTile(
+                prefixIcon: FIcon(FAssets.icons.wifi),
+                title: const Text('WiFi'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+            ],
           ),
-          FTile(
-            prefixIcon: FIcon(FAssets.icons.wifi),
-            title: const Text('WiFi'),
-            details: const Text('Forus Labs (5G)'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () {},
+          FSelectTileGroup<int>(
+            controller: selectGroupController,
+            children: [
+              FSelectTile.suffix(
+                prefixIcon: FIcon(FAssets.icons.list),
+                title: const Text('List View'),
+                subtitle: const Text('A simple list view'),
+                value: 1,
+              ),
+              FSelectTile.suffix(
+                prefixIcon: FIcon(FAssets.icons.grid2x2),
+                title: const Text('Grid View'),
+                value: 2,
+              ),
+            ],
           ),
         ],
-      ),
-      FSelectTileGroup<int>(
-        controller: selectGroupController,
-        children: [
-          FSelectTile.suffix(
-            prefixIcon: FIcon(FAssets.icons.list),
-            title: const Text('List View'),
-            subtitle: const Text('A simple list view'),
-            value: 1,
-          ),
-          FSelectTile.suffix(
-            prefixIcon: FIcon(FAssets.icons.grid2x2),
-            title: const Text('Grid View'),
-            value: 2,
-          ),
-        ],
-      ),
-    ],
-  );
+      );
 }

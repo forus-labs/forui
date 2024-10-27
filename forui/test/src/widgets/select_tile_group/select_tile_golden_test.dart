@@ -258,7 +258,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/suffix-checked-$name.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-tile-group/tile/suffix-checked-$name.png'),
+        );
       });
 
       testWidgets('suffix icon - unchecked - $name', (tester) async {
@@ -283,7 +286,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png'),
+        );
       });
     }
   });

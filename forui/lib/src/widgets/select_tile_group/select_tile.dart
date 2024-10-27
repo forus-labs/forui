@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A tile that represents a selection in a [FSelectTileGroup]. It should only be used in a [FSelectTileGroup].
 ///
@@ -169,8 +171,7 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   });
 
   @override
-  bool updateShouldNotify(FSelectTileData old) =>
-      controller != old.controller || selected != old.selected;
+  bool updateShouldNotify(FSelectTileData old) => controller != old.controller || selected != old.selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
