@@ -245,3 +245,62 @@ class _SelectTileGroupRadioPageState extends State<_SelectTileGroupRadioPage> {
     super.dispose();
   }
 }
+
+@RoutePage()
+class SelectTileGroupSuffixPage extends SampleScaffold {
+  SelectTileGroupSuffixPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget child(BuildContext context) => const _SelectTileGroupSuffixPage();
+}
+
+class _SelectTileGroupSuffixPage extends StatefulWidget {
+  const _SelectTileGroupSuffixPage();
+
+  @override
+  State<_SelectTileGroupSuffixPage> createState() => _SelectTileGroupSuffixPageState();
+}
+
+class _SelectTileGroupSuffixPageState extends State<_SelectTileGroupSuffixPage> {
+  late final FRadioSelectGroupController<String> controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FRadioSelectGroupController();
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 300),
+        child: FSelectTileGroup(
+          controller: controller,
+          label: const Text('Settings'),
+          children: [
+            FSelectTile.suffix(
+              prefixIcon: FIcon(FAssets.icons.list),
+              title: const Text('List View'),
+              value: 'List',
+            ),
+            FSelectTile.suffix(
+              prefixIcon: FIcon(FAssets.icons.layoutGrid),
+              title: const Text('Grid View'),
+              value: 'Grid',
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+}

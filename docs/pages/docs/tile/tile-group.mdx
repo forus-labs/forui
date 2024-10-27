@@ -103,21 +103,16 @@ several sections.
             ),
           ],
         ),
-        FTileGroup(
+        FSelectTileGroup<String>(
+          controller: FRadioSelectGroupController(),
           children: [
-            FTile(
-              prefixIcon: FIcon(FAssets.icons.check),
+            FSelectTile(
               title: const Text('List View'),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: () {},
+              value: 'List',
             ),
-            FTile(
-              prefixIcon: const SizedBox.square(
-                dimension: 17,
-              ),
+            FSelectTile(
               title: const Text('Grid View'),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: () {},
+              value: 'Grid',
             ),
           ],
         ),

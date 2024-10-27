@@ -1,4 +1,4 @@
-import {Tabs} from 'nextra/components';
+import {Callout, Tabs} from 'nextra/components';
 import { Widget } from "../../../components/widget.tsx";
 import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
@@ -6,11 +6,13 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 # Select Group
 A group of items that allow users to make a selection from a set of options.
 
-For desktops, a [FSelectGroup](/docs/form/select-group) is generally recommended over a [FSelectTileGroup](/docs/tile/select-tile-group).
-
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select-group/forui.widgets.select-group-library.html"/>
 </LinkBadgeGroup>
+
+<Callout type="info">
+    For touch devices, a [FSelectTileGroup](/docs/tile/select-tile-group) is generally recommended over a [FSelectGroup](/docs/form/select-group).
+</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
