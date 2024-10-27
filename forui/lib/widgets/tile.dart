@@ -1,6 +1,6 @@
 /// {@category Widgets}
 ///
-/// A tile group that is typically used to group related information together.
+/// A tile is typically used to group related information together.
 ///
 /// See https://forui.dev/tile for working examples.
 library forui.widgets.tile;
