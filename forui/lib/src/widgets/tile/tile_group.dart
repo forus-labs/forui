@@ -33,7 +33,8 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The group's description. It is ignored if the group is part of a merged [FTileGroup].
   final Widget? description;
 
-  /// The group's error. It is ignored if the group is part of a merged [FTileGroup].
+  /// The group's error. It is ignored if the group is part of a merged [FTileGroup] or if the [state] is not
+  /// [FLabelState.error].
   final Widget? error;
 
   /// The tiles in the group.
