@@ -19,10 +19,10 @@ class SelectTileGroupPage extends SampleScaffold {
     @queryParam super.theme,
     @queryParam String divider = 'indented',
   }) : divider = switch (divider) {
-    'indented' => FTileDivider.indented,
-    'none' => FTileDivider.none,
-    _ => FTileDivider.full,
-  };
+          'indented' => FTileDivider.indented,
+          'none' => FTileDivider.none,
+          _ => FTileDivider.full,
+        };
 
   @override
   Widget child(BuildContext context) => _SelectTileGroupPage(divider: divider);
@@ -48,36 +48,36 @@ class _SelectTileGroupPageState extends State<_SelectTileGroupPage> {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 400),
-        child: FSelectTileGroup(
-          controller: controller,
-          label: const Text('Sidebar'),
-          description: const Text('These will be shown in the sidebar.'),
-          divider: widget.divider,
-          children: [
-            FSelectTile(
-              title: const Text('Recents'),
-              suffixIcon: FIcon(FAssets.icons.timer),
-              value: Sidebar.recents,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: FSelectTileGroup(
+              controller: controller,
+              label: const Text('Sidebar'),
+              description: const Text('These will be shown in the sidebar.'),
+              divider: widget.divider,
+              children: [
+                FSelectTile(
+                  title: const Text('Recents'),
+                  suffixIcon: FIcon(FAssets.icons.timer),
+                  value: Sidebar.recents,
+                ),
+                FSelectTile(
+                  title: const Text('Home'),
+                  suffixIcon: FIcon(FAssets.icons.house),
+                  value: Sidebar.home,
+                ),
+                FSelectTile(
+                  title: const Text('Applications'),
+                  suffixIcon: FIcon(FAssets.icons.appWindowMac),
+                  value: Sidebar.applications,
+                ),
+              ],
             ),
-            FSelectTile(
-              title: const Text('Home'),
-              suffixIcon: FIcon(FAssets.icons.house),
-              value: Sidebar.home,
-            ),
-            FSelectTile(
-              title: const Text('Applications'),
-              suffixIcon: FIcon(FAssets.icons.appWindowMac),
-              value: Sidebar.applications,
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 
   @override
   void dispose() {
@@ -115,51 +115,51 @@ class _SelectTileGroupMultiValuePageState extends State<_SelectTileGroupMultiVal
 
   @override
   Widget build(BuildContext context) => Form(
-    key: _formKey,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FSelectTileGroup(
-          controller: controller,
-          label: const Text('Favorite Languages'),
-          description: const Text('Your favorite language.'),
-          validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FSelectTile(
-              title: const Text('Dart'),
-              value: Language.dart,
+            FSelectTileGroup(
+              controller: controller,
+              label: const Text('Favorite Languages'),
+              description: const Text('Your favorite language.'),
+              validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
+              children: [
+                FSelectTile(
+                  title: const Text('Dart'),
+                  value: Language.dart,
+                ),
+                FSelectTile(
+                  title: const Text('Java'),
+                  value: Language.java,
+                ),
+                FSelectTile(
+                  title: const Text('Rust'),
+                  value: Language.rust,
+                ),
+                FSelectTile(
+                  title: const Text('Python'),
+                  value: Language.python,
+                ),
+              ],
             ),
-            FSelectTile(
-              title: const Text('Java'),
-              value: Language.java,
-            ),
-            FSelectTile(
-              title: const Text('Rust'),
-              value: Language.rust,
-            ),
-            FSelectTile(
-              title: const Text('Python'),
-              value: Language.python,
+            const SizedBox(height: 20),
+            FButton(
+              label: const Text('Save'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
             ),
           ],
         ),
-        const SizedBox(height: 20),
-        FButton(
-          label: const Text('Save'),
-          onPress: () {
-            if (!_formKey.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _formKey.currentState!.save();
-            // Do something.
-          },
-        ),
-      ],
-    ),
-  );
+      );
 
   @override
   void dispose() {
@@ -197,47 +197,47 @@ class _SelectTileGroupRadioPageState extends State<_SelectTileGroupRadioPage> {
 
   @override
   Widget build(BuildContext context) => Form(
-    key: _formKey,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FSelectTileGroup(
-          controller: controller,
-          label: const Text('Notifications'),
-          description: const Text('Select the notifications.'),
-          validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FSelectTile(
-              title: const Text('All new messages'),
-              value: Notification.all,
+            FSelectTileGroup(
+              controller: controller,
+              label: const Text('Notifications'),
+              description: const Text('Select the notifications.'),
+              validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
+              children: [
+                FSelectTile(
+                  title: const Text('All new messages'),
+                  value: Notification.all,
+                ),
+                FSelectTile(
+                  title: const Text('Direct messages and mentions'),
+                  value: Notification.direct,
+                ),
+                FSelectTile(
+                  title: const Text('Nothing'),
+                  value: Notification.nothing,
+                ),
+              ],
             ),
-            FSelectTile(
-              title: const Text('Direct messages and mentions'),
-              value: Notification.direct,
-            ),
-            FSelectTile(
-              title: const Text('Nothing'),
-              value: Notification.nothing,
+            const SizedBox(height: 20),
+            FButton(
+              label: const Text('Save'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
             ),
           ],
         ),
-        const SizedBox(height: 20),
-        FButton(
-          label: const Text('Save'),
-          onPress: () {
-            if (!_formKey.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _formKey.currentState!.save();
-            // Do something.
-          },
-        ),
-      ],
-    ),
-  );
+      );
 
   @override
   void dispose() {
