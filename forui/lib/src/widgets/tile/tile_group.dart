@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
 
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [_MergeTileGroups].
 mixin FTileGroupMixin<T extends Widget> on Widget {}
