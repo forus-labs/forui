@@ -9,6 +9,8 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 ///
 /// A [FSelectTileGroup] is internally a [FormField], therefore it can be used in a [Form].
 ///
+/// For desktops, a [FSelectGroup] is generally recommended over a [FSelectTileGroup].
+///
 /// See:
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTile] for a single select tile.
