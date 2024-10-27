@@ -132,29 +132,25 @@ void main() {
                 padding: const EdgeInsets.all(8.0),
                 child: FTileGroup(
                   label: const Text('Network'),
-                  description: const Text('Configure your network'),
+                  description: const Text('Description'),
                   error: const Text('This should not appear'),
                   divider: divider,
                   children: [
                     FTile(
                       prefixIcon: FIcon(FAssets.icons.wifi),
                       title: const Text('WiFi'),
-                      details: const Text('FL (5G)'),
                       suffixIcon: FIcon(FAssets.icons.chevronRight),
                       onPress: () {},
                     ),
                     FTile(
                       prefixIcon: FIcon(FAssets.icons.mail),
                       title: const Text('Mail'),
-                      details: const Text('42'),
                       suffixIcon: FIcon(FAssets.icons.chevronRight),
                       onPress: () {},
                     ),
                     FTile(
                       prefixIcon: FIcon(FAssets.icons.bluetooth),
                       title: const Text('Bluetooth'),
-                      subtitle: const Text('Fee, Fo'),
-                      details: const Text('FL (5G)'),
                       suffixIcon: FIcon(FAssets.icons.chevronRight),
                       onPress: () {},
                     ),
@@ -182,7 +178,6 @@ void main() {
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.wifi),
                         title: const Text('WiFi'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
@@ -190,7 +185,6 @@ void main() {
                         prefixIcon: FIcon(FAssets.icons.bluetooth),
                         title: const Text('Bluetooth'),
                         subtitle: const Text('Fee, Fo'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
@@ -232,7 +226,6 @@ void main() {
                         enabled: index == 0,
                         prefixIcon: FIcon(FAssets.icons.wifi),
                         title: const Text('WiFi'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
@@ -241,7 +234,6 @@ void main() {
                         prefixIcon: FIcon(FAssets.icons.bluetooth),
                         title: const Text('Bluetooth'),
                         subtitle: const Text('Fee, Fo'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
@@ -268,14 +260,13 @@ void main() {
               padding: const EdgeInsets.all(8.0),
               child: FTileGroup(
                 label: const Text('Network'),
-                description: const Text('Configure your network'),
+                description: const Text('Description'),
                 error: const Text('This should appear'),
                 state: FLabelState.error,
                 children: [
                   FTile(
                     prefixIcon: FIcon(FAssets.icons.wifi),
                     title: const Text('WiFi'),
-                    details: const Text('FL (5G)'),
                     suffixIcon: FIcon(FAssets.icons.chevronRight),
                     onPress: () {},
                   ),
@@ -283,7 +274,6 @@ void main() {
                     prefixIcon: FIcon(FAssets.icons.bluetooth),
                     title: const Text('Bluetooth'),
                     subtitle: const Text('Fee, Fo'),
-                    details: const Text('FL (5G)'),
                     suffixIcon: FIcon(FAssets.icons.chevronRight),
                     onPress: () {},
                   ),
@@ -525,7 +515,7 @@ void main() {
                 padding: const EdgeInsets.all(8.0),
                 child: FTileGroup.merge(
                   label: const Text('Network'),
-                  description: const Text('Configure your network'),
+                  description: const Text('Description'),
                   error: const Text('This should not appear'),
                   divider: divider,
                   children: [
@@ -534,14 +524,12 @@ void main() {
                         FTile(
                           prefixIcon: FIcon(FAssets.icons.wifi),
                           title: const Text('WiFi'),
-                          details: const Text('FL (5G)'),
                           suffixIcon: FIcon(FAssets.icons.chevronRight),
                           onPress: () {},
                         ),
                         FTile(
                           prefixIcon: FIcon(FAssets.icons.mail),
                           title: const Text('Mail'),
-                          details: const Text('42'),
                           suffixIcon: FIcon(FAssets.icons.chevronRight),
                           onPress: () {},
                         ),
@@ -549,7 +537,6 @@ void main() {
                           prefixIcon: FIcon(FAssets.icons.bluetooth),
                           title: const Text('Bluetooth'),
                           subtitle: const Text('Fee, Fo'),
-                          details: const Text('FL (5G)'),
                           suffixIcon: FIcon(FAssets.icons.chevronRight),
                           onPress: () {},
                         ),
@@ -560,7 +547,6 @@ void main() {
                         FTile(
                           prefixIcon: FIcon(FAssets.icons.wifi),
                           title: const Text('WiFi'),
-                          details: const Text('FL (5G)'),
                           suffixIcon: FIcon(FAssets.icons.chevronRight),
                           onPress: () {},
                         ),
@@ -568,7 +554,6 @@ void main() {
                           prefixIcon: FIcon(FAssets.icons.bluetooth),
                           title: const Text('Bluetooth'),
                           subtitle: const Text('Fee, Fo'),
-                          details: const Text('FL (5G)'),
                           suffixIcon: FIcon(FAssets.icons.chevronRight),
                           onPress: () {},
                         ),
@@ -579,7 +564,6 @@ void main() {
                         FTile(
                           prefixIcon: FIcon(FAssets.icons.wifi),
                           title: const Text('WiFi'),
-                          details: const Text('FL (5G)'),
                           suffixIcon: FIcon(FAssets.icons.chevronRight),
                           onPress: () {},
                         ),
@@ -587,7 +571,6 @@ void main() {
                           prefixIcon: FIcon(FAssets.icons.bluetooth),
                           title: const Text('Bluetooth'),
                           subtitle: const Text('Fee, Fo'),
-                          details: const Text('FL (5G)'),
                           suffixIcon: FIcon(FAssets.icons.chevronRight),
                           onPress: () {},
                         ),
@@ -612,7 +595,7 @@ void main() {
               padding: const EdgeInsets.all(8.0),
               child: FTileGroup.merge(
                 label: const Text('Network'),
-                description: const Text('Configure your network'),
+                description: const Text('Description'),
                 error: const Text('This should not appear'),
                 state: FLabelState.disabled,
                 children: [
@@ -621,7 +604,6 @@ void main() {
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.wifi),
                         title: const Text('WiFi'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
@@ -632,7 +614,6 @@ void main() {
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.wifi),
                         title: const Text('WiFi'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
@@ -656,7 +637,7 @@ void main() {
               padding: const EdgeInsets.all(8.0),
               child: FTileGroup.merge(
                 label: const Text('Network'),
-                description: const Text('Configure your network'),
+                description: const Text('Description'),
                 error: const Text('This should appear'),
                 state: FLabelState.error,
                 children: [
@@ -665,7 +646,6 @@ void main() {
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.wifi),
                         title: const Text('WiFi'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
@@ -676,7 +656,6 @@ void main() {
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.wifi),
                         title: const Text('WiFi'),
-                        details: const Text('FL (5G)'),
                         suffixIcon: FIcon(FAssets.icons.chevronRight),
                         onPress: () {},
                       ),
