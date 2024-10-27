@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/tile/select_tile.dart';
+import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -149,7 +149,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-tile/select/enabled-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/enabled-$name.png'));
       });
 
       testWidgets('hovered - $name', (tester) async {
@@ -182,7 +182,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>)));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-tile/select/hovered-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/hovered-$name.png'));
       });
 
       testWidgets('disabled - $name', (tester) async {
@@ -208,7 +208,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-tile/select/disabled-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/disabled-$name.png'));
       });
 
       testWidgets('checked - $name', (tester) async {
@@ -233,7 +233,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-tile/select/checked-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/checked-$name.png'));
       });
 
       testWidgets('suffix icon - checked - $name', (tester) async {
@@ -258,7 +258,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-tile/suffix-checked-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/suffix-checked-$name.png'));
       });
 
       testWidgets('suffix icon - unchecked - $name', (tester) async {
@@ -283,7 +283,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-tile/suffix-unchecked-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png'));
       });
     }
   });

@@ -165,7 +165,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-group/$name/enabled/$divider.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/$name/enabled/$divider.png'));
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
@@ -210,7 +210,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('tile/select-group/$name/hovered/$divider-$position.png'),
+              matchesGoldenFile('select-tile-group/group/$name/hovered/$divider-$position.png'),
             );
           });
 
@@ -251,7 +251,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('tile/select-group/$name/disabled/$divider-$position.png'),
+              matchesGoldenFile('select-tile-group/group/$name/disabled/$divider-$position.png'),
             );
           });
         }
@@ -289,7 +289,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-group/$name/error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/$name/error.png'));
       });
     }
 
@@ -315,7 +315,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-group/single.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/single.png'));
     });
 
     testWidgets('empty tile group', (tester) async {
@@ -333,7 +333,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-group/empty.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/empty.png'));
     });
 
     testWidgets('tile style overrides group style', (tester) async {
@@ -366,7 +366,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-group/override-style.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/override-style.png'));
     });
 
     testWidgets('tile state overrides group state', (tester) async {
@@ -400,7 +400,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/select-group/override-state.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/override-state.png'));
     });
   });
 

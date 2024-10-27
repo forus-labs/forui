@@ -3,9 +3,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/tile/select_tile.dart';
+import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 
 /// A set of tiles that are treated as a single selection.
+///
+/// A [FSelectTileGroup] is internally a [FormField], therefore it can be used in a [Form].
 ///
 /// See:
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
