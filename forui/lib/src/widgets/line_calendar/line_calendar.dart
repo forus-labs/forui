@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/line_calendar/line_calendar_controller.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_tile.dart';
 
 import 'package:meta/meta.dart';
@@ -16,7 +18,7 @@ class FLineCalendar extends StatefulWidget {
   final FLineCalendarStyle? style;
 
   /// The controller.
-  final FCalendarController controller;
+  final FCalendarController<DateTime?> controller;
 
   /// The start date. It is truncated to the nearest date.
   ///
@@ -42,8 +44,10 @@ class FLineCalendar extends StatefulWidget {
     DateTime? today,
     super.key,
   })  : start = start ?? DateTime(1900).toUtc(),
-        assert(start == null || end == null || start.toLocalDate() < end.toLocalDate(),
-            'end date must be greater than start date'),
+        assert(
+          start == null || end == null || start.toLocalDate() < end.toLocalDate(),
+          'end date must be greater than start date',
+        ),
         today = today ?? DateTime.now();
 
   @override
@@ -67,8 +71,9 @@ class _FLineCalendarState extends State<FLineCalendar> {
   void didChangeDependencies() {
     _style = widget.style ?? FTheme.of(context).lineCalendarStyle;
     _size = _calculateSize(context, _style);
-    final offset = (widget.controller.value.toLocalDate().difference(widget.start.toLocalDate()).inDays - 2) * _size +
-        _style.itemPadding;
+
+    final value = widget.controller.value?.toLocalDate() ?? widget.today.toLocalDate();
+    final offset = (value.difference(widget.start.toLocalDate()).inDays - 2) * _size + _style.itemPadding;
     _controller = ScrollController(initialScrollOffset: offset);
 
     final textDirection = Directionality.of(context);

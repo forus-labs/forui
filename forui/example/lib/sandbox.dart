@@ -32,7 +32,11 @@ class _SandboxState extends State<Sandbox> {
           ),
           const SizedBox(height: 20),
           const FTextField.password(),
-          FLineCalendar(controller: FCalendarController.date()),
+          FLineCalendar(
+            controller: FCalendarController.date(
+              initialSelection: DateTime(2024, 10, 13).toUtc(),
+            ),
+          ),
           const SizedBox(height: 20),
           FTooltip(
             longPressExitDuration: const Duration(seconds: 5000),
