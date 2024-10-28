@@ -322,7 +322,7 @@ void main() {
       testWidgets('empty tile group - $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
+            theme: theme,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FSelectTileGroup(
