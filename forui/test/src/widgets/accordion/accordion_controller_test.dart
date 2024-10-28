@@ -211,5 +211,12 @@ void main() {
     ]) {
       test('validate $length', () => expect(controller.validate(length), expected));
     }
+
+    tearDown(() {
+      controller.dispose();
+      first.dispose();
+      second.dispose();
+    });
   });
+
 }

@@ -15,36 +15,33 @@ void main() {
       var taps = 0;
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            theme: FThemes.zinc.light,
-            child: FPortal(
-              followerAnchor: Alignment.topRight,
-              targetAnchor: Alignment.bottomLeft,
-              controller: controller,
-              followerBuilder: (context) => Padding(
-                padding: const EdgeInsets.all(5),
-                child: ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(
-                    dimension: 100,
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: SizedBox.square(
-                        dimension: 1,
-                        child: GestureDetector(
-                          onTap: () => taps++,
-                        ),
+        TestScaffold.app(
+          child: FPortal(
+            followerAnchor: Alignment.topRight,
+            targetAnchor: Alignment.bottomLeft,
+            controller: controller,
+            followerBuilder: (context) => Padding(
+              padding: const EdgeInsets.all(5),
+              child: ColoredBox(
+                color: Colors.red,
+                child: SizedBox.square(
+                  dimension: 100,
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: SizedBox.square(
+                      dimension: 1,
+                      child: GestureDetector(
+                        onTap: () => taps++,
                       ),
                     ),
                   ),
                 ),
               ),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
+            ),
+            child: const ColoredBox(
+              color: Colors.yellow,
+              child: SizedBox.square(
+                dimension: 100,
               ),
             ),
           ),

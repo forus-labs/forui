@@ -31,24 +31,19 @@ void main() {
     for (final (name, theme, _) in TestScaffold.themes) {
       testWidgets('shown', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(
+          TestScaffold(
             theme: theme,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FAccordion(
-                  items: [
-                    FAccordionItem(
-                      initiallyExpanded: true,
-                      title: const Text('Title'),
-                      child: const ColoredBox(
-                        color: Colors.yellow,
-                        child: SizedBox.square(
-                          dimension: 50,
-                        ),
-                      ),
+            child: FAccordion(
+              items: [
+                FAccordionItem(
+                  initiallyExpanded: true,
+                  title: const Text('Title'),
+                  child: const ColoredBox(
+                    color: Colors.yellow,
+                    child: SizedBox.square(
+                      dimension: 50,
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -60,24 +55,19 @@ void main() {
 
       testWidgets('hidden', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(
+          TestScaffold(
             theme: theme,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FAccordion(
-                  items: [
-                    FAccordionItem(
-                      initiallyExpanded: true,
-                      title: const Text('Title'),
-                      child: const ColoredBox(
-                        color: Colors.yellow,
-                        child: SizedBox.square(
-                          dimension: 50,
-                        ),
-                      ),
+            child: FAccordion(
+              items: [
+                FAccordionItem(
+                  initiallyExpanded: true,
+                  title: const Text('Title'),
+                  child: const ColoredBox(
+                    color: Colors.yellow,
+                    child: SizedBox.square(
+                      dimension: 50,
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

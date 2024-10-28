@@ -40,9 +40,21 @@ class TestScaffold extends StatelessWidget {
   final Widget child;
   final bool wrapped;
 
-  const TestScaffold({required this.theme, required this.child, this.background, super.key}) : wrapped = false;
+  TestScaffold({
+    required this.child,
+    this.background,
+    FThemeData? theme,
+    super.key,
+  })  : theme = theme ?? FThemes.zinc.light,
+        wrapped = false;
 
-  const TestScaffold.app({required this.theme, required this.child, this.background, super.key}) : wrapped = true;
+  TestScaffold.app({
+    required this.child,
+    this.background,
+    FThemeData? theme,
+    super.key,
+  })  : theme = theme ?? FThemes.zinc.light,
+        wrapped = true;
 
   TestScaffold.blue({required this.child, super.key})
       : theme = FThemes.zinc.light,

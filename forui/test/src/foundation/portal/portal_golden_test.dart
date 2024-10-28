@@ -15,7 +15,6 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.zinc.light,
           child: FPortal(
             controller: controller,
             followerBuilder: (context) => const ColoredBox(
@@ -42,7 +41,6 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.zinc.light,
           child: FPortal(
             controller: controller,
             followerBuilder: (context) => const Padding(
