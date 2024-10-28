@@ -20,43 +20,37 @@ void main() {
       testWidgets('enabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: false,
-                child: FSelectTile(
-                  style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: false,
+              child: FSelectTile(
+                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: false,
-                child: FSelectTile(
-                  style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: false,
+              child: FSelectTile(
+                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
@@ -70,57 +64,51 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>)));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('selected', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: true,
-                child: FSelectTile(
-                  style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
-                  enabled: false,
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: true,
+              child: FSelectTile(
+                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+                enabled: false,
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('disabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: false,
-                child: FSelectTile(
-                  style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
-                  enabled: false,
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: false,
+              child: FSelectTile(
+                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+                enabled: false,
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
     });
 
@@ -130,18 +118,15 @@ void main() {
           TestScaffold(
             theme: theme,
             background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: false,
-                child: FSelectTile(
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: false,
+              child: FSelectTile(
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
@@ -155,18 +140,15 @@ void main() {
           TestScaffold(
             theme: theme,
             background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: false,
-                child: FSelectTile(
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: false,
+              child: FSelectTile(
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
@@ -175,7 +157,6 @@ void main() {
         final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
-        await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>)));
         await tester.pumpAndSettle();
@@ -188,19 +169,16 @@ void main() {
           TestScaffold(
             theme: theme,
             background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: false,
-                child: FSelectTile(
-                  enabled: false,
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: false,
+              child: FSelectTile(
+                enabled: false,
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
@@ -214,18 +192,15 @@ void main() {
           TestScaffold(
             theme: theme,
             background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: true,
-                child: FSelectTile(
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: true,
+              child: FSelectTile(
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
               ),
             ),
           ),
@@ -239,18 +214,15 @@ void main() {
           TestScaffold(
             theme: theme,
             background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: true,
-                child: FSelectTile.suffix(
-                  prefixIcon: FIcon(FAssets.icons.bluetooth),
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: true,
+              child: FSelectTile.suffix(
+                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                value: 1,
               ),
             ),
           ),
@@ -267,18 +239,15 @@ void main() {
           TestScaffold(
             theme: theme,
             background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FSelectTileData<int>(
-                controller: controller,
-                selected: false,
-                child: FSelectTile.suffix(
-                  prefixIcon: FIcon(FAssets.icons.bluetooth),
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo, Fum'),
-                  details: const Text('Forus Labs (5G)'),
-                  value: 1,
-                ),
+            child: FSelectTileData(
+              controller: controller,
+              selected: false,
+              child: FSelectTile.suffix(
+                prefixIcon: FIcon(FAssets.icons.bluetooth),
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('Forus Labs (5G)'),
+                value: 1,
               ),
             ),
           ),
@@ -286,13 +255,11 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png'),
+          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png')
         );
       });
     }
   });
 
-  tearDown(() {
-    controller.dispose();
-  });
+  tearDown(() => controller.dispose());
 }

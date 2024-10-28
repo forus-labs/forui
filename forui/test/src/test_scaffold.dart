@@ -8,6 +8,8 @@ import 'threshold_file_comparator.dart';
 
 MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
 
+Future<void> expectBlueScreen(dynamic actual) => expectLater(actual, isBlueScreen);
+
 class TestScaffold extends StatelessWidget {
   static final blueScreen = FThemeData.inherit(
     colorScheme: const FColorScheme(
@@ -55,9 +57,9 @@ class TestScaffold extends StatelessWidget {
           data: theme,
           textDirection: TextDirection.ltr,
           child: Container(
-            // We use a fixed background color to ensure that widgets set their background properly.
             color: background ?? theme.colorScheme.background,
             alignment: Alignment.center,
+            padding: const EdgeInsets.all(16),
             child: child!,
           ),
         ),
@@ -68,9 +70,9 @@ class TestScaffold extends StatelessWidget {
         data: theme,
         textDirection: TextDirection.ltr,
         child: Container(
-          // We use a fixed background color to ensure that widgets set their background properly.
           color: background ?? theme.colorScheme.background,
           alignment: Alignment.center,
+          padding: const EdgeInsets.all(16),
           child: child,
         ),
       );

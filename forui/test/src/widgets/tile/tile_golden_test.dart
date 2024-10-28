@@ -30,7 +30,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('hovered', (tester) async {
@@ -59,7 +59,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FTile)));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('disabled', (tester) async {
@@ -81,7 +81,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
     });
 

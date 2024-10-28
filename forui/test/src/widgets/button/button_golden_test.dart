@@ -29,7 +29,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('FButtonIconContent', (tester) async {
@@ -46,7 +46,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
     });
 

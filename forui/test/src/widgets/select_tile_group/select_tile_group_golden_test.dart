@@ -19,60 +19,54 @@ void main() {
       testWidgets('enabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FSelectTileGroup(
-                controller: controller,
-                style: TestScaffold.blueScreen.tileGroupStyle,
-                label: const Text('Network'),
-                children: [
-                  FSelectTile(
-                    title: const Text('WiFi'),
-                    details: const Text('Forus Labs (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
-                    value: 1,
-                  ),
-                  FSelectTile.suffix(
-                    prefixIcon: FIcon(FAssets.icons.bluetooth),
-                    title: const Text('Bluetooth'),
-                    subtitle: const Text('Fee, Fo, Fum'),
-                    details: const Text('Forus Labs (5G)'),
-                    value: 2,
-                  ),
-                ],
-              ),
+            child: FSelectTileGroup(
+              controller: controller,
+              style: TestScaffold.blueScreen.tileGroupStyle,
+              label: const Text('Network'),
+              children: [
+                FSelectTile(
+                  title: const Text('WiFi'),
+                  details: const Text('Forus Labs (5G)'),
+                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  value: 1,
+                ),
+                FSelectTile.suffix(
+                  prefixIcon: FIcon(FAssets.icons.bluetooth),
+                  title: const Text('Bluetooth'),
+                  subtitle: const Text('Fee, Fo, Fum'),
+                  details: const Text('Forus Labs (5G)'),
+                  value: 2,
+                ),
+              ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FSelectTileGroup(
-                controller: controller,
-                style: TestScaffold.blueScreen.tileGroupStyle,
-                label: const Text('Network'),
-                children: [
-                  FSelectTile(
-                    title: const Text('WiFi'),
-                    details: const Text('Forus Labs (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
-                    value: 1,
-                  ),
-                  FSelectTile.suffix(
-                    prefixIcon: FIcon(FAssets.icons.bluetooth),
-                    title: const Text('Bluetooth'),
-                    subtitle: const Text('Fee, Fo, Fum'),
-                    details: const Text('Forus Labs (5G)'),
-                    value: 2,
-                  ),
-                ],
-              ),
+            child: FSelectTileGroup(
+              controller: controller,
+              style: TestScaffold.blueScreen.tileGroupStyle,
+              label: const Text('Network'),
+              children: [
+                FSelectTile(
+                  title: const Text('WiFi'),
+                  details: const Text('Forus Labs (5G)'),
+                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  value: 1,
+                ),
+                FSelectTile.suffix(
+                  prefixIcon: FIcon(FAssets.icons.bluetooth),
+                  title: const Text('Bluetooth'),
+                  subtitle: const Text('Fee, Fo, Fum'),
+                  details: const Text('Forus Labs (5G)'),
+                  value: 2,
+                ),
+              ],
             ),
           ),
         );
@@ -85,40 +79,37 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>).first));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
 
       testWidgets('disabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FSelectTileGroup(
-                controller: controller,
-                style: TestScaffold.blueScreen.tileGroupStyle,
-                enabled: false,
-                label: const Text('Network'),
-                children: [
-                  FSelectTile(
-                    title: const Text('WiFi'),
-                    details: const Text('Forus Labs (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
-                    value: 1,
-                  ),
-                  FSelectTile.suffix(
-                    prefixIcon: FIcon(FAssets.icons.bluetooth),
-                    title: const Text('Bluetooth'),
-                    subtitle: const Text('Fee, Fo, Fum'),
-                    details: const Text('Forus Labs (5G)'),
-                    value: 2,
-                  ),
-                ],
-              ),
+            child: FSelectTileGroup(
+              controller: controller,
+              style: TestScaffold.blueScreen.tileGroupStyle,
+              enabled: false,
+              label: const Text('Network'),
+              children: [
+                FSelectTile(
+                  title: const Text('WiFi'),
+                  details: const Text('Forus Labs (5G)'),
+                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  value: 1,
+                ),
+                FSelectTile.suffix(
+                  prefixIcon: FIcon(FAssets.icons.bluetooth),
+                  title: const Text('Bluetooth'),
+                  subtitle: const Text('Fee, Fo, Fum'),
+                  details: const Text('Forus Labs (5G)'),
+                  value: 2,
+                ),
+              ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), isBlueScreen);
+        await expectBlueScreen(find.byType(TestScaffold));
       });
     });
 
@@ -129,36 +120,33 @@ void main() {
             TestScaffold(
               theme: theme,
               background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FSelectTileGroup(
-                  controller: controller,
-                  label: const Text('Network'),
-                  description: const Text('Configure your network'),
-                  errorBuilder: (context, error) => Text(error),
-                  divider: divider,
-                  children: [
-                    FSelectTile(
-                      title: const Text('WiFi'),
-                      details: const Text('FL (5G)'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
-                      value: 1,
-                    ),
-                    FSelectTile(
-                      title: const Text('Mail'),
-                      details: const Text('42'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
-                      value: 2,
-                    ),
-                    FSelectTile(
-                      title: const Text('Bluetooth'),
-                      subtitle: const Text('Fee, Fo'),
-                      details: const Text('FL (5G)'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
-                      value: 3,
-                    ),
-                  ],
-                ),
+              child: FSelectTileGroup(
+                controller: controller,
+                label: const Text('Network'),
+                description: const Text('Configure your network'),
+                errorBuilder: (context, error) => Text(error),
+                divider: divider,
+                children: [
+                  FSelectTile(
+                    title: const Text('WiFi'),
+                    details: const Text('FL (5G)'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    value: 1,
+                  ),
+                  FSelectTile(
+                    title: const Text('Mail'),
+                    details: const Text('42'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    value: 2,
+                  ),
+                  FSelectTile(
+                    title: const Text('Bluetooth'),
+                    subtitle: const Text('Fee, Fo'),
+                    details: const Text('FL (5G)'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    value: 3,
+                  ),
+                ],
               ),
             ),
           );
@@ -220,32 +208,29 @@ void main() {
               TestScaffold(
                 theme: theme,
                 background: background,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FSelectTileGroup(
-                    controller: controller,
-                    label: const Text('Network'),
-                    description: const Text('Configure your network'),
-                    enabled: false,
-                    divider: divider,
-                    children: [
-                      FSelectTile(
-                        enabled: index == 0,
-                        title: const Text('WiFi'),
-                        details: const Text('FL (5G)'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
-                        value: 1,
-                      ),
-                      FSelectTile(
-                        enabled: index == 1,
-                        title: const Text('Bluetooth'),
-                        subtitle: const Text('Fee, Fo'),
-                        details: const Text('FL (5G)'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
-                        value: 2,
-                      ),
-                    ],
-                  ),
+                child: FSelectTileGroup(
+                  controller: controller,
+                  label: const Text('Network'),
+                  description: const Text('Configure your network'),
+                  enabled: false,
+                  divider: divider,
+                  children: [
+                    FSelectTile(
+                      enabled: index == 0,
+                      title: const Text('WiFi'),
+                      details: const Text('FL (5G)'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      value: 1,
+                    ),
+                    FSelectTile(
+                      enabled: index == 1,
+                      title: const Text('Bluetooth'),
+                      subtitle: const Text('Fee, Fo'),
+                      details: const Text('FL (5G)'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      value: 2,
+                    ),
+                  ],
                 ),
               ),
             );
@@ -298,20 +283,17 @@ void main() {
           TestScaffold(
             theme: theme,
             background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FSelectTileGroup(
-                controller: controller,
-                label: const Text('Network'),
-                children: [
-                  FSelectTile(
-                    title: const Text('WiFi'),
-                    details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
-                    value: 1,
-                  ),
-                ],
-              ),
+            child: FSelectTileGroup(
+              controller: controller,
+              label: const Text('Network'),
+              children: [
+                FSelectTile(
+                  title: const Text('WiFi'),
+                  details: const Text('FL (5G)'),
+                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  value: 1,
+                ),
+              ],
             ),
           ),
         );
@@ -342,28 +324,25 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FSelectTileGroup(
-              controller: controller,
-              label: const Text('Network'),
-              children: [
-                FSelectTile(
-                  title: const Text('WiFi'),
-                  details: const Text('FL (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
-                FSelectTile(
-                  style: FThemes.blue.dark.tileGroupStyle.tileStyle,
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo'),
-                  details: const Text('FL (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 2,
-                ),
-              ],
-            ),
+          child: FSelectTileGroup(
+            controller: controller,
+            label: const Text('Network'),
+            children: [
+              FSelectTile(
+                title: const Text('WiFi'),
+                details: const Text('FL (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
+              ),
+              FSelectTile(
+                style: FThemes.blue.dark.tileGroupStyle.tileStyle,
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo'),
+                details: const Text('FL (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 2,
+              ),
+            ],
           ),
         ),
       );
@@ -375,29 +354,26 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FSelectTileGroup(
-              controller: controller,
-              label: const Text('Network'),
-              enabled: false,
-              children: [
-                FSelectTile(
-                  enabled: true,
-                  title: const Text('WiFi'),
-                  details: const Text('FL (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
-                FSelectTile(
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo'),
-                  details: const Text('FL (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 2,
-                ),
-              ],
-            ),
+          child: FSelectTileGroup(
+            controller: controller,
+            label: const Text('Network'),
+            enabled: false,
+            children: [
+              FSelectTile(
+                enabled: true,
+                title: const Text('WiFi'),
+                details: const Text('FL (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 1,
+              ),
+              FSelectTile(
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo'),
+                details: const Text('FL (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                value: 2,
+              ),
+            ],
           ),
         ),
       );
@@ -406,7 +382,5 @@ void main() {
     });
   });
 
-  tearDown(() {
-    controller.dispose();
-  });
+  tearDown(() => controller.dispose());
 }

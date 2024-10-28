@@ -35,7 +35,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(MaterialApp), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
     for (final (name, theme, background) in TestScaffold.themes) {
