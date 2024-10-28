@@ -285,49 +285,51 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$name/error.png'));
       });
+
+      testWidgets('single tile - $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme,
+            background: background,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTileGroup(
+                label: const Text('Network'),
+                children: [
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    title: const Text('WiFi'),
+                    details: const Text('FL (5G)'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$name/single.png'));
+      });
+
+      testWidgets('empty tile group - $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme,
+            background: background,
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: FTileGroup(
+                label: Text('Network'),
+                children: [],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$name/empty.png'));
+      });
     }
-
-    testWidgets('single tile', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTileGroup(
-              label: const Text('Network'),
-              children: [
-                FTile(
-                  prefixIcon: FIcon(FAssets.icons.wifi),
-                  title: const Text('WiFi'),
-                  details: const Text('FL (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  onPress: () {},
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/single.png'));
-    });
-
-    testWidgets('empty tile group', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: FTileGroup(
-              label: Text('Network'),
-              children: [],
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/empty.png'));
-    });
 
     testWidgets('tile style overrides group style', (tester) async {
       await tester.pumpWidget(
@@ -669,52 +671,52 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/$name/error.png'));
       });
+
+      testWidgets('single group', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: FThemes.zinc.light,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTileGroup.merge(
+                children: [
+                  FTileGroup(
+                    children: [
+                      FTile(
+                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        title: const Text('WiFi'),
+                        details: const Text('FL (5G)'),
+                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/single.png'));
+      });
+
+      testWidgets('empty tile group', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: FThemes.zinc.light,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTileGroup.merge(
+                label: const Text('Network'),
+                children: [],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/empty.png'));
+      });
     }
-
-    testWidgets('single group', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTileGroup.merge(
-              children: [
-                FTileGroup(
-                  children: [
-                    FTile(
-                      prefixIcon: FIcon(FAssets.icons.wifi),
-                      title: const Text('WiFi'),
-                      details: const Text('FL (5G)'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/single.png'));
-    });
-
-    testWidgets('empty tile group', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTileGroup.merge(
-              label: const Text('Network'),
-              children: [],
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/empty.png'));
-    });
 
     testWidgets('ignore group label', (tester) async {
       await tester.pumpWidget(

@@ -294,50 +294,51 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/$name/error.png'));
       });
+
+      testWidgets('single tile - $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme,
+            background: background,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FSelectTileGroup(
+                controller: controller,
+                label: const Text('Network'),
+                children: [
+                  FSelectTile(
+                    title: const Text('WiFi'),
+                    details: const Text('FL (5G)'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    value: 1,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/$name/single.png'));
+      });
+
+      testWidgets('empty tile group - $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: FThemes.zinc.light,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FSelectTileGroup(
+                controller: controller,
+                label: const Text('Network'),
+                children: const [],
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/$name/empty.png'));
+      });
     }
-
-    testWidgets('single tile', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FSelectTileGroup(
-              controller: controller,
-              label: const Text('Network'),
-              children: [
-                FSelectTile(
-                  title: const Text('WiFi'),
-                  details: const Text('FL (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  value: 1,
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/single.png'));
-    });
-
-    testWidgets('empty tile group', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FSelectTileGroup(
-              controller: controller,
-              label: const Text('Network'),
-              children: const [],
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/empty.png'));
-    });
 
     testWidgets('tile style overrides group style', (tester) async {
       await tester.pumpWidget(
