@@ -48,11 +48,22 @@ class FTile extends StatelessWidget with FTileMixin {
   /// Provide a style to prevent inheriting from the ancestor tile group's style.
   final FTileStyle? style;
 
-  /// Whether the FTile is enabled. Defaults to true.
-  final bool enabled;
+  /// Whether the `FTile` is enabled. Defaults to true.
+  final bool? enabled;
 
   /// The semantic label.
   final String? semanticLabel;
+
+  /// Whether this tile should focus itself if nothing else is already focused. Defaults to false.
+  final bool autofocus;
+
+  /// Defines the [FocusNode] for this tile.
+  final FocusNode? focusNode;
+
+  /// Handler called when the focus changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  final ValueChanged<bool>? onFocusChange;
 
   /// A callback for when the tile is pressed.
   ///
@@ -82,8 +93,11 @@ class FTile extends StatelessWidget with FTileMixin {
   FTile({
     required Widget title,
     this.style,
-    this.enabled = true,
+    this.enabled,
     this.semanticLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
     Widget? prefixIcon,
@@ -91,8 +105,8 @@ class FTile extends StatelessWidget with FTileMixin {
     Widget? details,
     Widget? suffixIcon,
     super.key,
-  })  : onPress = enabled ? onPress : null,
-        onLongPress = enabled ? onLongPress : null,
+  })  : onPress = (enabled ?? true) ? onPress : null,
+        onLongPress = (enabled ?? true) ? onLongPress : null,
         child = FTileContent(
           title: title,
           prefixIcon: prefixIcon,
@@ -108,6 +122,7 @@ class FTile extends StatelessWidget with FTileMixin {
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
     final tile = extractTile(inherited);
+    final enabled = this.enabled ?? tile.enabled;
     final curveTop = group.index == 0 && tile.index == 0;
     final curveBottom = group.index == group.length - 1 && tile.index == tile.length - 1;
 
@@ -146,6 +161,9 @@ class FTile extends StatelessWidget with FTileMixin {
       semanticLabel: semanticLabel,
       touchHoverEnterDuration: style.touchHoverEnterDuration,
       touchHoverExitDuration: style.touchHoverExitDuration,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
       onPress: onPress,
       onLongPress: onLongPress,
       builder: (_, data, __) => content(hovered: data.hovered),
@@ -159,6 +177,9 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
       ..add(StringProperty('semanticLabel', semanticLabel, defaultValue: null, quoted: false))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty('onPress', onPress, ifPresent: 'onPress', level: DiagnosticLevel.debug))
       ..add(ObjectFlagProperty('onLongPress', onLongPress, ifPresent: 'onLongPress', level: DiagnosticLevel.debug));
   }
@@ -166,7 +187,8 @@ class FTile extends StatelessWidget with FTileMixin {
 
 /// Extracts the data from the given [FTileData].
 @internal
-({int index, int length, FTileDivider divider}) extractTile(FTileData? data) => (
+({int index, int length, FTileDivider divider, bool enabled}) extractTile(FTileData? data) => (
+      enabled: data?.enabled ?? true,
       index: data?.index ?? 0,
       length: data?.length ?? 1,
       divider: data?.divider ?? FTileDivider.indented,
@@ -225,8 +247,8 @@ class FTileData extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('divider', divider))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
-      ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered', level: DiagnosticLevel.debug))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
+      ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered'))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length));
   }

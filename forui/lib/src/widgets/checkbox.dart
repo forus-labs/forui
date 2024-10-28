@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 
 /// A checkbox control that allows the user to toggle between checked and not checked.
 ///
-/// For touch devices, a [FSwitch] is generally recommended over a [FCheckbox].
+/// For touch devices, a [FSwitch] is generally recommended over this.
 ///
 /// See:
 /// * https://forui.dev/docs/form/checkbox for working examples.

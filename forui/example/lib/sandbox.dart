@@ -9,9 +9,11 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
+enum Notification { all, direct, nothing }
+
 class _SandboxState extends State<Sandbox> {
   bool value = false;
-  FSelectGroupController selectGroupController = FRadioSelectGroupController(value: 1);
+  FMultiSelectGroupController<int> selectGroupController = FMultiSelectGroupController(min: 2);
   FAccordionController controller = FAccordionController(min: 1, max: 3);
 
   @override
@@ -20,21 +22,18 @@ class _SandboxState extends State<Sandbox> {
   }
 
   @override
-  Widget build(BuildContext context) => FTileGroup(
+  Widget build(BuildContext context) => FSelectTileGroup<int>(
+        controller: selectGroupController,
+        autovalidateMode: AutovalidateMode.always,
+        validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
         children: [
-          FTile(
-            prefixIcon: FIcon(FAssets.icons.check),
-            title: const Text('List View'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () {},
+          FSelectTile.suffix(
+            title: const Text('1'),
+            value: 1,
           ),
-          FTile(
-            prefixIcon: const SizedBox.square(
-              dimension: 17,
-            ),
-            title: const Text('Grid View'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () {},
+          FSelectTile.suffix(
+            title: const Text('2'),
+            value: 2,
           ),
         ],
       );

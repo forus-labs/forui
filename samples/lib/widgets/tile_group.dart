@@ -26,6 +26,7 @@ class TileGroupPage extends SampleScaffold {
             constraints: const BoxConstraints(maxWidth: 400),
             child: FTileGroup(
               label: const Text('Settings'),
+              description: const Text('Personalize your experience'),
               divider: divider,
               children: [
                 FTile(
@@ -50,26 +51,32 @@ class TileGroupPage extends SampleScaffold {
 
 @RoutePage()
 class MergeTileGroup extends SampleScaffold {
-  final FTileDivider divider;
-
   MergeTileGroup({
     @queryParam super.theme,
-    @queryParam String divider = 'full',
-  }) : divider = switch (divider) {
-          'indented' => FTileDivider.indented,
-          'none' => FTileDivider.none,
-          _ => FTileDivider.full,
-        };
+  });
 
   @override
-  Widget child(BuildContext context) => Column(
+  Widget child(BuildContext context) => const _MergeTileGroup();
+}
+
+class _MergeTileGroup extends StatefulWidget {
+  const _MergeTileGroup();
+
+  @override
+  State<_MergeTileGroup> createState() => _MergeTileGroupState();
+}
+
+class _MergeTileGroupState extends State<_MergeTileGroup> {
+  late FRadioSelectGroupController<String> controller = FRadioSelectGroupController();
+
+  @override
+  Widget build(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: FTileGroup.merge(
               label: const Text('Settings'),
-              divider: divider,
               children: [
                 FTileGroup(
                   children: [
@@ -88,21 +95,16 @@ class MergeTileGroup extends SampleScaffold {
                     ),
                   ],
                 ),
-                FTileGroup(
+                FSelectTileGroup<String>(
+                  controller: controller,
                   children: [
-                    FTile(
-                      prefixIcon: FIcon(FAssets.icons.check),
+                    FSelectTile(
                       title: const Text('List View'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
-                      onPress: () {},
+                      value: 'List',
                     ),
-                    FTile(
-                      prefixIcon: const SizedBox.square(
-                        dimension: 17,
-                      ),
+                    FSelectTile(
                       title: const Text('Grid View'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
-                      onPress: () {},
+                      value: 'Grid',
                     ),
                   ],
                 ),
@@ -111,4 +113,10 @@ class MergeTileGroup extends SampleScaffold {
           ),
         ],
       );
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }

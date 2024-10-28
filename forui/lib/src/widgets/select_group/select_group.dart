@@ -12,6 +12,8 @@ import 'package:forui/src/widgets/select_group/select_group_item.dart';
 ///
 /// Typically used to group multiple [FSelectGroupItem.checkbox]s or [FSelectGroupItem.radio]s.
 ///
+/// For touch devices, a [FSelectTileGroup] is generally recommended over this.
+///
 /// See:
 /// * https://forui.dev/docs/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
@@ -97,9 +99,7 @@ class FSelectGroup<T> extends FormField<Set<T>> {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(DiagnosticsProperty('testing', (1, 2, 3)))
-      ..add(IterableProperty('items', items));
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }
 

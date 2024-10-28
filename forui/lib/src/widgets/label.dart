@@ -89,7 +89,7 @@ final class FLabel extends StatelessWidget {
           Axis.vertical => context.theme.labelStyles.verticalStyle,
         };
 
-    if (label == null && description == null) {
+    if (label == null && description == null && error == null) {
       return Padding(
         padding: style.layout.childPadding,
         child: child,

@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/util.dart' as util;
 
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [_MergeTileGroups].
 mixin FTileGroupMixin<T extends Widget> on Widget {}
@@ -20,14 +19,24 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The style.
   final FTileGroupStyle? style;
 
+  /// The group's state. Defaults to [FLabelState.enabled].
+  final FLabelState? state;
+
   /// The divider between tiles. Defaults tp [FTileDivider.indented].
   final FTileDivider divider;
 
-  /// The group's label. It is ignored if the group is part of a [FTileGroup]s.
-  final Widget? label;
-
   /// The group's semantic label.
   final String? semanticLabel;
+
+  /// The group's label. It is ignored if the group is part of a merged [FTileGroup].
+  final Widget? label;
+
+  /// The group's description. It is ignored if the group is part of a merged [FTileGroup].
+  final Widget? description;
+
+  /// The group's error. It is ignored if the group is part of a merged [FTileGroup] or if the [state] is not
+  /// [FLabelState.error].
+  final Widget? error;
 
   /// The tiles in the group.
   final List<FTileMixin> children;
@@ -38,17 +47,23 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
     required List<FTileGroupMixin<FTileMixin>> children,
     FTileGroupStyle? style,
+    FLabelState state = FLabelState.enabled,
     FTileDivider divider = FTileDivider.full,
-    Widget? label,
     String? semanticLabel,
+    Widget? label,
+    Widget? description,
+    Widget? error,
     Key? key,
   }) =>
       _MergeTileGroups(
-        style: style,
-        divider: divider,
-        label: label,
-        semanticLabel: semanticLabel,
         key: key,
+        style: style,
+        state: state,
+        divider: divider,
+        semanticLabel: semanticLabel,
+        label: label,
+        description: description,
+        error: error,
         children: children,
       );
 
@@ -56,9 +71,12 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   const FTileGroup({
     required this.children,
     this.style,
+    this.state,
     this.divider = FTileDivider.indented,
-    this.label,
     this.semanticLabel,
+    this.label,
+    this.description,
+    this.error,
     super.key,
   });
 
@@ -67,31 +85,18 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     final data = FTileGroupData.maybeOf(context);
     final style = this.style ?? data?.style ?? context.theme.tileGroupStyle;
 
-    return Semantics(
-      label: semanticLabel,
+    Widget group = Semantics(
       container: true,
+      label: semanticLabel,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (label case final label? when data == null)
-            Padding(
-              padding: style.labelPadding,
-              child: util.merge(
-                style: style.labelTextStyle,
-                textHeightBehavior: const TextHeightBehavior(
-                  applyHeightToFirstAscent: false,
-                  applyHeightToLastDescent: false,
-                ),
-                overflow: TextOverflow.ellipsis,
-                child: label,
-              ),
-            ),
           for (final (index, child) in children.indexed)
             FTileData(
               style: style.tileStyle,
               divider: divider,
-              enabled: true,
+              enabled: state == null ? (data?.enabled ?? true) : (state != FLabelState.disabled),
               hovered: false,
               index: index,
               length: children.length,
@@ -100,6 +105,20 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
         ],
       ),
     );
+
+    if (data == null) {
+      group = FLabel(
+        style: style.labelStyle,
+        axis: Axis.vertical,
+        state: state ?? FLabelState.enabled,
+        label: label,
+        description: description,
+        error: error,
+        child: group,
+      );
+    }
+
+    return group;
   }
 
   @override
@@ -107,6 +126,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('state', state))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticLabel', semanticLabel));
   }
@@ -114,17 +134,23 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
 
 class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
   final FTileGroupStyle? style;
+  final FLabelState state;
   final FTileDivider divider;
   final String? semanticLabel;
   final Widget? label;
+  final Widget? description;
+  final Widget? error;
   final List<FTileGroupMixin> children;
 
   const _MergeTileGroups({
     required this.children,
     this.style,
+    this.state = FLabelState.enabled,
     this.divider = FTileDivider.full,
     this.semanticLabel,
     this.label,
+    this.description,
+    this.error,
     super.key,
   });
 
@@ -132,35 +158,31 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.tileGroupStyle;
 
-    return Semantics(
-      label: semanticLabel,
-      container: true,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (label case final label?)
-            Padding(
-              padding: style.labelPadding,
-              child: util.merge(
-                style: style.labelTextStyle,
-                textHeightBehavior: const TextHeightBehavior(
-                  applyHeightToFirstAscent: false,
-                  applyHeightToLastDescent: false,
-                ),
-                overflow: TextOverflow.ellipsis,
-                child: label,
+    return FLabel(
+      style: style.labelStyle,
+      axis: Axis.vertical,
+      state: state,
+      label: label,
+      description: description,
+      error: error,
+      child: Semantics(
+        container: true,
+        label: semanticLabel,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (final (index, child) in children.indexed)
+              FTileGroupData(
+                style: style,
+                divider: divider,
+                enabled: state != FLabelState.disabled,
+                index: index,
+                length: children.length,
+                child: child,
               ),
-            ),
-          for (final (index, child) in children.indexed)
-            FTileGroupData(
-              style: style,
-              divider: divider,
-              index: index,
-              length: children.length,
-              child: child,
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -170,42 +192,81 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('state', state))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticLabel', semanticLabel));
   }
 }
 
 /// A [FTileGroup]'s style.
-class FTileGroupStyle with Diagnosticable {
-  /// The label's padding.
-  final EdgeInsets labelPadding;
-
-  /// The label's text style.
-  final TextStyle labelTextStyle;
+class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
+  /// The group label's layout style.
+  final FLabelLayoutStyle labelLayoutStyle;
 
   /// The tile's style.
   final FTileStyle tileStyle;
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
-    required this.labelTextStyle,
     required this.tileStyle,
-    this.labelPadding = const EdgeInsets.symmetric(vertical: 7.5),
+    required super.enabledStyle,
+    required super.disabledStyle,
+    required super.errorStyle,
+    this.labelLayoutStyle = const FLabelLayoutStyle(
+      labelPadding: EdgeInsets.symmetric(vertical: 7.7),
+      descriptionPadding: EdgeInsets.only(top: 7.5),
+      errorPadding: EdgeInsets.only(top: 5),
+    ),
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  FTileGroupStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          labelTextStyle: typography.base.copyWith(fontWeight: FontWeight.w600),
+  FTileGroupStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
           tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+          enabledStyle: FFormFieldStyle(
+            labelTextStyle: typography.base.copyWith(
+              color: style.enabledFormFieldStyle.labelTextStyle.color,
+              fontWeight: FontWeight.w600,
+            ),
+            descriptionTextStyle: typography.xs.copyWith(
+              color: style.enabledFormFieldStyle.descriptionTextStyle.color,
+            ),
+          ),
+          disabledStyle: FFormFieldStyle(
+            labelTextStyle: typography.base.copyWith(
+              color: style.disabledFormFieldStyle.labelTextStyle.color,
+              fontWeight: FontWeight.w600,
+            ),
+            descriptionTextStyle: typography.xs.copyWith(
+              color: style.disabledFormFieldStyle.descriptionTextStyle.color,
+            ),
+          ),
+          errorStyle: FFormFieldErrorStyle(
+            labelTextStyle: typography.base.copyWith(
+              color: style.enabledFormFieldStyle.labelTextStyle.color,
+              fontWeight: FontWeight.w600,
+            ),
+            descriptionTextStyle: typography.xs.copyWith(
+              color: style.errorFormFieldStyle.descriptionTextStyle.color,
+            ),
+            errorTextStyle: typography.xs.copyWith(
+              color: style.errorFormFieldStyle.errorTextStyle.color,
+            ),
+          ),
         );
+
+  /// The label's style.
+  // ignore: diagnostic_describe_all_properties
+  FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('labelPadding', labelPadding))
-      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
+      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
       ..add(DiagnosticsProperty('tileStyle', tileStyle));
   }
 }
@@ -232,6 +293,9 @@ class FTileGroupData extends InheritedWidget {
   /// The divider if there are more than 1 tiles in the current group.
   final FTileDivider divider;
 
+  /// True if the group is enabled.
+  final bool enabled;
+
   /// The group's index.
   final int index;
 
@@ -242,6 +306,7 @@ class FTileGroupData extends InheritedWidget {
   const FTileGroupData({
     required this.style,
     required this.divider,
+    required this.enabled,
     required this.index,
     required this.length,
     required super.child,
@@ -250,7 +315,11 @@ class FTileGroupData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(FTileGroupData old) =>
-      style != old.style || divider != old.divider || index != old.index || length != old.length;
+      style != old.style ||
+      divider != old.divider ||
+      enabled != old.enabled ||
+      index != old.index ||
+      length != old.length;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -258,6 +327,7 @@ class FTileGroupData extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('divider', divider))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length));
   }

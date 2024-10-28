@@ -5,7 +5,7 @@ import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
 
 # Tile Group
-A tile group groups multiple groups and tiles.
+A tile group that typically groups related information together.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/forui.widgets.tile-library.html"/>
@@ -19,6 +19,7 @@ A tile group groups multiple groups and tiles.
     ```dart
     FTileGroup(
       label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
       children: [
         FTile(
           prefixIcon: FIcon(FAssets.icons.user),
@@ -46,6 +47,7 @@ A tile group groups multiple groups and tiles.
 ```dart
 FTileGroup(
   label: const Text('Settings'),
+  description: const Text('Personalize your experience'),
   semanticLabel: 'Settings',
   divider: FTileDivider.indented,
   children: [],
@@ -101,21 +103,16 @@ several sections.
             ),
           ],
         ),
-        FTileGroup(
+        FSelectTileGroup<String>(
+          controller: FRadioSelectGroupController(),
           children: [
-            FTile(
-              prefixIcon: FIcon(FAssets.icons.check),
+            FSelectTile(
               title: const Text('List View'),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: () {},
+              value: 'List',
             ),
-            FTile(
-              prefixIcon: const SizedBox.square(
-                dimension: 17,
-              ),
+            FSelectTile(
               title: const Text('Grid View'),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-              onPress: () {},
+              value: 'Grid',
             ),
           ],
         ),

@@ -25,6 +25,7 @@ export 'widgets/radio.dart';
 export 'widgets/resizable.dart';
 export 'widgets/scaffold.dart';
 export 'widgets/select_group.dart';
+export 'widgets/select_tile_group.dart';
 export 'widgets/slider.dart';
 export 'widgets/switch.dart';
 export 'widgets/tabs.dart';

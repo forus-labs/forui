@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="samples - run" type="FlutterRunConfigurationType" factoryName="Flutter">
-    <option name="additionalArgs" value="--web-port=3001" />
+    <option name="additionalArgs" value="--web-port=3001 -d chrome" />
     <option name="filePath" value="$PROJECT_DIR$/samples/lib/main.dart" />
     <method v="2" />
   </configuration>
