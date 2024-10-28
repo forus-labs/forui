@@ -128,7 +128,6 @@ void main() {
       expect(controller.values, {2});
     });
 
-
     testWidgets('press nested select tile', (tester) async {
       final controller = FRadioSelectGroupController<int>();
 
