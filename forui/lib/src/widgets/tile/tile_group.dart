@@ -254,7 +254,6 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
             ),
             errorTextStyle: typography.xs.copyWith(
               color: style.errorFormFieldStyle.errorTextStyle.color,
-              fontWeight: FontWeight.w600,
             ),
           ),
         );

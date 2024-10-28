@@ -12,9 +12,7 @@ import '../../test_scaffold.dart';
 void main() {
   late FSelectGroupController<int> controller;
 
-  setUp(() {
-    controller = FRadioSelectGroupController(value: 1);
-  });
+  setUp(() => controller = FRadioSelectGroupController(value: 1));
 
   group('FSelectTileGroup', () {
     group('blue screen', () {

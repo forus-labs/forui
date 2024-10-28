@@ -10,7 +10,7 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 ///
 /// A [FSelectTileGroup] is internally a [FormField], therefore it can be used in a [Form].
 ///
-/// For desktops, a [FSelectGroup] is generally recommended over a [FSelectTileGroup].
+/// For desktop, a [FSelectGroup] is generally recommended over a [FSelectTileGroup].
 ///
 /// See:
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
@@ -79,6 +79,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
               style: groupStyle,
               divider: divider,
               label: label,
+              state: labelState,
               description: description,
               error: error,
               semanticLabel: semanticLabel,

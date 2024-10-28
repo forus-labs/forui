@@ -94,6 +94,41 @@ void main() {
       expect(controller.values, {2});
     });
 
+    testWidgets('press tile hides error', (tester) async {
+      final controller = FRadioSelectGroupController<int>();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: FThemes.zinc.light,
+          child: FSelectTileGroup(
+            controller: controller,
+            autovalidateMode: AutovalidateMode.always,
+            validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
+            children: [
+              FSelectTile.suffix(
+                title: const Text('1'),
+                value: 1,
+              ),
+              FSelectTile.suffix(
+                title: const Text('2'),
+                value: 2,
+              ),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.text('error message'), findsOneWidget);
+      expect(controller.values, <int>{});
+
+      await tester.tap(find.text('2'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('error message'), findsNothing);
+      expect(controller.values, {2});
+    });
+
+
     testWidgets('press nested select tile', (tester) async {
       final controller = FRadioSelectGroupController<int>();
 

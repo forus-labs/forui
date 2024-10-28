@@ -9,9 +9,11 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
+enum Notification { all, direct, nothing }
+
 class _SandboxState extends State<Sandbox> {
   bool value = false;
-  FSelectGroupController<int> selectGroupController = FRadioSelectGroupController(value: 1);
+  FMultiSelectGroupController<int> selectGroupController = FMultiSelectGroupController(min: 2);
   FAccordionController controller = FAccordionController(min: 1, max: 3);
 
   @override
@@ -20,44 +22,19 @@ class _SandboxState extends State<Sandbox> {
   }
 
   @override
-  Widget build(BuildContext context) => FTileGroup.merge(
-        label: const Text('Settings'),
-        description: const Text(
-            'Personalize your experience by configuring your settings. You can change your preferences at any time.'),
-        children: [
-          FTileGroup(
-            children: [
-              FTile(
-                prefixIcon: FIcon(FAssets.icons.user),
-                title: const Text('Personalization'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
-              FTile(
-                prefixIcon: FIcon(FAssets.icons.wifi),
-                title: const Text('WiFi'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
-            ],
-          ),
-          FSelectTileGroup<int>(
-            controller: selectGroupController,
-            children: [
-              FSelectTile.suffix(
-                prefixIcon: FIcon(FAssets.icons.list),
-                title: const Text('List View'),
-                subtitle: const Text('A simple list view'),
-                value: 1,
-              ),
-              FSelectTile.suffix(
-                prefixIcon: FIcon(FAssets.icons.grid2x2),
-                title: const Text('Grid View'),
-                value: 2,
-              ),
-            ],
-          ),
-        ],
-      );
+  Widget build(BuildContext context) => FSelectTileGroup<int>(
+    controller: selectGroupController,
+    autovalidateMode: AutovalidateMode.always,
+    validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
+    children: [
+      FSelectTile.suffix(
+        title: const Text('1'),
+        value: 1,
+      ),
+      FSelectTile.suffix(
+        title: const Text('2'),
+        value: 2,
+      ),
+    ],
+  );
 }
