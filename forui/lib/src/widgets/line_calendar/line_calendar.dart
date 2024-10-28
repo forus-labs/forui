@@ -2,13 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/line_calendar/line_calendar_controller.dart';
+import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_tile.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
-
-import 'package:forui/forui.dart' hide FLineCalendar, FLineCalendarContentStyle, FLineCalendarStyle;
 
 const _textSpacing = 2.0;
 
@@ -76,9 +74,6 @@ class _FLineCalendarState extends State<FLineCalendar> {
     final offset = (value.difference(widget.start.toLocalDate()).inDays - 2) * _size + _style.itemPadding;
     _controller = ScrollController(initialScrollOffset: offset);
 
-    final textDirection = Directionality.of(context);
-    widget.controller.addListener(() => _onDateChange(textDirection));
-
     super.didChangeDependencies();
   }
 
@@ -90,33 +85,43 @@ class _FLineCalendarState extends State<FLineCalendar> {
     return dateTextSize + dayTextSize + _textSpacing + (style.content.verticalPadding * 2);
   }
 
-  void _onDateChange(TextDirection textDirection) {
-    setState(() {
-      //TODO: localizations.
-      SemanticsService.announce(widget.controller.value.toString(), textDirection);
-    });
-  }
-
   @override
   Widget build(BuildContext context) => SizedBox(
         height: _size,
-        child: ListView.builder(
-          controller: _controller,
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.zero,
-          itemExtent: _size,
-          itemBuilder: (context, index) {
-            final date = widget.start.add(Duration(days: index));
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: _style.itemPadding),
-              child: FlineCalendarTile(
-                style: _style,
-                controller: widget.controller,
-                date: date,
-                isToday: widget.today == date,
-              ),
-            );
+        child: Focus(
+          autofocus: true,
+          onKeyEvent: (node, event) {
+            if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.arrowRight) {
+              widget.controller.value = widget.controller.value?.add(const Duration(days: 1));
+              _controller.animateTo(_controller.offset + _size,
+                  duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
+              return KeyEventResult.handled;
+            } else if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+              widget.controller.value = widget.controller.value?.subtract(const Duration(days: 1));
+              _controller.animateTo(_controller.offset - _size,
+                  duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
+              return KeyEventResult.handled;
+            }
+            return KeyEventResult.ignored;
           },
+          child: ListView.builder(
+            controller: _controller,
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.zero,
+            itemExtent: _size,
+            itemBuilder: (context, index) {
+              final date = widget.start.add(Duration(days: index));
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: _style.itemPadding),
+                child: FlineCalendarTile(
+                  style: _style,
+                  controller: widget.controller,
+                  date: date,
+                  isToday: widget.today == date,
+                ),
+              );
+            },
+          ),
         ),
       );
 

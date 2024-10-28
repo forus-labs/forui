@@ -34,7 +34,7 @@ class _SandboxState extends State<Sandbox> {
           const FTextField.password(),
           FLineCalendar(
             controller: FCalendarController.date(
-              initialSelection: DateTime(2024, 10, 13).toUtc(),
+              initialSelection: DateTime.utc(2024, 9, 13),
             ),
           ),
           const SizedBox(height: 20),
