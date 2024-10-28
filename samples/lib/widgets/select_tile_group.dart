@@ -274,29 +274,29 @@ class _SelectTileGroupSuffixPageState extends State<_SelectTileGroupSuffixPage> 
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 300),
-        child: FSelectTileGroup(
-          controller: controller,
-          label: const Text('Settings'),
-          children: [
-            FSelectTile.suffix(
-              prefixIcon: FIcon(FAssets.icons.list),
-              title: const Text('List View'),
-              value: 'List',
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 300),
+            child: FSelectTileGroup(
+              controller: controller,
+              label: const Text('Settings'),
+              children: [
+                FSelectTile.suffix(
+                  prefixIcon: FIcon(FAssets.icons.list),
+                  title: const Text('List View'),
+                  value: 'List',
+                ),
+                FSelectTile.suffix(
+                  prefixIcon: FIcon(FAssets.icons.layoutGrid),
+                  title: const Text('Grid View'),
+                  value: 'Grid',
+                ),
+              ],
             ),
-            FSelectTile.suffix(
-              prefixIcon: FIcon(FAssets.icons.layoutGrid),
-              title: const Text('Grid View'),
-              value: 'Grid',
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 
   @override
   void dispose() {

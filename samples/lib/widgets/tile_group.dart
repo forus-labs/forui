@@ -71,48 +71,48 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 400),
-        child: FTileGroup.merge(
-          label: const Text('Settings'),
-          children: [
-            FTileGroup(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: FTileGroup.merge(
+              label: const Text('Settings'),
               children: [
-                FTile(
-                  prefixIcon: FIcon(FAssets.icons.user),
-                  title: const Text('Personalization'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  onPress: () {},
+                FTileGroup(
+                  children: [
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.user),
+                      title: const Text('Personalization'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      title: const Text('WiFi'),
+                      details: const Text('Forus Labs (5G)'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                  ],
                 ),
-                FTile(
-                  prefixIcon: FIcon(FAssets.icons.wifi),
-                  title: const Text('WiFi'),
-                  details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
-                  onPress: () {},
+                FSelectTileGroup<String>(
+                  controller: controller,
+                  children: [
+                    FSelectTile(
+                      title: const Text('List View'),
+                      value: 'List',
+                    ),
+                    FSelectTile(
+                      title: const Text('Grid View'),
+                      value: 'Grid',
+                    ),
+                  ],
                 ),
               ],
             ),
-            FSelectTileGroup<String>(
-              controller: controller,
-              children: [
-                FSelectTile(
-                  title: const Text('List View'),
-                  value: 'List',
-                ),
-                FSelectTile(
-                  title: const Text('Grid View'),
-                  value: 'Grid',
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 
   @override
   void dispose() {
