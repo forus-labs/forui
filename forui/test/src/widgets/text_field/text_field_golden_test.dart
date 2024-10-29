@@ -32,7 +32,7 @@ void main() {
         ),
       );
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen(find.byType(MaterialApp));
     });
 
     for (final (name, theme) in TestScaffold.themes) {

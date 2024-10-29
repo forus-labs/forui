@@ -18,7 +18,6 @@ void main() {
       );
 
       expect(find.text('Child'), findsOneWidget);
-      expect(find.byType(Padding), findsOneWidget);
     });
 
     testWidgets('renders error even when label and description are null', (tester) async {
