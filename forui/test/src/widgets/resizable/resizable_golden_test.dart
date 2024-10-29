@@ -40,14 +40,13 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final axis in Axis.values) {
         for (final divider in FResizableDivider.values) {
           testWidgets('$name - $axis - $divider', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme,
-                background: background,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -90,7 +89,6 @@ void main() {
       testWidgets('expanded - $axis', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FScaffold(
               content: DecoratedBox(
                 decoration: BoxDecoration(
