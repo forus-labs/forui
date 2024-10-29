@@ -13,15 +13,10 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FCard(
-                style: TestScaffold.blueScreen.cardStyle,
-                title: const Text('Notifications'),
-                subtitle: const Text('You have 3 unread messages.'),
-              ),
-            ],
+          child: FCard(
+            style: TestScaffold.blueScreen.cardStyle,
+            title: const Text('Notifications'),
+            subtitle: const Text('You have 3 unread messages.'),
           ),
         ),
       );
@@ -29,12 +24,11 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       testWidgets('$name with FCardContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -54,7 +48,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -79,7 +72,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

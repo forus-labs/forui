@@ -14,13 +14,10 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: FAlert(
-              title: const Text('Alert Title'),
-              subtitle: const Text('Alert description with extra text'),
-              style: TestScaffold.blueScreen.alertStyles.primary,
-            ),
+          child: FAlert(
+            title: const Text('Alert Title'),
+            subtitle: const Text('Alert description with extra text'),
+            style: TestScaffold.blueScreen.alertStyles.primary,
           ),
         ),
       );
@@ -28,20 +25,16 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final variant in Variant.values) {
         testWidgets('$name with default icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: FAlert(
-                  title: const Text('Alert Title'),
-                  subtitle: const Text('Alert description with extra text'),
-                  style: variant,
-                ),
+              child: FAlert(
+                title: const Text('Alert Title'),
+                subtitle: const Text('Alert description with extra text'),
+                style: variant,
               ),
             ),
           );
@@ -53,15 +46,11 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: FAlert(
-                  icon: FIcon(FAssets.icons.badgeAlert),
-                  title: const Text('Alert Title'),
-                  subtitle: const Text('Alert description with extra text'),
-                  style: variant,
-                ),
+              child: FAlert(
+                icon: FIcon(FAssets.icons.badgeAlert),
+                title: const Text('Alert Title'),
+                subtitle: const Text('Alert description with extra text'),
+                style: variant,
               ),
             ),
           );

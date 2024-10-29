@@ -23,13 +23,12 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final variant in Variant.values) {
         testWidgets('$name with FBadgeContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
               child: FBadge(
                 label: const Text('Badge'),
                 style: variant,
@@ -44,7 +43,6 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
               child: FBadge.raw(
                 style: variant,
                 builder: (_, style) => Padding(

@@ -12,16 +12,13 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FAvatar', () {
-    for (final (name, theme, backrground) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       testWidgets('$name with image', (tester) async {
-        final testWidget = MaterialApp(
-          home: TestScaffold(
-            theme: theme,
-            background: backrground,
-            child: FAvatar(
-              image: FileImage(File('./test/resources/pante.jpg')),
-              fallback: const Text('MN'),
-            ),
+        final testWidget = TestScaffold.app(
+          theme: theme,
+          child: FAvatar(
+            image: FileImage(File('./test/resources/pante.jpg')),
+            fallback: const Text('MN'),
           ),
         );
 
@@ -46,7 +43,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: backrground,
             child: FAvatar.raw(
               child: Padding(
                 padding: const EdgeInsets.all(10),
