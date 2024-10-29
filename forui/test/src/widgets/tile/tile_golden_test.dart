@@ -15,17 +15,14 @@ void main() {
       testWidgets('enabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FTile(
-                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
+            child: FTile(
+              style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Bluetooth'),
+              subtitle: const Text('Fee, Fo, Fum'),
+              details: const Text('Forus Labs (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
             ),
           ),
         );
@@ -36,17 +33,14 @@ void main() {
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FTile(
-                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
+            child: FTile(
+              style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Bluetooth'),
+              subtitle: const Text('Fee, Fo, Fum'),
+              details: const Text('Forus Labs (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
             ),
           ),
         );
@@ -65,18 +59,15 @@ void main() {
       testWidgets('disabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FTile(
-                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
-                enabled: false,
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
+            child: FTile(
+              style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+              enabled: false,
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Bluetooth'),
+              subtitle: const Text('Fee, Fo, Fum'),
+              details: const Text('Forus Labs (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
             ),
           ),
         );
@@ -85,22 +76,18 @@ void main() {
       });
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       testWidgets('enabled - $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FTile(
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('Lorem'),
-                subtitle: const Text('Fee, Fo'),
-                details: const Text('FL (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
+            child: FTile(
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
             ),
           ),
         );
@@ -112,17 +99,13 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FTile(
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('Lorem'),
-                subtitle: const Text('Fee, Fo'),
-                details: const Text('FL (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
+            child: FTile(
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
             ),
           ),
         );
@@ -142,18 +125,14 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FTile(
-                enabled: false,
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('Lorem'),
-                subtitle: const Text('Fee, Fo'),
-                details: const Text('FL (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
+            child: FTile(
+              enabled: false,
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
             ),
           ),
         );
@@ -165,15 +144,11 @@ void main() {
     testWidgets('does not hover', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTile(
-              prefixIcon: FIcon(FAssets.icons.bluetooth),
-              title: const Text('Bluetooth'),
-              details: const Text('FL (5G)'),
-              suffixIcon: FIcon(FAssets.icons.chevronRight),
-            ),
+          child: FTile(
+            prefixIcon: FIcon(FAssets.icons.bluetooth),
+            title: const Text('Bluetooth'),
+            details: const Text('FL (5G)'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
           ),
         ),
       );
@@ -192,49 +167,8 @@ void main() {
     testWidgets('utilize all space', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 225),
-              child: FTile(
-                prefixIcon: FIcon(FAssets.icons.bluetooth),
-                title: const Text('Bluetooth'),
-                details: const Text('FL (5G)'),
-                suffixIcon: FIcon(FAssets.icons.chevronRight),
-                onPress: () {},
-              ),
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/utilize-all-space.png'));
-    });
-
-    testWidgets('minimal', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTile(
-              title: const Text('Bluetooth'),
-              onPress: () {},
-            ),
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
-    });
-
-    testWidgets('no subtitle', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 225),
             child: FTile(
               prefixIcon: FIcon(FAssets.icons.bluetooth),
               title: const Text('Bluetooth'),
@@ -246,21 +180,46 @@ void main() {
         ),
       );
 
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/utilize-all-space.png'));
+    });
+
+    testWidgets('minimal', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile(
+            title: const Text('Bluetooth'),
+            onPress: () {},
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
+    });
+
+    testWidgets('no subtitle', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile(
+            prefixIcon: FIcon(FAssets.icons.bluetooth),
+            title: const Text('Bluetooth'),
+            details: const Text('FL (5G)'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+        ),
+      );
+
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
     });
 
     testWidgets('no suffix icon', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTile(
-              prefixIcon: FIcon(FAssets.icons.bluetooth),
-              title: const Text('Bluetooth'),
-              details: const Text('FL (5G)'),
-              onPress: () {},
-            ),
+          child: FTile(
+            prefixIcon: FIcon(FAssets.icons.bluetooth),
+            title: const Text('Bluetooth'),
+            details: const Text('FL (5G)'),
+            onPress: () {},
           ),
         ),
       );
@@ -271,7 +230,6 @@ void main() {
     testWidgets('prioritize title', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: SizedBox(
             width: 300,
             child: Padding(
@@ -294,7 +252,6 @@ void main() {
     testWidgets('prioritize subtitle', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: SizedBox(
             width: 300,
             child: Padding(
@@ -318,7 +275,6 @@ void main() {
     testWidgets('prioritize details', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: SizedBox(
             width: 300,
             child: Padding(
