@@ -112,6 +112,7 @@ class TestScaffold extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('data', theme))
       ..add(ColorProperty('background', background))
+      ..add(FlagProperty('padded', value: padded, ifTrue: 'padded'))
       ..add(FlagProperty('wrapped', value: wrapped, ifTrue: 'wrapped'));
   }
 }
