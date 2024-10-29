@@ -28,7 +28,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       testWidgets('shown', (tester) async {
         await tester.pumpWidget(
           TestScaffold(

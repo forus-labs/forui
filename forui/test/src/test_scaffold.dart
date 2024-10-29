@@ -30,9 +30,9 @@ class TestScaffold extends StatelessWidget {
     ),
   );
 
-  static List<(String name, FThemeData theme, Color background)> get themes => [
-        ('zinc-light', FThemes.zinc.light, const Color(0xFFD5FFFF)),
-        ('zinc-dark', FThemes.zinc.dark, const Color(0xFF104963)),
+  static List<(String name, FThemeData theme)> get themes => [
+        ('zinc-light', FThemes.zinc.light),
+        ('zinc-dark', FThemes.zinc.dark),
       ];
 
   final FThemeData theme;
@@ -42,18 +42,28 @@ class TestScaffold extends StatelessWidget {
 
   TestScaffold({
     required this.child,
-    this.background,
     FThemeData? theme,
+    Color? background,
     super.key,
   })  : theme = theme ?? FThemes.zinc.light,
+        background = switch ((theme, background)) {
+          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFF3FFFF),
+          (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+          (_, final background) => background,
+        },
         wrapped = false;
 
   TestScaffold.app({
     required this.child,
-    this.background,
     FThemeData? theme,
+    Color? background,
     super.key,
   })  : theme = theme ?? FThemes.zinc.light,
+        background = switch ((theme, background)) {
+          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFF3FFFF),
+          (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+          (_, final background) => background,
+        },
         wrapped = true;
 
   TestScaffold.blue({required this.child, super.key})
