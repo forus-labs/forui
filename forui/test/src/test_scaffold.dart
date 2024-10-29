@@ -47,7 +47,7 @@ class TestScaffold extends StatelessWidget {
     super.key,
   })  : theme = theme ?? FThemes.zinc.light,
         background = switch ((theme, background)) {
-          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFF3FFFF),
+          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
           (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
           (_, final background) => background,
         },
@@ -60,7 +60,7 @@ class TestScaffold extends StatelessWidget {
     super.key,
   })  : theme = theme ?? FThemes.zinc.light,
         background = switch ((theme, background)) {
-          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFF3FFFF),
+          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
           (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
           (_, final background) => background,
         },

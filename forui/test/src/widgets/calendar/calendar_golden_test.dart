@@ -23,18 +23,15 @@ void main() {
       testWidgets('day picker', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FCalendar(
-                style: TestScaffold.blueScreen.calendarStyle,
-                controller: FCalendarController.dates(
-                  initialSelections: selected,
-                  selectable: (date) => date != DateTime.utc(2024, 7, 2),
-                ),
-                start: DateTime(1900, 1, 8),
-                end: DateTime(2024, 7, 10),
-                today: DateTime(2024, 7, 14),
+            child: FCalendar(
+              style: TestScaffold.blueScreen.calendarStyle,
+              controller: FCalendarController.dates(
+                initialSelections: selected,
+                selectable: (date) => date != DateTime.utc(2024, 7, 2),
               ),
+              start: DateTime(1900, 1, 8),
+              end: DateTime(2024, 7, 10),
+              today: DateTime(2024, 7, 14),
             ),
           ),
         );
@@ -45,19 +42,16 @@ void main() {
       testWidgets('year picker', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: FCalendar(
-                style: TestScaffold.blueScreen.calendarStyle,
-                initialType: FCalendarPickerType.yearMonth,
-                controller: FCalendarController.dates(
-                  initialSelections: selected,
-                  selectable: (date) => date != DateTime.utc(2024, 7, 2),
-                ),
-                start: DateTime(1900, 1, 8),
-                end: DateTime(2024, 7, 10),
-                today: DateTime(2024, 7, 14),
+            child: FCalendar(
+              style: TestScaffold.blueScreen.calendarStyle,
+              initialType: FCalendarPickerType.yearMonth,
+              controller: FCalendarController.dates(
+                initialSelections: selected,
+                selectable: (date) => date != DateTime.utc(2024, 7, 2),
               ),
+              start: DateTime(1900, 1, 8),
+              end: DateTime(2024, 7, 10),
+              today: DateTime(2024, 7, 14),
             ),
           ),
         );
@@ -66,24 +60,19 @@ void main() {
       });
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       group('day picker', () {
         testWidgets('default - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: FCalendar(
-                  controller: FCalendarController.dates(
-                    initialSelections: selected,
-                    selectable: (date) => date != DateTime.utc(2024, 7, 2),
-                  ),
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2024, 7, 10),
-                  today: DateTime(2024, 7, 14),
+              child: FCalendar(
+                controller: FCalendarController.dates(
+                  initialSelections: selected,
+                  selectable: (date) => date != DateTime.utc(2024, 7, 2),
                 ),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 7, 14),
               ),
             ),
           );
@@ -96,25 +85,18 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('8')));
           await tester.pumpAndSettle();
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$name/day-picker/default.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$name/day-picker/default.png'));
         });
 
         testWidgets('max rows - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: FCalendar(
-                  controller: FCalendarController.dates(initialSelections: selected),
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2024, 7, 10),
-                  today: DateTime(2024, 6, 14),
-                ),
+              child: FCalendar(
+                controller: FCalendarController.dates(initialSelections: selected),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 6, 14),
               ),
             ),
           );
@@ -129,15 +111,11 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: FCalendar(
-                  controller: FCalendarController.dates(),
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2024, 8, 10),
-                  today: DateTime(2024, 7, 14),
-                ),
+              child: FCalendar(
+                controller: FCalendarController.dates(),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 8, 10),
+                today: DateTime(2024, 7, 14),
               ),
             ),
           );
@@ -163,17 +141,13 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: FCalendar(
-                  controller: FCalendarController.dates(
-                    initialSelections: {DateTime.utc(2024, 7, 13)},
-                  ),
-                  start: DateTime(2024, 7),
-                  end: DateTime(2024, 8, 10),
-                  today: DateTime(2024, 7, 14),
+              child: FCalendar(
+                controller: FCalendarController.dates(
+                  initialSelections: {DateTime.utc(2024, 7, 13)},
                 ),
+                start: DateTime(2024, 7),
+                end: DateTime(2024, 8, 10),
+                today: DateTime(2024, 7, 14),
               ),
             ),
           );
@@ -190,16 +164,12 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: FCalendar(
-                  controller: FCalendarController.dates(initialSelections: selected),
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2024, 7, 10),
-                  today: DateTime(2024, 7, 14),
-                  initialType: FCalendarPickerType.yearMonth,
-                ),
+              child: FCalendar(
+                controller: FCalendarController.dates(initialSelections: selected),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 7, 14),
+                initialType: FCalendarPickerType.yearMonth,
               ),
             ),
           );
@@ -215,10 +185,7 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('Feb')));
           await tester.pumpAndSettle();
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$name/month-picker/default.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$name/month-picker/default.png'));
         });
       });
 
@@ -227,41 +194,30 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: FCalendar(
-                  controller: FCalendarController.dates(initialSelections: selected),
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2024, 7, 10),
-                  today: DateTime(2024, 7, 14),
-                  initialType: FCalendarPickerType.yearMonth,
-                ),
+              child: FCalendar(
+                controller: FCalendarController.dates(initialSelections: selected),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 7, 14),
+                initialType: FCalendarPickerType.yearMonth,
               ),
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$name/year-picker/default.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$name/year-picker/default.png'));
         });
 
         testWidgets('initial date different from today - $name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: FCalendar(
-                  controller: FCalendarController.dates(initialSelections: selected),
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2024, 7, 10),
-                  today: DateTime(2024, 7, 14),
-                  initialMonth: DateTime(1984, 4, 2),
-                  initialType: FCalendarPickerType.yearMonth,
-                ),
+              child: FCalendar(
+                controller: FCalendarController.dates(initialSelections: selected),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 7, 14),
+                initialMonth: DateTime(1984, 4, 2),
+                initialType: FCalendarPickerType.yearMonth,
               ),
             ),
           );
