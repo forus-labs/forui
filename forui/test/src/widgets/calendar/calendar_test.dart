@@ -11,7 +11,6 @@ void main() {
       testWidgets('navigates to previous page', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
@@ -32,7 +31,6 @@ void main() {
       testWidgets('did not navigate to previous page', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(2024, 7),
@@ -55,7 +53,6 @@ void main() {
       testWidgets('navigates to next page', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
@@ -76,7 +73,6 @@ void main() {
       testWidgets('did not navigate to next page', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(2024),
@@ -100,7 +96,6 @@ void main() {
 
       setUp(() {
         calendar = TestScaffold(
-          theme: FThemes.zinc.light,
           child: FCalendar(
             initialType: FCalendarPickerType.yearMonth,
             controller: FCalendarController.dates(),
@@ -176,7 +171,6 @@ void main() {
         testWidgets('select year where current month out of range', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: FThemes.zinc.light,
               child: FCalendar(
                 initialType: FCalendarPickerType.yearMonth,
                 controller: FCalendarController.dates(),
