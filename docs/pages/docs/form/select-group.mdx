@@ -88,6 +88,7 @@ FSelectGroup<Value>(
 
         class CheckboxFormState extends State<CheckboxForm> {
           final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+          final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
 
           @override
           Widget build(BuildContext context) => Form(
@@ -96,8 +97,8 @@ FSelectGroup<Value>(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FSelectGroup<Language>(
-                      controller: FMultiSelectGroupController(),
+                    FSelectGroup(
+                      controller: controller,
                       label: const Text('Favorite Languages'),
                       description: const Text('Your favorite language.'),
                       validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
@@ -136,6 +137,12 @@ FSelectGroup<Value>(
                   ],
                 ),
               );
+
+          @override
+          void dispose() {
+            controller.dispose();
+            super.dispose();
+          }
         }
         ```
     </Tabs.Tab>
@@ -159,6 +166,7 @@ FSelectGroup<Value>(
 
     class RadioFormState extends State<RadioForm> {
       final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
 
       @override
       Widget build(BuildContext context) => Form(
@@ -167,8 +175,8 @@ FSelectGroup<Value>(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FSelectGroup<Notification>(
-                  controller: FRadioSelectGroupController(),
+                FSelectGroup(
+                  controller: controller,
                   label: const Text('Notifications'),
                   description: const Text('Select the notifications.'),
                   validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
@@ -203,6 +211,12 @@ FSelectGroup<Value>(
               ],
             ),
           );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
     }
     ```
   </Tabs.Tab>

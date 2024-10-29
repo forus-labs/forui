@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/src/widgets/badge/badge.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class BadgePage extends SampleScaffold {
+class BadgePage extends Sample {
   static final styles = {
     for (final value in Variant.values) value.name: value,
   };
@@ -21,7 +21,7 @@ class BadgePage extends SampleScaffold {
   }) : style = styles[style]!;
 
   @override
-  Widget child(BuildContext context) => FBadge(
+  Widget sample(BuildContext context) => FBadge(
         label: const Text('Badge'),
         style: style,
       );

@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 String path(String str) => kIsWeb ? 'assets/$str' : str;
 
 @RoutePage()
-class CardPage extends SampleScaffold {
+class CardPage extends Sample {
   CardPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Column(
+  Widget sample(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FCard(

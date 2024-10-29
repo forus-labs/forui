@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 String path(String str) => kIsWeb ? 'assets/$str' : str;
 
 @RoutePage()
-class IconPage extends SampleScaffold {
+class IconPage extends Sample {
   final String variant;
 
   IconPage({
@@ -18,7 +18,7 @@ class IconPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) => IntrinsicWidth(
+  Widget sample(BuildContext context) => IntrinsicWidth(
         child: FButton.icon(
           style: FButtonStyle.secondary,
           child: switch (variant) {
@@ -31,13 +31,13 @@ class IconPage extends SampleScaffold {
 }
 
 @RoutePage()
-class ComparisonIconPage extends SampleScaffold {
+class ComparisonIconPage extends Sample {
   ComparisonIconPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Row(
+  Widget sample(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FButton.icon(
@@ -56,13 +56,13 @@ class ComparisonIconPage extends SampleScaffold {
 }
 
 @RoutePage()
-class ImageIconPage extends SampleScaffold {
+class ImageIconPage extends Sample {
   ImageIconPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Row(
+  Widget sample(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FButton.icon(
@@ -81,57 +81,47 @@ class ImageIconPage extends SampleScaffold {
 }
 
 @RoutePage()
-class CustomIconPage extends SampleScaffold {
+class CustomIconPage extends StatefulSample {
   CustomIconPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => IntrinsicWidth(
-        child: FButton.icon(
-          child: FIcon.raw(
-            builder: (context, style, child) {
-              final FButtonData(:enabled) = FButtonData.of(context);
-              return enabled ? _Icon(style: style) : const FIcon.data(Icons.menu);
-            },
-          ),
-          onPress: () {},
-        ),
-      );
+  State<CustomIconPage> createState() => _CustomIconState();
 }
 
-class _Icon extends StatefulWidget {
-  final FIconStyle style;
-
-  const _Icon({required this.style});
-
-  @override
-  State<_Icon> createState() => _IconState();
-}
-
-class _IconState extends State<_Icon> with SingleTickerProviderStateMixin {
+class _CustomIconState extends StatefulSampleState<CustomIconPage> with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-    )
+    controller = AnimationController(vsync: this, duration: const Duration(seconds: 3))
       ..forward()
       ..repeat(reverse: true);
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedIcon(
-        icon: AnimatedIcons.home_menu,
-        progress: animation,
-        color: widget.style.color,
-        size: widget.style.size,
-        semanticLabel: 'Home menu',
+  Widget sample(BuildContext context) => IntrinsicWidth(
+        child: FButton.icon(
+          child: FIcon.raw(
+            builder: (context, style, child) {
+              final FButtonData(:enabled) = FButtonData.of(context);
+              return enabled
+                  ? AnimatedIcon(
+                      icon: AnimatedIcons.home_menu,
+                      progress: animation,
+                      color: style.color,
+                      size: style.size,
+                      semanticLabel: 'Home menu',
+                    )
+                  : const FIcon.data(Icons.menu);
+            },
+          ),
+          onPress: () {},
+        ),
       );
 
   @override

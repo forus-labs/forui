@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class RootHeaderPage extends SampleScaffold {
+class RootHeaderPage extends Sample {
   RootHeaderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FHeader(
+  Widget sample(BuildContext context) => FHeader(
         title: const Text('Edit Alarm'),
         actions: [
           FHeaderAction(
@@ -28,13 +28,13 @@ class RootHeaderPage extends SampleScaffold {
 }
 
 @RoutePage()
-class NestedHeaderPage extends SampleScaffold {
+class NestedHeaderPage extends Sample {
   NestedHeaderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FHeader.nested(
+  Widget sample(BuildContext context) => FHeader.nested(
         title: const Text('Appointment'),
         prefixActions: [
           FHeaderAction.back(onPress: () {}),
@@ -53,13 +53,13 @@ class NestedHeaderPage extends SampleScaffold {
 }
 
 @RoutePage()
-class XNestedHeaderPage extends SampleScaffold {
+class XNestedHeaderPage extends Sample {
   XNestedHeaderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FHeader.nested(
+  Widget sample(BuildContext context) => FHeader.nested(
         title: const Text('Climate'),
         prefixActions: [
           FHeaderAction(

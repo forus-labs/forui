@@ -8,10 +8,10 @@ final themes = {
   'zinc-dark': FThemes.zinc.dark,
 };
 
-abstract class SampleScaffold extends StatelessWidget {
+abstract class Sample extends StatelessWidget {
   final FThemeData theme;
 
-  SampleScaffold({
+  Sample({
     String theme = 'zinc-light',
     super.key,
   }) : theme = themes[theme]!;
@@ -32,12 +32,40 @@ abstract class SampleScaffold extends StatelessWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 400),
               child: Builder(
-                builder: child,
+                builder: sample,
               ),
             ),
           ),
         ),
       );
 
-  Widget child(BuildContext context);
+  Widget sample(BuildContext context);
+}
+
+abstract class StatefulSample extends StatefulWidget {
+  final FThemeData theme;
+
+  StatefulSample({
+    String theme = 'zinc-light',
+    super.key,
+  }) : theme = themes[theme]!;
+}
+
+abstract class StatefulSampleState<T extends StatefulSample> extends State<T> {
+  @override
+  Widget build(BuildContext context) => FTheme(
+    data: widget.theme,
+    child: FScaffold(
+      content: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Builder(
+            builder: sample,
+          ),
+        ),
+      ),
+    ),
+  );
+
+  Widget sample(BuildContext context);
 }

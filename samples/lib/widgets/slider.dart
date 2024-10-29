@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class SliderPage extends SampleScaffold {
+class SliderPage extends Sample {
   final String? label;
   final String? description;
   final String? error;
@@ -32,7 +32,7 @@ class SliderPage extends SampleScaffold {
         extent = bool.tryParse(extent) ?? false ? (min: 0.25, max: 0.75) : (min: 0, max: 1);
 
   @override
-  Widget child(BuildContext context) => FSlider(
+  Widget sample(BuildContext context) => FSlider(
         label: label != null ? Text(label!) : null,
         description: description != null ? Text(description!) : null,
         forceErrorText: error,
@@ -48,13 +48,13 @@ class SliderPage extends SampleScaffold {
 }
 
 @RoutePage()
-class TooltipSliderPage extends SampleScaffold {
+class TooltipSliderPage extends Sample {
   TooltipSliderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FSlider(
+  Widget sample(BuildContext context) => FSlider(
         tooltipBuilder: (style, value) {
           final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
           return Text('0x$hex');
@@ -64,13 +64,13 @@ class TooltipSliderPage extends SampleScaffold {
 }
 
 @RoutePage()
-class MarksSliderPage extends SampleScaffold {
+class MarksSliderPage extends Sample {
   MarksSliderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Padding(
+  Widget sample(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 35),
         child: FSlider(
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
@@ -86,13 +86,13 @@ class MarksSliderPage extends SampleScaffold {
 }
 
 @RoutePage()
-class DiscreteSliderPage extends SampleScaffold {
+class DiscreteSliderPage extends Sample {
   DiscreteSliderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FSlider(
+  Widget sample(BuildContext context) => FSlider(
         controller: FDiscreteSliderController(selection: FSliderSelection(max: 0.25)),
         marks: const [
           FSliderMark(value: 0, label: Text('0%')),
@@ -105,25 +105,25 @@ class DiscreteSliderPage extends SampleScaffold {
 }
 
 @RoutePage()
-class RangeSliderPage extends SampleScaffold {
+class RangeSliderPage extends Sample {
   RangeSliderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FSlider(
+  Widget sample(BuildContext context) => FSlider(
         controller: FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75)),
       );
 }
 
 @RoutePage()
-class VerticalSliderPage extends SampleScaffold {
+class VerticalSliderPage extends Sample {
   VerticalSliderPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Padding(
+  Widget sample(BuildContext context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 35),
         child: FSlider(
           label: const Text('Volume'),
@@ -143,30 +143,20 @@ class VerticalSliderPage extends SampleScaffold {
 }
 
 @RoutePage()
-class SliderFormPage extends SampleScaffold {
+class SliderFormPage extends StatefulSample {
   SliderFormPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 300),
-        child: const SliderForm(),
-      );
+  State<SliderFormPage> createState() => _SliderFormState();
 }
 
-class SliderForm extends StatefulWidget {
-  const SliderForm({super.key});
-
-  @override
-  State<SliderForm> createState() => SliderFormState();
-}
-
-class SliderFormState extends State<SliderForm> {
+class _SliderFormState extends StatefulSampleState<SliderFormPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) => Form(
+  Widget sample(BuildContext context) => Form(
         key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

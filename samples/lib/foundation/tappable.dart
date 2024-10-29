@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class TappablePage extends SampleScaffold {
+class TappablePage extends Sample {
   TappablePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FTappable.animated(
+  Widget sample(BuildContext context) => FTappable.animated(
         builder: (context, data, child) => Container(
           decoration: BoxDecoration(
             color: data.hovered ? context.theme.colorScheme.secondary : context.theme.colorScheme.background,

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 enum Sidebar { recents, home, applications }
 
@@ -12,7 +12,7 @@ enum Language { dart, java, rust, python }
 enum Notification { all, direct, nothing }
 
 @RoutePage()
-class SelectTileGroupPage extends SampleScaffold {
+class SelectTileGroupPage extends StatefulSample {
   final FTileDivider divider;
 
   SelectTileGroupPage({
@@ -25,29 +25,14 @@ class SelectTileGroupPage extends SampleScaffold {
         };
 
   @override
-  Widget child(BuildContext context) => _SelectTileGroupPage(divider: divider);
+  State<SelectTileGroupPage> createState() => _SelectTileGroupPageState();
 }
 
-class _SelectTileGroupPage extends StatefulWidget {
-  final FTileDivider divider;
-
-  const _SelectTileGroupPage({required this.divider});
+class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage> {
+  late final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
 
   @override
-  State<_SelectTileGroupPage> createState() => _SelectTileGroupPageState();
-}
-
-class _SelectTileGroupPageState extends State<_SelectTileGroupPage> {
-  late final FMultiSelectGroupController<Sidebar> controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FMultiSelectGroupController(values: {Sidebar.recents});
-  }
-
-  @override
-  Widget build(BuildContext context) => Column(
+  Widget sample(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ConstrainedBox(
@@ -87,34 +72,21 @@ class _SelectTileGroupPageState extends State<_SelectTileGroupPage> {
 }
 
 @RoutePage()
-class SelectTileGroupMultiValuePage extends SampleScaffold {
+class SelectTileGroupMultiValuePage extends StatefulSample {
   SelectTileGroupMultiValuePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => const _SelectTileGroupMultiValuePage();
+  State<SelectTileGroupMultiValuePage> createState() => _SelectTileGroupMultiValuePageState();
 }
 
-class _SelectTileGroupMultiValuePage extends StatefulWidget {
-  const _SelectTileGroupMultiValuePage();
-
-  @override
-  State<_SelectTileGroupMultiValuePage> createState() => _SelectTileGroupMultiValuePageState();
-}
-
-class _SelectTileGroupMultiValuePageState extends State<_SelectTileGroupMultiValuePage> {
+class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTileGroupMultiValuePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FMultiSelectGroupController<Language> controller;
+  late final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
 
   @override
-  void initState() {
-    super.initState();
-    controller = FMultiSelectGroupController(values: {});
-  }
-
-  @override
-  Widget build(BuildContext context) => Form(
+  Widget sample(BuildContext context) => Form(
         key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -169,34 +141,21 @@ class _SelectTileGroupMultiValuePageState extends State<_SelectTileGroupMultiVal
 }
 
 @RoutePage()
-class SelectTileGroupRadioPage extends SampleScaffold {
+class SelectTileGroupRadioPage extends StatefulSample {
   SelectTileGroupRadioPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => const _SelectTileGroupRadioPage();
+  State<SelectTileGroupRadioPage> createState() => _SelectTileGroupRadioPageState();
 }
 
-class _SelectTileGroupRadioPage extends StatefulWidget {
-  const _SelectTileGroupRadioPage();
-
-  @override
-  State<_SelectTileGroupRadioPage> createState() => _SelectTileGroupRadioPageState();
-}
-
-class _SelectTileGroupRadioPageState extends State<_SelectTileGroupRadioPage> {
+class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FRadioSelectGroupController<Notification> controller;
+  late final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
 
   @override
-  void initState() {
-    super.initState();
-    controller = FRadioSelectGroupController();
-  }
-
-  @override
-  Widget build(BuildContext context) => Form(
+  Widget sample(BuildContext context) => Form(
         key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -247,33 +206,20 @@ class _SelectTileGroupRadioPageState extends State<_SelectTileGroupRadioPage> {
 }
 
 @RoutePage()
-class SelectTileGroupSuffixPage extends SampleScaffold {
+class SelectTileGroupSuffixPage extends StatefulSample {
   SelectTileGroupSuffixPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => const _SelectTileGroupSuffixPage();
+  State<SelectTileGroupSuffixPage> createState() => _SelectTileGroupSuffixPageState();
 }
 
-class _SelectTileGroupSuffixPage extends StatefulWidget {
-  const _SelectTileGroupSuffixPage();
+class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
+  final FRadioSelectGroupController<String> controller = FRadioSelectGroupController();
 
   @override
-  State<_SelectTileGroupSuffixPage> createState() => _SelectTileGroupSuffixPageState();
-}
-
-class _SelectTileGroupSuffixPageState extends State<_SelectTileGroupSuffixPage> {
-  late final FRadioSelectGroupController<String> controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FRadioSelectGroupController();
-  }
-
-  @override
-  Widget build(BuildContext context) => Column(
+  Widget sample(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ConstrainedBox(

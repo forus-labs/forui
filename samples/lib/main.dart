@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'package:forui_samples/main.gr.dart';
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -26,9 +26,9 @@ class ForuiSamples extends StatelessWidget {
 }
 
 @RoutePage()
-class EmptyPage extends SampleScaffold {
+class EmptyPage extends Sample {
   @override
-  Widget child(BuildContext context) => const Placeholder();
+  Widget sample(BuildContext context) => const Placeholder();
 }
 
 @AutoRouterConfig()

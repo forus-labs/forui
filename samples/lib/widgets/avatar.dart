@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 String path(String str) => kIsWeb ? 'assets/$str' : str;
 
 @RoutePage()
-class AvatarPage extends SampleScaffold {
+class AvatarPage extends Sample {
   AvatarPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Row(
+  Widget sample(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAvatar(
@@ -36,13 +36,13 @@ class AvatarPage extends SampleScaffold {
 }
 
 @RoutePage()
-class AvatarRawPage extends SampleScaffold {
+class AvatarRawPage extends Sample {
   AvatarRawPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Row(
+  Widget sample(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAvatar.raw(),
@@ -59,13 +59,13 @@ class AvatarRawPage extends SampleScaffold {
 }
 
 @RoutePage()
-class AvatarInvalidPage extends SampleScaffold {
+class AvatarInvalidPage extends Sample {
   AvatarInvalidPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Row(
+  Widget sample(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAvatar(

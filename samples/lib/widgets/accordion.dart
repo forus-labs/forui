@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 final controllers = {
   'default': FAccordionController(),
@@ -12,7 +12,7 @@ final controllers = {
 };
 
 @RoutePage()
-class AccordionPage extends SampleScaffold {
+class AccordionPage extends Sample {
   final FAccordionController controller;
 
   AccordionPage({
@@ -21,7 +21,7 @@ class AccordionPage extends SampleScaffold {
   }) : controller = controllers[controller] ?? FAccordionController();
 
   @override
-  Widget child(BuildContext context) => Column(
+  Widget sample(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAccordion(

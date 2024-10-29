@@ -258,14 +258,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 final variants = {
   for (final value in Variant.values) value.name: value,
 };
 
 @RoutePage()
-class ButtonTextPage extends SampleScaffold { // - (1)
+class ButtonTextPage extends Sample { // - (1)
   final Variant variant;
   final String label;
 
@@ -276,7 +276,7 @@ class ButtonTextPage extends SampleScaffold { // - (1)
   }) : variant = variants[style] ?? Variant.primary;
 
   @override
-  Widget child(BuildContext context) => IntrinsicWidth(
+  Widget sample(BuildContext context) => IntrinsicWidth(
         child: FButton(
           label: Text(label),
           style: variant,
@@ -286,8 +286,8 @@ class ButtonTextPage extends SampleScaffold { // - (1)
 }
 ```
 
-1. Samples should extend `SampleScaffold` which centers and wraps the widget returned by the overridden `child(...)` 
-   method in a `FTheme`.
+1. Samples should extend `Sample`/`StatefulSample` which centers and wraps the widget returned by the overridden 
+  `sample(...)`  method in a `FTheme`.
 2. The current theme, provided as a URL query parameter.
 
 The samples website uses `auto_route` to generate a route for each sample. In general, each sample has its own page and

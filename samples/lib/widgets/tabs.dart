@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class TabsPage extends SampleScaffold {
+class TabsPage extends Sample {
   TabsPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Column(
+  Widget sample(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(

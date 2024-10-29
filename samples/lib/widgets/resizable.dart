@@ -4,16 +4,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class ResizablePage extends SampleScaffold {
+class ResizablePage extends Sample {
   ResizablePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => DecoratedBox(
+  Widget sample(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
@@ -43,13 +43,13 @@ class ResizablePage extends SampleScaffold {
 }
 
 @RoutePage()
-class NoCascadingResizablePage extends SampleScaffold {
+class NoCascadingResizablePage extends Sample {
   NoCascadingResizablePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => DecoratedBox(
+  Widget sample(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
@@ -126,13 +126,13 @@ class Label extends StatelessWidget {
 }
 
 @RoutePage()
-class HorizontalResizablePage extends SampleScaffold {
+class HorizontalResizablePage extends Sample {
   HorizontalResizablePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => DecoratedBox(
+  Widget sample(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
@@ -161,13 +161,13 @@ class HorizontalResizablePage extends SampleScaffold {
 }
 
 @RoutePage()
-class NoThumbResizablePage extends SampleScaffold {
+class NoThumbResizablePage extends Sample {
   NoThumbResizablePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => DecoratedBox(
+  Widget sample(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),
@@ -197,13 +197,13 @@ class NoThumbResizablePage extends SampleScaffold {
 }
 
 @RoutePage()
-class NoDividerResizablePage extends SampleScaffold {
+class NoDividerResizablePage extends Sample {
   NoDividerResizablePage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => DecoratedBox(
+  Widget sample(BuildContext context) => DecoratedBox(
         decoration: BoxDecoration(
           border: Border.all(color: context.theme.colorScheme.border),
           borderRadius: BorderRadius.circular(8),

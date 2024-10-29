@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 import 'package:sugar/sugar.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 DateTime get selected {
   final today = DateTime.now().toLocalDate();
@@ -17,13 +17,13 @@ DateTime get selected {
 }
 
 @RoutePage()
-class CalendarPage extends SampleScaffold {
+class CalendarPage extends Sample {
   CalendarPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FCalendar(
+  Widget sample(BuildContext context) => FCalendar(
         controller: FCalendarController.date(initialSelection: selected),
         start: DateTime.utc(2000),
         end: DateTime.utc(2030),
@@ -31,13 +31,13 @@ class CalendarPage extends SampleScaffold {
 }
 
 @RoutePage()
-class DatesCalendarPage extends SampleScaffold {
+class DatesCalendarPage extends Sample {
   DatesCalendarPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FCalendar(
+  Widget sample(BuildContext context) => FCalendar(
         controller: FCalendarController.dates(
           initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
         ),
@@ -48,13 +48,13 @@ class DatesCalendarPage extends SampleScaffold {
 }
 
 @RoutePage()
-class UnselectableCalendarPage extends SampleScaffold {
+class UnselectableCalendarPage extends Sample {
   UnselectableCalendarPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FCalendar(
+  Widget sample(BuildContext context) => FCalendar(
         controller: FCalendarController.dates(
           initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
           selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
@@ -66,13 +66,13 @@ class UnselectableCalendarPage extends SampleScaffold {
 }
 
 @RoutePage()
-class RangeCalendarPage extends SampleScaffold {
+class RangeCalendarPage extends Sample {
   RangeCalendarPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => FCalendar(
+  Widget sample(BuildContext context) => FCalendar(
         controller: FCalendarController.range(
           initialSelection: (DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)),
         ),
