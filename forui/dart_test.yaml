@@ -1,3 +1,2 @@
 tags:
-  golden:
-    retry: 3
+  golden: {}

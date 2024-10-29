@@ -113,13 +113,12 @@ void main() {
       });
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final divider in FTileDivider.values) {
         testWidgets('enabled - $name - $divider', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
               child: FSelectTileGroup(
                 controller: controller,
                 label: const Text('Network'),
@@ -162,7 +161,6 @@ void main() {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme,
-                background: background,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FSelectTileGroup(
@@ -207,7 +205,6 @@ void main() {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme,
-                background: background,
                 child: FSelectTileGroup(
                   controller: controller,
                   label: const Text('Network'),
@@ -247,7 +244,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FSelectTileGroup(
@@ -282,7 +278,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FSelectTileGroup(
               controller: controller,
               label: const Text('Network'),
@@ -323,7 +318,6 @@ void main() {
     testWidgets('tile style overrides group style', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FSelectTileGroup(
             controller: controller,
             label: const Text('Network'),
@@ -353,7 +347,6 @@ void main() {
     testWidgets('tile state overrides group state', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FSelectTileGroup(
             controller: controller,
             label: const Text('Network'),

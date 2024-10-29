@@ -112,12 +112,11 @@ void main() {
       });
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       testWidgets('enabled - $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -139,7 +138,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -168,7 +166,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -191,7 +188,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FSelectTileData(
               controller: controller,
               selected: true,
@@ -213,7 +209,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FSelectTileData(
               controller: controller,
               selected: true,
@@ -238,7 +233,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -255,7 +249,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png')
+          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png'),
         );
       });
     }
