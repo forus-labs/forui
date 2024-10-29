@@ -33,8 +33,8 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('forui icon - $name', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('forui icon - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -66,7 +66,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('bottom-navigation-bar/$name-forui-icon.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('bottom-navigation-bar/$themeName-forui-icon.png'));
       });
     }
   });

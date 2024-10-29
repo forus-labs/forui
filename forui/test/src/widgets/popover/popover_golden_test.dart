@@ -16,9 +16,9 @@ void main() {
 
   setUp(() => controller = FPopoverController(vsync: const TestVSync()));
 
-  for (final (name, theme) in TestScaffold.themes) {
+  for (final (themeName, theme) in TestScaffold.themes) {
     group('FPopover', () {
-      testWidgets('$name hidden ', (tester) async {
+      testWidgets('$themeName hidden ', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme,
@@ -35,10 +35,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/hidden-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/hidden-$themeName.png'));
       });
 
-      testWidgets('$name shown on touch device', (tester) async {
+      testWidgets('$themeName shown on touch device', (tester) async {
         Touch.primary = true;
 
         await tester.pumpWidget(
@@ -60,10 +60,10 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-$themeName.png'));
       });
 
-      testWidgets('$name shown on non-touch device', (tester) async {
+      testWidgets('$themeName shown on non-touch device', (tester) async {
         Touch.primary = false;
 
         await tester.pumpWidget(
@@ -85,7 +85,7 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-non-touch-device-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-non-touch-device-$themeName.png'));
       });
     });
   }

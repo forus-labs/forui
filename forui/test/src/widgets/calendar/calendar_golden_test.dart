@@ -59,9 +59,9 @@ void main() {
       });
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       group('day picker', () {
-        testWidgets('default - $name', (tester) async {
+        testWidgets('default - $themeName', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               child: FCalendar(
@@ -84,10 +84,10 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('8')));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$name/day-picker/default.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$themeName/day-picker/default.png'));
         });
 
-        testWidgets('max rows - $name', (tester) async {
+        testWidgets('max rows - $themeName', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -102,11 +102,11 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$name/day-picker/max-rows.png'),
+            matchesGoldenFile('calendar/$themeName/day-picker/max-rows.png'),
           );
         });
 
-        testWidgets('hovered and selected dates next to each other - $name', (tester) async {
+        testWidgets('hovered and selected dates next to each other - $themeName', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -132,11 +132,11 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$name/day-picker/hovered-selected.png'),
+            matchesGoldenFile('calendar/$themeName/day-picker/hovered-selected.png'),
           );
         });
 
-        testWidgets('disabled previous icon - $name', (tester) async {
+        testWidgets('disabled previous icon - $themeName', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -153,13 +153,13 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$name/day-picker/disabled-previous.png'),
+            matchesGoldenFile('calendar/$themeName/day-picker/disabled-previous.png'),
           );
         });
       });
 
       group('month picker', () {
-        testWidgets('default - $name', (tester) async {
+        testWidgets('default - $themeName', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -184,12 +184,12 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('Feb')));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$name/month-picker/default.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$themeName/month-picker/default.png'));
         });
       });
 
       group('year picker', () {
-        testWidgets('default - $name', (tester) async {
+        testWidgets('default - $themeName', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -203,10 +203,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$name/year-picker/default.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$themeName/year-picker/default.png'));
         });
 
-        testWidgets('initial date different from today - $name', (tester) async {
+        testWidgets('initial date different from today - $themeName', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -231,7 +231,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$name/year-picker/initial-date.png'),
+            matchesGoldenFile('calendar/$themeName/year-picker/initial-date.png'),
           );
         });
       });

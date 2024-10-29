@@ -12,8 +12,8 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FAvatar', () {
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('$name with image', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('$themeName with image', (tester) async {
         final testWidget = TestScaffold.app(
           theme: theme,
           child: FAvatar(
@@ -34,12 +34,12 @@ void main() {
           }
         });
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('avatar/$name/image.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('avatar/$themeName/image.png'));
       });
 
       /// We will not be testing for the fallback behavior due to this issue on flutter
       /// https://github.com/flutter/flutter/issues/107416
-      testWidgets('$name with raw content', (tester) async {
+      testWidgets('$themeName with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -54,7 +54,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('avatar/$name/raw.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('avatar/$themeName/raw.png'));
       });
     }
   });

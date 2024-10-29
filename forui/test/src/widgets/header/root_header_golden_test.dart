@@ -33,8 +33,8 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('$name with FRootHeader actions', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('$themeName with FRootHeader actions', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -54,7 +54,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/$name-header.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/$themeName-header.png'));
       });
     }
   });

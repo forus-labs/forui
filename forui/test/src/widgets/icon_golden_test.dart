@@ -25,8 +25,8 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/icon-style.png'));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('$name with SvgAsset', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('$themeName with SvgAsset', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -34,10 +34,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$name/svg-asset.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/svg-asset.png'));
       });
 
-      testWidgets('$name with IconData', (tester) async {
+      testWidgets('$themeName with IconData', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -46,10 +46,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$name/data.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/data.png'));
       });
 
-      testWidgets('$name with ImageProvider', (tester) async {
+      testWidgets('$themeName with ImageProvider', (tester) async {
         await tester.runAsync(() async {
           await tester.pumpWidget(
             TestScaffold(
@@ -65,10 +65,10 @@ void main() {
           }
         });
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$name/recolored-image.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/recolored-image.png'));
       });
 
-      testWidgets('$name with ImageProvider and no recoloring', (tester) async {
+      testWidgets('$themeName with ImageProvider and no recoloring', (tester) async {
         await tester.runAsync(() async {
           await tester.pumpWidget(
             TestScaffold(
@@ -84,10 +84,10 @@ void main() {
           }
         });
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$name/original-image.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/original-image.png'));
       });
 
-      testWidgets('$name with raw builder', (tester) async {
+      testWidgets('$themeName with raw builder', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -101,7 +101,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$name/raw.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/raw.png'));
       });
     }
   });

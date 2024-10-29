@@ -25,9 +25,9 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final variant in Variant.values) {
-        testWidgets('$name with default icon', (tester) async {
+        testWidgets('$themeName with default icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -39,10 +39,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/$name/$variant-default-icon.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/$themeName/$variant-default-icon.png'));
         });
 
-        testWidgets('$name with user icon', (tester) async {
+        testWidgets('$themeName with user icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -55,7 +55,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/$name/$variant-user-icon.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/$themeName/$variant-user-icon.png'));
         });
       }
     }

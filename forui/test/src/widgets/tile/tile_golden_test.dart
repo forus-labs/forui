@@ -76,8 +76,8 @@ void main() {
       });
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('enabled - $name', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('enabled - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -92,7 +92,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/enabled-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/enabled-$themeName.png'));
       });
 
       testWidgets('hovered', (tester) async {
@@ -118,10 +118,10 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FTile)));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/hovered-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/hovered-$themeName.png'));
       });
 
-      testWidgets('disabled - $name', (tester) async {
+      testWidgets('disabled - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -137,7 +137,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/disabled-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/disabled-$themeName.png'));
       });
     }
 

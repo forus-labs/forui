@@ -25,9 +25,9 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final direction in Axis.values) {
-        testWidgets('$name with $direction FDialogContent', (tester) async {
+        testWidgets('$themeName with $direction FDialogContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -52,11 +52,11 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$name-$direction-content-dialog.png'));
+          await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$themeName-$direction-content-dialog.png'));
         });
       }
 
-      testWidgets('$name with raw content', (tester) async {
+      testWidgets('$themeName with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -69,7 +69,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$name-raw-content-dialog.png'));
+        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$themeName-raw-content-dialog.png'));
       });
     }
   });

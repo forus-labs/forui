@@ -26,7 +26,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
@@ -38,7 +38,7 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$name with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '$themeName with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -54,13 +54,13 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'check-box/$name/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+              'check-box/$themeName/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });
 
         testWidgets(
-            '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '$themeName with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
                 (tester) async {
               await tester.pumpWidget(
                 TestScaffold(
@@ -78,7 +78,7 @@ void main() {
               await expectLater(
                 find.byType(TestScaffold),
                 matchesGoldenFile(
-                  'check-box/$name/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+                  'check-box/$themeName/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
                 ),
               );
             });

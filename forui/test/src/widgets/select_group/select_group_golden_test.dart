@@ -37,8 +37,8 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('$name with checkbox', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('$themeName with checkbox', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -67,10 +67,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/checkbox.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/checkbox.png'));
       });
 
-      testWidgets('$name with checkbox error', (tester) async {
+      testWidgets('$themeName with checkbox error', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -100,14 +100,14 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/checkbox-error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/checkbox-error.png'));
       });
     }
   });
 
   group('FRadio', () {
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('$name with radio', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('$themeName with radio', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -136,10 +136,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/radio.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/radio.png'));
       });
 
-      testWidgets('$name with radio error', (tester) async {
+      testWidgets('$themeName with radio error', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -169,7 +169,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$name/radio-error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/radio-error.png'));
       });
     }
   });

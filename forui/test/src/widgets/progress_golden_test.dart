@@ -21,9 +21,9 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final (progress, value) in [('positive', 17.0), ('negative', -4.0), ('clamped', 0.3)]) {
-        testWidgets('$name - $progress', (tester) async {
+        testWidgets('$themeName - $progress', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -31,7 +31,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/$name-$progress.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/$themeName-$progress.png'));
         });
       }
     }

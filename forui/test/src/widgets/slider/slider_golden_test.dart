@@ -35,11 +35,11 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final layout in Layout.values) {
         for (final touch in [true, false]) {
           for (final enabled in [true, false]) {
-            testWidgets('$name - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
+            testWidgets('$themeName - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
               Touch.primary = touch;
               final styles = FSliderStyles.inherit(
                 colorScheme: theme.colorScheme,
@@ -80,13 +80,13 @@ void main() {
               await expectLater(
                 find.byType(TestScaffold),
                 matchesGoldenFile(
-                  'slider/range-slider/$name/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
+                  'slider/range-slider/$themeName/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
                 ),
               );
             });
           }
 
-          testWidgets('$name - $layout - error', (tester) async {
+          testWidgets('$themeName - $layout - error', (tester) async {
             Touch.primary = touch;
             final styles = FSliderStyles.inherit(
               colorScheme: theme.colorScheme,
@@ -127,7 +127,7 @@ void main() {
             await expectLater(
               find.byType(TestScaffold),
               matchesGoldenFile(
-                'slider/range-slider/$name/$layout-${touch ? 'touch' : 'desktop'}-error.png',
+                'slider/range-slider/$themeName/$layout-${touch ? 'touch' : 'desktop'}-error.png',
               ),
             );
           });

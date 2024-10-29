@@ -112,8 +112,8 @@ void main() {
       });
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('enabled - $name', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('enabled - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -131,10 +131,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/enabled-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/enabled-$themeName.png'));
       });
 
-      testWidgets('hovered - $name', (tester) async {
+      testWidgets('hovered - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -159,10 +159,10 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>)));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/hovered-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/hovered-$themeName.png'));
       });
 
-      testWidgets('disabled - $name', (tester) async {
+      testWidgets('disabled - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -181,10 +181,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/disabled-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/disabled-$themeName.png'));
       });
 
-      testWidgets('checked - $name', (tester) async {
+      testWidgets('checked - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -202,10 +202,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/checked-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/tile/checked-$themeName.png'));
       });
 
-      testWidgets('suffix icon - checked - $name', (tester) async {
+      testWidgets('suffix icon - checked - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -225,11 +225,11 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-checked-$name.png'),
+          matchesGoldenFile('select-tile-group/tile/suffix-checked-$themeName.png'),
         );
       });
 
-      testWidgets('suffix icon - unchecked - $name', (tester) async {
+      testWidgets('suffix icon - unchecked - $themeName', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -249,7 +249,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$name.png'),
+          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$themeName.png'),
         );
       });
     }

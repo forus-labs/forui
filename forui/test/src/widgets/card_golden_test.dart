@@ -24,8 +24,8 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
-      testWidgets('$name with FCardContent', (tester) async {
+    for (final (themeName, theme) in TestScaffold.themes) {
+      testWidgets('$themeName with FCardContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -41,10 +41,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$name/content.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$themeName/content.png'));
       });
 
-      testWidgets('$name with image', (tester) async {
+      testWidgets('$themeName with image', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -65,10 +65,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$name/content-image.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$themeName/content-image.png'));
       });
 
-      testWidgets('$name with raw content', (tester) async {
+      testWidgets('$themeName with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
@@ -86,7 +86,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$name/raw.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$themeName/raw.png'));
       });
     }
   });

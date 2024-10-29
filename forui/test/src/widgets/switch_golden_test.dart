@@ -10,9 +10,9 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FSwitch', () {
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final (checked, value) in [('checked', true), ('unchecked', false)]) {
-        testWidgets('$name - $checked - unfocused', (tester) async {
+        testWidgets('$themeName - $checked - unfocused', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -28,10 +28,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$name/$checked-unfocused.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$themeName/$checked-unfocused.png'));
         });
 
-        testWidgets('$name - $checked - focused', (tester) async {
+        testWidgets('$themeName - $checked - focused', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -48,10 +48,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$name/$checked-focused.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$themeName/$checked-focused.png'));
         });
 
-        testWidgets('$name - $checked - disabled', (tester) async {
+        testWidgets('$themeName - $checked - disabled', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -69,10 +69,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$name/$checked-disabled.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$themeName/$checked-disabled.png'));
         });
 
-        testWidgets('$name - $checked - error', (tester) async {
+        testWidgets('$themeName - $checked - error', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -91,7 +91,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$name/$checked-error.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/$themeName/$checked-error.png'));
         });
       }
     }

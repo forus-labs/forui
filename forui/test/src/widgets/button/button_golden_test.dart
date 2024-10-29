@@ -44,9 +44,9 @@ void main() {
       });
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final variant in Variant.values) {
-        testWidgets('$name enabled with FButtonContent', (tester) async {
+        testWidgets('$themeName enabled with FButtonContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -60,10 +60,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$name/$variant/enabled-content.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/enabled-content.png'));
         });
 
-        testWidgets('$name enabled and hovered over', (tester) async {
+        testWidgets('$themeName enabled and hovered over', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -85,10 +85,10 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.byType(FButton)));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$name/$variant/enabled-hovered.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/enabled-hovered.png'));
         });
 
-        testWidgets('$name enabled and long pressed', (tester) async {
+        testWidgets('$themeName enabled and long pressed', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -112,11 +112,11 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name/$variant/enabled-long-pressed.png'),
+            matchesGoldenFile('button/$themeName/$variant/enabled-long-pressed.png'),
           );
         });
 
-        testWidgets('$name disabled with FButtonContent', (tester) async {
+        testWidgets('$themeName disabled with FButtonContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -130,10 +130,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$name/$variant/disabled-content.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/disabled-content.png'));
         });
 
-        testWidgets('$name with enabled raw content', (tester) async {
+        testWidgets('$themeName with enabled raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -163,10 +163,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$name/$variant/enabled-raw.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/enabled-raw.png'));
         });
 
-        testWidgets('$name disabled with raw content', (tester) async {
+        testWidgets('$themeName disabled with raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -196,10 +196,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$name/$variant/disabled-raw.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/disabled-raw.png'));
         });
 
-        testWidgets('$name with enabled icon', (tester) async {
+        testWidgets('$themeName with enabled icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -213,11 +213,11 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name/$variant/icon-enabled-button.png'),
+            matchesGoldenFile('button/$themeName/$variant/icon-enabled-button.png'),
           );
         });
 
-        testWidgets('$name with disabled icon', (tester) async {
+        testWidgets('$themeName with disabled icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -229,7 +229,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$name/$variant/icon-disabled.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/icon-disabled.png'));
         });
       }
     }

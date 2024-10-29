@@ -29,9 +29,9 @@ void main() {
       });
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final variant in Variant.values) {
-        testWidgets('$name with enabled button spinner', (tester) async {
+        testWidgets('$themeName with enabled button spinner', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -46,11 +46,11 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name/$variant/button-spinner-enabled-button.png'),
+            matchesGoldenFile('button/$themeName/$variant/button-spinner-enabled-button.png'),
           );
         });
 
-        testWidgets('$name with disabled button spinner', (tester) async {
+        testWidgets('$themeName with disabled button spinner', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
@@ -65,7 +65,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name/$variant/button-spinner-disabled-button.png'),
+            matchesGoldenFile('button/$themeName/$variant/button-spinner-disabled-button.png'),
           );
         });
       }

@@ -28,7 +28,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       testWidgets('shown', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -50,7 +50,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$name/shown.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$themeName/shown.png'));
       });
 
       testWidgets('hidden', (tester) async {
@@ -77,7 +77,7 @@ void main() {
         await tester.tap(find.text('Title'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$name/hidden.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$themeName/hidden.png'));
       });
     }
   });

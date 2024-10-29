@@ -35,10 +35,10 @@ void main() {
       await expectBlueScreen(find.byType(MaterialApp));
     });
 
-    for (final (name, theme) in TestScaffold.themes) {
+    for (final (themeName, theme) in TestScaffold.themes) {
       for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
         for (final text in ['short text', null]) {
-          testWidgets('default - $name - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('default - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -57,11 +57,11 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$name/default-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/$themeName/default-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
-          testWidgets('error - $name - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('error - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -80,11 +80,11 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$name/error-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/$themeName/error-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
-          testWidgets('email - $name - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('email - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -101,11 +101,11 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$name/email-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/$themeName/email-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
-          testWidgets('password - $name - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('password - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -122,13 +122,13 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$name/password-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/$themeName/password-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
         }
 
         for (final (text) in [_longText, null]) {
-          testWidgets('multiline - $name - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('multiline - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -146,7 +146,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$name/multiline-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/$themeName/multiline-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
         }
