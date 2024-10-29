@@ -118,7 +118,7 @@ void main() {
 
   for (final layout in Layout.values) {
     Widget slider(FSliderController controller) => TestScaffold.app(
-          theme: FThemes.zinc.light,
+          padded: false,
           child: FSlider(
             layout: layout,
             controller: controller,

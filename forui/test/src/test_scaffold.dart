@@ -38,10 +38,12 @@ class TestScaffold extends StatelessWidget {
   final FThemeData theme;
   final Color? background;
   final Widget child;
+  final bool padded;
   final bool wrapped;
 
   TestScaffold({
     required this.child,
+    this.padded = true,
     FThemeData? theme,
     Color? background,
     super.key,
@@ -55,6 +57,7 @@ class TestScaffold extends StatelessWidget {
 
   TestScaffold.app({
     required this.child,
+    this.padded = true,
     FThemeData? theme,
     Color? background,
     super.key,
@@ -69,6 +72,7 @@ class TestScaffold extends StatelessWidget {
   TestScaffold.blue({required this.child, super.key})
       : theme = FThemes.zinc.light,
         background = blueScreen.colorScheme.background,
+        padded = false,
         wrapped = false;
 
   @override
@@ -82,7 +86,7 @@ class TestScaffold extends StatelessWidget {
           child: Container(
             color: background ?? theme.colorScheme.background,
             alignment: Alignment.center,
-            padding: const EdgeInsets.all(16),
+            padding: padded ? const EdgeInsets.all(16) : null,
             child: child!,
           ),
         ),
@@ -95,7 +99,7 @@ class TestScaffold extends StatelessWidget {
         child: Container(
           color: background ?? theme.colorScheme.background,
           alignment: Alignment.center,
-          padding: const EdgeInsets.all(16),
+          padding: padded ? const EdgeInsets.all(16) : null,
           child: Center(child: child),
         ),
       );
