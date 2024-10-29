@@ -75,6 +75,7 @@ class TestScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     if (wrapped) {
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         builder: (context, child) => FTheme(
           data: theme,
           textDirection: TextDirection.ltr,

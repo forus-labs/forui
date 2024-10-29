@@ -14,7 +14,6 @@ void main() {
       FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
     }) =>
         TestScaffold.app(
-          theme: FThemes.zinc.light,
           child: FSlider(
             controller: FContinuousSliderController(
               selection: selection ?? FSliderSelection(max: 0.75),

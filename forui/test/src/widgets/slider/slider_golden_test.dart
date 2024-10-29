@@ -35,7 +35,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final layout in Layout.values) {
         for (final touch in [true, false]) {
           for (final enabled in [true, false]) {
@@ -140,7 +140,6 @@ void main() {
         testWidgets('single value - $layout - ${min ? 'min' : 'max'}', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 controller: FContinuousSliderController(
                   minExtendable: min,
@@ -226,7 +225,6 @@ void main() {
         testWidgets('symmetric padding', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 controller: FContinuousSliderController(
                   selection: FSliderSelection(min: 0.30, max: 0.60),
@@ -237,16 +235,12 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/label-offset/$layout-symmetric.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/label-offset/$layout-symmetric.png'));
         });
 
         testWidgets('asymmetric cross axis padding - $layout', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 style: sliderStyle.copyWith(
                   labelLayoutStyle: sliderStyle.labelLayoutStyle.copyWith(
@@ -262,16 +256,12 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/label-offset/$layout-asymmetric.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/label-offset/$layout-asymmetric.png'));
         });
 
         testWidgets('labelled', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 label: const Text('Label'),
                 description: const Text('Description'),
@@ -285,10 +275,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/label-offset/$layout-labelled.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/label-offset/$layout-labelled.png'));
         });
       });
     }
@@ -296,7 +283,6 @@ void main() {
     testWidgets('interweaving marks with no labels', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.zinc.light,
           child: FSlider(
             controller: FContinuousSliderController(
               selection: FSliderSelection(min: 0.30, max: 0.60),
@@ -312,10 +298,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('slider/interweaving-marks.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/interweaving-marks.png'));
     });
   });
 
