@@ -100,7 +100,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/${theme.name}/checkbox-error.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-group/${theme.name}/checkbox-error.png'),
+        );
       });
     }
   });

@@ -271,7 +271,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/${theme.name}/error.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-tile-group/group/${theme.name}/error.png'),
+        );
       });
 
       testWidgets('single tile - ${theme.name}', (tester) async {
@@ -314,7 +317,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/${theme.name}/empty.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-tile-group/group/${theme.name}/empty.png'),
+        );
       });
     }
 

@@ -147,7 +147,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/enabled/$divider.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('tile/group/${theme.name}/enabled/$divider.png'),
+          );
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
@@ -530,7 +533,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/${theme.name}/$divider.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('tile/group/merge/${theme.name}/$divider.png'),
+          );
         });
       }
 

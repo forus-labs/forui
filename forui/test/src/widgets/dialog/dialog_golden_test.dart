@@ -52,7 +52,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-$direction-content-dialog.png'));
+          await expectLater(
+            find.byType(FDialog),
+            matchesGoldenFile('dialog/${theme.name}-$direction-content-dialog.png'),
+          );
         });
       }
 

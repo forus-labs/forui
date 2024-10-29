@@ -172,7 +172,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$variant/enabled-raw.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/${theme.name}/$variant/enabled-raw.png'),
+          );
         });
 
         testWidgets('${theme.name} disabled with raw content', (tester) async {

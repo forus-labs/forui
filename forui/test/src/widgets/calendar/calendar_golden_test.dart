@@ -84,7 +84,10 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('8')));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/${theme.name}/day-picker/default.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('calendar/${theme.name}/day-picker/default.png'),
+          );
         });
 
         testWidgets('max rows - ${theme.name}', (tester) async {

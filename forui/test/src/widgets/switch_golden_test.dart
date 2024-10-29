@@ -28,7 +28,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/${theme.name}/$checked-unfocused.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('switch/${theme.name}/$checked-unfocused.png'),
+          );
         });
 
         testWidgets('${theme.name} - $checked - focused', (tester) async {
