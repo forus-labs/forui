@@ -184,7 +184,10 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('Feb')));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$themeName/month-picker/default.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('calendar/$themeName/month-picker/default.png'),
+          );
         });
       });
 
@@ -203,7 +206,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$themeName/year-picker/default.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('calendar/$themeName/year-picker/default.png'),
+          );
         });
 
         testWidgets('initial date different from today - $themeName', (tester) async {

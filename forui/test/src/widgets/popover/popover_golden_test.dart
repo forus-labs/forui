@@ -85,7 +85,10 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-non-touch-device-$themeName.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('popover/shown-non-touch-device-$themeName.png'),
+        );
       });
     });
   }

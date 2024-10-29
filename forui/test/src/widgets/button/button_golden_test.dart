@@ -60,7 +60,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/enabled-content.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/$themeName/$variant/enabled-content.png'),
+          );
         });
 
         testWidgets('$themeName enabled and hovered over', (tester) async {
@@ -85,7 +88,10 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.byType(FButton)));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/enabled-hovered.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/$themeName/$variant/enabled-hovered.png'),
+          );
         });
 
         testWidgets('$themeName enabled and long pressed', (tester) async {
@@ -130,7 +136,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/disabled-content.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/$themeName/$variant/disabled-content.png'),
+          );
         });
 
         testWidgets('$themeName with enabled raw content', (tester) async {
@@ -196,7 +205,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/disabled-raw.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/$themeName/$variant/disabled-raw.png'),
+          );
         });
 
         testWidgets('$themeName with enabled icon', (tester) async {
@@ -229,7 +241,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/$themeName/$variant/icon-disabled.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/$themeName/$variant/icon-disabled.png'),
+          );
         });
       }
     }

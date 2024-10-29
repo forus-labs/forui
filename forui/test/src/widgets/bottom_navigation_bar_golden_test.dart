@@ -66,7 +66,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('bottom-navigation-bar/$themeName-forui-icon.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('bottom-navigation-bar/$themeName-forui-icon.png'),
+        );
       });
     }
   });

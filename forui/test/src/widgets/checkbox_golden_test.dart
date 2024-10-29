@@ -61,27 +61,27 @@ void main() {
 
         testWidgets(
             '$themeName with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
-                (tester) async {
-              await tester.pumpWidget(
-                TestScaffold(
-                  theme: theme,
-                  child: FCheckbox(
-                    label: const Text('Terms and Conditions'),
-                    description: const Text('I agree to the terms and conditions.'),
-                    error: error ? const Text('Please check the agree to continue.') : null,
-                    value: value,
-                    enabled: enabled,
-                  ),
-                ),
-              );
+            (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme,
+              child: FCheckbox(
+                label: const Text('Terms and Conditions'),
+                description: const Text('I agree to the terms and conditions.'),
+                error: error ? const Text('Please check the agree to continue.') : null,
+                value: value,
+                enabled: enabled,
+              ),
+            ),
+          );
 
-              await expectLater(
-                find.byType(TestScaffold),
-                matchesGoldenFile(
-                  'check-box/$themeName/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
-                ),
-              );
-            });
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'check-box/$themeName/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+            ),
+          );
+        });
       }
     }
   });
