@@ -76,16 +76,16 @@ class TestScaffold extends StatelessWidget {
     if (wrapped) {
       return MaterialApp(
         builder: (context, child) => FTheme(
-          data: theme,
-          textDirection: TextDirection.ltr,
-          child: Container(
-            color: background ?? theme.colorScheme.background,
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(16),
-            child: child!,
+            data: theme,
+            textDirection: TextDirection.ltr,
+            child: Container(
+              color: background ?? theme.colorScheme.background,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(16),
+              child: child!,
+            ),
           ),
-        ),
-        home: Align(child: child),
+        home: child,
       );
     } else {
       return FTheme(

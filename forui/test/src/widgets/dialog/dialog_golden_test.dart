@@ -6,47 +6,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
-class UnderTest extends StatelessWidget {
-  final Axis direction;
-
-  const UnderTest({
-    required this.direction,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final actions = [
-      FButton(
-        label: const Text('Continue'),
-        onPress: () {},
-      ),
-      FButton(
-        style: FButtonStyle.outline,
-        label: const Text('Cancel'),
-        onPress: () {
-          Navigator.of(context).pop();
-        },
-      ),
-    ];
-
-    return FDialog(
-      direction: direction,
-      title: const Text('Are you absolutely sure?'),
-      body: const Text(
-        'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-      ),
-      actions: actions,
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty('alignment', direction));
-  }
-}
-
 void main() {
   group('FDialog', () {
     testWidgets('blue screen', (tester) async {
@@ -67,23 +26,34 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final direction in Axis.values) {
         testWidgets('$name with $direction FDialogContent', (tester) async {
           await tester.pumpWidget(
-            MaterialApp(
-              home: TestScaffold(
-                theme: theme,
-                background: background,
-                child: UnderTest(direction: direction),
+            TestScaffold(
+              theme: theme,
+              child: FDialog(
+                direction: direction,
+                title: const Text('Are you absolutely sure?'),
+                body: const Text(
+                  'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                ),
+                actions: [
+                  FButton(
+                    label: const Text('Continue'),
+                    onPress: () {},
+                  ),
+                  FButton(
+                    style: FButtonStyle.outline,
+                    label: const Text('Cancel'),
+                    onPress: () {},
+                  ),
+                ],
               ),
             ),
           );
 
-          await expectLater(
-            find.byType(UnderTest),
-            matchesGoldenFile('dialog/$name-$direction-content-dialog.png'),
-          );
+          await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$name-$direction-content-dialog.png'));
         });
       }
 
@@ -91,25 +61,16 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FDialog.raw(
-                  builder: (context, style) => const SizedBox(
-                    width: 50,
-                    height: 50,
-                  ),
-                ),
-              ],
+            child: FDialog.raw(
+              builder: (context, style) => const SizedBox(
+                width: 50,
+                height: 50,
+              ),
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(FDialog),
-          matchesGoldenFile('dialog/$name-raw-content-dialog.png'),
-        );
+        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$name-raw-content-dialog.png'));
       });
     }
   });
