@@ -26,7 +26,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
@@ -38,11 +38,11 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$themeName with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '${theme.name} with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FRadio(
                 enabled: enabled,
                 value: value,
@@ -54,17 +54,17 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'radio/$themeName/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+              'radio/${theme.name}/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });
 
         testWidgets(
-            '$themeName with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '${theme.name} with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: SizedBox(
                 width: 300,
                 child: FRadio(
@@ -81,7 +81,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'radio/$themeName/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+              'radio/${theme.name}/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });

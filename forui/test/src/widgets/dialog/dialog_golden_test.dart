@@ -25,12 +25,12 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final direction in Axis.values) {
-        testWidgets('$themeName with $direction FDialogContent', (tester) async {
+        testWidgets('${theme.name} with $direction FDialogContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FDialog(
                 direction: direction,
                 title: const Text('Are you absolutely sure?'),
@@ -52,14 +52,14 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$themeName-$direction-content-dialog.png'));
+          await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-$direction-content-dialog.png'));
         });
       }
 
-      testWidgets('$themeName with raw content', (tester) async {
+      testWidgets('${theme.name} with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FDialog.raw(
               builder: (context, style) => const SizedBox(
                 width: 50,
@@ -69,7 +69,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/$themeName-raw-content-dialog.png'));
+        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-raw-content-dialog.png'));
       });
     }
   });

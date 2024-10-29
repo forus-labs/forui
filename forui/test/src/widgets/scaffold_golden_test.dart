@@ -10,11 +10,11 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FScaffold', () {
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets(themeName, (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets(theme.name, (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FScaffold(
               header: Row(
                 children: [
@@ -41,7 +41,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/$themeName-scaffold.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}-scaffold.png'));
       });
     }
   });

@@ -112,11 +112,11 @@ void main() {
       });
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('enabled - $themeName', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('enabled - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -133,14 +133,14 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/enabled-$themeName.png'),
+          matchesGoldenFile('select-tile-group/tile/enabled-${theme.name}.png'),
         );
       });
 
-      testWidgets('hovered - $themeName', (tester) async {
+      testWidgets('hovered - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -164,14 +164,14 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/hovered-$themeName.png'),
+          matchesGoldenFile('select-tile-group/tile/hovered-${theme.name}.png'),
         );
       });
 
-      testWidgets('disabled - $themeName', (tester) async {
+      testWidgets('disabled - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -189,14 +189,14 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/disabled-$themeName.png'),
+          matchesGoldenFile('select-tile-group/tile/disabled-${theme.name}.png'),
         );
       });
 
-      testWidgets('checked - $themeName', (tester) async {
+      testWidgets('checked - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectTileData(
               controller: controller,
               selected: true,
@@ -213,14 +213,14 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/checked-$themeName.png'),
+          matchesGoldenFile('select-tile-group/tile/checked-${theme.name}.png'),
         );
       });
 
-      testWidgets('suffix icon - checked - $themeName', (tester) async {
+      testWidgets('suffix icon - checked - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectTileData(
               controller: controller,
               selected: true,
@@ -237,14 +237,14 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-checked-$themeName.png'),
+          matchesGoldenFile('select-tile-group/tile/suffix-checked-${theme.name}.png'),
         );
       });
 
-      testWidgets('suffix icon - unchecked - $themeName', (tester) async {
+      testWidgets('suffix icon - unchecked - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectTileData(
               controller: controller,
               selected: false,
@@ -261,7 +261,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-$themeName.png'),
+          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-${theme.name}.png'),
         );
       });
     }

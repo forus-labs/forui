@@ -23,16 +23,16 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final axis in Axis.values) {
-        testWidgets('$themeName - $axis', (tester) async {
+        testWidgets('${theme.name} - $axis', (tester) async {
           final children = [
             Container(
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                borderRadius: theme.style.borderRadius,
-                border: Border.all(color: theme.colorScheme.secondary),
+                borderRadius: theme.data.style.borderRadius,
+                border: Border.all(color: theme.data.colorScheme.secondary),
               ),
             ),
             FDivider(axis: axis),
@@ -40,15 +40,15 @@ void main() {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                borderRadius: theme.style.borderRadius,
-                border: Border.all(color: theme.colorScheme.secondary),
+                borderRadius: theme.data.style.borderRadius,
+                border: Border.all(color: theme.data.colorScheme.secondary),
               ),
             ),
           ];
 
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: axis == Axis.vertical
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +61,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('divider/$themeName-$axis.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('divider/${theme.name}-$axis.png'));
         });
       }
     }

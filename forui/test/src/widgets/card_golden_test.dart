@@ -24,11 +24,11 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('$themeName with FCardContent', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('${theme.name} with FCardContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -41,13 +41,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$themeName/content.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/${theme.name}/content.png'));
       });
 
-      testWidgets('$themeName with image', (tester) async {
+      testWidgets('${theme.name} with image', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -65,13 +65,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$themeName/content-image.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/${theme.name}/content-image.png'));
       });
 
-      testWidgets('$themeName with raw content', (tester) async {
+      testWidgets('${theme.name} with raw content', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -86,7 +86,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/$themeName/raw.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/${theme.name}/raw.png'));
       });
     }
   });

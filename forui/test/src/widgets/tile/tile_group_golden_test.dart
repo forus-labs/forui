@@ -112,12 +112,12 @@ void main() {
       });
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final divider in FTileDivider.values) {
-        testWidgets('enabled - $themeName - $divider', (tester) async {
+        testWidgets('enabled - ${theme.name} - $divider', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FTileGroup(
                 label: const Text('Network'),
                 description: const Text('Description'),
@@ -147,14 +147,14 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$themeName/enabled/$divider.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/enabled/$divider.png'));
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
-          testWidgets('hovered - $themeName - $divider - $position', (tester) async {
+          testWidgets('hovered - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
-                theme: theme,
+                theme: theme.data,
                 child: FTileGroup(
                   label: const Text('Network'),
                   divider: divider,
@@ -187,14 +187,14 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('tile/group/$themeName/hovered/$divider-$position.png'),
+              matchesGoldenFile('tile/group/${theme.name}/hovered/$divider-$position.png'),
             );
           });
 
-          testWidgets('disabled - $themeName - $divider - $position', (tester) async {
+          testWidgets('disabled - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
-                theme: theme,
+                theme: theme.data,
                 child: FTileGroup(
                   label: const Text('Network'),
                   description: const Text('Configure your network'),
@@ -224,16 +224,16 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('tile/group/$themeName/disabled/$divider-$position.png'),
+              matchesGoldenFile('tile/group/${theme.name}/disabled/$divider-$position.png'),
             );
           });
         }
       }
 
-      testWidgets('error - $themeName', (tester) async {
+      testWidgets('error - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FTileGroup(
               label: const Text('Network'),
               description: const Text('Description'),
@@ -258,13 +258,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$themeName/error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/error.png'));
       });
 
-      testWidgets('single tile - $themeName', (tester) async {
+      testWidgets('single tile - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FTileGroup(
               label: const Text('Network'),
               children: [
@@ -280,13 +280,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$themeName/single.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/single.png'));
       });
 
-      testWidgets('empty tile group - $themeName', (tester) async {
+      testWidgets('empty tile group - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: const FTileGroup(
               label: Text('Network'),
               children: [],
@@ -294,7 +294,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/$themeName/empty.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/empty.png'));
       });
     }
 
@@ -456,12 +456,12 @@ void main() {
       });
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final divider in FTileDivider.values) {
-        testWidgets('enabled - $themeName - $divider', (tester) async {
+        testWidgets('enabled - ${theme.name} - $divider', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FTileGroup.merge(
                 label: const Text('Network'),
                 description: const Text('Description'),
@@ -530,14 +530,14 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/$themeName/$divider.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/${theme.name}/$divider.png'));
         });
       }
 
-      testWidgets('disabled - $themeName', (tester) async {
+      testWidgets('disabled - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FTileGroup.merge(
               label: const Text('Network'),
               description: const Text('Description'),
@@ -569,13 +569,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/$themeName/disabled.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/${theme.name}/disabled.png'));
       });
 
-      testWidgets('error - $themeName', (tester) async {
+      testWidgets('error - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FTileGroup.merge(
               label: const Text('Network'),
               description: const Text('Description'),
@@ -607,7 +607,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/$themeName/error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/${theme.name}/error.png'));
       });
 
       testWidgets('single group', (tester) async {

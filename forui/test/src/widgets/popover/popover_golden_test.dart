@@ -16,12 +16,12 @@ void main() {
 
   setUp(() => controller = FPopoverController(vsync: const TestVSync()));
 
-  for (final (themeName, theme) in TestScaffold.themes) {
+  for (final theme in TestScaffold.themes) {
     group('FPopover', () {
-      testWidgets('$themeName hidden ', (tester) async {
+      testWidgets('${theme.name} hidden ', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: theme,
+            theme: theme.data,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -35,15 +35,15 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/hidden-$themeName.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/hidden-${theme.name}.png'));
       });
 
-      testWidgets('$themeName shown on touch device', (tester) async {
+      testWidgets('${theme.name} shown on touch device', (tester) async {
         Touch.primary = true;
 
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: theme,
+            theme: theme.data,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -60,15 +60,15 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-$themeName.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-${theme.name}.png'));
       });
 
-      testWidgets('$themeName shown on non-touch device', (tester) async {
+      testWidgets('${theme.name} shown on non-touch device', (tester) async {
         Touch.primary = false;
 
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: theme,
+            theme: theme.data,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -87,7 +87,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('popover/shown-non-touch-device-$themeName.png'),
+          matchesGoldenFile('popover/shown-non-touch-device-${theme.name}.png'),
         );
       });
     });

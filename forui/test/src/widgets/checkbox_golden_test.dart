@@ -26,7 +26,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
@@ -38,11 +38,11 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$themeName with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '${theme.name} with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCheckbox(
                 enabled: enabled,
                 value: value,
@@ -54,17 +54,17 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'check-box/$themeName/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+              'check-box/${theme.name}/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });
 
         testWidgets(
-            '$themeName with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '${theme.name} with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCheckbox(
                 label: const Text('Terms and Conditions'),
                 description: const Text('I agree to the terms and conditions.'),
@@ -78,7 +78,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'check-box/$themeName/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+              'check-box/${theme.name}/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });

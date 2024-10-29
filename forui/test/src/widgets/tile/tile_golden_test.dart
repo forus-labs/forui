@@ -76,11 +76,11 @@ void main() {
       });
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('enabled - $themeName', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('enabled - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FTile(
               prefixIcon: FIcon(FAssets.icons.bluetooth),
               title: const Text('Lorem'),
@@ -92,13 +92,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/enabled-$themeName.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/enabled-${theme.name}.png'));
       });
 
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FTile(
               prefixIcon: FIcon(FAssets.icons.bluetooth),
               title: const Text('Lorem'),
@@ -118,13 +118,13 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FTile)));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/hovered-$themeName.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/hovered-${theme.name}.png'));
       });
 
-      testWidgets('disabled - $themeName', (tester) async {
+      testWidgets('disabled - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FTile(
               enabled: false,
               prefixIcon: FIcon(FAssets.icons.bluetooth),
@@ -137,7 +137,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/disabled-$themeName.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/disabled-${theme.name}.png'));
       });
     }
 

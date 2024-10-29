@@ -37,11 +37,11 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('$themeName with checkbox', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('${theme.name} with checkbox', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
@@ -67,13 +67,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/checkbox.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/${theme.name}/checkbox.png'));
       });
 
-      testWidgets('$themeName with checkbox error', (tester) async {
+      testWidgets('${theme.name} with checkbox error', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
@@ -100,17 +100,17 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/checkbox-error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/${theme.name}/checkbox-error.png'));
       });
     }
   });
 
   group('FRadio', () {
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('$themeName with radio', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('${theme.name} with radio', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
@@ -136,13 +136,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/radio.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/${theme.name}/radio.png'));
       });
 
-      testWidgets('$themeName with radio error', (tester) async {
+      testWidgets('${theme.name} with radio error', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
@@ -169,7 +169,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/$themeName/radio-error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-group/${theme.name}/radio-error.png'));
       });
     }
   });

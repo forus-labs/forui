@@ -30,9 +30,9 @@ class TestScaffold extends StatelessWidget {
     ),
   );
 
-  static List<(String name, FThemeData theme)> get themes => [
-        ('zinc-light', FThemes.zinc.light),
-        ('zinc-dark', FThemes.zinc.dark),
+  static List<({String name, FThemeData data})> get themes => [
+        (name: 'zinc-light', data: FThemes.zinc.light),
+        (name: 'zinc-dark', data: FThemes.zinc.dark),
       ];
 
   final FThemeData theme;

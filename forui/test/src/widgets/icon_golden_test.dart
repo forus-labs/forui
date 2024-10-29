@@ -25,35 +25,35 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/icon-style.png'));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('$themeName with SvgAsset', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('${theme.name} with SvgAsset', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FIcon(FAssets.icons.laugh),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/svg-asset.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/svg-asset.png'));
       });
 
-      testWidgets('$themeName with IconData', (tester) async {
+      testWidgets('${theme.name} with IconData', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             // This will always be a square since we don't include material's icon in the pubspec.yaml.
             child: const FIcon.data(Icons.add),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/data.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/data.png'));
       });
 
-      testWidgets('$themeName with ImageProvider', (tester) async {
+      testWidgets('${theme.name} with ImageProvider', (tester) async {
         await tester.runAsync(() async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FIcon.image(FileImage(File('./test/resources/forus-labs.png'))),
             ),
           );
@@ -65,14 +65,14 @@ void main() {
           }
         });
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/recolored-image.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/recolored-image.png'));
       });
 
-      testWidgets('$themeName with ImageProvider and no recoloring', (tester) async {
+      testWidgets('${theme.name} with ImageProvider and no recoloring', (tester) async {
         await tester.runAsync(() async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FIcon.image(FileImage(File('./test/resources/forus-labs.png')), color: Colors.transparent),
             ),
           );
@@ -84,13 +84,13 @@ void main() {
           }
         });
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/original-image.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/original-image.png'));
       });
 
-      testWidgets('$themeName with raw builder', (tester) async {
+      testWidgets('${theme.name} with raw builder', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FIcon.raw(
               builder: (context, style, _) => Container(
                 color: style.color,
@@ -101,7 +101,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/$themeName/raw.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/raw.png'));
       });
     }
   });

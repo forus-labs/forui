@@ -37,11 +37,11 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('$themeName with FNestedHeader actions', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('${theme.name} with FNestedHeader actions', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FHeader.nested(
               title: const Text('Title'),
               prefixActions: [
@@ -62,7 +62,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/$themeName-header.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-header.png'));
       });
     }
   });

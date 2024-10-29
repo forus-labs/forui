@@ -29,12 +29,12 @@ void main() {
       });
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final variant in Variant.values) {
-        testWidgets('$themeName with enabled button spinner', (tester) async {
+        testWidgets('${theme.name} with enabled button spinner', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FButton(
                 prefix: const FButtonSpinner(),
                 label: const Text('Loading'),
@@ -46,14 +46,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$themeName/$variant/button-spinner-enabled-button.png'),
+            matchesGoldenFile('button/${theme.name}/$variant/button-spinner-enabled-button.png'),
           );
         });
 
-        testWidgets('$themeName with disabled button spinner', (tester) async {
+        testWidgets('${theme.name} with disabled button spinner', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FButton(
                 prefix: const FButtonSpinner(),
                 label: const Text('Loading'),
@@ -65,7 +65,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$themeName/$variant/button-spinner-disabled-button.png'),
+            matchesGoldenFile('button/${theme.name}/$variant/button-spinner-disabled-button.png'),
           );
         });
       }

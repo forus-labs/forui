@@ -31,12 +31,12 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final state in FLabelState.values) {
-        testWidgets('$themeName horizontal with $state', (tester) async {
+        testWidgets('${theme.name} horizontal with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: SizedBox(
                 width: 300,
                 child: FLabel(
@@ -56,16 +56,16 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('label/$themeName/horizontal-$state.png'),
+            matchesGoldenFile('label/${theme.name}/horizontal-$state.png'),
           );
         });
       }
 
       for (final state in FLabelState.values) {
-        testWidgets('$themeName vertical with $state', (tester) async {
+        testWidgets('${theme.name} vertical with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FLabel(
                 axis: Axis.vertical,
                 label: const Text('Email'),
@@ -82,7 +82,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('label/$themeName/vertical-$state.png'),
+            matchesGoldenFile('label/${theme.name}/vertical-$state.png'),
           );
         });
       }

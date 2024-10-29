@@ -59,9 +59,9 @@ void main() {
       });
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       group('day picker', () {
-        testWidgets('default - $themeName', (tester) async {
+        testWidgets('default - ${theme.name}', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               child: FCalendar(
@@ -84,13 +84,13 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('8')));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/$themeName/day-picker/default.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/${theme.name}/day-picker/default.png'));
         });
 
-        testWidgets('max rows - $themeName', (tester) async {
+        testWidgets('max rows - ${theme.name}', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCalendar(
                 controller: FCalendarController.dates(initialSelections: selected),
                 start: DateTime(1900, 1, 8),
@@ -102,14 +102,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$themeName/day-picker/max-rows.png'),
+            matchesGoldenFile('calendar/${theme.name}/day-picker/max-rows.png'),
           );
         });
 
-        testWidgets('hovered and selected dates next to each other - $themeName', (tester) async {
+        testWidgets('hovered and selected dates next to each other - ${theme.name}', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCalendar(
                 controller: FCalendarController.dates(),
                 start: DateTime(1900, 1, 8),
@@ -132,14 +132,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$themeName/day-picker/hovered-selected.png'),
+            matchesGoldenFile('calendar/${theme.name}/day-picker/hovered-selected.png'),
           );
         });
 
-        testWidgets('disabled previous icon - $themeName', (tester) async {
+        testWidgets('disabled previous icon - ${theme.name}', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCalendar(
                 controller: FCalendarController.dates(
                   initialSelections: {DateTime.utc(2024, 7, 13)},
@@ -153,16 +153,16 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$themeName/day-picker/disabled-previous.png'),
+            matchesGoldenFile('calendar/${theme.name}/day-picker/disabled-previous.png'),
           );
         });
       });
 
       group('month picker', () {
-        testWidgets('default - $themeName', (tester) async {
+        testWidgets('default - ${theme.name}', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCalendar(
                 controller: FCalendarController.dates(initialSelections: selected),
                 start: DateTime(1900, 1, 8),
@@ -186,16 +186,16 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$themeName/month-picker/default.png'),
+            matchesGoldenFile('calendar/${theme.name}/month-picker/default.png'),
           );
         });
       });
 
       group('year picker', () {
-        testWidgets('default - $themeName', (tester) async {
+        testWidgets('default - ${theme.name}', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCalendar(
                 controller: FCalendarController.dates(initialSelections: selected),
                 start: DateTime(1900, 1, 8),
@@ -208,14 +208,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$themeName/year-picker/default.png'),
+            matchesGoldenFile('calendar/${theme.name}/year-picker/default.png'),
           );
         });
 
-        testWidgets('initial date different from today - $themeName', (tester) async {
+        testWidgets('initial date different from today - ${theme.name}', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FCalendar(
                 controller: FCalendarController.dates(initialSelections: selected),
                 start: DateTime(1900, 1, 8),
@@ -237,7 +237,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('calendar/$themeName/year-picker/initial-date.png'),
+            matchesGoldenFile('calendar/${theme.name}/year-picker/initial-date.png'),
           );
         });
       });

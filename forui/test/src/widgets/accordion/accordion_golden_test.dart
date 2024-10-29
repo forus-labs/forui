@@ -28,11 +28,11 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       testWidgets('shown', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FAccordion(
               items: [
                 FAccordionItem(
@@ -50,13 +50,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$themeName/shown.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/shown.png'));
       });
 
       testWidgets('hidden', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FAccordion(
               items: [
                 FAccordionItem(
@@ -77,7 +77,7 @@ void main() {
         await tester.tap(find.text('Title'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/$themeName/hidden.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/hidden.png'));
       });
     }
   });

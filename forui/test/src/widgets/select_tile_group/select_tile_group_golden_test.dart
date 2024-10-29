@@ -113,12 +113,12 @@ void main() {
       });
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final divider in FTileDivider.values) {
-        testWidgets('enabled - $themeName - $divider', (tester) async {
+        testWidgets('enabled - ${theme.name} - $divider', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: FSelectTileGroup(
                 controller: controller,
                 label: const Text('Network'),
@@ -152,15 +152,15 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('select-tile-group/group/$themeName/enabled/$divider.png'),
+            matchesGoldenFile('select-tile-group/group/${theme.name}/enabled/$divider.png'),
           );
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
-          testWidgets('hovered - $themeName - $divider - $position', (tester) async {
+          testWidgets('hovered - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
-                theme: theme,
+                theme: theme.data,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FSelectTileGroup(
@@ -197,14 +197,14 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('select-tile-group/group/$themeName/hovered/$divider-$position.png'),
+              matchesGoldenFile('select-tile-group/group/${theme.name}/hovered/$divider-$position.png'),
             );
           });
 
-          testWidgets('disabled - $themeName - $divider - $position', (tester) async {
+          testWidgets('disabled - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
-                theme: theme,
+                theme: theme.data,
                 child: FSelectTileGroup(
                   controller: controller,
                   label: const Text('Network'),
@@ -234,16 +234,16 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('select-tile-group/group/$themeName/disabled/$divider-$position.png'),
+              matchesGoldenFile('select-tile-group/group/${theme.name}/disabled/$divider-$position.png'),
             );
           });
         }
       }
 
-      testWidgets('error - $themeName', (tester) async {
+      testWidgets('error - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FSelectTileGroup(
@@ -271,13 +271,13 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/$themeName/error.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/${theme.name}/error.png'));
       });
 
-      testWidgets('single tile - $themeName', (tester) async {
+      testWidgets('single tile - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: FSelectTileGroup(
               controller: controller,
               label: const Text('Network'),
@@ -295,14 +295,14 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/group/$themeName/single.png'),
+          matchesGoldenFile('select-tile-group/group/${theme.name}/single.png'),
         );
       });
 
-      testWidgets('empty tile group - $themeName', (tester) async {
+      testWidgets('empty tile group - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
+            theme: theme.data,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FSelectTileGroup(
@@ -314,7 +314,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/$themeName/empty.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/${theme.name}/empty.png'));
       });
     }
 

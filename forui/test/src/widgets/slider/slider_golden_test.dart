@@ -35,21 +35,21 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final layout in Layout.values) {
         for (final touch in [true, false]) {
           for (final enabled in [true, false]) {
-            testWidgets('$themeName - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
+            testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
               Touch.primary = touch;
               final styles = FSliderStyles.inherit(
-                colorScheme: theme.colorScheme,
-                typography: theme.typography,
-                style: theme.style,
+                colorScheme: theme.data.colorScheme,
+                typography: theme.data.typography,
+                style: theme.data.style,
               );
 
               await tester.pumpWidget(
                 TestScaffold.app(
-                  theme: theme,
+                  theme: theme.data,
                   child: FSlider(
                     style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                     label: const Text('Label'),
@@ -80,23 +80,23 @@ void main() {
               await expectLater(
                 find.byType(TestScaffold),
                 matchesGoldenFile(
-                  'slider/range-slider/$themeName/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
+                  'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
                 ),
               );
             });
           }
 
-          testWidgets('$themeName - $layout - error', (tester) async {
+          testWidgets('${theme.name} - $layout - error', (tester) async {
             Touch.primary = touch;
             final styles = FSliderStyles.inherit(
-              colorScheme: theme.colorScheme,
-              typography: theme.typography,
-              style: theme.style,
+              colorScheme: theme.data.colorScheme,
+              typography: theme.data.typography,
+              style: theme.data.style,
             );
 
             await tester.pumpWidget(
               TestScaffold.app(
-                theme: theme,
+                theme: theme.data,
                 child: FSlider(
                   style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                   label: const Text('Label'),
@@ -127,7 +127,7 @@ void main() {
             await expectLater(
               find.byType(TestScaffold),
               matchesGoldenFile(
-                'slider/range-slider/$themeName/$layout-${touch ? 'touch' : 'desktop'}-error.png',
+                'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-error.png',
               ),
             );
           });

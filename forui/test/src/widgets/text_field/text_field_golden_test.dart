@@ -35,14 +35,14 @@ void main() {
       await expectBlueScreen(find.byType(MaterialApp));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
         for (final text in ['short text', null]) {
-          testWidgets('default - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('default - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
-                theme: theme,
+                theme: theme.data,
                 child: FTextField(
                   controller: controller,
                   autofocus: focused_,
@@ -57,15 +57,15 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$themeName/default-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/${theme.name}/default-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
-          testWidgets('error - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('error - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
-                theme: theme,
+                theme: theme.data,
                 child: FTextField(
                   controller: controller,
                   autofocus: focused_,
@@ -80,15 +80,15 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$themeName/error-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/${theme.name}/error-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
-          testWidgets('email - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('email - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
-                theme: theme,
+                theme: theme.data,
                 child: FTextField.email(
                   controller: controller,
                   autofocus: focused_,
@@ -101,15 +101,15 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$themeName/email-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/${theme.name}/email-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
-          testWidgets('password - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('password - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
-                theme: theme,
+                theme: theme.data,
                 child: FTextField.password(
                   controller: controller,
                   autofocus: focused_,
@@ -122,17 +122,17 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$themeName/password-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/${theme.name}/password-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
         }
 
         for (final (text) in [_longText, null]) {
-          testWidgets('multiline - $themeName - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('multiline - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
-                theme: theme,
+                theme: theme.data,
                 child: FTextField.multiline(
                   controller: controller,
                   autofocus: focused_,
@@ -146,7 +146,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/$themeName/multiline-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text_field/${theme.name}/multiline-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
         }

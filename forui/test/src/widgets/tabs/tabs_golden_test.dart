@@ -32,11 +32,11 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (themeName, theme) in TestScaffold.themes) {
-      testWidgets('default - $themeName', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('default - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: theme,
+            theme: theme.data,
             child: FTabs(
               tabs: [
                 FTabEntry(
@@ -66,7 +66,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/$themeName-tabs.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-tabs.png'));
       });
     }
   });
