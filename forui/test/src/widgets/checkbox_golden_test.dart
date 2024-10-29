@@ -26,7 +26,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
@@ -43,17 +43,11 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: error
-                  ? FCheckbox(
-                      enabled: enabled,
-                      value: value,
-                      error: const Text(''),
-                    )
-                  : FCheckbox(
-                      enabled: enabled,
-                      value: value,
-                    ),
+              child: FCheckbox(
+                enabled: enabled,
+                value: value,
+                error: error ? const Text('') : null,
+              )
             ),
           );
 
@@ -64,47 +58,30 @@ void main() {
             ),
           );
         });
-      }
-    }
 
-    for (final (name, theme, background) in TestScaffold.themes) {
-      for (final (enabled, value, error) in [
-        (true, true, false),
-        (true, true, true),
-        (true, false, false),
-        (true, false, true),
-        (false, true, false),
-        (false, true, true),
-        (false, false, false),
-        (false, false, true),
-      ]) {
         testWidgets(
             '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
-            (tester) async {
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: theme,
-              background: background,
-              child: SizedBox(
-                width: 300,
-                child: FCheckbox(
-                  label: const Text('Terms and Conditions'),
-                  description: const Text('I agree to the terms and conditions.'),
-                  error: error ? const Text('Please check the agree to continue.') : null,
-                  value: value,
-                  enabled: enabled,
+                (tester) async {
+              await tester.pumpWidget(
+                TestScaffold(
+                  theme: theme,
+                  child: FCheckbox(
+                    label: const Text('Terms and Conditions'),
+                    description: const Text('I agree to the terms and conditions.'),
+                    error: error ? const Text('Please check the agree to continue.') : null,
+                    value: value,
+                    enabled: enabled,
+                  ),
                 ),
-              ),
-            ),
-          );
+              );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile(
-              'check-box/$name/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
-            ),
-          );
-        });
+              await expectLater(
+                find.byType(TestScaffold),
+                matchesGoldenFile(
+                  'check-box/$name/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+                ),
+              );
+            });
       }
     }
   });
