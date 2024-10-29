@@ -85,7 +85,7 @@ class TestScaffold extends StatelessWidget {
             child: child!,
           ),
         ),
-        home: Align(child: child),
+        home: Center(child: child),
       );
     } else {
       return FTheme(
@@ -95,7 +95,7 @@ class TestScaffold extends StatelessWidget {
           color: background ?? theme.colorScheme.background,
           alignment: Alignment.center,
           padding: const EdgeInsets.all(16),
-          child: child,
+          child: Center(child: child),
         ),
       );
     }
