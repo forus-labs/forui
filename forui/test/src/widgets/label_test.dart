@@ -10,7 +10,6 @@ void main() {
     testWidgets('renders child only when label, description, and error are null', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: const FLabel(
             axis: Axis.horizontal,
             child: Text('Child'),
@@ -25,7 +24,6 @@ void main() {
     testWidgets('renders error even when label and description are null', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: const FLabel(
             axis: Axis.horizontal,
             state: FLabelState.error,
@@ -42,7 +40,6 @@ void main() {
     testWidgets('renders horizontal label with label, description, and error', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: const FLabel(
             axis: Axis.horizontal,
             label: Text('Label'),
@@ -63,7 +60,6 @@ void main() {
     testWidgets('renders vertical label with label, description, and error', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: const FLabel(
             axis: Axis.vertical,
             label: Text('Label'),
@@ -84,7 +80,6 @@ void main() {
     testWidgets('does not render error when state is not error', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: const FLabel(
             axis: Axis.horizontal,
             error: Text('Error'),

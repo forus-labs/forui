@@ -31,7 +31,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final state in FLabelState.values) {
         testWidgets('$name horizontal with $state', (tester) async {
           await tester.pumpWidget(

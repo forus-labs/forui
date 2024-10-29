@@ -213,7 +213,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('button/$name/$variant/icon-enabled-button.png')
+            matchesGoldenFile('button/$name/$variant/icon-enabled-button.png'),
           );
         });
 

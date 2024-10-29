@@ -1,8 +1,6 @@
 @Tags(['golden'])
 library;
 
-import 'package:flutter/widgets.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -23,18 +21,13 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final (progress, value) in [('positive', 17.0), ('negative', -4.0), ('clamped', 0.3)]) {
         testWidgets('$name - $progress', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: FProgress(value: value),
-                ),
-              ),
+              child: FProgress(value: value),
             ),
           );
 

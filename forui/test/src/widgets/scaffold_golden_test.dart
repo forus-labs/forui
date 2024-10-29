@@ -10,27 +10,33 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FScaffold', () {
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       testWidgets(name, (tester) async {
-        Widget buildColor(Color color) => Row(
-              children: [
-                Expanded(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(color: color),
-                    child: const SizedBox(height: 100),
-                  ),
-                ),
-              ],
-            );
-
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            background: background,
             child: FScaffold(
-              header: buildColor(Colors.red),
+              header: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(color: Colors.red),
+                      height: 100,
+                    ),
+                  ),
+                ],
+              ),
               content: const Placeholder(),
-              footer: buildColor(Colors.green),
+              footer: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(color: Colors.green),
+                      height: 100,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

@@ -47,7 +47,7 @@ void main() {
                 enabled: enabled,
                 value: value,
                 error: error ? const Text('') : null,
-              )
+              ),
             ),
           );
 

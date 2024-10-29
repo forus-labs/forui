@@ -15,7 +15,6 @@ void main() {
     testWidgets('with parent IconStyle', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FIconStyleData(
             style: const FIconStyle(color: Colors.red, size: 48),
             child: FIcon(FAssets.icons.laugh),
@@ -26,7 +25,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/icon-style.png'));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       testWidgets('$name with SvgAsset', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -51,13 +50,13 @@ void main() {
       });
 
       testWidgets('$name with ImageProvider', (tester) async {
-        final image = TestScaffold(
-          theme: theme,
-          child: FIcon.image(FileImage(File('./test/resources/forus-labs.png'))),
-        );
-
         await tester.runAsync(() async {
-          await tester.pumpWidget(image);
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme,
+              child: FIcon.image(FileImage(File('./test/resources/forus-labs.png'))),
+            ),
+          );
           for (final element in find.byType(Image).evaluate()) {
             final Image widget = element.widget as Image;
             final ImageProvider image = widget.image;
@@ -70,13 +69,13 @@ void main() {
       });
 
       testWidgets('$name with ImageProvider and no recoloring', (tester) async {
-        final image = TestScaffold(
-          theme: theme,
-          child: FIcon.image(FileImage(File('./test/resources/forus-labs.png')), color: Colors.transparent),
-        );
-
         await tester.runAsync(() async {
-          await tester.pumpWidget(image);
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme,
+              child: FIcon.image(FileImage(File('./test/resources/forus-labs.png')), color: Colors.transparent),
+            ),
+          );
           for (final element in find.byType(Image).evaluate()) {
             final Image widget = element.widget as Image;
             final ImageProvider image = widget.image;

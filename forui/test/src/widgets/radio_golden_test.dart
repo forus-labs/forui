@@ -26,7 +26,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
@@ -43,17 +43,11 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
-              child: error
-                  ? FRadio(
-                      enabled: enabled,
-                      value: value,
-                      error: const SizedBox(),
-                    )
-                  : FRadio(
-                      enabled: enabled,
-                      value: value,
-                    ),
+              child: FRadio(
+                enabled: enabled,
+                value: value,
+                error: error ? const SizedBox() : null,
+              ),
             ),
           );
 
@@ -64,27 +58,13 @@ void main() {
             ),
           );
         });
-      }
-    }
 
-    for (final (name, theme, background) in TestScaffold.themes) {
-      for (final (enabled, value, error) in [
-        (true, true, false),
-        (true, true, true),
-        (true, false, false),
-        (true, false, true),
-        (false, true, false),
-        (false, true, true),
-        (false, false, false),
-        (false, false, true),
-      ]) {
         testWidgets(
             '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme,
-              background: background,
               child: SizedBox(
                 width: 300,
                 child: FRadio(

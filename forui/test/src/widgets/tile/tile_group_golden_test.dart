@@ -287,7 +287,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme,
-            child: FTileGroup(
+            child: const FTileGroup(
               label: Text('Network'),
               children: [],
             ),

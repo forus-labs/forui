@@ -23,7 +23,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final axis in Axis.values) {
         testWidgets('$name - $axis', (tester) async {
           final children = [
@@ -61,10 +61,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('divider/$name-$axis.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('divider/$name-$axis.png'));
         });
       }
     }
