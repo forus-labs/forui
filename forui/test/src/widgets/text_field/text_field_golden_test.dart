@@ -21,15 +21,12 @@ void main() {
         MaterialApp(
           debugShowCheckedModeBanner: false,
           home: TestScaffold.blue(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: FTextField(
-                style: TestScaffold.blueScreen.textFieldStyle,
-                label: const Text('My Label'),
-                hint: 'hint',
-                description: const Text('Some help text.'),
-                forceErrorText: 'Error',
-              ),
+            child: FTextField(
+              style: TestScaffold.blueScreen.textFieldStyle,
+              label: const Text('My Label'),
+              hint: 'hint',
+              description: const Text('Some help text.'),
+              forceErrorText: 'Error',
             ),
           ),
         ),
@@ -38,7 +35,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final (name, theme) in TestScaffold.themes) {
       for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
         for (final text in ['short text', null]) {
           testWidgets('default - $name - $focused - ${text == null ? 'no text' : ''}', (tester) async {
@@ -46,16 +43,12 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme,
-                background: background,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: FTextField(
-                    controller: controller,
-                    autofocus: focused_,
-                    label: const Text('My Label'),
-                    hint: 'hint',
-                    description: const Text('Some help text.'),
-                  ),
+                child: FTextField(
+                  controller: controller,
+                  autofocus: focused_,
+                  label: const Text('My Label'),
+                  hint: 'hint',
+                  description: const Text('Some help text.'),
                 ),
               ),
             );
@@ -73,16 +66,12 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme,
-                background: background,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: FTextField(
-                    controller: controller,
-                    autofocus: focused_,
-                    label: const Text('My Label'),
-                    hint: 'hint',
-                    forceErrorText: 'An error has occurred.',
-                  ),
+                child: FTextField(
+                  controller: controller,
+                  autofocus: focused_,
+                  label: const Text('My Label'),
+                  hint: 'hint',
+                  forceErrorText: 'An error has occurred.',
                 ),
               ),
             );
@@ -100,14 +89,10 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme,
-                background: background,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: FTextField.email(
-                    controller: controller,
-                    autofocus: focused_,
-                    hint: 'janedoe@foruslabs.com',
-                  ),
+                child: FTextField.email(
+                  controller: controller,
+                  autofocus: focused_,
+                  hint: 'janedoe@foruslabs.com',
                 ),
               ),
             );
@@ -125,14 +110,10 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme,
-                background: background,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: FTextField.password(
-                    controller: controller,
-                    autofocus: focused_,
-                    hint: 'password',
-                  ),
+                child: FTextField.password(
+                  controller: controller,
+                  autofocus: focused_,
+                  hint: 'password',
                 ),
               ),
             );
@@ -152,15 +133,11 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme,
-                background: background,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: FTextField.multiline(
-                    controller: controller,
-                    autofocus: focused_,
-                    label: const Text('My Label'),
-                    hint: 'hint',
-                  ),
+                child: FTextField.multiline(
+                  controller: controller,
+                  autofocus: focused_,
+                  label: const Text('My Label'),
+                  hint: 'hint',
                 ),
               ),
             );
