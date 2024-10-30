@@ -79,7 +79,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
               style: groupStyle,
               divider: divider,
               label: label,
-              state: labelState,
+              enabled: enabled,
               description: description,
               error: error,
               semanticLabel: semanticLabel,
