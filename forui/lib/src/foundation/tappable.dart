@@ -198,17 +198,7 @@ class _FTappableState extends State<FTappable> {
       );
     }
 
-    if (widget.onPress != null) {
-      tappable = Shortcuts(
-        shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-        child: Actions(
-          actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
-          child: tappable,
-        ),
-      );
-    }
-
-    return Semantics(
+    tappable = Semantics(
       enabled: _enabled,
       label: widget.semanticLabel,
       container: true,
@@ -225,6 +215,18 @@ class _FTappableState extends State<FTappable> {
         child: tappable,
       ),
     );
+
+    if (widget.onPress != null) {
+      tappable = Shortcuts(
+        shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
+        child: Actions(
+          actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
+          child: tappable,
+        ),
+      );
+    }
+
+    return tappable;
   }
 
   Widget _decorate(BuildContext context, Widget child) => child;
