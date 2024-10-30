@@ -12,7 +12,6 @@ void main() {
       var longPress = 0;
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FTile(
             title: const Text('Bluetooth'),
             onPress: () => press++,
@@ -33,7 +32,6 @@ void main() {
       var longPress = 0;
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FTile(
             enabled: false,
             title: const Text('Bluetooth'),
@@ -55,7 +53,6 @@ void main() {
       var longPress = 0;
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FTile(
             title: const Text('Lorem'),
             onPress: () => press++,
@@ -76,7 +73,6 @@ void main() {
       var longPress = 0;
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FTile(
             enabled: false,
             title: const Text('Lorem'),
@@ -97,7 +93,6 @@ void main() {
       var count = 0;
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FTile(
             title: const Text('Bluetooth'),
             details: FButton(onPress: () => count++, label: const Text('child')),

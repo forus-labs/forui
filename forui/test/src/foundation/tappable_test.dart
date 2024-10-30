@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
 
@@ -15,7 +14,6 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable(
               focusNode: focusNode,
               builder: (_, value, __) => Text('$value'),
@@ -33,7 +31,6 @@ void main() {
       testWidgets('hovered - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () {} : null,
@@ -64,7 +61,6 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
@@ -85,7 +81,6 @@ void main() {
         var longPressCount = 0;
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
@@ -114,7 +109,6 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable.animated(
               focusNode: focusNode,
               builder: (_, value, __) => Text('$value'),
@@ -132,7 +126,6 @@ void main() {
       testWidgets('hovered - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable.animated(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () {} : null,
@@ -163,7 +156,6 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable.animated(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
@@ -184,7 +176,6 @@ void main() {
         var longPressCount = 0;
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable.animated(
               builder: (_, value, __) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
@@ -209,7 +200,6 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTappable.animated(
               key: key,
               builder: (_, value, __) => Text('$value'),

@@ -198,8 +198,8 @@ testWidgets('blue screen', (tester) async {
     ),
   );
 
-  // (3) Always use the isBlueScreen matcher.
-  await expectLater(find.byType(TestScaffold), isBlueScreen);
+  // (3) Always use expectBlueScreen.
+  await expectBlueScreen(find.byType(TestScaffold));
 });
 ```
 

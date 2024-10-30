@@ -1,8 +1,6 @@
 @Tags(['golden'])
 library;
 
-import 'package:flutter/widgets.dart';
-
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -20,25 +18,20 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final (progress, value) in [('positive', 17.0), ('negative', -4.0), ('clamped', 0.3)]) {
-        testWidgets('$name - $progress', (tester) async {
+        testWidgets('${theme.name} - $progress', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: FProgress(value: value),
-                ),
-              ),
+              theme: theme.data,
+              child: FProgress(value: value),
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/$name-$progress.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/${theme.name}-$progress.png'));
         });
       }
     }

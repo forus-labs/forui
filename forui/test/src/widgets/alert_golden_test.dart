@@ -14,59 +14,51 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: FAlert(
-              title: const Text('Alert Title'),
-              subtitle: const Text('Alert description with extra text'),
-              style: TestScaffold.blueScreen.alertStyles.primary,
-            ),
+          child: FAlert(
+            title: const Text('Alert Title'),
+            subtitle: const Text('Alert description with extra text'),
+            style: TestScaffold.blueScreen.alertStyles.primary,
           ),
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final variant in Variant.values) {
-        testWidgets('$name with default icon', (tester) async {
+        testWidgets('${theme.name} with default icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: FAlert(
-                  title: const Text('Alert Title'),
-                  subtitle: const Text('Alert description with extra text'),
-                  style: variant,
-                ),
+              theme: theme.data,
+              child: FAlert(
+                title: const Text('Alert Title'),
+                subtitle: const Text('Alert description with extra text'),
+                style: variant,
               ),
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/$name/$variant-default-icon.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('alert/${theme.name}/$variant-default-icon.png'),
+          );
         });
 
-        testWidgets('$name with user icon', (tester) async {
+        testWidgets('${theme.name} with user icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              background: background,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: FAlert(
-                  icon: FIcon(FAssets.icons.badgeAlert),
-                  title: const Text('Alert Title'),
-                  subtitle: const Text('Alert description with extra text'),
-                  style: variant,
-                ),
+              theme: theme.data,
+              child: FAlert(
+                icon: FIcon(FAssets.icons.badgeAlert),
+                title: const Text('Alert Title'),
+                subtitle: const Text('Alert description with extra text'),
+                style: variant,
               ),
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/$name/$variant-user-icon.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/${theme.name}/$variant-user-icon.png'));
         });
       }
     }

@@ -11,24 +11,21 @@ void main() {
       var taps = 0;
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            theme: FThemes.zinc.light,
-            child: FAccordion(
-              items: [
-                FAccordionItem(
-                  title: const Text('Title'),
-                  initiallyExpanded: true,
-                  child: SizedBox.square(
-                    dimension: 1,
-                    child: GestureDetector(
-                      onTap: () => taps++,
-                      child: const Text('button'),
-                    ),
+        TestScaffold(
+          child: FAccordion(
+            items: [
+              FAccordionItem(
+                title: const Text('Title'),
+                initiallyExpanded: true,
+                child: SizedBox.square(
+                  dimension: 1,
+                  child: GestureDetector(
+                    onTap: () => taps++,
+                    child: const Text('button'),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );

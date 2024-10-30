@@ -32,24 +32,24 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final layout in Layout.values) {
         for (final touch in [true, false]) {
           for (final enabled in [true, false]) {
-            testWidgets('$name - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
+            testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
               Touch.primary = touch;
               final styles = FSliderStyles.inherit(
-                colorScheme: theme.colorScheme,
-                typography: theme.typography,
-                style: theme.style,
+                colorScheme: theme.data.colorScheme,
+                typography: theme.data.typography,
+                style: theme.data.style,
               );
 
               await tester.pumpWidget(
                 TestScaffold.app(
-                  theme: theme,
+                  theme: theme.data,
                   child: FSlider(
                     style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                     label: const Text('Label'),
@@ -80,23 +80,23 @@ void main() {
               await expectLater(
                 find.byType(TestScaffold),
                 matchesGoldenFile(
-                  'slider/range-slider/$name/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
+                  'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
                 ),
               );
             });
           }
 
-          testWidgets('$name - $layout - error', (tester) async {
+          testWidgets('${theme.name} - $layout - error', (tester) async {
             Touch.primary = touch;
             final styles = FSliderStyles.inherit(
-              colorScheme: theme.colorScheme,
-              typography: theme.typography,
-              style: theme.style,
+              colorScheme: theme.data.colorScheme,
+              typography: theme.data.typography,
+              style: theme.data.style,
             );
 
             await tester.pumpWidget(
               TestScaffold.app(
-                theme: theme,
+                theme: theme.data,
                 child: FSlider(
                   style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                   label: const Text('Label'),
@@ -127,7 +127,7 @@ void main() {
             await expectLater(
               find.byType(TestScaffold),
               matchesGoldenFile(
-                'slider/range-slider/$name/$layout-${touch ? 'touch' : 'desktop'}-error.png',
+                'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-error.png',
               ),
             );
           });
@@ -140,7 +140,6 @@ void main() {
         testWidgets('single value - $layout - ${min ? 'min' : 'max'}', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 controller: FContinuousSliderController(
                   minExtendable: min,
@@ -226,7 +225,6 @@ void main() {
         testWidgets('symmetric padding', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 controller: FContinuousSliderController(
                   selection: FSliderSelection(min: 0.30, max: 0.60),
@@ -237,16 +235,12 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/label-offset/$layout-symmetric.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/label-offset/$layout-symmetric.png'));
         });
 
         testWidgets('asymmetric cross axis padding - $layout', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 style: sliderStyle.copyWith(
                   labelLayoutStyle: sliderStyle.labelLayoutStyle.copyWith(
@@ -262,16 +256,12 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/label-offset/$layout-asymmetric.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/label-offset/$layout-asymmetric.png'));
         });
 
         testWidgets('labelled', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
-              theme: FThemes.zinc.light,
               child: FSlider(
                 label: const Text('Label'),
                 description: const Text('Description'),
@@ -285,10 +275,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/label-offset/$layout-labelled.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/label-offset/$layout-labelled.png'));
         });
       });
     }
@@ -296,7 +283,6 @@ void main() {
     testWidgets('interweaving marks with no labels', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.zinc.light,
           child: FSlider(
             controller: FContinuousSliderController(
               selection: FSliderSelection(min: 0.30, max: 0.60),
@@ -312,10 +298,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('slider/interweaving-marks.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('slider/interweaving-marks.png'));
     });
   });
 

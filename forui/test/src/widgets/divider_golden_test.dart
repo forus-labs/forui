@@ -20,19 +20,19 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final axis in Axis.values) {
-        testWidgets('$name - $axis', (tester) async {
+        testWidgets('${theme.name} - $axis', (tester) async {
           final children = [
             Container(
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                borderRadius: theme.style.borderRadius,
-                border: Border.all(color: theme.colorScheme.secondary),
+                borderRadius: theme.data.style.borderRadius,
+                border: Border.all(color: theme.data.colorScheme.secondary),
               ),
             ),
             FDivider(axis: axis),
@@ -40,15 +40,15 @@ void main() {
               width: 100,
               height: 100,
               decoration: BoxDecoration(
-                borderRadius: theme.style.borderRadius,
-                border: Border.all(color: theme.colorScheme.secondary),
+                borderRadius: theme.data.style.borderRadius,
+                border: Border.all(color: theme.data.colorScheme.secondary),
               ),
             ),
           ];
 
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: axis == Axis.vertical
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -61,10 +61,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('divider/$name-$axis.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('divider/${theme.name}-$axis.png'));
         });
       }
     }

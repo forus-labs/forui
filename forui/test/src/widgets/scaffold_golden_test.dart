@@ -10,32 +10,38 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FScaffold', () {
-    for (final (name, theme, background) in TestScaffold.themes) {
-      testWidgets(name, (tester) async {
-        Widget buildColor(Color color) => Row(
-              children: [
-                Expanded(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(color: color),
-                    child: const SizedBox(height: 100),
-                  ),
-                ),
-              ],
-            );
-
+    for (final theme in TestScaffold.themes) {
+      testWidgets(theme.name, (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
-            background: background,
+            theme: theme.data,
             child: FScaffold(
-              header: buildColor(Colors.red),
+              header: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(color: Colors.red),
+                      height: 100,
+                    ),
+                  ),
+                ],
+              ),
               content: const Placeholder(),
-              footer: buildColor(Colors.green),
+              footer: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(color: Colors.green),
+                      height: 100,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/$name-scaffold.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}-scaffold.png'));
       });
     }
   });

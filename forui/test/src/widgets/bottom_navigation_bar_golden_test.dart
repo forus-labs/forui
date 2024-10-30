@@ -30,15 +30,14 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
-      testWidgets('forui icon - $name', (tester) async {
+    for (final theme in TestScaffold.themes) {
+      testWidgets('forui icon - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: theme,
-            background: background,
+            theme: theme.data,
             child: FBottomNavigationBar(
               index: 2,
               children: [
@@ -69,7 +68,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('bottom-navigation-bar/$name-forui-icon.png'),
+          matchesGoldenFile('bottom-navigation-bar/${theme.name}-forui-icon.png'),
         );
       });
     }

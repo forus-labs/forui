@@ -12,7 +12,6 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FSelectTileGroup(
             controller: controller,
             children: [
@@ -41,7 +40,6 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FSelectTileGroup(
             controller: controller,
             children: [
@@ -70,7 +68,6 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FSelectTileGroup(
             controller: controller,
             children: [
@@ -99,7 +96,6 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FSelectTileGroup(
             controller: controller,
             autovalidateMode: AutovalidateMode.always,
@@ -133,7 +129,6 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FTileGroup.merge(
             children: [
               FTileGroup(

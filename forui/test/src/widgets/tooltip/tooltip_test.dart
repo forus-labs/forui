@@ -12,18 +12,15 @@ void main() {
       final controller = FTooltipController(vsync: const TestVSync());
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            theme: FThemes.zinc.light,
-            child: FTooltip(
-              controller: controller,
-              hover: false,
-              longPress: false,
-              tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(
-                onPress: () {},
-                label: const Text('button'),
-              ),
+        TestScaffold.app(
+          child: FTooltip(
+            controller: controller,
+            hover: false,
+            longPress: false,
+            tipBuilder: (context, style, _) => const Text('tip'),
+            child: FButton(
+              onPress: () {},
+              label: const Text('button'),
             ),
           ),
         ),
@@ -45,16 +42,13 @@ void main() {
         const duration = Duration(milliseconds: 1000);
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              theme: FThemes.zinc.light,
-              child: FTooltip(
-                longPressExitDuration: duration,
-                tipBuilder: (context, style, _) => const Text('tip'),
-                child: FButton(
-                  onPress: () {},
-                  label: const Text('button'),
-                ),
+          TestScaffold.app(
+            child: FTooltip(
+              longPressExitDuration: duration,
+              tipBuilder: (context, style, _) => const Text('tip'),
+              child: FButton(
+                onPress: () {},
+                label: const Text('button'),
               ),
             ),
           ),
@@ -74,16 +68,13 @@ void main() {
         const duration = Duration(milliseconds: 1000);
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              theme: FThemes.zinc.light,
-              child: FTooltip(
-                longPressExitDuration: duration,
-                tipBuilder: (context, style, _) => const Text('tip'),
-                child: FButton(
-                  onPress: () {},
-                  label: const Text('button'),
-                ),
+          TestScaffold.app(
+            child: FTooltip(
+              longPressExitDuration: duration,
+              tipBuilder: (context, style, _) => const Text('tip'),
+              child: FButton(
+                onPress: () {},
+                label: const Text('button'),
               ),
             ),
           ),
@@ -108,15 +99,12 @@ void main() {
     group('hover', () {
       testWidgets('hover shows tooltip', (tester) async {
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              theme: FThemes.zinc.light,
-              child: FTooltip(
-                tipBuilder: (context, style, _) => const Text('tip'),
-                child: FButton(
-                  onPress: () {},
-                  label: const Text('button'),
-                ),
+          TestScaffold.app(
+            child: FTooltip(
+              tipBuilder: (context, style, _) => const Text('tip'),
+              child: FButton(
+                onPress: () {},
+                label: const Text('button'),
               ),
             ),
           ),
@@ -140,16 +128,13 @@ void main() {
 
       testWidgets('hover enter and re-enter resets hoverEnterDuration', (tester) async {
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              theme: FThemes.zinc.light,
-              child: FTooltip(
-                hoverEnterDuration: const Duration(seconds: 1),
-                tipBuilder: (context, style, _) => const Text('tip'),
-                child: FButton(
-                  onPress: () {},
-                  label: const Text('button'),
-                ),
+          TestScaffold.app(
+            child: FTooltip(
+              hoverEnterDuration: const Duration(seconds: 1),
+              tipBuilder: (context, style, _) => const Text('tip'),
+              child: FButton(
+                onPress: () {},
+                label: const Text('button'),
               ),
             ),
           ),
@@ -178,17 +163,14 @@ void main() {
 
       testWidgets('hover exit and re-exit resets hoverExitDuration', (tester) async {
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              theme: FThemes.zinc.light,
-              child: FTooltip(
-                hoverEnterDuration: Duration.zero,
-                hoverExitDuration: const Duration(seconds: 1),
-                tipBuilder: (context, style, _) => const Text('tip'),
-                child: FButton(
-                  onPress: () {},
-                  label: const Text('button'),
-                ),
+          TestScaffold.app(
+            child: FTooltip(
+              hoverEnterDuration: Duration.zero,
+              hoverExitDuration: const Duration(seconds: 1),
+              tipBuilder: (context, style, _) => const Text('tip'),
+              child: FButton(
+                onPress: () {},
+                label: const Text('button'),
               ),
             ),
           ),
@@ -220,15 +202,12 @@ void main() {
 
       testWidgets('tap hides tooltip even if child is GestureDetector', (tester) async {
         await tester.pumpWidget(
-          MaterialApp(
-            home: TestScaffold(
-              theme: FThemes.zinc.light,
-              child: FTooltip(
-                tipBuilder: (context, style, _) => const Text('tip'),
-                child: FButton(
-                  onPress: () {},
-                  label: const Text('button'),
-                ),
+          TestScaffold.app(
+            child: FTooltip(
+              tipBuilder: (context, style, _) => const Text('tip'),
+              child: FButton(
+                onPress: () {},
+                label: const Text('button'),
               ),
             ),
           ),

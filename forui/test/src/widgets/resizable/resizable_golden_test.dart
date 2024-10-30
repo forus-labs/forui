@@ -37,21 +37,20 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final axis in Axis.values) {
         for (final divider in FResizableDivider.values) {
-          testWidgets('$name - $axis - $divider', (tester) async {
+          testWidgets('${theme.name} - $axis - $divider', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
-                theme: theme,
-                background: background,
+                theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: theme.colorScheme.border,
+                      color: theme.data.colorScheme.border,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -80,7 +79,7 @@ void main() {
               ),
             );
 
-            await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/$name/$axis-$divider.png'));
+            await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/${theme.name}/$axis-$divider.png'));
           });
         }
       }
@@ -90,7 +89,6 @@ void main() {
       testWidgets('expanded - $axis', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            theme: FThemes.zinc.light,
             child: FScaffold(
               content: DecoratedBox(
                 decoration: BoxDecoration(

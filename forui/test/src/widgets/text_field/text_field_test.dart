@@ -12,7 +12,6 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: TestScaffold(
-            theme: FThemes.zinc.light,
             child: const FTextField(),
           ),
         ),
@@ -25,7 +24,6 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            theme: FThemes.zinc.light,
             child: const FTextField(),
           ),
         ),
@@ -37,7 +35,6 @@ void main() {
     testWidgets('not embedded in any App', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: const FTextField(),
         ),
       );

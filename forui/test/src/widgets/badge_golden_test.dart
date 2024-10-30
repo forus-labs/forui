@@ -20,16 +20,15 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final variant in Variant.values) {
-        testWidgets('$name with FBadgeContent', (tester) async {
+        testWidgets('${theme.name} with FBadgeContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              background: background,
+              theme: theme.data,
               child: FBadge(
                 label: const Text('Badge'),
                 style: variant,
@@ -37,14 +36,13 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/$name/$variant-content.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-content.png'));
         });
 
-        testWidgets('$name with raw content', (tester) async {
+        testWidgets('${theme.name} with raw content', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              background: background,
+              theme: theme.data,
               child: FBadge.raw(
                 style: variant,
                 builder: (_, style) => Padding(
@@ -70,7 +68,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/$name/$variant-raw.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-raw.png'));
         });
       }
     }

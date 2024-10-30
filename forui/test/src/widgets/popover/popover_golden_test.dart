@@ -12,15 +12,16 @@ import 'package:forui/src/foundation/tappable.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  for (final (name, theme, background) in TestScaffold.themes) {
+  late FPopoverController controller;
+
+  setUp(() => controller = FPopoverController(vsync: const TestVSync()));
+
+  for (final theme in TestScaffold.themes) {
     group('FPopover', () {
-      testWidgets('$name hidden ', (tester) async {
-        final controller = FPopoverController(vsync: const TestVSync());
-
+      testWidgets('${theme.name} hidden ', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: theme,
-            background: background,
+            theme: theme.data,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -34,17 +35,15 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/hidden-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/hidden-${theme.name}.png'));
       });
 
-      testWidgets('$name shown on touch device', (tester) async {
+      testWidgets('${theme.name} shown on touch device', (tester) async {
         Touch.primary = true;
-        final controller = FPopoverController(vsync: const TestVSync());
 
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: theme,
-            background: background,
+            theme: theme.data,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -61,17 +60,15 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-$name.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-${theme.name}.png'));
       });
 
-      testWidgets('$name shown on non-touch device', (tester) async {
+      testWidgets('${theme.name} shown on non-touch device', (tester) async {
         Touch.primary = false;
-        final controller = FPopoverController(vsync: const TestVSync());
 
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: theme,
-            background: background,
+            theme: theme.data,
             child: FPopover(
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -88,10 +85,16 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-non-touch-device-$name.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('popover/shown-non-touch-device-${theme.name}.png'),
+        );
       });
-
-      tearDown(() => Touch.primary = null);
     });
   }
+
+  tearDown(() {
+    Touch.primary = null;
+    controller.dispose();
+  });
 }

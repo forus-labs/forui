@@ -8,6 +8,8 @@ import 'threshold_file_comparator.dart';
 
 MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
 
+Future<void> expectBlueScreen(dynamic actual) => expectLater(actual, isBlueScreen);
+
 class TestScaffold extends StatelessWidget {
   static final blueScreen = FThemeData.inherit(
     colorScheme: const FColorScheme(
@@ -28,50 +30,77 @@ class TestScaffold extends StatelessWidget {
     ),
   );
 
-  static List<(String name, FThemeData theme, Color background)> get themes => [
-        ('zinc-light', FThemes.zinc.light, const Color(0xFFD5FFFF)),
-        ('zinc-dark', FThemes.zinc.dark, const Color(0xFF104963)),
+  static List<({String name, FThemeData data})> get themes => [
+        (name: 'zinc-light', data: FThemes.zinc.light),
+        (name: 'zinc-dark', data: FThemes.zinc.dark),
       ];
 
   final FThemeData theme;
   final Color? background;
   final Widget child;
+  final bool padded;
   final bool wrapped;
 
-  const TestScaffold({required this.theme, required this.child, this.background, super.key}) : wrapped = false;
+  TestScaffold({
+    required this.child,
+    this.padded = true,
+    FThemeData? theme,
+    Color? background,
+    super.key,
+  })  : theme = theme ?? FThemes.zinc.light,
+        background = switch ((theme, background)) {
+          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
+          (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+          (_, final background) => background,
+        },
+        wrapped = false;
 
-  const TestScaffold.app({required this.theme, required this.child, this.background, super.key}) : wrapped = true;
+  TestScaffold.app({
+    required this.child,
+    this.padded = true,
+    FThemeData? theme,
+    Color? background,
+    super.key,
+  })  : theme = theme ?? FThemes.zinc.light,
+        background = switch ((theme, background)) {
+          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
+          (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+          (_, final background) => background,
+        },
+        wrapped = true;
 
   TestScaffold.blue({required this.child, super.key})
       : theme = FThemes.zinc.light,
         background = blueScreen.colorScheme.background,
+        padded = false,
         wrapped = false;
 
   @override
   Widget build(BuildContext context) {
     if (wrapped) {
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         builder: (context, child) => FTheme(
           data: theme,
           textDirection: TextDirection.ltr,
           child: Container(
-            // We use a fixed background color to ensure that widgets set their background properly.
             color: background ?? theme.colorScheme.background,
             alignment: Alignment.center,
+            padding: padded ? const EdgeInsets.all(16) : null,
             child: child!,
           ),
         ),
-        home: Align(child: child),
+        home: Center(child: child),
       );
     } else {
       return FTheme(
         data: theme,
         textDirection: TextDirection.ltr,
         child: Container(
-          // We use a fixed background color to ensure that widgets set their background properly.
           color: background ?? theme.colorScheme.background,
           alignment: Alignment.center,
-          child: child,
+          padding: padded ? const EdgeInsets.all(16) : null,
+          child: Center(child: child),
         ),
       );
     }
@@ -83,6 +112,7 @@ class TestScaffold extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('data', theme))
       ..add(ColorProperty('background', background))
+      ..add(FlagProperty('padded', value: padded, ifTrue: 'padded'))
       ..add(FlagProperty('wrapped', value: wrapped, ifTrue: 'wrapped'));
   }
 }

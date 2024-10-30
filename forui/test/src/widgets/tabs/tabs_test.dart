@@ -12,7 +12,6 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: [
                 FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -29,7 +28,6 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: [
                 FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -45,7 +43,6 @@ void main() {
     testWidgets('not embedded in any App', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.zinc.light,
           child: FTabs(
             tabs: [
               FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -67,7 +64,6 @@ void main() {
             DefaultWidgetsLocalizations.delegate,
           ],
           child: TestScaffold(
-            theme: FThemes.zinc.light,
             child: FTabs(
               tabs: [
                 FTabEntry(label: const Text('Account'), content: Container(height: 100)),
@@ -82,15 +78,12 @@ void main() {
 
     testWidgets('tap on current entry', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            theme: FThemes.zinc.light,
-            child: FTabs(
-              tabs: const [
-                FTabEntry(label: Text('foo'), content: Text('foo content')),
-                FTabEntry(label: Text('bar'), content: Text('bar content')),
-              ],
-            ),
+        TestScaffold.app(
+          child: FTabs(
+            tabs: const [
+              FTabEntry(label: Text('foo'), content: Text('foo content')),
+              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            ],
           ),
         ),
       );
@@ -107,15 +100,12 @@ void main() {
 
     testWidgets('using internal controller and tapping on tab switches tab entry', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            theme: FThemes.zinc.light,
-            child: FTabs(
-              tabs: const [
-                FTabEntry(label: Text('foo'), content: Text('foo content')),
-                FTabEntry(label: Text('bar'), content: Text('bar content')),
-              ],
-            ),
+        TestScaffold.app(
+          child: FTabs(
+            tabs: const [
+              FTabEntry(label: Text('foo'), content: Text('foo content')),
+              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            ],
           ),
         ),
       );
@@ -132,16 +122,13 @@ void main() {
       final controller = FTabController(length: 2, vsync: tester);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            theme: FThemes.zinc.light,
-            child: FTabs(
-              controller: controller,
-              tabs: const [
-                FTabEntry(label: Text('foo'), content: Text('foo content')),
-                FTabEntry(label: Text('bar'), content: Text('bar content')),
-              ],
-            ),
+        TestScaffold.app(
+          child: FTabs(
+            controller: controller,
+            tabs: const [
+              FTabEntry(label: Text('foo'), content: Text('foo content')),
+              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            ],
           ),
         ),
       );

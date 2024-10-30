@@ -23,10 +23,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
+      await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    for (final (name, theme, background) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final (enabled, value, error) in [
         (true, true, false),
         (true, true, true),
@@ -38,53 +38,33 @@ void main() {
         (false, false, true),
       ]) {
         testWidgets(
-            '$name with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '${theme.name} with ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              background: background,
-              child: error
-                  ? FRadio(
-                      enabled: enabled,
-                      value: value,
-                      error: const SizedBox(),
-                    )
-                  : FRadio(
-                      enabled: enabled,
-                      value: value,
-                    ),
+              theme: theme.data,
+              child: FRadio(
+                enabled: enabled,
+                value: value,
+                error: error ? const SizedBox() : null,
+              ),
             ),
           );
 
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'radio/$name/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+              'radio/${theme.name}/${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });
-      }
-    }
 
-    for (final (name, theme, background) in TestScaffold.themes) {
-      for (final (enabled, value, error) in [
-        (true, true, false),
-        (true, true, true),
-        (true, false, false),
-        (true, false, true),
-        (false, true, false),
-        (false, true, true),
-        (false, false, false),
-        (false, false, true),
-      ]) {
         testWidgets(
-            '$name with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
+            '${theme.name} with label, ${enabled ? 'enabled' : 'disabled'}, ${'$value value'} & ${error ? 'with error' : 'without error'}',
             (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
-              background: background,
+              theme: theme.data,
               child: SizedBox(
                 width: 300,
                 child: FRadio(
@@ -101,7 +81,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'radio/$name/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
+              'radio/${theme.name}/label-${enabled ? 'enabled' : 'disabled'}${value ? '-checked' : ''}${error ? '-error' : ''}.png',
             ),
           );
         });
