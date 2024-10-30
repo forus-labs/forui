@@ -16,6 +16,8 @@
 
 * Add `FSelectTileGroup`.
 
+* Add `FCalendarDayPickerStyle.tileSize`.
+
 ### Fixes
 
 * Change FButton's animation to only start on mouse down and up.

@@ -14,7 +14,8 @@ class YearPicker extends StatefulWidget {
   static const rows = 5;
   static const items = columns * rows;
 
-  final FCalendarYearMonthPickerStyle style;
+  final FCalendarYearMonthPickerStyle yearMonthStyle;
+  final FCalendarDayPickerStyle dayStyle;
   final LocalDate startYear;
   final LocalDate start;
   final LocalDate end;
@@ -23,7 +24,8 @@ class YearPicker extends StatefulWidget {
   final ValueChanged<LocalDate> onPress;
 
   YearPicker({
-    required this.style,
+    required this.yearMonthStyle,
+    required this.dayStyle,
     required this.startYear,
     required this.start,
     required this.end,
@@ -40,7 +42,8 @@ class YearPicker extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('startYear', startYear, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('start', start, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
@@ -71,15 +74,15 @@ class _YearPickerState extends State<YearPicker> {
         padding: const EdgeInsets.only(top: 5.0),
         child: GridView(
           padding: EdgeInsets.zero,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: YearPicker.columns,
-            mainAxisExtent: ((DayPicker.tileDimension - 5.0) * DayPicker.maxRows) / YearPicker.rows,
+            mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
             mainAxisSpacing: 5.0,
           ),
           children: [
             for (var year = widget.startYear, i = 0; i < YearPicker.items; year = year.plus(years: 1), i++)
               Entry.yearMonth(
-                style: widget.style,
+                style: widget.yearMonthStyle,
                 date: year,
                 focusNode: _years[i],
                 current: widget.today.year == year.year,

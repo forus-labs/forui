@@ -13,7 +13,6 @@ import 'package:forui/src/widgets/calendar/shared/entry.dart';
 @internal
 class DayPicker extends StatefulWidget {
   static const maxRows = 7;
-  static const tileDimension = 42.0;
 
   final FCalendarDayPickerStyle style;
   final LocalDate month;
@@ -95,12 +94,12 @@ class _DayPickerState extends State<DayPicker> {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: DateTime.daysPerWeek * DayPicker.tileDimension,
+        width: DateTime.daysPerWeek * widget.style.tileSize,
         child: GridView.custom(
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const _GridDelegate(),
+          gridDelegate: _GridDelegate(widget.style.tileSize),
           childrenDelegate: SliverChildListDelegate(
             addRepaintBoundaries: false,
             [
@@ -155,20 +154,22 @@ class _DayPickerState extends State<DayPicker> {
 
 // Based on Material [CalendarDatePicker]'s _DayPickerGridDelegate.
 class _GridDelegate extends SliverGridDelegate {
-  const _GridDelegate();
+  final double tileSize;
+
+  const _GridDelegate(this.tileSize);
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-        childCrossAxisExtent: DayPicker.tileDimension,
-        childMainAxisExtent: DayPicker.tileDimension,
+        childCrossAxisExtent: tileSize,
+        childMainAxisExtent: tileSize,
         crossAxisCount: DateTime.daysPerWeek,
-        crossAxisStride: DayPicker.tileDimension,
-        mainAxisStride: DayPicker.tileDimension,
+        crossAxisStride: tileSize,
+        mainAxisStride: tileSize,
         reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
       );
 
   @override
-  bool shouldRelayout(_GridDelegate oldDelegate) => false;
+  bool shouldRelayout(_GridDelegate oldDelegate) => tileSize != oldDelegate.tileSize;
 }
 
 /// A day picker's style.
@@ -192,16 +193,24 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// * [DateTime.sunday] < [startDayOfWeek]
   final int? startDayOfWeek;
 
+  /// The tile's size. Defaults to 42.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [tileSize] is not positive.
+  final double tileSize;
+
   /// Creates a [FCalendarDayPickerStyle].
   const FCalendarDayPickerStyle({
     required this.headerTextStyle,
     required this.selectableStyles,
     required this.unselectableStyles,
     this.startDayOfWeek,
+    this.tileSize = 42,
   }) : assert(
           startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
           'startDayOfWeek must be between DateTime.monday (1) and DateTime.sunday (7).',
-        );
+        ),
+        assert(0 < tileSize, 'tileSize must be positive.');
 
   /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
   factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
@@ -272,6 +281,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
     FCalendarDayStyle? selectableEnclosing,
     FCalendarDayStyle? unselectableCurrent,
     FCalendarDayStyle? unselectableEnclosing,
+    double? tileSize,
     int? startDayOfWeek,
   }) =>
       FCalendarDayPickerStyle(
@@ -296,6 +306,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       ..add(DiagnosticsProperty('selectableStyles.enclosing', selectableStyles.enclosing))
       ..add(DiagnosticsProperty('unselectableStyles.current', unselectableStyles.current))
       ..add(DiagnosticsProperty('unselectableStyles.enclosing', unselectableStyles.enclosing))
+      ..add(DoubleProperty('tileSize', tileSize))
       ..add(IntProperty('startDayOfWeek', startDayOfWeek));
   }
 

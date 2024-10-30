@@ -17,7 +17,8 @@ final _MMM = DateFormat.MMM();
 class MonthPicker extends StatefulWidget {
   static const columns = 3;
 
-  final FCalendarYearMonthPickerStyle style;
+  final FCalendarYearMonthPickerStyle yearMonthStyle;
+  final FCalendarDayPickerStyle dayStyle;
   final LocalDate currentYear;
   final LocalDate start;
   final LocalDate end;
@@ -26,7 +27,8 @@ class MonthPicker extends StatefulWidget {
   final ValueChanged<LocalDate> onPress;
 
   MonthPicker({
-    required this.style,
+    required this.yearMonthStyle,
+    required this.dayStyle,
     required this.currentYear,
     required this.start,
     required this.end,
@@ -42,7 +44,8 @@ class MonthPicker extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('currentYear', currentYear, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('start', start, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
@@ -70,15 +73,15 @@ class _MonthPickerState extends State<MonthPicker> {
         padding: const EdgeInsets.only(top: 5.0),
         child: GridView(
           padding: EdgeInsets.zero,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: YearPicker.columns,
-            mainAxisExtent: ((DayPicker.tileDimension - 5.0) * DayPicker.maxRows) / YearPicker.rows,
+            mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
             mainAxisSpacing: 5.0,
           ),
           children: [
             for (var month = widget.currentYear, i = 0; i < 12; month = month.plus(months: 1), i++)
               Entry.yearMonth(
-                style: widget.style,
+                style: widget.yearMonthStyle,
                 date: month,
                 focusNode: _months[i],
                 current: widget.today.truncate(to: DateUnit.months) == month,
