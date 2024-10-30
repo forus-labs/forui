@@ -36,7 +36,6 @@ class FlineCalendarTile extends StatelessWidget {
           final isSelected = controller.selected(date);
           return FTappable.animated(
             semanticLabel: date.toString(),
-            selected: isSelected,
             onPress: () => controller.select(date),
             child: Stack(
               children: [

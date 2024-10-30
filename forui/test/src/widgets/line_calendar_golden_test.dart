@@ -31,14 +31,14 @@ void main() {
       await expectLater(find.byType(TestScaffold), isBlueScreen);
     });
 
-    for (final (name, theme, _) in TestScaffold.themes) {
+    for (final theme in TestScaffold.themes) {
       for (final (lineCalendar, controller) in [
         ('default', FCalendarController.date(initialSelection: DateTime.utc(2024, 10, 20))),
       ]) {
-        testWidgets('$name - $lineCalendar', (tester) async {
+        testWidgets('$theme.name - $lineCalendar', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -50,14 +50,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('line_calendar/$name-$lineCalendar/default.png'),
+            matchesGoldenFile('line_calendar/$theme.name-$lineCalendar/default.png'),
           );
         });
 
-        testWidgets('new date selected - $name', (tester) async {
+        testWidgets('new date selected - $theme.name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -72,14 +72,14 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('line_calendar/$name-$lineCalendar/new-date.png'),
+            matchesGoldenFile('line_calendar/$theme.name-$lineCalendar/new-date.png'),
           );
         });
 
-        testWidgets('unselected - $name', (tester) async {
+        testWidgets('unselected - $theme.name', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
-              theme: theme,
+              theme: theme.data,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -93,7 +93,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('line_calendar/$name-$lineCalendar/unselected.png'),
+            matchesGoldenFile('line_calendar/$theme.name-$lineCalendar/unselected.png'),
           );
         });
       }
