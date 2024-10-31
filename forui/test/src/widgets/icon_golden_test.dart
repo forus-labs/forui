@@ -103,6 +103,20 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/raw.png'));
       });
+
+      testWidgets('empty icon', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: DecoratedBox(
+              decoration: BoxDecoration(border: Border.all(color: theme.data.colorScheme.primary)),
+              child: FIcon.empty(),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/empty.png'));
+      });
     }
   });
 }

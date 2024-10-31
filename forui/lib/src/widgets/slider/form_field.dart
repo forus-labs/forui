@@ -144,6 +144,12 @@ class _State extends FormFieldState<FSliderSelection> {
     super.reset();
   }
 
+  @override
+  void dispose() {
+    widget.controller.removeListener(_handleControllerChanged);
+    super.dispose();
+  }
+
   void _handleControllerChanged() {
     // Suppress changes that originated from within this class.
     //

@@ -75,8 +75,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     Widget? suffixIcon,
     super.key,
   })  : checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
-        // We use a transparent color instead of a sized box, to simplify calculation of the checked icon size.
-        uncheckedIcon = uncheckedIcon ?? FIcon(FAssets.icons.check, color: Colors.transparent),
+        uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
         _suffix = false,
         _icon = suffixIcon;
 
@@ -99,8 +98,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     super.key,
   })  : _icon = prefixIcon,
         checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
-        // We use a transparent color instead of a sized box, to simplify calculation of the checked icon size.
-        uncheckedIcon = uncheckedIcon ?? FIcon(FAssets.icons.check, color: Colors.transparent),
+        uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
         _suffix = true;
 
   @override

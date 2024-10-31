@@ -136,6 +136,12 @@ class _State<T> extends FormFieldState<Set<T>> {
     super.reset();
   }
 
+  @override
+  void dispose() {
+    widget.controller.removeListener(_handleControllerChanged);
+    super.dispose();
+  }
+
   void _handleControllerChanged() {
     // Suppress changes that originated from within this class.
     //

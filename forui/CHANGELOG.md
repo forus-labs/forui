@@ -6,6 +6,8 @@
 
 * Add `FBreakpoints`.
 
+* Add `FIcon.empty()`.
+
 * Add `FTappable`.
 
 * Add `FTile`.
@@ -23,6 +25,8 @@
 * Change FButton's animation to only start on mouse down and up.
 
 * Fix `FLabel` not showing error message if label and description are null.
+
+* Fix `FSelectGroup` not properly disposing callbacks.
 
 
 ## 0.6.1

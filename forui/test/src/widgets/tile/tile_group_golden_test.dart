@@ -650,6 +650,54 @@ void main() {
       });
     }
 
+    testWidgets('full dividers between groups and no dividers between tiles', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup.merge(
+            divider: FTileDivider.indented,
+            children: [
+              FTileGroup(
+                divider: FTileDivider.none,
+                children: [
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('Personalization'),
+                    suffixIcon: FIcon(FAssets.icons.user),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('Network'),
+                    suffixIcon: FIcon(FAssets.icons.appWindowMac),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+              FTileGroup(
+                divider: FTileDivider.none,
+                children: [
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('List View'),
+                    suffixIcon: FIcon(FAssets.icons.list),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('Grid View'),
+                    suffixIcon: FIcon(FAssets.icons.layoutGrid),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/full-no-dividers.png'));
+    });
+
     testWidgets('ignore group label', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
