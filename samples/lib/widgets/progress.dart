@@ -5,35 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class ProgressPage extends SampleScaffold {
+class ProgressPage extends StatefulSample {
   ProgressPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => Progress();
+  State<ProgressPage> createState() => _State();
 }
 
-class Progress extends StatefulWidget {
-  @override
-  State<Progress> createState() => ProgressState();
-}
-
-class ProgressState extends State<Progress> {
+class _State extends StatefulSampleState<ProgressPage> {
+  late Timer timer;
   double value = 0.2;
 
   @override
   void initState() {
-    Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
     super.initState();
+    timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [FProgress(value: value)],
-      );
+  Widget sample(BuildContext context) => FProgress(value: value);
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
 }

@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 // ignore_for_file: invalid_use_of_internal_member, implementation_imports
 
@@ -13,7 +13,7 @@ final variants = {
 };
 
 @RoutePage()
-class ButtonTextPage extends SampleScaffold {
+class ButtonTextPage extends Sample {
   final Variant variant;
   final String label;
 
@@ -24,7 +24,7 @@ class ButtonTextPage extends SampleScaffold {
   }) : variant = variants[style] ?? Variant.primary;
 
   @override
-  Widget child(BuildContext context) => IntrinsicWidth(
+  Widget sample(BuildContext context) => IntrinsicWidth(
         child: FButton(
           label: Text(label),
           style: variant,
@@ -34,7 +34,7 @@ class ButtonTextPage extends SampleScaffold {
 }
 
 @RoutePage()
-class ButtonIconPage extends SampleScaffold {
+class ButtonIconPage extends Sample {
   final Variant variant;
 
   ButtonIconPage({
@@ -43,7 +43,7 @@ class ButtonIconPage extends SampleScaffold {
   }) : variant = variants[variant]!;
 
   @override
-  Widget child(BuildContext context) => IntrinsicWidth(
+  Widget sample(BuildContext context) => IntrinsicWidth(
         child: FButton(
           prefix: FIcon(FAssets.icons.mail),
           label: const Text('Login with Email'),
@@ -54,13 +54,13 @@ class ButtonIconPage extends SampleScaffold {
 }
 
 @RoutePage()
-class ButtonOnlyIconPage extends SampleScaffold {
+class ButtonOnlyIconPage extends Sample {
   ButtonOnlyIconPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => IntrinsicWidth(
+  Widget sample(BuildContext context) => IntrinsicWidth(
         child: FButton.icon(
           child: FIcon(FAssets.icons.chevronRight),
           onPress: () {},
@@ -69,13 +69,13 @@ class ButtonOnlyIconPage extends SampleScaffold {
 }
 
 @RoutePage()
-class ButtonSpinnerPage extends SampleScaffold {
+class ButtonSpinnerPage extends Sample {
   ButtonSpinnerPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => IntrinsicWidth(
+  Widget sample(BuildContext context) => IntrinsicWidth(
         child: FButton(prefix: const FButtonSpinner(), onPress: null, label: const Text('Please wait')),
       );
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/src/widgets/alert.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 // ignore_for_file: invalid_use_of_internal_member, implementation_imports
 
@@ -12,7 +12,7 @@ final variants = {
 };
 
 @RoutePage()
-class AlertPage extends SampleScaffold {
+class AlertPage extends Sample {
   final Variant variant;
 
   AlertPage({
@@ -21,7 +21,7 @@ class AlertPage extends SampleScaffold {
   }) : variant = variants[style] ?? Variant.primary;
 
   @override
-  Widget child(BuildContext context) => Column(
+  Widget sample(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FAlert(

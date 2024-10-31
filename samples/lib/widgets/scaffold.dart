@@ -3,24 +3,56 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class ScaffoldPage extends SampleScaffold {
+class ScaffoldPage extends StatefulSample {
   ScaffoldPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget child(BuildContext context) => const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 500,
-            child: _Demo(),
+  State<ScaffoldPage> createState() => _State();
+}
+
+class _State extends StatefulSampleState<ScaffoldPage> {
+  int index = 3;
+
+  @override
+  Widget sample(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      SizedBox(
+        height: 500,
+        child: FScaffold(
+          header: headers[index],
+          content: contents[index],
+          footer: FBottomNavigationBar(
+            index: index,
+            onChange: (index) => setState(() => this.index = index),
+            children: [
+              FBottomNavigationBarItem(
+                icon: FIcon(FAssets.icons.house),
+                label: const Text('Home'),
+              ),
+              FBottomNavigationBarItem(
+                icon: FIcon(FAssets.icons.layoutGrid),
+                label: const Text('Categories'),
+              ),
+              FBottomNavigationBarItem(
+                icon: FIcon(FAssets.icons.search),
+                label: const Text('Search'),
+              ),
+              FBottomNavigationBarItem(
+                icon: FIcon(FAssets.icons.settings),
+                label: const Text('Settings'),
+              ),
+            ],
           ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 }
 
 final headers = [
@@ -79,42 +111,3 @@ final contents = [
     ],
   ),
 ];
-
-class _Demo extends StatefulWidget {
-  const _Demo();
-
-  @override
-  State<_Demo> createState() => _DemoState();
-}
-
-class _DemoState extends State<_Demo> {
-  int index = 3;
-
-  @override
-  Widget build(BuildContext context) => FScaffold(
-        header: headers[index],
-        content: contents[index],
-        footer: FBottomNavigationBar(
-          index: index,
-          onChange: (index) => setState(() => this.index = index),
-          children: [
-            FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.house),
-              label: const Text('Home'),
-            ),
-            FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.layoutGrid),
-              label: const Text('Categories'),
-            ),
-            FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.search),
-              label: const Text('Search'),
-            ),
-            FBottomNavigationBarItem(
-              icon: FIcon(FAssets.icons.settings),
-              label: const Text('Settings'),
-            ),
-          ],
-        ),
-      );
-}

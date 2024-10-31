@@ -91,13 +91,7 @@ FSelectTileGroup<Value>(
 
     class MultiValueFormState extends State<MultiValueForm> {
       final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      late final FMultiSelectGroupController<Language> controller;
-
-      @override
-      void initState() {
-        super.initState();
-        controller = FMultiSelectGroupController(values: {});
-      }
+      final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
 
       @override
       Widget build(BuildContext context) => Form(
@@ -163,13 +157,7 @@ FSelectTileGroup<Value>(
 
     class RadioFormState extends State<RadioForm> {
       final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      late final FRadioSelectGroupController<Notification> controller;
-
-      @override
-      void initState() {
-        super.initState();
-        controller = FRadioSelectGroupController();
-      }
+      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
 
       @override
       Widget build(BuildContext context) => Form(

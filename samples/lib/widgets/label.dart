@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_samples/sample_scaffold.dart';
+import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class VerticalLabelPage extends SampleScaffold {
+class VerticalLabelPage extends Sample {
   final String state;
 
   VerticalLabelPage({
@@ -15,7 +15,7 @@ class VerticalLabelPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) {
+  Widget sample(BuildContext context) {
     final labelState = switch (state) {
       'enabled' => FLabelState.enabled,
       'disabled' => FLabelState.disabled,
@@ -23,33 +23,28 @@ class VerticalLabelPage extends SampleScaffold {
       String() => FLabelState.enabled,
     };
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 290),
-          child: FLabel(
-            axis: Axis.vertical,
-            label: const Text('Email'),
-            description: const Text('Enter your email address.'),
-            error: const Text('Please enter a valid email address.'),
-            state: labelState,
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Colors.grey,
-              ),
-              child: SizedBox(width: 250, height: 30),
-            ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 290),
+      child: FLabel(
+        axis: Axis.vertical,
+        label: const Text('Email'),
+        description: const Text('Enter your email address.'),
+        error: const Text('Please enter a valid email address.'),
+        state: labelState,
+        child: const DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.grey,
           ),
+          child: SizedBox(width: 250, height: 30),
         ),
-      ],
+      ),
     );
   }
 }
 
 @RoutePage()
-class HorizontalLabelPage extends SampleScaffold {
+class HorizontalLabelPage extends Sample {
   final String state;
 
   HorizontalLabelPage({
@@ -58,7 +53,7 @@ class HorizontalLabelPage extends SampleScaffold {
   });
 
   @override
-  Widget child(BuildContext context) {
+  Widget sample(BuildContext context) {
     final labelState = switch (state) {
       'enabled' => FLabelState.enabled,
       'disabled' => FLabelState.disabled,
@@ -66,27 +61,22 @@ class HorizontalLabelPage extends SampleScaffold {
       String() => FLabelState.enabled,
     };
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 290),
-          child: FLabel(
-            axis: Axis.horizontal,
-            label: const Text('Accept terms and conditions'),
-            description: const Text('You agree to our terms and conditions.'),
-            error: const Text('Please accept the terms.'),
-            state: labelState,
-            child: const DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Colors.grey,
-              ),
-              child: SizedBox(width: 16, height: 16),
-            ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 290),
+      child: FLabel(
+        axis: Axis.horizontal,
+        label: const Text('Accept terms and conditions'),
+        description: const Text('You agree to our terms and conditions.'),
+        error: const Text('Please accept the terms.'),
+        state: labelState,
+        child: const DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.grey,
           ),
+          child: SizedBox(width: 16, height: 16),
         ),
-      ],
+      ),
     );
   }
 }
