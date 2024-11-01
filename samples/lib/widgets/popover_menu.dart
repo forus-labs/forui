@@ -7,11 +7,9 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PopoverMenuPage extends StatefulSample {
-  final FThemeData theme;
-
   PopoverMenuPage({
-    @queryParam String theme = 'zinc-light',
-  }) : theme = themes[theme]!;
+    @queryParam super.theme = 'zinc-light',
+  });
 
   @override
   State<PopoverMenuPage> createState() => _State();
