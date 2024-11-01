@@ -22,7 +22,14 @@
 
 * Add `FPopover.ignoreDirectionalPadding`.
 
+* Add `FPopover.tappable(...)`.
+
 * Add `FPortal.offset`.
+
+### Changes
+
+* **Breaking** Change `FPopover()` to not automatically wrap a target in a `GestureDetector` - use `FPopover.tappable(...)`
+  instead.
 
 ### Fixes
 

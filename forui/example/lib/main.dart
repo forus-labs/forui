@@ -50,10 +50,10 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
             actions: [
               FPopover(
                 style: context.theme.popoverStyle.copyWith(
-                  // padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
                   decoration: context.theme.popoverStyle.decoration.copyWith(
                     boxShadow: [
-                      BoxShadow(
+                      const BoxShadow(
                         color: Color(0x0d000000),
                         offset: Offset(0, 1),
                         blurRadius: 2,
@@ -64,6 +64,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                 controller: controller,
                 followerAnchor: Alignment.topRight,
                 targetAnchor: Alignment.bottomRight,
+                ignoreDirectionalPadding: false,
                 // hideOnTapOutside: widget.hideOnTapOutside,
                 // shift: widget.shift,
                 followerBuilder: (context, style, _) => ConstrainedBox(
