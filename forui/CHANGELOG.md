@@ -20,6 +20,8 @@
 
 * Add `FCalendarDayPickerStyle.tileSize`.
 
+* Add `FPopover.ignoreDirectionalPadding`.
+
 * Add `FPortal.offset`.
 
 ### Fixes

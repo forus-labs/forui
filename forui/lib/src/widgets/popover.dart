@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/rendering.dart';
 
 import 'package:meta/meta.dart';
 
@@ -99,6 +100,11 @@ class FPopover extends StatefulWidget {
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
   final bool hideOnTapOutside;
 
+  /// True if the follower should ignore the cross-axis padding of the anchor when aligning to it. Defaults to true.
+  ///
+  /// Diagonal corners are ignored.
+  final bool ignoreDirectionalPadding;
+
   /// The follower's semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
@@ -140,6 +146,7 @@ class FPopover extends StatefulWidget {
     this.style,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
+    this.ignoreDirectionalPadding = true,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -163,6 +170,13 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
+      ..add(
+        FlagProperty(
+          'anchorIgnoreCrossAxisPadding',
+          value: ignoreDirectionalPadding,
+          ifTrue: 'anchorIgnoreCrossAxisPadding',
+        ),
+      )
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -177,11 +191,17 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
+    final follower = widget.followerAnchor;
+    final target = widget.targetAnchor;
+
     return FPortal(
       controller: widget.controller._overlay,
       followerAnchor: widget.followerAnchor,
       targetAnchor: widget.targetAnchor,
       shift: widget.shift,
+      offset: widget.ignoreDirectionalPadding
+          ? Alignments.ignoreDirectionalPadding(style.padding, follower, target)
+          : Offset.zero,
       followerBuilder: (context) => CallbackShortcuts(
         bindings: {
           const SingleActivator(LogicalKeyboardKey.escape): widget.controller.hide,
