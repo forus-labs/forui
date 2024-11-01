@@ -20,25 +20,25 @@ class TileGroupPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTileGroup(
-    label: const Text('Settings'),
-    description: const Text('Personalize your experience'),
-    divider: divider,
-    children: [
-      FTile(
-        prefixIcon: FIcon(FAssets.icons.user),
-        title: const Text('Personalization'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
-        onPress: () {},
-      ),
-      FTile(
-        prefixIcon: FIcon(FAssets.icons.wifi),
-        title: const Text('WiFi'),
-        details: const Text('Forus Labs (5G)'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
-        onPress: () {},
-      ),
-    ],
-  );
+        label: const Text('Settings'),
+        description: const Text('Personalize your experience'),
+        divider: divider,
+        children: [
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.user),
+            title: const Text('Personalization'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.wifi),
+            title: const Text('WiFi'),
+            details: const Text('Forus Labs (5G)'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+        ],
+      );
 }
 
 @RoutePage()
@@ -63,40 +63,40 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
 
   @override
   Widget build(BuildContext context) => FTileGroup.merge(
-    label: const Text('Settings'),
-    children: [
-      FTileGroup(
+        label: const Text('Settings'),
         children: [
-          FTile(
-            prefixIcon: FIcon(FAssets.icons.user),
-            title: const Text('Personalization'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () {},
+          FTileGroup(
+            children: [
+              FTile(
+                prefixIcon: FIcon(FAssets.icons.user),
+                title: const Text('Personalization'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+              FTile(
+                prefixIcon: FIcon(FAssets.icons.wifi),
+                title: const Text('WiFi'),
+                details: const Text('Forus Labs (5G)'),
+                suffixIcon: FIcon(FAssets.icons.chevronRight),
+                onPress: () {},
+              ),
+            ],
           ),
-          FTile(
-            prefixIcon: FIcon(FAssets.icons.wifi),
-            title: const Text('WiFi'),
-            details: const Text('Forus Labs (5G)'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
-            onPress: () {},
+          FSelectTileGroup(
+            controller: controller,
+            children: [
+              FSelectTile(
+                title: const Text('List View'),
+                value: 'List',
+              ),
+              FSelectTile(
+                title: const Text('Grid View'),
+                value: 'Grid',
+              ),
+            ],
           ),
         ],
-      ),
-      FSelectTileGroup(
-        controller: controller,
-        children: [
-          FSelectTile(
-            title: const Text('List View'),
-            value: 'List',
-          ),
-          FSelectTile(
-            title: const Text('Grid View'),
-            value: 'Grid',
-          ),
-        ],
-      ),
-    ],
-  );
+      );
 
   @override
   void dispose() {

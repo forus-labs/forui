@@ -11,12 +11,12 @@ class RadioPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => ConstrainedBox(
-    constraints: const BoxConstraints(maxWidth: 290),
-    child: FRadio(
-      label: const Text('Default'),
-      description: const Text('The description of the default option.'),
-      value: true,
-      onChange: (value) {},
-    ),
-  );
+        constraints: const BoxConstraints(maxWidth: 290),
+        child: FRadio(
+          label: const Text('Default'),
+          description: const Text('The description of the default option.'),
+          value: true,
+          onChange: (value) {},
+        ),
+      );
 }

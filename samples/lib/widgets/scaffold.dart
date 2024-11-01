@@ -20,39 +20,39 @@ class _State extends StatefulSampleState<ScaffoldPage> {
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      SizedBox(
-        height: 500,
-        child: FScaffold(
-          header: headers[index],
-          content: contents[index],
-          footer: FBottomNavigationBar(
-            index: index,
-            onChange: (index) => setState(() => this.index = index),
-            children: [
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.house),
-                label: const Text('Home'),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 500,
+            child: FScaffold(
+              header: headers[index],
+              content: contents[index],
+              footer: FBottomNavigationBar(
+                index: index,
+                onChange: (index) => setState(() => this.index = index),
+                children: [
+                  FBottomNavigationBarItem(
+                    icon: FIcon(FAssets.icons.house),
+                    label: const Text('Home'),
+                  ),
+                  FBottomNavigationBarItem(
+                    icon: FIcon(FAssets.icons.layoutGrid),
+                    label: const Text('Categories'),
+                  ),
+                  FBottomNavigationBarItem(
+                    icon: FIcon(FAssets.icons.search),
+                    label: const Text('Search'),
+                  ),
+                  FBottomNavigationBarItem(
+                    icon: FIcon(FAssets.icons.settings),
+                    label: const Text('Settings'),
+                  ),
+                ],
               ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.layoutGrid),
-                label: const Text('Categories'),
-              ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.search),
-                label: const Text('Search'),
-              ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.settings),
-                label: const Text('Settings'),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    ],
-  );
+        ],
+      );
 }
 
 final headers = [
