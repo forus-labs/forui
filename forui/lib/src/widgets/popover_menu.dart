@@ -5,9 +5,8 @@ import 'package:forui/forui.dart';
 /// A popover menu displays a menu in a portal aligned to a child.
 ///
 /// See:
-/// // TODO: confirm link
-/// * https://forui.dev/docs/overlay/popover for working examples.
-/// * [FPopoverController] for controlling a popover.
+/// * https://forui.dev/docs/overlay/popover-menu for working examples.
+/// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
 class FPopoverMenu extends StatefulWidget {

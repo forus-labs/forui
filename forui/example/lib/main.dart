@@ -48,9 +48,69 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
           header: FHeader(
             title: const Text('Example'),
             actions: [
-              FHeaderAction(
-                icon: FIcon(FAssets.icons.plus),
-                onPress: controller.toggle,
+              FPopover(
+                style: context.theme.popoverStyle.copyWith(
+                  padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 5),
+                  decoration: context.theme.popoverStyle.decoration.copyWith(
+                    boxShadow: [
+                      const BoxShadow(
+                        color: Color(0x0d000000),
+                        offset: Offset(0, 1),
+                        blurRadius: 2,
+                      ),
+                    ],
+                  ),
+                ),
+                controller: controller,
+                followerAnchor: Alignment.topRight,
+                targetAnchor: Alignment.bottomRight,
+                ignoreDirectionalPadding: false,
+                // hideOnTapOutside: widget.hideOnTapOutside,
+                // shift: widget.shift,
+                followerBuilder: (context, style, _) => ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 250),
+                    child: FTileGroup.merge(
+                      divider: FTileDivider.indented,
+                      children: [
+                        FTileGroup(
+                          divider: FTileDivider.none,
+                          children: [
+                            FTile(
+                              prefixIcon: FIcon.empty(),
+                              title: const Text('Personalization'),
+                              suffixIcon: FIcon(FAssets.icons.user),
+                              onPress: () {},
+                            ),
+                            FTile(
+                              prefixIcon: FIcon.empty(),
+                              title: const Text('Network'),
+                              suffixIcon: FIcon(FAssets.icons.appWindowMac),
+                              onPress: () {},
+                            ),
+                          ],
+                        ),
+                        FSelectTileGroup(
+                          divider: FTileDivider.none,
+                          controller: selectGroupController,
+                          children: [
+                            FSelectTile(
+                              title: const Text('List View'),
+                              suffixIcon: FIcon(FAssets.icons.list),
+                              value: 'List',
+                            ),
+                            FSelectTile(
+                              title: const Text('Grid View'),
+                              suffixIcon: FIcon(FAssets.icons.layoutGrid),
+                              value: 'Grid',
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
+                target: FHeaderAction(
+                  icon: FIcon(FAssets.icons.plus),
+                  onPress: controller.toggle,
+                ),
               ),
             ],
           ),
