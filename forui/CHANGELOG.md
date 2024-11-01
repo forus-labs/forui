@@ -24,6 +24,8 @@
 
 * Add `FPopover.tappable(...)`.
 
+* Add `FPopoverMenu`.
+
 * Add `FPortal.offset`.
 
 ### Changes

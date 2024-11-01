@@ -198,16 +198,16 @@ class FPopover extends StatefulWidget {
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
       ..add(
         FlagProperty(
-          'anchorIgnoreCrossAxisPadding',
+          'ignoreDirectionalPadding',
           value: ignoreDirectionalPadding,
-          ifTrue: 'anchorIgnoreCrossAxisPadding',
+          ifTrue: 'ignoreDirectionalPadding',
         ),
       )
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(DiagnosticsProperty('follower', followerBuilder));
+      ..add(DiagnosticsProperty('followerBuilder', followerBuilder));
   }
 }
 
@@ -220,7 +220,6 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     super.initState();
     _controller = widget.controller ?? FPopoverController(vsync: this);
   }
-
 
   @override
   void didUpdateWidget(covariant FPopover old) {
@@ -300,7 +299,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 }
 
 /// A [FPopover]'s style.
-final class FPopoverStyle with Diagnosticable {
+class FPopoverStyle with Diagnosticable {
   /// The popover's default shadow in [FPopoverStyle.inherit].
   static const shadow = [
     BoxShadow(

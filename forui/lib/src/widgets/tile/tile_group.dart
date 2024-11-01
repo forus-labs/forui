@@ -22,7 +22,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// True if the group is enabled. Defaults to true.
   final bool? enabled;
 
-  /// The divider between tiles. Defaults tp [FTileDivider.indented].
+  /// The divider between tiles. Defaults to [FTileDivider.indented].
   final FTileDivider divider;
 
   /// The group's semantic label.
