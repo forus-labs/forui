@@ -23,7 +23,31 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => const Column();
+  Widget build(BuildContext context) => Form(
+        child: Column(
+          children: [
+            FSelectMenuTile(
+              groupController: selectGroupController,
+              autoHide: true,
+              validator: (value) => value == null ? 'Select an item' : null,
+              menu: [
+                FSelectTile(title: const Text('Item 1'), value: '1'),
+                FSelectTile(title: const Text('Item 2'), value: '2'),
+                FSelectTile(title: const Text('Item 3'), value: '3'),
+                FSelectTile(title: const Text('None'), value: 'None'),
+              ],
+              title: const Text('Repeat'),
+              details: ListenableBuilder(
+                listenable: selectGroupController,
+                builder: (context, _) => Text(
+                    (selectGroupController.values.isEmpty || selectGroupController.values.first == 'None')
+                        ? 'None'
+                        : 'Item ${selectGroupController.values.first}'),
+              ),
+            ),
+          ],
+        ),
+      );
 
   @override
   void dispose() {

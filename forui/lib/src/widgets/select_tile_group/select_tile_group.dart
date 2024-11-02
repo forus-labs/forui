@@ -75,6 +75,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
               null => (FLabelState.enabled, null),
             };
 
+            print('build');
+
             return FTileGroup(
               style: groupStyle,
               divider: divider,
