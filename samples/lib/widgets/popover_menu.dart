@@ -38,31 +38,26 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
               FTileGroup(
                 children: [
                   FTile(
-                    prefixIcon: FIcon.empty(),
+                    prefixIcon: FIcon(FAssets.icons.user),
                     title: const Text('Personalization'),
-                    suffixIcon: FIcon(FAssets.icons.user),
                     onPress: () {},
                   ),
                   FTile(
-                    prefixIcon: FIcon.empty(),
+                    prefixIcon: FIcon(FAssets.icons.paperclip),
                     title: const Text('Add attachments'),
-                    suffixIcon: FIcon(FAssets.icons.paperclip),
                     onPress: () {},
                   ),
                 ],
               ),
-              FSelectTileGroup(
-                controller: groupController,
+              FTileGroup(
                 children: [
-                  FSelectTile(
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.list),
                     title: const Text('List View'),
-                    suffixIcon: FIcon(FAssets.icons.list),
-                    value: 'List',
                   ),
-                  FSelectTile(
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.layoutGrid),
                     title: const Text('Grid View'),
-                    suffixIcon: FIcon(FAssets.icons.layoutGrid),
-                    value: 'Grid',
                   ),
                 ],
               ),

@@ -59,7 +59,7 @@ class _MergeTileGroup extends StatefulWidget {
 }
 
 class _MergeTileGroupState extends State<_MergeTileGroup> {
-  late FRadioSelectGroupController<String> controller = FRadioSelectGroupController();
+  late FRadioSelectGroupController<String> controller = FRadioSelectGroupController(value: 'List');
 
   @override
   Widget build(BuildContext context) => FTileGroup.merge(
