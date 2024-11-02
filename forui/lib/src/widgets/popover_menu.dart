@@ -157,6 +157,19 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
   }
 
   @override
+  void didUpdateWidget(covariant FPopoverMenu old) {
+    super.didUpdateWidget(old);
+    if (widget.controller == old.controller) {
+      return;
+    }
+
+    if (old.controller != null) {
+      _controller.dispose();
+    }
+    _controller = widget.controller ?? FPopoverController(vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverMenuStyle;
     return (widget._tappable ? FPopover.tappable : FPopover.new)(
