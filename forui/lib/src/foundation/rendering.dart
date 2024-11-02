@@ -42,11 +42,11 @@ extension Alignments on Alignment {
         _ when x == 1 && (target.x == x || target.x == 0) => padding.right,
         _ => 0,
       },
-        switch (target) {
-          _ when y == -1 && (target.y == y || target.y == 0) => -padding.top,
-          _ when y == 1 && (target.y == y || target.y == 0) => padding.bottom,
-          _ => 0,
-        },
+      switch (target) {
+        _ when y == -1 && (target.y == y || target.y == 0) => -padding.top,
+        _ when y == 1 && (target.y == y || target.y == 0) => padding.bottom,
+        _ => 0,
+      },
     );
   }
 

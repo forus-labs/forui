@@ -206,7 +206,7 @@ final class FCalendarDayPickerStyle with Diagnosticable {
     required this.unselectableStyles,
     this.startDayOfWeek,
     this.tileSize = 42,
-  }) : assert(
+  })  : assert(
           startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
           'startDayOfWeek must be between DateTime.monday (1) and DateTime.sunday (7).',
         ),

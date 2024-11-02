@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/rendering.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/foundation/tappable.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
