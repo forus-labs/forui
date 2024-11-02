@@ -148,7 +148,7 @@ class FPopoverMenu extends StatefulWidget {
 }
 
 class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderStateMixin {
-  late final FPopoverController _controller;
+  late FPopoverController _controller;
 
   @override
   void initState() {
