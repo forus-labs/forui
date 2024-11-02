@@ -208,15 +208,6 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
 
 /// A [FPopoverMenuStyle]'s style.
 final class FPopoverMenuStyle extends FPopoverStyle {
-  /// The popover's default shadow in [FPopoverMenuStyle.inherit].
-  static const shadow = [
-    BoxShadow(
-      color: Color(0x0d000000),
-      offset: Offset(0, 1),
-      blurRadius: 2,
-    ),
-  ];
-
   /// The tile group's style.
   final FTileGroupStyle tileGroupStyle;
 
@@ -235,19 +226,13 @@ final class FPopoverMenuStyle extends FPopoverStyle {
   }) : assert(0 < maxWidth, 'maxWidth must be positive');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties from [colorScheme], [style] and [typography].
-  FPopoverMenuStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
-      : this(
-          tileGroupStyle: FTileGroupStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
-          decoration: BoxDecoration(
-            color: colorScheme.background,
-            borderRadius: style.borderRadius,
-            border: Border.all(
-              width: style.borderWidth,
-              color: colorScheme.border,
-            ),
-            boxShadow: shadow,
-          ),
-        );
+  FPopoverMenuStyle.inherit({
+    required super.colorScheme,
+    required super.style,
+    required FTypography typography,
+  })  : tileGroupStyle = FTileGroupStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+        maxWidth = 250,
+        super.inherit();
 
   /// Returns a copy of this style with the given fields replaced by the new values.
   /// @useResult
