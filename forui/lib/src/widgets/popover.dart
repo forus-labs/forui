@@ -303,16 +303,9 @@ class FPopoverStyle with Diagnosticable {
   /// The popover's default shadow in [FPopoverStyle.inherit].
   static const shadow = [
     BoxShadow(
-      color: Color(0x1a000000),
-      offset: Offset(0, 4),
-      blurRadius: 6,
-      spreadRadius: -1,
-    ),
-    BoxShadow(
-      color: Color(0x1a000000),
-      offset: Offset(0, 2),
-      blurRadius: 4,
-      spreadRadius: -2,
+      color: Color(0x0d000000),
+      offset: Offset(0, 1),
+      blurRadius: 2,
     ),
   ];
 
