@@ -18,12 +18,12 @@ class TilePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTile(
-    enabled: enabled,
-    prefixIcon: FIcon(FAssets.icons.user),
-    title: const Text('Personalization'),
-    suffixIcon: FIcon(FAssets.icons.chevronRight),
-    onPress: tappable ? () {} : null,
-  );
+        enabled: enabled,
+        prefixIcon: FIcon(FAssets.icons.user),
+        title: const Text('Personalization'),
+        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        onPress: tappable ? () {} : null,
+      );
 }
 
 @RoutePage()
@@ -34,12 +34,12 @@ class TileSubtitlePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTile(
-    prefixIcon: FIcon(FAssets.icons.bell),
-    title: const Text('Notifications'),
-    subtitle: const Text('Banners, Sounds, Badges'),
-    suffixIcon: FIcon(FAssets.icons.chevronRight),
-    onPress: () {},
-  );
+        prefixIcon: FIcon(FAssets.icons.bell),
+        title: const Text('Notifications'),
+        subtitle: const Text('Banners, Sounds, Badges'),
+        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        onPress: () {},
+      );
 }
 
 @RoutePage()
@@ -50,10 +50,10 @@ class TileDetailsPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTile(
-    prefixIcon: FIcon(FAssets.icons.wifi),
-    title: const Text('WiFi'),
-    details: const Text('Forus Labs (5G)'),
-    suffixIcon: FIcon(FAssets.icons.chevronRight),
-    onPress: () {},
-  );
+        prefixIcon: FIcon(FAssets.icons.wifi),
+        title: const Text('WiFi'),
+        details: const Text('Forus Labs (5G)'),
+        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        onPress: () {},
+      );
 }

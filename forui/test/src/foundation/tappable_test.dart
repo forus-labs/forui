@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -98,6 +99,28 @@ void main() {
 
         expect(pressCount, 0);
         expect(longPressCount, enabled ? 1 : 0);
+      });
+
+      testWidgets('shortcut', (tester) async {
+        var pressCount = 0;
+        var longPressCount = 0;
+
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FTappable(
+              autofocus: true,
+              builder: (_, value, __) => Text('$value'),
+              onPress: enabled ? () => pressCount++ : null,
+              onLongPress: enabled ? () => longPressCount++ : null,
+            ),
+          ),
+        );
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+
+        expect(pressCount, enabled ? 1 : 0);
+        expect(longPressCount, 0);
       });
     }
   });
@@ -219,6 +242,28 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
         expect(key.currentState!.animation.value, 1);
+      });
+
+      testWidgets('shortcut', (tester) async {
+        var pressCount = 0;
+        var longPressCount = 0;
+
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FTappable.animated(
+              autofocus: true,
+              builder: (_, value, __) => Text('$value'),
+              onPress: enabled ? () => pressCount++ : null,
+              onLongPress: enabled ? () => longPressCount++ : null,
+            ),
+          ),
+        );
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+
+        expect(pressCount, enabled ? 1 : 0);
+        expect(longPressCount, 0);
       });
     }
   });

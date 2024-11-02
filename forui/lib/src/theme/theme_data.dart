@@ -71,6 +71,9 @@ final class FThemeData with Diagnosticable {
   /// The popover's style.
   final FPopoverStyle popoverStyle;
 
+  /// The popover menu's style.
+  final FPopoverMenuStyle popoverMenuStyle;
+
   /// The progress styles.
   final FProgressStyle progressStyle;
 
@@ -127,6 +130,7 @@ final class FThemeData with Diagnosticable {
     required this.headerStyle,
     required this.labelStyles,
     required this.popoverStyle,
+    required this.popoverMenuStyle,
     required this.progressStyle,
     required this.radioStyle,
     required this.resizableStyle,
@@ -168,6 +172,7 @@ final class FThemeData with Diagnosticable {
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
+      popoverMenuStyle: FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       radioStyle: FRadioStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
@@ -243,6 +248,7 @@ final class FThemeData with Diagnosticable {
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
     FPopoverStyle? popoverStyle,
+    FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
@@ -273,6 +279,7 @@ final class FThemeData with Diagnosticable {
         headerStyle: headerStyle ?? this.headerStyle,
         labelStyles: labelStyles ?? this.labelStyles,
         popoverStyle: popoverStyle ?? this.popoverStyle,
+        popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
         progressStyle: progressStyle ?? this.progressStyle,
         radioStyle: radioStyle ?? this.radioStyle,
         resizableStyle: resizableStyle ?? this.resizableStyle,
@@ -308,6 +315,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
@@ -344,6 +352,7 @@ final class FThemeData with Diagnosticable {
           headerStyle == other.headerStyle &&
           labelStyles == other.labelStyles &&
           popoverStyle == other.popoverStyle &&
+          popoverMenuStyle == other.popoverMenuStyle &&
           progressStyle == other.progressStyle &&
           radioStyle == other.radioStyle &&
           resizableStyle == other.resizableStyle &&
@@ -376,6 +385,7 @@ final class FThemeData with Diagnosticable {
       headerStyle.hashCode ^
       labelStyles.hashCode ^
       popoverStyle.hashCode ^
+      popoverMenuStyle.hashCode ^
       progressStyle.hashCode ^
       radioStyle.hashCode ^
       resizableStyle.hashCode ^

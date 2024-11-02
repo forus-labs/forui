@@ -90,6 +90,65 @@ void main() {
           matchesGoldenFile('popover/shown-non-touch-device-${theme.name}.png'),
         );
       });
+
+      testWidgets('${theme.name} with directional padding', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FPopover(
+              followerAnchor: Alignment.topRight,
+              targetAnchor: Alignment.bottomRight,
+              ignoreDirectionalPadding: false,
+              style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
+              controller: controller,
+              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              target: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(
+                  dimension: 100,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('popover/directional-padding-${theme.name}.png'),
+        );
+      });
+
+      testWidgets('${theme.name} ignore directional padding', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FPopover(
+              followerAnchor: Alignment.topRight,
+              targetAnchor: Alignment.bottomRight,
+              style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
+              controller: controller,
+              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              target: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(
+                  dimension: 100,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('popover/ignore-directional-padding-${theme.name}.png'),
+        );
+      });
     });
   }
 

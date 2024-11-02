@@ -121,7 +121,6 @@ void main() {
               child: FTileGroup(
                 label: const Text('Network'),
                 description: const Text('Description'),
-                error: const Text('This should not appear'),
                 divider: divider,
                 children: [
                   FTile(
@@ -202,7 +201,7 @@ void main() {
                   label: const Text('Network'),
                   description: const Text('Configure your network'),
                   error: const Text('This should not appear'),
-                  state: FLabelState.disabled,
+                  enabled: false,
                   divider: divider,
                   children: [
                     FTile(
@@ -241,7 +240,6 @@ void main() {
               label: const Text('Network'),
               description: const Text('Description'),
               error: const Text('This should appear'),
-              state: FLabelState.error,
               children: [
                 FTile(
                   prefixIcon: FIcon(FAssets.icons.wifi),
@@ -335,7 +333,7 @@ void main() {
         TestScaffold(
           child: FTileGroup(
             label: const Text('Network'),
-            state: FLabelState.disabled,
+            enabled: false,
             children: [
               FTile(
                 enabled: true,
@@ -468,7 +466,6 @@ void main() {
               child: FTileGroup.merge(
                 label: const Text('Network'),
                 description: const Text('Description'),
-                error: const Text('This should not appear'),
                 divider: divider,
                 children: [
                   FTileGroup(
@@ -548,7 +545,7 @@ void main() {
               label: const Text('Network'),
               description: const Text('Description'),
               error: const Text('This should not appear'),
-              state: FLabelState.disabled,
+              enabled: false,
               children: [
                 FTileGroup(
                   children: [
@@ -586,7 +583,6 @@ void main() {
               label: const Text('Network'),
               description: const Text('Description'),
               error: const Text('This should appear'),
-              state: FLabelState.error,
               children: [
                 FTileGroup(
                   children: [
@@ -653,6 +649,54 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/empty.png'));
       });
     }
+
+    testWidgets('full dividers between groups and no dividers between tiles', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup.merge(
+            divider: FTileDivider.indented,
+            children: [
+              FTileGroup(
+                divider: FTileDivider.none,
+                children: [
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('Personalization'),
+                    suffixIcon: FIcon(FAssets.icons.user),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('Network'),
+                    suffixIcon: FIcon(FAssets.icons.appWindowMac),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+              FTileGroup(
+                divider: FTileDivider.none,
+                children: [
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('List View'),
+                    suffixIcon: FIcon(FAssets.icons.list),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon.empty(),
+                    title: const Text('Grid View'),
+                    suffixIcon: FIcon(FAssets.icons.layoutGrid),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/full-no-dividers.png'));
+    });
 
     testWidgets('ignore group label', (tester) async {
       await tester.pumpWidget(
@@ -772,7 +816,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FTileGroup.merge(
-            state: FLabelState.disabled,
+            enabled: false,
             children: [
               FTileGroup(
                 children: [
@@ -793,7 +837,7 @@ void main() {
                 ],
               ),
               FTileGroup(
-                state: FLabelState.enabled,
+                enabled: true,
                 children: [
                   FTile(
                     prefixIcon: FIcon(FAssets.icons.wifi),

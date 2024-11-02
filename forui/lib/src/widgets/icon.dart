@@ -67,6 +67,8 @@ class FIconStyle with Diagnosticable {
 /// * [FIconStyle] for the properties that can be inherited.
 /// * [FAssets.icons] for bundled Forui icons.
 abstract class FIcon extends StatelessWidget {
+  static final _empty = FIcon(FAssets.icons.check, color: Colors.transparent);
+
   /// The icon's color.
   final Color? color;
 
@@ -88,8 +90,8 @@ abstract class FIcon extends StatelessWidget {
     bool allowDrawingOutsideViewBox,
     WidgetBuilder? placeholderBuilder,
     Clip clipBehavior,
-    Color color,
-    double size,
+    Color? color,
+    double? size,
     String? semanticLabel,
     Key? key,
   }) = _Icon;
@@ -104,11 +106,11 @@ abstract class FIcon extends StatelessWidget {
     double grade,
     double opticalSize,
     List<Shadow> shadows,
-    TextDirection textDirection,
+    TextDirection? textDirection,
     bool applyTextScaling,
-    Color color,
-    double size,
-    String semanticLabel,
+    Color? color,
+    double? size,
+    String? semanticLabel,
     Key? key,
   }) = _IconDataIcon;
 
@@ -141,6 +143,10 @@ abstract class FIcon extends StatelessWidget {
   /// );
   /// ```
   const factory FIcon.raw({required ValueWidgetBuilder<FIconStyle> builder, Widget? child, Key? key}) = _BuilderIcon;
+
+  /// Creates a placeholder icon.
+  factory FIcon.empty({double? size}) =>
+      size == null ? _empty : FIcon(FAssets.icons.check, color: Colors.transparent, size: size);
 
   const FIcon._({required this.color, this.size, this.semanticLabel, super.key});
 

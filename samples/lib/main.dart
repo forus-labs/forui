@@ -67,6 +67,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/label/vertical', page: VerticalLabelRoute.page),
         AutoRoute(path: '/label/horizontal', page: HorizontalLabelRoute.page),
         AutoRoute(path: '/popover/default', page: PopoverRoute.page),
+        AutoRoute(path: '/popover-menu/default', page: PopoverMenuRoute.page),
         AutoRoute(path: '/portal/default', page: PortalRoute.page),
         AutoRoute(path: '/progress/default', page: ProgressRoute.page),
         AutoRoute(path: '/radio/default', page: RadioRoute.page),

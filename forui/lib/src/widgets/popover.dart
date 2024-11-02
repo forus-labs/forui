@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/foundation/tappable.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
@@ -75,7 +76,7 @@ class FPopover extends StatefulWidget {
       : (follower: Alignment.topCenter, target: Alignment.bottomCenter);
 
   /// The controller that shows and hides the follower. It initially hides the follower.
-  final FPopoverController controller;
+  final FPopoverController? controller;
 
   /// The popover's style.
   final FPopoverStyle? style;
@@ -98,6 +99,11 @@ class FPopover extends StatefulWidget {
 
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
   final bool hideOnTapOutside;
+
+  /// True if the follower should ignore the cross-axis padding of the anchor when aligning to it. Defaults to true.
+  ///
+  /// Diagonal corners are ignored.
+  final bool ignoreDirectionalPadding;
 
   /// The follower's semantic label used by accessibility frameworks.
   final String? semanticLabel;
@@ -132,7 +138,9 @@ class FPopover extends StatefulWidget {
   /// The target.
   final Widget target;
 
-  /// Creates a popover.
+  final bool _tappable;
+
+  /// Creates a popover that only shows the follower when the controller is manually toggled.
   FPopover({
     required this.controller,
     required this.followerBuilder,
@@ -140,6 +148,7 @@ class FPopover extends StatefulWidget {
     this.style,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
+    this.ignoreDirectionalPadding = true,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -148,7 +157,31 @@ class FPopover extends StatefulWidget {
     Alignment? targetAnchor,
     super.key,
   })  : followerAnchor = followerAnchor ?? _platform.follower,
-        targetAnchor = targetAnchor ?? _platform.target;
+        targetAnchor = targetAnchor ?? _platform.target,
+        _tappable = false;
+
+  /// Creates a popover that is automatically shown when the [target] is tapped.
+  ///
+  /// It is not recommended for the [target] to contain a [GestureDetector], such as [FButton]. This is because only
+  /// one `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s.
+  FPopover.tappable({
+    required this.followerBuilder,
+    required this.target,
+    this.controller,
+    this.style,
+    this.shift = FPortalFollowerShift.flip,
+    this.hideOnTapOutside = true,
+    this.ignoreDirectionalPadding = true,
+    this.semanticLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    Alignment? followerAnchor,
+    Alignment? targetAnchor,
+    super.key,
+  })  : followerAnchor = followerAnchor ?? _platform.follower,
+        targetAnchor = targetAnchor ?? _platform.target,
+        _tappable = true;
 
   @override
   State<FPopover> createState() => _State();
@@ -163,28 +196,61 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
+      ..add(
+        FlagProperty(
+          'ignoreDirectionalPadding',
+          value: ignoreDirectionalPadding,
+          ifTrue: 'ignoreDirectionalPadding',
+        ),
+      )
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(DiagnosticsProperty('follower', followerBuilder));
+      ..add(DiagnosticsProperty('followerBuilder', followerBuilder));
   }
 }
 
 class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   final Key _group = UniqueKey();
+  late final FPopoverController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? FPopoverController(vsync: this);
+  }
+
+  @override
+  void didUpdateWidget(covariant FPopover old) {
+    super.didUpdateWidget(old);
+    if (widget.controller == old.controller) {
+      return;
+    }
+
+    if (old.controller != null) {
+      _controller.dispose();
+    }
+    _controller = widget.controller ?? FPopoverController(vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
+    final follower = widget.followerAnchor;
+    final target = widget.targetAnchor;
+
     return FPortal(
-      controller: widget.controller._overlay,
+      controller: _controller._overlay,
       followerAnchor: widget.followerAnchor,
       targetAnchor: widget.targetAnchor,
       shift: widget.shift,
+      offset: widget.ignoreDirectionalPadding
+          ? Alignments.ignoreDirectionalPadding(style.padding, follower, target)
+          : Offset.zero,
       followerBuilder: (context) => CallbackShortcuts(
         bindings: {
-          const SingleActivator(LogicalKeyboardKey.escape): widget.controller.hide,
+          const SingleActivator(LogicalKeyboardKey.escape): _controller.hide,
         },
         child: Semantics(
           label: widget.semanticLabel,
@@ -193,12 +259,12 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             child: Padding(
               padding: style.padding,
               child: FadeTransition(
-                opacity: widget.controller._fade,
+                opacity: _controller._fade,
                 child: ScaleTransition(
-                  scale: widget.controller._scale,
+                  scale: _controller._scale,
                   child: TapRegion(
                     groupId: _group,
-                    onTapOutside: widget.hideOnTapOutside ? (_) => widget.controller.hide() : null,
+                    onTapOutside: widget.hideOnTapOutside ? (_) => _controller.hide() : null,
                     child: DecoratedBox(
                       decoration: style.decoration,
                       child: widget.followerBuilder(context, style, null),
@@ -212,31 +278,34 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       ),
       child: TapRegion(
         groupId: _group,
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: widget.controller.toggle,
-          child: widget.target,
-        ),
+        child: widget._tappable
+            ? GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                onTap: _controller.toggle,
+                child: widget.target,
+              )
+            : widget.target,
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 }
 
 /// A [FPopover]'s style.
-final class FPopoverStyle with Diagnosticable {
+class FPopoverStyle with Diagnosticable {
   /// The popover's default shadow in [FPopoverStyle.inherit].
   static const shadow = [
     BoxShadow(
-      color: Color(0x1a000000),
-      offset: Offset(0, 4),
-      blurRadius: 6,
-      spreadRadius: -1,
-    ),
-    BoxShadow(
-      color: Color(0x1a000000),
-      offset: Offset(0, 2),
-      blurRadius: 4,
-      spreadRadius: -2,
+      color: Color(0x0d000000),
+      offset: Offset(0, 1),
+      blurRadius: 2,
     ),
   ];
 

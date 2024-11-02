@@ -54,18 +54,18 @@ abstract class StatefulSample extends StatefulWidget {
 abstract class StatefulSampleState<T extends StatefulSample> extends State<T> {
   @override
   Widget build(BuildContext context) => FTheme(
-    data: widget.theme,
-    child: FScaffold(
-      content: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: Builder(
-            builder: sample,
+        data: widget.theme,
+        child: FScaffold(
+          content: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 400),
+              child: Builder(
+                builder: sample,
+              ),
+            ),
           ),
         ),
-      ),
-    ),
-  );
+      );
 
   Widget sample(BuildContext context);
 }

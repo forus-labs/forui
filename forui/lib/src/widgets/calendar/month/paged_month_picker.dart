@@ -34,7 +34,8 @@ class PagedMonthPicker extends PagedPicker {
 class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
   @override
   Widget buildItem(BuildContext context, int page) => MonthPicker(
-        style: widget.style.yearMonthPickerStyle,
+        yearMonthStyle: widget.style.yearMonthPickerStyle,
+        dayStyle: widget.style.dayPickerStyle,
         currentYear: widget.initial,
         start: widget.start,
         end: widget.end,

@@ -84,8 +84,8 @@ class FCalendar extends StatelessWidget {
       child: Padding(
         padding: style.padding,
         child: SizedBox(
-          height: (DayPicker.maxRows * DayPicker.tileDimension) + Header.height + 5,
-          width: DateTime.daysPerWeek * DayPicker.tileDimension,
+          height: (DayPicker.maxRows * style.dayPickerStyle.tileSize) + Header.height + 5,
+          width: DateTime.daysPerWeek * style.dayPickerStyle.tileSize,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [

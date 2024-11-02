@@ -79,7 +79,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
               style: groupStyle,
               divider: divider,
               label: label,
-              state: labelState,
+              enabled: enabled,
               description: description,
               error: error,
               semanticLabel: semanticLabel,
@@ -141,6 +141,12 @@ class _State<T> extends FormFieldState<Set<T>> {
     // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
     widget.controller.values = widget.initialValue ?? {};
     super.reset();
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_handleControllerChanged);
+    super.dispose();
   }
 
   void _handleControllerChanged() {

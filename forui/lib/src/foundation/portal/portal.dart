@@ -29,6 +29,9 @@ class FPortal extends StatefulWidget {
   /// See [FPortalFollowerShift] for the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
+  /// The offset to adjust the [shift]ed follower by. Defaults to [Offset.zero].
+  final Offset offset;
+
   /// The follower.
   final WidgetBuilder followerBuilder;
 
@@ -43,6 +46,7 @@ class FPortal extends StatefulWidget {
     this.followerAnchor = Alignment.topCenter,
     this.targetAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
+    this.offset = Offset.zero,
     super.key,
   });
 
@@ -57,8 +61,8 @@ class FPortal extends StatefulWidget {
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
-      ..add(DiagnosticsProperty('followerBuilder', followerBuilder))
-      ..add(DiagnosticsProperty('child', child));
+      ..add(DiagnosticsProperty('offset', offset))
+      ..add(DiagnosticsProperty('followerBuilder', followerBuilder));
   }
 }
 
@@ -77,6 +81,7 @@ class _State extends State<FPortal> {
               followerAnchor: widget.followerAnchor,
               targetAnchor: widget.targetAnchor,
               shift: widget.shift,
+              offset: widget.offset,
               child: widget.followerBuilder(context),
             ),
           ),
@@ -90,6 +95,7 @@ class _Alignment extends SingleChildRenderObjectWidget {
   final Alignment _targetAnchor;
   final Alignment _followerAnchor;
   final Offset Function(Size, FPortalTarget, FPortalFollower) _shift;
+  final Offset _offset;
 
   const _Alignment({
     required Widget child,
@@ -97,10 +103,12 @@ class _Alignment extends SingleChildRenderObjectWidget {
     required Alignment targetAnchor,
     required Alignment followerAnchor,
     required Offset Function(Size, FPortalTarget, FPortalFollower) shift,
+    required Offset offset,
   })  : _link = link,
         _targetAnchor = targetAnchor,
         _followerAnchor = followerAnchor,
         _shift = shift,
+        _offset = offset,
         super(child: child);
 
   @override
@@ -109,6 +117,7 @@ class _Alignment extends SingleChildRenderObjectWidget {
         targetAnchor: _targetAnchor,
         followerAnchor: _followerAnchor,
         shift: _shift,
+        offset: _offset,
       );
 
   @override
@@ -117,7 +126,8 @@ class _Alignment extends SingleChildRenderObjectWidget {
       ..link = _link
       ..targetAnchor = _targetAnchor
       ..followerAnchor = _followerAnchor
-      ..shift = _shift;
+      ..shift = _shift
+      ..offset = _offset;
   }
 }
 
@@ -126,16 +136,19 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   Alignment _targetAnchor;
   Alignment _followerAnchor;
   Offset Function(Size, FPortalTarget, FPortalFollower) _shift;
+  Offset _offset;
 
   _RenderBox({
     required LayerLink link,
     required Alignment targetAnchor,
     required Alignment followerAnchor,
     required Offset Function(Size, FPortalTarget, FPortalFollower) shift,
+    required Offset offset,
   })  : _link = link,
         _targetAnchor = targetAnchor,
         _followerAnchor = followerAnchor,
-        _shift = shift;
+        _shift = shift,
+        _offset = offset;
 
   @override
   void performLayout() {
@@ -151,10 +164,11 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     final tuple = (child, child?.parentData, link.leader?.offset, link.leaderSize);
     if (tuple case (final child?, final BoxParentData data?, final offset?, final leaderSize?)) {
       data.offset = _shift(
-        size,
-        (offset: offset, size: leaderSize, anchor: targetAnchor),
-        (size: child.size, anchor: followerAnchor),
-      );
+            size,
+            (offset: offset, size: leaderSize, anchor: targetAnchor),
+            (size: child.size, anchor: followerAnchor),
+          ) +
+          _offset;
       context.paintChild(child, data.offset);
     }
   }
@@ -182,7 +196,8 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
       ..add(DiagnosticsProperty('link', link))
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
-      ..add(DiagnosticsProperty('shift', shift));
+      ..add(DiagnosticsProperty('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset));
   }
 
   LayerLink get link => _link;
@@ -226,6 +241,17 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     }
 
     _shift = value;
+    markNeedsPaint();
+  }
+
+  Offset get offset => _offset;
+
+  set offset(Offset value) {
+    if (_offset == value) {
+      return;
+    }
+
+    _offset = value;
     markNeedsPaint();
   }
 }

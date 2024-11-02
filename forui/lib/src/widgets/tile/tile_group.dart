@@ -19,10 +19,10 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The style.
   final FTileGroupStyle? style;
 
-  /// The group's state. Defaults to [FLabelState.enabled].
-  final FLabelState? state;
+  /// True if the group is enabled. Defaults to true.
+  final bool? enabled;
 
-  /// The divider between tiles. Defaults tp [FTileDivider.indented].
+  /// The divider between tiles. Defaults to [FTileDivider.indented].
   final FTileDivider divider;
 
   /// The group's semantic label.
@@ -34,8 +34,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The group's description. It is ignored if the group is part of a merged [FTileGroup].
   final Widget? description;
 
-  /// The group's error. It is ignored if the group is part of a merged [FTileGroup] or if the [state] is not
-  /// [FLabelState.error].
+  /// The group's error. It is ignored if the group is part of a merged [FTileGroup] or if the group is disabled.
   final Widget? error;
 
   /// The tiles in the group.
@@ -47,7 +46,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
     required List<FTileGroupMixin<FTileMixin>> children,
     FTileGroupStyle? style,
-    FLabelState state = FLabelState.enabled,
+    bool enabled = true,
     FTileDivider divider = FTileDivider.full,
     String? semanticLabel,
     Widget? label,
@@ -58,7 +57,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
       _MergeTileGroups(
         key: key,
         style: style,
-        state: state,
+        enabled: enabled,
         divider: divider,
         semanticLabel: semanticLabel,
         label: label,
@@ -71,7 +70,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   const FTileGroup({
     required this.children,
     this.style,
-    this.state,
+    this.enabled,
     this.divider = FTileDivider.indented,
     this.semanticLabel,
     this.label,
@@ -84,6 +83,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   Widget build(BuildContext context) {
     final data = FTileGroupData.maybeOf(context);
     final style = this.style ?? data?.style ?? context.theme.tileGroupStyle;
+    final enabled = this.enabled ?? data?.enabled ?? true;
 
     Widget group = Semantics(
       container: true,
@@ -96,7 +96,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
             FTileData(
               style: style.tileStyle,
               divider: divider,
-              enabled: state == null ? (data?.enabled ?? true) : (state != FLabelState.disabled),
+              enabled: enabled,
               hovered: false,
               index: index,
               length: children.length,
@@ -110,7 +110,11 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
       group = FLabel(
         style: style.labelStyle,
         axis: Axis.vertical,
-        state: state ?? FLabelState.enabled,
+        state: switch ((enabled, error)) {
+          _ when !enabled => FLabelState.disabled,
+          (_, null) => FLabelState.enabled,
+          _ => FLabelState.error,
+        },
         label: label,
         description: description,
         error: error,
@@ -126,7 +130,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('state', state))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticLabel', semanticLabel));
   }
@@ -134,7 +138,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
 
 class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
   final FTileGroupStyle? style;
-  final FLabelState state;
+  final bool enabled;
   final FTileDivider divider;
   final String? semanticLabel;
   final Widget? label;
@@ -145,7 +149,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
   const _MergeTileGroups({
     required this.children,
     this.style,
-    this.state = FLabelState.enabled,
+    this.enabled = true,
     this.divider = FTileDivider.full,
     this.semanticLabel,
     this.label,
@@ -161,7 +165,11 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
     return FLabel(
       style: style.labelStyle,
       axis: Axis.vertical,
-      state: state,
+      state: switch ((enabled, error)) {
+        _ when !enabled => FLabelState.disabled,
+        (_, null) => FLabelState.enabled,
+        _ => FLabelState.error,
+      },
       label: label,
       description: description,
       error: error,
@@ -176,7 +184,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
               FTileGroupData(
                 style: style,
                 divider: divider,
-                enabled: state != FLabelState.disabled,
+                enabled: enabled,
                 index: index,
                 length: children.length,
                 child: child,
@@ -192,7 +200,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('state', state))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticLabel', semanticLabel));
   }
