@@ -54,10 +54,12 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
                   FTile(
                     prefixIcon: FIcon(FAssets.icons.list),
                     title: const Text('List View'),
+                    onPress: () {},
                   ),
                   FTile(
                     prefixIcon: FIcon(FAssets.icons.layoutGrid),
                     title: const Text('Grid View'),
+                    onPress: () {},
                   ),
                 ],
               ),
