@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A controller for a select group.
 abstract class FSelectGroupController<T> extends FChangeNotifier {
@@ -29,10 +30,62 @@ abstract class FSelectGroupController<T> extends FChangeNotifier {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FSelectGroupController && runtimeType == other.runtimeType && _values == other._values;
+      other is FSelectGroupController && runtimeType == other.runtimeType && values == other.values;
 
   @override
   int get hashCode => _values.hashCode;
+}
+
+@internal
+// ignore: avoid_implementing_value_types
+class DelegateSelectGroupController<T> implements FSelectGroupController<T> {
+  FSelectGroupController<T> delegate;
+
+  DelegateSelectGroupController(this.delegate);
+
+  @override
+  @mustCallSuper
+  bool contains(T value) => delegate.contains(value);
+
+  @override
+  @mustCallSuper
+  void select(T value, bool selected) => delegate.select(value, selected);
+
+  @override
+  @mustCallSuper
+  void addListener(VoidCallback listener) => delegate.addListener(listener);
+
+  @override
+  @mustCallSuper
+  void notifyListeners() => delegate.notifyListeners();
+
+  @override
+  @mustCallSuper
+  void removeListener(VoidCallback listener) => delegate.removeListener(listener);
+
+  @override
+  @mustCallSuper
+  void dispose() => delegate.dispose();
+
+  @override
+  @mustCallSuper
+  bool get hasListeners => delegate.hasListeners;
+
+  @override
+  @mustCallSuper
+  bool get disposed => delegate.disposed;
+
+  @override
+  @mustCallSuper
+  Set<T> get values => delegate.values;
+
+  @override
+  @mustCallSuper
+  set values(Set<T> values) => delegate.values = values;
+
+  @override
+  @mustCallSuper
+  Set<T> get _values => delegate.values;
 }
 
 /// A [FSelectGroupController] that allows only one selection mimicking the behaviour of radio buttons.

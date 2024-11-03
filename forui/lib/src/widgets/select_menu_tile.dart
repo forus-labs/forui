@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/select_group/select_group_controller.dart';
 
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///
@@ -162,6 +163,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               onPress: state._controller._popover.toggle,
             );
 
+            // Should label be moved into tile?
             if (groupData == null && tileData == null) {
               tile = FLabel(
                 style: selectTileStyle.labelStyle,
@@ -256,7 +258,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     }
 
     if (widget.groupController != old.groupController) {
-      _controller._delegate = widget.groupController;
+      _controller.delegate = widget.groupController;
     }
 
     _controller.autoHide = old.autoHide;
@@ -301,51 +303,26 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   FSelectMenuTile<T> get widget => super.widget as FSelectMenuTile<T>;
 }
 
-// ignore: avoid_implementing_value_types
-class _SelectGroupController<T> implements FSelectGroupController<T> {
-  FSelectGroupController<T> _delegate;
+class _SelectGroupController<T> extends DelegateSelectGroupController<T> {
   FPopoverController _popover;
   bool autoHide;
 
-  _SelectGroupController(this._delegate, this._popover, {required this.autoHide});
-
-  @override
-  bool contains(T value) => _delegate.contains(value);
+  _SelectGroupController(super.delegate, this._popover, {required this.autoHide});
 
   @override
   Future<void> select(T value, bool selected) async {
     if (autoHide && _popover.shown) {
       await _popover.hide();
     }
-    _delegate.select(value, selected);
+
+    super.select(value, selected);
   }
-
-  @override
-  void addListener(VoidCallback listener) => _delegate.addListener(listener);
-
-  @override
-  void notifyListeners() => _delegate.notifyListeners();
-
-  @override
-  void removeListener(VoidCallback listener) => _delegate.removeListener(listener);
 
   @override
   void dispose() {
     _popover.dispose();
-    _delegate.dispose();
+    super.dispose();
   }
-
-  @override
-  Set<T> get values => _delegate.values;
-
-  @override
-  set values(Set<T> values) => _delegate.values = values;
-
-  @override
-  bool get hasListeners => _delegate.hasListeners;
-
-  @override
-  bool get disposed => _delegate.disposed;
 }
 
 /// A [FSelectMenuTileStyle]'s style.
