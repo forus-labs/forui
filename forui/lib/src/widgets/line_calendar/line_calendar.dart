@@ -71,7 +71,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
 
   @override
   void didChangeDependencies() {
-    _style = widget.style ?? FTheme.of(context).lineCalendarStyle;
+    _style = widget.style ?? context.theme.lineCalendarStyle;
     _size = _calculateSize(context, _style);
 
     final value = widget.controller.value?.toLocalDate() ?? widget.today.toLocalDate();
