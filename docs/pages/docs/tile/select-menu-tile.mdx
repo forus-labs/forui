@@ -17,7 +17,151 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-menu-tile' variant='default' query={{}} height={300}/>
+    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'false'}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    enum Notification { all, direct, nothing }
+
+    class _SelectMenuTile extends StatefulWidget {
+      const _SelectMenuTileForm({super.key});
+
+      @override
+      State<_SelectMenuTile> createState() => _SelectMenuTileFormState();
+    }
+
+    class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
+      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+
+      @override
+      Widget build(BuildContext context) => FSelectMenuTile(
+        groupController: controller,
+        autoHide: true,
+        validator: (value) => value == null ? 'Select an item' : null,
+        prefixIcon: FIcon(FAssets.icons.bell),
+        title: const Text('Notifications'),
+        details: ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) => Text(
+            switch (controller.values.firstOrNull) {
+              Notification.all => 'All',
+              Notification.direct => 'Direct Messages',
+              null || Notification.nothing => 'None',
+            },
+          ),
+        ),
+        menu: [
+          FSelectTile(title: const Text('All'), value: Notification.all),
+          FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
+          FSelectTile(title: const Text('None'), value: Notification.nothing),
+        ],
+      );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FSelectMenuTile(...)`
+
+```dart
+FSelectMenuTile<Value>(
+  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  popoverController: FPopoverController(...),
+  divider: FTileDivider.indented,
+  menuAnchor: FMenuAnchor.bottomLeft,
+  tileAnchor: FTileAnchor.bottomLeft,
+  shift: FPortalFollowerShift.flip,
+  hideOnTapOutside: true,
+  ignoreDirectionPadding: true,
+  autoHide: false,
+  label: const Text('Sidebar'),
+  description: const Text('Select the items you want to display in the sidebar.'),
+  errorBuilder: (context, error) => Text(error),
+  prefixIcon: FIcon(FAssets.icons.bell),
+  title: Text('Notifications'),
+  subtitle: Text('subtitle'),
+  details: Text('All'),
+  menu: [
+    FSelectTile(
+      label: const Text('1'),
+      value: 1,
+    ),
+  ],
+);
+```
+
+## Examples
+
+### Auto Hide
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'true'}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {17}
+    enum Notification { all, direct, nothing }
+
+    class _SelectMenuTile extends StatefulWidget {
+      const _SelectMenuTileForm({super.key});
+
+      @override
+      State<_SelectMenuTile> createState() => _SelectMenuTileFormState();
+    }
+
+    class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
+      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+
+      @override
+      Widget build(BuildContext context) => FSelectMenuTile(
+        groupController: controller,
+        autoHide: true,
+        validator: (value) => value == null ? 'Select an item' : null,
+        prefixIcon: FIcon(FAssets.icons.bell),
+        title: const Text('Notifications'),
+        details: ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) => Text(
+            switch (controller.values.firstOrNull) {
+              Notification.all => 'All',
+              Notification.direct => 'Direct Messages',
+              null || Notification.nothing => 'None',
+            },
+          ),
+        ),
+        menu: [
+          FSelectTile(title: const Text('All'), value: Notification.all),
+          FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
+          FSelectTile(title: const Text('None'), value: Notification.nothing),
+        ],
+      );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select-menu-tile' variant='form' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart

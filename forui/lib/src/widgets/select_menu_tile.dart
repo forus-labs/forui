@@ -159,6 +159,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
             };
 
             Widget tile = FPopover(
+              // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
+              //
+              // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
+              // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
+              // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
+              // another _OverlayPortalState, causing an assertion to be thrown.
+              //
+              // See https://stackoverflow.com/a/59410824/4189771
+              key: GlobalObjectKey(state._controller._popover),
               controller: state._controller._popover,
               style: menuStyle,
               followerAnchor: menuAnchor,

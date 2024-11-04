@@ -81,6 +81,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/select-group/checkbox-form', page: SelectGroupCheckboxFormRoute.page),
         AutoRoute(path: '/select-group/radio-form', page: SelectGroupRadioFormRoute.page),
         AutoRoute(path: '/select-menu-tile/default', page: SelectMenuTileRoute.page),
+        AutoRoute(path: '/select-menu-tile/form', page: SelectMenuTileFormRoute.page),
         AutoRoute(path: '/select-tile-group/default', page: SelectTileGroupRoute.page),
         AutoRoute(path: '/select-tile-group/multi-value', page: SelectTileGroupMultiValueRoute.page),
         AutoRoute(path: '/select-tile-group/radio', page: SelectTileGroupRadioRoute.page),
