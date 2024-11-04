@@ -48,11 +48,13 @@ A tile that, when triggered, displays a list of options for the user to pick fro
                   title: const Text('Notifications'),
                   details: ListenableBuilder(
                     listenable: controller,
-                    builder: (context, _) => Text(switch (controller.values.firstOrNull) {
-                      Notification.all => 'All',
-                      Notification.direct => 'Direct Messages',
-                      null || Notification.nothing => 'None',
-                    }),
+                    builder: (context, _) => Text(
+                      switch (controller.values.firstOrNull) {
+                        Notification.all => 'All',
+                        Notification.direct => 'Direct Messages',
+                        null || Notification.nothing => 'None',
+                      },
+                    ),
                   ),
                   menu: [
                     FSelectTile(title: const Text('All'), value: Notification.all),

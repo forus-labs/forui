@@ -158,8 +158,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               null => (FLabelState.enabled, null),
             };
 
-            print(identityHashCode(state._controller._popover));
-
             Widget tile = FPopover(
               controller: state._controller._popover,
               style: menuStyle,
@@ -255,7 +253,6 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
 
   @override
   void didUpdateWidget(covariant FSelectMenuTile<T> old) {
-    print('hm');
     super.didUpdateWidget(old);
     if (widget.popoverController != old.popoverController) {
       if (old.popoverController != null) {

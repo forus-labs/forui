@@ -113,7 +113,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-menu-tile/enabled-shown-${theme.name}.png')
+          matchesGoldenFile('select-menu-tile/enabled-shown-${theme.name}.png'),
         );
       });
 

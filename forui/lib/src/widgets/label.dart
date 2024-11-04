@@ -47,6 +47,7 @@ enum FLabelState {
 /// * [FLabelStyles] for customizing a label's appearance.
 final class FLabel extends StatelessWidget {
   /// The label's style. Defaults to the appropriate style in [FThemeData.labelStyles].
+  // ignore: diagnostic_describe_all_properties
   final FLabelStyle? style;
 
   /// The label that describes the form field.
@@ -120,7 +121,6 @@ final class FLabel extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('axis', axis))
       ..add(EnumProperty('state', state));
   }

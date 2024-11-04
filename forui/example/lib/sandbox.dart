@@ -11,9 +11,16 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
-class _SandboxState extends State<Sandbox> {
+class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+  late FPopoverController popoverController;
+
+  @override
+  void initState() {
+    super.initState();
+    popoverController = FPopoverController(vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) => Form(
@@ -23,6 +30,7 @@ class _SandboxState extends State<Sandbox> {
           children: [
             FSelectMenuTile(
               groupController: controller,
+              popoverController: popoverController,
               autoHide: true,
               validator: (value) => value == null ? 'Select an item' : null,
               prefixIcon: FIcon(FAssets.icons.bell),
