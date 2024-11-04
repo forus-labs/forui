@@ -31,7 +31,7 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   /// [selectable] will always return true if not given.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if assert(initialSelection?.isUtc ?? true, 'value must be in UTC timezone'),
+  /// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone.
   static FCalendarController<Set<DateTime>> dates({
     Set<DateTime> initialSelections = const {},
     Predicate<DateTime>? selectable,
