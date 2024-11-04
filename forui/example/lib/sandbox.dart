@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
+enum Notification { all, direct, nothing }
+
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -9,41 +11,48 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
-enum Notification { all, direct, nothing }
-
-class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  bool value = false;
-  FRadioSelectGroupController<String> selectGroupController = FRadioSelectGroupController();
-  late FPopoverController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FPopoverController(vsync: this);
-  }
+class _SandboxState extends State<Sandbox> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
 
   @override
   Widget build(BuildContext context) => Form(
+        key: _formKey,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             FSelectMenuTile(
-              groupController: selectGroupController,
+              groupController: controller,
               autoHide: true,
               validator: (value) => value == null ? 'Select an item' : null,
-              menu: [
-                FSelectTile(title: const Text('Item 1'), value: '1'),
-                FSelectTile(title: const Text('Item 2'), value: '2'),
-                FSelectTile(title: const Text('Item 3'), value: '3'),
-                FSelectTile(title: const Text('None'), value: 'None'),
-              ],
-              title: const Text('Repeat'),
+              prefixIcon: FIcon(FAssets.icons.bell),
+              title: const Text('Notifications'),
               details: ListenableBuilder(
-                listenable: selectGroupController,
-                builder: (context, _) => Text(
-                    (selectGroupController.values.isEmpty || selectGroupController.values.first == 'None')
-                        ? 'None'
-                        : 'Item ${selectGroupController.values.first}'),
+                listenable: controller,
+                builder: (context, _) => Text(switch (controller.values.firstOrNull) {
+                  Notification.all => 'All',
+                  Notification.direct => 'Direct Messages',
+                  null || Notification.nothing => 'None',
+                }),
               ),
+              menu: [
+                FSelectTile(title: const Text('All'), value: Notification.all),
+                FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
+                FSelectTile(title: const Text('None'), value: Notification.nothing),
+              ],
+            ),
+            const SizedBox(height: 20),
+            FButton(
+              label: const Text('Save'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
             ),
           ],
         ),
@@ -52,7 +61,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     controller.dispose();
-    selectGroupController.dispose();
     super.dispose();
   }
 }

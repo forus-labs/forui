@@ -12,7 +12,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
     assert(
       result != null,
       "No FSelectGroupItemData found in context. This likely because FSelectGroup's type parameter could not be inferred. "
-      'It is currently inferred as $T. To fix this, provide the type parameter explicitly, i.e. FSelectGroup<MyType>.',
+      'It is currently inferred as FSelectGroup<$T>. To fix this, provide the type parameter explicitly, i.e. FSelectGroup<MyType>.',
     );
     return result!;
   }

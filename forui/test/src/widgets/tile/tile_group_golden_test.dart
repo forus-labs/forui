@@ -18,6 +18,8 @@ void main() {
             child: FTileGroup(
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
+              description: const Text('Description'),
+              error: const Text('This should not appear'),
               children: [
                 FTile(
                   prefixIcon: FIcon(FAssets.icons.wifi),

@@ -117,11 +117,11 @@ class FTile extends StatelessWidget with FTileMixin {
 
   @override
   Widget build(BuildContext context) {
-    final inherited = FTileData.maybeOf(context);
-    final style = this.style ?? inherited?.style ?? context.theme.tileGroupStyle.tileStyle;
+    final tileData = FTileData.maybeOf(context);
+    final style = this.style ?? tileData?.style ?? context.theme.tileGroupStyle.tileStyle;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
-    final tile = extractTile(inherited);
+    final tile = extractTile(tileData);
     final enabled = this.enabled ?? tile.enabled;
     final curveTop = group.index == 0 && tile.index == 0;
     final curveBottom = group.index == group.length - 1 && tile.index == tile.length - 1;

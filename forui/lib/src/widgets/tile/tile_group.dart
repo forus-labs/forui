@@ -28,13 +28,19 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The group's semantic label.
   final String? semanticLabel;
 
-  /// The group's label. It is ignored if the group is part of a merged [FTileGroup].
+  /// The label above the group.
+  ///
+  /// It is not rendered if the group is disabled or part of a merged [FTileGroup].
   final Widget? label;
 
-  /// The group's description. It is ignored if the group is part of a merged [FTileGroup].
+  /// The description below the group.
+  ///
+  /// It is not rendered if the group is disabled or part of a merged [FTileGroup].
   final Widget? description;
 
-  /// The group's error. It is ignored if the group is part of a merged [FTileGroup] or if the group is disabled.
+  /// The error below the [description].
+  ///
+  /// It is not rendered if the group is disabled or part of a merged [FTileGroup].
   final Widget? error;
 
   /// The tiles in the group.
@@ -265,6 +271,23 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
             ),
           ),
         );
+
+  /// Returns a copy of this style with the given fields replaced by the new values.
+  @useResult
+  FTileGroupStyle copyWith({
+    FTileStyle? tileStyle,
+    FLabelLayoutStyle? labelLayoutStyle,
+    FFormFieldStyle? enabledStyle,
+    FFormFieldStyle? disabledStyle,
+    FFormFieldErrorStyle? errorStyle,
+  }) =>
+      FTileGroupStyle(
+        tileStyle: tileStyle ?? this.tileStyle,
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+        errorStyle: errorStyle ?? this.errorStyle,
+      );
 
   /// The label's style.
   // ignore: diagnostic_describe_all_properties

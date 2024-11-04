@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_group/select_group_controller.dart';
+import 'package:meta/meta.dart';
 
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///
@@ -143,42 +144,25 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   }) : super(
           builder: (field) {
             final state = field as _State<T>;
-            final selectTileStyle = style ?? state.context.theme.selectMenuTileStyle;
+            final groupData = FTileGroupData.maybeOf(state.context);
+            final tileData = FTileData.maybeOf(state.context);
+
+            final global = state.context.theme.selectMenuTileStyle;
+            final labelStyle = style?.labelStyle ?? global.labelStyle;
+            final menuStyle = style?.menuStyle ?? global.menuStyle;
+            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
+
             final (labelState, error) = switch (state.errorText) {
               _ when !enabled => (FLabelState.disabled, null),
               final text? => (FLabelState.error, errorBuilder(state.context, text)),
               null => (FLabelState.enabled, null),
             };
 
-            final groupData = FTileGroupData.maybeOf(field.context);
-            final tileData = FTileData.maybeOf(field.context);
+            print(identityHashCode(state._controller._popover));
 
-            Widget tile = FTile(
-              style: selectTileStyle.tileStyle,
-              prefixIcon: prefixIcon,
-              title: title,
-              subtitle: subtitle,
-              details: details,
-              suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
-              onPress: state._controller._popover.toggle,
-            );
-
-            // Should label be moved into tile?
-            if (groupData == null && tileData == null) {
-              tile = FLabel(
-                style: selectTileStyle.labelStyle,
-                axis: Axis.vertical,
-                state: labelState,
-                label: label,
-                description: description,
-                error: error,
-                child: tile,
-              );
-            }
-
-            return FPopover(
+            Widget tile = FPopover(
               controller: state._controller._popover,
-              style: selectTileStyle.menuStyle,
+              style: menuStyle,
               followerAnchor: menuAnchor,
               targetAnchor: tileAnchor,
               shift: shift,
@@ -188,17 +172,40 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               focusNode: focusNode,
               onFocusChange: onFocusChange,
               followerBuilder: (context, _, __) => ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: selectTileStyle.menuStyle.maxWidth),
+                constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>(
                   controller: state._controller,
-                  style: selectTileStyle.menuStyle.tileGroupStyle,
+                  style: menuStyle.tileGroupStyle,
                   semanticLabel: semanticLabel,
                   divider: divider,
                   children: menu,
                 ),
               ),
-              target: tile,
+              target: FTile(
+                style: tileStyle,
+                prefixIcon: prefixIcon,
+                enabled: enabled,
+                title: title,
+                subtitle: subtitle,
+                details: details,
+                suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
+                onPress: state._controller._popover.toggle,
+              ),
             );
+
+            if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+              tile = FLabel(
+                axis: Axis.vertical,
+                style: labelStyle,
+                state: labelState,
+                label: label,
+                description: description,
+                error: error,
+                child: tile,
+              );
+            }
+
+            return tile;
           },
         );
 
@@ -248,6 +255,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
 
   @override
   void didUpdateWidget(covariant FSelectMenuTile<T> old) {
+    print('hm');
     super.didUpdateWidget(old);
     if (widget.popoverController != old.popoverController) {
       if (old.popoverController != null) {
@@ -362,6 +370,25 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable {
       errorStyle: groupStyle.errorStyle,
     );
   }
+
+  /// Returns a copy of this [FTileStyle] with the given fields replaced with the new values.
+  @useResult
+  FSelectMenuTileStyle copyWith({
+    FLabelLayoutStyle? labelLayoutStyle,
+    FPopoverMenuStyle? menuStyle,
+    FTileStyle? tileStyle,
+    FFormFieldStyle? enabledStyle,
+    FFormFieldStyle? disabledStyle,
+    FFormFieldErrorStyle? errorStyle,
+  }) =>
+      FSelectMenuTileStyle(
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
+        menuStyle: menuStyle ?? this.menuStyle,
+        tileStyle: tileStyle ?? this.tileStyle,
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+        errorStyle: errorStyle ?? this.errorStyle,
+      );
 
   /// The label's style.
   // ignore: diagnostic_describe_all_properties

@@ -152,7 +152,7 @@ class SelectTileGroupRadioPage extends StatefulSample {
 
 class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
 
   @override
   Widget sample(BuildContext context) => Form(
