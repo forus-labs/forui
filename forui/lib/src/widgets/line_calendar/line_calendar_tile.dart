@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/foundation/util.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
+import 'package:meta/meta.dart';
 
 //TODO: localizations.
 const _days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const _textSpacing = 2.0;
 
+@internal
 class FLineCalendarTile extends StatelessWidget {
   final FLineCalendarStyle style;
   final FCalendarController controller;
@@ -20,6 +21,7 @@ class FLineCalendarTile extends StatelessWidget {
     required this.controller,
     required this.date,
     required this.isToday,
+    super.key,
   });
 
   Color _style(BuildContext context, bool selected) => switch ((selected, isToday)) {
@@ -94,6 +96,7 @@ class FLineCalendarTile extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('today', isToday));
+      ..add(DiagnosticsProperty('today', isToday))
+      ..add(DiagnosticsProperty('controller', controller));
   }
 }

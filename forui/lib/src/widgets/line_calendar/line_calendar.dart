@@ -56,7 +56,10 @@ class FLineCalendar extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller));
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('start', start))
+      ..add(DiagnosticsProperty('end', end))
+      ..add(DiagnosticsProperty('today', today));
   }
 }
 
@@ -93,13 +96,19 @@ class _FLineCalendarState extends State<FLineCalendar> {
           onKeyEvent: (node, event) {
             if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.arrowRight) {
               widget.controller.value = widget.controller.value?.add(const Duration(days: 1));
-              _controller.animateTo(_controller.offset + _size,
-                  duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
+              _controller.animateTo(
+                _controller.offset + _size,
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeInOut,
+              );
               return KeyEventResult.handled;
             } else if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.arrowLeft) {
               widget.controller.value = widget.controller.value?.subtract(const Duration(days: 1));
-              _controller.animateTo(_controller.offset - _size,
-                  duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
+              _controller.animateTo(
+                _controller.offset - _size,
+                duration: const Duration(milliseconds: 100),
+                curve: Curves.easeInOut,
+              );
               return KeyEventResult.handled;
             }
             return KeyEventResult.ignored;
