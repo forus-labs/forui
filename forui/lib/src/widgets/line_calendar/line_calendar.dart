@@ -43,11 +43,11 @@ class FLineCalendar extends StatefulWidget {
     DateTime? today,
     super.key,
   })  : start = start ?? DateTime(1900).toUtc(),
+        today = today ?? DateTime.now(),
         assert(
           start == null || end == null || start.toLocalDate() < end.toLocalDate(),
           'end date must be greater than start date',
-        ),
-        today = today ?? DateTime.now();
+        );
 
   @override
   State<FLineCalendar> createState() => _FLineCalendarState();
