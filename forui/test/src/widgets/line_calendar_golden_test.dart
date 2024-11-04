@@ -4,8 +4,8 @@ library;
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
 import '../test_scaffold.dart';
 
