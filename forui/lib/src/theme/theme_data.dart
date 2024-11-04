@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/theme/breakpoints.dart';
-import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
