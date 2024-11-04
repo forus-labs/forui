@@ -113,11 +113,11 @@ class _FLineCalendarState extends State<FLineCalendar> {
               final date = widget.start.add(Duration(days: index));
               return Container(
                 padding: EdgeInsets.symmetric(horizontal: _style.itemPadding),
-                child: FlineCalendarTile(
+                child: FLineCalendarTile(
                   style: _style,
                   controller: widget.controller,
                   date: date,
-                  isToday: widget.today == date,
+                  isToday: widget.today.toLocalDate() == date.toLocalDate(),
                 ),
               );
             },

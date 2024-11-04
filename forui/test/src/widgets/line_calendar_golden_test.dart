@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
 import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
+import 'package:forui/src/widgets/line_calendar/line_calendar_tile.dart';
 import '../test_scaffold.dart';
 
 void main() {
@@ -42,7 +43,10 @@ void main() {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: FLineCalendar(controller: controller),
+                  child: FLineCalendar(
+                    controller: controller,
+                    today: DateTime.utc(2024, 10, 20),
+                  ),
                 ),
               ),
             ),
@@ -50,50 +54,57 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('line_calendar/$theme.name-$lineCalendar/default.png'),
+            matchesGoldenFile('line_calendar/${theme.name}-$lineCalendar/today.png'),
           );
         });
 
-        testWidgets('new date selected - $theme.name', (tester) async {
+        testWidgets('$theme.name - unselected', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: FLineCalendar(controller: controller),
+                  child: FLineCalendar(
+                    controller: controller,
+                    today: DateTime.utc(2024, 10, 20),
+                  ),
+                ),
+              ),
+            ),
+          );
+
+          await tester.tap(find.text('20'));
+          await tester.pumpAndSettle(const Duration(milliseconds: 300));
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('line_calendar/${theme.name}-$lineCalendar/unselected.png'),
+          );
+        });
+
+        testWidgets('$theme.name - new date selected', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: FLineCalendar(
+                    controller: controller,
+                    today: DateTime.utc(2024, 10, 20),
+                  ),
                 ),
               ),
             ),
           );
 
           await tester.tap(find.text('24'));
-          await tester.pumpAndSettle();
+          await tester.pumpAndSettle(const Duration(milliseconds: 300));
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('line_calendar/$theme.name-$lineCalendar/new-date.png'),
-          );
-        });
-
-        testWidgets('unselected - $theme.name', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: theme.data,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: FLineCalendar(controller: controller),
-                ),
-              ),
-            ),
-          );
-          await tester.tap(find.text('20'));
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('line_calendar/$theme.name-$lineCalendar/unselected.png'),
+            matchesGoldenFile('line_calendar/${theme.name}-$lineCalendar/new-date.png'),
           );
         });
       }

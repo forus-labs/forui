@@ -9,13 +9,13 @@ import 'package:forui/src/widgets/line_calendar/line_calendar.dart';
 const _days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const _textSpacing = 2.0;
 
-class FlineCalendarTile extends StatelessWidget {
+class FLineCalendarTile extends StatelessWidget {
   final FLineCalendarStyle style;
   final FCalendarController controller;
   final DateTime date;
   final bool isToday;
 
-  const FlineCalendarTile({
+  const FLineCalendarTile({
     required this.style,
     required this.controller,
     required this.date,
