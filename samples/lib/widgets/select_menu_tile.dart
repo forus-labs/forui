@@ -14,7 +14,7 @@ class SelectMenuTilePage extends StatefulSample {
   SelectMenuTilePage({
     @queryParam super.theme,
     @queryParam String autoHide = 'true',
-  }): autoHide = bool.tryParse(autoHide) ?? true;
+  }) : autoHide = bool.tryParse(autoHide) ?? true;
 
   @override
   State<SelectMenuTilePage> createState() => _SelectMenuTilePageState();
@@ -25,27 +25,27 @@ class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
-    groupController: controller,
-    autoHide: widget.autoHide,
-    validator: (value) => value == null ? 'Select an item' : null,
-    prefixIcon: FIcon(FAssets.icons.bell),
-    title: const Text('Notifications'),
-    details: ListenableBuilder(
-      listenable: controller,
-      builder: (context, _) => Text(
-        switch (controller.values.firstOrNull) {
-          Notification.all => 'All',
-          Notification.direct => 'Direct Messages',
-          null || Notification.nothing => 'None',
-        },
-      ),
-    ),
-    menu: [
-      FSelectTile(title: const Text('All'), value: Notification.all),
-      FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
-      FSelectTile(title: const Text('None'), value: Notification.nothing),
-    ],
-  );
+        groupController: controller,
+        autoHide: widget.autoHide,
+        validator: (value) => value == null ? 'Select an item' : null,
+        prefixIcon: FIcon(FAssets.icons.bell),
+        title: const Text('Notifications'),
+        details: ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) => Text(
+            switch (controller.values.firstOrNull) {
+              Notification.all => 'All',
+              Notification.direct => 'Direct Messages',
+              null || Notification.nothing => 'None',
+            },
+          ),
+        ),
+        menu: [
+          FSelectTile(title: const Text('All'), value: Notification.all),
+          FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
+          FSelectTile(title: const Text('None'), value: Notification.nothing),
+        ],
+      );
 
   @override
   void dispose() {
