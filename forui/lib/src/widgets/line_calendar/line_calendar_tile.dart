@@ -39,7 +39,7 @@ class FLineCalendarTile extends StatelessWidget {
         builder: (context, selectedDate, _) {
           final isSelected = controller.selected(date);
           return FTappable.animated(
-            semanticLabel: date.toString(),
+            semanticLabel: date.toString(), // TODO: Localization
             onPress: () => controller.select(date),
             child: Stack(
               children: [
