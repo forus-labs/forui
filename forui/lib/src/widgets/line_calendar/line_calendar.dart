@@ -74,7 +74,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
     _style = widget.style ?? context.theme.lineCalendarStyle;
     _size = _calculateSize(context, _style);
 
-    final value = widget.controller.value?.toLocalDate() ?? widget.today.toLocalDate();
+    final value = (widget.controller.value ?? widget.today).toLocalDate();
     final offset = (value.difference(widget.start.toLocalDate()).inDays - 2) * _size + _style.itemPadding;
     _controller = ScrollController(initialScrollOffset: offset);
 
