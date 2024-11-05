@@ -15,12 +15,14 @@ const _textSpacing = 2.0;
 class FLineCalendarTile extends StatelessWidget {
   final FLineCalendarStyle style;
   final FCalendarController controller;
+  final FocusNode focusNode;
   final DateTime date;
   final bool isToday;
 
   const FLineCalendarTile({
     required this.style,
     required this.controller,
+    required this.focusNode,
     required this.date,
     required this.isToday,
     super.key,
@@ -40,7 +42,10 @@ class FLineCalendarTile extends StatelessWidget {
           final isSelected = controller.selected(date);
           return FTappable.animated(
             semanticLabel: date.toString(), // TODO: Localization
-            onPress: () => controller.select(date),
+            onPress: () {
+              focusNode.requestFocus();
+              controller.select(date);
+            },
             child: Stack(
               children: [
                 Positioned.fill(
@@ -98,7 +103,109 @@ class FLineCalendarTile extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('today', isToday))
+      ..add(FlagProperty('today', value: isToday, ifTrue: 'today'))
       ..add(DiagnosticsProperty('controller', controller));
   }
+}
+
+/// A line calendar's content style.
+final class FLineCalendarContentStyle with Diagnosticable {
+  /// The vertical height around the text in the calendar items.
+  final double verticalPadding;
+
+  /// The text style for the selected date.
+  final TextStyle selectedDateTextStyle;
+
+  /// The text style for the unselected date.
+  final TextStyle unselectedDateTextStyle;
+
+  /// The text style for the selected day of the week.
+  final TextStyle selectedDayTextStyle;
+
+  /// The text style for the unselected day of the week.
+  final TextStyle unselectedDayTextStyle;
+
+  /// Creates a [FLineCalendarContentStyle].
+  const FLineCalendarContentStyle({
+    required this.verticalPadding,
+    required this.selectedDateTextStyle,
+    required this.unselectedDateTextStyle,
+    required this.selectedDayTextStyle,
+    required this.unselectedDayTextStyle,
+  });
+
+  /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
+  FLineCalendarContentStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+  }) : this(
+          verticalPadding: 15.5,
+          selectedDateTextStyle: typography.xl.copyWith(
+            color: colorScheme.primaryForeground,
+            fontWeight: FontWeight.w500,
+            height: 0,
+          ),
+          unselectedDateTextStyle: typography.xl.copyWith(
+            color: colorScheme.primary,
+            fontWeight: FontWeight.w500,
+            height: 0,
+          ),
+          selectedDayTextStyle: typography.xs.copyWith(
+            color: colorScheme.primaryForeground,
+            fontWeight: FontWeight.w500,
+            height: 0,
+          ),
+          unselectedDayTextStyle: typography.xs.copyWith(
+            color: colorScheme.mutedForeground,
+            fontWeight: FontWeight.w500,
+            height: 0,
+          ),
+        );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('verticalPadding', verticalPadding))
+      ..add(DiagnosticsProperty('selectedDateTextStyle', selectedDateTextStyle))
+      ..add(DiagnosticsProperty('unselectedDateTextStyle', unselectedDateTextStyle))
+      ..add(DiagnosticsProperty('selectedDayTextStyle', selectedDayTextStyle))
+      ..add(DiagnosticsProperty('unselectedDayTextStyle', unselectedDayTextStyle));
+  }
+
+  /// Returns a copy of this [FLineCalendarContentStyle] with the given properties replaced.
+  @useResult
+  FLineCalendarContentStyle copyWith({
+    double? verticalPadding,
+    TextStyle? selectedDateTextStyle,
+    TextStyle? unselectedDateTextStyle,
+    TextStyle? selectedDayTextStyle,
+    TextStyle? unselectedDayTextStyle,
+  }) =>
+      FLineCalendarContentStyle(
+        verticalPadding: verticalPadding ?? this.verticalPadding,
+        selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
+        unselectedDateTextStyle: unselectedDateTextStyle ?? this.unselectedDateTextStyle,
+        selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
+        unselectedDayTextStyle: unselectedDayTextStyle ?? this.unselectedDayTextStyle,
+      );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FLineCalendarContentStyle &&
+          runtimeType == other.runtimeType &&
+          verticalPadding == other.verticalPadding &&
+          selectedDateTextStyle == other.selectedDateTextStyle &&
+          unselectedDateTextStyle == other.unselectedDateTextStyle &&
+          selectedDayTextStyle == other.selectedDayTextStyle &&
+          unselectedDayTextStyle == other.unselectedDayTextStyle;
+
+  @override
+  int get hashCode =>
+      verticalPadding.hashCode ^
+      selectedDateTextStyle.hashCode ^
+      unselectedDateTextStyle.hashCode ^
+      selectedDayTextStyle.hashCode ^
+      unselectedDayTextStyle.hashCode;
 }

@@ -19,6 +19,17 @@ class FLineCalendar extends StatefulWidget {
   /// The controller.
   final FCalendarController<DateTime?> controller;
 
+  /// Whether the calendar should focus itself if nothing else is already focused. Defaults to false.
+  final bool autofocus;
+
+  /// Defines the [FocusNode] for this line calendar.
+  final FocusNode? focusNode;
+
+  /// Handler called when the focus changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  final ValueChanged<bool>? onFocusChange;
+
   /// The start date. It is truncated to the nearest date.
   ///
   /// ## Contract
@@ -38,12 +49,15 @@ class FLineCalendar extends StatefulWidget {
   FLineCalendar({
     required this.controller,
     this.style,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     this.end,
     DateTime? start,
     DateTime? today,
     super.key,
   })  : start = start ?? DateTime(1900).toUtc(),
-        today = today ?? DateTime.now(),
+        today = today ?? DateTime.now().toUtc(),
         assert(
           start == null || end == null || start.toLocalDate() < end.toLocalDate(),
           'end date must be greater than start date',
@@ -66,19 +80,26 @@ class FLineCalendar extends StatefulWidget {
 
 class _FLineCalendarState extends State<FLineCalendar> {
   late ScrollController _controller;
+  late final FocusNode _focusNode;
   late double _size;
   late FLineCalendarStyle _style;
 
   @override
+  void initState() {
+    super.initState();
+    _focusNode = widget.focusNode ?? FocusNode();
+  }
+
+  @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     _style = widget.style ?? context.theme.lineCalendarStyle;
     _size = _calculateSize(context, _style);
 
     final value = (widget.controller.value ?? widget.today).toLocalDate();
-    final offset = (value.difference(widget.start.toLocalDate()).inDays - 2) * _size + _style.itemPadding;
-    _controller = ScrollController(initialScrollOffset: offset);
+    final offset = (value.difference(widget.start.toLocalDate()).inDays - 2) * _size + _style.itemPadding.horizontal;
 
-    super.didChangeDependencies();
+    _controller = ScrollController(initialScrollOffset: offset);
   }
 
   // TODO: calculate width of items based on the text font size.
@@ -92,45 +113,48 @@ class _FLineCalendarState extends State<FLineCalendar> {
   @override
   Widget build(BuildContext context) => SizedBox(
         height: _size,
-        child: Focus(
-          autofocus: true,
-          onKeyEvent: (node, event) {
-            if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.arrowRight) {
+        child: CallbackShortcuts(
+          bindings: {
+            const SingleActivator(LogicalKeyboardKey.arrowRight): () {
               widget.controller.value = widget.controller.value?.add(const Duration(days: 1));
               _controller.animateTo(
                 _controller.offset + _size,
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.easeInOut,
               );
-              return KeyEventResult.handled;
-            } else if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.arrowLeft) {
+            },
+            const SingleActivator(LogicalKeyboardKey.arrowLeft): () {
               widget.controller.value = widget.controller.value?.subtract(const Duration(days: 1));
               _controller.animateTo(
                 _controller.offset - _size,
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.easeInOut,
               );
-              return KeyEventResult.handled;
-            }
-            return KeyEventResult.ignored;
-          },
-          child: ListView.builder(
-            controller: _controller,
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.zero,
-            itemExtent: _size,
-            itemBuilder: (context, index) {
-              final date = widget.start.add(Duration(days: index));
-              return Container(
-                padding: EdgeInsets.symmetric(horizontal: _style.itemPadding),
-                child: FLineCalendarTile(
-                  style: _style,
-                  controller: widget.controller,
-                  date: date,
-                  isToday: widget.today.toLocalDate() == date.toLocalDate(),
-                ),
-              );
             },
+          },
+          child: Focus(
+            autofocus: widget.autofocus,
+            focusNode: _focusNode,
+            onFocusChange: (focused) => widget.onFocusChange?.call(focused),
+            child: ListView.builder(
+              controller: _controller,
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.zero,
+              itemExtent: _size,
+              itemBuilder: (context, index) {
+                final date = widget.start.add(Duration(days: index));
+                return Padding(
+                  padding: _style.itemPadding,
+                  child: FLineCalendarTile(
+                    focusNode: _focusNode,
+                    style: _style,
+                    controller: widget.controller,
+                    date: date,
+                    isToday: widget.today.toLocalDate() == date.toLocalDate(),
+                  ),
+                );
+              },
+            ),
           ),
         ),
       );
@@ -138,14 +162,18 @@ class _FLineCalendarState extends State<FLineCalendar> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 }
 
 /// [FLineCalendar]'s style.
 final class FLineCalendarStyle with Diagnosticable {
-  /// The horizontal padding around each calendar item.
-  final double itemPadding;
+  /// The horizontal padding around each calendar item. Defaults to `EdgeInsets.symmetric(horizontal: 6.5)`.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if itemPadding is negative.
+  final EdgeInsets itemPadding;
 
   /// The box decoration for a selected date.
   final BoxDecoration selectedDecoration;
@@ -163,41 +191,42 @@ final class FLineCalendarStyle with Diagnosticable {
   final FLineCalendarContentStyle content;
 
   /// Creates a [FLineCalendarStyle].
-  const FLineCalendarStyle({
-    required this.itemPadding,
+  FLineCalendarStyle({
     required this.selectedCurrentDateIndicatorColor,
     required this.unselectedCurrentDateIndicatorColor,
     required this.selectedDecoration,
     required this.unselectedDecoration,
     required this.content,
-  });
+    this.itemPadding = const EdgeInsets.symmetric(horizontal: 6.5),
+  }) : assert(itemPadding.isNonNegative, 'itemPadding must be non-negative');
 
-  /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
+  /// Creates a [FLineCalendarStyle] that inherits its properties from [colorScheme] and [typography].
   FLineCalendarStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  })  : itemPadding = 6.5,
-        selectedCurrentDateIndicatorColor = colorScheme.primaryForeground,
-        unselectedCurrentDateIndicatorColor = colorScheme.primary,
-        selectedDecoration = BoxDecoration(
-          color: colorScheme.primary,
-          borderRadius: style.borderRadius,
-        ),
-        unselectedDecoration = BoxDecoration(
-          color: colorScheme.background,
-          borderRadius: style.borderRadius,
-          border: Border.all(color: colorScheme.border),
-        ),
-        content = FLineCalendarContentStyle.inherit(colorScheme: colorScheme, typography: typography);
+  }) : this(
+          selectedCurrentDateIndicatorColor: colorScheme.primaryForeground,
+          unselectedCurrentDateIndicatorColor: colorScheme.primary,
+          selectedDecoration: BoxDecoration(
+            color: colorScheme.primary,
+            borderRadius: style.borderRadius,
+          ),
+          unselectedDecoration: BoxDecoration(
+            color: colorScheme.background,
+            borderRadius: style.borderRadius,
+            border: Border.all(color: colorScheme.border),
+          ),
+          content: FLineCalendarContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+        );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('itemPadding', itemPadding))
-      ..add(DiagnosticsProperty('selectedCurrentDateIndicatorColor', selectedCurrentDateIndicatorColor))
-      ..add(DiagnosticsProperty('unselectedCurrentDateIndicatorColor', unselectedCurrentDateIndicatorColor))
+      ..add(ColorProperty('selectedCurrentDateIndicatorColor', selectedCurrentDateIndicatorColor))
+      ..add(ColorProperty('unselectedCurrentDateIndicatorColor', unselectedCurrentDateIndicatorColor))
       ..add(DiagnosticsProperty('selectedDecoration', selectedDecoration))
       ..add(DiagnosticsProperty('unselectedDecoration', unselectedDecoration))
       ..add(DiagnosticsProperty('content', content));
@@ -206,7 +235,7 @@ final class FLineCalendarStyle with Diagnosticable {
   /// Returns a copy of this [FLineCalendarStyle] with the given properties replaced.
   @useResult
   FLineCalendarStyle copyWith({
-    double? itemPadding,
+    EdgeInsets? itemPadding,
     Color? selectedCurrentDateIndicatorColor,
     Color? unselectedCurrentDateIndicatorColor,
     BoxDecoration? selectedDecoration,
@@ -243,104 +272,4 @@ final class FLineCalendarStyle with Diagnosticable {
       selectedDecoration.hashCode ^
       unselectedDecoration.hashCode ^
       content.hashCode;
-}
-
-/// A line calendar's content style.
-final class FLineCalendarContentStyle with Diagnosticable {
-  /// The vertical padding around the text in the calendar items.
-  final double verticalPadding;
-
-  /// The text style for the selected date.
-  final TextStyle selectedDateTextStyle;
-
-  /// The text style for the unselected date.
-  final TextStyle unselectedDateTextStyle;
-
-  /// The text style for the selected day of the week.
-  final TextStyle selectedDayTextStyle;
-
-  /// The text style for the unselected day of the week.
-  final TextStyle unselectedDayTextStyle;
-
-  /// Creates a [FLineCalendarContentStyle].
-  const FLineCalendarContentStyle({
-    required this.verticalPadding,
-    required this.selectedDateTextStyle,
-    required this.unselectedDateTextStyle,
-    required this.selectedDayTextStyle,
-    required this.unselectedDayTextStyle,
-  });
-
-  /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
-  FLineCalendarContentStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-  })  : verticalPadding = 15.5,
-        selectedDateTextStyle = typography.xl.copyWith(
-          color: colorScheme.primaryForeground,
-          fontWeight: FontWeight.w500,
-          height: 0,
-        ),
-        unselectedDateTextStyle = typography.xl.copyWith(
-          color: colorScheme.primary,
-          fontWeight: FontWeight.w500,
-          height: 0,
-        ),
-        selectedDayTextStyle = typography.xs.copyWith(
-          color: colorScheme.primaryForeground,
-          fontWeight: FontWeight.w500,
-          height: 0,
-        ),
-        unselectedDayTextStyle = typography.xs.copyWith(
-          color: colorScheme.mutedForeground,
-          fontWeight: FontWeight.w500,
-          height: 0,
-        );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('verticalPadding', verticalPadding))
-      ..add(DiagnosticsProperty('selectedDateTextStyle', selectedDateTextStyle))
-      ..add(DiagnosticsProperty('unselectedDateTextStyle', unselectedDateTextStyle))
-      ..add(DiagnosticsProperty('selectedDayTextStyle', selectedDayTextStyle))
-      ..add(DiagnosticsProperty('unselectedDayTextStyle', unselectedDayTextStyle));
-  }
-
-  /// Returns a copy of this [FLineCalendarContentStyle] with the given properties replaced.
-  @useResult
-  FLineCalendarContentStyle copyWith({
-    double? verticalPadding,
-    TextStyle? selectedDateTextStyle,
-    TextStyle? unselectedDateTextStyle,
-    TextStyle? selectedDayTextStyle,
-    TextStyle? unselectedDayTextStyle,
-  }) =>
-      FLineCalendarContentStyle(
-        verticalPadding: verticalPadding ?? this.verticalPadding,
-        selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
-        unselectedDateTextStyle: unselectedDateTextStyle ?? this.unselectedDateTextStyle,
-        selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
-        unselectedDayTextStyle: unselectedDayTextStyle ?? this.unselectedDayTextStyle,
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FLineCalendarContentStyle &&
-          runtimeType == other.runtimeType &&
-          verticalPadding == other.verticalPadding &&
-          selectedDateTextStyle == other.selectedDateTextStyle &&
-          unselectedDateTextStyle == other.unselectedDateTextStyle &&
-          selectedDayTextStyle == other.selectedDayTextStyle &&
-          unselectedDayTextStyle == other.unselectedDayTextStyle;
-
-  @override
-  int get hashCode =>
-      verticalPadding.hashCode ^
-      selectedDateTextStyle.hashCode ^
-      unselectedDateTextStyle.hashCode ^
-      selectedDayTextStyle.hashCode ^
-      unselectedDayTextStyle.hashCode;
 }
