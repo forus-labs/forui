@@ -14,7 +14,7 @@ void main() {
     testWidgets('tap on tile opens menu', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child:  FSelectMenuTile(
+          child: FSelectMenuTile(
             groupController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
@@ -43,7 +43,7 @@ void main() {
     testWidgets('selecting item in menu does not close it', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child:  FSelectMenuTile(
+          child: FSelectMenuTile(
             groupController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
@@ -74,7 +74,7 @@ void main() {
     testWidgets('selecting item in menu closes it', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child:  FSelectMenuTile(
+          child: FSelectMenuTile(
             autoHide: true,
             groupController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),

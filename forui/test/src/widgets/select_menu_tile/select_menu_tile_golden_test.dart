@@ -145,7 +145,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            child:  FSelectMenuTile(
+            child: FSelectMenuTile(
               groupController: controller,
               prefixIcon: FIcon(FAssets.icons.calendar),
               label: const Text('Label'),
