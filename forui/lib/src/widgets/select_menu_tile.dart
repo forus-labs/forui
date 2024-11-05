@@ -109,6 +109,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// The details.
   final Widget? details;
 
+  /// The suffix icon. Defaults to `FAssets.icons.chevronsUpDown`.
+  final Widget? suffixIcon;
+
   /// Creates a [FSelectMenuTile].
   FSelectMenuTile({
     required this.groupController,
@@ -133,6 +136,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     this.prefixIcon,
     this.subtitle,
     this.details,
+    this.suffixIcon,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -195,7 +199,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
                 title: title,
                 subtitle: subtitle,
                 details: details,
-                suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
+                suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
                 onPress: state._controller._popover.toggle,
               ),
             );
