@@ -53,7 +53,7 @@ jobs:
         run: |
           pnpm install
           NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.deployment-url }} pnpm run export
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@v3.11
         id: publish-docs
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
