@@ -21,7 +21,7 @@ class SelectMenuTilePage extends StatefulSample {
 }
 
 class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
-  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
@@ -66,7 +66,7 @@ class SelectMenuTileFormPage extends StatefulSample {
 
 class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFormPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => Form(
