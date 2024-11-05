@@ -31,8 +31,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
     }
 
     class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
-      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(value: Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -108,7 +107,7 @@ FSelectMenuTile<Value>(
     <Widget name='select-menu-tile' variant='default' query={{autoHide: 'true'}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {17}
+    ```dart {16}
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTile extends StatefulWidget {
@@ -119,8 +118,7 @@ FSelectMenuTile<Value>(
     }
 
     class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
-      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
