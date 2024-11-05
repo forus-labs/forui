@@ -105,6 +105,7 @@ class FLineCalendarTile extends StatelessWidget {
       ..add(DiagnosticsProperty('date', date))
       ..add(FlagProperty('today', value: isToday, ifTrue: 'today'))
       ..add(DiagnosticsProperty('controller', controller));
+    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
   }
 }
 
