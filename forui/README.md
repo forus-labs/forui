@@ -9,16 +9,17 @@
   <a href="https://pub.dev/packages/forui"><img alt="Pub Version" src="https://img.shields.io/pub/v/forui?style=flat&logo=dart&label=pub.dev&color=00589B"></a>
   <a href="https://github.com/forus-labs/forui"><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/forus-labs/forui?style=flat&logo=github&color=8957e5&link=https%3A%2F%2Fgithub.com%2Fforus-labs%2Fforui"></a>
   <a href="https://github.com/forus-labs/forui"><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/forus-labs/forui?style=flat&logo=github"></a>
+  <a href="https://discord.gg/jrw3qHksjE"><img alt="Discord Server" src="https://dcbadge.limes.pink/api/server/https://discord.gg/jrw3qHksjE?style=flat&theme=default-inverted"></a>
 </p>
 
 <p align="center">
   <a href="https://forui.dev/docs">📚 Documentation</a> •
-  <a href="https://forui.dev/docs/badge">🖼️ Widgets</a> •
+  <a href="https://forui.dev/docs/layout/divider">🖼️ Widgets</a> •
   <a href="https://pub.dev/documentation/forui">🤓 API Reference</a>
 </p>
 
 <p align="center">
-  Forui is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by <a href="https://ui.shadcn.com/">shadcn/ui</a>.
+  Forui is a UI library for Flutter that provides a set of beautifully designed, minimalistic widgets.
 </p>
 
 <br />
@@ -32,9 +33,9 @@ Visit [forui.dev/docs](https://forui.dev/docs) to view the documentation.
 
 ## Contributing
 
-Please read the [contributing guide](/CONTRIBUTING.md).
+Please read the [contributing guide](https://github.com/forus-labs/forui/blob/main/CONTRIBUTING.md).
 
 ## License
 
-Licensed under the [MIT license](/LICENSE.md).
-
+Licensed under the [MIT License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE) and [Open Font License]
+(https://github.com/forus-labs/forui/blob/main/forui/LICENSE).

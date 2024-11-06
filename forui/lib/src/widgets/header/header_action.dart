@@ -35,7 +35,7 @@ class FHeaderAction extends StatelessWidget {
     super.key,
   });
 
-  /// Creates a [FHeaderAction] with [FAssets.icons.arrowLeft].
+  /// Creates a [FHeaderAction] with `FAssets.icons.arrowLeft`.
   factory FHeaderAction.back({
     required VoidCallback? onPress,
     FHeaderActionStyle? style,
@@ -50,7 +50,7 @@ class FHeaderAction extends StatelessWidget {
         key: key,
       );
 
-  /// Creates a [FHeaderAction] with [FAssets.icons.x].
+  /// Creates a [FHeaderAction] with `FAssets.icons.x`.
   factory FHeaderAction.x({
     required VoidCallback? onPress,
     FHeaderActionStyle? style,

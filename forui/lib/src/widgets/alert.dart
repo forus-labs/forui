@@ -13,7 +13,7 @@ import 'package:forui/forui.dart';
 /// * https://forui.dev/docs/navigation/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
-  /// The icon. Defaults to [FAssets.icons.circleAlert].
+  /// The icon. Defaults to `FAssets.icons.circleAlert`.
   ///
   /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
   final Widget icon;
