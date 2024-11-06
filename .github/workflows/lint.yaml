@@ -17,5 +17,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: lycheeverse/lychee-action@v2
-        with:
-          args: --base . --no-progress
