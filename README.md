@@ -41,5 +41,4 @@ Please read the [contributing guide](/CONTRIBUTING.md).
 
 ## License
 
-Code is licensed under the [MIT License](LICENSE). 
-Icons are licensed under [Open Font License](LICENSE).
+Code is licensed under the [MIT License](LICENSE). Fonts are licensed under [Open Font License](LICENSE). Icons are licensed under [ISC License](https://github.com/forus-labs/forui/blob/main/LICENSE).
