@@ -28,6 +28,12 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: |
+          output=$(dart doc --validate-links .)
+          if echo "$output" | grep -qv "Found 0 warnings and 0 errors"; then
+            echo "$output"
+            exit 1
+          fi
       - run: flutter analyze
       - run: flutter test
 
