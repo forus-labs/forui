@@ -31,7 +31,6 @@ jobs:
       - run: |
           output=$(dart doc --validate-links .)
           if echo "$output" | grep -qv "Found 0 warnings and 0 errors"; then
-            echo "$output"
             exit 1
           fi
       - run: flutter analyze
