@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - .github/workflows/lint.yaml
+      - '**.md'
+  pull_request:
+    paths:
+      - .github/workflows/lint.yaml
+      - '**.md'
+
+jobs:
+  lint:
+    name: Lint URLs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --base . --no-progress './**/*.md'
