@@ -18,4 +18,4 @@ jobs:
     steps:
       - uses: lycheeverse/lychee-action@v2
         with:
-          args: --base . --no-progress './**/*.md'
+          args: --base . --no-progress
