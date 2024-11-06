@@ -37,5 +37,4 @@ Please read the [contributing guide](https://github.com/forus-labs/forui/blob/ma
 
 ## License
 
-Licensed under the [MIT License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE) and [Open Font License]
-(https://github.com/forus-labs/forui/blob/main/forui/LICENSE).
+Licensed under the [MIT License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE) and [Open Font License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE).
