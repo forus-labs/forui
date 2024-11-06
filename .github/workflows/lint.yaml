@@ -6,7 +6,7 @@ on:
     paths:
       - .github/workflows/lint.yaml
       - '**.md'
-  pull_request:
+  pull_request_target:
     paths:
       - .github/workflows/lint.yaml
       - '**.md'
@@ -16,6 +16,13 @@ jobs:
     name: Lint Markdown URLs
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
       - uses: lycheeverse/lychee-action@v2
         with:
           args: --base . --no-progress './**/*.md'
+          token: ${{ steps.generate-token.outputs.token }}
