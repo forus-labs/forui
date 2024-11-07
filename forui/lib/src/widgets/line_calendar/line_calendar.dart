@@ -30,9 +30,9 @@ class FLineCalendar extends StatefulWidget {
   /// Called with true if this widget's node gains focus, and false if it loses focus.
   final ValueChanged<bool>? onFocusChange;
 
-  final DateTime _start;
+  final LocalDate _start;
 
-  final DateTime? _end;
+  final LocalDate? _end;
 
   final LocalDate _today;
 
@@ -43,19 +43,19 @@ class FLineCalendar extends StatefulWidget {
   /// [end] represents the end date. It is truncated to the nearest date.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [_end] <= [_start].
+  /// Throws [AssertionError] if [end] <= [start].
   FLineCalendar({
     required this.controller,
     this.style,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    DateTime? end,
     DateTime? start,
+    DateTime? end,
     DateTime? today,
     super.key,
-  })  : _end = end,
-        _start = start ?? DateTime.utc(1900),
+  })  : _start = (start ?? DateTime.utc(1900)).toLocalDate(),
+        _end = end?.toLocalDate(),
         _today = (today ?? DateTime.now()).toLocalDate(),
         assert(
           start == null || end == null || start.toLocalDate() < end.toLocalDate(),
@@ -73,9 +73,7 @@ class FLineCalendar extends StatefulWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(DiagnosticsProperty('start', _start))
-      ..add(DiagnosticsProperty('end', _end));
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
 }
 
@@ -98,7 +96,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
     _size = _calculateSize(context, _style);
 
     final value = widget.controller.value?.toLocalDate() ?? widget._today;
-    final offset = (value.difference(widget._start.toLocalDate()).inDays - 2) * _size + _style.itemPadding.horizontal;
+    final offset = (value.difference(widget._start).inDays - 2) * _size + _style.itemPadding.horizontal;
 
     if (_controller != null) {
       _controller!.dispose();
@@ -147,6 +145,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
               scrollDirection: Axis.horizontal,
               padding: EdgeInsets.zero,
               itemExtent: _size,
+              itemCount: widget._end != null ? widget._end!.difference(widget._start).inDays + 1 : null,
               itemBuilder: (context, index) {
                 final date = widget._start.add(Duration(days: index));
                 return Padding(
@@ -155,8 +154,8 @@ class _FLineCalendarState extends State<FLineCalendar> {
                     focusNode: _focusNode,
                     style: _style,
                     controller: widget.controller,
-                    date: date,
-                    isToday: widget._today == date.toLocalDate(),
+                    date: date.toNative(),
+                    isToday: widget._today == date,
                   ),
                 );
               },
