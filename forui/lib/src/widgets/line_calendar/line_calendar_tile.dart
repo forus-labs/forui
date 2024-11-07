@@ -104,15 +104,18 @@ class FLineCalendarTile extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('date', date))
       ..add(FlagProperty('today', value: isToday, ifTrue: 'today'))
-      ..add(DiagnosticsProperty('controller', controller));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode));
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('focusNode', focusNode));
   }
 }
 
 /// A line calendar's content style.
 final class FLineCalendarContentStyle with Diagnosticable {
   /// The vertical height around the text in the calendar items.
-  final double verticalPadding;
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if verticalSpacing is negative.
+  final double verticalSpacing;
 
   /// The text style for the selected date.
   final TextStyle selectedDateTextStyle;
@@ -128,19 +131,18 @@ final class FLineCalendarContentStyle with Diagnosticable {
 
   /// Creates a [FLineCalendarContentStyle].
   const FLineCalendarContentStyle({
-    required this.verticalPadding,
     required this.selectedDateTextStyle,
     required this.unselectedDateTextStyle,
     required this.selectedDayTextStyle,
     required this.unselectedDayTextStyle,
-  });
+    this.verticalSpacing = 15.5,
+  }) : assert(0 < verticalSpacing, 'verticalSpacing must be positive, but is $verticalSpacing.');
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
   FLineCalendarContentStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
   }) : this(
-          verticalPadding: 15.5,
           selectedDateTextStyle: typography.xl.copyWith(
             color: colorScheme.primaryForeground,
             fontWeight: FontWeight.w500,
@@ -167,7 +169,7 @@ final class FLineCalendarContentStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('verticalPadding', verticalPadding))
+      ..add(DoubleProperty('verticalPadding', verticalSpacing))
       ..add(DiagnosticsProperty('selectedDateTextStyle', selectedDateTextStyle))
       ..add(DiagnosticsProperty('unselectedDateTextStyle', unselectedDateTextStyle))
       ..add(DiagnosticsProperty('selectedDayTextStyle', selectedDayTextStyle))
@@ -177,14 +179,14 @@ final class FLineCalendarContentStyle with Diagnosticable {
   /// Returns a copy of this [FLineCalendarContentStyle] with the given properties replaced.
   @useResult
   FLineCalendarContentStyle copyWith({
-    double? verticalPadding,
+    double? verticalSpacing,
     TextStyle? selectedDateTextStyle,
     TextStyle? unselectedDateTextStyle,
     TextStyle? selectedDayTextStyle,
     TextStyle? unselectedDayTextStyle,
   }) =>
       FLineCalendarContentStyle(
-        verticalPadding: verticalPadding ?? this.verticalPadding,
+        verticalSpacing: verticalSpacing ?? this.verticalSpacing,
         selectedDateTextStyle: selectedDateTextStyle ?? this.selectedDateTextStyle,
         unselectedDateTextStyle: unselectedDateTextStyle ?? this.unselectedDateTextStyle,
         selectedDayTextStyle: selectedDayTextStyle ?? this.selectedDayTextStyle,
@@ -196,7 +198,7 @@ final class FLineCalendarContentStyle with Diagnosticable {
       identical(this, other) ||
       other is FLineCalendarContentStyle &&
           runtimeType == other.runtimeType &&
-          verticalPadding == other.verticalPadding &&
+          verticalSpacing == other.verticalSpacing &&
           selectedDateTextStyle == other.selectedDateTextStyle &&
           unselectedDateTextStyle == other.unselectedDateTextStyle &&
           selectedDayTextStyle == other.selectedDayTextStyle &&
@@ -204,7 +206,7 @@ final class FLineCalendarContentStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      verticalPadding.hashCode ^
+      verticalSpacing.hashCode ^
       selectedDateTextStyle.hashCode ^
       unselectedDateTextStyle.hashCode ^
       selectedDayTextStyle.hashCode ^
