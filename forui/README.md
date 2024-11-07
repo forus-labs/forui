@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  Forui is a UI library for Flutter that provides a set of beautifully designed, minimalistic widgets.
+  Forui is a Flutter UI library that provides a set of beautifully designed, minimalistic widgets.
 </p>
 
 <br />
