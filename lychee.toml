@@ -1,0 +1,13 @@
+exclude_path = [
+    "doc/**",
+    "forui/example/**",
+    "forui/src/**",
+    "forui/lib/**",
+    "forui/example/**",
+    "forui_assets/lib/**",
+    "samples/android/**",
+    "samples/ios/**",
+    "samples/macos/**",
+    "samples/web/**",
+    "samples/lib/**",
+]

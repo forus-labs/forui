@@ -1,5 +1,5 @@
 name: forui
-description: Forui is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by Shadcn/ui.
+description: Beautifully designed, minimalistic widgets for desktop & touch devices.
 version: 0.6.1
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
@@ -10,7 +10,7 @@ topics:
   - widget
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ">=3.5.0 <4.0.0"
   flutter: ">=3.24.0"
 
 dependencies:

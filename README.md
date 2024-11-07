@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  Forui is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by <a href="https://ui.shadcn.com/">shadcn/ui</a>.
+  Forui is a Flutter UI library that provides a set of beautifully designed, minimalistic widgets.
 </p>
 
 <br />
@@ -41,4 +41,4 @@ Please read the [contributing guide](/CONTRIBUTING.md).
 
 ## License
 
-Licensed under the [MIT license](/LICENSE.md).
+Code is licensed under the [MIT License](LICENSE). Fonts are licensed under [Open Font License](LICENSE). Icons are licensed under [ISC License](https://github.com/forus-labs/forui/blob/main/LICENSE).
