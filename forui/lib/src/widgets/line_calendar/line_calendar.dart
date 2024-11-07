@@ -76,7 +76,6 @@ class FLineCalendar extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(DiagnosticsProperty('start', _start))
       ..add(DiagnosticsProperty('end', _end));
-
   }
 }
 
