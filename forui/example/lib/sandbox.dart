@@ -23,13 +23,48 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => FCalendar(
-    controller: FCalendarController.dates(
-      initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
-    ),
-    start: DateTime.utc(2000),
-    end: DateTime.utc(2030),
-  );
+  Widget build(BuildContext context) => Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FSelectMenuTile(
+              groupController: controller,
+              popoverController: popoverController,
+              autoHide: true,
+              validator: (value) => value == null ? 'Select an item' : null,
+              prefixIcon: FIcon(FAssets.icons.bell),
+              title: const Text('Notifications'),
+              details: ListenableBuilder(
+                listenable: controller,
+                builder: (context, _) => Text(switch (controller.values.firstOrNull) {
+                  Notification.all => 'All',
+                  Notification.direct => 'Direct Messages',
+                  null || Notification.nothing => 'None',
+                }),
+              ),
+              menu: [
+                FSelectTile(title: const Text('All'), value: Notification.all),
+                FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
+                FSelectTile(title: const Text('None'), value: Notification.nothing),
+              ],
+            ),
+            const SizedBox(height: 20),
+            FButton(
+              label: const Text('Save'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
+            )
+          ],
+        ),
+      );
 
   @override
   void dispose() {

@@ -1,5 +1,7 @@
 ## 0.7.0 (Next)
 
+This update introduces several new tile widgets. It also adds support for responsive breakpoints and localization.
+
 ### Additions
 
 * Add `FButtonSpinner`.
@@ -30,10 +32,14 @@
 
 * Add `FPortal.offset`.
 
+* Add `FLocalizations`.
+
 ### Changes
 
 * **Breaking** Change `FPopover()` to not automatically wrap a target in a `GestureDetector` - use `FPopover.tappable(...)`
   instead.
+
+* Change `FCalendar` to support localization.
 
 ### Fixes
 
