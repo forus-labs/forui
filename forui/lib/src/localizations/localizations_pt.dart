@@ -51,7 +51,5 @@ class FLocalizationsPt extends FLocalizations {
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
 class FLocalizationsPtPt extends FLocalizationsPt {
-  FLocalizationsPtPt(): super('pt_PT');
-
-
+  FLocalizationsPtPt() : super('pt_PT');
 }

@@ -51,7 +51,5 @@ class FLocalizationsDe extends FLocalizations {
 
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
-  FLocalizationsDeCh(): super('de_CH');
-
-
+  FLocalizationsDeCh() : super('de_CH');
 }

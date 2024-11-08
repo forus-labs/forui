@@ -51,14 +51,10 @@ class FLocalizationsZh extends FLocalizations {
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
 class FLocalizationsZhHk extends FLocalizationsZh {
-  FLocalizationsZhHk(): super('zh_HK');
-
-
+  FLocalizationsZhHk() : super('zh_HK');
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
 class FLocalizationsZhTw extends FLocalizationsZh {
-  FLocalizationsZhTw(): super('zh_TW');
-
-
+  FLocalizationsZhTw() : super('zh_TW');
 }
