@@ -153,7 +153,8 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
     assert(
       result != null,
       "No FSelectTileData found in context. This likely because FSelectTileGroup's type parameter could not be inferred. "
-      'It is currently inferred as $T. To fix this, provide the type parameter explicitly, i.e. FSelectTileGroup<MyType>.',
+      'It is currently inferred as FSelectTileGroup<$T>. To fix this, provide the type parameter explicitly, i.e. '
+      'FSelectTileGroup<MyType>.',
     );
     return result!;
   }

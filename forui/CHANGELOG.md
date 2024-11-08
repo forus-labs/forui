@@ -14,6 +14,8 @@
 
 * Add `FTileGroup`.
 
+* Add `FSelectMenuTile`.
+
 * Add `FSelectTile`.
 
 * Add `FSelectTileGroup`.

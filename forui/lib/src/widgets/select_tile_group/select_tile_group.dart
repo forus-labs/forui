@@ -32,13 +32,19 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   /// The divider between tiles. Defaults tp [FTileDivider.indented].
   final FTileDivider divider;
 
-  /// The label displayed next to the select group.
+  /// The label displayed above the group.
+  ///
+  /// It is not rendered if the group is disabled or part of a [FTileGroup].
   final Widget? label;
 
   /// The description displayed below the group.
+  ///
+  /// It is not rendered if the group is disabled or part of a [FTileGroup].
   final Widget? description;
 
   /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  ///
+  /// It is not rendered if the group is disabled or part of a [FTileGroup].
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// The semantic label used by accessibility frameworks.

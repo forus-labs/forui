@@ -93,6 +93,9 @@ final class FThemeData with Diagnosticable {
   /// The select group style.
   final FSelectGroupStyle selectGroupStyle;
 
+  /// The select menu tile style.
+  final FSelectMenuTileStyle selectMenuTileStyle;
+
   /// The slider styles.
   final FSliderStyles sliderStyles;
 
@@ -141,6 +144,7 @@ final class FThemeData with Diagnosticable {
     required this.resizableStyle,
     required this.scaffoldStyle,
     required this.selectGroupStyle,
+    required this.selectMenuTileStyle,
     required this.sliderStyles,
     required this.switchStyle,
     required this.tabsStyle,
@@ -184,6 +188,7 @@ final class FThemeData with Diagnosticable {
       resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      selectMenuTileStyle: FSelectMenuTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -261,6 +266,7 @@ final class FThemeData with Diagnosticable {
     FResizableStyle? resizableStyle,
     FScaffoldStyle? scaffoldStyle,
     FSelectGroupStyle? selectGroupStyle,
+    FSelectMenuTileStyle? selectMenuTileStyle,
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
@@ -293,6 +299,7 @@ final class FThemeData with Diagnosticable {
         resizableStyle: resizableStyle ?? this.resizableStyle,
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
         selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
+        selectMenuTileStyle: selectMenuTileStyle ?? this.selectMenuTileStyle,
         sliderStyles: sliderStyles ?? this.sliderStyles,
         switchStyle: switchStyle ?? this.switchStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
@@ -330,6 +337,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('selectMenuTileStyle', selectMenuTileStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
@@ -368,6 +376,7 @@ final class FThemeData with Diagnosticable {
           resizableStyle == other.resizableStyle &&
           scaffoldStyle == other.scaffoldStyle &&
           selectGroupStyle == other.selectGroupStyle &&
+          selectMenuTileStyle == other.selectMenuTileStyle &&
           sliderStyles == other.sliderStyles &&
           switchStyle == other.switchStyle &&
           tabsStyle == other.tabsStyle &&
@@ -402,6 +411,7 @@ final class FThemeData with Diagnosticable {
       resizableStyle.hashCode ^
       scaffoldStyle.hashCode ^
       selectGroupStyle.hashCode ^
+      selectMenuTileStyle.hashCode ^
       sliderStyles.hashCode ^
       switchStyle.hashCode ^
       tabsStyle.hashCode ^
