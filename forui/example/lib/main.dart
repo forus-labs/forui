@@ -40,6 +40,9 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+        // locale: Locale('de'),
+        // localizationsDelegates: FLocalizations.localizationsDelegates,
+        // supportedLocales: FLocalizations.supportedLocales,
         builder: (context, child) => FTheme(
           data: FThemes.zinc.light,
           child: child!,

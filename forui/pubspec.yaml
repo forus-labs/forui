@@ -22,7 +22,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   forui_assets: ^0.3.0
   google_fonts: ^6.2.0
-  intl: ^0.19.0
+  intl: any
   meta: ^1.11.0
   nitrogen_flutter_svg: ^0.3.0+1
   nitrogen_types: ^0.3.0+1
@@ -34,6 +34,7 @@ dev_dependencies:
   flint: ^2.8.1
   flutter_test:
     sdk: flutter
+  http: ^1.2.2
   mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the
@@ -41,6 +42,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
@@ -15,8 +14,6 @@ enum FCalendarPickerType {
   /// The year-month picker.
   yearMonth,
 }
-
-final _yMMMM = DateFormat.yMMMM();
 
 @internal
 class Header extends StatefulWidget {
@@ -72,7 +69,10 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(_yMMMM.format(widget.month.toNative()), style: widget.style.headerTextStyle), // TODO: Localization
+                Text(
+                  FLocalizations.of(context).yearMonth(widget.month.toNative()),
+                  style: widget.style.headerTextStyle,
+                ),
                 RotationTransition(
                   turns: Tween(begin: 0.0, end: 0.25).animate(_controller),
                   child: Padding(
