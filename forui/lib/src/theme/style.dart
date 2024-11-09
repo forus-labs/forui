@@ -19,6 +19,9 @@ final class FStyle with Diagnosticable {
   /// The style for the form field when it has an error.
   final FFormFieldErrorStyle errorFormFieldStyle;
 
+  /// The focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// The icon style.
   final FIconStyle iconStyle;
 
@@ -40,6 +43,7 @@ final class FStyle with Diagnosticable {
     required this.disabledFormFieldStyle,
     required this.errorFormFieldStyle,
     required this.iconStyle,
+    required this.focusedOutlineStyle,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -66,6 +70,10 @@ final class FStyle with Diagnosticable {
             errorColor: colorScheme.error,
             typography: typography,
           ),
+          focusedOutlineStyle: FFocusedOutlineStyle(
+            color: colorScheme.primary,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+          ),
           iconStyle: FIconStyle(
             color: colorScheme.primary,
             size: 20,
@@ -78,6 +86,7 @@ final class FStyle with Diagnosticable {
     FFormFieldStyle? enabledFormFieldStyle,
     FFormFieldStyle? disabledFormFieldStyle,
     FFormFieldErrorStyle? errorFormFieldStyle,
+    FFocusedOutlineStyle? focusedOutlineStyle,
     FIconStyle? iconStyle,
     BorderRadius? borderRadius,
     double? borderWidth,
@@ -87,6 +96,7 @@ final class FStyle with Diagnosticable {
         enabledFormFieldStyle: enabledFormFieldStyle ?? this.enabledFormFieldStyle,
         disabledFormFieldStyle: disabledFormFieldStyle ?? this.disabledFormFieldStyle,
         errorFormFieldStyle: errorFormFieldStyle ?? this.errorFormFieldStyle,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
         iconStyle: iconStyle ?? this.iconStyle,
         borderRadius: borderRadius ?? this.borderRadius,
         borderWidth: borderWidth ?? this.borderWidth,
@@ -100,6 +110,7 @@ final class FStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledFormFieldStyle', enabledFormFieldStyle))
       ..add(DiagnosticsProperty('disabledFormFieldStyle', disabledFormFieldStyle))
       ..add(DiagnosticsProperty('errorFormFieldStyle', errorFormFieldStyle))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
       ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(8)))
       ..add(DoubleProperty('borderWidth', borderWidth, defaultValue: 1))
@@ -114,6 +125,7 @@ final class FStyle with Diagnosticable {
           enabledFormFieldStyle == other.enabledFormFieldStyle &&
           disabledFormFieldStyle == other.disabledFormFieldStyle &&
           errorFormFieldStyle == other.errorFormFieldStyle &&
+          focusedOutlineStyle == other.focusedOutlineStyle &&
           iconStyle == other.iconStyle &&
           borderRadius == other.borderRadius &&
           borderWidth == other.borderWidth &&
@@ -124,6 +136,7 @@ final class FStyle with Diagnosticable {
       enabledFormFieldStyle.hashCode ^
       disabledFormFieldStyle.hashCode ^
       errorFormFieldStyle.hashCode ^
+      focusedOutlineStyle.hashCode ^
       iconStyle.hashCode ^
       borderRadius.hashCode ^
       borderWidth.hashCode ^
