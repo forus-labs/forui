@@ -85,6 +85,7 @@ final class FButtonStyles with Diagnosticable {
               border: Border.all(color: colorScheme.disable(colorScheme.border)),
               borderRadius: style.borderRadius,
             ),
+            focusedOutlineStyle: style.focusedOutlineStyle,
             contentStyle: FButtonContentStyle.inherit(
               typography: typography,
               enabled: colorScheme.secondaryForeground,
@@ -110,6 +111,7 @@ final class FButtonStyles with Diagnosticable {
             disabledBoxDecoration: BoxDecoration(
               borderRadius: style.borderRadius,
             ),
+            focusedOutlineStyle: style.focusedOutlineStyle,
             contentStyle: FButtonContentStyle.inherit(
               typography: typography,
               enabled: colorScheme.secondaryForeground,

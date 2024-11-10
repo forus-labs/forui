@@ -207,6 +207,9 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
   /// The box decoration for a disabled button.
   final BoxDecoration disabledBoxDecoration;
 
+  /// The focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// The content's style.
   final FButtonContentStyle contentStyle;
 
@@ -221,6 +224,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     required this.enabledBoxDecoration,
     required this.enabledHoverBoxDecoration,
     required this.disabledBoxDecoration,
+    required this.focusedOutlineStyle,
     required this.contentStyle,
     required this.iconContentStyle,
     required this.spinnerStyle,
@@ -248,6 +252,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
             borderRadius: style.borderRadius,
             color: disabledBoxColor,
           ),
+          focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: FButtonContentStyle.inherit(
             typography: typography,
             enabled: enabledContentColor,
@@ -269,6 +274,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
     BoxDecoration? enabledBoxDecoration,
     BoxDecoration? enabledHoverBoxDecoration,
     BoxDecoration? disabledBoxDecoration,
+    FFocusedOutlineStyle? focusedOutlineStyle,
     FButtonContentStyle? contentStyle,
     FButtonIconContentStyle? iconContentStyle,
     FButtonSpinnerStyle? spinnerStyle,
@@ -277,6 +283,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
         enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
         enabledHoverBoxDecoration: enabledHoverBoxDecoration ?? this.enabledHoverBoxDecoration,
         disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
         contentStyle: contentStyle ?? this.contentStyle,
         iconContentStyle: iconContentStyle ?? this.iconContentStyle,
         spinnerStyle: spinnerStyle ?? this.spinnerStyle,
@@ -289,6 +296,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledBoxDecoration', enabledBoxDecoration))
       ..add(DiagnosticsProperty('enabledHoverBoxDecoration', enabledHoverBoxDecoration))
       ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(DiagnosticsProperty('contentStyle', contentStyle))
       ..add(DiagnosticsProperty('iconContentStyle', iconContentStyle))
       ..add(DiagnosticsProperty('spinnerStyle', spinnerStyle));
@@ -302,6 +310,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
           enabledBoxDecoration == other.enabledBoxDecoration &&
           enabledHoverBoxDecoration == other.enabledHoverBoxDecoration &&
           disabledBoxDecoration == other.disabledBoxDecoration &&
+          focusedOutlineStyle == other.focusedOutlineStyle &&
           contentStyle == other.contentStyle &&
           iconContentStyle == other.iconContentStyle &&
           spinnerStyle == other.spinnerStyle;
@@ -311,6 +320,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
       enabledBoxDecoration.hashCode ^
       enabledHoverBoxDecoration.hashCode ^
       disabledBoxDecoration.hashCode ^
+      focusedOutlineStyle.hashCode ^
       contentStyle.hashCode ^
       iconContentStyle.hashCode ^
       spinnerStyle.hashCode;

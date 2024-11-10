@@ -17,6 +17,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FButton(
+              autofocus: true,
               label: const Text('Button'),
               style: TestScaffold.blueScreen.buttonStyles.primary,
               prefix: FIcon(FAssets.icons.circlePlay),
@@ -120,6 +121,25 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('button/${theme.name}/$variant/enabled-long-pressed.png'),
           );
+        });
+
+        testWidgets('${theme.name} focused', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FButton(
+                autofocus: true,
+                label: const Text('Button'),
+                style: variant,
+                prefix: FIcon(FAssets.icons.circlePlay),
+                suffix: FIcon(FAssets.icons.circleStop),
+                onPress: () {},
+              ),
+            ),
+          );
+          await tester.pumpAndSettle();
+
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$variant/focused.png'));
         });
 
         testWidgets('${theme.name} disabled with FButtonContent', (tester) async {

@@ -51,6 +51,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             ),
             const SizedBox(height: 20),
             FButton(
+              autofocus: true,
               label: const Text('Save'),
               onPress: () {
                 if (!_formKey.currentState!.validate()) {

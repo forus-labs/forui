@@ -167,7 +167,7 @@ final class FThemeData with Diagnosticable {
       colorScheme: colorScheme,
       typography: typography,
       style: style,
-      accordionStyle: FAccordionStyle.inherit(colorScheme: colorScheme, typography: typography),
+      accordionStyle: FAccordionStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       alertStyles: FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       avatarStyle: FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),

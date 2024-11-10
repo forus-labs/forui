@@ -1,6 +1,6 @@
 ## 0.7.0 (Next)
 
-This update introduces several new tile widgets. It also adds support for responsive breakpoints and localization.
+This update adds responsive breakpoints, focused outlines & localization! It also introduces several new tile widgets.
 
 ### Additions
 
@@ -33,6 +33,12 @@ This update introduces several new tile widgets. It also adds support for respon
 * Add `FPortal.offset`.
 
 * Add `FLocalizations`.
+
+* Add `FFocusedOutline`.
+
+* **Breaking** Add `focusedOutlineStyle` to `FAccordionStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FButtonStyle` - this only affect users which use the primary constructor.
 
 ### Changes
 

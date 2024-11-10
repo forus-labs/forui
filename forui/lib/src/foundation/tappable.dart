@@ -37,6 +37,9 @@ typedef FTappableData = ({bool focused, bool hovered});
 class FTappable extends StatefulWidget {
   static Widget _builder(_, __, Widget? child) => child!;
 
+  /// The style used when the tappable is focused. This tappable will not be outlined if null.
+  final FFocusedOutlineStyle? focusedOutlineStyle;
+
   /// The semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
@@ -90,6 +93,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const factory FTappable.animated({
+    FFocusedOutlineStyle? focusedOutlineStyle,
     String? semanticLabel,
     bool semanticSelected,
     bool excludeSemantics,
@@ -111,6 +115,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const FTappable({
+    this.focusedOutlineStyle,
     this.semanticLabel,
     this.semanticSelected = false,
     this.excludeSemantics = false,
@@ -135,6 +140,7 @@ class FTappable extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('semanticsSelected', value: semanticSelected, ifTrue: 'selected'))
       ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
@@ -216,6 +222,14 @@ class _FTappableState extends State<FTappable> {
       ),
     );
 
+    if (widget.focusedOutlineStyle case final style?) {
+      tappable = FFocusedOutline(
+        focused: _focused,
+        style: style,
+        child: tappable,
+      );
+    }
+
     if (widget.onPress != null) {
       tappable = Shortcuts(
         shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
@@ -241,6 +255,7 @@ class _FTappableState extends State<FTappable> {
 @internal
 class AnimatedTappable extends FTappable {
   const AnimatedTappable({
+    super.focusedOutlineStyle,
     super.semanticLabel,
     super.semanticSelected = false,
     super.excludeSemantics = false,
