@@ -47,6 +47,8 @@ This update adds responsive breakpoints, focused outlines & localization! It als
 * **Breaking** Change `FPopover()` to not automatically wrap a target in a `GestureDetector` - use `FPopover.tappable(...)`
   instead.
 
+* **Breaking** Change `focusedBorderColor` to `focusedOutlineStyle` in various calendar related styles.
+
 * Change `FCalendar` to support localization.
 
 ### Fixes

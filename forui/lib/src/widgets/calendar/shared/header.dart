@@ -56,6 +56,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => FTappable(
+        focusedOutlineStyle: widget.style.focusedOutlineStyle,
         onPress: () => widget.type.value = switch (widget.type.value) {
           FCalendarPickerType.day => FCalendarPickerType.yearMonth,
           FCalendarPickerType.yearMonth => FCalendarPickerType.day,
@@ -186,6 +187,9 @@ class Navigation extends StatelessWidget {
 
 /// The calendar header's style.
 final class FCalendarHeaderStyle with Diagnosticable {
+  /// The focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// The button style.
   final FButtonCustomStyle buttonStyle;
 
@@ -203,6 +207,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
 
   /// Creates a [FCalendarHeaderStyle].
   FCalendarHeaderStyle({
+    required this.focusedOutlineStyle,
     required this.buttonStyle,
     required this.headerTextStyle,
     required this.enabledIconColor,
@@ -218,6 +223,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
   }) {
     final outline = FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style).outline;
     return FCalendarHeaderStyle(
+      focusedOutlineStyle: style.focusedOutlineStyle,
       buttonStyle: outline.copyWith(
         enabledBoxDecoration: outline.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
         enabledHoverBoxDecoration: outline.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
@@ -232,6 +238,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @useResult
   FCalendarHeaderStyle copyWith({
+    FFocusedOutlineStyle? focusedOutlineStyle,
     FButtonCustomStyle? buttonStyle,
     TextStyle? headerTextStyle,
     Color? enabledIconColor,
@@ -239,6 +246,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
     Duration? animationDuration,
   }) =>
       FCalendarHeaderStyle(
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
         buttonStyle: buttonStyle ?? this.buttonStyle,
         headerTextStyle: headerTextStyle ?? this.headerTextStyle,
         enabledIconColor: enabledIconColor ?? this.enabledIconColor,
@@ -250,6 +258,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(DiagnosticsProperty('buttonStyle', buttonStyle))
       ..add(DiagnosticsProperty('headerTextStyle', headerTextStyle))
       ..add(ColorProperty('enabledIconColor', enabledIconColor))
@@ -262,6 +271,8 @@ final class FCalendarHeaderStyle with Diagnosticable {
       identical(this, other) ||
       other is FCalendarHeaderStyle &&
           runtimeType == other.runtimeType &&
+          focusedOutlineStyle == other.focusedOutlineStyle &&
+          buttonStyle == other.buttonStyle &&
           headerTextStyle == other.headerTextStyle &&
           enabledIconColor == other.enabledIconColor &&
           disabledIconColor == other.disabledIconColor &&
@@ -269,5 +280,10 @@ final class FCalendarHeaderStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      headerTextStyle.hashCode ^ enabledIconColor.hashCode ^ disabledIconColor.hashCode ^ animationDuration.hashCode;
+      focusedOutlineStyle.hashCode ^
+      buttonStyle.hashCode ^
+      headerTextStyle.hashCode ^
+      enabledIconColor.hashCode ^
+      disabledIconColor.hashCode ^
+      animationDuration.hashCode;
 }
