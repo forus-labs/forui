@@ -38,6 +38,8 @@ This update adds responsive breakpoints, focused outlines & localization! It als
 
 * **Breaking** Add `focusedOutlineStyle` to `FAccordionStyle` - this only affect users which use the primary constructor.
 
+* **Breaking** Add `focusedOutlineStyle` to `FBottomNavigationBar` - this only affect users which use the primary constructor.
+
 * **Breaking** Add `focusedOutlineStyle` to `FButtonStyle` - this only affect users which use the primary constructor.
 
 ### Changes

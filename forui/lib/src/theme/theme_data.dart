@@ -171,7 +171,11 @@ final class FThemeData with Diagnosticable {
       alertStyles: FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       avatarStyle: FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
       badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography),
+      bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(
+        colorScheme: colorScheme,
+        typography: typography,
+        style: style,
+      ),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
