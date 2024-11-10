@@ -114,7 +114,7 @@ final class FNestedHeaderStyle with Diagnosticable {
             fontWeight: FontWeight.w600,
             height: 1,
           ),
-          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 25),
+          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 25),
           padding: style.pagePadding.copyWith(bottom: 15),
         );
 

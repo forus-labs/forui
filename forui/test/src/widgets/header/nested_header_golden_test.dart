@@ -64,6 +64,35 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-header.png'));
       });
+
+      testWidgets('${theme.name} with focused FNestedHeader actions', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FHeader.nested(
+              title: const Text('Title'),
+              prefixActions: [
+                FHeaderAction.back(onPress: () {}),
+                FHeaderAction(
+                  icon: FIcon(FAssets.icons.alarmClock),
+                  onPress: null,
+                ),
+              ],
+              suffixActions: [
+                FHeaderAction(
+                  autofocus: true,
+                  icon: FIcon(FAssets.icons.plus),
+                  onPress: () {},
+                ),
+                FHeaderAction.x(onPress: () {}),
+              ],
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-focused.png'));
+      });
     }
   });
 }

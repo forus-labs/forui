@@ -102,7 +102,7 @@ final class FRootHeaderStyle with Diagnosticable {
             fontWeight: FontWeight.w700,
             height: 1,
           ),
-          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 30),
+          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 30),
           padding: style.pagePadding.copyWith(bottom: 15),
         );
 
