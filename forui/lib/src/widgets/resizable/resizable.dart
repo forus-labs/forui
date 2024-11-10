@@ -248,10 +248,11 @@ final class FResizableStyle with Diagnosticable {
   });
 
   /// Creates a [FResizableStyle] that inherits its properties from [colorScheme].
-  FResizableStyle.inherit({required FColorScheme colorScheme})
+  FResizableStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : this(
           horizontalDividerStyle: FResizableDividerStyle(
             color: colorScheme.border,
+            focusedOutlineStyle: style.focusedOutlineStyle,
             thumbStyle: FResizableDividerThumbStyle(
               backgroundColor: colorScheme.border,
               foregroundColor: colorScheme.foreground,
@@ -261,6 +262,7 @@ final class FResizableStyle with Diagnosticable {
           ),
           verticalDividerStyle: FResizableDividerStyle(
             color: colorScheme.border,
+            focusedOutlineStyle: style.focusedOutlineStyle,
             thumbStyle: FResizableDividerThumbStyle(
               backgroundColor: colorScheme.border,
               foregroundColor: colorScheme.foreground,

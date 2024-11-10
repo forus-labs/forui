@@ -77,7 +77,6 @@ void main() {
             ),
           ),
         );
-        await tester.pumpAndSettle();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-focused.png'));
       });

@@ -162,6 +162,13 @@ class _FTappableState extends State<FTappable> {
   bool _hovered = false;
   bool _touched = false;
 
+
+  @override
+  void initState() {
+    super.initState();
+    _focused = widget.autofocus;
+  }
+
   @override
   Widget build(BuildContext context) {
     var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);

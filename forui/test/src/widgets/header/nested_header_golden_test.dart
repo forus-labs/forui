@@ -89,7 +89,6 @@ void main() {
             ),
           ),
         );
-        await tester.pumpAndSettle();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-focused.png'));
       });

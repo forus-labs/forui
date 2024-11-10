@@ -83,7 +83,6 @@ void main() {
             ),
           ),
         );
-        await tester.pumpAndSettle();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/focused.png'));
       });

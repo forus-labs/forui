@@ -15,6 +15,11 @@ void main() {
       height: 4,
       width: 4,
     ),
+    focusedOutlineStyle: FFocusedOutlineStyle(
+      color: const Color(0xFF000000),
+      width: 2,
+      borderRadius: BorderRadius.circular(4),
+    ),
   );
 
   final left = FResizableRegionData(index: 0, extent: (min: 10, max: 100, total: 100), offset: (min: 0, max: 50));

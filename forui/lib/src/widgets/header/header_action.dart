@@ -132,6 +132,9 @@ class FHeaderAction extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('icon', icon))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));
   }

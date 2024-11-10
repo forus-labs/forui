@@ -137,7 +137,6 @@ void main() {
               ),
             ),
           );
-          await tester.pumpAndSettle();
 
           await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$variant/focused.png'));
         });
