@@ -68,6 +68,45 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-tabs.png'));
       });
+
+      testWidgets('focus - ${theme.name}', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FTabs(
+              tabs: [
+                FTabEntry(
+                  label: const Text('Account'),
+                  content: FCard(
+                    title: const Text('Account'),
+                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+                    child: Container(
+                      color: Colors.blue,
+                      height: 100,
+                    ),
+                  ),
+                ),
+                FTabEntry(
+                  label: const Text('Password'),
+                  content: FCard(
+                    title: const Text('Password'),
+                    subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+                    child: Container(
+                      color: Colors.red,
+                      height: 100,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+
+        Focus.of(tester.element(find.text('Account').first)).requestFocus();
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-focused.png'));
+      });
     }
   });
 }

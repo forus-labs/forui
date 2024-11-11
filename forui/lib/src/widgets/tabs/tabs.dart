@@ -104,6 +104,7 @@ class FTabs extends StatefulWidget {
 
 class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   late FTabController _controller;
+  int? _focused;
 
   @override
   void initState() {
@@ -147,11 +148,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
             decoration: style.decoration,
             child: TabBar(
               tabs: [
-                for (final tab in widget.tabs)
-                  Tab(
-                    height: style.height,
-                    child: tab.label,
-                  ),
+                for (final tab in widget.tabs) _Tab(style: style, label: tab.label),
               ],
               controller: _controller._controller,
               isScrollable: widget.scrollable,
@@ -199,6 +196,48 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     if (widget.controller == null) {
       _controller.dispose();
     }
+    super.dispose();
+  }
+}
+
+class _Tab extends StatefulWidget {
+  final FTabsStyle style;
+  final Widget label;
+
+  const _Tab({required this.style, required this.label});
+
+  @override
+  State<_Tab> createState() => _TabState();
+}
+
+class _TabState extends State<_Tab> {
+  FocusNode? _focus;
+  bool _focused = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final updated = Focus.of(context);
+    if (_focus != updated) {
+      _focus?.removeListener(_handleFocusChange);
+      _focus = updated..addListener(_handleFocusChange);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => FFocusedOutline(
+        focused: _focused,
+        child: Tab(
+          height: widget.style.height,
+          child: widget.label,
+        ),
+      );
+
+  void _handleFocusChange() => setState(() => _focused = _focus?.hasFocus ?? false);
+
+  @override
+  void dispose() {
+    _focus?.removeListener(_handleFocusChange);
     super.dispose();
   }
 }
