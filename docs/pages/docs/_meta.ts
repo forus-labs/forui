@@ -1,6 +1,7 @@
 export default {
   index: 'Getting Started',
   themes: 'Themes',
+  localization: 'Localization',
   responsive: 'Responsive',
   'icon-library': 'Icon Library',
   api_reference: {

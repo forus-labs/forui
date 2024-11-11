@@ -1,17 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
 import 'package:forui/src/widgets/calendar/year/year_picker.dart';
-import 'package:forui/src/widgets/calendar/year_month_picker.dart';
-
-// ignore: non_constant_identifier_names
-final _MMM = DateFormat.MMM();
 
 @internal
 class MonthPicker extends StatefulWidget {
@@ -86,7 +82,7 @@ class _MonthPickerState extends State<MonthPicker> {
                 focusNode: _months[i],
                 current: widget.today.truncate(to: DateUnit.months) == month,
                 selectable: widget.start <= month && month <= widget.end,
-                format: (date) => _MMM.format(date.toNative()), // TODO: localize
+                format: (date) => FLocalizations.of(context).abbreviatedMonth(date.toNative()),
                 onPress: widget.onPress,
               ),
           ],

@@ -1,0 +1,56 @@
+{
+  "fullDate": "{date}",
+  "@fullDate": {
+    "description": "The full date.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMMd"
+      }
+    }
+  },
+
+  "year": "{date}",
+  "@year": {
+    "description": "The year.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "y"
+      }
+    }
+  },
+
+  "yearMonth": "{date}",
+  "@yearMonth": {
+    "description": "The year and month.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMM"
+      }
+    }
+  },
+
+  "abbreviatedMonth": "{date}",
+  "@abbreviatedMonth": {
+    "description": "The abbreviated month.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMM"
+      }
+    }
+  },
+
+  "day": "{date}",
+  "@day": {
+    "description": "The day of the month.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "d"
+      }
+    }
+  }
+}

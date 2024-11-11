@@ -340,3 +340,32 @@ the corresponding Dart code.
 3. The query parameters to pass to the sample widget.
 4. The height of the `<Widget/>` component.
 5. `{}` specifies the lines to highlight.
+
+## Updating Localizations
+
+In most cases, you will not need to update localizations. However, if you do, please read 
+[Internationalizing Flutter apps](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization).
+before continuing.
+
+Each ARB file in the `lib/l10n` represents a localization for a specific language. We try to maintain parity with the 
+languages Flutter natively supports. To add a missing language, run the `fetch_arb` script in the `tool` directory.
+
+After adding the necessary localization messages, run the following command in the `forui` project directory which will
+generate the localization files in `lib/src/localizations`:
+```shell
+flutter gen-l10n
+```
+
+Inside the generated `localizations.dart` file, change:
+```dart
+static FLocalizations of(BuildContext context) {
+  return Localizations.of<FLocalizations>(context, FLocalizations);
+}
+```
+
+To:
+```dart
+static FLocalizations of(BuildContext context) {
+  return Localizations.of<FLocalizations>(context, FLocalizations) ?? DefaultLocalizations();
+}
+```

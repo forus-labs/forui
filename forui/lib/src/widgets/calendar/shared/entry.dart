@@ -38,7 +38,7 @@ abstract class Entry extends StatelessWidget {
             left: isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius,
             right: isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
           ),
-          text: '${date.day}', // TODO: localization
+          text: FLocalizations.of(context).day(date.toNative()),
           data: data,
           current: today,
         );

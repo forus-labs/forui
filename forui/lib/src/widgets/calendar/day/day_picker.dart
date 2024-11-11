@@ -15,6 +15,7 @@ class DayPicker extends StatefulWidget {
   static const maxRows = 7;
 
   final FCalendarDayPickerStyle style;
+  final FLocalizations localization;
   final LocalDate month;
   final LocalDate today;
   final LocalDate? focused;
@@ -25,6 +26,7 @@ class DayPicker extends StatefulWidget {
 
   const DayPicker({
     required this.style,
+    required this.localization,
     required this.month,
     required this.today,
     required this.focused,
@@ -43,6 +45,7 @@ class DayPicker extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('localization', localization))
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
@@ -71,7 +74,7 @@ class _DayPickerState extends State<DayPicker> {
   }
 
   (LocalDate, LocalDate) get _range {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
+    final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
     final firstDayOfMonth = widget.month.firstDayOfMonth;
     var difference = firstDayOfMonth.weekday - firstDayOfWeek;
     if (difference < 0) {
@@ -122,13 +125,13 @@ class _DayPickerState extends State<DayPicker> {
       );
 
   List<Widget> _headers(BuildContext context) {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? DateTime.sunday; // TODO: Localization
-    final narrowWeekdays = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']; // TODO: Localization
+    final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
+    final narrowWeekdays = widget.localization.narrowWeekDays;
 
     return [
-      for (int i = firstDayOfWeek, j = 0; j < DateTime.daysPerWeek; i = (i + 1) % DateTime.daysPerWeek, j++)
+      for (int i = firstDayOfWeek, j = 0; j < DateTime.daysPerWeek; i++, j++)
         ExcludeSemantics(
-          child: Center(child: Text(narrowWeekdays[i - 1], style: widget.style.headerTextStyle)),
+          child: Center(child: Text(narrowWeekdays[i % DateTime.daysPerWeek], style: widget.style.headerTextStyle)),
         ),
     ];
   }

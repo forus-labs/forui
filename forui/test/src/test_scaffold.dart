@@ -37,6 +37,7 @@ class TestScaffold extends StatelessWidget {
 
   final FThemeData theme;
   final Color? background;
+  final Locale? locale;
   final Widget child;
   final bool padded;
   final bool wrapped;
@@ -48,6 +49,7 @@ class TestScaffold extends StatelessWidget {
     Color? background,
     super.key,
   })  : theme = theme ?? FThemes.zinc.light,
+        locale = null,
         background = switch ((theme, background)) {
           (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
           (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
@@ -57,6 +59,7 @@ class TestScaffold extends StatelessWidget {
 
   TestScaffold.app({
     required this.child,
+    this.locale,
     this.padded = true,
     FThemeData? theme,
     Color? background,
@@ -72,6 +75,7 @@ class TestScaffold extends StatelessWidget {
   TestScaffold.blue({required this.child, super.key})
       : theme = FThemes.zinc.light,
         background = blueScreen.colorScheme.background,
+        locale = null,
         padded = false,
         wrapped = false;
 
@@ -80,6 +84,9 @@ class TestScaffold extends StatelessWidget {
     if (wrapped) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
+        locale: locale,
+        localizationsDelegates: FLocalizations.localizationsDelegates,
+        supportedLocales: FLocalizations.supportedLocales,
         builder: (context, child) => FTheme(
           data: theme,
           textDirection: TextDirection.ltr,
@@ -112,6 +119,7 @@ class TestScaffold extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('data', theme))
       ..add(ColorProperty('background', background))
+      ..add(DiagnosticsProperty('locale', locale))
       ..add(FlagProperty('padded', value: padded, ifTrue: 'padded'))
       ..add(FlagProperty('wrapped', value: wrapped, ifTrue: 'wrapped'));
   }
