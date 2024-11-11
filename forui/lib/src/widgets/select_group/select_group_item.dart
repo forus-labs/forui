@@ -259,6 +259,7 @@ class FCheckboxSelectGroupStyle extends FCheckboxStyle {
   /// Creates a [FCheckboxSelectGroupStyle].
   FCheckboxSelectGroupStyle({
     required super.labelLayoutStyle,
+    required super.focusedOutlineStyle,
     required super.enabledStyle,
     required super.disabledStyle,
     required super.errorStyle,
@@ -269,6 +270,7 @@ class FCheckboxSelectGroupStyle extends FCheckboxStyle {
   FCheckboxSelectGroupStyle.inherit({required FCheckboxStyle style})
       : this(
           labelLayoutStyle: style.labelLayoutStyle,
+          focusedOutlineStyle: style.focusedOutlineStyle,
           enabledStyle: style.enabledStyle,
           disabledStyle: style.disabledStyle,
           errorStyle: style.errorStyle,
@@ -302,6 +304,7 @@ class FRadioSelectGroupStyle extends FRadioStyle {
     required super.animationDuration,
     required super.curve,
     required super.labelLayoutStyle,
+    required super.focusedOutlineStyle,
     required super.enabledStyle,
     required super.disabledStyle,
     required super.errorStyle,
@@ -314,6 +317,7 @@ class FRadioSelectGroupStyle extends FRadioStyle {
           animationDuration: style.animationDuration,
           curve: style.curve,
           labelLayoutStyle: style.labelLayoutStyle,
+          focusedOutlineStyle: style.focusedOutlineStyle,
           enabledStyle: style.enabledStyle,
           disabledStyle: style.disabledStyle,
           errorStyle: style.errorStyle,

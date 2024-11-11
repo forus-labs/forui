@@ -189,7 +189,7 @@ final class FThemeData with Diagnosticable {
       popoverMenuStyle: FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
       radioStyle: FRadioStyle.inherit(colorScheme: colorScheme, style: style),
-      resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme),
+      resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme, style: style),
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       selectMenuTileStyle: FSelectMenuTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),

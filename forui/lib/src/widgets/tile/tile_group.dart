@@ -104,6 +104,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
               divider: divider,
               enabled: enabled,
               hovered: false,
+              focused: false,
               index: index,
               length: children.length,
               child: child,

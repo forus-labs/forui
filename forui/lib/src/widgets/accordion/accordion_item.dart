@@ -118,7 +118,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
             focusNode: widget.focusNode,
             onFocusChange: widget.onFocusChange,
             onPress: () => controller.toggle(index),
-            builder: (context, state, child) => Padding(
+            builder: (context, data, child) => Padding(
               padding: style.titlePadding,
               child: Row(
                 children: [
@@ -129,7 +129,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                         applyHeightToFirstAscent: false,
                         applyHeightToLastDescent: false,
                       ),
-                      style: state.hovered
+                      style: data.hovered
                           ? style.titleTextStyle.copyWith(decoration: TextDecoration.underline)
                           : style.titleTextStyle,
                       child: widget.title,
@@ -137,7 +137,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                   ),
                   FFocusedOutline(
                     style: style.focusedOutlineStyle,
-                    focused: state.focused,
+                    focused: data.focused,
                     child: child!,
                   ),
                 ],

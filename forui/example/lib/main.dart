@@ -51,6 +51,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
             title: const Text('Example'),
             actions: [
               FHeaderAction(
+                autofocus: true,
                 icon: FIcon(FAssets.icons.plus),
                 onPress: controller.toggle,
               ),

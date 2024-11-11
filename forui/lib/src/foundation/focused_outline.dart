@@ -119,9 +119,6 @@ class FFocusedOutlineStyle with Diagnosticable {
   final double width;
 
   /// The spacing between the outline and the outlined widget. Defaults to 2.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if the width is not positive.
   final double spacing;
 
   /// Creates a [FFocusedOutlineStyle].
@@ -129,9 +126,8 @@ class FFocusedOutlineStyle with Diagnosticable {
     required this.color,
     required this.borderRadius,
     this.width = 1,
-    this.spacing = 2,
-  })  : assert(0 < width, 'The width must be greater than 0.'),
-        assert(0 < spacing, 'The spacing must be greater than 0.');
+    this.spacing = 3,
+  })  : assert(0 < width, 'The width must be greater than 0.');
 
   /// Returns a copy of this style with the given properties replaced.
   @useResult

@@ -128,8 +128,8 @@ class FButton extends StatelessWidget {
       onFocusChange: onFocusChange,
       onPress: onPress,
       onLongPress: onLongPress,
-      builder: (context, state, child) => DecoratedBox(
-        decoration: switch ((enabled, state.hovered)) {
+      builder: (context, data, child) => DecoratedBox(
+        decoration: switch ((enabled, data.hovered)) {
           (true, false) => style.enabledBoxDecoration,
           (true, true) => style.enabledHoverBoxDecoration,
           (false, _) => style.disabledBoxDecoration,

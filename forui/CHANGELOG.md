@@ -46,6 +46,12 @@ This update adds responsive breakpoints, focused outlines & localization! It als
 
 * **Breaking** Add `focusedOutlineStyle` to `FResizableDividerStyle` - this only affect users which use the primary constructor.
 
+* **Breaking** Add `focusedOutlineStyle` to `FCheckboxStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FRadioStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FTileStyle` - this only affect users which use the primary constructor.
+
 ### Changes
 
 * **Breaking** Change `FPopover()` to not automatically wrap a target in a `GestureDetector` - use `FPopover.tappable(...)`

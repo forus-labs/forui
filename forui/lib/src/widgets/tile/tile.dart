@@ -126,19 +126,26 @@ class FTile extends StatelessWidget with FTileMixin {
     final curveTop = group.index == 0 && tile.index == 0;
     final curveBottom = group.index == group.length - 1 && tile.index == tile.length - 1;
 
-    Widget content({required bool hovered}) => DecoratedBox(
+    Widget content(FTappableData data) => DecoratedBox(
           decoration: BoxDecoration(
-            color: switch ((enabled, hovered)) {
+            color: switch ((enabled, data.hovered)) {
               (true, true) => style.enabledHoveredBackgroundColor,
               (true, false) => style.enabledBackgroundColor,
               (false, _) => style.disabledBackgroundColor,
             },
-            border: Border(
-              top: curveTop ? style.border.top : BorderSide.none,
-              left: style.border.left,
-              right: style.border.right,
-              bottom: curveBottom ? style.border.top : BorderSide.none,
-            ),
+            border: data.focused
+                ? Border(
+                    top: curveBottom ? style.focusedBorder.top : style.focusedBorder.left,
+                    left: style.focusedBorder.left,
+                    right: style.focusedBorder.right,
+                    bottom: curveBottom ? style.focusedBorder.top : BorderSide.none,
+                  )
+                : Border(
+                    top: curveTop ? style.border.top : BorderSide.none,
+                    left: style.border.left,
+                    right: style.border.right,
+                    bottom: curveBottom ? style.border.top : BorderSide.none,
+                  ),
             borderRadius: BorderRadius.only(
               topLeft: curveTop ? style.borderRadius.topLeft : Radius.zero,
               topRight: curveTop ? style.borderRadius.topRight : Radius.zero,
@@ -150,7 +157,8 @@ class FTile extends StatelessWidget with FTileMixin {
             style: style,
             divider: tile.divider,
             enabled: enabled,
-            hovered: hovered,
+            hovered: data.hovered,
+            focused: data.focused,
             index: tile.index,
             length: tile.length,
             child: child,
@@ -166,7 +174,7 @@ class FTile extends StatelessWidget with FTileMixin {
       onFocusChange: onFocusChange,
       onPress: onPress,
       onLongPress: onLongPress,
-      builder: (_, data, __) => content(hovered: data.hovered),
+      builder: (_, data, __) => content(data),
     );
   }
 
@@ -214,6 +222,9 @@ class FTileData extends InheritedWidget {
   /// True if the tile is hovered over.
   final bool hovered;
 
+  /// True if the tile is focused.
+  final bool focused;
+
   /// The tile's index in the current group.
   final int index;
 
@@ -226,6 +237,7 @@ class FTileData extends InheritedWidget {
     required this.divider,
     required this.enabled,
     required this.hovered,
+    required this.focused,
     required this.index,
     required this.length,
     required super.child,
@@ -238,6 +250,7 @@ class FTileData extends InheritedWidget {
       divider != old.divider ||
       enabled != old.enabled ||
       hovered != old.hovered ||
+      focused != old.focused ||
       index != old.index ||
       length != old.length;
 
@@ -249,6 +262,7 @@ class FTileData extends InheritedWidget {
       ..add(EnumProperty('divider', divider))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered'))
+      ..add(FlagProperty('focused', value: focused, ifTrue: 'focused'))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length));
   }
@@ -258,6 +272,9 @@ class FTileData extends InheritedWidget {
 final class FTileStyle with Diagnosticable {
   /// The tile's border.
   final Border border;
+
+  /// The tile's focused border.
+  final Border focusedBorder;
 
   /// The tile's border radius.
   final BorderRadius borderRadius;
@@ -280,17 +297,22 @@ final class FTileStyle with Diagnosticable {
   /// The divider's style.
   final FDividerStyle dividerStyle;
 
+  /// The focused divider's style.
+  final FDividerStyle focusedDividerStyle;
+
   /// The default tile content's style.
   final FTileContentStyle contentStyle;
 
   /// Creates a [FTileStyle].
   FTileStyle({
     required this.border,
+    required this.focusedBorder,
     required this.borderRadius,
     required this.enabledBackgroundColor,
     required this.enabledHoveredBackgroundColor,
     required this.disabledBackgroundColor,
     required this.dividerStyle,
+    required this.focusedDividerStyle,
     required this.contentStyle,
     this.touchHoverEnterDuration = Duration.zero,
     this.touchHoverExitDuration = const Duration(milliseconds: 25),
@@ -300,11 +322,17 @@ final class FTileStyle with Diagnosticable {
   FTileStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
           border: Border.all(width: style.borderWidth, color: colorScheme.border),
+          focusedBorder: Border.all(width: style.borderWidth, color: colorScheme.primary),
           borderRadius: style.borderRadius,
           enabledBackgroundColor: colorScheme.background,
           enabledHoveredBackgroundColor: colorScheme.secondary,
           disabledBackgroundColor: colorScheme.disable(colorScheme.secondary),
           dividerStyle: FDividerStyle(color: colorScheme.border, width: style.borderWidth, padding: EdgeInsets.zero),
+          focusedDividerStyle: FDividerStyle(
+            color: colorScheme.primary,
+            width: style.borderWidth,
+            padding: EdgeInsets.zero,
+          ),
           contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
         );
 
@@ -312,6 +340,7 @@ final class FTileStyle with Diagnosticable {
   @useResult
   FTileStyle copyWith({
     Border? border,
+    Border? focusedBorder,
     BorderRadius? borderRadius,
     Color? enabledBackgroundColor,
     Color? enabledHoveredBackgroundColor,
@@ -319,10 +348,12 @@ final class FTileStyle with Diagnosticable {
     Duration? touchHoverEnterDuration,
     Duration? touchHoverExitDuration,
     FDividerStyle? dividerStyle,
+    FDividerStyle? focusedDividerStyle,
     FTileContentStyle? contentStyle,
   }) =>
       FTileStyle(
         border: border ?? this.border,
+        focusedBorder: focusedBorder ?? this.focusedBorder,
         borderRadius: borderRadius ?? this.borderRadius,
         enabledBackgroundColor: enabledBackgroundColor ?? this.enabledBackgroundColor,
         enabledHoveredBackgroundColor: enabledHoveredBackgroundColor ?? this.enabledHoveredBackgroundColor,
@@ -330,6 +361,7 @@ final class FTileStyle with Diagnosticable {
         touchHoverEnterDuration: touchHoverEnterDuration ?? this.touchHoverEnterDuration,
         touchHoverExitDuration: touchHoverExitDuration ?? this.touchHoverExitDuration,
         dividerStyle: dividerStyle ?? this.dividerStyle,
+        focusedDividerStyle: focusedDividerStyle ?? this.focusedDividerStyle,
         contentStyle: contentStyle ?? this.contentStyle,
       );
 
@@ -338,6 +370,7 @@ final class FTileStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('border', border))
+      ..add(DiagnosticsProperty('focusedBorder', focusedBorder))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
       ..add(ColorProperty('enabledBackgroundColor', enabledBackgroundColor))
       ..add(ColorProperty('enabledHoveredBackgroundColor', enabledHoveredBackgroundColor))
@@ -345,6 +378,7 @@ final class FTileStyle with Diagnosticable {
       ..add(DiagnosticsProperty('touchHoverEnterDuration', touchHoverEnterDuration))
       ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration))
       ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
+      ..add(DiagnosticsProperty('focusedDividerStyle', focusedDividerStyle))
       ..add(DiagnosticsProperty('contentStyle', contentStyle));
   }
 
@@ -354,6 +388,7 @@ final class FTileStyle with Diagnosticable {
       other is FTileStyle &&
           runtimeType == other.runtimeType &&
           border == other.border &&
+          focusedBorder == other.focusedBorder &&
           borderRadius == other.borderRadius &&
           enabledBackgroundColor == other.enabledBackgroundColor &&
           enabledHoveredBackgroundColor == other.enabledHoveredBackgroundColor &&
@@ -361,11 +396,13 @@ final class FTileStyle with Diagnosticable {
           touchHoverEnterDuration == other.touchHoverEnterDuration &&
           touchHoverExitDuration == other.touchHoverExitDuration &&
           dividerStyle == other.dividerStyle &&
+          focusedDividerStyle == other.focusedDividerStyle &&
           contentStyle == other.contentStyle;
 
   @override
   int get hashCode =>
       border.hashCode ^
+      focusedBorder.hashCode ^
       borderRadius.hashCode ^
       enabledBackgroundColor.hashCode ^
       enabledHoveredBackgroundColor.hashCode ^
@@ -373,5 +410,6 @@ final class FTileStyle with Diagnosticable {
       touchHoverEnterDuration.hashCode ^
       touchHoverExitDuration.hashCode ^
       dividerStyle.hashCode ^
+      focusedDividerStyle.hashCode ^
       contentStyle.hashCode;
 }
