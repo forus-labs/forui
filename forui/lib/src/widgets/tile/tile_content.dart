@@ -119,7 +119,7 @@ class FTileContent extends StatelessWidget {
           (_, FTileDivider.none) => const SizedBox(),
           (true, _) => FDivider(style: focusedDividerStyle),
           (false, _) => FDivider(style: dividerStyle),
-        }
+        },
       ],
     );
   }

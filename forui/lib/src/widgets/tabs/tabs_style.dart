@@ -44,12 +44,16 @@ final class FTabsStyle with Diagnosticable {
   /// The spacing between the tab bar and the views.
   final double spacing;
 
+  /// The focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// Creates a [FTabsStyle].
   FTabsStyle({
     required this.decoration,
     required this.selectedLabelTextStyle,
     required this.unselectedLabelTextStyle,
     required this.indicatorDecoration,
+    required this.focusedOutlineStyle,
     this.padding = const EdgeInsets.all(4),
     this.indicatorSize = FTabBarIndicatorSize.tab,
     this.height = 35,
@@ -78,6 +82,7 @@ final class FTabsStyle with Diagnosticable {
             color: colorScheme.background,
             borderRadius: style.borderRadius,
           ),
+          focusedOutlineStyle: style.focusedOutlineStyle,
         );
 
   /// Creates a copy of this [FCardStyle] with the given properties replaced.
@@ -91,6 +96,7 @@ final class FTabsStyle with Diagnosticable {
     FTabBarIndicatorSize? indicatorSize,
     double? height,
     double? spacing,
+    FFocusedOutlineStyle? focusedOutlineStyle,
   }) =>
       FTabsStyle(
         padding: padding ?? this.padding,
@@ -101,6 +107,7 @@ final class FTabsStyle with Diagnosticable {
         indicatorDecoration: indicatorDecoration ?? this.indicatorDecoration,
         height: height ?? this.height,
         spacing: spacing ?? this.spacing,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
       );
 
   @override
@@ -114,7 +121,8 @@ final class FTabsStyle with Diagnosticable {
       ..add(EnumProperty('indicatorSize', indicatorSize))
       ..add(DiagnosticsProperty('indicator', indicatorDecoration))
       ..add(DoubleProperty('height', height))
-      ..add(DoubleProperty('spacing', spacing));
+      ..add(DoubleProperty('spacing', spacing))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle));
   }
 
   @override
@@ -129,7 +137,8 @@ final class FTabsStyle with Diagnosticable {
           indicatorDecoration == other.indicatorDecoration &&
           indicatorSize == other.indicatorSize &&
           height == other.height &&
-          spacing == other.spacing;
+          spacing == other.spacing &&
+          focusedOutlineStyle == other.focusedOutlineStyle;
 
   @override
   int get hashCode =>
@@ -140,5 +149,6 @@ final class FTabsStyle with Diagnosticable {
       indicatorDecoration.hashCode ^
       indicatorSize.hashCode ^
       height.hashCode ^
-      spacing.hashCode;
+      spacing.hashCode ^
+      focusedOutlineStyle.hashCode;
 }

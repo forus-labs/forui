@@ -41,6 +41,7 @@ final class FSliderStyles with Diagnosticable {
       thumbStyle: FSliderThumbStyle(
         color: colorScheme.primaryForeground,
         borderColor: colorScheme.primary,
+        focusedOutlineStyle: style.focusedOutlineStyle,
       ),
     );
 
@@ -59,6 +60,7 @@ final class FSliderStyles with Diagnosticable {
       thumbStyle: FSliderThumbStyle(
         color: colorScheme.primaryForeground,
         borderColor: colorScheme.disable(colorScheme.primary),
+        focusedOutlineStyle: style.focusedOutlineStyle,
       ),
     );
 
@@ -78,6 +80,7 @@ final class FSliderStyles with Diagnosticable {
       thumbStyle: FSliderThumbStyle(
         color: colorScheme.errorForeground,
         borderColor: colorScheme.error,
+        focusedOutlineStyle: style.focusedOutlineStyle,
       ),
     );
 

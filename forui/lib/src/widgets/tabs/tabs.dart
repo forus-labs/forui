@@ -104,7 +104,6 @@ class FTabs extends StatefulWidget {
 
 class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   late FTabController _controller;
-  int? _focused;
 
   @override
   void initState() {
@@ -208,6 +207,12 @@ class _Tab extends StatefulWidget {
 
   @override
   State<_Tab> createState() => _TabState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
+  }
 }
 
 class _TabState extends State<_Tab> {
@@ -226,6 +231,7 @@ class _TabState extends State<_Tab> {
 
   @override
   Widget build(BuildContext context) => FFocusedOutline(
+        style: widget.style.focusedOutlineStyle,
         focused: _focused,
         child: Tab(
           height: widget.style.height,

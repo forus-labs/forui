@@ -43,6 +43,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   MouseCursor _cursor = SystemMouseCursors.grab;
   ({double min, double max})? _origin;
   bool _gesture = false;
+  bool _focused = false;
 
   @override
   void initState() {
@@ -90,17 +91,22 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         enabled: enabled,
         mouseCursor: enabled ? _cursor : MouseCursor.defer,
         includeFocusSemantics: false,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: thumbStyle.color,
-            border: Border.all(
-              color: thumbStyle.borderColor,
-              width: thumbStyle.borderWidth,
+        onFocusChange: (focused) => setState(() => _focused = focused),
+        child: FFocusedOutline(
+          style: thumbStyle.focusedOutlineStyle,
+          focused: _focused,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: thumbStyle.color,
+              border: Border.all(
+                color: thumbStyle.borderColor,
+                width: thumbStyle.borderWidth,
+              ),
             ),
-          ),
-          child: SizedBox.square(
-            dimension: style.thumbSize,
+            child: SizedBox.square(
+              dimension: style.thumbSize,
+            ),
           ),
         ),
       ),
@@ -240,10 +246,14 @@ final class FSliderThumbStyle with Diagnosticable {
   /// Throws [AssertionError] if [borderWidth] is not positive.
   final double borderWidth;
 
+  /// The thumb's focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// Creates a [FSliderThumbStyle].
   FSliderThumbStyle({
     required this.color,
     required this.borderColor,
+    required this.focusedOutlineStyle,
     this.borderWidth = 2,
   }) : assert(0 < borderWidth, 'The border width must be positive');
 
@@ -253,11 +263,13 @@ final class FSliderThumbStyle with Diagnosticable {
     Color? color,
     Color? borderColor,
     double? borderWidth,
+    FFocusedOutlineStyle? focusedOutlineStyle,
   }) =>
       FSliderThumbStyle(
         color: color ?? this.color,
         borderColor: borderColor ?? this.borderColor,
         borderWidth: borderWidth ?? this.borderWidth,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
       );
 
   @override
@@ -266,7 +278,8 @@ final class FSliderThumbStyle with Diagnosticable {
     properties
       ..add(ColorProperty('color', color))
       ..add(ColorProperty('borderColor', borderColor))
-      ..add(DoubleProperty('borderWidth', borderWidth));
+      ..add(DoubleProperty('borderWidth', borderWidth))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle));
   }
 
   @override
@@ -276,10 +289,11 @@ final class FSliderThumbStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           color == other.color &&
           borderColor == other.borderColor &&
-          borderWidth == other.borderWidth;
+          borderWidth == other.borderWidth &&
+          focusedOutlineStyle == other.focusedOutlineStyle;
 
   @override
-  int get hashCode => color.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode;
+  int get hashCode => color.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode ^ focusedOutlineStyle.hashCode;
 }
 
 @internal
