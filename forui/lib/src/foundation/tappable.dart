@@ -162,7 +162,6 @@ class _FTappableState extends State<FTappable> {
   bool _hovered = false;
   bool _touched = false;
 
-
   @override
   void initState() {
     super.initState();

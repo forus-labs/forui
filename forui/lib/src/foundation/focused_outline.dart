@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter/foundation.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// An outline around a focused widget that does not affect its layout.
 ///
@@ -127,7 +129,7 @@ class FFocusedOutlineStyle with Diagnosticable {
     required this.borderRadius,
     this.width = 1,
     this.spacing = 3,
-  })  : assert(0 < width, 'The width must be greater than 0.');
+  }) : assert(0 < width, 'The width must be greater than 0.');
 
   /// Returns a copy of this style with the given properties replaced.
   @useResult

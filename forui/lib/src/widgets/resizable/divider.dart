@@ -183,48 +183,47 @@ class _VerticalDividerState extends State<VerticalDivider> {
 
   @override
   Widget build(BuildContext context) => Positioned(
-    top: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
-    child: widget.focusableActionDetector(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.arrowUp): _Up(),
-        SingleActivator(LogicalKeyboardKey.arrowDown): _Down(),
-      },
-      onFocusChange: (focused) => setState(() => _focused = focused),
-      focused: _focused,
-      children: [
-        if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
-          ColoredBox(
-            color: widget.style.color,
-            child: SizedBox(
-              height: widget.style.width,
+        top: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
+        child: widget.focusableActionDetector(
+          shortcuts: const {
+            SingleActivator(LogicalKeyboardKey.arrowUp): _Up(),
+            SingleActivator(LogicalKeyboardKey.arrowDown): _Down(),
+          },
+          onFocusChange: (focused) => setState(() => _focused = focused),
+          focused: _focused,
+          children: [
+            if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
+              ColoredBox(
+                color: widget.style.color,
+                child: SizedBox(
+                  height: widget.style.width,
+                  width: widget.crossAxisExtent,
+                ),
+              ),
+            if (widget.type == FResizableDivider.dividerWithThumb)
+              _Thumb(
+                style: widget.style.thumbStyle,
+                icon: FAssets.icons.gripHorizontal,
+              ),
+            SizedBox(
+              height: widget.hitRegionExtent,
               width: widget.crossAxisExtent,
+              child: GestureDetector(
+                onVerticalDragUpdate: (details) {
+                  if (details.delta.dy == 0.0) {
+                    return;
+                  }
+
+                  widget.controller.update(widget.left, widget.right, details.delta.dy);
+                  // TODO: haptic feedback
+                },
+                onVerticalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
+              ),
             ),
-          ),
-        if (widget.type == FResizableDivider.dividerWithThumb)
-          _Thumb(
-            style: widget.style.thumbStyle,
-            icon: FAssets.icons.gripHorizontal,
-          ),
-        SizedBox(
-          height: widget.hitRegionExtent,
-          width: widget.crossAxisExtent,
-          child: GestureDetector(
-            onVerticalDragUpdate: (details) {
-              if (details.delta.dy == 0.0) {
-                return;
-              }
-
-              widget.controller.update(widget.left, widget.right, details.delta.dy);
-              // TODO: haptic feedback
-            },
-            onVerticalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
-          ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 }
-
 
 class _Thumb extends StatelessWidget {
   final FResizableDividerThumbStyle style;
