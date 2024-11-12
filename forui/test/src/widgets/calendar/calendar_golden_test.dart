@@ -2,6 +2,7 @@
 library;
 
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -241,6 +242,36 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/year-picker/initial-date.png'),
+          );
+        });
+
+        testWidgets('RTL - ${theme.name}', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              textDirection: TextDirection.rtl,
+              child: FCalendar(
+                controller: FCalendarController.dates(
+                  initialSelections: selected,
+                  selectable: (date) => date != DateTime.utc(2024, 7, 2),
+                ),
+                start: DateTime(1900, 1, 8),
+                end: DateTime(2024, 7, 10),
+                today: DateTime(2024, 7, 14),
+              ),
+            ),
+          );
+
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+          await gesture.addPointer(location: Offset.zero);
+          addTearDown(gesture.removePointer);
+          await tester.pump();
+
+          await gesture.moveTo(tester.getCenter(find.text('8')));
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('calendar/${theme.name}/day-picker/rtl.png'),
           );
         });
       });

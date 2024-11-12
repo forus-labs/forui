@@ -63,12 +63,14 @@ class FButton extends StatelessWidget {
   ///
   /// [prefix] and [suffix] are wrapped in [FIconStyle], and therefore works with [FIcon]s.
   ///
-  /// The button layout is as follows, assuming the locale is read from left to right:
+  /// The button layout is as follows, assuming the locale is LTR:
   /// ```
   /// |---------------------------------------|
   /// |  [prefixIcon]  [label]  [suffixIcon]  |
   /// |---------------------------------------|
   /// ```
+  ///
+  /// The layout is reversed for RTL locales.
   FButton({
     required this.onPress,
     required Widget label,

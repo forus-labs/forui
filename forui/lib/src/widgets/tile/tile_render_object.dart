@@ -13,17 +13,27 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
   final FTileContentStyle style;
   final FTileDivider divider;
 
-  const TileRenderObject({required this.style, required this.divider, super.key, super.children});
+  const TileRenderObject({
+    required this.style,
+    required this.divider,
+    super.key,
+    super.children,
+  });
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderTile(style, divider);
+  RenderObject createRenderObject(BuildContext context) => _RenderTile(
+        style,
+        divider,
+        Directionality.maybeOf(context) ?? TextDirection.ltr,
+      );
 
   @override
   // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext context, covariant _RenderTile renderObject) {
     renderObject
       ..style = style
-      ..divider = divider;
+      ..divider = divider
+      ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
   }
 
   @override
@@ -41,8 +51,9 @@ class _RenderTile extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   FTileContentStyle _style;
   FTileDivider _divider;
+  TextDirection _textDirection;
 
-  _RenderTile(this._style, this._divider);
+  _RenderTile(this._style, this._divider, this._textDirection);
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = _Data();
@@ -94,22 +105,38 @@ class _RenderTile extends RenderBox
     height = max(height, details.size.height);
 
     // Position all children
-    prefix.data.offset = Offset(left, top + (height - prefix.size.height) / 2);
-    column.data.offset = Offset(left + prefix.size.width, top + (height - column.size.height) / 2);
+    if (textDirection == TextDirection.ltr) {
+      prefix.data.offset = Offset(left, top + (height - prefix.size.height) / 2);
+      column.data.offset = Offset(left + prefix.size.width, top + (height - column.size.height) / 2);
 
-    details.data.offset = Offset(
-      this.constraints.maxWidth - right - suffix.size.width - details.size.width,
-      top + (height - details.size.height) / 2,
-    );
-    suffix.data.offset = Offset(
-      this.constraints.maxWidth - right - suffix.size.width,
-      top + (height - suffix.size.height) / 2,
-    );
+      details.data.offset = Offset(
+        this.constraints.maxWidth - right - suffix.size.width - details.size.width,
+        top + (height - details.size.height) / 2,
+      );
+      suffix.data.offset = Offset(
+        this.constraints.maxWidth - right - suffix.size.width,
+        top + (height - suffix.size.height) / 2,
+      );
 
-    divider.data.offset = Offset(
-      _divider == FTileDivider.indented ? left + prefix.size.width : 0,
-      top + height + bottom - divider.size.height,
-    );
+      divider.data.offset = Offset(
+        _divider == FTileDivider.indented ? left + prefix.size.width : 0,
+        top + height + bottom - divider.size.height,
+      );
+    } else {
+      suffix.data.offset = Offset(left, top + (height - suffix.size.height) / 2);
+      details.data.offset = Offset(left + suffix.size.width, top + (height - details.size.height) / 2);
+
+      column.data.offset = Offset(
+        this.constraints.maxWidth - right - prefix.size.width - column.size.width,
+        top + (height - column.size.height) / 2,
+      );
+      prefix.data.offset = Offset(
+        this.constraints.maxWidth - right - prefix.size.width,
+        top + (height - prefix.size.height) / 2,
+      );
+
+      divider.data.offset = Offset(0, top + height + bottom - divider.size.height);
+    }
 
     size = Size(this.constraints.maxWidth, height + top + bottom);
   }
@@ -126,7 +153,8 @@ class _RenderTile extends RenderBox
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('divider', divider));
+      ..add(EnumProperty('divider', divider))
+      ..add(EnumProperty('textDirection', textDirection));
   }
 
   FTileContentStyle get style => _style;
@@ -148,6 +176,17 @@ class _RenderTile extends RenderBox
     }
 
     _divider = value;
+    markNeedsLayout();
+  }
+
+  TextDirection get textDirection => _textDirection;
+
+  set textDirection(TextDirection value) {
+    if (_textDirection == value) {
+      return;
+    }
+
+    _textDirection = value;
     markNeedsLayout();
   }
 }

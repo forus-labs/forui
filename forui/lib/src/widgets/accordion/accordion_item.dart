@@ -108,6 +108,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   Widget build(BuildContext context) {
     final FAccordionItemData(:index, :controller, style: inheritedStyle) = FAccordionItemData.of(context);
     final style = widget.style ?? inheritedStyle;
+    final angle = ((Directionality.maybeOf(context) ?? TextDirection.ltr) == TextDirection.ltr) ? -180 : 180;
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, _) => Column(
@@ -144,7 +145,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
               ),
             ),
             child: Transform.rotate(
-              angle: (_controller.value * -180 + 90) * math.pi / 180.0,
+              angle: (_controller.value * angle + 90) * math.pi / 180.0,
               child: FIconStyleData(
                 style: FIconStyle(color: style.iconColor, size: style.iconSize),
                 child: widget.icon,

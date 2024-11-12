@@ -110,6 +110,7 @@ class _DayPickerState extends State<DayPicker> {
               for (final MapEntry(key: date, value: focusNode) in _days.entries)
                 Entry.day(
                   style: widget.style,
+                  localizations: widget.localization,
                   date: date,
                   focusNode: focusNode,
                   current: date.month == widget.month.month,

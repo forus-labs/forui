@@ -80,12 +80,15 @@ class FTile extends StatelessWidget with FTileMixin {
 
   /// Creates a [FTile].
   ///
+  /// Assuming LTR locale:
   /// ```
   /// -----------------------------------------------------
   /// | [prefixIcon] [title]       [details] [suffixIcon] |
   /// |              [subtitle]                           |
   /// ----------------------------------------------------
   /// ```
+  ///
+  /// The order is reversed for RTL locales.
   ///
   /// ## Overflow behavior
   /// If the tile's content overflows and `details` is text, it'll be truncated first. Otherwise, `title` and `subtitle`

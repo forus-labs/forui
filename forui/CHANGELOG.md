@@ -65,6 +65,8 @@ This update adds responsive breakpoints, focused outlines & localization! It als
 
 * **Breaking** Change `focusedBorderColor` to `focusedOutlineStyle` in various calendar related styles.
 
+* **Breaking** Change `FSlider` to default to the current text direction instead of `Layout.ltr`. 
+
 * Change `FCalendar` to support localization.
 
 ### Fixes

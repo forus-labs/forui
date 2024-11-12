@@ -13,7 +13,7 @@ const _textSpacing = 2.0;
 
 /// A calendar that can be scrolled horizontally.
 class FLineCalendar extends StatefulWidget {
-  /// The style. Defaults to [FThemeData.lineCalendarStyle].
+  /// The style.
   final FLineCalendarStyle? style;
 
   /// The controller.
@@ -92,7 +92,7 @@ class _FLineCalendarState extends State<FLineCalendar> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _style = widget.style ?? context.theme.lineCalendarStyle;
+    _style = widget.style!; // TODO: default to context.theme.lineCalendarStyle.
     _size = _calculateSize(context, _style);
 
     final value = widget.controller.value?.toLocalDate() ?? widget._today;

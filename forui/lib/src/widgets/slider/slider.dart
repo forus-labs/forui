@@ -39,8 +39,8 @@ class FSlider extends StatelessWidget {
   /// The style.
   final FSliderStyle? style;
 
-  /// The layout. Defaults to [Layout.ltr].
-  final Layout layout;
+  /// The layout. Defaults to the current [TextDirection].
+  final Layout? layout;
 
   /// The label.
   final Widget? label;
@@ -126,7 +126,7 @@ class FSlider extends StatelessWidget {
   FSlider({
     required this.controller,
     this.style,
-    this.layout = Layout.ltr,
+    this.layout,
     this.label,
     this.description,
     this.errorBuilder = _errorBuilder,
@@ -145,7 +145,7 @@ class FSlider extends StatelessWidget {
   }) : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller) {
     if (trackMainAxisExtent == null &&
         (label != null || description != null || forceErrorText != null) &&
-        layout.vertical) {
+        (layout?.vertical ?? false)) {
       throw StateError(
         'A vertical FSlider was given a label, description, or forceErrorText although it needs a trackMainAxisExtent. '
         'To fix this, consider supplying a trackMainAxisExtent or changing the layout to horizontal.',
@@ -156,7 +156,13 @@ class FSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final styles = context.theme.sliderStyles;
+    final layout = switch (this.layout) {
+      final layout? => layout,
+      _ when Directionality.maybeOf(context) == TextDirection.rtl => Layout.rtl,
+      _ => Layout.ltr,
+    };
     final sliderStyle = style ?? (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
+
     return InheritedData(
       style: sliderStyle,
       layout: layout,
