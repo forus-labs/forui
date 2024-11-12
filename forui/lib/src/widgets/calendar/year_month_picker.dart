@@ -100,17 +100,14 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
   FCalendarYearMonthPickerStyle({required this.enabledStyle, required this.disabledStyle});
 
   /// Creates a new year/month picker style that inherits the color scheme and typography.
-  FCalendarYearMonthPickerStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
+  FCalendarYearMonthPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+      : this(
           enabledStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
             hoveredBackgroundColor: colorScheme.secondary,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(8),
-            focusedOutlineStyle: style.focusedOutlineStyle,
           ),
           disabledStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
@@ -118,8 +115,8 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
               color: colorScheme.disable(colorScheme.mutedForeground),
               fontWeight: FontWeight.w500,
             ),
+            focusedBorderColor: colorScheme.background,
             radius: const Radius.circular(8),
-            focusedOutlineStyle: style.focusedOutlineStyle,
           ),
         );
 

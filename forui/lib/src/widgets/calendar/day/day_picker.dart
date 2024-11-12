@@ -220,7 +220,6 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   factory FCalendarDayPickerStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
-    required FStyle style,
   }) {
     final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
     final mutedTextStyle = typography.base.copyWith(
@@ -232,14 +231,14 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       selectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.primaryForeground,
         textStyle: mutedTextStyle,
+        focusedBorderColor: colorScheme.primaryForeground,
         radius: const Radius.circular(4),
-        focusedOutlineStyle: style.focusedOutlineStyle,
       ),
       unselectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.background,
         textStyle: mutedTextStyle,
+        focusedBorderColor: colorScheme.background,
         radius: const Radius.circular(4),
-        focusedOutlineStyle: style.focusedOutlineStyle,
       ),
     );
 
@@ -250,30 +249,30 @@ final class FCalendarDayPickerStyle with Diagnosticable {
           selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.foreground,
             textStyle: typography.base.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            focusedOutlineStyle: style.focusedOutlineStyle,
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: textStyle,
             hoveredBackgroundColor: colorScheme.secondary,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            focusedOutlineStyle: style.focusedOutlineStyle,
           ),
         ),
         enclosing: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.primaryForeground,
             textStyle: mutedTextStyle,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            focusedOutlineStyle: style.focusedOutlineStyle,
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
             textStyle: mutedTextStyle,
             hoveredBackgroundColor: colorScheme.secondary,
+            focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            focusedOutlineStyle: style.focusedOutlineStyle,
           ),
         ),
       ),

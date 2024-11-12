@@ -188,16 +188,8 @@ final class FCalendarStyle with Diagnosticable {
     required FStyle style,
   }) : this(
           headerStyle: FCalendarHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-          dayPickerStyle: FCalendarDayPickerStyle.inherit(
-            colorScheme: colorScheme,
-            typography: typography,
-            style: style,
-          ),
-          yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(
-            colorScheme: colorScheme,
-            typography: typography,
-            style: style,
-          ),
+          dayPickerStyle: FCalendarDayPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
+          yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
           decoration: BoxDecoration(
             borderRadius: style.borderRadius,
             border: Border.all(color: colorScheme.border),

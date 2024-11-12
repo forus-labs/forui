@@ -55,50 +55,45 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final (chevron, end) = switch (Directionality.maybeOf(context)) {
-      TextDirection.ltr || null => (FAssets.icons.chevronRight, 0.25),
-      TextDirection.rtl => (FAssets.icons.chevronLeft, -0.25),
-    };
-
-    return FTappable(
-      focusedOutlineStyle: widget.style.focusedOutlineStyle,
-      onPress: () => widget.type.value = switch (widget.type.value) {
-        FCalendarPickerType.day => FCalendarPickerType.yearMonth,
-        FCalendarPickerType.yearMonth => FCalendarPickerType.day,
-      },
-      excludeSemantics: true,
-      child: SizedBox(
-        height: Header.height,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                FLocalizations.of(context).yearMonth(widget.month.toNative()),
-                style: widget.style.headerTextStyle,
-              ),
-              RotationTransition(
-                turns: Tween(begin: 0.0, end: end).animate(_controller),
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: chevron(
-                    height: 15,
-                    colorFilter: ColorFilter.mode(
-                      widget.style.headerTextStyle.color ?? widget.style.enabledIconColor,
-                      BlendMode.srcIn,
+  Widget build(BuildContext context) => FTappable(
+        focusedOutlineStyle: widget.style.focusedOutlineStyle,
+        onPress: () => widget.type.value = switch (widget.type.value) {
+          FCalendarPickerType.day => FCalendarPickerType.yearMonth,
+          FCalendarPickerType.yearMonth => FCalendarPickerType.day,
+        },
+        excludeSemantics: true,
+        child: SizedBox(
+          height: Header.height,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  FLocalizations.of(context).yearMonth(widget.month.toNative()),
+                  style: widget.style.headerTextStyle,
+                ),
+                RotationTransition(
+                  turns: Tween(begin: 0.0, end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25)
+                      .animate(_controller),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: FAssets.icons.chevronRight(
+                      height: 15,
+                      matchTextDirection: true,
+                      colorFilter: ColorFilter.mode(
+                        widget.style.headerTextStyle.color ?? widget.style.enabledIconColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   void didUpdateWidget(Header old) {
@@ -141,53 +136,48 @@ class Navigation extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final (previous, next) = switch (Directionality.maybeOf(context)) {
-      TextDirection.ltr || null => (FAssets.icons.chevronLeft, FAssets.icons.chevronRight),
-      TextDirection.rtl => (FAssets.icons.chevronRight, FAssets.icons.chevronLeft),
-    };
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: SizedBox(
-        height: Header.height,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 7),
-              child: FButton.icon(
-                style: style.buttonStyle,
-                onPress: onPrevious,
-                child: previous(
-                  height: 17,
-                  colorFilter: ColorFilter.mode(
-                    onPrevious == null ? style.disabledIconColor : style.enabledIconColor,
-                    BlendMode.srcIn,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(bottom: 5),
+        child: SizedBox(
+          height: Header.height,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 7),
+                child: FButton.icon(
+                  style: style.buttonStyle,
+                  onPress: onPrevious,
+                  child: FAssets.icons.chevronLeft(
+                    height: 17,
+                    matchTextDirection: true,
+                    colorFilter: ColorFilter.mode(
+                      onPrevious == null ? style.disabledIconColor : style.enabledIconColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const Expanded(child: SizedBox()),
-            Padding(
-              padding: const EdgeInsets.only(right: 7),
-              child: FButton.icon(
-                style: style.buttonStyle,
-                onPress: onNext,
-                child: next(
-                  height: 17,
-                  colorFilter: ColorFilter.mode(
-                    onNext == null ? style.disabledIconColor : style.enabledIconColor,
-                    BlendMode.srcIn,
+              const Expanded(child: SizedBox()),
+              Padding(
+                padding: const EdgeInsets.only(right: 7),
+                child: FButton.icon(
+                  style: style.buttonStyle,
+                  onPress: onNext,
+                  child: FAssets.icons.chevronRight(
+                    height: 17,
+                    matchTextDirection: true,
+                    colorFilter: ColorFilter.mode(
+                      onNext == null ? style.disabledIconColor : style.enabledIconColor,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
