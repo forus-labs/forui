@@ -81,6 +81,45 @@ void main() {
 
             await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/${theme.name}/$axis-$divider.png'));
           });
+
+          testWidgets('${theme.name} - $axis - $divider - focused', (tester) async {
+            await tester.pumpWidget(
+              TestScaffold(
+                theme: theme.data,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: theme.data.colorScheme.border,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: FResizable(
+                    axis: axis,
+                    divider: divider,
+                    crossAxisExtent: 100,
+                    children: [
+                      FResizableRegion(
+                        initialExtent: 150,
+                        builder: (_, __, child) => child!,
+                        child: const Align(
+                          child: Text('A'),
+                        ),
+                      ),
+                      FResizableRegion(
+                        initialExtent: 300,
+                        builder: (_, __, child) => child!,
+                        child: const Align(
+                          child: Text('B'),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+
+            await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/${theme.name}/$axis-$divider.png'));
+          });
         }
       }
     }

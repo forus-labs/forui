@@ -53,6 +53,40 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/shown.png'));
       });
 
+      testWidgets('focused', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FAccordion(
+              items: [
+                FAccordionItem(
+                  initiallyExpanded: true,
+                  autofocus: true,
+                  title: const Text('Title'),
+                  child: const ColoredBox(
+                    color: Colors.yellow,
+                    child: SizedBox.square(
+                      dimension: 50,
+                    ),
+                  ),
+                ),
+                FAccordionItem(
+                  title: const Text('Title'),
+                  child: const ColoredBox(
+                    color: Colors.yellow,
+                    child: SizedBox.square(
+                      dimension: 50,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/focused.png'));
+      });
+
       testWidgets('hidden', (tester) async {
         await tester.pumpWidget(
           TestScaffold(

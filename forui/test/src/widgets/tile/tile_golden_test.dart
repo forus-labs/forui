@@ -121,6 +121,45 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/hovered-${theme.name}.png'));
       });
 
+      testWidgets('RTL', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            textDirection: TextDirection.rtl,
+            child: FTile(
+              autofocus: true,
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/rtl-${theme.name}.png'));
+      });
+
+      testWidgets('focused', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FTile(
+              autofocus: true,
+              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffixIcon: FIcon(FAssets.icons.chevronRight),
+              onPress: () {},
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/focused-${theme.name}.png'));
+      });
+
       testWidgets('disabled - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(

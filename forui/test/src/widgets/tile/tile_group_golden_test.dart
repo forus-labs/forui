@@ -154,6 +154,45 @@ void main() {
           );
         });
 
+        testWidgets('RTL - ${theme.name} - $divider', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              textDirection: TextDirection.rtl,
+              child: FTileGroup(
+                label: const Text('Network'),
+                description: const Text('Description'),
+                divider: divider,
+                children: [
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    title: const Text('WiFi'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.mail),
+                    title: const Text('Mail'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.bluetooth),
+                    title: const Text('Bluetooth'),
+                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('tile/group/${theme.name}/rtl/$divider.png'),
+          );
+        });
+
         for (final (index, position) in ['top', 'bottom'].indexed) {
           testWidgets('hovered - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
@@ -192,6 +231,40 @@ void main() {
             await expectLater(
               find.byType(TestScaffold),
               matchesGoldenFile('tile/group/${theme.name}/hovered/$divider-$position.png'),
+            );
+          });
+
+          testWidgets('focused - ${theme.name} - $divider - $position', (tester) async {
+            await tester.pumpWidget(
+              TestScaffold(
+                theme: theme.data,
+                child: FTileGroup(
+                  label: const Text('Network'),
+                  divider: divider,
+                  children: [
+                    FTile(
+                      autofocus: index == 0,
+                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      title: const Text('WiFi'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      autofocus: index == 1,
+                      prefixIcon: FIcon(FAssets.icons.bluetooth),
+                      title: const Text('Bluetooth'),
+                      subtitle: const Text('Fee, Fo'),
+                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+              ),
+            );
+
+            await expectLater(
+              find.byType(TestScaffold),
+              matchesGoldenFile('tile/group/${theme.name}/focused/$divider-$position.png'),
             );
           });
 

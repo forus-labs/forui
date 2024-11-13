@@ -1,6 +1,6 @@
 ## 0.7.0 (Next)
 
-This update introduces several new tile widgets. It also adds support for responsive breakpoints and localization.
+This update adds responsive breakpoints, focused outlines & localization! It also introduces several new tile widgets.
 
 ### Additions
 
@@ -34,10 +34,36 @@ This update introduces several new tile widgets. It also adds support for respon
 
 * Add `FLocalizations`.
 
+* Add `FFocusedOutline`.
+
+* **Breaking** Add `focusedOutlineStyle` to `FAccordionStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FBottomNavigationBar` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FButtonStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FHeaderActionStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FResizableDividerStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FCheckboxStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FRadioStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedBorder` to `FTileStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedDividerStyle` to `FTileStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FTabsStyle` - this only affect users which use the primary constructor.
+
+* **Breaking** Add `focusedOutlineStyle` to `FSliderThumbStyle` - this only affect users which use the primary constructor.
+
 ### Changes
 
 * **Breaking** Change `FPopover()` to not automatically wrap a target in a `GestureDetector` - use `FPopover.tappable(...)`
   instead.
+
+* **Breaking** Change `FSlider` to default to the current text direction instead of `Layout.ltr`. 
 
 * Change `FCalendar` to support localization.
 

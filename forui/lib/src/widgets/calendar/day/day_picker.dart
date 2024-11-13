@@ -110,6 +110,7 @@ class _DayPickerState extends State<DayPicker> {
               for (final MapEntry(key: date, value: focusNode) in _days.entries)
                 Entry.day(
                   style: widget.style,
+                  localizations: widget.localization,
                   date: date,
                   focusNode: focusNode,
                   current: date.month == widget.month.month,
@@ -216,7 +217,10 @@ final class FCalendarDayPickerStyle with Diagnosticable {
         assert(0 < tileSize, 'tileSize must be positive.');
 
   /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
-  factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
+  factory FCalendarDayPickerStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+  }) {
     final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
     final mutedTextStyle = typography.base.copyWith(
       color: colorScheme.disable(colorScheme.mutedForeground),

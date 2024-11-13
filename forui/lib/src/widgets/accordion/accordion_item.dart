@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -26,6 +27,30 @@ class FAccordionItem extends StatefulWidget {
   /// True if the item is initially expanded.
   final bool initiallyExpanded;
 
+  /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
+  ///
+  /// Defaults to false.
+  ///
+  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
+  /// autofocus set, then the first one added to the tree will get focus.
+  final bool autofocus;
+
+  /// An optional focus node to use as the focus node for this widget.
+  ///
+  /// If one is not supplied, then one will be automatically allocated, owned, and managed by this widget. The widget
+  /// will be focusable even if a [focusNode] is not supplied. If supplied, the given `focusNode` will be hosted by this
+  /// widget, but not owned. See [FocusNode] for more information on what being hosted and/or owned implies.
+  ///
+  /// Supplying a focus node is sometimes useful if an ancestor to this widget wants to control when this widget has the
+  /// focus. The owner will be responsible for calling [FocusNode.dispose] on the focus node when it is done with it,
+  /// but this widget will attach/detach and reparent the node when needed.
+  final FocusNode? focusNode;
+
+  /// Handler called when the focus changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  final ValueChanged<bool>? onFocusChange;
+
   /// The child.
   final Widget child;
 
@@ -35,6 +60,9 @@ class FAccordionItem extends StatefulWidget {
     required this.child,
     this.style,
     this.initiallyExpanded = false,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     super.key,
   }) : icon = FIcon(FAssets.icons.chevronRight);
 
@@ -46,7 +74,10 @@ class FAccordionItem extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'Initially expanded'));
+      ..add(FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'Initially expanded'))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
 }
 
@@ -77,14 +108,18 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   Widget build(BuildContext context) {
     final FAccordionItemData(:index, :controller, style: inheritedStyle) = FAccordionItemData.of(context);
     final style = widget.style ?? inheritedStyle;
+    final angle = ((Directionality.maybeOf(context) ?? TextDirection.ltr) == TextDirection.ltr) ? -180 : 180;
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, _) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           FTappable(
+            autofocus: widget.autofocus,
+            focusNode: widget.focusNode,
+            onFocusChange: widget.onFocusChange,
             onPress: () => controller.toggle(index),
-            builder: (context, state, child) => Padding(
+            builder: (context, data, child) => Padding(
               padding: style.titlePadding,
               child: Row(
                 children: [
@@ -95,18 +130,22 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                         applyHeightToFirstAscent: false,
                         applyHeightToLastDescent: false,
                       ),
-                      style: state.hovered
+                      style: data.hovered
                           ? style.titleTextStyle.copyWith(decoration: TextDecoration.underline)
                           : style.titleTextStyle,
                       child: widget.title,
                     ),
                   ),
-                  child!,
+                  FFocusedOutline(
+                    style: style.focusedOutlineStyle,
+                    focused: data.focused,
+                    child: child!,
+                  ),
                 ],
               ),
             ),
             child: Transform.rotate(
-              angle: (_controller.value * -180 + 90) * math.pi / 180.0,
+              angle: (_controller.value * angle + 90) * math.pi / 180.0,
               child: FIconStyleData(
                 style: FIconStyle(color: style.iconColor, size: style.iconSize),
                 child: widget.icon,

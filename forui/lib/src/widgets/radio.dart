@@ -13,7 +13,7 @@ import 'package:forui/forui.dart';
 /// See:
 /// * https://forui.dev/docs/form/radio for working examples.
 /// * [FRadioStyle] for customizing a radio's appearance.
-class FRadio extends StatelessWidget {
+class FRadio extends StatefulWidget {
   /// The style. Defaults to [FThemeData.radioStyle].
   final FRadioStyle? style;
 
@@ -68,63 +68,7 @@ class FRadio extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.radioStyle;
-    final (labelState, stateStyle) = switch ((enabled, error != null)) {
-      (true, false) => (FLabelState.enabled, style.enabledStyle),
-      (false, false) => (FLabelState.disabled, style.disabledStyle),
-      (_, true) => (FLabelState.error, style.errorStyle),
-    };
-
-    return GestureDetector(
-      onTap: enabled ? () => onChange?.call(!value) : null,
-      child: FocusableActionDetector(
-        enabled: enabled,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        mouseCursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
-        child: Semantics(
-          label: semanticLabel,
-          enabled: enabled,
-          checked: value,
-          child: FLabel(
-            axis: Axis.horizontal,
-            state: labelState,
-            style: style.labelStyle,
-            label: label,
-            description: description,
-            error: error,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: stateStyle.borderColor),
-                    color: stateStyle.backgroundColor,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const SizedBox.square(dimension: 10),
-                ),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: stateStyle.selectedColor,
-                    shape: BoxShape.circle,
-                  ),
-                  child: AnimatedSize(
-                    duration: style.animationDuration,
-                    curve: style.curve,
-                    child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  State<FRadio> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -141,6 +85,82 @@ class FRadio extends StatelessWidget {
   }
 }
 
+class _State extends State<FRadio> {
+  bool _focused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focused = widget.autofocus;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style ?? context.theme.radioStyle;
+    final (labelState, stateStyle) = switch ((widget.enabled, widget.error != null)) {
+      (true, false) => (FLabelState.enabled, style.enabledStyle),
+      (false, false) => (FLabelState.disabled, style.disabledStyle),
+      (_, true) => (FLabelState.error, style.errorStyle),
+    };
+
+    return GestureDetector(
+      onTap: widget.enabled ? () => widget.onChange?.call(!widget.value) : null,
+      child: FocusableActionDetector(
+        enabled: widget.enabled,
+        autofocus: widget.autofocus,
+        focusNode: widget.focusNode,
+        onFocusChange: (focused) {
+          setState(() => _focused = focused);
+          widget.onFocusChange?.call(focused);
+        },
+        mouseCursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
+        child: Semantics(
+          label: widget.semanticLabel,
+          enabled: widget.enabled,
+          checked: widget.value,
+          child: FLabel(
+            axis: Axis.horizontal,
+            state: labelState,
+            style: style.labelStyle,
+            label: widget.label,
+            description: widget.description,
+            error: widget.error,
+            child: FFocusedOutline(
+              style: style.focusedOutlineStyle,
+              focused: _focused,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: stateStyle.borderColor),
+                      color: stateStyle.backgroundColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const SizedBox.square(dimension: 10),
+                  ),
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: stateStyle.selectedColor,
+                      shape: BoxShape.circle,
+                    ),
+                    child: AnimatedSize(
+                      duration: style.animationDuration,
+                      curve: style.curve,
+                      child: widget.value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// A [FRadio]'s style.
 class FRadioStyle with Diagnosticable {
   /// The duration of the animation when the radio's switches between selected and unselected. Defaults to 100ms.
@@ -154,6 +174,9 @@ class FRadioStyle with Diagnosticable {
   /// The [FLabel]'s style.
   final FLabelLayoutStyle labelLayoutStyle;
 
+  /// The focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// The [FRadio]'s when the radio is enabled.
   final FRadioStateStyle enabledStyle;
 
@@ -166,6 +189,7 @@ class FRadioStyle with Diagnosticable {
   /// Creates a [FRadioStyle].
   FRadioStyle({
     required this.labelLayoutStyle,
+    required this.focusedOutlineStyle,
     required this.enabledStyle,
     required this.disabledStyle,
     required this.errorStyle,
@@ -177,6 +201,10 @@ class FRadioStyle with Diagnosticable {
   FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : this(
           labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
+          focusedOutlineStyle: FFocusedOutlineStyle(
+            color: colorScheme.primary,
+            borderRadius: BorderRadius.circular(100),
+          ),
           enabledStyle: FRadioStateStyle(
             labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
             descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
@@ -219,6 +247,7 @@ class FRadioStyle with Diagnosticable {
     Duration? animationDuration,
     Curve? curve,
     FLabelLayoutStyle? labelLayoutStyle,
+    FFocusedOutlineStyle? focusedOutlineStyle,
     FRadioStateStyle? enabledStyle,
     FRadioStateStyle? disabledStyle,
     FRadioErrorStyle? errorStyle,
@@ -227,6 +256,7 @@ class FRadioStyle with Diagnosticable {
         animationDuration: animationDuration ?? this.animationDuration,
         curve: curve ?? this.curve,
         labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
         enabledStyle: enabledStyle ?? this.enabledStyle,
         disabledStyle: disabledStyle ?? this.disabledStyle,
         errorStyle: errorStyle ?? this.errorStyle,
@@ -239,6 +269,7 @@ class FRadioStyle with Diagnosticable {
       ..add(DiagnosticsProperty('animationDuration', animationDuration))
       ..add(DiagnosticsProperty('curve', curve))
       ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle));
@@ -252,6 +283,7 @@ class FRadioStyle with Diagnosticable {
           animationDuration == other.animationDuration &&
           curve == other.curve &&
           labelLayoutStyle == other.labelLayoutStyle &&
+          focusedOutlineStyle == other.focusedOutlineStyle &&
           enabledStyle == other.enabledStyle &&
           disabledStyle == other.disabledStyle &&
           errorStyle == other.errorStyle;
@@ -261,6 +293,7 @@ class FRadioStyle with Diagnosticable {
       animationDuration.hashCode ^
       curve.hashCode ^
       labelLayoutStyle.hashCode ^
+      focusedOutlineStyle.hashCode ^
       enabledStyle.hashCode ^
       disabledStyle.hashCode ^
       errorStyle.hashCode;

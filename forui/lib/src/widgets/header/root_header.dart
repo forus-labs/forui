@@ -12,10 +12,14 @@ final class _FRootHeader extends FHeader {
   /// The header's style. Defaults to [FThemeData.headerStyle.rootStyle].
   final FRootHeaderStyle? style;
 
-  /// The title, aligned to the left.
+  /// The title, aligned to the left in LTR locales.
+  ///
+  /// It is aligned to the right in RTL locales.
   final Widget title;
 
-  /// The actions, aligned to the right. Defaults to an empty list.
+  /// The actions, aligned to the right in LTR locales. Defaults to an empty list.
+  ///
+  /// They are aligned to the left in RTL locales.
   final List<Widget> actions;
 
   /// Creates a [FHeader].
@@ -102,7 +106,7 @@ final class FRootHeaderStyle with Diagnosticable {
             fontWeight: FontWeight.w700,
             height: 1,
           ),
-          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 30),
+          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 30),
           padding: style.pagePadding.copyWith(bottom: 15),
         );
 

@@ -86,6 +86,47 @@ void main() {
             });
           }
 
+          testWidgets('${theme.name} - $layout - focused', (tester) async {
+            Touch.primary = touch;
+            final styles = FSliderStyles.inherit(
+              colorScheme: theme.data.colorScheme,
+              typography: theme.data.typography,
+              style: theme.data.style,
+            );
+
+            await tester.pumpWidget(
+              TestScaffold.app(
+                theme: theme.data,
+                child: FSlider(
+                  style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
+                  label: const Text('Label'),
+                  description: const Text('Description'),
+                  forceErrorText: 'Error',
+                  controller: FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
+                  layout: layout,
+                  trackMainAxisExtent: 300,
+                  marks: const [
+                    FSliderMark(value: 0.0, label: Text('0')),
+                    FSliderMark(value: 0.25, label: Text('25'), tick: false),
+                    FSliderMark(value: 0.5, label: Text('50')),
+                    FSliderMark(value: 0.75, label: Text('75'), tick: false),
+                    FSliderMark(value: 1.0, label: Text('100')),
+                  ],
+                ),
+              ),
+            );
+
+            Focus.of(tester.element(find.byType(FFocusedOutline).first)).requestFocus();
+            await tester.pumpAndSettle();
+
+            await expectLater(
+              find.byType(TestScaffold),
+              matchesGoldenFile(
+                'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-focused.png',
+              ),
+            );
+          });
+
           testWidgets('${theme.name} - $layout - error', (tester) async {
             Touch.primary = touch;
             final styles = FSliderStyles.inherit(

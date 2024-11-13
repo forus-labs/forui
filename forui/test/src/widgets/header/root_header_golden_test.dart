@@ -56,6 +56,54 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-header.png'));
       });
+
+      testWidgets('${theme.name} with focused FRootHeader actions', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FHeader(
+              title: const Text(title),
+              actions: [
+                FHeaderAction(
+                  icon: FIcon(FAssets.icons.alarmClock),
+                  onPress: null,
+                ),
+                FHeaderAction(
+                  autofocus: true,
+                  icon: FIcon(FAssets.icons.plus),
+                  onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-focused.png'));
+      });
+
+      testWidgets('${theme.name} with RTL FRootHeader actions', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            textDirection: TextDirection.rtl,
+            child: FHeader(
+              title: const Text(title),
+              actions: [
+                FHeaderAction(
+                  icon: FIcon(FAssets.icons.alarmClock),
+                  onPress: null,
+                ),
+                FHeaderAction(
+                  icon: FIcon(FAssets.icons.plus),
+                  onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-rtl.png'));
+      });
     }
   });
 }

@@ -28,21 +28,24 @@ class FTileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ltr = Directionality.maybeOf(context) == TextDirection.ltr;
+
     final tile = FTileData.maybeOf(context)!;
-    final FTileData(style: tileStyle, :enabled, :hovered) = tile;
+    final FTileData(style: tileStyle, :enabled, :hovered, :focused) = tile;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
 
-    final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
+    final FTileStyle(:contentStyle, :dividerStyle, :focusedDividerStyle) = tileStyle;
     final style = switch ((enabled, hovered)) {
       (true, true) => contentStyle.enabledHoveredStyle,
       (true, false) => contentStyle.enabledStyle,
       (false, _) => contentStyle.disabledStyle,
     };
-    final divider = switch (tile) {
-      _ when tile.divider != FTileDivider.none && tile.index != tile.length - 1 => tile.divider,
-      _ when group.divider != FTileDivider.none && tile.index == tile.length - 1 && group.index != group.length - 1 =>
-        group.divider,
+    final divider = switch (focused) {
+      true when tile.index != tile.length - 1 => FTileDivider.full,
+      true when tile.index == tile.length - 1 && group.index != group.length - 1 => FTileDivider.full,
+      false when tile.index != tile.length - 1 => tile.divider,
+      false when tile.index == tile.length - 1 && group.index != group.length - 1 => group.divider,
       _ => FTileDivider.none,
     };
 
@@ -52,7 +55,9 @@ class FTileContent extends StatelessWidget {
       children: [
         if (prefixIcon case final prefixIcon?)
           Padding(
-            padding: EdgeInsets.only(right: contentStyle.prefixIconSpacing),
+            padding: ltr
+                ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
+                : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
             child: FIconStyleData(
               style: style.prefixIconStyle,
               child: prefixIcon,
@@ -61,7 +66,9 @@ class FTileContent extends StatelessWidget {
         else
           const SizedBox(),
         Padding(
-          padding: EdgeInsets.only(right: contentStyle.middleSpacing),
+          padding: ltr
+              ? EdgeInsets.only(right: contentStyle.middleSpacing)
+              : EdgeInsets.only(left: contentStyle.middleSpacing),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -106,7 +113,9 @@ class FTileContent extends StatelessWidget {
           const SizedBox(),
         if (suffixIcon case final suffixIcon?)
           Padding(
-            padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
+            padding: ltr
+                ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
+                : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
             child: FIconStyleData(
               style: style.suffixIconStyle,
               child: suffixIcon,
@@ -114,7 +123,11 @@ class FTileContent extends StatelessWidget {
           )
         else
           const SizedBox(),
-        if (divider == FTileDivider.none) const SizedBox() else FDivider(style: dividerStyle),
+        switch ((focused, divider)) {
+          (_, FTileDivider.none) => const SizedBox(),
+          (true, _) => FDivider(style: focusedDividerStyle),
+          (false, _) => FDivider(style: dividerStyle),
+        },
       ],
     );
   }

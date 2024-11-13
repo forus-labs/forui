@@ -71,6 +71,47 @@ void main() {
           matchesGoldenFile('bottom-navigation-bar/${theme.name}-forui-icon.png'),
         );
       });
+
+      testWidgets('focused - ${theme.name}', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FBottomNavigationBar(
+              index: 2,
+              children: [
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.house),
+                  label: const Text('Home'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.layoutGrid),
+                  label: const Text('Browse'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.radio),
+                  label: const Text('Radio'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.radio),
+                  label: const Text('Library'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.radio),
+                  label: const Text('Search'),
+                ),
+              ],
+            ),
+          ),
+        );
+
+        Focus.of(tester.element(find.text('Radio'))).requestFocus();
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('bottom-navigation-bar/${theme.name}-focused.png'),
+        );
+      });
     }
   });
 }

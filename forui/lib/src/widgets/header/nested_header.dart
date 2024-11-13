@@ -15,10 +15,14 @@ final class _FNestedHeader extends FHeader {
   /// The title, aligned to the center.
   final Widget title;
 
-  /// The actions, aligned to the left. Defaults to an empty list.
+  /// The actions, aligned to the left in LTR locales. Defaults to an empty list.
+  ///
+  /// They are aligned to the right in RTL locales.
   final List<Widget> prefixActions;
 
   /// The actions, aligned to the right. Defaults to an empty list.
+  ///
+  /// They are aligned to the left in RTL locales.
   final List<Widget> suffixActions;
 
   /// Creates a [_FNestedHeader].
@@ -114,7 +118,7 @@ final class FNestedHeaderStyle with Diagnosticable {
             fontWeight: FontWeight.w600,
             height: 1,
           ),
-          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, size: 25),
+          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 25),
           padding: style.pagePadding.copyWith(bottom: 15),
         );
 

@@ -57,6 +57,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/checkbox/form', page: FormCheckboxRoute.page),
         AutoRoute(path: '/dialog/default', page: DialogRoute.page),
         AutoRoute(path: '/divider/default', page: DividerRoute.page),
+        AutoRoute(path: '/focused-outline/default', page: FocusedOutlineRoute.page),
         AutoRoute(path: '/header/default', page: RootHeaderRoute.page),
         AutoRoute(path: '/header/nested', page: NestedHeaderRoute.page),
         AutoRoute(path: '/header/nested-x', page: XNestedHeaderRoute.page),

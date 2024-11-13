@@ -56,6 +56,7 @@ class FBottomNavigationBar extends StatelessWidget {
               for (final (i, child) in children.indexed)
                 Expanded(
                   child: FTappable.animated(
+                    focusedOutlineStyle: style.focusedOutlineStyle,
                     onPress: () => onChange?.call(i),
                     child: FBottomNavigationBarData(
                       itemStyle: style.itemStyle,
@@ -129,23 +130,31 @@ class FBottomNavigationBarStyle with Diagnosticable {
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   final EdgeInsets padding;
 
+  /// The item's focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// The item's style.
   final FBottomNavigationBarItemStyle itemStyle;
 
   /// Creates a [FBottomNavigationBarStyle].
   FBottomNavigationBarStyle({
     required this.decoration,
+    required this.focusedOutlineStyle,
     required this.itemStyle,
     this.padding = const EdgeInsets.all(5),
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties from [colorScheme] and [typography].
-  FBottomNavigationBarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
+  FBottomNavigationBarStyle.inherit({
+    required FColorScheme colorScheme,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
           decoration: BoxDecoration(
             border: Border(top: BorderSide(color: colorScheme.border)),
             color: colorScheme.background,
           ),
+          focusedOutlineStyle: style.focusedOutlineStyle,
           itemStyle: FBottomNavigationBarItemStyle.inherit(
             colorScheme: colorScheme,
             typography: typography,
@@ -157,11 +166,13 @@ class FBottomNavigationBarStyle with Diagnosticable {
   FBottomNavigationBarStyle copyWith({
     BoxDecoration? decoration,
     EdgeInsets? padding,
+    FFocusedOutlineStyle? focusedOutlineStyle,
     FBottomNavigationBarItemStyle? itemStyle,
   }) =>
       FBottomNavigationBarStyle(
         decoration: decoration ?? this.decoration,
         padding: padding ?? this.padding,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
         itemStyle: itemStyle ?? this.itemStyle,
       );
 
@@ -171,6 +182,7 @@ class FBottomNavigationBarStyle with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('decoration', decoration))
       ..add(DiagnosticsProperty('padding', padding))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(DiagnosticsProperty('itemStyle', itemStyle));
   }
 
@@ -181,8 +193,9 @@ class FBottomNavigationBarStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           decoration == other.decoration &&
           padding == other.padding &&
+          focusedOutlineStyle == other.focusedOutlineStyle &&
           itemStyle == other.itemStyle;
 
   @override
-  int get hashCode => decoration.hashCode ^ padding.hashCode ^ itemStyle.hashCode;
+  int get hashCode => decoration.hashCode ^ padding.hashCode ^ focusedOutlineStyle.hashCode ^ itemStyle.hashCode;
 }

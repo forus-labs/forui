@@ -15,6 +15,30 @@ class FHeaderAction extends StatelessWidget {
   /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
   final Widget icon;
 
+  /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
+  ///
+  /// Defaults to false.
+  ///
+  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
+  /// autofocus set, then the first one added to the tree will get focus.
+  final bool autofocus;
+
+  /// An optional focus node to use as the focus node for this widget.
+  ///
+  /// If one is not supplied, then one will be automatically allocated, owned, and managed by this widget. The widget
+  /// will be focusable even if a [focusNode] is not supplied. If supplied, the given `focusNode` will be hosted by this
+  /// widget, but not owned. See [FocusNode] for more information on what being hosted and/or owned implies.
+  ///
+  /// Supplying a focus node is sometimes useful if an ancestor to this widget wants to control when this widget has the
+  /// focus. The owner will be responsible for calling [FocusNode.dispose] on the focus node when it is done with it,
+  /// but this widget will attach/detach and reparent the node when needed.
+  final FocusNode? focusNode;
+
+  /// Handler called when the focus changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  final ValueChanged<bool>? onFocusChange;
+
   /// A callback for when the button is pressed.
   ///
   /// The action will be disabled if both [onPress] and [onLongPress] are null.
@@ -29,9 +53,12 @@ class FHeaderAction extends StatelessWidget {
   const FHeaderAction({
     required this.icon,
     required this.onPress,
-    this.onLongPress,
     this.style,
     this.semanticLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    this.onLongPress,
     super.key,
   });
 
@@ -40,6 +67,9 @@ class FHeaderAction extends StatelessWidget {
     required VoidCallback? onPress,
     FHeaderActionStyle? style,
     String? semanticLabel,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
     Key? key,
   }) =>
       FHeaderAction(
@@ -47,6 +77,9 @@ class FHeaderAction extends StatelessWidget {
         onPress: onPress,
         style: style,
         semanticLabel: semanticLabel,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
         key: key,
       );
 
@@ -54,12 +87,18 @@ class FHeaderAction extends StatelessWidget {
   factory FHeaderAction.x({
     required VoidCallback? onPress,
     FHeaderActionStyle? style,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
     Key? key,
   }) =>
       FHeaderAction(
         icon: FIcon(FAssets.icons.x),
         onPress: onPress,
         style: style,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
         key: key,
       );
 
@@ -69,6 +108,10 @@ class FHeaderAction extends StatelessWidget {
     final enabled = onPress != null || onLongPress != null;
 
     return FTappable.animated(
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      focusedOutlineStyle: style.focusedOutlineStyle,
       semanticLabel: semanticLabel,
       onPress: onPress,
       onLongPress: onLongPress,
@@ -89,6 +132,9 @@ class FHeaderAction extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(DiagnosticsProperty('icon', icon))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(DiagnosticsProperty('onPress', onPress))
       ..add(DiagnosticsProperty('onLongPress', onLongPress));
   }
@@ -109,17 +155,22 @@ final class FHeaderActionStyle with Diagnosticable {
   /// * 25 for [FHeader.nested]
   final double size;
 
+  /// The outline style when this action is focused.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// Creates a [FHeaderActionStyle].
   FHeaderActionStyle({
     required this.enabledColor,
     required this.disabledColor,
     required this.size,
+    required this.focusedOutlineStyle,
   });
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
-  FHeaderActionStyle.inherit({required FColorScheme colorScheme, required this.size})
+  FHeaderActionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required this.size})
       : enabledColor = colorScheme.foreground,
-        disabledColor = colorScheme.disable(colorScheme.foreground);
+        disabledColor = colorScheme.disable(colorScheme.foreground),
+        focusedOutlineStyle = style.focusedOutlineStyle;
 
   /// Returns a copy of this [FHeaderActionStyle] with the given properties replaced.
   @useResult
@@ -127,11 +178,13 @@ final class FHeaderActionStyle with Diagnosticable {
     Color? enabledColor,
     Color? disabledColor,
     double? size,
+    FFocusedOutlineStyle? focusedOutlineStyle,
   }) =>
       FHeaderActionStyle(
         enabledColor: enabledColor ?? this.enabledColor,
         disabledColor: disabledColor ?? this.disabledColor,
         size: size ?? this.size,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
       );
 
   @override
@@ -140,7 +193,8 @@ final class FHeaderActionStyle with Diagnosticable {
     properties
       ..add(ColorProperty('enabledColor', enabledColor))
       ..add(ColorProperty('disabledColor', disabledColor))
-      ..add(DoubleProperty('size', size));
+      ..add(DoubleProperty('size', size))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle));
   }
 
   @override
@@ -150,8 +204,9 @@ final class FHeaderActionStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           enabledColor == other.enabledColor &&
           disabledColor == other.disabledColor &&
-          size == other.size;
+          size == other.size &&
+          focusedOutlineStyle == other.focusedOutlineStyle;
 
   @override
-  int get hashCode => enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode;
+  int get hashCode => enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode ^ focusedOutlineStyle.hashCode;
 }

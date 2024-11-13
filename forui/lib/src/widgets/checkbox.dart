@@ -13,7 +13,7 @@ import 'package:forui/forui.dart';
 /// See:
 /// * https://forui.dev/docs/form/checkbox for working examples.
 /// * [FCheckboxStyle] for customizing a checkbox's appearance.
-class FCheckbox extends StatelessWidget {
+class FCheckbox extends StatefulWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 
@@ -68,66 +68,7 @@ class FCheckbox extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.checkboxStyle;
-    final (labelState, stateStyle) = switch ((enabled, error != null)) {
-      (true, false) => (FLabelState.enabled, style.enabledStyle),
-      (false, false) => (FLabelState.disabled, style.disabledStyle),
-      (_, true) => (FLabelState.error, style.errorStyle),
-    };
-
-    return GestureDetector(
-      onTap: enabled ? () => onChange?.call(!value) : null,
-      child: FocusableActionDetector(
-        enabled: enabled,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        mouseCursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
-        child: Semantics(
-          label: semanticLabel,
-          enabled: enabled,
-          checked: value,
-          child: FLabel(
-            axis: Axis.horizontal,
-            state: labelState,
-            style: style.labelStyle,
-            label: label,
-            description: description,
-            error: error,
-            child: AnimatedSwitcher(
-              duration: style.animationDuration,
-              switchInCurve: style.curve,
-              child: SizedBox.square(
-                key: ValueKey(value),
-                dimension: 16,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    border: Border.all(
-                      color: stateStyle.borderColor,
-                      width: 0.6,
-                    ),
-                    color: value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
-                  ),
-                  child: value
-                      ? FAssets.icons.check(
-                          height: 14,
-                          width: 14,
-                          colorFilter: ColorFilter.mode(
-                            stateStyle.iconColor,
-                            BlendMode.srcIn,
-                          ),
-                        )
-                      : const SizedBox(),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  State<FCheckbox> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -144,6 +85,85 @@ class FCheckbox extends StatelessWidget {
   }
 }
 
+class _State extends State<FCheckbox> {
+  bool _focused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focused = widget.autofocus;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style ?? context.theme.checkboxStyle;
+    final (labelState, stateStyle) = switch ((widget.enabled, widget.error != null)) {
+      (true, false) => (FLabelState.enabled, style.enabledStyle),
+      (false, false) => (FLabelState.disabled, style.disabledStyle),
+      (_, true) => (FLabelState.error, style.errorStyle),
+    };
+
+    return GestureDetector(
+      onTap: widget.enabled ? () => widget.onChange?.call(!widget.value) : null,
+      child: FocusableActionDetector(
+        enabled: widget.enabled,
+        autofocus: widget.autofocus,
+        focusNode: widget.focusNode,
+        onFocusChange: (focused) {
+          setState(() => _focused = focused);
+          widget.onFocusChange?.call(focused);
+        },
+        mouseCursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
+        child: Semantics(
+          label: widget.semanticLabel,
+          enabled: widget.enabled,
+          checked: widget.value,
+          child: FLabel(
+            axis: Axis.horizontal,
+            state: labelState,
+            style: style.labelStyle,
+            label: widget.label,
+            description: widget.description,
+            error: widget.error,
+            child: FFocusedOutline(
+              style: style.focusedOutlineStyle,
+              focused: _focused,
+              child: AnimatedSwitcher(
+                duration: style.animationDuration,
+                switchInCurve: style.curve,
+                child: SizedBox.square(
+                  key: ValueKey(widget.value),
+                  dimension: 16,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      border: Border.all(
+                        color: stateStyle.borderColor,
+                        width: 0.6,
+                      ),
+                      color: widget.value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
+                    ),
+                    child: widget.value
+                        ? FAssets.icons.check(
+                            height: 14,
+                            width: 14,
+                            colorFilter: ColorFilter.mode(
+                              stateStyle.iconColor,
+                              BlendMode.srcIn,
+                            ),
+                          )
+                        : const SizedBox(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// A [FCheckbox]'s style.
 class FCheckboxStyle with Diagnosticable {
   /// The duration of the animation when the checkbox's switches between checked and unchecked. Defaults to 100ms.
@@ -157,6 +177,9 @@ class FCheckboxStyle with Diagnosticable {
   /// The [FLabel]'s style.
   final FLabelLayoutStyle labelLayoutStyle;
 
+  /// The focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// The [FCheckbox]'s style when it's enabled.
   final FCheckboxStateStyle enabledStyle;
 
@@ -169,6 +192,7 @@ class FCheckboxStyle with Diagnosticable {
   /// Creates a [FCheckboxStyle].
   FCheckboxStyle({
     required this.labelLayoutStyle,
+    required this.focusedOutlineStyle,
     required this.enabledStyle,
     required this.disabledStyle,
     required this.errorStyle,
@@ -180,6 +204,10 @@ class FCheckboxStyle with Diagnosticable {
   FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : this(
           labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
+          focusedOutlineStyle: FFocusedOutlineStyle(
+            color: style.focusedOutlineStyle.color,
+            borderRadius: BorderRadius.circular(4),
+          ),
           enabledStyle: FCheckboxStateStyle(
             labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
             descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
@@ -224,6 +252,7 @@ class FCheckboxStyle with Diagnosticable {
     Duration? animationDuration,
     Curve? curve,
     FLabelLayoutStyle? labelLayoutStyle,
+    FFocusedOutlineStyle? focusedOutlineStyle,
     FCheckboxStateStyle? enabledStyle,
     FCheckboxStateStyle? disabledStyle,
     FCheckboxErrorStyle? errorStyle,
@@ -232,6 +261,7 @@ class FCheckboxStyle with Diagnosticable {
         animationDuration: animationDuration ?? this.animationDuration,
         curve: curve ?? this.curve,
         labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
         enabledStyle: enabledStyle ?? this.enabledStyle,
         disabledStyle: disabledStyle ?? this.disabledStyle,
         errorStyle: errorStyle ?? this.errorStyle,
@@ -244,6 +274,7 @@ class FCheckboxStyle with Diagnosticable {
       ..add(DiagnosticsProperty('animationDuration', animationDuration))
       ..add(DiagnosticsProperty('curve', curve))
       ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle));
@@ -257,6 +288,7 @@ class FCheckboxStyle with Diagnosticable {
           animationDuration == other.animationDuration &&
           curve == other.curve &&
           labelLayoutStyle == other.labelLayoutStyle &&
+          focusedOutlineStyle == other.focusedOutlineStyle &&
           enabledStyle == other.enabledStyle &&
           disabledStyle == other.disabledStyle &&
           errorStyle == other.errorStyle;
@@ -266,6 +298,7 @@ class FCheckboxStyle with Diagnosticable {
       animationDuration.hashCode ^
       curve.hashCode ^
       labelLayoutStyle.hashCode ^
+      focusedOutlineStyle.hashCode ^
       enabledStyle.hashCode ^
       disabledStyle.hashCode ^
       errorStyle.hashCode;

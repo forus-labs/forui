@@ -38,12 +38,14 @@ class TestScaffold extends StatelessWidget {
   final FThemeData theme;
   final Color? background;
   final Locale? locale;
+  final TextDirection? textDirection;
   final Widget child;
   final bool padded;
   final bool wrapped;
 
   TestScaffold({
     required this.child,
+    this.textDirection,
     this.padded = true,
     FThemeData? theme,
     Color? background,
@@ -60,6 +62,7 @@ class TestScaffold extends StatelessWidget {
   TestScaffold.app({
     required this.child,
     this.locale,
+    this.textDirection,
     this.padded = true,
     FThemeData? theme,
     Color? background,
@@ -76,6 +79,7 @@ class TestScaffold extends StatelessWidget {
       : theme = FThemes.zinc.light,
         background = blueScreen.colorScheme.background,
         locale = null,
+        textDirection = null,
         padded = false,
         wrapped = false;
 
@@ -89,7 +93,7 @@ class TestScaffold extends StatelessWidget {
         supportedLocales: FLocalizations.supportedLocales,
         builder: (context, child) => FTheme(
           data: theme,
-          textDirection: TextDirection.ltr,
+          textDirection: textDirection,
           child: Container(
             color: background ?? theme.colorScheme.background,
             alignment: Alignment.center,
@@ -102,7 +106,7 @@ class TestScaffold extends StatelessWidget {
     } else {
       return FTheme(
         data: theme,
-        textDirection: TextDirection.ltr,
+        textDirection: textDirection,
         child: Container(
           color: background ?? theme.colorScheme.background,
           alignment: Alignment.center,
@@ -120,6 +124,7 @@ class TestScaffold extends StatelessWidget {
       ..add(DiagnosticsProperty('data', theme))
       ..add(ColorProperty('background', background))
       ..add(DiagnosticsProperty('locale', locale))
+      ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('padded', value: padded, ifTrue: 'padded'))
       ..add(FlagProperty('wrapped', value: wrapped, ifTrue: 'wrapped'));
   }

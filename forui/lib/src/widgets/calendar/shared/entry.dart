@@ -1,13 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-
-final _yMMMMd = DateFormat.yMMMMd();
 
 @internal
 abstract class Entry extends StatelessWidget {
@@ -16,6 +13,7 @@ abstract class Entry extends StatelessWidget {
 
   factory Entry.day({
     required FCalendarDayPickerStyle style,
+    required FLocalizations localizations,
     required LocalDate date,
     required FocusNode focusNode,
     required bool current,
@@ -32,22 +30,27 @@ abstract class Entry extends StatelessWidget {
     final dayStyle = current ? styles.current : styles.enclosing;
     final entryStyle = isSelected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
-    Widget builder(BuildContext context, FTappableData data, Widget? child) => _Content(
-          style: entryStyle,
-          borderRadius: BorderRadius.horizontal(
-            left: isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius,
-            right: isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius,
-          ),
-          text: FLocalizations.of(context).day(date.toNative()),
-          data: data,
-          current: today,
-        );
+    Widget builder(BuildContext context, FTappableData data, Widget? child) {
+      final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius;
+      final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius;
+
+      return _Content(
+        style: entryStyle,
+        borderRadius: switch (Directionality.maybeOf(context)) {
+          TextDirection.ltr || null => BorderRadius.horizontal(left: yesterday, right: tomorrow),
+          TextDirection.rtl => BorderRadius.horizontal(left: tomorrow, right: yesterday),
+        },
+        text: FLocalizations.of(context).day(date.toNative()),
+        data: data,
+        current: today,
+      );
+    }
 
     if (canSelect) {
       return _SelectableEntry(
         focusNode: focusNode,
         date: date,
-        semanticLabel: '${_yMMMMd.format(date.toNative())}${today ? ', Today' : ''}',
+        semanticLabel: localizations.fullDate(date.toNative()),
         selected: isSelected,
         onPress: onPress,
         onLongPress: onLongPress,

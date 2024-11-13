@@ -117,6 +117,9 @@ final class FAccordionStyle with Diagnosticable {
   /// Throws [AssertionError] if [iconSize] is not positive.
   final double iconSize;
 
+  /// The focused outline style.
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// The divider's color.
   final FDividerStyle dividerStyle;
 
@@ -128,6 +131,7 @@ final class FAccordionStyle with Diagnosticable {
     required this.titleTextStyle,
     required this.childTextStyle,
     required this.iconColor,
+    required this.focusedOutlineStyle,
     required this.dividerStyle,
     this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
     this.childPadding = const EdgeInsets.only(bottom: 15),
@@ -136,11 +140,13 @@ final class FAccordionStyle with Diagnosticable {
   }) : assert(0 < iconSize, 'iconSize should be positive.');
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
-  FAccordionStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
       : this(
           titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
           childTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
           iconColor: colorScheme.primary,
+          iconSize: 20,
+          focusedOutlineStyle: style.focusedOutlineStyle,
           dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
         );
 
@@ -153,6 +159,7 @@ final class FAccordionStyle with Diagnosticable {
     EdgeInsets? childPadding,
     Color? iconColor,
     double? iconSize,
+    FFocusedOutlineStyle? focusedOutlineStyle,
     FDividerStyle? dividerStyle,
     Duration? animationDuration,
   }) =>
@@ -163,6 +170,7 @@ final class FAccordionStyle with Diagnosticable {
         childPadding: childPadding ?? this.childPadding,
         iconColor: iconColor ?? this.iconColor,
         iconSize: iconSize ?? this.iconSize,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
         dividerStyle: dividerStyle ?? this.dividerStyle,
         animationDuration: animationDuration ?? this.animationDuration,
       );
@@ -177,6 +185,7 @@ final class FAccordionStyle with Diagnosticable {
       ..add(DiagnosticsProperty('contentPadding', childPadding))
       ..add(ColorProperty('iconColor', iconColor))
       ..add(DoubleProperty('iconSize', iconSize))
+      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
       ..add(DiagnosticsProperty('animationDuration', animationDuration));
   }
@@ -193,6 +202,7 @@ final class FAccordionStyle with Diagnosticable {
           iconColor == other.iconColor &&
           iconSize == other.iconSize &&
           animationDuration == other.animationDuration &&
+          focusedOutlineStyle == other.focusedOutlineStyle &&
           dividerStyle == other.dividerStyle;
 
   @override
@@ -204,6 +214,7 @@ final class FAccordionStyle with Diagnosticable {
       iconColor.hashCode ^
       iconSize.hashCode ^
       animationDuration.hashCode ^
+      focusedOutlineStyle.hashCode ^
       dividerStyle.hashCode;
 }
 
