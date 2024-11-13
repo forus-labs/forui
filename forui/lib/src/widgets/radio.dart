@@ -201,7 +201,10 @@ class FRadioStyle with Diagnosticable {
   FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : this(
           labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-          focusedOutlineStyle: style.focusedOutlineStyle,
+          focusedOutlineStyle: FFocusedOutlineStyle(
+            color: colorScheme.primary,
+            borderRadius: BorderRadius.circular(100),
+          ),
           enabledStyle: FRadioStateStyle(
             labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
             descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,

@@ -204,7 +204,10 @@ class FCheckboxStyle with Diagnosticable {
   FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
       : this(
           labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-          focusedOutlineStyle: style.focusedOutlineStyle,
+          focusedOutlineStyle: FFocusedOutlineStyle(
+            color: style.focusedOutlineStyle.color,
+            borderRadius: BorderRadius.circular(4),
+          ),
           enabledStyle: FCheckboxStateStyle(
             labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
             descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
