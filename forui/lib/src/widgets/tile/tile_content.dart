@@ -28,6 +28,8 @@ class FTileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ltr = Directionality.maybeOf(context) == TextDirection.ltr;
+
     final tile = FTileData.maybeOf(context)!;
     final FTileData(style: tileStyle, :enabled, :hovered, :focused) = tile;
 
@@ -53,7 +55,9 @@ class FTileContent extends StatelessWidget {
       children: [
         if (prefixIcon case final prefixIcon?)
           Padding(
-            padding: EdgeInsets.only(right: contentStyle.prefixIconSpacing),
+            padding: ltr
+                ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
+                : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
             child: FIconStyleData(
               style: style.prefixIconStyle,
               child: prefixIcon,
@@ -62,7 +66,9 @@ class FTileContent extends StatelessWidget {
         else
           const SizedBox(),
         Padding(
-          padding: EdgeInsets.only(right: contentStyle.middleSpacing),
+          padding: ltr
+              ? EdgeInsets.only(right: contentStyle.middleSpacing)
+              : EdgeInsets.only(left: contentStyle.middleSpacing),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +113,9 @@ class FTileContent extends StatelessWidget {
           const SizedBox(),
         if (suffixIcon case final suffixIcon?)
           Padding(
-            padding: EdgeInsets.only(left: contentStyle.suffixIconSpacing),
+            padding: ltr
+                ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
+                : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
             child: FIconStyleData(
               style: style.suffixIconStyle,
               child: suffixIcon,
