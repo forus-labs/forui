@@ -35,7 +35,7 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('line_calendar/${theme.name}/today.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/today.png'));
         });
 
         testWidgets('$theme.name - unselected', (tester) async {
@@ -52,7 +52,7 @@ void main() {
           await tester.tap(find.text('20'));
           await tester.pumpAndSettle(const Duration(milliseconds: 300));
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('line_calendar/${theme.name}/unselected.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/unselected.png'));
         });
 
         testWidgets('$theme.name - new date selected', (tester) async {
@@ -69,7 +69,7 @@ void main() {
           await tester.tap(find.text('24'));
           await tester.pumpAndSettle(const Duration(milliseconds: 300));
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('line_calendar/${theme.name}/new-date.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/new-date.png'));
         });
 
         testWidgets('$theme.name - single digit date', (tester) async {
@@ -85,7 +85,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('line_calendar/${theme.name}/single-digit-date.png'),
+            matchesGoldenFile('line-calendar/${theme.name}/single-digit-date.png'),
           );
         });
       }

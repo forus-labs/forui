@@ -29,13 +29,13 @@ class FCalendar extends StatelessWidget {
   /// A controller that determines if a date is selected.
   final FCalendarController controller;
 
-  /// The start date. It is truncated to the nearest date.
+  /// The start date, inclusive. It is truncated to the nearest date.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [end] <= [start].
   final DateTime start;
 
-  /// The end date. It is truncated to the nearest date.
+  /// The end date, exclusive. It is truncated to the nearest date.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [end] <= [start].
