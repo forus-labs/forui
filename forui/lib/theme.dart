@@ -2,6 +2,7 @@
 /// choices of Forui widgets.
 library forui.theme;
 
+export 'src/theme/breakpoints.dart';
 export 'src/theme/color_scheme.dart';
 export 'src/theme/form_field_style.dart';
 export 'src/theme/style.dart';

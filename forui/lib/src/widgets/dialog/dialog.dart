@@ -95,6 +95,32 @@ class FDialog extends StatelessWidget {
               ),
         };
 
+  /// Creates a adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
+  /// horizontally on larger devices.
+  FDialog.adaptive({
+    required List<Widget> actions,
+    this.style,
+    this.insetAnimationDuration = _defaultDuration,
+    this.insetAnimationCurve = Curves.decelerate,
+    this.semanticLabel,
+    Widget? title,
+    Widget? body,
+    super.key,
+  }) : builder = ((context, style) => switch (MediaQuery.sizeOf(context).width) {
+              final width when width < context.theme.breakpoints.sm => VerticalContent(
+                  style: style.verticalStyle,
+                  title: title,
+                  body: body,
+                  actions: actions,
+                ),
+              _ => HorizontalContent(
+                  style: style.horizontalStyle,
+                  title: title,
+                  body: body,
+                  actions: actions,
+                ),
+            });
+
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({
     required this.builder,

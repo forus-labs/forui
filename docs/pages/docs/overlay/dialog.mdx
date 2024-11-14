@@ -58,6 +58,19 @@ FDialog(
 );
 ```
 
+### `FDialog.adaptive(...)`
+
+```dart
+FDialog.adaptive(
+  title: const Text('Are you absolutely sure?'),
+  body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+  actions: [
+    FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+    FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+  ],
+);
+```
+
 ### `FDialog.raw(...)`
 
 ```dart

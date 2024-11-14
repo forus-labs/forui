@@ -1,7 +1,5 @@
 name: forui_assets
-description: >
-  Companion assets for Forui, a UI library for Flutter that provides a set of minimalistic widgets heavily 
-  inspired by Shadcn/ui.
+description: Companion assets for Forui, a set of beautifully designed, minimalistic widgets for desktop & touch devices.
 version: 0.7.0
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
