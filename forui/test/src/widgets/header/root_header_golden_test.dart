@@ -54,7 +54,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-header.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}.png'));
       });
 
       testWidgets('${theme.name} with focused FRootHeader actions', (tester) async {

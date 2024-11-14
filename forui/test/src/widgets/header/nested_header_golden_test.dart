@@ -62,7 +62,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-header.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}.png'));
       });
 
       testWidgets('${theme.name} with focused FNestedHeader actions', (tester) async {
@@ -91,33 +91,6 @@ void main() {
         );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-focused.png'));
-      });
-
-      testWidgets('${theme.name} with FNestedHeader actions', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: FHeader.nested(
-              title: const Text('Title'),
-              prefixActions: [
-                FHeaderAction.back(onPress: () {}),
-                FHeaderAction(
-                  icon: FIcon(FAssets.icons.alarmClock),
-                  onPress: null,
-                ),
-              ],
-              suffixActions: [
-                FHeaderAction(
-                  icon: FIcon(FAssets.icons.plus),
-                  onPress: () {},
-                ),
-                FHeaderAction.x(onPress: () {}),
-              ],
-            ),
-          ),
-        );
-
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-header.png'));
       });
 
       testWidgets('${theme.name} with RTL FNestedHeader actions', (tester) async {

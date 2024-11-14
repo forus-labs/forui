@@ -41,7 +41,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}-scaffold.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}.png'));
       });
     }
   });
