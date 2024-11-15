@@ -50,7 +50,7 @@ final class FBreakpoints with Diagnosticable {
 
   /// The minimum width of the medium breakpoint, inclusive. Defaults to 768.
   ///
-  /// Tablet decides are typically larger than
+  /// Tablet decides are typically larger than [md].
   final double md;
 
   /// The minimum width of the large breakpoint, inclusive. Defaults to 1024.

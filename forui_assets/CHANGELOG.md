@@ -1,3 +1,9 @@
+## 0.7.0
+
+This update syncs the version with the `forui` package.
+
+* Update icons to Lucide 0.456.0.
+
 ## 0.3.0
 
 * Update icons to Lucide 0.453.0.

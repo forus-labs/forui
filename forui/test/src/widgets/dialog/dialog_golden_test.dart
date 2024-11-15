@@ -74,6 +74,66 @@ void main() {
 
         await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-raw-content-dialog.png'));
       });
+
+      testWidgets('${theme.name} adaptive on mobile device', (tester) async {
+        tester.view.physicalSize = const Size(1290, 2796); // iPhone 15 Plus
+        addTearDown(tester.view.resetPhysicalSize);
+
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FDialog.adaptive(
+              title: const Text('Are you absolutely sure?'),
+              body: const Text(
+                'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+              ),
+              actions: [
+                FButton(
+                  label: const Text('Continue'),
+                  onPress: () {},
+                ),
+                FButton(
+                  style: FButtonStyle.outline,
+                  label: const Text('Cancel'),
+                  onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-adaptive-mobile.png'));
+      });
+
+      testWidgets('${theme.name} adaptive on tablet device', (tester) async {
+        tester.view.physicalSize = const Size(2388, 1668); // iPad Pro 11"
+        addTearDown(tester.view.resetPhysicalSize);
+
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FDialog.adaptive(
+              title: const Text('Are you absolutely sure?'),
+              body: const Text(
+                'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+              ),
+              actions: [
+                FButton(
+                  label: const Text('Continue'),
+                  onPress: () {},
+                ),
+                FButton(
+                  style: FButtonStyle.outline,
+                  label: const Text('Cancel'),
+                  onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-adaptive-tablet.png'));
+      });
     }
   });
 }

@@ -57,7 +57,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/${theme.name}/default-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-field/${theme.name}/default-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
@@ -80,7 +80,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/${theme.name}/error-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-field/${theme.name}/error-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
@@ -101,7 +101,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/${theme.name}/email-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-field/${theme.name}/email-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
@@ -122,7 +122,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/${theme.name}/password-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-field/${theme.name}/password-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
         }
@@ -146,7 +146,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text_field/${theme.name}/multiline-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-field/${theme.name}/multiline-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
         }

@@ -66,7 +66,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-tabs.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}.png'));
       });
 
       testWidgets('focus - ${theme.name}', (tester) async {
