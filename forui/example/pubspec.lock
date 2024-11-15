@@ -261,10 +261,10 @@ packages:
     dependency: transitive
     description:
       name: forui_assets
-      sha256: "48a036b329a855db9a18ebb3db98d5e9d1320479d747b48efd4e698ec7b1f178"
+      sha256: "17ade05cbb501faf95390f5c71f2eb1aea3e426afcc7aa1eb4289268a089da70"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.0"
+    version: "0.7.0"
   frontend_server_client:
     dependency: transitive
     description:
