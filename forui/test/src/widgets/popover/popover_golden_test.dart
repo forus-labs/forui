@@ -98,7 +98,7 @@ void main() {
             child: FPopover(
               followerAnchor: Alignment.topRight,
               targetAnchor: Alignment.bottomRight,
-              ignoreDirectionalPadding: false,
+              useDirectionalPadding: true,
               style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),

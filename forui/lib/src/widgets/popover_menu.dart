@@ -39,10 +39,10 @@ class FPopoverMenu extends StatefulWidget {
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
   final bool hideOnTapOutside;
 
-  /// True if the menu should ignore the cross-axis padding of the anchor when aligning to it. Defaults to true.
+  /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
   ///
   /// Diagonal corners are ignored.
-  final bool ignoreDirectionalPadding;
+  final bool useDirectionalPadding;
 
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticLabel;
@@ -90,7 +90,7 @@ class FPopoverMenu extends StatefulWidget {
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
-    this.ignoreDirectionalPadding = true,
+    this.useDirectionalPadding = false,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -112,7 +112,7 @@ class FPopoverMenu extends StatefulWidget {
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
-    this.ignoreDirectionalPadding = true,
+    this.useDirectionalPadding = false,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -134,13 +134,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
-      ..add(
-        FlagProperty(
-          'ignoreDirectionalPadding',
-          value: ignoreDirectionalPadding,
-          ifTrue: 'ignoreDirectionalPadding',
-        ),
-      )
+      ..add(FlagProperty('useDirectionalPadding', value: useDirectionalPadding, ifTrue: 'useDirectionalPadding'))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -180,7 +174,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       targetAnchor: widget.childAnchor,
       shift: widget.shift,
       hideOnTapOutside: widget.hideOnTapOutside,
-      ignoreDirectionalPadding: widget.ignoreDirectionalPadding,
+      useDirectionalPadding: widget.useDirectionalPadding,
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,

@@ -101,7 +101,7 @@ void main() {
             child: FPopoverMenu(
               menuAnchor: Alignment.topRight,
               childAnchor: Alignment.bottomRight,
-              ignoreDirectionalPadding: false,
+              useDirectionalPadding: true,
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
               menu: [
