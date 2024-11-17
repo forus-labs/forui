@@ -239,9 +239,8 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       followerAnchor: widget.followerAnchor,
       targetAnchor: widget.targetAnchor,
       shift: widget.shift,
-      offset: widget.directionPadding
-          ? Offset.zero
-          : Alignments.removeDirectionalPadding(style.padding, follower, target),
+      offset:
+          widget.directionPadding ? Offset.zero : Alignments.removeDirectionalPadding(style.padding, follower, target),
       followerBuilder: (context) => CallbackShortcuts(
         bindings: {
           const SingleActivator(LogicalKeyboardKey.escape): _controller.hide,
