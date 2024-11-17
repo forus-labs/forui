@@ -92,7 +92,7 @@ const FPopoverMenu(
   controller: FPopoverController(),
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
-  ignoreDirectionalPadding: true,
+  directionPadding: false,
   hideOnTapOutside: true,
   shift: FPortalFollowerShift.flip,
   menu: [
@@ -111,7 +111,7 @@ const FPopoverMenu.tappable(
   controller: FPopoverController(),
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
-  ignoreDirectionalPadding: true,
+  directionPadding: false,
   hideOnTapOutside: true,
   shift: FPortalFollowerShift.flip,
   menu: [

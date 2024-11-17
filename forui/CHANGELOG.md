@@ -2,11 +2,11 @@
 
 ### Changes
 
-* **Breaking** Change `Popover.ignoreDirectionalPadding` to `Popover.useDirectionalPadding` - the value should be inverted.
+* **Breaking** Change `Popover.ignoreDirectionalPadding` to `Popover.directionPadding` - the value should be inverted.
 
-* **Breaking** Change `PopoverMenu.ignoreDirectionalPadding` to `PopoverMenu.useDirectionalPadding` - the value should be inverted.
+* **Breaking** Change `PopoverMenu.ignoreDirectionalPadding` to `PopoverMenu.directionPadding` - the value should be inverted.
 
-* **Breaking** Change `SelectMenuTile.ignoreDirectionalPadding` to `SelectMenuTile.useDirectionalPadding` - the value should be inverted.
+* **Breaking** Change `SelectMenuTile.ignoreDirectionalPadding` to `SelectMenuTile.directionPadding` - the value should be inverted.
 
 
 ## 0.7.0

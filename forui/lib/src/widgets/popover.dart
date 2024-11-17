@@ -103,7 +103,7 @@ class FPopover extends StatefulWidget {
   /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
   ///
   /// Diagonal corners are ignored.
-  final bool useDirectionalPadding;
+  final bool directionPadding;
 
   /// The follower's semantic label used by accessibility frameworks.
   final String? semanticLabel;
@@ -148,7 +148,7 @@ class FPopover extends StatefulWidget {
     this.style,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
-    this.useDirectionalPadding = false,
+    this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -171,7 +171,7 @@ class FPopover extends StatefulWidget {
     this.style,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
-    this.useDirectionalPadding = false,
+    this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -196,7 +196,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
-      ..add(FlagProperty('useDirectionalPadding', value: useDirectionalPadding, ifTrue: 'useDirectionalPadding'))
+      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -239,7 +239,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       followerAnchor: widget.followerAnchor,
       targetAnchor: widget.targetAnchor,
       shift: widget.shift,
-      offset: widget.useDirectionalPadding
+      offset: widget.directionPadding
           ? Offset.zero
           : Alignments.removeDirectionalPadding(style.padding, follower, target),
       followerBuilder: (context) => CallbackShortcuts(
