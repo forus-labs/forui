@@ -121,7 +121,7 @@ void main() {
         );
       });
 
-      testWidgets('${theme.name} ignore directional padding', (tester) async {
+      testWidgets('${theme.name} no directional padding', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
@@ -146,7 +146,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('popover/ignore-directional-padding-${theme.name}.png'),
+          matchesGoldenFile('popover/no-directional-padding-${theme.name}.png'),
         );
       });
     });
