@@ -27,15 +27,18 @@ class DialogPage extends Sample {
         label: const Text('Show Dialog'),
         onPress: () => showAdaptiveDialog(
           context: context,
-          builder: (context) => FDialog(
-            style: style,
-            direction: direction,
-            title: const Text('Are you absolutely sure?'),
-            body: const Text(
-              'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+          builder: (context) => FTheme(
+              data: theme,
+              child: FDialog(
+                style: style,
+                direction: direction,
+                title: const Text('Are you absolutely sure?'),
+                body: const Text(
+                  'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                ),
+                actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
+              ),
             ),
-            actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
-          ),
         ),
       ),
     );
