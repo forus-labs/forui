@@ -89,18 +89,17 @@ class _ShiftedSheet extends RenderShiftedBox {
     return result + positionChild(constraints.biggest, childSize).dy;
   }
 
-  BoxConstraints constrainChild(BoxConstraints constraints) => switch (side) {
-        Layout.ttb || Layout.btt => BoxConstraints(
-            minWidth: constraints.maxWidth,
-            maxWidth: constraints.maxWidth,
-            maxHeight: _dimensionRatio == null ? constraints.maxHeight : constraints.maxHeight * _dimensionRatio!,
-          ),
-        Layout.ltr || Layout.rtl => BoxConstraints(
-            maxWidth: _dimensionRatio == null ? constraints.maxWidth : constraints.maxWidth * _dimensionRatio!,
-            minHeight: constraints.maxHeight,
-            maxHeight: constraints.maxHeight,
-          ),
-      };
+  BoxConstraints constrainChild(BoxConstraints constraints) => side.vertical
+      ? BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          maxHeight: _dimensionRatio == null ? constraints.maxHeight : constraints.maxHeight * _dimensionRatio!,
+        )
+      : BoxConstraints(
+          maxWidth: _dimensionRatio == null ? constraints.maxWidth : constraints.maxWidth * _dimensionRatio!,
+          minHeight: constraints.maxHeight,
+          maxHeight: constraints.maxHeight,
+        );
 
   Offset positionChild(Size size, Size childSize) => switch (side) {
         Layout.ttb => Offset(0, childSize.height * (_value - 1)),
