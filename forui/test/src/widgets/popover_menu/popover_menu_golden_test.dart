@@ -101,7 +101,7 @@ void main() {
             child: FPopoverMenu(
               menuAnchor: Alignment.topRight,
               childAnchor: Alignment.bottomRight,
-              ignoreDirectionalPadding: false,
+              directionPadding: true,
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
               menu: [
@@ -141,7 +141,7 @@ void main() {
         );
       });
 
-      testWidgets('${theme.name} ignore directional padding', (tester) async {
+      testWidgets('${theme.name} without no directional padding', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
@@ -183,7 +183,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('popover-menu/ignore-directional-padding-${theme.name}.png'),
+          matchesGoldenFile('popover-menu/no-directional-padding-${theme.name}.png'),
         );
       });
     });

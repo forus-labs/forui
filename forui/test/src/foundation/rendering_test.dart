@@ -100,8 +100,8 @@ void main() {
       (Alignment.bottomRight, Alignment.bottomRight, const Offset(3, 4)),
     ]) {
       test(
-        'ignoreDirectionalPadding - $follower - $target',
-        () => expect(Alignments.ignoreDirectionalPadding(insets, follower, target), expected),
+        'removeDirectionalPadding - $follower - $target',
+        () => expect(Alignments.removeDirectionalPadding(insets, follower, target), expected),
       );
     }
 

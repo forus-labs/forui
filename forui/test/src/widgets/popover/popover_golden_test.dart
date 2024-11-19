@@ -98,7 +98,7 @@ void main() {
             child: FPopover(
               followerAnchor: Alignment.topRight,
               targetAnchor: Alignment.bottomRight,
-              ignoreDirectionalPadding: false,
+              directionPadding: true,
               style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
               followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
@@ -121,7 +121,7 @@ void main() {
         );
       });
 
-      testWidgets('${theme.name} ignore directional padding', (tester) async {
+      testWidgets('${theme.name} no directional padding', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
@@ -146,7 +146,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('popover/ignore-directional-padding-${theme.name}.png'),
+          matchesGoldenFile('popover/no-directional-padding-${theme.name}.png'),
         );
       });
     });

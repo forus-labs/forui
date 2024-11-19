@@ -1,4 +1,15 @@
-## 0.7.0 (Next)
+## 0.8.0 (Next)
+
+### Changes
+
+* **Breaking** Change `Popover.ignoreDirectionalPadding` to `Popover.directionPadding` - the value should be inverted.
+
+* **Breaking** Change `PopoverMenu.ignoreDirectionalPadding` to `PopoverMenu.directionPadding` - the value should be inverted.
+
+* **Breaking** Change `SelectMenuTile.ignoreDirectionalPadding` to `SelectMenuTile.directionPadding` - the value should be inverted.
+
+
+## 0.7.0
 
 This update adds responsive breakpoints, focused outlines & localization! It also introduces several new tile widgets.
 

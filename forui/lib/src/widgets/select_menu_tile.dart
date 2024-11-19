@@ -52,10 +52,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
   final bool hideOnTapOutside;
 
-  /// True if the menu should ignore the cross-axis padding of the anchor when aligning to it. Defaults to true.
+  /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
   ///
   /// Diagonal corners are ignored.
-  final bool ignoreDirectionalPadding;
+  final bool directionPadding;
 
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
   final bool autoHide;
@@ -126,7 +126,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     this.tileAnchor = Alignment.bottomRight,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
-    this.ignoreDirectionalPadding = true,
+    this.directionPadding = false,
     this.autoHide = false,
     this.label,
     this.description,
@@ -180,7 +180,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               targetAnchor: tileAnchor,
               shift: shift,
               hideOnTapOutside: hideOnTapOutside,
-              ignoreDirectionalPadding: ignoreDirectionalPadding,
+              directionPadding: directionPadding,
               autofocus: autofocus,
               focusNode: focusNode,
               onFocusChange: onFocusChange,
@@ -237,13 +237,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
       ..add(DiagnosticsProperty('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
-      ..add(
-        FlagProperty(
-          'ignoreDirectionalPadding',
-          value: ignoreDirectionalPadding,
-          ifTrue: 'ignoreDirectionalPadding',
-        ),
-      )
+      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('semanticLabel', semanticLabel))
