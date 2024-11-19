@@ -2,7 +2,7 @@
 ///
 /// A tile is typically used to group related information together.
 ///
-/// See https://forui.dev/tile for working examples.
+/// See https://forui.dev/docs/tile/tile for working examples.
 library forui.widgets.tile;
 
 export '../src/widgets/tile/tile.dart' hide extractTile;

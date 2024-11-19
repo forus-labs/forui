@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:meta/meta.dart';
 
+/// This is based on Material's _BottomSheetLayoutWithSizeListener.
 @internal
 class ShiftedSheet extends SingleChildRenderObjectWidget {
   final Layout side;
