@@ -8,12 +8,12 @@ import 'package:meta/meta.dart';
 class ShiftedSheet extends SingleChildRenderObjectWidget {
   final Layout side;
   final double value;
-  final double dimensionRatio;
+  final double mainAxisMaxRatio;
 
   const ShiftedSheet({
     required this.side,
     required this.value,
-    required this.dimensionRatio,
+    required this.mainAxisMaxRatio,
     required super.child,
     super.key,
   });
@@ -22,7 +22,7 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
   RenderBox createRenderObject(BuildContext context) => _ShiftedSheet(
         side: side,
         value: value,
-        dimensionRatio: dimensionRatio,
+        mainAxisMaxRatio: mainAxisMaxRatio,
       );
 
   @override
@@ -31,7 +31,7 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
     renderObject
       ..side = side
       ..value = value
-      ..dimensionRatio = dimensionRatio;
+      ..mainAxisRatio = mainAxisMaxRatio;
   }
 
   @override
@@ -40,22 +40,22 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
     properties
       ..add(EnumProperty('side', side))
       ..add(DoubleProperty('value', value))
-      ..add(DoubleProperty('dimensionRatio', dimensionRatio));
+      ..add(DoubleProperty('dimensionRatio', mainAxisMaxRatio));
   }
 }
 
 class _ShiftedSheet extends RenderShiftedBox {
   Layout _side;
   double _value;
-  double? _dimensionRatio;
+  double? _mainAxisMaxRatio;
 
   _ShiftedSheet({
     required Layout side,
     required double value,
-    required double dimensionRatio,
+    required double mainAxisMaxRatio,
   })  : _side = side,
         _value = value,
-        _dimensionRatio = dimensionRatio,
+        _mainAxisMaxRatio = mainAxisMaxRatio,
         super(null);
 
   @override
@@ -94,10 +94,10 @@ class _ShiftedSheet extends RenderShiftedBox {
       ? BoxConstraints(
           minWidth: constraints.maxWidth,
           maxWidth: constraints.maxWidth,
-          maxHeight: _dimensionRatio == null ? constraints.maxHeight : constraints.maxHeight * _dimensionRatio!,
+          maxHeight: _mainAxisMaxRatio == null ? constraints.maxHeight : constraints.maxHeight * _mainAxisMaxRatio!,
         )
       : BoxConstraints(
-          maxWidth: _dimensionRatio == null ? constraints.maxWidth : constraints.maxWidth * _dimensionRatio!,
+          maxWidth: _mainAxisMaxRatio == null ? constraints.maxWidth : constraints.maxWidth * _mainAxisMaxRatio!,
           minHeight: constraints.maxHeight,
           maxHeight: constraints.maxHeight,
         );
@@ -154,11 +154,11 @@ class _ShiftedSheet extends RenderShiftedBox {
     }
   }
 
-  double? get dimensionRatio => _dimensionRatio;
+  double? get mainAxisRatio => _mainAxisMaxRatio;
 
-  set dimensionRatio(double? value) {
-    if (_dimensionRatio != value) {
-      _dimensionRatio = value;
+  set mainAxisRatio(double? value) {
+    if (_mainAxisMaxRatio != value) {
+      _mainAxisMaxRatio = value;
       markNeedsLayout();
     }
   }
@@ -169,6 +169,6 @@ class _ShiftedSheet extends RenderShiftedBox {
     properties
       ..add(EnumProperty('side', side))
       ..add(DoubleProperty('value', value))
-      ..add(DoubleProperty('dimensionRatio', dimensionRatio));
+      ..add(DoubleProperty('mainAxisRatio', mainAxisRatio));
   }
 }

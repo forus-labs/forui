@@ -4,36 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-/// This is based on Material's _DragHandle.
-@internal
-class Handle extends StatelessWidget {
-  final FSheetStyle style;
-
-  /// Creates a handle.
-  const Handle({required this.style, super.key});
-
-  @override
-  Widget build(BuildContext context) => Padding(
-        padding: style.handlePadding,
-        child: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: style.handleColor,
-              borderRadius: style.handleBorderRadius,
-            ),
-            child: SizedBox.fromSize(size: style.handleSize),
-          ),
-        ),
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
-  }
-}
-
 /// The sheet's gesture detector. We use a [RawGestureDetector] instead of a [GestureDetector] because the latter
 /// doesn't allow `onlyAcceptDragOnThreshold` to be configured.
 ///
