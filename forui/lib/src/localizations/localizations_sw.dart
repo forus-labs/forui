@@ -47,4 +47,7 @@ class FLocalizationsSw extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Kidirisha';
 }

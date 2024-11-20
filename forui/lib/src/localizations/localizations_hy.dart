@@ -47,4 +47,7 @@ class FLocalizationsHy extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Երկխոսության պատուհան';
 }

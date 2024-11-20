@@ -47,4 +47,7 @@ class FLocalizationsKa extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'დიალოგი';
 }

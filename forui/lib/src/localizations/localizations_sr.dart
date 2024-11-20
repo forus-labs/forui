@@ -47,9 +47,15 @@ class FLocalizationsSr extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Дијалог';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
 class FLocalizationsSrLatn extends FLocalizationsSr {
-  FLocalizationsSrLatn() : super('sr_Latn');
+  FLocalizationsSrLatn(): super('sr_Latn');
+
+  @override
+  String get dialogLabel => 'Dijalog';
 }

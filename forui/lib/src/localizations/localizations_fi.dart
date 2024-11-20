@@ -47,4 +47,7 @@ class FLocalizationsFi extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Valintaikkuna';
 }

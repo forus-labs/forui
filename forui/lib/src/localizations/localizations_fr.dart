@@ -47,9 +47,15 @@ class FLocalizationsFr extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Boîte de dialogue';
 }
 
 /// The translations for French, as used in Canada (`fr_CA`).
 class FLocalizationsFrCa extends FLocalizationsFr {
-  FLocalizationsFrCa() : super('fr_CA');
+  FLocalizationsFrCa(): super('fr_CA');
+
+  @override
+  String get dialogLabel => 'Boîte de dialogue';
 }

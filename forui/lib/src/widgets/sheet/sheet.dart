@@ -24,6 +24,8 @@ class Sheet extends StatefulWidget {
 
   /// True if the sheet can be dragged up and down/left and right, and dismissed by swiping in the opposite direction.
   ///
+  /// Defaults to true.
+  ///
   /// If this is true, the [controller] must not be null.
   final bool draggable;
 
@@ -48,28 +50,17 @@ class Sheet extends StatefulWidget {
   final VoidCallback onClosing;
 
   const Sheet({
-    required this.style,
-    required this.layout,
-    required this.builder,
-    this.controller,
-    this.constraints = const BoxConstraints(),
-    this.onClosing = _onClosing,
-    super.key,
-  })  : draggable = false,
-        onDragStart = null,
-        onDragEnd = null;
-
-  const Sheet.draggable({
-    required AnimationController this.controller,
+    required this.controller,
     required this.style,
     required this.layout,
     required this.builder,
     this.constraints = const BoxConstraints(),
+    this.draggable = true,
     this.onDragStart,
     this.onDragEnd,
     this.onClosing = _onClosing,
     super.key,
-  }) : draggable = true;
+  }): assert(!draggable || controller != null, 'Draggable sheets must have a controller.');
 
   @override
   State<Sheet> createState() => _SheetState();

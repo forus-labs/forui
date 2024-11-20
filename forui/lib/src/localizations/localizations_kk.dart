@@ -47,4 +47,7 @@ class FLocalizationsKk extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Диалогтық терезе';
 }

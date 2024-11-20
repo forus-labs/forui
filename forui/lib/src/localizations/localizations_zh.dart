@@ -47,14 +47,23 @@ class FLocalizationsZh extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => '对话框';
 }
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
 class FLocalizationsZhHk extends FLocalizationsZh {
-  FLocalizationsZhHk() : super('zh_HK');
+  FLocalizationsZhHk(): super('zh_HK');
+
+  @override
+  String get dialogLabel => '對話方塊';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
 class FLocalizationsZhTw extends FLocalizationsZh {
-  FLocalizationsZhTw() : super('zh_TW');
+  FLocalizationsZhTw(): super('zh_TW');
+
+  @override
+  String get dialogLabel => '對話方塊';
 }

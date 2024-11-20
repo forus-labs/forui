@@ -47,4 +47,7 @@ class FLocalizationsAr extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'مربع حوار';
 }

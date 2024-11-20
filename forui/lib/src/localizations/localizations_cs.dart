@@ -47,4 +47,7 @@ class FLocalizationsCs extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Dialogové okno';
 }

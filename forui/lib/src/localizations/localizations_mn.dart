@@ -47,4 +47,7 @@ class FLocalizationsMn extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Харилцах цонх';
 }

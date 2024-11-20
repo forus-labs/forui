@@ -47,4 +47,7 @@ class FLocalizationsRo extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Casetă de dialog';
 }

@@ -47,9 +47,15 @@ class FLocalizationsPt extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Caixa de diálogo';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
 class FLocalizationsPtPt extends FLocalizationsPt {
-  FLocalizationsPtPt() : super('pt_PT');
+  FLocalizationsPtPt(): super('pt_PT');
+
+  @override
+  String get dialogLabel => 'Caixa de diálogo';
 }

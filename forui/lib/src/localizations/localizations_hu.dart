@@ -47,4 +47,7 @@ class FLocalizationsHu extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Párbeszédablak';
 }

@@ -9,7 +9,6 @@
       }
     }
   },
-
   "year": "{date}",
   "@year": {
     "description": "The year.",
@@ -20,7 +19,6 @@
       }
     }
   },
-
   "yearMonth": "{date}",
   "@yearMonth": {
     "description": "The year and month.",
@@ -31,7 +29,6 @@
       }
     }
   },
-
   "abbreviatedMonth": "{date}",
   "@abbreviatedMonth": {
     "description": "The abbreviated month.",
@@ -42,7 +39,6 @@
       }
     }
   },
-
   "day": "{date}",
   "@day": {
     "description": "The day of the month.",
@@ -52,5 +48,9 @@
         "format": "d"
       }
     }
-  }
+  },
+  "dialogLabel": "Dialog",
+  "@dialogLabel": {
+      "description": "The audio announcement made when a Dialog is opened."
+    },
 }

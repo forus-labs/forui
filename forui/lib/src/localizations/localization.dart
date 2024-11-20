@@ -32,4 +32,7 @@ class DefaultLocalizations extends FLocalizations {
 
   @override
   String day(DateTime date) => DateFormat.d().format(date);
+
+  @override
+  String get dialogLabel => 'Dialog';
 }

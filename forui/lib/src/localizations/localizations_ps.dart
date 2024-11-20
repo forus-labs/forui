@@ -47,4 +47,7 @@ class FLocalizationsPs extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'خبرې اترې';
 }

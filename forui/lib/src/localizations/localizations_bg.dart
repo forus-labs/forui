@@ -47,4 +47,7 @@ class FLocalizationsBg extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Диалогов прозорец';
 }

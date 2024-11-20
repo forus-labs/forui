@@ -1,19 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:meta/meta.dart';
+
+@internal
+typedef SizeChangeCallback = void Function(Size size);
 
 /// This is based on Material's _BottomSheetLayoutWithSizeListener.
 @internal
 class ShiftedSheet extends SingleChildRenderObjectWidget {
   final Layout side;
   final double value;
-  final double mainAxisMaxRatio;
+  final double? mainAxisMaxRatio;
+  final SizeChangeCallback onChange;
 
   const ShiftedSheet({
     required this.side,
     required this.value,
     required this.mainAxisMaxRatio,
+    required this.onChange,
     required super.child,
     super.key,
   });
@@ -23,6 +29,7 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
         side: side,
         value: value,
         mainAxisMaxRatio: mainAxisMaxRatio,
+        onChange: onChange,
       );
 
   @override
@@ -31,7 +38,8 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
     renderObject
       ..side = side
       ..value = value
-      ..mainAxisRatio = mainAxisMaxRatio;
+      ..mainAxisMaxRatio = mainAxisMaxRatio
+      ..onChange = onChange;
   }
 
   @override
@@ -40,7 +48,8 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
     properties
       ..add(EnumProperty('side', side))
       ..add(DoubleProperty('value', value))
-      ..add(DoubleProperty('dimensionRatio', mainAxisMaxRatio));
+      ..add(DoubleProperty('mainAxisMaxRatio', mainAxisMaxRatio))
+      ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
 
@@ -48,14 +57,18 @@ class _ShiftedSheet extends RenderShiftedBox {
   Layout _side;
   double _value;
   double? _mainAxisMaxRatio;
+  SizeChangeCallback _onChange;
+  Size _previous = Size.zero;
 
   _ShiftedSheet({
     required Layout side,
     required double value,
-    required double mainAxisMaxRatio,
+    required double? mainAxisMaxRatio,
+    required SizeChangeCallback onChange,
   })  : _side = side,
         _value = value,
         _mainAxisMaxRatio = mainAxisMaxRatio,
+        _onChange = onChange,
         super(null);
 
   @override
@@ -70,6 +83,11 @@ class _ShiftedSheet extends RenderShiftedBox {
 
       final childSize = childConstraints.isTight ? childConstraints.smallest : child.size;
       child.data.offset = positionChild(size, childSize);
+
+      if (_previous != childSize) {
+        _previous = childSize;
+        _onChange.call(_previous);
+      }
     }
   }
 
@@ -154,11 +172,20 @@ class _ShiftedSheet extends RenderShiftedBox {
     }
   }
 
-  double? get mainAxisRatio => _mainAxisMaxRatio;
+  double? get mainAxisMaxRatio => _mainAxisMaxRatio;
 
-  set mainAxisRatio(double? value) {
+  set mainAxisMaxRatio(double? value) {
     if (_mainAxisMaxRatio != value) {
       _mainAxisMaxRatio = value;
+      markNeedsLayout();
+    }
+  }
+
+  SizeChangeCallback get onChange => _onChange;
+
+  set onChange(SizeChangeCallback value) {
+    if (_onChange != value) {
+      _onChange = value;
       markNeedsLayout();
     }
   }
@@ -169,6 +196,7 @@ class _ShiftedSheet extends RenderShiftedBox {
     properties
       ..add(EnumProperty('side', side))
       ..add(DoubleProperty('value', value))
-      ..add(DoubleProperty('mainAxisRatio', mainAxisRatio));
+      ..add(DoubleProperty('mainAxisRatio', mainAxisMaxRatio))
+      ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }

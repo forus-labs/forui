@@ -47,4 +47,7 @@ class FLocalizationsEt extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Dialoog';
 }

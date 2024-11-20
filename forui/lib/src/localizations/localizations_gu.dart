@@ -47,4 +47,7 @@ class FLocalizationsGu extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'સંવાદ';
 }
