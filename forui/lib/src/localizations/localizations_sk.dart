@@ -50,4 +50,15 @@ class FLocalizationsSk extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialógové okno';
+
+  @override
+  String get sheetLabel => 'hárok';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Zavrieť \$modalRouteContentName';
+  }
 }

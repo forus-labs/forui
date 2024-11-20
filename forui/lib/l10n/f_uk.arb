@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Вікно"
+  "dialogLabel": "Вікно",
+  "sheetLabel": "екран",
+  "barrierOnTapHint": "Закрити: $modalRouteContentName",
+  "barrierLabel": "Маскувальний фон"
 }

@@ -50,4 +50,15 @@ class FLocalizationsKn extends FLocalizations {
 
   @override
   String get dialogLabel => 'ಡೈಲಾಗ್';
+
+  @override
+  String get sheetLabel => 'ಶೀಟ್';
+
+  @override
+  String get barrierLabel => 'ಸ್ಕ್ರಿಮ್';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName ಅನ್ನು ಮುಚ್ಚಿರಿ';
+  }
 }

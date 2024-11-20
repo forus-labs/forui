@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Cuadro de diálogo"
+  "dialogLabel": "Cuadro de diálogo",
+  "sheetLabel": "Hoja",
+  "barrierOnTapHint": "Cerrar $modalRouteContentName",
+  "barrierLabel": "Sombreado"
 }

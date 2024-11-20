@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "డైలాగ్"
+  "dialogLabel": "డైలాగ్",
+  "sheetLabel": "షీట్",
+  "barrierOnTapHint": "$modalRouteContentName‌ను మూసివేయండి",
+  "barrierLabel": "స్క్రిమ్"
 }

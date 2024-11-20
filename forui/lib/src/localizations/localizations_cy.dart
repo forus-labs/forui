@@ -50,4 +50,15 @@ class FLocalizationsCy extends FLocalizations {
 
   @override
   String get dialogLabel => 'Deialog';
+
+  @override
+  String get sheetLabel => 'Taflen';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Cau \$modalRouteContentName';
+  }
 }

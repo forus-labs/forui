@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Muloqot oynasi"
+  "dialogLabel": "Muloqot oynasi",
+  "sheetLabel": "ekran",
+  "barrierOnTapHint": "Yopish: $modalRouteContentName",
+  "barrierLabel": "Kanop"
 }

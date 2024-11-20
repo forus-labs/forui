@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "සංවාදය"
+  "dialogLabel": "සංවාදය",
+  "sheetLabel": "පත්‍රය",
+  "barrierOnTapHint": "$modalRouteContentName වසන්න",
+  "barrierLabel": "ස්ක්‍රිම්"
 }

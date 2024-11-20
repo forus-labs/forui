@@ -50,4 +50,15 @@ class FLocalizationsHy extends FLocalizations {
 
   @override
   String get dialogLabel => 'Երկխոսության պատուհան';
+
+  @override
+  String get sheetLabel => 'էկրան';
+
+  @override
+  String get barrierLabel => 'Դիմակ';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Փակել՝ \$modalRouteContentName';
+  }
 }

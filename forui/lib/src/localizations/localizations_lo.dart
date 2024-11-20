@@ -50,4 +50,15 @@ class FLocalizationsLo extends FLocalizations {
 
   @override
   String get dialogLabel => 'ຂໍ້ຄວາມ';
+
+  @override
+  String get sheetLabel => 'ແຜ່ນ';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'ປິດ \$modalRouteContentName';
+  }
 }

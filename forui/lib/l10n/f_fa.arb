@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "کادر گفتگو"
+  "dialogLabel": "کادر گفتگو",
+  "sheetLabel": "برگ",
+  "barrierOnTapHint": "بستن $modalRouteContentName",
+  "barrierLabel": "رویه"
 }

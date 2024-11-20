@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dialoq"
+  "dialogLabel": "Dialoq",
+  "sheetLabel": "Vərəq",
+  "barrierOnTapHint": "Bağlayın: $modalRouteContentName",
+  "barrierLabel": "Kətan"
 }

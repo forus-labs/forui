@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "डायलॉग"
+  "dialogLabel": "डायलॉग",
+  "sheetLabel": "शीट",
+  "barrierOnTapHint": "$modalRouteContentName बंद करा",
+  "barrierLabel": "स्क्रिम"
 }

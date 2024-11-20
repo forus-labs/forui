@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dijalog"
+  "dialogLabel": "Dijalog",
+  "sheetLabel": "tabela",
+  "barrierOnTapHint": "Zatvori: $modalRouteContentName",
+  "barrierLabel": "Skrim"
 }

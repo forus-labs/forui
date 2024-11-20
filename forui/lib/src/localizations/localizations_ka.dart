@@ -50,4 +50,15 @@ class FLocalizationsKa extends FLocalizations {
 
   @override
   String get dialogLabel => 'დიალოგი';
+
+  @override
+  String get sheetLabel => 'ფურცელი';
+
+  @override
+  String get barrierLabel => 'სკრიმი';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName-ის დახურვა';
+  }
 }

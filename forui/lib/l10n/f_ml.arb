@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "ഡയലോഗ്"
+  "dialogLabel": "ഡയലോഗ്",
+  "sheetLabel": "ഷീറ്റ്",
+  "barrierOnTapHint": "$modalRouteContentName അടയ്ക്കുക",
+  "barrierLabel": "സ്ക്രിം"
 }

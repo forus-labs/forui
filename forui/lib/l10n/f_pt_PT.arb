@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Caixa de diálogo"
+  "dialogLabel": "Caixa de diálogo",
+  "sheetLabel": "Secção",
+  "barrierOnTapHint": "Fechar $modalRouteContentName",
+  "barrierLabel": "Scrim"
 }

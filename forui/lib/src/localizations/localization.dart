@@ -35,4 +35,13 @@ class DefaultLocalizations extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialog';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Barrier';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
 }

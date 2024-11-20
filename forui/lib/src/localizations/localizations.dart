@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -315,11 +314,29 @@ abstract class FLocalizations {
   /// **'{date}'**
   String day(DateTime date);
 
-  /// No description provided for @dialogLabel.
+  /// The sheet's label.
   ///
   /// In en, this message translates to:
   /// **'Dialog'**
   String get dialogLabel;
+
+  /// No description provided for @sheetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sheet'**
+  String get sheetLabel;
+
+  /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
+  ///
+  /// In en, this message translates to:
+  /// **'Barrier'**
+  String get barrierLabel;
+
+  /// The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.
+  ///
+  /// In en, this message translates to:
+  /// **'Close {modalRouteContentName}'**
+  String barrierOnTapHint(String modalRouteContentName);
 }
 
 class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {

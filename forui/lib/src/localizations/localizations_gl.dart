@@ -50,4 +50,15 @@ class FLocalizationsGl extends FLocalizations {
 
   @override
   String get dialogLabel => 'Cadro de diálogo';
+
+  @override
+  String get sheetLabel => 'Panel';
+
+  @override
+  String get barrierLabel => 'Sombreado';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Pechar \$modalRouteContentName';
+  }
 }

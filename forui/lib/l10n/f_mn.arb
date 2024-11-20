@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Харилцах цонх"
+  "dialogLabel": "Харилцах цонх",
+  "sheetLabel": "хүснэгт",
+  "barrierOnTapHint": "$modalRouteContentName-г хаах",
+  "barrierLabel": "Скрим"
 }

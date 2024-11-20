@@ -50,6 +50,17 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get dialogLabel => '对话框';
+
+  @override
+  String get sheetLabel => '动作条';
+
+  @override
+  String get barrierLabel => '纱罩';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '关闭 \$modalRouteContentName';
+  }
 }
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
@@ -58,6 +69,17 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get dialogLabel => '對話方塊';
+
+  @override
+  String get sheetLabel => '面板';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '關閉 \$modalRouteContentName';
+  }
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -66,4 +88,15 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get dialogLabel => '對話方塊';
+
+  @override
+  String get sheetLabel => '功能表';
+
+  @override
+  String get barrierLabel => '紗罩';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '關閉「\$modalRouteContentName」';
+  }
 }

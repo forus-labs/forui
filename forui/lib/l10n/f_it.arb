@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Finestra di dialogo"
+  "dialogLabel": "Finestra di dialogo",
+  "sheetLabel": "Riquadro",
+  "barrierOnTapHint": "Chiudi $modalRouteContentName",
+  "barrierLabel": "Rete"
 }

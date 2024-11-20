@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dialogboks"
+  "dialogLabel": "Dialogboks",
+  "sheetLabel": "Felt",
+  "barrierOnTapHint": "Luk $modalRouteContentName",
+  "barrierLabel": "Dæmpeskærm"
 }

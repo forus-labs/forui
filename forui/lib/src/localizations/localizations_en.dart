@@ -50,6 +50,17 @@ class FLocalizationsEn extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialog';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Barrier';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close $modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in Australia (`en_AU`).
@@ -58,6 +69,17 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in Canada (`en_CA`).
@@ -66,6 +88,17 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialog';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in the United Kingdom (`en_GB`).
@@ -74,6 +107,17 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+
+  @override
+  String get sheetLabel => 'sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in Ireland (`en_IE`).
@@ -82,6 +126,17 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+
+  @override
+  String get sheetLabel => 'sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in India (`en_IN`).
@@ -90,6 +145,17 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+
+  @override
+  String get sheetLabel => 'sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in New Zealand (`en_NZ`).
@@ -98,6 +164,17 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in Singapore (`en_SG`).
@@ -106,6 +183,17 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+
+  @override
+  String get sheetLabel => 'sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }
 
 /// The translations for English, as used in South Africa (`en_ZA`).
@@ -114,4 +202,15 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+
+  @override
+  String get sheetLabel => 'sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
 }

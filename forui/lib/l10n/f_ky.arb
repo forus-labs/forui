@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Диалог"
+  "dialogLabel": "Диалог",
+  "sheetLabel": "экран",
+  "barrierOnTapHint": "$modalRouteContentName жабуу",
+  "barrierLabel": "Кенеп"
 }

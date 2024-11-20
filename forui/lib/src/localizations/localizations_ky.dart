@@ -50,4 +50,15 @@ class FLocalizationsKy extends FLocalizations {
 
   @override
   String get dialogLabel => 'Диалог';
+
+  @override
+  String get sheetLabel => 'экран';
+
+  @override
+  String get barrierLabel => 'Кенеп';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName жабуу';
+  }
 }

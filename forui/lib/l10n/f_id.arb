@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dialog"
+  "dialogLabel": "Dialog",
+  "sheetLabel": "Sheet",
+  "barrierOnTapHint": "Tutup $modalRouteContentName",
+  "barrierLabel": "Scrim"
 }

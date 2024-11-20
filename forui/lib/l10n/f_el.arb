@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Παράθυρο διαλόγου"
+  "dialogLabel": "Παράθυρο διαλόγου",
+  "sheetLabel": "Φύλλο",
+  "barrierOnTapHint": "Κλείσιμο $modalRouteContentName",
+  "barrierLabel": "Επικάλυψη"
 }

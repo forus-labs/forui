@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dialógové okno"
+  "dialogLabel": "Dialógové okno",
+  "sheetLabel": "hárok",
+  "barrierOnTapHint": "Zavrieť $modalRouteContentName",
+  "barrierLabel": "Scrim"
 }

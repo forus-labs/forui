@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Дијалог"
+  "dialogLabel": "Дијалог",
+  "sheetLabel": "табела",
+  "barrierOnTapHint": "Затвори: $modalRouteContentName",
+  "barrierLabel": "Скрим"
 }

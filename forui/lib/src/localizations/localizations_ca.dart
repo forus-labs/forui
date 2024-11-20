@@ -50,4 +50,15 @@ class FLocalizationsCa extends FLocalizations {
 
   @override
   String get dialogLabel => 'Diàleg';
+
+  @override
+  String get sheetLabel => 'Full';
+
+  @override
+  String get barrierLabel => 'Fons atenuat';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Tanca \$modalRouteContentName';
+  }
 }

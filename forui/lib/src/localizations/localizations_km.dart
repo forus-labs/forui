@@ -50,4 +50,15 @@ class FLocalizationsKm extends FLocalizations {
 
   @override
   String get dialogLabel => 'ប្រអប់';
+
+  @override
+  String get sheetLabel => 'សន្លឹក';
+
+  @override
+  String get barrierLabel => 'ផ្ទាំងស្រអាប់';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'បិទ \$modalRouteContentName';
+  }
 }

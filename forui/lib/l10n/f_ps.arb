@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "خبرې اترې"
+  "dialogLabel": "خبرې اترې",
+  "sheetLabel": "Sheet",
+  "barrierOnTapHint": "Close $modalRouteName",
+  "barrierLabel": "Scrim"
 }

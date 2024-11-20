@@ -6,6 +6,12 @@ import 'package:meta/meta.dart';
 
 @internal
 class Sheet extends StatefulWidget {
+  static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) => AnimationController(
+        duration: style.enterDuration,
+        reverseDuration: style.exitDuration,
+        vsync: vsync,
+      );
+
   static void _onClosing() {}
 
   /// The animation controller that controls the bottom sheet's entrance and exit animations.
@@ -60,7 +66,7 @@ class Sheet extends StatefulWidget {
     this.onDragEnd,
     this.onClosing = _onClosing,
     super.key,
-  }): assert(!draggable || controller != null, 'Draggable sheets must have a controller.');
+  }) : assert(!draggable || controller != null, 'Draggable sheets must have a controller.');
 
   @override
   State<Sheet> createState() => _SheetState();
@@ -88,12 +94,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
-        AnimationController(
-          vsync: this,
-          duration: widget.style.enterDuration,
-          reverseDuration: widget.style.exitDuration,
-        );
+    _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
   }
 
   @override
@@ -104,12 +105,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         _controller.dispose();
       }
 
-      _controller = widget.controller ??
-          AnimationController(
-            vsync: this,
-            duration: widget.style.enterDuration,
-            reverseDuration: widget.style.exitDuration,
-          );
+      _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
     }
   }
 
@@ -127,14 +123,15 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       child: ConstrainedBox(
         constraints: widget.constraints,
         child: NotificationListener<DraggableScrollableNotification>(
-            key: _key,
-            onNotification: (notification) {
-              if (notification.extent == notification.minExtent && notification.shouldCloseOnMinExtent) {
-                widget.onClosing();
-              }
-              return false;
-            },
-            child: widget.builder(context)),
+          key: _key,
+          onNotification: (notification) {
+            if (notification.extent == notification.minExtent && notification.shouldCloseOnMinExtent) {
+              widget.onClosing();
+            }
+            return false;
+          },
+          child: widget.builder(context),
+        ),
       ),
     );
 
@@ -230,8 +227,6 @@ extension on GlobalKey {
   double get currentChildHeight => (currentContext!.findRenderObject()! as RenderBox).size.height;
 }
 
-// TODO: make abstract
-
 /// A sheet's style.
 class FSheetStyle with Diagnosticable {
   /// The sheet's background color.
@@ -264,12 +259,8 @@ class FSheetStyle with Diagnosticable {
     this.closeProgressThreshold = 0.5,
   });
 
-  /// Creates a [FSheetStyle] that inherits its colors from the given [FColorScheme] and [FStyle].
-  FSheetStyle.inherit({
-    required FColorScheme colorScheme,
-  }) : this(
-          backgroundColor: colorScheme.background,
-        );
+  /// Creates a [FSheetStyle] that inherits its colors from the given [FColorScheme].
+  FSheetStyle.inherit({required FColorScheme colorScheme}) : this(backgroundColor: colorScheme.background);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

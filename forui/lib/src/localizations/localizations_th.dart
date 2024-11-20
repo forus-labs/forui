@@ -50,4 +50,15 @@ class FLocalizationsTh extends FLocalizations {
 
   @override
   String get dialogLabel => 'กล่องโต้ตอบ';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'ปิด \$modalRouteContentName';
+  }
 }

@@ -50,6 +50,17 @@ class FLocalizationsFr extends FLocalizations {
 
   @override
   String get dialogLabel => 'Boîte de dialogue';
+
+  @override
+  String get sheetLabel => 'sheet';
+
+  @override
+  String get barrierLabel => 'Fond';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Fermer \$modalRouteContentName';
+  }
 }
 
 /// The translations for French, as used in Canada (`fr_CA`).
@@ -58,4 +69,15 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get dialogLabel => 'Boîte de dialogue';
+
+  @override
+  String get sheetLabel => 'Zone de contenu';
+
+  @override
+  String get barrierLabel => 'Grille';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Fermer \$modalRouteContentName';
+  }
 }

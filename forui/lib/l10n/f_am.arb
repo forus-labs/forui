@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "መገናኛ"
+  "dialogLabel": "መገናኛ",
+  "sheetLabel": "ሉህ",
+  "barrierOnTapHint": "$modalRouteContentNameን ዝጋ",
+  "barrierLabel": "ገዳቢ"
 }

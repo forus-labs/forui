@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "กล่องโต้ตอบ"
+  "dialogLabel": "กล่องโต้ตอบ",
+  "sheetLabel": "Sheet",
+  "barrierOnTapHint": "ปิด $modalRouteContentName",
+  "barrierLabel": "Scrim"
 }

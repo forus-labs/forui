@@ -50,4 +50,15 @@ class FLocalizationsUz extends FLocalizations {
 
   @override
   String get dialogLabel => 'Muloqot oynasi';
+
+  @override
+  String get sheetLabel => 'ekran';
+
+  @override
+  String get barrierLabel => 'Kanop';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Yopish: \$modalRouteContentName';
+  }
 }

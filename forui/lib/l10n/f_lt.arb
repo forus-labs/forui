@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dialogo langas"
+  "dialogLabel": "Dialogo langas",
+  "sheetLabel": "lapas",
+  "barrierOnTapHint": "Uždaryti „$modalRouteContentName“",
+  "barrierLabel": "Užsklanda"
 }

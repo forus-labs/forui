@@ -6,7 +6,7 @@ import 'dart:io';
 final pattern = RegExp(r'material_([\w_]+)\.arb');
 
 // Change this to add other keys.
-const key = 'dialogLabel';
+const key = 'scrimLabel';
 
 void main() {
   // I usually just download all Material localization files into the .temp folder.
@@ -17,6 +17,10 @@ void main() {
     }
 
     final locale = pattern.firstMatch(source.path)?.group(1);
+    if (locale == 'en') {
+      continue;
+    }
+
     final target = File('lib/l10n/f_$locale.arb');
 
     final forui = json.decode(target.readAsStringSync());

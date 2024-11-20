@@ -50,4 +50,15 @@ class FLocalizationsBg extends FLocalizations {
 
   @override
   String get dialogLabel => 'Диалогов прозорец';
+
+  @override
+  String get sheetLabel => 'лист';
+
+  @override
+  String get barrierLabel => 'Скрим';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Затваряне на \$modalRouteContentName';
+  }
 }

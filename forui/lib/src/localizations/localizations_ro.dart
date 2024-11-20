@@ -50,4 +50,15 @@ class FLocalizationsRo extends FLocalizations {
 
   @override
   String get dialogLabel => 'Casetă de dialog';
+
+  @override
+  String get sheetLabel => 'Foaie';
+
+  @override
+  String get barrierLabel => 'Material';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Închideți \$modalRouteContentName';
+  }
 }

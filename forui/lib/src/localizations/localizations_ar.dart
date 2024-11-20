@@ -50,4 +50,15 @@ class FLocalizationsAr extends FLocalizations {
 
   @override
   String get dialogLabel => 'مربع حوار';
+
+  @override
+  String get sheetLabel => 'بطاق ';
+
+  @override
+  String get barrierLabel => 'تمويه';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'إغلاق \"\$modalRouteContentName\"';
+  }
 }

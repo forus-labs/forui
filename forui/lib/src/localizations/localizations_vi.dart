@@ -50,4 +50,15 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get dialogLabel => 'Hộp thoại';
+
+  @override
+  String get sheetLabel => 'Bảng';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Đóng \$modalRouteContentName';
+  }
 }

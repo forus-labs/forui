@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dialog"
+  "dialogLabel": "Dialog",
+  "sheetLabel": "Helaian",
+  "barrierOnTapHint": "Tutup $modalRouteContentName",
+  "barrierLabel": "Scrim"
 }

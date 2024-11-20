@@ -50,4 +50,15 @@ class FLocalizationsSw extends FLocalizations {
 
   @override
   String get dialogLabel => 'Kidirisha';
+
+  @override
+  String get sheetLabel => 'Safu';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Funga \$modalRouteContentName';
+  }
 }

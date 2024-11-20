@@ -50,4 +50,15 @@ class FLocalizationsGsw extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialogfeld';
+
+  @override
+  String get sheetLabel => 'Ansicht';
+
+  @override
+  String get barrierLabel => 'Gitter';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName schließen';
+  }
 }

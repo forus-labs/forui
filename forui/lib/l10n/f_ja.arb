@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "ダイアログ"
+  "dialogLabel": "ダイアログ",
+  "sheetLabel": "シート",
+  "barrierOnTapHint": "$modalRouteContentName を閉じる",
+  "barrierLabel": "スクリム"
 }

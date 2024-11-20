@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "Dijaloški okvir"
+  "dialogLabel": "Dijaloški okvir",
+  "sheetLabel": "tabela",
+  "barrierOnTapHint": "Zatvori: $modalRouteContentName",
+  "barrierLabel": "Rubno"
 }

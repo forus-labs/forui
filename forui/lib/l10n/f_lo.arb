@@ -1,3 +1,6 @@
 {
-  "dialogLabel": "ຂໍ້ຄວາມ"
+  "dialogLabel": "ຂໍ້ຄວາມ",
+  "sheetLabel": "ແຜ່ນ",
+  "barrierOnTapHint": "ປິດ $modalRouteContentName",
+  "barrierLabel": "Scrim"
 }

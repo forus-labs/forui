@@ -50,4 +50,15 @@ class FLocalizationsFi extends FLocalizations {
 
   @override
   String get dialogLabel => 'Valintaikkuna';
+
+  @override
+  String get sheetLabel => 'arkki';
+
+  @override
+  String get barrierLabel => 'Sermi';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Sulje \$modalRouteContentName';
+  }
 }

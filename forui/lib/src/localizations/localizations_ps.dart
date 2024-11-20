@@ -50,4 +50,15 @@ class FLocalizationsPs extends FLocalizations {
 
   @override
   String get dialogLabel => 'خبرې اترې';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteName';
+  }
 }

@@ -50,4 +50,15 @@ class FLocalizationsEl extends FLocalizations {
 
   @override
   String get dialogLabel => 'Παράθυρο διαλόγου';
+
+  @override
+  String get sheetLabel => 'Φύλλο';
+
+  @override
+  String get barrierLabel => 'Επικάλυψη';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Κλείσιμο \$modalRouteContentName';
+  }
 }

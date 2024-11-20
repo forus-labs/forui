@@ -50,4 +50,15 @@ class FLocalizationsTe extends FLocalizations {
 
   @override
   String get dialogLabel => 'డైలాగ్';
+
+  @override
+  String get sheetLabel => 'షీట్';
+
+  @override
+  String get barrierLabel => 'స్క్రిమ్';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName‌ను మూసివేయండి';
+  }
 }

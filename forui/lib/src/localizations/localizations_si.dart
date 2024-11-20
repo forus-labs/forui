@@ -50,4 +50,15 @@ class FLocalizationsSi extends FLocalizations {
 
   @override
   String get dialogLabel => 'සංවාදය';
+
+  @override
+  String get sheetLabel => 'පත්‍රය';
+
+  @override
+  String get barrierLabel => 'ස්ක්‍රිම්';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName වසන්න';
+  }
 }
