@@ -31,3 +31,4 @@ migrate_working_dir/
 build/
 test/golden/failures/
 test/**/*_test.mocks.dart
+/.temp/
