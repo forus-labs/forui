@@ -6,6 +6,39 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
 import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
+/// Shows a modal sheet that appears from the given [side].
+///
+/// A modal sheet is an alternative to a menu or a dialog and prevents the user from interacting with the rest of the
+/// app.
+///
+/// [context] is used to look up the [Navigator] and [FSheetStyle] for the sheet. It is only used when the method is
+/// called. Its corresponding widget can be safely removed from the tree before the sheet is closed.
+///
+/// [useRootNavigator] ensures that the root navigator displays the sheet when`true`. This is useful in the case that a
+/// modal sheet needs to be displayed above all other content but the caller is inside another [Navigator].
+///
+/// [style] defaults to [FSheetStyle] from the closest [FTheme] ancestor.
+///
+/// [mainAxisMaxRatio] represents the main axis's max constraint ratio for the sheet, depending on [side].
+/// Defaults to 9 / 16. The main axis is the width if [side] is [Layout.ltr] or [Layout.rtl], and the height if [side]
+/// is [Layout.ttb] or [Layout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
+/// i.e. [ListView], along the main axis, to have the sheet be draggable.
+///
+/// [barrierLabel] defaults to [FLocalizations.barrierLabel].
+///
+/// [barrierColor] defaults to the default Cupertino modal barrier color on iOS & macOS, and [Colors.black54] on other
+/// platforms.
+///
+/// Returns a `Future` that resolves to the value (if any) that was passed to [Navigator.pop] when the modal sheet was
+/// closed.
+///
+/// See:
+/// * https://forui.dev/docs/overlay/modal-sheet for working examples.
+/// * [FModalSheetRoute] for more information about the various arguments.
+/// * [FSheetStyle] for customizing a switch's appearance.
+// TODO: reference persistent bottom sheet when implemented.
+/// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
+///   maximum size.
 Future<T?> showFModalSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
@@ -30,7 +63,7 @@ Future<T?> showFModalSheet<T>({
 
   final platformBarrierColor = switch (defaultTargetPlatform) {
     TargetPlatform.iOS || TargetPlatform.macOS => CupertinoDynamicColor.resolve(kCupertinoModalBarrierColor, context),
-    _ => Theme.of(context).dialogTheme.barrierColor ?? Colors.black54,
+    _ => Colors.black54,
   };
 
   return navigator.push(
@@ -60,7 +93,7 @@ Future<T?> showFModalSheet<T>({
 /// app.
 ///
 /// A closely related widget is a persistent sheet, which shows information that supplements the primary content of the
-/// app without preventing the user from interacting with the app. Persistent bottom sheets can be <INSERT HERE>.
+/// app without preventing the user from interacting with the app.
 // TODO: reference persistent bottom sheet when implemented.
 ///
 /// See:
