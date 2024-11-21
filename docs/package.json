@@ -15,7 +15,7 @@
   "homepage": "https://forui.dev",
   "dependencies": {
     "clsx": "^2.1.1",
-    "lucide-react": "^0.456.0",
+    "lucide-react": "^0.460.0",
     "next": "^14.2.14",
     "nextra": "^3.0.8",
     "nextra-theme-docs": "^3.0.8",
@@ -24,7 +24,7 @@
     "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
-    "@types/node": "22.9.0",
+    "@types/node": "22.9.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
