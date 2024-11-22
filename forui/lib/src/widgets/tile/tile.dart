@@ -138,7 +138,8 @@ class FTile extends StatelessWidget with FTileMixin {
             },
             border: data.focused
                 ? Border(
-                    top: curveBottom ? style.focusedBorder.top : style.focusedBorder.left,
+                    // style.focusedBorder.left is used so that the top is always painted.
+                    top: curveTop ? style.focusedBorder.top : style.focusedBorder.left,
                     left: style.focusedBorder.left,
                     right: style.focusedBorder.right,
                     bottom: curveBottom ? style.focusedBorder.top : BorderSide.none,

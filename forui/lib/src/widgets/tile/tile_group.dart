@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -94,23 +95,66 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     Widget group = Semantics(
       container: true,
       label: semanticLabel,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final (index, child) in children.indexed)
-            FTileData(
-              style: style.tileStyle,
-              divider: divider,
-              enabled: enabled,
-              hovered: false,
-              focused: false,
-              index: index,
-              length: children.length,
-              child: child,
+      child: switch (data) {
+        null => Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final (index, child) in children.indexed)
+                FTileData(
+                  style: style.tileStyle,
+                  divider: divider,
+                  enabled: enabled,
+                  hovered: false,
+                  focused: false,
+                  index: index,
+                  length: children.length,
+                  child: child,
+                ),
+            ],
+          ),
+        _ => ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 200), // TODO: make maxHeight a variable.
+            // A container which clips + paints the radius cannot be used as it draws the border 1px smaller/larger than
+            // a tile, making the border thicker than intended.
+            child: Stack(
+              children: [
+                ClipRRect(
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: style.tileStyle.borderRadius,
+                  child: Padding(
+                    // This padding prevents a visual oddity where a tile's content can "overflow" outside the borders.
+                    padding: const EdgeInsets.only(top: 0.1),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        for (final (index, child) in children.indexed)
+                          FTileData(
+                            style: style.tileStyle,
+                            divider: divider,
+                            enabled: enabled,
+                            hovered: false,
+                            focused: false,
+                            index: index,
+                            length: children.length,
+                            child: child,
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+                IgnorePointer(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: style.tileStyle.borderRadius,
+                      border: style.tileStyle.border,
+                    ),
+                  ),
+                ),
+              ],
             ),
-        ],
-      ),
+          ),
+      },
     );
 
     if (data == null) {
@@ -183,20 +227,44 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
       child: Semantics(
         container: true,
         label: semanticLabel,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (final (index, child) in children.indexed)
-              FTileGroupData(
-                style: style,
-                divider: divider,
-                enabled: enabled,
-                index: index,
-                length: children.length,
-                child: child,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 200), // TODO: make maxHeight a variable.
+          // A container which clips + paints the radius cannot be used as it draws the border 1px smaller/larger than
+          // a tile, making the border thicker than intended.
+          child: Stack(
+            children: [
+              ClipRRect(
+                clipBehavior: Clip.hardEdge,
+                borderRadius: style.tileStyle.borderRadius,
+                child: Padding(
+                  // This padding prevents a visual oddity where a tile's content can "overflow" outside the borders.
+                  padding: const EdgeInsets.only(top: 0.1),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      for (final (index, child) in children.indexed)
+                        FTileGroupData(
+                          style: style,
+                          divider: divider,
+                          enabled: enabled,
+                          index: index,
+                          length: children.length,
+                          child: child,
+                        ),
+                    ],
+                  ),
+                ),
               ),
-          ],
+              IgnorePointer(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: style.tileStyle.borderRadius,
+                    border: style.tileStyle.border,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
