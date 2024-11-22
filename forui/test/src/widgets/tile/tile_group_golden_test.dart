@@ -363,9 +363,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: const FTileGroup(
-              label: Text('Network'),
-              children: [],
+            child: FTileGroup(
+              label: const Text('Network'),
+              children: const [],
             ),
           ),
         );

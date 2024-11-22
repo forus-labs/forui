@@ -31,7 +31,7 @@ class FTileContent extends StatelessWidget {
     final ltr = Directionality.maybeOf(context) == TextDirection.ltr;
 
     final tile = FTileData.maybeOf(context)!;
-    final FTileData(style: tileStyle, :enabled, :hovered, :focused) = tile;
+    final FTileData(style: tileStyle, :enabled, :hovered, :focused, :index, :last) = tile;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
 
@@ -41,11 +41,11 @@ class FTileContent extends StatelessWidget {
       (true, false) => contentStyle.enabledStyle,
       (false, _) => contentStyle.disabledStyle,
     };
-    final divider = switch (focused) {
-      true when tile.index != tile.length - 1 => FTileDivider.full,
-      true when tile.index == tile.length - 1 && group.index != group.length - 1 => FTileDivider.full,
-      false when tile.index != tile.length - 1 => tile.divider,
-      false when tile.index == tile.length - 1 && group.index != group.length - 1 => group.divider,
+    final divider = switch ((focused, last)) {
+      (true, false) => FTileDivider.full,
+      (true, true) when group.index != group.length - 1 => FTileDivider.full,
+      (false, false) => tile.divider,
+      (false, true) when group.index != group.length - 1 => group.divider,
       _ => FTileDivider.none,
     };
 
