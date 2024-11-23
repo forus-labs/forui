@@ -150,7 +150,7 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
             ],
           ),
           FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             children: [
               FSelectTile(
                 title: const Text('List View'),

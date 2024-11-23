@@ -20,7 +20,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
@@ -49,7 +49,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
@@ -86,7 +86,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               style: TestScaffold.blueScreen.tileGroupStyle,
               enabled: false,
               label: const Text('Network'),
@@ -120,7 +120,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FSelectTileGroup(
-                controller: controller,
+                groupController: controller,
                 label: const Text('Network'),
                 description: const Text('Configure your network'),
                 errorBuilder: (context, error) => Text(error),
@@ -156,6 +156,46 @@ void main() {
           );
         });
 
+        testWidgets('${theme.name} scrollable', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FSelectTileGroup(
+                groupController: controller,
+                maxHeight: 150,
+                divider: divider,
+                children: [
+                  FSelectTile(
+                    title: const Text('Tile 1'),
+                    value: 1,
+                  ),
+                  FSelectTile(
+                    title: const Text('Tile 2'),
+                    value: 2,
+                  ),
+                  FSelectTile(
+                    title: const Text('Tile 3'),
+                    value: 3,
+                  ),
+                  FSelectTile(
+                    title: const Text('Tile 4'),
+                    value: 4,
+                  ),
+                  FSelectTile(
+                    title: const Text('Tile 5'),
+                    value: 4,
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('select-tile-group/group/${theme.name}/scrollable/$divider.png'),
+          );
+        });
+
         for (final (index, position) in ['top', 'bottom'].indexed) {
           testWidgets('hovered - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
@@ -164,7 +204,7 @@ void main() {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FSelectTileGroup(
-                    controller: controller,
+                    groupController: controller,
                     label: const Text('Network'),
                     divider: divider,
                     children: [
@@ -206,7 +246,7 @@ void main() {
               TestScaffold(
                 theme: theme.data,
                 child: FSelectTileGroup(
-                  controller: controller,
+                  groupController: controller,
                   label: const Text('Network'),
                   description: const Text('Configure your network'),
                   enabled: false,
@@ -247,7 +287,7 @@ void main() {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FSelectTileGroup(
-                controller: controller,
+                groupController: controller,
                 label: const Text('Network'),
                 description: const Text('Configure your network'),
                 forceErrorText: 'This should appear',
@@ -282,7 +322,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               label: const Text('Network'),
               children: [
                 FSelectTile(
@@ -309,7 +349,7 @@ void main() {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FSelectTileGroup(
-                controller: controller,
+                groupController: controller,
                 label: const Text('Network'),
                 children: const [],
               ),
@@ -328,7 +368,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             label: const Text('Network'),
             children: [
               FSelectTile(
@@ -357,7 +397,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             label: const Text('Network'),
             enabled: false,
             children: [
@@ -381,6 +421,85 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/override-state.png'));
+    });
+  });
+
+  group('FTileGroup.builder', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelectTileGroup.builder(
+            groupController: controller,
+            style: TestScaffold.blueScreen.tileGroupStyle,
+            maxHeight: 200,
+            count: 5,
+            label: const Text('Network'),
+            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index + 1),
+          ),
+        ),
+      );
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('lazily built', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FSelectTileGroup.builder(
+            groupController: controller,
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 250,
+            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select-tile-group/group/builder/lazy.png'),
+      );
+    });
+
+    testWidgets('limited by count', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FSelectTileGroup.builder(
+            groupController: controller,
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 500,
+            count: 2,
+            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select-tile-group/group/builder/count-limited.png'),
+      );
+    });
+
+    testWidgets('limited by predicate', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FSelectTileGroup.builder(
+            groupController: controller,
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 500,
+            count: 24,
+            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            predicate: (context, index) => index < 2,
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select-tile-group/group/builder/predicate-limited.png'),
+      );
     });
   });
 

@@ -12,9 +12,13 @@
 
 * Change `FPopoverMenu` to be scrollable.
 
+* Change `FSelectTileGroup` to be scrollable.
+
 * **Breaking** Change `FTileData.index` to `FTileData.last`.
 
 * **Breaking** Change `FPopoverMenu.controller` to `FPopoverMenu.popoverController`.
+
+* **Breaking** Change `FSelectTileGroup.controller` to `FSelectTileGroup.groupController`.
 
 * **Breaking** Change `FPopoverController.duration` to `FPopoverController.animationDuration`.
 

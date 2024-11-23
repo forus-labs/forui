@@ -97,11 +97,15 @@ A popover menu displays a menu in a portal aligned to a child.
 
 ## Usage
 
-### `FPopover(...)`
+### `FPopoverMenu(...)`
 
 ```dart
 const FPopoverMenu(
-  controller: FPopoverController(),
+  popoverController: FPopoverController(),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
@@ -116,11 +120,15 @@ const FPopoverMenu(
 );
 ```
 
-### `FPopover.tappable()`
+### `FPopoverMenu.tappable()`
 
 ```dart
 const FPopoverMenu.tappable(
-  controller: FPopoverController(),
+  popoverController: FPopoverController(),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,

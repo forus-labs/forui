@@ -187,7 +187,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               followerBuilder: (context, _, __) => ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>(
-                  controller: state._controller,
+                  groupController: state._controller,
                   style: menuStyle.tileGroupStyle,
                   semanticLabel: semanticLabel,
                   divider: divider,
