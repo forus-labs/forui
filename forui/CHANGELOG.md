@@ -9,8 +9,14 @@
 * Change `FTheme` to internally extend `InheritedTheme`.
 
 * Change `FTileGroup` to be scrollable.
-* **Breaking** Change `FPopoverController.duration` to `FPopoverController.animationDuration`.
 
+* Change `FPopoverMenu` to be scrollable.
+
+* **Breaking** Change `FTileData.index` to `FTileData.last`.
+
+* **Breaking** Change `FPopoverMenu.controller` to `FPopoverMenu.popoverController`.
+
+* **Breaking** Change `FPopoverController.duration` to `FPopoverController.animationDuration`.
 
 * **Breaking** Change `FTooltipController.duration` to `FTooltipController.animationDuration`.
 

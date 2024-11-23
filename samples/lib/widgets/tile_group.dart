@@ -79,7 +79,7 @@ class ScrollableTileGroupPage extends Sample {
             onPress: () {},
           ),
           FTile(
-            prefixIcon: FIcon(FAssets.icons.barcode),
+            prefixIcon: FIcon(FAssets.icons.qrCode),
             title: const Text('QR code'),
             suffixIcon: FIcon(FAssets.icons.chevronRight),
             onPress: () {},

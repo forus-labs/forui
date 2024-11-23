@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -11,11 +12,39 @@ import 'package:forui/forui.dart';
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
 class FPopoverMenu extends StatefulWidget {
-  /// The controller that shows and hides the menu. It initially hides the menu.
-  final FPopoverController? controller;
-
   /// The popover menu's style.
   final FPopoverMenuStyle? style;
+
+  /// The controller that shows and hides the menu. It initially hides the menu.
+  final FPopoverController? popoverController;
+
+  /// The scroll controller used to control the position to which this group is scrolled.
+  ///
+  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  ///
+  /// It is ignored if the group is part of a merged [FTileGroup].
+  final ScrollController? scrollController;
+
+  /// The cache extent in logical pixels.
+  ///
+  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
+  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  ///
+  /// It is ignored if the group is part of a merged [FTileGroup].
+  final double? cacheExtent;
+
+  /// The max height, in logical pixels. Defaults to infinity.
+  ///
+  /// It is ignored if the group is part of a merged [FTileGroup].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [maxHeight] is not positive.
+  final double maxHeight;
+
+  /// Determines the way that drag start behavior is handled. Defaults to [DragStartBehavior.start].
+  ///
+  /// It is ignored if the group is part of a merged [FTileGroup].
+  final DragStartBehavior dragStartBehavior;
 
   /// The divider between tile groups. Defaults to [FTileDivider.full].
   final FTileDivider divider;
@@ -81,10 +110,14 @@ class FPopoverMenu extends StatefulWidget {
 
   /// Creates a menu that only shows the menu when the controller is manually toggled.
   const FPopoverMenu({
-    required this.controller,
+    required this.popoverController,
     required this.menu,
     required this.child,
+    this.scrollController,
     this.style,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
@@ -105,8 +138,12 @@ class FPopoverMenu extends StatefulWidget {
   const FPopoverMenu.tappable({
     required this.menu,
     required this.child,
-    this.controller,
     this.style,
+    this.popoverController,
+    this.scrollController,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
@@ -127,8 +164,12 @@ class FPopoverMenu extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('popoverController', popoverController))
+      ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
+      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DoubleProperty('maxHeight', maxHeight))
+      ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
@@ -148,20 +189,20 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FPopoverController(vsync: this);
+    _controller = widget.popoverController ?? FPopoverController(vsync: this);
   }
 
   @override
   void didUpdateWidget(covariant FPopoverMenu old) {
     super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
+    if (widget.popoverController == old.popoverController) {
       return;
     }
 
-    if (old.controller != null) {
+    if (old.popoverController != null) {
       _controller.dispose();
     }
-    _controller = widget.controller ?? FPopoverController(vsync: this);
+    _controller = widget.popoverController ?? FPopoverController(vsync: this);
   }
 
   @override
@@ -181,6 +222,10 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       followerBuilder: (context, _, __) => ConstrainedBox(
         constraints: BoxConstraints(maxWidth: style.maxWidth),
         child: FTileGroup.merge(
+          controller: widget.scrollController,
+          cacheExtent: widget.cacheExtent,
+          maxHeight: widget.maxHeight,
+          dragStartBehavior: widget.dragStartBehavior,
           semanticLabel: widget.semanticLabel,
           style: style.tileGroupStyle,
           divider: widget.divider,
@@ -193,7 +238,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    if (widget.controller == null) {
+    if (widget.popoverController == null) {
       _controller.dispose();
     }
     super.dispose();

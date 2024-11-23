@@ -22,7 +22,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FPopoverMenu(
-              controller: controller,
+              popoverController: controller,
               menu: [
                 FTileGroup(
                   children: [
@@ -59,7 +59,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FPopoverMenu(
-              controller: controller,
+              popoverController: controller,
               menu: [
                 FTileGroup(
                   children: [
@@ -94,6 +94,59 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/shown-${theme.name}.png'));
       });
 
+      testWidgets('${theme.name} scrollable', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FPopoverMenu(
+              popoverController: controller,
+              maxHeight: 200,
+              menu: [
+                FTileGroup(
+                  children: [
+                    FTile(
+                      title: const Text('Group 1 - Tile 1'),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      title: const Text('Group 1 - Tile 2'),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+                FTileGroup(
+                  children: [
+                    FTile(
+                      title: const Text('Group 2- Tile 1'),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      title: const Text('Group 2 - Tile 2'),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      title: const Text('Group 2 - Tile 3'),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+              ],
+              child: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(
+                  dimension: 50,
+                ),
+              ),
+            ),
+          ),
+        );
+
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/scrollable-${theme.name}.png'));
+      });
+
       testWidgets('${theme.name} with directional padding', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
@@ -103,7 +156,7 @@ void main() {
               childAnchor: Alignment.bottomRight,
               directionPadding: true,
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
-              controller: controller,
+              popoverController: controller,
               menu: [
                 FTileGroup(
                   children: [
@@ -149,7 +202,7 @@ void main() {
               menuAnchor: Alignment.topRight,
               childAnchor: Alignment.bottomRight,
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
-              controller: controller,
+              popoverController: controller,
               menu: [
                 FTileGroup(
                   children: [
