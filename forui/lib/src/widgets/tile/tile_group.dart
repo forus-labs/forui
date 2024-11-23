@@ -25,6 +25,8 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
 
   /// The scroll controller used to control the position to which this group is scrolled.
   ///
+  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   final ScrollController? controller;
 
