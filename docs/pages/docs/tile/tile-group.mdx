@@ -46,11 +46,33 @@ A tile group that typically groups related information together.
 
 ```dart
 FTileGroup(
+  controller: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   label: const Text('Settings'),
   description: const Text('Personalize your experience'),
   semanticLabel: 'Settings',
   divider: FTileDivider.indented,
   children: [],
+);
+```
+
+### `FTileGroup.builder(...)`
+
+```dart
+FTileGroup.builder(
+  controller: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  label: const Text('Settings'),
+  description: const Text('Personalize your experience'),
+  semanticLabel: 'Settings',
+  divider: FTileDivider.indented,
+  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+  predicate: (context, index) => index < 10,
+  count: 100,
 );
 ```
 
@@ -66,6 +88,79 @@ FTileGroup.merge(
 ```
 
 ## Examples
+
+### Scrollable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile-group' variant='scrollable' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTileGroup(
+      label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
+      maxHeight: 200,
+      children: [
+        FTile(
+          prefixIcon: FIcon(FAssets.icons.user),
+          title: const Text('Personalization'),
+          suffixIcon: FIcon(FAssets.icons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefixIcon: FIcon(FAssets.icons.mail),
+          title: const Text('Mail'),
+          suffixIcon: FIcon(FAssets.icons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefixIcon: FIcon(FAssets.icons.wifi),
+          title: const Text('WiFi'),
+          details: const Text('Forus Labs (5G)'),
+          suffixIcon: FIcon(FAssets.icons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefixIcon: FIcon(FAssets.icons.alarmClock),
+          title: const Text('Alarm Clock'),
+          suffixIcon: FIcon(FAssets.icons.chevronRight),
+          onPress: () {},
+        ),
+        FTile(
+          prefixIcon: FIcon(FAssets.icons.barcode),
+          title: const Text('QR code'),
+          suffixIcon: FIcon(FAssets.icons.chevronRight),
+          onPress: () {},
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Lazy Generation
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart
+    FTileGroup.builder(
+      label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
+      maxHeight: 200,
+      count: 200,
+      tileBuilder: (context, index) => FTile(
+        title: Text('Tile $index'),
+        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        onPress: () {},
+      ),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ### Merge Multiple Groups
 

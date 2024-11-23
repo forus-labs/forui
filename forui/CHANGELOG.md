@@ -1,10 +1,16 @@
 ## 0.8.0 (Next)
 
+### Additions
+
+* Add `FTileGroup.builder`.
+
 ### Changes
 
 * Change `FTheme` to internally extend `InheritedTheme`.
 
+* Change `FTileGroup` to be scrollable.
 * **Breaking** Change `FPopoverController.duration` to `FPopoverController.animationDuration`.
+
 
 * **Breaking** Change `FTooltipController.duration` to `FTooltipController.animationDuration`.
 
