@@ -605,5 +605,81 @@ void main() {
     });
   });
 
+  group('FTileGroup.builder', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FTileGroup.builder(
+            style: TestScaffold.blueScreen.tileGroupStyle,
+            label: const Text('Network'),
+            description: const Text('Description'),
+            error: const Text('This should not appear'),
+            maxHeight: 300,
+            tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+          ),
+        ),
+      );
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('lazily built', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup.builder(
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 250,
+            tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/builder/lazy.png'),
+      );
+    });
+
+    testWidgets('limited by count', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup.builder(
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 500,
+            count: 2,
+            tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/builder/count-limited.png'),
+      );
+    });
+
+    testWidgets('limited by predicate', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup.builder(
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 500,
+            count: 24,
+            tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+            predicate: (context, index) => index < 2,
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/builder/predicate-limited.png'),
+      );
+    });
+  });
+
   tearDown(() => controller.dispose());
 }
