@@ -4,6 +4,10 @@
 
 * Add `FTileGroup.builder`.
 
+* Add `FSelectTileGroup.builder`.
+
+* Add `FSelectMenuTile.builder`.
+
 ### Changes
 
 * Change `FTheme` to internally extend `InheritedTheme`.
@@ -13,6 +17,8 @@
 * Change `FPopoverMenu` to be scrollable.
 
 * Change `FSelectTileGroup` to be scrollable.
+
+* Change `FSelectMenuTile` to be scrollable.
 
 * **Breaking** Change `FTileData.index` to `FTileData.last`.
 

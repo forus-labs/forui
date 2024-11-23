@@ -18,32 +18,24 @@ class FPopoverMenu extends StatefulWidget {
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
 
-  /// The scroll controller used to control the position to which this group is scrolled.
+  /// The scroll controller used to control the position to which this menu is scrolled.
   ///
-  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
+  /// Scrolling past the end of the menu using the controller will result in undefined behaviour.
   final ScrollController? scrollController;
 
   /// The cache extent in logical pixels.
   ///
   /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
   /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
   final double? cacheExtent;
 
   /// The max height, in logical pixels. Defaults to infinity.
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [maxHeight] is not positive.
   final double maxHeight;
 
   /// Determines the way that drag start behavior is handled. Defaults to [DragStartBehavior.start].
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
   final DragStartBehavior dragStartBehavior;
 
   /// The divider between tile groups. Defaults to [FTileDivider.full].

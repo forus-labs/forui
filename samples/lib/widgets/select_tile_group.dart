@@ -29,7 +29,7 @@ class SelectTileGroupPage extends StatefulSample {
 }
 
 class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage> {
-  late final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
+  final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -82,7 +82,7 @@ class ScrollableSelectTileGroupPage extends StatefulSample {
 }
 
 class _ScrollableSelectTileGroupPageState extends StatefulSampleState<ScrollableSelectTileGroupPage> {
-  late final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
+  final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -135,7 +135,7 @@ class LazySelectTileGroupPage extends StatefulSample {
 }
 
 class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGroupPage> {
-  late final FMultiSelectGroupController<int> controller = FMultiSelectGroupController(values: {1});
+  final FMultiSelectGroupController<int> controller = FMultiSelectGroupController(values: {1});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -145,8 +145,7 @@ class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGr
             constraints: const BoxConstraints(maxWidth: 400),
             child: FSelectTileGroup.builder(
               groupController: controller,
-              label: const Text('Sidebar'),
-              description: const Text('These will be shown in the sidebar.'),
+              label: const Text('Applicable values'),
               maxHeight: 200,
               tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
             ),
@@ -173,7 +172,7 @@ class SelectTileGroupMultiValuePage extends StatefulSample {
 
 class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTileGroupMultiValuePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
+  final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
 
   @override
   Widget sample(BuildContext context) => Form(

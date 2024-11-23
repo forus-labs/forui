@@ -85,7 +85,10 @@ FSelectTileGroup<Value>.builder(
   description: const Text('Personalize your experience'),
   semanticLabel: 'Settings',
   divider: FTileDivider.indented,
-  tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: Value.something),
+  tileBuilder: (context, index) => FSelectTile(
+    title: Text('Tile $index'),
+    value: Value.something,
+  ),
   predicate: (context, index) => index < 10,
   count: 100,
 );
@@ -104,6 +107,7 @@ FSelectTileGroup<Value>.builder(
   <Tabs.Tab>
     ```dart
     FSelectTileGroup(
+      groupController: FMultiSelectGroupController(values: {Sidebar.recents}),
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
       maxHeight: 100,
@@ -129,15 +133,16 @@ FSelectTileGroup<Value>.builder(
   </Tabs.Tab>
 </Tabs>
 
-#### Lazy Generation
+#### Lazy
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='select-tile-group' variant='lazy' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
-    FTileGroup.builder(
+    ```dart {1, 7-11}
+    FSelectTileGroup.builder(
+      groupController: FMultiSelectGroupController(values: {1}),
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
       maxHeight: 200,

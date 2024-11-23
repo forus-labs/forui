@@ -80,6 +80,10 @@ FTileGroup.builder(
 
 ```dart
 FTileGroup.merge(
+controller: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   label: const Text('Settings'),
   semanticLabel: 'Settings',
   divider: FTileDivider.indented,
@@ -89,7 +93,9 @@ FTileGroup.merge(
 
 ## Examples
 
-### Scrollable
+### Behavior
+
+#### Scrollable
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -139,14 +145,14 @@ FTileGroup.merge(
   </Tabs.Tab>
 </Tabs>
 
-### Lazy Generation
+#### Lazy
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {1, 6-10}
     FTileGroup.builder(
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
@@ -162,7 +168,7 @@ FTileGroup.merge(
   </Tabs.Tab>
 </Tabs>
 
-### Merge Multiple Groups
+#### Merge Multiple Groups
 
 This function merges multiple `FTileGroupMixin`s into a single group. It is useful for representing a group with
 several sections.
