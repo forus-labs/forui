@@ -2,11 +2,13 @@
 
 ### Changes
 
-* **Breaking** Change `Popover.ignoreDirectionalPadding` to `Popover.directionPadding` - the value should be inverted.
+* Change `FTheme` to internally extend `InheritedTheme`.
 
-* **Breaking** Change `PopoverMenu.ignoreDirectionalPadding` to `PopoverMenu.directionPadding` - the value should be inverted.
+* **Breaking** Change `FPopover.ignoreDirectionalPadding` to `FPopover.directionPadding` - the value should be inverted.
 
-* **Breaking** Change `SelectMenuTile.ignoreDirectionalPadding` to `SelectMenuTile.directionPadding` - the value should be inverted.
+* **Breaking** Change `FPopoverMenu.ignoreDirectionalPadding` to `FPopoverMenu.directionPadding` - the value should be inverted.
+
+* **Breaking** Change `FSelectMenuTile.ignoreDirectionalPadding` to `FSelectMenuTile.directionPadding` - the value should be inverted.
 
 
 ## 0.7.0

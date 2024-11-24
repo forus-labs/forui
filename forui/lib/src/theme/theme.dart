@@ -122,10 +122,13 @@ class FTheme extends StatelessWidget {
   }
 }
 
-class _InheritedTheme extends InheritedWidget {
+class _InheritedTheme extends InheritedTheme {
   final FThemeData data;
 
   const _InheritedTheme({required this.data, required super.child});
+
+  @override
+  Widget wrap(BuildContext context, Widget child) => _InheritedTheme(data: data, child: child);
 
   @override
   bool updateShouldNotify(covariant _InheritedTheme old) => data != old.data;
