@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-enum Notification { all, direct, nothing, limitedTime }
+enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 @RoutePage()
 class SelectMenuTilePage extends StatefulSample {
@@ -84,6 +84,8 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
           Notification.all => 'All',
           Notification.direct => 'Direct Messages',
           Notification.limitedTime => 'Limited Time',
+          Notification.selectedApps => 'Selected Apps',
+          Notification.timeSensitive => 'Time Sensitive',
           null || Notification.nothing => 'None',
         },
       ),
@@ -93,6 +95,8 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
       FSelectTile(title: const Text('All'), value: Notification.all),
       FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
       FSelectTile(title: const Text('Limited Time'), value: Notification.limitedTime),
+      FSelectTile(title: const Text('Selected Apps'), value: Notification.selectedApps),
+      FSelectTile(title: const Text('Time Sensitive'), value: Notification.timeSensitive),
       FSelectTile(title: const Text('None'), value: Notification.nothing),
     ],
   );
@@ -127,7 +131,7 @@ class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTil
           groupController: controller,
           prefixIcon: FIcon(FAssets.icons.variable),
           title: const Text('Applicable values'),
-          maxHeight: 150,
+          maxHeight: 200,
           menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
         ),
       ),

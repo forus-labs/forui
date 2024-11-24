@@ -102,7 +102,7 @@ controller: ScrollController(),
     <Widget name='tile-group' variant='scrollable' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {4}
     FTileGroup(
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
@@ -145,14 +145,14 @@ controller: ScrollController(),
   </Tabs.Tab>
 </Tabs>
 
-#### Lazy
+#### Lazy Scrollable
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {1, 6-10}
+    ```dart {1, 4-10}
     FTileGroup.builder(
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
