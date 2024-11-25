@@ -7,12 +7,12 @@ import 'package:forui/forui.dart';
 import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
-  testWidgets('useFTooltipController', (tester) async {
-    late FTooltipController controller;
+  testWidgets('useFPopoverController', (tester) async {
+    late FPopoverController controller;
 
     await tester.pumpWidget(
       HookBuilder(builder: (context) {
-        controller = useFTooltipController();
+        controller = useFPopoverController();
         return Container();
       }),
     );
@@ -25,14 +25,14 @@ void main() {
   testWidgets('switch from uncontrolled to controlled throws', (tester) async {
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController();
+        useFPopoverController();
         return Container();
       },
     ));
 
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController(vsync: tester);
+        useFPopoverController(vsync: tester);
         return Container();
       },
     ));
@@ -43,14 +43,14 @@ void main() {
   testWidgets('switch from controlled to uncontrolled throws', (tester) async {
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController(vsync: tester);
+        useFPopoverController(vsync: tester);
         return Container();
       },
     ));
 
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController();
+        useFPopoverController();
         return Container();
       },
     ));

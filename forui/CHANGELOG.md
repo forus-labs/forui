@@ -4,6 +4,10 @@
 
 * Change `FTheme` to internally extend `InheritedTheme`.
 
+* **Breaking** Change `FPopoverController.duration` to `FPopoverController.animationDuration`.
+
+* **Breaking** Change `FTooltipController.duration` to `FTooltipController.animationDuration`.
+
 * **Breaking** Change `FTabController.ignoreDirectionalPadding` to `FTabController.directionPadding`.
 
 * **Breaking** Change `FPopover.ignoreDirectionalPadding` to `FPopover.directionPadding` - the value should be inverted.*

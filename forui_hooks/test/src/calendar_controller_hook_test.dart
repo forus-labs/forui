@@ -17,7 +17,7 @@ void main() {
       ),
     );
 
-    controller.value = DateTime.utc(2000, 1, 1);
+    controller.value = DateTime.utc(2000);
 
     await tester.pumpAndSettle();
   });
@@ -34,7 +34,7 @@ void main() {
       ),
     );
 
-    controller.value = { DateTime.utc(2000, 1, 1) };
+    controller.value = { DateTime.utc(2000) };
 
     await tester.pumpAndSettle();
   });
@@ -51,7 +51,7 @@ void main() {
       ),
     );
 
-    controller.value = (DateTime.utc(2000, 1, 1), DateTime.utc(2000, 1, 2));
+    controller.value = (DateTime.utc(2000), DateTime.utc(2000, 1, 2));
 
     await tester.pumpAndSettle();
   });
