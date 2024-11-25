@@ -47,9 +47,7 @@ class _TooltipControllerHookState extends HookState<FTooltipController, _Tooltip
   FTooltipController build(BuildContext context) => _controller;
 
   @override
-  void dispose() {
-    _controller.dispose();
-  }
+  void dispose() => _controller.dispose();
 
   @override
   bool get debugHasShortDescription => false;

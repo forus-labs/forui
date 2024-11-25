@@ -12,6 +12,7 @@ FAccordionController useFAccordionController({
     use(_AccordionControllerHook(
       min: 0,
       max: max,
+      debugLabel: 'useFAccordionController',
       keys: keys,
     ));
 
@@ -24,6 +25,7 @@ FAccordionController useFRadioAccordionController({
     use(_AccordionControllerHook(
       min: 0,
       max: max,
+      debugLabel: 'useFRadioAccordionController',
       keys: keys,
     ));
 
@@ -31,12 +33,14 @@ FAccordionController useFRadioAccordionController({
 class _AccordionControllerHook extends Hook<FAccordionController> {
   final int min;
   final int? max;
+  final String _debugLabel;
 
   const _AccordionControllerHook({
     required this.min,
     required this.max,
+    required String debugLabel,
     super.keys,
-  });
+  }) : _debugLabel = debugLabel;
 
   @override
   _AccordionControllerHookState createState() => _AccordionControllerHookState();
@@ -60,13 +64,11 @@ class _AccordionControllerHookState extends HookState<FAccordionController, _Acc
   FAccordionController build(BuildContext context) => _controller;
 
   @override
-  void dispose() {
-    _controller.dispose();
-  }
+  void dispose() => _controller.dispose();
 
   @override
   bool get debugHasShortDescription => false;
 
   @override
-  String get debugLabel => 'useFAccordionController';
+  String get debugLabel => hook._debugLabel;
 }

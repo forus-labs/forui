@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
-  testWidgets('useFAccordionController basic', (tester) async {
+  testWidgets('useFAccordionController', (tester) async {
     late FAccordionController controller;
 
     await tester.pumpWidget(

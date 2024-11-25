@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
-  testWidgets('useFTooltipController basic', (tester) async {
+  testWidgets('useFTooltipController', (tester) async {
     late FTooltipController controller;
 
     await tester.pumpWidget(

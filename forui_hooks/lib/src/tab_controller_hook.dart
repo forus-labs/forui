@@ -59,9 +59,7 @@ class _TabControllerHookState extends HookState<FTabController, _TabControllerHo
   FTabController build(BuildContext context) => _controller;
 
   @override
-  void dispose() {
-    _controller.dispose();
-  }
+  void dispose() => _controller.dispose();
 
   @override
   bool get debugHasShortDescription => false;
