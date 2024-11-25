@@ -36,6 +36,7 @@ FResizableController useFCascadeResizableController({
         onResizeUpdate: hook.onResizeUpdate,
         onResizeEnd: hook.onResizeEnd,
       ),
+      keys: keys,
     ));
 
 class _ResizableControllerHook extends Hook<FResizableController> {
