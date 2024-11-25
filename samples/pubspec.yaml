@@ -21,6 +21,7 @@ version: 1.0.0+1
 environment:
   flutter: ">=3.24.0"
   sdk: '>=3.5.0 <4.0.0'
+resolution: workspace
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,7 +37,6 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   forui:
-    path: ../forui
   intl: any
   sugar: ^3.1.0
 
@@ -46,10 +46,6 @@ dev_dependencies:
   flint: ^2.8.1
   flutter_test:
     sdk: flutter
-
-dependency_overrides:
-  forui_assets:
-    path: ../forui_assets
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
