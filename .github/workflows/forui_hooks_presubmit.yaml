@@ -1,0 +1,56 @@
+name: Forui Hooks Presubmit
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/forui_hooks_presubmit.yaml
+  pull_request_target:
+    branches: [ main ]
+    paths:
+      - forui_hooks/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
+    name: Prepare PR for review
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forui_hooks
+
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: subosito/flutter-action@v2.16.0
+        with:
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter pub global activate import_sorter
+      - run: flutter pub global run import_sorter:main
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: dart format --line-length 120 .
+      - run: dart fix --apply
+        # We format the code again since the required trailing comma lint fixes causes code to be formatted differently
+      - run: dart format --line-length 120 .
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          pull: '--rebase --autostash'
+          add: '*'
