@@ -4,7 +4,9 @@
 
 * Change `FTheme` to internally extend `InheritedTheme`.
 
-* **Breaking** Change `FPopover.ignoreDirectionalPadding` to `FPopover.directionPadding` - the value should be inverted.
+* **Breaking** Change `FTabController.ignoreDirectionalPadding` to `FTabController.directionPadding`.
+
+* **Breaking** Change `FPopover.ignoreDirectionalPadding` to `FPopover.directionPadding` - the value should be inverted.*
 
 * **Breaking** Change `FPopoverMenu.ignoreDirectionalPadding` to `FPopoverMenu.directionPadding` - the value should be inverted.
 

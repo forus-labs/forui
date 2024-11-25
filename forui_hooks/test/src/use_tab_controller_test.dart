@@ -7,17 +7,17 @@ import 'package:forui/forui.dart';
 import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
-  testWidgets('useFTooltipController basic', (tester) async {
-    late FTooltipController controller;
+  testWidgets('useFTabController basic', (tester) async {
+    late FTabController controller;
 
     await tester.pumpWidget(
       HookBuilder(builder: (context) {
-        controller = useFTooltipController();
+        controller = useFTabController(length: 2);
         return Container();
       }),
     );
 
-    unawaited(controller.show());
+    controller.animateTo(1);
 
     await tester.pumpAndSettle();
   });
@@ -25,14 +25,14 @@ void main() {
   testWidgets('switch from uncontrolled to controlled throws', (tester) async {
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController();
+        useFTabController(length: 1);
         return Container();
       },
     ));
 
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController(vsync: tester);
+        useFTabController(vsync: tester, length: 1);
         return Container();
       },
     ));
@@ -43,14 +43,14 @@ void main() {
   testWidgets('switch from controlled to uncontrolled throws', (tester) async {
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController(vsync: tester);
+        useFTabController(vsync: tester, length: 1);
         return Container();
       },
     ));
 
     await tester.pumpWidget(HookBuilder(
       builder: (context) {
-        useFTooltipController();
+        useFTabController(length: 1);
         return Container();
       },
     ));
