@@ -67,6 +67,9 @@ final class FThemeData with Diagnosticable {
   /// The label styles.
   final FLabelStyles labelStyles;
 
+  /// The line calendar style.
+  final FLineCalendarStyle lineCalendarStyle;
+
   /// The popover's style.
   final FPopoverStyle popoverStyle;
 
@@ -134,6 +137,7 @@ final class FThemeData with Diagnosticable {
     required this.dividerStyles,
     required this.headerStyle,
     required this.labelStyles,
+    required this.lineCalendarStyle,
     required this.popoverStyle,
     required this.popoverMenuStyle,
     required this.progressStyle,
@@ -182,6 +186,7 @@ final class FThemeData with Diagnosticable {
       dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
+      lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       popoverMenuStyle: FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
@@ -260,6 +265,7 @@ final class FThemeData with Diagnosticable {
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
+    FLineCalendarStyle? lineCalendarStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
@@ -293,6 +299,7 @@ final class FThemeData with Diagnosticable {
         dividerStyles: dividerStyles ?? this.dividerStyles,
         headerStyle: headerStyle ?? this.headerStyle,
         labelStyles: labelStyles ?? this.labelStyles,
+        lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
         popoverStyle: popoverStyle ?? this.popoverStyle,
         popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
         progressStyle: progressStyle ?? this.progressStyle,
@@ -331,6 +338,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
@@ -370,6 +378,7 @@ final class FThemeData with Diagnosticable {
           dividerStyles == other.dividerStyles &&
           headerStyle == other.headerStyle &&
           labelStyles == other.labelStyles &&
+          lineCalendarStyle == other.lineCalendarStyle &&
           popoverStyle == other.popoverStyle &&
           popoverMenuStyle == other.popoverMenuStyle &&
           progressStyle == other.progressStyle &&
@@ -405,6 +414,7 @@ final class FThemeData with Diagnosticable {
       dividerStyles.hashCode ^
       headerStyle.hashCode ^
       labelStyles.hashCode ^
+      lineCalendarStyle.hashCode ^
       popoverStyle.hashCode ^
       popoverMenuStyle.hashCode ^
       progressStyle.hashCode ^
