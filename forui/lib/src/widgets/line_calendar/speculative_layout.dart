@@ -2,43 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
-
-@internal
-class LineCalendar extends StatefulWidget {
-  final FCalendarController<DateTime?> controller;
-  final FLineCalendarStyle? style;
-  final BoxConstraints constraints;
-  final LocalDate _start;
-  final LocalDate? _end;
-  final LocalDate _initial;
-  final LocalDate _today;
-
-  const LineCalendar({
-    required this.controller,
-    required this.style,
-    required this.constraints,
-    required LocalDate start,
-    required LocalDate? end,
-    required LocalDate initial,
-    required LocalDate today,
-    super.key,
-  })  : _start = start,
-        _end = end,
-        _initial = initial,
-        _today = today;
-
-  @override
-  State<LineCalendar> createState() => _LineCalendarState();
-}
-
-class _LineCalendarState extends State<LineCalendar> {
-  @override
-  Widget build(BuildContext context) => const Placeholder();
-}
+import 'package:sugar/sugar.dart' hide Offset;
 
 @internal
 class SpeculativeLayout extends MultiChildRenderObjectWidget {
@@ -61,12 +27,18 @@ class _SpeculativeBox extends RenderBox
   @override
   void performLayout() {
     final selected = firstChild!;
-    final unselected = childAfter(selected)!;
+    final selectedHovered = childAfter(selected)!;
+    final unselected = childAfter(selectedHovered)!;
+    final unselectedHovered = childAfter(unselected)!;
 
-    final selectedHeight = selected.getDryLayout(constraints).height;
-    final unselectedHeight = unselected.getDryLayout(constraints).height;
+    final maxHeight = [
+      selected.getDryLayout(constraints).height,
+      selectedHovered.getDryLayout(constraints).height,
+      unselected.getDryLayout(constraints).height,
+      unselectedHovered.getDryLayout(constraints).height,
+    ].max!;
 
-    final heightConstraints = constraints.copyWith(maxHeight: max(selectedHeight, unselectedHeight));
+    final heightConstraints = constraints.copyWith(maxHeight: maxHeight);
     final viewport = childAfter(unselected)!..layout(heightConstraints, parentUsesSize: true);
     size = constraints.constrain(viewport.size);
   }
