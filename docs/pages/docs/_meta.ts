@@ -4,6 +4,7 @@ export default {
   localization: 'Localization',
   responsive: 'Responsive',
   'icon-library': 'Icon Library',
+  'hooks': 'Hooks',
   api_reference: {
     title: 'API Reference ↗',
     href: 'https://pub.dev/documentation/forui',

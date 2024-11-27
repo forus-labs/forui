@@ -18,9 +18,9 @@ final class FPopoverController extends FChangeNotifier {
   late final Animation<double> _fade;
   late final Animation<double> _scale;
 
-  /// Creates a [FPopoverController] with the given [vsync] and animation [duration].
-  FPopoverController({required TickerProvider vsync, duration = const Duration(milliseconds: 100)}) {
-    _animation = AnimationController(vsync: vsync, duration: duration);
+  /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
+  FPopoverController({required TickerProvider vsync, animationDuration = const Duration(milliseconds: 100)}) {
+    _animation = AnimationController(vsync: vsync, duration: animationDuration);
     _fade = _fadeTween.animate(_animation);
     _scale = _scaleTween.animate(_animation);
   }
