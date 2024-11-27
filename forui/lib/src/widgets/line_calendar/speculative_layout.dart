@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class LineCalendar extends StatefulWidget {
@@ -13,16 +14,22 @@ class LineCalendar extends StatefulWidget {
   final BoxConstraints constraints;
   final LocalDate _start;
   final LocalDate? _end;
+  final LocalDate _initial;
   final LocalDate _today;
 
-  const LineCalendar({super.key,
-      required this.controller,
-      required this.style,
-      required this.constraints,
-      this._start,
-      this._end,
-      this._today,
-      });
+  const LineCalendar({
+    required this.controller,
+    required this.style,
+    required this.constraints,
+    required LocalDate start,
+    required LocalDate? end,
+    required LocalDate initial,
+    required LocalDate today,
+    super.key,
+  })  : _start = start,
+        _end = end,
+        _initial = initial,
+        _today = today;
 
   @override
   State<LineCalendar> createState() => _LineCalendarState();
