@@ -27,3 +27,5 @@ dependency_overrides:
 
 flutter:
 
+import_sorter:
+  comments: false

@@ -13,7 +13,7 @@ FAccordionController useFAccordionController({
   List<Object?>? keys,
 }) =>
     use(_AccordionControllerHook(
-      min: 0,
+      min: min,
       max: max,
       debugLabel: 'useFAccordionController',
       keys: keys,
@@ -26,7 +26,7 @@ FAccordionController useFRadioAccordionController({
   List<Object?>? keys,
 }) =>
     use(_AccordionControllerHook(
-      min: 0,
+      min: min,
       max: max,
       debugLabel: 'useFRadioAccordionController',
       keys: keys,

@@ -12,7 +12,7 @@ FRadioSelectGroupController<T> useFRadioSelectGroupController<T>({
   T? value,
   List<Object?>? keys,
 }) =>
-    use(_RadioControllerHook<T>(value: value));
+    use(_RadioControllerHook<T>(value: value, keys: keys));
 
 class _RadioControllerHook<T> extends Hook<FRadioSelectGroupController<T>> {
   final T? value;

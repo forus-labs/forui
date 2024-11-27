@@ -15,7 +15,7 @@ FTabController useFTabController({
   List<Object?>? keys,
 }) =>
     use(_TabControllerHook(
-      initialIndex: 0,
+      initialIndex: initialIndex,
       length: length,
       vsync: vsync ??= useSingleTickerProvider(keys: keys),
       animationDuration: animationDuration,
