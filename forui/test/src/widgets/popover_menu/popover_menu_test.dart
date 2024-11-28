@@ -15,7 +15,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopoverMenu(
-            controller: controller,
+            popoverController: controller,
             menu: [
               FTileGroup(
                 children: [
@@ -57,7 +57,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopoverMenu(
-            controller: controller,
+            popoverController: controller,
             hideOnTapOutside: false,
             menu: [
               FTileGroup(
@@ -100,7 +100,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopoverMenu(
-            controller: controller,
+            popoverController: controller,
             menu: [
               FTileGroup(
                 children: [

@@ -37,7 +37,7 @@ A popover menu displays a menu in a portal aligned to a child.
             title: const Text('Edit Notes'),
             actions: [
               FPopoverMenu(
-                controller: controller,
+                popoverController: controller,
                 menuAnchor: Alignment.topRight,
                 childAnchor: Alignment.bottomRight,
                 menu: [
@@ -51,6 +51,11 @@ A popover menu displays a menu in a portal aligned to a child.
                       FTile(
                         prefixIcon: FIcon(FAssets.icons.paperclip),
                         title: const Text('Add attachments'),
+                        onPress: () {},
+                      ),
+                      FTile(
+                        prefixIcon: FIcon(FAssets.icons.qrCode),
+                        title: const Text('Scan Document'),
                         onPress: () {},
                       ),
                     ],
@@ -70,7 +75,13 @@ A popover menu displays a menu in a portal aligned to a child.
                     ],
                   ),
                 ],
-              );
+                child: FHeaderAction(
+                  icon: FIcon(FAssets.icons.ellipsis),
+                  onPress: controller.toggle,
+                ),
+              ),
+            ],
+          );
 
       @override
       void dispose() {
@@ -85,11 +96,15 @@ A popover menu displays a menu in a portal aligned to a child.
 
 ## Usage
 
-### `FPopover(...)`
+### `FPopoverMenu(...)`
 
 ```dart
 const FPopoverMenu(
-  controller: FPopoverController(),
+  popoverController: FPopoverController(),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
@@ -104,11 +119,15 @@ const FPopoverMenu(
 );
 ```
 
-### `FPopover.tappable()`
+### `FPopoverMenu.tappable()`
 
 ```dart
 const FPopoverMenu.tappable(
-  controller: FPopoverController(),
+  popoverController: FPopoverController(),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,

@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -26,6 +27,26 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
 
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
+
+  /// The scroll controller used to control the position to which this menu is scrolled.
+  ///
+  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  final ScrollController? scrollController;
+
+  /// The menu's cache extent in logical pixels.
+  ///
+  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
+  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  final double? cacheExtent;
+
+  /// The menu's max height, in logical pixels. Defaults to infinity.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [maxHeight] is not positive.
+  final double maxHeight;
+
+  /// Determines the way that the menu's drag start behavior is handled. Defaults to [DragStartBehavior.start].
+  final DragStartBehavior dragStartBehavior;
 
   /// The style.
   final FSelectMenuTileStyle? style;
@@ -96,9 +117,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// Called with true if the menu's node gains focus, and false if it loses focus.
   final ValueChanged<bool>? onFocusChange;
 
-  /// The menu.
-  final List<FSelectTile<T>> menu;
-
   /// The prefix icon.
   final Widget? prefixIcon;
 
@@ -117,10 +135,14 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// Creates a [FSelectMenuTile].
   FSelectMenuTile({
     required this.groupController,
-    required this.menu,
     required this.title,
+    required List<FSelectTile<T>> menu,
     this.popoverController,
+    this.scrollController,
     this.style,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
@@ -187,11 +209,147 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               followerBuilder: (context, _, __) => ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>(
-                  controller: state._controller,
+                  groupController: state._controller,
+                  scrollController: scrollController,
+                  cacheExtent: cacheExtent,
+                  maxHeight: maxHeight,
+                  dragStartBehavior: dragStartBehavior,
                   style: menuStyle.tileGroupStyle,
                   semanticLabel: semanticLabel,
                   divider: divider,
                   children: menu,
+                ),
+              ),
+              target: FTile(
+                style: tileStyle,
+                prefixIcon: prefixIcon,
+                enabled: enabled,
+                title: title,
+                subtitle: subtitle,
+                details: details,
+                suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
+                onPress: state._controller._popover.toggle,
+              ),
+            );
+
+            if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+              tile = FLabel(
+                axis: Axis.vertical,
+                style: labelStyle,
+                state: labelState,
+                label: label,
+                description: description,
+                error: error,
+                child: tile,
+              );
+            }
+
+            return tile;
+          },
+        );
+
+  /// Creates a [FSelectMenuTile] that lazily builds the menu.
+  ///
+  /// The [menuTileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to
+  /// `menuTileBuilder`.
+  /// * It may return null to signify the end of the group.
+  /// * It may be called more than once for the same index.
+  /// * It will be called only for indices <= [count] if [count] is given.
+  ///
+  /// The [count] is the number of tiles to build. If null, [menuTileBuilder] will be called until it returns null.
+  ///
+  /// ## Notes
+  /// May result in an infinite loop or run out of memory if:
+  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
+  /// * [count] is null and [menuTileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
+  ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
+  FSelectMenuTile.builder({
+    required this.groupController,
+    required this.title,
+    required FSelectTile<T>? Function(BuildContext, int) menuTileBuilder,
+    int? count,
+    this.popoverController,
+    this.scrollController,
+    this.style,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.divider = FTileDivider.full,
+    this.menuAnchor = Alignment.topRight,
+    this.tileAnchor = Alignment.bottomRight,
+    this.shift = FPortalFollowerShift.flip,
+    this.hideOnTapOutside = true,
+    this.directionPadding = false,
+    this.autoHide = false,
+    this.label,
+    this.description,
+    this.errorBuilder = _errorBuilder,
+    this.semanticLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    this.prefixIcon,
+    this.subtitle,
+    this.details,
+    this.suffixIcon,
+    super.onSaved,
+    super.validator,
+    super.initialValue,
+    super.forceErrorText,
+    super.enabled = true,
+    super.autovalidateMode,
+    super.restorationId,
+    super.key,
+  }) : super(
+          builder: (field) {
+            final state = field as _State<T>;
+            final groupData = FTileGroupData.maybeOf(state.context);
+            final tileData = FTileData.maybeOf(state.context);
+
+            final global = state.context.theme.selectMenuTileStyle;
+            final labelStyle = style?.labelStyle ?? global.labelStyle;
+            final menuStyle = style?.menuStyle ?? global.menuStyle;
+            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
+
+            final (labelState, error) = switch (state.errorText) {
+              _ when !enabled => (FLabelState.disabled, null),
+              final text? => (FLabelState.error, errorBuilder(state.context, text)),
+              null => (FLabelState.enabled, null),
+            };
+
+            Widget tile = FPopover(
+              // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
+              //
+              // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
+              // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
+              // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
+              // another _OverlayPortalState, causing an assertion to be thrown.
+              //
+              // See https://stackoverflow.com/a/59410824/4189771
+              key: GlobalObjectKey(state._controller._popover),
+              controller: state._controller._popover,
+              style: menuStyle,
+              followerAnchor: menuAnchor,
+              targetAnchor: tileAnchor,
+              shift: shift,
+              hideOnTapOutside: hideOnTapOutside,
+              directionPadding: directionPadding,
+              autofocus: autofocus,
+              focusNode: focusNode,
+              onFocusChange: onFocusChange,
+              followerBuilder: (context, _, __) => ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
+                child: FSelectTileGroup<T>.builder(
+                  groupController: state._controller,
+                  scrollController: scrollController,
+                  cacheExtent: cacheExtent,
+                  maxHeight: maxHeight,
+                  dragStartBehavior: dragStartBehavior,
+                  style: menuStyle.tileGroupStyle,
+                  semanticLabel: semanticLabel,
+                  divider: divider,
+                  tileBuilder: menuTileBuilder,
+                  count: count,
                 ),
               ),
               target: FTile(
@@ -231,7 +389,11 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     properties
       ..add(DiagnosticsProperty('groupController', groupController))
       ..add(DiagnosticsProperty('popoverController', popoverController))
+      ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
+      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DoubleProperty('maxHeight', maxHeight))
+      ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))

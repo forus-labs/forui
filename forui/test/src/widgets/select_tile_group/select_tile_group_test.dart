@@ -13,7 +13,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             children: [
               FSelectTile(
                 title: const Text('1'),
@@ -41,7 +41,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             children: [
               FSelectTile.suffix(
                 title: const Text('1'),
@@ -69,7 +69,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             children: [
               FSelectTile.suffix(
                 title: const Text('1'),
@@ -97,7 +97,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             autovalidateMode: AutovalidateMode.always,
             validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
             children: [
@@ -142,7 +142,7 @@ void main() {
                 ],
               ),
               FSelectTileGroup(
-                controller: controller,
+                groupController: controller,
                 children: [
                   FSelectTile(
                     title: const Text('1'),

@@ -29,7 +29,7 @@ class SelectTileGroupPage extends StatefulSample {
 }
 
 class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage> {
-  late final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
+  final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -38,7 +38,7 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               label: const Text('Sidebar'),
               description: const Text('These will be shown in the sidebar.'),
               divider: widget.divider,
@@ -72,6 +72,95 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
 }
 
 @RoutePage()
+class ScrollableSelectTileGroupPage extends StatefulSample {
+  ScrollableSelectTileGroupPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  State<ScrollableSelectTileGroupPage> createState() => _ScrollableSelectTileGroupPageState();
+}
+
+class _ScrollableSelectTileGroupPageState extends StatefulSampleState<ScrollableSelectTileGroupPage> {
+  final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
+
+  @override
+  Widget sample(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: FSelectTileGroup(
+              groupController: controller,
+              label: const Text('Sidebar'),
+              description: const Text('These will be shown in the sidebar.'),
+              maxHeight: 100,
+              children: [
+                FSelectTile(
+                  title: const Text('Recents'),
+                  suffixIcon: FIcon(FAssets.icons.timer),
+                  value: Sidebar.recents,
+                ),
+                FSelectTile(
+                  title: const Text('Home'),
+                  suffixIcon: FIcon(FAssets.icons.house),
+                  value: Sidebar.home,
+                ),
+                FSelectTile(
+                  title: const Text('Applications'),
+                  suffixIcon: FIcon(FAssets.icons.appWindowMac),
+                  value: Sidebar.applications,
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+}
+
+@RoutePage()
+class LazySelectTileGroupPage extends StatefulSample {
+  LazySelectTileGroupPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  State<LazySelectTileGroupPage> createState() => _LazySelectTileGroupPageState();
+}
+
+class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGroupPage> {
+  final FMultiSelectGroupController<int> controller = FMultiSelectGroupController(values: {1});
+
+  @override
+  Widget sample(BuildContext context) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: FSelectTileGroup.builder(
+              groupController: controller,
+              label: const Text('Applicable values'),
+              maxHeight: 200,
+              tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            ),
+          ),
+        ],
+      );
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+}
+
+@RoutePage()
 class SelectTileGroupMultiValuePage extends StatefulSample {
   SelectTileGroupMultiValuePage({
     @queryParam super.theme,
@@ -83,7 +172,7 @@ class SelectTileGroupMultiValuePage extends StatefulSample {
 
 class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTileGroupMultiValuePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
+  final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -93,7 +182,7 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               label: const Text('Favorite Languages'),
               description: const Text('Your favorite language.'),
               validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
@@ -162,7 +251,7 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               label: const Text('Notifications'),
               description: const Text('Select the notifications.'),
               validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
@@ -225,7 +314,7 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 300),
             child: FSelectTileGroup(
-              controller: controller,
+              groupController: controller,
               label: const Text('Settings'),
               children: [
                 FSelectTile.suffix(

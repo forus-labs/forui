@@ -55,7 +55,11 @@ A group of tiles that allow users to make a selection from a set of options.
 
 ```dart
 FSelectTileGroup<Value>(
-  controller: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   divider: FTileDivider.indented,
@@ -68,9 +72,90 @@ FSelectTileGroup<Value>(
 );
 ```
 
+### `FTileGroup.builder(...)`
+
+```dart
+FSelectTileGroup<Value>.builder(
+  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  label: const Text('Settings'),
+  description: const Text('Personalize your experience'),
+  semanticLabel: 'Settings',
+  divider: FTileDivider.indented,
+  tileBuilder: (context, index) => index < 10 ? FSelectTile(
+    title: Text('Tile $index'),
+    value: Value.something,
+  ) : null,
+  count: 100,
+);
+```
+
 ## Examples
 
 ### Behavior
+
+#### Scrollable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select-tile-group' variant='scrollable' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {5}
+    FSelectTileGroup(
+      groupController: FMultiSelectGroupController(values: {Sidebar.recents}),
+      label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
+      maxHeight: 100,
+      children: [
+        FSelectTile(
+          title: const Text('Recents'),
+          suffixIcon: FIcon(FAssets.icons.timer),
+          value: Sidebar.recents,
+        ),
+        FSelectTile(
+          title: const Text('Home'),
+          suffixIcon: FIcon(FAssets.icons.house),
+          value: Sidebar.home,
+        ),
+        FSelectTile(
+          title: const Text('Applications'),
+          suffixIcon: FIcon(FAssets.icons.appWindowMac),
+          value: Sidebar.applications,
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Lazy Scrollable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select-tile-group' variant='lazy' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {1, 5-11}
+    FSelectTileGroup.builder(
+      groupController: FMultiSelectGroupController(values: {1}),
+      label: const Text('Settings'),
+      description: const Text('Personalize your experience'),
+      maxHeight: 200,
+      count: 200,
+      tileBuilder: (context, index) => FTile(
+        title: Text('Tile $index'),
+        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        onPress: () {},
+      ),
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 
 #### Multi-value Form
 

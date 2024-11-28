@@ -42,6 +42,73 @@ class TileGroupPage extends Sample {
 }
 
 @RoutePage()
+class ScrollableTileGroupPage extends Sample {
+  ScrollableTileGroupPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget sample(BuildContext context) => FTileGroup(
+        label: const Text('Settings'),
+        description: const Text('Personalize your experience'),
+        maxHeight: 200,
+        children: [
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.user),
+            title: const Text('Personalization'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.mail),
+            title: const Text('Mail'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.wifi),
+            title: const Text('WiFi'),
+            details: const Text('Forus Labs (5G)'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.alarmClock),
+            title: const Text('Alarm Clock'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+          FTile(
+            prefixIcon: FIcon(FAssets.icons.qrCode),
+            title: const Text('QR code'),
+            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            onPress: () {},
+          ),
+        ],
+      );
+}
+
+@RoutePage()
+class LazyTileGroupPage extends Sample {
+  LazyTileGroupPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget sample(BuildContext context) => FTileGroup.builder(
+        label: const Text('Settings'),
+        description: const Text('Personalize your experience'),
+        maxHeight: 200,
+        count: 200,
+        tileBuilder: (context, index) => FTile(
+          title: Text('Tile $index'),
+          suffixIcon: FIcon(FAssets.icons.chevronRight),
+          onPress: () {},
+        ),
+      );
+}
+
+@RoutePage()
 class MergeTileGroup extends Sample {
   MergeTileGroup({
     @queryParam super.theme,
@@ -83,7 +150,7 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
             ],
           ),
           FSelectTileGroup(
-            controller: controller,
+            groupController: controller,
             children: [
               FSelectTile(
                 title: const Text('List View'),

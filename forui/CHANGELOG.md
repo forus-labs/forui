@@ -1,8 +1,30 @@
 ## 0.8.0 (Next)
 
+### Additions
+
+* Add `FTileGroup.builder`.
+
+* Add `FSelectTileGroup.builder`.
+
+* Add `FSelectMenuTile.builder`.
+
 ### Changes
 
 * Change `FTheme` to internally extend `InheritedTheme`.
+
+* Change `FTileGroup` to be scrollable.
+
+* Change `FPopoverMenu` to be scrollable.
+
+* Change `FSelectTileGroup` to be scrollable.
+
+* Change `FSelectMenuTile` to be scrollable.
+
+* **Breaking** Change `FTileData.index` to `FTileData.last`.
+
+* **Breaking** Change `FPopoverMenu.controller` to `FPopoverMenu.popoverController`.
+
+* **Breaking** Change `FSelectTileGroup.controller` to `FSelectTileGroup.groupController`.
 
 * **Breaking** Change `FPopoverController.duration` to `FPopoverController.animationDuration`.
 

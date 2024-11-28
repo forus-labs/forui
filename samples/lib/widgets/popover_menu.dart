@@ -31,7 +31,7 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
         title: const Text('Edit Notes'),
         actions: [
           FPopoverMenu(
-            controller: controller,
+            popoverController: controller,
             menuAnchor: Alignment.topRight,
             childAnchor: Alignment.bottomRight,
             menu: [
@@ -45,6 +45,11 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
                   FTile(
                     prefixIcon: FIcon(FAssets.icons.paperclip),
                     title: const Text('Add attachments'),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: FIcon(FAssets.icons.qrCode),
+                    title: const Text('Scan Document'),
                     onPress: () {},
                   ),
                 ],

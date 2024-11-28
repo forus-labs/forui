@@ -127,7 +127,7 @@ class FTile extends StatelessWidget with FTileMixin {
     final tile = extractTile(tileData);
     final enabled = this.enabled ?? tile.enabled;
     final curveTop = group.index == 0 && tile.index == 0;
-    final curveBottom = group.index == group.length - 1 && tile.index == tile.length - 1;
+    final curveBottom = group.index == group.length - 1 && tile.last;
 
     Widget content(FTappableData data) => DecoratedBox(
           decoration: BoxDecoration(
@@ -138,7 +138,8 @@ class FTile extends StatelessWidget with FTileMixin {
             },
             border: data.focused
                 ? Border(
-                    top: curveBottom ? style.focusedBorder.top : style.focusedBorder.left,
+                    // style.focusedBorder.left is used so that the top is always painted.
+                    top: curveTop ? style.focusedBorder.top : style.focusedBorder.left,
                     left: style.focusedBorder.left,
                     right: style.focusedBorder.right,
                     bottom: curveBottom ? style.focusedBorder.top : BorderSide.none,
@@ -163,7 +164,7 @@ class FTile extends StatelessWidget with FTileMixin {
             hovered: data.hovered,
             focused: data.focused,
             index: tile.index,
-            length: tile.length,
+            last: tile.last,
             child: child,
           ),
         );
@@ -198,10 +199,10 @@ class FTile extends StatelessWidget with FTileMixin {
 
 /// Extracts the data from the given [FTileData].
 @internal
-({int index, int length, FTileDivider divider, bool enabled}) extractTile(FTileData? data) => (
+({int index, bool last, FTileDivider divider, bool enabled}) extractTile(FTileData? data) => (
       enabled: data?.enabled ?? true,
       index: data?.index ?? 0,
-      length: data?.length ?? 1,
+      last: data?.last ?? true,
       divider: data?.divider ?? FTileDivider.indented,
     );
 
@@ -231,8 +232,8 @@ class FTileData extends InheritedWidget {
   /// The tile's index in the current group.
   final int index;
 
-  /// The number of tiles in the current group.
-  final int length;
+  /// True if the tile is the last in the group.
+  final bool last;
 
   /// Creates a [FTileData].
   const FTileData({
@@ -242,7 +243,7 @@ class FTileData extends InheritedWidget {
     required this.hovered,
     required this.focused,
     required this.index,
-    required this.length,
+    required this.last,
     required super.child,
     super.key,
   });
@@ -255,7 +256,7 @@ class FTileData extends InheritedWidget {
       hovered != old.hovered ||
       focused != old.focused ||
       index != old.index ||
-      length != old.length;
+      last != old.last;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -267,7 +268,7 @@ class FTileData extends InheritedWidget {
       ..add(FlagProperty('hovered', value: hovered, ifTrue: 'hovered'))
       ..add(FlagProperty('focused', value: focused, ifTrue: 'focused'))
       ..add(IntProperty('index', index))
-      ..add(IntProperty('length', length));
+      ..add(FlagProperty('last', value: last, ifTrue: 'last'));
   }
 }
 

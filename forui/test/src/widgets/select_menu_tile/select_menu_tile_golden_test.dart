@@ -117,6 +117,49 @@ void main() {
         );
       });
 
+      testWidgets('${theme.name} scrollable', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FSelectMenuTile(
+              groupController: controller,
+              maxHeight: 150,
+              title: const Text('Title'),
+              menu: [
+                FSelectTile(
+                  title: const Text('Tile 1'),
+                  value: 1,
+                ),
+                FSelectTile(
+                  title: const Text('Tile 2'),
+                  value: 2,
+                ),
+                FSelectTile(
+                  title: const Text('Tile 3'),
+                  value: 3,
+                ),
+                FSelectTile(
+                  title: const Text('Tile 4'),
+                  value: 4,
+                ),
+                FSelectTile(
+                  title: const Text('Tile 5'),
+                  value: 4,
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byType(FSelectMenuTile<int>));
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-menu-tile/${theme.name}/scrollable.png'),
+        );
+      });
+
       testWidgets('disabled - hidden - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
@@ -165,6 +208,71 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/error-${theme.name}.png'));
       });
     }
+  });
+
+  group('FSelectMenuTile.builder', () {
+    testWidgets('lazily built', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelectMenuTile.builder(
+            groupController: controller,
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 250,
+            title: const Text('Title'),
+            menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(FSelectMenuTile<int>));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/lazy.png'));
+    });
+
+    testWidgets('limited by count', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelectMenuTile.builder(
+            groupController: controller,
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 500,
+            count: 2,
+            title: const Text('Title'),
+            menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(FSelectMenuTile<int>));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/count-limited.png'));
+    });
+
+    testWidgets('limited by returning null', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelectMenuTile.builder(
+            groupController: controller,
+            label: const Text('Network'),
+            description: const Text('Description'),
+            maxHeight: 500,
+            count: 24,
+            title: const Text('Title'),
+            menuTileBuilder: (context, index) =>
+                index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(FSelectMenuTile<int>));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/null-limited.png'));
+    });
   });
 
   tearDown(() => controller.dispose());

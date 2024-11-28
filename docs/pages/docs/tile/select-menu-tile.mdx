@@ -27,11 +27,11 @@ A tile that, when triggered, displays a list of options for the user to pick fro
       const _SelectMenuTileForm({super.key});
 
       @override
-      State<_SelectMenuTile> createState() => _SelectMenuTileFormState();
+      State<_SelectMenuTile> createState() => _SelectMenuTileState();
     }
 
-    class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
-      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(value: Notification.all);
+    class _SelectMenuTileState extends State<_SelectMenuTile> {
+      final controller = FRadioSelectGroupController(value: Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -75,6 +75,10 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 FSelectMenuTile<Value>(
   groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
   popoverController: FPopoverController(...),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
   divider: FTileDivider.indented,
   menuAnchor: FMenuAnchor.bottomLeft,
   tileAnchor: FTileAnchor.bottomLeft,
@@ -99,6 +103,39 @@ FSelectMenuTile<Value>(
 );
 ```
 
+### `FSelectMenuTile.builder(...)`
+
+```dart
+FSelectMenuTile<Value>.builder(
+  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  popoverController: FPopoverController(...),
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  divider: FTileDivider.indented,
+  menuAnchor: FMenuAnchor.bottomLeft,
+  tileAnchor: FTileAnchor.bottomLeft,
+  shift: FPortalFollowerShift.flip,
+  hideOnTapOutside: true,
+  ignoreDirectionPadding: true,
+  autoHide: false,
+  label: const Text('Sidebar'),
+  description: const Text('Select the items you want to display in the sidebar.'),
+  errorBuilder: (context, error) => Text(error),
+  prefixIcon: FIcon(FAssets.icons.bell),
+  title: Text('Notifications'),
+  subtitle: Text('subtitle'),
+  details: Text('All'),
+  suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
+  menuTileBuilder: (context, index) => index < 10 ? FSelectTile(
+    label: Text('Tile $index'),
+    value: Value.something,
+  ) : null,
+  count: 100,
+);
+```
+
 ## Examples
 
 ### Auto Hide
@@ -115,11 +152,11 @@ FSelectMenuTile<Value>(
       const _SelectMenuTileForm({super.key});
 
       @override
-      State<_SelectMenuTile> createState() => _SelectMenuTileFormState();
+      State<_SelectMenuTile> createState() => _SelectMenuTileState();
     }
 
-    class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
-      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(Notification.all);
+    class _SelectMenuTileState extends State<_SelectMenuTile> {
+      final controller = FRadioSelectGroupController(Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -156,6 +193,111 @@ FSelectMenuTile<Value>(
 </Tabs>
 
 
+### Scrollable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select-menu-tile' variant='scrollable' query={{}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {33}
+    enum Notification { all, direct, limitedTime, timeSensitive, selectedApps, nothing }
+
+    class _ScrollableSelectMenuTile extends StatefulWidget {
+      const _ScrollableSelectMenuTile({super.key});
+
+      @override
+      State<_ScrollableSelectMenuTile> createState() => _ScrollableSelectMenuTileState();
+    }
+
+    class _ScrollableSelectMenuTileState extends State<_ScrollableSelectMenuTile> {
+      final controller = FRadioSelectGroupController(Notification.all);
+
+      @override
+      Widget build(BuildContext context) => FSelectMenuTile(
+        groupController: controller,
+        autoHide: true,
+        validator: (value) => value == null ? 'Select an item' : null,
+        prefixIcon: FIcon(FAssets.icons.bell),
+        title: const Text('Notifications'),
+        details: ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) => Text(
+            switch (controller.values.firstOrNull) {
+              Notification.all => 'All',
+              Notification.direct => 'Direct Messages',
+              Notification.limitedTime => 'Limited Time',
+              Notification.SelectedApps => 'Selected Apps',
+              Notification.timeSensitive => 'Time Sensitive',
+              null || Notification.nothing => 'None',
+            },
+          ),
+        ),
+        maxHeight: 200,
+        menu: [
+          FSelectTile(title: const Text('All'), value: Notification.all),
+          FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
+          FSelectTile(title: const Text('Limited Time'), value: Notification.limitedTime),
+          FSelectTile(title: const Text('Selected Apps'), value: Notification.SelectedApps),
+          FSelectTile(title: const Text('Time Sensitive'), value: Notification.timeSensitive),
+          FSelectTile(title: const Text('None'), value: Notification.nothing),
+        ],
+      );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+### Lazy Scrollable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select-menu-tile' variant='lazy' query={{}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {12, 18-22}
+    class _LazySelectMenuTile extends StatefulWidget {
+      const _SelectMenuTileForm({super.key});
+
+      @override
+      State<_LazySelectMenuTile> createState() => _LazySelectMenuTileState();
+    }
+
+    class _LazySelectMenuTileState extends State<_LazySelectMenuTile> {
+      final controller = FMultiSelectGroupController(values: {1});
+
+      @override
+      Widget build(BuildContext context) => FSelectMenuTile.builder(
+        groupController: controller,
+        autoHide: true,
+        validator: (value) => value == null ? 'Select an item' : null,
+        prefixIcon: FIcon(FAssets.icons.variable),
+        title: const Text('Applicable values'),
+        maxHeight: 200,
+        menuTileBuilder: (context, index) => FSelectTile(
+          title: Text('Tile $index'),
+          value: index,
+        ),
+      );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
 ### Form
 
 <Tabs items={['Preview', 'Code']}>
@@ -174,8 +316,8 @@ FSelectMenuTile<Value>(
     }
 
     class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
-      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+      final _formKey = GlobalKey<FormState>();
+      final controller = FRadioSelectGroupController();
 
       @override
       Widget build(BuildContext context) => Form(
