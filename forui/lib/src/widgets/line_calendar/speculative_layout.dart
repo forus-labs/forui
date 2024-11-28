@@ -13,7 +13,7 @@ class CalendarLayout extends StatefulWidget {
   final FLineCalendarStyle? style;
   final AlignmentDirectional alignment;
   final double? cacheExtent;
-  final FLineCalendarItemBuilder builder;
+  final ValueWidgetBuilder<FLineCalendarItemData> builder;
   final LocalDate start;
   final LocalDate? end;
   final LocalDate? initial;

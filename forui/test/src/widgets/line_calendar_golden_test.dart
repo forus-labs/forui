@@ -230,7 +230,7 @@ void main() {
             controller: FCalendarController.date(),
             builder: (context, state, child) => Stack(
               children: [
-                child,
+                child!,
                 Positioned(
                   top: 5,
                   left: 5,

@@ -6,8 +6,16 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 /// A line calendar displays dates in a single horizontal, scrollable line.
+///
+/// ## Desktop and web note
+/// As the dates scrolls on the horizontal axis (left to right or right to left), hold Shift while using the mouse
+/// scroll wheel to scroll the list.
+///
+/// See:
+/// * https://forui.dev/docs/data/line-calendar for working examples.
+/// * [FLineCalendarStyle] for customizing a line calendar's style.
 class FLineCalendar extends StatelessWidget {
-  static Widget _builder(BuildContext context, FLineCalendarItemState state, Widget child) => child;
+  static Widget _builder(BuildContext context, FLineCalendarItemData state, Widget? child) => child!;
 
   /// The controller.
   final FCalendarController<DateTime?> controller;
@@ -18,14 +26,17 @@ class FLineCalendar extends StatelessWidget {
   /// The alignment to which the initial date will be aligned. Defaults to [Alignment.center].
   final AlignmentDirectional initialDateAlignment;
 
-  /// The cache extent.
+  /// The menu's cache extent in logical pixels.
+  ///
+  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
+  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
   final double? cacheExtent;
 
   /// The builder used to build a line calendar item. Defaults to returning the given child.
   ///
   /// The `child` is the default content with no alterations. Consider wrapping the `child` and other custom decoration
   /// in a [Stack] to avoid re-creating the custom content from scratch.
-  final FLineCalendarItemBuilder builder;
+  final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
   final LocalDate _start;
   final LocalDate? _end;
@@ -103,7 +114,8 @@ class FLineCalendar extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('alignment', initialDateAlignment))
+      ..add(DiagnosticsProperty('initialDateAlignment', initialDateAlignment))
+      ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }

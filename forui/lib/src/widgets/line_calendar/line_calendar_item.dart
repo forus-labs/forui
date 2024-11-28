@@ -7,11 +7,8 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/util.dart';
 
-/// The builder used to build a line calendar item. Defaults to returning [child].
-typedef FLineCalendarItemBuilder = Widget Function(BuildContext context, FLineCalendarItemState state, Widget child);
-
-/// The state of a line calendar item used by [FLineCalendarItemBuilder] to build a line calendar item.
-typedef FLineCalendarItemState = ({
+/// The state of a line calendar item used to build a line calendar item.
+typedef FLineCalendarItemData = ({
   FLineCalendarStyle style,
   FLineCalendarItemStyle itemStyle,
   DateTime date,
@@ -27,7 +24,7 @@ class Item extends StatelessWidget {
   final FLineCalendarStyle style;
   final DateTime date;
   final bool today;
-  final FLineCalendarItemBuilder builder;
+  final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
   const Item({
     required this.controller,
@@ -53,7 +50,7 @@ class Item extends StatelessWidget {
               (false, false) => style.unselectedItemStyle,
             };
 
-            final itemState = (
+            final itemData = (
               style: style,
               itemStyle: itemStyle,
               date: date,
@@ -65,7 +62,7 @@ class Item extends StatelessWidget {
 
             return builder(
               context,
-              itemState,
+              itemData,
               Stack(
                 children: [
                   Positioned.fill(
