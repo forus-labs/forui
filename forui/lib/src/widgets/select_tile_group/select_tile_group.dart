@@ -196,11 +196,13 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
               semanticLabel: semanticLabel,
               tileBuilder: (context, index) {
                 final child = tileBuilder(context, index);
-                return child == null ? null : FSelectTileData<T>(
-                  controller: groupController,
-                  selected: groupController.contains(child.value),
-                  child: child,
-                );
+                return child == null
+                    ? null
+                    : FSelectTileData<T>(
+                        controller: groupController,
+                        selected: groupController.contains(child.value),
+                        child: child,
+                      );
               },
             );
           },
