@@ -210,7 +210,7 @@ void main() {
     }
   });
 
-  group('FTileGroup.builder', () {
+  group('FSelectMenuTile.builder', () {
     testWidgets('lazily built', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
