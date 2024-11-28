@@ -25,14 +25,13 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      FLineCalendar(controller: controller, style: context.theme.lineCalendarStyle.copyWith(
-        itemStyle: context.theme.lineCalendarStyle.itemStyle.copyWith(
-        ),
-      ),),
-    ],
-  );
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FLineCalendar(
+            controller: controller,
+          ),
+        ],
+      );
 
   @override
   void dispose() {
