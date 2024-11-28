@@ -128,11 +128,10 @@ FSelectMenuTile<Value>.builder(
   subtitle: Text('subtitle'),
   details: Text('All'),
   suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
-  menuTileBuilder: (context, index) => FSelectTile(
+  menuTileBuilder: (context, index) => index < 10 ? FSelectTile(
     label: Text('Tile $index'),
     value: Value.something,
-  ),
-  predicate: (context, index) => index < 10,
+  ) : null,
   count: 100,
 );
 ```

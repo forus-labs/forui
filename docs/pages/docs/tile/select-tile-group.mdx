@@ -85,11 +85,10 @@ FSelectTileGroup<Value>.builder(
   description: const Text('Personalize your experience'),
   semanticLabel: 'Settings',
   divider: FTileDivider.indented,
-  tileBuilder: (context, index) => FSelectTile(
+  tileBuilder: (context, index) => index < 10 ? FSelectTile(
     title: Text('Tile $index'),
     value: Value.something,
-  ),
-  predicate: (context, index) => index < 10,
+  ) : null,
   count: 100,
 );
 ```

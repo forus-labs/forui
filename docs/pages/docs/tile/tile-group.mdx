@@ -70,8 +70,7 @@ FTileGroup.builder(
   description: const Text('Personalize your experience'),
   semanticLabel: 'Settings',
   divider: FTileDivider.indented,
-  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-  predicate: (context, index) => index < 10,
+  tileBuilder: (context, index) => index < 10 ? FTile(title: Text('Tile $index')) : null,
   count: 100,
 );
 ```
