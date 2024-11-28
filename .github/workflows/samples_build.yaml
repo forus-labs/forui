@@ -24,7 +24,7 @@ jobs:
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.16.0
+      - uses: subosito/flutter-action@v2.17.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
