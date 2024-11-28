@@ -29,7 +29,16 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            FCalendar(controller: a),
+            FButton(
+              label: const Text('Click me'),
+              onPress: () => showFModalSheet(
+                context: context,
+                side: Layout.ltr,
+                builder: (context) => ListView.builder(
+                  itemBuilder: (context, index) => FTile(title: Text('Tile $index')),
+                ),
+              ),
+            ),
           ],
         ),
       );
