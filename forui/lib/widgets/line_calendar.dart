@@ -5,6 +5,6 @@
 /// See https://forui.dev/docs/data/line-calendar for working examples.
 library forui.widgets.line_calendar;
 
-export '../src/widgets/line_calendar/old/line_calendar.dart';
 export '../src/widgets/line_calendar/line_calendar.dart';
-export '../src/widgets/line_calendar/line_calendar_item.dart' show FLineCalendarItemStateStyle, FLineCalendarItemStyle;
+export '../src/widgets/line_calendar/line_calendar_item.dart'
+    show FLineCalendarItemBuilder, FLineCalendarItemState, FLineCalendarItemStyle;

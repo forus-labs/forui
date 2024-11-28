@@ -1,18 +1,31 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/line_calendar/line_calendar_item.dart';
 import 'package:forui/src/widgets/line_calendar/speculative_layout.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 /// A line calendar displays dates in a single horizontal, scrollable line.
-class FLineCalendar extends StatefulWidget {
+class FLineCalendar extends StatelessWidget {
+  static Widget _builder(BuildContext context, FLineCalendarItemState state, Widget child) => child;
+
   /// The controller.
   final FCalendarController<DateTime?> controller;
 
   /// The style.
   final FLineCalendarStyle? style;
+
+  /// The alignment to which the initial date will be aligned. Defaults to [Alignment.center].
+  final AlignmentDirectional initialDateAlignment;
+
+  /// The cache extent.
+  final double? cacheExtent;
+
+  /// The builder used to build a line calendar item. Defaults to returning the given child.
+  ///
+  /// The `child` is the default content with no alterations. Consider wrapping the `child` and other custom decoration
+  /// in a [Stack] to avoid re-creating the custom content from scratch.
+  final FLineCalendarItemBuilder builder;
 
   final LocalDate _start;
   final LocalDate? _end;
@@ -39,6 +52,9 @@ class FLineCalendar extends StatefulWidget {
   FLineCalendar({
     required this.controller,
     this.style,
+    this.initialDateAlignment = AlignmentDirectional.center,
+    this.cacheExtent,
+    this.builder = _builder,
     DateTime? start,
     DateTime? end,
     DateTime? initial,
@@ -66,115 +82,29 @@ class FLineCalendar extends StatefulWidget {
         );
 
   @override
-  State<FLineCalendar> createState() => _FLineCalendarState();
-}
-
-class _FLineCalendarState extends State<FLineCalendar> {
-  late FLineCalendarStyle _style;
-  ScrollController? _controller;
-  double? _width;
+  Widget build(BuildContext context) => LayoutBuilder(
+        builder: (context, constraints) => CalendarLayout(
+          controller: controller,
+          style: style,
+          cacheExtent: cacheExtent,
+          builder: builder,
+          start: _start,
+          end: _end,
+          initial: _initial,
+          today: _today,
+          constraints: constraints,
+          alignment: initialDateAlignment,
+        ),
+      );
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _style = widget.style ?? context.theme.lineCalendarStyle;
-    _width = _estimateWidth();
-
-    final initial = widget._initial ?? widget._today;
-    final offset = (initial.difference(widget._start).inDays) * _width! + _style.itemPadding.horizontal;
-
-    if (_controller != null) {
-      _controller!.dispose();
-    }
-
-    _controller = ScrollController(initialScrollOffset: offset);
-  }
-
-  double _estimateWidth() {
-    final scale = MediaQuery.textScalerOf(context);
-    final textStyle = DefaultTextStyle.of(context).style;
-    final itemStyle = _style.itemStyle;
-
-    double height(FLineCalendarItemStateStyle style) {
-      final dateHeight = scale.scale(style.dateTextStyle.fontSize ?? textStyle.fontSize ?? 0);
-      final weekdayHeight = scale.scale(style.weekdayTextStyle.fontSize ?? textStyle.fontSize ?? 0);
-      final otherHeight = itemStyle.dateSpacing + (itemStyle.contentSpacing * 2);
-
-      return dateHeight + weekdayHeight + otherHeight;
-    }
-
-    // We use the height to estimate the width.
-    return [
-      height(itemStyle.selectedItemStyle),
-      height(itemStyle.selectedHoveredItemStyle),
-      height(itemStyle.unselectedItemStyle),
-      height(itemStyle.unselectedHoveredItemStyle),
-    ].max!;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final placeholder = widget._today.toNative();
-    return SpeculativeLayout(
-      children: [
-        ItemContent(
-          style: _style.itemStyle,
-          stateStyle: _style.itemStyle.selectedItemStyle,
-          width: _width!,
-          date: placeholder,
-          today: false,
-          hovered: false,
-          focused: false,
-        ),
-        ItemContent(
-          style: _style.itemStyle,
-          stateStyle: _style.itemStyle.selectedItemStyle,
-          width: _width!,
-          date: placeholder,
-          today: false,
-          hovered: true,
-          focused: false,
-        ),
-        ItemContent(
-          style: _style.itemStyle,
-          stateStyle: _style.itemStyle.unselectedItemStyle,
-          width: _width!,
-          date: placeholder,
-          today: false,
-          hovered: false,
-          focused: false,
-        ),
-        ItemContent(
-          style: _style.itemStyle,
-          stateStyle: _style.itemStyle.unselectedItemStyle,
-          width: _width!,
-          date: placeholder,
-          today: false,
-          hovered: true,
-          focused: false,
-        ),
-        ListView.builder(
-          controller: _controller,
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.zero,
-          itemExtent: _width!,
-          itemCount: widget._end != null ? widget._end!.difference(widget._start).inDays + 1 : null,
-          itemBuilder: (context, index) {
-            final date = widget._start.plus(days: index);
-            return Padding(
-              padding: _style.itemPadding,
-              child: Item(
-                style: _style.itemStyle,
-                width: _width!,
-                controller: widget.controller,
-                date: date.toNative(),
-                today: widget._today == date,
-              ),
-            );
-          },
-        ),
-      ],
-    );
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('alignment', initialDateAlignment))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -183,45 +113,166 @@ final class FLineCalendarStyle with Diagnosticable {
   /// The horizontal padding around each calendar item. Defaults to `EdgeInsets.symmetric(horizontal: 6.5)`.
   final EdgeInsets itemPadding;
 
-  /// The calendar item's style.
-  final FLineCalendarItemStyle itemStyle;
+  /// The vertical height between the content and the edges. Defaults to 15.5.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if `contentPadding` is negative.
+  final double itemContentEdgeSpacing;
+
+  /// The vertical height between the date and weekday. Defaults to 2.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if `datePadding` is negative.
+  final double itemContentSpacing;
+
+  /// The selected item's style.
+  final FLineCalendarItemStyle selectedItemStyle;
+
+  /// The selected item's hovered style.
+  final FLineCalendarItemStyle selectedHoveredItemStyle;
+
+  /// The unselected item's style.
+  final FLineCalendarItemStyle unselectedItemStyle;
+
+  /// The unselected item's hovered style.
+  final FLineCalendarItemStyle unselectedHoveredItemStyle;
 
   /// Creates a [FLineCalendarStyle].
   FLineCalendarStyle({
-    required this.itemStyle,
+    required this.selectedItemStyle,
+    required this.selectedHoveredItemStyle,
+    required this.unselectedItemStyle,
+    required this.unselectedHoveredItemStyle,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 6.5),
+    this.itemContentEdgeSpacing = 15.5,
+    this.itemContentSpacing = 2,
   });
 
   /// Creates a [FLineCalendarStyle] that inherits its properties from [colorScheme] and [typography].
-  FLineCalendarStyle.inherit({
+  factory FLineCalendarStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  }) : this(
-          itemStyle: FLineCalendarItemStyle.inherit(
-            colorScheme: colorScheme,
-            typography: typography,
-            style: style,
-          ),
-        );
+  }) {
+    final focusedBorder = Border.all(color: colorScheme.primary, width: style.borderWidth);
+
+    final selectedDateTextStyle = typography.xl.copyWith(
+      color: colorScheme.primaryForeground,
+      fontWeight: FontWeight.w500,
+      height: 0,
+    );
+
+    final selectedWeekdayTextStyle = typography.xs.copyWith(
+      color: colorScheme.primaryForeground,
+      fontWeight: FontWeight.w500,
+      height: 0,
+    );
+
+    final unselectedDateTextStyle = typography.xl.copyWith(
+      color: colorScheme.primary,
+      fontWeight: FontWeight.w500,
+      height: 0,
+    );
+    final unselectedWeekdayTextStyle = typography.xs.copyWith(
+      color: colorScheme.mutedForeground,
+      fontWeight: FontWeight.w500,
+      height: 0,
+    );
+
+    return FLineCalendarStyle(
+      selectedItemStyle: FLineCalendarItemStyle(
+        decoration: BoxDecoration(
+          color: colorScheme.primary,
+          borderRadius: style.borderRadius,
+        ),
+        focusedDecoration: BoxDecoration(
+          color: colorScheme.primary,
+          border: focusedBorder,
+          borderRadius: style.borderRadius,
+        ),
+        todayIndicatorColor: colorScheme.primaryForeground,
+        dateTextStyle: selectedDateTextStyle,
+        weekdayTextStyle: selectedWeekdayTextStyle,
+      ),
+      selectedHoveredItemStyle: FLineCalendarItemStyle(
+        decoration: BoxDecoration(
+          color: colorScheme.hover(colorScheme.primary),
+          borderRadius: style.borderRadius,
+        ),
+        focusedDecoration: BoxDecoration(
+          color: colorScheme.hover(colorScheme.primary),
+          border: focusedBorder,
+          borderRadius: style.borderRadius,
+        ),
+        todayIndicatorColor: colorScheme.hover(colorScheme.primaryForeground),
+        dateTextStyle: selectedDateTextStyle,
+        weekdayTextStyle: selectedWeekdayTextStyle,
+      ),
+      unselectedItemStyle: FLineCalendarItemStyle(
+        decoration: BoxDecoration(
+          color: colorScheme.background,
+          border: Border.all(color: colorScheme.border),
+          borderRadius: style.borderRadius,
+        ),
+        focusedDecoration: BoxDecoration(
+          color: colorScheme.background,
+          border: focusedBorder,
+          borderRadius: style.borderRadius,
+        ),
+        todayIndicatorColor: colorScheme.primary,
+        dateTextStyle: unselectedDateTextStyle,
+        weekdayTextStyle: unselectedWeekdayTextStyle,
+      ),
+      unselectedHoveredItemStyle: FLineCalendarItemStyle(
+        decoration: BoxDecoration(
+          color: colorScheme.secondary,
+          border: Border.all(color: colorScheme.border),
+          borderRadius: style.borderRadius,
+        ),
+        focusedDecoration: BoxDecoration(
+          color: colorScheme.secondary,
+          border: focusedBorder,
+          borderRadius: style.borderRadius,
+        ),
+        todayIndicatorColor: colorScheme.hover(colorScheme.primary),
+        dateTextStyle: unselectedDateTextStyle,
+        weekdayTextStyle: unselectedWeekdayTextStyle,
+      ),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('itemPadding', itemPadding))
-      ..add(DiagnosticsProperty('itemStyle', itemStyle));
+      ..add(DiagnosticsProperty('itemContentEdgeSpacing', itemContentEdgeSpacing))
+      ..add(DiagnosticsProperty('itemContentSpacing', itemContentSpacing))
+      ..add(DiagnosticsProperty('selectedItemStyle', selectedItemStyle))
+      ..add(DiagnosticsProperty('selectedHoveredItemStyle', selectedHoveredItemStyle))
+      ..add(DiagnosticsProperty('unselectedItemStyle', unselectedItemStyle))
+      ..add(DiagnosticsProperty('unselectedHoveredItemStyle', unselectedHoveredItemStyle));
   }
 
   /// Returns a copy of this [FLineCalendarStyle] with the given properties replaced.
   @useResult
   FLineCalendarStyle copyWith({
     EdgeInsets? itemPadding,
-    FLineCalendarItemStyle? itemStyle,
+    double? itemContentEdgeSpacing,
+    double? itemContentSpacing,
+    FLineCalendarItemStyle? selectedItemStyle,
+    FLineCalendarItemStyle? selectedHoveredItemStyle,
+    FLineCalendarItemStyle? unselectedItemStyle,
+    FLineCalendarItemStyle? unselectedHoveredItemStyle,
   }) =>
       FLineCalendarStyle(
         itemPadding: itemPadding ?? this.itemPadding,
-        itemStyle: itemStyle ?? this.itemStyle,
+        itemContentEdgeSpacing: itemContentEdgeSpacing ?? this.itemContentEdgeSpacing,
+        itemContentSpacing: itemContentSpacing ?? this.itemContentSpacing,
+        selectedItemStyle: selectedItemStyle ?? this.selectedItemStyle,
+        selectedHoveredItemStyle: selectedHoveredItemStyle ?? this.selectedHoveredItemStyle,
+        unselectedItemStyle: unselectedItemStyle ?? this.unselectedItemStyle,
+        unselectedHoveredItemStyle: unselectedHoveredItemStyle ?? this.unselectedHoveredItemStyle,
       );
 
   @override
@@ -230,8 +281,20 @@ final class FLineCalendarStyle with Diagnosticable {
       other is FLineCalendarStyle &&
           runtimeType == other.runtimeType &&
           itemPadding == other.itemPadding &&
-          itemStyle == other.itemStyle;
+          itemContentEdgeSpacing == other.itemContentEdgeSpacing &&
+          itemContentSpacing == other.itemContentSpacing &&
+          selectedItemStyle == other.selectedItemStyle &&
+          selectedHoveredItemStyle == other.selectedHoveredItemStyle &&
+          unselectedItemStyle == other.unselectedItemStyle &&
+          unselectedHoveredItemStyle == other.unselectedHoveredItemStyle;
 
   @override
-  int get hashCode => itemPadding.hashCode ^ itemStyle.hashCode;
+  int get hashCode =>
+      itemPadding.hashCode ^
+      itemContentEdgeSpacing.hashCode ^
+      itemContentSpacing.hashCode ^
+      selectedItemStyle.hashCode ^
+      selectedHoveredItemStyle.hashCode ^
+      unselectedItemStyle.hashCode ^
+      unselectedHoveredItemStyle.hashCode;
 }
