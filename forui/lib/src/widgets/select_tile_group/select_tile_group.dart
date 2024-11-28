@@ -18,8 +18,6 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// * [FSelectTile] for a single select tile.
 /// * [FTileGroupStyle] for customizing a select group's appearance.
 class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMixin> {
-  static bool _predicate(BuildContext _, int __) => true;
-
   static Widget _errorBuilder(BuildContext context, String error) => Text(error);
 
   /// The controller.
@@ -139,24 +137,21 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
 
   /// Creates a [FSelectTileGroup] that lazily builds its children.
   ///
-  /// The [tileBuilder] is called for each tile that should be built. It will be called only for indices <= [count] if
-  /// [count] is specified.
+  /// The [tileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to `tileBuilder`.
+  /// * It may return null to signify the end of the group.
+  /// * It may be called more than once for the same index.
+  /// * It will be called only for indices <= [count] if [count] is given.
   ///
-  /// The [predicate] returns true if the tile at the given index should be built. It may be called more than once for
-  /// the same index.
-  ///
-  /// The [count] is the number of tiles to build. If null, [tileBuilder] will be called until [predicate] returns false.
+  /// The [count] is the number of tiles to build. If null, [tileBuilder] will be called until it returns null.
   ///
   /// ## Notes
   /// May result in an infinite loop or run out of memory if:
+  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
   /// * [count] is null and [tileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
-  ///
-  /// * placed in a parent widget that does not constrain its size, i.e. [Column].
   FSelectTileGroup.builder({
     required this.groupController,
-    required FSelectTile<T> Function(BuildContext, int) tileBuilder,
-    bool Function(BuildContext context, int index) predicate = _predicate,
+    required FSelectTile<T>? Function(BuildContext, int) tileBuilder,
     int? count,
     this.scrollController,
     this.style,
@@ -199,10 +194,9 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
               description: description,
               error: error,
               semanticLabel: semanticLabel,
-              predicate: predicate,
               tileBuilder: (context, index) {
                 final child = tileBuilder(context, index);
-                return FSelectTileData<T>(
+                return child == null ? null : FSelectTileData<T>(
                   controller: groupController,
                   selected: groupController.contains(child.value),
                   child: child,

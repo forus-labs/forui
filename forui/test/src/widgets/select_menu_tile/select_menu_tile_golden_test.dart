@@ -156,7 +156,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-menu/${theme.name}/scrollable.png'),
+          matchesGoldenFile('select-menu-tile/${theme.name}/scrollable.png'),
         );
       });
 
@@ -228,7 +228,7 @@ void main() {
       await tester.tap(find.byType(FSelectMenuTile<int>));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-menu/builder/lazy.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/lazy.png'));
     });
 
     testWidgets('limited by count', (tester) async {
@@ -249,10 +249,10 @@ void main() {
       await tester.tap(find.byType(FSelectMenuTile<int>));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-menu/builder/count-limited.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/count-limited.png'));
     });
 
-    testWidgets('limited by predicate', (tester) async {
+    testWidgets('limited by returning null', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
@@ -262,8 +262,8 @@ void main() {
             maxHeight: 500,
             count: 24,
             title: const Text('Title'),
-            menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
-            predicate: (context, index) => index < 2,
+            menuTileBuilder: (context, index) =>
+                index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
           ),
         ),
       );
@@ -271,7 +271,7 @@ void main() {
       await tester.tap(find.byType(FSelectMenuTile<int>));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-menu/builder/predicate-limited.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/null-limited.png'));
     });
   });
 

@@ -660,7 +660,7 @@ void main() {
       );
     });
 
-    testWidgets('limited by predicate', (tester) async {
+    testWidgets('limited by returning null', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           child: FTileGroup.builder(
@@ -668,15 +668,14 @@ void main() {
             description: const Text('Description'),
             maxHeight: 500,
             count: 24,
-            tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-            predicate: (context, index) => index < 2,
+            tileBuilder: (context, index) => index < 2 ? FTile(title: Text('Tile $index')) : null,
           ),
         ),
       );
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/builder/predicate-limited.png'),
+        matchesGoldenFile('tile/group/builder/null-limited.png'),
       );
     });
   });

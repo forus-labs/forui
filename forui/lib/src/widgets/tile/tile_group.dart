@@ -17,8 +17,6 @@ mixin FTileGroupMixin<T extends Widget> on Widget {}
 /// * https://forui.dev/docs/tile/tile-group for working examples.
 /// * [FTileGroupStyle] for customizing a tile's appearance.
 class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
-  static bool _predicate(BuildContext _, int __) => true;
-
   /// The style.
   final FTileGroupStyle? style;
 
@@ -145,23 +143,20 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
 
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
-  /// The [tileBuilder] is called for each tile that should be built. It will be called only for indices <= [count] if
-  /// [count] is specified.
+  /// The [tileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to `tileBuilder`.
+  /// * It may return null to signify the end of the group.
+  /// * It may be called more than once for the same index.
+  /// * It will be called only for indices <= [count] if [count] is given.
   ///
-  /// The [predicate] returns true if the tile at the given index should be built. It may be called more than once for
-  /// the same index.
-  ///
-  /// The [count] is the number of tiles to build. If null, [tileBuilder] will be called until [predicate] returns false.
+  /// The [count] is the number of tiles to build. If null, [tileBuilder] will be called until it returns null.
   ///
   /// ## Notes
   /// May result in an infinite loop or run out of memory if:
+  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
   /// * [count] is null and [tileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
-  ///
-  /// * placed in a parent widget that does not constrain its size, i.e. [Column].
   FTileGroup.builder({
-    required IndexedWidgetBuilder tileBuilder,
-    bool Function(BuildContext context, int index) predicate = _predicate,
+    required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
     this.style,
     this.controller,
@@ -178,18 +173,23 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   })  : assert(0 < maxHeight, 'maxHeight must be positive.'),
         assert(count == null || 0 <= count, 'count must be non-negative.'),
         delegate = ((style, {required enabled}) => SliverChildBuilderDelegate(
-              (context, index) => (predicate(context, index))
-                  ? FTileData(
-                      style: style,
-                      divider: divider,
-                      enabled: enabled,
-                      hovered: false,
-                      focused: false,
-                      index: index,
-                      last: (count != null && index == count - 1) || !predicate(context, index + 1),
-                      child: Builder(builder: (context) => tileBuilder(context, index)),
-                    )
-                  : null,
+              (context, index) {
+                final tile = tileBuilder(context, index);
+                if (tile == null) {
+                  return null;
+                }
+
+                return FTileData(
+                  style: style,
+                  divider: divider,
+                  enabled: enabled,
+                  hovered: false,
+                  focused: false,
+                  index: index,
+                  last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
+                  child: tile,
+                );
+              },
               childCount: count,
             ));
 

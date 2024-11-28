@@ -20,8 +20,6 @@ import 'package:forui/src/widgets/select_group/select_group_controller.dart';
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
 class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
-  static bool _predicate(BuildContext _, int __) => true;
-
   static Widget _errorBuilder(BuildContext context, String error) => Text(error);
 
   /// The controller that controls the selected tiles.
@@ -252,26 +250,23 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuTileBuilder] is called for each tile that should be built. It will be called only for indices <= [count]
-  /// if [count] is specified.
+  /// The [menuTileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to
+  /// `menuTileBuilder`.
+  /// * It may return null to signify the end of the group.
+  /// * It may be called more than once for the same index.
+  /// * It will be called only for indices <= [count] if [count] is given.
   ///
-  /// The [predicate] returns true if the tile at the given index should be built. It may be called more than once for
-  /// the same index.
-  ///
-  /// The [count] is the number of tiles to build. If null, [menuTileBuilder] will be called until [predicate] returns
-  /// false.
+  /// The [count] is the number of tiles to build. If null, [menuTileBuilder] will be called until it returns null.
   ///
   /// ## Notes
   /// May result in an infinite loop or run out of memory if:
+  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
   /// * [count] is null and [menuTileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
-  ///
-  /// * placed in a parent widget that does not constrain its size, i.e. [Column].
   FSelectMenuTile.builder({
     required this.groupController,
     required this.title,
-    required FSelectTile<T> Function(BuildContext, int) menuTileBuilder,
-    bool Function(BuildContext context, int index) predicate = _predicate,
+    required FSelectTile<T>? Function(BuildContext, int) menuTileBuilder,
     int? count,
     this.popoverController,
     this.scrollController,
@@ -354,7 +349,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
                   semanticLabel: semanticLabel,
                   divider: divider,
                   tileBuilder: menuTileBuilder,
-                  predicate: predicate,
                   count: count,
                 ),
               ),
