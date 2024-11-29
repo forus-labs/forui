@@ -253,7 +253,7 @@ class FSheetStyle with Diagnosticable {
   /// Creates a [FSheetStyle].
   const FSheetStyle({
     required this.backgroundColor,
-    this.enterDuration = const Duration(milliseconds: 250),
+    this.enterDuration = const Duration(milliseconds: 200),
     this.exitDuration = const Duration(milliseconds: 200),
     this.flingVelocity = 700,
     this.closeProgressThreshold = 0.5,
