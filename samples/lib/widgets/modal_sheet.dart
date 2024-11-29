@@ -139,11 +139,13 @@ class DraggableModalSheetPage extends Sample {
             builder: (context, controller) => ScrollConfiguration(
               // This is required to enable dragging on desktop.
               // See https://github.com/flutter/flutter/issues/101903 for more information.
-              behavior: ScrollConfiguration.of(context).copyWith(dragDevices: {
-                PointerDeviceKind.touch,
-                PointerDeviceKind.mouse,
-                PointerDeviceKind.trackpad,
-              }),
+              behavior: ScrollConfiguration.of(context).copyWith(
+                dragDevices: {
+                  PointerDeviceKind.touch,
+                  PointerDeviceKind.mouse,
+                  PointerDeviceKind.trackpad,
+                },
+              ),
               child: FTileGroup.builder(
                 count: 25,
                 controller: controller,
