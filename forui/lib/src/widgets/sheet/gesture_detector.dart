@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// The sheet's gesture detector. We use a [RawGestureDetector] instead of a [GestureDetector] because the latter
 /// doesn't allow `onlyAcceptDragOnThreshold` to be configured.

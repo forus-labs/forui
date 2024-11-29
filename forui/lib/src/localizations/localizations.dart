@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -348,178 +349,375 @@ class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['af', 'am', 'ar', 'as', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'eu', 'fa', 'fi', 'fil', 'fr', 'gl', 'gsw', 'gu', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka', 'kk', 'km', 'kn', 'ko', 'ky', 'lo', 'lt', 'lv', 'mk', 'ml', 'mn', 'mr', 'ms', 'my', 'nb', 'ne', 'nl', 'no', 'or', 'pa', 'pl', 'ps', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw', 'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'uz', 'vi', 'zh', 'zu'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+        'af',
+        'am',
+        'ar',
+        'as',
+        'az',
+        'be',
+        'bg',
+        'bn',
+        'bs',
+        'ca',
+        'cs',
+        'cy',
+        'da',
+        'de',
+        'el',
+        'en',
+        'es',
+        'et',
+        'eu',
+        'fa',
+        'fi',
+        'fil',
+        'fr',
+        'gl',
+        'gsw',
+        'gu',
+        'he',
+        'hi',
+        'hr',
+        'hu',
+        'hy',
+        'id',
+        'is',
+        'it',
+        'ja',
+        'ka',
+        'kk',
+        'km',
+        'kn',
+        'ko',
+        'ky',
+        'lo',
+        'lt',
+        'lv',
+        'mk',
+        'ml',
+        'mn',
+        'mr',
+        'ms',
+        'my',
+        'nb',
+        'ne',
+        'nl',
+        'no',
+        'or',
+        'pa',
+        'pl',
+        'ps',
+        'pt',
+        'ro',
+        'ru',
+        'si',
+        'sk',
+        'sl',
+        'sq',
+        'sr',
+        'sv',
+        'sw',
+        'ta',
+        'te',
+        'th',
+        'tl',
+        'tr',
+        'uk',
+        'ur',
+        'uz',
+        'vi',
+        'zh',
+        'zu'
+      ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_FLocalizationsDelegate old) => false;
 }
 
 FLocalizations lookupFLocalizations(Locale locale) {
-
   // Lookup logic when language+script codes are specified.
   switch (locale.languageCode) {
-    case 'sr': {
-  switch (locale.scriptCode) {
-    case 'Latn': return FLocalizationsSrLatn();
-   }
-  break;
-   }
+    case 'sr':
+      {
+        switch (locale.scriptCode) {
+          case 'Latn':
+            return FLocalizationsSrLatn();
+        }
+        break;
+      }
   }
 
   // Lookup logic when language+country codes are specified.
   switch (locale.languageCode) {
-    case 'de': {
-  switch (locale.countryCode) {
-    case 'CH': return FLocalizationsDeCh();
-   }
-  break;
-   }
-    case 'en': {
-  switch (locale.countryCode) {
-    case 'AU': return FLocalizationsEnAu();
-case 'CA': return FLocalizationsEnCa();
-case 'GB': return FLocalizationsEnGb();
-case 'IE': return FLocalizationsEnIe();
-case 'IN': return FLocalizationsEnIn();
-case 'NZ': return FLocalizationsEnNz();
-case 'SG': return FLocalizationsEnSg();
-case 'ZA': return FLocalizationsEnZa();
-   }
-  break;
-   }
-    case 'es': {
-  switch (locale.countryCode) {
-    case '419': return FLocalizationsEs419();
-case 'AR': return FLocalizationsEsAr();
-case 'BO': return FLocalizationsEsBo();
-case 'CL': return FLocalizationsEsCl();
-case 'CO': return FLocalizationsEsCo();
-case 'CR': return FLocalizationsEsCr();
-case 'DO': return FLocalizationsEsDo();
-case 'EC': return FLocalizationsEsEc();
-case 'GT': return FLocalizationsEsGt();
-case 'HN': return FLocalizationsEsHn();
-case 'MX': return FLocalizationsEsMx();
-case 'NI': return FLocalizationsEsNi();
-case 'PA': return FLocalizationsEsPa();
-case 'PE': return FLocalizationsEsPe();
-case 'PR': return FLocalizationsEsPr();
-case 'PY': return FLocalizationsEsPy();
-case 'SV': return FLocalizationsEsSv();
-case 'US': return FLocalizationsEsUs();
-case 'UY': return FLocalizationsEsUy();
-case 'VE': return FLocalizationsEsVe();
-   }
-  break;
-   }
-    case 'fr': {
-  switch (locale.countryCode) {
-    case 'CA': return FLocalizationsFrCa();
-   }
-  break;
-   }
-    case 'pt': {
-  switch (locale.countryCode) {
-    case 'PT': return FLocalizationsPtPt();
-   }
-  break;
-   }
-    case 'zh': {
-  switch (locale.countryCode) {
-    case 'HK': return FLocalizationsZhHk();
-case 'TW': return FLocalizationsZhTw();
-   }
-  break;
-   }
+    case 'de':
+      {
+        switch (locale.countryCode) {
+          case 'CH':
+            return FLocalizationsDeCh();
+        }
+        break;
+      }
+    case 'en':
+      {
+        switch (locale.countryCode) {
+          case 'AU':
+            return FLocalizationsEnAu();
+          case 'CA':
+            return FLocalizationsEnCa();
+          case 'GB':
+            return FLocalizationsEnGb();
+          case 'IE':
+            return FLocalizationsEnIe();
+          case 'IN':
+            return FLocalizationsEnIn();
+          case 'NZ':
+            return FLocalizationsEnNz();
+          case 'SG':
+            return FLocalizationsEnSg();
+          case 'ZA':
+            return FLocalizationsEnZa();
+        }
+        break;
+      }
+    case 'es':
+      {
+        switch (locale.countryCode) {
+          case '419':
+            return FLocalizationsEs419();
+          case 'AR':
+            return FLocalizationsEsAr();
+          case 'BO':
+            return FLocalizationsEsBo();
+          case 'CL':
+            return FLocalizationsEsCl();
+          case 'CO':
+            return FLocalizationsEsCo();
+          case 'CR':
+            return FLocalizationsEsCr();
+          case 'DO':
+            return FLocalizationsEsDo();
+          case 'EC':
+            return FLocalizationsEsEc();
+          case 'GT':
+            return FLocalizationsEsGt();
+          case 'HN':
+            return FLocalizationsEsHn();
+          case 'MX':
+            return FLocalizationsEsMx();
+          case 'NI':
+            return FLocalizationsEsNi();
+          case 'PA':
+            return FLocalizationsEsPa();
+          case 'PE':
+            return FLocalizationsEsPe();
+          case 'PR':
+            return FLocalizationsEsPr();
+          case 'PY':
+            return FLocalizationsEsPy();
+          case 'SV':
+            return FLocalizationsEsSv();
+          case 'US':
+            return FLocalizationsEsUs();
+          case 'UY':
+            return FLocalizationsEsUy();
+          case 'VE':
+            return FLocalizationsEsVe();
+        }
+        break;
+      }
+    case 'fr':
+      {
+        switch (locale.countryCode) {
+          case 'CA':
+            return FLocalizationsFrCa();
+        }
+        break;
+      }
+    case 'pt':
+      {
+        switch (locale.countryCode) {
+          case 'PT':
+            return FLocalizationsPtPt();
+        }
+        break;
+      }
+    case 'zh':
+      {
+        switch (locale.countryCode) {
+          case 'HK':
+            return FLocalizationsZhHk();
+          case 'TW':
+            return FLocalizationsZhTw();
+        }
+        break;
+      }
   }
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'af': return FLocalizationsAf();
-    case 'am': return FLocalizationsAm();
-    case 'ar': return FLocalizationsAr();
-    case 'as': return FLocalizationsAs();
-    case 'az': return FLocalizationsAz();
-    case 'be': return FLocalizationsBe();
-    case 'bg': return FLocalizationsBg();
-    case 'bn': return FLocalizationsBn();
-    case 'bs': return FLocalizationsBs();
-    case 'ca': return FLocalizationsCa();
-    case 'cs': return FLocalizationsCs();
-    case 'cy': return FLocalizationsCy();
-    case 'da': return FLocalizationsDa();
-    case 'de': return FLocalizationsDe();
-    case 'el': return FLocalizationsEl();
-    case 'en': return FLocalizationsEn();
-    case 'es': return FLocalizationsEs();
-    case 'et': return FLocalizationsEt();
-    case 'eu': return FLocalizationsEu();
-    case 'fa': return FLocalizationsFa();
-    case 'fi': return FLocalizationsFi();
-    case 'fil': return FLocalizationsFil();
-    case 'fr': return FLocalizationsFr();
-    case 'gl': return FLocalizationsGl();
-    case 'gsw': return FLocalizationsGsw();
-    case 'gu': return FLocalizationsGu();
-    case 'he': return FLocalizationsHe();
-    case 'hi': return FLocalizationsHi();
-    case 'hr': return FLocalizationsHr();
-    case 'hu': return FLocalizationsHu();
-    case 'hy': return FLocalizationsHy();
-    case 'id': return FLocalizationsId();
-    case 'is': return FLocalizationsIs();
-    case 'it': return FLocalizationsIt();
-    case 'ja': return FLocalizationsJa();
-    case 'ka': return FLocalizationsKa();
-    case 'kk': return FLocalizationsKk();
-    case 'km': return FLocalizationsKm();
-    case 'kn': return FLocalizationsKn();
-    case 'ko': return FLocalizationsKo();
-    case 'ky': return FLocalizationsKy();
-    case 'lo': return FLocalizationsLo();
-    case 'lt': return FLocalizationsLt();
-    case 'lv': return FLocalizationsLv();
-    case 'mk': return FLocalizationsMk();
-    case 'ml': return FLocalizationsMl();
-    case 'mn': return FLocalizationsMn();
-    case 'mr': return FLocalizationsMr();
-    case 'ms': return FLocalizationsMs();
-    case 'my': return FLocalizationsMy();
-    case 'nb': return FLocalizationsNb();
-    case 'ne': return FLocalizationsNe();
-    case 'nl': return FLocalizationsNl();
-    case 'no': return FLocalizationsNo();
-    case 'or': return FLocalizationsOr();
-    case 'pa': return FLocalizationsPa();
-    case 'pl': return FLocalizationsPl();
-    case 'ps': return FLocalizationsPs();
-    case 'pt': return FLocalizationsPt();
-    case 'ro': return FLocalizationsRo();
-    case 'ru': return FLocalizationsRu();
-    case 'si': return FLocalizationsSi();
-    case 'sk': return FLocalizationsSk();
-    case 'sl': return FLocalizationsSl();
-    case 'sq': return FLocalizationsSq();
-    case 'sr': return FLocalizationsSr();
-    case 'sv': return FLocalizationsSv();
-    case 'sw': return FLocalizationsSw();
-    case 'ta': return FLocalizationsTa();
-    case 'te': return FLocalizationsTe();
-    case 'th': return FLocalizationsTh();
-    case 'tl': return FLocalizationsTl();
-    case 'tr': return FLocalizationsTr();
-    case 'uk': return FLocalizationsUk();
-    case 'ur': return FLocalizationsUr();
-    case 'uz': return FLocalizationsUz();
-    case 'vi': return FLocalizationsVi();
-    case 'zh': return FLocalizationsZh();
-    case 'zu': return FLocalizationsZu();
+    case 'af':
+      return FLocalizationsAf();
+    case 'am':
+      return FLocalizationsAm();
+    case 'ar':
+      return FLocalizationsAr();
+    case 'as':
+      return FLocalizationsAs();
+    case 'az':
+      return FLocalizationsAz();
+    case 'be':
+      return FLocalizationsBe();
+    case 'bg':
+      return FLocalizationsBg();
+    case 'bn':
+      return FLocalizationsBn();
+    case 'bs':
+      return FLocalizationsBs();
+    case 'ca':
+      return FLocalizationsCa();
+    case 'cs':
+      return FLocalizationsCs();
+    case 'cy':
+      return FLocalizationsCy();
+    case 'da':
+      return FLocalizationsDa();
+    case 'de':
+      return FLocalizationsDe();
+    case 'el':
+      return FLocalizationsEl();
+    case 'en':
+      return FLocalizationsEn();
+    case 'es':
+      return FLocalizationsEs();
+    case 'et':
+      return FLocalizationsEt();
+    case 'eu':
+      return FLocalizationsEu();
+    case 'fa':
+      return FLocalizationsFa();
+    case 'fi':
+      return FLocalizationsFi();
+    case 'fil':
+      return FLocalizationsFil();
+    case 'fr':
+      return FLocalizationsFr();
+    case 'gl':
+      return FLocalizationsGl();
+    case 'gsw':
+      return FLocalizationsGsw();
+    case 'gu':
+      return FLocalizationsGu();
+    case 'he':
+      return FLocalizationsHe();
+    case 'hi':
+      return FLocalizationsHi();
+    case 'hr':
+      return FLocalizationsHr();
+    case 'hu':
+      return FLocalizationsHu();
+    case 'hy':
+      return FLocalizationsHy();
+    case 'id':
+      return FLocalizationsId();
+    case 'is':
+      return FLocalizationsIs();
+    case 'it':
+      return FLocalizationsIt();
+    case 'ja':
+      return FLocalizationsJa();
+    case 'ka':
+      return FLocalizationsKa();
+    case 'kk':
+      return FLocalizationsKk();
+    case 'km':
+      return FLocalizationsKm();
+    case 'kn':
+      return FLocalizationsKn();
+    case 'ko':
+      return FLocalizationsKo();
+    case 'ky':
+      return FLocalizationsKy();
+    case 'lo':
+      return FLocalizationsLo();
+    case 'lt':
+      return FLocalizationsLt();
+    case 'lv':
+      return FLocalizationsLv();
+    case 'mk':
+      return FLocalizationsMk();
+    case 'ml':
+      return FLocalizationsMl();
+    case 'mn':
+      return FLocalizationsMn();
+    case 'mr':
+      return FLocalizationsMr();
+    case 'ms':
+      return FLocalizationsMs();
+    case 'my':
+      return FLocalizationsMy();
+    case 'nb':
+      return FLocalizationsNb();
+    case 'ne':
+      return FLocalizationsNe();
+    case 'nl':
+      return FLocalizationsNl();
+    case 'no':
+      return FLocalizationsNo();
+    case 'or':
+      return FLocalizationsOr();
+    case 'pa':
+      return FLocalizationsPa();
+    case 'pl':
+      return FLocalizationsPl();
+    case 'ps':
+      return FLocalizationsPs();
+    case 'pt':
+      return FLocalizationsPt();
+    case 'ro':
+      return FLocalizationsRo();
+    case 'ru':
+      return FLocalizationsRu();
+    case 'si':
+      return FLocalizationsSi();
+    case 'sk':
+      return FLocalizationsSk();
+    case 'sl':
+      return FLocalizationsSl();
+    case 'sq':
+      return FLocalizationsSq();
+    case 'sr':
+      return FLocalizationsSr();
+    case 'sv':
+      return FLocalizationsSv();
+    case 'sw':
+      return FLocalizationsSw();
+    case 'ta':
+      return FLocalizationsTa();
+    case 'te':
+      return FLocalizationsTe();
+    case 'th':
+      return FLocalizationsTh();
+    case 'tl':
+      return FLocalizationsTl();
+    case 'tr':
+      return FLocalizationsTr();
+    case 'uk':
+      return FLocalizationsUk();
+    case 'ur':
+      return FLocalizationsUr();
+    case 'uz':
+      return FLocalizationsUz();
+    case 'vi':
+      return FLocalizationsVi();
+    case 'zh':
+      return FLocalizationsZh();
+    case 'zu':
+      return FLocalizationsZu();
   }
 
-  throw FlutterError(
-    'FLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+  throw FlutterError('FLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }
