@@ -67,6 +67,8 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/icon/image', page: ImageIconRoute.page),
         AutoRoute(path: '/label/vertical', page: VerticalLabelRoute.page),
         AutoRoute(path: '/label/horizontal', page: HorizontalLabelRoute.page),
+        AutoRoute(path: '/modal-sheet/default', page: ModalSheetRoute.page),
+        AutoRoute(path: '/modal-sheet/draggable', page: DraggableModalSheetRoute.page),
         AutoRoute(path: '/popover/default', page: PopoverRoute.page),
         AutoRoute(path: '/popover-menu/default', page: PopoverMenuRoute.page),
         AutoRoute(path: '/portal/default', page: PortalRoute.page),

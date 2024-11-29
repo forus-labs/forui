@@ -14,45 +14,14 @@ class Sheet extends StatefulWidget {
 
   static void _onClosing() {}
 
-  /// The animation controller that controls the bottom sheet's entrance and exit animations.
-  ///
-  /// This widget will manipulate the position of this animation, it is not just a passive observer.
   final AnimationController? controller;
-
-  /// The sheet's layout.
-  final Layout layout;
-
-  /// The sheet's style.
   final FSheetStyle style;
-
-  /// The minimum and maximum size.
+  final Layout layout;
   final BoxConstraints constraints;
-
-  /// True if the sheet can be dragged up and down/left and right, and dismissed by swiping in the opposite direction.
-  ///
-  /// Defaults to true.
-  ///
-  /// If this is true, the [controller] must not be null.
   final bool draggable;
-
-  /// A builder for the sheet's contents.
   final WidgetBuilder builder;
-
-  /// Called when the user begins dragging the bottom sheet vertically, if [draggable] is true.
-  ///
-  /// Would typically be used to change the bottom sheet animation curve so that it tracks the user's finger accurately.
   final GestureDragStartCallback? onDragStart;
-
-  /// Called when the user stops dragging the sheet, if [draggable] is true.
-  ///
-  /// Would typically be used to reset the bottom sheet animation curve, so that it animates non-linearly. Called before
-  /// [onClosing] if the sheet is closing.
   final void Function(DragEndDetails details, {required bool closing})? onDragEnd;
-
-  /// Called when the sheet begins to close.
-  ///
-  /// A sheet might be prevented from closing (e.g., by user interaction) even after this callback is called. For this
-  /// reason, this callback might be call multiple times for a given sheet.
   final VoidCallback onClosing;
 
   const Sheet({
