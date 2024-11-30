@@ -13,10 +13,12 @@ void main() {
     );
 
     test('selectable(...)', () {
-      FCalendarController.date(selectable: (date) {
-        expect(date, DateTime.utc(2024));
-        return true;
-      }).selectable(DateTime(2024, 1, 1, 1));
+      FCalendarController.date(
+        selectable: (date) {
+          expect(date, DateTime.utc(2024));
+          return true;
+        },
+      ).selectable(DateTime(2024, 1, 1, 1));
     });
 
     for (final (date, expected) in [
@@ -58,11 +60,12 @@ void main() {
 
     test('selectable(...)', () {
       FCalendarController.date(
-          autoConvert: false,
-          selectable: (date) {
-            expect(date, DateTime(2024, 1, 1, 1));
-            return true;
-          }).selectable(DateTime(2024, 1, 1, 1));
+        autoConvert: false,
+        selectable: (date) {
+          expect(date, DateTime(2024, 1, 1, 1));
+          return true;
+        },
+      ).selectable(DateTime(2024, 1, 1, 1));
     });
 
     for (final (date, expected) in [
@@ -98,10 +101,12 @@ void main() {
     );
 
     test('selectable(...)', () {
-      FCalendarController.dates(selectable: (date) {
-        expect(date, DateTime.utc(2024));
-        return true;
-      }).selectable(DateTime(2024, 1, 1, 1));
+      FCalendarController.dates(
+        selectable: (date) {
+          expect(date, DateTime.utc(2024));
+          return true;
+        },
+      ).selectable(DateTime(2024, 1, 1, 1));
     });
 
     for (final (date, expected) in [
@@ -142,11 +147,12 @@ void main() {
 
     test('selectable(...)', () {
       FCalendarController.dates(
-          autoConvert: false,
-          selectable: (date) {
-            expect(date, DateTime(2024, 1, 1, 1));
-            return true;
-          }).selectable(DateTime(2024, 1, 1, 1));
+        autoConvert: false,
+        selectable: (date) {
+          expect(date, DateTime(2024, 1, 1, 1));
+          return true;
+        },
+      ).selectable(DateTime(2024, 1, 1, 1));
     });
 
     for (final (date, expected) in [
@@ -181,10 +187,12 @@ void main() {
     );
 
     test('selectable(...)', () {
-      FCalendarController.range(selectable: (date) {
-        expect(date, DateTime.utc(2024));
-        return true;
-      }).selectable(DateTime(2024, 1, 1, 1));
+      FCalendarController.range(
+        selectable: (date) {
+          expect(date, DateTime.utc(2024));
+          return true;
+        },
+      ).selectable(DateTime(2024, 1, 1, 1));
     });
 
     for (final (initial, date, expected) in [
