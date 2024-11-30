@@ -25,8 +25,8 @@ class CalendarPage extends Sample {
   @override
   Widget sample(BuildContext context) => FCalendar(
         controller: FCalendarController.date(initialSelection: selected),
-        start: DateTime.utc(2000),
-        end: DateTime.utc(2030),
+        start: DateTime(2000),
+        end: DateTime(2030),
       );
 }
 
@@ -39,11 +39,11 @@ class DatesCalendarPage extends Sample {
   @override
   Widget sample(BuildContext context) => FCalendar(
         controller: FCalendarController.dates(
-          initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
+          initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
         ),
-        start: DateTime.utc(2000),
-        today: DateTime.utc(2024, 7, 15),
-        end: DateTime.utc(2030),
+        start: DateTime(2000),
+        today: DateTime(2024, 7, 15),
+        end: DateTime(2030),
       );
 }
 
@@ -56,12 +56,12 @@ class UnselectableCalendarPage extends Sample {
   @override
   Widget sample(BuildContext context) => FCalendar(
         controller: FCalendarController.dates(
-          initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
-          selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+          initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
+          selectable: (date) => !{DateTime(2024, 7, 18), DateTime(2024, 7, 19)}.contains(date),
         ),
-        start: DateTime.utc(2000),
-        today: DateTime.utc(2024, 7, 15),
-        end: DateTime.utc(2030),
+        start: DateTime(2000),
+        today: DateTime(2024, 7, 15),
+        end: DateTime(2030),
       );
 }
 
@@ -73,11 +73,9 @@ class RangeCalendarPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FCalendar(
-        controller: FCalendarController.range(
-          initialSelection: (DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)),
-        ),
-        start: DateTime.utc(2000),
-        today: DateTime.utc(2024, 7, 15),
-        end: DateTime.utc(2030),
+        controller: FCalendarController.range(initialSelection: (DateTime(2024, 7, 17), DateTime(2024, 7, 20))),
+        start: DateTime(2000),
+        today: DateTime(2024, 7, 15),
+        end: DateTime(2030),
       );
 }

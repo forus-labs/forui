@@ -2,6 +2,14 @@
 
 ### Additions
 
+* Add `autoConvert` to `FCalendarController.date(...)`.
+
+* Add `autoConvert` to `FCalendarController.dates(...)`.
+
+* Add `autoConvert` to `FCalendarController.range(...)`.
+
+* Add `FCalendar.dayBuilder`.
+
 * Add `FTileGroup.builder`.
 
 * Add `FSelectTileGroup.builder`.
@@ -9,6 +17,16 @@
 * Add `FSelectMenuTile.builder`.
 
 ### Changes
+
+* Change `FCalendarController.date(...)` to automatically convert and truncate all DateTimes to dates in UTC timezone.
+
+* Change `FCalendarController.dates(...)` to automatically convert and truncate all DateTimes to dates in UTC timezone.
+
+* Change `FCalendarController.ranges(...)` to automatically convert and truncate all DateTimes to dates in UTC timezone.
+
+* Change `FCalendar.start` to be optional and default to 1st January 1900.
+
+* Change `FCalendar.end` to be optional and default to 1st January 2100.
 
 * Change `FTheme` to internally extend `InheritedTheme`.
 

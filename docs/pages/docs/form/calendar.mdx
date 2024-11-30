@@ -25,8 +25,8 @@ to customize the date selection behavior.
         ```dart
         FCalendar(
           controller: FCalendarController.date(initialSelection: selected),
-          start: DateTime.utc(2000),
-          end: DateTime.utc(2030),
+          start: DateTime(2000),
+          end: DateTime(2030),
         );
         ```
     </Tabs.Tab>
@@ -39,14 +39,15 @@ to customize the date selection behavior.
 ```dart
 FCalendar(
   controller: FCalendarController.date(
-    initialSelection: DateTime.utc(2024, 9, 13),
+    initialSelection: DateTime(2024, 9, 13),
     selectable: (date) => allowedDates.contains(date),
   ),
-  start: DateTime.utc(2024),
-  end: DateTime.utc(2030),
-  today: DateTime.utc(2024, 7, 14),
+  dayBuilder: (context, data, child) => !child,
+  start: DateTime(2024),
+  end: DateTime(2030),
+  today: DateTime(2024, 7, 14),
   initialType = FCalendarPickerType.yearMonth,
-  initialMonth = DateTime.utc(2024, 9),
+  initialMonth = DateTime(2024, 9),
   onMonthChange: (date) => print(date),
   onPress: (date) => print(date),
   onLongPress: (date) => print(date),
@@ -63,8 +64,8 @@ FCalendar(
         ```dart {2}
         FCalendar(
           controller: FCalendarController.date(),
-          start: DateTime.utc(2000),
-          end: DateTime.utc(2030),
+          start: DateTime(2000),
+          end: DateTime(2030),
         );
         ```
     </Tabs.Tab>
@@ -79,11 +80,11 @@ FCalendar(
         ```dart {2-4}
         FCalendar(
           controller: FCalendarController.dates(
-            initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
+            initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
           ),
-          start: DateTime.utc(2000),
-          today: DateTime.utc(2024, 7, 15),
-          end: DateTime.utc(2030),
+          start: DateTime(2000),
+          today: DateTime(2024, 7, 15),
+          end: DateTime(2030),
         );
         ```
     </Tabs.Tab>
@@ -98,12 +99,12 @@ FCalendar(
       ```dart {4}
       FCalendar(
         controller: FCalendarController.dates(
-          initialSelections: {DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)},
-          selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+          initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
+          selectable: (date) => !{DateTime(2024, 7, 18), DateTime(2024, 7, 19)}.contains(date),
         ),
-        start: DateTime.utc(2000),
-        today: DateTime.utc(2024, 7, 15),
-        end: DateTime.utc(2030),
+        start: DateTime(2000),
+        today: DateTime(2024, 7, 15),
+        end: DateTime(2030),
       );
       ```
     </Tabs.Tab>
@@ -118,11 +119,11 @@ FCalendar(
         ```dart {2-4}
         FCalendar(
           controller: FCalendarController.range(
-            initialSelection: (DateTime.utc(2024, 7, 17), DateTime.utc(2024, 7, 20)),
+            initialSelection: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),
           ),
-          start: DateTime.utc(2000),
-          today: DateTime.utc(2024, 7, 15),
-          end: DateTime.utc(2030),
+          start: DateTime(2000),
+          today: DateTime(2024, 7, 15),
+          end: DateTime(2030),
         );
         ```
     </Tabs.Tab>
