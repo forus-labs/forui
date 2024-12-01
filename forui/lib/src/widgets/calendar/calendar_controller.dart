@@ -88,7 +88,7 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * the given dates in [value] is not in UTC timezone and [autoConvert] is false.
+  /// * the given dates in [initialSelection] is not in UTC timezone and [autoConvert] is false.
   /// * the end date is less than start date.
   static FCalendarController<(DateTime, DateTime)?> range({
     (DateTime, DateTime)? initialSelection,
