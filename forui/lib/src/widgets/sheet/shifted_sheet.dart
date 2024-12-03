@@ -6,18 +6,13 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/src/foundation/rendering.dart';
 
-@internal
-
-///
-typedef SizeChangeCallback = void Function(Size size);
-
 /// This is based on Material's _BottomSheetLayoutWithSizeListener.
 @internal
 class ShiftedSheet extends SingleChildRenderObjectWidget {
   final Layout side;
   final double value;
   final double? mainAxisMaxRatio;
-  final SizeChangeCallback onChange;
+  final ValueChanged<Size>? onChange;
 
   const ShiftedSheet({
     required this.side,
@@ -61,14 +56,14 @@ class _ShiftedSheet extends RenderShiftedBox {
   Layout _side;
   double _value;
   double? _mainAxisMaxRatio;
-  SizeChangeCallback _onChange;
+  ValueChanged<Size>? _onChange;
   Size _previous = Size.zero;
 
   _ShiftedSheet({
     required Layout side,
     required double value,
     required double? mainAxisMaxRatio,
-    required SizeChangeCallback onChange,
+    required ValueChanged<Size>? onChange,
   })  : _side = side,
         _value = value,
         _mainAxisMaxRatio = mainAxisMaxRatio,
@@ -90,7 +85,7 @@ class _ShiftedSheet extends RenderShiftedBox {
 
       if (_previous != childSize) {
         _previous = childSize;
-        _onChange.call(_previous);
+        _onChange?.call(_previous);
       }
     }
   }
@@ -135,28 +130,16 @@ class _ShiftedSheet extends RenderShiftedBox {
   Size computeDryLayout(BoxConstraints constraints) => constraints.biggest;
 
   @override
-  double computeMinIntrinsicWidth(double height) {
-    final width = BoxConstraints.tightForFinite(height: height).biggest.width;
-    return width.isFinite ? width : 0.0;
-  }
+  double computeMinIntrinsicWidth(double height) => 0.0;
 
   @override
-  double computeMaxIntrinsicWidth(double height) {
-    final width = BoxConstraints.tightForFinite(height: height).biggest.width;
-    return width.isFinite ? width : 0.0;
-  }
+  double computeMaxIntrinsicWidth(double height) => 0.0;
 
   @override
-  double computeMinIntrinsicHeight(double width) {
-    final height = BoxConstraints.tightForFinite(width: width).biggest.height;
-    return height.isFinite ? height : 0.0;
-  }
+  double computeMinIntrinsicHeight(double width) => 0.0;
 
   @override
-  double computeMaxIntrinsicHeight(double width) {
-    final height = BoxConstraints.tightForFinite(width: width).biggest.height;
-    return height.isFinite ? height : 0.0;
-  }
+  double computeMaxIntrinsicHeight(double width) => 0.0;
 
   Layout get side => _side;
 
@@ -185,9 +168,9 @@ class _ShiftedSheet extends RenderShiftedBox {
     }
   }
 
-  SizeChangeCallback get onChange => _onChange;
+  ValueChanged<Size>? get onChange => _onChange;
 
-  set onChange(SizeChangeCallback value) {
+  set onChange(ValueChanged<Size>? value) {
     if (_onChange != value) {
       _onChange = value;
       markNeedsLayout();

@@ -7,4 +7,5 @@
 library forui.widgets.sheet;
 
 export '../src/widgets/sheet/modal_sheet.dart';
+export '../src/widgets/sheet/page_sheet.dart';
 export '../src/widgets/sheet/sheet.dart' show FSheetStyle;

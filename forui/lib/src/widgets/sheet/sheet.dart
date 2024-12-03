@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
 import 'package:meta/meta.dart';
 
@@ -17,24 +18,26 @@ class Sheet extends StatefulWidget {
   static void _onClosing() {}
 
   final AnimationController? controller;
+  final Animation<double>? animation;
   final FSheetStyle style;
-  final Layout layout;
+  final Layout side;
+  final double? mainAxisMaxRatio;
   final BoxConstraints constraints;
   final bool draggable;
   final WidgetBuilder builder;
-  final GestureDragStartCallback? onDragStart;
-  final void Function(DragEndDetails details, {required bool closing})? onDragEnd;
+  final ValueChanged<Size>? onChange;
   final VoidCallback onClosing;
 
   const Sheet({
     required this.controller,
     required this.style,
-    required this.layout,
+    required this.side,
+    required this.mainAxisMaxRatio,
     required this.builder,
+    this.animation,
     this.constraints = const BoxConstraints(),
     this.draggable = true,
-    this.onDragStart,
-    this.onDragEnd,
+    this.onChange,
     this.onClosing = _onClosing,
     super.key,
   }) : assert(!draggable || controller != null, 'Draggable sheets must have a controller.');
@@ -47,25 +50,31 @@ class Sheet extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('animation', animation))
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('layout', layout))
+      ..add(EnumProperty('side', side))
+      ..add(DoubleProperty('mainAxisMaxRatio', mainAxisMaxRatio))
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(FlagProperty('draggable', value: draggable, ifTrue: 'draggable'))
       ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('onDragStart', onDragStart))
-      ..add(ObjectFlagProperty.has('onDragEnd', onDragEnd))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onClosing', onClosing));
   }
 }
 
 class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
+  static const _cubic = Cubic(0.0, 0.0, 0.2, 1.0);
+
   final GlobalKey _key = GlobalKey(debugLabel: 'Sheet child');
   late AnimationController _controller;
+  late Animation<double> _animation;
+  ParametricCurve<double> _curve = _cubic;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
+    _animation = widget.animation ?? _controller.view;
   }
 
   @override
@@ -82,15 +91,17 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    assert(debugCheckHasMediaQuery(context), '');
+
     Widget sheet = Align(
-      alignment: switch (widget.layout) {
+      alignment: switch (widget.side) {
         Layout.ttb => Alignment.topCenter,
         Layout.btt => Alignment.bottomCenter,
         Layout.ltr => Alignment.centerLeft,
         Layout.rtl => Alignment.centerRight,
       },
-      heightFactor: widget.layout.vertical ? 1 : null,
-      widthFactor: widget.layout.vertical ? null : 1,
+      heightFactor: widget.side.vertical ? 1 : null,
+      widthFactor: widget.side.vertical ? null : 1,
       child: ConstrainedBox(
         constraints: widget.constraints,
         child: NotificationListener<DraggableScrollableNotification>(
@@ -108,18 +119,41 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
     if (widget.draggable) {
       sheet = SheetGestureDetector(
-        layout: widget.layout,
-        onStart: widget.onDragStart,
+        layout: widget.side,
+        // Allow the sheet to track the user's finger accurately.
+        onStart: (details) => _curve = Curves.linear,
         onUpdate: _dragUpdate,
+        // Allow the sheet to animate smoothly from its current position.
         onEnd: _dragEnd,
         child: sheet,
       );
     }
 
-    return sheet;
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) => Semantics(
+        scopesRoute: true,
+        namesRoute: true,
+        label: switch (defaultTargetPlatform) {
+          TargetPlatform.iOS || TargetPlatform.macOS => null,
+          _ => FLocalizations.of(context).dialogLabel,
+        },
+        explicitChildNodes: true,
+        child: ClipRect(
+          child: ShiftedSheet(
+            side: widget.side,
+            onChange: widget.onChange,
+            value: _curve.transform(_animation.value),
+            mainAxisMaxRatio: widget.mainAxisMaxRatio,
+            child: child,
+          ),
+        ),
+      ),
+      child: sheet,
+    );
   }
 
-  GestureDragUpdateCallback get _dragUpdate => switch (widget.layout) {
+  GestureDragUpdateCallback get _dragUpdate => switch (widget.side) {
         Layout.ttb => (details) {
             if (!_dismissing) {
               _controller.value += details.primaryDelta! / _key.currentChildHeight;
@@ -143,7 +177,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       };
 
   GestureDragEndCallback get _dragEnd {
-    final double Function(DragEndDetails) velocity = switch (widget.layout) {
+    final double Function(DragEndDetails) velocity = switch (widget.side) {
       Layout.ttb => (details) => details.primaryVelocity! / _key.currentChildHeight,
       Layout.btt => (details) => -details.primaryVelocity! / _key.currentChildHeight,
       Layout.ltr => (details) => details.primaryVelocity! / _key.currentChildWidth,
@@ -174,7 +208,8 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         _controller.forward();
       }
 
-      widget.onDragEnd?.call(details, closing: closing);
+      // Allow the sheet to animate smoothly from its current position.
+      _curve = Split(_animation.value, endCurve: _cubic);
       if (closing) {
         widget.onClosing();
       }

@@ -226,13 +226,28 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
     final content = DisplayFeatureSubScreen(
       anchorPoint: anchorPoint,
       child: Builder(
-        builder: (context) => _ModalSheet<T>(
-          route: this,
+        builder: (context) => Sheet(
+          controller: controller,
+          animation: animation,
           side: side,
           style: style,
           constraints: constraints,
           mainAxisMaxRatio: mainAxisMaxRatio,
           draggable: draggable,
+          builder: builder,
+          onChange: (size) => _didChangeBarrierSemanticsClip(
+            switch (side) {
+              Layout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
+              Layout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
+              Layout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
+              Layout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
+            },
+          ),
+          onClosing: () {
+            if (isCurrent) {
+              Navigator.pop(context);
+            }
+          },
         ),
       ),
     );
@@ -304,95 +319,4 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 
   @override
   Duration get reverseTransitionDuration => style.exitDuration;
-}
-
-class _ModalSheet<T> extends StatefulWidget {
-  final FModalSheetRoute<T> route;
-  final Layout side;
-  final FSheetStyle style;
-  final double? mainAxisMaxRatio;
-  final BoxConstraints constraints;
-  final bool draggable;
-
-  const _ModalSheet({
-    required this.route,
-    required this.side,
-    required this.style,
-    required this.mainAxisMaxRatio,
-    required this.constraints,
-    required this.draggable,
-    super.key,
-  });
-
-  @override
-  _ModalSheetState<T> createState() => _ModalSheetState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('route', route))
-      ..add(EnumProperty('side', side))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('mainAxisMaxRatio', mainAxisMaxRatio))
-      ..add(DiagnosticsProperty('constraints', constraints))
-      ..add(FlagProperty('draggable', value: draggable, ifTrue: 'draggable'));
-  }
-}
-
-class _ModalSheetState<T> extends State<_ModalSheet<T>> {
-  static const _cubic = Cubic(0.0, 0.0, 0.2, 1.0);
-
-  ParametricCurve<double> _curve = _cubic;
-
-  @override
-  Widget build(BuildContext context) {
-    assert(debugCheckHasMediaQuery(context), '');
-
-    return AnimatedBuilder(
-      animation: widget.route.animation!,
-      builder: (context, child) => Semantics(
-        scopesRoute: true,
-        namesRoute: true,
-        label: switch (defaultTargetPlatform) {
-          TargetPlatform.iOS || TargetPlatform.macOS => null,
-          _ => FLocalizations.of(context).dialogLabel,
-        },
-        explicitChildNodes: true,
-        child: ClipRect(
-          child: ShiftedSheet(
-            side: widget.side,
-            onChange: (size) => widget.route._didChangeBarrierSemanticsClip(
-              switch (widget.side) {
-                Layout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
-                Layout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
-                Layout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
-                Layout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
-              },
-            ),
-            value: _curve.transform(widget.route.animation!.value),
-            mainAxisMaxRatio: widget.mainAxisMaxRatio,
-            child: child,
-          ),
-        ),
-      ),
-      child: Sheet(
-        controller: widget.route._animationController,
-        layout: widget.side,
-        style: widget.style,
-        constraints: widget.constraints,
-        draggable: widget.draggable,
-        builder: widget.route.builder,
-        // Allow the bottom sheet to track the user's finger accurately.
-        onDragStart: (details) => _curve = Curves.linear,
-        // Allow the sheet to animate smoothly from its current position.
-        onDragEnd: (details, {required closing}) => _curve = Split(widget.route.animation!.value, endCurve: _cubic),
-        onClosing: () {
-          if (widget.route.isCurrent) {
-            Navigator.pop(context);
-          }
-        },
-      ),
-    );
-  }
 }
