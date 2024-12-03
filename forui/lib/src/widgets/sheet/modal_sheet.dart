@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
-import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
 /// Shows a modal sheet that appears from the given [side].
 ///
@@ -95,7 +94,6 @@ Future<T?> showFModalSheet<T>({
 ///
 /// A closely related widget is a persistent sheet, which shows information that supplements the primary content of the
 /// app without preventing the user from interacting with the app.
-// TODO: reference persistent bottom sheet when implemented.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/modal-sheet for working examples.
@@ -195,7 +193,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
     required this.style,
     required this.side,
     required this.builder,
-    required this.mainAxisMaxRatio,
+    this.mainAxisMaxRatio = 9 / 16,
     this.capturedThemes,
     this.barrierOnTapHint,
     this.barrierLabel,
@@ -223,45 +221,31 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    final content = DisplayFeatureSubScreen(
+    final sheet = Sheet(
+      controller: controller,
+      animation: animation,
+      side: side,
+      style: style,
+      constraints: constraints,
+      mainAxisMaxRatio: mainAxisMaxRatio,
       anchorPoint: anchorPoint,
-      child: Builder(
-        builder: (context) => Sheet(
-          controller: controller,
-          animation: animation,
-          side: side,
-          style: style,
-          constraints: constraints,
-          mainAxisMaxRatio: mainAxisMaxRatio,
-          draggable: draggable,
-          builder: builder,
-          onChange: (size) => _didChangeBarrierSemanticsClip(
-            switch (side) {
-              Layout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
-              Layout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
-              Layout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
-              Layout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
-            },
-          ),
-          onClosing: () {
-            if (isCurrent) {
-              Navigator.pop(context);
-            }
-          },
-        ),
+      draggable: draggable,
+      useSafeArea: useSafeArea,
+      builder: builder,
+      onChange: (size) => _didChangeBarrierSemanticsClip(
+        switch (side) {
+          Layout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
+          Layout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
+          Layout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
+          Layout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
+        },
       ),
+      onClosing: () {
+        if (isCurrent) {
+          Navigator.pop(context);
+        }
+      },
     );
-
-    final sheet = switch ((side, useSafeArea)) {
-      (Layout.ttb, true) => SafeArea(top: false, child: content),
-      (Layout.btt, true) => SafeArea(bottom: false, child: content),
-      (Layout.ltr, true) => SafeArea(left: false, child: content),
-      (Layout.rtl, true) => SafeArea(right: false, child: content),
-      (Layout.ttb, false) => MediaQuery.removePadding(context: context, removeBottom: true, child: content),
-      (Layout.btt, false) => MediaQuery.removePadding(context: context, removeTop: true, child: content),
-      (Layout.ltr, false) => MediaQuery.removePadding(context: context, removeRight: true, child: content),
-      (Layout.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: content),
-    };
 
     return capturedThemes?.wrap(sheet) ?? sheet;
   }

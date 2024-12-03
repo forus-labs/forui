@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/gesture_detector.dart';
+import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
 @internal
 class Sheet extends StatefulWidget {
@@ -23,7 +23,9 @@ class Sheet extends StatefulWidget {
   final Layout side;
   final double? mainAxisMaxRatio;
   final BoxConstraints constraints;
+  final Offset? anchorPoint;
   final bool draggable;
+  final bool useSafeArea;
   final WidgetBuilder builder;
   final ValueChanged<Size>? onChange;
   final VoidCallback onClosing;
@@ -33,6 +35,8 @@ class Sheet extends StatefulWidget {
     required this.style,
     required this.side,
     required this.mainAxisMaxRatio,
+    required this.anchorPoint,
+    required this.useSafeArea,
     required this.builder,
     this.animation,
     this.constraints = const BoxConstraints(),
@@ -55,7 +59,9 @@ class Sheet extends StatefulWidget {
       ..add(EnumProperty('side', side))
       ..add(DoubleProperty('mainAxisMaxRatio', mainAxisMaxRatio))
       ..add(DiagnosticsProperty('constraints', constraints))
+      ..add(DiagnosticsProperty('anchorPoint', anchorPoint))
       ..add(FlagProperty('draggable', value: draggable, ifTrue: 'draggable'))
+      ..add(FlagProperty('useSafeArea', value: useSafeArea, ifTrue: 'useSafeArea'))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onClosing', onClosing));
@@ -93,26 +99,29 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context), '');
 
-    Widget sheet = Align(
-      alignment: switch (widget.side) {
-        Layout.ttb => Alignment.topCenter,
-        Layout.btt => Alignment.bottomCenter,
-        Layout.ltr => Alignment.centerLeft,
-        Layout.rtl => Alignment.centerRight,
-      },
-      heightFactor: widget.side.vertical ? 1 : null,
-      widthFactor: widget.side.vertical ? null : 1,
-      child: ConstrainedBox(
-        constraints: widget.constraints,
-        child: NotificationListener<DraggableScrollableNotification>(
-          key: _key,
-          onNotification: (notification) {
-            if (notification.extent == notification.minExtent && notification.shouldCloseOnMinExtent) {
-              widget.onClosing();
-            }
-            return false;
-          },
-          child: widget.builder(context),
+    Widget sheet = DisplayFeatureSubScreen(
+      anchorPoint: widget.anchorPoint,
+      child: Align(
+        alignment: switch (widget.side) {
+          Layout.ttb => Alignment.topCenter,
+          Layout.btt => Alignment.bottomCenter,
+          Layout.ltr => Alignment.centerLeft,
+          Layout.rtl => Alignment.centerRight,
+        },
+        heightFactor: widget.side.vertical ? 1 : null,
+        widthFactor: widget.side.vertical ? null : 1,
+        child: ConstrainedBox(
+          constraints: widget.constraints,
+          child: NotificationListener<DraggableScrollableNotification>(
+            key: _key,
+            onNotification: (notification) {
+              if (notification.extent == notification.minExtent && notification.shouldCloseOnMinExtent) {
+                widget.onClosing();
+              }
+              return false;
+            },
+            child: widget.builder(context),
+          ),
         ),
       ),
     );
@@ -123,11 +132,21 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         // Allow the sheet to track the user's finger accurately.
         onStart: (details) => _curve = Curves.linear,
         onUpdate: _dragUpdate,
-        // Allow the sheet to animate smoothly from its current position.
         onEnd: _dragEnd,
         child: sheet,
       );
     }
+
+    sheet = switch ((widget.side, widget.useSafeArea)) {
+      (Layout.ttb, true) => SafeArea(top: false, child: sheet),
+      (Layout.btt, true) => SafeArea(bottom: false, child: sheet),
+      (Layout.ltr, true) => SafeArea(left: false, child: sheet),
+      (Layout.rtl, true) => SafeArea(right: false, child: sheet),
+      (Layout.ttb, false) => MediaQuery.removePadding(context: context, removeBottom: true, child: sheet),
+      (Layout.btt, false) => MediaQuery.removePadding(context: context, removeTop: true, child: sheet),
+      (Layout.ltr, false) => MediaQuery.removePadding(context: context, removeRight: true, child: sheet),
+      (Layout.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: sheet),
+    };
 
     return AnimatedBuilder(
       animation: _animation,
