@@ -41,7 +41,7 @@ class _TooltipControllerHook extends Hook<FTooltipController> {
 class _TooltipControllerHookState extends HookState<FTooltipController, _TooltipControllerHook> {
   late final FTooltipController _controller = FTooltipController(
     vsync: hook.vsync,
-    animationDuration: hook.animationDuration,
+    duration: hook.animationDuration,
   );
 
   @override
