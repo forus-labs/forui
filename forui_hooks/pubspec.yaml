@@ -21,7 +21,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
+dependency_overrides:
+  forui:
+    path: ../forui
 
 flutter:
 

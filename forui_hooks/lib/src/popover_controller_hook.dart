@@ -41,7 +41,7 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
 class _PopoverControllerHookState extends HookState<FPopoverController, _PopoverControllerHook> {
   late final FPopoverController _controller = FPopoverController(
     vsync: hook.vsync,
-    duration: hook.animationDuration,
+    animationDuration: hook.animationDuration,
   );
 
   @override
