@@ -22,7 +22,7 @@ jobs:
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.17.0
+      - uses: subosito/flutter-action@v2.18.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -51,7 +51,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-      - uses: subosito/flutter-action@v2.17.0
+      - uses: subosito/flutter-action@v2.18.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
@@ -71,7 +71,7 @@ jobs:
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2.17.0
+      - uses: subosito/flutter-action@v2.18.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
