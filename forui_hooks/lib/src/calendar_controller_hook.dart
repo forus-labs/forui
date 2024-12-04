@@ -36,7 +36,7 @@ FCalendarController<DateTime?> useFDateCalendarController({
       create: (hook) => FCalendarController.date(
         initialSelection: hook.value,
         selectable: hook.selectable,
-        autoConvert: autoConvert,
+        truncateAndStripTimezone: autoConvert,
       ),
     ));
 
@@ -70,7 +70,7 @@ FCalendarController<Set<DateTime>> useFDatesCalendarController({
       create: (hook) => FCalendarController.dates(
         initialSelections: hook.value,
         selectable: hook.selectable,
-        autoConvert: autoConvert,
+        truncateAndStripTimezone: autoConvert,
       ),
     ));
 
@@ -110,7 +110,7 @@ FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
       create: (hook) => FCalendarController.range(
         initialSelection: hook.value,
         selectable: hook.selectable,
-        autoConvert: autoConvert,
+        truncateAndStripTimezone: autoConvert,
       ),
     ));
 

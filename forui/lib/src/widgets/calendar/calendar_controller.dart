@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 
 bool _true(DateTime _) => true;
 
-DateTime _convert(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+DateTime _stripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
 
 /// A controller that controls date selection in a calendar.
 ///
@@ -20,25 +20,25 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   ///
   /// [selectable] will always return true if not given.
   ///
-  /// [autoConvert] determines whether the controller should truncate and convert all given [DateTime]s to dates in
-  /// UTC timezone. Defaults to true.
+  /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
+  /// dates in UTC timezone. Defaults to true.
   ///
   /// ```dart
-  /// DateTime convert(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+  /// DateTime truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
   /// ```
   ///
-  /// [autoConvert] should be set to false if you can guarantee that all dates are in UTC timezone (with the help of an
-  /// 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local timezone or with a
-  /// time component when [autoConvert] is false is undefined behavior.
+  /// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
+  /// the help of a 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
+  /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if [initialSelection] is not in UTC timezone and [autoConvert] is false.
+  /// Throws [AssertionError] if [initialSelection] is not in UTC timezone and [truncateAndStripTimezone] is false.
   static FCalendarController<DateTime?> date({
     DateTime? initialSelection,
     Predicate<DateTime>? selectable,
-    bool autoConvert = true,
+    bool truncateAndStripTimezone = true,
   }) =>
-      autoConvert
+      truncateAndStripTimezone
           ? _AutoDateController(initialSelection: initialSelection, selectable: selectable)
           : _DateController(initialSelection: initialSelection, selectable: selectable);
 
@@ -46,25 +46,26 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   ///
   /// [selectable] will always return true if not given.
   ///
-  /// [autoConvert] determines whether the controller should truncate and convert all given [DateTime]s to dates in
-  /// UTC timezone. Defaults to true.
+  /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
+  /// dates in UTC timezone. Defaults to true.
   ///
   /// ```dart
-  /// DateTime convert(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+  /// DateTime truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
   /// ```
   ///
-  /// [autoConvert] should be set to false if you can guarantee that all dates are in UTC timezone (with the help of an
-  /// 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local timezone or with a
-  /// time component when [autoConvert] is false is undefined behavior.
+  /// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
+  /// the help of an 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
+  /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone and [autoConvert] is false.
+  /// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone and [truncateAndStripTimezone]
+  /// is false.
   static FCalendarController<Set<DateTime>> dates({
     Set<DateTime> initialSelections = const {},
     Predicate<DateTime>? selectable,
-    bool autoConvert = true,
+    bool truncateAndStripTimezone = true,
   }) =>
-      autoConvert
+      truncateAndStripTimezone
           ? _AutoDatesController(initialSelections: initialSelections, selectable: selectable)
           : _DatesController(initialSelections: initialSelections, selectable: selectable);
 
@@ -72,30 +73,30 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   ///
   /// [selectable] will always return true if not given.
   ///
-  /// [autoConvert] determines whether the controller should truncate and convert all given [DateTime]s to dates in
-  /// UTC timezone. Defaults to true.
+  /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
+  /// dates in UTC timezone. Defaults to true.
   ///
   /// ```dart
-  /// DateTime convert(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+  /// DateTime truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
   /// ```
   ///
-  /// [autoConvert] should be set to false if you can guarantee that all dates are in UTC timezone (with the help of an
-  /// 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local timezone or with a
-  /// time component when [autoConvert] is false is undefined behavior.
+  /// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
+  /// the help of an 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
+  /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
   ///
-  /// Both the start and end dates of the range is inclusive. Unselectable dates within the selected range are
-  /// selected regardless.
+  /// Both the start and end dates of the range is inclusive. Unselectable dates within the selected range are selected
+  /// regardless.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * the given dates in [initialSelection] is not in UTC timezone and [autoConvert] is false.
+  /// * the given dates in [initialSelection] is not in UTC timezone and [truncateAndStripTimezone] is false.
   /// * the end date is less than start date.
   static FCalendarController<(DateTime, DateTime)?> range({
     (DateTime, DateTime)? initialSelection,
     Predicate<DateTime>? selectable,
-    bool autoConvert = true,
+    bool truncateAndStripTimezone = true,
   }) =>
-      autoConvert
+      truncateAndStripTimezone
           ? _AutoRangeController(initialSelection: initialSelection, selectable: selectable)
           : _RangeController(initialSelection: initialSelection, selectable: selectable);
 
@@ -124,22 +125,22 @@ class _AutoDateController extends FCalendarController<DateTime?> {
     DateTime? initialSelection,
     Predicate<DateTime>? selectable,
   })  : _selectable = selectable ?? _true,
-        super(initialSelection = initialSelection == null ? null : _convert(initialSelection));
+        super(initialSelection = initialSelection == null ? null : _stripTimezone(initialSelection));
 
   @override
-  bool selectable(DateTime date) => _selectable(_convert(date));
+  bool selectable(DateTime date) => _selectable(_stripTimezone(date));
 
   @override
-  bool selected(DateTime date) => value == _convert(date);
+  bool selected(DateTime date) => value == _stripTimezone(date);
 
   @override
   void select(DateTime date) {
-    date = _convert(date);
+    date = _stripTimezone(date);
     super.value = value == date ? null : date;
   }
 
   @override
-  set value(DateTime? value) => super.value = value == null ? null : _convert(value);
+  set value(DateTime? value) => super.value = value == null ? null : _stripTimezone(value);
 }
 
 class _DateController extends FCalendarController<DateTime?> {
@@ -170,22 +171,22 @@ final class _AutoDatesController extends FCalendarController<Set<DateTime>> {
     Set<DateTime> initialSelections = const {},
     Predicate<DateTime>? selectable,
   })  : _selectable = selectable ?? _true,
-        super(initialSelections.map(_convert).toSet());
+        super(initialSelections.map(_stripTimezone).toSet());
 
   @override
-  bool selectable(DateTime date) => _selectable(_convert(date));
+  bool selectable(DateTime date) => _selectable(_stripTimezone(date));
 
   @override
-  bool selected(DateTime date) => value.contains(_convert(date));
+  bool selected(DateTime date) => value.contains(_stripTimezone(date));
 
   @override
   void select(DateTime date) {
     final copy = {...value};
-    super.value = copy..toggle(_convert(date));
+    super.value = copy..toggle(_stripTimezone(date));
   }
 
   @override
-  set value(Set<DateTime> value) => super.value = value.map(_convert).toSet();
+  set value(Set<DateTime> value) => super.value = value.map(_stripTimezone).toSet();
 }
 
 final class _DatesController extends FCalendarController<Set<DateTime>> {
@@ -217,8 +218,9 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
     Predicate<DateTime>? selectable,
   })  : _selectable = selectable ?? _true,
         super(
-          initialSelection =
-              initialSelection == null ? null : (_convert(initialSelection.$1), _convert(initialSelection.$2)),
+          initialSelection = initialSelection == null
+              ? null
+              : (_stripTimezone(initialSelection.$1), _stripTimezone(initialSelection.$2)),
         ) {
     final range = value;
     assert(
@@ -228,7 +230,7 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
   }
 
   @override
-  bool selectable(DateTime date) => _selectable(_convert(date));
+  bool selectable(DateTime date) => _selectable(_stripTimezone(date));
 
   @override
   bool selected(DateTime date) {
@@ -242,7 +244,7 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
 
   @override
   void select(DateTime date) {
-    date = _convert(date);
+    date = _stripTimezone(date);
     if (value == null) {
       super.value = (date, date);
       return;
@@ -264,7 +266,7 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
 
   @override
   set value((DateTime, DateTime)? value) =>
-      super.value = value == null ? null : (_convert(value.$1), _convert(value.$2));
+      super.value = value == null ? null : (_stripTimezone(value.$1), _stripTimezone(value.$2));
 }
 
 final class _RangeController extends FCalendarController<(DateTime, DateTime)?> {

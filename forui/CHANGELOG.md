@@ -2,11 +2,11 @@
 
 ### Additions
 
-* Add `autoConvert` to `FCalendarController.date(...)`.
+* Add `truncateAndStripTimezone` to `FCalendarController.date(...)`.
 
-* Add `autoConvert` to `FCalendarController.dates(...)`.
+* Add `truncateAndStripTimezone` to `FCalendarController.dates(...)`.
 
-* Add `autoConvert` to `FCalendarController.range(...)`.
+* Add `truncateAndStripTimezone` to `FCalendarController.range(...)`.
 
 * Add `FCalendar.dayBuilder`.
 
@@ -18,11 +18,11 @@
 
 ### Changes
 
-* Change `FCalendarController.date(...)` to automatically convert and truncate all DateTimes to dates in UTC timezone.
+* Change `FCalendarController.date(...)` to automatically strip and truncate all DateTimes to dates in UTC timezone.
 
-* Change `FCalendarController.dates(...)` to automatically convert and truncate all DateTimes to dates in UTC timezone.
+* Change `FCalendarController.dates(...)` to automatically strip and truncate all DateTimes to dates in UTC timezone.
 
-* Change `FCalendarController.ranges(...)` to automatically convert and truncate all DateTimes to dates in UTC timezone.
+* Change `FCalendarController.ranges(...)` to automatically strip and truncate all DateTimes to dates in UTC timezone.
 
 * Change `FCalendar.start` to be optional and default to 1st January 1900.
 
