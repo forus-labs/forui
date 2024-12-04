@@ -56,7 +56,7 @@ class Example extends HookWidget {
 
 ## Documentation
 
-Visit [forui.dev/docs/hooks](https://forui.dev/docs/hooks) to view the documentation.
+Visit [forui.dev/docs](https://forui.dev/docs) to view the documentation.
 
 ## Contributing
 
