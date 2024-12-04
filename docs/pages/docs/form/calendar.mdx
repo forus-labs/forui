@@ -1,4 +1,4 @@
-import { Tabs } from 'nextra/components';
+import { Callout, Tabs } from 'nextra/components';
 import { Widget } from "../../../components/widget.tsx";
 import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
@@ -16,6 +16,9 @@ is used to customize the date selection behavior.
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.calendar/forui.widgets.calendar-library.html"/>
 </LinkBadgeGroup>
 
+<Callout type="info">
+    `FCalendar` and all `FCalendarController`s return `DateTime`s in UTC timezone, truncated to the nearest day.
+</Callout>
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
