@@ -6,6 +6,16 @@ import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 
+/// A calendar day's data.
+typedef FCalendarDayData = ({
+  FCalendarDayPickerStyle style,
+  DateTime date,
+  bool current,
+  bool today,
+  bool selectable,
+  bool selected,
+});
+
 @internal
 abstract class Entry extends StatelessWidget {
   final FCalendarEntryStyle style;
@@ -14,6 +24,7 @@ abstract class Entry extends StatelessWidget {
   factory Entry.day({
     required FCalendarDayPickerStyle style,
     required FLocalizations localizations,
+    required ValueWidgetBuilder<FCalendarDayData> dayBuilder,
     required LocalDate date,
     required FocusNode focusNode,
     required bool current,
@@ -34,7 +45,16 @@ abstract class Entry extends StatelessWidget {
       final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius;
       final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius;
 
-      return _Content(
+      final dayData = (
+        style: style,
+        date: date.toNative(),
+        current: current,
+        today: today,
+        selectable: canSelect,
+        selected: isSelected,
+      );
+
+      final child = _Content(
         style: entryStyle,
         borderRadius: switch (Directionality.maybeOf(context)) {
           TextDirection.ltr || null => BorderRadius.horizontal(left: yesterday, right: tomorrow),
@@ -44,6 +64,8 @@ abstract class Entry extends StatelessWidget {
         data: data,
         current: today,
       );
+
+      return dayBuilder(context, dayData, child);
     }
 
     if (canSelect) {

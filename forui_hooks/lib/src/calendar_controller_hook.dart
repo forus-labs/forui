@@ -9,9 +9,24 @@ typedef _Create<T> = FCalendarController<T> Function(_CalendarControllerHook<T>)
 /// Creates a [FCalendarController] that allows only a single date to be selected and is automatically disposed.
 ///
 /// [selectable] will always return true if not given.
+///
+/// [autoConvert] determines whether the controller should truncate and convert all given [DateTime]s to dates in
+/// UTC timezone. Defaults to true.
+///
+/// ```dart
+/// DateTime convert(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+/// ```
+///
+/// [autoConvert] should be set to false if you can guarantee that all dates are in UTC timezone (with the help of an
+/// 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local timezone or with a
+/// time component when [autoConvert] is false is undefined behavior.
+///
+/// ## Contract
+/// Throws [AssertionError] if [initialSelection] is not in UTC timezone and [autoConvert] is false.
 FCalendarController<DateTime?> useFDateCalendarController({
   DateTime? initialSelection,
   bool Function(DateTime)? selectable,
+  bool autoConvert = true,
   List<Object?>? keys,
 }) =>
     use(_CalendarControllerHook<DateTime?>(
@@ -21,15 +36,31 @@ FCalendarController<DateTime?> useFDateCalendarController({
       create: (hook) => FCalendarController.date(
         initialSelection: hook.value,
         selectable: hook.selectable,
+        truncateAndStripTimezone: autoConvert,
       ),
     ));
 
 /// Creates a [FCalendarController] that allows only multiple dates to be selected and is automatically disposed.
 ///
 /// [selectable] will always return true if not given.
+///
+/// [autoConvert] determines whether the controller should truncate and convert all given [DateTime]s to dates in
+/// UTC timezone. Defaults to true.
+///
+/// ```dart
+/// DateTime convert(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+/// ```
+///
+/// [autoConvert] should be set to false if you can guarantee that all dates are in UTC timezone (with the help of an
+/// 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local timezone or with a
+/// time component when [autoConvert] is false is undefined behavior.
+///
+/// ## Contract
+/// Throws [AssertionError] if the dates in [initialSelections] are not in UTC timezone and [autoConvert] is false.
 FCalendarController<Set<DateTime>> useFDatesCalendarController({
   Set<DateTime> initialSelections = const {},
   bool Function(DateTime)? selectable,
+  bool autoConvert = true,
   List<Object?>? keys,
 }) =>
     use(_CalendarControllerHook<Set<DateTime>>(
@@ -39,6 +70,7 @@ FCalendarController<Set<DateTime>> useFDatesCalendarController({
       create: (hook) => FCalendarController.dates(
         initialSelections: hook.value,
         selectable: hook.selectable,
+        truncateAndStripTimezone: autoConvert,
       ),
     ));
 
@@ -47,11 +79,28 @@ FCalendarController<Set<DateTime>> useFDatesCalendarController({
 ///
 /// [selectable] will always return true if not given.
 ///
-/// Both the start and end dates of the range is inclusive. The selected dates are always in UTC timezone and truncated
-/// to the nearest day. Unselectable dates within the selected range are selected regardless.
+/// [autoConvert] determines whether the controller should truncate and convert all given [DateTime]s to dates in
+/// UTC timezone. Defaults to true.
+///
+/// ```dart
+/// DateTime convert(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+/// ```
+///
+/// [autoConvert] should be set to false if you can guarantee that all dates are in UTC timezone (with the help of an
+/// 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local timezone or with a
+/// time component when [autoConvert] is false is undefined behavior.
+///
+/// Both the start and end dates of the range is inclusive. Unselectable dates within the selected range are
+/// selected regardless.
+///
+/// ## Contract
+/// Throws [AssertionError] if:
+/// * the given dates in [initialSelection] is not in UTC timezone and [autoConvert] is false.
+/// * the end date is less than start date.
 FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
   (DateTime, DateTime)? initialSelection,
   bool Function(DateTime)? selectable,
+  bool autoConvert = true,
   List<Object?>? keys,
 }) =>
     use(_CalendarControllerHook<(DateTime, DateTime)?>(
@@ -61,6 +110,7 @@ FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
       create: (hook) => FCalendarController.range(
         initialSelection: hook.value,
         selectable: hook.selectable,
+        truncateAndStripTimezone: autoConvert,
       ),
     ));
 

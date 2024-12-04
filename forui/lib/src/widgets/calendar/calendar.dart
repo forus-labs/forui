@@ -23,19 +23,27 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 /// * [FCalendarController] for customizing a calendar's date selection behavior.
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatelessWidget {
+  static Widget _dayBuilder(BuildContext context, FCalendarDayData data, Widget? child) => child!;
+
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
 
   /// A controller that determines if a date is selected.
   final FCalendarController controller;
 
-  /// The start date, inclusive. It is truncated to the nearest date.
+  /// The builder used to build a day in the day picker. Defaults to returning the given child.
+  ///
+  /// The `child` is the default content with no alterations. Consider wrapping the `child` and other custom decoration
+  /// in a [Stack] to avoid re-creating the custom day content from scratch.
+  final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
+
+  /// The start date, inclusive. It is truncated to the nearest date. Defaults to 1st January, 1900.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [end] <= [start].
   final DateTime start;
 
-  /// The end date, exclusive. It is truncated to the nearest date.
+  /// The end date, exclusive. It is truncated to the nearest date. Defaults to 1st January, 2100.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [end] <= [start].
@@ -61,20 +69,24 @@ class FCalendar extends StatelessWidget {
   /// [initialMonth] defaults to [today]. It is truncated to the nearest date.
   FCalendar({
     required this.controller,
-    required this.start,
-    required this.end,
     this.style,
+    this.dayBuilder = _dayBuilder,
     this.onMonthChange,
     this.onPress,
     this.onLongPress,
     FCalendarPickerType initialType = FCalendarPickerType.day,
+    DateTime? start,
+    DateTime? end,
     DateTime? today,
     DateTime? initialMonth,
     super.key,
-  })  : assert(start.toLocalDate() < end.toLocalDate(), 'end date must be greater than start date'),
+  })  : start = start ?? DateTime(1990),
+        end = end ?? DateTime(2100),
         today = today ?? DateTime.now(),
         _type = ValueNotifier(initialType),
-        _month = ValueNotifier((initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months));
+        _month = ValueNotifier((initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months)) {
+    assert(this.start.toLocalDate() < this.end.toLocalDate(), 'end date must be greater than start date');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +114,7 @@ class FCalendar extends StatelessWidget {
                 builder: (context, value, child) => switch (value) {
                   FCalendarPickerType.day => PagedDayPicker(
                       style: style,
+                      dayBuilder: dayBuilder,
                       start: start.toLocalDate(),
                       end: end.toLocalDate(),
                       today: today.toLocalDate(),
@@ -142,6 +155,7 @@ class FCalendar extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))

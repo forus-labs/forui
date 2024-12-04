@@ -15,12 +15,14 @@ class PagedDayPicker extends PagedPicker {
   final ValueChanged<LocalDate>? onMonthChange;
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate> onLongPress;
+  final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
 
   PagedDayPicker({
     required this.selected,
     required this.onMonthChange,
     required this.onPress,
     required this.onLongPress,
+    required this.dayBuilder,
     required super.style,
     required super.start,
     required super.end,
@@ -40,7 +42,8 @@ class PagedDayPicker extends PagedPicker {
       ..add(DiagnosticsProperty('selected', selected))
       ..add(DiagnosticsProperty('onMonthChange', onMonthChange))
       ..add(DiagnosticsProperty('onPress', onPress))
-      ..add(DiagnosticsProperty('onLongPress', onLongPress));
+      ..add(DiagnosticsProperty('onLongPress', onLongPress))
+      ..add(DiagnosticsProperty('dayBuilder', dayBuilder));
   }
 }
 
@@ -51,6 +54,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   Widget buildItem(BuildContext context, int page) => DayPicker(
         style: widget.style.dayPickerStyle,
         localization: FLocalizations.of(context),
+        dayBuilder: widget.dayBuilder,
         month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
         focused: focusedDate,

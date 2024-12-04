@@ -16,6 +16,7 @@ class DayPicker extends StatefulWidget {
 
   final FCalendarDayPickerStyle style;
   final FLocalizations localization;
+  final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
   final LocalDate month;
   final LocalDate today;
   final LocalDate? focused;
@@ -27,6 +28,7 @@ class DayPicker extends StatefulWidget {
   const DayPicker({
     required this.style,
     required this.localization,
+    required this.dayBuilder,
     required this.month,
     required this.today,
     required this.focused,
@@ -46,6 +48,7 @@ class DayPicker extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
+      ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
@@ -111,6 +114,7 @@ class _DayPickerState extends State<DayPicker> {
                 Entry.day(
                   style: widget.style,
                   localizations: widget.localization,
+                  dayBuilder: widget.dayBuilder,
                   date: date,
                   focusNode: focusNode,
                   current: date.month == widget.month.month,
