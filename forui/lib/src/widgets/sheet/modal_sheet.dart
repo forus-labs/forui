@@ -34,9 +34,9 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/modal-sheet for working examples.
+/// * [showFSheet] for displaying a sheet above the current widget.
 /// * [FModalSheetRoute] for more information about the various arguments.
 /// * [FSheetStyle] for customizing a switch's appearance.
-// TODO: reference persistent bottom sheet when implemented.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
 ///   maximum size.
 Future<T?> showFModalSheet<T>({
@@ -99,7 +99,7 @@ Future<T?> showFModalSheet<T>({
 /// * https://forui.dev/docs/overlay/modal-sheet for working examples.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [showFModalSheet] for displaying a FModalSheetRoute.
-// TODO: reference persistent bottom sheet when implemented.
+/// * [showFSheet] for displaying a sheet above the current widget.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
 ///   maximum size.
 ///

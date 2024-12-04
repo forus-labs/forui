@@ -7,5 +7,5 @@
 library forui.widgets.sheet;
 
 export '../src/widgets/sheet/modal_sheet.dart';
-export '../src/widgets/sheet/scaffold_sheet.dart';
+export '../src/widgets/sheet/sheets.dart';
 export '../src/widgets/sheet/sheet.dart' show FSheetStyle;
