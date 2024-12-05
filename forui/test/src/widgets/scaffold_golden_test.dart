@@ -45,8 +45,6 @@ void main() {
       });
 
       testWidgets('${theme.name} - have sheets', (tester) async {
-        FSheetController? controller;
-
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -58,7 +56,7 @@ void main() {
                       builder: (context) => FButton.icon(
                         child: FIcon(FAssets.icons.chevronRight),
                         onPress: () {
-                          controller = showFSheet(
+                          showFSheet(
                             context: context,
                             side: Layout.ltr,
                             draggable: false,
