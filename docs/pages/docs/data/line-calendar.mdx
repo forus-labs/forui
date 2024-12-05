@@ -21,10 +21,10 @@ A line calendar displays dates in a single horizontal, scrollable line.
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart
-        final date = DateTime.now().subtract(const Duration(days: 1));
-        final yesterday = DateTime.utc(date.year, date.month, date.day);
         FLineCalendar(
-          controller: FCalendarController.date(initialSelection: yesterday),
+          controller: FCalendarController.date(
+            initialSelection: DateTime.now().subtract(const Duration(days: 1)),
+          ),
         );
         ```
     </Tabs.Tab>

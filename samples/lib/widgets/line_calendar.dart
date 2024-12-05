@@ -13,11 +13,7 @@ class LineCalendarPage extends Sample {
   }) : super(maxWidth: 600);
 
   @override
-  Widget sample(BuildContext context) {
-    final date = DateTime.now().subtract(const Duration(days: 1));
-    final yesterday = DateTime.utc(date.year, date.month, date.day);
-    return FLineCalendar(
-      controller: FCalendarController.date(initialSelection: yesterday),
+  Widget sample(BuildContext context) => FLineCalendar(
+      controller: FCalendarController.date(initialSelection: DateTime.now().subtract(const Duration(days: 1))),
     );
-  }
 }
