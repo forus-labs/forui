@@ -14,6 +14,6 @@ class LineCalendarPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FLineCalendar(
-      controller: FCalendarController.date(initialSelection: DateTime.now().subtract(const Duration(days: 1))),
-    );
+        controller: FCalendarController.date(initialSelection: DateTime.now().subtract(const Duration(days: 1))),
+      );
 }
