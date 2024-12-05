@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
@@ -229,9 +230,18 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
     setState(() => sheets[controller.key] = (controller, sheet));
   }
 
-  void _remove(Key key) {
-    if (mounted) {
+  Future<void> _remove(Key key) async {
+    // This checks if the method was called during the build phase, and schedules the removal for the next frame.
+    // This done as _remove is called in FSheetController.dispose, and subsequently StatefulWidget.dispose, which is
+    // part of the build phase.
+    if (mounted && SchedulerBinding.instance.schedulerPhase == SchedulerPhase.idle) {
       setState(() => sheets.remove(key));
+    } else {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() => sheets.remove(key));
+        }
+      });
     }
   }
 

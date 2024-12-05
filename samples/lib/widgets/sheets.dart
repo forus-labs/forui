@@ -8,15 +8,18 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class SheetsPage extends StatefulSample {
+  final bool keepAliveOffstage;
+
   SheetsPage({
     @queryParam super.theme,
+    @queryParam this.keepAliveOffstage = false,
   });
 
   @override
-  State<SheetsPage> createState() => _State();
+  State<SheetsPage> createState() => _SheetsState();
 }
 
-class _State extends StatefulSampleState<SheetsPage> {
+class _SheetsState extends StatefulSampleState<SheetsPage> {
   final Map<Layout, FSheetController> _controllers = {};
 
   @override
@@ -27,6 +30,7 @@ class _State extends StatefulSampleState<SheetsPage> {
             controller = _controllers[side] ??= showFSheet(
               context: context,
               side: side,
+              keepAliveOffstage: widget.keepAliveOffstage,
               builder: (context, controller) => Form(side: side, controller: controller),
             );
           } else {
@@ -74,7 +78,7 @@ class Form extends StatelessWidget {
   final Layout side;
   final FSheetController controller;
 
-  Form({required this.side, required this.controller, super.key});
+  const Form({required this.side, required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -137,37 +141,57 @@ class Form extends StatelessWidget {
 }
 
 @RoutePage()
-class DraggableSheetsPage extends Sample {
+class DraggableSheetsPage extends StatefulSample {
   DraggableSheetsPage({
     @queryParam super.theme,
   });
 
   @override
+  State<DraggableSheetsPage> createState() => _DraggableSheetsState();
+}
+
+class _DraggableSheetsState extends StatefulSampleState<DraggableSheetsPage> {
+  FSheetController? controller;
+
+  @override
   Widget sample(BuildContext context) => FButton(
         label: const Text('Click me'),
-        onPress: () => showFSheet(
-          context: context,
-          side: Layout.btt,
-          mainAxisMaxRatio: null,
-          builder: (context, _) => DraggableScrollableSheet(
-            expand: false,
-            builder: (context, controller) => ScrollConfiguration(
-              // This is required to enable dragging on desktop.
-              // See https://github.com/flutter/flutter/issues/101903 for more information.
-              behavior: ScrollConfiguration.of(context).copyWith(
-                dragDevices: {
-                  PointerDeviceKind.touch,
-                  PointerDeviceKind.mouse,
-                  PointerDeviceKind.trackpad,
-                },
-              ),
-              child: FTileGroup.builder(
-                count: 25,
-                controller: controller,
-                tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+        onPress: () {
+          if (controller != null) {
+            controller!.toggle();
+            return;
+          }
+
+          controller = showFSheet(
+            context: context,
+            side: Layout.btt,
+            mainAxisMaxRatio: null,
+            builder: (context, _) => DraggableScrollableSheet(
+              expand: false,
+              builder: (context, controller) => ScrollConfiguration(
+                // This is required to enable dragging on desktop.
+                // See https://github.com/flutter/flutter/issues/101903 for more information.
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse,
+                    PointerDeviceKind.trackpad,
+                  },
+                ),
+                child: FTileGroup.builder(
+                  count: 25,
+                  controller: controller,
+                  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       );
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
 }
