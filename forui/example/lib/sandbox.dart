@@ -14,7 +14,6 @@ class Sandbox extends StatefulWidget {
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   final FCalendarController<DateTime?> controller = FCalendarController.date();
   late FPopoverController popoverController;
-  late FCalendarController<DateTime?> a = FCalendarController.date();
 
   @override
   void initState() {
