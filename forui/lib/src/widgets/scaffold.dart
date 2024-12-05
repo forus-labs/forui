@@ -52,8 +52,6 @@ class FScaffold extends StatefulWidget {
 }
 
 class _State extends State<FScaffold> {
-  FSheetController? _sheet;
-
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.scaffoldStyle;
@@ -63,14 +61,16 @@ class _State extends State<FScaffold> {
       content = Padding(padding: style.contentPadding, child: content);
     }
 
-    return ColoredBox(
-      color: style.backgroundColor,
-      child: Column(
-        children: [
-          if (widget.header != null) DecoratedBox(decoration: style.headerDecoration, child: widget.header!),
-          Expanded(child: content),
-          if (widget.footer != null) DecoratedBox(decoration: style.footerDecoration, child: widget.footer!),
-        ],
+    return FSheets(
+      child: ColoredBox(
+        color: style.backgroundColor,
+        child: Column(
+          children: [
+            if (widget.header != null) DecoratedBox(decoration: style.headerDecoration, child: widget.header!),
+            Expanded(child: content),
+            if (widget.footer != null) DecoratedBox(decoration: style.footerDecoration, child: widget.footer!),
+          ],
+        ),
       ),
     );
   }

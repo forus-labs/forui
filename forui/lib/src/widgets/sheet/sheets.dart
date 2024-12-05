@@ -8,6 +8,9 @@ import 'package:meta/meta.dart';
 
 /// Shows a sheet that appears above the current widget. It should have a [FSheets] or [FScaffold] ancestor.
 ///
+/// The returned [FSheetController] should always be disposed after use. Not doing so can lead to the sheets
+/// accumulating over time, which can negatively impact performance.
+///
 /// A closely related widget is a modal sheet which prevents the user from interacting with the rest of the app.
 ///
 /// [context] is used to look up the [Navigator] and [FSheetStyle] for the sheet. It is only used when the method is
@@ -20,11 +23,22 @@ import 'package:meta/meta.dart';
 /// is [Layout.ttb] or [Layout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
 /// i.e. [ListView], along the main axis, to have the sheet be draggable.
 ///
+/// [anchorPoint] is used to pick the closest sub-screen.
+///
+/// [keepAliveOffstage] determines whether the sheet should be kept alive even when it is offstage. Setting it to true
+/// retains the sheet's state even when it is not visible. Defaults to false. Keeping multiple sheets alive even when
+/// offstage can negatively impact performance.
+///
+/// [key] is used to identify the sheet. If a key is not provided, a random key will be generated. All sheets in a
+/// [FScaffold]/[FSheets] must have unique keys.
+///
 /// ## Contract
-/// Throws [FlutterError] if the [context] does not contain a [FSheets] or [FScaffold] ancestor.
+/// Throws [FlutterError] if:
+/// * the [context] does not contain a [FSheets] or [FScaffold] ancestor.
+/// * a sheet with the same [key] already exists.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/sheets for working examples.
+/// * https://forui.dev/docs/overlay/sheet for working examples.
 /// * [showFModalSheet] for showing a sheet in a modal that prevents the user from interacting with the rest of the app.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
@@ -33,7 +47,7 @@ import 'package:meta/meta.dart';
 FSheetController showFSheet({
   required BuildContext context,
   required Layout side,
-  required WidgetBuilder builder,
+  required Widget Function(BuildContext, FSheetController) builder,
   FSheetStyle? style,
   double? mainAxisMaxRatio = 9 / 16,
   BoxConstraints constraints = const BoxConstraints(),
@@ -90,7 +104,7 @@ FSheetController showFSheet({
       draggable: draggable,
       anchorPoint: anchorPoint,
       useSafeArea: useSafeArea,
-      builder: builder,
+      builder: (context) => builder(context, controller),
     ),
   );
 
@@ -104,8 +118,9 @@ class FSheetController {
   /// The sheet's key.
   final Key key;
 
-  /// True if the sheet to which this controller is attached should be kept alive even when it is offstage. Defaults to
-  /// false. Keeping multiple sheets alive even when offstage can negatively impact performance.
+  /// True if the sheet to which this controller is attached should be kept alive even when it is offstage. Setting it
+  /// to true retains the sheet's state even when it is not visible. Defaults to false. Keeping multiple sheets alive
+  /// even when offstage can negatively impact performance.
   final bool keepAliveOffstage;
 
   /// Marks the sheet as needing to be rebuilt.
@@ -162,7 +177,7 @@ class FSheetController {
 /// interacting with the rest of the app.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/sheets for working examples.
+/// * https://forui.dev/docs/overlay/sheet for working examples.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [showFSheet] for for displaying a sheet above the current widget.
 /// * [showFModalSheet] for displaying a modal sheet.

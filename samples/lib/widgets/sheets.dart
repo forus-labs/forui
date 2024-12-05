@@ -7,59 +7,74 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class ModalSheetPage extends Sample {
-  ModalSheetPage({
+class SheetsPage extends StatefulSample {
+  SheetsPage({
     @queryParam super.theme,
   });
 
   @override
-  Widget sample(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FButton(
-            label: const Text('Left'),
-            onPress: () => showFModalSheet(
+  State<SheetsPage> createState() => _State();
+}
+
+class _State extends StatefulSampleState<SheetsPage> {
+  final Map<Layout, FSheetController> _controllers = {};
+
+  @override
+  Widget sample(BuildContext context) {
+    VoidCallback onPress(Layout side) => () {
+          var controller = _controllers[side];
+          if (controller == null) {
+            controller = _controllers[side] ??= showFSheet(
               context: context,
-              side: Layout.ltr,
-              builder: (context) => const Form(side: Layout.ltr),
-            ),
-          ),
-          const SizedBox(height: 5),
-          FButton(
-            label: const Text('Top'),
-            onPress: () => showFModalSheet(
-              context: context,
-              side: Layout.ttb,
-              builder: (context) => const Form(side: Layout.ttb),
-            ),
-          ),
-          const SizedBox(height: 5),
-          FButton(
-            label: const Text('Right'),
-            onPress: () => showFModalSheet(
-              context: context,
-              side: Layout.rtl,
-              builder: (context) => const Form(side: Layout.rtl),
-            ),
-          ),
-          const SizedBox(height: 5),
-          FButton(
-            label: const Text('Bottom'),
-            onPress: () => showFModalSheet(
-              context: context,
-              side: Layout.btt,
-              builder: (context) => const Form(side: Layout.btt),
-            ),
-          ),
-        ],
-      );
+              side: side,
+              builder: (context, controller) => Form(side: side, controller: controller),
+            );
+          } else {
+            controller.toggle();
+          }
+        };
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        FButton(
+          label: const Text('Left'),
+          onPress: onPress(Layout.ltr),
+        ),
+        const SizedBox(height: 5),
+        FButton(
+          label: const Text('Top'),
+          onPress: onPress(Layout.ttb),
+        ),
+        const SizedBox(height: 5),
+        FButton(
+          label: const Text('Right'),
+          onPress: onPress(Layout.rtl),
+        ),
+        const SizedBox(height: 5),
+        FButton(
+          label: const Text('Bottom'),
+          onPress: onPress(Layout.btt),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    for (final controller in _controllers.values) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
 }
 
 class Form extends StatelessWidget {
   final Layout side;
+  final FSheetController controller;
 
-  const Form({required this.side, super.key});
+  Form({required this.side, required this.controller, super.key});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -109,7 +124,7 @@ class Form extends StatelessWidget {
                       const SizedBox(height: 16),
                       FButton(
                         label: const Text('Save'),
-                        onPress: () => Navigator.of(context).pop(),
+                        onPress: controller.toggle,
                       ),
                     ],
                   ),
@@ -122,19 +137,19 @@ class Form extends StatelessWidget {
 }
 
 @RoutePage()
-class DraggableModalSheetPage extends Sample {
-  DraggableModalSheetPage({
+class DraggableSheetsPage extends Sample {
+  DraggableSheetsPage({
     @queryParam super.theme,
   });
 
   @override
   Widget sample(BuildContext context) => FButton(
         label: const Text('Click me'),
-        onPress: () => showFModalSheet(
+        onPress: () => showFSheet(
           context: context,
           side: Layout.btt,
           mainAxisMaxRatio: null,
-          builder: (context) => DraggableScrollableSheet(
+          builder: (context, _) => DraggableScrollableSheet(
             expand: false,
             builder: (context, controller) => ScrollConfiguration(
               // This is required to enable dragging on desktop.

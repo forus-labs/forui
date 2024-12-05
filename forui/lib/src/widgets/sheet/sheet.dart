@@ -239,10 +239,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
     if (widget.controller == null) {
       _controller.dispose();
     }
+    super.dispose();
   }
 }
 

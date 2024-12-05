@@ -21,7 +21,7 @@ void main() {
                   controller = showFSheet(
                     context: context,
                     side: Layout.btt,
-                    builder: (context) => Container(
+                    builder: (context, controller) => Container(
                       height: double.infinity,
                       width: double.infinity,
                       color: context.theme.colorScheme.background,
@@ -56,7 +56,7 @@ void main() {
                     context: context,
                     side: Layout.btt,
                     keepAliveOffstage: true,
-                    builder: (context) => Container(
+                    builder: (context, controller) => Container(
                       height: double.infinity,
                       width: double.infinity,
                       color: context.theme.colorScheme.background,
@@ -89,7 +89,7 @@ void main() {
                 controller = showFSheet(
                   context: context,
                   side: Layout.btt,
-                  builder: (context) => Container(
+                  builder: (context, controller) => Container(
                     height: double.infinity,
                     width: double.infinity,
                     color: context.theme.colorScheme.background,
@@ -120,7 +120,7 @@ void main() {
                     key: const Key('test'),
                     context: context,
                     side: Layout.btt,
-                    builder: (context) => Container(
+                    builder: (context, controller) => Container(
                       height: double.infinity,
                       width: double.infinity,
                       color: context.theme.colorScheme.background,
@@ -158,7 +158,7 @@ void main() {
                   controller = showFSheet(
                     context: context,
                     side: Layout.btt,
-                    builder: (context) => Container(
+                    builder: (context, controller) => Container(
                       height: double.infinity,
                       width: double.infinity,
                       color: context.theme.colorScheme.background,
@@ -197,7 +197,7 @@ void main() {
                     controller = showFSheet(
                       context: context,
                       side: side,
-                      builder: (context) => Container(
+                      builder: (context, controller) => Container(
                         height: double.infinity,
                         width: double.infinity,
                         color: context.theme.colorScheme.background,
@@ -232,7 +232,7 @@ void main() {
                       context: context,
                       side: side,
                       draggable: false,
-                      builder: (context) => Container(
+                      builder: (context, controller) => Container(
                         height: double.infinity,
                         width: double.infinity,
                         color: context.theme.colorScheme.background,

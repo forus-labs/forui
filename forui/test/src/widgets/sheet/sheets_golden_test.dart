@@ -25,7 +25,7 @@ void main() {
                       controller = showFSheet(
                         context: context,
                         side: side,
-                        builder: (context) => Container(
+                        builder: (context, controller) => Container(
                           height: double.infinity,
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -62,7 +62,7 @@ void main() {
                         context: context,
                         side: side,
                         constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
-                        builder: (context) => Container(
+                        builder: (context, controller) => Container(
                           height: double.infinity,
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -99,7 +99,7 @@ void main() {
                         context: context,
                         side: side,
                         mainAxisMaxRatio: null,
-                        builder: (context) => Container(
+                        builder: (context, controller) => Container(
                           height: double.infinity,
                           width: double.infinity,
                           decoration: BoxDecoration(
