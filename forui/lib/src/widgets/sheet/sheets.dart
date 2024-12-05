@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
 import 'package:meta/meta.dart';
 
-/// Shows a sheet that appears above the current widget.
+/// Shows a sheet that appears above the current widget. It should have a [FSheets] or [FScaffold] ancestor.
 ///
 /// A closely related widget is a modal sheet which prevents the user from interacting with the rest of the app.
 ///
@@ -43,7 +43,7 @@ FSheetController showFSheet({
   bool keepAliveOffstage = false,
   Key? key,
 }) {
-  final state = context.findAncestorStateOfType<_FSheetsState>();
+  final state = context.findAncestorStateOfType<FSheetsState>();
   if (state == null) {
     throw FlutterError.fromParts([
       ErrorSummary(
@@ -86,6 +86,8 @@ FSheetController showFSheet({
       style: style,
       side: side,
       mainAxisMaxRatio: mainAxisMaxRatio,
+      constraints: constraints,
+      draggable: draggable,
       anchorPoint: anchorPoint,
       useSafeArea: useSafeArea,
       builder: builder,
@@ -174,17 +176,19 @@ class FSheets extends StatefulWidget {
   const FSheets({required this.child, super.key});
 
   @override
-  State<FSheets> createState() => _FSheetsState();
+  State<FSheets> createState() => FSheetsState();
 }
 
-class _FSheetsState extends State<FSheets> with TickerProviderStateMixin {
-  final Map<Key, (FSheetController, Sheet)> _sheets = {};
+@visibleForTesting
+@internal
+class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
+  final Map<Key, (FSheetController, Sheet)> sheets = {};
 
   @override
   Widget build(BuildContext context) => Stack(
         children: [
           widget.child,
-          for (final (controller, sheet) in _sheets.values)
+          for (final (controller, sheet) in sheets.values)
             if (controller.shown || controller.keepAliveOffstage || controller._controller.status.isAnimating) sheet,
         ],
       );
@@ -194,7 +198,7 @@ class _FSheetsState extends State<FSheets> with TickerProviderStateMixin {
       return;
     }
 
-    if (_sheets.containsKey(controller.key)) {
+    if (sheets.containsKey(controller.key)) {
       throw FlutterError.fromParts([
         ErrorSummary('showFSheet(...) called with a key that already exists.'),
         ErrorDescription(
@@ -207,12 +211,18 @@ class _FSheetsState extends State<FSheets> with TickerProviderStateMixin {
       ]);
     }
 
-    setState(() => _sheets[controller.key] = (controller, sheet));
+    setState(() => sheets[controller.key] = (controller, sheet));
   }
 
   void _remove(Key key) {
     if (mounted) {
-      setState(() => _sheets.remove(key));
+      setState(() => sheets.remove(key));
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Map<Key, (FSheetController, Sheet)>>('sheets', sheets));
   }
 }
