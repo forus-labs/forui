@@ -26,6 +26,8 @@ class FScaffold extends StatelessWidget {
   /// True if [FScaffoldStyle.contentPadding] should be applied to the [content]. Defaults to `true`.
   final bool contentPad;
 
+  final bool resizeToAvoidBottomInset;
+
   /// The style. Defaults to [FThemeData.scaffoldStyle].
   final FScaffoldStyle? style;
 
@@ -35,6 +37,7 @@ class FScaffold extends StatelessWidget {
     this.header,
     this.footer,
     this.contentPad = true,
+    this.resizeToAvoidBottomInset = true,
     this.style,
     super.key,
   });
@@ -42,10 +45,21 @@ class FScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.scaffoldStyle;
+    final viewInsets = MediaQuery.of(context).viewInsets;
     Widget content = this.content;
+    Widget footer = this.footer != null
+        ? DecoratedBox(
+            decoration: style.footerDecoration,
+            child: this.footer!,
+          )
+        : const SizedBox();
 
     if (contentPad) {
       content = Padding(padding: style.contentPadding, child: content);
+    }
+
+    if (viewInsets.bottom > 0 && resizeToAvoidBottomInset) {
+      footer = SizedBox(height: viewInsets.bottom);
     }
 
     return ColoredBox(
@@ -54,7 +68,7 @@ class FScaffold extends StatelessWidget {
         children: [
           if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
           Expanded(child: content),
-          if (footer != null) DecoratedBox(decoration: style.footerDecoration, child: footer!),
+          footer,
         ],
       ),
     );
