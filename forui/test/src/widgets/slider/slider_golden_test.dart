@@ -36,7 +36,7 @@ void main() {
     });
 
     for (final theme in TestScaffold.themes) {
-      for (final layout in Layout.values) {
+      for (final layout in FLayout.values) {
         for (final touch in [true, false]) {
           for (final enabled in [true, false]) {
             testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
@@ -176,7 +176,7 @@ void main() {
       }
     }
 
-    for (final layout in Layout.values) {
+    for (final layout in FLayout.values) {
       for (final min in [true, false]) {
         testWidgets('single value - $layout - ${min ? 'min' : 'max'}', (tester) async {
           await tester.pumpWidget(
@@ -214,7 +214,7 @@ void main() {
       }
     }
 
-    for (final layout in Layout.values) {
+    for (final layout in FLayout.values) {
       group('label offset - $layout', () {
         late FSliderStyle sliderStyle;
         late Alignment positive;
