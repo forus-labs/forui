@@ -5,6 +5,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample.dart';
+import 'package:forui_samples/widgets/persistent_sheet.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -93,8 +94,8 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/select-tile-group/multi-value', page: SelectTileGroupMultiValueRoute.page),
         AutoRoute(path: '/select-tile-group/radio', page: SelectTileGroupRadioRoute.page),
         AutoRoute(path: '/select-tile-group/suffix', page: SelectTileGroupSuffixRoute.page),
-        AutoRoute(path: '/persistent-sheet/default', page: SheetsRoute.page),
-        AutoRoute(path: '/persistent-sheet/draggable', page: DraggableSheetsRoute.page),
+        AutoRoute(path: '/persistent-sheet/default', page: PersistentSheetRoute.page),
+        AutoRoute(path: '/persistent-sheet/draggable', page: DraggablePersistentSheetRoute.page),
         AutoRoute(path: '/slider/default', page: SliderRoute.page),
         AutoRoute(path: '/slider/tooltip', page: TooltipSliderRoute.page),
         AutoRoute(path: '/slider/marks', page: MarksSliderRoute.page),
