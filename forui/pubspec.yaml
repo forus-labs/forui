@@ -29,9 +29,9 @@ dependencies:
   nitrogen_types: ^0.3.0+1
   sugar: ^3.1.0
 
+
 dev_dependencies:
   build_runner: ^2.4.0
-  custom_lint: ^0.6.6
   flint: ^2.8.1
   flutter_test:
     sdk: flutter

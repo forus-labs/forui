@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 /// Possible way to layout a sequence of items.
-enum FLayout {
+enum Layout {
   /// Lays out the items horizontally from left to right.
   ltr(vertical: false),
 
@@ -19,7 +19,7 @@ enum FLayout {
   /// Whether the layout is vertical.
   final bool vertical;
 
-  const FLayout({required this.vertical});
+  const Layout({required this.vertical});
 }
 
 @internal

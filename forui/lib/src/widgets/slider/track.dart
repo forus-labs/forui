@@ -121,7 +121,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     }
   }
 
-  GestureTapDownCallback? _tap(FSliderController controller, double thumbSize, FLayout layout) {
+  GestureTapDownCallback? _tap(FSliderController controller, double thumbSize, Layout layout) {
     final translate = layout.translateTrackTap(controller.selection.rawExtent.total, thumbSize);
 
     void down(TapDownDetails details) {
@@ -143,7 +143,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
     return tappable.contains(controller.allowedInteraction) ? down : null;
   }
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, FLayout layout) {
+  GestureDragUpdateCallback? _drag(FSliderController controller, Layout layout) {
     if (controller.allowedInteraction != FSliderInteraction.slide) {
       return null;
     }
@@ -241,25 +241,25 @@ class ActiveTrack extends StatelessWidget {
 }
 
 @internal
-extension Layouts on FLayout {
+extension Layouts on Layout {
   double Function(Offset) translateTrackTap(double extent, double thumbSize) => switch (this) {
-        FLayout.ltr => (offset) => offset.dx - thumbSize / 2,
-        FLayout.rtl => (offset) => extent - offset.dx + thumbSize / 2,
-        FLayout.ttb => (offset) => offset.dy - thumbSize / 2,
-        FLayout.btt => (offset) => extent - offset.dy + thumbSize / 2,
+        Layout.ltr => (offset) => offset.dx - thumbSize / 2,
+        Layout.rtl => (offset) => extent - offset.dx + thumbSize / 2,
+        Layout.ttb => (offset) => offset.dy - thumbSize / 2,
+        Layout.btt => (offset) => extent - offset.dy + thumbSize / 2,
       };
 
   double Function(Offset) translateTrackDrag() => switch (this) {
-        FLayout.ltr => (delta) => delta.dx,
-        FLayout.rtl => (delta) => -delta.dx,
-        FLayout.ttb => (delta) => delta.dy,
-        FLayout.btt => (delta) => -delta.dy,
+        Layout.ltr => (delta) => delta.dx,
+        Layout.rtl => (delta) => -delta.dx,
+        Layout.ttb => (delta) => delta.dy,
+        Layout.btt => (delta) => -delta.dy,
       };
 
   Positioned Function({required double offset, required Widget child}) get position => switch (this) {
-        FLayout.ltr => ({required offset, required child}) => Positioned(left: offset, child: child),
-        FLayout.rtl => ({required offset, required child}) => Positioned(right: offset, child: child),
-        FLayout.ttb => ({required offset, required child}) => Positioned(top: offset, child: child),
-        FLayout.btt => ({required offset, required child}) => Positioned(bottom: offset, child: child),
+        Layout.ltr => ({required offset, required child}) => Positioned(left: offset, child: child),
+        Layout.rtl => ({required offset, required child}) => Positioned(right: offset, child: child),
+        Layout.ttb => ({required offset, required child}) => Positioned(top: offset, child: child),
+        Layout.btt => ({required offset, required child}) => Positioned(bottom: offset, child: child),
       };
 }

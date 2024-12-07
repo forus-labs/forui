@@ -116,7 +116,7 @@ void main() {
     });
   });
 
-  for (final layout in FLayout.values) {
+  for (final layout in Layout.values) {
     Widget slider(FSliderController controller) => TestScaffold.app(
           padded: false,
           child: FSlider(
@@ -343,26 +343,26 @@ void main() {
 }
 
 extension on Rect {
-  Offset min(FLayout layout) => switch (layout) {
-        FLayout.ltr => centerLeft,
-        FLayout.rtl => centerRight,
-        FLayout.ttb => topCenter,
-        FLayout.btt => bottomCenter,
+  Offset min(Layout layout) => switch (layout) {
+        Layout.ltr => centerLeft,
+        Layout.rtl => centerRight,
+        Layout.ttb => topCenter,
+        Layout.btt => bottomCenter,
       };
 
-  Offset max(FLayout layout) => switch (layout) {
-        FLayout.ltr => centerRight,
-        FLayout.rtl => centerLeft,
-        FLayout.ttb => bottomCenter,
-        FLayout.btt => topCenter,
+  Offset max(Layout layout) => switch (layout) {
+        Layout.ltr => centerRight,
+        Layout.rtl => centerLeft,
+        Layout.ttb => bottomCenter,
+        Layout.btt => topCenter,
       };
 }
 
-extension on FLayout {
+extension on Layout {
   Offset directional(double value) => switch (this) {
-        FLayout.ltr => Offset(value, 0),
-        FLayout.rtl => Offset(-value, 0),
-        FLayout.ttb => Offset(0, value),
-        FLayout.btt => Offset(0, -value),
+        Layout.ltr => Offset(value, 0),
+        Layout.rtl => Offset(-value, 0),
+        Layout.ttb => Offset(0, value),
+        Layout.btt => Offset(0, -value),
       };
 }
