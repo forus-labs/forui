@@ -5,7 +5,6 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample.dart';
-import 'package:forui_samples/widgets/persistent_sheet.dart';
 
 void main() {
   usePathUrlStrategy();
