@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  FSheetController? controller;
+  FPersistentSheetController? controller;
 
   group('showFSheet', () {
     for (final side in Layout.values) {
@@ -22,7 +22,7 @@ void main() {
                   child: FButton.icon(
                     child: FIcon(FAssets.icons.chevronRight),
                     onPress: () {
-                      controller = showFSheet(
+                      controller = showFPersistentSheet(
                         context: context,
                         side: side,
                         builder: (context, controller) => Container(
@@ -46,7 +46,7 @@ void main() {
         await tester.tap(find.byType(FButton));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/sheets/default-$side.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/persistent/default-$side.png'));
       });
 
       testWidgets('constrained - $side', (tester) async {
@@ -58,7 +58,7 @@ void main() {
                   child: FButton.icon(
                     child: FIcon(FAssets.icons.chevronRight),
                     onPress: () {
-                      controller = showFSheet(
+                      controller = showFPersistentSheet(
                         context: context,
                         side: side,
                         constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
@@ -83,7 +83,7 @@ void main() {
         await tester.tap(find.byType(FButton));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/sheets/constrained-$side.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/persistent/constrained-$side.png'));
       });
 
       testWidgets('scrollable - $side', (tester) async {
@@ -95,7 +95,7 @@ void main() {
                   child: FButton.icon(
                     child: FIcon(FAssets.icons.chevronRight),
                     onPress: () {
-                      controller = showFSheet(
+                      controller = showFPersistentSheet(
                         context: context,
                         side: side,
                         mainAxisMaxRatio: null,
@@ -127,7 +127,7 @@ void main() {
         await tester.tap(find.byType(FButton));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/sheets/scrollable-$side.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/persistent/scrollable-$side.png'));
       });
     }
   });

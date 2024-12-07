@@ -17,7 +17,7 @@ void main() {
             child: Builder(
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
-                onPress: () => showFModalSheet(
+                onPress: () => showFSheet(
                   context: context,
                   side: side,
                   builder: (context) => Container(
@@ -44,7 +44,7 @@ void main() {
             child: Builder(
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
-                onPress: () => showFModalSheet(
+                onPress: () => showFSheet(
                   context: context,
                   side: side,
                   constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
@@ -72,7 +72,7 @@ void main() {
             child: Builder(
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
-                onPress: () => showFModalSheet(
+                onPress: () => showFSheet(
                   context: context,
                   side: side,
                   mainAxisMaxRatio: null,

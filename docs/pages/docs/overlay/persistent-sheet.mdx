@@ -3,10 +3,10 @@ import { Widget } from "../../../components/widget.tsx";
 import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
 
-# Sheet
+# Persistent Sheet
 
-A sheet that are displayed above another widget. It is part of [FScaffold](/docs/layout/scaffold), which should be
-preferred in most cases.
+A persistent sheet that are displayed above another widget. It is part of [FScaffold](/docs/layout/scaffold), which
+should be preferred in most cases.
 
 A closely related widget is a [modal sheet](/docs/overlay/modal-sheet) which prevents the user from interacting with the
 rest of the app.
@@ -16,12 +16,13 @@ rest of the app.
 </LinkBadgeGroup>
 
 <Callout type="info">
-    All calls to `showFSheet(...)` should be made inside widgets that have either `FScaffold` or `Sheets` as their
+    All calls to `showFPersistentSheet(...)` should be made inside widgets that have either `FScaffold` or `FSheets` as
+    their ancestor.
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sheets' query={{}} height={500}/>
+    <Widget name='persistent-sheet' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
@@ -36,9 +37,15 @@ rest of the app.
       @override
       Widget build(BuildContext context) {
         VoidCallback onPress(Layout side) => () {
+              for (final MapEntry(:key, :value) in _controllers.entries) {
+                if (key != side && value.shown) {
+                  return;
+                }
+              }
+
               var controller = _controllers[side];
               if (controller == null) {
-                controller = _controllers[side] ??= showFSheet(
+                controller = _controllers[side] ??= showFPersistentSheet(
                   context: context,
                   side: Layout.ltr,
                   builder: (context, controller) => Form(side: side, controller: controller),
@@ -157,10 +164,10 @@ rest of the app.
 
 ## Usage
 
-### `showFSheet(...)`
+### `showFPersistentSheet(...)`
 
 ```dart
-showFSheet(
+showFPersistentSheet(
   context: context,
   side: Layout.ltr,
   useRootNavigator: true,
@@ -179,7 +186,7 @@ showFSheet(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sheets' query={{keepAliveOffstage: true}} height={500}/>
+    <Widget name='persistent-sheet' query={{keepAliveOffstage: true}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {17}
@@ -194,9 +201,15 @@ showFSheet(
       @override
       Widget build(BuildContext context) {
         VoidCallback onPress(Layout side) => () {
+              for (final MapEntry(:key, :value) in _controllers.entries) {
+                if (key != side && value.shown) {
+                  return;
+                }
+              }
+
               var controller = _controllers[side];
               if (controller == null) {
-                controller = _controllers[side] ??= showFSheet(
+                controller = _controllers[side] ??= showFPersistentSheet(
                   context: context,
                   side: Layout.ltr,
                   keepAliveOffstage: true,
@@ -318,7 +331,7 @@ showFSheet(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sheets' query={{}} height={400} variant='draggable'/>
+    <Widget name='persistent-sheet' query={{}} height={400} variant='draggable'/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart
@@ -340,7 +353,7 @@ showFSheet(
                   return;
                 }
 
-                controller = showFSheet(
+                controller = showFPersistentSheet(
                   context: context,
                   side: Layout.btt,
                   mainAxisMaxRatio: null,

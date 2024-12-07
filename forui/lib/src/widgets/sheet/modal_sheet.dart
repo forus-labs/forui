@@ -34,12 +34,12 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/modal-sheet for working examples.
-/// * [showFSheet] for displaying a sheet above the current widget.
+/// * [showFPersistentSheet] for displaying a sheet above the current widget.
 /// * [FModalSheetRoute] for more information about the various arguments.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
 ///   maximum size.
-Future<T?> showFModalSheet<T>({
+Future<T?> showFSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
   required Layout side,
@@ -87,7 +87,7 @@ Future<T?> showFModalSheet<T>({
   );
 }
 
-/// A route that represents a modal sheet. [showFModalSheet] should be preferred in most cases.
+/// A route that represents a modal sheet. [showFSheet] should be preferred in most cases.
 ///
 /// A modal sheet is an alternative to a menu or a dialog and prevents the user from interacting with the rest of the
 /// app.
@@ -98,8 +98,8 @@ Future<T?> showFModalSheet<T>({
 /// See:
 /// * https://forui.dev/docs/overlay/modal-sheet for working examples.
 /// * [FSheetStyle] for customizing a switch's appearance.
-/// * [showFModalSheet] for displaying a FModalSheetRoute.
-/// * [showFSheet] for displaying a sheet above the current widget.
+/// * [showFSheet] for displaying a FModalSheetRoute.
+/// * [showFPersistentSheet] for displaying a sheet above the current widget.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
 ///   maximum size.
 ///

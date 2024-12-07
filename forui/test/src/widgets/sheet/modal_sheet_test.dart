@@ -13,7 +13,7 @@ void main() {
           child: Builder(
             builder: (context) => FButton.icon(
               child: FIcon(FAssets.icons.chevronRight),
-              onPress: () => showFModalSheet(
+              onPress: () => showFSheet(
                 context: context,
                 side: Layout.btt,
                 builder: (context) => Container(
@@ -49,7 +49,7 @@ void main() {
             child: Builder(
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
-                onPress: () => showFModalSheet(
+                onPress: () => showFSheet(
                   context: context,
                   side: side,
                   builder: (context) => Container(
@@ -79,7 +79,7 @@ void main() {
             child: Builder(
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
-                onPress: () => showFModalSheet(
+                onPress: () => showFSheet(
                   context: context,
                   side: side,
                   draggable: false,

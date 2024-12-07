@@ -7,8 +7,8 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 
 A modal sheet is an alternative to a menu or a dialog and prevents the user from interacting with the rest of the app.
 
-A closely related widget is a [sheet](/docs/overlay/sheet), which shows information that supplements the primary content
-of the app without preventing the user from interacting with the app.
+A closely related widget is a [persistent sheet](/docs/overlay/persistent-sheet), which shows information that
+supplements the primary content of the app without preventing the user from interacting with the app.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/forui.widgets.sheet-library.html"/>
@@ -28,7 +28,7 @@ of the app without preventing the user from interacting with the app.
         children: [
           FButton(
             label: const Text('Left'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.ltr,
               builder: (context) => const Form(side: Layout.ltr),
@@ -37,7 +37,7 @@ of the app without preventing the user from interacting with the app.
           const SizedBox(height: 5),
           FButton(
             label: const Text('Top'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.ttb,
               builder: (context) => const Form(side: Layout.ttb),
@@ -46,7 +46,7 @@ of the app without preventing the user from interacting with the app.
           const SizedBox(height: 5),
           FButton(
             label: const Text('Right'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.rtl,
               builder: (context) => const Form(side: Layout.btt),
@@ -55,7 +55,7 @@ of the app without preventing the user from interacting with the app.
           const SizedBox(height: 5),
           FButton(
             label: const Text('Bottom'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.btt,
               builder: (context) => const Form(side: Layout.btt),
@@ -135,10 +135,10 @@ of the app without preventing the user from interacting with the app.
 
 ## Usage
 
-### `showFModalSheet(...)`
+### `showFSheet(...)`
 
 ```dart
-showFModalSheet(
+showFSheet(
   context: context,
   side: Layout.ltr,
   useRootNavigator: true,

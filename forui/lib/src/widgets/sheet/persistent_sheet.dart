@@ -7,9 +7,9 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
 import 'package:meta/meta.dart';
 
-/// Shows a sheet that appears above the current widget. It should have a [FSheets] or [FScaffold] ancestor.
+/// Shows a persistent sheet that appears above the current widget. It should have a [FSheets] or [FScaffold] ancestor.
 ///
-/// The returned [FSheetController] should always be disposed after use. Not doing so can lead to the sheets
+/// The returned [FPersistentSheetController] should always be disposed after use. Not doing so can lead to the sheets
 /// accumulating over time, which can negatively impact performance.
 ///
 /// A closely related widget is a modal sheet which prevents the user from interacting with the rest of the app.
@@ -39,16 +39,16 @@ import 'package:meta/meta.dart';
 /// * a sheet with the same [key] already exists.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/sheet for working examples.
-/// * [showFModalSheet] for showing a sheet in a modal that prevents the user from interacting with the rest of the app.
+/// * https://forui.dev/docs/overlay/persistent-sheet for working examples.
+/// * [showFSheet] for showing a sheet in a modal that prevents the user from interacting with the rest of the app.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
 ///   maximum size.
 @useResult
-FSheetController showFSheet({
+FPersistentSheetController showFPersistentSheet({
   required BuildContext context,
   required Layout side,
-  required Widget Function(BuildContext, FSheetController) builder,
+  required Widget Function(BuildContext, FPersistentSheetController) builder,
   FSheetStyle? style,
   double? mainAxisMaxRatio = 9 / 16,
   BoxConstraints constraints = const BoxConstraints(),
@@ -80,7 +80,7 @@ FSheetController showFSheet({
   key ??= ValueKey(Random.secure().nextInt(2147483647));
   style ??= context.theme.sheetStyle;
 
-  final controller = FSheetController._(
+  final controller = FPersistentSheetController._(
     vsync: state,
     style: style,
     key: key,
@@ -115,7 +115,7 @@ FSheetController showFSheet({
 }
 
 /// A sheet controller.
-class FSheetController {
+class FPersistentSheetController {
   /// The sheet's key.
   final Key key;
 
@@ -130,7 +130,7 @@ class FSheetController {
   final AnimationController _controller;
   final VoidCallback _onDispose;
 
-  FSheetController._({
+  FPersistentSheetController._({
     required TickerProvider vsync,
     required FSheetStyle style,
     required VoidCallback onDispose,
@@ -142,7 +142,7 @@ class FSheetController {
     if (kFlutterMemoryAllocationsEnabled) {
       FlutterMemoryAllocations.instance.dispatchObjectCreated(
         library: 'package:flutter/forui.dart',
-        className: '$FSheetController',
+        className: '$FPersistentSheetController',
         object: this,
       );
     }
@@ -180,8 +180,8 @@ class FSheetController {
 /// See:
 /// * https://forui.dev/docs/overlay/sheet for working examples.
 /// * [FSheetStyle] for customizing a switch's appearance.
-/// * [showFSheet] for for displaying a sheet above the current widget.
-/// * [showFModalSheet] for displaying a modal sheet.
+/// * [showFPersistentSheet] for for displaying a sheet above the current widget.
+/// * [showFSheet] for displaying a modal sheet.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
 ///   maximum size.
 class FSheets extends StatefulWidget {
@@ -198,7 +198,7 @@ class FSheets extends StatefulWidget {
 @visibleForTesting
 @internal
 class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
-  final Map<Key, (FSheetController, Sheet)> sheets = {};
+  final Map<Key, (FPersistentSheetController, Sheet)> sheets = {};
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -209,7 +209,7 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
         ],
       );
 
-  void _add(FSheetController controller, Sheet sheet) {
+  void _add(FPersistentSheetController controller, Sheet sheet) {
     if (!mounted) {
       return;
     }
@@ -248,6 +248,6 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<Key, (FSheetController, Sheet)>>('sheets', sheets));
+    properties.add(DiagnosticsProperty<Map<Key, (FPersistentSheetController, Sheet)>>('sheets', sheets));
   }
 }

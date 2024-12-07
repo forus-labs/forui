@@ -56,7 +56,7 @@ void main() {
                       builder: (context) => FButton.icon(
                         child: FIcon(FAssets.icons.chevronRight),
                         onPress: () {
-                          showFSheet(
+                          showFPersistentSheet(
                             context: context,
                             side: Layout.ltr,
                             draggable: false,

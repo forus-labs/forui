@@ -29,7 +29,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
           children: [
             FButton(
               label: const Text('Click me'),
-              onPress: () => showFModalSheet(
+              onPress: () => showFSheet(
                 context: context,
                 side: Layout.ltr,
                 builder: (context) => ListView.builder(

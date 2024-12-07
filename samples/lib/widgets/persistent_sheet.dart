@@ -7,27 +7,33 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class SheetsPage extends StatefulSample {
+class PersistentSheetPage extends StatefulSample {
   final bool keepAliveOffstage;
 
-  SheetsPage({
+  PersistentSheetPage({
     @queryParam super.theme,
     @queryParam this.keepAliveOffstage = false,
   });
 
   @override
-  State<SheetsPage> createState() => _SheetsState();
+  State<PersistentSheetPage> createState() => _SheetsState();
 }
 
-class _SheetsState extends StatefulSampleState<SheetsPage> {
-  final Map<Layout, FSheetController> _controllers = {};
+class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
+  final Map<Layout, FPersistentSheetController> _controllers = {};
 
   @override
   Widget sample(BuildContext context) {
     VoidCallback onPress(Layout side) => () {
+          for (final MapEntry(:key, :value) in _controllers.entries) {
+            if (key != side && value.shown) {
+              return;
+            }
+          }
+
           var controller = _controllers[side];
           if (controller == null) {
-            controller = _controllers[side] ??= showFSheet(
+            controller = _controllers[side] ??= showFPersistentSheet(
               context: context,
               side: side,
               keepAliveOffstage: widget.keepAliveOffstage,
@@ -76,7 +82,7 @@ class _SheetsState extends StatefulSampleState<SheetsPage> {
 
 class Form extends StatelessWidget {
   final Layout side;
-  final FSheetController controller;
+  final FPersistentSheetController controller;
 
   const Form({required this.side, required this.controller, super.key});
 
@@ -141,17 +147,17 @@ class Form extends StatelessWidget {
 }
 
 @RoutePage()
-class DraggableSheetsPage extends StatefulSample {
-  DraggableSheetsPage({
+class DraggablePersistentSheetPage extends StatefulSample {
+  DraggablePersistentSheetPage({
     @queryParam super.theme,
   });
 
   @override
-  State<DraggableSheetsPage> createState() => _DraggableSheetsState();
+  State<DraggablePersistentSheetPage> createState() => _DraggableState();
 }
 
-class _DraggableSheetsState extends StatefulSampleState<DraggableSheetsPage> {
-  FSheetController? controller;
+class _DraggableState extends StatefulSampleState<DraggablePersistentSheetPage> {
+  FPersistentSheetController? controller;
 
   @override
   Widget sample(BuildContext context) => FButton(
@@ -162,7 +168,7 @@ class _DraggableSheetsState extends StatefulSampleState<DraggableSheetsPage> {
             return;
           }
 
-          controller = showFSheet(
+          controller = showFPersistentSheet(
             context: context,
             side: Layout.btt,
             mainAxisMaxRatio: null,

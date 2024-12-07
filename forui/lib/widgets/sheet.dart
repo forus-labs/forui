@@ -7,5 +7,5 @@
 library forui.widgets.sheet;
 
 export '../src/widgets/sheet/modal_sheet.dart';
-export '../src/widgets/sheet/sheets.dart' hide FSheetsState;
+export '../src/widgets/sheet/persistent_sheet.dart' hide FSheetsState;
 export '../src/widgets/sheet/sheet.dart' show FSheetStyle;

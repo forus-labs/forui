@@ -19,7 +19,7 @@ class ModalSheetPage extends Sample {
         children: [
           FButton(
             label: const Text('Left'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.ltr,
               builder: (context) => const Form(side: Layout.ltr),
@@ -28,7 +28,7 @@ class ModalSheetPage extends Sample {
           const SizedBox(height: 5),
           FButton(
             label: const Text('Top'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.ttb,
               builder: (context) => const Form(side: Layout.ttb),
@@ -37,7 +37,7 @@ class ModalSheetPage extends Sample {
           const SizedBox(height: 5),
           FButton(
             label: const Text('Right'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.rtl,
               builder: (context) => const Form(side: Layout.rtl),
@@ -46,7 +46,7 @@ class ModalSheetPage extends Sample {
           const SizedBox(height: 5),
           FButton(
             label: const Text('Bottom'),
-            onPress: () => showFModalSheet(
+            onPress: () => showFSheet(
               context: context,
               side: Layout.btt,
               builder: (context) => const Form(side: Layout.btt),
@@ -130,7 +130,7 @@ class DraggableModalSheetPage extends Sample {
   @override
   Widget sample(BuildContext context) => FButton(
         label: const Text('Click me'),
-        onPress: () => showFModalSheet(
+        onPress: () => showFSheet(
           context: context,
           side: Layout.btt,
           mainAxisMaxRatio: null,

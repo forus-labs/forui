@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/sheet/sheets.dart';
+import 'package:forui/src/widgets/sheet/persistent_sheet.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  FSheetController? controller;
+  FPersistentSheetController? controller;
 
-  group('showFSheet', () {
+  group('showFPersistentSheet', () {
     testWidgets('shows sheet', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
@@ -18,7 +18,7 @@ void main() {
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
                 onPress: () {
-                  controller = showFSheet(
+                  controller = showFPersistentSheet(
                     context: context,
                     side: Layout.btt,
                     builder: (context, controller) => Container(
@@ -52,7 +52,7 @@ void main() {
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
                 onPress: () {
-                  controller = showFSheet(
+                  controller = showFPersistentSheet(
                     context: context,
                     side: Layout.btt,
                     keepAliveOffstage: true,
@@ -86,7 +86,7 @@ void main() {
             builder: (context) => FButton.icon(
               child: FIcon(FAssets.icons.chevronRight),
               onPress: () {
-                controller = showFSheet(
+                controller = showFPersistentSheet(
                   context: context,
                   side: Layout.btt,
                   builder: (context, controller) => Container(
@@ -116,7 +116,7 @@ void main() {
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
                 onPress: () {
-                  controller = showFSheet(
+                  controller = showFPersistentSheet(
                     key: const Key('test'),
                     context: context,
                     side: Layout.btt,
@@ -144,7 +144,7 @@ void main() {
     });
 
     testWidgets('dispose removes sheet', (tester) async {
-      late FSheetController controller;
+      late FPersistentSheetController controller;
       const key = Key('test');
 
       await tester.pumpWidget(
@@ -155,7 +155,7 @@ void main() {
               builder: (context) => FButton.icon(
                 child: FIcon(FAssets.icons.chevronRight),
                 onPress: () {
-                  controller = showFSheet(
+                  controller = showFPersistentSheet(
                     context: context,
                     side: Layout.btt,
                     builder: (context, controller) => Container(
@@ -194,7 +194,7 @@ void main() {
                 builder: (context) => FButton.icon(
                   child: FIcon(FAssets.icons.chevronRight),
                   onPress: () {
-                    controller = showFSheet(
+                    controller = showFPersistentSheet(
                       context: context,
                       side: side,
                       builder: (context, controller) => Container(
@@ -228,7 +228,7 @@ void main() {
                 builder: (context) => FButton.icon(
                   child: FIcon(FAssets.icons.chevronRight),
                   onPress: () {
-                    controller = showFSheet(
+                    controller = showFPersistentSheet(
                       context: context,
                       side: side,
                       draggable: false,
