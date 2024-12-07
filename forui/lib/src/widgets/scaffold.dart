@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/rendering.dart';
 
 import 'package:meta/meta.dart';
 
@@ -45,7 +49,7 @@ class FScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.scaffoldStyle;
-    final viewInsets = MediaQuery.of(context).viewInsets;
+    final viewInsets = MediaQuery.viewInsetsOf(context);
     Widget content = this.content;
     Widget footer = this.footer != null
         ? DecoratedBox(
@@ -64,10 +68,14 @@ class FScaffold extends StatelessWidget {
 
     return ColoredBox(
       color: style.backgroundColor,
-      child: Column(
+      child: _Wrapper(
         children: [
-          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-          Expanded(child: content),
+          Column(
+            children: [
+              if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+              Expanded(child: content),
+            ],
+          ),
           footer,
         ],
       ),
@@ -158,4 +166,44 @@ final class FScaffoldStyle with Diagnosticable {
   @override
   int get hashCode =>
       backgroundColor.hashCode ^ contentPadding.hashCode ^ headerDecoration.hashCode ^ footerDecoration.hashCode;
+}
+
+class _Wrapper extends MultiChildRenderObjectWidget {
+  final bool resizeToAvoidBottomInset;
+
+  const _Wrapper({required this.resizeToAvoidBottomInset, required super.children});
+
+  @override
+  RenderObject createRenderObject(BuildContext context) {
+    final viewInsets = MediaQuery.viewInsetsOf(context);
+  }
+}
+
+class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
+
+class _RenderScaffold extends RenderBox
+    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+  final bool resizeToAvoidBottomInset;
+  final EdgeInsets insets;
+
+  _RenderScaffold({
+    required this.resizeToAvoidBottomInset,
+    required this.insets,
+  });
+
+  @override
+  void setupParentData(covariant RenderObject child) => child.parentData = _Data();
+
+  @override
+  void performLayout() {
+    size = constraints.biggest;
+
+    final others = firstChild!;
+    final footer = lastChild!..layout(constraints, parentUsesSize: true);
+
+    final othersHeight = constraints.maxHeight - max(insets.bottom, footer.size.height);
+    others.layout(constraints.copyWith(maxHeight: othersHeight), parentUsesSize: true);
+
+    footer.data.offset = Offset(0, size.height - footer.size.height);
+  }
 }
