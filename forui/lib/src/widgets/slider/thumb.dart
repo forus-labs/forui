@@ -185,26 +185,26 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 
   double _offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
 
-  Map<ShortcutActivator, Intent> _shortcuts(Layout layout) => switch ((layout, widget.min)) {
-        (Layout.ltr, true) || (Layout.rtl, false) => const {
+  Map<ShortcutActivator, Intent> _shortcuts(FLayout layout) => switch ((layout, widget.min)) {
+        (FLayout.ltr, true) || (FLayout.rtl, false) => const {
             SingleActivator(LogicalKeyboardKey.arrowLeft): _ExtendIntent(),
             SingleActivator(LogicalKeyboardKey.arrowRight): _ShrinkIntent(),
           },
-        (Layout.ltr, false) || (Layout.rtl, true) => const {
+        (FLayout.ltr, false) || (FLayout.rtl, true) => const {
             SingleActivator(LogicalKeyboardKey.arrowLeft): _ShrinkIntent(),
             SingleActivator(LogicalKeyboardKey.arrowRight): _ExtendIntent(),
           },
-        (Layout.ttb, true) || (Layout.btt, false) => const {
+        (FLayout.ttb, true) || (FLayout.btt, false) => const {
             SingleActivator(LogicalKeyboardKey.arrowUp): _ExtendIntent(),
             SingleActivator(LogicalKeyboardKey.arrowDown): _ShrinkIntent(),
           },
-        (Layout.ttb, false) || (Layout.btt, true) => const {
+        (FLayout.ttb, false) || (FLayout.btt, true) => const {
             SingleActivator(LogicalKeyboardKey.arrowUp): _ShrinkIntent(),
             SingleActivator(LogicalKeyboardKey.arrowDown): _ExtendIntent(),
           },
       };
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, Layout layout) {
+  GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {
     if (controller.allowedInteraction == FSliderInteraction.tap) {
       return null;
     }
@@ -296,11 +296,11 @@ final class FSliderThumbStyle with Diagnosticable {
 }
 
 @internal
-extension Layouts on Layout {
+extension Layouts on FLayout {
   double Function(Offset) translateThumbDrag(double thumbSize) => switch (this) {
-        Layout.ltr => (delta) => delta.dx - thumbSize / 2,
-        Layout.rtl => (delta) => -delta.dx + thumbSize / 2,
-        Layout.ttb => (delta) => delta.dy - thumbSize / 2,
-        Layout.btt => (delta) => -delta.dy + thumbSize / 2,
+        FLayout.ltr => (delta) => delta.dx - thumbSize / 2,
+        FLayout.rtl => (delta) => -delta.dx + thumbSize / 2,
+        FLayout.ttb => (delta) => delta.dy - thumbSize / 2,
+        FLayout.btt => (delta) => -delta.dy + thumbSize / 2,
       };
 }

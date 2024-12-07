@@ -174,7 +174,7 @@ abstract class _RenderSlider extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   FSliderStyle _style;
   FSliderStateStyle _stateStyle;
-  Layout _layout;
+  FLayout _layout;
   List<FSliderMark> _marks;
   double? _mainAxisExtent;
   late Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) _positionMark;
@@ -236,22 +236,22 @@ abstract class _RenderSlider extends RenderBox
   Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) get _position {
     final insets = _style.labelLayoutStyle.childPadding;
     return switch (_layout) {
-      Layout.ltr => (track, label, mark, style) {
+      FLayout.ltr => (track, label, mark, style) {
           final extent = track.size.width - insets.left - insets.right;
           final offset = _anchor(extent, mark.value, insets.left, insets.top, style);
           return _rect(label, mark, Offset(offset.$1, offset.$2), style);
         },
-      Layout.rtl => (track, size, mark, style) {
+      FLayout.rtl => (track, size, mark, style) {
           final extent = track.size.width - insets.left - insets.right;
           final offset = _anchor(extent, 1 - mark.value, insets.left, insets.top, style);
           return _rect(size, mark, Offset(offset.$1, offset.$2), style);
         },
-      Layout.ttb => (track, size, mark, style) {
+      FLayout.ttb => (track, size, mark, style) {
           final extent = track.size.height - insets.top - insets.bottom;
           final offset = _anchor(extent, mark.value, insets.top, insets.left, style);
           return _rect(size, mark, Offset(offset.$2, offset.$1), style);
         },
-      Layout.btt => (track, size, mark, style) {
+      FLayout.btt => (track, size, mark, style) {
           final extent = track.size.height - insets.top - insets.bottom;
           final offset = _anchor(extent, 1 - mark.value, insets.top, insets.left, style);
           return _rect(size, mark, Offset(offset.$2, offset.$1), style);
@@ -331,9 +331,9 @@ abstract class _RenderSlider extends RenderBox
     markNeedsLayout();
   }
 
-  Layout get sliderLayout => _layout;
+  FLayout get sliderLayout => _layout;
 
-  set sliderLayout(Layout value) {
+  set sliderLayout(FLayout value) {
     if (_layout == value) {
       return;
     }

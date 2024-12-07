@@ -74,7 +74,7 @@ final class FSliderMarkStyle with Diagnosticable {
   /// The label's offset from the slider, along its cross axis, in logical pixels. The top-left corner is always the
   /// origin, regardless of the layout.
   ///
-  /// For example, if the layout is [Layout.ltr] and the cross axis offset is 3, the label will be 3 pixels below the
+  /// For example, if the layout is [FLayout.ltr] and the cross axis offset is 3, the label will be 3 pixels below the
   /// slider's edge.
   ///
   /// ```

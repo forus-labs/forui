@@ -26,11 +26,4 @@ migrate_working_dir/
 /pubspec.lock
 **/doc/api/
 .dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
 build/
-test/golden/failures/
-test/**/*_test.mocks.dart
-/.temp/
-custom_lint.log
-.i10n.txt

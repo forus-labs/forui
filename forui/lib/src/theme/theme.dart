@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 /// Applies a theme to descendant widgets.
 ///
 /// A theme configures the colors and typographic choices of Forui widgets. The actual configuration is stored in
-/// a [FThemeData]. Descendant widgets obtain the current theme's [FThemeData] via either [ThemeBuildContext.theme],
+/// a [FThemeData]. Descendant widgets obtain the current theme's [FThemeData] via either [FThemeBuildContext.theme],
 /// or [FTheme.of]. When a widget uses either, it is automatically rebuilt if the theme later changes.
 ///
 /// ```dart
@@ -34,7 +34,7 @@ import 'package:meta/meta.dart';
 class FTheme extends StatelessWidget {
   /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
   ///
-  /// It is recommended to use the terser [ThemeBuildContext.theme] getter instead.
+  /// It is recommended to use the terser [FThemeBuildContext.theme] getter instead.
   ///
   /// ## Troubleshooting:
   ///
@@ -140,7 +140,7 @@ class _InheritedTheme extends InheritedTheme {
 }
 
 /// Provides functions for accessing the current [FThemeData].
-extension ThemeBuildContext on BuildContext {
+extension FThemeBuildContext on BuildContext {
   /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
   ///
   /// ## Troubleshooting:
