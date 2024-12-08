@@ -18,7 +18,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
   }
 
   @override

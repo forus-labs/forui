@@ -151,8 +151,7 @@ class ItemContent extends StatelessWidget {
                 applyHeightToLastDescent: false,
               ),
               style: itemStyle.weekdayTextStyle,
-              // TODO: localization
-              child: Text(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][date.weekday - 1]),
+              child: Text(localizations.shortWeekDays[date.weekday % 7]),
             ),
           ],
         ),
