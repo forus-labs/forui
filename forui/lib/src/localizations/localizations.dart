@@ -314,6 +314,30 @@ abstract class FLocalizations {
   /// In en, this message translates to:
   /// **'{date}'**
   String day(DateTime date);
+
+  /// The sheet's label.
+  ///
+  /// In en, this message translates to:
+  /// **'Dialog'**
+  String get dialogLabel;
+
+  /// No description provided for @sheetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sheet'**
+  String get sheetLabel;
+
+  /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
+  ///
+  /// In en, this message translates to:
+  /// **'Barrier'**
+  String get barrierLabel;
+
+  /// The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.
+  ///
+  /// In en, this message translates to:
+  /// **'Close {modalRouteContentName}'**
+  String barrierOnTapHint(String modalRouteContentName);
 }
 
 class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {

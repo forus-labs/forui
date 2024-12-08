@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Párbeszédablak",
+  "sheetLabel": "lap",
+  "barrierOnTapHint": "$modalRouteContentName bezárása",
+  "barrierLabel": "Borítás"
+}

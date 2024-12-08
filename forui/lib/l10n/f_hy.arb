@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Երկխոսության պատուհան",
+  "sheetLabel": "էկրան",
+  "barrierOnTapHint": "Փակել՝ $modalRouteContentName",
+  "barrierLabel": "Դիմակ"
+}

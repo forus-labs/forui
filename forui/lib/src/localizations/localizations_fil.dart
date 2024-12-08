@@ -47,4 +47,18 @@ class FLocalizationsFil extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Dialog';
+
+  @override
+  String get sheetLabel => 'sheet';
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Isara ang \$modalRouteContentName';
+  }
 }

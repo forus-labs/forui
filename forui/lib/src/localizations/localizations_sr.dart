@@ -47,9 +47,37 @@ class FLocalizationsSr extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Дијалог';
+
+  @override
+  String get sheetLabel => 'табела';
+
+  @override
+  String get barrierLabel => 'Скрим';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Затвори: \$modalRouteContentName';
+  }
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
 class FLocalizationsSrLatn extends FLocalizationsSr {
   FLocalizationsSrLatn() : super('sr_Latn');
+
+  @override
+  String get dialogLabel => 'Dijalog';
+
+  @override
+  String get sheetLabel => 'tabela';
+
+  @override
+  String get barrierLabel => 'Skrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Zatvori: \$modalRouteContentName';
+  }
 }

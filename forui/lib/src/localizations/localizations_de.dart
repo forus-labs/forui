@@ -47,9 +47,26 @@ class FLocalizationsDe extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Dialogfeld';
+
+  @override
+  String get sheetLabel => 'Ansicht';
+
+  @override
+  String get barrierLabel => 'Gitter';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName schließen';
+  }
 }
 
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
   FLocalizationsDeCh() : super('de_CH');
+
+  @override
+  String get dialogLabel => 'Dialogfeld';
 }

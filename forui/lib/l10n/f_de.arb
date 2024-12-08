@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dialogfeld",
+  "sheetLabel": "Ansicht",
+  "barrierOnTapHint": "$modalRouteContentName schließen",
+  "barrierLabel": "Gitter"
+}

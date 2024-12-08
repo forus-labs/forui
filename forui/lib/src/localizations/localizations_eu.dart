@@ -47,4 +47,18 @@ class FLocalizationsEu extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Leihoa';
+
+  @override
+  String get sheetLabel => 'orria';
+
+  @override
+  String get barrierLabel => 'Barrera';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Itxi \$modalRouteContentName';
+  }
 }

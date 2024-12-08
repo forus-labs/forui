@@ -13,7 +13,7 @@ import 'package:forui/forui.dart';
 /// See:
 /// * https://forui.dev/docs/layout/scaffold for working examples.
 /// * [FScaffoldStyle] for customizing a scaffold's appearance.
-class FScaffold extends StatelessWidget {
+class FScaffold extends StatefulWidget {
   /// The content.
   final Widget content;
 
@@ -40,25 +40,7 @@ class FScaffold extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.scaffoldStyle;
-    Widget content = this.content;
-
-    if (contentPad) {
-      content = Padding(padding: style.contentPadding, child: content);
-    }
-
-    return ColoredBox(
-      color: style.backgroundColor,
-      child: Column(
-        children: [
-          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-          Expanded(child: content),
-          if (footer != null) DecoratedBox(decoration: style.footerDecoration, child: footer!),
-        ],
-      ),
-    );
-  }
+  State<FScaffold> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -66,6 +48,31 @@ class FScaffold extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('contentPad', value: contentPad, defaultValue: true, ifTrue: 'pad'));
+  }
+}
+
+class _State extends State<FScaffold> {
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style ?? context.theme.scaffoldStyle;
+    Widget content = widget.content;
+
+    if (widget.contentPad) {
+      content = Padding(padding: style.contentPadding, child: content);
+    }
+
+    return FSheets(
+      child: ColoredBox(
+        color: style.backgroundColor,
+        child: Column(
+          children: [
+            if (widget.header != null) DecoratedBox(decoration: style.headerDecoration, child: widget.header!),
+            Expanded(child: content),
+            if (widget.footer != null) DecoratedBox(decoration: style.footerDecoration, child: widget.footer!),
+          ],
+        ),
+      ),
+    );
   }
 }
 

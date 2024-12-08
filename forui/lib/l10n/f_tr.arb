@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "İletişim kutusu",
+  "sheetLabel": "sayfa",
+  "barrierOnTapHint": "$modalRouteContentName içeriğini kapat",
+  "barrierLabel": "opaklık katmanı"
+}

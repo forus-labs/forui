@@ -47,4 +47,18 @@ class FLocalizationsTr extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'İletişim kutusu';
+
+  @override
+  String get sheetLabel => 'sayfa';
+
+  @override
+  String get barrierLabel => 'opaklık katmanı';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName içeriğini kapat';
+  }
 }

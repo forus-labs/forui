@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dialogové okno",
+  "sheetLabel": "tabulka",
+  "barrierOnTapHint": "Zavřít $modalRouteContentName",
+  "barrierLabel": "Scrim"
+}

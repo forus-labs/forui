@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dijalog",
+  "sheetLabel": "tablica",
+  "barrierOnTapHint": "Zatvori $modalRouteContentName",
+  "barrierLabel": "Rubno"
+}

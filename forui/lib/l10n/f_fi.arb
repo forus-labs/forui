@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Valintaikkuna",
+  "sheetLabel": "arkki",
+  "barrierOnTapHint": "Sulje $modalRouteContentName",
+  "barrierLabel": "Sermi"
+}

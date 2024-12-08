@@ -10,6 +10,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
         primary: Color(0xFF18181B),
@@ -28,6 +29,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF09090B),
         foreground: Color(0xFFFAFAFA),
         primary: Color(0xFFFAFAFA),
@@ -50,6 +52,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF020817),
         primary: Color(0xFF0F172A),
@@ -68,6 +71,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF020817),
         foreground: Color(0xFFF8FAFC),
         primary: Color(0xFFF8FAFC),
@@ -90,6 +94,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
         primary: Color(0xFFDC2626),
@@ -108,6 +113,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF0A0A0A),
         foreground: Color(0xFFFAFAFA),
         primary: Color(0xFFDC2626),
@@ -130,6 +136,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
         primary: Color(0xFFE11D48),
@@ -148,6 +155,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFF2F2F2),
         primary: Color(0xFFE11D48),
@@ -170,6 +178,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF0C0A09),
         primary: Color(0xFFF97316),
@@ -188,6 +197,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFFAFAF9),
         primary: Color(0xFFEA580C),
@@ -210,6 +220,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
         primary: Color(0xFF16A34A),
@@ -228,6 +239,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFF2F2F2),
         primary: Color(0xFF22C55E),
@@ -250,6 +262,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF020817),
         primary: Color(0xFF2563EB),
@@ -268,6 +281,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF020817),
         foreground: Color(0xFFF8FAFC),
         primary: Color(0xFF3B82F6),
@@ -290,6 +304,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF0C0A09),
         primary: Color(0xFFFACC15),
@@ -308,6 +323,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFFAFAF9),
         primary: Color(0xFFFACC15),
@@ -330,6 +346,7 @@ extension FThemes on Never {
     light: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
+        barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF030712),
         primary: Color(0xFF7C3AED),
@@ -348,6 +365,7 @@ extension FThemes on Never {
     dark: FThemeData.inherit(
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
+        barrier: Color(0x7A000000),
         background: Color(0xFF030712),
         foreground: Color(0xFFF9FAFB),
         primary: Color(0xFF6D28D9),

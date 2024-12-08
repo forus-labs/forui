@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dialogu",
+  "sheetLabel": "Fleta",
+  "barrierOnTapHint": "Mbyll $modalRouteContentName",
+  "barrierLabel": "Kanavacë"
+}

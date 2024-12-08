@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dialoglodziņš",
+  "sheetLabel": "lapa",
+  "barrierOnTapHint": "Aizvērt $modalRouteContentName",
+  "barrierLabel": "Pārklājums"
+}

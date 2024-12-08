@@ -9,7 +9,6 @@
       }
     }
   },
-
   "year": "{date}",
   "@year": {
     "description": "The year.",
@@ -20,7 +19,6 @@
       }
     }
   },
-
   "yearMonth": "{date}",
   "@yearMonth": {
     "description": "The year and month.",
@@ -31,7 +29,6 @@
       }
     }
   },
-
   "abbreviatedMonth": "{date}",
   "@abbreviatedMonth": {
     "description": "The abbreviated month.",
@@ -42,7 +39,6 @@
       }
     }
   },
-
   "day": "{date}",
   "@day": {
     "description": "The day of the month.",
@@ -50,6 +46,31 @@
       "date": {
         "type": "DateTime",
         "format": "d"
+      }
+    }
+  },
+
+  "dialogLabel": "Dialog",
+  "@dialogLabel": {
+    "description": "The audio announcement made when a dialog is opened."
+  },
+
+  "sheetLabel": "Sheet",
+  "@dialogLabel": {
+    "description": "The sheet's label."
+  },
+
+  "barrierLabel": "Barrier",
+  "@barrierLabel": {
+    "description": "The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message)."
+  },
+
+  "barrierOnTapHint": "Close {modalRouteContentName}",
+  "@barrierOnTapHint": {
+    "description": "The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.",
+    "placeholders": {
+      "modalRouteContentName": {
+        "type": "String"
       }
     }
   }

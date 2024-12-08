@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "ប្រអប់",
+  "sheetLabel": "សន្លឹក",
+  "barrierOnTapHint": "បិទ $modalRouteContentName",
+  "barrierLabel": "ផ្ទាំងស្រអាប់"
+}

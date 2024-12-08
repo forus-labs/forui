@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Hộp thoại",
+  "sheetLabel": "Bảng",
+  "barrierOnTapHint": "Đóng $modalRouteContentName",
+  "barrierLabel": "Scrim"
+}

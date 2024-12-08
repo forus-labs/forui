@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dialogruta",
+  "sheetLabel": "Ark",
+  "barrierOnTapHint": "Stäng $modalRouteContentName",
+  "barrierLabel": "Scrim"
+}

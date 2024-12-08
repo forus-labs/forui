@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Okno dialogowe",
+  "sheetLabel": "Plansza",
+  "barrierOnTapHint": "Zamknij: $modalRouteContentName",
+  "barrierLabel": "Siatka"
+}

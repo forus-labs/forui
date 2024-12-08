@@ -2,6 +2,16 @@
 
 ### Additions
 
+* Add `showFSheet(...)`.
+
+* Add `showFModalSheet(...)`.
+
+* Add `FModalSheetRoute`.
+
+* Add `FSheets`.
+
+* Add `FSheets` internally to `FScaffold`.
+
 * Add `truncateAndStripTimezone` to `FCalendarController.date(...)`.
 
 * Add `truncateAndStripTimezone` to `FCalendarController.dates(...)`.

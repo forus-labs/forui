@@ -14,6 +14,7 @@ class TestScaffold extends StatelessWidget {
   static final blueScreen = FThemeData.inherit(
     colorScheme: const FColorScheme(
       brightness: Brightness.light,
+      barrier: Color(0xFF03A9F4),
       background: Color(0xFF03A9F4),
       foreground: Color(0xFF03A9F4),
       primary: Color(0xFF03A9F4),

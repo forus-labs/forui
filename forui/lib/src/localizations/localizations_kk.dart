@@ -47,4 +47,18 @@ class FLocalizationsKk extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Диалогтық терезе';
+
+  @override
+  String get sheetLabel => 'парақша';
+
+  @override
+  String get barrierLabel => 'Кенеп';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName жабу';
+  }
 }
