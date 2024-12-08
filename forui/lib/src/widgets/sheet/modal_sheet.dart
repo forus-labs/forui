@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:forui/forui.dart';
@@ -181,13 +181,13 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   FModalSheetRoute({
     required this.style,
     required this.side,
+    required this.barrierColor,
     required this.builder,
     this.mainAxisMaxRatio = 9 / 16,
     this.capturedThemes,
     this.barrierOnTapHint,
     this.barrierLabel,
     this.barrierDismissible = true,
-    this.barrierColor = Colors.black54,
     this.constraints = const BoxConstraints(),
     this.draggable = true,
     this.transitionAnimationController,
