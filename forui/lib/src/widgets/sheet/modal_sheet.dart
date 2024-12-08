@@ -24,9 +24,6 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 ///
 /// [barrierLabel] defaults to [FLocalizations.barrierLabel].
 ///
-/// [barrierColor] defaults to the default Cupertino modal barrier color on iOS & macOS, and [Colors.black54] on other
-/// platforms.
-///
 /// Returns a `Future` that resolves to the value (if any) that was passed to [Navigator.pop] when the modal sheet was
 /// closed.
 ///
