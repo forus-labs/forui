@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/line_calendar/speculative_layout.dart';
+import 'package:forui/src/widgets/line_calendar/calendar_layout.dart';
 
 /// A line calendar displays dates in a single horizontal, scrollable line.
 ///
