@@ -10,9 +10,11 @@ final themes = {
 
 abstract class Sample extends StatelessWidget {
   final FThemeData theme;
+  final double maxWidth;
 
   Sample({
     String theme = 'zinc-light',
+    this.maxWidth = 400,
     super.key,
   }) : theme = themes[theme]!;
 
@@ -30,7 +32,7 @@ abstract class Sample extends StatelessWidget {
         child: FScaffold(
           content: Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 400),
+              constraints: BoxConstraints(maxWidth: maxWidth),
               child: Builder(
                 builder: sample,
               ),
