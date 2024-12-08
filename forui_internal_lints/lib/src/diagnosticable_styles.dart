@@ -25,7 +25,13 @@ class DiagnosticableStylesRule extends DartLintRule {
       }
 
       if (declared case final declared? when declared.isConstructable && !_checker.isAssignableFrom(declared)) {
-        reporter.atElement(declared, _code);
+        reporter.atElement(
+          declared,
+          LintCode(
+            name: 'diagnosticable_styles',
+            problemMessage: 'Style(s), ${declared.name}, should be assignable to Diagnosticable.',
+          ),
+        );
       }
     });
   }

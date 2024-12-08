@@ -1,4 +1,6 @@
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:forui_internal_lints/src/always_call_super_dispose_last.dart';
+import 'package:forui_internal_lints/src/avoid_record_diagnostics_properties.dart';
 
 import 'package:forui_internal_lints/src/diagnosticable_styles.dart';
 import 'package:forui_internal_lints/src/prefer_specific_diagnostics_properties.dart';
@@ -10,6 +12,8 @@ PluginBase createPlugin() => _ForuiLinter();
 class _ForuiLinter extends PluginBase {
   @override
   List<LintRule> getLintRules(CustomLintConfigs configs) => const [
+        AlwaysCallSuperDisposeLast(),
+        AvoidRecordDiagnosticsProperties(),
         DiagnosticableStylesRule(),
         PreferSpecificDiagnosticsProperties(),
         PrefixPublicTypesRule(),

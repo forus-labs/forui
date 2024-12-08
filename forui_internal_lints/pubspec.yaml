@@ -15,7 +15,7 @@ dependencies:
   analyzer: any
   analyzer_plugin: any
   collection: ^1.18.0
-  custom_lint_builder: ^0.6.6
+  custom_lint_builder: ^0.7.0
   flutter:
     sdk: flutter
 

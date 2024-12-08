@@ -35,7 +35,13 @@ class PrefixPublicTypesRule extends DartLintRule {
         return;
       }
 
-      reporter.atElement(element, _code);
+      reporter.atElement(
+        element,
+        LintCode(
+          name: 'prefix_public_types',
+          problemMessage: 'Public type, ${element.name}, should be prefixed with F.',
+        ),
+      );
     }
 
     context.registry

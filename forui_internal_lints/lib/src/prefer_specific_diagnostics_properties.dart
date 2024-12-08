@@ -1,4 +1,4 @@
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
@@ -16,15 +16,8 @@ const _iconData = TypeChecker.fromName('IconData', packageName: 'flutter');
 const _int = TypeChecker.fromName('int');
 const _string = TypeChecker.fromName('String');
 
-const _exact = TypeChecker.any([
-  _bool,
-  _double,
-  _iconData,
-  _int,
-  _string,
-]);
-
-const _color = TypeChecker.fromName('Color', packageName: 'flutter');
+const _enum = TypeChecker.fromName('Enum', packageName: 'dart:core');
+const _color = TypeChecker.fromName('Color');
 const _iterable = TypeChecker.fromName('Iterable');
 
 /// A lint rule that checks if a DiagnosticsProperty is created with a type.
@@ -48,65 +41,30 @@ class PreferSpecificDiagnosticsProperties extends DartLintRule {
         return;
       }
 
-      if (_exact.isExactlyType(type) ||
-          type.isDartCoreEnum ||
-          type.isDartCoreFunction ||
-          _color.isAssignableFromType(type) ||
-          _iterable.isAssignableFromType(type)) {
-        reporter.atNode(node, _code);
-      }
-    });
-  }
+      final recommendation = switch (type) {
+        _ when _bool.isAssignableFromType(type) => ('bools', 'FlagProperty'),
+        _ when _double.isAssignableFromType(type) => ('doubles', 'DoubleProperty/PercentageProperty'),
+        _ when _iconData.isAssignableFromType(type) => ('IconData', 'IconDataProperty'),
+        _ when _int.isAssignableFromType(type) => ('ints', 'IntProperty'),
+        _ when _string.isAssignableFromType(type) => ('strings', 'StringProperty'),
+        _ when (type is InterfaceType) && type.allSupertypes.any(_enum.isExactlyType) => ('enums', 'EnumProperty'),
+        _ when _color.isAssignableFromType(type) => ('colors', 'ColorProperty'),
+        _ when _iterable.isAssignableFromType(type) => ('iterables', 'IterableProperty'),
+        _ when type is FunctionType => ('functions', 'ObjectFlagProperty'),
+        _ => null,
+      };
 
-  @override
-  List<DartFix> getFixes() => [_Fix()];
-}
-
-class _Fix extends DartFix {
-  @override
-  void run(
-    CustomLintResolver resolver,
-    ChangeReporter reporter,
-    CustomLintContext context,
-    AnalysisError analysisError,
-    List<AnalysisError> others,
-  ) {
-    context.registry.addInstanceCreationExpression((node) {
-      if (!node.sourceRange.intersects(analysisError.sourceRange)) {
+      if (recommendation == null) {
         return;
       }
 
-      final type = node.staticType; // DiagnosticsProperty.lazy is not supported.
-      if (type == null || node.constructorName.name != null) {
-        return;
-      }
-
-      reporter
-          .createChangeBuilder(message: 'Use specific DiagnosticsProperties.', priority: 100)
-          .addDartFileEdit((builder) {
-        switch (type) {
-          // FlagProperty (bool) is not supported.
-          case _ when _double.isExactlyType(type):
-            // It may be more appropriate to use a PercentageProperty but there is no simple way to infer that.
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'DoubleProperty');
-          case _ when _int.isExactlyType(type):
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'IntProperty');
-          case _ when _string.isExactlyType(type):
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'StringProperty');
-          case _ when _iconData.isExactlyType(type):
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'IconDataProperty');
-
-          case _ when type.isDartCoreEnum:
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'EnumProperty');
-          case _ when type.isDartCoreFunction:
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'ObjectFlagProperty.has');
-
-          case _ when _color.isAssignableFromType(type):
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'ColorProperty');
-          case _ when _iterable.isAssignableFromType(type):
-            builder.addSimpleReplacement(node.constructorName.sourceRange, 'IterableProperty');
-        }
-      });
+      reporter.atNode(
+        node,
+        LintCode(
+          name: 'prefer_specific_diagnostics_properties',
+          problemMessage: 'Prefer specific diagnostic properties, ${recommendation.$2}, for ${recommendation.$1}',
+        ),
+      );
     });
   }
 }

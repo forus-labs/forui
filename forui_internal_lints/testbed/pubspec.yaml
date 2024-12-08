@@ -13,7 +13,6 @@ dependencies:
   meta: ^1.11.0
 
 dev_dependencies:
-  custom_lint: ^0.7.0
   flutter_test:
     sdk: flutter
   forui_internal_lints:
