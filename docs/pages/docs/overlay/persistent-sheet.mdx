@@ -5,17 +5,19 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 
 # Persistent Sheet
 
-A persistent sheet that are displayed above another widget. It is part of [FScaffold](/docs/layout/scaffold), which
-should be preferred in most cases.
-
-A closely related widget is a [modal sheet](/docs/overlay/modal-sheet) which prevents the user from interacting with the
-rest of the app.
+A persistent sheet is displayed above another widget while still allowing users to interact with the widget below.
+It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in most cases.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/forui.widgets.sheet-library.html"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
+    A closely related widget is a [modal sheet](/docs/overlay/sheet) which prevents the user from interacting with the
+    rest of the app.
+</Callout>
+
+<Callout type="warning">
     All calls to `showFPersistentSheet(...)` should be made inside widgets that have either `FScaffold` or `FSheets` as
     their ancestor.
 </Callout>
@@ -189,7 +191,7 @@ showFPersistentSheet(
     <Widget name='persistent-sheet' query={{keepAliveOffstage: true}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {17}
+    ```dart {23}
     class Sheets extends StatefulWidget {
       @override
       State<Sheets> createState() => _State();
@@ -334,7 +336,7 @@ showFPersistentSheet(
     <Widget name='persistent-sheet' query={{}} height={400} variant='draggable'/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {23-41}
     class DraggableSheets extends StatefulWidget {
       @override
       State<DraggableSheets> createState() => _State();

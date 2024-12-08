@@ -1,8 +1,8 @@
 export default {
   dialog: 'Dialog',
+  sheet: 'Sheet',
+  'persistent-sheet': 'Persistent Sheet',
   popover: 'Popover',
   'popover-menu': 'Popover Menu',
-  'modal-sheet': 'Modal Sheet',
-  'persistent-sheet': 'Persistent Sheet',
   tooltip: 'Tooltip',
 };

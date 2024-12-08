@@ -1,18 +1,21 @@
-import { Tabs } from 'nextra/components';
+import { Callout, Tabs } from 'nextra/components';
 import { Widget } from "../../../components/widget.tsx";
 import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
 
-# Modal Sheet
+# Sheet
 
 A modal sheet is an alternative to a menu or a dialog and prevents the user from interacting with the rest of the app.
-
-A closely related widget is a [persistent sheet](/docs/overlay/persistent-sheet), which shows information that
-supplements the primary content of the app without preventing the user from interacting with the app.
+It navigates to a new page each time.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/forui.widgets.sheet-library.html"/>
 </LinkBadgeGroup>
+
+<Callout type="info">
+    A closely related widget is a [persistent sheet](/docs/overlay/persistent-sheet), which shows information that
+    supplements the primary content of the app without preventing the user from interacting with the app.
+</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -160,7 +163,7 @@ showFSheet(
     <Widget name='modal-sheet' query={{}} height={400} variant='draggable'/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart {9-22}
     FButton(
       label: const Text('Click me'),
       onPress: () => showFModalSheet(

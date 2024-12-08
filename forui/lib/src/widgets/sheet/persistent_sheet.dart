@@ -77,7 +77,7 @@ FPersistentSheetController showFPersistentSheet({
     ]);
   }
 
-  key ??= ValueKey(Random.secure().nextInt(2147483647));
+  key ??= ValueKey(Random().nextInt(2147483647));
   style ??= context.theme.sheetStyle;
 
   final controller = FPersistentSheetController._(
