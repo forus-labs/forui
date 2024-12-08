@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
-import 'package:meta/meta.dart';
 
 /// Shows a persistent sheet that appears above the current widget. It should have a [FSheets] or [FScaffold] ancestor.
 ///
