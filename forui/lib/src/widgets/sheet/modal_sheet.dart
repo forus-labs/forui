@@ -48,7 +48,6 @@ Future<T?> showFSheet<T>({
   double? mainAxisMaxRatio = 9 / 16,
   String? barrierLabel,
   bool barrierDismissible = true,
-  Color? barrierColor,
   BoxConstraints constraints = const BoxConstraints(),
   bool draggable = true,
   RouteSettings? routeSettings,
@@ -61,11 +60,6 @@ Future<T?> showFSheet<T>({
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
   final localizations = FLocalizations.of(context);
 
-  final platformBarrierColor = switch (defaultTargetPlatform) {
-    TargetPlatform.iOS || TargetPlatform.macOS => CupertinoDynamicColor.resolve(kCupertinoModalBarrierColor, context),
-    _ => Colors.black54,
-  };
-
   return navigator.push(
     FModalSheetRoute<T>(
       style: style ?? context.theme.sheetStyle,
@@ -76,7 +70,7 @@ Future<T?> showFSheet<T>({
       barrierOnTapHint: localizations.barrierOnTapHint(localizations.sheetLabel),
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
       barrierDismissible: barrierDismissible,
-      barrierColor: barrierColor ?? platformBarrierColor,
+      barrierColor: (style ?? context.theme.sheetStyle).barrierColor,
       constraints: constraints,
       draggable: draggable,
       settings: routeSettings,

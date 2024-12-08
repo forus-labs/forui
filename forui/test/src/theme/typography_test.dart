@@ -52,6 +52,7 @@ void main() {
     group('inherit constructor', () {
       const colorScheme = FColorScheme(
         brightness: Brightness.light,
+        barrier: Colors.black12,
         background: Colors.black,
         foreground: Colors.black12,
         primary: Colors.black26,

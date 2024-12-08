@@ -254,6 +254,9 @@ extension on GlobalKey {
 
 /// A sheet's style.
 class FSheetStyle with Diagnosticable {
+  /// The barrier's color.
+  final Color barrierColor;
+
   /// The sheet's background color.
   final Color backgroundColor;
 
@@ -277,6 +280,7 @@ class FSheetStyle with Diagnosticable {
 
   /// Creates a [FSheetStyle].
   const FSheetStyle({
+    required this.barrierColor,
     required this.backgroundColor,
     this.enterDuration = const Duration(milliseconds: 200),
     this.exitDuration = const Duration(milliseconds: 200),
@@ -285,12 +289,17 @@ class FSheetStyle with Diagnosticable {
   });
 
   /// Creates a [FSheetStyle] that inherits its colors from the given [FColorScheme].
-  FSheetStyle.inherit({required FColorScheme colorScheme}) : this(backgroundColor: colorScheme.background);
+  FSheetStyle.inherit({required FColorScheme colorScheme})
+      : this(
+          barrierColor: colorScheme.barrier,
+          backgroundColor: colorScheme.background,
+        );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(ColorProperty('barrierColor', barrierColor))
       ..add(ColorProperty('backgroundColor', backgroundColor))
       ..add(DiagnosticsProperty('enterDuration', enterDuration))
       ..add(DiagnosticsProperty('exitDuration', exitDuration))
