@@ -128,7 +128,7 @@ class VerticalSliderPage extends Sample {
         child: FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          layout: Layout.btt,
+          layout: FLayout.btt,
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           trackMainAxisExtent: 350,
           marks: const [

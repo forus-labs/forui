@@ -48,6 +48,10 @@
 
 * Change `FSelectMenuTile` to be scrollable.
 
+* Change `ThemeBuildContext` to `FThemeBuildContext`.
+
+* **Breaking** Change `Layout` to `FLayout`.
+
 * **Breaking** Change `FTileData.index` to `FTileData.last`.
 
 * **Breaking** Change `FPopoverMenu.controller` to `FPopoverMenu.popoverController`.

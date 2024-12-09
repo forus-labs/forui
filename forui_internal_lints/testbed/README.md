@@ -1,0 +1,1 @@
+Tests for the `forui_internal_lints` package.

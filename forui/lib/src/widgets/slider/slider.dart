@@ -40,7 +40,7 @@ class FSlider extends StatelessWidget {
   final FSliderStyle? style;
 
   /// The layout. Defaults to the current [TextDirection].
-  final Layout? layout;
+  final FLayout? layout;
 
   /// The label.
   final Widget? label;
@@ -158,8 +158,8 @@ class FSlider extends StatelessWidget {
     final styles = context.theme.sliderStyles;
     final layout = switch (this.layout) {
       final layout? => layout,
-      _ when Directionality.maybeOf(context) == TextDirection.rtl => Layout.rtl,
-      _ => Layout.ltr,
+      _ when Directionality.maybeOf(context) == TextDirection.rtl => FLayout.rtl,
+      _ => FLayout.ltr,
     };
     final sliderStyle = style ?? (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
 
@@ -219,7 +219,7 @@ class FSlider extends StatelessWidget {
 class _Slider extends StatefulWidget {
   final FSliderController controller;
   final FSliderStyle style;
-  final Layout layout;
+  final FLayout layout;
   final Widget? label;
   final Widget? description;
   final Widget Function(BuildContext, String) errorBuilder;

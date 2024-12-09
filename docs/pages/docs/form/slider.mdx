@@ -31,7 +31,7 @@ An input where the user selects a value from within a given range.
 
 ```dart
 FSlider(
-  layout: Layout.rtl,
+  layout: FLayout.rtl,
   tooltipBuilder: (style, value) => Text('${(value.toStringAsFixed(2)}%'),
   controller: FContinuousSliderController(
     allowedInteraction: FSliderInteraction.tap,
@@ -231,7 +231,7 @@ describes the mark's value.
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          layout: Layout.btt,
+          layout: FLayout.btt,
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           trackMainAxisExtent: 350,
           marks: const [
