@@ -38,7 +38,8 @@ class AlwaysCallSuperDisposeLast extends DartLintRule {
 
       if (node.body case BlockFunctionBody(block: Block(:final statements)) when statements.isNotEmpty) {
         for (final statement in statements.reversed.skip(1)) {
-          if (statement case ExpressionStatement(:final MethodInvocation expression) when expression.toSource() == 'super.dispose()') {
+          if (statement case ExpressionStatement(:final MethodInvocation expression)
+              when expression.toSource() == 'super.dispose()') {
             reporter.atNode(expression, _code);
           }
         }
@@ -59,13 +60,14 @@ class _Visitor extends SimpleElementVisitor<bool> {
   bool? visitMixinElement(MixinElement type) => _visitInterface(type);
 
   bool _visitInterface(InterfaceElement interface) {
-    if (self != interface &&
-        interface.methods.any((method) =>
-            !method.isStatic &&
-            method.hasMustCallSuper &&
-            method.returnType is VoidType &&
-            method.name == 'dispose' &&
-            method.parameters.isEmpty)) {
+    bool signature(MethodElement method) =>
+        !method.isStatic &&
+        method.hasMustCallSuper &&
+        method.returnType is VoidType &&
+        method.name == 'dispose' &&
+        method.parameters.isEmpty;
+
+    if (self != interface && interface.methods.any(signature)) {
       return true;
     }
 

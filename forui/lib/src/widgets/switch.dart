@@ -308,7 +308,7 @@ final class FSwitchStateStyle with Diagnosticable implements FFormFieldStyle {
   });
 
   @override
-  FFormFieldStyle copyWith({
+  FSwitchStateStyle copyWith({
     Color? checkedColor,
     Color? uncheckedColor,
     Color? thumbColor,
