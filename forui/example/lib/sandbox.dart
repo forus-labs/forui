@@ -12,33 +12,22 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late AnimationController controller;
+  final FCalendarController<DateTime?> controller = FCalendarController.date();
+  late FPopoverController popoverController;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
   }
 
   @override
-  Widget build(BuildContext context) => Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FButton(
-              label: const Text('Click me'),
-              onPress: () => showFSheet(
-                context: context,
-                side: Layout.ltr,
-                builder: (context) => ListView.builder(
-                  itemBuilder: (context, index) => FTile(title: Text('Tile $index')),
-                ),
-              ),
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FLineCalendar(
+            controller: controller,
+          ),
+        ],
       );
 
   @override

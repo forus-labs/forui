@@ -20,6 +20,8 @@
 
 * Add `FCalendar.dayBuilder`.
 
+* Add `FLineCalendar`.
+
 * Add `FTileGroup.builder`.
 
 * Add `FSelectTileGroup.builder`.

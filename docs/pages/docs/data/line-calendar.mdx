@@ -1,0 +1,48 @@
+import { Tabs } from 'nextra/components';
+import { Callout } from "nextra/components";
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Line Calendar
+A line calendar displays dates in a single horizontal, scrollable line.
+
+<LinkBadgeGroup>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/forui.widgets.line-calendar-library.html"/>
+</LinkBadgeGroup>
+
+<Callout type="info">
+  Hold `Shift` while using the mouse scroll wheel on desktop and web to scroll the through the dates.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='line-calendar' query={{}} height={200}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FLineCalendar(
+          controller: FCalendarController.date(
+            initialSelection: DateTime.now().subtract(const Duration(days: 1)),
+          ),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FLineCalendar(...)`
+
+```dart
+FLineCalendar(
+  controller: FCalendarController.date(),
+  initialDateAlignment: AlignmentDirectional.center,
+  cacheExtent: 100,
+  builder: (context, data, child) => child!,
+  start: DateTime(1900),
+  end: DateTime(2050),
+  initial: DateTime.now(),
+  today: DateTime.now(),
+);
+```

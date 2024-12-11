@@ -81,6 +81,29 @@ void main() {
       });
     });
 
+    group('shortWeekdays', () {
+      test('default implementation', () {
+        expect(DefaultLocalizations().shortWeekDays, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+      });
+
+      testWidgets('de locale', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('de'),
+            child: Builder(
+              builder: (context) {
+                final localizations = FLocalizations.of(context);
+                expect(localizations.shortWeekDays, ['So.', 'Mo.', 'Di.', 'Mi.', 'Do.', 'Fr.', 'Sa.']);
+                return const Placeholder();
+              },
+            ),
+          ),
+        );
+
+        await expectLater(tester.takeException(), null);
+      });
+    });
+
     group('narrowWeekDays', () {
       test('default implementation', () {
         expect(DefaultLocalizations().narrowWeekDays, ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
