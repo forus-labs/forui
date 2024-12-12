@@ -1,7 +1,5 @@
-import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:intl/intl.dart';
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
@@ -19,9 +17,14 @@ extension FDateTimeLocalizations on FLocalizations {
       : DateFormat.yMMMMd(localeName).dateSymbols.STANDALONENARROWWEEKDAYS;
 }
 
-@internal
+/// The default localization for when no localization is provided.
 class DefaultLocalizations extends FLocalizations {
-  DefaultLocalizations() : super('');
+  static final _localizations = DefaultLocalizations._();
+
+  /// Creates a [DefaultLocalizations].
+  factory DefaultLocalizations() => _localizations;
+
+  DefaultLocalizations._() : super('');
 
   @override
   String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);

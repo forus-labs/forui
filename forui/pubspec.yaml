@@ -10,8 +10,9 @@ topics:
   - widget
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
-  flutter: ">=3.24.0"
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+resolution: workspace
 
 dependencies:
   collection: ^1.18.0
@@ -28,10 +29,8 @@ dependencies:
   nitrogen_types: ^0.3.0+1
   sugar: ^3.1.0
 
-
 dev_dependencies:
   build_runner: ^2.4.0
-  flint: ^2.8.1
   flutter_test:
     sdk: flutter
   http: ^1.2.2
@@ -42,7 +41,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  generate: true
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -77,6 +75,3 @@ flutter:
 
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
-
-import_sorter:
-  comments: false

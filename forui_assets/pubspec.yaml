@@ -11,8 +11,9 @@ topics:
   - widget
 
 environment:
-  sdk: '>=3.5.0 <4.0.0'
-  flutter: ">=3.24.0"
+  sdk: '>=3.6.0 <4.0.0'
+  flutter: ">=3.27.0"
+resolution: workspace
 
 dependencies:
   flutter:
@@ -21,7 +22,6 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.0
-  flint: ^2.8.1
   nitrogen: ^0.3.0+1
 
 # For information on the generic Dart part of this file, see the

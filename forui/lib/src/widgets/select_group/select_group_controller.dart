@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A controller for a select group.
 abstract class FSelectGroupController<T> extends FChangeNotifier {

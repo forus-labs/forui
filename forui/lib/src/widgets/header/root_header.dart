@@ -9,7 +9,7 @@ part of 'header.dart';
 /// * https://forui.dev/docs/navigation/header for working examples.
 /// * [FRootHeaderStyle] for customizing a header's appearance.
 final class _FRootHeader extends FHeader {
-  /// The header's style. Defaults to [FThemeData.headerStyle.rootStyle].
+  /// The header's style.
   final FRootHeaderStyle? style;
 
   /// The title, aligned to the left in LTR locales.

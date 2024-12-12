@@ -6,8 +6,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/forui.dart';
+
 import '../test_scaffold.dart';
 
 void main() {
@@ -17,7 +17,7 @@ void main() {
         final testWidget = TestScaffold.app(
           theme: theme.data,
           child: FAvatar(
-            image: FileImage(File('./test/resources/pante.jpg')),
+            image: FileImage(File('$relativePath/test/resources/pante.jpg')),
             fallback: const Text('MN'),
           ),
         );

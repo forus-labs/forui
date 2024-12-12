@@ -2,10 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/util.dart';
+import 'package:meta/meta.dart';
 
 /// The state of a line calendar item used to build a line calendar item.
 typedef FLineCalendarItemData = ({
@@ -40,7 +38,7 @@ class Item extends StatelessWidget {
         valueListenable: controller,
         builder: (context, selected, _) => FTappable.animated(
           focusNode: FocusNode(debugLabel: 'Date: $date'),
-          semanticLabel: FLocalizations.of(context).fullDate(date),
+          semanticLabel: (FLocalizations.of(context) ?? DefaultLocalizations()).fullDate(date),
           onPress: () => controller.select(date),
           builder: (context, state, _) {
             final itemStyle = switch ((selected == date, state.hovered)) {
@@ -125,7 +123,7 @@ class ItemContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = FLocalizations.of(context);
+    final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
     return DecoratedBox(
       decoration: focused ? itemStyle.focusedDecoration : itemStyle.decoration,
       child: Padding(
@@ -134,8 +132,7 @@ class ItemContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-            merge(
+            DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
@@ -144,8 +141,7 @@ class ItemContent extends StatelessWidget {
               child: Text(localizations.day(date)),
             ),
             SizedBox(height: style.itemContentSpacing),
-            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-            merge(
+            DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,

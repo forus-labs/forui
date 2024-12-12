@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/gesture_detector.dart';
 import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
+import 'package:meta/meta.dart';
 
 @internal
 class Sheet extends StatefulWidget {
@@ -155,7 +154,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         namesRoute: true,
         label: switch (defaultTargetPlatform) {
           TargetPlatform.iOS || TargetPlatform.macOS => null,
-          _ => FLocalizations.of(context).dialogLabel,
+          _ => (FLocalizations.of(context) ?? DefaultLocalizations()).dialogLabel,
         },
         explicitChildNodes: true,
         child: ClipRect(

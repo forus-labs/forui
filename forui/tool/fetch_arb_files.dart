@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:collection/collection.dart';
 import 'package:http/http.dart' as http;
 
 final pattern = RegExp(r'(widgets|material)_([\w_]+)\.arb');
@@ -21,7 +20,7 @@ Future<void> main() async {
   (json.decode(response.body) as List<dynamic>)
       .map((file) => file['name'] as String)
       .map((file) => pattern.firstMatch(file)?.group(2))
-      .whereNotNull()
+      .nonNulls
       .map((locale) => File('lib/l10n/f_$locale.arb'))
       .where((arb) => !arb.existsSync())
       .forEach(

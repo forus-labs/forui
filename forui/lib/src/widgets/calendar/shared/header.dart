@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
-
-import 'package:forui/forui.dart';
 
 /// The current picker type.
 enum FCalendarPickerType {
@@ -71,7 +70,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  FLocalizations.of(context).yearMonth(widget.month.toNative()),
+                  (FLocalizations.of(context) ?? DefaultLocalizations()).yearMonth(widget.month.toNative()),
                   style: widget.style.headerTextStyle,
                 ),
                 RotationTransition(

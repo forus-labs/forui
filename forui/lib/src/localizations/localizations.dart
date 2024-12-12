@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'package:forui/src/localizations/localization.dart';
 import 'localizations_af.dart';
 import 'localizations_am.dart';
 import 'localizations_ar.dart';
@@ -145,8 +144,8 @@ abstract class FLocalizations {
 
   final String localeName;
 
-  static FLocalizations of(BuildContext context) {
-    return Localizations.of<FLocalizations>(context, FLocalizations) ?? DefaultLocalizations();
+  static FLocalizations? of(BuildContext context) {
+    return Localizations.of<FLocalizations>(context, FLocalizations);
   }
 
   static const LocalizationsDelegate<FLocalizations> delegate = _FLocalizationsDelegate();

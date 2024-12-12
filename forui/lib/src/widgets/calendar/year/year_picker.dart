@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class YearPicker extends StatefulWidget {
@@ -87,7 +86,7 @@ class _YearPickerState extends State<YearPicker> {
                 focusNode: _years[i],
                 current: widget.today.year == year.year,
                 selectable: widget.start <= year && year <= widget.end,
-                format: (date) => FLocalizations.of(context).year(date.toNative()),
+                format: (date) => (FLocalizations.of(context) ?? DefaultLocalizations()).year(date.toNative()),
                 onPress: widget.onPress,
               ),
           ],

@@ -4,10 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_group/select_group_controller.dart';
+import 'package:meta/meta.dart';
 
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///

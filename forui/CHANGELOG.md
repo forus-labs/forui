@@ -1,5 +1,7 @@
 ## 0.8.0 (Next)
 
+Bump minimum Flutter version to 3.27.0.
+
 ### Additions
 
 * Add `showFSheet(...)`.
@@ -49,6 +51,9 @@
 * Change `FSelectTileGroup` to be scrollable.
 
 * Change `FSelectMenuTile` to be scrollable.
+
+* **Breaking**  Change `FLocalizations.of(...)` to return `FLocalizations?` instead of `FLocalizations` - do `FLocalizations.of(...) ?? DefaultLocalizations()`.
+  This change is sadly needed as Flutter now forcefully regenerates `FLocalizations` each time `flutter pub get` is called.
 
 * **Breaking** Change `FTileData.index` to `FTileData.last`.
 

@@ -3,13 +3,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:collection/collection.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart' hide Offset;
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart' hide Offset;
 
 @internal
 class HorizontalSliderRenderObject extends _SliderRenderObject {

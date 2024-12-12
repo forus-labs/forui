@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/forui.dart';
-import 'package:forui/src/localizations/localization.dart';
+
 import '../test_scaffold.dart';
 
 void main() {
   group('FLocalizations', () {
-    testWidgets('no localization provided, defaults to DefaultLocalizations', (tester) async {
+    testWidgets('no localization provided', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           child: Builder(
             builder: (context) {
               final localizations = FLocalizations.of(context);
-              expect(localizations, isA<DefaultLocalizations>());
+              expect(localizations, null);
               return const Placeholder();
             },
           ),
         ),
       );
-
-      await expectLater(tester.takeException(), null);
     });
 
     testWidgets('correct localization', (tester) async {
@@ -30,7 +27,7 @@ void main() {
           locale: const Locale('de'),
           child: Builder(
             builder: (context) {
-              final localizations = FLocalizations.of(context);
+              final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
               expect(localizations.localeName, 'de');
               return const Placeholder();
             },
@@ -52,7 +49,7 @@ void main() {
             locale: const Locale('de'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context);
+                final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
                 expect(localizations.firstDayOfWeek, 1);
                 return const Placeholder();
               },
@@ -69,7 +66,7 @@ void main() {
             locale: const Locale('en'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context);
+                final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
                 expect(localizations.firstDayOfWeek, 7);
                 return const Placeholder();
               },
@@ -92,7 +89,7 @@ void main() {
             locale: const Locale('de'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context);
+                final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
                 expect(localizations.shortWeekDays, ['So.', 'Mo.', 'Di.', 'Mi.', 'Do.', 'Fr.', 'Sa.']);
                 return const Placeholder();
               },
@@ -115,7 +112,7 @@ void main() {
             locale: const Locale('de'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context);
+                final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
                 expect(localizations.narrowWeekDays, ['S', 'M', 'D', 'M', 'D', 'F', 'S']);
                 return const Placeholder();
               },
@@ -132,7 +129,7 @@ void main() {
             locale: const Locale('en', 'SG'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context);
+                final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
                 expect(localizations.narrowWeekDays, ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
                 return const Placeholder();
               },

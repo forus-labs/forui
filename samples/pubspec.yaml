@@ -21,6 +21,7 @@ version: 1.0.0+1
 environment:
   flutter: ">=3.24.0"
   sdk: '>=3.5.0 <4.0.0'
+resolution: workspace
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,32 +37,20 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   forui:
-    path: ../forui
   intl: any
   sugar: ^3.1.0
 
 dev_dependencies:
   auto_route_generator: ^9.0.0
   build_runner: any
-  flint: ^2.8.1
   flutter_test:
     sdk: flutter
-
-dependency_overrides:
-  forui_assets:
-    path: ../forui_assets
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -96,7 +85,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
-
-import_sorter:
-  comments: false

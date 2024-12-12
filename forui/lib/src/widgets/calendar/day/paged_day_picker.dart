@@ -2,12 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/paged_picker.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class PagedDayPicker extends PagedPicker {
@@ -53,7 +52,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   Widget buildItem(BuildContext context, int page) => DayPicker(
         style: widget.style.dayPickerStyle,
-        localization: FLocalizations.of(context),
+        localization: FLocalizations.of(context) ?? DefaultLocalizations(),
         dayBuilder: widget.dayBuilder,
         month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
@@ -88,7 +87,10 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
         focusedDate = _focusableDayForMonth(current, focusedDate!.day);
       }
 
-      SemanticsService.announce(FLocalizations.of(context).fullDate(current.toNative()), textDirection);
+      SemanticsService.announce(
+        (FLocalizations.of(context) ?? DefaultLocalizations()).fullDate(current.toNative()),
+        textDirection,
+      );
     });
   }
 
