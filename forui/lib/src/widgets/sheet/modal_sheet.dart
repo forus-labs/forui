@@ -53,7 +53,7 @@ Future<T?> showFSheet<T>({
   assert(debugCheckHasMediaQuery(context), '');
 
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
-  final localizations = FLocalizations.of(context);
+  final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
 
   return navigator.push(
     FModalSheetRoute<T>(

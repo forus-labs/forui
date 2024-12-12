@@ -71,7 +71,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  FLocalizations.of(context).yearMonth(widget.month.toNative()),
+                  (FLocalizations.of(context) ?? DefaultLocalizations()).yearMonth(widget.month.toNative()),
                   style: widget.style.headerTextStyle,
                 ),
                 RotationTransition(

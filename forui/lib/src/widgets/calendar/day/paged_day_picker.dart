@@ -53,7 +53,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   Widget buildItem(BuildContext context, int page) => DayPicker(
         style: widget.style.dayPickerStyle,
-        localization: FLocalizations.of(context),
+        localization: FLocalizations.of(context) ?? DefaultLocalizations(),
         dayBuilder: widget.dayBuilder,
         month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
@@ -88,7 +88,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
         focusedDate = _focusableDayForMonth(current, focusedDate!.day);
       }
 
-      SemanticsService.announce(FLocalizations.of(context).fullDate(current.toNative()), textDirection);
+      SemanticsService.announce((FLocalizations.of(context) ?? DefaultLocalizations()).fullDate(current.toNative()), textDirection);
     });
   }
 

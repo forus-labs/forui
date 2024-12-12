@@ -60,7 +60,7 @@ abstract class Entry extends StatelessWidget {
           TextDirection.ltr || null => BorderRadius.horizontal(left: yesterday, right: tomorrow),
           TextDirection.rtl => BorderRadius.horizontal(left: tomorrow, right: yesterday),
         },
-        text: FLocalizations.of(context).day(date.toNative()),
+        text: (FLocalizations.of(context) ?? DefaultLocalizations()).day(date.toNative()),
         data: data,
         current: today,
       );

@@ -39,7 +39,7 @@ class Item extends StatelessWidget {
         valueListenable: controller,
         builder: (context, selected, _) => FTappable.animated(
           focusNode: FocusNode(debugLabel: 'Date: $date'),
-          semanticLabel: FLocalizations.of(context).fullDate(date),
+          semanticLabel: (FLocalizations.of(context) ?? DefaultLocalizations()).fullDate(date),
           onPress: () => controller.select(date),
           builder: (context, state, _) {
             final itemStyle = switch ((selected == date, state.hovered)) {
@@ -124,7 +124,7 @@ class ItemContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = FLocalizations.of(context);
+    final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
     return DecoratedBox(
       decoration: focused ? itemStyle.focusedDecoration : itemStyle.decoration,
       child: Padding(

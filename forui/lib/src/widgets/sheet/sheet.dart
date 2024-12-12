@@ -155,7 +155,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         namesRoute: true,
         label: switch (defaultTargetPlatform) {
           TargetPlatform.iOS || TargetPlatform.macOS => null,
-          _ => FLocalizations.of(context).dialogLabel,
+          _ => (FLocalizations.of(context) ?? DefaultLocalizations()).dialogLabel,
         },
         explicitChildNodes: true,
         child: ClipRect(
