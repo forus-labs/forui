@@ -30,6 +30,13 @@ class FScaffold extends StatelessWidget {
   /// True if [FScaffoldStyle.contentPadding] should be applied to the [content]. Defaults to `true`.
   final bool contentPad;
 
+  /// If true the [body] and the scaffold's floating widgets should size themselves to avoid the onscreen keyboard
+  /// whose height is defined by the ambient [MediaQuery]'s [MediaQueryData.viewInsets] `bottom` property.
+  ///
+  /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
+  /// overlapping the keyboard, which prevents widgets inside the body from being obscured by the keyboard.
+  ///
+  /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
   /// The style. Defaults to [FThemeData.scaffoldStyle].
@@ -69,6 +76,7 @@ class FScaffold extends StatelessWidget {
     return ColoredBox(
       color: style.backgroundColor,
       child: _Wrapper(
+        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         children: [
           Column(
             children: [
@@ -87,7 +95,8 @@ class FScaffold extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('contentPad', value: contentPad, defaultValue: true, ifTrue: 'pad'));
+      ..add(FlagProperty('contentPad', value: contentPad, defaultValue: true))
+      ..add(FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, defaultValue: true));
   }
 }
 
@@ -171,11 +180,31 @@ final class FScaffoldStyle with Diagnosticable {
 class _Wrapper extends MultiChildRenderObjectWidget {
   final bool resizeToAvoidBottomInset;
 
-  const _Wrapper({required this.resizeToAvoidBottomInset, required super.children});
+  const _Wrapper({
+    required this.resizeToAvoidBottomInset,
+    required super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) {
     final viewInsets = MediaQuery.viewInsetsOf(context);
+
+    return _RenderScaffold(
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      insets: viewInsets,
+    );
+  }
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderScaffold renderObject) {
+    final viewInsets = MediaQuery.viewInsetsOf(context);
+    renderObject.insets = viewInsets;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('resizeToAvoidBottomInset', resizeToAvoidBottomInset));
   }
 }
 
@@ -184,12 +213,12 @@ class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMi
 class _RenderScaffold extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   final bool resizeToAvoidBottomInset;
-  final EdgeInsets insets;
+  EdgeInsets _insets;
 
   _RenderScaffold({
     required this.resizeToAvoidBottomInset,
-    required this.insets,
-  });
+    required EdgeInsets insets,
+  }) : _insets = insets;
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = _Data();
@@ -197,13 +226,44 @@ class _RenderScaffold extends RenderBox
   @override
   void performLayout() {
     size = constraints.biggest;
-
     final others = firstChild!;
-    final footer = lastChild!..layout(constraints, parentUsesSize: true);
+
+    final footerConstraints = constraints.loosen();
+    final footer = lastChild!..layout(footerConstraints, parentUsesSize: true);
 
     final othersHeight = constraints.maxHeight - max(insets.bottom, footer.size.height);
-    others.layout(constraints.copyWith(maxHeight: othersHeight), parentUsesSize: true);
+    final othersConstraints = constraints.copyWith(minHeight: 0, maxHeight: othersHeight);
+    others.layout(othersConstraints);
 
+    others.data.offset = Offset.zero;
     footer.data.offset = Offset(0, size.height - footer.size.height);
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    defaultPaint(context, offset);
+  }
+
+  @override
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
+      defaultHitTestChildren(result, position: position);
+
+  EdgeInsets get insets => _insets;
+
+  set insets(EdgeInsets insets) {
+    if (_insets == insets) {
+      return;
+    }
+
+    _insets = insets;
+    markNeedsLayout();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('resizeToAvoidBottomInset', resizeToAvoidBottomInset))
+      ..add(DiagnosticsProperty('insets', insets));
   }
 }

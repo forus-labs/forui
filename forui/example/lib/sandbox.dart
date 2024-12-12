@@ -26,9 +26,17 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => Form(
         key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
+          // mainAxisSize: MainAxisSize.min,
           children: [
+            FTextField(
+              // controller: _controller, // TextEditingController
+              label: const Text('Username'),
+              hint: 'JaneDoe',
+              description: const Text('Please enter your username.'),
+              maxLines: 1,
+            ),
+            FCalendar(controller: a),
             FCalendar(controller: a),
           ],
         ),
