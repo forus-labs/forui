@@ -1,8 +1,9 @@
 name: _
 environment:
-  sdk: ">=3.5.0 <4.0.0"
-  flutter: ">=3.24.0"
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
 workspace:
   - forui
   - forui_assets
+  - forui_hooks
   - samples
