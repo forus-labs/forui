@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
 import 'package:forui/src/widgets/calendar/year/year_picker.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class MonthPicker extends StatefulWidget {
@@ -82,7 +81,8 @@ class _MonthPickerState extends State<MonthPicker> {
                 focusNode: _months[i],
                 current: widget.today.truncate(to: DateUnit.months) == month,
                 selectable: widget.start <= month && month <= widget.end,
-                format: (date) => (FLocalizations.of(context) ?? DefaultLocalizations()).abbreviatedMonth(date.toNative()),
+                format: (date) =>
+                    (FLocalizations.of(context) ?? DefaultLocalizations()).abbreviatedMonth(date.toNative()),
                 onPress: widget.onPress,
               ),
           ],

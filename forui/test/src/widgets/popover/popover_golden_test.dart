@@ -6,9 +6,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
+
 import '../../test_scaffold.dart';
 
 void main() {

@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A mark in a [FSlider]. It is a combination of a tick - a visual indicator along the track, and a label.
 final class FSliderMark with Diagnosticable {
