@@ -17,7 +17,7 @@ void main() {
         final testWidget = TestScaffold.app(
           theme: theme.data,
           child: FAvatar(
-            image: FileImage(File('${Directory.current.path}/forui/test/resources/pante.jpg')),
+            image: FileImage(File('$relativePath/test/resources/pante.jpg')),
             fallback: const Text('MN'),
           ),
         );

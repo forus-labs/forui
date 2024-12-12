@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import 'threshold_file_comparator.dart';
+
+final relativePath = Directory.current.path.contains('forui/forui') ? '.' : '${Directory.current.path}/forui';
 
 MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
 
