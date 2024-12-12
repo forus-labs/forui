@@ -69,10 +69,6 @@ class FScaffold extends StatelessWidget {
       content = Padding(padding: style.contentPadding, child: content);
     }
 
-    if (viewInsets.bottom > 0 && resizeToAvoidBottomInset) {
-      footer = SizedBox(height: viewInsets.bottom);
-    }
-
     return ColoredBox(
       color: style.backgroundColor,
       child: _Wrapper(
@@ -94,9 +90,7 @@ class FScaffold extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('contentPad', value: contentPad, defaultValue: true))
-      ..add(FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, defaultValue: true));
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -225,6 +219,7 @@ class _RenderScaffold extends RenderBox
 
   @override
   void performLayout() {
+    print('insets: ${insets.bottom}');
     size = constraints.biggest;
     final others = firstChild!;
 
@@ -232,7 +227,9 @@ class _RenderScaffold extends RenderBox
     final footer = lastChild!..layout(footerConstraints, parentUsesSize: true);
 
     final othersHeight = constraints.maxHeight - max(insets.bottom, footer.size.height);
-    final othersConstraints = constraints.copyWith(minHeight: 0, maxHeight: othersHeight);
+    print('height: ${othersHeight}');
+    print('footer: ${footer.size.height}');
+    final othersConstraints = constraints.copyWith(maxHeight: othersHeight).normalize();
     others.layout(othersConstraints);
 
     others.data.offset = Offset.zero;
@@ -240,9 +237,7 @@ class _RenderScaffold extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
-    defaultPaint(context, offset);
-  }
+  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
