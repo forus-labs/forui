@@ -27,7 +27,7 @@ jobs:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
       - run: flutter pub get
-      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: dart run build_runner build --delete-conflicting-outputs
       - run: |
           output=$(dart doc --validate-links .)
           if echo "$output" | grep -q "Found 0 warnings and 0 errors"; then
@@ -57,7 +57,7 @@ jobs:
           cache: true
 
       - run: flutter pub get
-      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter build appbundle --debug --no-pub --no-tree-shake-icons
 
   build-ios:
@@ -77,7 +77,7 @@ jobs:
           cache: true
 
       - run: flutter pub get
-      - run: flutter pub run build_runner build --delete-conflicting-outputs
+      - run: dart run build_runner build --delete-conflicting-outputs
       - run: pod repo update
         working-directory: forui/example/ios
       - run: flutter build ios --debug --no-codesign --no-pub

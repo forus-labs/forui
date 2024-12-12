@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/util.dart';
 import 'package:forui/src/widgets/accordion/accordion.dart';
 
 /// An interactive heading that reveals a section of content.
@@ -124,8 +123,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
               child: Row(
                 children: [
                   Expanded(
-                    child: merge(
-                      // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
+                    child: DefaultTextStyle.merge(
                       textHeightBehavior: const TextHeightBehavior(
                         applyHeightToFirstAscent: false,
                         applyHeightToLastDescent: false,

@@ -142,7 +142,7 @@ final class FColorScheme with Diagnosticable {
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color hover(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withOpacity(enabledHoveredOpacity),
+        foreground.withValues(alpha: enabledHoveredOpacity),
         background ?? this.background,
       );
 
@@ -150,7 +150,7 @@ final class FColorScheme with Diagnosticable {
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color disable(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withOpacity(disabledOpacity),
+        foreground.withValues(alpha: disabledOpacity),
         background ?? this.background,
       );
 

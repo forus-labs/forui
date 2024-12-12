@@ -54,7 +54,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FIcon.image(FileImage(File('./test/resources/forus-labs.png'))),
+              child: FIcon.image(FileImage(File('${Directory.current.path}/forui/test/resources/forus-labs.png'))),
             ),
           );
           for (final element in find.byType(Image).evaluate()) {
@@ -73,7 +73,10 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FIcon.image(FileImage(File('./test/resources/forus-labs.png')), color: Colors.transparent),
+              child: FIcon.image(
+                FileImage(File('${Directory.current.path}/forui/test/resources/forus-labs.png')),
+                color: Colors.transparent,
+              ),
             ),
           );
           for (final element in find.byType(Image).evaluate()) {

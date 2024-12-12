@@ -140,8 +140,8 @@ class FSwitch extends StatelessWidget {
                 onChange?.call(value);
               },
               applyTheme: false,
-              activeColor: switchStyle.checkedColor,
-              trackColor: switchStyle.uncheckedColor,
+              activeTrackColor: switchStyle.checkedColor,
+              inactiveTrackColor: switchStyle.uncheckedColor,
               thumbColor: switchStyle.thumbColor,
               focusColor: style.focusColor,
               autofocus: autofocus,

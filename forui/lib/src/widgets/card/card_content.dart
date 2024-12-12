@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/util.dart';
 
 @internal
 class Content extends StatelessWidget {
@@ -39,8 +38,7 @@ class Content extends StatelessWidget {
             ),
           if ((title != null || subtitle != null || child != null) && image != null) const SizedBox(height: 10),
           if (title != null)
-            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-            merge(
+            DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
@@ -49,8 +47,7 @@ class Content extends StatelessWidget {
               child: title!,
             ),
           if (subtitle != null)
-            // TODO: replace with DefaultTextStyle.merge when textHeightBehavior has been added.
-            merge(
+            DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
