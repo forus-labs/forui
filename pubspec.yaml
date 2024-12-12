@@ -7,3 +7,6 @@ workspace:
   - forui_assets
   - forui_hooks
   - samples
+
+dev_dependencies:
+  flint: ^2.8.1

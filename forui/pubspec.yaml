@@ -21,7 +21,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.10+1
-  forui_assets:
+  forui_assets: ^0.7.0
   google_fonts: ^6.2.0
   intl: any
   meta: ^1.11.0
@@ -29,10 +29,8 @@ dependencies:
   nitrogen_types: ^0.3.0+1
   sugar: ^3.1.0
 
-
 dev_dependencies:
   build_runner: ^2.4.0
-  flint: ^2.8.1
   flutter_test:
     sdk: flutter
   http: ^1.2.2
@@ -77,6 +75,3 @@ flutter:
 
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
-
-import_sorter:
-  comments: false

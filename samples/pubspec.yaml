@@ -43,7 +43,6 @@ dependencies:
 dev_dependencies:
   auto_route_generator: ^9.0.0
   build_runner: any
-  flint: ^2.8.1
   flutter_test:
     sdk: flutter
 
@@ -86,7 +85,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
-
-import_sorter:
-  comments: false

@@ -22,7 +22,6 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.0
-  flint: ^2.8.1
   nitrogen: ^0.3.0+1
 
 # For information on the generic Dart part of this file, see the

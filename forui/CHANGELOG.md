@@ -1,5 +1,7 @@
 ## 0.8.0 (Next)
 
+Bump minimum Flutter version to 3.27.0.
+
 ### Additions
 
 * Add `showFSheet(...)`.
