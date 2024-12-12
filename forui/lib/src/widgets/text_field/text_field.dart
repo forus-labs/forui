@@ -767,7 +767,7 @@ final class FTextField extends StatelessWidget {
           data: Theme.of(context).copyWith(
             textSelectionTheme: TextSelectionThemeData(
               cursorColor: style.cursorColor,
-              selectionColor: style.cursorColor.withOpacity(0.4),
+              selectionColor: style.cursorColor.withValues(alpha: 0.4),
               selectionHandleColor: style.cursorColor,
             ),
             cupertinoOverrideTheme: CupertinoThemeData(
