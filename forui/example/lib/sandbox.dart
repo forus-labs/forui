@@ -12,8 +12,8 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  final FCalendarController<DateTime?> controller = FCalendarController.date();
-  late FPopoverController popoverController;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late FCalendarController<DateTime?> calendarController = FCalendarController.date();
 
   @override
   void initState() {
@@ -32,15 +32,15 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
               description: Text('Please enter your username.'),
               maxLines: 1,
             ),
-            FCalendar(controller: a),
-            FCalendar(controller: a),
+            FCalendar(controller: calendarController),
+            FCalendar(controller: calendarController),
           ],
         ),
       );
 
   @override
   void dispose() {
-    controller.dispose();
+    calendarController.dispose();
     super.dispose();
   }
 }

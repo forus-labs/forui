@@ -16,7 +16,7 @@ import 'package:meta/meta.dart';
 /// See:
 /// * https://forui.dev/docs/layout/scaffold for working examples.
 /// * [FScaffoldStyle] for customizing a scaffold's appearance.
-class FScaffold extends StatefulWidget {
+class FScaffold extends StatelessWidget {
   /// The content.
   final Widget content;
 
@@ -29,7 +29,7 @@ class FScaffold extends StatefulWidget {
   /// True if [FScaffoldStyle.contentPadding] should be applied to the [content]. Defaults to `true`.
   final bool contentPad;
 
-  /// If true the [body] and the scaffold's floating widgets should size themselves to avoid the onscreen keyboard
+  /// If true the [content] and the scaffold's floating widgets should size themselves to avoid the onscreen keyboard
   /// whose height is defined by the ambient [MediaQuery]'s [MediaQueryData.viewInsets] `bottom` property.
   ///
   /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
@@ -67,19 +67,21 @@ class FScaffold extends StatefulWidget {
       content = Padding(padding: style.contentPadding, child: content);
     }
 
-    return ColoredBox(
-      color: style.backgroundColor,
-      child: _Wrapper(
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-        children: [
-          Column(
-            children: [
-              if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-              Expanded(child: content),
-            ],
-          ),
-          footer,
-        ],
+    return FSheets(
+      child: ColoredBox(
+        color: style.backgroundColor,
+        child: _Wrapper(
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+          children: [
+            Column(
+              children: [
+                if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                Expanded(child: content),
+              ],
+            ),
+            footer,
+          ],
+        ),
       ),
     );
   }
@@ -87,34 +89,10 @@ class FScaffold extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
-    properties.add(DiagnosticsProperty<bool>('contentPad', contentPad));
-    properties.add(DiagnosticsProperty<bool>('resizeToAvoidBottomInset', resizeToAvoidBottomInset));
-  }
-}
-
-class _State extends State<FScaffold> {
-  @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.scaffoldStyle;
-    Widget content = widget.content;
-
-    if (widget.contentPad) {
-      content = Padding(padding: style.contentPadding, child: content);
-    }
-
-    return FSheets(
-      child: ColoredBox(
-        color: style.backgroundColor,
-        child: Column(
-          children: [
-            if (widget.header != null) DecoratedBox(decoration: style.headerDecoration, child: widget.header!),
-            Expanded(child: content),
-            if (widget.footer != null) DecoratedBox(decoration: style.footerDecoration, child: widget.footer!),
-          ],
-        ),
-      ),
-    );
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty<bool>('contentPad', contentPad))
+      ..add(DiagnosticsProperty<bool>('resizeToAvoidBottomInset', resizeToAvoidBottomInset));
   }
 }
 
@@ -246,7 +224,6 @@ class _RenderScaffold extends RenderBox
 
   @override
   void performLayout() {
-    print('insets: ${insets.bottom}');
     size = constraints.biggest;
     final others = firstChild!;
 

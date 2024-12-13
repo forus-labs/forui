@@ -30,6 +30,8 @@ Bump minimum Flutter version to 3.27.0.
 
 * Add `FSelectMenuTile.builder`.
 
+* Add `resizeToAvoidBottomInset` to `FScaffold(...)`.
+
 ### Changes
 
 * Change `FCalendarController.date(...)` to automatically strip and truncate all DateTimes to dates in UTC timezone.
