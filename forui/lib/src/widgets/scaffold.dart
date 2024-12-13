@@ -56,9 +56,8 @@ class FScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.scaffoldStyle;
-    final viewInsets = MediaQuery.viewInsetsOf(context);
     Widget content = this.content;
-    Widget footer = this.footer != null
+    final Widget footer = this.footer != null
         ? DecoratedBox(
             decoration: style.footerDecoration,
             child: this.footer!,
@@ -67,10 +66,6 @@ class FScaffold extends StatelessWidget {
 
     if (contentPad) {
       content = Padding(padding: style.contentPadding, child: content);
-    }
-
-    if (viewInsets.bottom > 0 && resizeToAvoidBottomInset) {
-      footer = SizedBox(height: viewInsets.bottom);
     }
 
     return ColoredBox(
@@ -198,7 +193,9 @@ class _Wrapper extends MultiChildRenderObjectWidget {
   @override
   void updateRenderObject(BuildContext context, _RenderScaffold renderObject) {
     final viewInsets = MediaQuery.viewInsetsOf(context);
-    renderObject.insets = viewInsets;
+    renderObject
+      ..insets = viewInsets
+      ..resizeToAvoidBottomInset = resizeToAvoidBottomInset;
   }
 
   @override
@@ -212,13 +209,14 @@ class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMi
 
 class _RenderScaffold extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
-  final bool resizeToAvoidBottomInset;
+  bool _resizeToAvoidBottomInset;
   EdgeInsets _insets;
 
   _RenderScaffold({
-    required this.resizeToAvoidBottomInset,
+    required bool resizeToAvoidBottomInset,
     required EdgeInsets insets,
-  }) : _insets = insets;
+  })  : _resizeToAvoidBottomInset = resizeToAvoidBottomInset,
+        _insets = insets;
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = _Data();
@@ -230,8 +228,12 @@ class _RenderScaffold extends RenderBox
 
     final footerConstraints = constraints.loosen();
     final footer = lastChild!..layout(footerConstraints, parentUsesSize: true);
+    double footerHeight = footer.size.height;
+    if (_resizeToAvoidBottomInset) {
+      footerHeight = max(insets.bottom, footer.size.height);
+    }
 
-    final othersHeight = constraints.maxHeight - max(insets.bottom, footer.size.height);
+    final othersHeight = constraints.maxHeight - footerHeight;
     final othersConstraints = constraints.copyWith(minHeight: 0, maxHeight: othersHeight);
     others.layout(othersConstraints);
 
@@ -250,12 +252,23 @@ class _RenderScaffold extends RenderBox
 
   EdgeInsets get insets => _insets;
 
-  set insets(EdgeInsets insets) {
-    if (_insets == insets) {
+  set insets(EdgeInsets value) {
+    if (_insets == value) {
       return;
     }
 
-    _insets = insets;
+    _insets = value;
+    markNeedsLayout();
+  }
+
+  bool get resizeToAvoidBottomInset => _resizeToAvoidBottomInset;
+
+  set resizeToAvoidBottomInset(bool value) {
+    if (_resizeToAvoidBottomInset == value) {
+      return;
+    }
+
+    _resizeToAvoidBottomInset = value;
     markNeedsLayout();
   }
 

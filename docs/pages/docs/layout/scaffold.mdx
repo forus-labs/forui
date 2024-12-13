@@ -130,7 +130,6 @@ FScaffold(
       ),
     ],
   ),
-  contentPad: false,
   content: Column(
     children: [
       FCard(
@@ -141,5 +140,7 @@ FScaffold(
     ],
   ),
   footer: FBottomNavigationBar(items: const []),
+  contentPad: true,
+  resizeToAvoidBottomInset: true,
 );
 ```

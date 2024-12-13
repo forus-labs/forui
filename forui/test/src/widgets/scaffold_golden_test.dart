@@ -44,5 +44,36 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}.png'));
       });
     }
+
+    for (final resizeToAvoidBottomInset in [true, false]) {
+      testWidgets('resizeToAvoidBottomInset - $resizeToAvoidBottomInset', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: TestScaffold.themes[0].data,
+            child: FScaffold(
+              resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+              header: Container(
+                decoration: const BoxDecoration(color: Colors.red),
+                height: 100,
+              ),
+              content: const Placeholder(),
+              footer: Container(
+                decoration: const BoxDecoration(color: Colors.green),
+                height: 100,
+              ),
+            ),
+          ),
+        );
+
+        // Simulate keyboard.
+        tester.view.viewInsets = const FakeViewPadding(bottom: 800);
+        await tester.pump();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('scaffold/resizeToAvoidBottomInset-$resizeToAvoidBottomInset.png'),
+        );
+      });
+    }
   });
 }
