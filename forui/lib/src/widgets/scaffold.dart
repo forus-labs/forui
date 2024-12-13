@@ -70,7 +70,7 @@ class FScaffold extends StatelessWidget {
     return FSheets(
       child: ColoredBox(
         color: style.backgroundColor,
-        child: _Wrapper(
+        child: _RenderScaffoldWidget(
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           children: [
             Column(
@@ -91,8 +91,15 @@ class FScaffold extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty<bool>('contentPad', contentPad))
-      ..add(DiagnosticsProperty<bool>('resizeToAvoidBottomInset', resizeToAvoidBottomInset));
+      ..add(FlagProperty('contentPad', value: contentPad, ifTrue: 'contentPad', defaultValue: true))
+      ..add(
+        FlagProperty(
+          'resizeToAvoidBottomInset',
+          value: resizeToAvoidBottomInset,
+          ifTrue: 'resizeToAvoidBottomInset',
+          defaultValue: true,
+        ),
+      );
   }
 }
 
@@ -173,10 +180,10 @@ final class FScaffoldStyle with Diagnosticable {
       backgroundColor.hashCode ^ contentPadding.hashCode ^ headerDecoration.hashCode ^ footerDecoration.hashCode;
 }
 
-class _Wrapper extends MultiChildRenderObjectWidget {
+class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   final bool resizeToAvoidBottomInset;
 
-  const _Wrapper({
+  const _RenderScaffoldWidget({
     required this.resizeToAvoidBottomInset,
     required super.children,
   });
@@ -202,7 +209,13 @@ class _Wrapper extends MultiChildRenderObjectWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('resizeToAvoidBottomInset', resizeToAvoidBottomInset));
+    properties.add(
+      FlagProperty(
+        'resizeToAvoidBottomInset',
+        value: resizeToAvoidBottomInset,
+        ifTrue: 'resizeToAvoidBottomInset',
+      ),
+    );
   }
 }
 
@@ -229,7 +242,7 @@ class _RenderScaffold extends RenderBox
 
     final footerConstraints = constraints.loosen();
     final footer = lastChild!..layout(footerConstraints, parentUsesSize: true);
-    final footerHeight = _resizeToAvoidBottomInset ? footerHeight = max(insets.bottom, footer.size.height) : footer.size.height;
+    final footerHeight = _resizeToAvoidBottomInset ? max(insets.bottom, footer.size.height) : footer.size.height;
 
     final othersHeight = constraints.maxHeight - footerHeight;
     others.layout(constraints.copyWith(minHeight: 0, maxHeight: othersHeight));
@@ -271,7 +284,13 @@ class _RenderScaffold extends RenderBox
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('resizeToAvoidBottomInset', resizeToAvoidBottomInset))
+      ..add(
+        FlagProperty(
+          'resizeToAvoidBottomInset',
+          value: resizeToAvoidBottomInset,
+          ifTrue: 'resizeToAvoidBottomInset',
+        ),
+      )
       ..add(DiagnosticsProperty('insets', insets));
   }
 }
