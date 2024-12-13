@@ -1,7 +1,6 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/error/listener.dart';
-import 'package:collection/collection.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 const _code = LintCode(
@@ -23,7 +22,7 @@ class PrefixPublicTypesRule extends DartLintRule {
         return;
       }
 
-      if (annotations.map((a) => a.element).whereNotNull().any(_checker.isAssignableFrom)) {
+      if (annotations.map((a) => a.element).nonNulls.any(_checker.isAssignableFrom)) {
         return;
       }
 

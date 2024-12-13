@@ -4,8 +4,9 @@ version: 0.0.1
 publish_to: 'none'
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
-  flutter: ">=3.24.0"
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+resolution: workspace
 
 dependencies:
   flutter:
@@ -16,7 +17,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   forui_internal_lints:
-    path: ../
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -54,5 +54,3 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/to/font-from-package
-import_sorter:
-  comments: false

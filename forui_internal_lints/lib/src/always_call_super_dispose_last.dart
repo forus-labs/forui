@@ -2,7 +2,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/dart/element/visitor.dart';
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
@@ -32,7 +32,7 @@ class AlwaysCallSuperDisposeLast extends DartLintRule {
           method.returnType is! VoidType ||
           method.name != 'dispose' ||
           method.parameters.isNotEmpty ||
-          !(method.enclosingElement.accept(_Visitor(method.enclosingElement)) ?? false)) {
+          !(method.enclosingElement3.accept(_Visitor(method.enclosingElement3)) ?? false)) {
         return;
       }
 
