@@ -89,9 +89,7 @@ class FScaffold extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('contentPad', value: contentPad, defaultValue: true))
-      ..add(FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, defaultValue: true));
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -223,6 +221,7 @@ class _RenderScaffold extends RenderBox
 
   @override
   void performLayout() {
+    print('insets: ${insets.bottom}');
     size = constraints.biggest;
     final others = firstChild!;
 
@@ -242,9 +241,7 @@ class _RenderScaffold extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
-    defaultPaint(context, offset);
-  }
+  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
