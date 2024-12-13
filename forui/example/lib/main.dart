@@ -47,7 +47,6 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
           child: child!,
         ),
         home: FScaffold(
-          resizeToAvoidBottomInset: true,
           header: FHeader(
             title: const Text('Example'),
             actions: [

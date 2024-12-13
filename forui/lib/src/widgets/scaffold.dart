@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/rendering.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/rendering.dart';
 import 'package:meta/meta.dart';
 
 /// A scaffold.
@@ -87,8 +87,9 @@ class FScaffold extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style));
+    properties.add(DiagnosticsProperty('style', style));
+    properties.add(DiagnosticsProperty<bool>('contentPad', contentPad));
+    properties.add(DiagnosticsProperty<bool>('resizeToAvoidBottomInset', resizeToAvoidBottomInset));
   }
 }
 
