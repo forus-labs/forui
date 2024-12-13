@@ -47,4 +47,18 @@ class FLocalizationsHu extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Párbeszédablak';
+
+  @override
+  String get sheetLabel => 'lap';
+
+  @override
+  String get barrierLabel => 'Borítás';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName bezárása';
+  }
 }

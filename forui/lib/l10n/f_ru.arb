@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Диалоговое окно",
+  "sheetLabel": "экран",
+  "barrierOnTapHint": "Закрыть $modalRouteContentName",
+  "barrierLabel": "Маска"
+}

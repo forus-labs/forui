@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Casetă de dialog",
+  "sheetLabel": "Foaie",
+  "barrierOnTapHint": "Închideți $modalRouteContentName",
+  "barrierLabel": "Material"
+}

@@ -47,4 +47,18 @@ class FLocalizationsPa extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'ਵਿੰਡੋ';
+
+  @override
+  String get sheetLabel => 'ਸ਼ੀਟ';
+
+  @override
+  String get barrierLabel => 'ਸਕ੍ਰਿਮ';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName ਨੂੰ ਬੰਦ ਕਰੋ';
+  }
 }

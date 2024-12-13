@@ -47,4 +47,18 @@ class FLocalizationsHe extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'תיבת דו-שיח';
+
+  @override
+  String get sheetLabel => 'גיליו ';
+
+  @override
+  String get barrierLabel => 'מיסוך';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'סגירת \$modalRouteContentName';
+  }
 }

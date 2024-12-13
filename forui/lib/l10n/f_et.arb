@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dialoog",
+  "sheetLabel": "leht",
+  "barrierOnTapHint": "Sule $modalRouteContentName",
+  "barrierLabel": "Sirm"
+}

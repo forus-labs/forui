@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Boîte de dialogue",
+  "sheetLabel": "sheet",
+  "barrierOnTapHint": "Fermer $modalRouteContentName",
+  "barrierLabel": "Fond"
+}

@@ -3,9 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A control that allows the user to toggle between checked and unchecked.
 ///
@@ -140,8 +139,8 @@ class FSwitch extends StatelessWidget {
                 onChange?.call(value);
               },
               applyTheme: false,
-              activeColor: switchStyle.checkedColor,
-              trackColor: switchStyle.uncheckedColor,
+              activeTrackColor: switchStyle.checkedColor,
+              inactiveTrackColor: switchStyle.uncheckedColor,
               thumbColor: switchStyle.thumbColor,
               focusColor: style.focusColor,
               autofocus: autofocus,

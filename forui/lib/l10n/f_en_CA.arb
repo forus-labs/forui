@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Dialog",
+  "sheetLabel": "Sheet",
+  "barrierOnTapHint": "Close $modalRouteContentName",
+  "barrierLabel": "Scrim"
+}

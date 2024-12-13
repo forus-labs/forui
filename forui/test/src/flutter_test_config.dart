@@ -18,7 +18,9 @@ Future<void> configureGoldenTests(double threshold) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final fontLoader = FontLoader('packages/forui/Inter');
-  final directory = Directory('./assets/fonts/inter/');
+
+  final prefix = Directory.current.path.contains('forui/forui') ? '.' : '${Directory.current.path}/forui';
+  final directory = Directory('$prefix/assets/fonts/inter/');
   for (final file in directory.listSync().whereType<File>().where((e) => e.path.endsWith('.ttf'))) {
     fontLoader.addFont(rootBundle.load(file.path));
   }
@@ -33,7 +35,7 @@ Future<void> configureGoldenTests(double threshold) async {
       // As such, we use the default `testUrl`, which is only the `baseDir` and
       // append a generically named `test.dart` so that the `baseDir` is
       // properly extracted.
-      Uri.parse('./test/golden/test.dart'),
+      Uri.parse('$prefix/test/golden/test.dart'),
       threshold,
     );
   }

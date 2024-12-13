@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Leihoa",
+  "sheetLabel": "orria",
+  "barrierOnTapHint": "Itxi $modalRouteContentName",
+  "barrierLabel": "Barrera"
+}

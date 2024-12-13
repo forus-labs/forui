@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Ingxoxo",
+  "sheetLabel": "Ishidi",
+  "barrierOnTapHint": "Vala i-$modalRouteContentName",
+  "barrierLabel": "I-Scrim"
+}

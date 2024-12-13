@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "ڈائلاگ",
+  "sheetLabel": "شیٹ",
+  "barrierOnTapHint": "$modalRouteContentName بند کریں",
+  "barrierLabel": "اسکریم"
+}

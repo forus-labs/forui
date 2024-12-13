@@ -5,9 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/src/foundation/rendering.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A scaffold.
 ///
@@ -17,7 +16,7 @@ import 'package:forui/forui.dart';
 /// See:
 /// * https://forui.dev/docs/layout/scaffold for working examples.
 /// * [FScaffoldStyle] for customizing a scaffold's appearance.
-class FScaffold extends StatelessWidget {
+class FScaffold extends StatefulWidget {
   /// The content.
   final Widget content;
 
@@ -90,6 +89,31 @@ class FScaffold extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style));
+  }
+}
+
+class _State extends State<FScaffold> {
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style ?? context.theme.scaffoldStyle;
+    Widget content = widget.content;
+
+    if (widget.contentPad) {
+      content = Padding(padding: style.contentPadding, child: content);
+    }
+
+    return FSheets(
+      child: ColoredBox(
+        color: style.backgroundColor,
+        child: Column(
+          children: [
+            if (widget.header != null) DecoratedBox(decoration: style.headerDecoration, child: widget.header!),
+            Expanded(child: content),
+            if (widget.footer != null) DecoratedBox(decoration: style.footerDecoration, child: widget.footer!),
+          ],
+        ),
+      ),
+    );
   }
 }
 

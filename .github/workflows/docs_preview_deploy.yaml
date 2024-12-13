@@ -27,12 +27,12 @@ jobs:
       # Publish samples
       - uses: subosito/flutter-action@v2.18.0
         with:
-          flutter-version: 3.24.x
+          flutter-version: 3.27.x
           cache: true
       - working-directory: ./samples
         run: |
           flutter pub get
-          flutter pub run build_runner build --delete-conflicting-outputs
+          dart run build_runner build --delete-conflicting-outputs
           flutter build web
       - uses: cloudflare/wrangler-action@v3
         id: publish-samples

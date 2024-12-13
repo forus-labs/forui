@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Gluggi",
+  "sheetLabel": "Blað",
+  "barrierOnTapHint": "Loka $modalRouteContentName",
+  "barrierLabel": "Möskvi"
+}

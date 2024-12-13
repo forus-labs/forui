@@ -6,8 +6,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/forui.dart';
+
 import '../test_scaffold.dart';
 
 void main() {
@@ -54,7 +54,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FIcon.image(FileImage(File('./test/resources/forus-labs.png'))),
+              child: FIcon.image(FileImage(File('$relativePath/test/resources/forus-labs.png'))),
             ),
           );
           for (final element in find.byType(Image).evaluate()) {
@@ -73,7 +73,10 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FIcon.image(FileImage(File('./test/resources/forus-labs.png')), color: Colors.transparent),
+              child: FIcon.image(
+                FileImage(File('$relativePath/test/resources/forus-labs.png')),
+                color: Colors.transparent,
+              ),
             ),
           );
           for (final element in find.byType(Image).evaluate()) {

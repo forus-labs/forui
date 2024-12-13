@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A set of colors that is part of a [FThemeData]. It is used to configure the color properties of Forui widgets.
 ///
@@ -29,6 +28,11 @@ final class FColorScheme with Diagnosticable {
   ///
   /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
   final Brightness brightness;
+
+  /// The barrier color.
+  ///
+  /// Typically used as a background for modal/pop-up routes.
+  final Color barrier;
 
   /// The background color.
   ///
@@ -111,6 +115,7 @@ final class FColorScheme with Diagnosticable {
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
   const FColorScheme({
     required this.brightness,
+    required this.barrier,
     required this.background,
     required this.foreground,
     required this.primary,
@@ -136,7 +141,7 @@ final class FColorScheme with Diagnosticable {
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color hover(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withOpacity(enabledHoveredOpacity),
+        foreground.withValues(alpha: enabledHoveredOpacity),
         background ?? this.background,
       );
 
@@ -144,7 +149,7 @@ final class FColorScheme with Diagnosticable {
   ///
   /// [FColorScheme.background] is used if [background] is not given.
   Color disable(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withOpacity(disabledOpacity),
+        foreground.withValues(alpha: disabledOpacity),
         background ?? this.background,
       );
 
@@ -165,6 +170,7 @@ final class FColorScheme with Diagnosticable {
   @useResult
   FColorScheme copyWith({
     Brightness? brightness,
+    Color? barrier,
     Color? background,
     Color? foreground,
     Color? primary,
@@ -183,6 +189,7 @@ final class FColorScheme with Diagnosticable {
   }) =>
       FColorScheme(
         brightness: brightness ?? this.brightness,
+        barrier: barrier ?? this.barrier,
         background: background ?? this.background,
         foreground: foreground ?? this.foreground,
         primary: primary ?? this.primary,
@@ -205,6 +212,7 @@ final class FColorScheme with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty('brightness', brightness))
+      ..add(ColorProperty('barrier', barrier))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))
       ..add(ColorProperty('primary', primary))
@@ -227,6 +235,7 @@ final class FColorScheme with Diagnosticable {
       identical(this, other) ||
       other is FColorScheme &&
           brightness == other.brightness &&
+          barrier == other.barrier &&
           background == other.background &&
           foreground == other.foreground &&
           primary == other.primary &&
@@ -246,6 +255,7 @@ final class FColorScheme with Diagnosticable {
   @override
   int get hashCode =>
       brightness.hashCode ^
+      barrier.hashCode ^
       background.hashCode ^
       foreground.hashCode ^
       primary.hashCode ^

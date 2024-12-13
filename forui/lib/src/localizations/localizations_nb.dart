@@ -47,4 +47,18 @@ class FLocalizationsNb extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Dialogboks';
+
+  @override
+  String get sheetLabel => 'Felt';
+
+  @override
+  String get barrierLabel => 'Vev';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Lukk \$modalRouteContentName';
+  }
 }

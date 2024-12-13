@@ -47,4 +47,18 @@ class FLocalizationsKo extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => '대화상자';
+
+  @override
+  String get sheetLabel => '시트';
+
+  @override
+  String get barrierLabel => '스크림';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName 닫기';
+  }
 }

@@ -47,4 +47,18 @@ class FLocalizationsIt extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Finestra di dialogo';
+
+  @override
+  String get sheetLabel => 'Riquadro';
+
+  @override
+  String get barrierLabel => 'Rete';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Chiudi \$modalRouteContentName';
+  }
 }

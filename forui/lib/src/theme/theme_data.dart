@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
@@ -67,6 +66,9 @@ final class FThemeData with Diagnosticable {
   /// The label styles.
   final FLabelStyles labelStyles;
 
+  /// The line calendar style.
+  final FLineCalendarStyle lineCalendarStyle;
+
   /// The popover's style.
   final FPopoverStyle popoverStyle;
 
@@ -90,6 +92,9 @@ final class FThemeData with Diagnosticable {
 
   /// The select menu tile style.
   final FSelectMenuTileStyle selectMenuTileStyle;
+
+  /// The sheet style.
+  final FSheetStyle sheetStyle;
 
   /// The slider styles.
   final FSliderStyles sliderStyles;
@@ -131,6 +136,7 @@ final class FThemeData with Diagnosticable {
     required this.dividerStyles,
     required this.headerStyle,
     required this.labelStyles,
+    required this.lineCalendarStyle,
     required this.popoverStyle,
     required this.popoverMenuStyle,
     required this.progressStyle,
@@ -139,6 +145,7 @@ final class FThemeData with Diagnosticable {
     required this.scaffoldStyle,
     required this.selectGroupStyle,
     required this.selectMenuTileStyle,
+    required this.sheetStyle,
     required this.sliderStyles,
     required this.switchStyle,
     required this.tabsStyle,
@@ -178,6 +185,7 @@ final class FThemeData with Diagnosticable {
       dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
+      lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       popoverMenuStyle: FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
       progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
@@ -186,6 +194,7 @@ final class FThemeData with Diagnosticable {
       scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       selectMenuTileStyle: FSelectMenuTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      sheetStyle: FSheetStyle.inherit(colorScheme: colorScheme),
       sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
       tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -255,6 +264,7 @@ final class FThemeData with Diagnosticable {
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
+    FLineCalendarStyle? lineCalendarStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
@@ -263,6 +273,7 @@ final class FThemeData with Diagnosticable {
     FScaffoldStyle? scaffoldStyle,
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
+    FSheetStyle? sheetStyle,
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
@@ -287,6 +298,7 @@ final class FThemeData with Diagnosticable {
         dividerStyles: dividerStyles ?? this.dividerStyles,
         headerStyle: headerStyle ?? this.headerStyle,
         labelStyles: labelStyles ?? this.labelStyles,
+        lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
         popoverStyle: popoverStyle ?? this.popoverStyle,
         popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
         progressStyle: progressStyle ?? this.progressStyle,
@@ -295,6 +307,7 @@ final class FThemeData with Diagnosticable {
         scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
         selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
         selectMenuTileStyle: selectMenuTileStyle ?? this.selectMenuTileStyle,
+        sheetStyle: sheetStyle ?? this.sheetStyle,
         sliderStyles: sliderStyles ?? this.sliderStyles,
         switchStyle: switchStyle ?? this.switchStyle,
         tabsStyle: tabsStyle ?? this.tabsStyle,
@@ -324,6 +337,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
@@ -332,6 +346,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('selectMenuTileStyle', selectMenuTileStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('sheetStyle', sheetStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
@@ -362,6 +377,7 @@ final class FThemeData with Diagnosticable {
           dividerStyles == other.dividerStyles &&
           headerStyle == other.headerStyle &&
           labelStyles == other.labelStyles &&
+          lineCalendarStyle == other.lineCalendarStyle &&
           popoverStyle == other.popoverStyle &&
           popoverMenuStyle == other.popoverMenuStyle &&
           progressStyle == other.progressStyle &&
@@ -370,6 +386,7 @@ final class FThemeData with Diagnosticable {
           scaffoldStyle == other.scaffoldStyle &&
           selectGroupStyle == other.selectGroupStyle &&
           selectMenuTileStyle == other.selectMenuTileStyle &&
+          sheetStyle == other.sheetStyle &&
           sliderStyles == other.sliderStyles &&
           switchStyle == other.switchStyle &&
           tabsStyle == other.tabsStyle &&
@@ -396,6 +413,7 @@ final class FThemeData with Diagnosticable {
       dividerStyles.hashCode ^
       headerStyle.hashCode ^
       labelStyles.hashCode ^
+      lineCalendarStyle.hashCode ^
       popoverStyle.hashCode ^
       popoverMenuStyle.hashCode ^
       progressStyle.hashCode ^
@@ -404,6 +422,7 @@ final class FThemeData with Diagnosticable {
       scaffoldStyle.hashCode ^
       selectGroupStyle.hashCode ^
       selectMenuTileStyle.hashCode ^
+      sheetStyle.hashCode ^
       sliderStyles.hashCode ^
       switchStyle.hashCode ^
       tabsStyle.hashCode ^

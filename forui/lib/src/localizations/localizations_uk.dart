@@ -47,4 +47,18 @@ class FLocalizationsUk extends FLocalizations {
 
     return '$dateString';
   }
+
+  @override
+  String get dialogLabel => 'Вікно';
+
+  @override
+  String get sheetLabel => 'екран';
+
+  @override
+  String get barrierLabel => 'Маскувальний фон';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Закрити: \$modalRouteContentName';
+  }
 }

@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/forui.dart';
 
 void main() {
   group('FColorScheme', () {
     const scheme = FColorScheme(
       brightness: Brightness.light,
+      barrier: Color(0xFF03A9F4),
       background: Colors.black,
       foreground: Colors.black12,
       primary: Colors.black26,
@@ -30,6 +30,7 @@ void main() {
       test('all arguments', () {
         final copy = scheme.copyWith(
           brightness: Brightness.dark,
+          barrier: Colors.red,
           background: Colors.red,
           foreground: Colors.greenAccent,
           primary: Colors.yellow,
@@ -48,6 +49,7 @@ void main() {
         );
 
         expect(copy.brightness, equals(Brightness.dark));
+        expect(copy.barrier, equals(Colors.red));
         expect(copy.background, equals(Colors.red));
         expect(copy.foreground, equals(Colors.greenAccent));
         expect(copy.primary, equals(Colors.yellow));
@@ -74,6 +76,7 @@ void main() {
         builder.properties.map((p) => p.toString()),
         [
           EnumProperty('brightness', Brightness.light),
+          ColorProperty('barrier', const Color(0xFF03A9F4)),
           ColorProperty('background', Colors.black),
           ColorProperty('foreground', Colors.black12),
           ColorProperty('primary', Colors.black26),

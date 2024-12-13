@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Pogovorno okno",
+  "sheetLabel": "Razdelek",
+  "barrierOnTapHint": "Zapiranje »$modalRouteContentName«",
+  "barrierLabel": "Scrim"
+}

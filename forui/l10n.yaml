@@ -4,4 +4,4 @@ synthetic-package: false
 output-dir: lib/src/localizations
 output-localization-file: localizations.dart
 output-class: FLocalizations
-nullable-getter: false
+untranslated-messages-file: .i10n.txt

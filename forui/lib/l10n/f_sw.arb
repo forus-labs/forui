@@ -1,1 +1,6 @@
-{}
+{
+  "dialogLabel": "Kidirisha",
+  "sheetLabel": "Safu",
+  "barrierOnTapHint": "Funga $modalRouteContentName",
+  "barrierLabel": "Scrim"
+}

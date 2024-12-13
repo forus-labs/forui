@@ -9,7 +9,7 @@ part of 'header.dart';
 /// * https://forui.dev/docs/navigation/header for working examples.
 /// * [FNestedHeaderStyle] for customizing a header's appearance.
 final class _FNestedHeader extends FHeader {
-  /// The style. Defaults to [FThemeData.headerStyle.nestedStyle].
+  /// The style.
   final FNestedHeaderStyle? style;
 
   /// The title, aligned to the center.

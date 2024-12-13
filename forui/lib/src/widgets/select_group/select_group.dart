@@ -3,10 +3,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_group/select_group_item.dart';
+import 'package:meta/meta.dart';
 
 /// A set of items that are treated as a single selection.
 ///

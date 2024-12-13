@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/forui.dart';
 
 void main() {
@@ -52,6 +51,7 @@ void main() {
     group('inherit constructor', () {
       const colorScheme = FColorScheme(
         brightness: Brightness.light,
+        barrier: Colors.black12,
         background: Colors.black,
         foreground: Colors.black12,
         primary: Colors.black26,

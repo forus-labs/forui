@@ -1,12 +1,15 @@
-import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:intl/intl.dart';
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
   /// The first day of the week, in ISO 8601 style, where the first day of the week, i. e. index 1, is Monday.
   int get firstDayOfWeek => localeName == '' ? 7 : DateFormat.yMMMMd(localeName).dateSymbols.FIRSTDAYOFWEEK + 1;
+
+  /// Short names for days of the week, starting with Sunday, e.g. 'Sun'.
+  List<String> get shortWeekDays => localeName == ''
+      ? const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+      : DateFormat.yMMMMd(localeName).dateSymbols.SHORTWEEKDAYS;
 
   /// Very short names for days of the week, starting with Sunday, e.g. 'Su'.
   List<String> get narrowWeekDays => (localeName == '' || localeName.startsWith('en'))
@@ -14,9 +17,14 @@ extension FDateTimeLocalizations on FLocalizations {
       : DateFormat.yMMMMd(localeName).dateSymbols.STANDALONENARROWWEEKDAYS;
 }
 
-@internal
+/// The default localization for when no localization is provided.
 class DefaultLocalizations extends FLocalizations {
-  DefaultLocalizations() : super('');
+  static final _localizations = DefaultLocalizations._();
+
+  /// Creates a [DefaultLocalizations].
+  factory DefaultLocalizations() => _localizations;
+
+  DefaultLocalizations._() : super('');
 
   @override
   String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);
@@ -32,4 +40,16 @@ class DefaultLocalizations extends FLocalizations {
 
   @override
   String day(DateTime date) => DateFormat.d().format(date);
+
+  @override
+  String get dialogLabel => 'Dialog';
+
+  @override
+  String get sheetLabel => 'Sheet';
+
+  @override
+  String get barrierLabel => 'Barrier';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
 }

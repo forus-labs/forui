@@ -2,12 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/util.dart';
 import 'package:forui/src/widgets/tile/tile_group.dart';
 import 'package:forui/src/widgets/tile/tile_render_object.dart';
+import 'package:meta/meta.dart';
 
 @internal
 class FTileContent extends StatelessWidget {
@@ -74,7 +72,7 @@ class FTileContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              merge(
+              DefaultTextStyle.merge(
                 style: style.titleTextStyle,
                 textHeightBehavior: const TextHeightBehavior(
                   applyHeightToFirstAscent: false,
@@ -86,7 +84,7 @@ class FTileContent extends StatelessWidget {
               if (subtitle case final subtitle?)
                 Padding(
                   padding: EdgeInsets.only(top: contentStyle.titleSpacing),
-                  child: merge(
+                  child: DefaultTextStyle.merge(
                     style: style.subtitleTextStyle,
                     textHeightBehavior: const TextHeightBehavior(
                       applyHeightToFirstAscent: false,
@@ -100,7 +98,7 @@ class FTileContent extends StatelessWidget {
           ),
         ),
         if (details case final details?)
-          merge(
+          DefaultTextStyle.merge(
             style: style.detailsTextStyle,
             textHeightBehavior: const TextHeightBehavior(
               applyHeightToFirstAscent: false,
