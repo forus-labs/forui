@@ -437,6 +437,7 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
         );
 
   /// Returns a copy of this style with the given fields replaced by the new values.
+  @override
   @useResult
   FTileGroupStyle copyWith({
     Color? borderColor,

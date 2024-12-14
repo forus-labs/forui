@@ -21,8 +21,8 @@ class ModalSheetPage extends Sample {
             label: const Text('Left'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.ltr,
-              builder: (context) => const Form(side: Layout.ltr),
+              side: FLayout.ltr,
+              builder: (context) => const Form(side: FLayout.ltr),
             ),
           ),
           const SizedBox(height: 5),
@@ -30,8 +30,8 @@ class ModalSheetPage extends Sample {
             label: const Text('Top'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.ttb,
-              builder: (context) => const Form(side: Layout.ttb),
+              side: FLayout.ttb,
+              builder: (context) => const Form(side: FLayout.ttb),
             ),
           ),
           const SizedBox(height: 5),
@@ -39,8 +39,8 @@ class ModalSheetPage extends Sample {
             label: const Text('Right'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.rtl,
-              builder: (context) => const Form(side: Layout.rtl),
+              side: FLayout.rtl,
+              builder: (context) => const Form(side: FLayout.rtl),
             ),
           ),
           const SizedBox(height: 5),
@@ -48,8 +48,8 @@ class ModalSheetPage extends Sample {
             label: const Text('Bottom'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.btt,
-              builder: (context) => const Form(side: Layout.btt),
+              side: FLayout.btt,
+              builder: (context) => const Form(side: FLayout.btt),
             ),
           ),
         ],
@@ -57,7 +57,7 @@ class ModalSheetPage extends Sample {
 }
 
 class Form extends StatelessWidget {
-  final Layout side;
+  final FLayout side;
 
   const Form({required this.side, super.key});
 
@@ -132,7 +132,7 @@ class DraggableModalSheetPage extends Sample {
         label: const Text('Click me'),
         onPress: () => showFSheet(
           context: context,
-          side: Layout.btt,
+          side: FLayout.btt,
           mainAxisMaxRatio: null,
           builder: (context) => DraggableScrollableSheet(
             expand: false,
