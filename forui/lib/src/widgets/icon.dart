@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// The [FIconStyle] that this [FIconStyleData]'s widget subtree should inherit.
 class FIconStyleData extends InheritedWidget {
@@ -46,6 +47,21 @@ class FIconStyle with Diagnosticable {
     required this.color,
     required this.size,
   }) : assert(0 < size, 'size is $size, but it should be positive.');
+
+  /// Returns a copy of this [FIconStyle] but with the given fields replaced with the new values.
+  @useResult
+  FIconStyle copyWith({Color? color, double? size}) => FIconStyle(
+        color: color ?? this.color,
+        size: size ?? this.size,
+      );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FIconStyle && runtimeType == other.runtimeType && color == other.color && size == other.size;
+
+  @override
+  int get hashCode => color.hashCode ^ size.hashCode;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -270,7 +286,7 @@ class _IconDataIcon extends FIcon {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('icon', icon))
+      ..add(IconDataProperty('icon', icon))
       ..add(DoubleProperty('fill', fill))
       ..add(DoubleProperty('weight', weight))
       ..add(DoubleProperty('grade', grade))

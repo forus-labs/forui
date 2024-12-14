@@ -51,10 +51,10 @@ class DayPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
-      ..add(DiagnosticsProperty('selectable', selectable))
-      ..add(DiagnosticsProperty('selected', selected))
-      ..add(DiagnosticsProperty('onPress', onPress))
-      ..add(DiagnosticsProperty('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('selectable', selectable))
+      ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }
 }
 

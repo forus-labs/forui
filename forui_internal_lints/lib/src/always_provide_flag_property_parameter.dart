@@ -1,10 +1,12 @@
 import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 const _code = LintCode(
   name: 'always_provide_flag_property_parameter',
   problemMessage: 'Provide `ifTrue` and/or `ifFalse` parameter',
+  errorSeverity: ErrorSeverity.ERROR,
 );
 
 const _flagProperty = TypeChecker.fromName('FlagProperty', packageName: 'flutter');

@@ -89,10 +89,10 @@ final class FBreakpoints with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('sm', sm))
-      ..add(DiagnosticsProperty('md', md))
-      ..add(DiagnosticsProperty('lg', lg))
-      ..add(DiagnosticsProperty('xl', xl))
-      ..add(DiagnosticsProperty('xl2', xl2));
+      ..add(DoubleProperty('sm', sm))
+      ..add(DoubleProperty('md', md))
+      ..add(DoubleProperty('lg', lg))
+      ..add(DoubleProperty('xl', xl))
+      ..add(DoubleProperty('xl2', xl2));
   }
 }

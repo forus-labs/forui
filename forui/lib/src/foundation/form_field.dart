@@ -91,7 +91,7 @@ abstract class FFormField<T> extends StatelessWidget {
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(DiagnosticsProperty('initialValue', initialValue))
-      ..add(DiagnosticsProperty('enabled', enabled))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('restorationId', restorationId));
   }

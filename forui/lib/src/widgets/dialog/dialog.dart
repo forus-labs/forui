@@ -178,7 +178,7 @@ class FDialog extends StatelessWidget {
       ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration, defaultValue: _defaultDuration))
       ..add(DiagnosticsProperty('insetAnimationCurve', insetAnimationCurve, defaultValue: Curves.decelerate))
       ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(DiagnosticsProperty('builder', builder));
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 

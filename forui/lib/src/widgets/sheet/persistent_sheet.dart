@@ -21,8 +21,8 @@ import 'package:meta/meta.dart';
 /// [style] defaults to [FSheetStyle] from the closest [FTheme] ancestor.
 ///
 /// [mainAxisMaxRatio] represents the main axis's max constraint ratio for the sheet, depending on [side].
-/// Defaults to 9 / 16. The main axis is the width if [side] is [Layout.ltr] or [Layout.rtl], and the height if [side]
-/// is [Layout.ttb] or [Layout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
+/// Defaults to 9 / 16. The main axis is the width if [side] is [FLayout.ltr] or [FLayout.rtl], and the height if [side]
+/// is [FLayout.ttb] or [FLayout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
 /// i.e. [ListView], along the main axis, to have the sheet be draggable.
 ///
 /// [anchorPoint] is used to pick the closest sub-screen.
@@ -48,7 +48,7 @@ import 'package:meta/meta.dart';
 @useResult
 FPersistentSheetController showFPersistentSheet({
   required BuildContext context,
-  required Layout side,
+  required FLayout side,
   required Widget Function(BuildContext, FPersistentSheetController) builder,
   FSheetStyle? style,
   double? mainAxisMaxRatio = 9 / 16,

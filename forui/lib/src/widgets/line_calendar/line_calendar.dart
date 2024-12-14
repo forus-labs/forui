@@ -259,8 +259,8 @@ final class FLineCalendarStyle with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('itemPadding', itemPadding))
-      ..add(DiagnosticsProperty('itemContentEdgeSpacing', itemContentEdgeSpacing))
-      ..add(DiagnosticsProperty('itemContentSpacing', itemContentSpacing))
+      ..add(DoubleProperty('itemContentEdgeSpacing', itemContentEdgeSpacing))
+      ..add(DoubleProperty('itemContentSpacing', itemContentSpacing))
       ..add(DiagnosticsProperty('selectedItemStyle', selectedItemStyle))
       ..add(DiagnosticsProperty('selectedHoveredItemStyle', selectedHoveredItemStyle))
       ..add(DiagnosticsProperty('unselectedItemStyle', unselectedItemStyle))

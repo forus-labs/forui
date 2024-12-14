@@ -12,7 +12,7 @@ void main() {
   FPersistentSheetController? controller;
 
   group('showFSheet', () {
-    for (final side in Layout.values) {
+    for (final side in FLayout.values) {
       testWidgets('default - $side', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(

@@ -396,7 +396,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
-      ..add(DiagnosticsProperty('shift', shift))
+      ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
@@ -539,6 +539,7 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable {
   }
 
   /// Returns a copy of this [FTileStyle] with the given fields replaced with the new values.
+  @override
   @useResult
   FSelectMenuTileStyle copyWith({
     FLabelLayoutStyle? labelLayoutStyle,
@@ -560,6 +561,19 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable {
   /// The label's style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is FSelectMenuTileStyle &&
+          runtimeType == other.runtimeType &&
+          labelLayoutStyle == other.labelLayoutStyle &&
+          menuStyle == other.menuStyle &&
+          tileStyle == other.tileStyle;
+
+  @override
+  int get hashCode => super.hashCode ^ labelLayoutStyle.hashCode ^ menuStyle.hashCode ^ tileStyle.hashCode;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

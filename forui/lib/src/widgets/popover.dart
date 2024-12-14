@@ -193,14 +193,14 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
-      ..add(DiagnosticsProperty('shift', shift))
+      ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(DiagnosticsProperty('followerBuilder', followerBuilder));
+      ..add(ObjectFlagProperty.has('followerBuilder', followerBuilder));
   }
 }
 

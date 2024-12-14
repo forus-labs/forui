@@ -59,7 +59,7 @@ abstract class Entry extends StatelessWidget {
           TextDirection.ltr || null => BorderRadius.horizontal(left: yesterday, right: tomorrow),
           TextDirection.rtl => BorderRadius.horizontal(left: tomorrow, right: yesterday),
         },
-        text: (FLocalizations.of(context) ?? DefaultLocalizations()).day(date.toNative()),
+        text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
         data: data,
         current: today,
       );
@@ -126,7 +126,7 @@ abstract class Entry extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('builder', builder));
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -227,7 +227,7 @@ class _Content extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
       ..add(StringProperty('text', text))
-      ..add(DiagnosticsProperty('state', data.toString()))
+      ..add(StringProperty('state', data.toString()))
       ..add(FlagProperty('current', value: current, ifTrue: 'current'));
   }
 }

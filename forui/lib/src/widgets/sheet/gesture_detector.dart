@@ -11,7 +11,7 @@ import 'package:meta/meta.dart';
 /// This is based on Material's _BottomSheetGestureDetector.
 @internal
 class SheetGestureDetector extends StatelessWidget {
-  final Layout layout;
+  final FLayout layout;
   final GestureDragStartCallback? onStart;
   final GestureDragUpdateCallback? onUpdate;
   final GestureDragEndCallback? onEnd;

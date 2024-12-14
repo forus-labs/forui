@@ -161,7 +161,7 @@ class FSwitch extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(FlagProperty('enabled', value: enabled))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

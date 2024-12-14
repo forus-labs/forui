@@ -30,6 +30,6 @@ class InheritedState extends InheritedWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('state', state));
+      ..add(EnumProperty('state', state));
   }
 }

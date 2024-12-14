@@ -38,11 +38,11 @@ class PagedDayPicker extends PagedPicker {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selected', selected))
-      ..add(DiagnosticsProperty('onMonthChange', onMonthChange))
-      ..add(DiagnosticsProperty('onPress', onPress))
-      ..add(DiagnosticsProperty('onLongPress', onLongPress))
-      ..add(DiagnosticsProperty('dayBuilder', dayBuilder));
+      ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(ObjectFlagProperty.has('onMonthChange', onMonthChange))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder));
   }
 }
 
@@ -52,7 +52,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   Widget buildItem(BuildContext context, int page) => DayPicker(
         style: widget.style.dayPickerStyle,
-        localization: FLocalizations.of(context) ?? DefaultLocalizations(),
+        localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
         dayBuilder: widget.dayBuilder,
         month: widget.start.truncate(to: DateUnit.months).plus(months: page),
         today: widget.today,
@@ -88,7 +88,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
       }
 
       SemanticsService.announce(
-        (FLocalizations.of(context) ?? DefaultLocalizations()).fullDate(current.toNative()),
+        (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(current.toNative()),
         textDirection,
       );
     });

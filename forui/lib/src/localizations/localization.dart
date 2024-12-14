@@ -18,13 +18,13 @@ extension FDateTimeLocalizations on FLocalizations {
 }
 
 /// The default localization for when no localization is provided.
-class DefaultLocalizations extends FLocalizations {
-  static final _localizations = DefaultLocalizations._();
+class FDefaultLocalizations extends FLocalizations {
+  static final _localizations = FDefaultLocalizations._();
 
-  /// Creates a [DefaultLocalizations].
-  factory DefaultLocalizations() => _localizations;
+  /// Creates a [FDefaultLocalizations].
+  factory FDefaultLocalizations() => _localizations;
 
-  DefaultLocalizations._() : super('');
+  FDefaultLocalizations._() : super('');
 
   @override
   String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);

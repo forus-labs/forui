@@ -79,14 +79,14 @@ sealed class Divider extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('type', type))
+      ..add(EnumProperty('type', type))
       ..add(IntProperty('left', left))
       ..add(IntProperty('right', right))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
       ..add(DoubleProperty('resizePercentage', resizePercentage))
       ..add(DiagnosticsProperty('cursor', cursor))
-      ..add(DiagnosticsProperty('semanticFormatterCallback', semanticFormatterCallback));
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback));
   }
 }
 

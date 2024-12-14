@@ -15,7 +15,7 @@ void main() {
               child: FIcon(FAssets.icons.chevronRight),
               onPress: () => showFSheet(
                 context: context,
-                side: Layout.btt,
+                side: FLayout.btt,
                 builder: (context) => Container(
                   height: double.infinity,
                   width: double.infinity,
@@ -38,10 +38,10 @@ void main() {
     });
 
     for (final (side, offset) in [
-      (Layout.btt, const Offset(0, 300)),
-      (Layout.ttb, const Offset(0, -300)),
-      (Layout.ltr, const Offset(-300, 0)),
-      (Layout.rtl, const Offset(300, 0)),
+      (FLayout.btt, const Offset(0, 300)),
+      (FLayout.ttb, const Offset(0, -300)),
+      (FLayout.ltr, const Offset(-300, 0)),
+      (FLayout.rtl, const Offset(300, 0)),
     ]) {
       testWidgets('drag to dismiss - $side', (tester) async {
         await tester.pumpWidget(

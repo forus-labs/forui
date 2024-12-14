@@ -69,8 +69,8 @@ class FResizableRegion extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('initialSize', initialExtent))
-      ..add(DoubleProperty('minSize', minExtent))
-      ..add(DiagnosticsProperty('builder', builder));
+      ..add(DoubleProperty('initialExtent', initialExtent))
+      ..add(DoubleProperty('minExtent', minExtent))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }

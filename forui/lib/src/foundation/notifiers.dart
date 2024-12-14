@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+// ignore_for_file: always_call_super_dispose_last
+
 /// A [ChangeNotifier] that provides additional life-cycle tracking capabilities.
 class FChangeNotifier with ChangeNotifier {
   bool _disposed = false;

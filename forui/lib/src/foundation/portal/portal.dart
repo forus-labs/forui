@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -60,9 +60,9 @@ class FPortal extends StatefulWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
-      ..add(DiagnosticsProperty('shift', shift))
+      ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(DiagnosticsProperty('followerBuilder', followerBuilder));
+      ..add(ObjectFlagProperty.has('followerBuilder', followerBuilder));
   }
 }
 
@@ -196,7 +196,7 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
       ..add(DiagnosticsProperty('link', link))
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
-      ..add(DiagnosticsProperty('shift', shift))
+      ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset));
   }
 
