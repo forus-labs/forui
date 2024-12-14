@@ -60,7 +60,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 }
 
 class AForm extends StatelessWidget {
-  final Layout side;
+  final FLayout side;
 
   const AForm({required this.side, super.key});
 

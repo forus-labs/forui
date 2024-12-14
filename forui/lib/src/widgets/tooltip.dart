@@ -140,13 +140,13 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('tipAnchor', tipAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
-      ..add(DiagnosticsProperty('shift', shift))
+      ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
       ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration))
-      ..add(DiagnosticsProperty('tipBuilder', tipBuilder));
+      ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder));
   }
 }
 

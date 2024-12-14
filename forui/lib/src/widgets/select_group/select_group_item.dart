@@ -263,6 +263,8 @@ class FCheckboxSelectGroupStyle extends FCheckboxStyle {
     required super.disabledStyle,
     required super.errorStyle,
     this.padding = const EdgeInsets.symmetric(vertical: 2),
+    super.animationDuration,
+    super.curve,
   });
 
   /// Creates a [FCheckboxSelectGroupStyle] that inherits its properties from the given parameters.
@@ -274,6 +276,30 @@ class FCheckboxSelectGroupStyle extends FCheckboxStyle {
           disabledStyle: style.disabledStyle,
           errorStyle: style.errorStyle,
         );
+
+  /// Returns a [FCheckboxSelectGroupStyle] that is a copy of this style with the given properties replaced.
+  @override
+  @useResult
+  FCheckboxSelectGroupStyle copyWith({
+    Duration? animationDuration,
+    Curve? curve,
+    FLabelLayoutStyle? labelLayoutStyle,
+    FFocusedOutlineStyle? focusedOutlineStyle,
+    FCheckboxStateStyle? enabledStyle,
+    FCheckboxStateStyle? disabledStyle,
+    FCheckboxErrorStyle? errorStyle,
+    EdgeInsets? padding,
+  }) =>
+      FCheckboxSelectGroupStyle(
+        animationDuration: animationDuration ?? this.animationDuration,
+        curve: curve ?? this.curve,
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+        errorStyle: errorStyle ?? this.errorStyle,
+        padding: padding ?? this.padding,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -300,14 +326,14 @@ class FRadioSelectGroupStyle extends FRadioStyle {
 
   /// Creates a [FRadioSelectGroupStyle].
   FRadioSelectGroupStyle({
-    required super.animationDuration,
-    required super.curve,
     required super.labelLayoutStyle,
     required super.focusedOutlineStyle,
     required super.enabledStyle,
     required super.disabledStyle,
     required super.errorStyle,
     this.padding = const EdgeInsets.symmetric(vertical: 2),
+    super.animationDuration,
+    super.curve,
   });
 
   /// Creates a [FRadioSelectGroupStyle] that inherits its properties from the given parameters.
@@ -321,6 +347,30 @@ class FRadioSelectGroupStyle extends FRadioStyle {
           disabledStyle: style.disabledStyle,
           errorStyle: style.errorStyle,
         );
+
+  /// Returns a [FRadioSelectGroupStyle] that is a copy of this style with the given properties replaced.
+  @override
+  @useResult
+  FRadioSelectGroupStyle copyWith({
+    Duration? animationDuration,
+    Curve? curve,
+    FLabelLayoutStyle? labelLayoutStyle,
+    FFocusedOutlineStyle? focusedOutlineStyle,
+    FRadioStateStyle? enabledStyle,
+    FRadioStateStyle? disabledStyle,
+    FRadioErrorStyle? errorStyle,
+    EdgeInsets? padding,
+  }) =>
+      FRadioSelectGroupStyle(
+        animationDuration: animationDuration ?? this.animationDuration,
+        curve: curve ?? this.curve,
+        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
+        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+        errorStyle: errorStyle ?? this.errorStyle,
+        padding: padding ?? this.padding,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

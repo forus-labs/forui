@@ -70,7 +70,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  (FLocalizations.of(context) ?? DefaultLocalizations()).yearMonth(widget.month.toNative()),
+                  (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
                   style: widget.style.headerTextStyle,
                 ),
                 RotationTransition(
@@ -183,8 +183,8 @@ class Navigation extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('onPrevious', onPrevious))
-      ..add(DiagnosticsProperty('onNext', onNext));
+      ..add(ObjectFlagProperty.has('onPrevious', onPrevious))
+      ..add(ObjectFlagProperty.has('onNext', onNext));
   }
 }
 

@@ -35,7 +35,7 @@ abstract class PagedPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('initial', initial))
-      ..add(DiagnosticsProperty('selectable', selectable));
+      ..add(ObjectFlagProperty.has('selectable', selectable));
   }
 }
 

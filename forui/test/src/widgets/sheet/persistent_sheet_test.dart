@@ -20,7 +20,7 @@ void main() {
                 onPress: () {
                   controller = showFPersistentSheet(
                     context: context,
-                    side: Layout.btt,
+                    side: FLayout.btt,
                     builder: (context, controller) => Container(
                       height: double.infinity,
                       width: double.infinity,
@@ -54,7 +54,7 @@ void main() {
                 onPress: () {
                   controller = showFPersistentSheet(
                     context: context,
-                    side: Layout.btt,
+                    side: FLayout.btt,
                     keepAliveOffstage: true,
                     builder: (context, controller) => Container(
                       height: double.infinity,
@@ -88,7 +88,7 @@ void main() {
               onPress: () {
                 controller = showFPersistentSheet(
                   context: context,
-                  side: Layout.btt,
+                  side: FLayout.btt,
                   builder: (context, controller) => Container(
                     height: double.infinity,
                     width: double.infinity,
@@ -119,7 +119,7 @@ void main() {
                   controller = showFPersistentSheet(
                     key: const Key('test'),
                     context: context,
-                    side: Layout.btt,
+                    side: FLayout.btt,
                     builder: (context, controller) => Container(
                       height: double.infinity,
                       width: double.infinity,
@@ -157,7 +157,7 @@ void main() {
                 onPress: () {
                   controller = showFPersistentSheet(
                     context: context,
-                    side: Layout.btt,
+                    side: FLayout.btt,
                     builder: (context, controller) => Container(
                       height: double.infinity,
                       width: double.infinity,
@@ -181,10 +181,10 @@ void main() {
     });
 
     for (final (side, offset) in [
-      (Layout.btt, const Offset(0, 300)),
-      (Layout.ttb, const Offset(0, -300)),
-      (Layout.ltr, const Offset(-300, 0)),
-      (Layout.rtl, const Offset(300, 0)),
+      (FLayout.btt, const Offset(0, 300)),
+      (FLayout.ttb, const Offset(0, -300)),
+      (FLayout.ltr, const Offset(-300, 0)),
+      (FLayout.rtl, const Offset(300, 0)),
     ]) {
       testWidgets('drag to dismiss - $side', (tester) async {
         await tester.pumpWidget(

@@ -20,11 +20,11 @@ class PersistentSheetPage extends StatefulSample {
 }
 
 class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
-  final Map<Layout, FPersistentSheetController> _controllers = {};
+  final Map<FLayout, FPersistentSheetController> _controllers = {};
 
   @override
   Widget sample(BuildContext context) {
-    VoidCallback onPress(Layout side) => () {
+    VoidCallback onPress(FLayout side) => () {
           for (final MapEntry(:key, :value) in _controllers.entries) {
             if (key != side && value.shown) {
               return;
@@ -50,22 +50,22 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
       children: [
         FButton(
           label: const Text('Left'),
-          onPress: onPress(Layout.ltr),
+          onPress: onPress(FLayout.ltr),
         ),
         const SizedBox(height: 5),
         FButton(
           label: const Text('Top'),
-          onPress: onPress(Layout.ttb),
+          onPress: onPress(FLayout.ttb),
         ),
         const SizedBox(height: 5),
         FButton(
           label: const Text('Right'),
-          onPress: onPress(Layout.rtl),
+          onPress: onPress(FLayout.rtl),
         ),
         const SizedBox(height: 5),
         FButton(
           label: const Text('Bottom'),
-          onPress: onPress(Layout.btt),
+          onPress: onPress(FLayout.btt),
         ),
       ],
     );
@@ -81,7 +81,7 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
 }
 
 class Form extends StatelessWidget {
-  final Layout side;
+  final FLayout side;
   final FPersistentSheetController controller;
 
   const Form({required this.side, required this.controller, super.key});
@@ -170,7 +170,7 @@ class _DraggableState extends StatefulSampleState<DraggablePersistentSheetPage> 
 
           controller = showFPersistentSheet(
             context: context,
-            side: Layout.btt,
+            side: FLayout.btt,
             mainAxisMaxRatio: null,
             builder: (context, _) => DraggableScrollableSheet(
               expand: false,

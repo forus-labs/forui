@@ -244,7 +244,7 @@ final class FSliderStyle with Diagnosticable {
       ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
       ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
       ..add(DiagnosticsProperty('errorStyle', errorStyle))
-      ..add(DiagnosticsProperty('thumbSize', thumbSize))
+      ..add(DoubleProperty('thumbSize', thumbSize))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DiagnosticsProperty('tooltipTipAnchor', tooltipTipAnchor))
       ..add(DiagnosticsProperty('tooltipThumbAnchor', tooltipThumbAnchor));
@@ -441,4 +441,15 @@ final class FSliderErrorStyle extends FSliderStateStyle implements FFormFieldErr
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('errorTextStyle', errorTextStyle));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is FSliderErrorStyle &&
+          runtimeType == other.runtimeType &&
+          errorTextStyle == other.errorTextStyle;
+
+  @override
+  int get hashCode => super.hashCode ^ errorTextStyle.hashCode;
 }

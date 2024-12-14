@@ -10,7 +10,7 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FModalSheet', () {
-    for (final side in Layout.values) {
+    for (final side in FLayout.values) {
       testWidgets('default - $side', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(

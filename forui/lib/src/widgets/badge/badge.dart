@@ -67,7 +67,7 @@ class FBadge extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style, defaultValue: FBadgeStyle.primary))
-      ..add(DiagnosticsProperty('builder', builder, level: DiagnosticLevel.debug));
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 

@@ -18,8 +18,8 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 /// [style] defaults to [FSheetStyle] from the closest [FTheme] ancestor.
 ///
 /// [mainAxisMaxRatio] represents the main axis's max constraint ratio for the sheet, depending on [side].
-/// Defaults to 9 / 16. The main axis is the width if [side] is [Layout.ltr] or [Layout.rtl], and the height if [side]
-/// is [Layout.ttb] or [Layout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
+/// Defaults to 9 / 16. The main axis is the width if [side] is [FLayout.ltr] or [FLayout.rtl], and the height if [side]
+/// is [FLayout.ttb] or [FLayout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
 /// i.e. [ListView], along the main axis, to have the sheet be draggable.
 ///
 /// [barrierLabel] defaults to [FLocalizations.barrierLabel].
@@ -37,7 +37,7 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 Future<T?> showFSheet<T>({
   required BuildContext context,
   required WidgetBuilder builder,
-  required Layout side,
+  required FLayout side,
   bool useRootNavigator = false,
   FSheetStyle? style,
   double? mainAxisMaxRatio = 9 / 16,
@@ -53,7 +53,7 @@ Future<T?> showFSheet<T>({
   assert(debugCheckHasMediaQuery(context), '');
 
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
-  final localizations = FLocalizations.of(context) ?? DefaultLocalizations();
+  final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
   return navigator.push(
     FModalSheetRoute<T>(
@@ -98,7 +98,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   final FSheetStyle style;
 
   /// The side.
-  final Layout side;
+  final FLayout side;
 
   /// Stores a list of captured [InheritedTheme]s that are wrapped around the sheet.
   ///
@@ -107,8 +107,8 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 
   /// The main axis's max constraint ratio for the sheet, depending on [side]. Defaults to 9 / 16.
   ///
-  /// The main axis is the width if [side] is [Layout.ltr] or [Layout.rtl], and the height if [side] is [Layout.ttb] or
-  /// [Layout.btt].
+  /// The main axis is the width if [side] is [FLayout.ltr] or [FLayout.rtl], and the height if [side] is [FLayout.ttb] or
+  /// [FLayout.btt].
   ///
   /// Consider setting this to null if this sheet has a scrollable child, i.e. [ListView], along the main axis, to have
   /// the sheet be draggable.
@@ -223,10 +223,10 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       builder: builder,
       onChange: (size) => _didChangeBarrierSemanticsClip(
         switch (side) {
-          Layout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
-          Layout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
-          Layout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
-          Layout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
+          FLayout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
+          FLayout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
+          FLayout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
+          FLayout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
         },
       ),
       onClosing: () {

@@ -437,6 +437,7 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
         );
 
   /// Returns a copy of this style with the given fields replaced by the new values.
+  @override
   @useResult
   FTileGroupStyle copyWith({
     Color? borderColor,
@@ -462,6 +463,27 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
   /// The label's style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is FTileGroupStyle &&
+          runtimeType == other.runtimeType &&
+          labelLayoutStyle == other.labelLayoutStyle &&
+          borderColor == other.borderColor &&
+          borderWidth == other.borderWidth &&
+          borderRadius == other.borderRadius &&
+          tileStyle == other.tileStyle;
+
+  @override
+  int get hashCode =>
+      super.hashCode ^
+      labelLayoutStyle.hashCode ^
+      borderColor.hashCode ^
+      borderWidth.hashCode ^
+      borderRadius.hashCode ^
+      tileStyle.hashCode;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

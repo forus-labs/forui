@@ -48,7 +48,7 @@ class YearPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('today', today, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('focused', focused, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug));
+      ..add(ObjectFlagProperty.has('onPress', onPress, level: DiagnosticLevel.debug));
   }
 }
 
@@ -86,7 +86,7 @@ class _YearPickerState extends State<YearPicker> {
                 focusNode: _years[i],
                 current: widget.today.year == year.year,
                 selectable: widget.start <= year && year <= widget.end,
-                format: (date) => (FLocalizations.of(context) ?? DefaultLocalizations()).year(date.toNative()),
+                format: (date) => (FLocalizations.of(context) ?? FDefaultLocalizations()).year(date.toNative()),
                 onPress: widget.onPress,
               ),
           ],

@@ -14,7 +14,7 @@ final class InheritedData extends InheritedWidget {
   }
 
   final FSliderStyle style;
-  final Layout layout;
+  final FLayout layout;
   final List<FSliderMark> marks;
   final double? trackMainAxisExtent;
   final double? trackHitRegionCrossExtent;

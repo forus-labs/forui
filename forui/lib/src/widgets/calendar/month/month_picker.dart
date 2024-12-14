@@ -46,7 +46,7 @@ class MonthPicker extends StatefulWidget {
       ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('today', today, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('focused', focused, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('onPress', onPress, level: DiagnosticLevel.debug));
+      ..add(ObjectFlagProperty.has('onPress', onPress, level: DiagnosticLevel.debug));
   }
 }
 
@@ -82,7 +82,7 @@ class _MonthPickerState extends State<MonthPicker> {
                 current: widget.today.truncate(to: DateUnit.months) == month,
                 selectable: widget.start <= month && month <= widget.end,
                 format: (date) =>
-                    (FLocalizations.of(context) ?? DefaultLocalizations()).abbreviatedMonth(date.toNative()),
+                    (FLocalizations.of(context) ?? FDefaultLocalizations()).abbreviatedMonth(date.toNative()),
                 onPress: widget.onPress,
               ),
           ],

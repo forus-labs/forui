@@ -54,7 +54,11 @@ Bump minimum Flutter version to 3.27.0.
 
 * Change `FSelectMenuTile` to be scrollable.
 
-* **Breaking**  Change `FLocalizations.of(...)` to return `FLocalizations?` instead of `FLocalizations` - do `FLocalizations.of(...) ?? DefaultLocalizations()`.
+* Change `ThemeBuildContext` to `FThemeBuildContext`.
+
+* **Breaking** Change `Layout` to `FLayout`.
+
+* **Breaking**  Change `FLocalizations.of(...)` to return `FLocalizations?` instead of `FLocalizations` - do `FLocalizations.of(...) ?? FDefaultLocalizations()`.
   This change is sadly needed as Flutter now forcefully regenerates `FLocalizations` each time `flutter pub get` is called.
 
 * **Breaking** Change `FTileData.index` to `FTileData.last`.

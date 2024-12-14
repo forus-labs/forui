@@ -234,7 +234,7 @@ final class _FHorizontalLabel extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('style', style.toString()))
       ..add(EnumProperty('state', state));
   }
 }
@@ -307,7 +307,7 @@ class _FVerticalLabel extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('style', style.toString()))
       ..add(EnumProperty('state', state));
   }
 }
@@ -360,8 +360,8 @@ final class FLabelStyles with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('horizontalStyle', horizontalStyle))
-      ..add(DiagnosticsProperty('verticalStyle', verticalStyle));
+      ..add(StringProperty('horizontalStyle', horizontalStyle.toString()))
+      ..add(StringProperty('verticalStyle', verticalStyle.toString()));
   }
 
   @override
@@ -463,6 +463,19 @@ class FLabelStateStyles with Diagnosticable {
           disabledStyle: style.disabledFormFieldStyle,
           errorStyle: style.errorFormFieldStyle,
         );
+
+  /// Returns a copy of this [FLabelStateStyles] with the given properties replaced.
+  @useResult
+  FLabelStateStyles copyWith({
+    FFormFieldStyle? enabledStyle,
+    FFormFieldStyle? disabledStyle,
+    FFormFieldErrorStyle? errorStyle,
+  }) =>
+      FLabelStateStyles(
+        enabledStyle: enabledStyle ?? this.enabledStyle,
+        disabledStyle: disabledStyle ?? this.disabledStyle,
+        errorStyle: errorStyle ?? this.errorStyle,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -100,7 +100,7 @@ class FResizable extends StatefulWidget {
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
       ..add(DoubleProperty('resizePercentage', resizePercentage))
-      ..add(DiagnosticsProperty('semanticFormatterCallback', semanticFormatterCallback))
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(IterableProperty('children', children));
   }
 }

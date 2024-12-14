@@ -26,7 +26,7 @@ class PagedMonthPicker extends PagedPicker {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('onPress', onPress));
+    properties.add(ObjectFlagProperty.has('onPress', onPress));
   }
 }
 

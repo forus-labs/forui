@@ -19,7 +19,7 @@ class Sheet extends StatefulWidget {
   final AnimationController? controller;
   final Animation<double>? animation;
   final FSheetStyle style;
-  final Layout side;
+  final FLayout side;
   final double? mainAxisMaxRatio;
   final BoxConstraints constraints;
   final Offset? anchorPoint;
@@ -102,10 +102,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       anchorPoint: widget.anchorPoint,
       child: Align(
         alignment: switch (widget.side) {
-          Layout.ttb => Alignment.topCenter,
-          Layout.btt => Alignment.bottomCenter,
-          Layout.ltr => Alignment.centerLeft,
-          Layout.rtl => Alignment.centerRight,
+          FLayout.ttb => Alignment.topCenter,
+          FLayout.btt => Alignment.bottomCenter,
+          FLayout.ltr => Alignment.centerLeft,
+          FLayout.rtl => Alignment.centerRight,
         },
         heightFactor: widget.side.vertical ? 1 : null,
         widthFactor: widget.side.vertical ? null : 1,
@@ -137,14 +137,14 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
     }
 
     sheet = switch ((widget.side, widget.useSafeArea)) {
-      (Layout.ttb, true) => SafeArea(top: false, child: sheet),
-      (Layout.btt, true) => SafeArea(bottom: false, child: sheet),
-      (Layout.ltr, true) => SafeArea(left: false, child: sheet),
-      (Layout.rtl, true) => SafeArea(right: false, child: sheet),
-      (Layout.ttb, false) => MediaQuery.removePadding(context: context, removeBottom: true, child: sheet),
-      (Layout.btt, false) => MediaQuery.removePadding(context: context, removeTop: true, child: sheet),
-      (Layout.ltr, false) => MediaQuery.removePadding(context: context, removeRight: true, child: sheet),
-      (Layout.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: sheet),
+      (FLayout.ttb, true) => SafeArea(top: false, child: sheet),
+      (FLayout.btt, true) => SafeArea(bottom: false, child: sheet),
+      (FLayout.ltr, true) => SafeArea(left: false, child: sheet),
+      (FLayout.rtl, true) => SafeArea(right: false, child: sheet),
+      (FLayout.ttb, false) => MediaQuery.removePadding(context: context, removeBottom: true, child: sheet),
+      (FLayout.btt, false) => MediaQuery.removePadding(context: context, removeTop: true, child: sheet),
+      (FLayout.ltr, false) => MediaQuery.removePadding(context: context, removeRight: true, child: sheet),
+      (FLayout.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: sheet),
     };
 
     return AnimatedBuilder(
@@ -154,7 +154,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         namesRoute: true,
         label: switch (defaultTargetPlatform) {
           TargetPlatform.iOS || TargetPlatform.macOS => null,
-          _ => (FLocalizations.of(context) ?? DefaultLocalizations()).dialogLabel,
+          _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).dialogLabel,
         },
         explicitChildNodes: true,
         child: ClipRect(
@@ -172,22 +172,22 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   }
 
   GestureDragUpdateCallback get _dragUpdate => switch (widget.side) {
-        Layout.ttb => (details) {
+        FLayout.ttb => (details) {
             if (!_dismissing) {
               _controller.value += details.primaryDelta! / _key.currentChildHeight;
             }
           },
-        Layout.btt => (details) {
+        FLayout.btt => (details) {
             if (!_dismissing) {
               _controller.value -= details.primaryDelta! / _key.currentChildHeight;
             }
           },
-        Layout.ltr => (details) {
+        FLayout.ltr => (details) {
             if (!_dismissing) {
               _controller.value += details.primaryDelta! / _key.currentChildWidth;
             }
           },
-        Layout.rtl => (details) {
+        FLayout.rtl => (details) {
             if (!_dismissing) {
               _controller.value -= details.primaryDelta! / _key.currentChildWidth;
             }
@@ -196,10 +196,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
   GestureDragEndCallback get _dragEnd {
     final double Function(DragEndDetails) velocity = switch (widget.side) {
-      Layout.ttb => (details) => details.primaryVelocity! / _key.currentChildHeight,
-      Layout.btt => (details) => -details.primaryVelocity! / _key.currentChildHeight,
-      Layout.ltr => (details) => details.primaryVelocity! / _key.currentChildWidth,
-      Layout.rtl => (details) => -details.primaryVelocity! / _key.currentChildWidth,
+      FLayout.ttb => (details) => details.primaryVelocity! / _key.currentChildHeight,
+      FLayout.btt => (details) => -details.primaryVelocity! / _key.currentChildHeight,
+      FLayout.ltr => (details) => details.primaryVelocity! / _key.currentChildWidth,
+      FLayout.rtl => (details) => -details.primaryVelocity! / _key.currentChildWidth,
     };
 
     return (details) {
@@ -293,6 +293,25 @@ class FSheetStyle with Diagnosticable {
           barrierColor: colorScheme.barrier,
           backgroundColor: colorScheme.background,
         );
+
+  /// Returns a new [FSheetStyle] with the given properties replaced.
+  @useResult
+  FSheetStyle copyWith({
+    Color? barrierColor,
+    Color? backgroundColor,
+    Duration? enterDuration,
+    Duration? exitDuration,
+    double? flingVelocity,
+    double? closeProgressThreshold,
+  }) =>
+      FSheetStyle(
+        barrierColor: barrierColor ?? this.barrierColor,
+        backgroundColor: backgroundColor ?? this.backgroundColor,
+        enterDuration: enterDuration ?? this.enterDuration,
+        exitDuration: exitDuration ?? this.exitDuration,
+        flingVelocity: flingVelocity ?? this.flingVelocity,
+        closeProgressThreshold: closeProgressThreshold ?? this.closeProgressThreshold,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

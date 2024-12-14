@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 /// This is based on Material's _BottomSheetLayoutWithSizeListener.
 @internal
 class ShiftedSheet extends SingleChildRenderObjectWidget {
-  final Layout side;
+  final FLayout side;
   final double value;
   final double? mainAxisMaxRatio;
   final ValueChanged<Size>? onChange;
@@ -52,14 +52,14 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
 }
 
 class _ShiftedSheet extends RenderShiftedBox {
-  Layout _side;
+  FLayout _side;
   double _value;
   double? _mainAxisMaxRatio;
   ValueChanged<Size>? _onChange;
   Size _previous = Size.zero;
 
   _ShiftedSheet({
-    required Layout side,
+    required FLayout side,
     required double value,
     required double? mainAxisMaxRatio,
     required ValueChanged<Size>? onChange,
@@ -119,10 +119,10 @@ class _ShiftedSheet extends RenderShiftedBox {
         );
 
   Offset positionChild(Size size, Size childSize) => switch (side) {
-        Layout.ttb => Offset(0, childSize.height * (_value - 1)),
-        Layout.btt => Offset(0, size.height - childSize.height * _value),
-        Layout.ltr => Offset(childSize.width * (_value - 1), 0),
-        Layout.rtl => Offset(size.width - childSize.width * _value, 0),
+        FLayout.ttb => Offset(0, childSize.height * (_value - 1)),
+        FLayout.btt => Offset(0, size.height - childSize.height * _value),
+        FLayout.ltr => Offset(childSize.width * (_value - 1), 0),
+        FLayout.rtl => Offset(size.width - childSize.width * _value, 0),
       };
 
   @override
@@ -140,9 +140,9 @@ class _ShiftedSheet extends RenderShiftedBox {
   @override
   double computeMaxIntrinsicHeight(double width) => 0.0;
 
-  Layout get side => _side;
+  FLayout get side => _side;
 
-  set side(Layout value) {
+  set side(FLayout value) {
     if (_side != value) {
       _side = value;
       markNeedsLayout();

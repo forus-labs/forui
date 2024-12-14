@@ -58,7 +58,7 @@ void main() {
                         onPress: () {
                           showFPersistentSheet(
                             context: context,
-                            side: Layout.ltr,
+                            side: FLayout.ltr,
                             draggable: false,
                             builder: (context, controller) => Container(
                               height: double.infinity,
