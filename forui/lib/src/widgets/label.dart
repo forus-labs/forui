@@ -330,7 +330,7 @@ final class FLabelStyles with Diagnosticable {
   FLabelStyles.inherit({required FStyle style})
       : horizontalStyle = (
           layout: const FLabelLayoutStyle(
-            childPadding: EdgeInsets.only(right: 8),
+            childPadding: EdgeInsets.symmetric(horizontal: 8),
             descriptionPadding: EdgeInsets.only(top: 2),
             errorPadding: EdgeInsets.only(top: 2),
           ),
