@@ -75,6 +75,9 @@ Bump minimum Flutter version to 3.27.0.
 
 * **Breaking** Change `FSelectMenuTile.ignoreDirectionalPadding` to `FSelectMenuTile.directionPadding` - the value should be inverted.
 
+### Fixes
+
+* Resolved an issue where `FLabel` exhibited incorrect padding when used with `Axis.horizontal` and RTL layouts.
 
 ## 0.7.0
 
