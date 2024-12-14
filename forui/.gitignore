@@ -32,5 +32,4 @@ build/
 test/golden/failures/
 test/**/*_test.mocks.dart
 /.temp/
-custom_lint.log
 .i10n.txt
