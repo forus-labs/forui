@@ -42,6 +42,9 @@ final class FThemeData with Diagnosticable {
   /// The bottom navigation bar style.
   final FBottomNavigationBarStyle bottomNavigationBarStyle;
 
+  /// The breadcrumb style.
+  final FBreadcrumbStyle breadcrumbStyle;
+
   /// The button styles.
   final FButtonStyles buttonStyles;
 
@@ -128,6 +131,7 @@ final class FThemeData with Diagnosticable {
     required this.avatarStyle,
     required this.badgeStyles,
     required this.bottomNavigationBarStyle,
+    required this.breadcrumbStyle,
     required this.buttonStyles,
     required this.calendarStyle,
     required this.cardStyle,
@@ -177,6 +181,7 @@ final class FThemeData with Diagnosticable {
         typography: typography,
         style: style,
       ),
+      breadcrumbStyle: FBreadcrumbStyle.inherit(colorScheme: colorScheme, typography: typography),
       buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -256,6 +261,7 @@ final class FThemeData with Diagnosticable {
     FAvatarStyle? avatarStyle,
     FBadgeStyles? badgeStyles,
     FBottomNavigationBarStyle? bottomNavigationBarStyle,
+    FBreadcrumbStyle? breadcrumbStyle,
     FButtonStyles? buttonStyles,
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
@@ -290,6 +296,7 @@ final class FThemeData with Diagnosticable {
         avatarStyle: avatarStyle ?? this.avatarStyle,
         badgeStyles: badgeStyles ?? this.badgeStyles,
         bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
+        breadcrumbStyle: breadcrumbStyle ?? this.breadcrumbStyle,
         buttonStyles: buttonStyles ?? this.buttonStyles,
         calendarStyle: calendarStyle ?? this.calendarStyle,
         cardStyle: cardStyle ?? this.cardStyle,
@@ -329,6 +336,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('avatarStyle', avatarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('breadcrumbStyle', breadcrumbStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('calendarStyle', calendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
@@ -369,6 +377,7 @@ final class FThemeData with Diagnosticable {
           avatarStyle == other.avatarStyle &&
           badgeStyles == other.badgeStyles &&
           bottomNavigationBarStyle == other.bottomNavigationBarStyle &&
+          breadcrumbStyle == other.breadcrumbStyle &&
           buttonStyles == other.buttonStyles &&
           calendarStyle == other.calendarStyle &&
           cardStyle == other.cardStyle &&
@@ -405,6 +414,7 @@ final class FThemeData with Diagnosticable {
       avatarStyle.hashCode ^
       badgeStyles.hashCode ^
       bottomNavigationBarStyle.hashCode ^
+      breadcrumbStyle.hashCode ^
       buttonStyles.hashCode ^
       calendarStyle.hashCode ^
       cardStyle.hashCode ^
