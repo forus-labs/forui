@@ -291,7 +291,7 @@ void main() {
       expect(
         builder.properties.map((p) => p.toString()),
         [
-          StringProperty('family', 'Roboto'),
+          StringProperty('defaultFontFamily', 'Roboto'),
           DiagnosticsProperty('xs', const TextStyle(fontSize: 1)),
           DiagnosticsProperty('sm', const TextStyle(fontSize: 2)),
           DiagnosticsProperty('base', const TextStyle(fontSize: 3)),
