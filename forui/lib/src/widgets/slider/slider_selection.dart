@@ -75,15 +75,10 @@ sealed class FSliderSelection with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('extent.min', extent.min))
-      ..add(DoubleProperty('extent.max', extent.max))
-      ..add(DoubleProperty('offset.min', offset.min))
-      ..add(DoubleProperty('offset.max', offset.max))
-      ..add(DoubleProperty('rawExtent.min', rawExtent.min))
-      ..add(DoubleProperty('rawExtent.max', rawExtent.max))
-      ..add(DoubleProperty('rawExtent.total', rawExtent.total))
-      ..add(DoubleProperty('rawOffset.min', rawOffset.min))
-      ..add(DoubleProperty('rawOffset.max', rawOffset.max));
+      ..add(StringProperty('extent', extent.toString()))
+      ..add(StringProperty('offset', offset.toString()))
+      ..add(StringProperty('rawExtent', rawExtent.toString()))
+      ..add(StringProperty('rawOffset', rawOffset.toString()));
   }
 
   @override

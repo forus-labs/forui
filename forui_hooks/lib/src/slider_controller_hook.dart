@@ -46,7 +46,7 @@ class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('selection', selection))
-      ..add(DoubleProperty('stepPercentage', stepPercentage))
+      ..add(PercentProperty('stepPercentage', stepPercentage))
       ..add(FlagProperty('tooltips', value: tooltips, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(EnumProperty('allowedInteraction', allowedInteraction))
       ..add(FlagProperty('minExtendable', value: minExtendable, ifTrue: 'min extendable', ifFalse: 'max extendable'));
