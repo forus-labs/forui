@@ -38,8 +38,8 @@ final class FBreadcrumb extends StatelessWidget {
     return Row(
       children: [
         for (final (index, item) in items.indexed) ...[
-          FBreadcrumbItem(onPressed: item.onPressed, child: item.child),
-          if (index < items.length) Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: dividerIcon),
+          if (item is _Crumb) item else item as _NestedCrumbs,
+          if (index < items.length-1) Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: dividerIcon),
         ]
       ],
     );
@@ -52,17 +52,40 @@ final class FBreadcrumb extends StatelessWidget {
   }
 }
 
-class FBreadcrumbItem extends StatelessWidget {
+abstract class FBreadcrumbItem {
+  const FBreadcrumbItem._();
+
+  /// Creates a crumb.
+  ///
+  /// It is typically used on pages at the root of the navigation stack.
+  factory FBreadcrumbItem({
+    required VoidCallback onPressed,
+    required Widget child,
+    bool? selected,
+    Key? key,
+  }) = _Crumb;
+
+  /// Creates a nested crumb.
+  ///
+  /// It is typically used on pages NOT at the root of the navigation stack.
+  factory FBreadcrumbItem.nested({
+    required List<FTileGroup> menu,
+    Key? key,
+  }) =>
+      _NestedCrumbs(menu: menu, key: key);
+}
+
+class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   final bool selected;
   final VoidCallback onPressed;
   final Widget child;
 
-  const FBreadcrumbItem({
-    required this.child,
+  const _Crumb({
     required this.onPressed,
-    this.selected = false,
+    required this.child,
+    bool? selected,
     super.key,
-  });
+  }) : selected = selected ?? false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +98,46 @@ class FBreadcrumbItem extends StatelessWidget {
         child: child,
       ),
     );
+  }
+}
+
+class _NestedCrumbs extends StatefulWidget implements FBreadcrumbItem {
+  final List<FTileGroup> menu;
+
+  const _NestedCrumbs({
+    required this.menu,
+    super.key,
+  });
+
+  @override
+  State<_NestedCrumbs> createState() => _NestedCrumbsState();
+}
+
+class _NestedCrumbsState extends State<_NestedCrumbs> with SingleTickerProviderStateMixin {
+  late FPopoverController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FPopoverController(vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) => Container(
+        child: FPopoverMenu.tappable(
+
+          popoverController: controller,
+          menuAnchor: Alignment.topRight,
+          childAnchor: Alignment.bottomRight,
+          menu: widget.menu,
+          child: FIcon(FAssets.icons.ellipsis),
+        ),
+      );
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }
 
