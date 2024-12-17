@@ -15,6 +15,9 @@ import 'package:meta/meta.dart';
 /// [FThemeData] and widget styles provide an `inherit(...)` constructor. The constructor configures the theme data/
 /// widget style using the defaults provided by the [colorScheme], [typography], and [style].
 final class FThemeData with Diagnosticable {
+  /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
+  final String? debugLabel;
+
   /// The responsive breakpoints.
   final FBreakpoints breakpoints;
 
@@ -156,6 +159,7 @@ final class FThemeData with Diagnosticable {
     required this.textFieldStyle,
     required this.tooltipStyle,
     required this.tileGroupStyle,
+    this.debugLabel,
     this.breakpoints = const FBreakpoints(),
     this.typography = const FTypography(),
   });
@@ -163,12 +167,14 @@ final class FThemeData with Diagnosticable {
   /// Creates a [FThemeData] that configures the widget styles using the given properties.
   factory FThemeData.inherit({
     required FColorScheme colorScheme,
+    String? debugLabel,
     FStyle? style,
     FTypography? typography,
   }) {
     typography ??= FTypography.inherit(colorScheme: colorScheme);
     style ??= FStyle.inherit(colorScheme: colorScheme, typography: typography);
     return FThemeData(
+      debugLabel: debugLabel,
       colorScheme: colorScheme,
       typography: typography,
       style: style,
@@ -327,10 +333,11 @@ final class FThemeData with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('breakpoints', breakpoints, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('colorScheme', colorScheme, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('typography', typography, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
+      ..add(StringProperty('debugLabel', debugLabel, showName: false))
+      ..add(DiagnosticsProperty('breakpoints', breakpoints))
+      ..add(DiagnosticsProperty('colorScheme', colorScheme))
+      ..add(DiagnosticsProperty('typography', typography))
+      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('accordionStyle', accordionStyle))
       ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('avatarStyle', avatarStyle, level: DiagnosticLevel.debug))

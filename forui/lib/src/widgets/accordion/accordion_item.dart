@@ -193,7 +193,7 @@ class _Expandable extends SingleChildRenderObjectWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('value', value));
+    properties.add(PercentProperty('value', value));
   }
 }
 
@@ -243,7 +243,7 @@ class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<Render
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('value', value));
+    properties.add(PercentProperty('value', value));
   }
 }
 

@@ -98,14 +98,9 @@ final class FResizableRegionData with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(IntProperty('index', index))
-      ..add(DoubleProperty('extent.min', extent.min))
-      ..add(DoubleProperty('extent.current', extent.current))
-      ..add(DoubleProperty('extent.max', extent.max))
-      ..add(DoubleProperty('extent.total', extent.total))
-      ..add(DoubleProperty('offset.min', offset.min))
-      ..add(DoubleProperty('offset.max', offset.max))
-      ..add(DoubleProperty('offsetPercentage.min', offsetPercentage.min))
-      ..add(DoubleProperty('offsetPercentage.max', offsetPercentage.max));
+      ..add(StringProperty('extent', extent.toString()))
+      ..add(StringProperty('offset', offset.toString()))
+      ..add(StringProperty('offsetPercentage', offsetPercentage.toString()));
   }
 }
 

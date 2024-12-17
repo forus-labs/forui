@@ -228,19 +228,19 @@ final class FTypography with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(StringProperty('family', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
-      ..add(DiagnosticsProperty('xs', xs, defaultValue: 12))
-      ..add(DiagnosticsProperty('sm', sm, defaultValue: 14))
-      ..add(DiagnosticsProperty('base', base, defaultValue: 16))
-      ..add(DiagnosticsProperty('lg', lg, defaultValue: 18))
-      ..add(DiagnosticsProperty('xl', xl, defaultValue: 20))
-      ..add(DiagnosticsProperty('xl2', xl2, defaultValue: 22))
-      ..add(DiagnosticsProperty('xl3', xl3, defaultValue: 30))
-      ..add(DiagnosticsProperty('xl4', xl4, defaultValue: 36))
-      ..add(DiagnosticsProperty('xl5', xl5, defaultValue: 48))
-      ..add(DiagnosticsProperty('xl6', xl6, defaultValue: 60))
-      ..add(DiagnosticsProperty('xl7', xl7, defaultValue: 72))
-      ..add(DiagnosticsProperty('xl8', xl8, defaultValue: 96));
+      ..add(StringProperty('defaultFontFamily', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
+      ..add(DiagnosticsProperty('xs', xs))
+      ..add(DiagnosticsProperty('sm', sm))
+      ..add(DiagnosticsProperty('base', base))
+      ..add(DiagnosticsProperty('lg', lg))
+      ..add(DiagnosticsProperty('xl', xl))
+      ..add(DiagnosticsProperty('xl2', xl2))
+      ..add(DiagnosticsProperty('xl3', xl3))
+      ..add(DiagnosticsProperty('xl4', xl4))
+      ..add(DiagnosticsProperty('xl5', xl5))
+      ..add(DiagnosticsProperty('xl6', xl6))
+      ..add(DiagnosticsProperty('xl7', xl7))
+      ..add(DiagnosticsProperty('xl8', xl8));
   }
 
   @override

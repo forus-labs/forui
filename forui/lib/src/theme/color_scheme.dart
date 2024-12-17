@@ -226,8 +226,8 @@ final class FColorScheme with Diagnosticable {
       ..add(ColorProperty('error', error))
       ..add(ColorProperty('errorForeground', errorForeground))
       ..add(ColorProperty('border', border))
-      ..add(DoubleProperty('enabledHoveredOpacity', enabledHoveredOpacity))
-      ..add(DoubleProperty('disabledOpacity', disabledOpacity));
+      ..add(PercentProperty('enabledHoveredOpacity', enabledHoveredOpacity))
+      ..add(PercentProperty('disabledOpacity', disabledOpacity));
   }
 
   @override

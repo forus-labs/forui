@@ -67,7 +67,7 @@ class FProgress extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('value', value));
+      ..add(PercentProperty('value', value));
   }
 }
 

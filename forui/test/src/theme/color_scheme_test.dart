@@ -90,8 +90,8 @@ void main() {
           ColorProperty('error', Colors.red),
           ColorProperty('errorForeground', Colors.redAccent),
           ColorProperty('border', Colors.lightBlue),
-          DoubleProperty('enabledHoveredOpacity', 0.9),
-          DoubleProperty('disabledOpacity', 0.5),
+          PercentProperty('enabledHoveredOpacity', 0.9),
+          PercentProperty('disabledOpacity', 0.5),
         ].map((p) => p.toString()),
       );
     });

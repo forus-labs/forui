@@ -6,7 +6,7 @@ Bump minimum Flutter version to 3.27.0.
 
 * Add `showFSheet(...)`.
 
-* Add `showFModalSheet(...)`.
+* Add `showFPersistentSheet(...)`.
 
 * Add `FModalSheetRoute`.
 
@@ -30,7 +30,9 @@ Bump minimum Flutter version to 3.27.0.
 
 * Add `FSelectMenuTile.builder`.
 
-* Add `resizeToAvoidBottomInset` to `FScaffold(...)`.
+* Add `FScaffold.resizeToAvoidBottomInset`.
+
+* Add `FThemeData.debugLabel`.
 
 ### Changes
 
