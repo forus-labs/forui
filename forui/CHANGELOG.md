@@ -6,7 +6,7 @@ Bump minimum Flutter version to 3.27.0.
 
 * Add `showFSheet(...)`.
 
-* Add `showFModalSheet(...)`.
+* Add `showFPersistentSheet(...)`.
 
 * Add `FModalSheetRoute`.
 
