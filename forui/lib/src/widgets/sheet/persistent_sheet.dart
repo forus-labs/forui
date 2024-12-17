@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -206,7 +207,17 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
         children: [
           widget.child,
           for (final (controller, sheet) in sheets.values)
-            if (controller.shown || controller.keepAliveOffstage || controller._controller.status.isAnimating) sheet,
+            if (controller.shown || controller.keepAliveOffstage || controller._controller.status.isAnimating)
+              CallbackShortcuts(
+                bindings: {
+                  const SingleActivator(LogicalKeyboardKey.escape): controller._controller.reverse,
+                },
+                child: FocusTraversalGroup(
+                  descendantsAreFocusable: controller.shown,
+                  descendantsAreTraversable: controller.shown,
+                  child: sheet,
+                ),
+              ),
         ],
       );
 
