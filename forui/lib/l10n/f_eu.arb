@@ -2,5 +2,7 @@
   "dialogLabel": "Leihoa",
   "sheetLabel": "orria",
   "barrierOnTapHint": "Itxi $modalRouteContentName",
-  "barrierLabel": "Barrera"
+  "barrierLabel": "Barrera",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

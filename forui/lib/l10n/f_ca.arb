@@ -2,5 +2,7 @@
   "dialogLabel": "Diàleg",
   "sheetLabel": "Full",
   "barrierOnTapHint": "Tanca $modalRouteContentName",
-  "barrierLabel": "Fons atenuat"
+  "barrierLabel": "Fons atenuat",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

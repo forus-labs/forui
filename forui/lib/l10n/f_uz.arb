@@ -2,5 +2,7 @@
   "dialogLabel": "Muloqot oynasi",
   "sheetLabel": "ekran",
   "barrierOnTapHint": "Yopish: $modalRouteContentName",
-  "barrierLabel": "Kanop"
+  "barrierLabel": "Kanop",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

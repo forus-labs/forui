@@ -2,5 +2,7 @@
   "dialogLabel": "Харилцах цонх",
   "sheetLabel": "хүснэгт",
   "barrierOnTapHint": "$modalRouteContentName-г хаах",
-  "barrierLabel": "Скрим"
+  "barrierLabel": "Скрим",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": ""
 }
