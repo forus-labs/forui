@@ -2,5 +2,7 @@
   "dialogLabel": "對話方塊",
   "sheetLabel": "面板",
   "barrierOnTapHint": "關閉 $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

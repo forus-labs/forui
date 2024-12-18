@@ -1,6 +1,7 @@
 arb-dir: lib/l10n
 template-arb-file: f_en.arb
 synthetic-package: false
+format: true
 output-dir: lib/src/localizations
 output-localization-file: localizations.dart
 output-class: FLocalizations

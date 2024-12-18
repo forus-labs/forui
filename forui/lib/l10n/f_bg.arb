@@ -2,5 +2,7 @@
   "dialogLabel": "Диалогов прозорец",
   "sheetLabel": "лист",
   "barrierOnTapHint": "Затваряне на $modalRouteContentName",
-  "barrierLabel": "Скрим"
+  "barrierLabel": "Скрим",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": " г."
 }

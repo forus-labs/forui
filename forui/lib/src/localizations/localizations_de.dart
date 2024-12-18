@@ -49,6 +49,20 @@ class FLocalizationsDe extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialogfeld';
 
   @override
@@ -66,6 +80,12 @@ class FLocalizationsDe extends FLocalizations {
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
   FLocalizationsDeCh() : super('de_CH');
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
 
   @override
   String get dialogLabel => 'Dialogfeld';

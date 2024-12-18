@@ -42,6 +42,15 @@ class FDefaultLocalizations extends FLocalizations {
   String day(DateTime date) => DateFormat.d().format(date);
 
   @override
+  String shortDate(DateTime date) => DateFormat.yMd().format(date);
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialog';
 
   @override

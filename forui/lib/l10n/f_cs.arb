@@ -2,5 +2,7 @@
   "dialogLabel": "Dialogové okno",
   "sheetLabel": "tabulka",
   "barrierOnTapHint": "Zavřít $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": ". ",
+  "shortDateSuffix": ""
 }

@@ -2,5 +2,7 @@
   "dialogLabel": "ਵਿੰਡੋ",
   "sheetLabel": "ਸ਼ੀਟ",
   "barrierOnTapHint": "$modalRouteContentName ਨੂੰ ਬੰਦ ਕਰੋ",
-  "barrierLabel": "ਸਕ੍ਰਿਮ"
+  "barrierLabel": "ਸਕ੍ਰਿਮ",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

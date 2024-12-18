@@ -2,5 +2,7 @@
   "dialogLabel": "Kidirisha",
   "sheetLabel": "Safu",
   "barrierOnTapHint": "Funga $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

@@ -50,6 +50,29 @@
     }
   },
 
+
+  "shortDate": "{date}",
+  "@shortDate": {
+    "description": "The short date.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      }
+    }
+  },
+
+  "shortDateSeparator": "",
+  "@shortDateSeparator": {
+    "description": "The short date's separator, typically /."
+  },
+
+  "shortDateSuffix": "",
+  "@shortDateSuffix": {
+    "description": "The short date's suffix, typically empty."
+  },
+
+
   "dialogLabel": "Dialog",
   "@dialogLabel": {
     "description": "The audio announcement made when a dialog is opened."

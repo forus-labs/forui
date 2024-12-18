@@ -2,5 +2,7 @@
   "dialogLabel": "對話方塊",
   "sheetLabel": "功能表",
   "barrierOnTapHint": "關閉「$modalRouteContentName」",
-  "barrierLabel": "紗罩"
+  "barrierLabel": "紗罩",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }
