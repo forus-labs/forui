@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 /// A Breadcrumb.
 ///
-/// Displays the path to the current resource using a hierarchy of links..
+/// Displays the path to the current resource using a hierarchy of links.
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/breadcrumb for working examples.
@@ -16,30 +16,36 @@ final class FBreadcrumb extends StatelessWidget {
   /// The breadcrumb's style. Defaults to the appropriate style in [FThemeData.breadcrumbStyle].
   final FBreadcrumbStyle? style;
 
-  /// The items.
-  final List<FBreadcrumbItem> items;
+  /// The children.
+  final List<Widget> children;
 
-  final Widget? dividerIcon;
+  /// The divider icons place in between the children.
+  final Widget? divider;
 
   /// Creates an [FBreadcrumb].
   const FBreadcrumb({
-    required this.items,
-    this.dividerIcon,
+    required this.children,
     this.style,
+    this.divider,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.breadcrumbStyle;
-    final dividerIcon =
-        this.dividerIcon ?? FIcon(FAssets.icons.chevronRight, color: Colors.white, size: style.iconSize);
+    final divider = this.divider != null
+        ? FIcon.raw(builder: (_, __, ___) => this.divider!)
+        : FIcon(
+            FAssets.icons.chevronRight,
+            color: style.iconStyle.color,
+            size: style.iconStyle.size,
+          );
 
     return Row(
       children: [
-        for (final (index, item) in items.indexed) ...[
-          if (item is _Crumb) item else item as _NestedCrumbs,
-          if (index < items.length-1) Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: dividerIcon),
+        for (final (index, item) in children.indexed) ...[
+          item,
+          if (index < children.length - 1) Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: divider),
         ]
       ],
     );
@@ -52,23 +58,22 @@ final class FBreadcrumb extends StatelessWidget {
   }
 }
 
-abstract class FBreadcrumbItem {
-  const FBreadcrumbItem._();
-
+mixin FBreadcrumbItem on Widget {
   /// Creates a crumb.
   ///
   /// It is typically used on pages at the root of the navigation stack.
-  factory FBreadcrumbItem({
-    required VoidCallback onPressed,
+  static Widget link({
+    required VoidCallback onPress,
     required Widget child,
     bool? selected,
     Key? key,
-  }) = _Crumb;
+  }) =>
+      _Crumb(onPress: onPress, selected: selected, key: key, child: child);
 
   /// Creates a nested crumb.
   ///
   /// It is typically used on pages NOT at the root of the navigation stack.
-  factory FBreadcrumbItem.nested({
+  static Widget collapsed({
     required List<FTileGroup> menu,
     Key? key,
   }) =>
@@ -77,11 +82,11 @@ abstract class FBreadcrumbItem {
 
 class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   final bool selected;
-  final VoidCallback onPressed;
+  final VoidCallback onPress;
   final Widget child;
 
   const _Crumb({
-    required this.onPressed,
+    required this.onPress,
     required this.child,
     bool? selected,
     super.key,
@@ -92,12 +97,20 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
     final style = context.theme.breadcrumbStyle;
 
     return FTappable(
-      onPress: onPressed,
+      onPress: onPress,
       child: DefaultTextStyle(
         style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
         child: child,
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
+      ..add(ObjectFlagProperty.has('onPress', onPress));
   }
 }
 
@@ -123,15 +136,12 @@ class _NestedCrumbsState extends State<_NestedCrumbs> with SingleTickerProviderS
   }
 
   @override
-  Widget build(BuildContext context) => Container(
-        child: FPopoverMenu.tappable(
-
-          popoverController: controller,
-          menuAnchor: Alignment.topRight,
-          childAnchor: Alignment.bottomRight,
-          menu: widget.menu,
-          child: FIcon(FAssets.icons.ellipsis),
-        ),
+  Widget build(BuildContext context) => FPopoverMenu.tappable(
+        popoverController: controller,
+        menuAnchor: Alignment.topRight,
+        childAnchor: Alignment.bottomRight,
+        menu: widget.menu,
+        child: FIcon(FAssets.icons.ellipsis),
       );
 
   @override
@@ -139,9 +149,15 @@ class _NestedCrumbsState extends State<_NestedCrumbs> with SingleTickerProviderS
     controller.dispose();
     super.dispose();
   }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('controller', controller));
+  }
 }
 
-/// The [FDivider] styles.
+/// The [FBreadcrumb] styles.
 final class FBreadcrumbStyle with Diagnosticable {
   /// The selected breadcrumb [TextStyle].
   final TextStyle selectedTextStyle;
@@ -149,8 +165,7 @@ final class FBreadcrumbStyle with Diagnosticable {
   /// The unselected breadcrumb [TextStyle].
   final TextStyle unselectedTextStyle;
 
-  final double iconSize;
-  final Color iconColor;
+  final FIconStyle iconStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
   final EdgeInsets padding;
@@ -159,8 +174,7 @@ final class FBreadcrumbStyle with Diagnosticable {
   FBreadcrumbStyle({
     required this.selectedTextStyle,
     required this.unselectedTextStyle,
-    required this.iconColor,
-    this.iconSize = 24,
+    required this.iconStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   });
 
@@ -175,7 +189,7 @@ final class FBreadcrumbStyle with Diagnosticable {
             fontWeight: FontWeight.w400,
             color: colorScheme.mutedForeground,
           ),
-          iconColor: colorScheme.mutedForeground,
+          iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 24),
         );
 
   /// Returns a copy of this [FBreadcrumbStyle] with the given properties replaced.
@@ -183,15 +197,13 @@ final class FBreadcrumbStyle with Diagnosticable {
   FBreadcrumbStyle copyWith({
     TextStyle? selectedTextStyle,
     TextStyle? unselectedTextStyle,
-    Color? iconColor,
-    double? iconSize,
+    FIconStyle? iconStyle,
     EdgeInsets? padding,
   }) =>
       FBreadcrumbStyle(
         selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
         unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
-        iconColor: iconColor ?? this.iconColor,
-        iconSize: iconSize ?? this.iconSize,
+        iconStyle: iconStyle ?? this.iconStyle,
         padding: padding ?? this.padding,
       );
 
@@ -208,15 +220,9 @@ final class FBreadcrumbStyle with Diagnosticable {
           runtimeType == other.runtimeType &&
           selectedTextStyle == other.selectedTextStyle &&
           unselectedTextStyle == other.unselectedTextStyle &&
-          iconColor == other.iconColor &&
-          iconSize == other.iconSize &&
+          iconStyle == other.iconStyle &&
           padding == other.padding;
 
   @override
-  int get hashCode =>
-      selectedTextStyle.hashCode ^
-      unselectedTextStyle.hashCode ^
-      iconColor.hashCode ^
-      iconSize.hashCode ^
-      padding.hashCode;
+  int get hashCode => selectedTextStyle.hashCode ^ unselectedTextStyle.hashCode ^ iconStyle.hashCode ^ padding.hashCode;
 }
