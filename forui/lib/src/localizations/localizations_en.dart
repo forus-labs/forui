@@ -49,6 +49,20 @@ class FLocalizationsEn extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialog';
 
   @override
@@ -66,6 +80,12 @@ class FLocalizationsEn extends FLocalizations {
 /// The translations for English, as used in Australia (`en_AU`).
 class FLocalizationsEnAu extends FLocalizationsEn {
   FLocalizationsEnAu() : super('en_AU');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -87,6 +107,12 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   FLocalizationsEnCa() : super('en_CA');
 
   @override
+  String get shortDateSeparator => '-';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialog';
 
   @override
@@ -104,6 +130,12 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 /// The translations for English, as used in the United Kingdom (`en_GB`).
 class FLocalizationsEnGb extends FLocalizationsEn {
   FLocalizationsEnGb() : super('en_GB');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -125,6 +157,12 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   FLocalizationsEnIe() : super('en_IE');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialogue';
 
   @override
@@ -142,6 +180,12 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 /// The translations for English, as used in India (`en_IN`).
 class FLocalizationsEnIn extends FLocalizationsEn {
   FLocalizationsEnIn() : super('en_IN');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -163,6 +207,12 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   FLocalizationsEnNz() : super('en_NZ');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialogue';
 
   @override
@@ -182,6 +232,12 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   FLocalizationsEnSg() : super('en_SG');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialogue';
 
   @override
@@ -199,6 +255,12 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 /// The translations for English, as used in South Africa (`en_ZA`).
 class FLocalizationsEnZa extends FLocalizationsEn {
   FLocalizationsEnZa() : super('en_ZA');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
 
   @override
   String get dialogLabel => 'Dialogue';

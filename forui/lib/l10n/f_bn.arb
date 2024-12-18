@@ -2,5 +2,7 @@
   "dialogLabel": "ডায়ালগ",
   "sheetLabel": "শীট",
   "barrierOnTapHint": "$modalRouteContentName বন্ধ করুন",
-  "barrierLabel": "স্ক্রিম"
+  "barrierLabel": "স্ক্রিম",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

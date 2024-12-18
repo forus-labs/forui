@@ -2,5 +2,7 @@
   "dialogLabel": "مربع حوار",
   "sheetLabel": "بطاق ",
   "barrierOnTapHint": "إغلاق \"$modalRouteContentName\"",
-  "barrierLabel": "تمويه"
+  "barrierLabel": "تمويه",
+  "shortDateSeparator": "‏/",
+  "shortDateSuffix": ""
 }

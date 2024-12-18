@@ -2,5 +2,7 @@
   "dialogLabel": "Dialogboks",
   "sheetLabel": "Felt",
   "barrierOnTapHint": "Lukk $modalRouteContentName",
-  "barrierLabel": "Vev"
+  "barrierLabel": "Vev",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": ""
 }

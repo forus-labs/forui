@@ -2,5 +2,7 @@
   "dialogLabel": "Boîte de dialogue",
   "sheetLabel": "sheet",
   "barrierOnTapHint": "Fermer $modalRouteContentName",
-  "barrierLabel": "Fond"
+  "barrierLabel": "Fond",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

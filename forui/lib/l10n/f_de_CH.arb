@@ -1,3 +1,5 @@
 {
-  "dialogLabel": "Dialogfeld"
+  "dialogLabel": "Dialogfeld",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": ""
 }

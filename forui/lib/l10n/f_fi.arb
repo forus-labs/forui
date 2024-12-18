@@ -2,5 +2,7 @@
   "dialogLabel": "Valintaikkuna",
   "sheetLabel": "arkki",
   "barrierOnTapHint": "Sulje $modalRouteContentName",
-  "barrierLabel": "Sermi"
+  "barrierLabel": "Sermi",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": ""
 }

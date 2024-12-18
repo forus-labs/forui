@@ -2,5 +2,7 @@
   "dialogLabel": "መገናኛ",
   "sheetLabel": "ሉህ",
   "barrierOnTapHint": "$modalRouteContentNameን ዝጋ",
-  "barrierLabel": "ገዳቢ"
+  "barrierLabel": "ገዳቢ",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": ""
 }

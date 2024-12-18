@@ -2,5 +2,7 @@
   "dialogLabel": "Gluggi",
   "sheetLabel": "Blað",
   "barrierOnTapHint": "Loka $modalRouteContentName",
-  "barrierLabel": "Möskvi"
+  "barrierLabel": "Möskvi",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": ""
 }

@@ -49,6 +49,20 @@ class FLocalizationsBg extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => ' г.';
+
+  @override
   String get dialogLabel => 'Диалогов прозорец';
 
   @override

@@ -49,6 +49,20 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => '对话框';
 
   @override
@@ -68,6 +82,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   FLocalizationsZhHk() : super('zh_HK');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
   String get dialogLabel => '對話方塊';
 
   @override
@@ -85,6 +105,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
 class FLocalizationsZhTw extends FLocalizationsZh {
   FLocalizationsZhTw() : super('zh_TW');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
 
   @override
   String get dialogLabel => '對話方塊';
