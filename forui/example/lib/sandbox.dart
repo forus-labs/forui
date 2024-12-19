@@ -33,6 +33,30 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
               maxLines: 1,
             ),
             const SizedBox(height: 20),
+            FBreadcrumb(
+              divider: FIcon(FAssets.icons.slash),
+              children: [
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Home')),
+                FBreadcrumbItem.collapsed(
+                  menu: [
+                    FTileGroup(children: [
+                      FTile(
+                        title: const Text('Documentation'),
+                        onPress: () {},
+                      ),
+                      FTile(
+                        title: const Text('Themes'),
+                        onPress: () {},
+                      ),
+                    ]),
+                  ],
+                ),
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Categories')),
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Search')),
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Settings'), selected: true),
+              ],
+            ),
+            const SizedBox(height: 20),
             const FLabel(
               axis: Axis.horizontal,
               label: Text('Label'),
@@ -45,9 +69,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
                 child: Placeholder(),
               ),
             ),
-            const SizedBox(height: 20),
-            FCalendar(controller: calendarController),
-            FCalendar(controller: calendarController),
           ],
         ),
       );
