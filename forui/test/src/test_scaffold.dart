@@ -8,7 +8,8 @@ import 'package:forui/forui.dart';
 
 import 'threshold_file_comparator.dart';
 
-final relativePath = Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
+final relativePath =
+    Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
 
 MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
 

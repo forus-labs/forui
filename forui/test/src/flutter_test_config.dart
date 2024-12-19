@@ -19,7 +19,8 @@ Future<void> configureGoldenTests(double threshold) async {
 
   final fontLoader = FontLoader('packages/forui/Inter');
 
-  final prefix = Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
+  final prefix =
+      Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
 
   final directory = Directory('$prefix/assets/fonts/inter/');
   for (final file in directory.listSync().whereType<File>().where((e) => e.path.endsWith('.ttf'))) {
