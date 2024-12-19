@@ -34,7 +34,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             ),
             const SizedBox(height: 20),
             FBreadcrumb(
-              divider: FIcon(FAssets.icons.chevronRight),
+              divider: FIcon(FAssets.icons.slash),
               children: [
                 FBreadcrumbItem.of(onPress: () {}, child: const Text('Home')),
                 FBreadcrumbItem.collapsed(

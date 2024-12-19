@@ -44,6 +44,7 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/badge/default', page: BadgeRoute.page),
         AutoRoute(path: '/bottom-navigation-bar/default', page: BottomNavigationBarRoute.page),
         AutoRoute(path: '/breadcrumb/default', page: BreadcrumbRoute.page),
+        AutoRoute(path: '/breadcrumb/divider', page: BreadcrumbDividerRoute.page),
         AutoRoute(path: '/button/text', page: ButtonTextRoute.page),
         AutoRoute(path: '/button/icon', page: ButtonIconRoute.page),
         AutoRoute(path: '/button/only-icon', page: ButtonOnlyIconRoute.page),

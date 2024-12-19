@@ -12,7 +12,53 @@ class BreadcrumbPage extends Sample {
   });
 
   @override
-  Widget sample(BuildContext context) => FBreadcrumb(
+  Widget sample(BuildContext context) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FBreadcrumb(
+            children: [
+              FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem.collapsed(
+                menu: [
+                  FTileGroup(children: [
+                    FTile(
+                      title: const Text('Documentation'),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      title: const Text('Themes'),
+                      onPress: () {},
+                    ),
+                  ]),
+                ],
+              ),
+              FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
+              FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+            ],
+          ),
+    ],
+  );
+}
+
+
+@RoutePage()
+class BreadcrumbDividerPage extends Sample {
+  BreadcrumbDividerPage({
+    @queryParam super.theme,
+  });
+
+  @override
+  Widget sample(BuildContext context) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FBreadcrumb(
+        divider: Transform.rotate(
+          angle: -60,
+          child: FIcon(
+            FAssets.icons.slash,
+            size: 14,
+          ),
+        ),
         children: [
           FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
           FBreadcrumbItem.collapsed(
@@ -32,5 +78,8 @@ class BreadcrumbPage extends Sample {
           FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
           FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
         ],
-      );
+      ),
+    ],
+  );
 }
+

@@ -1,0 +1,103 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Breadcrumb
+Displays a list of links that help visualize a page's location within a site's hierarchical structure,
+it allows navigation up to any of the ancestors.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/forui.widgets.breadcrumb-library.html"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='breadcrumb' variant='default' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FBreadcrumb(
+          children: [
+            FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+            FBreadcrumbItem.collapsed(
+              menu: [
+                FTileGroup(
+                  children: [
+                    FTile(
+                      title: const Text('Documentation'),W
+                      onPress: () {},
+                    ),
+                    FTile(
+                      title: const Text('Themes'),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
+            FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FBreadcrumb(...)`
+
+```dart
+FBreadcrumb(
+  children: [
+    FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+    FBreadcrumbItem.of(onPress: () {}, child: const Text('Documentation')),
+    FBreadcrumbItem.of(onPress: () {}, child: const Text('Themes')),
+    FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+  ],
+);
+```
+
+## Examples
+
+### Custom divider
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='breadcrumb' variant='divider' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart
+        FBreadcrumb(
+          divider: Transform.rotate(
+            angle: -60,
+            child: FIcon(
+              FAssets.icons.slash,
+              size: 14,
+            ),
+          ),
+          children: [
+            FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+            FBreadcrumbItem.collapsed(
+              menu: [
+                FTileGroup(
+                  children: [
+                    FTile(
+                      title: const Text('Documentation'),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      title: const Text('Themes'),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            FBreadcrumbItem.of(onPress: () {}, child: const Text('Themes')),
+            FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>

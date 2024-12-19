@@ -41,10 +41,9 @@ final class FBreadcrumb extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.breadcrumbStyle;
     final divider = this.divider != null
-        ? FIcon.raw(
-            builder: (context, iconStyle, child) {
-              return this.divider!;
-            },
+        ? FIconStyleData(
+            style: style.iconStyle,
+            child: this.divider!,
           )
         : FIcon(
             FAssets.icons.chevronRight,
@@ -185,8 +184,8 @@ class _NestedCrumbsState extends State<_NestedCrumbs> with SingleTickerProviderS
     final style = FBreadcrumbData.of(context).style;
     return FPopoverMenu.tappable(
       popoverController: controller,
-      menuAnchor: Alignment.topRight,
-      childAnchor: Alignment.bottomRight,
+      menuAnchor: Alignment.topLeft,
+      childAnchor: Alignment.bottomLeft,
       menu: widget.menu,
       child: FIcon(
         FAssets.icons.ellipsis,
