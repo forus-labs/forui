@@ -1,4 +1,4 @@
-## 0.8.0 (Next)
+## 0.8.0
 
 Bump minimum Flutter version to 3.27.0.
 
