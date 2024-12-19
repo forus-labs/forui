@@ -13,12 +13,13 @@ on:
 jobs:
   test:
     name: Build & test
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: forui
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest]
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
@@ -28,11 +29,6 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
-      - run: |
-          output=$(dart doc --validate-links .)
-          if echo "$output" | grep -q "Found 0 warnings and 0 errors"; then
-            exit 1
-          fi
       - run: flutter analyze
       - run: flutter test
 
