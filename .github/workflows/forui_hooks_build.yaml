@@ -28,10 +28,5 @@ jobs:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
       - run: flutter pub get
-      - run: |
-          output=$(dart doc --validate-links .)
-          if echo "$output" | grep -q "Found 0 warnings and 0 errors"; then
-            exit 1
-          fi
       - run: flutter analyze
       - run: flutter test
