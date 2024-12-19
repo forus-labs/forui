@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:path/path.dart';
 
 import 'threshold_file_comparator.dart';
 
@@ -20,9 +19,10 @@ Future<void> configureGoldenTests(double threshold) async {
 
   final fontLoader = FontLoader('packages/forui/Inter');
 
-  final prefix = Directory.current.path.contains('forui/forui') ? '.' : '${Directory.current.path}/forui';
+  final prefix =
+      Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
 
-  final directory = Directory(normalize('$prefix/assets/fonts/inter/'));
+  final directory = Directory('$prefix/assets/fonts/inter/');
   for (final file in directory.listSync().whereType<File>().where((e) => e.path.endsWith('.ttf'))) {
     fontLoader.addFont(rootBundle.load(file.path));
   }
@@ -37,7 +37,7 @@ Future<void> configureGoldenTests(double threshold) async {
       // As such, we use the default `testUrl`, which is only the `baseDir` and
       // append a generically named `test.dart` so that the `baseDir` is
       // properly extracted.
-      Uri.parse(normalize('$prefix/test/golden/test.dart')),
+      Uri.parse('$prefix/test/golden/test.dart'),
       threshold,
     );
   }

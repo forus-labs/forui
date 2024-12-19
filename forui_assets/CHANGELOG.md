@@ -1,3 +1,9 @@
+## 0.8.0
+
+Bumps minimum Flutter SDK version to 3.27.0.
+
+* Update icons to Lucide 0.458.0.
+
 ## 0.7.0
 
 This update syncs the version with the `forui` package.
