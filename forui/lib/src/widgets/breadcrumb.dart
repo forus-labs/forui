@@ -7,7 +7,8 @@ import 'package:meta/meta.dart';
 
 /// A Breadcrumb.
 ///
-/// Displays the path to the current resource using a hierarchy of links.
+/// A breadcrumb is a list of links that help visualize a page's location within a site's hierarchical structure,
+/// it allows navigation up to any of the ancestors.
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/breadcrumb for working examples.
@@ -16,10 +17,16 @@ final class FBreadcrumb extends StatelessWidget {
   /// The breadcrumb's style. Defaults to the appropriate style in [FThemeData.breadcrumbStyle].
   final FBreadcrumbStyle? style;
 
-  /// The children.
+  /// The list of breadcrumb items.
+  ///
+  /// Each item in the list is typically an [FBreadcrumbItem], with a [divider] placed between consecutive items.
+  /// The last item in the list is usually an [FBreadcrumbItem] with the `selected` property set to true,
+  /// to indicate the current page in the breadcrumb.
   final List<Widget> children;
 
   /// The divider icons place in between the children.
+  ///
+  /// Defaults to an `FAssets.icons.chevronRight` icon.
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
@@ -34,7 +41,11 @@ final class FBreadcrumb extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.breadcrumbStyle;
     final divider = this.divider != null
-        ? FIcon.raw(builder: (_, __, ___) => this.divider!)
+        ? FIcon.raw(
+            builder: (context, iconStyle, child) {
+              return this.divider!;
+            },
+          )
         : FIcon(
             FAssets.icons.chevronRight,
             color: style.iconStyle.color,
@@ -44,7 +55,7 @@ final class FBreadcrumb extends StatelessWidget {
     return Row(
       children: [
         for (final (index, item) in children.indexed) ...[
-          item,
+          FBreadcrumbData(style: style, child: item),
           if (index < children.length - 1) Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: divider),
         ]
       ],
@@ -58,11 +69,45 @@ final class FBreadcrumb extends StatelessWidget {
   }
 }
 
-mixin FBreadcrumbItem on Widget {
-  /// Creates a crumb.
+/// The [FBreadcrumb] data.
+class FBreadcrumbData extends InheritedWidget {
+  /// Returns the [FBreadcrumbData] of the [FBreadcrumb] in the given [context].
   ///
-  /// It is typically used on pages at the root of the navigation stack.
-  static Widget link({
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FBreadcrumb] in the given [context].
+  @useResult
+  static FBreadcrumbData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FBreadcrumbData>();
+    assert(data != null, 'No FBreadcrumbData found in context');
+    return data!;
+  }
+
+  /// The breadcrumb's style.
+  final FBreadcrumbStyle style;
+
+  /// Creates a [FBreadcrumbData].
+  const FBreadcrumbData({
+    required this.style,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(FBreadcrumbData oldWidget) => style != oldWidget.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
+  }
+}
+
+/// A breadcrumb item.
+mixin FBreadcrumbItem on Widget {
+  /// Creates a basic crumb.
+  ///
+  /// It is typically used to represent a single item in the breadcrumb.
+  static Widget of({
     required VoidCallback onPress,
     required Widget child,
     bool? selected,
@@ -70,9 +115,9 @@ mixin FBreadcrumbItem on Widget {
   }) =>
       _Crumb(onPress: onPress, selected: selected, key: key, child: child);
 
-  /// Creates a nested crumb.
+  /// Creates a collapsed crumb.
   ///
-  /// It is typically used on pages NOT at the root of the navigation stack.
+  /// It is typically used to keep the breadcrumb compact when there are too many items.
   static Widget collapsed({
     required List<FTileGroup> menu,
     Key? key,
@@ -94,7 +139,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 
   @override
   Widget build(BuildContext context) {
-    final style = context.theme.breadcrumbStyle;
+    final style = FBreadcrumbData.of(context).style;
 
     return FTappable(
       onPress: onPress,
@@ -136,13 +181,20 @@ class _NestedCrumbsState extends State<_NestedCrumbs> with SingleTickerProviderS
   }
 
   @override
-  Widget build(BuildContext context) => FPopoverMenu.tappable(
-        popoverController: controller,
-        menuAnchor: Alignment.topRight,
-        childAnchor: Alignment.bottomRight,
-        menu: widget.menu,
-        child: FIcon(FAssets.icons.ellipsis),
-      );
+  Widget build(BuildContext context) {
+    final style = FBreadcrumbData.of(context).style;
+    return FPopoverMenu.tappable(
+      popoverController: controller,
+      menuAnchor: Alignment.topRight,
+      childAnchor: Alignment.bottomRight,
+      menu: widget.menu,
+      child: FIcon(
+        FAssets.icons.ellipsis,
+        size: style.iconStyle.size,
+        color: style.iconStyle.color,
+      ),
+    );
+  }
 
   @override
   void dispose() {
@@ -165,6 +217,7 @@ final class FBreadcrumbStyle with Diagnosticable {
   /// The unselected breadcrumb [TextStyle].
   final TextStyle unselectedTextStyle;
 
+  /// The divider icon style.
   final FIconStyle iconStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
@@ -210,7 +263,11 @@ final class FBreadcrumbStyle with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('selectedTextStyle', selectedTextStyle));
+    properties
+      ..add(DiagnosticsProperty('selectedTextStyle', selectedTextStyle))
+      ..add(DiagnosticsProperty('unselectedTextStyle', unselectedTextStyle))
+      ..add(DiagnosticsProperty('iconStyle', iconStyle))
+      ..add(DiagnosticsProperty('padding', padding));
   }
 
   @override

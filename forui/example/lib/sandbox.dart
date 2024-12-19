@@ -34,8 +34,9 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             ),
             const SizedBox(height: 20),
             FBreadcrumb(
+              divider: FIcon(FAssets.icons.chevronRight),
               children: [
-                FBreadcrumbItem.link(onPress: () {}, child: const Text('Home')),
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Home')),
                 FBreadcrumbItem.collapsed(
                   menu: [
                     FTileGroup(children: [
@@ -50,11 +51,10 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
                     ]),
                   ],
                 ),
-                FBreadcrumbItem.link(onPress: () {}, child: const Text('Categories')),
-                FBreadcrumbItem.link(onPress: () {}, child: const Text('Search')),
-                FBreadcrumbItem.link(onPress: () {}, child: const Text('Settings')),
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Categories')),
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Search')),
+                FBreadcrumbItem.of(onPress: () {}, child: const Text('Settings'), selected: true),
               ],
-              divider: FIcon(FAssets.icons.chevronRight),
             ),
             const SizedBox(height: 20),
             const FLabel(
