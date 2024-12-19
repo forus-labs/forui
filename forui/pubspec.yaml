@@ -38,6 +38,7 @@ dev_dependencies:
   forui_internal_lints:
   http: ^1.2.2
   mockito: ^5.4.4
+  path: ^1.9.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
