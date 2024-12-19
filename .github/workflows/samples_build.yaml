@@ -15,12 +15,13 @@ on:
 jobs:
   test:
     name: Build & test
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: samples
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest]
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
