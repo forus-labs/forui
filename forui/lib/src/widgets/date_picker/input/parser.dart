@@ -40,7 +40,7 @@ class Parser {
 
       current[i] = parsed;
       if (parsed != oldPart) {
-        changes = changes.add(next ? i + 1 : i);
+        changes = changes.add(min(next ? i + 1 : i, 2));
       }
     }
 
@@ -51,33 +51,78 @@ class Parser {
     assert(old.length <= 2, 'old day must be at most 2 characters long');
 
     final full = old == 'DD' ? current : '$old$current';
-    return switch (_day.tryParse(full)) {
-      final day? when 1 <= day && day <= 31 => (_day.format(day), 4 <= day),
-      final day? when 1 <= day =>
-      _ => (old, false),
-    };
+    switch (_day.tryParse(full)?.toInt()) {
+      // Backspace.
+      case _ when current.isEmpty:
+        return ('DD', false);
+
+      case final day? when 1 <= day && day <= 31:
+        return (_day.format(day), 4 <= day);
+
+      // Replace rather than append.
+      case _?:
+        final day = _day.parse(current);
+        if (1 <= day && day <= 31) {
+          return (_day.format(day), 4 <= day);
+        } else {
+          return (old, false);
+        }
+
+      default:
+        return (old, false);
+    }
   }
 
   (String, bool) parseMonth(String old, String current) {
     assert(old.length <= 2, 'old month must be at most 2 characters long');
 
     final full = old == 'MM' ? current : '$old$current';
-    if (_month.tryParse(full) case final month? when 1 <= month && month <= 12) {
-      return (_month.format(month), 2 <= month);
-    }
+    switch (_month.tryParse(full)?.toInt()) {
+      // Backspace.
+      case _ when current.isEmpty:
+        return ('MM', false);
 
-    return (old, false);
+      case final month? when 1 <= month && month <= 12:
+        return (_month.format(month), 2 <= month);
+
+      // Replace rather than append.
+      case _?:
+        final month = _month.parse(current);
+        if (1 <= month && month <= 12) {
+          return (_month.format(month), 2 <= month);
+        } else {
+          return (old, false);
+        }
+
+      default:
+        return (old, false);
+    }
   }
 
   (String, bool) parseYear(String old, String current) {
     assert(old.length <= 4, 'old month must be at most 4 characters long');
 
     final full = old == 'YYYY' ? current : '$old$current';
-    if (_year.tryParse(full) case final year? when 1 <= year) {
-      return (_year.format(year), false);
-    }
+    switch (_year.tryParse(full)?.toInt()) {
+      // Backspace.
+      case _ when current.isEmpty:
+        return ('YYYY', false);
 
-    return (old, false);
+      case final year? when 1 <= year && year <= 9999:
+        return (_year.format(year), 1000 <= year);
+
+      // Replace rather than append.
+      case final _?:
+        final year = _year.parse(current);
+        if (1 <= year && year <= 9999) {
+          return (_year.format(year), 1000 <= year);
+        } else {
+          return (old, false);
+        }
+
+      default:
+        return (old, false);
+    }
   }
 }
 
@@ -104,6 +149,16 @@ class Single extends Changes {
 
   @override
   Changes add(int i) => const Many();
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is Single && runtimeType == other.runtimeType && index == other.index;
+
+  @override
+  int get hashCode => index.hashCode;
+
+  @override
+  String toString() => 'Single($index)';
 }
 
 @internal
