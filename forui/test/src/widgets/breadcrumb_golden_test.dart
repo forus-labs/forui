@@ -33,7 +33,6 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FBreadcrumb(
-              style: TestScaffold.blueScreen.breadcrumbStyle,
               children: [
                 FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
                 FBreadcrumbItem.collapsed(
@@ -63,9 +62,10 @@ void main() {
             find.byType(TestScaffold), matchesGoldenFile('breadcrumb/${theme.name}/collapsed-breadcrumb.png'));
       });
 
-      testWidgets('${theme.name} with shown collapsed breadcrumb', (tester) async {
+      testWidgets('${theme.name} with uncollapsed breadcrumb', (tester) async {
         final menu = [
           FTileGroup(
+            key: const Key('menu'),
             children: [
               FTile(
                 title: const Text('Documentation'),
@@ -93,11 +93,11 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byWidget(FBreadcrumbItem.collapsed(menu: menu)));
+        await tester.tap(find.descendant(of: find.byType(FBreadcrumb), matching: find.byType(FPopoverMenu)));
         await tester.pumpAndSettle();
 
         // await tester.tapAt(Offset.zero);
-        // await tester.pumpAndSettle();
+
         //
         // expect(find.text('Group 1'), findsOneWidget);
 
