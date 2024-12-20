@@ -59,7 +59,9 @@ void main() {
         );
 
         await expectLater(
-            find.byType(TestScaffold), matchesGoldenFile('breadcrumb/${theme.name}/collapsed-breadcrumb.png'));
+          find.byType(TestScaffold),
+          matchesGoldenFile('breadcrumb/${theme.name}/collapsed-breadcrumb.png'),
+        );
       });
 
       testWidgets('${theme.name} with uncollapsed breadcrumb', (tester) async {
@@ -102,7 +104,9 @@ void main() {
         // expect(find.text('Group 1'), findsOneWidget);
 
         await expectLater(
-            find.byType(TestScaffold), matchesGoldenFile('breadcrumb/${theme.name}/shown-collapsed-breadcrumb.png'));
+          find.byType(TestScaffold),
+          matchesGoldenFile('breadcrumb/${theme.name}/shown-collapsed-breadcrumb.png'),
+        );
       });
     }
   });

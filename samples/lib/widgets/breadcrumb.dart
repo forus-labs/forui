@@ -13,33 +13,34 @@ class BreadcrumbPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      FBreadcrumb(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FBreadcrumb(
             children: [
               FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
               FBreadcrumbItem.collapsed(
                 menu: [
-                  FTileGroup(children: [
-                    FTile(
-                      title: const Text('Documentation'),
-                      onPress: () {},
-                    ),
-                    FTile(
-                      title: const Text('Themes'),
-                      onPress: () {},
-                    ),
-                  ]),
+                  FTileGroup(
+                    children: [
+                      FTile(
+                        title: const Text('Documentation'),
+                        onPress: () {},
+                      ),
+                      FTile(
+                        title: const Text('Themes'),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
                 ],
               ),
               FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
               FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
             ],
           ),
-    ],
-  );
+        ],
+      );
 }
-
 
 @RoutePage()
 class BreadcrumbDividerPage extends Sample {
@@ -49,37 +50,38 @@ class BreadcrumbDividerPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      FBreadcrumb(
-        divider: Transform.rotate(
-          angle: -60,
-          child: FIcon(
-            FAssets.icons.slash,
-            size: 14,
-          ),
-        ),
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
-          FBreadcrumbItem.collapsed(
-            menu: [
-              FTileGroup(children: [
-                FTile(
-                  title: const Text('Documentation'),
-                  onPress: () {},
-                ),
-                FTile(
-                  title: const Text('Themes'),
-                  onPress: () {},
-                ),
-              ]),
+          FBreadcrumb(
+            divider: Transform.rotate(
+              angle: -60,
+              child: FIcon(
+                FAssets.icons.slash,
+                size: 14,
+              ),
+            ),
+            children: [
+              FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem.collapsed(
+                menu: [
+                  FTileGroup(
+                    children: [
+                      FTile(
+                        title: const Text('Documentation'),
+                        onPress: () {},
+                      ),
+                      FTile(
+                        title: const Text('Themes'),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
+              FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
             ],
           ),
-          FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
-          FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
         ],
-      ),
-    ],
-  );
+      );
 }
-

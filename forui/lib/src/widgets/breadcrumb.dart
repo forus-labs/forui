@@ -54,9 +54,9 @@ final class FBreadcrumb extends StatelessWidget {
     return Row(
       children: [
         for (final (index, item) in children.indexed) ...[
-          FBreadcrumbData(style: style, child: item),
+          FBreadcrumbItemData(style: style, child: item),
           if (index < children.length - 1) Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: divider),
-        ]
+        ],
       ],
     );
   }
@@ -68,15 +68,15 @@ final class FBreadcrumb extends StatelessWidget {
   }
 }
 
-/// The [FBreadcrumb] data.
-class FBreadcrumbData extends InheritedWidget {
-  /// Returns the [FBreadcrumbData] of the [FBreadcrumb] in the given [context].
+/// The [FBreadcrumbItem] data.
+class FBreadcrumbItemData extends InheritedWidget {
+  /// Returns the [FBreadcrumbItemData] of the [FBreadcrumb] in the given [context].
   ///
   /// ## Contract
   /// Throws [AssertionError] if there is no ancestor [FBreadcrumb] in the given [context].
   @useResult
-  static FBreadcrumbData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FBreadcrumbData>();
+  static FBreadcrumbItemData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FBreadcrumbItemData>();
     assert(data != null, 'No FBreadcrumbData found in context');
     return data!;
   }
@@ -84,15 +84,15 @@ class FBreadcrumbData extends InheritedWidget {
   /// The breadcrumb's style.
   final FBreadcrumbStyle style;
 
-  /// Creates a [FBreadcrumbData].
-  const FBreadcrumbData({
+  /// Creates a [FBreadcrumbItemData].
+  const FBreadcrumbItemData({
     required this.style,
     required super.child,
     super.key,
   });
 
   @override
-  bool updateShouldNotify(FBreadcrumbData oldWidget) => style != oldWidget.style;
+  bool updateShouldNotify(FBreadcrumbItemData oldWidget) => style != oldWidget.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -138,7 +138,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 
   @override
   Widget build(BuildContext context) {
-    final style = FBreadcrumbData.of(context).style;
+    final style = FBreadcrumbItemData.of(context).style;
 
     return FTappable(
       onPress: onPress,
@@ -181,7 +181,7 @@ class _NestedCrumbsState extends State<_NestedCrumbs> with SingleTickerProviderS
 
   @override
   Widget build(BuildContext context) {
-    final style = FBreadcrumbData.of(context).style;
+    final style = FBreadcrumbItemData.of(context).style;
     return FPopoverMenu.tappable(
       popoverController: controller,
       menuAnchor: Alignment.topLeft,
