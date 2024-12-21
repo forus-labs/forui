@@ -17,14 +17,14 @@ final class FBreadcrumb extends StatelessWidget {
   /// The breadcrumb's style. Defaults to the appropriate style in [FThemeData.breadcrumbStyle].
   final FBreadcrumbStyle? style;
 
-  /// The list of breadcrumb items.
+  /// The breadcrumb items.
   ///
   /// Each item in the list is typically an [FBreadcrumbItem], with a [divider] placed between consecutive items.
   /// The last item in the list is usually an [FBreadcrumbItem] with the `selected` property set to true,
   /// to indicate the current page in the breadcrumb.
   final List<Widget> children;
 
-  /// The divider icons place in between the children.
+  /// The divider placed in between the children.
   ///
   /// Defaults to an `FAssets.icons.chevronRight` icon.
   final Widget? divider;
@@ -117,6 +117,9 @@ mixin FBreadcrumbItem on Widget {
   /// Creates a collapsed crumb.
   ///
   /// It is typically used to keep the breadcrumb compact when there are too many items.
+``
+
+I think the phrasing can be improved, "...reduce the number of items displayed in a breadcrumb".
   static Widget collapsed({
     required List<FTileGroup> menu,
     Key? key,
