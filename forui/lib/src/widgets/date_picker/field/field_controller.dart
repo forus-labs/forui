@@ -1,10 +1,23 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_picker/input/parser.dart';
+import 'package:forui/src/widgets/date_picker/field/parser.dart';
 import 'package:meta/meta.dart';
 
+///
 @internal
-class Updater {
+typedef Select = TextEditingValue Function(TextEditingValue, int first, int last, int end, int separator);
+
+TextEditingValue _first(TextEditingValue value, int first, int last, int end, int separator) =>
+    value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
+
+TextEditingValue _middle(TextEditingValue value, int first, int last, int end, int separator) =>
+    value.copyWith(selection: TextSelection(baseOffset: first + separator, extentOffset: last));
+
+TextEditingValue _last(TextEditingValue value, int first, int last, int end, int separator) =>
+    value.copyWith(selection: TextSelection(baseOffset: last + separator, extentOffset: end));
+
+@internal
+class FieldController {
   final TextEditingController controller;
   final FLocalizations _localizations;
   final Parser _parser;
@@ -12,13 +25,14 @@ class Updater {
   TextEditingValue _old;
   bool _mutating = false;
 
-  Updater(this.controller, this._localizations)
+  FieldController(this.controller, this._localizations)
       : _parser = Parser(_localizations.localeName),
         _suffix = RegExp(RegExp.escape(_localizations.shortDateSuffix) + r'$'),
         _old = controller.value {
     controller.addListener(update);
   }
 
+  /// Modifies the controller's selection and text whenever it receives a new value.
   void update() {
     if (_mutating) {
       return;
@@ -37,8 +51,8 @@ class Updater {
         _set(_old);
 
       case _ when _old.text != value.text:
-        final old = _split(_old);
-        final current = _split(value);
+        final old = _old.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+        final current = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
 
         if (current.length != 3) {
           _set(_old);
@@ -73,32 +87,43 @@ class Updater {
     _mutating = false;
   }
 
-  TextEditingValue selectPart(TextEditingValue value) {
+  void next() {
+    _mutating = true;
+    _set(selectPart(controller.value, onFirst: _middle, onMiddle: _last));
+    _mutating = false;
+  }
+
+  void previous() {
+    _mutating = true;
+    _set(selectPart(controller.value, onMiddle: _first, onLast: _middle));
+    _mutating = false;
+  }
+
+  @visibleForTesting
+  TextEditingValue selectPart(
+    TextEditingValue value, {
+    Select onFirst = _first,
+    Select onMiddle = _middle,
+    Select onLast = _last,
+  }) {
+    // precondition: value's text is valid.
     // There's generally 2 cases:
     // * User selects part of the text -> select the whole enclosing date part.
     // * User selects a seperator -> revert to the previous selection.
     final separator = _localizations.shortDateSeparator.length;
 
-    var start = 0;
-    for (final part in _split(value)) {
-      // It's possible that the RTL marker, which is part of the separator, is part of the selection.
-      var end = start + part.length;
-      if (_localizations.shortDateSeparator.contains('\u200F') && end < value.text.length) {
-        end += 1;
-      }
+    final first = value.text.indexOf(_localizations.shortDateSeparator);
+    final last = value.text.indexOf(_localizations.shortDateSeparator, first + separator);
+    final end = value.text.length - _localizations.shortDateSuffix.length;
+    final offset = value.selection.extentOffset;
 
-      if (start <= value.selection.extentOffset && value.selection.extentOffset <= end) {
-        return value.copyWith(selection: TextSelection(baseOffset: start, extentOffset: end));
-      }
-
-      start = start + part.length + separator;
-    }
-
-    return _old;
+    return switch (offset) {
+      _ when 0 <= offset && offset <= first => onFirst(value, first, last, end, separator),
+      _ when first + separator <= offset && offset <= last => onMiddle(value, first, last, end, separator),
+      _ when last + separator <= offset && offset <= end => onLast(value, first, last, end, separator),
+      _ => _old,
+    };
   }
 
   void _set(TextEditingValue value) => _old = controller.value = value;
-
-  List<String> _split(TextEditingValue value) =>
-      value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
 }

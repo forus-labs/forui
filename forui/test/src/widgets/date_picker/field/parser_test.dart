@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/src/widgets/date_picker/input/parser.dart';
+import 'package:forui/src/widgets/date_picker/field/parser.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 final bg = Parser('bg'); // d.MM.y r.
