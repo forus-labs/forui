@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/localizations/localizations_hr.dart';
-import 'package:forui/src/widgets/date_picker/input/updater.dart';
+import 'package:forui/src/widgets/date_picker/field/field_controller.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
@@ -63,7 +63,7 @@ void main() {
     ].indexed) {
       test('single separator - $index', () {
         controller.value = old;
-        Updater(controller, FLocalizationsEnSg());
+        FieldController(controller, FLocalizationsEnSg());
 
         controller.value = value;
         expect(controller.value, expected);
@@ -119,13 +119,65 @@ void main() {
     ].indexed) {
       test('multiple separator & suffix - $index', () {
         controller.value = old;
-        Updater(controller, FLocalizationsHr());
+        FieldController(controller, FLocalizationsHr());
 
         controller.value = value;
         expect(controller.value, expected);
       });
     }
   });
+
+  for (final (index, (value, expected)) in [
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+    ),
+  ].indexed) {
+    test('next - $index', () {
+      controller.value = value;
+      FieldController(controller, FLocalizationsHr()).next();
+
+      expect(controller.value, expected);
+    });
+  }
+
+  for (final (index, (value, expected)) in [
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+    ),
+  ].indexed) {
+    test('previous - $index', () {
+      controller.value = value;
+      FieldController(controller, FLocalizationsHr()).previous();
+
+      expect(controller.value, expected);
+    });
+  }
 
   group('selectPart(...)', () {
     for (final (index, (value, expected)) in [
@@ -175,7 +227,7 @@ void main() {
       ),
     ].indexed) {
       test('single separator - $index', () {
-        final updater = Updater(controller, FLocalizationsEnSg());
+        final updater = FieldController(controller, FLocalizationsEnSg());
         expect(updater.selectPart(value), expected);
       });
     }
@@ -183,55 +235,55 @@ void main() {
     for (final (index, (value, expected)) in [
       // 1st part
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 0)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 0)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 1)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 1)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 2)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 2)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       // 2nd part
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 4)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 4)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
       ),
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 5)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 5)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
       ),
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 6)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 6)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
       ),
       // 3rd part
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 8)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 8)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
       ),
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 9)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 9)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
       ),
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 12)),
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 12)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
       ),
       // invalid
       (
-        const TextEditingValue(text: '01. 02. 2024'),
+        const TextEditingValue(text: '01. 02. 2024.'),
         TextEditingValue.empty,
       ),
       (
-        const TextEditingValue(text: '01. 02. 2024', selection: TextSelection.collapsed(offset: 3)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 3)),
         TextEditingValue.empty,
       ),
     ].indexed) {
       test('multiple separator - $index', () {
-        final updater = Updater(controller, FLocalizationsHr());
+        final updater = FieldController(controller, FLocalizationsHr());
         expect(updater.selectPart(value), expected);
       });
     }
@@ -273,7 +325,7 @@ void main() {
       ),
     ].indexed) {
       test('suffix - $index', () {
-        final updater = Updater(controller, FLocalizationsBg());
+        final updater = FieldController(controller, FLocalizationsBg());
         expect(updater.selectPart(value), expected);
       });
     }
