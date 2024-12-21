@@ -172,7 +172,7 @@ void main() {
         const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
       ),
     ].indexed) {
-      test('previous - $index', () {
+      test('backward - $index', () {
         controller.value = value;
         FieldController(controller, FLocalizationsHr()).traverse(forward: false);
 
@@ -180,6 +180,36 @@ void main() {
       });
     }
   });
+
+  for (final (index, (value, adjustment, expected)) in [
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+      1,
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+      1,
+      const TextEditingValue(text: '02. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+      1,
+      const TextEditingValue(text: '01. 03. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+    ),
+    (
+      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+      1,
+      const TextEditingValue(text: '01. 02. 2025.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+    ),
+  ].indexed) {
+    test('adjust - $index', () {
+      controller.value = value;
+      FieldController(controller, FLocalizationsHr()).adjust(adjustment);
+
+      expect(controller.value, expected);
+    });
+  }
 
   group('selectPart(...)', () {
     for (final (index, (value, expected)) in [
