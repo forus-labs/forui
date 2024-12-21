@@ -227,4 +227,57 @@ void main() {
       test('4 digit year - $i', () => expect(enSG.parseYear(old, current), expected));
     }
   });
+
+  for (final (index, (parts, selected, adjustment, expected)) in [
+    // Days
+    (['DD', 'MM', 'YYYY'], 0, 1, ['01', 'MM', 'YYYY']),
+    (['DD', 'MM', 'YYYY'], 0, -1, ['31', 'MM', 'YYYY']),
+    (['01', 'MM', 'YYYY'], 0, 1, ['02', 'MM', 'YYYY']),
+    // Months
+    (['DD', 'MM', 'YYYY'], 1, 1, ['DD', '01', 'YYYY']),
+    (['DD', 'MM', 'YYYY'], 1, -1, ['DD', '12', 'YYYY']),
+    (['DD', '01', 'YYYY'], 1, 1, ['DD', '02', 'YYYY']),
+    // Years
+    (['DD', 'MM', 'YYYY'], 2, 1, ['DD', 'MM', '0001']),
+    (['DD', 'MM', 'YYYY'], 2, -1, ['DD', 'MM', '9999']),
+    (['DD', 'MM', '0001'], 2, 1, ['DD', 'MM', '0002']),
+  ].indexed) {
+    test('adjust(...) - $index', () => expect(enSG.adjust(parts, selected, adjustment), expected));
+  }
+
+  for (final (index, (year, adjustment, expected)) in [
+    ('DD', 1, '01'),
+    ('DD', 0, '01'),
+    ('DD', -1, '31'),
+    ('31', 1, '01'),
+    ('01', -1, '31'),
+    ('05', 1, '06'),
+    ('05', -1, '04'),
+  ].indexed) {
+    test('adjustDay(...) - $index', () => expect(enSG.adjustDay(year, adjustment), expected));
+  }
+
+  for (final (index, (year, adjustment, expected)) in [
+    ('MM', 1, '01'),
+    ('MM', 0, '01'),
+    ('MM', -1, '12'),
+    ('12', 1, '01'),
+    ('01', -1, '12'),
+    ('05', 1, '06'),
+    ('05', -1, '04'),
+  ].indexed) {
+    test('adjustMonth(...) - $index', () => expect(enSG.adjustMonth(year, adjustment), expected));
+  }
+
+  for (final (index, (year, adjustment, expected)) in [
+    ('YYYY', 1, '0001'),
+    ('YYYY', 0, '0001'),
+    ('YYYY', -1, '9999'),
+    ('9999', 1, '0001'),
+    ('0001', -1, '9999'),
+    ('2024', 1, '2025'),
+    ('2024', -1, '2023'),
+  ].indexed) {
+    test('adjustYear(...) - $index', () => expect(enSG.adjustYear(year, adjustment), expected));
+  }
 }

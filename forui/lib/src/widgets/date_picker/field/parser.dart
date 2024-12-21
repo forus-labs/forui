@@ -124,6 +124,41 @@ class Parser {
         return (old, false);
     }
   }
+
+  List<String> adjust(List<String> parts, int selected, int adjustment) {
+    assert(parts.length == 3, 'Must have 3 parts.');
+
+    final part = parts[selected];
+    parts[selected] = switch (_parts[selected]) {
+      'd' || 'dd' => adjustDay(part, adjustment),
+      'M' || 'MM' => adjustMonth(part, adjustment),
+      'y' => adjustYear(part, adjustment),
+      _ => part,
+    };
+
+    return parts;
+  }
+
+  String adjustDay(String value, int adjustment) {
+    assert(value.length <= 2, 'day must be at most 2 characters long');
+
+    final day = (_day.tryParse(value)?.toInt() ?? (adjustment <= 0 ? 1 : 0)) + adjustment;
+    return _day.format((day - 1) % 31 + 1);
+  }
+
+  String adjustMonth(String value, int adjustment) {
+    assert(value.length <= 2, 'month must be at most 2 characters long');
+
+    final month = (_month.tryParse(value)?.toInt() ?? (adjustment <= 0 ? 1 : 0)) + adjustment;
+    return _month.format((month - 1) % 12 + 1);
+  }
+
+  String adjustYear(String value, int adjustment) {
+    assert(value.length <= 4, 'year must be at most 4 characters long');
+
+    final year = (_year.tryParse(value)?.toInt() ?? (adjustment <= 0 ? 1 : 0)) + adjustment;
+    return _year.format((year - 1) % 9999 + 1);
+  }
 }
 
 @internal
