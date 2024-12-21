@@ -46,66 +46,66 @@ class FieldController {
     }
 
     _mutating = true;
-    switch (value) {
-      case _ when value.text.isEmpty:
-        _set(_old);
-
-      case _ when _old.text != value.text:
-        final old = _old.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
-        final current = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
-
-        if (current.length != 3) {
-          _set(_old);
-          break;
-        }
-
-        final (parts, selected) = _parser.parse(old, current);
-        switch (selected) {
-          case None():
-            _set(_old);
-
-          case Single(:final index):
-            final text = parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
-
-            var start = 0;
-            var end = parts[0].length;
-            for (var i = 1; i <= index; i++) {
-              start = end + _localizations.shortDateSeparator.length;
-              end = start + parts[i].length;
-            }
-
-            _set(TextEditingValue(text: text, selection: TextSelection(baseOffset: start, extentOffset: end)));
-
-          case Many():
-            final text = parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
-            _set(TextEditingValue(text: text, selection: TextSelection(baseOffset: 0, extentOffset: text.length)));
-        }
-      default:
-        _set(selectPart(value));
-    }
-
+    _set(
+      switch (value) {
+        _ when value.text.isEmpty => _old,
+        _ when _old.text != value.text => updateParts(value),
+        _ => selectParts(value),
+      },
+    );
     _mutating = false;
   }
 
-  void next() {
+  void traverse({required bool forward}) {
+    final value = controller.value;
     _mutating = true;
-    _set(selectPart(controller.value, onFirst: _middle, onMiddle: _last));
+    _set(
+      forward
+          ? selectParts(value, onFirst: _middle, onMiddle: _last)
+          : selectParts(value, onMiddle: _first, onLast: _middle),
+    );
     _mutating = false;
   }
 
-  void previous() {
+  void adjust(int adjustment) {
     _mutating = true;
-    _set(selectPart(controller.value, onMiddle: _first, onLast: _middle));
+    final value = controller.value;
+    final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+    _set(selectParts(
+      value,
+      onFirst: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 0, adjustment), 0),
+      onMiddle: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 1, adjustment), 1),
+      onLast: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 2, adjustment), 2),
+    ));
     _mutating = false;
   }
 
   @visibleForTesting
-  TextEditingValue selectPart(
-    TextEditingValue value, {
-    Select onFirst = _first,
-    Select onMiddle = _middle,
-    Select onLast = _last,
-  }) {
+  TextEditingValue updateParts(TextEditingValue value) {
+    final old = _old.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+    final current = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+
+    if (current.length != 3) {
+      return _old;
+    }
+
+    final (parts, selected) = _parser.parse(old, current);
+    switch (selected) {
+      case None():
+        return _old;
+
+      case Single(:final index):
+        return _update(parts, index);
+
+      case Many():
+        final text = parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
+        return TextEditingValue(text: text, selection: TextSelection(baseOffset: 0, extentOffset: text.length));
+    }
+  }
+
+  @visibleForTesting
+  TextEditingValue selectParts(TextEditingValue value,
+      {Select onFirst = _first, Select onMiddle = _middle, Select onLast = _last}) {
     // precondition: value's text is valid.
     // There's generally 2 cases:
     // * User selects part of the text -> select the whole enclosing date part.
@@ -123,6 +123,19 @@ class FieldController {
       _ when last + separator <= offset && offset <= end => onLast(value, first, last, end, separator),
       _ => _old,
     };
+  }
+
+  TextEditingValue _update(List<String> parts, int index) {
+    final text = parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
+
+    var start = 0;
+    var end = parts[0].length;
+    for (var i = 1; i <= index; i++) {
+      start = end + _localizations.shortDateSeparator.length;
+      end = start + parts[i].length;
+    }
+
+    return TextEditingValue(text: text, selection: TextSelection(baseOffset: start, extentOffset: end));
   }
 
   void _set(TextEditingValue value) => _old = controller.value = value;

@@ -127,57 +127,59 @@ void main() {
     }
   });
 
-  for (final (index, (value, expected)) in [
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
-    ),
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
-    ),
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
-    ),
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
-    ),
-  ].indexed) {
-    test('next - $index', () {
-      controller.value = value;
-      FieldController(controller, FLocalizationsHr()).next();
+  group('traverse', () {
+    for (final (index, (value, expected)) in [
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+      ),
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+      ),
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+      ),
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+      ),
+    ].indexed) {
+      test('forward - $index', () {
+        controller.value = value;
+        FieldController(controller, FLocalizationsHr()).traverse(forward: true);
 
-      expect(controller.value, expected);
-    });
-  }
+        expect(controller.value, expected);
+      });
+    }
 
-  for (final (index, (value, expected)) in [
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
-    ),
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-    ),
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-    ),
-    (
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
-      const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
-    ),
-  ].indexed) {
-    test('previous - $index', () {
-      controller.value = value;
-      FieldController(controller, FLocalizationsHr()).previous();
+    for (final (index, (value, expected)) in [
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
+      ),
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+      ),
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+      ),
+      (
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
+        const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 4, extentOffset: 6)),
+      ),
+    ].indexed) {
+      test('previous - $index', () {
+        controller.value = value;
+        FieldController(controller, FLocalizationsHr()).traverse(forward: false);
 
-      expect(controller.value, expected);
-    });
-  }
+        expect(controller.value, expected);
+      });
+    }
+  });
 
   group('selectPart(...)', () {
     for (final (index, (value, expected)) in [
@@ -228,7 +230,7 @@ void main() {
     ].indexed) {
       test('single separator - $index', () {
         final updater = FieldController(controller, FLocalizationsEnSg());
-        expect(updater.selectPart(value), expected);
+        expect(updater.selectParts(value), expected);
       });
     }
 
@@ -284,7 +286,7 @@ void main() {
     ].indexed) {
       test('multiple separator - $index', () {
         final updater = FieldController(controller, FLocalizationsHr());
-        expect(updater.selectPart(value), expected);
+        expect(updater.selectParts(value), expected);
       });
     }
 
@@ -326,7 +328,7 @@ void main() {
     ].indexed) {
       test('suffix - $index', () {
         final updater = FieldController(controller, FLocalizationsBg());
-        expect(updater.selectPart(value), expected);
+        expect(updater.selectParts(value), expected);
       });
     }
   });
