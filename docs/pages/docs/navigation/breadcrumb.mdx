@@ -19,7 +19,7 @@ it allows navigation up to any of the ancestors.
         ```dart
         FBreadcrumb(
           children: [
-            FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+            FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
             FBreadcrumbItem.collapsed(
               menu: [
                 FTileGroup(
@@ -36,8 +36,8 @@ it allows navigation up to any of the ancestors.
                 ),
               ],
             ),
-            FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
-            FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+            FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+            FBreadcrumbItem(current: true, child: const Text('Widgets')),
           ],
         );
         ```
@@ -51,7 +51,7 @@ it allows navigation up to any of the ancestors.
 ```dart
 FBreadcrumb(
   children: [
-    FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+    FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
     FBreadcrumbItem.collapsed(
       menu: [
         FTileGroup(
@@ -68,8 +68,8 @@ FBreadcrumb(
         ),
       ],
     ),
-    FBreadcrumbItem.of(onPress: () {}, child: const Text('Themes')),
-    FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+    FBreadcrumbItem(onPress: () {}, child: const Text('Themes')),
+    FBreadcrumbItem(current: true, child: const Text('Widgets')),
   ],
 );
 ```
@@ -92,7 +92,7 @@ FBreadcrumb(
             ),
           ),
           children: [
-            FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+            FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
             FBreadcrumbItem.collapsed(
               menu: [
                 FTileGroup(
@@ -109,8 +109,8 @@ FBreadcrumb(
                 ),
               ],
             ),
-            FBreadcrumbItem.of(onPress: () {}, child: const Text('Themes')),
-            FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+            FBreadcrumbItem(onPress: () {}, child: const Text('Themes')),
+            FBreadcrumbItem(current: true, child: const Text('Widgets')),
           ],
         );
         ```
