@@ -134,6 +134,7 @@ abstract interface class FBreadcrumbItem extends Widget {
       );
 }
 
+// ignore: avoid_implementing_value_types
 class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   final bool current;
   final VoidCallback? onPress;
@@ -179,6 +180,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   }
 }
 
+// ignore: avoid_implementing_value_types
 class _NestedCrumbs extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup> menu;
   final FPopoverMenuStyle? popOverMenuStyle;
