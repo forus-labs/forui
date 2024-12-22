@@ -63,6 +63,9 @@ class FLocalizationsIs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Ógilt snið.';
+
+  @override
   String get dialogLabel => 'Gluggi';
 
   @override

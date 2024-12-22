@@ -63,6 +63,9 @@ class FLocalizationsTl extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Invalid ang format.';
+
+  @override
   String get dialogLabel => 'Dialog';
 
   @override

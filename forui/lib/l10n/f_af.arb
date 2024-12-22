@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Maak $modalRouteContentName toe",
   "barrierLabel": "Skerm",
   "shortDateSeparator": "-",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ongeldige formaat."
 }

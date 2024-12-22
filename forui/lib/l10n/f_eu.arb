@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Itxi $modalRouteContentName",
   "barrierLabel": "Barrera",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Formatuak ez du balio."
 }

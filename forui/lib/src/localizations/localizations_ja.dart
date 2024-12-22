@@ -63,6 +63,9 @@ class FLocalizationsJa extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => '形式が無効です。';
+
+  @override
   String get dialogLabel => 'ダイアログ';
 
   @override

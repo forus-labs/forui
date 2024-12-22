@@ -4,5 +4,6 @@
   "barrierOnTapHint": "סגירת $modalRouteContentName",
   "barrierLabel": "מיסוך",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "פורמט לא חוקי."
 }

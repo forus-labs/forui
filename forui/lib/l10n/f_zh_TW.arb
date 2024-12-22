@@ -4,5 +4,6 @@
   "barrierOnTapHint": "關閉「$modalRouteContentName」",
   "barrierLabel": "紗罩",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "格式無效。"
 }

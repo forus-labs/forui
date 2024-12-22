@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Zatvori: $modalRouteContentName",
   "barrierLabel": "Rubno",
   "shortDateSeparator": ".",
-  "shortDateSuffix": "."
+  "shortDateSuffix": ".",
+  "invalidDateFormatLabel": "Nevažeći format."
 }

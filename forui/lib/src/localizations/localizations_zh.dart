@@ -63,6 +63,9 @@ class FLocalizationsZh extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => '格式无效。';
+
+  @override
   String get dialogLabel => '对话框';
 
   @override
@@ -88,6 +91,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => '格式無效。';
+
+  @override
   String get dialogLabel => '對話方塊';
 
   @override
@@ -111,6 +117,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => '格式無效。';
 
   @override
   String get dialogLabel => '對話方塊';

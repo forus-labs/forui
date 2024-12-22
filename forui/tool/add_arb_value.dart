@@ -6,7 +6,7 @@ import 'dart:io';
 final pattern = RegExp(r'material_([\w_]+)\.arb');
 
 // Change this to add other keys.
-const key = 'scrimLabel';
+const key = 'invalidDateFormatLabel';
 
 void main() {
   // I usually just download all Material localization files into the .temp folder.

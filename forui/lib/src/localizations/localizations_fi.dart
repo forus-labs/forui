@@ -63,6 +63,9 @@ class FLocalizationsFi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Virheellinen muoto';
+
+  @override
   String get dialogLabel => 'Valintaikkuna';
 
   @override

@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Sule $modalRouteContentName",
   "barrierLabel": "Sirm",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Sobimatu vorming."
 }

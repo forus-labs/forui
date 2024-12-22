@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Zavřít $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": ". ",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Neplatný formát."
 }

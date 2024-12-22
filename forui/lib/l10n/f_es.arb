@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Cerrar $modalRouteContentName",
   "barrierLabel": "Sombreado",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Formato no válido."
 }

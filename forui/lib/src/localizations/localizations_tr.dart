@@ -63,6 +63,9 @@ class FLocalizationsTr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Geçersiz biçim.';
+
+  @override
   String get dialogLabel => 'İletişim kutusu';
 
   @override

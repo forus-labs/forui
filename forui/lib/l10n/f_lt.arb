@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Uždaryti „$modalRouteContentName“",
   "barrierLabel": "Užsklanda",
   "shortDateSeparator": "-",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Netinkamas formatas."
 }

@@ -63,6 +63,9 @@ class FLocalizationsNe extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'अवैध ढाँचा।';
+
+  @override
   String get dialogLabel => 'संवाद';
 
   @override

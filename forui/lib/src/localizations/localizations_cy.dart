@@ -63,6 +63,9 @@ class FLocalizationsCy extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Fformat annilys.';
+
+  @override
   String get dialogLabel => 'Deialog';
 
   @override

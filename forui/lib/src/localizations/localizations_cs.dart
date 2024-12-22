@@ -63,6 +63,9 @@ class FLocalizationsCs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Neplatný formát.';
+
+  @override
   String get dialogLabel => 'Dialogové okno';
 
   @override

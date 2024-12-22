@@ -63,6 +63,9 @@ class FLocalizationsEu extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Formatuak ez du balio.';
+
+  @override
   String get dialogLabel => 'Leihoa';
 
   @override

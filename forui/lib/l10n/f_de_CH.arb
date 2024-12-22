@@ -1,5 +1,6 @@
 {
   "dialogLabel": "Dialogfeld",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ungültiges Format."
 }

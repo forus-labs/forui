@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName 닫기",
   "barrierLabel": "스크림",
   "shortDateSeparator": ". ",
-  "shortDateSuffix": "."
+  "shortDateSuffix": ".",
+  "invalidDateFormatLabel": "형식이 잘못되었습니다."
 }

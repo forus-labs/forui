@@ -63,6 +63,9 @@ class FLocalizationsMn extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Буруу формат байна.';
+
+  @override
   String get dialogLabel => 'Харилцах цонх';
 
   @override

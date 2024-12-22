@@ -4,5 +4,6 @@
   "barrierOnTapHint": "បិទ $modalRouteContentName",
   "barrierLabel": "ផ្ទាំងស្រអាប់",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "ទម្រង់មិន​ត្រឹមត្រូវទេ។"
 }

@@ -63,6 +63,9 @@ class FLocalizationsFr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Format non valide.';
+
+  @override
   String get dialogLabel => 'Boîte de dialogue';
 
   @override
@@ -86,6 +89,9 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'Format incorrect';
 
   @override
   String get dialogLabel => 'Boîte de dialogue';

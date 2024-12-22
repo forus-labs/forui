@@ -4,5 +4,6 @@
   "barrierOnTapHint": "بستن $modalRouteContentName",
   "barrierLabel": "رویه",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "قالب نامعتبر است."
 }

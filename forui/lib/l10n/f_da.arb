@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Luk $modalRouteContentName",
   "barrierLabel": "Dæmpeskærm",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ugyldigt format."
 }

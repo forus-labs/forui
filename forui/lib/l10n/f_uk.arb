@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Закрити: $modalRouteContentName",
   "barrierLabel": "Маскувальний фон",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Недійсний формат."
 }

@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Tanca $modalRouteContentName",
   "barrierLabel": "Fons atenuat",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "El format no és vàlid."
 }

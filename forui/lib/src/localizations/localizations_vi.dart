@@ -63,6 +63,9 @@ class FLocalizationsVi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Định dạng không hợp lệ.';
+
+  @override
   String get dialogLabel => 'Hộp thoại';
 
   @override

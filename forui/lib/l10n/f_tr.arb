@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName içeriğini kapat",
   "barrierLabel": "opaklık katmanı",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Geçersiz biçim."
 }

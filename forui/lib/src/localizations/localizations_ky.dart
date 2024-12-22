@@ -63,6 +63,9 @@ class FLocalizationsKy extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Туура эмес формат.';
+
+  @override
   String get dialogLabel => 'Диалог';
 
   @override

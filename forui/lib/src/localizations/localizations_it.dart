@@ -63,6 +63,9 @@ class FLocalizationsIt extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Formato non valido.';
+
+  @override
   String get dialogLabel => 'Finestra di dialogo';
 
   @override

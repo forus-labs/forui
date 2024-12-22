@@ -63,6 +63,9 @@ class FLocalizationsAr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'التنسيق غير صالح.';
+
+  @override
   String get dialogLabel => 'مربع حوار';
 
   @override

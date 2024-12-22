@@ -4,5 +4,6 @@
   "barrierOnTapHint": "إغلاق \"$modalRouteContentName\"",
   "barrierLabel": "تمويه",
   "shortDateSeparator": "‏/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "التنسيق غير صالح."
 }

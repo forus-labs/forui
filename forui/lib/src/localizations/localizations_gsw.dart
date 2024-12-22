@@ -63,6 +63,9 @@ class FLocalizationsGsw extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Ungültiges Format.';
+
+  @override
   String get dialogLabel => 'Dialogfeld';
 
   @override

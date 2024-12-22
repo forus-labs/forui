@@ -4,5 +4,6 @@
   "barrierOnTapHint": "ปิด $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "รูปแบบไม่ถูกต้อง"
 }
