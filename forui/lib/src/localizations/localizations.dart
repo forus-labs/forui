@@ -334,6 +334,12 @@ abstract class FLocalizations {
   /// **''**
   String get shortDateSuffix;
 
+  /// Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid format.'**
+  String get invalidDateFormatLabel;
+
   /// The sheet's label.
   ///
   /// In en, this message translates to:

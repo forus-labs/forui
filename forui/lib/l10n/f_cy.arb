@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Cau $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Fformat annilys."
 }

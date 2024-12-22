@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Sulje $modalRouteContentName",
   "barrierLabel": "Sermi",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Virheellinen muoto"
 }

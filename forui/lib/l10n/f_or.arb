@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentNameକୁ ବନ୍ଦ କରନ୍ତୁ",
   "barrierLabel": "ସ୍କ୍ରିମ",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "ଅବୈଧ ଫର୍ମାଟ୍।"
 }

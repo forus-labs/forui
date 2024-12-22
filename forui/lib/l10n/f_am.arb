@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentNameን ዝጋ",
   "barrierLabel": "ገዳቢ",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "ልክ ያልሆነ ቅርጸት።"
 }

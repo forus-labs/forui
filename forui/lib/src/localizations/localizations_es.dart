@@ -63,6 +63,9 @@ class FLocalizationsEs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Formato no válido.';
+
+  @override
   String get dialogLabel => 'Cuadro de diálogo';
 
   @override
@@ -86,6 +89,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -113,6 +119,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -136,6 +145,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -163,6 +175,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -186,6 +201,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -213,6 +231,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -236,6 +257,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -263,6 +287,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -286,6 +313,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -313,6 +343,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -336,6 +369,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -363,6 +399,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -386,6 +425,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -413,6 +455,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -436,6 +481,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -463,6 +511,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -486,6 +537,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -513,6 +567,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -538,6 +595,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -561,6 +621,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get invalidDateFormatLabel => 'El formato no es válido.';
 
   @override
   String get dialogLabel => 'Diálogo';

@@ -63,6 +63,9 @@ class FLocalizationsUz extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Yaroqsiz format.';
+
+  @override
   String get dialogLabel => 'Muloqot oynasi';
 
   @override

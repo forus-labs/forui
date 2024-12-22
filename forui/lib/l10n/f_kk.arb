@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName жабу",
   "barrierLabel": "Кенеп",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Формат жарамсыз."
 }

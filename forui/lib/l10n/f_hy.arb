@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Փակել՝ $modalRouteContentName",
   "barrierLabel": "Դիմակ",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ձևաչափն անվավեր է։"
 }

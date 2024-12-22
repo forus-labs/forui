@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Bağlayın: $modalRouteContentName",
   "barrierLabel": "Kətan",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Yanlış format."
 }

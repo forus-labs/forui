@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName ಅನ್ನು ಮುಚ್ಚಿರಿ",
   "barrierLabel": "ಸ್ಕ್ರಿಮ್",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "ಅಮಾನ್ಯವಾದ ಫಾರ್ಮ್ಯಾಟ್."
 }

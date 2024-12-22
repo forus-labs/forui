@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Yopish: $modalRouteContentName",
   "barrierLabel": "Kanop",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Yaroqsiz format."
 }

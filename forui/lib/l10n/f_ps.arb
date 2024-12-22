@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Close $modalRouteName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Invalid format."
 }

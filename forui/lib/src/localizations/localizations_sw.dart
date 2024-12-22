@@ -63,6 +63,9 @@ class FLocalizationsSw extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Muundo si sahihi.';
+
+  @override
   String get dialogLabel => 'Kidirisha';
 
   @override

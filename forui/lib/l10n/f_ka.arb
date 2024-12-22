@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName-ის დახურვა",
   "barrierLabel": "სკრიმი",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "ფორმატი არასწორია."
 }

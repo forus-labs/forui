@@ -73,6 +73,12 @@
   },
 
 
+  "invalidDateFormatLabel": "Invalid format.",
+  "@invalidDateFormatLabel": {
+    "description": "Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format."
+  },
+
+
   "dialogLabel": "Dialog",
   "@dialogLabel": {
     "description": "The audio announcement made when a dialog is opened."

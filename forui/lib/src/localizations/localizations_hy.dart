@@ -63,6 +63,9 @@ class FLocalizationsHy extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Ձևաչափն անվավեր է։';
+
+  @override
   String get dialogLabel => 'Երկխոսության պատուհան';
 
   @override

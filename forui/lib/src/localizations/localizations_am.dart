@@ -63,6 +63,9 @@ class FLocalizationsAm extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'ልክ ያልሆነ ቅርጸት።';
+
+  @override
   String get dialogLabel => 'መገናኛ';
 
   @override

@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Funga $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Muundo si sahihi."
 }

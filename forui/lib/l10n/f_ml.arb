@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName അടയ്ക്കുക",
   "barrierLabel": "സ്ക്രിം",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "തെറ്റായ ഫോർമാറ്റ്."
 }

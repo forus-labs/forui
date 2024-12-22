@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Vala i-$modalRouteContentName",
   "barrierLabel": "I-Scrim",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ifomethi engavumelekile."
 }

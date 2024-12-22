@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Aizvērt $modalRouteContentName",
   "barrierLabel": "Pārklājums",
   "shortDateSeparator": ".",
-  "shortDateSuffix": "."
+  "shortDateSuffix": ".",
+  "invalidDateFormatLabel": "Nederīgs formāts."
 }

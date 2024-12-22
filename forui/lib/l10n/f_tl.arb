@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Isara ang $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Invalid ang format."
 }

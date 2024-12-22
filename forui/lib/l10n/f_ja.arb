@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName を閉じる",
   "barrierLabel": "スクリム",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "形式が無効です。"
 }

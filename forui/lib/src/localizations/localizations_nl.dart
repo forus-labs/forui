@@ -63,6 +63,9 @@ class FLocalizationsNl extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Ongeldige indeling.';
+
+  @override
   String get dialogLabel => 'Dialoogvenster';
 
   @override

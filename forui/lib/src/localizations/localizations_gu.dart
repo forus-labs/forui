@@ -63,6 +63,9 @@ class FLocalizationsGu extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'અમાન્ય ફોર્મેટ.';
+
+  @override
   String get dialogLabel => 'સંવાદ';
 
   @override

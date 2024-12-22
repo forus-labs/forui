@@ -63,6 +63,9 @@ class FLocalizationsSi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'අවලංගු ආකෘතියකි.';
+
+  @override
   String get dialogLabel => 'සංවාදය';
 
   @override

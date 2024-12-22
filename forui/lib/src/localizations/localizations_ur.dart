@@ -63,6 +63,9 @@ class FLocalizationsUr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'غلط فارمیٹ۔';
+
+  @override
   String get dialogLabel => 'ڈائلاگ';
 
   @override

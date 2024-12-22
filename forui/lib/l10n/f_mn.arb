@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName-г хаах",
   "barrierLabel": "Скрим",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Буруу формат байна."
 }

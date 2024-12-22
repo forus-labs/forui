@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName schließen",
   "barrierLabel": "Gitter",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ungültiges Format."
 }

@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Κλείσιμο $modalRouteContentName",
   "barrierLabel": "Επικάλυψη",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Μη έγκυρη μορφή."
 }

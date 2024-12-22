@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Затвори: $modalRouteContentName",
   "barrierLabel": "Скрим",
   "shortDateSeparator": ". ",
-  "shortDateSuffix": "."
+  "shortDateSuffix": ".",
+  "invalidDateFormatLabel": "Формат је неважећи."
 }

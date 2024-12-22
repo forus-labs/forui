@@ -63,6 +63,9 @@ class FLocalizationsPa extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'ਅਵੈਧ ਫਾਰਮੈਟ।';
+
+  @override
   String get dialogLabel => 'ਵਿੰਡੋ';
 
   @override

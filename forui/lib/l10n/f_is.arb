@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Loka $modalRouteContentName",
   "barrierLabel": "Möskvi",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ógilt snið."
 }

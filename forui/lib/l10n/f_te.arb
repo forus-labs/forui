@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName‌ను మూసివేయండి",
   "barrierLabel": "స్క్రిమ్",
   "shortDateSeparator": "/",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "ఫార్మాట్ చెల్లదు."
 }

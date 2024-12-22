@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Mbyll $modalRouteContentName",
   "barrierLabel": "Kanavacë",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Format i pavlefshëm."
 }

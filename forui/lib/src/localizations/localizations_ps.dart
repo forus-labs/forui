@@ -63,6 +63,9 @@ class FLocalizationsPs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Invalid format.';
+
+  @override
   String get dialogLabel => 'خبرې اترې';
 
   @override

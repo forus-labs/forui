@@ -4,5 +4,6 @@
   "barrierOnTapHint": "Lukk $modalRouteContentName",
   "barrierLabel": "Vev",
   "shortDateSeparator": ".",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "Ugyldig format."
 }

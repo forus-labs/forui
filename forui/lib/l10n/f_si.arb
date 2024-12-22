@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName වසන්න",
   "barrierLabel": "ස්ක්‍රිම්",
   "shortDateSeparator": "-",
-  "shortDateSuffix": ""
+  "shortDateSuffix": "",
+  "invalidDateFormatLabel": "අවලංගු ආකෘතියකි."
 }

@@ -63,6 +63,9 @@ class FLocalizationsFa extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'قالب نامعتبر است.';
+
+  @override
   String get dialogLabel => 'کادر گفتگو';
 
   @override

@@ -4,5 +4,6 @@
   "barrierOnTapHint": "$modalRouteContentName bezárása",
   "barrierLabel": "Borítás",
   "shortDateSeparator": ". ",
-  "shortDateSuffix": "."
+  "shortDateSuffix": ".",
+  "invalidDateFormatLabel": "Érvénytelen formátum."
 }

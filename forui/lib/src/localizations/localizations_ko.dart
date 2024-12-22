@@ -63,6 +63,9 @@ class FLocalizationsKo extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
+  String get invalidDateFormatLabel => '형식이 잘못되었습니다.';
+
+  @override
   String get dialogLabel => '대화상자';
 
   @override

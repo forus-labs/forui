@@ -63,6 +63,9 @@ class FLocalizationsSv extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get invalidDateFormatLabel => 'Ogiltigt format.';
+
+  @override
   String get dialogLabel => 'Dialogruta';
 
   @override
