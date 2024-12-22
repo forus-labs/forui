@@ -21,7 +21,7 @@ final class FBreadcrumb extends StatelessWidget {
   /// A list of breadcrumb items representing the navigation path.
   ///
   /// Each item is typically an [FBreadcrumbItem], separated by a [divider].
-  /// /// The last item generally represents the current page and has its `selected` property set to `true`.
+  /// /// The last item generally represents the current page and has its `current` property set to `true`.
   /// Navigation can be handled via the `onPress` callback.
   final List<Widget> children;
 
@@ -127,7 +127,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPopoverMenuStyle? popOverMenuStyle,
     Key? key,
   }) =>
-      _NestedCrumbs(
+      _CollapsedCrumb(
         menu: menu,
         popOverMenuStyle: popOverMenuStyle,
         key: key,
@@ -181,18 +181,18 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 }
 
 // ignore: avoid_implementing_value_types
-class _NestedCrumbs extends StatefulWidget implements FBreadcrumbItem {
+class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup> menu;
   final FPopoverMenuStyle? popOverMenuStyle;
 
-  const _NestedCrumbs({
+  const _CollapsedCrumb({
     required this.menu,
     this.popOverMenuStyle,
     super.key,
   });
 
   @override
-  State<_NestedCrumbs> createState() => _NestedCrumbsState();
+  State<_CollapsedCrumb> createState() => _CollapsedCrumbState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -201,7 +201,7 @@ class _NestedCrumbs extends StatefulWidget implements FBreadcrumbItem {
   }
 }
 
-class _NestedCrumbsState extends State<_NestedCrumbs> with SingleTickerProviderStateMixin {
+class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProviderStateMixin {
   late FPopoverController controller;
 
   @override

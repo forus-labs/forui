@@ -73,6 +73,46 @@ void main() {
           matchesGoldenFile('breadcrumb/${theme.name}/hovered-breadcrumb.png'),
         );
       });
+
+      testWidgets('${theme.name} with hovered breadcrumb', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FBreadcrumb(
+              children: [
+                FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+                FBreadcrumbItem.collapsed(
+                  menu: [
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          title: const Text('Documentation'),
+                          onPress: () {},
+                        ),
+                        FTile(
+                          title: const Text('Themes'),
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+                FBreadcrumbItem(current: true, child: const Text('Components')),
+              ],
+            ),
+          ),
+        );
+
+        Focus.of(tester.element(find.text('Forui'))).requestFocus();
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('breadcrumb/${theme.name}/focused-breadcrumb.png'),
+        );
+      });
+
       testWidgets('${theme.name} with collapsed breadcrumb', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
