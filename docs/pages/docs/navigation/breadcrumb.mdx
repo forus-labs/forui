@@ -25,7 +25,7 @@ it allows navigation up to any of the ancestors.
                 FTileGroup(
                   children: [
                     FTile(
-                      title: const Text('Documentation'),W
+                      title: const Text('Documentation'),
                       onPress: () {},
                     ),
                     FTile(
@@ -52,7 +52,22 @@ it allows navigation up to any of the ancestors.
 FBreadcrumb(
   children: [
     FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
-    FBreadcrumbItem.of(onPress: () {}, child: const Text('Documentation')),
+    FBreadcrumbItem.collapsed(
+      menu: [
+        FTileGroup(
+          children: [
+            FTile(
+              title: const Text('Documentation'),
+              onPress: () {},
+            ),
+            FTile(
+              title: const Text('Themes'),
+              onPress: () {},
+            ),
+          ],
+        ),
+      ],
+    ),
     FBreadcrumbItem.of(onPress: () {}, child: const Text('Themes')),
     FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
   ],
@@ -61,7 +76,7 @@ FBreadcrumb(
 
 ## Examples
 
-### Custom divider
+### Custom Divider
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='breadcrumb' variant='divider' height={400}/>

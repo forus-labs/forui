@@ -1,6 +1,8 @@
 @Tags(['golden'])
 library;
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -16,9 +18,9 @@ void main() {
           child: FBreadcrumb(
             style: TestScaffold.blueScreen.breadcrumbStyle,
             children: [
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Core')),
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Components')),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+              FBreadcrumbItem(current: true, child: const Text('Components')),
             ],
           ),
         ),
@@ -28,13 +30,13 @@ void main() {
     });
 
     for (final theme in TestScaffold.themes) {
-      testWidgets('${theme.name} with collapsed breadcrumb', (tester) async {
+      testWidgets('${theme.name} with hovered breadcrumb', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FBreadcrumb(
               children: [
-                FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+                FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
                 FBreadcrumbItem.collapsed(
                   menu: [
                     FTileGroup(
@@ -51,8 +53,51 @@ void main() {
                     ),
                   ],
                 ),
-                FBreadcrumbItem.of(onPress: () {}, child: const Text('Core')),
-                FBreadcrumbItem.of(onPress: () {}, child: const Text('Components')),
+                FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+                FBreadcrumbItem(current: true, child: const Text('Components')),
+              ],
+            ),
+          ),
+        );
+
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        await gesture.addPointer(location: Offset.zero);
+        addTearDown(gesture.removePointer);
+        await tester.pump();
+
+        await gesture.moveTo(tester.getCenter(find.text('Core')));
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('breadcrumb/${theme.name}/hovered-breadcrumb.png'),
+        );
+      });
+      testWidgets('${theme.name} with collapsed breadcrumb', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FBreadcrumb(
+              children: [
+                FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+                FBreadcrumbItem.collapsed(
+                  menu: [
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          title: const Text('Documentation'),
+                          onPress: () {},
+                        ),
+                        FTile(
+                          title: const Text('Themes'),
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+                FBreadcrumbItem(current: true, child: const Text('Components')),
               ],
             ),
           ),
@@ -86,10 +131,10 @@ void main() {
             theme: theme.data,
             child: FBreadcrumb(
               children: [
-                FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+                FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
                 FBreadcrumbItem.collapsed(menu: menu),
-                FBreadcrumbItem.of(onPress: () {}, child: const Text('Core')),
-                FBreadcrumbItem.of(onPress: () {}, child: const Text('Components')),
+                FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+                FBreadcrumbItem(current: true, child: const Text('Components')),
               ],
             ),
           ),
@@ -97,11 +142,6 @@ void main() {
 
         await tester.tap(find.descendant(of: find.byType(FBreadcrumb), matching: find.byType(FPopoverMenu)));
         await tester.pumpAndSettle();
-
-        // await tester.tapAt(Offset.zero);
-
-        //
-        // expect(find.text('Group 1'), findsOneWidget);
 
         await expectLater(
           find.byType(TestScaffold),

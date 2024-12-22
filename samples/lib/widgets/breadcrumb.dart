@@ -17,7 +17,7 @@ class BreadcrumbPage extends Sample {
         children: [
           FBreadcrumb(
             children: [
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
               FBreadcrumbItem.collapsed(
                 menu: [
                   FTileGroup(
@@ -34,8 +34,8 @@ class BreadcrumbPage extends Sample {
                   ),
                 ],
               ),
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+              FBreadcrumbItem(current: true, child: const Text('Widgets')),
             ],
           ),
         ],
@@ -61,7 +61,7 @@ class BreadcrumbDividerPage extends Sample {
               ),
             ),
             children: [
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
               FBreadcrumbItem.collapsed(
                 menu: [
                   FTileGroup(
@@ -78,8 +78,8 @@ class BreadcrumbDividerPage extends Sample {
                   ),
                 ],
               ),
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Layout')),
-              FBreadcrumbItem.of(onPress: () {}, child: const Text('Widgets'), selected: true),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+              FBreadcrumbItem(current: true, child: const Text('Widgets')),
             ],
           ),
         ],
