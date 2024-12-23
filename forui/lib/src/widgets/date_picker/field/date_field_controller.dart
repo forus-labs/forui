@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/date_picker/field/parser.dart';
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 ///
@@ -17,82 +18,105 @@ TextEditingValue _last(TextEditingValue value, int first, int last, int end, int
     value.copyWith(selection: TextSelection(baseOffset: last + separator, extentOffset: end));
 
 @internal
-class FieldController {
-  final TextEditingController controller;
+class DateFieldController extends TextEditingController {
+  final WidgetStatesController states;
+  final String placeholder;
   final FLocalizations _localizations;
   final Parser _parser;
   final RegExp _suffix;
-  TextEditingValue _old;
   bool _mutating = false;
 
-  FieldController(this.controller, this._localizations)
-      : _parser = Parser(_localizations.localeName),
+  factory DateFieldController(FLocalizations localizations, DateTime? initial) {
+    final format = DateFormat.yMd(localizations.localeName);
+    final placeholder =
+        format.pattern!.replaceAll(RegExp('d(d+)'), 'DD').replaceAll('M(M+)', 'MM').replaceAll('y', 'YYYY');
+    final text = initial == null ? placeholder : format.format(initial);
+    return DateFieldController.fromValue(localizations, placeholder, TextEditingValue(text: text));
+  }
+
+  @visibleForTesting
+  DateFieldController.fromValue(this._localizations, this.placeholder, TextEditingValue? value)
+      : states = WidgetStatesController(),
+        _parser = Parser(_localizations.localeName),
         _suffix = RegExp(RegExp.escape(_localizations.shortDateSuffix) + r'$'),
-        _old = controller.value {
-    controller.addListener(update);
-  }
-
-  /// Modifies the controller's selection and text whenever it receives a new value.
-  void update() {
-    if (_mutating) {
-      return;
-    }
-
-    final value = controller.value;
-    final TextSelection(:baseOffset, :extentOffset) = value.selection;
-    // Selected everything without doing anything else.
-    if (baseOffset == 0 && extentOffset == value.text.length && _old.text == value.text) {
-      return;
-    }
-
-    _mutating = true;
-    _set(
-      switch (value) {
-        _ when value.text.isEmpty => _old,
-        _ when _old.text != value.text => updateParts(value),
-        _ => selectParts(value),
-      },
-    );
-    _mutating = false;
-  }
+        super.fromValue(value);
 
   void traverse({required bool forward}) {
-    final value = controller.value;
     _mutating = true;
-    _set(
-      forward
-          ? selectParts(value, onFirst: _middle, onMiddle: _last)
-          : selectParts(value, onMiddle: _first, onLast: _middle),
-    );
+    super.value = forward
+        ? selectParts(value, onFirst: _middle, onMiddle: _last)
+        : selectParts(value, onMiddle: _first, onLast: _middle);
     _mutating = false;
   }
 
   void adjust(int adjustment) {
     _mutating = true;
-    final value = controller.value;
     final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
-    _set(selectParts(
+    super.value = selectParts(
       value,
       onFirst: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 0, adjustment), 0),
       onMiddle: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 1, adjustment), 1),
       onLast: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 2, adjustment), 2),
-    ));
+    );
     _mutating = false;
+  }
+
+  @override
+  set value(TextEditingValue value) {
+    if (_mutating) {
+      return;
+    }
+
+    final TextSelection(:baseOffset, :extentOffset) = value.selection;
+    // Selected everything without doing anything else.
+    if (baseOffset == 0 && extentOffset == value.text.length && text == value.text) {
+      super.value = value;
+      return;
+    }
+
+    super.value = switch (value) {
+      _ when value.text.isEmpty =>
+        TextEditingValue(text: placeholder, selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length)),
+      _ when text != value.text => updateParts(value),
+      _ => selectParts(value),
+    };
+  }
+
+  @override
+  TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
+    if (text == placeholder) {
+      final textFieldStyle = context.theme.textFieldStyle; // TODO: Replace with DatePickerStyle.textField.
+      style = switch (states.value) {
+        // Disabled style
+        final values when values.containsAll(const {WidgetState.disabled, WidgetState.focused}) =>
+          textFieldStyle.disabledStyle.contentTextStyle,
+        final values when values.contains(WidgetState.disabled) => textFieldStyle.disabledStyle.contentTextStyle,
+        // Error styles
+        final values when values.containsAll(const {WidgetState.error, WidgetState.focused}) =>
+          textFieldStyle.errorStyle.contentTextStyle,
+        final values when values.contains(WidgetState.error) => textFieldStyle.errorStyle.contentTextStyle,
+        // Enabled styles
+        final values when values.containsAll({WidgetState.focused}) => textFieldStyle.enabledStyle.contentTextStyle,
+        _ => textFieldStyle.enabledStyle.hintTextStyle,
+      };
+    }
+
+    return super.buildTextSpan(context: context, withComposing: withComposing, style: style);
   }
 
   @visibleForTesting
   TextEditingValue updateParts(TextEditingValue value) {
-    final old = _old.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+    final old = text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
     final current = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
 
     if (current.length != 3) {
-      return _old;
+      return super.value;
     }
 
     final (parts, selected) = _parser.parse(old, current);
     switch (selected) {
       case None():
-        return _old;
+        return super.value;
 
       case Single(:final index):
         return _update(parts, index);
@@ -104,8 +128,12 @@ class FieldController {
   }
 
   @visibleForTesting
-  TextEditingValue selectParts(TextEditingValue value,
-      {Select onFirst = _first, Select onMiddle = _middle, Select onLast = _last}) {
+  TextEditingValue selectParts(
+    TextEditingValue value, {
+    Select onFirst = _first,
+    Select onMiddle = _middle,
+    Select onLast = _last,
+  }) {
     // precondition: value's text is valid.
     // There's generally 2 cases:
     // * User selects part of the text -> select the whole enclosing date part.
@@ -121,7 +149,7 @@ class FieldController {
       _ when 0 <= offset && offset <= first => onFirst(value, first, last, end, separator),
       _ when first + separator <= offset && offset <= last => onMiddle(value, first, last, end, separator),
       _ when last + separator <= offset && offset <= end => onLast(value, first, last, end, separator),
-      _ => _old,
+      _ => super.value,
     };
   }
 
@@ -137,6 +165,4 @@ class FieldController {
 
     return TextEditingValue(text: text, selection: TextSelection(baseOffset: start, extentOffset: end));
   }
-
-  void _set(TextEditingValue value) => _old = controller.value = value;
 }

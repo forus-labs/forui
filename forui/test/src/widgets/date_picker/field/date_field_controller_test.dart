@@ -3,17 +3,28 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/localizations/localizations_hr.dart';
-import 'package:forui/src/widgets/date_picker/field/field_controller.dart';
+import 'package:forui/src/widgets/date_picker/field/date_field_controller.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  late TextEditingController controller;
+  late DateFieldController controller;
 
   setUpAll(initializeDateFormatting);
 
-  setUp(() => controller = TextEditingController());
+  setUp(() => controller = DateFieldController.fromValue(FLocalizationsEnSg(), '', null));
 
-  group('update', () {
+  for (final (index, (localizations, initial, expected)) in [
+    (FLocalizationsEnSg(), null, 'DD/MM/YYYY'),
+    (FLocalizationsHr(), null, 'DD. MM. YYYY.'),
+    (FLocalizationsEnSg(), DateTime(2024, 1, 2), '02/01/2024'),
+    (FLocalizationsEnIe(), DateTime(2024, 1, 2), '2/1/2024'),
+  ].indexed) {
+    test('DateFieldController.() - $index', () {
+      expect(DateFieldController(localizations, initial).text, expected);
+    });
+  }
+
+  group('value', () {
     for (final (index, (old, value, expected)) in [
       // Select everything
       (
@@ -25,7 +36,7 @@ void main() {
       (
         const TextEditingValue(text: '01/02/2024'),
         TextEditingValue.empty,
-        const TextEditingValue(text: '01/02/2024'),
+        const TextEditingValue(text: 'DD/MM/YYYY', selection: TextSelection(baseOffset: 0, extentOffset: 10)),
       ),
       // Malformed paste
       (
@@ -62,10 +73,7 @@ void main() {
       ),
     ].indexed) {
       test('single separator - $index', () {
-        controller.value = old;
-        FieldController(controller, FLocalizationsEnSg());
-
-        controller.value = value;
+        controller = DateFieldController.fromValue(FLocalizationsEnSg(), 'DD/MM/YYYY', old)..value = value;
         expect(controller.value, expected);
       });
     }
@@ -81,7 +89,7 @@ void main() {
       (
         const TextEditingValue(text: '01. 02. 2024.'),
         TextEditingValue.empty,
-        const TextEditingValue(text: '01. 02. 2024.'),
+        const TextEditingValue(text: 'DD. MM. YYYY.', selection: TextSelection(baseOffset: 0, extentOffset: 13)),
       ),
       // Malformed paste
       (
@@ -118,10 +126,7 @@ void main() {
       ),
     ].indexed) {
       test('multiple separator & suffix - $index', () {
-        controller.value = old;
-        FieldController(controller, FLocalizationsHr());
-
-        controller.value = value;
+        controller = DateFieldController.fromValue(FLocalizationsHr(), 'DD. MM. YYYY.', old)..value = value;
         expect(controller.value, expected);
       });
     }
@@ -147,9 +152,7 @@ void main() {
       ),
     ].indexed) {
       test('forward - $index', () {
-        controller.value = value;
-        FieldController(controller, FLocalizationsHr()).traverse(forward: true);
-
+        controller = DateFieldController.fromValue(FLocalizationsHr(), '', value)..traverse(forward: true);
         expect(controller.value, expected);
       });
     }
@@ -173,9 +176,7 @@ void main() {
       ),
     ].indexed) {
       test('backward - $index', () {
-        controller.value = value;
-        FieldController(controller, FLocalizationsHr()).traverse(forward: false);
-
+        controller = DateFieldController.fromValue(FLocalizationsHr(), '', value)..traverse(forward: false);
         expect(controller.value, expected);
       });
     }
@@ -204,9 +205,7 @@ void main() {
     ),
   ].indexed) {
     test('adjust - $index', () {
-      controller.value = value;
-      FieldController(controller, FLocalizationsHr()).adjust(adjustment);
-
+      controller = DateFieldController.fromValue(FLocalizationsHr(), '', value)..adjust(adjustment);
       expect(controller.value, expected);
     });
   }
@@ -259,8 +258,8 @@ void main() {
       ),
     ].indexed) {
       test('single separator - $index', () {
-        final updater = FieldController(controller, FLocalizationsEnSg());
-        expect(updater.selectParts(value), expected);
+        controller = DateFieldController.fromValue(FLocalizationsEnSg(), '', null);
+        expect(controller.selectParts(value), expected);
       });
     }
 
@@ -315,8 +314,8 @@ void main() {
       ),
     ].indexed) {
       test('multiple separator - $index', () {
-        final updater = FieldController(controller, FLocalizationsHr());
-        expect(updater.selectParts(value), expected);
+        controller = DateFieldController.fromValue(FLocalizationsHr(), '', null);
+        expect(controller.selectParts(value), expected);
       });
     }
 
@@ -357,8 +356,8 @@ void main() {
       ),
     ].indexed) {
       test('suffix - $index', () {
-        final updater = FieldController(controller, FLocalizationsBg());
-        expect(updater.selectParts(value), expected);
+        controller = DateFieldController.fromValue(FLocalizationsBg(), '', null);
+        expect(controller.selectParts(value), expected);
       });
     }
   });
