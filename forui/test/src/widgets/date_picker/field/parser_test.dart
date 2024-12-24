@@ -238,8 +238,8 @@ void main() {
     (['DD', 'MM', 'YYYY'], 1, -1, ['DD', '12', 'YYYY']),
     (['DD', '01', 'YYYY'], 1, 1, ['DD', '02', 'YYYY']),
     // Years
-    (['DD', 'MM', 'YYYY'], 2, 1, ['DD', 'MM', '0001']),
-    (['DD', 'MM', 'YYYY'], 2, -1, ['DD', 'MM', '9999']),
+    (['DD', 'MM', 'YYYY'], 2, 1, ['DD', 'MM', '2001']),
+    (['DD', 'MM', 'YYYY'], 2, -1, ['DD', 'MM', '1999']),
     (['DD', 'MM', '0001'], 2, 1, ['DD', 'MM', '0002']),
   ].indexed) {
     test('adjust(...) - $index', () => expect(enSG.adjust(parts, selected, adjustment), expected));
@@ -270,9 +270,9 @@ void main() {
   }
 
   for (final (index, (year, adjustment, expected)) in [
-    ('YYYY', 1, '0001'),
-    ('YYYY', 0, '0001'),
-    ('YYYY', -1, '9999'),
+    ('YYYY', 1, '2001'),
+    ('YYYY', 0, '2000'),
+    ('YYYY', -1, '1999'),
     ('9999', 1, '0001'),
     ('0001', -1, '9999'),
     ('2024', 1, '2025'),

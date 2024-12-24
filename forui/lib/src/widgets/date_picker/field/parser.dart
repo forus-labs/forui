@@ -155,8 +155,11 @@ class Parser {
 
   String adjustYear(String value, int adjustment) {
     assert(value.length <= 4, 'year must be at most 4 characters long');
+    if (value == 'YYYY') {
+      return _year.format(2000 + adjustment);
+    }
 
-    final year = (_year.tryParse(value)?.toInt() ?? (adjustment <= 0 ? 1 : 0)) + adjustment;
+    final year = (_year.tryParse(value)?.toInt() ?? 0) + adjustment;
     return _year.format((year - 1) % 9999 + 1);
   }
 }

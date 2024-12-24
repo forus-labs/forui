@@ -13,6 +13,7 @@ const unsupportedLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
 class DateField extends StatefulWidget {
   static Widget _errorBuilder(BuildContext context, String text) => Text(text);
 
+  final FCalendarController<DateTime?> calendarController;
   final FTextFieldStyle? style;
   final Widget? label;
   final Widget? description;
@@ -36,12 +37,11 @@ class DateField extends StatefulWidget {
   final String? forceErrorText;
   final Widget Function(BuildContext, String) errorBuilder;
   final FLocalizations _localizations;
-  final DateTime? _initial;
 
   const DateField({
+    required this.calendarController,
     required this.style,
     required FLocalizations localizations,
-    required DateTime? initialValue,
     this.label,
     this.description,
     this.focusNode,
@@ -64,8 +64,7 @@ class DateField extends StatefulWidget {
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
-  })  : _localizations = localizations,
-        _initial = initialValue;
+  }) : _localizations = localizations;
 
   @override
   State<DateField> createState() => _DateFieldState();
@@ -74,6 +73,7 @@ class DateField extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('calendarController', calendarController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(EnumProperty('textInputAction', textInputAction))
@@ -106,7 +106,7 @@ class _DateFieldState extends State<DateField> {
     super.initState();
     _localizations =
         unsupportedLocales.contains(widget._localizations.localeName) ? FDefaultLocalizations() : widget._localizations;
-    _controller = DateFieldController(_localizations, widget._initial);
+    _controller = DateFieldController(widget.calendarController, _localizations);
   }
 
   @override
@@ -118,9 +118,9 @@ class _DateFieldState extends State<DateField> {
           : widget._localizations;
     }
 
-    if (widget._initial != old._initial) {
+    if (widget.calendarController != old.calendarController) {
       _controller.dispose();
-      _controller = DateFieldController(_localizations, widget._initial);
+      _controller = DateFieldController(widget.calendarController, _localizations);
     }
   }
 
@@ -169,7 +169,9 @@ class _DateFieldState extends State<DateField> {
                   }
 
                   final date = DateFormat.yMd(_localizations.localeName).tryParseStrict(value ?? '');
-                  return date == null ? _localizations.invalidDateFormatLabel : null;
+                  return date == null || !widget.calendarController.selectable(date)
+                      ? _localizations.invalidDateFormatLabel
+                      : null;
                 },
             autovalidateMode: widget.autovalidateMode,
             forceErrorText: widget.forceErrorText,

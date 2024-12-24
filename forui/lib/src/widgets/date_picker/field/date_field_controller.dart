@@ -8,38 +8,44 @@ import 'package:meta/meta.dart';
 @internal
 typedef Select = TextEditingValue Function(TextEditingValue, int first, int last, int end, int separator);
 
-TextEditingValue _first(TextEditingValue value, int first, int last, int end, int separator) =>
+TextEditingValue _first(TextEditingValue value, int first, int _, int __, int ___) =>
     value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
 
-TextEditingValue _middle(TextEditingValue value, int first, int last, int end, int separator) =>
+TextEditingValue _middle(TextEditingValue value, int first, int last, int _, int separator) =>
     value.copyWith(selection: TextSelection(baseOffset: first + separator, extentOffset: last));
 
-TextEditingValue _last(TextEditingValue value, int first, int last, int end, int separator) =>
+TextEditingValue _last(TextEditingValue value, int _, int last, int end, int separator) =>
     value.copyWith(selection: TextSelection(baseOffset: last + separator, extentOffset: end));
 
 @internal
 class DateFieldController extends TextEditingController {
+  final FCalendarController<DateTime?> controller;
   final WidgetStatesController states;
   final String placeholder;
   final FLocalizations _localizations;
   final Parser _parser;
+  final DateFormat _format;
   final RegExp _suffix;
   bool _mutating = false;
 
-  factory DateFieldController(FLocalizations localizations, DateTime? initial) {
+  factory DateFieldController(FCalendarController<DateTime?> controller, FLocalizations localizations) {
     final format = DateFormat.yMd(localizations.localeName);
     final placeholder =
-        format.pattern!.replaceAll(RegExp('d(d+)'), 'DD').replaceAll('M(M+)', 'MM').replaceAll('y', 'YYYY');
-    final text = initial == null ? placeholder : format.format(initial);
-    return DateFieldController.fromValue(localizations, placeholder, TextEditingValue(text: text));
+        format.pattern!.replaceAll(RegExp('d(d+)'), 'DD').replaceAll(RegExp('M(M+)'), 'MM').replaceAll('y', 'YYYY');
+    final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
+
+    return DateFieldController.fromValue(controller, localizations, placeholder, TextEditingValue(text: text));
   }
 
   @visibleForTesting
-  DateFieldController.fromValue(this._localizations, this.placeholder, TextEditingValue? value)
+  DateFieldController.fromValue(this.controller, this._localizations, this.placeholder, TextEditingValue? value)
       : states = WidgetStatesController(),
         _parser = Parser(_localizations.localeName),
+        _format = DateFormat.yMd(_localizations.localeName),
         _suffix = RegExp(RegExp.escape(_localizations.shortDateSuffix) + r'$'),
-        super.fromValue(value);
+        super.fromValue(value) {
+    controller.addListener(update);
+  }
 
   void traverse({required bool forward}) {
     _mutating = true;
@@ -74,34 +80,21 @@ class DateFieldController extends TextEditingController {
       return;
     }
 
+    _mutating = true;
+
+    final current = super.value;
     super.value = switch (value) {
       _ when value.text.isEmpty =>
         TextEditingValue(text: placeholder, selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length)),
       _ when text != value.text => updateParts(value),
       _ => selectParts(value),
     };
-  }
 
-  @override
-  TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
-    if (text == placeholder) {
-      final textFieldStyle = context.theme.textFieldStyle; // TODO: Replace with DatePickerStyle.textField.
-      style = switch (states.value) {
-        // Disabled style
-        final values when values.containsAll(const {WidgetState.disabled, WidgetState.focused}) =>
-          textFieldStyle.disabledStyle.contentTextStyle,
-        final values when values.contains(WidgetState.disabled) => textFieldStyle.disabledStyle.contentTextStyle,
-        // Error styles
-        final values when values.containsAll(const {WidgetState.error, WidgetState.focused}) =>
-          textFieldStyle.errorStyle.contentTextStyle,
-        final values when values.contains(WidgetState.error) => textFieldStyle.errorStyle.contentTextStyle,
-        // Enabled styles
-        final values when values.containsAll({WidgetState.focused}) => textFieldStyle.enabledStyle.contentTextStyle,
-        _ => textFieldStyle.enabledStyle.hintTextStyle,
-      };
+    if (current.text != super.value.text) {
+      controller.value = _format.tryParseStrict(super.value.text, true);
     }
 
-    return super.buildTextSpan(context: context, withComposing: withComposing, style: style);
+    _mutating = false;
   }
 
   @visibleForTesting
@@ -164,5 +157,39 @@ class DateFieldController extends TextEditingController {
     }
 
     return TextEditingValue(text: text, selection: TextSelection(baseOffset: start, extentOffset: end));
+  }
+
+  @visibleForTesting
+  void update() {
+    if (!_mutating) {
+      super.value = TextEditingValue(
+        text: switch (controller.value) {
+          null => placeholder,
+          final value => _localizations.shortDate(value),
+        },
+      );
+    }
+  }
+
+  @override
+  TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
+    if (text == placeholder) {
+      final textFieldStyle = context.theme.textFieldStyle; // TODO: Replace with DatePickerStyle.textField.
+      style = switch (states.value) {
+        // Disabled styles
+        final values when values.containsAll(const {WidgetState.disabled, WidgetState.focused}) =>
+          textFieldStyle.disabledStyle.contentTextStyle,
+        final values when values.contains(WidgetState.disabled) => textFieldStyle.disabledStyle.contentTextStyle,
+        // Error styles
+        final values when values.containsAll(const {WidgetState.error, WidgetState.focused}) =>
+          textFieldStyle.errorStyle.contentTextStyle,
+        final values when values.contains(WidgetState.error) => textFieldStyle.errorStyle.contentTextStyle,
+        // Enabled styles
+        final values when values.containsAll({WidgetState.focused}) => textFieldStyle.enabledStyle.contentTextStyle,
+        _ => textFieldStyle.enabledStyle.hintTextStyle,
+      };
+    }
+
+    return super.buildTextSpan(context: context, withComposing: withComposing, style: style);
   }
 }
