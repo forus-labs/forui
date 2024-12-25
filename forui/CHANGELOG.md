@@ -21,7 +21,11 @@
 
 ### Fixes
 
-* Resolved an issue where `FTappable` remained in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
+* Fix `FCalendar` rebuilding whenever the given `initialType` and/or `initialMonth` changes.
+
+* Fix `FCalendar`'s day picker not updating when a new start and/or end date is given.
+
+* Fix `FTappable` remaining in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
 
 ## 0.8.0
 
