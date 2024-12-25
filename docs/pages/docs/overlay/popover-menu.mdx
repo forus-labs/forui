@@ -108,7 +108,7 @@ const FPopoverMenu(
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
-  hideOnTapOutside: true,
+  hideOnTapOutside: FHidePopoverRegion.anywhere,
   shift: FPortalShift.flip,
   menu: [
     FTileGroup(
@@ -131,7 +131,7 @@ const FPopoverMenu.automatic(
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
-  hideOnTapOutside: true,
+  hideOnTapOutside: FHidePopoverRegion.none,
   shift: FPortalShift.flip,
   menu: [
     FTileGroup(

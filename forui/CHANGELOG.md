@@ -3,9 +3,12 @@
 ### Additions
 
 * Add `FFormProperties`.
+* Add `FPopoverTagRegion`.
 
 ### Changes
 
+* **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`.
+  The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
 * **Breaking:** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
 * **Breaking:** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
 * **Breaking:** Change `FPopover.controller(...)` to `FPopover.popoverController(...)`.

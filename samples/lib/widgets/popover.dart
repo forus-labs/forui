@@ -10,14 +10,14 @@ class PopoverPage extends StatefulWidget {
   final FThemeData theme;
   final Alignment alignment;
   final Axis axis;
-  final bool hideOnTapOutside;
+  final FHidePopoverRegion hideOnTapOutside;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   PopoverPage({
     @queryParam String theme = 'zinc-light',
     @queryParam String alignment = 'center',
     @queryParam String axis = 'vertical',
-    @queryParam String hideOnTapOutside = 'true',
+    @queryParam String hideOnTapOutside = 'anywhere',
     @queryParam String shift = 'flip',
   })  : theme = themes[theme]!,
         alignment = switch (alignment) {
@@ -29,7 +29,11 @@ class PopoverPage extends StatefulWidget {
           'horizontal' => Axis.horizontal,
           _ => Axis.vertical,
         },
-        hideOnTapOutside = bool.tryParse(hideOnTapOutside) ?? true,
+        hideOnTapOutside = switch (hideOnTapOutside) {
+          'anywhere' => FHidePopoverRegion.anywhere,
+          'excludeTarget' => FHidePopoverRegion.excludeTarget,
+          _ => FHidePopoverRegion.none,
+        },
         shift = switch (shift) {
           'flip' => FPortalShift.flip,
           'along' => FPortalShift.along,

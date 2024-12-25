@@ -41,9 +41,9 @@ void main() {
         TestScaffold.app(
           child: FPopover(
             controller: controller,
-            hideOnTapOutside: false,
-            popoverBuilder: (context, style, _) => const Text('popover'),
-            child: FButton(
+            hideOnTapOutside: FHidePopoverRegion.none,
+            followerBuilder: (context, style, _) => const Text('follower'),
+            target: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -62,16 +62,21 @@ void main() {
       expect(find.text('popover'), findsOneWidget);
     });
 
-    testWidgets('tap button when popover is open closes it', (tester) async {
+    testWidgets('tap button when popover is open and FHidePopoverRegion.excludeTarget remains open', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopover(
             controller: controller,
-            hideOnTapOutside: false,
-            popoverBuilder: (context, style, _) => const Text('popover'),
-            child: FButton(
-              onPress: controller.toggle,
-              label: const Text('target'),
+            hideOnTapOutside: FHidePopoverRegion.excludeTarget,
+            followerBuilder: (context, style, _) => const Text('follower'),
+            target: Row(
+              children: [
+                const Text('other'),
+                FButton(
+                  onPress: controller.toggle,
+                  label: const Text('target'),
+                ),
+              ],
             ),
           ),
         ),
@@ -82,10 +87,45 @@ void main() {
 
       expect(find.text('popover'), findsOneWidget);
 
+      await tester.tap(find.text('other'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('follower'), findsOneWidget);
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      expect(find.text('follower'), findsNothing);
+    });
+
+    testWidgets('tap button when popover is open and FHidePopoverRegion.anywhere closes it', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            controller: controller,
+            followerBuilder: (context, style, _) => const Text('follower'),
+            target: Row(
+              children: [
+                const Text('other'),
+                FButton(
+                  onPress: controller.toggle,
+                  label: const Text('target'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
       await tester.tap(find.text('target'));
       await tester.pumpAndSettle();
 
-      expect(find.text('popover'), findsNothing);
+      expect(find.text('follower'), findsOneWidget);
+
+      await tester.tap(find.text('other'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('follower'), findsNothing);
     });
   });
 

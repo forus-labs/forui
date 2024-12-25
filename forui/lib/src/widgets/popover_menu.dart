@@ -55,7 +55,7 @@ class FPopoverMenu extends StatefulWidget {
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final bool hideOnTapOutside;
+  final FHidePopoverRegion hideOnTapOutside;
 
   /// {@macro forui.widgets.FPopover.directionPadding}
   final bool directionPadding;
@@ -94,7 +94,7 @@ class FPopoverMenu extends StatefulWidget {
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
@@ -121,7 +121,7 @@ class FPopoverMenu extends StatefulWidget {
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
@@ -147,7 +147,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('popoverAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
+      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
