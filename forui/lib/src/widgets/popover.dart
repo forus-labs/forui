@@ -63,6 +63,18 @@ final class FPopoverController extends FChangeNotifier {
   }
 }
 
+/// The regions that can be tapped to hide a popover.
+enum FHidePopoverRegion {
+  /// The entire screen, excluding the popover.
+  anywhere,
+
+  /// The entire screen, excluding the target and popover.
+  excludeTarget,
+
+  /// Disables tapping outside of the popover to hide it.
+  none,
+}
+
 /// A popover displays rich content in a portal that is aligned to a target.
 ///
 /// See:
@@ -96,8 +108,8 @@ class FPopover extends StatefulWidget {
   /// See [FPortalFollowerShift] for more information on the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
-  final bool hideOnTapOutside;
+  /// The region that can be tapped to hide the popover.
+  final FHidePopoverRegion hideOnTapOutside;
 
   /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
   ///
@@ -146,7 +158,7 @@ class FPopover extends StatefulWidget {
     required this.target,
     this.style,
     this.shift = FPortalFollowerShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
@@ -169,7 +181,7 @@ class FPopover extends StatefulWidget {
     this.controller,
     this.style,
     this.shift = FPortalFollowerShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
@@ -194,7 +206,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
       ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
+      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
@@ -233,6 +245,22 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     final follower = widget.followerAnchor;
     final target = widget.targetAnchor;
 
+    var child = widget._tappable
+        ? GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: _controller.toggle,
+            child: widget.target,
+          )
+        : widget.target;
+
+    if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
+      child = TapRegion(
+        groupId: _group,
+        onTapOutside: (_) => _controller.hide(),
+        child: child,
+      );
+    }
+
     return FPortal(
       controller: _controller._overlay,
       followerAnchor: widget.followerAnchor,
@@ -256,7 +284,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                   scale: _controller._scale,
                   child: TapRegion(
                     groupId: _group,
-                    onTapOutside: widget.hideOnTapOutside ? (_) => _controller.hide() : null,
+                    onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
                     child: DecoratedBox(
                       decoration: style.decoration,
                       child: widget.followerBuilder(context, style, null),
@@ -268,16 +296,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      child: TapRegion(
-        groupId: _group,
-        child: widget._tappable
-            ? GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: _controller.toggle,
-                child: widget.target,
-              )
-            : widget.target,
-      ),
+      child: child,
     );
   }
 

@@ -1,6 +1,13 @@
 ## 0.9.0 (Next)
 
+###
+
+* Add `FPopoverTagRegion`.
+
 ### Changes
+
+* **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`.
+  The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
 
 * **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
   unfortunately overlooked and did not remove.

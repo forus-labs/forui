@@ -144,9 +144,7 @@ class _State extends State<FCalendar> {
               ),
               ValueListenableBuilder(
                 valueListenable: _type,
-                builder: (context, value, child) {
-                  print(value);
-                  return switch (value) {
+                builder: (context, value, child) => switch (value) {
                     FCalendarPickerType.day => PagedDayPicker(
                         style: style,
                         dayBuilder: widget.dayBuilder,
@@ -175,8 +173,7 @@ class _State extends State<FCalendar> {
                         month: _month,
                         type: _type,
                       ),
-                  };
-                },
+                  },
               ),
             ],
           ),

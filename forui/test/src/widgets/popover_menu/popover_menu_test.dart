@@ -58,7 +58,7 @@ void main() {
         TestScaffold.app(
           child: FPopoverMenu(
             popoverController: controller,
-            hideOnTapOutside: false,
+            hideOnTapOutside: FHidePopoverRegion.none,
             menu: [
               FTileGroup(
                 children: [

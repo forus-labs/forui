@@ -69,8 +69,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// See [FPortalFollowerShift] for more information on the different shifting strategies.
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
-  final bool hideOnTapOutside;
+  /// The region that can be tapped to hide the popover. Defaults to [FHidePopoverRegion.excludeTarget].
+  final FHidePopoverRegion hideOnTapOutside;
 
   /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
   ///
@@ -146,7 +146,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.shift = FPortalFollowerShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.autoHide = false,
     this.label,
@@ -277,7 +277,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.shift = FPortalFollowerShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.autoHide = false,
     this.label,
@@ -397,7 +397,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
+      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
