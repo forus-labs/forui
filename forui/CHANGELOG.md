@@ -5,6 +5,12 @@
 * **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
   unfortunately overlooked and did not remove.
 
+### Fixes
+
+* Fix `FCalendar` rebuilding whenever the given `initialType` and/or `initialMonth` changes.
+
+* Fix `FCalendar`'s day picker not updating when a new start and/or end date is given.
+
 
 ## 0.8.0
 
