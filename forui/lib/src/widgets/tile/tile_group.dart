@@ -467,7 +467,7 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
 ({int index, int length, FTileDivider divider}) extractTileGroup(FTileGroupData? data) => (
       index: data?.index ?? 0,
       length: data?.length ?? 1,
-      divider: data?.divider ?? FTileDivider.full,
+      previous: data?.divider ?? FTileDivider.full,
     );
 
 /// A tile group's data.
