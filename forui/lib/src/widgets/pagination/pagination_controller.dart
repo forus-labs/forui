@@ -9,6 +9,7 @@ class FPaginationController extends FChangeNotifier {
   final Map<int, AnimationController> controllers;
   final Set<int> _expanded;
   final int selected;
+  final int count;
 
   /// Creates a [FAccordionController].
   ///
@@ -93,8 +94,8 @@ class FPaginationController extends FChangeNotifier {
   /// Collapses the item at the given [index], returning true if collapsed.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<bool> collapse(int index) async {
-    if (_expanded.length <= _min || !_expanded.contains(index)) {
+  Future<bool> select(int index) async {
+    if (_expanded.length <= selected || !_expanded.contains(index)) {
       return false;
     }
 
