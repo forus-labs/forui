@@ -45,7 +45,7 @@ class FTileContent extends StatelessWidget {
       (true, false) => FTileDivider.full,
       (true, true) when group.index != group.length - 1 => FTileDivider.full,
       (false, false) => tile.divider,
-      (false, true) when group.index != group.length - 1 => group.divider,
+      (false, true) when group.index != group.length - 1 => group.previous,
       _ => FTileDivider.none,
     };
 

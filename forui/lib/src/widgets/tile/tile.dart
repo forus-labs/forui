@@ -158,7 +158,7 @@ class FTile extends StatelessWidget with FTileMixin {
           ),
           child: FTileData(
             style: style,
-            divider: tile.divider,
+            divider: tile.previous,
             enabled: enabled,
             hovered: data.hovered,
             focused: data.focused,
@@ -202,7 +202,7 @@ class FTile extends StatelessWidget with FTileMixin {
       enabled: data?.enabled ?? true,
       index: data?.index ?? 0,
       last: data?.last ?? true,
-      divider: data?.divider ?? FTileDivider.indented,
+      previous: data?.divider ?? FTileDivider.indented,
     );
 
 /// A tile's data.
