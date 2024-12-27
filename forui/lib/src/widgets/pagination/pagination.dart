@@ -18,8 +18,6 @@ final class FPagination extends StatefulWidget {
 
   final FPaginationController? controller;
 
-  final int displayed;
-
   /// The previous button placed in the beginning of the pagination.
   ///
   /// Defaults to an `FAssets.icons.chevronRight` icon.
@@ -32,8 +30,7 @@ final class FPagination extends StatefulWidget {
 
   /// Creates an [FPagination].
   const FPagination({
-    required this.controller,
-    required this.displayed,
+    this.controller,
     this.style,
     this.previous,
     this.next,
@@ -68,139 +65,180 @@ class _FPaginationState extends State<FPagination> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? FTheme.of(context).paginationStyle;
+    final style = widget.style ?? context.theme.paginationStyle;
     final previous = widget.previous != null
         ? FIconStyleData(
             style: style.iconStyle,
             child: widget.previous!,
           )
-        : FButton(
-            onPress: () {},
-            label: const Text('Previous'),
-            prefix: FIcon(
-              FAssets.icons.chevronLeft,
-              color: style.iconStyle.color,
-              size: style.iconStyle.size,
-            ),
-          );
+        : _Action.previous(style: style, onPress: _controller.previous);
     final next = widget.next != null
         ? FIconStyleData(
             style: style.iconStyle,
             child: widget.next!,
           )
-        : FButton(
-            onPress: () {},
-            label: const Text('Next'),
-            prefix: FIcon(
-              FAssets.icons.chevronRight,
-              color: style.iconStyle.color,
-              size: style.iconStyle.size,
-            ),
-          );
+        : _Action.next(style: style, onPress: _controller.next);
+
     return Row(
       children: [
         Padding(
-          padding: style.padding,
+          padding: style.itemPadding,
           child: previous,
         ),
         for (int i = 0; i < _controller.count; i++)
-          FPaginationData(
+          FPaginationItemData(
+            index: i,
             style: style,
-            child: _Page(
-              current: i == _controller.selected,
-              child: Text('$i'),
+            controller: _controller,
+            child: Padding(
+              padding: style.itemPadding,
+              child: const _Page(),
             ),
           ),
         Padding(
-          padding: style.padding,
+          padding: style.itemPadding,
           child: next,
         ),
       ],
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-  }
 }
 
-/// The [FBreadcrumbItem] data.
-class FPaginationData extends InheritedWidget {
-  /// Returns the [FPaginationData] of the [FPagination] in the given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FPagination] in the given [context].
+@internal
+class FPaginationItemData extends InheritedWidget {
   @useResult
-  static FPaginationData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FPaginationData>();
-    assert(data != null, 'No FPaginationData found in context');
+  static FPaginationItemData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<FPaginationItemData>();
+    assert(data != null, 'No FPaginationItemData found in context.');
     return data!;
   }
 
-  /// The pagination's style.
+  final int index;
+  final FPaginationController controller;
   final FPaginationStyle style;
 
-  /// Creates a [FPaginationData].
-  const FPaginationData({
+  const FPaginationItemData({
+    required this.index,
+    required this.controller,
     required this.style,
     required super.child,
     super.key,
   });
 
   @override
-  bool updateShouldNotify(FPaginationData oldWidget) => style != oldWidget.style;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
-  }
-}
-
-class _Page extends StatelessWidget {
-  final bool current;
-  final VoidCallback? onPress;
-  final Widget child;
-
-  const _Page({
-    required this.child,
-    this.onPress,
-    this.current = false,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final style = FPaginationData.of(context).style;
-    final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
-
-    return FTappable(
-      focusedOutlineStyle: focusedOutlineStyle,
-      onPress: onPress,
-      builder: (context, data, child) => Container(
-        decoration: switch ((current, data.hovered)) {
-          (false, false) => style.unselectedDecoration,
-          (false, true) => style.hoveredDecoration,
-          (true, true) => style.hoveredDecoration,
-          (true, false) => style.selectedDecoration,
-        },
-        padding: style.padding,
-        child: DefaultTextStyle(
-          style: style.textStyle,
-          child: child!,
-        ),
-      ),
-      child: child,
-    );
-  }
+  bool updateShouldNotify(covariant FPaginationItemData old) =>
+      index != old.index || controller != old.controller || style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('current', value: current, ifTrue: 'current'))
-      ..add(ObjectFlagProperty.has('onPress', onPress));
+      ..add(IntProperty('index', index))
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style));
+  }
+}
+
+class _Action extends StatelessWidget {
+  final VoidCallback onPress;
+  final FPaginationStyle style;
+  final Widget child;
+
+  const _Action({
+    required this.onPress,
+    required this.style,
+    required this.child,
+  });
+
+  factory _Action.previous({
+    required VoidCallback onPress,
+    required FPaginationStyle style,
+  }) =>
+      _Action(
+        onPress: onPress,
+        style: style,
+        child: Row(
+          children: [
+            FIcon(
+              FAssets.icons.chevronLeft,
+              color: style.iconStyle.color,
+              size: style.iconStyle.size,
+            ),
+            const SizedBox(width: 3),
+            Text(
+              'Previous',
+              style: style.textStyle,
+            ),
+          ],
+        ),
+      );
+
+  factory _Action.next({
+    required VoidCallback onPress,
+    required FPaginationStyle style,
+  }) =>
+      _Action(
+        onPress: onPress,
+        style: style,
+        child: Row(
+          children: [
+            Text(
+              'Next',
+              style: style.textStyle,
+            ),
+            const SizedBox(width: 3),
+            FIcon(
+              FAssets.icons.chevronRight,
+              color: style.iconStyle.color,
+              size: style.iconStyle.size,
+            ),
+          ],
+        ),
+      );
+
+  @override
+  Widget build(BuildContext context) => FTappable(
+        onPress: onPress,
+        builder: (context, tappableData, child) => Container(
+          decoration: switch (tappableData.hovered) {
+            (false) => style.unselectedDecoration,
+            (true) => style.hoveredDecoration,
+          },
+          padding: style.contentPadding,
+          child: child,
+        ),
+        child: child,
+      );
+}
+
+class _Page extends StatelessWidget {
+  const _Page();
+
+  @override
+  Widget build(BuildContext context) {
+    final data = FPaginationItemData.of(context);
+    final current = data.index == data.controller.value;
+    final style = FPaginationItemData.of(context).style;
+    final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
+
+    return FTappable(
+      focusedOutlineStyle: focusedOutlineStyle,
+      onPress: () => data.controller.select(data.index),
+      builder: (context, tappableData, child) => Container(
+        decoration: switch ((current, tappableData.hovered)) {
+          (false, false) => style.unselectedDecoration,
+          (false, true) => style.hoveredDecoration,
+          (true, true) => style.selectedHoveredDecoration,
+          (true, false) => style.selectedDecoration,
+        },
+        padding: style.contentPadding,
+        child: DefaultTextStyle(
+          style: style.textStyle,
+          child: child!,
+        ),
+      ),
+      child: Text('${data.index}'),
+    );
   }
 }
 
@@ -215,11 +253,19 @@ final class FPaginationStyle with Diagnosticable {
   /// The hovered page [BoxDecoration].
   final BoxDecoration hoveredDecoration;
 
+  /// The hovered selected page [BoxDecoration].
+  final BoxDecoration selectedHoveredDecoration;
+
   /// The icon style.
   final FIconStyle iconStyle;
 
-  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
-  final EdgeInsets padding;
+  /// The padding around a page item. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
+  final EdgeInsets contentPadding;
+
+  /// The padding around an action button. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
+  final EdgeInsets itemPadding;
+
+  final double spacing;
 
   /// The text style.
   final TextStyle textStyle;
@@ -229,9 +275,12 @@ final class FPaginationStyle with Diagnosticable {
     required this.selectedDecoration,
     required this.unselectedDecoration,
     required this.hoveredDecoration,
+    required this.selectedHoveredDecoration,
     required this.iconStyle,
     required this.textStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
+    this.spacing = 5,
   });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
@@ -239,22 +288,28 @@ final class FPaginationStyle with Diagnosticable {
       : this(
           selectedDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.foreground,
+            color: colorScheme.background,
             border: Border.all(
               color: colorScheme.mutedForeground,
-              width: 2,
             ),
           ),
           unselectedDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.foreground,
+            color: colorScheme.background,
           ),
           hoveredDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.mutedForeground,
+            color: colorScheme.border,
           ),
-          textStyle: typography.base.copyWith(color: colorScheme.primary),
-          iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
+          selectedHoveredDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.border,
+            border: Border.all(
+              color: colorScheme.mutedForeground,
+            ),
+          ),
+          textStyle: typography.sm.copyWith(color: colorScheme.primary),
+          iconStyle: FIconStyle(color: colorScheme.primary, size: 16),
         );
 
   /// Returns a copy of this [FPaginationStyle] with the given properties replaced.
@@ -263,17 +318,23 @@ final class FPaginationStyle with Diagnosticable {
     BoxDecoration? selectedDecoration,
     BoxDecoration? unselectedDecoration,
     BoxDecoration? hoveredDecoration,
+    BoxDecoration? selectedHoveredDecoration,
     TextStyle? textStyle,
     FIconStyle? iconStyle,
-    EdgeInsets? padding,
+    EdgeInsets? itemPadding,
+    EdgeInsets? actionPadding,
+    double? spacing,
   }) =>
       FPaginationStyle(
         selectedDecoration: selectedDecoration ?? this.selectedDecoration,
         unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
         hoveredDecoration: hoveredDecoration ?? this.hoveredDecoration,
+        selectedHoveredDecoration: selectedHoveredDecoration ?? this.selectedHoveredDecoration,
         textStyle: textStyle ?? this.textStyle,
         iconStyle: iconStyle ?? this.iconStyle,
-        padding: padding ?? this.padding,
+        contentPadding: itemPadding ?? this.contentPadding,
+        itemPadding: actionPadding ?? this.itemPadding,
+        spacing: spacing ?? this.spacing,
       );
 
   @override
@@ -283,9 +344,13 @@ final class FPaginationStyle with Diagnosticable {
       ..add(DiagnosticsProperty('selectedDecoration', selectedDecoration))
       ..add(DiagnosticsProperty('unselectedDecoration', unselectedDecoration))
       ..add(DiagnosticsProperty('hoveredDecoration', hoveredDecoration))
+      ..add(DiagnosticsProperty('selectedHoveredDecoration', selectedHoveredDecoration))
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('padding', padding));
+      ..add(DiagnosticsProperty('itemPadding', contentPadding))
+      ..add(DiagnosticsProperty('actionPadding', itemPadding))
+      ..add(DoubleProperty('spacing', spacing));
+    ;
   }
 
   @override
@@ -296,16 +361,22 @@ final class FPaginationStyle with Diagnosticable {
           selectedDecoration == other.selectedDecoration &&
           unselectedDecoration == other.unselectedDecoration &&
           hoveredDecoration == other.hoveredDecoration &&
+          selectedHoveredDecoration == other.selectedHoveredDecoration &&
           textStyle == other.textStyle &&
           iconStyle == other.iconStyle &&
-          padding == other.padding;
+          contentPadding == other.contentPadding &&
+          itemPadding == other.itemPadding &&
+          spacing == other.spacing;
 
   @override
   int get hashCode =>
       selectedDecoration.hashCode ^
       unselectedDecoration.hashCode ^
       hoveredDecoration.hashCode ^
+      selectedHoveredDecoration.hashCode ^
       textStyle.hashCode ^
       iconStyle.hashCode ^
-      padding.hashCode;
+      contentPadding.hashCode ^
+      itemPadding.hashCode ^
+      spacing.hashCode;
 }
