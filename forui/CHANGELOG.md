@@ -1,3 +1,11 @@
+## 0.9.0 (Next)
+
+### Changes
+
+* **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
+  unfortunately overlooked and did not remove.
+
+
 ## 0.8.0
 
 Bump minimum Flutter version to 3.27.0.
