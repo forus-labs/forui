@@ -35,9 +35,6 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// The current value.
   final T value;
 
-  /// Called when the user initiates a change to the [FSelectTile]'s value: when they have checked or unchecked this tile.
-  final ValueChanged<bool>? onChange;
-
   /// Whether this radio tile is enabled. Defaults to true.
   final bool? enabled;
 
@@ -64,7 +61,6 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.subtitle,
     this.details,
     this.semanticLabel,
-    this.onChange,
     this.enabled,
     this.autofocus = false,
     this.focusNode,
@@ -86,7 +82,6 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.subtitle,
     this.details,
     this.semanticLabel,
-    this.onChange,
     this.enabled,
     this.autofocus = false,
     this.focusNode,
@@ -137,7 +132,6 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
