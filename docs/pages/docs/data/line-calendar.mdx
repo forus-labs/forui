@@ -8,7 +8,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A line calendar displays dates in a single horizontal, scrollable line.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/forui.widgets.line-calendar-library.html"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
@@ -20,7 +20,7 @@ A line calendar displays dates in a single horizontal, scrollable line.
         <Widget name='line-calendar' query={{}} height={200}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         FLineCalendar(
           controller: FCalendarController.date(
             initialSelection: DateTime.now().subtract(const Duration(days: 1)),
@@ -34,7 +34,7 @@ A line calendar displays dates in a single horizontal, scrollable line.
 
 ### `FLineCalendar(...)`
 
-```dart
+```dart copy
 FLineCalendar(
   controller: FCalendarController.date(),
   initialDateAlignment: AlignmentDirectional.center,

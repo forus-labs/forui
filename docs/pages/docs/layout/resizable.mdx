@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A box which children can be resized along either the horizontal or vertical axis.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.resizable/forui.widgets.resizable-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.resizable/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A box which children can be resized along either the horizontal or vertical axis
     <Widget name='resizable' query={{}} height={700}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     class TimeOfDay extends StatelessWidget {
       @override
       Widget build(BuildContext context) => DecoratedBox(
@@ -100,7 +100,7 @@ A box which children can be resized along either the horizontal or vertical axis
 
 ### `FResizable(...)`
 
-```dart
+```dart copy
 FResizable(
   controller: FResizableController.cascade(
     onResizeUpdate: (regions) => print(regions),
@@ -129,7 +129,7 @@ FResizable(
     <Widget name='resizable' variant='no-cascading' query={{}} height={700}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {10}
+    ```dart {10} copy
     class TimeOfDay extends StatelessWidget {
       @override
       Widget build(BuildContext context) => DecoratedBox(
@@ -218,7 +218,7 @@ FResizable(
     <Widget name='resizable' variant='horizontal' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {7}
+    ```dart {7} copy
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colorScheme.border),
@@ -256,7 +256,7 @@ FResizable(
     <Widget name='resizable' variant='no-thumb' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8}
+    ```dart {8} copy
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colorScheme.border),
@@ -295,7 +295,7 @@ FResizable(
     <Widget name='resizable' variant='no-divider' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8}
+    ```dart {8} copy
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colorScheme.border),

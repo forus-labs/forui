@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A modal dialog interrupts the user with important content and expects a response.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.dialog/forui.widgets.dialog-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.dialog"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A modal dialog interrupts the user with important content and expects a response
     <Widget name='dialog' query={{vertical: "false"}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -46,7 +46,7 @@ A modal dialog interrupts the user with important content and expects a response
 
 ### `FDialog(...)`
 
-```dart
+```dart copy
 FDialog(
   direction: Axis.horizontal,
   title: const Text('Are you absolutely sure?'),
@@ -60,7 +60,7 @@ FDialog(
 
 ### `FDialog.adaptive(...)`
 
-```dart
+```dart copy
 FDialog.adaptive(
   title: const Text('Are you absolutely sure?'),
   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
@@ -73,7 +73,7 @@ FDialog.adaptive(
 
 ### `FDialog.raw(...)`
 
-```dart
+```dart copy
 FDialog.raw(
   child: const Placeholder(),
 );
@@ -87,7 +87,7 @@ FDialog.raw(
     <Widget name='dialog' query={{vertical: "false"}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {10}
+    ```dart {10} copy
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -123,7 +123,7 @@ We recommend using the vertical layout on mobile devices.
     <Widget name='dialog' query={{vertical: "true"}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {10}
+      ```dart {10} copy
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

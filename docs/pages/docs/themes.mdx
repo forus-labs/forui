@@ -22,7 +22,7 @@ Our theming solution is designed to help you get started quickly while offering 
     Forui does not manage the theme brightness (light or dark) automatically.
     You need to specify the theme explicitly in `FTheme(...)`.
 
-    ```dart filename="main.dart" {3}
+    ```dart filename="main.dart" {3} copy
     @override
     Widget build(BuildContext context) => FTheme(
           data: FThemes.zinc.light, // or FThemes.zinc.dark
@@ -53,7 +53,7 @@ The color schemes are heavily inspired by [shadcn/ui themes](https://ui.shadcn.c
 [`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) to all widgets in the subtree.
 Forui provides an extension on `BuildContext` which allows for direct access to `FThemeData` through `context.theme`.
 
-```dart {3-6}
+```dart {3-6} copy
 @override
 Widget build(BuildContext context) {
   final theme = context.theme; // FThemeData
@@ -80,7 +80,7 @@ It's recommended to use the predefined themes as a starting point and customize 
 [`inherit(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/FThemeData.inherit.html) constructor
 and [`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html) method to suit your needs.
 
-```dart filename="main.dart" {3-14, 17-23}
+```dart filename="main.dart" {3-14, 17-23} copy
 @override
 Widget build(BuildContext context) {
   final theme = FThemeData.inherit(
@@ -120,7 +120,7 @@ The example above uses `FThemes.zinc.light` theme as a starting point and custom
     It's important to use the newly created `theme` instead of `FThemes.zinc.light`. This allows `colorScheme`,
     `typography`, and `style` to be inherited by widget-specific themes.
 
-    ```dart {3-4}
+    ```dart {3-4} copy
     return FTheme(
       data: theme.copyWith(
         cardStyle: theme.cardStyle.copyWith(
@@ -183,7 +183,7 @@ This usually consist of a set of colors with its corresponding foreground color 
 
 In most cases, the color will be used as the background color, and the foreground color will be used as the text/icon color.
 
-```dart {3, 6-14}
+```dart {3, 6-14} copy
 @override
 Widget build(BuildContext context) {
   final colorScheme = context.theme.colorScheme;
@@ -219,7 +219,7 @@ This includes the default font family and various `TextStyle`s for different use
 
 It is recommended to use the `copyWith(...)` to apply colors and other styles as the `TextStyle`s stored only contain the `fontSize` and `height` properties.
 
-```dart {4, 8-12}
+```dart {4, 8-12} copy
 @override
 Widget build(BuildContext context) {
   final colorScheme = context.theme.colorScheme;
@@ -242,7 +242,7 @@ Widget build(BuildContext context) {
 To change the default font family, use the `copyWith(...)` method to apply the new font family.
 As some fonts may have different sizes, the `scale(...)` method is provided to quickly scale all the font sizes.
 
-```dart filename="main.dart" {4-6}
+```dart filename="main.dart" {4-6} copy
 @override
 Widget build(BuildContext context) => FTheme(
       data: FThemes.zinc.light.copyWith(
@@ -259,7 +259,7 @@ Widget build(BuildContext context) => FTheme(
 
 The `FStyle` class contains other miscellaneous styling options for the theme.
 
-```dart {4, 7-14}
+```dart {4, 7-14} copy
 @override
 Widget build(BuildContext context) {
   final colorScheme = context.theme.colorScheme;
@@ -290,7 +290,7 @@ This can be easily achieved by using the `style(...)` parameter.
     `FCard` widgets that are used elsewhere will still inherit from theme data.
 </Callout>
 
-```dart filename="main.dart" {8-12}
+```dart filename="main.dart" {8-12} copy
 @override
 Widget build(BuildContext context) {
   final theme = context.theme;

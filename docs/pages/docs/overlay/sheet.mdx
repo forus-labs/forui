@@ -9,7 +9,7 @@ A modal sheet is an alternative to a menu or a dialog and prevents the user from
 It navigates to a new page each time.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/forui.widgets.sheet-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
@@ -22,7 +22,7 @@ It navigates to a new page each time.
     <Widget name='modal-sheet' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     class ModalSheet extends StatelessWidget {
       @override
       Widget build(BuildContext context) => Column(
@@ -140,7 +140,7 @@ It navigates to a new page each time.
 
 ### `showFSheet(...)`
 
-```dart
+```dart copy
 showFSheet(
   context: context,
   side: Layout.ltr,
@@ -163,10 +163,10 @@ showFSheet(
     <Widget name='modal-sheet' query={{}} height={400} variant='draggable'/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {9-22}
+    ```dart {9-22} copy
     FButton(
       label: const Text('Click me'),
-      onPress: () => showFModalSheet(
+      onPress: () => showFSheet(
         context: context,
         side: Layout.btt,
         mainAxisMaxRatio: null,

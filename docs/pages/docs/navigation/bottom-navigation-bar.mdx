@@ -9,7 +9,7 @@ A bottom navigation bar is usually present at the bottom of root pages.
 It is used to navigate between a small number of views, typically between three and five.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/forui.widgets.bottom_navigation_bar-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -17,7 +17,7 @@ It is used to navigate between a small number of views, typically between three 
         <Widget name='bottom-navigation-bar' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-      ```dart
+      ```dart copy
       class Application extends StatefulWidget {
         const Application({super.key});
 
@@ -68,7 +68,7 @@ It is used to navigate between a small number of views, typically between three 
 
 ### `FBottomNavigationBar(...)`
 
-```dart
+```dart copy
 FBottomNavigationBar(
     index: 0,
     onChange: (index) => {},

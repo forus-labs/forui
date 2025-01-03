@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A card, typically with a title, subtitle, and child widget.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.card/forui.widgets.card-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.card/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A card, typically with a title, subtitle, and child widget.
       <Widget name='card' query={{}}  height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart
+      ```dart copy
       FCard(
         image: Container(
           decoration: BoxDecoration(
@@ -37,7 +37,7 @@ A card, typically with a title, subtitle, and child widget.
 
 ### `FCard(...)`
 
-```dart
+```dart copy
 FCard(
   title: const Text('Notification'),
   subtitle: const Text('You have 3 unread messages.'),
@@ -47,7 +47,7 @@ FCard(
 
 ### `FCard.raw(...)`
 
-```dart
+```dart copy
 FCard.raw(
   child: const Placeholder(),
 );

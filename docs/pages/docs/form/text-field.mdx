@@ -8,7 +8,7 @@ A text field lets the user enter text, either with hardware keyboard or with an 
 in a form.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.text_field/forui.widgets.text_field-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.text_field/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -16,7 +16,7 @@ in a form.
     <Widget name='text-field' query={{enabled: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {9, 18, 23-29}
+    ```dart {9, 18, 23-29} copy
     class DefaultTextField extends StatefulWidget {
       const DefaultTextField({super.key});
 
@@ -55,7 +55,7 @@ in a form.
 
 ### `FTextField(...)`
 
-```dart
+```dart copy
 FTextField(
   controller: _controller, // TextEditingController
   enabled: true,
@@ -80,7 +80,7 @@ FTextField(
     <Widget name='text-field' query={{enabled: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTextField(
       controller: _controller, // TextEditingController
       label: const Text('Username'),
@@ -100,7 +100,7 @@ FTextField(
     <Widget name='text-field' query={{enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3}
+    ```dart {3} copy
     FTextField(
       controller: _controller, // TextEditingController
       label: const Text('Username'),
@@ -121,7 +121,7 @@ FTextField(
     <Widget name='text-field' variant='email' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTextField.email(
       initialValue: 'jane@doe.com',
       controller: _controller, // TextEditingController
@@ -137,7 +137,7 @@ FTextField(
     <Widget name='text-field' variant='password' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTextField.password(
       controller: _controller, // TextEditingController
     );
@@ -152,7 +152,7 @@ FTextField(
     <Widget name='text-field' variant='multiline' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTextField.multiline(
       controller: _controller, // TextEditingController
       label: const Text('Leave a review'),
@@ -170,7 +170,7 @@ FTextField(
     <Widget name='text-field' variant='form' height={550} query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {9-11, 20-21, 26-27, 31-36, 38-42, 46-52}
+    ```dart {9-11, 20-21, 26-27, 31-36, 38-42, 46-52} copy
     class LoginForm extends StatefulWidget {
       const LoginForm({super.key});
 

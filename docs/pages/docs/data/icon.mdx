@@ -8,7 +8,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 An icon that inherits its style from an enclosing, supported widget, such as a [button](/docs/form/button).
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.icon/forui.widgets.icon-library.html"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.icon/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -16,7 +16,7 @@ An icon that inherits its style from an enclosing, supported widget, such as a [
     <Widget name='icon' variant='comparison' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     Row(
       children: [
         FButton.icon(
@@ -41,7 +41,7 @@ An icon that inherits its style from an enclosing, supported widget, such as a [
 
 ### `FIcon(...)`
 
-```dart
+```dart copy
 FIcon(
   FAssets.icons.bird,
   color: Colors.red,
@@ -57,7 +57,7 @@ FIcon(
     `IconData`s.
 </Callout>
 
-```dart
+```dart copy
 FIcon.data(
   Icons.abc,
   color: Colors.red,
@@ -73,7 +73,7 @@ FIcon.data(
     completely filled with a single color.
 </Callout>
 
-```dart
+```dart copy
 FIcon.image(
   NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
   color: Colors.red,
@@ -84,7 +84,7 @@ FIcon.image(
 
 ### `FIcon.raw(...)`
 
-```dart
+```dart copy
 FIcon.raw(
   builder: (context, style, child) => Container(
     color: style.color,
@@ -105,7 +105,7 @@ FIcon.raw(
     <Widget name='icon'  query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3}
+    ```dart {3} copy
     FButton.icon(
       style: FButtonStyle.secondary,
       child: FIcon(FAssets.icons.wifi),
@@ -124,7 +124,7 @@ FIcon.raw(
     <Widget name='icon'  query={{variant: 'data'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3}
+    ```dart {3} copy
     FButton.icon(
       style: FButtonStyle.secondary,
       child: const FIcon.data(Icons.wifi),
@@ -141,7 +141,7 @@ FIcon.raw(
     <Widget name='icon' variant='image'/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {7, 14}
+    ```dart {7, 14} copy
     Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -171,7 +171,7 @@ FIcon.raw(
     <Widget name='icon'  variant='custom' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {24-35}
+    ```dart {24-35} copy
     class _Example extends StatefulWidget {
       @override
       State<_Example> createState() => _ExampleState();

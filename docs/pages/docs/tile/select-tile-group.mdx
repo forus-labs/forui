@@ -8,7 +8,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A group of tiles that allow users to make a selection from a set of options.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/forui.widgets.select-tile-group-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select_tile/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
@@ -20,7 +20,7 @@ A group of tiles that allow users to make a selection from a set of options.
     <Widget name='select-tile-group' variant='default' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(
@@ -53,7 +53,7 @@ A group of tiles that allow users to make a selection from a set of options.
 
 ### `FSelectTileGroup(...)`
 
-```dart
+```dart copy
 FSelectTileGroup<Value>(
   groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
   scrollController: ScrollController(),
@@ -74,7 +74,7 @@ FSelectTileGroup<Value>(
 
 ### `FTileGroup.builder(...)`
 
-```dart
+```dart copy
 FSelectTileGroup<Value>.builder(
   groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
   scrollController: ScrollController(),
@@ -104,7 +104,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='scrollable' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {5}
+    ```dart {5} copy
     FSelectTileGroup(
       groupController: FMultiSelectGroupController(values: {Sidebar.recents}),
       label: const Text('Settings'),
@@ -139,7 +139,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='lazy' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {1, 5-11}
+    ```dart {1, 5-11} copy
     FSelectTileGroup.builder(
       groupController: FMultiSelectGroupController(values: {1}),
       label: const Text('Settings'),
@@ -164,7 +164,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='multi-value' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     enum Language { dart, java, rust, python }
 
     class MultiValueForm extends StatefulWidget {
@@ -230,7 +230,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='radio' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     enum Notification { all, direct, nothing }
 
     class RadioForm extends StatefulWidget {
@@ -307,7 +307,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='suffix' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4, 9}
+    ```dart {4, 9} copy
     FSelectTileGroup(
       controller: FRadioSelectGroupController(),
       label: const Text('Settings'),
@@ -335,7 +335,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='default' query={{divider: 'full'}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {5}
+    ```dart {5} copy
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(
@@ -372,7 +372,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='default' query={{divider: 'none'}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {5}
+    ```dart {5} copy
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(

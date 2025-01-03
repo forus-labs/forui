@@ -16,6 +16,7 @@ class CheckboxPage extends StatefulSample {
     @queryParam this.initialValue = false,
     @queryParam this.enabled = true,
     @queryParam this.error,
+    super.maxWidth = 320,
   });
 
   @override
@@ -32,18 +33,15 @@ class _CheckboxState extends StatefulSampleState<CheckboxPage> {
   }
 
   @override
-  Widget sample(BuildContext context) => ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 290),
-        child: FCheckbox(
-          label: const Text('Accept terms and conditions'),
-          description: const Text('You agree to our terms and conditions.'),
-          error: widget.error != null ? Text(widget.error!) : null,
-          semanticLabel: 'Accept terms and conditions',
-          value: state,
-          onChange: (value) => setState(() => state = value),
-          enabled: widget.enabled,
-        ),
-      );
+  Widget sample(BuildContext context) => FCheckbox(
+    label: const Text('Accept terms and conditions'),
+    description: const Text('You agree to our terms and conditions.'),
+    error: widget.error != null ? Text(widget.error!) : null,
+    semanticLabel: 'Accept terms and conditions',
+    value: state,
+    onChange: (value) => setState(() => state = value),
+    enabled: widget.enabled,
+  );
 }
 
 @RoutePage()

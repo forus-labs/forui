@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A control that allows the user to toggle between checked and not checked.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/forui.widgets.checkbox-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/"/>
 </LinkBadgeGroup>
 
 <div className="pb-5">
@@ -25,7 +25,7 @@ A control that allows the user to toggle between checked and not checked.
         <Widget name='checkbox' query={{enabled: 'true'}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {12-18}
+        ```dart {12-18} copy
         class Page extends StatefulWidget {
           const Page({super.key});
 
@@ -53,7 +53,7 @@ A control that allows the user to toggle between checked and not checked.
 
 ### `FCheckbox(...)`
 
-```dart
+```dart copy
 FCheckbox(
   label: const Text('Accept terms and conditions'),
   description: const Text('You agree to our terms and conditions.'),
@@ -75,7 +75,7 @@ FCheckbox(
     <Widget name='checkbox' query={{initialValue: 'true', enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {18}
+    ```dart {18} copy
     class Page extends StatefulWidget {
       const Page({super.key});
 
@@ -107,7 +107,7 @@ FCheckbox(
     <Widget name='checkbox' query={{ error: 'Please accept the terms and conditions.' }}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {15}
+    ```dart {15} copy
     class Page extends StatefulWidget {
       const Page({super.key});
 
@@ -139,7 +139,7 @@ FCheckbox(
         <Widget name='checkbox' variant='raw' query={{ }}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {12-17}
+        ```dart {12-17} copy
         class Page extends StatefulWidget {
           const Page({super.key});
 
@@ -169,7 +169,7 @@ FCheckbox(
     <Widget name='checkbox' variant='form' query={{}} height={550}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {27-40}
+    ```dart {27-40} copy
     class RegisterForm extends StatefulWidget {
       const RegisterForm({super.key});
 

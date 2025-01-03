@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.progress/forui.widgets.progress-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.progress/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ Displays an indicator showing the completion progress of a task, typically displ
     <Widget name='progress'/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     class Progress extends StatefulWidget {
       @override
       State<Progress> createState() => ProgressState();
@@ -44,6 +44,6 @@ Displays an indicator showing the completion progress of a task, typically displ
 
 ### `FProgress(...)`
 
-```dart
+```dart copy
 FProgress(value: 0.6);
 ```

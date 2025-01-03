@@ -12,6 +12,7 @@ class VerticalLabelPage extends Sample {
   VerticalLabelPage({
     @queryParam super.theme,
     @queryParam this.state = 'enabled',
+    super.maxWidth = 320,
   });
 
   @override
@@ -23,21 +24,18 @@ class VerticalLabelPage extends Sample {
       String() => FLabelState.enabled,
     };
 
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 290),
-      child: FLabel(
-        axis: Axis.vertical,
-        label: const Text('Email'),
-        description: const Text('Enter your email address.'),
-        error: const Text('Please enter a valid email address.'),
-        state: labelState,
-        child: const DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.grey,
-          ),
-          child: SizedBox(width: 250, height: 30),
+    return FLabel(
+      axis: Axis.vertical,
+      label: const Text('Email'),
+      description: const Text('Enter your email address.'),
+      error: const Text('Please enter a valid email address.'),
+      state: labelState,
+      child: const DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          color: Colors.grey,
         ),
+        child: SizedBox(width: 250, height: 30),
       ),
     );
   }
@@ -50,6 +48,7 @@ class HorizontalLabelPage extends Sample {
   HorizontalLabelPage({
     @queryParam super.theme,
     @queryParam this.state = 'enabled',
+    super.maxWidth = 320,
   });
 
   @override
@@ -61,21 +60,18 @@ class HorizontalLabelPage extends Sample {
       String() => FLabelState.enabled,
     };
 
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 290),
-      child: FLabel(
-        axis: Axis.horizontal,
-        label: const Text('Accept terms and conditions'),
-        description: const Text('You agree to our terms and conditions.'),
-        error: const Text('Please accept the terms.'),
-        state: labelState,
-        child: const DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.grey,
-          ),
-          child: SizedBox(width: 16, height: 16),
+    return FLabel(
+      axis: Axis.horizontal,
+      label: const Text('Accept terms and conditions'),
+      description: const Text('You agree to our terms and conditions.'),
+      error: const Text('Please accept the terms.'),
+      state: labelState,
+      child: const DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          color: Colors.grey,
         ),
+        child: SizedBox(width: 16, height: 16),
       ),
     );
   }

@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 Displays a callout for user attention.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.alert/forui.widgets.alert-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.alert/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ Displays a callout for user attention.
     <Widget name='alert' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FAlert(
       title: const Text('Heads Up!'),
       subtitle: const Text('You can add components to your app using the cli.'),
@@ -28,7 +28,7 @@ Displays a callout for user attention.
 
 ### `FAlert(...)`
 
-```dart
+```dart copy
 FAlert(
   icon: FIcon(FAssets.icons.badgeAlert),
   title: const Text('Heads Up!'),
@@ -44,7 +44,7 @@ FAlert(
     <Widget name='alert' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FAlert(
       title: const Text('Heads Up!'),
       subtitle: const Text('You can add components to your app using the cli.'),
@@ -59,7 +59,7 @@ FAlert(
     <Widget name='alert' query={{style: 'destructive'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4}
+    ```dart {4} copy
     FAlert(
       title: const Text('Heads Up!'),
       subtitle: const Text('You can add components to your app using the cli.'),

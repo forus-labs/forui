@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A group of items that allow users to make a selection from a set of options.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select-group/forui.widgets.select-group-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select_group/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
@@ -19,7 +19,7 @@ A group of items that allow users to make a selection from a set of options.
     <Widget name='select-group' variant='default' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     enum Sidebar { recents, home, applications }
 
     FSelectGroup<Sidebar>(
@@ -49,7 +49,7 @@ A group of items that allow users to make a selection from a set of options.
 
 ### `FSelectGroup(...)`
 
-```dart
+```dart copy
 FSelectGroup<Value>(
   controller: FMultiSelectGroupController(), // or FRadioSelectGroupController()
   label: const Text('Sidebar'),
@@ -76,7 +76,7 @@ FSelectGroup<Value>(
         <Widget name='select-group' variant='checkbox-form' query={{}} height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         enum Language { dart, java, rust, python }
 
         class CheckboxForm extends StatefulWidget {
@@ -154,7 +154,7 @@ FSelectGroup<Value>(
     <Widget name='select-group' variant='radio-form' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     enum Notification { all, direct, nothing }
 
     class RadioForm extends StatefulWidget {

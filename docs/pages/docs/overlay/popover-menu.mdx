@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A popover menu displays a menu in a portal aligned to a child.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.popover-menu/forui.widgets.popover-menu-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A popover menu displays a menu in a portal aligned to a child.
     <Widget name='popover-menu' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     class _PopoverMenu extends StatefulWidget {
       @override
       State<_PopoverMenu> createState() => _State();
@@ -98,7 +98,7 @@ A popover menu displays a menu in a portal aligned to a child.
 
 ### `FPopoverMenu(...)`
 
-```dart
+```dart copy
 const FPopoverMenu(
   popoverController: FPopoverController(),
   scrollController: ScrollController(),
@@ -121,7 +121,7 @@ const FPopoverMenu(
 
 ### `FPopoverMenu.tappable()`
 
-```dart
+```dart copy
 const FPopoverMenu.tappable(
   popoverController: FPopoverController(),
   scrollController: ScrollController(),

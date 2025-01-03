@@ -17,7 +17,7 @@ devices are typically larger than than `md` (768) and `lg` (1024) respectively.
 
 ## Usage
 
-```dart
+```dart copy
 @override
 Widget build(BuildContext context) {
   final breakpoints = context.theme.breakpoints; // FBreakpoints
@@ -34,14 +34,14 @@ Widget build(BuildContext context) {
 ## Custom Breakpoints
 
 Additional breakpoints can be added via an extension on `FBreakpoints`:
-```dart
+```dart copy
 extension CustomBreakpoints on FBreakpoints {
   double get custom => 42;
 }
 ```
 
 After which, the custom breakpoint can be accessed like so:
-```dart {7}
+```dart {7} copy
 @override
 Widget build(BuildContext context) {
   final breakpoints = context.theme.breakpoints; // FBreakpoints

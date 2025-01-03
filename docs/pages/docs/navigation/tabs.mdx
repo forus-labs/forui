@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A set of layered sections of content—known as tab entries—that are displayed one at a time.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tabs/forui.widgets.tabs-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tabs/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A set of layered sections of content—known as tab entries—that are displayed
     <Widget name='tabs' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTabs(
       tabs: [
         FTabEntry(
@@ -72,7 +72,7 @@ A set of layered sections of content—known as tab entries—that are displayed
 
 ### `FTabs(...)`
 
-```dart
+```dart copy
 FTabs(
   initialIndex: 1,
   tabs: const [

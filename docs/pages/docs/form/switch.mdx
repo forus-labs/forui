@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A switch that allows the user to toggle between checked and unchecked.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.switch_/forui.widgets.switch_-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.switch_/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A switch that allows the user to toggle between checked and unchecked.
     <Widget name='switch' query={{enabled: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {12-17}
+    ```dart {12-17} copy
     class Page extends StatefulWidget {
       const Page({super.key});
 
@@ -42,7 +42,7 @@ A switch that allows the user to toggle between checked and unchecked.
 
 ### `FSwitch(...)`
 
-```dart
+```dart copy
 FSwitch(
   label: const Text('Airplane Mode'),
   description: const Text('Turn on airplane mode to disable all wireless connections.'),
@@ -64,7 +64,7 @@ FSwitch(
     <Widget name='switch' query={{enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {17}
+    ```dart {17} copy
     class Page extends StatefulWidget {
       const Page({super.key});
 
@@ -95,7 +95,7 @@ FSwitch(
     <Widget name='switch' variant='form' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {54-64, 95-105}
+    ```dart {54-64, 95-105} copy
     class NotificationForm extends StatefulWidget {
       const NotificationForm({super.key});
 

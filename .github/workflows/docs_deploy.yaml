@@ -3,6 +3,8 @@ name: Docs Deploy
 on:
   push:
     branches: [main]
+    tags:
+      - forui/*
     paths: 
        - '.github/workflows/docs_deploy.yaml'
        - 'docs/**'
@@ -32,7 +34,7 @@ jobs:
   docs:
     name: Deploy Docs
     runs-on: ubuntu-latest
-    environment: ${{ (startsWith(github.ref, 'refs/tags/forui') || inputs.target == 'production') && 'docs-production' || 'docs-development' }}
+    environment: ${{ (startsWith(github.ref, 'refs/tags/forui/') || inputs.target == 'production') && 'docs-production' || 'docs-development' }}
     defaults:
       run:
         working-directory: ./docs
@@ -76,7 +78,13 @@ jobs:
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
+        id: publish-docs
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy ./samples/build/web --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=main
+
+      # Check that all relative URLs are working. We don't check GitHub links due to rate limiting.
+      - uses: actions/setup-go@v5
+      - run: go install github.com/raviqqe/muffet/v2@latest
+      - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)"

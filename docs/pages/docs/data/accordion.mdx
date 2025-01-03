@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A vertically stacked set of interactive headings that each reveal a section of content.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.accordion/forui.widgets.accordion-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.accordion/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A vertically stacked set of interactive headings that each reveal a section of c
         <Widget name='accordion' query={{controller: 'default-max'}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -51,7 +51,7 @@ A vertically stacked set of interactive headings that each reveal a section of c
 
 ### `FAccordion(...)`
 
-```dart
+```dart copy
 FAccordion(
   controller: FAccordionController(min: 1, max: 2), // or FAccordionController.radio()
   items: [
@@ -71,7 +71,7 @@ FAccordion(
         <Widget name='accordion' query={{controller: 'radio'}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {5}
+        ```dart {5} copy
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -105,7 +105,7 @@ FAccordion(
         <Widget name='accordion' query={{controller: 'default'}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {5}
+        ```dart {5} copy
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

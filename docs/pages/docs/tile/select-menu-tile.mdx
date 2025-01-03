@@ -8,7 +8,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A tile that, when triggered, displays a list of options for the user to pick from.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select-menu-tile/forui.widgets.select-menu-tile-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
@@ -20,7 +20,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
     <Widget name='select-menu-tile' variant='default' query={{autoHide: 'false'}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTile extends StatefulWidget {
@@ -71,7 +71,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
 ### `FSelectMenuTile(...)`
 
-```dart
+```dart copy
 FSelectMenuTile<Value>(
   groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
   popoverController: FPopoverController(...),
@@ -105,7 +105,7 @@ FSelectMenuTile<Value>(
 
 ### `FSelectMenuTile.builder(...)`
 
-```dart
+```dart copy
 FSelectMenuTile<Value>.builder(
   groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
   popoverController: FPopoverController(...),
@@ -145,7 +145,7 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='default' query={{autoHide: 'true'}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {16}
+    ```dart {16} copy
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTile extends StatefulWidget {
@@ -200,7 +200,7 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='scrollable' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {33}
+    ```dart {33} copy
     enum Notification { all, direct, limitedTime, timeSensitive, selectedApps, nothing }
 
     class _ScrollableSelectMenuTile extends StatefulWidget {
@@ -262,7 +262,7 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='lazy' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {12, 18-22}
+    ```dart {12, 18-22} copy
     class _LazySelectMenuTile extends StatefulWidget {
       const _SelectMenuTileForm({super.key});
 
@@ -305,7 +305,7 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='form' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTileForm extends StatefulWidget {

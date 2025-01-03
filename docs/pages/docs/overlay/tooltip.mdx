@@ -7,14 +7,14 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A tooltip displays information related to a widget when focused, hovered over, and/or long pressed.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/forui.widgets.tooltip-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/"/>
 </LinkBadgeGroup>
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='tooltip' height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTooltip(
       tipBuilder: (context, style, _) => const Text('Add to library'),
       child: IntrinsicWidth(
@@ -33,7 +33,7 @@ A tooltip displays information related to a widget when focused, hovered over, a
 
 ### `FTooltip(...)`
 
-```dart
+```dart copy
 FTooltip(
   controller: _controller, // FTooltipController
   hover: true,
@@ -57,7 +57,7 @@ You can change how the tooltip is aligned to the button.
     <Widget name='tooltip' query={{axis: 'horizontal'}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2-3}
+    ```dart {2-3} copy
     FTooltip(
       tipAnchor: Alignment.topLeft,
       childAnchor: Alignment.topRight,
@@ -81,7 +81,7 @@ You can change how the tooltip is aligned to the button.
     <Widget name='tooltip' query={{hover: 'false'}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2-3}
+    ```dart {2-3} copy
     FTooltip(
       hover: false,
       longPress: true,

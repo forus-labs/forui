@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 An input where the user selects a value from within a given range.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.slider/forui.widgets.slider-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.slider/"/>
 </LinkBadgeGroup>
 
 ## Usage
@@ -17,7 +17,7 @@ An input where the user selects a value from within a given range.
     <Widget name='slider'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart
+        ```dart copy
         FSlider(
           controller: FContinuousSliderController(
             selection: FSliderSelection(max: 0.6),
@@ -29,7 +29,7 @@ An input where the user selects a value from within a given range.
 
 ### `FSlider(...)`
 
-```dart
+```dart copy
 FSlider(
   layout: Layout.rtl,
   tooltipBuilder: (style, value) => Text('${(value.toStringAsFixed(2)}%'),
@@ -56,7 +56,7 @@ FSlider(
     <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2-3}
+        ```dart {2-3} copy
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
@@ -75,7 +75,7 @@ FSlider(
     <Widget name='slider' query={{enabled: 'false', label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {7}
+        ```dart {7} copy
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
@@ -95,7 +95,7 @@ FSlider(
     <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.', error: 'Volume is too high.'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {4}
+        ```dart {4} copy
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
@@ -116,7 +116,7 @@ FSlider(
     <Widget name='slider' variant='tooltip'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {5-8}
+        ```dart {5-8} copy
         FSlider(
           controller: FContinuousSliderController(
             selection: FSliderSelection(max: 0.6),
@@ -140,7 +140,7 @@ describes the mark's value.
     <Widget name='slider' variant='marks'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {5-11}
+        ```dart {5-11} copy
         FSlider(
           controller: FContinuousSliderController(
             selection: FSliderSelection(max: 0.35),
@@ -166,7 +166,7 @@ describes the mark's value.
     <Widget name='slider' variant='discrete'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2-4}
+        ```dart {2-4} copy
         FSlider(
           controller: FDiscreteSliderController(
             selection: FSliderSelection(max: 0.25),
@@ -190,7 +190,7 @@ describes the mark's value.
     <Widget name='slider' variant='range'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2-4}
+        ```dart {2-4} copy
         FSlider(
           controller: FContinuousSliderController.range(
             selection: FSliderSelection(min: 0.25, max: 0.75),
@@ -207,7 +207,7 @@ describes the mark's value.
     <Widget name='slider' query={{extent: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {5}
+        ```dart {5} copy
         FSlider(
           controller: FContinuousSliderController(
             selection: FSliderSelection(
@@ -227,7 +227,7 @@ describes the mark's value.
     <Widget name='slider' variant='vertical' height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {4}
+        ```dart {4} copy
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
@@ -257,7 +257,7 @@ Slide anywhere on the track or thumb to select a value.
     <Widget name='slider' query={{interaction: 'slide'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3}
+        ```dart {3} copy
         FSlider(
           controller: FContinuousSliderController(
             allowedInteraction: FSliderInteraction.slide,
@@ -277,7 +277,7 @@ Slide the thumb to select a value.
     <Widget name='slider' query={{interaction: 'slideThumb'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3}
+        ```dart {3} copy
         FSlider(
           controller: FContinuousSliderController(
             allowedInteraction: FSliderInteraction.slideThumb,
@@ -297,7 +297,7 @@ Tap anywhere on the track to select a value.
     <Widget name='slider' query={{interaction: 'tap'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3}
+        ```dart {3} copy
         FSlider(
           controller: FContinuousSliderController(
             allowedInteraction: FSliderInteraction.tap,
@@ -317,7 +317,7 @@ Tap anywhere or slide the thumb to select a value.
     <Widget name='slider' query={{interaction: 'tapAndSlideThumb'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3}
+        ```dart {3} copy
         FSlider(
           controller: FContinuousSliderController(
             allowedInteraction: FSliderInteraction.tapAndSlideThumb,
@@ -335,7 +335,7 @@ Tap anywhere or slide the thumb to select a value.
     <Widget name='slider' variant='form' height='500'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart
+        ```dart copy
         class SliderForm extends StatefulWidget {
           const SliderForm({super.key});
 

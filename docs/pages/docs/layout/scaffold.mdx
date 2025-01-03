@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 Creates a visual scaffold for Forui widgets.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/forui.widgets.scaffold-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ Creates a visual scaffold for Forui widgets.
     <Widget name='scaffold' query={{}} height={600}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     final headers = [
       const FHeader(title: Text('Home')),
       const FHeader(title: Text('Categories')),
@@ -119,7 +119,7 @@ Creates a visual scaffold for Forui widgets.
 
 ### `FScaffold(...)`
 
-```dart
+```dart copy
 FScaffold(
   header: FHeader(
     title: const Text('Settings'),

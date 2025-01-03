@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A popover displays rich content in a portal that is aligned to a target.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.popover/forui.widgets.popover-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.popover/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A popover displays rich content in a portal that is aligned to a target.
     <Widget name='popover' query={{alignment: 'topCenter'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     class _Popover extends StatefulWidget {
       @override
       State<_Popover> createState() => _State();
@@ -92,7 +92,7 @@ A popover displays rich content in a portal that is aligned to a target.
 
 ### `FPopover(...)`
 
-```dart
+```dart copy
 const FPopover(
   controller: FPopoverController(),
   followerAnchor: Alignment.topCenter,
@@ -107,7 +107,7 @@ const FPopover(
 
 ### `FPopover.tappable()`
 
-```dart
+```dart copy
 const FPopover.tappable(
   controller: FPopoverController(),
   followerAnchor: Alignment.topCenter,
@@ -131,7 +131,7 @@ You can change how the popover is aligned to the button.
     <Widget name='popover' query={{axis: 'horizontal'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {18-19}
+    ```dart {18-19} copy
     class _Popover extends StatefulWidget {
       @override
       State<_Popover> createState() => _State();
@@ -213,7 +213,7 @@ You can change how the popover is aligned to the button.
     <Widget name='popover' query={{alignment: 'topCenter', hideOnTapOutside: 'false'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {18}
+    ```dart {18} copy
     class _Popover extends StatefulWidget {
       @override
       State<_Popover> createState() => _State();
@@ -296,7 +296,7 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
     <Widget name='popover' query={{alignment: 'bottomCenter', shift: 'flip'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {18}
+    ```dart {18} copy
     class _Popover extends StatefulWidget {
       @override
       State<_Popover> createState() => _State();
@@ -379,7 +379,7 @@ The popover can be shifted along the overflowing axis to stay within the viewpor
     <Widget name='popover' query={{shift: 'along'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {18}
+    ```dart {18} copy
     class _Popover extends StatefulWidget {
       @override
       State<_Popover> createState() => _State();
@@ -462,7 +462,7 @@ The popover is not shifted to stay within the viewport boundaries, even if it ov
     <Widget name='popover' query={{shift: 'none'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {18}
+    ```dart {18} copy
     class _Popover extends StatefulWidget {
       @override
       State<_Popover> createState() => _State();

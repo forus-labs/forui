@@ -8,7 +8,7 @@ Describes a form field with a label, description, and error message (if any). Th
 form fields. All form fields in Forui comes with this widget wrapped.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.label/forui.widgets.label-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.label/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -16,7 +16,7 @@ form fields. All form fields in Forui comes with this widget wrapped.
     <Widget name='label' variant='horizontal' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FLabel(
         axis: Axis.horizontal,
         label: const Text('Accept terms and conditions'),
@@ -37,7 +37,7 @@ form fields. All form fields in Forui comes with this widget wrapped.
 
 ### `FLabel(...)`
 
-```dart
+```dart copy
 FLabel(
     axis: Axis.horizontal,
     label: const Text('Accept terms and conditions'),
@@ -56,7 +56,7 @@ FLabel(
         <Widget name='label' variant='vertical' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         FLabel(
             axis: Axis.vertical,
             label: const Text('Email'),
@@ -79,7 +79,7 @@ FLabel(
     <Widget name='label' variant='horizontal' query={{ state: 'disabled' }}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FLabel(
         axis: Axis.horizontal,
         label: const Text('Accept terms and conditions'),
@@ -103,7 +103,7 @@ FLabel(
     <Widget name='label' variant='horizontal' query={{ state: 'error' }}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FLabel(
         axis: Axis.horizontal,
         label: const Text('Accept terms and conditions'),

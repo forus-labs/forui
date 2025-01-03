@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 Visually or semantically separates content.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.divider/forui.widgets.divider-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.divider/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ Visually or semantically separates content.
     <Widget name='divider' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     final theme = context.theme;
     final colorScheme = theme.colorScheme;
     final typography = theme.typography;
@@ -70,6 +70,6 @@ Visually or semantically separates content.
 
 ### `FDivider(...)`
 
-```dart
+```dart copy
 const FDivider(axis : Axis.vertical);
 ```

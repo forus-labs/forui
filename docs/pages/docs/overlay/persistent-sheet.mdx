@@ -9,7 +9,7 @@ A persistent sheet is displayed above another widget while still allowing users 
 It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in most cases.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/forui.widgets.sheet-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
@@ -27,7 +27,7 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
     <Widget name='persistent-sheet' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     class Sheets extends StatefulWidget {
       @override
       State<Sheets> createState() => _State();
@@ -168,7 +168,7 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
 
 ### `showFPersistentSheet(...)`
 
-```dart
+```dart copy
 showFPersistentSheet(
   context: context,
   side: Layout.ltr,
@@ -191,7 +191,7 @@ showFPersistentSheet(
     <Widget name='persistent-sheet' query={{keepAliveOffstage: true}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {23}
+    ```dart {23} copy
     class Sheets extends StatefulWidget {
       @override
       State<Sheets> createState() => _State();
@@ -336,7 +336,7 @@ showFPersistentSheet(
     <Widget name='persistent-sheet' query={{}} height={400} variant='draggable'/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {23-41}
+    ```dart {23-41} copy
     class DraggableSheets extends StatefulWidget {
       @override
       State<DraggableSheets> createState() => _State();

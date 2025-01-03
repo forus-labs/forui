@@ -8,7 +8,7 @@ A header contains the page's title and navigation actions.
 It is typically used on pages at the root of the navigation stack.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.header/forui.widgets.header-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.header/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -16,7 +16,7 @@ It is typically used on pages at the root of the navigation stack.
     <Widget name='header'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart
+        ```dart copy
         FHeader(
           title: const Text('Edit Alarm'),
           actions: [
@@ -40,10 +40,10 @@ It is typically used on nested pages or sheets.
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='header'  variant='nested'/>
+        <Widget name='header' variant='nested'/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         FHeader.nested(
           title: const Text('Appointment'),
           prefixActions: [
@@ -72,7 +72,7 @@ It is typically used on nested pages or sheets.
 
 ### `FHeader(...)`
 
-```dart
+```dart copy
 FHeader(
   title: const Text('Title'),
   actions: [
@@ -90,7 +90,7 @@ FHeader(
 
 ### `FHeader.nested(...)`
 
-```dart
+```dart copy
 FHeader.nested(
   title: const Text('Title'),
   prefixActions: [
@@ -114,7 +114,7 @@ FHeader.nested(
     <Widget name='header'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart
+        ```dart copy
         FHeader(
           title: const Text('Edit Alarm'),
           actions: [
@@ -138,7 +138,7 @@ FHeader.nested(
     <Widget name='header' variant='nested' />
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {3-5}
+        ```dart {3-5} copy
         FHeader.nested(
           title: const Text('Appointment'),
           prefixActions: [
@@ -165,7 +165,7 @@ FHeader.nested(
     <Widget name='header' variant='nested-x' />
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {13-15}
+        ```dart {13-15} copy
         FHeader.nested(
           title: const Text('Climate'),
           prefixActions: [

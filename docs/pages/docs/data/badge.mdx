@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A badge typically draws attention to specific information, such as labels and counts.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.badge/forui.widgets.badge-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.badge/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A badge typically draws attention to specific information, such as labels and co
       <Widget name='badge' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart
+      ```dart copy
       FBadge(label: const Text('Badge'));
       ```
   </Tabs.Tab>
@@ -25,13 +25,13 @@ A badge typically draws attention to specific information, such as labels and co
 
 ### `FBadge(...)`
 
-```dart
+```dart copy
 FBadge(label: const Text('Badge'));
 ```
 
 ### `FBadge.raw(...)`
 
-```dart
+```dart copy
 FBadge.raw(builder: (context, style) => Text('Badge'));
 ```
 ## Examples
@@ -42,7 +42,7 @@ FBadge.raw(builder: (context, style) => Text('Badge'));
       <Widget name='badge' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart
+      ```dart copy
       FBadge(label: const Text('Badge'));
       ```
   </Tabs.Tab>
@@ -54,7 +54,7 @@ FBadge.raw(builder: (context, style) => Text('Badge'));
       <Widget name='badge' query={{style: 'secondary'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {3}
+      ```dart {3} copy
       FBadge(
         label: const Text('Badge'),
         style: FBadgeStyle.secondary,
@@ -69,7 +69,7 @@ FBadge.raw(builder: (context, style) => Text('Badge'));
       <Widget name='badge' query={{style: 'outline'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {3}
+      ```dart {3} copy
       FBadge(
         label: const Text('Badge'),
         style: FBadgeStyle.outline,
@@ -84,7 +84,7 @@ FBadge.raw(builder: (context, style) => Text('Badge'));
       <Widget name='badge' query={{style: 'destructive'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {3}
+      ```dart {3} copy
       FBadge(
         label: const Text('Badge'),
         style: FBadgeStyle.destructive,

@@ -5,7 +5,7 @@ Forui supports all 115 languages that Flutter natively does.
 To enable localization for Forui widgets, add the `FLocalizations.delegate` in your call to the constructor for `
 CupertinoApp`, `MaterialApp`, or `WidgetsApp`. Afterwards, add the locales supported by your application.
 
-```dart {3, 6}
+```dart {3, 6} copy
 Widget build(BuildContext context) => MaterialApp(
   localizationsDelegates: [
     FLocalizations.delegate, // Add this line
@@ -24,7 +24,7 @@ Widget build(BuildContext context) => MaterialApp(
 The `FLocalizations` class also provides auto-generated `localizationsDelegates` and `supportedLocales` lists. You can use
 these instead of providing them manually if your application doesn't have any other localization messages.
 
-```dart {2-3}
+```dart {2-3} copy
 Widget build(BuildContext context) => MaterialApp(
   localizationsDelegates: FLocalizations.localizationsDelegates,
   supportedLocales: FLocalizations.supportedLocales,

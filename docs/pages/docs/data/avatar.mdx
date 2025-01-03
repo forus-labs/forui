@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 An image element with a fallback for representing the user.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.avatar/forui.widgets.avatar-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.avatar/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ An image element with a fallback for representing the user.
       <Widget name='avatar' variant='default' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart
+      ```dart copy
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -45,7 +45,7 @@ An image element with a fallback for representing the user.
 
 ### `FAvatar(...)`
 
-```dart
+```dart copy
 FAvatar(
   image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
   fallback: const Text('MN'),
@@ -54,7 +54,7 @@ FAvatar(
 
 ### `FAvatar.raw(...)`
 
-```dart
+```dart copy
 // Raw constructor - with icon.
 FAvatar.raw(
   child: FAssets.icons.baby(
@@ -74,7 +74,7 @@ FAvatar.raw(child: const Text('MN'));
         <Widget name='avatar' variant='invalid' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {7}
+        ```dart {7} copy
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -99,7 +99,7 @@ FAvatar.raw(child: const Text('MN'));
         <Widget name='avatar' variant='raw' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

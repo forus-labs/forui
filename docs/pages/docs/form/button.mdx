@@ -7,7 +7,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A button.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.button/forui.widgets.button-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.button/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -15,7 +15,7 @@ A button.
     <Widget name='button' variant='text' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FButton(
       label: const Text('Button'),
       onPress: () {},
@@ -28,7 +28,7 @@ A button.
 
 ### `FButton(...)`
 
-```dart
+```dart copy
 FButton(
   label: const Text('Button'),
   onPress: () {},
@@ -37,7 +37,7 @@ FButton(
 
 ### `FButton.raw(...)`
 
-```dart
+```dart copy
 FButton.raw(
   child: const Text('Button'),
   onPress: () {},
@@ -54,7 +54,7 @@ FButton.raw(
     <Widget name='button' variant='text' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FButton(
       label: const Text('Button'),
       onPress: () {},
@@ -69,7 +69,7 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'secondary'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3}
+    ```dart {3} copy
     FButton(
       label: const Text('Button'),
       style: FButtonStyle.secondary,
@@ -85,7 +85,7 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'destructive'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3}
+    ```dart {3} copy
     FButton(
       label: const Text('Button'),
       style: FButtonStyle.destructive,
@@ -101,7 +101,7 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'outline'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3}
+    ```dart {3} copy
     FButton(
       label: const Text('Button'),
       style: FButtonStyle.outline,
@@ -117,7 +117,7 @@ FButton.raw(
     <Widget name='button' variant='text' query={{style: 'ghost'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3}
+    ```dart {3} copy
     FButton(
       label: const Text('Button'),
       style: FButtonStyle.ghost,
@@ -136,7 +136,7 @@ FButton.raw(
     <Widget name='button' variant='icon' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2}
+    ```dart {2} copy
     FButton(
       prefix: FIcon(FAssets.icons.mail),
       label: const Text('Login with Email'),
@@ -152,7 +152,7 @@ FButton.raw(
     <Widget name='button' variant='only-icon' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2}
+    ```dart {2} copy
     FButton.icon(
       child: FIcon(FAssets.icons.chevronRight),
       onPress: () {},
@@ -167,7 +167,7 @@ FButton.raw(
     <Widget name='button' variant='spinner' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2}
+    ```dart {2} copy
     FButton(
       prefix: const FButtonSpinner(),
       label: const Text('Please wait')

@@ -8,7 +8,7 @@ import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx"
 A tile that is typically used to group related information together.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/forui.widgets.tile-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
@@ -20,7 +20,7 @@ A tile that is typically used to group related information together.
     <Widget name='tile' variant='default' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTile(
       prefixIcon: FIcon(FAssets.icons.user),
       title: const Text('Personalization'),
@@ -35,7 +35,7 @@ A tile that is typically used to group related information together.
 
 ### `FTile(...)`
 
-```dart
+```dart copy
 FTile(
   prefixIcon: FIcon(FAssets.icons.globe),
   title: const Text('Title'),
@@ -58,7 +58,7 @@ FTile(
     <Widget name='tile' variant='default' query={{tappable: false}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart
+    ```dart copy
     FTile(
       prefixIcon: FIcon(FAssets.icons.user),
       title: const Text('Personalization'),
@@ -75,7 +75,7 @@ FTile(
     <Widget name='tile' variant='default' query={{enabled: false}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2}
+    ```dart {2} copy
     FTile(
       enabled: false
       prefixIcon: FIcon(FAssets.icons.user),
@@ -94,7 +94,7 @@ FTile(
     <Widget name='tile' variant='subtitle' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4}
+    ```dart {4} copy
     FTile(
       prefixIcon: FIcon(FAssets.icons.bell),
       title: const Text('Notifications'),
@@ -113,7 +113,7 @@ FTile(
     <Widget name='tile' variant='details' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4}
+    ```dart {4} copy
     FTile(
       prefixIcon: FIcon(FAssets.icons.wifi),
       title: const Text('WiFi'),
