@@ -142,6 +142,7 @@ class Field extends FormField<String> {
 // This class is based on Material's _TextFormFieldState implementation.
 class _State extends FormFieldState<String> {
   RestorableTextEditingController? _controller;
+  late FocusNode _focusNode;
 
   @override
   void initState() {
@@ -152,6 +153,9 @@ class _State extends FormFieldState<String> {
     } else {
       _registerController(RestorableTextEditingController(text: widget.initialValue));
     }
+
+    _focusNode = widget.parent.focusNode ?? FocusNode();
+    _focusNode.addListener(() => widget.parent.onFocusChange?.call(_focusNode.hasFocus));
   }
 
   @override
@@ -195,12 +199,27 @@ class _State extends FormFieldState<String> {
       case (null, final old?):
         _registerController(RestorableTextEditingController.fromValue(old.value));
     }
+
+    switch ((widget.parent.focusNode, old.parent.focusNode)) {
+      case (final current?, _):
+        _focusNode.removeListener(() => widget.parent.onFocusChange?.call(_focusNode.hasFocus));
+        _focusNode = current;
+        _focusNode.addListener(() => widget.parent.onFocusChange?.call(_focusNode.hasFocus));
+
+      case (null, final _?):
+        _focusNode.removeListener(() => widget.parent.onFocusChange?.call(_focusNode.hasFocus));
+        _focusNode = FocusNode();
+        _focusNode.addListener(() => widget.parent.onFocusChange?.call(_focusNode.hasFocus));
+    }
   }
 
   @override
   void dispose() {
     widget.parent.controller?.removeListener(_handleControllerChanged);
     _controller?.dispose();
+    if (widget.parent.focusNode == null) {
+      _focusNode.dispose();
+    }
     super.dispose();
   }
 

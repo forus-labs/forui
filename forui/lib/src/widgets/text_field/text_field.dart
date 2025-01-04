@@ -17,7 +17,7 @@ import 'package:forui/src/widgets/text_field/field.dart';
 /// * https://forui.dev/docs/form/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
-final class FTextField extends StatelessWidget {
+final class FTextField extends StatelessWidget implements FFocusableProperties {
   static Widget _contextMenuBuilder(
     BuildContext context,
     EditableTextState state,
@@ -51,10 +51,14 @@ final class FTextField extends StatelessWidget {
   /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
 
-  /// Defines the keyboard focus for this [FTextField].
-  ///
-  /// See [TextField.focusNode] for more information.
+  @override
+  final bool autofocus;
+
+  @override
   final FocusNode? focusNode;
+
+  @override
+  final ValueChanged<bool>? onFocusChange;
 
   /// The type of keyboard to use for editing the text. Defaults to [TextInputType.text] if maxLines is one and
   /// [TextInputType.multiline] otherwise.
@@ -88,12 +92,6 @@ final class FTextField extends StatelessWidget {
   ///
   /// See [TextField.textDirection] for more information.
   final TextDirection? textDirection;
-
-  /// Whether this text field should focus itself if nothing else is already focused. Defaults to false.
-  ///
-  /// If true, the keyboard will open as soon as this text field obtains focus. Otherwise, the keyboard is only shown
-  /// after the user taps the text field.
-  final bool autofocus;
 
   /// Represents the interactive "state" of this widget in terms of a set of [WidgetState]s, including
   /// [WidgetState.disabled], [WidgetState.hovered], [WidgetState.error], and [WidgetState.focused].
@@ -509,7 +507,6 @@ final class FTextField extends StatelessWidget {
     this.description,
     this.magnifierConfiguration,
     this.controller,
-    this.focusNode,
     this.keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
@@ -517,6 +514,8 @@ final class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     this.statesController,
     this.obscureText = false,
     this.autocorrect = true,
@@ -570,7 +569,6 @@ final class FTextField extends StatelessWidget {
     this.description,
     this.magnifierConfiguration,
     this.controller,
-    this.focusNode,
     this.keyboardType = TextInputType.emailAddress,
     this.textInputAction = TextInputAction.next,
     this.textCapitalization = TextCapitalization.none,
@@ -578,6 +576,8 @@ final class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     this.statesController,
     this.obscureText = false,
     this.autocorrect = false,
@@ -634,7 +634,6 @@ final class FTextField extends StatelessWidget {
     this.description,
     this.magnifierConfiguration,
     this.controller,
-    this.focusNode,
     this.keyboardType,
     this.textInputAction = TextInputAction.next,
     this.textCapitalization = TextCapitalization.none,
@@ -642,6 +641,8 @@ final class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     this.statesController,
     this.obscureText = true,
     this.autocorrect = false,
@@ -699,7 +700,6 @@ final class FTextField extends StatelessWidget {
     this.description,
     this.magnifierConfiguration,
     this.controller,
-    this.focusNode,
     this.keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.sentences,
@@ -707,6 +707,8 @@ final class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     this.statesController,
     this.obscureText = false,
     this.autocorrect = true,

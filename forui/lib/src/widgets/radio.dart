@@ -12,7 +12,7 @@ import 'package:meta/meta.dart';
 /// See:
 /// * https://forui.dev/docs/form/radio for working examples.
 /// * [FRadioStyle] for customizing a radio's appearance.
-class FRadio extends StatefulWidget {
+class FRadio extends StatefulWidget implements FFocusableProperties {
   /// The style. Defaults to [FThemeData.radioStyle].
   final FRadioStyle? style;
 
@@ -39,15 +39,13 @@ class FRadio extends StatefulWidget {
   /// Whether this radio is enabled. Defaults to true.
   final bool enabled;
 
-  /// Whether this radio should focus itself if nothing else is already focused. Defaults to false.
+  @override
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this radio.
+  @override
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  @override
   final ValueChanged<bool>? onFocusChange;
 
   /// Creates a [FRadio].

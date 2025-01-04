@@ -33,7 +33,7 @@ typedef FTappableData = ({bool focused, bool hovered});
 ///
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
-class FTappable extends StatefulWidget {
+class FTappable extends StatefulWidget implements FFocusableProperties {
   static Widget _builder(_, __, Widget? child) => child!;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
@@ -48,15 +48,13 @@ class FTappable extends StatefulWidget {
   /// Whether to replace all child semantics with this node. Defaults to false.
   final bool excludeSemantics;
 
-  /// Whether this radio should focus itself if nothing else is already focused. Defaults to false.
+  @override
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this radio.
+  @override
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  @override
   final ValueChanged<bool>? onFocusChange;
 
   /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 200ms.

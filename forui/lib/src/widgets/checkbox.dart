@@ -12,7 +12,7 @@ import 'package:meta/meta.dart';
 /// See:
 /// * https://forui.dev/docs/form/checkbox for working examples.
 /// * [FCheckboxStyle] for customizing a checkbox's appearance.
-class FCheckbox extends StatefulWidget {
+class FCheckbox extends StatefulWidget implements FFocusableProperties {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 
@@ -39,15 +39,13 @@ class FCheckbox extends StatefulWidget {
   /// Whether this checkbox is enabled. Defaults to true.
   final bool enabled;
 
-  /// Whether this checkbox should focus itself if nothing else is already focused. Defaults to false.
+  @override
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this checkbox.
+  @override
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  @override
   final ValueChanged<bool>? onFocusChange;
 
   /// Creates a [FCheckbox].

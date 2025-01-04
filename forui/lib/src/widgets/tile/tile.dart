@@ -41,7 +41,7 @@ mixin FTileMixin on Widget {}
 /// * https://forui.dev/docs/tile/tile for working examples.
 /// * [FTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a tile's appearance.
-class FTile extends StatelessWidget with FTileMixin {
+class FTile extends StatelessWidget with FTileMixin implements FFocusableProperties {
   /// The tile's style. Defaults to the ancestor tile group's style if present, and [FThemeData.tileGroupStyle] otherwise.
   ///
   /// Provide a style to prevent inheriting from the ancestor tile group's style.
@@ -53,15 +53,13 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The semantic label.
   final String? semanticLabel;
 
-  /// Whether this tile should focus itself if nothing else is already focused. Defaults to false.
+  @override
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this tile.
+  @override
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  @override
   final ValueChanged<bool>? onFocusChange;
 
   /// A callback for when the tile is pressed.

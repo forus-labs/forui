@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 /// * https://forui.dev/docs/tile/select-tile for working examples.
 /// * [FSelectTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a select tile's appearance.
-class FSelectTile<T> extends StatelessWidget with FTileMixin {
+class FSelectTile<T> extends StatelessWidget with FTileMixin implements FFocusableProperties {
   /// The style.
   final FTileStyle? style;
 
@@ -38,15 +38,13 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// Whether this radio tile is enabled. Defaults to true.
   final bool? enabled;
 
-  /// Whether this radio tile should focus itself if nothing else is already focused. Defaults to false.
+  @override
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this radio.
+  @override
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  @override
   final ValueChanged<bool>? onFocusChange;
 
   final Widget? _icon;
