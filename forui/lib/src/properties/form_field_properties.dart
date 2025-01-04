@@ -1,16 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
 
-/// A stateless single form field.
-///
-/// This widget is meant to be extended by other form field widgets.
-@internal
-abstract class FFormField<T> extends StatelessWidget {
+/// Properties for a form field.
+interface class FFormFieldProperties<T> with Diagnosticable {
   /// An optional method to call with the final value when the form is saved via [FormState.save].
-  final FormFieldSetter<T>? onSave;
+  final FormFieldSetter<T>? onSaved;
 
   /// An optional property that forces the [FormFieldState] into an error state by directly setting the
   /// [FormFieldState.errorText] property without running the validator function.
@@ -25,11 +20,13 @@ abstract class FFormField<T> extends StatelessWidget {
   /// An optional method that validates an input. Returns an error string to display if the input is invalid, or null
   /// otherwise.
   ///
-  /// The returned value is exposed by the [FormFieldState.errorText] property.
+  /// The returned value is exposed by the [FormFieldState.errorText] property. It transforms the text using
+  /// [errorBuilder].
+  ///
+  /// Alternating between error and normal state can cause the height of the form field to change if no other
+  /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
+  /// error is displayed, wrap the field in a fixed height parent like [SizedBox].
   final FormFieldValidator<T>? validator;
-
-  /// An optional value to initialize the form field to, or null otherwise.
-  final T initialValue;
 
   /// Whether the form is able to receive user input.
   ///
@@ -46,53 +43,23 @@ abstract class FFormField<T> extends StatelessWidget {
   /// auto-validation will be disabled.
   final AutovalidateMode autovalidateMode;
 
-  /// Restoration ID to save and restore the state of the form field.
-  ///
-  /// Setting the restoration ID to a non-null value results in whether or not the form field validation persists.
-  ///
-  /// The state of this widget is persisted in a [RestorationBucket] claimed from the surrounding [RestorationScope]
-  /// using the provided restoration ID.
-  ///
-  /// See also:
-  ///  * [RestorationManager], which explains how state restoration works in Flutter.
-  final String? restorationId;
-
-  /// Creates a [FFormField].
-  const FFormField({
-    required this.initialValue,
-    this.onSave,
+  /// Creates a [FFormFieldProperties].
+  const FFormFieldProperties({
+    this.onSaved,
     this.forceErrorText,
     this.validator,
     this.enabled = true,
     this.autovalidateMode = AutovalidateMode.disabled,
-    this.restorationId,
-    super.key,
   });
-
-  @override
-  Widget build(BuildContext context) => FormField<T>(
-        onSaved: onSave,
-        validator: validator,
-        initialValue: initialValue,
-        enabled: enabled,
-        autovalidateMode: autovalidateMode,
-        restorationId: restorationId,
-        builder: (state) => builder(context, state),
-      );
-
-  /// The builder for the [FormField].
-  Widget builder(BuildContext context, FormFieldState<T> state);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ObjectFlagProperty.has('onSave', onSave))
+      ..add(ObjectFlagProperty.has('onSave', onSaved))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(DiagnosticsProperty('initialValue', initialValue))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(StringProperty('restorationId', restorationId));
+      ..add(EnumProperty('autovalidateMode', autovalidateMode));
   }
 }

@@ -18,7 +18,7 @@ import 'package:meta/meta.dart';
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
-class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
+class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FFormFieldProperties<Set<T>> {
   static Widget _errorBuilder(BuildContext context, String error) => Text(error);
 
   /// The controller that controls the selected tiles.

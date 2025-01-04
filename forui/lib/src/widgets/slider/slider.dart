@@ -18,7 +18,7 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 /// * [FDiscreteSliderController.new] for selecting a discrete value.
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 /// * [FSliderStyles] for customizing a slider's appearance.
-class FSlider extends StatelessWidget {
+class FSlider extends StatelessWidget implements FFormFieldProperties<FSliderSelection> {
   static Widget _errorBuilder(BuildContext context, String error) => Text(error);
 
   static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
@@ -83,42 +83,19 @@ class FSlider extends StatelessWidget {
   // ignore: avoid_positional_boolean_parameters
   final String Function(double) semanticValueFormatterCallback;
 
-  /// An optional method to call with the final value when the form is saved via [FormState.save].
+  @override
   final FormFieldSetter<FSliderSelection>? onSaved;
 
-  /// An optional method that validates an input. Returns an error string to
-  /// display if the input is invalid, or null otherwise.
-  ///
-  /// The returned value is exposed by the [FormFieldState.errorText] property. It transforms the text using
-  /// [errorBuilder].
-  ///
-  /// Alternating between error and normal state can cause the height of the [FTextField] to change if no other
-  /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
-  /// error is displayed, wrap the [FTextField] in a fixed height parent like [SizedBox].
+  @override
   final FormFieldValidator<FSliderSelection>? validator;
 
-  /// Used to enable/disable this form field auto validation and update its error text.
-  ///
-  /// Defaults to [AutovalidateMode.disabled].
-  ///
-  /// If [AutovalidateMode.onUserInteraction], this FormField will only auto-validate after its content changes. If
-  /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
-  /// auto-validation will be disabled.
-  final AutovalidateMode? autovalidateMode;
+  @override
+  final AutovalidateMode autovalidateMode;
 
-  /// An optional property that forces the [FormFieldState] into an error state
-  /// by directly setting the [FormFieldState.errorText] property without
-  /// running the validator function.
-  ///
-  /// When the [forceErrorText] property is provided, the [FormFieldState.errorText]
-  /// will be set to the provided value, causing the form field to be considered
-  /// invalid and to display the error message specified.
-  ///
-  /// When [validator] is provided, [forceErrorText] will override any error that it
-  /// returns. [validator] will not be called unless [forceErrorText] is null.
+  @override
   final String? forceErrorText;
 
-  /// True if the slider is enabled.
+  @override
   final bool enabled;
 
   /// Creates a [FSlider].
@@ -139,7 +116,7 @@ class FSlider extends StatelessWidget {
     this.validator,
     this.forceErrorText,
     this.enabled = true,
-    this.autovalidateMode,
+    this.autovalidateMode = AutovalidateMode.disabled,
     super.key,
   }) : semanticFormatterCallback = semanticFormatterCallback ?? _formatter(controller) {
     if (trackMainAxisExtent == null &&

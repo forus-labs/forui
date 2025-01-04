@@ -9,7 +9,7 @@ import 'package:forui/src/widgets/slider/track.dart';
 import 'package:meta/meta.dart';
 
 @internal
-class SliderFormField extends FormField<FSliderSelection> {
+class SliderFormField extends FormField<FSliderSelection> implements FFormFieldProperties<FSliderSelection> {
   final FSliderController controller;
   final BoxConstraints constraints;
   final Widget? label;
@@ -27,7 +27,6 @@ class SliderFormField extends FormField<FSliderSelection> {
     super.forceErrorText,
     super.enabled = true,
     super.autovalidateMode,
-    super.restorationId,
     super.key,
   }) : super(
           builder: (field) {

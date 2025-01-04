@@ -4,6 +4,7 @@ library forui;
 export 'assets.dart';
 export 'foundation.dart';
 export 'localizations.dart';
+export 'properties.dart';
 export 'theme.dart';
 
 export 'widgets/accordion.dart';
