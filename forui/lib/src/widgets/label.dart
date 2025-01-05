@@ -19,6 +19,23 @@ enum FLabelState {
   error,
 }
 
+/// Properties for a labelled widget.
+class FLabelledProperties {
+  /// The label.
+  final Widget? label;
+
+  /// The description.
+  final Widget? description;
+
+  /// The error displayed below the [description].
+  ///
+  /// If the value is present, the widget is in an error state.
+  final Widget? error;
+
+  /// Creates a [FLabelledProperties].
+  const FLabelledProperties({this.label, this.description, this.error});
+}
+
 /// A label that describes a form field with a label, description, and error message (if any).
 ///
 /// There are two different [Axis] variants for labels:
@@ -44,18 +61,18 @@ enum FLabelState {
 /// See:
 /// * https://forui.dev/docs/form/label for working examples.
 /// * [FLabelStyles] for customizing a label's appearance.
-final class FLabel extends StatelessWidget {
+final class FLabel extends StatelessWidget implements FLabelledProperties {
   /// The label's style. Defaults to the appropriate style in [FThemeData.labelStyles].
   // ignore: diagnostic_describe_all_properties
   final FLabelStyle? style;
 
-  /// The label that describes the form field.
+  @override
   final Widget? label;
 
-  /// The description that elaborates on the label.
+  @override
   final Widget? description;
 
-  /// The error message.
+  @override
   final Widget? error;
 
   /// The axis that represents.
@@ -68,6 +85,18 @@ final class FLabel extends StatelessWidget {
 
   /// The child.
   final Widget child;
+
+  /// Creates a [FLabel] from the given properties.
+  FLabel.fromProperties({
+    required FLabelledProperties properties,
+    required this.axis,
+    required this.child,
+    this.style,
+    this.state = FLabelState.enabled,
+    super.key,
+  })  : label = properties.label,
+        description = properties.description,
+        error = properties.error;
 
   /// Creates a [FLabel].
   const FLabel({

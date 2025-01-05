@@ -528,7 +528,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
   });
 
@@ -590,7 +590,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
   });
 
@@ -655,7 +655,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
   });
 
@@ -721,7 +721,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
   });
 

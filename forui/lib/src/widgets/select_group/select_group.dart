@@ -46,7 +46,7 @@ class FSelectGroup<T> extends FormField<Set<T>> implements FFormFieldProperties<
     this.style,
     this.label,
     this.description,
-    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.initialValue,

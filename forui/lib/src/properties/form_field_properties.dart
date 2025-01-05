@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
-
 
 /// Properties for a form field.
-class FFormFieldProperties<T> extends FLabelledProperties {
+class FFormFieldProperties<T> with Diagnosticable {
+  /// The default error builder.
+  static Widget defaultErrorBuilder(BuildContext context, String error) => Text(error);
+
   /// An optional method to call with the final value when the form is saved via [FormState.save].
   final FormFieldSetter<T>? onSaved;
 
@@ -44,6 +45,15 @@ class FFormFieldProperties<T> extends FLabelledProperties {
   /// auto-validation will be disabled.
   final AutovalidateMode autovalidateMode;
 
+  /// The label.
+  final Widget? label;
+
+  /// The description.
+  final Widget? description;
+
+  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  final Widget Function(BuildContext, String) errorBuilder;
+
   /// Creates a [FFormFieldProperties].
   const FFormFieldProperties({
     this.onSaved,
@@ -51,9 +61,9 @@ class FFormFieldProperties<T> extends FLabelledProperties {
     this.validator,
     this.enabled = true,
     this.autovalidateMode = AutovalidateMode.disabled,
-    super.label,
-    super.description,
-    super.errorBuilder,
+    this.label,
+    this.description,
+    this.errorBuilder = defaultErrorBuilder,
   });
 
   @override
@@ -64,6 +74,7 @@ class FFormFieldProperties<T> extends FLabelledProperties {
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode));
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }

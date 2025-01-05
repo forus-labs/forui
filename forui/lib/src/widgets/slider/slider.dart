@@ -103,7 +103,7 @@ class FSlider extends StatelessWidget implements FFormFieldProperties<FSliderSel
     this.layout,
     this.label,
     this.description,
-    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.marks = const [],
     this.trackMainAxisExtent,
     this.trackHitRegionCrossExtent,
