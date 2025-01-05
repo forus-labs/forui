@@ -18,9 +18,9 @@ import 'package:meta/meta.dart';
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
-class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FFormFieldProperties<Set<T>> {
-  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
-
+class FSelectMenuTile<T> extends FormField<Set<T>>
+    with FTileMixin
+    implements FFormFieldProperties<Set<T>>, FFocusableProperties {
   /// The controller that controls the selected tiles.
   final FSelectGroupController<T> groupController;
 
@@ -80,40 +80,25 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
   final bool autoHide;
 
-  /// The label displayed next to the select group.
-  final Widget? label;
-
-  /// The description displayed below the group.
-  final Widget? description;
-
-  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
-  final Widget Function(BuildContext, String) errorBuilder;
-
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
-  /// True if the menu will be selected as the initial focus when no other node in its scope is currently focused.
-  ///
-  /// Defaults to false.
-  ///
-  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
-  /// autofocus set, then the first one added to the tree will get focus.
+  @override
+  final Widget? label;
+
+  @override
+  final Widget? description;
+
+  @override
+  final Widget Function(BuildContext, String) errorBuilder;
+
+  @override
   final bool autofocus;
 
-  /// An optional focus node to use as the focus node for the menu.
-  ///
-  /// If one is not supplied, then one will be automatically allocated, owned, and managed by the menu. The menu
-  /// will be focusable even if a [focusNode] is not supplied. If supplied, the given `focusNode` will be hosted by the
-  /// menu but not owned. See [FocusNode] for more information on what being hosted and/or owned implies.
-  ///
-  /// Supplying a focus node is sometimes useful if an ancestor to the menu wants to control when the menu has
-  /// the focus. The owner will be responsible for calling [FocusNode.dispose] on the focus node when it is done with
-  /// it, but the menu will attach/detach and reparent the node when needed.
+  @override
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if the menu's node gains focus, and false if it loses focus.
+  @override
   final ValueChanged<bool>? onFocusChange;
 
   /// The prefix icon.
@@ -151,7 +136,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
     this.autoHide = false,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -281,8 +266,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
     this.directionPadding = false,
     this.autoHide = false,
     this.label,
+
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,

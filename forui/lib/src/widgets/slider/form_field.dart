@@ -12,8 +12,11 @@ import 'package:meta/meta.dart';
 class SliderFormField extends FormField<FSliderSelection> implements FFormFieldProperties<FSliderSelection> {
   final FSliderController controller;
   final BoxConstraints constraints;
+  @override
   final Widget? label;
+  @override
   final Widget? description;
+  @override
   final Widget Function(BuildContext, String) errorBuilder;
 
   SliderFormField({

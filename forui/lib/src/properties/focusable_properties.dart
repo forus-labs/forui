@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// Properties for focusable widgets.
-interface class FFocusableProperties with Diagnosticable {
+class FFocusableProperties with Diagnosticable {
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
   ///
   /// Defaults to false.

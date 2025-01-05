@@ -19,8 +19,6 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 /// * [FSliderStyles] for customizing a slider's appearance.
 class FSlider extends StatelessWidget implements FFormFieldProperties<FSliderSelection> {
-  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
-
   static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
   static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {
@@ -40,15 +38,6 @@ class FSlider extends StatelessWidget implements FFormFieldProperties<FSliderSel
 
   /// The layout. Defaults to the current [TextDirection].
   final FLayout? layout;
-
-  /// The label.
-  final Widget? label;
-
-  /// The description.
-  final Widget? description;
-
-  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
-  final Widget Function(BuildContext, String) errorBuilder;
 
   /// The marks.
   final List<FSliderMark> marks;
@@ -84,6 +73,15 @@ class FSlider extends StatelessWidget implements FFormFieldProperties<FSliderSel
   final String Function(double) semanticValueFormatterCallback;
 
   @override
+  final Widget? label;
+
+  @override
+  final Widget? description;
+
+  @override
+  final Widget Function(BuildContext, String) errorBuilder;
+
+  @override
   final FormFieldSetter<FSliderSelection>? onSaved;
 
   @override
@@ -105,7 +103,7 @@ class FSlider extends StatelessWidget implements FFormFieldProperties<FSliderSel
     this.layout,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     this.marks = const [],
     this.trackMainAxisExtent,
     this.trackHitRegionCrossExtent,

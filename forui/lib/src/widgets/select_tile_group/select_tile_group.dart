@@ -20,8 +20,6 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 class FSelectTileGroup<T> extends FormField<Set<T>>
     with FTileGroupMixin<FTileMixin>
     implements FFormFieldProperties<Set<T>> {
-  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
-
   /// The controller.
   ///
   /// See:
@@ -63,19 +61,16 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
   /// The divider between tiles. Defaults tp [FTileDivider.indented].
   final FTileDivider divider;
 
-  /// The label displayed above the group.
-  ///
   /// It is not rendered if the group is disabled or part of a [FTileGroup].
+  @override
   final Widget? label;
 
-  /// The description displayed below the group.
-  ///
   /// It is not rendered if the group is disabled or part of a [FTileGroup].
+  @override
   final Widget? description;
 
-  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
-  ///
   /// It is not rendered if the group is disabled or part of a [FTileGroup].
+  @override
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// The semantic label used by accessibility frameworks.
@@ -93,7 +88,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
     this.divider = FTileDivider.indented,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     this.semanticLabel,
     super.onSaved,
     super.validator,
@@ -163,7 +158,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
     this.divider = FTileDivider.indented,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     this.semanticLabel,
     super.onSaved,
     super.validator,

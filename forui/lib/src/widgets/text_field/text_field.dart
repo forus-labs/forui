@@ -24,23 +24,22 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
   ) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
-  static Widget _errorBuilder(BuildContext context, String text) => Text(text);
-
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
-
-  /// The label above a text field.
-  final Widget? label;
 
   /// The text to display when the text field is empty.
   ///
   /// See [InputDecoration.hintText] for more information.
   final String? hint;
 
-  /// The description text.
-  ///
-  /// See [InputDecoration.helper] for more information.
+  @override
+  final Widget? label;
+
+  @override
   final Widget? description;
+
+  @override
+  final Widget Function(BuildContext, String) errorBuilder;
 
   /// The configuration for the magnifier of this text field.
   ///
@@ -471,11 +470,6 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
   /// An optional value to initialize the form field to, or null otherwise.
   final String? initialValue;
 
-  /// A builder that transforms a [FormFieldState.errorText] into a widget. Defaults to a [Text] widget.
-  ///
-  /// The builder is called whenever [validator] returns an error text.
-  final Widget Function(BuildContext, String) errorBuilder;
-
   /// Creates a [FTextField].
   const FTextField({
     this.style,
@@ -534,7 +528,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     super.key,
   });
 
@@ -596,7 +590,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     super.key,
   });
 
@@ -661,7 +655,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     super.key,
   });
 
@@ -727,7 +721,7 @@ final class FTextField extends StatelessWidget implements FFormFieldProperties<S
     this.initialValue,
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FLabelledProperties.defaultErrorBuilder,
     super.key,
   });
 

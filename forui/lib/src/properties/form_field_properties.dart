@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 
 
 /// Properties for a form field.
-interface class FFormFieldProperties<T> with Diagnosticable {
+class FFormFieldProperties<T> extends FLabelledProperties {
   /// An optional method to call with the final value when the form is saved via [FormState.save].
   final FormFieldSetter<T>? onSaved;
 
@@ -50,6 +51,9 @@ interface class FFormFieldProperties<T> with Diagnosticable {
     this.validator,
     this.enabled = true,
     this.autovalidateMode = AutovalidateMode.disabled,
+    super.label,
+    super.description,
+    super.errorBuilder,
   });
 
   @override
