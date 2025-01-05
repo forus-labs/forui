@@ -5,6 +5,13 @@
 * **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
   unfortunately overlooked and did not remove.
 
+* **Breaking:** Change `FPopover.followerAnchor` to `FPopover.popoverAnchor`.
+* **Breaking:** Change `FPopover.targetAnchor` to `FPopover.childAnchor`.
+* **Breaking:** Change `FPopover.followerBuilder` to `FPopover.popoverBuilder`.
+* **Breaking:** Change `FPopoverMenu.menuAnchor` to `FPopover.popoverAnchor`.
+* **Breaking:** Change `FSelectMenuTile.menuAnchor` to `FPopover.popoverAnchor`.
+* **Breaking:** Change `FSelectMenuTile.tileAnchor` to `FPopover.childAnchor`.
+
 
 ## 0.8.0
 

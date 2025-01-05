@@ -24,8 +24,8 @@ void main() {
             theme: theme.data,
             child: FPopover(
               controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
+              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
                 color: Colors.yellow,
                 child: SizedBox.square(
                   dimension: 100,
@@ -46,8 +46,8 @@ void main() {
             theme: theme.data,
             child: FPopover(
               controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
+              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
                 color: Colors.yellow,
                 child: SizedBox.square(
                   dimension: 100,
@@ -71,8 +71,8 @@ void main() {
             theme: theme.data,
             child: FPopover(
               controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
+              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
                 color: Colors.yellow,
                 child: SizedBox.square(
                   dimension: 100,
@@ -96,13 +96,13 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FPopover(
-              followerAnchor: Alignment.topRight,
-              targetAnchor: Alignment.bottomRight,
+              popoverAnchor: Alignment.topRight,
+              childAnchor: Alignment.bottomRight,
               directionPadding: true,
               style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
+              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
                 color: Colors.yellow,
                 child: SizedBox.square(
                   dimension: 100,
@@ -126,12 +126,12 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FPopover(
-              followerAnchor: Alignment.topRight,
-              targetAnchor: Alignment.bottomRight,
+              popoverAnchor: Alignment.topRight,
+              childAnchor: Alignment.bottomRight,
               style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
-              followerBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              target: const ColoredBox(
+              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
                 color: Colors.yellow,
                 child: SizedBox.square(
                   dimension: 100,

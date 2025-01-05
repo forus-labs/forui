@@ -17,10 +17,20 @@ class FPortal extends StatefulWidget {
   /// The controller that shows and hides the follower. It initially hides the follower.
   final OverlayPortalController controller;
 
-  /// The anchor of the follower to which the [targetAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  /// The point on the follower (floating content) that connects with the target, at the target's anchor.
+  ///
+  /// For example, [Alignment.topCenter] means the top-center point of the overlay will connection with the source.
+  /// See [targetAnchor] for changing the target's anchor.
+  ///
+  /// Defaults to [Alignment.topCenter].
   final Alignment followerAnchor;
 
-  /// The anchor of the target to which the [followerAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
+  /// The point on the target widget that connections with the follower (floating content, at the follower's anchor.
+  ///
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the overlay will connection with the source.
+  /// See [targetAnchor] for changing the target's anchor.
+  ///
+  /// Defaults to [Alignment.bottomCenter].
   final Alignment targetAnchor;
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to

@@ -16,8 +16,8 @@ void main() {
         TestScaffold.app(
           child: FPopover(
             controller: controller,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: FButton(
+            popoverBuilder: (context, style, _) => const Text('follower'),
+            child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -42,8 +42,8 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: false,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: FButton(
+            popoverBuilder: (context, style, _) => const Text('follower'),
+            child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -68,8 +68,8 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: false,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: FButton(
+            popoverBuilder: (context, style, _) => const Text('follower'),
+            child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -95,8 +95,8 @@ void main() {
         TestScaffold.app(
           child: FPopover.tappable(
             controller: controller,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: Container(
+            popoverBuilder: (context, style, _) => const Text('follower'),
+            child: Container(
               color: Colors.black,
               height: 10,
               width: 10,

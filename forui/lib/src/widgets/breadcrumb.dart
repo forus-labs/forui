@@ -218,7 +218,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       child: FPopoverMenu.tappable(
         style: widget.popOverMenuStyle,
         popoverController: controller,
-        menuAnchor: Alignment.topLeft,
+        popoverAnchor: Alignment.topLeft,
         childAnchor: Alignment.bottomLeft,
         menu: widget.menu,
         child: FIcon(

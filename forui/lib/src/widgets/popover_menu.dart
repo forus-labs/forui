@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 /// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
-class FPopoverMenu extends StatefulWidget implements FFocusableProperties {
+class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FFocusableProperties {
   /// The popover menu's style.
   final FPopoverMenuStyle? style;
 
@@ -41,28 +41,19 @@ class FPopoverMenu extends StatefulWidget implements FFocusableProperties {
   /// The divider between tile groups. Defaults to [FTileDivider.full].
   final FTileDivider divider;
 
-  /// The anchor of the menu to which the [childAnchor] is aligned to.
-  ///
-  /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
-  final Alignment menuAnchor;
+  @override
+  final Alignment popoverAnchor;
 
-  /// The anchor of the child to which the [menuAnchor] is aligned to.
-  ///
-  /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
+  @override
   final Alignment childAnchor;
 
-  /// The shifting strategy used to shift a menu when it overflows out of the viewport. Defaults to
-  /// [FPortalFollowerShift.flip].
-  ///
-  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
+  @override
   final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
 
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
+  @override
   final bool hideOnTapOutside;
 
-  /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
-  ///
-  /// Diagonal corners are ignored.
+  @override
   final bool directionPadding;
 
   /// The menu's semantic label used by accessibility frameworks.
@@ -96,7 +87,7 @@ class FPopoverMenu extends StatefulWidget implements FFocusableProperties {
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.menuAnchor = Alignment.topCenter,
+    this.popoverAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
@@ -122,7 +113,7 @@ class FPopoverMenu extends StatefulWidget implements FFocusableProperties {
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.menuAnchor = Alignment.topCenter,
+    this.popoverAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalFollowerShift.flip,
     this.hideOnTapOutside = true,
@@ -148,7 +139,7 @@ class FPopoverMenu extends StatefulWidget implements FFocusableProperties {
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
-      ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
+      ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
@@ -188,15 +179,15 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
     return (widget._tappable ? FPopover.tappable : FPopover.new)(
       controller: _controller,
       style: style,
-      followerAnchor: widget.menuAnchor,
-      targetAnchor: widget.childAnchor,
+      popoverAnchor: widget.popoverAnchor,
+      childAnchor: widget.childAnchor,
       shift: widget.shift,
       hideOnTapOutside: widget.hideOnTapOutside,
       directionPadding: widget.directionPadding,
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
-      followerBuilder: (context, _, __) => ConstrainedBox(
+      popoverBuilder: (context, _, __) => ConstrainedBox(
         constraints: BoxConstraints(maxWidth: style.maxWidth),
         child: FTileGroup.merge(
           controller: widget.scrollController,
@@ -209,7 +200,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
           children: widget.menu,
         ),
       ),
-      target: widget.child,
+      child: widget.child,
     );
   }
 
