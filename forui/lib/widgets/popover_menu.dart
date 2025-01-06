@@ -5,4 +5,4 @@
 /// See https://forui.dev/docs/overlay/popover-menu for working examples.
 library forui.widgets.popover_menu;
 
-export '../src/widgets/popover_menu.dart';
+export '../src/widgets/popover/popover_menu.dart';

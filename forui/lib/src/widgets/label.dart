@@ -27,7 +27,7 @@ class FLabelledProperties {
   /// The description.
   final Widget? description;
 
-  /// The error displayed below the [description].
+  /// The error, typically displayed below the [description].
   ///
   /// If the value is present, the widget is in an error state.
   final Widget? error;
@@ -86,18 +86,6 @@ final class FLabel extends StatelessWidget implements FLabelledProperties {
   /// The child.
   final Widget child;
 
-  /// Creates a [FLabel] from the given properties.
-  FLabel.fromProperties({
-    required FLabelledProperties properties,
-    required this.axis,
-    required this.child,
-    this.style,
-    this.state = FLabelState.enabled,
-    super.key,
-  })  : label = properties.label,
-        description = properties.description,
-        error = properties.error;
-
   /// Creates a [FLabel].
   const FLabel({
     required this.axis,
@@ -109,6 +97,18 @@ final class FLabel extends StatelessWidget implements FLabelledProperties {
     this.state = FLabelState.enabled,
     super.key,
   });
+
+  /// Creates a [FLabel] from the given properties.
+  FLabel.fromProperties({
+    required FLabelledProperties properties,
+    required this.axis,
+    required this.child,
+    this.style,
+    this.state = FLabelState.enabled,
+    super.key,
+  })  : label = properties.label,
+        description = properties.description,
+        error = properties.error;
 
   @override
   Widget build(BuildContext context) {

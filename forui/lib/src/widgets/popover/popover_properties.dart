@@ -10,20 +10,18 @@ class FPopoverProperties with Diagnosticable {
       ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
       : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 
+  ///
+  /// {@template a}
   /// The point on the popover (floating content) that connects with the target, at the child's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
   /// See [childAnchor] for changing the child's anchor.
+  /// {@endtemplate}
   ///
   /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
   final Alignment popoverAnchor;
 
-  /// The point on the child widget that connections with the popover (floating content), at the popover's anchor.
-  ///
-  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
-  /// See [popoverAnchor] for changing the popover's anchor.
-  ///
-  /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
+  /// {@macro a}
   final Alignment childAnchor;
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to

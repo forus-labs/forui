@@ -53,9 +53,21 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
   /// The divider between select tiles. Defaults to [FTileDivider.indented].
   final FTileDivider divider;
 
+  /// The point on the popover (floating content) that connects with the target, at the child's anchor.
+  ///
+  /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
+  /// See [childAnchor] for changing the child's anchor.
+  ///
+  /// Defaults to [Alignment.topRight].
   @override
   final Alignment popoverAnchor;
 
+  /// The point on the child widget that connections with the popover (floating content), at the popover's anchor.
+  ///
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
+  /// See [popoverAnchor] for changing the popover's anchor.
+  ///
+  /// Defaults to [Alignment.bottomRight].
   @override
   final Alignment childAnchor;
 

@@ -19,15 +19,15 @@ class FPortal extends StatefulWidget {
 
   /// The point on the follower (floating content) that connects with the target, at the target's anchor.
   ///
-  /// For example, [Alignment.topCenter] means the top-center point of the overlay will connection with the source.
+  /// For example, [Alignment.topCenter] means the top-center point of the follower will connect with the target.
   /// See [targetAnchor] for changing the target's anchor.
   ///
   /// Defaults to [Alignment.topCenter].
   final Alignment followerAnchor;
 
-  /// The point on the target widget that connections with the follower (floating content, at the follower's anchor.
+  /// The point on the target widget that connections with the follower (floating content), at the follower's anchor.
   ///
-  /// For example, [Alignment.bottomCenter] means the bottom-center point of the overlay will connection with the source.
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the target will connect with the follower.
   /// See [targetAnchor] for changing the target's anchor.
   ///
   /// Defaults to [Alignment.bottomCenter].

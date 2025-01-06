@@ -13,19 +13,17 @@ import 'package:meta/meta.dart';
 /// See:
 /// * https://forui.dev/docs/form/switch for working examples.
 /// * [FSwitchStyle] for customizing a switch's appearance.
-class FSwitch extends StatelessWidget implements FFocusableProperties {
+class FSwitch extends StatelessWidget implements FFocusableProperties, FLabelledProperties {
   /// The style. Defaults to [FThemeData.switchStyle].
   final FSwitchStyle? style;
 
-  /// The label displayed next to the checkbox.
+  @override
   final Widget? label;
 
-  /// The description displayed below the [label].
+  @override
   final Widget? description;
 
-  /// The error displayed below the [description].
-  ///
-  /// If the value is present, the checkbox is in an error state.
+  @override
   final Widget? error;
 
   /// The semantic label used by accessibility frameworks.
@@ -107,13 +105,11 @@ class FSwitch extends StatelessWidget implements FFocusableProperties {
           label: semanticLabel,
           enabled: enabled,
           toggled: value,
-          child: FLabel(
+          child: FLabel.fromProperties(
+            properties: this,
             axis: Axis.horizontal,
             state: labelState,
             style: style.labelStyle,
-            label: label,
-            description: description,
-            error: error,
             child: CupertinoSwitch(
               value: value,
               onChanged: (value) {

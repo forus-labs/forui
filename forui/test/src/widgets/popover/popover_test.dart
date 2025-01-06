@@ -89,11 +89,12 @@ void main() {
     });
   });
 
-  group('FPopover.tappable', () {
+  group('automatic', () {
     testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FPopover.tappable(
+          child: FPopover(
+            automatic: true,
             controller: controller,
             popoverBuilder: (context, style, _) => const Text('follower'),
             child: Container(

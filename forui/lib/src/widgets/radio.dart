@@ -12,19 +12,17 @@ import 'package:meta/meta.dart';
 /// See:
 /// * https://forui.dev/docs/form/radio for working examples.
 /// * [FRadioStyle] for customizing a radio's appearance.
-class FRadio extends StatefulWidget implements FFocusableProperties {
+class FRadio extends StatefulWidget implements FFocusableProperties, FLabelledProperties {
   /// The style. Defaults to [FThemeData.radioStyle].
   final FRadioStyle? style;
 
-  /// The label displayed next to the radio.
+  @override
   final Widget? label;
 
-  /// The description displayed below the [label].
+  @override
   final Widget? description;
 
-  /// The error displayed below the [description].
-  ///
-  /// If the value is present, the radio is in an error state.
+  @override
   final Widget? error;
 
   /// The semantic label used by accessibility frameworks.
@@ -115,13 +113,11 @@ class _State extends State<FRadio> {
           label: widget.semanticLabel,
           enabled: widget.enabled,
           checked: widget.value,
-          child: FLabel(
+          child: FLabel.fromProperties(
+            properties: widget,
             axis: Axis.horizontal,
             state: labelState,
             style: style.labelStyle,
-            label: widget.label,
-            description: widget.description,
-            error: widget.error,
             child: FFocusedOutline(
               style: style.focusedOutlineStyle,
               focused: _focused,

@@ -74,7 +74,14 @@ class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FFocusa
   /// The child.
   final Widget child;
 
-  final bool _tappable;
+  /// True if the popover should be automatically shown when the [child] is tapped.
+  ///
+  /// When true, avoid using a [GestureDetector] in the child, such as [FButton]. The child will be wrapped in a
+  /// `GestureDetector`, and only one `GestureDetector` will be called if there are multiple overlapping
+  /// `GestureDetector`s, which may cause unexpected behavior.
+  ///
+  /// Defaults to false.
+  final bool automatic;
 
   /// Creates a menu that only shows the menu when the controller is manually toggled.
   const FPopoverMenu({
@@ -96,34 +103,9 @@ class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FFocusa
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.automatic = false,
     super.key,
-  }) : _tappable = false;
-
-  /// Creates a menu that is automatically shown when the [child] is tapped.
-  ///
-  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. This is because only
-  /// one `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s.
-  const FPopoverMenu.tappable({
-    required this.menu,
-    required this.child,
-    this.style,
-    this.popoverController,
-    this.scrollController,
-    this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FTileDivider.full,
-    this.popoverAnchor = Alignment.topCenter,
-    this.childAnchor = Alignment.bottomCenter,
-    this.shift = FPortalFollowerShift.flip,
-    this.hideOnTapOutside = true,
-    this.directionPadding = false,
-    this.semanticLabel,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    super.key,
-  }) : _tappable = true;
+  });
 
   @override
   State<FPopoverMenu> createState() => _FPopoverMenuState();
@@ -147,7 +129,8 @@ class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FFocusa
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(FlagProperty('automatic', value: automatic, ifTrue: 'automatic'));
   }
 }
 
@@ -176,17 +159,12 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverMenuStyle;
-    return (widget._tappable ? FPopover.tappable : FPopover.new)(
+    return FPopover.fromProperties(
+      automatic: widget.automatic,
       controller: _controller,
       style: style,
-      popoverAnchor: widget.popoverAnchor,
-      childAnchor: widget.childAnchor,
-      shift: widget.shift,
-      hideOnTapOutside: widget.hideOnTapOutside,
-      directionPadding: widget.directionPadding,
-      autofocus: widget.autofocus,
-      focusNode: widget.focusNode,
-      onFocusChange: widget.onFocusChange,
+      popoverProperties: widget,
+      focusableProperties: widget,
       popoverBuilder: (context, _, __) => ConstrainedBox(
         constraints: BoxConstraints(maxWidth: style.maxWidth),
         child: FTileGroup.merge(

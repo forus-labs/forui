@@ -215,7 +215,8 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
     final style = FBreadcrumbItemData.of(context).style;
     return Padding(
       padding: style.padding,
-      child: FPopoverMenu.tappable(
+      child: FPopoverMenu(
+        automatic: true,
         style: widget.popOverMenuStyle,
         popoverController: controller,
         popoverAnchor: Alignment.topLeft,

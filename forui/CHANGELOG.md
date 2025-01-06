@@ -1,10 +1,21 @@
 ## 0.9.0 (Next)
 
+### Additions
+
+* Add `FFocusableProperties`.
+* Add `FFormFieldProperties`.
+* Add `FPopoverProperties`.
+* Add `FLabelledProperties`.
+* Add `FLabel.fromProperties`.
+* Add `FPopover.automatic`.
+* Add `FPopoverMenu.automatic`.
+
 ### Changes
 
-* **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
+* **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that we 
   unfortunately overlooked and did not remove.
-
+* **Breaking:** Remove `FPopover.tappable`. Set `FPopover.automatic` to true instead.
+* **Breaking:** Remove `FPopoverMenu.tappable`. Set `FPopoverMenu.automatic` to true instead.
 * **Breaking:** Change `FPopover.followerAnchor` to `FPopover.popoverAnchor`.
 * **Breaking:** Change `FPopover.targetAnchor` to `FPopover.childAnchor`.
 * **Breaking:** Change `FPopover.followerBuilder` to `FPopover.popoverBuilder`.

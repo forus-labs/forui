@@ -24,8 +24,11 @@ class FTooltipController extends FChangeNotifier {
 
   /// Convenience method for toggling the current [shown] status.
   ///
-  /// This method should typically not be called while the widget tree is being
-  /// rebuilt.
+  ///
+  ///
+  /// [FAccordionController] for customizing the accordion's selection behavior.
+  ///
+  /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> toggle() async => shown ? hide() : show();
 
   /// Shows the tooltip.
@@ -78,10 +81,20 @@ class FTooltip extends StatefulWidget {
   /// The tooltip's style.
   final FTooltipStyle? style;
 
-  /// The anchor of the follower to which the [childAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
+  /// The point on the follower (floating content) that connects with the child, at the child's anchor.
+  ///
+  /// For example, [Alignment.topCenter] means the top-center point of the follower will connect with the child.
+  /// See [childAnchor] for changing the child's anchor.
+  ///
+  /// Defaults to [Alignment.topCenter].
   final Alignment tipAnchor;
 
-  /// The anchor of the target to which the [tipAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  /// The point on the child widget that connections with the tooltip (floating content, at the follower's anchor.
+  ///
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the overlay will connection with the source.
+  /// See [tipAnchor] for changing the target's anchor.
+  ///
+  /// Defaults to [Alignment.bottomCenter].
   final Alignment childAnchor;
 
   /// The shifting strategy used to shift a tooltip's tip when it overflows out of the viewport. Defaults to

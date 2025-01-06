@@ -108,7 +108,14 @@ class FPopover extends StatefulWidget implements FPopoverProperties, FFocusableP
   /// The child to which the popover is laid over.
   final Widget child;
 
-  final bool _tappable;
+  /// True if the popover should be automatically shown when the [child] is tapped.
+  ///
+  /// When true, avoid using a [GestureDetector] in the child, such as [FButton]. The child will be wrapped in a
+  /// `GestureDetector`, and only one `GestureDetector` will be called if there are multiple overlapping
+  /// `GestureDetector`s, which may cause unexpected behavior.
+  ///
+  /// Defaults to false.
+  final bool automatic;
 
   /// Creates a popover that only shows the popover when the controller is manually toggled.
   FPopover({
@@ -123,35 +130,32 @@ class FPopover extends StatefulWidget implements FPopoverProperties, FFocusableP
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.automatic = false,
     Alignment? popoverAnchor,
     Alignment? childAnchor,
     super.key,
   })  : popoverAnchor = popoverAnchor ?? FPopoverProperties.defaultAlignment.popover,
-        childAnchor = childAnchor ?? FPopoverProperties.defaultAlignment.child,
-        _tappable = false;
+        childAnchor = childAnchor ?? FPopoverProperties.defaultAlignment.child;
 
-  /// Creates a popover that is automatically shown when the [child] is tapped.
-  ///
-  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. This is because only
-  /// one `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s.
-  FPopover.tappable({
+  /// Creates a popover from the given properties.
+  FPopover.fromProperties({
+    required FPopoverProperties popoverProperties,
+    required FFocusableProperties focusableProperties,
+    required this.controller,
     required this.popoverBuilder,
     required this.child,
-    this.controller,
     this.style,
-    this.shift = FPortalFollowerShift.flip,
-    this.hideOnTapOutside = true,
-    this.directionPadding = false,
     this.semanticLabel,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    Alignment? popoverAnchor,
-    Alignment? childAnchor,
+    this.automatic = false,
     super.key,
-  })  : popoverAnchor = popoverAnchor ?? FPopoverProperties.defaultAlignment.popover,
-        childAnchor = childAnchor ?? FPopoverProperties.defaultAlignment.child,
-        _tappable = true;
+  })  : popoverAnchor = popoverProperties.popoverAnchor,
+        childAnchor = popoverProperties.childAnchor,
+        shift = popoverProperties.shift,
+        hideOnTapOutside = popoverProperties.hideOnTapOutside,
+        directionPadding = popoverProperties.directionPadding,
+        autofocus = focusableProperties.autofocus,
+        focusNode = focusableProperties.focusNode,
+        onFocusChange = focusableProperties.onFocusChange;
 
   @override
   State<FPopover> createState() => _State();
@@ -171,7 +175,8 @@ class FPopover extends StatefulWidget implements FPopoverProperties, FFocusableP
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(ObjectFlagProperty.has('followerBuilder', popoverBuilder));
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
+      ..add(FlagProperty('automatic', value: automatic, ifTrue: 'automatic'));
   }
 }
 
@@ -182,6 +187,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    final a = widget.childAnchor;
     _controller = widget.controller ?? FPopoverController(vsync: this);
   }
 
@@ -241,7 +247,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       ),
       child: TapRegion(
         groupId: _group,
-        child: widget._tappable
+        child: widget.automatic
             ? GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: _controller.toggle,

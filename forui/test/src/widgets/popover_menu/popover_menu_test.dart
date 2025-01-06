@@ -139,11 +139,13 @@ void main() {
     });
   });
 
-  group('FPopover.tappable', () {
+  group('automatic', () {
     testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FPopoverMenu.tappable(
+          child: FPopoverMenu(
+            automatic: true,
+            popoverController: null,
             menu: [
               FTileGroup(
                 children: [
