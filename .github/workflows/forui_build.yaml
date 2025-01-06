@@ -46,6 +46,7 @@ jobs:
               echo "$output"
               exit 1
           fi
+        if: runner.os == 'Linux'
 
   build-android:
     name: Build Android
