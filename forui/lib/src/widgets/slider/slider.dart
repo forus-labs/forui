@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/form_field_properties.dart';
 import 'package:forui/src/widgets/slider/form_field.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';

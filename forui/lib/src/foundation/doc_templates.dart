@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 @internal
@@ -51,7 +52,3 @@ extension Scroll on Never {
   /// {@endtemplate}
   static const cacheExtent = '';
 }
-
-
-
-
