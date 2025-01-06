@@ -18,8 +18,6 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// * [FSelectTile] for a single select tile.
 /// * [FTileGroupStyle] for customizing a select group's appearance.
 class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMixin>, FFormFieldProperties<Set<T>> {
-  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
-
   /// The controller.
   ///
   /// See:
