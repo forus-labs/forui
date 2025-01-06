@@ -27,10 +27,7 @@ class FLineCalendar extends StatelessWidget {
   /// The alignment to which the initial date will be aligned. Defaults to [Alignment.center].
   final AlignmentDirectional initialDateAlignment;
 
-  /// The menu's cache extent in logical pixels.
-  ///
-  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
-  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  /// {@macro forui.foundation.doc_templates.cacheExtent}
   final double? cacheExtent;
 
   /// The builder used to build a line calendar item. Defaults to returning the given child.

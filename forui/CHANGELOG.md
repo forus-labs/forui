@@ -1,5 +1,9 @@
 ## 0.9.0 (Next)
 
+### Additions
+
+* Add `FFormProperties`.
+
 ### Changes
 
 * **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 

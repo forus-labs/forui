@@ -16,9 +16,7 @@ import 'package:meta/meta.dart';
 /// See:
 /// * https://forui.dev/docs/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
-class FSelectGroup<T> extends FormField<Set<T>> {
-  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
-
+class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>> {
   /// The controller.
   ///
   /// See:
@@ -29,13 +27,13 @@ class FSelectGroup<T> extends FormField<Set<T>> {
   /// The style. Defaults to [FThemeData.selectGroupStyle].
   final FSelectGroupStyle? style;
 
-  /// The label displayed next to the select group.
+  @override
   final Widget? label;
 
-  /// The description displayed below the [label].
+  @override
   final Widget? description;
 
-  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  @override
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// The items.
@@ -48,14 +46,12 @@ class FSelectGroup<T> extends FormField<Set<T>> {
     this.style,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
-    super.initialValue,
     super.forceErrorText,
     super.enabled = true,
     super.autovalidateMode,
-    super.restorationId,
     super.key,
   }) : super(
           builder: (field) {

@@ -27,24 +27,16 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
 
-  /// The scroll controller used to control the position to which this menu is scrolled.
-  ///
-  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  /// {@macro forui.widgets.FTileGroup.controller}
   final ScrollController? scrollController;
 
-  /// The menu's cache extent in logical pixels.
-  ///
-  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
-  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  /// {@macro forui.foundation.doc_templates.cacheExtent}
   final double? cacheExtent;
 
-  /// The menu's max height, in logical pixels. Defaults to infinity.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [maxHeight] is not positive.
+  /// {@macro forui.widgets.FTileGroup.maxHeight}
   final double maxHeight;
 
-  /// Determines the way that the menu's drag start behavior is handled. Defaults to [DragStartBehavior.start].
+  /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
   /// The style.
@@ -80,40 +72,27 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
   final bool autoHide;
 
-  /// The label displayed next to the select group.
+  /// The label displayed above to the select menu tile.
   final Widget? label;
 
-  /// The description displayed below the group.
+  /// The description displayed below the select menu tile.
   final Widget? description;
 
   /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
   final Widget Function(BuildContext, String) errorBuilder;
 
-  /// The menu's semantic label used by accessibility frameworks.
+  /// {@macro forui.foundation.doc_templates.semanticLabel}
   final String? semanticLabel;
 
-  /// True if the menu will be selected as the initial focus when no other node in its scope is currently focused.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   ///
   /// Defaults to false.
-  ///
-  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
-  /// autofocus set, then the first one added to the tree will get focus.
   final bool autofocus;
 
-  /// An optional focus node to use as the focus node for the menu.
-  ///
-  /// If one is not supplied, then one will be automatically allocated, owned, and managed by the menu. The menu
-  /// will be focusable even if a [focusNode] is not supplied. If supplied, the given `focusNode` will be hosted by the
-  /// menu but not owned. See [FocusNode] for more information on what being hosted and/or owned implies.
-  ///
-  /// Supplying a focus node is sometimes useful if an ancestor to the menu wants to control when the menu has
-  /// the focus. The owner will be responsible for calling [FocusNode.dispose] on the focus node when it is done with
-  /// it, but the menu will attach/detach and reparent the node when needed.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if the menu's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// The prefix icon.

@@ -19,30 +19,33 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The style.
   final FTileGroupStyle? style;
 
+  /// {@template forui.widgets.FTileGroup.controller}
   /// The scroll controller used to control the position to which this group is scrolled.
   ///
   /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  /// {@endtemplate}
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   final ScrollController? controller;
 
-  /// The cache extent in logical pixels.
-  ///
-  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
-  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  /// {@macro forui.foundation.doc_templates.cacheExtent}
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   final double? cacheExtent;
 
+  /// {@template forui.widgets.FTileGroup.maxHeight}
   /// The max height, in logical pixels. Defaults to infinity.
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [maxHeight] is not positive.
+  /// {@endtemplate}
+  ///
+  /// It is ignored if the group is part of a merged [FTileGroup].
   final double maxHeight;
 
+  /// {@template forui.widgets.FTileGroup.dragStartBehavior}
   /// Determines the way that drag start behavior is handled. Defaults to [DragStartBehavior.start].
+  /// {@endtemplate}
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   final DragStartBehavior dragStartBehavior;
@@ -142,6 +145,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
 
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
+  /// {@template forui.widgets.FTileGroup.builder}
   /// The [tileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to `tileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -154,6 +158,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
   /// * [count] is null and [tileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
+  /// {@endtemplate}
   FTileGroup.builder({
     required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
