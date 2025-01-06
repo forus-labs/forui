@@ -274,7 +274,7 @@ class FSheetStyle with Diagnosticable {
   /// The threshold for determining whether the sheet is closing. Defaults to 0.5.
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if the value is not in the range [0, 1].
+  /// Throws an [AssertionError] if the value is not in the range `[0, 1]`.
   final double closeProgressThreshold;
 
   /// Creates a [FSheetStyle].

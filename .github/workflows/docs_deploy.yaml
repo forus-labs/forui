@@ -88,3 +88,4 @@ jobs:
       - uses: actions/setup-go@v5
       - run: go install github.com/raviqqe/muffet/v2@latest
       - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=8192 --exclude="(\/cdn-cgi\/)|(github.com)"
+        if: startsWith(github.ref, 'refs/tags/forui/') || inputs.target == 'production'
