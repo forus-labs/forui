@@ -4,48 +4,58 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-/// A portal renders a follower widget that "floats" on top of a target widget.
+/// A portal renders a portal widget that "floats" on top of a child widget.
 ///
-/// Similar to an [OverlayPortal], it requires an [Overlay] ancestor. Unlike an [OverlayPortal], the follower is aligned
-/// relative to the target.
+/// Similar to an [OverlayPortal], it requires an [Overlay] ancestor. Unlike an [OverlayPortal], the Portal is aligned
+/// relative to the child.
 ///
 /// See:
-/// * [FPortalFollowerShift] for shifting strategies when a follower overflows outside of the viewport.
-/// * [OverlayPortalController] for controlling the follower's visibility.
+/// * [FPortalShift] for shifting strategies when a portal overflows outside of the viewport.
+/// * [OverlayPortalController] for controlling the portal's visibility.
 /// * [OverlayPortal] for the underlying widget.
 class FPortal extends StatefulWidget {
-  /// The controller that shows and hides the follower. It initially hides the follower.
+  /// The controller that shows and hides the portal. It initially hides the portal.
   final OverlayPortalController controller;
 
-  /// The anchor of the follower to which the [targetAnchor] is aligned to. Defaults to [Alignment.topCenter].
-  final Alignment followerAnchor;
-
-  /// The anchor of the target to which the [followerAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
-  final Alignment targetAnchor;
-
-  /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
-  /// [FPortalFollowerShift.flip].
+  /// The point on the portal (floating content) that connects with the child, at the child's anchor.
   ///
-  /// See [FPortalFollowerShift] for the different shifting strategies.
-  final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
+  /// For example, [Alignment.topCenter] means the top-center point of the portal will connect with the child.
+  /// See [childAnchor] for changing the child's anchor.
+  ///
+  /// Defaults to [Alignment.topCenter].
+  final Alignment portalAnchor;
 
-  /// The offset to adjust the [shift]ed follower by. Defaults to [Offset.zero].
+  /// The point on the child widget that connections with the portal (floating content), at the portal's anchor.
+  ///
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the portal.
+  /// See [childAnchor] for changing the child's anchor.
+  ///
+  /// Defaults to [Alignment.bottomCenter].
+  final Alignment childAnchor;
+
+  /// The shifting strategy used to shift a portal when it overflows out of the viewport. Defaults to
+  /// [FPortalShift.flip].
+  ///
+  /// See [FPortalShift] for the different shifting strategies.
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+
+  /// The offset to adjust the [shift]ed portal by. Defaults to [Offset.zero].
   final Offset offset;
 
-  /// The follower.
-  final WidgetBuilder followerBuilder;
+  /// The portal builder which returns the floating content.
+  final WidgetBuilder portalBuilder;
 
-  /// The target.
+  /// The child which the portal is aligned to.
   final Widget child;
 
   /// Creates a portal.
   const FPortal({
     required this.controller,
-    required this.followerBuilder,
+    required this.portalBuilder,
     required this.child,
-    this.followerAnchor = Alignment.topCenter,
-    this.targetAnchor = Alignment.bottomCenter,
-    this.shift = FPortalFollowerShift.flip,
+    this.portalAnchor = Alignment.topCenter,
+    this.childAnchor = Alignment.bottomCenter,
+    this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     super.key,
   });
@@ -58,11 +68,11 @@ class FPortal extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
-      ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
+      ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(ObjectFlagProperty.has('followerBuilder', followerBuilder));
+      ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder));
   }
 }
 
@@ -78,11 +88,11 @@ class _State extends State<FPortal> {
             link: _link,
             child: _Alignment(
               link: _link,
-              followerAnchor: widget.followerAnchor,
-              targetAnchor: widget.targetAnchor,
+              portalAnchor: widget.portalAnchor,
+              childAnchor: widget.childAnchor,
               shift: widget.shift,
               offset: widget.offset,
-              child: widget.followerBuilder(context),
+              child: widget.portalBuilder(context),
             ),
           ),
           child: widget.child,
@@ -92,21 +102,21 @@ class _State extends State<FPortal> {
 
 class _Alignment extends SingleChildRenderObjectWidget {
   final LayerLink _link;
-  final Alignment _targetAnchor;
-  final Alignment _followerAnchor;
-  final Offset Function(Size, FPortalTarget, FPortalFollower) _shift;
+  final Alignment _childAnchor;
+  final Alignment _portalAnchor;
+  final Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
   final Offset _offset;
 
   const _Alignment({
     required Widget child,
     required LayerLink link,
-    required Alignment targetAnchor,
-    required Alignment followerAnchor,
-    required Offset Function(Size, FPortalTarget, FPortalFollower) shift,
+    required Alignment childAnchor,
+    required Alignment portalAnchor,
+    required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     required Offset offset,
   })  : _link = link,
-        _targetAnchor = targetAnchor,
-        _followerAnchor = followerAnchor,
+        _childAnchor = childAnchor,
+        _portalAnchor = portalAnchor,
         _shift = shift,
         _offset = offset,
         super(child: child);
@@ -114,8 +124,8 @@ class _Alignment extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) => _RenderBox(
         link: _link,
-        targetAnchor: _targetAnchor,
-        followerAnchor: _followerAnchor,
+        childAnchor: _childAnchor,
+        portalAnchor: _portalAnchor,
         shift: _shift,
         offset: _offset,
       );
@@ -124,8 +134,8 @@ class _Alignment extends SingleChildRenderObjectWidget {
   void updateRenderObject(BuildContext context, _RenderBox renderObject) {
     renderObject
       ..link = _link
-      ..targetAnchor = _targetAnchor
-      ..followerAnchor = _followerAnchor
+      ..childAnchor = _childAnchor
+      ..portalAnchor = _portalAnchor
       ..shift = _shift
       ..offset = _offset;
   }
@@ -133,20 +143,20 @@ class _Alignment extends SingleChildRenderObjectWidget {
 
 class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   LayerLink _link;
-  Alignment _targetAnchor;
-  Alignment _followerAnchor;
-  Offset Function(Size, FPortalTarget, FPortalFollower) _shift;
+  Alignment _childAnchor;
+  Alignment _portalAnchor;
+  Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
   Offset _offset;
 
   _RenderBox({
     required LayerLink link,
-    required Alignment targetAnchor,
-    required Alignment followerAnchor,
-    required Offset Function(Size, FPortalTarget, FPortalFollower) shift,
+    required Alignment childAnchor,
+    required Alignment portalAnchor,
+    required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     required Offset offset,
   })  : _link = link,
-        _targetAnchor = targetAnchor,
-        _followerAnchor = followerAnchor,
+        _childAnchor = childAnchor,
+        _portalAnchor = portalAnchor,
         _shift = shift,
         _offset = offset;
 
@@ -165,8 +175,8 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     if (tuple case (final child?, final BoxParentData data?, final offset?, final leaderSize?)) {
       data.offset = _shift(
             size,
-            (offset: offset, size: leaderSize, anchor: targetAnchor),
-            (size: child.size, anchor: followerAnchor),
+            (offset: offset, size: leaderSize, anchor: childAnchor),
+            (size: child.size, anchor: portalAnchor),
           ) +
           _offset;
       context.paintChild(child, data.offset);
@@ -194,8 +204,8 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('link', link))
-      ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
-      ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset));
   }
@@ -211,31 +221,31 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     markNeedsPaint();
   }
 
-  Alignment get targetAnchor => _targetAnchor;
+  Alignment get childAnchor => _childAnchor;
 
-  set targetAnchor(Alignment value) {
-    if (_targetAnchor == value) {
+  set childAnchor(Alignment value) {
+    if (_childAnchor == value) {
       return;
     }
 
-    _targetAnchor = value;
+    _childAnchor = value;
     markNeedsPaint();
   }
 
-  Alignment get followerAnchor => _followerAnchor;
+  Alignment get portalAnchor => _portalAnchor;
 
-  set followerAnchor(Alignment value) {
-    if (_followerAnchor == value) {
+  set portalAnchor(Alignment value) {
+    if (_portalAnchor == value) {
       return;
     }
 
-    _followerAnchor = value;
+    _portalAnchor = value;
     markNeedsPaint();
   }
 
-  Offset Function(Size, FPortalTarget, FPortalFollower) get shift => _shift;
+  Offset Function(Size, FPortalChildBox, FPortalBox) get shift => _shift;
 
-  set shift(Offset Function(Size, FPortalTarget, FPortalFollower) value) {
+  set shift(Offset Function(Size, FPortalChildBox, FPortalBox) value) {
     if (_shift == value) {
       return;
     }

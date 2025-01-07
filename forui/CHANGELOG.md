@@ -6,6 +6,10 @@
 
 ### Changes
 
+* **Breaking:** Change `FPortal.followerAnchor(...)` to `FPortal.portalAnchor(...)`.
+* **Breaking:** Change `FPortal.targetAnchor(...)` to `FPortal.childAnchor(...)`.
+* **Breaking:** Change `FPortal.followerBuilder` to `FPortal.portalBuilder`.
+* **Breaking:** Change `FPortalFollowerShift` to `FPortalShift`.
 * **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
   unfortunately overlooked and did not remove.
 

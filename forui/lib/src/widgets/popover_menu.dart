@@ -44,10 +44,10 @@ class FPopoverMenu extends StatefulWidget {
   final Alignment childAnchor;
 
   /// The shifting strategy used to shift a menu when it overflows out of the viewport. Defaults to
-  /// [FPortalFollowerShift.flip].
+  /// [FPortalShift.flip].
   ///
-  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
+  /// See [FPortalShift] for more information on the different shifting strategies.
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
   final bool hideOnTapOutside;
@@ -92,7 +92,7 @@ class FPopoverMenu extends StatefulWidget {
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
     this.semanticLabel,
@@ -118,7 +118,7 @@ class FPopoverMenu extends StatefulWidget {
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
     this.semanticLabel,

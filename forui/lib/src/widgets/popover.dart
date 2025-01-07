@@ -91,10 +91,10 @@ class FPopover extends StatefulWidget {
   final Alignment targetAnchor;
 
   /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
-  /// [FPortalFollowerShift.flip].
+  /// [FPortalShift.flip].
   ///
-  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
+  /// See [FPortalShift] for more information on the different shifting strategies.
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
   final bool hideOnTapOutside;
@@ -132,7 +132,7 @@ class FPopover extends StatefulWidget {
     required this.followerBuilder,
     required this.target,
     this.style,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
     this.semanticLabel,
@@ -155,7 +155,7 @@ class FPopover extends StatefulWidget {
     required this.target,
     this.controller,
     this.style,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
     this.semanticLabel,
@@ -222,12 +222,12 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
     return FPortal(
       controller: _controller._overlay,
-      followerAnchor: widget.followerAnchor,
-      targetAnchor: widget.targetAnchor,
+      portalAnchor: widget.followerAnchor,
+      childAnchor: widget.targetAnchor,
       shift: widget.shift,
       offset:
           widget.directionPadding ? Offset.zero : Alignments.removeDirectionalPadding(style.padding, follower, target),
-      followerBuilder: (context) => CallbackShortcuts(
+      portalBuilder: (context) => CallbackShortcuts(
         bindings: {
           const SingleActivator(LogicalKeyboardKey.escape): _controller.hide,
         },

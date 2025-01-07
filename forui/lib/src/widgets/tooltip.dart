@@ -85,10 +85,10 @@ class FTooltip extends StatefulWidget {
   final Alignment childAnchor;
 
   /// The shifting strategy used to shift a tooltip's tip when it overflows out of the viewport. Defaults to
-  /// [FPortalFollowerShift.flip].
+  /// [FPortalShift.flip].
   ///
-  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
+  /// See [FPortalShift] for more information on the different shifting strategies.
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   /// True if the tooltip should be shown when hovered over. Defaults to true.
   final bool hover;
@@ -120,7 +120,7 @@ class FTooltip extends StatefulWidget {
     this.style,
     this.tipAnchor = Alignment.bottomCenter,
     this.childAnchor = Alignment.topCenter,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hover = true,
     this.hoverEnterDuration = const Duration(milliseconds: 500),
     this.hoverExitDuration = Duration.zero,
@@ -223,10 +223,10 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
     return FPortal(
       controller: _controller._overlay,
-      targetAnchor: widget.childAnchor,
-      followerAnchor: widget.tipAnchor,
+      childAnchor: widget.childAnchor,
+      portalAnchor: widget.tipAnchor,
       shift: widget.shift,
-      followerBuilder: (context) => Semantics(
+      portalBuilder: (context) => Semantics(
         container: true,
         child: FadeTransition(
           opacity: _controller._fade,

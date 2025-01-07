@@ -34,7 +34,7 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => FPortal(
         controller: controller,
-        followerBuilder: (context) => Padding(
+        portalBuilder: (context) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(

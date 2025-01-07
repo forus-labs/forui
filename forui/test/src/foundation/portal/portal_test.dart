@@ -17,10 +17,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPortal(
-            followerAnchor: Alignment.topRight,
-            targetAnchor: Alignment.bottomLeft,
+            portalAnchor: Alignment.topRight,
+            childAnchor: Alignment.bottomLeft,
             controller: controller,
-            followerBuilder: (context) => Padding(
+            portalBuilder: (context) => Padding(
               padding: const EdgeInsets.all(5),
               child: ColoredBox(
                 color: Colors.red,
