@@ -3,27 +3,27 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 /// A form field's properties.
-mixin FFormFieldProperties<T> {
+abstract class FFormFieldProperties<T> {
   /// The default builder for errors displayed below the [description].
   static Widget defaultErrorBuilder(BuildContext context, String error) => Text(error);
 
   /// The label.
-  Widget? get label;
+  final Widget? label;
 
   /// The description.
-  Widget? get description;
+  final Widget? description;
 
   /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
-  Widget Function(BuildContext, String) get errorBuilder;
+  final Widget Function(BuildContext, String) errorBuilder;
 
   /// Whether the form is able to receive user input.
   ///
   /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the checkbox will be auto validated.
   /// Likewise, if this field is false, the widget will not be validated regardless of [autovalidateMode].
-  bool get enabled;
+  final bool enabled;
 
   /// An optional method to call with the final value when the form is saved via [FormState.save].
-  FormFieldSetter<T>? get onSaved;
+  final FormFieldSetter<T>? onSaved;
 
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
@@ -34,7 +34,7 @@ mixin FFormFieldProperties<T> {
   /// Alternating between error and normal state can cause the height of the [FTextField] to change if no other
   /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
   /// error is displayed, wrap the [FTextField] in a fixed height parent like [SizedBox].
-  FormFieldValidator<T>? get validator;
+  final FormFieldValidator<T>? validator;
 
   /// Used to enable/disable this checkbox auto validation and update its error text.
   ///
@@ -43,7 +43,7 @@ mixin FFormFieldProperties<T> {
   /// If [AutovalidateMode.onUserInteraction], this checkbox will only auto-validate after its content changes. If
   /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
   /// auto-validation will be disabled.
-  AutovalidateMode get autovalidateMode;
+  final AutovalidateMode autovalidateMode;
 
   /// An optional property that forces the [FormFieldState] into an error state by directly setting the
   /// [FormFieldState.errorText] property without running the validator function.
@@ -53,5 +53,17 @@ mixin FFormFieldProperties<T> {
   ///
   /// When [validator] is provided, [forceErrorText] will override any error that it returns. [validator] will not be
   /// called unless [forceErrorText] is null.
-  String? get forceErrorText;
+  final String? forceErrorText;
+
+  /// Creates a form field's properties.
+  const FFormFieldProperties({
+    this.label,
+    this.description,
+    this.errorBuilder = defaultErrorBuilder,
+    this.enabled = true,
+    this.onSaved,
+    this.validator,
+    this.autovalidateMode = AutovalidateMode.disabled,
+    this.forceErrorText,
+  });
 }

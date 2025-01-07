@@ -143,7 +143,7 @@ void main() {
     testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FPopoverMenu.tappable(
+          child: FPopoverMenu.automatic(
             menu: [
               FTileGroup(
                 children: [

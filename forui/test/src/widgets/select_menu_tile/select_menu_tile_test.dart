@@ -75,7 +75,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            autoHide: true,
+            popover: const FSelectMenuTilePopoverProperties(autoHide: true),
             groupController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),

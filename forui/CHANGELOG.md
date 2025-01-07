@@ -3,11 +3,19 @@
 ### Additions
 
 * Add `FFormProperties`.
+* Add `FPopoverProperties`.
+* Add `FSelectMenuTilePopoverProperties`.
 
 ### Changes
 
-* **Breaking:** Change `FPortal.followerAnchor(...)` to `FPortal.portalAnchor(...)`.
-* **Breaking:** Change `FPortal.targetAnchor(...)` to `FPortal.childAnchor(...)`.
+* **Breaking:** Store `FSelectMenuTile`'s popover parameters in `FSelectMenuTilePopoverProperties`.
+* **Breaking:** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
+* **Breaking:** Change `FPopoverMenu.menuAnchor` to `FPopover.popoverAnchor`.
+* **Breaking:** Change `FPopover.tappable(...)` to `FPopover.automatic(...)`.
+* **Breaking:** Change `FPopover.followerAnchor` to `FPopover.popoverAnchor`.
+* **Breaking:** Change `FPopover.targetAnchor` to `FPopover.childAnchor`.
+* **Breaking:** Change `FPortal.followerAnchor` to `FPortal.portalAnchor`.
+* **Breaking:** Change `FPortal.targetAnchor` to `FPortal.childAnchor`.
 * **Breaking:** Change `FPortal.followerBuilder` to `FPortal.portalBuilder`.
 * **Breaking:** Change `FPortalFollowerShift` to `FPortalShift`.
 * **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 

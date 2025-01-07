@@ -8,6 +8,37 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_group/select_group_controller.dart';
 import 'package:meta/meta.dart';
 
+/// A select menu tile's popover properties.
+class FSelectMenuTilePopoverProperties extends FPopoverProperties {
+  /// The controller that shows and hides the menu. It initially hides the menu.
+  final FPopoverController? controller;
+
+  /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
+  final bool autoHide;
+
+  /// Creates a [FSelectMenuTilePopoverProperties].
+  const FSelectMenuTilePopoverProperties({
+    this.controller,
+    this.autoHide = false,
+    super.popoverAnchor = Alignment.topRight,
+    super.childAnchor = Alignment.bottomRight,
+    super.shift,
+    super.hideOnTapOutside,
+    super.directionPadding,
+    super.autofocus,
+    super.focusNode,
+    super.onFocusChange,
+  });
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(FlagProperty('autoHide', value: autoHide));
+  }
+}
+
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///
 /// A [FSelectMenuTile] is internally a [FormField], therefore it can be used in a [Form].
@@ -18,14 +49,12 @@ import 'package:meta/meta.dart';
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
-class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
-  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
-
+class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FFormFieldProperties<Set<T>> {
   /// The controller that controls the selected tiles.
   final FSelectGroupController<T> groupController;
 
-  /// The controller that shows and hides the menu. It initially hides the menu.
-  final FPopoverController? popoverController;
+  /// The popover's properties.
+  final FSelectMenuTilePopoverProperties popover;
 
   /// {@macro forui.widgets.FTileGroup.controller}
   final ScrollController? scrollController;
@@ -45,55 +74,17 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// The divider between select tiles. Defaults to [FTileDivider.indented].
   final FTileDivider divider;
 
-  /// The anchor of the menu to which the [tileAnchor] is aligned to.
-  ///
-  /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
-  final Alignment menuAnchor;
-
-  /// The anchor of the child to which the [menuAnchor] is aligned to.
-  ///
-  /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
-  final Alignment tileAnchor;
-
-  /// The shifting strategy used to shift a menu when it overflows out of the viewport. Defaults to
-  /// [FPortalShift.flip].
-  ///
-  /// See [FPortalShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
-
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
-  final bool hideOnTapOutside;
-
-  /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
-  ///
-  /// Diagonal corners are ignored.
-  final bool directionPadding;
-
-  /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
-  final bool autoHide;
-
-  /// The label displayed above to the select menu tile.
+  @override
   final Widget? label;
 
-  /// The description displayed below the select menu tile.
+  @override
   final Widget? description;
 
-  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  @override
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// {@macro forui.foundation.doc_templates.semanticLabel}
   final String? semanticLabel;
-
-  /// {@macro forui.foundation.doc_templates.autofocus}
-  ///
-  /// Defaults to false.
-  final bool autofocus;
-
-  /// {@macro forui.foundation.doc_templates.focusNode}
-  final FocusNode? focusNode;
-
-  /// {@macro forui.foundation.doc_templates.onFocusChange}
-  final ValueChanged<bool>? onFocusChange;
 
   /// The prefix icon.
   final Widget? prefixIcon;
@@ -115,26 +106,17 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     required this.groupController,
     required this.title,
     required List<FSelectTile<T>> menu,
-    this.popoverController,
+    this.popover = const FSelectMenuTilePopoverProperties(),
     this.scrollController,
     this.style,
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.menuAnchor = Alignment.topRight,
-    this.tileAnchor = Alignment.bottomRight,
-    this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
-    this.directionPadding = false,
-    this.autoHide = false,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticLabel,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
     this.prefixIcon,
     this.subtitle,
     this.details,
@@ -164,7 +146,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               null => (FLabelState.enabled, null),
             };
 
-            Widget tile = FPopover(
+            Widget tile = FPopover.fromProperties(
               // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
               //
               // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
@@ -176,15 +158,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               key: GlobalObjectKey(state._controller._popover),
               controller: state._controller._popover,
               style: menuStyle,
-              followerAnchor: menuAnchor,
-              targetAnchor: tileAnchor,
-              shift: shift,
-              hideOnTapOutside: hideOnTapOutside,
-              directionPadding: directionPadding,
-              autofocus: autofocus,
-              focusNode: focusNode,
-              onFocusChange: onFocusChange,
-              followerBuilder: (context, _, __) => ConstrainedBox(
+              automatic: false,
+              semanticLabel: null,
+              properties: popover,
+              popoverBuilder: (context, _, __) => ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>(
                   groupController: state._controller,
@@ -198,7 +175,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
                   children: menu,
                 ),
               ),
-              target: FTile(
+              child: FTile(
                 style: tileStyle,
                 prefixIcon: prefixIcon,
                 enabled: enabled,
@@ -245,27 +222,18 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     required this.groupController,
     required this.title,
     required FSelectTile<T>? Function(BuildContext, int) menuTileBuilder,
+    this.popover = const FSelectMenuTilePopoverProperties(),
     int? count,
-    this.popoverController,
     this.scrollController,
     this.style,
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.menuAnchor = Alignment.topRight,
-    this.tileAnchor = Alignment.bottomRight,
-    this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
-    this.directionPadding = false,
-    this.autoHide = false,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticLabel,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
     this.prefixIcon,
     this.subtitle,
     this.details,
@@ -295,7 +263,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               null => (FLabelState.enabled, null),
             };
 
-            Widget tile = FPopover(
+            Widget tile = FPopover.fromProperties(
               // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
               //
               // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
@@ -307,15 +275,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               key: GlobalObjectKey(state._controller._popover),
               controller: state._controller._popover,
               style: menuStyle,
-              followerAnchor: menuAnchor,
-              targetAnchor: tileAnchor,
-              shift: shift,
-              hideOnTapOutside: hideOnTapOutside,
-              directionPadding: directionPadding,
-              autofocus: autofocus,
-              focusNode: focusNode,
-              onFocusChange: onFocusChange,
-              followerBuilder: (context, _, __) => ConstrainedBox(
+              automatic: false,
+              semanticLabel: null,
+              properties: popover,
+              popoverBuilder: (context, _, __) => ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>.builder(
                   groupController: state._controller,
@@ -330,7 +293,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
                   count: count,
                 ),
               ),
-              target: FTile(
+              child: FTile(
                 style: tileStyle,
                 prefixIcon: prefixIcon,
                 enabled: enabled,
@@ -366,24 +329,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('groupController', groupController))
-      ..add(DiagnosticsProperty('popoverController', popoverController))
       ..add(DiagnosticsProperty('scrollController', scrollController))
+      ..add(DiagnosticsProperty('popover', popover))
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
-      ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
-      ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
-      ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
-      ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(StringProperty('semanticLabel', semanticLabel))
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+      ..add(StringProperty('semanticLabel', semanticLabel));
   }
 }
 
@@ -395,27 +349,27 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     super.initState();
     _controller = _SelectGroupController(
       widget.groupController,
-      widget.popoverController ?? FPopoverController(vsync: this),
-      autoHide: widget.autoHide,
+      widget.popover.controller ?? FPopoverController(vsync: this),
+      autoHide: widget.popover.autoHide,
     )..addListener(_handleControllerChanged);
   }
 
   @override
   void didUpdateWidget(covariant FSelectMenuTile<T> old) {
     super.didUpdateWidget(old);
-    if (widget.popoverController != old.popoverController) {
-      if (old.popoverController != null) {
+    if (widget.popover.controller != old.popover.controller) {
+      if (old.popover.controller != null) {
         _controller._popover.dispose();
       }
 
-      _controller._popover = widget.popoverController ?? FPopoverController(vsync: this);
+      _controller._popover = widget.popover.controller ?? FPopoverController(vsync: this);
     }
 
     if (widget.groupController != old.groupController) {
       _controller.delegate = widget.groupController;
     }
 
-    _controller.autoHide = old.autoHide;
+    _controller.autoHide = old.popover.autoHide;
   }
 
   @override
@@ -436,7 +390,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   @override
   void dispose() {
     widget.groupController.removeListener(_handleControllerChanged);
-    if (widget.popoverController == null) {
+    if (widget.popover.controller == null) {
       _controller._popover.dispose();
     }
     super.dispose();

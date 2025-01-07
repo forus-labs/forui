@@ -38,7 +38,7 @@ A popover menu displays a menu in a portal aligned to a child.
             actions: [
               FPopoverMenu(
                 popoverController: controller,
-                menuAnchor: Alignment.topRight,
+                popoverAnchor: Alignment.topRight,
                 childAnchor: Alignment.bottomRight,
                 menu: [
                   FTileGroup(
@@ -105,11 +105,11 @@ const FPopoverMenu(
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
-  menuAnchor: Alignment.topCenter,
+  popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: true,
-  shift: FPortalFollowerShift.flip,
+  shift: FPortalShift.flip,
   menu: [
     FTileGroup(
       children: [],
@@ -119,20 +119,20 @@ const FPopoverMenu(
 );
 ```
 
-### `FPopoverMenu.tappable()`
+### `FPopoverMenu.automatic()`
 
 ```dart copy
-const FPopoverMenu.tappable(
+const FPopoverMenu.automatic(
   popoverController: FPopoverController(),
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
-  menuAnchor: Alignment.topCenter,
+  popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: true,
-  shift: FPortalFollowerShift.flip,
+  shift: FPortalShift.flip,
   menu: [
     FTileGroup(
       children: [],

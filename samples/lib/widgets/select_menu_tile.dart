@@ -26,7 +26,7 @@ class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
         groupController: controller,
-        autoHide: widget.autoHide,
+        popover: FSelectMenuTilePopoverProperties(autoHide: widget.autoHide),
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
         title: const Text('Notifications'),
@@ -73,7 +73,7 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
         groupController: controller,
-        autoHide: widget.autoHide,
+        popover: FSelectMenuTilePopoverProperties(autoHide: widget.autoHide),
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
         title: const Text('Notifications'),
@@ -167,7 +167,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
           children: [
             FSelectMenuTile(
               groupController: controller,
-              autoHide: true,
+              popover: const FSelectMenuTilePopoverProperties(autoHide: true),
               validator: (value) => value == null ? 'Select an item' : null,
               prefixIcon: FIcon(FAssets.icons.bell),
               title: const Text('Notifications'),

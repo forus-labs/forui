@@ -16,8 +16,8 @@ void main() {
         TestScaffold.app(
           child: FPopover(
             controller: controller,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: FButton(
+            popoverBuilder: (context, style, _) => const Text('popover'),
+            child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -28,12 +28,12 @@ void main() {
       await tester.tap(find.text('target'));
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsOneWidget);
+      expect(find.text('popover'), findsOneWidget);
 
       await tester.tapAt(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsNothing);
+      expect(find.text('popover'), findsNothing);
     });
 
     testWidgets('tap outside does not hide popover', (tester) async {
@@ -42,8 +42,8 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: false,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: FButton(
+            popoverBuilder: (context, style, _) => const Text('popover'),
+            child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -54,12 +54,12 @@ void main() {
       await tester.tap(find.text('target'));
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsOneWidget);
+      expect(find.text('popover'), findsOneWidget);
 
       await tester.tapAt(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsOneWidget);
+      expect(find.text('popover'), findsOneWidget);
     });
 
     testWidgets('tap button when popover is open closes it', (tester) async {
@@ -68,8 +68,8 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: false,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: FButton(
+            popoverBuilder: (context, style, _) => const Text('popover'),
+            child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -80,12 +80,12 @@ void main() {
       await tester.tap(find.text('target'));
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsOneWidget);
+      expect(find.text('popover'), findsOneWidget);
 
       await tester.tap(find.text('target'));
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsNothing);
+      expect(find.text('popover'), findsNothing);
     });
   });
 
@@ -93,10 +93,10 @@ void main() {
     testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FPopover.tappable(
+          child: FPopover.automatic(
             controller: controller,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: Container(
+            popoverBuilder: (context, style, _) => const Text('popover'),
+            child: Container(
               color: Colors.black,
               height: 10,
               width: 10,
@@ -108,12 +108,12 @@ void main() {
       await tester.tap(find.byType(Container).last);
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsOneWidget);
+      expect(find.text('popover'), findsOneWidget);
 
       await tester.tapAt(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsNothing);
+      expect(find.text('popover'), findsNothing);
     });
   });
 

@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 /// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
-class FPopoverMenu extends StatefulWidget {
+class FPopoverMenu extends StatefulWidget implements FPopoverProperties {
   /// The popover menu's style.
   final FPopoverMenuStyle? style;
 
@@ -33,43 +33,38 @@ class FPopoverMenu extends StatefulWidget {
   /// The divider between tile groups. Defaults to [FTileDivider.full].
   final FTileDivider divider;
 
-  /// The anchor of the menu to which the [childAnchor] is aligned to.
+  /// {@macro forui.widgets.popover.popoverAnchor}
   ///
-  /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
-  final Alignment menuAnchor;
+  /// Defaults to [Alignment.topCenter].
+  @override
+  final Alignment popoverAnchor;
 
-  /// The anchor of the child to which the [menuAnchor] is aligned to.
+  /// {@macro forui.widgets.popover.childAnchor}
   ///
-  /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
+  /// Defaults to [Alignment.bottomCenter].
+  @override
   final Alignment childAnchor;
 
-  /// The shifting strategy used to shift a menu when it overflows out of the viewport. Defaults to
-  /// [FPortalShift.flip].
-  ///
-  /// See [FPortalShift] for more information on the different shifting strategies.
+  @override
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
+  @override
   final bool hideOnTapOutside;
 
-  /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
-  ///
-  /// Diagonal corners are ignored.
+  @override
   final bool directionPadding;
+
+  @override
+  final bool autofocus;
+
+  @override
+  final FocusNode? focusNode;
+
+  @override
+  final ValueChanged<bool>? onFocusChange;
 
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticLabel;
-
-  /// {@macro forui.foundation.doc_templates.autofocus}
-  ///
-  /// Defaults to false.
-  final bool autofocus;
-
-  /// {@macro forui.foundation.doc_templates.focusNode}
-  final FocusNode? focusNode;
-
-  /// {@macro forui.foundation.doc_templates.onFocusChange}
-  final ValueChanged<bool>? onFocusChange;
 
   /// The menu.
   final List<FTileGroupMixin<FTileMixin>> menu;
@@ -77,11 +72,11 @@ class FPopoverMenu extends StatefulWidget {
   /// The child.
   final Widget child;
 
-  final bool _tappable;
+  final bool _automatic;
 
   /// Creates a menu that only shows the menu when the controller is manually toggled.
   const FPopoverMenu({
-    required this.popoverController,
+    required FPopoverController this.popoverController,
     required this.menu,
     required this.child,
     this.scrollController,
@@ -90,7 +85,7 @@ class FPopoverMenu extends StatefulWidget {
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.menuAnchor = Alignment.topCenter,
+    this.popoverAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
@@ -100,13 +95,14 @@ class FPopoverMenu extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     super.key,
-  }) : _tappable = false;
+  }) : _automatic = false;
 
   /// Creates a menu that is automatically shown when the [child] is tapped.
   ///
-  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. This is because only
-  /// one `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s.
-  const FPopoverMenu.tappable({
+  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. Only one
+  /// `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s, leading to unexpected
+  /// behavior.
+  const FPopoverMenu.automatic({
     required this.menu,
     required this.child,
     this.style,
@@ -116,7 +112,7 @@ class FPopoverMenu extends StatefulWidget {
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.menuAnchor = Alignment.topCenter,
+    this.popoverAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
@@ -126,7 +122,7 @@ class FPopoverMenu extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     super.key,
-  }) : _tappable = true;
+  }) : _automatic = true;
 
   @override
   State<FPopoverMenu> createState() => _FPopoverMenuState();
@@ -142,7 +138,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
-      ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
+      ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
@@ -179,18 +175,13 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverMenuStyle;
-    return (widget._tappable ? FPopover.tappable : FPopover.new)(
+    return FPopover.fromProperties(
+      properties: widget,
       controller: _controller,
       style: style,
-      followerAnchor: widget.menuAnchor,
-      targetAnchor: widget.childAnchor,
-      shift: widget.shift,
-      hideOnTapOutside: widget.hideOnTapOutside,
-      directionPadding: widget.directionPadding,
-      autofocus: widget.autofocus,
-      focusNode: widget.focusNode,
-      onFocusChange: widget.onFocusChange,
-      followerBuilder: (context, _, __) => ConstrainedBox(
+      automatic: widget._automatic,
+      semanticLabel: null,
+      popoverBuilder: (context, _, __) => ConstrainedBox(
         constraints: BoxConstraints(maxWidth: style.maxWidth),
         child: FTileGroup.merge(
           controller: widget.scrollController,
@@ -203,7 +194,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
           children: widget.menu,
         ),
       ),
-      target: widget.child,
+      child: widget.child,
     );
   }
 

@@ -83,7 +83,7 @@ A portal renders a portal widget that "floats" on top of a child widget.
 ```dart copy
 FPortal(
   controller: OverlayPortalController(),
-  shift: FPortalFollowerShift.flip,
+  shift: FPortalShift.flip,
   portalAnchor: Alignment.topCenter,
   portalBuilder: (context) => const Text('portal'),
   childAnchor: Alignment.bottomCenter,

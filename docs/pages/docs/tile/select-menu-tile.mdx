@@ -74,18 +74,12 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 ```dart copy
 FSelectMenuTile<Value>(
   groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
-  popoverController: FPopoverController(...),
+  popover: FSelectMenuTilePopoverProperties(...),
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   divider: FTileDivider.indented,
-  menuAnchor: Alignment.bottomLeft,
-  tileAnchor: Alignment.bottomLeft,
-  shift: FPortalFollowerShift.flip,
-  hideOnTapOutside: true,
-  directionPadding: true,
-  autoHide: false,
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),
@@ -108,18 +102,12 @@ FSelectMenuTile<Value>(
 ```dart copy
 FSelectMenuTile<Value>.builder(
   groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
-  popoverController: FPopoverController(...),
+  popover: FSelectMenuTilePopoverProperties(...),
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
   divider: FTileDivider.indented,
-  menuAnchor: Alignment.bottomLeft,
-  tileAnchor: Alignment.bottomLeft,
-  shift: FPortalFollowerShift.flip,
-  hideOnTapOutside: true,
-  directionPadding: true,
-  autoHide: false,
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),

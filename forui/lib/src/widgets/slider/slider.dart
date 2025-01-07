@@ -18,7 +18,7 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 /// * [FDiscreteSliderController.new] for selecting a discrete value.
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 /// * [FSliderStyles] for customizing a slider's appearance.
-class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection> {
+class FSlider extends StatelessWidget implements FFormFieldProperties<FSliderSelection> {
   static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
   static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {

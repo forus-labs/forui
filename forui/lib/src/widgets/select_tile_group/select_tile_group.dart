@@ -17,7 +17,9 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FTileGroupStyle] for customizing a select group's appearance.
-class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMixin>, FFormFieldProperties<Set<T>> {
+class FSelectTileGroup<T> extends FormField<Set<T>>
+    with FTileGroupMixin<FTileMixin>
+    implements FFormFieldProperties<Set<T>> {
   /// The controller.
   ///
   /// See:

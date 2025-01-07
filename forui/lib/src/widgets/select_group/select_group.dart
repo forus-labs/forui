@@ -16,7 +16,7 @@ import 'package:meta/meta.dart';
 /// See:
 /// * https://forui.dev/docs/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
-class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>> {
+class FSelectGroup<T> extends FormField<Set<T>> implements FFormFieldProperties<Set<T>> {
   /// The controller.
   ///
   /// See:
