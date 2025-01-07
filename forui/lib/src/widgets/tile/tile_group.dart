@@ -298,7 +298,9 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> implem
   }
 }
 
-class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMixin<FTileMixin>> implements FTileGroupProperties {
+class _MergeTileGroups extends StatelessWidget
+    with FTileGroupMixin<FTileGroupMixin<FTileMixin>>
+    implements FTileGroupProperties {
   final FTileGroupStyle? style;
   @override
   final ScrollController? scrollController;

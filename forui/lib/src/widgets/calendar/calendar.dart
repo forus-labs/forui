@@ -10,9 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 /// A calendar's properties.
-abstract class FCalendarProperties {
-
-}
+abstract class FCalendarProperties {}
 
 /// A calendar.
 ///
