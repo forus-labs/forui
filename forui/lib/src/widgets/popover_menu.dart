@@ -11,26 +11,26 @@ import 'package:forui/forui.dart';
 /// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
-class FPopoverMenu extends StatefulWidget implements FPopoverProperties {
+class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FTileGroupProperties {
   /// The popover menu's style.
   final FPopoverMenuStyle? style;
 
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
 
-  /// {@macro forui.widgets.FTileGroup.controller}
+  @override
   final ScrollController? scrollController;
 
-  /// {@macro forui.foundation.doc_templates.cacheExtent}
+  @override
   final double? cacheExtent;
 
-  /// {@macro forui.widgets.FTileGroup.maxHeight}
+  @override
   final double maxHeight;
 
-  /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
+  @override
   final DragStartBehavior dragStartBehavior;
 
-  /// The divider between tile groups. Defaults to [FTileDivider.full].
+  @override
   final FTileDivider divider;
 
   /// {@macro forui.widgets.FPopoverProperties.popoverAnchor}
