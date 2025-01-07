@@ -33,13 +33,13 @@ class FPopoverMenu extends StatefulWidget implements FPopoverProperties {
   /// The divider between tile groups. Defaults to [FTileDivider.full].
   final FTileDivider divider;
 
-  /// {@macro forui.widgets.popover.popoverAnchor}
+  /// {@macro forui.widgets.FPopoverProperties.popoverAnchor}
   ///
   /// Defaults to [Alignment.topCenter].
   @override
   final Alignment popoverAnchor;
 
-  /// {@macro forui.widgets.popover.childAnchor}
+  /// {@macro forui.widgets.FPopoverProperties.childAnchor}
   ///
   /// Defaults to [Alignment.bottomCenter].
   @override
@@ -184,7 +184,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       popoverBuilder: (context, _, __) => ConstrainedBox(
         constraints: BoxConstraints(maxWidth: style.maxWidth),
         child: FTileGroup.merge(
-          controller: widget.scrollController,
+          scrollController: widget.scrollController,
           cacheExtent: widget.cacheExtent,
           maxHeight: widget.maxHeight,
           dragStartBehavior: widget.dragStartBehavior,

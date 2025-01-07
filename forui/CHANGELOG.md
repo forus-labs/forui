@@ -8,7 +8,9 @@
 
 ### Changes
 
+* **Breaking:** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
 * **Breaking:** Store `FSelectMenuTile`'s popover parameters in `FSelectMenuTilePopoverProperties`.
+* **Breaking:** Store `FSelectMenuTile`'s menu parameters in `FSelectMenuTileMenuProperties`.
 * **Breaking:** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
 * **Breaking:** Change `FPopoverMenu.menuAnchor` to `FPopover.popoverAnchor`.
 * **Breaking:** Change `FPopover.tappable(...)` to `FPopover.automatic(...)`.

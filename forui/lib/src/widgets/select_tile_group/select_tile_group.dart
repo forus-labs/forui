@@ -19,7 +19,7 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// * [FTileGroupStyle] for customizing a select group's appearance.
 class FSelectTileGroup<T> extends FormField<Set<T>>
     with FTileGroupMixin<FTileMixin>
-    implements FFormFieldProperties<Set<T>> {
+    implements FFormFieldProperties<Set<T>>, FTileGroupProperties {
   /// The controller.
   ///
   /// See:
@@ -27,30 +27,22 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
   /// * [FMultiSelectGroupController] for multiple selections.
   final FSelectGroupController<T> groupController;
 
-  /// {@macro forui.widgets.FTileGroup.controller}
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
+  @override
   final ScrollController? scrollController;
 
-  /// {@macro forui.foundation.doc_templates.cacheExtent}
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
+  @override
   final double? cacheExtent;
 
-  /// {@macro forui.widgets.FTileGroup.maxHeight}
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
+  @override
   final double maxHeight;
 
-  /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
-  ///
-  /// It is ignored if the group is part of a merged [FTileGroup].
+  @override
   final DragStartBehavior dragStartBehavior;
 
   /// The style. Defaults to [FThemeData.tileGroupStyle].
   final FTileGroupStyle? style;
 
-  /// The divider between tiles. Defaults tp [FTileDivider.indented].
+  @override
   final FTileDivider divider;
 
   /// The label displayed above the group.
@@ -71,7 +63,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
   @override
   final Widget Function(BuildContext, String) errorBuilder;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// Creates a [FSelectTileGroup].
@@ -105,7 +97,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
             };
 
             return FTileGroup(
-              controller: scrollController,
+              scrollController: scrollController,
               style: groupStyle,
               cacheExtent: cacheExtent,
               maxHeight: maxHeight,
@@ -162,7 +154,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
             };
 
             return FTileGroup.builder(
-              controller: scrollController,
+              scrollController: scrollController,
               style: groupStyle,
               cacheExtent: cacheExtent,
               maxHeight: maxHeight,

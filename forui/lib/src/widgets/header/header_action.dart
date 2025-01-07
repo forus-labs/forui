@@ -7,7 +7,7 @@ class FHeaderAction extends StatelessWidget {
   /// The style.
   final FHeaderActionStyle? style;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// The icon.

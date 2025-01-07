@@ -39,6 +39,18 @@ class FSelectMenuTilePopoverProperties extends FPopoverProperties {
   }
 }
 
+/// A select menu tile's popover properties.
+class FSelectMenuTileMenuProperties extends FTileGroupProperties {
+  /// Creates a [FSelectMenuTileMenuProperties].
+  const FSelectMenuTileMenuProperties({
+    super.scrollController,
+    super.cacheExtent,
+    super.maxHeight = double.infinity,
+    super.dragStartBehavior = DragStartBehavior.start,
+    super.divider = FTileDivider.full,
+  });
+}
+
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///
 /// A [FSelectMenuTile] is internally a [FormField], therefore it can be used in a [Form].
@@ -51,28 +63,16 @@ class FSelectMenuTilePopoverProperties extends FPopoverProperties {
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
 class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FFormFieldProperties<Set<T>> {
   /// The controller that controls the selected tiles.
-  final FSelectGroupController<T> groupController;
-
-  /// The popover's properties.
-  final FSelectMenuTilePopoverProperties popover;
-
-  /// {@macro forui.widgets.FTileGroup.controller}
-  final ScrollController? scrollController;
-
-  /// {@macro forui.foundation.doc_templates.cacheExtent}
-  final double? cacheExtent;
-
-  /// {@macro forui.widgets.FTileGroup.maxHeight}
-  final double maxHeight;
-
-  /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
-  final DragStartBehavior dragStartBehavior;
+  final FSelectGroupController<T> controller;
 
   /// The style.
   final FSelectMenuTileStyle? style;
 
-  /// The divider between select tiles. Defaults to [FTileDivider.indented].
-  final FTileDivider divider;
+  /// The popover's properties.
+  final FSelectMenuTilePopoverProperties popover;
+
+  /// The menu's properties.
+  final FSelectMenuTileMenuProperties menu;
 
   @override
   final Widget? label;
@@ -83,7 +83,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
   @override
   final Widget Function(BuildContext, String) errorBuilder;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// The prefix icon.
@@ -103,16 +103,12 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
 
   /// Creates a [FSelectMenuTile].
   FSelectMenuTile({
-    required this.groupController,
+    required this.controller,
     required this.title,
-    required List<FSelectTile<T>> menu,
+    required List<FSelectTile<T>> menuTiles,
     this.popover = const FSelectMenuTilePopoverProperties(),
-    this.scrollController,
+    this.menu = const FSelectMenuTileMenuProperties(),
     this.style,
-    this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FTileDivider.full,
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -127,7 +123,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
     super.forceErrorText,
     super.enabled = true,
     super.autovalidateMode,
-    super.restorationId,
     super.key,
   }) : super(
           builder: (field) {
@@ -165,14 +160,14 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>(
                   groupController: state._controller,
-                  scrollController: scrollController,
-                  cacheExtent: cacheExtent,
-                  maxHeight: maxHeight,
-                  dragStartBehavior: dragStartBehavior,
+                  scrollController: menu.scrollController,
+                  cacheExtent: menu.cacheExtent,
+                  maxHeight: menu.maxHeight,
+                  dragStartBehavior: menu.dragStartBehavior,
                   style: menuStyle.tileGroupStyle,
                   semanticLabel: semanticLabel,
-                  divider: divider,
-                  children: menu,
+                  divider: menu.divider,
+                  children: menuTiles,
                 ),
               ),
               child: FTile(
@@ -219,17 +214,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
   /// * [count] is null and [menuTileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
   FSelectMenuTile.builder({
-    required this.groupController,
+    required this.controller,
     required this.title,
     required FSelectTile<T>? Function(BuildContext, int) menuTileBuilder,
     this.popover = const FSelectMenuTilePopoverProperties(),
+    this.menu = const FSelectMenuTileMenuProperties(),
     int? count,
-    this.scrollController,
     this.style,
-    this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FTileDivider.full,
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -244,7 +235,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
     super.forceErrorText,
     super.enabled = true,
     super.autovalidateMode,
-    super.restorationId,
     super.key,
   }) : super(
           builder: (field) {
@@ -282,13 +272,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>.builder(
                   groupController: state._controller,
-                  scrollController: scrollController,
-                  cacheExtent: cacheExtent,
-                  maxHeight: maxHeight,
-                  dragStartBehavior: dragStartBehavior,
+                  scrollController: menu.scrollController,
+                  cacheExtent: menu.cacheExtent,
+                  maxHeight: menu.maxHeight,
+                  dragStartBehavior: menu.dragStartBehavior,
                   style: menuStyle.tileGroupStyle,
                   semanticLabel: semanticLabel,
-                  divider: divider,
+                  divider: menu.divider,
                   tileBuilder: menuTileBuilder,
                   count: count,
                 ),
@@ -328,14 +318,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin implements FF
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('groupController', groupController))
-      ..add(DiagnosticsProperty('scrollController', scrollController))
+      ..add(DiagnosticsProperty('groupController', controller))
       ..add(DiagnosticsProperty('popover', popover))
+      ..add(DiagnosticsProperty('menu', menu))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
-      ..add(DoubleProperty('maxHeight', maxHeight))
-      ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
-      ..add(EnumProperty('divider', divider))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('semanticLabel', semanticLabel));
   }
@@ -348,7 +334,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     _controller = _SelectGroupController(
-      widget.groupController,
+      widget.controller,
       widget.popover.controller ?? FPopoverController(vsync: this),
       autoHide: widget.popover.autoHide,
     )..addListener(_handleControllerChanged);
@@ -365,8 +351,8 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       _controller._popover = widget.popover.controller ?? FPopoverController(vsync: this);
     }
 
-    if (widget.groupController != old.groupController) {
-      _controller.delegate = widget.groupController;
+    if (widget.controller != old.controller) {
+      _controller.delegate = widget.controller;
     }
 
     _controller.autoHide = old.popover.autoHide;
@@ -389,7 +375,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
 
   @override
   void dispose() {
-    widget.groupController.removeListener(_handleControllerChanged);
+    widget.controller.removeListener(_handleControllerChanged);
     if (widget.popover.controller == null) {
       _controller._popover.dispose();
     }
@@ -402,8 +388,8 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
     // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
     // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.groupController.values != value) {
-      didChange(widget.groupController.values);
+    if (widget.controller.values != value) {
+      didChange(widget.controller.values);
     }
   }
 

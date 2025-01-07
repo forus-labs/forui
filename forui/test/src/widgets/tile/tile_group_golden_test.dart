@@ -201,7 +201,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FTileGroup(
-                controller: controller,
+                scrollController: controller,
                 maxHeight: 100,
                 label: const Text('Network'),
                 description: const Text('Description'),
@@ -238,7 +238,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FTileGroup(
-                controller: controller,
+                scrollController: controller,
                 maxHeight: 100,
                 label: const Text('Network'),
                 description: const Text('Description'),
@@ -281,7 +281,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FTileGroup(
-                controller: controller,
+                scrollController: controller,
                 maxHeight: 100,
                 label: const Text('Network'),
                 description: const Text('Description'),

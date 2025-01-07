@@ -25,7 +25,7 @@ class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
-        groupController: controller,
+        controller: controller,
         popover: FSelectMenuTilePopoverProperties(autoHide: widget.autoHide),
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
@@ -40,7 +40,7 @@ class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
             },
           ),
         ),
-        menu: [
+        menuTiles: [
           FSelectTile(title: const Text('All'), value: Notification.all),
           FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
           FSelectTile(title: const Text('None'), value: Notification.nothing),
@@ -72,8 +72,9 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
-        groupController: controller,
+        controller: controller,
         popover: FSelectMenuTilePopoverProperties(autoHide: widget.autoHide),
+        menu: const FSelectMenuTileMenuProperties(maxHeight: 150),
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
         title: const Text('Notifications'),
@@ -90,8 +91,7 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
             },
           ),
         ),
-        maxHeight: 150,
-        menu: [
+        menuTiles: [
           FSelectTile(title: const Text('All'), value: Notification.all),
           FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
           FSelectTile(title: const Text('Limited Time'), value: Notification.limitedTime),
@@ -128,10 +128,10 @@ class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTil
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: FSelectMenuTile.builder(
-              groupController: controller,
+              controller: controller,
               prefixIcon: FIcon(FAssets.icons.variable),
               title: const Text('Applicable values'),
-              maxHeight: 200,
+              menu: const FSelectMenuTileMenuProperties(maxHeight: 200),
               menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
             ),
           ),
@@ -166,7 +166,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
           mainAxisSize: MainAxisSize.min,
           children: [
             FSelectMenuTile(
-              groupController: controller,
+              controller: controller,
               popover: const FSelectMenuTilePopoverProperties(autoHide: true),
               validator: (value) => value == null ? 'Select an item' : null,
               prefixIcon: FIcon(FAssets.icons.bell),
@@ -181,7 +181,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
                   },
                 ),
               ),
-              menu: [
+              menuTiles: [
                 FSelectTile(title: const Text('All'), value: Notification.all),
                 FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
                 FSelectTile(title: const Text('None'), value: Notification.nothing),

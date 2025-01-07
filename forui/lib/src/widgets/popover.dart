@@ -64,7 +64,7 @@ final class FPopoverController extends FChangeNotifier {
 
 /// A popover's properties.
 abstract class FPopoverProperties with Diagnosticable {
-  /// {@template forui.widgets.popover.popoverAnchor}
+  /// {@template forui.widgets.FPopoverProperties.popoverAnchor}
   /// The point on the popover (floating content) that connects with the child, at the child's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
@@ -72,7 +72,7 @@ abstract class FPopoverProperties with Diagnosticable {
   /// {@endtemplate}
   final Alignment popoverAnchor;
 
-  /// {@template forui.widgets.popover.childAnchor}
+  /// {@template forui.widgets.FPopoverProperties.childAnchor}
   /// The point on the child that connects with the popover, at the popover's anchor.
   ///
   /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
@@ -150,13 +150,13 @@ class FPopover extends StatefulWidget implements FPopoverProperties {
   /// The popover's style.
   final FPopoverStyle? style;
 
-  /// {@macro forui.widgets.popover.popoverAnchor}
+  /// {@macro forui.widgets.FPopoverProperties.popoverAnchor}
   ///
   /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
   @override
   final Alignment popoverAnchor;
 
-  /// {@macro forui.widgets.popover.childAnchor}
+  /// {@macro forui.widgets.FPopoverProperties.childAnchor}
   ///
   /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
   @override

@@ -29,7 +29,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// The details on the right hand side of the title and subtitle.
   final Widget? details;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// The current value.

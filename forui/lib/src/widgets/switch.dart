@@ -28,7 +28,7 @@ class FSwitch extends StatelessWidget {
   /// If the value is present, the checkbox is in an error state.
   final Widget? error;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// The current value of the checkbox.

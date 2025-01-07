@@ -94,7 +94,7 @@ abstract class FIcon extends StatelessWidget {
   /// Throws [AssertionError] if `size` <= 0.0
   final double? size;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// Creates a [FIcon] from a [SvgAsset].

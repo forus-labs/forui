@@ -50,7 +50,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// Whether the `FTile` is enabled. Defaults to true.
   final bool? enabled;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// {@macro forui.foundation.doc_templates.autofocus}

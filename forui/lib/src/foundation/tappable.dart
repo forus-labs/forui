@@ -39,7 +39,7 @@ class FTappable extends StatefulWidget {
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
   final FFocusedOutlineStyle? focusedOutlineStyle;
 
-  /// {@macro forui.foundation.doc_templates.semanticLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// Used by accessibility frameworks to determine whether this tappable has been selected. Defaults to false.
