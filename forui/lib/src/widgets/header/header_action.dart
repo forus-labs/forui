@@ -16,8 +16,6 @@ class FHeaderAction extends StatelessWidget {
   final Widget icon;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
-  ///
-  /// Defaults to false.
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}

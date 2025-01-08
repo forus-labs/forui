@@ -32,7 +32,7 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
         actions: [
           FPopoverMenu(
             popoverController: controller,
-            popoverAnchor: Alignment.topRight,
+            menuAnchor: Alignment.topRight,
             childAnchor: Alignment.bottomRight,
             menu: [
               FTileGroup(

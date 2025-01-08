@@ -38,7 +38,7 @@ A popover menu displays a menu in a portal aligned to a child.
             actions: [
               FPopoverMenu(
                 popoverController: controller,
-                popoverAnchor: Alignment.topRight,
+                menuAnchor: Alignment.topRight,
                 childAnchor: Alignment.bottomRight,
                 menu: [
                   FTileGroup(
@@ -105,7 +105,7 @@ const FPopoverMenu(
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
-  popoverAnchor: Alignment.topCenter,
+  menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: true,
@@ -128,7 +128,7 @@ const FPopoverMenu.automatic(
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
-  popoverAnchor: Alignment.topCenter,
+  menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: true,

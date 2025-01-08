@@ -62,83 +62,13 @@ final class FPopoverController extends FChangeNotifier {
   }
 }
 
-/// A popover's properties.
-abstract class FPopoverProperties with Diagnosticable {
-  /// {@template forui.widgets.FPopoverProperties.popoverAnchor}
-  /// The point on the popover (floating content) that connects with the child, at the child's anchor.
-  ///
-  /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
-  /// See [childAnchor] for changing the child's anchor.
-  /// {@endtemplate}
-  final Alignment popoverAnchor;
-
-  /// {@template forui.widgets.FPopoverProperties.childAnchor}
-  /// The point on the child that connects with the popover, at the popover's anchor.
-  ///
-  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
-  /// See [popoverAnchor] for changing the popover's anchor.
-  /// {@endtemplate}
-  final Alignment childAnchor;
-
-  /// The shifting strategy used to shift a popover when it overflows out of the viewport. Defaults to
-  /// [FPortalShift.flip].
-  ///
-  /// See [FPortalShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
-
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
-  final bool hideOnTapOutside;
-
-  /// True if the popover should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
-  ///
-  /// Diagonal corners are ignored.
-  final bool directionPadding;
-
-  /// {@macro forui.foundation.doc_templates.autofocus}
-  ///
-  /// Defaults to false.
-  final bool autofocus;
-
-  /// {@macro forui.foundation.doc_templates.focusNode}
-  final FocusNode? focusNode;
-
-  /// {@macro forui.foundation.doc_templates.onFocusChange}
-  final ValueChanged<bool>? onFocusChange;
-
-  /// Creates a [FPopoverProperties].
-  const FPopoverProperties({
-    required this.popoverAnchor,
-    required this.childAnchor,
-    this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
-    this.directionPadding = false,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-  });
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
-      ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
-  }
-}
-
 /// A popover displays rich content in a portal that is aligned to a child.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/popover for working examples.
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
-class FPopover extends StatefulWidget implements FPopoverProperties {
+class FPopover extends StatefulWidget {
   /// The platform-specific default popover and child anchors.
   static ({Alignment popover, Alignment child}) get defaultPlatform => Touch.primary
       ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
@@ -150,34 +80,53 @@ class FPopover extends StatefulWidget implements FPopoverProperties {
   /// The popover's style.
   final FPopoverStyle? style;
 
-  /// {@macro forui.widgets.FPopoverProperties.popoverAnchor}
+  /// {@template forui.widgets.FPopover.popoverAnchor}
+  /// The point on the popover (floating content) that connects with the child, at the child's anchor.
+  ///
+  /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
+  /// See [childAnchor] for changing the child's anchor.
+  /// {@endtemplate}
   ///
   /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
-  @override
   final Alignment popoverAnchor;
 
-  /// {@macro forui.widgets.FPopoverProperties.childAnchor}
+  /// {@template forui.widgets.FPopover.childAnchor}
+  /// The point on the child that connects with the popover, at the popover's anchor.
+  ///
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
+  /// See [popoverAnchor] for changing the popover's anchor.
+  /// {@endtemplate}
   ///
   /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
-  @override
   final Alignment childAnchor;
 
-  @override
+  /// {@template forui.widgets.FPopover.shift}
+  /// The shifting strategy used to shift a popover when it overflows out of the viewport. Defaults to
+  /// [FPortalShift.flip].
+  ///
+  /// See [FPortalShift] for more information on the different shifting strategies.
+  /// {@endtemplate}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
-  @override
+  /// {@template forui.widgets.FPopover.hideOnTapOutside}
+  /// True if the popover is hidden when tapped outside of it. Defaults to true.
+  /// {@endtemplate}
   final bool hideOnTapOutside;
 
-  @override
+  /// {@template forui.widgets.FPopover.directionPadding}
+  /// True if the popover should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
+  ///
+  /// Diagonal corners are ignored.
+  /// {@endtemplate}
   final bool directionPadding;
 
-  @override
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  @override
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  @override
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// The popover's semantic label used by accessibility frameworks.
@@ -234,26 +183,6 @@ class FPopover extends StatefulWidget implements FPopoverProperties {
   })  : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
         childAnchor = childAnchor ?? defaultPlatform.child,
         _automatic = true;
-
-  /// Creates a popover from the given properties.
-  FPopover.fromProperties({
-    required FPopoverProperties properties,
-    required this.popoverBuilder,
-    required this.child,
-    required this.controller,
-    required this.style,
-    required this.semanticLabel,
-    required bool automatic,
-    super.key,
-  })  : popoverAnchor = properties.popoverAnchor,
-        childAnchor = properties.childAnchor,
-        shift = properties.shift,
-        hideOnTapOutside = properties.hideOnTapOutside,
-        directionPadding = properties.directionPadding,
-        autofocus = properties.autofocus,
-        focusNode = properties.focusNode,
-        onFocusChange = properties.onFocusChange,
-        _automatic = automatic;
 
   @override
   State<FPopover> createState() => _State();

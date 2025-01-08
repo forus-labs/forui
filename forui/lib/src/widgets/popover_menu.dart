@@ -11,56 +11,62 @@ import 'package:forui/forui.dart';
 /// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
-class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FTileGroupProperties {
+class FPopoverMenu extends StatefulWidget {
   /// The popover menu's style.
   final FPopoverMenuStyle? style;
 
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.cacheExtent}
   final double? cacheExtent;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.maxHeight}
   final double maxHeight;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.divider}
+  ///
+  /// Defaults to [FTileDivider.full].
   final FTileDivider divider;
 
-  /// {@macro forui.widgets.FPopoverProperties.popoverAnchor}
+  /// The point on the menu (floating content) that connects with the child, at the child's anchor.
+  ///
+  /// For example, [Alignment.topCenter] means the top-center point of the menu will connect with the child.
+  /// See [childAnchor] for changing the child's anchor.
   ///
   /// Defaults to [Alignment.topCenter].
-  @override
-  final Alignment popoverAnchor;
+  final Alignment menuAnchor;
 
-  /// {@macro forui.widgets.FPopoverProperties.childAnchor}
+  /// The point on the child that connects with the menu, at the menu's anchor.
+  ///
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the menu.
+  /// See [menuAnchor] for changing the popover's anchor.
   ///
   /// Defaults to [Alignment.bottomCenter].
-  @override
   final Alignment childAnchor;
 
-  @override
+  /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
-  @override
+  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final bool hideOnTapOutside;
 
-  @override
+  /// {@macro forui.widgets.FPopover.directionPadding}
   final bool directionPadding;
 
-  @override
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  @override
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  @override
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// The menu's semantic label used by accessibility frameworks.
@@ -85,7 +91,7 @@ class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FTileGr
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.popoverAnchor = Alignment.topCenter,
+    this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
@@ -112,7 +118,7 @@ class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FTileGr
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.divider = FTileDivider.full,
-    this.popoverAnchor = Alignment.topCenter,
+    this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
@@ -138,7 +144,7 @@ class FPopoverMenu extends StatefulWidget implements FPopoverProperties, FTileGr
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
-      ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
+      ..add(DiagnosticsProperty('popoverAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
@@ -175,12 +181,17 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverMenuStyle;
-    return FPopover.fromProperties(
-      properties: widget,
+    return (widget._automatic ? FPopover.automatic : FPopover.new)(
       controller: _controller,
       style: style,
-      automatic: widget._automatic,
-      semanticLabel: null,
+      popoverAnchor: widget.menuAnchor,
+      childAnchor: widget.childAnchor,
+      shift: widget.shift,
+      hideOnTapOutside: widget.hideOnTapOutside,
+      directionPadding: widget.directionPadding,
+      autofocus: widget.autofocus,
+      focusNode: widget.focusNode,
+      onFocusChange: widget.onFocusChange,
       popoverBuilder: (context, _, __) => ConstrainedBox(
         constraints: BoxConstraints(maxWidth: style.maxWidth),
         child: FTileGroup.merge(

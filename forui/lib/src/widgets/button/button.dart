@@ -28,8 +28,6 @@ class FButton extends StatelessWidget {
   final VoidCallback? onLongPress;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
-  ///
-  /// Defaults to false.
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}

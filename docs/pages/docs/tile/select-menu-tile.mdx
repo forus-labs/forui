@@ -35,8 +35,8 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
-        controller: controller,
-        popover: const FSelectMenuTileMenuProperties(autoHide: true),
+        groupController: controller,
+        autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
         title: const Text('Notifications'),
@@ -50,7 +50,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
             },
           ),
         ),
-        menuTiles: [
+        menu: [
           FSelectTile(title: const Text('All'), value: Notification.all),
           FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
           FSelectTile(title: const Text('None'), value: Notification.nothing),
@@ -73,9 +73,18 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
 ```dart copy
 FSelectMenuTile<Value>(
-  controller: FMultiSelectGroupController(), // or FRadioSelectGroupController()
-  popover: FSelectMenuTilePopoverProperties(...),
-  menu: FSelectMenuTileMenuProperties(...),
+  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  menuAnchor: Alignment.bottomLeft,
+  tileAnchor: Alignment.bottomLeft,
+  shift: FPortalFollowerShift.flip,
+  hideOnTapOutside: true,
+  directionPadding: true,
+  autoHide: false,
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  divider: FTileDivider.indented,
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),
@@ -97,9 +106,18 @@ FSelectMenuTile<Value>(
 
 ```dart copy
 FSelectMenuTile<Value>.builder(
-  controller: FMultiSelectGroupController(), // or FRadioSelectGroupController()
-  popover: FSelectMenuTilePopoverProperties(...),
-  menu: FSelectMenuTileMenuProperties(...),
+  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  menuAnchor: Alignment.bottomLeft,
+  tileAnchor: Alignment.bottomLeft,
+  shift: FPortalFollowerShift.flip,
+  hideOnTapOutside: true,
+  directionPadding: true,
+  autoHide: false,
+  scrollController: ScrollController(),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  divider: FTileDivider.indented,
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),
@@ -140,8 +158,8 @@ FSelectMenuTile<Value>.builder(
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
-        controller: controller,
-        popover: const FSelectMenuTileMenuProperties(autoHide: true),
+        groupController: controller,
+        autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
         title: const Text('Notifications'),
@@ -155,7 +173,7 @@ FSelectMenuTile<Value>.builder(
             },
           ),
         ),
-        menuTiles: [
+        menu: [
           FSelectTile(title: const Text('All'), value: Notification.all),
           FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
           FSelectTile(title: const Text('None'), value: Notification.nothing),
@@ -195,9 +213,9 @@ FSelectMenuTile<Value>.builder(
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
-        controller: controller,
-        popover: const FSelectMenuTileMenuProperties(autoHide: true),
-        menu: const FSelectMenuTileMenuProperties(maxHeight: 200),
+        groupController: controller,
+        autoHide: true,
+        maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
         title: const Text('Notifications'),
@@ -214,7 +232,7 @@ FSelectMenuTile<Value>.builder(
             },
           ),
         ),
-        menuTiles: [
+        menu: [
           FSelectTile(title: const Text('All'), value: Notification.all),
           FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
           FSelectTile(title: const Text('Limited Time'), value: Notification.limitedTime),
@@ -255,9 +273,9 @@ FSelectMenuTile<Value>.builder(
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile.builder(
-        controller: controller,
-        popover: const FSelectMenuTileMenuProperties(autoHide: true),
-        menu: const FSelectMenuTileMenuProperties(maxHeight: 200),
+        groupController: controller,
+        autoHide: true,
+        maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.variable),
         title: const Text('Applicable values'),
@@ -306,9 +324,8 @@ FSelectMenuTile<Value>.builder(
               mainAxisSize: MainAxisSize.min,
               children: [
                 FSelectMenuTile(
-                  controller: controller,
-                  popover: FSelectMenuTilePopoverProperties(autoHide: true),
-
+                  groupController: controller,
+                  autoHide: true,
                   validator: (value) => value == null ? 'Select an item' : null,
                   prefixIcon: FIcon(FAssets.icons.bell),
                   title: const Text('Notifications'),
@@ -322,7 +339,7 @@ FSelectMenuTile<Value>.builder(
                       },
                     ),
                   ),
-                  menuTiles: [
+                  menu: [
                     FSelectTile(title: const Text('All'), value: Notification.all),
                     FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
                     FSelectTile(title: const Text('None'), value: Notification.nothing),

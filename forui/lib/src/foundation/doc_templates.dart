@@ -9,6 +9,8 @@ extension Focus on Never {
   ///
   /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
   /// autofocus set, then the first one added to the tree will get focus.
+  ///
+  /// Defaults to false.
   /// {@endtemplate}
   static const autofocus = '';
 

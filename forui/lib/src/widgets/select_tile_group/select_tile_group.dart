@@ -17,9 +17,7 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FTileGroupStyle] for customizing a select group's appearance.
-class FSelectTileGroup<T> extends FormField<Set<T>>
-    with FTileGroupMixin<FTileMixin>
-    implements FFormFieldProperties<Set<T>>, FTileGroupProperties {
+class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMixin>, FFormFieldProperties<Set<T>> {
   /// The controller.
   ///
   /// See:
@@ -27,22 +25,24 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
   /// * [FMultiSelectGroupController] for multiple selections.
   final FSelectGroupController<T> groupController;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.cacheExtent}
   final double? cacheExtent;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.maxHeight}
   final double maxHeight;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
   /// The style. Defaults to [FThemeData.tileGroupStyle].
   final FTileGroupStyle? style;
 
-  @override
+  /// {@macro forui.widgets.FTileGroup.divider}
+  ///
+  /// Defaults to [FTileDivider.indented].
   final FTileDivider divider;
 
   /// The label displayed above the group.

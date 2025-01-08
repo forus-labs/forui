@@ -15,14 +15,14 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            controller: controller,
+            groupController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
             title: const Text('Repeat'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('None'),
-            menuTiles: [
+            menu: [
               FSelectTile(title: const Text('Item 1'), value: 1),
               FSelectTile(title: const Text('Item 2'), value: 2),
             ],
@@ -44,14 +44,14 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            controller: controller,
+            groupController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
             title: const Text('Repeat'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('None'),
-            menuTiles: [
+            menu: [
               FSelectTile(title: const Text('Item 1'), value: 1),
               FSelectTile(title: const Text('Item 2'), value: 2),
             ],
@@ -75,15 +75,15 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            popover: const FSelectMenuTilePopoverProperties(autoHide: true),
-            controller: controller,
+            autoHide: true,
+            groupController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
             title: const Text('Repeat'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('None'),
-            menuTiles: [
+            menu: [
               FSelectTile(title: const Text('Item 1'), value: 1),
               FSelectTile(title: const Text('Item 2'), value: 2),
             ],

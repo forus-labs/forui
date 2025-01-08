@@ -9,7 +9,7 @@ import 'package:forui/src/widgets/slider/track.dart';
 import 'package:meta/meta.dart';
 
 @internal
-class SliderFormField extends FormField<FSliderSelection> implements FFormFieldProperties<FSliderSelection> {
+class SliderFormField extends FormField<FSliderSelection> with FFormFieldProperties<FSliderSelection> {
   final FSliderController controller;
   final BoxConstraints constraints;
   @override

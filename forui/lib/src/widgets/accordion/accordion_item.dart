@@ -27,8 +27,6 @@ class FAccordionItem extends StatefulWidget {
   final bool initiallyExpanded;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
-  ///
-  /// Defaults to false.
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}

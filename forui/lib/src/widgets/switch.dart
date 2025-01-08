@@ -44,8 +44,6 @@ class FSwitch extends StatelessWidget {
   final bool enabled;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
-  ///
-  /// Defaults to false.
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}

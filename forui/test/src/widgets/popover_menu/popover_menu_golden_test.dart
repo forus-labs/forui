@@ -152,7 +152,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FPopoverMenu(
-              popoverAnchor: Alignment.topRight,
+              menuAnchor: Alignment.topRight,
               childAnchor: Alignment.bottomRight,
               directionPadding: true,
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
@@ -199,7 +199,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FPopoverMenu(
-              popoverAnchor: Alignment.topRight,
+              menuAnchor: Alignment.topRight,
               childAnchor: Alignment.bottomRight,
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
               popoverController: controller,
