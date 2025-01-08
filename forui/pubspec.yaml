@@ -35,7 +35,6 @@ dev_dependencies:
   flint: ^2.8.1
   flutter_test:
     sdk: flutter
-  forui_internal_lints:
   http: ^1.2.2
   mockito: ^5.4.4
 

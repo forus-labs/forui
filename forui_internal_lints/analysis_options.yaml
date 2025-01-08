@@ -1,9 +1,0 @@
-include: package:flint/analysis_options.flutter.yaml
-analyzer:
-  errors:
-    unused_result: ignore
-
-linter:
-  rules:
-    - use_key_in_widget_constructors
-    - require_trailing_commas
