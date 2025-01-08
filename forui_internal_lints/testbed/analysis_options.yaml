@@ -1,6 +1,0 @@
-analyzer:
-  plugins:
-    - custom_lint
-  errors:
-    unused_result: ignore
-    unused_element: ignore

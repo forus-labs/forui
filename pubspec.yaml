@@ -7,8 +7,6 @@ workspace:
   - forui/example
   - forui_assets
   - forui_hooks
-  - forui_internal_lints
-  - forui_internal_lints/testbed
   - samples
 
 dev_dependencies:
