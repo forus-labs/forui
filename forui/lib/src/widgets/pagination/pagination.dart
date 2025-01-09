@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/pagination/pagination_controller.dart';
+
 import 'package:meta/meta.dart';
 
 /// A Pagination component that enables the user to select a specific page from a range of pages.
@@ -18,10 +18,12 @@ final class FPagination extends StatefulWidget {
 
   final FPaginationController? controller;
 
+  final bool firstLastVisible;
+
   /// The previous button placed in the beginning of the pagination.
   ///
   /// Defaults to an `FAssets.icons.chevronRight` icon.
-  final FButton? previous;
+  final Widget? previous;
 
   /// The next button placed at the end of the pagination.
   ///
@@ -34,6 +36,7 @@ final class FPagination extends StatefulWidget {
     this.style,
     this.previous,
     this.next,
+    this.firstLastVisible = true,
     super.key,
   });
 
@@ -43,11 +46,17 @@ final class FPagination extends StatefulWidget {
 
 class _FPaginationState extends State<FPagination> {
   late FPaginationController _controller;
+  late int currentPage;
 
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FPaginationController();
+    _controller = widget.controller ?? FPaginationController(initialPage: 6, length: 20);
+    _controller.addListener(() {
+      setState(() {
+        currentPage = _controller.value;
+      });
+    });
   }
 
   @override
@@ -60,24 +69,28 @@ class _FPaginationState extends State<FPagination> {
     if (old.controller != null) {
       _controller.dispose();
     }
-    _controller = widget.controller ?? FPaginationController();
+    _controller = widget.controller ?? FPaginationController(initialPage: 6, length: 20);
   }
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.paginationStyle;
-    final previous = widget.previous != null
-        ? FIconStyleData(
-            style: style.iconStyle,
-            child: widget.previous!,
-          )
-        : _Action.previous(style: style, onPress: _controller.previous);
-    final next = widget.next != null
-        ? FIconStyleData(
-            style: style.iconStyle,
-            child: widget.next!,
-          )
-        : _Action.next(style: style, onPress: _controller.next);
+    final previous = widget.previous ?? _Action.previous(style: style, onPress: _controller.previous);
+    final next = widget.next ?? _Action.next(style: style, onPress: _controller.next);
+
+    final elipsis = Container(
+      decoration: style.unselectedDecoration,
+      padding: style.contentPadding,
+      child: ConstrainedBox(
+        constraints: style.contentConstraints,
+        child: DefaultTextStyle(
+          style: style.textStyle,
+          child: const Center(child: Text('...')),
+        ),
+      ),
+    );
+
+    final range = _controller.calculateRange();
 
     return Row(
       children: [
@@ -85,9 +98,35 @@ class _FPaginationState extends State<FPagination> {
           padding: style.itemPadding,
           child: previous,
         ),
-        for (int i = 0; i < _controller.count; i++)
+        if (_controller.value >= _controller.minDisplayed - 1)
           FPaginationItemData(
-            index: i,
+            pageNumber: 1,
+            style: style,
+            controller: _controller,
+            child: Padding(
+              padding: style.itemPadding,
+              child: const _Page(),
+            ),
+          ),
+        Row(
+          children: [
+            if (_controller.value >= _controller.minDisplayed) elipsis,
+            for (int i = range.$1; i <= range.$2; i++)
+              FPaginationItemData(
+                pageNumber: i,
+                style: style,
+                controller: _controller,
+                child: Padding(
+                  padding: style.itemPadding,
+                  child: const _Page(),
+                ),
+              ),
+            if (_controller.value <= (_controller.length - _controller.minDisplayed + 1)) elipsis,
+          ],
+        ),
+        if (_controller.value < (_controller.length - _controller.visiblePageOffset))
+          FPaginationItemData(
+            pageNumber: _controller.length,
             style: style,
             controller: _controller,
             child: Padding(
@@ -113,12 +152,12 @@ class FPaginationItemData extends InheritedWidget {
     return data!;
   }
 
-  final int index;
+  final int pageNumber;
   final FPaginationController controller;
   final FPaginationStyle style;
 
   const FPaginationItemData({
-    required this.index,
+    required this.pageNumber,
     required this.controller,
     required this.style,
     required super.child,
@@ -127,13 +166,13 @@ class FPaginationItemData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant FPaginationItemData old) =>
-      index != old.index || controller != old.controller || style != old.style;
+      pageNumber != old.pageNumber || controller != old.controller || style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IntProperty('index', index))
+      ..add(IntProperty('index', pageNumber))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style));
   }
@@ -198,6 +237,7 @@ class _Action extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FTappable(
+        focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
         onPress: onPress,
         builder: (context, tappableData, child) => Container(
           decoration: switch (tappableData.hovered) {
@@ -216,28 +256,36 @@ class _Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = FPaginationItemData.of(context);
-    final current = data.index == data.controller.value;
-    final style = FPaginationItemData.of(context).style;
+    final FPaginationItemData(pageNumber: pageNumber, :controller, style: style) = FPaginationItemData.of(context);
+
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
-    return FTappable(
-      focusedOutlineStyle: focusedOutlineStyle,
-      onPress: () => data.controller.select(data.index),
-      builder: (context, tappableData, child) => Container(
-        decoration: switch ((current, tappableData.hovered)) {
-          (false, false) => style.unselectedDecoration,
-          (false, true) => style.hoveredDecoration,
-          (true, true) => style.selectedHoveredDecoration,
-          (true, false) => style.selectedDecoration,
-        },
-        padding: style.contentPadding,
-        child: DefaultTextStyle(
-          style: style.textStyle,
-          child: child!,
-        ),
-      ),
-      child: Text('${data.index}'),
+    return ValueListenableBuilder(
+      valueListenable: controller,
+      builder: (context, value, __) {
+        final current = pageNumber == value;
+        return FTappable(
+          focusedOutlineStyle: focusedOutlineStyle,
+          onPress: () => controller.value = pageNumber,
+          builder: (context, tappableData, child) => Container(
+            decoration: switch ((current, tappableData.hovered)) {
+              (false, false) => style.unselectedDecoration,
+              (false, true) => style.hoveredDecoration,
+              (true, true) => style.selectedHoveredDecoration,
+              (true, false) => style.selectedDecoration,
+            },
+            padding: style.contentPadding,
+            child: ConstrainedBox(
+              constraints: style.contentConstraints,
+              child: DefaultTextStyle(
+                style: style.textStyle,
+                child: child!,
+              ),
+            ),
+          ),
+          child: Center(child: Text('$pageNumber')),
+        );
+      },
     );
   }
 }
@@ -265,7 +313,7 @@ final class FPaginationStyle with Diagnosticable {
   /// The padding around an action button. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
   final EdgeInsets itemPadding;
 
-  final double spacing;
+  final BoxConstraints contentConstraints;
 
   /// The text style.
   final TextStyle textStyle;
@@ -280,7 +328,7 @@ final class FPaginationStyle with Diagnosticable {
     required this.textStyle,
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.spacing = 5,
+    this.contentConstraints = const BoxConstraints(minWidth:18.0, maxWidth: 18.0),
   });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
@@ -323,7 +371,7 @@ final class FPaginationStyle with Diagnosticable {
     FIconStyle? iconStyle,
     EdgeInsets? itemPadding,
     EdgeInsets? actionPadding,
-    double? spacing,
+    BoxConstraints? contentConstraints,
   }) =>
       FPaginationStyle(
         selectedDecoration: selectedDecoration ?? this.selectedDecoration,
@@ -334,7 +382,7 @@ final class FPaginationStyle with Diagnosticable {
         iconStyle: iconStyle ?? this.iconStyle,
         contentPadding: itemPadding ?? this.contentPadding,
         itemPadding: actionPadding ?? this.itemPadding,
-        spacing: spacing ?? this.spacing,
+        contentConstraints: contentConstraints ?? this.contentConstraints,
       );
 
   @override
@@ -349,7 +397,7 @@ final class FPaginationStyle with Diagnosticable {
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
       ..add(DiagnosticsProperty('itemPadding', contentPadding))
       ..add(DiagnosticsProperty('actionPadding', itemPadding))
-      ..add(DoubleProperty('spacing', spacing));
+      ..add(DiagnosticsProperty('contentConstraints', contentConstraints));
     ;
   }
 
@@ -366,7 +414,7 @@ final class FPaginationStyle with Diagnosticable {
           iconStyle == other.iconStyle &&
           contentPadding == other.contentPadding &&
           itemPadding == other.itemPadding &&
-          spacing == other.spacing;
+          contentConstraints == other.contentConstraints;
 
   @override
   int get hashCode =>
@@ -378,5 +426,5 @@ final class FPaginationStyle with Diagnosticable {
       iconStyle.hashCode ^
       contentPadding.hashCode ^
       itemPadding.hashCode ^
-      spacing.hashCode;
+      contentConstraints.hashCode;
 }

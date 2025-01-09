@@ -5,5 +5,5 @@
 /// See https://forui.dev/docs/navigation/pagination for working examples.
 library forui.widgets.pagination;
 
-export '../src/widgets/pagination/pagination.dart';
+export '../src/widgets/pagination/pagination.dart' hide FPaginationItemData;
 export '../src/widgets/pagination/pagination_controller.dart';
