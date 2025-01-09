@@ -2,14 +2,28 @@ import 'package:forui/forui.dart';
 
 /// A controller that controls which page is selected.
 class FPaginationController extends FValueNotifier<int> {
+  /// The total number of pages in the paginated content.
   final int length;
 
-  /// the number of sibling pages beside the selected page number.
+  /// The number of sibling pages to display beside the selected page number.
+  ///
+  /// This value determines how many pages are shown on either side of the
+  /// currently selected page in the pagination control.
+  ///
+  /// For example, if `siblingLength` is 2 and the current page is 5,
+  /// the displayed pages would be 3, 4, 5, 6, and 7.
   final int siblingLength;
+
+  /// Whether to show the first and last pages in the pagination control.
+  ///
+  /// If `true`, the pagination control will always display the first and
+  /// last pages, regardless of the current page.
+  ///
+  /// This can be useful for allowing users to quickly navigate
+  /// to the beginning or end of the paginated content.
   final bool showFirstLastPages;
 
   /// Creates a [FPaginationController].
-  ///
   ///
   /// # Contract:
   /// * Throws [AssertionError] if [length] < 0.
@@ -19,43 +33,27 @@ class FPaginationController extends FValueNotifier<int> {
     int? initialPage,
     this.showFirstLastPages = true,
     this.siblingLength = 1,
-
-  })  : assert(length >= 0, 'The count value must be greater than or equal to 0.'),
+  })  :  assert(length > 0, 'The total length of pages should be more than 0, but is $length.'),
+        assert(siblingLength >= 0, 'The siblingLength should be non-negative, but is $siblingLength'),
         assert(
-          siblingLength >= 1 && siblingLength <= length,
-          'The minDisplayed value must be greater than or equal to 1.',
-        ),
-        assert(
-          initialPage == null || initialPage <= length && initialPage >= 1,
-          'The initial value must be greater than or equal to 0 and less than count.',
+        initialPage == null || (initialPage >= 1 && initialPage <= length),
+        'The initial value must be greater than or equal to 1 and less than or equal to length.',
         ),
         super(initialPage ?? 0);
 
-  /// moves to the previous page.
+  /// Moves to the previous page if the current page is greater than 1.
   void previous() {
     if (value > 1) {
       value = value - 1;
     }
   }
 
-  /// moves to the next page.
+  /// Moves to the next page if the current page is less than the total number of pages.
   void next() {
     if (value < length) {
       value = value + 1;
     }
   }
-
-  // /// selects the page at the given [index], returning true if selected.
-  // ///
-  // /// This method should typically not be called while the widget tree is being rebuilt.
-  // void select(int index) async {
-  //   if (validate(index)) {
-  //     value = index;
-  //     notifyListeners();
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   @override
   set value(int newValue) {
@@ -69,8 +67,12 @@ class FPaginationController extends FValueNotifier<int> {
   /// Calculates the start of the range for page numbers to display.
   (int, int) calculateRange() {
     print('value: $value');
-    print('visiblePageOffset: $siblingLength');
+    print('siblingLength: $siblingLength');
     print('minDisplayed: $minPagesDisplayedAtEnds');
+
+    if (length <= minPagesDisplayedAtEnds) {
+      return (1, length);
+    }
 
     final rangeStart = value - siblingLength < 1
         ? 1
@@ -94,11 +96,16 @@ class FPaginationController extends FValueNotifier<int> {
     return (rangeStart, rangeEnd);
   }
 
+  /// Returns the minimum number of pages to display at the start and end before the selected page number.
+  ///
+  /// If the total number of pages is less than the minimum number of pages to display at the start and end,
+  /// plus a full cycle of sibling pages on either side of the selected page number,
+  /// the total number of pages is returned.
   int get minPagesDisplayedAtEnds {
-    final firstLastOffset = showFirstLastPages ? 1 : 0;
-    return siblingLength + 1 + firstLastOffset;
+    final minDisplayedAtEnds = siblingLength + 1 + (showFirstLastPages ? 1 : 0);
+    return length <= minDisplayedAtEnds + (siblingLength * 2 + 2) ? length : minDisplayedAtEnds;
   }
 
-  /// Returns true if given index is within the allowed range.
+  /// Returns `true` if the page is within the range of 1 to [length], inclusive.
   bool validate(int page) => page >= 1 && page <= length;
 }

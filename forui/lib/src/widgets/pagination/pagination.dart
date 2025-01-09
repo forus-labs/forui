@@ -53,8 +53,9 @@ class _FPaginationState extends State<FPagination> {
     _controller = widget.controller ??
         FPaginationController(
           showFirstLastPages: widget.showFirstLastPages,
+          siblingLength: 1,
           initialPage: 1,
-          length: 10,
+          length: 8,
         );
     _controller.addListener(() {
       setState(() {
