@@ -63,7 +63,7 @@ class FPaginationController extends FValueNotifier<int> {
 
   /// Calculates the start of the range for page numbers to display.
   (int, int) calculateRange() {
-    final minDisplayed = visiblePageOffset * 2 + 1;
+    //final minDisplayed = visiblePageOffset * 2 + 5;
 
     print('value: $value');
     print('visiblePageOffset: $visiblePageOffset');
@@ -88,7 +88,7 @@ class FPaginationController extends FValueNotifier<int> {
   }
 
 
-  int get minDisplayed => visiblePageOffset * 2 + 1;
+  int get minDisplayed => visiblePageOffset * 2 + 2;
 
   /// Returns true if given index is within the allowed range.
   bool validate(int page) => page >= 1 && page <= length;

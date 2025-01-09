@@ -51,7 +51,7 @@ class _FPaginationState extends State<FPagination> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FPaginationController(initialPage: 6, length: 20);
+    _controller = widget.controller ?? FPaginationController(initialPage: 1, length: 20);
     _controller.addListener(() {
       setState(() {
         currentPage = _controller.value;
@@ -69,7 +69,15 @@ class _FPaginationState extends State<FPagination> {
     if (old.controller != null) {
       _controller.dispose();
     }
-    _controller = widget.controller ?? FPaginationController(initialPage: 6, length: 20);
+    _controller = widget.controller ?? FPaginationController(initialPage: 1, length: 20);
+  }
+
+  List<Widget> _buildPages() {
+    final list = <Widget>[];
+
+    final range = _controller.calculateRange();
+
+    return list;
   }
 
   @override
@@ -98,7 +106,7 @@ class _FPaginationState extends State<FPagination> {
           padding: style.itemPadding,
           child: previous,
         ),
-        if (_controller.value >= _controller.minDisplayed - 1)
+        if (_controller.value > 1 + _controller.visiblePageOffset) ...[
           FPaginationItemData(
             pageNumber: 1,
             style: style,
@@ -108,23 +116,42 @@ class _FPaginationState extends State<FPagination> {
               child: const _Page(),
             ),
           ),
-        Row(
-          children: [
-            if (_controller.value >= _controller.minDisplayed) elipsis,
-            for (int i = range.$1; i <= range.$2; i++)
-              FPaginationItemData(
-                pageNumber: i,
-                style: style,
-                controller: _controller,
-                child: Padding(
-                  padding: style.itemPadding,
-                  child: const _Page(),
-                ),
+          if (range.$1 > 1 + _controller.visiblePageOffset)
+            elipsis
+          else if (range.$1 == 1 + _controller.visiblePageOffset)
+            FPaginationItemData(
+              pageNumber: 2,
+              style: style,
+              controller: _controller,
+              child: Padding(
+                padding: style.itemPadding,
+                child: const _Page(),
               ),
-            if (_controller.value <= (_controller.length - _controller.minDisplayed + 1)) elipsis,
-          ],
-        ),
-        if (_controller.value < (_controller.length - _controller.visiblePageOffset))
+            ),
+        ],
+        for (int i = range.$1; i <= range.$2; i++)
+          FPaginationItemData(
+            pageNumber: i,
+            style: style,
+            controller: _controller,
+            child: Padding(
+              padding: style.itemPadding,
+              child: const _Page(),
+            ),
+          ),
+        if (_controller.value < (_controller.length - _controller.visiblePageOffset)) ...[
+          if (range.$2 < _controller.length - _controller.visiblePageOffset)
+            elipsis
+          else if (range.$2 == _controller.length - _controller.visiblePageOffset)
+            FPaginationItemData(
+              pageNumber: _controller.length - 1,
+              style: style,
+              controller: _controller,
+              child: Padding(
+                padding: style.itemPadding,
+                child: const _Page(),
+              ),
+            ),
           FPaginationItemData(
             pageNumber: _controller.length,
             style: style,
@@ -134,6 +161,7 @@ class _FPaginationState extends State<FPagination> {
               child: const _Page(),
             ),
           ),
+        ],
         Padding(
           padding: style.itemPadding,
           child: next,
@@ -326,9 +354,9 @@ final class FPaginationStyle with Diagnosticable {
     required this.selectedHoveredDecoration,
     required this.iconStyle,
     required this.textStyle,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.contentConstraints = const BoxConstraints(minWidth:18.0, maxWidth: 18.0),
+    this.contentConstraints = const BoxConstraints(minWidth: 18.0, maxWidth: 18.0, maxHeight: 18.0),
   });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
