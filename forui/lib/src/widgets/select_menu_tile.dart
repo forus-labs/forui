@@ -469,13 +469,21 @@ class _SelectGroupController<T> extends DelegateSelectGroupController<T> {
   _SelectGroupController(super.delegate, this._popover, {required this.autoHide});
 
   @override
-  Future<void> select(T value, bool selected) async {
-    if (autoHide && _popover.shown) {
-      await _popover.hide();
-    }
-
-    super.select(value, selected);
-  }
+  bool update(
+    T value, {
+    required bool selected,
+    void Function(VoidCallback) onChanged = FSelectGroupController.defaultOnChanged,
+  }) =>
+      super.update(
+        value,
+        selected: selected,
+        onChanged: (callback) async {
+          if (autoHide && _popover.shown) {
+            await _popover.hide();
+          }
+          callback();
+        },
+      );
 
   @override
   void dispose() {

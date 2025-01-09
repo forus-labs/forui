@@ -3,16 +3,29 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-/// A controller for a select group.
+/// A select group's controller that manages the selection state of a group of values.
+///
+/// See:
+/// * [FRadioSelectGroupController] for a single radio button like selection.
+/// * [FMultiSelectGroupController] for multiple selections.
 abstract class FSelectGroupController<T> extends FChangeNotifier {
+  /// The default continuation for [update] that just invokes [callback].
+  static void defaultOnChanged(VoidCallback callback) => callback();
+
   final Set<T> _values;
 
   /// Creates a [FSelectGroupController].
   FSelectGroupController({Set<T> values = const {}}) : _values = {...values};
 
-  /// Handles a change in the selection.
-  // ignore: avoid_positional_boolean_parameters
-  void select(T value, bool selected);
+  /// Updates the selection state of the given [value].
+  ///
+  /// [onChanged] is a callback that is called after the selection state is updated but before [notifyListeners] is
+  /// called. It must always invoke the [VoidCallback] passed to it. It is typically used to perform additional actions
+  /// such as animations.
+  ///
+  /// Returns true if the selection state was changed, false if the state remained the same (e.g., trying to select an
+  /// already selected value).
+  bool update(T value, {required bool selected, void Function(VoidCallback) onChanged = defaultOnChanged});
 
   /// Returns true if a value is selected.
   bool contains(T value) => _values.contains(value);
@@ -21,11 +34,12 @@ abstract class FSelectGroupController<T> extends FChangeNotifier {
   Set<T> get values => {..._values};
 
   @protected
-  set values(Set<T> values) => {
-        _values.clear(),
-        _values.addAll(values),
-        notifyListeners(),
-      };
+  set values(Set<T> values) {
+    _values
+      ..clear()
+      ..addAll(values);
+    notifyListeners();
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -49,7 +63,12 @@ class DelegateSelectGroupController<T> implements FSelectGroupController<T> {
 
   @override
   @mustCallSuper
-  void select(T value, bool selected) => delegate.select(value, selected);
+  bool update(
+    T value, {
+    required bool selected,
+    void Function(VoidCallback) onChanged = FSelectGroupController.defaultOnChanged,
+  }) =>
+      delegate.update(value, selected: selected, onChanged: onChanged);
 
   @override
   @mustCallSuper
@@ -88,22 +107,27 @@ class DelegateSelectGroupController<T> implements FSelectGroupController<T> {
   Set<T> get _values => delegate.values;
 }
 
-/// A [FSelectGroupController] that allows only one selection mimicking the behaviour of radio buttons.
+/// A [FSelectGroupController] that allows only one selection, mimicking the behaviour of radio buttons.
 class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
   /// Creates a [FRadioSelectGroupController].
   FRadioSelectGroupController({T? value}) : super(values: value == null ? {} : {value});
 
   @override
-  void select(T value, bool selected) {
+  bool update(
+    T value, {
+    required bool selected,
+    void Function(VoidCallback) onChanged = FSelectGroupController.defaultOnChanged,
+  }) {
     if (!selected || contains(value)) {
-      return;
+      return false;
     }
 
     _values
       ..clear()
       ..add(value);
 
-    notifyListeners();
+    onChanged(notifyListeners);
+    return true;
   }
 }
 
@@ -131,22 +155,28 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
         assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   @override
-  void select(T value, bool selected) {
+  bool update(
+    T value, {
+    required bool selected,
+    void Function(VoidCallback) onChanged = FSelectGroupController.defaultOnChanged,
+  }) {
     if (selected) {
       if (_max != null && _values.length >= _max) {
-        return;
+        return false;
       }
 
       _values.add(value);
     } else {
       if (_values.length <= _min) {
-        return;
+        return false;
       }
 
       _values.remove(value);
     }
 
-    notifyListeners();
+    onChanged(notifyListeners);
+
+    return true;
   }
 
   @override

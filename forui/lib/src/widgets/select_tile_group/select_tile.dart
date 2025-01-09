@@ -117,7 +117,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       style: style,
       semanticLabel: semanticLabel,
       enabled: enabled,
-      onPress: () => controller.select(value, !selected),
+      onPress: () => controller.update(value, selected: !selected),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
