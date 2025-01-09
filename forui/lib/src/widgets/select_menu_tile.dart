@@ -18,9 +18,7 @@ import 'package:meta/meta.dart';
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
-class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
-  static Widget _errorBuilder(BuildContext context, String error) => Text(error);
-
+class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
   /// The controller that controls the selected tiles.
   final FSelectGroupController<T> groupController;
 
@@ -53,67 +51,53 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
   /// The divider between select tiles. Defaults to [FTileDivider.indented].
   final FTileDivider divider;
 
-  /// The anchor of the menu to which the [tileAnchor] is aligned to.
+  /// The point on the menu (floating content) that connects with the tile, at the tile's anchor.
   ///
-  /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
+  /// For example, [Alignment.topCenter] means the top-center point of the menu will connect with the tile.
+  /// See [tileAnchor] for changing the tile's anchor.
+  ///
+  /// Defaults to [Alignment.topRight].
   final Alignment menuAnchor;
 
-  /// The anchor of the child to which the [menuAnchor] is aligned to.
+  /// The point on the tile that connects with the menu, at the menu's anchor.
   ///
-  /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the tile will connect with the menu.
+  /// See [menuAnchor] for changing the menu's anchor.
+  ///
+  /// Defaults to [Alignment.bottomRight].
   final Alignment tileAnchor;
 
-  /// The shifting strategy used to shift a menu when it overflows out of the viewport. Defaults to
-  /// [FPortalFollowerShift.flip].
-  ///
-  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
+  /// {@macro forui.widgets.FPopover.shift}
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
+  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final bool hideOnTapOutside;
 
-  /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
-  ///
-  /// Diagonal corners are ignored.
+  /// {@macro forui.widgets.FPopover.directionPadding}
   final bool directionPadding;
 
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
   final bool autoHide;
 
-  /// The label displayed next to the select group.
+  @override
   final Widget? label;
 
-  /// The description displayed below the group.
+  @override
   final Widget? description;
 
-  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  @override
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticLabel;
 
-  /// True if the menu will be selected as the initial focus when no other node in its scope is currently focused.
-  ///
-  /// Defaults to false.
-  ///
-  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
-  /// autofocus set, then the first one added to the tree will get focus.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  /// An optional focus node to use as the focus node for the menu.
-  ///
-  /// If one is not supplied, then one will be automatically allocated, owned, and managed by the menu. The menu
-  /// will be focusable even if a [focusNode] is not supplied. If supplied, the given `focusNode` will be hosted by the
-  /// menu but not owned. See [FocusNode] for more information on what being hosted and/or owned implies.
-  ///
-  /// Supplying a focus node is sometimes useful if an ancestor to the menu wants to control when the menu has
-  /// the focus. The owner will be responsible for calling [FocusNode.dispose] on the focus node when it is done with
-  /// it, but the menu will attach/detach and reparent the node when needed.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if the menu's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// The prefix icon.
@@ -145,13 +129,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
     this.autoHide = false,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -197,15 +181,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               key: GlobalObjectKey(state._controller._popover),
               controller: state._controller._popover,
               style: menuStyle,
-              followerAnchor: menuAnchor,
-              targetAnchor: tileAnchor,
+              popoverAnchor: menuAnchor,
+              childAnchor: tileAnchor,
               shift: shift,
               hideOnTapOutside: hideOnTapOutside,
               directionPadding: directionPadding,
               autofocus: autofocus,
               focusNode: focusNode,
               onFocusChange: onFocusChange,
-              followerBuilder: (context, _, __) => ConstrainedBox(
+              popoverBuilder: (context, _, __) => ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>(
                   groupController: state._controller,
@@ -219,7 +203,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
                   children: menu,
                 ),
               ),
-              target: FTile(
+              child: FTile(
                 style: tileStyle,
                 prefixIcon: prefixIcon,
                 enabled: enabled,
@@ -276,13 +260,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
     this.autoHide = false,
     this.label,
     this.description,
-    this.errorBuilder = _errorBuilder,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
@@ -328,15 +312,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
               key: GlobalObjectKey(state._controller._popover),
               controller: state._controller._popover,
               style: menuStyle,
-              followerAnchor: menuAnchor,
-              targetAnchor: tileAnchor,
+              popoverAnchor: menuAnchor,
+              childAnchor: tileAnchor,
               shift: shift,
               hideOnTapOutside: hideOnTapOutside,
               directionPadding: directionPadding,
               autofocus: autofocus,
               focusNode: focusNode,
               onFocusChange: onFocusChange,
-              followerBuilder: (context, _, __) => ConstrainedBox(
+              popoverBuilder: (context, _, __) => ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                 child: FSelectTileGroup<T>.builder(
                   groupController: state._controller,
@@ -351,7 +335,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin {
                   count: count,
                 ),
               ),
-              target: FTile(
+              child: FTile(
                 style: tileStyle,
                 prefixIcon: prefixIcon,
                 enabled: enabled,

@@ -26,8 +26,7 @@ final class FPopoverController extends FChangeNotifier {
 
   /// Convenience method for toggling the current [shown] status.
   ///
-  /// This method should typically not be called while the widget tree is being
-  /// rebuilt.
+  /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> toggle() async => shown ? hide() : show();
 
   /// Shows the popover.
@@ -63,124 +62,127 @@ final class FPopoverController extends FChangeNotifier {
   }
 }
 
-/// A popover displays rich content in a portal that is aligned to a target.
+/// A popover displays rich content in a portal that is aligned to a child.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/popover for working examples.
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
-  static ({Alignment follower, Alignment target}) get _platform => Touch.primary
-      ? (follower: Alignment.bottomCenter, target: Alignment.topCenter)
-      : (follower: Alignment.topCenter, target: Alignment.bottomCenter);
+  /// The platform-specific default popover and child anchors.
+  static ({Alignment popover, Alignment child}) get defaultPlatform => Touch.primary
+      ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
+      : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 
-  /// The controller that shows and hides the follower. It initially hides the follower.
+  /// The controller that shows and hides the popover. It initially hides the popover.
   final FPopoverController? controller;
 
   /// The popover's style.
   final FPopoverStyle? style;
 
-  /// The anchor of the follower to which the [targetAnchor] is aligned to.
+  /// {@template forui.widgets.FPopover.popoverAnchor}
+  /// The point on the popover (floating content) that connects with the child, at the child's anchor.
+  ///
+  /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
+  /// See [childAnchor] for changing the child's anchor.
+  /// {@endtemplate}
   ///
   /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
-  final Alignment followerAnchor;
+  final Alignment popoverAnchor;
 
-  /// The anchor of the target to which the [followerAnchor] is aligned to.
+  /// {@template forui.widgets.FPopover.childAnchor}
+  /// The point on the child that connects with the popover, at the popover's anchor.
+  ///
+  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
+  /// See [popoverAnchor] for changing the popover's anchor.
+  /// {@endtemplate}
   ///
   /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
-  final Alignment targetAnchor;
+  final Alignment childAnchor;
 
-  /// The shifting strategy used to shift a follower when it overflows out of the viewport. Defaults to
-  /// [FPortalFollowerShift.flip].
+  /// {@template forui.widgets.FPopover.shift}
+  /// The shifting strategy used to shift a popover when it overflows out of the viewport. Defaults to
+  /// [FPortalShift.flip].
   ///
-  /// See [FPortalFollowerShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
+  /// See [FPortalShift] for more information on the different shifting strategies.
+  /// {@endtemplate}
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// {@template forui.widgets.FPopover.hideOnTapOutside}
   /// True if the popover is hidden when tapped outside of it. Defaults to true.
+  /// {@endtemplate}
   final bool hideOnTapOutside;
 
-  /// True if the follower should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
+  /// {@template forui.widgets.FPopover.directionPadding}
+  /// True if the popover should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
   ///
   /// Diagonal corners are ignored.
+  /// {@endtemplate}
   final bool directionPadding;
 
-  /// The follower's semantic label used by accessibility frameworks.
-  final String? semanticLabel;
-
-  /// True if the follower will be selected as the initial focus when no other node in its scope is currently focused.
-  ///
-  /// Defaults to false.
-  ///
-  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
-  /// autofocus set, then the first one added to the tree will get focus.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  /// An optional focus node to use as the focus node for the follower.
-  ///
-  /// If one is not supplied, then one will be automatically allocated, owned, and managed by the follower. The follower
-  /// will be focusable even if a [focusNode] is not supplied. If supplied, the given `focusNode` will be hosted by the
-  /// follower but not owned. See [FocusNode] for more information on what being hosted and/or owned implies.
-  ///
-  /// Supplying a focus node is sometimes useful if an ancestor to the follower wants to control when the follower has
-  /// the focus. The owner will be responsible for calling [FocusNode.dispose] on the focus node when it is done with
-  /// it, but the follower will attach/detach and reparent the node when needed.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if the follower's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
-  /// The follower builder. The child passed to [followerBuilder] will always be null.
-  final ValueWidgetBuilder<FPopoverStyle> followerBuilder;
+  /// The popover's semantic label used by accessibility frameworks.
+  final String? semanticLabel;
 
-  /// The target.
-  final Widget target;
+  /// The popover builder. The child passed to [popoverBuilder] will always be null.
+  final ValueWidgetBuilder<FPopoverStyle> popoverBuilder;
 
-  final bool _tappable;
+  /// The child.
+  final Widget child;
 
-  /// Creates a popover that only shows the follower when the controller is manually toggled.
+  final bool _automatic;
+
+  /// Creates a popover that only shows the popover when the controller is manually toggled.
   FPopover({
-    required this.controller,
-    required this.followerBuilder,
-    required this.target,
+    required FPopoverController this.controller,
+    required this.popoverBuilder,
+    required this.child,
     this.style,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    Alignment? followerAnchor,
-    Alignment? targetAnchor,
+    Alignment? popoverAnchor,
+    Alignment? childAnchor,
     super.key,
-  })  : followerAnchor = followerAnchor ?? _platform.follower,
-        targetAnchor = targetAnchor ?? _platform.target,
-        _tappable = false;
+  })  : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
+        childAnchor = childAnchor ?? defaultPlatform.child,
+        _automatic = false;
 
-  /// Creates a popover that is automatically shown when the [target] is tapped.
+  /// Creates a popover that is automatically shown when the [child] is tapped.
   ///
-  /// It is not recommended for the [target] to contain a [GestureDetector], such as [FButton]. This is because only
-  /// one `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s.
-  FPopover.tappable({
-    required this.followerBuilder,
-    required this.target,
+  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. Only one
+  /// `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s, leading to unexpected
+  /// behavior.
+  FPopover.automatic({
+    required this.popoverBuilder,
+    required this.child,
     this.controller,
     this.style,
-    this.shift = FPortalFollowerShift.flip,
+    this.shift = FPortalShift.flip,
     this.hideOnTapOutside = true,
     this.directionPadding = false,
-    this.semanticLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    Alignment? followerAnchor,
-    Alignment? targetAnchor,
+    this.semanticLabel,
+    Alignment? popoverAnchor,
+    Alignment? childAnchor,
     super.key,
-  })  : followerAnchor = followerAnchor ?? _platform.follower,
-        targetAnchor = targetAnchor ?? _platform.target,
-        _tappable = true;
+  })  : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
+        childAnchor = childAnchor ?? defaultPlatform.child,
+        _automatic = true;
 
   @override
   State<FPopover> createState() => _State();
@@ -191,8 +193,8 @@ class FPopover extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('followerAnchor', followerAnchor))
-      ..add(DiagnosticsProperty('targetAnchor', targetAnchor))
+      ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
@@ -200,7 +202,7 @@ class FPopover extends StatefulWidget {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(ObjectFlagProperty.has('followerBuilder', followerBuilder));
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
   }
 }
 
@@ -230,17 +232,17 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
-    final follower = widget.followerAnchor;
-    final target = widget.targetAnchor;
+    final popover = widget.popoverAnchor;
+    final child = widget.childAnchor;
 
     return FPortal(
       controller: _controller._overlay,
-      followerAnchor: widget.followerAnchor,
-      targetAnchor: widget.targetAnchor,
+      portalAnchor: widget.popoverAnchor,
+      childAnchor: widget.childAnchor,
       shift: widget.shift,
       offset:
-          widget.directionPadding ? Offset.zero : Alignments.removeDirectionalPadding(style.padding, follower, target),
-      followerBuilder: (context) => CallbackShortcuts(
+          widget.directionPadding ? Offset.zero : Alignments.removeDirectionalPadding(style.padding, popover, child),
+      portalBuilder: (context) => CallbackShortcuts(
         bindings: {
           const SingleActivator(LogicalKeyboardKey.escape): _controller.hide,
         },
@@ -248,6 +250,9 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
           label: widget.semanticLabel,
           container: true,
           child: Focus(
+            autofocus: widget.autofocus,
+            focusNode: widget.focusNode,
+            onFocusChange: widget.onFocusChange,
             child: Padding(
               padding: style.padding,
               child: FadeTransition(
@@ -259,7 +264,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                     onTapOutside: widget.hideOnTapOutside ? (_) => _controller.hide() : null,
                     child: DecoratedBox(
                       decoration: style.decoration,
-                      child: widget.followerBuilder(context, style, null),
+                      child: widget.popoverBuilder(context, style, null),
                     ),
                   ),
                 ),
@@ -270,13 +275,13 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       ),
       child: TapRegion(
         groupId: _group,
-        child: widget._tappable
+        child: widget._automatic
             ? GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: _controller.toggle,
-                child: widget.target,
+                child: widget.child,
               )
-            : widget.target,
+            : widget.child,
       ),
     );
   }

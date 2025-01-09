@@ -65,7 +65,11 @@ class FTabs extends StatefulWidget {
 
   /// Creates a [FTabs].
   ///
-  /// ## Throws
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * [tabs] is empty.
+  /// * [initialIndex] is not within the range '0 <= initialIndex < tabs.length`.
+  /// * [controller] index does not match the [initialIndex].
   FTabs({
     required this.tabs,
     this.initialIndex = 0,

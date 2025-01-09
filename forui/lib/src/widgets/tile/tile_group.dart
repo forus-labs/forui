@@ -19,39 +19,51 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The style.
   final FTileGroupStyle? style;
 
+  /// {@template forui.widgets.FTileGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
   ///
   /// Scrolling past the end of the group using the controller will result in undefined behaviour.
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
-  final ScrollController? controller;
+  /// {@endtemplate}
+  final ScrollController? scrollController;
 
-  /// The cache extent in logical pixels.
+  /// {@template forui.widgets.FTileGroup.cacheExtent}
+  /// The scrollable area's cache extent in logical pixels.
   ///
   /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
   /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
+  /// {@endtemplate}
   final double? cacheExtent;
 
+  /// {@template forui.widgets.FTileGroup.maxHeight}
   /// The max height, in logical pixels. Defaults to infinity.
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [maxHeight] is not positive.
+  /// {@endtemplate}
   final double maxHeight;
 
+  /// {@template forui.widgets.FTileGroup.dragStartBehavior}
   /// Determines the way that drag start behavior is handled. Defaults to [DragStartBehavior.start].
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
+  /// {@endtemplate}
   final DragStartBehavior dragStartBehavior;
+
+  /// {@template forui.widgets.FTileGroup.divider}
+  /// The divider between tiles.
+  /// {@endtemplate}
+  ///
+  /// Defaults to [FTileDivider.indented].
+  final FTileDivider divider;
 
   /// True if the group is enabled. Defaults to true.
   final bool? enabled;
-
-  /// The divider between tiles. Defaults to [FTileDivider.indented].
-  final FTileDivider divider;
 
   /// The group's semantic label.
   ///
@@ -82,7 +94,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
     required List<FTileGroupMixin<FTileMixin>> children,
     FTileGroupStyle? style,
-    ScrollController? controller,
+    ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = double.infinity,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
@@ -97,7 +109,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
       _MergeTileGroups(
         key: key,
         style: style,
-        controller: controller,
+        scrollController: scrollController,
         cacheExtent: cacheExtent,
         maxHeight: maxHeight,
         dragStartBehavior: dragStartBehavior,
@@ -114,7 +126,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   FTileGroup({
     required List<FTileMixin> children,
     this.style,
-    this.controller,
+    this.scrollController,
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
@@ -142,6 +154,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
 
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
+  /// {@template forui.widgets.FTileGroup.builder}
   /// The [tileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to `tileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -154,11 +167,12 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
   /// * [count] is null and [tileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
+  /// {@endtemplate}
   FTileGroup.builder({
     required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
     this.style,
-    this.controller,
+    this.scrollController,
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
@@ -228,7 +242,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
                   spacing: 0,
                 ),
                 child: CustomScrollView(
-                  controller: controller,
+                  controller: scrollController,
                   cacheExtent: cacheExtent,
                   dragStartBehavior: dragStartBehavior,
                   shrinkWrap: true,
@@ -250,7 +264,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('controller', scrollController))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -263,7 +277,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
 
 class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
   final FTileGroupStyle? style;
-  final ScrollController? controller;
+  final ScrollController? scrollController;
   final double? cacheExtent;
   final double maxHeight;
   final DragStartBehavior dragStartBehavior;
@@ -278,7 +292,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
   const _MergeTileGroups({
     required this.children,
     this.style,
-    this.controller,
+    this.scrollController,
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
@@ -322,7 +336,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
                 spacing: 0,
               ),
               child: CustomScrollView(
-                controller: controller,
+                controller: scrollController,
                 cacheExtent: cacheExtent,
                 dragStartBehavior: dragStartBehavior,
                 shrinkWrap: true,
@@ -351,7 +365,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('controller', scrollController))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))

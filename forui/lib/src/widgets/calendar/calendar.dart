@@ -9,6 +9,9 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+/// A calendar's properties.
+abstract class FCalendarProperties {}
+
 /// A calendar.
 ///
 /// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing

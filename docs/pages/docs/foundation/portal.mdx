@@ -4,7 +4,7 @@ import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
 
 # Portal
-A portal renders a follower widget that "floats" on top of a target widget.
+A portal renders a portal widget that "floats" on top of a child widget.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FPortal-class.html"/>
@@ -25,7 +25,7 @@ A portal renders a follower widget that "floats" on top of a target widget.
 
     FPortal(
       controller: controller,
-      followerBuilder: (context) => Padding(
+      portalBuilder: (context) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
@@ -83,10 +83,10 @@ A portal renders a follower widget that "floats" on top of a target widget.
 ```dart copy
 FPortal(
   controller: OverlayPortalController(),
-  shift: FPortalFollowerShift.flip,
-  followerAnchor: Alignment.topCenter,
-  followerBuilder: (context) => const Text('follower'),
-  targetAnchor: Alignment.bottomCenter,
-  child: const Text('target'),
+  shift: FPortalShift.flip,
+  portalAnchor: Alignment.topCenter,
+  portalBuilder: (context) => const Text('portal'),
+  childAnchor: Alignment.bottomCenter,
+  child: const Text('child'),
 );
 ```

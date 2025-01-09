@@ -39,7 +39,7 @@ class FTappable extends StatefulWidget {
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
   final FFocusedOutlineStyle? focusedOutlineStyle;
 
-  /// The semantic label used by accessibility frameworks.
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// Used by accessibility frameworks to determine whether this tappable has been selected. Defaults to false.
@@ -48,15 +48,13 @@ class FTappable extends StatefulWidget {
   /// Whether to replace all child semantics with this node. Defaults to false.
   final bool excludeSemantics;
 
-  /// Whether this radio should focus itself if nothing else is already focused. Defaults to false.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this radio.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 200ms.
@@ -68,14 +66,18 @@ class FTappable extends StatefulWidget {
   /// The tappable's hit test behavior. Defaults to [HitTestBehavior.translucent].
   final HitTestBehavior behavior;
 
-  /// A callback for when the tappable is pressed.
+  /// {@template forui.foundation.FTappable.onPress}
+  /// A callback for when the widget is pressed.
   ///
-  /// The tappable will be disabled if both [onPress] and [onLongPress] are null.
+  /// The widget will be disabled if both [onPress] and [onLongPress] are null.
+  /// {@endtemplate}
   final VoidCallback? onPress;
 
-  /// A callback for when the tappable is long pressed.
+  /// {@template forui.foundation.FTappable.onLongPress}
+  /// A callback for when the widget is long pressed.
   ///
-  /// The tappable will be disabled if both [onPress] and [onLongPress] are null.
+  /// The widget will be disabled if both [onPress] and [onLongPress] are null.
+  /// {@endtemplate}
   final VoidCallback? onLongPress;
 
   /// The builder used to build to create a child with the current state.

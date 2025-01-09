@@ -28,7 +28,7 @@ class FSwitch extends StatelessWidget {
   /// If the value is present, the checkbox is in an error state.
   final Widget? error;
 
-  /// The semantic label used by accessibility frameworks.
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// The current value of the checkbox.
@@ -43,28 +43,13 @@ class FSwitch extends StatelessWidget {
   /// Whether this checkbox is enabled. Defaults to true.
   final bool enabled;
 
-  /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
-  ///
-  /// Defaults to false.
-  ///
-  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
-  /// autofocus set, then the first one added to the tree will get focus.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  /// An optional focus node to use as the focus node for this widget.
-  ///
-  /// If one is not supplied, then one will be automatically allocated, owned, and managed by this widget. The widget
-  /// will be focusable even if a [focusNode] is not supplied. If supplied, the given `focusNode` will be hosted by this
-  /// widget, but not owned. See [FocusNode] for more information on what being hosted and/or owned implies.
-  ///
-  /// Supplying a focus node is sometimes useful if an ancestor to this widget wants to control when this widget has the
-  /// focus. The owner will be responsible for calling [FocusNode.dispose] on the focus node when it is done with it,
-  /// but this widget will attach/detach and reparent the node when needed.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// Determines the way that drag start behavior is handled.

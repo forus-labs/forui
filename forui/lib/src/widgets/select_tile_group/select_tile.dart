@@ -29,7 +29,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// The details on the right hand side of the title and subtitle.
   final Widget? details;
 
-  /// The semantic label used by accessibility frameworks.
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// The current value.
@@ -38,15 +38,13 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// Whether this radio tile is enabled. Defaults to true.
   final bool? enabled;
 
-  /// Whether this radio tile should focus itself if nothing else is already focused. Defaults to false.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this radio.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   final Widget? _icon;

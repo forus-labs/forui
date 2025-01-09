@@ -50,18 +50,16 @@ class FTile extends StatelessWidget with FTileMixin {
   /// Whether the `FTile` is enabled. Defaults to true.
   final bool? enabled;
 
-  /// The semantic label.
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
-  /// Whether this tile should focus itself if nothing else is already focused. Defaults to false.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this tile.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// A callback for when the tile is pressed.

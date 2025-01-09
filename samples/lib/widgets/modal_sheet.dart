@@ -148,7 +148,7 @@ class DraggableModalSheetPage extends Sample {
               ),
               child: FTileGroup.builder(
                 count: 25,
-                controller: controller,
+                scrollController: controller,
                 tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
               ),
             ),

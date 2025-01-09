@@ -74,6 +74,7 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
   Widget sample(BuildContext context) => FSelectMenuTile(
         groupController: controller,
         autoHide: widget.autoHide,
+        maxHeight: 150,
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
         title: const Text('Notifications'),
@@ -90,7 +91,6 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
             },
           ),
         ),
-        maxHeight: 150,
         menu: [
           FSelectTile(title: const Text('All'), value: Notification.all),
           FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),

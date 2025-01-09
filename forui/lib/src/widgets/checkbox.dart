@@ -27,7 +27,7 @@ class FCheckbox extends StatefulWidget {
   /// If the value is present, the checkbox is in an error state.
   final Widget? error;
 
-  /// The semantic label used by accessibility frameworks.
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
   /// The current value of the checkbox.
@@ -39,15 +39,13 @@ class FCheckbox extends StatefulWidget {
   /// Whether this checkbox is enabled. Defaults to true.
   final bool enabled;
 
-  /// Whether this checkbox should focus itself if nothing else is already focused. Defaults to false.
+  /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
-  /// Defines the [FocusNode] for this checkbox.
+  /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
-  /// Handler called when the focus changes.
-  ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
   /// Creates a [FCheckbox].

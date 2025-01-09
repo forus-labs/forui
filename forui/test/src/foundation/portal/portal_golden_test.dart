@@ -17,7 +17,7 @@ void main() {
         TestScaffold.app(
           child: FPortal(
             controller: controller,
-            followerBuilder: (context) => const ColoredBox(
+            portalBuilder: (context) => const ColoredBox(
               color: Colors.red,
               child: SizedBox.square(
                 dimension: 100,
@@ -43,7 +43,7 @@ void main() {
         TestScaffold.app(
           child: FPortal(
             controller: controller,
-            followerBuilder: (context) => const Padding(
+            portalBuilder: (context) => const Padding(
               padding: EdgeInsets.all(5),
               child: ColoredBox(
                 color: Colors.red,
@@ -76,7 +76,7 @@ void main() {
           child: FPortal(
             controller: controller,
             offset: const Offset(100, 100),
-            followerBuilder: (context) => const Padding(
+            portalBuilder: (context) => const Padding(
               padding: EdgeInsets.all(5),
               child: ColoredBox(
                 color: Colors.red,

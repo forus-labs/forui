@@ -109,7 +109,7 @@ const FPopoverMenu(
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: true,
-  shift: FPortalFollowerShift.flip,
+  shift: FPortalShift.flip,
   menu: [
     FTileGroup(
       children: [],
@@ -119,10 +119,10 @@ const FPopoverMenu(
 );
 ```
 
-### `FPopoverMenu.tappable()`
+### `FPopoverMenu.automatic()`
 
 ```dart copy
-const FPopoverMenu.tappable(
+const FPopoverMenu.automatic(
   popoverController: FPopoverController(),
   scrollController: ScrollController(),
   cacheExtent: 100,
@@ -132,7 +132,7 @@ const FPopoverMenu.tappable(
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: true,
-  shift: FPortalFollowerShift.flip,
+  shift: FPortalShift.flip,
   menu: [
     FTileGroup(
       children: [],

@@ -8,7 +8,7 @@ Displays a list of links that help visualize a page's location within a site's h
 it allows navigation up to any of the ancestors.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/forui.widgets.breadcrumb-library.html"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -16,7 +16,7 @@ it allows navigation up to any of the ancestors.
         <Widget name='breadcrumb' variant='default' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         FBreadcrumb(
           children: [
             FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
@@ -48,7 +48,7 @@ it allows navigation up to any of the ancestors.
 
 ### `FBreadcrumb(...)`
 
-```dart
+```dart copy
 FBreadcrumb(
   children: [
     FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
@@ -82,7 +82,7 @@ FBreadcrumb(
         <Widget name='breadcrumb' variant='divider' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart
+        ```dart copy
         FBreadcrumb(
           divider: Transform.rotate(
             angle: -60,

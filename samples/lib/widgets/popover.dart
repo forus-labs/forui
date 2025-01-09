@@ -11,7 +11,7 @@ class PopoverPage extends StatefulWidget {
   final Alignment alignment;
   final Axis axis;
   final bool hideOnTapOutside;
-  final Offset Function(Size, FPortalTarget, FPortalFollower) shift;
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   PopoverPage({
     @queryParam String theme = 'zinc-light',
@@ -31,9 +31,9 @@ class PopoverPage extends StatefulWidget {
         },
         hideOnTapOutside = bool.tryParse(hideOnTapOutside) ?? true,
         shift = switch (shift) {
-          'flip' => FPortalFollowerShift.flip,
-          'along' => FPortalFollowerShift.along,
-          _ => FPortalFollowerShift.none,
+          'flip' => FPortalShift.flip,
+          'along' => FPortalShift.along,
+          _ => FPortalShift.none,
         };
 
   @override
@@ -64,11 +64,11 @@ class _State extends State<PopoverPage> with SingleTickerProviderStateMixin {
                     const SizedBox(height: 30),
                     FPopover(
                       controller: controller,
-                      followerAnchor: widget.axis == Axis.horizontal ? Alignment.topLeft : Alignment.topCenter,
-                      targetAnchor: widget.axis == Axis.horizontal ? Alignment.topRight : Alignment.bottomCenter,
+                      popoverAnchor: widget.axis == Axis.horizontal ? Alignment.topLeft : Alignment.topCenter,
+                      childAnchor: widget.axis == Axis.horizontal ? Alignment.topRight : Alignment.bottomCenter,
                       hideOnTapOutside: widget.hideOnTapOutside,
                       shift: widget.shift,
-                      followerBuilder: (context, style, _) => Padding(
+                      popoverBuilder: (context, style, _) => Padding(
                         padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
                         child: SizedBox(
                           width: 288,
@@ -104,7 +104,7 @@ class _State extends State<PopoverPage> with SingleTickerProviderStateMixin {
                           ),
                         ),
                       ),
-                      target: IntrinsicWidth(
+                      child: IntrinsicWidth(
                         child: FButton(
                           style: FButtonStyle.outline,
                           onPress: controller.toggle,

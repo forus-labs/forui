@@ -65,51 +65,51 @@ class _CheckboxFormState extends StatefulSampleState<SelectGroupCheckboxFormPage
 
   @override
   Widget sample(BuildContext context) => Form(
-    key: _formKey,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FSelectGroup(
-          controller: controller,
-          label: const Text('Favorite Languages'),
-          description: const Text('Your favorite language.'),
-          validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
-          items: const [
-            FSelectGroupItem.checkbox(
-              value: Language.dart,
-              label: Text('Dart'),
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FSelectGroup(
+              controller: controller,
+              label: const Text('Favorite Languages'),
+              description: const Text('Your favorite language.'),
+              validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
+              items: const [
+                FSelectGroupItem.checkbox(
+                  value: Language.dart,
+                  label: Text('Dart'),
+                ),
+                FSelectGroupItem.checkbox(
+                  value: Language.java,
+                  label: Text('Java'),
+                ),
+                FSelectGroupItem.checkbox(
+                  value: Language.rust,
+                  label: Text('Rust'),
+                ),
+                FSelectGroupItem.checkbox(
+                  value: Language.python,
+                  label: Text('Python'),
+                ),
+              ],
             ),
-            FSelectGroupItem.checkbox(
-              value: Language.java,
-              label: Text('Java'),
-            ),
-            FSelectGroupItem.checkbox(
-              value: Language.rust,
-              label: Text('Rust'),
-            ),
-            FSelectGroupItem.checkbox(
-              value: Language.python,
-              label: Text('Python'),
+            const SizedBox(height: 20),
+            FButton(
+              label: const Text('Submit'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
             ),
           ],
         ),
-        const SizedBox(height: 20),
-        FButton(
-          label: const Text('Submit'),
-          onPress: () {
-            if (!_formKey.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _formKey.currentState!.save();
-            // Do something.
-          },
-        ),
-      ],
-    ),
-  );
+      );
 
   @override
   void dispose() {
@@ -141,47 +141,47 @@ class _RadioFormState extends StatefulSampleState<SelectGroupRadioFormPage> {
 
   @override
   Widget sample(BuildContext context) => Form(
-    key: _formKey,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FSelectGroup(
-          controller: controller,
-          label: const Text('Notifications'),
-          description: const Text('Select the notifications.'),
-          validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-          items: const [
-            FSelectGroupItem.radio(
-              value: Notification.all,
-              label: Text('All new messages'),
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FSelectGroup(
+              controller: controller,
+              label: const Text('Notifications'),
+              description: const Text('Select the notifications.'),
+              validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
+              items: const [
+                FSelectGroupItem.radio(
+                  value: Notification.all,
+                  label: Text('All new messages'),
+                ),
+                FSelectGroupItem.radio(
+                  value: Notification.direct,
+                  label: Text('Direct messages and mentions'),
+                ),
+                FSelectGroupItem.radio(
+                  value: Notification.nothing,
+                  label: Text('Nothing'),
+                ),
+              ],
             ),
-            FSelectGroupItem.radio(
-              value: Notification.direct,
-              label: Text('Direct messages and mentions'),
-            ),
-            FSelectGroupItem.radio(
-              value: Notification.nothing,
-              label: Text('Nothing'),
+            const SizedBox(height: 20),
+            FButton(
+              label: const Text('Save'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
             ),
           ],
         ),
-        const SizedBox(height: 20),
-        FButton(
-          label: const Text('Save'),
-          onPress: () {
-            if (!_formKey.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _formKey.currentState!.save();
-            // Do something.
-          },
-        ),
-      ],
-    ),
-  );
+      );
 
   @override
   void dispose() {

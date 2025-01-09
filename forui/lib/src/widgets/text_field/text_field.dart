@@ -17,7 +17,7 @@ import 'package:forui/src/widgets/text_field/field.dart';
 /// * https://forui.dev/docs/form/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
-final class FTextField extends StatelessWidget {
+final class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget _contextMenuBuilder(
     BuildContext context,
     EditableTextState state,
@@ -29,7 +29,7 @@ final class FTextField extends StatelessWidget {
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
 
-  /// The label above a text field.
+  @override
   final Widget? label;
 
   /// The text to display when the text field is empty.
@@ -40,6 +40,7 @@ final class FTextField extends StatelessWidget {
   /// The description text.
   ///
   /// See [InputDecoration.helper] for more information.
+  @override
   final Widget? description;
 
   /// The configuration for the magnifier of this text field.
@@ -50,11 +51,6 @@ final class FTextField extends StatelessWidget {
 
   /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
-
-  /// Defines the keyboard focus for this [FTextField].
-  ///
-  /// See [TextField.focusNode] for more information.
-  final FocusNode? focusNode;
 
   /// The type of keyboard to use for editing the text. Defaults to [TextInputType.text] if maxLines is one and
   /// [TextInputType.multiline] otherwise.
@@ -94,6 +90,11 @@ final class FTextField extends StatelessWidget {
   /// If true, the keyboard will open as soon as this text field obtains focus. Otherwise, the keyboard is only shown
   /// after the user taps the text field.
   final bool autofocus;
+
+  /// Defines the keyboard focus for this [FTextField].
+  ///
+  /// See [TextField.focusNode] for more information.
+  final FocusNode? focusNode;
 
   /// Represents the interactive "state" of this widget in terms of a set of [WidgetState]s, including
   /// [WidgetState.disabled], [WidgetState.hovered], [WidgetState.error], and [WidgetState.focused].
@@ -338,6 +339,7 @@ final class FTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   /// If false the text field is "disabled": it ignores taps. Defaults to true.
+  @override
   final bool enabled;
 
   /// Determines whether this widget ignores pointer events. Defaults to null, and when null, does nothing.
@@ -458,47 +460,22 @@ final class FTextField extends StatelessWidget {
   /// See [InputDecoration.suffixIcon] for more information.
   final Widget? suffix;
 
-  /// An optional method to call with the final value when the form is saved via [FormState.save].
+  @override
   final FormFieldSetter<String>? onSaved;
 
-  /// An optional method that validates an input. Returns an error string to
-  /// display if the input is invalid, or null otherwise.
-  ///
-  /// The returned value is exposed by the [FormFieldState.errorText] property. It transforms the text using
-  /// [errorBuilder].
-  ///
-  /// Alternating between error and normal state can cause the height of the [FTextField] to change if no other
-  /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
-  /// error is displayed, wrap the [FTextField] in a fixed height parent like [SizedBox].
+  @override
   final FormFieldValidator<String>? validator;
 
   /// An optional value to initialize the form field to, or null otherwise.
   final String? initialValue;
 
-  /// Used to enable/disable this form field auto validation and update its error text.
-  ///
-  /// Defaults to [AutovalidateMode.disabled].
-  ///
-  /// If [AutovalidateMode.onUserInteraction], this FormField will only auto-validate after its content changes. If
-  /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
-  /// auto-validation will be disabled.
-  final AutovalidateMode? autovalidateMode;
+  @override
+  final AutovalidateMode autovalidateMode;
 
-  /// An optional property that forces the [FormFieldState] into an error state
-  /// by directly setting the [FormFieldState.errorText] property without
-  /// running the validator function.
-  ///
-  /// When the [forceErrorText] property is provided, the [FormFieldState.errorText]
-  /// will be set to the provided value, causing the form field to be considered
-  /// invalid and to display the error message specified.
-  ///
-  /// When [validator] is provided, [forceErrorText] will override any error that it
-  /// returns. [validator] will not be called unless [forceErrorText] is null.
+  @override
   final String? forceErrorText;
 
-  /// A builder that transforms a [FormFieldState.errorText] into a widget. Defaults to a [Text] widget.
-  ///
-  /// The builder is called whenever [validator] returns an error text.
+  @override
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// Creates a [FTextField].
@@ -556,7 +533,7 @@ final class FTextField extends StatelessWidget {
     this.onSaved,
     this.validator,
     this.initialValue,
-    this.autovalidateMode,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
@@ -617,7 +594,7 @@ final class FTextField extends StatelessWidget {
     this.onSaved,
     this.validator,
     this.initialValue,
-    this.autovalidateMode,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
@@ -681,7 +658,7 @@ final class FTextField extends StatelessWidget {
     this.onSaved,
     this.validator,
     this.initialValue,
-    this.autovalidateMode,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
@@ -746,7 +723,7 @@ final class FTextField extends StatelessWidget {
     this.onSaved,
     this.validator,
     this.initialValue,
-    this.autovalidateMode,
+    this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
     super.key,
