@@ -3,21 +3,26 @@ import 'package:forui/forui.dart';
 /// A controller that controls which page is selected.
 class FPaginationController extends FValueNotifier<int> {
   final int length;
-  final int visiblePageOffset;
+
+  /// the number of sibling pages beside the selected page number.
+  final int siblingLength;
+  final bool showFirstLastPages;
 
   /// Creates a [FPaginationController].
   ///
   ///
   /// # Contract:
   /// * Throws [AssertionError] if [length] < 0.
-  /// * Throws [AssertionError] if [visiblePageOffset] < 0.
+  /// * Throws [AssertionError] if [siblingLength] < 0.
   FPaginationController({
     required this.length,
     int? initialPage,
-    this.visiblePageOffset = 2,
+    this.showFirstLastPages = true,
+    this.siblingLength = 1,
+
   })  : assert(length >= 0, 'The count value must be greater than or equal to 0.'),
         assert(
-          visiblePageOffset >= 1 && visiblePageOffset <= length,
+          siblingLength >= 1 && siblingLength <= length,
           'The minDisplayed value must be greater than or equal to 1.',
         ),
         assert(
@@ -63,32 +68,36 @@ class FPaginationController extends FValueNotifier<int> {
 
   /// Calculates the start of the range for page numbers to display.
   (int, int) calculateRange() {
-    //final minDisplayed = visiblePageOffset * 2 + 5;
-
     print('value: $value');
-    print('visiblePageOffset: $visiblePageOffset');
-    print('minDisplayed: $minDisplayed');
+    print('visiblePageOffset: $siblingLength');
+    print('minDisplayed: $minPagesDisplayedAtEnds');
 
-    final rangeStart = value - visiblePageOffset < 1
+    final rangeStart = value - siblingLength < 1
         ? 1
-        : value - visiblePageOffset > (length - minDisplayed)
-            ? (length- minDisplayed)
-            : value - visiblePageOffset;
+        : value > (length - minPagesDisplayedAtEnds)
+            ? (length - minPagesDisplayedAtEnds) - siblingLength
+            : value <= minPagesDisplayedAtEnds + 1
+                ? 1
+                : value - siblingLength;
     print('rangeStart: $rangeStart');
 
-    final rangeEnd = value + visiblePageOffset > length
+    final rangeEnd = value + siblingLength > length
         ? length
-        : value + visiblePageOffset < minDisplayed + 1
-            ? minDisplayed + 1
-            : value + visiblePageOffset;
+        : value < minPagesDisplayedAtEnds + 1
+            ? minPagesDisplayedAtEnds + 1 + siblingLength
+            : value >= (length - minPagesDisplayedAtEnds)
+                ? length
+                : value + siblingLength;
 
     print('rangeEnd: $rangeEnd');
 
     return (rangeStart, rangeEnd);
   }
 
-
-  int get minDisplayed => visiblePageOffset * 2 + 2;
+  int get minPagesDisplayedAtEnds {
+    final firstLastOffset = showFirstLastPages ? 1 : 0;
+    return siblingLength + 1 + firstLastOffset;
+  }
 
   /// Returns true if given index is within the allowed range.
   bool validate(int page) => page >= 1 && page <= length;

@@ -18,7 +18,7 @@ final class FPagination extends StatefulWidget {
 
   final FPaginationController? controller;
 
-  final bool firstLastVisible;
+  final bool showFirstLastPages;
 
   /// The previous button placed in the beginning of the pagination.
   ///
@@ -27,7 +27,6 @@ final class FPagination extends StatefulWidget {
 
   /// The next button placed at the end of the pagination.
   ///
-  /// Defaults to an `FAssets.icons.chevronRight` icon.
   final FButton? next;
 
   /// Creates an [FPagination].
@@ -36,7 +35,7 @@ final class FPagination extends StatefulWidget {
     this.style,
     this.previous,
     this.next,
-    this.firstLastVisible = true,
+    this.showFirstLastPages = true,
     super.key,
   });
 
@@ -51,7 +50,12 @@ class _FPaginationState extends State<FPagination> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FPaginationController(initialPage: 1, length: 20);
+    _controller = widget.controller ??
+        FPaginationController(
+          showFirstLastPages: widget.showFirstLastPages,
+          initialPage: 1,
+          length: 10,
+        );
     _controller.addListener(() {
       setState(() {
         currentPage = _controller.value;
@@ -69,15 +73,12 @@ class _FPaginationState extends State<FPagination> {
     if (old.controller != null) {
       _controller.dispose();
     }
-    _controller = widget.controller ?? FPaginationController(initialPage: 1, length: 20);
-  }
-
-  List<Widget> _buildPages() {
-    final list = <Widget>[];
-
-    final range = _controller.calculateRange();
-
-    return list;
+    _controller = widget.controller ??
+        FPaginationController(
+          showFirstLastPages: widget.showFirstLastPages,
+          initialPage: 1,
+          length: 10,
+        );
   }
 
   @override
@@ -86,14 +87,17 @@ class _FPaginationState extends State<FPagination> {
     final previous = widget.previous ?? _Action.previous(style: style, onPress: _controller.previous);
     final next = widget.next ?? _Action.next(style: style, onPress: _controller.next);
 
-    final elipsis = Container(
-      decoration: style.unselectedDecoration,
-      padding: style.contentPadding,
-      child: ConstrainedBox(
-        constraints: style.contentConstraints,
-        child: DefaultTextStyle(
-          style: style.textStyle,
-          child: const Center(child: Text('...')),
+    final elipsis = Padding(
+      padding: style.itemPadding,
+      child: Container(
+        decoration: style.unselectedDecoration,
+        padding: style.contentPadding,
+        child: ConstrainedBox(
+          constraints: style.contentConstraints,
+          child: DefaultTextStyle(
+            style: style.textStyle,
+            child: const Center(child: Text('...')),
+          ),
         ),
       ),
     );
@@ -102,70 +106,35 @@ class _FPaginationState extends State<FPagination> {
 
     return Row(
       children: [
-        Padding(
-          padding: style.itemPadding,
-          child: previous,
-        ),
-        if (_controller.value > 1 + _controller.visiblePageOffset) ...[
-          FPaginationItemData(
-            pageNumber: 1,
-            style: style,
-            controller: _controller,
-            child: Padding(
-              padding: style.itemPadding,
-              child: const _Page(),
-            ),
-          ),
-          if (range.$1 > 1 + _controller.visiblePageOffset)
-            elipsis
-          else if (range.$1 == 1 + _controller.visiblePageOffset)
+        previous,
+        if (_controller.value > _controller.minPagesDisplayedAtEnds + 1) ...[
+          if (_controller.showFirstLastPages)
             FPaginationItemData(
-              pageNumber: 2,
+              pageNumber: 1,
               style: style,
               controller: _controller,
-              child: Padding(
-                padding: style.itemPadding,
-                child: const _Page(),
-              ),
+              child: const _Page(),
             ),
+          elipsis,
         ],
         for (int i = range.$1; i <= range.$2; i++)
           FPaginationItemData(
             pageNumber: i,
             style: style,
             controller: _controller,
-            child: Padding(
-              padding: style.itemPadding,
-              child: const _Page(),
-            ),
+            child: const _Page(),
           ),
-        if (_controller.value < (_controller.length - _controller.visiblePageOffset)) ...[
-          if (range.$2 < _controller.length - _controller.visiblePageOffset)
-            elipsis
-          else if (range.$2 == _controller.length - _controller.visiblePageOffset)
+        if (_controller.value < (_controller.length - _controller.minPagesDisplayedAtEnds)) ...[
+          elipsis,
+          if (_controller.showFirstLastPages)
             FPaginationItemData(
-              pageNumber: _controller.length - 1,
+              pageNumber: _controller.length,
               style: style,
               controller: _controller,
-              child: Padding(
-                padding: style.itemPadding,
-                child: const _Page(),
-              ),
-            ),
-          FPaginationItemData(
-            pageNumber: _controller.length,
-            style: style,
-            controller: _controller,
-            child: Padding(
-              padding: style.itemPadding,
               child: const _Page(),
             ),
-          ),
         ],
-        Padding(
-          padding: style.itemPadding,
-          child: next,
-        ),
+        next,
       ],
     );
   }
@@ -264,23 +233,28 @@ class _Action extends StatelessWidget {
       );
 
   @override
-  Widget build(BuildContext context) => FTappable(
-        focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
-        onPress: onPress,
-        builder: (context, tappableData, child) => Container(
-          decoration: switch (tappableData.hovered) {
-            (false) => style.unselectedDecoration,
-            (true) => style.hoveredDecoration,
-          },
-          padding: style.contentPadding,
+  Widget build(BuildContext context) => Padding(
+        padding: style.itemPadding,
+        child: FTappable(
+          focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
+          onPress: onPress,
+          builder: (context, tappableData, child) => Container(
+            decoration: switch (tappableData.hovered) {
+              (false) => style.unselectedDecoration,
+              (true) => style.hoveredDecoration,
+            },
+            padding: style.contentPadding,
+            child: child,
+          ),
           child: child,
         ),
-        child: child,
       );
 }
 
 class _Page extends StatelessWidget {
-  const _Page();
+  final Widget? child;
+
+  const _Page({this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -288,32 +262,35 @@ class _Page extends StatelessWidget {
 
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
-    return ValueListenableBuilder(
-      valueListenable: controller,
-      builder: (context, value, __) {
-        final current = pageNumber == value;
-        return FTappable(
-          focusedOutlineStyle: focusedOutlineStyle,
-          onPress: () => controller.value = pageNumber,
-          builder: (context, tappableData, child) => Container(
-            decoration: switch ((current, tappableData.hovered)) {
-              (false, false) => style.unselectedDecoration,
-              (false, true) => style.hoveredDecoration,
-              (true, true) => style.selectedHoveredDecoration,
-              (true, false) => style.selectedDecoration,
-            },
-            padding: style.contentPadding,
-            child: ConstrainedBox(
-              constraints: style.contentConstraints,
-              child: DefaultTextStyle(
-                style: style.textStyle,
-                child: child!,
+    return Padding(
+      padding: style.itemPadding,
+      child: ValueListenableBuilder(
+        valueListenable: controller,
+        builder: (context, value, __) {
+          final current = pageNumber == value;
+          return FTappable(
+            focusedOutlineStyle: focusedOutlineStyle,
+            onPress: () => controller.value = pageNumber,
+            builder: (context, tappableData, child) => Container(
+              decoration: switch ((current, tappableData.hovered)) {
+                (false, false) => style.unselectedDecoration,
+                (false, true) => style.hoveredDecoration,
+                (true, true) => style.selectedHoveredDecoration,
+                (true, false) => style.selectedDecoration,
+              },
+              padding: style.contentPadding,
+              child: ConstrainedBox(
+                constraints: style.contentConstraints,
+                child: DefaultTextStyle(
+                  style: style.textStyle,
+                  child: child!,
+                ),
               ),
             ),
-          ),
-          child: Center(child: Text('$pageNumber')),
-        );
-      },
+            child: Center(child: child ?? Text('$pageNumber')),
+          );
+        },
+      ),
     );
   }
 }
