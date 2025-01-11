@@ -171,7 +171,6 @@ class _FTappableState extends State<FTappable> {
 
   @override
   Widget build(BuildContext context) {
-
     // In the case where a tappable is no longer enabled, we want to reset the hovered and touched states.
     // This may occur in a menu where a tappable is disabled after being pressed.
     // The variables _hovered and _touched must be reset in case the item is re-enabled.
@@ -179,7 +178,7 @@ class _FTappableState extends State<FTappable> {
       _hovered = false;
       _touched = false;
     }
-    
+
     var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
     tappable = _decorate(context, tappable);
 
