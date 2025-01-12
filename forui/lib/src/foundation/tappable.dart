@@ -155,6 +155,8 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
+
+  bool get _enabled => onPress != null || onLongPress != null;
 }
 
 class _FTappableState extends State<FTappable> {
@@ -170,11 +172,20 @@ class _FTappableState extends State<FTappable> {
   }
 
   @override
+  void didUpdateWidget(covariant FTappable oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget._enabled != oldWidget._enabled) {
+      _hovered = false;
+      _touched = false;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
     tappable = _decorate(context, tappable);
 
-    if (_enabled) {
+    if (widget._enabled) {
       tappable = MouseRegion(
         cursor: SystemMouseCursors.click,
         onEnter: (_) => setState(() => _hovered = true),
@@ -212,7 +223,7 @@ class _FTappableState extends State<FTappable> {
     }
 
     tappable = Semantics(
-      enabled: _enabled,
+      enabled: widget._enabled,
       label: widget.semanticLabel,
       container: true,
       button: true,
@@ -255,8 +266,6 @@ class _FTappableState extends State<FTappable> {
   void _onPointerDown() {}
 
   void _onPointerUp() {}
-
-  bool get _enabled => widget.onPress != null || widget.onLongPress != null;
 }
 
 @internal
