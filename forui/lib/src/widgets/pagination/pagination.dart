@@ -10,23 +10,23 @@ import 'package:meta/meta.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/pagination for working examples.
-/// * [FPaginationStyle] for customizing a breadcrumb's appearance.
-/// * [FBreadcrumbItem] for adding items to a breadcrumb.
+/// * [FPaginationController] for customizing the pagination component's behavior.
+/// * [FPaginationStyle] for customizing the pagination component's appearance.
 final class FPagination extends StatefulWidget {
-  /// The pagination's style. Defaults to the appropriate style in [FThemeData.breadcrumbStyle].
+  /// The pagination's style. Defaults to the appropriate style in [FThemeData.paginationStyle].
   final FPaginationStyle? style;
 
+  /// The controller. Defaults to [FPaginationController.new].
   final FPaginationController? controller;
-
-  final bool showFirstLastPages;
 
   /// The previous button placed in the beginning of the pagination.
   ///
-  /// Defaults to an `FAssets.icons.chevronRight` icon.
+  /// Defaults to an `FAssets.icons.chevronLeft` icon.
   final Widget? previous;
 
   /// The next button placed at the end of the pagination.
   ///
+  /// Defaults to an `FAssets.icons.chevronRight` icon.
   final FButton? next;
 
   /// Creates an [FPagination].
@@ -35,12 +35,19 @@ final class FPagination extends StatefulWidget {
     this.style,
     this.previous,
     this.next,
-    this.showFirstLastPages = true,
     super.key,
   });
 
   @override
   State<FPagination> createState() => _FPaginationState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('controller', controller));
+  }
 }
 
 class _FPaginationState extends State<FPagination> {
@@ -50,13 +57,7 @@ class _FPaginationState extends State<FPagination> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
-        FPaginationController(
-          showFirstLastPages: widget.showFirstLastPages,
-          siblingLength: 1,
-          initialPage: 1,
-          length: 8,
-        );
+    _controller = widget.controller ?? FPaginationController(length: 14, siblingLength: 2);
     _controller.addListener(() {
       setState(() {
         currentPage = _controller.value;
@@ -74,12 +75,7 @@ class _FPaginationState extends State<FPagination> {
     if (old.controller != null) {
       _controller.dispose();
     }
-    _controller = widget.controller ??
-        FPaginationController(
-          showFirstLastPages: widget.showFirstLastPages,
-          initialPage: 1,
-          length: 10,
-        );
+    _controller = widget.controller ?? FPaginationController(length: 10);
   }
 
   @override
@@ -96,7 +92,7 @@ class _FPaginationState extends State<FPagination> {
         child: ConstrainedBox(
           constraints: style.contentConstraints,
           child: DefaultTextStyle(
-            style: style.textStyle,
+            style: style.unselectedTextStyle,
             child: const Center(child: Text('...')),
           ),
         ),
@@ -138,6 +134,12 @@ class _FPaginationState extends State<FPagination> {
         next,
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IntProperty('currentPage', currentPage));
   }
 }
 
@@ -187,51 +189,23 @@ class _Action extends StatelessWidget {
     required this.child,
   });
 
-  factory _Action.previous({
-    required VoidCallback onPress,
-    required FPaginationStyle style,
-  }) =>
-      _Action(
-        onPress: onPress,
-        style: style,
-        child: Row(
-          children: [
-            FIcon(
-              FAssets.icons.chevronLeft,
-              color: style.iconStyle.color,
-              size: style.iconStyle.size,
-            ),
-            const SizedBox(width: 3),
-            Text(
-              'Previous',
-              style: style.textStyle,
-            ),
-          ],
-        ),
-      );
+  _Action.previous({
+    required this.style,
+    required this.onPress,
+  }) : child = FIcon(
+          FAssets.icons.chevronLeft,
+          color: style.iconStyle.color,
+          size: style.iconStyle.size,
+        );
 
-  factory _Action.next({
-    required VoidCallback onPress,
-    required FPaginationStyle style,
-  }) =>
-      _Action(
-        onPress: onPress,
-        style: style,
-        child: Row(
-          children: [
-            Text(
-              'Next',
-              style: style.textStyle,
-            ),
-            const SizedBox(width: 3),
-            FIcon(
-              FAssets.icons.chevronRight,
-              color: style.iconStyle.color,
-              size: style.iconStyle.size,
-            ),
-          ],
-        ),
-      );
+  _Action.next({
+    required this.onPress,
+    required this.style,
+  }) : child = FIcon(
+          FAssets.icons.chevronRight,
+          color: style.iconStyle.color,
+          size: style.iconStyle.size,
+        );
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -245,17 +219,29 @@ class _Action extends StatelessWidget {
               (true) => style.hoveredDecoration,
             },
             padding: style.contentPadding,
-            child: child,
+            child: ConstrainedBox(
+              constraints: style.contentConstraints,
+              child: DefaultTextStyle(
+                style: style.unselectedTextStyle,
+                child: Center(child: child!),
+              ),
+            ),
           ),
           child: child,
         ),
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('onPress', onPress));
+  }
 }
 
 class _Page extends StatelessWidget {
-  final Widget? child;
-
-  const _Page({this.child});
+  const _Page();
 
   @override
   Widget build(BuildContext context) {
@@ -268,12 +254,12 @@ class _Page extends StatelessWidget {
       child: ValueListenableBuilder(
         valueListenable: controller,
         builder: (context, value, __) {
-          final current = pageNumber == value;
+          final selected = pageNumber == value;
           return FTappable(
             focusedOutlineStyle: focusedOutlineStyle,
             onPress: () => controller.value = pageNumber,
             builder: (context, tappableData, child) => Container(
-              decoration: switch ((current, tappableData.hovered)) {
+              decoration: switch ((selected, tappableData.hovered)) {
                 (false, false) => style.unselectedDecoration,
                 (false, true) => style.hoveredDecoration,
                 (true, true) => style.selectedHoveredDecoration,
@@ -283,12 +269,12 @@ class _Page extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: style.contentConstraints,
                 child: DefaultTextStyle(
-                  style: style.textStyle,
+                  style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
                   child: child!,
                 ),
               ),
             ),
-            child: Center(child: child ?? Text('$pageNumber')),
+            child: Center(child: Text('$pageNumber')),
           );
         },
       ),
@@ -310,19 +296,23 @@ final class FPaginationStyle with Diagnosticable {
   /// The hovered selected page [BoxDecoration].
   final BoxDecoration selectedHoveredDecoration;
 
+  /// The unselected textStyle.
+  final TextStyle unselectedTextStyle;
+
+  /// The selected textStyle.
+  final TextStyle selectedTextStyle;
+
   /// The icon style.
   final FIconStyle iconStyle;
 
-  /// The padding around a page item. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
+  /// The padding around a page item. Defaults to `EdgeInsets.all(10)`.
   final EdgeInsets contentPadding;
 
-  /// The padding around an action button. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
+  /// The padding around an action button. EdgeInsets.symmetric(horizontal: 2)`.
   final EdgeInsets itemPadding;
 
+  /// The constraints for the content.
   final BoxConstraints contentConstraints;
-
-  /// The text style.
-  final TextStyle textStyle;
 
   /// Creates a [FPaginationStyle].
   FPaginationStyle({
@@ -331,10 +321,11 @@ final class FPaginationStyle with Diagnosticable {
     required this.hoveredDecoration,
     required this.selectedHoveredDecoration,
     required this.iconStyle,
-    required this.textStyle,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    required this.unselectedTextStyle,
+    required this.selectedTextStyle,
+    this.contentPadding = const EdgeInsets.all(10),
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.contentConstraints = const BoxConstraints(minWidth: 18.0, maxWidth: 18.0, maxHeight: 18.0),
+    this.contentConstraints = const BoxConstraints(maxWidth: 25.0, maxHeight: 24),
   });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
@@ -342,10 +333,7 @@ final class FPaginationStyle with Diagnosticable {
       : this(
           selectedDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.background,
-            border: Border.all(
-              color: colorScheme.mutedForeground,
-            ),
+            color: colorScheme.primary,
           ),
           unselectedDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
@@ -357,13 +345,11 @@ final class FPaginationStyle with Diagnosticable {
           ),
           selectedHoveredDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.border,
-            border: Border.all(
-              color: colorScheme.mutedForeground,
-            ),
+            color: colorScheme.hover(colorScheme.primary),
           ),
-          textStyle: typography.sm.copyWith(color: colorScheme.primary),
-          iconStyle: FIconStyle(color: colorScheme.primary, size: 16),
+          unselectedTextStyle: typography.sm.copyWith(color: colorScheme.primary),
+          selectedTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+          iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
         );
 
   /// Returns a copy of this [FPaginationStyle] with the given properties replaced.
@@ -373,10 +359,11 @@ final class FPaginationStyle with Diagnosticable {
     BoxDecoration? unselectedDecoration,
     BoxDecoration? hoveredDecoration,
     BoxDecoration? selectedHoveredDecoration,
-    TextStyle? textStyle,
+    TextStyle? unselectedTextStyle,
+    TextStyle? selectedTextStyle,
     FIconStyle? iconStyle,
+    EdgeInsets? contentPadding,
     EdgeInsets? itemPadding,
-    EdgeInsets? actionPadding,
     BoxConstraints? contentConstraints,
   }) =>
       FPaginationStyle(
@@ -384,10 +371,11 @@ final class FPaginationStyle with Diagnosticable {
         unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
         hoveredDecoration: hoveredDecoration ?? this.hoveredDecoration,
         selectedHoveredDecoration: selectedHoveredDecoration ?? this.selectedHoveredDecoration,
-        textStyle: textStyle ?? this.textStyle,
+        unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
+        selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
         iconStyle: iconStyle ?? this.iconStyle,
-        contentPadding: itemPadding ?? this.contentPadding,
-        itemPadding: actionPadding ?? this.itemPadding,
+        contentPadding: contentPadding ?? this.contentPadding,
+        itemPadding: itemPadding ?? this.itemPadding,
         contentConstraints: contentConstraints ?? this.contentConstraints,
       );
 
@@ -399,12 +387,12 @@ final class FPaginationStyle with Diagnosticable {
       ..add(DiagnosticsProperty('unselectedDecoration', unselectedDecoration))
       ..add(DiagnosticsProperty('hoveredDecoration', hoveredDecoration))
       ..add(DiagnosticsProperty('selectedHoveredDecoration', selectedHoveredDecoration))
-      ..add(DiagnosticsProperty('textStyle', textStyle))
+      ..add(DiagnosticsProperty('unselectedTextStyle', unselectedTextStyle))
+      ..add(DiagnosticsProperty('selectedTextStyle', selectedTextStyle))
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('itemPadding', contentPadding))
-      ..add(DiagnosticsProperty('actionPadding', itemPadding))
+      ..add(DiagnosticsProperty('contentPadding', contentPadding))
+      ..add(DiagnosticsProperty('itemPadding', itemPadding))
       ..add(DiagnosticsProperty('contentConstraints', contentConstraints));
-    ;
   }
 
   @override
@@ -416,7 +404,8 @@ final class FPaginationStyle with Diagnosticable {
           unselectedDecoration == other.unselectedDecoration &&
           hoveredDecoration == other.hoveredDecoration &&
           selectedHoveredDecoration == other.selectedHoveredDecoration &&
-          textStyle == other.textStyle &&
+          unselectedTextStyle == other.unselectedTextStyle &&
+          selectedTextStyle == other.selectedTextStyle &&
           iconStyle == other.iconStyle &&
           contentPadding == other.contentPadding &&
           itemPadding == other.itemPadding &&
@@ -428,7 +417,8 @@ final class FPaginationStyle with Diagnosticable {
       unselectedDecoration.hashCode ^
       hoveredDecoration.hashCode ^
       selectedHoveredDecoration.hashCode ^
-      textStyle.hashCode ^
+      unselectedTextStyle.hashCode ^
+      selectedTextStyle.hashCode ^
       iconStyle.hashCode ^
       contentPadding.hashCode ^
       itemPadding.hashCode ^

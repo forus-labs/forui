@@ -33,13 +33,13 @@ class FPaginationController extends FValueNotifier<int> {
     int? initialPage,
     this.showFirstLastPages = true,
     this.siblingLength = 1,
-  })  :  assert(length > 0, 'The total length of pages should be more than 0, but is $length.'),
+  })  : assert(length > 0, 'The total length of pages should be more than 0, but is $length.'),
         assert(siblingLength >= 0, 'The siblingLength should be non-negative, but is $siblingLength'),
         assert(
-        initialPage == null || (initialPage >= 1 && initialPage <= length),
-        'The initial value must be greater than or equal to 1 and less than or equal to length.',
+          initialPage == null || (initialPage >= 1 && initialPage <= length),
+          'The initial value must be greater than or equal to 1 and less than or equal to length.',
         ),
-        super(initialPage ?? 0);
+        super(initialPage ?? 1);
 
   /// Moves to the previous page if the current page is greater than 1.
   void previous() {
@@ -57,19 +57,17 @@ class FPaginationController extends FValueNotifier<int> {
 
   @override
   set value(int newValue) {
-    if (validate(newValue)) {
+    if (newValue >= 1 && newValue <= length) {
       super.value = newValue;
     } else {
       throw StateError('The index must be within the allowed range.');
     }
   }
 
-  /// Calculates the start of the range for page numbers to display.
+  /// Calculates the range of pages to display in the pagination control.
+  /// Returns a tuple of the start and end page numbers to display.
+  /// The range is calculated based on the current page number and the sibling length.
   (int, int) calculateRange() {
-    print('value: $value');
-    print('siblingLength: $siblingLength');
-    print('minDisplayed: $minPagesDisplayedAtEnds');
-
     if (length <= minPagesDisplayedAtEnds) {
       return (1, length);
     }
@@ -81,7 +79,6 @@ class FPaginationController extends FValueNotifier<int> {
             : value <= minPagesDisplayedAtEnds + 1
                 ? 1
                 : value - siblingLength;
-    print('rangeStart: $rangeStart');
 
     final rangeEnd = value + siblingLength > length
         ? length
@@ -91,21 +88,17 @@ class FPaginationController extends FValueNotifier<int> {
                 ? length
                 : value + siblingLength;
 
-    print('rangeEnd: $rangeEnd');
-
     return (rangeStart, rangeEnd);
   }
 
-  /// Returns the minimum number of pages to display at the start and end before the selected page number.
+  /// Returns the minimum number of pages to be displayed at both the start and the end of the pagination control.
   ///
-  /// If the total number of pages is less than the minimum number of pages to display at the start and end,
-  /// plus a full cycle of sibling pages on either side of the selected page number,
-  /// the total number of pages is returned.
+  /// If the total number of pages is less than the sum of:
+  ///   - The minimum number of pages to display at the start and end, and
+  ///   - A complete set of sibling pages on either side of the selected page,
+  /// the total number of pages is returned instead.
   int get minPagesDisplayedAtEnds {
     final minDisplayedAtEnds = siblingLength + 1 + (showFirstLastPages ? 1 : 0);
-    return length <= minDisplayedAtEnds + (siblingLength * 2 + 2) ? length : minDisplayedAtEnds;
+    return length <= (minDisplayedAtEnds + (siblingLength * 2 + 2)) ? length : minDisplayedAtEnds;
   }
-
-  /// Returns `true` if the page is within the range of 1 to [length], inclusive.
-  bool validate(int page) => page >= 1 && page <= length;
 }
