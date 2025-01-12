@@ -19,11 +19,14 @@ migrate_working_dir/
 !.idea/runConfigurations/
 
 # Visual Studio Code related
-.classpath
-.project
-.settings/
 .vscode/*
 !.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
 
 # Flutter/Dart/Pub related
 # Libraries should not include pubspec.lock, per https://dart.dev/guides/libraries/private-files#pubspeclock.
