@@ -1,0 +1,46 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "forui: build_runner",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "run",
+                "build_runner",
+                "build"
+            ],
+            "options": {
+                "cwd": "forui"
+            },
+            "problemMatcher": ["$dart-build_runner"]
+        },
+        {
+            "label": "forui: generate_localizations",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "gen-l10n"
+            ],
+            "options": {
+                "cwd": "forui"
+            },
+            "problemMatcher": ["$dart-build_runner"]
+        },
+        {
+            "label": "samples: build_runner",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "run",
+                "build_runner",
+                "build",
+                "--delete-conflicting-outputs"
+            ],
+            "options": {
+                "cwd": "samples"
+            },
+            "problemMatcher": ["$dart-build_runner"]
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Generate Localizations" type="ShConfigurationType">
+  <configuration default="false" name="forui - generate_localizations" type="ShConfigurationType">
     <option name="SCRIPT_TEXT" value="flutter gen-l10n" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="" />
