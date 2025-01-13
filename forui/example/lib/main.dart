@@ -43,47 +43,50 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
         // locale: const Locale('ar'),
         localizationsDelegates: FLocalizations.localizationsDelegates,
         supportedLocales: FLocalizations.supportedLocales,
+        theme: FThemes.zinc.light.toMaterialTheme(),
         builder: (context, child) => FTheme(
           data: FThemes.zinc.light,
           child: child!,
         ),
-        home: FScaffold(
-          header: FHeader(
-            title: const Text('Example'),
-            actions: [
-              FHeaderAction(
-                autofocus: true,
-                icon: FIcon(FAssets.icons.plus),
-                onPress: controller.toggle,
-              ),
-            ],
-          ),
-          content: _pages[index],
-          footer: FBottomNavigationBar(
-            index: index,
-            onChange: (index) => setState(() => this.index = index),
-            children: [
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.house),
-                label: const Text('Home'),
-              ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.layoutGrid),
-                label: const Text('Categories'),
-              ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.search),
-                label: const Text('Search'),
-              ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.settings),
-                label: const Text('Settings'),
-              ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.castle),
-                label: const Text('Sandbox'),
-              ),
-            ],
+        home: Container(
+          child: FScaffold(
+            header: FHeader(
+              title: const Text('Example'),
+              actions: [
+                FHeaderAction(
+                  autofocus: true,
+                  icon: FIcon(FAssets.icons.plus),
+                  onPress: controller.toggle,
+                ),
+              ],
+            ),
+            content: _pages[index],
+            footer: FBottomNavigationBar(
+              index: index,
+              onChange: (index) => setState(() => this.index = index),
+              children: [
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.house),
+                  label: const Text('Home'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.layoutGrid),
+                  label: const Text('Categories'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.search),
+                  label: const Text('Search'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.settings),
+                  label: const Text('Settings'),
+                ),
+                FBottomNavigationBarItem(
+                  icon: FIcon(FAssets.icons.castle),
+                  label: const Text('Sandbox'),
+                ),
+              ],
+            ),
           ),
         ),
       );
