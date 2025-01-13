@@ -5,5 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Ogiltigt format."
+  "datePickerHint": "Välj datum",
+  "datePickerInvalidDateError": "Ogiltigt datum."
 }

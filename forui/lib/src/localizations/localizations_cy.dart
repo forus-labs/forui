@@ -63,7 +63,10 @@ class FLocalizationsCy extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Fformat annilys.';
+  String get datePickerHint => 'Dewiswch ddyddiad';
+
+  @override
+  String get datePickerInvalidDateError => 'Dyddiad annilys.';
 
   @override
   String get dialogLabel => 'Deialog';

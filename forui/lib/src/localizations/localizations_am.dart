@@ -63,7 +63,10 @@ class FLocalizationsAm extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'ልክ ያልሆነ ቅርጸት።';
+  String get datePickerHint => 'ቀን ይምረጡ';
+
+  @override
+  String get datePickerInvalidDateError => 'ልክ ያልሆነ ቀን።';
 
   @override
   String get dialogLabel => 'መገናኛ';

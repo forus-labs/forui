@@ -63,7 +63,10 @@ class FLocalizationsRo extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Format nevalid.';
+  String get datePickerHint => 'Selectați data';
+
+  @override
+  String get datePickerInvalidDateError => 'Dată nevalidă.';
 
   @override
   String get dialogLabel => 'Casetă de dialog';

@@ -63,7 +63,10 @@ class FLocalizationsEt extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Sobimatu vorming.';
+  String get datePickerHint => 'Valige kuupäev';
+
+  @override
+  String get datePickerInvalidDateError => 'Sobimatu kuupäev.';
 
   @override
   String get dialogLabel => 'Dialoog';

@@ -5,5 +5,6 @@
   "barrierLabel": "מיסוך",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "פורמט לא חוקי."
+  "datePickerHint": "בחירת תאריך",
+  "datePickerInvalidDateError": "תאריך לא חוקי."
 }

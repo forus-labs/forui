@@ -63,7 +63,10 @@ class FLocalizationsHe extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'פורמט לא חוקי.';
+  String get datePickerHint => 'בחירת תאריך';
+
+  @override
+  String get datePickerInvalidDateError => 'תאריך לא חוקי.';
 
   @override
   String get dialogLabel => 'תיבת דו-שיח';

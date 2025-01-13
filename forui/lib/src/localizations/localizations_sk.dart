@@ -63,7 +63,10 @@ class FLocalizationsSk extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Neplatný formát.';
+  String get datePickerHint => 'Vyberte dátum';
+
+  @override
+  String get datePickerInvalidDateError => 'Neplatný dátum.';
 
   @override
   String get dialogLabel => 'Dialógové okno';

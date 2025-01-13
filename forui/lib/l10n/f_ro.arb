@@ -5,5 +5,6 @@
   "barrierLabel": "Material",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Format nevalid."
+  "datePickerHint": "Selectați data",
+  "datePickerInvalidDateError": "Dată nevalidă."
 }

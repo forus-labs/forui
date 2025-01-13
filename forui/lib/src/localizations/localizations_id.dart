@@ -63,7 +63,10 @@ class FLocalizationsId extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Format tidak valid.';
+  String get datePickerHint => 'Pilih tanggal';
+
+  @override
+  String get datePickerInvalidDateError => 'Tanggal tidak valid.';
 
   @override
   String get dialogLabel => 'Dialog';

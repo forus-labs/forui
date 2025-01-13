@@ -63,7 +63,10 @@ class FLocalizationsSr extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
-  String get invalidDateFormatLabel => 'Формат је неважећи.';
+  String get datePickerHint => 'Изаберите датум';
+
+  @override
+  String get datePickerInvalidDateError => 'Неважећи датум.';
 
   @override
   String get dialogLabel => 'Дијалог';
@@ -91,7 +94,10 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get shortDateSuffix => '.';
 
   @override
-  String get invalidDateFormatLabel => 'Format je nevažeći.';
+  String get datePickerHint => 'Izaberite datum';
+
+  @override
+  String get datePickerInvalidDateError => 'Nevažeći datum.';
 
   @override
   String get dialogLabel => 'Dijalog';

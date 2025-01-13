@@ -63,7 +63,10 @@ class FLocalizationsFi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Virheellinen muoto';
+  String get datePickerHint => 'Valitse päivämäärä';
+
+  @override
+  String get datePickerInvalidDateError => 'Virheellinen päivämäärä.';
 
   @override
   String get dialogLabel => 'Valintaikkuna';

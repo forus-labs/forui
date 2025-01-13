@@ -63,7 +63,10 @@ class FLocalizationsGsw extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Ungültiges Format.';
+  String get datePickerHint => 'Datum uswähle';
+
+  @override
+  String get datePickerInvalidDateError => 'Ungültigs Datum.';
 
   @override
   String get dialogLabel => 'Dialogfeld';

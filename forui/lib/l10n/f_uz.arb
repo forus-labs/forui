@@ -5,5 +5,6 @@
   "barrierLabel": "Kanop",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Yaroqsiz format."
+  "datePickerHint": "Sanani tanlang",
+  "datePickerInvalidDateError": "Sana yaroqsiz."
 }

@@ -63,7 +63,10 @@ class FLocalizationsHy extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Ձևաչափն անվավեր է։';
+  String get datePickerHint => 'Ընտրել ամսաթիվը';
+
+  @override
+  String get datePickerInvalidDateError => 'Սխալ ամսաթիվ:';
 
   @override
   String get dialogLabel => 'Երկխոսության պատուհան';

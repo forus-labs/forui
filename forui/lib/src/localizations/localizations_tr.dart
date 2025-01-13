@@ -63,7 +63,10 @@ class FLocalizationsTr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Geçersiz biçim.';
+  String get datePickerHint => 'Tarih seçin';
+
+  @override
+  String get datePickerInvalidDateError => 'Geçersiz tarih.';
 
   @override
   String get dialogLabel => 'İletişim kutusu';

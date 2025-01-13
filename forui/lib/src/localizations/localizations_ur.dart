@@ -63,7 +63,10 @@ class FLocalizationsUr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'غلط فارمیٹ۔';
+  String get datePickerHint => 'تاریخ منتخب کریں';
+
+  @override
+  String get datePickerInvalidDateError => 'غلط تاریخ۔';
 
   @override
   String get dialogLabel => 'ڈائلاگ';

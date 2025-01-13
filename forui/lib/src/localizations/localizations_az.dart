@@ -63,7 +63,10 @@ class FLocalizationsAz extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Yanlış format.';
+  String get datePickerHint => 'Tarix seçin';
+
+  @override
+  String get datePickerInvalidDateError => 'Yanlış tarix.';
 
   @override
   String get dialogLabel => 'Dialoq';

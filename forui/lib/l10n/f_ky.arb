@@ -5,5 +5,6 @@
   "barrierLabel": "Кенеп",
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Туура эмес формат."
+  "datePickerHint": "Күндү тандоо",
+  "datePickerInvalidDateError": "Жараксыз күн."
 }

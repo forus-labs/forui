@@ -73,8 +73,13 @@
   },
 
 
-  "invalidDateFormatLabel": "Invalid format.",
-  "@invalidDateFormatLabel": {
+  "datePickerHint": "Pick a date",
+  "@datePickerHint": {
+    "description": "The hint text for the calendar-only date picker."
+  },
+
+  "datePickerInvalidDateError": "Invalid date.",
+  "@datePickerInvalidDateError": {
     "description": "Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format."
   },
 

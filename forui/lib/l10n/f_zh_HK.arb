@@ -5,5 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "格式無效。"
+  "datePickerHint": "選擇日期",
+  "datePickerInvalidDateError": "日期無效。"
 }

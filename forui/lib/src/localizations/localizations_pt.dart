@@ -63,7 +63,10 @@ class FLocalizationsPt extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Formato inválido.';
+  String get datePickerHint => 'Selecionar data';
+
+  @override
+  String get datePickerInvalidDateError => 'Data inválida.';
 
   @override
   String get dialogLabel => 'Caixa de diálogo';
@@ -91,7 +94,10 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Formato inválido.';
+  String get datePickerHint => 'Selecionar data';
+
+  @override
+  String get datePickerInvalidDateError => 'Data inválida.';
 
   @override
   String get dialogLabel => 'Caixa de diálogo';

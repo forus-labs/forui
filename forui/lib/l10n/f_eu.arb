@@ -5,5 +5,6 @@
   "barrierLabel": "Barrera",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Formatuak ez du balio."
+  "datePickerHint": "Hautatu data",
+  "datePickerInvalidDateError": "Data baliogabea."
 }

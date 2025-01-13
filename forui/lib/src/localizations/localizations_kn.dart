@@ -63,7 +63,10 @@ class FLocalizationsKn extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'ಅಮಾನ್ಯವಾದ ಫಾರ್ಮ್ಯಾಟ್.';
+  String get datePickerHint => 'ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ';
+
+  @override
+  String get datePickerInvalidDateError => 'ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ.';
 
   @override
   String get dialogLabel => 'ಡೈಲಾಗ್';

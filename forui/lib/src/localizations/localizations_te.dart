@@ -63,7 +63,10 @@ class FLocalizationsTe extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'ఫార్మాట్ చెల్లదు.';
+  String get datePickerHint => 'తేదీని ఎంచుకోండి';
+
+  @override
+  String get datePickerInvalidDateError => 'చెల్లని తేదీ.';
 
   @override
   String get dialogLabel => 'డైలాగ్';

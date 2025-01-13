@@ -63,7 +63,10 @@ class FLocalizationsZu extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Ifomethi engavumelekile.';
+  String get datePickerHint => 'Khetha usuku';
+
+  @override
+  String get datePickerInvalidDateError => 'Usuku olungalungile.';
 
   @override
   String get dialogLabel => 'Ingxoxo';

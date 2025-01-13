@@ -5,5 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": ". ",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Neveljavna oblika"
+  "datePickerHint": "Izberite datum",
+  "datePickerInvalidDateError": "Neveljaven datum."
 }

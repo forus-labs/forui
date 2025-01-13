@@ -334,11 +334,17 @@ abstract class FLocalizations {
   /// **''**
   String get shortDateSuffix;
 
+  /// The hint text for the calendar-only date picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a date'**
+  String get datePickerHint;
+
   /// Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format.
   ///
   /// In en, this message translates to:
-  /// **'Invalid format.'**
-  String get invalidDateFormatLabel;
+  /// **'Invalid date.'**
+  String get datePickerInvalidDateError;
 
   /// The sheet's label.
   ///

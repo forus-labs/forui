@@ -63,7 +63,10 @@ class FLocalizationsSi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'අවලංගු ආකෘතියකි.';
+  String get datePickerHint => 'දිනය තෝරන්න';
+
+  @override
+  String get datePickerInvalidDateError => 'අවලංගු දිනයකි.';
 
   @override
   String get dialogLabel => 'සංවාදය';

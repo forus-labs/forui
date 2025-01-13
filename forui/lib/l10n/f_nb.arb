@@ -5,5 +5,6 @@
   "barrierLabel": "Vev",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Ugyldig format."
+  "datePickerHint": "Velg dato",
+  "datePickerInvalidDateError": "Ugyldig dato."
 }

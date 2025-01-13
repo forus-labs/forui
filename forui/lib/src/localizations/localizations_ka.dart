@@ -63,7 +63,10 @@ class FLocalizationsKa extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'ფორმატი არასწორია.';
+  String get datePickerHint => 'აირჩიეთ თარიღი';
+
+  @override
+  String get datePickerInvalidDateError => 'არასწორი თარიღი.';
 
   @override
   String get dialogLabel => 'დიალოგი';

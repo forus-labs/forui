@@ -5,5 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "ຮູບແບບບໍ່ຖືກຕ້ອງ."
+  "datePickerHint": "ເລືອກວັນທີ",
+  "datePickerInvalidDateError": "ວັນທີບໍ່ຖືກຕ້ອງ."
 }

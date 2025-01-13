@@ -5,5 +5,6 @@
   "barrierLabel": "స్క్రిమ్",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "ఫార్మాట్ చెల్లదు."
+  "datePickerHint": "తేదీని ఎంచుకోండి",
+  "datePickerInvalidDateError": "చెల్లని తేదీ."
 }

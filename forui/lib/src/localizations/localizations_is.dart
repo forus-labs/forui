@@ -63,7 +63,10 @@ class FLocalizationsIs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Ógilt snið.';
+  String get datePickerHint => 'Veldu dagsetningu';
+
+  @override
+  String get datePickerInvalidDateError => 'Ógild dagsetning.';
 
   @override
   String get dialogLabel => 'Gluggi';

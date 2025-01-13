@@ -63,7 +63,10 @@ class FLocalizationsSw extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Muundo si sahihi.';
+  String get datePickerHint => 'Chagua tarehe';
+
+  @override
+  String get datePickerInvalidDateError => 'Tarehe si sahihi.';
 
   @override
   String get dialogLabel => 'Kidirisha';

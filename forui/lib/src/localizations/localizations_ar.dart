@@ -63,7 +63,10 @@ class FLocalizationsAr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'التنسيق غير صالح.';
+  String get datePickerHint => 'اختر تاريخًا';
+
+  @override
+  String get datePickerInvalidDateError => 'تاريخ غير صالح.';
 
   @override
   String get dialogLabel => 'مربع حوار';

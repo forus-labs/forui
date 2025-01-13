@@ -63,7 +63,10 @@ class FLocalizationsEl extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Μη έγκυρη μορφή.';
+  String get datePickerHint => 'Επιλέξτε ημερομηνία';
+
+  @override
+  String get datePickerInvalidDateError => 'Μη έγκυρη ημερομηνία.';
 
   @override
   String get dialogLabel => 'Παράθυρο διαλόγου';

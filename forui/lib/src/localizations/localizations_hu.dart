@@ -63,7 +63,10 @@ class FLocalizationsHu extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
-  String get invalidDateFormatLabel => 'Érvénytelen formátum.';
+  String get datePickerHint => 'Válasszon dátumot';
+
+  @override
+  String get datePickerInvalidDateError => 'Érvénytelen dátum.';
 
   @override
   String get dialogLabel => 'Párbeszédablak';

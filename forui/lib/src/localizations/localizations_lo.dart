@@ -63,7 +63,10 @@ class FLocalizationsLo extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'ຮູບແບບບໍ່ຖືກຕ້ອງ.';
+  String get datePickerHint => 'ເລືອກວັນທີ';
+
+  @override
+  String get datePickerInvalidDateError => 'ວັນທີບໍ່ຖືກຕ້ອງ.';
 
   @override
   String get dialogLabel => 'ຂໍ້ຄວາມ';

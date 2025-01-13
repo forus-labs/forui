@@ -63,7 +63,10 @@ class FLocalizationsSl extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Neveljavna oblika';
+  String get datePickerHint => 'Izberite datum';
+
+  @override
+  String get datePickerInvalidDateError => 'Neveljaven datum.';
 
   @override
   String get dialogLabel => 'Pogovorno okno';

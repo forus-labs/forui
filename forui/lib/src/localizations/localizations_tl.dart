@@ -63,7 +63,10 @@ class FLocalizationsTl extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid ang format.';
+  String get datePickerHint => 'Pumili ng petsa';
+
+  @override
+  String get datePickerInvalidDateError => 'Hindi wastong petsa.';
 
   @override
   String get dialogLabel => 'Dialog';

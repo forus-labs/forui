@@ -63,7 +63,10 @@ class FLocalizationsKy extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Туура эмес формат.';
+  String get datePickerHint => 'Күндү тандоо';
+
+  @override
+  String get datePickerInvalidDateError => 'Жараксыз күн.';
 
   @override
   String get dialogLabel => 'Диалог';

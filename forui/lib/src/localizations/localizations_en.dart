@@ -63,7 +63,10 @@ class FLocalizationsEn extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';
@@ -91,7 +94,10 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -119,7 +125,10 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';
@@ -147,7 +156,10 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -175,7 +187,10 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -203,7 +218,10 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -231,7 +249,10 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -259,7 +280,10 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -287,7 +311,10 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';

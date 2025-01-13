@@ -63,7 +63,10 @@ class FLocalizationsLv extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
-  String get invalidDateFormatLabel => 'Nederīgs formāts.';
+  String get datePickerHint => 'Atlasīt datumu';
+
+  @override
+  String get datePickerInvalidDateError => 'Nederīgs datums.';
 
   @override
   String get dialogLabel => 'Dialoglodziņš';

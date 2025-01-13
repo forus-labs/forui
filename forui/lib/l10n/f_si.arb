@@ -5,5 +5,6 @@
   "barrierLabel": "ස්ක්‍රිම්",
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "අවලංගු ආකෘතියකි."
+  "datePickerHint": "දිනය තෝරන්න",
+  "datePickerInvalidDateError": "අවලංගු දිනයකි."
 }

@@ -5,5 +5,6 @@
   "barrierLabel": "Скрим",
   "shortDateSeparator": ". ",
   "shortDateSuffix": ".",
-  "invalidDateFormatLabel": "Формат је неважећи."
+  "datePickerHint": "Изаберите датум",
+  "datePickerInvalidDateError": "Неважећи датум."
 }

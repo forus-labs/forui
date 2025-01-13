@@ -5,5 +5,6 @@
   "barrierLabel": "Dæmpeskærm",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "invalidDateFormatLabel": "Ugyldigt format."
+  "datePickerHint": "Vælg en dato",
+  "datePickerInvalidDateError": "Ugyldig dato."
 }

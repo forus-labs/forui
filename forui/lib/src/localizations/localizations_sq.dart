@@ -63,7 +63,10 @@ class FLocalizationsSq extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Format i pavlefshëm.';
+  String get datePickerHint => 'Zgjidh datën';
+
+  @override
+  String get datePickerInvalidDateError => 'Datë e pavlefshme.';
 
   @override
   String get dialogLabel => 'Dialogu';

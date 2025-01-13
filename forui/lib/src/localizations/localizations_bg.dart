@@ -63,7 +63,10 @@ class FLocalizationsBg extends FLocalizations {
   String get shortDateSuffix => ' г.';
 
   @override
-  String get invalidDateFormatLabel => 'Невалиден формат.';
+  String get datePickerHint => 'Изберете дата';
+
+  @override
+  String get datePickerInvalidDateError => 'Невалидна дата.';
 
   @override
   String get dialogLabel => 'Диалогов прозорец';

@@ -63,7 +63,10 @@ class FLocalizationsPs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get invalidDateFormatLabel => 'Invalid format.';
+  String get datePickerHint => 'نېټه وټاکئ';
+
+  @override
+  String get datePickerInvalidDateError => 'ناسمه نېټه.';
 
   @override
   String get dialogLabel => 'خبرې اترې';
