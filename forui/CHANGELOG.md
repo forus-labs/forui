@@ -4,6 +4,8 @@
 
 * Add `FFormProperties`.
 * Add `FPopoverTagRegion`.
+* Add `FTextfield.onTap`.
+* Add `FTextfield.onTapOutside`.
 
 ### Changes
 
@@ -28,7 +30,12 @@
 
 * Fix `FCalendar`'s day picker not updating when a new start and/or end date is given.
 
+* Fix `FPopover` not handling focus changes in popover properly.
+
 * Fix `FTappable` remaining in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
+
+* Fix `FTextField` ignoring `enableInteractiveSelection` parameter.
+
 
 ## 0.8.0
 

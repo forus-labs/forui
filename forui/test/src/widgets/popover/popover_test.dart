@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
@@ -129,7 +130,7 @@ void main() {
     });
   });
 
-  group('FPopover.tappable', () {
+  group('FPopover.automatic', () {
     testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
@@ -154,6 +155,65 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('popover'), findsNothing);
+    });
+  });
+
+  group('focus', () {
+    testWidgets("focuses on popover's children", (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FPopover.automatic(
+                popoverBuilder: (context, style, _) => Row(
+                  children: [
+                    FButton(
+                      onPress: () {},
+                      label: const Text('1'),
+                    ),
+                    FButton(
+                      onPress: () {},
+                      label: const Text('2'),
+                    ),
+                    FButton(
+                      onPress: () {},
+                      label: const Text('3'),
+                    ),
+                  ],
+                ),
+                child: Container(
+                  color: Colors.black,
+                  height: 10,
+                  width: 10,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: FButton(
+                  onPress: () {},
+                  label: const Text('Underneath'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(Container).last);
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsOneWidget);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      expect(Focus.of(tester.element(find.text('2'))).hasFocus, true);
     });
   });
 

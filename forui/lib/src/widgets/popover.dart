@@ -282,18 +282,20 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             autofocus: widget.autofocus,
             focusNode: widget.focusNode,
             onFocusChange: widget.onFocusChange,
-            child: Padding(
-              padding: style.padding,
-              child: FadeTransition(
-                opacity: _controller._fade,
-                child: ScaleTransition(
-                  scale: _controller._scale,
-                  child: TapRegion(
-                    groupId: _group,
-                    onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
-                    child: DecoratedBox(
-                      decoration: style.decoration,
-                      child: widget.popoverBuilder(context, style, null),
+            child: FocusTraversalGroup(
+              child: Padding(
+                padding: style.padding,
+                child: FadeTransition(
+                  opacity: _controller._fade,
+                  child: ScaleTransition(
+                    scale: _controller._scale,
+                    child: TapRegion(
+                      groupId: _group,
+                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
+                      child: DecoratedBox(
+                        decoration: style.decoration,
+                        child: widget.popoverBuilder(context, style, null),
+                      ),
                     ),
                   ),
                 ),
