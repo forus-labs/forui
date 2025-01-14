@@ -1,6 +1,7 @@
 @Tags(['golden'])
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
@@ -121,6 +122,52 @@ void main() {
         find.byType(TestScaffold),
         matchesGoldenFile('date-picker/${theme.name}/input/unsupported-locale.png'),
       );
+    });
+
+    testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('ar'),
+          child: FDatePicker.input(key: key),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-picker/${theme.name}/input/focused.png'),
+      );
+    });
+
+    testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('ar'),
+          child: FDatePicker.input(key: key),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-picker/${theme.name}/input/unfocused.png'),
+      );
+
+      debugDefaultTargetPlatformOverride = null;
     });
   }
 }
