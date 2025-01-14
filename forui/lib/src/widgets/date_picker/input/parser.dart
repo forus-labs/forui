@@ -9,11 +9,16 @@ class Parser {
   final NumberFormat _day;
   final NumberFormat _month;
   final NumberFormat _year;
+  final int _initialYear;
 
-  Parser(String locale)
-      : this._(RegExp('([A-z]+)').allMatches(DateFormat.yMd(locale).pattern!).map((e) => e.group(1)!).toList(), locale);
+  Parser(String locale, int initialYear)
+      : this._(
+          RegExp('([A-z]+)').allMatches(DateFormat.yMd(locale).pattern!).map((e) => e.group(1)!).toList(),
+          initialYear,
+          locale,
+        );
 
-  Parser._(this._parts, String locale)
+  Parser._(this._parts, this._initialYear, String locale)
       : _day = NumberFormat(_parts.contains('d') ? '#0' : '00', locale),
         _month = NumberFormat(_parts.contains('M') ? '#0' : '00', locale),
         _year = NumberFormat('0000', locale);
@@ -156,7 +161,7 @@ class Parser {
   String adjustYear(String value, int adjustment) {
     assert(value.length <= 4, 'year must be at most 4 characters long');
     if (value == 'YYYY') {
-      return _year.format(2000 + adjustment);
+      return _year.format(_initialYear + adjustment);
     }
 
     final year = (_year.tryParse(value)?.toInt() ?? 0) + adjustment;

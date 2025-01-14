@@ -793,6 +793,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
               selectionHandleColor: style.cursorColor,
             ),
             cupertinoOverrideTheme: CupertinoThemeData(
+              // TODO: See https://github.com/flutter/flutter/issues/161573
               primaryColor: style.cursorColor,
             ),
           ),

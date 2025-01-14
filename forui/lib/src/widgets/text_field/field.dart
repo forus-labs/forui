@@ -16,7 +16,9 @@ class Field extends FormField<String> {
         prefixIcon: parent.prefix,
         suffixIcon: parent.suffix,
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-        prefix: Padding(padding: EdgeInsets.only(left: contentPadding.left)),
+        prefix: Padding(padding: EdgeInsets.only(left: parent.prefix == null ? contentPadding.left : 0)),
+        prefixIconConstraints: const BoxConstraints(),
+        suffixIconConstraints: const BoxConstraints(),
         contentPadding: contentPadding.copyWith(left: 0),
         hintText: parent.hint,
         hintStyle: stateStyle.hintTextStyle,

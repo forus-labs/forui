@@ -24,7 +24,7 @@ class FDefaultLocalizations extends FLocalizations {
   /// Creates a [FDefaultLocalizations].
   factory FDefaultLocalizations() => _localizations;
 
-  FDefaultLocalizations._() : super('');
+  FDefaultLocalizations._() : super('en_US');
 
   @override
   String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);
