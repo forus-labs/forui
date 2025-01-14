@@ -9,9 +9,6 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
-/// A calendar's properties.
-abstract class FCalendarProperties {}
-
 /// A calendar.
 ///
 /// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing
@@ -25,7 +22,8 @@ abstract class FCalendarProperties {}
 /// * [FCalendarController] for customizing a calendar's date selection behavior.
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatefulWidget {
-  static Widget _dayBuilder(BuildContext context, FCalendarDayData data, Widget? child) => child!;
+  /// The default day builder.
+  static Widget defaultDayBuilder(BuildContext context, FCalendarDayData data, Widget? child) => child!;
 
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
@@ -76,7 +74,7 @@ class FCalendar extends StatefulWidget {
   FCalendar({
     required this.controller,
     this.style,
-    this.dayBuilder = _dayBuilder,
+    this.dayBuilder = defaultDayBuilder,
     this.onMonthChange,
     this.onPress,
     this.onLongPress,
@@ -86,7 +84,7 @@ class FCalendar extends StatefulWidget {
     DateTime? today,
     DateTime? initialMonth,
     super.key,
-  })  : start = start ?? DateTime(1990),
+  })  : start = start ?? DateTime(1900),
         end = end ?? DateTime(2100),
         today = today ?? DateTime.now(),
         _initialType = initialType,
@@ -232,7 +230,7 @@ final class FCalendarStyle with Diagnosticable {
           ),
         );
 
-  /// Returns a copy of this [FCalendarStyle] but with the given fields replaced with the new values.
+  /// Returns a copy of this [FCalendarStyle] with the given fields replaced with the new values.
   @useResult
   FCalendarStyle copyWith({
     FCalendarHeaderStyle? headerStyle,

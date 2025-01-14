@@ -42,8 +42,8 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: FHidePopoverRegion.none,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: FButton(
+            popoverBuilder: (context, style, _) => const Text('follower'),
+            child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
             ),
@@ -68,8 +68,8 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: FHidePopoverRegion.excludeTarget,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: Row(
+            popoverBuilder: (context, style, _) => const Text('follower'),
+            child: Row(
               children: [
                 const Text('other'),
                 FButton(
@@ -103,8 +103,8 @@ void main() {
         TestScaffold.app(
           child: FPopover(
             controller: controller,
-            followerBuilder: (context, style, _) => const Text('follower'),
-            target: Row(
+            popoverBuilder: (context, style, _) => const Text('follower'),
+            child: Row(
               children: [
                 const Text('other'),
                 FButton(

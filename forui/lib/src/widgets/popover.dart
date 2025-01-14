@@ -245,15 +245,15 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
     final popover = widget.popoverAnchor;
-    final child = widget.childAnchor;
+    final childAnchor = widget.childAnchor;
 
-    var child = widget._tappable
+    var child = widget._automatic
         ? GestureDetector(
             behavior: HitTestBehavior.translucent,
             onTap: _controller.toggle,
-            child: widget.target,
+            child: widget.child,
           )
-        : widget.target;
+        : widget.child;
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
       child = TapRegion(
@@ -268,8 +268,9 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       portalAnchor: widget.popoverAnchor,
       childAnchor: widget.childAnchor,
       shift: widget.shift,
-      offset:
-          widget.directionPadding ? Offset.zero : Alignments.removeDirectionalPadding(style.padding, popover, child),
+      offset: widget.directionPadding
+          ? Offset.zero
+          : Alignments.removeDirectionalPadding(style.padding, popover, childAnchor),
       portalBuilder: (context) => CallbackShortcuts(
         bindings: {
           const SingleActivator(LogicalKeyboardKey.escape): _controller.hide,
