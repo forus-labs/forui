@@ -9,7 +9,7 @@ import '../../../test_scaffold.dart';
 
 void main() {
   const key = Key('picker');
-  
+
   setUpAll(initializeDateFormatting);
 
   for (final (description, picker) in [
@@ -162,13 +162,16 @@ void main() {
       testWidgets('custom invalid date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        final controller = FDatePickerController(vsync: const TestVSync(), validator: (date) {
-          if (date == DateTime.utc(1984)) {
-            return 'Custom error.';
-          }
+        final controller = FDatePickerController(
+          vsync: const TestVSync(),
+          validator: (date) {
+            if (date == DateTime.utc(1984)) {
+              return 'Custom error.';
+            }
 
-          return null;
-        });
+            return null;
+          },
+        );
 
         await tester.pumpWidget(
           TestScaffold.app(

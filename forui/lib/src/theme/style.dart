@@ -33,6 +33,9 @@ final class FStyle with Diagnosticable {
   /// The page's padding. Defaults to `EdgeInsets.symmetric(vertical: 8, horizontal: 12)`.
   final EdgeInsets pagePadding;
 
+  /// The shadow used for elevated widgets.
+  final List<BoxShadow> shadow;
+
   /// Creates an [FStyle].
   ///
   /// **Note:**
@@ -46,6 +49,13 @@ final class FStyle with Diagnosticable {
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+    this.shadow = const [
+      BoxShadow(
+        color: Color(0x0d000000),
+        offset: Offset(0, 1),
+        blurRadius: 2,
+      ),
+    ],
   });
 
   /// Creates an [FStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
@@ -90,6 +100,7 @@ final class FStyle with Diagnosticable {
     BorderRadius? borderRadius,
     double? borderWidth,
     EdgeInsets? pagePadding,
+    List<BoxShadow>? shadow,
   }) =>
       FStyle(
         enabledFormFieldStyle: enabledFormFieldStyle ?? this.enabledFormFieldStyle,
@@ -100,6 +111,7 @@ final class FStyle with Diagnosticable {
         borderRadius: borderRadius ?? this.borderRadius,
         borderWidth: borderWidth ?? this.borderWidth,
         pagePadding: pagePadding ?? this.pagePadding,
+        shadow: shadow ?? this.shadow,
       );
 
   @override
@@ -113,7 +125,8 @@ final class FStyle with Diagnosticable {
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
       ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(8)))
       ..add(DoubleProperty('borderWidth', borderWidth, defaultValue: 1))
-      ..add(DiagnosticsProperty('pagePadding', pagePadding, defaultValue: const EdgeInsets.all(4)));
+      ..add(DiagnosticsProperty('pagePadding', pagePadding, defaultValue: const EdgeInsets.all(4)))
+      ..add(IterableProperty('shadow', shadow));
   }
 
   @override
@@ -128,7 +141,8 @@ final class FStyle with Diagnosticable {
           iconStyle == other.iconStyle &&
           borderRadius == other.borderRadius &&
           borderWidth == other.borderWidth &&
-          pagePadding == other.pagePadding;
+          pagePadding == other.pagePadding &&
+          shadow == other.shadow;
 
   @override
   int get hashCode =>
@@ -139,5 +153,6 @@ final class FStyle with Diagnosticable {
       iconStyle.hashCode ^
       borderRadius.hashCode ^
       borderWidth.hashCode ^
-      pagePadding.hashCode;
+      pagePadding.hashCode ^
+      shadow.hashCode;
 }

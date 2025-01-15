@@ -319,15 +319,6 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
 /// A [FPopover]'s style.
 class FPopoverStyle with Diagnosticable {
-  /// The popover's default shadow in [FPopoverStyle.inherit].
-  static const shadow = [
-    BoxShadow(
-      color: Color(0x0d000000),
-      offset: Offset(0, 1),
-      blurRadius: 2,
-    ),
-  ];
-
   /// The popover's decoration.
   final BoxDecoration decoration;
 
@@ -350,7 +341,7 @@ class FPopoverStyle with Diagnosticable {
               width: style.borderWidth,
               color: colorScheme.border,
             ),
-            boxShadow: shadow,
+            boxShadow: style.shadow,
           ),
         );
 

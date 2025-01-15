@@ -253,7 +253,18 @@ abstract class FDatePicker extends StatefulWidget {
   /// The [hint] is displayed when the input field is empty. Defaults to the current locale's
   /// [FLocalizations.datePickerHint].
   ///
-  /// The [mouseCursor] is used to specify the cursor shown when hovering over the input field.
+  /// The [textAlign] property is used to specify the alignment of the text within the input field.
+  ///
+  /// The [textAlignVertical] property is used to specify the vertical alignment of the text and can be useful when
+  /// used with a prefix or suffix.
+  ///
+  /// The [textDirection] property can be used to specify the directionality of the text input.
+  ///
+  /// If [expands] is true, the input field will expand to fill its parent's height.
+  ///
+  /// The [mouseCursor] can be used to specify the cursor shown when hovering over the input field.
+  ///
+  /// If [canRequestFocus] is false, the input field cannot obtain focus but can still be selected.
   ///
   /// The [dayBuilder] customizes the appearance of calendar day cells. Defaults to [FCalendar.defaultDayBuilder].
   ///
@@ -285,7 +296,12 @@ abstract class FDatePicker extends StatefulWidget {
     FDatePickerController? controller,
     FDatePickerStyle? style,
     DateFormat? format,
+    TextAlign textAlign,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands,
     MouseCursor mouseCursor,
+    bool canRequestFocus,
     String? hint,
     bool autofocus,
     FocusNode? focusNode,

@@ -4,7 +4,12 @@ part of '../date_picker.dart';
 class _CalendarDatePicker extends FDatePicker implements FDatePickerCalendarProperties {
   final DateFormat? format;
   final String? hint;
+  final TextAlign textAlign;
+  final TextAlignVertical? textAlignVertical;
+  final TextDirection? textDirection;
+  final bool expands;
   final MouseCursor mouseCursor;
+  final bool canRequestFocus;
   @override
   final Alignment anchor;
   @override
@@ -31,7 +36,12 @@ class _CalendarDatePicker extends FDatePicker implements FDatePickerCalendarProp
   const _CalendarDatePicker({
     this.format,
     this.hint,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical,
+    this.textDirection,
+    this.expands = false,
     this.mouseCursor = SystemMouseCursors.click,
+    this.canRequestFocus = true,
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
     this.shift = FPortalShift.flip,
@@ -68,7 +78,12 @@ class _CalendarDatePicker extends FDatePicker implements FDatePickerCalendarProp
     properties
       ..add(DiagnosticsProperty('format', format))
       ..add(StringProperty('hint', hint))
-      ..add(DiagnosticsProperty('mouseCursor', mouseCursor));
+      ..add(EnumProperty('textAlign', textAlign))
+      ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
+      ..add(EnumProperty('textDirection', textDirection))
+      ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
+      ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'));
   }
 }
 
@@ -130,6 +145,7 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.datePickerStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final onSaved = widget.onSaved;
     return _CalendarPopover(
       controller: _controller,
       style: style,
@@ -138,10 +154,13 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
         focusNode: _focus,
         controller: _textController,
         style: style.inputStyle,
+        textAlign: widget.textAlign,
+        textAlignVertical: widget.textAlignVertical,
+        textDirection: widget.textDirection,
+        expands: widget.expands,
         mouseCursor: widget.mouseCursor,
-        onTap: () {
-          _controller.calendar.toggle();
-        },
+        canRequestFocus: widget.canRequestFocus,
+        onTap: _controller.calendar.toggle,
         hint: widget.hint ?? localizations.datePickerHint,
         readOnly: true,
         enableInteractiveSelection: false,
@@ -153,6 +172,14 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
           cursor: SystemMouseCursors.click,
           child: widget.suffixBuilder?.call(context, style),
         ),
+        label: widget.label,
+        description: widget.description,
+        enabled: widget.enabled,
+        onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
+        validator: (value) => _controller.validator(_controller.value),
+        autovalidateMode: widget.autovalidateMode,
+        forceErrorText: widget.forceErrorText,
+        errorBuilder: widget.errorBuilder,
       ),
     );
   }

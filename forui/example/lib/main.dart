@@ -39,13 +39,16 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) =>
+      MaterialApp(
+        locale: Locale('hr'),
         localizationsDelegates: FLocalizations.localizationsDelegates,
         supportedLocales: FLocalizations.supportedLocales,
-        builder: (context, child) => FTheme(
-          data: FThemes.zinc.light,
-          child: child!,
-        ),
+        builder: (context, child) =>
+            FTheme(
+              data: FThemes.zinc.light,
+              child: child!,
+            ),
         home: FScaffold(
           header: FHeader(
             title: const Text('Example'),
