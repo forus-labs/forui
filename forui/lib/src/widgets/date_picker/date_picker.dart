@@ -166,7 +166,14 @@ abstract class FDatePicker extends StatefulWidget {
   /// auto-validation will be disabled.
   final AutovalidateMode autovalidateMode;
 
-  /// {@macro forui.foundation.form_field_properties.forceErrorText}
+  /// An optional property that forces the [FormFieldState] into an error state by directly setting the
+  /// [FormFieldState.errorText] property without running the validator function.
+  ///
+  /// When the [forceErrorText] property is provided, the [FormFieldState.errorText] will be set to the provided value,
+  /// causing the form field to be considered invalid and to display the error message specified.
+  ///
+  /// When [FDatePickerController.validator] is provided, [forceErrorText] will override any error that it returns.
+  /// [FDatePickerController.validator] will not be called unless [forceErrorText] is null.
   final String? forceErrorText;
 
   const FDatePicker._({
