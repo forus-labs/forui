@@ -13,14 +13,7 @@ class Sandbox extends StatefulWidget {
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late FPopoverController _popover;
   late FCalendarController<DateTime?> calendarController = FCalendarController.date();
-
-  @override
-  void initState() {
-    super.initState();
-    _popover = FPopoverController(vsync: this);
-  }
 
   @override
   Widget build(BuildContext context) => Form(

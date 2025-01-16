@@ -109,6 +109,7 @@ class FDatePickerController implements FValueNotifier<DateTime?> {
 /// See:
 /// * https://forui.dev/docs/form/date-picker for working examples.
 /// * [FDatePickerController] for controlling a date picker.
+/// * [FDatePickerCalendarProperties] for customizing a date picker calendar's behavior.
 /// * [FDatePickerStyle] for customizing a date picker's appearance.
 abstract class FDatePicker extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
