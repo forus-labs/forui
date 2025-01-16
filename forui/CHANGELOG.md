@@ -2,6 +2,7 @@
 
 ### Additions
 
+* Add `FDatePicker`.
 * Add `FFormProperties`.
 * Add `FPopoverTagRegion`.
 * Add `FTextfield.onTap`.
