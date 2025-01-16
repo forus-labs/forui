@@ -121,7 +121,7 @@ class TestScaffold extends StatelessWidget {
         home: Align(
           alignment: alignment,
           child: child,
-        )
+        ),
       );
     } else {
       return FTheme(
@@ -148,6 +148,7 @@ class TestScaffold extends StatelessWidget {
       ..add(ColorProperty('background', background))
       ..add(DiagnosticsProperty('locale', locale))
       ..add(EnumProperty('textDirection', textDirection))
+      ..add(DiagnosticsProperty('alignment', alignment))
       ..add(FlagProperty('padded', value: padded, ifTrue: 'padded'))
       ..add(FlagProperty('wrapped', value: wrapped, ifTrue: 'wrapped'));
   }

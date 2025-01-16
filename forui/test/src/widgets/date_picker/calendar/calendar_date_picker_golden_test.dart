@@ -3,7 +3,6 @@ library;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -108,6 +107,32 @@ void main() {
       await expectLater(
         find.byType(TestScaffold),
         matchesGoldenFile('date-picker/${theme.name}/calendar/text.png'),
+      );
+    });
+
+    testWidgets('${theme.name} does not auto hide', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('en', 'SG'),
+          alignment: Alignment.topCenter,
+          child: FDatePicker.calendar(
+            key: key,
+            today: DateTime.utc(2025, 1, 15),
+            autoHide: false,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-picker/${theme.name}/calendar/auto-hide.png'),
       );
     });
 
