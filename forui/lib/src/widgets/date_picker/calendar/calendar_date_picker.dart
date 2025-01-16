@@ -164,14 +164,18 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
         hint: widget.hint ?? localizations.datePickerHint,
         readOnly: true,
         enableInteractiveSelection: false,
-        prefix: widget.prefixBuilder == null ? null : MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: widget.prefixBuilder?.call(context, style),
-        ),
-        suffix: widget.suffixBuilder == null ? null : MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: widget.suffixBuilder?.call(context, style),
-        ),
+        prefix: widget.prefixBuilder == null
+            ? null
+            : MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.prefixBuilder?.call(context, style),
+              ),
+        suffix: widget.suffixBuilder == null
+            ? null
+            : MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.suffixBuilder?.call(context, style),
+              ),
         label: widget.label,
         description: widget.description,
         enabled: widget.enabled,

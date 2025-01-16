@@ -291,7 +291,8 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                     scale: _controller._scale,
                     child: TapRegion(
                       groupId: _group,
-                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
+                      onTapOutside:
+                          widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
                       child: DecoratedBox(
                         decoration: style.decoration,
                         child: widget.popoverBuilder(context, style, null),
