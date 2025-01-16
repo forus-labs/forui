@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import '../../../test_scaffold.dart';
+import '../../test_scaffold.dart';
 
 void main() {
   const key = Key('picker');
@@ -19,7 +19,7 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FDatePicker.calendar(
+          home: FDatePicker(
             style: TestScaffold.blueScreen.datePickerStyle,
             key: key,
           ),
@@ -37,13 +37,13 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: const FDatePicker.calendar(key: key),
+          child: const FDatePicker(key: key),
         ),
       );
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/placeholder.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/placeholder.png'),
       );
     });
 
@@ -51,7 +51,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: const FDatePicker.calendar(
+          child: const FDatePicker(
             prefixBuilder: null,
           ),
         ),
@@ -59,7 +59,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/no-icon.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/no-icon.png'),
       );
     });
 
@@ -69,9 +69,11 @@ void main() {
           theme: theme.data,
           locale: const Locale('hr'),
           alignment: Alignment.topCenter,
-          child: FDatePicker.calendar(
+          child: FDatePicker(
             key: key,
-            today: DateTime.utc(2025, 1, 15),
+            calendar: FDatePickerCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
           ),
         ),
       );
@@ -81,19 +83,45 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/hr-locale.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/hr-locale.png'),
       );
     });
 
-    testWidgets('${theme.name} text', (tester) async {
+    testWidgets('${theme.name} click shows calendar', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDatePicker.calendar(
+          child: FDatePicker(
             key: key,
-            today: DateTime.utc(2025, 1, 15),
+            calendar: FDatePickerCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/show-calendar.png'),
+      );
+    });
+
+    testWidgets('${theme.name} click shows calendar', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('en', 'SG'),
+          alignment: Alignment.topCenter,
+          child: FDatePicker(
+            key: key,
+            calendar: FDatePickerCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
           ),
         ),
       );
@@ -106,7 +134,34 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/text.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/calendar-updates-input.png'),
+      );
+    });
+
+    testWidgets('${theme.name} input', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('en', 'SG'),
+          alignment: Alignment.topCenter,
+          child: FDatePicker(
+            key: key,
+            calendar: FDatePickerCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byKey(key), '15/01/2025');
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/input-updates-calendar.png'),
       );
     });
 
@@ -116,10 +171,12 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDatePicker.calendar(
+          child: FDatePicker(
             key: key,
-            today: DateTime.utc(2025, 1, 15),
-            autoHide: false,
+            calendar: FDatePickerCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+              autoHide: false,
+            ),
           ),
         ),
       );
@@ -128,11 +185,11 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('15'));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/no-auto-hide.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/no-auto-hide.png'),
       );
     });
 
@@ -140,7 +197,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: const FDatePicker.calendar(enabled: false, key: key),
+          child: const FDatePicker(enabled: false, key: key),
         ),
       );
 
@@ -149,7 +206,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/disabled.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/disabled.png'),
       );
     });
 
@@ -157,22 +214,22 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: const FDatePicker.calendar(forceErrorText: 'Error', key: key),
+          child: const FDatePicker(forceErrorText: 'Error', key: key),
         ),
       );
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/error.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/error.png'),
       );
     });
 
-    testWidgets('${theme.name} tap outside unfocuses on Android/iOS', (tester) async {
+    testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: const FDatePicker.calendar(key: key),
+          child: const FDatePicker(key: key),
         ),
       );
 
@@ -184,7 +241,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/mobile-unfocused.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/mobile-focused.png'),
       );
     });
 
@@ -195,7 +252,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: const FDatePicker.calendar(key: key),
+          child: const FDatePicker(key: key),
         ),
       );
 
@@ -207,7 +264,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/desktop-unfocused.png'),
+        matchesGoldenFile('date-picker/${theme.name}/input-calendar/desktop-unfocused.png'),
       );
 
       debugDefaultTargetPlatformOverride = null;

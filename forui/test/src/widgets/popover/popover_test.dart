@@ -43,7 +43,7 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: FHidePopoverRegion.none,
-            popoverBuilder: (context, style, _) => const Text('follower'),
+            popoverBuilder: (context, style, _) => const Text('popover'),
             child: FButton(
               onPress: controller.toggle,
               label: const Text('target'),
@@ -54,6 +54,8 @@ void main() {
 
       await tester.tap(find.text('target'));
       await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('lol.png'));
 
       expect(find.text('popover'), findsOneWidget);
 
@@ -69,7 +71,7 @@ void main() {
           child: FPopover(
             controller: controller,
             hideOnTapOutside: FHidePopoverRegion.excludeTarget,
-            popoverBuilder: (context, style, _) => const Text('follower'),
+            popoverBuilder: (context, style, _) => const Text('popover'),
             child: Row(
               children: [
                 const Text('other'),
@@ -91,12 +93,12 @@ void main() {
       await tester.tap(find.text('other'));
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsOneWidget);
+      expect(find.text('popover'), findsOneWidget);
 
       await tester.tapAt(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(find.text('follower'), findsNothing);
+      expect(find.text('popover'), findsNothing);
     });
 
     testWidgets('tap button when popover is open and FHidePopoverRegion.anywhere closes it', (tester) async {

@@ -223,10 +223,8 @@ class _CalendarPopover extends StatelessWidget {
             controller: controller._calendar,
             initialMonth: switch (value) {
               null => null,
-              _ when properties.start != null && value.isBefore(properties.start!) => properties.today,
-              _ when properties.start == null && value.isBefore(DateTime.utc(1900)) => properties.today,
-              _ when properties.end != null && value.isAfter(properties.end!) => properties.today,
-              _ when properties.end == null && value.isAfter(DateTime.utc(2100)) => properties.today,
+              _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
+              _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
               _ => value,
             },
             onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
