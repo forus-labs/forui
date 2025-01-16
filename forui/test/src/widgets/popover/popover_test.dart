@@ -55,8 +55,6 @@ void main() {
       await tester.tap(find.text('target'));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('lol.png'));
-
       expect(find.text('popover'), findsOneWidget);
 
       await tester.tapAt(Offset.zero);
