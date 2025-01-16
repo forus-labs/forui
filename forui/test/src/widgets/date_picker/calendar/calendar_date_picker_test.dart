@@ -1,5 +1,6 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -132,7 +133,7 @@ void main() {
 
     await tester.tap(find.text('15'));
     await tester.pumpAndSettle(const Duration(seconds: 3));
-    
+
     expect(find.text('15 January 2025'), findsOneWidget);
   });
 }

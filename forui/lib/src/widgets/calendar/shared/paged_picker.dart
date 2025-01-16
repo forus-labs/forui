@@ -71,7 +71,6 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     _focusNode = FocusNode();
   }
 
-
   @override
   void didUpdateWidget(T old) {
     super.didUpdateWidget(old);

@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
@@ -35,10 +36,14 @@ void main() {
   ].indexed) {
     test('DateFieldController.() - $index', () {
       expect(
-          InputController(FCalendarController.date(initialSelection: initial), TestScaffold.blueScreen.datePickerStyle,
-                  localizations, 2000,)
-              .text,
-          expected,);
+        InputController(
+          FCalendarController.date(initialSelection: initial),
+          TestScaffold.blueScreen.datePickerStyle,
+          localizations,
+          2000,
+        ).text,
+        expected,
+      );
     });
   }
 
@@ -100,8 +105,13 @@ void main() {
     ].indexed) {
       test('single separator - $index', () {
         controller = InputController.fromValue(
-            calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsEnSg(), 'DD/MM/YYYY', 2000, old,)
-          ..value = value;
+          calendarController,
+          TestScaffold.blueScreen.datePickerStyle,
+          FLocalizationsEnSg(),
+          'DD/MM/YYYY',
+          2000,
+          old,
+        )..value = value;
         expect(controller.value, expected);
         expect(calendarController.value, date);
       });
@@ -156,8 +166,13 @@ void main() {
     ].indexed) {
       test('multiple separator & suffix - $index', () {
         controller = InputController.fromValue(
-            calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsHr(), 'DD. MM. YYYY.', 2000, old,)
-          ..value = value;
+          calendarController,
+          TestScaffold.blueScreen.datePickerStyle,
+          FLocalizationsHr(),
+          'DD. MM. YYYY.',
+          2000,
+          old,
+        )..value = value;
         expect(controller.value, expected);
       });
     }
@@ -184,8 +199,13 @@ void main() {
     ].indexed) {
       test('forward - $index', () {
         controller = InputController.fromValue(
-            calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsHr(), '', 2000, value,)
-          ..traverse(forward: true);
+          calendarController,
+          TestScaffold.blueScreen.datePickerStyle,
+          FLocalizationsHr(),
+          '',
+          2000,
+          value,
+        )..traverse(forward: true);
         expect(controller.value, expected);
       });
     }
@@ -210,8 +230,13 @@ void main() {
     ].indexed) {
       test('backward - $index', () {
         controller = InputController.fromValue(
-            calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsHr(), '', 2000, value,)
-          ..traverse(forward: false);
+          calendarController,
+          TestScaffold.blueScreen.datePickerStyle,
+          FLocalizationsHr(),
+          '',
+          2000,
+          value,
+        )..traverse(forward: false);
         expect(controller.value, expected);
       });
     }
@@ -251,8 +276,13 @@ void main() {
   ].indexed) {
     test('adjust - $index', () {
       controller = InputController.fromValue(
-          calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsHr(), '', 2000, value,)
-        ..adjust(adjustment);
+        calendarController,
+        TestScaffold.blueScreen.datePickerStyle,
+        FLocalizationsHr(),
+        '',
+        2000,
+        value,
+      )..adjust(adjustment);
       expect(controller.value, expectedText);
       expect(calendarController.value, expectedDate);
     });
@@ -307,7 +337,13 @@ void main() {
     ].indexed) {
       test('single separator - $index', () {
         controller = InputController.fromValue(
-            calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsEnSg(), '', 2000, null,);
+          calendarController,
+          TestScaffold.blueScreen.datePickerStyle,
+          FLocalizationsEnSg(),
+          '',
+          2000,
+          null,
+        );
         expect(controller.selectParts(value), expected);
       });
     }
@@ -364,7 +400,13 @@ void main() {
     ].indexed) {
       test('multiple separator - $index', () {
         controller = InputController.fromValue(
-            calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsHr(), '', 2000, null,);
+          calendarController,
+          TestScaffold.blueScreen.datePickerStyle,
+          FLocalizationsHr(),
+          '',
+          2000,
+          null,
+        );
         expect(controller.selectParts(value), expected);
       });
     }
@@ -407,7 +449,13 @@ void main() {
     ].indexed) {
       test('suffix - $index', () {
         controller = InputController.fromValue(
-            calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsBg(), '', 2000, null,);
+          calendarController,
+          TestScaffold.blueScreen.datePickerStyle,
+          FLocalizationsBg(),
+          '',
+          2000,
+          null,
+        );
         expect(controller.selectParts(value), expected);
       });
     }
@@ -420,7 +468,13 @@ void main() {
     test('update(...) - $index', () {
       calendarController = FCalendarController.date(initialSelection: initial);
       controller = InputController.fromValue(
-          calendarController, TestScaffold.blueScreen.datePickerStyle, FLocalizationsEnSg(), 'DD/MM/YYYY', 2000, null,);
+        calendarController,
+        TestScaffold.blueScreen.datePickerStyle,
+        FLocalizationsEnSg(),
+        'DD/MM/YYYY',
+        2000,
+        null,
+      );
       calendarController.value = value;
 
       expect(controller.value, expected);
