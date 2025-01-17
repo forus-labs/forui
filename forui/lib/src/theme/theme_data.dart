@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:forui/forui.dart';
@@ -212,6 +213,87 @@ final class FThemeData with Diagnosticable {
       textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tileGroupStyle: FTileGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+    );
+  }
+
+  @experimental
+  ThemeData toMaterialTheme() {
+    final textTheme = TextTheme(
+      displayLarge: typography.xl6,
+      displayMedium: typography.xl5,
+      displaySmall: typography.xl4,
+      headlineLarge: typography.xl5,
+      headlineMedium: typography.xl4,
+      headlineSmall: typography.xl3,
+      titleLarge: typography.xl,
+      titleMedium: typography.lg,
+      titleSmall: typography.base,
+      labelLarge: typography.lg,
+      labelMedium: typography.base,
+      labelSmall: typography.sm,
+      bodyLarge: typography.lg,
+      bodyMedium: typography.base,
+      bodySmall: typography.sm,
+    )..apply(
+        fontFamily: typography.defaultFontFamily,
+        bodyColor: colorScheme.foreground,
+        displayColor: colorScheme.foreground,
+      );
+
+    return ThemeData(
+      colorScheme: ColorScheme(
+        brightness: colorScheme.brightness,
+        primary: colorScheme.primary,
+        onPrimary: colorScheme.primaryForeground,
+        secondary: colorScheme.secondary,
+        onSecondary: colorScheme.secondaryForeground,
+        error: colorScheme.error,
+        onError: colorScheme.errorForeground,
+        surface: colorScheme.background,
+        onSurface: colorScheme.foreground,
+      ),
+      fontFamily: typography.defaultFontFamily,
+      typography: Typography(
+        black: textTheme,
+        white: textTheme,
+        englishLike: textTheme,
+        dense: textTheme,
+        tall: textTheme,
+      ),
+      textTheme: textTheme,
+      useMaterial3: true,
+      cardTheme: CardTheme(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: style.borderRadius,
+          side: BorderSide(width: style.borderWidth, color: colorScheme.border),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: style.borderRadius,
+          borderSide: BorderSide(width: style.borderWidth),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        ),
+      ),
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+      ),
     );
   }
 

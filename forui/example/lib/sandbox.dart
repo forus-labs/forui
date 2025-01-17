@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:forui/forui.dart';
-
-enum Notification { all, direct, nothing }
 
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
@@ -11,135 +8,161 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
-class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late FCalendarController<DateTime?> calendarController = FCalendarController.date();
+class _SandboxState extends State<Sandbox> {
+  bool switchValue = false;
+  double sliderValue = 0.5;
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    return const FTextField(
+      label: Text('Forui TextField'),
+      hint: 'Enter text here',
+    );
+
+    // return ListView(
+    //   children: [
+    //     // Material Widgets Section
+    //     const Text(
+    //       'Material Widgets',
+    //       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    //     ),
+    //     const SizedBox(height: 16),
+
+    //     // Buttons
+    //     Wrap(
+    //       spacing: 8,
+    //       children: [
+    //         ElevatedButton(
+    //           onPressed: () {},
+    //           child: const Text('Elevated Button'),
+    //         ),
+    //         FilledButton(
+    //           onPressed: () {},
+    //           child: const Text('Filled Button'),
+    //         ),
+    //         OutlinedButton(
+    //           onPressed: () {},
+    //           child: const Text('Outlined Button'),
+    //         ),
+    //         TextButton(
+    //           onPressed: () {},
+    //           child: const Text('Text Button'),
+    //         ),
+    //       ],
+    //     ),
+    //     const SizedBox(height: 16),
+
+    //     // Input Fields
+    //     const TextField(
+    //       decoration: InputDecoration(
+    //         labelText: 'Material TextField',
+    //         hintText: 'Enter text here',
+    //       ),
+    //     ),
+    //     const SizedBox(height: 16),
+
+    //     // Cards
+    //     Card(
+    //       child: Padding(
+    //         padding: const EdgeInsets.all(16),
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             const Text('Material Card'),
+    //             const SizedBox(height: 8),
+    //             const Text('This is content inside a Material card'),
+    //             const SizedBox(height: 8),
+    //             Row(
+    //               children: [
+    //                 TextButton(
+    //                   onPressed: () {},
+    //                   child: const Text('Action 1'),
+    //                 ),
+    //                 TextButton(
+    //                   onPressed: () {},
+    //                   child: const Text('Action 2'),
+    //                 ),
+    //               ],
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //     const SizedBox(height: 16),
+
+    //     // Selection Controls
+    //     Row(
+    //       children: [
+    //         Switch(
+    //           value: switchValue,
+    //           onChanged: (value) => setState(() => switchValue = value),
+    //         ),
+    //         const SizedBox(width: 16),
+    //         Checkbox(
+    //           value: switchValue,
+    //           onChanged: (value) => setState(() => switchValue = value ?? false),
+    //         ),
+    //         const SizedBox(width: 16),
+    //         Radio(
+    //           value: true,
+    //           groupValue: switchValue,
+    //           onChanged: (value) => setState(() => switchValue = value ?? false),
+    //         ),
+    //       ],
+    //     ),
+    //     const SizedBox(height: 16),
+
+    //     // Slider
+    //     Slider(
+    //       value: sliderValue,
+    //       onChanged: (value) => setState(() => sliderValue = value),
+    //     ),
+    //     const SizedBox(height: 32),
+
+    //     // Forui Widgets Section
+    //     const Text('Forui Widgets', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+    //     const SizedBox(height: 16),
+
+    //     // Forui Button
+    //     FButton(
+    //       label: const Text('Forui Button'),
+    //       onPress: () {},
+    //     ),
+    //     const SizedBox(height: 16),
+
+    //     // Forui TextField
+    //     // const FTextField(
+    //     //   label: Text('Forui TextField'),
+    //     //   hint: 'Enter text here',
+    //     // ),
+    //     // const SizedBox(height: 16),
+
+    //     // Forui Card
+    //     FCard(
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: [
+    //           const Text('Forui Card'),
+    //           const SizedBox(height: 8),
+    //           const Text('This is content inside a Forui card'),
+    //           const SizedBox(height: 8),
+    //           Row(
+    //             children: [
+    //               FButton(
+    //                 label: const Text('Action 1'),
+    //                 onPress: () {},
+    //               ),
+    //               const SizedBox(width: 8),
+    //               FButton(
+    //                 label: const Text('Action 2'),
+    //                 onPress: () {},
+    //               ),
+    //             ],
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
-
-  @override
-  Widget build(BuildContext context) => Form(
-        key: _formKey,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const FTextField(
-              label: Text('Username'),
-              hint: 'JaneDoe',
-              description: Text('Please enter your username.'),
-              maxLines: 1,
-            ),
-            const SizedBox(height: 20),
-            FBreadcrumb(
-              children: [
-                FBreadcrumbItem(onPress: () {}, child: const Text('Home')),
-                FBreadcrumbItem.collapsed(
-                  menu: [
-                    FTileGroup(children: [
-                      FTile(
-                        title: const Text('Documentation'),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        title: const Text('Themes'),
-                        onPress: () {},
-                      ),
-                    ]),
-                  ],
-                ),
-                FBreadcrumbItem(onPress: () {}, child: const Text('Categories')),
-                FBreadcrumbItem(onPress: () {}, child: const Text('Search')),
-                FBreadcrumbItem(onPress: () {}, current: true, child: const Text('Results')),
-              ],
-            ),
-            const SizedBox(height: 20),
-            const FLabel(
-              axis: Axis.horizontal,
-              label: Text('Label'),
-              description: Text('Description'),
-              error: Text('Error'),
-              state: FLabelState.error,
-              child: SizedBox(
-                width: 200,
-                height: 20,
-                child: Placeholder(),
-              ),
-            ),
-          ],
-        ),
-      );
-
-  @override
-  void dispose() {
-    calendarController.dispose();
-    super.dispose();
-  }
-}
-
-class AForm extends StatelessWidget {
-  final FLayout side;
-
-  const AForm({required this.side, super.key});
-
-  @override
-  Widget build(BuildContext context) => Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: context.theme.colorScheme.background,
-          border: side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colorScheme.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.colorScheme.border)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Account',
-                  style: context.theme.typography.xl2.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: context.theme.colorScheme.foreground,
-                    height: 1.5,
-                  ),
-                ),
-                Text(
-                  'Make changes to your account here. Click save when you are done.',
-                  style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colorScheme.mutedForeground,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: 450,
-                  child: Column(
-                    children: [
-                      const FTextField(
-                        label: Text('Name'),
-                        hint: 'John Renalo',
-                      ),
-                      const SizedBox(height: 10),
-                      const FTextField(
-                        label: Text('Email'),
-                        hint: 'john@doe.com',
-                      ),
-                      const SizedBox(height: 16),
-                      FButton(
-                        label: const Text('Save'),
-                        onPress: () => Navigator.of(context).pop(),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
 }
