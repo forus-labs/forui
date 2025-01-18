@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
@@ -45,9 +47,9 @@ class InputDatePickerPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FDatePicker.input(
-    label: const Text('Appointment Date'),
-    description: const Text('Select a date for your appointment'),
-  );
+        label: const Text('Appointment Date'),
+        description: const Text('Select a date for your appointment'),
+      );
 }
 
 @RoutePage()
@@ -101,7 +103,6 @@ class FormDatePickerPage extends StatefulSample {
   State<FormDatePickerPage> createState() => _FormDatePickerPageState();
 }
 
-
 class _FormDatePickerPageState extends StatefulSampleState<FormDatePickerPage> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late final FDatePickerController _startDateController;
@@ -142,37 +143,37 @@ class _FormDatePickerPageState extends StatefulSampleState<FormDatePickerPage> w
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(30.0),
-    child: Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          FDatePicker(
-            controller: _startDateController,
-            label: const Text('Start Date'),
-            description: const Text('Select a start date'),
-            autovalidateMode: AutovalidateMode.disabled,
+        padding: const EdgeInsets.all(30.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              FDatePicker(
+                controller: _startDateController,
+                label: const Text('Start Date'),
+                description: const Text('Select a start date'),
+                autovalidateMode: AutovalidateMode.disabled,
+              ),
+              const SizedBox(height: 20),
+              FDatePicker(
+                controller: _endDateController,
+                label: const Text('End Date'),
+                description: const Text('Select an end date'),
+                autovalidateMode: AutovalidateMode.disabled,
+              ),
+              const SizedBox(height: 25),
+              FButton(
+                label: const Text('Submit'),
+                onPress: () {
+                  if (_formKey.currentState!.validate()) {
+                    // Form is valid, process the dates
+                  }
+                },
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          FDatePicker(
-            controller: _endDateController,
-            label: const Text('End Date'),
-            description: const Text('Select an end date'),
-            autovalidateMode: AutovalidateMode.disabled,
-          ),
-          const SizedBox(height: 25),
-          FButton(
-            label: const Text('Submit'),
-            onPress: () {
-              if (_formKey.currentState!.validate()) {
-                // Form is valid, process the dates
-              }
-            },
-          ),
-        ],
-      ),
-    ),
-  );
+        ),
+      );
 
   @override
   void dispose() {
