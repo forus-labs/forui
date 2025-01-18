@@ -33,7 +33,7 @@ class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
         details: ListenableBuilder(
           listenable: controller,
           builder: (context, _) => Text(
-            switch (controller.values.firstOrNull) {
+            switch (controller.value.firstOrNull) {
               Notification.all => 'All',
               Notification.direct => 'Direct Messages',
               _ => 'None',
@@ -81,7 +81,7 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
         details: ListenableBuilder(
           listenable: controller,
           builder: (context, _) => Text(
-            switch (controller.values.firstOrNull) {
+            switch (controller.value.firstOrNull) {
               Notification.all => 'All',
               Notification.direct => 'Direct Messages',
               Notification.limitedTime => 'Limited Time',
@@ -174,7 +174,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
               details: ListenableBuilder(
                 listenable: controller,
                 builder: (context, _) => Text(
-                  switch (controller.values.firstOrNull) {
+                  switch (controller.value.firstOrNull) {
                     Notification.all => 'All',
                     Notification.direct => 'Direct Messages',
                     _ => 'None',

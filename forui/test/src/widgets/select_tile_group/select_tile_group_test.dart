@@ -27,12 +27,12 @@ void main() {
           ),
         ),
       );
-      expect(controller.values, <int>{});
+      expect(controller.value, <int>{});
 
       await tester.tap(find.text('2'));
       await tester.pumpAndSettle();
 
-      expect(controller.values, {2});
+      expect(controller.value, {2});
     });
 
     testWidgets('press select tile with suffix check icon', (tester) async {
@@ -55,12 +55,12 @@ void main() {
           ),
         ),
       );
-      expect(controller.values, <int>{});
+      expect(controller.value, <int>{});
 
       await tester.tap(find.text('2'));
       await tester.pumpAndSettle();
 
-      expect(controller.values, {2});
+      expect(controller.value, {2});
     });
 
     testWidgets('press already selected tile', (tester) async {
@@ -83,12 +83,12 @@ void main() {
           ),
         ),
       );
-      expect(controller.values, {2});
+      expect(controller.value, {2});
 
       await tester.tap(find.text('2'));
       await tester.pumpAndSettle();
 
-      expect(controller.values, {2});
+      expect(controller.value, {2});
     });
 
     testWidgets('press tile hides error', (tester) async {
@@ -115,13 +115,13 @@ void main() {
       );
 
       expect(find.text('error message'), findsOneWidget);
-      expect(controller.values, <int>{});
+      expect(controller.value, <int>{});
 
       await tester.tap(find.text('2'));
       await tester.pumpAndSettle();
 
       expect(find.text('error message'), findsNothing);
-      expect(controller.values, {2});
+      expect(controller.value, {2});
     });
 
     testWidgets('press nested select tile', (tester) async {
@@ -158,12 +158,12 @@ void main() {
           ),
         ),
       );
-      expect(controller.values, <int>{});
+      expect(controller.value, <int>{});
 
       await tester.tap(find.text('2'));
       await tester.pumpAndSettle();
 
-      expect(controller.values, {2});
+      expect(controller.value, {2});
     });
   });
 }
