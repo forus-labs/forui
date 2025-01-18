@@ -64,11 +64,9 @@ void main() {
       });
 
       test('removing non-existent listener does nothing', () {
-        int? lastValue;
-        void listener(int value) => lastValue = value;
+        void listener(int value) {}
 
-        // Should not throw
-        notifier.removeValueListener(listener);
+        expect(() => notifier.removeValueListener(listener), returnsNormally);
       });
 
       test('multiple listeners receive updates independently', () {
