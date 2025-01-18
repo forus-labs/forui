@@ -41,7 +41,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/placeholder.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/placeholder.png'),
       );
     });
 
@@ -57,7 +57,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/no-icon.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/no-icon.png'),
       );
     });
 
@@ -72,7 +72,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/hr-locale.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/hr-locale.png'),
       );
     });
 
@@ -89,7 +89,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/disabled.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/disabled.png'),
       );
     });
 
@@ -103,7 +103,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/error.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/error.png'),
       );
     });
 
@@ -121,7 +121,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/unsupported-locale.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/unsupported-locale.png'),
       );
     });
 
@@ -141,7 +141,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/mobile-focused.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/mobile-focused.png'),
       );
     });
 
@@ -163,7 +163,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input/desktop-unfocused.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field/desktop-unfocused.png'),
       );
 
       debugDefaultTargetPlatformOverride = null;

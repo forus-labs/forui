@@ -1,6 +1,6 @@
 part of '../date_picker.dart';
 
-class _InputDatePicker extends FDatePicker {
+class _FieldDatePicker extends FDatePicker {
   final TextInputAction? textInputAction;
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
@@ -13,7 +13,7 @@ class _InputDatePicker extends FDatePicker {
   final int baselineInputYear;
   final FDatePickerCalendarProperties? calendar;
 
-  const _InputDatePicker({
+  const _FieldDatePicker({
     this.textInputAction,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -42,7 +42,7 @@ class _InputDatePicker extends FDatePicker {
   }) : super._();
 
   @override
-  State<StatefulWidget> createState() => _InputDatePickerState();
+  State<StatefulWidget> createState() => _FieldDatePickerState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -62,7 +62,7 @@ class _InputDatePicker extends FDatePicker {
   }
 }
 
-class _InputDatePickerState extends _DatePickerState<_InputDatePicker> {
+class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.datePickerStyle;
@@ -84,7 +84,7 @@ class _InputDatePickerState extends _DatePickerState<_InputDatePicker> {
             );
     }
 
-    Widget input = Input(
+    Widget input = DateField(
       calendarController: _controller._calendar,
       onTap: widget.calendar == null ? null : _controller.calendar.show,
       style: style,

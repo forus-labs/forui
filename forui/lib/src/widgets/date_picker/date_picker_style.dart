@@ -5,8 +5,8 @@ import 'package:meta/meta.dart';
 
 /// A date picker's style.
 class FDatePickerStyle with Diagnosticable {
-  /// The date picker's input style.
-  final FTextFieldStyle inputStyle;
+  /// The date picker's textfield style.
+  final FTextFieldStyle textFieldStyle;
 
   /// The date picker calendar's popover style.
   final FPopoverStyle popoverStyle;
@@ -22,7 +22,7 @@ class FDatePickerStyle with Diagnosticable {
 
   /// Creates a [FDatePickerStyle].
   const FDatePickerStyle({
-    required this.inputStyle,
+    required this.textFieldStyle,
     required this.popoverStyle,
     required this.calendarStyle,
     required this.iconStyle,
@@ -35,7 +35,7 @@ class FDatePickerStyle with Diagnosticable {
     required FTypography typography,
     required FStyle style,
   }) : this(
-          inputStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+          textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
           calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
@@ -45,14 +45,14 @@ class FDatePickerStyle with Diagnosticable {
   /// Returns a copy of this [FDatePickerStyle] with the given fields replaced with the new values.
   @useResult
   FDatePickerStyle copyWith({
-    FTextFieldStyle? inputStyle,
+    FTextFieldStyle? textFieldStyle,
     FPopoverStyle? popoverStyle,
     FCalendarStyle? calendarStyle,
     FIconStyle? iconStyle,
     FFocusedOutlineStyle? iconFocusedOutlineStyle,
   }) =>
       FDatePickerStyle(
-        inputStyle: inputStyle ?? this.inputStyle,
+        textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         popoverStyle: popoverStyle ?? this.popoverStyle,
         calendarStyle: calendarStyle ?? this.calendarStyle,
         iconStyle: iconStyle ?? this.iconStyle,
@@ -63,7 +63,7 @@ class FDatePickerStyle with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('inputStyle', inputStyle))
+      ..add(DiagnosticsProperty('textfieldStyle', textFieldStyle))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle))
       ..add(DiagnosticsProperty('calendarStyle', calendarStyle))
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
@@ -75,7 +75,7 @@ class FDatePickerStyle with Diagnosticable {
       identical(this, other) ||
       other is FDatePickerStyle &&
           runtimeType == other.runtimeType &&
-          inputStyle == other.inputStyle &&
+          textFieldStyle == other.textFieldStyle &&
           popoverStyle == other.popoverStyle &&
           calendarStyle == other.calendarStyle &&
           iconStyle == other.iconStyle &&
@@ -83,7 +83,7 @@ class FDatePickerStyle with Diagnosticable {
 
   @override
   int get hashCode =>
-      inputStyle.hashCode ^
+      textFieldStyle.hashCode ^
       popoverStyle.hashCode ^
       calendarStyle.hashCode ^
       iconStyle.hashCode ^

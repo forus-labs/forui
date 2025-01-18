@@ -36,7 +36,10 @@ The input field does not support the following locales that use non-western nume
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        const FDatePicker();
+        const FDatePicker(
+          label: Text('Appointment Date'),
+          description: Text('Select a date for your appointment'),
+        );
         ```
     </Tabs.Tab>
 </Tabs>
@@ -134,7 +137,10 @@ FDatePicker.input(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        const FDatePicker.calendar();
+        const FDatePicker.calendar(
+          label: Text('Appointment Date'),
+          description: Text('Select a date for your appointment'),
+        );
         ```
     </Tabs.Tab>
 </Tabs>
@@ -147,7 +153,10 @@ FDatePicker.input(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        FDatePicker.input();
+        FDatePicker.input(
+          label: Text('Appointment Date'),
+          description: Text('Select a date for your appointment'),
+        );
         ```
     </Tabs.Tab>
 </Tabs>
@@ -253,15 +262,17 @@ FDatePicker.input(
                   FDatePicker(
                     controller: _startDateController,
                     label: const Text('Start Date'),
+                    description: const Text('Select a start date'),
                     autovalidateMode: AutovalidateMode.disabled,
                   ),
                   const SizedBox(height: 20),
                   FDatePicker(
                     controller: _endDateController,
                     label: const Text('End Date'),
+                    description: const Text('Select an end date'),
                     autovalidateMode: AutovalidateMode.disabled,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 25),
                   FButton(
                     label: const Text('Submit'),
                     onPress: () {

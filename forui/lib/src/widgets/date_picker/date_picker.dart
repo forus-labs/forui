@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_picker/input/input.dart';
+import 'package:forui/src/widgets/date_picker/field/field.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 part 'calendar/calendar_date_picker.dart';
 
-part 'input/input_date_picker.dart';
+part 'field/field_date_picker.dart';
 
 /// The date picker's controller.
 class FDatePickerController implements FValueNotifier<DateTime?> {
@@ -252,7 +252,7 @@ abstract class FDatePicker extends StatefulWidget {
     String? forceErrorText,
     Widget Function(BuildContext, String) errorBuilder,
     Key? key,
-  }) = _InputDatePicker;
+  }) = _FieldDatePicker;
 
   /// Creates a [FDatePicker] that allows a date to be selected using only a calendar.
   ///
@@ -390,7 +390,7 @@ abstract class FDatePicker extends StatefulWidget {
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Key? key,
   }) =>
-      _InputDatePicker(
+      _FieldDatePicker(
         controller: controller,
         style: style,
         autofocus: autofocus,

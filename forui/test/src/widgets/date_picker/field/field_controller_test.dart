@@ -5,20 +5,20 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/localizations/localizations_hr.dart';
-import 'package:forui/src/widgets/date_picker/input/input_controller.dart';
+import 'package:forui/src/widgets/date_picker/field/field_controller.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import '../../../test_scaffold.dart';
 
 void main() {
   late FCalendarController<DateTime?> calendarController;
-  late InputController controller;
+  late FieldController controller;
 
   setUpAll(initializeDateFormatting);
 
   setUp(() {
     calendarController = FCalendarController.date();
-    controller = InputController.fromValue(
+    controller = FieldController.fromValue(
       calendarController,
       TestScaffold.blueScreen.datePickerStyle,
       FLocalizationsEnSg(),
@@ -34,9 +34,9 @@ void main() {
     (FLocalizationsEnSg(), DateTime(2024, 1, 2), '02/01/2024'),
     (FLocalizationsEnIe(), DateTime(2024, 1, 2), '2/1/2024'),
   ].indexed) {
-    test('DateFieldController.() - $index', () {
+    test('FieldController.() - $index', () {
       expect(
-        InputController(
+        FieldController(
           FCalendarController.date(initialSelection: initial),
           TestScaffold.blueScreen.datePickerStyle,
           localizations,
@@ -104,7 +104,7 @@ void main() {
       ),
     ].indexed) {
       test('single separator - $index', () {
-        controller = InputController.fromValue(
+        controller = FieldController.fromValue(
           calendarController,
           TestScaffold.blueScreen.datePickerStyle,
           FLocalizationsEnSg(),
@@ -165,7 +165,7 @@ void main() {
       ),
     ].indexed) {
       test('multiple separator & suffix - $index', () {
-        controller = InputController.fromValue(
+        controller = FieldController.fromValue(
           calendarController,
           TestScaffold.blueScreen.datePickerStyle,
           FLocalizationsHr(),
@@ -198,7 +198,7 @@ void main() {
       ),
     ].indexed) {
       test('forward - $index', () {
-        controller = InputController.fromValue(
+        controller = FieldController.fromValue(
           calendarController,
           TestScaffold.blueScreen.datePickerStyle,
           FLocalizationsHr(),
@@ -229,7 +229,7 @@ void main() {
       ),
     ].indexed) {
       test('backward - $index', () {
-        controller = InputController.fromValue(
+        controller = FieldController.fromValue(
           calendarController,
           TestScaffold.blueScreen.datePickerStyle,
           FLocalizationsHr(),
@@ -275,7 +275,7 @@ void main() {
     ),
   ].indexed) {
     test('adjust - $index', () {
-      controller = InputController.fromValue(
+      controller = FieldController.fromValue(
         calendarController,
         TestScaffold.blueScreen.datePickerStyle,
         FLocalizationsHr(),
@@ -336,7 +336,7 @@ void main() {
       ),
     ].indexed) {
       test('single separator - $index', () {
-        controller = InputController.fromValue(
+        controller = FieldController.fromValue(
           calendarController,
           TestScaffold.blueScreen.datePickerStyle,
           FLocalizationsEnSg(),
@@ -399,7 +399,7 @@ void main() {
       ),
     ].indexed) {
       test('multiple separator - $index', () {
-        controller = InputController.fromValue(
+        controller = FieldController.fromValue(
           calendarController,
           TestScaffold.blueScreen.datePickerStyle,
           FLocalizationsHr(),
@@ -448,7 +448,7 @@ void main() {
       ),
     ].indexed) {
       test('suffix - $index', () {
-        controller = InputController.fromValue(
+        controller = FieldController.fromValue(
           calendarController,
           TestScaffold.blueScreen.datePickerStyle,
           FLocalizationsBg(),
@@ -467,7 +467,7 @@ void main() {
   ].indexed) {
     test('update(...) - $index', () {
       calendarController = FCalendarController.date(initialSelection: initial);
-      controller = InputController.fromValue(
+      controller = FieldController.fromValue(
         calendarController,
         TestScaffold.blueScreen.datePickerStyle,
         FLocalizationsEnSg(),

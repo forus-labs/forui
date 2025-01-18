@@ -44,7 +44,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/placeholder.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/placeholder.png'),
       );
     });
 
@@ -60,7 +60,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/no-icon.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/no-icon.png'),
       );
     });
 
@@ -84,7 +84,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/hr-locale.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/hr-locale.png'),
       );
     });
 
@@ -108,7 +108,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/show-calendar.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/show-calendar.png'),
       );
     });
 
@@ -135,11 +135,11 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/calendar-updates-input.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/calendar-updates-field.png'),
       );
     });
 
-    testWidgets('${theme.name} input', (tester) async {
+    testWidgets('${theme.name} field', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
@@ -162,7 +162,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/input-updates-calendar.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/field-updates-calendar.png'),
       );
     });
 
@@ -190,7 +190,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/no-auto-hide.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/no-auto-hide.png'),
       );
     });
 
@@ -207,7 +207,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/disabled.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/disabled.png'),
       );
     });
 
@@ -221,7 +221,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/error.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/error.png'),
       );
     });
 
@@ -242,7 +242,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/mobile-focused.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/mobile-focused.png'),
       );
     });
 
@@ -265,7 +265,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/input-calendar/desktop-unfocused.png'),
+        matchesGoldenFile('date-picker/${theme.name}/field-calendar/desktop-unfocused.png'),
       );
 
       debugDefaultTargetPlatformOverride = null;

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_picker/input/parser.dart';
+import 'package:forui/src/widgets/date_picker/field/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
@@ -19,7 +19,7 @@ TextEditingValue _last(TextEditingValue value, int _, int last, int end, int sep
     value.copyWith(selection: TextSelection(baseOffset: last + separator, extentOffset: end));
 
 @internal
-class InputController extends TextEditingController {
+class FieldController extends TextEditingController {
   final FCalendarController<DateTime?> controller;
   final FDatePickerStyle style;
   final WidgetStatesController states;
@@ -30,7 +30,7 @@ class InputController extends TextEditingController {
   final RegExp _suffix;
   bool _mutating = false;
 
-  factory InputController(
+  factory FieldController(
     FCalendarController<DateTime?> controller,
     FDatePickerStyle style,
     FLocalizations localizations,
@@ -40,7 +40,7 @@ class InputController extends TextEditingController {
     final placeholder =
         format.pattern!.replaceAll(RegExp('d{1,2}'), 'DD').replaceAll(RegExp('M{1,2}'), 'MM').replaceAll('y', 'YYYY');
     final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
-    return InputController.fromValue(
+    return FieldController.fromValue(
       controller,
       style,
       localizations,
@@ -51,7 +51,7 @@ class InputController extends TextEditingController {
   }
 
   @visibleForTesting
-  InputController.fromValue(
+  FieldController.fromValue(
     this.controller,
     this.style,
     this._localizations,
@@ -194,19 +194,19 @@ class InputController extends TextEditingController {
   @override
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
     if (text == placeholder) {
-      final inputStyle = this.style.inputStyle;
+      final textFieldStyle = this.style.textFieldStyle;
       style = switch (states.value) {
         // Disabled styles
         final values when values.containsAll(const {WidgetState.disabled, WidgetState.focused}) =>
-          inputStyle.disabledStyle.contentTextStyle,
-        final values when values.contains(WidgetState.disabled) => inputStyle.disabledStyle.contentTextStyle,
+          textFieldStyle.disabledStyle.contentTextStyle,
+        final values when values.contains(WidgetState.disabled) => textFieldStyle.disabledStyle.contentTextStyle,
         // Error styles
         final values when values.containsAll(const {WidgetState.error, WidgetState.focused}) =>
-          inputStyle.errorStyle.contentTextStyle,
-        final values when values.contains(WidgetState.error) => inputStyle.errorStyle.contentTextStyle,
+          textFieldStyle.errorStyle.contentTextStyle,
+        final values when values.contains(WidgetState.error) => textFieldStyle.errorStyle.contentTextStyle,
         // Enabled styles
-        final values when values.containsAll({WidgetState.focused}) => inputStyle.enabledStyle.contentTextStyle,
-        _ => inputStyle.enabledStyle.hintTextStyle,
+        final values when values.containsAll({WidgetState.focused}) => textFieldStyle.enabledStyle.contentTextStyle,
+        _ => textFieldStyle.enabledStyle.hintTextStyle,
       };
     }
 

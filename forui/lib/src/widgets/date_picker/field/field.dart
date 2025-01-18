@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_picker/input/input_controller.dart';
+import 'package:forui/src/widgets/date_picker/field/field_controller.dart';
 import 'package:meta/meta.dart';
 
 /// The locales not supported in a date field. It is mostly composed of locales that use non-western digits.
@@ -11,7 +11,7 @@ import 'package:meta/meta.dart';
 const unsupportedLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
 
 @internal
-class Input extends StatefulWidget {
+class DateField extends StatefulWidget {
   final FCalendarController<DateTime?> calendarController;
   final FDatePickerStyle style;
   final Widget? label;
@@ -38,7 +38,7 @@ class Input extends StatefulWidget {
   final FLocalizations localizations;
   final int baselineYear;
 
-  const Input({
+  const DateField({
     required this.calendarController,
     required this.style,
     required this.label,
@@ -68,7 +68,7 @@ class Input extends StatefulWidget {
   });
 
   @override
-  State<Input> createState() => _InputState();
+  State<DateField> createState() => _DateFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -99,20 +99,20 @@ class Input extends StatefulWidget {
   }
 }
 
-class _InputState extends State<Input> {
+class _DateFieldState extends State<DateField> {
   late FLocalizations _localizations;
-  late InputController _controller;
+  late FieldController _controller;
 
   @override
   void initState() {
     super.initState();
     _localizations =
         unsupportedLocales.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
-    _controller = InputController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
+    _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
   }
 
   @override
-  void didUpdateWidget(covariant Input old) {
+  void didUpdateWidget(covariant DateField old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       _localizations =
@@ -121,7 +121,7 @@ class _InputState extends State<Input> {
 
     if (widget.calendarController != old.calendarController) {
       _controller.dispose();
-      _controller = InputController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
+      _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
     }
   }
 
@@ -142,7 +142,7 @@ class _InputState extends State<Input> {
         },
         child: FTextField(
           controller: _controller,
-          style: widget.style.inputStyle,
+          style: widget.style.textFieldStyle,
           statesController: _controller.states,
           autocorrect: false,
           // We cannot use TextInputType.number as it is does not contain a done button.

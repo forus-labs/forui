@@ -153,7 +153,7 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
       child: FTextField(
         focusNode: _focus,
         controller: _textController,
-        style: style.inputStyle,
+        style: style.textFieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
