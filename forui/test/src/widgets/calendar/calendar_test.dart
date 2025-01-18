@@ -7,6 +7,63 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FCalendar', () {
+    testWidgets('initial type changes', (tester) async {
+      final controller = FCalendarController.date(initialSelection: DateTime(2024, 7, 14));
+      final type = ValueNotifier(FCalendarPickerType.yearMonth);
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: ValueListenableBuilder(
+            valueListenable: type,
+            builder: (context, value, _) => FCalendar(
+              controller: controller,
+              start: DateTime(1900, 1, 8),
+              end: DateTime(2025, 7, 10),
+              initialType: value,
+              initialMonth: DateTime(2024, 7, 14),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('2023'), findsOneWidget);
+
+      type.value = FCalendarPickerType.day;
+      await tester.pumpAndSettle();
+
+      expect(find.text('2023'), findsOneWidget);
+    });
+
+    testWidgets('initial month changes', (tester) async {
+      final controller = FCalendarController.date(initialSelection: DateTime(2024, 7, 14));
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: ValueListenableBuilder(
+            valueListenable: controller,
+            builder: (context, value, _) => FCalendar(
+              controller: controller,
+              start: DateTime(1900, 1, 8),
+              end: DateTime(2025, 7, 10),
+              initialMonth: value,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('July 2024'), findsOneWidget);
+
+      controller.value = DateTime(2024, 12, 14);
+      await tester.pumpAndSettle();
+
+      expect(find.text('July 2024'), findsOneWidget);
+
+      await tester.tap(find.byType(FButton).first);
+      await tester.pumpAndSettle();
+
+      expect(find.text('June 2024'), findsOneWidget);
+    });
+
     group('previous button', () {
       testWidgets('navigates to previous page', (tester) async {
         await tester.pumpWidget(

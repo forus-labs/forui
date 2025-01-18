@@ -2,5 +2,9 @@
   "dialogLabel": "خبرې اترې",
   "sheetLabel": "Sheet",
   "barrierOnTapHint": "Close $modalRouteName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "نېټه وټاکئ",
+  "datePickerInvalidDateError": "ناسمه نېټه."
 }

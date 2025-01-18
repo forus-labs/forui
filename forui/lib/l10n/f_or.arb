@@ -2,5 +2,9 @@
   "dialogLabel": "ଡାୟଲଗ୍",
   "sheetLabel": "ସିଟ",
   "barrierOnTapHint": "$modalRouteContentNameକୁ ବନ୍ଦ କରନ୍ତୁ",
-  "barrierLabel": "ସ୍କ୍ରିମ"
+  "barrierLabel": "ସ୍କ୍ରିମ",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "ତାରିଖ ଚୟନ କରନ୍ତୁ",
+  "datePickerInvalidDateError": "ଅବୈଧ ତାରିଖ।"
 }

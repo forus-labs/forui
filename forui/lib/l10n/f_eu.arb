@@ -2,5 +2,9 @@
   "dialogLabel": "Leihoa",
   "sheetLabel": "orria",
   "barrierOnTapHint": "Itxi $modalRouteContentName",
-  "barrierLabel": "Barrera"
+  "barrierLabel": "Barrera",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Hautatu data",
+  "datePickerInvalidDateError": "Data baliogabea."
 }

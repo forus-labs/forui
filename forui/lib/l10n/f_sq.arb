@@ -2,5 +2,9 @@
   "dialogLabel": "Dialogu",
   "sheetLabel": "Fleta",
   "barrierOnTapHint": "Mbyll $modalRouteContentName",
-  "barrierLabel": "Kanavacë"
+  "barrierLabel": "Kanavacë",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Zgjidh datën",
+  "datePickerInvalidDateError": "Datë e pavlefshme."
 }

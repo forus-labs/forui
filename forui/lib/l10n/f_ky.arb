@@ -2,5 +2,9 @@
   "dialogLabel": "Диалог",
   "sheetLabel": "экран",
   "barrierOnTapHint": "$modalRouteContentName жабуу",
-  "barrierLabel": "Кенеп"
+  "barrierLabel": "Кенеп",
+  "shortDateSeparator": "-",
+  "shortDateSuffix": "",
+  "datePickerHint": "Күндү тандоо",
+  "datePickerInvalidDateError": "Жараксыз күн."
 }

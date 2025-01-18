@@ -16,6 +16,7 @@ export 'widgets/button.dart';
 export 'widgets/calendar.dart';
 export 'widgets/card.dart';
 export 'widgets/checkbox.dart';
+export 'widgets/date_picker.dart';
 export 'widgets/dialog.dart';
 export 'widgets/divider.dart';
 export 'widgets/header.dart';

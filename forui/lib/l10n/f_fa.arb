@@ -2,5 +2,9 @@
   "dialogLabel": "کادر گفتگو",
   "sheetLabel": "برگ",
   "barrierOnTapHint": "بستن $modalRouteContentName",
-  "barrierLabel": "رویه"
+  "barrierLabel": "رویه",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "انتخاب تاریخ",
+  "datePickerInvalidDateError": "تاریخ نامعتبر."
 }

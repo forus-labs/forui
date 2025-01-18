@@ -2,5 +2,9 @@
   "dialogLabel": "Dijaloški okvir",
   "sheetLabel": "tabela",
   "barrierOnTapHint": "Zatvori: $modalRouteContentName",
-  "barrierLabel": "Rubno"
+  "barrierLabel": "Rubno",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": ".",
+  "datePickerHint": "Odaberite datum",
+  "datePickerInvalidDateError": "Nevažeći datum."
 }

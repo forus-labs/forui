@@ -2,5 +2,9 @@
   "dialogLabel": "Ingxoxo",
   "sheetLabel": "Ishidi",
   "barrierOnTapHint": "Vala i-$modalRouteContentName",
-  "barrierLabel": "I-Scrim"
+  "barrierLabel": "I-Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Khetha usuku",
+  "datePickerInvalidDateError": "Usuku olungalungile."
 }

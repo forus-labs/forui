@@ -2,5 +2,9 @@
   "dialogLabel": "Párbeszédablak",
   "sheetLabel": "lap",
   "barrierOnTapHint": "$modalRouteContentName bezárása",
-  "barrierLabel": "Borítás"
+  "barrierLabel": "Borítás",
+  "shortDateSeparator": ". ",
+  "shortDateSuffix": ".",
+  "datePickerHint": "Válasszon dátumot",
+  "datePickerInvalidDateError": "Érvénytelen dátum."
 }

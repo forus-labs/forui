@@ -2,5 +2,9 @@
   "dialogLabel": "Dialog",
   "sheetLabel": "Sheet",
   "barrierOnTapHint": "Tutup $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Pilih tanggal",
+  "datePickerInvalidDateError": "Tanggal tidak valid."
 }

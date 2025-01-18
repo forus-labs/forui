@@ -2,26 +2,42 @@
 
 ### Additions
 
+* Add `FDatePicker`.
 * Add `FFormProperties`.
+* Add `FPopoverTagRegion`.
+* Add `FTextfield.onTap`.
+* Add `FTextfield.onTapOutside`.
 
 ### Changes
 
-* **Breaking:** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
-* **Breaking:** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
-* **Breaking:** Change `FPopover.controller(...)` to `FPopover.popoverController(...)`.
-* **Breaking:** Change `FPopover.tappable(...)` to `FPopover.automatic(...)`.
-* **Breaking:** Change `FPopover.followerAnchor` to `FPopover.popoverAnchor`.
-* **Breaking:** Change `FPopover.targetAnchor` to `FPopover.childAnchor`.
-* **Breaking:** Change `FPortal.followerAnchor` to `FPortal.portalAnchor`.
-* **Breaking:** Change `FPortal.targetAnchor` to `FPortal.childAnchor`.
-* **Breaking:** Change `FPortal.followerBuilder` to `FPortal.portalBuilder`.
-* **Breaking:** Change `FPortalFollowerShift` to `FPortalShift`.
-* **Breaking:** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
+* **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`.
+* **Breaking** Change `FPopoverStyle.shadow` to `FStyle.shadow`.
+  The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
+* **Breaking** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
+* **Breaking** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
+* **Breaking** Change `FPopover.controller(...)` to `FPopover.popoverController(...)`.
+* **Breaking** Change `FPopover.tappable(...)` to `FPopover.automatic(...)`.
+* **Breaking** Change `FPopover.followerAnchor` to `FPopover.popoverAnchor`.
+* **Breaking** Change `FPopover.targetAnchor` to `FPopover.childAnchor`.
+* **Breaking** Change `FPortal.followerAnchor` to `FPortal.portalAnchor`.
+* **Breaking** Change `FPortal.targetAnchor` to `FPortal.childAnchor`.
+* **Breaking** Change `FPortal.followerBuilder` to `FPortal.portalBuilder`.
+* **Breaking** Change `FPortalFollowerShift` to `FPortalShift`.
+* **Breaking** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
   unfortunately overlooked and did not remove.
 
 ### Fixes
 
-* Resolved an issue where `FTappable` remained in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
+* Fix `FCalendar` rebuilding whenever the given `initialType` and/or `initialMonth` changes.
+
+* Fix `FCalendar`'s day picker not updating when a new start and/or end date is given.
+
+* Fix `FPopover` not handling focus changes in popover properly.
+
+* Fix `FTappable` remaining in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
+
+* Fix `FTextField` ignoring `enableInteractiveSelection` parameter.
+
 
 ## 0.8.0
 

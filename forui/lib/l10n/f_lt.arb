@@ -2,5 +2,9 @@
   "dialogLabel": "Dialogo langas",
   "sheetLabel": "lapas",
   "barrierOnTapHint": "Uždaryti „$modalRouteContentName“",
-  "barrierLabel": "Užsklanda"
+  "barrierLabel": "Užsklanda",
+  "shortDateSeparator": "-",
+  "shortDateSuffix": "",
+  "datePickerHint": "Pasirinkti datą",
+  "datePickerInvalidDateError": "Netinkama data."
 }

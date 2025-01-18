@@ -2,5 +2,9 @@
   "dialogLabel": "مربع حوار",
   "sheetLabel": "بطاق ",
   "barrierOnTapHint": "إغلاق \"$modalRouteContentName\"",
-  "barrierLabel": "تمويه"
+  "barrierLabel": "تمويه",
+  "shortDateSeparator": "‏/",
+  "shortDateSuffix": "",
+  "datePickerHint": "اختر تاريخًا",
+  "datePickerInvalidDateError": "تاريخ غير صالح."
 }

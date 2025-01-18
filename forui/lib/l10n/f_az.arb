@@ -2,5 +2,9 @@
   "dialogLabel": "Dialoq",
   "sheetLabel": "Vərəq",
   "barrierOnTapHint": "Bağlayın: $modalRouteContentName",
-  "barrierLabel": "Kətan"
+  "barrierLabel": "Kətan",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Tarix seçin",
+  "datePickerInvalidDateError": "Yanlış tarix."
 }

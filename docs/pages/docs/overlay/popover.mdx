@@ -98,7 +98,7 @@ const FPopover(
   popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
-  hideOnTapOutside: true,
+  hideOnTapOutside: FHidePopoverRegion.anywhere,
   shift: FPortalShift.flip,
   popoverBuilder: (context) => const Placeholder(),
   child: const Placeholder(),
@@ -113,7 +113,7 @@ const FPopover.automatic(
   popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
-  hideOnTapOutside: true,
+  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   shift: FPortalShift.flip,
   popoverBuilder: (context) => const Placeholder(),
   child: const Placeholder(),
@@ -210,7 +210,7 @@ You can change how the popover is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='popover' query={{alignment: 'topCenter', hideOnTapOutside: 'false'}} height={500}/>
+    <Widget name='popover' query={{alignment: 'topCenter', hideOnTapOutside: 'none'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {18} copy
@@ -231,7 +231,7 @@ You can change how the popover is aligned to the button.
       @override
       Widget build(BuildContext context) => FPopover(
             controller: controller,
-            hideOnTapOutside: false,
+            hideOnTapOutside: FHidePopoverRegion.none,
             popoverBuilder: (context, style, _) => Padding(
               padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
               child: SizedBox(

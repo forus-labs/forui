@@ -40,7 +40,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        // locale: const Locale('ar'),
+        locale: const Locale('hr'),
         localizationsDelegates: FLocalizations.localizationsDelegates,
         supportedLocales: FLocalizations.supportedLocales,
         builder: (context, child) => FTheme(
@@ -52,7 +52,6 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
             title: const Text('Example'),
             actions: [
               FHeaderAction(
-                autofocus: true,
                 icon: FIcon(FAssets.icons.plus),
                 onPress: controller.toggle,
               ),

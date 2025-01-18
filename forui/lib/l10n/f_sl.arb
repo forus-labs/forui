@@ -2,5 +2,9 @@
   "dialogLabel": "Pogovorno okno",
   "sheetLabel": "Razdelek",
   "barrierOnTapHint": "Zapiranje »$modalRouteContentName«",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": ". ",
+  "shortDateSuffix": "",
+  "datePickerHint": "Izberite datum",
+  "datePickerInvalidDateError": "Neveljaven datum."
 }

@@ -2,5 +2,9 @@
   "dialogLabel": "డైలాగ్",
   "sheetLabel": "షీట్",
   "barrierOnTapHint": "$modalRouteContentName‌ను మూసివేయండి",
-  "barrierLabel": "స్క్రిమ్"
+  "barrierLabel": "స్క్రిమ్",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "తేదీని ఎంచుకోండి",
+  "datePickerInvalidDateError": "చెల్లని తేదీ."
 }

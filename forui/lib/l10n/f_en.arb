@@ -50,6 +50,40 @@
     }
   },
 
+
+  "shortDate": "{date}",
+  "@shortDate": {
+    "description": "The short date.",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      }
+    }
+  },
+
+  "shortDateSeparator": "",
+  "@shortDateSeparator": {
+    "description": "The short date's separator, typically /."
+  },
+
+  "shortDateSuffix": "",
+  "@shortDateSuffix": {
+    "description": "The short date's suffix, typically empty."
+  },
+
+
+  "datePickerHint": "Pick a date",
+  "@datePickerHint": {
+    "description": "The hint text for the calendar-only date picker."
+  },
+
+  "datePickerInvalidDateError": "Invalid date.",
+  "@datePickerInvalidDateError": {
+    "description": "Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format."
+  },
+
+
   "dialogLabel": "Dialog",
   "@dialogLabel": {
     "description": "The audio announcement made when a dialog is opened."

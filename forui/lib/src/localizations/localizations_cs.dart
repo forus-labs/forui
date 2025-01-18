@@ -49,6 +49,26 @@ class FLocalizationsCs extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Vyberte datum';
+
+  @override
+  String get datePickerInvalidDateError => 'Neplatné datum.';
+
+  @override
   String get dialogLabel => 'Dialogové okno';
 
   @override

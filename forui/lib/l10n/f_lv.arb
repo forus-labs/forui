@@ -2,5 +2,9 @@
   "dialogLabel": "Dialoglodziņš",
   "sheetLabel": "lapa",
   "barrierOnTapHint": "Aizvērt $modalRouteContentName",
-  "barrierLabel": "Pārklājums"
+  "barrierLabel": "Pārklājums",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": ".",
+  "datePickerHint": "Atlasīt datumu",
+  "datePickerInvalidDateError": "Nederīgs datums."
 }

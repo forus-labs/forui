@@ -13,16 +13,22 @@ mixin FFormFieldProperties<T> {
   /// The description.
   Widget? get description;
 
+  /// {@template forui.foundation.form_field_properties.errorBuilder}
   /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
+  /// {@endtemplate}
   Widget Function(BuildContext, String) get errorBuilder;
 
+  /// {@template forui.foundation.form_field_properties.enabled}
   /// Whether the form is able to receive user input.
   ///
-  /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the checkbox will be auto validated.
+  /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the form field will be auto validated.
   /// Likewise, if this field is false, the widget will not be validated regardless of [autovalidateMode].
+  /// {@endtemplate}
   bool get enabled;
 
+  /// {@template forui.foundation.form_field_properties.onSaved}
   /// An optional method to call with the final value when the form is saved via [FormState.save].
+  /// {@endtemplate}
   FormFieldSetter<T>? get onSaved;
 
   /// An optional method that validates an input. Returns an error string to
@@ -40,11 +46,12 @@ mixin FFormFieldProperties<T> {
   ///
   /// Defaults to [AutovalidateMode.disabled].
   ///
-  /// If [AutovalidateMode.onUserInteraction], this checkbox will only auto-validate after its content changes. If
+  /// If [AutovalidateMode.onUserInteraction], this form field will only auto-validate after its content changes. If
   /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
   /// auto-validation will be disabled.
   AutovalidateMode get autovalidateMode;
 
+  /// {@template forui.foundation.form_field_properties.forceErrorText}
   /// An optional property that forces the [FormFieldState] into an error state by directly setting the
   /// [FormFieldState.errorText] property without running the validator function.
   ///
@@ -53,5 +60,6 @@ mixin FFormFieldProperties<T> {
   ///
   /// When [validator] is provided, [forceErrorText] will override any error that it returns. [validator] will not be
   /// called unless [forceErrorText] is null.
+  /// {@endtemplate}
   String? get forceErrorText;
 }

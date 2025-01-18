@@ -49,6 +49,26 @@ class FLocalizationsFr extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Sélectionner une date';
+
+  @override
+  String get datePickerInvalidDateError => 'Date non valide.';
+
+  @override
   String get dialogLabel => 'Boîte de dialogue';
 
   @override
@@ -66,6 +86,18 @@ class FLocalizationsFr extends FLocalizations {
 /// The translations for French, as used in Canada (`fr_CA`).
 class FLocalizationsFrCa extends FLocalizationsFr {
   FLocalizationsFrCa() : super('fr_CA');
+
+  @override
+  String get shortDateSeparator => '-';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Sélectionner une date';
+
+  @override
+  String get datePickerInvalidDateError => 'Date non valide.';
 
   @override
   String get dialogLabel => 'Boîte de dialogue';

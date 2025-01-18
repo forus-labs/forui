@@ -2,5 +2,9 @@
   "dialogLabel": "ダイアログ",
   "sheetLabel": "シート",
   "barrierOnTapHint": "$modalRouteContentName を閉じる",
-  "barrierLabel": "スクリム"
+  "barrierLabel": "スクリム",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "日付を選択",
+  "datePickerInvalidDateError": "日付が無効です。"
 }

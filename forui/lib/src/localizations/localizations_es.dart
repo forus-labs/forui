@@ -49,6 +49,26 @@ class FLocalizationsEs extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Cuadro de diálogo';
 
   @override
@@ -66,6 +86,18 @@ class FLocalizationsEs extends FLocalizations {
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
 class FLocalizationsEs419 extends FLocalizationsEs {
   FLocalizationsEs419() : super('es_419');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -87,6 +119,18 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   FLocalizationsEsAr() : super('es_AR');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -104,6 +148,18 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Bolivia (`es_BO`).
 class FLocalizationsEsBo extends FLocalizationsEs {
   FLocalizationsEsBo() : super('es_BO');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -125,6 +181,18 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   FLocalizationsEsCl() : super('es_CL');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -142,6 +210,18 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Colombia (`es_CO`).
 class FLocalizationsEsCo extends FLocalizationsEs {
   FLocalizationsEsCo() : super('es_CO');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -163,6 +243,18 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   FLocalizationsEsCr() : super('es_CR');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -180,6 +272,18 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in the Dominican Republic (`es_DO`).
 class FLocalizationsEsDo extends FLocalizationsEs {
   FLocalizationsEsDo() : super('es_DO');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -201,6 +305,18 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   FLocalizationsEsEc() : super('es_EC');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -218,6 +334,18 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Guatemala (`es_GT`).
 class FLocalizationsEsGt extends FLocalizationsEs {
   FLocalizationsEsGt() : super('es_GT');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -239,6 +367,18 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   FLocalizationsEsHn() : super('es_HN');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -256,6 +396,18 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
 class FLocalizationsEsMx extends FLocalizationsEs {
   FLocalizationsEsMx() : super('es_MX');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -277,6 +429,18 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   FLocalizationsEsNi() : super('es_NI');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -294,6 +458,18 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Panama (`es_PA`).
 class FLocalizationsEsPa extends FLocalizationsEs {
   FLocalizationsEsPa() : super('es_PA');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -315,6 +491,18 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   FLocalizationsEsPe() : super('es_PE');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -332,6 +520,18 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Puerto Rico (`es_PR`).
 class FLocalizationsEsPr extends FLocalizationsEs {
   FLocalizationsEsPr() : super('es_PR');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -353,6 +553,18 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   FLocalizationsEsPy() : super('es_PY');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -370,6 +582,18 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in El Salvador (`es_SV`).
 class FLocalizationsEsSv extends FLocalizationsEs {
   FLocalizationsEsSv() : super('es_SV');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -391,6 +615,18 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   FLocalizationsEsUs() : super('es_US');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -410,6 +646,18 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   FLocalizationsEsUy() : super('es_UY');
 
   @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
+
+  @override
   String get dialogLabel => 'Diálogo';
 
   @override
@@ -427,6 +675,18 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Venezuela (`es_VE`).
 class FLocalizationsEsVe extends FLocalizationsEs {
   FLocalizationsEsVe() : super('es_VE');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Seleccionar fecha';
+
+  @override
+  String get datePickerInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';

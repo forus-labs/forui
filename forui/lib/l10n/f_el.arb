@@ -2,5 +2,9 @@
   "dialogLabel": "Παράθυρο διαλόγου",
   "sheetLabel": "Φύλλο",
   "barrierOnTapHint": "Κλείσιμο $modalRouteContentName",
-  "barrierLabel": "Επικάλυψη"
+  "barrierLabel": "Επικάλυψη",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Επιλέξτε ημερομηνία",
+  "datePickerInvalidDateError": "Μη έγκυρη ημερομηνία."
 }

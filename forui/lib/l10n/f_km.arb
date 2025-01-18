@@ -2,5 +2,9 @@
   "dialogLabel": "ប្រអប់",
   "sheetLabel": "សន្លឹក",
   "barrierOnTapHint": "បិទ $modalRouteContentName",
-  "barrierLabel": "ផ្ទាំងស្រអាប់"
+  "barrierLabel": "ផ្ទាំងស្រអាប់",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "ជ្រើសរើស​កាលបរិច្ឆេទ",
+  "datePickerInvalidDateError": "កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។"
 }

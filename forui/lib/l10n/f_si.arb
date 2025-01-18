@@ -2,5 +2,9 @@
   "dialogLabel": "සංවාදය",
   "sheetLabel": "පත්‍රය",
   "barrierOnTapHint": "$modalRouteContentName වසන්න",
-  "barrierLabel": "ස්ක්‍රිම්"
+  "barrierLabel": "ස්ක්‍රිම්",
+  "shortDateSeparator": "-",
+  "shortDateSuffix": "",
+  "datePickerHint": "දිනය තෝරන්න",
+  "datePickerInvalidDateError": "අවලංගු දිනයකි."
 }

@@ -2,5 +2,9 @@
   "dialogLabel": "Valintaikkuna",
   "sheetLabel": "arkki",
   "barrierOnTapHint": "Sulje $modalRouteContentName",
-  "barrierLabel": "Sermi"
+  "barrierLabel": "Sermi",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Valitse päivämäärä",
+  "datePickerInvalidDateError": "Virheellinen päivämäärä."
 }

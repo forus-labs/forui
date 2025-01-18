@@ -71,7 +71,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final bool hideOnTapOutside;
+  final FHidePopoverRegion hideOnTapOutside;
 
   /// {@macro forui.widgets.FPopover.directionPadding}
   final bool directionPadding;
@@ -130,7 +130,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.autoHide = false,
     this.label,
@@ -261,7 +261,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.autoHide = false,
     this.label,
@@ -381,7 +381,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
+      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))

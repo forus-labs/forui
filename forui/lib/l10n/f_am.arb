@@ -2,5 +2,9 @@
   "dialogLabel": "መገናኛ",
   "sheetLabel": "ሉህ",
   "barrierOnTapHint": "$modalRouteContentNameን ዝጋ",
-  "barrierLabel": "ገዳቢ"
+  "barrierLabel": "ገዳቢ",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "ቀን ይምረጡ",
+  "datePickerInvalidDateError": "ልክ ያልሆነ ቀን።"
 }

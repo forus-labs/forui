@@ -314,6 +314,36 @@ abstract class FLocalizations {
   /// **'{date}'**
   String day(DateTime date);
 
+  /// The short date.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}'**
+  String shortDate(DateTime date);
+
+  /// The short date's separator, typically /.
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get shortDateSeparator;
+
+  /// The short date's suffix, typically empty.
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get shortDateSuffix;
+
+  /// The hint text for the calendar-only date picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a date'**
+  String get datePickerHint;
+
+  /// Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid date.'**
+  String get datePickerInvalidDateError;
+
   /// The sheet's label.
   ///
   /// In en, this message translates to:

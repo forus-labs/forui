@@ -2,5 +2,9 @@
   "dialogLabel": "Boîte de dialogue",
   "sheetLabel": "sheet",
   "barrierOnTapHint": "Fermer $modalRouteContentName",
-  "barrierLabel": "Fond"
+  "barrierLabel": "Fond",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Sélectionner une date",
+  "datePickerInvalidDateError": "Date non valide."
 }

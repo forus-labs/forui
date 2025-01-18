@@ -2,5 +2,9 @@
   "dialogLabel": "ಡೈಲಾಗ್",
   "sheetLabel": "ಶೀಟ್",
   "barrierOnTapHint": "$modalRouteContentName ಅನ್ನು ಮುಚ್ಚಿರಿ",
-  "barrierLabel": "ಸ್ಕ್ರಿಮ್"
+  "barrierLabel": "ಸ್ಕ್ರಿಮ್",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "datePickerInvalidDateError": "ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ."
 }

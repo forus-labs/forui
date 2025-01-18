@@ -2,5 +2,9 @@
   "dialogLabel": "Дијалог",
   "sheetLabel": "лист",
   "barrierOnTapHint": "Затворете ја $modalRouteContentName",
-  "barrierLabel": "Скрим"
+  "barrierLabel": "Скрим",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Изберете датум",
+  "datePickerInvalidDateError": "Неважечки датум."
 }

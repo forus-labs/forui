@@ -49,6 +49,26 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get datePickerHint => 'Изаберите датум';
+
+  @override
+  String get datePickerInvalidDateError => 'Неважећи датум.';
+
+  @override
   String get dialogLabel => 'Дијалог';
 
   @override
@@ -66,6 +86,18 @@ class FLocalizationsSr extends FLocalizations {
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
 class FLocalizationsSrLatn extends FLocalizationsSr {
   FLocalizationsSrLatn() : super('sr_Latn');
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get datePickerHint => 'Izaberite datum';
+
+  @override
+  String get datePickerInvalidDateError => 'Nevažeći datum.';
 
   @override
   String get dialogLabel => 'Dijalog';

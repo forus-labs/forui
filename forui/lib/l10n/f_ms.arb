@@ -2,5 +2,9 @@
   "dialogLabel": "Dialog",
   "sheetLabel": "Helaian",
   "barrierOnTapHint": "Tutup $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Pilih tarikh",
+  "datePickerInvalidDateError": "Tarikh tidak sah."
 }

@@ -2,5 +2,9 @@
   "dialogLabel": "תיבת דו-שיח",
   "sheetLabel": "גיליו ",
   "barrierOnTapHint": "סגירת $modalRouteContentName",
-  "barrierLabel": "מיסוך"
+  "barrierLabel": "מיסוך",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "בחירת תאריך",
+  "datePickerInvalidDateError": "תאריך לא חוקי."
 }

@@ -2,5 +2,9 @@
   "dialogLabel": "ဒိုင်ယာလော့",
   "sheetLabel": "ပိုဆောင်း စာမျက်နှာ",
   "barrierOnTapHint": "$modalRouteContentName ပိတ်ရန်",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "ရက်စွဲ ရွေးပါ",
+  "datePickerInvalidDateError": "ရက်စွဲ မမှန်ကန်ပါ။"
 }

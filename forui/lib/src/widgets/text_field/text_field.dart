@@ -282,6 +282,35 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   ///  * [onEditingComplete], [onSubmit]: which are more specialized input change notifications.
   final ValueChanged<String>? onChange;
 
+  /// Called for the first tap in a series of taps.
+  ///
+  /// The text field builds a [GestureDetector] to handle input events like tap,
+  /// to trigger focus requests, to move the caret, adjust the selection, etc.
+  /// Handling some of those events by wrapping the text field with a competing
+  /// GestureDetector is problematic.
+  ///
+  /// To unconditionally handle taps, without interfering with the text field's
+  /// internal gesture detector, provide this callback.
+  ///
+  /// If the text field is created with [enabled] false, taps will not be
+  /// recognized.
+  ///
+  /// To be notified when the text field gains or loses the focus, provide a
+  /// [focusNode] and add a listener to that.
+  ///
+  /// To listen to arbitrary pointer events without competing with the
+  /// text field's internal gesture detector, use a [Listener].
+  ///
+  /// If [onTapAlwaysCalled] is enabled, this will also be called for consecutive
+  /// taps.
+  final GestureTapCallback? onTap;
+
+  /// Whether [onTap] should be called for every tap.
+  ///
+  /// Defaults to false, so [onTap] is only called for each distinct tap. When
+  /// enabled, [onTap] is called for every tap including consecutive taps.
+  final bool onTapAlwaysCalled;
+
   /// Called when the user submits editable content (e.g., user presses the "done" button on the keyboard).
   ///
   /// The default implementation of [onEditingComplete] executes 2 different behaviors based on the situation:
@@ -352,7 +381,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   ///
   /// When this is false, the text selection cannot be adjusted by the user, text cannot be copied, and the user cannot
   /// paste into the text field from the clipboard.
-  final bool enableInteractSelection;
+  final bool enableInteractiveSelection;
 
   /// Optional delegate for building the text selection handles.
   ///
@@ -455,6 +484,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// If this configuration is left null, then spell check is disabled by default.
   final SpellCheckConfiguration? spellCheckConfiguration;
 
+  /// The prefix.
+  ///
+  /// See [InputDecoration.prefixIcon] for more information.
+  final Widget? prefix;
+
   /// The suffix icon.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
@@ -508,13 +542,15 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.maxLength,
     this.maxLengthEnforcement,
     this.onChange,
+    this.onTap,
+    this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
     this.onAppPrivateCommand,
     this.inputFormatters,
     this.enabled = true,
     this.ignorePointers,
-    this.enableInteractSelection = true,
+    this.enableInteractiveSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -529,6 +565,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
+    this.prefix,
     this.suffix,
     this.onSaved,
     this.validator,
@@ -569,13 +606,15 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.maxLength,
     this.maxLengthEnforcement,
     this.onChange,
+    this.onTap,
+    this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
     this.onAppPrivateCommand,
     this.inputFormatters,
     this.enabled = true,
     this.ignorePointers,
-    this.enableInteractSelection = true,
+    this.enableInteractiveSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -590,6 +629,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
+    this.prefix,
     this.suffix,
     this.onSaved,
     this.validator,
@@ -633,13 +673,15 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.maxLength,
     this.maxLengthEnforcement,
     this.onChange,
+    this.onTap,
+    this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
     this.onAppPrivateCommand,
     this.inputFormatters,
     this.enabled = true,
     this.ignorePointers,
-    this.enableInteractSelection = true,
+    this.enableInteractiveSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -654,6 +696,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
+    this.prefix,
     this.suffix,
     this.onSaved,
     this.validator,
@@ -698,13 +741,15 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.maxLength,
     this.maxLengthEnforcement,
     this.onChange,
+    this.onTap,
+    this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
     this.onAppPrivateCommand,
     this.inputFormatters,
     this.enabled = true,
     this.ignorePointers,
-    this.enableInteractSelection = true,
+    this.enableInteractiveSelection = true,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -719,6 +764,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
+    this.prefix,
     this.suffix,
     this.onSaved,
     this.validator,
@@ -747,6 +793,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
               selectionHandleColor: style.cursorColor,
             ),
             cupertinoOverrideTheme: CupertinoThemeData(
+              // TODO: See https://github.com/flutter/flutter/issues/161573
               primaryColor: style.cursorColor,
             ),
           ),
@@ -803,13 +850,17 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(IntProperty('maxLength', maxLength))
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
       ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onTap', onTap))
+      ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(ObjectFlagProperty.has('onAppPrivateCommand', onAppPrivateCommand))
       ..add(IterableProperty('inputFormatters', inputFormatters))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('ignorePointers', value: ignorePointers, ifTrue: 'ignorePointers'))
-      ..add(FlagProperty('enableInteractSelection', value: enableInteractSelection, ifTrue: 'enableInteractSelection'))
+      ..add(
+        FlagProperty('enableInteractSelection', value: enableInteractiveSelection, ifTrue: 'enableInteractSelection'),
+      )
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))

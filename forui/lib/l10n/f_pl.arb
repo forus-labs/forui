@@ -2,5 +2,9 @@
   "dialogLabel": "Okno dialogowe",
   "sheetLabel": "Plansza",
   "barrierOnTapHint": "Zamknij: $modalRouteContentName",
-  "barrierLabel": "Siatka"
+  "barrierLabel": "Siatka",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Wybierz datę",
+  "datePickerInvalidDateError": "Nieprawidłowa data."
 }

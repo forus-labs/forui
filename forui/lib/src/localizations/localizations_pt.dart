@@ -49,6 +49,26 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Selecionar data';
+
+  @override
+  String get datePickerInvalidDateError => 'Data inválida.';
+
+  @override
   String get dialogLabel => 'Caixa de diálogo';
 
   @override
@@ -66,6 +86,18 @@ class FLocalizationsPt extends FLocalizations {
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
 class FLocalizationsPtPt extends FLocalizationsPt {
   FLocalizationsPtPt() : super('pt_PT');
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Selecionar data';
+
+  @override
+  String get datePickerInvalidDateError => 'Data inválida.';
 
   @override
   String get dialogLabel => 'Caixa de diálogo';

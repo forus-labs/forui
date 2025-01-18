@@ -2,5 +2,9 @@
   "dialogLabel": "Dialoog",
   "sheetLabel": "blad",
   "barrierOnTapHint": "Maak $modalRouteContentName toe",
-  "barrierLabel": "Skerm"
+  "barrierLabel": "Skerm",
+  "shortDateSeparator": "-",
+  "shortDateSuffix": "",
+  "datePickerHint": "Kies 'n datum",
+  "datePickerInvalidDateError": "Ongeldige datum."
 }

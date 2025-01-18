@@ -2,5 +2,9 @@
   "dialogLabel": "Dialogboks",
   "sheetLabel": "Felt",
   "barrierOnTapHint": "Lukk $modalRouteContentName",
-  "barrierLabel": "Vev"
+  "barrierLabel": "Vev",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Velg dato",
+  "datePickerInvalidDateError": "Ugyldig dato."
 }

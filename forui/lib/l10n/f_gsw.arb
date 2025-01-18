@@ -2,5 +2,9 @@
   "dialogLabel": "Dialogfeld",
   "sheetLabel": "Ansicht",
   "barrierOnTapHint": "$modalRouteContentName schließen",
-  "barrierLabel": "Gitter"
+  "barrierLabel": "Gitter",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Datum uswähle",
+  "datePickerInvalidDateError": "Ungültigs Datum."
 }

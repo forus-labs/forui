@@ -16,38 +16,34 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late FCalendarController<DateTime?> calendarController = FCalendarController.date();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => Form(
         key: _formKey,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const FTextField(
-              label: Text('Username'),
-              hint: 'JaneDoe',
-              description: Text('Please enter your username.'),
-              maxLines: 1,
-            ),
+            const FDatePicker.calendar(),
+            const SizedBox(height: 20),
+            const FDatePicker(),
+            const SizedBox(height: 20),
+            FDatePicker.input(),
             const SizedBox(height: 20),
             FBreadcrumb(
               children: [
                 FBreadcrumbItem(onPress: () {}, child: const Text('Home')),
                 FBreadcrumbItem.collapsed(
                   menu: [
-                    FTileGroup(children: [
-                      FTile(
-                        title: const Text('Documentation'),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        title: const Text('Themes'),
-                        onPress: () {},
-                      ),
-                    ]),
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          title: const Text('Documentation'),
+                          onPress: () {},
+                        ),
+                        FTile(
+                          title: const Text('Themes'),
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 FBreadcrumbItem(onPress: () {}, child: const Text('Categories')),

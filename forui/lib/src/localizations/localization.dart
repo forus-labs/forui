@@ -24,7 +24,7 @@ class FDefaultLocalizations extends FLocalizations {
   /// Creates a [FDefaultLocalizations].
   factory FDefaultLocalizations() => _localizations;
 
-  FDefaultLocalizations._() : super('');
+  FDefaultLocalizations._() : super('en_US');
 
   @override
   String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);
@@ -40,6 +40,21 @@ class FDefaultLocalizations extends FLocalizations {
 
   @override
   String day(DateTime date) => DateFormat.d().format(date);
+
+  @override
+  String shortDate(DateTime date) => DateFormat.yMd().format(date);
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'Pick a date';
+
+  @override
+  String get datePickerInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';

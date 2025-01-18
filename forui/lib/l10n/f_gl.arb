@@ -2,5 +2,9 @@
   "dialogLabel": "Cadro de diálogo",
   "sheetLabel": "Panel",
   "barrierOnTapHint": "Pechar $modalRouteContentName",
-  "barrierLabel": "Sombreado"
+  "barrierLabel": "Sombreado",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Selecciona unha data",
+  "datePickerInvalidDateError": "Data non válida."
 }

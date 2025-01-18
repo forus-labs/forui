@@ -2,5 +2,9 @@
   "dialogLabel": "Dijalog",
   "sheetLabel": "tabela",
   "barrierOnTapHint": "Zatvori: $modalRouteContentName",
-  "barrierLabel": "Skrim"
+  "barrierLabel": "Skrim",
+  "shortDateSeparator": ". ",
+  "shortDateSuffix": ".",
+  "datePickerHint": "Izaberite datum",
+  "datePickerInvalidDateError": "Nevažeći datum."
 }

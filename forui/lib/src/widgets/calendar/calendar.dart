@@ -9,9 +9,6 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
-/// A calendar's properties.
-abstract class FCalendarProperties {}
-
 /// A calendar.
 ///
 /// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing
@@ -24,8 +21,9 @@ abstract class FCalendarProperties {}
 /// * https://forui.dev/docs/form/calendar for working examples.
 /// * [FCalendarController] for customizing a calendar's date selection behavior.
 /// * [FCalendarStyle] for customizing a calendar's appearance.
-class FCalendar extends StatelessWidget {
-  static Widget _dayBuilder(BuildContext context, FCalendarDayData data, Widget? child) => child!;
+class FCalendar extends StatefulWidget {
+  /// The default day builder.
+  static Widget defaultDayBuilder(BuildContext context, FCalendarDayData data, Widget? child) => child!;
 
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
@@ -63,16 +61,20 @@ class FCalendar extends StatelessWidget {
   /// A callback for when a date in a [FCalendarPickerType.day] picker is long pressed.
   final ValueChanged<DateTime>? onLongPress;
 
-  final ValueNotifier<FCalendarPickerType> _type;
-  final ValueNotifier<LocalDate> _month;
+  final FCalendarPickerType _initialType;
+  final LocalDate _initialMonth;
 
   /// Creates a [FCalendar].
   ///
-  /// [initialMonth] defaults to [today]. It is truncated to the nearest date.
+  /// Subsequently changing [initialType] has no effect.
+  ///
+  /// [initialMonth] defaults to [today]. It is truncated to the nearest date. Subsequently changing [initialMonth] has
+  /// no effect. To change the selected date, change the key to create a new [FCalendar], and provide that widget the
+  /// new [initialMonth]. This will reset the widget's interactive state.
   FCalendar({
     required this.controller,
     this.style,
-    this.dayBuilder = _dayBuilder,
+    this.dayBuilder = defaultDayBuilder,
     this.onMonthChange,
     this.onPress,
     this.onLongPress,
@@ -82,17 +84,47 @@ class FCalendar extends StatelessWidget {
     DateTime? today,
     DateTime? initialMonth,
     super.key,
-  })  : start = start ?? DateTime(1990),
+  })  : start = start ?? DateTime(1900),
         end = end ?? DateTime(2100),
         today = today ?? DateTime.now(),
-        _type = ValueNotifier(initialType),
-        _month = ValueNotifier((initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months)) {
+        _initialType = initialType,
+        _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
     assert(this.start.toLocalDate() < this.end.toLocalDate(), 'end date must be greater than start date');
   }
 
   @override
+  State<FCalendar> createState() => _State();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
+      ..add(DiagnosticsProperty('start', start))
+      ..add(DiagnosticsProperty('end', end))
+      ..add(DiagnosticsProperty('today', today))
+      ..add(ObjectFlagProperty.has('onMonthChange', onMonthChange))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
+  }
+}
+
+class _State extends State<FCalendar> {
+  late ValueNotifier<FCalendarPickerType> _type;
+  late ValueNotifier<LocalDate> _month;
+
+  @override
+  void initState() {
+    super.initState();
+    _type = ValueNotifier(widget._initialType);
+    _month = ValueNotifier(widget._initialMonth);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.calendarStyle;
+    final style = widget.style ?? context.theme.calendarStyle;
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(
@@ -116,29 +148,29 @@ class FCalendar extends StatelessWidget {
                 builder: (context, value, child) => switch (value) {
                   FCalendarPickerType.day => PagedDayPicker(
                       style: style,
-                      dayBuilder: dayBuilder,
-                      start: start.toLocalDate(),
-                      end: end.toLocalDate(),
-                      today: today.toLocalDate(),
+                      dayBuilder: widget.dayBuilder,
+                      start: widget.start.toLocalDate(),
+                      end: widget.end.toLocalDate(),
+                      today: widget.today.toLocalDate(),
                       initial: _month.value,
-                      selectable: (date) => controller.selectable(date.toNative()),
-                      selected: (date) => controller.selected(date.toNative()),
+                      selectable: (date) => widget.controller.selectable(date.toNative()),
+                      selected: (date) => widget.controller.selected(date.toNative()),
                       onMonthChange: (date) {
                         _month.value = date;
-                        onMonthChange?.call(date.toNative());
+                        widget.onMonthChange?.call(date.toNative());
                       },
                       onPress: (date) {
                         final native = date.toNative();
-                        controller.select(native);
-                        onPress?.call(native);
+                        widget.controller.select(native);
+                        widget.onPress?.call(native);
                       },
-                      onLongPress: (date) => onLongPress?.call(date.toNative()),
+                      onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
                     ),
                   FCalendarPickerType.yearMonth => YearMonthPicker(
                       style: style,
-                      start: start.toLocalDate(),
-                      end: end.toLocalDate(),
-                      today: today.toLocalDate(),
+                      start: widget.start.toLocalDate(),
+                      end: widget.end.toLocalDate(),
+                      today: widget.today.toLocalDate(),
                       month: _month,
                       type: _type,
                     ),
@@ -149,21 +181,6 @@ class FCalendar extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
-      ..add(DiagnosticsProperty('start', start))
-      ..add(DiagnosticsProperty('end', end))
-      ..add(DiagnosticsProperty('today', today))
-      ..add(ObjectFlagProperty.has('onMonthChange', onMonthChange))
-      ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }
 }
 
@@ -213,7 +230,7 @@ final class FCalendarStyle with Diagnosticable {
           ),
         );
 
-  /// Returns a copy of this [FCalendarStyle] but with the given fields replaced with the new values.
+  /// Returns a copy of this [FCalendarStyle] with the given fields replaced with the new values.
   @useResult
   FCalendarStyle copyWith({
     FCalendarHeaderStyle? headerStyle,

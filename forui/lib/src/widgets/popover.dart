@@ -62,6 +62,18 @@ final class FPopoverController extends FChangeNotifier {
   }
 }
 
+/// The regions that can be tapped to hide a popover.
+enum FHidePopoverRegion {
+  /// The entire screen, excluding the popover.
+  anywhere,
+
+  /// The entire screen, excluding the target and popover.
+  excludeTarget,
+
+  /// Disables tapping outside of the popover to hide it.
+  none,
+}
+
 /// A popover displays rich content in a portal that is aligned to a child.
 ///
 /// See:
@@ -109,9 +121,9 @@ class FPopover extends StatefulWidget {
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   /// {@template forui.widgets.FPopover.hideOnTapOutside}
-  /// True if the popover is hidden when tapped outside of it. Defaults to true.
+  /// The region that can be tapped to hide the popover.
   /// {@endtemplate}
-  final bool hideOnTapOutside;
+  final FHidePopoverRegion hideOnTapOutside;
 
   /// {@template forui.widgets.FPopover.directionPadding}
   /// True if the popover should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
@@ -147,7 +159,7 @@ class FPopover extends StatefulWidget {
     required this.child,
     this.style,
     this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.directionPadding = false,
     this.semanticLabel,
     this.autofocus = false,
@@ -171,7 +183,7 @@ class FPopover extends StatefulWidget {
     this.controller,
     this.style,
     this.shift = FPortalShift.flip,
-    this.hideOnTapOutside = true,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.autofocus = false,
     this.focusNode,
@@ -196,7 +208,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(FlagProperty('hideOnTapOutside', value: hideOnTapOutside, ifTrue: 'hideOnTapOutside'))
+      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
@@ -233,15 +245,32 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
     final popover = widget.popoverAnchor;
-    final child = widget.childAnchor;
+    final childAnchor = widget.childAnchor;
+
+    var child = widget._automatic
+        ? GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: _controller.toggle,
+            child: widget.child,
+          )
+        : widget.child;
+
+    if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
+      child = TapRegion(
+        groupId: _group,
+        onTapOutside: (_) => _controller.hide(),
+        child: child,
+      );
+    }
 
     return FPortal(
       controller: _controller._overlay,
       portalAnchor: widget.popoverAnchor,
       childAnchor: widget.childAnchor,
       shift: widget.shift,
-      offset:
-          widget.directionPadding ? Offset.zero : Alignments.removeDirectionalPadding(style.padding, popover, child),
+      offset: widget.directionPadding
+          ? Offset.zero
+          : Alignments.removeDirectionalPadding(style.padding, popover, childAnchor),
       portalBuilder: (context) => CallbackShortcuts(
         bindings: {
           const SingleActivator(LogicalKeyboardKey.escape): _controller.hide,
@@ -253,18 +282,21 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             autofocus: widget.autofocus,
             focusNode: widget.focusNode,
             onFocusChange: widget.onFocusChange,
-            child: Padding(
-              padding: style.padding,
-              child: FadeTransition(
-                opacity: _controller._fade,
-                child: ScaleTransition(
-                  scale: _controller._scale,
-                  child: TapRegion(
-                    groupId: _group,
-                    onTapOutside: widget.hideOnTapOutside ? (_) => _controller.hide() : null,
-                    child: DecoratedBox(
-                      decoration: style.decoration,
-                      child: widget.popoverBuilder(context, style, null),
+            child: FocusTraversalGroup(
+              child: Padding(
+                padding: style.padding,
+                child: FadeTransition(
+                  opacity: _controller._fade,
+                  child: ScaleTransition(
+                    scale: _controller._scale,
+                    child: TapRegion(
+                      groupId: _group,
+                      onTapOutside:
+                          widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
+                      child: DecoratedBox(
+                        decoration: style.decoration,
+                        child: widget.popoverBuilder(context, style, null),
+                      ),
                     ),
                   ),
                 ),
@@ -273,16 +305,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      child: TapRegion(
-        groupId: _group,
-        child: widget._automatic
-            ? GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: _controller.toggle,
-                child: widget.child,
-              )
-            : widget.child,
-      ),
+      child: child,
     );
   }
 
@@ -297,15 +320,6 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
 /// A [FPopover]'s style.
 class FPopoverStyle with Diagnosticable {
-  /// The popover's default shadow in [FPopoverStyle.inherit].
-  static const shadow = [
-    BoxShadow(
-      color: Color(0x0d000000),
-      offset: Offset(0, 1),
-      blurRadius: 2,
-    ),
-  ];
-
   /// The popover's decoration.
   final BoxDecoration decoration;
 
@@ -328,7 +342,7 @@ class FPopoverStyle with Diagnosticable {
               width: style.borderWidth,
               color: colorScheme.border,
             ),
-            boxShadow: shadow,
+            boxShadow: style.shadow,
           ),
         );
 

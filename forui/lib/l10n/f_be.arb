@@ -2,5 +2,9 @@
   "dialogLabel": "Дыялогавае акно",
   "sheetLabel": "аркуш",
   "barrierOnTapHint": "Закрыць: $modalRouteContentName",
-  "barrierLabel": "Палатно"
+  "barrierLabel": "Палатно",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Выберыце дату",
+  "datePickerInvalidDateError": "Няправільная дата."
 }

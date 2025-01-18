@@ -2,5 +2,9 @@
   "dialogLabel": "Dialoog",
   "sheetLabel": "leht",
   "barrierOnTapHint": "Sule $modalRouteContentName",
-  "barrierLabel": "Sirm"
+  "barrierLabel": "Sirm",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Valige kuupäev",
+  "datePickerInvalidDateError": "Sobimatu kuupäev."
 }

@@ -49,6 +49,26 @@ class FLocalizationsTh extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'เลือกวันที่';
+
+  @override
+  String get datePickerInvalidDateError => 'วันที่ไม่ถูกต้อง';
+
+  @override
   String get dialogLabel => 'กล่องโต้ตอบ';
 
   @override

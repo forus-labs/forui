@@ -2,5 +2,9 @@
   "dialogLabel": "Deialog",
   "sheetLabel": "Taflen",
   "barrierOnTapHint": "Cau $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Dewiswch ddyddiad",
+  "datePickerInvalidDateError": "Dyddiad annilys."
 }

@@ -49,6 +49,26 @@ class FLocalizationsMr extends FLocalizations {
   }
 
   @override
+  String shortDate(DateTime date) {
+    final intl.DateFormat dateDateFormat = intl.DateFormat.yMd(localeName);
+    final String dateString = dateDateFormat.format(date);
+
+    return '$dateString';
+  }
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get datePickerHint => 'तारीख निवडा';
+
+  @override
+  String get datePickerInvalidDateError => 'अवैध तारीख.';
+
+  @override
   String get dialogLabel => 'डायलॉग';
 
   @override

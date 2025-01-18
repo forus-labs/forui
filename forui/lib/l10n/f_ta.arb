@@ -2,5 +2,9 @@
   "dialogLabel": "உரையாடல்",
   "sheetLabel": "திரை",
   "barrierOnTapHint": "$modalRouteContentName ஐ மூடுக",
-  "barrierLabel": "ஸ்க்ரிம்"
+  "barrierLabel": "ஸ்க்ரிம்",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "தேதியைத் தேர்ந்தெடுக்கவும்",
+  "datePickerInvalidDateError": "தவறான தேதி."
 }

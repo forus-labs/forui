@@ -2,5 +2,9 @@
   "dialogLabel": "Caixa de diálogo",
   "sheetLabel": "Secção",
   "barrierOnTapHint": "Fechar $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "Selecionar data",
+  "datePickerInvalidDateError": "Data inválida."
 }

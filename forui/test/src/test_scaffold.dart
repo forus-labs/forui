@@ -16,8 +16,8 @@ MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen
 Future<void> expectBlueScreen(dynamic actual) => expectLater(actual, isBlueScreen);
 
 class TestScaffold extends StatelessWidget {
-  static final blueScreen = FThemeData.inherit(
-    colorScheme: const FColorScheme(
+  static final blueScreen = () {
+    const colorScheme = FColorScheme(
       brightness: Brightness.light,
       barrier: Color(0xFF03A9F4),
       background: Color(0xFF03A9F4),
@@ -33,8 +33,16 @@ class TestScaffold extends StatelessWidget {
       error: Color(0xFF03A9F4),
       errorForeground: Color(0xFF03A9F4),
       border: Color(0xFF03A9F4),
-    ),
-  );
+    );
+    final typography = FTypography.inherit(colorScheme: colorScheme);
+    final style = FStyle.inherit(colorScheme: colorScheme, typography: typography).copyWith(shadow: []);
+
+    return FThemeData.inherit(
+      colorScheme: colorScheme,
+      typography: typography,
+      style: style,
+    );
+  }();
 
   static List<({String name, FThemeData data})> get themes => [
         (name: 'zinc-light', data: FThemes.zinc.light),
@@ -46,12 +54,14 @@ class TestScaffold extends StatelessWidget {
   final Locale? locale;
   final TextDirection? textDirection;
   final Widget child;
+  final Alignment alignment;
   final bool padded;
   final bool wrapped;
 
   TestScaffold({
     required this.child,
     this.textDirection,
+    this.alignment = Alignment.center,
     this.padded = true,
     FThemeData? theme,
     Color? background,
@@ -69,6 +79,7 @@ class TestScaffold extends StatelessWidget {
     required this.child,
     this.locale,
     this.textDirection,
+    this.alignment = Alignment.center,
     this.padded = true,
     FThemeData? theme,
     Color? background,
@@ -81,7 +92,7 @@ class TestScaffold extends StatelessWidget {
         },
         wrapped = true;
 
-  TestScaffold.blue({required this.child, super.key})
+  TestScaffold.blue({required this.child, this.alignment = Alignment.center, super.key})
       : theme = FThemes.zinc.light,
         background = blueScreen.colorScheme.background,
         locale = null,
@@ -107,7 +118,10 @@ class TestScaffold extends StatelessWidget {
             child: child!,
           ),
         ),
-        home: Center(child: child),
+        home: Align(
+          alignment: alignment,
+          child: child,
+        ),
       );
     } else {
       return FTheme(
@@ -117,7 +131,10 @@ class TestScaffold extends StatelessWidget {
           color: background ?? theme.colorScheme.background,
           alignment: Alignment.center,
           padding: padded ? const EdgeInsets.all(16) : null,
-          child: Center(child: child),
+          child: Align(
+            alignment: alignment,
+            child: child,
+          ),
         ),
       );
     }
@@ -131,6 +148,7 @@ class TestScaffold extends StatelessWidget {
       ..add(ColorProperty('background', background))
       ..add(DiagnosticsProperty('locale', locale))
       ..add(EnumProperty('textDirection', textDirection))
+      ..add(DiagnosticsProperty('alignment', alignment))
       ..add(FlagProperty('padded', value: padded, ifTrue: 'padded'))
       ..add(FlagProperty('wrapped', value: wrapped, ifTrue: 'wrapped'));
   }

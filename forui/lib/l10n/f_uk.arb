@@ -2,5 +2,9 @@
   "dialogLabel": "Вікно",
   "sheetLabel": "екран",
   "barrierOnTapHint": "Закрити: $modalRouteContentName",
-  "barrierLabel": "Маскувальний фон"
+  "barrierLabel": "Маскувальний фон",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Виберіть дату",
+  "datePickerInvalidDateError": "Недійсна дата."
 }

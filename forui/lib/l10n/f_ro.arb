@@ -2,5 +2,9 @@
   "dialogLabel": "Casetă de dialog",
   "sheetLabel": "Foaie",
   "barrierOnTapHint": "Închideți $modalRouteContentName",
-  "barrierLabel": "Material"
+  "barrierLabel": "Material",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Selectați data",
+  "datePickerInvalidDateError": "Dată nevalidă."
 }

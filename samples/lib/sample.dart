@@ -10,10 +10,12 @@ final themes = {
 
 abstract class Sample extends StatelessWidget {
   final FThemeData theme;
+  final Alignment alignment;
   final double maxWidth;
 
   Sample({
     String theme = 'zinc-light',
+    this.alignment = Alignment.center,
     this.maxWidth = 400,
     super.key,
   }) : theme = themes[theme]!;
@@ -30,7 +32,8 @@ abstract class Sample extends StatelessWidget {
   Widget build(BuildContext context) => FTheme(
         data: theme,
         child: FScaffold(
-          content: Center(
+          content: Align(
+            alignment: alignment,
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: maxWidth),
               child: Builder(
@@ -46,10 +49,12 @@ abstract class Sample extends StatelessWidget {
 
 abstract class StatefulSample extends StatefulWidget {
   final FThemeData theme;
+  final Alignment alignment;
   final double maxWidth;
 
   StatefulSample({
     String theme = 'zinc-light',
+    this.alignment = Alignment.center,
     this.maxWidth = 400,
     super.key,
   }) : theme = themes[theme]!;
@@ -60,7 +65,8 @@ abstract class StatefulSampleState<T extends StatefulSample> extends State<T> {
   Widget build(BuildContext context) => FTheme(
         data: widget.theme,
         child: FScaffold(
-          content: Center(
+          content: Align(
+            alignment: widget.alignment,
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: widget.maxWidth),
               child: Builder(

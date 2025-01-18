@@ -2,5 +2,9 @@
   "dialogLabel": "ຂໍ້ຄວາມ",
   "sheetLabel": "ແຜ່ນ",
   "barrierOnTapHint": "ປິດ $modalRouteContentName",
-  "barrierLabel": "Scrim"
+  "barrierLabel": "Scrim",
+  "shortDateSeparator": "/",
+  "shortDateSuffix": "",
+  "datePickerHint": "ເລືອກວັນທີ",
+  "datePickerInvalidDateError": "ວັນທີບໍ່ຖືກຕ້ອງ."
 }

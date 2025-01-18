@@ -52,8 +52,8 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   LocalDate? focusedDate;
   late LocalDate current;
   late TextDirection textDirection;
-  final GlobalKey _pageViewKey = GlobalKey();
   late PageController _controller;
+  late Key _key;
   late Map<Type, Action<Intent>> _actions;
   late FocusNode _focusNode;
 
@@ -62,12 +62,23 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     super.initState();
     current = widget.initial;
     _controller = PageController(initialPage: delta(widget.start, widget.initial));
+    _key = ValueKey((widget.start, widget.end));
     _actions = {
       NextFocusIntent: CallbackAction<NextFocusIntent>(onInvoke: _onGridNextFocus),
       PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(onInvoke: _onGridPreviousFocus),
       DirectionalFocusIntent: CallbackAction<DirectionalFocusIntent>(onInvoke: _onDirectionFocus),
     };
     _focusNode = FocusNode();
+  }
+
+  @override
+  void didUpdateWidget(T old) {
+    super.didUpdateWidget(old);
+    if (widget.start != old.start || widget.end != old.end) {
+      _controller.dispose();
+      _controller = PageController(initialPage: delta(widget.start, current));
+      _key = ValueKey((widget.start, widget.end));
+    }
   }
 
   @override
@@ -85,7 +96,7 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
               focusNode: _focusNode,
               onFocusChange: onGridFocusChange,
               child: PageView.builder(
-                key: _pageViewKey,
+                key: _key,
                 controller: _controller,
                 itemBuilder: buildItem,
                 itemCount: delta(widget.start, widget.end) + 1,

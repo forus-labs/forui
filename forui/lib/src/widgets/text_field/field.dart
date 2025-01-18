@@ -13,9 +13,12 @@ class Field extends FormField<String> {
   ) =>
       InputDecoration(
         isDense: true,
+        prefixIcon: parent.prefix,
         suffixIcon: parent.suffix,
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-        prefix: Padding(padding: EdgeInsets.only(left: contentPadding.left)),
+        prefix: Padding(padding: EdgeInsets.only(left: parent.prefix == null ? contentPadding.left : 0)),
+        prefixIconConstraints: const BoxConstraints(),
+        suffixIconConstraints: const BoxConstraints(),
         contentPadding: contentPadding.copyWith(left: 0),
         hintText: parent.hint,
         hintStyle: stateStyle.hintTextStyle,
@@ -107,12 +110,15 @@ class Field extends FormField<String> {
                     field.didChange(value);
                     parent.onChange?.call(value);
                   },
+                  onTap: parent.onTap,
+                  onTapAlwaysCalled: parent.onTapAlwaysCalled,
                   onEditingComplete: parent.onEditingComplete,
                   onSubmitted: parent.onSubmit,
                   onAppPrivateCommand: parent.onAppPrivateCommand,
                   inputFormatters: parent.inputFormatters,
                   enabled: parent.enabled,
                   ignorePointers: parent.ignorePointers,
+                  enableInteractiveSelection: parent.enableInteractiveSelection,
                   keyboardAppearance: style.keyboardAppearance,
                   scrollPadding: style.scrollPadding,
                   dragStartBehavior: parent.dragStartBehavior,

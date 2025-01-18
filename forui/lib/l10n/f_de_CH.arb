@@ -1,3 +1,7 @@
 {
-  "dialogLabel": "Dialogfeld"
+  "dialogLabel": "Dialogfeld",
+  "shortDateSeparator": ".",
+  "shortDateSuffix": "",
+  "datePickerHint": "Datum auswählen",
+  "datePickerInvalidDateError": "Ungültiges Datum."
 }
