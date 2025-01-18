@@ -61,10 +61,16 @@ class FDatePickerController implements FValueNotifier<DateTime?> {
   void addListener(VoidCallback listener) => _calendar.addListener(listener);
 
   @override
+  void addValueListener(ValueChanged<DateTime?> listener) => _calendar.addValueListener(listener);
+
+  @override
   void notifyListeners() => _calendar.notifyListeners();
 
   @override
   void removeListener(VoidCallback listener) => _calendar.removeListener(listener);
+
+  @override
+  void removeValueListener(ValueChanged<DateTime?> listener) => _calendar.removeValueListener(listener);
 
   @override
   bool get hasListeners => _calendar.hasListeners;
