@@ -5,17 +5,17 @@
 * Add `FDatePicker`.
 * Add `FFormProperties`.
 * Add `FPopoverTagRegion`.
-* Add `FTextfield.onTap`.
-* Add `FTextfield.onTapOutside`.
+* Add `FTextField.onTap`.
+* Add `FTextField.onTapOutside`.
 * Add `FSelectGroupController.onUpdate`.
+* Add `animationTween` to `FTappable.animated(...)`.
 * Add `FValueNotifier.addValueListener(...)`.
 * Add `FValueNotifier.removeValueListener(...)`.
 
 ### Changes
 
-* **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`.
+* **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`. The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
 * **Breaking** Change `FPopoverStyle.shadow` to `FStyle.shadow`.
-  The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
 * **Breaking** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
 * **Breaking** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
 * **Breaking** Change `FPopover.controller(...)` to `FPopover.popoverController(...)`.
