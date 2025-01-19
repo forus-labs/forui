@@ -218,17 +218,17 @@ class _State<T> extends FormFieldState<Set<T>> {
   }
 
   @override
-  void didChange(Set<T>? values) {
-    super.didChange(values);
-    if (!setEquals(widget.groupController.values, values)) {
-      widget.groupController.values = values ?? {};
+  void didChange(Set<T>? value) {
+    super.didChange(value);
+    if (!setEquals(widget.groupController.value, value)) {
+      widget.groupController.value = value ?? {};
     }
   }
 
   @override
   void reset() {
     // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
-    widget.groupController.values = widget.initialValue ?? {};
+    widget.groupController.value = widget.initialValue ?? {};
     super.reset();
   }
 
@@ -244,8 +244,8 @@ class _State<T> extends FormFieldState<Set<T>> {
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
     // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
     // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.groupController.values != value) {
-      didChange(widget.groupController.values);
+    if (widget.groupController.value != value) {
+      didChange(widget.groupController.value);
     }
   }
 

@@ -6,6 +6,9 @@ import 'package:meta/meta.dart';
 /// A controller that controls which sections are shown and hidden.
 class FAccordionController extends FChangeNotifier {
   /// The animation controllers for each of the sections in the accordion.
+  ///
+  /// ## Contract
+  /// Modifying this map directly will result in undefined behavior.
   final Map<int, AnimationController> controllers;
   final Set<int> _expanded;
   final int _min;
