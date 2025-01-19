@@ -68,8 +68,9 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
     final style = widget.style ?? context.theme.datePickerStyle;
     var prefix = widget.prefixBuilder?.call(context, style);
     var suffix = widget.suffixBuilder?.call(context, style);
+    TransitionBuilder builder = (context, child) => child!;
 
-    if (widget.calendar != null) {
+    if (widget.calendar case final properties?) {
       prefix = widget.prefixBuilder == null
           ? null
           : MouseRegion(
@@ -82,9 +83,16 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
               cursor: SystemMouseCursors.click,
               child: widget.suffixBuilder?.call(context, style),
             );
+
+      builder = (context, child) => _CalendarPopover(
+        controller: _controller,
+        style: style,
+        properties: properties,
+        child: child!,
+      );
     }
 
-    Widget input = DateField(
+    return DateField(
       calendarController: _controller._calendar,
       onTap: widget.calendar == null ? null : _controller.calendar.show,
       style: style,
@@ -110,17 +118,7 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
       suffix: suffix,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
       baselineYear: widget.baselineInputYear,
+      builder: builder,
     );
-
-    if (widget.calendar case final properties?) {
-      input = _CalendarPopover(
-        controller: _controller,
-        style: style,
-        properties: properties,
-        child: input,
-      );
-    }
-
-    return input;
   }
 }

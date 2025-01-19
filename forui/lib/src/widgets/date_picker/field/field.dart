@@ -14,6 +14,7 @@ const unsupportedLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
 class DateField extends StatefulWidget {
   final FCalendarController<DateTime?> calendarController;
   final FDatePickerStyle style;
+  final TransitionBuilder builder;
   final Widget? label;
   final Widget? description;
   final Widget Function(BuildContext, String) errorBuilder;
@@ -41,6 +42,7 @@ class DateField extends StatefulWidget {
   const DateField({
     required this.calendarController,
     required this.style,
+    required this.builder,
     required this.label,
     required this.description,
     required this.errorBuilder,
@@ -144,6 +146,7 @@ class _DateFieldState extends State<DateField> {
           controller: _controller,
           style: widget.style.textFieldStyle,
           statesController: _controller.states,
+          builder: widget.builder,
           autocorrect: false,
           // We cannot use TextInputType.number as it is does not contain a done button.
           keyboardType: const TextInputType.numberWithOptions(signed: true),

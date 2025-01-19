@@ -5,6 +5,7 @@
 * Add `FDatePicker`.
 * Add `FFormProperties`.
 * Add `FPopoverTagRegion`.
+* Add `FTextField.builder`.
 * Add `FTextField.onTap`.
 * Add `FTextField.onTapOutside`.
 * Add `FSelectGroupController.onUpdate`.

@@ -18,16 +18,20 @@ import 'package:forui/src/widgets/text_field/field.dart';
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget with FFormFieldProperties<String> {
-  static Widget _contextMenuBuilder(
-    BuildContext context,
-    EditableTextState state,
-  ) =>
+  static Widget _contextMenuBuilder(BuildContext context, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+  static Widget _fieldBuilder(BuildContext context, Widget? child) => child!;
 
   static Widget _errorBuilder(BuildContext context, String text) => Text(text);
 
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
+
+  /// The builder used to decorate the text-field. It should use the given child.
+  ///
+  /// Defaults to returning the given child.
+  final TransitionBuilder builder;
 
   @override
   final Widget? label;
@@ -515,6 +519,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// Creates a [FTextField].
   const FTextField({
     this.style,
+    this.builder = _fieldBuilder,
     this.label,
     this.hint,
     this.description,
@@ -579,6 +584,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
+    this.builder = _fieldBuilder,
     this.label = const Text('Email'),
     this.hint,
     this.description,
@@ -646,6 +652,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// when handling the creation of new passwords.
   const FTextField.password({
     this.style,
+    this.builder = _fieldBuilder,
     this.label = const Text('Password'),
     this.hint,
     this.description,
@@ -714,6 +721,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// [maxLines].
   const FTextField.multiline({
     this.style,
+    this.builder = _fieldBuilder,
     this.label,
     this.hint,
     this.description,
@@ -825,6 +833,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('controller', controller))
