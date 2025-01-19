@@ -123,6 +123,39 @@ void main() {
         expect(longPressCount, 0);
       });
     }
+
+    testWidgets('resets hover and touch states when enabled state changes', (tester) async {
+      late StateSetter setState;
+      VoidCallback? onPress = () {};
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: StatefulBuilder(
+            builder: (context, setter) {
+              setState = setter;
+              return FTappable(
+                builder: (_, value, __) => Text('$value'),
+                onPress: onPress,
+              );
+            },
+          ),
+        ),
+      );
+
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+
+      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await gesture.addPointer(location: Offset.zero);
+      addTearDown(gesture.removePointer);
+
+      await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
+      await tester.pumpAndSettle();
+      expect(find.text((focused: false, hovered: true).toString()), findsOneWidget);
+
+      setState(() => onPress = null);
+      await tester.pumpAndSettle();
+      expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
+    });
   });
 
   group('AnimatedTappable', () {
