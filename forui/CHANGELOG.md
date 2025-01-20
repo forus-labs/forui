@@ -17,7 +17,6 @@
 
 * **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`. The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
 * **Breaking** Change `FPopoverStyle.shadow` to `FStyle.shadow`.
-* **Breaking** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
 * **Breaking** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
 * **Breaking** Change `FPopover.controller(...)` to `FPopover.popoverController(...)`.
 * **Breaking** Change `FPopover.tappable(...)` to `FPopover.automatic(...)`.
@@ -30,6 +29,9 @@
 * **Breaking** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was unfortunately overlooked and did not remove.
 * **Breaking** Change `FSelectGroupController.select(...)` to `FSelectGroupController.update(...)`
 * **Breaking** Change `FSelectGroupController` to be a `ValueNotifier`.
+* **Breaking** Change `FTileGroup.prefix` from `Widget` to `ValueWidgetBuilder<FTextFieldStateStyle>`.
+* **Breaking** Change `FTileGroup.suffix` from `Widget` to `ValueWidgetBuilder<FTextFieldStateStyle>`.
+* **Breaking** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
 
 ### Fixes
 

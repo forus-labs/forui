@@ -488,15 +488,15 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// If this configuration is left null, then spell check is disabled by default.
   final SpellCheckConfiguration? spellCheckConfiguration;
 
-  /// The prefix.
+  /// The prefix's builder.
   ///
   /// See [InputDecoration.prefixIcon] for more information.
-  final Widget? prefix;
+  final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
 
-  /// The suffix icon.
+  /// The suffix's builder.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
-  final Widget? suffix;
+  final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
 
   @override
   final FormFieldSetter<String>? onSaved;
@@ -570,8 +570,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -635,8 +635,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -703,8 +703,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -772,8 +772,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -890,7 +890,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('undoController', undoController))
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
-      ..add(DiagnosticsProperty('suffixIcon', suffix))
+      ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
+      ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialValue', initialValue))

@@ -13,10 +13,10 @@ class Field extends FormField<String> {
   ) =>
       InputDecoration(
         isDense: true,
-        prefixIcon: parent.prefix,
-        suffixIcon: parent.suffix,
+        prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
+        suffixIcon: parent.suffixBuilder?.call(state.context, stateStyle, null),
         // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-        prefix: Padding(padding: EdgeInsets.only(left: parent.prefix == null ? contentPadding.left : 0)),
+        prefix: Padding(padding: EdgeInsets.only(left: parent.prefixBuilder == null ? contentPadding.left : 0)),
         prefixIconConstraints: const BoxConstraints(),
         suffixIconConstraints: const BoxConstraints(),
         contentPadding: contentPadding.copyWith(left: 0),

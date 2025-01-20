@@ -66,30 +66,31 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.datePickerStyle;
-    var prefix = widget.prefixBuilder?.call(context, style);
-    var suffix = widget.suffixBuilder?.call(context, style);
+    ValueWidgetBuilder<FTextFieldStateStyle>? prefix;
+    ValueWidgetBuilder<FTextFieldStateStyle>? suffix;
     TransitionBuilder builder = (context, child) => child!;
 
     if (widget.calendar case final properties?) {
       prefix = widget.prefixBuilder == null
           ? null
-          : MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: widget.prefixBuilder?.call(context, style),
-            );
+          : (context, stateStyle, child) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.prefixBuilder?.call(context, (style, stateStyle), child),
+              );
+
       suffix = widget.suffixBuilder == null
           ? null
-          : MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: widget.suffixBuilder?.call(context, style),
-            );
+          : (context, stateStyle, child) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.suffixBuilder?.call(context, (style, stateStyle), child),
+              );
 
       builder = (context, child) => _CalendarPopover(
-        controller: _controller,
-        style: style,
-        properties: properties,
-        child: child!,
-      );
+            controller: _controller,
+            style: style,
+            properties: properties,
+            child: child!,
+          );
     }
 
     return DateField(
@@ -114,8 +115,8 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
       onEditingComplete: widget.onEditingComplete,
       mouseCursor: widget.mouseCursor,
       canRequestFocus: widget.canRequestFocus,
-      prefix: prefix,
-      suffix: suffix,
+      prefixBuilder: prefix,
+      suffixBuilder: suffix,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
       baselineYear: widget.baselineInputYear,
       builder: builder,
