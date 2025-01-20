@@ -26,7 +26,7 @@
 * **Breaking** Change `FPortal.targetAnchor` to `FPortal.childAnchor`.
 * **Breaking** Change `FPortal.followerBuilder` to `FPortal.portalBuilder`.
 * **Breaking** Change `FPortalFollowerShift` to `FPortalShift`.
-* **Breaking** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was unfortunately overlooked and did not remove.
+* **Breaking** Remove `onChange` parameter from `FSelectTile`. This was accidentally include from early prototyping.
 * **Breaking** Change `FSelectGroupController.select(...)` to `FSelectGroupController.update(...)`
 * **Breaking** Change `FSelectGroupController` to be a `ValueNotifier`.
 * **Breaking** Change `FTileGroup.prefix` from `Widget` to `ValueWidgetBuilder<FTextFieldStateStyle>`.
@@ -36,16 +36,9 @@
 ### Fixes
 
 * Fix `FCalendar` rebuilding whenever the given `initialType` and/or `initialMonth` changes.
-
-* Resolved an issue where `FTappable` remained in a hovered or touched state when its `onPress`/`onLongPress` callbacks 
-  were nulled after being non-null.
-
 * Fix `FCalendar`'s day picker not updating when a new start and/or end date is given.
-
 * Fix `FPopover` not handling focus changes in popover properly.
-
 * Fix `FTappable` remaining in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
-
 * Fix `FTextField` ignoring `enableInteractiveSelection` parameter.
 
 
