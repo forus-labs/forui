@@ -17,16 +17,12 @@ class FDatePickerStyle with Diagnosticable {
   /// The date picker icon's style.
   final FIconStyle iconStyle;
 
-  /// The date picker's focused outline style.
-  final FFocusedOutlineStyle iconFocusedOutlineStyle;
-
   /// Creates a [FDatePickerStyle].
   const FDatePickerStyle({
     required this.textFieldStyle,
     required this.popoverStyle,
     required this.calendarStyle,
     required this.iconStyle,
-    required this.iconFocusedOutlineStyle,
   });
 
   /// Creates a [FDatePickerStyle] that inherits the [colorScheme], [typography], and [style].
@@ -39,7 +35,6 @@ class FDatePickerStyle with Diagnosticable {
           popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
           calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
           iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
-          iconFocusedOutlineStyle: style.focusedOutlineStyle,
         );
 
   /// Returns a copy of this [FDatePickerStyle] with the given fields replaced with the new values.
@@ -49,14 +44,12 @@ class FDatePickerStyle with Diagnosticable {
     FPopoverStyle? popoverStyle,
     FCalendarStyle? calendarStyle,
     FIconStyle? iconStyle,
-    FFocusedOutlineStyle? iconFocusedOutlineStyle,
   }) =>
       FDatePickerStyle(
         textFieldStyle: textFieldStyle ?? this.textFieldStyle,
         popoverStyle: popoverStyle ?? this.popoverStyle,
         calendarStyle: calendarStyle ?? this.calendarStyle,
         iconStyle: iconStyle ?? this.iconStyle,
-        iconFocusedOutlineStyle: iconFocusedOutlineStyle ?? this.iconFocusedOutlineStyle,
       );
 
   @override
@@ -66,8 +59,7 @@ class FDatePickerStyle with Diagnosticable {
       ..add(DiagnosticsProperty('textfieldStyle', textFieldStyle))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle))
       ..add(DiagnosticsProperty('calendarStyle', calendarStyle))
-      ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('iconFocusedOutlineStyle', iconFocusedOutlineStyle));
+      ..add(DiagnosticsProperty('iconStyle', iconStyle));
   }
 
   @override
@@ -78,14 +70,8 @@ class FDatePickerStyle with Diagnosticable {
           textFieldStyle == other.textFieldStyle &&
           popoverStyle == other.popoverStyle &&
           calendarStyle == other.calendarStyle &&
-          iconStyle == other.iconStyle &&
-          iconFocusedOutlineStyle == other.iconFocusedOutlineStyle;
+          iconStyle == other.iconStyle;
 
   @override
-  int get hashCode =>
-      textFieldStyle.hashCode ^
-      popoverStyle.hashCode ^
-      calendarStyle.hashCode ^
-      iconStyle.hashCode ^
-      iconFocusedOutlineStyle.hashCode;
+  int get hashCode => textFieldStyle.hashCode ^ popoverStyle.hashCode ^ calendarStyle.hashCode ^ iconStyle.hashCode;
 }

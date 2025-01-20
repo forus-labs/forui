@@ -120,10 +120,11 @@ class FDatePickerController implements FValueNotifier<DateTime?> {
 /// * [FDatePickerStyle] for customizing a date picker's appearance.
 abstract class FDatePicker extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
-  static Widget defaultIconBuilder(BuildContext context, FDatePickerStyle style) => Padding(
+  static Widget defaultIconBuilder(BuildContext context, (FDatePickerStyle, FTextFieldStateStyle) styles, Widget? _) =>
+      Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
         child: FIconStyleData(
-          style: style.iconStyle,
+          style: styles.$1.iconStyle,
           child: FIcon(FAssets.icons.calendar),
         ),
       );
@@ -142,11 +143,11 @@ abstract class FDatePicker extends StatefulWidget {
 
   /// Builds a widget at the start of the input field that can be pressed to toggle the calendar popover. Defaults to
   /// [defaultIconBuilder].
-  final Widget Function(BuildContext, FDatePickerStyle)? prefixBuilder;
+  final ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? prefixBuilder;
 
   /// Builds a widget at the end of the input field that can be pressed to toggle the calendar popover. Defaults to
   /// no prefix.
-  final Widget Function(BuildContext, FDatePickerStyle)? suffixBuilder;
+  final ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? suffixBuilder;
 
   /// The label.
   final Widget? label;
@@ -247,8 +248,8 @@ abstract class FDatePicker extends StatefulWidget {
     MouseCursor? mouseCursor,
     bool canRequestFocus,
     int baselineInputYear,
-    Widget Function(BuildContext, FDatePickerStyle)? prefixBuilder,
-    Widget Function(BuildContext, FDatePickerStyle)? suffixBuilder,
+    ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? prefixBuilder,
+    ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? suffixBuilder,
     FDatePickerCalendarProperties calendar,
     Widget? label,
     Widget? description,
@@ -331,8 +332,8 @@ abstract class FDatePicker extends StatefulWidget {
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     FHidePopoverRegion hideOnTapOutside,
     bool directionPadding,
-    Widget Function(BuildContext, FDatePickerStyle)? prefixBuilder,
-    Widget Function(BuildContext, FDatePickerStyle)? suffixBuilder,
+    ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? prefixBuilder,
+    ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -375,8 +376,8 @@ abstract class FDatePicker extends StatefulWidget {
     FDatePickerStyle? style,
     bool autofocus = false,
     FocusNode? focusNode,
-    Widget Function(BuildContext, FDatePickerStyle)? prefixBuilder = defaultIconBuilder,
-    Widget Function(BuildContext, FDatePickerStyle)? suffixBuilder,
+    ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? prefixBuilder = defaultIconBuilder,
+    ValueWidgetBuilder<(FDatePickerStyle, FTextFieldStateStyle)>? suffixBuilder,
     TextInputAction? textInputAction,
     TextAlign textAlign = TextAlign.start,
     TextAlignVertical? textAlignVertical,

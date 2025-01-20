@@ -65,7 +65,7 @@ FDatePicker(
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
   baselineInputYear: 2000,
-  prefixBuilder: (context, style) => Icon(Icons.calendar_today),
+  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,
   calendar: FDatePickerCalendarProperties(),
   label: Text('Select Date'),
@@ -101,6 +101,8 @@ FDatePicker.calendar(
   directionPadding: false,
   label: Text('Calendar Date'),
   description: Text('Select a date from the calendar'),
+  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
+    suffixBuilder: null,
 );
 ```
 
@@ -124,6 +126,8 @@ FDatePicker.input(
   label: Text('Input Date'),
   description: Text('Enter a date using the keyboard'),
   autovalidateMode: AutovalidateMode.onUnfocus,
+  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
+  suffixBuilder: null,
 )
 ```
 
