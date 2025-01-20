@@ -169,9 +169,9 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
       suffixBuilder: widget.suffixBuilder == null
           ? null
           : (context, stateStyle, _) => MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
-            ),
+                cursor: SystemMouseCursors.click,
+                child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
+              ),
       label: widget.label,
       description: widget.description,
       enabled: widget.enabled,

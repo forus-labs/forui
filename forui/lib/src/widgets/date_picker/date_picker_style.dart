@@ -73,9 +73,5 @@ class FDatePickerStyle with Diagnosticable {
           iconStyle == other.iconStyle;
 
   @override
-  int get hashCode =>
-      textFieldStyle.hashCode ^
-      popoverStyle.hashCode ^
-      calendarStyle.hashCode ^
-      iconStyle.hashCode;
+  int get hashCode => textFieldStyle.hashCode ^ popoverStyle.hashCode ^ calendarStyle.hashCode ^ iconStyle.hashCode;
 }
