@@ -21,7 +21,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   static Widget _contextMenuBuilder(BuildContext context, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
-  static Widget _fieldBuilder(BuildContext context, Widget? child) => child!;
+  static Widget _fieldBuilder(BuildContext context, FTextFieldStateStyle style, Widget? child) => child!;
 
   static Widget _errorBuilder(BuildContext context, String text) => Text(text);
 
@@ -31,7 +31,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// The builder used to decorate the text-field. It should use the given child.
   ///
   /// Defaults to returning the given child.
-  final TransitionBuilder builder;
+  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
 
   @override
   final Widget? label;

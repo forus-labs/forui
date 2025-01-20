@@ -14,7 +14,7 @@ const unsupportedLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
 class DateField extends StatefulWidget {
   final FCalendarController<DateTime?> calendarController;
   final FDatePickerStyle style;
-  final TransitionBuilder builder;
+  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
   final Widget? label;
   final Widget? description;
   final Widget Function(BuildContext, String) errorBuilder;

@@ -68,7 +68,7 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
     final style = widget.style ?? context.theme.datePickerStyle;
     ValueWidgetBuilder<FTextFieldStateStyle>? prefix;
     ValueWidgetBuilder<FTextFieldStateStyle>? suffix;
-    TransitionBuilder builder = (context, child) => child!;
+    ValueWidgetBuilder<FTextFieldStateStyle> builder = (context, _, child) => child!;
 
     if (widget.calendar case final properties?) {
       prefix = widget.prefixBuilder == null
@@ -85,7 +85,7 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
                 child: widget.suffixBuilder?.call(context, (style, stateStyle), child),
               );
 
-      builder = (context, child) => _CalendarPopover(
+      builder = (context, _, child) => _CalendarPopover(
             controller: _controller,
             style: style,
             properties: properties,

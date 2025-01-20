@@ -137,7 +137,7 @@ class Field extends FormField<String> {
                   null => const SizedBox(),
                   final error => parent.errorBuilder(state.context, error),
                 },
-                child: parent.builder(state.context, textfield),
+                child: parent.builder(state.context, stateStyle, textfield),
               ),
             );
           },

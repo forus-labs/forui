@@ -180,7 +180,7 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
-      builder: (context, child) => _CalendarPopover(
+      builder: (context, _, child) => _CalendarPopover(
         controller: _controller,
         style: style,
         properties: widget,
