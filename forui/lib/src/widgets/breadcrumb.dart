@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -43,14 +44,14 @@ final class FBreadcrumb extends StatelessWidget {
     final style = this.style ?? context.theme.breadcrumbStyle;
     final divider = this.divider != null
         ? FIconStyleData(
-            style: style.iconStyle,
-            child: this.divider!,
-          )
+      style: style.iconStyle,
+      child: this.divider!,
+    )
         : FIcon(
-            FAssets.icons.chevronRight,
-            color: style.iconStyle.color,
-            size: style.iconStyle.size,
-          );
+      FAssets.icons.chevronRight,
+      color: style.iconStyle.color,
+      size: style.iconStyle.size,
+    );
 
     return Row(
       children: [
@@ -125,11 +126,41 @@ abstract interface class FBreadcrumbItem extends Widget {
   factory FBreadcrumbItem.collapsed({
     required List<FTileGroup> menu,
     FPopoverMenuStyle? popOverMenuStyle,
+    FPopoverController? popoverController,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double? maxHeight,
+    DragStartBehavior? dragStartBehavior,
+    FTileDivider? divider,
+    Alignment? menuAnchor,
+    Alignment? childAnchor,
+    Offset Function(Size, FPortalChildBox, FPortalBox)? shift,
+    FHidePopoverRegion? hideOnTapOutside,
+    bool? directionPadding,
+    bool? autofocus,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    String? semanticLabel,
     Key? key,
   }) =>
       _CollapsedCrumb(
         menu: menu,
         popOverMenuStyle: popOverMenuStyle,
+        popoverController: popoverController,
+        scrollController: scrollController,
+        cacheExtent: cacheExtent,
+        maxHeight: maxHeight ?? double.infinity,
+        dragStartBehavior: dragStartBehavior ?? DragStartBehavior.start,
+        divider: divider ?? FTileDivider.full,
+        menuAnchor: menuAnchor,
+        childAnchor: childAnchor,
+        shift: shift ?? FPortalShift.flip,
+        hideOnTapOutside: hideOnTapOutside ?? FHidePopoverRegion.excludeTarget,
+        directionPadding: directionPadding ?? false,
+        autofocus: autofocus ?? false,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        semanticLabel: semanticLabel,
         key: key,
       );
 }
@@ -184,10 +215,40 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup> menu;
   final FPopoverMenuStyle? popOverMenuStyle;
+  final FPopoverController? popoverController;
+  final ScrollController? scrollController;
+  final double? cacheExtent;
+  final double maxHeight;
+  final DragStartBehavior dragStartBehavior;
+  final FTileDivider divider;
+  final Alignment? menuAnchor;
+  final Alignment? childAnchor;
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final FHidePopoverRegion hideOnTapOutside;
+  final bool directionPadding;
+  final bool autofocus;
+  final FocusNode? focusNode;
+  final ValueChanged<bool>? onFocusChange;
+  final String? semanticLabel;
 
   const _CollapsedCrumb({
     required this.menu,
+    required this.maxHeight,
+    required this.dragStartBehavior,
+    required this.divider,
+    required this.shift,
+    required this.hideOnTapOutside,
+    required this.directionPadding,
+    required this.autofocus,
     this.popOverMenuStyle,
+    this.popoverController,
+    this.scrollController,
+    this.cacheExtent,
+    this.menuAnchor,
+    this.childAnchor,
+    this.focusNode,
+    this.onFocusChange,
+    this.semanticLabel,
     super.key,
   });
 
@@ -197,7 +258,23 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('popOverMenuStyle', popOverMenuStyle));
+    properties
+      ..add(DiagnosticsProperty('popOverMenuStyle', popOverMenuStyle))
+      ..add(DiagnosticsProperty<FPopoverController?>('popoverController', popoverController))
+      ..add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController))
+      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DoubleProperty('maxHeight', maxHeight))
+      ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
+      ..add(EnumProperty('divider', divider))
+      ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(StringProperty('semanticLabel', semanticLabel));
   }
 }
 
@@ -207,24 +284,41 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
   @override
   void initState() {
     super.initState();
-    controller = FPopoverController(vsync: this);
+    controller = widget.popoverController ?? FPopoverController(vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
-    return Padding(
-      padding: style.padding,
-      child: FPopoverMenu.automatic(
-        style: widget.popOverMenuStyle,
-        popoverController: controller,
-        menuAnchor: Alignment.topLeft,
-        childAnchor: Alignment.bottomLeft,
-        menu: widget.menu,
-        child: FIcon(
-          FAssets.icons.ellipsis,
-          size: style.iconStyle.size,
-          color: style.iconStyle.color,
+    final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
+    return FTappable(
+      focusedOutlineStyle: focusedOutlineStyle,
+      onPress: controller.toggle,
+      child: Padding(
+        padding: style.padding,
+        child: FPopoverMenu(
+          popoverController: controller,
+          style: widget.popOverMenuStyle,
+          menuAnchor: widget.menuAnchor ?? Alignment.topLeft,
+          childAnchor: widget.childAnchor ?? Alignment.bottomLeft,
+          shift: widget.shift,
+          hideOnTapOutside: widget.hideOnTapOutside,
+          directionPadding: widget.directionPadding,
+          autofocus: widget.autofocus,
+          focusNode: widget.focusNode,
+          onFocusChange: widget.onFocusChange,
+          scrollController: widget.scrollController,
+          cacheExtent: widget.cacheExtent,
+          maxHeight: widget.maxHeight,
+          dragStartBehavior: widget.dragStartBehavior,
+          semanticLabel: widget.semanticLabel,
+          divider: widget.divider,
+          menu: widget.menu,
+          child: FIcon(
+            FAssets.icons.ellipsis,
+            size: style.iconStyle.size,
+            color: style.iconStyle.color,
+          ),
         ),
       ),
     );
@@ -272,21 +366,21 @@ final class FBreadcrumbStyle with Diagnosticable {
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
   FBreadcrumbStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : this(
-          selectedTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colorScheme.foreground,
-          ),
-          unselectedTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colorScheme.mutedForeground,
-          ),
-          hoveredTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colorScheme.primary,
-            decoration: TextDecoration.underline,
-          ),
-          iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
-        );
+    selectedTextStyle: typography.sm.copyWith(
+      fontWeight: FontWeight.w400,
+      color: colorScheme.foreground,
+    ),
+    unselectedTextStyle: typography.sm.copyWith(
+      fontWeight: FontWeight.w400,
+      color: colorScheme.mutedForeground,
+    ),
+    hoveredTextStyle: typography.sm.copyWith(
+      fontWeight: FontWeight.w400,
+      color: colorScheme.primary,
+      decoration: TextDecoration.underline,
+    ),
+    iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
+  );
 
   /// Returns a copy of this [FBreadcrumbStyle] with the given properties replaced.
   @useResult
@@ -319,13 +413,13 @@ final class FBreadcrumbStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FBreadcrumbStyle &&
-          runtimeType == other.runtimeType &&
-          selectedTextStyle == other.selectedTextStyle &&
-          unselectedTextStyle == other.unselectedTextStyle &&
-          hoveredTextStyle == other.hoveredTextStyle &&
-          iconStyle == other.iconStyle &&
-          padding == other.padding;
+          other is FBreadcrumbStyle &&
+              runtimeType == other.runtimeType &&
+              selectedTextStyle == other.selectedTextStyle &&
+              unselectedTextStyle == other.unselectedTextStyle &&
+              hoveredTextStyle == other.hoveredTextStyle &&
+              iconStyle == other.iconStyle &&
+              padding == other.padding;
 
   @override
   int get hashCode =>

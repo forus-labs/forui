@@ -7,6 +7,7 @@
 * Add `FPopoverTagRegion`.
 * Add `FTextfield.onTap`.
 * Add `FTextfield.onTapOutside`.
+* Add `FBreadcrumb`.
 
 ### Changes
 
