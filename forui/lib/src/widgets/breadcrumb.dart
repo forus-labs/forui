@@ -44,14 +44,14 @@ final class FBreadcrumb extends StatelessWidget {
     final style = this.style ?? context.theme.breadcrumbStyle;
     final divider = this.divider != null
         ? FIconStyleData(
-      style: style.iconStyle,
-      child: this.divider!,
-    )
+            style: style.iconStyle,
+            child: this.divider!,
+          )
         : FIcon(
-      FAssets.icons.chevronRight,
-      color: style.iconStyle.color,
-      size: style.iconStyle.size,
-    );
+            FAssets.icons.chevronRight,
+            color: style.iconStyle.color,
+            size: style.iconStyle.size,
+          );
 
     return Row(
       children: [
@@ -366,21 +366,21 @@ final class FBreadcrumbStyle with Diagnosticable {
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
   FBreadcrumbStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
       : this(
-    selectedTextStyle: typography.sm.copyWith(
-      fontWeight: FontWeight.w400,
-      color: colorScheme.foreground,
-    ),
-    unselectedTextStyle: typography.sm.copyWith(
-      fontWeight: FontWeight.w400,
-      color: colorScheme.mutedForeground,
-    ),
-    hoveredTextStyle: typography.sm.copyWith(
-      fontWeight: FontWeight.w400,
-      color: colorScheme.primary,
-      decoration: TextDecoration.underline,
-    ),
-    iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
-  );
+          selectedTextStyle: typography.sm.copyWith(
+            fontWeight: FontWeight.w400,
+            color: colorScheme.foreground,
+          ),
+          unselectedTextStyle: typography.sm.copyWith(
+            fontWeight: FontWeight.w400,
+            color: colorScheme.mutedForeground,
+          ),
+          hoveredTextStyle: typography.sm.copyWith(
+            fontWeight: FontWeight.w400,
+            color: colorScheme.primary,
+            decoration: TextDecoration.underline,
+          ),
+          iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
+        );
 
   /// Returns a copy of this [FBreadcrumbStyle] with the given properties replaced.
   @useResult
@@ -413,13 +413,13 @@ final class FBreadcrumbStyle with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FBreadcrumbStyle &&
-              runtimeType == other.runtimeType &&
-              selectedTextStyle == other.selectedTextStyle &&
-              unselectedTextStyle == other.unselectedTextStyle &&
-              hoveredTextStyle == other.hoveredTextStyle &&
-              iconStyle == other.iconStyle &&
-              padding == other.padding;
+      other is FBreadcrumbStyle &&
+          runtimeType == other.runtimeType &&
+          selectedTextStyle == other.selectedTextStyle &&
+          unselectedTextStyle == other.unselectedTextStyle &&
+          hoveredTextStyle == other.hoveredTextStyle &&
+          iconStyle == other.iconStyle &&
+          padding == other.padding;
 
   @override
   int get hashCode =>
