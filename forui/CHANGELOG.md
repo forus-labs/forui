@@ -40,6 +40,7 @@
 * Fix `FPopover` not handling focus changes in popover properly.
 * Fix `FTappable` remaining in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
 * Fix `FTextField` ignoring `enableInteractiveSelection` parameter.
+* Fix `FTextField` ignoring `FTextFieldStyle.cursorColor`.
 
 
 ## 0.8.0
