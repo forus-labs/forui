@@ -1,6 +1,7 @@
 @Tags(['golden'])
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -151,6 +152,31 @@ void main() {
           });
         }
       }
+
+      testWidgets('iOS selection handles - ${theme.name}', (tester) async {
+        debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+
+        final controller = TextEditingController(text: 'text');
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FTextField(controller: controller),
+          ),
+        );
+
+        await tester.tap(find.byType(FTextField));
+        await tester.tap(find.byType(FTextField));
+        await tester.tap(find.byType(FTextField));
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('text-field/${theme.name}/ios-selection-handle.png'),
+        );
+
+        debugDefaultTargetPlatformOverride = null;
+      });
     }
   });
 }

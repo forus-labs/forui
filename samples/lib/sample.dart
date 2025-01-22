@@ -51,11 +51,13 @@ abstract class StatefulSample extends StatefulWidget {
   final FThemeData theme;
   final Alignment alignment;
   final double maxWidth;
+  final double maxHeight;
 
   StatefulSample({
     String theme = 'zinc-light',
     this.alignment = Alignment.center,
     this.maxWidth = 400,
+    this.maxHeight = double.infinity,
     super.key,
   }) : theme = themes[theme]!;
 }
@@ -68,7 +70,7 @@ abstract class StatefulSampleState<T extends StatefulSample> extends State<T> {
           content: Align(
             alignment: widget.alignment,
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: widget.maxWidth),
+              constraints: BoxConstraints(maxWidth: widget.maxWidth, maxHeight: widget.maxHeight),
               child: Builder(
                 builder: sample,
               ),

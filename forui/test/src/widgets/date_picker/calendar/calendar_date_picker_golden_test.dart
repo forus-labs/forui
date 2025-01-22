@@ -157,10 +157,14 @@ void main() {
     testWidgets('${theme.name} error', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
+          alignment: Alignment.topCenter,
           theme: theme.data,
           child: const FDatePicker.calendar(forceErrorText: 'Error', key: key),
         ),
       );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
 
       await expectLater(
         find.byType(TestScaffold),

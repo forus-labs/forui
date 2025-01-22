@@ -424,17 +424,17 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   }
 
   @override
-  Future<void> didChange(Set<T>? values) async {
-    super.didChange(values);
-    if (!setEquals(_controller.values, values)) {
-      _controller.values = values ?? {};
+  Future<void> didChange(Set<T>? value) async {
+    super.didChange(value);
+    if (!setEquals(_controller.value, value)) {
+      _controller.value = value ?? {};
     }
   }
 
   @override
   void reset() {
     // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
-    _controller.values = widget.initialValue ?? {};
+    _controller.value = widget.initialValue ?? {};
     super.reset();
   }
 
@@ -453,8 +453,8 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
     // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
     // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.groupController.values != value) {
-      didChange(widget.groupController.values);
+    if (widget.groupController.value != value) {
+      didChange(widget.groupController.value);
     }
   }
 
@@ -469,12 +469,12 @@ class _SelectGroupController<T> extends DelegateSelectGroupController<T> {
   _SelectGroupController(super.delegate, this._popover, {required this.autoHide});
 
   @override
-  Future<void> select(T value, bool selected) async {
+  Future<void> update(T value, {required bool selected}) async {
     if (autoHide && _popover.shown) {
       await _popover.hide();
     }
 
-    super.select(value, selected);
+    super.update(value, selected: selected);
   }
 
   @override

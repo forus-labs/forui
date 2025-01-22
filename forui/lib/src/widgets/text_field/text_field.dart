@@ -18,16 +18,20 @@ import 'package:forui/src/widgets/text_field/field.dart';
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget with FFormFieldProperties<String> {
-  static Widget _contextMenuBuilder(
-    BuildContext context,
-    EditableTextState state,
-  ) =>
+  static Widget _contextMenuBuilder(BuildContext context, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+  static Widget _fieldBuilder(BuildContext context, FTextFieldStateStyle style, Widget? child) => child!;
 
   static Widget _errorBuilder(BuildContext context, String text) => Text(text);
 
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
+
+  /// The builder used to decorate the text-field. It should use the given child.
+  ///
+  /// Defaults to returning the given child.
+  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
 
   @override
   final Widget? label;
@@ -484,15 +488,15 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// If this configuration is left null, then spell check is disabled by default.
   final SpellCheckConfiguration? spellCheckConfiguration;
 
-  /// The prefix.
+  /// The prefix's builder.
   ///
   /// See [InputDecoration.prefixIcon] for more information.
-  final Widget? prefix;
+  final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
 
-  /// The suffix icon.
+  /// The suffix's builder.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
-  final Widget? suffix;
+  final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
 
   @override
   final FormFieldSetter<String>? onSaved;
@@ -515,6 +519,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// Creates a [FTextField].
   const FTextField({
     this.style,
+    this.builder = _fieldBuilder,
     this.label,
     this.hint,
     this.description,
@@ -565,8 +570,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -579,6 +584,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
+    this.builder = _fieldBuilder,
     this.label = const Text('Email'),
     this.hint,
     this.description,
@@ -629,8 +635,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -646,6 +652,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// when handling the creation of new passwords.
   const FTextField.password({
     this.style,
+    this.builder = _fieldBuilder,
     this.label = const Text('Password'),
     this.hint,
     this.description,
@@ -696,8 +703,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -714,6 +721,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// [maxLines].
   const FTextField.multiline({
     this.style,
+    this.builder = _fieldBuilder,
     this.label,
     this.hint,
     this.description,
@@ -764,8 +772,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
-    this.prefix,
-    this.suffix,
+    this.prefixBuilder,
+    this.suffixBuilder,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -792,15 +800,15 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
               selectionColor: style.cursorColor.withValues(alpha: 0.4),
               selectionHandleColor: style.cursorColor,
             ),
-            cupertinoOverrideTheme: CupertinoThemeData(
-              // TODO: See https://github.com/flutter/flutter/issues/161573
-              primaryColor: style.cursorColor,
-            ),
           ),
-          child: Field(
-            parent: this,
-            style: style,
-            key: key,
+          child: CupertinoTheme(
+            // We cannot use Theme.cupertinoOverrideTheme because of https://github.com/flutter/flutter/issues/161573.
+            data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
+            child: Field(
+              parent: this,
+              style: style,
+              key: key,
+            ),
           ),
         ),
       ),
@@ -825,6 +833,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('controller', controller))
@@ -881,7 +890,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('undoController', undoController))
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
-      ..add(DiagnosticsProperty('suffixIcon', suffix))
+      ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
+      ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialValue', initialValue))

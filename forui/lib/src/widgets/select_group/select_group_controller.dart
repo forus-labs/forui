@@ -3,37 +3,34 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-/// A controller for a select group.
-abstract class FSelectGroupController<T> extends FChangeNotifier {
-  final Set<T> _values;
-
+/// A select group's controller that manages the selection state of a group of values.
+///
+/// See:
+/// * [FRadioSelectGroupController] for a single radio button like selection.
+/// * [FMultiSelectGroupController] for multiple selections.
+abstract class FSelectGroupController<T> extends FValueNotifier<Set<T>> {
   /// Creates a [FSelectGroupController].
-  FSelectGroupController({Set<T> values = const {}}) : _values = {...values};
-
-  /// Handles a change in the selection.
-  // ignore: avoid_positional_boolean_parameters
-  void select(T value, bool selected);
+  FSelectGroupController({Set<T> values = const {}}) : super({...values});
 
   /// Returns true if a value is selected.
-  bool contains(T value) => _values.contains(value);
+  bool contains(T value) => super.value.contains(value);
 
-  /// The currently selected values.
-  Set<T> get values => {..._values};
-
-  @protected
-  set values(Set<T> values) => {
-        _values.clear(),
-        _values.addAll(values),
-        notifyListeners(),
-      };
+  /// Updates the selection state of the given [value].
+  void update(T value, {required bool selected});
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSelectGroupController && runtimeType == other.runtimeType && values == other.values;
+  Set<T> get value => {..._value};
 
   @override
-  int get hashCode => _values.hashCode;
+  set value(Set<T> values) {
+    _value
+      ..clear()
+      ..addAll(values);
+
+    notifyListeners();
+  }
+
+  Set<T> get _value => super.value;
 }
 
 @internal
@@ -49,11 +46,14 @@ class DelegateSelectGroupController<T> implements FSelectGroupController<T> {
 
   @override
   @mustCallSuper
-  void select(T value, bool selected) => delegate.select(value, selected);
+  void update(T value, {required bool selected}) => delegate.update(value, selected: selected);
 
   @override
   @mustCallSuper
   void addListener(VoidCallback listener) => delegate.addListener(listener);
+
+  @override
+  void addValueListener(ValueChanged<Set<T>> listener) => delegate.addValueListener(listener);
 
   @override
   @mustCallSuper
@@ -62,6 +62,9 @@ class DelegateSelectGroupController<T> implements FSelectGroupController<T> {
   @override
   @mustCallSuper
   void removeListener(VoidCallback listener) => delegate.removeListener(listener);
+
+  @override
+  void removeValueListener(ValueChanged<Set<T>> listener) => delegate.removeValueListener(listener);
 
   @override
   @mustCallSuper
@@ -77,38 +80,56 @@ class DelegateSelectGroupController<T> implements FSelectGroupController<T> {
 
   @override
   @mustCallSuper
-  Set<T> get values => delegate.values;
+  Set<T> get value => delegate.value;
 
   @override
   @mustCallSuper
-  set values(Set<T> values) => delegate.values = values;
+  set value(Set<T> value) => delegate.value = value;
 
   @override
-  @mustCallSuper
-  Set<T> get _values => delegate.values;
+  Set<T> get _value => delegate._value;
 }
 
-/// A [FSelectGroupController] that allows only one selection mimicking the behaviour of radio buttons.
+/// A [FSelectGroupController] that allows only one selection, mimicking the behaviour of radio buttons.
 class FRadioSelectGroupController<T> extends FSelectGroupController<T> {
+  /// A callback that is called when the selection of a value is updated via [update].
+  ///
+  /// It is called before listeners registered via [addListener] and [addValueListener].
+  final ValueChanged<(T, bool)>? onUpdate;
+
   /// Creates a [FRadioSelectGroupController].
-  FRadioSelectGroupController({T? value}) : super(values: value == null ? {} : {value});
+  FRadioSelectGroupController({T? value, this.onUpdate}) : super(values: value == null ? {} : {value});
 
   @override
-  void select(T value, bool selected) {
+  void update(T value, {required bool selected}) {
     if (!selected || contains(value)) {
       return;
     }
 
-    _values
+    _value
       ..clear()
       ..add(value);
 
+    onUpdate?.call((value, selected));
     notifyListeners();
+  }
+
+  @override
+  set value(Set<T> value) {
+    if (1 < value.length) {
+      throw ArgumentError('Only one value can be selected.');
+    }
+
+    super.value = value;
   }
 }
 
 /// A [FSelectGroupController] that allows multiple selections.
 class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
+  /// A callback that is called when the selection of a value is updated via [update].
+  ///
+  /// It is called before listeners registered via [addListener] and [addValueListener].
+  final ValueChanged<(T, bool)>? onUpdate;
   final int _min;
   final int? _max;
 
@@ -123,6 +144,7 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
   FMultiSelectGroupController({
     int min = 0,
     int? max,
+    this.onUpdate,
     super.values,
   })  : _min = min,
         _max = max,
@@ -131,32 +153,31 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
         assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   @override
-  void select(T value, bool selected) {
+  void update(T value, {required bool selected}) {
     if (selected) {
-      if (_max != null && _values.length >= _max) {
+      if (_max != null && _value.length >= _max) {
         return;
       }
 
-      _values.add(value);
+      _value.add(value);
     } else {
-      if (_values.length <= _min) {
+      if (_value.length <= _min) {
         return;
       }
 
-      _values.remove(value);
+      _value.remove(value);
     }
 
+    onUpdate?.call((value, selected));
     notifyListeners();
   }
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FMultiSelectGroupController &&
-          runtimeType == other.runtimeType &&
-          _min == other._min &&
-          _max == other._max;
+  set value(Set<T> value) {
+    if (value.length < _min || (_max != null && _max < value.length)) {
+      throw ArgumentError('The number of values must be between $_min and ${_max ?? ''}.');
+    }
 
-  @override
-  int get hashCode => _min.hashCode ^ _max.hashCode;
+    super.value = value;
+  }
 }

@@ -14,6 +14,7 @@ const unsupportedLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
 class DateField extends StatefulWidget {
   final FCalendarController<DateTime?> calendarController;
   final FDatePickerStyle style;
+  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
   final Widget? label;
   final Widget? description;
   final Widget Function(BuildContext, String) errorBuilder;
@@ -33,14 +34,15 @@ class DateField extends StatefulWidget {
   final MouseCursor? mouseCursor;
   final VoidCallback? onTap;
   final bool canRequestFocus;
-  final Widget? prefix;
-  final Widget? suffix;
+  final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
+  final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
   final FLocalizations localizations;
   final int baselineYear;
 
   const DateField({
     required this.calendarController,
     required this.style,
+    required this.builder,
     required this.label,
     required this.description,
     required this.errorBuilder,
@@ -60,8 +62,8 @@ class DateField extends StatefulWidget {
     required this.mouseCursor,
     required this.onTap,
     required this.canRequestFocus,
-    required this.prefix,
-    required this.suffix,
+    required this.prefixBuilder,
+    required this.suffixBuilder,
     required this.localizations,
     required this.baselineYear,
     super.key,
@@ -76,6 +78,7 @@ class DateField extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('calendarController', calendarController))
       ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
@@ -93,7 +96,8 @@ class DateField extends StatefulWidget {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(DiagnosticsProperty('suffix', suffix))
+      ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
+      ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(IntProperty('baselineYear', baselineYear));
   }
@@ -144,6 +148,7 @@ class _DateFieldState extends State<DateField> {
           controller: _controller,
           style: widget.style.textFieldStyle,
           statesController: _controller.states,
+          builder: widget.builder,
           autocorrect: false,
           // We cannot use TextInputType.number as it is does not contain a done button.
           keyboardType: const TextInputType.numberWithOptions(signed: true),
@@ -163,8 +168,8 @@ class _DateFieldState extends State<DateField> {
           mouseCursor: widget.mouseCursor,
           onTap: widget.onTap,
           canRequestFocus: widget.canRequestFocus,
-          prefix: widget.prefix,
-          suffix: widget.suffix,
+          prefixBuilder: widget.prefixBuilder,
+          suffixBuilder: widget.suffixBuilder,
           onSaved: onSaved == null ? null : (_) => onSaved(widget.calendarController.value),
           validator: (value) => switch (widget.calendarController.value) {
             null when value == _controller.placeholder => widget.validator(null),

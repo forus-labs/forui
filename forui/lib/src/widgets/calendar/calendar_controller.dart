@@ -7,7 +7,8 @@ DateTime _truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, dat
 
 /// A controller that controls date selection in a calendar.
 ///
-/// All returned [DateTime]s are in UTC timezone with no time component.
+/// All returned [DateTime]s are in UTC timezone with no time component. It is possible to set the controller's value
+/// to a unselectable date. Doing so will result in undefined behavior.
 ///
 /// This class should be extended to customize date selection. By default, the following controllers are provided:
 /// * [FCalendarController.date] for selecting a single date.

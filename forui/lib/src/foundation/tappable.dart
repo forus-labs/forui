@@ -101,6 +101,7 @@ class FTappable extends StatefulWidget {
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    Tween<double>? animationTween,
     HitTestBehavior behavior,
     Duration touchHoverEnterDuration,
     Duration touchHoverExitDuration,
@@ -135,7 +136,7 @@ class FTappable extends StatefulWidget {
         builder = builder ?? _builder;
 
   @override
-  State<FTappable> createState() => _FTappableState();
+  State<FTappable> createState() => _FTappableState<FTappable>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -159,7 +160,7 @@ class FTappable extends StatefulWidget {
   bool get _enabled => onPress != null || onLongPress != null;
 }
 
-class _FTappableState extends State<FTappable> {
+class _FTappableState<T extends FTappable> extends State<T> {
   int _monotonic = 0;
   bool _focused = false;
   bool _hovered = false;
@@ -172,9 +173,9 @@ class _FTappableState extends State<FTappable> {
   }
 
   @override
-  void didUpdateWidget(covariant FTappable oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget._enabled != oldWidget._enabled) {
+  void didUpdateWidget(covariant T old) {
+    super.didUpdateWidget(old);
+    if (widget._enabled != old._enabled) {
       _hovered = false;
       _touched = false;
     }
@@ -270,7 +271,10 @@ class _FTappableState extends State<FTappable> {
 
 @internal
 class AnimatedTappable extends FTappable {
+  final Tween<double>? animationTween;
+
   const AnimatedTappable({
+    this.animationTween,
     super.focusedOutlineStyle,
     super.semanticLabel,
     super.semanticSelected = false,
@@ -290,18 +294,32 @@ class AnimatedTappable extends FTappable {
 
   @override
   State<FTappable> createState() => AnimatedTappableState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('animationTween', animationTween));
+  }
 }
 
 @internal
-class AnimatedTappableState extends _FTappableState with SingleTickerProviderStateMixin {
+class AnimatedTappableState extends _FTappableState<AnimatedTappable> with SingleTickerProviderStateMixin {
   late final AnimationController controller;
-  late final Animation<double> animation;
+  late Animation<double> animation;
 
   @override
   void initState() {
     super.initState();
     controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    animation = Tween(begin: 1.0, end: 0.97).animate(controller);
+    animation = (widget.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
+  }
+
+  @override
+  void didUpdateWidget(covariant AnimatedTappable old) {
+    super.didUpdateWidget(old);
+    if (widget.animationTween != old.animationTween) {
+      animation = (widget.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
+    }
   }
 
   @override

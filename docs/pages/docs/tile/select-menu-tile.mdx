@@ -43,7 +43,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
         details: ListenableBuilder(
           listenable: controller,
           builder: (context, _) => Text(
-            switch (controller.values.firstOrNull) {
+            switch (controller.value.firstOrNull) {
               Notification.all => 'All',
               Notification.direct => 'Direct Messages',
               null || Notification.nothing => 'None',
@@ -166,7 +166,7 @@ FSelectMenuTile<Value>.builder(
         details: ListenableBuilder(
           listenable: controller,
           builder: (context, _) => Text(
-            switch (controller.values.firstOrNull) {
+            switch (controller.value.firstOrNull) {
               Notification.all => 'All',
               Notification.direct => 'Direct Messages',
               null || Notification.nothing => 'None',
@@ -222,7 +222,7 @@ FSelectMenuTile<Value>.builder(
         details: ListenableBuilder(
           listenable: controller,
           builder: (context, _) => Text(
-            switch (controller.values.firstOrNull) {
+            switch (controller.value.firstOrNull) {
               Notification.all => 'All',
               Notification.direct => 'Direct Messages',
               Notification.limitedTime => 'Limited Time',
@@ -332,7 +332,7 @@ FSelectMenuTile<Value>.builder(
                   details: ListenableBuilder(
                     listenable: controller,
                     builder: (context, _) => Text(
-                      switch (controller.values.firstOrNull) {
+                      switch (controller.value.firstOrNull) {
                         Notification.all => 'All',
                         Notification.direct => 'Direct Messages',
                         null || Notification.nothing => 'None',

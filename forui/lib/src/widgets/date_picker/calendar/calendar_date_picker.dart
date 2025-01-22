@@ -146,44 +146,45 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
     final style = widget.style ?? context.theme.datePickerStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final onSaved = widget.onSaved;
-    return _CalendarPopover(
-      controller: _controller,
-      style: style,
-      properties: widget,
-      child: FTextField(
-        focusNode: _focus,
-        controller: _textController,
-        style: style.textFieldStyle,
-        textAlign: widget.textAlign,
-        textAlignVertical: widget.textAlignVertical,
-        textDirection: widget.textDirection,
-        expands: widget.expands,
-        mouseCursor: widget.mouseCursor,
-        canRequestFocus: widget.canRequestFocus,
-        onTap: _controller.calendar.toggle,
-        hint: widget.hint ?? localizations.datePickerHint,
-        readOnly: true,
-        enableInteractiveSelection: false,
-        prefix: widget.prefixBuilder == null
-            ? null
-            : MouseRegion(
+    return FTextField(
+      focusNode: _focus,
+      controller: _textController,
+      style: style.textFieldStyle,
+      textAlign: widget.textAlign,
+      textAlignVertical: widget.textAlignVertical,
+      textDirection: widget.textDirection,
+      expands: widget.expands,
+      mouseCursor: widget.mouseCursor,
+      canRequestFocus: widget.canRequestFocus,
+      onTap: _controller.calendar.toggle,
+      hint: widget.hint ?? localizations.datePickerHint,
+      readOnly: true,
+      enableInteractiveSelection: false,
+      prefixBuilder: widget.prefixBuilder == null
+          ? null
+          : (context, stateStyle, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, style),
+                child: widget.prefixBuilder?.call(context, (style, stateStyle), null),
               ),
-        suffix: widget.suffixBuilder == null
-            ? null
-            : MouseRegion(
+      suffixBuilder: widget.suffixBuilder == null
+          ? null
+          : (context, stateStyle, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, style),
+                child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
               ),
-        label: widget.label,
-        description: widget.description,
-        enabled: widget.enabled,
-        onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
-        validator: (value) => _controller.validator(_controller.value),
-        autovalidateMode: widget.autovalidateMode,
-        forceErrorText: widget.forceErrorText,
-        errorBuilder: widget.errorBuilder,
+      label: widget.label,
+      description: widget.description,
+      enabled: widget.enabled,
+      onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
+      validator: (value) => _controller.validator(_controller.value),
+      autovalidateMode: widget.autovalidateMode,
+      forceErrorText: widget.forceErrorText,
+      errorBuilder: widget.errorBuilder,
+      builder: (context, _, child) => _CalendarPopover(
+        controller: _controller,
+        style: style,
+        properties: widget,
+        child: child!,
       ),
     );
   }
@@ -220,23 +221,25 @@ class _CalendarPopover extends StatelessWidget {
         shift: properties.shift,
         hideOnTapOutside: properties.hideOnTapOutside,
         directionPadding: properties.directionPadding,
-        popoverBuilder: (context, follower, _) => ValueListenableBuilder(
-          valueListenable: controller._calendar,
-          builder: (context, value, _) => FCalendar(
-            style: style.calendarStyle,
-            controller: controller._calendar,
-            initialMonth: switch (value) {
-              null => null,
-              _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
-              _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
-              _ => value,
-            },
-            onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
-            dayBuilder: properties.dayBuilder,
-            start: properties.start,
-            end: properties.end,
-            today: properties.today,
-            initialType: properties.initialType,
+        popoverBuilder: (context, follower, _) => TextFieldTapRegion(
+          child: ValueListenableBuilder(
+            valueListenable: controller._calendar,
+            builder: (context, value, _) => FCalendar(
+              style: style.calendarStyle,
+              controller: controller._calendar,
+              initialMonth: switch (value) {
+                null => null,
+                _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
+                _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
+                _ => value,
+              },
+              onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
+              dayBuilder: properties.dayBuilder,
+              start: properties.start,
+              end: properties.end,
+              today: properties.today,
+              initialType: properties.initialType,
+            ),
           ),
         ),
         child: child,

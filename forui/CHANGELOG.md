@@ -5,16 +5,19 @@
 * Add `FDatePicker`.
 * Add `FFormProperties`.
 * Add `FPopoverTagRegion`.
-* Add `FTextfield.onTap`.
-* Add `FTextfield.onTapOutside`.
 * Add `FBreadcrumb`.
+* Add `FTextField.builder`.
+* Add `FTextField.onTap`.
+* Add `FTextField.onTapOutside`.
+* Add `FSelectGroupController.onUpdate`.
+* Add `animationTween` to `FTappable.animated(...)`.
+* Add `FValueNotifier.addValueListener(...)`.
+* Add `FValueNotifier.removeValueListener(...)`.
 
 ### Changes
 
-* **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`.
+* **Breaking** Change `FPopover.hideOnTapOutside`'s type from `bool` to `FHidePopoverRegion`. The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
 * **Breaking** Change `FPopoverStyle.shadow` to `FStyle.shadow`.
-  The default behavior for hiding behavior for `FPopover()` has changed from excluding the target to not.
-* **Breaking** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
 * **Breaking** Change `FPopoverMenu.tappable(...)` to `FPopoverMenu.automatic(...)`.
 * **Breaking** Change `FPopover.controller(...)` to `FPopover.popoverController(...)`.
 * **Breaking** Change `FPopover.tappable(...)` to `FPopover.automatic(...)`.
@@ -24,20 +27,21 @@
 * **Breaking** Change `FPortal.targetAnchor` to `FPortal.childAnchor`.
 * **Breaking** Change `FPortal.followerBuilder` to `FPortal.portalBuilder`.
 * **Breaking** Change `FPortalFollowerShift` to `FPortalShift`.
-* **Breaking** Remove `onChange` parameter from `FSelectTile`. This was an artifact from early prototyping that was 
-  unfortunately overlooked and did not remove.
+* **Breaking** Remove `onChange` parameter from `FSelectTile`. This was accidentally include from early prototyping.
+* **Breaking** Change `FSelectGroupController.select(...)` to `FSelectGroupController.update(...)`
+* **Breaking** Change `FSelectGroupController` to be a `ValueNotifier`.
+* **Breaking** Change `FTileGroup.prefix` from `Widget` to `ValueWidgetBuilder<FTextFieldStateStyle>`.
+* **Breaking** Change `FTileGroup.suffix` from `Widget` to `ValueWidgetBuilder<FTextFieldStateStyle>`.
+* **Breaking** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
 
 ### Fixes
 
 * Fix `FCalendar` rebuilding whenever the given `initialType` and/or `initialMonth` changes.
-
 * Fix `FCalendar`'s day picker not updating when a new start and/or end date is given.
-
 * Fix `FPopover` not handling focus changes in popover properly.
-
 * Fix `FTappable` remaining in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
-
 * Fix `FTextField` ignoring `enableInteractiveSelection` parameter.
+* Fix `FTextField` ignoring `FTextFieldStyle.cursorColor`.
 
 
 ## 0.8.0
