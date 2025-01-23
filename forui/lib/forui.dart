@@ -23,6 +23,7 @@ export 'widgets/header.dart';
 export 'widgets/icon.dart';
 export 'widgets/label.dart';
 export 'widgets/line_calendar.dart';
+export 'widgets/picker.dart';
 export 'widgets/popover.dart';
 export 'widgets/popover_menu.dart';
 export 'widgets/progress.dart';
