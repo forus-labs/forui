@@ -1,6 +1,8 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:auto_route/annotations.dart';
 import 'package:forui/forui.dart';
+
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
@@ -89,8 +91,8 @@ class SeparatedPickerPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => SizedBox(
-    width: 200,
-    child: FPicker(
+        width: 200,
+        child: FPicker(
           children: [
             FPickerWheel.builder(
               builder: (context, index) => Text((index % 12).toString().padLeft(2, '0')),
@@ -107,5 +109,5 @@ class SeparatedPickerPage extends Sample {
             ),
           ],
         ),
-  );
+      );
 }
