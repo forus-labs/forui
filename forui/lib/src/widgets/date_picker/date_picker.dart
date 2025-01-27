@@ -21,7 +21,7 @@ class FDatePickerController implements FValueNotifier<DateTime?> {
   final FPopoverController calendar;
 
   /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
-  /// whether a date iin a calendar is selectable.
+  /// whether a date in a calendar is selectable.
   ///
   /// Defaults to always returning null.
   final FormFieldValidator<DateTime> validator;
@@ -96,7 +96,7 @@ class FDatePickerController implements FValueNotifier<DateTime?> {
 /// A [FDatePicker] is internally a [FormField], therefore it can be used in a [Form].
 ///
 /// It is recommended to use [FDatePicker.calendar] on touch devices and [FDatePicker.new]/[FDatePicker.input] on
-/// non-primarily touch devices.
+/// non-touch devices.
 ///
 /// The input field supports both arrow key navigation:
 /// * Up/Down arrows: Increment/decrement values

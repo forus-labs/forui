@@ -4,6 +4,7 @@
 
 * Add `FDatePicker`.
 * Add `FFormProperties`.
+* Add `FPicker`.
 * Add `FPopoverTagRegion`.
 * Add `FBreadcrumb`.
 * Add `FTextField.builder`.

@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/picker/picker.dart';
 import 'package:meta/meta.dart';
 
 class _ScrollBehavior extends ScrollBehavior {
@@ -14,8 +15,11 @@ class _ScrollBehavior extends ScrollBehavior {
   Set<PointerDeviceKind> get dragDevices => _devices;
 }
 
-@internal
-abstract class Wheel extends StatefulWidget {
+/// A picker wheel that displays a list of items that can be scrolled vertically.
+///
+/// It should only be used in a [FPicker].
+abstract class FPickerWheel extends StatefulWidget {
+  /// Estimates the extent of each item in the picker based on the given [style] and [context].
   static double estimateExtent(FPickerStyle style, BuildContext context) {
     final defaultTextStyle = DefaultTextStyle.of(context);
     final scale = MediaQuery.textScalerOf(context);
@@ -25,20 +29,57 @@ abstract class Wheel extends StatefulWidget {
     return scale.scale(height == null ? fontSize : height * fontSize);
   }
 
-  final FixedExtentScrollController controller;
-  final FPickerStyle style;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
+  /// The flex factor to use for this child.
+  ///
+  /// If zero, the child is inflexible and determines its own size. If non-zero, the amount of space the child can
+  /// occupy in the main axis is determined by dividing the free space (after placing the inflexible children) according
+  /// to the flex factors of the flexible children.
+  ///
+  /// Defaults to 1.
+  final int flex;
+
+  /// The extent of each item in the picker. Defaults to the height of the picker's text style, scaled by the current
+  /// [TextScaler].
   final double? itemExtent;
 
-  const Wheel({
-    required this.controller,
-    required this.style,
-    required this.autofocus,
-    required this.focusNode,
-    required this.onFocusChange,
-    required this.itemExtent,
+  /// {@macro forui.foundation.doc_templates.autofocus}
+  final bool autofocus;
+
+  /// {@macro forui.foundation.doc_templates.focusNode}
+  final FocusNode? focusNode;
+
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
+  final ValueChanged<bool>? onFocusChange;
+
+  /// Creates a picker wheel with the given children.
+  const factory FPickerWheel({
+    required List<Widget> children,
+    bool loop,
+    int flex,
+    double? itemExtent,
+    bool autofocus,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    Key? key,
+  }) = ListWheel;
+
+  /// Creates a picker wheel with the given builder.
+  const factory FPickerWheel.builder({
+    required IndexedWidgetBuilder builder,
+    int flex,
+    double? itemExtent,
+    bool autofocus,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    Key? key,
+  }) = BuilderWheel;
+
+  const FPickerWheel._({
+    this.flex = 1,
+    this.itemExtent,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
     super.key,
   });
 
@@ -46,14 +87,15 @@ abstract class Wheel extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
+      ..add(IntProperty('flex', flex))
       ..add(DoubleProperty('itemExtent', itemExtent))
-      ..add(DiagnosticsProperty<bool>('autofocus', autofocus));
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
 }
 
-abstract class _State<T extends Wheel> extends State<T> {
+abstract class _State<T extends FPickerWheel> extends State<T> {
   bool _focused = false;
 
   @override
@@ -64,9 +106,10 @@ abstract class _State<T extends Wheel> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    final extent = widget.itemExtent ?? Wheel.estimateExtent(widget.style, context);
-    return ScrollConfiguration(
-      behavior: const _ScrollBehavior(),
+    final PickerData(:controller, :style) = PickerData.of(context);
+    final extent = widget.itemExtent ?? FPickerWheel.estimateExtent(style, context);
+    return Flexible(
+      flex: widget.flex,
       child: FocusableActionDetector(
         descendantsAreFocusable: false,
         autofocus: widget.autofocus,
@@ -86,8 +129,8 @@ abstract class _State<T extends Wheel> extends State<T> {
           ScrollIntent: CallbackAction<ScrollIntent>(
             onInvoke: (intent) {
               final offset = intent.direction == AxisDirection.up ? -1 : 1;
-              widget.controller.animateToItem(
-                widget.controller.selectedItem + offset,
+              controller.animateToItem(
+                controller.selectedItem + offset,
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.decelerate,
               );
@@ -103,19 +146,23 @@ abstract class _State<T extends Wheel> extends State<T> {
               Container(
                 height: extent,
                 decoration: BoxDecoration(
-                  border: Border.all(color: widget.style.focusedOutlineStyle.color),
-                  borderRadius: widget.style.focusedOutlineStyle.borderRadius,
+                  border: Border.all(color: style.focusedOutlineStyle.color),
+                  borderRadius: style.focusedOutlineStyle.borderRadius,
                 ),
               ),
-            ListWheelScrollView.useDelegate(
-              controller: widget.controller,
-              physics: const FixedExtentScrollPhysics(),
-              itemExtent: extent,
-              diameterRatio: widget.style.diameterRatio,
-              magnification: widget.style.magnification,
-              squeeze: widget.style.squeeze,
-              overAndUnderCenterOpacity: widget.style.overAndUnderCenterOpacity,
-              childDelegate: delegate(widget.style),
+            ScrollConfiguration(
+              behavior: const _ScrollBehavior(),
+              child: ListWheelScrollView.useDelegate(
+                controller: controller,
+                physics: const FixedExtentScrollPhysics(),
+                itemExtent: extent,
+                diameterRatio: style.diameterRatio,
+                magnification: style.magnification,
+                squeeze: style.squeeze,
+                overAndUnderCenterOpacity: style.overAndUnderCenterOpacity,
+                childDelegate: delegate(style),
+                onSelectedItemChanged: (_) => HapticFeedback.selectionClick(),
+              ),
             ),
           ],
         ),
@@ -127,21 +174,20 @@ abstract class _State<T extends Wheel> extends State<T> {
 }
 
 @internal
-class ListWheel extends Wheel {
+class ListWheel extends FPickerWheel {
   final bool loop;
   final List<Widget> children;
 
   const ListWheel({
-    required this.loop,
     required this.children,
-    required super.controller,
-    required super.style,
-    required super.itemExtent,
-    required super.autofocus,
-    required super.focusNode,
-    required super.onFocusChange,
+    this.loop = false,
+    super.flex = 1,
+    super.itemExtent,
+    super.autofocus,
+    super.focusNode,
+    super.onFocusChange,
     super.key,
-  });
+  }) : super._();
 
   @override
   State<StatefulWidget> createState() => _ListState();
@@ -167,7 +213,7 @@ class _ListState extends _State<ListWheel> {
               child: child,
             ),
           ),
-        )
+        ),
     ];
 
     return widget.loop
@@ -177,19 +223,18 @@ class _ListState extends _State<ListWheel> {
 }
 
 @internal
-class BuilderWheel extends Wheel {
+class BuilderWheel extends FPickerWheel {
   final IndexedWidgetBuilder builder;
 
   const BuilderWheel({
     required this.builder,
-    required super.controller,
-    required super.style,
-    required super.itemExtent,
-    required super.autofocus,
-    required super.focusNode,
-    required super.onFocusChange,
+    super.flex,
+    super.itemExtent,
+    super.autofocus,
+    super.focusNode,
+    super.onFocusChange,
     super.key,
-  });
+  }) : super._();
 
   @override
   State<BuilderWheel> createState() => _BuilderState();

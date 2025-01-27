@@ -18,6 +18,12 @@ final class FPickerStyle with Diagnosticable {
   /// The opacity value applied to the wheel above and below the magnifier.
   final double overAndUnderCenterOpacity;
 
+  /// The spacing between the picker's wheels. Defaults to 5.
+  ///
+  /// ## Contract
+  /// Throws an [AssertionError] if the spacing is less than 0.
+  final double spacing;
+
   /// The picker's default text style.
   final TextStyle textStyle;
 
@@ -43,17 +49,19 @@ final class FPickerStyle with Diagnosticable {
     this.squeeze = 1,
     this.magnification = 1,
     this.overAndUnderCenterOpacity = 0.25,
+    this.spacing = 5,
     this.textHeightBehavior = const TextHeightBehavior(
       applyHeightToFirstAscent: false,
       applyHeightToLastDescent: false,
     ),
-  })  : assert(diameterRatio > 0, 'The diameter ratio must be greater than 0.'),
-        assert(squeeze > 0, 'The squeeze must be greater than 0.'),
-        assert(magnification > 0, 'The magnification must be greater than 0.'),
+  })  : assert(0 < diameterRatio, 'The diameter ratio must be greater than 0.'),
+        assert(0 < squeeze, 'The squeeze must be greater than 0.'),
+        assert(0 < magnification, 'The magnification must be greater than 0.'),
         assert(
-          overAndUnderCenterOpacity >= 0 && overAndUnderCenterOpacity <= 1,
+          0 <= overAndUnderCenterOpacity  && overAndUnderCenterOpacity <= 1,
           'The over and under center opacity must be between 0 and 1.',
-        );
+        ),
+        assert(spacing >= 0, 'The spacing must be greater than or equal to 0.');
 
   /// Creates a [FPickerStyle] that inherits its properties.
   FPickerStyle.inherit({
@@ -74,10 +82,11 @@ final class FPickerStyle with Diagnosticable {
     double? squeeze,
     double? magnification,
     double? overAndUnderCenterOpacity,
-    BorderRadius? selectionBorderRadius,
-    Color? selectionColor,
+    double? spacing,
     TextStyle? textStyle,
     TextHeightBehavior? textHeightBehavior,
+    BorderRadius? selectionBorderRadius,
+    Color? selectionColor,
     FFocusedOutlineStyle? focusedOutlineStyle,
   }) =>
       FPickerStyle(
@@ -85,10 +94,11 @@ final class FPickerStyle with Diagnosticable {
         squeeze: squeeze ?? this.squeeze,
         magnification: magnification ?? this.magnification,
         overAndUnderCenterOpacity: overAndUnderCenterOpacity ?? this.overAndUnderCenterOpacity,
-        selectionBorderRadius: selectionBorderRadius ?? this.selectionBorderRadius,
-        selectionColor: selectionColor ?? this.selectionColor,
+        spacing: spacing ?? this.spacing,
         textStyle: textStyle ?? this.textStyle,
         textHeightBehavior: textHeightBehavior ?? this.textHeightBehavior,
+        selectionBorderRadius: selectionBorderRadius ?? this.selectionBorderRadius,
+        selectionColor: selectionColor ?? this.selectionColor,
         focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
       );
 
@@ -100,6 +110,7 @@ final class FPickerStyle with Diagnosticable {
       ..add(DoubleProperty('squeeze', squeeze))
       ..add(DoubleProperty('magnification', magnification))
       ..add(DoubleProperty('overAndUnderCenterOpacity', overAndUnderCenterOpacity))
+      ..add(DoubleProperty('spacing', spacing))
       ..add(DiagnosticsProperty('selectionBorderRadius', selectionBorderRadius))
       ..add(ColorProperty('selectionColor', selectionColor))
       ..add(DiagnosticsProperty('textStyle', textStyle))
@@ -116,6 +127,7 @@ final class FPickerStyle with Diagnosticable {
           squeeze == other.squeeze &&
           magnification == other.magnification &&
           overAndUnderCenterOpacity == other.overAndUnderCenterOpacity &&
+          spacing == other.spacing &&
           selectionBorderRadius == other.selectionBorderRadius &&
           selectionColor == other.selectionColor &&
           textStyle == other.textStyle &&
@@ -128,6 +140,7 @@ final class FPickerStyle with Diagnosticable {
       squeeze.hashCode ^
       magnification.hashCode ^
       overAndUnderCenterOpacity.hashCode ^
+      spacing.hashCode ^
       selectionBorderRadius.hashCode ^
       selectionColor.hashCode ^
       textStyle.hashCode ^
