@@ -2,7 +2,7 @@
 ///
 /// A calendar.
 ///
-/// See https://forui.dev/docs/form/calendar for working examples.
+/// See https://forui.dev/docs/calendar for working examples.
 library forui.widgets.calendar;
 
 export '../src/widgets/calendar/calendar.dart';

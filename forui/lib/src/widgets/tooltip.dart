@@ -180,7 +180,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     if (widget.hover || widget.longPress) {
       child = CallbackShortcuts(
         bindings: {
-          LogicalKeySet(LogicalKeyboardKey.escape): _exit,
+          const SingleActivator(LogicalKeyboardKey.escape): _exit,
         },
         child: Focus(
           onFocusChange: (focused) async => focused ? _enter() : _exit(),
