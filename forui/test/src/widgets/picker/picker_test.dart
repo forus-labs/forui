@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
@@ -7,27 +8,27 @@ import '../../test_scaffold.dart';
 void main() {
   group('FPicker', () {
     Widget buildPicker(FPickerController? controller) => TestScaffold(
-      child: FPicker(
-        controller: controller,
-        children: const [
-          FPickerWheel(
-            key: ValueKey('A'),
-            children: [
-              Text('A1'),
-              Text('A2'),
-              Text('A3'),
+          child: FPicker(
+            controller: controller,
+            children: const [
+              FPickerWheel(
+                key: ValueKey('A'),
+                children: [
+                  Text('A1'),
+                  Text('A2'),
+                  Text('A3'),
+                ],
+              ),
+              FPickerWheel(
+                children: [
+                  Text('B1'),
+                  Text('B2'),
+                  Text('B3'),
+                ],
+              ),
             ],
           ),
-          FPickerWheel(
-            children: [
-              Text('B1'),
-              Text('B2'),
-              Text('B3'),
-            ],
-          ),
-        ],
-      ),
-    );
+        );
 
     testWidgets('maintains wheel positions when controller changes', (tester) async {
       final initialController = FPickerController(initialIndexes: [1, 1]);

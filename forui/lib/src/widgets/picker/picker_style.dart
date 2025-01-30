@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
 /// [FPickerStyle]'s style.
@@ -58,7 +58,7 @@ final class FPickerStyle with Diagnosticable {
         assert(0 < squeeze, 'The squeeze must be greater than 0.'),
         assert(0 < magnification, 'The magnification must be greater than 0.'),
         assert(
-          0 <= overAndUnderCenterOpacity  && overAndUnderCenterOpacity <= 1,
+          0 <= overAndUnderCenterOpacity && overAndUnderCenterOpacity <= 1,
           'The over and under center opacity must be between 0 and 1.',
         ),
         assert(spacing >= 0, 'The spacing must be greater than or equal to 0.');
