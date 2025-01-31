@@ -33,11 +33,7 @@ class PaginationSibilingLengthPage extends Sample {
   @override
   Widget sample(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FPagination(
-            controller: controller,
-          )
-        ],
+        children: [FPagination(controller: controller)],
       );
 }
 
