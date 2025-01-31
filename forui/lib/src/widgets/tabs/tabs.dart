@@ -149,6 +149,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           DecoratedBox(
             decoration: style.decoration,
             child: TabBar(
+              tabAlignment: widget.scrollable ? TabAlignment.start : TabAlignment.fill,
               tabs: [
                 for (final tab in widget.tabs) _Tab(style: style, label: tab.label),
               ],
