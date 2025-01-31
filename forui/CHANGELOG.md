@@ -40,6 +40,7 @@
 * Fix `FCalendar` rebuilding whenever the given `initialType` and/or `initialMonth` changes.
 * Fix `FCalendar`'s day picker not updating when a new start and/or end date is given.
 * Fix `FPopover` not handling focus changes in popover properly.
+* Fix `FTabs`'s scrollable alignment not being correct.
 * Fix `FTappable` remaining in a hovered or touched state when its `onPress`/`onLongPress` callbacks were nulled after being non-null.
 * Fix `FTextField` ignoring `enableInteractiveSelection` parameter.
 * Fix `FTextField` ignoring `FTextFieldStyle.cursorColor`.

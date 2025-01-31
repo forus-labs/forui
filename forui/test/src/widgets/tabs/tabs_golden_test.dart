@@ -69,6 +69,26 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}.png'));
       });
 
+      testWidgets('scrollable - ${theme.name}', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FTabs(
+              scrollable: true,
+              tabs: [
+                for (var i = 0; i < 10; i++)
+                  FTabEntry(
+                    label: Text('$i'),
+                    content: Text('Tab $i'),
+                  ),
+              ],
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-scrollable.png'));
+      });
+
       testWidgets('focus - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
