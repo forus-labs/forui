@@ -5,6 +5,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample.dart';
+import 'package:forui_samples/widgets/pagination.dart';
 
 void main() {
   usePathUrlStrategy();
@@ -77,6 +78,10 @@ class _AppRouter extends RootStackRouter {
         AutoRoute(path: '/line-calendar/default', page: LineCalendarRoute.page),
         AutoRoute(path: '/modal-sheet/default', page: ModalSheetRoute.page),
         AutoRoute(path: '/modal-sheet/draggable', page: DraggableModalSheetRoute.page),
+        AutoRoute(path: '/pagination/default', page: PaginationRoute.page),
+        AutoRoute(path: '/pagination/siblingLength', page: PaginationSibilingLengthRoute.page),
+        AutoRoute(path: '/pagination/hideFirstLast', page: PaginationHideFirstLastRoute.page),
+        AutoRoute(path: '/pagination/customIcon', page: PaginationCustomIconRoute.page),
         AutoRoute(path: '/picker/default', page: PickerRoute.page),
         AutoRoute(path: '/picker/multiple', page: MultiPickerRoute.page),
         AutoRoute(path: '/picker/separator', page: SeparatedPickerRoute.page),

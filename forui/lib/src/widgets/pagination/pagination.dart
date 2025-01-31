@@ -27,7 +27,7 @@ final class FPagination extends StatefulWidget {
   /// The next button placed at the end of the pagination.
   ///
   /// Defaults to an `FAssets.icons.chevronRight` icon.
-  final FButton? next;
+  final Widget? next;
 
   /// Creates an [FPagination].
   const FPagination({
@@ -86,9 +86,8 @@ class _FPaginationState extends State<FPagination> {
 
     final elipsis = Padding(
       padding: style.itemPadding,
-      child: Container(
+      child: DecoratedBox(
         decoration: style.unselectedDecoration,
-        padding: style.contentPadding,
         child: ConstrainedBox(
           constraints: style.contentConstraints,
           child: DefaultTextStyle(
@@ -102,6 +101,7 @@ class _FPaginationState extends State<FPagination> {
     final range = _controller.calculateRange();
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         previous,
         if (_controller.value > _controller.minPagesDisplayedAtEnds + 1) ...[
@@ -213,12 +213,11 @@ class _Action extends StatelessWidget {
         child: FTappable(
           focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
           onPress: onPress,
-          builder: (context, tappableData, child) => Container(
+          builder: (context, tappableData, child) => DecoratedBox(
             decoration: switch (tappableData.hovered) {
               (false) => style.unselectedDecoration,
               (true) => style.hoveredDecoration,
             },
-            padding: style.contentPadding,
             child: ConstrainedBox(
               constraints: style.contentConstraints,
               child: DefaultTextStyle(
@@ -258,14 +257,13 @@ class _Page extends StatelessWidget {
           return FTappable(
             focusedOutlineStyle: focusedOutlineStyle,
             onPress: () => controller.value = pageNumber,
-            builder: (context, tappableData, child) => Container(
+            builder: (context, tappableData, child) => DecoratedBox(
               decoration: switch ((selected, tappableData.hovered)) {
                 (false, false) => style.unselectedDecoration,
                 (false, true) => style.hoveredDecoration,
                 (true, true) => style.selectedHoveredDecoration,
                 (true, false) => style.selectedDecoration,
               },
-              padding: style.contentPadding,
               child: ConstrainedBox(
                 constraints: style.contentConstraints,
                 child: DefaultTextStyle(
@@ -305,10 +303,7 @@ final class FPaginationStyle with Diagnosticable {
   /// The icon style.
   final FIconStyle iconStyle;
 
-  /// The padding around a page item. Defaults to `EdgeInsets.all(10)`.
-  final EdgeInsets contentPadding;
-
-  /// The padding around an action button. EdgeInsets.symmetric(horizontal: 2)`.
+  /// The padding around each item. EdgeInsets.symmetric(horizontal: 2)`.
   final EdgeInsets itemPadding;
 
   /// The constraints for the content.
@@ -323,9 +318,8 @@ final class FPaginationStyle with Diagnosticable {
     required this.iconStyle,
     required this.unselectedTextStyle,
     required this.selectedTextStyle,
-    this.contentPadding = const EdgeInsets.all(10),
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.contentConstraints = const BoxConstraints(maxWidth: 25.0, maxHeight: 24),
+    this.contentConstraints = const BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40, minHeight: 40.0,),
   });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
@@ -374,7 +368,6 @@ final class FPaginationStyle with Diagnosticable {
         unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
         selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
         iconStyle: iconStyle ?? this.iconStyle,
-        contentPadding: contentPadding ?? this.contentPadding,
         itemPadding: itemPadding ?? this.itemPadding,
         contentConstraints: contentConstraints ?? this.contentConstraints,
       );
@@ -390,7 +383,6 @@ final class FPaginationStyle with Diagnosticable {
       ..add(DiagnosticsProperty('unselectedTextStyle', unselectedTextStyle))
       ..add(DiagnosticsProperty('selectedTextStyle', selectedTextStyle))
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('contentPadding', contentPadding))
       ..add(DiagnosticsProperty('itemPadding', itemPadding))
       ..add(DiagnosticsProperty('contentConstraints', contentConstraints));
   }
@@ -407,7 +399,6 @@ final class FPaginationStyle with Diagnosticable {
           unselectedTextStyle == other.unselectedTextStyle &&
           selectedTextStyle == other.selectedTextStyle &&
           iconStyle == other.iconStyle &&
-          contentPadding == other.contentPadding &&
           itemPadding == other.itemPadding &&
           contentConstraints == other.contentConstraints;
 
@@ -420,7 +411,6 @@ final class FPaginationStyle with Diagnosticable {
       unselectedTextStyle.hashCode ^
       selectedTextStyle.hashCode ^
       iconStyle.hashCode ^
-      contentPadding.hashCode ^
       itemPadding.hashCode ^
       contentConstraints.hashCode;
 }

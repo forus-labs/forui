@@ -25,9 +25,12 @@ class FPaginationController extends FValueNotifier<int> {
 
   /// Creates a [FPaginationController].
   ///
+  /// The [initialPage] specifies the starting page to be selected, Defaults to 1.
+  ///
   /// # Contract:
   /// * Throws [AssertionError] if [length] < 0.
   /// * Throws [AssertionError] if [siblingLength] < 0.
+  /// * Throws [AssertionError] if [initialPage] >= 1 and [initialPage] <= length.
   FPaginationController({
     required this.length,
     int? initialPage,

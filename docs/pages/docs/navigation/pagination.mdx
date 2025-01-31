@@ -1,0 +1,111 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Pagination
+Display active page and navigate between multiple pages
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.pagination/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' variant='default' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FPagination(controller: FPaginationController(length: 10));
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FPagination(...)`
+
+```dart copy
+FPagination(
+  controller: FPaginationController(
+    length: 20,
+    siblingLength: 2,
+    showFirstLastPages: false,
+    initialPage: 4,
+  ),
+);
+```
+
+## Examples
+
+
+### Sibling Length
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' variant='siblingLength' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FPagination(
+          controller: FPaginationController(
+            length: 20,
+            siblingLength: 2,
+          ),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+
+### Hide First and Last page
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' variant='hideFirstLast' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FPagination(
+          controller: FPaginationController(
+            length: 8,
+            showFirstLastPages: false,
+          ),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Custom Next and Previous
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' variant='customIcon' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FPagination(
+          controller: controller,
+          next: ConstrainedBox(
+            constraints: style.contentConstraints,
+              child: FButton.icon(
+                style: FButtonStyle.ghost,
+                onPress: controller.next,
+                child: FIconStyleData(
+                  style: style.iconStyle,
+                  child: FIcon(FAssets.icons.bird),
+                ),
+              ),
+            ),
+          previous: ConstrainedBox(
+            constraints: style.contentConstraints,
+            child: FButton.icon(
+              style: FButtonStyle.ghost,
+              onPress: controller.previous,
+              child: FIconStyleData(
+                style: style.iconStyle,
+                child: FIcon(FAssets.icons.anchor),
+              ),
+            ),
+          ),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
