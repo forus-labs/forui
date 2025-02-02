@@ -65,6 +65,19 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}.png'));
       });
 
+      testWidgets('${theme.name} with no FNestedHeader actions', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: const FHeader.nested(
+              title: Text('Title'),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-no-actions.png'));
+      });
+
       testWidgets('${theme.name} with focused FNestedHeader actions', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
