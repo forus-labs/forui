@@ -38,36 +38,38 @@ final class _FNestedHeader extends FHeader {
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.headerStyle.nestedStyle;
 
+    final header = Align(
+      child: DefaultTextStyle.merge(
+        overflow: TextOverflow.fade,
+        maxLines: 1,
+        softWrap: false,
+        style: style.titleTextStyle,
+        child: title,
+      ),
+    );
+
     return SafeArea(
       bottom: false,
       child: Semantics(
         header: true,
         child: Padding(
           padding: style.padding,
-          child: Stack(
-            children: [
-              FHeaderData(
-                actionStyle: style.actionStyle,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(children: prefixActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
-                    Row(children: suffixActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
-                  ],
-                ),
-              ),
-              Positioned.fill(
-                child: Align(
-                  child: DefaultTextStyle.merge(
-                    overflow: TextOverflow.fade,
-                    maxLines: 1,
-                    softWrap: false,
-                    style: style.titleTextStyle,
-                    child: title,
+          child: FHeaderData(
+            actionStyle: style.actionStyle,
+            child: prefixActions.isEmpty && suffixActions.isEmpty
+                ? header
+                : Stack(
+                    children: [
+                      Positioned.fill(child: header),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(children: prefixActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
+                          Row(children: suffixActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-              ),
-            ],
           ),
         ),
       ),
