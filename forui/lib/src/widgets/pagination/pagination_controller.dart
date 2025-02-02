@@ -2,10 +2,10 @@ import 'package:forui/forui.dart';
 
 /// A controller that controls which page is selected.
 class FPaginationController extends FValueNotifier<int> {
-  /// The total number of pages in the paginated content.
+  /// The total number of pages.
   final int length;
 
-  /// The number of sibling pages to display beside the selected page number.
+  /// The number of sibling pages displayed beside the current page number.
   ///
   /// This value determines how many pages are shown on either side of the
   /// currently selected page in the pagination control.
