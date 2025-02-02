@@ -82,12 +82,15 @@ void main() {
       (9, 2, 9),
       (10, 2, 10),
       (11, 2, 4),
-      (12, 3,12),
+      (12, 3, 12),
       (13, 3, 13),
       (14, 3, 5),
     ]) {
       test('minPagesDisplayedAtEnds', () {
-        final controller = FPaginationController(length: length, siblingLength: siblingLength, );
+        final controller = FPaginationController(
+          length: length,
+          siblingLength: siblingLength,
+        );
         expect(controller.minPagesDisplayedAtEnds, expected);
       });
     }
@@ -97,11 +100,12 @@ void main() {
       (7, 1, 2),
       (9, 2, 9),
       (10, 2, 3),
-      (12, 3,12),
+      (12, 3, 12),
       (13, 3, 4),
     ]) {
       test('minPagesDisplayedAtEnds with showFirstLastPages set to false', () {
-        final controller = FPaginationController(length: length, siblingLength: siblingLength, showFirstLastPages: false);
+        final controller =
+            FPaginationController(length: length, siblingLength: siblingLength, showFirstLastPages: false);
         expect(controller.minPagesDisplayedAtEnds, expected);
       });
     }
