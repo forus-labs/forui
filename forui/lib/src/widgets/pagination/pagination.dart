@@ -57,7 +57,7 @@ class _FPaginationState extends State<FPagination> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FPaginationController(length: 14, siblingLength: 2);
+    _controller = widget.controller ?? FPaginationController(length: 10);
     _controller.addListener(() {
       setState(() {
         currentPage = _controller.value;
@@ -303,10 +303,10 @@ final class FPaginationStyle with Diagnosticable {
   /// The icon style.
   final FIconStyle iconStyle;
 
-  /// The padding around each item. EdgeInsets.symmetric(horizontal: 2)`.
+  /// The padding around each item. Defaults to EdgeInsets.symmetric(horizontal: 2)`.
   final EdgeInsets itemPadding;
 
-  /// The constraints for the content.
+  /// The constraints for the content. Defaults to `BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40, minHeight: 40.0)`.
   final BoxConstraints contentConstraints;
 
   /// Creates a [FPaginationStyle].
@@ -319,10 +319,10 @@ final class FPaginationStyle with Diagnosticable {
     required this.unselectedTextStyle,
     required this.selectedTextStyle,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.contentConstraints = const BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40, minHeight: 40.0,),
+    this.contentConstraints = const BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40, minHeight: 40.0),
   });
 
-  /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
+  /// Creates a [FPaginationStyle] that inherits its properties from [colorScheme], [typography], and [style].
   FPaginationStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
       : this(
           selectedDecoration: BoxDecoration(

@@ -28,7 +28,11 @@ class PaginationSibilingLengthPage extends Sample {
   PaginationSibilingLengthPage({
     @queryParam super.theme,
     @queryParam super.maxWidth = 500,
-  }) : controller = FPaginationController(length: 20, siblingLength: 2);
+  }) : controller = FPaginationController(
+          length: 20,
+          siblingLength: 2,
+          initialPage: 6,
+        );
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -64,29 +68,6 @@ class PaginationCustomIconPage extends Sample {
     @queryParam super.maxWidth = 400,
   }) : controller = FPaginationController(length: 10, initialPage: 5);
 
-  // Widget _buildNext() => Padding(
-  //       padding: style.itemPadding,
-  //       child: FTappable(
-  //         focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
-  //         onPress: onPress,
-  //         builder: (context, tappableData, child) => Container(
-  //           decoration: switch (tappableData.hovered) {
-  //             (false) => style.unselectedDecoration,
-  //             (true) => style.hoveredDecoration,
-  //           },
-  //           padding: style.contentPadding,
-  //           child: ConstrainedBox(
-  //             constraints: style.contentConstraints,
-  //             child: DefaultTextStyle(
-  //               style: style.unselectedTextStyle,
-  //               child: Center(child: child!),
-  //             ),
-  //           ),
-  //         ),
-  //         child: child,
-  //       ),
-  //     );
-
   @override
   Widget sample(BuildContext context) {
     final style = context.theme.paginationStyle;
@@ -95,25 +76,31 @@ class PaginationCustomIconPage extends Sample {
       children: [
         FPagination(
           controller: controller,
-          next: ConstrainedBox(
-            constraints: style.contentConstraints,
-            child: FButton.icon(
-              style: FButtonStyle.ghost,
-              onPress: controller.next,
-              child: FIconStyleData(
-                style: style.iconStyle,
-                child: FIcon(FAssets.icons.bird),
+          next: Padding(
+            padding: style.itemPadding,
+            child: ConstrainedBox(
+              constraints: style.contentConstraints,
+              child: FButton.icon(
+                style: FButtonStyle.ghost,
+                onPress: controller.next,
+                child: FIconStyleData(
+                  style: style.iconStyle,
+                  child: FIcon(FAssets.icons.bird),
+                ),
               ),
             ),
           ),
-          previous: ConstrainedBox(
-            constraints: style.contentConstraints,
-            child: FButton.icon(
-              style: FButtonStyle.ghost,
-              onPress: controller.previous,
-              child: FIconStyleData(
-                style: style.iconStyle,
-                child: FIcon(FAssets.icons.anchor),
+          previous: Padding(
+            padding: style.itemPadding,
+            child: ConstrainedBox(
+              constraints: style.contentConstraints,
+              child: FButton.icon(
+                style: FButtonStyle.ghost,
+                onPress: controller.previous,
+                child: FIconStyleData(
+                  style: style.iconStyle,
+                  child: FIcon(FAssets.icons.anchor),
+                ),
               ),
             ),
           ),

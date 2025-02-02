@@ -33,6 +33,7 @@ Fix documentation not publishing.
 
 * Add `FDatePicker`.
 * Add `FFormProperties`.
+* Add `FPagination`.
 * Add `FPicker`.
 * Add `FPopoverTagRegion`.
 * Add `FBreadcrumb`.

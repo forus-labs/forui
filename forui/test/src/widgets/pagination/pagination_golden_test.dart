@@ -1,6 +1,7 @@
 @Tags(['golden'])
 library;
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
@@ -80,6 +81,48 @@ void main() {
           find.byType(TestScaffold),
           matchesGoldenFile('pagination/${theme.name}/sibling-length-two.png'),
         );
+      });
+
+      testWidgets('custom icon', (tester) async {
+        final style = theme.data.paginationStyle;
+        final controller = FPaginationController(length: 10, initialPage: 5);
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FPagination(
+              controller: controller,
+              next: Padding(
+                padding: style.itemPadding,
+                child: ConstrainedBox(
+                  constraints: style.contentConstraints,
+                  child: FButton.icon(
+                    style: FButtonStyle.ghost,
+                    onPress: controller.next,
+                    child: FIconStyleData(
+                      style: style.iconStyle,
+                      child: FIcon(FAssets.icons.bird),
+                    ),
+                  ),
+                ),
+              ),
+              previous: Padding(
+                padding: style.itemPadding,
+                child: ConstrainedBox(
+                  constraints: style.contentConstraints,
+                  child: FButton.icon(
+                    style: FButtonStyle.ghost,
+                    onPress: controller.previous,
+                    child: FIconStyleData(
+                      style: style.iconStyle,
+                      child: FIcon(FAssets.icons.anchor),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/custom-icon.png'));
       });
     }
   });
