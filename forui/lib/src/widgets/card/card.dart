@@ -22,7 +22,7 @@ final class FCard extends StatelessWidget {
   /// Creates a [FCard] with a tile, subtitle, and [child].
   ///
   /// The card's layout is as follows:
-  /// ```
+  /// ```diagram
   /// |---------------------------|
   /// |  [image]                  |
   /// |                           |

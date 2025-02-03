@@ -44,7 +44,7 @@ class FButton extends StatelessWidget {
   /// [prefix] and [suffix] are wrapped in [FIconStyle], and therefore works with [FIcon]s.
   ///
   /// The button layout is as follows, assuming the locale is LTR:
-  /// ```
+  /// ```diagram
   /// |---------------------------------------|
   /// |  [prefixIcon]  [label]  [suffixIcon]  |
   /// |---------------------------------------|

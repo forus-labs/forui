@@ -49,7 +49,7 @@ class FDialog extends StatelessWidget {
   /// such as mobile phones, and [Axis.horizontal] on larger devices, such as tablets and desktops.
   ///
   /// The [Axis.vertical] layout with two possibles actions is:
-  /// ```
+  /// ```diagram
   /// |--------------------|
   /// | [title]            |
   /// |                    |
@@ -61,7 +61,7 @@ class FDialog extends StatelessWidget {
   /// ```
   ///
   /// The [Axis.horizontal] layout with two possibles actions is:
-  /// ```
+  /// ```diagram
   /// |--------------------------------------------|
   /// | [title]                                    |
   /// |                                            |

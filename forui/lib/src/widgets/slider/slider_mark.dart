@@ -77,7 +77,7 @@ final class FSliderMarkStyle with Diagnosticable {
   /// For example, if the layout is [FLayout.ltr] and the cross axis offset is 3, the label will be 3 pixels below the
   /// slider's edge.
   ///
-  /// ```
+  /// ```diagram
   /// |--------------------------|
   /// |----------[tick]----------|
   /// |__________________________|
@@ -89,7 +89,7 @@ final class FSliderMarkStyle with Diagnosticable {
   ///
   /// Given the same layout, if the cross axis offset is -3, the label will be 3 pixels above the slider's edge.
   ///
-  /// ```
+  /// ```diagram
   ///            [label]
   ///              (3)
   ///              (2)

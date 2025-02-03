@@ -16,7 +16,7 @@ enum FTileDivider {
   ///
   /// For [FTile.new], the divider spans from the title's left edge to the tile's right edge. It is always aligned to
   /// the title of the tile above the divider.
-  /// ```
+  /// ```diagram
   /// -----------------------------
   /// | [prefixIcon] [title]      | <- Tile A
   /// |              ------------ |
@@ -78,7 +78,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// Creates a [FTile].
   ///
   /// Assuming LTR locale:
-  /// ```
+  /// ```diagram
   /// -----------------------------------------------------
   /// | [prefixIcon] [title]       [details] [suffixIcon] |
   /// |              [subtitle]                           |

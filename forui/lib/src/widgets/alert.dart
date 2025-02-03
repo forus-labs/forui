@@ -31,7 +31,7 @@ class FAlert extends StatelessWidget {
   /// Creates a [FAlert] with a tile, subtitle, and icon.
   ///
   /// The alert's layout is as follows:
-  /// ```
+  /// ```diagram
   /// |---------------------------|
   /// |  [icon]  [title]          |
   /// |          [subtitle]       |

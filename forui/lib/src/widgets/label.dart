@@ -23,7 +23,7 @@ enum FLabelState {
 ///
 /// There are two different [Axis] variants for labels:
 /// * [Axis.horizontal] - Used in [FCheckbox].
-/// ```
+/// ```diagram
 /// |--------------------------|
 /// |  [child]  [label]        |
 /// |           [description]  |
@@ -32,7 +32,7 @@ enum FLabelState {
 /// ```
 ///
 /// * [Axis.vertical] - Used in [FTextField].
-/// ```
+/// ```diagram
 /// |-----------------|
 /// |  [label]        |
 /// |  [child]        |
