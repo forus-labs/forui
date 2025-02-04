@@ -101,8 +101,7 @@ void main() {
       (13, 3, 4),
     ]) {
       test('minPagesDisplayedAtEnds with showEdges set to false', () {
-        final controller =
-            FPaginationController(length: length, siblings: siblingLength, showEdges: false);
+        final controller = FPaginationController(length: length, siblings: siblingLength, showEdges: false);
         expect(controller.minPagesDisplayedAtEdges, expected);
       });
     }
