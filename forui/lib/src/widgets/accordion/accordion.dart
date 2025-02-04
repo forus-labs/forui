@@ -251,3 +251,95 @@ class FAccordionItemData extends InheritedWidget {
       ..add(DiagnosticsProperty('style', style));
   }
 }
+
+// T self<T>(T t) => t;
+//
+// // Simulates a parent style/FThemeData.
+// void OtherStyle({
+//   required AStyle style,
+// }) {}
+//
+// class AStyle {
+//   final int foo;
+//   final int bar;
+//   final BStyle b;
+//
+//   AStyle({required this.foo, required this.bar, required this.b});
+//
+//   factory AStyle.inherit({
+//     required FStyle style,
+//     required FTypography typography,
+//     required FColorScheme colorScheme,
+//     AStyle Function(AStyle) inherit = self,
+//   }) =>
+//       AStyle(foo: 1, bar: 2, b: BStyle(foo: 3, bar: 4));
+//
+//   AStyle copyWith({
+//     int? foo,
+//     int? bar,
+//     BStyle? b,
+//   }) =>
+//       AStyle(
+//         foo: foo ?? this.foo,
+//         bar: bar ?? this.bar,
+//         b: b ?? this.b,
+//       );
+// }
+//
+// class BStyle {
+//   final int foo;
+//   final int bar;
+//
+//   BStyle({required this.foo, required this.bar});
+//
+//   factory BStyle.inherit({
+//     required FStyle style,
+//     required FTypography typography,
+//     required FColorScheme colorScheme,
+//     BStyle Function(BStyle) inherit = self,
+//   }) =>
+//       map(BStyle(foo: 1, bar: 2));
+//
+//   BStyle copyWith({
+//     int? foo,
+//     int? bar,
+//     BStyle Function(BStyle) inherit = self,
+//   }) =>
+//       inherit(BStyle(
+//         foo: foo ?? this.foo,
+//         bar: bar ?? this.bar,
+//       ));
+// }
+//
+// void current(FStyle style, FTypography typography, FColorScheme colorScheme) {
+//   // Requires a block.
+//   final a = AStyle.inherit(
+//     style: style,
+//     typography: typography,
+//     colorScheme: colorScheme,
+//   );
+//
+//   OtherStyle(
+//     style: AStyle(
+//       foo: 5,
+//       bar: a.bar,
+//       b: a.b.copyWith(foo: 6),
+//     ),
+//   );
+// }
+//
+// void proposed(FStyle style, FTypography typography, FColorScheme colorScheme) {
+//   // Does not require a block (usable in arrow functions & expressions)
+//   OtherStyle(
+//     style: AStyle.inherit(
+//       style: style,
+//       typography: typography,
+//       colorScheme: colorScheme,
+//     ).copyWith(
+//       map: (style) => style.copyWith(
+//         foo: 5,
+//         b: style.b.copyWith(foo: 6),
+//       ),
+//     ),
+//   );
+// }

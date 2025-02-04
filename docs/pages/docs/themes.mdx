@@ -76,14 +76,13 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 
 ## Customize Themes
 
-It's recommended to use the predefined themes as a starting point and customize them with the
-[`inherit(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/FThemeData.inherit.html) constructor
-and [`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html) method to suit your needs.
+It's recommended to use the predefined themes as a starting point and customize them with
+ [`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html) method to suit your needs.
 
 ```dart filename="main.dart" {3-14, 17-23} copy
 @override
 Widget build(BuildContext context) {
-  final theme = FThemeData.inherit(
+  final theme = FThemeData(
     colorScheme: FThemes.zinc.light.colorScheme.copyWith(
       primary: const Color(0xFF0D47A1), // dark blue
       primaryForeground: const Color(0xFFFFFFFF), // white
@@ -147,7 +146,6 @@ title: Forui Theme Data
 classDiagram
 class FThemeData {
     +FThemeData(...)
-    +FThemeData.inherit(colorScheme)
 }
 
 class FColorScheme {
