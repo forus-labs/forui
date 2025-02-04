@@ -35,11 +35,11 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/default.png'));
       });
 
-      testWidgets('showFirstLastPages set to false', (tester) async {
+      testWidgets('showEdges = false', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 10, showFirstLastPages: false)),
+            child: FPagination(controller: FPaginationController(length: 10, showEdges: false)),
           ),
         );
 
@@ -48,31 +48,31 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('pagination/${theme.name}/no-first-last-page.png'),
+          matchesGoldenFile('pagination/${theme.name}/hide-edges.png'),
         );
       });
 
-      testWidgets('sibling length 1', (tester) async {
+      testWidgets('siblings = 0', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 10)),
+            child: FPagination(controller: FPaginationController(length: 10, siblings: 0, page: 3)),
           ),
         );
-        await tester.tap(find.text('5'));
+        await tester.tap(find.bySemanticsLabel('Pagination action').last);
         await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('pagination/${theme.name}/sibling-length-one.png'),
+          matchesGoldenFile('pagination/${theme.name}/siblings-zero.png'),
         );
       });
 
-      testWidgets('sibling length 2', (tester) async {
+      testWidgets('siblings = 2', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 14, siblingLength: 2)),
+            child: FPagination(controller: FPaginationController(length: 14, siblings: 2)),
           ),
         );
         await tester.tap(find.text('7'));
@@ -80,13 +80,13 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('pagination/${theme.name}/sibling-length-two.png'),
+          matchesGoldenFile('pagination/${theme.name}/siblings-two.png'),
         );
       });
 
       testWidgets('custom icon', (tester) async {
         final style = theme.data.paginationStyle;
-        final controller = FPaginationController(length: 10, initialPage: 5);
+        final controller = FPaginationController(length: 10, page: 5);
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,

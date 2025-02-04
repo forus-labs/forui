@@ -22,16 +22,16 @@ class PaginationPage extends Sample {
 }
 
 @RoutePage()
-class PaginationSibilingLengthPage extends Sample {
+class PaginationSiblingsPage extends Sample {
   final FPaginationController controller;
 
-  PaginationSibilingLengthPage({
+  PaginationSiblingsPage({
     @queryParam super.theme,
     @queryParam super.maxWidth = 500,
   }) : controller = FPaginationController(
           length: 20,
-          siblingLength: 2,
-          initialPage: 6,
+          siblings: 2,
+          page: 10,
         );
 
   @override
@@ -47,10 +47,7 @@ class PaginationHideFirstLastPage extends Sample {
 
   PaginationHideFirstLastPage({
     @queryParam super.theme,
-  }) : controller = FPaginationController(
-          length: 8,
-          showFirstLastPages: false,
-        );
+  }) : controller = FPaginationController(length: 8, showEdges: false);
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -66,7 +63,7 @@ class PaginationCustomIconPage extends Sample {
   PaginationCustomIconPage({
     @queryParam super.theme,
     @queryParam super.maxWidth = 400,
-  }) : controller = FPaginationController(length: 10, initialPage: 5);
+  }) : controller = FPaginationController(length: 10, page: 5);
 
   @override
   Widget sample(BuildContext context) {
