@@ -78,6 +78,9 @@ final class FThemeData with Diagnosticable {
   /// The line calendar style.
   final FLineCalendarStyle lineCalendarStyle;
 
+  /// The pagination style.
+  final FPaginationStyle paginationStyle;
+
   /// The picker's style.
   final FPickerStyle pickerStyle;
 
@@ -151,6 +154,7 @@ final class FThemeData with Diagnosticable {
     required this.headerStyle,
     required this.labelStyles,
     required this.lineCalendarStyle,
+    required this.paginationStyle,
     required this.pickerStyle,
     required this.popoverStyle,
     required this.popoverMenuStyle,
@@ -206,6 +210,7 @@ final class FThemeData with Diagnosticable {
       headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: FLabelStyles.inherit(style: style),
       lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      paginationStyle: FPaginationStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       pickerStyle: FPickerStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
       popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       popoverMenuStyle: FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
@@ -288,6 +293,7 @@ final class FThemeData with Diagnosticable {
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
+    FPaginationStyle? paginationStyle,
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
@@ -325,6 +331,7 @@ final class FThemeData with Diagnosticable {
         headerStyle: headerStyle ?? this.headerStyle,
         labelStyles: labelStyles ?? this.labelStyles,
         lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
+        paginationStyle: paginationStyle ?? this.paginationStyle,
         pickerStyle: pickerStyle ?? this.pickerStyle,
         popoverStyle: popoverStyle ?? this.popoverStyle,
         popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
@@ -368,6 +375,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('paginationStyle', paginationStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('pickerStyle', pickerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle, level: DiagnosticLevel.debug))

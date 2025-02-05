@@ -33,24 +33,29 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late FPickerController controller = FPickerController(initialIndexes: [2, 5]);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 250,
-        child: FPicker(
-          style: context.theme.pickerStyle,
-          controller: controller,
-          children: [
-            FPickerWheel(
-              flex: 3,
-              loop: true,
-              children: a.map(Text.new).toList(),
+  Widget build(BuildContext context) => Column(
+        children: [
+          const SizedBox(height: 20),
+          FPagination(
+            controller: FPaginationController(
+              length: 20,
+              page: 4,
             ),
-            FPickerWheel(
-              flex: 3,
-              loop: true,
-              children: a.map(Text.new).toList(),
+          ),
+          const SizedBox(height: 20),
+          const FLabel(
+            axis: Axis.horizontal,
+            label: Text('Label'),
+            description: Text('Description'),
+            error: Text('Error'),
+            state: FLabelState.error,
+            child: SizedBox(
+              width: 200,
+              height: 20,
+              child: Placeholder(),
             ),
-          ],
-        ),
+          ),
+        ],
       );
 
   @override
