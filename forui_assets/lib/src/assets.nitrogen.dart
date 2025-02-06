@@ -1033,6 +1033,13 @@ class $FAssetsIcons {
         'assets/icons/battery-medium.svg',
       );
 
+  /// The `assets/icons/battery-plus.svg`.
+  SvgAsset get batteryPlus => const SvgAsset(
+        'forui_assets',
+        'battery-plus',
+        'assets/icons/battery-plus.svg',
+      );
+
   /// The `assets/icons/battery-warning.svg`.
   SvgAsset get batteryWarning => const SvgAsset(
         'forui_assets',
@@ -5373,6 +5380,13 @@ class $FAssetsIcons {
         'assets/icons/house-plus.svg',
       );
 
+  /// The `assets/icons/house-wifi.svg`.
+  SvgAsset get houseWifi => const SvgAsset(
+        'forui_assets',
+        'house-wifi',
+        'assets/icons/house-wifi.svg',
+      );
+
   /// The `assets/icons/house.svg`.
   SvgAsset get house => const SvgAsset(
         'forui_assets',
@@ -6260,6 +6274,13 @@ class $FAssetsIcons {
         'forui_assets',
         'map-pinned',
         'assets/icons/map-pinned.svg',
+      );
+
+  /// The `assets/icons/map-plus.svg`.
+  SvgAsset get mapPlus => const SvgAsset(
+        'forui_assets',
+        'map-plus',
+        'assets/icons/map-plus.svg',
       );
 
   /// The `assets/icons/map.svg`.
@@ -10140,6 +10161,13 @@ class $FAssetsIcons {
         'assets/icons/triangle-alert.svg',
       );
 
+  /// The `assets/icons/triangle-dashed.svg`.
+  SvgAsset get triangleDashed => const SvgAsset(
+        'forui_assets',
+        'triangle-dashed',
+        'assets/icons/triangle-dashed.svg',
+      );
+
   /// The `assets/icons/triangle-right.svg`.
   SvgAsset get triangleRight => const SvgAsset(
         'forui_assets',
@@ -11564,6 +11592,11 @@ class $FAssetsIcons {
           'forui_assets',
           'battery-medium',
           'assets/icons/battery-medium.svg',
+        ),
+        'battery-plus': const SvgAsset(
+          'forui_assets',
+          'battery-plus',
+          'assets/icons/battery-plus.svg',
         ),
         'battery-warning': const SvgAsset(
           'forui_assets',
@@ -14665,6 +14698,11 @@ class $FAssetsIcons {
           'house-plus',
           'assets/icons/house-plus.svg',
         ),
+        'house-wifi': const SvgAsset(
+          'forui_assets',
+          'house-wifi',
+          'assets/icons/house-wifi.svg',
+        ),
         'house': const SvgAsset(
           'forui_assets',
           'house',
@@ -15299,6 +15337,11 @@ class $FAssetsIcons {
           'forui_assets',
           'map-pinned',
           'assets/icons/map-pinned.svg',
+        ),
+        'map-plus': const SvgAsset(
+          'forui_assets',
+          'map-plus',
+          'assets/icons/map-plus.svg',
         ),
         'map': const SvgAsset(
           'forui_assets',
@@ -18069,6 +18112,11 @@ class $FAssetsIcons {
           'forui_assets',
           'triangle-alert',
           'assets/icons/triangle-alert.svg',
+        ),
+        'triangle-dashed': const SvgAsset(
+          'forui_assets',
+          'triangle-dashed',
+          'assets/icons/triangle-dashed.svg',
         ),
         'triangle-right': const SvgAsset(
           'forui_assets',

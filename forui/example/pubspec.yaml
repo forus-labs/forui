@@ -28,7 +28,7 @@ dependencies:
     sdk: flutter
   flutter_hooks: ^0.20.5
   forui:
-  forui_hooks: ^0.8.0
+  forui_hooks:
   intl: any
   sugar: ^3.1.0
   wakelock_plus: ^1.2.8

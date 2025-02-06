@@ -1,6 +1,6 @@
 name: forui
 description: Beautifully designed, minimalistic widgets for desktop & touch devices.
-version: 0.8.0
+version: 0.9.0
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
 repository: https://github.com/forus-labs/forui/tree/main/forui
@@ -21,7 +21,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.10+1
-  forui_assets: ^0.8.0
+  forui_assets: ^0.9.0
   google_fonts: ^6.2.0
   intl: any
   meta: ^1.11.0
