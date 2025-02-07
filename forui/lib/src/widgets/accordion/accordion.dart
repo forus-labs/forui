@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'accordion.style.dart';
+
 /// A vertically stacked set of interactive headings that each reveal a section of content.
 ///
 /// See:
@@ -70,7 +72,7 @@ class _FAccordionState extends State<FAccordion> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? FTheme.of(context).accordionStyle;
+    final style = widget.style ?? context.theme.accordionStyle;
     return Column(
       children: [
         for (final (index, child) in widget.items.indexed)
@@ -94,11 +96,13 @@ class _FAccordionState extends State<FAccordion> {
 }
 
 /// The [FAccordion]'s style.
-final class FAccordionStyle with Diagnosticable {
+final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's default text style.
+  @override
   final TextStyle titleTextStyle;
 
   /// The child's default text style.
+  @override
   final TextStyle childTextStyle;
 
   /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
@@ -148,73 +152,6 @@ final class FAccordionStyle with Diagnosticable {
           focusedOutlineStyle: style.focusedOutlineStyle,
           dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
         );
-
-  /// Returns a copy of this [FAccordionStyle] with the given properties replaced.
-  @useResult
-  FAccordionStyle copyWith({
-    TextStyle? titleTextStyle,
-    TextStyle? childTextStyle,
-    EdgeInsets? titlePadding,
-    EdgeInsets? childPadding,
-    Color? iconColor,
-    double? iconSize,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FDividerStyle? dividerStyle,
-    Duration? animationDuration,
-  }) =>
-      FAccordionStyle(
-        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-        childTextStyle: childTextStyle ?? this.childTextStyle,
-        titlePadding: titlePadding ?? this.titlePadding,
-        childPadding: childPadding ?? this.childPadding,
-        iconColor: iconColor ?? this.iconColor,
-        iconSize: iconSize ?? this.iconSize,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        dividerStyle: dividerStyle ?? this.dividerStyle,
-        animationDuration: animationDuration ?? this.animationDuration,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('title', titleTextStyle))
-      ..add(DiagnosticsProperty('childTextStyle', childTextStyle))
-      ..add(DiagnosticsProperty('padding', titlePadding))
-      ..add(DiagnosticsProperty('contentPadding', childPadding))
-      ..add(ColorProperty('iconColor', iconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FAccordionStyle &&
-          runtimeType == other.runtimeType &&
-          titleTextStyle == other.titleTextStyle &&
-          childTextStyle == other.childTextStyle &&
-          titlePadding == other.titlePadding &&
-          childPadding == other.childPadding &&
-          iconColor == other.iconColor &&
-          iconSize == other.iconSize &&
-          animationDuration == other.animationDuration &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          dividerStyle == other.dividerStyle;
-
-  @override
-  int get hashCode =>
-      titleTextStyle.hashCode ^
-      childTextStyle.hashCode ^
-      titlePadding.hashCode ^
-      childPadding.hashCode ^
-      iconColor.hashCode ^
-      iconSize.hashCode ^
-      animationDuration.hashCode ^
-      focusedOutlineStyle.hashCode ^
-      dividerStyle.hashCode;
 }
 
 @internal
@@ -251,95 +188,3 @@ class FAccordionItemData extends InheritedWidget {
       ..add(DiagnosticsProperty('style', style));
   }
 }
-
-// T self<T>(T t) => t;
-//
-// // Simulates a parent style/FThemeData.
-// void OtherStyle({
-//   required AStyle style,
-// }) {}
-//
-// class AStyle {
-//   final int foo;
-//   final int bar;
-//   final BStyle b;
-//
-//   AStyle({required this.foo, required this.bar, required this.b});
-//
-//   factory AStyle.inherit({
-//     required FStyle style,
-//     required FTypography typography,
-//     required FColorScheme colorScheme,
-//     AStyle Function(AStyle) inherit = self,
-//   }) =>
-//       AStyle(foo: 1, bar: 2, b: BStyle(foo: 3, bar: 4));
-//
-//   AStyle copyWith({
-//     int? foo,
-//     int? bar,
-//     BStyle? b,
-//   }) =>
-//       AStyle(
-//         foo: foo ?? this.foo,
-//         bar: bar ?? this.bar,
-//         b: b ?? this.b,
-//       );
-// }
-//
-// class BStyle {
-//   final int foo;
-//   final int bar;
-//
-//   BStyle({required this.foo, required this.bar});
-//
-//   factory BStyle.inherit({
-//     required FStyle style,
-//     required FTypography typography,
-//     required FColorScheme colorScheme,
-//     BStyle Function(BStyle) inherit = self,
-//   }) =>
-//       map(BStyle(foo: 1, bar: 2));
-//
-//   BStyle copyWith({
-//     int? foo,
-//     int? bar,
-//     BStyle Function(BStyle) inherit = self,
-//   }) =>
-//       inherit(BStyle(
-//         foo: foo ?? this.foo,
-//         bar: bar ?? this.bar,
-//       ));
-// }
-//
-// void current(FStyle style, FTypography typography, FColorScheme colorScheme) {
-//   // Requires a block.
-//   final a = AStyle.inherit(
-//     style: style,
-//     typography: typography,
-//     colorScheme: colorScheme,
-//   );
-//
-//   OtherStyle(
-//     style: AStyle(
-//       foo: 5,
-//       bar: a.bar,
-//       b: a.b.copyWith(foo: 6),
-//     ),
-//   );
-// }
-//
-// void proposed(FStyle style, FTypography typography, FColorScheme colorScheme) {
-//   // Does not require a block (usable in arrow functions & expressions)
-//   OtherStyle(
-//     style: AStyle.inherit(
-//       style: style,
-//       typography: typography,
-//       colorScheme: colorScheme,
-//     ).copyWith(
-//       map: (style) => style.copyWith(
-//         foo: 5,
-//         b: style.b.copyWith(foo: 6),
-//       ),
-//     ),
-//   );
-// }

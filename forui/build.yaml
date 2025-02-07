@@ -1,8 +1,16 @@
 # Configuration for build runners. See https://github.com/dart-lang/build/blob/master/build_config/README.md
 
+# Configuration for build runners. See https://github.com/dart-lang/build/blob/master/build_config/README.md
+
 targets:
   $default:
     builders:
+      forui_internal_gen:styleBuilder:
+        generate_for:
+          - lib/src/foundation/**.dart
+          - lib/src/theme/**.dart
+          - lib/src/widgets/**.dart
+
       mockito:mockBuilder:
         generate_for:
           - test/**.dart

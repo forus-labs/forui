@@ -40,7 +40,7 @@ final class FStyle with Diagnosticable {
   ///
   /// **Note:**
   /// Unless you are creating a completely new style, modifying [FThemes]' predefined styles should be preferred.
-  FStyle({
+  const FStyle({
     required this.enabledFormFieldStyle,
     required this.disabledFormFieldStyle,
     required this.errorFormFieldStyle,

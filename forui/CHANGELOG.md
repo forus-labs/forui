@@ -1,3 +1,11 @@
+## 0.10.0 (Next)
+
+### Changes
+
+* **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
+* **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
+
+
 ## 0.9.0
 
 ### Additions
@@ -34,8 +42,6 @@
 * **Breaking** Change `FTileGroup.prefix` from `Widget` to `ValueWidgetBuilder<FTextFieldStateStyle>`.
 * **Breaking** Change `FTileGroup.suffix` from `Widget` to `ValueWidgetBuilder<FTextFieldStateStyle>`.
 * **Breaking** Change `FTileGroup.controller` to `FTileGroup.scrollController`.
-* **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
-* **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 
 ### Fixes
 

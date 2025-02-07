@@ -4,8 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'text_field_style.style.dart';
+
 /// [FTextFieldStyle]'s style.
-final class FTextFieldStyle with Diagnosticable {
+final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   /// The appearance of the keyboard. Defaults to [FColorScheme.brightness].
   ///
   /// This setting is only honored on iOS devices.
