@@ -9,7 +9,7 @@
 * Add `FBreadcrumb`.
 * Add `FTextField.builder`.
 * Add `FTextField.onTap`.
-* Add `FTextField.onTapOutside`.
+* Add `FTextField.onTapAlwaysCalled`.
 * Add `FSelectGroupController.onUpdate`.
 * Add `animationTween` to `FTappable.animated(...)`.
 * Add `FValueNotifier.addValueListener(...)`.
