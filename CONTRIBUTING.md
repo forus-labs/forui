@@ -161,7 +161,7 @@ class FooStyle with Diagnosticable, _$FooStyleFunctions { // ---- (2) (3)
 
 They should:
 1. include a generated part file which includes `_$FooStyleFunctions`. To generate the file, run 
-  `dart run build_runner builder --delete-conflicting-outputs` in the forui/forui directory.
+  `dart run build_runner build --delete-conflicting-outputs` in the forui/forui directory.
 2. mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
 3. mix-in `_$FooStyleFunctions`, which contains several utility functions.
 4. provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on
