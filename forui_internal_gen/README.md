@@ -5,7 +5,6 @@ Forui's internal code generation tool. Not meant for end-users.
 ## Styles
 
 The `styleBuilder` generates a mixin for a corresponding style class name. It generates the following functions:
-  * `transform(T Function(T))`
   * `copyWith(...)`
   * `debugFillProperties(...)`
   * `operator==`

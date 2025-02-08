@@ -14,7 +14,7 @@ import 'package:meta/meta.dart';
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colorScheme], [typography], and [style].
-final class FThemeData with Diagnosticable {
+final class FThemeData with Diagnosticable, FTransformable {
   /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
   final String? debugLabel;
 
