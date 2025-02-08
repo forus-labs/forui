@@ -5,12 +5,16 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:meta/meta.dart';
 
+part 'slider_styles.style.dart';
+
 /// A slider's styles.
-final class FSliderStyles with Diagnosticable {
+final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   /// The enabled slider's horizontal style.
+  @override
   final FSliderStyle horizontalStyle;
 
   /// The enabled slider's vertical style.
+  @override
   final FSliderStyle verticalStyle;
 
   /// Creates a [FSliderStyles].
@@ -125,56 +129,31 @@ final class FSliderStyles with Diagnosticable {
       ),
     );
   }
-
-  /// Returns a copy of this [FSliderStyles] but with the given fields replaced with the new values.
-  @useResult
-  FSliderStyles copyWith({
-    FSliderStyle? horizontalStyle,
-    FSliderStyle? verticalStyle,
-  }) =>
-      FSliderStyles(
-        horizontalStyle: horizontalStyle ?? this.horizontalStyle,
-        verticalStyle: verticalStyle ?? this.verticalStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('horizontalStyle', horizontalStyle))
-      ..add(DiagnosticsProperty('verticalStyle', verticalStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSliderStyles &&
-          runtimeType == other.runtimeType &&
-          horizontalStyle == other.horizontalStyle &&
-          verticalStyle == other.verticalStyle;
-
-  @override
-  int get hashCode => horizontalStyle.hashCode ^ verticalStyle.hashCode;
 }
 
 /// A slider's style.
-final class FSliderStyle with Diagnosticable {
+final class FSliderStyle with Diagnosticable, _$FSliderStyleFunctions {
   /// The label's layout style.
+  @override
   final FLabelLayoutStyle labelLayoutStyle;
 
   /// The enabled slider's style.
+  @override
   final FSliderStateStyle enabledStyle;
 
   /// The disabled slider's style.
+  @override
   final FSliderStateStyle disabledStyle;
 
   /// The error slider's style.
+  @override
   final FSliderErrorStyle errorStyle;
 
   /// The slider's cross-axis extent. Defaults to 8.
   ///
   /// ## Contract:
   /// Throws [AssertionError] if it is not positive.
+  @override
   final double crossAxisExtent;
 
   /// The thumb's size, inclusive of . Defaults to `25` on touch platforms and `20` on non-touch platforms.
@@ -186,18 +165,21 @@ final class FSliderStyle with Diagnosticable {
   /// This unfortunately has to be placed outside of FSliderThumbStyle because [FSliderThumbStyle] is inside
   /// [FSliderStateStyle]. Putting the thumb size inside [FSliderThumbStyle] will cause a cyclic rebuild to occur
   /// whenever the window is resized due to some bad interaction between an internal LayoutBuilder and SliderFormField.
+  @override
   final double thumbSize;
 
   /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned to.
   ///
   /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
   /// devices.
+  @override
   final Alignment tooltipTipAnchor;
 
   /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned to.
   ///
   /// Defaults to [Alignment.topCenter] on primarily touch devices and [Alignment.centerRight] on non-primarily touch
   /// devices.
+  @override
   final Alignment tooltipThumbAnchor;
 
   /// Creates a [FSliderStyle].
@@ -212,82 +194,11 @@ final class FSliderStyle with Diagnosticable {
     this.tooltipThumbAnchor = Alignment.topCenter,
   })  : assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
         thumbSize = thumbSize ?? (Touch.primary ? 25 : 20);
-
-  /// Returns a copy of this [FSliderStyle] but with the given fields replaced with the new values.
-  @useResult
-  FSliderStyle copyWith({
-    FLabelLayoutStyle? labelLayoutStyle,
-    FSliderStateStyle? enabledStyle,
-    FSliderStateStyle? disabledStyle,
-    FSliderErrorStyle? errorStyle,
-    double? thumbSize,
-    double? crossAxisExtent,
-    Alignment? tooltipTipAnchor,
-    Alignment? tooltipThumbAnchor,
-  }) =>
-      FSliderStyle(
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-        thumbSize: thumbSize ?? this.thumbSize,
-        crossAxisExtent: crossAxisExtent ?? this.crossAxisExtent,
-        tooltipTipAnchor: tooltipTipAnchor ?? this.tooltipTipAnchor,
-        tooltipThumbAnchor: tooltipThumbAnchor ?? this.tooltipThumbAnchor,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
-      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
-      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
-      ..add(DiagnosticsProperty('errorStyle', errorStyle))
-      ..add(DoubleProperty('thumbSize', thumbSize))
-      ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
-      ..add(DiagnosticsProperty('tooltipTipAnchor', tooltipTipAnchor))
-      ..add(DiagnosticsProperty('tooltipThumbAnchor', tooltipThumbAnchor));
-  }
-
-  /// The label style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (
-        layout: labelLayoutStyle,
-        state: FLabelStateStyles(
-          enabledStyle: enabledStyle,
-          disabledStyle: disabledStyle,
-          errorStyle: errorStyle,
-        ),
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSliderStyle &&
-          runtimeType == other.runtimeType &&
-          labelLayoutStyle == other.labelLayoutStyle &&
-          enabledStyle == other.enabledStyle &&
-          disabledStyle == other.disabledStyle &&
-          errorStyle == other.errorStyle &&
-          crossAxisExtent == other.crossAxisExtent &&
-          tooltipTipAnchor == other.tooltipTipAnchor &&
-          tooltipThumbAnchor == other.tooltipThumbAnchor;
-
-  @override
-  int get hashCode =>
-      labelLayoutStyle.hashCode ^
-      enabledStyle.hashCode ^
-      disabledStyle.hashCode ^
-      errorStyle.hashCode ^
-      crossAxisExtent.hashCode ^
-      tooltipTipAnchor.hashCode ^
-      tooltipThumbAnchor.hashCode;
 }
 
 /// A slider state's style.
 // ignore: avoid_implementing_value_types
-final class FSliderStateStyle with Diagnosticable implements FFormFieldStyle {
+final class FSliderStateStyle with Diagnosticable, _$FSliderStateStyleFunctions implements FFormFieldStyle {
   /// The label's [TextStyle].
   @override
   final TextStyle labelTextStyle;
@@ -297,21 +208,27 @@ final class FSliderStateStyle with Diagnosticable implements FFormFieldStyle {
   final TextStyle descriptionTextStyle;
 
   /// The slider's active track color.
+  @override
   final Color activeColor;
 
   /// The slider's inactive track color.
+  @override
   final Color inactiveColor;
 
   /// The slider's border radius.
+  @override
   final BorderRadius borderRadius;
 
   /// The slider marks' style.
+  @override
   final FSliderMarkStyle markStyle;
 
   /// The slider thumb's style.
+  @override
   final FSliderThumbStyle thumbStyle;
 
   /// The tooltip's style.
+  @override
   final FTooltipStyle tooltipStyle;
 
   /// Creates a [FSliderStateStyle].
@@ -325,73 +242,13 @@ final class FSliderStateStyle with Diagnosticable implements FFormFieldStyle {
     required this.tooltipStyle,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
   });
-
-  /// Returns a copy of this [FSliderStateStyle] but with the given fields replaced with the new values.
-  @useResult
-  @override
-  FSliderStateStyle copyWith({
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-    Color? activeColor,
-    Color? inactiveColor,
-    double? mainAxisPadding,
-    BorderRadius? borderRadius,
-    FSliderMarkStyle? markStyle,
-    FSliderThumbStyle? thumbStyle,
-    FTooltipStyle? tooltipStyle,
-  }) =>
-      FSliderStateStyle(
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-        activeColor: activeColor ?? this.activeColor,
-        inactiveColor: inactiveColor ?? this.inactiveColor,
-        borderRadius: borderRadius ?? this.borderRadius,
-        markStyle: markStyle ?? this.markStyle,
-        thumbStyle: thumbStyle ?? this.thumbStyle,
-        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
-      ..add(DiagnosticsProperty('descriptionTextStyle', descriptionTextStyle))
-      ..add(ColorProperty('activeColor', activeColor))
-      ..add(ColorProperty('inactiveColor', inactiveColor))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius))
-      ..add(DiagnosticsProperty('markStyle', markStyle))
-      ..add(DiagnosticsProperty('thumbStyle', thumbStyle))
-      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSliderStateStyle &&
-          runtimeType == other.runtimeType &&
-          labelTextStyle == other.labelTextStyle &&
-          descriptionTextStyle == other.descriptionTextStyle &&
-          activeColor == other.activeColor &&
-          inactiveColor == other.inactiveColor &&
-          borderRadius == other.borderRadius &&
-          markStyle == other.markStyle &&
-          thumbStyle == other.thumbStyle &&
-          tooltipStyle == other.tooltipStyle;
-
-  @override
-  int get hashCode =>
-      activeColor.hashCode ^
-      inactiveColor.hashCode ^
-      borderRadius.hashCode ^
-      markStyle.hashCode ^
-      thumbStyle.hashCode ^
-      tooltipStyle.hashCode;
 }
 
 /// A slider error's style.
 // ignore: avoid_implementing_value_types
-final class FSliderErrorStyle extends FSliderStateStyle implements FFormFieldErrorStyle {
+final class FSliderErrorStyle extends FSliderStateStyle
+    with _$FSliderErrorStyleFunctions
+    implements FFormFieldErrorStyle {
   /// The error's [TextStyle].
   @override
   final TextStyle errorTextStyle;
@@ -408,48 +265,4 @@ final class FSliderErrorStyle extends FSliderStateStyle implements FFormFieldErr
     required super.tooltipStyle,
     super.borderRadius,
   });
-
-  /// Returns a copy of this [FSliderStateStyle] but with the given fields replaced with the new values.
-  @useResult
-  @override
-  FSliderErrorStyle copyWith({
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-    TextStyle? errorTextStyle,
-    Color? activeColor,
-    Color? inactiveColor,
-    double? mainAxisPadding,
-    BorderRadius? borderRadius,
-    FSliderMarkStyle? markStyle,
-    FSliderThumbStyle? thumbStyle,
-    FTooltipStyle? tooltipStyle,
-  }) =>
-      FSliderErrorStyle(
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-        errorTextStyle: errorTextStyle ?? this.errorTextStyle,
-        activeColor: activeColor ?? this.activeColor,
-        inactiveColor: inactiveColor ?? this.inactiveColor,
-        borderRadius: borderRadius ?? this.borderRadius,
-        markStyle: markStyle ?? this.markStyle,
-        thumbStyle: thumbStyle ?? this.thumbStyle,
-        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('errorTextStyle', errorTextStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is FSliderErrorStyle &&
-          runtimeType == other.runtimeType &&
-          errorTextStyle == other.errorTextStyle;
-
-  @override
-  int get hashCode => super.hashCode ^ errorTextStyle.hashCode;
 }

@@ -5,33 +5,33 @@ import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
-final _style = RegExp(r'^F.*Style$');
+final _style = RegExp(r'^F.*(Style|Styles)$');
 
 /// Generates corresponding style mixins that implement several commonly used operations.
 class StyleGenerator extends Generator {
   final _emitter = DartEmitter(orderDirectives: true, useNullSafetySyntax: true);
 
   @override
-  Future<String?> generate(LibraryReader library, BuildStep step) async {
-    for (final type in library.classes) {
-      if (_style.hasMatch(type.name)) {
-        return _emitter.visitMixin(generateMixin(type)).toString();
-      }
-    }
-
-    return null;
-  }
+  Future<String?> generate(LibraryReader library, BuildStep step) async => library.classes
+      .where((type) => _style.hasMatch(type.name) && !type.isSealed && !type.isAbstract)
+      .map((type) => _emitter.visitMixin(generateMixin(type)).toString())
+      .join('\n');
 }
 
 /// Generates a mixin for the given [element].
 Mixin generateMixin(ClassElement element) {
-  final fields = element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)).toList();
+  final fields = [
+    ...element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)),
+    ...element.supertype?.element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)) ??
+        <FieldElement>[],
+  ];
+
   final type = MixinBuilder()
     ..name = '_\$${element.name}Functions'
+    ..implements.add(refer('FTransformable'))
     ..on = refer('Diagnosticable')
     ..methods.addAll([
       ...getters(fields),
-      generateTransform(element),
       generateCopyWith(element, fields),
       generateDebugFillProperties(element, fields),
       generateEquals(element, fields),
@@ -54,31 +54,6 @@ List<Method> getters(List<FieldElement> fields) => fields
     )
     .toList();
 
-/// Generates a `transform` method using the given [element].
-@visibleForTesting
-Method generateTransform(ClassElement element) => Method(
-      (m) => m
-        ..returns = refer(element.name)
-        ..docs.addAll([
-          '''
-        /// Transform this [${element.name}] using the given [transform].
-        ///
-        /// This should be used in conjunction with [copyWith] to update deeply nested properties and styles that rely on the
-        /// current [${element.name}].'''
-        ])
-        ..annotations.add(refer('useResult'))
-        ..name = 'transform'
-        ..requiredParameters.addAll([
-          Parameter(
-            (p) => p
-              ..name = 'transform'
-              ..type = refer('${element.name} Function(${element.name} self)'),
-          ),
-        ])
-        ..lambda = true
-        ..body = Code('transform(this as ${element.name})'),
-    );
-
 /// Generates a `copyWith` method using the given [element] and [fields].
 @visibleForTesting
 Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
@@ -94,7 +69,11 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
           Parameter(
             (p) => p
               ..name = field.name
-              ..type = refer('${field.type.getDisplayString()}?')
+              ..type = refer(
+                field.type.getDisplayString().endsWith('?')
+                    ? field.type.getDisplayString()
+                    : '${field.type.getDisplayString()}?',
+              )
               ..named = true,
           ),
       ])
@@ -136,7 +115,7 @@ Method generateDebugFillProperties(ClassElement element, List<FieldElement> fiel
 
   final additions = switch (properties) {
     _ when properties.isEmpty => '',
-    _ when properties.length == 1 => 'properties.addProperty(${properties.single});',
+    _ when properties.length == 1 => 'properties.add(${properties.single});',
     _ => 'properties\n      ..add(${properties.join(')..add(')});',
   };
 

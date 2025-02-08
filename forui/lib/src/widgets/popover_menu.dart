@@ -3,6 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
+
+part 'popover_menu.style.dart';
 
 /// A popover menu displays a menu in a portal aligned to a child.
 ///
@@ -219,14 +222,16 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
 }
 
 /// A [FPopoverMenuStyle]'s style.
-final class FPopoverMenuStyle extends FPopoverStyle {
+final class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
   /// The tile group's style.
+  @override
   final FTileGroupStyle tileGroupStyle;
 
   /// The menu's max width. Defaults to 250.
   ///
   /// ## Contract
   /// Throws [AssertionError] if the width is not positive.
+  @override
   final double maxWidth;
 
   /// Creates a [FPopoverMenuStyle].
@@ -245,39 +250,4 @@ final class FPopoverMenuStyle extends FPopoverStyle {
   })  : tileGroupStyle = FTileGroupStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
         maxWidth = 250,
         super.inherit();
-
-  /// Returns a copy of this style with the given fields replaced by the new values.
-  /// @useResult
-  @override
-  FPopoverMenuStyle copyWith({
-    FTileGroupStyle? tileGroupStyle,
-    BoxDecoration? decoration,
-    EdgeInsets? padding,
-  }) =>
-      FPopoverMenuStyle(
-        tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
-        decoration: decoration ?? this.decoration,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle))
-      ..add(DoubleProperty('maxWidth', maxWidth));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FPopoverMenuStyle &&
-          runtimeType == other.runtimeType &&
-          tileGroupStyle == other.tileGroupStyle &&
-          maxWidth == other.maxWidth &&
-          decoration == other.decoration &&
-          padding == other.padding;
-
-  @override
-  int get hashCode => tileGroupStyle.hashCode ^ maxWidth.hashCode ^ decoration.hashCode ^ padding.hashCode;
 }

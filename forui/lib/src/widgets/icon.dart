@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'icon.style.dart';
+
 /// The [FIconStyle] that this [FIconStyleData]'s widget subtree should inherit.
 class FIconStyleData extends InheritedWidget {
   /// The icon's data.
@@ -27,19 +29,21 @@ class FIconStyleData extends InheritedWidget {
 }
 
 /// The default properties of [FIcon]s in a widget subtree.
-class FIconStyle with Diagnosticable {
+class FIconStyle with Diagnosticable, _$FIconStyleFunctions {
   /// The icon style from the closest instance of [FIconStyleData] that encloses the given context, or
   /// [FStyle.iconStyle] otherwise.
   static FIconStyle of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<FIconStyleData>()?.style ?? context.theme.style.iconStyle;
 
   /// The icon's color.
+  @override
   final Color color;
 
   /// The icon's size.
   ///
   /// ## Contract
   /// Throws [AssertionError] if `size` is not positive.
+  @override
   final double size;
 
   /// Creates a [FIconStyle].
@@ -47,29 +51,6 @@ class FIconStyle with Diagnosticable {
     required this.color,
     required this.size,
   }) : assert(0 < size, 'size is $size, but it should be positive.');
-
-  /// Returns a copy of this [FIconStyle] but with the given fields replaced with the new values.
-  @useResult
-  FIconStyle copyWith({Color? color, double? size}) => FIconStyle(
-        color: color ?? this.color,
-        size: size ?? this.size,
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FIconStyle && runtimeType == other.runtimeType && color == other.color && size == other.size;
-
-  @override
-  int get hashCode => color.hashCode ^ size.hashCode;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('size', size));
-  }
 }
 
 /// A graphical icon widget that inherits its style from an [FIconStyle], if any.

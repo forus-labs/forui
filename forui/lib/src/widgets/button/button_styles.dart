@@ -4,21 +4,28 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'button_styles.style.dart';
+
 /// [FButtonCustomStyle]'s style.
-final class FButtonStyles with Diagnosticable {
+final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
   /// The primary button style.
+  @override
   final FButtonCustomStyle primary;
 
   /// The secondary  button style.
+  @override
   final FButtonCustomStyle secondary;
 
   /// The destructive button style.
+  @override
   final FButtonCustomStyle destructive;
 
   /// The outlined button style.
+  @override
   final FButtonCustomStyle outline;
 
   /// The ghost button style.
+  @override
   final FButtonCustomStyle ghost;
 
   /// Creates a [FButtonCustomStyle].
@@ -126,46 +133,4 @@ final class FButtonStyles with Diagnosticable {
             ),
           ),
         );
-
-  /// Returns a copy of this [FButtonStyles] with the given properties replaced.
-  @useResult
-  FButtonStyles copyWith({
-    FButtonCustomStyle? primary,
-    FButtonCustomStyle? secondary,
-    FButtonCustomStyle? destructive,
-    FButtonCustomStyle? outline,
-    FButtonCustomStyle? ghost,
-  }) =>
-      FButtonStyles(
-        primary: primary ?? this.primary,
-        secondary: secondary ?? this.secondary,
-        destructive: destructive ?? this.destructive,
-        outline: outline ?? this.outline,
-        ghost: ghost ?? this.ghost,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('primary', primary))
-      ..add(DiagnosticsProperty('secondary', secondary))
-      ..add(DiagnosticsProperty('destructive', destructive))
-      ..add(DiagnosticsProperty('outlined', outline))
-      ..add(DiagnosticsProperty('ghost', ghost));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FButtonStyles &&
-          runtimeType == other.runtimeType &&
-          primary == other.primary &&
-          secondary == other.secondary &&
-          destructive == other.destructive &&
-          outline == other.outline &&
-          ghost == other.ghost;
-
-  @override
-  int get hashCode => primary.hashCode ^ secondary.hashCode ^ destructive.hashCode ^ outline.hashCode ^ ghost.hashCode;
 }

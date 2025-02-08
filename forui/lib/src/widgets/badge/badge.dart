@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/badge/badge_content.dart';
 import 'package:meta/meta.dart';
 
+part 'badge.style.dart';
+
 /// A badge. Badges are typically used to draw attention to specific information, such as labels and counts.
 ///
 /// The constants in [FBadgeStyle] provide a convenient way to style a badge.
@@ -106,14 +108,17 @@ enum Variant implements FBadgeStyle {
 }
 
 /// A custom [FBadge] style.
-final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
+final class FBadgeCustomStyle with Diagnosticable, _$FBadgeCustomStyleFunctions implements FBadgeStyle {
   /// The background color.
+  @override
   final Color backgroundColor;
 
   /// The border color.
+  @override
   final Color borderColor;
 
   /// The border radius. Defaults to `BorderRadius.circular(100)`.
+  @override
   final BorderRadius borderRadius;
 
   /// The border width (thickness).
@@ -122,9 +127,11 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
   /// Throws [AssertionError] if:
   /// * `borderWidth` <= 0.0
   /// * `borderWidth` is Nan
+  @override
   final double borderWidth;
 
   /// The badge content's style.
+  @override
   final FBadgeContentStyle contentStyle;
 
   /// Creates a [FBadgeCustomStyle].
@@ -135,51 +142,4 @@ final class FBadgeCustomStyle with Diagnosticable implements FBadgeStyle {
     required this.contentStyle,
     this.borderRadius = const BorderRadius.all(Radius.circular(100)),
   }) : assert(0 < borderWidth, 'The borderWidth is $borderWidth, but it should be in the range "0 < borderWidth".');
-
-  /// Returns a copy of this [FBadgeCustomStyle] with the given properties replaced.
-  @useResult
-  FBadgeCustomStyle copyWith({
-    Color? backgroundColor,
-    Color? borderColor,
-    BorderRadius? borderRadius,
-    double? borderWidth,
-    FBadgeContentStyle? contentStyle,
-  }) =>
-      FBadgeCustomStyle(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        borderColor: borderColor ?? this.borderColor,
-        borderRadius: borderRadius ?? this.borderRadius,
-        borderWidth: borderWidth ?? this.borderWidth,
-        contentStyle: contentStyle ?? this.contentStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('backgroundColor', backgroundColor))
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(100)))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(DiagnosticsProperty('contentStyle', contentStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FBadgeCustomStyle &&
-          runtimeType == other.runtimeType &&
-          backgroundColor == other.backgroundColor &&
-          borderColor == other.borderColor &&
-          borderRadius == other.borderRadius &&
-          borderWidth == other.borderWidth &&
-          contentStyle == other.contentStyle;
-
-  @override
-  int get hashCode =>
-      backgroundColor.hashCode ^
-      borderColor.hashCode ^
-      borderRadius.hashCode ^
-      borderWidth.hashCode ^
-      contentStyle.hashCode;
 }

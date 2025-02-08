@@ -6,6 +6,8 @@ import 'package:forui/src/widgets/sheet/gesture_detector.dart';
 import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 import 'package:meta/meta.dart';
 
+part 'sheet.style.dart';
+
 @internal
 class Sheet extends StatefulWidget {
   static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) => AnimationController(
@@ -252,29 +254,35 @@ extension on GlobalKey {
 }
 
 /// A sheet's style.
-class FSheetStyle with Diagnosticable {
+class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
   /// The barrier's color.
+  @override
   final Color barrierColor;
 
   /// The sheet's background color.
+  @override
   final Color backgroundColor;
 
   /// The entrance duration. Defaults to 200ms.
+  @override
   final Duration enterDuration;
 
   /// The exit duration. Defaults to 200ms.
+  @override
   final Duration exitDuration;
 
   /// The minimum velocity to initiate a fling. Defaults to 700.
   ///
   /// ## Contract
   /// Throws an [AssertionError] if the value is not positive.
+  @override
   final double flingVelocity;
 
   /// The threshold for determining whether the sheet is closing. Defaults to 0.5.
   ///
   /// ## Contract
   /// Throws an [AssertionError] if the value is not in the range `[0, 1]`.
+  @override
   final double closeProgressThreshold;
 
   /// Creates a [FSheetStyle].
@@ -293,54 +301,4 @@ class FSheetStyle with Diagnosticable {
           barrierColor: colorScheme.barrier,
           backgroundColor: colorScheme.background,
         );
-
-  /// Returns a new [FSheetStyle] with the given properties replaced.
-  @useResult
-  FSheetStyle copyWith({
-    Color? barrierColor,
-    Color? backgroundColor,
-    Duration? enterDuration,
-    Duration? exitDuration,
-    double? flingVelocity,
-    double? closeProgressThreshold,
-  }) =>
-      FSheetStyle(
-        barrierColor: barrierColor ?? this.barrierColor,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        enterDuration: enterDuration ?? this.enterDuration,
-        exitDuration: exitDuration ?? this.exitDuration,
-        flingVelocity: flingVelocity ?? this.flingVelocity,
-        closeProgressThreshold: closeProgressThreshold ?? this.closeProgressThreshold,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('barrierColor', barrierColor))
-      ..add(ColorProperty('backgroundColor', backgroundColor))
-      ..add(DiagnosticsProperty('enterDuration', enterDuration))
-      ..add(DiagnosticsProperty('exitDuration', exitDuration))
-      ..add(DoubleProperty('flingVelocity', flingVelocity))
-      ..add(DoubleProperty('closeProgressThreshold', closeProgressThreshold));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSheetStyle &&
-          runtimeType == other.runtimeType &&
-          backgroundColor == other.backgroundColor &&
-          enterDuration == other.enterDuration &&
-          exitDuration == other.exitDuration &&
-          flingVelocity == other.flingVelocity &&
-          closeProgressThreshold == other.closeProgressThreshold;
-
-  @override
-  int get hashCode =>
-      backgroundColor.hashCode ^
-      enterDuration.hashCode ^
-      exitDuration.hashCode ^
-      flingVelocity.hashCode ^
-      closeProgressThreshold.hashCode;
 }

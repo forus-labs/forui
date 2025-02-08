@@ -6,6 +6,8 @@ import 'package:forui/src/widgets/tile/tile_content.dart';
 import 'package:forui/src/widgets/tile/tile_group.dart';
 import 'package:meta/meta.dart';
 
+part 'tile.style.dart';
+
 /// The divider between tiles in a group.
 enum FTileDivider {
   /// Represents a divider that spans the entire tile horizontally.
@@ -270,38 +272,49 @@ class FTileData extends InheritedWidget {
 }
 
 /// A [FTile]'s style.
-final class FTileStyle with Diagnosticable {
+final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   /// The tile's border.
+  @override
   final Border border;
 
   /// The tile's focused border.
+  @override
   final Border focusedBorder;
 
   /// The tile's border radius.
+  @override
   final BorderRadius borderRadius;
 
   /// The background color when the tile is enabled.
+  @override
   final Color enabledBackgroundColor;
 
   /// The background color when the tile is enabled and hovered.
+  @override
   final Color enabledHoveredBackgroundColor;
 
   /// The background color when the tile is disabled.
+  @override
   final Color disabledBackgroundColor;
 
   /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 0 seconds.
+  @override
   final Duration touchHoverEnterDuration;
 
   /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 25ms.
+  @override
   final Duration touchHoverExitDuration;
 
   /// The divider's style.
+  @override
   final FDividerStyle dividerStyle;
 
   /// The focused divider's style.
+  @override
   final FDividerStyle focusedDividerStyle;
 
   /// The default tile content's style.
+  @override
   final FTileContentStyle contentStyle;
 
   /// Creates a [FTileStyle].
@@ -336,81 +349,4 @@ final class FTileStyle with Diagnosticable {
           ),
           contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
         );
-
-  /// Returns a copy of this [FTileStyle] with the given fields replaced with the new values.
-  @useResult
-  FTileStyle copyWith({
-    Border? border,
-    Border? focusedBorder,
-    BorderRadius? borderRadius,
-    Color? enabledBackgroundColor,
-    Color? enabledHoveredBackgroundColor,
-    Color? disabledBackgroundColor,
-    Duration? touchHoverEnterDuration,
-    Duration? touchHoverExitDuration,
-    FDividerStyle? dividerStyle,
-    FDividerStyle? focusedDividerStyle,
-    FTileContentStyle? contentStyle,
-  }) =>
-      FTileStyle(
-        border: border ?? this.border,
-        focusedBorder: focusedBorder ?? this.focusedBorder,
-        borderRadius: borderRadius ?? this.borderRadius,
-        enabledBackgroundColor: enabledBackgroundColor ?? this.enabledBackgroundColor,
-        enabledHoveredBackgroundColor: enabledHoveredBackgroundColor ?? this.enabledHoveredBackgroundColor,
-        disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
-        touchHoverEnterDuration: touchHoverEnterDuration ?? this.touchHoverEnterDuration,
-        touchHoverExitDuration: touchHoverExitDuration ?? this.touchHoverExitDuration,
-        dividerStyle: dividerStyle ?? this.dividerStyle,
-        focusedDividerStyle: focusedDividerStyle ?? this.focusedDividerStyle,
-        contentStyle: contentStyle ?? this.contentStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('border', border))
-      ..add(DiagnosticsProperty('focusedBorder', focusedBorder))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius))
-      ..add(ColorProperty('enabledBackgroundColor', enabledBackgroundColor))
-      ..add(ColorProperty('enabledHoveredBackgroundColor', enabledHoveredBackgroundColor))
-      ..add(ColorProperty('disabledBackgroundColor', disabledBackgroundColor))
-      ..add(DiagnosticsProperty('touchHoverEnterDuration', touchHoverEnterDuration))
-      ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration))
-      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
-      ..add(DiagnosticsProperty('focusedDividerStyle', focusedDividerStyle))
-      ..add(DiagnosticsProperty('contentStyle', contentStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FTileStyle &&
-          runtimeType == other.runtimeType &&
-          border == other.border &&
-          focusedBorder == other.focusedBorder &&
-          borderRadius == other.borderRadius &&
-          enabledBackgroundColor == other.enabledBackgroundColor &&
-          enabledHoveredBackgroundColor == other.enabledHoveredBackgroundColor &&
-          disabledBackgroundColor == other.disabledBackgroundColor &&
-          touchHoverEnterDuration == other.touchHoverEnterDuration &&
-          touchHoverExitDuration == other.touchHoverExitDuration &&
-          dividerStyle == other.dividerStyle &&
-          focusedDividerStyle == other.focusedDividerStyle &&
-          contentStyle == other.contentStyle;
-
-  @override
-  int get hashCode =>
-      border.hashCode ^
-      focusedBorder.hashCode ^
-      borderRadius.hashCode ^
-      enabledBackgroundColor.hashCode ^
-      enabledHoveredBackgroundColor.hashCode ^
-      disabledBackgroundColor.hashCode ^
-      touchHoverEnterDuration.hashCode ^
-      touchHoverExitDuration.hashCode ^
-      dividerStyle.hashCode ^
-      focusedDividerStyle.hashCode ^
-      contentStyle.hashCode;
 }

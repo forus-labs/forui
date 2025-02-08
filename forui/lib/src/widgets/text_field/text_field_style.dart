@@ -11,16 +11,19 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   /// The appearance of the keyboard. Defaults to [FColorScheme.brightness].
   ///
   /// This setting is only honored on iOS devices.
+  @override
   final Brightness keyboardAppearance;
 
   /// The color of the cursor. Defaults to [CupertinoColors.activeBlue].
   ///
   /// The cursor indicates the current location of text insertion point in the field.
+  @override
   final Color cursorColor;
 
   /// The padding surrounding this text field's content.
   ///
   /// Defaults to `const EdgeInsets.symmetric(horizontal: 14, vertical: 14)`.
+  @override
   final EdgeInsets contentPadding;
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
@@ -31,18 +34,23 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   /// overlapped by the keyboard) then it will attempt to make itself visible by scrolling a surrounding [Scrollable],
   /// if one is present. This value controls how far from the edges of a [Scrollable] the TextField will be positioned
   /// after the scroll.
+  @override
   final EdgeInsets scrollPadding;
 
   /// The label's layout style.
+  @override
   final FLabelLayoutStyle labelLayoutStyle;
 
   /// The style when this text field is enabled.
+  @override
   final FTextFieldStateStyle enabledStyle;
 
   /// The style when this text field is enabled.
+  @override
   final FTextFieldStateStyle disabledStyle;
 
   /// The style when this text field has an error.
+  @override
   final FTextFieldErrorStyle errorStyle;
 
   /// Creates a [FTextFieldStyle].
@@ -94,29 +102,6 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
           ),
         );
 
-  /// Returns a copy of this [FTextFieldStyle] with the given properties replaced.
-  @useResult
-  FTextFieldStyle copyWith({
-    Brightness? keyboardAppearance,
-    Color? cursorColor,
-    EdgeInsets? contentPadding,
-    EdgeInsets? scrollPadding,
-    FLabelLayoutStyle? labelLayoutStyle,
-    FTextFieldStateStyle? enabledStyle,
-    FTextFieldStateStyle? disabledStyle,
-    FTextFieldErrorStyle? errorStyle,
-  }) =>
-      FTextFieldStyle(
-        keyboardAppearance: keyboardAppearance ?? this.keyboardAppearance,
-        cursorColor: cursorColor ?? this.cursorColor,
-        contentPadding: contentPadding ?? this.contentPadding,
-        scrollPadding: scrollPadding ?? this.scrollPadding,
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-      );
-
   /// The label style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
@@ -127,43 +112,4 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
           errorStyle: errorStyle,
         ),
       );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(EnumProperty('keyboardAppearance', keyboardAppearance))
-      ..add(ColorProperty('cursorColor', cursorColor, defaultValue: CupertinoColors.activeBlue))
-      ..add(DiagnosticsProperty('contentPadding', contentPadding))
-      ..add(DiagnosticsProperty('scrollPadding', scrollPadding))
-      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
-      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
-      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
-      ..add(DiagnosticsProperty('errorStyle', errorStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FTextFieldStyle &&
-          runtimeType == other.runtimeType &&
-          keyboardAppearance == other.keyboardAppearance &&
-          cursorColor == other.cursorColor &&
-          contentPadding == other.contentPadding &&
-          scrollPadding == other.scrollPadding &&
-          labelLayoutStyle == other.labelLayoutStyle &&
-          enabledStyle == other.enabledStyle &&
-          disabledStyle == other.disabledStyle &&
-          errorStyle == other.errorStyle;
-
-  @override
-  int get hashCode =>
-      keyboardAppearance.hashCode ^
-      cursorColor.hashCode ^
-      contentPadding.hashCode ^
-      scrollPadding.hashCode ^
-      labelLayoutStyle.hashCode ^
-      enabledStyle.hashCode ^
-      disabledStyle.hashCode ^
-      errorStyle.hashCode;
 }

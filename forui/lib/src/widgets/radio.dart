@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'radio.style.dart';
+
 /// A radio button that typically allows the user to choose only one of a predefined set of options.
 ///
 /// It is recommended to use [FSelectGroup] in conjunction with [FSelectGroupItem.radio] to create a group of radio
@@ -159,28 +161,35 @@ class _State extends State<FRadio> {
 }
 
 /// A [FRadio]'s style.
-class FRadioStyle with Diagnosticable {
+class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   /// The duration of the animation when the radio's switches between selected and unselected. Defaults to 100ms.
+  @override
   final Duration animationDuration;
 
   /// The curve of the animation when the radio's switches between selected and unselected.
   ///
   /// Defaults to [Curves.easeOutCirc].
+  @override
   final Curve curve;
 
   /// The [FLabel]'s style.
+  @override
   final FLabelLayoutStyle labelLayoutStyle;
 
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The [FRadio]'s when the radio is enabled.
+  @override
   final FRadioStateStyle enabledStyle;
 
   /// The [FRadio]'s when the radio is disabled.
+  @override
   final FRadioStateStyle disabledStyle;
 
   /// The [FRadio]'s when the radio is in an error state.
+  @override
   final FRadioErrorStyle errorStyle;
 
   /// Creates a [FRadioStyle].
@@ -227,7 +236,6 @@ class FRadioStyle with Diagnosticable {
         );
 
   /// The [FLabel]'s style.
-
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
         layout: labelLayoutStyle,
@@ -237,75 +245,21 @@ class FRadioStyle with Diagnosticable {
           errorStyle: errorStyle,
         ),
       );
-
-  /// Returns a copy of this [FRadioStyle] with the given properties replaced.
-  @useResult
-  FRadioStyle copyWith({
-    Duration? animationDuration,
-    Curve? curve,
-    FLabelLayoutStyle? labelLayoutStyle,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FRadioStateStyle? enabledStyle,
-    FRadioStateStyle? disabledStyle,
-    FRadioErrorStyle? errorStyle,
-  }) =>
-      FRadioStyle(
-        animationDuration: animationDuration ?? this.animationDuration,
-        curve: curve ?? this.curve,
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('animationDuration', animationDuration))
-      ..add(DiagnosticsProperty('curve', curve))
-      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
-      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
-      ..add(DiagnosticsProperty('errorStyle', errorStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FRadioStyle &&
-          runtimeType == other.runtimeType &&
-          animationDuration == other.animationDuration &&
-          curve == other.curve &&
-          labelLayoutStyle == other.labelLayoutStyle &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          enabledStyle == other.enabledStyle &&
-          disabledStyle == other.disabledStyle &&
-          errorStyle == other.errorStyle;
-
-  @override
-  int get hashCode =>
-      animationDuration.hashCode ^
-      curve.hashCode ^
-      labelLayoutStyle.hashCode ^
-      focusedOutlineStyle.hashCode ^
-      enabledStyle.hashCode ^
-      disabledStyle.hashCode ^
-      errorStyle.hashCode;
 }
 
 /// A [FRadio]'s state style.
 // ignore: avoid_implementing_value_types
-class FRadioStateStyle with Diagnosticable implements FFormFieldStyle {
+class FRadioStateStyle with Diagnosticable, _$FRadioStateStyleFunctions implements FFormFieldStyle {
   /// The border color.
+  @override
   final Color borderColor;
 
   /// The selected color.
+  @override
   final Color selectedColor;
 
   /// The background color.
+  @override
   final Color backgroundColor;
 
   @override
@@ -322,57 +276,11 @@ class FRadioStateStyle with Diagnosticable implements FFormFieldStyle {
     required this.labelTextStyle,
     required this.descriptionTextStyle,
   });
-
-  /// Returns a copy of this [FRadioStateStyle] with the given properties replaced.
-  @override
-  @useResult
-  FRadioStateStyle copyWith({
-    Color? borderColor,
-    Color? selectedColor,
-    Color? backgroundColor,
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-  }) =>
-      FRadioStateStyle(
-        borderColor: borderColor ?? this.borderColor,
-        selectedColor: selectedColor ?? this.selectedColor,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(ColorProperty('selectedColor', selectedColor))
-      ..add(ColorProperty('backgroundColor', backgroundColor));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FRadioStateStyle &&
-          runtimeType == other.runtimeType &&
-          borderColor == other.borderColor &&
-          selectedColor == other.selectedColor &&
-          backgroundColor == other.backgroundColor &&
-          labelTextStyle == other.labelTextStyle &&
-          descriptionTextStyle == other.descriptionTextStyle;
-
-  @override
-  int get hashCode =>
-      borderColor.hashCode ^
-      selectedColor.hashCode ^
-      backgroundColor.hashCode ^
-      labelTextStyle.hashCode ^
-      descriptionTextStyle.hashCode;
 }
 
 /// A [FRadio]'s error style.
 // ignore: avoid_implementing_value_types
-final class FRadioErrorStyle extends FRadioStateStyle implements FFormFieldErrorStyle {
+final class FRadioErrorStyle extends FRadioStateStyle with _$FRadioErrorStyleFunctions implements FFormFieldErrorStyle {
   @override
   final TextStyle errorTextStyle;
 
@@ -385,32 +293,4 @@ final class FRadioErrorStyle extends FRadioStateStyle implements FFormFieldError
     required super.descriptionTextStyle,
     required this.errorTextStyle,
   });
-
-  /// Returns a copy of this [FRadioErrorStyle] with the given properties replaced.
-  @override
-  @useResult
-  FRadioErrorStyle copyWith({
-    Color? borderColor,
-    Color? selectedColor,
-    Color? backgroundColor,
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-    TextStyle? errorTextStyle,
-  }) =>
-      FRadioErrorStyle(
-        borderColor: borderColor ?? this.borderColor,
-        selectedColor: selectedColor ?? this.selectedColor,
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-        errorTextStyle: errorTextStyle ?? this.errorTextStyle,
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FRadioErrorStyle && runtimeType == other.runtimeType && errorTextStyle == other.errorTextStyle;
-
-  @override
-  int get hashCode => errorTextStyle.hashCode;
 }

@@ -106,27 +106,34 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   final TextStyle childTextStyle;
 
   /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
+  @override
   final EdgeInsets titlePadding;
 
   /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 15)`.
+  @override
   final EdgeInsets childPadding;
 
   /// The icon's color.
+  @override
   final Color iconColor;
 
   /// The icon's size. Defaults to 20.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [iconSize] is not positive.
+  @override
   final double iconSize;
 
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The divider's color.
+  @override
   final FDividerStyle dividerStyle;
 
   /// The expanding/collapsing animation duration. Defaults to 200ms.
+  @override
   final Duration animationDuration;
 
   /// Creates a [FAccordionStyle].

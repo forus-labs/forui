@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'header.style.dart';
+
 /// The current picker type.
 enum FCalendarPickerType {
   /// The day picker.
@@ -189,23 +191,29 @@ class Navigation extends StatelessWidget {
 }
 
 /// The calendar header's style.
-final class FCalendarHeaderStyle with Diagnosticable {
+final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The button style.
+  @override
   final FButtonCustomStyle buttonStyle;
 
   /// The header's text style.
+  @override
   final TextStyle headerTextStyle;
 
   /// The header icons' enabled color.
+  @override
   final Color enabledIconColor;
 
   /// The header icons' disabled color.
+  @override
   final Color disabledIconColor;
 
   /// The arrow turn animation's duration. Defaults to 200ms.
+  @override
   final Duration animationDuration;
 
   /// Creates a [FCalendarHeaderStyle].
@@ -239,6 +247,7 @@ final class FCalendarHeaderStyle with Diagnosticable {
   }
 
   /// Creates a copy of this but with the given fields replaced with the new values.
+  @override
   @useResult
   FCalendarHeaderStyle copyWith({
     FFocusedOutlineStyle? focusedOutlineStyle,
@@ -256,37 +265,4 @@ final class FCalendarHeaderStyle with Diagnosticable {
         disabledIconColor: disabledIconColor ?? this.disabledIconColor,
         animationDuration: animationDuration ?? this.animationDuration,
       );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('buttonStyle', buttonStyle))
-      ..add(DiagnosticsProperty('headerTextStyle', headerTextStyle))
-      ..add(ColorProperty('enabledIconColor', enabledIconColor))
-      ..add(ColorProperty('disabledIconColor', disabledIconColor))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCalendarHeaderStyle &&
-          runtimeType == other.runtimeType &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          buttonStyle == other.buttonStyle &&
-          headerTextStyle == other.headerTextStyle &&
-          enabledIconColor == other.enabledIconColor &&
-          disabledIconColor == other.disabledIconColor &&
-          animationDuration == other.animationDuration;
-
-  @override
-  int get hashCode =>
-      focusedOutlineStyle.hashCode ^
-      buttonStyle.hashCode ^
-      headerTextStyle.hashCode ^
-      enabledIconColor.hashCode ^
-      disabledIconColor.hashCode ^
-      animationDuration.hashCode;
 }

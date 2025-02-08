@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'breadcrumb.style.dart';
+
 /// A breadcrumb.
 ///
 /// A breadcrumb is a list of links that help visualize a page's location within a site's hierarchical structure,
@@ -333,20 +335,25 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
 }
 
 /// The [FBreadcrumb] styles.
-final class FBreadcrumbStyle with Diagnosticable {
+final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   /// The selected breadcrumb [TextStyle].
+  @override
   final TextStyle selectedTextStyle;
 
   /// The unselected breadcrumb [TextStyle].
+  @override
   final TextStyle unselectedTextStyle;
 
   /// The hovered breadcrumb [TextStyle].
+  @override
   final TextStyle hoveredTextStyle;
 
   /// The divider icon style.
+  @override
   final FIconStyle iconStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FBreadcrumbStyle].
@@ -378,6 +385,7 @@ final class FBreadcrumbStyle with Diagnosticable {
         );
 
   /// Returns a copy of this [FBreadcrumbStyle] with the given properties replaced.
+  @override
   @useResult
   FBreadcrumbStyle copyWith({
     TextStyle? selectedTextStyle,

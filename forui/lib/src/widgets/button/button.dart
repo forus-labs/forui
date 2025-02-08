@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 import 'package:meta/meta.dart';
 
+part 'button.style.dart';
+
 /// A button.
 ///
 /// [FButton]s typically contain icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
@@ -180,26 +182,33 @@ enum Variant implements FButtonStyle {
 }
 
 /// A custom [FButton] style.
-class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
+class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCustomStyleFunctions {
   /// The box decoration for an enabled button.
+  @override
   final BoxDecoration enabledBoxDecoration;
 
   /// The box decoration for an enabled button when it is hovered over.
+  @override
   final BoxDecoration enabledHoverBoxDecoration;
 
   /// The box decoration for a disabled button.
+  @override
   final BoxDecoration disabledBoxDecoration;
 
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The content's style.
+  @override
   final FButtonContentStyle contentStyle;
 
   /// The icon content's style.
+  @override
   final FButtonIconContentStyle iconContentStyle;
 
   /// The spinner's style.
+  @override
   final FButtonSpinnerStyle spinnerStyle;
 
   /// Creates a [FButtonCustomStyle].
@@ -250,63 +259,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable {
             disabled: disabledContentColor,
           ),
         );
-
-  /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
-  @useResult
-  FButtonCustomStyle copyWith({
-    BoxDecoration? enabledBoxDecoration,
-    BoxDecoration? enabledHoverBoxDecoration,
-    BoxDecoration? disabledBoxDecoration,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FButtonContentStyle? contentStyle,
-    FButtonIconContentStyle? iconContentStyle,
-    FButtonSpinnerStyle? spinnerStyle,
-  }) =>
-      FButtonCustomStyle(
-        enabledBoxDecoration: enabledBoxDecoration ?? this.enabledBoxDecoration,
-        enabledHoverBoxDecoration: enabledHoverBoxDecoration ?? this.enabledHoverBoxDecoration,
-        disabledBoxDecoration: disabledBoxDecoration ?? this.disabledBoxDecoration,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        contentStyle: contentStyle ?? this.contentStyle,
-        iconContentStyle: iconContentStyle ?? this.iconContentStyle,
-        spinnerStyle: spinnerStyle ?? this.spinnerStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('enabledBoxDecoration', enabledBoxDecoration))
-      ..add(DiagnosticsProperty('enabledHoverBoxDecoration', enabledHoverBoxDecoration))
-      ..add(DiagnosticsProperty('disabledBoxDecoration', disabledBoxDecoration))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('contentStyle', contentStyle))
-      ..add(DiagnosticsProperty('iconContentStyle', iconContentStyle))
-      ..add(DiagnosticsProperty('spinnerStyle', spinnerStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FButtonCustomStyle &&
-          runtimeType == other.runtimeType &&
-          enabledBoxDecoration == other.enabledBoxDecoration &&
-          enabledHoverBoxDecoration == other.enabledHoverBoxDecoration &&
-          disabledBoxDecoration == other.disabledBoxDecoration &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          contentStyle == other.contentStyle &&
-          iconContentStyle == other.iconContentStyle &&
-          spinnerStyle == other.spinnerStyle;
-
-  @override
-  int get hashCode =>
-      enabledBoxDecoration.hashCode ^
-      enabledHoverBoxDecoration.hashCode ^
-      disabledBoxDecoration.hashCode ^
-      focusedOutlineStyle.hashCode ^
-      contentStyle.hashCode ^
-      iconContentStyle.hashCode ^
-      spinnerStyle.hashCode;
 }
 
 /// A button's data.

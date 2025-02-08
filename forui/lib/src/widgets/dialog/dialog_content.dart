@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'dialog_content.style.dart';
+
 @internal
 sealed class Content extends StatelessWidget {
   final FDialogContentStyle style;
@@ -122,17 +124,21 @@ class VerticalContent extends Content {
 }
 
 /// [FDialog] content's style.
-final class FDialogContentStyle with Diagnosticable {
+final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
   /// The title's [TextStyle].
+  @override
   final TextStyle titleTextStyle;
 
   /// The body's [TextStyle].
+  @override
   final TextStyle bodyTextStyle;
 
   /// The padding surrounding the content.
+  @override
   final EdgeInsets padding;
 
   /// The space between actions.
+  @override
   final double actionPadding;
 
   /// Creates a [FDialogContentStyle].
@@ -155,42 +161,4 @@ final class FDialogContentStyle with Diagnosticable {
           padding: padding,
           actionPadding: actionPadding,
         );
-
-  /// Returns a copy of this [FDialogContentStyle] with the given properties replaced.
-  @useResult
-  FDialogContentStyle copyWith({
-    TextStyle? titleTextStyle,
-    TextStyle? bodyTextStyle,
-    EdgeInsets? padding,
-    double? actionPadding,
-  }) =>
-      FDialogContentStyle(
-        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-        bodyTextStyle: bodyTextStyle ?? this.bodyTextStyle,
-        padding: padding ?? this.padding,
-        actionPadding: actionPadding ?? this.actionPadding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
-      ..add(DiagnosticsProperty('bodyTextStyle', bodyTextStyle))
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(DoubleProperty('actionPadding', actionPadding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FDialogContentStyle &&
-          runtimeType == other.runtimeType &&
-          titleTextStyle == other.titleTextStyle &&
-          bodyTextStyle == other.bodyTextStyle &&
-          padding == other.padding &&
-          actionPadding == other.actionPadding;
-
-  @override
-  int get hashCode => titleTextStyle.hashCode ^ bodyTextStyle.hashCode ^ padding.hashCode ^ actionPadding.hashCode;
 }

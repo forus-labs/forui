@@ -1,7 +1,5 @@
 # Configuration for build runners. See https://github.com/dart-lang/build/blob/master/build_config/README.md
 
-# Configuration for build runners. See https://github.com/dart-lang/build/blob/master/build_config/README.md
-
 targets:
   $default:
     builders:

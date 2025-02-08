@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'alert.style.dart';
+
 /// An alert.
 ///
 /// Displays a callout for user attention.
@@ -106,11 +108,13 @@ class FAlert extends StatelessWidget {
 }
 
 /// [FAlertCustomStyle]'s style.
-final class FAlertStyles with Diagnosticable {
+final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   /// The primary alert style.
+  @override
   final FAlertCustomStyle primary;
 
   /// The destructive alert style.
+  @override
   final FAlertCustomStyle destructive;
 
   /// Creates a [FAlertStyles].
@@ -151,36 +155,6 @@ final class FAlertStyles with Diagnosticable {
             ),
           ),
         );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('primary', primary))
-      ..add(DiagnosticsProperty('destructive', destructive));
-  }
-
-  /// Returns a copy of this [FAlertStyles] with the given properties replaced.
-  @useResult
-  FAlertStyles copyWith({
-    FAlertCustomStyle? primary,
-    FAlertCustomStyle? destructive,
-  }) =>
-      FAlertStyles(
-        primary: primary ?? this.primary,
-        destructive: destructive ?? this.destructive,
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FAlertStyles &&
-          runtimeType == other.runtimeType &&
-          primary == other.primary &&
-          destructive == other.destructive;
-
-  @override
-  int get hashCode => primary.hashCode ^ destructive.hashCode;
 }
 
 /// A [FAlert]'s style.
@@ -206,28 +180,34 @@ enum Variant implements FAlertStyle {
 }
 
 /// A custom [FAlert] style.
-final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
+final class FAlertCustomStyle extends FAlertStyle with Diagnosticable, _$FAlertCustomStyleFunctions {
   /// The decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 12)`.
+  @override
   final EdgeInsets padding;
 
   /// The icon's color.
   ///
   /// Defaults to 20.
+  @override
   final Color iconColor;
 
   /// The icon's size. Defaults to 20.
   ///
   /// ## Contract
   /// Throws [AssertionError] if `iconSize` is not positive.
+  @override
   final double iconSize;
 
   /// The title's [TextStyle].
+  @override
   final TextStyle titleTextStyle;
 
   /// The subtitle's [TextStyle].
+  @override
   final TextStyle subtitleTextStyle;
 
   /// Creates a [FAlertCustomStyle].
@@ -239,55 +219,4 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable {
     this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 12),
     this.iconSize = 20,
   }) : assert(0 < iconSize, 'iconSize is $iconSize, but it should be positive.');
-
-  /// Returns a copy of this [FAlertCustomStyle] with the given properties replaced.
-  @useResult
-  FAlertCustomStyle copyWith({
-    BoxDecoration? decoration,
-    EdgeInsets? padding,
-    Color? iconColor,
-    double? iconSize,
-    TextStyle? titleTextStyle,
-    TextStyle? subtitleTextStyle,
-  }) =>
-      FAlertCustomStyle(
-        decoration: decoration ?? this.decoration,
-        padding: padding ?? this.padding,
-        iconColor: iconColor ?? this.iconColor,
-        iconSize: iconSize ?? this.iconSize,
-        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-        subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(ColorProperty('iconColor', iconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
-      ..add(DiagnosticsProperty('subtitleTextStyle', subtitleTextStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FAlertCustomStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          padding == other.padding &&
-          iconColor == other.iconColor &&
-          iconSize == other.iconSize &&
-          titleTextStyle == other.titleTextStyle &&
-          subtitleTextStyle == other.subtitleTextStyle;
-
-  @override
-  int get hashCode =>
-      decoration.hashCode ^
-      padding.hashCode ^
-      iconColor.hashCode ^
-      iconSize.hashCode & titleTextStyle.hashCode ^
-      subtitleTextStyle.hashCode;
 }

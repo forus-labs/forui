@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'slider_mark.style.dart';
+
 /// A mark in a [FSlider]. It is a combination of a tick - a visual indicator along the track, and a label.
 final class FSliderMark with Diagnosticable {
   /// The mark's style.
@@ -55,20 +57,24 @@ final class FSliderMark with Diagnosticable {
 }
 
 /// A [FSlider] mark's style.
-final class FSliderMarkStyle with Diagnosticable {
+final class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   /// The tick's color.
+  @override
   final Color tickColor;
 
   /// The tick's size. Defaults to 3.
   ///
   /// ## Contract
   /// Throws [AssertionError] if it is not positive.
+  @override
   final double tickSize;
 
   /// The label's default text style.
+  @override
   final TextStyle labelTextStyle;
 
   /// The label's anchor to which the [labelOffset] is applied.
+  @override
   final Alignment labelAnchor;
 
   /// The label's offset from the slider, along its cross axis, in logical pixels. The top-left corner is always the
@@ -98,6 +104,7 @@ final class FSliderMarkStyle with Diagnosticable {
   /// |----------[tick]----------|
   /// |__________________________|
   /// ```
+  @override
   final double labelOffset;
 
   /// Creates a [FSliderMarkStyle].
@@ -108,47 +115,4 @@ final class FSliderMarkStyle with Diagnosticable {
     required this.labelOffset,
     this.tickSize = 3,
   }) : assert(0 < tickSize, 'tickDimension must be positive, but is $tickSize.');
-
-  /// Returns a copy of this [FSliderMarkStyle] but with the given fields replaced with the new values.
-  @useResult
-  FSliderMarkStyle copyWith({
-    Color? tickColor,
-    double? tickSize,
-    TextStyle? labelTextStyle,
-    Alignment? labelAnchor,
-    double? labelOffset,
-  }) =>
-      FSliderMarkStyle(
-        tickColor: tickColor ?? this.tickColor,
-        tickSize: tickSize ?? this.tickSize,
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        labelAnchor: labelAnchor ?? this.labelAnchor,
-        labelOffset: labelOffset ?? this.labelOffset,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('tickColor', tickColor))
-      ..add(DoubleProperty('tickSize', tickSize))
-      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
-      ..add(DiagnosticsProperty('labelAnchor', labelAnchor))
-      ..add(DoubleProperty('labelCrossAxisOffset', labelOffset));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSliderMarkStyle &&
-          runtimeType == other.runtimeType &&
-          tickColor == other.tickColor &&
-          tickSize == other.tickSize &&
-          labelTextStyle == other.labelTextStyle &&
-          labelAnchor == other.labelAnchor &&
-          labelOffset == other.labelOffset;
-
-  @override
-  int get hashCode =>
-      tickColor.hashCode ^ tickSize.hashCode ^ labelTextStyle.hashCode ^ labelAnchor.hashCode ^ labelOffset.hashCode;
 }

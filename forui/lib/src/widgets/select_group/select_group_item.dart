@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'select_group_item.style.dart';
+
 @internal
 class FSelectGroupItemData<T> extends InheritedWidget {
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
@@ -251,8 +253,9 @@ class _Radio<T> extends FSelectGroupItem<T> {
 }
 
 /// A [FSelectGroupItem.checkbox]'s style.
-class FCheckboxSelectGroupStyle extends FCheckboxStyle {
+class FCheckboxSelectGroupStyle extends FCheckboxStyle with _$FCheckboxSelectGroupStyleFunctions {
   /// The padding around the checkbox. Defaults to `EdgeInsets.symmetric(vertical: 2)`.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FCheckboxSelectGroupStyle].
@@ -276,52 +279,12 @@ class FCheckboxSelectGroupStyle extends FCheckboxStyle {
           disabledStyle: style.disabledStyle,
           errorStyle: style.errorStyle,
         );
-
-  /// Returns a [FCheckboxSelectGroupStyle] that is a copy of this style with the given properties replaced.
-  @override
-  @useResult
-  FCheckboxSelectGroupStyle copyWith({
-    Duration? animationDuration,
-    Curve? curve,
-    FLabelLayoutStyle? labelLayoutStyle,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FCheckboxStateStyle? enabledStyle,
-    FCheckboxStateStyle? disabledStyle,
-    FCheckboxErrorStyle? errorStyle,
-    EdgeInsets? padding,
-  }) =>
-      FCheckboxSelectGroupStyle(
-        animationDuration: animationDuration ?? this.animationDuration,
-        curve: curve ?? this.curve,
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is FCheckboxSelectGroupStyle &&
-          runtimeType == other.runtimeType &&
-          padding == other.padding;
-
-  @override
-  int get hashCode => super.hashCode ^ padding.hashCode;
 }
 
 /// A [FSelectGroupItem.radio]'s style.
-class FRadioSelectGroupStyle extends FRadioStyle {
+class FRadioSelectGroupStyle extends FRadioStyle with _$FRadioSelectGroupStyleFunctions {
   /// The padding around the radio. Defaults to `EdgeInsets.symmetric(vertical: 2)`.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FRadioSelectGroupStyle].
@@ -347,42 +310,4 @@ class FRadioSelectGroupStyle extends FRadioStyle {
           disabledStyle: style.disabledStyle,
           errorStyle: style.errorStyle,
         );
-
-  /// Returns a [FRadioSelectGroupStyle] that is a copy of this style with the given properties replaced.
-  @override
-  @useResult
-  FRadioSelectGroupStyle copyWith({
-    Duration? animationDuration,
-    Curve? curve,
-    FLabelLayoutStyle? labelLayoutStyle,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FRadioStateStyle? enabledStyle,
-    FRadioStateStyle? disabledStyle,
-    FRadioErrorStyle? errorStyle,
-    EdgeInsets? padding,
-  }) =>
-      FRadioSelectGroupStyle(
-        animationDuration: animationDuration ?? this.animationDuration,
-        curve: curve ?? this.curve,
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other && other is FRadioSelectGroupStyle && runtimeType == other.runtimeType && padding == other.padding;
-
-  @override
-  int get hashCode => super.hashCode ^ padding.hashCode;
 }
