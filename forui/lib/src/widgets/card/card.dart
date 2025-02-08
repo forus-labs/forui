@@ -88,35 +88,4 @@ final class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
           ),
           contentStyle: FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
         );
-
-  /// Returns a copy of this [FCardStyle] with the given properties replaced.
-  @override
-  @useResult
-  FCardStyle copyWith({
-    BoxDecoration? decoration,
-    FCardContentStyle? contentStyle,
-  }) =>
-      FCardStyle(
-        decoration: decoration ?? this.decoration,
-        contentStyle: contentStyle ?? this.contentStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('contentStyle', contentStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCardStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          contentStyle == other.contentStyle;
-
-  @override
-  int get hashCode => decoration.hashCode ^ contentStyle.hashCode;
 }

@@ -245,24 +245,4 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
       disabledIconColor: colorScheme.disable(colorScheme.mutedForeground),
     );
   }
-
-  /// Creates a copy of this but with the given fields replaced with the new values.
-  @override
-  @useResult
-  FCalendarHeaderStyle copyWith({
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FButtonCustomStyle? buttonStyle,
-    TextStyle? headerTextStyle,
-    Color? enabledIconColor,
-    Color? disabledIconColor,
-    Duration? animationDuration,
-  }) =>
-      FCalendarHeaderStyle(
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        buttonStyle: buttonStyle ?? this.buttonStyle,
-        headerTextStyle: headerTextStyle ?? this.headerTextStyle,
-        enabledIconColor: enabledIconColor ?? this.enabledIconColor,
-        disabledIconColor: disabledIconColor ?? this.disabledIconColor,
-        animationDuration: animationDuration ?? this.animationDuration,
-      );
 }

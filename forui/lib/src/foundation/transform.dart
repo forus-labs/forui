@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:forui/forui.dart';
-
 /// A marker interface that denotes that mixed-in types are transformable.
 mixin FTransformable {}
 

@@ -106,22 +106,19 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
           descriptionPadding: EdgeInsets.only(top: 5),
           errorPadding: EdgeInsets.only(top: 5),
         ),
-        enabledStyle: enabledHorizontalStyle.copyWith(
-          markStyle: enabledHorizontalStyle.markStyle.copyWith(
-            labelAnchor: Alignment.centerRight,
-            labelOffset: -10,
+        enabledStyle: enabledHorizontalStyle.transform(
+          (style) => style.copyWith(
+            markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10),
           ),
         ),
-        disabledStyle: disabledHorizontalStyle.copyWith(
-          markStyle: disabledHorizontalStyle.markStyle.copyWith(
-            labelAnchor: Alignment.centerRight,
-            labelOffset: -10,
+        disabledStyle: disabledHorizontalStyle.transform(
+          (style) => style.copyWith(
+            markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10),
           ),
         ),
-        errorStyle: errorHorizontalStyle.copyWith(
-          markStyle: errorHorizontalStyle.markStyle.copyWith(
-            labelAnchor: Alignment.centerRight,
-            labelOffset: -10,
+        errorStyle: errorHorizontalStyle.transform(
+          (style) => style.copyWith(
+            markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10),
           ),
         ),
         tooltipTipAnchor: Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
