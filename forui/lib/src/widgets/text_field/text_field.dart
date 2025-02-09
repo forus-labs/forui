@@ -411,7 +411,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor? mouseCursor;
 
-  // TODO: InputCounterWidgetBuilder? buildCounter;
+
+  /// The [InputCounterWidgetBuilder] to build a custom counter for the text field.
+  /// 
+  /// See [TextField.buildCounter] for more information.
+  final InputCounterWidgetBuilder? buildCounter;
 
   /// The [ScrollPhysics] to use when vertically scrolling the input. If not specified, it will behave according to the
   /// current platform.
@@ -559,6 +563,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.buildCounter,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
@@ -624,6 +629,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.buildCounter,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints = const [AutofillHints.email],
@@ -692,6 +698,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.buildCounter,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints = const [AutofillHints.password],
@@ -761,6 +768,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.buildCounter,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
@@ -873,6 +881,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
+      ..add(ObjectFlagProperty.has('buildCounter', buildCounter))
       ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(IterableProperty('autofillHints', autofillHints))
