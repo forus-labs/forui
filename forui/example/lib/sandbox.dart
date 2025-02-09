@@ -35,19 +35,12 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => SizedBox(
         width: 250,
-        child: FPicker(
-          style: context.theme.pickerStyle,
-          controller: controller,
+        child: Column(
           children: [
-            FPickerWheel(
-              flex: 3,
-              loop: true,
-              children: a.map(Text.new).toList(),
-            ),
-            FPickerWheel(
-              flex: 3,
-              loop: true,
-              children: a.map(Text.new).toList(),
+            FTextField(
+              maxLength: 3,
+              buildCounter: (context, {required currentLength, required isFocused, required maxLength}) =>
+                  Text('$currentLength of $maxLength'),
             ),
           ],
         ),

@@ -14,6 +14,7 @@
 * Add `animationTween` to `FTappable.animated(...)`.
 * Add `FValueNotifier.addValueListener(...)`.
 * Add `FValueNotifier.removeValueListener(...)`.
+* Add `buildCounter` to `FTextField`.
 
 ### Changes
 
