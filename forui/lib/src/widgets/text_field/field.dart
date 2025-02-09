@@ -123,6 +123,7 @@ class Field extends FormField<String> {
               canRequestFocus: parent.canRequestFocus,
               spellCheckConfiguration: parent.spellCheckConfiguration,
               magnifierConfiguration: parent.magnifierConfiguration,
+              buildCounter: parent.buildCounter,
             );
 
             return UnmanagedRestorationScope(
