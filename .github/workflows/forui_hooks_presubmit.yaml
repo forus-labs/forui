@@ -41,6 +41,11 @@ jobs:
         with:
           cache: true
 
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+
       - run: flutter pub get
       - run: dart run ../tool/sort.dart forui_samples
       - run: dart format --line-length 120 .
