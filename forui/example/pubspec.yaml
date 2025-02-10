@@ -30,7 +30,7 @@ dependencies:
   forui:
   forui_hooks:
   intl: any
-  sugar: ^3.1.0
+  sugar: ^4.0.0
   wakelock_plus: ^1.2.8
 
 # For information on the generic Dart part of this file, see the
