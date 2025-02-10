@@ -104,6 +104,8 @@ void main() {
       });
 
       testWidgets('${theme.name} non-looping', (tester) async {
+        controller = FPickerController(initialIndexes: [1]);
+
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
