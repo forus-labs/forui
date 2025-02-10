@@ -27,6 +27,10 @@ jobs:
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
