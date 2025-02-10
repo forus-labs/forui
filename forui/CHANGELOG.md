@@ -1,3 +1,11 @@
+## 0.9.1
+
+### Fixes
+* Fix `FAccordion` disposing passed in controllers.
+* Fix `FPicker` incorrectly handling widget updates.
+* Fix `FPopover` incorrectly handling widget updates.
+
+
 ## 0.9.0
 
 ### Additions

@@ -62,7 +62,7 @@ class _FAccordionState extends State<FAccordion> {
       return;
     }
 
-    if (old.controller != null) {
+    if (old.controller == null) {
       _controller.dispose();
     }
     _controller = widget.controller ?? FAccordionController();

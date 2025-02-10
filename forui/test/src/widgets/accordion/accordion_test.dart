@@ -40,5 +40,38 @@ void main() {
       await tester.tap(find.text('button'));
       expect(taps, 1);
     });
+
+    testWidgets('old controller is not disposed', (tester) async {
+      final first = FAccordionController();
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAccordion(
+            items: [
+              FAccordionItem(
+                title: const Text('Title'),
+                child: const Text('button'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final second = FAccordionController();
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAccordion(
+            items: [
+              FAccordionItem(
+                title: const Text('Title'),
+                child: const Text('button'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      expect(first.disposed, false);
+      expect(second.disposed, false);
+    });
   });
 }
