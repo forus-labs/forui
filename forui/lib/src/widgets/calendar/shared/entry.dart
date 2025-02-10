@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'entry.style.dart';
+
 /// A calendar day's data.
 typedef FCalendarDayData = ({
   FCalendarDayPickerStyle style,
@@ -233,23 +235,29 @@ class _Content extends StatelessWidget {
 }
 
 /// A calendar entry's style.
-final class FCalendarEntryStyle with Diagnosticable {
+final class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
   /// The day's background color.
+  @override
   final Color backgroundColor;
 
   /// The day's text style.
+  @override
   final TextStyle textStyle;
 
   /// The hovered day's background color. Defaults to [backgroundColor].
+  @override
   final Color hoveredBackgroundColor;
 
   /// The hovered day's text style. Defaults to [textStyle].
+  @override
   final TextStyle hoveredTextStyle;
 
   /// The border color when an entry is focused.
+  @override
   final Color focusedBorderColor;
 
   /// The entry border's radius. Defaults to `Radius.circular(4)`.
+  @override
   final Radius radius;
 
   /// Creates a [FCalendarEntryStyle].
@@ -262,56 +270,4 @@ final class FCalendarEntryStyle with Diagnosticable {
     TextStyle? hoveredTextStyle,
   })  : hoveredBackgroundColor = hoveredBackgroundColor ?? backgroundColor,
         hoveredTextStyle = hoveredTextStyle ?? textStyle;
-
-  /// Returns a copy of this [FCalendarEntryStyle] but with the given fields replaced with the new values.
-  @useResult
-  FCalendarEntryStyle copyWith({
-    Color? backgroundColor,
-    TextStyle? textStyle,
-    Color? hoveredBackgroundColor,
-    TextStyle? hoveredTextStyle,
-    Color? focusedBorderColor,
-    Radius? radius,
-  }) =>
-      FCalendarEntryStyle(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        textStyle: textStyle ?? this.textStyle,
-        hoveredBackgroundColor: hoveredBackgroundColor ?? this.hoveredBackgroundColor,
-        hoveredTextStyle: hoveredTextStyle ?? this.hoveredTextStyle,
-        focusedBorderColor: focusedBorderColor ?? this.focusedBorderColor,
-        radius: radius ?? this.radius,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('backgroundColor', backgroundColor))
-      ..add(DiagnosticsProperty('textStyle', textStyle))
-      ..add(ColorProperty('hoveredBackgroundColor', hoveredBackgroundColor))
-      ..add(DiagnosticsProperty('hoveredTextStyle', hoveredTextStyle))
-      ..add(ColorProperty('focusedBorderColor', focusedBorderColor))
-      ..add(DiagnosticsProperty('radius', radius));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCalendarEntryStyle &&
-          runtimeType == other.runtimeType &&
-          backgroundColor == other.backgroundColor &&
-          textStyle == other.textStyle &&
-          hoveredBackgroundColor == other.hoveredBackgroundColor &&
-          hoveredTextStyle == other.hoveredTextStyle &&
-          focusedBorderColor == other.focusedBorderColor &&
-          radius == other.radius;
-
-  @override
-  int get hashCode =>
-      backgroundColor.hashCode ^
-      textStyle.hashCode ^
-      hoveredBackgroundColor.hashCode ^
-      hoveredTextStyle.hashCode ^
-      focusedBorderColor.hashCode ^
-      radius.hashCode;
 }

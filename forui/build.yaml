@@ -3,6 +3,12 @@
 targets:
   $default:
     builders:
+      forui_internal_gen:styleBuilder:
+        generate_for:
+          - lib/src/foundation/**.dart
+          - lib/src/theme/**.dart
+          - lib/src/widgets/**.dart
+
       mockito:mockBuilder:
         generate_for:
           - test/**.dart

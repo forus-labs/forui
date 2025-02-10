@@ -8,6 +8,8 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
 import 'package:meta/meta.dart';
 
+part 'thumb.style.dart';
+
 class _ShrinkIntent extends Intent {
   const _ShrinkIntent();
 }
@@ -232,20 +234,24 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 /// **Note**:
 /// The thumb size can be configured inside [FSliderStyle] instead. This is due to an unfortunate limitation of the
 /// implementation.
-final class FSliderThumbStyle with Diagnosticable {
+final class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
   /// The thumb's color.
+  @override
   final Color color;
 
   /// The border's color.
+  @override
   final Color borderColor;
 
   /// The border's width. Defaults to `2`.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [borderWidth] is not positive.
+  @override
   final double borderWidth;
 
   /// The thumb's focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FSliderThumbStyle].
@@ -255,44 +261,6 @@ final class FSliderThumbStyle with Diagnosticable {
     required this.focusedOutlineStyle,
     this.borderWidth = 2,
   }) : assert(0 < borderWidth, 'The border width must be positive');
-
-  /// Returns a copy of this [FSliderThumbStyle] but with the given fields replaced with the new values.
-  @useResult
-  FSliderThumbStyle copyWith({
-    Color? color,
-    Color? borderColor,
-    double? borderWidth,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-  }) =>
-      FSliderThumbStyle(
-        color: color ?? this.color,
-        borderColor: borderColor ?? this.borderColor,
-        borderWidth: borderWidth ?? this.borderWidth,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('color', color))
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSliderThumbStyle &&
-          runtimeType == other.runtimeType &&
-          color == other.color &&
-          borderColor == other.borderColor &&
-          borderWidth == other.borderWidth &&
-          focusedOutlineStyle == other.focusedOutlineStyle;
-
-  @override
-  int get hashCode => color.hashCode ^ borderColor.hashCode ^ borderWidth.hashCode ^ focusedOutlineStyle.hashCode;
 }
 
 @internal

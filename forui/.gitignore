@@ -33,3 +33,6 @@ test/golden/failures/
 test/**/*_test.mocks.dart
 /.temp/
 .i10n.txt
+
+## Generated Dart files
+**.style.dart

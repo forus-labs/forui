@@ -7,6 +7,8 @@ import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:meta/meta.dart';
 
+part 'popover.style.dart';
+
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
@@ -320,11 +322,13 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 }
 
 /// A [FPopover]'s style.
-class FPopoverStyle with Diagnosticable {
+class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// The popover's decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The margin surrounding the popover. Defaults to `EdgeInsets.all(4)`.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FPopoverStyle].
@@ -346,34 +350,4 @@ class FPopoverStyle with Diagnosticable {
             boxShadow: style.shadow,
           ),
         );
-
-  /// Returns a copy of this style with the given fields replaced by the new values.
-  @useResult
-  FPopoverStyle copyWith({
-    BoxDecoration? decoration,
-    EdgeInsets? padding,
-  }) =>
-      FPopoverStyle(
-        decoration: decoration ?? this.decoration,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FPopoverStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          padding == other.padding;
-
-  @override
-  int get hashCode => decoration.hashCode ^ padding.hashCode;
 }

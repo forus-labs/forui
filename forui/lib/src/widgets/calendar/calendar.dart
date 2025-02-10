@@ -9,6 +9,8 @@ import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'calendar.style.dart';
+
 /// A calendar.
 ///
 /// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing
@@ -185,23 +187,29 @@ class _State extends State<FCalendar> {
 }
 
 /// The calendar's style.
-final class FCalendarStyle with Diagnosticable {
+final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   /// The header's style.
+  @override
   final FCalendarHeaderStyle headerStyle;
 
   /// The day picker's style.
+  @override
   final FCalendarDayPickerStyle dayPickerStyle;
 
   /// The year/month picker's style.
+  @override
   final FCalendarYearMonthPickerStyle yearMonthPickerStyle;
 
   /// The decoration surrounding the header & picker.
+  @override
   final BoxDecoration decoration;
 
   /// The padding surrounding the header & picker. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 16)`.
+  @override
   final EdgeInsets padding;
 
   /// The duration of the page switch animation. Defaults to 200 milliseconds.
+  @override
   final Duration pageAnimationDuration;
 
   /// Creates a new [FCalendarStyle].
@@ -229,56 +237,4 @@ final class FCalendarStyle with Diagnosticable {
             color: colorScheme.background,
           ),
         );
-
-  /// Returns a copy of this [FCalendarStyle] with the given fields replaced with the new values.
-  @useResult
-  FCalendarStyle copyWith({
-    FCalendarHeaderStyle? headerStyle,
-    FCalendarDayPickerStyle? dayPickerStyle,
-    FCalendarYearMonthPickerStyle? yearMonthPickerStyle,
-    BoxDecoration? decoration,
-    EdgeInsets? padding,
-    Duration? pageAnimationDuration,
-  }) =>
-      FCalendarStyle(
-        headerStyle: headerStyle ?? this.headerStyle,
-        dayPickerStyle: dayPickerStyle ?? this.dayPickerStyle,
-        yearMonthPickerStyle: yearMonthPickerStyle ?? this.yearMonthPickerStyle,
-        decoration: decoration ?? this.decoration,
-        padding: padding ?? this.padding,
-        pageAnimationDuration: pageAnimationDuration ?? this.pageAnimationDuration,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('headerStyle', headerStyle))
-      ..add(DiagnosticsProperty('dayPickerStyle', dayPickerStyle))
-      ..add(DiagnosticsProperty('yearMonthPickerStyle', yearMonthPickerStyle))
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('pageAnimationDuration', pageAnimationDuration));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCalendarStyle &&
-          runtimeType == other.runtimeType &&
-          headerStyle == other.headerStyle &&
-          dayPickerStyle == other.dayPickerStyle &&
-          yearMonthPickerStyle == other.yearMonthPickerStyle &&
-          decoration == other.decoration &&
-          padding == other.padding &&
-          pageAnimationDuration == other.pageAnimationDuration;
-
-  @override
-  int get hashCode =>
-      headerStyle.hashCode ^
-      dayPickerStyle.hashCode ^
-      yearMonthPickerStyle.hashCode ^
-      decoration.hashCode ^
-      padding.hashCode ^
-      pageAnimationDuration.hashCode;
 }

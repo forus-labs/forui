@@ -4,18 +4,24 @@ import 'package:flutter/rendering.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'badge_styles.style.dart';
+
 /// The [FBadgeCustomStyle]s.
-final class FBadgeStyles with Diagnosticable {
+final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
   /// The primary badge style.
+  @override
   final FBadgeCustomStyle primary;
 
   /// The secondary badge style.
+  @override
   final FBadgeCustomStyle secondary;
 
   /// The outlined badge style.
+  @override
   final FBadgeCustomStyle outline;
 
   /// The destructive badge style.
+  @override
   final FBadgeCustomStyle destructive;
 
   /// Creates a [FBadgeStyles].
@@ -71,42 +77,4 @@ final class FBadgeStyles with Diagnosticable {
             ),
           ),
         );
-
-  /// Returns a copy of this [FBadgeStyles] with the given properties replaced.
-  @useResult
-  FBadgeStyles copyWith({
-    FBadgeCustomStyle? primary,
-    FBadgeCustomStyle? secondary,
-    FBadgeCustomStyle? outline,
-    FBadgeCustomStyle? destructive,
-  }) =>
-      FBadgeStyles(
-        primary: primary ?? this.primary,
-        secondary: secondary ?? this.secondary,
-        outline: outline ?? this.outline,
-        destructive: destructive ?? this.destructive,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('primary', primary))
-      ..add(DiagnosticsProperty('secondary', secondary))
-      ..add(DiagnosticsProperty('outline', outline))
-      ..add(DiagnosticsProperty('destructive', destructive));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FBadgeStyles &&
-          runtimeType == other.runtimeType &&
-          primary == other.primary &&
-          secondary == other.secondary &&
-          outline == other.outline &&
-          destructive == other.destructive;
-
-  @override
-  int get hashCode => primary.hashCode ^ secondary.hashCode ^ outline.hashCode ^ destructive.hashCode;
 }

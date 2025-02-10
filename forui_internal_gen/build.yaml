@@ -1,0 +1,23 @@
+# Configuration for build runners. See https://github.com/dart-lang/build/blob/master/build_config/README.md
+
+targets:
+  $default:
+    builders:
+      styleBuilder:
+        enabled: true
+        generate_for:
+          exclude:
+            - example
+            - test
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+            - "type=lint"
+
+builders:
+  styleBuilder:
+    import: "package:forui_internal_gen/forui_internal_gen.dart"
+    builder_factories: [ "styleBuilder" ]
+    build_extensions: { ".dart": [".style.dart"] }
+    auto_apply: dependents
+    build_to: source

@@ -122,11 +122,13 @@ class FHeaderAction extends StatelessWidget {
 }
 
 /// [FHeaderAction]'s style.
-final class FHeaderActionStyle with Diagnosticable {
+final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   /// The icon's color when this action is enabled.
+  @override
   final Color enabledColor;
 
   /// The icon's color when this action is disabled.
+  @override
   final Color disabledColor;
 
   /// The icon's size.
@@ -134,9 +136,11 @@ final class FHeaderActionStyle with Diagnosticable {
   /// Defaults to:
   /// * 30 for [FHeader].
   /// * 25 for [FHeader.nested]
+  @override
   final double size;
 
   /// The outline style when this action is focused.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FHeaderActionStyle].
@@ -152,42 +156,4 @@ final class FHeaderActionStyle with Diagnosticable {
       : enabledColor = colorScheme.foreground,
         disabledColor = colorScheme.disable(colorScheme.foreground),
         focusedOutlineStyle = style.focusedOutlineStyle;
-
-  /// Returns a copy of this [FHeaderActionStyle] with the given properties replaced.
-  @useResult
-  FHeaderActionStyle copyWith({
-    Color? enabledColor,
-    Color? disabledColor,
-    double? size,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-  }) =>
-      FHeaderActionStyle(
-        enabledColor: enabledColor ?? this.enabledColor,
-        disabledColor: disabledColor ?? this.disabledColor,
-        size: size ?? this.size,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('enabledColor', enabledColor))
-      ..add(ColorProperty('disabledColor', disabledColor))
-      ..add(DoubleProperty('size', size))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FHeaderActionStyle &&
-          runtimeType == other.runtimeType &&
-          enabledColor == other.enabledColor &&
-          disabledColor == other.disabledColor &&
-          size == other.size &&
-          focusedOutlineStyle == other.focusedOutlineStyle;
-
-  @override
-  int get hashCode => enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode ^ focusedOutlineStyle.hashCode;
 }

@@ -76,28 +76,26 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 
 ## Customize Themes
 
-It's recommended to use the predefined themes as a starting point and customize them with the
-[`inherit(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/FThemeData.inherit.html) constructor
-and [`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html) method to suit your needs.
+It's recommended to use the predefined themes as a starting point and customize them with
+[`transform(...)`](https://pub.dev/documentation/forui/latest/forui.foundation/FTransformables/transform.html) and
+[`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html) methods to suit your
+needs.
 
 ```dart filename="main.dart" {3-14, 17-23} copy
 @override
-Widget build(BuildContext context) {
-  final theme = FThemeData.inherit(
-    colorScheme: FThemes.zinc.light.colorScheme.copyWith(
-      primary: const Color(0xFF0D47A1), // dark blue
-      primaryForeground: const Color(0xFFFFFFFF), // white
-    ),
-    typography: FThemes.zinc.light.typography.copyWith(
-      defaultFontFamily: 'Roboto',
-    ).scale(sizeScalar: 0.8),
-    style: FThemes.zinc.light.style.copyWith(
-      borderRadius: BorderRadius.zero,
-    ),
-  );
-
-  return FTheme(
-    data: theme.copyWith(
+Widget build(BuildContext context) => FTheme(
+    data: FThemeData(
+      colorScheme: FThemes.zinc.light.colorScheme.copyWith(
+        primary: const Color(0xFF0D47A1), // dark blue
+        primaryForeground: const Color(0xFFFFFFFF), // white
+      ),
+      typography: FThemes.zinc.light.typography.copyWith(
+        defaultFontFamily: 'Roboto',
+      ).scale(sizeScalar: 0.8),
+      style: FThemes.zinc.light.style.copyWith(
+        borderRadius: BorderRadius.zero,
+      ),
+    ).transform((theme) => theme.copyWith(
       cardStyle: theme.cardStyle.copyWith(
         decoration: theme.cardStyle.decoration.copyWith(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -106,7 +104,6 @@ Widget build(BuildContext context) {
     ),
     child: const FScaffold(...),
   );
-}
 ```
 
 The example above uses `FThemes.zinc.light` theme as a starting point and customizes the following:
@@ -134,9 +131,8 @@ The example above uses `FThemes.zinc.light` theme as a starting point and custom
     ```
 </Callout>
 
-While the example may seem overwhelming, most use cases will only require customizations to the `FColorScheme`, `FTypography`, and `FStyle` class.
-Sensible defaults for each Forui widget will be automatically inherited.
-
+While the example may seem overwhelming, most use cases will only require customizations to the `FColorScheme`,
+`FTypography`, and `FStyle` class. Sensible defaults for each Forui widget will be automatically inherited.
 
 ## Class Diagram
 
@@ -147,7 +143,6 @@ title: Forui Theme Data
 classDiagram
 class FThemeData {
     +FThemeData(...)
-    +FThemeData.inherit(colorScheme)
 }
 
 class FColorScheme {

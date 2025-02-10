@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'line_calendar_item.style.dart';
+
 /// The state of a line calendar item used to build a line calendar item.
 typedef FLineCalendarItemData = ({
   FLineCalendarStyle style,
@@ -168,20 +170,25 @@ class ItemContent extends StatelessWidget {
 }
 
 /// A line calendar item's state style.
-final class FLineCalendarItemStyle with Diagnosticable {
+final class FLineCalendarItemStyle with Diagnosticable, _$FLineCalendarItemStyleFunctions {
   /// The decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The focused decoration.
+  @override
   final BoxDecoration focusedDecoration;
 
   /// The color of the today indicator.
+  @override
   final Color todayIndicatorColor;
 
   /// The text style for the date.
+  @override
   final TextStyle dateTextStyle;
 
   /// The text style for the day of the week.
+  @override
   final TextStyle weekdayTextStyle;
 
   /// Creates a [FLineCalendarItemStyle].
@@ -192,49 +199,4 @@ final class FLineCalendarItemStyle with Diagnosticable {
     required this.dateTextStyle,
     required this.weekdayTextStyle,
   });
-
-  /// Returns a [FLineCalendarItemStyle] with the given properties replaced.
-  FLineCalendarItemStyle copyWith({
-    BoxDecoration? decoration,
-    BoxDecoration? focusedDecoration,
-    Color? todayIndicatorColor,
-    TextStyle? dateTextStyle,
-    TextStyle? weekdayTextStyle,
-  }) =>
-      FLineCalendarItemStyle(
-        decoration: decoration ?? this.decoration,
-        focusedDecoration: focusedDecoration ?? this.focusedDecoration,
-        todayIndicatorColor: todayIndicatorColor ?? this.todayIndicatorColor,
-        dateTextStyle: dateTextStyle ?? this.dateTextStyle,
-        weekdayTextStyle: weekdayTextStyle ?? this.weekdayTextStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('focusedDecoration', focusedDecoration))
-      ..add(ColorProperty('todayIndicatorColor', todayIndicatorColor))
-      ..add(DiagnosticsProperty('dateTextStyle', dateTextStyle))
-      ..add(DiagnosticsProperty('weekdayTextStyle', weekdayTextStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FLineCalendarItemStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          focusedDecoration == other.focusedDecoration &&
-          todayIndicatorColor == other.todayIndicatorColor &&
-          dateTextStyle == other.dateTextStyle &&
-          weekdayTextStyle == other.weekdayTextStyle;
-
-  @override
-  int get hashCode =>
-      decoration.hashCode ^
-      focusedDecoration.hashCode & todayIndicatorColor.hashCode ^
-      dateTextStyle.hashCode ^
-      weekdayTextStyle.hashCode;
 }

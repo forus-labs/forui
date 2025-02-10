@@ -23,7 +23,7 @@ import 'package:meta/meta.dart';
 /// [disable] methods. The opacity can be adjusted with [enabledHoveredOpacity] and [disabledOpacity].
 ///
 /// See [FThemes] for predefined themes and color schemes.
-final class FColorScheme with Diagnosticable {
+final class FColorScheme with Diagnosticable, FTransformable {
   /// The system brightness.
   ///
   /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.

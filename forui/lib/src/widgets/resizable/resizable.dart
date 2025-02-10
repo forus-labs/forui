@@ -7,6 +7,8 @@ import 'package:forui/src/widgets/resizable/divider.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'resizable.style.dart';
+
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
 ///
 /// Each child is a [FResizableRegion] has a initial and minimum extent. Setting an initial extent less than the
@@ -233,11 +235,13 @@ class _FResizableState extends State<FResizable> {
 }
 
 /// A [FResizable]'s style.
-final class FResizableStyle with Diagnosticable {
+final class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
   /// The horizontal divider style.
+  @override
   final FResizableDividerStyle horizontalDividerStyle;
 
   /// The vertical divider style.
+  @override
   final FResizableDividerStyle verticalDividerStyle;
 
   /// Creates a [FResizableStyle].
@@ -270,36 +274,6 @@ final class FResizableStyle with Diagnosticable {
             ),
           ),
         );
-
-  /// Returns a copy of this [FResizableStyle] with the given properties replaced.
-  @useResult
-  FResizableStyle copyWith({
-    FResizableDividerStyle? horizontalDividerStyle,
-    FResizableDividerStyle? verticalDividerStyle,
-  }) =>
-      FResizableStyle(
-        horizontalDividerStyle: horizontalDividerStyle ?? this.horizontalDividerStyle,
-        verticalDividerStyle: verticalDividerStyle ?? this.verticalDividerStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('horizontalDividerStyle', horizontalDividerStyle))
-      ..add(DiagnosticsProperty('verticalDividerStyle', verticalDividerStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FResizableStyle &&
-          runtimeType == other.runtimeType &&
-          horizontalDividerStyle == other.horizontalDividerStyle &&
-          verticalDividerStyle == other.verticalDividerStyle;
-
-  @override
-  int get hashCode => horizontalDividerStyle.hashCode ^ verticalDividerStyle.hashCode;
 }
 
 @internal

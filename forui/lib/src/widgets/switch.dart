@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'switch.style.dart';
+
 /// A control that allows the user to toggle between checked and unchecked.
 ///
 /// Typically used to toggle the on/off state of a single setting.
@@ -155,20 +157,25 @@ class FSwitch extends StatelessWidget {
 }
 
 /// [FSwitch]'s style.
-final class FSwitchStyle with Diagnosticable {
+final class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
   /// This [FSwitch]'s color when focused.
+  @override
   final Color focusColor;
 
   /// The [FLabel]'s style.
+  @override
   final FLabelLayoutStyle labelLayoutStyle;
 
   /// The [FSwitch]'s style when it's enabled.
+  @override
   final FSwitchStateStyle enabledStyle;
 
   /// The [FSwitch]'s style when it's disabled.
+  @override
   final FSwitchStateStyle disabledStyle;
 
   /// The [FSwitch]'s style when it has an error.
+  @override
   final FSwitchErrorStyle errorStyle;
 
   /// Creates a [FSwitchStyle].
@@ -216,65 +223,21 @@ final class FSwitchStyle with Diagnosticable {
           errorStyle: errorStyle,
         ),
       );
-
-  /// Returns a copy of this [FSwitchStyle] with the given properties replaced.
-  @useResult
-  FSwitchStyle copyWith({
-    Color? focusColor,
-    FLabelLayoutStyle? labelLayoutStyle,
-    FSwitchStateStyle? enabledStyle,
-    FSwitchStateStyle? disabledStyle,
-    FSwitchErrorStyle? errorStyle,
-  }) =>
-      FSwitchStyle(
-        focusColor: focusColor ?? this.focusColor,
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('focusColor', focusColor))
-      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
-      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
-      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
-      ..add(DiagnosticsProperty('errorStyle', errorStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSwitchStyle &&
-          runtimeType == other.runtimeType &&
-          focusColor == other.focusColor &&
-          labelLayoutStyle == other.labelLayoutStyle &&
-          enabledStyle == other.enabledStyle &&
-          disabledStyle == other.disabledStyle &&
-          errorStyle == other.errorStyle;
-
-  @override
-  int get hashCode =>
-      focusColor.hashCode ^
-      labelLayoutStyle.hashCode ^
-      enabledStyle.hashCode ^
-      disabledStyle.hashCode ^
-      errorStyle.hashCode;
 }
 
 /// [FSwitch]'s state style.
 // ignore: avoid_implementing_value_types
-final class FSwitchStateStyle with Diagnosticable implements FFormFieldStyle {
+final class FSwitchStateStyle with Diagnosticable, _$FSwitchStateStyleFunctions implements FFormFieldStyle {
   /// The track's color when checked.
+  @override
   final Color checkedColor;
 
   /// The track's color when unchecked.
+  @override
   final Color uncheckedColor;
 
   /// The thumb's color.
+  @override
   final Color thumbColor;
 
   @override
@@ -291,55 +254,11 @@ final class FSwitchStateStyle with Diagnosticable implements FFormFieldStyle {
     required this.labelTextStyle,
     required this.descriptionTextStyle,
   });
-
-  @override
-  FSwitchStateStyle copyWith({
-    Color? checkedColor,
-    Color? uncheckedColor,
-    Color? thumbColor,
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-  }) =>
-      FSwitchStateStyle(
-        checkedColor: checkedColor ?? this.checkedColor,
-        uncheckedColor: uncheckedColor ?? this.uncheckedColor,
-        thumbColor: thumbColor ?? this.thumbColor,
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('checkedColor', checkedColor))
-      ..add(ColorProperty('uncheckedColor', uncheckedColor))
-      ..add(ColorProperty('thumbColor', thumbColor));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSwitchStateStyle &&
-          runtimeType == other.runtimeType &&
-          checkedColor == other.checkedColor &&
-          uncheckedColor == other.uncheckedColor &&
-          thumbColor == other.thumbColor &&
-          labelTextStyle == other.labelTextStyle &&
-          descriptionTextStyle == other.descriptionTextStyle;
-
-  @override
-  int get hashCode =>
-      checkedColor.hashCode ^
-      uncheckedColor.hashCode ^
-      thumbColor.hashCode ^
-      labelTextStyle.hashCode ^
-      descriptionTextStyle.hashCode;
 }
 
 /// [FSwitch]'s error style.
 // ignore: avoid_implementing_value_types
-final class FSwitchErrorStyle with Diagnosticable implements FFormFieldErrorStyle {
+final class FSwitchErrorStyle with Diagnosticable, _$FSwitchErrorStyleFunctions implements FFormFieldErrorStyle {
   @override
   final TextStyle labelTextStyle;
 
@@ -355,28 +274,4 @@ final class FSwitchErrorStyle with Diagnosticable implements FFormFieldErrorStyl
     required this.descriptionTextStyle,
     required this.errorTextStyle,
   });
-
-  @override
-  FSwitchErrorStyle copyWith({
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-    TextStyle? errorTextStyle,
-  }) =>
-      FSwitchErrorStyle(
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-        errorTextStyle: errorTextStyle ?? this.errorTextStyle,
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FSwitchErrorStyle &&
-          runtimeType == other.runtimeType &&
-          labelTextStyle == other.labelTextStyle &&
-          descriptionTextStyle == other.descriptionTextStyle &&
-          errorTextStyle == other.errorTextStyle;
-
-  @override
-  int get hashCode => labelTextStyle.hashCode ^ descriptionTextStyle.hashCode ^ errorTextStyle.hashCode;
 }

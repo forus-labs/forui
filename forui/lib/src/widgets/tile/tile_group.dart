@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'tile_group.style.dart';
+
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [_MergeTileGroups].
 mixin FTileGroupMixin<T extends Widget> on Widget {}
 
@@ -376,20 +378,25 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
 }
 
 /// A [FTileGroup]'s style.
-class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
+class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGroupStyleFunctions {
   /// The group label's layout style.
+  @override
   final FLabelLayoutStyle labelLayoutStyle;
 
   /// The group's border color.
+  @override
   final Color borderColor;
 
   /// the group's border width.
+  @override
   final double borderWidth;
 
   /// The group's border radius.
+  @override
   final BorderRadius borderRadius;
 
   /// The tile's style.
+  @override
   final FTileStyle tileStyle;
 
   /// Creates a [FTileGroupStyle].
@@ -450,65 +457,9 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable {
           ),
         );
 
-  /// Returns a copy of this style with the given fields replaced by the new values.
-  @override
-  @useResult
-  FTileGroupStyle copyWith({
-    Color? borderColor,
-    double? borderWidth,
-    BorderRadius? borderRadius,
-    FTileStyle? tileStyle,
-    FLabelLayoutStyle? labelLayoutStyle,
-    FFormFieldStyle? enabledStyle,
-    FFormFieldStyle? disabledStyle,
-    FFormFieldErrorStyle? errorStyle,
-  }) =>
-      FTileGroupStyle(
-        borderColor: borderColor ?? this.borderColor,
-        borderWidth: borderWidth ?? this.borderWidth,
-        borderRadius: borderRadius ?? this.borderRadius,
-        tileStyle: tileStyle ?? this.tileStyle,
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-      );
-
   /// The label's style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is FTileGroupStyle &&
-          runtimeType == other.runtimeType &&
-          labelLayoutStyle == other.labelLayoutStyle &&
-          borderColor == other.borderColor &&
-          borderWidth == other.borderWidth &&
-          borderRadius == other.borderRadius &&
-          tileStyle == other.tileStyle;
-
-  @override
-  int get hashCode =>
-      super.hashCode ^
-      labelLayoutStyle.hashCode ^
-      borderColor.hashCode ^
-      borderWidth.hashCode ^
-      borderRadius.hashCode ^
-      tileStyle.hashCode;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
-      ..add(ColorProperty('borderColor', borderColor))
-      ..add(DoubleProperty('borderWidth', borderWidth))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius))
-      ..add(DiagnosticsProperty('tileStyle', tileStyle));
-  }
 }
 
 /// Extracts the data from the given [FTileGroupData].

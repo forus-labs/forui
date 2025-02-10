@@ -68,6 +68,9 @@ jobs:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
 
+      - run: dart run build_runner build --delete-conflicting-outputs
+        working-directory: forui
+
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter build appbundle --debug --no-pub --no-tree-shake-icons
@@ -87,6 +90,9 @@ jobs:
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
+
+      - run: dart run build_runner build --delete-conflicting-outputs
+        working-directory: forui
 
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
