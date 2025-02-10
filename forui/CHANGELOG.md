@@ -12,20 +12,6 @@
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 
 
-## 0.9.1+1
-Fix documentation not publishing.
-
-## 0.9.1
-
-### Changes
-* Bump Sugar from 3.1.0 to 4.0.0.
-
-### Fixes
-* Fix `FAccordion` disposing passed in controllers.
-* Fix `FPicker` incorrectly handling widget updates.
-* Fix `FPopover` incorrectly handling widget updates.
-
-
 ## 0.9.0
 
 ### Additions
