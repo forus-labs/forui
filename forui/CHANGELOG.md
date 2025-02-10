@@ -1,3 +1,6 @@
+## 0.9.1+1
+Fix documentation not publishing.
+
 ## 0.9.1
 
 ### Changes
