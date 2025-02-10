@@ -1,3 +1,8 @@
+## 0.9.1
+
+Bump nitrogen dependency from 0.3.0 to 0.4.0.
+
+
 ## 0.9.0
 
 * Update icons to Lucide 0.474.0.
