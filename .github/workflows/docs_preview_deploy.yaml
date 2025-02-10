@@ -29,6 +29,10 @@ jobs:
         with:
           flutter-version: 3.27.x
           cache: true
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
       - working-directory: ./samples
         run: |
           flutter pub get

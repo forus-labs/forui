@@ -7,14 +7,14 @@ import 'package:meta/meta.dart';
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
 /// A [FThemeData] is composed of [colorScheme], [typography], [style], and widget styles.
-/// * [colorScheme] is a set of colors.
-/// * [typography] contains font and typography information.
-/// * [style] is a set of miscellaneous properties.
-/// * widget styles are used to style individual Forui widgets.
+///   * [colorScheme] is a set of colors.
+///   * [typography] contains font and typography information.
+///   * [style] is a set of miscellaneous properties.
+///   * widget styles are used to style individual Forui widgets.
 ///
-/// [FThemeData] and widget styles provide an `inherit(...)` constructor. The constructor configures the theme data/
-/// widget style using the defaults provided by the [colorScheme], [typography], and [style].
-final class FThemeData with Diagnosticable {
+/// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
+/// provided by the [colorScheme], [typography], and [style].
+final class FThemeData with Diagnosticable, FTransformable {
   /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
   final String? debugLabel;
 
@@ -126,14 +126,111 @@ final class FThemeData with Diagnosticable {
   /// The tooltip style.
   final FTooltipStyle tooltipStyle;
 
-  /// Creates a [FThemeData].
-  ///
-  /// **Note:**
-  /// Unless you are creating a completely new theme, modifying [FThemes]' predefined themes is preferred.
-  /// [FThemeData.inherit] can also be used as a simpler way to create a [FThemeData] without manually specifying the
-  /// widget styles.
-  FThemeData({
+  /// Creates a [FThemeData] that configures the widget styles using the given properties if not given.
+  factory FThemeData({
+    required FColorScheme colorScheme,
+    String? debugLabel,
+    FBreakpoints breakpoints = const FBreakpoints(),
+    FTypography? typography,
+    FStyle? style,
+    FAccordionStyle? accordionStyle,
+    FAlertStyles? alertStyles,
+    FAvatarStyle? avatarStyle,
+    FBadgeStyles? badgeStyles,
+    FBottomNavigationBarStyle? bottomNavigationBarStyle,
+    FBreadcrumbStyle? breadcrumbStyle,
+    FButtonStyles? buttonStyles,
+    FCalendarStyle? calendarStyle,
+    FCardStyle? cardStyle,
+    FCheckboxStyle? checkboxStyle,
+    FDatePickerStyle? datePickerStyle,
+    FDialogStyle? dialogStyle,
+    FDividerStyles? dividerStyles,
+    FHeaderStyles? headerStyle,
+    FLabelStyles? labelStyles,
+    FLineCalendarStyle? lineCalendarStyle,
+    FPickerStyle? pickerStyle,
+    FPopoverStyle? popoverStyle,
+    FPopoverMenuStyle? popoverMenuStyle,
+    FProgressStyle? progressStyle,
+    FRadioStyle? radioStyle,
+    FResizableStyle? resizableStyle,
+    FScaffoldStyle? scaffoldStyle,
+    FSelectGroupStyle? selectGroupStyle,
+    FSelectMenuTileStyle? selectMenuTileStyle,
+    FSheetStyle? sheetStyle,
+    FSliderStyles? sliderStyles,
+    FSwitchStyle? switchStyle,
+    FTabsStyle? tabsStyle,
+    FTextFieldStyle? textFieldStyle,
+    FTooltipStyle? tooltipStyle,
+    FTileGroupStyle? tileGroupStyle,
+  }) {
+    typography = typography ?? FTypography.inherit(colorScheme: colorScheme);
+    style = style ?? FStyle.inherit(colorScheme: colorScheme, typography: typography);
+    return FThemeData._(
+      debugLabel: debugLabel,
+      breakpoints: breakpoints,
+      colorScheme: colorScheme,
+      typography: typography,
+      style: style,
+      accordionStyle:
+          accordionStyle ?? FAccordionStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      alertStyles: alertStyles ?? FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
+      badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      bottomNavigationBarStyle: bottomNavigationBarStyle ??
+          FBottomNavigationBarStyle.inherit(
+            colorScheme: colorScheme,
+            typography: typography,
+            style: style,
+          ),
+      breadcrumbStyle: breadcrumbStyle ?? FBreadcrumbStyle.inherit(colorScheme: colorScheme, typography: typography),
+      buttonStyles:
+          buttonStyles ?? FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      calendarStyle:
+          calendarStyle ?? FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      cardStyle: cardStyle ?? FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      checkboxStyle: checkboxStyle ?? FCheckboxStyle.inherit(colorScheme: colorScheme, style: style),
+      datePickerStyle:
+          datePickerStyle ?? FDatePickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      dialogStyle: dialogStyle ?? FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      dividerStyles: dividerStyles ?? FDividerStyles.inherit(colorScheme: colorScheme, style: style),
+      headerStyle: headerStyle ?? FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
+      lineCalendarStyle: lineCalendarStyle ??
+          FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      pickerStyle: pickerStyle ?? FPickerStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+      popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
+      popoverMenuStyle:
+          popoverMenuStyle ?? FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+      progressStyle: progressStyle ?? FProgressStyle.inherit(colorScheme: colorScheme, style: style),
+      radioStyle: radioStyle ?? FRadioStyle.inherit(colorScheme: colorScheme, style: style),
+      resizableStyle: resizableStyle ?? FResizableStyle.inherit(colorScheme: colorScheme, style: style),
+      scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
+      selectGroupStyle:
+          selectGroupStyle ?? FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      selectMenuTileStyle: selectMenuTileStyle ??
+          FSelectMenuTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      sheetStyle: sheetStyle ?? FSheetStyle.inherit(colorScheme: colorScheme),
+      sliderStyles:
+          sliderStyles ?? FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      switchStyle: switchStyle ?? FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
+      tabsStyle: tabsStyle ?? FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      textFieldStyle:
+          textFieldStyle ?? FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tooltipStyle:
+          tooltipStyle ?? FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tileGroupStyle:
+          tileGroupStyle ?? FTileGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+    );
+  }
+
+  FThemeData._({
+    required this.debugLabel,
+    required this.breakpoints,
     required this.colorScheme,
+    required this.typography,
     required this.style,
     required this.accordionStyle,
     required this.alertStyles,
@@ -167,63 +264,7 @@ final class FThemeData with Diagnosticable {
     required this.textFieldStyle,
     required this.tooltipStyle,
     required this.tileGroupStyle,
-    this.debugLabel,
-    this.breakpoints = const FBreakpoints(),
-    this.typography = const FTypography(),
   });
-
-  /// Creates a [FThemeData] that configures the widget styles using the given properties.
-  factory FThemeData.inherit({
-    required FColorScheme colorScheme,
-    String? debugLabel,
-    FStyle? style,
-    FTypography? typography,
-  }) {
-    typography ??= FTypography.inherit(colorScheme: colorScheme);
-    style ??= FStyle.inherit(colorScheme: colorScheme, typography: typography);
-    return FThemeData(
-      debugLabel: debugLabel,
-      colorScheme: colorScheme,
-      typography: typography,
-      style: style,
-      accordionStyle: FAccordionStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      alertStyles: FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      avatarStyle: FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
-      badgeStyles: FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      bottomNavigationBarStyle: FBottomNavigationBarStyle.inherit(
-        colorScheme: colorScheme,
-        typography: typography,
-        style: style,
-      ),
-      breadcrumbStyle: FBreadcrumbStyle.inherit(colorScheme: colorScheme, typography: typography),
-      buttonStyles: FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      cardStyle: FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      checkboxStyle: FCheckboxStyle.inherit(colorScheme: colorScheme, style: style),
-      datePickerStyle: FDatePickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      dialogStyle: FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      dividerStyles: FDividerStyles.inherit(colorScheme: colorScheme, style: style),
-      headerStyle: FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      labelStyles: FLabelStyles.inherit(style: style),
-      lineCalendarStyle: FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      pickerStyle: FPickerStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
-      popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
-      popoverMenuStyle: FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
-      progressStyle: FProgressStyle.inherit(colorScheme: colorScheme, style: style),
-      radioStyle: FRadioStyle.inherit(colorScheme: colorScheme, style: style),
-      resizableStyle: FResizableStyle.inherit(colorScheme: colorScheme, style: style),
-      scaffoldStyle: FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
-      selectGroupStyle: FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      selectMenuTileStyle: FSelectMenuTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      sheetStyle: FSheetStyle.inherit(colorScheme: colorScheme),
-      sliderStyles: FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      switchStyle: FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
-      tabsStyle: FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      tooltipStyle: FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      tileGroupStyle: FTileGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-    );
-  }
 
   /// Returns a copy of this [FThemeData] with the given properties replaced.
   ///
@@ -239,13 +280,13 @@ final class FThemeData with Diagnosticable {
   /// print(theme.avatarStyle == copy.avatarStyle); // false
   /// ```
   ///
-  /// To modify [colorScheme], [typography], and/or [style], create a new `FThemeData` using [FThemeData.inherit] first.
+  /// To modify [colorScheme], [typography], and/or [style], create a new `FThemeData` using [FThemeData] first.
   /// This allows the global theme data to propagate to widget-specific theme data.
   ///
   /// ```dart
   /// @override
   /// Widget build(BuildContext context) {
-  ///   final theme = FThemeData.inherit(
+  ///   final theme = FThemeData(
   ///     colorScheme: FThemes.zinc.light.colorScheme.copyWith(
   ///       primary: const Color(0xFF0D47A1), // dark blue
   ///       primaryForeground: const Color(0xFFFFFFFF), // white

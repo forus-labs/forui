@@ -1,0 +1,31 @@
+name: forui_internal_gen
+description: "Internal code generation tool for Forui."
+publish_to: 'none'
+version: 0.0.0
+homepage: https://forui.dev/
+documentation: https://forui.dev/docs
+repository: https://github.com/forus-labs/forui/tree/main/forui_internal_gen
+issue_tracker: https://github.com/forus-labs/forui/issues
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+resolution: workspace
+
+dependencies:
+  analyzer: ^6.11.0
+  build: ^2.4.2
+  code_builder: ^4.10.0
+  collection: ^1.18.0
+  dart_style: ^3.0.1
+  flutter:
+    sdk: flutter
+  meta: ^1.11.0
+  source_gen: ^2.0.0
+
+dev_dependencies:
+  build_test: ^2.2.3
+  flint: ^2.8.1
+  flutter_test:
+    sdk: flutter
+  source_gen_test: ^1.1.1

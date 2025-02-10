@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'bottom_navigation_bar_item.style.dart';
+
 /// A [FBottomNavigationBar] item.
 class FBottomNavigationBarItem extends StatelessWidget {
   /// The style.
@@ -64,23 +66,29 @@ class FBottomNavigationBarItem extends StatelessWidget {
 }
 
 /// [FBottomNavigationBarItem]'s style.
-final class FBottomNavigationBarItemStyle with Diagnosticable {
+final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
   /// The icon's color when this item is active.
+  @override
   final Color activeIconColor;
 
   /// The icon's color when this item is inactive.
+  @override
   final Color inactiveIconColor;
 
   /// The icon's size. Defaults to `24`.
+  @override
   final double iconSize;
 
   /// The text's style when this item is active.
+  @override
   final TextStyle activeTextStyle;
 
   /// The text's style when this item is inactive.
+  @override
   final TextStyle inactiveTextStyle;
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FBottomNavigationBarItemStyle].
@@ -108,56 +116,4 @@ final class FBottomNavigationBarItemStyle with Diagnosticable {
             fontSize: 10,
           ),
         );
-
-  /// Returns a copy of this [FBottomNavigationBarItemStyle] with the given properties replaced.
-  @useResult
-  FBottomNavigationBarItemStyle copyWith({
-    Color? activeIconColor,
-    Color? inactiveIconColor,
-    double? iconSize,
-    TextStyle? activeTextStyle,
-    TextStyle? inactiveTextStyle,
-    EdgeInsets? padding,
-  }) =>
-      FBottomNavigationBarItemStyle(
-        activeIconColor: activeIconColor ?? this.activeIconColor,
-        inactiveIconColor: inactiveIconColor ?? this.inactiveIconColor,
-        iconSize: iconSize ?? this.iconSize,
-        activeTextStyle: activeTextStyle ?? this.activeTextStyle,
-        inactiveTextStyle: inactiveTextStyle ?? this.inactiveTextStyle,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('activeIconColor', activeIconColor))
-      ..add(ColorProperty('inactiveIconColor', inactiveIconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DiagnosticsProperty('activeTextStyle', activeTextStyle))
-      ..add(DiagnosticsProperty('inactiveTextStyle', inactiveTextStyle))
-      ..add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FBottomNavigationBarItemStyle &&
-          runtimeType == other.runtimeType &&
-          activeIconColor == other.activeIconColor &&
-          inactiveIconColor == other.inactiveIconColor &&
-          iconSize == other.iconSize &&
-          activeTextStyle == other.activeTextStyle &&
-          inactiveTextStyle == other.inactiveTextStyle &&
-          padding == other.padding;
-
-  @override
-  int get hashCode =>
-      activeIconColor.hashCode ^
-      inactiveIconColor.hashCode ^
-      iconSize.hashCode ^
-      activeTextStyle.hashCode ^
-      inactiveTextStyle.hashCode ^
-      padding.hashCode;
 }

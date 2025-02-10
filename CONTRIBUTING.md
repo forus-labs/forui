@@ -33,6 +33,14 @@ This helps to:
 
 If you're stuck or unsure about anything, feel free to ask for help in our [discord](https://discord.gg/UEky7WkXd6).
 
+## Configuring the Development Environment
+
+After cloning the repository, and before starting work on a PR, run the following commands in the `forui` project directory:
+```shell
+dart run build_runner build --delete-conflicting-outputs
+````
+
+This command generates the necessary files for the project to build successfully.
 
 ## Conventions
 
@@ -135,40 +143,32 @@ Lastly, types from 3rd party packages should not be publicly exported by Forui.
 ### Widget Styles
 
 ```dart
-class FooStyle with Diagnosticable { // ---- (1)
+part 'foo.style.dart'; // --- (1)
+
+class FooStyle with Diagnosticable, _$FooStyleFunctions { // ---- (2) (3)
   
   final Color color;
   
-  FooStyle({required this.color}); // ---- (2)
+  FooStyle({required this.color}); // ---- (3)
   
-  FooStyle.inherit({FFont font, FColorScheme scheme}): color = scheme.primary; // ---- (2)
+  FooStyle.inherit({FFont font, FColorScheme scheme}): color = scheme.primary; // ---- (4)
   
-  FooStyle copyWith({Color? color}) => FooStyle( // ---- (3)
+  FooStyle copyWith({Color? color}) => FooStyle( // ---- (5)
     color: color ?? this.color, 
   );
-  
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) { // ---- (4)
-    super.debugFillProperties(properties);
-    properties.add(ColorProperty<BorderRadius>('color', color));
-  }
-
-  @override
-  bool operator ==(Object other) => identical(this, other) || other is FStyle && color == other.color; // ---- (5)
-
-  @override
-  int get hashCode => color.hashCode; // ---- (5)
-  
 }
 ```
 
 They should:
-1. mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
-2. provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on
+1. include a generated part file which includes `_$FooStyleFunctions`. To generate the file, run 
+  `dart run build_runner build --delete-conflicting-outputs` in the forui/forui directory.
+2. mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
+3. mix-in `_$FooStyleFunctions`, which contains several utility functions.
+4. provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on
    an ancestor `FTheme`.
-3. provide a `copyWith(...)` method.
-4. override [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html).
-5. implement `operator ==` and `hashCode`.
+5. provide a `copyWith(...)` method.
+6. override [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html).
+7. implement `operator ==` and `hashCode`.
 
 Lastly, the order of the fields and methods should be as shown above.
 

@@ -6,6 +6,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/dialog/dialog_content.dart';
 import 'package:meta/meta.dart';
 
+part 'dialog.style.dart';
+
 /// A modal dialog.
 ///
 /// A dialog interrupts the user with important content and expects a response. It is typically used with
@@ -183,23 +185,29 @@ class FDialog extends StatelessWidget {
 }
 
 /// [FDialog]'s style.
-final class FDialogStyle with Diagnosticable {
+final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   /// The decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The inset padding. Defaults to `EdgeInsets.symmetric(horizontal: 40, vertical: 24)`.
+  @override
   final EdgeInsets insetPadding;
 
   /// The horizontal dialog content's style.
+  @override
   final FDialogContentStyle horizontalStyle;
 
   /// The vertical dialog content's style.
+  @override
   final FDialogContentStyle verticalStyle;
 
   /// The minimum width of the dialog. Defaults to 280.
+  @override
   final double minWidth;
 
   /// The maximum width of the dialog. Defaults to 560.
+  @override
   final double maxWidth;
 
   /// Creates a [FDialogStyle].
@@ -235,56 +243,4 @@ final class FDialogStyle with Diagnosticable {
             actionPadding: 8,
           ),
         );
-
-  /// Returns a copy of this [FButtonCustomStyle] with the given properties replaced.
-  @useResult
-  FDialogStyle copyWith({
-    BoxDecoration? decoration,
-    EdgeInsets? insetPadding,
-    FDialogContentStyle? horizontalStyle,
-    FDialogContentStyle? verticalStyle,
-    double? minWidth,
-    double? maxWidth,
-  }) =>
-      FDialogStyle(
-        decoration: decoration ?? this.decoration,
-        insetPadding: insetPadding ?? this.insetPadding,
-        horizontalStyle: horizontalStyle ?? this.horizontalStyle,
-        verticalStyle: verticalStyle ?? this.verticalStyle,
-        minWidth: minWidth ?? this.minWidth,
-        maxWidth: maxWidth ?? this.maxWidth,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('insetPadding', insetPadding))
-      ..add(DiagnosticsProperty('horizontalStyle', horizontalStyle))
-      ..add(DiagnosticsProperty('verticalStyle', verticalStyle))
-      ..add(DoubleProperty('minWidth', minWidth, defaultValue: 280))
-      ..add(DoubleProperty('maxWidth', maxWidth, defaultValue: 560));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FDialogStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          insetPadding == other.insetPadding &&
-          horizontalStyle == other.horizontalStyle &&
-          verticalStyle == other.verticalStyle &&
-          minWidth == other.minWidth &&
-          maxWidth == other.maxWidth;
-
-  @override
-  int get hashCode =>
-      decoration.hashCode ^
-      insetPadding.hashCode ^
-      horizontalStyle.hashCode ^
-      verticalStyle.hashCode ^
-      minWidth.hashCode ^
-      maxWidth.hashCode;
 }

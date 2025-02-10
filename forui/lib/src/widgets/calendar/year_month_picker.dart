@@ -7,6 +7,8 @@ import 'package:forui/src/widgets/calendar/year/paged_year_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'year_month_picker.style.dart';
+
 @internal
 class YearMonthPicker extends StatefulWidget {
   final FCalendarStyle style;
@@ -88,11 +90,13 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
 }
 
 /// The year/month picker's style.
-final class FCalendarYearMonthPickerStyle with Diagnosticable {
+final class FCalendarYearMonthPickerStyle with Diagnosticable, _$FCalendarYearMonthPickerStyleFunctions {
   /// The enabled years/months' styles.
+  @override
   final FCalendarEntryStyle enabledStyle;
 
   /// The disabled years/months' styles.
+  @override
   final FCalendarEntryStyle disabledStyle;
 
   /// Creates a new year/month picker style.
@@ -118,34 +122,4 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable {
             radius: const Radius.circular(8),
           ),
         );
-
-  /// Returns a copy of this [FCalendarYearMonthPickerStyle] but with the given fields replaced with the new values.
-  @useResult
-  FCalendarYearMonthPickerStyle copyWith({
-    FCalendarEntryStyle? enabledStyle,
-    FCalendarEntryStyle? disabledStyle,
-  }) =>
-      FCalendarYearMonthPickerStyle(
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
-      ..add(DiagnosticsProperty('disabledStyle', disabledStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCalendarYearMonthPickerStyle &&
-          runtimeType == other.runtimeType &&
-          enabledStyle == other.enabledStyle &&
-          disabledStyle == other.disabledStyle;
-
-  @override
-  int get hashCode => enabledStyle.hashCode ^ disabledStyle.hashCode;
 }

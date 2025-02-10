@@ -5,6 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'tabs.style.dart';
+
 part 'tabs_style.dart';
 
 part 'tab_controller.dart';

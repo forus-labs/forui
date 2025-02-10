@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'label.style.dart';
+
 /// The [FLabel]'s style.
 typedef FLabelStyle = ({FLabelLayoutStyle layout, FLabelStateStyles state});
 
@@ -313,11 +315,13 @@ class _FVerticalLabel extends StatelessWidget {
 }
 
 /// The [FLabel]'s styles.
-final class FLabelStyles with Diagnosticable {
+final class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   /// The horizontal label's style.
+  @override
   final FLabelStyle horizontalStyle;
 
   /// The vertical label's style.
+  @override
   final FLabelStyle verticalStyle;
 
   /// Creates a [FLabelStyles].
@@ -344,50 +348,24 @@ final class FLabelStyles with Diagnosticable {
           ),
           state: FLabelStateStyles.inherit(style: style)
         );
-
-  /// Returns a copy of this [FLabelStyles] with the given properties replaced.
-  @useResult
-  FLabelStyles copyWith({
-    FLabelStyle? horizontalStyle,
-    FLabelStyle? verticalStyle,
-  }) =>
-      FLabelStyles(
-        horizontalStyle: horizontalStyle ?? this.horizontalStyle,
-        verticalStyle: verticalStyle ?? this.verticalStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty('horizontalStyle', horizontalStyle.toString()))
-      ..add(StringProperty('verticalStyle', verticalStyle.toString()));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FLabelStyles &&
-          runtimeType == other.runtimeType &&
-          horizontalStyle == other.horizontalStyle &&
-          verticalStyle == other.verticalStyle;
-
-  @override
-  int get hashCode => horizontalStyle.hashCode ^ verticalStyle.hashCode;
 }
 
 /// The [FLabel]'s layout style.
-final class FLabelLayoutStyle with Diagnosticable {
+final class FLabelLayoutStyle with Diagnosticable, _$FLabelLayoutStyleFunctions {
   /// The label's padding.
+  @override
   final EdgeInsets labelPadding;
 
   /// The description's padding.
+  @override
   final EdgeInsets descriptionPadding;
 
   /// The error's padding.
+  @override
   final EdgeInsets errorPadding;
 
   /// The child's padding.
+  @override
   final EdgeInsets childPadding;
 
   /// Creates a [FLabelLayoutStyle].
@@ -397,56 +375,20 @@ final class FLabelLayoutStyle with Diagnosticable {
     this.errorPadding = EdgeInsets.zero,
     this.childPadding = EdgeInsets.zero,
   });
-
-  /// Returns a copy of this [FLabelLayoutStyle] with the given properties replaced.
-  @useResult
-  FLabelLayoutStyle copyWith({
-    EdgeInsets? labelPadding,
-    EdgeInsets? descriptionPadding,
-    EdgeInsets? errorPadding,
-    EdgeInsets? childPadding,
-  }) =>
-      FLabelLayoutStyle(
-        labelPadding: labelPadding ?? this.labelPadding,
-        descriptionPadding: descriptionPadding ?? this.descriptionPadding,
-        errorPadding: errorPadding ?? this.errorPadding,
-        childPadding: childPadding ?? this.childPadding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('labelPadding', labelPadding))
-      ..add(DiagnosticsProperty('descriptionPadding', descriptionPadding))
-      ..add(DiagnosticsProperty('errorPadding', errorPadding))
-      ..add(DiagnosticsProperty('childPadding', childPadding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FLabelLayoutStyle &&
-          runtimeType == other.runtimeType &&
-          labelPadding == other.labelPadding &&
-          descriptionPadding == other.descriptionPadding &&
-          errorPadding == other.errorPadding &&
-          childPadding == other.childPadding;
-
-  @override
-  int get hashCode =>
-      labelPadding.hashCode ^ descriptionPadding.hashCode ^ errorPadding.hashCode ^ childPadding.hashCode;
 }
 
 /// The [FLabel]'s state styles.
-class FLabelStateStyles with Diagnosticable {
+class FLabelStateStyles with Diagnosticable, _$FLabelStateStylesFunctions {
   /// The style for the form field when it is enabled.
+  @override
   final FFormFieldStyle enabledStyle;
 
   /// The style for the form field when it is disabled.
+  @override
   final FFormFieldStyle disabledStyle;
 
   /// The style for the form field when it has an error.
+  @override
   final FFormFieldErrorStyle errorStyle;
 
   /// Creates a [FLabelStateStyles].
@@ -463,38 +405,4 @@ class FLabelStateStyles with Diagnosticable {
           disabledStyle: style.disabledFormFieldStyle,
           errorStyle: style.errorFormFieldStyle,
         );
-
-  /// Returns a copy of this [FLabelStateStyles] with the given properties replaced.
-  @useResult
-  FLabelStateStyles copyWith({
-    FFormFieldStyle? enabledStyle,
-    FFormFieldStyle? disabledStyle,
-    FFormFieldErrorStyle? errorStyle,
-  }) =>
-      FLabelStateStyles(
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('enabledStyle', enabledStyle))
-      ..add(DiagnosticsProperty('disabledStyle', disabledStyle))
-      ..add(DiagnosticsProperty('errorStyle', errorStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FLabelStateStyles &&
-          runtimeType == other.runtimeType &&
-          enabledStyle == other.enabledStyle &&
-          disabledStyle == other.disabledStyle &&
-          errorStyle == other.errorStyle;
-
-  @override
-  int get hashCode => enabledStyle.hashCode ^ disabledStyle.hashCode ^ errorStyle.hashCode;
 }

@@ -19,32 +19,41 @@ enum FTabBarIndicatorSize {
 }
 
 /// [FTabs]'s style.
-final class FTabsStyle with Diagnosticable {
+final class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   /// The decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The padding.
+  @override
   final EdgeInsets padding;
 
   /// The [TextStyle] of the label.
+  @override
   final TextStyle selectedLabelTextStyle;
 
   /// The [TextStyle] of the label.
+  @override
   final TextStyle unselectedLabelTextStyle;
 
   /// The indicator.
+  @override
   final BoxDecoration indicatorDecoration;
 
   /// The indicator size.
+  @override
   final FTabBarIndicatorSize indicatorSize;
 
   /// The height.
+  @override
   final double height;
 
   /// The spacing between the tab bar and the views.
+  @override
   final double spacing;
 
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FTabsStyle].
@@ -84,71 +93,4 @@ final class FTabsStyle with Diagnosticable {
           ),
           focusedOutlineStyle: style.focusedOutlineStyle,
         );
-
-  /// Creates a copy of this [FCardStyle] with the given properties replaced.
-  @useResult
-  FTabsStyle copyWith({
-    EdgeInsets? padding,
-    BoxDecoration? decoration,
-    TextStyle? selectedLabelTextStyle,
-    TextStyle? unselectedLabelTextStyle,
-    BoxDecoration? indicatorDecoration,
-    FTabBarIndicatorSize? indicatorSize,
-    double? height,
-    double? spacing,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-  }) =>
-      FTabsStyle(
-        padding: padding ?? this.padding,
-        decoration: decoration ?? this.decoration,
-        selectedLabelTextStyle: selectedLabelTextStyle ?? this.selectedLabelTextStyle,
-        unselectedLabelTextStyle: unselectedLabelTextStyle ?? this.unselectedLabelTextStyle,
-        indicatorSize: indicatorSize ?? this.indicatorSize,
-        indicatorDecoration: indicatorDecoration ?? this.indicatorDecoration,
-        height: height ?? this.height,
-        spacing: spacing ?? this.spacing,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('selectedLabelTextStyle', selectedLabelTextStyle))
-      ..add(DiagnosticsProperty('unselectedLabelTextStyle', unselectedLabelTextStyle))
-      ..add(EnumProperty('indicatorSize', indicatorSize))
-      ..add(DiagnosticsProperty('indicator', indicatorDecoration))
-      ..add(DoubleProperty('height', height))
-      ..add(DoubleProperty('spacing', spacing))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FTabsStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          padding == other.padding &&
-          unselectedLabelTextStyle == other.unselectedLabelTextStyle &&
-          selectedLabelTextStyle == other.selectedLabelTextStyle &&
-          indicatorDecoration == other.indicatorDecoration &&
-          indicatorSize == other.indicatorSize &&
-          height == other.height &&
-          spacing == other.spacing &&
-          focusedOutlineStyle == other.focusedOutlineStyle;
-
-  @override
-  int get hashCode =>
-      decoration.hashCode ^
-      padding.hashCode ^
-      unselectedLabelTextStyle.hashCode ^
-      selectedLabelTextStyle.hashCode ^
-      indicatorDecoration.hashCode ^
-      indicatorSize.hashCode ^
-      height.hashCode ^
-      spacing.hashCode ^
-      focusedOutlineStyle.hashCode;
 }

@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'breadcrumb.style.dart';
+
 /// A breadcrumb.
 ///
 /// A breadcrumb is a list of links that help visualize a page's location within a site's hierarchical structure,
@@ -333,20 +335,25 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
 }
 
 /// The [FBreadcrumb] styles.
-final class FBreadcrumbStyle with Diagnosticable {
+final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   /// The selected breadcrumb [TextStyle].
+  @override
   final TextStyle selectedTextStyle;
 
   /// The unselected breadcrumb [TextStyle].
+  @override
   final TextStyle unselectedTextStyle;
 
   /// The hovered breadcrumb [TextStyle].
+  @override
   final TextStyle hoveredTextStyle;
 
   /// The divider icon style.
+  @override
   final FIconStyle iconStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FBreadcrumbStyle].
@@ -376,51 +383,4 @@ final class FBreadcrumbStyle with Diagnosticable {
           ),
           iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
         );
-
-  /// Returns a copy of this [FBreadcrumbStyle] with the given properties replaced.
-  @useResult
-  FBreadcrumbStyle copyWith({
-    TextStyle? selectedTextStyle,
-    TextStyle? unselectedTextStyle,
-    TextStyle? hoveredTextStyle,
-    FIconStyle? iconStyle,
-    EdgeInsets? padding,
-  }) =>
-      FBreadcrumbStyle(
-        selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
-        unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
-        hoveredTextStyle: hoveredTextStyle ?? this.hoveredTextStyle,
-        iconStyle: iconStyle ?? this.iconStyle,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('selectedTextStyle', selectedTextStyle))
-      ..add(DiagnosticsProperty('unselectedTextStyle', unselectedTextStyle))
-      ..add(DiagnosticsProperty('hoveredTextStyle', hoveredTextStyle))
-      ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FBreadcrumbStyle &&
-          runtimeType == other.runtimeType &&
-          selectedTextStyle == other.selectedTextStyle &&
-          unselectedTextStyle == other.unselectedTextStyle &&
-          hoveredTextStyle == other.hoveredTextStyle &&
-          iconStyle == other.iconStyle &&
-          padding == other.padding;
-
-  @override
-  int get hashCode =>
-      selectedTextStyle.hashCode ^
-      unselectedTextStyle.hashCode ^
-      hoveredTextStyle.hashCode ^
-      iconStyle.hashCode ^
-      padding.hashCode;
 }

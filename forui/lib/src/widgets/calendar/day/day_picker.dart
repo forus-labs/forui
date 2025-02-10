@@ -9,6 +9,8 @@ import 'package:forui/src/widgets/calendar/shared/entry.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'day_picker.style.dart';
+
 @internal
 class DayPicker extends StatefulWidget {
   static const maxRows = 7;
@@ -180,14 +182,17 @@ class _GridDelegate extends SliverGridDelegate {
 }
 
 /// A day picker's style.
-final class FCalendarDayPickerStyle with Diagnosticable {
+final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
   /// The text style for the day of th week headers.
+  @override
   final TextStyle headerTextStyle;
 
   /// The styles of selectable dates in the current month on display and the enclosing months.
+  @override
   final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) selectableStyles;
 
   /// The styles of unselectable dates in the current month on display and the enclosing months.
+  @override
   final ({FCalendarDayStyle current, FCalendarDayStyle enclosing}) unselectableStyles;
 
   /// The starting day of the week. Defaults to the current locale's preferred starting day of the week if null.
@@ -198,12 +203,14 @@ final class FCalendarDayPickerStyle with Diagnosticable {
   /// Throws [AssertionError] if:
   /// * [startDayOfWeek] < [DateTime.monday]
   /// * [DateTime.sunday] < [startDayOfWeek]
+  @override
   final int? startDayOfWeek;
 
   /// The tile's size. Defaults to 42.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [tileSize] is not positive.
+  @override
   final double tileSize;
 
   /// Creates a [FCalendarDayPickerStyle].
@@ -282,65 +289,16 @@ final class FCalendarDayPickerStyle with Diagnosticable {
       unselectableStyles: (current: disabled, enclosing: disabled),
     );
   }
-
-  /// Returns a copy of this [FCalendarDayPickerStyle] but with the given fields replaced with the new values.
-  @useResult
-  FCalendarDayPickerStyle copyWith({
-    TextStyle? headerTextStyle,
-    FCalendarDayStyle? selectableCurrent,
-    FCalendarDayStyle? selectableEnclosing,
-    FCalendarDayStyle? unselectableCurrent,
-    FCalendarDayStyle? unselectableEnclosing,
-    double? tileSize,
-    int? startDayOfWeek,
-  }) =>
-      FCalendarDayPickerStyle(
-        headerTextStyle: headerTextStyle ?? this.headerTextStyle,
-        selectableStyles: (
-          current: selectableCurrent ?? selectableStyles.current,
-          enclosing: selectableEnclosing ?? selectableStyles.enclosing,
-        ),
-        unselectableStyles: (
-          current: unselectableCurrent ?? unselectableStyles.current,
-          enclosing: unselectableEnclosing ?? unselectableStyles.enclosing,
-        ),
-        startDayOfWeek: startDayOfWeek ?? this.startDayOfWeek,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('headerTextStyle', headerTextStyle))
-      ..add(DiagnosticsProperty('selectableStyles.current', selectableStyles.current))
-      ..add(DiagnosticsProperty('selectableStyles.enclosing', selectableStyles.enclosing))
-      ..add(DiagnosticsProperty('unselectableStyles.current', unselectableStyles.current))
-      ..add(DiagnosticsProperty('unselectableStyles.enclosing', unselectableStyles.enclosing))
-      ..add(DoubleProperty('tileSize', tileSize))
-      ..add(IntProperty('startDayOfWeek', startDayOfWeek));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCalendarDayPickerStyle &&
-          runtimeType == other.runtimeType &&
-          headerTextStyle == other.headerTextStyle &&
-          selectableStyles == other.selectableStyles &&
-          unselectableStyles == other.unselectableStyles &&
-          startDayOfWeek == other.startDayOfWeek;
-
-  @override
-  int get hashCode =>
-      headerTextStyle.hashCode ^ selectableStyles.hashCode ^ unselectableStyles.hashCode ^ startDayOfWeek.hashCode;
 }
 
 /// A calender day's style.
-final class FCalendarDayStyle with Diagnosticable {
+final class FCalendarDayStyle with Diagnosticable, _$FCalendarDayStyleFunctions {
   /// The selected dates' style.
+  @override
   final FCalendarEntryStyle selectedStyle;
 
   /// The unselected dates' style.
+  @override
   final FCalendarEntryStyle unselectedStyle;
 
   /// Creates a [FCalendarDayStyle].
@@ -348,34 +306,4 @@ final class FCalendarDayStyle with Diagnosticable {
     required this.unselectedStyle,
     required this.selectedStyle,
   });
-
-  /// Returns a copy of this [FCalendarDayStyle] but with the given fields replaced with the new values.
-  @useResult
-  FCalendarDayStyle copyWith({
-    FCalendarEntryStyle? selectedStyle,
-    FCalendarEntryStyle? unselectedStyle,
-  }) =>
-      FCalendarDayStyle(
-        selectedStyle: selectedStyle ?? this.selectedStyle,
-        unselectedStyle: unselectedStyle ?? this.unselectedStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('selectedStyle', selectedStyle))
-      ..add(DiagnosticsProperty('unselectedStyle', unselectedStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCalendarDayStyle &&
-          runtimeType == other.runtimeType &&
-          unselectedStyle == other.unselectedStyle &&
-          selectedStyle == other.selectedStyle;
-
-  @override
-  int get hashCode => unselectedStyle.hashCode ^ selectedStyle.hashCode;
 }

@@ -1,3 +1,17 @@
+## 0.10.0 (Next)
+
+### Additions
+
+* Add `FTransformable`.
+* Add `FTransformables`.
+
+### Changes
+
+* Change all widget styles to use code generated functions.
+* **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
+* **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
+
+
 ## 0.9.0
 
 ### Additions

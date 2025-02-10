@@ -8,6 +8,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_group/select_group_controller.dart';
 import 'package:meta/meta.dart';
 
+part 'select_menu_tile.style.dart';
+
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///
 /// A [FSelectMenuTile] is internally a [FormField], therefore it can be used in a [Form].
@@ -485,14 +487,17 @@ class _SelectGroupController<T> extends DelegateSelectGroupController<T> {
 }
 
 /// A [FSelectMenuTileStyle]'s style.
-final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable {
+final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, _$FSelectMenuTileStyleFunctions {
   /// The group label's layout style.
+  @override
   final FLabelLayoutStyle labelLayoutStyle;
 
   /// The menu's style.
+  @override
   final FPopoverMenuStyle menuStyle;
 
   /// The tile's style.
+  @override
   final FTileStyle tileStyle;
 
   /// Creates a [FSelectMenuTileStyle].
@@ -522,49 +527,7 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable {
     );
   }
 
-  /// Returns a copy of this [FTileStyle] with the given fields replaced with the new values.
-  @override
-  @useResult
-  FSelectMenuTileStyle copyWith({
-    FLabelLayoutStyle? labelLayoutStyle,
-    FPopoverMenuStyle? menuStyle,
-    FTileStyle? tileStyle,
-    FFormFieldStyle? enabledStyle,
-    FFormFieldStyle? disabledStyle,
-    FFormFieldErrorStyle? errorStyle,
-  }) =>
-      FSelectMenuTileStyle(
-        labelLayoutStyle: labelLayoutStyle ?? this.labelLayoutStyle,
-        menuStyle: menuStyle ?? this.menuStyle,
-        tileStyle: tileStyle ?? this.tileStyle,
-        enabledStyle: enabledStyle ?? this.enabledStyle,
-        disabledStyle: disabledStyle ?? this.disabledStyle,
-        errorStyle: errorStyle ?? this.errorStyle,
-      );
-
   /// The label's style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other &&
-          other is FSelectMenuTileStyle &&
-          runtimeType == other.runtimeType &&
-          labelLayoutStyle == other.labelLayoutStyle &&
-          menuStyle == other.menuStyle &&
-          tileStyle == other.tileStyle;
-
-  @override
-  int get hashCode => super.hashCode ^ labelLayoutStyle.hashCode ^ menuStyle.hashCode ^ tileStyle.hashCode;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('labelLayoutStyle', labelLayoutStyle))
-      ..add(DiagnosticsProperty('menuStyle', menuStyle))
-      ..add(DiagnosticsProperty('tileStyle', tileStyle));
-  }
 }

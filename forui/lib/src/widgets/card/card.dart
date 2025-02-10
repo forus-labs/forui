@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/card/card_content.dart';
 import 'package:meta/meta.dart';
 
+part 'card.style.dart';
+
 /// A card.
 ///
 /// Card are typically used to group related information together.
@@ -64,11 +66,13 @@ final class FCard extends StatelessWidget {
 }
 
 /// [FCard]'s style.
-final class FCardStyle with Diagnosticable {
+final class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   /// The decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The card content's style.
+  @override
   final FCardContentStyle contentStyle;
 
   /// Creates a [FCardStyle].
@@ -84,34 +88,4 @@ final class FCardStyle with Diagnosticable {
           ),
           contentStyle: FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
         );
-
-  /// Returns a copy of this [FCardStyle] with the given properties replaced.
-  @useResult
-  FCardStyle copyWith({
-    BoxDecoration? decoration,
-    FCardContentStyle? contentStyle,
-  }) =>
-      FCardStyle(
-        decoration: decoration ?? this.decoration,
-        contentStyle: contentStyle ?? this.contentStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('contentStyle', contentStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FCardStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          contentStyle == other.contentStyle;
-
-  @override
-  int get hashCode => decoration.hashCode ^ contentStyle.hashCode;
 }

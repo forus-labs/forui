@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'header.style.dart';
+
 part 'header_action.dart';
 
 part 'root_header.dart';
@@ -74,11 +76,13 @@ class FHeaderData extends InheritedWidget {
 }
 
 /// [FHeader]'s styles.
-final class FHeaderStyles with Diagnosticable {
+final class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   /// The root header's style.
+  @override
   final FRootHeaderStyle rootStyle;
 
   /// The nested header's style.
+  @override
   final FNestedHeaderStyle nestedStyle;
 
   /// Creates a [FHeaderStyles].
@@ -94,34 +98,4 @@ final class FHeaderStyles with Diagnosticable {
     required FStyle style,
   })  : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         nestedStyle = FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
-
-  /// Returns a copy of this [FHeaderStyles] with the given properties replaced.
-  @useResult
-  FHeaderStyles copyWith({
-    FRootHeaderStyle? rootStyle,
-    FNestedHeaderStyle? nestedStyle,
-  }) =>
-      FHeaderStyles(
-        rootStyle: rootStyle ?? this.rootStyle,
-        nestedStyle: nestedStyle ?? this.nestedStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('rootStyle', rootStyle))
-      ..add(DiagnosticsProperty('nestedStyle', nestedStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FHeaderStyles &&
-          runtimeType == other.runtimeType &&
-          rootStyle == other.rootStyle &&
-          nestedStyle == other.nestedStyle;
-
-  @override
-  int get hashCode => rootStyle.hashCode ^ nestedStyle.hashCode;
 }
