@@ -74,4 +74,33 @@ void main() {
 
     expect(find.text('15/01/2025'), findsNothing);
   });
+
+  testWidgets('old controller is not disposed', (tester) async {
+    final first = FDatePickerController(vsync: tester);
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FDatePicker(
+          key: key,
+          calendar: FDatePickerCalendarProperties(
+            today: DateTime.utc(2025, 1, 15),
+          ),
+        ),
+      ),
+    );
+
+    final second = FDatePickerController(vsync: tester);
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FDatePicker(
+          key: key,
+          calendar: FDatePickerCalendarProperties(
+            today: DateTime.utc(2025, 1, 15),
+          ),
+        ),
+      ),
+    );
+
+    expect(first.disposed, false);
+    expect(second.disposed, false);
+  });
 }

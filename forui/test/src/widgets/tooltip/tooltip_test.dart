@@ -229,5 +229,38 @@ void main() {
         expect(find.text('tip'), findsNothing);
       });
     });
+
+    testWidgets('old controller is not disposed', (tester) async {
+      final first = FTooltipController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTooltip(
+            controller: first,
+            tipBuilder: (context, style, _) => const Text('tip'),
+            child: FButton(
+              onPress: () {},
+              label: const Text('button'),
+            ),
+          ),
+        ),
+      );
+
+      final second = FTooltipController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTooltip(
+            controller: first,
+            tipBuilder: (context, style, _) => const Text('tip'),
+            child: FButton(
+              onPress: () {},
+              label: const Text('button'),
+            ),
+          ),
+        ),
+      );
+
+      expect(first.disposed, false);
+      expect(second.disposed, false);
+    });
   });
 }

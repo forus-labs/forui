@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -139,6 +140,37 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('bar content'), findsOneWidget);
+    });
+
+    testWidgets('old controller is not disposed', (tester) async {
+      final first = FTabController(length: 2, vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            controller: first,
+            tabs: const [
+              FTabEntry(label: Text('foo'), content: Text('foo content')),
+              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+
+      final second = FTabController(length: 2, vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            controller: second,
+            tabs: const [
+              FTabEntry(label: Text('foo'), content: Text('foo content')),
+              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+
+      expect(first.disposed, false);
+      expect(second.disposed, false);
     });
   });
 }

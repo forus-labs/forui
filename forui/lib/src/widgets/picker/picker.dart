@@ -10,6 +10,9 @@ import 'package:meta/meta.dart';
 /// * from left to right if the current text direction is LTR
 /// * from right to left if the current text direction is RTL
 class FPickerController extends FValueNotifier<List<int>> {
+  /// The picker wheels' initial indexes.
+  final List<int> initialIndexes;
+
   /// The controllers for the individual picker wheels.
   ///
   /// The controllers are ordered:
@@ -23,7 +26,7 @@ class FPickerController extends FValueNotifier<List<int>> {
   final List<FixedExtentScrollController> wheels = [];
 
   /// Creates a [FPickerController].
-  FPickerController({required List<int> initialIndexes}) : super([...initialIndexes]);
+  FPickerController({required this.initialIndexes}) : super([...initialIndexes]);
 
   @override
   List<int> get value => [...super.value];
@@ -109,26 +112,45 @@ class _FPickerState extends State<FPicker> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FPickerController(initialIndexes: List.filled(widget.children.length, 0));
-    for (final wheel in _controller.value) {
-      _controller.wheels.add(FixedExtentScrollController(initialItem: wheel));
-    }
+    _createController();
   }
 
   @override
   void didUpdateWidget(covariant FPicker old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      final previous = _controller.wheels.map((c) => c.selectedItem).toList();
+    if (widget.controller == old.controller) {
+      return;
+    }
 
-      if (old.controller != null) {
-        old.controller?.dispose();
-      }
+    if (old.controller == null) {
+      _controller.dispose();
+    }
 
-      _controller = (widget.controller?..value = previous) ?? FPickerController(initialIndexes: previous);
-      for (final wheel in _controller.value) {
-        _controller.wheels.add(FixedExtentScrollController(initialItem: wheel));
-      }
+    _createController();
+  }
+
+  void _createController() {
+    _controller = widget.controller ?? FPickerController(initialIndexes: List.filled(widget.children.length, 0));
+
+    for (final wheel in _controller.wheels) {
+      wheel.dispose();
+    }
+    _controller.wheels.clear();
+
+    for (final (index, item) in _controller.value.indexed) {
+      _controller.wheels.add(
+        FixedExtentScrollController(
+          initialItem: item,
+          onAttach: (position) {
+            if (position.hasContentDimensions) {
+              final copy = _controller.value;
+              // This is evil but it's the only way to get the item index as it's hidden in a private class.
+              copy[index] = (position as dynamic).itemIndex;
+              _controller._value = copy;
+            }
+          },
+        ),
+      );
     }
   }
 
@@ -148,32 +170,39 @@ class _FPickerState extends State<FPicker> {
             borderRadius: style.selectionBorderRadius,
           ),
         ),
-        NotificationListener<ScrollEndNotification>(
+        // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
+        NotificationListener<ScrollMetricsNotification>(
           onNotification: (notification) {
             _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
             return false;
           },
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: style.spacing,
-            children: [
-              for (final child in widget.children)
-                if (child is FPickerWheel)
-                  PickerData(
-                    controller: _controller.wheels[wheelIndex++],
-                    style: style,
-                    child: child,
-                  )
-                else
-                  Center(
-                    child: DefaultTextStyle.merge(
-                      textHeightBehavior: style.textHeightBehavior,
-                      style: style.textStyle,
+          child: NotificationListener<ScrollEndNotification>(
+            onNotification: (notification) {
+              _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+              return false;
+            },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: style.spacing,
+              children: [
+                for (final child in widget.children)
+                  if (child is FPickerWheel)
+                    PickerData(
+                      controller: _controller.wheels[wheelIndex++],
+                      style: style,
                       child: child,
+                    )
+                  else
+                    Center(
+                      child: DefaultTextStyle.merge(
+                        textHeightBehavior: style.textHeightBehavior,
+                        style: style.textStyle,
+                        child: child,
+                      ),
                     ),
-                  ),
-            ],
+              ],
+            ),
           ),
         ),
       ],

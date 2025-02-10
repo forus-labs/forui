@@ -217,5 +217,40 @@ void main() {
     });
   });
 
+  testWidgets('old controller is not disposed', (tester) async {
+    final first = FPopoverController(vsync: tester);
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FPopover.automatic(
+          controller: first,
+          popoverBuilder: (context, style, _) => const Text('popover'),
+          child: Container(
+            color: Colors.black,
+            height: 10,
+            width: 10,
+          ),
+        ),
+      ),
+    );
+
+    final second = FPopoverController(vsync: tester);
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FPopover.automatic(
+          controller: second,
+          popoverBuilder: (context, style, _) => const Text('popover'),
+          child: Container(
+            color: Colors.black,
+            height: 10,
+            width: 10,
+          ),
+        ),
+      ),
+    );
+
+    expect(first.disposed, false);
+    expect(second.disposed, false);
+  });
+
   tearDown(() => controller.dispose());
 }

@@ -7,100 +7,87 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FPicker', () {
-    Widget buildPicker(FPickerController? controller) => TestScaffold(
+    Widget picker([FPickerController? controller]) => TestScaffold(
           child: FPicker(
             controller: controller,
-            children: const [
-              FPickerWheel(
-                key: ValueKey('A'),
-                children: [
-                  Text('A1'),
-                  Text('A2'),
-                  Text('A3'),
-                ],
-              ),
-              FPickerWheel(
-                children: [
-                  Text('B1'),
-                  Text('B2'),
-                  Text('B3'),
-                ],
-              ),
+            children: [
+              for (var i = 0; i < (controller?.initialIndexes.length ?? 2); i++)
+                FPickerWheel(
+                  children: [
+                    Text('${i}A'),
+                    Text('${i}B'),
+                    Text('${i}C'),
+                  ],
+                ),
             ],
           ),
         );
 
-    testWidgets('maintains wheel positions when controller changes', (tester) async {
+    testWidgets('different controller size', (tester) async {
       final initialController = FPickerController(initialIndexes: [1, 1]);
 
-      await tester.pumpWidget(buildPicker(initialController));
+      await tester.pumpWidget(picker(initialController));
 
-      await tester.drag(find.byKey(const ValueKey('A')), const Offset(0, -100));
+      await tester.drag(find.text('0A'), const Offset(0, -100));
       await tester.pumpAndSettle();
 
       expect(initialController.value, [2, 1]);
       expect(initialController.wheels.map((w) => w.selectedItem).toList(), [2, 1]);
 
-      final previousPositions = [2, 1];
+      final newController = FPickerController(initialIndexes: [1, 2, 0]);
 
-      final newController = FPickerController(initialIndexes: [0, 0]);
-
-      await tester.pumpWidget(buildPicker(newController));
-
-      expect(initialController.disposed, true);
-      expect(newController.value, previousPositions);
-      expect(newController.wheels.map((w) => w.selectedItem).toList(), [2, 1]);
-
-      // Verify wheels remain interactive
-      await tester.drag(find.byKey(const ValueKey('A')), const Offset(0, 100));
+      await tester.pumpWidget(picker(newController));
       await tester.pumpAndSettle();
 
-      expect(newController.wheels[0].selectedItem, isNot(previousPositions[0]));
+      expect(initialController.disposed, false);
+      expect(newController.value, [2, 1, 0]);
+      expect(newController.wheels.map((w) => w.selectedItem).toList(), [2, 1, 0]);
+
+      await tester.drag(find.text('0A'), const Offset(0, 100));
+      await tester.pumpAndSettle();
+
+      expect(newController.wheels[0].selectedItem, isNot(2));
       expect(newController.value[0], newController.wheels[0].selectedItem);
     });
 
-    testWidgets('preserves positions when switching from null to explicit controller', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: const FPicker(
-            children: [
-              FPickerWheel(
-                key: ValueKey('A'),
-                children: [
-                  Text('A1'),
-                  Text('A2'),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-      await tester.drag(find.byKey(const ValueKey('A')), const Offset(0, -100));
+    testWidgets('same controller size', (tester) async {
+      final initialController = FPickerController(initialIndexes: [1, 1, 1]);
+
+      await tester.pumpWidget(picker(initialController));
+
+      await tester.drag(find.text('0A'), const Offset(0, -100));
       await tester.pumpAndSettle();
 
-      final newController = FPickerController(initialIndexes: [0]);
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FPicker(
-            controller: newController,
-            children: const [
-              FPickerWheel(
-                key: ValueKey('A'),
-                children: [
-                  Text('A1'),
-                  Text('A2'),
-                  Text('A3'),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
+      expect(initialController.value, [2, 1, 1]);
+      expect(initialController.wheels.map((w) => w.selectedItem).toList(), [2, 1, 1]);
+
+      final newController = FPickerController(initialIndexes: [1, 2, 0]);
+
+      await tester.pumpWidget(picker(newController));
       await tester.pumpAndSettle();
 
-      // Verify position was maintained
-      expect(newController.value, [1]);
-      expect(newController.wheels.map((w) => w.selectedItem), [1]);
+      expect(initialController.disposed, false);
+      expect(newController.value, [2, 1, 1]);
+      expect(newController.wheels.map((w) => w.selectedItem).toList(), [2, 1, 1]);
+
+      await tester.drag(find.text('0A'), const Offset(0, 100));
+      await tester.pumpAndSettle();
+
+      expect(newController.wheels[0].selectedItem, isNot(2));
+      expect(newController.value[0], newController.wheels[0].selectedItem);
+    });
+
+    testWidgets('null to explicit controller', (tester) async {
+      await tester.pumpWidget(picker());
+      await tester.drag(find.text('0A'), const Offset(0, -100));
+      await tester.pumpAndSettle();
+
+      final newController = FPickerController(initialIndexes: [0, 1]);
+      await tester.pumpWidget(picker(newController))
+      ;await tester.pumpAndSettle();
+      
+      expect(newController.value, [2, 0]);
+      expect(newController.wheels.map((w) => w.selectedItem), [2, 0]);
     });
   });
 }

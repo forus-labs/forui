@@ -1,15 +1,9 @@
-## 0.10.0 (Next)
+## 0.9.1
 
-### Additions
-
-* Add `FTransformable`.
-* Add `FTransformables`.
-
-### Changes
-
-* Change all widget styles to use code generated functions.
-* **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
-* **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
+### Fixes
+* Fix `FAccordion` disposing passed in controllers.
+* Fix `FPicker` incorrectly handling widget updates.
+* Fix `FPopover` incorrectly handling widget updates.
 
 
 ## 0.9.0
