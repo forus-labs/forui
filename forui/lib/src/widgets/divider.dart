@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'divider.style.dart';
+
 /// A divider.
 ///
 /// Dividers visually separate content.
@@ -47,11 +49,13 @@ final class FDivider extends StatelessWidget {
 }
 
 /// The [FDivider] styles.
-final class FDividerStyles with Diagnosticable {
+final class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
   /// The horizontal divider's style.
+  @override
   final FDividerStyle horizontalStyle;
 
   /// The vertical divider's style.
+  @override
   final FDividerStyle verticalStyle;
 
   /// Creates a [FDividerStyles].
@@ -71,38 +75,12 @@ final class FDividerStyles with Diagnosticable {
             padding: FDividerStyle.defaultPadding.verticalStyle,
           ),
         );
-
-  /// Returns a copy of this [FDividerStyles] with the given properties replaced.
-  @useResult
-  FDividerStyles copyWith({FDividerStyle? horizontalStyle, FDividerStyle? verticalStyle}) => FDividerStyles(
-        horizontalStyle: horizontalStyle ?? this.horizontalStyle,
-        verticalStyle: verticalStyle ?? this.verticalStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('horizontalStyle', horizontalStyle))
-      ..add(DiagnosticsProperty('verticalStyle', verticalStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FDividerStyles &&
-          runtimeType == other.runtimeType &&
-          horizontalStyle == other.horizontalStyle &&
-          verticalStyle == other.verticalStyle;
-
-  @override
-  int get hashCode => horizontalStyle.hashCode ^ verticalStyle.hashCode;
 }
 
 /// [FDivider]'s style.
 ///
 /// The [padding] property can be used to indent the start and end of the separating line.
-final class FDividerStyle with Diagnosticable {
+final class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
   /// The default padding for horizontal and vertical dividers.
   static const defaultPadding = (
     horizontalStyle: EdgeInsets.symmetric(vertical: 20),
@@ -110,11 +88,13 @@ final class FDividerStyle with Diagnosticable {
   );
 
   /// The color of the separating line.
+  @override
   final Color color;
 
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
   ///
   /// This property can be used to indent the start and end of the separating line.
+  @override
   final EdgeInsetsGeometry padding;
 
   /// The width (thickness) of the separating line. Defaults to 1.
@@ -123,6 +103,7 @@ final class FDividerStyle with Diagnosticable {
   /// Throws [AssertionError] if:
   /// * `width` <= 0.0
   /// * `width` is Nan
+  @override
   final double width;
 
   /// Creates a [FDividerStyle].
@@ -139,33 +120,4 @@ final class FDividerStyle with Diagnosticable {
           padding: padding,
           width: style.borderWidth,
         );
-
-  /// Returns a copy of this [FDividerStyle] with the given properties replaced.
-  @useResult
-  FDividerStyle copyWith({Color? color, EdgeInsetsGeometry? padding, double? width}) => FDividerStyle(
-        color: color ?? this.color,
-        padding: padding ?? this.padding,
-        width: width ?? this.width,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('width', width));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FDividerStyle &&
-          runtimeType == other.runtimeType &&
-          color == other.color &&
-          padding == other.padding &&
-          width == other.width;
-
-  @override
-  int get hashCode => color.hashCode ^ padding.hashCode ^ width.hashCode;
 }

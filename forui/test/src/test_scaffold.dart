@@ -37,7 +37,7 @@ class TestScaffold extends StatelessWidget {
     final typography = FTypography.inherit(colorScheme: colorScheme);
     final style = FStyle.inherit(colorScheme: colorScheme, typography: typography).copyWith(shadow: []);
 
-    return FThemeData.inherit(
+    return FThemeData(
       colorScheme: colorScheme,
       typography: typography,
       style: style,

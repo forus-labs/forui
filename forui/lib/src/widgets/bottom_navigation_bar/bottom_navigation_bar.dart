@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'bottom_navigation_bar.style.dart';
+
 /// A bottom navigation bar.
 ///
 /// A bottom navigation bar is usually present at the bottom of root pages. It is used to navigate between a small
@@ -122,17 +124,21 @@ class FBottomNavigationBarData extends InheritedWidget {
 }
 
 /// [FBottomNavigationBar]'s style.
-class FBottomNavigationBarStyle with Diagnosticable {
+class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyleFunctions {
   /// The decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
+  @override
   final EdgeInsets padding;
 
   /// The item's focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The item's style.
+  @override
   final FBottomNavigationBarItemStyle itemStyle;
 
   /// Creates a [FBottomNavigationBarStyle].
@@ -159,42 +165,4 @@ class FBottomNavigationBarStyle with Diagnosticable {
             typography: typography,
           ),
         );
-
-  /// Returns a copy of this [FBottomNavigationBarStyle] with the given properties replaced.
-  @useResult
-  FBottomNavigationBarStyle copyWith({
-    BoxDecoration? decoration,
-    EdgeInsets? padding,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FBottomNavigationBarItemStyle? itemStyle,
-  }) =>
-      FBottomNavigationBarStyle(
-        decoration: decoration ?? this.decoration,
-        padding: padding ?? this.padding,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        itemStyle: itemStyle ?? this.itemStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('itemStyle', itemStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FBottomNavigationBarStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          padding == other.padding &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          itemStyle == other.itemStyle;
-
-  @override
-  int get hashCode => decoration.hashCode ^ padding.hashCode ^ focusedOutlineStyle.hashCode ^ itemStyle.hashCode;
 }

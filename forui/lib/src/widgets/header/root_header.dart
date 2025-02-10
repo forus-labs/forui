@@ -73,17 +73,21 @@ final class _FRootHeader extends FHeader {
 }
 
 /// [FHeader.new]'s style.
-final class FRootHeaderStyle with Diagnosticable {
+final class FRootHeaderStyle with Diagnosticable, _$FRootHeaderStyleFunctions {
   /// The title's [TextStyle].
+  @override
   final TextStyle titleTextStyle;
 
   /// The [FHeaderAction]'s style.
+  @override
   final FHeaderActionStyle actionStyle;
 
   /// The spacing between [FHeaderAction]s. Defaults to 10.
+  @override
   final double actionSpacing;
 
   /// The padding.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FRootHeaderStyle].
@@ -109,42 +113,4 @@ final class FRootHeaderStyle with Diagnosticable {
           actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 30),
           padding: style.pagePadding.copyWith(bottom: 15),
         );
-
-  /// Returns a copy of this [FRootHeaderStyle] with the given properties replaced.
-  @useResult
-  FRootHeaderStyle copyWith({
-    TextStyle? titleTextStyle,
-    FHeaderActionStyle? actionStyle,
-    double? actionSpacing,
-    EdgeInsets? padding,
-  }) =>
-      FRootHeaderStyle(
-        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-        actionStyle: actionStyle ?? this.actionStyle,
-        actionSpacing: actionSpacing ?? this.actionSpacing,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
-      ..add(DiagnosticsProperty('action', actionStyle))
-      ..add(DoubleProperty('actionSpacing', actionSpacing))
-      ..add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FRootHeaderStyle &&
-          runtimeType == other.runtimeType &&
-          titleTextStyle == other.titleTextStyle &&
-          actionStyle == other.actionStyle &&
-          actionSpacing == other.actionSpacing &&
-          padding == other.padding;
-
-  @override
-  int get hashCode => titleTextStyle.hashCode ^ actionStyle.hashCode ^ actionSpacing.hashCode ^ padding.hashCode;
 }

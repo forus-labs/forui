@@ -6,6 +6,8 @@ import 'package:forui/src/widgets/line_calendar/calendar_layout.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'line_calendar.style.dart';
+
 /// A line calendar displays dates in a single horizontal, scrollable line.
 ///
 /// ## Desktop and web note
@@ -119,32 +121,39 @@ class FLineCalendar extends StatelessWidget {
 }
 
 /// [FLineCalendar]'s style.
-final class FLineCalendarStyle with Diagnosticable {
+final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   /// The horizontal padding around each calendar item. Defaults to `EdgeInsets.symmetric(horizontal: 6.5)`.
+  @override
   final EdgeInsets itemPadding;
 
   /// The vertical height between the content and the edges. Defaults to 15.5.
   ///
   /// ## Contract
   /// Throws [AssertionError] if `contentPadding` is negative.
+  @override
   final double itemContentEdgeSpacing;
 
   /// The vertical height between the date and weekday. Defaults to 2.
   ///
   /// ## Contract
   /// Throws [AssertionError] if `datePadding` is negative.
+  @override
   final double itemContentSpacing;
 
   /// The selected item's style.
+  @override
   final FLineCalendarItemStyle selectedItemStyle;
 
   /// The selected item's hovered style.
+  @override
   final FLineCalendarItemStyle selectedHoveredItemStyle;
 
   /// The unselected item's style.
+  @override
   final FLineCalendarItemStyle unselectedItemStyle;
 
   /// The unselected item's hovered style.
+  @override
   final FLineCalendarItemStyle unselectedHoveredItemStyle;
 
   /// Creates a [FLineCalendarStyle].
@@ -250,61 +259,4 @@ final class FLineCalendarStyle with Diagnosticable {
       ),
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('itemPadding', itemPadding))
-      ..add(DoubleProperty('itemContentEdgeSpacing', itemContentEdgeSpacing))
-      ..add(DoubleProperty('itemContentSpacing', itemContentSpacing))
-      ..add(DiagnosticsProperty('selectedItemStyle', selectedItemStyle))
-      ..add(DiagnosticsProperty('selectedHoveredItemStyle', selectedHoveredItemStyle))
-      ..add(DiagnosticsProperty('unselectedItemStyle', unselectedItemStyle))
-      ..add(DiagnosticsProperty('unselectedHoveredItemStyle', unselectedHoveredItemStyle));
-  }
-
-  /// Returns a copy of this [FLineCalendarStyle] with the given properties replaced.
-  @useResult
-  FLineCalendarStyle copyWith({
-    EdgeInsets? itemPadding,
-    double? itemContentEdgeSpacing,
-    double? itemContentSpacing,
-    FLineCalendarItemStyle? selectedItemStyle,
-    FLineCalendarItemStyle? selectedHoveredItemStyle,
-    FLineCalendarItemStyle? unselectedItemStyle,
-    FLineCalendarItemStyle? unselectedHoveredItemStyle,
-  }) =>
-      FLineCalendarStyle(
-        itemPadding: itemPadding ?? this.itemPadding,
-        itemContentEdgeSpacing: itemContentEdgeSpacing ?? this.itemContentEdgeSpacing,
-        itemContentSpacing: itemContentSpacing ?? this.itemContentSpacing,
-        selectedItemStyle: selectedItemStyle ?? this.selectedItemStyle,
-        selectedHoveredItemStyle: selectedHoveredItemStyle ?? this.selectedHoveredItemStyle,
-        unselectedItemStyle: unselectedItemStyle ?? this.unselectedItemStyle,
-        unselectedHoveredItemStyle: unselectedHoveredItemStyle ?? this.unselectedHoveredItemStyle,
-      );
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FLineCalendarStyle &&
-          runtimeType == other.runtimeType &&
-          itemPadding == other.itemPadding &&
-          itemContentEdgeSpacing == other.itemContentEdgeSpacing &&
-          itemContentSpacing == other.itemContentSpacing &&
-          selectedItemStyle == other.selectedItemStyle &&
-          selectedHoveredItemStyle == other.selectedHoveredItemStyle &&
-          unselectedItemStyle == other.unselectedItemStyle &&
-          unselectedHoveredItemStyle == other.unselectedHoveredItemStyle;
-
-  @override
-  int get hashCode =>
-      itemPadding.hashCode ^
-      itemContentEdgeSpacing.hashCode ^
-      itemContentSpacing.hashCode ^
-      selectedItemStyle.hashCode ^
-      selectedHoveredItemStyle.hashCode ^
-      unselectedItemStyle.hashCode ^
-      unselectedHoveredItemStyle.hashCode;
 }

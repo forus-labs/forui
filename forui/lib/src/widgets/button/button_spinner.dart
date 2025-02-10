@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'button_spinner.style.dart';
+
 /// An animated spinner icon.
 ///
 /// Should only be used with an [FButton] as a prefixIcon. The spinner will rotate indefinitely.
@@ -81,17 +83,21 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
 }
 
 /// [FButton] spinner's style.
-final class FButtonSpinnerStyle with Diagnosticable {
+final class FButtonSpinnerStyle with Diagnosticable, _$FButtonSpinnerStyleFunctions {
   /// The animation duration. Defaults to 1 second`.
+  @override
   final Duration animationDuration;
 
   /// The spinner's color when this button is enabled.
+  @override
   final Color enabledSpinnerColor;
 
   /// The spinner's color when this button is disabled.
+  @override
   final Color disabledSpinnerColor;
 
   /// The spinner's size. Defaults to 20.
+  @override
   final double spinnerSize;
 
   /// Creates a [FButtonSpinnerStyle].
@@ -110,43 +116,4 @@ final class FButtonSpinnerStyle with Diagnosticable {
           enabledSpinnerColor: enabled,
           disabledSpinnerColor: disabled,
         );
-
-  /// Returns a copy of this [FButtonSpinnerStyle] with the given properties replaced.
-  @useResult
-  FButtonSpinnerStyle copyWith({
-    Duration? animationDuration,
-    Color? enabledSpinnerColor,
-    Color? disabledSpinnerColor,
-    double? spinnerSize,
-  }) =>
-      FButtonSpinnerStyle(
-        animationDuration: animationDuration ?? this.animationDuration,
-        enabledSpinnerColor: enabledSpinnerColor ?? this.enabledSpinnerColor,
-        disabledSpinnerColor: disabledSpinnerColor ?? this.disabledSpinnerColor,
-        spinnerSize: spinnerSize ?? this.spinnerSize,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('animationDuration', animationDuration))
-      ..add(ColorProperty('enabledColor', enabledSpinnerColor))
-      ..add(ColorProperty('disabledColor', disabledSpinnerColor))
-      ..add(DoubleProperty('size', spinnerSize, defaultValue: 20));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FButtonSpinnerStyle &&
-          runtimeType == other.runtimeType &&
-          animationDuration == other.animationDuration &&
-          enabledSpinnerColor == other.enabledSpinnerColor &&
-          disabledSpinnerColor == other.disabledSpinnerColor &&
-          spinnerSize == other.spinnerSize;
-
-  @override
-  int get hashCode =>
-      animationDuration.hashCode ^ enabledSpinnerColor.hashCode ^ disabledSpinnerColor.hashCode ^ spinnerSize.hashCode;
 }

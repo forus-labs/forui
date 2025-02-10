@@ -4,12 +4,16 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'form_field_style.style.dart';
+
 /// A form field state's style.
-class FFormFieldStyle with Diagnosticable {
+class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   /// The label's text style.
+  @override
   final TextStyle labelTextStyle;
 
   /// The description's text style.
+  @override
   final TextStyle descriptionTextStyle;
 
   /// Creates a [FFormFieldStyle].
@@ -28,41 +32,12 @@ class FFormFieldStyle with Diagnosticable {
           fontWeight: FontWeight.w600,
         ),
         descriptionTextStyle = typography.sm.copyWith(color: descriptionColor);
-
-  /// Returns a copy of this [FFormFieldStyle] with the given properties replaced.
-  @useResult
-  FFormFieldStyle copyWith({
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-  }) =>
-      FFormFieldStyle(
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
-      ..add(DiagnosticsProperty('descriptionTextStyle', descriptionTextStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FFormFieldStyle &&
-          runtimeType == other.runtimeType &&
-          labelTextStyle == other.labelTextStyle &&
-          descriptionTextStyle == other.descriptionTextStyle;
-
-  @override
-  int get hashCode => labelTextStyle.hashCode ^ descriptionTextStyle.hashCode;
 }
 
 /// A form field's error style.
-class FFormFieldErrorStyle extends FFormFieldStyle {
+class FFormFieldErrorStyle extends FFormFieldStyle with _$FFormFieldErrorStyleFunctions {
   /// The error's text style.
+  @override
   final TextStyle errorTextStyle;
 
   /// Creates a [FFormFieldErrorStyle].
@@ -83,36 +58,4 @@ class FFormFieldErrorStyle extends FFormFieldStyle {
           fontWeight: FontWeight.w600,
         ),
         super.inherit();
-
-  /// Returns a copy of this [FFormFieldErrorStyle] with the given properties replaced.
-  @override
-  @useResult
-  FFormFieldErrorStyle copyWith({
-    TextStyle? labelTextStyle,
-    TextStyle? descriptionTextStyle,
-    TextStyle? errorTextStyle,
-  }) =>
-      FFormFieldErrorStyle(
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
-        errorTextStyle: errorTextStyle ?? this.errorTextStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('errorTextStyle', errorTextStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FFormFieldErrorStyle &&
-          runtimeType == other.runtimeType &&
-          labelTextStyle == other.labelTextStyle &&
-          descriptionTextStyle == other.descriptionTextStyle &&
-          errorTextStyle == other.errorTextStyle;
-
-  @override
-  int get hashCode => labelTextStyle.hashCode ^ descriptionTextStyle.hashCode ^ errorTextStyle.hashCode;
 }

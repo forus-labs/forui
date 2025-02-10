@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/avatar/avatar_content.dart';
 import 'package:meta/meta.dart';
 
+part 'avatar.style.dart';
+
 /// An image element with a fallback for representing the user.
 ///
 /// Typically used with a user's profile image. If the image fails to load, the fallback widget is used instead, which
@@ -79,17 +81,21 @@ class FAvatar extends StatelessWidget {
 }
 
 /// [FAvatar]'s style.
-final class FAvatarStyle with Diagnosticable {
+final class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   /// The fallback's background color.
+  @override
   final Color backgroundColor;
 
   /// The fallback's color.
+  @override
   final Color foregroundColor;
 
   /// The text style for the fallback text.
+  @override
   final TextStyle textStyle;
 
   /// Duration for the transition animation. Defaults to 500ms.
+  @override
   final Duration fadeInDuration;
 
   /// Creates a [FAvatarStyle].
@@ -107,43 +113,4 @@ final class FAvatarStyle with Diagnosticable {
           foregroundColor: colorScheme.mutedForeground,
           textStyle: typography.base.copyWith(color: colorScheme.mutedForeground, height: 0),
         );
-
-  /// Returns a copy of this [FAvatarStyle] with the given properties replaced.
-  @useResult
-  FAvatarStyle copyWith({
-    Color? backgroundColor,
-    Color? foregroundColor,
-    TextStyle? textStyle,
-    Duration? fadeInDuration,
-  }) =>
-      FAvatarStyle(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        foregroundColor: foregroundColor ?? this.foregroundColor,
-        textStyle: textStyle ?? this.textStyle,
-        fadeInDuration: fadeInDuration ?? this.fadeInDuration,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('backgroundColor', backgroundColor))
-      ..add(ColorProperty('foregroundColor', foregroundColor))
-      ..add(DiagnosticsProperty('textStyle', textStyle))
-      ..add(DiagnosticsProperty('fadeInDuration', fadeInDuration));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FAvatarStyle &&
-          runtimeType == other.runtimeType &&
-          backgroundColor == other.backgroundColor &&
-          foregroundColor == other.foregroundColor &&
-          fadeInDuration == other.fadeInDuration &&
-          textStyle == other.textStyle;
-
-  @override
-  int get hashCode =>
-      backgroundColor.hashCode ^ foregroundColor.hashCode ^ fadeInDuration.hashCode ^ textStyle.hashCode;
 }

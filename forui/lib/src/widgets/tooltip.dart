@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'tooltip.style.dart';
+
 /// A controller that controls whether a [FPopover] is shown or hidden.
 class FTooltipController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
@@ -280,7 +282,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 }
 
 /// A [FTooltip]'s style.
-final class FTooltipStyle with Diagnosticable {
+final class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   /// The tooltip's default shadow in [FTooltipStyle.inherit].
   static const shadow = [
     BoxShadow(
@@ -298,15 +300,19 @@ final class FTooltipStyle with Diagnosticable {
   ];
 
   /// The box decoration.
+  @override
   final BoxDecoration decoration;
 
   /// The margin surrounding the tooltip.
+  @override
   final EdgeInsets margin;
 
   /// The padding surrounding the tooltip's text.
+  @override
   final EdgeInsets padding;
 
   /// The tooltip's default text style.
+  @override
   final TextStyle textStyle;
 
   /// Creates a [FTooltipStyle].
@@ -331,42 +337,4 @@ final class FTooltipStyle with Diagnosticable {
           ),
           textStyle: typography.sm,
         );
-
-  /// Returns a copy of this [FTooltipStyle] with the given properties replaced.
-  @useResult
-  FTooltipStyle copyWith({
-    BoxDecoration? decoration,
-    TextStyle? textStyle,
-    EdgeInsets? margin,
-    EdgeInsets? padding,
-  }) =>
-      FTooltipStyle(
-        decoration: decoration ?? this.decoration,
-        textStyle: textStyle ?? this.textStyle,
-        margin: margin ?? this.margin,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(DiagnosticsProperty('textStyle', textStyle))
-      ..add(DiagnosticsProperty('margin', margin))
-      ..add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FTooltipStyle &&
-          runtimeType == other.runtimeType &&
-          decoration == other.decoration &&
-          margin == other.margin &&
-          padding == other.padding &&
-          textStyle == other.textStyle;
-
-  @override
-  int get hashCode => decoration.hashCode ^ margin.hashCode ^ padding.hashCode ^ textStyle.hashCode;
 }

@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'badge_content.style.dart';
+
 @internal
 final class Content extends StatelessWidget {
   final FBadgeCustomStyle style;
@@ -34,11 +36,13 @@ final class Content extends StatelessWidget {
 }
 
 /// [FBadge] content's style.
-final class FBadgeContentStyle with Diagnosticable {
+final class FBadgeContentStyle with Diagnosticable, _$FBadgeContentStyleFunctions {
   /// The label's [TextStyle].
+  @override
   final TextStyle labelTextStyle;
 
   /// The padding.
+  @override
   final EdgeInsets padding;
 
   /// Creates a [FBadgeContentStyle].
@@ -46,30 +50,4 @@ final class FBadgeContentStyle with Diagnosticable {
     required this.labelTextStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
   });
-
-  /// Returns a copy of this [FBadgeContentStyle] with the given properties replaced.
-  @useResult
-  FBadgeContentStyle copyWith({TextStyle? labelTextStyle, EdgeInsets? padding}) => FBadgeContentStyle(
-        labelTextStyle: labelTextStyle ?? this.labelTextStyle,
-        padding: padding ?? this.padding,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('labelTextStyle', labelTextStyle))
-      ..add(DiagnosticsProperty('padding', padding));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FBadgeContentStyle &&
-          runtimeType == other.runtimeType &&
-          padding == other.padding &&
-          labelTextStyle == other.labelTextStyle;
-
-  @override
-  int get hashCode => padding.hashCode ^ labelTextStyle.hashCode;
 }

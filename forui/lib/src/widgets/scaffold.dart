@@ -8,6 +8,8 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:meta/meta.dart';
 
+part 'scaffold.style.dart';
+
 /// A scaffold.
 ///
 /// A scaffold is a layout structure that contains a header, content, and footer.
@@ -104,17 +106,21 @@ class FScaffold extends StatelessWidget {
 }
 
 /// [FScaffold]'s style.
-final class FScaffoldStyle with Diagnosticable {
+final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// The background color.
+  @override
   final Color backgroundColor;
 
   /// The content padding. Only used when [FScaffold.contentPad] is `true`.
+  @override
   final EdgeInsets contentPadding;
 
   /// The header decoration.
+  @override
   final BoxDecoration headerDecoration;
 
   /// The footer decoration.
+  @override
   final BoxDecoration footerDecoration;
 
   /// Creates a [FScaffoldStyle].
@@ -139,45 +145,6 @@ final class FScaffoldStyle with Diagnosticable {
             ),
           ),
         );
-
-  /// Returns a copy of this style with the provided properties replaced.
-  @useResult
-  FScaffoldStyle copyWith({
-    Color? backgroundColor,
-    EdgeInsets? contentPadding,
-    BoxDecoration? headerDecoration,
-    BoxDecoration? footerDecoration,
-  }) =>
-      FScaffoldStyle(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        contentPadding: contentPadding ?? this.contentPadding,
-        headerDecoration: headerDecoration ?? this.headerDecoration,
-        footerDecoration: footerDecoration ?? this.footerDecoration,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('backgroundColor', backgroundColor))
-      ..add(DiagnosticsProperty('contentPadding', contentPadding))
-      ..add(DiagnosticsProperty('headerDecoration', headerDecoration))
-      ..add(DiagnosticsProperty('footerDecoration', footerDecoration));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FScaffoldStyle &&
-          runtimeType == other.runtimeType &&
-          backgroundColor == other.backgroundColor &&
-          contentPadding == other.contentPadding &&
-          headerDecoration == other.headerDecoration &&
-          footerDecoration == other.footerDecoration;
-
-  @override
-  int get hashCode =>
-      backgroundColor.hashCode ^ contentPadding.hashCode ^ headerDecoration.hashCode ^ footerDecoration.hashCode;
 }
 
 class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {

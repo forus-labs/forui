@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'progress.style.dart';
+
 /// A progress bar.
 ///
 /// Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
@@ -72,20 +74,25 @@ class FProgress extends StatelessWidget {
 }
 
 /// [FProgress]'s style.
-final class FProgressStyle with Diagnosticable {
+final class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
   /// The background's color.
+  @override
   final BoxDecoration backgroundDecoration;
 
   /// The progress's color.
+  @override
   final BoxDecoration progressDecoration;
 
   /// The constraints for the progress bar. Defaults to a height of 15.0.
+  @override
   final BoxConstraints constraints;
 
   /// The animation duration. Defaults to 500ms.
+  @override
   final Duration animationDuration;
 
   /// The animation curve. Defaults to [Curves.ease].
+  @override
   final Curve curve;
 
   /// Creates a [FProgressStyle].
@@ -109,51 +116,4 @@ final class FProgressStyle with Diagnosticable {
             color: colorScheme.primary,
           ),
         );
-
-  /// Returns a copy of this [FProgressStyle] with the given properties replaced.
-  @useResult
-  FProgressStyle copyWith({
-    BoxDecoration? backgroundDecoration,
-    BoxDecoration? progressDecoration,
-    BoxConstraints? constraints,
-    Duration? animationDuration,
-    Curve? curve,
-  }) =>
-      FProgressStyle(
-        backgroundDecoration: backgroundDecoration ?? this.backgroundDecoration,
-        progressDecoration: progressDecoration ?? this.progressDecoration,
-        constraints: constraints ?? this.constraints,
-        animationDuration: animationDuration ?? this.animationDuration,
-        curve: curve ?? this.curve,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('progressDecoration', progressDecoration))
-      ..add(DiagnosticsProperty('backgroundDecoration', backgroundDecoration))
-      ..add(DiagnosticsProperty('constraints', constraints))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration))
-      ..add(DiagnosticsProperty('curve', curve));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FProgressStyle &&
-          runtimeType == other.runtimeType &&
-          backgroundDecoration == other.backgroundDecoration &&
-          progressDecoration == other.progressDecoration &&
-          constraints == other.constraints &&
-          animationDuration == other.animationDuration &&
-          curve == other.curve;
-
-  @override
-  int get hashCode =>
-      backgroundDecoration.hashCode ^
-      progressDecoration.hashCode ^
-      constraints.hashCode ^
-      animationDuration.hashCode ^
-      curve.hashCode;
 }

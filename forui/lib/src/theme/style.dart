@@ -4,48 +4,59 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'style.style.dart';
+
 /// A set of miscellaneous properties that is part of a [FThemeData].
 ///
 /// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding
 /// properties of widget styles configured via `inherit(...)` constructors.
-final class FStyle with Diagnosticable {
+final class FStyle with Diagnosticable, _$FStyleFunctions {
   /// The style for the form field when it is enabled.
+  @override
   final FFormFieldStyle enabledFormFieldStyle;
 
   /// The style for the form field when it is disabled.
+  @override
   final FFormFieldStyle disabledFormFieldStyle;
 
   /// The style for the form field when it has an error.
+  @override
   final FFormFieldErrorStyle errorFormFieldStyle;
 
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The icon style.
+  @override
   final FIconStyle iconStyle;
 
   /// The border radius. Defaults to `BorderRadius.circular(8)`.
+  @override
   final BorderRadius borderRadius;
 
   /// The border width. Defaults to 1.
+  @override
   final double borderWidth;
 
   /// The page's padding. Defaults to `EdgeInsets.symmetric(vertical: 8, horizontal: 12)`.
+  @override
   final EdgeInsets pagePadding;
 
   /// The shadow used for elevated widgets.
+  @override
   final List<BoxShadow> shadow;
 
   /// Creates an [FStyle].
   ///
   /// **Note:**
   /// Unless you are creating a completely new style, modifying [FThemes]' predefined styles should be preferred.
-  FStyle({
+  const FStyle({
     required this.enabledFormFieldStyle,
     required this.disabledFormFieldStyle,
     required this.errorFormFieldStyle,
-    required this.iconStyle,
     required this.focusedOutlineStyle,
+    required this.iconStyle,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -88,71 +99,4 @@ final class FStyle with Diagnosticable {
             size: 20,
           ),
         );
-
-  /// Returns a copy of this [FStyle] with the given properties replaced.
-  @useResult
-  FStyle copyWith({
-    FFormFieldStyle? enabledFormFieldStyle,
-    FFormFieldStyle? disabledFormFieldStyle,
-    FFormFieldErrorStyle? errorFormFieldStyle,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FIconStyle? iconStyle,
-    BorderRadius? borderRadius,
-    double? borderWidth,
-    EdgeInsets? pagePadding,
-    List<BoxShadow>? shadow,
-  }) =>
-      FStyle(
-        enabledFormFieldStyle: enabledFormFieldStyle ?? this.enabledFormFieldStyle,
-        disabledFormFieldStyle: disabledFormFieldStyle ?? this.disabledFormFieldStyle,
-        errorFormFieldStyle: errorFormFieldStyle ?? this.errorFormFieldStyle,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        iconStyle: iconStyle ?? this.iconStyle,
-        borderRadius: borderRadius ?? this.borderRadius,
-        borderWidth: borderWidth ?? this.borderWidth,
-        pagePadding: pagePadding ?? this.pagePadding,
-        shadow: shadow ?? this.shadow,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('enabledFormFieldStyle', enabledFormFieldStyle))
-      ..add(DiagnosticsProperty('disabledFormFieldStyle', disabledFormFieldStyle))
-      ..add(DiagnosticsProperty('errorFormFieldStyle', errorFormFieldStyle))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius, defaultValue: BorderRadius.circular(8)))
-      ..add(DoubleProperty('borderWidth', borderWidth, defaultValue: 1))
-      ..add(DiagnosticsProperty('pagePadding', pagePadding, defaultValue: const EdgeInsets.all(4)))
-      ..add(IterableProperty('shadow', shadow));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FStyle &&
-          runtimeType == other.runtimeType &&
-          enabledFormFieldStyle == other.enabledFormFieldStyle &&
-          disabledFormFieldStyle == other.disabledFormFieldStyle &&
-          errorFormFieldStyle == other.errorFormFieldStyle &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          iconStyle == other.iconStyle &&
-          borderRadius == other.borderRadius &&
-          borderWidth == other.borderWidth &&
-          pagePadding == other.pagePadding &&
-          shadow == other.shadow;
-
-  @override
-  int get hashCode =>
-      enabledFormFieldStyle.hashCode ^
-      disabledFormFieldStyle.hashCode ^
-      errorFormFieldStyle.hashCode ^
-      focusedOutlineStyle.hashCode ^
-      iconStyle.hashCode ^
-      borderRadius.hashCode ^
-      borderWidth.hashCode ^
-      pagePadding.hashCode ^
-      shadow.hashCode;
 }

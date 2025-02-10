@@ -5,6 +5,8 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
+part 'button_content.style.dart';
+
 @internal
 class Content extends StatelessWidget {
   final Widget? prefix;
@@ -73,23 +75,29 @@ class IconContent extends StatelessWidget {
 }
 
 /// [FButton] content's style.
-final class FButtonContentStyle with Diagnosticable {
+final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   /// The [TextStyle] when this button is enabled.
+  @override
   final TextStyle enabledTextStyle;
 
   /// The [TextStyle] when this button is disabled.
+  @override
   final TextStyle disabledTextStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
+  @override
   final EdgeInsets padding;
 
   /// The icon's color when this button is enabled.
+  @override
   final Color enabledIconColor;
 
   /// The icon's color when this button is disabled.
+  @override
   final Color disabledIconColor;
 
   /// The icon's size. Defaults to 20.
+  @override
   final double iconSize;
 
   /// Creates a [FButtonContentStyle].
@@ -121,72 +129,24 @@ final class FButtonContentStyle with Diagnosticable {
           enabledIconColor: enabled,
           disabledIconColor: disabled,
         );
-
-  /// Returns a copy of this [FButtonContentStyle] with the given properties replaced.
-  @useResult
-  FButtonContentStyle copyWith({
-    TextStyle? enabledTextStyle,
-    TextStyle? disabledTextStyle,
-    EdgeInsets? padding,
-    Color? enabledIconColor,
-    Color? disabledIconColor,
-    double? iconSize,
-  }) =>
-      FButtonContentStyle(
-        enabledTextStyle: enabledTextStyle ?? this.enabledTextStyle,
-        disabledTextStyle: disabledTextStyle ?? this.disabledTextStyle,
-        padding: padding ?? this.padding,
-        enabledIconColor: enabledIconColor ?? this.enabledIconColor,
-        disabledIconColor: disabledIconColor ?? this.disabledIconColor,
-        iconSize: iconSize ?? this.iconSize,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('enabledTextStyle', enabledTextStyle))
-      ..add(DiagnosticsProperty('disabledTextStyle', disabledTextStyle))
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(ColorProperty('enabledColor', enabledIconColor))
-      ..add(ColorProperty('disabledColor', disabledIconColor))
-      ..add(DoubleProperty('size', iconSize, defaultValue: 20));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FButtonContentStyle &&
-          runtimeType == other.runtimeType &&
-          enabledTextStyle == other.enabledTextStyle &&
-          disabledTextStyle == other.disabledTextStyle &&
-          padding == other.padding &&
-          enabledIconColor == other.enabledIconColor &&
-          disabledIconColor == other.disabledIconColor &&
-          iconSize == other.iconSize;
-
-  @override
-  int get hashCode =>
-      enabledTextStyle.hashCode ^
-      disabledTextStyle.hashCode ^
-      padding.hashCode ^
-      enabledIconColor.hashCode ^
-      disabledIconColor.hashCode ^
-      iconSize.hashCode;
 }
 
 /// [FButton] icon content's style.
-final class FButtonIconContentStyle with Diagnosticable {
+final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// The padding. Defaults to `EdgeInsets.all(7.5)`.
+  @override
   final EdgeInsets padding;
 
   /// The icon's color when this button is enabled.
+  @override
   final Color enabledColor;
 
   /// The icon's color when this button is disabled.
+  @override
   final Color disabledColor;
 
   /// The icon's size. Defaults to 20.
+  @override
   final double size;
 
   /// Creates a [FButtonIconContentStyle].
@@ -196,42 +156,4 @@ final class FButtonIconContentStyle with Diagnosticable {
     this.padding = const EdgeInsets.all(7.5),
     this.size = 20,
   });
-
-  /// Returns a copy of this [FButtonIconContentStyle] with the given properties replaced.
-  @useResult
-  FButtonIconContentStyle copyWith({
-    EdgeInsets? padding,
-    Color? enabledColor,
-    Color? disabledColor,
-    double? size,
-  }) =>
-      FButtonIconContentStyle(
-        padding: padding ?? this.padding,
-        enabledColor: enabledColor ?? this.enabledColor,
-        disabledColor: disabledColor ?? this.disabledColor,
-        size: size ?? this.size,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(ColorProperty('enabledColor', enabledColor))
-      ..add(ColorProperty('disabledColor', disabledColor))
-      ..add(DoubleProperty('size', size, defaultValue: 20));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FButtonIconContentStyle &&
-          runtimeType == other.runtimeType &&
-          padding == other.padding &&
-          enabledColor == other.enabledColor &&
-          disabledColor == other.disabledColor &&
-          size == other.size;
-
-  @override
-  int get hashCode => padding.hashCode ^ enabledColor.hashCode ^ disabledColor.hashCode ^ size.hashCode;
 }

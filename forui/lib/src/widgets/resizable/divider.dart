@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'divider.style.dart';
+
 class _Up extends Intent {
   const _Up();
 }
@@ -266,20 +268,24 @@ enum FResizableDivider {
 }
 
 /// The style of the dividers between [FResizableRegion]s.
-final class FResizableDividerStyle with Diagnosticable {
+final class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFunctions {
   /// The divider's color.
+  @override
   final Color color;
 
   /// The divider's width (thickness). Defaults to `0.5`.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [width] <= 0.
+  @override
   final double width;
 
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The divider thumb's style.
+  @override
   final FResizableDividerThumbStyle thumbStyle;
 
   /// Creates a [FResizableDividerStyle].
@@ -289,64 +295,30 @@ final class FResizableDividerStyle with Diagnosticable {
     required this.thumbStyle,
     this.width = 0.5,
   }) : assert(0 < width, 'Thickness should be positive, but is $width.');
-
-  /// Returns a copy of this but with the given fields replaced with the new values.
-  @useResult
-  FResizableDividerStyle copyWith({
-    Color? color,
-    double? width,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FResizableDividerThumbStyle? thumbStyle,
-  }) =>
-      FResizableDividerStyle(
-        color: color ?? this.color,
-        width: width ?? this.width,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        thumbStyle: thumbStyle ?? this.thumbStyle,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('width', width))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('thumbStyle', thumbStyle));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FResizableDividerStyle &&
-          runtimeType == other.runtimeType &&
-          color == other.color &&
-          width == other.width &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          thumbStyle == other.thumbStyle;
-
-  @override
-  int get hashCode => color.hashCode ^ width.hashCode ^ focusedOutlineStyle.hashCode ^ thumbStyle.hashCode;
 }
 
 /// The style of the dividers' thumbs between [FResizableRegion]s.
-final class FResizableDividerThumbStyle with Diagnosticable {
+final class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
   /// The background color.
+  @override
   final Color backgroundColor;
 
   /// The foreground color.
+  @override
   final Color foregroundColor;
 
   /// The height.
   ///
   /// ## Contract
   /// Throws [AssertionError] if height] <= 0.
+  @override
   final double height;
 
   /// The width.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [width] <= 0.
+  @override
   final double width;
 
   /// Creates a [FResizableDividerThumbStyle].
@@ -357,42 +329,4 @@ final class FResizableDividerThumbStyle with Diagnosticable {
     required this.width,
   })  : assert(0 < height, 'Height should be positive, but is $height.'),
         assert(0 < width, 'Width should be positive, but is $width.');
-
-  /// Returns a copy of this but with the given fields replaced with the new values.
-  @useResult
-  FResizableDividerThumbStyle copyWith({
-    Color? backgroundColor,
-    Color? foregroundColor,
-    double? height,
-    double? width,
-  }) =>
-      FResizableDividerThumbStyle(
-        backgroundColor: backgroundColor ?? this.backgroundColor,
-        foregroundColor: foregroundColor ?? this.foregroundColor,
-        height: height ?? this.height,
-        width: width ?? this.width,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('backgroundColor', backgroundColor))
-      ..add(ColorProperty('foregroundColor', foregroundColor))
-      ..add(DoubleProperty('height', height))
-      ..add(DoubleProperty('width', width));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FResizableDividerThumbStyle &&
-          runtimeType == other.runtimeType &&
-          backgroundColor == other.backgroundColor &&
-          foregroundColor == other.foregroundColor &&
-          height == other.height &&
-          width == other.width;
-
-  @override
-  int get hashCode => backgroundColor.hashCode ^ foregroundColor.hashCode ^ height.hashCode ^ width.hashCode;
 }

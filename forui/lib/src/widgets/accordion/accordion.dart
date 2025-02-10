@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+part 'accordion.style.dart';
+
 /// A vertically stacked set of interactive headings that each reveal a section of content.
 ///
 /// See:
@@ -70,7 +72,7 @@ class _FAccordionState extends State<FAccordion> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? FTheme.of(context).accordionStyle;
+    final style = widget.style ?? context.theme.accordionStyle;
     return Column(
       children: [
         for (final (index, child) in widget.items.indexed)
@@ -94,35 +96,44 @@ class _FAccordionState extends State<FAccordion> {
 }
 
 /// The [FAccordion]'s style.
-final class FAccordionStyle with Diagnosticable {
+final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's default text style.
+  @override
   final TextStyle titleTextStyle;
 
   /// The child's default text style.
+  @override
   final TextStyle childTextStyle;
 
   /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
+  @override
   final EdgeInsets titlePadding;
 
   /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 15)`.
+  @override
   final EdgeInsets childPadding;
 
   /// The icon's color.
+  @override
   final Color iconColor;
 
   /// The icon's size. Defaults to 20.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [iconSize] is not positive.
+  @override
   final double iconSize;
 
   /// The focused outline style.
+  @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The divider's color.
+  @override
   final FDividerStyle dividerStyle;
 
   /// The expanding/collapsing animation duration. Defaults to 200ms.
+  @override
   final Duration animationDuration;
 
   /// Creates a [FAccordionStyle].
@@ -148,73 +159,6 @@ final class FAccordionStyle with Diagnosticable {
           focusedOutlineStyle: style.focusedOutlineStyle,
           dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
         );
-
-  /// Returns a copy of this [FAccordionStyle] with the given properties replaced.
-  @useResult
-  FAccordionStyle copyWith({
-    TextStyle? titleTextStyle,
-    TextStyle? childTextStyle,
-    EdgeInsets? titlePadding,
-    EdgeInsets? childPadding,
-    Color? iconColor,
-    double? iconSize,
-    FFocusedOutlineStyle? focusedOutlineStyle,
-    FDividerStyle? dividerStyle,
-    Duration? animationDuration,
-  }) =>
-      FAccordionStyle(
-        titleTextStyle: titleTextStyle ?? this.titleTextStyle,
-        childTextStyle: childTextStyle ?? this.childTextStyle,
-        titlePadding: titlePadding ?? this.titlePadding,
-        childPadding: childPadding ?? this.childPadding,
-        iconColor: iconColor ?? this.iconColor,
-        iconSize: iconSize ?? this.iconSize,
-        focusedOutlineStyle: focusedOutlineStyle ?? this.focusedOutlineStyle,
-        dividerStyle: dividerStyle ?? this.dividerStyle,
-        animationDuration: animationDuration ?? this.animationDuration,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('title', titleTextStyle))
-      ..add(DiagnosticsProperty('childTextStyle', childTextStyle))
-      ..add(DiagnosticsProperty('padding', titlePadding))
-      ..add(DiagnosticsProperty('contentPadding', childPadding))
-      ..add(ColorProperty('iconColor', iconColor))
-      ..add(DoubleProperty('iconSize', iconSize))
-      ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FAccordionStyle &&
-          runtimeType == other.runtimeType &&
-          titleTextStyle == other.titleTextStyle &&
-          childTextStyle == other.childTextStyle &&
-          titlePadding == other.titlePadding &&
-          childPadding == other.childPadding &&
-          iconColor == other.iconColor &&
-          iconSize == other.iconSize &&
-          animationDuration == other.animationDuration &&
-          focusedOutlineStyle == other.focusedOutlineStyle &&
-          dividerStyle == other.dividerStyle;
-
-  @override
-  int get hashCode =>
-      titleTextStyle.hashCode ^
-      childTextStyle.hashCode ^
-      titlePadding.hashCode ^
-      childPadding.hashCode ^
-      iconColor.hashCode ^
-      iconSize.hashCode ^
-      animationDuration.hashCode ^
-      focusedOutlineStyle.hashCode ^
-      dividerStyle.hashCode;
 }
 
 @internal

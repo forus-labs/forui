@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 extension FThemes on Never {
   /// The light and dark variants of the [Zinc](https://ui.shadcn.com/themes) theme.
   static final zinc = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Zinc Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -27,7 +27,7 @@ extension FThemes on Never {
         border: Color(0xFFE4E4E7),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Zinc Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -51,7 +51,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Slate](https://ui.shadcn.com/themes) theme.
   static final slate = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Slate Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -71,7 +71,7 @@ extension FThemes on Never {
         border: Color(0xFFE2E8F0),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Slate Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -95,7 +95,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Red](https://ui.shadcn.com/themes) theme.
   static final red = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Red Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -115,7 +115,7 @@ extension FThemes on Never {
         border: Color(0xFFE5E5E5),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Red Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -139,7 +139,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Rose](https://ui.shadcn.com/themes) theme.
   static final rose = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Rose Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -159,7 +159,7 @@ extension FThemes on Never {
         border: Color(0xFFE4E4E7),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Rose Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -183,7 +183,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Orange](https://ui.shadcn.com/themes) theme.
   static final orange = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Orange Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -203,7 +203,7 @@ extension FThemes on Never {
         border: Color(0xFFE4E4E7),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Orange Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -227,7 +227,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Green](https://ui.shadcn.com/themes) theme.
   static final green = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Green Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -247,7 +247,7 @@ extension FThemes on Never {
         border: Color(0xFFE4E4E7),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Green Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -271,7 +271,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Blue](https://ui.shadcn.com/themes) theme.
   static final blue = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Blue Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -291,7 +291,7 @@ extension FThemes on Never {
         border: Color(0xFFE2E8F0),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Blue Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -315,7 +315,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Yellow](https://ui.shadcn.com/themes) theme.
   static final yellow = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Yellow Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -335,7 +335,7 @@ extension FThemes on Never {
         border: Color(0xFFE7E5E4),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Yellow Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
@@ -359,7 +359,7 @@ extension FThemes on Never {
 
   /// The light and dark variants of the [Violet](https://ui.shadcn.com/themes) theme.
   static final violet = (
-    light: FThemeData.inherit(
+    light: FThemeData(
       debugLabel: 'Violet Light ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.light,
@@ -379,7 +379,7 @@ extension FThemes on Never {
         border: Color(0xFFE5E7EB),
       ),
     ),
-    dark: FThemeData.inherit(
+    dark: FThemeData(
       debugLabel: 'Violet Dark ThemeData',
       colorScheme: const FColorScheme(
         brightness: Brightness.dark,
