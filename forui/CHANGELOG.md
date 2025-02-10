@@ -1,5 +1,8 @@
 ## 0.9.1
 
+### Changes
+* Bump Sugar from 3.1.0 to 4.0.0.
+
 ### Fixes
 * Fix `FAccordion` disposing passed in controllers.
 * Fix `FPicker` incorrectly handling widget updates.
