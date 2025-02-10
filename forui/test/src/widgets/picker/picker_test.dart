@@ -83,9 +83,9 @@ void main() {
       await tester.pumpAndSettle();
 
       final newController = FPickerController(initialIndexes: [0, 1]);
-      await tester.pumpWidget(picker(newController))
-      ;await tester.pumpAndSettle();
-      
+      await tester.pumpWidget(picker(newController));
+      await tester.pumpAndSettle();
+
       expect(newController.value, [2, 0]);
       expect(newController.wheels.map((w) => w.selectedItem), [2, 0]);
     });
