@@ -167,8 +167,6 @@ They should:
 4. provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on
    an ancestor `FTheme`.
 5. provide a `copyWith(...)` method.
-6. override [debugFillProperties](https://api.flutter.dev/flutter/foundation/Diagnosticable/debugFillProperties.html).
-7. implement `operator ==` and `hashCode`.
 
 Lastly, the order of the fields and methods should be as shown above.
 
