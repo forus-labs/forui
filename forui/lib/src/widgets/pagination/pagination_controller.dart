@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
@@ -34,7 +33,6 @@ class FPaginationController extends FValueNotifier<int> {
   /// # Contract:
   /// * Throws [AssertionError] if 1 <= [page] and [page] <= length.
   FPaginationController({
-
     required this.length,
     int page = 1,
     // super.onDetach,
@@ -99,7 +97,6 @@ class FPaginationController extends FValueNotifier<int> {
 
     return (rangeStart, rangeEnd);
   }
-
 
   /// Returns the minimum number of pages to display at both the start and end of the pagination.
   ///

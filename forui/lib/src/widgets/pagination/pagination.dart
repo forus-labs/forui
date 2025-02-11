@@ -2,10 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/theme/theme_data.dart';
-import 'package:forui/src/widgets/pagination/pagination_controller.dart';
-import 'package:forui/theme.dart';
-import 'package:forui/widgets/pagination.dart';
 import 'package:meta/meta.dart';
 
 /// A pagination enables the user to select a specific page from a range of pages.
@@ -181,11 +177,13 @@ class Action extends StatelessWidget {
     required this.onPress,
     required this.style,
     required this.child,
+    super.key,
   });
 
   Action.previous({
     required this.style,
     required this.onPress,
+    super.key,
   }) : child = FIcon(
           FAssets.icons.chevronLeft,
           color: style.iconStyle.color,
@@ -195,6 +193,7 @@ class Action extends StatelessWidget {
   Action.next({
     required this.onPress,
     required this.style,
+    super.key,
   }) : child = FIcon(
           FAssets.icons.chevronRight,
           color: style.iconStyle.color,
