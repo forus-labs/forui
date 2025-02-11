@@ -2,6 +2,7 @@
 
 ### Additions
 
+* Add `FTextField.counterBuilder`.
 * Add `FTransformable`.
 * Add `FTransformables`.
 

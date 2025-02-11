@@ -17,6 +17,9 @@ class FTextFieldStateStyle with Diagnosticable, _$FTextFieldStateStyleFunctions 
   @override
   final TextStyle descriptionTextStyle;
 
+  @override
+  final TextStyle counterTextStyle;
+
   /// The content's [TextStyle].
   @override
   final TextStyle contentTextStyle;
@@ -39,6 +42,7 @@ class FTextFieldStateStyle with Diagnosticable, _$FTextFieldStateStyleFunctions 
     required this.contentTextStyle,
     required this.hintTextStyle,
     required this.descriptionTextStyle,
+    required this.counterTextStyle,
     required this.focusedStyle,
     required this.unfocusedStyle,
   });
@@ -62,6 +66,10 @@ class FTextFieldStateStyle with Diagnosticable, _$FTextFieldStateStyleFunctions 
             fontFamily: typography.defaultFontFamily,
             color: hintColor,
           ),
+          counterTextStyle: typography.sm.copyWith(
+            fontFamily: typography.defaultFontFamily,
+            color: contentColor,
+          ),
           descriptionTextStyle: formFieldStyle.descriptionTextStyle,
           focusedStyle: FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
           unfocusedStyle: FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style),
@@ -84,6 +92,7 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle
     required super.contentTextStyle,
     required super.hintTextStyle,
     required super.descriptionTextStyle,
+    required super.counterTextStyle,
     required super.focusedStyle,
     required super.unfocusedStyle,
   });

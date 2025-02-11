@@ -153,6 +153,23 @@ void main() {
         }
       }
 
+      testWidgets('counter text', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FTextField(
+              label: const Text('My Label'),
+              counterBuilder: (context, current, max, focused) => Text('$current of $max'),
+            ),
+          ),
+        );
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('text-field/${theme.name}/counter.png'),
+        );
+      });
+
       testWidgets('iOS selection handles - ${theme.name}', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
 

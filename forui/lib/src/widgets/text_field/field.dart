@@ -11,6 +11,7 @@ class Field extends FormField<String> {
     FTextFieldStateStyle stateStyle,
     EdgeInsets contentPadding,
   ) =>
+      // counterTextStyle does not need to be set since it only affects counterText, not counter.
       InputDecoration(
         isDense: true,
         prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
@@ -111,6 +112,15 @@ class Field extends FormField<String> {
               scrollPadding: style.scrollPadding,
               dragStartBehavior: parent.dragStartBehavior,
               mouseCursor: parent.mouseCursor,
+              buildCounter: (context, {required currentLength, required isFocused, required maxLength}) {
+                final counter = parent.counterBuilder?.call(context, currentLength, maxLength, isFocused);
+                return counter == null
+                    ? null
+                    : DefaultTextStyle.merge(
+                        style: stateStyle.counterTextStyle,
+                        child: counter,
+                      );
+              },
               selectionControls: parent.selectionControls,
               scrollController: parent.scrollController,
               scrollPhysics: parent.scrollPhysics,

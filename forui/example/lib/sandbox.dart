@@ -33,24 +33,9 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late FPickerController controller = FPickerController(initialIndexes: [2, 5]);
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: 250,
-        child: FPicker(
-          style: context.theme.pickerStyle,
-          controller: controller,
-          children: [
-            FPickerWheel(
-              flex: 3,
-              loop: true,
-              children: a.map(Text.new).toList(),
-            ),
-            FPickerWheel(
-              flex: 3,
-              loop: true,
-              children: a.map(Text.new).toList(),
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => FTextField(
+        maxLength: 3,
+        counterBuilder: (context, current, max, focused) => Text('$current of $max'),
       );
 
   @override
