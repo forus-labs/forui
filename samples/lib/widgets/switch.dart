@@ -24,12 +24,12 @@ class _SwitchState extends StatefulSampleState<SwitchPage> {
 
   @override
   Widget sample(BuildContext context) => FSwitch(
-    label: const Text('Airplane Mode'),
-    semanticLabel: 'Airplane Mode',
-    value: state,
-    onChange: (value) => setState(() => state = value),
-    enabled: widget.enabled,
-  );
+        label: const Text('Airplane Mode'),
+        semanticLabel: 'Airplane Mode',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+        enabled: widget.enabled,
+      );
 }
 
 @RoutePage()
