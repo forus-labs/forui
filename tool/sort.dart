@@ -3,9 +3,13 @@ import 'dart:io';
 void main(List<String> args) {
   final currentPath = Directory.current.path;
   final [packageName, ...] = args;
+  final ignore = {
+    '$currentPath/lib/generated_plugin_registrant.dart',
+    '$currentPath/lib/src/localizations/localizations.dart',
+  };
 
   // Getting all the dart files for the project
-  final files = dartFiles(currentPath)..remove('$currentPath/lib/generated_plugin_registrant.dart');
+  final files = dartFiles(currentPath)..removeWhere((key, _) => ignore.contains(key));
 
   // Sorting and writing to files
   for (final file in files.values) {

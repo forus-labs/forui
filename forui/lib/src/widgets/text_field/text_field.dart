@@ -8,6 +8,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/text_field/field.dart';
 
+/// The [FTextField.counterBuilder] callback.
+///
+/// [currentLength] represents the length of the textfield's input.
+/// [maxLength] represents the maximum length of the textfield's input.
+/// [focused] represents whether the textfield is currently focused.
+typedef FTextFieldCounterBuilder = Widget? Function(
+  BuildContext context,
+  int currentLength,
+  int? maxLength,
+  // ignore: avoid_positional_boolean_parameters
+  bool focused,
+);
+
 /// A text field.
 ///
 /// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard. A [FTextField] is internally
@@ -411,7 +424,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor? mouseCursor;
 
-  // TODO: InputCounterWidgetBuilder? buildCounter;
+  /// The [FTextFieldCounterBuilder] used to build a custom counter for the text field.
+  ///
+  /// The returned widget will be wrapped in a Semantics widget for accessibility, but it also needs to be accessible
+  /// itself. For example, if returning a [Text] widget, set the [Text.semanticsLabel] property.
+  final FTextFieldCounterBuilder? counterBuilder;
 
   /// The [ScrollPhysics] to use when vertically scrolling the input. If not specified, it will behave according to the
   /// current platform.
@@ -559,6 +576,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.counterBuilder,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
@@ -624,6 +642,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.counterBuilder,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints = const [AutofillHints.email],
@@ -692,6 +711,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.counterBuilder,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints = const [AutofillHints.password],
@@ -761,6 +781,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
+    this.counterBuilder,
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
@@ -873,6 +894,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
+      ..add(ObjectFlagProperty.has('buildCounter', counterBuilder))
       ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(IterableProperty('autofillHints', autofillHints))
