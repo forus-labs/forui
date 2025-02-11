@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-
+import 'package:forui/src/theme/theme_data.dart';
+import 'package:forui/src/widgets/pagination/pagination_controller.dart';
+import 'package:forui/theme.dart';
+import 'package:forui/widgets/pagination.dart';
 import 'package:meta/meta.dart';
 
 /// A Pagination component that enables the user to select a specific page from a range of pages.
