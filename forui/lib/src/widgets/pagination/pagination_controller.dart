@@ -1,6 +1,9 @@
+import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A controller that controls which page is selected.
+// TODO: Extend PageController
 class FPaginationController extends FValueNotifier<int> {
   /// The total number of pages.
   ///
@@ -31,8 +34,11 @@ class FPaginationController extends FValueNotifier<int> {
   /// # Contract:
   /// * Throws [AssertionError] if 1 <= [page] and [page] <= length.
   FPaginationController({
+
     required this.length,
     int page = 1,
+    // super.onDetach,
+    // super.onAttach,
     this.showEdges = true,
     this.siblings = 1,
   })  : assert(0 < length, 'The total length of pages should be more than 0, but is $length.'),
@@ -94,10 +100,12 @@ class FPaginationController extends FValueNotifier<int> {
     return (rangeStart, rangeEnd);
   }
 
+
   /// Returns the minimum number of pages to display at both the start and end of the pagination.
   ///
   /// If the total number of pages is too small to accommodate both the edge pages
   /// and the full set of sibling pages around the current page, all pages are displayed instead.
+  @internal
   int get minPagesDisplayedAtEdges {
     final minDisplayedAtEnds = siblings + 1 + (showEdges ? 1 : 0);
     return length <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? length : minDisplayedAtEnds;

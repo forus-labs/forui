@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
 import 'package:meta/meta.dart';
 
-/// A Pagination component that enables the user to select a specific page from a range of pages.
+/// A pagination enables the user to select a specific page from a range of pages.
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/pagination for working examples.
@@ -17,16 +16,7 @@ final class FPagination extends StatefulWidget {
   final FPaginationStyle? style;
 
   /// The controller. Defaults to [FPaginationController.new].
-  final FPaginationController? controller;
-
-  /// Convenience property to set the length of the pagination.
-  ///
-  /// equivalent to setting the [length] property of the [controller].
-  /// if the [controller] is provided, this property is ignored.
-  ///
-  /// # Contract:
-  /// * Throws [AssertionError] if [length] < 0.
-  final int? length;
+  final FPaginationController controller;
 
   /// The previous button placed in the beginning of the pagination.
   ///
@@ -40,16 +30,12 @@ final class FPagination extends StatefulWidget {
 
   /// Creates an [FPagination].
   const FPagination({
+    required this.controller,
     this.style,
-    this.controller,
-    this.length,
     this.previous,
     this.next,
     super.key,
-  }) : assert(
-          controller != null || (length != null && 0 < length),
-          'Either a controller must be provided, or length must be more than 0, but is $length.',
-        );
+  });
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -59,23 +45,17 @@ final class FPagination extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('length', length));
+      ..add(DiagnosticsProperty('controller', controller));
   }
 }
 
 class _FPaginationState extends State<FPagination> {
-  late FPaginationController _controller;
-  late int current;
-
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FPaginationController(length: widget.length!);
-    _controller.addListener(() {
-      setState(() {
-        current = _controller.value;
-      });
+
+    widget.controller.addListener(() {
+      setState(() {});
     });
   }
 
@@ -85,18 +65,20 @@ class _FPaginationState extends State<FPagination> {
     if (widget.controller == old.controller) {
       return;
     }
-
-    if (old.controller != null) {
-      _controller.dispose();
-    }
-    _controller = widget.controller ?? FPaginationController(length: widget.length!);
+    old.controller.removeListener(() {
+      setState(() {});
+    });
+    widget.controller.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = widget.controller;
     final style = widget.style ?? context.theme.paginationStyle;
-    final previous = widget.previous ?? _Action.previous(style: style, onPress: _controller.previous);
-    final next = widget.next ?? _Action.next(style: style, onPress: _controller.next);
+    final previous = widget.previous ?? Action.previous(style: style, onPress: controller.previous);
+    final next = widget.next ?? Action.next(style: style, onPress: controller.next);
 
     final elipsis = Padding(
       padding: style.itemPadding,
@@ -112,18 +94,18 @@ class _FPaginationState extends State<FPagination> {
       ),
     );
 
-    final range = _controller.calculateSiblingRange();
+    final range = controller.calculateSiblingRange();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         previous,
-        if (_controller.value > _controller.minPagesDisplayedAtEdges + 1) ...[
-          if (_controller.showEdges)
+        if (controller.value > controller.minPagesDisplayedAtEdges + 1) ...[
+          if (controller.showEdges)
             FPaginationItemData(
               page: 1,
               style: style,
-              controller: _controller,
+              controller: controller,
               child: const _Page(),
             ),
           elipsis,
@@ -132,28 +114,22 @@ class _FPaginationState extends State<FPagination> {
           FPaginationItemData(
             page: i,
             style: style,
-            controller: _controller,
+            controller: controller,
             child: const _Page(),
           ),
-        if (_controller.value < (_controller.length - _controller.minPagesDisplayedAtEdges)) ...[
+        if (controller.value < (controller.length - controller.minPagesDisplayedAtEdges)) ...[
           elipsis,
-          if (_controller.showEdges)
+          if (controller.showEdges)
             FPaginationItemData(
-              page: _controller.length,
+              page: controller.length,
               style: style,
-              controller: _controller,
+              controller: controller,
               child: const _Page(),
             ),
         ],
         next,
       ],
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('current', current));
   }
 }
 
@@ -192,18 +168,19 @@ class FPaginationItemData extends InheritedWidget {
   }
 }
 
-class _Action extends StatelessWidget {
+@internal
+class Action extends StatelessWidget {
   final VoidCallback onPress;
   final FPaginationStyle style;
   final Widget child;
 
-  const _Action({
+  const Action({
     required this.onPress,
     required this.style,
     required this.child,
   });
 
-  _Action.previous({
+  Action.previous({
     required this.style,
     required this.onPress,
   }) : child = FIcon(
@@ -212,7 +189,7 @@ class _Action extends StatelessWidget {
           size: style.iconStyle.size,
         );
 
-  _Action.next({
+  Action.next({
     required this.onPress,
     required this.style,
   }) : child = FIcon(
@@ -293,139 +270,4 @@ class _Page extends StatelessWidget {
       ),
     );
   }
-}
-
-/// The [FPagination] styles.
-final class FPaginationStyle with Diagnosticable {
-  /// The selected page [BoxDecoration].
-  final BoxDecoration selectedDecoration;
-
-  /// The unselected page [BoxDecoration].
-  final BoxDecoration unselectedDecoration;
-
-  /// The hovered page [BoxDecoration].
-  final BoxDecoration hoveredDecoration;
-
-  /// The hovered selected page [BoxDecoration].
-  final BoxDecoration selectedHoveredDecoration;
-
-  /// The unselected textStyle.
-  final TextStyle unselectedTextStyle;
-
-  /// The selected textStyle.
-  final TextStyle selectedTextStyle;
-
-  /// The icon style.
-  final FIconStyle iconStyle;
-
-  /// The padding around each item. Defaults to EdgeInsets.symmetric(horizontal: 2)`.
-  final EdgeInsets itemPadding;
-
-  /// The constraints for the content. Defaults to `BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40, minHeight: 40.0)`.
-  final BoxConstraints contentConstraints;
-
-  /// Creates a [FPaginationStyle].
-  FPaginationStyle({
-    required this.selectedDecoration,
-    required this.unselectedDecoration,
-    required this.hoveredDecoration,
-    required this.selectedHoveredDecoration,
-    required this.iconStyle,
-    required this.unselectedTextStyle,
-    required this.selectedTextStyle,
-    this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.contentConstraints = const BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40, minHeight: 40.0),
-  });
-
-  /// Creates a [FPaginationStyle] that inherits its properties from [colorScheme], [typography], and [style].
-  FPaginationStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          selectedDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.primary,
-          ),
-          unselectedDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
-          ),
-          hoveredDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.border,
-          ),
-          selectedHoveredDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.hover(colorScheme.primary),
-          ),
-          unselectedTextStyle: typography.sm.copyWith(color: colorScheme.primary),
-          selectedTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
-          iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
-        );
-
-  /// Returns a copy of this [FPaginationStyle] with the given properties replaced.
-  @useResult
-  FPaginationStyle copyWith({
-    BoxDecoration? selectedDecoration,
-    BoxDecoration? unselectedDecoration,
-    BoxDecoration? hoveredDecoration,
-    BoxDecoration? selectedHoveredDecoration,
-    TextStyle? unselectedTextStyle,
-    TextStyle? selectedTextStyle,
-    FIconStyle? iconStyle,
-    EdgeInsets? contentPadding,
-    EdgeInsets? itemPadding,
-    BoxConstraints? contentConstraints,
-  }) =>
-      FPaginationStyle(
-        selectedDecoration: selectedDecoration ?? this.selectedDecoration,
-        unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
-        hoveredDecoration: hoveredDecoration ?? this.hoveredDecoration,
-        selectedHoveredDecoration: selectedHoveredDecoration ?? this.selectedHoveredDecoration,
-        unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
-        selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
-        iconStyle: iconStyle ?? this.iconStyle,
-        itemPadding: itemPadding ?? this.itemPadding,
-        contentConstraints: contentConstraints ?? this.contentConstraints,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('selectedDecoration', selectedDecoration))
-      ..add(DiagnosticsProperty('unselectedDecoration', unselectedDecoration))
-      ..add(DiagnosticsProperty('hoveredDecoration', hoveredDecoration))
-      ..add(DiagnosticsProperty('selectedHoveredDecoration', selectedHoveredDecoration))
-      ..add(DiagnosticsProperty('unselectedTextStyle', unselectedTextStyle))
-      ..add(DiagnosticsProperty('selectedTextStyle', selectedTextStyle))
-      ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('itemPadding', itemPadding))
-      ..add(DiagnosticsProperty('contentConstraints', contentConstraints));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FPaginationStyle &&
-          runtimeType == other.runtimeType &&
-          selectedDecoration == other.selectedDecoration &&
-          unselectedDecoration == other.unselectedDecoration &&
-          hoveredDecoration == other.hoveredDecoration &&
-          selectedHoveredDecoration == other.selectedHoveredDecoration &&
-          unselectedTextStyle == other.unselectedTextStyle &&
-          selectedTextStyle == other.selectedTextStyle &&
-          iconStyle == other.iconStyle &&
-          itemPadding == other.itemPadding &&
-          contentConstraints == other.contentConstraints;
-
-  @override
-  int get hashCode =>
-      selectedDecoration.hashCode ^
-      unselectedDecoration.hashCode ^
-      hoveredDecoration.hashCode ^
-      selectedHoveredDecoration.hashCode ^
-      unselectedTextStyle.hashCode ^
-      selectedTextStyle.hashCode ^
-      iconStyle.hashCode ^
-      itemPadding.hashCode ^
-      contentConstraints.hashCode;
 }

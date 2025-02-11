@@ -59,7 +59,7 @@ void main() {
             child: FPagination(controller: FPaginationController(length: 10, siblings: 0, page: 3)),
           ),
         );
-        await tester.tap(find.bySemanticsLabel('Pagination action').last);
+        await tester.tap(find.byType(Action).last);
         await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
         await expectLater(
