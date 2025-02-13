@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 @internal
 class Field extends FormField<String> {

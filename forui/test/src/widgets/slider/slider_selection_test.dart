@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/src/widgets/slider/slider_selection.dart';
 
 void main() {
