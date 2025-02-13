@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/tile/tile_content.dart';
 import 'package:forui/src/widgets/tile/tile_group.dart';
+import 'package:meta/meta.dart';
 
 part 'tile.style.dart';
 

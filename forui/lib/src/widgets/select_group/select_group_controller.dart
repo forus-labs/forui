@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A select group's controller that manages the selection state of a group of values.
 ///

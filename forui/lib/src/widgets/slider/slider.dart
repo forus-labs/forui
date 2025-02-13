@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/form_field.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';

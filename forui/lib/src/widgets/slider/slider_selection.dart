@@ -2,9 +2,8 @@ import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 /// A [FSlider]'s active track/selection.
 sealed class FSliderSelection with Diagnosticable {

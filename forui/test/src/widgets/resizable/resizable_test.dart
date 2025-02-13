@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart' hide VerticalDivider;
 
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';

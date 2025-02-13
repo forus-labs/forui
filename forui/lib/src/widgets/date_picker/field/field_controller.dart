@@ -1,10 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/date_picker/field/parser.dart';
+import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
 ///
 @internal

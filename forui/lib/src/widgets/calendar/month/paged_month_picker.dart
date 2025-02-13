@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
-
 import 'package:forui/src/widgets/calendar/month/month_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/paged_picker.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @internal
 class PagedMonthPicker extends PagedPicker {
