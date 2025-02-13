@@ -12,11 +12,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: TestScaffold(
-            child: FTabs(
-              tabs: [
-                FTabEntry(label: const Text('Account'), content: Container(height: 100)),
-              ],
-            ),
+            child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))]),
           ),
         ),
       );
@@ -28,11 +24,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            child: FTabs(
-              tabs: [
-                FTabEntry(label: const Text('Account'), content: Container(height: 100)),
-              ],
-            ),
+            child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))]),
           ),
         ),
       );
@@ -42,13 +34,7 @@ void main() {
 
     testWidgets('not embedded in any App', (tester) async {
       await tester.pumpWidget(
-        TestScaffold(
-          child: FTabs(
-            tabs: [
-              FTabEntry(label: const Text('Account'), content: Container(height: 100)),
-            ],
-          ),
-        ),
+        TestScaffold(child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))])),
       );
 
       expect(tester.takeException(), null);
@@ -64,11 +50,7 @@ void main() {
             DefaultWidgetsLocalizations.delegate,
           ],
           child: TestScaffold(
-            child: FTabs(
-              tabs: [
-                FTabEntry(label: const Text('Account'), content: Container(height: 100)),
-              ],
-            ),
+            child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))]),
           ),
         ),
       );

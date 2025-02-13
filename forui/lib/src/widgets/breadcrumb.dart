@@ -34,26 +34,15 @@ final class FBreadcrumb extends StatelessWidget {
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
-  const FBreadcrumb({
-    required this.children,
-    this.style,
-    this.divider,
-    super.key,
-  });
+  const FBreadcrumb({required this.children, this.style, this.divider, super.key});
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.breadcrumbStyle;
-    final divider = this.divider != null
-        ? FIconStyleData(
-            style: style.iconStyle,
-            child: this.divider!,
-          )
-        : FIcon(
-            FAssets.icons.chevronRight,
-            color: style.iconStyle.color,
-            size: style.iconStyle.size,
-          );
+    final divider =
+        this.divider != null
+            ? FIconStyleData(style: style.iconStyle, child: this.divider!)
+            : FIcon(FAssets.icons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size);
 
     return Row(
       children: [
@@ -89,11 +78,7 @@ class FBreadcrumbItemData extends InheritedWidget {
   final FBreadcrumbStyle style;
 
   /// Creates a [FBreadcrumbItemData].
-  const FBreadcrumbItemData({
-    required this.style,
-    required super.child,
-    super.key,
-  });
+  const FBreadcrumbItemData({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FBreadcrumbItemData oldWidget) => style != oldWidget.style;
@@ -108,18 +93,8 @@ class FBreadcrumbItemData extends InheritedWidget {
 /// A breadcrumb item.
 abstract interface class FBreadcrumbItem extends Widget {
   /// Creates a crumb that typically represents a single item in the navigation path.
-  factory FBreadcrumbItem({
-    required Widget child,
-    bool current = false,
-    VoidCallback? onPress,
-    Key? key,
-  }) =>
-      _Crumb(
-        current: current,
-        onPress: onPress,
-        key: key,
-        child: child,
-      );
+  factory FBreadcrumbItem({required Widget child, bool current = false, VoidCallback? onPress, Key? key}) =>
+      _Crumb(current: current, onPress: onPress, key: key, child: child);
 
   /// Creates a collapsed crumb.
   ///
@@ -153,12 +128,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   final VoidCallback? onPress;
   final Widget child;
 
-  const _Crumb({
-    required this.child,
-    this.onPress,
-    this.current = false,
-    super.key,
-  });
+  const _Crumb({required this.child, this.onPress, this.current = false, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -168,18 +138,19 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
     return FTappable(
       focusedOutlineStyle: focusedOutlineStyle,
       onPress: onPress,
-      builder: (context, data, child) => Padding(
-        padding: style.padding,
-        child: DefaultTextStyle(
-          style: switch ((current, data.hovered)) {
-            (false, false) => style.unselectedTextStyle,
-            (false, true) => style.hoveredTextStyle,
-            (true, true) => style.hoveredTextStyle,
-            (true, false) => style.selectedTextStyle,
-          },
-          child: child!,
-        ),
-      ),
+      builder:
+          (context, data, child) => Padding(
+            padding: style.padding,
+            child: DefaultTextStyle(
+              style: switch ((current, data.hovered)) {
+                (false, false) => style.unselectedTextStyle,
+                (false, true) => style.hoveredTextStyle,
+                (true, true) => style.hoveredTextStyle,
+                (true, false) => style.selectedTextStyle,
+              },
+              child: child!,
+            ),
+          ),
       child: child,
     );
   }
@@ -309,11 +280,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         onPress: controller.toggle,
         child: Padding(
           padding: style.padding,
-          child: FIcon(
-            FAssets.icons.ellipsis,
-            size: style.iconStyle.size,
-            color: style.iconStyle.color,
-          ),
+          child: FIcon(FAssets.icons.ellipsis, size: style.iconStyle.size, color: style.iconStyle.color),
         ),
       ),
     );
@@ -367,20 +334,14 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
   FBreadcrumbStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          selectedTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colorScheme.foreground,
-          ),
-          unselectedTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colorScheme.mutedForeground,
-          ),
-          hoveredTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colorScheme.primary,
-            decoration: TextDecoration.underline,
-          ),
-          iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
-        );
+    : this(
+        selectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colorScheme.foreground),
+        unselectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colorScheme.mutedForeground),
+        hoveredTextStyle: typography.sm.copyWith(
+          fontWeight: FontWeight.w400,
+          color: colorScheme.primary,
+          decoration: TextDecoration.underline,
+        ),
+        iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
+      );
 }

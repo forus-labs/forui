@@ -8,14 +8,8 @@ import 'package:sugar/sugar.dart';
 part 'entry.style.dart';
 
 /// A calendar day's data.
-typedef FCalendarDayData = ({
-  FCalendarDayPickerStyle style,
-  DateTime date,
-  bool current,
-  bool today,
-  bool selectable,
-  bool selected,
-});
+typedef FCalendarDayData =
+    ({FCalendarDayPickerStyle style, DateTime date, bool current, bool today, bool selectable, bool selected});
 
 @internal
 abstract class Entry extends StatelessWidget {
@@ -97,12 +91,12 @@ abstract class Entry extends StatelessWidget {
     final entryStyle = selectable ? style.enabledStyle : style.disabledStyle;
 
     Widget builder(BuildContext context, FTappableData data, Widget? child) => _Content(
-          style: entryStyle,
-          borderRadius: BorderRadius.all(entryStyle.radius),
-          text: format(date),
-          data: data,
-          current: current,
-        );
+      style: entryStyle,
+      borderRadius: BorderRadius.all(entryStyle.radius),
+      text: format(date),
+      data: data,
+      current: current,
+    );
 
     if (selectable) {
       return _SelectableEntry(
@@ -118,10 +112,7 @@ abstract class Entry extends StatelessWidget {
     }
   }
 
-  const Entry._({
-    required this.style,
-    required this.builder,
-  });
+  const Entry._({required this.style, required this.builder});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -153,14 +144,14 @@ class _SelectableEntry extends Entry {
 
   @override
   Widget build(BuildContext context) => FTappable(
-        semanticLabel: semanticLabel,
-        semanticSelected: selected,
-        focusNode: focusNode,
-        excludeSemantics: true,
-        onPress: () => onPress(date),
-        onLongPress: () => onLongPress?.call(date),
-        builder: builder,
-      );
+    semanticLabel: semanticLabel,
+    semanticSelected: selected,
+    focusNode: focusNode,
+    excludeSemantics: true,
+    onPress: () => onPress(date),
+    onLongPress: () => onLongPress?.call(date),
+    builder: builder,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -176,15 +167,11 @@ class _SelectableEntry extends Entry {
 }
 
 class _UnselectableEntry extends Entry {
-  const _UnselectableEntry({
-    required super.style,
-    required super.builder,
-  }) : super._();
+  const _UnselectableEntry({required super.style, required super.builder}) : super._();
 
   @override
-  Widget build(BuildContext context) => ExcludeSemantics(
-        child: builder(context, (focused: false, hovered: false), null),
-      );
+  Widget build(BuildContext context) =>
+      ExcludeSemantics(child: builder(context, (focused: false, hovered: false), null));
 }
 
 class _Content extends StatelessWidget {
@@ -216,9 +203,7 @@ class _Content extends StatelessWidget {
         borderRadius: borderRadius,
         color: hovered ? style.hoveredBackgroundColor : style.backgroundColor,
       ),
-      child: Center(
-        child: Text(text, style: textStyle),
-      ),
+      child: Center(child: Text(text, style: textStyle)),
     );
   }
 
@@ -268,6 +253,6 @@ final class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFuncti
     required this.radius,
     Color? hoveredBackgroundColor,
     TextStyle? hoveredTextStyle,
-  })  : hoveredBackgroundColor = hoveredBackgroundColor ?? backgroundColor,
-        hoveredTextStyle = hoveredTextStyle ?? textStyle;
+  }) : hoveredBackgroundColor = hoveredBackgroundColor ?? backgroundColor,
+       hoveredTextStyle = hoveredTextStyle ?? textStyle;
 }

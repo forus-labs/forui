@@ -13,12 +13,12 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFDatePickerController();
-          return FDatePicker(
-            controller: controller,
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFDatePickerController();
+            return FDatePicker(controller: controller);
+          },
+        ),
       ),
     );
 

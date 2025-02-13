@@ -23,12 +23,8 @@ sealed class FHeader extends StatelessWidget {
   /// Creates a header.
   ///
   /// It is typically used on pages at the root of the navigation stack.
-  const factory FHeader({
-    required Widget title,
-    FRootHeaderStyle? style,
-    List<Widget> actions,
-    Key? key,
-  }) = _FRootHeader;
+  const factory FHeader({required Widget title, FRootHeaderStyle? style, List<Widget> actions, Key? key}) =
+      _FRootHeader;
 
   /// Creates a nested header.
   ///
@@ -59,11 +55,7 @@ class FHeaderData extends InheritedWidget {
   final FHeaderActionStyle actionStyle;
 
   /// Creates a [FHeaderData].
-  const FHeaderData({
-    required this.actionStyle,
-    required super.child,
-    super.key,
-  });
+  const FHeaderData({required this.actionStyle, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FHeaderData oldWidget) => actionStyle != oldWidget.actionStyle;
@@ -86,16 +78,10 @@ final class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   final FNestedHeaderStyle nestedStyle;
 
   /// Creates a [FHeaderStyles].
-  const FHeaderStyles({
-    required this.rootStyle,
-    required this.nestedStyle,
-  });
+  const FHeaderStyles({required this.rootStyle, required this.nestedStyle});
 
   /// Creates a [FHeaderStyles] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
-  FHeaderStyles.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  })  : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        nestedStyle = FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
+  FHeaderStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+    : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      nestedStyle = FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
 }

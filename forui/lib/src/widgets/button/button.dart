@@ -112,19 +112,16 @@ class FButton extends StatelessWidget {
       onFocusChange: onFocusChange,
       onPress: onPress,
       onLongPress: onLongPress,
-      builder: (context, data, child) => DecoratedBox(
-        decoration: switch ((enabled, data.hovered)) {
-          (true, false) => style.enabledBoxDecoration,
-          (true, true) => style.enabledHoverBoxDecoration,
-          (false, _) => style.disabledBoxDecoration,
-        },
-        child: child,
-      ),
-      child: FButtonData(
-        style: style,
-        enabled: enabled,
-        child: child,
-      ),
+      builder:
+          (context, data, child) => DecoratedBox(
+            decoration: switch ((enabled, data.hovered)) {
+              (true, false) => style.enabledBoxDecoration,
+              (true, true) => style.enabledHoverBoxDecoration,
+              (false, _) => style.disabledBoxDecoration,
+            },
+            child: child,
+          ),
+      child: FButtonData(style: style, enabled: enabled, child: child),
     );
   }
 
@@ -173,13 +170,7 @@ sealed class FButtonStyle {
 }
 
 @internal
-enum Variant implements FButtonStyle {
-  primary,
-  secondary,
-  destructive,
-  outline,
-  ghost,
-}
+enum Variant implements FButtonStyle { primary, secondary, destructive, outline, ghost }
 
 /// A custom [FButton] style.
 class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCustomStyleFunctions {
@@ -232,33 +223,21 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCust
     required Color enabledContentColor,
     required Color disabledContentColor,
   }) : this(
-          enabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: enabledBoxColor,
-          ),
-          enabledHoverBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: enabledHoveredBoxColor,
-          ),
-          disabledBoxDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: disabledBoxColor,
-          ),
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          contentStyle: FButtonContentStyle.inherit(
-            typography: typography,
-            enabled: enabledContentColor,
-            disabled: disabledContentColor,
-          ),
-          iconContentStyle: FButtonIconContentStyle(
-            enabledColor: enabledContentColor,
-            disabledColor: disabledContentColor,
-          ),
-          spinnerStyle: FButtonSpinnerStyle.inherit(
-            enabled: enabledContentColor,
-            disabled: disabledContentColor,
-          ),
-        );
+         enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: enabledBoxColor),
+         enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: enabledHoveredBoxColor),
+         disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: disabledBoxColor),
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         contentStyle: FButtonContentStyle.inherit(
+           typography: typography,
+           enabled: enabledContentColor,
+           disabled: disabledContentColor,
+         ),
+         iconContentStyle: FButtonIconContentStyle(
+           enabledColor: enabledContentColor,
+           disabledColor: disabledContentColor,
+         ),
+         spinnerStyle: FButtonSpinnerStyle.inherit(enabled: enabledContentColor, disabled: disabledContentColor),
+       );
 }
 
 /// A button's data.
@@ -281,12 +260,7 @@ class FButtonData extends InheritedWidget {
   final bool enabled;
 
   /// Creates a [FButtonData].
-  const FButtonData({
-    required this.style,
-    required super.child,
-    this.enabled = true,
-    super.key,
-  });
+  const FButtonData({required this.style, required super.child, this.enabled = true, super.key});
 
   @override
   bool updateShouldNotify(covariant FButtonData old) => style != old.style || enabled != old.enabled;

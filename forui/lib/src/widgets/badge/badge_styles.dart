@@ -25,56 +25,45 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
   final FBadgeCustomStyle destructive;
 
   /// Creates a [FBadgeStyles].
-  FBadgeStyles({
-    required this.primary,
-    required this.secondary,
-    required this.outline,
-    required this.destructive,
-  });
+  FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
 
   /// Creates a [FBadgeStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FBadgeStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          primary: FBadgeCustomStyle(
-            backgroundColor: colorScheme.primary,
-            borderColor: colorScheme.primary,
-            borderWidth: style.borderWidth,
-            contentStyle: FBadgeContentStyle(
-              labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground, fontWeight: FontWeight.w600),
+    : this(
+        primary: FBadgeCustomStyle(
+          backgroundColor: colorScheme.primary,
+          borderColor: colorScheme.primary,
+          borderWidth: style.borderWidth,
+          contentStyle: FBadgeContentStyle(
+            labelTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground, fontWeight: FontWeight.w600),
+          ),
+        ),
+        secondary: FBadgeCustomStyle(
+          backgroundColor: colorScheme.secondary,
+          borderColor: colorScheme.secondary,
+          borderWidth: style.borderWidth,
+          contentStyle: FBadgeContentStyle(
+            labelTextStyle: typography.sm.copyWith(color: colorScheme.secondaryForeground, fontWeight: FontWeight.w600),
+          ),
+        ),
+        outline: FBadgeCustomStyle(
+          backgroundColor: colorScheme.background,
+          borderColor: colorScheme.border,
+          borderWidth: style.borderWidth,
+          contentStyle: FBadgeContentStyle(
+            labelTextStyle: typography.sm.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w600),
+          ),
+        ),
+        destructive: FBadgeCustomStyle(
+          backgroundColor: colorScheme.destructive,
+          borderColor: colorScheme.destructive,
+          borderWidth: style.borderWidth,
+          contentStyle: FBadgeContentStyle(
+            labelTextStyle: typography.sm.copyWith(
+              color: colorScheme.destructiveForeground,
+              fontWeight: FontWeight.w600,
             ),
           ),
-          secondary: FBadgeCustomStyle(
-            backgroundColor: colorScheme.secondary,
-            borderColor: colorScheme.secondary,
-            borderWidth: style.borderWidth,
-            contentStyle: FBadgeContentStyle(
-              labelTextStyle: typography.sm.copyWith(
-                color: colorScheme.secondaryForeground,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          outline: FBadgeCustomStyle(
-            backgroundColor: colorScheme.background,
-            borderColor: colorScheme.border,
-            borderWidth: style.borderWidth,
-            contentStyle: FBadgeContentStyle(
-              labelTextStyle: typography.sm.copyWith(
-                color: colorScheme.foreground,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          destructive: FBadgeCustomStyle(
-            backgroundColor: colorScheme.destructive,
-            borderColor: colorScheme.destructive,
-            borderWidth: style.borderWidth,
-            contentStyle: FBadgeContentStyle(
-              labelTextStyle: typography.sm.copyWith(
-                color: colorScheme.destructiveForeground,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        );
+        ),
+      );
 }

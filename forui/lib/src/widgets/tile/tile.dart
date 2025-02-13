@@ -107,15 +107,15 @@ class FTile extends StatelessWidget with FTileMixin {
     Widget? details,
     Widget? suffixIcon,
     super.key,
-  })  : onPress = (enabled ?? true) ? onPress : null,
-        onLongPress = (enabled ?? true) ? onLongPress : null,
-        child = FTileContent(
-          title: title,
-          prefixIcon: prefixIcon,
-          subtitle: subtitle,
-          details: details,
-          suffixIcon: suffixIcon,
-        );
+  }) : onPress = (enabled ?? true) ? onPress : null,
+       onLongPress = (enabled ?? true) ? onLongPress : null,
+       child = FTileContent(
+         title: title,
+         prefixIcon: prefixIcon,
+         subtitle: subtitle,
+         details: details,
+         suffixIcon: suffixIcon,
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -129,44 +129,45 @@ class FTile extends StatelessWidget with FTileMixin {
     final curveBottom = group.index == group.length - 1 && tile.last;
 
     Widget content(FTappableData data) => DecoratedBox(
-          decoration: BoxDecoration(
-            color: switch ((enabled, data.hovered)) {
-              (true, true) => style.enabledHoveredBackgroundColor,
-              (true, false) => style.enabledBackgroundColor,
-              (false, _) => style.disabledBackgroundColor,
-            },
-            border: data.focused
+      decoration: BoxDecoration(
+        color: switch ((enabled, data.hovered)) {
+          (true, true) => style.enabledHoveredBackgroundColor,
+          (true, false) => style.enabledBackgroundColor,
+          (false, _) => style.disabledBackgroundColor,
+        },
+        border:
+            data.focused
                 ? Border(
-                    // style.focusedBorder.left is used so that the top is always painted.
-                    top: curveTop ? style.focusedBorder.top : style.focusedBorder.left,
-                    left: style.focusedBorder.left,
-                    right: style.focusedBorder.right,
-                    bottom: curveBottom ? style.focusedBorder.top : BorderSide.none,
-                  )
+                  // style.focusedBorder.left is used so that the top is always painted.
+                  top: curveTop ? style.focusedBorder.top : style.focusedBorder.left,
+                  left: style.focusedBorder.left,
+                  right: style.focusedBorder.right,
+                  bottom: curveBottom ? style.focusedBorder.top : BorderSide.none,
+                )
                 : Border(
-                    top: curveTop ? style.border.top : BorderSide.none,
-                    left: style.border.left,
-                    right: style.border.right,
-                    bottom: curveBottom ? style.border.top : BorderSide.none,
-                  ),
-            borderRadius: BorderRadius.only(
-              topLeft: curveTop ? style.borderRadius.topLeft : Radius.zero,
-              topRight: curveTop ? style.borderRadius.topRight : Radius.zero,
-              bottomLeft: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
-              bottomRight: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
-            ),
-          ),
-          child: FTileData(
-            style: style,
-            divider: tile.divider,
-            enabled: enabled,
-            hovered: data.hovered,
-            focused: data.focused,
-            index: tile.index,
-            last: tile.last,
-            child: child,
-          ),
-        );
+                  top: curveTop ? style.border.top : BorderSide.none,
+                  left: style.border.left,
+                  right: style.border.right,
+                  bottom: curveBottom ? style.border.top : BorderSide.none,
+                ),
+        borderRadius: BorderRadius.only(
+          topLeft: curveTop ? style.borderRadius.topLeft : Radius.zero,
+          topRight: curveTop ? style.borderRadius.topRight : Radius.zero,
+          bottomLeft: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
+          bottomRight: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
+        ),
+      ),
+      child: FTileData(
+        style: style,
+        divider: tile.divider,
+        enabled: enabled,
+        hovered: data.hovered,
+        focused: data.focused,
+        index: tile.index,
+        last: tile.last,
+        child: child,
+      ),
+    );
 
     return FTappable(
       semanticLabel: semanticLabel,
@@ -177,7 +178,7 @@ class FTile extends StatelessWidget with FTileMixin {
       onFocusChange: onFocusChange,
       onPress: onPress,
       onLongPress: onLongPress,
-      builder: (_, data, __) => content(data),
+      builder: (_, data, _) => content(data),
     );
   }
 
@@ -199,11 +200,11 @@ class FTile extends StatelessWidget with FTileMixin {
 /// Extracts the data from the given [FTileData].
 @internal
 ({int index, bool last, FTileDivider divider, bool enabled}) extractTile(FTileData? data) => (
-      enabled: data?.enabled ?? true,
-      index: data?.index ?? 0,
-      last: data?.last ?? true,
-      divider: data?.divider ?? FTileDivider.indented,
-    );
+  enabled: data?.enabled ?? true,
+  index: data?.index ?? 0,
+  last: data?.last ?? true,
+  divider: data?.divider ?? FTileDivider.indented,
+);
 
 /// A tile's data.
 class FTileData extends InheritedWidget {
@@ -334,19 +335,19 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
 
   /// Creates a [FTileStyle] that inherits from the given [colorScheme] and [typography].
   FTileStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          border: Border.all(width: style.borderWidth, color: colorScheme.border),
-          focusedBorder: Border.all(width: style.borderWidth, color: colorScheme.primary),
-          borderRadius: style.borderRadius,
-          enabledBackgroundColor: colorScheme.background,
-          enabledHoveredBackgroundColor: colorScheme.secondary,
-          disabledBackgroundColor: colorScheme.disable(colorScheme.secondary),
-          dividerStyle: FDividerStyle(color: colorScheme.border, width: style.borderWidth, padding: EdgeInsets.zero),
-          focusedDividerStyle: FDividerStyle(
-            color: colorScheme.primary,
-            width: style.borderWidth,
-            padding: EdgeInsets.zero,
-          ),
-          contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
-        );
+    : this(
+        border: Border.all(width: style.borderWidth, color: colorScheme.border),
+        focusedBorder: Border.all(width: style.borderWidth, color: colorScheme.primary),
+        borderRadius: style.borderRadius,
+        enabledBackgroundColor: colorScheme.background,
+        enabledHoveredBackgroundColor: colorScheme.secondary,
+        disabledBackgroundColor: colorScheme.disable(colorScheme.secondary),
+        dividerStyle: FDividerStyle(color: colorScheme.border, width: style.borderWidth, padding: EdgeInsets.zero),
+        focusedDividerStyle: FDividerStyle(
+          color: colorScheme.primary,
+          width: style.borderWidth,
+          padding: EdgeInsets.zero,
+        ),
+        contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+      );
 }

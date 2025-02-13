@@ -31,16 +31,13 @@ final class Content extends StatelessWidget {
       width: size,
       image: image,
       semanticLabel: semanticLabel,
-      errorBuilder: (context, _, __) => fallback,
+      errorBuilder: (context, _, _) => fallback,
       frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) {
           return child;
         }
 
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          child: frame == null ? fallback : child,
-        );
+        return AnimatedSwitcher(duration: const Duration(milliseconds: 500), child: frame == null ? fallback : child);
       },
       loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : fallback,
       fit: BoxFit.cover,

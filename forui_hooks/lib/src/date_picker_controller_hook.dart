@@ -33,16 +33,17 @@ FDatePickerController useFDatePickerController({
   bool truncateAndStripTimezone = true,
   Duration popoverAnimationDuration = const Duration(milliseconds: 100),
   List<Object?>? keys,
-}) =>
-    use(_DatePickerHook(
-      vsync: vsync ??= useSingleTickerProvider(keys: keys),
-      initialDate: initialDate,
-      validator: validator,
-      truncateAndStripTimezone: truncateAndStripTimezone,
-      popoverAnimationDuration: popoverAnimationDuration,
-      debugLabel: 'useFDatePickerController',
-      keys: keys,
-    ));
+}) => use(
+  _DatePickerHook(
+    vsync: vsync ??= useSingleTickerProvider(keys: keys),
+    initialDate: initialDate,
+    validator: validator,
+    truncateAndStripTimezone: truncateAndStripTimezone,
+    popoverAnimationDuration: popoverAnimationDuration,
+    debugLabel: 'useFDatePickerController',
+    keys: keys,
+  ),
+);
 
 class _DatePickerHook extends Hook<FDatePickerController> {
   final TickerProvider vsync;
@@ -73,7 +74,8 @@ class _DatePickerHook extends Hook<FDatePickerController> {
       ..add(DiagnosticsProperty('initialDate', initialDate))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(
-          FlagProperty('truncateAndStripTimezone', value: truncateAndStripTimezone, ifTrue: 'truncateAndStripTimezone'))
+        FlagProperty('truncateAndStripTimezone', value: truncateAndStripTimezone, ifTrue: 'truncateAndStripTimezone'),
+      )
       ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
   }
 }

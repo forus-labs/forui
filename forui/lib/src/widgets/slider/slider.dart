@@ -22,11 +22,12 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
   static String Function(FSliderSelection) _formatter(FSliderController controller) => switch (controller.extendable) {
-        (min: true, max: false) => (selection) => '${(selection.offset.min * 100).toStringAsFixed(0)}%',
-        (min: false, max: true) => (selection) => '${(selection.offset.max * 100).toStringAsFixed(0)}%',
-        (min: true, max: true) || (min: false, max: false) => (selection) =>
-            '${(selection.offset.min * 100).toStringAsFixed(0)}% - ${(selection.offset.max * 100).toStringAsFixed(0)}%',
-      };
+    (min: true, max: false) => (selection) => '${(selection.offset.min * 100).toStringAsFixed(0)}%',
+    (min: false, max: true) => (selection) => '${(selection.offset.max * 100).toStringAsFixed(0)}%',
+    (min: true, max: true) || (min: false, max: false) =>
+      (selection) =>
+          '${(selection.offset.min * 100).toStringAsFixed(0)}% - ${(selection.offset.max * 100).toStringAsFixed(0)}%',
+  };
 
   static String _semanticValueFormatter(double value) => '${(value * 100).toStringAsFixed(0)}%';
 
@@ -148,22 +149,23 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
       semanticFormatterCallback: semanticFormatterCallback,
       semanticValueFormatterCallback: semanticValueFormatterCallback,
       child: LayoutBuilder(
-        builder: (context, constraints) => _Slider(
-          controller: controller,
-          style: sliderStyle,
-          layout: layout,
-          label: label,
-          description: description,
-          errorBuilder: errorBuilder,
-          marks: marks,
-          constraints: constraints,
-          mainAxisExtent: trackMainAxisExtent,
-          onSaved: onSaved,
-          validator: validator,
-          autovalidateMode: autovalidateMode,
-          forceErrorText: forceErrorText,
-          enabled: enabled,
-        ),
+        builder:
+            (context, constraints) => _Slider(
+              controller: controller,
+              style: sliderStyle,
+              layout: layout,
+              label: label,
+              description: description,
+              errorBuilder: errorBuilder,
+              marks: marks,
+              constraints: constraints,
+              mainAxisExtent: trackMainAxisExtent,
+              onSaved: onSaved,
+              validator: validator,
+              autovalidateMode: autovalidateMode,
+              forceErrorText: forceErrorText,
+              enabled: enabled,
+            ),
       ),
     );
   }
@@ -235,14 +237,14 @@ class _Slider extends StatefulWidget {
     };
 
     if (extent.isInfinite) {
-      throw FlutterError(
-        switch (layout.vertical) {
-          true => 'A vertical FSlider was given an infinite height although it needs a finite height. To fix this, '
+      throw FlutterError(switch (layout.vertical) {
+        true =>
+          'A vertical FSlider was given an infinite height although it needs a finite height. To fix this, '
               'consider supplying a mainAxisExtent or placing FSlider in a SizedBox.',
-          false => 'A horizontal FSlider was given an infinite width although it needs a finite width. To fix this, '
+        false =>
+          'A horizontal FSlider was given an infinite width although it needs a finite width. To fix this, '
               'consider supplying a mainAxisExtent or placing FSlider in a SizedBox.',
-        },
-      );
+      });
     }
 
     return extent - style.thumbSize;
@@ -287,8 +289,9 @@ class _SliderState extends State<_Slider> {
 
   @override
   Widget build(BuildContext context) => ListenableBuilder(
-        listenable: widget.controller,
-        builder: (context, _) => InheritedController(
+    listenable: widget.controller,
+    builder:
+        (context, _) => InheritedController(
           controller: widget.controller,
           child: SliderFormField(
             controller: widget.controller,
@@ -303,5 +306,5 @@ class _SliderState extends State<_Slider> {
             enabled: widget.enabled,
           ),
         ),
-      );
+  );
 }

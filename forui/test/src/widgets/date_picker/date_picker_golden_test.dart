@@ -20,10 +20,7 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FDatePicker(
-            style: TestScaffold.blueScreen.datePickerStyle,
-            key: key,
-          ),
+          home: FDatePicker(style: TestScaffold.blueScreen.datePickerStyle, key: key),
         ),
       ),
     );
@@ -35,12 +32,7 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: const FDatePicker(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FDatePicker(key: key)));
 
       await expectLater(
         find.byType(TestScaffold),
@@ -49,14 +41,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: const FDatePicker(
-            prefixBuilder: null,
-          ),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDatePicker(prefixBuilder: null)));
 
       await expectLater(
         find.byType(TestScaffold),
@@ -70,12 +55,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('hr'),
           alignment: Alignment.topCenter,
-          child: FDatePicker(
-            key: key,
-            calendar: FDatePickerCalendarProperties(
-              today: DateTime.utc(2025, 1, 15),
-            ),
-          ),
+          child: FDatePicker(key: key, calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15))),
         ),
       );
 
@@ -94,12 +74,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDatePicker(
-            key: key,
-            calendar: FDatePickerCalendarProperties(
-              today: DateTime.utc(2025, 1, 15),
-            ),
-          ),
+          child: FDatePicker(key: key, calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15))),
         ),
       );
 
@@ -118,12 +93,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDatePicker(
-            key: key,
-            calendar: FDatePickerCalendarProperties(
-              today: DateTime.utc(2025, 1, 15),
-            ),
-          ),
+          child: FDatePicker(key: key, calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15))),
         ),
       );
 
@@ -145,12 +115,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDatePicker(
-            key: key,
-            calendar: FDatePickerCalendarProperties(
-              today: DateTime.utc(2025, 1, 15),
-            ),
-          ),
+          child: FDatePicker(key: key, calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15))),
         ),
       );
 
@@ -174,10 +139,7 @@ void main() {
           alignment: Alignment.topCenter,
           child: FDatePicker(
             key: key,
-            calendar: FDatePickerCalendarProperties(
-              today: DateTime.utc(2025, 1, 15),
-              autoHide: false,
-            ),
+            calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15), autoHide: false),
           ),
         ),
       );
@@ -195,12 +157,7 @@ void main() {
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: const FDatePicker(enabled: false, key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FDatePicker(enabled: false, key: key)));
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -231,11 +188,7 @@ void main() {
 
     testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          alignment: Alignment.topCenter,
-          child: const FDatePicker(key: key),
-        ),
+        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: const FDatePicker(key: key)),
       );
 
       await tester.tap(find.byKey(key));
@@ -254,11 +207,7 @@ void main() {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          alignment: Alignment.topCenter,
-          child: const FDatePicker(key: key),
-        ),
+        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: const FDatePicker(key: key)),
       );
 
       await tester.tap(find.byKey(key));

@@ -51,24 +51,24 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
 
   @override
   Widget buildItem(BuildContext context, int page) => DayPicker(
-        style: widget.style.dayPickerStyle,
-        localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-        dayBuilder: widget.dayBuilder,
-        month: widget.start.truncate(to: DateUnit.months).plus(months: page),
-        today: widget.today,
-        focused: focusedDate,
-        selectable: widget.selectable,
-        selected: widget.selected,
-        onPress: (date) {
-          setState(() {
-            if (_gridFocused) {
-              focusedDate = date;
-            }
-          });
-          widget.onPress(date);
-        },
-        onLongPress: (date) => widget.onLongPress(date),
-      );
+    style: widget.style.dayPickerStyle,
+    localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+    dayBuilder: widget.dayBuilder,
+    month: widget.start.truncate(to: DateUnit.months).plus(months: page),
+    today: widget.today,
+    focused: focusedDate,
+    selectable: widget.selectable,
+    selected: widget.selected,
+    onPress: (date) {
+      setState(() {
+        if (_gridFocused) {
+          focusedDate = date;
+        }
+      });
+      widget.onPress(date);
+    },
+    onLongPress: (date) => widget.onLongPress(date),
+  );
 
   @override
   void onPageChange(int page) {
@@ -136,9 +136,9 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-        TraversalDirection.up: Period(days: -DateTime.daysPerWeek),
-        TraversalDirection.right: Period(days: 1),
-        TraversalDirection.down: Period(days: DateTime.daysPerWeek),
-        TraversalDirection.left: Period(days: -1),
-      };
+    TraversalDirection.up: Period(days: -DateTime.daysPerWeek),
+    TraversalDirection.right: Period(days: 1),
+    TraversalDirection.down: Period(days: DateTime.daysPerWeek),
+    TraversalDirection.left: Period(days: -1),
+  };
 }

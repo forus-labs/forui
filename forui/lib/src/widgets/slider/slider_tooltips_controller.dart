@@ -32,9 +32,7 @@ final class FSliderTooltipsController {
       return;
     }
 
-    await Future.wait([
-      for (final tooltip in _tooltips.values) tooltip.toggle(),
-    ]);
+    await Future.wait([for (final tooltip in _tooltips.values) tooltip.toggle()]);
   }
 
   /// Shows the tooltip with the given key, or all tooltips if none is specified.

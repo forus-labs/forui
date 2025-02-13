@@ -34,29 +34,15 @@ final class FCard extends StatelessWidget {
   /// |  [child]                  |
   /// |---------------------------|
   /// ```
-  FCard({
-    Widget? image,
-    Widget? title,
-    Widget? subtitle,
-    Widget? child,
-    this.style,
-    super.key,
-  }) : child = Content(
-          image: image,
-          title: title,
-          subtitle: subtitle,
-          style: style?.contentStyle,
-          child: child,
-        );
+  FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, this.style, super.key})
+    : child = Content(image: image, title: title, subtitle: subtitle, style: style?.contentStyle, child: child);
 
   /// Creates a [FCard] with custom content.
   const FCard.raw({required this.child, this.style, super.key});
 
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-        decoration: (style ?? context.theme.cardStyle).decoration,
-        child: child,
-      );
+  Widget build(BuildContext context) =>
+      DecoratedBox(decoration: (style ?? context.theme.cardStyle).decoration, child: child);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -80,12 +66,12 @@ final class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme], [typography] and [style].
   FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          decoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
-          ),
-          contentStyle: FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
-        );
+    : this(
+        decoration: BoxDecoration(
+          border: Border.all(color: colorScheme.border),
+          borderRadius: style.borderRadius,
+          color: colorScheme.background,
+        ),
+        contentStyle: FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+      );
 }

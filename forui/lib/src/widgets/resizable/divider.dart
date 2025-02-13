@@ -40,40 +40,34 @@ sealed class Divider extends StatefulWidget {
     required this.cursor,
     required this.semanticFormatterCallback,
     super.key,
-  })  : assert(0 <= left, 'Left child should be non-negative, but is $left.'),
-        assert(left + 1 == right, 'Left and right should be next to each other.');
+  }) : assert(0 <= left, 'Left child should be non-negative, but is $left.'),
+       assert(left + 1 == right, 'Left and right should be next to each other.');
 
   Widget focusableActionDetector({
     required Map<ShortcutActivator, Intent> shortcuts,
     required List<Widget> children,
     required bool focused,
     required ValueChanged<bool> onFocusChange,
-  }) =>
-      Semantics(
-        value: semanticFormatterCallback(controller.regions[left], controller.regions[right]),
-        child: FocusableActionDetector(
-          mouseCursor: cursor,
-          shortcuts: shortcuts,
-          onFocusChange: onFocusChange,
-          actions: {
-            _Up: CallbackAction(
-              onInvoke: (_) =>
-                  controller.update(left, right, -resizePercentage * (controller.regions[left].extent.total)),
-            ),
-            _Down: CallbackAction(
-              onInvoke: (_) =>
-                  controller.update(left, right, resizePercentage * (controller.regions[left].extent.total)),
-            ),
-          },
-          child: FFocusedOutline(
-            focused: focused,
-            child: Stack(
-              alignment: AlignmentDirectional.center,
-              children: children,
-            ),
-          ),
+  }) => Semantics(
+    value: semanticFormatterCallback(controller.regions[left], controller.regions[right]),
+    child: FocusableActionDetector(
+      mouseCursor: cursor,
+      shortcuts: shortcuts,
+      onFocusChange: onFocusChange,
+      actions: {
+        _Up: CallbackAction(
+          onInvoke: (_) => controller.update(left, right, -resizePercentage * (controller.regions[left].extent.total)),
         ),
-      );
+        _Down: CallbackAction(
+          onInvoke: (_) => controller.update(left, right, resizePercentage * (controller.regions[left].extent.total)),
+        ),
+      },
+      child: FFocusedOutline(
+        focused: focused,
+        child: Stack(alignment: AlignmentDirectional.center, children: children),
+      ),
+    ),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -117,46 +111,40 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        left: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
-        child: widget.focusableActionDetector(
-          shortcuts: const {
-            SingleActivator(LogicalKeyboardKey.arrowLeft): _Up(),
-            SingleActivator(LogicalKeyboardKey.arrowRight): _Down(),
-          },
-          onFocusChange: (focused) => setState(() => _focused = focused),
-          focused: _focused,
-          children: [
-            if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
-              ColoredBox(
-                color: widget.style.color,
-                child: SizedBox(
-                  height: widget.crossAxisExtent,
-                  width: widget.style.width,
-                ),
-              ),
-            if (widget.type == FResizableDivider.dividerWithThumb)
-              _Thumb(
-                style: widget.style.thumbStyle,
-                icon: FAssets.icons.gripVertical,
-              ),
-            SizedBox(
-              height: widget.crossAxisExtent,
-              width: widget.hitRegionExtent,
-              child: GestureDetector(
-                onHorizontalDragUpdate: (details) {
-                  if (details.delta.dx == 0.0) {
-                    return;
-                  }
+    left: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
+    child: widget.focusableActionDetector(
+      shortcuts: const {
+        SingleActivator(LogicalKeyboardKey.arrowLeft): _Up(),
+        SingleActivator(LogicalKeyboardKey.arrowRight): _Down(),
+      },
+      onFocusChange: (focused) => setState(() => _focused = focused),
+      focused: _focused,
+      children: [
+        if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
+          ColoredBox(
+            color: widget.style.color,
+            child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
+          ),
+        if (widget.type == FResizableDivider.dividerWithThumb)
+          _Thumb(style: widget.style.thumbStyle, icon: FAssets.icons.gripVertical),
+        SizedBox(
+          height: widget.crossAxisExtent,
+          width: widget.hitRegionExtent,
+          child: GestureDetector(
+            onHorizontalDragUpdate: (details) {
+              if (details.delta.dx == 0.0) {
+                return;
+              }
 
-                  widget.controller.update(widget.left, widget.right, details.delta.dx);
-                  // TODO: haptic feedback
-                },
-                onHorizontalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
-              ),
-            ),
-          ],
+              widget.controller.update(widget.left, widget.right, details.delta.dx);
+              // TODO: haptic feedback
+            },
+            onHorizontalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
+          ),
         ),
-      );
+      ],
+    ),
+  );
 }
 
 @internal
@@ -184,46 +172,40 @@ class _VerticalDividerState extends State<VerticalDivider> {
 
   @override
   Widget build(BuildContext context) => Positioned(
-        top: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
-        child: widget.focusableActionDetector(
-          shortcuts: const {
-            SingleActivator(LogicalKeyboardKey.arrowUp): _Up(),
-            SingleActivator(LogicalKeyboardKey.arrowDown): _Down(),
-          },
-          onFocusChange: (focused) => setState(() => _focused = focused),
-          focused: _focused,
-          children: [
-            if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
-              ColoredBox(
-                color: widget.style.color,
-                child: SizedBox(
-                  height: widget.style.width,
-                  width: widget.crossAxisExtent,
-                ),
-              ),
-            if (widget.type == FResizableDivider.dividerWithThumb)
-              _Thumb(
-                style: widget.style.thumbStyle,
-                icon: FAssets.icons.gripHorizontal,
-              ),
-            SizedBox(
-              height: widget.hitRegionExtent,
-              width: widget.crossAxisExtent,
-              child: GestureDetector(
-                onVerticalDragUpdate: (details) {
-                  if (details.delta.dy == 0.0) {
-                    return;
-                  }
+    top: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
+    child: widget.focusableActionDetector(
+      shortcuts: const {
+        SingleActivator(LogicalKeyboardKey.arrowUp): _Up(),
+        SingleActivator(LogicalKeyboardKey.arrowDown): _Down(),
+      },
+      onFocusChange: (focused) => setState(() => _focused = focused),
+      focused: _focused,
+      children: [
+        if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
+          ColoredBox(
+            color: widget.style.color,
+            child: SizedBox(height: widget.style.width, width: widget.crossAxisExtent),
+          ),
+        if (widget.type == FResizableDivider.dividerWithThumb)
+          _Thumb(style: widget.style.thumbStyle, icon: FAssets.icons.gripHorizontal),
+        SizedBox(
+          height: widget.hitRegionExtent,
+          width: widget.crossAxisExtent,
+          child: GestureDetector(
+            onVerticalDragUpdate: (details) {
+              if (details.delta.dy == 0.0) {
+                return;
+              }
 
-                  widget.controller.update(widget.left, widget.right, details.delta.dy);
-                  // TODO: haptic feedback
-                },
-                onVerticalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
-              ),
-            ),
-          ],
+              widget.controller.update(widget.left, widget.right, details.delta.dy);
+              // TODO: haptic feedback
+            },
+            onVerticalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
+          ),
         ),
-      );
+      ],
+    ),
+  );
 }
 
 class _Thumb extends StatelessWidget {
@@ -234,17 +216,12 @@ class _Thumb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: style.backgroundColor,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        height: style.height,
-        width: style.width,
-        child: icon(
-          colorFilter: ColorFilter.mode(style.foregroundColor, BlendMode.srcIn),
-        ),
-      );
+    alignment: Alignment.center,
+    decoration: BoxDecoration(color: style.backgroundColor, borderRadius: BorderRadius.circular(4)),
+    height: style.height,
+    width: style.width,
+    child: icon(colorFilter: ColorFilter.mode(style.foregroundColor, BlendMode.srcIn)),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -327,6 +304,6 @@ final class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDivider
     required this.foregroundColor,
     required this.height,
     required this.width,
-  })  : assert(0 < height, 'Height should be positive, but is $height.'),
-        assert(0 < width, 'Width should be positive, but is $width.');
+  }) : assert(0 < height, 'Height should be positive, but is $height.'),
+       assert(0 < width, 'Width should be positive, but is $width.');
 }

@@ -7,9 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class DividerPage extends Sample {
-  DividerPage({
-    @queryParam super.theme,
-  });
+  DividerPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) {
@@ -22,15 +20,9 @@ class DividerPage extends Sample {
       children: [
         Text(
           'Flutter Forui',
-          style: typography.xl2.copyWith(
-            color: colorScheme.foreground,
-            fontWeight: FontWeight.w600,
-          ),
+          style: typography.xl2.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w600),
         ),
-        Text(
-          'An open-source widget library.',
-          style: typography.sm.copyWith(color: colorScheme.mutedForeground),
-        ),
+        Text('An open-source widget library.', style: typography.sm.copyWith(color: colorScheme.mutedForeground)),
         const FDivider(),
         SizedBox(
           height: 30,
@@ -38,20 +30,11 @@ class DividerPage extends Sample {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Blog',
-                style: typography.sm.copyWith(color: colorScheme.foreground),
-              ),
+              Text('Blog', style: typography.sm.copyWith(color: colorScheme.foreground)),
               const FDivider(axis: Axis.vertical),
-              Text(
-                'Docs',
-                style: typography.sm.copyWith(color: colorScheme.foreground),
-              ),
+              Text('Docs', style: typography.sm.copyWith(color: colorScheme.foreground)),
               const FDivider(axis: Axis.vertical),
-              Text(
-                'Source',
-                style: typography.sm.copyWith(color: colorScheme.foreground),
-              ),
+              Text('Source', style: typography.sm.copyWith(color: colorScheme.foreground)),
             ],
           ),
         ),

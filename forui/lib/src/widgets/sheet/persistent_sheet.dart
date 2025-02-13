@@ -63,9 +63,7 @@ FPersistentSheetController showFPersistentSheet({
   final state = context.findAncestorStateOfType<FSheetsState>();
   if (state == null) {
     throw FlutterError.fromParts([
-      ErrorSummary(
-        'showFSheet(...) called with a context that does not contain a FSheets/FScaffold.',
-      ),
+      ErrorSummary('showFSheet(...) called with a context that does not contain a FSheets/FScaffold.'),
       ErrorDescription(
         'No FSheets/FScaffold ancestor could be found starting from the context that was passed to FSheets/FScaffold.of(). '
         'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
@@ -139,8 +137,8 @@ class FPersistentSheetController {
     required this.key,
     required this.keepAliveOffstage,
     required this.setState,
-  })  : _controller = Sheet.createAnimationController(vsync, style),
-        _onDispose = onDispose {
+  }) : _controller = Sheet.createAnimationController(vsync, style),
+       _onDispose = onDispose {
     if (kFlutterMemoryAllocationsEnabled) {
       FlutterMemoryAllocations.instance.dispatchObjectCreated(
         library: 'package:flutter/forui.dart',
@@ -204,22 +202,20 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => Stack(
-        children: [
-          widget.child,
-          for (final (controller, sheet) in sheets.values)
-            if (controller.shown || controller.keepAliveOffstage || controller._controller.status.isAnimating)
-              CallbackShortcuts(
-                bindings: {
-                  const SingleActivator(LogicalKeyboardKey.escape): controller._controller.reverse,
-                },
-                child: FocusTraversalGroup(
-                  descendantsAreFocusable: controller.shown,
-                  descendantsAreTraversable: controller.shown,
-                  child: sheet,
-                ),
-              ),
-        ],
-      );
+    children: [
+      widget.child,
+      for (final (controller, sheet) in sheets.values)
+        if (controller.shown || controller.keepAliveOffstage || controller._controller.status.isAnimating)
+          CallbackShortcuts(
+            bindings: {const SingleActivator(LogicalKeyboardKey.escape): controller._controller.reverse},
+            child: FocusTraversalGroup(
+              descendantsAreFocusable: controller.shown,
+              descendantsAreTraversable: controller.shown,
+              child: sheet,
+            ),
+          ),
+    ],
+  );
 
   void _add(FPersistentSheetController controller, Sheet sheet) {
     if (!mounted) {

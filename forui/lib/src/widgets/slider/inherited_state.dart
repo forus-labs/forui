@@ -15,12 +15,7 @@ class InheritedState extends InheritedWidget {
   final FSliderStateStyle style;
   final FLabelState state;
 
-  const InheritedState({
-    required this.style,
-    required this.state,
-    required super.child,
-    super.key,
-  });
+  const InheritedState({required this.style, required this.state, required super.child, super.key});
 
   @override
   bool updateShouldNotify(InheritedState old) => style != old.style || state != old.state;

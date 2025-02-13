@@ -16,10 +16,7 @@ void main() {
           child: FFocusedOutline(
             style: TestScaffold.blueScreen.style.focusedOutlineStyle,
             focused: true,
-            child: const SizedBox(
-              width: 100,
-              height: 100,
-            ),
+            child: const SizedBox(width: 100, height: 100),
           ),
         ),
       );
@@ -34,11 +31,7 @@ void main() {
             theme: theme.data,
             child: FFocusedOutline(
               focused: true,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: theme.data.colorScheme.primary,
-              ),
+              child: Container(width: 100, height: 100, color: theme.data.colorScheme.primary),
             ),
           ),
         );
@@ -52,11 +45,7 @@ void main() {
             theme: theme.data,
             child: FFocusedOutline(
               focused: false,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: theme.data.colorScheme.primary,
-              ),
+              child: Container(width: 100, height: 100, color: theme.data.colorScheme.primary),
             ),
           ),
         );

@@ -78,9 +78,10 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       _controller.dispose();
     }
 
-    _controller = AnimationController(vsync: this)
-      ..value = widget.initiallyExpanded ? 1 : 0
-      ..duration = style.animationDuration;
+    _controller =
+        AnimationController(vsync: this)
+          ..value = widget.initiallyExpanded ? 1 : 0
+          ..duration = style.animationDuration;
     _animation = Tween<double>(begin: 0, end: 100).animate(CurvedAnimation(curve: Curves.ease, parent: _controller));
 
     if (!controller.addItem(index, _controller)) {
@@ -95,62 +96,61 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     final angle = ((Directionality.maybeOf(context) ?? TextDirection.ltr) == TextDirection.ltr) ? -180 : 180;
     return AnimatedBuilder(
       animation: _animation,
-      builder: (context, _) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          FTappable(
-            autofocus: widget.autofocus,
-            focusNode: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
-            onPress: () => controller.toggle(index),
-            builder: (context, data, child) => Padding(
-              padding: style.titlePadding,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: DefaultTextStyle.merge(
-                      textHeightBehavior: const TextHeightBehavior(
-                        applyHeightToFirstAscent: false,
-                        applyHeightToLastDescent: false,
+      builder:
+          (context, _) => Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              FTappable(
+                autofocus: widget.autofocus,
+                focusNode: widget.focusNode,
+                onFocusChange: widget.onFocusChange,
+                onPress: () => controller.toggle(index),
+                builder:
+                    (context, data, child) => Padding(
+                      padding: style.titlePadding,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: DefaultTextStyle.merge(
+                              textHeightBehavior: const TextHeightBehavior(
+                                applyHeightToFirstAscent: false,
+                                applyHeightToLastDescent: false,
+                              ),
+                              style:
+                                  data.hovered
+                                      ? style.titleTextStyle.copyWith(decoration: TextDecoration.underline)
+                                      : style.titleTextStyle,
+                              child: widget.title,
+                            ),
+                          ),
+                          FFocusedOutline(style: style.focusedOutlineStyle, focused: data.focused, child: child!),
+                        ],
                       ),
-                      style: data.hovered
-                          ? style.titleTextStyle.copyWith(decoration: TextDecoration.underline)
-                          : style.titleTextStyle,
-                      child: widget.title,
                     ),
+                child: Transform.rotate(
+                  angle: (_controller.value * angle + 90) * math.pi / 180.0,
+                  child: FIconStyleData(
+                    style: FIconStyle(color: style.iconColor, size: style.iconSize),
+                    child: widget.icon,
                   ),
-                  FFocusedOutline(
-                    style: style.focusedOutlineStyle,
-                    focused: data.focused,
-                    child: child!,
+                ),
+              ),
+              // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
+              // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
+              // child to layout at a smaller size while the amount of padding remains the same.
+              _Expandable(
+                value: _controller.value,
+                child: ClipRect(
+                  clipper: _Clipper(_controller.value),
+                  child: Padding(
+                    padding: style.childPadding,
+                    child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
                   ),
-                ],
+                ),
               ),
-            ),
-            child: Transform.rotate(
-              angle: (_controller.value * angle + 90) * math.pi / 180.0,
-              child: FIconStyleData(
-                style: FIconStyle(color: style.iconColor, size: style.iconSize),
-                child: widget.icon,
-              ),
-            ),
+              FDivider(style: style.dividerStyle),
+            ],
           ),
-          // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
-          // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
-          // child to layout at a smaller size while the amount of padding remains the same.
-          _Expandable(
-            value: _controller.value,
-            child: ClipRect(
-              clipper: _Clipper(_controller.value),
-              child: Padding(
-                padding: style.childPadding,
-                child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
-              ),
-            ),
-          ),
-          FDivider(style: style.dividerStyle),
-        ],
-      ),
     );
   }
 
@@ -164,10 +164,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
 class _Expandable extends SingleChildRenderObjectWidget {
   final double value;
 
-  const _Expandable({
-    required this.value,
-    required super.child,
-  });
+  const _Expandable({required this.value, required super.child});
 
   @override
   RenderObject createRenderObject(BuildContext context) => _RenderExpandable(value);

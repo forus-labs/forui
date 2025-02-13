@@ -171,11 +171,12 @@ class _DateFieldState extends State<DateField> {
           prefixBuilder: widget.prefixBuilder,
           suffixBuilder: widget.suffixBuilder,
           onSaved: onSaved == null ? null : (_) => onSaved(widget.calendarController.value),
-          validator: (value) => switch (widget.calendarController.value) {
-            null when value == _controller.placeholder => widget.validator(null),
-            null => _localizations.datePickerInvalidDateError,
-            final value => widget.validator(value),
-          },
+          validator:
+              (value) => switch (widget.calendarController.value) {
+                null when value == _controller.placeholder => widget.validator(null),
+                null => _localizations.datePickerInvalidDateError,
+                final value => widget.validator(value),
+              },
           autovalidateMode: widget.autovalidateMode,
           forceErrorText: widget.forceErrorText,
           errorBuilder: widget.errorBuilder,

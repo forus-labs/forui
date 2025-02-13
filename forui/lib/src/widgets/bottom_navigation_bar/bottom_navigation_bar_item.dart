@@ -20,12 +20,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final Widget label;
 
   /// Creates a [FBottomNavigationBarItem].
-  const FBottomNavigationBarItem({
-    required this.label,
-    required this.icon,
-    this.style,
-    super.key,
-  });
+  const FBottomNavigationBarItem({required this.label, required this.icon, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,16 +99,10 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and
   /// [FTypography].
   FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          activeIconColor: colorScheme.primary,
-          inactiveIconColor: colorScheme.disable(colorScheme.foreground),
-          activeTextStyle: typography.base.copyWith(
-            color: colorScheme.primary,
-            fontSize: 10,
-          ),
-          inactiveTextStyle: typography.base.copyWith(
-            color: colorScheme.disable(colorScheme.foreground),
-            fontSize: 10,
-          ),
-        );
+    : this(
+        activeIconColor: colorScheme.primary,
+        inactiveIconColor: colorScheme.disable(colorScheme.foreground),
+        activeTextStyle: typography.base.copyWith(color: colorScheme.primary, fontSize: 10),
+        inactiveTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.foreground), fontSize: 10),
+      );
 }

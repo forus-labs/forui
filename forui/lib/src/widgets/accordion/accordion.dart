@@ -28,12 +28,7 @@ class FAccordion extends StatefulWidget {
   final List<FAccordionItem> items;
 
   /// Creates a [FAccordion].
-  const FAccordion({
-    required this.items,
-    this.controller,
-    this.style,
-    super.key,
-  });
+  const FAccordion({required this.items, this.controller, this.style, super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -76,12 +71,7 @@ class _FAccordionState extends State<FAccordion> {
     return Column(
       children: [
         for (final (index, child) in widget.items.indexed)
-          FAccordionItemData(
-            index: index,
-            controller: _controller,
-            style: style,
-            child: child,
-          ),
+          FAccordionItemData(index: index, controller: _controller, style: style, child: child),
       ],
     );
   }
@@ -151,14 +141,14 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
-      : this(
-          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
-          childTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
-          iconColor: colorScheme.primary,
-          iconSize: 20,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
-        );
+    : this(
+        titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
+        childTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
+        iconColor: colorScheme.primary,
+        iconSize: 20,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
+      );
 }
 
 @internal

@@ -9,11 +9,7 @@ import 'package:forui_samples/sample.dart';
 class VerticalLabelPage extends Sample {
   final String state;
 
-  VerticalLabelPage({
-    @queryParam super.theme,
-    @queryParam this.state = 'enabled',
-    super.maxWidth = 320,
-  });
+  VerticalLabelPage({@queryParam super.theme, @queryParam this.state = 'enabled', super.maxWidth = 320});
 
   @override
   Widget sample(BuildContext context) {
@@ -31,10 +27,7 @@ class VerticalLabelPage extends Sample {
       error: const Text('Please enter a valid email address.'),
       state: labelState,
       child: const DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.grey,
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
         child: SizedBox(width: 250, height: 30),
       ),
     );
@@ -45,11 +38,7 @@ class VerticalLabelPage extends Sample {
 class HorizontalLabelPage extends Sample {
   final String state;
 
-  HorizontalLabelPage({
-    @queryParam super.theme,
-    @queryParam this.state = 'enabled',
-    super.maxWidth = 320,
-  });
+  HorizontalLabelPage({@queryParam super.theme, @queryParam this.state = 'enabled', super.maxWidth = 320});
 
   @override
   Widget sample(BuildContext context) {
@@ -67,10 +56,7 @@ class HorizontalLabelPage extends Sample {
       error: const Text('Please accept the terms.'),
       state: labelState,
       child: const DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          color: Colors.grey,
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
         child: SizedBox(width: 16, height: 16),
       ),
     );

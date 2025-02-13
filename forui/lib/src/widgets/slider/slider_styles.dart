@@ -18,10 +18,7 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   final FSliderStyle verticalStyle;
 
   /// Creates a [FSliderStyles].
-  FSliderStyles({
-    required this.horizontalStyle,
-    required this.verticalStyle,
-  });
+  FSliderStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
   factory FSliderStyles.inherit({
@@ -107,19 +104,16 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
           errorPadding: EdgeInsets.only(top: 5),
         ),
         enabledStyle: enabledHorizontalStyle.transform(
-          (style) => style.copyWith(
-            markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10),
-          ),
+          (style) =>
+              style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),
         ),
         disabledStyle: disabledHorizontalStyle.transform(
-          (style) => style.copyWith(
-            markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10),
-          ),
+          (style) =>
+              style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),
         ),
         errorStyle: errorHorizontalStyle.transform(
-          (style) => style.copyWith(
-            markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10),
-          ),
+          (style) =>
+              style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),
         ),
         tooltipTipAnchor: Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
         tooltipThumbAnchor: Touch.primary ? Alignment.topCenter : Alignment.centerRight,
@@ -189,8 +183,8 @@ final class FSliderStyle with Diagnosticable, _$FSliderStyleFunctions {
     double? thumbSize,
     this.tooltipTipAnchor = Alignment.bottomCenter,
     this.tooltipThumbAnchor = Alignment.topCenter,
-  })  : assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
-        thumbSize = thumbSize ?? (Touch.primary ? 25 : 20);
+  }) : assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
+       thumbSize = thumbSize ?? (Touch.primary ? 25 : 20);
 }
 
 /// A slider state's style.
@@ -242,9 +236,9 @@ final class FSliderStateStyle with Diagnosticable, _$FSliderStateStyleFunctions 
 }
 
 /// A slider error's style.
-// ignore: avoid_implementing_value_types
 final class FSliderErrorStyle extends FSliderStateStyle
     with _$FSliderErrorStyleFunctions
+    // ignore: avoid_implementing_value_types
     implements FFormFieldErrorStyle {
   /// The error's [TextStyle].
   @override

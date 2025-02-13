@@ -31,13 +31,7 @@ class FBottomNavigationBar extends StatelessWidget {
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
   ///
   /// See [FBottomNavigationBarItem] for the items in a bottom navigation bar.
-  const FBottomNavigationBar({
-    required this.children,
-    this.style,
-    this.onChange,
-    this.index = -1,
-    super.key,
-  });
+  const FBottomNavigationBar({required this.children, this.style, this.onChange, this.index = -1, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +53,7 @@ class FBottomNavigationBar extends StatelessWidget {
                   child: FTappable.animated(
                     focusedOutlineStyle: style.focusedOutlineStyle,
                     onPress: () => onChange?.call(i),
-                    child: FBottomNavigationBarData(
-                      itemStyle: style.itemStyle,
-                      selected: index == i,
-                      child: child,
-                    ),
+                    child: FBottomNavigationBarData(itemStyle: style.itemStyle, selected: index == i, child: child),
                   ),
                 ),
             ],
@@ -104,12 +94,7 @@ class FBottomNavigationBarData extends InheritedWidget {
   final bool selected;
 
   /// Creates a [FBottomNavigationBarData].
-  const FBottomNavigationBarData({
-    required this.itemStyle,
-    required this.selected,
-    required super.child,
-    super.key,
-  });
+  const FBottomNavigationBarData({required this.itemStyle, required this.selected, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FBottomNavigationBarData old) => old.itemStyle != itemStyle || old.selected != selected;
@@ -155,14 +140,11 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
     required FTypography typography,
     required FStyle style,
   }) : this(
-          decoration: BoxDecoration(
-            border: Border(top: BorderSide(color: colorScheme.border)),
-            color: colorScheme.background,
-          ),
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          itemStyle: FBottomNavigationBarItemStyle.inherit(
-            colorScheme: colorScheme,
-            typography: typography,
-          ),
-        );
+         decoration: BoxDecoration(
+           border: Border(top: BorderSide(color: colorScheme.border)),
+           color: colorScheme.background,
+         ),
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         itemStyle: FBottomNavigationBarItemStyle.inherit(colorScheme: colorScheme, typography: typography),
+       );
 }

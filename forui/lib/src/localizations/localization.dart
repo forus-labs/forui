@@ -7,14 +7,16 @@ extension FDateTimeLocalizations on FLocalizations {
   int get firstDayOfWeek => localeName == '' ? 7 : DateFormat.yMMMMd(localeName).dateSymbols.FIRSTDAYOFWEEK + 1;
 
   /// Short names for days of the week, starting with Sunday, e.g. 'Sun'.
-  List<String> get shortWeekDays => localeName == ''
-      ? const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-      : DateFormat.yMMMMd(localeName).dateSymbols.SHORTWEEKDAYS;
+  List<String> get shortWeekDays =>
+      localeName == ''
+          ? const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+          : DateFormat.yMMMMd(localeName).dateSymbols.SHORTWEEKDAYS;
 
   /// Very short names for days of the week, starting with Sunday, e.g. 'Su'.
-  List<String> get narrowWeekDays => (localeName == '' || localeName.startsWith('en'))
-      ? const ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-      : DateFormat.yMMMMd(localeName).dateSymbols.STANDALONENARROWWEEKDAYS;
+  List<String> get narrowWeekDays =>
+      (localeName == '' || localeName.startsWith('en'))
+          ? const ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+          : DateFormat.yMMMMd(localeName).dateSymbols.STANDALONENARROWWEEKDAYS;
 }
 
 /// The default localization for when no localization is provided.

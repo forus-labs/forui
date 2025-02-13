@@ -34,34 +34,26 @@ sealed class FSliderSelection with Diagnosticable {
   final ({double min, double max}) rawOffset;
 
   /// Creates a [FSliderSelection].
-  factory FSliderSelection({
-    required double max,
-    double min,
-    ({double min, double max}) extent,
-  }) = _Selection;
+  factory FSliderSelection({required double max, double min, ({double min, double max}) extent}) = _Selection;
 
   FSliderSelection._({
     required double mainAxisExtent,
     required ({double min, double max}) extent,
     required ({double min, double max}) offset,
   }) : this._copy(
-          extent: extent,
-          offset: offset,
-          rawExtent: (min: extent.min * mainAxisExtent, max: extent.max * mainAxisExtent, total: mainAxisExtent),
-          rawOffset: (min: offset.min * mainAxisExtent, max: offset.max * mainAxisExtent),
-        );
+         extent: extent,
+         offset: offset,
+         rawExtent: (min: extent.min * mainAxisExtent, max: extent.max * mainAxisExtent, total: mainAxisExtent),
+         rawOffset: (min: offset.min * mainAxisExtent, max: offset.max * mainAxisExtent),
+       );
 
-  FSliderSelection._copy({
-    required this.extent,
-    required this.offset,
-    required this.rawExtent,
-    required this.rawOffset,
-  })  : assert(extent.min >= 0, 'Min extent must be >= 0, but is ${extent.min}.'),
-        assert(extent.max >= extent.min, 'Max extent must be > min extent, but is ${extent.max}.'),
-        assert(extent.max <= 1, 'Max extent must be <= 1, but is ${extent.max}.'),
-        assert(offset.min >= 0, 'Min offset must be >= 0, but is ${offset.min}.'),
-        assert(offset.max >= offset.min, 'Max offset must be > min offset, but is ${offset.max} and ${offset.min}.'),
-        assert(offset.max <= 1, 'Max offset must be <=> 1, but is ${offset.max}.');
+  FSliderSelection._copy({required this.extent, required this.offset, required this.rawExtent, required this.rawOffset})
+    : assert(extent.min >= 0, 'Min extent must be >= 0, but is ${extent.min}.'),
+      assert(extent.max >= extent.min, 'Max extent must be > min extent, but is ${extent.max}.'),
+      assert(extent.max <= 1, 'Max extent must be <= 1, but is ${extent.max}.'),
+      assert(offset.min >= 0, 'Min offset must be >= 0, but is ${offset.min}.'),
+      assert(offset.max >= offset.min, 'Max offset must be > min offset, but is ${offset.max} and ${offset.min}.'),
+      assert(offset.max <= 1, 'Max offset must be <=> 1, but is ${offset.max}.');
 
   /// Returns a [FSliderSelection] which [min] edge is extended/shrunk to the previous/next step.
   @useResult
@@ -96,15 +88,8 @@ sealed class FSliderSelection with Diagnosticable {
 }
 
 final class _Selection extends FSliderSelection {
-  _Selection({
-    required double max,
-    double min = 0,
-    super.extent = (min: 0, max: 1),
-  }) : super._copy(
-          offset: (min: min, max: max),
-          rawExtent: (min: 0, max: 0, total: 0),
-          rawOffset: (min: 0, max: 0),
-        );
+  _Selection({required double max, double min = 0, super.extent = (min: 0, max: 1)})
+    : super._copy(offset: (min: min, max: max), rawExtent: (min: 0, max: 0, total: 0), rawOffset: (min: 0, max: 0));
 
   @override
   FSliderSelection step({required bool min, required bool extend}) => this;
@@ -122,17 +107,17 @@ final class ContinuousSelection extends FSliderSelection {
     required super.mainAxisExtent,
     required super.extent,
     required super.offset,
-  })  : assert(0 < step && step <= 1, 'step must be > 0 and <= 1, but is $step.'),
-        _step = step,
-        super._();
+  }) : assert(0 < step && step <= 1, 'step must be > 0 and <= 1, but is $step.'),
+       _step = step,
+       super._();
 
   ContinuousSelection._({
     required double step,
     required super.extent,
     required super.rawExtent,
     required super.rawOffset,
-  })  : _step = step,
-        super._copy(offset: (min: rawOffset.min / rawExtent.total, max: rawOffset.max / rawExtent.total));
+  }) : _step = step,
+       super._copy(offset: (min: rawOffset.min / rawExtent.total, max: rawOffset.max / rawExtent.total));
 
   @override
   ContinuousSelection step({required bool min, required bool extend}) {
@@ -191,27 +176,23 @@ final class DiscreteSelection extends FSliderSelection {
     required ({double min, double max}) offset,
     required super.mainAxisExtent,
     required super.extent,
-  })  : assert(ticks.isNotEmpty, 'ticks must not be empty.'),
-        assert(ticks.keys.every((tick) => 0 <= tick && tick <= 1), 'Every tick must be >= 0 and <= 1.'),
-        super._(offset: (min: ticks.round(offset.min), max: ticks.round(offset.max)));
+  }) : assert(ticks.isNotEmpty, 'ticks must not be empty.'),
+       assert(ticks.keys.every((tick) => 0 <= tick && tick <= 1), 'Every tick must be >= 0 and <= 1.'),
+       super._(offset: (min: ticks.round(offset.min), max: ticks.round(offset.max)));
 
-  DiscreteSelection._({
-    required this.ticks,
-    required super.offset,
-    required super.extent,
-    required super.rawExtent,
-  }) : super._copy(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
+  DiscreteSelection._({required this.ticks, required super.offset, required super.extent, required super.rawExtent})
+    : super._copy(rawOffset: (min: offset.min * rawExtent.total, max: offset.max * rawExtent.total));
 
   @override
   DiscreteSelection step({required bool min, required bool extend}) => _move(
-        min: min,
-        to: switch ((min, extend)) {
-          (true, true) => ticks.lastKeyBefore(offset.min) ?? offset.min,
-          (true, false) => ticks.firstKeyAfter(offset.min) ?? offset.min,
-          (false, true) => ticks.firstKeyAfter(offset.max) ?? offset.max,
-          (false, false) => ticks.lastKeyBefore(offset.max) ?? offset.max,
-        },
-      );
+    min: min,
+    to: switch ((min, extend)) {
+      (true, true) => ticks.lastKeyBefore(offset.min) ?? offset.min,
+      (true, false) => ticks.firstKeyAfter(offset.min) ?? offset.min,
+      (false, true) => ticks.firstKeyAfter(offset.max) ?? offset.max,
+      (false, false) => ticks.lastKeyBefore(offset.max) ?? offset.max,
+    },
+  );
 
   @override
   DiscreteSelection move({required bool min, required double to}) => _move(min: min, to: to / rawExtent.total);
@@ -225,34 +206,34 @@ final class DiscreteSelection extends FSliderSelection {
     to = ticks.round(to);
     final (minOffset, maxOffset) = switch (min) {
       true when offset.max - to < extent.min => (
-          ticks
-              .lastKeysBefore(to)
-              .takeWhile((tick) => offset.min < tick)
-              .firstWhere((tick) => extent.min <= offset.max - tick, orElse: () => offset.min),
-          offset.max,
-        ),
+        ticks
+            .lastKeysBefore(to)
+            .takeWhile((tick) => offset.min < tick)
+            .firstWhere((tick) => extent.min <= offset.max - tick, orElse: () => offset.min),
+        offset.max,
+      ),
       true when extent.max < offset.max - to => (
-          ticks
-              .firstKeysAfter(to)
-              .takeWhile((tick) => tick < offset.min)
-              .firstWhere((tick) => offset.max - tick <= extent.max, orElse: () => offset.min),
-          offset.max,
-        ),
+        ticks
+            .firstKeysAfter(to)
+            .takeWhile((tick) => tick < offset.min)
+            .firstWhere((tick) => offset.max - tick <= extent.max, orElse: () => offset.min),
+        offset.max,
+      ),
       true => (to, offset.max),
       false when to - offset.min < extent.min => (
-          offset.min,
-          ticks
-              .firstKeysAfter(to)
-              .takeWhile((tick) => tick < offset.max)
-              .firstWhere((tick) => extent.min <= tick - offset.min, orElse: () => offset.max),
-        ),
+        offset.min,
+        ticks
+            .firstKeysAfter(to)
+            .takeWhile((tick) => tick < offset.max)
+            .firstWhere((tick) => extent.min <= tick - offset.min, orElse: () => offset.max),
+      ),
       false when extent.max < to - offset.min => (
-          offset.min,
-          ticks
-              .lastKeysBefore(to)
-              .takeWhile((tick) => offset.max < tick)
-              .firstWhere((tick) => tick - offset.min <= extent.max, orElse: () => offset.max),
-        ),
+        offset.min,
+        ticks
+            .lastKeysBefore(to)
+            .takeWhile((tick) => offset.max < tick)
+            .firstWhere((tick) => tick - offset.min <= extent.max, orElse: () => offset.max),
+      ),
       false => (offset.min, to),
     };
 

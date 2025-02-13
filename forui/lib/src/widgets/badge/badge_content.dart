@@ -11,22 +11,15 @@ final class Content extends StatelessWidget {
   final FBadgeCustomStyle style;
   final Widget label;
 
-  const Content({
-    required this.style,
-    required this.label,
-    super.key,
-  });
+  const Content({required this.style, required this.label, super.key});
 
   @override
   Widget build(BuildContext context) => Center(
-        child: Padding(
-          padding: style.contentStyle.padding,
-          child: DefaultTextStyle.merge(
-            style: style.contentStyle.labelTextStyle,
-            child: label,
-          ),
-        ),
-      );
+    child: Padding(
+      padding: style.contentStyle.padding,
+      child: DefaultTextStyle.merge(style: style.contentStyle.labelTextStyle, child: label),
+    ),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

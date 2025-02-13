@@ -32,14 +32,11 @@ class FDatePickerStyle with Diagnosticable, _$FDatePickerStyleFunctions {
   });
 
   /// Creates a [FDatePickerStyle] that inherits the [colorScheme], [typography], and [style].
-  FDatePickerStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-          textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-          popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
-          calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-          iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
-        );
+  FDatePickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+    : this(
+        textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
+        calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+      );
 }

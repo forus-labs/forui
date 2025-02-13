@@ -71,26 +71,25 @@ class _FieldDatePickerState extends _DatePickerState<_FieldDatePicker> {
     ValueWidgetBuilder<FTextFieldStateStyle> builder = (context, _, child) => child!;
 
     if (widget.calendar case final properties?) {
-      prefix = widget.prefixBuilder == null
-          ? null
-          : (context, stateStyle, child) => MouseRegion(
+      prefix =
+          widget.prefixBuilder == null
+              ? null
+              : (context, stateStyle, child) => MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: widget.prefixBuilder?.call(context, (style, stateStyle), child),
               );
 
-      suffix = widget.suffixBuilder == null
-          ? null
-          : (context, stateStyle, child) => MouseRegion(
+      suffix =
+          widget.suffixBuilder == null
+              ? null
+              : (context, stateStyle, child) => MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: widget.suffixBuilder?.call(context, (style, stateStyle), child),
               );
 
-      builder = (context, _, child) => _CalendarPopover(
-            controller: _controller,
-            style: style,
-            properties: properties,
-            child: child!,
-          );
+      builder =
+          (context, _, child) =>
+              _CalendarPopover(controller: _controller, style: style, properties: properties, child: child!);
     }
 
     return DateField(

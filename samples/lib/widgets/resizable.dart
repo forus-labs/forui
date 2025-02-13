@@ -8,75 +8,71 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class ResizablePage extends Sample {
-  ResizablePage({
-    @queryParam super.theme,
-  });
+  ResizablePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.border),
-          borderRadius: BorderRadius.circular(8),
+    decoration: BoxDecoration(
+      border: Border.all(color: context.theme.colorScheme.border),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: FResizable(
+      axis: Axis.vertical,
+      crossAxisExtent: 300,
+      children: [
+        FResizableRegion(
+          initialExtent: 250,
+          minExtent: 100,
+          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
         ),
-        child: FResizable(
-          axis: Axis.vertical,
-          crossAxisExtent: 300,
-          children: [
-            FResizableRegion(
-              initialExtent: 250,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-            ),
-            FResizableRegion(
-              initialExtent: 100,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-            ),
-            FResizableRegion(
-              initialExtent: 250,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
-            ),
-          ],
+        FResizableRegion(
+          initialExtent: 100,
+          minExtent: 100,
+          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
         ),
-      );
+        FResizableRegion(
+          initialExtent: 250,
+          minExtent: 100,
+          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+        ),
+      ],
+    ),
+  );
 }
 
 @RoutePage()
 class NoCascadingResizablePage extends Sample {
-  NoCascadingResizablePage({
-    @queryParam super.theme,
-  });
+  NoCascadingResizablePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.border),
-          borderRadius: BorderRadius.circular(8),
+    decoration: BoxDecoration(
+      border: Border.all(color: context.theme.colorScheme.border),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: FResizable(
+      axis: Axis.vertical,
+      controller: FResizableController(),
+      crossAxisExtent: 300,
+      children: [
+        FResizableRegion(
+          initialExtent: 200,
+          minExtent: 100,
+          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
         ),
-        child: FResizable(
-          axis: Axis.vertical,
-          controller: FResizableController(),
-          crossAxisExtent: 300,
-          children: [
-            FResizableRegion(
-              initialExtent: 200,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
-            ),
-            FResizableRegion(
-              initialExtent: 200,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
-            ),
-            FResizableRegion(
-              initialExtent: 200,
-              minExtent: 100,
-              builder: (_, data, __) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
-            ),
-          ],
+        FResizableRegion(
+          initialExtent: 200,
+          minExtent: 100,
+          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
         ),
-      );
+        FResizableRegion(
+          initialExtent: 200,
+          minExtent: 100,
+          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+        ),
+      ],
+    ),
+  );
 }
 
 class Label extends StatelessWidget {
@@ -127,107 +123,89 @@ class Label extends StatelessWidget {
 
 @RoutePage()
 class HorizontalResizablePage extends Sample {
-  HorizontalResizablePage({
-    @queryParam super.theme,
-  });
+  HorizontalResizablePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.border),
-          borderRadius: BorderRadius.circular(8),
+    decoration: BoxDecoration(
+      border: Border.all(color: context.theme.colorScheme.border),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: FResizable(
+      axis: Axis.horizontal,
+      crossAxisExtent: 300,
+      children: [
+        FResizableRegion(
+          initialExtent: 100,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
-        child: FResizable(
-          axis: Axis.horizontal,
-          crossAxisExtent: 300,
-          children: [
-            FResizableRegion(
-              initialExtent: 100,
-              minExtent: 100,
-              builder: (context, data, _) => Align(
-                child: Text('Sidebar', style: context.theme.typography.sm),
-              ),
-            ),
-            FResizableRegion(
-              initialExtent: 300,
-              minExtent: 100,
-              builder: (context, data, _) => Align(
-                child: Text('Content', style: context.theme.typography.sm),
-              ),
-            ),
-          ],
+        FResizableRegion(
+          initialExtent: 300,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
-      );
+      ],
+    ),
+  );
 }
 
 @RoutePage()
 class NoThumbResizablePage extends Sample {
-  NoThumbResizablePage({
-    @queryParam super.theme,
-  });
+  NoThumbResizablePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.border),
-          borderRadius: BorderRadius.circular(8),
+    decoration: BoxDecoration(
+      border: Border.all(color: context.theme.colorScheme.border),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: FResizable(
+      axis: Axis.horizontal,
+      divider: FResizableDivider.divider,
+      crossAxisExtent: 300,
+      children: [
+        FResizableRegion(
+          initialExtent: 100,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
-        child: FResizable(
-          axis: Axis.horizontal,
-          divider: FResizableDivider.divider,
-          crossAxisExtent: 300,
-          children: [
-            FResizableRegion(
-              initialExtent: 100,
-              minExtent: 100,
-              builder: (context, data, _) => Align(
-                child: Text('Sidebar', style: context.theme.typography.sm),
-              ),
-            ),
-            FResizableRegion(
-              initialExtent: 300,
-              minExtent: 100,
-              builder: (context, data, _) => Align(
-                child: Text('Content', style: context.theme.typography.sm),
-              ),
-            ),
-          ],
+        FResizableRegion(
+          initialExtent: 300,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
-      );
+      ],
+    ),
+  );
 }
 
 @RoutePage()
 class NoDividerResizablePage extends Sample {
-  NoDividerResizablePage({
-    @queryParam super.theme,
-  });
+  NoDividerResizablePage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colorScheme.border),
-          borderRadius: BorderRadius.circular(8),
+    decoration: BoxDecoration(
+      border: Border.all(color: context.theme.colorScheme.border),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: FResizable(
+      axis: Axis.horizontal,
+      divider: FResizableDivider.none,
+      crossAxisExtent: 300,
+      children: [
+        FResizableRegion(
+          initialExtent: 100,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
-        child: FResizable(
-          axis: Axis.horizontal,
-          divider: FResizableDivider.none,
-          crossAxisExtent: 300,
-          children: [
-            FResizableRegion(
-              initialExtent: 100,
-              minExtent: 100,
-              builder: (context, data, _) => Align(
-                child: Text('Sidebar', style: context.theme.typography.sm),
-              ),
-            ),
-            FResizableRegion(
-              initialExtent: 300,
-              minExtent: 100,
-              builder: (context, data, _) => Align(
-                child: Text('Content', style: context.theme.typography.sm),
-              ),
-            ),
-          ],
+        FResizableRegion(
+          initialExtent: 300,
+          minExtent: 100,
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
-      );
+      ],
+    ),
+  );
 }

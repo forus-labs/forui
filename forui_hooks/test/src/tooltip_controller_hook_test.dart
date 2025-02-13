@@ -12,10 +12,12 @@ void main() {
     late FTooltipController controller;
 
     await tester.pumpWidget(
-      HookBuilder(builder: (context) {
-        controller = useFTooltipController();
-        return Container();
-      }),
+      HookBuilder(
+        builder: (context) {
+          controller = useFTooltipController();
+          return Container();
+        },
+      ),
     );
 
     unawaited(controller.show());
@@ -24,37 +26,45 @@ void main() {
   });
 
   testWidgets('switch from uncontrolled to controlled throws', (tester) async {
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTooltipController();
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTooltipController();
+          return Container();
+        },
+      ),
+    );
 
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTooltipController(vsync: tester);
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTooltipController(vsync: tester);
+          return Container();
+        },
+      ),
+    );
 
     expect(tester.takeException(), isStateError);
   });
 
   testWidgets('switch from controlled to uncontrolled throws', (tester) async {
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTooltipController(vsync: tester);
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTooltipController(vsync: tester);
+          return Container();
+        },
+      ),
+    );
 
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTooltipController();
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTooltipController();
+          return Container();
+        },
+      ),
+    );
 
     expect(tester.takeException(), isStateError);
   });

@@ -10,11 +10,8 @@ part 'sheet.style.dart';
 
 @internal
 class Sheet extends StatefulWidget {
-  static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) => AnimationController(
-        duration: style.enterDuration,
-        reverseDuration: style.exitDuration,
-        vsync: vsync,
-      );
+  static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) =>
+      AnimationController(duration: style.enterDuration, reverseDuration: style.exitDuration, vsync: vsync);
 
   static void _onClosing() {}
 
@@ -151,50 +148,51 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
     return AnimatedBuilder(
       animation: _animation,
-      builder: (context, child) => Semantics(
-        scopesRoute: true,
-        namesRoute: true,
-        label: switch (defaultTargetPlatform) {
-          TargetPlatform.iOS || TargetPlatform.macOS => null,
-          _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).dialogLabel,
-        },
-        explicitChildNodes: true,
-        child: ClipRect(
-          child: ShiftedSheet(
-            side: widget.side,
-            onChange: widget.onChange,
-            value: _curve.transform(_animation.value),
-            mainAxisMaxRatio: widget.mainAxisMaxRatio,
-            child: child,
+      builder:
+          (context, child) => Semantics(
+            scopesRoute: true,
+            namesRoute: true,
+            label: switch (defaultTargetPlatform) {
+              TargetPlatform.iOS || TargetPlatform.macOS => null,
+              _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).dialogLabel,
+            },
+            explicitChildNodes: true,
+            child: ClipRect(
+              child: ShiftedSheet(
+                side: widget.side,
+                onChange: widget.onChange,
+                value: _curve.transform(_animation.value),
+                mainAxisMaxRatio: widget.mainAxisMaxRatio,
+                child: child,
+              ),
+            ),
           ),
-        ),
-      ),
       child: sheet,
     );
   }
 
   GestureDragUpdateCallback get _dragUpdate => switch (widget.side) {
-        FLayout.ttb => (details) {
-            if (!_dismissing) {
-              _controller.value += details.primaryDelta! / _key.currentChildHeight;
-            }
-          },
-        FLayout.btt => (details) {
-            if (!_dismissing) {
-              _controller.value -= details.primaryDelta! / _key.currentChildHeight;
-            }
-          },
-        FLayout.ltr => (details) {
-            if (!_dismissing) {
-              _controller.value += details.primaryDelta! / _key.currentChildWidth;
-            }
-          },
-        FLayout.rtl => (details) {
-            if (!_dismissing) {
-              _controller.value -= details.primaryDelta! / _key.currentChildWidth;
-            }
-          },
-      };
+    FLayout.ttb => (details) {
+      if (!_dismissing) {
+        _controller.value += details.primaryDelta! / _key.currentChildHeight;
+      }
+    },
+    FLayout.btt => (details) {
+      if (!_dismissing) {
+        _controller.value -= details.primaryDelta! / _key.currentChildHeight;
+      }
+    },
+    FLayout.ltr => (details) {
+      if (!_dismissing) {
+        _controller.value += details.primaryDelta! / _key.currentChildWidth;
+      }
+    },
+    FLayout.rtl => (details) {
+      if (!_dismissing) {
+        _controller.value -= details.primaryDelta! / _key.currentChildWidth;
+      }
+    },
+  };
 
   GestureDragEndCallback get _dragEnd {
     final double Function(DragEndDetails) velocity = switch (widget.side) {
@@ -297,8 +295,5 @@ class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
 
   /// Creates a [FSheetStyle] that inherits its colors from the given [FColorScheme].
   FSheetStyle.inherit({required FColorScheme colorScheme})
-      : this(
-          barrierColor: colorScheme.barrier,
-          backgroundColor: colorScheme.background,
-        );
+    : this(barrierColor: colorScheme.barrier, backgroundColor: colorScheme.background);
 }

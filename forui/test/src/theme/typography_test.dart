@@ -73,12 +73,7 @@ void main() {
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
         expect(
           typography.xs,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 12,
-            height: 1,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 12, height: 1),
         );
         expect(
           typography.sm,
@@ -91,12 +86,7 @@ void main() {
         );
         expect(
           typography.base,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 16,
-            height: 1.5,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 16, height: 1.5),
         );
         expect(
           typography.lg,
@@ -118,12 +108,7 @@ void main() {
         );
         expect(
           typography.xl2,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 22,
-            height: 2,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 22, height: 2),
         );
         expect(
           typography.xl3,
@@ -136,60 +121,29 @@ void main() {
         );
         expect(
           typography.xl4,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 36,
-            height: 2.5,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 36, height: 2.5),
         );
         expect(
           typography.xl5,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 48,
-            height: 1,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 48, height: 1),
         );
         expect(
           typography.xl6,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 60,
-            height: 1,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 60, height: 1),
         );
         expect(
           typography.xl7,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 72,
-            height: 1,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 72, height: 1),
         );
         expect(
           typography.xl8,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 96,
-            height: 1,
-          ),
+          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 96, height: 1),
         );
       });
 
       test(
         'blank font family',
-        () => expect(
-          () => FTypography.inherit(
-            colorScheme: colorScheme,
-            defaultFontFamily: '',
-          ),
-          throwsAssertionError,
-        ),
+        () => expect(() => FTypography.inherit(colorScheme: colorScheme, defaultFontFamily: ''), throwsAssertionError),
       );
     });
 

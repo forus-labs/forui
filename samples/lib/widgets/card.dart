@@ -10,28 +10,22 @@ String path(String str) => kIsWeb ? 'assets/$str' : str;
 
 @RoutePage()
 class CardPage extends Sample {
-  CardPage({
-    @queryParam super.theme,
-  });
+  CardPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FCard(
-            image: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(path('avatar.png')),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              height: 200,
-            ),
-            title: const Text('Gratitude'),
-            subtitle:
-                const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
-          ),
-        ],
-      );
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FCard(
+        image: Container(
+          decoration: BoxDecoration(image: DecorationImage(image: AssetImage(path('avatar.png')), fit: BoxFit.cover)),
+          height: 200,
+        ),
+        title: const Text('Gratitude'),
+        subtitle: const Text(
+          'The quality of being thankful; readiness to show appreciation for and to return kindness.',
+        ),
+      ),
+    ],
+  );
 }

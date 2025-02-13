@@ -58,12 +58,8 @@ class FScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.scaffoldStyle;
     Widget content = this.content;
-    final Widget footer = this.footer != null
-        ? DecoratedBox(
-            decoration: style.footerDecoration,
-            child: this.footer!,
-          )
-        : const SizedBox();
+    final Widget footer =
+        this.footer != null ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!) : const SizedBox();
 
     if (contentPad) {
       content = Padding(padding: style.contentPadding, child: content);
@@ -133,36 +129,25 @@ final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 
   /// Creates a [FScaffoldStyle] that inherits its properties from the provided [colorScheme] and [style].
   FScaffoldStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          backgroundColor: colorScheme.background,
-          contentPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
-          footerDecoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                color: colorScheme.border,
-                width: style.borderWidth,
-              ),
-            ),
-          ),
-        );
+    : this(
+        backgroundColor: colorScheme.background,
+        contentPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
+        footerDecoration: BoxDecoration(
+          border: Border(top: BorderSide(color: colorScheme.border, width: style.borderWidth)),
+        ),
+      );
 }
 
 class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   final bool resizeToAvoidBottomInset;
 
-  const _RenderScaffoldWidget({
-    required this.resizeToAvoidBottomInset,
-    required super.children,
-  });
+  const _RenderScaffoldWidget({required this.resizeToAvoidBottomInset, required super.children});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
     final viewInsets = MediaQuery.viewInsetsOf(context);
 
-    return _RenderScaffold(
-      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      insets: viewInsets,
-    );
+    return _RenderScaffold(resizeToAvoidBottomInset: resizeToAvoidBottomInset, insets: viewInsets);
   }
 
   @override
@@ -177,11 +162,7 @@ class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
-      FlagProperty(
-        'resizeToAvoidBottomInset',
-        value: resizeToAvoidBottomInset,
-        ifTrue: 'resizeToAvoidBottomInset',
-      ),
+      FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, ifTrue: 'resizeToAvoidBottomInset'),
     );
   }
 }
@@ -193,11 +174,9 @@ class _RenderScaffold extends RenderBox
   bool _resizeToAvoidBottomInset;
   EdgeInsets _insets;
 
-  _RenderScaffold({
-    required bool resizeToAvoidBottomInset,
-    required EdgeInsets insets,
-  })  : _resizeToAvoidBottomInset = resizeToAvoidBottomInset,
-        _insets = insets;
+  _RenderScaffold({required bool resizeToAvoidBottomInset, required EdgeInsets insets})
+    : _resizeToAvoidBottomInset = resizeToAvoidBottomInset,
+      _insets = insets;
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = _Data();
@@ -252,11 +231,7 @@ class _RenderScaffold extends RenderBox
     super.debugFillProperties(properties);
     properties
       ..add(
-        FlagProperty(
-          'resizeToAvoidBottomInset',
-          value: resizeToAvoidBottomInset,
-          ifTrue: 'resizeToAvoidBottomInset',
-        ),
+        FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, ifTrue: 'resizeToAvoidBottomInset'),
       )
       ..add(DiagnosticsProperty('insets', insets));
   }

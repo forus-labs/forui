@@ -11,147 +11,132 @@ class Field extends FormField<String> {
     FTextFieldStateStyle stateStyle,
     EdgeInsets contentPadding,
   ) =>
-      // counterTextStyle does not need to be set since it only affects counterText, not counter.
-      InputDecoration(
-        isDense: true,
-        prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
-        suffixIcon: parent.suffixBuilder?.call(state.context, stateStyle, null),
-        // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-        prefix: Padding(padding: EdgeInsets.only(left: parent.prefixBuilder == null ? contentPadding.left : 0)),
-        prefixIconConstraints: const BoxConstraints(),
-        suffixIconConstraints: const BoxConstraints(),
-        contentPadding: contentPadding.copyWith(left: 0),
-        hintText: parent.hint,
-        hintStyle: stateStyle.hintTextStyle,
-        disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: stateStyle.unfocusedStyle.color,
-            width: stateStyle.unfocusedStyle.width,
-          ),
-          borderRadius: stateStyle.unfocusedStyle.radius,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: stateStyle.unfocusedStyle.color,
-            width: stateStyle.unfocusedStyle.width,
-          ),
-          borderRadius: stateStyle.unfocusedStyle.radius,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: stateStyle.focusedStyle.color,
-            width: stateStyle.focusedStyle.width,
-          ),
-          borderRadius: stateStyle.focusedStyle.radius,
-        ),
-      );
+  // counterTextStyle does not need to be set since it only affects counterText, not counter.
+  InputDecoration(
+    isDense: true,
+    prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
+    suffixIcon: parent.suffixBuilder?.call(state.context, stateStyle, null),
+    // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
+    prefix: Padding(padding: EdgeInsets.only(left: parent.prefixBuilder == null ? contentPadding.left : 0)),
+    prefixIconConstraints: const BoxConstraints(),
+    suffixIconConstraints: const BoxConstraints(),
+    contentPadding: contentPadding.copyWith(left: 0),
+    hintText: parent.hint,
+    hintStyle: stateStyle.hintTextStyle,
+    disabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
+      borderRadius: stateStyle.unfocusedStyle.radius,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
+      borderRadius: stateStyle.unfocusedStyle.radius,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: stateStyle.focusedStyle.color, width: stateStyle.focusedStyle.width),
+      borderRadius: stateStyle.focusedStyle.radius,
+    ),
+  );
 
   final FTextField parent;
 
-  Field({
-    required this.parent,
-    required FTextFieldStyle style,
-    super.key,
-  }) : super(
-          onSaved: parent.onSaved,
-          validator: parent.validator,
-          initialValue: parent.initialValue,
-          enabled: parent.enabled,
-          autovalidateMode: parent.autovalidateMode,
-          forceErrorText: parent.forceErrorText,
-          restorationId: parent.restorationId,
-          builder: (field) {
-            final state = field as _State;
-            final (labelState, stateStyle) = switch (parent) {
-              _ when !parent.enabled => (FLabelState.disabled, style.disabledStyle),
-              _ when state.errorText != null => (FLabelState.error, style.errorStyle),
-              _ => (FLabelState.enabled, style.enabledStyle),
-            };
+  Field({required this.parent, required FTextFieldStyle style, super.key})
+    : super(
+        onSaved: parent.onSaved,
+        validator: parent.validator,
+        initialValue: parent.initialValue,
+        enabled: parent.enabled,
+        autovalidateMode: parent.autovalidateMode,
+        forceErrorText: parent.forceErrorText,
+        restorationId: parent.restorationId,
+        builder: (field) {
+          final state = field as _State;
+          final (labelState, stateStyle) = switch (parent) {
+            _ when !parent.enabled => (FLabelState.disabled, style.disabledStyle),
+            _ when state.errorText != null => (FLabelState.error, style.errorStyle),
+            _ => (FLabelState.enabled, style.enabledStyle),
+          };
 
-            final textfield = TextField(
-              controller: state._effectiveController,
-              decoration: _decoration(state, parent, stateStyle, style.contentPadding),
-              focusNode: parent.focusNode,
-              undoController: parent.undoController,
-              cursorErrorColor: style.cursorColor,
-              keyboardType: parent.keyboardType,
-              textInputAction: parent.textInputAction,
-              textCapitalization: parent.textCapitalization,
-              style: stateStyle.contentTextStyle,
-              textAlign: parent.textAlign,
-              textAlignVertical: parent.textAlignVertical,
-              textDirection: parent.textDirection,
-              readOnly: parent.readOnly,
-              showCursor: parent.showCursor,
-              autofocus: parent.autofocus,
-              statesController: parent.statesController,
-              obscureText: parent.obscureText,
-              autocorrect: parent.autocorrect,
-              smartDashesType: parent.smartDashesType,
-              smartQuotesType: parent.smartQuotesType,
-              enableSuggestions: parent.enableSuggestions,
-              maxLines: parent.maxLines,
-              minLines: parent.minLines,
-              expands: parent.expands,
-              maxLength: parent.maxLength,
-              maxLengthEnforcement: parent.maxLengthEnforcement,
-              onChanged: (value) {
-                field.didChange(value);
-                parent.onChange?.call(value);
-              },
-              onTap: parent.onTap,
-              onTapAlwaysCalled: parent.onTapAlwaysCalled,
-              onEditingComplete: parent.onEditingComplete,
-              onSubmitted: parent.onSubmit,
-              onAppPrivateCommand: parent.onAppPrivateCommand,
-              inputFormatters: parent.inputFormatters,
-              enabled: parent.enabled,
-              ignorePointers: parent.ignorePointers,
-              enableInteractiveSelection: parent.enableInteractiveSelection,
-              keyboardAppearance: style.keyboardAppearance,
-              scrollPadding: style.scrollPadding,
-              dragStartBehavior: parent.dragStartBehavior,
-              mouseCursor: parent.mouseCursor,
-              buildCounter: (context, {required currentLength, required isFocused, required maxLength}) {
-                final counter = parent.counterBuilder?.call(context, currentLength, maxLength, isFocused);
-                return counter == null
-                    ? null
-                    : DefaultTextStyle.merge(
-                        style: stateStyle.counterTextStyle,
-                        child: counter,
-                      );
-              },
-              selectionControls: parent.selectionControls,
-              scrollController: parent.scrollController,
-              scrollPhysics: parent.scrollPhysics,
-              autofillHints: parent.autofillHints,
-              restorationId: parent.restorationId,
-              scribbleEnabled: parent.scribbleEnabled,
-              enableIMEPersonalizedLearning: parent.enableIMEPersonalizedLearning,
-              contentInsertionConfiguration: parent.contentInsertionConfiguration,
-              contextMenuBuilder: parent.contextMenuBuilder,
-              canRequestFocus: parent.canRequestFocus,
-              spellCheckConfiguration: parent.spellCheckConfiguration,
-              magnifierConfiguration: parent.magnifierConfiguration,
-            );
+          final textfield = TextField(
+            controller: state._effectiveController,
+            decoration: _decoration(state, parent, stateStyle, style.contentPadding),
+            focusNode: parent.focusNode,
+            undoController: parent.undoController,
+            cursorErrorColor: style.cursorColor,
+            keyboardType: parent.keyboardType,
+            textInputAction: parent.textInputAction,
+            textCapitalization: parent.textCapitalization,
+            style: stateStyle.contentTextStyle,
+            textAlign: parent.textAlign,
+            textAlignVertical: parent.textAlignVertical,
+            textDirection: parent.textDirection,
+            readOnly: parent.readOnly,
+            showCursor: parent.showCursor,
+            autofocus: parent.autofocus,
+            statesController: parent.statesController,
+            obscureText: parent.obscureText,
+            autocorrect: parent.autocorrect,
+            smartDashesType: parent.smartDashesType,
+            smartQuotesType: parent.smartQuotesType,
+            enableSuggestions: parent.enableSuggestions,
+            maxLines: parent.maxLines,
+            minLines: parent.minLines,
+            expands: parent.expands,
+            maxLength: parent.maxLength,
+            maxLengthEnforcement: parent.maxLengthEnforcement,
+            onChanged: (value) {
+              field.didChange(value);
+              parent.onChange?.call(value);
+            },
+            onTap: parent.onTap,
+            onTapAlwaysCalled: parent.onTapAlwaysCalled,
+            onEditingComplete: parent.onEditingComplete,
+            onSubmitted: parent.onSubmit,
+            onAppPrivateCommand: parent.onAppPrivateCommand,
+            inputFormatters: parent.inputFormatters,
+            enabled: parent.enabled,
+            ignorePointers: parent.ignorePointers,
+            enableInteractiveSelection: parent.enableInteractiveSelection,
+            keyboardAppearance: style.keyboardAppearance,
+            scrollPadding: style.scrollPadding,
+            dragStartBehavior: parent.dragStartBehavior,
+            mouseCursor: parent.mouseCursor,
+            buildCounter: (context, {required currentLength, required isFocused, required maxLength}) {
+              final counter = parent.counterBuilder?.call(context, currentLength, maxLength, isFocused);
+              return counter == null
+                  ? null
+                  : DefaultTextStyle.merge(style: stateStyle.counterTextStyle, child: counter);
+            },
+            selectionControls: parent.selectionControls,
+            scrollController: parent.scrollController,
+            scrollPhysics: parent.scrollPhysics,
+            autofillHints: parent.autofillHints,
+            restorationId: parent.restorationId,
+            stylusHandwritingEnabled: parent.stylusHandwritingEnabled,
+            enableIMEPersonalizedLearning: parent.enableIMEPersonalizedLearning,
+            contentInsertionConfiguration: parent.contentInsertionConfiguration,
+            contextMenuBuilder: parent.contextMenuBuilder,
+            canRequestFocus: parent.canRequestFocus,
+            spellCheckConfiguration: parent.spellCheckConfiguration,
+            magnifierConfiguration: parent.magnifierConfiguration,
+          );
 
-            return UnmanagedRestorationScope(
-              bucket: state.bucket,
-              child: FLabel(
-                axis: Axis.vertical,
-                state: labelState,
-                label: parent.label,
-                style: style.labelStyle,
-                description: parent.description,
-                error: switch (state.errorText) {
-                  null => const SizedBox(),
-                  final error => parent.errorBuilder(state.context, error),
-                },
-                child: parent.builder(state.context, stateStyle, textfield),
-              ),
-            );
-          },
-        );
+          return UnmanagedRestorationScope(
+            bucket: state.bucket,
+            child: FLabel(
+              axis: Axis.vertical,
+              state: labelState,
+              label: parent.label,
+              style: style.labelStyle,
+              description: parent.description,
+              error: switch (state.errorText) {
+                null => const SizedBox(),
+                final error => parent.errorBuilder(state.context, error),
+              },
+              child: parent.builder(state.context, stateStyle, textfield),
+            ),
+          );
+        },
+      );
 
   @override
   FormFieldState<String> createState() => _State();

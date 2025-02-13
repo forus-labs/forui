@@ -120,22 +120,20 @@ final class FTypography with Diagnosticable, FTransformable {
   }) : assert(0 < defaultFontFamily.length, 'The defaultFontFamily should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties from [colorScheme].
-  FTypography.inherit({
-    required FColorScheme colorScheme,
-    this.defaultFontFamily = 'packages/forui/Inter',
-  })  : xs = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
-        sm = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
-        base = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
-        lg = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 18, height: 1.75),
-        xl = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 20, height: 1.75),
-        xl2 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 22, height: 2),
-        xl3 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 30, height: 2.25),
-        xl4 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 36, height: 2.5),
-        xl5 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 48, height: 1),
-        xl6 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 60, height: 1),
-        xl7 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 72, height: 1),
-        xl8 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 96, height: 1),
-        assert(defaultFontFamily.isNotEmpty, 'The defaultFontFamily should not be empty.');
+  FTypography.inherit({required FColorScheme colorScheme, this.defaultFontFamily = 'packages/forui/Inter'})
+    : xs = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
+      sm = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
+      base = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
+      lg = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 18, height: 1.75),
+      xl = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 20, height: 1.75),
+      xl2 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 22, height: 2),
+      xl3 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 30, height: 2.25),
+      xl4 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 36, height: 2.5),
+      xl5 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 48, height: 1),
+      xl6 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 60, height: 1),
+      xl7 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 72, height: 1),
+      xl8 = TextStyle(color: colorScheme.foreground, fontFamily: defaultFontFamily, fontSize: 96, height: 1),
+      assert(defaultFontFamily.isNotEmpty, 'The defaultFontFamily should not be empty.');
 
   /// Scales the fields of this [FTypography] by the given fields.
   ///
@@ -152,25 +150,22 @@ final class FTypography with Diagnosticable, FTransformable {
   /// ```
   @useResult
   FTypography scale({double sizeScalar = 1}) => FTypography(
-        defaultFontFamily: defaultFontFamily,
-        xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
-        sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
-        base: _scaleTextStyle(style: base, sizeScalar: sizeScalar),
-        lg: _scaleTextStyle(style: lg, sizeScalar: sizeScalar),
-        xl: _scaleTextStyle(style: xl, sizeScalar: sizeScalar),
-        xl2: _scaleTextStyle(style: xl2, sizeScalar: sizeScalar),
-        xl3: _scaleTextStyle(style: xl3, sizeScalar: sizeScalar),
-        xl4: _scaleTextStyle(style: xl4, sizeScalar: sizeScalar),
-        xl5: _scaleTextStyle(style: xl5, sizeScalar: sizeScalar),
-        xl6: _scaleTextStyle(style: xl6, sizeScalar: sizeScalar),
-        xl7: _scaleTextStyle(style: xl7, sizeScalar: sizeScalar),
-        xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
-      );
+    defaultFontFamily: defaultFontFamily,
+    xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
+    sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
+    base: _scaleTextStyle(style: base, sizeScalar: sizeScalar),
+    lg: _scaleTextStyle(style: lg, sizeScalar: sizeScalar),
+    xl: _scaleTextStyle(style: xl, sizeScalar: sizeScalar),
+    xl2: _scaleTextStyle(style: xl2, sizeScalar: sizeScalar),
+    xl3: _scaleTextStyle(style: xl3, sizeScalar: sizeScalar),
+    xl4: _scaleTextStyle(style: xl4, sizeScalar: sizeScalar),
+    xl5: _scaleTextStyle(style: xl5, sizeScalar: sizeScalar),
+    xl6: _scaleTextStyle(style: xl6, sizeScalar: sizeScalar),
+    xl7: _scaleTextStyle(style: xl7, sizeScalar: sizeScalar),
+    xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
+  );
 
-  TextStyle _scaleTextStyle({
-    required TextStyle style,
-    required double sizeScalar,
-  }) {
+  TextStyle _scaleTextStyle({required TextStyle style, required double sizeScalar}) {
     // default font size; https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
     final double fontSize = style.fontSize ?? 14;
 
@@ -207,22 +202,21 @@ final class FTypography with Diagnosticable, FTransformable {
     TextStyle? xl6,
     TextStyle? xl7,
     TextStyle? xl8,
-  }) =>
-      FTypography(
-        defaultFontFamily: defaultFontFamily ?? this.defaultFontFamily,
-        xs: xs ?? this.xs,
-        sm: sm ?? this.sm,
-        base: base ?? this.base,
-        lg: lg ?? this.lg,
-        xl: xl ?? this.xl,
-        xl2: xl2 ?? this.xl2,
-        xl3: xl3 ?? this.xl3,
-        xl4: xl4 ?? this.xl4,
-        xl5: xl5 ?? this.xl5,
-        xl6: xl6 ?? this.xl6,
-        xl7: xl7 ?? this.xl7,
-        xl8: xl8 ?? this.xl8,
-      );
+  }) => FTypography(
+    defaultFontFamily: defaultFontFamily ?? this.defaultFontFamily,
+    xs: xs ?? this.xs,
+    sm: sm ?? this.sm,
+    base: base ?? this.base,
+    lg: lg ?? this.lg,
+    xl: xl ?? this.xl,
+    xl2: xl2 ?? this.xl2,
+    xl3: xl3 ?? this.xl3,
+    xl4: xl4 ?? this.xl4,
+    xl5: xl5 ?? this.xl5,
+    xl6: xl6 ?? this.xl6,
+    xl7: xl7 ?? this.xl7,
+    xl8: xl8 ?? this.xl8,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -61,13 +61,10 @@ class _RenderHorizontalSlider extends _RenderSlider {
 
     // Layout parts, assuming top-left corner of track/origin is (0, 0).
     final insets = _style.labelLayoutStyle.childPadding;
-    final (:label, :paddedTrack, :description, :error, :slider) = layoutParts(
-      loosened,
-      switch (_mainAxisExtent) {
-        final extent? => loosened.copyWith(maxWidth: extent + insets.left + insets.right),
-        null => loosened,
-      },
-    );
+    final (:label, :paddedTrack, :description, :error, :slider) = layoutParts(loosened, switch (_mainAxisExtent) {
+      final extent? => loosened.copyWith(maxWidth: extent + insets.left + insets.right),
+      null => loosened,
+    });
 
     // Calculate offset to move the top/left corner of track/origin from (0, 0), such that no part of the slider has a
     // negative offset.
@@ -106,13 +103,10 @@ class _RenderVerticalSlider extends _RenderSlider {
 
     // Layout parts, assuming top-left corner of track/origin is (0, 0).
     final insets = _style.labelLayoutStyle.childPadding;
-    final (:label, :paddedTrack, :description, :error, :slider) = layoutParts(
-      loosened,
-      switch (_mainAxisExtent) {
-        final extent? => loosened.copyWith(maxHeight: extent + insets.top + insets.bottom),
-        null => loosened,
-      },
-    );
+    final (:label, :paddedTrack, :description, :error, :slider) = layoutParts(loosened, switch (_mainAxisExtent) {
+      final extent? => loosened.copyWith(maxHeight: extent + insets.top + insets.bottom),
+      null => loosened,
+    });
 
     // Calculate offset to move the top/left corner of track/origin from (0, 0), such that no part of the slider has a
     // negative offset.
@@ -162,13 +156,14 @@ class _RenderVerticalSlider extends _RenderSlider {
 
 class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
 
-typedef _Parts = ({
-  RenderBox paddedTrack,
-  RenderBox label,
-  RenderBox description,
-  RenderBox error,
-  ({Map<RenderBox, Rect> marks, Size size}) slider,
-});
+typedef _Parts =
+    ({
+      RenderBox paddedTrack,
+      RenderBox label,
+      RenderBox description,
+      RenderBox error,
+      ({Map<RenderBox, Rect> marks, Size size}) slider,
+    });
 
 abstract class _RenderSlider extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
@@ -237,25 +232,25 @@ abstract class _RenderSlider extends RenderBox
     final insets = _style.labelLayoutStyle.childPadding;
     return switch (_layout) {
       FLayout.ltr => (track, label, mark, style) {
-          final extent = track.size.width - insets.left - insets.right;
-          final offset = _anchor(extent, mark.value, insets.left, insets.top, style);
-          return _rect(label, mark, Offset(offset.$1, offset.$2), style);
-        },
+        final extent = track.size.width - insets.left - insets.right;
+        final offset = _anchor(extent, mark.value, insets.left, insets.top, style);
+        return _rect(label, mark, Offset(offset.$1, offset.$2), style);
+      },
       FLayout.rtl => (track, size, mark, style) {
-          final extent = track.size.width - insets.left - insets.right;
-          final offset = _anchor(extent, 1 - mark.value, insets.left, insets.top, style);
-          return _rect(size, mark, Offset(offset.$1, offset.$2), style);
-        },
+        final extent = track.size.width - insets.left - insets.right;
+        final offset = _anchor(extent, 1 - mark.value, insets.left, insets.top, style);
+        return _rect(size, mark, Offset(offset.$1, offset.$2), style);
+      },
       FLayout.ttb => (track, size, mark, style) {
-          final extent = track.size.height - insets.top - insets.bottom;
-          final offset = _anchor(extent, mark.value, insets.top, insets.left, style);
-          return _rect(size, mark, Offset(offset.$2, offset.$1), style);
-        },
+        final extent = track.size.height - insets.top - insets.bottom;
+        final offset = _anchor(extent, mark.value, insets.top, insets.left, style);
+        return _rect(size, mark, Offset(offset.$2, offset.$1), style);
+      },
       FLayout.btt => (track, size, mark, style) {
-          final extent = track.size.height - insets.top - insets.bottom;
-          final offset = _anchor(extent, 1 - mark.value, insets.top, insets.left, style);
-          return _rect(size, mark, Offset(offset.$2, offset.$1), style);
-        },
+        final extent = track.size.height - insets.top - insets.bottom;
+        final offset = _anchor(extent, 1 - mark.value, insets.top, insets.left, style);
+        return _rect(size, mark, Offset(offset.$2, offset.$1), style);
+      },
     };
   }
 

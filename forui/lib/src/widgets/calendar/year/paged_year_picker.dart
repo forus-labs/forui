@@ -34,15 +34,15 @@ class PagedYearPicker extends PagedPicker {
 class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   @override
   Widget buildItem(BuildContext context, int page) => YearPicker(
-        yearMonthStyle: widget.style.yearMonthPickerStyle,
-        dayStyle: widget.style.dayPickerStyle,
-        startYear: widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items),
-        start: widget.start,
-        end: widget.end,
-        today: widget.today,
-        focused: focusedDate,
-        onPress: widget.onPress,
-      );
+    yearMonthStyle: widget.style.yearMonthPickerStyle,
+    dayStyle: widget.style.dayPickerStyle,
+    startYear: widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items),
+    start: widget.start,
+    end: widget.end,
+    today: widget.today,
+    focused: focusedDate,
+    onPress: widget.onPress,
+  );
 
   @override
   void onGridFocusChange(bool focused) {
@@ -93,9 +93,9 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-        TraversalDirection.up: Period(years: -YearPicker.columns),
-        TraversalDirection.right: Period(years: 1),
-        TraversalDirection.down: Period(years: YearPicker.columns),
-        TraversalDirection.left: Period(years: -1),
-      };
+    TraversalDirection.up: Period(years: -YearPicker.columns),
+    TraversalDirection.right: Period(years: 1),
+    TraversalDirection.down: Period(years: YearPicker.columns),
+    TraversalDirection.left: Period(years: -1),
+  };
 }
