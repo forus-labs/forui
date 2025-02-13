@@ -173,7 +173,12 @@ void main() {
         TestScaffold.app(
           alignment: Alignment.topCenter,
           theme: theme.data,
-          child: const FDatePicker(forceErrorText: 'Error', key: key),
+          child: FDatePicker(
+            calendar: FDatePickerCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
+            forceErrorText: 'Error', key: key,
+          ),
         ),
       );
 
