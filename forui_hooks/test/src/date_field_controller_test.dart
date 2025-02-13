@@ -8,14 +8,14 @@ import 'package:forui/forui.dart';
 import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
-  testWidgets('useFAccordionController', (tester) async {
+  testWidgets('useFDateFieldController', (tester) async {
     late FDateFieldController controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFDatePickerController();
+            controller = useFDateFieldController();
             return FDateField(controller: controller);
           },
         ),

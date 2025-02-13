@@ -26,7 +26,7 @@ String? _defaultValidator(DateTime? _) => null;
 ///
 /// ## Contract
 /// Throws [AssertionError] if [initialDate] is not in UTC timezone and [truncateAndStripTimezone] is false.
-FDateFieldController useFDatePickerController({
+FDateFieldController useFDateFieldController({
   TickerProvider? vsync,
   DateTime? initialDate,
   FormFieldValidator<DateTime> validator = _defaultValidator,
@@ -34,7 +34,7 @@ FDateFieldController useFDatePickerController({
   Duration popoverAnimationDuration = const Duration(milliseconds: 100),
   List<Object?>? keys,
 }) => use(
-  _DatePickerHook(
+  _DateFieldHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
     initialDate: initialDate,
     validator: validator,
@@ -45,7 +45,7 @@ FDateFieldController useFDatePickerController({
   ),
 );
 
-class _DatePickerHook extends Hook<FDateFieldController> {
+class _DateFieldHook extends Hook<FDateFieldController> {
   final TickerProvider vsync;
   final DateTime? initialDate;
   final FormFieldValidator<DateTime> validator;
@@ -53,7 +53,7 @@ class _DatePickerHook extends Hook<FDateFieldController> {
   final Duration popoverAnimationDuration;
   final String _debugLabel;
 
-  const _DatePickerHook({
+  const _DateFieldHook({
     required this.vsync,
     required this.initialDate,
     required this.validator,
@@ -64,7 +64,7 @@ class _DatePickerHook extends Hook<FDateFieldController> {
   }) : _debugLabel = debugLabel;
 
   @override
-  _DatePickerHookState createState() => _DatePickerHookState();
+  _DateFieldHookState createState() => _DateFieldHookState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -80,7 +80,7 @@ class _DatePickerHook extends Hook<FDateFieldController> {
   }
 }
 
-class _DatePickerHookState extends HookState<FDateFieldController, _DatePickerHook> {
+class _DateFieldHookState extends HookState<FDateFieldController, _DateFieldHook> {
   late final FDateFieldController _controller = FDateFieldController(
     vsync: hook.vsync,
     initialDate: hook.initialDate,
