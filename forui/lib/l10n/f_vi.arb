@@ -5,6 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Chọn ngày",
-  "datePickerInvalidDateError": "Ngày không hợp lệ."
+  "dateFieldHint": "Chọn ngày",
+  "dateFieldInvalidDateError": "Ngày không hợp lệ."
 }

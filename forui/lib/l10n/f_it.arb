@@ -5,6 +5,6 @@
   "barrierLabel": "Rete",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Seleziona data",
-  "datePickerInvalidDateError": "Data non valida."
+  "dateFieldHint": "Seleziona data",
+  "dateFieldInvalidDateError": "Data non valida."
 }

@@ -5,6 +5,6 @@
   "barrierLabel": "Pārklājums",
   "shortDateSeparator": ".",
   "shortDateSuffix": ".",
-  "datePickerHint": "Atlasīt datumu",
-  "datePickerInvalidDateError": "Nederīgs datums."
+  "dateFieldHint": "Atlasīt datumu",
+  "dateFieldInvalidDateError": "Nederīgs datums."
 }

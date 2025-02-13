@@ -1,5 +1,5 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -63,10 +63,10 @@ class FLocalizationsFr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Sélectionner une date';
+  String get dateFieldHint => 'Sélectionner une date';
 
   @override
-  String get datePickerInvalidDateError => 'Date non valide.';
+  String get dateFieldInvalidDateError => 'Date non valide.';
 
   @override
   String get dialogLabel => 'Boîte de dialogue';
@@ -94,10 +94,10 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Sélectionner une date';
+  String get dateFieldHint => 'Sélectionner une date';
 
   @override
-  String get datePickerInvalidDateError => 'Date non valide.';
+  String get dateFieldInvalidDateError => 'Date non valide.';
 
   @override
   String get dialogLabel => 'Boîte de dialogue';

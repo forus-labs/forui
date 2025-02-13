@@ -5,6 +5,6 @@
   "barrierLabel": "স্ক্রিম",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "তারিখ বেছে নিন",
-  "datePickerInvalidDateError": "অবৈধ তারিখ।"
+  "dateFieldHint": "তারিখ বেছে নিন",
+  "dateFieldInvalidDateError": "অবৈধ তারিখ।"
 }

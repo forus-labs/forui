@@ -5,6 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "เลือกวันที่",
-  "datePickerInvalidDateError": "วันที่ไม่ถูกต้อง"
+  "dateFieldHint": "เลือกวันที่",
+  "dateFieldInvalidDateError": "วันที่ไม่ถูกต้อง"
 }

@@ -71,7 +71,7 @@ class FPickerController extends FValueNotifier<List<int>> {
 /// * https://forui.dev/docs/form/picker for working examples.
 /// * [FPickerController] for controlling a picker.
 /// * [FPickerWheel] for customizing a picker's individual wheel.
-/// * [FDatePickerStyle] for customizing a picker's appearance.
+/// * [FDateFieldStyle] for customizing a picker's appearance.
 class FPicker extends StatefulWidget {
   /// The controller.
   final FPickerController? controller;

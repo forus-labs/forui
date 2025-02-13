@@ -5,6 +5,6 @@
   "barrierLabel": "Fons atenuat",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Selecciona una data",
-  "datePickerInvalidDateError": "Data no vàlida."
+  "dateFieldHint": "Selecciona una data",
+  "dateFieldInvalidDateError": "Data no vàlida."
 }

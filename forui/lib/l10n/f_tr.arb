@@ -5,6 +5,6 @@
   "barrierLabel": "opaklık katmanı",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Tarih seçin",
-  "datePickerInvalidDateError": "Geçersiz tarih."
+  "dateFieldHint": "Tarih seçin",
+  "dateFieldInvalidDateError": "Geçersiz tarih."
 }

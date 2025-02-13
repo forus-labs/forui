@@ -5,6 +5,6 @@
   "barrierLabel": "Sombreado",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Selecciona unha data",
-  "datePickerInvalidDateError": "Data non válida."
+  "dateFieldHint": "Selecciona unha data",
+  "dateFieldInvalidDateError": "Data non válida."
 }

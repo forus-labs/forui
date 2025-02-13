@@ -5,6 +5,6 @@
   "barrierLabel": "Դիմակ",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Ընտրել ամսաթիվը",
-  "datePickerInvalidDateError": "Սխալ ամսաթիվ:"
+  "dateFieldHint": "Ընտրել ամսաթիվը",
+  "dateFieldInvalidDateError": "Սխալ ամսաթիվ:"
 }

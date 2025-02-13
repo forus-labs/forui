@@ -1,5 +1,5 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -63,10 +63,10 @@ class FLocalizationsZh extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => '选择日期';
+  String get dateFieldHint => '选择日期';
 
   @override
-  String get datePickerInvalidDateError => '日期无效。';
+  String get dateFieldInvalidDateError => '日期无效。';
 
   @override
   String get dialogLabel => '对话框';
@@ -94,10 +94,10 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => '選擇日期';
+  String get dateFieldHint => '選擇日期';
 
   @override
-  String get datePickerInvalidDateError => '日期無效。';
+  String get dateFieldInvalidDateError => '日期無效。';
 
   @override
   String get dialogLabel => '對話方塊';
@@ -125,10 +125,10 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => '選擇日期';
+  String get dateFieldHint => '選擇日期';
 
   @override
-  String get datePickerInvalidDateError => '日期無效。';
+  String get dateFieldInvalidDateError => '日期無效。';
 
   @override
   String get dialogLabel => '對話方塊';

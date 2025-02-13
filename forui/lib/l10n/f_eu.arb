@@ -5,6 +5,6 @@
   "barrierLabel": "Barrera",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Hautatu data",
-  "datePickerInvalidDateError": "Data baliogabea."
+  "dateFieldHint": "Hautatu data",
+  "dateFieldInvalidDateError": "Data baliogabea."
 }

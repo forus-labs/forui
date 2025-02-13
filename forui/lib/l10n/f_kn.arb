@@ -5,6 +5,6 @@
   "barrierLabel": "ಸ್ಕ್ರಿಮ್",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-  "datePickerInvalidDateError": "ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ."
+  "dateFieldHint": "ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "dateFieldInvalidDateError": "ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ."
 }

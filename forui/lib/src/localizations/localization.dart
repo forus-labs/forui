@@ -53,10 +53,10 @@ class FDefaultLocalizations extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';

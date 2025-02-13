@@ -1,5 +1,5 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -63,10 +63,10 @@ class FLocalizationsEn extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';
@@ -94,10 +94,10 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -125,10 +125,10 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';
@@ -156,10 +156,10 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -187,10 +187,10 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -218,10 +218,10 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -249,10 +249,10 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -280,10 +280,10 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';
@@ -311,10 +311,10 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialogue';

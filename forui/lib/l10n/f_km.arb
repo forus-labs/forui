@@ -5,6 +5,6 @@
   "barrierLabel": "ផ្ទាំងស្រអាប់",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "ជ្រើសរើស​កាលបរិច្ឆេទ",
-  "datePickerInvalidDateError": "កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។"
+  "dateFieldHint": "ជ្រើសរើស​កាលបរិច្ឆេទ",
+  "dateFieldInvalidDateError": "កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។"
 }

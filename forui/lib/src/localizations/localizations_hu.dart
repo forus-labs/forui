@@ -1,5 +1,5 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -63,10 +63,10 @@ class FLocalizationsHu extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
-  String get datePickerHint => 'Válasszon dátumot';
+  String get dateFieldHint => 'Válasszon dátumot';
 
   @override
-  String get datePickerInvalidDateError => 'Érvénytelen dátum.';
+  String get dateFieldInvalidDateError => 'Érvénytelen dátum.';
 
   @override
   String get dialogLabel => 'Párbeszédablak';

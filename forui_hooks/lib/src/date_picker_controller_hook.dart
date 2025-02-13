@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 String? _defaultValidator(DateTime? _) => null;
 
-/// Creates a [FDatePickerController] that allows date selection through a calendar and/or input field and is
+/// Creates a [FDateFieldController] that allows date selection through a calendar and/or input field and is
 /// automatically disposed.
 ///
 /// [validator] returns an error string to display if the input is invalid, or null otherwise.
@@ -26,7 +26,7 @@ String? _defaultValidator(DateTime? _) => null;
 ///
 /// ## Contract
 /// Throws [AssertionError] if [initialDate] is not in UTC timezone and [truncateAndStripTimezone] is false.
-FDatePickerController useFDatePickerController({
+FDateFieldController useFDatePickerController({
   TickerProvider? vsync,
   DateTime? initialDate,
   FormFieldValidator<DateTime> validator = _defaultValidator,
@@ -45,7 +45,7 @@ FDatePickerController useFDatePickerController({
   ),
 );
 
-class _DatePickerHook extends Hook<FDatePickerController> {
+class _DatePickerHook extends Hook<FDateFieldController> {
   final TickerProvider vsync;
   final DateTime? initialDate;
   final FormFieldValidator<DateTime> validator;
@@ -80,8 +80,8 @@ class _DatePickerHook extends Hook<FDatePickerController> {
   }
 }
 
-class _DatePickerHookState extends HookState<FDatePickerController, _DatePickerHook> {
-  late final FDatePickerController _controller = FDatePickerController(
+class _DatePickerHookState extends HookState<FDateFieldController, _DatePickerHook> {
+  late final FDateFieldController _controller = FDateFieldController(
     vsync: hook.vsync,
     initialDate: hook.initialDate,
     validator: hook.validator,
@@ -90,7 +90,7 @@ class _DatePickerHookState extends HookState<FDatePickerController, _DatePickerH
   );
 
   @override
-  FDatePickerController build(BuildContext context) => _controller;
+  FDateFieldController build(BuildContext context) => _controller;
 
   @override
   void dispose() => _controller.dispose();

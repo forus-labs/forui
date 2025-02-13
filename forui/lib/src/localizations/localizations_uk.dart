@@ -1,5 +1,5 @@
+// ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -63,10 +63,10 @@ class FLocalizationsUk extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Виберіть дату';
+  String get dateFieldHint => 'Виберіть дату';
 
   @override
-  String get datePickerInvalidDateError => 'Недійсна дата.';
+  String get dateFieldInvalidDateError => 'Недійсна дата.';
 
   @override
   String get dialogLabel => 'Вікно';

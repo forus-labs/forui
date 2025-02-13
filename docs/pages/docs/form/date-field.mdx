@@ -1,0 +1,302 @@
+import {Callout, Tabs} from 'nextra/components';
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Date Field
+A date field allows a date to be selected from a calendar or input field.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.date_field/"/>
+</LinkBadgeGroup>
+
+<div className="pb-5">
+    <Callout type="info">
+        It is recommended to use [FDateField.calendar](#fdatefieldcalendar) on touch devices and
+        [FDateField.new](#fdatefield)/[FDateField.input](#fdatefieldinput) on non-primarily touch devices.
+    </Callout>
+</div>
+
+The input field supports both arrow key navigation:
+  * Up/Down arrows: Increment/decrement values
+  * Left/Right arrows: Move between date segments
+
+The input field does not support the following locales that use non-western numerals, it will default to English
+(United States):
+  * Arabic (العربية)
+  * Bengali (বাংলা)
+  * Persian/Farsi (فارسی)
+  * Burmese (မြန်မာ)
+  * Nepali (नेपाली)
+  * Pashto (پښتو)
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='date-field' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        const FDateField(
+          label: Text('Appointment Date'),
+          description: Text('Select a date for your appointment'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FDateField(...)`
+
+```dart copy
+FDateField(
+  controller: FDateFieldController(
+    vsync: this,
+    initialDate: DateTime(2024, 1, 1),
+    validator: (date) => date?.isBefore(DateTime.now()) ?? false ? 'Date must be in the future' : null,
+  ),
+  style: FDateFieldStyle(),
+  textAlign: TextAlign.start,
+  textAlignVertical: TextAlignVertical.center,
+  autofocus: false,
+  expands: false,
+  onEditingComplete: () => print('Editing complete'),
+  onSubmit: (date) => print('Date submitted: $date'),
+  mouseCursor: SystemMouseCursors.text,
+  canRequestFocus: true,
+  baselineInputYear: 2000,
+  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
+  suffixBuilder: null,
+  calendar: FDateFieldCalendarProperties(),
+  label: Text('Select Date'),
+  description: Text('Choose a date from the calendar or input field'),
+  enabled: true,
+  onSaved: (date) => print('Date saved: $date'),
+  autovalidateMode: AutovalidateMode.onUnfocus,
+);
+```
+
+### `FDateField.calendar(...)`
+
+```dart copy
+FDateField.calendar(
+  controller: FDateFieldController(
+    vsync: this,
+    initialDate: DateTime(2024, 1, 1),
+  ),
+  format: DateFormat('d MMM y'),
+  textAlign: TextAlign.start,
+  textAlignVertical: TextAlignVertical.center,
+  expands: false,
+  mouseCursor: SystemMouseCursors.text,
+  canRequestFocus: true,
+  hint: 'Select a date',
+  start: DateTime(2024),
+  end: DateTime(2025),
+  today: DateTime.now(),
+  initialType: FCalendarFieldType.yearMonth,
+  autoHide: true,
+  anchor: Alignment.topLeft,
+  inputAnchor: Alignment.bottomLeft,
+  directionPadding: false,
+  label: Text('Calendar Date'),
+  description: Text('Select a date from the calendar'),
+  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
+    suffixBuilder: null,
+);
+```
+
+### `FDateField.input(...)`
+
+```dart copy
+FDateField.input(
+  controller: FDateFieldController(
+    vsync: this,
+    initialDate: DateTime(2024, 1, 1),
+  ),
+  textInputAction: TextInputAction.done,
+  textAlign: TextAlign.start,
+  textAlignVertical: TextAlignVertical.center,
+  expands: false,
+  onEditingComplete: () => print('Editing complete'),
+  onSubmit: (date) => print('Date submitted: $date'),
+  mouseCursor: SystemMouseCursors.text,
+  canRequestFocus: true,
+  baselineInputYear: 2000,
+  label: Text('Input Date'),
+  description: Text('Enter a date using the keyboard'),
+  autovalidateMode: AutovalidateMode.onUnfocus,
+  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
+  suffixBuilder: null,
+)
+```
+
+## Examples
+
+### Calendar Only
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='date-field' variant='calendar' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        const FDateField.calendar(
+          label: Text('Appointment Date'),
+          description: Text('Select a date for your appointment'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Input Only
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='date-field' variant='input' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FDateField.input(
+          label: Text('Appointment Date'),
+          description: Text('Select a date for your appointment'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Custom Validation
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='date-field' variant='validator' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        class ValidatorDateFieldPage extends StatefulWidget {
+          @override
+          State<ValidatorDateFieldPage> createState() => _ValidationDateFieldPageState();
+        }
+
+        class _ValidationDateFieldPageState extends State<ValidatorDateFieldPage> with SingleTickerProviderStateMixin {
+          late final FDateFieldController _controller;
+
+          @override
+          void initState() {
+            super.initState();
+            _controller = FDateFieldController(vsync: this, validator: _validate);
+          }
+
+          String? _validate(DateTime? date) => date?.weekday == 6 || date?.weekday == 7 ? 'Date cannot be a weekend.' : null;
+
+          @override
+          Widget build(BuildContext context) => FDateField(
+                controller: _controller,
+                label: const Text('Appointment Date'),
+              );
+
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='date-field' variant='form' query={{}} height={600}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        class FormDateFieldPage extends StatefulWidget {
+          @override
+          State<FormDateFieldPage> createState() => _FormDateFieldPageState();
+        }
+
+        class _FormDateFieldPageState extends State<FormDateFieldPage> with TickerProviderStateMixin {
+          final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+          late final FDateFieldController _startDateController;
+          late final FDateFieldController _endDateController;
+
+          @override
+          void initState() {
+            super.initState();
+            _startDateController = FDateFieldController(
+              vsync: this,
+              validator: _validateStartDate,
+            );
+            _endDateController = FDateFieldController(
+              vsync: this,
+              validator: _validateEndDate,
+            );
+          }
+
+          String? _validateStartDate(DateTime? date) {
+            if (date == null) {
+              return 'Please select a start date';
+            }
+            if (date.isBefore(DateTime.now())) {
+              return 'Start date must be in the future';
+            }
+            return null;
+          }
+
+          String? _validateEndDate(DateTime? date) {
+            if (date == null) {
+              return 'Please select an end date';
+            }
+            if (_startDateController.value != null && date.isBefore(_startDateController.value!)) {
+              return 'End date must be after start date';
+            }
+            return null;
+          }
+
+          @override
+          Widget build(BuildContext context) => Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  FDateField(
+                    controller: _startDateController,
+                    label: const Text('Start Date'),
+                    description: const Text('Select a start date'),
+                    autovalidateMode: AutovalidateMode.disabled,
+                  ),
+                  const SizedBox(height: 20),
+                  FDateField(
+                    controller: _endDateController,
+                    label: const Text('End Date'),
+                    description: const Text('Select an end date'),
+                    autovalidateMode: AutovalidateMode.disabled,
+                  ),
+                  const SizedBox(height: 25),
+                  FButton(
+                    label: const Text('Submit'),
+                    onPress: () {
+                      if (_formKey.currentState!.validate()) {
+                        // Form is valid, process the dates
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          @override
+          void dispose() {
+            _startDateController.dispose();
+            _endDateController.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>
