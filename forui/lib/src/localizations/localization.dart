@@ -1,5 +1,6 @@
-import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
+
+import 'package:forui/forui.dart';
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {

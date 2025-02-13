@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/gesture_detector.dart';
 import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
-import 'package:meta/meta.dart';
 
 part 'sheet.style.dart';
 

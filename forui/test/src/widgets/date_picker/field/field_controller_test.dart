@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/localizations/localizations_hr.dart';
 import 'package:forui/src/widgets/date_picker/field/field_controller.dart';
-import 'package:intl/date_symbol_data_local.dart';
-
 import '../../../test_scaffold.dart';
 
 void main() {
