@@ -27,7 +27,7 @@ jobs:
       # Publish samples
       - uses: subosito/flutter-action@v2.18.0
         with:
-          flutter-version: 3.27.x
+          flutter-version: 3.29.x
           cache: true
       - working-directory: forui
         run: |
