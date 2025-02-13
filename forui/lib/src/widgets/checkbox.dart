@@ -283,8 +283,9 @@ class FCheckboxStateStyle with Diagnosticable, _$FCheckboxStateStyleFunctions im
 /// A checkbox's error state style.
 final class FCheckboxErrorStyle extends FCheckboxStateStyle
     with _$FCheckboxErrorStyleFunctions
-    // ignore: avoid_implementing_value_types
-    implements FFormFieldErrorStyle {
+        // ignore: avoid_implementing_value_types
+        implements
+        FFormFieldErrorStyle {
   @override
   final TextStyle errorTextStyle;
 

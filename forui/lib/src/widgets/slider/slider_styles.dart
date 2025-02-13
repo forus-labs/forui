@@ -238,8 +238,9 @@ final class FSliderStateStyle with Diagnosticable, _$FSliderStateStyleFunctions 
 /// A slider error's style.
 final class FSliderErrorStyle extends FSliderStateStyle
     with _$FSliderErrorStyleFunctions
-    // ignore: avoid_implementing_value_types
-    implements FFormFieldErrorStyle {
+        // ignore: avoid_implementing_value_types
+        implements
+        FFormFieldErrorStyle {
   /// The error's [TextStyle].
   @override
   final TextStyle errorTextStyle;
