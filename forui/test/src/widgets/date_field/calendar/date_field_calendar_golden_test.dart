@@ -5,9 +5,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'package:forui/forui.dart';
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -114,10 +114,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/disabled.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/disabled.png'));
     });
 
     testWidgets('${theme.name} error', (tester) async {
@@ -137,11 +134,7 @@ void main() {
 
     testWidgets('${theme.name} tap outside unfocuses on Android/iOS', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          alignment: Alignment.topCenter,
-          child: const FDateField.calendar(key: key),
-        ),
+        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: const FDateField.calendar(key: key)),
       );
 
       await tester.tap(find.byKey(key));
@@ -160,11 +153,7 @@ void main() {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          alignment: Alignment.topCenter,
-          child: const FDateField.calendar(key: key),
-        ),
+        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: const FDateField.calendar(key: key)),
       );
 
       await tester.tap(find.byKey(key));

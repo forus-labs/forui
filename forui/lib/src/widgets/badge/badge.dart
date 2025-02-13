@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/badge/badge_content.dart';
-import 'package:meta/meta.dart';
 
 part 'badge.style.dart';
 

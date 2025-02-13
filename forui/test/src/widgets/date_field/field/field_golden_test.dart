@@ -5,9 +5,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'package:forui/forui.dart';
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -16,9 +16,7 @@ void main() {
   setUpAll(initializeDateFormatting);
 
   testWidgets('blue screen', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.blue(child: FDateField.input(style: TestScaffold.blueScreen.dateFieldStyle)),
-    );
+    await tester.pumpWidget(TestScaffold.blue(child: FDateField.input(style: TestScaffold.blueScreen.dateFieldStyle)));
 
     await expectBlueScreen(find.byType(TestScaffold));
   });
@@ -30,10 +28,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/field/placeholder.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/field/placeholder.png'));
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {

@@ -2,9 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/date_field/field/field_controller.dart';
-import 'package:meta/meta.dart';
 
 /// The locales not supported in a date field. It is mostly composed of locales that use non-western digits.
 @internal
