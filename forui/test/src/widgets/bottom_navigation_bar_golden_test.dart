@@ -17,14 +17,8 @@ void main() {
             style: TestScaffold.blueScreen.bottomNavigationBarStyle,
             index: 2,
             children: [
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.house),
-                label: const Text('Home'),
-              ),
-              FBottomNavigationBarItem(
-                icon: FIcon(FAssets.icons.layoutGrid),
-                label: const Text('Browse'),
-              ),
+              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
+              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Browse')),
             ],
           ),
         ),
@@ -41,26 +35,11 @@ void main() {
             child: FBottomNavigationBar(
               index: 2,
               children: [
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.house),
-                  label: const Text('Home'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.layoutGrid),
-                  label: const Text('Browse'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.radio),
-                  label: const Text('Radio'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.radio),
-                  label: const Text('Library'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.radio),
-                  label: const Text('Search'),
-                ),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Browse')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Radio')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Library')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Search')),
               ],
             ),
           ),
@@ -79,26 +58,11 @@ void main() {
             child: FBottomNavigationBar(
               index: 2,
               children: [
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.house),
-                  label: const Text('Home'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.layoutGrid),
-                  label: const Text('Browse'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.radio),
-                  label: const Text('Radio'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.radio),
-                  label: const Text('Library'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcon(FAssets.icons.radio),
-                  label: const Text('Search'),
-                ),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Browse')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Radio')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Library')),
+                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Search')),
               ],
             ),
           ),

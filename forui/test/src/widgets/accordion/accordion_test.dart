@@ -19,10 +19,7 @@ void main() {
                 initiallyExpanded: true,
                 child: SizedBox.square(
                   dimension: 1,
-                  child: GestureDetector(
-                    onTap: () => taps++,
-                    child: const Text('button'),
-                  ),
+                  child: GestureDetector(onTap: () => taps++, child: const Text('button')),
                 ),
               ),
             ],
@@ -45,28 +42,14 @@ void main() {
       final first = FAccordionController();
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAccordion(
-            items: [
-              FAccordionItem(
-                title: const Text('Title'),
-                child: const Text('button'),
-              ),
-            ],
-          ),
+          child: FAccordion(items: [FAccordionItem(title: const Text('Title'), child: const Text('button'))]),
         ),
       );
 
       final second = FAccordionController();
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAccordion(
-            items: [
-              FAccordionItem(
-                title: const Text('Title'),
-                child: const Text('button'),
-              ),
-            ],
-          ),
+          child: FAccordion(items: [FAccordionItem(title: const Text('Title'), child: const Text('button'))]),
         ),
       );
 

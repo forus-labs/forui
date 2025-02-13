@@ -12,16 +12,16 @@ class Parser {
   final int _initialYear;
 
   Parser(String locale, int initialYear)
-      : this._(
-          RegExp('([A-z]+)').allMatches(DateFormat.yMd(locale).pattern!).map((e) => e.group(1)!).toList(),
-          initialYear,
-          locale,
-        );
+    : this._(
+        RegExp('([A-z]+)').allMatches(DateFormat.yMd(locale).pattern!).map((e) => e.group(1)!).toList(),
+        initialYear,
+        locale,
+      );
 
   Parser._(this._parts, this._initialYear, String locale)
-      : _day = NumberFormat(_parts.contains('d') ? '#0' : '00', locale),
-        _month = NumberFormat(_parts.contains('M') ? '#0' : '00', locale),
-        _year = NumberFormat('0000', locale);
+    : _day = NumberFormat(_parts.contains('d') ? '#0' : '00', locale),
+      _month = NumberFormat(_parts.contains('M') ? '#0' : '00', locale),
+      _year = NumberFormat('0000', locale);
 
   (List<String>, Changes) parse(List<String> old, List<String> current) {
     assert(old.length == 3, 'old must have 3 parts');

@@ -92,9 +92,9 @@ class FSwitch extends StatelessWidget {
       (true, false) => (FLabelState.enabled, style.enabledStyle),
       (false, false) => (FLabelState.disabled, style.disabledStyle),
       (_, true) => (
-          FLabelState.error,
-          style.enabledStyle
-        ), // `enabledStyle` is used as error style doesn't contain any switch styles.
+        FLabelState.error,
+        style.enabledStyle,
+      ), // `enabledStyle` is used as error style doesn't contain any switch styles.
     };
 
     return GestureDetector(
@@ -189,40 +189,36 @@ final class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
 
   /// Creates a [FSwitchStyle] that inherits its properties from [colorScheme].
   FSwitchStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          focusColor: colorScheme.primary,
-          labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-          enabledStyle: FSwitchStateStyle(
-            checkedColor: colorScheme.primary,
-            uncheckedColor: colorScheme.border,
-            thumbColor: colorScheme.background,
-            labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          ),
-          disabledStyle: FSwitchStateStyle(
-            checkedColor: colorScheme.disable(colorScheme.primary),
-            uncheckedColor: colorScheme.disable(colorScheme.border),
-            thumbColor: colorScheme.background,
-            labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          ),
-          errorStyle: FSwitchErrorStyle(
-            labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-            errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          ),
-        );
+    : this(
+        focusColor: colorScheme.primary,
+        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
+        enabledStyle: FSwitchStateStyle(
+          checkedColor: colorScheme.primary,
+          uncheckedColor: colorScheme.border,
+          thumbColor: colorScheme.background,
+          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+        ),
+        disabledStyle: FSwitchStateStyle(
+          checkedColor: colorScheme.disable(colorScheme.primary),
+          uncheckedColor: colorScheme.disable(colorScheme.border),
+          thumbColor: colorScheme.background,
+          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+        ),
+        errorStyle: FSwitchErrorStyle(
+          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+        ),
+      );
 
   /// The [FLabel]'s style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
-        layout: labelLayoutStyle,
-        state: FLabelStateStyles(
-          enabledStyle: enabledStyle,
-          disabledStyle: disabledStyle,
-          errorStyle: errorStyle,
-        ),
-      );
+    layout: labelLayoutStyle,
+    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+  );
 }
 
 /// [FSwitch]'s state style.
@@ -269,9 +265,5 @@ final class FSwitchErrorStyle with Diagnosticable, _$FSwitchErrorStyleFunctions 
   final TextStyle errorTextStyle;
 
   /// Creates a [FSwitchErrorStyle].
-  FSwitchErrorStyle({
-    required this.labelTextStyle,
-    required this.descriptionTextStyle,
-    required this.errorTextStyle,
-  });
+  FSwitchErrorStyle({required this.labelTextStyle, required this.descriptionTextStyle, required this.errorTextStyle});
 }

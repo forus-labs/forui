@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 @internal
 typedef Select = TextEditingValue Function(TextEditingValue, int first, int last, int end, int separator);
 
-TextEditingValue _first(TextEditingValue value, int first, int _, int __, int ___) =>
+TextEditingValue _first(TextEditingValue value, int first, int _, int _, int _) =>
     value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
 
 TextEditingValue _middle(TextEditingValue value, int first, int last, int _, int separator) =>
@@ -37,8 +37,10 @@ class FieldController extends TextEditingController {
     int initialYear,
   ) {
     final format = DateFormat.yMd(localizations.localeName);
-    final placeholder =
-        format.pattern!.replaceAll(RegExp('d{1,2}'), 'DD').replaceAll(RegExp('M{1,2}'), 'MM').replaceAll('y', 'YYYY');
+    final placeholder = format.pattern!
+        .replaceAll(RegExp('d{1,2}'), 'DD')
+        .replaceAll(RegExp('M{1,2}'), 'MM')
+        .replaceAll('y', 'YYYY');
     final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
     return FieldController.fromValue(
       controller,
@@ -58,19 +60,20 @@ class FieldController extends TextEditingController {
     this.placeholder,
     int initialYear,
     TextEditingValue? value,
-  )   : states = WidgetStatesController(),
-        _parser = Parser(_localizations.localeName, initialYear),
-        _format = DateFormat.yMd(_localizations.localeName),
-        _suffix = RegExp(RegExp.escape(_localizations.shortDateSuffix) + r'$'),
-        super.fromValue(value) {
+  ) : states = WidgetStatesController(),
+      _parser = Parser(_localizations.localeName, initialYear),
+      _format = DateFormat.yMd(_localizations.localeName),
+      _suffix = RegExp(RegExp.escape(_localizations.shortDateSuffix) + r'$'),
+      super.fromValue(value) {
     controller.addListener(update);
   }
 
   void traverse({required bool forward}) {
     _mutating = true;
-    super.value = forward
-        ? selectParts(value, onFirst: _middle, onMiddle: _last)
-        : selectParts(value, onMiddle: _first, onLast: _middle);
+    super.value =
+        forward
+            ? selectParts(value, onFirst: _middle, onMiddle: _last)
+            : selectParts(value, onMiddle: _first, onLast: _middle);
     _mutating = false;
   }
 
@@ -79,9 +82,9 @@ class FieldController extends TextEditingController {
     final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
     super.value = selectParts(
       value,
-      onFirst: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 0, adjustment), 0),
-      onMiddle: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 1, adjustment), 1),
-      onLast: (value, _, __, ___, ____) => _update(_parser.adjust(parts, 2, adjustment), 2),
+      onFirst: (value, _, _, _, _) => _update(_parser.adjust(parts, 0, adjustment), 0),
+      onMiddle: (value, _, _, _, _) => _update(_parser.adjust(parts, 1, adjustment), 1),
+      onLast: (value, _, _, _, _) => _update(_parser.adjust(parts, 2, adjustment), 2),
     );
     controller.value = _format.tryParseStrict(super.value.text, true);
     _mutating = false;
@@ -104,8 +107,10 @@ class FieldController extends TextEditingController {
 
     final current = super.value;
     super.value = switch (value) {
-      _ when value.text.isEmpty =>
-        TextEditingValue(text: placeholder, selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length)),
+      _ when value.text.isEmpty => TextEditingValue(
+        text: placeholder,
+        selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
+      ),
       _ when text != value.text => updateParts(value),
       _ => selectParts(value),
     };

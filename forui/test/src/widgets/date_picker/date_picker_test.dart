@@ -12,25 +12,22 @@ void main() {
 
   setUpAll(initializeDateFormatting);
 
-  for (final (index, (date, start, end, expected)) in [
-    ('01/01/1899', null, null, 'January 2025'),
-    ('01/01/1949', DateTime.utc(1950), null, 'January 2025'),
-    ('01/01/1951', DateTime.utc(1950), null, 'January 1951'),
-    ('01/01/2101', null, null, 'January 2025'),
-    ('01/01/2051', null, DateTime.utc(2050), 'January 2025'),
-    ('01/01/2049', null, DateTime.utc(2050), 'January 2049'),
-  ].indexed) {
+  for (final (index, (date, start, end, expected))
+      in [
+        ('01/01/1899', null, null, 'January 2025'),
+        ('01/01/1949', DateTime.utc(1950), null, 'January 2025'),
+        ('01/01/1951', DateTime.utc(1950), null, 'January 1951'),
+        ('01/01/2101', null, null, 'January 2025'),
+        ('01/01/2051', null, DateTime.utc(2050), 'January 2025'),
+        ('01/01/2049', null, DateTime.utc(2050), 'January 2049'),
+      ].indexed) {
     testWidgets('initial month - $index', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
           child: FDatePicker(
             key: key,
-            calendar: FDatePickerCalendarProperties(
-              start: start,
-              end: end,
-              today: DateTime.utc(2025, 1, 15),
-            ),
+            calendar: FDatePickerCalendarProperties(start: start, end: end, today: DateTime.utc(2025, 1, 15)),
           ),
         ),
       );
@@ -49,12 +46,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDatePicker(
-          key: key,
-          calendar: FDatePickerCalendarProperties(
-            today: DateTime.utc(2025, 1, 15),
-          ),
-        ),
+        child: FDatePicker(key: key, calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15))),
       ),
     );
 
@@ -79,24 +71,14 @@ void main() {
     final first = FDatePickerController(vsync: tester);
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FDatePicker(
-          key: key,
-          calendar: FDatePickerCalendarProperties(
-            today: DateTime.utc(2025, 1, 15),
-          ),
-        ),
+        child: FDatePicker(key: key, calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15))),
       ),
     );
 
     final second = FDatePickerController(vsync: tester);
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FDatePicker(
-          key: key,
-          calendar: FDatePickerCalendarProperties(
-            today: DateTime.utc(2025, 1, 15),
-          ),
-        ),
+        child: FDatePicker(key: key, calendar: FDatePickerCalendarProperties(today: DateTime.utc(2025, 1, 15))),
       ),
     );
 

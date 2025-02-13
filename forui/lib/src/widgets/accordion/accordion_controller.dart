@@ -23,16 +23,14 @@ class FAccordionController extends FChangeNotifier {
   /// # Contract:
   /// * Throws [AssertionError] if [min] < 0.
   /// * Throws [AssertionError] if [max] < [min].
-  FAccordionController({
-    int min = 0,
-    int? max,
-  })  : _min = min,
-        _max = max,
-        controllers = {},
-        _expanded = {},
-        assert(min >= 0, 'The min value must be greater than or equal to 0.'),
-        assert(max == null || 0 <= max, 'The max value must be greater than or equal to 0.'),
-        assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
+  FAccordionController({int min = 0, int? max})
+    : _min = min,
+      _max = max,
+      controllers = {},
+      _expanded = {},
+      assert(min >= 0, 'The min value must be greater than or equal to 0.'),
+      assert(max == null || 0 <= max, 'The max value must be greater than or equal to 0.'),
+      assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   /// Creates an [FAccordionController] that allows only one section to be expanded at a time.
   FAccordionController.radio() : this(max: 1);
@@ -68,10 +66,10 @@ class FAccordionController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> toggle(int index) async => switch (controllers[index]?.value) {
-        null => false,
-        1 => await collapse(index),
-        _ => await expand(index),
-      };
+    null => false,
+    1 => await collapse(index),
+    _ => await expand(index),
+  };
 
   /// Expands the item at the given [index], returning true if expanded.
   ///

@@ -209,10 +209,7 @@ class _ListState extends _State<ListWheel> {
           child: DefaultTextStyle.merge(
             textHeightBehavior: style.textHeightBehavior,
             style: style.textStyle,
-            child: Semantics(
-              inMutuallyExclusiveGroup: true,
-              child: child,
-            ),
+            child: Semantics(inMutuallyExclusiveGroup: true, child: child),
           ),
         ),
     ];
@@ -250,12 +247,13 @@ class BuilderWheel extends FPickerWheel {
 class _BuilderState extends _State<BuilderWheel> {
   @override
   ListWheelChildDelegate delegate(FPickerStyle style) => ListWheelChildBuilderDelegate(
-        builder: (context, index) => Center(
+    builder:
+        (context, index) => Center(
           child: DefaultTextStyle.merge(
             textHeightBehavior: style.textHeightBehavior,
             style: style.textStyle,
             child: widget.builder(context, index),
           ),
         ),
-      );
+  );
 }

@@ -35,21 +35,11 @@ class FAvatar extends StatelessWidget {
     String? semanticLabel,
     Widget? fallback,
     super.key,
-  }) : child = Content(
-          style: style,
-          size: size,
-          image: image,
-          semanticLabel: semanticLabel,
-          fallback: fallback,
-        );
+  }) : child = Content(style: style, size: size, image: image, semanticLabel: semanticLabel, fallback: fallback);
 
   /// Creates a [FAvatar] without a fallback.
-  FAvatar.raw({
-    Widget? child,
-    this.style,
-    this.size = 40.0,
-    super.key,
-  }) : child = child ?? PlaceholderContent(style: style, size: size);
+  FAvatar.raw({Widget? child, this.style, this.size = 40.0, super.key})
+    : child = child ?? PlaceholderContent(style: style, size: size);
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +49,9 @@ class FAvatar extends StatelessWidget {
       alignment: Alignment.center,
       height: size,
       width: size,
-      decoration: BoxDecoration(
-        color: style.backgroundColor,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: style.backgroundColor, shape: BoxShape.circle),
       clipBehavior: Clip.hardEdge,
-      child: DefaultTextStyle(
-        style: style.textStyle,
-        child: child,
-      ),
+      child: DefaultTextStyle(style: style.textStyle, child: child),
     );
   }
 
@@ -108,9 +92,9 @@ final class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
 
   /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
   FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          backgroundColor: colorScheme.muted,
-          foregroundColor: colorScheme.mutedForeground,
-          textStyle: typography.base.copyWith(color: colorScheme.mutedForeground, height: 0),
-        );
+    : this(
+        backgroundColor: colorScheme.muted,
+        foregroundColor: colorScheme.mutedForeground,
+        textStyle: typography.base.copyWith(color: colorScheme.mutedForeground, height: 0),
+      );
 }

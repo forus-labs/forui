@@ -12,19 +12,11 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
   final FTileContentStyle style;
   final FTileDivider divider;
 
-  const TileRenderObject({
-    required this.style,
-    required this.divider,
-    super.key,
-    super.children,
-  });
+  const TileRenderObject({required this.style, required this.divider, super.key, super.children});
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderTile(
-        style,
-        divider,
-        Directionality.maybeOf(context) ?? TextDirection.ltr,
-      );
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderTile(style, divider, Directionality.maybeOf(context) ?? TextDirection.ltr);
 
   @override
   // ignore: library_private_types_in_public_api

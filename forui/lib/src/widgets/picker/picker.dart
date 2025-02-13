@@ -87,12 +87,7 @@ class FPicker extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.
-  const FPicker({
-    required this.children,
-    this.controller,
-    this.style,
-    super.key,
-  });
+  const FPicker({required this.children, this.controller, this.style, super.key});
 
   @override
   State<FPicker> createState() => _FPickerState();
@@ -165,10 +160,7 @@ class _FPickerState extends State<FPicker> {
       children: [
         Container(
           height: selectionExtent,
-          decoration: BoxDecoration(
-            color: style.selectionColor,
-            borderRadius: style.selectionBorderRadius,
-          ),
+          decoration: BoxDecoration(color: style.selectionColor, borderRadius: style.selectionBorderRadius),
         ),
         // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
         NotificationListener<ScrollMetricsNotification>(
@@ -188,11 +180,7 @@ class _FPickerState extends State<FPicker> {
               children: [
                 for (final child in widget.children)
                   if (child is FPickerWheel)
-                    PickerData(
-                      controller: _controller.wheels[wheelIndex++],
-                      style: style,
-                      child: child,
-                    )
+                    PickerData(controller: _controller.wheels[wheelIndex++], style: style, child: child)
                   else
                     Center(
                       child: DefaultTextStyle.merge(
@@ -229,12 +217,7 @@ class PickerData extends InheritedWidget {
   final FixedExtentScrollController controller;
   final FPickerStyle style;
 
-  const PickerData({
-    required this.controller,
-    required this.style,
-    required super.child,
-    super.key,
-  });
+  const PickerData({required this.controller, required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(PickerData old) => controller != old.controller || style != old.style;

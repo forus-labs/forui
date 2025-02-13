@@ -20,10 +20,7 @@ void main() {
       ).selectable(DateTime(2024, 1, 1, 1));
     });
 
-    for (final (date, expected) in [
-      (DateTime(2024, 5, 4, 3), true),
-      (DateTime(2024, 5, 5, 3), false),
-    ]) {
+    for (final (date, expected) in [(DateTime(2024, 5, 4, 3), true), (DateTime(2024, 5, 5, 3), false)]) {
       test('selected(...) contains date', () {
         final controller = FCalendarController.date(initialSelection: DateTime(2024, 5, 4));
         expect(controller.selected(date), expected);
@@ -67,13 +64,12 @@ void main() {
       ).selectable(DateTime(2024, 1, 1, 1));
     });
 
-    for (final (date, expected) in [
-      (DateTime.utc(2024, 5, 4), true),
-      (DateTime.utc(2024, 5, 5), false),
-    ]) {
+    for (final (date, expected) in [(DateTime.utc(2024, 5, 4), true), (DateTime.utc(2024, 5, 5), false)]) {
       test('selected(...) contains date', () {
-        final controller =
-            FCalendarController.date(initialSelection: DateTime.utc(2024, 5, 4), truncateAndStripTimezone: false);
+        final controller = FCalendarController.date(
+          initialSelection: DateTime.utc(2024, 5, 4),
+          truncateAndStripTimezone: false,
+        );
         expect(controller.selected(date), expected);
       });
     }
@@ -95,10 +91,9 @@ void main() {
   group('FCalendarController.dates(...)', () {
     test(
       'constructor converts date time',
-      () => expect(
-        FCalendarController.dates(initialSelections: {DateTime(2024, 11, 30, 12)}).value,
-        {DateTime.utc(2024, 11, 30)},
-      ),
+      () => expect(FCalendarController.dates(initialSelections: {DateTime(2024, 11, 30, 12)}).value, {
+        DateTime.utc(2024, 11, 30),
+      }),
     );
 
     test('selectable(...)', () {
@@ -110,10 +105,7 @@ void main() {
       ).selectable(DateTime(2024, 1, 1, 1));
     });
 
-    for (final (date, expected) in [
-      (DateTime(2024), true),
-      (DateTime(2025), false),
-    ]) {
+    for (final (date, expected) in [(DateTime(2024), true), (DateTime(2025), false)]) {
       test('selected(...)', () {
         final controller = FCalendarController.dates(initialSelections: {DateTime.utc(2024)});
         expect(controller.selected(date), expected);
@@ -156,13 +148,12 @@ void main() {
       ).selectable(DateTime(2024, 1, 1, 1));
     });
 
-    for (final (date, expected) in [
-      (DateTime.utc(2024), true),
-      (DateTime.utc(2025), false),
-    ]) {
+    for (final (date, expected) in [(DateTime.utc(2024), true), (DateTime.utc(2025), false)]) {
       test('selected(...)', () {
-        final controller =
-            FCalendarController.dates(initialSelections: {DateTime.utc(2024)}, truncateAndStripTimezone: false);
+        final controller = FCalendarController.dates(
+          initialSelections: {DateTime.utc(2024)},
+          truncateAndStripTimezone: false,
+        );
         expect(controller.selected(date), expected);
       });
     }

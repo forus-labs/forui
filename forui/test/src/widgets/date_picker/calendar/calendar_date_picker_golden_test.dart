@@ -20,10 +20,7 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FDatePicker.calendar(
-            style: TestScaffold.blueScreen.datePickerStyle,
-            key: key,
-          ),
+          home: FDatePicker.calendar(style: TestScaffold.blueScreen.datePickerStyle, key: key),
         ),
       ),
     );
@@ -35,12 +32,7 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: const FDatePicker.calendar(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FDatePicker.calendar(key: key)));
 
       await expectLater(
         find.byType(TestScaffold),
@@ -49,19 +41,9 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: const FDatePicker.calendar(
-            prefixBuilder: null,
-          ),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDatePicker.calendar(prefixBuilder: null)));
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/no-icon.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-picker/${theme.name}/calendar/no-icon.png'));
     });
 
     testWidgets('${theme.name} hr locale', (tester) async {
@@ -70,10 +52,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('hr'),
           alignment: Alignment.topCenter,
-          child: FDatePicker.calendar(
-            key: key,
-            today: DateTime.utc(2025, 1, 15),
-          ),
+          child: FDatePicker.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
         ),
       );
 
@@ -92,10 +71,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDatePicker.calendar(
-            key: key,
-            today: DateTime.utc(2025, 1, 15),
-          ),
+          child: FDatePicker.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
         ),
       );
 
@@ -105,10 +81,7 @@ void main() {
       await tester.tap(find.text('15'));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/text.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-picker/${theme.name}/calendar/text.png'));
     });
 
     testWidgets('${theme.name} does not auto hide', (tester) async {
@@ -117,11 +90,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDatePicker.calendar(
-            key: key,
-            today: DateTime.utc(2025, 1, 15),
-            autoHide: false,
-          ),
+          child: FDatePicker.calendar(key: key, today: DateTime.utc(2025, 1, 15), autoHide: false),
         ),
       );
 
@@ -139,10 +108,7 @@ void main() {
 
     testWidgets('${theme.name} disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: const FDatePicker.calendar(enabled: false, key: key),
-        ),
+        TestScaffold.app(theme: theme.data, child: const FDatePicker.calendar(enabled: false, key: key)),
       );
 
       await tester.tap(find.byKey(key));
@@ -166,10 +132,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/calendar/error.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-picker/${theme.name}/calendar/error.png'));
     });
 
     testWidgets('${theme.name} tap outside unfocuses on Android/iOS', (tester) async {

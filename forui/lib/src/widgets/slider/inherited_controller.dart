@@ -21,11 +21,7 @@ class InheritedController extends InheritedModel<UniqueKey> {
   final FSliderController controller;
   final FSliderSelection _selection;
 
-  InheritedController({
-    required this.controller,
-    required super.child,
-    super.key,
-  }) : _selection = controller.selection;
+  InheritedController({required this.controller, required super.child, super.key}) : _selection = controller.selection;
 
   @override
   bool updateShouldNotify(InheritedController old) => _selection != old._selection || controller != old.controller;

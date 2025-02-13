@@ -90,27 +90,22 @@ class FTheme extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FTheme({
-    required this.data,
-    required this.child,
-    this.textDirection,
-    super.key,
-  });
+  const FTheme({required this.data, required this.child, this.textDirection, super.key});
 
   @override
   Widget build(BuildContext context) => _InheritedTheme(
-        data: data,
-        child: Directionality(
-          textDirection: textDirection ?? Directionality.maybeOf(context) ?? TextDirection.ltr,
-          child: DefaultTextStyle(
-            style: data.typography.base.copyWith(
-              fontFamily: data.typography.defaultFontFamily,
-              color: data.colorScheme.foreground,
-            ),
-            child: child,
-          ),
+    data: data,
+    child: Directionality(
+      textDirection: textDirection ?? Directionality.maybeOf(context) ?? TextDirection.ltr,
+      child: DefaultTextStyle(
+        style: data.typography.base.copyWith(
+          fontFamily: data.typography.defaultFontFamily,
+          color: data.colorScheme.foreground,
         ),
-      );
+        child: child,
+      ),
+    ),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -10,10 +10,12 @@ void main() {
     late FPickerController controller;
 
     await tester.pumpWidget(
-      HookBuilder(builder: (context) {
-        controller = useFPickerController(initialIndexes: [1, 2, 3]);
-        return Container();
-      }),
+      HookBuilder(
+        builder: (context) {
+          controller = useFPickerController(initialIndexes: [1, 2, 3]);
+          return Container();
+        },
+      ),
     );
 
     expect(controller.value, [1, 2, 3]);

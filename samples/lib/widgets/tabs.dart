@@ -7,65 +7,51 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TabsPage extends Sample {
-  TabsPage({
-    @queryParam super.theme,
-  });
+  TabsPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: FTabs(
-              tabs: [
-                FTabEntry(
-                  label: const Text('Account'),
-                  content: FCard(
-                    title: const Text('Account'),
-                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-                    child: Column(
-                      children: [
-                        const FTextField(
-                          label: Text('Name'),
-                          hint: 'John Renalo',
-                        ),
-                        const SizedBox(height: 10),
-                        const FTextField(
-                          label: Text('Email'),
-                          hint: 'john@doe.com',
-                        ),
-                        const SizedBox(height: 16),
-                        FButton(
-                          label: const Text('Save'),
-                          onPress: () {},
-                        ),
-                      ],
-                    ),
-                  ),
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Padding(
+        padding: const EdgeInsets.all(16),
+        child: FTabs(
+          tabs: [
+            FTabEntry(
+              label: const Text('Account'),
+              content: FCard(
+                title: const Text('Account'),
+                subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+                child: Column(
+                  children: [
+                    const FTextField(label: Text('Name'), hint: 'John Renalo'),
+                    const SizedBox(height: 10),
+                    const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+                    const SizedBox(height: 16),
+                    FButton(label: const Text('Save'), onPress: () {}),
+                  ],
                 ),
-                FTabEntry(
-                  label: const Text('Password'),
-                  content: FCard(
-                    title: const Text('Password'),
-                    subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-                    child: Column(
-                      children: [
-                        const FTextField(label: Text('Current password')),
-                        const SizedBox(height: 10),
-                        const FTextField(label: Text('New password')),
-                        const SizedBox(height: 16),
-                        FButton(
-                          label: const Text('Save'),
-                          onPress: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
-      );
+            FTabEntry(
+              label: const Text('Password'),
+              content: FCard(
+                title: const Text('Password'),
+                subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+                child: Column(
+                  children: [
+                    const FTextField(label: Text('Current password')),
+                    const SizedBox(height: 10),
+                    const FTextField(label: Text('New password')),
+                    const SizedBox(height: 16),
+                    FButton(label: const Text('Save'), onPress: () {}),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }

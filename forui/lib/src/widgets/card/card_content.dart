@@ -14,14 +14,7 @@ class Content extends StatelessWidget {
   final Widget? child;
   final FCardContentStyle? style;
 
-  const Content({
-    this.image,
-    this.title,
-    this.subtitle,
-    this.child,
-    this.style,
-    super.key,
-  });
+  const Content({this.image, this.title, this.subtitle, this.child, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +25,7 @@ class Content extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (image != null)
-            ClipRRect(
-              borderRadius: context.theme.style.borderRadius,
-              child: image,
-            ),
+          if (image != null) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
           if ((title != null || subtitle != null || child != null) && image != null) const SizedBox(height: 10),
           if (title != null)
             DefaultTextStyle.merge(
@@ -95,12 +84,12 @@ final class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions 
 
   /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
   FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          titleTextStyle: typography.xl2.copyWith(
-            fontWeight: FontWeight.w600,
-            color: colorScheme.foreground,
-            height: 1.5,
-          ),
-          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-        );
+    : this(
+        titleTextStyle: typography.xl2.copyWith(
+          fontWeight: FontWeight.w600,
+          color: colorScheme.foreground,
+          height: 1.5,
+        ),
+        subtitleTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+      );
 }

@@ -21,13 +21,7 @@ void main() {
       double max, {
       double step = 0.05,
       ({double min, double max}) extent = (min: 0.1, max: 0.3),
-    }) =>
-        ContinuousSelection(
-          step: step,
-          mainAxisExtent: 100.0,
-          extent: extent,
-          offset: (min: min, max: max),
-        );
+    }) => ContinuousSelection(step: step, mainAxisExtent: 100.0, extent: extent, offset: (min: min, max: max));
 
     for (final (description, selection) in [
       ('step negative', () => value(0.2, 0.4, step: -0.05)),
@@ -105,33 +99,32 @@ void main() {
       double max, {
       List<double> ticks = const [0, 0.125, 0.25, 0.5, 0.75, 0.875, 1],
       ({double min, double max}) extent = (min: 0.01, max: 0.6),
-    }) =>
-        DiscreteSelection(
-          ticks: SplayTreeMap.fromIterable(ticks, value: (_) {}),
-          mainAxisExtent: 100.0,
-          extent: extent,
-          offset: (min: min, max: max),
-        );
+    }) => DiscreteSelection(
+      ticks: SplayTreeMap.fromIterable(ticks, value: (_) {}),
+      mainAxisExtent: 100.0,
+      extent: extent,
+      offset: (min: min, max: max),
+    );
 
     for (final constructor in [
       () => DiscreteSelection(
-            ticks: SplayTreeMap(),
-            mainAxisExtent: 100.0,
-            extent: (min: 0, max: 1),
-            offset: (min: 0.1, max: 0.2),
-          ),
+        ticks: SplayTreeMap(),
+        mainAxisExtent: 100.0,
+        extent: (min: 0, max: 1),
+        offset: (min: 0.1, max: 0.2),
+      ),
       () => DiscreteSelection(
-            ticks: SplayTreeMap.fromIterable([-1.0], value: (_) {}),
-            mainAxisExtent: 100.0,
-            extent: (min: 0, max: 1),
-            offset: (min: 0.1, max: 0.2),
-          ),
+        ticks: SplayTreeMap.fromIterable([-1.0], value: (_) {}),
+        mainAxisExtent: 100.0,
+        extent: (min: 0, max: 1),
+        offset: (min: 0.1, max: 0.2),
+      ),
       () => DiscreteSelection(
-            ticks: SplayTreeMap.fromIterable([1.1], value: (_) {}),
-            mainAxisExtent: 100.0,
-            extent: (min: 0, max: 1),
-            offset: (min: 0.1, max: 0.2),
-          ),
+        ticks: SplayTreeMap.fromIterable([1.1], value: (_) {}),
+        mainAxisExtent: 100.0,
+        extent: (min: 0, max: 1),
+        offset: (min: 0.1, max: 0.2),
+      ),
     ]) {
       test('constructor', () => expect(constructor, throwsAssertionError));
     }
@@ -150,12 +143,7 @@ void main() {
         });
       }
 
-      for (final (min, extend) in [
-        (true, true),
-        (false, true),
-        (true, false),
-        (false, false),
-      ]) {
+      for (final (min, extend) in [(true, true), (false, true), (true, false), (false, false)]) {
         test('single point - ${min ? 'min' : 'max'} ${extend ? 'extend' : 'shrink'}', () {
           expect(
             value(0.5, 0.5, extent: (min: 0, max: 1), ticks: [0.5]).step(min: min, extend: extend),
@@ -202,25 +190,27 @@ void main() {
         );
       });
 
-      for (final (index, (value, to, expected)) in [
-        (value(0.25, 0.5), 20.0, value(0.25, 0.5)),
-        (value(0.25, 0.5), 30.0, value(0.25, 0.5)),
-        (value(0.25, 0.5), 13.0, value(0.125, 0.5)),
-        (value(0.25, 0.75), 40.0, value(0.5, 0.75)),
-        (value(0.25, 0.5), 5.0, value(0, 0.5)),
-        (value(0.25, 0.5), 10.0, value(0.125, 0.5)),
-      ].indexed) {
+      for (final (index, (value, to, expected))
+          in [
+            (value(0.25, 0.5), 20.0, value(0.25, 0.5)),
+            (value(0.25, 0.5), 30.0, value(0.25, 0.5)),
+            (value(0.25, 0.5), 13.0, value(0.125, 0.5)),
+            (value(0.25, 0.75), 40.0, value(0.5, 0.75)),
+            (value(0.25, 0.5), 5.0, value(0, 0.5)),
+            (value(0.25, 0.5), 10.0, value(0.125, 0.5)),
+          ].indexed) {
         test('[$index] min extend/shrink', () => expect(value.move(min: true, to: to), expected));
       }
 
-      for (final (index, (value, to, expected)) in [
-        (value(0.5, 0.75), 55.0, value(0.5, 0.75)),
-        (value(0.5, 0.75), 45.0, value(0.5, 0.75)),
-        (value(0.5, 0.75), 87.0, value(0.5, 0.875)),
-        (value(0.25, 0.75), 60.0, value(0.25, 0.5)),
-        (value(0.5, 0.75), 95.0, value(0.5, 1)),
-        (value(0.5, 0.75), 90.0, value(0.5, 0.875)),
-      ].indexed) {
+      for (final (index, (value, to, expected))
+          in [
+            (value(0.5, 0.75), 55.0, value(0.5, 0.75)),
+            (value(0.5, 0.75), 45.0, value(0.5, 0.75)),
+            (value(0.5, 0.75), 87.0, value(0.5, 0.875)),
+            (value(0.25, 0.75), 60.0, value(0.25, 0.5)),
+            (value(0.5, 0.75), 95.0, value(0.5, 1)),
+            (value(0.5, 0.75), 90.0, value(0.5, 0.875)),
+          ].indexed) {
         test('[$index] max extend/shrink', () => expect(value.move(min: false, to: to), expected));
       }
     });
@@ -230,13 +220,7 @@ void main() {
     late SplayTreeMap<double, void> map;
 
     setUp(() {
-      map = SplayTreeMap.from({
-        1.0: null,
-        2.0: null,
-        3.0: null,
-        4.0: null,
-        5.0: null,
-      });
+      map = SplayTreeMap.from({1.0: null, 2.0: null, 3.0: null, 4.0: null, 5.0: null});
     });
 
     test('firstKeysAfter(...)', () {

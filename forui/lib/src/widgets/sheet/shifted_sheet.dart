@@ -23,12 +23,8 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
   });
 
   @override
-  RenderBox createRenderObject(BuildContext context) => _ShiftedSheet(
-        side: side,
-        value: value,
-        mainAxisMaxRatio: mainAxisMaxRatio,
-        onChange: onChange,
-      );
+  RenderBox createRenderObject(BuildContext context) =>
+      _ShiftedSheet(side: side, value: value, mainAxisMaxRatio: mainAxisMaxRatio, onChange: onChange);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -63,11 +59,11 @@ class _ShiftedSheet extends RenderShiftedBox {
     required double value,
     required double? mainAxisMaxRatio,
     required ValueChanged<Size>? onChange,
-  })  : _side = side,
-        _value = value,
-        _mainAxisMaxRatio = mainAxisMaxRatio,
-        _onChange = onChange,
-        super(null);
+  }) : _side = side,
+       _value = value,
+       _mainAxisMaxRatio = mainAxisMaxRatio,
+       _onChange = onChange,
+       super(null);
 
   @override
   void performLayout() {
@@ -106,24 +102,25 @@ class _ShiftedSheet extends RenderShiftedBox {
     return result + positionChild(constraints.biggest, childSize).dy;
   }
 
-  BoxConstraints constrainChild(BoxConstraints constraints) => side.vertical
-      ? BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          maxHeight: _mainAxisMaxRatio == null ? constraints.maxHeight : constraints.maxHeight * _mainAxisMaxRatio!,
-        )
-      : BoxConstraints(
-          maxWidth: _mainAxisMaxRatio == null ? constraints.maxWidth : constraints.maxWidth * _mainAxisMaxRatio!,
-          minHeight: constraints.maxHeight,
-          maxHeight: constraints.maxHeight,
-        );
+  BoxConstraints constrainChild(BoxConstraints constraints) =>
+      side.vertical
+          ? BoxConstraints(
+            minWidth: constraints.maxWidth,
+            maxWidth: constraints.maxWidth,
+            maxHeight: _mainAxisMaxRatio == null ? constraints.maxHeight : constraints.maxHeight * _mainAxisMaxRatio!,
+          )
+          : BoxConstraints(
+            maxWidth: _mainAxisMaxRatio == null ? constraints.maxWidth : constraints.maxWidth * _mainAxisMaxRatio!,
+            minHeight: constraints.maxHeight,
+            maxHeight: constraints.maxHeight,
+          );
 
   Offset positionChild(Size size, Size childSize) => switch (side) {
-        FLayout.ttb => Offset(0, childSize.height * (_value - 1)),
-        FLayout.btt => Offset(0, size.height - childSize.height * _value),
-        FLayout.ltr => Offset(childSize.width * (_value - 1), 0),
-        FLayout.rtl => Offset(size.width - childSize.width * _value, 0),
-      };
+    FLayout.ttb => Offset(0, childSize.height * (_value - 1)),
+    FLayout.btt => Offset(0, size.height - childSize.height * _value),
+    FLayout.ltr => Offset(childSize.width * (_value - 1), 0),
+    FLayout.rtl => Offset(size.width - childSize.width * _value, 0),
+  };
 
   @override
   Size computeDryLayout(BoxConstraints constraints) => constraints.biggest;

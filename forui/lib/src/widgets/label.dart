@@ -85,36 +85,34 @@ final class FLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ??
+    final style =
+        this.style ??
         switch (axis) {
           Axis.horizontal => context.theme.labelStyles.horizontalStyle,
           Axis.vertical => context.theme.labelStyles.verticalStyle,
         };
 
     if (label == null && description == null && error == null) {
-      return Padding(
-        padding: style.layout.childPadding,
-        child: child,
-      );
+      return Padding(padding: style.layout.childPadding, child: child);
     }
 
     return switch (axis) {
       Axis.horizontal => _FHorizontalLabel(
-          style: style,
-          label: label,
-          description: description,
-          error: error,
-          state: state,
-          child: child,
-        ),
+        style: style,
+        label: label,
+        description: description,
+        error: error,
+        state: state,
+        child: child,
+      ),
       Axis.vertical => _FVerticalLabel(
-          style: style,
-          label: label,
-          description: description,
-          error: error,
-          state: state,
-          child: child,
-        ),
+        style: style,
+        label: label,
+        description: description,
+        error: error,
+        state: state,
+        child: child,
+      ),
     };
   }
 
@@ -155,25 +153,13 @@ final class _FHorizontalLabel extends StatelessWidget {
     return Table(
       defaultColumnWidth: const IntrinsicColumnWidth(),
       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      columnWidths: const {
-        0: IntrinsicColumnWidth(),
-        1: FlexColumnWidth(),
-      },
+      columnWidths: const {0: IntrinsicColumnWidth(), 1: FlexColumnWidth()},
       children: [
         TableRow(
           children: [
-            TableCell(
-              child: Padding(
-                padding: style.layout.childPadding,
-                child: child,
-              ),
-            ),
+            TableCell(child: Padding(padding: style.layout.childPadding, child: child)),
             if (label != null)
-              _buildCell(
-                padding: style.layout.labelPadding,
-                textStyle: stateStyle.labelTextStyle,
-                child: label,
-              )
+              _buildCell(padding: style.layout.labelPadding, textStyle: stateStyle.labelTextStyle, child: label)
             else
               _buildCell(
                 padding: style.layout.descriptionPadding,
@@ -200,10 +186,7 @@ final class _FHorizontalLabel extends StatelessWidget {
               TableCell(
                 child: Padding(
                   padding: style.layout.errorPadding,
-                  child: DefaultTextStyle(
-                    style: style.state.errorStyle.errorTextStyle,
-                    child: error!,
-                  ),
+                  child: DefaultTextStyle(style: style.state.errorStyle.errorTextStyle, child: error!),
                 ),
               ),
             ],
@@ -212,24 +195,12 @@ final class _FHorizontalLabel extends StatelessWidget {
     );
   }
 
-  Widget _buildCell({
-    required EdgeInsets padding,
-    required TextStyle textStyle,
-    Widget? child,
-  }) {
+  Widget _buildCell({required EdgeInsets padding, required TextStyle textStyle, Widget? child}) {
     if (child == null) {
       return const TableCell(child: SizedBox());
     }
 
-    return TableCell(
-      child: Padding(
-        padding: padding,
-        child: DefaultTextStyle(
-          style: textStyle,
-          child: child,
-        ),
-      ),
-    );
+    return TableCell(child: Padding(padding: padding, child: DefaultTextStyle(style: textStyle, child: child)));
   }
 
   @override
@@ -279,10 +250,7 @@ class _FVerticalLabel extends StatelessWidget {
               child: label!,
             ),
           ),
-        Padding(
-          padding: style.layout.childPadding,
-          child: child,
-        ),
+        Padding(padding: style.layout.childPadding, child: child),
         if (description != null)
           Padding(
             padding: style.layout.descriptionPadding,
@@ -325,29 +293,26 @@ final class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   final FLabelStyle verticalStyle;
 
   /// Creates a [FLabelStyles].
-  const FLabelStyles({
-    required this.horizontalStyle,
-    required this.verticalStyle,
-  });
+  const FLabelStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FLabelStyles] that inherits its properties from the given [style].
   FLabelStyles.inherit({required FStyle style})
-      : horizontalStyle = (
-          layout: const FLabelLayoutStyle(
-            childPadding: EdgeInsets.symmetric(horizontal: 8),
-            descriptionPadding: EdgeInsets.only(top: 2),
-            errorPadding: EdgeInsets.only(top: 2),
-          ),
-          state: FLabelStateStyles.inherit(style: style),
+    : horizontalStyle = (
+        layout: const FLabelLayoutStyle(
+          childPadding: EdgeInsets.symmetric(horizontal: 8),
+          descriptionPadding: EdgeInsets.only(top: 2),
+          errorPadding: EdgeInsets.only(top: 2),
         ),
-        verticalStyle = (
-          layout: const FLabelLayoutStyle(
-            labelPadding: EdgeInsets.only(bottom: 5),
-            descriptionPadding: EdgeInsets.only(top: 5),
-            errorPadding: EdgeInsets.only(top: 5),
-          ),
-          state: FLabelStateStyles.inherit(style: style)
-        );
+        state: FLabelStateStyles.inherit(style: style),
+      ),
+      verticalStyle = (
+        layout: const FLabelLayoutStyle(
+          labelPadding: EdgeInsets.only(bottom: 5),
+          descriptionPadding: EdgeInsets.only(top: 5),
+          errorPadding: EdgeInsets.only(top: 5),
+        ),
+        state: FLabelStateStyles.inherit(style: style),
+      );
 }
 
 /// The [FLabel]'s layout style.
@@ -392,17 +357,13 @@ class FLabelStateStyles with Diagnosticable, _$FLabelStateStylesFunctions {
   final FFormFieldErrorStyle errorStyle;
 
   /// Creates a [FLabelStateStyles].
-  FLabelStateStyles({
-    required this.enabledStyle,
-    required this.disabledStyle,
-    required this.errorStyle,
-  });
+  FLabelStateStyles({required this.enabledStyle, required this.disabledStyle, required this.errorStyle});
 
   /// Creates a [FLabelStateStyles] that inherits its properties from [style].
   FLabelStateStyles.inherit({required FStyle style})
-      : this(
-          enabledStyle: style.enabledFormFieldStyle,
-          disabledStyle: style.disabledFormFieldStyle,
-          errorStyle: style.errorFormFieldStyle,
-        );
+    : this(
+        enabledStyle: style.enabledFormFieldStyle,
+        disabledStyle: style.disabledFormFieldStyle,
+        errorStyle: style.errorFormFieldStyle,
+      );
 }

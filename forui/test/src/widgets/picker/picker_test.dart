@@ -8,20 +8,14 @@ import '../../test_scaffold.dart';
 void main() {
   group('FPicker', () {
     Widget picker([FPickerController? controller]) => TestScaffold(
-          child: FPicker(
-            controller: controller,
-            children: [
-              for (var i = 0; i < (controller?.initialIndexes.length ?? 2); i++)
-                FPickerWheel(
-                  children: [
-                    Text('${i}A'),
-                    Text('${i}B'),
-                    Text('${i}C'),
-                  ],
-                ),
-            ],
-          ),
-        );
+      child: FPicker(
+        controller: controller,
+        children: [
+          for (var i = 0; i < (controller?.initialIndexes.length ?? 2); i++)
+            FPickerWheel(children: [Text('${i}A'), Text('${i}B'), Text('${i}C')]),
+        ],
+      ),
+    );
 
     testWidgets('different controller size', (tester) async {
       final initialController = FPickerController(initialIndexes: [1, 1]);

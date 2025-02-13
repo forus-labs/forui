@@ -13,22 +13,18 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFAccordionController();
-          return FAccordion(
-            controller: controller,
-            items: [
-              FAccordionItem(
-                title: const Text('Header 1'),
-                child: const Text('Body 1'),
-              ),
-              FAccordionItem(
-                title: const Text('Header 1'),
-                child: const Text('Body 1'),
-              ),
-            ],
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFAccordionController();
+            return FAccordion(
+              controller: controller,
+              items: [
+                FAccordionItem(title: const Text('Header 1'), child: const Text('Body 1')),
+                FAccordionItem(title: const Text('Header 1'), child: const Text('Body 1')),
+              ],
+            );
+          },
+        ),
       ),
     );
 

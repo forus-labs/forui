@@ -18,10 +18,7 @@ void main() {
           child: FPopover(
             controller: controller,
             popoverBuilder: (context, style, _) => const Text('popover'),
-            child: FButton(
-              onPress: controller.toggle,
-              label: const Text('target'),
-            ),
+            child: FButton(onPress: controller.toggle, label: const Text('target')),
           ),
         ),
       );
@@ -44,10 +41,7 @@ void main() {
             controller: controller,
             hideOnTapOutside: FHidePopoverRegion.none,
             popoverBuilder: (context, style, _) => const Text('popover'),
-            child: FButton(
-              onPress: controller.toggle,
-              label: const Text('target'),
-            ),
+            child: FButton(onPress: controller.toggle, label: const Text('target')),
           ),
         ),
       );
@@ -71,13 +65,7 @@ void main() {
             hideOnTapOutside: FHidePopoverRegion.excludeTarget,
             popoverBuilder: (context, style, _) => const Text('popover'),
             child: Row(
-              children: [
-                const Text('other'),
-                FButton(
-                  onPress: controller.toggle,
-                  label: const Text('target'),
-                ),
-              ],
+              children: [const Text('other'), FButton(onPress: controller.toggle, label: const Text('target'))],
             ),
           ),
         ),
@@ -106,13 +94,7 @@ void main() {
             controller: controller,
             popoverBuilder: (context, style, _) => const Text('follower'),
             child: Row(
-              children: [
-                const Text('other'),
-                FButton(
-                  onPress: controller.toggle,
-                  label: const Text('target'),
-                ),
-              ],
+              children: [const Text('other'), FButton(onPress: controller.toggle, label: const Text('target'))],
             ),
           ),
         ),
@@ -137,11 +119,7 @@ void main() {
           child: FPopover.automatic(
             controller: controller,
             popoverBuilder: (context, style, _) => const Text('popover'),
-            child: Container(
-              color: Colors.black,
-              height: 10,
-              width: 10,
-            ),
+            child: Container(color: Colors.black, height: 10, width: 10),
           ),
         ),
       );
@@ -165,34 +143,19 @@ void main() {
           child: Column(
             children: [
               FPopover.automatic(
-                popoverBuilder: (context, style, _) => Row(
-                  children: [
-                    FButton(
-                      onPress: () {},
-                      label: const Text('1'),
+                popoverBuilder:
+                    (context, style, _) => Row(
+                      children: [
+                        FButton(onPress: () {}, label: const Text('1')),
+                        FButton(onPress: () {}, label: const Text('2')),
+                        FButton(onPress: () {}, label: const Text('3')),
+                      ],
                     ),
-                    FButton(
-                      onPress: () {},
-                      label: const Text('2'),
-                    ),
-                    FButton(
-                      onPress: () {},
-                      label: const Text('3'),
-                    ),
-                  ],
-                ),
-                child: Container(
-                  color: Colors.black,
-                  height: 10,
-                  width: 10,
-                ),
+                child: Container(color: Colors.black, height: 10, width: 10),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: FButton(
-                  onPress: () {},
-                  label: const Text('Underneath'),
-                ),
+                child: FButton(onPress: () {}, label: const Text('Underneath')),
               ),
             ],
           ),
@@ -224,11 +187,7 @@ void main() {
         child: FPopover.automatic(
           controller: first,
           popoverBuilder: (context, style, _) => const Text('popover'),
-          child: Container(
-            color: Colors.black,
-            height: 10,
-            width: 10,
-          ),
+          child: Container(color: Colors.black, height: 10, width: 10),
         ),
       ),
     );
@@ -239,11 +198,7 @@ void main() {
         child: FPopover.automatic(
           controller: second,
           popoverBuilder: (context, style, _) => const Text('popover'),
-          child: Container(
-            color: Colors.black,
-            height: 10,
-            width: 10,
-          ),
+          child: Container(color: Colors.black, height: 10, width: 10),
         ),
       ),
     );

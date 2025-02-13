@@ -136,22 +136,17 @@ class _State extends State<FCheckbox> {
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
-                      border: Border.all(
-                        color: stateStyle.borderColor,
-                        width: 0.6,
-                      ),
+                      border: Border.all(color: stateStyle.borderColor, width: 0.6),
                       color: widget.value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
                     ),
-                    child: widget.value
-                        ? FAssets.icons.check(
-                            height: 14,
-                            width: 14,
-                            colorFilter: ColorFilter.mode(
-                              stateStyle.iconColor,
-                              BlendMode.srcIn,
-                            ),
-                          )
-                        : const SizedBox(),
+                    child:
+                        widget.value
+                            ? FAssets.icons.check(
+                              height: 14,
+                              width: 14,
+                              colorFilter: ColorFilter.mode(stateStyle.iconColor, BlendMode.srcIn),
+                            )
+                            : const SizedBox(),
                   ),
                 ),
               ),
@@ -208,49 +203,45 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
 
   /// Creates a [FCheckboxStyle] that inherits its properties from the given parameters.
   FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-          focusedOutlineStyle: FFocusedOutlineStyle(
-            color: style.focusedOutlineStyle.color,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          enabledStyle: FCheckboxStateStyle(
-            labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-            borderColor: colorScheme.primary,
-            iconColor: colorScheme.primaryForeground,
-            checkedBackgroundColor: colorScheme.primary,
-            uncheckedBackgroundColor: colorScheme.background,
-          ),
-          disabledStyle: FCheckboxStateStyle(
-            labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-            borderColor: colorScheme.disable(colorScheme.primary),
-            iconColor: colorScheme.disable(colorScheme.primaryForeground),
-            checkedBackgroundColor: colorScheme.disable(colorScheme.primary),
-            uncheckedBackgroundColor: colorScheme.disable(colorScheme.background),
-          ),
-          errorStyle: FCheckboxErrorStyle(
-            labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-            errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-            borderColor: colorScheme.error,
-            iconColor: colorScheme.errorForeground,
-            checkedBackgroundColor: colorScheme.error,
-            uncheckedBackgroundColor: colorScheme.background,
-          ),
-        );
+    : this(
+        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
+        focusedOutlineStyle: FFocusedOutlineStyle(
+          color: style.focusedOutlineStyle.color,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        enabledStyle: FCheckboxStateStyle(
+          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+          borderColor: colorScheme.primary,
+          iconColor: colorScheme.primaryForeground,
+          checkedBackgroundColor: colorScheme.primary,
+          uncheckedBackgroundColor: colorScheme.background,
+        ),
+        disabledStyle: FCheckboxStateStyle(
+          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+          borderColor: colorScheme.disable(colorScheme.primary),
+          iconColor: colorScheme.disable(colorScheme.primaryForeground),
+          checkedBackgroundColor: colorScheme.disable(colorScheme.primary),
+          uncheckedBackgroundColor: colorScheme.disable(colorScheme.background),
+        ),
+        errorStyle: FCheckboxErrorStyle(
+          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+          borderColor: colorScheme.error,
+          iconColor: colorScheme.errorForeground,
+          checkedBackgroundColor: colorScheme.error,
+          uncheckedBackgroundColor: colorScheme.background,
+        ),
+      );
 
   /// The [FLabel]'s style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
-        layout: labelLayoutStyle,
-        state: FLabelStateStyles(
-          enabledStyle: enabledStyle,
-          disabledStyle: disabledStyle,
-          errorStyle: errorStyle,
-        ),
-      );
+    layout: labelLayoutStyle,
+    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+  );
 }
 
 /// A checkbox state's style.
@@ -290,10 +281,11 @@ class FCheckboxStateStyle with Diagnosticable, _$FCheckboxStateStyleFunctions im
 }
 
 /// A checkbox's error state style.
-// ignore: avoid_implementing_value_types
 final class FCheckboxErrorStyle extends FCheckboxStateStyle
     with _$FCheckboxErrorStyleFunctions
-    implements FFormFieldErrorStyle {
+    implements
+        // ignore: avoid_implementing_value_types
+        FFormFieldErrorStyle {
   @override
   final TextStyle errorTextStyle;
 

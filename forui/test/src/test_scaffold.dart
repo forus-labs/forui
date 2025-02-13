@@ -37,17 +37,13 @@ class TestScaffold extends StatelessWidget {
     final typography = FTypography.inherit(colorScheme: colorScheme);
     final style = FStyle.inherit(colorScheme: colorScheme, typography: typography).copyWith(shadow: []);
 
-    return FThemeData(
-      colorScheme: colorScheme,
-      typography: typography,
-      style: style,
-    );
+    return FThemeData(colorScheme: colorScheme, typography: typography, style: style);
   }();
 
   static List<({String name, FThemeData data})> get themes => [
-        (name: 'zinc-light', data: FThemes.zinc.light),
-        (name: 'zinc-dark', data: FThemes.zinc.dark),
-      ];
+    (name: 'zinc-light', data: FThemes.zinc.light),
+    (name: 'zinc-dark', data: FThemes.zinc.dark),
+  ];
 
   final FThemeData theme;
   final Color? background;
@@ -66,14 +62,14 @@ class TestScaffold extends StatelessWidget {
     FThemeData? theme,
     Color? background,
     super.key,
-  })  : theme = theme ?? FThemes.zinc.light,
-        locale = null,
-        background = switch ((theme, background)) {
-          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
-          (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
-          (_, final background) => background,
-        },
-        wrapped = false;
+  }) : theme = theme ?? FThemes.zinc.light,
+       locale = null,
+       background = switch ((theme, background)) {
+         (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
+         (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+         (_, final background) => background,
+       },
+       wrapped = false;
 
   TestScaffold.app({
     required this.child,
@@ -84,21 +80,21 @@ class TestScaffold extends StatelessWidget {
     FThemeData? theme,
     Color? background,
     super.key,
-  })  : theme = theme ?? FThemes.zinc.light,
-        background = switch ((theme, background)) {
-          (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
-          (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
-          (_, final background) => background,
-        },
-        wrapped = true;
+  }) : theme = theme ?? FThemes.zinc.light,
+       background = switch ((theme, background)) {
+         (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
+         (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+         (_, final background) => background,
+       },
+       wrapped = true;
 
   TestScaffold.blue({required this.child, this.alignment = Alignment.center, super.key})
-      : theme = FThemes.zinc.light,
-        background = blueScreen.colorScheme.background,
-        locale = null,
-        textDirection = null,
-        padded = false,
-        wrapped = false;
+    : theme = FThemes.zinc.light,
+      background = blueScreen.colorScheme.background,
+      locale = null,
+      textDirection = null,
+      padded = false,
+      wrapped = false;
 
   @override
   Widget build(BuildContext context) {
@@ -108,20 +104,18 @@ class TestScaffold extends StatelessWidget {
         locale: locale,
         localizationsDelegates: FLocalizations.localizationsDelegates,
         supportedLocales: FLocalizations.supportedLocales,
-        builder: (context, child) => FTheme(
-          data: theme,
-          textDirection: textDirection,
-          child: Container(
-            color: background ?? theme.colorScheme.background,
-            alignment: Alignment.center,
-            padding: padded ? const EdgeInsets.all(16) : null,
-            child: child!,
-          ),
-        ),
-        home: Align(
-          alignment: alignment,
-          child: child,
-        ),
+        builder:
+            (context, child) => FTheme(
+              data: theme,
+              textDirection: textDirection,
+              child: Container(
+                color: background ?? theme.colorScheme.background,
+                alignment: Alignment.center,
+                padding: padded ? const EdgeInsets.all(16) : null,
+                child: child!,
+              ),
+            ),
+        home: Align(alignment: alignment, child: child),
       );
     } else {
       return FTheme(
@@ -131,10 +125,7 @@ class TestScaffold extends StatelessWidget {
           color: background ?? theme.colorScheme.background,
           alignment: Alignment.center,
           padding: padded ? const EdgeInsets.all(16) : null,
-          child: Align(
-            alignment: alignment,
-            child: child,
-          ),
+          child: Align(alignment: alignment, child: child),
         ),
       );
     }

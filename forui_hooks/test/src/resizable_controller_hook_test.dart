@@ -11,29 +11,31 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFResizableController();
-          return Center(
-            child: FResizable(
-              axis: Axis.vertical,
-              controller: controller,
-              children: [
-                FResizableRegion(
-                  initialExtent: 100,
-                  minExtent: 50,
-                  builder: (context, snapshot, child) => const Align(child: Text('A')),
-                  child: Container(),
-                ),
-                FResizableRegion(
-                  initialExtent: 100,
-                  minExtent: 50,
-                  builder: (context, snapshot, child) => const Align(child: Text('B')),
-                  child: Container(),
-                ),
-              ],
-            ),
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFResizableController();
+            return Center(
+              child: FResizable(
+                axis: Axis.vertical,
+                controller: controller,
+                children: [
+                  FResizableRegion(
+                    initialExtent: 100,
+                    minExtent: 50,
+                    builder: (context, snapshot, child) => const Align(child: Text('A')),
+                    child: Container(),
+                  ),
+                  FResizableRegion(
+                    initialExtent: 100,
+                    minExtent: 50,
+                    builder: (context, snapshot, child) => const Align(child: Text('B')),
+                    child: Container(),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
 
@@ -46,29 +48,31 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFCascadeResizableController();
-          return Center(
-            child: FResizable(
-              axis: Axis.vertical,
-              controller: controller,
-              children: [
-                FResizableRegion(
-                  initialExtent: 100,
-                  minExtent: 50,
-                  builder: (context, snapshot, child) => const Align(child: Text('A')),
-                  child: Container(),
-                ),
-                FResizableRegion(
-                  initialExtent: 100,
-                  minExtent: 50,
-                  builder: (context, snapshot, child) => const Align(child: Text('B')),
-                  child: Container(),
-                ),
-              ],
-            ),
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFCascadeResizableController();
+            return Center(
+              child: FResizable(
+                axis: Axis.vertical,
+                controller: controller,
+                children: [
+                  FResizableRegion(
+                    initialExtent: 100,
+                    minExtent: 50,
+                    builder: (context, snapshot, child) => const Align(child: Text('A')),
+                    child: Container(),
+                  ),
+                  FResizableRegion(
+                    initialExtent: 100,
+                    minExtent: 50,
+                    builder: (context, snapshot, child) => const Align(child: Text('B')),
+                    child: Container(),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
 

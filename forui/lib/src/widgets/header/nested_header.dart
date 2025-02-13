@@ -56,20 +56,25 @@ final class _FNestedHeader extends FHeader {
           padding: style.padding,
           child: FHeaderData(
             actionStyle: style.actionStyle,
-            child: prefixActions.isEmpty && suffixActions.isEmpty
-                ? header
-                : Stack(
-                    children: [
-                      Positioned.fill(child: header),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(children: prefixActions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
-                          Row(children: suffixActions.expand((action) => [const SizedBox(width: 10), action]).toList()),
-                        ],
-                      ),
-                    ],
-                  ),
+            child:
+                prefixActions.isEmpty && suffixActions.isEmpty
+                    ? header
+                    : Stack(
+                      children: [
+                        Positioned.fill(child: header),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: prefixActions.expand((action) => [action, const SizedBox(width: 10)]).toList(),
+                            ),
+                            Row(
+                              children: suffixActions.expand((action) => [const SizedBox(width: 10), action]).toList(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
           ),
         ),
       ),
@@ -119,12 +124,8 @@ final class FNestedHeaderStyle with Diagnosticable, _$FNestedHeaderStyleFunction
     required FTypography typography,
     required FStyle style,
   }) : this(
-          titleTextStyle: typography.xl.copyWith(
-            color: colorScheme.foreground,
-            fontWeight: FontWeight.w600,
-            height: 1,
-          ),
-          actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 25),
-          padding: style.pagePadding.copyWith(bottom: 15),
-        );
+         titleTextStyle: typography.xl.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w600, height: 1),
+         actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 25),
+         padding: style.pagePadding.copyWith(bottom: 15),
+       );
 }

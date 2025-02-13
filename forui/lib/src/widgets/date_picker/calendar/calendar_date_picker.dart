@@ -160,15 +160,17 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
       hint: widget.hint ?? localizations.datePickerHint,
       readOnly: true,
       enableInteractiveSelection: false,
-      prefixBuilder: widget.prefixBuilder == null
-          ? null
-          : (context, stateStyle, _) => MouseRegion(
+      prefixBuilder:
+          widget.prefixBuilder == null
+              ? null
+              : (context, stateStyle, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: widget.prefixBuilder?.call(context, (style, stateStyle), null),
               ),
-      suffixBuilder: widget.suffixBuilder == null
-          ? null
-          : (context, stateStyle, _) => MouseRegion(
+      suffixBuilder:
+          widget.suffixBuilder == null
+              ? null
+              : (context, stateStyle, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
                 child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
               ),
@@ -180,12 +182,9 @@ class _CalendarDatePickerState extends _DatePickerState<_CalendarDatePicker> {
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
-      builder: (context, _, child) => _CalendarPopover(
-        controller: _controller,
-        style: style,
-        properties: widget,
-        child: child!,
-      ),
+      builder:
+          (context, _, child) =>
+              _CalendarPopover(controller: _controller, style: style, properties: widget, child: child!),
     );
   }
 
@@ -214,36 +213,38 @@ class _CalendarPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FPopover(
-        style: style.popoverStyle,
-        controller: controller.calendar,
-        popoverAnchor: properties.anchor,
-        childAnchor: properties.inputAnchor,
-        shift: properties.shift,
-        hideOnTapOutside: properties.hideOnTapOutside,
-        directionPadding: properties.directionPadding,
-        popoverBuilder: (context, follower, _) => TextFieldTapRegion(
+    style: style.popoverStyle,
+    controller: controller.calendar,
+    popoverAnchor: properties.anchor,
+    childAnchor: properties.inputAnchor,
+    shift: properties.shift,
+    hideOnTapOutside: properties.hideOnTapOutside,
+    directionPadding: properties.directionPadding,
+    popoverBuilder:
+        (context, follower, _) => TextFieldTapRegion(
           child: ValueListenableBuilder(
             valueListenable: controller._calendar,
-            builder: (context, value, _) => FCalendar(
-              style: style.calendarStyle,
-              controller: controller._calendar,
-              initialMonth: switch (value) {
-                null => null,
-                _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
-                _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
-                _ => value,
-              },
-              onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
-              dayBuilder: properties.dayBuilder,
-              start: properties.start,
-              end: properties.end,
-              today: properties.today,
-              initialType: properties.initialType,
-            ),
+            builder:
+                (context, value, _) => FCalendar(
+                  style: style.calendarStyle,
+                  controller: controller._calendar,
+                  initialMonth: switch (value) {
+                    null => null,
+                    _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
+                    _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
+                    _ => value,
+                  },
+                  onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
+                  dayBuilder: properties.dayBuilder,
+                  start: properties.start,
+                  end: properties.end,
+                  today: properties.today,
+                  initialType: properties.initialType,
+                ),
           ),
         ),
-        child: child,
-      );
+    child: child,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

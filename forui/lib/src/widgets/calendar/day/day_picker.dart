@@ -101,34 +101,31 @@ class _DayPickerState extends State<DayPicker> {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: DateTime.daysPerWeek * widget.style.tileSize,
-        child: GridView.custom(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: _GridDelegate(widget.style.tileSize),
-          childrenDelegate: SliverChildListDelegate(
-            addRepaintBoundaries: false,
-            [
-              ..._headers(context),
-              for (final MapEntry(key: date, value: focusNode) in _days.entries)
-                Entry.day(
-                  style: widget.style,
-                  localizations: widget.localization,
-                  dayBuilder: widget.dayBuilder,
-                  date: date,
-                  focusNode: focusNode,
-                  current: date.month == widget.month.month,
-                  today: date == widget.today,
-                  selectable: widget.selectable,
-                  selected: widget.selected,
-                  onPress: widget.onPress,
-                  onLongPress: widget.onLongPress,
-                ),
-            ],
+    width: DateTime.daysPerWeek * widget.style.tileSize,
+    child: GridView.custom(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: _GridDelegate(widget.style.tileSize),
+      childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
+        ..._headers(context),
+        for (final MapEntry(key: date, value: focusNode) in _days.entries)
+          Entry.day(
+            style: widget.style,
+            localizations: widget.localization,
+            dayBuilder: widget.dayBuilder,
+            date: date,
+            focusNode: focusNode,
+            current: date.month == widget.month.month,
+            today: date == widget.today,
+            selectable: widget.selectable,
+            selected: widget.selected,
+            onPress: widget.onPress,
+            onLongPress: widget.onLongPress,
           ),
-        ),
-      );
+      ]),
+    ),
+  );
 
   List<Widget> _headers(BuildContext context) {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
@@ -169,13 +166,13 @@ class _GridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-        childCrossAxisExtent: tileSize,
-        childMainAxisExtent: tileSize,
-        crossAxisCount: DateTime.daysPerWeek,
-        crossAxisStride: tileSize,
-        mainAxisStride: tileSize,
-        reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
-      );
+    childCrossAxisExtent: tileSize,
+    childMainAxisExtent: tileSize,
+    crossAxisCount: DateTime.daysPerWeek,
+    crossAxisStride: tileSize,
+    mainAxisStride: tileSize,
+    reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
+  );
 
   @override
   bool shouldRelayout(_GridDelegate oldDelegate) => tileSize != oldDelegate.tileSize;
@@ -220,17 +217,14 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
     required this.unselectableStyles,
     this.startDayOfWeek,
     this.tileSize = 42,
-  })  : assert(
-          startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
-          'startDayOfWeek must be between DateTime.monday (1) and DateTime.sunday (7).',
-        ),
-        assert(0 < tileSize, 'tileSize must be positive.');
+  }) : assert(
+         startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
+         'startDayOfWeek must be between DateTime.monday (1) and DateTime.sunday (7).',
+       ),
+       assert(0 < tileSize, 'tileSize must be positive.');
 
   /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
-  factory FCalendarDayPickerStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-  }) {
+  factory FCalendarDayPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography}) {
     final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
     final mutedTextStyle = typography.base.copyWith(
       color: colorScheme.disable(colorScheme.mutedForeground),
@@ -302,8 +296,5 @@ final class FCalendarDayStyle with Diagnosticable, _$FCalendarDayStyleFunctions 
   final FCalendarEntryStyle unselectedStyle;
 
   /// Creates a [FCalendarDayStyle].
-  const FCalendarDayStyle({
-    required this.unselectedStyle,
-    required this.selectedStyle,
-  });
+  const FCalendarDayStyle({required this.unselectedStyle, required this.selectedStyle});
 }

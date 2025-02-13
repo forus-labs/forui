@@ -57,30 +57,22 @@ class FTextFieldStateStyle with Diagnosticable, _$FTextFieldStateStyleFunctions 
     required FTypography typography,
     required FStyle style,
   }) : this(
-          labelTextStyle: formFieldStyle.labelTextStyle,
-          contentTextStyle: typography.sm.copyWith(
-            fontFamily: typography.defaultFontFamily,
-            color: contentColor,
-          ),
-          hintTextStyle: typography.sm.copyWith(
-            fontFamily: typography.defaultFontFamily,
-            color: hintColor,
-          ),
-          counterTextStyle: typography.sm.copyWith(
-            fontFamily: typography.defaultFontFamily,
-            color: contentColor,
-          ),
-          descriptionTextStyle: formFieldStyle.descriptionTextStyle,
-          focusedStyle: FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
-          unfocusedStyle: FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style),
-        );
+         labelTextStyle: formFieldStyle.labelTextStyle,
+         contentTextStyle: typography.sm.copyWith(fontFamily: typography.defaultFontFamily, color: contentColor),
+         hintTextStyle: typography.sm.copyWith(fontFamily: typography.defaultFontFamily, color: hintColor),
+         counterTextStyle: typography.sm.copyWith(fontFamily: typography.defaultFontFamily, color: contentColor),
+         descriptionTextStyle: formFieldStyle.descriptionTextStyle,
+         focusedStyle: FTextFieldBorderStyle.inherit(color: focusedBorderColor, style: style),
+         unfocusedStyle: FTextFieldBorderStyle.inherit(color: unfocusedBorderColor, style: style),
+       );
 }
 
 /// A [FTextField] error state's style.
-// ignore: avoid_implementing_value_types
 final class FTextFieldErrorStyle extends FTextFieldStateStyle
     with _$FTextFieldErrorStyleFunctions
-    implements FFormFieldErrorStyle {
+    implements
+        // ignore: avoid_implementing_value_types
+        FFormFieldErrorStyle {
   /// The error's [TextStyle].
   @override
   final TextStyle errorTextStyle;
@@ -106,8 +98,8 @@ final class FTextFieldErrorStyle extends FTextFieldStateStyle
     required super.unfocusedBorderColor,
     required super.typography,
     required super.style,
-  })  : errorTextStyle = formFieldErrorStyle.errorTextStyle,
-        super.inherit(formFieldStyle: formFieldErrorStyle);
+  }) : errorTextStyle = formFieldErrorStyle.errorTextStyle,
+       super.inherit(formFieldStyle: formFieldErrorStyle);
 }
 
 /// A [FTextField] border's style.
@@ -125,19 +117,9 @@ final class FTextFieldBorderStyle with Diagnosticable, _$FTextFieldBorderStyleFu
   final BorderRadius radius;
 
   /// Creates a [FTextFieldBorderStyle].
-  FTextFieldBorderStyle({
-    required this.color,
-    required this.width,
-    required this.radius,
-  });
+  FTextFieldBorderStyle({required this.color, required this.width, required this.radius});
 
   /// Creates a [FTextFieldBorderStyle] that inherits its properties from [style].
-  FTextFieldBorderStyle.inherit({
-    required Color color,
-    required FStyle style,
-  }) : this(
-          color: color,
-          width: style.borderWidth,
-          radius: style.borderRadius,
-        );
+  FTextFieldBorderStyle.inherit({required Color color, required FStyle style})
+    : this(color: color, width: style.borderWidth, radius: style.borderRadius);
 }

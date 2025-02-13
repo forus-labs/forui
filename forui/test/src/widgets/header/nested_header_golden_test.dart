@@ -18,16 +18,10 @@ void main() {
             title: const Text('Title'),
             prefixActions: [
               FHeaderAction.back(onPress: () {}),
-              FHeaderAction(
-                icon: FIcon(FAssets.icons.alarmClock),
-                onPress: null,
-              ),
+              FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
             ],
             suffixActions: [
-              FHeaderAction(
-                icon: FIcon(FAssets.icons.plus),
-                onPress: () {},
-              ),
+              FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
               FHeaderAction.x(onPress: () {}),
             ],
           ),
@@ -46,16 +40,10 @@ void main() {
               title: const Text('Title'),
               prefixActions: [
                 FHeaderAction.back(onPress: () {}),
-                FHeaderAction(
-                  icon: FIcon(FAssets.icons.alarmClock),
-                  onPress: null,
-                ),
+                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
               ],
               suffixActions: [
-                FHeaderAction(
-                  icon: FIcon(FAssets.icons.plus),
-                  onPress: () {},
-                ),
+                FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
                 FHeaderAction.x(onPress: () {}),
               ],
             ),
@@ -66,14 +54,7 @@ void main() {
       });
 
       testWidgets('${theme.name} with no FNestedHeader actions', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: const FHeader.nested(
-              title: Text('Title'),
-            ),
-          ),
-        );
+        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FHeader.nested(title: Text('Title'))));
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-no-actions.png'));
       });
@@ -86,17 +67,10 @@ void main() {
               title: const Text('Title'),
               prefixActions: [
                 FHeaderAction.back(onPress: () {}),
-                FHeaderAction(
-                  icon: FIcon(FAssets.icons.alarmClock),
-                  onPress: null,
-                ),
+                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
               ],
               suffixActions: [
-                FHeaderAction(
-                  autofocus: true,
-                  icon: FIcon(FAssets.icons.plus),
-                  onPress: () {},
-                ),
+                FHeaderAction(autofocus: true, icon: FIcon(FAssets.icons.plus), onPress: () {}),
                 FHeaderAction.x(onPress: () {}),
               ],
             ),
@@ -115,16 +89,10 @@ void main() {
               title: const Text('Title'),
               prefixActions: [
                 FHeaderAction.back(onPress: () {}),
-                FHeaderAction(
-                  icon: FIcon(FAssets.icons.alarmClock),
-                  onPress: null,
-                ),
+                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
               ],
               suffixActions: [
-                FHeaderAction(
-                  icon: FIcon(FAssets.icons.plus),
-                  onPress: () {},
-                ),
+                FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
                 FHeaderAction.x(onPress: () {}),
               ],
             ),

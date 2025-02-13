@@ -131,27 +131,23 @@ final class FColorScheme with Diagnosticable, FTransformable {
     required this.border,
     this.enabledHoveredOpacity = 0.9,
     this.disabledOpacity = 0.5,
-  })  : assert(
-          0 <= enabledHoveredOpacity && enabledHoveredOpacity <= 1,
-          'The enabledHoveredOpacity must be between 0 and 1.',
-        ),
-        assert(0 <= disabledOpacity && disabledOpacity <= 1, 'The disabledOpacity must be between 0 and 1.');
+  }) : assert(
+         0 <= enabledHoveredOpacity && enabledHoveredOpacity <= 1,
+         'The enabledHoveredOpacity must be between 0 and 1.',
+       ),
+       assert(0 <= disabledOpacity && disabledOpacity <= 1, 'The disabledOpacity must be between 0 and 1.');
 
   /// Returns a hovered color for the [foreground] on the [background].
   ///
   /// [FColorScheme.background] is used if [background] is not given.
-  Color hover(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withValues(alpha: enabledHoveredOpacity),
-        background ?? this.background,
-      );
+  Color hover(Color foreground, [Color? background]) =>
+      Color.alphaBlend(foreground.withValues(alpha: enabledHoveredOpacity), background ?? this.background);
 
   /// Returns a disabled color for the [foreground] on the [background].
   ///
   /// [FColorScheme.background] is used if [background] is not given.
-  Color disable(Color foreground, [Color? background]) => Color.alphaBlend(
-        foreground.withValues(alpha: disabledOpacity),
-        background ?? this.background,
-      );
+  Color disable(Color foreground, [Color? background]) =>
+      Color.alphaBlend(foreground.withValues(alpha: disabledOpacity), background ?? this.background);
 
   /// Returns a copy of this [FColorScheme] with the given properties replaced.
   ///
@@ -186,26 +182,25 @@ final class FColorScheme with Diagnosticable, FTransformable {
     Color? border,
     double? enabledHoveredOpacity,
     double? disabledOpacity,
-  }) =>
-      FColorScheme(
-        brightness: brightness ?? this.brightness,
-        barrier: barrier ?? this.barrier,
-        background: background ?? this.background,
-        foreground: foreground ?? this.foreground,
-        primary: primary ?? this.primary,
-        primaryForeground: primaryForeground ?? this.primaryForeground,
-        secondary: secondary ?? this.secondary,
-        secondaryForeground: secondaryForeground ?? this.secondaryForeground,
-        muted: muted ?? this.muted,
-        mutedForeground: mutedForeground ?? this.mutedForeground,
-        destructive: destructive ?? this.destructive,
-        destructiveForeground: destructiveForeground ?? this.destructiveForeground,
-        error: error ?? this.error,
-        errorForeground: errorForeground ?? this.errorForeground,
-        border: border ?? this.border,
-        enabledHoveredOpacity: enabledHoveredOpacity ?? this.enabledHoveredOpacity,
-        disabledOpacity: disabledOpacity ?? this.disabledOpacity,
-      );
+  }) => FColorScheme(
+    brightness: brightness ?? this.brightness,
+    barrier: barrier ?? this.barrier,
+    background: background ?? this.background,
+    foreground: foreground ?? this.foreground,
+    primary: primary ?? this.primary,
+    primaryForeground: primaryForeground ?? this.primaryForeground,
+    secondary: secondary ?? this.secondary,
+    secondaryForeground: secondaryForeground ?? this.secondaryForeground,
+    muted: muted ?? this.muted,
+    mutedForeground: mutedForeground ?? this.mutedForeground,
+    destructive: destructive ?? this.destructive,
+    destructiveForeground: destructiveForeground ?? this.destructiveForeground,
+    error: error ?? this.error,
+    errorForeground: errorForeground ?? this.errorForeground,
+    border: border ?? this.border,
+    enabledHoveredOpacity: enabledHoveredOpacity ?? this.enabledHoveredOpacity,
+    disabledOpacity: disabledOpacity ?? this.disabledOpacity,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

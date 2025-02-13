@@ -141,16 +141,12 @@ class FMultiSelectGroupController<T> extends FSelectGroupController<T> {
   /// * Throws [AssertionError] if [min] < 0.
   /// * Throws [AssertionError] if [max] < 0.
   /// * Throws [AssertionError] if [min] > [max].
-  FMultiSelectGroupController({
-    int min = 0,
-    int? max,
-    this.onUpdate,
-    super.values,
-  })  : _min = min,
-        _max = max,
-        assert(min >= 0, 'The min value must be greater than or equal to 0.'),
-        assert(max == null || max >= 0, 'The max value must be greater than or equal to 0.'),
-        assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
+  FMultiSelectGroupController({int min = 0, int? max, this.onUpdate, super.values})
+    : _min = min,
+      _max = max,
+      assert(min >= 0, 'The min value must be greater than or equal to 0.'),
+      assert(max == null || max >= 0, 'The max value must be greater than or equal to 0.'),
+      assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   @override
   void update(T value, {required bool selected}) {

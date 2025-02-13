@@ -7,9 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PortalPage extends Sample {
-  PortalPage({
-    @queryParam super.theme,
-  });
+  PortalPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => const _Portal();
@@ -33,8 +31,9 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => FPortal(
-        controller: controller,
-        portalBuilder: (context) => Padding(
+    controller: controller,
+    portalBuilder:
+        (context) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
@@ -59,10 +58,7 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  for (final (label, value) in [
-                    ('Width', '100%'),
-                    ('Max. Width', '300px'),
-                  ]) ...[
+                  for (final (label, value) in [('Width', '100%'), ('Max. Width', '300px')]) ...[
                     Row(
                       children: [
                         Expanded(child: Text(label, style: context.theme.typography.sm)),
@@ -76,9 +72,6 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
-        child: FButton(
-          label: const Text('Portal'),
-          onPress: () => controller.toggle(),
-        ),
-      );
+    child: FButton(label: const Text('Portal'), onPress: () => controller.toggle()),
+  );
 }

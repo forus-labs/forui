@@ -41,14 +41,8 @@ void main() {
                   menu: [
                     FTileGroup(
                       children: [
-                        FTile(
-                          title: const Text('Documentation'),
-                          onPress: () {},
-                        ),
-                        FTile(
-                          title: const Text('Themes'),
-                          onPress: () {},
-                        ),
+                        FTile(title: const Text('Documentation'), onPress: () {}),
+                        FTile(title: const Text('Themes'), onPress: () {}),
                       ],
                     ),
                   ],
@@ -85,14 +79,8 @@ void main() {
                   menu: [
                     FTileGroup(
                       children: [
-                        FTile(
-                          title: const Text('Documentation'),
-                          onPress: () {},
-                        ),
-                        FTile(
-                          title: const Text('Themes'),
-                          onPress: () {},
-                        ),
+                        FTile(title: const Text('Documentation'), onPress: () {}),
+                        FTile(title: const Text('Themes'), onPress: () {}),
                       ],
                     ),
                   ],
@@ -124,14 +112,8 @@ void main() {
                   menu: [
                     FTileGroup(
                       children: [
-                        FTile(
-                          title: const Text('Documentation'),
-                          onPress: () {},
-                        ),
-                        FTile(
-                          title: const Text('Themes'),
-                          onPress: () {},
-                        ),
+                        FTile(title: const Text('Documentation'), onPress: () {}),
+                        FTile(title: const Text('Themes'), onPress: () {}),
                       ],
                     ),
                   ],
@@ -154,14 +136,8 @@ void main() {
           FTileGroup(
             key: const Key('menu'),
             children: [
-              FTile(
-                title: const Text('Documentation'),
-                onPress: () {},
-              ),
-              FTile(
-                title: const Text('Themes'),
-                onPress: () {},
-              ),
+              FTile(title: const Text('Documentation'), onPress: () {}),
+              FTile(title: const Text('Themes'), onPress: () {}),
             ],
           ),
         ];

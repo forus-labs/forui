@@ -34,7 +34,7 @@ typedef FTappableData = ({bool focused, bool hovered});
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FTappable extends StatefulWidget {
-  static Widget _builder(_, __, Widget? child) => child!;
+  static Widget _builder(BuildContext _, FTappableData _, Widget? child) => child!;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
   final FFocusedOutlineStyle? focusedOutlineStyle;
@@ -132,8 +132,8 @@ class FTappable extends StatefulWidget {
     this.child,
     ValueWidgetBuilder<FTappableData>? builder,
     super.key,
-  })  : assert(builder != null || child != null, 'Either builder or child must be provided.'),
-        builder = builder ?? _builder;
+  }) : assert(builder != null || child != null, 'Either builder or child must be provided.'),
+       builder = builder ?? _builder;
 
   @override
   State<FTappable> createState() => _FTappableState<FTappable>();
@@ -242,11 +242,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
     );
 
     if (widget.focusedOutlineStyle case final style?) {
-      tappable = FFocusedOutline(
-        focused: _focused,
-        style: style,
-        child: tappable,
-      );
+      tappable = FFocusedOutline(focused: _focused, style: style, child: tappable);
     }
 
     if (widget.onPress != null) {
@@ -329,10 +325,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   void _onPointerUp() => controller.reverse();
 
   @override
-  Widget _decorate(BuildContext context, Widget child) => ScaleTransition(
-        scale: animation,
-        child: child,
-      );
+  Widget _decorate(BuildContext context, Widget child) => ScaleTransition(scale: animation, child: child);
 
   @override
   void dispose() {

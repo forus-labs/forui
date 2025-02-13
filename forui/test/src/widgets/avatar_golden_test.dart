@@ -16,10 +16,7 @@ void main() {
       testWidgets('${theme.name} with image', (tester) async {
         final testWidget = TestScaffold.app(
           theme: theme.data,
-          child: FAvatar(
-            image: FileImage(File('$relativePath/test/resources/pante.jpg')),
-            fallback: const Text('MN'),
-          ),
+          child: FAvatar(image: FileImage(File('$relativePath/test/resources/pante.jpg')), fallback: const Text('MN')),
         );
 
         /// current workaround for flaky image asset testing.

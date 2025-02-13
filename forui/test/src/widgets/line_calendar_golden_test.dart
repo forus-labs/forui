@@ -43,10 +43,7 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(
-                controller: FCalendarController.date(),
-                today: DateTime(2024, 11, 28),
-              ),
+              child: FLineCalendar(controller: FCalendarController.date(), today: DateTime(2024, 11, 28)),
             ),
           ),
         );
@@ -62,10 +59,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(
-              controller: FCalendarController.date(),
-              today: DateTime(2024, 11, 28),
-            ),
+            child: FLineCalendar(controller: FCalendarController.date(), today: DateTime(2024, 11, 28)),
           ),
         );
 
@@ -82,10 +76,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(
-              controller: FCalendarController.date(),
-              today: DateTime(2024, 11, 28),
-            ),
+            child: FLineCalendar(controller: FCalendarController.date(), today: DateTime(2024, 11, 28)),
           ),
         );
 
@@ -107,10 +98,7 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(
-                controller: FCalendarController.date(),
-                today: DateTime(2024, 11, 28),
-              ),
+              child: FLineCalendar(controller: FCalendarController.date(), today: DateTime(2024, 11, 28)),
             ),
           ),
         );
@@ -132,10 +120,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(
-              controller: FCalendarController.date(),
-              today: DateTime(2024, 11, 28),
-            ),
+            child: FLineCalendar(controller: FCalendarController.date(), today: DateTime(2024, 11, 28)),
           ),
         );
 
@@ -160,10 +145,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(
-              controller: FCalendarController.date(),
-              today: DateTime(2024, 11, 28),
-            ),
+            child: FLineCalendar(controller: FCalendarController.date(), today: DateTime(2024, 11, 28)),
           ),
         );
 
@@ -186,10 +168,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           textDirection: TextDirection.rtl,
-          child: FLineCalendar(
-            controller: FCalendarController.date(),
-            today: DateTime(2024, 11, 28),
-          ),
+          child: FLineCalendar(controller: FCalendarController.date(), today: DateTime(2024, 11, 28)),
         ),
       );
 
@@ -229,20 +208,13 @@ void main() {
         TestScaffold.app(
           child: FLineCalendar(
             controller: FCalendarController.date(),
-            builder: (context, state, child) => Stack(
-              children: [
-                child!,
-                Positioned(
-                  top: 5,
-                  left: 5,
-                  child: Container(
-                    width: 3,
-                    height: 3,
-                    color: const Color(0xFF00FF00),
-                  ),
+            builder:
+                (context, state, child) => Stack(
+                  children: [
+                    child!,
+                    Positioned(top: 5, left: 5, child: Container(width: 3, height: 3, color: const Color(0xFF00FF00))),
+                  ],
                 ),
-              ],
-            ),
             today: DateTime(2024, 11, 28),
           ),
         ),

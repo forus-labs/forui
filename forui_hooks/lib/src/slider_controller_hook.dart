@@ -12,15 +12,16 @@ FContinuousSliderController useFContinuousSliderController({
   bool tooltips = true,
   bool minExtendable = false,
   List<Object?>? keys,
-}) =>
-    use(_ContinuousControllerHook(
-      selection: selection,
-      stepPercentage: stepPercentage,
-      tooltips: tooltips,
-      allowedInteraction: allowedInteraction,
-      minExtendable: minExtendable,
-      keys: keys,
-    ));
+}) => use(
+  _ContinuousControllerHook(
+    selection: selection,
+    stepPercentage: stepPercentage,
+    tooltips: tooltips,
+    allowedInteraction: allowedInteraction,
+    minExtendable: minExtendable,
+    keys: keys,
+  ),
+);
 
 class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
   final FSliderSelection selection;
@@ -81,13 +82,9 @@ FContinuousSliderController useFContinuousRangeSliderController({
   double stepPercentage = 0.05,
   bool tooltips = true,
   List<Object?>? keys,
-}) =>
-    use(_ContinuousRangeControllerHook(
-      selection: selection,
-      stepPercentage: stepPercentage,
-      tooltips: tooltips,
-      keys: keys,
-    ));
+}) => use(
+  _ContinuousRangeControllerHook(selection: selection, stepPercentage: stepPercentage, tooltips: tooltips, keys: keys),
+);
 
 class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
   final FSliderSelection selection;
@@ -142,14 +139,15 @@ FDiscreteSliderController useFDiscreteSliderController({
   bool tooltips = true,
   bool minExtendable = false,
   List<Object?>? keys,
-}) =>
-    use(_DiscreteControllerHook(
-      selection: selection,
-      tooltips: tooltips,
-      allowedInteraction: allowedInteraction,
-      minExtendable: minExtendable,
-      keys: keys,
-    ));
+}) => use(
+  _DiscreteControllerHook(
+    selection: selection,
+    tooltips: tooltips,
+    allowedInteraction: allowedInteraction,
+    minExtendable: minExtendable,
+    keys: keys,
+  ),
+);
 
 class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderSelection selection;
@@ -205,22 +203,13 @@ FDiscreteSliderController useFDiscreteRangeSliderController({
   required FSliderSelection selection,
   bool tooltips = true,
   List<Object?>? keys,
-}) =>
-    use(_DiscreteRangeControllerHook(
-      selection: selection,
-      tooltips: tooltips,
-      keys: keys,
-    ));
+}) => use(_DiscreteRangeControllerHook(selection: selection, tooltips: tooltips, keys: keys));
 
 class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderSelection selection;
   final bool tooltips;
 
-  const _DiscreteRangeControllerHook({
-    required this.selection,
-    required this.tooltips,
-    super.keys,
-  });
+  const _DiscreteRangeControllerHook({required this.selection, required this.tooltips, super.keys});
 
   @override
   _DiscreteRangeControllerHookState createState() => _DiscreteRangeControllerHookState();

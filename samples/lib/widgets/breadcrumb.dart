@@ -7,81 +7,59 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class BreadcrumbPage extends Sample {
-  BreadcrumbPage({
-    @queryParam super.theme,
-  });
+  BreadcrumbPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FBreadcrumb(
         children: [
-          FBreadcrumb(
-            children: [
-              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
-              FBreadcrumbItem.collapsed(
-                menu: [
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        title: const Text('Documentation'),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        title: const Text('Themes'),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
+          FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+          FBreadcrumbItem.collapsed(
+            menu: [
+              FTileGroup(
+                children: [
+                  FTile(title: const Text('Documentation'), onPress: () {}),
+                  FTile(title: const Text('Themes'), onPress: () {}),
                 ],
               ),
-              FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
-              FBreadcrumbItem(current: true, child: const Text('Widgets')),
             ],
           ),
+          FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+          FBreadcrumbItem(current: true, child: const Text('Widgets')),
         ],
-      );
+      ),
+    ],
+  );
 }
 
 @RoutePage()
 class BreadcrumbDividerPage extends Sample {
-  BreadcrumbDividerPage({
-    @queryParam super.theme,
-  });
+  BreadcrumbDividerPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FBreadcrumb(
+        divider: Transform.rotate(angle: -60, child: FIcon(FAssets.icons.slash, size: 14)),
         children: [
-          FBreadcrumb(
-            divider: Transform.rotate(
-              angle: -60,
-              child: FIcon(
-                FAssets.icons.slash,
-                size: 14,
-              ),
-            ),
-            children: [
-              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
-              FBreadcrumbItem.collapsed(
-                menu: [
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        title: const Text('Documentation'),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        title: const Text('Themes'),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
+          FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+          FBreadcrumbItem.collapsed(
+            menu: [
+              FTileGroup(
+                children: [
+                  FTile(title: const Text('Documentation'), onPress: () {}),
+                  FTile(title: const Text('Themes'), onPress: () {}),
                 ],
               ),
-              FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
-              FBreadcrumbItem(current: true, child: const Text('Widgets')),
             ],
           ),
+          FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+          FBreadcrumbItem(current: true, child: const Text('Widgets')),
         ],
-      );
+      ),
+    ],
+  );
 }

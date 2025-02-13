@@ -67,10 +67,10 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     Widget? uncheckedIcon,
     Widget? suffixIcon,
     super.key,
-  })  : checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
-        uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
-        _suffix = false,
-        _icon = suffixIcon;
+  }) : checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
+       uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
+       _suffix = false,
+       _icon = suffixIcon;
 
   /// Creates a [FSelectTile] with a suffix check icon.
   FSelectTile.suffix({
@@ -88,10 +88,10 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     Widget? checkedIcon,
     Widget? uncheckedIcon,
     super.key,
-  })  : _icon = prefixIcon,
-        checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
-        uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
-        _suffix = true;
+  }) : _icon = prefixIcon,
+       checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
+       uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
+       _suffix = true;
 
   @override
   Widget build(BuildContext context) {
@@ -153,12 +153,7 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   final FSelectGroupController<T> controller;
   final bool selected;
 
-  const FSelectTileData({
-    required this.controller,
-    required this.selected,
-    required super.child,
-    super.key,
-  });
+  const FSelectTileData({required this.controller, required this.selected, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FSelectTileData old) => controller != old.controller || selected != old.selected;

@@ -18,64 +18,54 @@ DateTime get selected {
 
 @RoutePage()
 class CalendarPage extends Sample {
-  CalendarPage({
-    @queryParam super.theme,
-  });
+  CalendarPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FCalendar(
-        controller: FCalendarController.date(initialSelection: selected),
-        start: DateTime(2000),
-        end: DateTime(2030),
-      );
+    controller: FCalendarController.date(initialSelection: selected),
+    start: DateTime(2000),
+    end: DateTime(2030),
+  );
 }
 
 @RoutePage()
 class DatesCalendarPage extends Sample {
-  DatesCalendarPage({
-    @queryParam super.theme,
-  });
+  DatesCalendarPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FCalendar(
-        controller: FCalendarController.dates(
-          initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-        ),
-        start: DateTime(2000),
-        today: DateTime(2024, 7, 15),
-        end: DateTime(2030),
-      );
+    controller: FCalendarController.dates(initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)}),
+    start: DateTime(2000),
+    today: DateTime(2024, 7, 15),
+    end: DateTime(2030),
+  );
 }
 
 @RoutePage()
 class UnselectableCalendarPage extends Sample {
-  UnselectableCalendarPage({
-    @queryParam super.theme,
-  });
+  UnselectableCalendarPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FCalendar(
-        controller: FCalendarController.dates(
-          initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-          selectable: (date) => !{DateTime(2024, 7, 18), DateTime(2024, 7, 19)}.contains(date),
-        ),
-        start: DateTime(2000),
-        today: DateTime(2024, 7, 15),
-        end: DateTime(2030),
-      );
+    controller: FCalendarController.dates(
+      initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
+      selectable: (date) => !{DateTime(2024, 7, 18), DateTime(2024, 7, 19)}.contains(date),
+    ),
+    start: DateTime(2000),
+    today: DateTime(2024, 7, 15),
+    end: DateTime(2030),
+  );
 }
 
 @RoutePage()
 class RangeCalendarPage extends Sample {
-  RangeCalendarPage({
-    @queryParam super.theme,
-  });
+  RangeCalendarPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FCalendar(
-        controller: FCalendarController.range(initialSelection: (DateTime(2024, 7, 17), DateTime(2024, 7, 20))),
-        start: DateTime(2000),
-        today: DateTime(2024, 7, 15),
-        end: DateTime(2030),
-      );
+    controller: FCalendarController.range(initialSelection: (DateTime(2024, 7, 17), DateTime(2024, 7, 20))),
+    start: DateTime(2000),
+    today: DateTime(2024, 7, 15),
+    end: DateTime(2030),
+  );
 }

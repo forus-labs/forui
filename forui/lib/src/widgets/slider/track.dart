@@ -80,12 +80,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbSize, style.crossAxisExtent);
       final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
-      track = Container(
-        height: height,
-        width: width,
-        color: const Color(0x00000000),
-        child: track,
-      );
+      track = Container(height: height, width: width, color: const Color(0x00000000), child: track);
     }
 
     void start(DragStartDetails details) {
@@ -178,10 +173,7 @@ class _Track extends StatelessWidget {
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: borderRadius,
-        color: inactiveColor,
-      ),
+      decoration: BoxDecoration(borderRadius: borderRadius, color: inactiveColor),
       child: SizedBox(
         height: height,
         width: width,
@@ -193,13 +185,8 @@ class _Track extends StatelessWidget {
                 position(
                   offset: value * extent + half - ((style ??= markStyle).tickSize / 2),
                   child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: style.tickColor,
-                    ),
-                    child: SizedBox.square(
-                      dimension: style.tickSize,
-                    ),
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: style.tickColor),
+                    child: SizedBox.square(dimension: style.tickSize),
                   ),
                 ),
             const ActiveTrack(),
@@ -227,14 +214,8 @@ class ActiveTrack extends StatelessWidget {
     return layout.position(
       offset: rawOffset.min,
       child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: borderRadius,
-          color: activeColor,
-        ),
-        child: SizedBox(
-          height: height,
-          width: width,
-        ),
+        decoration: BoxDecoration(borderRadius: borderRadius, color: activeColor),
+        child: SizedBox(height: height, width: width),
       ),
     );
   }
@@ -243,23 +224,23 @@ class ActiveTrack extends StatelessWidget {
 @internal
 extension Layouts on FLayout {
   double Function(Offset) translateTrackTap(double extent, double thumbSize) => switch (this) {
-        FLayout.ltr => (offset) => offset.dx - thumbSize / 2,
-        FLayout.rtl => (offset) => extent - offset.dx + thumbSize / 2,
-        FLayout.ttb => (offset) => offset.dy - thumbSize / 2,
-        FLayout.btt => (offset) => extent - offset.dy + thumbSize / 2,
-      };
+    FLayout.ltr => (offset) => offset.dx - thumbSize / 2,
+    FLayout.rtl => (offset) => extent - offset.dx + thumbSize / 2,
+    FLayout.ttb => (offset) => offset.dy - thumbSize / 2,
+    FLayout.btt => (offset) => extent - offset.dy + thumbSize / 2,
+  };
 
   double Function(Offset) translateTrackDrag() => switch (this) {
-        FLayout.ltr => (delta) => delta.dx,
-        FLayout.rtl => (delta) => -delta.dx,
-        FLayout.ttb => (delta) => delta.dy,
-        FLayout.btt => (delta) => -delta.dy,
-      };
+    FLayout.ltr => (delta) => delta.dx,
+    FLayout.rtl => (delta) => -delta.dx,
+    FLayout.ttb => (delta) => delta.dy,
+    FLayout.btt => (delta) => -delta.dy,
+  };
 
   Positioned Function({required double offset, required Widget child}) get position => switch (this) {
-        FLayout.ltr => ({required offset, required child}) => Positioned(left: offset, child: child),
-        FLayout.rtl => ({required offset, required child}) => Positioned(right: offset, child: child),
-        FLayout.ttb => ({required offset, required child}) => Positioned(top: offset, child: child),
-        FLayout.btt => ({required offset, required child}) => Positioned(bottom: offset, child: child),
-      };
+    FLayout.ltr => ({required offset, required child}) => Positioned(left: offset, child: child),
+    FLayout.rtl => ({required offset, required child}) => Positioned(right: offset, child: child),
+    FLayout.ttb => ({required offset, required child}) => Positioned(top: offset, child: child),
+    FLayout.btt => ({required offset, required child}) => Positioned(bottom: offset, child: child),
+  };
 }

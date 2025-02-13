@@ -15,12 +15,7 @@ void main() {
         TestScaffold.blue(
           child: FAccordion(
             style: TestScaffold.blueScreen.accordionStyle,
-            items: [
-              FAccordionItem(
-                title: const Text('Title'),
-                child: const SizedBox(),
-              ),
-            ],
+            items: [FAccordionItem(title: const Text('Title'), child: const SizedBox())],
           ),
         ),
       );
@@ -38,12 +33,7 @@ void main() {
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: const Text('Title'),
-                  child: const ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(
-                      dimension: 50,
-                    ),
-                  ),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),
@@ -63,21 +53,11 @@ void main() {
                   initiallyExpanded: true,
                   autofocus: true,
                   title: const Text('Title'),
-                  child: const ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(
-                      dimension: 50,
-                    ),
-                  ),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
                 FAccordionItem(
                   title: const Text('Title'),
-                  child: const ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(
-                      dimension: 50,
-                    ),
-                  ),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),
@@ -96,12 +76,7 @@ void main() {
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: const Text('Title'),
-                  child: const ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(
-                      dimension: 50,
-                    ),
-                  ),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),

@@ -11,16 +11,14 @@ FResizableController useFResizableController({
   void Function(List<FResizableRegionData> resized)? onResizeUpdate,
   void Function(List<FResizableRegionData> resized)? onResizeEnd,
   List<Object?>? keys,
-}) =>
-    use(_ResizableControllerHook(
-      onResizeUpdate: onResizeUpdate,
-      onResizeEnd: onResizeEnd,
-      debugLabel: 'useFResizableController',
-      create: (hook) => FResizableController(
-        onResizeUpdate: hook.onResizeUpdate,
-        onResizeEnd: hook.onResizeEnd,
-      ),
-    ));
+}) => use(
+  _ResizableControllerHook(
+    onResizeUpdate: onResizeUpdate,
+    onResizeEnd: onResizeEnd,
+    debugLabel: 'useFResizableController',
+    create: (hook) => FResizableController(onResizeUpdate: hook.onResizeUpdate, onResizeEnd: hook.onResizeEnd),
+  ),
+);
 
 /// Creates a [FResizableController] that cascades shrinking of a region below their minimum extents to its neighbours
 /// and is automatically disposed.
@@ -28,17 +26,15 @@ FResizableController useFCascadeResizableController({
   void Function(List<FResizableRegionData> resized)? onResizeUpdate,
   void Function(List<FResizableRegionData> resized)? onResizeEnd,
   List<Object?>? keys,
-}) =>
-    use(_ResizableControllerHook(
-      onResizeUpdate: onResizeUpdate,
-      onResizeEnd: onResizeEnd,
-      debugLabel: 'useFResizableCascadeController',
-      create: (hook) => FResizableController.cascade(
-        onResizeUpdate: hook.onResizeUpdate,
-        onResizeEnd: hook.onResizeEnd,
-      ),
-      keys: keys,
-    ));
+}) => use(
+  _ResizableControllerHook(
+    onResizeUpdate: onResizeUpdate,
+    onResizeEnd: onResizeEnd,
+    debugLabel: 'useFResizableCascadeController',
+    create: (hook) => FResizableController.cascade(onResizeUpdate: hook.onResizeUpdate, onResizeEnd: hook.onResizeEnd),
+    keys: keys,
+  ),
+);
 
 class _ResizableControllerHook extends Hook<FResizableController> {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
@@ -52,8 +48,8 @@ class _ResizableControllerHook extends Hook<FResizableController> {
     required String debugLabel,
     required _Create create,
     super.keys,
-  })  : _debugLabel = debugLabel,
-        _create = create;
+  }) : _debugLabel = debugLabel,
+       _create = create;
 
   @override
   _ResizableControllerHookState createState() => _ResizableControllerHookState();

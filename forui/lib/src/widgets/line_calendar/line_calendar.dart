@@ -71,30 +71,31 @@ class FLineCalendar extends StatelessWidget {
     DateTime? initial,
     DateTime? today,
     super.key,
-  })  : _start = (start ?? DateTime.utc(1900)).toLocalDate(),
-        _end = end?.toLocalDate(),
-        _initial = initial?.toLocalDate(),
-        _today = (today ?? DateTime.now()).toLocalDate(),
-        assert(
-          start == null || end == null || start.toLocalDate() < end.toLocalDate(),
-          'end date must be greater than start date',
-        ),
-        assert(
-          initial == null ||
-              start == null ||
-              (initial.toLocalDate() >= start.toLocalDate() && initial.toLocalDate() < end!.toLocalDate()),
-          'initial date must be greater than or equal to start date',
-        ),
-        assert(
-          today == null ||
-              start == null ||
-              (today.toLocalDate() >= start.toLocalDate() && today.toLocalDate() < end!.toLocalDate()),
-          'initial date must be greater than or equal to start date',
-        );
+  }) : _start = (start ?? DateTime.utc(1900)).toLocalDate(),
+       _end = end?.toLocalDate(),
+       _initial = initial?.toLocalDate(),
+       _today = (today ?? DateTime.now()).toLocalDate(),
+       assert(
+         start == null || end == null || start.toLocalDate() < end.toLocalDate(),
+         'end date must be greater than start date',
+       ),
+       assert(
+         initial == null ||
+             start == null ||
+             (initial.toLocalDate() >= start.toLocalDate() && initial.toLocalDate() < end!.toLocalDate()),
+         'initial date must be greater than or equal to start date',
+       ),
+       assert(
+         today == null ||
+             start == null ||
+             (today.toLocalDate() >= start.toLocalDate() && today.toLocalDate() < end!.toLocalDate()),
+         'initial date must be greater than or equal to start date',
+       );
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-        builder: (context, constraints) => CalendarLayout(
+    builder:
+        (context, constraints) => CalendarLayout(
           controller: controller,
           style: style,
           cacheExtent: cacheExtent,
@@ -106,7 +107,7 @@ class FLineCalendar extends StatelessWidget {
           constraints: constraints,
           alignment: initialDateAlignment,
         ),
-      );
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -200,10 +201,7 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
 
     return FLineCalendarStyle(
       selectedItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(
-          color: colorScheme.primary,
-          borderRadius: style.borderRadius,
-        ),
+        decoration: BoxDecoration(color: colorScheme.primary, borderRadius: style.borderRadius),
         focusedDecoration: BoxDecoration(
           color: colorScheme.primary,
           border: focusedBorder,
@@ -214,10 +212,7 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
         weekdayTextStyle: selectedWeekdayTextStyle,
       ),
       selectedHoveredItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(
-          color: colorScheme.hover(colorScheme.primary),
-          borderRadius: style.borderRadius,
-        ),
+        decoration: BoxDecoration(color: colorScheme.hover(colorScheme.primary), borderRadius: style.borderRadius),
         focusedDecoration: BoxDecoration(
           color: colorScheme.hover(colorScheme.primary),
           border: focusedBorder,

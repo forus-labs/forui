@@ -17,30 +17,21 @@ void main() {
     ('input only', FDatePicker.input(key: key)),
     ('input & calendar', const FDatePicker(key: key)),
   ]) {
-    for (final (index, (locale, placeholder)) in const [
-      (null, 'MM/DD/YYYY'), // M/d/y
-      (Locale('en', 'SG'), 'DD/MM/YYYY'), // dd/MM/y
-      (Locale('hr'), 'DD. MM. YYYY.'),
-    ].indexed) {
+    for (final (index, (locale, placeholder))
+        in const [
+          (null, 'MM/DD/YYYY'), // M/d/y
+          (Locale('en', 'SG'), 'DD/MM/YYYY'), // dd/MM/y
+          (Locale('hr'), 'DD. MM. YYYY.'),
+        ].indexed) {
       testWidgets('placeholder - $description - $index', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold.app(
-            locale: locale,
-            child: picker,
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: locale, child: picker));
 
         expect(find.text(placeholder), findsOneWidget);
       });
     }
 
     testWidgets('arrow key adjustment - $description', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: picker,
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: picker));
 
       await tester.tapAt(tester.getTopLeft(find.byKey(key)));
       await tester.pumpAndSettle();
@@ -72,12 +63,7 @@ void main() {
       testWidgets('placeholder - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            locale: const Locale('en', 'SG'),
-            child: picker,
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: picker));
 
         await tester.tapAt(tester.getTopLeft(find.byKey(key)));
         await tester.pumpAndSettle();
@@ -95,12 +81,7 @@ void main() {
       testWidgets('partial date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            locale: const Locale('en', 'SG'),
-            child: picker,
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: picker));
 
         await tester.enterText(find.byKey(key), '28/MM/YYYY');
         await tester.pumpAndSettle();
@@ -116,12 +97,7 @@ void main() {
       testWidgets('partial date - hr locale - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            locale: const Locale('hr'),
-            child: picker,
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('hr'), child: picker));
 
         await tester.enterText(find.byKey(key), '28. MM. YYYY');
         await tester.pumpAndSettle();
@@ -137,12 +113,7 @@ void main() {
       testWidgets('full date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            locale: const Locale('en', 'SG'),
-            child: picker,
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: picker));
 
         await tester.enterText(find.byKey(key), '14/01/2025');
         await tester.pumpAndSettle();
@@ -174,12 +145,7 @@ void main() {
           },
         );
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            locale: const Locale('en', 'SG'),
-            child: picker(controller),
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: picker(controller)));
 
         await tester.enterText(find.byKey(key), '01/01/1984');
         await tester.pumpAndSettle();

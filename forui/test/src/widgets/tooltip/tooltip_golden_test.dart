@@ -21,12 +21,7 @@ void main() {
             child: FTooltip(
               controller: controller,
               tipBuilder: (context, style, _) => const Text('Lorem'),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );
@@ -43,12 +38,7 @@ void main() {
             child: FTooltip(
               controller: controller,
               tipBuilder: (context, style, _) => const Text('Lorem'),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );

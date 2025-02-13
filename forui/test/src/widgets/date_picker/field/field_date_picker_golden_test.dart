@@ -17,11 +17,7 @@ void main() {
 
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.blue(
-        child: FDatePicker.input(
-          style: TestScaffold.blueScreen.datePickerStyle,
-        ),
-      ),
+      TestScaffold.blue(child: FDatePicker.input(style: TestScaffold.blueScreen.datePickerStyle)),
     );
 
     await expectBlueScreen(find.byType(TestScaffold));
@@ -29,12 +25,7 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FDatePicker.input(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDatePicker.input(key: key)));
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -46,74 +37,39 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: FDatePicker.input(
-            prefixBuilder: null,
-          ),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDatePicker.input(prefixBuilder: null)));
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/field/no-icon.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-picker/${theme.name}/field/no-icon.png'));
     });
 
     testWidgets('${theme.name} hr locale', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          locale: const Locale('hr'),
-          child: FDatePicker.input(),
-        ),
+        TestScaffold.app(theme: theme.data, locale: const Locale('hr'), child: FDatePicker.input()),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/field/hr-locale.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-picker/${theme.name}/field/hr-locale.png'));
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FDatePicker.input(enabled: false, key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDatePicker.input(enabled: false, key: key)));
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/field/disabled.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-picker/${theme.name}/field/disabled.png'));
     });
 
     testWidgets('${theme.name} error', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FDatePicker.input(forceErrorText: 'Error', key: key),
-        ),
+        TestScaffold.app(theme: theme.data, child: FDatePicker.input(forceErrorText: 'Error', key: key)),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-picker/${theme.name}/field/error.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-picker/${theme.name}/field/error.png'));
     });
 
     testWidgets('${theme.name} unsupported locale defaults to en_US', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          locale: const Locale('ar'),
-          child: FDatePicker.input(key: key),
-        ),
+        TestScaffold.app(theme: theme.data, locale: const Locale('ar'), child: FDatePicker.input(key: key)),
       );
 
       await tester.enterText(find.byKey(key), '1/14/2024');
@@ -126,12 +82,7 @@ void main() {
     });
 
     testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FDatePicker.input(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDatePicker.input(key: key)));
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -148,12 +99,7 @@ void main() {
     testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FDatePicker.input(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDatePicker.input(key: key)));
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();

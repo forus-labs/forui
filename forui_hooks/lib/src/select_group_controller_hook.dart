@@ -6,19 +6,13 @@ import 'package:forui/forui.dart';
 
 /// Creates a [FRadioSelectGroupController] that allows only one selection to be selected mimicking the behaviour of
 /// radio buttons and is automatically disposed.
-FRadioSelectGroupController<T> useFRadioSelectGroupController<T>({
-  T? value,
-  List<Object?>? keys,
-}) =>
+FRadioSelectGroupController<T> useFRadioSelectGroupController<T>({T? value, List<Object?>? keys}) =>
     use(_RadioControllerHook<T>(value: value, keys: keys));
 
 class _RadioControllerHook<T> extends Hook<FRadioSelectGroupController<T>> {
   final T? value;
 
-  const _RadioControllerHook({
-    required this.value,
-    super.keys,
-  });
+  const _RadioControllerHook({required this.value, super.keys});
 
   @override
   _RadioControllerHookState<T> createState() => _RadioControllerHookState<T>();
@@ -55,25 +49,14 @@ FMultiSelectGroupController<T> useFMultiSelectGroupController<T>({
   int min = 0,
   int? max,
   List<Object?>? keys,
-}) =>
-    use(_MultiControllerHook<T>(
-      values: values,
-      min: min,
-      max: max,
-      keys: keys,
-    ));
+}) => use(_MultiControllerHook<T>(values: values, min: min, max: max, keys: keys));
 
 class _MultiControllerHook<T> extends Hook<FMultiSelectGroupController<T>> {
   final Set<T> values;
   final int min;
   final int? max;
 
-  const _MultiControllerHook({
-    required this.values,
-    required this.min,
-    required this.max,
-    super.keys,
-  });
+  const _MultiControllerHook({required this.values, required this.min, required this.max, super.keys});
 
   @override
   _MultiControllerHookState<T> createState() => _MultiControllerHookState<T>();

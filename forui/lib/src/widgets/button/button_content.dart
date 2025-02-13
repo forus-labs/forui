@@ -13,12 +13,7 @@ class Content extends StatelessWidget {
   final Widget? suffix;
   final Widget label;
 
-  const Content({
-    required this.label,
-    this.prefix,
-    this.suffix,
-    super.key,
-  });
+  const Content({required this.label, this.prefix, this.suffix, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +30,8 @@ class Content extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: separate(
-              [
-                if (prefix != null) prefix!,
-                label,
-                if (suffix != null) suffix!,
-              ],
-              by: [
-                const SizedBox(width: 10),
-              ],
+              [if (prefix != null) prefix!, label, if (suffix != null) suffix!],
+              by: [const SizedBox(width: 10)],
             ),
           ),
         ),
@@ -111,24 +100,13 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled].
-  FButtonContentStyle.inherit({
-    required FTypography typography,
-    required Color enabled,
-    required Color disabled,
-  }) : this(
-          enabledTextStyle: typography.base.copyWith(
-            color: enabled,
-            fontWeight: FontWeight.w500,
-            height: 1,
-          ),
-          disabledTextStyle: typography.base.copyWith(
-            color: disabled,
-            fontWeight: FontWeight.w500,
-            height: 1,
-          ),
-          enabledIconColor: enabled,
-          disabledIconColor: disabled,
-        );
+  FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
+    : this(
+        enabledTextStyle: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
+        disabledTextStyle: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
+        enabledIconColor: enabled,
+        disabledIconColor: disabled,
+      );
 }
 
 /// [FButton] icon content's style.

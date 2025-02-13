@@ -51,11 +51,11 @@ class FDatePickerController implements FValueNotifier<DateTime?> {
     this.truncateAndStripTimezone = true,
     DateTime? initialDate,
     Duration popoverAnimationDuration = const Duration(milliseconds: 100),
-  })  : calendar = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
-        _calendar = FCalendarController.date(
-          initialSelection: initialDate,
-          selectable: (date) => validator(date) == null,
-        );
+  }) : calendar = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
+       _calendar = FCalendarController.date(
+         initialSelection: initialDate,
+         selectable: (date) => validator(date) == null,
+       );
 
   @override
   void addListener(VoidCallback listener) => _calendar.addListener(listener);
@@ -123,10 +123,7 @@ abstract class FDatePicker extends StatefulWidget {
   static Widget defaultIconBuilder(BuildContext context, (FDatePickerStyle, FTextFieldStateStyle) styles, Widget? _) =>
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
-        child: FIconStyleData(
-          style: styles.$1.iconStyle,
-          child: FIcon(FAssets.icons.calendar),
-        ),
+        child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.calendar)),
       );
 
   /// The controller.
@@ -396,34 +393,33 @@ abstract class FDatePicker extends StatefulWidget {
     String? forceErrorText,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Key? key,
-  }) =>
-      _FieldDatePicker(
-        controller: controller,
-        style: style,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        prefixBuilder: prefixBuilder,
-        suffixBuilder: suffixBuilder,
-        textInputAction: textInputAction,
-        textAlign: textAlign,
-        textAlignVertical: textAlignVertical,
-        textDirection: textDirection,
-        expands: expands,
-        onEditingComplete: onEditingComplete,
-        onSubmit: onSubmit,
-        mouseCursor: mouseCursor,
-        canRequestFocus: canRequestFocus,
-        baselineInputYear: baselineInputYear,
-        calendar: null,
-        label: label,
-        description: description,
-        enabled: enabled,
-        onSaved: onSaved,
-        autovalidateMode: autovalidateMode,
-        forceErrorText: forceErrorText,
-        errorBuilder: errorBuilder,
-        key: key,
-      );
+  }) => _FieldDatePicker(
+    controller: controller,
+    style: style,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    prefixBuilder: prefixBuilder,
+    suffixBuilder: suffixBuilder,
+    textInputAction: textInputAction,
+    textAlign: textAlign,
+    textAlignVertical: textAlignVertical,
+    textDirection: textDirection,
+    expands: expands,
+    onEditingComplete: onEditingComplete,
+    onSubmit: onSubmit,
+    mouseCursor: mouseCursor,
+    canRequestFocus: canRequestFocus,
+    baselineInputYear: baselineInputYear,
+    calendar: null,
+    label: label,
+    description: description,
+    enabled: enabled,
+    onSaved: onSaved,
+    autovalidateMode: autovalidateMode,
+    forceErrorText: forceErrorText,
+    errorBuilder: errorBuilder,
+    key: key,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

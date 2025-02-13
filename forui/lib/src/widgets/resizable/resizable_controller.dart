@@ -122,10 +122,7 @@ final class _CascadeController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd;
 
-  _CascadeController({
-    this.onResizeUpdate,
-    this.onResizeEnd,
-  }) : super._();
+  _CascadeController({this.onResizeUpdate, this.onResizeEnd}) : super._();
 
   @override
   bool update(int left, int right, double delta) {

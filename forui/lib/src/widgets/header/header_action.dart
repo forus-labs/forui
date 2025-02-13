@@ -52,17 +52,16 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     Key? key,
-  }) =>
-      FHeaderAction(
-        icon: FIcon(FAssets.icons.arrowLeft),
-        onPress: onPress,
-        style: style,
-        semanticLabel: semanticLabel,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        key: key,
-      );
+  }) => FHeaderAction(
+    icon: FIcon(FAssets.icons.arrowLeft),
+    onPress: onPress,
+    style: style,
+    semanticLabel: semanticLabel,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    onFocusChange: onFocusChange,
+    key: key,
+  );
 
   /// Creates a [FHeaderAction] with `FAssets.icons.x`.
   factory FHeaderAction.x({
@@ -72,16 +71,15 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     Key? key,
-  }) =>
-      FHeaderAction(
-        icon: FIcon(FAssets.icons.x),
-        onPress: onPress,
-        style: style,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        key: key,
-      );
+  }) => FHeaderAction(
+    icon: FIcon(FAssets.icons.x),
+    onPress: onPress,
+    style: style,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    onFocusChange: onFocusChange,
+    key: key,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +95,7 @@ class FHeaderAction extends StatelessWidget {
       onPress: onPress,
       onLongPress: onLongPress,
       child: FIconStyleData(
-        style: FIconStyle(
-          color: enabled ? style.enabledColor : style.disabledColor,
-          size: style.size,
-        ),
+        style: FIconStyle(color: enabled ? style.enabledColor : style.disabledColor, size: style.size),
         child: icon,
       ),
     );
@@ -153,7 +148,7 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
   FHeaderActionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required this.size})
-      : enabledColor = colorScheme.foreground,
-        disabledColor = colorScheme.disable(colorScheme.foreground),
-        focusedOutlineStyle = style.focusedOutlineStyle;
+    : enabledColor = colorScheme.foreground,
+      disabledColor = colorScheme.disable(colorScheme.foreground),
+      focusedOutlineStyle = style.focusedOutlineStyle;
 }

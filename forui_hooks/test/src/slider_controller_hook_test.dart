@@ -11,12 +11,12 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFContinuousSliderController(selection: FSliderSelection(max: 0.2));
-          return FSlider(
-            controller: controller,
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFContinuousSliderController(selection: FSliderSelection(max: 0.2));
+            return FSlider(controller: controller);
+          },
+        ),
       ),
     );
 
@@ -30,12 +30,12 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFContinuousRangeSliderController(selection: FSliderSelection(max: 0.2));
-          return FSlider(
-            controller: controller,
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFContinuousRangeSliderController(selection: FSliderSelection(max: 0.2));
+            return FSlider(controller: controller);
+          },
+        ),
       ),
     );
 
@@ -49,17 +49,15 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFDiscreteSliderController(selection: FSliderSelection(max: 0.2));
-          return FSlider(
-            controller: controller,
-            marks: const [
-              FSliderMark(value: 0),
-              FSliderMark(value: 0.2),
-              FSliderMark(value: 0.5),
-            ],
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFDiscreteSliderController(selection: FSliderSelection(max: 0.2));
+            return FSlider(
+              controller: controller,
+              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.2), FSliderMark(value: 0.5)],
+            );
+          },
+        ),
       ),
     );
 
@@ -73,17 +71,15 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
-        home: HookBuilder(builder: (context) {
-          controller = useFDiscreteRangeSliderController(selection: FSliderSelection(max: 0.2));
-          return FSlider(
-            controller: controller,
-            marks: const [
-              FSliderMark(value: 0),
-              FSliderMark(value: 0.2),
-              FSliderMark(value: 0.5),
-            ],
-          );
-        }),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFDiscreteRangeSliderController(selection: FSliderSelection(max: 0.2));
+            return FSlider(
+              controller: controller,
+              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.2), FSliderMark(value: 0.5)],
+            );
+          },
+        ),
       ),
     );
 

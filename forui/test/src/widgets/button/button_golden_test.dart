@@ -179,10 +179,7 @@ void main() {
                       height: 50,
                       decoration: BoxDecoration(
                         color: Colors.amber,
-                        border: Border.all(
-                          color: Colors.blueAccent,
-                          width: 2,
-                        ),
+                        border: Border.all(color: Colors.blueAccent, width: 2),
                       ),
                     ),
                   ),
@@ -215,10 +212,7 @@ void main() {
                       height: 50,
                       decoration: BoxDecoration(
                         color: Colors.amber,
-                        border: Border.all(
-                          color: Colors.blueAccent,
-                          width: 2,
-                        ),
+                        border: Border.all(color: Colors.blueAccent, width: 2),
                       ),
                     ),
                   ),
@@ -237,11 +231,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FButton.icon(
-                onPress: () {},
-                style: variant,
-                child: FIcon(FAssets.icons.chevronRight),
-              ),
+              child: FButton.icon(onPress: () {}, style: variant, child: FIcon(FAssets.icons.chevronRight)),
             ),
           );
 
@@ -255,11 +245,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FButton.icon(
-                onPress: null,
-                style: variant,
-                child: FIcon(FAssets.icons.chevronRight),
-              ),
+              child: FButton.icon(onPress: null, style: variant, child: FIcon(FAssets.icons.chevronRight)),
             ),
           );
 

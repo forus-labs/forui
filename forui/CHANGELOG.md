@@ -5,12 +5,14 @@
 * Add `FTextField.counterBuilder`.
 * Add `FTransformable`.
 * Add `FTransformables`.
+* Add `FTextField.stylusHandwritingEnabled`.
 
 ### Changes
 
 * Change all widget styles to use code generated functions.
 * **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
+* **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
 
 
 ## 0.9.1+1

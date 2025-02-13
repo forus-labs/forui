@@ -54,10 +54,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('label/${theme.name}/horizontal-$state.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$state.png'));
         });
       }
 
@@ -80,10 +77,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('label/${theme.name}/vertical-$state.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/vertical-$state.png'));
         });
       }
     }

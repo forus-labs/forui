@@ -10,10 +10,12 @@ void main() {
     late FTabController controller;
 
     await tester.pumpWidget(
-      HookBuilder(builder: (context) {
-        controller = useFTabController(length: 2);
-        return Container();
-      }),
+      HookBuilder(
+        builder: (context) {
+          controller = useFTabController(length: 2);
+          return Container();
+        },
+      ),
     );
 
     controller.animateTo(1);
@@ -22,37 +24,45 @@ void main() {
   });
 
   testWidgets('switch from uncontrolled to controlled throws', (tester) async {
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTabController(length: 1);
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTabController(length: 1);
+          return Container();
+        },
+      ),
+    );
 
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTabController(vsync: tester, length: 1);
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTabController(vsync: tester, length: 1);
+          return Container();
+        },
+      ),
+    );
 
     expect(tester.takeException(), isStateError);
   });
 
   testWidgets('switch from controlled to uncontrolled throws', (tester) async {
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTabController(vsync: tester, length: 1);
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTabController(vsync: tester, length: 1);
+          return Container();
+        },
+      ),
+    );
 
-    await tester.pumpWidget(HookBuilder(
-      builder: (context) {
-        useFTabController(length: 1);
-        return Container();
-      },
-    ));
+    await tester.pumpWidget(
+      HookBuilder(
+        builder: (context) {
+          useFTabController(length: 1);
+          return Container();
+        },
+      ),
+    );
 
     expect(tester.takeException(), isStateError);
   });

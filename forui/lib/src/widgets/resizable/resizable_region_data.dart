@@ -38,27 +38,27 @@ final class FResizableRegionData with Diagnosticable {
     required this.index,
     required ({double min, double max, double total}) extent,
     required this.offset,
-  })  : assert(0 <= index, 'Index should be non-negative, but is $index.'),
-        assert(0 < extent.min, 'Min extent should be positive, but is ${extent.min}'),
-        assert(
-          extent.min < extent.max,
-          'Min extent should be less than the max extent, but min is ${extent.min} and max is ${extent.max}',
-        ),
-        assert(
-          extent.max <= extent.total,
-          'Max extent should be less than or equal to the total extent, but max is ${extent.max} and total is ${extent.total}',
-        ),
-        assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),
-        assert(
-          offset.min < offset.max,
-          'Min offset should be less than the max offset, but min is ${offset.min} and max is ${offset.max}',
-        ),
-        assert(
-          0 <= offset.max - offset.min && offset.max - offset.min <= extent.max,
-          'Current extent should be non-negative and less than or equal to the max extent, but current is '
-          '${offset.max - offset.min} and max is ${extent.max}.',
-        ),
-        extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
+  }) : assert(0 <= index, 'Index should be non-negative, but is $index.'),
+       assert(0 < extent.min, 'Min extent should be positive, but is ${extent.min}'),
+       assert(
+         extent.min < extent.max,
+         'Min extent should be less than the max extent, but min is ${extent.min} and max is ${extent.max}',
+       ),
+       assert(
+         extent.max <= extent.total,
+         'Max extent should be less than or equal to the total extent, but max is ${extent.max} and total is ${extent.total}',
+       ),
+       assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),
+       assert(
+         offset.min < offset.max,
+         'Min offset should be less than the max offset, but min is ${offset.min} and max is ${offset.max}',
+       ),
+       assert(
+         0 <= offset.max - offset.min && offset.max - offset.min <= extent.max,
+         'Current extent should be non-negative and less than or equal to the max extent, but current is '
+         '${offset.max - offset.min} and max is ${extent.max}.',
+       ),
+       extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
 
   /// Returns a copy of this [FResizableRegionData] with the given fields replaced by the new values.
   @useResult
@@ -68,12 +68,11 @@ final class FResizableRegionData with Diagnosticable {
     double? maxExtent,
     double? minOffset,
     double? maxOffset,
-  }) =>
-      FResizableRegionData(
-        index: index ?? this.index,
-        extent: (min: minExtent ?? extent.min, max: maxExtent ?? extent.max, total: extent.total),
-        offset: (min: minOffset ?? offset.min, max: maxOffset ?? offset.max),
-      );
+  }) => FResizableRegionData(
+    index: index ?? this.index,
+    extent: (min: minExtent ?? extent.min, max: maxExtent ?? extent.max, total: extent.total),
+    offset: (min: minOffset ?? offset.min, max: maxOffset ?? offset.max),
+  );
 
   /// The offsets as a percentage of the parent [FResizable]'s size.
   ///

@@ -18,9 +18,7 @@ void main() {
         TestScaffold.blue(
           child: FSlider(
             style: TestScaffold.blueScreen.sliderStyles.horizontalStyle,
-            controller: FContinuousSliderController(
-              selection: FSliderSelection(min: 0.30, max: 0.60),
-            ),
+            controller: FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60)),
             marks: const [
               FSliderMark(value: 0.0, label: Text('0')),
               FSliderMark(value: 0.25, label: Text('25'), tick: false),
@@ -121,9 +119,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile(
-                'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-focused.png',
-              ),
+              matchesGoldenFile('slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-focused.png'),
             );
           });
 
@@ -167,9 +163,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile(
-                'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-error.png',
-              ),
+              matchesGoldenFile('slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-error.png'),
             );
           });
         }
@@ -231,34 +225,22 @@ void main() {
             FSliderMark(
               value: 0.0,
               label: const Text('0'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(
-                labelOffset: 20,
-                labelAnchor: positive,
-              ),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: 20, labelAnchor: positive),
             ),
             FSliderMark(
               value: 0.25,
               label: const Text('25'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(
-                labelOffset: 1,
-                labelAnchor: positive,
-              ),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: 1, labelAnchor: positive),
             ),
             FSliderMark(
               value: 0.75,
               label: const Text('75'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(
-                labelOffset: -1,
-                labelAnchor: negative,
-              ),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: -1, labelAnchor: negative),
             ),
             FSliderMark(
               value: 1.0,
               label: const Text('100'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(
-                labelOffset: -20,
-                labelAnchor: negative,
-              ),
+              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: -20, labelAnchor: negative),
             ),
           ];
         });
@@ -267,9 +249,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold.app(
               child: FSlider(
-                controller: FContinuousSliderController(
-                  selection: FSliderSelection(min: 0.30, max: 0.60),
-                ),
+                controller: FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60)),
                 layout: layout,
                 marks: marks,
               ),
@@ -288,9 +268,7 @@ void main() {
                     childPadding: const EdgeInsets.only(left: 20, top: 40, right: 10, bottom: 30),
                   ),
                 ),
-                controller: FContinuousSliderController(
-                  selection: FSliderSelection(min: 0.30, max: 0.60),
-                ),
+                controller: FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60)),
                 layout: layout,
                 marks: marks,
               ),
@@ -307,9 +285,7 @@ void main() {
                 label: const Text('Label'),
                 description: const Text('Description'),
                 trackMainAxisExtent: 300,
-                controller: FContinuousSliderController(
-                  selection: FSliderSelection(min: 0.30, max: 0.60),
-                ),
+                controller: FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60)),
                 layout: layout,
                 marks: marks,
               ),
@@ -325,9 +301,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSlider(
-            controller: FContinuousSliderController(
-              selection: FSliderSelection(min: 0.30, max: 0.60),
-            ),
+            controller: FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60)),
             marks: const [
               FSliderMark(value: 0, label: Text('0%')),
               FSliderMark(value: 0.25, tick: false),

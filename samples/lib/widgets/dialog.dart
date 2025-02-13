@@ -9,10 +9,8 @@ import 'package:forui_samples/sample.dart';
 class DialogPage extends Sample {
   final Axis direction;
 
-  DialogPage({
-    @queryParam super.theme,
-    @queryParam bool vertical = false,
-  }) : direction = vertical ? Axis.vertical : Axis.horizontal;
+  DialogPage({@queryParam super.theme, @queryParam bool vertical = false})
+    : direction = vertical ? Axis.vertical : Axis.horizontal;
 
   @override
   Widget sample(BuildContext context) {
@@ -25,21 +23,23 @@ class DialogPage extends Sample {
     return IntrinsicWidth(
       child: FButton(
         label: const Text('Show Dialog'),
-        onPress: () => showAdaptiveDialog(
-          context: context,
-          builder: (context) => FTheme(
-            data: theme,
-            child: FDialog(
-              style: style,
-              direction: direction,
-              title: const Text('Are you absolutely sure?'),
-              body: const Text(
-                'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-              ),
-              actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
+        onPress:
+            () => showAdaptiveDialog(
+              context: context,
+              builder:
+                  (context) => FTheme(
+                    data: theme,
+                    child: FDialog(
+                      style: style,
+                      direction: direction,
+                      title: const Text('Are you absolutely sure?'),
+                      body: const Text(
+                        'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                      ),
+                      actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
+                    ),
+                  ),
             ),
-          ),
-        ),
       ),
     );
   }

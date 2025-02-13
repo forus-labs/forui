@@ -11,18 +11,14 @@ final class FTabController extends FChangeNotifier {
     int initialIndex = 0,
     Duration? animationDuration,
   }) : _controller = TabController(
-          initialIndex: initialIndex,
-          length: length,
-          animationDuration: animationDuration,
-          vsync: vsync,
-        );
+         initialIndex: initialIndex,
+         length: length,
+         animationDuration: animationDuration,
+         vsync: vsync,
+       );
 
   /// Animates to the given [index].
-  void animateTo(
-    int index, {
-    Duration? duration,
-    Curve curve = Curves.ease,
-  }) {
+  void animateTo(int index, {Duration? duration, Curve curve = Curves.ease}) {
     _controller.animateTo(index, duration: duration, curve: curve);
   }
 

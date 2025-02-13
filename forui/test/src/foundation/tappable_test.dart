@@ -17,7 +17,7 @@ void main() {
           TestScaffold(
             child: FTappable(
               focusNode: focusNode,
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () {} : null,
             ),
           ),
@@ -31,12 +31,7 @@ void main() {
 
       testWidgets('hovered - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
-            child: FTappable(
-              builder: (_, value, __) => Text('$value'),
-              onPress: enabled ? () {} : null,
-            ),
-          ),
+          TestScaffold(child: FTappable(builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null)),
         );
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
@@ -63,7 +58,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FTappable(
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
             ),
@@ -83,7 +78,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FTappable(
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
             ),
@@ -109,7 +104,7 @@ void main() {
           TestScaffold(
             child: FTappable(
               autofocus: true,
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
             ),
@@ -133,10 +128,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setter) {
               setState = setter;
-              return FTappable(
-                builder: (_, value, __) => Text('$value'),
-                onPress: onPress,
-              );
+              return FTappable(builder: (_, value, _) => Text('$value'), onPress: onPress);
             },
           ),
         ),
@@ -167,7 +159,7 @@ void main() {
           TestScaffold(
             child: FTappable.animated(
               focusNode: focusNode,
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () {} : null,
             ),
           ),
@@ -182,10 +174,7 @@ void main() {
       testWidgets('hovered - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FTappable.animated(
-              builder: (_, value, __) => Text('$value'),
-              onPress: enabled ? () {} : null,
-            ),
+            child: FTappable.animated(builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null),
           ),
         );
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
@@ -213,7 +202,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FTappable.animated(
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
             ),
@@ -233,7 +222,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FTappable.animated(
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
             ),
@@ -258,7 +247,7 @@ void main() {
           TestScaffold(
             child: FTappable.animated(
               key: key,
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () {} : null,
             ),
           ),
@@ -285,7 +274,7 @@ void main() {
           TestScaffold(
             child: FTappable.animated(
               autofocus: true,
-              builder: (_, value, __) => Text('$value'),
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
             ),

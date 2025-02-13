@@ -13,37 +13,28 @@ void main() {
 
   setUpAll(initializeDateFormatting);
 
-  for (final (index, (locale, placeholder)) in const [
-    (null, 'Pick a date'),
-    (Locale('en', 'SG'), 'Pick a date'),
-    (Locale('hr'), 'Odaberite datum'),
-  ].indexed) {
+  for (final (index, (locale, placeholder))
+      in const [
+        (null, 'Pick a date'),
+        (Locale('en', 'SG'), 'Pick a date'),
+        (Locale('hr'), 'Odaberite datum'),
+      ].indexed) {
     testWidgets('placeholder - $index', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: locale,
-          child: const FDatePicker.calendar(),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: locale, child: const FDatePicker.calendar()));
 
       expect(find.text(placeholder), findsOneWidget);
     });
   }
 
-  for (final (index, (locale, day, date)) in const [
-    (null, '15', 'Jan 15, 2025'), // M/d/y
-    (Locale('en', 'SG'), '15', '15 Jan 2025'), // dd/MM/y
-    (Locale('hr'), '15.', '15. sij 2025.'),
-  ].indexed) {
+  for (final (index, (locale, day, date))
+      in const [
+        (null, '15', 'Jan 15, 2025'), // M/d/y
+        (Locale('en', 'SG'), '15', '15 Jan 2025'), // dd/MM/y
+        (Locale('hr'), '15.', '15. sij 2025.'),
+      ].indexed) {
     testWidgets('formatted date - $index', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          locale: locale,
-          child: FDatePicker.calendar(
-            key: key,
-            today: DateTime.utc(2025, 1, 15),
-          ),
-        ),
+        TestScaffold.app(locale: locale, child: FDatePicker.calendar(key: key, today: DateTime.utc(2025, 1, 15))),
       );
 
       await tester.tap(find.byKey(key));
@@ -71,11 +62,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDatePicker.calendar(
-          controller: controller,
-          key: key,
-          today: DateTime.utc(2025, 1, 15),
-        ),
+        child: FDatePicker.calendar(controller: controller, key: key, today: DateTime.utc(2025, 1, 15)),
       ),
     );
 
@@ -92,10 +79,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDatePicker.calendar(
-          key: key,
-          today: DateTime.utc(2025, 1, 15),
-        ),
+        child: FDatePicker.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
       ),
     );
 
@@ -120,11 +104,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDatePicker.calendar(
-          key: key,
-          format: DateFormat.yMMMMd('en_SG'),
-          today: DateTime.utc(2025, 1, 15),
-        ),
+        child: FDatePicker.calendar(key: key, format: DateFormat.yMMMMd('en_SG'), today: DateTime.utc(2025, 1, 15)),
       ),
     );
 

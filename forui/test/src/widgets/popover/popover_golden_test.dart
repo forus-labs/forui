@@ -25,12 +25,7 @@ void main() {
             child: FPopover(
               controller: controller,
               popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );
@@ -47,12 +42,7 @@ void main() {
             child: FPopover(
               controller: controller,
               popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );
@@ -72,12 +62,7 @@ void main() {
             child: FPopover(
               controller: controller,
               popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );
@@ -102,12 +87,7 @@ void main() {
               style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
               popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );
@@ -131,12 +111,7 @@ void main() {
               style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
               controller: controller,
               popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );

@@ -12,15 +12,14 @@ void main() {
     Widget slider({
       FSliderSelection? selection,
       FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
-    }) =>
-        TestScaffold.app(
-          child: FSlider(
-            controller: FContinuousSliderController(
-              selection: selection ?? FSliderSelection(max: 0.75),
-              allowedInteraction: interaction,
-            ),
-          ),
-        );
+    }) => TestScaffold.app(
+      child: FSlider(
+        controller: FContinuousSliderController(
+          selection: selection ?? FSliderSelection(max: 0.75),
+          allowedInteraction: interaction,
+        ),
+      ),
+    );
 
     for (final (interaction, expected) in [
       (FSliderInteraction.slide, findsNothing),
@@ -83,13 +82,11 @@ void main() {
 
   group('range slider tooltip', () {
     Widget slider({FSliderSelection? selection}) => TestScaffold.app(
-          theme: FThemes.zinc.light,
-          child: FSlider(
-            controller: FContinuousSliderController.range(
-              selection: selection ?? FSliderSelection(max: 0.75),
-            ),
-          ),
-        );
+      theme: FThemes.zinc.light,
+      child: FSlider(
+        controller: FContinuousSliderController.range(selection: selection ?? FSliderSelection(max: 0.75)),
+      ),
+    );
 
     testWidgets('long press thumb', (tester) async {
       await tester.pumpWidget(slider());
@@ -118,30 +115,30 @@ void main() {
 
   for (final layout in FLayout.values) {
     Widget slider(FSliderController controller) => TestScaffold.app(
-          padded: false,
-          child: FSlider(
-            layout: layout,
-            controller: controller,
-            marks: const [
-              FSliderMark(value: 0),
-              FSliderMark(value: 0.25),
-              FSliderMark(value: 0.5),
-              FSliderMark(value: 0.75),
-              FSliderMark(value: 1),
-            ],
-          ),
-        );
+      padded: false,
+      child: FSlider(
+        layout: layout,
+        controller: controller,
+        marks: const [
+          FSliderMark(value: 0),
+          FSliderMark(value: 0.25),
+          FSliderMark(value: 0.5),
+          FSliderMark(value: 0.75),
+          FSliderMark(value: 1),
+        ],
+      ),
+    );
 
     group('value selection - $layout', () {
       FSliderController continuous(FSliderInteraction interaction) => FContinuousSliderController(
-            allowedInteraction: interaction,
-            selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
-          );
+        allowedInteraction: interaction,
+        selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
+      );
 
       FSliderController discrete(FSliderInteraction interaction) => FDiscreteSliderController(
-            allowedInteraction: interaction,
-            selection: FSliderSelection(max: 0.5, extent: (min: 0.25, max: 0.8)),
-          );
+        allowedInteraction: interaction,
+        selection: FSliderSelection(max: 0.5, extent: (min: 0.25, max: 0.8)),
+      );
 
       for (final (con, interaction, expandExpected, shrinkExpected) in [
         (true, FSliderInteraction.slide, greaterThan(0.75), lessThan(0.75)),
@@ -252,12 +249,11 @@ void main() {
 
     group('range selection - $layout', () {
       FSliderController continuous() => FContinuousSliderController.range(
-            selection: FSliderSelection(min: 0.25, max: 0.75, extent: (min: 0.3, max: 0.8)),
-          );
+        selection: FSliderSelection(min: 0.25, max: 0.75, extent: (min: 0.3, max: 0.8)),
+      );
 
-      FSliderController discrete() => FDiscreteSliderController.range(
-            selection: FSliderSelection(min: 0.25, max: 0.75),
-          );
+      FSliderController discrete() =>
+          FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75));
 
       for (final (index, constructor) in [continuous, discrete].indexed) {
         testWidgets('tap active track - $index', (tester) async {
@@ -272,10 +268,8 @@ void main() {
         });
       }
 
-      for (final (index, (constructor, minExpected, maxExpected)) in [
-        (continuous, lessThan(0.25), greaterThan(0.75)),
-        (discrete, 0, 1),
-      ].indexed) {
+      for (final (index, (constructor, minExpected, maxExpected))
+          in [(continuous, lessThan(0.25), greaterThan(0.75)), (discrete, 0, 1)].indexed) {
         testWidgets('tap inactive track - $index', (tester) async {
           final controller = constructor();
           await tester.pumpWidget(slider(controller));
@@ -294,10 +288,11 @@ void main() {
         });
       }
 
-      for (final (index, (constructor, minShrink, minExpand, maxExpand, maxShrink)) in [
-        (continuous, greaterThan(0.25), lessThan(0.25), greaterThan(0.75), lessThan(0.75)),
-        (discrete, 0.5, 0.25, 1, 0.75),
-      ].indexed) {
+      for (final (index, (constructor, minShrink, minExpand, maxExpand, maxShrink))
+          in [
+            (continuous, greaterThan(0.25), lessThan(0.25), greaterThan(0.75), lessThan(0.75)),
+            (discrete, 0.5, 0.25, 1, 0.75),
+          ].indexed) {
         testWidgets('drag thumbs - $index', (tester) async {
           final controller = constructor();
           await tester.pumpWidget(slider(controller));
@@ -344,25 +339,25 @@ void main() {
 
 extension on Rect {
   Offset min(FLayout layout) => switch (layout) {
-        FLayout.ltr => centerLeft,
-        FLayout.rtl => centerRight,
-        FLayout.ttb => topCenter,
-        FLayout.btt => bottomCenter,
-      };
+    FLayout.ltr => centerLeft,
+    FLayout.rtl => centerRight,
+    FLayout.ttb => topCenter,
+    FLayout.btt => bottomCenter,
+  };
 
   Offset max(FLayout layout) => switch (layout) {
-        FLayout.ltr => centerRight,
-        FLayout.rtl => centerLeft,
-        FLayout.ttb => bottomCenter,
-        FLayout.btt => topCenter,
-      };
+    FLayout.ltr => centerRight,
+    FLayout.rtl => centerLeft,
+    FLayout.ttb => bottomCenter,
+    FLayout.btt => topCenter,
+  };
 }
 
 extension on FLayout {
   Offset directional(double value) => switch (this) {
-        FLayout.ltr => Offset(value, 0),
-        FLayout.rtl => Offset(-value, 0),
-        FLayout.ttb => Offset(0, value),
-        FLayout.btt => Offset(0, -value),
-      };
+    FLayout.ltr => Offset(value, 0),
+    FLayout.rtl => Offset(-value, 0),
+    FLayout.ttb => Offset(0, value),
+    FLayout.btt => Offset(0, -value),
+  };
 }
