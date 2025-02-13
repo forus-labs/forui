@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
@@ -358,7 +359,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     calendarStyle: calendarStyle ?? this.calendarStyle,
     cardStyle: cardStyle ?? this.cardStyle,
     checkboxStyle: checkboxStyle ?? this.checkboxStyle,
-    datePickerStyle: datePickerStyle ?? this.dateFieldStyle,
+    datePickerStyle: datePickerStyle ?? dateFieldStyle,
     dialogStyle: dialogStyle ?? this.dialogStyle,
     dividerStyles: dividerStyles ?? this.dividerStyles,
     headerStyle: headerStyle ?? this.headerStyle,
