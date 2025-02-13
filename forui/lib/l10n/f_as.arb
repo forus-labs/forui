@@ -5,6 +5,6 @@
   "barrierLabel": "স্ক্ৰিম",
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
-  "datePickerHint": "তাৰিখ বাছনি কৰক",
-  "datePickerInvalidDateError": "অমান্য তাৰিখ।"
+  "dateFieldHint": "তাৰিখ বাছনি কৰক",
+  "dateFieldInvalidDateError": "অমান্য তাৰিখ।"
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A controller that controls which sections are shown and hidden.
 class FAccordionController extends FChangeNotifier {

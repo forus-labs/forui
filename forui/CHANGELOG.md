@@ -10,6 +10,11 @@
 ### Changes
 
 * Change all widget styles to use code generated functions.
+* **Breaking** Change `FDatePicker` to `FDateField`.
+* **Breaking** Change `FDatePickerController` to `FDateFieldController`.
+* **Breaking** Change `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
+* **Breaking** Change `FLocalizations.datePickerHint` to `FLocalizations.dateFieldHint`.
+* **Breaking** Change `FLocalizations.datePickerInvalidDateError` to `FLocalizations.dateFieldInvalidDateError`.
 * **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.

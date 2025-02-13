@@ -1,5 +1,6 @@
-import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
+
+import 'package:forui/forui.dart';
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
@@ -53,10 +54,10 @@ class FDefaultLocalizations extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';

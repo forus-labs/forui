@@ -5,6 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Chagua tarehe",
-  "datePickerInvalidDateError": "Tarehe si sahihi."
+  "dateFieldHint": "Chagua tarehe",
+  "dateFieldInvalidDateError": "Tarehe si sahihi."
 }

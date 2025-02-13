@@ -5,6 +5,6 @@
   "barrierLabel": "სკრიმი",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "აირჩიეთ თარიღი",
-  "datePickerInvalidDateError": "არასწორი თარიღი."
+  "dateFieldHint": "აირჩიეთ თარიღი",
+  "dateFieldInvalidDateError": "არასწორი თარიღი."
 }

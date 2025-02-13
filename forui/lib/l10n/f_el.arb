@@ -5,6 +5,6 @@
   "barrierLabel": "Επικάλυψη",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Επιλέξτε ημερομηνία",
-  "datePickerInvalidDateError": "Μη έγκυρη ημερομηνία."
+  "dateFieldHint": "Επιλέξτε ημερομηνία",
+  "dateFieldInvalidDateError": "Μη έγκυρη ημερομηνία."
 }

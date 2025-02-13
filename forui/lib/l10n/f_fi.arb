@@ -5,6 +5,6 @@
   "barrierLabel": "Sermi",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Valitse päivämäärä",
-  "datePickerInvalidDateError": "Virheellinen päivämäärä."
+  "dateFieldHint": "Valitse päivämäärä",
+  "dateFieldInvalidDateError": "Virheellinen päivämäärä."
 }

@@ -5,6 +5,6 @@
   "barrierLabel": "Skrim",
   "shortDateSeparator": ". ",
   "shortDateSuffix": ".",
-  "datePickerHint": "Izaberite datum",
-  "datePickerInvalidDateError": "Nevažeći datum."
+  "dateFieldHint": "Izaberite datum",
+  "dateFieldInvalidDateError": "Nevažeći datum."
 }

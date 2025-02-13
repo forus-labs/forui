@@ -1,3 +1,5 @@
+// ignore: unused_import
+
 import 'package:intl/intl.dart' as intl;
 
 import 'localizations.dart';
@@ -63,10 +65,10 @@ class FLocalizationsHr extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
-  String get datePickerHint => 'Odaberite datum';
+  String get dateFieldHint => 'Odaberite datum';
 
   @override
-  String get datePickerInvalidDateError => 'Nevažeći datum.';
+  String get dateFieldInvalidDateError => 'Nevažeći datum.';
 
   @override
   String get dialogLabel => 'Dijalog';

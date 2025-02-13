@@ -5,6 +5,6 @@
   "barrierLabel": "Kətan",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Tarix seçin",
-  "datePickerInvalidDateError": "Yanlış tarix."
+  "dateFieldHint": "Tarix seçin",
+  "dateFieldInvalidDateError": "Yanlış tarix."
 }

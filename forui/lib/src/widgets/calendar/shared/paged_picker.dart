@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/src/widgets/calendar/calendar.dart';
-import 'package:forui/src/widgets/calendar/shared/header.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/src/widgets/calendar/calendar.dart';
+import 'package:forui/src/widgets/calendar/shared/header.dart';
 
 @internal
 abstract class PagedPicker extends StatefulWidget {

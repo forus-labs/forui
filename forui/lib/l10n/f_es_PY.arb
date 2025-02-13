@@ -5,6 +5,6 @@
   "barrierLabel": "Lámina",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Seleccionar fecha",
-  "datePickerInvalidDateError": "Fecha no válida."
+  "dateFieldHint": "Seleccionar fecha",
+  "dateFieldInvalidDateError": "Fecha no válida."
 }

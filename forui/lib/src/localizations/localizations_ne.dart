@@ -1,3 +1,5 @@
+// ignore: unused_import
+
 import 'package:intl/intl.dart' as intl;
 
 import 'localizations.dart';
@@ -63,10 +65,10 @@ class FLocalizationsNe extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'मिति चयन गर्नुहोस्';
+  String get dateFieldHint => 'मिति चयन गर्नुहोस्';
 
   @override
-  String get datePickerInvalidDateError => 'अमान्य मिति।';
+  String get dateFieldInvalidDateError => 'अमान्य मिति।';
 
   @override
   String get dialogLabel => 'संवाद';

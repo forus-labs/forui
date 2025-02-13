@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import 'package:forui/forui.dart';
 import 'slider_tooltips_controller_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FTooltipController>()])

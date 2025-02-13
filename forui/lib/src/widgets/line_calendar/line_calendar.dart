@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/line_calendar/calendar_layout.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/line_calendar/calendar_layout.dart';
 
 part 'line_calendar.style.dart';
 

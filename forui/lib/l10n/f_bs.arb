@@ -5,6 +5,6 @@
   "barrierLabel": "Rubno",
   "shortDateSeparator": ".",
   "shortDateSuffix": ".",
-  "datePickerHint": "Odaberite datum",
-  "datePickerInvalidDateError": "Nevažeći datum."
+  "dateFieldHint": "Odaberite datum",
+  "dateFieldInvalidDateError": "Nevažeći datum."
 }

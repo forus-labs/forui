@@ -5,6 +5,6 @@
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Selecionar data",
-  "datePickerInvalidDateError": "Data inválida."
+  "dateFieldHint": "Selecionar data",
+  "dateFieldInvalidDateError": "Data inválida."
 }

@@ -5,6 +5,6 @@
   "barrierLabel": "Užsklanda",
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
-  "datePickerHint": "Pasirinkti datą",
-  "datePickerInvalidDateError": "Netinkama data."
+  "dateFieldHint": "Pasirinkti datą",
+  "dateFieldInvalidDateError": "Netinkama data."
 }

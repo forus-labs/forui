@@ -5,6 +5,6 @@
   "barrierLabel": "Sirm",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Valige kuupäev",
-  "datePickerInvalidDateError": "Sobimatu kuupäev."
+  "dateFieldHint": "Valige kuupäev",
+  "dateFieldInvalidDateError": "Sobimatu kuupäev."
 }
