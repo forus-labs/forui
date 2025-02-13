@@ -71,8 +71,8 @@ class FTextFieldStateStyle with Diagnosticable, _$FTextFieldStateStyleFunctions 
 /// A [FTextField] error state's style.
 final class FTextFieldErrorStyle extends FTextFieldStateStyle
     with _$FTextFieldErrorStyleFunctions
+    implements
         // ignore: avoid_implementing_value_types
-        implements
         FFormFieldErrorStyle {
   /// The error's [TextStyle].
   @override
