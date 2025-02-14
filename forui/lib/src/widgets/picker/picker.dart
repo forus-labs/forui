@@ -126,7 +126,9 @@ class _FPickerState extends State<FPicker> {
   }
 
   void _createController() {
-    _controller = widget.controller ?? FPickerController(initialIndexes: List.filled(widget.children.length, 0));
+    _controller =
+        widget.controller ??
+        FPickerController(initialIndexes: List.filled(widget.children.whereType<FPickerWheel>().length, 0));
 
     for (final wheel in _controller.wheels) {
       wheel.dispose();
