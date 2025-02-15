@@ -123,6 +123,29 @@ void main() {
       expect(find.text('bar content'), findsOneWidget);
     });
 
+    testWidgets('using controller to switches tab entry', (tester) async {
+      final controller = FTabController(length: 2, vsync: tester);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            controller: controller,
+            tabs: const [
+              FTabEntry(label: Text('foo'), content: Text('foo content')),
+              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.text('bar content'), findsNothing);
+
+      controller.animateTo(1);
+      await tester.pumpAndSettle();
+
+      expect(find.text('bar content'), findsOneWidget);
+    });
+
     testWidgets('old controller is not disposed', (tester) async {
       final first = FTabController(length: 2, vsync: tester);
       await tester.pumpWidget(
