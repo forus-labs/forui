@@ -19,6 +19,9 @@
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
 
+### Fixes
+* Fix `FTab` not updating when using controller to switch tabs.
+
 
 ## 0.9.1+1
 Fix documentation not publishing.
