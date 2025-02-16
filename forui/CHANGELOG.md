@@ -6,6 +6,7 @@
 * Add `FTransformable`.
 * Add `FTransformables`.
 * Add `FTextField.stylusHandwritingEnabled`.
+* Add `FPickerWheelMixin`.
 
 ### Changes
 

@@ -1,6 +1,11 @@
 import 'package:intl/intl.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
+
+/// The locales that use non-western digits.
+@internal
+const easternLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {

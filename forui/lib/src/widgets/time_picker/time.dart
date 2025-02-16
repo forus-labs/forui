@@ -1,8 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 /// Represents the time of the day.
-final class FTime with Diagnosticable implements Comparable<FTime> {
+final class FTime implements Comparable<FTime> {
   /// The hour. Always in 24-hour format.
   ///
   /// ## Contract
@@ -64,10 +63,5 @@ final class FTime with Diagnosticable implements Comparable<FTime> {
   int get hashCode => hour.hashCode ^ minute.hashCode;
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(IntProperty('hour', hour))
-      ..add(IntProperty('minute', minute));
-  }
+  String toString() => '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
 }
