@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -62,18 +62,14 @@ void main() {
 
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: const FTimePicker()));
 
-      await tester.pumpWidget(
-        TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller)),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller)));
       expect(controller.value, const FTime());
     });
 
     testWidgets('swap external controller with internal controller', (tester) async {
       final controller = FTimePickerController(initial: const FTime(10, 30));
 
-      await tester.pumpWidget(
-        TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller)),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller)));
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: const FTimePicker()));
 
       expect(controller.disposed, false);

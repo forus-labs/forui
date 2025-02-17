@@ -20,10 +20,10 @@ final class FTime implements Comparable<FTime> {
       assert(minute >= 0 && minute <= 59, 'minute must be between 0 and 59');
 
   /// Creates a [FTime] based on the given [DateTime].
-  FTime.fromDateTime(DateTime dateTime): this(dateTime.hour, dateTime.minute);
+  FTime.fromDateTime(DateTime dateTime) : this(dateTime.hour, dateTime.minute);
 
   /// Creates a [FTime] based on the current time.
-  FTime.now(): this.fromDateTime(DateTime.now());
+  FTime.now() : this.fromDateTime(DateTime.now());
 
   /// Returns a new [FTime] with the hour and/or minute replaced.
   @useResult

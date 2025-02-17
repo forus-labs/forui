@@ -1,6 +1,8 @@
 import 'package:flutter/animation.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A [FTimePicker]'s controller.
 final class FTimePickerController extends FValueNotifier<FTime> {

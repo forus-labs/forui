@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:meta/meta.dart';
 
 /// The locales that use non-western digits.
 @internal

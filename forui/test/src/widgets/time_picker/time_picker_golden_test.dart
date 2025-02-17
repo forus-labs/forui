@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/basic.dart';
+
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_wheel.dart';
-
 import '../../test_scaffold.dart';
 
 void main() {
@@ -80,7 +81,6 @@ void main() {
           ),
         );
 
-
         await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
@@ -101,7 +101,6 @@ void main() {
             child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller, hour24: false)),
           ),
         );
-
 
         await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
         await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -124,7 +123,6 @@ void main() {
           ),
         );
 
-
         await tester.drag(find.byType(BuilderWheel).first, const Offset(0, 50));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
@@ -145,7 +143,6 @@ void main() {
             child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller, hour24: false)),
           ),
         );
-
 
         await tester.drag(find.byType(BuilderWheel).first, const Offset(0, 50));
         await tester.pumpAndSettle(const Duration(seconds: 1));
