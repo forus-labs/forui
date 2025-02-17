@@ -76,10 +76,6 @@ extension FTimePickerControllers on FTimePickerController {
 
   /// Decodes the current picker wheels as an [FTime].
   void decode() {
-    if (_mutating) {
-      return;
-    }
-
     final indexes = _picker!.value;
 
     var hour = (indexes[0] * hourInterval) % (hours12 ? 12 : 24);
