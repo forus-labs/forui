@@ -51,10 +51,10 @@ void main() {
           child: FTimePicker(controller: controller, hourInterval: 2, minuteInterval: 15),
         ),
       );
-      expect(controller.value, null);
+      expect(controller.value, const FTime(8, 45));
       // TODO: Change unexpected values once https://github.com/flutter/flutter/issues/162972 is resolved.
-      expect(controller.hourInterval, 8);
-      expect(controller.minuteInterval, 45);
+      expect(controller.hourInterval, 2);
+      expect(controller.minuteInterval, 15);
     });
 
     testWidgets('swap internal controller with external controller', (tester) async {
