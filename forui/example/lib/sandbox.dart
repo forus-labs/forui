@@ -31,9 +31,7 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  late FCalendarController<DateTime?> calendarController = FCalendarController.date();
-  late FPickerController controller = FPickerController(initialIndexes: [2, 5]);
-  late FTimePickerController timeController = FTimePickerController()..addValueListener((value) => print(value));
+  late FTimePickerController timeController = FTimePickerController();
 
   @override
   Widget build(BuildContext context) => Column(
@@ -49,7 +47,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    calendarController.dispose();
     timeController.dispose();
     super.dispose();
   }

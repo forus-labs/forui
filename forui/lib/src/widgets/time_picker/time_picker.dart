@@ -109,6 +109,9 @@ class _FTimePickerState extends State<FTimePicker> {
     };
     padding = format.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
 
+    // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
+    // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
+    // See https://github.com/flutter/flutter/issues/162972
     controller
       ..hours12 = format.pattern!.contains('a')
       ..hourInterval = widget.hourInterval

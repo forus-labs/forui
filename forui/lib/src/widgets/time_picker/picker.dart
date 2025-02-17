@@ -106,29 +106,34 @@ class _Western12Picker extends TimePicker {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => FPicker(
-    controller: controller.picker,
-    style: style,
-    children: [
-      _HourPicker(
-        controller: controller,
-        child: FPickerWheel.builder(
-          builder: (_, index) {
-            final hour = (index * hourInterval) % 12;
-            return Text('${hour == 0 ? 12 : hour}'.padLeft(padding, '0'));
-          },
+  Widget build(BuildContext context) {
+    // Do NOT try to separate the date returned by format by whitespace. Certain locales, i.e. en_US on certain
+    // platforms such as Chrome uses a narrow NBSP.
+    final period = DateFormat('a', format.locale);
+    return FPicker(
+      controller: controller.picker,
+      style: style,
+      children: [
+        _HourPicker(
+          controller: controller,
+          child: FPickerWheel.builder(
+            builder: (_, index) {
+              final hour = (index * hourInterval) % 12;
+              return Text('${hour == 0 ? 12 : hour}'.padLeft(padding, '0'));
+            },
+          ),
         ),
-      ),
-      const Text(':'),
-      FPickerWheel.builder(builder: (_, index) => Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
-      FPickerWheel(
-        children: [
-          Text(format.format(DateTime.utc(1970, 1, 1, 1)).split(' ').last),
-          Text(format.format(DateTime.utc(1970, 1, 1, 13)).split(' ').last),
-        ],
-      ),
-    ],
-  );
+        const Text(':'),
+        FPickerWheel.builder(builder: (_, index) => Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
+        FPickerWheel(
+          children: [
+            Text(period.format(DateTime.utc(1970, 1, 1, 1))),
+            Text(period.format(DateTime.utc(1970, 1, 1, 13))),
+          ],
+        ),
+      ],
+    );
+  }
 }
 
 class _Western24Picker extends TimePicker {
@@ -164,34 +169,37 @@ class _Eastern12Picker extends TimePicker {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => FPicker(
-    controller: controller.picker,
-    style: style,
-    children: [
-      _HourPicker(
-        controller: controller,
-        child: FPickerWheel.builder(
+  Widget build(BuildContext context) {
+    final period = DateFormat('a', format.locale);
+    return FPicker(
+      controller: controller.picker,
+      style: style,
+      children: [
+        _HourPicker(
+          controller: controller,
+          child: FPickerWheel.builder(
+            builder: (_, index) {
+              final time = format.format(DateTime(1970, 1, 1, (index * hourInterval) % 12));
+              return Text(time.split(':').first);
+            },
+          ),
+        ),
+        const Text(':'),
+        FPickerWheel.builder(
           builder: (_, index) {
-            final time = format.format(DateTime(1970, 1, 1, (index * hourInterval) % 12));
-            return Text(time.split(':').first);
+            final time = format.format(DateTime(1970, 1, 1, 0, (index * minuteInterval) % 60));
+            return Text(time.split(':').last.split(' ').first);
           },
         ),
-      ),
-      const Text(':'),
-      FPickerWheel.builder(
-        builder: (_, index) {
-          final time = format.format(DateTime(1970, 1, 1, 0, (index * minuteInterval) % 60));
-          return Text(time.split(':').last.split(' ').first);
-        },
-      ),
-      FPickerWheel(
-        children: [
-          Text(format.format(DateTime.utc(1970, 1, 1, 1)).split(' ').last),
-          Text(format.format(DateTime.utc(1970, 1, 1, 13)).split(' ').last),
-        ],
-      ),
-    ],
-  );
+        FPickerWheel(
+          children: [
+            Text(period.format(DateTime.utc(1970, 1, 1, 1))),
+            Text(period.format(DateTime.utc(1970, 1, 1, 13))),
+          ],
+        ),
+      ],
+    );
+  }
 }
 
 class _Eastern24Picker extends TimePicker {

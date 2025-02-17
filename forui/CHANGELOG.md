@@ -7,6 +7,8 @@
 * Add `FTransformables`.
 * Add `FTextField.stylusHandwritingEnabled`.
 * Add `FPickerWheelMixin`.
+* Add `FTimePicker`.
+* Add `FTimePickerController`.
 
 ### Changes
 

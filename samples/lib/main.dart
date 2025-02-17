@@ -126,6 +126,9 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/tile-group/scrollable', page: ScrollableTileGroupRoute.page),
     AutoRoute(path: '/tile-group/lazy', page: LazyTileGroupRoute.page),
     AutoRoute(path: '/tile-group/merge', page: MergeTileGroup.page),
+    AutoRoute(path: '/time-picker/default', page: TimePickerRoute.page),
+    AutoRoute(path: '/time-picker/interval', page: IntervalTimePickerRoute.page),
+    AutoRoute(path: '/time-picker/animated', page: AnimatedTimePickerRoute.page),
     AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
   ];
 }
