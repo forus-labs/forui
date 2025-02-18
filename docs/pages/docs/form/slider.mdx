@@ -35,7 +35,7 @@ FSlider(
   tooltipBuilder: (style, value) => Text('${(value.toStringAsFixed(2)}%'),
   controller: FContinuousSliderController(
     allowedInteraction: FSliderInteraction.tap,
-    selection: FSliderSelection(max: 0.75, extent: (min: 0, max: 0.6)),
+    selection: FSliderSelection(max: 0.75, extent: (min: 0, max: 0.8)),
   ),
   marks: const [
     FSliderMark(value: 0, label: const Text('0%')),

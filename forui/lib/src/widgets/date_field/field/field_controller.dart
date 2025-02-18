@@ -70,25 +70,31 @@ class FieldController extends TextEditingController {
   }
 
   void traverse({required bool forward}) {
-    _mutating = true;
-    super.value =
-        forward
-            ? selectParts(value, onFirst: _middle, onMiddle: _last)
-            : selectParts(value, onMiddle: _first, onLast: _middle);
-    _mutating = false;
+    try {
+      _mutating = true;
+      super.value =
+      forward
+          ? selectParts(value, onFirst: _middle, onMiddle: _last)
+          : selectParts(value, onMiddle: _first, onLast: _middle);
+    } finally {
+      _mutating = false;
+    }
   }
 
   void adjust(int adjustment) {
-    _mutating = true;
-    final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
-    super.value = selectParts(
-      value,
-      onFirst: (value, _, _, _, _) => _update(_parser.adjust(parts, 0, adjustment), 0),
-      onMiddle: (value, _, _, _, _) => _update(_parser.adjust(parts, 1, adjustment), 1),
-      onLast: (value, _, _, _, _) => _update(_parser.adjust(parts, 2, adjustment), 2),
-    );
-    controller.value = _format.tryParseStrict(super.value.text, true);
-    _mutating = false;
+    try {
+      _mutating = true;
+      final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+      super.value = selectParts(
+        value,
+        onFirst: (value, _, _, _, _) => _update(_parser.adjust(parts, 0, adjustment), 0),
+        onMiddle: (value, _, _, _, _) => _update(_parser.adjust(parts, 1, adjustment), 1),
+        onLast: (value, _, _, _, _) => _update(_parser.adjust(parts, 2, adjustment), 2),
+      );
+      controller.value = _format.tryParseStrict(super.value.text, true);
+    } finally {
+      _mutating = false;
+    }
   }
 
   @override
@@ -104,23 +110,25 @@ class FieldController extends TextEditingController {
       return;
     }
 
-    _mutating = true;
+    try {
+      _mutating = true;
+      final current = super.value;
+      super.value = switch (value) {
+        _ when value.text.isEmpty => TextEditingValue(
+          text: placeholder,
+          selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
+        ),
+        _ when text != value.text => updateParts(value),
+        _ => selectParts(value),
+      };
 
-    final current = super.value;
-    super.value = switch (value) {
-      _ when value.text.isEmpty => TextEditingValue(
-        text: placeholder,
-        selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
-      ),
-      _ when text != value.text => updateParts(value),
-      _ => selectParts(value),
-    };
+      if (current.text != super.value.text) {
+        controller.value = _format.tryParseStrict(super.value.text, true);
+      }
 
-    if (current.text != super.value.text) {
-      controller.value = _format.tryParseStrict(super.value.text, true);
+    } finally {
+      _mutating = false;
     }
-
-    _mutating = false;
   }
 
   @visibleForTesting
