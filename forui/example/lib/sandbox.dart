@@ -37,7 +37,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) => Column(
     mainAxisSize: MainAxisSize.min,
     children: [
-      SizedBox(height: 300, width: 300, child: FTimePicker(controller: timeController)),
+      SizedBox(height: 300, width: 300, child: FTimePicker(controller: timeController, hourInterval: 7,)),
       FButton(
         label: const Text('Funny button'),
         onPress: () => timeController.animateTo(FTime(Random().nextInt(24), Random().nextInt(61))),

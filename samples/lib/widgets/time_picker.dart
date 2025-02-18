@@ -11,7 +11,8 @@ import 'package:forui_samples/sample.dart';
 class TimePickerPage extends StatefulSample {
   final bool? hour24;
 
-  TimePickerPage({@queryParam String? hour24, @queryParam super.theme}) : hour24 = bool.tryParse(hour24 ?? '');
+  TimePickerPage({@queryParam String? hour24, @queryParam super.theme, super.maxWidth = 200})
+    : hour24 = bool.tryParse(hour24 ?? '');
 
   @override
   State<TimePickerPage> createState() => _TimePickerPageState();
@@ -32,7 +33,7 @@ class _TimePickerPageState extends StatefulSampleState<TimePickerPage> {
 
 @RoutePage()
 class IntervalTimePickerPage extends StatefulSample {
-  IntervalTimePickerPage({@queryParam super.theme});
+  IntervalTimePickerPage({@queryParam super.theme, super.maxWidth = 200});
 
   @override
   State<IntervalTimePickerPage> createState() => _IntervalTimePickerPageState();
@@ -53,7 +54,7 @@ class _IntervalTimePickerPageState extends StatefulSampleState<IntervalTimePicke
 
 @RoutePage()
 class AnimatedTimePickerPage extends StatefulSample {
-  AnimatedTimePickerPage({@queryParam super.theme});
+  AnimatedTimePickerPage({@queryParam super.theme, super.maxWidth = 200});
 
   @override
   State<AnimatedTimePickerPage> createState() => _AnimatedTimePickerPageState();
@@ -67,7 +68,7 @@ class _AnimatedTimePickerPageState extends StatefulSampleState<AnimatedTimePicke
   Widget sample(BuildContext context) => Column(
     mainAxisSize: MainAxisSize.min,
     children: [
-      SizedBox(height: 300, width: 300, child: FTimePicker(controller: _controller)),
+      SizedBox(height: 300, child: FTimePicker(controller: _controller)),
       FButton(
         label: const Text('Funny button'),
         onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
