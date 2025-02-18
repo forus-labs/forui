@@ -6,6 +6,9 @@
 * Add `FTransformable`.
 * Add `FTransformables`.
 * Add `FTextField.stylusHandwritingEnabled`.
+* Add `FPickerWheelMixin`.
+* Add `FTimePicker`.
+* Add `FTimePickerController`.
 
 ### Changes
 
@@ -21,6 +24,7 @@
 
 ### Fixes
 * Fix `FTab` not updating when using controller to switch tabs.
+* Fix `FPicker` incorrectly detecting number of wheels when controller is not given and placeholder is used.
 
 
 ## 0.9.1+1

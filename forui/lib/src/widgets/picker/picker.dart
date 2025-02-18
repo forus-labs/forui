@@ -72,7 +72,7 @@ class FPickerController extends FValueNotifier<List<int>> {
 /// * https://forui.dev/docs/form/picker for working examples.
 /// * [FPickerController] for controlling a picker.
 /// * [FPickerWheel] for customizing a picker's individual wheel.
-/// * [FDateFieldStyle] for customizing a picker's appearance.
+/// * [FPickerStyle] for customizing a picker's appearance.
 class FPicker extends StatefulWidget {
   /// The controller.
   final FPickerController? controller;
@@ -126,7 +126,9 @@ class _FPickerState extends State<FPicker> {
   }
 
   void _createController() {
-    _controller = widget.controller ?? FPickerController(initialIndexes: List.filled(widget.children.length, 0));
+    _controller =
+        widget.controller ??
+        FPickerController(initialIndexes: List.filled(widget.children.whereType<FPickerWheel>().length, 0));
 
     for (final wheel in _controller.wheels) {
       wheel.dispose();
@@ -180,7 +182,7 @@ class _FPickerState extends State<FPicker> {
               spacing: style.spacing,
               children: [
                 for (final child in widget.children)
-                  if (child is FPickerWheel)
+                  if (child is FPickerWheelMixin)
                     PickerData(controller: _controller.wheels[wheelIndex++], style: style, child: child)
                   else
                     Center(

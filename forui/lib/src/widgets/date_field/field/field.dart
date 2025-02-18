@@ -7,10 +7,6 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/date_field/field/field_controller.dart';
 
-/// The locales not supported in a date field. It is mostly composed of locales that use non-western digits.
-@internal
-const unsupportedLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
-
 @internal
 class Field extends StatefulWidget {
   final FCalendarController<DateTime?> calendarController;
@@ -112,7 +108,7 @@ class _FieldState extends State<Field> {
   void initState() {
     super.initState();
     _localizations =
-        unsupportedLocales.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+        easternLocales.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
     _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
   }
 
@@ -121,7 +117,7 @@ class _FieldState extends State<Field> {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       _localizations =
-          unsupportedLocales.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+          easternLocales.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
     }
 
     if (widget.calendarController != old.calendarController) {

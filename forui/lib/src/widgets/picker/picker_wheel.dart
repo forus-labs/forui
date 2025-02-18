@@ -17,10 +17,13 @@ class _ScrollBehavior extends ScrollBehavior {
   Set<PointerDeviceKind> get dragDevices => _devices;
 }
 
+/// A marker interface that indicates that a widget is a picker wheel.
+mixin FPickerWheelMixin on Widget {}
+
 /// A picker wheel that displays a list of items that can be scrolled vertically.
 ///
 /// It should only be used in a [FPicker].
-abstract class FPickerWheel extends StatefulWidget {
+abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
   /// Estimates the extent of each item in the picker based on the given [style] and [context].
   static double estimateExtent(FPickerStyle style, BuildContext context) {
     final defaultTextStyle = DefaultTextStyle.of(context);

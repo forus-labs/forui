@@ -44,6 +44,22 @@ void main() {
       expect(newController.value[0], newController.wheels[0].selectedItem);
     });
 
+    testWidgets('placeholders does not cause errors', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPicker(
+            children: [
+              FPickerWheel.builder(builder: (context, index) => const Text('a')),
+              const Text(':'),
+              FPickerWheel.builder(builder: (context, index) => const Text('b')),
+            ],
+          ),
+        ),
+      );
+
+      expect(tester.takeException(), null);
+    });
+
     testWidgets('same controller size', (tester) async {
       final initialController = FPickerController(initialIndexes: [1, 1, 1]);
 
