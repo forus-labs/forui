@@ -34,7 +34,7 @@ class PagedYearPicker extends PagedPicker {
 
 class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   @override
-  Widget buildItem(BuildContext context, int page) => YearPicker(
+  Widget buildItem(BuildContext _, int page) => YearPicker(
     yearMonthStyle: widget.style.yearMonthPickerStyle,
     dayStyle: widget.style.dayPickerStyle,
     startYear: widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items),

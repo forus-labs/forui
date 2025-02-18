@@ -73,9 +73,9 @@ class FieldController extends TextEditingController {
     try {
       _mutating = true;
       super.value =
-      forward
-          ? selectParts(value, onFirst: _middle, onMiddle: _last)
-          : selectParts(value, onMiddle: _first, onLast: _middle);
+          forward
+              ? selectParts(value, onFirst: _middle, onMiddle: _last)
+              : selectParts(value, onMiddle: _first, onLast: _middle);
     } finally {
       _mutating = false;
     }
@@ -87,9 +87,9 @@ class FieldController extends TextEditingController {
       final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
       super.value = selectParts(
         value,
-        onFirst: (value, _, _, _, _) => _update(_parser.adjust(parts, 0, adjustment), 0),
-        onMiddle: (value, _, _, _, _) => _update(_parser.adjust(parts, 1, adjustment), 1),
-        onLast: (value, _, _, _, _) => _update(_parser.adjust(parts, 2, adjustment), 2),
+        onFirst: (_, _, _, _, _) => _update(_parser.adjust(parts, 0, adjustment), 0),
+        onMiddle: (_, _, _, _, _) => _update(_parser.adjust(parts, 1, adjustment), 1),
+        onLast: (_, _, _, _, _) => _update(_parser.adjust(parts, 2, adjustment), 2),
       );
       controller.value = _format.tryParseStrict(super.value.text, true);
     } finally {
@@ -125,7 +125,6 @@ class FieldController extends TextEditingController {
       if (current.text != super.value.text) {
         controller.value = _format.tryParseStrict(super.value.text, true);
       }
-
     } finally {
       _mutating = false;
     }
@@ -164,7 +163,7 @@ class FieldController extends TextEditingController {
     // precondition: value's text is valid.
     // There's generally 2 cases:
     // * User selects part of the text -> select the whole enclosing date part.
-    // * User selects a seperator -> revert to the previous selection.
+    // * User selects a separator -> revert to the previous selection.
     final separator = _localizations.shortDateSeparator.length;
 
     final first = value.text.indexOf(_localizations.shortDateSeparator);
@@ -181,8 +180,6 @@ class FieldController extends TextEditingController {
   }
 
   TextEditingValue _update(List<String> parts, int index) {
-    final text = parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
-
     var start = 0;
     var end = parts[0].length;
     for (var i = 1; i <= index; i++) {
@@ -190,7 +187,10 @@ class FieldController extends TextEditingController {
       end = start + parts[i].length;
     }
 
-    return TextEditingValue(text: text, selection: TextSelection(baseOffset: start, extentOffset: end));
+    return TextEditingValue(
+      text: parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix,
+      selection: TextSelection(baseOffset: start, extentOffset: end),
+    );
   }
 
   @visibleForTesting

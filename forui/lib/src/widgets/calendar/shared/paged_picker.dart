@@ -83,7 +83,7 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext _) => Column(
     children: [
       Navigation(
         style: widget.style.headerStyle,

@@ -140,7 +140,7 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
               widget.controller.update(widget.left, widget.right, details.delta.dx);
               // TODO: haptic feedback
             },
-            onHorizontalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
+            onHorizontalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
           ),
         ),
       ],
@@ -201,7 +201,7 @@ class _VerticalDividerState extends State<VerticalDivider> {
               widget.controller.update(widget.left, widget.right, details.delta.dy);
               // TODO: haptic feedback
             },
-            onVerticalDragEnd: (details) => widget.controller.end(widget.left, widget.right),
+            onVerticalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
           ),
         ),
       ],

@@ -37,47 +37,44 @@ abstract class Entry extends StatelessWidget {
     final dayStyle = current ? styles.current : styles.enclosing;
     final entryStyle = isSelected ? dayStyle.selectedStyle : dayStyle.unselectedStyle;
 
-    Widget builder(BuildContext context, FTappableData data, Widget? child) {
+    Widget builder(BuildContext context, FTappableData data, Widget? _) {
       final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius;
       final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius;
-
-      final dayData = (
-        style: style,
-        date: date.toNative(),
-        current: current,
-        today: today,
-        selectable: canSelect,
-        selected: isSelected,
+      return dayBuilder(
+        context,
+        (
+          style: style,
+          date: date.toNative(),
+          current: current,
+          today: today,
+          selectable: canSelect,
+          selected: isSelected,
+        ),
+        _Content(
+          style: entryStyle,
+          borderRadius: switch (Directionality.maybeOf(context)) {
+            TextDirection.ltr || null => BorderRadius.horizontal(left: yesterday, right: tomorrow),
+            TextDirection.rtl => BorderRadius.horizontal(left: tomorrow, right: yesterday),
+          },
+          text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
+          data: data,
+          current: today,
+        ),
       );
-
-      final child = _Content(
-        style: entryStyle,
-        borderRadius: switch (Directionality.maybeOf(context)) {
-          TextDirection.ltr || null => BorderRadius.horizontal(left: yesterday, right: tomorrow),
-          TextDirection.rtl => BorderRadius.horizontal(left: tomorrow, right: yesterday),
-        },
-        text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
-        data: data,
-        current: today,
-      );
-
-      return dayBuilder(context, dayData, child);
     }
 
-    if (canSelect) {
-      return _SelectableEntry(
-        focusNode: focusNode,
-        date: date,
-        semanticLabel: localizations.fullDate(date.toNative()),
-        selected: isSelected,
-        onPress: onPress,
-        onLongPress: onLongPress,
-        style: entryStyle,
-        builder: builder,
-      );
-    } else {
-      return _UnselectableEntry(style: entryStyle, builder: builder);
-    }
+    return canSelect
+        ? _SelectableEntry(
+          focusNode: focusNode,
+          date: date,
+          semanticLabel: localizations.fullDate(date.toNative()),
+          selected: isSelected,
+          onPress: onPress,
+          onLongPress: onLongPress,
+          style: entryStyle,
+          builder: builder,
+        )
+        : _UnselectableEntry(style: entryStyle, builder: builder);
   }
 
   factory Entry.yearMonth({
@@ -91,7 +88,7 @@ abstract class Entry extends StatelessWidget {
   }) {
     final entryStyle = selectable ? style.enabledStyle : style.disabledStyle;
 
-    Widget builder(BuildContext context, FTappableData data, Widget? child) => _Content(
+    Widget builder(BuildContext _, FTappableData data, Widget? _) => _Content(
       style: entryStyle,
       borderRadius: BorderRadius.all(entryStyle.radius),
       text: format(date),
@@ -99,18 +96,16 @@ abstract class Entry extends StatelessWidget {
       current: current,
     );
 
-    if (selectable) {
-      return _SelectableEntry(
-        focusNode: focusNode,
-        date: date,
-        semanticLabel: format(date),
-        onPress: onPress,
-        style: entryStyle,
-        builder: builder,
-      );
-    } else {
-      return _UnselectableEntry(style: entryStyle, builder: builder);
-    }
+    return selectable
+        ? _SelectableEntry(
+          focusNode: focusNode,
+          date: date,
+          semanticLabel: format(date),
+          onPress: onPress,
+          style: entryStyle,
+          builder: builder,
+        )
+        : _UnselectableEntry(style: entryStyle, builder: builder);
   }
 
   const Entry._({required this.style, required this.builder});
@@ -144,7 +139,7 @@ class _SelectableEntry extends Entry {
   }) : super._();
 
   @override
-  Widget build(BuildContext context) => FTappable(
+  Widget build(BuildContext _) => FTappable(
     semanticLabel: semanticLabel,
     semanticSelected: selected,
     focusNode: focusNode,
@@ -191,9 +186,8 @@ class _Content extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final hovered = data.hovered;
-    var textStyle = hovered ? style.hoveredTextStyle : style.textStyle;
+  Widget build(BuildContext _) {
+    var textStyle = data.hovered ? style.hoveredTextStyle : style.textStyle;
     if (current) {
       textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
     }
@@ -202,7 +196,7 @@ class _Content extends StatelessWidget {
       decoration: BoxDecoration(
         border: data.focused ? Border.all(color: style.focusedBorderColor) : null,
         borderRadius: borderRadius,
-        color: hovered ? style.hoveredBackgroundColor : style.backgroundColor,
+        color: data.hovered ? style.hoveredBackgroundColor : style.backgroundColor,
       ),
       child: Center(child: Text(text, style: textStyle)),
     );

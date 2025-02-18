@@ -160,20 +160,20 @@ class _FResizableState extends State<FResizable> {
         height: widget.crossAxisExtent,
         child: LayoutBuilder(
           builder:
-              (context, constraints) => ListenableBuilder(
+              (_, constraints) => ListenableBuilder(
                 listenable: widget.controller,
                 builder:
-                    (context, _) => Stack(
+                    (_, _) => Stack(
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            for (var i = 0; i < widget.children.length; i++)
+                            for (final (i, child) in widget.children.indexed)
                               InheritedData(
                                 controller: widget.controller,
                                 axis: widget.axis,
                                 data: widget.controller.regions[i],
-                                child: widget.children[i],
+                                child: child,
                               ),
                           ],
                         ),
@@ -201,20 +201,20 @@ class _FResizableState extends State<FResizable> {
         width: widget.crossAxisExtent,
         child: LayoutBuilder(
           builder:
-              (context, constraints) => ListenableBuilder(
+              (_, constraints) => ListenableBuilder(
                 listenable: widget.controller,
                 builder:
-                    (context, _) => Stack(
+                    (_, _) => Stack(
                       children: [
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            for (var i = 0; i < widget.children.length; i++)
+                            for (final (i, child) in widget.children.indexed)
                               InheritedData(
-                                axis: widget.axis,
                                 controller: widget.controller,
+                                axis: widget.axis,
                                 data: widget.controller.regions[i],
-                                child: widget.children[i],
+                                child: child,
                               ),
                           ],
                         ),

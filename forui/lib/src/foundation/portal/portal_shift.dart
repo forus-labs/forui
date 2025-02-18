@@ -87,7 +87,7 @@ extension FPortalShift on Never {
   }
 
   /// Does not perform any shifting if the portal overflows out of the viewport.
-  static Offset none(Size view, FPortalChildBox child, FPortalBox portal) {
+  static Offset none(Size _, FPortalChildBox child, FPortalBox portal) {
     final childAnchor = child.anchor.relative(to: child.size);
     final portalAnchor = portal.anchor.relative(to: portal.size);
     return childAnchor - portalAnchor;

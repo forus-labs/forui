@@ -90,7 +90,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       controller.tooltips.show();
     }
 
-    void end(DragEndDetails details) {
+    void end(DragEndDetails _) {
       _origin = null;
       _pointerOrigin = null;
       controller.tooltips.hide();

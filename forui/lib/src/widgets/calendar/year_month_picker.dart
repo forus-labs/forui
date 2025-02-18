@@ -49,7 +49,7 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
   bool _year = true;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     if (_year) {
       return PagedYearPicker(
         style: widget.style,

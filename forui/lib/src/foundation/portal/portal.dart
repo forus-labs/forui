@@ -80,7 +80,7 @@ class _State extends State<FPortal> {
   final LayerLink _link = LayerLink();
 
   @override
-  Widget build(BuildContext context) => CompositedTransformTarget(
+  Widget build(BuildContext _) => CompositedTransformTarget(
     link: _link,
     child: OverlayPortal(
       controller: widget.controller,
@@ -123,12 +123,12 @@ class _Alignment extends SingleChildRenderObjectWidget {
        super(child: child);
 
   @override
-  RenderObject createRenderObject(BuildContext context) =>
+  RenderObject createRenderObject(BuildContext _) =>
       _RenderBox(link: _link, childAnchor: _childAnchor, portalAnchor: _portalAnchor, shift: _shift, offset: _offset);
 
   @override
-  void updateRenderObject(BuildContext context, _RenderBox renderObject) {
-    renderObject
+  void updateRenderObject(BuildContext _, _RenderBox box) {
+    box
       ..link = _link
       ..childAnchor = _childAnchor
       ..portalAnchor = _portalAnchor
@@ -166,7 +166,7 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
+  void paint(PaintingContext context, Offset _) {
     final tuple = (child, child?.parentData, link.leader?.offset, link.leaderSize);
     if (tuple case (final child?, final BoxParentData data?, final offset?, final leaderSize?)) {
       data.offset =

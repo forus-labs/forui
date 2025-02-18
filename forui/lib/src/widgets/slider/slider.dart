@@ -151,7 +151,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
       semanticValueFormatterCallback: semanticValueFormatterCallback,
       child: LayoutBuilder(
         builder:
-            (context, constraints) => _Slider(
+            (_, constraints) => _Slider(
               controller: controller,
               style: sliderStyle,
               layout: layout,
@@ -289,10 +289,10 @@ class _SliderState extends State<_Slider> {
   }
 
   @override
-  Widget build(BuildContext context) => ListenableBuilder(
+  Widget build(BuildContext _) => ListenableBuilder(
     listenable: widget.controller,
     builder:
-        (context, _) => InheritedController(
+        (_, _) => InheritedController(
           controller: widget.controller,
           child: SliderFormField(
             controller: widget.controller,

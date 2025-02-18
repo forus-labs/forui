@@ -68,7 +68,7 @@ class _DateFieldState extends _FDateFieldState<_DateField> {
     final style = widget.style ?? context.theme.dateFieldStyle;
     ValueWidgetBuilder<FTextFieldStateStyle>? prefix;
     ValueWidgetBuilder<FTextFieldStateStyle>? suffix;
-    ValueWidgetBuilder<FTextFieldStateStyle> builder = (context, _, child) => child!;
+    ValueWidgetBuilder<FTextFieldStateStyle> builder = (_, _, child) => child!;
 
     if (widget.calendar case final properties?) {
       prefix =
@@ -88,7 +88,7 @@ class _DateFieldState extends _FDateFieldState<_DateField> {
               );
 
       builder =
-          (context, _, child) =>
+          (_, _, child) =>
               _CalendarPopover(controller: _controller, style: style, properties: properties, child: child!);
     }
 

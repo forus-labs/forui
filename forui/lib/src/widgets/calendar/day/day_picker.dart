@@ -128,7 +128,7 @@ class _DayPickerState extends State<DayPicker> {
     ),
   );
 
-  List<Widget> _headers(BuildContext context) {
+  List<Widget> _headers(BuildContext _) {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
     final narrowWeekdays = widget.localization.narrowWeekDays;
 

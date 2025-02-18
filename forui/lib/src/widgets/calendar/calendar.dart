@@ -26,7 +26,7 @@ part 'calendar.style.dart';
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatefulWidget {
   /// The default day builder.
-  static Widget defaultDayBuilder(BuildContext context, FCalendarDayData data, Widget? child) => child!;
+  static Widget defaultDayBuilder(BuildContext _, FCalendarDayData data, Widget? child) => child!;
 
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
@@ -140,12 +140,12 @@ class _State extends State<FCalendar> {
             children: [
               ValueListenableBuilder(
                 valueListenable: _month,
-                builder: (context, month, child) => Header(style: style.headerStyle, type: _type, month: month),
+                builder: (_, month, _) => Header(style: style.headerStyle, type: _type, month: month),
               ),
               ValueListenableBuilder(
                 valueListenable: _type,
                 builder:
-                    (context, value, child) => switch (value) {
+                    (_, value, _) => switch (value) {
                       FCalendarPickerType.day => PagedDayPicker(
                         style: style,
                         dayBuilder: widget.dayBuilder,

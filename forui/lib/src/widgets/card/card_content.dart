@@ -26,28 +26,28 @@ class Content extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (image != null) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
+          if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
           if ((title != null || subtitle != null || child != null) && image != null) const SizedBox(height: 10),
-          if (title != null)
+          if (title case final title?)
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
               ),
               style: style.titleTextStyle,
-              child: title!,
+              child: title,
             ),
-          if (subtitle != null)
+          if (subtitle case final subtitle?)
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
               ),
               style: style.subtitleTextStyle,
-              child: subtitle!,
+              child: subtitle,
             ),
           if (title != null && subtitle != null && image == null) const SizedBox(height: 8),
-          if (child != null) child!,
+          if (child case final child?) child,
         ],
       ),
     );

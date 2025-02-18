@@ -220,10 +220,10 @@ class FDiscreteSliderController extends FSliderController {
 
   @override
   void reset() {
-    if (_selection case final DiscreteSelection selection?) {
-      this.selection = DiscreteSelection(
-        ticks: selection.ticks,
-        mainAxisExtent: selection.rawExtent.total,
+    if (_selection case final DiscreteSelection discrete?) {
+      selection = DiscreteSelection(
+        ticks: discrete.ticks,
+        mainAxisExtent: discrete.rawExtent.total,
         extent: _initialSelection.extent,
         offset: _initialSelection.offset,
       );

@@ -89,16 +89,10 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   }) : super(
          builder: (field) {
            final state = field as _State;
-           final groupStyle = style ?? state.context.theme.tileGroupStyle;
-           final (labelState, error) = switch (state.errorText) {
-             _ when !enabled => (FLabelState.disabled, null),
-             final text? => (FLabelState.error, errorBuilder(state.context, text)),
-             null => (FLabelState.enabled, null),
-           };
 
            return FTileGroup(
              scrollController: scrollController,
-             style: groupStyle,
+             style: style ?? state.context.theme.tileGroupStyle,
              cacheExtent: cacheExtent,
              maxHeight: maxHeight,
              dragStartBehavior: dragStartBehavior,
@@ -106,7 +100,11 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
              label: label,
              enabled: enabled,
              description: description,
-             error: error,
+             error: switch (state.errorText) {
+               _ when !enabled => null,
+               final text? => errorBuilder(state.context, text),
+               null => null,
+             },
              semanticLabel: semanticLabel,
              children: [
                for (final child in children)
@@ -146,16 +144,10 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   }) : super(
          builder: (field) {
            final state = field as _State;
-           final groupStyle = style ?? state.context.theme.tileGroupStyle;
-           final (labelState, error) = switch (state.errorText) {
-             _ when !enabled => (FLabelState.disabled, null),
-             final text? => (FLabelState.error, errorBuilder(state.context, text)),
-             null => (FLabelState.enabled, null),
-           };
 
            return FTileGroup.builder(
              scrollController: scrollController,
-             style: groupStyle,
+             style: style ?? state.context.theme.tileGroupStyle,
              cacheExtent: cacheExtent,
              maxHeight: maxHeight,
              dragStartBehavior: dragStartBehavior,
@@ -164,7 +156,11 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
              label: label,
              enabled: enabled,
              description: description,
-             error: error,
+             error: switch (state.errorText) {
+               _ when !enabled => null,
+               final text? => errorBuilder(state.context, text),
+               null => null,
+             },
              semanticLabel: semanticLabel,
              tileBuilder: (context, index) {
                final child = tileBuilder(context, index);

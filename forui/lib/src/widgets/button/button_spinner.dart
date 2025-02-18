@@ -53,7 +53,7 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
         AnimationController(vsync: this, duration: _style.animationDuration)
           ..forward()
           ..repeat();
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
   }
 
   @override

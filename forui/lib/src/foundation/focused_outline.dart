@@ -29,8 +29,8 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  void updateRenderObject(BuildContext context, _Outline renderObject) {
-    renderObject
+  void updateRenderObject(BuildContext context, _Outline outline) {
+    outline
       ..style = style ?? context.theme.style.focusedOutlineStyle
       ..focused = focused;
   }

@@ -24,18 +24,17 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
   });
 
   @override
-  RenderBox createRenderObject(BuildContext context) =>
+  RenderBox createRenderObject(BuildContext _) =>
       _ShiftedSheet(side: side, value: value, mainAxisMaxRatio: mainAxisMaxRatio, onChange: onChange);
 
   @override
   // ignore: library_private_types_in_public_api
-  void updateRenderObject(BuildContext context, _ShiftedSheet renderObject) {
-    renderObject
-      ..side = side
-      ..value = value
-      ..mainAxisMaxRatio = mainAxisMaxRatio
-      ..onChange = onChange;
-  }
+  void updateRenderObject(BuildContext _, _ShiftedSheet box) =>
+      box
+        ..side = side
+        ..value = value
+        ..mainAxisMaxRatio = mainAxisMaxRatio
+        ..onChange = onChange;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -88,19 +87,18 @@ class _ShiftedSheet extends RenderShiftedBox {
 
   @override
   double? computeDryBaseline(covariant BoxConstraints constraints, TextBaseline baseline) {
-    final child = this.child;
-    if (child == null) {
-      return null;
+    if (child case final child?) {
+      final childConstraints = constrainChild(constraints);
+      final result = child.getDryBaseline(childConstraints, baseline);
+      if (result == null) {
+        return null;
+      }
+
+      final childSize = childConstraints.isTight ? childConstraints.smallest : child.getDryLayout(childConstraints);
+      return result + positionChild(constraints.biggest, childSize).dy;
     }
 
-    final childConstraints = constrainChild(constraints);
-    final result = child.getDryBaseline(childConstraints, baseline);
-    if (result == null) {
-      return null;
-    }
-
-    final childSize = childConstraints.isTight ? childConstraints.smallest : child.getDryLayout(childConstraints);
-    return result + positionChild(constraints.biggest, childSize).dy;
+    return null;
   }
 
   BoxConstraints constrainChild(BoxConstraints constraints) =>
@@ -127,16 +125,16 @@ class _ShiftedSheet extends RenderShiftedBox {
   Size computeDryLayout(BoxConstraints constraints) => constraints.biggest;
 
   @override
-  double computeMinIntrinsicWidth(double height) => 0.0;
+  double computeMinIntrinsicWidth(double _) => 0.0;
 
   @override
-  double computeMaxIntrinsicWidth(double height) => 0.0;
+  double computeMaxIntrinsicWidth(double _) => 0.0;
 
   @override
-  double computeMinIntrinsicHeight(double width) => 0.0;
+  double computeMinIntrinsicHeight(double _) => 0.0;
 
   @override
-  double computeMaxIntrinsicHeight(double width) => 0.0;
+  double computeMaxIntrinsicHeight(double _) => 0.0;
 
   FLayout get side => _side;
 

@@ -202,7 +202,7 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
   final Map<Key, (FPersistentSheetController, Sheet)> sheets = {};
 
   @override
-  Widget build(BuildContext context) => Stack(
+  Widget build(BuildContext _) => Stack(
     children: [
       widget.child,
       for (final (controller, sheet) in sheets.values)
@@ -257,6 +257,6 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Map<Key, (FPersistentSheetController, Sheet)>>('sheets', sheets));
+    properties.add(DiagnosticsProperty('sheets', sheets));
   }
 }

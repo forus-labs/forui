@@ -21,6 +21,7 @@
 * **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
+* **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
 
 ### Fixes
 * Fix `FTab` not updating when using controller to switch tabs.

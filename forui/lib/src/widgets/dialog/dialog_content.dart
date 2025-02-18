@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 
@@ -37,20 +36,20 @@ sealed class Content extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: alignment,
         children: [
-          if (title != null)
+          if (title case final title?)
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Semantics(
                 container: true,
-                child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title!),
+                child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
               ),
             ),
-          if (body != null)
+          if (body case final body?)
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Semantics(
                 container: true,
-                child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body!),
+                child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
               ),
             ),
           if (title != null && body != null) const SizedBox(height: 8),
@@ -87,10 +86,8 @@ class HorizontalContent extends Content {
   @override
   Widget _actions(BuildContext context) => Row(
     mainAxisAlignment: MainAxisAlignment.end,
-    children: separate(
-      [for (final action in actions) IntrinsicWidth(child: action)],
-      by: [SizedBox(width: style.actionPadding)],
-    ),
+    spacing: style.actionSpacing,
+    children: [for (final action in actions) IntrinsicWidth(child: action)],
   );
 }
 
@@ -106,7 +103,7 @@ class VerticalContent extends Content {
 
   @override
   Widget _actions(BuildContext context) =>
-      Column(mainAxisSize: MainAxisSize.min, children: separate(actions, by: [SizedBox(height: style.actionPadding)]));
+      Column(mainAxisSize: MainAxisSize.min, spacing: style.actionSpacing, children: actions);
 }
 
 /// [FDialog] content's style.
@@ -125,14 +122,14 @@ final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFuncti
 
   /// The space between actions.
   @override
-  final double actionPadding;
+  final double actionSpacing;
 
   /// Creates a [FDialogContentStyle].
   FDialogContentStyle({
     required this.titleTextStyle,
     required this.bodyTextStyle,
     required this.padding,
-    required this.actionPadding,
+    required this.actionSpacing,
   });
 
   /// Creates a [FDialogContentStyle] that inherits its properties from [colorScheme] and [typography].
@@ -140,11 +137,11 @@ final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFuncti
     required FColorScheme colorScheme,
     required FTypography typography,
     required EdgeInsets padding,
-    required double actionPadding,
+    required double actionSpacing,
   }) : this(
          titleTextStyle: typography.lg.copyWith(fontWeight: FontWeight.w600, color: colorScheme.foreground),
          bodyTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
          padding: padding,
-         actionPadding: actionPadding,
+         actionSpacing: actionSpacing,
        );
 }

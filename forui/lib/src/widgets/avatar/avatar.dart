@@ -45,7 +45,6 @@ class FAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.avatarStyle;
-
     return Container(
       alignment: Alignment.center,
       height: size,

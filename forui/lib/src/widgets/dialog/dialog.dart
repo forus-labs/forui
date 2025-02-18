@@ -84,10 +84,9 @@ class FDialog extends StatelessWidget {
     super.key,
   }) : builder = switch (direction) {
          Axis.horizontal =>
-           (context, style) =>
-               HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
+           (_, style) => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
          Axis.vertical =>
-           (context, style) => VerticalContent(style: style.verticalStyle, title: title, body: body, actions: actions),
+           (_, style) => VerticalContent(style: style.verticalStyle, title: title, body: body, actions: actions),
        };
 
   /// Creates a adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
@@ -212,13 +211,13 @@ final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
           colorScheme: colorScheme,
           typography: typography,
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-          actionPadding: 7,
+          actionSpacing: 7,
         ),
         verticalStyle: FDialogContentStyle.inherit(
           colorScheme: colorScheme,
           typography: typography,
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-          actionPadding: 8,
+          actionSpacing: 8,
         ),
       );
 }

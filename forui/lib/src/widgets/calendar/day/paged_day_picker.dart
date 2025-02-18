@@ -68,7 +68,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
       });
       widget.onPress(date);
     },
-    onLongPress: (date) => widget.onLongPress(date),
+    onLongPress: widget.onLongPress,
   );
 
   @override

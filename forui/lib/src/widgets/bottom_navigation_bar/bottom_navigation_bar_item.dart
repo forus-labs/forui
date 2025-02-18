@@ -25,25 +25,24 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = FBottomNavigationBarData.of(context);
-    final FBottomNavigationBarData(:itemStyle, :selected) = data;
+    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBarData.of(context);
     final style = this.style ?? itemStyle;
 
     return Padding(
       padding: style.padding,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        spacing: 2,
         children: [
           ExcludeSemantics(
             child: FIconStyleData(
               style: FIconStyle(
-                color: data.selected ? style.activeIconColor : style.inactiveIconColor,
+                color: selected ? style.activeIconColor : style.inactiveIconColor,
                 size: style.iconSize,
               ),
               child: icon,
             ),
           ),
-          const SizedBox(height: 2),
           DefaultTextStyle.merge(
             style: selected ? style.activeTextStyle : style.inactiveTextStyle,
             overflow: TextOverflow.ellipsis,

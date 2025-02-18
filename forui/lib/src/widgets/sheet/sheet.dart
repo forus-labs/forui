@@ -129,7 +129,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       sheet = SheetGestureDetector(
         layout: widget.side,
         // Allow the sheet to track the user's finger accurately.
-        onStart: (details) => _curve = Curves.linear,
+        onStart: (_) => _curve = Curves.linear,
         onUpdate: _dragUpdate,
         onEnd: _dragEnd,
         child: sheet,

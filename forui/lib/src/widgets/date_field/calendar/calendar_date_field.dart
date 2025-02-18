@@ -178,13 +178,12 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       description: widget.description,
       enabled: widget.enabled,
       onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
-      validator: (value) => _controller.validator(_controller.value),
+      validator: (_) => _controller.validator(_controller.value),
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
       builder:
-          (context, _, child) =>
-              _CalendarPopover(controller: _controller, style: style, properties: widget, child: child!),
+          (_, _, child) => _CalendarPopover(controller: _controller, style: style, properties: widget, child: child!),
     );
   }
 
@@ -212,7 +211,7 @@ class _CalendarPopover extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => FPopover(
+  Widget build(BuildContext _) => FPopover(
     style: style.popoverStyle,
     controller: controller.calendar,
     popoverAnchor: properties.anchor,
@@ -221,11 +220,11 @@ class _CalendarPopover extends StatelessWidget {
     hideOnTapOutside: properties.hideOnTapOutside,
     directionPadding: properties.directionPadding,
     popoverBuilder:
-        (context, follower, _) => TextFieldTapRegion(
+        (_, _, _) => TextFieldTapRegion(
           child: ValueListenableBuilder(
             valueListenable: controller._calendar,
             builder:
-                (context, value, _) => FCalendar(
+                (_, value, _) => FCalendar(
                   style: style.calendarStyle,
                   controller: controller._calendar,
                   initialMonth: switch (value) {

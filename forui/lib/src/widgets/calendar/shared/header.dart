@@ -132,7 +132,7 @@ class Navigation extends StatelessWidget {
   const Navigation({required this.style, required this.onPrevious, required this.onNext, super.key});
 
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget build(BuildContext _) => Padding(
     padding: const EdgeInsets.only(bottom: 5),
     child: SizedBox(
       height: Header.height,

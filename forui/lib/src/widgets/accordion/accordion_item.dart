@@ -97,7 +97,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     return AnimatedBuilder(
       animation: _animation,
       builder:
-          (context, _) => Column(
+          (_, _) => Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               FTappable(
@@ -106,7 +106,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                 onFocusChange: widget.onFocusChange,
                 onPress: () => controller.toggle(index),
                 builder:
-                    (context, data, child) => Padding(
+                    (_, data, child) => Padding(
                       padding: style.titlePadding,
                       child: Row(
                         children: [
@@ -167,7 +167,7 @@ class _Expandable extends SingleChildRenderObjectWidget {
   const _Expandable({required this.value, required super.child});
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderExpandable(value);
+  RenderObject createRenderObject(BuildContext _) => _RenderExpandable(value);
 
   @override
   void updateRenderObject(BuildContext context, _RenderExpandable renderObject) => renderObject..value = value;

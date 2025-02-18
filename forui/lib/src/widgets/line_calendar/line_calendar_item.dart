@@ -53,19 +53,17 @@ class Item extends StatelessWidget {
               (false, false) => style.unselectedItemStyle,
             };
 
-            final itemData = (
-              style: style,
-              itemStyle: itemStyle,
-              date: date,
-              today: today,
-              selected: selected == date,
-              hovered: state.hovered,
-              focused: state.focused,
-            );
-
             return builder(
               context,
-              itemData,
+              (
+                style: style,
+                itemStyle: itemStyle,
+                date: date,
+                today: today,
+                selected: selected == date,
+                hovered: state.hovered,
+                focused: state.focused,
+              ),
               Stack(
                 children: [
                   Positioned.fill(
@@ -133,6 +131,7 @@ class ItemContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
+          spacing: style.itemContentSpacing,
           children: [
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
@@ -142,7 +141,6 @@ class ItemContent extends StatelessWidget {
               style: itemStyle.dateTextStyle,
               child: Text(localizations.day(date)),
             ),
-            SizedBox(height: style.itemContentSpacing),
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
