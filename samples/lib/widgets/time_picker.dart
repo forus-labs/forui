@@ -1,16 +1,17 @@
 import 'dart:math';
 
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:auto_route/annotations.dart';
 import 'package:forui/forui.dart';
+
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TimePickerPage extends StatefulSample {
   final bool? hour24;
 
-  TimePickerPage({@queryParam String? hour24, @queryParam super.theme})
-    : hour24 = bool.tryParse(hour24 ?? '');
+  TimePickerPage({@queryParam String? hour24, @queryParam super.theme}) : hour24 = bool.tryParse(hour24 ?? '');
 
   @override
   State<TimePickerPage> createState() => _TimePickerPageState();
