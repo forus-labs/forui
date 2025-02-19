@@ -30,11 +30,7 @@ class Content extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
-            children: [
-              if (prefix case final prefix?) prefix,
-              label,
-              if (suffix case final suffix?) suffix,
-            ]
+            children: [if (prefix case final prefix?) prefix, label, if (suffix case final suffix?) suffix],
           ),
         ),
       ),
