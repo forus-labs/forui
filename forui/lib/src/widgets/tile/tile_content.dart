@@ -54,13 +54,13 @@ class FTileContent extends StatelessWidget {
       style: contentStyle,
       divider: divider,
       children: [
-        if (prefixIcon case final prefixIcon?)
+        if (prefixIcon case final prefix?)
           Padding(
             padding:
                 ltr
                     ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
                     : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
-            child: FIconStyleData(style: style.prefixIconStyle, child: prefixIcon),
+            child: FIconStyleData(style: style.prefixIconStyle, child: prefix),
           )
         else
           const SizedBox(),

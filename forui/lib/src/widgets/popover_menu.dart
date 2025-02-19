@@ -197,7 +197,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
       popoverBuilder:
-          (context, _, _) => ConstrainedBox(
+          (_, _, _) => ConstrainedBox(
             constraints: BoxConstraints(maxWidth: style.maxWidth),
             child: FTileGroup.merge(
               scrollController: widget.scrollController,

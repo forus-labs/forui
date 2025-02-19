@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 @internal
 class InheritedState extends InheritedWidget {
   static InheritedState of(BuildContext context) {
-    final InheritedState? result = context.dependOnInheritedWidgetOfExactType<InheritedState>();
+    final result = context.dependOnInheritedWidgetOfExactType<InheritedState>();
     assert(result != null, 'No InheritedState found in context');
     return result!;
   }

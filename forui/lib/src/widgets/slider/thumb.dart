@@ -123,7 +123,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           controller: _tooltip,
           tipAnchor: style.tooltipTipAnchor,
           childAnchor: style.tooltipThumbAnchor,
-          tipBuilder: (context, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
+          tipBuilder: (_, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
           longPress: false,
           hover: false,
           child: thumb,
@@ -131,19 +131,19 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
       );
     }
 
-    void down(TapDownDetails details) {
+    void down(TapDownDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _gesture = true;
       _controller.tooltips.show(_key);
     }
 
-    void up(TapUpDetails details) {
+    void up(TapUpDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _gesture = false;
       _controller.tooltips.hide(_key);
     }
 
-    void start(DragStartDetails details) {
+    void start(DragStartDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _origin = null;
       _origin = _controller.selection.rawOffset;
@@ -151,7 +151,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
       _controller.tooltips.show(_key);
     }
 
-    void end(DragEndDetails details) {
+    void end(DragEndDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _origin = null;
       _gesture = false;

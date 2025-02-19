@@ -28,7 +28,7 @@ class SheetGestureDetector extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     void initialize(DragGestureRecognizer recognizer) {
       recognizer
         ..onStart = onStart

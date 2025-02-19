@@ -167,12 +167,12 @@ class _FPickerState extends State<FPicker> {
         ),
         // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
         NotificationListener<ScrollMetricsNotification>(
-          onNotification: (notification) {
+          onNotification: (_) {
             _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
             return false;
           },
           child: NotificationListener<ScrollEndNotification>(
-            onNotification: (notification) {
+            onNotification: (_) {
               _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
               return false;
             },

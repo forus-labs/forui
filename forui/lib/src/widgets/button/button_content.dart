@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 
@@ -30,10 +29,8 @@ class Content extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: separate(
-              [if (prefix != null) prefix!, label, if (suffix != null) suffix!],
-              by: [const SizedBox(width: 10)],
-            ),
+            spacing: 10,
+            children: [if (prefix case final prefix?) prefix, label, if (suffix case final suffix?) suffix],
           ),
         ),
       ),

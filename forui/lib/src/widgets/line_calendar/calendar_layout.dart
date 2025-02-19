@@ -67,8 +67,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     _style = widget.style ?? context.theme.lineCalendarStyle;
     _width = _estimateWidth();
 
-    final initial = widget.initial ?? widget.today;
-    final startOffset = (initial.difference(widget.start).inDays) * _width!;
+    final startOffset = ((widget.initial ?? widget.today).difference(widget.start).inDays) * _width!;
     final offset = switch (widget.alignment.start) {
       -1 => startOffset,
       1 => startOffset - widget.constraints.maxWidth + _width!,
@@ -104,7 +103,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     final placeholder = widget.today.toNative();
     return SpeculativeLayout(
       children: [
@@ -142,8 +141,8 @@ class _CalendarLayoutState extends State<CalendarLayout> {
           padding: EdgeInsets.zero,
           cacheExtent: widget.cacheExtent,
           itemExtent: _width!,
-          itemCount: widget.end != null ? widget.end!.difference(widget.start).inDays + 1 : null,
-          itemBuilder: (context, index) {
+          itemCount: widget.end == null ? null : widget.end!.difference(widget.start).inDays + 1,
+          itemBuilder: (_, index) {
             final date = widget.start.plus(days: index);
             return Padding(
               padding: _style.itemPadding,
@@ -167,7 +166,7 @@ class SpeculativeLayout extends MultiChildRenderObjectWidget {
   const SpeculativeLayout({required super.children, super.key});
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _SpeculativeBox();
+  RenderObject createRenderObject(BuildContext _) => _SpeculativeBox();
 }
 
 class _Data extends ContainerBoxParentData<RenderBox> {}
@@ -211,7 +210,5 @@ class _SpeculativeBox extends RenderBox
   }
 
   @override
-  void visitChildrenForSemantics(RenderObjectVisitor visitor) {
-    visitor(lastChild!);
-  }
+  void visitChildrenForSemantics(RenderObjectVisitor visitor) => visitor(lastChild!);
 }

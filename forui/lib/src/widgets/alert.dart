@@ -69,14 +69,14 @@ class FAlert extends StatelessWidget {
                 ),
               ],
             ),
-            if (subtitle != null)
+            if (subtitle case final subtitle?)
               Row(
                 children: [
                   SizedBox(width: style.iconSize),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
-                      child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle!),
+                      child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
                     ),
                   ),
                 ],

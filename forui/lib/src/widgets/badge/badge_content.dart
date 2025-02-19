@@ -15,7 +15,7 @@ final class Content extends StatelessWidget {
   const Content({required this.style, required this.label, super.key});
 
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext _) => Center(
     child: Padding(
       padding: style.contentStyle.padding,
       child: DefaultTextStyle.merge(style: style.contentStyle.labelTextStyle, child: label),

@@ -19,7 +19,7 @@ part 'line_calendar.style.dart';
 /// * https://forui.dev/docs/data/line-calendar for working examples.
 /// * [FLineCalendarStyle] for customizing a line calendar's style.
 class FLineCalendar extends StatelessWidget {
-  static Widget _builder(BuildContext context, FLineCalendarItemData state, Widget? child) => child!;
+  static Widget _builder(BuildContext _, FLineCalendarItemData _, Widget? child) => child!;
 
   /// The controller.
   final FCalendarController<DateTime?> controller;
@@ -96,7 +96,7 @@ class FLineCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder:
-        (context, constraints) => CalendarLayout(
+        (_, constraints) => CalendarLayout(
           controller: controller,
           style: style,
           cacheExtent: cacheExtent,

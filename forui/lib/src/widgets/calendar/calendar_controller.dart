@@ -237,14 +237,10 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
   @override
   void select(DateTime date) {
     date = _truncateAndStripTimezone(date);
-    if (value == null) {
-      super.value = (date, date);
-      return;
-    }
+    switch (value) {
+      case null:
+        super.value = (date, date);
 
-    final (first, last) = value!;
-
-    switch ((first, last)) {
       case (final first, final last) when date == first || date == last:
         super.value = null;
 
@@ -293,14 +289,10 @@ final class _RangeController extends FCalendarController<(DateTime, DateTime)?> 
 
   @override
   void select(DateTime date) {
-    if (value == null) {
-      super.value = (date, date);
-      return;
-    }
+    switch (value) {
+      case null:
+        super.value = (date, date);
 
-    final (first, last) = value!;
-
-    switch ((first, last)) {
       case (final first, final last) when date == first || date == last:
         super.value = null;
 

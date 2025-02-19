@@ -166,12 +166,9 @@ final class FTypography with Diagnosticable, FTransformable {
     xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
   );
 
-  TextStyle _scaleTextStyle({required TextStyle style, required double sizeScalar}) {
-    // default font size; https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
-    final double fontSize = style.fontSize ?? 14;
-
-    return style.copyWith(fontSize: fontSize * sizeScalar);
-  }
+  // default font size: https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
+  TextStyle _scaleTextStyle({required TextStyle style, required double sizeScalar}) =>
+      style.copyWith(fontSize: (style.fontSize ?? 14) * sizeScalar);
 
   /// Returns a copy of this [FTypography] with the given properties replaced.
   ///

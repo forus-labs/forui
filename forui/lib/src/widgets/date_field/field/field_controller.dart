@@ -70,25 +70,31 @@ class FieldController extends TextEditingController {
   }
 
   void traverse({required bool forward}) {
-    _mutating = true;
-    super.value =
-        forward
-            ? selectParts(value, onFirst: _middle, onMiddle: _last)
-            : selectParts(value, onMiddle: _first, onLast: _middle);
-    _mutating = false;
+    try {
+      _mutating = true;
+      super.value =
+          forward
+              ? selectParts(value, onFirst: _middle, onMiddle: _last)
+              : selectParts(value, onMiddle: _first, onLast: _middle);
+    } finally {
+      _mutating = false;
+    }
   }
 
   void adjust(int adjustment) {
-    _mutating = true;
-    final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
-    super.value = selectParts(
-      value,
-      onFirst: (value, _, _, _, _) => _update(_parser.adjust(parts, 0, adjustment), 0),
-      onMiddle: (value, _, _, _, _) => _update(_parser.adjust(parts, 1, adjustment), 1),
-      onLast: (value, _, _, _, _) => _update(_parser.adjust(parts, 2, adjustment), 2),
-    );
-    controller.value = _format.tryParseStrict(super.value.text, true);
-    _mutating = false;
+    try {
+      _mutating = true;
+      final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+      super.value = selectParts(
+        value,
+        onFirst: (_, _, _, _, _) => _update(_parser.adjust(parts, 0, adjustment), 0),
+        onMiddle: (_, _, _, _, _) => _update(_parser.adjust(parts, 1, adjustment), 1),
+        onLast: (_, _, _, _, _) => _update(_parser.adjust(parts, 2, adjustment), 2),
+      );
+      controller.value = _format.tryParseStrict(super.value.text, true);
+    } finally {
+      _mutating = false;
+    }
   }
 
   @override
@@ -104,23 +110,24 @@ class FieldController extends TextEditingController {
       return;
     }
 
-    _mutating = true;
+    try {
+      _mutating = true;
+      final current = super.value;
+      super.value = switch (value) {
+        _ when value.text.isEmpty => TextEditingValue(
+          text: placeholder,
+          selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
+        ),
+        _ when text != value.text => updateParts(value),
+        _ => selectParts(value),
+      };
 
-    final current = super.value;
-    super.value = switch (value) {
-      _ when value.text.isEmpty => TextEditingValue(
-        text: placeholder,
-        selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
-      ),
-      _ when text != value.text => updateParts(value),
-      _ => selectParts(value),
-    };
-
-    if (current.text != super.value.text) {
-      controller.value = _format.tryParseStrict(super.value.text, true);
+      if (current.text != super.value.text) {
+        controller.value = _format.tryParseStrict(super.value.text, true);
+      }
+    } finally {
+      _mutating = false;
     }
-
-    _mutating = false;
   }
 
   @visibleForTesting
@@ -156,7 +163,7 @@ class FieldController extends TextEditingController {
     // precondition: value's text is valid.
     // There's generally 2 cases:
     // * User selects part of the text -> select the whole enclosing date part.
-    // * User selects a seperator -> revert to the previous selection.
+    // * User selects a separator -> revert to the previous selection.
     final separator = _localizations.shortDateSeparator.length;
 
     final first = value.text.indexOf(_localizations.shortDateSeparator);
@@ -173,8 +180,6 @@ class FieldController extends TextEditingController {
   }
 
   TextEditingValue _update(List<String> parts, int index) {
-    final text = parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
-
     var start = 0;
     var end = parts[0].length;
     for (var i = 1; i <= index; i++) {
@@ -182,7 +187,10 @@ class FieldController extends TextEditingController {
       end = start + parts[i].length;
     }
 
-    return TextEditingValue(text: text, selection: TextSelection(baseOffset: start, extentOffset: end));
+    return TextEditingValue(
+      text: parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix,
+      selection: TextSelection(baseOffset: start, extentOffset: end),
+    );
   }
 
   @visibleForTesting

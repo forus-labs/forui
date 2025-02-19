@@ -246,11 +246,11 @@ class _FTappableState<T extends FTappable> extends State<T> {
       tappable = FFocusedOutline(focused: _focused, style: style, child: tappable);
     }
 
-    if (widget.onPress != null) {
+    if (widget.onPress case final onPress?) {
       tappable = Shortcuts(
         shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
         child: Actions(
-          actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!())},
+          actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => onPress())},
           child: tappable,
         ),
       );
@@ -259,7 +259,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
     return tappable;
   }
 
-  Widget _decorate(BuildContext context, Widget child) => child;
+  Widget _decorate(BuildContext _, Widget child) => child;
 
   void _onPointerDown() {}
 
@@ -326,7 +326,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   void _onPointerUp() => controller.reverse();
 
   @override
-  Widget _decorate(BuildContext context, Widget child) => ScaleTransition(scale: animation, child: child);
+  Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
 
   @override
   void dispose() {

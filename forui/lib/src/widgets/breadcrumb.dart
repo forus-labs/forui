@@ -140,7 +140,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
       focusedOutlineStyle: focusedOutlineStyle,
       onPress: onPress,
       builder:
-          (context, data, child) => Padding(
+          (_, data, child) => Padding(
             padding: style.padding,
             child: DefaultTextStyle(
               style: switch ((current, data.hovered)) {
@@ -257,7 +257,6 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
-    final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
     return FPopoverMenu(
       popoverController: controller,
       style: widget.popOverMenuStyle,
@@ -277,7 +276,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       divider: widget.divider,
       menu: widget.menu,
       child: FTappable(
-        focusedOutlineStyle: focusedOutlineStyle,
+        focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
         onPress: controller.toggle,
         child: Padding(
           padding: style.padding,

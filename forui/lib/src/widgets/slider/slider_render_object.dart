@@ -41,10 +41,10 @@ abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
   const _SliderRenderObject({super.key, super.children});
 
   @override
-  void updateRenderObject(BuildContext context, covariant _RenderSlider renderObject) {
+  void updateRenderObject(BuildContext context, covariant _RenderSlider slider) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = InheritedData.of(context);
     final stateStyle = InheritedState.of(context).style;
-    renderObject
+    slider
       ..style = style
       ..stateStyle = stateStyle
       ..sliderLayout = layout
@@ -232,25 +232,25 @@ abstract class _RenderSlider extends RenderBox
   Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) get _position {
     final insets = _style.labelLayoutStyle.childPadding;
     return switch (_layout) {
-      FLayout.ltr => (track, label, mark, style) {
+      FLayout.ltr => (track, size, mark, style) {
         final extent = track.size.width - insets.left - insets.right;
         final offset = _anchor(extent, mark.value, insets.left, insets.top, style);
-        return _rect(label, mark, Offset(offset.$1, offset.$2), style);
+        return _rect(size, Offset(offset.$1, offset.$2), style);
       },
       FLayout.rtl => (track, size, mark, style) {
         final extent = track.size.width - insets.left - insets.right;
         final offset = _anchor(extent, 1 - mark.value, insets.left, insets.top, style);
-        return _rect(size, mark, Offset(offset.$1, offset.$2), style);
+        return _rect(size, Offset(offset.$1, offset.$2), style);
       },
       FLayout.ttb => (track, size, mark, style) {
         final extent = track.size.height - insets.top - insets.bottom;
         final offset = _anchor(extent, mark.value, insets.top, insets.left, style);
-        return _rect(size, mark, Offset(offset.$2, offset.$1), style);
+        return _rect(size, Offset(offset.$2, offset.$1), style);
       },
       FLayout.btt => (track, size, mark, style) {
         final extent = track.size.height - insets.top - insets.bottom;
         final offset = _anchor(extent, 1 - mark.value, insets.top, insets.left, style);
-        return _rect(size, mark, Offset(offset.$2, offset.$1), style);
+        return _rect(size, Offset(offset.$2, offset.$1), style);
       },
     };
   }
@@ -273,7 +273,7 @@ abstract class _RenderSlider extends RenderBox
     return (anchorMainAxis, anchorCrossAxis);
   }
 
-  Rect _rect(Size size, FSliderMark mark, Offset anchor, FSliderMarkStyle markStyle) {
+  Rect _rect(Size size, Offset anchor, FSliderMarkStyle markStyle) {
     final rect = anchor & size;
     return rect.shift(anchor - markStyle.labelAnchor.relative(to: size, origin: anchor));
   }

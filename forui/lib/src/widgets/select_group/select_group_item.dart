@@ -10,7 +10,7 @@ part 'select_group_item.style.dart';
 @internal
 class FSelectGroupItemData<T> extends InheritedWidget {
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
-    final FSelectGroupItemData<T>? result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
+    final result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
     assert(
       result != null,
       "No FSelectGroupItemData found in context. This likely because FSelectGroup's type parameter could not be inferred. "

@@ -141,7 +141,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 @internal
 class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   static FSelectTileData<T> of<T>(BuildContext context) {
-    final FSelectTileData<T>? result = context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>();
+    final result = context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>();
     assert(
       result != null,
       "No FSelectTileData found in context. This likely because FSelectTileGroup's type parameter could not be inferred. "

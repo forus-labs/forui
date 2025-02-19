@@ -41,7 +41,7 @@ class FProgress extends StatelessWidget {
 
     return LayoutBuilder(
       builder:
-          (context, constraints) => ConstrainedBox(
+          (_, constraints) => ConstrainedBox(
             constraints: style.constraints,
             child: Stack(
               alignment: AlignmentDirectional.centerStart,
