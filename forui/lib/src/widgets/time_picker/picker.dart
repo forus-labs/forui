@@ -80,7 +80,7 @@ class _HourPickerState extends State<_HourPicker> {
 
   @override
   Widget build(BuildContext context) => NotificationListener<ScrollUpdateNotification>(
-    onNotification: (notification) {
+    onNotification: (_) {
       final picker = widget.controller.picker!;
       final current = picker.wheels.first.selectedItem % 12;
       final am = picker.wheels.last;

@@ -150,7 +150,6 @@ class _State extends FormFieldState<String> {
   @override
   void initState() {
     super.initState();
-
     if (widget.parent.controller case final controller?) {
       controller.addListener(_handleControllerChanged);
     } else {

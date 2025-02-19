@@ -21,8 +21,8 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  void updateRenderObject(BuildContext context, covariant _RenderTile renderObject) {
-    renderObject
+  void updateRenderObject(BuildContext context, covariant _RenderTile tile) {
+    tile
       ..style = style
       ..divider = divider
       ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;

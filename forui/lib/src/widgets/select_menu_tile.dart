@@ -193,7 +193,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              focusNode: focusNode,
              onFocusChange: onFocusChange,
              popoverBuilder:
-                 (context, _, _) => ConstrainedBox(
+                 (_, _, _) => ConstrainedBox(
                    constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                    child: FSelectTileGroup<T>(
                      groupController: state._controller,
@@ -325,7 +325,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              focusNode: focusNode,
              onFocusChange: onFocusChange,
              popoverBuilder:
-                 (context, _, _) => ConstrainedBox(
+                 (_, _, _) => ConstrainedBox(
                    constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                    child: FSelectTileGroup<T>.builder(
                      groupController: state._controller,

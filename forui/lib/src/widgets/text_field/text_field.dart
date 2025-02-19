@@ -835,7 +835,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
             ),
           ),
           child: CupertinoTheme(
-            // We cannot use Theme.cupertinoOverrideTheme because of https://github.com/flutter/flutter/issues/161573.
+            // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
             data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
             child: Field(parent: this, style: style, key: key),
           ),
