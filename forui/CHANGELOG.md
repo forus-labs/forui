@@ -2,6 +2,7 @@
 
 ### Additions
 
+* Add `FButtonCustomStyle.animationTween`.
 * Add `FTextField.counterBuilder`.
 * Add `FTransformable`.
 * Add `FTransformables`.
