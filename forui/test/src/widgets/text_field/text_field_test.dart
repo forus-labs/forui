@@ -2,42 +2,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
   group('FTextField', () {
     testWidgets('embedded in CupertinoApp', (tester) async {
-      await tester.pumpWidget(
-        CupertinoApp(
-          home: TestScaffold(
-            child: const FTextField(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(CupertinoApp(home: TestScaffold(child: const FTextField())));
 
       expect(tester.takeException(), null);
     });
 
     testWidgets('embedded in MaterialApp', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: TestScaffold(
-            child: const FTextField(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(MaterialApp(home: TestScaffold(child: const FTextField())));
 
       expect(tester.takeException(), null);
     });
 
     testWidgets('not embedded in any App', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: const FTextField(),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(child: const FTextField()));
 
       expect(tester.takeException(), null);
     });
@@ -51,10 +35,7 @@ void main() {
             DefaultCupertinoLocalizations.delegate,
             DefaultWidgetsLocalizations.delegate,
           ],
-          child: TestScaffold(
-            theme: FThemes.zinc.light,
-            child: const FTextField(),
-          ),
+          child: TestScaffold(theme: FThemes.zinc.light, child: const FTextField()),
         ),
       );
 

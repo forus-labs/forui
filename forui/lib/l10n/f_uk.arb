@@ -5,6 +5,6 @@
   "barrierLabel": "Маскувальний фон",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Виберіть дату",
-  "datePickerInvalidDateError": "Недійсна дата."
+  "dateFieldHint": "Виберіть дату",
+  "dateFieldInvalidDateError": "Недійсна дата."
 }

@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'focused_outline.style.dart';
 
@@ -20,12 +21,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   final bool focused;
 
   /// Creates a [FFocusedOutline].
-  const FFocusedOutline({
-    required this.focused,
-    required super.child,
-    this.style,
-    super.key,
-  });
+  const FFocusedOutline({required this.focused, required super.child, this.style, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
@@ -33,8 +29,8 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  void updateRenderObject(BuildContext context, _Outline renderObject) {
-    renderObject
+  void updateRenderObject(BuildContext context, _Outline outline) {
+    outline
       ..style = style ?? context.theme.style.focusedOutlineStyle
       ..focused = focused;
   }
@@ -59,16 +55,15 @@ class _Outline extends RenderProxyBox {
     context.paintChild(child!, offset);
     if (focused) {
       context.canvas.drawPath(
-        Path()
-          ..addRRect(
-            RRect.fromRectAndCorners(
-              (offset & child!.size).inflate(_style.spacing),
-              topLeft: _style.borderRadius.topLeft,
-              topRight: _style.borderRadius.topRight,
-              bottomLeft: _style.borderRadius.bottomLeft,
-              bottomRight: _style.borderRadius.bottomRight,
-            ),
+        Path()..addRRect(
+          RRect.fromRectAndCorners(
+            (offset & child!.size).inflate(_style.spacing),
+            topLeft: _style.borderRadius.topLeft,
+            topRight: _style.borderRadius.topRight,
+            bottomLeft: _style.borderRadius.bottomLeft,
+            bottomRight: _style.borderRadius.bottomRight,
           ),
+        ),
         Paint()
           ..style = PaintingStyle.stroke
           ..color = _style.color
@@ -129,10 +124,6 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
   final double spacing;
 
   /// Creates a [FFocusedOutlineStyle].
-  const FFocusedOutlineStyle({
-    required this.color,
-    required this.borderRadius,
-    this.width = 1,
-    this.spacing = 3,
-  }) : assert(0 < width, 'The width must be greater than 0.');
+  const FFocusedOutlineStyle({required this.color, required this.borderRadius, this.width = 1, this.spacing = 3})
+    : assert(0 < width, 'The width must be greater than 0.');
 }

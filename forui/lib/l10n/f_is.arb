@@ -5,6 +5,6 @@
   "barrierLabel": "Möskvi",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Veldu dagsetningu",
-  "datePickerInvalidDateError": "Ógild dagsetning."
+  "dateFieldHint": "Veldu dagsetningu",
+  "dateFieldInvalidDateError": "Ógild dagsetning."
 }

@@ -1,3 +1,5 @@
+// ignore: unused_import
+
 import 'package:intl/intl.dart' as intl;
 
 import 'localizations.dart';
@@ -63,10 +65,10 @@ class FLocalizationsKo extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
-  String get datePickerHint => '날짜 선택';
+  String get dateFieldHint => '날짜 선택';
 
   @override
-  String get datePickerInvalidDateError => '날짜가 잘못되었습니다.';
+  String get dateFieldInvalidDateError => '날짜가 잘못되었습니다.';
 
   @override
   String get dialogLabel => '대화상자';

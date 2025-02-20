@@ -221,14 +221,13 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       draggable: draggable,
       useSafeArea: useSafeArea,
       builder: builder,
-      onChange: (size) => _didChangeBarrierSemanticsClip(
-        switch (side) {
-          FLayout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
-          FLayout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
-          FLayout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
-          FLayout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
-        },
-      ),
+      onChange:
+          (size) => _didChangeBarrierSemanticsClip(switch (side) {
+            FLayout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
+            FLayout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
+            FLayout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
+            FLayout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
+          }),
       onClosing: () {
         if (isCurrent) {
           Navigator.pop(context);
@@ -242,15 +241,13 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   @override
   Widget buildModalBarrier() {
     if (barrierColor.a != 0 && !offstage) {
-      // changedInternalState is called if barrierColor or offstage updates
-      final color = animation!.drive(
-        ColorTween(
-          begin: barrierColor.withValues(alpha: 0.0),
-          end: barrierColor, // changedInternalState is called if barrierColor updates
-        ).chain(CurveTween(curve: barrierCurve)), // changedInternalState is called if barrierCurve updates
-      );
       return AnimatedModalBarrier(
-        color: color,
+        color: animation!.drive(
+          ColorTween(
+            begin: barrierColor.withValues(alpha: 0.0),
+            end: barrierColor, // changedInternalState is called if barrierColor updates
+          ).chain(CurveTween(curve: barrierCurve)), // changedInternalState is called if barrierCurve updates
+        ),
         dismissible: barrierDismissible, // changedInternalState is called if barrierDismissible updates
         semanticsLabel: barrierLabel, // changedInternalState is called if barrierLabel updates
         barrierSemanticsDismissible: semanticsDismissible,

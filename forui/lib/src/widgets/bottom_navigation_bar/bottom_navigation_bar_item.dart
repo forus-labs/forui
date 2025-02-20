@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'bottom_navigation_bar_item.style.dart';
 
@@ -20,34 +21,28 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final Widget label;
 
   /// Creates a [FBottomNavigationBarItem].
-  const FBottomNavigationBarItem({
-    required this.label,
-    required this.icon,
-    this.style,
-    super.key,
-  });
+  const FBottomNavigationBarItem({required this.label, required this.icon, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final data = FBottomNavigationBarData.of(context);
-    final FBottomNavigationBarData(:itemStyle, :selected) = data;
+    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBarData.of(context);
     final style = this.style ?? itemStyle;
 
     return Padding(
       padding: style.padding,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        spacing: 2,
         children: [
           ExcludeSemantics(
             child: FIconStyleData(
               style: FIconStyle(
-                color: data.selected ? style.activeIconColor : style.inactiveIconColor,
+                color: selected ? style.activeIconColor : style.inactiveIconColor,
                 size: style.iconSize,
               ),
               child: icon,
             ),
           ),
-          const SizedBox(height: 2),
           DefaultTextStyle.merge(
             style: selected ? style.activeTextStyle : style.inactiveTextStyle,
             overflow: TextOverflow.ellipsis,
@@ -104,16 +99,10 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and
   /// [FTypography].
   FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          activeIconColor: colorScheme.primary,
-          inactiveIconColor: colorScheme.disable(colorScheme.foreground),
-          activeTextStyle: typography.base.copyWith(
-            color: colorScheme.primary,
-            fontSize: 10,
-          ),
-          inactiveTextStyle: typography.base.copyWith(
-            color: colorScheme.disable(colorScheme.foreground),
-            fontSize: 10,
-          ),
-        );
+    : this(
+        activeIconColor: colorScheme.primary,
+        inactiveIconColor: colorScheme.disable(colorScheme.foreground),
+        activeTextStyle: typography.base.copyWith(color: colorScheme.primary, fontSize: 10),
+        inactiveTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.foreground), fontSize: 10),
+      );
 }

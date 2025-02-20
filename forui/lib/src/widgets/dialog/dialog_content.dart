@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
 
 part 'dialog_content.style.dart';
 
@@ -30,42 +30,34 @@ sealed class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => IntrinsicWidth(
-        child: Padding(
-          padding: style.padding,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: alignment,
-            children: [
-              if (title != null)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 4),
-                  child: Semantics(
-                    container: true,
-                    child: DefaultTextStyle.merge(
-                      textAlign: titleTextAlign,
-                      style: style.titleTextStyle,
-                      child: title!,
-                    ),
-                  ),
-                ),
-              if (body != null)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 4),
-                  child: Semantics(
-                    container: true,
-                    child: DefaultTextStyle.merge(
-                      textAlign: bodyTextAlign,
-                      style: style.bodyTextStyle,
-                      child: body!,
-                    ),
-                  ),
-                ),
-              if (title != null && body != null) const SizedBox(height: 8),
-              _actions(context),
-            ],
-          ),
-        ),
-      );
+    child: Padding(
+      padding: style.padding,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: alignment,
+        children: [
+          if (title case final title?)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Semantics(
+                container: true,
+                child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
+              ),
+            ),
+          if (body case final body?)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Semantics(
+                container: true,
+                child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
+              ),
+            ),
+          if (title != null && body != null) const SizedBox(height: 8),
+          _actions(context),
+        ],
+      ),
+    ),
+  );
 
   Widget _actions(BuildContext context);
 
@@ -93,14 +85,10 @@ class HorizontalContent extends Content {
 
   @override
   Widget _actions(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: separate(
-          [
-            for (final action in actions) IntrinsicWidth(child: action),
-          ],
-          by: [SizedBox(width: style.actionPadding)],
-        ),
-      );
+    mainAxisAlignment: MainAxisAlignment.end,
+    spacing: style.actionSpacing,
+    children: [for (final action in actions) IntrinsicWidth(child: action)],
+  );
 }
 
 @internal
@@ -114,13 +102,8 @@ class VerticalContent extends Content {
   }) : super(alignment: CrossAxisAlignment.center, titleTextAlign: TextAlign.center, bodyTextAlign: TextAlign.center);
 
   @override
-  Widget _actions(BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: separate(
-          actions,
-          by: [SizedBox(height: style.actionPadding)],
-        ),
-      );
+  Widget _actions(BuildContext context) =>
+      Column(mainAxisSize: MainAxisSize.min, spacing: style.actionSpacing, children: actions);
 }
 
 /// [FDialog] content's style.
@@ -139,14 +122,14 @@ final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFuncti
 
   /// The space between actions.
   @override
-  final double actionPadding;
+  final double actionSpacing;
 
   /// Creates a [FDialogContentStyle].
   FDialogContentStyle({
     required this.titleTextStyle,
     required this.bodyTextStyle,
     required this.padding,
-    required this.actionPadding,
+    required this.actionSpacing,
   });
 
   /// Creates a [FDialogContentStyle] that inherits its properties from [colorScheme] and [typography].
@@ -154,11 +137,11 @@ final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFuncti
     required FColorScheme colorScheme,
     required FTypography typography,
     required EdgeInsets padding,
-    required double actionPadding,
+    required double actionSpacing,
   }) : this(
-          titleTextStyle: typography.lg.copyWith(fontWeight: FontWeight.w600, color: colorScheme.foreground),
-          bodyTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-          padding: padding,
-          actionPadding: actionPadding,
-        );
+         titleTextStyle: typography.lg.copyWith(fontWeight: FontWeight.w600, color: colorScheme.foreground),
+         bodyTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+         padding: padding,
+         actionSpacing: actionSpacing,
+       );
 }

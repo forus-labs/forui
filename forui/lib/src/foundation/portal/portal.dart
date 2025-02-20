@@ -80,11 +80,12 @@ class _State extends State<FPortal> {
   final LayerLink _link = LayerLink();
 
   @override
-  Widget build(BuildContext context) => CompositedTransformTarget(
-        link: _link,
-        child: OverlayPortal(
-          controller: widget.controller,
-          overlayChildBuilder: (context) => CompositedTransformFollower(
+  Widget build(BuildContext _) => CompositedTransformTarget(
+    link: _link,
+    child: OverlayPortal(
+      controller: widget.controller,
+      overlayChildBuilder:
+          (context) => CompositedTransformFollower(
             link: _link,
             child: _Alignment(
               link: _link,
@@ -95,9 +96,9 @@ class _State extends State<FPortal> {
               child: widget.portalBuilder(context),
             ),
           ),
-          child: widget.child,
-        ),
-      );
+      child: widget.child,
+    ),
+  );
 }
 
 class _Alignment extends SingleChildRenderObjectWidget {
@@ -114,25 +115,20 @@ class _Alignment extends SingleChildRenderObjectWidget {
     required Alignment portalAnchor,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     required Offset offset,
-  })  : _link = link,
-        _childAnchor = childAnchor,
-        _portalAnchor = portalAnchor,
-        _shift = shift,
-        _offset = offset,
-        super(child: child);
+  }) : _link = link,
+       _childAnchor = childAnchor,
+       _portalAnchor = portalAnchor,
+       _shift = shift,
+       _offset = offset,
+       super(child: child);
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderBox(
-        link: _link,
-        childAnchor: _childAnchor,
-        portalAnchor: _portalAnchor,
-        shift: _shift,
-        offset: _offset,
-      );
+  RenderObject createRenderObject(BuildContext _) =>
+      _RenderBox(link: _link, childAnchor: _childAnchor, portalAnchor: _portalAnchor, shift: _shift, offset: _offset);
 
   @override
-  void updateRenderObject(BuildContext context, _RenderBox renderObject) {
-    renderObject
+  void updateRenderObject(BuildContext _, _RenderBox box) {
+    box
       ..link = _link
       ..childAnchor = _childAnchor
       ..portalAnchor = _portalAnchor
@@ -154,11 +150,11 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
     required Alignment portalAnchor,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     required Offset offset,
-  })  : _link = link,
-        _childAnchor = childAnchor,
-        _portalAnchor = portalAnchor,
-        _shift = shift,
-        _offset = offset;
+  }) : _link = link,
+       _childAnchor = childAnchor,
+       _portalAnchor = portalAnchor,
+       _shift = shift,
+       _offset = offset;
 
   @override
   void performLayout() {
@@ -170,10 +166,11 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
+  void paint(PaintingContext context, Offset _) {
     final tuple = (child, child?.parentData, link.leader?.offset, link.leaderSize);
     if (tuple case (final child?, final BoxParentData data?, final offset?, final leaderSize?)) {
-      data.offset = _shift(
+      data.offset =
+          _shift(
             size,
             (offset: offset, size: leaderSize, anchor: childAnchor),
             (size: child.size, anchor: portalAnchor),

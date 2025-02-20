@@ -2,9 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/dialog/dialog_content.dart';
-import 'package:meta/meta.dart';
 
 part 'dialog.style.dart';
 
@@ -82,19 +83,11 @@ class FDialog extends StatelessWidget {
     Axis direction = Axis.vertical,
     super.key,
   }) : builder = switch (direction) {
-          Axis.horizontal => (context, style) => HorizontalContent(
-                style: style.horizontalStyle,
-                title: title,
-                body: body,
-                actions: actions,
-              ),
-          Axis.vertical => (context, style) => VerticalContent(
-                style: style.verticalStyle,
-                title: title,
-                body: body,
-                actions: actions,
-              ),
-        };
+         Axis.horizontal =>
+           (_, style) => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
+         Axis.vertical =>
+           (_, style) => VerticalContent(style: style.verticalStyle, title: title, body: body, actions: actions),
+       };
 
   /// Creates a adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
   /// horizontally on larger devices.
@@ -107,20 +100,16 @@ class FDialog extends StatelessWidget {
     Widget? title,
     Widget? body,
     super.key,
-  }) : builder = ((context, style) => switch (MediaQuery.sizeOf(context).width) {
-              final width when width < context.theme.breakpoints.sm => VerticalContent(
-                  style: style.verticalStyle,
-                  title: title,
-                  body: body,
-                  actions: actions,
-                ),
-              _ => HorizontalContent(
-                  style: style.horizontalStyle,
-                  title: title,
-                  body: body,
-                  actions: actions,
-                ),
-            });
+  }) : builder =
+           ((context, style) => switch (MediaQuery.sizeOf(context).width) {
+             final width when width < context.theme.breakpoints.sm => VerticalContent(
+               style: style.verticalStyle,
+               title: title,
+               body: body,
+               actions: actions,
+             ),
+             _ => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
+           });
 
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({
@@ -156,14 +145,8 @@ class FDialog extends StatelessWidget {
               namesRoute: true,
               label: semanticLabel,
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: style.minWidth,
-                  maxWidth: style.maxWidth,
-                ),
-                child: DecoratedBox(
-                  decoration: style.decoration,
-                  child: builder(context, style),
-                ),
+                constraints: BoxConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
+                child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
               ),
             ),
           ),
@@ -221,26 +204,20 @@ final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties from the given [style], [colorScheme], and [typography].
-  FDialogStyle.inherit({
-    required FStyle style,
-    required FColorScheme colorScheme,
-    required FTypography typography,
-  }) : this(
-          decoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
-          ),
-          horizontalStyle: FDialogContentStyle.inherit(
-            colorScheme: colorScheme,
-            typography: typography,
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-            actionPadding: 7,
-          ),
-          verticalStyle: FDialogContentStyle.inherit(
-            colorScheme: colorScheme,
-            typography: typography,
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-            actionPadding: 8,
-          ),
-        );
+  FDialogStyle.inherit({required FStyle style, required FColorScheme colorScheme, required FTypography typography})
+    : this(
+        decoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.background),
+        horizontalStyle: FDialogContentStyle.inherit(
+          colorScheme: colorScheme,
+          typography: typography,
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+          actionSpacing: 7,
+        ),
+        verticalStyle: FDialogContentStyle.inherit(
+          colorScheme: colorScheme,
+          typography: typography,
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+          actionSpacing: 8,
+        ),
+      );
 }

@@ -4,8 +4,8 @@ library;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -17,18 +17,8 @@ void main() {
         TestScaffold.app(
           child: FPortal(
             controller: controller,
-            portalBuilder: (context) => const ColoredBox(
-              color: Colors.red,
-              child: SizedBox.square(
-                dimension: 100,
-              ),
-            ),
-            child: const ColoredBox(
-              color: Colors.yellow,
-              child: SizedBox.square(
-                dimension: 100,
-              ),
-            ),
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
       );
@@ -43,21 +33,12 @@ void main() {
         TestScaffold.app(
           child: FPortal(
             controller: controller,
-            portalBuilder: (context) => const Padding(
-              padding: EdgeInsets.all(5),
-              child: ColoredBox(
-                color: Colors.red,
-                child: SizedBox.square(
-                  dimension: 100,
+            portalBuilder:
+                (context) => const Padding(
+                  padding: EdgeInsets.all(5),
+                  child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                 ),
-              ),
-            ),
-            child: const ColoredBox(
-              color: Colors.yellow,
-              child: SizedBox.square(
-                dimension: 50,
-              ),
-            ),
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
         ),
       );
@@ -76,21 +57,12 @@ void main() {
           child: FPortal(
             controller: controller,
             offset: const Offset(100, 100),
-            portalBuilder: (context) => const Padding(
-              padding: EdgeInsets.all(5),
-              child: ColoredBox(
-                color: Colors.red,
-                child: SizedBox.square(
-                  dimension: 100,
+            portalBuilder:
+                (context) => const Padding(
+                  padding: EdgeInsets.all(5),
+                  child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                 ),
-              ),
-            ),
-            child: const ColoredBox(
-              color: Colors.yellow,
-              child: SizedBox.square(
-                dimension: 50,
-              ),
-            ),
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
         ),
       );

@@ -2,21 +2,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'line_calendar_item.style.dart';
 
 /// The state of a line calendar item used to build a line calendar item.
-typedef FLineCalendarItemData = ({
-  FLineCalendarStyle style,
-  FLineCalendarItemStyle itemStyle,
-  DateTime date,
-  bool today,
-  bool selected,
-  bool hovered,
-  bool focused,
-});
+typedef FLineCalendarItemData =
+    ({
+      FLineCalendarStyle style,
+      FLineCalendarItemStyle itemStyle,
+      DateTime date,
+      bool today,
+      bool selected,
+      bool hovered,
+      bool focused,
+    });
 
 @internal
 class Item extends StatelessWidget {
@@ -37,8 +39,9 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ValueListenableBuilder(
-        valueListenable: controller,
-        builder: (context, selected, _) => FTappable.animated(
+    valueListenable: controller,
+    builder:
+        (context, selected, _) => FTappable.animated(
           focusNode: FocusNode(debugLabel: 'Date: $date'),
           semanticLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
           onPress: () => controller.select(date),
@@ -50,19 +53,17 @@ class Item extends StatelessWidget {
               (false, false) => style.unselectedItemStyle,
             };
 
-            final itemData = (
-              style: style,
-              itemStyle: itemStyle,
-              date: date,
-              today: today,
-              selected: selected == date,
-              hovered: state.hovered,
-              focused: state.focused,
-            );
-
             return builder(
               context,
-              itemData,
+              (
+                style: style,
+                itemStyle: itemStyle,
+                date: date,
+                today: today,
+                selected: selected == date,
+                hovered: state.hovered,
+                focused: state.focused,
+              ),
               Stack(
                 children: [
                   Positioned.fill(
@@ -81,10 +82,7 @@ class Item extends StatelessWidget {
                       child: Container(
                         height: 4,
                         width: 4,
-                        decoration: BoxDecoration(
-                          color: itemStyle.todayIndicatorColor,
-                          shape: BoxShape.circle,
-                        ),
+                        decoration: BoxDecoration(color: itemStyle.todayIndicatorColor, shape: BoxShape.circle),
                       ),
                     ),
                 ],
@@ -92,7 +90,7 @@ class Item extends StatelessWidget {
             );
           },
         ),
-      );
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -133,6 +131,7 @@ class ItemContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
+          spacing: style.itemContentSpacing,
           children: [
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
@@ -142,7 +141,6 @@ class ItemContent extends StatelessWidget {
               style: itemStyle.dateTextStyle,
               child: Text(localizations.day(date)),
             ),
-            SizedBox(height: style.itemContentSpacing),
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,

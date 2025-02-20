@@ -5,6 +5,6 @@
   "barrierLabel": "ਸਕ੍ਰਿਮ",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "ਤਾਰੀਖ ਚੁਣੋ",
-  "datePickerInvalidDateError": "ਅਵੈਧ ਤਾਰੀਖ।"
+  "dateFieldHint": "ਤਾਰੀਖ ਚੁਣੋ",
+  "dateFieldInvalidDateError": "ਅਵੈਧ ਤਾਰੀਖ।"
 }

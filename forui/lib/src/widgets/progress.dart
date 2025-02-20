@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'progress.style.dart';
 
@@ -27,11 +28,7 @@ class FProgress extends StatelessWidget {
   final double value;
 
   /// Creates a [FProgress].
-  FProgress({
-    required this.value,
-    this.style,
-    super.key,
-  }) : assert(!value.isNaN, 'Cannot provide a NaN value.');
+  FProgress({required this.value, this.style, super.key}) : assert(!value.isNaN, 'Cannot provide a NaN value.');
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +40,22 @@ class FProgress extends StatelessWidget {
     };
 
     return LayoutBuilder(
-      builder: (context, constraints) => ConstrainedBox(
-        constraints: style.constraints,
-        child: Stack(
-          alignment: AlignmentDirectional.centerStart,
-          children: [
-            Container(
-              decoration: style.backgroundDecoration,
-              width: constraints.maxWidth,
+      builder:
+          (_, constraints) => ConstrainedBox(
+            constraints: style.constraints,
+            child: Stack(
+              alignment: AlignmentDirectional.centerStart,
+              children: [
+                Container(decoration: style.backgroundDecoration, width: constraints.maxWidth),
+                AnimatedContainer(
+                  curve: style.curve,
+                  duration: style.animationDuration,
+                  decoration: style.progressDecoration,
+                  width: value * constraints.maxWidth,
+                ),
+              ],
             ),
-            AnimatedContainer(
-              curve: style.curve,
-              duration: style.animationDuration,
-              decoration: style.progressDecoration,
-              width: value * constraints.maxWidth,
-            ),
-          ],
-        ),
-      ),
+          ),
     );
   }
 
@@ -106,14 +101,8 @@ final class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
 
   /// Creates a [FProgressStyle] that inherits its properties from [colorScheme] and [style].
   FProgressStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          backgroundDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.secondary,
-          ),
-          progressDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.primary,
-          ),
-        );
+    : this(
+        backgroundDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.secondary),
+        progressDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
+      );
 }

@@ -5,6 +5,6 @@
   "barrierLabel": "I-Scrim",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "Khetha usuku",
-  "datePickerInvalidDateError": "Usuku olungalungile."
+  "dateFieldHint": "Khetha usuku",
+  "dateFieldInvalidDateError": "Usuku olungalungile."
 }

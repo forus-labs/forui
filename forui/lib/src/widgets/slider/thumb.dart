@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
-import 'package:meta/meta.dart';
 
 part 'thumb.style.dart';
 
@@ -22,10 +23,7 @@ class _ExtendIntent extends Intent {
 class Thumb extends StatefulWidget {
   final bool min;
 
-  const Thumb({
-    required this.min,
-    super.key,
-  });
+  const Thumb({required this.min, super.key});
 
   @override
   State<Thumb> createState() => _ThumbState();
@@ -63,8 +61,9 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final thumbStyle = InheritedState.of(context).style.thumbStyle;
-    final InheritedData(:style, :layout, :tooltipBuilder, :semanticValueFormatterCallback, :enabled) =
-        InheritedData.of(context);
+    final InheritedData(:style, :layout, :tooltipBuilder, :semanticValueFormatterCallback, :enabled) = InheritedData.of(
+      context,
+    );
 
     String? increasedValue;
     if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
@@ -100,14 +99,9 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: thumbStyle.color,
-              border: Border.all(
-                color: thumbStyle.borderColor,
-                width: thumbStyle.borderWidth,
-              ),
+              border: Border.all(color: thumbStyle.borderColor, width: thumbStyle.borderWidth),
             ),
-            child: SizedBox.square(
-              dimension: style.thumbSize,
-            ),
+            child: SizedBox.square(dimension: style.thumbSize),
           ),
         ),
       ),
@@ -129,7 +123,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           controller: _tooltip,
           tipAnchor: style.tooltipTipAnchor,
           childAnchor: style.tooltipThumbAnchor,
-          tipBuilder: (context, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
+          tipBuilder: (_, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
           longPress: false,
           hover: false,
           child: thumb,
@@ -137,19 +131,19 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
       );
     }
 
-    void down(TapDownDetails details) {
+    void down(TapDownDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _gesture = true;
       _controller.tooltips.show(_key);
     }
 
-    void up(TapUpDetails details) {
+    void up(TapUpDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _gesture = false;
       _controller.tooltips.hide(_key);
     }
 
-    void start(DragStartDetails details) {
+    void start(DragStartDetails _) {
       setState(() => _cursor = SystemMouseCursors.grabbing);
       _origin = null;
       _origin = _controller.selection.rawOffset;
@@ -157,7 +151,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
       _controller.tooltips.show(_key);
     }
 
-    void end(DragEndDetails details) {
+    void end(DragEndDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _origin = null;
       _gesture = false;
@@ -188,23 +182,23 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   double _offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
 
   Map<ShortcutActivator, Intent> _shortcuts(FLayout layout) => switch ((layout, widget.min)) {
-        (FLayout.ltr, true) || (FLayout.rtl, false) => const {
-            SingleActivator(LogicalKeyboardKey.arrowLeft): _ExtendIntent(),
-            SingleActivator(LogicalKeyboardKey.arrowRight): _ShrinkIntent(),
-          },
-        (FLayout.ltr, false) || (FLayout.rtl, true) => const {
-            SingleActivator(LogicalKeyboardKey.arrowLeft): _ShrinkIntent(),
-            SingleActivator(LogicalKeyboardKey.arrowRight): _ExtendIntent(),
-          },
-        (FLayout.ttb, true) || (FLayout.btt, false) => const {
-            SingleActivator(LogicalKeyboardKey.arrowUp): _ExtendIntent(),
-            SingleActivator(LogicalKeyboardKey.arrowDown): _ShrinkIntent(),
-          },
-        (FLayout.ttb, false) || (FLayout.btt, true) => const {
-            SingleActivator(LogicalKeyboardKey.arrowUp): _ShrinkIntent(),
-            SingleActivator(LogicalKeyboardKey.arrowDown): _ExtendIntent(),
-          },
-      };
+    (FLayout.ltr, true) || (FLayout.rtl, false) => const {
+      SingleActivator(LogicalKeyboardKey.arrowLeft): _ExtendIntent(),
+      SingleActivator(LogicalKeyboardKey.arrowRight): _ShrinkIntent(),
+    },
+    (FLayout.ltr, false) || (FLayout.rtl, true) => const {
+      SingleActivator(LogicalKeyboardKey.arrowLeft): _ShrinkIntent(),
+      SingleActivator(LogicalKeyboardKey.arrowRight): _ExtendIntent(),
+    },
+    (FLayout.ttb, true) || (FLayout.btt, false) => const {
+      SingleActivator(LogicalKeyboardKey.arrowUp): _ExtendIntent(),
+      SingleActivator(LogicalKeyboardKey.arrowDown): _ShrinkIntent(),
+    },
+    (FLayout.ttb, false) || (FLayout.btt, true) => const {
+      SingleActivator(LogicalKeyboardKey.arrowUp): _ShrinkIntent(),
+      SingleActivator(LogicalKeyboardKey.arrowDown): _ExtendIntent(),
+    },
+  };
 
   GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {
     if (controller.allowedInteraction == FSliderInteraction.tap) {
@@ -266,9 +260,9 @@ final class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions 
 @internal
 extension Layouts on FLayout {
   double Function(Offset) translateThumbDrag(double thumbSize) => switch (this) {
-        FLayout.ltr => (delta) => delta.dx - thumbSize / 2,
-        FLayout.rtl => (delta) => -delta.dx + thumbSize / 2,
-        FLayout.ttb => (delta) => delta.dy - thumbSize / 2,
-        FLayout.btt => (delta) => -delta.dy + thumbSize / 2,
-      };
+    FLayout.ltr => (delta) => delta.dx - thumbSize / 2,
+    FLayout.rtl => (delta) => -delta.dx + thumbSize / 2,
+    FLayout.ttb => (delta) => delta.dy - thumbSize / 2,
+    FLayout.btt => (delta) => -delta.dy + thumbSize / 2,
+  };
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/persistent_sheet.dart';
-
 import '../../test_scaffold.dart';
 
 void main() {
@@ -15,21 +15,23 @@ void main() {
         TestScaffold.app(
           child: FSheets(
             child: Builder(
-              builder: (context) => FButton.icon(
-                child: FIcon(FAssets.icons.chevronRight),
-                onPress: () {
-                  controller = showFPersistentSheet(
-                    context: context,
-                    side: FLayout.btt,
-                    builder: (context, controller) => Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: context.theme.colorScheme.background,
-                      child: const Center(child: Text('sheet')),
-                    ),
-                  );
-                },
-              ),
+              builder:
+                  (context) => FButton.icon(
+                    child: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {
+                      controller = showFPersistentSheet(
+                        context: context,
+                        side: FLayout.btt,
+                        builder:
+                            (context, controller) => Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              color: context.theme.colorScheme.background,
+                              child: const Center(child: Text('sheet')),
+                            ),
+                      );
+                    },
+                  ),
             ),
           ),
         ),
@@ -49,22 +51,24 @@ void main() {
         TestScaffold.app(
           child: FSheets(
             child: Builder(
-              builder: (context) => FButton.icon(
-                child: FIcon(FAssets.icons.chevronRight),
-                onPress: () {
-                  controller = showFPersistentSheet(
-                    context: context,
-                    side: FLayout.btt,
-                    keepAliveOffstage: true,
-                    builder: (context, controller) => Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: context.theme.colorScheme.background,
-                      child: const Center(child: Text('sheet')),
-                    ),
-                  );
-                },
-              ),
+              builder:
+                  (context) => FButton.icon(
+                    child: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {
+                      controller = showFPersistentSheet(
+                        context: context,
+                        side: FLayout.btt,
+                        keepAliveOffstage: true,
+                        builder:
+                            (context, controller) => Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              color: context.theme.colorScheme.background,
+                              child: const Center(child: Text('sheet')),
+                            ),
+                      );
+                    },
+                  ),
             ),
           ),
         ),
@@ -83,21 +87,23 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Builder(
-            builder: (context) => FButton.icon(
-              child: FIcon(FAssets.icons.chevronRight),
-              onPress: () {
-                controller = showFPersistentSheet(
-                  context: context,
-                  side: FLayout.btt,
-                  builder: (context, controller) => Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    color: context.theme.colorScheme.background,
-                    child: const Center(child: Text('sheet')),
-                  ),
-                );
-              },
-            ),
+            builder:
+                (context) => FButton.icon(
+                  child: FIcon(FAssets.icons.chevronRight),
+                  onPress: () {
+                    controller = showFPersistentSheet(
+                      context: context,
+                      side: FLayout.btt,
+                      builder:
+                          (context, controller) => Container(
+                            height: double.infinity,
+                            width: double.infinity,
+                            color: context.theme.colorScheme.background,
+                            child: const Center(child: Text('sheet')),
+                          ),
+                    );
+                  },
+                ),
           ),
         ),
       );
@@ -113,22 +119,24 @@ void main() {
         TestScaffold.app(
           child: FSheets(
             child: Builder(
-              builder: (context) => FButton.icon(
-                child: FIcon(FAssets.icons.chevronRight),
-                onPress: () {
-                  controller = showFPersistentSheet(
-                    key: const Key('test'),
-                    context: context,
-                    side: FLayout.btt,
-                    builder: (context, controller) => Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: context.theme.colorScheme.background,
-                      child: const Center(child: Text('sheet')),
-                    ),
-                  );
-                },
-              ),
+              builder:
+                  (context) => FButton.icon(
+                    child: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {
+                      controller = showFPersistentSheet(
+                        key: const Key('test'),
+                        context: context,
+                        side: FLayout.btt,
+                        builder:
+                            (context, controller) => Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              color: context.theme.colorScheme.background,
+                              child: const Center(child: Text('sheet')),
+                            ),
+                      );
+                    },
+                  ),
             ),
           ),
         ),
@@ -152,21 +160,23 @@ void main() {
           child: FSheets(
             key: key,
             child: Builder(
-              builder: (context) => FButton.icon(
-                child: FIcon(FAssets.icons.chevronRight),
-                onPress: () {
-                  controller = showFPersistentSheet(
-                    context: context,
-                    side: FLayout.btt,
-                    builder: (context, controller) => Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      color: context.theme.colorScheme.background,
-                      child: const Center(child: Text('sheet')),
-                    ),
-                  );
-                },
-              ),
+              builder:
+                  (context) => FButton.icon(
+                    child: FIcon(FAssets.icons.chevronRight),
+                    onPress: () {
+                      controller = showFPersistentSheet(
+                        context: context,
+                        side: FLayout.btt,
+                        builder:
+                            (context, controller) => Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              color: context.theme.colorScheme.background,
+                              child: const Center(child: Text('sheet')),
+                            ),
+                      );
+                    },
+                  ),
             ),
           ),
         ),
@@ -191,21 +201,23 @@ void main() {
           TestScaffold.app(
             child: FSheets(
               child: Builder(
-                builder: (context) => FButton.icon(
-                  child: FIcon(FAssets.icons.chevronRight),
-                  onPress: () {
-                    controller = showFPersistentSheet(
-                      context: context,
-                      side: side,
-                      builder: (context, controller) => Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        color: context.theme.colorScheme.background,
-                        child: const Center(child: Text('sheet')),
-                      ),
-                    );
-                  },
-                ),
+                builder:
+                    (context) => FButton.icon(
+                      child: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {
+                        controller = showFPersistentSheet(
+                          context: context,
+                          side: side,
+                          builder:
+                              (context, controller) => Container(
+                                height: double.infinity,
+                                width: double.infinity,
+                                color: context.theme.colorScheme.background,
+                                child: const Center(child: Text('sheet')),
+                              ),
+                        );
+                      },
+                    ),
               ),
             ),
           ),
@@ -225,22 +237,24 @@ void main() {
           TestScaffold.app(
             child: FSheets(
               child: Builder(
-                builder: (context) => FButton.icon(
-                  child: FIcon(FAssets.icons.chevronRight),
-                  onPress: () {
-                    controller = showFPersistentSheet(
-                      context: context,
-                      side: side,
-                      draggable: false,
-                      builder: (context, controller) => Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        color: context.theme.colorScheme.background,
-                        child: const Center(child: Text('sheet')),
-                      ),
-                    );
-                  },
-                ),
+                builder:
+                    (context) => FButton.icon(
+                      child: FIcon(FAssets.icons.chevronRight),
+                      onPress: () {
+                        controller = showFPersistentSheet(
+                          context: context,
+                          side: side,
+                          draggable: false,
+                          builder:
+                              (context, controller) => Container(
+                                height: double.infinity,
+                                width: double.infinity,
+                                color: context.theme.colorScheme.background,
+                                child: const Center(child: Text('sheet')),
+                              ),
+                        );
+                      },
+                    ),
               ),
             ),
           ),

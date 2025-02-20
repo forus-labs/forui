@@ -5,6 +5,6 @@
   "barrierLabel": "Кенеп",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Күнді таңдаңыз",
-  "datePickerInvalidDateError": "Жарамсыз күн."
+  "dateFieldHint": "Күнді таңдаңыз",
+  "dateFieldInvalidDateError": "Жарамсыз күн."
 }

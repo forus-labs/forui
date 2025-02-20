@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/src/widgets/calendar/month/month_picker.dart';
-import 'package:forui/src/widgets/calendar/shared/paged_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/src/widgets/calendar/month/month_picker.dart';
+import 'package:forui/src/widgets/calendar/shared/paged_picker.dart';
 
 @internal
 class PagedMonthPicker extends PagedPicker {
@@ -33,15 +34,15 @@ class PagedMonthPicker extends PagedPicker {
 class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
   @override
   Widget buildItem(BuildContext context, int page) => MonthPicker(
-        yearMonthStyle: widget.style.yearMonthPickerStyle,
-        dayStyle: widget.style.dayPickerStyle,
-        currentYear: widget.initial,
-        start: widget.start,
-        end: widget.end,
-        today: widget.today,
-        focused: focusedDate,
-        onPress: widget.onPress,
-      );
+    yearMonthStyle: widget.style.yearMonthPickerStyle,
+    dayStyle: widget.style.dayPickerStyle,
+    currentYear: widget.initial,
+    start: widget.start,
+    end: widget.end,
+    today: widget.today,
+    focused: focusedDate,
+    onPress: widget.onPress,
+  );
 
   @override
   void onPageChange(int page) {} // Months will only appear on a single page.
@@ -76,9 +77,9 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-        TraversalDirection.up: Period(months: -MonthPicker.columns),
-        TraversalDirection.right: Period(months: 1),
-        TraversalDirection.down: Period(months: MonthPicker.columns),
-        TraversalDirection.left: Period(months: -1),
-      };
+    TraversalDirection.up: Period(months: -MonthPicker.columns),
+    TraversalDirection.right: Period(months: 1),
+    TraversalDirection.down: Period(months: MonthPicker.columns),
+    TraversalDirection.left: Period(months: -1),
+  };
 }

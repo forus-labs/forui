@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/foundation/tappable.dart';
-import 'package:meta/meta.dart';
 
 part 'popover.style.dart';
 
@@ -84,9 +85,10 @@ enum FHidePopoverRegion {
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
   /// The platform-specific default popover and child anchors.
-  static ({Alignment popover, Alignment child}) get defaultPlatform => Touch.primary
-      ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
-      : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
+  static ({Alignment popover, Alignment child}) get defaultPlatform =>
+      Touch.primary
+          ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
+          : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 
   /// The controller that shows and hides the popover. It initially hides the popover.
   final FPopoverController? controller;
@@ -170,9 +172,9 @@ class FPopover extends StatefulWidget {
     Alignment? popoverAnchor,
     Alignment? childAnchor,
     super.key,
-  })  : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
-        childAnchor = childAnchor ?? defaultPlatform.child,
-        _automatic = false;
+  }) : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
+       childAnchor = childAnchor ?? defaultPlatform.child,
+       _automatic = false;
 
   /// Creates a popover that is automatically shown when the [child] is tapped.
   ///
@@ -194,9 +196,9 @@ class FPopover extends StatefulWidget {
     Alignment? popoverAnchor,
     Alignment? childAnchor,
     super.key,
-  })  : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
-        childAnchor = childAnchor ?? defaultPlatform.child,
-        _automatic = true;
+  }) : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
+       childAnchor = childAnchor ?? defaultPlatform.child,
+       _automatic = true;
 
   @override
   State<FPopover> createState() => _State();
@@ -250,20 +252,13 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     final popover = widget.popoverAnchor;
     final childAnchor = widget.childAnchor;
 
-    var child = widget._automatic
-        ? GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: _controller.toggle,
-            child: widget.child,
-          )
-        : widget.child;
+    var child =
+        widget._automatic
+            ? GestureDetector(behavior: HitTestBehavior.translucent, onTap: _controller.toggle, child: widget.child)
+            : widget.child;
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
-      child = TapRegion(
-        groupId: _group,
-        onTapOutside: (_) => _controller.hide(),
-        child: child,
-      );
+      child = TapRegion(groupId: _group, onTapOutside: (_) => _controller.hide(), child: child);
     }
 
     return FPortal(
@@ -271,34 +266,36 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       portalAnchor: widget.popoverAnchor,
       childAnchor: widget.childAnchor,
       shift: widget.shift,
-      offset: widget.directionPadding
-          ? Offset.zero
-          : Alignments.removeDirectionalPadding(style.padding, popover, childAnchor),
-      portalBuilder: (context) => CallbackShortcuts(
-        bindings: {
-          const SingleActivator(LogicalKeyboardKey.escape): _controller.hide,
-        },
-        child: Semantics(
-          label: widget.semanticLabel,
-          container: true,
-          child: Focus(
-            autofocus: widget.autofocus,
-            focusNode: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
-            child: FocusTraversalGroup(
-              child: Padding(
-                padding: style.padding,
-                child: FadeTransition(
-                  opacity: _controller._fade,
-                  child: ScaleTransition(
-                    scale: _controller._scale,
-                    child: TapRegion(
-                      groupId: _group,
-                      onTapOutside:
-                          widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
-                      child: DecoratedBox(
-                        decoration: style.decoration,
-                        child: widget.popoverBuilder(context, style, null),
+      offset:
+          widget.directionPadding
+              ? Offset.zero
+              : Alignments.removeDirectionalPadding(style.padding, popover, childAnchor),
+      portalBuilder:
+          (context) => CallbackShortcuts(
+            bindings: {const SingleActivator(LogicalKeyboardKey.escape): _controller.hide},
+            child: Semantics(
+              label: widget.semanticLabel,
+              container: true,
+              child: Focus(
+                autofocus: widget.autofocus,
+                focusNode: widget.focusNode,
+                onFocusChange: widget.onFocusChange,
+                child: FocusTraversalGroup(
+                  child: Padding(
+                    padding: style.padding,
+                    child: FadeTransition(
+                      opacity: _controller._fade,
+                      child: ScaleTransition(
+                        scale: _controller._scale,
+                        child: TapRegion(
+                          groupId: _group,
+                          onTapOutside:
+                              widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
+                          child: DecoratedBox(
+                            decoration: style.decoration,
+                            child: widget.popoverBuilder(context, style, null),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -306,8 +303,6 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
               ),
             ),
           ),
-        ),
-      ),
       child: child,
     );
   }
@@ -332,22 +327,16 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final EdgeInsets padding;
 
   /// Creates a [FPopoverStyle].
-  const FPopoverStyle({
-    required this.decoration,
-    this.padding = const EdgeInsets.all(4),
-  });
+  const FPopoverStyle({required this.decoration, this.padding = const EdgeInsets.all(4)});
 
   /// Creates a [FPopoverStyle] that inherits its properties from [colorScheme] and [style].
   FPopoverStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          decoration: BoxDecoration(
-            color: colorScheme.background,
-            borderRadius: style.borderRadius,
-            border: Border.all(
-              width: style.borderWidth,
-              color: colorScheme.border,
-            ),
-            boxShadow: style.shadow,
-          ),
-        );
+    : this(
+        decoration: BoxDecoration(
+          color: colorScheme.background,
+          borderRadius: style.borderRadius,
+          border: Border.all(width: style.borderWidth, color: colorScheme.border),
+          boxShadow: style.shadow,
+        ),
+      );
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'divider.style.dart';
 
@@ -25,7 +26,8 @@ final class FDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ??
+    final style =
+        this.style ??
         switch (axis) {
           Axis.horizontal => context.theme.dividerStyles.horizontalStyle,
           Axis.vertical => context.theme.dividerStyles.verticalStyle,
@@ -63,18 +65,18 @@ final class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [style].
   FDividerStyles.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          horizontalStyle: FDividerStyle.inherit(
-            colorScheme: colorScheme,
-            style: style,
-            padding: FDividerStyle.defaultPadding.horizontalStyle,
-          ),
-          verticalStyle: FDividerStyle.inherit(
-            colorScheme: colorScheme,
-            style: style,
-            padding: FDividerStyle.defaultPadding.verticalStyle,
-          ),
-        );
+    : this(
+        horizontalStyle: FDividerStyle.inherit(
+          colorScheme: colorScheme,
+          style: style,
+          padding: FDividerStyle.defaultPadding.horizontalStyle,
+        ),
+        verticalStyle: FDividerStyle.inherit(
+          colorScheme: colorScheme,
+          style: style,
+          padding: FDividerStyle.defaultPadding.verticalStyle,
+        ),
+      );
 }
 
 /// [FDivider]'s style.
@@ -108,16 +110,9 @@ final class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
 
   /// Creates a [FDividerStyle].
   FDividerStyle({required this.color, required this.padding, this.width = 1})
-      : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
+    : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
 
   /// Creates a [FDividerStyle] that inherits its properties from [colorScheme], [style], and [padding].
-  FDividerStyle.inherit({
-    required FColorScheme colorScheme,
-    required FStyle style,
-    required EdgeInsetsGeometry padding,
-  }) : this(
-          color: colorScheme.secondary,
-          padding: padding,
-          width: style.borderWidth,
-        );
+  FDividerStyle.inherit({required FColorScheme colorScheme, required FStyle style, required EdgeInsetsGeometry padding})
+    : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 }

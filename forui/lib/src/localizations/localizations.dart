@@ -280,7 +280,7 @@ abstract class FLocalizations {
     Locale('zh'),
     Locale('zh', 'HK'),
     Locale('zh', 'TW'),
-    Locale('zu')
+    Locale('zu'),
   ];
 
   /// The full date.
@@ -335,13 +335,13 @@ abstract class FLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Pick a date'**
-  String get datePickerHint;
+  String get dateFieldHint;
 
   /// Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format.
   ///
   /// In en, this message translates to:
   /// **'Invalid date.'**
-  String get datePickerInvalidDateError;
+  String get dateFieldInvalidDateError;
 
   /// The sheet's label.
   ///
@@ -378,86 +378,86 @@ class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {
 
   @override
   bool isSupported(Locale locale) => <String>[
-        'af',
-        'am',
-        'ar',
-        'as',
-        'az',
-        'be',
-        'bg',
-        'bn',
-        'bs',
-        'ca',
-        'cs',
-        'cy',
-        'da',
-        'de',
-        'el',
-        'en',
-        'es',
-        'et',
-        'eu',
-        'fa',
-        'fi',
-        'fil',
-        'fr',
-        'gl',
-        'gsw',
-        'gu',
-        'he',
-        'hi',
-        'hr',
-        'hu',
-        'hy',
-        'id',
-        'is',
-        'it',
-        'ja',
-        'ka',
-        'kk',
-        'km',
-        'kn',
-        'ko',
-        'ky',
-        'lo',
-        'lt',
-        'lv',
-        'mk',
-        'ml',
-        'mn',
-        'mr',
-        'ms',
-        'my',
-        'nb',
-        'ne',
-        'nl',
-        'no',
-        'or',
-        'pa',
-        'pl',
-        'ps',
-        'pt',
-        'ro',
-        'ru',
-        'si',
-        'sk',
-        'sl',
-        'sq',
-        'sr',
-        'sv',
-        'sw',
-        'ta',
-        'te',
-        'th',
-        'tl',
-        'tr',
-        'uk',
-        'ur',
-        'uz',
-        'vi',
-        'zh',
-        'zu'
-      ].contains(locale.languageCode);
+    'af',
+    'am',
+    'ar',
+    'as',
+    'az',
+    'be',
+    'bg',
+    'bn',
+    'bs',
+    'ca',
+    'cs',
+    'cy',
+    'da',
+    'de',
+    'el',
+    'en',
+    'es',
+    'et',
+    'eu',
+    'fa',
+    'fi',
+    'fil',
+    'fr',
+    'gl',
+    'gsw',
+    'gu',
+    'he',
+    'hi',
+    'hr',
+    'hu',
+    'hy',
+    'id',
+    'is',
+    'it',
+    'ja',
+    'ka',
+    'kk',
+    'km',
+    'kn',
+    'ko',
+    'ky',
+    'lo',
+    'lt',
+    'lv',
+    'mk',
+    'ml',
+    'mn',
+    'mr',
+    'ms',
+    'my',
+    'nb',
+    'ne',
+    'nl',
+    'no',
+    'or',
+    'pa',
+    'pl',
+    'ps',
+    'pt',
+    'ro',
+    'ru',
+    'si',
+    'sk',
+    'sl',
+    'sq',
+    'sr',
+    'sv',
+    'sw',
+    'ta',
+    'te',
+    'th',
+    'tl',
+    'tr',
+    'uk',
+    'ur',
+    'uz',
+    'vi',
+    'zh',
+    'zu',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_FLocalizationsDelegate old) => false;
@@ -744,8 +744,10 @@ FLocalizations lookupFLocalizations(Locale locale) {
       return FLocalizationsZu();
   }
 
-  throw FlutterError('FLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+  throw FlutterError(
+    'FLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
 }

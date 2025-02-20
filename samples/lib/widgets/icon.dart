@@ -12,79 +12,58 @@ String path(String str) => kIsWeb ? 'assets/$str' : str;
 class IconPage extends Sample {
   final String variant;
 
-  IconPage({
-    @queryParam super.theme,
-    @queryParam this.variant = 'svg',
-  });
+  IconPage({@queryParam super.theme, @queryParam this.variant = 'svg'});
 
   @override
   Widget sample(BuildContext context) => IntrinsicWidth(
-        child: FButton.icon(
-          style: FButtonStyle.secondary,
-          child: switch (variant) {
-            'data' => const FIcon.data(Icons.wifi),
-            _ => FIcon(FAssets.icons.wifi),
-          },
-          onPress: () {},
-        ),
-      );
+    child: FButton.icon(
+      style: FButtonStyle.secondary,
+      child: switch (variant) {
+        'data' => const FIcon.data(Icons.wifi),
+        _ => FIcon(FAssets.icons.wifi),
+      },
+      onPress: () {},
+    ),
+  );
 }
 
 @RoutePage()
 class ComparisonIconPage extends Sample {
-  ComparisonIconPage({
-    @queryParam super.theme,
-  });
+  ComparisonIconPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FButton.icon(
-            style: FButtonStyle.primary,
-            child: FIcon(FAssets.icons.bird),
-            onPress: () {},
-          ),
-          const SizedBox(width: 10),
-          FButton.icon(
-            style: FButtonStyle.secondary,
-            child: FIcon(FAssets.icons.bird),
-            onPress: () {},
-          ),
-        ],
-      );
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FButton.icon(style: FButtonStyle.primary, child: FIcon(FAssets.icons.bird), onPress: () {}),
+      const SizedBox(width: 10),
+      FButton.icon(style: FButtonStyle.secondary, child: FIcon(FAssets.icons.bird), onPress: () {}),
+    ],
+  );
 }
 
 @RoutePage()
 class ImageIconPage extends Sample {
-  ImageIconPage({
-    @queryParam super.theme,
-  });
+  ImageIconPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FButton.icon(
-            style: FButtonStyle.primary,
-            child: FIcon.image(AssetImage(path('forus-labs.png')), color: Colors.transparent),
-            onPress: () {},
-          ),
-          const SizedBox(width: 10),
-          FButton.icon(
-            style: FButtonStyle.primary,
-            child: FIcon.image(AssetImage(path('forus-labs.png'))),
-            onPress: () {},
-          ),
-        ],
-      );
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FButton.icon(
+        style: FButtonStyle.primary,
+        child: FIcon.image(AssetImage(path('forus-labs.png')), color: Colors.transparent),
+        onPress: () {},
+      ),
+      const SizedBox(width: 10),
+      FButton.icon(style: FButtonStyle.primary, child: FIcon.image(AssetImage(path('forus-labs.png'))), onPress: () {}),
+    ],
+  );
 }
 
 @RoutePage()
 class CustomIconPage extends StatefulSample {
-  CustomIconPage({
-    @queryParam super.theme,
-  });
+  CustomIconPage({@queryParam super.theme});
 
   @override
   State<CustomIconPage> createState() => _CustomIconState();
@@ -97,32 +76,33 @@ class _CustomIconState extends StatefulSampleState<CustomIconPage> with SingleTi
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(seconds: 3))
-      ..forward()
-      ..repeat(reverse: true);
+    controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 3))
+          ..forward()
+          ..repeat(reverse: true);
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
   }
 
   @override
   Widget sample(BuildContext context) => IntrinsicWidth(
-        child: FButton.icon(
-          child: FIcon.raw(
-            builder: (context, style, child) {
-              final FButtonData(:enabled) = FButtonData.of(context);
-              return enabled
-                  ? AnimatedIcon(
-                      icon: AnimatedIcons.home_menu,
-                      progress: animation,
-                      color: style.color,
-                      size: style.size,
-                      semanticLabel: 'Home menu',
-                    )
-                  : const FIcon.data(Icons.menu);
-            },
-          ),
-          onPress: () {},
-        ),
-      );
+    child: FButton.icon(
+      child: FIcon.raw(
+        builder: (context, style, child) {
+          final FButtonData(:enabled) = FButtonData.of(context);
+          return enabled
+              ? AnimatedIcon(
+                icon: AnimatedIcons.home_menu,
+                progress: animation,
+                color: style.color,
+                size: style.size,
+                semanticLabel: 'Home menu',
+              )
+              : const FIcon.data(Icons.menu);
+        },
+      ),
+      onPress: () {},
+    ),
+  );
 
   @override
   void dispose() {

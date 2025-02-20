@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -145,9 +145,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FCalendar(
-                controller: FCalendarController.dates(
-                  initialSelections: {DateTime.utc(2024, 7, 13)},
-                ),
+                controller: FCalendarController.dates(initialSelections: {DateTime.utc(2024, 7, 13)}),
                 start: DateTime(2024, 7),
                 end: DateTime(2024, 8, 10),
                 today: DateTime(2024, 7, 14),
@@ -269,10 +267,7 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.text('8')));
           await tester.pumpAndSettle();
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('calendar/${theme.name}/day-picker/rtl.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/${theme.name}/day-picker/rtl.png'));
         });
       });
     }

@@ -5,6 +5,6 @@
   "barrierLabel": "纱罩",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "选择日期",
-  "datePickerInvalidDateError": "日期无效。"
+  "dateFieldHint": "选择日期",
+  "dateFieldInvalidDateError": "日期无效。"
 }

@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'tabs.style.dart';
 
@@ -20,10 +21,7 @@ class FTabEntry {
   final Widget content;
 
   /// Creates a [FTabs].
-  const FTabEntry({
-    required this.label,
-    required this.content,
-  });
+  const FTabEntry({required this.label, required this.content});
 
   @override
   bool operator ==(Object other) =>
@@ -80,16 +78,13 @@ class FTabs extends StatefulWidget {
     this.style,
     this.onPress,
     super.key,
-  })  : assert(tabs.isNotEmpty, 'Must have at least 1 tab provided.'),
-        assert(0 <= initialIndex && initialIndex < tabs.length, 'Initial index must be within the range of tabs.'),
-        assert(
-          controller == null || controller.index == initialIndex,
-          'Controller index must match the initial index.',
-        ),
-        assert(
-          controller == null || controller.length == tabs.length,
-          'Controller length must match the number of tabs.',
-        );
+  }) : assert(tabs.isNotEmpty, 'Must have at least 1 tab provided.'),
+       assert(0 <= initialIndex && initialIndex < tabs.length, 'Initial index must be within the range of tabs.'),
+       assert(controller == null || controller.index == initialIndex, 'Controller index must match the initial index.'),
+       assert(
+         controller == null || controller.length == tabs.length,
+         'Controller length must match the number of tabs.',
+       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -113,12 +108,9 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ??
-        FTabController(
-          initialIndex: widget.initialIndex,
-          length: widget.tabs.length,
-          vsync: this,
-        );
+    _controller =
+        widget.controller ?? FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this)
+          ..addListener(() => setState(() {}));
   }
 
   @override
@@ -129,12 +121,10 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
         _controller.dispose();
       }
 
-      _controller = widget.controller ??
-          FTabController(
-            initialIndex: widget.initialIndex,
-            length: widget.tabs.length,
-            vsync: this,
-          );
+      _controller =
+          widget.controller ??
+                FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this)
+            ..addListener(() => setState(() {}));
     }
   }
 
@@ -152,9 +142,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
             decoration: style.decoration,
             child: TabBar(
               tabAlignment: widget.scrollable ? TabAlignment.start : TabAlignment.fill,
-              tabs: [
-                for (final tab in widget.tabs) _Tab(style: style, label: tab.label),
-              ],
+              tabs: [for (final tab in widget.tabs) _Tab(style: style, label: tab.label)],
               controller: _controller._controller,
               isScrollable: widget.scrollable,
               padding: style.padding,
@@ -236,14 +224,11 @@ class _TabState extends State<_Tab> {
   }
 
   @override
-  Widget build(BuildContext context) => FFocusedOutline(
-        style: widget.style.focusedOutlineStyle,
-        focused: _focused,
-        child: Tab(
-          height: widget.style.height,
-          child: widget.label,
-        ),
-      );
+  Widget build(BuildContext _) => FFocusedOutline(
+    style: widget.style.focusedOutlineStyle,
+    focused: _focused,
+    child: Tab(height: widget.style.height, child: widget.label),
+  );
 
   void _handleFocusChange() => setState(() => _focused = _focus?.hasFocus ?? false);
 

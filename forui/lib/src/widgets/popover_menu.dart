@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'popover_menu.style.dart';
 
@@ -195,19 +196,20 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
-      popoverBuilder: (context, _, __) => ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: style.maxWidth),
-        child: FTileGroup.merge(
-          scrollController: widget.scrollController,
-          cacheExtent: widget.cacheExtent,
-          maxHeight: widget.maxHeight,
-          dragStartBehavior: widget.dragStartBehavior,
-          semanticLabel: widget.semanticLabel,
-          style: style.tileGroupStyle,
-          divider: widget.divider,
-          children: widget.menu,
-        ),
-      ),
+      popoverBuilder:
+          (_, _, _) => ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: style.maxWidth),
+            child: FTileGroup.merge(
+              scrollController: widget.scrollController,
+              cacheExtent: widget.cacheExtent,
+              maxHeight: widget.maxHeight,
+              dragStartBehavior: widget.dragStartBehavior,
+              semanticLabel: widget.semanticLabel,
+              style: style.tileGroupStyle,
+              divider: widget.divider,
+              children: widget.menu,
+            ),
+          ),
       child: widget.child,
     );
   }
@@ -235,19 +237,12 @@ final class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunc
   final double maxWidth;
 
   /// Creates a [FPopoverMenuStyle].
-  const FPopoverMenuStyle({
-    required this.tileGroupStyle,
-    required super.decoration,
-    this.maxWidth = 250,
-    super.padding,
-  }) : assert(0 < maxWidth, 'maxWidth must be positive');
+  const FPopoverMenuStyle({required this.tileGroupStyle, required super.decoration, this.maxWidth = 250, super.padding})
+    : assert(0 < maxWidth, 'maxWidth must be positive');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties from [colorScheme], [style] and [typography].
-  FPopoverMenuStyle.inherit({
-    required super.colorScheme,
-    required super.style,
-    required FTypography typography,
-  })  : tileGroupStyle = FTileGroupStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
-        maxWidth = 250,
-        super.inherit();
+  FPopoverMenuStyle.inherit({required super.colorScheme, required super.style, required FTypography typography})
+    : tileGroupStyle = FTileGroupStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+      maxWidth = 250,
+      super.inherit();
 }

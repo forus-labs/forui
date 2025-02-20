@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -358,10 +358,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('tile/group/${theme.name}/rtl/$divider.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/rtl/$divider.png'));
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
@@ -532,13 +529,7 @@ void main() {
 
       testWidgets('empty tile group - ${theme.name}', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: FTileGroup(
-              label: const Text('Network'),
-              children: const [],
-            ),
-          ),
+          TestScaffold(theme: theme.data, child: FTileGroup(label: const Text('Network'), children: const [])),
         );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/empty.png'));
@@ -635,10 +626,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/builder/lazy.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/lazy.png'));
     });
 
     testWidgets('limited by count', (tester) async {
@@ -654,10 +642,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/builder/count-limited.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/count-limited.png'));
     });
 
     testWidgets('limited by returning null', (tester) async {
@@ -673,10 +658,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/builder/null-limited.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/null-limited.png'));
     });
   });
 

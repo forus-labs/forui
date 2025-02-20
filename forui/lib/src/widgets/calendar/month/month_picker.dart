@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
 import 'package:forui/src/widgets/calendar/year/year_picker.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 @internal
 class MonthPicker extends StatefulWidget {
@@ -65,29 +66,28 @@ class _MonthPickerState extends State<MonthPicker> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 5.0),
-        child: GridView(
-          padding: EdgeInsets.zero,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: YearPicker.columns,
-            mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
-            mainAxisSpacing: 5.0,
+    padding: const EdgeInsets.only(top: 5.0),
+    child: GridView(
+      padding: EdgeInsets.zero,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: YearPicker.columns,
+        mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
+        mainAxisSpacing: 5.0,
+      ),
+      children: [
+        for (var month = widget.currentYear, i = 0; i < 12; month = month.plus(months: 1), i++)
+          Entry.yearMonth(
+            style: widget.yearMonthStyle,
+            date: month,
+            focusNode: _months[i],
+            current: widget.today.truncate(to: DateUnit.months) == month,
+            selectable: widget.start <= month && month <= widget.end,
+            format: (date) => (FLocalizations.of(context) ?? FDefaultLocalizations()).abbreviatedMonth(date.toNative()),
+            onPress: widget.onPress,
           ),
-          children: [
-            for (var month = widget.currentYear, i = 0; i < 12; month = month.plus(months: 1), i++)
-              Entry.yearMonth(
-                style: widget.yearMonthStyle,
-                date: month,
-                focusNode: _months[i],
-                current: widget.today.truncate(to: DateUnit.months) == month,
-                selectable: widget.start <= month && month <= widget.end,
-                format: (date) =>
-                    (FLocalizations.of(context) ?? FDefaultLocalizations()).abbreviatedMonth(date.toNative()),
-                onPress: widget.onPress,
-              ),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 
   @override
   void didUpdateWidget(MonthPicker old) {

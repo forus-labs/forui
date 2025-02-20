@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
 
 void main() {
@@ -97,10 +98,11 @@ void main() {
 
         test('tap only', () {
           var calls = 0;
-          controller = constructor(range, FSliderInteraction.tap)
-            ..attach(100, marks)
-            ..addListener(() => calls++)
-            ..slide(50, min: false);
+          controller =
+              constructor(range, FSliderInteraction.tap)
+                ..attach(100, marks)
+                ..addListener(() => calls++)
+                ..slide(50, min: false);
 
           expect(calls, 0);
           expect(controller.selection.offset, range.offset);
@@ -111,9 +113,10 @@ void main() {
         for (final interaction in [FSliderInteraction.slide, FSliderInteraction.slideThumb]) {
           test('slide only - $interaction', () {
             var calls = 0;
-            controller = constructor(value, interaction)
-              ..attach(100, marks)
-              ..addListener(() => calls++);
+            controller =
+                constructor(value, interaction)
+                  ..attach(100, marks)
+                  ..addListener(() => calls++);
 
             expect(controller.tap(50), null);
             expect(calls, 0);
@@ -129,9 +132,10 @@ void main() {
         ]) {
           test('tap value', () {
             var calls = 0;
-            controller = constructor(range, FSliderInteraction.tap, min)
-              ..attach(100, marks)
-              ..addListener(() => calls++);
+            controller =
+                constructor(range, FSliderInteraction.tap, min)
+                  ..attach(100, marks)
+                  ..addListener(() => calls++);
 
             expect(controller.tap(offset), thumb);
             expect(calls, 1);
@@ -239,10 +243,11 @@ void main() {
     ]) {
       test('step ${min ? 'min' : 'max'} edge - ${extend ? 'extend' : 'shrink'}', () {
         var calls = 0;
-        controller = FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
-          ..attach(100, [])
-          ..addListener(() => calls++)
-          ..step(min: min, extend: extend);
+        controller =
+            FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+              ..attach(100, [])
+              ..addListener(() => calls++)
+              ..step(min: min, extend: extend);
 
         expect(calls, 1);
         expect(controller.selection.offset, offset);
@@ -257,9 +262,10 @@ void main() {
     ]) {
       test('tap range', () {
         var calls = 0;
-        controller = FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
-          ..attach(100, [])
-          ..addListener(() => calls++);
+        controller =
+            FContinuousSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+              ..attach(100, [])
+              ..addListener(() => calls++);
 
         expect(controller.tap(offset), thumb);
         expect(calls, times);
@@ -287,10 +293,11 @@ void main() {
     ]) {
       test('step ${min ? 'min' : 'max'} edge - ${extend ? 'extend' : 'shrink'}', () {
         var calls = 0;
-        controller = FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
-          ..attach(100, marks)
-          ..addListener(() => calls++)
-          ..step(min: min, extend: extend);
+        controller =
+            FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+              ..attach(100, marks)
+              ..addListener(() => calls++)
+              ..step(min: min, extend: extend);
 
         expect(calls, 1);
         expect(controller.selection.offset, offset);
@@ -305,9 +312,10 @@ void main() {
     ]) {
       test('tap range', () {
         var calls = 0;
-        controller = FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
-          ..attach(100, marks)
-          ..addListener(() => calls++);
+        controller =
+            FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75))
+              ..attach(100, marks)
+              ..addListener(() => calls++);
 
         expect(controller.tap(offset), thumb);
         expect(calls, times);

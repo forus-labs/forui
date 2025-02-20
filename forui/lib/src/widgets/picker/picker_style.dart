@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'picker_style.style.dart';
 
@@ -66,24 +67,21 @@ final class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
       applyHeightToFirstAscent: false,
       applyHeightToLastDescent: false,
     ),
-  })  : assert(0 < diameterRatio, 'The diameter ratio must be greater than 0.'),
-        assert(0 < squeeze, 'The squeeze must be greater than 0.'),
-        assert(0 < magnification, 'The magnification must be greater than 0.'),
-        assert(
-          0 <= overAndUnderCenterOpacity && overAndUnderCenterOpacity <= 1,
-          'The over and under center opacity must be between 0 and 1.',
-        ),
-        assert(spacing >= 0, 'The spacing must be greater than or equal to 0.');
+  }) : assert(0 < diameterRatio, 'The diameter ratio must be greater than 0.'),
+       assert(0 < squeeze, 'The squeeze must be greater than 0.'),
+       assert(0 < magnification, 'The magnification must be greater than 0.'),
+       assert(
+         0 <= overAndUnderCenterOpacity && overAndUnderCenterOpacity <= 1,
+         'The over and under center opacity must be between 0 and 1.',
+       ),
+       assert(spacing >= 0, 'The spacing must be greater than or equal to 0.');
 
   /// Creates a [FPickerStyle] that inherits its properties.
-  FPickerStyle.inherit({
-    required FColorScheme colorScheme,
-    required FStyle style,
-    required FTypography typography,
-  }) : this(
-          textStyle: typography.lg.copyWith(fontWeight: FontWeight.w500),
-          selectionBorderRadius: style.borderRadius,
-          selectionColor: colorScheme.muted,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-        );
+  FPickerStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
+    : this(
+        textStyle: typography.lg.copyWith(fontWeight: FontWeight.w500),
+        selectionBorderRadius: style.borderRadius,
+        selectionColor: colorScheme.muted,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+      );
 }

@@ -9,9 +9,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class ProgressPage extends StatefulSample {
-  ProgressPage({
-    @queryParam super.theme,
-  });
+  ProgressPage({@queryParam super.theme});
 
   @override
   State<ProgressPage> createState() => _State();

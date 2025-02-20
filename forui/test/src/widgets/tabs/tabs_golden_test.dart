@@ -4,8 +4,8 @@ library;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -16,14 +16,8 @@ void main() {
           child: FTabs(
             style: TestScaffold.blueScreen.tabsStyle,
             tabs: const [
-              FTabEntry(
-                label: Text('Account'),
-                content: SizedBox(),
-              ),
-              FTabEntry(
-                label: Text('Settings'),
-                content: SizedBox(),
-              ),
+              FTabEntry(label: Text('Account'), content: SizedBox()),
+              FTabEntry(label: Text('Settings'), content: SizedBox()),
             ],
           ),
         ),
@@ -44,10 +38,7 @@ void main() {
                   content: FCard(
                     title: const Text('Account'),
                     subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-                    child: Container(
-                      color: Colors.blue,
-                      height: 100,
-                    ),
+                    child: Container(color: Colors.blue, height: 100),
                   ),
                 ),
                 FTabEntry(
@@ -55,10 +46,7 @@ void main() {
                   content: FCard(
                     title: const Text('Password'),
                     subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-                    child: Container(
-                      color: Colors.red,
-                      height: 100,
-                    ),
+                    child: Container(color: Colors.red, height: 100),
                   ),
                 ),
               ],
@@ -75,13 +63,7 @@ void main() {
             theme: theme.data,
             child: FTabs(
               scrollable: true,
-              tabs: [
-                for (var i = 0; i < 10; i++)
-                  FTabEntry(
-                    label: Text('$i'),
-                    content: Text('Tab $i'),
-                  ),
-              ],
+              tabs: [for (var i = 0; i < 10; i++) FTabEntry(label: Text('$i'), content: Text('Tab $i'))],
             ),
           ),
         );
@@ -100,10 +82,7 @@ void main() {
                   content: FCard(
                     title: const Text('Account'),
                     subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-                    child: Container(
-                      color: Colors.blue,
-                      height: 100,
-                    ),
+                    child: Container(color: Colors.blue, height: 100),
                   ),
                 ),
                 FTabEntry(
@@ -111,10 +90,7 @@ void main() {
                   content: FCard(
                     title: const Text('Password'),
                     subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-                    child: Container(
-                      color: Colors.red,
-                      height: 100,
-                    ),
+                    child: Container(color: Colors.red, height: 100),
                   ),
                 ),
               ],

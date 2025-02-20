@@ -6,8 +6,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
@@ -27,12 +27,7 @@ void main() {
 
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} with SvgAsset', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: FIcon(FAssets.icons.laugh),
-          ),
-        );
+        await tester.pumpWidget(TestScaffold(theme: theme.data, child: FIcon(FAssets.icons.laugh)));
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('icon/${theme.name}/svg-asset.png'));
       });
@@ -95,11 +90,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FIcon.raw(
-              builder: (context, style, _) => Container(
-                color: style.color,
-                height: style.size,
-                width: style.size,
-              ),
+              builder: (context, style, _) => Container(color: style.color, height: style.size, width: style.size),
             ),
           ),
         );

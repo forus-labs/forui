@@ -5,6 +5,6 @@
   "barrierLabel": "Siatka",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Wybierz datę",
-  "datePickerInvalidDateError": "Nieprawidłowa data."
+  "dateFieldHint": "Wybierz datę",
+  "dateFieldInvalidDateError": "Nieprawidłowa data."
 }

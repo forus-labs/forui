@@ -11,14 +11,15 @@ FTabController useFTabController({
   TickerProvider? vsync,
   Duration? animationDuration,
   List<Object?>? keys,
-}) =>
-    use(_TabControllerHook(
-      initialIndex: initialIndex,
-      length: length,
-      vsync: vsync ??= useSingleTickerProvider(keys: keys),
-      animationDuration: animationDuration,
-      keys: keys,
-    ));
+}) => use(
+  _TabControllerHook(
+    initialIndex: initialIndex,
+    length: length,
+    vsync: vsync ??= useSingleTickerProvider(keys: keys),
+    animationDuration: animationDuration,
+    keys: keys,
+  ),
+);
 
 class _TabControllerHook extends Hook<FTabController> {
   final int initialIndex;

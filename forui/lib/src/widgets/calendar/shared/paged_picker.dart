@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/src/widgets/calendar/calendar.dart';
-import 'package:forui/src/widgets/calendar/shared/header.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
+
+import 'package:forui/src/widgets/calendar/calendar.dart';
+import 'package:forui/src/widgets/calendar/shared/header.dart';
 
 @internal
 abstract class PagedPicker extends StatefulWidget {
@@ -82,30 +83,30 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          Navigation(
-            style: widget.style.headerStyle,
-            onPrevious: _first ? null : _onPrevious,
-            onNext: _last ? null : _onNext,
+  Widget build(BuildContext _) => Column(
+    children: [
+      Navigation(
+        style: widget.style.headerStyle,
+        onPrevious: _first ? null : _onPrevious,
+        onNext: _last ? null : _onNext,
+      ),
+      Expanded(
+        child: FocusableActionDetector(
+          shortcuts: _shortcuts,
+          actions: _actions,
+          focusNode: _focusNode,
+          onFocusChange: onGridFocusChange,
+          child: PageView.builder(
+            key: _key,
+            controller: _controller,
+            itemBuilder: buildItem,
+            itemCount: delta(widget.start, widget.end) + 1,
+            onPageChanged: onPageChange,
           ),
-          Expanded(
-            child: FocusableActionDetector(
-              shortcuts: _shortcuts,
-              actions: _actions,
-              focusNode: _focusNode,
-              onFocusChange: onGridFocusChange,
-              child: PageView.builder(
-                key: _key,
-                controller: _controller,
-                itemBuilder: buildItem,
-                itemCount: delta(widget.start, widget.end) + 1,
-                onPageChanged: onPageChange,
-              ),
-            ),
-          ),
-        ],
-      );
+        ),
+      ),
+    ],
+  );
 
   Widget buildItem(BuildContext context, int page);
 
@@ -150,11 +151,7 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
   void _showPage(LocalDate date) {
     final page = delta(widget.start, date);
-    _controller.animateToPage(
-      page,
-      duration: widget.style.pageAnimationDuration,
-      curve: Curves.ease,
-    );
+    _controller.animateToPage(page, duration: widget.style.pageAnimationDuration, curve: Curves.ease);
   }
 
   void onPageChange(int page);
@@ -199,11 +196,12 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
   LocalDate? _nextDate(LocalDate date, TraversalDirection direction) {
     final textDirection = Directionality.of(context);
-    final offset = directionOffset[switch ((direction, textDirection)) {
-      (TraversalDirection.left, TextDirection.rtl) => TraversalDirection.right,
-      (TraversalDirection.right, TextDirection.rtl) => TraversalDirection.left,
-      _ => direction,
-    }]!;
+    final offset =
+        directionOffset[switch ((direction, textDirection)) {
+          (TraversalDirection.left, TextDirection.rtl) => TraversalDirection.right,
+          (TraversalDirection.right, TextDirection.rtl) => TraversalDirection.left,
+          _ => direction,
+        }]!;
 
     var next = date + offset;
     while (widget.start <= next && next <= widget.end) {

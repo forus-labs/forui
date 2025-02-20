@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 part 'resizable.style.dart';
 
@@ -77,16 +78,16 @@ class FResizable extends StatefulWidget {
     FResizableController? controller,
     double? hitRegionExtent,
     super.key,
-  })  : assert(
-          crossAxisExtent == null || 0 < crossAxisExtent,
-          'The crossAxisExtent should be positive, but is $crossAxisExtent.',
-        ),
-        assert(
-          hitRegionExtent == null || 0 < hitRegionExtent,
-          'The hitRegionExtent should be positive, but is $hitRegionExtent.',
-        ),
-        controller = controller ?? FResizableController.cascade(),
-        hitRegionExtent = hitRegionExtent ?? (Touch.primary ? 60 : 10);
+  }) : assert(
+         crossAxisExtent == null || 0 < crossAxisExtent,
+         'The crossAxisExtent should be positive, but is $crossAxisExtent.',
+       ),
+       assert(
+         hitRegionExtent == null || 0 < hitRegionExtent,
+         'The hitRegionExtent should be positive, but is $hitRegionExtent.',
+       ),
+       controller = controller ?? FResizableController.cascade(),
+       hitRegionExtent = hitRegionExtent ?? (Touch.primary ? 60 : 10);
 
   @override
   State<StatefulWidget> createState() => _FResizableState();
@@ -136,7 +137,7 @@ class _FResizableState extends State<FResizable> {
           extent: (
             min: region.minExtent ?? widget.hitRegionExtent,
             max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
-            total: totalExtent
+            total: totalExtent,
           ),
           offset: (min: minOffset, max: minOffset += region.initialExtent),
         ),
@@ -158,76 +159,82 @@ class _FResizableState extends State<FResizable> {
       return SizedBox(
         height: widget.crossAxisExtent,
         child: LayoutBuilder(
-          builder: (context, constraints) => ListenableBuilder(
-            listenable: widget.controller,
-            builder: (context, _) => Stack(
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (var i = 0; i < widget.children.length; i++)
-                      InheritedData(
-                        controller: widget.controller,
-                        axis: widget.axis,
-                        data: widget.controller.regions[i],
-                        child: widget.children[i],
-                      ),
-                  ],
-                ),
-                for (var i = 0; i < widget.children.length - 1; i++)
-                  HorizontalDivider(
-                    controller: widget.controller,
-                    style: style.horizontalDividerStyle,
-                    type: widget.divider,
-                    left: i,
-                    right: i + 1,
-                    crossAxisExtent: constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
-                    hitRegionExtent: widget.hitRegionExtent,
-                    resizePercentage: widget.resizePercentage,
-                    cursor: SystemMouseCursors.resizeLeftRight,
-                    semanticFormatterCallback: widget.semanticFormatterCallback,
-                  ),
-              ],
-            ),
-          ),
+          builder:
+              (_, constraints) => ListenableBuilder(
+                listenable: widget.controller,
+                builder:
+                    (_, _) => Stack(
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (final (i, child) in widget.children.indexed)
+                              InheritedData(
+                                controller: widget.controller,
+                                axis: widget.axis,
+                                data: widget.controller.regions[i],
+                                child: child,
+                              ),
+                          ],
+                        ),
+                        for (var i = 0; i < widget.children.length - 1; i++)
+                          HorizontalDivider(
+                            controller: widget.controller,
+                            style: style.horizontalDividerStyle,
+                            type: widget.divider,
+                            left: i,
+                            right: i + 1,
+                            crossAxisExtent:
+                                constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
+                            hitRegionExtent: widget.hitRegionExtent,
+                            resizePercentage: widget.resizePercentage,
+                            cursor: SystemMouseCursors.resizeLeftRight,
+                            semanticFormatterCallback: widget.semanticFormatterCallback,
+                          ),
+                      ],
+                    ),
+              ),
         ),
       );
     } else {
       return SizedBox(
         width: widget.crossAxisExtent,
         child: LayoutBuilder(
-          builder: (context, constraints) => ListenableBuilder(
-            listenable: widget.controller,
-            builder: (context, _) => Stack(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (var i = 0; i < widget.children.length; i++)
-                      InheritedData(
-                        axis: widget.axis,
-                        controller: widget.controller,
-                        data: widget.controller.regions[i],
-                        child: widget.children[i],
-                      ),
-                  ],
-                ),
-                for (var i = 0; i < widget.children.length - 1; i++)
-                  VerticalDivider(
-                    controller: widget.controller,
-                    style: style.verticalDividerStyle,
-                    type: widget.divider,
-                    left: i,
-                    right: i + 1,
-                    crossAxisExtent: constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
-                    hitRegionExtent: widget.hitRegionExtent,
-                    resizePercentage: widget.resizePercentage,
-                    cursor: SystemMouseCursors.resizeUpDown,
-                    semanticFormatterCallback: widget.semanticFormatterCallback,
-                  ),
-              ],
-            ),
-          ),
+          builder:
+              (_, constraints) => ListenableBuilder(
+                listenable: widget.controller,
+                builder:
+                    (_, _) => Stack(
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (final (i, child) in widget.children.indexed)
+                              InheritedData(
+                                controller: widget.controller,
+                                axis: widget.axis,
+                                data: widget.controller.regions[i],
+                                child: child,
+                              ),
+                          ],
+                        ),
+                        for (var i = 0; i < widget.children.length - 1; i++)
+                          VerticalDivider(
+                            controller: widget.controller,
+                            style: style.verticalDividerStyle,
+                            type: widget.divider,
+                            left: i,
+                            right: i + 1,
+                            crossAxisExtent:
+                                constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
+                            hitRegionExtent: widget.hitRegionExtent,
+                            resizePercentage: widget.resizePercentage,
+                            cursor: SystemMouseCursors.resizeUpDown,
+                            semanticFormatterCallback: widget.semanticFormatterCallback,
+                          ),
+                      ],
+                    ),
+              ),
         ),
       );
     }
@@ -245,35 +252,32 @@ final class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
   final FResizableDividerStyle verticalDividerStyle;
 
   /// Creates a [FResizableStyle].
-  FResizableStyle({
-    required this.horizontalDividerStyle,
-    required this.verticalDividerStyle,
-  });
+  FResizableStyle({required this.horizontalDividerStyle, required this.verticalDividerStyle});
 
   /// Creates a [FResizableStyle] that inherits its properties from [colorScheme].
   FResizableStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          horizontalDividerStyle: FResizableDividerStyle(
-            color: colorScheme.border,
-            focusedOutlineStyle: style.focusedOutlineStyle,
-            thumbStyle: FResizableDividerThumbStyle(
-              backgroundColor: colorScheme.border,
-              foregroundColor: colorScheme.foreground,
-              height: 20,
-              width: 10,
-            ),
+    : this(
+        horizontalDividerStyle: FResizableDividerStyle(
+          color: colorScheme.border,
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          thumbStyle: FResizableDividerThumbStyle(
+            backgroundColor: colorScheme.border,
+            foregroundColor: colorScheme.foreground,
+            height: 20,
+            width: 10,
           ),
-          verticalDividerStyle: FResizableDividerStyle(
-            color: colorScheme.border,
-            focusedOutlineStyle: style.focusedOutlineStyle,
-            thumbStyle: FResizableDividerThumbStyle(
-              backgroundColor: colorScheme.border,
-              foregroundColor: colorScheme.foreground,
-              height: 10,
-              width: 20,
-            ),
+        ),
+        verticalDividerStyle: FResizableDividerStyle(
+          color: colorScheme.border,
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          thumbStyle: FResizableDividerThumbStyle(
+            backgroundColor: colorScheme.border,
+            foregroundColor: colorScheme.foreground,
+            height: 10,
+            width: 20,
           ),
-        );
+        ),
+      );
 }
 
 @internal

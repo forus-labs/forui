@@ -1,5 +1,11 @@
-import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
+
+/// The locales that use non-western digits.
+@internal
+const easternLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
@@ -7,14 +13,16 @@ extension FDateTimeLocalizations on FLocalizations {
   int get firstDayOfWeek => localeName == '' ? 7 : DateFormat.yMMMMd(localeName).dateSymbols.FIRSTDAYOFWEEK + 1;
 
   /// Short names for days of the week, starting with Sunday, e.g. 'Sun'.
-  List<String> get shortWeekDays => localeName == ''
-      ? const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-      : DateFormat.yMMMMd(localeName).dateSymbols.SHORTWEEKDAYS;
+  List<String> get shortWeekDays =>
+      localeName == ''
+          ? const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+          : DateFormat.yMMMMd(localeName).dateSymbols.SHORTWEEKDAYS;
 
   /// Very short names for days of the week, starting with Sunday, e.g. 'Su'.
-  List<String> get narrowWeekDays => (localeName == '' || localeName.startsWith('en'))
-      ? const ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-      : DateFormat.yMMMMd(localeName).dateSymbols.STANDALONENARROWWEEKDAYS;
+  List<String> get narrowWeekDays =>
+      (localeName == '' || localeName.startsWith('en'))
+          ? const ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+          : DateFormat.yMMMMd(localeName).dateSymbols.STANDALONENARROWWEEKDAYS;
 }
 
 /// The default localization for when no localization is provided.
@@ -51,10 +59,10 @@ class FDefaultLocalizations extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Pick a date';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get datePickerInvalidDateError => 'Invalid date.';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get dialogLabel => 'Dialog';

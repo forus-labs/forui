@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'radio.style.dart';
 
@@ -140,10 +141,7 @@ class _State extends State<FRadio> {
                     child: const SizedBox.square(dimension: 10),
                   ),
                   DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: stateStyle.selectedColor,
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: BoxDecoration(color: stateStyle.selectedColor, shape: BoxShape.circle),
                     child: AnimatedSize(
                       duration: style.animationDuration,
                       curve: style.curve,
@@ -205,46 +203,39 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
 
   /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
   FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style})
-      : this(
-          labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-          focusedOutlineStyle: FFocusedOutlineStyle(
-            color: colorScheme.primary,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          enabledStyle: FRadioStateStyle(
-            labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-            borderColor: colorScheme.primary,
-            selectedColor: colorScheme.primary,
-            backgroundColor: colorScheme.background,
-          ),
-          disabledStyle: FRadioStateStyle(
-            labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-            borderColor: colorScheme.disable(colorScheme.primary),
-            selectedColor: colorScheme.disable(colorScheme.primary),
-            backgroundColor: colorScheme.background,
-          ),
-          errorStyle: FRadioErrorStyle(
-            labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-            descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-            errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-            borderColor: colorScheme.error,
-            selectedColor: colorScheme.error,
-            backgroundColor: colorScheme.background,
-          ),
-        );
+    : this(
+        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
+        focusedOutlineStyle: FFocusedOutlineStyle(color: colorScheme.primary, borderRadius: BorderRadius.circular(100)),
+        enabledStyle: FRadioStateStyle(
+          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+          borderColor: colorScheme.primary,
+          selectedColor: colorScheme.primary,
+          backgroundColor: colorScheme.background,
+        ),
+        disabledStyle: FRadioStateStyle(
+          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+          borderColor: colorScheme.disable(colorScheme.primary),
+          selectedColor: colorScheme.disable(colorScheme.primary),
+          backgroundColor: colorScheme.background,
+        ),
+        errorStyle: FRadioErrorStyle(
+          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+          borderColor: colorScheme.error,
+          selectedColor: colorScheme.error,
+          backgroundColor: colorScheme.background,
+        ),
+      );
 
   /// The [FLabel]'s style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
-        layout: labelLayoutStyle,
-        state: FLabelStateStyles(
-          enabledStyle: enabledStyle,
-          disabledStyle: disabledStyle,
-          errorStyle: errorStyle,
-        ),
-      );
+    layout: labelLayoutStyle,
+    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+  );
 }
 
 /// A [FRadio]'s state style.

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 const months = [
@@ -38,15 +38,8 @@ void main() {
             // The default opacity messes up the coloring.
             style: TestScaffold.blueScreen.pickerStyle.copyWith(overAndUnderCenterOpacity: 1),
             children: [
-              const FPickerWheel(
-                flex: 3,
-                loop: true,
-                children: months,
-              ),
-              FPickerWheel.builder(
-                flex: 3,
-                builder: (context, index) => Text('Item $index'),
-              ),
+              const FPickerWheel(flex: 3, loop: true, children: months),
+              FPickerWheel.builder(flex: 3, builder: (context, index) => Text('Item $index')),
             ],
           ),
         ),
@@ -63,14 +56,8 @@ void main() {
             child: FPicker(
               controller: controller,
               children: [
-                const FPickerWheel(
-                  flex: 3,
-                  loop: true,
-                  children: months,
-                ),
-                FPickerWheel.builder(
-                  builder: (context, index) => Text('Item $index'),
-                ),
+                const FPickerWheel(flex: 3, loop: true, children: months),
+                FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
               ],
             ),
           ),
@@ -86,15 +73,9 @@ void main() {
             child: FPicker(
               controller: controller,
               children: [
-                const FPickerWheel(
-                  flex: 3,
-                  loop: true,
-                  children: months,
-                ),
+                const FPickerWheel(flex: 3, loop: true, children: months),
                 const Text(':'),
-                FPickerWheel.builder(
-                  builder: (context, index) => Text('Item $index'),
-                ),
+                FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
               ],
             ),
           ),
@@ -109,15 +90,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPicker(
-              controller: controller,
-              children: const [
-                FPickerWheel(
-                  flex: 3,
-                  children: months,
-                ),
-              ],
-            ),
+            child: FPicker(controller: controller, children: const [FPickerWheel(flex: 3, children: months)]),
           ),
         );
 
@@ -131,16 +104,9 @@ void main() {
             child: FPicker(
               controller: controller,
               children: [
-                const FPickerWheel(
-                  autofocus: true,
-                  flex: 3,
-                  loop: true,
-                  children: months,
-                ),
+                const FPickerWheel(autofocus: true, flex: 3, loop: true, children: months),
                 const Text(':'),
-                FPickerWheel.builder(
-                  builder: (context, index) => Text('Item $index'),
-                ),
+                FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
               ],
             ),
           ),
@@ -158,15 +124,9 @@ void main() {
           child: FPicker(
             controller: controller,
             children: [
-              const FPickerWheel(
-                flex: 3,
-                key: key,
-                children: months,
-              ),
+              const FPickerWheel(flex: 3, key: key, children: months),
               const Text(':'),
-              FPickerWheel.builder(
-                builder: (context, index) => Text('Item $index'),
-              ),
+              FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
             ],
           ),
         ),
@@ -188,15 +148,9 @@ void main() {
           child: FPicker(
             controller: controller,
             children: [
-              const FPickerWheel(
-                flex: 3,
-                key: key,
-                children: months,
-              ),
+              const FPickerWheel(flex: 3, key: key, children: months),
               const Text(':'),
-              FPickerWheel.builder(
-                builder: (context, index) => Text('Item $index'),
-              ),
+              FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
             ],
           ),
         ),
@@ -220,16 +174,9 @@ void main() {
           child: FPicker(
             controller: controller,
             children: [
-              const FPickerWheel(
-                autofocus: true,
-                flex: 3,
-                key: key,
-                children: months,
-              ),
+              const FPickerWheel(autofocus: true, flex: 3, key: key, children: months),
               const Text(':'),
-              FPickerWheel.builder(
-                builder: (context, index) => Text('Item $index'),
-              ),
+              FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
             ],
           ),
         ),

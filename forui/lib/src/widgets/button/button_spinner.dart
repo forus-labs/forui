@@ -3,8 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'button_spinner.style.dart';
 
@@ -24,10 +25,7 @@ class FButtonSpinner extends StatefulWidget {
   final FButtonSpinnerStyle? style;
 
   /// Creates a button spinner.
-  const FButtonSpinner({
-    this.style,
-    super.key,
-  });
+  const FButtonSpinner({this.style, super.key});
 
   @override
   State<FButtonSpinner> createState() => _FButtonSpinnerState();
@@ -51,29 +49,24 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
     _data = FButtonData.of(context);
     _style = widget.style ?? _data.style.spinnerStyle;
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: _style.animationDuration,
-    )
-      ..forward()
-      ..repeat();
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _controller =
+        AnimationController(vsync: this, duration: _style.animationDuration)
+          ..forward()
+          ..repeat();
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
   }
 
   @override
   Widget build(BuildContext context) => AnimatedBuilder(
-        animation: _animation,
-        builder: (_, child) => Transform.rotate(
-          angle: _controller.value * 2 * math.pi,
-          child: child,
-        ),
-        child: FIcon(
-          FAssets.icons.loaderCircle,
-          color: _data.enabled ? _style.enabledSpinnerColor : _style.disabledSpinnerColor,
-          size: _style.spinnerSize,
-          semanticLabel: 'Button Spinner',
-        ),
-      );
+    animation: _animation,
+    builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
+    child: FIcon(
+      FAssets.icons.loaderCircle,
+      color: _data.enabled ? _style.enabledSpinnerColor : _style.disabledSpinnerColor,
+      size: _style.spinnerSize,
+      semanticLabel: 'Button Spinner',
+    ),
+  );
 
   @override
   void dispose() {
@@ -109,11 +102,6 @@ final class FButtonSpinnerStyle with Diagnosticable, _$FButtonSpinnerStyleFuncti
   });
 
   /// Creates a [FButtonSpinnerStyle] that inherits its properties from the given [enabled] and [disabled].
-  FButtonSpinnerStyle.inherit({
-    required Color enabled,
-    required Color disabled,
-  }) : this(
-          enabledSpinnerColor: enabled,
-          disabledSpinnerColor: disabled,
-        );
+  FButtonSpinnerStyle.inherit({required Color enabled, required Color disabled})
+    : this(enabledSpinnerColor: enabled, disabledSpinnerColor: disabled);
 }

@@ -5,6 +5,6 @@
   "barrierLabel": "ገዳቢ",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "ቀን ይምረጡ",
-  "datePickerInvalidDateError": "ልክ ያልሆነ ቀን።"
+  "dateFieldHint": "ቀን ይምረጡ",
+  "dateFieldInvalidDateError": "ልክ ያልሆነ ቀን።"
 }

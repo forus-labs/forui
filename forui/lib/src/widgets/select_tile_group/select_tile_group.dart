@@ -87,38 +87,36 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     super.autovalidateMode,
     super.key,
   }) : super(
-          builder: (field) {
-            final state = field as _State;
-            final groupStyle = style ?? state.context.theme.tileGroupStyle;
-            final (labelState, error) = switch (state.errorText) {
-              _ when !enabled => (FLabelState.disabled, null),
-              final text? => (FLabelState.error, errorBuilder(state.context, text)),
-              null => (FLabelState.enabled, null),
-            };
+         builder: (field) {
+           final state = field as _State;
 
-            return FTileGroup(
-              scrollController: scrollController,
-              style: groupStyle,
-              cacheExtent: cacheExtent,
-              maxHeight: maxHeight,
-              dragStartBehavior: dragStartBehavior,
-              divider: divider,
-              label: label,
-              enabled: enabled,
-              description: description,
-              error: error,
-              semanticLabel: semanticLabel,
-              children: [
-                for (final child in children)
-                  FSelectTileData<T>(
-                    controller: groupController,
-                    selected: groupController.contains(child.value),
-                    child: child,
-                  ),
-              ],
-            );
-          },
-        );
+           return FTileGroup(
+             scrollController: scrollController,
+             style: style ?? state.context.theme.tileGroupStyle,
+             cacheExtent: cacheExtent,
+             maxHeight: maxHeight,
+             dragStartBehavior: dragStartBehavior,
+             divider: divider,
+             label: label,
+             enabled: enabled,
+             description: description,
+             error: switch (state.errorText) {
+               _ when !enabled => null,
+               final text? => errorBuilder(state.context, text),
+               null => null,
+             },
+             semanticLabel: semanticLabel,
+             children: [
+               for (final child in children)
+                 FSelectTileData<T>(
+                   controller: groupController,
+                   selected: groupController.contains(child.value),
+                   child: child,
+                 ),
+             ],
+           );
+         },
+       );
 
   /// Creates a [FSelectTileGroup] that lazily builds its children.
   ///
@@ -144,41 +142,39 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     super.autovalidateMode,
     super.key,
   }) : super(
-          builder: (field) {
-            final state = field as _State;
-            final groupStyle = style ?? state.context.theme.tileGroupStyle;
-            final (labelState, error) = switch (state.errorText) {
-              _ when !enabled => (FLabelState.disabled, null),
-              final text? => (FLabelState.error, errorBuilder(state.context, text)),
-              null => (FLabelState.enabled, null),
-            };
+         builder: (field) {
+           final state = field as _State;
 
-            return FTileGroup.builder(
-              scrollController: scrollController,
-              style: groupStyle,
-              cacheExtent: cacheExtent,
-              maxHeight: maxHeight,
-              dragStartBehavior: dragStartBehavior,
-              count: count,
-              divider: divider,
-              label: label,
-              enabled: enabled,
-              description: description,
-              error: error,
-              semanticLabel: semanticLabel,
-              tileBuilder: (context, index) {
-                final child = tileBuilder(context, index);
-                return child == null
-                    ? null
-                    : FSelectTileData<T>(
-                        controller: groupController,
-                        selected: groupController.contains(child.value),
-                        child: child,
-                      );
-              },
-            );
-          },
-        );
+           return FTileGroup.builder(
+             scrollController: scrollController,
+             style: style ?? state.context.theme.tileGroupStyle,
+             cacheExtent: cacheExtent,
+             maxHeight: maxHeight,
+             dragStartBehavior: dragStartBehavior,
+             count: count,
+             divider: divider,
+             label: label,
+             enabled: enabled,
+             description: description,
+             error: switch (state.errorText) {
+               _ when !enabled => null,
+               final text? => errorBuilder(state.context, text),
+               null => null,
+             },
+             semanticLabel: semanticLabel,
+             tileBuilder: (context, index) {
+               final child = tileBuilder(context, index);
+               return child == null
+                   ? null
+                   : FSelectTileData<T>(
+                     controller: groupController,
+                     selected: groupController.contains(child.value),
+                     child: child,
+                   );
+             },
+           );
+         },
+       );
 
   @override
   FormFieldState<Set<T>> createState() => _State();

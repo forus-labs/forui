@@ -2,10 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/tile/tile_group.dart';
 import 'package:forui/src/widgets/tile/tile_render_object.dart';
-import 'package:meta/meta.dart';
 
 part 'tile_content.style.dart';
 
@@ -53,22 +54,21 @@ class FTileContent extends StatelessWidget {
       style: contentStyle,
       divider: divider,
       children: [
-        if (prefixIcon case final prefixIcon?)
+        if (prefixIcon case final prefix?)
           Padding(
-            padding: ltr
-                ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
-                : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
-            child: FIconStyleData(
-              style: style.prefixIconStyle,
-              child: prefixIcon,
-            ),
+            padding:
+                ltr
+                    ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
+                    : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
+            child: FIconStyleData(style: style.prefixIconStyle, child: prefix),
           )
         else
           const SizedBox(),
         Padding(
-          padding: ltr
-              ? EdgeInsets.only(right: contentStyle.middleSpacing)
-              : EdgeInsets.only(left: contentStyle.middleSpacing),
+          padding:
+              ltr
+                  ? EdgeInsets.only(right: contentStyle.middleSpacing)
+                  : EdgeInsets.only(left: contentStyle.middleSpacing),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -113,13 +113,11 @@ class FTileContent extends StatelessWidget {
           const SizedBox(),
         if (suffixIcon case final suffixIcon?)
           Padding(
-            padding: ltr
-                ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
-                : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
-            child: FIconStyleData(
-              style: style.suffixIconStyle,
-              child: suffixIcon,
-            ),
+            padding:
+                ltr
+                    ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
+                    : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
+            child: FIconStyleData(style: style.suffixIconStyle, child: suffixIcon),
           )
         else
           const SizedBox(),
@@ -189,36 +187,36 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
     this.titleSpacing = 3,
     this.middleSpacing = 4,
     this.suffixIconSpacing = 5,
-  })  : assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.'),
-        assert(0 <= titleSpacing, 'titleSpacing must be non-negative.'),
-        assert(0 <= middleSpacing, 'middleSpacing must be non-negative.'),
-        assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
+  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.'),
+       assert(0 <= titleSpacing, 'titleSpacing must be non-negative.'),
+       assert(0 <= middleSpacing, 'middleSpacing must be non-negative.'),
+       assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
 
   /// Creates a [FTileContentStyle] that inherits from the given [colorScheme] and [typography].
   FTileContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          enabledStyle: FTileContentStateStyle(
-            prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
-            titleTextStyle: typography.base,
-            subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
-            detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
-            suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
-          ),
-          enabledHoveredStyle: FTileContentStateStyle(
-            prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
-            titleTextStyle: typography.base,
-            subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
-            detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
-            suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
-          ),
-          disabledStyle: FTileContentStateStyle(
-            prefixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.primary), size: 18),
-            titleTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.primary)),
-            subtitleTextStyle: typography.xs.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
-            detailsTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
-            suffixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.mutedForeground), size: 18),
-          ),
-        );
+    : this(
+        enabledStyle: FTileContentStateStyle(
+          prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
+          titleTextStyle: typography.base,
+          subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
+          detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
+          suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+        ),
+        enabledHoveredStyle: FTileContentStateStyle(
+          prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
+          titleTextStyle: typography.base,
+          subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
+          detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
+          suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+        ),
+        disabledStyle: FTileContentStateStyle(
+          prefixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.primary), size: 18),
+          titleTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.primary)),
+          subtitleTextStyle: typography.xs.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
+          detailsTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
+          suffixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.mutedForeground), size: 18),
+        ),
+      );
 }
 
 /// A [FTile] content's state style.

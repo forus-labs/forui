@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
 
 part 'button_content.style.dart';
 
@@ -13,12 +13,7 @@ class Content extends StatelessWidget {
   final Widget? suffix;
   final Widget label;
 
-  const Content({
-    required this.label,
-    this.prefix,
-    this.suffix,
-    super.key,
-  });
+  const Content({required this.label, this.prefix, this.suffix, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +29,8 @@ class Content extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: separate(
-              [
-                if (prefix != null) prefix!,
-                label,
-                if (suffix != null) suffix!,
-              ],
-              by: [
-                const SizedBox(width: 10),
-              ],
-            ),
+            spacing: 10,
+            children: [if (prefix case final prefix?) prefix, label, if (suffix case final suffix?) suffix],
           ),
         ),
       ),
@@ -111,24 +98,13 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled].
-  FButtonContentStyle.inherit({
-    required FTypography typography,
-    required Color enabled,
-    required Color disabled,
-  }) : this(
-          enabledTextStyle: typography.base.copyWith(
-            color: enabled,
-            fontWeight: FontWeight.w500,
-            height: 1,
-          ),
-          disabledTextStyle: typography.base.copyWith(
-            color: disabled,
-            fontWeight: FontWeight.w500,
-            height: 1,
-          ),
-          enabledIconColor: enabled,
-          disabledIconColor: disabled,
-        );
+  FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
+    : this(
+        enabledTextStyle: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
+        disabledTextStyle: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
+        enabledIconColor: enabled,
+        disabledIconColor: disabled,
+      );
 }
 
 /// [FButton] icon content's style.

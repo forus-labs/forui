@@ -5,6 +5,6 @@
   "barrierLabel": "Borítás",
   "shortDateSeparator": ". ",
   "shortDateSuffix": ".",
-  "datePickerHint": "Válasszon dátumot",
-  "datePickerInvalidDateError": "Érvénytelen dátum."
+  "dateFieldHint": "Válasszon dátumot",
+  "dateFieldInvalidDateError": "Érvénytelen dátum."
 }

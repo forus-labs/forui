@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 const _longText =
@@ -90,11 +90,7 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
-                child: FTextField.email(
-                  controller: controller,
-                  autofocus: focused_,
-                  hint: 'janedoe@foruslabs.com',
-                ),
+                child: FTextField.email(controller: controller, autofocus: focused_, hint: 'janedoe@foruslabs.com'),
               ),
             );
 
@@ -111,11 +107,7 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
-                child: FTextField.password(
-                  controller: controller,
-                  autofocus: focused_,
-                  hint: 'password',
-                ),
+                child: FTextField.password(controller: controller, autofocus: focused_, hint: 'password'),
               ),
             );
 
@@ -164,10 +156,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('text-field/${theme.name}/counter.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('text-field/${theme.name}/counter.png'));
       });
 
       testWidgets('iOS selection handles - ${theme.name}', (tester) async {
@@ -175,12 +164,7 @@ void main() {
 
         final controller = TextEditingController(text: 'text');
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            theme: theme.data,
-            child: FTextField(controller: controller),
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextField(controller: controller)));
 
         await tester.tap(find.byType(FTextField));
         await tester.tap(find.byType(FTextField));

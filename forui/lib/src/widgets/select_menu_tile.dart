@@ -4,9 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_group/select_group_controller.dart';
-import 'package:meta/meta.dart';
 
 part 'select_menu_tile.style.dart';
 
@@ -155,83 +156,84 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.restorationId,
     super.key,
   }) : super(
-          builder: (field) {
-            final state = field as _State<T>;
-            final groupData = FTileGroupData.maybeOf(state.context);
-            final tileData = FTileData.maybeOf(state.context);
+         builder: (field) {
+           final state = field as _State<T>;
+           final groupData = FTileGroupData.maybeOf(state.context);
+           final tileData = FTileData.maybeOf(state.context);
 
-            final global = state.context.theme.selectMenuTileStyle;
-            final labelStyle = style?.labelStyle ?? global.labelStyle;
-            final menuStyle = style?.menuStyle ?? global.menuStyle;
-            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
+           final global = state.context.theme.selectMenuTileStyle;
+           final labelStyle = style?.labelStyle ?? global.labelStyle;
+           final menuStyle = style?.menuStyle ?? global.menuStyle;
+           final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
 
-            final (labelState, error) = switch (state.errorText) {
-              _ when !enabled => (FLabelState.disabled, null),
-              final text? => (FLabelState.error, errorBuilder(state.context, text)),
-              null => (FLabelState.enabled, null),
-            };
+           final (labelState, error) = switch (state.errorText) {
+             _ when !enabled => (FLabelState.disabled, null),
+             final text? => (FLabelState.error, errorBuilder(state.context, text)),
+             null => (FLabelState.enabled, null),
+           };
 
-            Widget tile = FPopover(
-              // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
-              //
-              // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
-              // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
-              // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
-              // another _OverlayPortalState, causing an assertion to be thrown.
-              //
-              // See https://stackoverflow.com/a/59410824/4189771
-              key: GlobalObjectKey(state._controller._popover),
-              controller: state._controller._popover,
-              style: menuStyle,
-              popoverAnchor: menuAnchor,
-              childAnchor: tileAnchor,
-              shift: shift,
-              hideOnTapOutside: hideOnTapOutside,
-              directionPadding: directionPadding,
-              autofocus: autofocus,
-              focusNode: focusNode,
-              onFocusChange: onFocusChange,
-              popoverBuilder: (context, _, __) => ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
-                child: FSelectTileGroup<T>(
-                  groupController: state._controller,
-                  scrollController: scrollController,
-                  cacheExtent: cacheExtent,
-                  maxHeight: maxHeight,
-                  dragStartBehavior: dragStartBehavior,
-                  style: menuStyle.tileGroupStyle,
-                  semanticLabel: semanticLabel,
-                  divider: divider,
-                  children: menu,
-                ),
-              ),
-              child: FTile(
-                style: tileStyle,
-                prefixIcon: prefixIcon,
-                enabled: enabled,
-                title: title,
-                subtitle: subtitle,
-                details: details,
-                suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
-                onPress: state._controller._popover.toggle,
-              ),
-            );
+           Widget tile = FPopover(
+             // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
+             //
+             // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
+             // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
+             // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
+             // another _OverlayPortalState, causing an assertion to be thrown.
+             //
+             // See https://stackoverflow.com/a/59410824/4189771
+             key: GlobalObjectKey(state._controller._popover),
+             controller: state._controller._popover,
+             style: menuStyle,
+             popoverAnchor: menuAnchor,
+             childAnchor: tileAnchor,
+             shift: shift,
+             hideOnTapOutside: hideOnTapOutside,
+             directionPadding: directionPadding,
+             autofocus: autofocus,
+             focusNode: focusNode,
+             onFocusChange: onFocusChange,
+             popoverBuilder:
+                 (_, _, _) => ConstrainedBox(
+                   constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
+                   child: FSelectTileGroup<T>(
+                     groupController: state._controller,
+                     scrollController: scrollController,
+                     cacheExtent: cacheExtent,
+                     maxHeight: maxHeight,
+                     dragStartBehavior: dragStartBehavior,
+                     style: menuStyle.tileGroupStyle,
+                     semanticLabel: semanticLabel,
+                     divider: divider,
+                     children: menu,
+                   ),
+                 ),
+             child: FTile(
+               style: tileStyle,
+               prefixIcon: prefixIcon,
+               enabled: enabled,
+               title: title,
+               subtitle: subtitle,
+               details: details,
+               suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
+               onPress: state._controller._popover.toggle,
+             ),
+           );
 
-            if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
-              tile = FLabel(
-                axis: Axis.vertical,
-                style: labelStyle,
-                state: labelState,
-                label: label,
-                description: description,
-                error: error,
-                child: tile,
-              );
-            }
+           if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+             tile = FLabel(
+               axis: Axis.vertical,
+               style: labelStyle,
+               state: labelState,
+               label: label,
+               description: description,
+               error: error,
+               child: tile,
+             );
+           }
 
-            return tile;
-          },
-        );
+           return tile;
+         },
+       );
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
@@ -286,84 +288,85 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.restorationId,
     super.key,
   }) : super(
-          builder: (field) {
-            final state = field as _State<T>;
-            final groupData = FTileGroupData.maybeOf(state.context);
-            final tileData = FTileData.maybeOf(state.context);
+         builder: (field) {
+           final state = field as _State<T>;
+           final groupData = FTileGroupData.maybeOf(state.context);
+           final tileData = FTileData.maybeOf(state.context);
 
-            final global = state.context.theme.selectMenuTileStyle;
-            final labelStyle = style?.labelStyle ?? global.labelStyle;
-            final menuStyle = style?.menuStyle ?? global.menuStyle;
-            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
+           final global = state.context.theme.selectMenuTileStyle;
+           final labelStyle = style?.labelStyle ?? global.labelStyle;
+           final menuStyle = style?.menuStyle ?? global.menuStyle;
+           final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
 
-            final (labelState, error) = switch (state.errorText) {
-              _ when !enabled => (FLabelState.disabled, null),
-              final text? => (FLabelState.error, errorBuilder(state.context, text)),
-              null => (FLabelState.enabled, null),
-            };
+           final (labelState, error) = switch (state.errorText) {
+             _ when !enabled => (FLabelState.disabled, null),
+             final text? => (FLabelState.error, errorBuilder(state.context, text)),
+             null => (FLabelState.enabled, null),
+           };
 
-            Widget tile = FPopover(
-              // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
-              //
-              // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
-              // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
-              // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
-              // another _OverlayPortalState, causing an assertion to be thrown.
-              //
-              // See https://stackoverflow.com/a/59410824/4189771
-              key: GlobalObjectKey(state._controller._popover),
-              controller: state._controller._popover,
-              style: menuStyle,
-              popoverAnchor: menuAnchor,
-              childAnchor: tileAnchor,
-              shift: shift,
-              hideOnTapOutside: hideOnTapOutside,
-              directionPadding: directionPadding,
-              autofocus: autofocus,
-              focusNode: focusNode,
-              onFocusChange: onFocusChange,
-              popoverBuilder: (context, _, __) => ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
-                child: FSelectTileGroup<T>.builder(
-                  groupController: state._controller,
-                  scrollController: scrollController,
-                  cacheExtent: cacheExtent,
-                  maxHeight: maxHeight,
-                  dragStartBehavior: dragStartBehavior,
-                  style: menuStyle.tileGroupStyle,
-                  semanticLabel: semanticLabel,
-                  divider: divider,
-                  tileBuilder: menuTileBuilder,
-                  count: count,
-                ),
-              ),
-              child: FTile(
-                style: tileStyle,
-                prefixIcon: prefixIcon,
-                enabled: enabled,
-                title: title,
-                subtitle: subtitle,
-                details: details,
-                suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
-                onPress: state._controller._popover.toggle,
-              ),
-            );
+           Widget tile = FPopover(
+             // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
+             //
+             // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
+             // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
+             // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
+             // another _OverlayPortalState, causing an assertion to be thrown.
+             //
+             // See https://stackoverflow.com/a/59410824/4189771
+             key: GlobalObjectKey(state._controller._popover),
+             controller: state._controller._popover,
+             style: menuStyle,
+             popoverAnchor: menuAnchor,
+             childAnchor: tileAnchor,
+             shift: shift,
+             hideOnTapOutside: hideOnTapOutside,
+             directionPadding: directionPadding,
+             autofocus: autofocus,
+             focusNode: focusNode,
+             onFocusChange: onFocusChange,
+             popoverBuilder:
+                 (_, _, _) => ConstrainedBox(
+                   constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
+                   child: FSelectTileGroup<T>.builder(
+                     groupController: state._controller,
+                     scrollController: scrollController,
+                     cacheExtent: cacheExtent,
+                     maxHeight: maxHeight,
+                     dragStartBehavior: dragStartBehavior,
+                     style: menuStyle.tileGroupStyle,
+                     semanticLabel: semanticLabel,
+                     divider: divider,
+                     tileBuilder: menuTileBuilder,
+                     count: count,
+                   ),
+                 ),
+             child: FTile(
+               style: tileStyle,
+               prefixIcon: prefixIcon,
+               enabled: enabled,
+               title: title,
+               subtitle: subtitle,
+               details: details,
+               suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
+               onPress: state._controller._popover.toggle,
+             ),
+           );
 
-            if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
-              tile = FLabel(
-                axis: Axis.vertical,
-                style: labelStyle,
-                state: labelState,
-                label: label,
-                description: description,
-                error: error,
-                child: tile,
-              );
-            }
+           if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+             tile = FLabel(
+               axis: Axis.vertical,
+               style: labelStyle,
+               state: labelState,
+               label: label,
+               description: description,
+               error: error,
+               child: tile,
+             );
+           }
 
-            return tile;
-          },
-        );
+           return tile;
+         },
+       );
 
   @override
   FormFieldState<Set<T>> createState() => _State();

@@ -4,8 +4,8 @@ library;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -18,26 +18,28 @@ void main() {
           TestScaffold.app(
             child: FSheets(
               child: Builder(
-                builder: (context) => Center(
-                  child: FButton.icon(
-                    child: FIcon(FAssets.icons.chevronRight),
-                    onPress: () {
-                      controller = showFPersistentSheet(
-                        context: context,
-                        side: side,
-                        builder: (context, controller) => Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: context.theme.colorScheme.primary),
-                            color: context.theme.colorScheme.background,
-                          ),
-                          child: const Center(child: Text('Sheet')),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                builder:
+                    (context) => Center(
+                      child: FButton.icon(
+                        child: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {
+                          controller = showFPersistentSheet(
+                            context: context,
+                            side: side,
+                            builder:
+                                (context, controller) => Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: context.theme.colorScheme.primary),
+                                    color: context.theme.colorScheme.background,
+                                  ),
+                                  child: const Center(child: Text('Sheet')),
+                                ),
+                          );
+                        },
+                      ),
+                    ),
               ),
             ),
           ),
@@ -54,27 +56,29 @@ void main() {
           TestScaffold.app(
             child: FSheets(
               child: Builder(
-                builder: (context) => Center(
-                  child: FButton.icon(
-                    child: FIcon(FAssets.icons.chevronRight),
-                    onPress: () {
-                      controller = showFPersistentSheet(
-                        context: context,
-                        side: side,
-                        constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
-                        builder: (context, controller) => Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: context.theme.colorScheme.primary),
-                            color: context.theme.colorScheme.background,
-                          ),
-                          child: const Center(child: Text('Sheet')),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                builder:
+                    (context) => Center(
+                      child: FButton.icon(
+                        child: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {
+                          controller = showFPersistentSheet(
+                            context: context,
+                            side: side,
+                            constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
+                            builder:
+                                (context, controller) => Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: context.theme.colorScheme.primary),
+                                    color: context.theme.colorScheme.background,
+                                  ),
+                                  child: const Center(child: Text('Sheet')),
+                                ),
+                          );
+                        },
+                      ),
+                    ),
               ),
             ),
           ),
@@ -91,34 +95,35 @@ void main() {
           TestScaffold.app(
             child: FSheets(
               child: Builder(
-                builder: (context) => Center(
-                  child: FButton.icon(
-                    child: FIcon(FAssets.icons.chevronRight),
-                    onPress: () {
-                      controller = showFPersistentSheet(
-                        context: context,
-                        side: side,
-                        mainAxisMaxRatio: null,
-                        builder: (context, controller) => Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: context.theme.colorScheme.primary),
-                            color: context.theme.colorScheme.background,
-                          ),
-                          child: ListView.builder(
-                            scrollDirection: side.vertical ? Axis.vertical : Axis.horizontal,
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('Tile $index'),
-                            ),
-                            itemCount: 20,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                builder:
+                    (context) => Center(
+                      child: FButton.icon(
+                        child: FIcon(FAssets.icons.chevronRight),
+                        onPress: () {
+                          controller = showFPersistentSheet(
+                            context: context,
+                            side: side,
+                            mainAxisMaxRatio: null,
+                            builder:
+                                (context, controller) => Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: context.theme.colorScheme.primary),
+                                    color: context.theme.colorScheme.background,
+                                  ),
+                                  child: ListView.builder(
+                                    scrollDirection: side.vertical ? Axis.vertical : Axis.horizontal,
+                                    itemBuilder:
+                                        (context, index) =>
+                                            Padding(padding: const EdgeInsets.all(8.0), child: Text('Tile $index')),
+                                    itemCount: 20,
+                                  ),
+                                ),
+                          );
+                        },
+                      ),
+                    ),
               ),
             ),
           ),

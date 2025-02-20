@@ -12,7 +12,7 @@ class ThresholdComparator extends LocalFileComparator {
   final double threshold;
 
   ThresholdComparator(super.testFile, this.threshold)
-      : assert(0 <= threshold && threshold <= 1, 'Threshold must be between 0 and 1.');
+    : assert(0 <= threshold && threshold <= 1, 'Threshold must be between 0 and 1.');
 
   @override
   Future<bool> compare(Uint8List imageBytes, Uri golden) async {

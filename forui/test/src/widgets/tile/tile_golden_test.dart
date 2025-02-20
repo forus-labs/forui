@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -223,14 +223,7 @@ void main() {
     });
 
     testWidgets('minimal', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FTile(
-            title: const Text('Bluetooth'),
-            onPress: () {},
-          ),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(child: FTile(title: const Text('Bluetooth'), onPress: () {})));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
     });

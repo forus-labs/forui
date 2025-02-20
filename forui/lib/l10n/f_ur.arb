@@ -5,6 +5,6 @@
   "barrierLabel": "اسکریم",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "تاریخ منتخب کریں",
-  "datePickerInvalidDateError": "غلط تاریخ۔"
+  "dateFieldHint": "تاریخ منتخب کریں",
+  "dateFieldInvalidDateError": "غلط تاریخ۔"
 }

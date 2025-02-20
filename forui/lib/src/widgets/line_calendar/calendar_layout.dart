@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart' hide Offset;
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_item.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart' hide Offset;
 
 @internal
 class CalendarLayout extends StatefulWidget {
@@ -66,8 +67,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     _style = widget.style ?? context.theme.lineCalendarStyle;
     _width = _estimateWidth();
 
-    final initial = widget.initial ?? widget.today;
-    final startOffset = (initial.difference(widget.start).inDays) * _width!;
+    final startOffset = ((widget.initial ?? widget.today).difference(widget.start).inDays) * _width!;
     final offset = switch (widget.alignment.start) {
       -1 => startOffset,
       1 => startOffset - widget.constraints.maxWidth + _width!,
@@ -103,7 +103,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     final placeholder = widget.today.toNative();
     return SpeculativeLayout(
       children: [
@@ -141,8 +141,8 @@ class _CalendarLayoutState extends State<CalendarLayout> {
           padding: EdgeInsets.zero,
           cacheExtent: widget.cacheExtent,
           itemExtent: _width!,
-          itemCount: widget.end != null ? widget.end!.difference(widget.start).inDays + 1 : null,
-          itemBuilder: (context, index) {
+          itemCount: widget.end == null ? null : widget.end!.difference(widget.start).inDays + 1,
+          itemBuilder: (_, index) {
             final date = widget.start.plus(days: index);
             return Padding(
               padding: _style.itemPadding,
@@ -163,13 +163,10 @@ class _CalendarLayoutState extends State<CalendarLayout> {
 
 @internal
 class SpeculativeLayout extends MultiChildRenderObjectWidget {
-  const SpeculativeLayout({
-    required super.children,
-    super.key,
-  });
+  const SpeculativeLayout({required super.children, super.key});
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _SpeculativeBox();
+  RenderObject createRenderObject(BuildContext _) => _SpeculativeBox();
 }
 
 class _Data extends ContainerBoxParentData<RenderBox> {}
@@ -186,12 +183,13 @@ class _SpeculativeBox extends RenderBox
     final unselected = childAfter(selectedHovered)!;
     final unselectedHovered = childAfter(unselected)!;
 
-    final maxHeight = [
-      selected.getDryLayout(constraints).height,
-      selectedHovered.getDryLayout(constraints).height,
-      unselected.getDryLayout(constraints).height,
-      unselectedHovered.getDryLayout(constraints).height,
-    ].max!;
+    final maxHeight =
+        [
+          selected.getDryLayout(constraints).height,
+          selectedHovered.getDryLayout(constraints).height,
+          unselected.getDryLayout(constraints).height,
+          unselectedHovered.getDryLayout(constraints).height,
+        ].max!;
 
     final heightConstraints = constraints.copyWith(maxHeight: maxHeight);
     final viewport = childAfter(unselectedHovered)!..layout(heightConstraints, parentUsesSize: true);
@@ -212,7 +210,5 @@ class _SpeculativeBox extends RenderBox
   }
 
   @override
-  void visitChildrenForSemantics(RenderObjectVisitor visitor) {
-    visitor(lastChild!);
-  }
+  void visitChildrenForSemantics(RenderObjectVisitor visitor) => visitor(lastChild!);
 }

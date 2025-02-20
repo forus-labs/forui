@@ -1,8 +1,9 @@
 import 'dart:collection';
 
+import 'package:sugar/collection_aggregate.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
-import 'package:sugar/collection_aggregate.dart';
 
 /// A controller that manages the resizing of regions in a [FResizable].
 abstract interface class FResizableController extends FChangeNotifier {
@@ -122,10 +123,7 @@ final class _CascadeController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd;
 
-  _CascadeController({
-    this.onResizeUpdate,
-    this.onResizeEnd,
-  }) : super._();
+  _CascadeController({this.onResizeUpdate, this.onResizeEnd}) : super._();
 
   @override
   bool update(int left, int right, double delta) {

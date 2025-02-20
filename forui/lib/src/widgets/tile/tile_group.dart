@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'tile_group.style.dart';
 
@@ -107,22 +108,21 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     Widget? description,
     Widget? error,
     Key? key,
-  }) =>
-      _MergeTileGroups(
-        key: key,
-        style: style,
-        scrollController: scrollController,
-        cacheExtent: cacheExtent,
-        maxHeight: maxHeight,
-        dragStartBehavior: dragStartBehavior,
-        enabled: enabled,
-        divider: divider,
-        semanticLabel: semanticLabel,
-        label: label,
-        description: description,
-        error: error,
-        children: children,
-      );
+  }) => _MergeTileGroups(
+    key: key,
+    style: style,
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    enabled: enabled,
+    divider: divider,
+    semanticLabel: semanticLabel,
+    label: label,
+    description: description,
+    error: error,
+    children: children,
+  );
 
   /// Creates a [FTileGroup].
   FTileGroup({
@@ -139,20 +139,21 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     this.description,
     this.error,
     super.key,
-  })  : assert(0 < maxHeight, 'maxHeight must be positive.'),
-        delegate = ((style, {required enabled}) => SliverChildListDelegate([
-              for (final (index, child) in children.indexed)
-                FTileData(
-                  style: style,
-                  divider: divider,
-                  enabled: enabled,
-                  hovered: false,
-                  focused: false,
-                  index: index,
-                  last: index == children.length - 1,
-                  child: child,
-                ),
-            ]));
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       delegate =
+           ((style, {required enabled}) => SliverChildListDelegate([
+             for (final (index, child) in children.indexed)
+               FTileData(
+                 style: style,
+                 divider: divider,
+                 enabled: enabled,
+                 hovered: false,
+                 focused: false,
+                 index: index,
+                 last: index == children.length - 1,
+                 child: child,
+               ),
+           ]));
 
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
@@ -185,28 +186,26 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     this.description,
     this.error,
     super.key,
-  })  : assert(0 < maxHeight, 'maxHeight must be positive.'),
-        assert(count == null || 0 <= count, 'count must be non-negative.'),
-        delegate = ((style, {required enabled}) => SliverChildBuilderDelegate(
-              (context, index) {
-                final tile = tileBuilder(context, index);
-                if (tile == null) {
-                  return null;
-                }
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       assert(count == null || 0 <= count, 'count must be non-negative.'),
+       delegate =
+           ((style, {required enabled}) => SliverChildBuilderDelegate((context, index) {
+             final tile = tileBuilder(context, index);
+             if (tile == null) {
+               return null;
+             }
 
-                return FTileData(
-                  style: style,
-                  divider: divider,
-                  enabled: enabled,
-                  hovered: false,
-                  focused: false,
-                  index: index,
-                  last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
-                  child: tile,
-                );
-              },
-              childCount: count,
-            ));
+             return FTileData(
+               style: style,
+               divider: divider,
+               enabled: enabled,
+               hovered: false,
+               focused: false,
+               index: index,
+               last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
+               child: tile,
+             );
+           }, childCount: count));
 
   @override
   Widget build(BuildContext context) {
@@ -416,46 +415,35 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  FTileGroupStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-          borderColor: colorScheme.border,
-          borderWidth: style.borderWidth,
-          borderRadius: style.borderRadius,
-          tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-          enabledStyle: FFormFieldStyle(
-            labelTextStyle: typography.base.copyWith(
-              color: style.enabledFormFieldStyle.labelTextStyle.color,
-              fontWeight: FontWeight.w600,
-            ),
-            descriptionTextStyle: typography.xs.copyWith(
-              color: style.enabledFormFieldStyle.descriptionTextStyle.color,
-            ),
+  FTileGroupStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+    : this(
+        borderColor: colorScheme.border,
+        borderWidth: style.borderWidth,
+        borderRadius: style.borderRadius,
+        tileStyle: FTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        enabledStyle: FFormFieldStyle(
+          labelTextStyle: typography.base.copyWith(
+            color: style.enabledFormFieldStyle.labelTextStyle.color,
+            fontWeight: FontWeight.w600,
           ),
-          disabledStyle: FFormFieldStyle(
-            labelTextStyle: typography.base.copyWith(
-              color: style.disabledFormFieldStyle.labelTextStyle.color,
-              fontWeight: FontWeight.w600,
-            ),
-            descriptionTextStyle: typography.xs.copyWith(
-              color: style.disabledFormFieldStyle.descriptionTextStyle.color,
-            ),
+          descriptionTextStyle: typography.xs.copyWith(color: style.enabledFormFieldStyle.descriptionTextStyle.color),
+        ),
+        disabledStyle: FFormFieldStyle(
+          labelTextStyle: typography.base.copyWith(
+            color: style.disabledFormFieldStyle.labelTextStyle.color,
+            fontWeight: FontWeight.w600,
           ),
-          errorStyle: FFormFieldErrorStyle(
-            labelTextStyle: typography.base.copyWith(
-              color: style.enabledFormFieldStyle.labelTextStyle.color,
-              fontWeight: FontWeight.w600,
-            ),
-            descriptionTextStyle: typography.xs.copyWith(
-              color: style.errorFormFieldStyle.descriptionTextStyle.color,
-            ),
-            errorTextStyle: typography.xs.copyWith(
-              color: style.errorFormFieldStyle.errorTextStyle.color,
-            ),
+          descriptionTextStyle: typography.xs.copyWith(color: style.disabledFormFieldStyle.descriptionTextStyle.color),
+        ),
+        errorStyle: FFormFieldErrorStyle(
+          labelTextStyle: typography.base.copyWith(
+            color: style.enabledFormFieldStyle.labelTextStyle.color,
+            fontWeight: FontWeight.w600,
           ),
-        );
+          descriptionTextStyle: typography.xs.copyWith(color: style.errorFormFieldStyle.descriptionTextStyle.color),
+          errorTextStyle: typography.xs.copyWith(color: style.errorFormFieldStyle.errorTextStyle.color),
+        ),
+      );
 
   /// The label's style.
   // ignore: diagnostic_describe_all_properties
@@ -465,10 +453,10 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
 /// Extracts the data from the given [FTileGroupData].
 @internal
 ({int index, int length, FTileDivider divider}) extractTileGroup(FTileGroupData? data) => (
-      index: data?.index ?? 0,
-      length: data?.length ?? 1,
-      divider: data?.divider ?? FTileDivider.full,
-    );
+  index: data?.index ?? 0,
+  length: data?.length ?? 1,
+  divider: data?.divider ?? FTileDivider.full,
+);
 
 /// A tile group's data.
 class FTileGroupData extends InheritedWidget {

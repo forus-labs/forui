@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'icon.style.dart';
 
@@ -12,11 +13,7 @@ class FIconStyleData extends InheritedWidget {
   final FIconStyle style;
 
   /// Creates a [FIconStyle].
-  const FIconStyleData({
-    required this.style,
-    required super.child,
-    super.key,
-  });
+  const FIconStyleData({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FIconStyleData old) => style != old.style;
@@ -47,10 +44,8 @@ class FIconStyle with Diagnosticable, _$FIconStyleFunctions {
   final double size;
 
   /// Creates a [FIconStyle].
-  const FIconStyle({
-    required this.color,
-    required this.size,
-  }) : assert(0 < size, 'size is $size, but it should be positive.');
+  const FIconStyle({required this.color, required this.size})
+    : assert(0 < size, 'size is $size, but it should be positive.');
 }
 
 /// A graphical icon widget that inherits its style from an [FIconStyle], if any.
@@ -282,13 +277,7 @@ class _IconDataIcon extends FIcon {
 class _ImageProviderIcon extends FIcon {
   final ImageProvider<Object> image;
 
-  const _ImageProviderIcon(
-    this.image, {
-    super.color,
-    super.size,
-    super.semanticLabel,
-    super.key,
-  }) : super._();
+  const _ImageProviderIcon(this.image, {super.color, super.size, super.semanticLabel, super.key}) : super._();
 
   @override
   Widget build(BuildContext context) {

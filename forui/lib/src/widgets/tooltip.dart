@@ -2,8 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'tooltip.style.dart';
 
@@ -181,13 +182,8 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     var child = widget.child;
     if (widget.hover || widget.longPress) {
       child = CallbackShortcuts(
-        bindings: {
-          const SingleActivator(LogicalKeyboardKey.escape): _exit,
-        },
-        child: Focus(
-          onFocusChange: (focused) async => focused ? _enter() : _exit(),
-          child: child,
-        ),
+        bindings: {const SingleActivator(LogicalKeyboardKey.escape): _exit},
+        child: Focus(onFocusChange: (focused) async => focused ? _enter() : _exit(), child: child),
       );
     }
 
@@ -197,10 +193,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         onExit: (_) => _exit(),
         // We have to use a Listener as GestureDetector's arena implementation allows only 1 gesture to win. It is
         // problematic if the child is a button. See https://github.com/flutter/flutter/issues/92103.
-        child: Listener(
-          onPointerDown: (_) => _exit(),
-          child: child,
-        ),
+        child: Listener(onPointerDown: (_) => _exit(), child: child),
       );
     }
 
@@ -228,28 +221,26 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       childAnchor: widget.childAnchor,
       portalAnchor: widget.tipAnchor,
       shift: widget.shift,
-      portalBuilder: (context) => Semantics(
-        container: true,
-        child: FadeTransition(
-          opacity: _controller._fade,
-          child: ScaleTransition(
-            scale: _controller._scale,
-            child: Padding(
-              padding: style.margin,
-              child: DecoratedBox(
-                decoration: style.decoration,
+      portalBuilder:
+          (context) => Semantics(
+            container: true,
+            child: FadeTransition(
+              opacity: _controller._fade,
+              child: ScaleTransition(
+                scale: _controller._scale,
                 child: Padding(
-                  padding: style.padding,
-                  child: DefaultTextStyle(
-                    style: style.textStyle,
-                    child: widget.tipBuilder(context, style, null),
+                  padding: style.margin,
+                  child: DecoratedBox(
+                    decoration: style.decoration,
+                    child: Padding(
+                      padding: style.padding,
+                      child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, style, null)),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
       child: child,
     );
   }
@@ -285,18 +276,8 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 final class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   /// The tooltip's default shadow in [FTooltipStyle.inherit].
   static const shadow = [
-    BoxShadow(
-      color: Color(0x1a000000),
-      offset: Offset(0, 4),
-      blurRadius: 6,
-      spreadRadius: -1,
-    ),
-    BoxShadow(
-      color: Color(0x1a000000),
-      offset: Offset(0, 2),
-      blurRadius: 4,
-      spreadRadius: -2,
-    ),
+    BoxShadow(color: Color(0x1a000000), offset: Offset(0, 4), blurRadius: 6, spreadRadius: -1),
+    BoxShadow(color: Color(0x1a000000), offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2),
   ];
 
   /// The box decoration.
@@ -325,16 +306,13 @@ final class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
 
   /// Creates a [FTooltipStyle] that inherits its properties from the given [colorScheme], [typography], and [style].
   FTooltipStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          decoration: BoxDecoration(
-            color: colorScheme.background,
-            borderRadius: style.borderRadius,
-            border: Border.all(
-              width: style.borderWidth,
-              color: colorScheme.border,
-            ),
-            boxShadow: shadow,
-          ),
-          textStyle: typography.sm,
-        );
+    : this(
+        decoration: BoxDecoration(
+          color: colorScheme.background,
+          borderRadius: style.borderRadius,
+          border: Border.all(width: style.borderWidth, color: colorScheme.border),
+          boxShadow: shadow,
+        ),
+        textStyle: typography.sm,
+      );
 }

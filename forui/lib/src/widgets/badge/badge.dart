@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/badge/badge_content.dart';
-import 'package:meta/meta.dart';
 
 part 'badge.style.dart';
 
@@ -24,18 +25,11 @@ class FBadge extends StatelessWidget {
   final Widget Function(BuildContext, FBadgeCustomStyle) builder;
 
   /// Creates a [FBadge] that contains a [label].
-  FBadge({
-    required Widget label,
-    this.style = FBadgeStyle.primary,
-    super.key,
-  }) : builder = ((context, style) => Content(label: label, style: style));
+  FBadge({required Widget label, this.style = FBadgeStyle.primary, super.key})
+    : builder = ((context, style) => Content(label: label, style: style));
 
   /// Creates a [FBadge] with custom content.
-  const FBadge.raw({
-    required this.builder,
-    this.style = FBadgeStyle.primary,
-    super.key,
-  });
+  const FBadge.raw({required this.builder, this.style = FBadgeStyle.primary, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +45,7 @@ class FBadge extends StatelessWidget {
       child: IntrinsicHeight(
         child: DecoratedBox(
           decoration: BoxDecoration(
-            border: Border.all(
-              color: style.borderColor,
-              width: style.borderWidth,
-            ),
+            border: Border.all(color: style.borderColor, width: style.borderWidth),
             borderRadius: style.borderRadius,
             color: style.backgroundColor,
           ),
@@ -100,12 +91,7 @@ sealed class FBadgeStyle {
 }
 
 @internal
-enum Variant implements FBadgeStyle {
-  primary,
-  secondary,
-  outline,
-  destructive,
-}
+enum Variant implements FBadgeStyle { primary, secondary, outline, destructive }
 
 /// A custom [FBadge] style.
 final class FBadgeCustomStyle with Diagnosticable, _$FBadgeCustomStyleFunctions implements FBadgeStyle {

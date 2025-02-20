@@ -1,3 +1,5 @@
+// ignore: unused_import
+
 import 'package:intl/intl.dart' as intl;
 
 import 'localizations.dart';
@@ -63,10 +65,10 @@ class FLocalizationsVi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Chọn ngày';
+  String get dateFieldHint => 'Chọn ngày';
 
   @override
-  String get datePickerInvalidDateError => 'Ngày không hợp lệ.';
+  String get dateFieldInvalidDateError => 'Ngày không hợp lệ.';
 
   @override
   String get dialogLabel => 'Hộp thoại';

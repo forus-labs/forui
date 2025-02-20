@@ -3,33 +3,26 @@ import 'dart:math';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
-import 'package:meta/meta.dart';
 
 @internal
 class TileRenderObject extends MultiChildRenderObjectWidget {
   final FTileContentStyle style;
   final FTileDivider divider;
 
-  const TileRenderObject({
-    required this.style,
-    required this.divider,
-    super.key,
-    super.children,
-  });
+  const TileRenderObject({required this.style, required this.divider, super.key, super.children});
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderTile(
-        style,
-        divider,
-        Directionality.maybeOf(context) ?? TextDirection.ltr,
-      );
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderTile(style, divider, Directionality.maybeOf(context) ?? TextDirection.ltr);
 
   @override
   // ignore: library_private_types_in_public_api
-  void updateRenderObject(BuildContext context, covariant _RenderTile renderObject) {
-    renderObject
+  void updateRenderObject(BuildContext context, covariant _RenderTile tile) {
+    tile
       ..style = style
       ..divider = divider
       ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'alert.style.dart';
 
@@ -39,13 +40,8 @@ class FAlert extends StatelessWidget {
   /// |          [subtitle]       |
   /// |---------------------------|
   /// ```
-  FAlert({
-    required this.title,
-    Widget? icon,
-    this.subtitle,
-    this.style = FAlertStyle.primary,
-    super.key,
-  }) : icon = icon ?? FIcon(FAssets.icons.circleAlert);
+  FAlert({required this.title, Widget? icon, this.subtitle, this.style = FAlertStyle.primary, super.key})
+    : icon = icon ?? FIcon(FAssets.icons.circleAlert);
 
   @override
   Widget build(BuildContext context) {
@@ -64,32 +60,23 @@ class FAlert extends StatelessWidget {
           children: [
             Row(
               children: [
-                FIconStyleData(
-                  style: FIconStyle(color: style.iconColor, size: style.iconSize),
-                  child: icon,
-                ),
+                FIconStyleData(style: FIconStyle(color: style.iconColor, size: style.iconSize), child: icon),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: DefaultTextStyle.merge(
-                      style: style.titleTextStyle,
-                      child: title,
-                    ),
+                    child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
                   ),
                 ),
               ],
             ),
-            if (subtitle != null)
+            if (subtitle case final subtitle?)
               Row(
                 children: [
                   SizedBox(width: style.iconSize),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
-                      child: DefaultTextStyle.merge(
-                        style: style.subtitleTextStyle,
-                        child: subtitle!,
-                      ),
+                      child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
                     ),
                   ),
                 ],
@@ -118,43 +105,40 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   final FAlertCustomStyle destructive;
 
   /// Creates a [FAlertStyles].
-  const FAlertStyles({
-    required this.primary,
-    required this.destructive,
-  });
+  const FAlertStyles({required this.primary, required this.destructive});
 
   /// Creates a [FAlertStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          primary: FAlertCustomStyle(
-            iconColor: colorScheme.foreground,
-            titleTextStyle: typography.base.copyWith(
-              fontWeight: FontWeight.w500,
-              color: colorScheme.foreground,
-              height: 1.2,
-            ),
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
-            decoration: BoxDecoration(
-              border: Border.all(color: colorScheme.border),
-              borderRadius: style.borderRadius,
-              color: colorScheme.background,
-            ),
+    : this(
+        primary: FAlertCustomStyle(
+          iconColor: colorScheme.foreground,
+          titleTextStyle: typography.base.copyWith(
+            fontWeight: FontWeight.w500,
+            color: colorScheme.foreground,
+            height: 1.2,
           ),
-          destructive: FAlertCustomStyle(
-            iconColor: colorScheme.destructive,
-            titleTextStyle: typography.base.copyWith(
-              fontWeight: FontWeight.w500,
-              color: colorScheme.destructive,
-              height: 1.2,
-            ),
-            subtitleTextStyle: typography.sm.copyWith(color: colorScheme.destructive),
-            decoration: BoxDecoration(
-              border: Border.all(color: colorScheme.destructive),
-              borderRadius: style.borderRadius,
-              color: colorScheme.background,
-            ),
+          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
+          decoration: BoxDecoration(
+            border: Border.all(color: colorScheme.border),
+            borderRadius: style.borderRadius,
+            color: colorScheme.background,
           ),
-        );
+        ),
+        destructive: FAlertCustomStyle(
+          iconColor: colorScheme.destructive,
+          titleTextStyle: typography.base.copyWith(
+            fontWeight: FontWeight.w500,
+            color: colorScheme.destructive,
+            height: 1.2,
+          ),
+          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.destructive),
+          decoration: BoxDecoration(
+            border: Border.all(color: colorScheme.destructive),
+            borderRadius: style.borderRadius,
+            color: colorScheme.background,
+          ),
+        ),
+      );
 }
 
 /// A [FAlert]'s style.
@@ -174,10 +158,7 @@ sealed class FAlertStyle {
 }
 
 @internal
-enum Variant implements FAlertStyle {
-  primary,
-  destructive,
-}
+enum Variant implements FAlertStyle { primary, destructive }
 
 /// A custom [FAlert] style.
 final class FAlertCustomStyle extends FAlertStyle with Diagnosticable, _$FAlertCustomStyleFunctions {

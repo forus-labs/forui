@@ -5,6 +5,6 @@
   "barrierLabel": "رویه",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "انتخاب تاریخ",
-  "datePickerInvalidDateError": "تاریخ نامعتبر."
+  "dateFieldHint": "انتخاب تاریخ",
+  "dateFieldInvalidDateError": "تاریخ نامعتبر."
 }

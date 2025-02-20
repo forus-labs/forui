@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -496,14 +496,7 @@ void main() {
       });
 
       testWidgets('empty tile group', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FTileGroup.merge(
-              label: const Text('Network'),
-              children: [],
-            ),
-          ),
-        );
+        await tester.pumpWidget(TestScaffold(child: FTileGroup.merge(label: const Text('Network'), children: [])));
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/empty.png'));
       });

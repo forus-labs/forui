@@ -17,23 +17,24 @@ class TooltipPage extends StatelessWidget {
     @queryParam String hover = 'true',
     @queryParam String longPress = 'true',
     @queryParam String axis = 'vertical',
-  })  : theme = themes[theme]!,
-        hover = bool.tryParse(hover) ?? true,
-        longPress = bool.tryParse(longPress) ?? true,
-        axis = switch (axis) {
-          'horizontal' => Axis.horizontal,
-          _ => Axis.vertical,
-        };
+  }) : theme = themes[theme]!,
+       hover = bool.tryParse(hover) ?? true,
+       longPress = bool.tryParse(longPress) ?? true,
+       axis = switch (axis) {
+         'horizontal' => Axis.horizontal,
+         _ => Axis.vertical,
+       };
 
   @override
   Widget build(BuildContext context) => FTheme(
-        data: theme,
-        child: FScaffold(
-          content: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
-              child: Builder(
-                builder: (context) => Column(
+    data: theme,
+    child: FScaffold(
+      content: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
+          child: Builder(
+            builder:
+                (context) => Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 30),
@@ -47,20 +48,15 @@ class TooltipPage extends StatelessWidget {
                         child: FButton(
                           style: FButtonStyle.outline,
                           onPress: () {},
-                          label: Text(
-                            [
-                              if (longPress) 'Long press',
-                              if (hover) 'Hover',
-                            ].join('/'),
-                          ),
+                          label: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-            ),
           ),
         ),
-      );
+      ),
+    ),
+  );
 }

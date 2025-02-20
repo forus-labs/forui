@@ -3,9 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker.dart';
-import 'package:meta/meta.dart';
 
 class _ScrollBehavior extends ScrollBehavior {
   static final _devices = PointerDeviceKind.values.toSet();
@@ -16,10 +17,13 @@ class _ScrollBehavior extends ScrollBehavior {
   Set<PointerDeviceKind> get dragDevices => _devices;
 }
 
+/// A marker interface that indicates that a widget is a picker wheel.
+mixin FPickerWheelMixin on Widget {}
+
 /// A picker wheel that displays a list of items that can be scrolled vertically.
 ///
 /// It should only be used in a [FPicker].
-abstract class FPickerWheel extends StatefulWidget {
+abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
   /// Estimates the extent of each item in the picker based on the given [style] and [context].
   static double estimateExtent(FPickerStyle style, BuildContext context) {
     final defaultTextStyle = DefaultTextStyle.of(context);
@@ -209,10 +213,7 @@ class _ListState extends _State<ListWheel> {
           child: DefaultTextStyle.merge(
             textHeightBehavior: style.textHeightBehavior,
             style: style.textStyle,
-            child: Semantics(
-              inMutuallyExclusiveGroup: true,
-              child: child,
-            ),
+            child: Semantics(inMutuallyExclusiveGroup: true, child: child),
           ),
         ),
     ];
@@ -250,12 +251,13 @@ class BuilderWheel extends FPickerWheel {
 class _BuilderState extends _State<BuilderWheel> {
   @override
   ListWheelChildDelegate delegate(FPickerStyle style) => ListWheelChildBuilderDelegate(
-        builder: (context, index) => Center(
+    builder:
+        (context, index) => Center(
           child: DefaultTextStyle.merge(
             textHeightBehavior: style.textHeightBehavior,
             style: style.textStyle,
             child: widget.builder(context, index),
           ),
         ),
-      );
+  );
 }

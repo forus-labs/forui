@@ -12,8 +12,8 @@ final _suffix = RegExp('[A-z]+[^A-z]+[A-z]+[^A-z]+[A-z]+(.*)');
 
 void main() {
   initializeDateFormatting();
-  for (final source in Directory('lib/l10n').listSync().whereType<File>().toList()
-    ..sort((a, b) => a.path.compareTo(b.path))) {
+  for (final source
+      in Directory('lib/l10n').listSync().whereType<File>().toList()..sort((a, b) => a.path.compareTo(b.path))) {
     final locale = _pattern.firstMatch(source.path)?.group(1);
     if (locale == 'en') {
       continue;

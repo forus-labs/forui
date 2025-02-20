@@ -28,17 +28,19 @@ FCalendarController<DateTime?> useFDateCalendarController({
   bool Function(DateTime)? selectable,
   bool truncateAndStripTimezone = true,
   List<Object?>? keys,
-}) =>
-    use(_CalendarControllerHook<DateTime?>(
-      value: initialSelection,
-      selectable: selectable,
-      debugLabel: 'useFDateCalendarController',
-      create: (hook) => FCalendarController.date(
-        initialSelection: hook.value,
-        selectable: hook.selectable,
-        truncateAndStripTimezone: truncateAndStripTimezone,
-      ),
-    ));
+}) => use(
+  _CalendarControllerHook<DateTime?>(
+    value: initialSelection,
+    selectable: selectable,
+    debugLabel: 'useFDateCalendarController',
+    create:
+        (hook) => FCalendarController.date(
+          initialSelection: hook.value,
+          selectable: hook.selectable,
+          truncateAndStripTimezone: truncateAndStripTimezone,
+        ),
+  ),
+);
 
 /// Creates a [FCalendarController] that allows only multiple dates to be selected and is automatically disposed.
 ///
@@ -63,17 +65,19 @@ FCalendarController<Set<DateTime>> useFDatesCalendarController({
   bool Function(DateTime)? selectable,
   bool truncateAndStripTimezone = true,
   List<Object?>? keys,
-}) =>
-    use(_CalendarControllerHook<Set<DateTime>>(
-      value: initialSelections,
-      selectable: selectable,
-      debugLabel: 'useFDatesCalendarController',
-      create: (hook) => FCalendarController.dates(
-        initialSelections: hook.value,
-        selectable: hook.selectable,
-        truncateAndStripTimezone: truncateAndStripTimezone,
-      ),
-    ));
+}) => use(
+  _CalendarControllerHook<Set<DateTime>>(
+    value: initialSelections,
+    selectable: selectable,
+    debugLabel: 'useFDatesCalendarController',
+    create:
+        (hook) => FCalendarController.dates(
+          initialSelections: hook.value,
+          selectable: hook.selectable,
+          truncateAndStripTimezone: truncateAndStripTimezone,
+        ),
+  ),
+);
 
 /// Creates a [FCalendarController] that allows a single range to be selected to be selected and is automatically
 /// disposed.
@@ -103,17 +107,19 @@ FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
   bool Function(DateTime)? selectable,
   bool truncateAndStripTimezone = true,
   List<Object?>? keys,
-}) =>
-    use(_CalendarControllerHook<(DateTime, DateTime)?>(
-      value: initialSelection,
-      selectable: selectable,
-      debugLabel: 'useFRangeCalendarController',
-      create: (hook) => FCalendarController.range(
-        initialSelection: hook.value,
-        selectable: hook.selectable,
-        truncateAndStripTimezone: truncateAndStripTimezone,
-      ),
-    ));
+}) => use(
+  _CalendarControllerHook<(DateTime, DateTime)?>(
+    value: initialSelection,
+    selectable: selectable,
+    debugLabel: 'useFRangeCalendarController',
+    create:
+        (hook) => FCalendarController.range(
+          initialSelection: hook.value,
+          selectable: hook.selectable,
+          truncateAndStripTimezone: truncateAndStripTimezone,
+        ),
+  ),
+);
 
 class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
   final T value;
@@ -127,8 +133,8 @@ class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
     required String debugLabel,
     required _Create<T> create,
     super.keys,
-  })  : _create = create,
-        _debugLabel = debugLabel;
+  }) : _create = create,
+       _debugLabel = debugLabel;
 
   @override
   _CalendarControllerHookState<T> createState() => _CalendarControllerHookState<T>();

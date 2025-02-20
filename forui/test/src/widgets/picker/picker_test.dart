@@ -1,27 +1,21 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
   group('FPicker', () {
     Widget picker([FPickerController? controller]) => TestScaffold(
-          child: FPicker(
-            controller: controller,
-            children: [
-              for (var i = 0; i < (controller?.initialIndexes.length ?? 2); i++)
-                FPickerWheel(
-                  children: [
-                    Text('${i}A'),
-                    Text('${i}B'),
-                    Text('${i}C'),
-                  ],
-                ),
-            ],
-          ),
-        );
+      child: FPicker(
+        controller: controller,
+        children: [
+          for (var i = 0; i < (controller?.initialIndexes.length ?? 2); i++)
+            FPickerWheel(children: [Text('${i}A'), Text('${i}B'), Text('${i}C')]),
+        ],
+      ),
+    );
 
     testWidgets('different controller size', (tester) async {
       final initialController = FPickerController(initialIndexes: [1, 1]);
@@ -48,6 +42,22 @@ void main() {
 
       expect(newController.wheels[0].selectedItem, isNot(2));
       expect(newController.value[0], newController.wheels[0].selectedItem);
+    });
+
+    testWidgets('placeholders does not cause errors', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPicker(
+            children: [
+              FPickerWheel.builder(builder: (context, index) => const Text('a')),
+              const Text(':'),
+              FPickerWheel.builder(builder: (context, index) => const Text('b')),
+            ],
+          ),
+        ),
+      );
+
+      expect(tester.takeException(), null);
     });
 
     testWidgets('same controller size', (tester) async {

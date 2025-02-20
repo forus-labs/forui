@@ -5,6 +5,6 @@
   "barrierLabel": "スクリム",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "日付を選択",
-  "datePickerInvalidDateError": "日付が無効です。"
+  "dateFieldHint": "日付を選択",
+  "dateFieldInvalidDateError": "日付が無効です。"
 }

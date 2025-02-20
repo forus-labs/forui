@@ -9,22 +9,19 @@ FTooltipController useFTooltipController({
   TickerProvider? vsync,
   Duration animationDuration = const Duration(milliseconds: 100),
   List<Object?>? keys,
-}) =>
-    use(_TooltipControllerHook(
-      vsync: vsync ??= useSingleTickerProvider(keys: keys),
-      animationDuration: animationDuration,
-      keys: keys,
-    ));
+}) => use(
+  _TooltipControllerHook(
+    vsync: vsync ??= useSingleTickerProvider(keys: keys),
+    animationDuration: animationDuration,
+    keys: keys,
+  ),
+);
 
 class _TooltipControllerHook extends Hook<FTooltipController> {
   final TickerProvider vsync;
   final Duration animationDuration;
 
-  const _TooltipControllerHook({
-    required this.vsync,
-    required this.animationDuration,
-    super.keys,
-  });
+  const _TooltipControllerHook({required this.vsync, required this.animationDuration, super.keys});
 
   @override
   _TooltipControllerHookState createState() => _TooltipControllerHookState();

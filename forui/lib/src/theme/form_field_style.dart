@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'form_field_style.style.dart';
 
@@ -17,21 +18,12 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   final TextStyle descriptionTextStyle;
 
   /// Creates a [FFormFieldStyle].
-  const FFormFieldStyle({
-    required this.labelTextStyle,
-    required this.descriptionTextStyle,
-  });
+  const FFormFieldStyle({required this.labelTextStyle, required this.descriptionTextStyle});
 
   /// Creates a [FFormFieldStyle] that inherits its properties from the given [FTypography].
-  FFormFieldStyle.inherit({
-    required Color labelColor,
-    required Color descriptionColor,
-    required FTypography typography,
-  })  : labelTextStyle = typography.sm.copyWith(
-          color: labelColor,
-          fontWeight: FontWeight.w600,
-        ),
-        descriptionTextStyle = typography.sm.copyWith(color: descriptionColor);
+  FFormFieldStyle.inherit({required Color labelColor, required Color descriptionColor, required FTypography typography})
+    : labelTextStyle = typography.sm.copyWith(color: labelColor, fontWeight: FontWeight.w600),
+      descriptionTextStyle = typography.sm.copyWith(color: descriptionColor);
 }
 
 /// A form field's error style.
@@ -53,9 +45,6 @@ class FFormFieldErrorStyle extends FFormFieldStyle with _$FFormFieldErrorStyleFu
     required super.labelColor,
     required super.descriptionColor,
     required super.typography,
-  })  : errorTextStyle = typography.sm.copyWith(
-          color: errorColor,
-          fontWeight: FontWeight.w600,
-        ),
-        super.inherit();
+  }) : errorTextStyle = typography.sm.copyWith(color: errorColor, fontWeight: FontWeight.w600),
+       super.inherit();
 }

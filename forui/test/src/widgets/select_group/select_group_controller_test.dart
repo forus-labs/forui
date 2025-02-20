@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
 
 void main() {
@@ -37,9 +38,10 @@ void main() {
       (int, bool)? lastValue;
       void onUpdate((int, bool) value) => lastValue = value;
 
-      final controller = FRadioSelectGroupController<int>(onUpdate: onUpdate)
-        ..addListener(() => count++)
-        ..update(1, selected: true);
+      final controller =
+          FRadioSelectGroupController<int>(onUpdate: onUpdate)
+            ..addListener(() => count++)
+            ..update(1, selected: true);
 
       expect(controller.value, equals({1}));
       expect(lastValue, (1, true));
@@ -50,9 +52,10 @@ void main() {
       (int, bool)? lastValue;
       void onUpdate((int, bool) value) => lastValue = value;
 
-      final controller = FRadioSelectGroupController(value: 1, onUpdate: onUpdate)
-        ..addListener(() => count++)
-        ..update(1, selected: true);
+      final controller =
+          FRadioSelectGroupController(value: 1, onUpdate: onUpdate)
+            ..addListener(() => count++)
+            ..update(1, selected: true);
 
       expect(controller.value, equals({1}));
       expect(lastValue, null);
@@ -63,9 +66,10 @@ void main() {
       (int, bool)? lastValue;
       void onUpdate((int, bool) value) => lastValue = value;
 
-      final controller = FRadioSelectGroupController(value: 1, onUpdate: onUpdate)
-        ..addListener(() => count++)
-        ..update(1, selected: false);
+      final controller =
+          FRadioSelectGroupController(value: 1, onUpdate: onUpdate)
+            ..addListener(() => count++)
+            ..update(1, selected: false);
 
       expect(controller.value, equals({1}));
       expect(lastValue, null);
@@ -124,9 +128,10 @@ void main() {
       (int, bool)? lastValue;
       void onUpdate((int, bool) value) => lastValue = value;
 
-      final controller = FMultiSelectGroupController<int>(onUpdate: onUpdate)
-        ..addListener(() => count++)
-        ..update(1, selected: true);
+      final controller =
+          FMultiSelectGroupController<int>(onUpdate: onUpdate)
+            ..addListener(() => count++)
+            ..update(1, selected: true);
 
       expect(controller.value, equals({1}));
       expect(lastValue, (1, true));
@@ -137,9 +142,10 @@ void main() {
       (int, bool)? lastValue;
       void onUpdate((int, bool) value) => lastValue = value;
 
-      final controller = FMultiSelectGroupController(values: {1, 2}, onUpdate: onUpdate)
-        ..addListener(() => count++)
-        ..update(1, selected: false);
+      final controller =
+          FMultiSelectGroupController(values: {1, 2}, onUpdate: onUpdate)
+            ..addListener(() => count++)
+            ..update(1, selected: false);
 
       expect(controller.value, equals({2}));
       expect(lastValue, (1, false));
@@ -150,9 +156,10 @@ void main() {
       (int, bool)? lastValue;
       void onUpdate((int, bool) value) => lastValue = value;
 
-      final controller = FMultiSelectGroupController(max: 2, values: {1, 2}, onUpdate: onUpdate)
-        ..addListener(() => count++)
-        ..update(3, selected: true);
+      final controller =
+          FMultiSelectGroupController(max: 2, values: {1, 2}, onUpdate: onUpdate)
+            ..addListener(() => count++)
+            ..update(3, selected: true);
 
       expect(controller.value, equals({1, 2}));
       expect(lastValue, null);
@@ -163,9 +170,10 @@ void main() {
       (int, bool)? lastValue;
       void onUpdate((int, bool) value) => lastValue = value;
 
-      final controller = FMultiSelectGroupController(min: 2, values: {1, 2}, onUpdate: onUpdate)
-        ..addListener(() => count++)
-        ..update(1, selected: false);
+      final controller =
+          FMultiSelectGroupController(min: 2, values: {1, 2}, onUpdate: onUpdate)
+            ..addListener(() => count++)
+            ..update(1, selected: false);
 
       expect(controller.value, equals({1, 2}));
       expect(lastValue, null);

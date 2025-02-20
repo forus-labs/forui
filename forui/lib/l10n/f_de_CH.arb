@@ -2,6 +2,6 @@
   "dialogLabel": "Dialogfeld",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Datum auswählen",
-  "datePickerInvalidDateError": "Ungültiges Datum."
+  "dateFieldHint": "Datum auswählen",
+  "dateFieldInvalidDateError": "Ungültiges Datum."
 }

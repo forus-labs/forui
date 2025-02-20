@@ -5,6 +5,6 @@
   "barrierLabel": "تمويه",
   "shortDateSeparator": "‏/",
   "shortDateSuffix": "",
-  "datePickerHint": "اختر تاريخًا",
-  "datePickerInvalidDateError": "تاريخ غير صالح."
+  "dateFieldHint": "اختر تاريخًا",
+  "dateFieldInvalidDateError": "تاريخ غير صالح."
 }

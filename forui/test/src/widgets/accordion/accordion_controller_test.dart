@@ -2,6 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
 
 void main() {
@@ -128,10 +129,11 @@ void main() {
           ..duration = const Duration(milliseconds: 1)
           ..value = 1;
 
-        final controller = FAccordionController(min: 1, max: 1)
-          ..addListener(() => count++)
-          ..addItem(0, first)
-          ..addItem(1, second);
+        final controller =
+            FAccordionController(min: 1, max: 1)
+              ..addListener(() => count++)
+              ..addItem(0, first)
+              ..addItem(1, second);
 
         final future = controller.expand(0);
         await tester.pumpAndSettle();
@@ -176,9 +178,10 @@ void main() {
 
       test('under min', () async {
         first.value = 1;
-        final controller = FAccordionController(min: 1)
-          ..addListener(() => count++)
-          ..addItem(2, first);
+        final controller =
+            FAccordionController(min: 1)
+              ..addListener(() => count++)
+              ..addItem(2, first);
 
         expect(await controller.collapse(2), false);
         expect(first.value, 1);
@@ -201,13 +204,7 @@ void main() {
       });
     });
 
-    for (final (length, expected) in [
-      (-1, false),
-      (0, true),
-      (1, true),
-      (2, true),
-      (3, false),
-    ]) {
+    for (final (length, expected) in [(-1, false), (0, true), (1, true), (2, true), (3, false)]) {
       test('validate $length', () => expect(controller.validate(length), expected));
     }
 

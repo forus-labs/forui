@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'text_field_style.style.dart';
 
@@ -66,50 +67,43 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  FTextFieldStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-          keyboardAppearance: colorScheme.brightness,
-          labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-          enabledStyle: FTextFieldStateStyle.inherit(
-            contentColor: colorScheme.primary,
-            hintColor: colorScheme.mutedForeground,
-            focusedBorderColor: colorScheme.primary,
-            unfocusedBorderColor: colorScheme.border,
-            formFieldStyle: style.enabledFormFieldStyle,
-            typography: typography,
-            style: style,
-          ),
-          disabledStyle: FTextFieldStateStyle.inherit(
-            contentColor: colorScheme.disable(colorScheme.primary),
-            hintColor: colorScheme.disable(colorScheme.border),
-            focusedBorderColor: colorScheme.disable(colorScheme.border),
-            unfocusedBorderColor: colorScheme.disable(colorScheme.border),
-            formFieldStyle: style.disabledFormFieldStyle,
-            typography: typography,
-            style: style,
-          ),
-          errorStyle: FTextFieldErrorStyle.inherit(
-            contentColor: colorScheme.primary,
-            hintColor: colorScheme.mutedForeground,
-            focusedBorderColor: colorScheme.error,
-            unfocusedBorderColor: colorScheme.error,
-            formFieldErrorStyle: style.errorFormFieldStyle,
-            typography: typography,
-            style: style,
-          ),
-        );
+  FTextFieldStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+    : this(
+        keyboardAppearance: colorScheme.brightness,
+        labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
+        enabledStyle: FTextFieldStateStyle.inherit(
+          contentColor: colorScheme.primary,
+          hintColor: colorScheme.mutedForeground,
+          focusedBorderColor: colorScheme.primary,
+          unfocusedBorderColor: colorScheme.border,
+          formFieldStyle: style.enabledFormFieldStyle,
+          typography: typography,
+          style: style,
+        ),
+        disabledStyle: FTextFieldStateStyle.inherit(
+          contentColor: colorScheme.disable(colorScheme.primary),
+          hintColor: colorScheme.disable(colorScheme.border),
+          focusedBorderColor: colorScheme.disable(colorScheme.border),
+          unfocusedBorderColor: colorScheme.disable(colorScheme.border),
+          formFieldStyle: style.disabledFormFieldStyle,
+          typography: typography,
+          style: style,
+        ),
+        errorStyle: FTextFieldErrorStyle.inherit(
+          contentColor: colorScheme.primary,
+          hintColor: colorScheme.mutedForeground,
+          focusedBorderColor: colorScheme.error,
+          unfocusedBorderColor: colorScheme.error,
+          formFieldErrorStyle: style.errorFormFieldStyle,
+          typography: typography,
+          style: style,
+        ),
+      );
 
   /// The label style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
-        layout: labelLayoutStyle,
-        state: FLabelStateStyles(
-          enabledStyle: enabledStyle,
-          disabledStyle: disabledStyle,
-          errorStyle: errorStyle,
-        ),
-      );
+    layout: labelLayoutStyle,
+    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+  );
 }

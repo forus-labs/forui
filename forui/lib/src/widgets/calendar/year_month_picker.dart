@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/month/paged_month_picker.dart';
 import 'package:forui/src/widgets/calendar/year/paged_year_picker.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 part 'year_month_picker.style.dart';
 
@@ -48,7 +49,7 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
   bool _year = true;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext _) {
     if (_year) {
       return PagedYearPicker(
         style: widget.style,
@@ -104,22 +105,22 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable, _$FCalendarYearMo
 
   /// Creates a new year/month picker style that inherits the color scheme and typography.
   FCalendarYearMonthPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-      : this(
-          enabledStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.background,
-            textStyle: typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
-            hoveredBackgroundColor: colorScheme.secondary,
-            focusedBorderColor: colorScheme.foreground,
-            radius: const Radius.circular(8),
+    : this(
+        enabledStyle: FCalendarEntryStyle(
+          backgroundColor: colorScheme.background,
+          textStyle: typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
+          hoveredBackgroundColor: colorScheme.secondary,
+          focusedBorderColor: colorScheme.foreground,
+          radius: const Radius.circular(8),
+        ),
+        disabledStyle: FCalendarEntryStyle(
+          backgroundColor: colorScheme.background,
+          textStyle: typography.base.copyWith(
+            color: colorScheme.disable(colorScheme.mutedForeground),
+            fontWeight: FontWeight.w500,
           ),
-          disabledStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.background,
-            textStyle: typography.base.copyWith(
-              color: colorScheme.disable(colorScheme.mutedForeground),
-              fontWeight: FontWeight.w500,
-            ),
-            focusedBorderColor: colorScheme.background,
-            radius: const Radius.circular(8),
-          ),
-        );
+          focusedBorderColor: colorScheme.background,
+          radius: const Radius.circular(8),
+        ),
+      );
 }

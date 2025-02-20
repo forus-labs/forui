@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -15,13 +15,14 @@ void main() {
         TestScaffold(
           child: ValueListenableBuilder(
             valueListenable: type,
-            builder: (context, value, _) => FCalendar(
-              controller: controller,
-              start: DateTime(1900, 1, 8),
-              end: DateTime(2025, 7, 10),
-              initialType: value,
-              initialMonth: DateTime(2024, 7, 14),
-            ),
+            builder:
+                (context, value, _) => FCalendar(
+                  controller: controller,
+                  start: DateTime(1900, 1, 8),
+                  end: DateTime(2025, 7, 10),
+                  initialType: value,
+                  initialMonth: DateTime(2024, 7, 14),
+                ),
           ),
         ),
       );
@@ -41,12 +42,13 @@ void main() {
         TestScaffold(
           child: ValueListenableBuilder(
             valueListenable: controller,
-            builder: (context, value, _) => FCalendar(
-              controller: controller,
-              start: DateTime(1900, 1, 8),
-              end: DateTime(2025, 7, 10),
-              initialMonth: value,
-            ),
+            builder:
+                (context, value, _) => FCalendar(
+                  controller: controller,
+                  start: DateTime(1900, 1, 8),
+                  end: DateTime(2025, 7, 10),
+                  initialMonth: value,
+                ),
           ),
         ),
       );
@@ -163,10 +165,7 @@ void main() {
         );
       });
 
-      for (final (year, mmm, mmmm) in [
-        (2023, 'Feb', 'February'),
-        (2025, 'Aug', 'August'),
-      ]) {
+      for (final (year, mmm, mmmm) in [(2023, 'Feb', 'February'), (2025, 'Aug', 'August')]) {
         testWidgets('select $year $mmmm', (tester) async {
           await tester.pumpWidget(calendar);
 
@@ -198,10 +197,7 @@ void main() {
         expect(find.text('July 2026'), findsNothing);
       });
 
-      for (final (year, mmm, mmmm) in [
-        (2023, 'Jan', 'January'),
-        (2025, 'Sep', 'September'),
-      ]) {
+      for (final (year, mmm, mmmm) in [(2023, 'Jan', 'January'), (2025, 'Sep', 'September')]) {
         testWidgets('select $year $mmmm out of range', (tester) async {
           await tester.pumpWidget(calendar);
 
@@ -221,10 +217,7 @@ void main() {
         });
       }
 
-      for (final (year, month) in [
-        (2023, 'September'),
-        (2025, 'May'),
-      ]) {
+      for (final (year, month) in [(2023, 'September'), (2025, 'May')]) {
         testWidgets('select year where current month out of range', (tester) async {
           await tester.pumpWidget(
             TestScaffold(

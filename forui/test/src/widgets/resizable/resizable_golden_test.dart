@@ -4,8 +4,8 @@ library;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -20,17 +20,13 @@ void main() {
             children: [
               FResizableRegion(
                 initialExtent: 150,
-                builder: (_, __, child) => child!,
-                child: const Align(
-                  child: Text(''),
-                ),
+                builder: (_, _, child) => child!,
+                child: const Align(child: Text('')),
               ),
               FResizableRegion(
                 initialExtent: 300,
-                builder: (_, __, child) => child!,
-                child: const Align(
-                  child: Text(''),
-                ),
+                builder: (_, _, child) => child!,
+                child: const Align(child: Text('')),
               ),
             ],
           ),
@@ -49,9 +45,7 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: theme.data.colorScheme.border,
-                    ),
+                    border: Border.all(color: theme.data.colorScheme.border),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: FResizable(
@@ -61,17 +55,13 @@ void main() {
                     children: [
                       FResizableRegion(
                         initialExtent: 150,
-                        builder: (_, __, child) => child!,
-                        child: const Align(
-                          child: Text('A'),
-                        ),
+                        builder: (_, _, child) => child!,
+                        child: const Align(child: Text('A')),
                       ),
                       FResizableRegion(
                         initialExtent: 300,
-                        builder: (_, __, child) => child!,
-                        child: const Align(
-                          child: Text('B'),
-                        ),
+                        builder: (_, _, child) => child!,
+                        child: const Align(child: Text('B')),
                       ),
                     ],
                   ),
@@ -88,9 +78,7 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: theme.data.colorScheme.border,
-                    ),
+                    border: Border.all(color: theme.data.colorScheme.border),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: FResizable(
@@ -100,17 +88,13 @@ void main() {
                     children: [
                       FResizableRegion(
                         initialExtent: 150,
-                        builder: (_, __, child) => child!,
-                        child: const Align(
-                          child: Text('A'),
-                        ),
+                        builder: (_, _, child) => child!,
+                        child: const Align(child: Text('A')),
                       ),
                       FResizableRegion(
                         initialExtent: 300,
-                        builder: (_, __, child) => child!,
-                        child: const Align(
-                          child: Text('B'),
-                        ),
+                        builder: (_, _, child) => child!,
+                        child: const Align(child: Text('B')),
                       ),
                     ],
                   ),
@@ -131,9 +115,7 @@ void main() {
             child: FScaffold(
               content: DecoratedBox(
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: FThemes.zinc.light.colorScheme.border,
-                  ),
+                  border: Border.all(color: FThemes.zinc.light.colorScheme.border),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: FResizable(
@@ -141,17 +123,13 @@ void main() {
                   children: [
                     FResizableRegion(
                       initialExtent: 150,
-                      builder: (_, __, child) => child!,
-                      child: const Align(
-                        child: Text('A'),
-                      ),
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('A')),
                     ),
                     FResizableRegion(
                       initialExtent: 300,
-                      builder: (_, __, child) => child!,
-                      child: const Align(
-                        child: Text('B'),
-                      ),
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('B')),
                     ),
                   ],
                 ),

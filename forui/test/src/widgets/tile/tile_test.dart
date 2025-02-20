@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -12,11 +12,7 @@ void main() {
       var longPress = 0;
       await tester.pumpWidget(
         TestScaffold(
-          child: FTile(
-            title: const Text('Bluetooth'),
-            onPress: () => press++,
-            onLongPress: () => longPress++,
-          ),
+          child: FTile(title: const Text('Bluetooth'), onPress: () => press++, onLongPress: () => longPress++),
         ),
       );
 
@@ -52,13 +48,7 @@ void main() {
       var press = 0;
       var longPress = 0;
       await tester.pumpWidget(
-        TestScaffold(
-          child: FTile(
-            title: const Text('Lorem'),
-            onPress: () => press++,
-            onLongPress: () => longPress++,
-          ),
-        ),
+        TestScaffold(child: FTile(title: const Text('Lorem'), onPress: () => press++, onLongPress: () => longPress++)),
       );
 
       await tester.longPress(find.byType(FTile));

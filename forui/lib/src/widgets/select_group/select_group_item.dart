@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'select_group_item.style.dart';
 
 @internal
 class FSelectGroupItemData<T> extends InheritedWidget {
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
-    final FSelectGroupItemData<T>? result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
+    final result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
     assert(
       result != null,
       "No FSelectGroupItemData found in context. This likely because FSelectGroup's type parameter could not be inferred. "
@@ -45,12 +46,8 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 }
 
 /// A [FSelectGroupItem]'s state.
-typedef FSelectGroupItemState<T> = ({
-  FSelectGroupController<T> controller,
-  FSelectGroupStyle style,
-  T value,
-  bool selected
-});
+typedef FSelectGroupItemState<T> =
+    ({FSelectGroupController<T> controller, FSelectGroupStyle style, T value, bool selected});
 
 /// Represents a selection in a [FSelectGroup].
 abstract class FSelectGroupItem<T> extends StatelessWidget {
@@ -108,12 +105,7 @@ class _Builder<T> extends FSelectGroupItem<T> {
   final ValueWidgetBuilder<FSelectGroupItemState<T>> builder;
   final Widget? child;
 
-  const _Builder({
-    required this.builder,
-    required super.value,
-    this.child,
-    super.key,
-  }) : super._();
+  const _Builder({required this.builder, required super.value, this.child, super.key}) : super._();
 
   @override
   Widget build(BuildContext context) {
@@ -272,13 +264,13 @@ class FCheckboxSelectGroupStyle extends FCheckboxStyle with _$FCheckboxSelectGro
 
   /// Creates a [FCheckboxSelectGroupStyle] that inherits its properties from the given parameters.
   FCheckboxSelectGroupStyle.inherit({required FCheckboxStyle style})
-      : this(
-          labelLayoutStyle: style.labelLayoutStyle,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          enabledStyle: style.enabledStyle,
-          disabledStyle: style.disabledStyle,
-          errorStyle: style.errorStyle,
-        );
+    : this(
+        labelLayoutStyle: style.labelLayoutStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        enabledStyle: style.enabledStyle,
+        disabledStyle: style.disabledStyle,
+        errorStyle: style.errorStyle,
+      );
 }
 
 /// A [FSelectGroupItem.radio]'s style.
@@ -301,13 +293,13 @@ class FRadioSelectGroupStyle extends FRadioStyle with _$FRadioSelectGroupStyleFu
 
   /// Creates a [FRadioSelectGroupStyle] that inherits its properties from the given parameters.
   FRadioSelectGroupStyle.inherit({required FRadioStyle style})
-      : this(
-          animationDuration: style.animationDuration,
-          curve: style.curve,
-          labelLayoutStyle: style.labelLayoutStyle,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          enabledStyle: style.enabledStyle,
-          disabledStyle: style.disabledStyle,
-          errorStyle: style.errorStyle,
-        );
+    : this(
+        animationDuration: style.animationDuration,
+        curve: style.curve,
+        labelLayoutStyle: style.labelLayoutStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        enabledStyle: style.enabledStyle,
+        disabledStyle: style.disabledStyle,
+        errorStyle: style.errorStyle,
+      );
 }

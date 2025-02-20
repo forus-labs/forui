@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -14,10 +14,7 @@ void main() {
 
     test('setting value throws if length mismatch with wheels', () {
       final controller = FPickerController(initialIndexes: [0, 1]);
-      controller.wheels.addAll([
-        FixedExtentScrollController(),
-        FixedExtentScrollController(),
-      ]);
+      controller.wheels.addAll([FixedExtentScrollController(), FixedExtentScrollController()]);
 
       expect(() => controller.value = [1], throwsAssertionError);
       expect(() => controller.value = [1, 2, 3], throwsAssertionError);
@@ -31,12 +28,8 @@ void main() {
           child: FPicker(
             controller: controller,
             children: const [
-              FPickerWheel(
-                children: [Text('A1'), Text('A2'), Text('A3')],
-              ),
-              FPickerWheel(
-                children: [Text('B1'), Text('B2'), Text('B3')],
-              ),
+              FPickerWheel(children: [Text('A1'), Text('A2'), Text('A3')]),
+              FPickerWheel(children: [Text('B1'), Text('B2'), Text('B3')]),
             ],
           ),
         ),
@@ -57,12 +50,8 @@ void main() {
           child: FPicker(
             controller: controller,
             children: const [
-              FPickerWheel(
-                children: [Text('A1'), Text('A2'), Text('A3')],
-              ),
-              FPickerWheel(
-                children: [Text('B1'), Text('B2'), Text('B3')],
-              ),
+              FPickerWheel(children: [Text('A1'), Text('A2'), Text('A3')]),
+              FPickerWheel(children: [Text('B1'), Text('B2'), Text('B3')]),
             ],
           ),
         ),
@@ -77,10 +66,7 @@ void main() {
 
     test('dispose cleans up wheel controllers', () {
       final controller = FPickerController(initialIndexes: [0, 1]);
-      controller.wheels.addAll([
-        FixedExtentScrollController(),
-        FixedExtentScrollController(),
-      ]);
+      controller.wheels.addAll([FixedExtentScrollController(), FixedExtentScrollController()]);
 
       controller.dispose();
 

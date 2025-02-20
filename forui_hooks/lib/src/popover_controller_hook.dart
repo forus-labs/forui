@@ -9,22 +9,19 @@ FPopoverController useFPopoverController({
   TickerProvider? vsync,
   Duration animationDuration = const Duration(milliseconds: 100),
   List<Object?>? keys,
-}) =>
-    use(_PopoverControllerHook(
-      vsync: vsync ??= useSingleTickerProvider(keys: keys),
-      animationDuration: animationDuration,
-      keys: keys,
-    ));
+}) => use(
+  _PopoverControllerHook(
+    vsync: vsync ??= useSingleTickerProvider(keys: keys),
+    animationDuration: animationDuration,
+    keys: keys,
+  ),
+);
 
 class _PopoverControllerHook extends Hook<FPopoverController> {
   final TickerProvider vsync;
   final Duration animationDuration;
 
-  const _PopoverControllerHook({
-    required this.vsync,
-    required this.animationDuration,
-    super.keys,
-  });
+  const _PopoverControllerHook({required this.vsync, required this.animationDuration, super.keys});
 
   @override
   _PopoverControllerHookState createState() => _PopoverControllerHookState();

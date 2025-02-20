@@ -4,8 +4,8 @@ library;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -27,9 +27,7 @@ void main() {
               title: const Text('Bluetooth'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('Forus Labs (5G)'),
-              menu: [
-                FSelectTile(title: const Text('Menu'), value: 1),
-              ],
+              menu: [FSelectTile(title: const Text('Menu'), value: 1)],
             ),
           ),
         );
@@ -50,9 +48,7 @@ void main() {
               title: const Text('Bluetooth'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('Forus Labs (5G)'),
-              menu: [
-                FSelectTile(title: const Text('Menu'), value: 1),
-              ],
+              menu: [FSelectTile(title: const Text('Menu'), value: 1)],
             ),
           ),
         );
@@ -126,26 +122,11 @@ void main() {
               maxHeight: 150,
               title: const Text('Title'),
               menu: [
-                FSelectTile(
-                  title: const Text('Tile 1'),
-                  value: 1,
-                ),
-                FSelectTile(
-                  title: const Text('Tile 2'),
-                  value: 2,
-                ),
-                FSelectTile(
-                  title: const Text('Tile 3'),
-                  value: 3,
-                ),
-                FSelectTile(
-                  title: const Text('Tile 4'),
-                  value: 4,
-                ),
-                FSelectTile(
-                  title: const Text('Tile 5'),
-                  value: 4,
-                ),
+                FSelectTile(title: const Text('Tile 1'), value: 1),
+                FSelectTile(title: const Text('Tile 2'), value: 2),
+                FSelectTile(title: const Text('Tile 3'), value: 3),
+                FSelectTile(title: const Text('Tile 4'), value: 4),
+                FSelectTile(title: const Text('Tile 5'), value: 4),
               ],
             ),
           ),
@@ -262,8 +243,8 @@ void main() {
             maxHeight: 500,
             count: 24,
             title: const Text('Title'),
-            menuTileBuilder: (context, index) =>
-                index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
+            menuTileBuilder:
+                (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
           ),
         ),
       );

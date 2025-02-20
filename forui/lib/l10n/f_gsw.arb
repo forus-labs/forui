@@ -5,6 +5,6 @@
   "barrierLabel": "Gitter",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Datum uswähle",
-  "datePickerInvalidDateError": "Ungültigs Datum."
+  "dateFieldHint": "Datum uswähle",
+  "dateFieldInvalidDateError": "Ungültigs Datum."
 }

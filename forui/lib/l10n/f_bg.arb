@@ -5,6 +5,6 @@
   "barrierLabel": "Скрим",
   "shortDateSeparator": ".",
   "shortDateSuffix": " г.",
-  "datePickerHint": "Изберете дата",
-  "datePickerInvalidDateError": "Невалидна дата."
+  "dateFieldHint": "Изберете дата",
+  "dateFieldInvalidDateError": "Невалидна дата."
 }

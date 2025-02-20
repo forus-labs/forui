@@ -5,6 +5,6 @@
   "barrierLabel": "സ്ക്രിം",
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
-  "datePickerHint": "തീയതി തിരഞ്ഞെടുക്കുക",
-  "datePickerInvalidDateError": "അസാധുവായ തീയതി."
+  "dateFieldHint": "തീയതി തിരഞ്ഞെടുക്കുക",
+  "dateFieldInvalidDateError": "അസാധുവായ തീയതി."
 }

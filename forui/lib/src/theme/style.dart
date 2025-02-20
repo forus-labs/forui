@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'style.style.dart';
 
@@ -60,43 +61,32 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-    this.shadow = const [
-      BoxShadow(
-        color: Color(0x0d000000),
-        offset: Offset(0, 1),
-        blurRadius: 2,
-      ),
-    ],
+    this.shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
   });
 
   /// Creates an [FStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
-  FStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-  }) : this(
-          enabledFormFieldStyle: FFormFieldStyle.inherit(
-            labelColor: colorScheme.primary,
-            descriptionColor: colorScheme.mutedForeground,
-            typography: typography,
-          ),
-          disabledFormFieldStyle: FFormFieldStyle.inherit(
-            labelColor: colorScheme.disable(colorScheme.primary),
-            descriptionColor: colorScheme.disable(colorScheme.mutedForeground),
-            typography: typography,
-          ),
-          errorFormFieldStyle: FFormFieldErrorStyle.inherit(
-            labelColor: colorScheme.error,
-            descriptionColor: colorScheme.mutedForeground,
-            errorColor: colorScheme.error,
-            typography: typography,
-          ),
-          focusedOutlineStyle: FFocusedOutlineStyle(
-            color: colorScheme.primary,
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          iconStyle: FIconStyle(
-            color: colorScheme.primary,
-            size: 20,
-          ),
-        );
+  FStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+    : this(
+        enabledFormFieldStyle: FFormFieldStyle.inherit(
+          labelColor: colorScheme.primary,
+          descriptionColor: colorScheme.mutedForeground,
+          typography: typography,
+        ),
+        disabledFormFieldStyle: FFormFieldStyle.inherit(
+          labelColor: colorScheme.disable(colorScheme.primary),
+          descriptionColor: colorScheme.disable(colorScheme.mutedForeground),
+          typography: typography,
+        ),
+        errorFormFieldStyle: FFormFieldErrorStyle.inherit(
+          labelColor: colorScheme.error,
+          descriptionColor: colorScheme.mutedForeground,
+          errorColor: colorScheme.error,
+          typography: typography,
+        ),
+        focusedOutlineStyle: FFocusedOutlineStyle(
+          color: colorScheme.primary,
+          borderRadius: const BorderRadius.all(Radius.circular(8)),
+        ),
+        iconStyle: FIconStyle(color: colorScheme.primary, size: 20),
+      );
 }

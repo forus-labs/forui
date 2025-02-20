@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 @internal
 final class Content extends StatelessWidget {
@@ -23,26 +24,23 @@ final class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.avatarStyle;
-    final fallback = this.fallback ?? PlaceholderContent(style: style, size: size);
+    final fallback = this.fallback ?? PlaceholderContent(style: style ?? context.theme.avatarStyle, size: size);
 
     return Image(
       height: size,
       width: size,
       image: image,
       semanticLabel: semanticLabel,
-      errorBuilder: (context, _, __) => fallback,
-      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-        if (wasSynchronouslyLoaded) {
-          return child;
-        }
-
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          child: frame == null ? fallback : child,
-        );
-      },
-      loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : fallback,
+      errorBuilder: (_, _, _) => fallback,
+      frameBuilder:
+          (_, child, frame, wasSynchronouslyLoaded) =>
+              wasSynchronouslyLoaded
+                  ? child
+                  : AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: frame == null ? fallback : child,
+                  ),
+      loadingBuilder: (_, child, loadingProgress) => loadingProgress == null ? child : fallback,
       fit: BoxFit.cover,
     );
   }

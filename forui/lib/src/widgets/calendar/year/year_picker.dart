@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 @internal
 class YearPicker extends StatefulWidget {
@@ -70,28 +71,28 @@ class _YearPickerState extends State<YearPicker> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 5.0),
-        child: GridView(
-          padding: EdgeInsets.zero,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: YearPicker.columns,
-            mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
-            mainAxisSpacing: 5.0,
+    padding: const EdgeInsets.only(top: 5.0),
+    child: GridView(
+      padding: EdgeInsets.zero,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: YearPicker.columns,
+        mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
+        mainAxisSpacing: 5.0,
+      ),
+      children: [
+        for (var year = widget.startYear, i = 0; i < YearPicker.items; year = year.plus(years: 1), i++)
+          Entry.yearMonth(
+            style: widget.yearMonthStyle,
+            date: year,
+            focusNode: _years[i],
+            current: widget.today.year == year.year,
+            selectable: widget.start <= year && year <= widget.end,
+            format: (date) => (FLocalizations.of(context) ?? FDefaultLocalizations()).year(date.toNative()),
+            onPress: widget.onPress,
           ),
-          children: [
-            for (var year = widget.startYear, i = 0; i < YearPicker.items; year = year.plus(years: 1), i++)
-              Entry.yearMonth(
-                style: widget.yearMonthStyle,
-                date: year,
-                focusNode: _years[i],
-                current: widget.today.year == year.year,
-                selectable: widget.start <= year && year <= widget.end,
-                format: (date) => (FLocalizations.of(context) ?? FDefaultLocalizations()).year(date.toNative()),
-                onPress: widget.onPress,
-              ),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 
   @override
   void didUpdateWidget(YearPicker old) {

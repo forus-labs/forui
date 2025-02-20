@@ -6,8 +6,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -24,29 +24,10 @@ void main() {
             child: FPopoverMenu(
               popoverController: controller,
               menu: [
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Item 1'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Item 1'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
+                FTileGroup(children: [FTile(title: const Text('Item 1'), onPress: () {})]),
+                FTileGroup(children: [FTile(title: const Text('Item 1'), onPress: () {})]),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 50,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         );
@@ -61,29 +42,10 @@ void main() {
             child: FPopoverMenu(
               popoverController: controller,
               menu: [
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Group 1'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Group 2'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
+                FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+                FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 50,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         );
@@ -104,39 +66,19 @@ void main() {
               menu: [
                 FTileGroup(
                   children: [
-                    FTile(
-                      title: const Text('Group 1 - Tile 1'),
-                      onPress: () {},
-                    ),
-                    FTile(
-                      title: const Text('Group 1 - Tile 2'),
-                      onPress: () {},
-                    ),
+                    FTile(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                    FTile(title: const Text('Group 1 - Tile 2'), onPress: () {}),
                   ],
                 ),
                 FTileGroup(
                   children: [
-                    FTile(
-                      title: const Text('Group 2- Tile 1'),
-                      onPress: () {},
-                    ),
-                    FTile(
-                      title: const Text('Group 2 - Tile 2'),
-                      onPress: () {},
-                    ),
-                    FTile(
-                      title: const Text('Group 2 - Tile 3'),
-                      onPress: () {},
-                    ),
+                    FTile(title: const Text('Group 2- Tile 1'), onPress: () {}),
+                    FTile(title: const Text('Group 2 - Tile 2'), onPress: () {}),
+                    FTile(title: const Text('Group 2 - Tile 3'), onPress: () {}),
                   ],
                 ),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 50,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         );
@@ -158,29 +100,10 @@ void main() {
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
               popoverController: controller,
               menu: [
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Group 1'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Group 2'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
+                FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+                FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );
@@ -204,29 +127,10 @@ void main() {
               style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
               popoverController: controller,
               menu: [
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Group 1'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
-                FTileGroup(
-                  children: [
-                    FTile(
-                      title: const Text('Group 2'),
-                      onPress: () {},
-                    ),
-                  ],
-                ),
+                FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+                FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(
-                  dimension: 100,
-                ),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
         );

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'slider_mark.style.dart';
 
@@ -26,12 +27,8 @@ final class FSliderMark with Diagnosticable {
   final Widget? label;
 
   /// Creates a [FSliderMark] at the given percentage in a slider.
-  const FSliderMark({
-    required this.value,
-    this.style,
-    this.tick = true,
-    this.label,
-  }) : assert(0 <= value && value <= 1, 'offset must be between 0 and 1, but is $value.');
+  const FSliderMark({required this.value, this.style, this.tick = true, this.label})
+    : assert(0 <= value && value <= 1, 'offset must be between 0 and 1, but is $value.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

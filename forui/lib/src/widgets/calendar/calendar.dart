@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/day/paged_day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/header.dart';
 import 'package:forui/src/widgets/calendar/year_month_picker.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 part 'calendar.style.dart';
 
@@ -25,7 +26,7 @@ part 'calendar.style.dart';
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatefulWidget {
   /// The default day builder.
-  static Widget defaultDayBuilder(BuildContext context, FCalendarDayData data, Widget? child) => child!;
+  static Widget defaultDayBuilder(BuildContext _, FCalendarDayData data, Widget? child) => child!;
 
   /// The style. Defaults to [FThemeData.calendarStyle].
   final FCalendarStyle? style;
@@ -86,11 +87,11 @@ class FCalendar extends StatefulWidget {
     DateTime? today,
     DateTime? initialMonth,
     super.key,
-  })  : start = start ?? DateTime(1900),
-        end = end ?? DateTime(2100),
-        today = today ?? DateTime.now(),
-        _initialType = initialType,
-        _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
+  }) : start = start ?? DateTime(1900),
+       end = end ?? DateTime(2100),
+       today = today ?? DateTime.now(),
+       _initialType = initialType,
+       _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
     assert(this.start.toLocalDate() < this.end.toLocalDate(), 'end date must be greater than start date');
   }
 
@@ -139,44 +140,41 @@ class _State extends State<FCalendar> {
             children: [
               ValueListenableBuilder(
                 valueListenable: _month,
-                builder: (context, month, child) => Header(
-                  style: style.headerStyle,
-                  type: _type,
-                  month: month,
-                ),
+                builder: (_, month, _) => Header(style: style.headerStyle, type: _type, month: month),
               ),
               ValueListenableBuilder(
                 valueListenable: _type,
-                builder: (context, value, child) => switch (value) {
-                  FCalendarPickerType.day => PagedDayPicker(
-                      style: style,
-                      dayBuilder: widget.dayBuilder,
-                      start: widget.start.toLocalDate(),
-                      end: widget.end.toLocalDate(),
-                      today: widget.today.toLocalDate(),
-                      initial: _month.value,
-                      selectable: (date) => widget.controller.selectable(date.toNative()),
-                      selected: (date) => widget.controller.selected(date.toNative()),
-                      onMonthChange: (date) {
-                        _month.value = date;
-                        widget.onMonthChange?.call(date.toNative());
-                      },
-                      onPress: (date) {
-                        final native = date.toNative();
-                        widget.controller.select(native);
-                        widget.onPress?.call(native);
-                      },
-                      onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
-                    ),
-                  FCalendarPickerType.yearMonth => YearMonthPicker(
-                      style: style,
-                      start: widget.start.toLocalDate(),
-                      end: widget.end.toLocalDate(),
-                      today: widget.today.toLocalDate(),
-                      month: _month,
-                      type: _type,
-                    ),
-                },
+                builder:
+                    (_, value, _) => switch (value) {
+                      FCalendarPickerType.day => PagedDayPicker(
+                        style: style,
+                        dayBuilder: widget.dayBuilder,
+                        start: widget.start.toLocalDate(),
+                        end: widget.end.toLocalDate(),
+                        today: widget.today.toLocalDate(),
+                        initial: _month.value,
+                        selectable: (date) => widget.controller.selectable(date.toNative()),
+                        selected: (date) => widget.controller.selected(date.toNative()),
+                        onMonthChange: (date) {
+                          _month.value = date;
+                          widget.onMonthChange?.call(date.toNative());
+                        },
+                        onPress: (date) {
+                          final native = date.toNative();
+                          widget.controller.select(native);
+                          widget.onPress?.call(native);
+                        },
+                        onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
+                      ),
+                      FCalendarPickerType.yearMonth => YearMonthPicker(
+                        style: style,
+                        start: widget.start.toLocalDate(),
+                        end: widget.end.toLocalDate(),
+                        today: widget.today.toLocalDate(),
+                        month: _month,
+                        type: _type,
+                      ),
+                    },
               ),
             ],
           ),
@@ -223,18 +221,15 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   });
 
   /// Creates a [FCalendarStyle] that inherits the color scheme and typography.
-  FCalendarStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-          headerStyle: FCalendarHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-          dayPickerStyle: FCalendarDayPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
-          yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
-          decoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            border: Border.all(color: colorScheme.border),
-            color: colorScheme.background,
-          ),
-        );
+  FCalendarStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+    : this(
+        headerStyle: FCalendarHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        dayPickerStyle: FCalendarDayPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
+        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
+        decoration: BoxDecoration(
+          borderRadius: style.borderRadius,
+          border: Border.all(color: colorScheme.border),
+          color: colorScheme.background,
+        ),
+      );
 }

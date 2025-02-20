@@ -4,8 +4,8 @@ library;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
@@ -17,24 +17,12 @@ void main() {
             theme: theme.data,
             child: FScaffold(
               header: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.red),
-                      height: 100,
-                    ),
-                  ),
-                ],
+                children: [Expanded(child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100))],
               ),
               content: const Placeholder(),
               footer: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      height: 100,
-                    ),
-                  ),
+                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
                 ],
               ),
             ),
@@ -53,25 +41,27 @@ void main() {
                 children: [
                   Expanded(
                     child: Builder(
-                      builder: (context) => FButton.icon(
-                        child: FIcon(FAssets.icons.chevronRight),
-                        onPress: () {
-                          showFPersistentSheet(
-                            context: context,
-                            side: FLayout.ltr,
-                            draggable: false,
-                            builder: (context, controller) => Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: context.theme.colorScheme.primary),
-                                color: context.theme.colorScheme.background,
-                              ),
-                              child: const Center(child: Text('sheet')),
-                            ),
-                          );
-                        },
-                      ),
+                      builder:
+                          (context) => FButton.icon(
+                            child: FIcon(FAssets.icons.chevronRight),
+                            onPress: () {
+                              showFPersistentSheet(
+                                context: context,
+                                side: FLayout.ltr,
+                                draggable: false,
+                                builder:
+                                    (context, controller) => Container(
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: context.theme.colorScheme.primary),
+                                        color: context.theme.colorScheme.background,
+                                      ),
+                                      child: const Center(child: Text('sheet')),
+                                    ),
+                              );
+                            },
+                          ),
                     ),
                   ),
                 ],
@@ -79,12 +69,7 @@ void main() {
               content: const Placeholder(),
               footer: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      height: 100,
-                    ),
-                  ),
+                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
                 ],
               ),
             ),
@@ -105,15 +90,9 @@ void main() {
             theme: TestScaffold.themes[0].data,
             child: FScaffold(
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-              header: Container(
-                decoration: const BoxDecoration(color: Colors.red),
-                height: 100,
-              ),
+              header: Container(decoration: const BoxDecoration(color: Colors.red), height: 100),
               content: const Placeholder(),
-              footer: Container(
-                decoration: const BoxDecoration(color: Colors.green),
-                height: 100,
-              ),
+              footer: Container(decoration: const BoxDecoration(color: Colors.green), height: 100),
             ),
           ),
         );

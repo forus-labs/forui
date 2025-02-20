@@ -5,6 +5,6 @@
   "barrierLabel": "Skerm",
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
-  "datePickerHint": "Kies 'n datum",
-  "datePickerInvalidDateError": "Ongeldige datum."
+  "dateFieldHint": "Kies 'n datum",
+  "dateFieldInvalidDateError": "Ongeldige datum."
 }

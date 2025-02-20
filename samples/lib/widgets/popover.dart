@@ -17,28 +17,28 @@ class PopoverPage extends StatefulSample {
     @queryParam String hideOnTapOutside = 'anywhere',
     @queryParam String shift = 'flip',
     @queryParam super.theme,
-  })  : axis = switch (axis) {
-          'horizontal' => Axis.horizontal,
-          _ => Axis.vertical,
-        },
-        hideOnTapOutside = switch (hideOnTapOutside) {
-          'anywhere' => FHidePopoverRegion.anywhere,
-          'excludeTarget' => FHidePopoverRegion.excludeTarget,
-          _ => FHidePopoverRegion.none,
-        },
-        shift = switch (shift) {
-          'flip' => FPortalShift.flip,
-          'along' => FPortalShift.along,
-          _ => FPortalShift.none,
-        },
-        super(
-          alignment: switch (alignment) {
-            'topCenter' => Alignment.topCenter,
-            'bottomCenter' => Alignment.bottomCenter,
-            _ => Alignment.center,
-          },
-          maxHeight: 200,
-        );
+  }) : axis = switch (axis) {
+         'horizontal' => Axis.horizontal,
+         _ => Axis.vertical,
+       },
+       hideOnTapOutside = switch (hideOnTapOutside) {
+         'anywhere' => FHidePopoverRegion.anywhere,
+         'excludeTarget' => FHidePopoverRegion.excludeTarget,
+         _ => FHidePopoverRegion.none,
+       },
+       shift = switch (shift) {
+         'flip' => FPortalShift.flip,
+         'along' => FPortalShift.along,
+         _ => FPortalShift.none,
+       },
+       super(
+         alignment: switch (alignment) {
+           'topCenter' => Alignment.topCenter,
+           'bottomCenter' => Alignment.bottomCenter,
+           _ => Alignment.center,
+         },
+         maxHeight: 200,
+       );
 
   @override
   State<PopoverPage> createState() => _State();
@@ -55,16 +55,17 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
 
   @override
   Widget sample(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: 30),
-          FPopover(
-            controller: controller,
-            popoverAnchor: widget.axis == Axis.horizontal ? Alignment.topLeft : Alignment.topCenter,
-            childAnchor: widget.axis == Axis.horizontal ? Alignment.topRight : Alignment.bottomCenter,
-            hideOnTapOutside: widget.hideOnTapOutside,
-            shift: widget.shift,
-            popoverBuilder: (context, style, _) => Padding(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      const SizedBox(height: 30),
+      FPopover(
+        controller: controller,
+        popoverAnchor: widget.axis == Axis.horizontal ? Alignment.topLeft : Alignment.topCenter,
+        childAnchor: widget.axis == Axis.horizontal ? Alignment.topRight : Alignment.bottomCenter,
+        hideOnTapOutside: widget.hideOnTapOutside,
+        shift: widget.shift,
+        popoverBuilder:
+            (context, style, _) => Padding(
               padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
               child: SizedBox(
                 width: 288,
@@ -100,16 +101,12 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
                 ),
               ),
             ),
-            child: IntrinsicWidth(
-              child: FButton(
-                style: FButtonStyle.outline,
-                onPress: controller.toggle,
-                label: const Text('Open popover'),
-              ),
-            ),
-          ),
-        ],
-      );
+        child: IntrinsicWidth(
+          child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, label: const Text('Open popover')),
+        ),
+      ),
+    ],
+  );
 
   @override
   void dispose() {

@@ -71,26 +71,23 @@ final class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
 
   /// Creates a [FTabsStyle] that inherits its properties from [colorScheme].
   FTabsStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          decoration: BoxDecoration(
-            border: Border.all(color: colorScheme.muted),
-            borderRadius: style.borderRadius,
-            color: colorScheme.muted,
-          ),
-          selectedLabelTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w500,
-            fontFamily: typography.defaultFontFamily,
-            color: colorScheme.foreground,
-          ),
-          unselectedLabelTextStyle: typography.sm.copyWith(
-            fontWeight: FontWeight.w500,
-            fontFamily: typography.defaultFontFamily,
-            color: colorScheme.mutedForeground,
-          ),
-          indicatorDecoration: BoxDecoration(
-            color: colorScheme.background,
-            borderRadius: style.borderRadius,
-          ),
-          focusedOutlineStyle: style.focusedOutlineStyle,
-        );
+    : this(
+        decoration: BoxDecoration(
+          border: Border.all(color: colorScheme.muted),
+          borderRadius: style.borderRadius,
+          color: colorScheme.muted,
+        ),
+        selectedLabelTextStyle: typography.sm.copyWith(
+          fontWeight: FontWeight.w500,
+          fontFamily: typography.defaultFontFamily,
+          color: colorScheme.foreground,
+        ),
+        unselectedLabelTextStyle: typography.sm.copyWith(
+          fontWeight: FontWeight.w500,
+          fontFamily: typography.defaultFontFamily,
+          color: colorScheme.mutedForeground,
+        ),
+        indicatorDecoration: BoxDecoration(color: colorScheme.background, borderRadius: style.borderRadius),
+        focusedOutlineStyle: style.focusedOutlineStyle,
+      );
 }

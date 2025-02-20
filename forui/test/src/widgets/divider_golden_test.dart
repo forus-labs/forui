@@ -4,8 +4,8 @@ library;
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
@@ -13,10 +13,7 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FDivider(
-            style: TestScaffold.blueScreen.dividerStyles.verticalStyle,
-            axis: Axis.vertical,
-          ),
+          child: FDivider(style: TestScaffold.blueScreen.dividerStyles.verticalStyle, axis: Axis.vertical),
         ),
       );
 
@@ -49,15 +46,10 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: axis == Axis.vertical
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: children,
-                    )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: children,
-                    ),
+              child:
+                  axis == Axis.vertical
+                      ? Row(mainAxisAlignment: MainAxisAlignment.center, children: children)
+                      : Column(mainAxisAlignment: MainAxisAlignment.center, children: children),
             ),
           );
 

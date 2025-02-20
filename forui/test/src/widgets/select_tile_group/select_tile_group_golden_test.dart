@@ -5,8 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -165,26 +165,11 @@ void main() {
                 maxHeight: 150,
                 divider: divider,
                 children: [
-                  FSelectTile(
-                    title: const Text('Tile 1'),
-                    value: 1,
-                  ),
-                  FSelectTile(
-                    title: const Text('Tile 2'),
-                    value: 2,
-                  ),
-                  FSelectTile(
-                    title: const Text('Tile 3'),
-                    value: 3,
-                  ),
-                  FSelectTile(
-                    title: const Text('Tile 4'),
-                    value: 4,
-                  ),
-                  FSelectTile(
-                    title: const Text('Tile 5'),
-                    value: 4,
-                  ),
+                  FSelectTile(title: const Text('Tile 1'), value: 1),
+                  FSelectTile(title: const Text('Tile 2'), value: 2),
+                  FSelectTile(title: const Text('Tile 3'), value: 3),
+                  FSelectTile(title: const Text('Tile 4'), value: 4),
+                  FSelectTile(title: const Text('Tile 5'), value: 4),
                 ],
               ),
             ),
@@ -348,11 +333,7 @@ void main() {
             theme: theme.data,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FSelectTileGroup(
-                groupController: controller,
-                label: const Text('Network'),
-                children: const [],
-              ),
+              child: FSelectTileGroup(groupController: controller, label: const Text('Network'), children: const []),
             ),
           ),
         );
@@ -455,10 +436,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select-tile-group/group/builder/lazy.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/builder/lazy.png'));
     });
 
     testWidgets('limited by count', (tester) async {

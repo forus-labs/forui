@@ -1,8 +1,9 @@
 import 'dart:collection';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/slider_selection.dart';
-import 'package:meta/meta.dart';
 
 /// Possible ways for a user to interact with a slider.
 enum FSliderInteraction {
@@ -45,18 +46,16 @@ abstract class FSliderController extends FChangeNotifier {
     this.allowedInteraction = FSliderInteraction.tapAndSlideThumb,
     bool tooltips = true,
     bool minExtendable = false,
-  })  : tooltips = FSliderTooltipsController(enabled: tooltips),
-        extendable = (min: minExtendable, max: !minExtendable),
-        _initialSelection = selection;
+  }) : tooltips = FSliderTooltipsController(enabled: tooltips),
+       extendable = (min: minExtendable, max: !minExtendable),
+       _initialSelection = selection;
 
   /// Creates a [FSliderController] for selecting a range.
-  FSliderController.range({
-    required FSliderSelection selection,
-    bool tooltips = true,
-  })  : tooltips = FSliderTooltipsController(enabled: tooltips),
-        allowedInteraction = FSliderInteraction.tapAndSlideThumb,
-        extendable = (min: true, max: true),
-        _initialSelection = selection;
+  FSliderController.range({required FSliderSelection selection, bool tooltips = true})
+    : tooltips = FSliderTooltipsController(enabled: tooltips),
+      allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+      extendable = (min: true, max: true),
+      _initialSelection = selection;
 
   /// Registers the controller to a slider with the given extent and marks.
   ///
@@ -153,12 +152,9 @@ class FContinuousSliderController extends FSliderController {
   }) : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.');
 
   /// Creates a [FContinuousSliderController] for selecting a range.
-  FContinuousSliderController.range({
-    required super.selection,
-    this.stepPercentage = 0.05,
-    super.tooltips = true,
-  })  : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
-        super.range();
+  FContinuousSliderController.range({required super.selection, this.stepPercentage = 0.05, super.tooltips = true})
+    : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
+      super.range();
 
   @override
   @internal
@@ -201,10 +197,7 @@ class FDiscreteSliderController extends FSliderController {
   });
 
   /// Creates a [FDiscreteSliderController] for selecting a range.
-  FDiscreteSliderController.range({
-    required super.selection,
-    super.tooltips = true,
-  }) : super.range();
+  FDiscreteSliderController.range({required super.selection, super.tooltips = true}) : super.range();
 
   @override
   @internal
@@ -227,10 +220,10 @@ class FDiscreteSliderController extends FSliderController {
 
   @override
   void reset() {
-    if (_selection case final DiscreteSelection selection?) {
-      this.selection = DiscreteSelection(
-        ticks: selection.ticks,
-        mainAxisExtent: selection.rawExtent.total,
+    if (_selection case final DiscreteSelection discrete?) {
+      selection = DiscreteSelection(
+        ticks: discrete.ticks,
+        mainAxisExtent: discrete.rawExtent.total,
         extent: _initialSelection.extent,
         offset: _initialSelection.offset,
       );

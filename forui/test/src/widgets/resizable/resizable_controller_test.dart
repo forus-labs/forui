@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 import 'package:sugar/collection.dart';
+
+import 'package:forui/forui.dart';
 
 void main() {
   late FResizableController controller;
@@ -25,18 +26,17 @@ void main() {
 
   group('_ResizableController', () {
     setUp(() {
-      controller = FResizableController(
-        onResizeUpdate: (regions) => resizeUpdate = regions,
-        onResizeEnd: (regions) => resizeEnd = regions,
-      )
-        ..addListener(() => count++)
-        ..regions.addAll([top, middle, bottom]);
+      controller =
+          FResizableController(
+              onResizeUpdate: (regions) => resizeUpdate = regions,
+              onResizeEnd: (regions) => resizeEnd = regions,
+            )
+            ..addListener(() => count++)
+            ..regions.addAll([top, middle, bottom]);
     });
 
-    for (final (i, (offset, topOffsets, middleOffsets, maximized)) in [
-      (-100.0, (0, 10), (10, 40), false),
-      (100.0, (0, 30), (30, 40), false),
-    ].indexed) {
+    for (final (i, (offset, topOffsets, middleOffsets, maximized))
+        in [(-100.0, (0, 10), (10, 40), false), (100.0, (0, 30), (30, 40), false)].indexed) {
       test('[$i] update(...) direction', () {
         expect(controller.update(0, 1, offset), maximized);
 
@@ -65,19 +65,21 @@ void main() {
 
   group('_CascadeController', () {
     setUp(() {
-      controller = FResizableController.cascade(
-        onResizeUpdate: (regions) => resizeUpdate = regions,
-        onResizeEnd: (regions) => resizeEnd = regions,
-      )
-        ..addListener(() => count++)
-        ..regions.addAll([top, middle, bottom]);
+      controller =
+          FResizableController.cascade(
+              onResizeUpdate: (regions) => resizeUpdate = regions,
+              onResizeEnd: (regions) => resizeEnd = regions,
+            )
+            ..addListener(() => count++)
+            ..regions.addAll([top, middle, bottom]);
     });
 
-    for (final (i, (offset, topOffset, middleOffset, bottomOffset, length)) in [
-      (-100.0, (0, 10), (10, 40), (40, 60), 2),
-      (100.0, (0, 40), (40, 50), (50, 60), 3),
-      (1.0, (0, 27), (27, 40), (40, 60), 2),
-    ].indexed) {
+    for (final (i, (offset, topOffset, middleOffset, bottomOffset, length))
+        in [
+          (-100.0, (0, 10), (10, 40), (40, 60), 2),
+          (100.0, (0, 40), (40, 50), (50, 60), 3),
+          (1.0, (0, 27), (27, 40), (40, 60), 2),
+        ].indexed) {
       test('[$i] update(...) direction', () {
         controller
           ..update(0, 1, offset)

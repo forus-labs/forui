@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -14,16 +14,7 @@ void main() {
         TestScaffold(
           child: FSelectTileGroup(
             groupController: controller,
-            children: [
-              FSelectTile(
-                title: const Text('1'),
-                value: 1,
-              ),
-              FSelectTile(
-                title: const Text('2'),
-                value: 2,
-              ),
-            ],
+            children: [FSelectTile(title: const Text('1'), value: 1), FSelectTile(title: const Text('2'), value: 2)],
           ),
         ),
       );
@@ -43,14 +34,8 @@ void main() {
           child: FSelectTileGroup(
             groupController: controller,
             children: [
-              FSelectTile.suffix(
-                title: const Text('1'),
-                value: 1,
-              ),
-              FSelectTile.suffix(
-                title: const Text('2'),
-                value: 2,
-              ),
+              FSelectTile.suffix(title: const Text('1'), value: 1),
+              FSelectTile.suffix(title: const Text('2'), value: 2),
             ],
           ),
         ),
@@ -71,14 +56,8 @@ void main() {
           child: FSelectTileGroup(
             groupController: controller,
             children: [
-              FSelectTile.suffix(
-                title: const Text('1'),
-                value: 1,
-              ),
-              FSelectTile.suffix(
-                title: const Text('2'),
-                value: 2,
-              ),
+              FSelectTile.suffix(title: const Text('1'), value: 1),
+              FSelectTile.suffix(title: const Text('2'), value: 2),
             ],
           ),
         ),
@@ -101,14 +80,8 @@ void main() {
             autovalidateMode: AutovalidateMode.always,
             validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
             children: [
-              FSelectTile.suffix(
-                title: const Text('1'),
-                value: 1,
-              ),
-              FSelectTile.suffix(
-                title: const Text('2'),
-                value: 2,
-              ),
+              FSelectTile.suffix(title: const Text('1'), value: 1),
+              FSelectTile.suffix(title: const Text('2'), value: 2),
             ],
           ),
         ),
@@ -131,27 +104,12 @@ void main() {
         TestScaffold(
           child: FTileGroup.merge(
             children: [
-              FTileGroup(
-                children: [
-                  FTile(
-                    title: const Text('A'),
-                  ),
-                  FTile(
-                    title: const Text('B'),
-                  ),
-                ],
-              ),
+              FTileGroup(children: [FTile(title: const Text('A')), FTile(title: const Text('B'))]),
               FSelectTileGroup(
                 groupController: controller,
                 children: [
-                  FSelectTile(
-                    title: const Text('1'),
-                    value: 1,
-                  ),
-                  FSelectTile(
-                    title: const Text('2'),
-                    value: 2,
-                  ),
+                  FSelectTile(title: const Text('1'), value: 1),
+                  FSelectTile(title: const Text('2'), value: 2),
                 ],
               ),
             ],

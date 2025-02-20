@@ -5,6 +5,6 @@
   "barrierLabel": "Маска",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
-  "datePickerHint": "Выберите дату",
-  "datePickerInvalidDateError": "Недействительная дата."
+  "dateFieldHint": "Выберите дату",
+  "dateFieldInvalidDateError": "Недействительная дата."
 }

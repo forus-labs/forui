@@ -1,3 +1,5 @@
+// ignore: unused_import
+
 import 'package:intl/intl.dart' as intl;
 
 import 'localizations.dart';
@@ -63,10 +65,10 @@ class FLocalizationsEs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Cuadro de diálogo';
@@ -94,10 +96,10 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -125,10 +127,10 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -156,10 +158,10 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -187,10 +189,10 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -218,10 +220,10 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -249,10 +251,10 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -280,10 +282,10 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -311,10 +313,10 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -342,10 +344,10 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -373,10 +375,10 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -404,10 +406,10 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -435,10 +437,10 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -466,10 +468,10 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -497,10 +499,10 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -528,10 +530,10 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -559,10 +561,10 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -590,10 +592,10 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -621,10 +623,10 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -652,10 +654,10 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';
@@ -683,10 +685,10 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
-  String get datePickerHint => 'Seleccionar fecha';
+  String get dateFieldHint => 'Seleccionar fecha';
 
   @override
-  String get datePickerInvalidDateError => 'Fecha no válida.';
+  String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
   String get dialogLabel => 'Diálogo';

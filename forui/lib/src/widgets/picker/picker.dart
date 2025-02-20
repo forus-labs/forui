@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A picker's controller.
 ///
@@ -71,7 +72,7 @@ class FPickerController extends FValueNotifier<List<int>> {
 /// * https://forui.dev/docs/form/picker for working examples.
 /// * [FPickerController] for controlling a picker.
 /// * [FPickerWheel] for customizing a picker's individual wheel.
-/// * [FDatePickerStyle] for customizing a picker's appearance.
+/// * [FPickerStyle] for customizing a picker's appearance.
 class FPicker extends StatefulWidget {
   /// The controller.
   final FPickerController? controller;
@@ -87,12 +88,7 @@ class FPicker extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.
-  const FPicker({
-    required this.children,
-    this.controller,
-    this.style,
-    super.key,
-  });
+  const FPicker({required this.children, this.controller, this.style, super.key});
 
   @override
   State<FPicker> createState() => _FPickerState();
@@ -130,7 +126,9 @@ class _FPickerState extends State<FPicker> {
   }
 
   void _createController() {
-    _controller = widget.controller ?? FPickerController(initialIndexes: List.filled(widget.children.length, 0));
+    _controller =
+        widget.controller ??
+        FPickerController(initialIndexes: List.filled(widget.children.whereType<FPickerWheel>().length, 0));
 
     for (final wheel in _controller.wheels) {
       wheel.dispose();
@@ -165,19 +163,16 @@ class _FPickerState extends State<FPicker> {
       children: [
         Container(
           height: selectionExtent,
-          decoration: BoxDecoration(
-            color: style.selectionColor,
-            borderRadius: style.selectionBorderRadius,
-          ),
+          decoration: BoxDecoration(color: style.selectionColor, borderRadius: style.selectionBorderRadius),
         ),
         // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
         NotificationListener<ScrollMetricsNotification>(
-          onNotification: (notification) {
+          onNotification: (_) {
             _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
             return false;
           },
           child: NotificationListener<ScrollEndNotification>(
-            onNotification: (notification) {
+            onNotification: (_) {
               _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
               return false;
             },
@@ -187,12 +182,8 @@ class _FPickerState extends State<FPicker> {
               spacing: style.spacing,
               children: [
                 for (final child in widget.children)
-                  if (child is FPickerWheel)
-                    PickerData(
-                      controller: _controller.wheels[wheelIndex++],
-                      style: style,
-                      child: child,
-                    )
+                  if (child is FPickerWheelMixin)
+                    PickerData(controller: _controller.wheels[wheelIndex++], style: style, child: child)
                   else
                     Center(
                       child: DefaultTextStyle.merge(
@@ -229,12 +220,7 @@ class PickerData extends InheritedWidget {
   final FixedExtentScrollController controller;
   final FPickerStyle style;
 
-  const PickerData({
-    required this.controller,
-    required this.style,
-    required super.child,
-    super.key,
-  });
+  const PickerData({required this.controller, required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(PickerData old) => controller != old.controller || style != old.style;

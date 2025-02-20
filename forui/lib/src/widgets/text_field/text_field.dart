@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/text_field/field.dart';
 
@@ -13,13 +14,14 @@ import 'package:forui/src/widgets/text_field/field.dart';
 /// [currentLength] represents the length of the textfield's input.
 /// [maxLength] represents the maximum length of the textfield's input.
 /// [focused] represents whether the textfield is currently focused.
-typedef FTextFieldCounterBuilder = Widget? Function(
-  BuildContext context,
-  int currentLength,
-  int? maxLength,
-  // ignore: avoid_positional_boolean_parameters
-  bool focused,
-);
+typedef FTextFieldCounterBuilder =
+    Widget? Function(
+      BuildContext context,
+      int currentLength,
+      int? maxLength,
+      // ignore: avoid_positional_boolean_parameters
+      bool focused,
+    );
 
 /// A text field.
 ///
@@ -451,10 +453,20 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// See [TextField.restorationId] for more information.
   final String? restorationId;
 
-  /// Whether iOS 14 Scribble features are enabled for this  Defaults to true.
+  /// Whether this input supports stylus handwriting, where the user can write directly on top of a field.
   ///
-  /// Only available on iPads.
-  final bool scribbleEnabled;
+  /// Currently only the following devices are supported:
+  ///
+  ///  * iPads running iOS 14 and above using an Apple Pencil.
+  ///  * Android devices running API 34 and above and using an active stylus.
+  ///
+  /// On Android, Scribe gestures are detected outside of [EditableText], typically by
+  /// [TextSelectionGestureDetectorBuilder]. This is handled automatically in [FTextField].
+  ///
+  /// See also:
+  ///   * [ScribbleClient], which can be mixed into an arbitrary widget to provide iOS Scribble functionality.
+  ///   * [Scribe], which can be used to interact with Android Scribe directly.
+  final bool stylusHandwritingEnabled;
 
   /// Whether to enable that the IME update personalized data such as typing history and user dictionary data.
   ///
@@ -581,7 +593,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.scrollController,
     this.autofillHints,
     this.restorationId,
-    this.scribbleEnabled = true,
+    this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
@@ -647,7 +659,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.scrollController,
     this.autofillHints = const [AutofillHints.email],
     this.restorationId,
-    this.scribbleEnabled = true,
+    this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
@@ -716,7 +728,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.scrollController,
     this.autofillHints = const [AutofillHints.password],
     this.restorationId,
-    this.scribbleEnabled = true,
+    this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
@@ -786,7 +798,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.scrollController,
     this.autofillHints,
     this.restorationId,
-    this.scribbleEnabled = true,
+    this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
     this.contextMenuBuilder = _contextMenuBuilder,
@@ -823,13 +835,9 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
             ),
           ),
           child: CupertinoTheme(
-            // We cannot use Theme.cupertinoOverrideTheme because of https://github.com/flutter/flutter/issues/161573.
+            // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
             data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
-            child: Field(
-              parent: this,
-              style: style,
-              key: key,
-            ),
+            child: Field(parent: this, style: style, key: key),
           ),
         ),
       ),
@@ -838,14 +846,14 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
     return materialLocalizations == null
         ? Localizations(
-            locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-            delegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            child: textFormField,
-          )
+          locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+          delegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          child: textFormField,
+        )
         : textFormField;
   }
 
@@ -899,7 +907,9 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(IterableProperty('autofillHints', autofillHints))
       ..add(StringProperty('restorationId', restorationId))
-      ..add(FlagProperty('scribbleEnabled', value: scribbleEnabled, ifTrue: 'scribbleEnabled'))
+      ..add(
+        FlagProperty('stylusHandwritingEnabled', value: stylusHandwritingEnabled, ifTrue: 'stylusHandwritingEnabled'),
+      )
       ..add(
         FlagProperty(
           'enableIMEPersonalizedLearning',

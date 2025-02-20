@@ -3,9 +3,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_group/select_group_item.dart';
-import 'package:meta/meta.dart';
 
 part 'select_group.style.dart';
 
@@ -56,36 +57,36 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     super.autovalidateMode,
     super.key,
   }) : super(
-          builder: (field) {
-            final state = field as _State;
-            final groupStyle = style ?? state.context.theme.selectGroupStyle;
-            final (labelState, error) = switch (state.errorText) {
-              _ when !enabled => (FLabelState.disabled, null),
-              final text? => (FLabelState.error, errorBuilder(state.context, text)),
-              null => (FLabelState.enabled, null),
-            };
+         builder: (field) {
+           final state = field as _State;
+           final groupStyle = style ?? state.context.theme.selectGroupStyle;
+           final (labelState, error) = switch (state.errorText) {
+             _ when !enabled => (FLabelState.disabled, null),
+             final text? => (FLabelState.error, errorBuilder(state.context, text)),
+             null => (FLabelState.enabled, null),
+           };
 
-            return FLabel(
-              axis: Axis.vertical,
-              state: labelState,
-              style: groupStyle.labelStyle,
-              label: label,
-              description: description,
-              error: error,
-              child: Column(
-                children: [
-                  for (final child in items)
-                    FSelectGroupItemData<T>(
-                      controller: controller,
-                      style: groupStyle,
-                      selected: controller.contains(child.value),
-                      child: child,
-                    ),
-                ],
-              ),
-            );
-          },
-        );
+           return FLabel(
+             axis: Axis.vertical,
+             state: labelState,
+             style: groupStyle.labelStyle,
+             label: label,
+             description: description,
+             error: error,
+             child: Column(
+               children: [
+                 for (final child in items)
+                   FSelectGroupItemData<T>(
+                     controller: controller,
+                     style: groupStyle,
+                     selected: controller.contains(child.value),
+                     child: child,
+                   ),
+               ],
+             ),
+           );
+         },
+       );
 
   @override
   FormFieldState<Set<T>> createState() => _State();
@@ -195,96 +196,73 @@ class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  }) =>
-      FSelectGroupStyle(
-        labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-        enabledStyle: FSelectGroupStateStyle(
-          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-        ),
-        disabledStyle: FSelectGroupStateStyle(
-          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-        ),
-        errorStyle: FSelectGroupErrorStyle(
-          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-        ),
-        checkboxStyle: FCheckboxSelectGroupStyle.inherit(
-          style: FCheckboxStyle.inherit(colorScheme: colorScheme, style: style).transform(
-            (style) => style.copyWith(
-              enabledStyle: style.enabledStyle.copyWith(
-                labelTextStyle: typography.sm.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-                descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-              ),
-              disabledStyle: style.disabledStyle.copyWith(
-                labelTextStyle: typography.sm.copyWith(
-                  color: colorScheme.disable(colorScheme.primary),
-                  fontWeight: FontWeight.w500,
-                ),
-                descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
-              ),
-              errorStyle: style.errorStyle.copyWith(
-                labelTextStyle: typography.sm.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-                descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-                errorTextStyle: typography.sm.copyWith(
-                  color: colorScheme.error,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+  }) => FSelectGroupStyle(
+    labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
+    enabledStyle: FSelectGroupStateStyle(
+      labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+    ),
+    disabledStyle: FSelectGroupStateStyle(
+      labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+    ),
+    errorStyle: FSelectGroupErrorStyle(
+      labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+    ),
+    checkboxStyle: FCheckboxSelectGroupStyle.inherit(
+      style: FCheckboxStyle.inherit(colorScheme: colorScheme, style: style).transform(
+        (style) => style.copyWith(
+          enabledStyle: style.enabledStyle.copyWith(
+            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
+            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          ),
+          disabledStyle: style.disabledStyle.copyWith(
+            labelTextStyle: typography.sm.copyWith(
+              color: colorScheme.disable(colorScheme.primary),
+              fontWeight: FontWeight.w500,
             ),
+            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
+          ),
+          errorStyle: style.errorStyle.copyWith(
+            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
+            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+            errorTextStyle: typography.sm.copyWith(color: colorScheme.error, fontWeight: FontWeight.w500),
           ),
         ),
-        radioStyle: FRadioSelectGroupStyle.inherit(
-          style: FRadioStyle.inherit(colorScheme: colorScheme, style: style).transform(
-            (style) => style.copyWith(
-              enabledStyle: style.enabledStyle.copyWith(
-                labelTextStyle: typography.sm.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-                descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-              ),
-              disabledStyle: style.disabledStyle.copyWith(
-                labelTextStyle: typography.sm.copyWith(
-                  color: colorScheme.disable(colorScheme.primary),
-                  fontWeight: FontWeight.w500,
-                ),
-                descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
-              ),
-              errorStyle: style.errorStyle.copyWith(
-                labelTextStyle: typography.sm.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w500,
-                ),
-                descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-                errorTextStyle: typography.sm.copyWith(
-                  color: colorScheme.error,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+      ),
+    ),
+    radioStyle: FRadioSelectGroupStyle.inherit(
+      style: FRadioStyle.inherit(colorScheme: colorScheme, style: style).transform(
+        (style) => style.copyWith(
+          enabledStyle: style.enabledStyle.copyWith(
+            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
+            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+          ),
+          disabledStyle: style.disabledStyle.copyWith(
+            labelTextStyle: typography.sm.copyWith(
+              color: colorScheme.disable(colorScheme.primary),
+              fontWeight: FontWeight.w500,
             ),
+            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
+          ),
+          errorStyle: style.errorStyle.copyWith(
+            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
+            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
+            errorTextStyle: typography.sm.copyWith(color: colorScheme.error, fontWeight: FontWeight.w500),
           ),
         ),
-      );
+      ),
+    ),
+  );
 
   /// The [FLabel]'s style.
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
-        layout: labelLayoutStyle,
-        state: FLabelStateStyles(
-          enabledStyle: enabledStyle,
-          disabledStyle: disabledStyle,
-          errorStyle: errorStyle,
-        ),
-      );
+    layout: labelLayoutStyle,
+    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+  );
 }
 
 /// [FSelectGroup]'s state style.
