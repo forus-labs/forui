@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
@@ -183,12 +184,9 @@ final class FThemeData with Diagnosticable, FTransformable {
       alertStyles: alertStyles ?? FAlertStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colorScheme: colorScheme, typography: typography),
       badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      bottomNavigationBarStyle: bottomNavigationBarStyle ??
-          FBottomNavigationBarStyle.inherit(
-            colorScheme: colorScheme,
-            typography: typography,
-            style: style,
-          ),
+      bottomNavigationBarStyle:
+          bottomNavigationBarStyle ??
+          FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       breadcrumbStyle: breadcrumbStyle ?? FBreadcrumbStyle.inherit(colorScheme: colorScheme, typography: typography),
       buttonStyles:
           buttonStyles ?? FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -202,7 +200,8 @@ final class FThemeData with Diagnosticable, FTransformable {
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       headerStyle: headerStyle ?? FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
-      lineCalendarStyle: lineCalendarStyle ??
+      lineCalendarStyle:
+          lineCalendarStyle ??
           FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       paginationStyle:
           paginationStyle ?? FPaginationStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -216,7 +215,8 @@ final class FThemeData with Diagnosticable, FTransformable {
       scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
       selectGroupStyle:
           selectGroupStyle ?? FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      selectMenuTileStyle: selectMenuTileStyle ??
+      selectMenuTileStyle:
+          selectMenuTileStyle ??
           FSelectMenuTileStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(colorScheme: colorScheme),
       sliderStyles:
@@ -353,45 +353,44 @@ final class FThemeData with Diagnosticable, FTransformable {
     FTextFieldStyle? textFieldStyle,
     FTileGroupStyle? tileGroupStyle,
     FTooltipStyle? tooltipStyle,
-  }) =>
-      FThemeData(
-        colorScheme: colorScheme,
-        typography: typography,
-        style: style,
-        accordionStyle: accordionStyle ?? this.accordionStyle,
-        alertStyles: alertStyles ?? this.alertStyles,
-        avatarStyle: avatarStyle ?? this.avatarStyle,
-        badgeStyles: badgeStyles ?? this.badgeStyles,
-        bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
-        breadcrumbStyle: breadcrumbStyle ?? this.breadcrumbStyle,
-        buttonStyles: buttonStyles ?? this.buttonStyles,
-        calendarStyle: calendarStyle ?? this.calendarStyle,
-        cardStyle: cardStyle ?? this.cardStyle,
-        checkboxStyle: checkboxStyle ?? this.checkboxStyle,
-        datePickerStyle: datePickerStyle ?? this.datePickerStyle,
-        dialogStyle: dialogStyle ?? this.dialogStyle,
-        dividerStyles: dividerStyles ?? this.dividerStyles,
-        headerStyle: headerStyle ?? this.headerStyle,
-        labelStyles: labelStyles ?? this.labelStyles,
-        lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
-        paginationStyle: paginationStyle ?? this.paginationStyle,
-        pickerStyle: pickerStyle ?? this.pickerStyle,
-        popoverStyle: popoverStyle ?? this.popoverStyle,
-        popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
-        progressStyle: progressStyle ?? this.progressStyle,
-        radioStyle: radioStyle ?? this.radioStyle,
-        resizableStyle: resizableStyle ?? this.resizableStyle,
-        scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
-        selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
-        selectMenuTileStyle: selectMenuTileStyle ?? this.selectMenuTileStyle,
-        sheetStyle: sheetStyle ?? this.sheetStyle,
-        sliderStyles: sliderStyles ?? this.sliderStyles,
-        switchStyle: switchStyle ?? this.switchStyle,
-        tabsStyle: tabsStyle ?? this.tabsStyle,
-        textFieldStyle: textFieldStyle ?? this.textFieldStyle,
-        tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
-        tooltipStyle: tooltipStyle ?? this.tooltipStyle,
-      );
+  }) => FThemeData(
+    colorScheme: colorScheme,
+    typography: typography,
+    style: style,
+    accordionStyle: accordionStyle ?? this.accordionStyle,
+    alertStyles: alertStyles ?? this.alertStyles,
+    avatarStyle: avatarStyle ?? this.avatarStyle,
+    badgeStyles: badgeStyles ?? this.badgeStyles,
+    bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
+    breadcrumbStyle: breadcrumbStyle ?? this.breadcrumbStyle,
+    buttonStyles: buttonStyles ?? this.buttonStyles,
+    calendarStyle: calendarStyle ?? this.calendarStyle,
+    cardStyle: cardStyle ?? this.cardStyle,
+    checkboxStyle: checkboxStyle ?? this.checkboxStyle,
+    datePickerStyle: datePickerStyle ?? this.datePickerStyle,
+    dialogStyle: dialogStyle ?? this.dialogStyle,
+    dividerStyles: dividerStyles ?? this.dividerStyles,
+    headerStyle: headerStyle ?? this.headerStyle,
+    labelStyles: labelStyles ?? this.labelStyles,
+    lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
+    paginationStyle: paginationStyle ?? this.paginationStyle,
+    pickerStyle: pickerStyle ?? this.pickerStyle,
+    popoverStyle: popoverStyle ?? this.popoverStyle,
+    popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
+    progressStyle: progressStyle ?? this.progressStyle,
+    radioStyle: radioStyle ?? this.radioStyle,
+    resizableStyle: resizableStyle ?? this.resizableStyle,
+    scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
+    selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
+    selectMenuTileStyle: selectMenuTileStyle ?? this.selectMenuTileStyle,
+    sheetStyle: sheetStyle ?? this.sheetStyle,
+    sliderStyles: sliderStyles ?? this.sliderStyles,
+    switchStyle: switchStyle ?? this.switchStyle,
+    tabsStyle: tabsStyle ?? this.tabsStyle,
+    textFieldStyle: textFieldStyle ?? this.textFieldStyle,
+    tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
+    tooltipStyle: tooltipStyle ?? this.tooltipStyle,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

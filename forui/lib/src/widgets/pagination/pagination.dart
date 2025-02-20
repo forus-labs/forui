@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A pagination enables the user to select a specific page from a range of pages.
 ///
@@ -28,13 +29,7 @@ final class FPagination extends StatefulWidget {
   final Widget? next;
 
   /// Creates an [FPagination].
-  const FPagination({
-    required this.controller,
-    this.style,
-    this.previous,
-    this.next,
-    super.key,
-  });
+  const FPagination({required this.controller, this.style, this.previous, this.next, super.key});
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -85,10 +80,7 @@ class _FPaginationState extends State<FPagination> {
         decoration: style.unselectedDecoration,
         child: ConstrainedBox(
           constraints: style.contentConstraints,
-          child: DefaultTextStyle(
-            style: style.unselectedTextStyle,
-            child: const Center(child: Text('...')),
-          ),
+          child: DefaultTextStyle(style: style.unselectedTextStyle, child: const Center(child: Text('...'))),
         ),
       ),
     );
@@ -101,30 +93,15 @@ class _FPaginationState extends State<FPagination> {
         previous,
         if (controller.value > controller.minPagesDisplayedAtEdges + 1) ...[
           if (controller.showEdges)
-            FPaginationItemData(
-              page: 1,
-              style: style,
-              controller: controller,
-              child: const _Page(),
-            ),
+            FPaginationItemData(page: 1, style: style, controller: controller, child: const _Page()),
           elipsis,
         ],
         for (int i = range.$1; i <= range.$2; i++)
-          FPaginationItemData(
-            page: i,
-            style: style,
-            controller: controller,
-            child: const _Page(),
-          ),
+          FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
         if (controller.value < (controller.length - controller.minPagesDisplayedAtEdges)) ...[
           elipsis,
           if (controller.showEdges)
-            FPaginationItemData(
-              page: controller.length,
-              style: style,
-              controller: controller,
-              child: const _Page(),
-            ),
+            FPaginationItemData(page: controller.length, style: style, controller: controller, child: const _Page()),
         ],
         next,
       ],
@@ -173,56 +150,35 @@ class Action extends StatelessWidget {
   final FPaginationStyle style;
   final Widget child;
 
-  const Action({
-    required this.onPress,
-    required this.style,
-    required this.child,
-    super.key,
-  });
+  const Action({required this.onPress, required this.style, required this.child, super.key});
 
-  Action.previous({
-    required this.style,
-    required this.onPress,
-    super.key,
-  }) : child = FIcon(
-          FAssets.icons.chevronLeft,
-          color: style.iconStyle.color,
-          size: style.iconStyle.size,
-        );
+  Action.previous({required this.style, required this.onPress, super.key})
+    : child = FIcon(FAssets.icons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size);
 
-  Action.next({
-    required this.onPress,
-    required this.style,
-    super.key,
-  }) : child = FIcon(
-          FAssets.icons.chevronRight,
-          color: style.iconStyle.color,
-          size: style.iconStyle.size,
-        );
+  Action.next({required this.onPress, required this.style, super.key})
+    : child = FIcon(FAssets.icons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size);
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: style.itemPadding,
-        child: FTappable(
-          semanticLabel: 'Pagination action',
-          focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
-          onPress: onPress,
-          builder: (context, tappableData, child) => DecoratedBox(
+    padding: style.itemPadding,
+    child: FTappable(
+      semanticLabel: 'Pagination action',
+      focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
+      onPress: onPress,
+      builder:
+          (context, tappableData, child) => DecoratedBox(
             decoration: switch (tappableData.hovered) {
               (false) => style.unselectedDecoration,
               (true) => style.hoveredDecoration,
             },
             child: ConstrainedBox(
               constraints: style.contentConstraints,
-              child: DefaultTextStyle(
-                style: style.unselectedTextStyle,
-                child: Center(child: child!),
-              ),
+              child: DefaultTextStyle(style: style.unselectedTextStyle, child: Center(child: child!)),
             ),
           ),
-          child: child,
-        ),
-      );
+      child: child,
+    ),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -251,21 +207,22 @@ class _Page extends StatelessWidget {
           return FTappable(
             focusedOutlineStyle: focusedOutlineStyle,
             onPress: () => controller.value = pageNumber,
-            builder: (context, tappableData, child) => DecoratedBox(
-              decoration: switch ((selected, tappableData.hovered)) {
-                (false, false) => style.unselectedDecoration,
-                (false, true) => style.hoveredDecoration,
-                (true, true) => style.selectedHoveredDecoration,
-                (true, false) => style.selectedDecoration,
-              },
-              child: ConstrainedBox(
-                constraints: style.contentConstraints,
-                child: DefaultTextStyle(
-                  style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
-                  child: child!,
+            builder:
+                (context, tappableData, child) => DecoratedBox(
+                  decoration: switch ((selected, tappableData.hovered)) {
+                    (false, false) => style.unselectedDecoration,
+                    (false, true) => style.hoveredDecoration,
+                    (true, true) => style.selectedHoveredDecoration,
+                    (true, false) => style.selectedDecoration,
+                  },
+                  child: ConstrainedBox(
+                    constraints: style.contentConstraints,
+                    child: DefaultTextStyle(
+                      style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
+                      child: child!,
+                    ),
+                  ),
                 ),
-              ),
-            ),
             child: Center(child: Text('$pageNumber')),
           );
         },

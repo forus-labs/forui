@@ -4,8 +4,8 @@ library;
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -26,10 +26,7 @@ void main() {
     for (final theme in TestScaffold.themes) {
       testWidgets('default', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 10)),
-          ),
+          TestScaffold(theme: theme.data, child: FPagination(controller: FPaginationController(length: 10))),
         );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/default.png'));
@@ -46,10 +43,7 @@ void main() {
         await tester.tap(find.text('4'));
         await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('pagination/${theme.name}/hide-edges.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/hide-edges.png'));
       });
 
       testWidgets('siblings = 0', (tester) async {
@@ -62,10 +56,7 @@ void main() {
         await tester.tap(find.byType(Action).last);
         await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('pagination/${theme.name}/siblings-zero.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/siblings-zero.png'));
       });
 
       testWidgets('siblings = 2', (tester) async {
@@ -78,10 +69,7 @@ void main() {
         await tester.tap(find.text('7'));
         await tester.pumpAndSettle(const Duration(milliseconds: 500));
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('pagination/${theme.name}/siblings-two.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/siblings-two.png'));
       });
 
       testWidgets('custom icon', (tester) async {
@@ -99,10 +87,7 @@ void main() {
                   child: FButton.icon(
                     style: FButtonStyle.ghost,
                     onPress: controller.next,
-                    child: FIconStyleData(
-                      style: style.iconStyle,
-                      child: FIcon(FAssets.icons.bird),
-                    ),
+                    child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.bird)),
                   ),
                 ),
               ),
@@ -113,10 +98,7 @@ void main() {
                   child: FButton.icon(
                     style: FButtonStyle.ghost,
                     onPress: controller.previous,
-                    child: FIconStyleData(
-                      style: style.iconStyle,
-                      child: FIcon(FAssets.icons.anchor),
-                    ),
+                    child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.anchor)),
                   ),
                 ),
               ),

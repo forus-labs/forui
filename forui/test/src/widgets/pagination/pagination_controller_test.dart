@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
 
 void main() {
@@ -84,10 +85,7 @@ void main() {
       (14, 3, 5),
     ]) {
       test('minPagesDisplayedAtEdges', () {
-        final controller = FPaginationController(
-          length: length,
-          siblings: siblingLength,
-        );
+        final controller = FPaginationController(length: length, siblings: siblingLength);
         expect(controller.minPagesDisplayedAtEdges, expected);
       });
     }

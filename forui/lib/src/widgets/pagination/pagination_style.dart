@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'pagination_style.style.dart';
 
@@ -62,27 +63,18 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
 
   /// Creates a [FPaginationStyle] that inherits its properties from [colorScheme], [typography], and [style].
   FPaginationStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-      : this(
-          selectedDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.primary,
-          ),
-          unselectedDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.background,
-          ),
-          hoveredDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.border,
-          ),
-          selectedHoveredDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colorScheme.hover(colorScheme.primary),
-          ),
-          unselectedTextStyle: typography.sm.copyWith(color: colorScheme.primary),
-          selectedTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
-          iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
-        );
+    : this(
+        selectedDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
+        unselectedDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.background),
+        hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.border),
+        selectedHoveredDecoration: BoxDecoration(
+          borderRadius: style.borderRadius,
+          color: colorScheme.hover(colorScheme.primary),
+        ),
+        unselectedTextStyle: typography.sm.copyWith(color: colorScheme.primary),
+        selectedTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+        iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
+      );
 
   /// Returns a copy of this [FPaginationStyle] with the given properties replaced.
   @override
@@ -98,18 +90,17 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     EdgeInsets? contentPadding,
     EdgeInsets? itemPadding,
     BoxConstraints? contentConstraints,
-  }) =>
-      FPaginationStyle(
-        selectedDecoration: selectedDecoration ?? this.selectedDecoration,
-        unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
-        hoveredDecoration: hoveredDecoration ?? this.hoveredDecoration,
-        selectedHoveredDecoration: selectedHoveredDecoration ?? this.selectedHoveredDecoration,
-        unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
-        selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
-        iconStyle: iconStyle ?? this.iconStyle,
-        itemPadding: itemPadding ?? this.itemPadding,
-        contentConstraints: contentConstraints ?? this.contentConstraints,
-      );
+  }) => FPaginationStyle(
+    selectedDecoration: selectedDecoration ?? this.selectedDecoration,
+    unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
+    hoveredDecoration: hoveredDecoration ?? this.hoveredDecoration,
+    selectedHoveredDecoration: selectedHoveredDecoration ?? this.selectedHoveredDecoration,
+    unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
+    selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
+    iconStyle: iconStyle ?? this.iconStyle,
+    itemPadding: itemPadding ?? this.itemPadding,
+    contentConstraints: contentConstraints ?? this.contentConstraints,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

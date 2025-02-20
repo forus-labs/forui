@@ -1,5 +1,6 @@
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A controller that controls which page is selected.
 // TODO: Extend PageController
@@ -39,13 +40,13 @@ class FPaginationController extends FValueNotifier<int> {
     // super.onAttach,
     this.showEdges = true,
     this.siblings = 1,
-  })  : assert(0 < length, 'The total length of pages should be more than 0, but is $length.'),
-        assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
-        assert(
-          1 <= page && page <= length,
-          'The initial value must be greater than or equal to 1 and less than or equal to length.',
-        ),
-        super(page);
+  }) : assert(0 < length, 'The total length of pages should be more than 0, but is $length.'),
+       assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
+       assert(
+         1 <= page && page <= length,
+         'The initial value must be greater than or equal to 1 and less than or equal to length.',
+       ),
+       super(page);
 
   /// Moves to the previous page if the current page is greater than 1.
   void previous() {
@@ -79,21 +80,23 @@ class FPaginationController extends FValueNotifier<int> {
       return (1, length);
     }
 
-    final rangeStart = value - siblings < 1
-        ? 1
-        : value > (length - minPagesDisplayedAtEdges)
+    final rangeStart =
+        value - siblings < 1
+            ? 1
+            : value > (length - minPagesDisplayedAtEdges)
             ? (length - minPagesDisplayedAtEdges) - siblings
             : value <= minPagesDisplayedAtEdges + 1
-                ? 1
-                : value - siblings;
+            ? 1
+            : value - siblings;
 
-    final rangeEnd = value + siblings > length
-        ? length
-        : value < minPagesDisplayedAtEdges + 1
+    final rangeEnd =
+        value + siblings > length
+            ? length
+            : value < minPagesDisplayedAtEdges + 1
             ? minPagesDisplayedAtEdges + 1 + siblings
             : value >= (length - minPagesDisplayedAtEdges)
-                ? length
-                : value + siblings;
+            ? length
+            : value + siblings;
 
     return (rangeStart, rangeEnd);
   }
