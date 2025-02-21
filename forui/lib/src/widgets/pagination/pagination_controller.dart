@@ -1,10 +1,8 @@
+import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
-import 'package:forui/forui.dart';
-
 /// A controller that controls which page is selected.
-// TODO: Extend PageController
-class FPaginationController extends FValueNotifier<int> {
+class FPaginationController extends PageController {
   /// The total number of pages.
   ///
   /// # Contract:
@@ -29,43 +27,62 @@ class FPaginationController extends FValueNotifier<int> {
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
   final bool showEdges;
 
+  int _value;
+
   /// Creates a [FPaginationController].
   ///
   /// # Contract:
   /// * Throws [AssertionError] if 1 <= [page] and [page] <= length.
   FPaginationController({
     required this.length,
-    int page = 1,
-    // super.onDetach,
-    // super.onAttach,
+    int page = 0,
     this.showEdges = true,
     this.siblings = 1,
-  }) : assert(0 < length, 'The total length of pages should be more than 0, but is $length.'),
+    super.onDetach,
+    super.onAttach,
+    super.keepPage,
+    super.viewportFraction,
+  }) : assert(0 < length, ''
+      'The total length of pages should be more than 0, but is $length.'),
        assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
        assert(
-         1 <= page && page <= length,
-         'The initial value must be greater than or equal to 1 and less than or equal to length.',
+         0 <= page && page <= length,
+         'The initial page must be greater than or equal to 0 and less than or equal to length.',
        ),
-       super(page);
+       _value = page,
+       super(initialPage: page);
 
   /// Moves to the previous page if the current page is greater than 1.
   void previous() {
-    if (1 < value) {
-      value = value - 1;
+    final value = page?.round() ?? _value;
+    if (0 < value) {
+      _value = value - 1;
+      //TODO: should the user be given the option to specify the duration and curve? how to handle this?
+      super.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      notifyListeners();
     }
   }
 
   /// Moves to the next page if the current page is less than the total number of pages.
   void next() {
-    if (value < length) {
-      value = value + 1;
+    final value = page?.round() ?? _value;
+    if (value < length - 1) {
+      _value = value + 1;
+      //TODO: should the user be given the option to specify the duration and curve? how to handle this?
+      super.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      notifyListeners();
     }
   }
 
-  @override
-  set value(int newValue) {
-    if (1 <= newValue && newValue <= length) {
-      super.value = newValue;
+  /// Returns the current page index.
+  int get value => _value;
+
+  /// Sets the current page index.
+  set value(int index) {
+    if (0 <= index && index <= length) {
+      _value = index;
+      super.jumpToPage(index);
+      notifyListeners();
     } else {
       throw StateError('The index must be within the allowed range.');
     }
@@ -76,27 +93,27 @@ class FPaginationController extends FValueNotifier<int> {
   /// Returns a tuple of the start and end page numbers by centering the range around the current page,
   /// ensuring a balanced display of sibling pages on either side while considering pagination constraints.
   (int, int) calculateSiblingRange() {
+    final last = length - 1;
     if (length <= minPagesDisplayedAtEdges) {
-      return (1, length);
+      return (0, last);
     }
-
     final rangeStart =
-        value - siblings < 1
-            ? 1
-            : value > (length - minPagesDisplayedAtEdges)
-            ? (length - minPagesDisplayedAtEdges) - siblings
-            : value <= minPagesDisplayedAtEdges + 1
-            ? 1
-            : value - siblings;
+        _value - siblings < 0
+            ? 0
+            : _value > (last - minPagesDisplayedAtEdges)
+            ? (last - minPagesDisplayedAtEdges) - siblings
+            : _value <= minPagesDisplayedAtEdges
+            ? 0
+            : _value - siblings;
 
     final rangeEnd =
-        value + siblings > length
-            ? length
-            : value < minPagesDisplayedAtEdges + 1
-            ? minPagesDisplayedAtEdges + 1 + siblings
-            : value >= (length - minPagesDisplayedAtEdges)
-            ? length
-            : value + siblings;
+        _value + siblings > last
+            ? last
+            : _value < minPagesDisplayedAtEdges + 1
+            ? minPagesDisplayedAtEdges + siblings
+            : _value >= (last - minPagesDisplayedAtEdges)
+            ? last
+            : _value + siblings;
 
     return (rangeStart, rangeEnd);
   }

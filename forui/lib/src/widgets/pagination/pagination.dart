@@ -73,6 +73,7 @@ class _FPaginationState extends State<FPagination> {
     final style = widget.style ?? context.theme.paginationStyle;
     final previous = widget.previous ?? Action.previous(style: style, onPress: controller.previous);
     final next = widget.next ?? Action.next(style: style, onPress: controller.next);
+    final lastPage = controller.length - 1;
 
     final elipsis = Padding(
       padding: style.itemPadding,
@@ -91,17 +92,22 @@ class _FPaginationState extends State<FPagination> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         previous,
-        if (controller.value > controller.minPagesDisplayedAtEdges + 1) ...[
+        if (controller.value > controller.minPagesDisplayedAtEdges) ...[
           if (controller.showEdges)
-            FPaginationItemData(page: 1, style: style, controller: controller, child: const _Page()),
+            FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
           elipsis,
         ],
         for (int i = range.$1; i <= range.$2; i++)
           FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
-        if (controller.value < (controller.length - controller.minPagesDisplayedAtEdges)) ...[
+        if (controller.value < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
           elipsis,
           if (controller.showEdges)
-            FPaginationItemData(page: controller.length, style: style, controller: controller, child: const _Page()),
+            FPaginationItemData(
+              page: lastPage,
+              style: style,
+              controller: controller,
+              child: const _Page(),
+            ),
         ],
         next,
       ],
@@ -194,19 +200,19 @@ class _Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FPaginationItemData(page: pageNumber, :controller, style: style) = FPaginationItemData.of(context);
+    final FPaginationItemData(:page, :controller, :style) = FPaginationItemData.of(context);
 
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
     return Padding(
       padding: style.itemPadding,
-      child: ValueListenableBuilder(
-        valueListenable: controller,
-        builder: (context, value, __) {
-          final selected = pageNumber == value;
+      child: ListenableBuilder(
+        listenable: controller,
+        builder: (context, _) {
+          final selected = controller.value == page;
           return FTappable(
             focusedOutlineStyle: focusedOutlineStyle,
-            onPress: () => controller.value = pageNumber,
+            onPress: () => controller.value = page,
             builder:
                 (context, tappableData, child) => DecoratedBox(
                   decoration: switch ((selected, tappableData.hovered)) {
@@ -223,7 +229,7 @@ class _Page extends StatelessWidget {
                     ),
                   ),
                 ),
-            child: Center(child: Text('$pageNumber')),
+            child: Center(child: Text('${page + 1}')),
           );
         },
       ),
