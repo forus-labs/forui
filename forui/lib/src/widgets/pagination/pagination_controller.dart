@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 /// A controller that controls which page is selected.
@@ -42,8 +43,11 @@ class FPaginationController extends PageController {
     super.onAttach,
     super.keepPage,
     super.viewportFraction,
-  }) : assert(0 < length, ''
-      'The total length of pages should be more than 0, but is $length.'),
+  }) : assert(
+         0 < length,
+         ''
+         'The total length of pages should be more than 0, but is $length.',
+       ),
        assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
        assert(
          0 <= page && page <= length,
