@@ -9,61 +9,44 @@ import 'package:forui_samples/sample.dart';
 class PaginationPage extends Sample {
   final FPaginationController controller;
 
-  PaginationPage({
-    @queryParam super.theme,
-    @queryParam super.maxWidth = 400,
-  }) : controller = FPaginationController(length: 10);
+  PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
+    : controller = FPaginationController(length: 10);
 
   @override
-  Widget sample(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [FPagination(controller: controller)],
-      );
+  Widget sample(BuildContext context) =>
+      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: controller)]);
 }
 
 @RoutePage()
 class PaginationSiblingsPage extends Sample {
   final FPaginationController controller;
 
-  PaginationSiblingsPage({
-    @queryParam super.theme,
-    @queryParam super.maxWidth = 500,
-  }) : controller = FPaginationController(
-          length: 20,
-          siblings: 2,
-          page: 10,
-        );
+  PaginationSiblingsPage({@queryParam super.theme, @queryParam super.maxWidth = 500})
+    : controller = FPaginationController(length: 20, siblings: 2, page: 10);
 
   @override
-  Widget sample(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [FPagination(controller: controller)],
-      );
+  Widget sample(BuildContext context) =>
+      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: controller)]);
 }
 
 @RoutePage()
 class PaginationHideFirstLastPage extends Sample {
   final FPaginationController controller;
 
-  PaginationHideFirstLastPage({
-    @queryParam super.theme,
-  }) : controller = FPaginationController(length: 8, showEdges: false);
+  PaginationHideFirstLastPage({@queryParam super.theme})
+    : controller = FPaginationController(length: 8, showEdges: false);
 
   @override
-  Widget sample(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [FPagination(controller: controller)],
-      );
+  Widget sample(BuildContext context) =>
+      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: controller)]);
 }
 
 @RoutePage()
 class PaginationCustomIconPage extends Sample {
   final FPaginationController controller;
 
-  PaginationCustomIconPage({
-    @queryParam super.theme,
-    @queryParam super.maxWidth = 400,
-  }) : controller = FPaginationController(length: 10, page: 5);
+  PaginationCustomIconPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
+    : controller = FPaginationController(length: 10, page: 5);
 
   @override
   Widget sample(BuildContext context) {
@@ -80,10 +63,7 @@ class PaginationCustomIconPage extends Sample {
               child: FButton.icon(
                 style: FButtonStyle.ghost,
                 onPress: controller.next,
-                child: FIconStyleData(
-                  style: style.iconStyle,
-                  child: FIcon(FAssets.icons.bird),
-                ),
+                child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.bird)),
               ),
             ),
           ),
@@ -94,10 +74,7 @@ class PaginationCustomIconPage extends Sample {
               child: FButton.icon(
                 style: FButtonStyle.ghost,
                 onPress: controller.previous,
-                child: FIconStyleData(
-                  style: style.iconStyle,
-                  child: FIcon(FAssets.icons.anchor),
-                ),
+                child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.anchor)),
               ),
             ),
           ),

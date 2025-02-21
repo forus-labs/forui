@@ -9,11 +9,7 @@ import 'package:forui_samples/sample.dart';
 class SwitchPage extends StatefulSample {
   final bool enabled;
 
-  SwitchPage({
-    @queryParam super.theme,
-    @queryParam this.enabled = true,
-    @queryParam super.maxWidth = 200,
-  });
+  SwitchPage({@queryParam super.theme, @queryParam this.enabled = true, @queryParam super.maxWidth = 200});
 
   @override
   State<SwitchPage> createState() => _SwitchState();
@@ -24,19 +20,17 @@ class _SwitchState extends StatefulSampleState<SwitchPage> {
 
   @override
   Widget sample(BuildContext context) => FSwitch(
-        label: const Text('Airplane Mode'),
-        semanticLabel: 'Airplane Mode',
-        value: state,
-        onChange: (value) => setState(() => state = value),
-        enabled: widget.enabled,
-      );
+    label: const Text('Airplane Mode'),
+    semanticLabel: 'Airplane Mode',
+    value: state,
+    onChange: (value) => setState(() => state = value),
+    enabled: widget.enabled,
+  );
 }
 
 @RoutePage()
 class FormSwitchPage extends StatefulSample {
-  FormSwitchPage({
-    @queryParam super.theme,
-  });
+  FormSwitchPage({@queryParam super.theme});
 
   @override
   State<FormSwitchPage> createState() => _FormSwitchState();
@@ -96,10 +90,8 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
                         // Save values somewhere.
                       },
                       validator: (value) => null, // No validation required.
-                      builder: (state) => FSwitch(
-                        value: state.value ?? false,
-                        onChange: (value) => state.didChange(value),
-                      ),
+                      builder:
+                          (state) => FSwitch(value: state.value ?? false, onChange: (value) => state.didChange(value)),
                     ),
                   ],
                 ),
@@ -137,10 +129,8 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
                         // Save values somewhere.
                       },
                       validator: (value) => null, // No validation required.
-                      builder: (state) => FSwitch(
-                        value: state.value ?? false,
-                        onChange: (value) => state.didChange(value),
-                      ),
+                      builder:
+                          (state) => FSwitch(value: state.value ?? false, onChange: (value) => state.didChange(value)),
                     ),
                   ],
                 ),
