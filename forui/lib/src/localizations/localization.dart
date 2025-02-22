@@ -1,3 +1,4 @@
+import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
@@ -5,7 +6,10 @@ import 'package:forui/forui.dart';
 
 /// The locales that use non-western digits.
 @internal
-const easternLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
+const easternLocales = ['ar', 'as', 'bn', 'fa', 'my', 'ne', 'ps'];
+
+/// The default localization for when no localization is provided.
+typedef FDefaultLocalizations = FLocalizationsEn;
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
@@ -23,56 +27,4 @@ extension FDateTimeLocalizations on FLocalizations {
       (localeName == '' || localeName.startsWith('en'))
           ? const ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
           : DateFormat.yMMMMd(localeName).dateSymbols.STANDALONENARROWWEEKDAYS;
-}
-
-/// The default localization for when no localization is provided.
-class FDefaultLocalizations extends FLocalizations {
-  static final _localizations = FDefaultLocalizations._();
-
-  /// Creates a [FDefaultLocalizations].
-  factory FDefaultLocalizations() => _localizations;
-
-  FDefaultLocalizations._() : super('en_US');
-
-  @override
-  String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);
-
-  @override
-  String year(DateTime date) => DateFormat.y().format(date);
-
-  @override
-  String yearMonth(DateTime date) => DateFormat.yMMMM().format(date);
-
-  @override
-  String abbreviatedMonth(DateTime date) => DateFormat.MMM().format(date);
-
-  @override
-  String day(DateTime date) => DateFormat.d().format(date);
-
-  @override
-  String shortDate(DateTime date) => DateFormat.yMd().format(date);
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
-
-  @override
-  String get dialogLabel => 'Dialog';
-
-  @override
-  String get sheetLabel => 'Sheet';
-
-  @override
-  String get barrierLabel => 'Barrier';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
 }

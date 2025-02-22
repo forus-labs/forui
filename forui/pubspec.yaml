@@ -13,8 +13,6 @@ environment:
   sdk: ">=3.7.0 <4.0.0"
   flutter: ">=3.27.0"
 resolution: workspace
-workspace:
-  - example
 
 dependencies:
   collection: ^1.18.0

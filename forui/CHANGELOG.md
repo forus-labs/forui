@@ -13,6 +13,7 @@
 ### Changes
 
 * Change all widget styles to use code generated functions.
+* Change `FDefaultLocalization` to point to `en`.
 * **Breaking** Change `FDatePicker` to `FDateField`.
 * **Breaking** Change `FDatePickerController` to `FDateFieldController`.
 * **Breaking** Change `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
