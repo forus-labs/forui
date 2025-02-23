@@ -72,11 +72,8 @@ final class FTimePickerController extends FValueNotifier<FTime> {
 extension FTimePickerControllers on FTimePickerController {
   /// Encodes the given [value] as picker wheels.
   List<int> encode(FTime value) {
-    final indexes = [
-      (value.hour / hourInterval).round(),
-      (value.minute / minuteInterval).round(),
-    ];
-    
+    final indexes = [(value.hour / hourInterval).round(), (value.minute / minuteInterval).round()];
+
     if (!hours24) {
       final period = value.hour < 12 ? 0 : 1;
       _pattern.startsWith('a') ? indexes.insert(0, period) : indexes.add(period);
