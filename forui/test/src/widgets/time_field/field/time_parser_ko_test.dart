@@ -7,8 +7,6 @@ import '../../../test_scaffold.dart';
 
 // This needs to be a separate test suite as Flutter modifies the period. It is AM/PM in intl, and 오전/오후 in Flutter.
 void main() {
-  late Time12Parser ko; // a h:mm (오전/오후)
-
   for (final (i, (old, current, expected))
   in [
     ('--', '오', ('오', false)),
@@ -22,7 +20,7 @@ void main() {
   ].indexed) {
     testWidgets('ko locale - $i', (tester) async {
       await tester.pumpWidget(TestScaffold.app(child: const Text('stub')));
-      final ko = Time12Parser(DateFormat.jm('ko'));
+      final ko = Time12Parser(DateFormat.jm('ko')); // a h:mm (오전/오후)
 
       expect(ko.updatePeriod(old, current), expected);
     });

@@ -6,7 +6,7 @@ import 'package:forui/src/localizations/localization.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_field/field/field_controller.dart';
+import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
 
 @internal
 class Field extends StatefulWidget {
@@ -103,14 +103,19 @@ class Field extends StatefulWidget {
 
 class _FieldState extends State<Field> {
   late FLocalizations _localizations;
-  late FieldController _controller;
+  late DateFieldController _controller;
 
   @override
   void initState() {
     super.initState();
     _localizations =
         scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
-    _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
+    _controller = DateFieldController(
+      widget.calendarController,
+      _localizations,
+      widget.style.textFieldStyle,
+      widget.baselineYear,
+    );
   }
 
   @override
@@ -123,7 +128,12 @@ class _FieldState extends State<Field> {
 
     if (widget.calendarController != old.calendarController) {
       _controller.dispose();
-      _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
+      _controller = DateFieldController(
+        widget.calendarController,
+        _localizations,
+        widget.style.textFieldStyle,
+        widget.baselineYear,
+      );
     }
   }
 

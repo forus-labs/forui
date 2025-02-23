@@ -5,17 +5,17 @@ import 'package:meta/meta.dart';
 /// A parser that parses updates components of a string input.
 @internal
 abstract class Parser {
-  final List<String> _parts;
+  final List<String> parts;
 
-  Parser(this._parts);
+  Parser(this.parts);
 
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
-    assert(previous.length == _parts.length, 'previous must have ${_parts.length} parts');
-    assert(current.length == _parts.length, 'current must have ${_parts.length} parts');
+    assert(previous.length == parts.length, 'previous must have ${parts.length} parts');
+    assert(current.length == parts.length, 'current must have ${parts.length} parts');
 
     Changes changes = const None();
-    for (int i = 0; i < _parts.length; i++) {
+    for (int i = 0; i < parts.length; i++) {
       final previousPart = previous[i];
       final currentPart = current[i];
 
@@ -23,12 +23,12 @@ abstract class Parser {
         continue;
       }
 
-      final (updated, next) = updatePart(_parts[i], previousPart, currentPart);
+      final (updated, next) = updatePart(parts[i], previousPart, currentPart);
 
       current[i] = updated;
       if (updated != previousPart) {
         final nextPart = next ? i + 1 : i;
-        changes = changes.add(min(nextPart, _parts.length - 1));
+        changes = changes.add(min(nextPart, parts.length - 1));
       }
     }
 
@@ -40,10 +40,10 @@ abstract class Parser {
 
   /// Adjusts the current part of the input by [amount].
   List<String> adjust(List<String> current, int selected, int amount) {
-    assert(current.length == _parts.length, 'Must have ${_parts.length} parts.');
+    assert(current.length == parts.length, 'Must have ${parts.length} parts.');
 
     final part = current[selected];
-    current[selected] = adjustPart(_parts[selected], part, amount);
+    current[selected] = adjustPart(parts[selected], part, amount);
 
     return current;
   }
