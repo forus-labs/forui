@@ -1,9 +1,10 @@
-import 'dart:ui';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/picker/picker_wheel.dart';
 import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
 import '../../test_scaffold.dart';
 
@@ -30,12 +31,12 @@ void main() {
       final controller = FTimePickerController();
 
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller)));
-      expect(controller.hours12, true);
+      expect(controller.hours24, false);
 
       await tester.pumpWidget(
         TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller, hour24: true)),
       );
-      expect(controller.hours12, false);
+      expect(controller.hours24, true);
     });
 
     testWidgets('change intervals', (tester) async {
@@ -74,5 +75,22 @@ void main() {
 
       expect(controller.disposed, false);
     });
+  });
+
+  testWidgets('period first', (tester) async {
+    final controller = FTimePickerController(initial: const FTime(22));
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('ko'),
+        child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
+      ),
+    );
+
+    // Period uses a different picker wheel implementation, only hour & minute uses BuilderWheel.
+    await tester.drag(find.byType(BuilderWheel).at(0), const Offset(0, -50));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    expect(controller.value, const FTime());
   });
 }

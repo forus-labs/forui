@@ -103,13 +103,8 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
 /// * Up/Down arrows: Increment/decrement values
 /// * Left/Right arrows: Move between date segments
 ///
-/// The input field does not support the following locales that use non-western numerals:
-/// * Arabic (العربية)
-/// * Bengali (বাংলা)
-/// * Persian/Farsi (فارسی)
-/// * Burmese (မြန်မာ)
-/// * Nepali (नेपाली)
-/// * Pashto (پښتو)
+/// The input field does not support the following locales that use non-western numerals, it will default to English:
+/// {@macro forui.localizations.fScriptNumerals}
 ///
 /// Consider providing a [FDateFieldController.validator] to perform custom date validation logic. By default, all
 /// dates are valid.
