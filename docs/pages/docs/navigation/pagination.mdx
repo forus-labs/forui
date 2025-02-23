@@ -119,3 +119,57 @@ FPagination(
         ```
     </Tabs.Tab>
 </Tabs>
+
+### with PageView
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' variant='with-page-view' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {9} {22} {35} opy
+        class PageViewExample extends StatefulWidget {
+          const PageViewExample({super.key});
+
+          @override
+          State<PageViewExample> createState() => _PageViewExampleState();
+        }
+
+        class _PageViewExampleState extends State<PageViewExample>{
+          FPaginationController controller = FPaginationController(length: 10);
+
+          @override
+          Widget build(BuildContext context) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: SizedBox(
+                    height: 300,
+                    width: 300,
+                    child: PageView.builder(
+                      itemCount: 10,
+                      controller: controller,
+                      itemBuilder: (context, index) => ColoredBox(
+                        color: index.isEven ? Colors.red : Colors.blue,
+                        child: Center(
+                          child: Text(
+                            'Page $index',
+                            style: const TextStyle(fontSize: 45, color: Colors.white)
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                FPagination(controller: controller),
+              ],
+            );
+          @override
+          void dispose() {
+            controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>

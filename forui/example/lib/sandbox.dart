@@ -31,7 +31,7 @@ class Sandbox extends StatefulWidget {
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late FTimePickerController timeController = FTimePickerController();
-  late FPaginationController pageController = FPaginationController(length: 10, siblings: 0);
+  late FPaginationController pageController = FPaginationController(length: 10);
 
   @override
   Widget build(BuildContext context) => ListView(

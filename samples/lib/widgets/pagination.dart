@@ -83,3 +83,35 @@ class PaginationCustomIconPage extends Sample {
     );
   }
 }
+
+@RoutePage()
+class PaginationWithViewPage extends Sample {
+  final FPaginationController controller;
+
+  PaginationWithViewPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
+    : controller = FPaginationController(length: 10);
+
+  @override
+  Widget sample(BuildContext context) => Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: SizedBox(
+            height: 300,
+            width: 300,
+            child: PageView.builder(
+              itemCount: 10,
+              controller: controller,
+              itemBuilder:
+                  (context, index) => ColoredBox(
+                    color: index.isEven ? Colors.red : Colors.blue,
+                    child: Center(child: Text('Page ${index + 1}', style: const TextStyle(fontSize: 45, color: Colors.white))),
+                  ),
+            ),
+          ),
+        ),
+        FPagination(controller: controller),
+      ],
+    );
+}

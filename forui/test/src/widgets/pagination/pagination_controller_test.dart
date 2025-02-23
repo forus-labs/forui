@@ -10,19 +10,19 @@ void main() {
     });
 
     test('next', () {
-      final controller = FPaginationController(length: 10, page: 9)..next();
-      expect(controller.value, 10);
+      final controller = FPaginationController(length: 10, page: 8)..next();
+      expect(controller.value, 9);
 
       controller.next();
-      expect(controller.value, 10);
+      expect(controller.value, 9);
     });
 
     test('previous', () {
-      final controller = FPaginationController(length: 10, page: 2)..previous();
-      expect(controller.value, 1);
+      final controller = FPaginationController(length: 10, page: 1)..previous();
+      expect(controller.value, 0);
 
       controller.previous();
-      expect(controller.value, 1);
+      expect(controller.value, 0);
     });
 
     group('calculateSiblingRange(...)', () {

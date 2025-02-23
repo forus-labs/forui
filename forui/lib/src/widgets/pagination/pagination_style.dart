@@ -7,34 +7,33 @@ import 'package:forui/forui.dart';
 
 part 'pagination_style.style.dart';
 
-/// The [FPagination] styles.
-final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
-  /// The selected page [BoxDecoration].
+/// Defines the visual styles for different states of the [FPagination] widget.
+final class FPaginationStateStyle with Diagnosticable, _$FPaginationStateStyleFunctions {
+  /// The default decoration applied to the pagination item.
   @override
-  final BoxDecoration selectedDecoration;
+  final BoxDecoration decoration;
 
-  /// The unselected page [BoxDecoration].
-  @override
-  final BoxDecoration unselectedDecoration;
-
-  /// The hovered page [BoxDecoration].
+  /// The decoration applied when the pagination item is hovered.
   @override
   final BoxDecoration hoveredDecoration;
 
-  /// The hovered selected page [BoxDecoration].
+  /// The text style used for the pagination item.
   @override
-  final BoxDecoration selectedHoveredDecoration;
+  final TextStyle textStyle;
 
-  /// The unselected textStyle.
+  /// Creates a [FPaginationStateStyle].
+  FPaginationStateStyle({required this.decoration, required this.hoveredDecoration, required this.textStyle});
+}
+
+/// The [FPagination] styles.
+final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
+  /// The style configuration for a pagination item when it is in the selected state.
   @override
-  final TextStyle unselectedTextStyle;
+  final FPaginationStateStyle selected;
 
-  /// The selected textStyle.
+  /// The style configuration for a pagination item when it is in the unselected state.
   @override
-  final TextStyle selectedTextStyle;
-
-  // final FPaginationStateStyle selected;
-  // final FPaginationStateStyle unselected;
+  final FPaginationStateStyle unselected;
 
   /// The icon style.
   @override
@@ -50,13 +49,10 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
 
   /// Creates a [FPaginationStyle].
   FPaginationStyle({
-    required this.selectedDecoration,
-    required this.unselectedDecoration,
-    required this.hoveredDecoration,
-    required this.selectedHoveredDecoration,
+    required this.selected,
+    required this.unselected,
     required this.iconStyle,
-    required this.unselectedTextStyle,
-    required this.selectedTextStyle,
+
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
     this.contentConstraints = const BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40.0, minHeight: 40.0),
   });
@@ -64,15 +60,21 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   /// Creates a [FPaginationStyle] that inherits its properties from [colorScheme], [typography], and [style].
   FPaginationStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
     : this(
-        selectedDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
-        unselectedDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.background),
-        hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.border),
-        selectedHoveredDecoration: BoxDecoration(
-          borderRadius: style.borderRadius,
-          color: colorScheme.hover(colorScheme.primary),
+        selected: FPaginationStateStyle(
+          decoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
+          hoveredDecoration: BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colorScheme.hover(colorScheme.primary),
+          ),
+          textStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
         ),
-        unselectedTextStyle: typography.sm.copyWith(color: colorScheme.primary),
-        selectedTextStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+
+        unselected: FPaginationStateStyle(
+          decoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.background),
+          hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.border),
+          textStyle: typography.sm.copyWith(color: colorScheme.primary),
+        ),
+
         iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
       );
 
@@ -80,23 +82,14 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   @override
   @useResult
   FPaginationStyle copyWith({
-    BoxDecoration? selectedDecoration,
-    BoxDecoration? unselectedDecoration,
-    BoxDecoration? hoveredDecoration,
-    BoxDecoration? selectedHoveredDecoration,
-    TextStyle? unselectedTextStyle,
-    TextStyle? selectedTextStyle,
+    FPaginationStateStyle? selected,
+    FPaginationStateStyle? unselected,
     FIconStyle? iconStyle,
-    EdgeInsets? contentPadding,
     EdgeInsets? itemPadding,
     BoxConstraints? contentConstraints,
   }) => FPaginationStyle(
-    selectedDecoration: selectedDecoration ?? this.selectedDecoration,
-    unselectedDecoration: unselectedDecoration ?? this.unselectedDecoration,
-    hoveredDecoration: hoveredDecoration ?? this.hoveredDecoration,
-    selectedHoveredDecoration: selectedHoveredDecoration ?? this.selectedHoveredDecoration,
-    unselectedTextStyle: unselectedTextStyle ?? this.unselectedTextStyle,
-    selectedTextStyle: selectedTextStyle ?? this.selectedTextStyle,
+    selected: selected ?? this.selected,
+    unselected: unselected ?? this.unselected,
     iconStyle: iconStyle ?? this.iconStyle,
     itemPadding: itemPadding ?? this.itemPadding,
     contentConstraints: contentConstraints ?? this.contentConstraints,
@@ -106,12 +99,8 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('selectedDecoration', selectedDecoration))
-      ..add(DiagnosticsProperty('unselectedDecoration', unselectedDecoration))
-      ..add(DiagnosticsProperty('hoveredDecoration', hoveredDecoration))
-      ..add(DiagnosticsProperty('selectedHoveredDecoration', selectedHoveredDecoration))
-      ..add(DiagnosticsProperty('unselectedTextStyle', unselectedTextStyle))
-      ..add(DiagnosticsProperty('selectedTextStyle', selectedTextStyle))
+      ..add(DiagnosticsProperty('selected', selected))
+      ..add(DiagnosticsProperty('unselected', unselected))
       ..add(DiagnosticsProperty('iconStyle', iconStyle))
       ..add(DiagnosticsProperty('itemPadding', itemPadding))
       ..add(DiagnosticsProperty('contentConstraints', contentConstraints));
@@ -122,25 +111,13 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
       identical(this, other) ||
       other is FPaginationStyle &&
           runtimeType == other.runtimeType &&
-          selectedDecoration == other.selectedDecoration &&
-          unselectedDecoration == other.unselectedDecoration &&
-          hoveredDecoration == other.hoveredDecoration &&
-          selectedHoveredDecoration == other.selectedHoveredDecoration &&
-          unselectedTextStyle == other.unselectedTextStyle &&
-          selectedTextStyle == other.selectedTextStyle &&
+          selected == other.selected &&
+          unselected == other.unselected &&
           iconStyle == other.iconStyle &&
           itemPadding == other.itemPadding &&
           contentConstraints == other.contentConstraints;
 
   @override
   int get hashCode =>
-      selectedDecoration.hashCode ^
-      unselectedDecoration.hashCode ^
-      hoveredDecoration.hashCode ^
-      selectedHoveredDecoration.hashCode ^
-      unselectedTextStyle.hashCode ^
-      selectedTextStyle.hashCode ^
-      iconStyle.hashCode ^
-      itemPadding.hashCode ^
-      contentConstraints.hashCode;
+      selected.hashCode ^ unselected.hashCode ^ iconStyle.hashCode ^ itemPadding.hashCode ^ contentConstraints.hashCode;
 }

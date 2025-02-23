@@ -1,11 +1,13 @@
 @Tags(['golden'])
 library;
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' hide Action;
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/forui.dart';
+import 'package:forui/forui.dart' ;
+import 'package:forui/src/widgets/pagination/pagination.dart';
+
 import '../../test_scaffold.dart';
 
 void main() {
@@ -50,7 +52,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 10, siblings: 0, page: 3)),
+            child: FPagination(controller: FPaginationController(length: 10, siblings: 0, page: 2)),
           ),
         );
         await tester.tap(find.byType(Action).last);
@@ -74,7 +76,7 @@ void main() {
 
       testWidgets('custom icon', (tester) async {
         final style = theme.data.paginationStyle;
-        final controller = FPaginationController(length: 10, page: 5);
+        final controller = FPaginationController(length: 10, page: 4);
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,

@@ -112,7 +112,6 @@ class FPaginationController extends PageController {
   @override
   void dispose() {
     removeListener(_handleScrollChanges);
-
     super.dispose();
   }
 

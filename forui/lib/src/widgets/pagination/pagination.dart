@@ -77,10 +77,10 @@ class _FPaginationState extends State<FPagination> {
     final elipsis = Padding(
       padding: style.itemPadding,
       child: DecoratedBox(
-        decoration: style.unselectedDecoration,
+        decoration: style.unselected.decoration,
         child: ConstrainedBox(
           constraints: style.contentConstraints,
-          child: DefaultTextStyle(style: style.unselectedTextStyle, child: const Center(child: Text('...'))),
+          child: DefaultTextStyle(style: style.unselected.textStyle, child: const Center(child: Text('...'))),
         ),
       ),
     );
@@ -174,12 +174,12 @@ class Action extends StatelessWidget {
       builder:
           (context, tappableData, child) => DecoratedBox(
             decoration: switch (tappableData.hovered) {
-              (false) => style.unselectedDecoration,
-              (true) => style.hoveredDecoration,
+              (false) => style.unselected.decoration,
+              (true) => style.unselected.hoveredDecoration,
             },
             child: ConstrainedBox(
               constraints: style.contentConstraints,
-              child: DefaultTextStyle(style: style.unselectedTextStyle, child: Center(child: child!)),
+              child: DefaultTextStyle(style: style.unselected.textStyle, child: Center(child: child!)),
             ),
           ),
       child: child,
@@ -216,15 +216,15 @@ class _Page extends StatelessWidget {
             builder:
                 (context, tappableData, child) => DecoratedBox(
                   decoration: switch ((selected, tappableData.hovered)) {
-                    (false, false) => style.unselectedDecoration,
-                    (false, true) => style.hoveredDecoration,
-                    (true, true) => style.selectedHoveredDecoration,
-                    (true, false) => style.selectedDecoration,
+                    (false, false) => style.unselected.decoration,
+                    (false, true) => style.unselected.hoveredDecoration,
+                    (true, true) => style.selected.hoveredDecoration,
+                    (true, false) => style.selected.decoration,
                   },
                   child: ConstrainedBox(
                     constraints: style.contentConstraints,
                     child: DefaultTextStyle(
-                      style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
+                      style: selected ? style.selected.textStyle : style.unselected.textStyle,
                       child: child!,
                     ),
                   ),
