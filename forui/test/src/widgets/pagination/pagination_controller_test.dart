@@ -27,16 +27,16 @@ void main() {
 
     group('calculateSiblingRange(...)', () {
       for (final (currentPage, expected) in [
-        (1, (1, 5)),
-        (2, (1, 5)),
-        (3, (1, 5)),
-        (4, (1, 5)),
+        (0, (0, 4)),
+        (1, (0, 4)),
+        (2, (0, 4)),
+        (3, (0, 4)),
+        (4, (3, 5)),
         (5, (4, 6)),
-        (6, (5, 7)),
-        (7, (6, 10)),
-        (8, (6, 10)),
-        (9, (6, 10)),
-        (10, (6, 10)),
+        (6, (5, 9)),
+        (7, (5, 9)),
+        (8, (5, 9)),
+        (9, (5, 9)),
       ]) {
         test('siblings = 1', () {
           final controller = FPaginationController(length: 10)..value = currentPage;
@@ -45,29 +45,19 @@ void main() {
       }
 
       for (final (currentPage, expected) in [
-        (1, (1, 7)),
-        (2, (1, 7)),
-        (3, (1, 7)),
-        (4, (1, 7)),
-        (5, (1, 7)),
-        (6, (4, 8)),
-        (7, (5, 9)),
-        (8, (6, 10)),
-        (9, (7, 11)),
-        (10, (8, 12)),
-        (11, (9, 13)),
-        (12, (10, 14)),
-        (13, (11, 15)),
-        (14, (12, 16)),
-        (15, (13, 17)),
-        (16, (14, 20)),
-        (17, (14, 20)),
-        (18, (14, 20)),
-        (19, (14, 20)),
-        (20, (14, 20)),
+        (0, (0, 2)),
+        (1, (0, 2)),
+        (2, (0, 2)),
+        (3, (3, 3)),
+        (4, (4, 4)),
+        (5, (5, 5)),
+        (6, (6, 6)),
+        (7, (7, 9)),
+        (8, (7, 9)),
+        (9, (7, 9)),
       ]) {
-        test('siblings = 2', () {
-          final controller = FPaginationController(siblings: 2, length: 20)..value = currentPage;
+        test('siblings = 0', () {
+          final controller = FPaginationController(siblings: 0, length: 10)..value = currentPage;
           expect(controller.calculateSiblingRange(), expected);
         });
       }

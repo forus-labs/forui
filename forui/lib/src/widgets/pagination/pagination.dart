@@ -47,7 +47,6 @@ class _FPaginationState extends State<FPagination> {
   @override
   void initState() {
     super.initState();
-
     widget.controller.addListener(() {
       setState(() {});
     });
@@ -86,7 +85,7 @@ class _FPaginationState extends State<FPagination> {
       ),
     );
 
-    final range = controller.calculateSiblingRange();
+    final (start, end) = controller.calculateSiblingRange();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +96,7 @@ class _FPaginationState extends State<FPagination> {
             FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
           elipsis,
         ],
-        for (int i = range.$1; i <= range.$2; i++)
+        for (int i = start; i <= end; i++)
           FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
         if (controller.value < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
           elipsis,
@@ -107,6 +106,12 @@ class _FPaginationState extends State<FPagination> {
         next,
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    widget.controller.dispose();
+    super.dispose();
   }
 }
 

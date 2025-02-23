@@ -39,8 +39,8 @@ class FPaginationController extends PageController {
     int page = 0,
     this.showEdges = true,
     this.siblings = 1,
-    super.onDetach,
     super.onAttach,
+    super.onDetach,
     super.keepPage,
     super.viewportFraction,
   }) : assert(
@@ -54,26 +54,40 @@ class FPaginationController extends PageController {
          'The initial page must be greater than or equal to 0 and less than or equal to length.',
        ),
        _value = page,
-       super(initialPage: page);
+       super(initialPage: page) {
+    addListener(_handleScrollChanges);
+  }
+
+  void _handleScrollChanges() {
+    if (hasClients) {
+      if (page != null && page!.round() != _value) {
+        _value = page!.round();
+      }
+    }
+  }
 
   /// Moves to the previous page if the current page is greater than 1.
   void previous() {
-    final value = page?.round() ?? _value;
+    final value = hasClients && page != null ? page!.round() : _value;
     if (0 < value) {
       _value = value - 1;
-      //TODO: should the user be given the option to specify the duration and curve? how to handle this?
-      super.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+
+      if (hasClients) {
+        super.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      }
       notifyListeners();
     }
   }
 
   /// Moves to the next page if the current page is less than the total number of pages.
   void next() {
-    final value = page?.round() ?? _value;
+    final value = hasClients && page != null ? page!.round() : _value;
     if (value < length - 1) {
       _value = value + 1;
-      //TODO: should the user be given the option to specify the duration and curve? how to handle this?
-      super.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+
+      if (hasClients) {
+        super.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
+      }
       notifyListeners();
     }
   }
@@ -85,11 +99,21 @@ class FPaginationController extends PageController {
   set value(int index) {
     if (0 <= index && index <= length) {
       _value = index;
-      super.jumpToPage(index);
+
+      if (hasClients) {
+        super.jumpToPage(index);
+      }
       notifyListeners();
     } else {
       throw StateError('The index must be within the allowed range.');
     }
+  }
+
+  @override
+  void dispose() {
+    removeListener(_handleScrollChanges);
+
+    super.dispose();
   }
 
   /// Calculates the range of page numbers to display around the current page.
