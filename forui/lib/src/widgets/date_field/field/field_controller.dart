@@ -1,10 +1,11 @@
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/field/parser.dart';
 
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_field/field/parser.dart';
+import 'package:forui/src/widgets/date_field/field/date_parser.dart';
 
 ///
 @internal
@@ -26,7 +27,7 @@ class FieldController extends TextEditingController {
   final WidgetStatesController states;
   final String placeholder;
   final FLocalizations _localizations;
-  final Parser _parser;
+  final DateParser _parser;
   final DateFormat _format;
   final RegExp _suffix;
   bool _mutating = false;
@@ -62,7 +63,7 @@ class FieldController extends TextEditingController {
     int initialYear,
     TextEditingValue? value,
   ) : states = WidgetStatesController(),
-      _parser = Parser(_localizations.localeName, initialYear),
+      _parser = DateParser(_localizations.localeName, initialYear),
       _format = DateFormat.yMd(_localizations.localeName),
       _suffix = RegExp(RegExp.escape(_localizations.shortDateSuffix) + r'$'),
       super.fromValue(value) {
@@ -139,7 +140,7 @@ class FieldController extends TextEditingController {
       return super.value;
     }
 
-    final (parts, selected) = _parser.parse(old, current);
+    final (parts, selected) = _parser.update(old, current);
     switch (selected) {
       case None():
         return super.value;
