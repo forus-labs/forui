@@ -111,7 +111,6 @@ class FButton extends StatelessWidget {
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
-      animationTween: style.animationTween,
       onPress: onPress,
       onLongPress: onLongPress,
       builder:
@@ -188,10 +187,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCust
   @override
   final BoxDecoration disabledBoxDecoration;
 
-  /// The animation tween. Defaults to `Tween(begin: 1.0, end: 0.97)` if null.
-  @override
-  final Tween<double>? animationTween;
-
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
@@ -217,7 +212,6 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCust
     required this.contentStyle,
     required this.iconContentStyle,
     required this.spinnerStyle,
-    this.animationTween,
   });
 
   /// Creates a [FButtonCustomStyle] that inherits its properties from the given arguments.
