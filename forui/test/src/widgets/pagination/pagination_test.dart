@@ -1,9 +1,7 @@
-
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/pagination/pagination.dart';
-
 import '../../test_scaffold.dart';
 
 void main() {
@@ -30,7 +28,6 @@ void main() {
       await tester.tap(find.byType(Action).last);
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
       expect(controller.value, 1);
-
 
       await tester.tap(find.text('10'));
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
