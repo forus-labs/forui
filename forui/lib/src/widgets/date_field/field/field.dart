@@ -108,7 +108,7 @@ class _FieldState extends State<Field> {
   void initState() {
     super.initState();
     _localizations =
-        easternLocales.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+        scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
     _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
   }
 
@@ -117,7 +117,7 @@ class _FieldState extends State<Field> {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       _localizations =
-          easternLocales.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
     }
 
     if (widget.calendarController != old.calendarController) {

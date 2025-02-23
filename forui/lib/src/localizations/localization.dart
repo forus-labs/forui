@@ -1,12 +1,23 @@
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
-/// The locales that use non-western digits.
+/// The locales that use non-western digits in their date and time formatting:
+/// {@template forui.localizations.fScriptNumerals}
+///  * Arabic (العربية)
+///  * Assamese (অসমীয়া)
+///  * Bengali (বাংলা)
+///  * Persian/Farsi (فارسی)
+///  * Marathi (मराठी)
+///  * Burmese (မြန်မာ)
+///  * Nepali (नेपाली)
+///  * Pashto (پښتو)
+///  * Tamil (தமிழ்)
+/// {@endtemplate}
 @internal
-const easternLocales = ['ar', 'as', 'bn', 'fa', 'my', 'ne', 'ps'];
+const scriptNumerals = ['ar', 'as', 'bn', 'fa', 'mr', 'my', 'ne', 'ps', 'ta'];
 
 /// The default localization for when no localization is provided.
 typedef FDefaultLocalizations = FLocalizationsEn;

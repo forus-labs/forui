@@ -94,7 +94,7 @@ class TestScaffold extends StatelessWidget {
       locale = null,
       textDirection = null,
       padded = false,
-      wrapped = false;
+      wrapped = true;
 
   @override
   Widget build(BuildContext context) {

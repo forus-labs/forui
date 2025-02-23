@@ -9,10 +9,10 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TimePickerPage extends StatefulSample {
-  final bool? hour24;
+  final bool hour24;
 
-  TimePickerPage({@queryParam String? hour24, @queryParam super.theme, super.maxWidth = 200})
-    : hour24 = bool.tryParse(hour24 ?? '');
+  TimePickerPage({@queryParam String hour24 = 'false', @queryParam super.theme, super.maxWidth = 200})
+    : hour24 = bool.tryParse(hour24) ?? false;
 
   @override
   State<TimePickerPage> createState() => _TimePickerPageState();

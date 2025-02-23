@@ -19,16 +19,13 @@ void main() {
   group('FTextField', () {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: TestScaffold.blue(
-            child: FTextField(
-              style: TestScaffold.blueScreen.textFieldStyle,
-              label: const Text('My Label'),
-              hint: 'hint',
-              description: const Text('Some help text.'),
-              forceErrorText: 'Error',
-            ),
+        TestScaffold.blue(
+          child: FTextField(
+            style: TestScaffold.blueScreen.textFieldStyle,
+            label: const Text('My Label'),
+            hint: 'hint',
+            description: const Text('Some help text.'),
+            forceErrorText: 'Error',
           ),
         ),
       );
