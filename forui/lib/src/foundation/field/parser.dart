@@ -15,7 +15,7 @@ abstract class Parser {
     assert(current.length == _parts.length, 'current must have ${_parts.length} parts');
 
     Changes changes = const None();
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < _parts.length; i++) {
       final previousPart = previous[i];
       final currentPart = current[i];
 
