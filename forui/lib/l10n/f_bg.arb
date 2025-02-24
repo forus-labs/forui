@@ -4,7 +4,7 @@
   "barrierOnTapHint": "Затваряне на $modalRouteContentName",
   "barrierLabel": "Скрим",
   "shortDateSeparator": ".",
-  "shortDateSuffix": " г.",
+  "shortDateSuffix": " г.",
   "dateFieldHint": "Изберете дата",
   "dateFieldInvalidDateError": "Невалидна дата."
 }

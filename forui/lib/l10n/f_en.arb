@@ -62,7 +62,7 @@
     }
   },
 
-  "shortDateSeparator": "",
+  "shortDateSeparator": "/",
   "@shortDateSeparator": {
     "description": "The short date's separator, typically /."
   },

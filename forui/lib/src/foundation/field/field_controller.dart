@@ -51,14 +51,12 @@ abstract class FieldController extends TextEditingController {
   }
 
   TextEditingValue _updateParts(TextEditingValue value) {
-    final old = split(text);
     final current = split(value.text);
-
-    if (current.length != 3) {
+    if (current.length != parser.parts.length) {
       return super.value;
     }
 
-    final (parts, selected) = parser.update(old, current);
+    final (parts, selected) = parser.update(split(text), current);
     switch (selected) {
       case None():
         return super.value;

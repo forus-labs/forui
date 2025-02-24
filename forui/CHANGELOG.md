@@ -28,7 +28,7 @@
 ### Fixes
 * Fix `FTab` not updating when using controller to switch tabs.
 * Fix `FPicker` incorrectly detecting number of wheels when controller is not given and placeholder is used.
-
+* Fix `FDateField` not handling `bg`, `en`, `sr`, `sr_Latn` and `zu` locales properly.
 
 ## 0.9.1+1
 Fix documentation not publishing.

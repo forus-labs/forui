@@ -3,7 +3,7 @@
   "sheetLabel": "Ishidi",
   "barrierOnTapHint": "Vala i-$modalRouteContentName",
   "barrierLabel": "I-Scrim",
-  "shortDateSeparator": "/",
+  "shortDateSeparator": "-",
   "shortDateSuffix": "",
   "dateFieldHint": "Khetha usuku",
   "dateFieldInvalidDateError": "Usuku olungalungile."

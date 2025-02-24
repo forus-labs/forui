@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -59,7 +57,7 @@ class FLocalizationsEn extends FLocalizations {
   }
 
   @override
-  String get shortDateSeparator => '';
+  String get shortDateSeparator => '/';
 
   @override
   String get shortDateSuffix => '';

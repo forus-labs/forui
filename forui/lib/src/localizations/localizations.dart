@@ -322,7 +322,7 @@ abstract class FLocalizations {
   /// The short date's separator, typically /.
   ///
   /// In en, this message translates to:
-  /// **''**
+  /// **'/'**
   String get shortDateSeparator;
 
   /// The short date's suffix, typically empty.

@@ -33,11 +33,11 @@ class DateFieldController extends FieldController {
     FTextFieldStyle style,
     int initialYear,
   ) {
-    final format = DateFormat.yMd(localizations.localeName);
-    final placeholder = format.pattern!
+    final placeholder = DateFormat.yMd(localizations.localeName).pattern!
         .replaceAll(RegExp('d{1,2}'), 'DD')
         .replaceAll(RegExp('M{1,2}'), 'MM')
-        .replaceAll('y', 'YYYY');
+        .replaceAll('y', 'YYYY')
+        .replaceAll("'", '');
     final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
     return DateFieldController.fromValue(
       controller,
@@ -78,7 +78,7 @@ class DateFieldController extends FieldController {
   void adjust(int adjustment) {
     try {
       mutating = true;
-      final parts = value.text.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
+      final parts = split(value.text);
       super.rawValue = selectParts(
         value,
         onFirst: (_, _, _, _, _) => updatePart(parser.adjust(parts, 0, adjustment), 0),
@@ -89,22 +89,6 @@ class DateFieldController extends FieldController {
     } finally {
       mutating = false;
     }
-  }
-
-  @override
-  void onValueChanged(String newValue) => controller.value = _format.tryParseStrict(newValue, true);
-
-  @override
-  @visibleForTesting
-  TextEditingValue updatePart(List<String> parts, int index) {
-    var start = 0;
-    var end = parts[0].length;
-    for (var i = 1; i <= index; i++) {
-      start = end + _localizations.shortDateSeparator.length;
-      end = start + parts[i].length;
-    }
-
-    return TextEditingValue(text: join(parts), selection: TextSelection(baseOffset: start, extentOffset: end));
   }
 
   @override
@@ -135,11 +119,25 @@ class DateFieldController extends FieldController {
   }
 
   @override
-  @protected
+  @visibleForTesting
+  TextEditingValue updatePart(List<String> parts, int index) {
+    var start = 0;
+    var end = parts[0].length;
+    for (var i = 1; i <= index; i++) {
+      start = end + _localizations.shortDateSeparator.length;
+      end = start + parts[i].length;
+    }
+
+    return TextEditingValue(text: join(parts), selection: TextSelection(baseOffset: start, extentOffset: end));
+  }
+
+  @override
+  void onValueChanged(String newValue) => controller.value = _format.tryParseStrict(newValue, true);
+
+  @override
   List<String> split(String raw) => raw.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
 
   @override
-  @protected
   String join(List<String> parts) => parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
 
   @visibleForTesting
