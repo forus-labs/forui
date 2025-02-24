@@ -18,7 +18,7 @@ final class FPagination extends StatefulWidget {
   /// The controller. Defaults to [FPaginationController.new].
   final FPaginationController controller;
 
-  /// The previous button placed in the beginning of the pagination.
+  /// The previous button placed at the beginning of the pagination.
   ///
   /// Defaults to an `FAssets.icons.chevronLeft` icon.
   final Widget? previous;
@@ -45,28 +45,6 @@ final class FPagination extends StatefulWidget {
 
 class _FPaginationState extends State<FPagination> {
   @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
-  void didUpdateWidget(covariant FPagination old) {
-    super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
-      return;
-    }
-    old.controller.removeListener(() {
-      setState(() {});
-    });
-    widget.controller.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final controller = widget.controller;
     final style = widget.style ?? context.theme.paginationStyle;
@@ -85,33 +63,31 @@ class _FPaginationState extends State<FPagination> {
       ),
     );
 
-    final (start, end) = controller.calculateSiblingRange();
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        previous,
-        if (controller.value > controller.minPagesDisplayedAtEdges) ...[
-          if (controller.showEdges)
-            FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
-          elipsis,
-        ],
-        for (int i = start; i <= end; i++)
-          FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
-        if (controller.value < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
-          elipsis,
-          if (controller.showEdges)
-            FPaginationItemData(page: lastPage, style: style, controller: controller, child: const _Page()),
-        ],
-        next,
-      ],
+    return ListenableBuilder(
+      listenable: controller,
+      builder: (context, _) {
+        final (start, end) = controller.calculateSiblingRange();
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            previous,
+            if (controller.value > controller.minPagesDisplayedAtEdges) ...[
+              if (controller.showEdges)
+                FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
+              elipsis,
+            ],
+            for (int i = start; i <= end; i++)
+              FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
+            if (controller.value < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
+              elipsis,
+              if (controller.showEdges)
+                FPaginationItemData(page: lastPage, style: style, controller: controller, child: const _Page()),
+            ],
+            next,
+          ],
+        );
+      },
     );
-  }
-
-  @override
-  void dispose() {
-    widget.controller.dispose();
-    super.dispose();
   }
 }
 

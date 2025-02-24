@@ -62,6 +62,7 @@ class FPaginationController extends PageController {
     if (hasClients) {
       if (page != null && page!.round() != _value) {
         _value = page!.round();
+        notifyListeners();
       }
     }
   }

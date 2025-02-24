@@ -22,7 +22,7 @@ class PaginationSiblingsPage extends Sample {
   final FPaginationController controller;
 
   PaginationSiblingsPage({@queryParam super.theme, @queryParam super.maxWidth = 500})
-    : controller = FPaginationController(length: 20, siblings: 2, page: 10);
+    : controller = FPaginationController(length: 20, siblings: 2, page: 9);
 
   @override
   Widget sample(BuildContext context) =>
@@ -46,7 +46,7 @@ class PaginationCustomIconPage extends Sample {
   final FPaginationController controller;
 
   PaginationCustomIconPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
-    : controller = FPaginationController(length: 10, page: 5);
+    : controller = FPaginationController(length: 10, page: 4);
 
   @override
   Widget sample(BuildContext context) {
@@ -92,7 +92,9 @@ class PaginationWithViewPage extends Sample {
     : controller = FPaginationController(length: 10);
 
   @override
-  Widget sample(BuildContext context) => Column(
+  Widget sample(BuildContext context) {
+    final style = context.theme.colorScheme;
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
@@ -105,8 +107,10 @@ class PaginationWithViewPage extends Sample {
               controller: controller,
               itemBuilder:
                   (context, index) => ColoredBox(
-                    color: index.isEven ? Colors.red : Colors.blue,
-                    child: Center(child: Text('Page ${index + 1}', style: const TextStyle(fontSize: 45, color: Colors.white))),
+                    color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
+                    child: Center(
+                      child: Text('Page ${index + 1}', style: TextStyle(fontSize: 45, color: style.primaryForeground)),
+                    ),
                   ),
             ),
           ),
@@ -114,4 +118,5 @@ class PaginationWithViewPage extends Sample {
         FPagination(controller: controller),
       ],
     );
+  }
 }

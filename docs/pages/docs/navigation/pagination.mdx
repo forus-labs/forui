@@ -4,7 +4,7 @@ import LinkBadge from "../../../components/link-badge/link-badge.tsx";
 import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
 
 # Pagination
-Display active page and navigate between multiple pages
+Display the current active page and enable navigation between multiple pages.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.pagination/"/>
@@ -16,7 +16,7 @@ Display active page and navigate between multiple pages
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        FPagination(controller: FPaginationController(length: 10);
+        FPagination(controller: FPaginationController(length: 10));
         ```
     </Tabs.Tab>
 </Tabs>
@@ -39,7 +39,7 @@ FPagination(
 ## Examples
 
 
-### Sibling Length
+### Siblings
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='pagination' variant='siblings' height={400}/>
@@ -50,7 +50,7 @@ FPagination(
           controller: FPaginationController(
             length: 20,
             siblings: 2,
-            page: 10,
+            page: 9,
           ),
         );
         ```
@@ -58,7 +58,7 @@ FPagination(
 </Tabs>
 
 
-### Hide First and Last page
+### Show Edges
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='pagination' variant='hide-first-last' height={400}/>
@@ -75,7 +75,7 @@ FPagination(
     </Tabs.Tab>
 </Tabs>
 
-### Custom Next and Previous
+### Custom Icons
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='pagination' variant='custom-icon' height={400}/>
@@ -85,7 +85,7 @@ FPagination(
         FPagination(
           controller: FPaginationController(
             length: 10,
-            page: 5,
+            page: 4,
           ),
           next: Padding(
             padding: style.itemPadding,
@@ -120,13 +120,13 @@ FPagination(
     </Tabs.Tab>
 </Tabs>
 
-### with PageView
+### With a PageView Widget
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='pagination' variant='with-page-view' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {9} {22} {35} opy
+        ```dart {9} {24} {34} opy
         class PageViewExample extends StatefulWidget {
           const PageViewExample({super.key});
 
@@ -138,32 +138,32 @@ FPagination(
           FPaginationController controller = FPaginationController(length: 10);
 
           @override
-          Widget build(BuildContext context) => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: SizedBox(
-                    height: 300,
-                    width: 300,
-                    child: PageView.builder(
-                      itemCount: 10,
-                      controller: controller,
-                      itemBuilder: (context, index) => ColoredBox(
-                        color: index.isEven ? Colors.red : Colors.blue,
-                        child: Center(
-                          child: Text(
-                            'Page $index',
-                            style: const TextStyle(fontSize: 45, color: Colors.white)
-                          ),
-                        ),
+          Widget build(BuildContext context) =>
+          final style = context.theme.colorScheme;
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: SizedBox(
+                  height: 300,
+                  width: 300,
+                  child: PageView.builder(
+                    itemCount: 10,
+                    controller: controller,
+                    itemBuilder:(context, index) => ColoredBox(
+                      color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
+                      child: Center(
+                        child: Text('Page ${index + 1}', style: TextStyle(fontSize: 45, color: style.primaryForeground)),
                       ),
                     ),
                   ),
                 ),
-                FPagination(controller: controller),
-              ],
-            );
+              ),
+              FPagination(controller: controller),
+            ],
+          );
+
           @override
           void dispose() {
             controller.dispose();
