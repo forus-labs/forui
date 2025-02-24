@@ -69,6 +69,15 @@ class FLocalizationsGu extends FLocalizations {
   String get dateFieldInvalidDateError => 'અમાન્ય તારીખ.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'સંવાદ';
 
   @override

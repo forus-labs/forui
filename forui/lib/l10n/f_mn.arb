@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Огноо сонгох",
-  "dateFieldInvalidDateError": "Огноо буруу байна."
+  "dateFieldInvalidDateError": "Огноо буруу байна.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

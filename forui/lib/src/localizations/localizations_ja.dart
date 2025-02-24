@@ -69,6 +69,15 @@ class FLocalizationsJa extends FLocalizations {
   String get dateFieldInvalidDateError => '日付が無効です。';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'ダイアログ';
 
   @override

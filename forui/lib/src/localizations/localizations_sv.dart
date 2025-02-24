@@ -69,6 +69,15 @@ class FLocalizationsSv extends FLocalizations {
   String get dateFieldInvalidDateError => 'Ogiltigt datum.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialogruta';
 
   @override

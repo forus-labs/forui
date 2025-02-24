@@ -6,5 +6,7 @@
   "shortDateSeparator": ". ",
   "shortDateSuffix": ".",
   "dateFieldHint": "Válasszon dátumot",
-  "dateFieldInvalidDateError": "Érvénytelen dátum."
+  "dateFieldInvalidDateError": "Érvénytelen dátum.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

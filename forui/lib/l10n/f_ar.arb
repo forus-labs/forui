@@ -6,5 +6,7 @@
   "shortDateSeparator": "‏/",
   "shortDateSuffix": "",
   "dateFieldHint": "اختر تاريخًا",
-  "dateFieldInvalidDateError": "تاريخ غير صالح."
+  "dateFieldInvalidDateError": "تاريخ غير صالح.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": ""
 }

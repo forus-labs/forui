@@ -69,6 +69,15 @@ class FLocalizationsBn extends FLocalizations {
   String get dateFieldInvalidDateError => 'অবৈধ তারিখ।';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'ডায়ালগ';
 
   @override

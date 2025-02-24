@@ -69,6 +69,15 @@ class FLocalizationsAm extends FLocalizations {
   String get dateFieldInvalidDateError => 'ልክ ያልሆነ ቀን።';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'መገናኛ';
 
   @override

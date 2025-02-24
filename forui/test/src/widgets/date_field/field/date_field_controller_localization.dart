@@ -9,11 +9,10 @@ import '../../../test_scaffold.dart';
 
 final _date = DateTime(2024, 12, 25);
 
+// We use a widget to load the locales since Flutter and default intl might have different mappings.
 void main() {
   testWidgets('remove quotes', (tester) async {
     late String placeholder;
-
-    // We use a widget to load the locales since Flutter and default intl might have different mappings.
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('bg'),
@@ -38,8 +37,6 @@ void main() {
   for (final locale in FLocalizations.supportedLocales.where((locale) => !scriptNumerals.contains(locale.toString()))) {
     testWidgets('split parts - $locale', (tester) async {
       late List<String> parts;
-
-      // We use a widget to load the locales since Flutter and default intl might have different mappings.
       await tester.pumpWidget(
         TestScaffold.app(
           locale: locale,

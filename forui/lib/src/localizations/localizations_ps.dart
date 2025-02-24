@@ -69,6 +69,15 @@ class FLocalizationsPs extends FLocalizations {
   String get dateFieldInvalidDateError => 'ناسمه نېټه.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'خبرې اترې';
 
   @override

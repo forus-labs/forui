@@ -69,6 +69,15 @@ class FLocalizationsBg extends FLocalizations {
   String get dateFieldInvalidDateError => 'Невалидна дата.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => ' ч.';
+
+  @override
   String get dialogLabel => 'Диалогов прозорец';
 
   @override

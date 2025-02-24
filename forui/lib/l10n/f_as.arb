@@ -6,5 +6,7 @@
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
   "dateFieldHint": "তাৰিখ বাছনি কৰক",
-  "dateFieldInvalidDateError": "অমান্য তাৰিখ।"
+  "dateFieldInvalidDateError": "অমান্য তাৰিখ।",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

@@ -69,6 +69,15 @@ class FLocalizationsSq extends FLocalizations {
   String get dateFieldInvalidDateError => 'Datë e pavlefshme.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialogu';
 
   @override

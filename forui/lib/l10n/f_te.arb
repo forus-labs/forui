@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "తేదీని ఎంచుకోండి",
-  "dateFieldInvalidDateError": "చెల్లని తేదీ."
+  "dateFieldInvalidDateError": "చెల్లని తేదీ.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": ""
 }

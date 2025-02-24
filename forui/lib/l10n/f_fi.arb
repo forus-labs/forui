@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Valitse päivämäärä",
-  "dateFieldInvalidDateError": "Virheellinen päivämäärä."
+  "dateFieldInvalidDateError": "Virheellinen päivämäärä.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

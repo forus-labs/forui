@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Veldu dagsetningu",
-  "dateFieldInvalidDateError": "Ógild dagsetning."
+  "dateFieldInvalidDateError": "Ógild dagsetning.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

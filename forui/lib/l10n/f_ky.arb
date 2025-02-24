@@ -6,5 +6,7 @@
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
   "dateFieldHint": "Күндү тандоо",
-  "dateFieldInvalidDateError": "Жараксыз күн."
+  "dateFieldInvalidDateError": "Жараксыз күн.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

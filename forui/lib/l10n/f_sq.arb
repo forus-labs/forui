@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Zgjidh datën",
-  "dateFieldInvalidDateError": "Datë e pavlefshme."
+  "dateFieldInvalidDateError": "Datë e pavlefshme.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": ""
 }

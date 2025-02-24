@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "选择日期",
-  "dateFieldInvalidDateError": "日期无效。"
+  "dateFieldInvalidDateError": "日期无效。",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

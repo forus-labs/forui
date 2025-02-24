@@ -6,5 +6,7 @@
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
   "dateFieldHint": "Kies 'n datum",
-  "dateFieldInvalidDateError": "Ongeldige datum."
+  "dateFieldInvalidDateError": "Ongeldige datum.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

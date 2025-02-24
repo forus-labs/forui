@@ -69,6 +69,15 @@ class FLocalizationsTr extends FLocalizations {
   String get dateFieldInvalidDateError => 'Geçersiz tarih.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'İletişim kutusu';
 
   @override

@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Selectați data",
-  "dateFieldInvalidDateError": "Dată nevalidă."
+  "dateFieldInvalidDateError": "Dată nevalidă.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

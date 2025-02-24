@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "日付を選択",
-  "dateFieldInvalidDateError": "日付が無効です。"
+  "dateFieldInvalidDateError": "日付が無効です。",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

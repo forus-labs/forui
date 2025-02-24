@@ -69,6 +69,15 @@ class FLocalizationsMy extends FLocalizations {
   String get dateFieldInvalidDateError => 'ရက်စွဲ မမှန်ကန်ပါ။';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'ဒိုင်ယာလော့';
 
   @override

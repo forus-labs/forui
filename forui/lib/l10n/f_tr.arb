@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Tarih seçin",
-  "dateFieldInvalidDateError": "Geçersiz tarih."
+  "dateFieldInvalidDateError": "Geçersiz tarih.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

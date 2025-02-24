@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Dewiswch ddyddiad",
-  "dateFieldInvalidDateError": "Dyddiad annilys."
+  "dateFieldInvalidDateError": "Dyddiad annilys.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Valige kuupäev",
-  "dateFieldInvalidDateError": "Sobimatu kuupäev."
+  "dateFieldInvalidDateError": "Sobimatu kuupäev.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

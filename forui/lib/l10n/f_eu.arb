@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Hautatu data",
-  "dateFieldInvalidDateError": "Data baliogabea."
+  "dateFieldInvalidDateError": "Data baliogabea.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "აირჩიეთ თარიღი",
-  "dateFieldInvalidDateError": "არასწორი თარიღი."
+  "dateFieldInvalidDateError": "არასწორი თარიღი.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

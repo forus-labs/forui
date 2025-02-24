@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "તારીખ પસંદ કરો",
-  "dateFieldInvalidDateError": "અમાન્ય તારીખ."
+  "dateFieldInvalidDateError": "અમાન્ય તારીખ.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": ""
 }

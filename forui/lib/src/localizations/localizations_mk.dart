@@ -69,6 +69,15 @@ class FLocalizationsMk extends FLocalizations {
   String get dateFieldInvalidDateError => 'Неважечки датум.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'Дијалог';
 
   @override

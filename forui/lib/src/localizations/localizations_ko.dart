@@ -69,6 +69,15 @@ class FLocalizationsKo extends FLocalizations {
   String get dateFieldInvalidDateError => '날짜가 잘못되었습니다.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => '대화상자';
 
   @override

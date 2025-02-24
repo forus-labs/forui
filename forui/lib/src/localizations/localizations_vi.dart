@@ -69,6 +69,15 @@ class FLocalizationsVi extends FLocalizations {
   String get dateFieldInvalidDateError => 'Ngày không hợp lệ.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'Hộp thoại';
 
   @override

@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Tarix seçin",
-  "dateFieldInvalidDateError": "Yanlış tarix."
+  "dateFieldInvalidDateError": "Yanlış tarix.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

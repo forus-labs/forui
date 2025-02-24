@@ -6,5 +6,7 @@
   "shortDateSeparator": ". ",
   "shortDateSuffix": "",
   "dateFieldHint": "Vyberte datum",
-  "dateFieldInvalidDateError": "Neplatné datum."
+  "dateFieldInvalidDateError": "Neplatné datum.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

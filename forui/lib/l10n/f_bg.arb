@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": " г.",
   "dateFieldHint": "Изберете дата",
-  "dateFieldInvalidDateError": "Невалидна дата."
+  "dateFieldInvalidDateError": "Невалидна дата.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": " ч."
 }

@@ -69,6 +69,15 @@ class FLocalizationsSl extends FLocalizations {
   String get dateFieldInvalidDateError => 'Neveljaven datum.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'Pogovorno okno';
 
   @override

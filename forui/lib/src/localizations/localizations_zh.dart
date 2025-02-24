@@ -69,6 +69,15 @@ class FLocalizationsZh extends FLocalizations {
   String get dateFieldInvalidDateError => '日期无效。';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => '对话框';
 
   @override
@@ -100,6 +109,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get dateFieldInvalidDateError => '日期無效。';
 
   @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => '對話方塊';
 
   @override
@@ -129,6 +144,12 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get dateFieldInvalidDateError => '日期無效。';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
 
   @override
   String get dialogLabel => '對話方塊';

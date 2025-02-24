@@ -3,5 +3,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Datum auswählen",
-  "dateFieldInvalidDateError": "Ungültiges Datum."
+  "dateFieldInvalidDateError": "Ungültiges Datum.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

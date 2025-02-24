@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "ເລືອກວັນທີ",
-  "dateFieldInvalidDateError": "ວັນທີບໍ່ຖືກຕ້ອງ."
+  "dateFieldInvalidDateError": "ວັນທີບໍ່ຖືກຕ້ອງ.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

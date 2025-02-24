@@ -6,5 +6,7 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Pick a date",
-  "dateFieldInvalidDateError": "Invalid date."
+  "dateFieldInvalidDateError": "Invalid date.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

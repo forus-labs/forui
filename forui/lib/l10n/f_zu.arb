@@ -6,5 +6,7 @@
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
   "dateFieldHint": "Khetha usuku",
-  "dateFieldInvalidDateError": "Usuku olungalungile."
+  "dateFieldInvalidDateError": "Usuku olungalungile.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

@@ -69,6 +69,15 @@ class FLocalizationsNo extends FLocalizations {
   String get dateFieldInvalidDateError => 'Ugyldig dato.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'Dialogboks';
 
   @override

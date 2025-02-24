@@ -72,7 +72,6 @@
     "description": "The short date's suffix, typically empty."
   },
 
-
   "dateFieldHint": "Pick a date",
   "@dateFieldHint": {
     "description": "The hint text for the calendar-only date picker."
@@ -81,6 +80,21 @@
   "dateFieldInvalidDateError": "Invalid date.",
   "@dateFieldInvalidDateError": {
     "description": "Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format."
+  },
+
+  "timeFieldTimeSeparator": ":",
+  "@timeFieldTimeSeparator": {
+      "description": "The time field's time separator, typically ':'."
+  },
+
+  "timeFieldPeriodSeparator": " ",
+  "@timeFieldPeriodSeparator": {
+      "description": "The time field's period separator, typically ' '."
+  },
+
+  "timeFieldSuffix": "",
+  "@timeFieldSuffix": {
+      "description": "The time field's suffix, typically none."
   },
 
 

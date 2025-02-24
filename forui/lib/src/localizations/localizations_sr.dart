@@ -69,6 +69,15 @@ class FLocalizationsSr extends FLocalizations {
   String get dateFieldInvalidDateError => 'Неважећи датум.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
   String get dialogLabel => 'Дијалог';
 
   @override
@@ -98,6 +107,12 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get dateFieldInvalidDateError => 'Nevažeći datum.';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
 
   @override
   String get dialogLabel => 'Dijalog';

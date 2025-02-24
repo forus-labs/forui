@@ -6,5 +6,7 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": ".",
   "dateFieldHint": "Izaberite datum",
-  "dateFieldInvalidDateError": "Nevažeći datum."
+  "dateFieldInvalidDateError": "Nevažeći datum.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": ""
 }

@@ -343,6 +343,24 @@ abstract class FLocalizations {
   /// **'Invalid date.'**
   String get dateFieldInvalidDateError;
 
+  /// The time field's time separator, typically ':'.
+  ///
+  /// In en, this message translates to:
+  /// **':'**
+  String get timeFieldTimeSeparator;
+
+  /// The time field's period separator, typically ' '.
+  ///
+  /// In en, this message translates to:
+  /// **' '**
+  String get timeFieldPeriodSeparator;
+
+  /// The time field's suffix, typically none.
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get timeFieldSuffix;
+
   /// The sheet's label.
   ///
   /// In en, this message translates to:
