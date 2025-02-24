@@ -8,5 +8,6 @@
   "dateFieldHint": "Välj datum",
   "dateFieldInvalidDateError": "Ogiltigt datum.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

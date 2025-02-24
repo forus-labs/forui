@@ -79,10 +79,8 @@ abstract class FieldController extends TextEditingController {
   @protected
   TextEditingValue selectParts(TextEditingValue value);
 
-  @protected
   List<String> split(String raw);
 
-  @protected
   String join(List<String> parts);
 
   @override

@@ -69,7 +69,7 @@ class FLocalizationsFi extends FLocalizations {
   String get dateFieldInvalidDateError => 'Virheellinen päivämäärä.';
 
   @override
-  String get timeFieldTimeSeparator => ':';
+  String get timeFieldTimeSeparator => '.';
 
   @override
   String get timeFieldPeriodSeparator => '';

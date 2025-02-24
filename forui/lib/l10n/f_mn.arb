@@ -8,5 +8,6 @@
   "dateFieldHint": "Огноо сонгох",
   "dateFieldInvalidDateError": "Огноо буруу байна.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

@@ -109,7 +109,10 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -146,7 +149,10 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -181,6 +187,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -220,6 +229,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -257,7 +269,10 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -294,7 +309,10 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -331,7 +349,10 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -366,6 +387,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';

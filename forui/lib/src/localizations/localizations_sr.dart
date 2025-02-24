@@ -109,6 +109,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get dateFieldInvalidDateError => 'Nevažeći datum.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override

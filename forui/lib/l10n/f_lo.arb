@@ -8,5 +8,6 @@
   "dateFieldHint": "ເລືອກວັນທີ",
   "dateFieldInvalidDateError": "ວັນທີບໍ່ຖືກຕ້ອງ.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

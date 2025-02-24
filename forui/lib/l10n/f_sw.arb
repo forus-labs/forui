@@ -8,5 +8,6 @@
   "dateFieldHint": "Chagua tarehe",
   "dateFieldInvalidDateError": "Tarehe si sahihi.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

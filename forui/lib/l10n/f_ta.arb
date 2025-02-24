@@ -8,5 +8,6 @@
   "dateFieldHint": "தேதியைத் தேர்ந்தெடுக்கவும்",
   "dateFieldInvalidDateError": "தவறான தேதி.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

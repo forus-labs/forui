@@ -8,5 +8,6 @@
   "dateFieldHint": "දිනය තෝරන්න",
   "dateFieldInvalidDateError": "අවලංගු දිනයකි.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": "."
 }

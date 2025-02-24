@@ -8,5 +8,6 @@
   "dateFieldHint": "തീയതി തിരഞ്ഞെടുക്കുക",
   "dateFieldInvalidDateError": "അസാധുവായ തീയതി.",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

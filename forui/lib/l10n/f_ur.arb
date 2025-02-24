@@ -8,5 +8,6 @@
   "dateFieldHint": "تاریخ منتخب کریں",
   "dateFieldInvalidDateError": "غلط تاریخ۔",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

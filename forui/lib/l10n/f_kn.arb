@@ -8,5 +8,6 @@
   "dateFieldHint": "ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
   "dateFieldInvalidDateError": "ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ.",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

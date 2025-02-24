@@ -8,5 +8,6 @@
   "dateFieldHint": "בחירת תאריך",
   "dateFieldInvalidDateError": "תאריך לא חוקי.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

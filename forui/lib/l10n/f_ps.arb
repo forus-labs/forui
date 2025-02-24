@@ -8,5 +8,6 @@
   "dateFieldHint": "نېټه وټاکئ",
   "dateFieldInvalidDateError": "ناسمه نېټه.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

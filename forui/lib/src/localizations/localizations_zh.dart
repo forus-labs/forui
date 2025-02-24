@@ -109,6 +109,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get dateFieldInvalidDateError => '日期無效。';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -144,6 +147,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get dateFieldInvalidDateError => '日期無效。';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';

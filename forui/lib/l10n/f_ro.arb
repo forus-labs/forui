@@ -8,5 +8,6 @@
   "dateFieldHint": "Selectați data",
   "dateFieldInvalidDateError": "Dată nevalidă.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

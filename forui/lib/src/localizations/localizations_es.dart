@@ -109,6 +109,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => ' ';
 
   @override
@@ -144,6 +147,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -183,6 +189,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -218,6 +227,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -257,6 +269,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -292,6 +307,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -331,6 +349,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -366,6 +387,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -405,6 +429,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -440,6 +467,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -479,6 +509,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => ' ';
 
   @override
@@ -514,6 +547,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -553,6 +589,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -588,6 +627,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -627,6 +669,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -662,6 +707,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -701,6 +749,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override
@@ -738,7 +789,10 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get dateFieldInvalidDateError => 'Fecha no válida.';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -773,6 +827,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';
@@ -810,6 +867,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get dateFieldInvalidDateError => 'Fecha no válida.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
 
   @override
   String get timeFieldPeriodSeparator => '';

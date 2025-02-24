@@ -8,5 +8,6 @@
   "dateFieldHint": "Veldu dagsetningu",
   "dateFieldInvalidDateError": "Ógild dagsetning.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

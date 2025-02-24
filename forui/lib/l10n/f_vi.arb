@@ -8,5 +8,6 @@
   "dateFieldHint": "Chọn ngày",
   "dateFieldInvalidDateError": "Ngày không hợp lệ.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

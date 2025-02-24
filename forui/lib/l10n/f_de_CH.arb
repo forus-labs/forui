@@ -5,5 +5,6 @@
   "dateFieldHint": "Datum auswählen",
   "dateFieldInvalidDateError": "Ungültiges Datum.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

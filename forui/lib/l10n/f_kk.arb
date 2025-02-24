@@ -8,5 +8,6 @@
   "dateFieldHint": "Күнді таңдаңыз",
   "dateFieldInvalidDateError": "Жарамсыз күн.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

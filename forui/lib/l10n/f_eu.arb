@@ -8,5 +8,6 @@
   "dateFieldHint": "Hautatu data",
   "dateFieldInvalidDateError": "Data baliogabea.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

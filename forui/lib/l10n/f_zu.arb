@@ -8,5 +8,6 @@
   "dateFieldHint": "Khetha usuku",
   "dateFieldInvalidDateError": "Usuku olungalungile.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

@@ -8,5 +8,6 @@
   "dateFieldHint": "Pasirinkti datą",
   "dateFieldInvalidDateError": "Netinkama data.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

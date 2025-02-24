@@ -69,7 +69,7 @@ class FLocalizationsId extends FLocalizations {
   String get dateFieldInvalidDateError => 'Tanggal tidak valid.';
 
   @override
-  String get timeFieldTimeSeparator => ':';
+  String get timeFieldTimeSeparator => '.';
 
   @override
   String get timeFieldPeriodSeparator => '';

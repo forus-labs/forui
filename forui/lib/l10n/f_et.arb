@@ -8,5 +8,6 @@
   "dateFieldHint": "Valige kuupäev",
   "dateFieldInvalidDateError": "Sobimatu kuupäev.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

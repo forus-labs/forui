@@ -109,6 +109,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   String get dateFieldInvalidDateError => 'Data inválida.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override

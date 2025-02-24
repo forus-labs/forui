@@ -8,5 +8,6 @@
   "dateFieldHint": "ជ្រើសរើស​កាលបរិច្ឆេទ",
   "dateFieldInvalidDateError": "កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

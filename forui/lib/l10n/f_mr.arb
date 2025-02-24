@@ -8,5 +8,6 @@
   "dateFieldHint": "तारीख निवडा",
   "dateFieldInvalidDateError": "अवैध तारीख.",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

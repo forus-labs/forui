@@ -109,6 +109,9 @@ class FLocalizationsDeCh extends FLocalizationsDe {
   String get dateFieldInvalidDateError => 'Ungültiges Datum.';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
   String get timeFieldPeriodSeparator => '';
 
   @override

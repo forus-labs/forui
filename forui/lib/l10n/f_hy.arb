@@ -8,5 +8,6 @@
   "dateFieldHint": "Ընտրել ամսաթիվը",
   "dateFieldInvalidDateError": "Սխալ ամսաթիվ:",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

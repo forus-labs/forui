@@ -8,5 +8,6 @@
   "dateFieldHint": "Dewiswch ddyddiad",
   "dateFieldInvalidDateError": "Dyddiad annilys.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

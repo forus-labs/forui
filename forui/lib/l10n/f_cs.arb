@@ -8,5 +8,6 @@
   "dateFieldHint": "Vyberte datum",
   "dateFieldInvalidDateError": "Neplatné datum.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

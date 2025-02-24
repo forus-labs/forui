@@ -8,5 +8,6 @@
   "dateFieldHint": "Atlasīt datumu",
   "dateFieldInvalidDateError": "Nederīgs datums.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

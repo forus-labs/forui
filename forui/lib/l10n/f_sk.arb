@@ -8,5 +8,6 @@
   "dateFieldHint": "Vyberte dátum",
   "dateFieldInvalidDateError": "Neplatný dátum.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

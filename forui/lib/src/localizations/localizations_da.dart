@@ -69,7 +69,7 @@ class FLocalizationsDa extends FLocalizations {
   String get dateFieldInvalidDateError => 'Ugyldig dato.';
 
   @override
-  String get timeFieldTimeSeparator => ':';
+  String get timeFieldTimeSeparator => '.';
 
   @override
   String get timeFieldPeriodSeparator => '';

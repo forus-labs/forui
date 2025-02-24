@@ -109,7 +109,7 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get dateFieldInvalidDateError => 'Date non valide.';
 
   @override
-  String get timeFieldTimeSeparator => ':';
+  String get timeFieldTimeSeparator => ' h ';
 
   @override
   String get timeFieldPeriodSeparator => '';

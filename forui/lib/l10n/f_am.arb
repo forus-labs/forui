@@ -8,5 +8,6 @@
   "dateFieldHint": "ቀን ይምረጡ",
   "dateFieldInvalidDateError": "ልክ ያልሆነ ቀን።",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

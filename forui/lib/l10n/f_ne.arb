@@ -8,5 +8,6 @@
   "dateFieldHint": "मिति चयन गर्नुहोस्",
   "dateFieldInvalidDateError": "अमान्य मिति।",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

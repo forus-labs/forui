@@ -8,5 +8,6 @@
   "dateFieldHint": "తేదీని ఎంచుకోండి",
   "dateFieldInvalidDateError": "చెల్లని తేదీ.",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

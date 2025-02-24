@@ -8,5 +8,6 @@
   "dateFieldHint": "Sanani tanlang",
   "dateFieldInvalidDateError": "Sana yaroqsiz.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

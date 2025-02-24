@@ -8,5 +8,6 @@
   "dateFieldHint": "Seleccionar fecha",
   "dateFieldInvalidDateError": "Fecha no válida.",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

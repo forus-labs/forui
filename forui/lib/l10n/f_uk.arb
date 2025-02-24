@@ -8,5 +8,6 @@
   "dateFieldHint": "Виберіть дату",
   "dateFieldInvalidDateError": "Недійсна дата.",
   "timeFieldPeriodSeparator": "",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

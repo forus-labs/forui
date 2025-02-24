@@ -69,7 +69,7 @@ class FLocalizationsSi extends FLocalizations {
   String get dateFieldInvalidDateError => 'අවලංගු දිනයකි.';
 
   @override
-  String get timeFieldTimeSeparator => ':';
+  String get timeFieldTimeSeparator => '.';
 
   @override
   String get timeFieldPeriodSeparator => '';

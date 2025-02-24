@@ -8,5 +8,6 @@
   "dateFieldHint": "اختر تاريخًا",
   "dateFieldInvalidDateError": "تاريخ غير صالح.",
   "timeFieldPeriodSeparator": " ",
-  "timeFieldSuffix": ""
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":"
 }

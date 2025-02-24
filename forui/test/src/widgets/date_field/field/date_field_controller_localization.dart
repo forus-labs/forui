@@ -37,17 +37,22 @@ void main() {
   for (final locale in FLocalizations.supportedLocales.where((locale) => !scriptNumerals.contains(locale.toString()))) {
     testWidgets('split parts - $locale', (tester) async {
       late List<String> parts;
+      late String joined;
+
       await tester.pumpWidget(
         TestScaffold.app(
           locale: locale,
           child: Builder(
             builder: (context) {
-              parts = DateFieldController(
+              final controller = DateFieldController(
                 FCalendarController.date(),
                 FLocalizations.of(context)!,
                 context.theme.textFieldStyle,
                 2025,
-              ).split(DateFormat.yMd(locale.toString()).format(_date));
+              );
+
+              parts = controller.split(DateFormat.yMd(locale.toString()).format(_date));
+              joined = controller.join(parts);
 
               return const Text('');
             },
@@ -56,6 +61,7 @@ void main() {
       );
 
       expect(parts, unorderedEquals(['2024', '12', '25']));
+      expect(joined, DateFormat.yMd(locale.toString()).format(_date));
     });
   }
 }
