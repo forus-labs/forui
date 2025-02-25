@@ -9,7 +9,7 @@ import 'package:forui_samples/sample.dart';
 class SwitchPage extends StatefulSample {
   final bool enabled;
 
-  SwitchPage({@queryParam super.theme, @queryParam this.enabled = true});
+  SwitchPage({@queryParam super.theme, @queryParam this.enabled = true, @queryParam super.maxWidth = 200});
 
   @override
   State<SwitchPage> createState() => _SwitchState();
@@ -19,15 +19,12 @@ class _SwitchState extends StatefulSampleState<SwitchPage> {
   bool state = false;
 
   @override
-  Widget sample(BuildContext context) => ConstrainedBox(
-    constraints: const BoxConstraints(maxWidth: 170),
-    child: FSwitch(
-      label: const Text('Airplane Mode'),
-      semanticLabel: 'Airplane Mode',
-      value: state,
-      onChange: (value) => setState(() => state = value),
-      enabled: widget.enabled,
-    ),
+  Widget sample(BuildContext context) => FSwitch(
+    label: const Text('Airplane Mode'),
+    semanticLabel: 'Airplane Mode',
+    value: state,
+    onChange: (value) => setState(() => state = value),
+    enabled: widget.enabled,
   );
 }
 
