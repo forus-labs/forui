@@ -1,21 +1,23 @@
 import 'dart:math';
 
+import 'package:flutter/services.dart';
+import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-/// A parser that parses updates components of a string input.
+/// A parser that updates individual parts of a string input.
 @internal
 abstract class Parser {
-  final List<String> parts;
+  final List<String> pattern;
 
-  Parser(this.parts);
+  Parser(this.pattern);
 
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
-    assert(previous.length == parts.length, 'previous must have ${parts.length} parts');
-    assert(current.length == parts.length, 'current must have ${parts.length} parts');
+    assert(previous.length == pattern.length, 'previous must have ${pattern.length} parts');
+    assert(current.length == pattern.length, 'current must have ${pattern.length} parts');
 
     Changes changes = const None();
-    for (int i = 0; i < parts.length; i++) {
+    for (int i = 0; i < pattern.length; i++) {
       final previousPart = previous[i];
       final currentPart = current[i];
 
@@ -23,12 +25,12 @@ abstract class Parser {
         continue;
       }
 
-      final (updated, next) = updatePart(parts[i], previousPart, currentPart);
+      final (updated, next) = updatePart(pattern[i], previousPart, currentPart);
 
       current[i] = updated;
       if (updated != previousPart) {
         final nextPart = next ? i + 1 : i;
-        changes = changes.add(min(nextPart, parts.length - 1));
+        changes = changes.add(min(nextPart, pattern.length - 1));
       }
     }
 
@@ -40,10 +42,10 @@ abstract class Parser {
 
   /// Adjusts the current part of the input by [amount].
   List<String> adjust(List<String> current, int selected, int amount) {
-    assert(current.length == parts.length, 'Must have ${parts.length} parts.');
+    assert(current.length == pattern.length, 'Must have ${pattern.length} parts.');
 
     final part = current[selected];
-    current[selected] = adjustPart(parts[selected], part, amount);
+    current[selected] = adjustPart(pattern[selected], part, amount);
 
     return current;
   }
@@ -93,4 +95,20 @@ class Many extends Changes {
 
   @override
   Many add(int _) => this;
+}
+
+@internal
+abstract class Selector {
+  final FLocalizations localizations;
+  final RegExp suffix;
+
+  Selector(this.localizations, this.suffix);
+
+  TextEditingValue? resolve(TextEditingValue value);
+
+  TextEditingValue select(List<String> parts, int index);
+
+  List<String> split(String raw);
+
+  String join(List<String> parts);
 }

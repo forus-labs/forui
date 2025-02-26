@@ -16,9 +16,9 @@ class DateParser extends Parser {
         locale,
       );
 
-  DateParser._(super.parts, this._initialYear, String locale)
-    : _day = NumberFormat(parts.contains('d') ? '#0' : '00', locale),
-      _month = NumberFormat(parts.contains('M') ? '#0' : '00', locale),
+  DateParser._(super.pattern, this._initialYear, String locale)
+    : _day = NumberFormat(pattern.contains('d') ? '#0' : '00', locale),
+      _month = NumberFormat(pattern.contains('M') ? '#0' : '00', locale),
       _year = NumberFormat('0000', locale);
 
   @override

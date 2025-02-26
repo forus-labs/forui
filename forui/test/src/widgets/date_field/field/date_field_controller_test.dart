@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     calendarController = FCalendarController.date();
-    controller = DateFieldController.fromValue(
+    controller = DateFieldController.test(
       calendarController,
       FLocalizationsEnSg(),
       TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -106,7 +106,7 @@ void main() {
           ),
         ].indexed) {
       test('single separator - $index', () {
-        controller = DateFieldController.fromValue(
+        controller = DateFieldController.test(
           calendarController,
           FLocalizationsEnSg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -168,7 +168,7 @@ void main() {
           ),
         ].indexed) {
       test('multiple separator & suffix - $index', () {
-        controller = DateFieldController.fromValue(
+        controller = DateFieldController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -202,7 +202,7 @@ void main() {
           ),
         ].indexed) {
       test('forward - $index', () {
-        controller = DateFieldController.fromValue(
+        controller = DateFieldController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -234,7 +234,7 @@ void main() {
           ),
         ].indexed) {
       test('backward - $index', () {
-        controller = DateFieldController.fromValue(
+        controller = DateFieldController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -281,7 +281,7 @@ void main() {
         ),
       ].indexed) {
     test('adjust - $index', () {
-      controller = DateFieldController.fromValue(
+      controller = DateFieldController.test(
         calendarController,
         FLocalizationsHr(),
         TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -294,7 +294,7 @@ void main() {
     });
   }
 
-  group('selectPart(...)', () {
+  group('DateSelector.resolve(...)', () {
     for (final (index, (value, expected))
         in [
           // 1st part
@@ -337,10 +337,10 @@ void main() {
             const TextEditingValue(text: '01/02/2024', selection: TextSelection(baseOffset: 6, extentOffset: 10)),
           ),
           // invalid
-          (const TextEditingValue(text: '01/02/2024'), TextEditingValue.empty),
+          (const TextEditingValue(text: '01/02/2024'), null),
         ].indexed) {
       test('single separator - $index', () {
-        controller = DateFieldController.fromValue(
+        controller = DateFieldController.test(
           calendarController,
           FLocalizationsEnSg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -348,7 +348,7 @@ void main() {
           2000,
           null,
         );
-        expect(controller.selectParts(value), expected);
+        expect(controller.selector.resolve(value), expected);
       });
     }
 
@@ -394,14 +394,11 @@ void main() {
             const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection(baseOffset: 8, extentOffset: 12)),
           ),
           // invalid
-          (const TextEditingValue(text: '01. 02. 2024.'), TextEditingValue.empty),
-          (
-            const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 3)),
-            TextEditingValue.empty,
-          ),
+          (const TextEditingValue(text: '01. 02. 2024.'), null),
+          (const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 3)), null),
         ].indexed) {
       test('multiple separator - $index', () {
-        controller = DateFieldController.fromValue(
+        controller = DateFieldController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -409,7 +406,7 @@ void main() {
           2000,
           null,
         );
-        expect(controller.selectParts(value), expected);
+        expect(controller.selector.resolve(value), expected);
       });
     }
 
@@ -437,18 +434,18 @@ void main() {
               selection: TextSelection(baseOffset: 6, extentOffset: 10),
             ),
           ),
-          (const TextEditingValue(text: '01.02.2024\u202f\u0433.'), TextEditingValue.empty),
+          (const TextEditingValue(text: '01.02.2024\u202f\u0433.'), null),
           (
             const TextEditingValue(text: '01.02.2024\u202f\u0433.', selection: TextSelection.collapsed(offset: 11)),
-            TextEditingValue.empty,
+            null,
           ),
           (
             const TextEditingValue(text: '01.02.2024\u202f\u0433.', selection: TextSelection.collapsed(offset: 12)),
-            TextEditingValue.empty,
+            null,
           ),
         ].indexed) {
       test('suffix - $index', () {
-        controller = DateFieldController.fromValue(
+        controller = DateFieldController.test(
           calendarController,
           FLocalizationsBg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -456,7 +453,7 @@ void main() {
           2000,
           null,
         );
-        expect(controller.selectParts(value), expected);
+        expect(controller.selector.resolve(value), expected);
       });
     }
   });
@@ -466,9 +463,9 @@ void main() {
         (null, DateTime.utc(2025, 2), const TextEditingValue(text: '01/02/2025')),
         (DateTime.utc(2025, 2), null, const TextEditingValue(text: 'DD/MM/YYYY')),
       ].indexed) {
-    test('update(...) - $index', () {
+    test('update from calendar(...) - $index', () {
       calendarController = FCalendarController.date(initialSelection: initial);
-      controller = DateFieldController.fromValue(
+      controller = DateFieldController.test(
         calendarController,
         FLocalizationsEnSg(),
         TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,

@@ -12,8 +12,7 @@ abstract class TimeParser extends Parser {
   final int _hourDigit;
   final int _hourEnd;
 
-  factory TimeParser(DateFormat format) =>
-      format.pattern!.contains('a') ? Time12Parser(format) : Time24Parser(format);
+  factory TimeParser(DateFormat format) => format.pattern!.contains('a') ? Time12Parser(format) : Time24Parser(format);
 
   TimeParser._(DateFormat format, this._hour, this._hourDigit, this._hourEnd)
     : _minute = NumberFormat('00', format.locale),
@@ -91,11 +90,11 @@ class Time12Parser extends TimeParser {
   static final _afternoon = DateTime(1970, 1, 1, 13);
 
   final List<String> periods;
-  final List<String> _periodMatches;
+  final List<String> _matches;
 
   Time12Parser(DateFormat format)
     : periods = [DateFormat('a', format.locale).format(_morning), DateFormat('a', format.locale).format(_afternoon)],
-      _periodMatches = [
+      _matches = [
         DateFormat('a', format.locale).format(_morning).toLowerCase(),
         DateFormat('a', format.locale).format(_afternoon).toLowerCase(),
       ],
@@ -117,14 +116,14 @@ class Time12Parser extends TimeParser {
       // Backspace.
       _ when current.isEmpty => ('--', false),
       // Conflicting matches
-      _ when _periodMatches[0].startsWith(full) && _periodMatches[1].startsWith(full) => (full, false),
+      _ when _matches[0].startsWith(full) && _matches[1].startsWith(full) => (full.padRight(2, '-'), false),
       // Single matches
-      _ when _periodMatches[0].startsWith(full) => (periods[0], true),
-      _ when _periodMatches[1].startsWith(full) => (periods[1], true),
+      _ when _matches[0].startsWith(full) => (periods[0], true),
+      _ when _matches[1].startsWith(full) => (periods[1], true),
       // Replace rather than append
-      _ when _periodMatches[0].startsWith(current) && _periodMatches[1].startsWith(current) => (current, false),
-      _ when _periodMatches[0].startsWith(current) => (periods[0], true),
-      _ when _periodMatches[1].startsWith(current) => (periods[1], true),
+      _ when _matches[0].startsWith(current) && _matches[1].startsWith(current) => (current.padRight(2, '-'), false),
+      _ when _matches[0].startsWith(current) => (periods[0], true),
+      _ when _matches[1].startsWith(current) => (periods[1], true),
       _ => (previous, false),
     };
   }

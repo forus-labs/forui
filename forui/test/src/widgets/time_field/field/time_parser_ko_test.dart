@@ -9,14 +9,16 @@ import '../../../test_scaffold.dart';
 void main() {
   for (final (i, (old, current, expected))
   in [
-    ('--', '오', ('오', false)),
+    ('--', '오', ('오-', false)),
     ('오', '전', ('오전', true)),
     ('오', '후', ('오후', true)),
-    ('오', 'A', ('오', false)),
-    ('오', 'A', ('오', false)),
+    ('오-', 'A', ('오-', false)),
+    ('오-', 'A', ('오-', false)),
     // Replace rather than append
     ('A', '오전', ('오전', true)),
     ('A', '오후', ('오후', true)),
+    ('오전', '오', ('오-', false)),
+    ('오후', '오', ('오-', false)),
   ].indexed) {
     testWidgets('ko locale - $i', (tester) async {
       await tester.pumpWidget(TestScaffold.app(child: const Text('stub')));

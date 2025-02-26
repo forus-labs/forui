@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
 import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
 import 'package:intl/intl.dart';
 
@@ -21,10 +20,10 @@ void main() {
           builder: (context) {
             placeholder =
                 TimeFieldController(
-                  const FTime(12, 15),
                   FLocalizations.of(context)!,
                   DateFormat.jm('fr_CA'),
                   context.theme.textFieldStyle,
+                  const FTime(12, 15),
                 ).placeholder;
 
             return const Text('');
@@ -45,10 +44,10 @@ void main() {
           builder: (context) {
             placeholder =
                 TimeFieldController(
-                  const FTime(12, 15),
                   FLocalizations.of(context)!,
                   DateFormat.jm('zh_HK'),
                   context.theme.textFieldStyle,
+                  const FTime(12, 15),
                 ).placeholder;
 
             return const Text('');
@@ -74,14 +73,14 @@ void main() {
             child: Builder(
               builder: (context) {
                 final controller = TimeFieldController(
-                  const FTime(12, 15),
                   FLocalizations.of(context)!,
                   DateFormat.jm(locale.toString()),
                   context.theme.textFieldStyle,
+                  const FTime(12, 15),
                 );
 
-                parts = controller.split(DateFormat.jm(locale.toString()).format(_date));
-                joined = controller.join(parts);
+                parts = controller.selector.split(DateFormat.jm(locale.toString()).format(_date));
+                joined = controller.selector.join(parts);
 
                 return const Text('');
               },
@@ -103,14 +102,14 @@ void main() {
             child: Builder(
               builder: (context) {
                 final controller = TimeFieldController(
-                  const FTime(12, 15),
                   FLocalizations.of(context)!,
                   DateFormat.Hm(locale.toString()),
                   context.theme.textFieldStyle,
+                  const FTime(12, 15),
                 );
 
-                parts = controller.split(DateFormat.Hm(locale.toString()).format(_date));
-                joined = controller.join(parts);
+                parts = controller.selector.split(DateFormat.Hm(locale.toString()).format(_date));
+                joined = controller.selector.join(parts);
                 return const Text('');
               },
             ),

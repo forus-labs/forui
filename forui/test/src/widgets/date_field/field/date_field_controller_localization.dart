@@ -18,12 +18,13 @@ void main() {
         locale: const Locale('bg'),
         child: Builder(
           builder: (context) {
-            placeholder = DateFieldController(
-              FCalendarController.date(),
-              FLocalizations.of(context)!,
-              context.theme.textFieldStyle,
-              2025,
-            ).placeholder;
+            placeholder =
+                DateFieldController(
+                  FCalendarController.date(),
+                  FLocalizations.of(context)!,
+                  context.theme.textFieldStyle,
+                  2025,
+                ).placeholder;
 
             return const Text('');
           },
@@ -44,15 +45,10 @@ void main() {
           locale: locale,
           child: Builder(
             builder: (context) {
-              final controller = DateFieldController(
-                FCalendarController.date(),
-                FLocalizations.of(context)!,
-                context.theme.textFieldStyle,
-                2025,
-              );
+              final selector = DateSelector(FLocalizations.of(context)!);
 
-              parts = controller.split(DateFormat.yMd(locale.toString()).format(_date));
-              joined = controller.join(parts);
+              parts = selector.split(DateFormat.yMd(locale.toString()).format(_date));
+              joined = selector.join(parts);
 
               return const Text('');
             },

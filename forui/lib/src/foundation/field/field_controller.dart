@@ -12,10 +12,12 @@ abstract class FieldController extends TextEditingController {
   bool mutating = false;
 
   FieldController(this.style, this.parser, this.placeholder, TextEditingValue? value)
-    : states = WidgetStatesController(), super.fromValue(value);
+    : states = WidgetStatesController(),
+      super.fromValue(value);
 
-  // ignore: avoid_setters_without_getters
-  set rawValue(TextEditingValue value) => super.value = value;
+  void traverse({required bool forward});
+
+  void adjust(int amount);
 
   @override
   set value(TextEditingValue value) {
@@ -32,56 +34,52 @@ abstract class FieldController extends TextEditingController {
 
     try {
       mutating = true;
-      final current = super.value;
+      final current = this.value;
+
       super.value = switch (value) {
         _ when value.text.isEmpty => TextEditingValue(
           text: placeholder,
           selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
         ),
-        _ when text != value.text => _updateParts(value),
-        _ => selectParts(value),
+        _ when text != value.text => _update(value),
+        _ => selector.resolve(value) ?? this.value,
       };
 
-      if (current.text != super.value.text) {
-        onValueChanged(super.value.text);
+      if (current.text != this.value.text) {
+        onValueChanged(this.value.text);
       }
     } finally {
       mutating = false;
     }
   }
 
-  TextEditingValue _updateParts(TextEditingValue value) {
-    final current = split(value.text);
-    if (current.length != parser.parts.length) {
-      return super.value;
+  TextEditingValue _update(TextEditingValue value) {
+    final current = selector.split(value.text);
+    if (current.length != parser.pattern.length) {
+      return this.value;
     }
 
-    final (parts, selected) = parser.update(split(text), current);
+    final (parts, selected) = parser.update(selector.split(text), current);
     switch (selected) {
       case None():
-        return super.value;
+        return this.value;
 
       case Single(:final index):
-        return updatePart(parts, index);
+        return selector.select(parts, index);
 
       case Many():
-        final text = join(parts);
+        final text = selector.join(parts);
         return TextEditingValue(text: text, selection: TextSelection(baseOffset: 0, extentOffset: text.length));
     }
   }
+
+  Selector get selector;
 
   @protected
   void onValueChanged(String newValue) {}
 
   @protected
-  TextEditingValue updatePart(List<String> parts, int index);
-
-  @protected
-  TextEditingValue selectParts(TextEditingValue value);
-
-  List<String> split(String raw);
-
-  String join(List<String> parts);
+  set rawValue(TextEditingValue value) => super.value = value; // ignore: avoid_setters_without_getters
 
   @override
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/foundation/field/parser.dart';
 
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
@@ -22,10 +23,10 @@ TextEditingValue _last(TextEditingValue value, int _, int last, int end, int sep
 
 @internal
 class DateFieldController extends FieldController {
+  @override
+  final DateSelector selector;
   final FCalendarController<DateTime?> controller;
-  final FLocalizations _localizations;
   final DateFormat _format;
-  final RegExp _suffix;
 
   factory DateFieldController(
     FCalendarController<DateTime?> controller,
@@ -39,7 +40,7 @@ class DateFieldController extends FieldController {
         .replaceAll('y', 'YYYY')
         .replaceAll("'", '');
     final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
-    return DateFieldController.fromValue(
+    return DateFieldController.test(
       controller,
       localizations,
       style,
@@ -50,50 +51,75 @@ class DateFieldController extends FieldController {
   }
 
   @visibleForTesting
-  DateFieldController.fromValue(
+  DateFieldController.test(
     this.controller,
-    this._localizations,
+    FLocalizations localizations,
     FTextFieldStyle style,
     String placeholder,
     int initialYear,
     TextEditingValue? value,
-  ) : _format = DateFormat.yMd(_localizations.localeName),
-      _suffix = RegExp(RegExp.escape(_localizations.shortDateSuffix) + r'$'),
-      super(style, DateParser(_localizations.localeName, initialYear), placeholder, value) {
+  ) : selector = DateSelector(localizations),
+      _format = DateFormat.yMd(localizations.localeName),
+      super(style, DateParser(localizations.localeName, initialYear), placeholder, value) {
     controller.addListener(updateFromCalendar);
   }
 
+  @override
   void traverse({required bool forward}) {
     try {
       mutating = true;
-      super.rawValue =
-          forward
-              ? selectParts(value, onFirst: _middle, onMiddle: _last)
-              : selectParts(value, onMiddle: _first, onLast: _middle);
-    } finally {
-      mutating = false;
-    }
-  }
-
-  void adjust(int adjustment) {
-    try {
-      mutating = true;
-      final parts = split(value.text);
-      super.rawValue = selectParts(
-        value,
-        onFirst: (_, _, _, _, _) => updatePart(parser.adjust(parts, 0, adjustment), 0),
-        onMiddle: (_, _, _, _, _) => updatePart(parser.adjust(parts, 1, adjustment), 1),
-        onLast: (_, _, _, _, _) => updatePart(parser.adjust(parts, 2, adjustment), 2),
-      );
-      onValueChanged(super.value.text);
+      rawValue =
+          (forward
+              ? selector.resolve(value, onFirst: _middle, onMiddle: _last)
+              : selector.resolve(value, onMiddle: _first, onLast: _middle)) ??
+          value;
     } finally {
       mutating = false;
     }
   }
 
   @override
+  void adjust(int amount) {
+    try {
+      mutating = true;
+      final parts = selector.split(text);
+      rawValue =
+          selector.resolve(
+            value,
+            onFirst: (_, _, _, _, _) => selector.select(parser.adjust(parts, 0, amount), 0),
+            onMiddle: (_, _, _, _, _) => selector.select(parser.adjust(parts, 1, amount), 1),
+            onLast: (_, _, _, _, _) => selector.select(parser.adjust(parts, 2, amount), 2),
+          ) ??
+          value;
+      onValueChanged(text);
+    } finally {
+      mutating = false;
+    }
+  }
+
+  @override
+  void onValueChanged(String newValue) => controller.value = _format.tryParseStrict(newValue, true);
+
   @visibleForTesting
-  TextEditingValue selectParts(
+  void updateFromCalendar() {
+    if (!mutating) {
+      rawValue = TextEditingValue(
+        text: switch (controller.value) {
+          null => placeholder,
+          final value => selector.localizations.shortDate(value),
+        },
+      );
+    }
+  }
+}
+
+@internal
+class DateSelector extends Selector {
+  DateSelector(FLocalizations localizations)
+    : super(localizations, RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'));
+
+  @override
+  TextEditingValue? resolve(
     TextEditingValue value, {
     Select onFirst = _first,
     Select onMiddle = _middle,
@@ -103,28 +129,27 @@ class DateFieldController extends FieldController {
     // There's generally 2 cases:
     // * User selects part of the text -> select the whole enclosing date part.
     // * User selects a separator -> revert to the previous selection.
-    final separator = _localizations.shortDateSeparator.length;
+    final separator = localizations.shortDateSeparator.length;
 
-    final first = value.text.indexOf(_localizations.shortDateSeparator);
-    final last = value.text.indexOf(_localizations.shortDateSeparator, first + separator);
-    final end = value.text.length - _localizations.shortDateSuffix.length;
+    final first = value.text.indexOf(localizations.shortDateSeparator);
+    final last = value.text.indexOf(localizations.shortDateSeparator, first + separator);
+    final end = value.text.length - localizations.shortDateSuffix.length;
     final offset = value.selection.extentOffset;
 
     return switch (offset) {
       _ when 0 <= offset && offset <= first => onFirst(value, first, last, end, separator),
       _ when first + separator <= offset && offset <= last => onMiddle(value, first, last, end, separator),
       _ when last + separator <= offset && offset <= end => onLast(value, first, last, end, separator),
-      _ => super.value,
+      _ => null,
     };
   }
 
   @override
-  @visibleForTesting
-  TextEditingValue updatePart(List<String> parts, int index) {
+  TextEditingValue select(List<String> parts, int index) {
     var start = 0;
     var end = parts[0].length;
     for (var i = 1; i <= index; i++) {
-      start = end + _localizations.shortDateSeparator.length;
+      start = end + localizations.shortDateSeparator.length;
       end = start + parts[i].length;
     }
 
@@ -132,23 +157,8 @@ class DateFieldController extends FieldController {
   }
 
   @override
-  void onValueChanged(String newValue) => controller.value = _format.tryParseStrict(newValue, true);
+  List<String> split(String raw) => raw.replaceAll(suffix, '').split(localizations.shortDateSeparator);
 
   @override
-  List<String> split(String raw) => raw.replaceAll(_suffix, '').split(_localizations.shortDateSeparator);
-
-  @override
-  String join(List<String> parts) => parts.join(_localizations.shortDateSeparator) + _localizations.shortDateSuffix;
-
-  @visibleForTesting
-  void updateFromCalendar() {
-    if (!mutating) {
-      super.rawValue = TextEditingValue(
-        text: switch (controller.value) {
-          null => placeholder,
-          final value => _localizations.shortDate(value),
-        },
-      );
-    }
-  }
+  String join(List<String> parts) => parts.join(localizations.shortDateSeparator) + localizations.shortDateSuffix;
 }
