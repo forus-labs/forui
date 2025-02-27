@@ -21,10 +21,9 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(),
+                  FTimeFieldController(initial: const FTime(12, 15)),
                   DateFormat.jm('fr_CA'),
                   context.theme.textFieldStyle,
-                  const FTime(12, 15),
                 ).placeholder;
 
             return const Text('');
@@ -46,10 +45,9 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(),
+                  FTimeFieldController(initial: const FTime(12, 15)),
                   DateFormat.jm('bg'),
                   context.theme.textFieldStyle,
-                  const FTime(12, 15),
                 ).placeholder;
 
             return const Text('');
@@ -71,10 +69,9 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(),
+                  FTimeFieldController(initial: const FTime(12, 15)),
                   DateFormat.jm('zh_HK'),
                   context.theme.textFieldStyle,
-                  const FTime(12, 15),
                 ).placeholder;
 
             return const Text('');
@@ -101,10 +98,9 @@ void main() {
               builder: (context) {
                 final controller = TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(),
+                  FTimeFieldController(initial: const FTime(12, 15)),
                   DateFormat.jm(locale.toString()),
                   context.theme.textFieldStyle,
-                  const FTime(12, 15),
                 );
 
                 parts = controller.selector.split(DateFormat.jm(locale.toString()).format(_date));
@@ -131,10 +127,9 @@ void main() {
               builder: (context) {
                 final controller = TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(),
+                  FTimeFieldController(initial: const FTime(12, 15)),
                   DateFormat.Hm(locale.toString()),
                   context.theme.textFieldStyle,
-                  const FTime(12, 15),
                 );
 
                 parts = controller.selector.split(DateFormat.Hm(locale.toString()).format(_date));

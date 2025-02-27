@@ -213,7 +213,6 @@ void main() {
           FTimeFieldController(),
           DateFormat.jm('eu'),
           TestScaffold.blueScreen.textFieldStyle,
-          const FTime(),
         );
 
         expect(controller.selector.resolve(value), expected);
@@ -258,7 +257,6 @@ void main() {
           FTimeFieldController(),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
-          const FTime(),
         );
 
         expect(controller.selector.resolve(value), expected);
@@ -290,7 +288,6 @@ void main() {
           FTimeFieldController(),
           DateFormat.jm('bg'),
           TestScaffold.blueScreen.textFieldStyle,
-          const FTime(),
         );
 
         expect(controller.selector.resolve(value), expected);
@@ -310,7 +307,6 @@ void main() {
         timeController,
         DateFormat.jm('bg'),
         TestScaffold.blueScreen.textFieldStyle,
-        initial,
       );
       timeController.value = value;
 

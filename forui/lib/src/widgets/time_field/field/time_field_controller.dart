@@ -17,7 +17,6 @@ abstract class TimeFieldController extends FieldController {
     FTimeFieldController controller,
     DateFormat format,
     FTextFieldStyle style,
-    FTime? time,
   ) {
     final placeholder = format.pattern!
         .replaceAll(RegExp('HH|H|hh|h'), 'HH')
@@ -25,6 +24,7 @@ abstract class TimeFieldController extends FieldController {
         .replaceAll(RegExp('mm'), 'MM')
         .replaceAll('a', '--')
         .replaceAll("'", '');
+    final time = controller.value == null ? placeholder : format.format(controller.value!.withDate(DateTime(1970)));
 
     return TimeFieldController.test(
       localizations,
@@ -32,7 +32,7 @@ abstract class TimeFieldController extends FieldController {
       format,
       style,
       placeholder,
-      TextEditingValue(text: time == null ? placeholder : format.format(time.withDate(DateTime(1970)))),
+      TextEditingValue(text: time),
     );
   }
 
