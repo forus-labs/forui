@@ -63,7 +63,7 @@ abstract class FTimeField extends StatefulWidget {
   static Widget defaultIconBuilder(BuildContext _, (FTimeFieldStyle, FTextFieldStateStyle) styles, Widget? _) =>
       Padding(
         padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
-        child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.clock2)),
+        child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.clock4)),
       );
 
   /// The controller.
@@ -75,7 +75,7 @@ abstract class FTimeField extends StatefulWidget {
   /// True if the time field should use the 24-hour format.
   ///
   /// Setting this to false will use the locale's default format, which may be 24-hours. Defaults to false.
-  final hour24;
+  final bool hour24;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -166,7 +166,7 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// See also:
   /// * [FTimeField.picker] - Creates a time field with only a picker.
-  factory FTimeField({
+  const factory FTimeField({
     FTimeFieldController? controller,
     FTimeFieldStyle? style,
     bool hour24,
@@ -269,6 +269,7 @@ abstract class FTimeField extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))

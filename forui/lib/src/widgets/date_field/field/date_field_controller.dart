@@ -111,6 +111,12 @@ class DateFieldController extends FieldController {
       );
     }
   }
+
+  @override
+  void dispose() {
+    controller.removeListener(updateFromCalendar);
+    super.dispose();
+  }
 }
 
 @internal

@@ -77,4 +77,10 @@ abstract class TimeFieldController extends FieldController {
       );
     }
   }
+
+  @override
+  void dispose() {
+    controller.removeListener(updateFromTimeController);
+    super.dispose();
+  }
 }

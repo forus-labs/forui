@@ -1,10 +1,12 @@
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:forui/forui.dart';
+import '../../locale_scaffold.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -84,5 +86,37 @@ void main() {
 
     expect(first.disposed, false);
     expect(second.disposed, false);
+  });
+
+  testWidgets('input only - change locale without changing controller', (tester) async {
+    final controller = FDateFieldController(vsync: tester);
+
+    await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: FDateField.input(controller: controller,))));
+    expect(find.text('MM/DD/YYYY'), findsOneWidget);
+    expect(find.text('YYYY. MM. DD.'), findsNothing);
+
+    await tester.tap(find.byType(FButton));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+    
+    await tester.enterText(find.byType(FTextField), '2025. 02. 27.');
+
+    expect(find.text('MM/DD/YYYY'), findsNothing);
+    expect(find.text('YYYY. MM. DD.'), findsOneWidget);
+  });
+
+  testWidgets('calendar only - change locale without changing controller', (tester) async {
+    final controller = FDateFieldController(vsync: tester);
+
+    await tester.pumpWidget(
+      TestScaffold.app(child: LocaleScaffold(child: FDateField.calendar(controller: controller))),
+    );
+    expect(find.text('Pick a date'), findsOneWidget);
+    expect(find.text('날짜 선택'), findsNothing);
+
+    await tester.tap(find.byType(FButton));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    expect(find.text('Pick a date'), findsNothing);
+    expect(find.text('날짜 선택'), findsOneWidget);
   });
 }

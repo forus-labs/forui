@@ -106,15 +106,6 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
   FieldController createController();
 
   @override
-  void didUpdateWidget(covariant T old) {
-    super.didUpdateWidget(old);
-    if (widget.localizations != old.localizations) {
-      localizations =
-          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
-    }
-  }
-
-  @override
   Widget build(BuildContext _) {
     final onSaved = widget.onSaved;
     return Shortcuts(

@@ -69,20 +69,18 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
 
     final ValueWidgetBuilder<FTextFieldStateStyle>? prefix = switch (widget.prefixBuilder) {
       null => null,
-      final builder when widget.calendar == null =>
-        (context, stateStyle, child) => builder(context, (style, stateStyle), child),
-      final builder =>
+      final builder when widget.calendar != null =>
         (context, stateStyle, child) =>
             MouseRegion(cursor: SystemMouseCursors.click, child: builder(context, (style, stateStyle), child)),
+      final builder => (context, stateStyle, child) => builder(context, (style, stateStyle), child),
     };
 
     final ValueWidgetBuilder<FTextFieldStateStyle>? suffix = switch (widget.suffixBuilder) {
       null => null,
-      final builder when widget.calendar == null =>
-        (context, stateStyle, child) => builder(context, (style, stateStyle), child),
-      final builder =>
+      final builder when widget.calendar != null =>
         (context, stateStyle, child) =>
             MouseRegion(cursor: SystemMouseCursors.click, child: builder(context, (style, stateStyle), child)),
+      final builder => (context, stateStyle, child) => builder(context, (style, stateStyle), child),
     };
 
     final ValueWidgetBuilder<FTextFieldStateStyle> builder = switch (widget.calendar) {
