@@ -23,13 +23,10 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
   int index = 4;
-  FRadioSelectGroupController<String> selectGroupController = FRadioSelectGroupController();
-  late FPopoverController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FPopoverController(vsync: this);
   }
 
   @override
@@ -37,22 +34,40 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     locale: const Locale('en', 'US'),
     localizationsDelegates: FLocalizations.localizationsDelegates,
     supportedLocales: FLocalizations.supportedLocales,
+    theme: FThemes.zinc.light.toMaterialTheme(),
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
-    home: FScaffold(
-      header: FHeader(
-        title: const Text('Example'),
-        actions: [FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: controller.toggle)],
-      ),
-      content: _pages[index],
-      footer: FBottomNavigationBar(
-        index: index,
-        onChange: (index) => setState(() => this.index = index),
-        children: [
-          FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
-          FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Categories')),
-          FBottomNavigationBarItem(icon: FIcon(FAssets.icons.search), label: const Text('Search')),
-          FBottomNavigationBarItem(icon: FIcon(FAssets.icons.settings), label: const Text('Settings')),
-          FBottomNavigationBarItem(icon: FIcon(FAssets.icons.castle), label: const Text('Sandbox')),
+    home: Scaffold(
+      appBar: AppBar(title: const Text('Example')),
+      body: _pages[index],
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (value) {
+          setState(() {
+            index = value;
+          });
+        },
+        selectedIndex: index,
+        destinations: [
+          const NavigationDestination(selectedIcon: Icon(Icons.home), icon: Icon(Icons.home_outlined), label: 'Home'),
+          const NavigationDestination(
+            selectedIcon: Icon(Icons.grid_view),
+            icon: Icon(Icons.grid_view_outlined),
+            label: 'Categories',
+          ),
+          const NavigationDestination(
+            selectedIcon: Icon(Icons.search),
+            icon: Icon(Icons.search_outlined),
+            label: 'Search',
+          ),
+          const NavigationDestination(
+            selectedIcon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
+            label: 'Settings',
+          ),
+          NavigationDestination(
+            selectedIcon: Badge.count(count: 10, child: const Icon(Icons.castle)),
+            icon: Badge.count(count: 10, child: const Icon(Icons.castle_outlined)),
+            label: 'Sandbox',
+          ),
         ],
       ),
     ),

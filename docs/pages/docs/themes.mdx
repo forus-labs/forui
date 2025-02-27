@@ -301,3 +301,45 @@ Widget build(BuildContext context) {
   );
 }
 ```
+
+## Material Design Interoperability
+
+Forui provides a way to convert its themes to Material Design's `ThemeData` for interoperability between Forui and Material widgets. This is useful when:
+
+- Using Material widgets within a Forui application
+- Maintaining consistent theming across both Forui and Material components
+- Gradually migrating from Material Design to Forui
+
+<Callout type="warning">
+  The `toMaterialTheme()` method is marked as experimental. The mapping between Forui and Material themes is done on a best-effort basis, and may not perfectly capture all the nuances of a Forui theme.
+</Callout>
+
+### Usage
+
+A Forui theme can be converted to a Material theme using the `toMaterialTheme()` method.
+
+```dart {9} copy
+import 'package:flutter/material.dart';
+import 'package:forui/forui.dart';
+
+@override
+Widget build(BuildContext context) {
+  final fThemeData = FThemes.zinc.light;
+  
+  return MaterialApp(
+    theme: fThemeData.toMaterialTheme(),
+    home: Scaffold(
+      body: Center(
+        child: FCard(
+          title: 'Mixed Widgets',
+          subtitle: 'Using both Forui and Material widgets together',
+          child: ElevatedButton(
+            onPressed: () {},
+            child: const Text('Material Button'),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+```
