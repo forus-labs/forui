@@ -312,13 +312,14 @@ Forui provides a way to convert its themes to Material Design's `ThemeData` for 
 - Gradually migrating from Material Design to Forui
 
 <Callout type="warning">
-  The `toMaterialTheme()` method is marked as experimental. The mapping between Forui and Material themes is done on a best-effort basis, and may not perfectly capture all the nuances of a Forui theme.
+  The `toApproximateMaterialTheme()` method is marked as experimental. As an experimental feature, this method can change without prior warning.
+  The mapping between Forui and Material themes is done on a best-effort basis, and may not perfectly capture all the nuances of a Forui theme.
 </Callout>
 
 
 ### Usage
 
-A Forui theme can be converted to a Material theme using the `toMaterialTheme()` method.
+A Forui theme can be converted to a Material theme using the `toApproximateMaterialTheme()` method.
 
 ```dart {9} copy
 import 'package:flutter/material.dart';
@@ -329,7 +330,7 @@ Widget build(BuildContext context) {
   final fThemeData = FThemes.zinc.light;
   
   return MaterialApp(
-    theme: fThemeData.toMaterialTheme(),
+    theme: fThemeData.toApproximateMaterialTheme(),
     home: Scaffold(
       body: Center(
         child: FCard(

@@ -283,12 +283,12 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// ```dart
   /// // Apply a Forui theme to Material widgets
   /// MaterialApp(
-  ///   theme: FThemes.zinc.light.toMaterialTheme(),
+  ///   theme: FThemes.zinc.light.toApproximateMaterialTheme(),
   ///   // ...
   /// )
   /// ```
   @experimental
-  ThemeData toMaterialTheme() {
+  ThemeData toApproximateMaterialTheme() {
     // Material requires height to be 1, certain widgets will overflow without it.
     // TextBaseline.alphabetic is required as TextField requires it.
     final textTheme = TextTheme(
