@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Data baliogabea.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Aukeratu ordua",
+  "timeFieldInvalidDateError": "Ordu baliogabea."
 }

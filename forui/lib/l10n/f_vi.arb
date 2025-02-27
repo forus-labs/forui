@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Ngày không hợp lệ.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Chọn thời gian",
+  "timeFieldInvalidDateError": "Thời gian không hợp lệ."
 }

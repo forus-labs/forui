@@ -78,6 +78,12 @@ class FLocalizationsKo extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => '시간 선택';
+
+  @override
+  String get timeFieldInvalidDateError => '잘못된 시간입니다.';
+
+  @override
   String get dialogLabel => '대화상자';
 
   @override

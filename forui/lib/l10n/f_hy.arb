@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Սխալ ամսաթիվ:",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Ընտրեք ժամանակը",
+  "timeFieldInvalidDateError": "Անվավեր ժամանակ:"
 }

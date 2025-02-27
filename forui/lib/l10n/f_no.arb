@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Ugyldig dato.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Velg et tidspunkt",
+  "timeFieldInvalidDateError": "Ugyldig tidspunkt."
 }

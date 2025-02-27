@@ -78,6 +78,12 @@ class FLocalizationsKn extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'ಸಮಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ';
+
+  @override
+  String get timeFieldInvalidDateError => 'ಅಮಾನ್ಯ ಸಮಯ.';
+
+  @override
   String get dialogLabel => 'ಡೈಲಾಗ್';
 
   @override

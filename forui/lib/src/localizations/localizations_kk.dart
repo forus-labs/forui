@@ -78,6 +78,12 @@ class FLocalizationsKk extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Уақытты таңдаңыз';
+
+  @override
+  String get timeFieldInvalidDateError => 'Жарамсыз уақыт.';
+
+  @override
   String get dialogLabel => 'Диалогтық терезе';
 
   @override

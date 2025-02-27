@@ -78,6 +78,12 @@ class FLocalizationsZh extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => '选择时间';
+
+  @override
+  String get timeFieldInvalidDateError => '无效的时间。';
+
+  @override
   String get dialogLabel => '对话框';
 
   @override
@@ -118,6 +124,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => '選擇時間';
+
+  @override
+  String get timeFieldInvalidDateError => '無效的時間。';
+
+  @override
   String get dialogLabel => '對話方塊';
 
   @override
@@ -156,6 +168,12 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => '選擇時間';
+
+  @override
+  String get timeFieldInvalidDateError => '無效的時間。';
 
   @override
   String get dialogLabel => '對話方塊';

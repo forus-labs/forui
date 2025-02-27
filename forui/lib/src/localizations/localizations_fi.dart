@@ -78,6 +78,12 @@ class FLocalizationsFi extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Valitse aika';
+
+  @override
+  String get timeFieldInvalidDateError => 'Virheellinen aika.';
+
+  @override
   String get dialogLabel => 'Valintaikkuna';
 
   @override

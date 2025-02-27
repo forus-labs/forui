@@ -78,6 +78,12 @@ class FLocalizationsAm extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'ሰዓት ይምረጡ';
+
+  @override
+  String get timeFieldInvalidDateError => 'ልክ ያልሆነ ሰዓት።';
+
+  @override
   String get dialogLabel => 'መገናኛ';
 
   @override

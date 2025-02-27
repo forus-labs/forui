@@ -78,6 +78,12 @@ class FLocalizationsHr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Odaberite vrijeme';
+
+  @override
+  String get timeFieldInvalidDateError => 'Nevažeće vrijeme.';
+
+  @override
   String get dialogLabel => 'Dijalog';
 
   @override

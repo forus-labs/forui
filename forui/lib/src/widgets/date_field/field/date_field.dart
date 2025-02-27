@@ -105,4 +105,8 @@ class _DateFieldState extends FieldState<DateField, DateTime?> {
   @override
   @protected
   DateTime? get value => widget.calendarController.value;
+
+  @override
+  @protected
+  String get invalidDateError => localizations.dateFieldInvalidDateError;
 }

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "ଅବୈଧ ତାରିଖ।",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ସମୟ ଚୟନ କରନ୍ତୁ",
+  "timeFieldInvalidDateError": "ଅବୈଧ ସମୟ।"
 }

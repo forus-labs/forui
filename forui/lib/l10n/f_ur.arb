@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "غلط تاریخ۔",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "وقت منتخب کریں",
+  "timeFieldInvalidDateError": "غلط وقت۔"
 }

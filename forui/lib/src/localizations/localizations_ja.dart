@@ -78,6 +78,12 @@ class FLocalizationsJa extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => '時間を選択';
+
+  @override
+  String get timeFieldInvalidDateError => '無効な時間です。';
+
+  @override
   String get dialogLabel => 'ダイアログ';
 
   @override

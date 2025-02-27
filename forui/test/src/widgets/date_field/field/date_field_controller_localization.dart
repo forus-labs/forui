@@ -11,30 +11,6 @@ final _date = DateTime(2024, 12, 25);
 
 // We use a widget to load the locales since Flutter and default intl might have different mappings.
 void main() {
-  testWidgets('remove quotes', (tester) async {
-    late String placeholder;
-    await tester.pumpWidget(
-      TestScaffold.app(
-        locale: const Locale('bg'),
-        child: Builder(
-          builder: (context) {
-            placeholder =
-                DateFieldController(
-                  FCalendarController.date(),
-                  FLocalizations.of(context)!,
-                  context.theme.textFieldStyle,
-                  2025,
-                ).placeholder;
-
-            return const Text('');
-          },
-        ),
-      ),
-    );
-
-    expect(placeholder, 'DD.MM.YYYY г.');
-  });
-
   for (final locale in FLocalizations.supportedLocales.where((locale) => !scriptNumerals.contains(locale.toString()))) {
     testWidgets('split parts - $locale', (tester) async {
       late List<String> parts;

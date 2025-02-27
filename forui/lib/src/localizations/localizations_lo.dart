@@ -78,6 +78,12 @@ class FLocalizationsLo extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'ເລືອກເວລາ';
+
+  @override
+  String get timeFieldInvalidDateError => 'ເວລາບໍ່ຖືກຕ້ອງ.';
+
+  @override
   String get dialogLabel => 'ຂໍ້ຄວາມ';
 
   @override

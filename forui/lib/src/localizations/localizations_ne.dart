@@ -78,6 +78,12 @@ class FLocalizationsNe extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'समय चयन गर्नुहोस्';
+
+  @override
+  String get timeFieldInvalidDateError => 'अमान्य समय।';
+
+  @override
   String get dialogLabel => 'संवाद';
 
   @override

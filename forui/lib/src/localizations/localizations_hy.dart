@@ -78,6 +78,12 @@ class FLocalizationsHy extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Ընտրեք ժամանակը';
+
+  @override
+  String get timeFieldInvalidDateError => 'Անվավեր ժամանակ:';
+
+  @override
   String get dialogLabel => 'Երկխոսության պատուհան';
 
   @override

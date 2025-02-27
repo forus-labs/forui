@@ -78,6 +78,12 @@ class FLocalizationsAz extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Vaxt seçin';
+
+  @override
+  String get timeFieldInvalidDateError => 'Yanlış vaxt.';
+
+  @override
   String get dialogLabel => 'Dialoq';
 
   @override

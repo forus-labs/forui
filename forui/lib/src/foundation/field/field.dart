@@ -150,7 +150,7 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
           validator:
               (value) => switch (this.value) {
                 null when value == controller.placeholder => widget.validator(null),
-                null => localizations.dateFieldInvalidDateError,
+                null => invalidDateError,
                 final value => widget.validator(value),
               },
           autovalidateMode: widget.autovalidateMode,
@@ -167,6 +167,9 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
   @protected
   U get value;
 
+  @protected
+  String get invalidDateError;
+
   @override
   void dispose() {
     controller.dispose();
@@ -180,7 +183,8 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle))
-      ..add(DiagnosticsProperty('value', value));
+      ..add(DiagnosticsProperty('value', value))
+      ..add(StringProperty('invalidDateError', invalidDateError));
   }
 }
 

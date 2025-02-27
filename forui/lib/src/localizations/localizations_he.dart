@@ -78,6 +78,12 @@ class FLocalizationsHe extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'בחר שעה';
+
+  @override
+  String get timeFieldInvalidDateError => 'שעה לא חוקית.';
+
+  @override
   String get dialogLabel => 'תיבת דו-שיח';
 
   @override

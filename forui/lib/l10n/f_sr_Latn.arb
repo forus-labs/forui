@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Nevažeći datum.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Izaberite vreme",
+  "timeFieldInvalidDateError": "Nevažeće vreme."
 }

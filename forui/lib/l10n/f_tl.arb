@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Hindi wastong petsa.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Pumili ng oras",
+  "timeFieldInvalidDateError": "Di-wastong oras."
 }

@@ -11,8 +11,6 @@ import '../../../test_scaffold.dart';
 void main() {
   const key = Key('field');
 
-  setUpAll(initializeDateFormatting);
-
   for (final (description, field) in [
     ('input only', FDateField.input(key: key)),
     ('input & calendar', const FDateField(key: key)),
@@ -22,6 +20,7 @@ void main() {
           (null, 'MM/DD/YYYY'), // M/d/y
           (Locale('en', 'SG'), 'DD/MM/YYYY'), // dd/MM/y
           (Locale('hr'), 'DD. MM. YYYY.'),
+          (Locale('bg'), 'DD.MM.YYYY г.'),
         ].indexed) {
       testWidgets('placeholder - $description - $index', (tester) async {
         await tester.pumpWidget(TestScaffold.app(locale: locale, child: field));

@@ -78,6 +78,12 @@ class FLocalizationsLv extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Izvēlieties laiku';
+
+  @override
+  String get timeFieldInvalidDateError => 'Nederīgs laiks.';
+
+  @override
   String get dialogLabel => 'Dialoglodziņš';
 
   @override

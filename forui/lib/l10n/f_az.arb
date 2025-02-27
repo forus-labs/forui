@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Yanlış tarix.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Vaxt seçin",
+  "timeFieldInvalidDateError": "Yanlış vaxt."
 }

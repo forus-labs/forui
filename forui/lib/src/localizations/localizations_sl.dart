@@ -78,6 +78,12 @@ class FLocalizationsSl extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Izberite čas';
+
+  @override
+  String get timeFieldInvalidDateError => 'Neveljaven čas.';
+
+  @override
   String get dialogLabel => 'Pogovorno okno';
 
   @override

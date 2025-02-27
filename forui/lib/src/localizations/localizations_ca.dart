@@ -78,6 +78,12 @@ class FLocalizationsCa extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Trieu una hora';
+
+  @override
+  String get timeFieldInvalidDateError => 'Hora no vàlida.';
+
+  @override
   String get dialogLabel => 'Diàleg';
 
   @override

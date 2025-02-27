@@ -78,6 +78,12 @@ class FLocalizationsMs extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Pilih masa';
+
+  @override
+  String get timeFieldInvalidDateError => 'Masa tidak sah.';
+
+  @override
   String get dialogLabel => 'Dialog';
 
   @override

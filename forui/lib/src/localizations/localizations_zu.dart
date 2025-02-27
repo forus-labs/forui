@@ -78,6 +78,12 @@ class FLocalizationsZu extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Khetha isikhathi';
+
+  @override
+  String get timeFieldInvalidDateError => 'Isikhathi esingalungile.';
+
+  @override
   String get dialogLabel => 'Ingxoxo';
 
   @override

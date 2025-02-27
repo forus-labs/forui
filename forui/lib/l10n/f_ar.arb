@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "تاريخ غير صالح.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "اختر وقتًا",
+  "timeFieldInvalidDateError": "وقت غير صالح."
 }

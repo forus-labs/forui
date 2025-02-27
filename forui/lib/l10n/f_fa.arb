@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "تاریخ نامعتبر.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "یک زمان انتخاب کنید",
+  "timeFieldInvalidDateError": "زمان نامعتبر است."
 }

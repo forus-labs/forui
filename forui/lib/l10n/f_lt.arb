@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Netinkama data.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Pasirinkite laiką",
+  "timeFieldInvalidDateError": "Neteisingas laikas."
 }

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "날짜가 잘못되었습니다.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "시간 선택",
+  "timeFieldInvalidDateError": "잘못된 시간입니다."
 }

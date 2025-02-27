@@ -78,6 +78,12 @@ class FLocalizationsIs extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Veldu tíma';
+
+  @override
+  String get timeFieldInvalidDateError => 'Ógildur tími.';
+
+  @override
   String get dialogLabel => 'Gluggi';
 
   @override

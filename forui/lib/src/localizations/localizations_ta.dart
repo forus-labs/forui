@@ -78,6 +78,12 @@ class FLocalizationsTa extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'நேரத்தைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get timeFieldInvalidDateError => 'தவறான நேரம்.';
+
+  @override
   String get dialogLabel => 'உரையாடல்';
 
   @override

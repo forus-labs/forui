@@ -78,6 +78,12 @@ class FLocalizationsFr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Choisissez une heure';
+
+  @override
+  String get timeFieldInvalidDateError => 'Heure invalide.';
+
+  @override
   String get dialogLabel => 'Boîte de dialogue';
 
   @override
@@ -116,6 +122,12 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Choisir une heure';
+
+  @override
+  String get timeFieldInvalidDateError => 'Heure invalide.';
 
   @override
   String get dialogLabel => 'Boîte de dialogue';

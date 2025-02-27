@@ -78,6 +78,12 @@ class FLocalizationsAf extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Kies \'n tyd';
+
+  @override
+  String get timeFieldInvalidDateError => 'Ongeldige tyd.';
+
+  @override
   String get dialogLabel => 'Dialoog';
 
   @override

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Dyddiad annilys.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Dewiswch amser",
+  "timeFieldInvalidDateError": "Amser annilys."
 }

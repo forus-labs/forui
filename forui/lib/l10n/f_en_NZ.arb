@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Invalid date.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Pick a time",
+  "timeFieldInvalidDateError": "Invalid time."
 }

@@ -78,6 +78,12 @@ class FLocalizationsEt extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Vali aeg';
+
+  @override
+  String get timeFieldInvalidDateError => 'Vigane aeg.';
+
+  @override
   String get dialogLabel => 'Dialoog';
 
   @override

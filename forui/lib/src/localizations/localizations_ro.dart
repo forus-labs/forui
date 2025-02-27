@@ -78,6 +78,12 @@ class FLocalizationsRo extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Alegeți o oră';
+
+  @override
+  String get timeFieldInvalidDateError => 'Oră invalidă.';
+
+  @override
   String get dialogLabel => 'Casetă de dialog';
 
   @override

@@ -78,6 +78,12 @@ class FLocalizationsSw extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Chagua wakati';
+
+  @override
+  String get timeFieldInvalidDateError => 'Wakati batili.';
+
+  @override
   String get dialogLabel => 'Kidirisha';
 
   @override

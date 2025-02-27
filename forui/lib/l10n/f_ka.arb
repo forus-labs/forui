@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "არასწორი თარიღი.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "აირჩიეთ დრო",
+  "timeFieldInvalidDateError": "არასწორი დრო."
 }

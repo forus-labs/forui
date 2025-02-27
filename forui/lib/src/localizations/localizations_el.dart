@@ -78,6 +78,12 @@ class FLocalizationsEl extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Επιλέξτε μια ώρα';
+
+  @override
+  String get timeFieldInvalidDateError => 'Μη έγκυρη ώρα.';
+
+  @override
   String get dialogLabel => 'Παράθυρο διαλόγου';
 
   @override

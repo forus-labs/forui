@@ -78,6 +78,12 @@ class FLocalizationsPa extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'ਇੱਕ ਸਮਾਂ ਚੁਣੋ';
+
+  @override
+  String get timeFieldInvalidDateError => 'ਅਵੈਧ ਸਮਾਂ।';
+
+  @override
   String get dialogLabel => 'ਵਿੰਡੋ';
 
   @override

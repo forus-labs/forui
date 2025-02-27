@@ -78,6 +78,12 @@ class FLocalizationsPl extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Wybierz godzinę';
+
+  @override
+  String get timeFieldInvalidDateError => 'Nieprawidłowa godzina.';
+
+  @override
   String get dialogLabel => 'Okno dialogowe';
 
   @override

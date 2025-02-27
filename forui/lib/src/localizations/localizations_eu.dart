@@ -78,6 +78,12 @@ class FLocalizationsEu extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Aukeratu ordua';
+
+  @override
+  String get timeFieldInvalidDateError => 'Ordu baliogabea.';
+
+  @override
   String get dialogLabel => 'Leihoa';
 
   @override

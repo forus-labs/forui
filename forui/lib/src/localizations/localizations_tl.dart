@@ -78,6 +78,12 @@ class FLocalizationsTl extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Pumili ng oras';
+
+  @override
+  String get timeFieldInvalidDateError => 'Di-wastong oras.';
+
+  @override
   String get dialogLabel => 'Dialog';
 
   @override

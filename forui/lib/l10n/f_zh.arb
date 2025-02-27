@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "日期无效。",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "选择时间",
+  "timeFieldInvalidDateError": "无效的时间。"
 }

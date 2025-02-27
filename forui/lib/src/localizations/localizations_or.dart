@@ -78,6 +78,12 @@ class FLocalizationsOr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'ସମୟ ଚୟନ କରନ୍ତୁ';
+
+  @override
+  String get timeFieldInvalidDateError => 'ଅବୈଧ ସମୟ।';
+
+  @override
   String get dialogLabel => 'ଡାୟଲଗ୍';
 
   @override

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "தவறான தேதி.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "நேரத்தைத் தேர்ந்தெடுக்கவும்",
+  "timeFieldInvalidDateError": "தவறான நேரம்."
 }

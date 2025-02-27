@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "অমান্য তাৰিখ।",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "সময় বাছনি কৰক",
+  "timeFieldInvalidDateError": "অমান্য সময়।"
 }

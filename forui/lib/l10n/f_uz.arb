@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Sana yaroqsiz.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Vaqtni tanlang",
+  "timeFieldInvalidDateError": "Yaroqsiz vaqt."
 }

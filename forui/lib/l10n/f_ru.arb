@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Недействительная дата.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Выберите время",
+  "timeFieldInvalidDateError": "Недействительное время."
 }

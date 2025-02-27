@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Neplatný dátum.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Vyberte čas",
+  "timeFieldInvalidDateError": "Neplatný čas."
 }

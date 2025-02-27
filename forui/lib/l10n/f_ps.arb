@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "ناسمه نېټه.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "یو وخت وټاکئ",
+  "timeFieldInvalidDateError": "ناسم وخت."
 }

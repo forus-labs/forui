@@ -78,6 +78,12 @@ class FLocalizationsGu extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'સમય પસંદ કરો';
+
+  @override
+  String get timeFieldInvalidDateError => 'અમાન્ય સમય.';
+
+  @override
   String get dialogLabel => 'સંવાદ';
 
   @override

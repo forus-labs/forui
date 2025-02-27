@@ -78,6 +78,12 @@ class FLocalizationsMn extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Цаг сонгох';
+
+  @override
+  String get timeFieldInvalidDateError => 'Буруу цаг.';
+
+  @override
   String get dialogLabel => 'Харилцах цонх';
 
   @override

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Data non válida.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Escolla unha hora",
+  "timeFieldInvalidDateError": "Hora non válida."
 }

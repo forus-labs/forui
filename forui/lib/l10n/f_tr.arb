@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Geçersiz tarih.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Bir zaman seçin",
+  "timeFieldInvalidDateError": "Geçersiz zaman."
 }

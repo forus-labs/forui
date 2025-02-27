@@ -78,6 +78,12 @@ class FLocalizationsBg extends FLocalizations {
   String get timeFieldSuffix => ' ч.';
 
   @override
+  String get timeFieldHint => 'Изберете време';
+
+  @override
+  String get timeFieldInvalidDateError => 'Невалидно време.';
+
+  @override
   String get dialogLabel => 'Диалогов прозорец';
 
   @override

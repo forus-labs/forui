@@ -78,6 +78,12 @@ class FLocalizationsKm extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'ជ្រើសរើសពេលវេលា';
+
+  @override
+  String get timeFieldInvalidDateError => 'ពេលវេលាមិនត្រឹមត្រូវ។';
+
+  @override
   String get dialogLabel => 'ប្រអប់';
 
   @override

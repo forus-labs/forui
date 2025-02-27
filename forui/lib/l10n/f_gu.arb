@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "અમાન્ય તારીખ.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "સમય પસંદ કરો",
+  "timeFieldInvalidDateError": "અમાન્ય સમય."
 }

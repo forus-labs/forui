@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Ongeldige datum.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Kies 'n tyd",
+  "timeFieldInvalidDateError": "Ongeldige tyd."
 }

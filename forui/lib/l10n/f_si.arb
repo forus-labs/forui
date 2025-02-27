@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "අවලංගු දිනයකි.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": "."
+  "timeFieldTimeSeparator": ".",
+  "timeFieldHint": "වේලාවක් තෝරන්න",
+  "timeFieldInvalidDateError": "අවලංගු වේලාවකි."
 }

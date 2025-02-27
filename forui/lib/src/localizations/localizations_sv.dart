@@ -78,6 +78,12 @@ class FLocalizationsSv extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Välj en tid';
+
+  @override
+  String get timeFieldInvalidDateError => 'Ogiltig tid.';
+
+  @override
   String get dialogLabel => 'Dialogruta';
 
   @override

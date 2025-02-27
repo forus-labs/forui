@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Tanggal tidak valid.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": "."
+  "timeFieldTimeSeparator": ".",
+  "timeFieldHint": "Pilih waktu",
+  "timeFieldInvalidDateError": "Waktu tidak valid."
 }

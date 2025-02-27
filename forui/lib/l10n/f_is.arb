@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Ógild dagsetning.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Veldu tíma",
+  "timeFieldInvalidDateError": "Ógildur tími."
 }

@@ -78,6 +78,12 @@ class FLocalizationsMr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'वेळ निवडा';
+
+  @override
+  String get timeFieldInvalidDateError => 'अवैध वेळ.';
+
+  @override
   String get dialogLabel => 'डायलॉग';
 
   @override

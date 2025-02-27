@@ -78,6 +78,12 @@ class FLocalizationsKa extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'აირჩიეთ დრო';
+
+  @override
+  String get timeFieldInvalidDateError => 'არასწორი დრო.';
+
+  @override
   String get dialogLabel => 'დიალოგი';
 
   @override

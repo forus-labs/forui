@@ -78,6 +78,12 @@ class FLocalizationsAr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'اختر وقتًا';
+
+  @override
+  String get timeFieldInvalidDateError => 'وقت غير صالح.';
+
+  @override
   String get dialogLabel => 'مربع حوار';
 
   @override

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "അസാധുവായ തീയതി.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ഒരു സമയം തിരഞ്ഞെടുക്കുക",
+  "timeFieldInvalidDateError": "അസാധുവായ സമയം."
 }

@@ -78,6 +78,12 @@ class FLocalizationsMy extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'အချိန်ရွေးပါ';
+
+  @override
+  String get timeFieldInvalidDateError => 'အချိန်မမှန်ပါ။';
+
+  @override
   String get dialogLabel => 'ဒိုင်ယာလော့';
 
   @override

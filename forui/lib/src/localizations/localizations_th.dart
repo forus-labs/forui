@@ -78,6 +78,12 @@ class FLocalizationsTh extends FLocalizations {
   String get timeFieldSuffix => ' น.';
 
   @override
+  String get timeFieldHint => 'เลือกเวลา';
+
+  @override
+  String get timeFieldInvalidDateError => 'เวลาไม่ถูกต้อง';
+
+  @override
   String get dialogLabel => 'กล่องโต้ตอบ';
 
   @override

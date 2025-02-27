@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Μη έγκυρη ημερομηνία.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Επιλέξτε μια ώρα",
+  "timeFieldInvalidDateError": "Μη έγκυρη ώρα."
 }

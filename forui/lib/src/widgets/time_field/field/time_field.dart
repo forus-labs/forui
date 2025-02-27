@@ -108,4 +108,8 @@ class _TimeFieldState extends FieldState<TimeField, FTime?> {
   @override
   @protected
   FTime? get value => widget.timeController.value;
+
+  @override
+  @protected
+  String get invalidDateError => localizations.timeFieldInvalidDateError;
 }

@@ -13,8 +13,6 @@ import '../../../test_scaffold.dart';
 void main() {
   const key = Key('field');
 
-  setUpAll(initializeDateFormatting);
-
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(TestScaffold.blue(child: FDateField.input(style: TestScaffold.blueScreen.dateFieldStyle)));
 

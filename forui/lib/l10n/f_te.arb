@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "చెల్లని తేదీ.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "సమయాన్ని ఎంచుకోండి",
+  "timeFieldInvalidDateError": "చెల్లని సమయం."
 }

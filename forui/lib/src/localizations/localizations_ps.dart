@@ -78,6 +78,12 @@ class FLocalizationsPs extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'یو وخت وټاکئ';
+
+  @override
+  String get timeFieldInvalidDateError => 'ناسم وخت.';
+
+  @override
   String get dialogLabel => 'خبرې اترې';
 
   @override

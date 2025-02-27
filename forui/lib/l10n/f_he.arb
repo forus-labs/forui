@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "תאריך לא חוקי.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "בחר שעה",
+  "timeFieldInvalidDateError": "שעה לא חוקית."
 }

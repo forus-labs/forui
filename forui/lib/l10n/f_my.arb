@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "ရက်စွဲ မမှန်ကန်ပါ။",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "အချိန်ရွေးပါ",
+  "timeFieldInvalidDateError": "အချိန်မမှန်ပါ။"
 }

@@ -78,6 +78,12 @@ class FLocalizationsTr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Bir zaman seçin';
+
+  @override
+  String get timeFieldInvalidDateError => 'Geçersiz zaman.';
+
+  @override
   String get dialogLabel => 'İletişim kutusu';
 
   @override

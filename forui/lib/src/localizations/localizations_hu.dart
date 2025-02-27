@@ -78,6 +78,12 @@ class FLocalizationsHu extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Válasszon időpontot';
+
+  @override
+  String get timeFieldInvalidDateError => 'Érvénytelen idő.';
+
+  @override
   String get dialogLabel => 'Párbeszédablak';
 
   @override

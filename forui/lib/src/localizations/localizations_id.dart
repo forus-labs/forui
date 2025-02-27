@@ -78,6 +78,12 @@ class FLocalizationsId extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Pilih waktu';
+
+  @override
+  String get timeFieldInvalidDateError => 'Waktu tidak valid.';
+
+  @override
   String get dialogLabel => 'Dialog';
 
   @override

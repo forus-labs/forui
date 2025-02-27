@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Virheellinen päivämäärä.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": "."
+  "timeFieldTimeSeparator": ".",
+  "timeFieldHint": "Valitse aika",
+  "timeFieldInvalidDateError": "Virheellinen aika."
 }

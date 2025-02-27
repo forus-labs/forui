@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Datë e pavlefshme.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Zgjidh një orë",
+  "timeFieldInvalidDateError": "Orë e pavlefshme."
 }

@@ -78,6 +78,12 @@ class FLocalizationsGsw extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Wähle e Zyt';
+
+  @override
+  String get timeFieldInvalidDateError => 'Ungültigi Zyt.';
+
+  @override
   String get dialogLabel => 'Dialogfeld';
 
   @override

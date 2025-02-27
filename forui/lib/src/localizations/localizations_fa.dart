@@ -78,6 +78,12 @@ class FLocalizationsFa extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'یک زمان انتخاب کنید';
+
+  @override
+  String get timeFieldInvalidDateError => 'زمان نامعتبر است.';
+
+  @override
   String get dialogLabel => 'کادر گفتگو';
 
   @override

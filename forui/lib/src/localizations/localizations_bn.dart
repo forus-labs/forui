@@ -78,6 +78,12 @@ class FLocalizationsBn extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'একটি সময় বেছে নিন';
+
+  @override
+  String get timeFieldInvalidDateError => 'অবৈধ সময়।';
+
+  @override
   String get dialogLabel => 'ডায়ালগ';
 
   @override

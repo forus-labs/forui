@@ -78,6 +78,12 @@ class FLocalizationsVi extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Chọn thời gian';
+
+  @override
+  String get timeFieldInvalidDateError => 'Thời gian không hợp lệ.';
+
+  @override
   String get dialogLabel => 'Hộp thoại';
 
   @override

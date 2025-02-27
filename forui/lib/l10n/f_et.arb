@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Sobimatu kuupäev.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Vali aeg",
+  "timeFieldInvalidDateError": "Vigane aeg."
 }

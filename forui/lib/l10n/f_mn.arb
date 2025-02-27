@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Огноо буруу байна.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Цаг сонгох",
+  "timeFieldInvalidDateError": "Буруу цаг."
 }

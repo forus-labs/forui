@@ -78,6 +78,12 @@ class FLocalizationsTe extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'సమయాన్ని ఎంచుకోండి';
+
+  @override
+  String get timeFieldInvalidDateError => 'చెల్లని సమయం.';
+
+  @override
   String get dialogLabel => 'డైలాగ్';
 
   @override

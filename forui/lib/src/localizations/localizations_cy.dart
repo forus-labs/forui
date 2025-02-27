@@ -78,6 +78,12 @@ class FLocalizationsCy extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Dewiswch amser';
+
+  @override
+  String get timeFieldInvalidDateError => 'Amser annilys.';
+
+  @override
   String get dialogLabel => 'Deialog';
 
   @override

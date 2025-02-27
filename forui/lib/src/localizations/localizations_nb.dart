@@ -78,6 +78,12 @@ class FLocalizationsNb extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Velg et klokkeslett';
+
+  @override
+  String get timeFieldInvalidDateError => 'Ugyldig klokkeslett.';
+
+  @override
   String get dialogLabel => 'Dialogboks';
 
   @override

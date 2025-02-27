@@ -78,6 +78,12 @@ class FLocalizationsUr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'وقت منتخب کریں';
+
+  @override
+  String get timeFieldInvalidDateError => 'غلط وقت۔';
+
+  @override
   String get dialogLabel => 'ڈائلاگ';
 
   @override

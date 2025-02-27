@@ -78,6 +78,12 @@ class FLocalizationsSr extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Изаберите време';
+
+  @override
+  String get timeFieldInvalidDateError => 'Неважеће време.';
+
+  @override
   String get dialogLabel => 'Дијалог';
 
   @override
@@ -116,6 +122,12 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Izaberite vreme';
+
+  @override
+  String get timeFieldInvalidDateError => 'Nevažeće vreme.';
 
   @override
   String get dialogLabel => 'Dijalog';

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ជ្រើសរើសពេលវេលា",
+  "timeFieldInvalidDateError": "ពេលវេលាមិនត្រឹមត្រូវ។"
 }

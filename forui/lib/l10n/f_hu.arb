@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Érvénytelen dátum.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Válasszon időpontot",
+  "timeFieldInvalidDateError": "Érvénytelen idő."
 }

@@ -78,6 +78,12 @@ class FLocalizationsUz extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Vaqtni tanlang';
+
+  @override
+  String get timeFieldInvalidDateError => 'Yaroqsiz vaqt.';
+
+  @override
   String get dialogLabel => 'Muloqot oynasi';
 
   @override

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "Nederīgs datums.",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Izvēlieties laiku",
+  "timeFieldInvalidDateError": "Nederīgs laiks."
 }

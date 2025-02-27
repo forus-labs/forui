@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ.",
   "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ಸಮಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "timeFieldInvalidDateError": "ಅಮಾನ್ಯ ಸಮಯ."
 }

@@ -9,5 +9,7 @@
   "dateFieldInvalidDateError": "日付が無効です。",
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
-  "timeFieldTimeSeparator": ":"
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "時間を選択",
+  "timeFieldInvalidDateError": "無効な時間です。"
 }

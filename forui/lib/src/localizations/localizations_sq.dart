@@ -78,6 +78,12 @@ class FLocalizationsSq extends FLocalizations {
   String get timeFieldSuffix => '';
 
   @override
+  String get timeFieldHint => 'Zgjidh një orë';
+
+  @override
+  String get timeFieldInvalidDateError => 'Orë e pavlefshme.';
+
+  @override
   String get dialogLabel => 'Dialogu';
 
   @override
