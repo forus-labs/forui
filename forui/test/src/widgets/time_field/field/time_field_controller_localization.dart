@@ -11,7 +11,7 @@ final _date = DateTime(2024, 12, 25, 15, 30);
 
 // We use a widget to load the locales since Flutter and default intl might have different mappings.
 void main() {
-  testWidgets('remove quotes', (tester) async {
+  testWidgets('remove quotes from special character', (tester) async {
     late String placeholder;
     await tester.pumpWidget(
       TestScaffold.app(
@@ -21,6 +21,7 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
+                  FTimeFieldController(),
                   DateFormat.jm('fr_CA'),
                   context.theme.textFieldStyle,
                   const FTime(12, 15),
@@ -35,6 +36,31 @@ void main() {
     expect(placeholder, 'HH h MM');
   });
 
+  testWidgets('remove quotes', (tester) async {
+    late String placeholder;
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('bg'),
+        child: Builder(
+          builder: (context) {
+            placeholder =
+                TimeFieldController(
+                  FLocalizations.of(context)!,
+                  FTimeFieldController(),
+                  DateFormat.jm('bg'),
+                  context.theme.textFieldStyle,
+                  const FTime(12, 15),
+                ).placeholder;
+
+            return const Text('');
+          },
+        ),
+      ),
+    );
+
+    expect(placeholder, 'HH:MM ч.');
+  });
+
   testWidgets('no separator between time and period', (tester) async {
     late String placeholder;
     await tester.pumpWidget(
@@ -45,6 +71,7 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
+                  FTimeFieldController(),
                   DateFormat.jm('zh_HK'),
                   context.theme.textFieldStyle,
                   const FTime(12, 15),
@@ -74,6 +101,7 @@ void main() {
               builder: (context) {
                 final controller = TimeFieldController(
                   FLocalizations.of(context)!,
+                  FTimeFieldController(),
                   DateFormat.jm(locale.toString()),
                   context.theme.textFieldStyle,
                   const FTime(12, 15),
@@ -103,6 +131,7 @@ void main() {
               builder: (context) {
                 final controller = TimeFieldController(
                   FLocalizations.of(context)!,
+                  FTimeFieldController(),
                   DateFormat.Hm(locale.toString()),
                   context.theme.textFieldStyle,
                   const FTime(12, 15),

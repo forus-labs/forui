@@ -26,6 +26,7 @@ class Time12FieldController extends TimeFieldController {
 
   Time12FieldController(
     FLocalizations localizations,
+    super.controller,
     super.format,
     super.style,
     super.parser,

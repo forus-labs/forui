@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/localizations/localization.dart';
+import 'package:forui/src/foundation/field/field.dart';
+import 'package:forui/src/foundation/field/field_controller.dart';
 
 import 'package:meta/meta.dart';
 
@@ -9,66 +9,42 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
 
 @internal
-class Field extends StatefulWidget {
+class DateField extends Field<DateTime?> {
   final FCalendarController<DateTime?> calendarController;
-  final FDateFieldStyle style;
-  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
-  final Widget? label;
-  final Widget? description;
-  final Widget Function(BuildContext, String) errorBuilder;
-  final bool enabled;
-  final FormFieldSetter<DateTime>? onSaved;
-  final FormFieldValidator<DateTime> validator;
-  final AutovalidateMode autovalidateMode;
-  final String? forceErrorText;
-  final FocusNode? focusNode;
-  final TextInputAction? textInputAction;
-  final TextAlign textAlign;
-  final TextAlignVertical? textAlignVertical;
-  final TextDirection? textDirection;
-  final bool expands;
-  final bool autofocus;
-  final VoidCallback? onEditingComplete;
-  final MouseCursor? mouseCursor;
-  final VoidCallback? onTap;
-  final bool canRequestFocus;
-  final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
-  final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
-  final FLocalizations localizations;
   final int baselineYear;
 
-  const Field({
+  const DateField({
     required this.calendarController,
-    required this.style,
-    required this.builder,
-    required this.label,
-    required this.description,
-    required this.errorBuilder,
-    required this.enabled,
-    required this.onSaved,
-    required this.validator,
-    required this.autovalidateMode,
-    required this.forceErrorText,
-    required this.focusNode,
-    required this.textInputAction,
-    required this.textAlign,
-    required this.textAlignVertical,
-    required this.textDirection,
-    required this.autofocus,
-    required this.expands,
-    required this.onEditingComplete,
-    required this.mouseCursor,
-    required this.onTap,
-    required this.canRequestFocus,
-    required this.prefixBuilder,
-    required this.suffixBuilder,
-    required this.localizations,
     required this.baselineYear,
+    required super.style,
+    required super.builder,
+    required super.label,
+    required super.description,
+    required super.errorBuilder,
+    required super.enabled,
+    required super.onSaved,
+    required super.validator,
+    required super.autovalidateMode,
+    required super.forceErrorText,
+    required super.focusNode,
+    required super.textInputAction,
+    required super.textAlign,
+    required super.textAlignVertical,
+    required super.textDirection,
+    required super.autofocus,
+    required super.expands,
+    required super.onEditingComplete,
+    required super.mouseCursor,
+    required super.onTap,
+    required super.canRequestFocus,
+    required super.prefixBuilder,
+    required super.suffixBuilder,
+    required super.localizations,
     super.key,
   });
 
   @override
-  State<Field> createState() => _FieldState();
+  State<DateField> createState() => _DateFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -101,114 +77,22 @@ class Field extends StatefulWidget {
   }
 }
 
-class _FieldState extends State<Field> {
-  late FLocalizations _localizations;
-  late DateFieldController _controller;
-
+class _DateFieldState extends FieldState<DateField, DateTime?> {
   @override
-  void initState() {
-    super.initState();
-    _localizations =
-        scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
-    _controller = DateFieldController(
-      widget.calendarController,
-      _localizations,
-      widget.style.textFieldStyle,
-      widget.baselineYear,
-    );
-  }
-
-  @override
-  void didUpdateWidget(covariant Field old) {
+  void didUpdateWidget(covariant DateField old) {
     super.didUpdateWidget(old);
-    if (widget.localizations != old.localizations) {
-      _localizations =
-          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
-    }
-
     if (widget.calendarController != old.calendarController) {
-      _controller.dispose();
-      _controller = DateFieldController(
-        widget.calendarController,
-        _localizations,
-        widget.style.textFieldStyle,
-        widget.baselineYear,
-      );
+      controller.dispose();
+      controller = createController();
     }
   }
 
   @override
-  Widget build(BuildContext _) {
-    final onSaved = widget.onSaved;
-    return Shortcuts(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.arrowUp): AdjustIntent(1),
-        SingleActivator(LogicalKeyboardKey.arrowDown): AdjustIntent(-1),
-      },
-      child: Actions(
-        actions: {
-          AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => _controller.adjust(intent.amount)),
-          ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
-            onInvoke: (intent) => _controller.traverse(forward: intent.forward),
-          ),
-        },
-        child: FTextField(
-          controller: _controller,
-          style: widget.style.textFieldStyle,
-          statesController: _controller.states,
-          builder: widget.builder,
-          autocorrect: false,
-          // We cannot use TextInputType.number as it is does not contain a done button.
-          keyboardType: const TextInputType.numberWithOptions(signed: true),
-          minLines: 1,
-          maxLines: 1,
-          label: widget.label,
-          description: widget.description,
-          enabled: widget.enabled,
-          focusNode: widget.focusNode,
-          textInputAction: widget.textInputAction,
-          textAlign: widget.textAlign,
-          textAlignVertical: widget.textAlignVertical,
-          textDirection: widget.textDirection,
-          expands: widget.expands,
-          autofocus: widget.autofocus,
-          onEditingComplete: widget.onEditingComplete,
-          mouseCursor: widget.mouseCursor,
-          onTap: widget.onTap,
-          canRequestFocus: widget.canRequestFocus,
-          prefixBuilder: widget.prefixBuilder,
-          suffixBuilder: widget.suffixBuilder,
-          onSaved: onSaved == null ? null : (_) => onSaved(widget.calendarController.value),
-          validator:
-              (value) => switch (widget.calendarController.value) {
-                null when value == _controller.placeholder => widget.validator(null),
-                null => _localizations.dateFieldInvalidDateError,
-                final value => widget.validator(value),
-              },
-          autovalidateMode: widget.autovalidateMode,
-          forceErrorText: widget.forceErrorText,
-          errorBuilder: widget.errorBuilder,
-        ),
-      ),
-    );
-  }
+  @protected
+  FieldController createController() =>
+      DateFieldController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-}
-
-@internal
-class AdjustIntent extends Intent {
-  final int amount;
-
-  const AdjustIntent(this.amount);
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('amount', amount));
-  }
+  @protected
+  DateTime? get value => widget.calendarController.value;
 }

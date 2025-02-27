@@ -9,7 +9,7 @@ import 'package:forui/src/widgets/date_field/field/field.dart';
 
 part 'calendar/calendar_date_field.dart';
 
-part 'field/date_field.dart';
+part 'field/input_date_field.dart';
 
 /// The date field's controller.
 class FDateFieldController implements FValueNotifier<DateTime?> {
@@ -252,7 +252,7 @@ abstract class FDateField extends StatefulWidget {
     String? forceErrorText,
     Widget Function(BuildContext, String) errorBuilder,
     Key? key,
-  }) = _DateField;
+  }) = _InputDateField;
 
   /// Creates a [FDateField] that allows a date to be selected using only a calendar.
   ///
@@ -389,7 +389,7 @@ abstract class FDateField extends StatefulWidget {
     String? forceErrorText,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Key? key,
-  }) => _DateField(
+  }) => _InputDateField(
     controller: controller,
     style: style,
     autofocus: autofocus,

@@ -1,6 +1,6 @@
 part of '../date_field.dart';
 
-class _DateField extends FDateField {
+class _InputDateField extends FDateField {
   final TextInputAction? textInputAction;
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
@@ -13,7 +13,7 @@ class _DateField extends FDateField {
   final int baselineInputYear;
   final FDateFieldCalendarProperties? calendar;
 
-  const _DateField({
+  const _InputDateField({
     this.textInputAction,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -42,7 +42,7 @@ class _DateField extends FDateField {
   }) : super._();
 
   @override
-  State<StatefulWidget> createState() => _DateFieldState();
+  State<StatefulWidget> createState() => _InputDateFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -62,7 +62,7 @@ class _DateField extends FDateField {
   }
 }
 
-class _DateFieldState extends _FDateFieldState<_DateField> {
+class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.dateFieldStyle;
@@ -92,7 +92,7 @@ class _DateFieldState extends _FDateFieldState<_DateField> {
               _CalendarPopover(controller: _controller, style: style, properties: properties, child: child!);
     }
 
-    return Field(
+    return DateField(
       calendarController: _controller._calendar,
       onTap: widget.calendar == null ? null : _controller.calendar.show,
       style: style,

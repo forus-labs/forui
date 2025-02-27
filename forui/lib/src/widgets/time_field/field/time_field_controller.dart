@@ -9,17 +9,26 @@ import 'package:meta/meta.dart';
 
 @internal
 abstract class TimeFieldController extends FieldController {
+  final FTimeFieldController controller;
   final DateFormat format;
 
-  factory TimeFieldController(FLocalizations localizations, DateFormat format, FTextFieldStyle style, FTime? time) {
+  factory TimeFieldController(
+    FLocalizations localizations,
+    FTimeFieldController controller,
+    DateFormat format,
+    FTextFieldStyle style,
+    FTime? time,
+  ) {
     final placeholder = format.pattern!
         .replaceAll(RegExp('HH|H|hh|h'), 'HH')
         .replaceAll("'HH'", 'h') // fr_CA uses h to separate hour & minute
         .replaceAll(RegExp('mm'), 'MM')
-        .replaceAll('a', '--');
+        .replaceAll('a', '--')
+        .replaceAll("'", '');
 
     return TimeFieldController.test(
       localizations,
+      controller,
       format,
       style,
       placeholder,
@@ -30,6 +39,7 @@ abstract class TimeFieldController extends FieldController {
   @visibleForTesting
   factory TimeFieldController.test(
     FLocalizations localizations,
+    FTimeFieldController controller,
     DateFormat format,
     FTextFieldStyle style,
     String placeholder,
@@ -37,7 +47,34 @@ abstract class TimeFieldController extends FieldController {
   ) => switch (format.pattern!.contains('a')) {
     true => Time12FieldController.new,
     false => Time24FieldController.new,
-  }(localizations, format, style, TimeParser(format), placeholder, value);
+  }(localizations, controller, format, style, TimeParser(format), placeholder, value);
 
-  TimeFieldController.fromValue(this.format, super.style, super.parser, super.placeholder, super.value);
+  TimeFieldController.fromValue(
+    this.controller,
+    this.format,
+    super.style,
+    super.parser,
+    super.placeholder,
+    super.value,
+  ) {
+    controller.addListener(updateFromTimeController);
+  }
+
+  @override
+  void onValueChanged(String newValue) {
+    final time = format.tryParseStrict(newValue, true);
+    controller.value = time == null ? null : FTime.fromDateTime(time);
+  }
+
+  @visibleForTesting
+  void updateFromTimeController() {
+    if (!mutating) {
+      rawValue = TextEditingValue(
+        text: switch (controller.value) {
+          null => placeholder,
+          final value => format.format(value.withDate(DateTime(1970))),
+        },
+      );
+    }
+  }
 }
