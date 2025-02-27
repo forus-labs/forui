@@ -155,15 +155,10 @@ class _SandboxState extends State<Sandbox> {
 
       // Forui TextField
       const Text('Forui TextField', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-      const FTextField(
-        label: Text('Username'),
-        hint: 'JaneDoe',
-      ),
-      const FTextField.password(
-        hint: 'Enter your password',
-      ),
-      
-      // TabBar 
+      const FTextField(label: Text('Username'), hint: 'JaneDoe'),
+      const FTextField.password(hint: 'Enter your password'),
+
+      // TabBar
       const Text('TabBar with DefaultTabController', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       const SizedBox(
         height: 150,
@@ -191,62 +186,52 @@ class _SandboxState extends State<Sandbox> {
           ),
         ),
       ),
-      
+
       // AlertDialog
       const Text('AlertDialog', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ElevatedButton(
         onPressed: () {
           showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-                title: const Text('Confirm Action'),
-                content: const Text('Are you sure you want to proceed with this action?'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('OK'),
-                  ),
-                ],
-              ),
+            builder:
+                (context) => AlertDialog(
+                  title: const Text('Confirm Action'),
+                  content: const Text('Are you sure you want to proceed with this action?'),
+                  actions: [
+                    TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                    TextButton(onPressed: () => Navigator.of(context).pop(), child: const Text('OK')),
+                  ],
+                ),
           );
         },
         child: const Text('Show Alert Dialog'),
       ),
-      
+
       // BottomSheet
       const Text('BottomSheet', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ElevatedButton(
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => Container(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'Bottom Sheet Content',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text('This is a modal bottom sheet that slides up from the bottom of the screen.'),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Close'),
-                    ),
-                  ],
+            builder:
+                (context) => Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('Bottom Sheet Content', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 16),
+                      const Text('This is a modal bottom sheet that slides up from the bottom of the screen.'),
+                      const SizedBox(height: 16),
+                      ElevatedButton(onPressed: () => Navigator.of(context).pop(), child: const Text('Close')),
+                    ],
+                  ),
                 ),
-              ),
           );
         },
         child: const Text('Show Bottom Sheet'),
       ),
-      
+
       // Card
       const Text('Card', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       const Card(
@@ -255,20 +240,14 @@ class _SandboxState extends State<Sandbox> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Material Card',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              Text('Material Card', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               SizedBox(height: 8),
-              Text(
-                'Cards contain content and actions about a single subject.',
-                style: TextStyle(fontSize: 14),
-              ),
+              Text('Cards contain content and actions about a single subject.', style: TextStyle(fontSize: 14)),
             ],
           ),
         ),
       ),
-      
+
       // ListTile
       const Text('ListTile', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       Card(
@@ -279,35 +258,26 @@ class _SandboxState extends State<Sandbox> {
               leading: const CircleAvatar(child: Icon(Icons.person)),
               title: const Text('John Doe'),
               subtitle: const Text('Software Developer'),
-              trailing: IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {},
-              ),
+              trailing: IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
             ),
             const Divider(height: 1),
             ListTile(
               leading: const CircleAvatar(child: Icon(Icons.person_outline)),
               title: const Text('Jane Smith'),
               subtitle: const Text('UX Designer'),
-              trailing: IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {},
-              ),
+              trailing: IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
             ),
             const Divider(height: 1),
             ListTile(
               leading: const CircleAvatar(child: Icon(Icons.person_2_outlined)),
               title: const Text('Robert Johnson'),
               subtitle: const Text('Product Manager'),
-              trailing: IconButton(
-                icon: const Icon(Icons.more_vert),
-                onPressed: () {},
-              ),
+              trailing: IconButton(icon: const Icon(Icons.more_vert), onPressed: () {}),
             ),
           ],
         ),
       ),
-      
+
       // SnackBar
       const Text('SnackBar', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ElevatedButton(
@@ -315,10 +285,7 @@ class _SandboxState extends State<Sandbox> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: const Text('This is a snackbar message'),
-              action: SnackBarAction(
-                label: 'UNDO',
-                onPressed: () {},
-              ),
+              action: SnackBarAction(label: 'UNDO', onPressed: () {}),
               duration: const Duration(seconds: 3),
               behavior: SnackBarBehavior.floating,
             ),
