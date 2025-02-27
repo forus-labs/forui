@@ -21,7 +21,7 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(initial: const FTime(12, 15)),
+                  FTimeFieldController(vsync: const TestVSync(), initial: const FTime(12, 15)),
                   DateFormat.jm('fr_CA'),
                   context.theme.textFieldStyle,
                 ).placeholder;
@@ -45,7 +45,7 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(initial: const FTime(12, 15)),
+                  FTimeFieldController(vsync: const TestVSync(), initial: const FTime(12, 15)),
                   DateFormat.jm('bg'),
                   context.theme.textFieldStyle,
                 ).placeholder;
@@ -69,7 +69,7 @@ void main() {
             placeholder =
                 TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(initial: const FTime(12, 15)),
+                  FTimeFieldController(vsync: const TestVSync(), initial: const FTime(12, 15)),
                   DateFormat.jm('zh_HK'),
                   context.theme.textFieldStyle,
                 ).placeholder;
@@ -98,7 +98,7 @@ void main() {
               builder: (context) {
                 final controller = TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(initial: const FTime(12, 15)),
+                  FTimeFieldController(vsync: const TestVSync(), initial: const FTime(12, 15)),
                   DateFormat.jm(locale.toString()),
                   context.theme.textFieldStyle,
                 );
@@ -127,7 +127,7 @@ void main() {
               builder: (context) {
                 final controller = TimeFieldController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(initial: const FTime(12, 15)),
+                  FTimeFieldController(vsync: const TestVSync(), initial: const FTime(12, 15)),
                   DateFormat.Hm(locale.toString()),
                   context.theme.textFieldStyle,
                 );

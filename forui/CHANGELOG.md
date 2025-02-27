@@ -14,9 +14,11 @@
 ### Changes
 
 * Change all widget styles to use code generated functions.
+* Change spacing between `FDateField`'s default prefix icon and content.
 * Change `FDefaultLocalization` to point to `en`.
 * **Breaking** Change `FDatePicker` to `FDateField`.
 * **Breaking** Change `FDatePickerController` to `FDateFieldController`.
+* **Breaking** Change `FDatePickerController.calendar` to `FDateFieldController.popover`.
 * **Breaking** Change `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
 * **Breaking** Change `FLocalizations.datePickerHint` to `FLocalizations.dateFieldHint`.
 * **Breaking** Change `FLocalizations.datePickerInvalidDateError` to `FLocalizations.dateFieldInvalidDateError`.
@@ -26,6 +28,7 @@
 * **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
 
 ### Fixes
+* Fix `FDateField.input` to show default icon.
 * Fix `FTab` not updating when using controller to switch tabs.
 * Fix `FPicker` incorrectly detecting number of wheels when controller is not given and placeholder is used.
 * Fix `FDateField` not handling `bg`, `en`, `sr`, `sr_Latn` and `zu` locales properly.

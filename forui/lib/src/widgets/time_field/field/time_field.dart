@@ -12,12 +12,13 @@ import 'package:forui/forui.dart';
 @internal
 class TimeField extends Field<FTime?> {
   final FTimeFieldController timeController;
+  final FTimeFieldStyle style;
   final bool hour24;
 
   const TimeField({
     required this.timeController,
     required this.hour24,
-    required super.style,
+    required this.style,
     required super.builder,
     required super.label,
     required super.description,
@@ -70,7 +71,6 @@ class TimeField extends Field<FTime?> {
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
@@ -94,6 +94,10 @@ class _TimeFieldState extends FieldState<TimeField, FTime?> {
     final format = widget.hour24 ? DateFormat.Hm(localizations.localeName) : DateFormat.jm(localizations.localeName);
     return TimeFieldController(localizations, widget.timeController, format, widget.style.textFieldStyle);
   }
+
+  @override
+  @protected
+  FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
 
   @override
   @protected

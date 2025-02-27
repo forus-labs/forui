@@ -118,7 +118,7 @@ abstract class FDateField extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
   static Widget defaultIconBuilder(BuildContext _, (FDateFieldStyle, FTextFieldStateStyle) styles, Widget? _) =>
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+        padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
         child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.calendar)),
       );
 

@@ -65,7 +65,7 @@ void main() {
       test('multiple separator - $index', () {
         final controller = TimeFieldController.test(
           FLocalizationsFrCa(),
-          FTimeFieldController(),
+          FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
           'HH h MM',
@@ -96,7 +96,7 @@ void main() {
       test('forward - $index', () {
         final controller = TimeFieldController.test(
           FLocalizationsFrCa(),
-          FTimeFieldController(),
+          FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
           'HH h MM',
@@ -125,7 +125,7 @@ void main() {
       test('backward - $index', () {
         final controller = TimeFieldController.test(
           FLocalizationsFrCa(),
-          FTimeFieldController(),
+          FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
           'HH h MM',
@@ -164,7 +164,7 @@ void main() {
     testWidgets('adjust - $index', (tester) async {
       final controller = TimeFieldController.test(
         FLocalizationsFrCa(),
-        FTimeFieldController(),
+        FTimeFieldController(vsync: const TestVSync()),
         DateFormat.jm('fr_CA'),
         TestScaffold.blueScreen.textFieldStyle,
         'HH h MM',
@@ -210,7 +210,7 @@ void main() {
       test('single time separator - $index', () {
         final controller = TimeFieldController(
           FLocalizationsEu(),
-          FTimeFieldController(),
+          FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('eu'),
           TestScaffold.blueScreen.textFieldStyle,
         );
@@ -254,7 +254,7 @@ void main() {
       test('multiple time separator - $index', () {
         final controller = TimeFieldController(
           FLocalizationsFrCa(),
-          FTimeFieldController(),
+          FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
           TestScaffold.blueScreen.textFieldStyle,
         );
@@ -285,7 +285,7 @@ void main() {
       test('suffix - $index', () {
         final controller = TimeFieldController(
           FLocalizationsBg(),
-          FTimeFieldController(),
+          FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('bg'),
           TestScaffold.blueScreen.textFieldStyle,
         );
@@ -301,7 +301,7 @@ void main() {
     (const FTime(9, 30), null, const TextEditingValue(text: 'HH:MM ч.')),
   ].indexed) {
     test('update from time controller(...) - $index', () {
-      final timeController = FTimeFieldController(initial: initial);
+      final timeController = FTimeFieldController(vsync: const TestVSync(), initial: initial);
       final controller = TimeFieldController(
         FLocalizationsBg(),
         timeController,

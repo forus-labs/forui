@@ -1,19 +1,17 @@
-part of '../date_field.dart';
+part of '../time_field.dart';
 
-class _InputDateField extends FDateField {
+class _InputTimeField extends FTimeField {
   final TextInputAction? textInputAction;
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
   final TextDirection? textDirection;
   final bool expands;
   final VoidCallback? onEditingComplete;
-  final ValueChanged<DateTime>? onSubmit;
+  final ValueChanged<FTime>? onSubmit;
   final MouseCursor? mouseCursor;
   final bool canRequestFocus;
-  final int baselineInputYear;
-  final FDateFieldCalendarProperties? calendar;
 
-  const _InputDateField({
+  const _InputTimeField({
     this.textInputAction,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -23,10 +21,9 @@ class _InputDateField extends FDateField {
     this.onSubmit,
     this.mouseCursor,
     this.canRequestFocus = true,
-    this.baselineInputYear = 2000,
-    this.calendar = const FDateFieldCalendarProperties(),
     super.controller,
     super.style,
+    super.hour24,
     super.autofocus,
     super.focusNode,
     super.prefixBuilder,
@@ -42,7 +39,7 @@ class _InputDateField extends FDateField {
   }) : super._();
 
   @override
-  State<_InputDateField> createState() => _InputDateFieldState();
+  State<_InputTimeField> createState() => _InputTimeFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -56,44 +53,20 @@ class _InputDateField extends FDateField {
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(DiagnosticsProperty('calendar', calendar))
-      ..add(IntProperty('baselineInputYear', baselineInputYear));
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'));
   }
 }
 
-class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
+class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.dateFieldStyle;
+    final style = widget.style ?? context.theme.timeFieldStyle;
+    ValueWidgetBuilder<FTextFieldStateStyle>? prefix;
+    ValueWidgetBuilder<FTextFieldStateStyle>? suffix;
 
-    final ValueWidgetBuilder<FTextFieldStateStyle>? prefix = switch (widget.prefixBuilder) {
-      null => null,
-      final builder when widget.calendar == null =>
-        (context, stateStyle, child) => builder(context, (style, stateStyle), child),
-      final builder =>
-        (context, stateStyle, child) =>
-            MouseRegion(cursor: SystemMouseCursors.click, child: builder(context, (style, stateStyle), child)),
-    };
-
-    final ValueWidgetBuilder<FTextFieldStateStyle>? suffix = switch (widget.suffixBuilder) {
-      null => null,
-      final builder when widget.calendar == null =>
-        (context, stateStyle, child) => builder(context, (style, stateStyle), child),
-      final builder =>
-        (context, stateStyle, child) =>
-            MouseRegion(cursor: SystemMouseCursors.click, child: builder(context, (style, stateStyle), child)),
-    };
-
-    final ValueWidgetBuilder<FTextFieldStateStyle> builder = switch (widget.calendar) {
-      null => (_, _, child) => child!,
-      final properties =>
-        (_, _, child) => _CalendarPopover(controller: _controller, style: style, properties: properties, child: child!),
-    };
-
-    return DateField(
-      calendarController: _controller._calendar,
-      onTap: widget.calendar == null ? null : _controller.calendar.show,
+    return TimeField(
+      timeController: _controller,
+      hour24: widget.hour24,
       style: style,
       label: widget.label,
       description: widget.description,
@@ -112,12 +85,12 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
       autofocus: widget.autofocus,
       onEditingComplete: widget.onEditingComplete,
       mouseCursor: widget.mouseCursor,
+      onTap: null,
       canRequestFocus: widget.canRequestFocus,
       prefixBuilder: prefix,
       suffixBuilder: suffix,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
-      baselineYear: widget.baselineInputYear,
-      builder: builder,
+      builder: (_, _, child) => child!,
     );
   }
 }

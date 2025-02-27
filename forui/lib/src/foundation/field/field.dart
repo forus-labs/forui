@@ -10,7 +10,6 @@ import 'package:forui/forui.dart';
 
 @internal
 abstract class Field<T> extends StatefulWidget {
-  final FDateFieldStyle style;
   final ValueWidgetBuilder<FTextFieldStateStyle> builder;
   final Widget? label;
   final Widget? description;
@@ -36,7 +35,6 @@ abstract class Field<T> extends StatefulWidget {
   final FLocalizations localizations;
 
   const Field({
-    required this.style,
     required this.builder,
     required this.label,
     required this.description,
@@ -67,7 +65,6 @@ abstract class Field<T> extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
@@ -134,7 +131,7 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
         },
         child: FTextField(
           controller: controller,
-          style: widget.style.textFieldStyle,
+          style: textFieldStyle,
           statesController: controller.states,
           builder: widget.builder,
           autocorrect: false,
@@ -174,6 +171,9 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
   }
 
   @protected
+  FTextFieldStyle get textFieldStyle;
+
+  @protected
   U get value;
 
   @override
@@ -188,6 +188,7 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
     properties
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle))
       ..add(DiagnosticsProperty('value', value));
   }
 }

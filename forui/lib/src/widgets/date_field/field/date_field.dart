@@ -11,12 +11,13 @@ import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
 @internal
 class DateField extends Field<DateTime?> {
   final FCalendarController<DateTime?> calendarController;
+  final FDateFieldStyle style;
   final int baselineYear;
 
   const DateField({
     required this.calendarController,
+    required this.style,
     required this.baselineYear,
-    required super.style,
     required super.builder,
     required super.label,
     required super.description,
@@ -91,6 +92,9 @@ class _DateFieldState extends FieldState<DateField, DateTime?> {
   @protected
   FieldController createController() =>
       DateFieldController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
+
+  @override
+  FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
 
   @override
   @protected
