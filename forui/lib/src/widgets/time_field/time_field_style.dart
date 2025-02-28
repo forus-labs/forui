@@ -23,7 +23,7 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
 
   /// The time field's picker style.
   @override
-  final FPickerStyle pickerStyle;
+  final FTimePickerStyle pickerStyle;
 
   /// The time field icon's style.
   @override
@@ -43,7 +43,7 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
     : this(
         textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
-        pickerStyle: FPickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        pickerStyle: FTimePickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
       );
 }

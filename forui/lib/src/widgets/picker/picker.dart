@@ -106,6 +106,7 @@ class FPicker extends StatefulWidget {
 
 class _FPickerState extends State<FPicker> {
   late FPickerController _controller;
+
   // This prevents the controller's value from being updated when the wheels are scrolling.
   int _scrolling = 0;
 
@@ -159,7 +160,8 @@ class _FPickerState extends State<FPicker> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.pickerStyle;
-    final selectionExtent = FPickerWheel.estimateExtent(style, context) * style.magnification;
+    final selectionExtent =
+        FPickerWheel.estimateExtent(style, context) * style.magnification + style.selectionHeightAdjustment;
 
     var wheelIndex = 0;
     return Stack(

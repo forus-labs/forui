@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 part 'picker_style.style.dart';
 
 /// [FPickerStyle]'s style.
-final class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
+class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   /// A ratio between the diameter of the cylinder and the viewport's size.
   @override
   final double diameterRatio;
@@ -40,6 +40,10 @@ final class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   @override
   final TextHeightBehavior textHeightBehavior;
 
+  /// An amount to add to the height of the selection.
+  @override
+  final double selectionHeightAdjustment;
+
   /// The selection's border radius.
   @override
   final BorderRadius selectionBorderRadius;
@@ -67,6 +71,7 @@ final class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
       applyHeightToFirstAscent: false,
       applyHeightToLastDescent: false,
     ),
+    this.selectionHeightAdjustment = 0,
   }) : assert(0 < diameterRatio, 'The diameter ratio must be greater than 0.'),
        assert(0 < squeeze, 'The squeeze must be greater than 0.'),
        assert(0 < magnification, 'The magnification must be greater than 0.'),
@@ -79,7 +84,7 @@ final class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   /// Creates a [FPickerStyle] that inherits its properties.
   FPickerStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
     : this(
-        textStyle: typography.lg.copyWith(fontWeight: FontWeight.w500),
+        textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
         selectionBorderRadius: style.borderRadius,
         selectionColor: colorScheme.muted,
         focusedOutlineStyle: style.focusedOutlineStyle,

@@ -7,9 +7,12 @@
 * Add `FTransformables`.
 * Add `FTextField.stylusHandwritingEnabled`.
 * Add `FPickerWheelMixin`.
-* Add `FTimePicker`.
-* Add `FTimePickerController`.
-* Add `FThemeData.toApproximateMaterialTheme()`
+* Add `FTimeField`.
+* Add `FTimeFieldController`.
+* Add `FTimeFieldProperties`.
+* Add `FThemeData.toApproximateMaterialTheme()`.
+* Add `FTimePickerStyle`.
+* Add `FPickerStyle.selectionHeightAdjustment`.
 
 ### Changes
 
@@ -26,6 +29,8 @@
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
 * **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
+* **Breaking** Change default `FPickerStyle.textStyle` size from `lg` to `base`.
+* **Breaking** Change `FTimePickerStyle` to use `FTimePickerStyle` instead of `FPickerStyle`.
 
 ### Fixes
 * Fix `FDateField.input` to show default icon.

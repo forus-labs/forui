@@ -128,6 +128,9 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// The time field's style.
   final FTimeFieldStyle timeFieldStyle;
 
+  /// The time picker style.
+  final FTimePickerStyle timePickerStyle;
+
   /// The tooltip style.
   final FTooltipStyle tooltipStyle;
 
@@ -168,9 +171,10 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
-    FTooltipStyle? tooltipStyle,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
+    FTimePickerStyle? timePickerStyle,
+    FTooltipStyle? tooltipStyle,
   }) {
     typography = typography ?? FTypography.inherit(colorScheme: colorScheme);
     style = style ?? FStyle.inherit(colorScheme: colorScheme, typography: typography);
@@ -224,12 +228,14 @@ final class FThemeData with Diagnosticable, FTransformable {
       tabsStyle: tabsStyle ?? FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle:
           textFieldStyle ?? FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      tooltipStyle:
-          tooltipStyle ?? FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tileGroupStyle:
           tileGroupStyle ?? FTileGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       timeFieldStyle:
           timeFieldStyle ?? FTimeFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      timePickerStyle:
+          timePickerStyle ?? FTimePickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tooltipStyle:
+          tooltipStyle ?? FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
     );
   }
 
@@ -269,9 +275,10 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.switchStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
-    required this.tooltipStyle,
     required this.tileGroupStyle,
     required this.timeFieldStyle,
+    required this.timePickerStyle,
+    required this.tooltipStyle,
   });
 
   /// Converts this [FThemeData] to a Material [ThemeData] on a best-effort basis.
@@ -916,6 +923,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('timeFieldStyle', timeFieldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('timePickerStyle', timePickerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug));
   }
 
@@ -960,6 +968,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           textFieldStyle == other.textFieldStyle &&
           tileGroupStyle == other.tileGroupStyle &&
           timeFieldStyle == other.timeFieldStyle &&
+          timePickerStyle == other.timePickerStyle &&
           tooltipStyle == other.tooltipStyle;
 
   @override
@@ -1000,5 +1009,6 @@ final class FThemeData with Diagnosticable, FTransformable {
       textFieldStyle.hashCode ^
       tileGroupStyle.hashCode ^
       timeFieldStyle.hashCode ^
+      timePickerStyle.hashCode ^
       tooltipStyle.hashCode;
 }
