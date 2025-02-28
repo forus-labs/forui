@@ -1,5 +1,4 @@
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -91,14 +90,14 @@ void main() {
   testWidgets('input only - change locale without changing controller', (tester) async {
     final controller = FDateFieldController(vsync: tester);
 
-    await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: FDateField.input(controller: controller,))));
+    await tester.pumpWidget(
+      TestScaffold.app(child: LocaleScaffold(child: FDateField.input(controller: controller, key: key))),
+    );
     expect(find.text('MM/DD/YYYY'), findsOneWidget);
     expect(find.text('YYYY. MM. DD.'), findsNothing);
 
     await tester.tap(find.byType(FButton));
     await tester.pumpAndSettle(const Duration(seconds: 1));
-    
-    await tester.enterText(find.byType(FTextField), '2025. 02. 27.');
 
     expect(find.text('MM/DD/YYYY'), findsNothing);
     expect(find.text('YYYY. MM. DD.'), findsOneWidget);

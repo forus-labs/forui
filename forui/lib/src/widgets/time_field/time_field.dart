@@ -3,9 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_field/field/time_field.dart';
+import 'package:forui/src/widgets/time_field/picker/properties.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 part 'field/input_time_field.dart';
+
+part 'picker/picker_time_field.dart';
 
 /// The time field's controller.
 class FTimeFieldController extends FValueNotifier<FTime?> {
@@ -23,6 +26,9 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
   /// Defaults to always returning null.
   final FormFieldValidator<FTime> validator;
 
+  final FTimePickerController _picker;
+  bool _mutating = false;
+
   /// Creates a [FTimeFieldController].
   FTimeFieldController({
     required TickerProvider vsync,
@@ -30,7 +36,23 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
     FTime? initial,
     Duration popoverAnimationDuration = const Duration(milliseconds: 100),
   }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
-       super(initial);
+       _picker = FTimePickerController(initial: initial ?? const FTime()),
+       super(initial) {
+    _picker.addValueListener((time) {
+      try {
+        _mutating = true;
+        value = time;
+      } finally {
+        _mutating = false;
+      }
+    });
+
+    addValueListener((time) {
+      if (!_mutating && time != null) {
+        _picker.value = time;
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -52,7 +74,8 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
 /// The input field does not support the following locales that use non-western numerals, it will default to English:
 /// {@macro forui.localizations.fScriptNumerals}
 ///
-/// Consider providing a [FTimeField.validator] to perform custom time validation logic. By default, all times are valid.
+/// Consider providing a [FTimeFieldController.validator] to perform custom time validation logic. By default, all
+/// times are valid.
 ///
 /// See:
 /// * https://forui.dev/docs/form/time-field for working examples.
@@ -195,12 +218,11 @@ abstract class FTimeField extends StatefulWidget {
 
   /// Creates a [FTimeField] that allows a time to be selected using only a picker.
   ///
-  /// The [format] customizes the appearance of the time in the input field. Defaults to the [DateFormat.jm] in the
-  /// current locale.
+  /// The [format] customizes the appearance of the time in the input field. Defaults to the [DateFormat.Hm] if
+  /// [hour24] is true or [DateFormat.jm] if false.
   ///
-  /// // TODO: add default hint
   /// The [hint] is displayed when the input field is empty. Defaults to the current locale's
-  /// [FLocalizations.dateFieldHint].
+  /// [FLocalizations.timeFieldHint].
   ///
   /// The [textAlign] property is used to specify the alignment of the text within the input field.
   ///
@@ -215,8 +237,6 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// If [canRequestFocus] is false, the input field cannot obtain focus but can still be selected.
   ///
-  /// When [autoHide] is true, the picker will automatically hide after a picker is selected.
-  ///
   /// The [anchor] and [inputAnchor] control the alignment points for the picker popover positioning.
   /// Defaults to [Alignment.topLeft] and [Alignment.bottomLeft] respectively.
   ///
@@ -229,39 +249,43 @@ abstract class FTimeField extends StatefulWidget {
   /// [directionPadding] controls whether the popover should include the cross-axis padding of the anchor when aligning
   /// to it. Defaults to false.
   ///
+  /// [hourInterval] and [minuteInterval] control the increment/decrement interval of the hour and minute respectively.
+  /// Default to 1.
+  ///
   /// See also:
   /// * [FTimeField.new] - Creates a time field with only an input field.
-  // TODO:
-  // const factory FTimeField.picker({
-  //   FTimeFieldController? controller,
-  //   FTimeFieldStyle? style,
-  //   DateFormat? format,
-  //   TextAlign textAlign,
-  //   TextAlignVertical? textAlignVertical,
-  //   TextDirection? textDirection,
-  //   bool expands,
-  //   MouseCursor mouseCursor,
-  //   bool canRequestFocus,
-  //   String? hint,
-  //   bool autofocus,
-  //   FocusNode? focusNode,
-  //   bool autoHide,
-  //   Alignment anchor,
-  //   Alignment inputAnchor,
-  //   Offset Function(Size, FPortalChildBox, FPortalBox) shift,
-  //   FHidePopoverRegion hideOnTapOutside,
-  //   bool directionPadding,
-  //   ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? prefixBuilder,
-  //   ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? suffixBuilder,
-  //   Widget? label,
-  //   Widget? description,
-  //   bool enabled,
-  //   FormFieldSetter<FTime>? onSaved,
-  //   AutovalidateMode autovalidateMode,
-  //   String? forceErrorText,
-  //   Widget Function(BuildContext, String) errorBuilder,
-  //   Key? key,
-  // }) = _CalendarDateField;
+  const factory FTimeField.picker({
+    FTimeFieldController? controller,
+    FTimeFieldStyle? style,
+    bool hour24,
+    DateFormat? format,
+    TextAlign textAlign,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands,
+    MouseCursor mouseCursor,
+    bool canRequestFocus,
+    String? hint,
+    bool autofocus,
+    FocusNode? focusNode,
+    Alignment anchor,
+    Alignment inputAnchor,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    FHidePopoverRegion hideOnTapOutside,
+    bool directionPadding,
+    int hourInterval,
+    int minuteInterval,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? prefixBuilder,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? suffixBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled,
+    FormFieldSetter<FTime>? onSaved,
+    AutovalidateMode autovalidateMode,
+    String? forceErrorText,
+    Widget Function(BuildContext, String) errorBuilder,
+    Key? key,
+  }) = _PickerTimeField;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

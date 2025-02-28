@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 
 /// A date picker calendar popover's properties.
 class FDateFieldCalendarProperties with Diagnosticable {
-  /// The alignment point on the calendar popover. Defaults to [Alignment.topLeft]
+  /// The alignment point on the calendar popover. Defaults to [Alignment.topLeft].
   final Alignment anchor;
 
   /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
@@ -17,7 +17,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
 
-  /// Whether to add padding based on the popover direction. Defaults
+  /// Whether to add padding based on the popover direction. Defaults to false.
   final bool directionPadding;
 
   /// Customizes the appearance of calendar days.

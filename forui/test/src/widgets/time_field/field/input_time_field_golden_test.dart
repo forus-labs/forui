@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:forui/forui.dart';
 import '../../../test_scaffold.dart';
@@ -33,6 +32,21 @@ void main() {
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FTimeField(prefixBuilder: null)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/no-icon.png'));
+    });
+
+    testWidgets('${theme.name} 24 hours', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('en', 'US'),
+          child: const FTimeField(hour24: true, key: key),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), '13:00');
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/hour-24.png'));
     });
 
     testWidgets('${theme.name} hr locale', (tester) async {

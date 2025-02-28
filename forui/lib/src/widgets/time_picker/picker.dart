@@ -91,7 +91,10 @@ class _HourPickerState extends State<_HourPicker> {
       final next = period.selectedItem.isEven ? 1 : 0;
 
       if (!widget.controller.mutating && ((_previous == 11 && current == 0) || (_previous == 0 && current == 11))) {
-        period.animateToItem(next, duration: const Duration(milliseconds: 100), curve: Curves.decelerate);
+        // Workaround for when the picker's parent listens to changes in the picker.
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) => period.animateToItem(next, duration: const Duration(milliseconds: 100), curve: Curves.decelerate),
+        );
       }
 
       _previous = current;

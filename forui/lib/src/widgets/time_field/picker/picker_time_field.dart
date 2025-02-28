@@ -1,7 +1,7 @@
-part of '../date_field.dart';
+part of '../time_field.dart';
 
 // ignore: avoid_implementing_value_types
-class _CalendarDateField extends FDateField implements FDateFieldCalendarProperties {
+class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties {
   final DateFormat? format;
   final String? hint;
   final TextAlign textAlign;
@@ -21,19 +21,11 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final bool directionPadding;
   @override
-  final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
+  final int hourInterval;
   @override
-  final DateTime? start;
-  @override
-  final DateTime? end;
-  @override
-  final DateTime? today;
-  @override
-  final FCalendarPickerType initialType;
-  @override
-  final bool autoHide;
+  final int minuteInterval;
 
-  const _CalendarDateField({
+  const _PickerTimeField({
     this.format,
     this.hint,
     this.textAlign = TextAlign.start,
@@ -47,14 +39,11 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.directionPadding = false,
-    this.dayBuilder = FCalendar.defaultDayBuilder,
-    this.start,
-    this.end,
-    this.today,
-    this.initialType = FCalendarPickerType.day,
-    this.autoHide = true,
+    this.hourInterval = 1,
+    this.minuteInterval = 1,
     super.controller,
     super.style,
+    super.hour24,
     super.autofocus,
     super.focusNode,
     super.prefixBuilder,
@@ -70,7 +59,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   }) : super._();
 
   @override
-  State<StatefulWidget> createState() => _CalendarDatePickerState();
+  State<_PickerTimeField> createState() => _PickerTimeFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -87,7 +76,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   }
 }
 
-class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
+class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   final TextEditingController _textController = TextEditingController();
   DateFormat? _format;
   late FocusNode _focus;
@@ -95,17 +84,17 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   @override
   void initState() {
     super.initState();
-    _controller._calendar.addListener(_updateTextController);
+    _controller._picker.addListener(_updateTextController);
     _focus = widget.focusNode ?? FocusNode();
-    _controller.calendar.addListener(() {
-      if (!_controller.calendar.shown) {
+    _controller.popover.addListener(() {
+      if (!_controller.popover.shown) {
         _focus.unfocus();
       }
     });
   }
 
   @override
-  void didUpdateWidget(covariant _CalendarDateField old) {
+  void didUpdateWidget(covariant _PickerTimeField old) {
     super.didUpdateWidget(old);
     // DO NOT REORDER
     if (widget.focusNode != old.focusNode) {
@@ -115,11 +104,16 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       _focus = widget.focusNode ?? FocusNode();
     }
 
+    if (widget.hour24 != old.hour24) {
+      final localizations = FLocalizations.of(context)?.localeName;
+      _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
+    }
+
     if (widget.controller != old.controller) {
-      _controller._calendar.addListener(_updateTextController);
+      _controller._picker.addListener(_updateTextController);
       _updateTextController();
-      _controller.calendar.addListener(() {
-        if (!_controller.calendar.shown) {
+      _controller.popover.addListener(() {
+        if (!_controller.popover.shown) {
           _focus.unfocus();
         }
       });
@@ -129,21 +123,23 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _format = DateFormat.yMMMd(FLocalizations.of(context)?.localeName);
+
+    final localizations = FLocalizations.of(context)?.localeName;
+    _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
+
     _updateTextController();
   }
 
   void _updateTextController() {
-    if (_controller._calendar.value case final value?) {
-      _textController.text = widget.format?.format(value) ?? _format?.format(value) ?? '';
-    } else {
-      _textController.text = '';
+    if (_controller._picker.value case final value) {
+      final time = value.withDate(DateTime(1970));
+      _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.dateFieldStyle;
+    final style = widget.style ?? context.theme.timeFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final onSaved = widget.onSaved;
     return FTextField(
@@ -156,7 +152,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       expands: widget.expands,
       mouseCursor: widget.mouseCursor,
       canRequestFocus: widget.canRequestFocus,
-      onTap: _controller.calendar.toggle,
+      onTap: _controller.popover.toggle,
       hint: widget.hint ?? localizations.dateFieldHint,
       readOnly: true,
       enableInteractiveSelection: false,
@@ -183,7 +179,13 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
       builder:
-          (_, _, child) => _CalendarPopover(controller: _controller, style: style, properties: widget, child: child!),
+          (_, _, child) => _PickerPopover(
+            controller: _controller,
+            style: style,
+            hour24: widget.hour24,
+            properties: widget,
+            child: child!,
+          ),
     );
   }
 
@@ -197,23 +199,25 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   }
 }
 
-class _CalendarPopover extends StatelessWidget {
-  final FDateFieldController controller;
-  final FDateFieldStyle style;
-  final FDateFieldCalendarProperties properties;
+class _PickerPopover extends StatelessWidget {
+  final FTimeFieldController controller;
+  final FTimeFieldStyle style;
+  final FTimeFieldPickerProperties properties;
+  final bool hour24;
   final Widget child;
 
-  const _CalendarPopover({
+  const _PickerPopover({
     required this.controller,
     required this.style,
     required this.properties,
+    required this.hour24,
     required this.child,
   });
 
   @override
   Widget build(BuildContext _) => FPopover(
     style: style.popoverStyle,
-    controller: controller.calendar,
+    controller: controller.popover,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
     shift: properties.shift,
@@ -221,25 +225,18 @@ class _CalendarPopover extends StatelessWidget {
     directionPadding: properties.directionPadding,
     popoverBuilder:
         (_, _, _) => TextFieldTapRegion(
-          child: ValueListenableBuilder(
-            valueListenable: controller._calendar,
-            builder:
-                (_, value, _) => FCalendar(
-                  style: style.calendarStyle,
-                  controller: controller._calendar,
-                  initialMonth: switch (value) {
-                    null => null,
-                    _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
-                    _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
-                    _ => value,
-                  },
-                  onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
-                  dayBuilder: properties.dayBuilder,
-                  start: properties.start,
-                  end: properties.end,
-                  today: properties.today,
-                  initialType: properties.initialType,
-                ),
+          child: ConstrainedBox(
+            constraints: style.popoverConstraints,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: FTimePicker(
+                controller: controller._picker,
+                style: style.pickerStyle,
+                hour24: hour24,
+                hourInterval: properties.hourInterval,
+                minuteInterval: properties.minuteInterval,
+              ),
+            ),
           ),
         ),
     child: child,
@@ -251,6 +248,7 @@ class _CalendarPopover extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('properties', this.properties));
+      ..add(DiagnosticsProperty('properties', this.properties))
+      ..add(DiagnosticsProperty('hour24', hour24));
   }
 }
