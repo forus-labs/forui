@@ -33,11 +33,11 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
   FTimeFieldController({
     required TickerProvider vsync,
     this.validator = _defaultValidator,
-    FTime? initial,
+    FTime? initialTime,
     Duration popoverAnimationDuration = const Duration(milliseconds: 100),
   }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
-       _picker = FTimePickerController(initial: initial ?? const FTime()),
-       super(initial) {
+       _picker = FTimePickerController(initial: initialTime ?? const FTime()),
+       super(initialTime) {
     _picker.addValueListener((time) {
       try {
         _mutating = true;
