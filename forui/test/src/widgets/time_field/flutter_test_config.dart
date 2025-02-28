@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../../flutter_test_config.dart';
+import '../../flutter_test_config.dart';
 
 const _kGoldenTestsThreshold = 1.5 / 100;
 
