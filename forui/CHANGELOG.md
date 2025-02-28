@@ -29,7 +29,7 @@
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
 * **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
 * **Breaking** Change default `FPickerStyle.textStyle` size from `lg` to `base`.
-* **Breaking** Change `FTimePickerStyle` to use `FTimePickerStyle` instead of `FPickerStyle`.
+* **Breaking** Change `FTimePicker` to use `FTimePickerStyle` instead of `FPickerStyle`.
 
 ### Fixes
 * Fix `FDateField.input` to show default icon.
