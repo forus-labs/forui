@@ -1,13 +1,14 @@
 import 'package:flutter/painting.dart';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_eu.dart';
 import 'package:forui/src/localizations/localizations_fr.dart';
 import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
-
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -15,53 +16,53 @@ void main() {
 
   group('value', () {
     for (final (index, (old, value, expected))
-    in [
-      // Select everything
-      (
-      const TextEditingValue(text: '13 h 30'),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
-      ),
-      // Backspace
-      (
-      const TextEditingValue(text: '13 h 30'),
-      TextEditingValue.empty,
-      const TextEditingValue(text: 'HH h MM', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
-      ),
-      // Malformed paste
-      (
-      const TextEditingValue(text: '13 h 30'),
-      const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 4)),
-      const TextEditingValue(text: '13 h 30'),
-      ),
-      (
-      const TextEditingValue(text: '13 h 30'),
-      const TextEditingValue(text: '13 h 30 h 1', selection: TextSelection.collapsed(offset: 4)),
-      const TextEditingValue(text: '13 h 30'),
-      ),
-      // Changes
-      (
-      const TextEditingValue(text: '13 h 30'),
-      const TextEditingValue(text: '13 h 71', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
-      const TextEditingValue(text: '13 h 30'),
-      ),
-      (
-      const TextEditingValue(text: '13 h 30'),
-      const TextEditingValue(text: '13 h 45', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
-      const TextEditingValue(text: '13 h 45', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
-      ),
-      (
-      const TextEditingValue(text: '13 h 30'),
-      const TextEditingValue(text: '11 h 30', selection: TextSelection.collapsed(offset: 1)),
-      const TextEditingValue(text: '11 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
-      ),
-      // Select part
-      (
-      const TextEditingValue(text: '13 h 30'),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 1)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      ),
-    ].indexed) {
+        in [
+          // Select everything
+          (
+            const TextEditingValue(text: '13 h 30'),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+          ),
+          // Backspace
+          (
+            const TextEditingValue(text: '13 h 30'),
+            TextEditingValue.empty,
+            const TextEditingValue(text: 'HH h MM', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+          ),
+          // Malformed paste
+          (
+            const TextEditingValue(text: '13 h 30'),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 4)),
+            const TextEditingValue(text: '13 h 30'),
+          ),
+          (
+            const TextEditingValue(text: '13 h 30'),
+            const TextEditingValue(text: '13 h 30 h 1', selection: TextSelection.collapsed(offset: 4)),
+            const TextEditingValue(text: '13 h 30'),
+          ),
+          // Changes
+          (
+            const TextEditingValue(text: '13 h 30'),
+            const TextEditingValue(text: '13 h 71', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30'),
+          ),
+          (
+            const TextEditingValue(text: '13 h 30'),
+            const TextEditingValue(text: '13 h 45', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 45', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+          ),
+          (
+            const TextEditingValue(text: '13 h 30'),
+            const TextEditingValue(text: '11 h 30', selection: TextSelection.collapsed(offset: 1)),
+            const TextEditingValue(text: '11 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+          ),
+          // Select part
+          (
+            const TextEditingValue(text: '13 h 30'),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 1)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+          ),
+        ].indexed) {
       test('multiple separator - $index', () {
         final controller = TimeFieldController.test(
           FLocalizationsFrCa(),
@@ -79,20 +80,20 @@ void main() {
 
   group('traverse', () {
     for (final (index, (value, expected))
-    in [
-      (
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
-      ),
-      (
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
-      ),
-      (
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
-      ),
-    ].indexed) {
+        in [
+          (
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+          ),
+          (
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+          ),
+          (
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+          ),
+        ].indexed) {
       test('forward - $index', () {
         final controller = TimeFieldController.test(
           FLocalizationsFrCa(),
@@ -108,20 +109,20 @@ void main() {
     }
 
     for (final (index, (value, expected))
-    in [
-      (
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      ),
-      (
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      ),
-      (
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
-      const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-      ),
-    ].indexed) {
+        in [
+          (
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+          ),
+          (
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+          ),
+          (
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+          ),
+        ].indexed) {
       test('backward - $index', () {
         final controller = TimeFieldController.test(
           FLocalizationsFrCa(),
@@ -296,10 +297,10 @@ void main() {
   });
 
   for (final (index, (initial, value, expected))
-  in [
-    (null, const FTime(9, 30), const TextEditingValue(text: '09:30 ч.')),
-    (const FTime(9, 30), null, const TextEditingValue(text: 'HH:MM ч.')),
-  ].indexed) {
+      in [
+        (null, const FTime(9, 30), const TextEditingValue(text: '09:30 ч.')),
+        (const FTime(9, 30), null, const TextEditingValue(text: 'HH:MM ч.')),
+      ].indexed) {
     test('update from time controller(...) - $index', () {
       final timeController = FTimeFieldController(vsync: const TestVSync(), initialTime: initial);
       final controller = TimeFieldController(

@@ -2,24 +2,18 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/src/widgets/picker/picker_wheel.dart';
 import 'package:intl/intl.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/picker/picker_wheel.dart';
 import '../../../test_scaffold.dart';
 
 void main() {
   const key = Key('field');
 
-  for (final (index, (locale, date))
-      in const [
-        (null, '10:00 AM'),
-        (Locale('en', 'SG'), '10:00 am'),
-      ].indexed) {
+  for (final (index, (locale, date)) in const [(null, '10:00 AM'), (Locale('en', 'SG'), '10:00 am')].indexed) {
     testWidgets('formatted date - $index', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(locale: locale, child: const FTimeField.picker(key: key)),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: locale, child: const FTimeField.picker(key: key)));
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -60,10 +54,7 @@ void main() {
     );
 
     await tester.pumpWidget(
-      TestScaffold.app(
-        locale: const Locale('en', 'SG'),
-        child: FTimeField.picker(controller: controller, key: key),
-      ),
+      TestScaffold.app(locale: const Locale('en', 'SG'), child: FTimeField.picker(controller: controller, key: key)),
     );
 
     await tester.tap(find.byKey(key));
@@ -77,7 +68,6 @@ void main() {
 
     expect(find.text('Custom error.'), findsOneWidget);
   });
-
 
   testWidgets('custom format', (tester) async {
     await tester.pumpWidget(

@@ -1,6 +1,7 @@
-import 'package:forui/src/foundation/field/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/src/foundation/field/parser.dart';
 
 @internal
 class DateParser extends Parser {

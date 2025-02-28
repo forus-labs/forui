@@ -102,4 +102,3 @@ class FDefaultLocalizations extends FLocalizations {
   @override
   String get timeFieldSuffix => '';
 }
-

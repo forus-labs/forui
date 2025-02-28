@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/field/field.dart';
-import 'package:forui/src/foundation/field/field_controller.dart';
-import 'package:forui/src/localizations/localization.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/field/field.dart';
+import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
 
 @internal
@@ -84,10 +84,10 @@ class _DateFieldState extends FieldState<DateField, DateTime?> {
   void didUpdateWidget(covariant DateField old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
-      localizations = scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+      localizations =
+          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
       controller.dispose();
       controller = createController();
-
     } else if (widget.calendarController != old.calendarController) {
       controller.dispose();
       controller = createController();

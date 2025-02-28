@@ -1,8 +1,10 @@
 import 'package:flutter/services.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/field/parser.dart';
 import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
-import 'package:meta/meta.dart';
 
 ///
 @internal

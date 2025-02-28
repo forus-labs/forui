@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:intl/intl.dart' hide TextDirection;
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_field/field/time_field.dart';
 import 'package:forui/src/widgets/time_field/picker/properties.dart';
-import 'package:intl/intl.dart' hide TextDirection;
 
 part 'field/input_time_field.dart';
 

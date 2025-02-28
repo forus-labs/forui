@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/field/field.dart';
 import 'package:forui/src/foundation/field/field_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
-import 'package:intl/intl.dart';
-
-import 'package:meta/meta.dart';
-
-import 'package:forui/forui.dart';
 
 @internal
 class TimeField extends Field<FTime?> {
@@ -84,10 +84,10 @@ class _TimeFieldState extends FieldState<TimeField, FTime?> {
   void didUpdateWidget(covariant TimeField old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
-      localizations = scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+      localizations =
+          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
       controller.dispose();
       controller = createController();
-
     } else if (widget.timeController != old.timeController) {
       controller.dispose();
       controller = createController();

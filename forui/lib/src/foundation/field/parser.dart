@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/services.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 /// A parser that updates individual parts of a string input.
 @internal
