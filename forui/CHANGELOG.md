@@ -18,7 +18,6 @@
 
 * Change all widget styles to use code generated functions.
 * Change spacing between `FDateField`'s default prefix icon and content.
-* Change `FDefaultLocalization` to point to `en`.
 * **Breaking** Change `FDatePicker` to `FDateField`.
 * **Breaking** Change `FDatePickerController` to `FDateFieldController`.
 * **Breaking** Change `FDatePickerController.calendar` to `FDateFieldController.popover`.
