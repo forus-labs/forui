@@ -34,13 +34,13 @@ The input field does not support the following locales that use non-western nume
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='time-field' query={{}} height={500}/>
+        <Widget name='time-field' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
         const FTimeField(
           label: Text('Appointment Time'),
-          description: Text('Select a time for your appointment'),
+          description: Text('Select a time for your appointment.'),
         );
         ```
     </Tabs.Tab>
@@ -101,11 +101,28 @@ FTimeField.picker(
   label: Text('Picker Time'),
   description: Text('Select a time from the calendar'),
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
-    suffixBuilder: null,
+  suffixBuilder: null,
 );
 ```
 
 ## Examples
+
+### 24 Hours
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-field'  query={{hour24: 'true'}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {2} copy
+        const FTimeField(
+          hour24: true,
+          label: Text('Appointment Time'),
+          description: Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
 
 ### Picker Only
 
@@ -117,7 +134,7 @@ FTimeField.picker(
         ```dart copy
         const FTimeField.picker(
           label: Text('Appointment Time'),
-          description: Text('Select a time for your appointment'),
+          description: Text('Select a time for your appointment.'),
         );
         ```
     </Tabs.Tab>
@@ -218,14 +235,14 @@ FTimeField.picker(
                   FTimeField(
                     controller: _startTimeController,
                     label: const Text('Start Time'),
-                    description: const Text('Select a start time'),
+                    description: const Text('Select a start time.'),
                     autovalidateMode: AutovalidateMode.disabled,
                   ),
                   const SizedBox(height: 20),
                   FTimeField(
                     controller: _endTimeController,
                     label: const Text('End Time'),
-                    description: const Text('Select an end time'),
+                    description: const Text('Select an end time.'),
                     autovalidateMode: AutovalidateMode.disabled,
                   ),
                   const SizedBox(height: 25),

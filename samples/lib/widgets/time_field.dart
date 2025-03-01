@@ -7,12 +7,15 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TimeFieldPage extends Sample {
-  TimeFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+  final bool hour24;
+
+  TimeFieldPage({@queryParam super.theme, @queryParam String hour24 = 'false'}) : hour24 = bool.tryParse(hour24) ?? false;
 
   @override
-  Widget sample(BuildContext context) => const Padding(
-    padding: EdgeInsets.only(top: 30),
-    child: FTimeField(label: Text('Appointment Time'), description: Text('Select a Time for your appointment.')),
+  Widget sample(BuildContext context) => FTimeField(
+    hour24: hour24,
+    label: const Text('Appointment Time'),
+    description: const Text('Select a Time for your appointment.'),
   );
 }
 
@@ -29,7 +32,7 @@ class PickerTimeFieldPage extends Sample {
 
 @RoutePage()
 class ValidatorTimeFieldPage extends StatefulSample {
-  ValidatorTimeFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+  ValidatorTimeFieldPage({@queryParam super.theme});
 
   @override
   State<ValidatorTimeFieldPage> createState() => _ValidationTimePickerPageState();
@@ -48,13 +51,10 @@ class _ValidationTimePickerPageState extends StatefulSampleState<ValidatorTimeFi
   String? _validate(FTime? time) => time?.hour == 12 ? 'Time cannot be noon.' : null;
 
   @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 30),
-    child: FTimeField(
-      controller: _controller,
-      label: const Text('Appointment Time'),
-      description: const Text('Select a time for your appointment.'),
-    ),
+  Widget sample(BuildContext context) => FTimeField(
+    controller: _controller,
+    label: const Text('Appointment Time'),
+    description: const Text('Select a time for your appointment.'),
   );
 
   @override
@@ -66,7 +66,7 @@ class _ValidationTimePickerPageState extends StatefulSampleState<ValidatorTimeFi
 
 @RoutePage()
 class FormTimeFieldPage extends StatefulSample {
-  FormTimeFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+  FormTimeFieldPage({@queryParam super.theme});
 
   @override
   State<FormTimeFieldPage> createState() => _FormTimePickerPageState();
