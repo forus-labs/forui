@@ -16,18 +16,18 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "lucide-react": "^0.477.0",
-    "next": "^15.0.0",
-    "nextra": "^3.0.8",
-    "nextra-theme-docs": "^3.0.8",
+    "next": "^15.2.0",
+    "nextra": "^3.3.1",
+    "nextra-theme-docs": "^3.3.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "tailwind-merge": "^2.5.2"
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@types/node": "22.13.7",
     "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.13",
-    "typescript": "^5.6.2"
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
   }
 }

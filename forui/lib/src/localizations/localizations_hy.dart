@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsHy extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'Սխալ ամսաթիվ:';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Ընտրեք ժամանակը';
+
+  @override
+  String get timeFieldInvalidDateError => 'Անվավեր ժամանակ:';
 
   @override
   String get dialogLabel => 'Երկխոսության պատուհան';

@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "เลือกวันที่",
-  "dateFieldInvalidDateError": "วันที่ไม่ถูกต้อง"
+  "dateFieldInvalidDateError": "วันที่ไม่ถูกต้อง",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": " น.",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "เลือกเวลา",
+  "timeFieldInvalidDateError": "เวลาไม่ถูกต้อง"
 }

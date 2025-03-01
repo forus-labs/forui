@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-  "dateFieldInvalidDateError": "ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ."
+  "dateFieldInvalidDateError": "ಅಮಾನ್ಯವಾದ ದಿನಾಂಕ.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ಸಮಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "timeFieldInvalidDateError": "ಅಮಾನ್ಯ ಸಮಯ."
 }

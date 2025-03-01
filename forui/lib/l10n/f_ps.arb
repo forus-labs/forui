@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "نېټه وټاکئ",
-  "dateFieldInvalidDateError": "ناسمه نېټه."
+  "dateFieldInvalidDateError": "ناسمه نېټه.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "یو وخت وټاکئ",
+  "timeFieldInvalidDateError": "ناسم وخت."
 }

@@ -5,19 +5,18 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_field/field/field_controller.dart';
+import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/localizations/localization.dart';
 
 @internal
-class Field extends StatefulWidget {
-  final FCalendarController<DateTime?> calendarController;
-  final FDateFieldStyle style;
+abstract class Field<T> extends StatefulWidget {
   final ValueWidgetBuilder<FTextFieldStateStyle> builder;
   final Widget? label;
   final Widget? description;
   final Widget Function(BuildContext, String) errorBuilder;
   final bool enabled;
-  final FormFieldSetter<DateTime>? onSaved;
-  final FormFieldValidator<DateTime> validator;
+  final FormFieldSetter<T>? onSaved;
+  final FormFieldValidator<T> validator;
   final AutovalidateMode autovalidateMode;
   final String? forceErrorText;
   final FocusNode? focusNode;
@@ -34,11 +33,8 @@ class Field extends StatefulWidget {
   final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
   final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
   final FLocalizations localizations;
-  final int baselineYear;
 
   const Field({
-    required this.calendarController,
-    required this.style,
     required this.builder,
     required this.label,
     required this.description,
@@ -62,19 +58,13 @@ class Field extends StatefulWidget {
     required this.prefixBuilder,
     required this.suffixBuilder,
     required this.localizations,
-    required this.baselineYear,
     super.key,
   });
-
-  @override
-  State<Field> createState() => _FieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('calendarController', calendarController))
-      ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
@@ -95,36 +85,25 @@ class Field extends StatefulWidget {
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
-      ..add(DiagnosticsProperty('localizations', localizations))
-      ..add(IntProperty('baselineYear', baselineYear));
+      ..add(DiagnosticsProperty('localizations', localizations));
   }
 }
 
-class _FieldState extends State<Field> {
-  late FLocalizations _localizations;
-  late FieldController _controller;
+@internal
+abstract class FieldState<T extends Field<U>, U> extends State<T> {
+  late FLocalizations localizations;
+  late FieldController controller;
 
   @override
   void initState() {
     super.initState();
-    _localizations =
+    localizations =
         scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
-    _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
+    controller = createController();
   }
 
-  @override
-  void didUpdateWidget(covariant Field old) {
-    super.didUpdateWidget(old);
-    if (widget.localizations != old.localizations) {
-      _localizations =
-          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
-    }
-
-    if (widget.calendarController != old.calendarController) {
-      _controller.dispose();
-      _controller = FieldController(widget.calendarController, widget.style, _localizations, widget.baselineYear);
-    }
-  }
+  @protected
+  FieldController createController();
 
   @override
   Widget build(BuildContext _) {
@@ -136,15 +115,15 @@ class _FieldState extends State<Field> {
       },
       child: Actions(
         actions: {
-          AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => _controller.adjust(intent.amount)),
+          AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => controller.adjust(intent.amount)),
           ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
-            onInvoke: (intent) => _controller.traverse(forward: intent.forward),
+            onInvoke: (intent) => controller.traverse(forward: intent.forward),
           ),
         },
         child: FTextField(
-          controller: _controller,
-          style: widget.style.textFieldStyle,
-          statesController: _controller.states,
+          controller: controller,
+          style: textFieldStyle,
+          statesController: controller.states,
           builder: widget.builder,
           autocorrect: false,
           // We cannot use TextInputType.number as it is does not contain a done button.
@@ -167,11 +146,11 @@ class _FieldState extends State<Field> {
           canRequestFocus: widget.canRequestFocus,
           prefixBuilder: widget.prefixBuilder,
           suffixBuilder: widget.suffixBuilder,
-          onSaved: onSaved == null ? null : (_) => onSaved(widget.calendarController.value),
+          onSaved: onSaved == null ? null : (_) => onSaved(this.value),
           validator:
-              (value) => switch (widget.calendarController.value) {
-                null when value == _controller.placeholder => widget.validator(null),
-                null => _localizations.dateFieldInvalidDateError,
+              (value) => switch (this.value) {
+                null when value == controller.placeholder => widget.validator(null),
+                null => invalidDateError,
                 final value => widget.validator(value),
               },
           autovalidateMode: widget.autovalidateMode,
@@ -182,10 +161,30 @@ class _FieldState extends State<Field> {
     );
   }
 
+  @protected
+  FTextFieldStyle get textFieldStyle;
+
+  @protected
+  U get value;
+
+  @protected
+  String get invalidDateError;
+
   @override
   void dispose() {
-    _controller.dispose();
+    controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('localizations', localizations))
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(StringProperty('invalidDateError', invalidDateError));
   }
 }
 

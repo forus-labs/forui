@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsEl extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'Μη έγκυρη ημερομηνία.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Επιλέξτε μια ώρα';
+
+  @override
+  String get timeFieldInvalidDateError => 'Μη έγκυρη ώρα.';
 
   @override
   String get dialogLabel => 'Παράθυρο διαλόγου';

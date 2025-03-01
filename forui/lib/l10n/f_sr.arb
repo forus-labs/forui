@@ -3,8 +3,13 @@
   "sheetLabel": "табела",
   "barrierOnTapHint": "Затвори: $modalRouteContentName",
   "barrierLabel": "Скрим",
-  "shortDateSeparator": ". ",
+  "shortDateSeparator": ".",
   "shortDateSuffix": ".",
   "dateFieldHint": "Изаберите датум",
-  "dateFieldInvalidDateError": "Неважећи датум."
+  "dateFieldInvalidDateError": "Неважећи датум.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Изаберите време",
+  "timeFieldInvalidDateError": "Неважеће време."
 }

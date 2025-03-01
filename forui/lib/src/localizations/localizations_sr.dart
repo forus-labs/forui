@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -59,7 +57,7 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
-  String get shortDateSeparator => '. ';
+  String get shortDateSeparator => '.';
 
   @override
   String get shortDateSuffix => '.';
@@ -69,6 +67,21 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'Неважећи датум.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Изаберите време';
+
+  @override
+  String get timeFieldInvalidDateError => 'Неважеће време.';
 
   @override
   String get dialogLabel => 'Дијалог';
@@ -90,7 +103,7 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   FLocalizationsSrLatn() : super('sr_Latn');
 
   @override
-  String get shortDateSeparator => '. ';
+  String get shortDateSeparator => '.';
 
   @override
   String get shortDateSuffix => '.';
@@ -100,6 +113,21 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get dateFieldInvalidDateError => 'Nevažeći datum.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Izaberite vreme';
+
+  @override
+  String get timeFieldInvalidDateError => 'Nevažeće vreme.';
 
   @override
   String get dialogLabel => 'Dijalog';

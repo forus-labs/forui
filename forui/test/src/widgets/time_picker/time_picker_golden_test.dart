@@ -15,7 +15,7 @@ void main() {
       TestScaffold.blue(
         child: FTimePicker(
           // The default opacity messes up the coloring.
-          style: TestScaffold.blueScreen.pickerStyle.copyWith(overAndUnderCenterOpacity: 1),
+          style: TestScaffold.blueScreen.timePickerStyle.copyWith(overAndUnderCenterOpacity: 1),
         ),
       ),
     );

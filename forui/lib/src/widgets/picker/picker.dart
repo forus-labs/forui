@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -105,6 +107,9 @@ class FPicker extends StatefulWidget {
 class _FPickerState extends State<FPicker> {
   late FPickerController _controller;
 
+  // This prevents the controller's value from being updated when the wheels are scrolling.
+  int _scrolling = 0;
+
   @override
   void initState() {
     super.initState();
@@ -155,7 +160,8 @@ class _FPickerState extends State<FPicker> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.pickerStyle;
-    final selectionExtent = FPickerWheel.estimateExtent(style, context) * style.magnification;
+    final selectionExtent =
+        FPickerWheel.estimateExtent(style, context) * style.magnification + style.selectionHeightAdjustment;
 
     var wheelIndex = 0;
     return Stack(
@@ -168,31 +174,44 @@ class _FPickerState extends State<FPicker> {
         // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
         NotificationListener<ScrollMetricsNotification>(
           onNotification: (_) {
-            _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+            if (_scrolling == 0) {
+              _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+            }
+
             return false;
           },
-          child: NotificationListener<ScrollEndNotification>(
+          child: NotificationListener<ScrollStartNotification>(
             onNotification: (_) {
-              _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+              _scrolling++;
               return false;
             },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: style.spacing,
-              children: [
-                for (final child in widget.children)
-                  if (child is FPickerWheelMixin)
-                    PickerData(controller: _controller.wheels[wheelIndex++], style: style, child: child)
-                  else
-                    Center(
-                      child: DefaultTextStyle.merge(
-                        textHeightBehavior: style.textHeightBehavior,
-                        style: style.textStyle,
-                        child: child,
+            child: NotificationListener<ScrollEndNotification>(
+              onNotification: (_) {
+                _scrolling = max(_scrolling - 1, 0);
+                if (_scrolling == 0) {
+                  _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+                }
+
+                return false;
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: style.spacing,
+                children: [
+                  for (final child in widget.children)
+                    if (child is FPickerWheelMixin)
+                      PickerData(controller: _controller.wheels[wheelIndex++], style: style, child: child)
+                    else
+                      Center(
+                        child: DefaultTextStyle.merge(
+                          textHeightBehavior: style.textHeightBehavior,
+                          style: style.textStyle,
+                          child: child,
+                        ),
                       ),
-                    ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

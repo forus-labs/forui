@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "ቀን ይምረጡ",
-  "dateFieldInvalidDateError": "ልክ ያልሆነ ቀን።"
+  "dateFieldInvalidDateError": "ልክ ያልሆነ ቀን።",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ሰዓት ይምረጡ",
+  "timeFieldInvalidDateError": "ልክ ያልሆነ ሰዓት።"
 }

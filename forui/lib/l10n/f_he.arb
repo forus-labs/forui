@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "בחירת תאריך",
-  "dateFieldInvalidDateError": "תאריך לא חוקי."
+  "dateFieldInvalidDateError": "תאריך לא חוקי.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "בחר שעה",
+  "timeFieldInvalidDateError": "שעה לא חוקית."
 }

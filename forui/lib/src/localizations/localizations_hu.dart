@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsHu extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'Érvénytelen dátum.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Válasszon időpontot';
+
+  @override
+  String get timeFieldInvalidDateError => 'Érvénytelen idő.';
 
   @override
   String get dialogLabel => 'Párbeszédablak';

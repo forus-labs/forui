@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "ତାରିଖ ଚୟନ କରନ୍ତୁ",
-  "dateFieldInvalidDateError": "ଅବୈଧ ତାରିଖ।"
+  "dateFieldInvalidDateError": "ଅବୈଧ ତାରିଖ।",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ସମୟ ଚୟନ କରନ୍ତୁ",
+  "timeFieldInvalidDateError": "ଅବୈଧ ସମୟ।"
 }

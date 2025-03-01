@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "ਤਾਰੀਖ ਚੁਣੋ",
-  "dateFieldInvalidDateError": "ਅਵੈਧ ਤਾਰੀਖ।"
+  "dateFieldInvalidDateError": "ਅਵੈਧ ਤਾਰੀਖ।",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ਇੱਕ ਸਮਾਂ ਚੁਣੋ",
+  "timeFieldInvalidDateError": "ਅਵੈਧ ਸਮਾਂ।"
 }

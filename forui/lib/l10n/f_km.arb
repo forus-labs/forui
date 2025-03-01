@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "ជ្រើសរើស​កាលបរិច្ឆេទ",
-  "dateFieldInvalidDateError": "កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។"
+  "dateFieldInvalidDateError": "កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ជ្រើសរើសពេលវេលា",
+  "timeFieldInvalidDateError": "ពេលវេលាមិនត្រឹមត្រូវ។"
 }

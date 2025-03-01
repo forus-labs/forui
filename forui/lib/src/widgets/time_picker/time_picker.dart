@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_picker/picker.dart';
 import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
+
+part 'time_picker.style.dart';
 
 /// A time picker that allows a time to be selected.
 ///
@@ -18,13 +21,13 @@ import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
 /// See:
 /// * https://forui.dev/docs/form/time-picker for working examples.
 /// * [FTimePickerController] for controlling a time picker.
-/// * [FPickerStyle] for customizing a time picker's appearance.
+/// * [FTimePickerStyle] for customizing a time picker's appearance.
 class FTimePicker extends StatefulWidget {
   /// The controller.
   final FTimePickerController? controller;
 
   /// The style. If null, the default picker style will be used.
-  final FPickerStyle? style;
+  final FTimePickerStyle? style;
 
   /// True if the time picker should use the 24-hour format.
   ///
@@ -123,7 +126,7 @@ class _FTimePickerState extends State<FTimePicker> {
   @override
   Widget build(BuildContext context) => TimePicker(
     controller: controller,
-    style: widget.style ?? context.theme.pickerStyle,
+    style: widget.style ?? context.theme.timePickerStyle,
     format: format,
     padding: padding,
     hourInterval: controller.hourInterval,
@@ -138,4 +141,42 @@ class _FTimePickerState extends State<FTimePicker> {
       ..add(DiagnosticsProperty('format', format))
       ..add(IntProperty('padding', padding));
   }
+}
+
+/// The style of a time picker.
+class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
+  /// The padding.
+  @override
+  final EdgeInsetsDirectional padding;
+
+  /// Creates a [FTimePickerStyle].
+  const FTimePickerStyle({
+    required super.textStyle,
+    required super.selectionBorderRadius,
+    required super.selectionColor,
+    required super.focusedOutlineStyle,
+    super.diameterRatio,
+    super.squeeze,
+    super.magnification,
+    super.overAndUnderCenterOpacity,
+    super.spacing = 0,
+    super.textHeightBehavior = const TextHeightBehavior(
+      applyHeightToFirstAscent: false,
+      applyHeightToLastDescent: false,
+    ),
+    super.selectionHeightAdjustment = 5,
+    this.padding = const EdgeInsetsDirectional.only(start: 10, end: 10),
+  });
+
+  /// Creates a [FTimePickerStyle] that inherits its properties.
+  FTimePickerStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
+    : this(
+        textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
+        selectionBorderRadius: style.borderRadius,
+        selectionColor: colorScheme.muted,
+        selectionHeightAdjustment: 5,
+        spacing: 2,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
+      );
 }

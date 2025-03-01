@@ -135,7 +135,7 @@ void main() {
       await tester.drag(find.byKey(key), const Offset(0, -100));
       await tester.pumpAndSettle();
 
-      expect(controller.value, [4, 5]);
+      expect(controller.value, [5, 5]);
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/touch-dragged.png'));
     });
 

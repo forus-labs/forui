@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsLv extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'Nederīgs datums.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Izvēlieties laiku';
+
+  @override
+  String get timeFieldInvalidDateError => 'Nederīgs laiks.';
 
   @override
   String get dialogLabel => 'Dialoglodziņš';

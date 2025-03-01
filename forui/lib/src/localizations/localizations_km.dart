@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsKm extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ។';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'ជ្រើសរើសពេលវេលា';
+
+  @override
+  String get timeFieldInvalidDateError => 'ពេលវេលាមិនត្រឹមត្រូវ។';
 
   @override
   String get dialogLabel => 'ប្រអប់';

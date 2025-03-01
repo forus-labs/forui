@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Күнді таңдаңыз",
-  "dateFieldInvalidDateError": "Жарамсыз күн."
+  "dateFieldInvalidDateError": "Жарамсыз күн.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Уақытты таңдаңыз",
+  "timeFieldInvalidDateError": "Жарамсыз уақыт."
 }

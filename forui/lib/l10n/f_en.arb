@@ -49,8 +49,6 @@
       }
     }
   },
-
-
   "shortDate": "{date}",
   "@shortDate": {
     "description": "The short date.",
@@ -61,44 +59,48 @@
       }
     }
   },
-
-  "shortDateSeparator": "",
+  "shortDateSeparator": "/",
   "@shortDateSeparator": {
     "description": "The short date's separator, typically /."
   },
-
   "shortDateSuffix": "",
   "@shortDateSuffix": {
     "description": "The short date's suffix, typically empty."
   },
-
-
   "dateFieldHint": "Pick a date",
   "@dateFieldHint": {
-    "description": "The hint text for the calendar-only date picker."
+    "description": "The hint text for the calendar-only date field."
   },
-
   "dateFieldInvalidDateError": "Invalid date.",
   "@dateFieldInvalidDateError": {
-    "description": "Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format."
+    "description": "Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format."
   },
-
-
+  "timeFieldTimeSeparator": ":",
+  "@timeFieldTimeSeparator": {
+    "description": "The time field's time separator, typically ':'."
+  },
+  "timeFieldPeriodSeparator": " ",
+  "@timeFieldPeriodSeparator": {
+    "description": "The time field's period separator, typically ' '."
+  },
+  "timeFieldSuffix": "",
+  "@timeFieldSuffix": {
+    "description": "The time field's suffix, typically none."
+  },
+  "timeFieldHint": "Pick a time",
+  "@timeFieldHint": {
+    "description": "The hint text for the picker-only time field."
+  },
+  "timeFieldInvalidDateError": "Invalid time.",
   "dialogLabel": "Dialog",
-  "@dialogLabel": {
-    "description": "The audio announcement made when a dialog is opened."
-  },
-
-  "sheetLabel": "Sheet",
   "@dialogLabel": {
     "description": "The sheet's label."
   },
-
+  "sheetLabel": "Sheet",
   "barrierLabel": "Barrier",
   "@barrierLabel": {
     "description": "The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message)."
   },
-
   "barrierOnTapHint": "Close {modalRouteContentName}",
   "@barrierOnTapHint": {
     "description": "The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.",

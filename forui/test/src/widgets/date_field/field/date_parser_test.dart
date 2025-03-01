@@ -1,18 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'package:forui/src/widgets/date_field/field/parser.dart';
+import 'package:forui/src/foundation/field/parser.dart';
+import 'package:forui/src/widgets/date_field/field/date_parser.dart';
 
-final bg = Parser('bg', 2000); // d.MM.y r.
-final hr = Parser('hr', 2000); // dd. MM. y.
+final bg = DateParser('bg', 2000); // d.MM.y r.
+final hr = DateParser('hr', 2000); // dd. MM. y.
 
-final enSG = Parser('en_SG', 2000); // dd/MM/y
-final enIE = Parser('en_IE', 2000); // d/M/y
+final enSG = DateParser('en_SG', 2000); // dd/MM/y
+final enIE = DateParser('en_IE', 2000); // d/M/y
 
 void main() {
   setUpAll(initializeDateFormatting);
 
-  group('parse(...)', () {
+  group('update(...)', () {
     for (final (index, (old, current, expected))
         in [
           // None
@@ -37,7 +38,7 @@ void main() {
           (['DD', 'MM', 'YYYY'], ['3', '2', '2024'], (['03', '02', '2024'], const Many())),
         ].indexed) {
       test('en_SG (double digit) - $index', () {
-        final (parts, changes) = enSG.parse(old, current);
+        final (parts, changes) = enSG.update(old, current);
         expect(parts, expected.$1);
         expect(changes, expected.$2);
       });
@@ -67,14 +68,14 @@ void main() {
           (['DD', 'MM', 'YYYY'], ['3', '2', '2024'], (['3', '2', '2024'], const Many())),
         ].indexed) {
       test('enIE (single digit) - $index', () {
-        final (parts, changes) = enIE.parse(old, current);
+        final (parts, changes) = enIE.update(old, current);
         expect(parts, expected.$1);
         expect(changes, expected.$2);
       });
     }
   });
 
-  group('parseDay(...)', () {
+  group('updateDay(...)', () {
     for (final (i, (old, current, expected))
         in [
           // Backspace
@@ -105,7 +106,7 @@ void main() {
           ('DD', '32', ('DD', false)),
           ('DD', '321', ('DD', false)),
         ].indexed) {
-      test('double digit - $i', () => expect(enSG.parseDay(old, current), expected));
+      test('double digit - $i', () => expect(enSG.updateDay(old, current), expected));
     }
 
     for (final (i, (old, current, expected))
@@ -138,11 +139,11 @@ void main() {
           ('DD', '32', ('DD', false)),
           ('DD', '321', ('DD', false)),
         ].indexed) {
-      test('single digit - $i', () => expect(bg.parseDay(old, current), expected));
+      test('single digit - $i', () => expect(bg.updateDay(old, current), expected));
     }
   });
 
-  group('parseMonth(...)', () {
+  group('updateMonth(...)', () {
     for (final (i, (old, current, expected))
         in [
           // Backspace
@@ -170,7 +171,7 @@ void main() {
           ('MM', '13', ('MM', false)),
           ('MM', '321', ('MM', false)),
         ].indexed) {
-      test('double digit month - $i', () => expect(enSG.parseMonth(old, current), expected));
+      test('double digit month - $i', () => expect(enSG.updateMonth(old, current), expected));
     }
 
     for (final (i, (old, current, expected))
@@ -200,11 +201,11 @@ void main() {
           ('MM', '13', ('MM', false)),
           ('MM', '321', ('MM', false)),
         ].indexed) {
-      test('single digit day - $i', () => expect(enIE.parseMonth(old, current), expected));
+      test('single digit day - $i', () => expect(enIE.updateMonth(old, current), expected));
     }
   });
 
-  group('parseYear(...)', () {
+  group('updateYear(...)(...)', () {
     for (final (i, (old, current, expected))
         in [
           // Backspace
@@ -232,7 +233,7 @@ void main() {
           ('0002', '-1', ('0002', false)),
           ('YYYY', '10000', ('YYYY', false)),
         ].indexed) {
-      test('4 digit year - $i', () => expect(enSG.parseYear(old, current), expected));
+      test('4 digit year - $i', () => expect(enSG.updateYear(old, current), expected));
     }
   });
 

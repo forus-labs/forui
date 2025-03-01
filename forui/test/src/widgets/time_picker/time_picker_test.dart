@@ -12,6 +12,27 @@ void main() {
   setUpAll(initializeDateFormatting);
 
   group('state', () {
+    testWidgets('crossing 12pm does not cause controller value to update', (tester) async {
+      final controller = FTimePickerController(initial: const FTime(10, 30));
+
+      await tester.pumpWidget(
+        TestScaffold.app(locale: const Locale('en', 'SG'), child: FTimePicker(controller: controller)),
+      );
+
+      final gesture = await tester.startGesture(tester.getCenter(find.byType(BuilderWheel).first));
+      await tester.pump(const Duration(milliseconds: 100));
+      await gesture.moveBy(const Offset(0, -100));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(controller.value, const FTime(10, 30));
+
+      // Release the gesture
+      await gesture.up();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(controller.value, isNot(const FTime(10, 30)));
+    });
+
     testWidgets('swap external controller', (tester) async {
       final initial = FTimePickerController(initial: const FTime(10, 30));
       final current = FTimePickerController(initial: const FTime(14, 45));

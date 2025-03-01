@@ -5,29 +5,33 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
 
 @internal
 abstract class TimePicker extends StatelessWidget {
   final FTimePickerController controller;
-  final FPickerStyle style;
+  final FTimePickerStyle style;
   final DateFormat format;
   final int padding;
+  final EdgeInsetsDirectional start;
+  final EdgeInsetsDirectional end;
   final int hourInterval;
   final int minuteInterval;
 
-  const TimePicker._({
+  TimePicker._({
     required this.controller,
     required this.style,
     required this.format,
     required this.padding,
     required this.hourInterval,
     required this.minuteInterval,
-  });
+  }) : start = EdgeInsetsDirectional.only(start: style.padding.start),
+       end = EdgeInsetsDirectional.only(end: style.padding.end);
 
   factory TimePicker({
     required FTimePickerController controller,
-    required FPickerStyle style,
+    required FTimePickerStyle style,
     required DateFormat format,
     required int padding,
     required int hourInterval,
@@ -54,6 +58,8 @@ abstract class TimePicker extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('format', format))
       ..add(IntProperty('padding', padding))
+      ..add(DiagnosticsProperty('start', start))
+      ..add(DiagnosticsProperty('end', end))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval));
   }
@@ -90,7 +96,10 @@ class _HourPickerState extends State<_HourPicker> {
       final next = period.selectedItem.isEven ? 1 : 0;
 
       if (!widget.controller.mutating && ((_previous == 11 && current == 0) || (_previous == 0 && current == 11))) {
-        period.animateToItem(next, duration: const Duration(milliseconds: 100), curve: Curves.decelerate);
+        // Workaround for when the picker's parent listens to changes in the picker.
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) => period.animateToItem(next, duration: const Duration(milliseconds: 100), curve: Curves.decelerate),
+        );
       }
 
       _previous = current;
@@ -101,7 +110,7 @@ class _HourPickerState extends State<_HourPicker> {
 }
 
 class _Western12Picker extends TimePicker {
-  const _Western12Picker({
+  _Western12Picker({
     required super.controller,
     required super.style,
     required super.format,
@@ -115,8 +124,18 @@ class _Western12Picker extends TimePicker {
     // Do NOT try to separate the date returned by format by whitespace. Locales may use NNBSP or have no separators.
     // ISTG if there's a locale that inserts the period in the middle of the time...
     final period = DateFormat('a', format.locale);
+
+    // We cannot insert the padding outside the pickers because the resultant affordance might be too small.
+    final (hourPadding, minutePadding, periodPadding) = switch (format.pattern!.startsWith('a')) {
+      (true) => (EdgeInsets.zero, end, start),
+      (false) => (start, EdgeInsets.zero, end),
+    };
+
     final periodPicker = FPickerWheel(
-      children: [Text(period.format(DateTime.utc(1970, 1, 1, 1))), Text(period.format(DateTime.utc(1970, 1, 1, 13)))],
+      children: [
+        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 1)))),
+        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 13)))),
+      ],
     );
 
     final pickers = [
@@ -126,12 +145,16 @@ class _Western12Picker extends TimePicker {
         child: FPickerWheel.builder(
           builder: (_, index) {
             final hour = (index * hourInterval) % 12;
-            return Text('${hour == 0 ? 12 : hour}'.padLeft(padding, '0'));
+            return Padding(padding: hourPadding, child: Text('${hour == 0 ? 12 : hour}'.padLeft(padding, '0')));
           },
         ),
       ),
       const Text(':'),
-      FPickerWheel.builder(builder: (_, index) => Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
+      FPickerWheel.builder(
+        builder:
+            (_, index) =>
+                Padding(padding: minutePadding, child: Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
+      ),
     ];
 
     format.pattern!.startsWith('a') ? pickers.insert(0, periodPicker) : pickers.add(periodPicker);
@@ -141,7 +164,7 @@ class _Western12Picker extends TimePicker {
 }
 
 class _Western24Picker extends TimePicker {
-  const _Western24Picker({
+  _Western24Picker({
     required super.controller,
     required super.style,
     required super.format,
@@ -155,15 +178,20 @@ class _Western24Picker extends TimePicker {
     controller: controller.picker,
     style: style,
     children: [
-      FPickerWheel.builder(builder: (_, index) => Text('${(index * hourInterval) % 24}'.padLeft(padding, '0'))),
+      FPickerWheel.builder(
+        builder:
+            (_, index) => Padding(padding: start, child: Text('${(index * hourInterval) % 24}'.padLeft(padding, '0'))),
+      ),
       const Text(':'),
-      FPickerWheel.builder(builder: (_, index) => Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
+      FPickerWheel.builder(
+        builder: (_, index) => Padding(padding: end, child: Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
+      ),
     ],
   );
 }
 
 class _Eastern12Picker extends TimePicker {
-  const _Eastern12Picker({
+  _Eastern12Picker({
     required super.controller,
     required super.style,
     required super.format,
@@ -177,8 +205,18 @@ class _Eastern12Picker extends TimePicker {
     // Do NOT try to separate the date returned by format by whitespace. Locales may use NNBSP or have no separators.
     // ISTG if there's a locale that inserts the period in the middle of the time...
     final period = DateFormat('a', format.locale);
+
+    // We cannot insert the padding outside the pickers because the resultant affordance might be too small.
+    final (hourPadding, minutePadding, periodPadding) = switch (format.pattern!.startsWith('a')) {
+      (true) => (EdgeInsets.zero, end, start),
+      (false) => (start, EdgeInsets.zero, end),
+    };
+
     final periodPicker = FPickerWheel(
-      children: [Text(period.format(DateTime.utc(1970, 1, 1, 1))), Text(period.format(DateTime.utc(1970, 1, 1, 13)))],
+      children: [
+        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 1)))),
+        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 13)))),
+      ],
     );
 
     final pickers = [
@@ -188,7 +226,7 @@ class _Eastern12Picker extends TimePicker {
         child: FPickerWheel.builder(
           builder: (_, index) {
             final time = format.format(DateTime(1970, 1, 1, (index * hourInterval) % 12));
-            return Text(time.split(':').first);
+            return Padding(padding: hourPadding, child: Text(time.split(':').first));
           },
         ),
       ),
@@ -196,7 +234,7 @@ class _Eastern12Picker extends TimePicker {
       FPickerWheel.builder(
         builder: (_, index) {
           final time = format.format(DateTime(1970, 1, 1, 0, (index * minuteInterval) % 60));
-          return Text(time.split(':').last.split(' ').first);
+          return Padding(padding: minutePadding, child: Text(time.split(':').last.split(' ').first));
         },
       ),
     ];
@@ -208,7 +246,7 @@ class _Eastern12Picker extends TimePicker {
 }
 
 class _Eastern24Picker extends TimePicker {
-  const _Eastern24Picker({
+  _Eastern24Picker({
     required super.controller,
     required super.style,
     required super.format,
@@ -225,14 +263,14 @@ class _Eastern24Picker extends TimePicker {
       FPickerWheel.builder(
         builder: (_, index) {
           final time = format.format(DateTime(1970, 1, 1, (index * hourInterval) % 24));
-          return Text(time.split(':').first);
+          return Padding(padding: start, child: Text(time.split(':').first));
         },
       ),
       const Text(':'),
       FPickerWheel.builder(
         builder: (_, index) {
           final time = format.format(DateTime(1970, 1, 1, (index * minuteInterval) % minuteInterval));
-          return Text(time.split(':').last.split(' ').first);
+          return Padding(padding: end, child: Text(time.split(':').last.split(' ').first));
         },
       ),
     ],

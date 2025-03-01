@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "തീയതി തിരഞ്ഞെടുക്കുക",
-  "dateFieldInvalidDateError": "അസാധുവായ തീയതി."
+  "dateFieldInvalidDateError": "അസാധുവായ തീയതി.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "ഒരു സമയം തിരഞ്ഞെടുക്കുക",
+  "timeFieldInvalidDateError": "അസാധുവായ സമയം."
 }

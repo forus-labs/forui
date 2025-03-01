@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "تاریخ منتخب کریں",
-  "dateFieldInvalidDateError": "غلط تاریخ۔"
+  "dateFieldInvalidDateError": "غلط تاریخ۔",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "وقت منتخب کریں",
+  "timeFieldInvalidDateError": "غلط وقت۔"
 }
