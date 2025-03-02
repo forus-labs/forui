@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => '날짜가 잘못되었습니다.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => '시간 선택';
+
+  @override
+  String get timeFieldInvalidDateError => '잘못된 시간입니다.';
 
   @override
   String get dialogLabel => '대화상자';

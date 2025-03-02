@@ -322,7 +322,7 @@ abstract class FLocalizations {
   /// The short date's separator, typically /.
   ///
   /// In en, this message translates to:
-  /// **''**
+  /// **'/'**
   String get shortDateSeparator;
 
   /// The short date's suffix, typically empty.
@@ -331,17 +331,47 @@ abstract class FLocalizations {
   /// **''**
   String get shortDateSuffix;
 
-  /// The hint text for the calendar-only date picker.
+  /// The hint text for the calendar-only date field.
   ///
   /// In en, this message translates to:
   /// **'Pick a date'**
   String get dateFieldHint;
 
-  /// Error message displayed to the user when they have entered a text string in an input field of the date picker that is not in a valid date format.
+  /// Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format.
   ///
   /// In en, this message translates to:
   /// **'Invalid date.'**
   String get dateFieldInvalidDateError;
+
+  /// The time field's time separator, typically ':'.
+  ///
+  /// In en, this message translates to:
+  /// **':'**
+  String get timeFieldTimeSeparator;
+
+  /// The time field's period separator, typically ' '.
+  ///
+  /// In en, this message translates to:
+  /// **' '**
+  String get timeFieldPeriodSeparator;
+
+  /// The time field's suffix, typically none.
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get timeFieldSuffix;
+
+  /// The hint text for the picker-only time field.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a time'**
+  String get timeFieldHint;
+
+  /// No description provided for @timeFieldInvalidDateError.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid time.'**
+  String get timeFieldInvalidDateError;
 
   /// The sheet's label.
   ///

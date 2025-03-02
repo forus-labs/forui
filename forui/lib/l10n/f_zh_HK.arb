@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "選擇日期",
-  "dateFieldInvalidDateError": "日期無效。"
+  "dateFieldInvalidDateError": "日期無效。",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "選擇時間",
+  "timeFieldInvalidDateError": "無效的時間。"
 }

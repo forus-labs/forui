@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Selecciona una data",
-  "dateFieldInvalidDateError": "Data no vàlida."
+  "dateFieldInvalidDateError": "Data no vàlida.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Trieu una hora",
+  "timeFieldInvalidDateError": "Hora no vàlida."
 }

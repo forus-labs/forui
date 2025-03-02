@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": ".",
   "dateFieldHint": "Atlasīt datumu",
-  "dateFieldInvalidDateError": "Nederīgs datums."
+  "dateFieldInvalidDateError": "Nederīgs datums.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Izvēlieties laiku",
+  "timeFieldInvalidDateError": "Nederīgs laiks."
 }

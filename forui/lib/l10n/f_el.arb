@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Επιλέξτε ημερομηνία",
-  "dateFieldInvalidDateError": "Μη έγκυρη ημερομηνία."
+  "dateFieldInvalidDateError": "Μη έγκυρη ημερομηνία.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Επιλέξτε μια ώρα",
+  "timeFieldInvalidDateError": "Μη έγκυρη ώρα."
 }

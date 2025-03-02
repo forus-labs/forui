@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide DialogRoute;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui_samples/main.gr.dart';
 import 'package:forui_samples/sample.dart';
@@ -18,6 +19,8 @@ class ForuiSamples extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp.router(
     title: 'Forui Samples',
     theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.white), useMaterial3: true),
+    localizationsDelegates: FLocalizations.localizationsDelegates,
+    supportedLocales: FLocalizations.supportedLocales,
     routerConfig: _router.config(),
   );
 }
@@ -126,6 +129,10 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/tile-group/scrollable', page: ScrollableTileGroupRoute.page),
     AutoRoute(path: '/tile-group/lazy', page: LazyTileGroupRoute.page),
     AutoRoute(path: '/tile-group/merge', page: MergeTileGroup.page),
+    AutoRoute(path: '/time-field/default', page: TimeFieldRoute.page),
+    AutoRoute(path: '/time-field/picker', page: PickerTimeFieldRoute.page),
+    AutoRoute(path: '/time-field/validator', page: ValidatorTimeFieldRoute.page),
+    AutoRoute(path: '/time-field/form', page: FormTimeFieldRoute.page),
     AutoRoute(path: '/time-picker/default', page: TimePickerRoute.page),
     AutoRoute(path: '/time-picker/interval', page: IntervalTimePickerRoute.page),
     AutoRoute(path: '/time-picker/animated', page: AnimatedTimePickerRoute.page),

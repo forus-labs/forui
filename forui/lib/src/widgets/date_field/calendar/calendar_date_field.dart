@@ -251,6 +251,6 @@ class _CalendarPopover extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('properties', properties));
+      ..add(DiagnosticsProperty('properties', this.properties));
   }
 }

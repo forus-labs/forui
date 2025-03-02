@@ -6,5 +6,10 @@
   "shortDateSeparator": "-",
   "shortDateSuffix": "",
   "dateFieldHint": "Pasirinkti datą",
-  "dateFieldInvalidDateError": "Netinkama data."
+  "dateFieldInvalidDateError": "Netinkama data.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Pasirinkite laiką",
+  "timeFieldInvalidDateError": "Neteisingas laikas."
 }

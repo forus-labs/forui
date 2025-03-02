@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Виберіть дату",
-  "dateFieldInvalidDateError": "Недійсна дата."
+  "dateFieldInvalidDateError": "Недійсна дата.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Виберіть час",
+  "timeFieldInvalidDateError": "Недійсний час."
 }

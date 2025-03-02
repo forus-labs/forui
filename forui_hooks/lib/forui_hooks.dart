@@ -7,5 +7,6 @@ export '/src/resizable_controller_hook.dart';
 export '/src/select_group_controller_hook.dart';
 export '/src/slider_controller_hook.dart';
 export '/src/tab_controller_hook.dart';
+export '/src/time_field_controller_hook.dart';
 export '/src/time_picker_controller_hook.dart';
 export '/src/tooltip_controller_hook.dart';

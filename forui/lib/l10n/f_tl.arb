@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Pumili ng petsa",
-  "dateFieldInvalidDateError": "Hindi wastong petsa."
+  "dateFieldInvalidDateError": "Hindi wastong petsa.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Pumili ng oras",
+  "timeFieldInvalidDateError": "Di-wastong oras."
 }

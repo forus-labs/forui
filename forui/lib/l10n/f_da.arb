@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Vælg en dato",
-  "dateFieldInvalidDateError": "Ugyldig dato."
+  "dateFieldInvalidDateError": "Ugyldig dato.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ".",
+  "timeFieldHint": "Vælg et tidspunkt",
+  "timeFieldInvalidDateError": "Ugyldigt tidspunkt."
 }

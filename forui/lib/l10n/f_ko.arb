@@ -6,5 +6,10 @@
   "shortDateSeparator": ". ",
   "shortDateSuffix": ".",
   "dateFieldHint": "날짜 선택",
-  "dateFieldInvalidDateError": "날짜가 잘못되었습니다."
+  "dateFieldInvalidDateError": "날짜가 잘못되었습니다.",
+  "timeFieldPeriodSeparator": " ",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "시간 선택",
+  "timeFieldInvalidDateError": "잘못된 시간입니다."
 }

@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -71,6 +69,21 @@ class FLocalizationsZh extends FLocalizations {
   String get dateFieldInvalidDateError => '日期无效。';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => '选择时间';
+
+  @override
+  String get timeFieldInvalidDateError => '无效的时间。';
+
+  @override
   String get dialogLabel => '对话框';
 
   @override
@@ -102,6 +115,21 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get dateFieldInvalidDateError => '日期無效。';
 
   @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => '選擇時間';
+
+  @override
+  String get timeFieldInvalidDateError => '無效的時間。';
+
+  @override
   String get dialogLabel => '對話方塊';
 
   @override
@@ -131,6 +159,21 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get dateFieldInvalidDateError => '日期無效。';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => '選擇時間';
+
+  @override
+  String get timeFieldInvalidDateError => '無效的時間。';
 
   @override
   String get dialogLabel => '對話方塊';

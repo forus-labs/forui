@@ -6,5 +6,10 @@
   "shortDateSeparator": ". ",
   "shortDateSuffix": "",
   "dateFieldHint": "Vyberte dátum",
-  "dateFieldInvalidDateError": "Neplatný dátum."
+  "dateFieldInvalidDateError": "Neplatný dátum.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Vyberte čas",
+  "timeFieldInvalidDateError": "Neplatný čas."
 }

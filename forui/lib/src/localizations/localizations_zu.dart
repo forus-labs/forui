@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -59,7 +57,7 @@ class FLocalizationsZu extends FLocalizations {
   }
 
   @override
-  String get shortDateSeparator => '/';
+  String get shortDateSeparator => '-';
 
   @override
   String get shortDateSuffix => '';
@@ -69,6 +67,21 @@ class FLocalizationsZu extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'Usuku olungalungile.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Khetha isikhathi';
+
+  @override
+  String get timeFieldInvalidDateError => 'Isikhathi esingalungile.';
 
   @override
   String get dialogLabel => 'Ingxoxo';
