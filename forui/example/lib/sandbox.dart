@@ -11,7 +11,6 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
-
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late FTimePickerController timeController = FTimePickerController();
   late Locale locale = const Locale('en', 'US');
@@ -44,7 +43,6 @@ class LocaleScaffold extends StatefulWidget {
     properties.add(IterableProperty('locales', locales));
   }
 }
-
 
 class _LocaleScaffoldState extends State<LocaleScaffold> {
   int index = 0;
