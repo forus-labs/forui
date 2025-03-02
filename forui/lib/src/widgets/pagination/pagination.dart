@@ -72,7 +72,7 @@ class _FPaginationState extends State<FPagination> {
           children: [
             previous,
             if (controller.value > controller.minPagesDisplayedAtEdges) ...[
-              if (controller.showEdges)
+              if (controller.showEdges && lastPage.isFinite)
                 FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
               elipsis,
             ],
@@ -80,8 +80,8 @@ class _FPaginationState extends State<FPagination> {
               FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
             if (controller.value < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
               elipsis,
-              if (controller.showEdges)
-                FPaginationItemData(page: lastPage, style: style, controller: controller, child: const _Page()),
+              if (controller.showEdges && lastPage.isFinite)
+                FPaginationItemData(page: lastPage.toInt(), style: style, controller: controller, child: const _Page()),
             ],
             next,
           ],

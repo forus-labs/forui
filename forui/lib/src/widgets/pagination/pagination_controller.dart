@@ -1,15 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
 /// A controller that controls which page is selected.
 class FPaginationController extends PageController {
-  /// The total number of pages.
-  ///
-  /// # Contract:
-  /// * Throws [AssertionError] if [length] < 0.
-  final int length;
-
   /// The number of sibling pages displayed beside the current page number. Defaults to 1.
   ///
   /// This value determines how many pages are shown on either side of the
@@ -28,6 +24,11 @@ class FPaginationController extends PageController {
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
   final bool showEdges;
 
+  /// The total number of pages.
+  ///
+  /// # Contract:
+  /// * Throws [AssertionError] if [length] < 0.
+  final int _length;
   int _value;
 
   /// Creates a [FPaginationController].
@@ -35,7 +36,7 @@ class FPaginationController extends PageController {
   /// # Contract:
   /// * Throws [AssertionError] if 1 <= [page] and [page] <= length.
   FPaginationController({
-    required this.length,
+    int? length,
     int page = 0,
     this.showEdges = true,
     this.siblings = 1,
@@ -43,17 +44,14 @@ class FPaginationController extends PageController {
     super.onDetach,
     super.keepPage,
     super.viewportFraction,
-  }) : assert(
-         0 < length,
-         ''
-         'The total length of pages should be more than 0, but is $length.',
-       ),
+  }) : assert(length == null || 0 < length, 'The total length of pages should be more than 0, but is $length.'),
        assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
        assert(
-         0 <= page && page <= length,
+         0 <= page && page < (length ?? 0),
          'The initial page must be greater than or equal to 0 and less than or equal to length.',
        ),
        _value = page,
+       _length = length ?? 0,
        super(initialPage: page) {
     addListener(_handleScrollChanges);
   }
@@ -64,6 +62,27 @@ class FPaginationController extends PageController {
         _value = page!.round();
         notifyListeners();
       }
+    }
+  }
+
+  /// Returns the total number of pages in the pagination.
+  ///
+  /// If the controller has clients (i.e., it is attached to a [PageView]),
+  /// the length is dynamically computed using the scroll extents and viewport dimensions.
+  ///
+  /// If not attached to any clients, it returns the predefined `_length`, which defaults to 0.
+  num get length {
+    if (hasClients) {
+      final len =
+          max(0, position.maxScrollExtent - position.minScrollExtent) /
+          max(1.0, position.viewportDimension * viewportFraction);
+      if (len.isFinite) {
+        return len.ceil() + 1;
+      } else {
+        return len;
+      }
+    } else {
+      return _length;
     }
   }
 
@@ -121,28 +140,39 @@ class FPaginationController extends PageController {
   /// Returns a tuple of the start and end page numbers by centering the range around the current page,
   /// ensuring a balanced display of sibling pages on either side while considering pagination constraints.
   (int, int) calculateSiblingRange() {
-    final last = length - 1;
-    if (length <= minPagesDisplayedAtEdges) {
-      return (0, last);
+    final int rangeStart;
+    final int rangeEnd;
+    if (length.isFinite) {
+      final last = length.toInt() - 1;
+      if (length <= minPagesDisplayedAtEdges) {
+        return (0, last);
+      }
+      rangeStart =
+          _value - siblings < 0
+              ? 0
+              : _value > (last - minPagesDisplayedAtEdges)
+              ? (last - minPagesDisplayedAtEdges) - siblings
+              : _value <= minPagesDisplayedAtEdges
+              ? 0
+              : _value - siblings;
+
+      rangeEnd =
+          _value + siblings > last
+              ? last
+              : _value < minPagesDisplayedAtEdges + 1
+              ? minPagesDisplayedAtEdges + siblings
+              : _value >= (last - minPagesDisplayedAtEdges)
+              ? last
+              : _value + siblings;
+    } else {
+      rangeStart =
+          _value - siblings < 0
+              ? 0
+              : _value <= minPagesDisplayedAtEdges
+              ? 0
+              : _value - siblings;
+      rangeEnd = _value < minPagesDisplayedAtEdges + 1 ? minPagesDisplayedAtEdges : _value + siblings;
     }
-    final rangeStart =
-        _value - siblings < 0
-            ? 0
-            : _value > (last - minPagesDisplayedAtEdges)
-            ? (last - minPagesDisplayedAtEdges) - siblings
-            : _value <= minPagesDisplayedAtEdges
-            ? 0
-            : _value - siblings;
-
-    final rangeEnd =
-        _value + siblings > last
-            ? last
-            : _value < minPagesDisplayedAtEdges + 1
-            ? minPagesDisplayedAtEdges + siblings
-            : _value >= (last - minPagesDisplayedAtEdges)
-            ? last
-            : _value + siblings;
-
     return (rangeStart, rangeEnd);
   }
 
@@ -152,7 +182,11 @@ class FPaginationController extends PageController {
   /// and the full set of sibling pages around the current page, all pages are displayed instead.
   @internal
   int get minPagesDisplayedAtEdges {
-    final minDisplayedAtEnds = siblings + 1 + (showEdges ? 1 : 0);
-    return length <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? length : minDisplayedAtEnds;
+    if (length.isFinite) {
+      final len = length.toInt();
+      final minDisplayedAtEnds = siblings + 1 + (showEdges ? 1 : 0);
+      return len <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? len : minDisplayedAtEnds;
+    }
+    return siblings + 1 + (showEdges ? 1 : 0);
   }
 }
