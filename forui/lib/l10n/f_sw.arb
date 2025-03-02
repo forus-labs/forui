@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Chagua tarehe",
-  "dateFieldInvalidDateError": "Tarehe si sahihi."
+  "dateFieldInvalidDateError": "Tarehe si sahihi.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Chagua wakati",
+  "timeFieldInvalidDateError": "Wakati batili."
 }

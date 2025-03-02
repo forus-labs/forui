@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_picker/picker.dart';
 import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
+
+part 'time_picker.style.dart';
 
 /// A time picker that allows a time to be selected.
 ///
@@ -18,18 +21,18 @@ import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
 /// See:
 /// * https://forui.dev/docs/form/time-picker for working examples.
 /// * [FTimePickerController] for controlling a time picker.
-/// * [FPickerStyle] for customizing a time picker's appearance.
+/// * [FTimePickerStyle] for customizing a time picker's appearance.
 class FTimePicker extends StatefulWidget {
   /// The controller.
   final FTimePickerController? controller;
 
   /// The style. If null, the default picker style will be used.
-  final FPickerStyle? style;
+  final FTimePickerStyle? style;
 
-  /// True if the time picker should try to use the 24-hour format.
+  /// True if the time picker should use the 24-hour format.
   ///
-  /// Setting this to null will use the locale's default format. Defaults to null.
-  final bool? hour24;
+  /// Setting this to false will use the locale's default format, which may be 24-hours. Defaults to false.
+  final bool hour24;
 
   /// The interval between hours in the picker. Defaults to 1.
   ///
@@ -47,7 +50,7 @@ class FTimePicker extends StatefulWidget {
   const FTimePicker({
     this.controller,
     this.style,
-    this.hour24,
+    this.hour24 = false,
     this.hourInterval = 1,
     this.minuteInterval = 1,
     super.key,
@@ -63,7 +66,7 @@ class FTimePicker extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('hour24', value: hour24, ifTrue: '24-hour', ifFalse: '12-hour'))
+      ..add(FlagProperty('hour24', value: hour24, ifTrue: '24-hour'))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval));
   }
@@ -102,32 +105,28 @@ class _FTimePickerState extends State<FTimePicker> {
 
   void _update() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
-    final jm = DateFormat.jm(locale.localeName);
 
-    format = switch (widget.hour24) {
-      true => DateFormat.Hm(locale.localeName),
-      false => DateFormat(jm.pattern!.contains(RegExp('HH|hh')) ? 'hh:mm a' : 'h:mm a', locale.localeName),
-      null => jm,
-    };
+    format = widget.hour24 ? DateFormat.Hm(locale.localeName) : DateFormat.jm(locale.localeName);
     padding = format.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
 
     // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
     // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
     // See https://github.com/flutter/flutter/issues/162972
     controller
-      ..hours12 = format.pattern!.contains('a')
+      ..pattern = format.pattern!
+      ..hours24 = !format.pattern!.contains('a')
       ..hourInterval = widget.hourInterval
       ..minuteInterval = widget.minuteInterval;
 
     controller.picker?.dispose();
-    controller.picker = FPickerController(initialIndexes: controller.encode());
+    controller.picker = FPickerController(initialIndexes: controller.encode(controller.value));
     controller.picker?.addListener(() => controller.decode());
   }
 
   @override
   Widget build(BuildContext context) => TimePicker(
     controller: controller,
-    style: widget.style ?? context.theme.pickerStyle,
+    style: widget.style ?? context.theme.timePickerStyle,
     format: format,
     padding: padding,
     hourInterval: controller.hourInterval,
@@ -142,4 +141,42 @@ class _FTimePickerState extends State<FTimePicker> {
       ..add(DiagnosticsProperty('format', format))
       ..add(IntProperty('padding', padding));
   }
+}
+
+/// The style of a time picker.
+class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
+  /// The padding.
+  @override
+  final EdgeInsetsDirectional padding;
+
+  /// Creates a [FTimePickerStyle].
+  const FTimePickerStyle({
+    required super.textStyle,
+    required super.selectionBorderRadius,
+    required super.selectionColor,
+    required super.focusedOutlineStyle,
+    super.diameterRatio,
+    super.squeeze,
+    super.magnification,
+    super.overAndUnderCenterOpacity,
+    super.spacing = 0,
+    super.textHeightBehavior = const TextHeightBehavior(
+      applyHeightToFirstAscent: false,
+      applyHeightToLastDescent: false,
+    ),
+    super.selectionHeightAdjustment = 5,
+    this.padding = const EdgeInsetsDirectional.only(start: 10, end: 10),
+  });
+
+  /// Creates a [FTimePickerStyle] that inherits its properties.
+  FTimePickerStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
+    : this(
+        textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
+        selectionBorderRadius: style.borderRadius,
+        selectionColor: colorScheme.muted,
+        selectionHeightAdjustment: 5,
+        spacing: 2,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
+      );
 }

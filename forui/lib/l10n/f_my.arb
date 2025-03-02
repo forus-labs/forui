@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "ရက်စွဲ ရွေးပါ",
-  "dateFieldInvalidDateError": "ရက်စွဲ မမှန်ကန်ပါ။"
+  "dateFieldInvalidDateError": "ရက်စွဲ မမှန်ကန်ပါ။",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "အချိန်ရွေးပါ",
+  "timeFieldInvalidDateError": "အချိန်မမှန်ပါ။"
 }

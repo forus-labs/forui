@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Ընտրել ամսաթիվը",
-  "dateFieldInvalidDateError": "Սխալ ամսաթիվ:"
+  "dateFieldInvalidDateError": "Սխալ ամսաթիվ:",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Ընտրեք ժամանակը",
+  "timeFieldInvalidDateError": "Անվավեր ժամանակ:"
 }

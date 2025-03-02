@@ -1,124 +1,112 @@
-part of '../date_field.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
-class _DateField extends FDateField {
-  final TextInputAction? textInputAction;
-  final TextAlign textAlign;
-  final TextAlignVertical? textAlignVertical;
-  final TextDirection? textDirection;
-  final bool expands;
-  final VoidCallback? onEditingComplete;
-  final ValueChanged<DateTime>? onSubmit;
-  final MouseCursor? mouseCursor;
-  final bool canRequestFocus;
-  final int baselineInputYear;
-  final FDateFieldCalendarProperties? calendar;
+import 'package:meta/meta.dart';
 
-  const _DateField({
-    this.textInputAction,
-    this.textAlign = TextAlign.start,
-    this.textAlignVertical,
-    this.textDirection,
-    this.expands = false,
-    this.onEditingComplete,
-    this.onSubmit,
-    this.mouseCursor,
-    this.canRequestFocus = true,
-    this.baselineInputYear = 2000,
-    this.calendar = const FDateFieldCalendarProperties(),
-    super.controller,
-    super.style,
-    super.autofocus,
-    super.focusNode,
-    super.prefixBuilder,
-    super.suffixBuilder,
-    super.label,
-    super.description,
-    super.enabled,
-    super.onSaved,
-    super.autovalidateMode,
-    super.forceErrorText,
-    super.errorBuilder,
+import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/field/field.dart';
+import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/localizations/localization.dart';
+import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
+
+@internal
+class DateField extends Field<DateTime?> {
+  final FCalendarController<DateTime?> calendarController;
+  final FDateFieldStyle style;
+  final int baselineYear;
+
+  const DateField({
+    required this.calendarController,
+    required this.style,
+    required this.baselineYear,
+    required super.builder,
+    required super.label,
+    required super.description,
+    required super.errorBuilder,
+    required super.enabled,
+    required super.onSaved,
+    required super.validator,
+    required super.autovalidateMode,
+    required super.forceErrorText,
+    required super.focusNode,
+    required super.textInputAction,
+    required super.textAlign,
+    required super.textAlignVertical,
+    required super.textDirection,
+    required super.autofocus,
+    required super.expands,
+    required super.onEditingComplete,
+    required super.mouseCursor,
+    required super.onTap,
+    required super.canRequestFocus,
+    required super.prefixBuilder,
+    required super.suffixBuilder,
+    required super.localizations,
     super.key,
-  }) : super._();
+  });
 
   @override
-  State<StatefulWidget> createState() => _DateFieldState();
+  State<DateField> createState() => _DateFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('calendarController', calendarController))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('builder', builder))
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('validator', validator))
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(StringProperty('forceErrorText', forceErrorText))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(EnumProperty('textInputAction', textInputAction))
       ..add(EnumProperty('textAlign', textAlign))
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
-      ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
+      ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(DiagnosticsProperty('calendar', calendar))
-      ..add(IntProperty('baselineInputYear', baselineInputYear));
+      ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
+      ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
+      ..add(DiagnosticsProperty('localizations', localizations))
+      ..add(IntProperty('baselineYear', baselineYear));
   }
 }
 
-class _DateFieldState extends _FDateFieldState<_DateField> {
+class _DateFieldState extends FieldState<DateField, DateTime?> {
   @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.dateFieldStyle;
-    ValueWidgetBuilder<FTextFieldStateStyle>? prefix;
-    ValueWidgetBuilder<FTextFieldStateStyle>? suffix;
-    ValueWidgetBuilder<FTextFieldStateStyle> builder = (_, _, child) => child!;
-
-    if (widget.calendar case final properties?) {
-      prefix =
-          widget.prefixBuilder == null
-              ? null
-              : (context, stateStyle, child) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, stateStyle), child),
-              );
-
-      suffix =
-          widget.suffixBuilder == null
-              ? null
-              : (context, stateStyle, child) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, stateStyle), child),
-              );
-
-      builder =
-          (_, _, child) =>
-              _CalendarPopover(controller: _controller, style: style, properties: properties, child: child!);
+  void didUpdateWidget(covariant DateField old) {
+    super.didUpdateWidget(old);
+    if (widget.localizations != old.localizations) {
+      localizations =
+          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+      controller.dispose();
+      controller = createController();
+    } else if (widget.calendarController != old.calendarController) {
+      controller.dispose();
+      controller = createController();
     }
-
-    return Field(
-      calendarController: _controller._calendar,
-      onTap: widget.calendar == null ? null : _controller.calendar.show,
-      style: style,
-      label: widget.label,
-      description: widget.description,
-      errorBuilder: widget.errorBuilder,
-      enabled: widget.enabled,
-      onSaved: widget.onSaved,
-      validator: _controller.validator,
-      autovalidateMode: widget.autovalidateMode,
-      forceErrorText: widget.forceErrorText,
-      focusNode: widget.focusNode,
-      textInputAction: widget.textInputAction,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      expands: widget.expands,
-      autofocus: widget.autofocus,
-      onEditingComplete: widget.onEditingComplete,
-      mouseCursor: widget.mouseCursor,
-      canRequestFocus: widget.canRequestFocus,
-      prefixBuilder: prefix,
-      suffixBuilder: suffix,
-      localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
-      baselineYear: widget.baselineInputYear,
-      builder: builder,
-    );
   }
+
+  @override
+  @protected
+  FieldController createController() =>
+      DateFieldController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
+
+  @override
+  FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
+
+  @override
+  @protected
+  DateTime? get value => widget.calendarController.value;
+
+  @override
+  @protected
+  String get invalidDateError => localizations.dateFieldInvalidDateError;
 }

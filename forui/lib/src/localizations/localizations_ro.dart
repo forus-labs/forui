@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsRo extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'Dată nevalidă.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'Alegeți o oră';
+
+  @override
+  String get timeFieldInvalidDateError => 'Oră invalidă.';
 
   @override
   String get dialogLabel => 'Casetă de dialog';

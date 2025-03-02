@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Datum uswähle",
-  "dateFieldInvalidDateError": "Ungültigs Datum."
+  "dateFieldInvalidDateError": "Ungültigs Datum.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Wähle e Zyt",
+  "timeFieldInvalidDateError": "Ungültigi Zyt."
 }

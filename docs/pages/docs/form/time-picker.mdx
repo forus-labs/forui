@@ -61,37 +61,6 @@ const FTimePicker(
 
 ## Examples
 
-### 12 Hour Clock
-
-<Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='time-picker' query={{hour24: 'false'}}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart {12} copy
-        class Foo extends StatefulWidget {
-          Foo();
-
-          @override
-          State<Foo> createState() => _FooState();
-        }
-
-        class _FooState extends State<Foo> {
-          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
-
-          @override
-          Widget build(BuildContext context) => FTimePicker(controller: _controller, hour24: false);
-
-          @override
-          void dispose() {
-            _controller.dispose();
-            super.dispose();
-          }
-        }
-        ```
-    </Tabs.Tab>
-</Tabs>
-
 ### 24 Hour Clock
 
 <Tabs items={['Preview', 'Code']}>

@@ -1,5 +1,6 @@
 ## 0.10.0 (Next)
 
+* Add `useFTimeFieldController`.
 * Add `useFTimePickerController`.
 * **Breaking** Change `useFDatePickerController` to `useFDateFieldController`.
 

@@ -5,11 +5,11 @@ void main(List<String> args) {
   final [packageName, ...] = args;
   final ignore = {
     '$currentPath/lib/generated_plugin_registrant.dart',
-    '$currentPath/lib/src/localizations/localizations.dart',
+    '$currentPath/lib/src/localizations/'
   };
 
   // Getting all the dart files for the project
-  final files = dartFiles(currentPath)..removeWhere((key, _) => ignore.contains(key));
+  final files = dartFiles(currentPath)..removeWhere((key, _) => ignore.any(key.startsWith));
 
   // Sorting and writing to files
   for (final file in files.values) {

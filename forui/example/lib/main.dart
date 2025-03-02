@@ -23,13 +23,10 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
   int index = 4;
-  FRadioSelectGroupController<String> selectGroupController = FRadioSelectGroupController();
-  late FPopoverController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FPopoverController(vsync: this);
   }
 
   @override
@@ -39,10 +36,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     supportedLocales: FLocalizations.supportedLocales,
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
     home: FScaffold(
-      header: FHeader(
-        title: const Text('Example'),
-        actions: [FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: controller.toggle)],
-      ),
+      header: const FHeader(title: Text('Example')),
       content: _pages[index],
       footer: FBottomNavigationBar(
         index: index,

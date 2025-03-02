@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Chọn ngày",
-  "dateFieldInvalidDateError": "Ngày không hợp lệ."
+  "dateFieldInvalidDateError": "Ngày không hợp lệ.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Chọn thời gian",
+  "timeFieldInvalidDateError": "Thời gian không hợp lệ."
 }

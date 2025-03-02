@@ -6,5 +6,10 @@
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Выберыце дату",
-  "dateFieldInvalidDateError": "Няправільная дата."
+  "dateFieldInvalidDateError": "Няправільная дата.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Выберыце час",
+  "timeFieldInvalidDateError": "Няправільны час."
 }

@@ -3,9 +3,20 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// The locales that use non-western digits.
+/// The locales that use non-western digits in their date and time formatting:
+/// {@template forui.localizations.fScriptNumerals}
+///  * Arabic (العربية)
+///  * Assamese (অসমীয়া)
+///  * Bengali (বাংলা)
+///  * Persian/Farsi (فارسی)
+///  * Marathi (मराठी)
+///  * Burmese (မြန်မာ)
+///  * Nepali (नेपाली)
+///  * Pashto (پښتو)
+///  * Tamil (தமிழ்)
+/// {@endtemplate}
 @internal
-const easternLocales = ['ar', 'bn', 'fa', 'my', 'ne', 'ps'];
+const scriptNumerals = ['ar', 'as', 'bn', 'fa', 'mr', 'my', 'ne', 'ps', 'ta'];
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
@@ -75,4 +86,19 @@ class FDefaultLocalizations extends FLocalizations {
 
   @override
   String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
+
+  @override
+  String get timeFieldHint => 'Pick a time';
+
+  @override
+  String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => ' ';
+
+  @override
+  String get timeFieldSuffix => '';
 }

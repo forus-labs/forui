@@ -15,7 +15,7 @@ void main() {
       TestScaffold.blue(
         child: FTimePicker(
           // The default opacity messes up the coloring.
-          style: TestScaffold.blueScreen.pickerStyle.copyWith(overAndUnderCenterOpacity: 1),
+          style: TestScaffold.blueScreen.timePickerStyle.copyWith(overAndUnderCenterOpacity: 1),
         ),
       ),
     );
@@ -32,12 +32,11 @@ void main() {
       ('Eastern 24-hour interval', const Locale('ar'), true, 2, 5, 'eastern-24-interval.png'),
       //
       ('Western 12-hour single digit', const Locale('en'), false, 1, 1, 'western-12-single-digit.png'),
+      // AM/PM is not rendered, this is expected.
+      ('Western 12-hour single digit', const Locale('zh', 'HK'), false, 1, 1, 'western-period-first.png'),
       ('Western 24-hour single digit', const Locale('en'), true, 1, 1, 'western-24-single-digit.png'),
-      ('Western default single digit', const Locale('en'), null, 1, 1, 'western-default-single-digit.png'),
       //
-      ('Western 12-hour double digit', const Locale('hr'), false, 1, 1, 'western-12-double-digit.png'),
       ('Western 24-hour double digit', const Locale('hr'), true, 1, 1, 'western-24-double-digit.png'),
-      ('Western default double digit', const Locale('hr'), null, 1, 1, 'western-default-double-digit.png'),
       //
       ('Western 12-hour interval', const Locale('en'), false, 2, 5, 'western-12-interval.png'),
       ('Western 24-hour interval', const Locale('en'), true, 2, 5, 'western-24-interval.png'),
@@ -77,7 +76,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller, hour24: false)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
           ),
         );
 
@@ -98,7 +97,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller, hour24: false)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
           ),
         );
 
@@ -119,7 +118,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller, hour24: false)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
           ),
         );
 
@@ -140,7 +139,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller, hour24: false)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
           ),
         );
 

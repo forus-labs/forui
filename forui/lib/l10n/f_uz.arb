@@ -6,5 +6,10 @@
   "shortDateSeparator": "/",
   "shortDateSuffix": "",
   "dateFieldHint": "Sanani tanlang",
-  "dateFieldInvalidDateError": "Sana yaroqsiz."
+  "dateFieldInvalidDateError": "Sana yaroqsiz.",
+  "timeFieldPeriodSeparator": "",
+  "timeFieldSuffix": "",
+  "timeFieldTimeSeparator": ":",
+  "timeFieldHint": "Vaqtni tanlang",
+  "timeFieldInvalidDateError": "Yaroqsiz vaqt."
 }

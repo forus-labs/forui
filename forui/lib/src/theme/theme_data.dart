@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:meta/meta.dart';
@@ -127,6 +128,12 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// The tile group's style.
   final FTileGroupStyle tileGroupStyle;
 
+  /// The time field's style.
+  final FTimeFieldStyle timeFieldStyle;
+
+  /// The time picker style.
+  final FTimePickerStyle timePickerStyle;
+
   /// The tooltip style.
   final FTooltipStyle tooltipStyle;
 
@@ -168,8 +175,10 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
-    FTooltipStyle? tooltipStyle,
     FTileGroupStyle? tileGroupStyle,
+    FTimeFieldStyle? timeFieldStyle,
+    FTimePickerStyle? timePickerStyle,
+    FTooltipStyle? tooltipStyle,
   }) {
     typography = typography ?? FTypography.inherit(colorScheme: colorScheme);
     style = style ?? FStyle.inherit(colorScheme: colorScheme, typography: typography);
@@ -225,10 +234,14 @@ final class FThemeData with Diagnosticable, FTransformable {
       tabsStyle: tabsStyle ?? FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       textFieldStyle:
           textFieldStyle ?? FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      tooltipStyle:
-          tooltipStyle ?? FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tileGroupStyle:
           tileGroupStyle ?? FTileGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      timeFieldStyle:
+          timeFieldStyle ?? FTimeFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      timePickerStyle:
+          timePickerStyle ?? FTimePickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tooltipStyle:
+          tooltipStyle ?? FTooltipStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
     );
   }
 
@@ -269,9 +282,493 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.switchStyle,
     required this.tabsStyle,
     required this.textFieldStyle,
-    required this.tooltipStyle,
     required this.tileGroupStyle,
+    required this.timeFieldStyle,
+    required this.timePickerStyle,
+    required this.tooltipStyle,
   });
+
+  /// Converts this [FThemeData] to a Material [ThemeData] on a best-effort basis.
+  ///
+  /// This method enables interoperability between Forui and Material Design widgets by mapping
+  /// Forui's theme properties to their closest Material equivalents. Use this when you need to:
+  ///
+  /// * Use Material widgets within a Forui application
+  /// * Apply your Forui theme consistently to both Forui and Material widgets
+  /// * Create a gradual migration path from Material Design to Forui
+  ///
+  /// Note that this conversion is approximate and experimental. Some styling properties may not map
+  /// perfectly between the two design systems, and the resulting Material theme might not capture
+  /// all the nuances of your Forui theme.
+  ///
+  /// ```dart
+  /// // Apply a Forui theme to Material widgets
+  /// MaterialApp(
+  ///   theme: FThemes.zinc.light.toApproximateMaterialTheme(),
+  ///   // ...
+  /// )
+  /// ```
+  @experimental
+  ThemeData toApproximateMaterialTheme() {
+    // Material requires height to be 1, certain widgets will overflow without it.
+    // TextBaseline.alphabetic is required as TextField requires it.
+    final textTheme = TextTheme(
+      displayLarge: typography.xl4.copyWith(
+        height: 1,
+        textBaseline: typography.xl4.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      displayMedium: typography.xl3.copyWith(
+        height: 1,
+        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      displaySmall: typography.xl2.copyWith(
+        height: 1,
+        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      headlineLarge: typography.xl3.copyWith(
+        height: 1,
+        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      headlineMedium: typography.xl2.copyWith(
+        height: 1,
+        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      headlineSmall: typography.xl.copyWith(
+        height: 1,
+        textBaseline: typography.xl.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      titleLarge: typography.lg.copyWith(
+        height: 1,
+        textBaseline: typography.lg.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      titleMedium: typography.base.copyWith(
+        height: 1,
+        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      titleSmall: typography.sm.copyWith(
+        height: 1,
+        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      labelLarge: typography.base.copyWith(
+        height: 1,
+        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      labelMedium: typography.sm.copyWith(
+        height: 1,
+        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      labelSmall: typography.xs.copyWith(
+        height: 1,
+        textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      bodyLarge: typography.base.copyWith(
+        height: 1,
+        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      bodyMedium: typography.sm.copyWith(
+        height: 1,
+        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      bodySmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic),
+    )..apply(
+      fontFamily: typography.defaultFontFamily,
+      bodyColor: colorScheme.foreground,
+      displayColor: colorScheme.foreground,
+    );
+
+    return ThemeData(
+      colorScheme: ColorScheme(
+        brightness: colorScheme.brightness,
+        primary: colorScheme.primary,
+        onPrimary: colorScheme.primaryForeground,
+        secondary: colorScheme.secondary,
+        onSecondary: colorScheme.secondaryForeground,
+        error: colorScheme.error,
+        onError: colorScheme.errorForeground,
+        surface: colorScheme.background,
+        onSurface: colorScheme.foreground,
+        secondaryContainer: colorScheme.secondary,
+        onSecondaryContainer: colorScheme.secondaryForeground,
+      ),
+      fontFamily: typography.defaultFontFamily,
+      typography: Typography(
+        black: textTheme,
+        white: textTheme,
+        englishLike: textTheme,
+        dense: textTheme,
+        tall: textTheme,
+      ),
+      textTheme: textTheme,
+      splashFactory: NoSplash.splashFactory,
+      useMaterial3: true,
+
+      //// Navigation Bar
+      navigationBarTheme: NavigationBarThemeData(
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+      ),
+
+      //// Navigation Drawer
+      navigationDrawerTheme: NavigationDrawerThemeData(
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+      ),
+
+      //// Navigation Rail
+      navigationRailTheme: NavigationRailThemeData(
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+      ),
+
+      //// Card
+      cardTheme: CardTheme(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: style.borderRadius,
+          side: BorderSide(width: style.borderWidth, color: colorScheme.border),
+        ),
+      ),
+
+      //// Chip
+      chipTheme: ChipThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+
+      //// Input
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: textFieldStyle.enabledStyle.unfocusedStyle.radius,
+          borderSide: BorderSide(
+            color: textFieldStyle.enabledStyle.unfocusedStyle.color,
+            width: textFieldStyle.enabledStyle.unfocusedStyle.width,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: textFieldStyle.enabledStyle.unfocusedStyle.radius,
+          borderSide: BorderSide(
+            color: textFieldStyle.enabledStyle.unfocusedStyle.color,
+            width: textFieldStyle.enabledStyle.unfocusedStyle.width,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: textFieldStyle.enabledStyle.focusedStyle.radius,
+          borderSide: BorderSide(
+            color: textFieldStyle.enabledStyle.focusedStyle.color,
+            width: textFieldStyle.enabledStyle.focusedStyle.width,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: textFieldStyle.errorStyle.unfocusedStyle.radius,
+          borderSide: BorderSide(
+            color: textFieldStyle.errorStyle.unfocusedStyle.color,
+            width: textFieldStyle.errorStyle.unfocusedStyle.width,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: textFieldStyle.errorStyle.focusedStyle.radius,
+          borderSide: BorderSide(
+            color: textFieldStyle.errorStyle.focusedStyle.color,
+            width: textFieldStyle.errorStyle.focusedStyle.width,
+          ),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: textFieldStyle.disabledStyle.unfocusedStyle.radius,
+          borderSide: BorderSide(
+            color: textFieldStyle.disabledStyle.unfocusedStyle.color,
+            width: textFieldStyle.disabledStyle.unfocusedStyle.width,
+          ),
+        ),
+        labelStyle: textFieldStyle.enabledStyle.descriptionTextStyle,
+        floatingLabelStyle: textFieldStyle.enabledStyle.labelTextStyle,
+        hintStyle: textFieldStyle.enabledStyle.hintTextStyle,
+        errorStyle: textFieldStyle.errorStyle.errorTextStyle,
+        helperStyle: textFieldStyle.enabledStyle.descriptionTextStyle,
+        counterStyle: textFieldStyle.enabledStyle.counterTextStyle,
+        contentPadding: textFieldStyle.contentPadding,
+      ),
+
+      //// Date Picker
+      datePickerTheme: DatePickerThemeData(
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        dayShape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+        rangePickerShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+      ),
+
+      //// Time Picker
+      timePickerTheme: TimePickerThemeData(
+        hourMinuteTextColor: colorScheme.secondaryForeground,
+        hourMinuteColor: colorScheme.secondary,
+        hourMinuteShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        dayPeriodTextColor: colorScheme.foreground,
+        dayPeriodColor: colorScheme.secondary,
+        dayPeriodBorderSide: BorderSide(color: colorScheme.border),
+        dayPeriodShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        dialBackgroundColor: colorScheme.secondary,
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+      ),
+
+      /// Slider
+      sliderTheme: SliderThemeData(
+        activeTrackColor: sliderStyles.horizontalStyle.enabledStyle.activeColor,
+        inactiveTrackColor: sliderStyles.horizontalStyle.enabledStyle.inactiveColor,
+        disabledActiveTrackColor: sliderStyles.horizontalStyle.disabledStyle.activeColor,
+        disabledInactiveTrackColor: sliderStyles.horizontalStyle.disabledStyle.inactiveColor,
+        activeTickMarkColor: sliderStyles.horizontalStyle.enabledStyle.markStyle.tickColor,
+        inactiveTickMarkColor: sliderStyles.horizontalStyle.enabledStyle.markStyle.tickColor,
+        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.disabledStyle.markStyle.tickColor,
+        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.disabledStyle.markStyle.tickColor,
+        thumbColor: sliderStyles.horizontalStyle.enabledStyle.thumbStyle.borderColor,
+        disabledThumbColor: sliderStyles.horizontalStyle.disabledStyle.thumbStyle.borderColor,
+        valueIndicatorColor: sliderStyles.horizontalStyle.enabledStyle.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.horizontalStyle.enabledStyle.tooltipStyle.textStyle,
+      ),
+
+      //// Switch
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled)) {
+            return switchStyle.disabledStyle.thumbColor;
+          }
+          return switchStyle.enabledStyle.thumbColor;
+        }),
+        trackColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
+              return switchStyle.disabledStyle.checkedColor;
+            }
+            return switchStyle.disabledStyle.uncheckedColor;
+          }
+
+          if (states.contains(WidgetState.selected)) {
+            return switchStyle.enabledStyle.checkedColor;
+          }
+          return switchStyle.enabledStyle.uncheckedColor;
+        }),
+        trackOutlineColor: WidgetStateProperty.resolveWith((states) {
+          // Make the outline match the track color.
+          if (states.contains(WidgetState.disabled)) {
+            if (states.contains(WidgetState.selected)) {
+              return switchStyle.disabledStyle.checkedColor;
+            }
+            return switchStyle.disabledStyle.uncheckedColor;
+          }
+
+          if (states.contains(WidgetState.selected)) {
+            return switchStyle.enabledStyle.checkedColor;
+          }
+          return switchStyle.enabledStyle.uncheckedColor;
+        }),
+      ),
+
+      //// Buttons
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.secondary.contentStyle.disabledTextStyle;
+            }
+            return buttonStyles.secondary.contentStyle.enabledTextStyle;
+          }),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.secondary.disabledBoxDecoration.color;
+            } else if (states.contains(WidgetState.hovered)) {
+              return buttonStyles.secondary.enabledHoverBoxDecoration.color;
+            }
+            return buttonStyles.secondary.enabledBoxDecoration.color;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.secondary.contentStyle.disabledTextStyle.color;
+            }
+            return buttonStyles.secondary.contentStyle.enabledTextStyle.color;
+          }),
+          padding: WidgetStateProperty.all(buttonStyles.secondary.contentStyle.padding),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.primary.contentStyle.disabledTextStyle;
+            }
+            return buttonStyles.primary.contentStyle.enabledTextStyle;
+          }),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.primary.disabledBoxDecoration.color;
+            } else if (states.contains(WidgetState.hovered)) {
+              return buttonStyles.primary.enabledHoverBoxDecoration.color;
+            }
+            return buttonStyles.primary.enabledBoxDecoration.color;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.primary.contentStyle.disabledTextStyle.color;
+            }
+            return buttonStyles.primary.contentStyle.enabledTextStyle.color;
+          }),
+          padding: WidgetStateProperty.all(buttonStyles.primary.contentStyle.padding),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.outline.contentStyle.disabledTextStyle;
+            }
+            return buttonStyles.outline.contentStyle.enabledTextStyle;
+          }),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.outline.disabledBoxDecoration.color;
+            } else if (states.contains(WidgetState.hovered)) {
+              return buttonStyles.outline.enabledHoverBoxDecoration.color;
+            }
+            return buttonStyles.outline.enabledBoxDecoration.color;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.outline.contentStyle.disabledTextStyle.color;
+            }
+            return buttonStyles.outline.contentStyle.enabledTextStyle.color;
+          }),
+          padding: WidgetStateProperty.all(buttonStyles.outline.contentStyle.padding),
+          side: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return BorderSide(
+                color:
+                    buttonStyles.outline.disabledBoxDecoration.border?.top.color ??
+                    colorScheme.disable(colorScheme.border),
+                width: buttonStyles.outline.disabledBoxDecoration.border?.top.width ?? style.borderWidth,
+              );
+            } else if (states.contains(WidgetState.hovered)) {
+              return BorderSide(
+                color:
+                    buttonStyles.outline.enabledHoverBoxDecoration.border?.top.color ??
+                    colorScheme.hover(colorScheme.border),
+                width: buttonStyles.outline.enabledHoverBoxDecoration.border?.top.width ?? style.borderWidth,
+              );
+            }
+            return BorderSide(
+              color: buttonStyles.outline.enabledBoxDecoration.border?.top.color ?? colorScheme.border,
+              width: buttonStyles.outline.enabledBoxDecoration.border?.top.width ?? style.borderWidth,
+            );
+          }),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: buttonStyles.outline.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.contentStyle.disabledTextStyle;
+            }
+            return buttonStyles.ghost.contentStyle.enabledTextStyle;
+          }),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.disabledBoxDecoration.color;
+            } else if (states.contains(WidgetState.hovered)) {
+              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
+            }
+            return buttonStyles.ghost.enabledBoxDecoration.color;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.contentStyle.disabledTextStyle.color;
+            }
+            return buttonStyles.ghost.contentStyle.enabledTextStyle.color;
+          }),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: buttonStyles.primary.enabledBoxDecoration.color,
+        foregroundColor: buttonStyles.primary.contentStyle.enabledTextStyle.color,
+        hoverColor: buttonStyles.primary.enabledHoverBoxDecoration.color,
+        disabledElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: buttonStyles.primary.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+        ),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.disabledBoxDecoration.color;
+            } else if (states.contains(WidgetState.hovered)) {
+              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
+            }
+            return buttonStyles.ghost.enabledBoxDecoration.color;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.contentStyle.disabledTextStyle.color;
+            }
+            return buttonStyles.ghost.contentStyle.enabledTextStyle.color;
+          }),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.contentStyle.disabledTextStyle;
+            }
+            return buttonStyles.ghost.contentStyle.enabledTextStyle;
+          }),
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.disabledBoxDecoration.color;
+            } else if (states.contains(WidgetState.hovered)) {
+              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
+            }
+            return buttonStyles.ghost.enabledBoxDecoration.color;
+          }),
+          foregroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
+              return buttonStyles.ghost.contentStyle.disabledTextStyle.color;
+            }
+            return buttonStyles.ghost.contentStyle.enabledTextStyle.color;
+          }),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
+
+      /// Dialog
+      dialogTheme: DialogTheme(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+
+      /// Bottom Sheet
+      bottomSheetTheme: BottomSheetThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+
+      /// Snack Bar
+      snackBarTheme: SnackBarThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+
+      /// List Tile
+      listTileTheme: ListTileThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+
+      /// Divider
+      dividerTheme: DividerThemeData(
+        color: dividerStyles.horizontalStyle.color,
+        thickness: dividerStyles.horizontalStyle.width,
+      ),
+    );
+  }
 
   /// Returns a copy of this [FThemeData] with the given properties replaced.
   ///
@@ -352,6 +849,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FTabsStyle? tabsStyle,
     FTextFieldStyle? textFieldStyle,
     FTileGroupStyle? tileGroupStyle,
+    FTimeFieldStyle? timeFieldStyle,
     FTooltipStyle? tooltipStyle,
   }) => FThemeData(
     colorScheme: colorScheme,
@@ -389,6 +887,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     tabsStyle: tabsStyle ?? this.tabsStyle,
     textFieldStyle: textFieldStyle ?? this.textFieldStyle,
     tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
+    timeFieldStyle: timeFieldStyle ?? this.timeFieldStyle,
     tooltipStyle: tooltipStyle ?? this.tooltipStyle,
   );
 
@@ -433,6 +932,8 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('timeFieldStyle', timeFieldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('timePickerStyle', timePickerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug));
   }
 
@@ -477,6 +978,8 @@ final class FThemeData with Diagnosticable, FTransformable {
           tabsStyle == other.tabsStyle &&
           textFieldStyle == other.textFieldStyle &&
           tileGroupStyle == other.tileGroupStyle &&
+          timeFieldStyle == other.timeFieldStyle &&
+          timePickerStyle == other.timePickerStyle &&
           tooltipStyle == other.tooltipStyle;
 
   @override
@@ -517,5 +1020,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       tabsStyle.hashCode ^
       textFieldStyle.hashCode ^
       tileGroupStyle.hashCode ^
+      timeFieldStyle.hashCode ^
+      timePickerStyle.hashCode ^
       tooltipStyle.hashCode;
 }

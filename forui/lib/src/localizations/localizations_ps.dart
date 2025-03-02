@@ -1,7 +1,5 @@
 // ignore: unused_import
-
 import 'package:intl/intl.dart' as intl;
-
 import 'localizations.dart';
 
 // ignore_for_file: type=lint
@@ -69,6 +67,21 @@ class FLocalizationsPs extends FLocalizations {
 
   @override
   String get dateFieldInvalidDateError => 'ناسمه نېټه.';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => 'یو وخت وټاکئ';
+
+  @override
+  String get timeFieldInvalidDateError => 'ناسم وخت.';
 
   @override
   String get dialogLabel => 'خبرې اترې';

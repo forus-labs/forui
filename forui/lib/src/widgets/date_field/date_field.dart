@@ -5,11 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/date_field/field/field.dart';
+import 'package:forui/src/widgets/date_field/field/date_field.dart';
 
 part 'calendar/calendar_date_field.dart';
 
-part 'field/date_field.dart';
+part 'field/input_date_field.dart';
 
 /// The date field's controller.
 class FDateFieldController implements FValueNotifier<DateTime?> {
@@ -103,13 +103,8 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
 /// * Up/Down arrows: Increment/decrement values
 /// * Left/Right arrows: Move between date segments
 ///
-/// The input field does not support the following locales that use non-western numerals:
-/// * Arabic (العربية)
-/// * Bengali (বাংলা)
-/// * Persian/Farsi (فارسی)
-/// * Burmese (မြန်မာ)
-/// * Nepali (नेपाली)
-/// * Pashto (پښتو)
+/// The input field does not support the following locales that use non-western numerals, it will default to English:
+/// {@macro forui.localizations.fScriptNumerals}
 ///
 /// Consider providing a [FDateFieldController.validator] to perform custom date validation logic. By default, all
 /// dates are valid.
@@ -123,7 +118,7 @@ abstract class FDateField extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
   static Widget defaultIconBuilder(BuildContext _, (FDateFieldStyle, FTextFieldStateStyle) styles, Widget? _) =>
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0),
+        padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
         child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.calendar)),
       );
 
@@ -257,7 +252,7 @@ abstract class FDateField extends StatefulWidget {
     String? forceErrorText,
     Widget Function(BuildContext, String) errorBuilder,
     Key? key,
-  }) = _DateField;
+  }) = _InputDateField;
 
   /// Creates a [FDateField] that allows a date to be selected using only a calendar.
   ///
@@ -394,7 +389,7 @@ abstract class FDateField extends StatefulWidget {
     String? forceErrorText,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Key? key,
-  }) => _DateField(
+  }) => _InputDateField(
     controller: controller,
     style: style,
     autofocus: autofocus,

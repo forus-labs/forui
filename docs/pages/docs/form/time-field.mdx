@@ -1,0 +1,271 @@
+import {Callout, Tabs} from 'nextra/components';
+import { Widget } from "../../../components/widget.tsx";
+import LinkBadge from "../../../components/link-badge/link-badge.tsx";
+import LinkBadgeGroup from "../../../components/link-badge/link-badge-group.tsx";
+
+# Time Field
+A time field allows a time to be selected from a picker or input field.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.time_field/"/>
+</LinkBadgeGroup>
+
+<div className="pb-5">
+    <Callout type="info">
+        It is recommended to use [FTimeField.picker](#ftimefieldpicker) on touch devices and [FTimeField.new](#ftimefield)
+         on non-primarily touch devices.
+    </Callout>
+</div>
+
+The input field supports both arrow key navigation:
+  * Up/Down arrows: Increment/decrement values
+  * Left/Right arrows: Move between time segments
+
+The input field does not support the following locales that use non-western numerals, it will default to English:
+  * Arabic (العربية)
+  * Assamese (অসমীয়া)
+  * Bengali (বাংলা)
+  * Persian/Farsi (فارسی)
+  * Marathi (मराठी)
+  * Burmese (မြန်မာ)
+  * Nepali (नेपाली)
+  * Pashto (پښتو)
+  * Tamil (தமிழ்)
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-field' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        const FTimeField(
+          label: Text('Appointment Time'),
+          description: Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTimeField(...)`
+
+```dart copy
+FTimeField(
+  controller: FTimeFieldController(
+    vsync: this,
+    initialTime: FTime(hour: 12, minute: 30),
+    validator: (time) => time?.isBefore(const FTime(14, 30)) ?? false ? 'Time must be in the future' : null,
+  ),
+  style: FTimeFieldStyle(),
+  textAlign: TextAlign.start,
+  textAlignVertical: TextAlignVertical.center,
+  autofocus: false,
+  expands: false,
+  onEditingComplete: () => print('Editing complete'),
+  onSubmit: (time) => print('Time submitted: time'),
+  mouseCursor: SystemMouseCursors.text,
+  canRequestFocus: true,
+  prefixBuilder: (context, styles, child) => Icon(Icons.clock2),
+  suffixBuilder: null,
+  label: Text('Select Time'),
+  description: Text('Choose a input field'),
+  enabled: true,
+  onSaved: (time) => print('Time saved: $time'),
+  autovalidateMode: AutovalidateMode.onUnfocus,
+);
+```
+
+### `FTimeField.picker(...)`
+
+```dart copy
+FTimeField.picker(
+  controller: FTimeFieldController(
+    vsync: this,
+    initialTime: FTime(hour: 12, minute: 30),
+    validator: (time) => time?.isBefore(const FTime(14, 30)) ?? false ? 'Time must be in the future' : null,
+  ),
+  format: DateFormat.jms(),
+  textAlign: TextAlign.start,
+  textAlignVertical: TextAlignVertical.center,
+  expands: false,
+  mouseCursor: SystemMouseCursors.text,
+  canRequestFocus: true,
+  hint: 'Select a time',
+  hideOnTapOutside: FHidePopoverRegion.none,
+  hourInterval: 1,
+  minuteInterval: 1,
+  anchor: Alignment.topLeft,
+  inputAnchor: Alignment.bottomLeft,
+  directionPadding: false,
+  label: Text('Picker Time'),
+  description: Text('Select a time from the calendar'),
+  prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
+  suffixBuilder: null,
+);
+```
+
+## Examples
+
+### 24 Hours
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-field'  query={{hour24: 'true'}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {2} copy
+        const FTimeField(
+          hour24: true,
+          label: Text('Appointment Time'),
+          description: Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Picker Only
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-field' variant='picker' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        const FTimeField.picker(
+          label: Text('Appointment Time'),
+          description: Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Custom Validation
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-field' variant='validator' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        class ValidatorTimeFieldPage extends StatefulWidget {
+          @override
+          State<ValidatorTimeFieldPage> createState() => _ValidationTimeFieldPageState();
+        }
+
+        class _ValidationTimeFieldPageState extends State<ValidatorTimeFieldPage> with SingleTickerProviderStateMixin {
+          late final FTimeFieldController _controller;
+
+          @override
+          void initState() {
+            super.initState();
+            _controller = FTimeFieldController(vsync: this, validator: _validate);
+          }
+
+          String? _validate(FTime? time) => time == 12 ? 'Time cannot be noon.' : null;
+
+          @override
+          Widget build(BuildContext context) => FTimeField(
+                controller: _controller,
+                label: const Text('Appointment Time'),
+              );
+
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-field' variant='form' query={{}} height={600}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        class FormTimeFieldPage extends StatefulWidget {
+          @override
+          State<FormTimeFieldPage> createState() => _FormTimeFieldPageState();
+        }
+
+        class _FormTimeFieldPageState extends State<FormTimeFieldPage> with TickerProviderStateMixin {
+          final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+          late final FTimeFieldController _startTimeController;
+          late final FTimeFieldController _endTimeController;
+
+          @override
+          void initState() {
+            super.initState();
+            _startTimeController = FTimeFieldController(
+              vsync: this,
+              validator: _validateStartTime,
+            );
+            _endTimeController = FTimeFieldController(
+              vsync: this,
+              validator: _validateEndTime,
+            );
+          }
+
+          String? _validateStartTime(FTime? time) {
+            if (time < FTime.now()) {
+              return 'Start time must be in the future.';
+            }
+            return null;
+          }
+
+          String? _validateEndTime(FTime? time) {
+            if (_startTimeController.value != null && time < _startTimeController.value!) {
+              return 'End time must be after start time.';
+            }
+            return null;
+          }
+
+          @override
+          Widget build(BuildContext context) => Padding(
+            padding: const EdgeInsets.all(30.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  FTimeField(
+                    controller: _startTimeController,
+                    label: const Text('Start Time'),
+                    description: const Text('Select a start time.'),
+                    autovalidateMode: AutovalidateMode.disabled,
+                  ),
+                  const SizedBox(height: 20),
+                  FTimeField(
+                    controller: _endTimeController,
+                    label: const Text('End Time'),
+                    description: const Text('Select an end time.'),
+                    autovalidateMode: AutovalidateMode.disabled,
+                  ),
+                  const SizedBox(height: 25),
+                  FButton(
+                    label: const Text('Submit'),
+                    onPress: () {
+                      if (_formKey.currentState!.validate()) {
+                        // Form is valid, process the dates
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          @override
+          void dispose() {
+            _startTimeController.dispose();
+            _endTimeController.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>

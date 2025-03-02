@@ -2,20 +2,25 @@
 
 ### Additions
 
-* Add `FButtonCustomStyle.animationTween`.
 * Add `FTextField.counterBuilder`.
 * Add `FTransformable`.
 * Add `FTransformables`.
 * Add `FTextField.stylusHandwritingEnabled`.
 * Add `FPickerWheelMixin`.
-* Add `FTimePicker`.
-* Add `FTimePickerController`.
+* Add `FTimeField`.
+* Add `FTimeFieldController`.
+* Add `FTimeFieldProperties`.
+* Add `FThemeData.toApproximateMaterialTheme()`.
+* Add `FTimePickerStyle`.
+* Add `FPickerStyle.selectionHeightAdjustment`.
 
 ### Changes
 
 * Change all widget styles to use code generated functions.
+* Change spacing between `FDateField`'s default prefix icon and content.
 * **Breaking** Change `FDatePicker` to `FDateField`.
 * **Breaking** Change `FDatePickerController` to `FDateFieldController`.
+* **Breaking** Change `FDatePickerController.calendar` to `FDateFieldController.popover`.
 * **Breaking** Change `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
 * **Breaking** Change `FLocalizations.datePickerHint` to `FLocalizations.dateFieldHint`.
 * **Breaking** Change `FLocalizations.datePickerInvalidDateError` to `FLocalizations.dateFieldInvalidDateError`.
@@ -23,11 +28,15 @@
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
 * **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
+* **Breaking** Change default `FPickerStyle.textStyle` size from `lg` to `base`.
+* **Breaking** Change `FTimePicker` to use `FTimePickerStyle` instead of `FPickerStyle`.
 
 ### Fixes
+* Fix `FDateField.input` to show default icon.
 * Fix `FTab` not updating when using controller to switch tabs.
 * Fix `FPicker` incorrectly detecting number of wheels when controller is not given and placeholder is used.
-
+* Fix `FDateField` not handling `bg`, `en`, `sr`, `sr_Latn` and `zu` locales properly.
+* Fix `FDateField` not updating when locale changes.
 
 ## 0.9.1+1
 Fix documentation not publishing.

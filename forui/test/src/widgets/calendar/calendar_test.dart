@@ -12,7 +12,7 @@ void main() {
       final type = ValueNotifier(FCalendarPickerType.yearMonth);
 
       await tester.pumpWidget(
-        TestScaffold(
+        TestScaffold.app(
           child: ValueListenableBuilder(
             valueListenable: type,
             builder:
@@ -39,7 +39,7 @@ void main() {
       final controller = FCalendarController.date(initialSelection: DateTime(2024, 7, 14));
 
       await tester.pumpWidget(
-        TestScaffold(
+        TestScaffold.app(
           child: ValueListenableBuilder(
             valueListenable: controller,
             builder:
@@ -69,7 +69,7 @@ void main() {
     group('previous button', () {
       testWidgets('navigates to previous page', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
+          TestScaffold.app(
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
@@ -89,7 +89,7 @@ void main() {
 
       testWidgets('did not navigate to previous page', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
+          TestScaffold.app(
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(2024, 7),
@@ -111,7 +111,7 @@ void main() {
     group('next button', () {
       testWidgets('navigates to next page', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
+          TestScaffold.app(
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
@@ -131,7 +131,7 @@ void main() {
 
       testWidgets('did not navigate to next page', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
+          TestScaffold.app(
             child: FCalendar(
               controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
               start: DateTime(2024),
@@ -154,7 +154,7 @@ void main() {
       late Widget calendar;
 
       setUp(() {
-        calendar = TestScaffold(
+        calendar = TestScaffold.app(
           child: FCalendar(
             initialType: FCalendarPickerType.yearMonth,
             controller: FCalendarController.dates(),
@@ -220,7 +220,7 @@ void main() {
       for (final (year, month) in [(2023, 'September'), (2025, 'May')]) {
         testWidgets('select year where current month out of range', (tester) async {
           await tester.pumpWidget(
-            TestScaffold(
+            TestScaffold.app(
               child: FCalendar(
                 initialType: FCalendarPickerType.yearMonth,
                 controller: FCalendarController.dates(),

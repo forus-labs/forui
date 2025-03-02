@@ -8,7 +8,8 @@ import 'package:forui/forui.dart';
 final class FTimePickerController extends FValueNotifier<FTime> {
   FPickerController? _picker;
   bool _mutating = false;
-  late bool _hours12;
+  late String _pattern;
+  late bool _hours24;
   late int _hourInterval;
   late int _minuteInterval;
 
@@ -28,7 +29,7 @@ final class FTimePickerController extends FValueNotifier<FTime> {
     final values = [
       (value.hour / hourInterval).round(),
       (value.minute / minuteInterval).round(),
-      if (hours12) value.hour < 12 ? 0 : 1,
+      if (!hours24) value.hour < 12 ? 0 : 1,
     ];
 
     try {
@@ -51,7 +52,7 @@ final class FTimePickerController extends FValueNotifier<FTime> {
     try {
       _mutating = true;
       super.value = value;
-      _picker?.value = encode();
+      _picker?.value = encode(value);
     } finally {
       _mutating = false;
     }
@@ -70,22 +71,29 @@ final class FTimePickerController extends FValueNotifier<FTime> {
 @internal
 extension FTimePickerControllers on FTimePickerController {
   /// Encodes the given [value] as picker wheels.
-  List<int> encode() => [
-    (value.hour / hourInterval).round(),
-    (value.minute / minuteInterval).round(),
-    if (hours12) value.hour < 12 ? 0 : 1,
-  ];
+  List<int> encode(FTime value) {
+    final indexes = [(value.hour / hourInterval).round(), (value.minute / minuteInterval).round()];
+
+    if (!hours24) {
+      final period = value.hour < 12 ? 0 : 1;
+      _pattern.startsWith('a') ? indexes.insert(0, period) : indexes.add(period);
+    }
+
+    return indexes;
+  }
 
   /// Decodes the current picker wheels as an [FTime].
   void decode() {
     final indexes = _picker!.value;
+    final hourIndex = _pattern.startsWith('a') ? 1 : 0;
+    final periodIndex = _pattern.startsWith('a') ? 0 : 2;
 
-    var hour = (indexes[0] * hourInterval) % (hours12 ? 12 : 24);
-    if (hours12 && indexes[2].isOdd) {
+    var hour = (indexes[hourIndex] * hourInterval) % (hours24 ? 24 : 12);
+    if (!hours24 && indexes[periodIndex].isOdd) {
       hour += 12;
     }
 
-    _value = FTime(hour, (indexes[1] * minuteInterval) % 60);
+    _value = FTime(hour, (indexes[hourIndex + 1] * minuteInterval) % 60);
   }
 
   FPickerController? get picker => _picker;
@@ -94,9 +102,13 @@ extension FTimePickerControllers on FTimePickerController {
 
   bool get mutating => _mutating;
 
-  bool get hours12 => _hours12;
+  String get pattern => _pattern;
 
-  set hours12(bool value) => _hours12 = value;
+  set pattern(String value) => _pattern = value;
+
+  bool get hours24 => _hours24;
+
+  set hours24(bool value) => _hours24 = value;
 
   int get hourInterval => _hourInterval;
 
