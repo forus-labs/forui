@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
@@ -12,7 +10,6 @@ class Sandbox extends StatefulWidget {
   @override
   State<Sandbox> createState() => _SandboxState();
 }
-
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late FTimePickerController timeController = FTimePickerController();
@@ -46,7 +43,6 @@ class LocaleScaffold extends StatefulWidget {
     properties.add(IterableProperty('locales', locales));
   }
 }
-
 
 class _LocaleScaffoldState extends State<LocaleScaffold> {
   int index = 0;
