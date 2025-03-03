@@ -5,18 +5,18 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/field.dart';
-import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/foundation/input/input.dart';
+import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
 @internal
-class TimeField extends Field<FTime?> {
+class TimeInput extends Input<FTime?> {
   final FTimeFieldController timeController;
   final FTimeFieldStyle style;
   final bool hour24;
 
-  const TimeField({
+  const TimeInput({
     required this.timeController,
     required this.hour24,
     required this.style,
@@ -47,7 +47,7 @@ class TimeField extends Field<FTime?> {
   });
 
   @override
-  State<TimeField> createState() => _TimeFieldState();
+  State<TimeInput> createState() => _TimeFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -79,9 +79,9 @@ class TimeField extends Field<FTime?> {
   }
 }
 
-class _TimeFieldState extends FieldState<TimeField, FTime?> {
+class _TimeFieldState extends InputState<TimeInput, FTime?> {
   @override
-  void didUpdateWidget(covariant TimeField old) {
+  void didUpdateWidget(covariant TimeInput old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       localizations =
@@ -96,9 +96,9 @@ class _TimeFieldState extends FieldState<TimeField, FTime?> {
 
   @override
   @protected
-  FieldController createController() {
+  InputController createController() {
     final format = widget.hour24 ? DateFormat.Hm(localizations.localeName) : DateFormat.jm(localizations.localeName);
-    return TimeFieldController(localizations, widget.timeController, format, widget.style.textFieldStyle);
+    return TimeInputController(localizations, widget.timeController, format, widget.style.textFieldStyle);
   }
 
   @override

@@ -3,17 +3,17 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/parser.dart';
+import 'package:forui/src/foundation/input/parser.dart';
 
 @internal
-abstract class FieldController extends TextEditingController {
+abstract class InputController extends TextEditingController {
   final FTextFieldStyle style;
   final WidgetStatesController states;
   final Parser parser;
   final String placeholder;
   bool mutating = false;
 
-  FieldController(this.style, this.parser, this.placeholder, TextEditingValue? value)
+  InputController(this.style, this.parser, this.placeholder, TextEditingValue? value)
     : states = WidgetStatesController(),
       super.fromValue(value);
 

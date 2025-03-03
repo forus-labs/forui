@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/field_controller.dart';
-import 'package:forui/src/foundation/field/parser.dart';
-import 'package:forui/src/widgets/date_field/field/date_parser.dart';
+import 'package:forui/src/foundation/input/input_controller.dart';
+import 'package:forui/src/foundation/input/parser.dart';
+import 'package:forui/src/widgets/date_field/input/date_parser.dart';
 
 ///
 @internal
@@ -22,13 +22,13 @@ TextEditingValue _last(TextEditingValue value, int _, int last, int end, int sep
     value.copyWith(selection: TextSelection(baseOffset: last + separator, extentOffset: end));
 
 @internal
-class DateFieldController extends FieldController {
+class DateInputController extends InputController {
   @override
   final DateSelector selector;
   final FCalendarController<DateTime?> controller;
   final DateFormat _format;
 
-  factory DateFieldController(
+  factory DateInputController(
     FCalendarController<DateTime?> controller,
     FLocalizations localizations,
     FTextFieldStyle style,
@@ -40,7 +40,7 @@ class DateFieldController extends FieldController {
         .replaceAll('y', 'YYYY')
         .replaceAll("'", '');
     final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
-    return DateFieldController.test(
+    return DateInputController.test(
       controller,
       localizations,
       style,
@@ -51,7 +51,7 @@ class DateFieldController extends FieldController {
   }
 
   @visibleForTesting
-  DateFieldController.test(
+  DateInputController.test(
     this.controller,
     FLocalizations localizations,
     FTextFieldStyle style,

@@ -5,10 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/time_field/field/time_field.dart';
+import 'package:forui/src/widgets/time_field/input/time_input.dart';
 import 'package:forui/src/widgets/time_field/picker/properties.dart';
 
-part 'field/input_time_field.dart';
+part 'input/input_time_field.dart';
 
 part 'picker/picker_time_field.dart';
 

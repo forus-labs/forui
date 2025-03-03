@@ -5,11 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
 
 @internal
-abstract class Field<T> extends StatefulWidget {
+abstract class Input<T> extends StatefulWidget {
   final ValueWidgetBuilder<FTextFieldStateStyle> builder;
   final Widget? label;
   final Widget? description;
@@ -34,7 +34,7 @@ abstract class Field<T> extends StatefulWidget {
   final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
   final FLocalizations localizations;
 
-  const Field({
+  const Input({
     required this.builder,
     required this.label,
     required this.description,
@@ -90,9 +90,9 @@ abstract class Field<T> extends StatefulWidget {
 }
 
 @internal
-abstract class FieldState<T extends Field<U>, U> extends State<T> {
+abstract class InputState<T extends Input<U>, U> extends State<T> {
   late FLocalizations localizations;
-  late FieldController controller;
+  late InputController controller;
 
   @override
   void initState() {
@@ -103,7 +103,7 @@ abstract class FieldState<T extends Field<U>, U> extends State<T> {
   }
 
   @protected
-  FieldController createController();
+  InputController createController();
 
   @override
   Widget build(BuildContext _) {

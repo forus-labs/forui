@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/parser.dart';
-import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
+import 'package:forui/src/foundation/input/parser.dart';
+import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
 ///
 @internal
@@ -22,11 +22,11 @@ TextEditingValue _onLast(TextEditingValue value, int _, int last, int end, int _
     value.copyWith(selection: TextSelection(baseOffset: last + lastSeparator, extentOffset: end));
 
 @internal
-class Time12FieldController extends TimeFieldController {
+class Time12InputController extends TimeInputController {
   @override
   final Time12Selector selector;
 
-  Time12FieldController(
+  Time12InputController(
     FLocalizations localizations,
     super.controller,
     super.format,

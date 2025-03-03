@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/parser.dart';
-import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
+import 'package:forui/src/foundation/input/parser.dart';
+import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
 ///
 @internal
@@ -17,11 +17,11 @@ TextEditingValue _last(TextEditingValue value, int only, int end, int separator)
     value.copyWith(selection: TextSelection(baseOffset: only + separator, extentOffset: end));
 
 @internal
-class Time24FieldController extends TimeFieldController {
+class Time24InputController extends TimeInputController {
   @override
   final Time24Selector selector;
 
-  Time24FieldController(
+  Time24InputController(
     FLocalizations localizations,
     super.controller,
     super.format,

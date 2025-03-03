@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_eu.dart';
 import 'package:forui/src/localizations/localizations_fr.dart';
-import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -64,7 +64,7 @@ void main() {
           ),
         ].indexed) {
       test('multiple separator - $index', () {
-        final controller = TimeFieldController.test(
+        final controller = TimeInputController.test(
           FLocalizationsFrCa(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
@@ -95,7 +95,7 @@ void main() {
           ),
         ].indexed) {
       test('forward - $index', () {
-        final controller = TimeFieldController.test(
+        final controller = TimeInputController.test(
           FLocalizationsFrCa(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
@@ -124,7 +124,7 @@ void main() {
           ),
         ].indexed) {
       test('backward - $index', () {
-        final controller = TimeFieldController.test(
+        final controller = TimeInputController.test(
           FLocalizationsFrCa(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
@@ -163,7 +163,7 @@ void main() {
         ),
       ].indexed) {
     testWidgets('adjust - $index', (tester) async {
-      final controller = TimeFieldController.test(
+      final controller = TimeInputController.test(
         FLocalizationsFrCa(),
         FTimeFieldController(vsync: const TestVSync()),
         DateFormat.jm('fr_CA'),
@@ -209,7 +209,7 @@ void main() {
           (const TextEditingValue(text: '13:30'), null),
         ].indexed) {
       test('single time separator - $index', () {
-        final controller = TimeFieldController(
+        final controller = TimeInputController(
           FLocalizationsEu(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('eu'),
@@ -253,7 +253,7 @@ void main() {
           (const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 3)), null),
         ].indexed) {
       test('multiple time separator - $index', () {
-        final controller = TimeFieldController(
+        final controller = TimeInputController(
           FLocalizationsFrCa(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('fr_CA'),
@@ -284,7 +284,7 @@ void main() {
           (const TextEditingValue(text: '13:30 ч.', selection: TextSelection.collapsed(offset: 12)), null),
         ].indexed) {
       test('suffix - $index', () {
-        final controller = TimeFieldController(
+        final controller = TimeInputController(
           FLocalizationsBg(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('bg'),
@@ -303,7 +303,7 @@ void main() {
       ].indexed) {
     test('update from time controller(...) - $index', () {
       final timeController = FTimeFieldController(vsync: const TestVSync(), initialTime: initial);
-      final controller = TimeFieldController(
+      final controller = TimeInputController(
         FLocalizationsBg(),
         timeController,
         DateFormat.jm('bg'),

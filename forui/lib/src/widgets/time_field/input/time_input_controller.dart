@@ -4,17 +4,17 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/field_controller.dart';
-import 'package:forui/src/widgets/time_field/field/time_12_field_controller.dart';
-import 'package:forui/src/widgets/time_field/field/time_24_field_controller.dart';
-import 'package:forui/src/widgets/time_field/field/time_parser.dart';
+import 'package:forui/src/foundation/input/input_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_12_input_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_24_input_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_parser.dart';
 
 @internal
-abstract class TimeFieldController extends FieldController {
+abstract class TimeInputController extends InputController {
   final FTimeFieldController controller;
   final DateFormat format;
 
-  factory TimeFieldController(
+  factory TimeInputController(
     FLocalizations localizations,
     FTimeFieldController controller,
     DateFormat format,
@@ -28,7 +28,7 @@ abstract class TimeFieldController extends FieldController {
         .replaceAll("'", '');
     final time = controller.value == null ? placeholder : format.format(controller.value!.withDate(DateTime(1970)));
 
-    return TimeFieldController.test(
+    return TimeInputController.test(
       localizations,
       controller,
       format,
@@ -39,7 +39,7 @@ abstract class TimeFieldController extends FieldController {
   }
 
   @visibleForTesting
-  factory TimeFieldController.test(
+  factory TimeInputController.test(
     FLocalizations localizations,
     FTimeFieldController controller,
     DateFormat format,
@@ -47,11 +47,11 @@ abstract class TimeFieldController extends FieldController {
     String placeholder,
     TextEditingValue value,
   ) => switch (format.pattern!.contains('a')) {
-    true => Time12FieldController.new,
-    false => Time24FieldController.new,
+    true => Time12InputController.new,
+    false => Time24InputController.new,
   }(localizations, controller, format, style, TimeParser(format), placeholder, value);
 
-  TimeFieldController.fromValue(
+  TimeInputController.fromValue(
     this.controller,
     this.format,
     super.style,

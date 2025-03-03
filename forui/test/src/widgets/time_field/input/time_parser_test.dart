@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 
-import 'package:forui/src/foundation/field/parser.dart';
-import 'package:forui/src/widgets/time_field/field/time_parser.dart';
+import 'package:forui/src/foundation/input/parser.dart';
+import 'package:forui/src/widgets/time_field/input/time_parser.dart';
 
 void main() {
   late Time12Parser enSG; // h:mm a (am/pm)

@@ -4,18 +4,18 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/field.dart';
-import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/foundation/input/input.dart';
+import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
+import 'package:forui/src/widgets/date_field/input/date_input_controller.dart';
 
 @internal
-class DateField extends Field<DateTime?> {
+class DateInput extends Input<DateTime?> {
   final FCalendarController<DateTime?> calendarController;
   final FDateFieldStyle style;
   final int baselineYear;
 
-  const DateField({
+  const DateInput({
     required this.calendarController,
     required this.style,
     required this.baselineYear,
@@ -46,7 +46,7 @@ class DateField extends Field<DateTime?> {
   });
 
   @override
-  State<DateField> createState() => _DateFieldState();
+  State<DateInput> createState() => _DateInputState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -79,9 +79,9 @@ class DateField extends Field<DateTime?> {
   }
 }
 
-class _DateFieldState extends FieldState<DateField, DateTime?> {
+class _DateInputState extends InputState<DateInput, DateTime?> {
   @override
-  void didUpdateWidget(covariant DateField old) {
+  void didUpdateWidget(covariant DateInput old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       localizations =
@@ -96,8 +96,8 @@ class _DateFieldState extends FieldState<DateField, DateTime?> {
 
   @override
   @protected
-  FieldController createController() =>
-      DateFieldController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
+  InputController createController() =>
+      DateInputController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
 
   @override
   FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
