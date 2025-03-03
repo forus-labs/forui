@@ -24,10 +24,6 @@ class FPaginationController extends PageController {
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
   final bool showEdges;
 
-  /// The total number of pages.
-  ///
-  /// # Contract:
-  /// * Throws [AssertionError] if [length] < 0.
   final int _length;
   int _value;
 

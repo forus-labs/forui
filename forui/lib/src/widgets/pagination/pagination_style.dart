@@ -17,7 +17,7 @@ final class FPaginationStateStyle with Diagnosticable, _$FPaginationStateStyleFu
   @override
   final BoxDecoration hoveredDecoration;
 
-  /// The text style used for the pagination item.
+  /// The text style.
   @override
   final TextStyle textStyle;
 
@@ -43,7 +43,7 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   @override
   final EdgeInsets itemPadding;
 
-  /// The constraints for the content. Defaults to `BoxConstraints(maxWidth: 40.0, minWidth: 40.0, maxHeight: 40, minHeight: 40.0)`.
+  /// The constraints for the content. Defaults to `BoxConstraints(maxWidth: 40, minWidth: 40, maxHeight: 40, minHeight: 40)`.
   @override
   final BoxConstraints contentConstraints;
 

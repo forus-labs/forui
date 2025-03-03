@@ -190,7 +190,7 @@ class _Page extends StatelessWidget {
             focusedOutlineStyle: focusedOutlineStyle,
             onPress: () => controller.value = page,
             builder:
-                (context, tappableData, child) => DecoratedBox(
+                (context, tappableData, _) => DecoratedBox(
                   decoration: switch ((selected, tappableData.hovered)) {
                     (false, false) => style.unselected.decoration,
                     (false, true) => style.unselected.hoveredDecoration,
