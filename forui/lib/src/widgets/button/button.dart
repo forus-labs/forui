@@ -104,8 +104,6 @@ class FButton extends StatelessWidget {
       Variant.ghost => context.theme.buttonStyles.ghost,
     };
 
-    final enabled = onPress != null || onLongPress != null;
-
     return FTappable.animated(
       focusedOutlineStyle: style.focusedOutlineStyle,
       autofocus: autofocus,
@@ -114,15 +112,11 @@ class FButton extends StatelessWidget {
       onPress: onPress,
       onLongPress: onLongPress,
       builder:
-          (_, data, child) => DecoratedBox(
-            decoration: switch ((enabled, data.hovered)) {
-              (true, false) => style.enabledBoxDecoration,
-              (true, true) => style.enabledHoverBoxDecoration,
-              (false, _) => style.disabledBoxDecoration,
-            },
-            child: child,
+          (_, states, child) => DecoratedBox(
+            decoration: style.decoration.resolve(states),
+            child: FButtonData(style: style, states: states, child: child!),
           ),
-      child: FButtonData(style: style, enabled: enabled, child: child),
+      child: child,
     );
   }
 
@@ -175,25 +169,17 @@ enum Variant implements FButtonStyle { primary, secondary, destructive, outline,
 
 /// A custom [FButton] style.
 class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCustomStyleFunctions {
-  /// The box decoration for an enabled button.
+  /// The decoration.
   @override
-  final BoxDecoration enabledBoxDecoration;
+  final WidgetStateMapper<BoxDecoration> decoration;
 
-  /// The box decoration for an enabled button when it is hovered over.
+  /// The content's style.
   @override
-  final BoxDecoration enabledHoverBoxDecoration;
-
-  /// The box decoration for a disabled button.
-  @override
-  final BoxDecoration disabledBoxDecoration;
+  final WidgetStateMapper<FButtonContentStyle> contentStyle;
 
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
-
-  /// The content's style.
-  @override
-  final FButtonContentStyle contentStyle;
 
   /// The icon content's style.
   @override
@@ -205,9 +191,7 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCust
 
   /// Creates a [FButtonCustomStyle].
   FButtonCustomStyle({
-    required this.enabledBoxDecoration,
-    required this.enabledHoverBoxDecoration,
-    required this.disabledBoxDecoration,
+    required this.decoration,
     required this.focusedOutlineStyle,
     required this.contentStyle,
     required this.iconContentStyle,
@@ -224,15 +208,16 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCust
     required Color enabledContentColor,
     required Color disabledContentColor,
   }) : this(
-         enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: enabledBoxColor),
-         enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: enabledHoveredBoxColor),
-         disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: disabledBoxColor),
+         decoration: WidgetStateMapper({
+           WidgetState.disabled: BoxDecoration(borderRadius: style.borderRadius, color: disabledBoxColor),
+           WidgetState.hovered | WidgetState.pressed: BoxDecoration(borderRadius: style.borderRadius, color: enabledHoveredBoxColor),
+           WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: enabledBoxColor),
+         }),
          focusedOutlineStyle: style.focusedOutlineStyle,
-         contentStyle: FButtonContentStyle.inherit(
-           typography: typography,
-           enabled: enabledContentColor,
-           disabled: disabledContentColor,
-         ),
+         contentStyle: WidgetStateMapper({
+           WidgetState.disabled: FButtonContentStyle.inherit(typography: typography, color: disabledContentColor),
+           WidgetState.any: FButtonContentStyle.inherit(typography: typography, color: enabledContentColor),
+         }),
          iconContentStyle: FButtonIconContentStyle(
            enabledColor: enabledContentColor,
            disabledColor: disabledContentColor,
@@ -258,19 +243,19 @@ class FButtonData extends InheritedWidget {
   final FButtonCustomStyle style;
 
   /// True if the button is enabled.
-  final bool enabled;
+  final Set<WidgetState> states;
 
   /// Creates a [FButtonData].
-  const FButtonData({required this.style, required super.child, this.enabled = true, super.key});
+  const FButtonData({required this.style, required super.child, required this.states, super.key});
 
   @override
-  bool updateShouldNotify(covariant FButtonData old) => style != old.style || enabled != old.enabled;
+  bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(states, old.states);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'));
+      ..add(IterableProperty('states', states));
   }
 }

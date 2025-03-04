@@ -17,15 +17,16 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonCustomStyle(:contentStyle), :enabled) = FButtonData.of(context);
+    final FButtonData(style: FButtonCustomStyle(:contentStyle), :states) = FButtonData.of(context);
+    final style = contentStyle.resolve(states);
     return Padding(
-      padding: contentStyle.padding,
+      padding: style.padding,
       child: DefaultTextStyle.merge(
-        style: enabled ? contentStyle.enabledTextStyle : contentStyle.disabledTextStyle,
+        style: style.textStyle,
         child: FIconStyleData(
           style: FIconStyle(
-            color: enabled ? contentStyle.enabledIconColor : contentStyle.disabledIconColor,
-            size: contentStyle.iconSize,
+            color: style.iconColor,
+            size: style.iconSize,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +47,7 @@ class IconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(:style, :enabled) = FButtonData.of(context);
+    final FButtonData(:style, :states) = FButtonData.of(context);
 
     return Padding(
       padding: style.iconContentStyle.padding,
@@ -65,11 +66,7 @@ class IconContent extends StatelessWidget {
 final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   /// The [TextStyle] when this button is enabled.
   @override
-  final TextStyle enabledTextStyle;
-
-  /// The [TextStyle] when this button is disabled.
-  @override
-  final TextStyle disabledTextStyle;
+  final TextStyle textStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
   @override
@@ -77,11 +74,7 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
 
   /// The icon's color when this button is enabled.
   @override
-  final Color enabledIconColor;
-
-  /// The icon's color when this button is disabled.
-  @override
-  final Color disabledIconColor;
+  final Color iconColor;
 
   /// The icon's size. Defaults to 20.
   @override
@@ -89,22 +82,15 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
 
   /// Creates a [FButtonContentStyle].
   FButtonContentStyle({
-    required this.enabledTextStyle,
-    required this.disabledTextStyle,
-    required this.enabledIconColor,
-    required this.disabledIconColor,
+    required this.textStyle,
+    required this.iconColor,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
     this.iconSize = 20,
   });
 
-  /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled].
-  FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
-    : this(
-        enabledTextStyle: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
-        disabledTextStyle: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
-        enabledIconColor: enabled,
-        disabledIconColor: disabled,
-      );
+  /// Creates a [FButtonContentStyle] that inherits its properties from the given [color].
+  FButtonContentStyle.inherit({required FTypography typography, required Color color})
+    : this(textStyle: typography.base.copyWith(color: color, fontWeight: FontWeight.w500, height: 1), iconColor: color);
 }
 
 /// [FButton] icon content's style.
