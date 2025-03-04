@@ -133,10 +133,9 @@ In some situations, it is unrealistic to implement things ourselves. In these ca
 
 Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
-### Prefer `AlignmentGeomtry`/`BorderRadiussGeomtry`/`EdgeInsetsGeomtry` over `Alignment`/`BorderRadius`/`EdgeInsets`
+### Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`
 
-Prefer the `Geomtry` variants when possible because they are more flexible.
-
+Prefer the `Geometry` variants when possible because they are more flexible.
 ### Widget Styles
 
 ```dart
