@@ -24,14 +24,18 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   const FFocusedOutline({required this.focused, required super.child, this.style, super.key});
 
   @override
-  RenderObject createRenderObject(BuildContext context) =>
-      _Outline(style ?? context.theme.style.focusedOutlineStyle, focused: focused);
+  RenderObject createRenderObject(BuildContext context) => _Outline(
+    style ?? context.theme.style.focusedOutlineStyle,
+    Directionality.maybeOf(context) ?? TextDirection.ltr,
+    focused: focused,
+  );
 
   @override
   // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext context, _Outline outline) {
     outline
       ..style = style ?? context.theme.style.focusedOutlineStyle
+      ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr
       ..focused = focused;
   }
 
@@ -46,22 +50,24 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
 
 class _Outline extends RenderProxyBox {
   FFocusedOutlineStyle _style;
+  TextDirection _textDirection;
   bool _focused;
 
-  _Outline(this._style, {required bool focused}) : _focused = focused;
+  _Outline(this._style, this._textDirection, {required bool focused}) : _focused = focused;
 
   @override
   void paint(PaintingContext context, Offset offset) {
     context.paintChild(child!, offset);
     if (focused) {
+      final radius = _style.borderRadius.resolve(_textDirection);
       context.canvas.drawPath(
         Path()..addRRect(
           RRect.fromRectAndCorners(
             (offset & child!.size).inflate(_style.spacing),
-            topLeft: _style.borderRadius.topLeft,
-            topRight: _style.borderRadius.topRight,
-            bottomLeft: _style.borderRadius.bottomLeft,
-            bottomRight: _style.borderRadius.bottomRight,
+            topLeft: radius.topLeft,
+            topRight: radius.topRight,
+            bottomLeft: radius.bottomLeft,
+            bottomRight: radius.bottomRight,
           ),
         ),
         Paint()
@@ -84,6 +90,15 @@ class _Outline extends RenderProxyBox {
     }
   }
 
+  TextDirection get textDirection => _textDirection;
+
+  set textDirection(TextDirection value) {
+    if (textDirection != value) {
+      _textDirection = value;
+      markNeedsPaint();
+    }
+  }
+
   bool get focused => _focused;
 
   set focused(bool value) {
@@ -98,6 +113,7 @@ class _Outline extends RenderProxyBox {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('focused', value: focused, ifTrue: 'focused'));
   }
 }
@@ -110,7 +126,7 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
 
   /// The border radius.
   @override
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// The outline's width. Defaults to 1.
   ///
@@ -119,7 +135,7 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
   @override
   final double width;
 
-  /// The spacing between the outline and the outlined widget. Defaults to 2.
+  /// The spacing between the outline and the outlined widget. Defaults to 3.
   @override
   final double spacing;
 

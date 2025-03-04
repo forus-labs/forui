@@ -11,9 +11,9 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final MouseCursor mouseCursor;
   final bool canRequestFocus;
   @override
-  final Alignment anchor;
+  final AlignmentGeometry anchor;
   @override
-  final Alignment inputAnchor;
+  final AlignmentGeometry inputAnchor;
   @override
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   @override

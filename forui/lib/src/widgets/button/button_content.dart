@@ -73,7 +73,7 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The icon's color when this button is enabled.
   @override
@@ -111,7 +111,7 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
 final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// The padding. Defaults to `EdgeInsets.all(7.5)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The icon's color when this button is enabled.
   @override

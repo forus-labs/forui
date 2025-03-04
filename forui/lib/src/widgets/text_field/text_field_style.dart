@@ -25,7 +25,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   ///
   /// Defaults to `const EdgeInsets.symmetric(horizontal: 14, vertical: 14)`.
   @override
-  final EdgeInsets contentPadding;
+  final EdgeInsetsGeometry contentPadding;
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
   ///

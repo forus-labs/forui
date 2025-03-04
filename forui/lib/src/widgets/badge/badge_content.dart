@@ -37,7 +37,7 @@ final class FBadgeContentStyle with Diagnosticable, _$FBadgeContentStyleFunction
 
   /// The padding.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FBadgeContentStyle].
   FBadgeContentStyle({

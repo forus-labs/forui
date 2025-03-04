@@ -6,10 +6,10 @@ import 'package:forui/forui.dart';
 /// A date picker calendar popover's properties.
 class FDateFieldCalendarProperties with Diagnosticable {
   /// The alignment point on the calendar popover. Defaults to [Alignment.topLeft].
-  final Alignment anchor;
+  final AlignmentGeometry anchor;
 
   /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
-  final Alignment inputAnchor;
+  final AlignmentGeometry inputAnchor;
 
   /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;

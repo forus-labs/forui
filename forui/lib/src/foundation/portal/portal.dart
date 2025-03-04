@@ -23,7 +23,7 @@ class FPortal extends StatefulWidget {
   /// See [childAnchor] for changing the child's anchor.
   ///
   /// Defaults to [Alignment.topCenter].
-  final Alignment portalAnchor;
+  final AlignmentGeometry portalAnchor;
 
   /// The point on the child widget that connections with the portal (floating content), at the portal's anchor.
   ///
@@ -31,7 +31,7 @@ class FPortal extends StatefulWidget {
   /// See [childAnchor] for changing the child's anchor.
   ///
   /// Defaults to [Alignment.bottomCenter].
-  final Alignment childAnchor;
+  final AlignmentGeometry childAnchor;
 
   /// The shifting strategy used to shift a portal when it overflows out of the viewport. Defaults to
   /// [FPortalShift.flip].
@@ -103,16 +103,16 @@ class _State extends State<FPortal> {
 
 class _Alignment extends SingleChildRenderObjectWidget {
   final LayerLink _link;
-  final Alignment _childAnchor;
-  final Alignment _portalAnchor;
+  final AlignmentGeometry _childAnchor;
+  final AlignmentGeometry _portalAnchor;
   final Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
   final Offset _offset;
 
   const _Alignment({
     required Widget child,
     required LayerLink link,
-    required Alignment childAnchor,
-    required Alignment portalAnchor,
+    required AlignmentGeometry childAnchor,
+    required AlignmentGeometry portalAnchor,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     required Offset offset,
   }) : _link = link,
@@ -123,15 +123,24 @@ class _Alignment extends SingleChildRenderObjectWidget {
        super(child: child);
 
   @override
-  RenderObject createRenderObject(BuildContext _) =>
-      _RenderBox(link: _link, childAnchor: _childAnchor, portalAnchor: _portalAnchor, shift: _shift, offset: _offset);
+  RenderObject createRenderObject(BuildContext context) {
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    return _RenderBox(
+      link: _link,
+      childAnchor: _childAnchor.resolve(direction),
+      portalAnchor: _portalAnchor.resolve(direction),
+      shift: _shift,
+      offset: _offset,
+    );
+  }
 
   @override
-  void updateRenderObject(BuildContext _, _RenderBox box) {
+  void updateRenderObject(BuildContext context, _RenderBox box) {
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     box
       ..link = _link
-      ..childAnchor = _childAnchor
-      ..portalAnchor = _portalAnchor
+      ..childAnchor = _childAnchor.resolve(direction)
+      ..portalAnchor = _portalAnchor.resolve(direction)
       ..shift = _shift
       ..offset = _offset;
   }

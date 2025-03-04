@@ -165,14 +165,14 @@ final class FSliderStyle with Diagnosticable, _$FSliderStyleFunctions {
   /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
   /// devices.
   @override
-  final Alignment tooltipTipAnchor;
+  final AlignmentGeometry tooltipTipAnchor;
 
   /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned to.
   ///
   /// Defaults to [Alignment.topCenter] on primarily touch devices and [Alignment.centerRight] on non-primarily touch
   /// devices.
   @override
-  final Alignment tooltipThumbAnchor;
+  final AlignmentGeometry tooltipThumbAnchor;
 
   /// Creates a [FSliderStyle].
   FSliderStyle({

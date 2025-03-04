@@ -150,7 +150,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
           validator:
               (value) => switch (this.value) {
                 null when value == controller.placeholder => widget.validator(null),
-                null => invalidDateError,
+                null => errorMessage,
                 final value => widget.validator(value),
               },
           autovalidateMode: widget.autovalidateMode,
@@ -168,7 +168,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   U get value;
 
   @protected
-  String get invalidDateError;
+  String get errorMessage;
 
   @override
   void dispose() {
@@ -184,7 +184,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle))
       ..add(DiagnosticsProperty('value', value))
-      ..add(StringProperty('invalidDateError', invalidDateError));
+      ..add(StringProperty('errorMessage', errorMessage));
   }
 }
 

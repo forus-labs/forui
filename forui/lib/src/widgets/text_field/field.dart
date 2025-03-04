@@ -10,33 +10,44 @@ class Field extends FormField<String> {
     _State state,
     FTextField parent,
     FTextFieldStateStyle stateStyle,
-    EdgeInsets contentPadding,
-  ) =>
-  // counterTextStyle does not need to be set since it only affects counterText, not counter.
-  InputDecoration(
-    isDense: true,
-    prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
-    suffixIcon: parent.suffixBuilder?.call(state.context, stateStyle, null),
-    // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-    prefix: Padding(padding: EdgeInsets.only(left: parent.prefixBuilder == null ? contentPadding.left : 0)),
-    prefixIconConstraints: const BoxConstraints(),
-    suffixIconConstraints: const BoxConstraints(),
-    contentPadding: contentPadding.copyWith(left: 0),
-    hintText: parent.hint,
-    hintStyle: stateStyle.hintTextStyle,
-    disabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
-      borderRadius: stateStyle.unfocusedStyle.radius,
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
-      borderRadius: stateStyle.unfocusedStyle.radius,
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: stateStyle.focusedStyle.color, width: stateStyle.focusedStyle.width),
-      borderRadius: stateStyle.focusedStyle.radius,
-    ),
-  );
+    EdgeInsetsGeometry contentPadding,
+  ) {
+    final textDirection = Directionality.maybeOf(state.context) ?? TextDirection.ltr;
+    final padding = contentPadding.resolve(textDirection);
+
+    return InputDecoration(
+      isDense: true,
+      prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
+      suffixIcon: parent.suffixBuilder?.call(state.context, stateStyle, null),
+      // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
+      prefix: Padding(
+        padding: switch (textDirection) {
+          TextDirection.ltr => EdgeInsets.only(left: parent.prefixBuilder == null ? padding.left : 0),
+          TextDirection.rtl => EdgeInsets.only(right: parent.prefixBuilder == null ? padding.right : 0),
+        },
+      ),
+      prefixIconConstraints: const BoxConstraints(),
+      suffixIconConstraints: const BoxConstraints(),
+      contentPadding: switch (textDirection) {
+        TextDirection.ltr => padding.copyWith(left: 0),
+        TextDirection.rtl => padding.copyWith(right: 0),
+      },
+      hintText: parent.hint,
+      hintStyle: stateStyle.hintTextStyle,
+      disabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
+        borderRadius: stateStyle.unfocusedStyle.radius,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
+        borderRadius: stateStyle.unfocusedStyle.radius,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: stateStyle.focusedStyle.color, width: stateStyle.focusedStyle.width),
+        borderRadius: stateStyle.focusedStyle.radius,
+      ),
+    );
+  }
 
   final FTextField parent;
 

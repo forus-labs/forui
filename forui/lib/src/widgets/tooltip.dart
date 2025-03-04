@@ -82,10 +82,10 @@ class FTooltip extends StatefulWidget {
   final FTooltipStyle? style;
 
   /// The anchor of the follower to which the [childAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
-  final Alignment tipAnchor;
+  final AlignmentGeometry tipAnchor;
 
   /// The anchor of the target to which the [tipAnchor] is aligned to. Defaults to [Alignment.topCenter].
-  final Alignment childAnchor;
+  final AlignmentGeometry childAnchor;
 
   /// The shifting strategy used to shift a tooltip's tip when it overflows out of the viewport. Defaults to
   /// [FPortalShift.flip].

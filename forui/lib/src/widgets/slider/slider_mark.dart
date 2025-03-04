@@ -72,7 +72,7 @@ final class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
 
   /// The label's anchor to which the [labelOffset] is applied.
   @override
-  final Alignment labelAnchor;
+  final AlignmentGeometry labelAnchor;
 
   /// The label's offset from the slider, along its cross axis, in logical pixels. The top-left corner is always the
   /// origin, regardless of the layout.

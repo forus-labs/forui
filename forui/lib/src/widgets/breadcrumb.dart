@@ -110,8 +110,8 @@ abstract interface class FBreadcrumbItem extends Widget {
     double maxHeight,
     DragStartBehavior dragStartBehavior,
     FTileDivider divider,
-    Alignment menuAnchor,
-    Alignment childAnchor,
+    AlignmentGeometry menuAnchor,
+    AlignmentGeometry childAnchor,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     FHidePopoverRegion hideOnTapOutside,
     bool directionPadding,
@@ -175,8 +175,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final double maxHeight;
   final DragStartBehavior dragStartBehavior;
   final FTileDivider divider;
-  final Alignment menuAnchor;
-  final Alignment childAnchor;
+  final AlignmentGeometry menuAnchor;
+  final AlignmentGeometry childAnchor;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   final FHidePopoverRegion hideOnTapOutside;
   final bool directionPadding;
@@ -321,7 +321,7 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FBreadcrumbStyle].
   FBreadcrumbStyle({

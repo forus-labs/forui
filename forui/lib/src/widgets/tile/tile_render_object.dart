@@ -52,7 +52,7 @@ class _RenderTile extends RenderBox
 
   @override
   void performLayout() {
-    final EdgeInsets(:left, :top, :right, :bottom) = _style.padding;
+    final EdgeInsets(:left, :top, :right, :bottom) = _style.padding.resolve(_textDirection);
     var constraints = this.constraints.loosen().copyWith(maxWidth: this.constraints.maxWidth - left - right);
     var height = 0.0;
 

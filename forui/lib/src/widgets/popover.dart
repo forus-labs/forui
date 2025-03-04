@@ -104,7 +104,7 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   ///
   /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
-  final Alignment popoverAnchor;
+  final AlignmentGeometry popoverAnchor;
 
   /// {@template forui.widgets.FPopover.childAnchor}
   /// The point on the child that connects with the popover, at the popover's anchor.
@@ -114,7 +114,7 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   ///
   /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
-  final Alignment childAnchor;
+  final AlignmentGeometry childAnchor;
 
   /// {@template forui.widgets.FPopover.shift}
   /// The shifting strategy used to shift a popover when it overflows out of the viewport. Defaults to
@@ -169,8 +169,8 @@ class FPopover extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    Alignment? popoverAnchor,
-    Alignment? childAnchor,
+    AlignmentGeometry? popoverAnchor,
+    AlignmentGeometry? childAnchor,
     super.key,
   }) : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
        childAnchor = childAnchor ?? defaultPlatform.child,
@@ -193,8 +193,8 @@ class FPopover extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.semanticLabel,
-    Alignment? popoverAnchor,
-    Alignment? childAnchor,
+    AlignmentGeometry? popoverAnchor,
+    AlignmentGeometry? childAnchor,
     super.key,
   }) : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
        childAnchor = childAnchor ?? defaultPlatform.child,
@@ -249,6 +249,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
+    final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final popover = widget.popoverAnchor;
     final childAnchor = widget.childAnchor;
 
@@ -269,7 +270,11 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       offset:
           widget.directionPadding
               ? Offset.zero
-              : Alignments.removeDirectionalPadding(style.padding, popover, childAnchor),
+              : Alignments.removeDirectionalPadding(
+                style.padding.resolve(textDirection),
+                popover.resolve(textDirection),
+                childAnchor.resolve(textDirection),
+              ),
       portalBuilder:
           (context) => CallbackShortcuts(
             bindings: {const SingleActivator(LogicalKeyboardKey.escape): _controller.hide},
@@ -324,7 +329,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
 
   /// The margin surrounding the popover. Defaults to `EdgeInsets.all(4)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FPopoverStyle].
   const FPopoverStyle({required this.decoration, this.padding = const EdgeInsets.all(4)});

@@ -83,7 +83,7 @@ final class FRootHeaderStyle with Diagnosticable, _$FRootHeaderStyleFunctions {
 
   /// The padding.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FRootHeaderStyle].
   FRootHeaderStyle({

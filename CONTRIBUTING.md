@@ -116,12 +116,6 @@ class Foo extends StatelessWidget {
 
 These subclasses have additional life-cycle tracking capabilities baked-in.
 
-### Mark widgets as final when sensible
-
-Subclasses can interact with Forui in unforeseen ways, and cause potential issues. It is not breaking to initially mark
-classes as `final`, and subsequently unmark it. The inverse isn't true. Favor composition over inheritance.
-
-
 ### Minimize dependency on Cupertino/Material
 
 Cupertino and Material specific widgets should be avoided when possible.
@@ -139,6 +133,9 @@ In some situations, it is unrealistic to implement things ourselves. In these ca
 
 Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
+### Prefer `AlignmentGeomtry`/`BorderRadiussGeomtry`/`EdgeInsetsGeomtry` over `Alignment`/`BorderRadius`/`EdgeInsets`
+
+Prefer the `Geomtry` variants when possible because they are more flexible.
 
 ### Widget Styles
 
@@ -166,7 +163,6 @@ They should:
 3. mix-in `_$FooStyleFunctions`, which contains several utility functions.
 4. provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on
    an ancestor `FTheme`.
-5. provide a `copyWith(...)` method.
 
 Lastly, the order of the fields and methods should be as shown above.
 

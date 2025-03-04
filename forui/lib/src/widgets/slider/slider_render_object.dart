@@ -19,8 +19,9 @@ class HorizontalSliderRenderObject extends _SliderRenderObject {
   RenderObject createRenderObject(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = InheritedData.of(context);
     final labelledMarks = marks.where((mark) => mark.label != null).toList();
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final stateStyle = InheritedState.of(context).style;
-    return _RenderHorizontalSlider(style, stateStyle, layout, labelledMarks, trackMainAxisExtent);
+    return _RenderHorizontalSlider(style, stateStyle, layout, direction, labelledMarks, trackMainAxisExtent);
   }
 }
 
@@ -32,8 +33,9 @@ class VerticalSliderRenderObject extends _SliderRenderObject {
   RenderObject createRenderObject(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = InheritedData.of(context);
     final labelledMarks = marks.where((mark) => mark.label != null).toList();
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final stateStyle = InheritedState.of(context).style;
-    return _RenderVerticalSlider(style, stateStyle, layout, labelledMarks, trackMainAxisExtent);
+    return _RenderVerticalSlider(style, stateStyle, layout, direction, labelledMarks, trackMainAxisExtent);
   }
 }
 
@@ -48,20 +50,28 @@ abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
       ..style = style
       ..stateStyle = stateStyle
       ..sliderLayout = layout
+      ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr
       ..marks = marks.where((mark) => mark.label != null).toList()
       ..mainAxisExtent = trackMainAxisExtent;
   }
 }
 
 class _RenderHorizontalSlider extends _RenderSlider {
-  _RenderHorizontalSlider(super._style, super._stateStyle, super._layout, super._marks, super._mainAxisExtent);
+  _RenderHorizontalSlider(
+    super._style,
+    super._stateStyle,
+    super._layout,
+    super._textDirection,
+    super._marks,
+    super._mainAxisExtent,
+  );
 
   @override
   void performLayout() {
     final loosened = constraints.loosen();
 
     // Layout parts, assuming top-left corner of track/origin is (0, 0).
-    final insets = _style.labelLayoutStyle.childPadding;
+    final insets = _style.labelLayoutStyle.childPadding.resolve(_textDirection);
     final (:label, :paddedTrack, :description, :error, :slider) = layoutParts(loosened, switch (_mainAxisExtent) {
       final extent? => loosened.copyWith(maxWidth: extent + insets.left + insets.right),
       null => loosened,
@@ -96,14 +106,21 @@ class _RenderHorizontalSlider extends _RenderSlider {
 }
 
 class _RenderVerticalSlider extends _RenderSlider {
-  _RenderVerticalSlider(super._style, super._stateStyle, super._layout, super._marks, super._mainAxisExtent);
+  _RenderVerticalSlider(
+    super._style,
+    super._stateStyle,
+    super._layout,
+    super._textDirection,
+    super._marks,
+    super._mainAxisExtent,
+  );
 
   @override
   void performLayout() {
     final loosened = constraints.loosen();
 
     // Layout parts, assuming top-left corner of track/origin is (0, 0).
-    final insets = _style.labelLayoutStyle.childPadding;
+    final insets = _style.labelLayoutStyle.childPadding.resolve(_textDirection);
     final (:label, :paddedTrack, :description, :error, :slider) = layoutParts(loosened, switch (_mainAxisExtent) {
       final extent? => loosened.copyWith(maxHeight: extent + insets.top + insets.bottom),
       null => loosened,
@@ -171,11 +188,12 @@ abstract class _RenderSlider extends RenderBox
   FSliderStyle _style;
   FSliderStateStyle _stateStyle;
   FLayout _layout;
+  TextDirection _textDirection;
   List<FSliderMark> _marks;
   double? _mainAxisExtent;
   late Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) _positionMark;
 
-  _RenderSlider(this._style, this._stateStyle, this._layout, this._marks, this._mainAxisExtent) {
+  _RenderSlider(this._style, this._stateStyle, this._layout, this._textDirection, this._marks, this._mainAxisExtent) {
     _positionMark = _position;
   }
 
@@ -230,7 +248,7 @@ abstract class _RenderSlider extends RenderBox
   }
 
   Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) get _position {
-    final insets = _style.labelLayoutStyle.childPadding;
+    final insets = _style.labelLayoutStyle.childPadding.resolve(_textDirection);
     return switch (_layout) {
       FLayout.ltr => (track, size, mark, style) {
         final extent = track.size.width - insets.left - insets.right;
@@ -275,7 +293,7 @@ abstract class _RenderSlider extends RenderBox
 
   Rect _rect(Size size, Offset anchor, FSliderMarkStyle markStyle) {
     final rect = anchor & size;
-    return rect.shift(anchor - markStyle.labelAnchor.relative(to: size, origin: anchor));
+    return rect.shift(anchor - markStyle.labelAnchor.resolve(_textDirection).relative(to: size, origin: anchor));
   }
 
   @override
@@ -300,6 +318,7 @@ abstract class _RenderSlider extends RenderBox
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('stateStyle', stateStyle))
       ..add(EnumProperty('layout', sliderLayout))
+      ..add(EnumProperty('textDirection', textDirection))
       ..add(IterableProperty('marks', marks))
       ..add(DoubleProperty('mainAxisExtent', mainAxisExtent));
   }
@@ -336,6 +355,17 @@ abstract class _RenderSlider extends RenderBox
 
     _layout = value;
     _positionMark = _position;
+    markNeedsLayout();
+  }
+
+  TextDirection get textDirection => _textDirection;
+
+  set textDirection(TextDirection value) {
+    if (_textDirection == value) {
+      return;
+    }
+
+    _textDirection = value;
     markNeedsLayout();
   }
 

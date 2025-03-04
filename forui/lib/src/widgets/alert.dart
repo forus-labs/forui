@@ -168,7 +168,7 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable, _$FAlertC
 
   /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 12)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The icon's color.
   ///

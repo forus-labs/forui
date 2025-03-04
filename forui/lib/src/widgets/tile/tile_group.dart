@@ -392,7 +392,7 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
 
   /// The group's border radius.
   @override
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
 
   /// The tile's style.
   @override

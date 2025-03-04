@@ -118,7 +118,7 @@ final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFuncti
 
   /// The padding surrounding the content.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The space between actions.
   @override
