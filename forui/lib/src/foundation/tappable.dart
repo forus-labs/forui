@@ -27,15 +27,12 @@ extension Touch on Never {
   }
 }
 
-/// The tappable's current data.
-typedef FTappableData = ({bool focused, bool hovered});
-
 /// An area that responds to touch.
 ///
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FTappable extends StatefulWidget {
-  static Widget _builder(BuildContext _, FTappableData _, Widget? child) => child!;
+  static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
   final FFocusedOutlineStyle? focusedOutlineStyle;
@@ -82,7 +79,7 @@ class FTappable extends StatefulWidget {
   final VoidCallback? onLongPress;
 
   /// The builder used to build to create a child with the current state.
-  final ValueWidgetBuilder<({bool focused, bool hovered})> builder;
+  final ValueWidgetBuilder<Set<WidgetState>> builder;
 
   /// The child.
   ///
@@ -108,7 +105,7 @@ class FTappable extends StatefulWidget {
     Duration touchHoverExitDuration,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<FTappableData>? builder,
+    ValueWidgetBuilder<Set<WidgetState>>? builder,
     Widget? child,
     Key? key,
   }) = AnimatedTappable;
@@ -131,7 +128,7 @@ class FTappable extends StatefulWidget {
     this.onPress,
     this.onLongPress,
     this.child,
-    ValueWidgetBuilder<FTappableData>? builder,
+    ValueWidgetBuilder<Set<WidgetState>>? builder,
     super.key,
   }) : assert(builder != null || child != null, 'Either builder or child must be provided.'),
        builder = builder ?? _builder;
@@ -158,74 +155,31 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
-  bool get _enabled => onPress != null || onLongPress != null;
+  bool get _disabled => onPress == null && onLongPress == null;
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
+  final _controller = WidgetStatesController();
   int _monotonic = 0;
-  bool _focused = false;
-  bool _hovered = false;
-  bool _touched = false;
 
   @override
   void initState() {
     super.initState();
-    _focused = widget.autofocus;
+    _controller
+      ..update(WidgetState.focused, widget.autofocus)
+      ..update(WidgetState.disabled, widget._disabled);
   }
 
   @override
   void didUpdateWidget(covariant T old) {
     super.didUpdateWidget(old);
-    if (widget._enabled != old._enabled) {
-      _hovered = false;
-      _touched = false;
-    }
+    _controller.update(WidgetState.disabled, widget._disabled);
   }
 
   @override
   Widget build(BuildContext context) {
-    var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
-    tappable = _decorate(context, tappable);
-
-    if (widget._enabled) {
-      tappable = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => setState(() => _hovered = true),
-        onExit: (_) => setState(() => _hovered = false),
-        // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
-        // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
-        // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
-        child: Listener(
-          onPointerDown: (_) async {
-            final count = ++_monotonic;
-            _onPointerDown();
-
-            await Future.delayed(widget.touchHoverEnterDuration);
-            if (mounted && count == _monotonic && !_touched) {
-              setState(() => _touched = true);
-            }
-          },
-          onPointerUp: (_) async {
-            final count = ++_monotonic;
-            _onPointerUp();
-
-            await Future.delayed(widget.touchHoverExitDuration);
-            if (mounted && count == _monotonic && _touched) {
-              setState(() => _touched = false);
-            }
-          },
-          child: GestureDetector(
-            behavior: widget.behavior,
-            onTap: widget.onPress,
-            onLongPress: widget.onLongPress,
-            child: tappable,
-          ),
-        ),
-      );
-    }
-
-    tappable = Semantics(
-      enabled: widget._enabled,
+    Widget tappable = Semantics(
+      enabled: !widget._disabled,
       label: widget.semanticLabel,
       container: true,
       button: true,
@@ -235,15 +189,52 @@ class _FTappableState<T extends FTappable> extends State<T> {
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
         onFocusChange: (focused) {
-          setState(() => _focused = focused);
+          setState(() => _controller.update(WidgetState.focused, focused));
           widget.onFocusChange?.call(focused);
         },
-        child: tappable,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => setState(() => _controller.update(WidgetState.hovered, true)),
+          onExit: (_) => setState(() => _controller.update(WidgetState.hovered, false)),
+          // We use a separate Listener as GestureDetectors compete in GestureArena where only 1 wins. This prevents
+          // issues when wrapped in another GestureDetector, as onTapDown/onTapUp could absorb all gestures including
+          // drags and pans.
+          child: Listener(
+            onPointerDown: (_) async {
+              final count = ++_monotonic;
+              _onPointerDown();
+
+              await Future.delayed(widget.touchHoverEnterDuration);
+              if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
+                setState(() => _controller.update(WidgetState.pressed, true));
+              }
+            },
+            onPointerUp: (_) async {
+              final count = ++_monotonic;
+              _onPointerUp();
+
+              await Future.delayed(widget.touchHoverExitDuration);
+              if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
+                setState(() => _controller.update(WidgetState.pressed, true));
+              }
+            },
+            child: GestureDetector(
+              behavior: widget.behavior,
+              onTap: widget.onPress,
+              onLongPress: widget.onLongPress,
+              child: _decorate(context, widget.builder(context, _controller.value, widget.child)),
+            ),
+          ),
+        ),
       ),
     );
 
     if (widget.focusedOutlineStyle case final style?) {
-      tappable = FFocusedOutline(focused: _focused, style: style, child: tappable);
+      tappable = FFocusedOutline(
+        focused: _controller.value.contains(WidgetState.focused),
+        style: style,
+        child: tappable,
+      );
     }
 
     if (widget.onPress case final onPress?) {
@@ -320,13 +311,13 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   @override
+  Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
+
+  @override
   void _onPointerDown() => controller.forward();
 
   @override
   void _onPointerUp() => controller.reverse();
-
-  @override
-  Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
 
   @override
   void dispose() {
