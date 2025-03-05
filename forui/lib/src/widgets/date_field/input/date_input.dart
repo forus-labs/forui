@@ -108,5 +108,5 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
 
   @override
   @protected
-  String get invalidDateError => localizations.dateFieldInvalidDateError;
+  String get errorMessage => localizations.dateFieldInvalidDateError;
 }

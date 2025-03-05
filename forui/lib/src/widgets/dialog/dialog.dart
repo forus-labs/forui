@@ -127,7 +127,9 @@ class FDialog extends StatelessWidget {
     final style = this.style ?? theme.dialogStyle;
 
     return AnimatedPadding(
-      padding: MediaQuery.viewInsetsOf(context) + style.insetPadding,
+      padding:
+          MediaQuery.viewInsetsOf(context) +
+          style.insetPadding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr),
       duration: insetAnimationDuration,
       curve: insetAnimationCurve,
       child: MediaQuery.removeViewInsets(
@@ -175,7 +177,7 @@ final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
 
   /// The inset padding. Defaults to `EdgeInsets.symmetric(horizontal: 40, vertical: 24)`.
   @override
-  final EdgeInsets insetPadding;
+  final EdgeInsetsGeometry insetPadding;
 
   /// The horizontal dialog content's style.
   @override

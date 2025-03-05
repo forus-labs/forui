@@ -60,7 +60,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// See [tileAnchor] for changing the tile's anchor.
   ///
   /// Defaults to [Alignment.topRight].
-  final Alignment menuAnchor;
+  final AlignmentGeometry menuAnchor;
 
   /// The point on the tile that connects with the menu, at the menu's anchor.
   ///
@@ -68,7 +68,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// See [menuAnchor] for changing the menu's anchor.
   ///
   /// Defaults to [Alignment.bottomRight].
-  final Alignment tileAnchor;
+  final AlignmentGeometry tileAnchor;
 
   /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;

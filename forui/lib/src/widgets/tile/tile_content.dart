@@ -133,9 +133,9 @@ class FTileContent extends StatelessWidget {
 
 /// A [FTile] content's style.
 final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions {
-  /// The content's padding. Defaults to `EdgeInsets.only(left: 15, top: 13, right: 10, bottom: 13)`.
+  /// The content's padding. Defaults to `EdgeInsetsDirectional.only(15, 13, 10, 13)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
   ///
@@ -182,7 +182,7 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
     required this.enabledStyle,
     required this.enabledHoveredStyle,
     required this.disabledStyle,
-    this.padding = const EdgeInsets.only(left: 15, top: 13, right: 10, bottom: 13),
+    this.padding = const EdgeInsetsDirectional.fromSTEB(15, 13, 10, 13),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 3,
     this.middleSpacing = 4,

@@ -26,7 +26,7 @@ final class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
 
   /// The padding.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The [TextStyle] of the label.
   @override

@@ -111,5 +111,5 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
 
   @override
   @protected
-  String get invalidDateError => localizations.timeFieldInvalidDateError;
+  String get errorMessage => localizations.timeFieldInvalidDateError;
 }

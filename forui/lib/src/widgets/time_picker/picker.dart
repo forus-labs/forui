@@ -14,8 +14,8 @@ abstract class TimePicker extends StatelessWidget {
   final FTimePickerStyle style;
   final DateFormat format;
   final int padding;
-  final EdgeInsetsDirectional start;
-  final EdgeInsetsDirectional end;
+  final EdgeInsetsGeometry start;
+  final EdgeInsetsGeometry end;
   final int hourInterval;
   final int minuteInterval;
 

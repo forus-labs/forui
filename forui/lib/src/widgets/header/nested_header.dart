@@ -107,7 +107,7 @@ final class FNestedHeaderStyle with Diagnosticable, _$FNestedHeaderStyleFunction
 
   /// The padding.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FNestedHeaderStyle].
   const FNestedHeaderStyle({

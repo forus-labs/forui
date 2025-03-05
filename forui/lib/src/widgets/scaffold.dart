@@ -110,7 +110,7 @@ final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 
   /// The content padding. Only used when [FScaffold.contentPad] is `true`.
   @override
-  final EdgeInsets contentPadding;
+  final EdgeInsetsGeometry contentPadding;
 
   /// The header decoration.
   @override
