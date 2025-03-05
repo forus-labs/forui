@@ -26,7 +26,7 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.20.5
+  flutter_hooks: ^0.21.0
   forui:
   intl: any
   sugar: ^4.0.0

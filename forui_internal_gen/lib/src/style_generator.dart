@@ -149,7 +149,18 @@ Method generateDebugFillProperties(ClassElement element, List<FieldElement> fiel
 /// Generates an `operator==` method using the given [element] and [fields].
 @visibleForTesting
 Method generateEquals(ClassElement element, List<FieldElement> fields) {
-  final comparisons = fields.isEmpty ? '' : '&& ${fields.map((f) => '${f.name} == other.${f.name}').join(' && ')}';
+  const list = TypeChecker.fromUrl('dart:core#List');
+  const set = TypeChecker.fromUrl('dart:core#Set');
+  const map = TypeChecker.fromUrl('dart:core#Map');
+
+  String generate(FieldElement field) => switch (field.type) {
+    _ when list.isAssignableFromType(field.type) => 'listEquals(${field.name}, other.${field.name})',
+    _ when set.isAssignableFromType(field.type) => 'setEquals(${field.name}, other.${field.name})',
+    _ when map.isAssignableFromType(field.type) => 'mapEquals(${field.name}, other.${field.name})',
+    _ => '${field.name} == other.${field.name}',
+  };
+
+  final comparisons = fields.isEmpty ? '' : '&& ${fields.map(generate).join(' && ')}';
   return Method(
     (m) =>
         m

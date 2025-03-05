@@ -1,4 +1,5 @@
 ## 0.10.0 (Next)
+Bump `flutter_hooks` version to `0.21.0`.
 
 * Add `useFTimeFieldController`.
 * Add `useFTimePickerController`.
