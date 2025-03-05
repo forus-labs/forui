@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -25,7 +26,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBarData.of(context);
+    final FBottomNavigationBarData(:itemStyle, :states) = FBottomNavigationBarData.of(context);
     final style = this.style ?? itemStyle;
 
     return Padding(
@@ -37,14 +38,14 @@ class FBottomNavigationBarItem extends StatelessWidget {
           ExcludeSemantics(
             child: FIconStyleData(
               style: FIconStyle(
-                color: selected ? style.activeIconColor : style.inactiveIconColor,
+                color: style.iconColor.resolve(states),
                 size: style.iconSize,
               ),
               child: icon,
             ),
           ),
           DefaultTextStyle.merge(
-            style: selected ? style.activeTextStyle : style.inactiveTextStyle,
+            style: style.textStyle.resolve(states),
             overflow: TextOverflow.ellipsis,
             child: label,
           ),
@@ -62,25 +63,23 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
 /// [FBottomNavigationBarItem]'s style.
 final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
-  /// The icon's color when this item is active.
+  /// The icon's color.
+  ///
+  /// {@macro forui.foundation.tappable.builder}
+  /// * [WidgetState.selected]
   @override
-  final Color activeIconColor;
-
-  /// The icon's color when this item is inactive.
-  @override
-  final Color inactiveIconColor;
+  final FWidgetStateMap<Color> iconColor;
 
   /// The icon's size. Defaults to `24`.
   @override
   final double iconSize;
 
-  /// The text's style when this item is active.
+  /// The text's style.
+  ///
+  /// {@macro forui.foundation.tappable.builder}
+  /// * [WidgetState.selected]
   @override
-  final TextStyle activeTextStyle;
-
-  /// The text's style when this item is inactive.
-  @override
-  final TextStyle inactiveTextStyle;
+  final FWidgetStateMap<TextStyle> textStyle;
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
@@ -88,10 +87,8 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
 
   /// Creates a [FBottomNavigationBarItemStyle].
   FBottomNavigationBarItemStyle({
-    required this.activeIconColor,
-    required this.inactiveIconColor,
-    required this.activeTextStyle,
-    required this.inactiveTextStyle,
+    required this.iconColor,
+    required this.textStyle,
     this.iconSize = 24,
     this.padding = const EdgeInsets.all(5),
   });
@@ -100,9 +97,13 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
   /// [FTypography].
   FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
     : this(
-        activeIconColor: colorScheme.primary,
-        inactiveIconColor: colorScheme.disable(colorScheme.foreground),
-        activeTextStyle: typography.base.copyWith(color: colorScheme.primary, fontSize: 10),
-        inactiveTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.foreground), fontSize: 10),
+        iconColor: FWidgetStateMap({
+          WidgetState.selected: colorScheme.primary,
+          WidgetState.any: colorScheme.disable(colorScheme.foreground),
+        }),
+        textStyle: FWidgetStateMap({
+          WidgetState.selected: typography.base.copyWith(color: colorScheme.primary, fontSize: 10),
+          WidgetState.any: typography.base.copyWith(color: colorScheme.disable(colorScheme.foreground), fontSize: 10),
+        }),
       );
 }

@@ -54,7 +54,12 @@ class FBottomNavigationBar extends StatelessWidget {
                   child: FTappable.animated(
                     focusedOutlineStyle: style.focusedOutlineStyle,
                     onPress: () => onChange?.call(i),
-                    child: FBottomNavigationBarData(itemStyle: style.itemStyle, selected: index == i, child: child),
+                    builder:
+                        (_, states, _) => FBottomNavigationBarData(
+                          itemStyle: style.itemStyle,
+                          states: {...states, if (i == index) WidgetState.selected},
+                          child: child,
+                        ),
                   ),
                 ),
             ],
@@ -91,21 +96,24 @@ class FBottomNavigationBarData extends InheritedWidget {
   /// The item's style.
   final FBottomNavigationBarItemStyle itemStyle;
 
-  /// Whether the item is currently selected.
-  final bool selected;
+  /// The possible states.
+  ///
+  /// {@macro forui.foundation.tappable.builder}
+  /// * [WidgetState.selected]
+  final Set<WidgetState> states;
 
   /// Creates a [FBottomNavigationBarData].
-  const FBottomNavigationBarData({required this.itemStyle, required this.selected, required super.child, super.key});
+  const FBottomNavigationBarData({required this.itemStyle, required this.states, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(FBottomNavigationBarData old) => old.itemStyle != itemStyle || old.selected != selected;
+  bool updateShouldNotify(FBottomNavigationBarData old) => old.itemStyle != itemStyle || old.states != states;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('itemStyle', itemStyle))
-      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'));
+      ..add(IterableProperty('states', states));
   }
 }
 
