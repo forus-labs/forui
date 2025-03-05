@@ -11,7 +11,7 @@ import 'package:forui_samples/sample.dart';
 class BadgePage extends Sample {
   static final styles = {for (final value in Variant.values) value.name: value};
 
-  final FBadgeStyle style;
+  final FBaseBadgeStyle style;
 
   BadgePage({@queryParam super.theme, @queryParam String style = 'primary'}) : style = styles[style]!;
 

@@ -513,231 +513,137 @@ final class FThemeData with Diagnosticable, FTransformable {
 
       //// Switch
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.disabled)) {
-            return switchStyle.disabledStyle.thumbColor;
-          }
-          return switchStyle.enabledStyle.thumbColor;
+        thumbColor: WidgetStateColor.fromMap({
+          WidgetState.disabled: switchStyle.disabledStyle.thumbColor,
+          WidgetState.any: switchStyle.enabledStyle.thumbColor,
         }),
-        trackColor: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.disabled)) {
-            if (states.contains(WidgetState.selected)) {
-              return switchStyle.disabledStyle.checkedColor;
-            }
-            return switchStyle.disabledStyle.uncheckedColor;
-          }
-
-          if (states.contains(WidgetState.selected)) {
-            return switchStyle.enabledStyle.checkedColor;
-          }
-          return switchStyle.enabledStyle.uncheckedColor;
+        trackColor: WidgetStateColor.fromMap({
+          WidgetState.disabled & WidgetState.selected: switchStyle.disabledStyle.checkedColor,
+          WidgetState.disabled: switchStyle.disabledStyle.uncheckedColor,
+          WidgetState.selected: switchStyle.enabledStyle.checkedColor,
+          WidgetState.any: switchStyle.enabledStyle.uncheckedColor,
         }),
-        trackOutlineColor: WidgetStateProperty.resolveWith((states) {
-          // Make the outline match the track color.
-          if (states.contains(WidgetState.disabled)) {
-            if (states.contains(WidgetState.selected)) {
-              return switchStyle.disabledStyle.checkedColor;
-            }
-            return switchStyle.disabledStyle.uncheckedColor;
-          }
-
-          if (states.contains(WidgetState.selected)) {
-            return switchStyle.enabledStyle.checkedColor;
-          }
-          return switchStyle.enabledStyle.uncheckedColor;
+        trackOutlineColor: WidgetStateColor.fromMap({
+          WidgetState.disabled & WidgetState.selected: switchStyle.disabledStyle.checkedColor,
+          WidgetState.disabled: switchStyle.disabledStyle.uncheckedColor,
+          WidgetState.selected: switchStyle.enabledStyle.checkedColor,
+          WidgetState.any: switchStyle.enabledStyle.uncheckedColor,
         }),
       ),
 
       //// Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.secondary.contentStyle.disabledTextStyle;
-            }
-            return buttonStyles.secondary.contentStyle.enabledTextStyle;
-          }),
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.secondary.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.secondary.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.secondary.enabledBoxDecoration.color;
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.secondary.contentStyle.disabledTextStyle.color;
-            }
-            return buttonStyles.secondary.contentStyle.enabledTextStyle.color;
-          }),
+          textStyle: buttonStyles.secondary.contentStyle.textStyle,
+          backgroundColor: WidgetStateMapper(
+            buttonStyles.secondary.boxDecoration.map((state, decoration) => MapEntry(state, decoration.color)),
+          ),
+          foregroundColor: WidgetStateMapper(
+            buttonStyles.secondary.contentStyle.textStyle.map((state, text) => MapEntry(state, text.color)),
+          ),
           padding: WidgetStateProperty.all(buttonStyles.secondary.contentStyle.padding),
           shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.primary.contentStyle.disabledTextStyle;
-            }
-            return buttonStyles.primary.contentStyle.enabledTextStyle;
-          }),
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.primary.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.primary.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.primary.enabledBoxDecoration.color;
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.primary.contentStyle.disabledTextStyle.color;
-            }
-            return buttonStyles.primary.contentStyle.enabledTextStyle.color;
-          }),
+          textStyle: buttonStyles.primary.contentStyle.textStyle,
+          backgroundColor: WidgetStateMapper(
+            buttonStyles.primary.boxDecoration.map((state, decoration) => MapEntry(state, decoration.color)),
+          ),
+          foregroundColor: WidgetStateMapper(
+            buttonStyles.primary.contentStyle.textStyle.map((state, text) => MapEntry(state, text.color)),
+          ),
           padding: WidgetStateProperty.all(buttonStyles.primary.contentStyle.padding),
           shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.outline.contentStyle.disabledTextStyle;
-            }
-            return buttonStyles.outline.contentStyle.enabledTextStyle;
-          }),
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.outline.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.outline.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.outline.enabledBoxDecoration.color;
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.outline.contentStyle.disabledTextStyle.color;
-            }
-            return buttonStyles.outline.contentStyle.enabledTextStyle.color;
-          }),
+          textStyle: buttonStyles.outline.contentStyle.textStyle,
+          backgroundColor: WidgetStateMapper(
+            buttonStyles.outline.boxDecoration.map((state, decoration) => MapEntry(state, decoration.color)),
+          ),
+          foregroundColor: WidgetStateMapper(
+            buttonStyles.outline.contentStyle.textStyle.map((state, text) => MapEntry(state, text.color)),
+          ),
           padding: WidgetStateProperty.all(buttonStyles.outline.contentStyle.padding),
-          side: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return BorderSide(
-                color:
-                    buttonStyles.outline.disabledBoxDecoration.border?.top.color ??
-                    colorScheme.disable(colorScheme.border),
-                width: buttonStyles.outline.disabledBoxDecoration.border?.top.width ?? style.borderWidth,
-              );
-            } else if (states.contains(WidgetState.hovered)) {
-              return BorderSide(
-                color:
-                    buttonStyles.outline.enabledHoverBoxDecoration.border?.top.color ??
-                    colorScheme.hover(colorScheme.border),
-                width: buttonStyles.outline.enabledHoverBoxDecoration.border?.top.width ?? style.borderWidth,
-              );
-            }
-            return BorderSide(
-              color: buttonStyles.outline.enabledBoxDecoration.border?.top.color ?? colorScheme.border,
-              width: buttonStyles.outline.enabledBoxDecoration.border?.top.width ?? style.borderWidth,
-            );
-          }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.outline.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          side: WidgetStateBorderSide.fromMap(
+            buttonStyles.outline.boxDecoration.map(
+              (state, decoration) => MapEntry(
+                state,
+                BorderSide(
+                  color: decoration.border?.top.color ?? colorScheme.border,
+                  width: decoration.border?.top.width ?? style.borderWidth,
+                ),
+              ),
+            ),
+          ),
+          shape: WidgetStateProperty.fromMap(
+            buttonStyles.outline.boxDecoration.map(
+              (state, decoration) =>
+                  MapEntry(state, RoundedRectangleBorder(borderRadius: decoration.borderRadius ?? style.borderRadius)),
             ),
           ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.contentStyle.disabledTextStyle;
-            }
-            return buttonStyles.ghost.contentStyle.enabledTextStyle;
-          }),
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.ghost.enabledBoxDecoration.color;
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.contentStyle.disabledTextStyle.color;
-            }
-            return buttonStyles.ghost.contentStyle.enabledTextStyle.color;
-          }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          textStyle: buttonStyles.ghost.contentStyle.textStyle,
+          backgroundColor: WidgetStateMapper(
+            buttonStyles.ghost.boxDecoration.map((state, decoration) => MapEntry(state, decoration.color)),
+          ),
+          foregroundColor: WidgetStateMapper(
+            buttonStyles.ghost.contentStyle.textStyle.map((state, text) => MapEntry(state, text.color)),
+          ),
+          padding: WidgetStateProperty.all(buttonStyles.ghost.contentStyle.padding),
+          shape: WidgetStateProperty.fromMap(
+            buttonStyles.ghost.boxDecoration.map(
+              (state, decoration) =>
+                  MapEntry(state, RoundedRectangleBorder(borderRadius: decoration.borderRadius ?? style.borderRadius)),
             ),
           ),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: buttonStyles.primary.enabledBoxDecoration.color,
-        foregroundColor: buttonStyles.primary.contentStyle.enabledTextStyle.color,
-        hoverColor: buttonStyles.primary.enabledHoverBoxDecoration.color,
+        backgroundColor: buttonStyles.primary.boxDecoration.maybeResolve(const {})?.color,
+        foregroundColor: buttonStyles.primary.contentStyle.textStyle.maybeResolve(const {})?.color,
+        hoverColor: buttonStyles.primary.boxDecoration.maybeResolve(const {WidgetState.hovered})?.color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: buttonStyles.primary.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          borderRadius:
+              buttonStyles.primary.boxDecoration.maybeResolve(const {WidgetState.hovered})?.borderRadius ??
+              style.borderRadius,
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.ghost.enabledBoxDecoration.color;
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.contentStyle.disabledTextStyle.color;
-            }
-            return buttonStyles.ghost.contentStyle.enabledTextStyle.color;
-          }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          backgroundColor: WidgetStateMapper(
+            buttonStyles.ghost.boxDecoration.map((state, decoration) => MapEntry(state, decoration.color)),
+          ),
+          foregroundColor: WidgetStateMapper(
+            buttonStyles.ghost.contentStyle.textStyle.map((state, text) => MapEntry(state, text.color)),
+          ),
+          shape: WidgetStateProperty.fromMap(
+            buttonStyles.ghost.boxDecoration.map(
+              (state, decoration) =>
+                  MapEntry(state, RoundedRectangleBorder(borderRadius: decoration.borderRadius ?? style.borderRadius)),
             ),
           ),
         ),
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.contentStyle.disabledTextStyle;
-            }
-            return buttonStyles.ghost.contentStyle.enabledTextStyle;
-          }),
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.ghost.enabledBoxDecoration.color;
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.contentStyle.disabledTextStyle.color;
-            }
-            return buttonStyles.ghost.contentStyle.enabledTextStyle.color;
-          }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          backgroundColor: WidgetStateMapper(
+            buttonStyles.ghost.boxDecoration.map((state, decoration) => MapEntry(state, decoration.color)),
+          ),
+          foregroundColor: WidgetStateMapper(
+            buttonStyles.ghost.contentStyle.textStyle.map((state, text) => MapEntry(state, text.color)),
+          ),
+          shape: WidgetStateProperty.fromMap(
+            buttonStyles.ghost.boxDecoration.map(
+              (state, decoration) =>
+                  MapEntry(state, RoundedRectangleBorder(borderRadius: decoration.borderRadius ?? style.borderRadius)),
             ),
           ),
         ),

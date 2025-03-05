@@ -14,15 +14,13 @@ part 'badge.style.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/data/badge for working examples.
-/// * [FBadgeCustomStyle] for customizing a badge's appearance.
+/// * [FBadgeStyle] for customizing a badge's appearance.
 class FBadge extends StatelessWidget {
   /// The style. Defaults to [FBadgeStyle.primary].
-  ///
-  /// Although typically one of the pre-defined styles in [FBadgeStyle], it can also be a [FBadgeCustomStyle].
-  final FBadgeStyle style;
+  final FBaseBadgeStyle style;
 
   /// The builder used to build the badge's content.
-  final Widget Function(BuildContext, FBadgeCustomStyle) builder;
+  final Widget Function(BuildContext, FBadgeStyle) builder;
 
   /// Creates a [FBadge] that contains a [label].
   FBadge({required Widget label, this.style = FBadgeStyle.primary, super.key})
@@ -34,7 +32,7 @@ class FBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = switch (this.style) {
-      final FBadgeCustomStyle style => style,
+      final FBadgeStyle style => style,
       FBadgeStyle.primary => context.theme.badgeStyles.primary,
       FBadgeStyle.secondary => context.theme.badgeStyles.secondary,
       FBadgeStyle.outline => context.theme.badgeStyles.outline,
@@ -66,35 +64,37 @@ class FBadge extends StatelessWidget {
 
 /// A [FBadge]'s style.
 ///
-/// A style can be either one of the pre-defined styles in [FBadgeStyle] or a [FBadgeCustomStyle]. The pre-defined
-/// styles are a convenient shorthand for the various [FBadgeCustomStyle]s in the current context's [FBadgeStyles].
-sealed class FBadgeStyle {
+/// See [FBadgeStyle] for more information.
+sealed class FBaseBadgeStyle {}
+
+@internal
+enum Variant implements FBaseBadgeStyle { primary, secondary, outline, destructive }
+
+/// A [FBadge] style.
+///
+/// A style can be either one of the pre-defined styles in [FBaseBadgeStyle] or a [FBadgeStyle]. The pre-defined
+/// styles are a convenient shorthand for the various [FBadgeStyle]s in the current context's [FBadgeStyles].
+final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions implements FBaseBadgeStyle {
   /// The badge's primary style.
   ///
   /// Shorthand for the current context's [FBadgeStyles.primary] style.
-  static const FBadgeStyle primary = Variant.primary;
+  static const FBaseBadgeStyle primary = Variant.primary;
 
   /// The badge's secondary style.
   ///
   /// Shorthand for the current context's [FBadgeStyles.secondary] style.
-  static const FBadgeStyle secondary = Variant.secondary;
+  static const FBaseBadgeStyle secondary = Variant.secondary;
 
   /// The badge's outline style.
   ///
   /// Shorthand for the current context's [FBadgeStyles.outline] style.
-  static const FBadgeStyle outline = Variant.outline;
+  static const FBaseBadgeStyle outline = Variant.outline;
 
   /// The badge's destructive style.
   ///
   /// Shorthand for the current context's [FBadgeStyles.destructive] style.
-  static const FBadgeStyle destructive = Variant.destructive;
-}
+  static const FBaseBadgeStyle destructive = Variant.destructive;
 
-@internal
-enum Variant implements FBadgeStyle { primary, secondary, outline, destructive }
-
-/// A custom [FBadge] style.
-final class FBadgeCustomStyle with Diagnosticable, _$FBadgeCustomStyleFunctions implements FBadgeStyle {
   /// The background color.
   @override
   final Color backgroundColor;
@@ -120,8 +120,8 @@ final class FBadgeCustomStyle with Diagnosticable, _$FBadgeCustomStyleFunctions 
   @override
   final FBadgeContentStyle contentStyle;
 
-  /// Creates a [FBadgeCustomStyle].
-  const FBadgeCustomStyle({
+  /// Creates a [FBadgeStyle].
+  const FBadgeStyle({
     required this.backgroundColor,
     required this.borderColor,
     required this.borderWidth,

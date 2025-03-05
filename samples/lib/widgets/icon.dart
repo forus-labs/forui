@@ -88,16 +88,16 @@ class _CustomIconState extends StatefulSampleState<CustomIconPage> with SingleTi
     child: FButton.icon(
       child: FIcon.raw(
         builder: (context, style, child) {
-          final FButtonData(:enabled) = FButtonData.of(context);
-          return enabled
-              ? AnimatedIcon(
+          final FButtonData(:states) = FButtonData.of(context);
+          return states.contains(WidgetState.disabled)
+              ? const FIcon.data(Icons.menu)
+              : AnimatedIcon(
                 icon: AnimatedIcons.home_menu,
                 progress: animation,
                 color: style.color,
                 size: style.size,
                 semanticLabel: 'Home menu',
-              )
-              : const FIcon.data(Icons.menu);
+              );
         },
       ),
       onPress: () {},

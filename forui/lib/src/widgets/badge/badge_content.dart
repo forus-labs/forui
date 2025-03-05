@@ -9,7 +9,7 @@ part 'badge_content.style.dart';
 
 @internal
 final class Content extends StatelessWidget {
-  final FBadgeCustomStyle style;
+  final FBadgeStyle style;
   final Widget label;
 
   const Content({required this.style, required this.label, super.key});

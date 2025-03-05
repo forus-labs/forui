@@ -1,7 +1,7 @@
 name: _
 environment:
-  sdk: ">=3.6.0 <4.0.0"
-  flutter: ">=3.27.0"
+  sdk: ">=3.7.0 <4.0.0"
+  flutter: ">=3.29.0"
 workspace:
   - forui
   - forui_assets
@@ -10,4 +10,5 @@ workspace:
   - samples
 
 dev_dependencies:
+  build_runner: ^2.4.0
   flint: ^2.8.1
