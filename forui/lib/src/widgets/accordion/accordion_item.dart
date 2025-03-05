@@ -56,12 +56,10 @@ class FAccordionItem extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'Initially expanded'))
-      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+    properties..add(DiagnosticsProperty('style', style))..add(
+        FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'Initially expanded'))..add(
+        FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))..add(
+        DiagnosticsProperty('focusNode', focusNode))..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
 }
 
@@ -79,9 +77,9 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     }
 
     _controller =
-        AnimationController(vsync: this)
-          ..value = widget.initiallyExpanded ? 1 : 0
-          ..duration = style.animationDuration;
+    AnimationController(vsync: this)
+      ..value = widget.initiallyExpanded ? 1 : 0
+      ..duration = style.animationDuration;
     _animation = Tween<double>(begin: 0, end: 100).animate(CurvedAnimation(curve: Curves.ease, parent: _controller));
 
     if (!controller.addItem(index, _controller)) {
@@ -97,7 +95,8 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     return AnimatedBuilder(
       animation: _animation,
       builder:
-          (_, _) => Column(
+          (_, _) =>
+          Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               FTappable(
@@ -106,7 +105,8 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                 onFocusChange: widget.onFocusChange,
                 onPress: () => controller.toggle(index),
                 builder:
-                    (_, data, child) => Padding(
+                    (_, states, child) =>
+                    Padding(
                       padding: style.titlePadding,
                       child: Row(
                         children: [
@@ -116,14 +116,14 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                                 applyHeightToFirstAscent: false,
                                 applyHeightToLastDescent: false,
                               ),
-                              style:
-                                  data.hovered
-                                      ? style.titleTextStyle.copyWith(decoration: TextDecoration.underline)
-                                      : style.titleTextStyle,
+                              style: style.titleTextStyle.resolve(states),
                               child: widget.title,
                             ),
                           ),
-                          FFocusedOutline(style: style.focusedOutlineStyle, focused: data.focused, child: child!),
+                          FFocusedOutline(style: style.focusedOutlineStyle,
+                            focused: states.contains(WidgetState.focused),
+                            child: child!,
+                          ),
                         ],
                       ),
                     ),

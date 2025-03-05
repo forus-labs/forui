@@ -90,7 +90,7 @@ class _FAccordionState extends State<FAccordion> {
 final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's default text style.
   @override
-  final TextStyle titleTextStyle;
+  final FWidgetStateMap<TextStyle> titleTextStyle;
 
   /// The child's default text style.
   @override
@@ -143,7 +143,14 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
     : this(
-        titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
+        titleTextStyle: FWidgetStateMap({
+          WidgetState.hovered: typography.base.copyWith(
+            fontWeight: FontWeight.w500,
+            color: colorScheme.foreground,
+            decoration: TextDecoration.underline,
+          ),
+          WidgetState.any: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
+        }),
         childTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
         iconColor: colorScheme.primary,
         iconSize: 20,
