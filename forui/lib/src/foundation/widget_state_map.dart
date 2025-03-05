@@ -35,6 +35,17 @@ class FWidgetStateMap<T> with MapBase<WidgetStatesConstraint, T>, Diagnosticable
     }
   }
 
+  /// Returns the value that satifies the given [states], or `null` if none do.
+  T? maybeResolve(Set<WidgetState> states) {
+    for (final MapEntry(:key, :value) in _map.entries) {
+      if (key.isSatisfiedBy(states)) {
+        return value;
+      }
+    }
+
+    return null;
+  }
+
   /// Returns a new [FWidgetStateMap] with the contents of the given [map] replacing existing values.
   @useResult
   FWidgetStateMap<T> copyWith(WidgetStateMap<T> map) => FWidgetStateMap<T>(map);
