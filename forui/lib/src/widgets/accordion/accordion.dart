@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -89,6 +90,8 @@ class _FAccordionState extends State<FAccordion> {
 /// The [FAccordion]'s style.
 final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's default text style.
+  ///
+  /// {@macro forui.foundation.tappable.builder}
   @override
   final FWidgetStateMap<TextStyle> titleTextStyle;
 
@@ -144,7 +147,7 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
     : this(
         titleTextStyle: FWidgetStateMap({
-          WidgetState.hovered: typography.base.copyWith(
+          WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.foreground,
             decoration: TextDecoration.underline,

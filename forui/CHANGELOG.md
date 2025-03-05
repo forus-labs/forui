@@ -1,3 +1,11 @@
+## 0.11.0 (Next)
+
+### Changes
+* Remove `FTappableData`.
+* **Breaking** Move predefined styles in `FBaseBadgeStyle` to `FBadgeStyle`.
+* **Breaking** Rename `FBadgeStyle` to `FBaseBadgeStyle`.
+* **Breaking** Rename `FBadgeCustomStyle` to `FBadgeStyle`.
+
 ## 0.10.0 (Next)
 
 ### Additions

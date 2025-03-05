@@ -78,7 +78,15 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final VoidCallback? onLongPress;
 
-  /// The builder used to build to create a child with the current state.
+  /// The builder used to build to create a child with the current states.
+  ///
+  /// {@template forui.foundation.tappable.builder}
+  /// The following states are supported:
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.disabled]
+  /// {@endtemplate}
   final ValueWidgetBuilder<Set<WidgetState>> builder;
 
   /// The child.
