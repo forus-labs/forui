@@ -613,25 +613,18 @@ final class FThemeData with Diagnosticable, FTransformable {
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.contentStyle.disabledTextStyle;
-            }
-            return buttonStyles.ghost.contentStyle.enabledTextStyle;
+          textStyle: WidgetStateTextStyle.fromMap({
+            WidgetState.disabled: buttonStyles.ghost.contentStyle.disabledTextStyle,
+            WidgetState.any: buttonStyles.ghost.contentStyle.enabledTextStyle,
           }),
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.ghost.enabledBoxDecoration.color;
+          backgroundColor: WidgetStateMapper({
+            WidgetState.disabled: buttonStyles.ghost.disabledBoxDecoration.color,
+            WidgetState.hovered: buttonStyles.ghost.enabledHoverBoxDecoration.color,
+            WidgetState.any: buttonStyles.ghost.enabledBoxDecoration.color,
           }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.contentStyle.disabledTextStyle.color;
-            }
-            return buttonStyles.ghost.contentStyle.enabledTextStyle.color;
+          foregroundColor: WidgetStateMapper({
+            WidgetState.disabled: buttonStyles.ghost.contentStyle.disabledTextStyle.color,
+            WidgetState.any: buttonStyles.ghost.contentStyle.enabledTextStyle.color,
           }),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
@@ -651,13 +644,10 @@ final class FThemeData with Diagnosticable, FTransformable {
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return buttonStyles.ghost.disabledBoxDecoration.color;
-            } else if (states.contains(WidgetState.hovered)) {
-              return buttonStyles.ghost.enabledHoverBoxDecoration.color;
-            }
-            return buttonStyles.ghost.enabledBoxDecoration.color;
+          backgroundColor: WidgetStateMapper({
+            WidgetState.disabled: buttonStyles.ghost.disabledBoxDecoration.color,
+            WidgetState.hovered: buttonStyles.ghost.enabledHoverBoxDecoration.color,
+            WidgetState.any: buttonStyles.ghost.enabledBoxDecoration.color,
           }),
           foregroundColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.disabled)) {
