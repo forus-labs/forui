@@ -106,7 +106,7 @@ class FBottomNavigationBarData extends InheritedWidget {
   const FBottomNavigationBarData({required this.itemStyle, required this.states, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(FBottomNavigationBarData old) => old.itemStyle != itemStyle || old.states != states;
+  bool updateShouldNotify(FBottomNavigationBarData old) => old.itemStyle != itemStyle || !setEquals(states, old.states);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

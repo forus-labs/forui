@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +13,12 @@ part 'button_spinner.style.dart';
 /// An animated spinner icon.
 ///
 /// Should only be used with an [FButton] as a prefixIcon. The spinner will rotate indefinitely.
-/// The spinner's color and size defaults to the parent button's [FButtonStyle].
+/// The spinner's color and size defaults to the parent button's [FBaseButtonStyle].
 ///
 /// See:
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButton] for creating a button.
-/// * [FButtonCustomStyle] for customizing a button's appearance.
+/// * [FButtonStyle] for customizing a button's appearance.
 class FButtonSpinner extends StatefulWidget {
   /// The style. Defaults to the parent button's [FButtonSpinnerStyle].
   ///
@@ -62,8 +63,8 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
     builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
     child: FIcon(
       FAssets.icons.loaderCircle,
-      color: _data.enabled ? _style.enabledSpinnerColor : _style.disabledSpinnerColor,
-      size: _style.spinnerSize,
+      color: _style.color.resolve(_data.states),
+      size: _style.size,
       semanticLabel: 'Button Spinner',
     ),
   );
@@ -81,27 +82,18 @@ final class FButtonSpinnerStyle with Diagnosticable, _$FButtonSpinnerStyleFuncti
   @override
   final Duration animationDuration;
 
-  /// The spinner's color when this button is enabled.
+  /// The spinner's color.
   @override
-  final Color enabledSpinnerColor;
-
-  /// The spinner's color when this button is disabled.
-  @override
-  final Color disabledSpinnerColor;
+  final FWidgetStateMap<Color> color;
 
   /// The spinner's size. Defaults to 20.
   @override
-  final double spinnerSize;
+  final double size;
 
   /// Creates a [FButtonSpinnerStyle].
   FButtonSpinnerStyle({
-    required this.enabledSpinnerColor,
-    required this.disabledSpinnerColor,
+    required this.color,
     this.animationDuration = const Duration(seconds: 1),
-    this.spinnerSize = 20,
+    this.size = 20,
   });
-
-  /// Creates a [FButtonSpinnerStyle] that inherits its properties from the given [enabled] and [disabled].
-  FButtonSpinnerStyle.inherit({required Color enabled, required Color disabled})
-    : this(enabledSpinnerColor: enabled, disabledSpinnerColor: disabled);
 }
