@@ -9,7 +9,8 @@ import 'package:forui_samples/sample.dart';
 class TimeFieldPage extends Sample {
   final bool hour24;
 
-  TimeFieldPage({@queryParam super.theme, @queryParam String hour24 = 'false'}) : hour24 = bool.tryParse(hour24) ?? false;
+  TimeFieldPage({@queryParam super.theme, @queryParam String hour24 = 'false'})
+    : hour24 = bool.tryParse(hour24) ?? false;
 
   @override
   Widget sample(BuildContext context) => FTimeField(

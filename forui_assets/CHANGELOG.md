@@ -1,3 +1,9 @@
+## 0.10.0 (Next)
+
+Bumps minimum Flutter SDK version to 3.29.0.
+
+* Update icons to Lucide 0.476.0.
+
 ## 0.9.1
 
 Bump nitrogen dependency from 0.3.0 to 0.4.0.
