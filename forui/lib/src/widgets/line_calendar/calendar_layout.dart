@@ -85,20 +85,20 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     final scale = MediaQuery.textScalerOf(context);
     final textStyle = DefaultTextStyle.of(context).style;
 
-    double height(FLineCalendarItemStyle style) {
-      final dateHeight = scale.scale(style.dateTextStyle.fontSize ?? textStyle.fontSize ?? 0);
-      final weekdayHeight = scale.scale(style.weekdayTextStyle.fontSize ?? textStyle.fontSize ?? 0);
-      final otherHeight = _style.itemContentSpacing + (_style.itemContentEdgeSpacing * 2);
+    double height(FLineCalendarStyle style, Set<WidgetState> states) {
+      final dateHeight = scale.scale(style.dateTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
+      final weekdayHeight = scale.scale(style.weekdayTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
+      final otherHeight = _style.contentSpacing + (_style.contentEdgeSpacing * 2);
 
       return dateHeight + weekdayHeight + otherHeight;
     }
 
     // We use the height to estimate the width.
     return [
-      height(_style.selectedItemStyle),
-      height(_style.selectedHoveredItemStyle),
-      height(_style.unselectedItemStyle),
-      height(_style.unselectedHoveredItemStyle),
+      height(_style, const {WidgetState.selected}),
+      height(_style, const {WidgetState.selected, WidgetState.hovered}),
+      height(_style, const {WidgetState.hovered}),
+      height(_style, const {}),
     ].max!;
   }
 
@@ -109,31 +109,23 @@ class _CalendarLayoutState extends State<CalendarLayout> {
       children: [
         ItemContent(
           style: _style,
-          itemStyle: _style.selectedItemStyle,
+          states: const {WidgetState.selected},
           date: placeholder,
-          hovered: false,
-          focused: false,
         ),
         ItemContent(
           style: _style,
-          itemStyle: _style.selectedItemStyle,
+          states: const {WidgetState.selected, WidgetState.hovered},
           date: placeholder,
-          hovered: true,
-          focused: false,
         ),
         ItemContent(
           style: _style,
-          itemStyle: _style.unselectedItemStyle,
+          states: const {},
           date: placeholder,
-          hovered: false,
-          focused: false,
         ),
         ItemContent(
           style: _style,
-          itemStyle: _style.unselectedItemStyle,
+          states: const {WidgetState.hovered},
           date: placeholder,
-          hovered: true,
-          focused: false,
         ),
         ListView.builder(
           controller: _controller,
@@ -145,7 +137,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
           itemBuilder: (_, index) {
             final date = widget.start.plus(days: index);
             return Padding(
-              padding: _style.itemPadding,
+              padding: _style.padding,
               child: Item(
                 style: _style,
                 controller: widget.controller,

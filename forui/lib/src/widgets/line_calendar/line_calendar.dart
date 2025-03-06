@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -126,47 +127,59 @@ class FLineCalendar extends StatelessWidget {
 final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   /// The horizontal padding around each calendar item. Defaults to `EdgeInsets.symmetric(horizontal: 6.5)`.
   @override
-  final EdgeInsetsGeometry itemPadding;
+  final EdgeInsetsGeometry padding;
 
   /// The vertical height between the content and the edges. Defaults to 15.5.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if `contentPadding` is negative.
+  /// Throws [AssertionError] if negative.
   @override
-  final double itemContentEdgeSpacing;
+  final double contentEdgeSpacing;
 
   /// The vertical height between the date and weekday. Defaults to 2.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if `datePadding` is negative.
+  /// Throws [AssertionError] if negative.
   @override
-  final double itemContentSpacing;
+  final double contentSpacing;
 
-  /// The selected item's style.
+  /// The decoration.
+  ///
+  /// {@macro forui.foundation.FTappable.builder}
+  /// * [WidgetState.selected]
   @override
-  final FLineCalendarItemStyle selectedItemStyle;
+  final FWidgetStateMap<BoxDecoration> decoration;
 
-  /// The selected item's hovered style.
+  /// The color of the today indicator.
+  ///
+  /// {@macro forui.foundation.FTappable.builder}
+  /// * [WidgetState.selected]
   @override
-  final FLineCalendarItemStyle selectedHoveredItemStyle;
+  final FWidgetStateMap<Color> todayIndicatorColor;
 
-  /// The unselected item's style.
+  /// The text style for the date.
+  ///
+  /// {@macro forui.foundation.FTappable.builder}
+  /// * [WidgetState.selected]
   @override
-  final FLineCalendarItemStyle unselectedItemStyle;
+  final FWidgetStateMap<TextStyle> dateTextStyle;
 
-  /// The unselected item's hovered style.
+  /// The text style for the day of the week.
+  ///
+  /// {@macro forui.foundation.FTappable.builder}
+  /// * [WidgetState.selected]
   @override
-  final FLineCalendarItemStyle unselectedHoveredItemStyle;
+  final FWidgetStateMap<TextStyle> weekdayTextStyle;
 
   /// Creates a [FLineCalendarStyle].
   FLineCalendarStyle({
-    required this.selectedItemStyle,
-    required this.selectedHoveredItemStyle,
-    required this.unselectedItemStyle,
-    required this.unselectedHoveredItemStyle,
-    this.itemPadding = const EdgeInsets.symmetric(horizontal: 6.5),
-    this.itemContentEdgeSpacing = 15.5,
-    this.itemContentSpacing = 2,
+    required this.decoration,
+    required this.todayIndicatorColor,
+    required this.dateTextStyle,
+    required this.weekdayTextStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 6.5),
+    this.contentEdgeSpacing = 15.5,
+    this.contentSpacing = 2,
   });
 
   /// Creates a [FLineCalendarStyle] that inherits its properties from [colorScheme] and [typography].
@@ -176,83 +189,74 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
     required FStyle style,
   }) {
     final focusedBorder = Border.all(color: colorScheme.primary, width: style.borderWidth);
-
-    final selectedDateTextStyle = typography.xl.copyWith(
-      color: colorScheme.primaryForeground,
-      fontWeight: FontWeight.w500,
-      height: 0,
-    );
-
-    final selectedWeekdayTextStyle = typography.xs.copyWith(
-      color: colorScheme.primaryForeground,
-      fontWeight: FontWeight.w500,
-      height: 0,
-    );
-
-    final unselectedDateTextStyle = typography.xl.copyWith(
-      color: colorScheme.primary,
-      fontWeight: FontWeight.w500,
-      height: 0,
-    );
-    final unselectedWeekdayTextStyle = typography.xs.copyWith(
-      color: colorScheme.mutedForeground,
-      fontWeight: FontWeight.w500,
-      height: 0,
-    );
-
     return FLineCalendarStyle(
-      selectedItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(color: colorScheme.primary, borderRadius: style.borderRadius),
-        focusedDecoration: BoxDecoration(
-          color: colorScheme.primary,
-          border: focusedBorder,
-          borderRadius: style.borderRadius,
-        ),
-        todayIndicatorColor: colorScheme.primaryForeground,
-        dateTextStyle: selectedDateTextStyle,
-        weekdayTextStyle: selectedWeekdayTextStyle,
-      ),
-      selectedHoveredItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(color: colorScheme.hover(colorScheme.primary), borderRadius: style.borderRadius),
-        focusedDecoration: BoxDecoration(
+      decoration: FWidgetStateMap({
+        WidgetState.selected & WidgetState.hovered & WidgetState.focused: BoxDecoration(
           color: colorScheme.hover(colorScheme.primary),
           border: focusedBorder,
           borderRadius: style.borderRadius,
         ),
-        todayIndicatorColor: colorScheme.hover(colorScheme.primaryForeground),
-        dateTextStyle: selectedDateTextStyle,
-        weekdayTextStyle: selectedWeekdayTextStyle,
-      ),
-      unselectedItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(
-          color: colorScheme.background,
-          border: Border.all(color: colorScheme.border),
+        WidgetState.selected & WidgetState.hovered: BoxDecoration(
+          color: colorScheme.hover(colorScheme.primary),
           borderRadius: style.borderRadius,
         ),
-        focusedDecoration: BoxDecoration(
-          color: colorScheme.background,
+        WidgetState.selected & WidgetState.focused: BoxDecoration(
+          color: colorScheme.primary,
           border: focusedBorder,
           borderRadius: style.borderRadius,
         ),
-        todayIndicatorColor: colorScheme.primary,
-        dateTextStyle: unselectedDateTextStyle,
-        weekdayTextStyle: unselectedWeekdayTextStyle,
-      ),
-      unselectedHoveredItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(
-          color: colorScheme.secondary,
-          border: Border.all(color: colorScheme.border),
-          borderRadius: style.borderRadius,
-        ),
-        focusedDecoration: BoxDecoration(
+        WidgetState.selected: BoxDecoration(color: colorScheme.primary, borderRadius: style.borderRadius),
+        WidgetState.hovered & WidgetState.focused: BoxDecoration(
           color: colorScheme.secondary,
           border: focusedBorder,
           borderRadius: style.borderRadius,
         ),
-        todayIndicatorColor: colorScheme.hover(colorScheme.primary),
-        dateTextStyle: unselectedDateTextStyle,
-        weekdayTextStyle: unselectedWeekdayTextStyle,
-      ),
+        WidgetState.hovered: BoxDecoration(
+          color: colorScheme.secondary,
+          border: Border.all(color: colorScheme.border),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.focused: BoxDecoration(
+          color: colorScheme.background,
+          border: focusedBorder,
+          borderRadius: style.borderRadius,
+        ),
+        ~WidgetState.focused: BoxDecoration(
+          color: colorScheme.background,
+          border: Border.all(color: colorScheme.border),
+          borderRadius: style.borderRadius,
+        ),
+      }),
+      todayIndicatorColor: FWidgetStateMap({
+        WidgetState.selected & WidgetState.hovered: colorScheme.hover(colorScheme.primaryForeground),
+        WidgetState.selected: colorScheme.primaryForeground,
+        WidgetState.hovered: colorScheme.hover(colorScheme.primary),
+        ~WidgetState.selected: colorScheme.primary,
+      }),
+      dateTextStyle: FWidgetStateMap({
+        WidgetState.selected: typography.xl.copyWith(
+          color: colorScheme.primaryForeground,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
+        ~WidgetState.selected: typography.xl.copyWith(
+          color: colorScheme.primary,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
+      }),
+      weekdayTextStyle: FWidgetStateMap({
+        WidgetState.selected: typography.xs.copyWith(
+          color: colorScheme.primaryForeground,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
+        ~WidgetState.selected: typography.xs.copyWith(
+          color: colorScheme.mutedForeground,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
+      }),
     );
   }
 }
