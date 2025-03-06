@@ -196,7 +196,7 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
 
   /// The year/month picker's style.
   @override
-  final FCalendarYearMonthPickerStyle yearMonthPickerStyle;
+  final FCalendarEntryStyle yearMonthPickerStyle;
 
   /// The decoration surrounding the header & picker.
   @override
@@ -225,7 +225,24 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     : this(
         headerStyle: FCalendarHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         dayPickerStyle: FCalendarDayPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
-        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: colorScheme, typography: typography),
+        yearMonthPickerStyle: FCalendarEntryStyle(
+          backgroundColor: FWidgetStateMap({
+            WidgetState.hovered & ~WidgetState.disabled: colorScheme.secondary,
+            ~WidgetState.hovered: colorScheme.background,
+          }),
+          borderColor: FWidgetStateMap({
+            WidgetState.disabled: colorScheme.background,
+            ~WidgetState.disabled: colorScheme.foreground,
+          }),
+          textStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.base.copyWith(
+              color: colorScheme.disable(colorScheme.mutedForeground),
+              fontWeight: FontWeight.w500,
+            ),
+            ~WidgetState.disabled: typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
+          }),
+          radius: const Radius.circular(8),
+        ),
         decoration: BoxDecoration(
           borderRadius: style.borderRadius,
           border: Border.all(color: colorScheme.border),

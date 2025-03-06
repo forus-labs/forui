@@ -48,7 +48,7 @@ class FWidgetStateMap<T> with MapBase<WidgetStatesConstraint, T>, Diagnosticable
 
   /// Returns a new [FWidgetStateMap] with the contents of the given [map] replacing existing values.
   @useResult
-  FWidgetStateMap<T> copyWith(WidgetStateMap<T> map) => FWidgetStateMap<T>(map);
+  FWidgetStateMap<T> copyWith(WidgetStateMap<T> map) => FWidgetStateMap<T>({..._map, ...map});
 
   @override
   T? operator [](Object? key) => _map[key];

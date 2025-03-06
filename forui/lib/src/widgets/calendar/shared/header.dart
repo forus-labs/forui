@@ -61,39 +61,41 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               FCalendarPickerType.yearMonth => FCalendarPickerType.day,
             },
     excludeSemantics: true,
-    child: SizedBox(
-      height: Header.height,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
-              style: widget.style.headerTextStyle,
-            ),
-            RotationTransition(
-              turns: Tween(
-                begin: 0.0,
-                end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
-              ).animate(_controller),
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: FAssets.icons.chevronRight(
-                  height: 15,
-                  matchTextDirection: true,
-                  colorFilter: ColorFilter.mode(
-                    widget.style.headerTextStyle.color ?? widget.style.enabledIconColor,
-                    BlendMode.srcIn,
+    builder:
+        (_, states, _) => SizedBox(
+          height: Header.height,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
+                  style: widget.style.headerTextStyle,
+                ),
+                RotationTransition(
+                  turns: Tween(
+                    begin: 0.0,
+                    end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
+                  ).animate(_controller),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: FAssets.icons.chevronRight(
+                      height: 15,
+                      matchTextDirection: true,
+                      colorFilter: ColorFilter.mode(
+                        widget.style.headerTextStyle.color ??
+                            widget.style.buttonStyle.iconContentStyle.color.resolve(states),
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    ),
   );
 
   @override
@@ -144,30 +146,17 @@ class Navigation extends StatelessWidget {
             child: FButton.icon(
               style: style.buttonStyle,
               onPress: onPrevious,
-              child: FAssets.icons.chevronLeft(
-                height: 17,
-                matchTextDirection: true,
-                colorFilter: ColorFilter.mode(
-                  onPrevious == null ? style.disabledIconColor : style.enabledIconColor,
-                  BlendMode.srcIn,
-                ),
-              ),
+              child: FIcon(FAssets.icons.chevronLeft, matchTextDirection: true),
             ),
           ),
+
           const Expanded(child: SizedBox()),
           Padding(
             padding: const EdgeInsets.only(right: 7),
             child: FButton.icon(
               style: style.buttonStyle,
               onPress: onNext,
-              child: FAssets.icons.chevronRight(
-                height: 17,
-                matchTextDirection: true,
-                colorFilter: ColorFilter.mode(
-                  onNext == null ? style.disabledIconColor : style.enabledIconColor,
-                  BlendMode.srcIn,
-                ),
-              ),
+              child: FIcon(FAssets.icons.chevronRight, matchTextDirection: true),
             ),
           ),
         ],
@@ -193,19 +182,11 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
 
   /// The button style.
   @override
-  final FButtonCustomStyle buttonStyle;
+  final FButtonStyle buttonStyle;
 
   /// The header's text style.
   @override
   final TextStyle headerTextStyle;
-
-  /// The header icons' enabled color.
-  @override
-  final Color enabledIconColor;
-
-  /// The header icons' disabled color.
-  @override
-  final Color disabledIconColor;
 
   /// The arrow turn animation's duration. Defaults to 200ms.
   @override
@@ -216,8 +197,6 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     required this.focusedOutlineStyle,
     required this.buttonStyle,
     required this.headerTextStyle,
-    required this.enabledIconColor,
-    required this.disabledIconColor,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
@@ -231,13 +210,20 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     return FCalendarHeaderStyle(
       focusedOutlineStyle: style.focusedOutlineStyle,
       buttonStyle: outline.copyWith(
-        enabledBoxDecoration: outline.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-        enabledHoverBoxDecoration: outline.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-        disabledBoxDecoration: outline.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+        boxDecoration: FWidgetStateMap(
+          outline.boxDecoration.map(
+            (state, decoration) => MapEntry(state, decoration.copyWith(borderRadius: BorderRadius.circular(4))),
+          ),
+        ),
+        iconContentStyle: FButtonIconContentStyle(
+          size: 17,
+          color: FWidgetStateMap({
+            WidgetState.disabled: colorScheme.disable(colorScheme.mutedForeground),
+            ~WidgetState.disabled: colorScheme.mutedForeground,
+          }),
+        ),
       ),
       headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-      enabledIconColor: colorScheme.mutedForeground,
-      disabledIconColor: colorScheme.disable(colorScheme.mutedForeground),
     );
   }
 }

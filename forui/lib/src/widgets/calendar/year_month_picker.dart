@@ -8,8 +8,6 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/month/paged_month_picker.dart';
 import 'package:forui/src/widgets/calendar/year/paged_year_picker.dart';
 
-part 'year_month_picker.style.dart';
-
 @internal
 class YearMonthPicker extends StatefulWidget {
   final FCalendarStyle style;
@@ -88,39 +86,4 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
       );
     }
   }
-}
-
-/// The year/month picker's style.
-final class FCalendarYearMonthPickerStyle with Diagnosticable, _$FCalendarYearMonthPickerStyleFunctions {
-  /// The enabled years/months' styles.
-  @override
-  final FCalendarEntryStyle enabledStyle;
-
-  /// The disabled years/months' styles.
-  @override
-  final FCalendarEntryStyle disabledStyle;
-
-  /// Creates a new year/month picker style.
-  FCalendarYearMonthPickerStyle({required this.enabledStyle, required this.disabledStyle});
-
-  /// Creates a new year/month picker style that inherits the color scheme and typography.
-  FCalendarYearMonthPickerStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-    : this(
-        enabledStyle: FCalendarEntryStyle(
-          backgroundColor: colorScheme.background,
-          textStyle: typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
-          hoveredBackgroundColor: colorScheme.secondary,
-          focusedBorderColor: colorScheme.foreground,
-          radius: const Radius.circular(8),
-        ),
-        disabledStyle: FCalendarEntryStyle(
-          backgroundColor: colorScheme.background,
-          textStyle: typography.base.copyWith(
-            color: colorScheme.disable(colorScheme.mutedForeground),
-            fontWeight: FontWeight.w500,
-          ),
-          focusedBorderColor: colorScheme.background,
-          radius: const Radius.circular(8),
-        ),
-      );
 }

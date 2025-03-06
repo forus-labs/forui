@@ -5,16 +5,21 @@
 * **Breaking** Move predefined styles in `FBaseBadgeStyle` to `FBadgeStyle`.
 * **Breaking** Rename `FBadgeStyle` to `FBaseBadgeStyle`.
 * **Breaking** Rename `FBadgeCustomStyle` to `FBadgeStyle`.
-* **Breaking** Change `FBottomNavigationBarItemStyle` to use `WidgetState`s.
+* **Breaking** Change `FBottomNavigationBarItemStyle` to support `WidgetState`s.
 * **Breaking** Change `FBottomNavigationBarData.selected` to use `FBottomNavigationBarData.states`.
 * **Breaking** Move predefined styles in `FBaseButtonStyle` to `FButtonStyle`.
 * **Breaking** Rename `FButtonStyle` to `FBaseButtonStyle`.
 * **Breaking** Rename `FButtonCustomStyle` to `FButtonStyle`.
-* **Breaking** Change `FButtonStyle` to use `WidgetState`s.
-* **Breaking** Change `FButtonContentStyle` to use `WidgetState`s.
-* **Breaking** Change `FButtonIconContentStyle` to use `WidgetState`s.
-* **Breaking** Change `FButtonSpinnerStyle` to use `WidgetState`s.
+* **Breaking** Change `FButtonStyle` to support `WidgetState`s.
+* **Breaking** Change `FButtonContentStyle` to support `WidgetState`s.
+* **Breaking** Change `FButtonIconContentStyle` to support `WidgetState`s.
+* **Breaking** Change `FButtonSpinnerStyle` to support `WidgetState`s.
 * **Breaking** Change `FButtonData.enabled` to use `FButtonData.states`.
+* **Breaking** Remove `FCalendarYearMonthPickerStyle` - redundant because of `WidgetState`s.
+* **Breaking** Change `FCalendarStyle` to support `WidgetState`s.
+* **Breaking** Change `FCalendarHeaderStyle` to support `WidgetState`s.
+* **Breaking** Change `FCalendarDayPickerStyle` to support `WidgetState`s.
+* **Breaking** Change `FCalendarEntryStyle` to support `WidgetState`s.
 
 ## 0.10.0 (Next)
 

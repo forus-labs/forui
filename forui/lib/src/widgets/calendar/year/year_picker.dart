@@ -14,7 +14,7 @@ class YearPicker extends StatefulWidget {
   static const rows = 5;
   static const items = columns * rows;
 
-  final FCalendarYearMonthPickerStyle yearMonthStyle;
+  final FCalendarEntryStyle yearMonthStyle;
   final FCalendarDayPickerStyle dayStyle;
   final LocalDate startYear;
   final LocalDate start;
