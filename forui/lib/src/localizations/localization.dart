@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// The locales that use non-western digits in their date and time formatting:
-/// {@template forui.localizations.fScriptNumerals}
+/// {@template forui.localizations.scriptNumerals}
 ///  * Arabic (العربية)
 ///  * Assamese (অসমীয়া)
 ///  * Bengali (বাংলা)

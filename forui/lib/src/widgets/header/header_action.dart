@@ -84,7 +84,6 @@ class FHeaderAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? FHeaderData.of(context).actionStyle;
-    final enabled = onPress != null || onLongPress != null;
 
     return FTappable.animated(
       autofocus: autofocus,
@@ -94,10 +93,9 @@ class FHeaderAction extends StatelessWidget {
       semanticLabel: semanticLabel,
       onPress: onPress,
       onLongPress: onLongPress,
-      child: FIconStyleData(
-        style: FIconStyle(color: enabled ? style.enabledColor : style.disabledColor, size: style.size),
-        child: icon,
-      ),
+      builder:
+          (_, states, _) =>
+              FIconStyleData(style: FIconStyle(color: style.color.resolve(states), size: style.size), child: icon),
     );
   }
 
@@ -118,13 +116,11 @@ class FHeaderAction extends StatelessWidget {
 
 /// [FHeaderAction]'s style.
 final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
-  /// The icon's color when this action is enabled.
+  /// The icon's color.
+  ///
+  /// {@macro forui.foundation.FTappable.builder}
   @override
-  final Color enabledColor;
-
-  /// The icon's color when this action is disabled.
-  @override
-  final Color disabledColor;
+  final FWidgetStateMap<Color> color;
 
   /// The icon's size.
   ///
@@ -139,16 +135,13 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FHeaderActionStyle].
-  FHeaderActionStyle({
-    required this.enabledColor,
-    required this.disabledColor,
-    required this.size,
-    required this.focusedOutlineStyle,
-  });
+  FHeaderActionStyle({required this.color, required this.size, required this.focusedOutlineStyle});
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
   FHeaderActionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required this.size})
-    : enabledColor = colorScheme.foreground,
-      disabledColor = colorScheme.disable(colorScheme.foreground),
+    : color = FWidgetStateMap({
+        WidgetState.disabled: colorScheme.disable(colorScheme.foreground),
+        ~WidgetState.disabled: colorScheme.foreground,
+      }),
       focusedOutlineStyle = style.focusedOutlineStyle;
 }

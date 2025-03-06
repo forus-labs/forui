@@ -65,7 +65,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
   /// The icon's color.
   ///
-  /// {@macro forui.foundation.tappable.builder}
+  /// {@macro forui.foundation.FTappable.builder}
   /// * [WidgetState.selected]
   @override
   final FWidgetStateMap<Color> iconColor;
@@ -76,7 +76,7 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
 
   /// The text's style.
   ///
-  /// {@macro forui.foundation.tappable.builder}
+  /// {@macro forui.foundation.FTappable.builder}
   /// * [WidgetState.selected]
   @override
   final FWidgetStateMap<TextStyle> textStyle;

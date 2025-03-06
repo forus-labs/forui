@@ -91,7 +91,7 @@ class _FAccordionState extends State<FAccordion> {
 final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's default text style.
   ///
-  /// {@macro forui.foundation.tappable.builder}
+  /// {@macro forui.foundation.FTappable.builder}
   @override
   final FWidgetStateMap<TextStyle> titleTextStyle;
 

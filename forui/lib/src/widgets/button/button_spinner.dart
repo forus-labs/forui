@@ -83,6 +83,8 @@ final class FButtonSpinnerStyle with Diagnosticable, _$FButtonSpinnerStyleFuncti
   final Duration animationDuration;
 
   /// The spinner's color.
+  ///
+  /// {@macro forui.foundation.FTappable.builder}
   @override
   final FWidgetStateMap<Color> color;
 

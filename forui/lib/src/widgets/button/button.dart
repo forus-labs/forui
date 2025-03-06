@@ -172,6 +172,8 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   static const FBaseButtonStyle ghost = Variant.ghost;
 
   /// The box decoration.
+  /// 
+  /// {@macro forui.foundation.FTappable.builder}
   @override
   final FWidgetStateMap<BoxDecoration> boxDecoration;
 
@@ -237,7 +239,7 @@ class FButtonData extends InheritedWidget {
 
   /// The states.
   ///
-  /// {@macro forui.foundation.tappable.builder}
+  /// {@macro forui.foundation.FTappable.builder}
   final Set<WidgetState> states;
 
   /// Creates a [FButtonData].

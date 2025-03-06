@@ -20,6 +20,7 @@
 * **Breaking** Change `FCalendarHeaderStyle` to support `WidgetState`s.
 * **Breaking** Change `FCalendarDayPickerStyle` to support `WidgetState`s.
 * **Breaking** Change `FCalendarEntryStyle` to support `WidgetState`s.
+* **Breaking** Change `FHeaderActionStyle` to support `WidgetState`s.
 
 ## 0.10.0 (Next)
 

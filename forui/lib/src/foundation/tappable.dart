@@ -80,7 +80,7 @@ class FTappable extends StatefulWidget {
 
   /// The builder used to build to create a child with the current states.
   ///
-  /// {@template forui.foundation.tappable.builder}
+  /// {@template forui.foundation.FTappable.builder}
   /// The following states are supported:
   /// * [WidgetState.focused]
   /// * [WidgetState.hovered]

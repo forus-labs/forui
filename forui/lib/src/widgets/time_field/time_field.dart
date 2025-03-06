@@ -74,7 +74,7 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
 /// * Left/Right arrows: Move between time segments
 ///
 /// The input field does not support the following locales that use non-western numerals, it will default to English:
-/// {@macro forui.localizations.fScriptNumerals}
+/// {@macro forui.localizations.scriptNumerals}
 ///
 /// Consider providing a [FTimeFieldController.validator] to perform custom time validation logic. By default, all
 /// times are valid.

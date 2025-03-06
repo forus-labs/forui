@@ -60,7 +60,7 @@ class IconContent extends StatelessWidget {
 final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   /// The [TextStyle].
   ///
-  /// {macro forui.foundation.tappable.builder}
+  /// {macro forui.foundation.FTappable.builder}
   @override
   final FWidgetStateMap<TextStyle> textStyle;
 
@@ -70,7 +70,7 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
 
   /// The icon's color.
   ///
-  /// {macro forui.foundation.tappable.builder}
+  /// {macro forui.foundation.FTappable.builder}
   @override
   final FWidgetStateMap<Color> iconColor;
 
@@ -107,7 +107,7 @@ final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentSty
 
   /// The icon's color.
   ///
-  /// {macro forui.foundation.tappable.builder}
+  /// {macro forui.foundation.FTappable.builder}
   @override
   final FWidgetStateMap<Color> color;
 
