@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-
+import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 
 /// A pagination enables the user to select a specific page from a range of pages.
 ///
