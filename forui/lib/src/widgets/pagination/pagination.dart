@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+
 
 /// A pagination enables the user to select a specific page from a range of pages.
 ///
@@ -186,7 +188,7 @@ class _Page extends StatelessWidget {
         listenable: controller,
         builder: (context, _) {
           final selected = controller.page == page;
-          print('rebuilt');
+
           return FTappable(
             focusedOutlineStyle: focusedOutlineStyle,
             onPress: () => controller.page = page,

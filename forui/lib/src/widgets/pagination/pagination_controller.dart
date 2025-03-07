@@ -62,9 +62,8 @@ class FPaginationController extends FChangeNotifier {
   void _handleScrollChanges() {
     if (hasClients) {
       if (_controller.page case final page when page!.round() != _page) {
-        print('page: $page.round();');
         _page = page.round();
-        print('_page: $_page;');
+
         notifyListeners();
       }
     }
@@ -118,7 +117,6 @@ class FPaginationController extends FChangeNotifier {
       if (hasClients) {
         _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
       } else {
-        print('value: $value;');
         _page = value + 1;
         notifyListeners();
       }
@@ -190,7 +188,7 @@ class FPaginationController extends FChangeNotifier {
 }
 
 @internal
-extension InternalExtension on FPaginationController {
+extension MinPagesDisplayedAtEdges on FPaginationController {
   /// Returns the minimum number of pages to display at both the start and end of the pagination.
   ///
   /// If the total number of pages is too small to accommodate both the edge pages

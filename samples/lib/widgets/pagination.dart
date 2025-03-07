@@ -104,7 +104,7 @@ class PaginationWithViewPage extends Sample {
             width: 300,
             child: PageView.builder(
               itemCount: 10,
-              controller: controller,
+              controller: controller.controller,
               itemBuilder:
                   (context, index) => ColoredBox(
                     color: index.isEven ? style.hover(style.primary) : style.mutedForeground,

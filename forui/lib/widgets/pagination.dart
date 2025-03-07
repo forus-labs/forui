@@ -6,5 +6,5 @@
 library forui.widgets.pagination;
 
 export '../src/widgets/pagination/pagination.dart' hide Action, FPaginationItemData;
-export '../src/widgets/pagination/pagination_controller.dart';
+export '../src/widgets/pagination/pagination_controller.dart' hide MinPagesDisplayedAtEdges;
 export '../src/widgets/pagination/pagination_style.dart';

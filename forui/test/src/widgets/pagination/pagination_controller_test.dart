@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 
 void main() {
   group('FPaginationController', () {
@@ -95,8 +95,7 @@ void main() {
     }
 
     test('dispose', () {
-      final controller = FPaginationController(pages: 10);
-      controller.dispose();
+      final controller = FPaginationController(pages: 10)..dispose();
       expect(controller.hasListeners, isFalse);
       expect(controller.controller.hasListeners, isFalse);
     });
