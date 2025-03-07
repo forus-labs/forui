@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -45,6 +46,7 @@ class LocaleScaffold extends StatefulWidget {
 
 class _LocaleScaffoldState extends State<LocaleScaffold> {
   int index = 0;
+  late FPaginationController pageController = FPaginationController(pages: 10);
 
   @override
   Widget build(BuildContext context) => Column(
@@ -58,6 +60,21 @@ class _LocaleScaffoldState extends State<LocaleScaffold> {
         child: widget.child,
       ),
       FButton(onPress: () => setState(() => index++), label: const Text('Change Locale')),
+
+      SizedBox(
+        height: 300,
+        width: 300,
+        child: PageView.builder(
+          itemCount: 10,
+          controller: pageController.controller,
+          itemBuilder:
+              (context, index) => ColoredBox(
+                color: index.isEven ? Colors.red : Colors.blue,
+                child: Center(child: Text('Page $index', style: const TextStyle(fontSize: 45, color: Colors.white))),
+              ),
+        ),
+      ),
+      SizedBox(height: 200, child: FPagination(controller: pageController)),
     ],
   );
 
