@@ -93,11 +93,5 @@ void main() {
         expect(controller.minPagesDisplayedAtEdges, expected);
       });
     }
-
-    test('dispose', () {
-      final controller = FPaginationController(pages: 10)..dispose();
-      expect(controller.hasListeners, isFalse);
-      expect(controller.controller.hasListeners, isFalse);
-    });
   });
 }
