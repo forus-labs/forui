@@ -46,7 +46,7 @@ class LocaleScaffold extends StatefulWidget {
 
 class _LocaleScaffoldState extends State<LocaleScaffold> {
   int index = 0;
-  late FPaginationController pageController = FPaginationController(length: 10);
+  late FPaginationController pageController = FPaginationController(pages: 10);
 
   @override
   Widget build(BuildContext context) => Column(
@@ -66,7 +66,7 @@ class _LocaleScaffoldState extends State<LocaleScaffold> {
         width: 300,
         child: PageView.builder(
           itemCount: 10,
-          controller: pageController,
+          controller: pageController.controller,
           itemBuilder:
               (context, index) => ColoredBox(
                 color: index.isEven ? Colors.red : Colors.blue,

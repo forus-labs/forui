@@ -5,24 +5,24 @@ import 'package:forui/forui.dart';
 void main() {
   group('FPaginationController', () {
     test('value', () {
-      final controller = FPaginationController(length: 10, page: 8)..value = 5;
-      expect(controller.value, 5);
+      final controller = FPaginationController(pages: 10, initialPage: 8)..page = 5;
+      expect(controller.page, 5);
     });
 
     test('next', () {
-      final controller = FPaginationController(length: 10, page: 8)..next();
-      expect(controller.value, 9);
+      final controller = FPaginationController(pages: 10, initialPage: 8)..next();
+      expect(controller.page, 9);
 
       controller.next();
-      expect(controller.value, 9);
+      expect(controller.page, 9);
     });
 
     test('previous', () {
-      final controller = FPaginationController(length: 10, page: 1)..previous();
-      expect(controller.value, 0);
+      final controller = FPaginationController(pages: 10, initialPage: 1)..previous();
+      expect(controller.page, 0);
 
       controller.previous();
-      expect(controller.value, 0);
+      expect(controller.page, 0);
     });
 
     group('calculateSiblingRange(...)', () {
@@ -39,7 +39,7 @@ void main() {
         (9, (5, 9)),
       ]) {
         test('siblings = 1', () {
-          final controller = FPaginationController(length: 10)..value = currentPage;
+          final controller = FPaginationController(pages: 10)..page = currentPage;
           expect(controller.calculateSiblingRange(), expected);
         });
       }
@@ -57,7 +57,7 @@ void main() {
         (9, (7, 9)),
       ]) {
         test('siblings = 0', () {
-          final controller = FPaginationController(siblings: 0, length: 10)..value = currentPage;
+          final controller = FPaginationController(siblings: 0, pages: 10)..page = currentPage;
           expect(controller.calculateSiblingRange(), expected);
         });
       }
@@ -75,7 +75,7 @@ void main() {
       (14, 3, 5),
     ]) {
       test('minPagesDisplayedAtEdges', () {
-        final controller = FPaginationController(length: length, siblings: siblingLength);
+        final controller = FPaginationController(pages: length, siblings: siblingLength);
         expect(controller.minPagesDisplayedAtEdges, expected);
       });
     }
@@ -89,9 +89,16 @@ void main() {
       (13, 3, 4),
     ]) {
       test('minPagesDisplayedAtEnds with showEdges set to false', () {
-        final controller = FPaginationController(length: length, siblings: siblingLength, showEdges: false);
+        final controller = FPaginationController(pages: length, siblings: siblingLength, showEdges: false);
         expect(controller.minPagesDisplayedAtEdges, expected);
       });
     }
+
+    test('dispose', () {
+      final controller = FPaginationController(pages: 10);
+      controller.dispose();
+      expect(controller.hasListeners, isFalse);
+      expect(controller.controller.hasListeners, isFalse);
+    });
   });
 }

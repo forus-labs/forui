@@ -50,7 +50,7 @@ class _FPaginationState extends State<FPagination> {
     final style = widget.style ?? context.theme.paginationStyle;
     final previous = widget.previous ?? Action.previous(style: style, onPress: controller.previous);
     final next = widget.next ?? Action.next(style: style, onPress: controller.next);
-    final lastPage = controller.length - 1;
+    final lastPage = controller.pages - 1;
 
     final elipsis = Padding(
       padding: style.itemPadding,
@@ -71,14 +71,14 @@ class _FPaginationState extends State<FPagination> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             previous,
-            if (controller.value > controller.minPagesDisplayedAtEdges) ...[
+            if (controller.page > controller.minPagesDisplayedAtEdges) ...[
               if (controller.showEdges && lastPage.isFinite)
                 FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
               elipsis,
             ],
             for (int i = start; i <= end; i++)
               FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
-            if (controller.value < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
+            if (controller.page < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
               elipsis,
               if (controller.showEdges && lastPage.isFinite)
                 FPaginationItemData(page: lastPage.toInt(), style: style, controller: controller, child: const _Page()),
@@ -185,10 +185,11 @@ class _Page extends StatelessWidget {
       child: ListenableBuilder(
         listenable: controller,
         builder: (context, _) {
-          final selected = controller.value == page;
+          final selected = controller.page == page;
+          print('rebuilt');
           return FTappable(
             focusedOutlineStyle: focusedOutlineStyle,
-            onPress: () => controller.value = page,
+            onPress: () => controller.page = page,
             builder:
                 (context, tappableData, _) => DecoratedBox(
                   decoration: switch ((selected, tappableData.hovered)) {
@@ -201,11 +202,10 @@ class _Page extends StatelessWidget {
                     constraints: style.contentConstraints,
                     child: DefaultTextStyle(
                       style: selected ? style.selected.textStyle : style.unselected.textStyle,
-                      child: child!,
+                      child: Center(child: Text('${page + 1}')),
                     ),
                   ),
                 ),
-            child: Center(child: Text('${page + 1}')),
           );
         },
       ),

@@ -16,7 +16,7 @@ void main() {
         TestScaffold.blue(
           child: FPagination(
             style: TestScaffold.blueScreen.paginationStyle,
-            controller: FPaginationController(length: 10),
+            controller: FPaginationController(pages: 10),
           ),
         ),
       );
@@ -27,7 +27,7 @@ void main() {
     for (final theme in TestScaffold.themes) {
       testWidgets('default', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(theme: theme.data, child: FPagination(controller: FPaginationController(length: 10))),
+          TestScaffold(theme: theme.data, child: FPagination(controller: FPaginationController(pages: 10))),
         );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/default.png'));
@@ -37,7 +37,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 10, showEdges: false)),
+            child: FPagination(controller: FPaginationController(pages: 10, showEdges: false)),
           ),
         );
 
@@ -51,7 +51,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 10, siblings: 0, page: 2)),
+            child: FPagination(controller: FPaginationController(pages: 10, siblings: 0, initialPage: 2)),
           ),
         );
         await tester.tap(find.byType(Action).last);
@@ -64,7 +64,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(length: 14, siblings: 2)),
+            child: FPagination(controller: FPaginationController(pages: 14, siblings: 2)),
           ),
         );
         await tester.tap(find.text('7'));
@@ -75,7 +75,7 @@ void main() {
 
       testWidgets('custom icon', (tester) async {
         final style = theme.data.paginationStyle;
-        final controller = FPaginationController(length: 10, page: 4);
+        final controller = FPaginationController(pages: 10, initialPage: 4);
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,

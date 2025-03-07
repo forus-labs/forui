@@ -7,9 +7,9 @@ import 'package:forui/forui.dart';
 
 part 'pagination_style.style.dart';
 
-/// Defines the visual styles for different states of the [FPagination] widget.
+/// A [FPagination] state's style.
 final class FPaginationStateStyle with Diagnosticable, _$FPaginationStateStyleFunctions {
-  /// The default decoration applied to the pagination item.
+  /// The decoration applied to the pagination item.
   @override
   final BoxDecoration decoration;
 
@@ -27,11 +27,11 @@ final class FPaginationStateStyle with Diagnosticable, _$FPaginationStateStyleFu
 
 /// The [FPagination] styles.
 final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
-  /// The style configuration for a pagination item when it is in the selected state.
+  /// The style for the [FPagination] when it is selected.
   @override
   final FPaginationStateStyle selected;
 
-  /// The style configuration for a pagination item when it is in the unselected state.
+  /// The style for the [FPagination] when it is unselected.
   @override
   final FPaginationStateStyle unselected;
 
@@ -77,47 +77,4 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
 
         iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
       );
-
-  /// Returns a copy of this [FPaginationStyle] with the given properties replaced.
-  @override
-  @useResult
-  FPaginationStyle copyWith({
-    FPaginationStateStyle? selected,
-    FPaginationStateStyle? unselected,
-    FIconStyle? iconStyle,
-    EdgeInsets? itemPadding,
-    BoxConstraints? contentConstraints,
-  }) => FPaginationStyle(
-    selected: selected ?? this.selected,
-    unselected: unselected ?? this.unselected,
-    iconStyle: iconStyle ?? this.iconStyle,
-    itemPadding: itemPadding ?? this.itemPadding,
-    contentConstraints: contentConstraints ?? this.contentConstraints,
-  );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('selected', selected))
-      ..add(DiagnosticsProperty('unselected', unselected))
-      ..add(DiagnosticsProperty('iconStyle', iconStyle))
-      ..add(DiagnosticsProperty('itemPadding', itemPadding))
-      ..add(DiagnosticsProperty('contentConstraints', contentConstraints));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FPaginationStyle &&
-          runtimeType == other.runtimeType &&
-          selected == other.selected &&
-          unselected == other.unselected &&
-          iconStyle == other.iconStyle &&
-          itemPadding == other.itemPadding &&
-          contentConstraints == other.contentConstraints;
-
-  @override
-  int get hashCode =>
-      selected.hashCode ^ unselected.hashCode ^ iconStyle.hashCode ^ itemPadding.hashCode ^ contentConstraints.hashCode;
 }

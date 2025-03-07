@@ -79,7 +79,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/modal-sheet/draggable', page: DraggableModalSheetRoute.page),
     AutoRoute(path: '/pagination/default', page: PaginationRoute.page),
     AutoRoute(path: '/pagination/siblings', page: PaginationSiblingsRoute.page),
-    AutoRoute(path: '/pagination/hide-first-last', page: PaginationHideFirstLastRoute.page),
+    AutoRoute(path: '/pagination/show-edges', page: PaginationShowEdgesRoute.page),
     AutoRoute(path: '/pagination/custom-icon', page: PaginationCustomIconRoute.page),
     AutoRoute(path: '/pagination/with-page-view', page: PaginationWithViewRoute.page),
     AutoRoute(path: '/picker/default', page: PickerRoute.page),

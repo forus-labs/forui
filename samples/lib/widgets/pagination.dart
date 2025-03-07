@@ -10,7 +10,7 @@ class PaginationPage extends Sample {
   final FPaginationController controller;
 
   PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
-    : controller = FPaginationController(length: 10);
+    : controller = FPaginationController(pages: 10);
 
   @override
   Widget sample(BuildContext context) =>
@@ -22,7 +22,7 @@ class PaginationSiblingsPage extends Sample {
   final FPaginationController controller;
 
   PaginationSiblingsPage({@queryParam super.theme, @queryParam super.maxWidth = 500})
-    : controller = FPaginationController(length: 20, siblings: 2, page: 9);
+    : controller = FPaginationController(pages: 20, siblings: 2, initialPage: 9);
 
   @override
   Widget sample(BuildContext context) =>
@@ -30,11 +30,11 @@ class PaginationSiblingsPage extends Sample {
 }
 
 @RoutePage()
-class PaginationHideFirstLastPage extends Sample {
+class PaginationShowEdgesPage extends Sample {
   final FPaginationController controller;
 
-  PaginationHideFirstLastPage({@queryParam super.theme})
-    : controller = FPaginationController(length: 8, showEdges: false);
+  PaginationShowEdgesPage({@queryParam super.theme})
+    : controller = FPaginationController(pages: 8, showEdges: false);
 
   @override
   Widget sample(BuildContext context) =>
@@ -46,7 +46,7 @@ class PaginationCustomIconPage extends Sample {
   final FPaginationController controller;
 
   PaginationCustomIconPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
-    : controller = FPaginationController(length: 10, page: 4);
+    : controller = FPaginationController(pages: 10, initialPage: 4);
 
   @override
   Widget sample(BuildContext context) {
@@ -89,7 +89,7 @@ class PaginationWithViewPage extends Sample {
   final FPaginationController controller;
 
   PaginationWithViewPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
-    : controller = FPaginationController(length: 10);
+    : controller = FPaginationController(pages: 10);
 
   @override
   Widget sample(BuildContext context) {
