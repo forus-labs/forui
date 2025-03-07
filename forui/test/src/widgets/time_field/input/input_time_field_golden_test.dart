@@ -25,13 +25,13 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/placeholder.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/placeholder.png'));
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FTimeField(prefixBuilder: null)));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/no-icon.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/no-icon.png'));
     });
 
     testWidgets('${theme.name} 24 hours', (tester) async {
@@ -46,7 +46,7 @@ void main() {
       await tester.enterText(find.byKey(key), '13:00');
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/hour-24.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/hour-24.png'));
     });
 
     testWidgets('${theme.name} hr locale', (tester) async {
@@ -54,7 +54,7 @@ void main() {
         TestScaffold.app(theme: theme.data, locale: const Locale('hr'), child: const FTimeField()),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/hr-locale.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/hr-locale.png'));
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
@@ -63,7 +63,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/disabled.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/disabled.png'));
     });
 
     testWidgets('${theme.name} error', (tester) async {
@@ -71,7 +71,7 @@ void main() {
         TestScaffold.app(theme: theme.data, child: const FTimeField(forceErrorText: 'Error', key: key)),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/field/error.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/error.png'));
     });
 
     testWidgets('${theme.name} unsupported locale defaults to en_US', (tester) async {
@@ -84,7 +84,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('time-field/${theme.name}/field/unsupported-locale.png'),
+        matchesGoldenFile('time-field/${theme.name}/input/unsupported-locale.png'),
       );
     });
 
@@ -99,7 +99,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('time-field/${theme.name}/field/mobile-focused.png'),
+        matchesGoldenFile('time-field/${theme.name}/input/mobile-focused.png'),
       );
     });
 
@@ -116,7 +116,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('time-field/${theme.name}/field/desktop-unfocused.png'),
+        matchesGoldenFile('time-field/${theme.name}/input/desktop-unfocused.png'),
       );
 
       debugDefaultTargetPlatformOverride = null;

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
+import 'package:forui/src/widgets/date_field/input/date_input_controller.dart';
 import '../../../test_scaffold.dart';
 
 final _date = DateTime(2024, 12, 25);

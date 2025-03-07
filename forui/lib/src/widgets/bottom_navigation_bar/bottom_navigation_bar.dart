@@ -37,15 +37,15 @@ class FBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.bottomNavigationBarStyle;
+    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+
     return DecoratedBox(
       decoration: style.decoration,
       child: SafeArea(
         top: false,
         bottom: false,
         child: Padding(
-          padding: style.padding.copyWith(
-            bottom: style.padding.bottom + (MediaQuery.viewPaddingOf(context).bottom * 2 / 3),
-          ),
+          padding: padding.copyWith(bottom: padding.bottom + (MediaQuery.viewPaddingOf(context).bottom * 2 / 3)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -117,7 +117,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The item's focused outline style.
   @override

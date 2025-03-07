@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/localizations/localizations_ko.dart';
 import 'package:forui/src/localizations/localizations_zh.dart';
-import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -69,7 +69,7 @@ void main() {
           ),
         ].indexed) {
       test('single separator - $index', () {
-        final controller = TimeFieldController.test(
+        final controller = TimeInputController.test(
           FLocalizationsEnSg(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('en_SG'),
@@ -104,7 +104,7 @@ void main() {
           ),
         ].indexed) {
       test('forward - $index', () {
-        final controller = TimeFieldController.test(
+        final controller = TimeInputController.test(
           FLocalizationsEnSg(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('en_SG'),
@@ -138,7 +138,7 @@ void main() {
           ),
         ].indexed) {
       test('backward - $index', () {
-        final controller = TimeFieldController.test(
+        final controller = TimeInputController.test(
           FLocalizationsEnSg(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('en_SG'),
@@ -177,7 +177,7 @@ void main() {
         ),
       ].indexed) {
     testWidgets('adjust - $index', (tester) async {
-      final controller = TimeFieldController.test(
+      final controller = TimeInputController.test(
         FLocalizationsEnSg(),
         FTimeFieldController(vsync: const TestVSync()),
         DateFormat.jm('en_SG'),
@@ -234,7 +234,7 @@ void main() {
           ),
         ].indexed) {
       test('period with spaces - $index', () {
-        final controller = TimeFieldController(
+        final controller = TimeInputController(
           FLocalizationsKo(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('sq'),
@@ -276,7 +276,7 @@ void main() {
           ),
         ].indexed) {
       test('period first - $index', () {
-        final controller = TimeFieldController(
+        final controller = TimeInputController(
           FLocalizationsKo(),
           FTimeFieldController(vsync: const TestVSync()),
           DateFormat.jm('ko'),
@@ -314,7 +314,7 @@ void main() {
             ),
           ].indexed) {
         test('period with no separator - locale - $index', () {
-          final controller = TimeFieldController(
+          final controller = TimeInputController(
             localization,
             FTimeFieldController(vsync: const TestVSync()),
             DateFormat.jm(locale),
@@ -334,7 +334,7 @@ void main() {
       ].indexed) {
     test('update from time controller(...) - $index', () {
       final timeController = FTimeFieldController(vsync: const TestVSync(), initialTime: initial);
-      final controller = TimeFieldController(
+      final controller = TimeInputController(
         FLocalizationsEnSg(),
         timeController,
         DateFormat.jm('en_SG'),

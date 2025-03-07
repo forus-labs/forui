@@ -159,6 +159,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
               description: description,
               errorBuilder: errorBuilder,
               marks: marks,
+              textDirection: Directionality.maybeOf(context) ?? TextDirection.ltr,
               constraints: constraints,
               mainAxisExtent: trackMainAxisExtent,
               onSaved: onSaved,
@@ -201,6 +202,7 @@ class _Slider extends StatefulWidget {
   final Widget? description;
   final Widget Function(BuildContext, String) errorBuilder;
   final List<FSliderMark> marks;
+  final TextDirection textDirection;
   final BoxConstraints constraints;
   final double? mainAxisExtent;
   final FormFieldSetter<FSliderSelection>? onSaved;
@@ -217,6 +219,7 @@ class _Slider extends StatefulWidget {
     required this.description,
     required this.errorBuilder,
     required this.marks,
+    required this.textDirection,
     required this.constraints,
     required this.mainAxisExtent,
     required this.onSaved,
@@ -230,7 +233,7 @@ class _Slider extends StatefulWidget {
   State<_Slider> createState() => _SliderState();
 
   double get _mainAxisExtent {
-    final insets = style.labelLayoutStyle.childPadding;
+    final insets = style.labelLayoutStyle.childPadding.resolve(textDirection);
     final extent = switch (mainAxisExtent) {
       final extent? => extent,
       _ when layout.vertical => constraints.maxHeight - insets.top - insets.bottom,
@@ -260,6 +263,7 @@ class _Slider extends StatefulWidget {
       ..add(EnumProperty('layout', layout))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(IterableProperty('marks', marks))
+      ..add(EnumProperty('textDirection', textDirection))
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DoubleProperty('mainAxisExtent', mainAxisExtent))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))

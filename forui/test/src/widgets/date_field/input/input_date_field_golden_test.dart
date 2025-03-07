@@ -25,13 +25,13 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/field/placeholder.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/placeholder.png'));
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField.input(prefixBuilder: null)));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/field/no-icon.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/no-icon.png'));
     });
 
     testWidgets('${theme.name} hr locale', (tester) async {
@@ -39,7 +39,7 @@ void main() {
         TestScaffold.app(theme: theme.data, locale: const Locale('hr'), child: FDateField.input()),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/field/hr-locale.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/hr-locale.png'));
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
@@ -48,7 +48,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/field/disabled.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/disabled.png'));
     });
 
     testWidgets('${theme.name} error', (tester) async {
@@ -56,7 +56,7 @@ void main() {
         TestScaffold.app(theme: theme.data, child: FDateField.input(forceErrorText: 'Error', key: key)),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/field/error.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/error.png'));
     });
 
     testWidgets('${theme.name} unsupported locale defaults to en_US', (tester) async {
@@ -69,7 +69,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/field/unsupported-locale.png'),
+        matchesGoldenFile('date-field/${theme.name}/input/unsupported-locale.png'),
       );
     });
 
@@ -84,7 +84,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/field/mobile-focused.png'),
+        matchesGoldenFile('date-field/${theme.name}/input/mobile-focused.png'),
       );
     });
 
@@ -101,7 +101,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/field/desktop-unfocused.png'),
+        matchesGoldenFile('date-field/${theme.name}/input/desktop-unfocused.png'),
       );
 
       debugDefaultTargetPlatformOverride = null;

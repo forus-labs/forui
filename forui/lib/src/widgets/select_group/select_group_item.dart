@@ -277,7 +277,7 @@ class FCheckboxSelectGroupStyle extends FCheckboxStyle with _$FCheckboxSelectGro
 class FRadioSelectGroupStyle extends FRadioStyle with _$FRadioSelectGroupStyleFunctions {
   /// The padding around the radio. Defaults to `EdgeInsets.symmetric(vertical: 2)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FRadioSelectGroupStyle].
   FRadioSelectGroupStyle({

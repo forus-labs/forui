@@ -45,7 +45,7 @@ class FPopoverMenu extends StatefulWidget {
   /// See [childAnchor] for changing the child's anchor.
   ///
   /// Defaults to [Alignment.topCenter].
-  final Alignment menuAnchor;
+  final AlignmentGeometry menuAnchor;
 
   /// The point on the child that connects with the menu, at the menu's anchor.
   ///
@@ -53,7 +53,7 @@ class FPopoverMenu extends StatefulWidget {
   /// See [menuAnchor] for changing the popover's anchor.
   ///
   /// Defaults to [Alignment.bottomCenter].
-  final Alignment childAnchor;
+  final AlignmentGeometry childAnchor;
 
   /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;

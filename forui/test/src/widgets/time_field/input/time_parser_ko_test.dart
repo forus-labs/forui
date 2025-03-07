@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 
-import 'package:forui/src/widgets/time_field/field/time_parser.dart';
+import 'package:forui/src/widgets/time_field/input/time_parser.dart';
 import '../../../test_scaffold.dart';
 
 // This needs to be a separate test suite as Flutter modifies the period. It is AM/PM in intl, and 오전/오후 in Flutter.

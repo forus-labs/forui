@@ -84,7 +84,7 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FBottomNavigationBarItemStyle].
   FBottomNavigationBarItemStyle({

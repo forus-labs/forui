@@ -196,7 +196,7 @@ final class _FHorizontalLabel extends StatelessWidget {
     );
   }
 
-  Widget _buildCell({required EdgeInsets padding, required TextStyle textStyle, Widget? child}) {
+  Widget _buildCell({required EdgeInsetsGeometry padding, required TextStyle textStyle, Widget? child}) {
     if (child == null) {
       return const TableCell(child: SizedBox());
     }
@@ -320,19 +320,19 @@ final class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
 final class FLabelLayoutStyle with Diagnosticable, _$FLabelLayoutStyleFunctions {
   /// The label's padding.
   @override
-  final EdgeInsets labelPadding;
+  final EdgeInsetsGeometry labelPadding;
 
   /// The description's padding.
   @override
-  final EdgeInsets descriptionPadding;
+  final EdgeInsetsGeometry descriptionPadding;
 
   /// The error's padding.
   @override
-  final EdgeInsets errorPadding;
+  final EdgeInsetsGeometry errorPadding;
 
   /// The child's padding.
   @override
-  final EdgeInsets childPadding;
+  final EdgeInsetsGeometry childPadding;
 
   /// Creates a [FLabelLayoutStyle].
   const FLabelLayoutStyle({

@@ -1,24 +1,25 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/field/field.dart';
-import 'package:forui/src/foundation/field/field_controller.dart';
+import 'package:forui/src/foundation/input/input.dart';
+import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
 @internal
-class DateField extends Field<DateTime?> {
-  final FCalendarController<DateTime?> calendarController;
-  final FDateFieldStyle style;
-  final int baselineYear;
+class TimeInput extends Input<FTime?> {
+  final FTimeFieldController timeController;
+  final FTimeFieldStyle style;
+  final bool hour24;
 
-  const DateField({
-    required this.calendarController,
+  const TimeInput({
+    required this.timeController,
+    required this.hour24,
     required this.style,
-    required this.baselineYear,
     required super.builder,
     required super.label,
     required super.description,
@@ -46,13 +47,14 @@ class DateField extends Field<DateTime?> {
   });
 
   @override
-  State<DateField> createState() => _DateFieldState();
+  State<TimeInput> createState() => _TimeFieldState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('calendarController', calendarController))
+      ..add(DiagnosticsProperty('timeController', timeController))
+      ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
@@ -70,25 +72,23 @@ class DateField extends Field<DateTime?> {
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
-      ..add(DiagnosticsProperty('localizations', localizations))
-      ..add(IntProperty('baselineYear', baselineYear));
+      ..add(DiagnosticsProperty('localizations', localizations));
   }
 }
 
-class _DateFieldState extends FieldState<DateField, DateTime?> {
+class _TimeFieldState extends InputState<TimeInput, FTime?> {
   @override
-  void didUpdateWidget(covariant DateField old) {
+  void didUpdateWidget(covariant TimeInput old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       localizations =
           scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
       controller.dispose();
       controller = createController();
-    } else if (widget.calendarController != old.calendarController) {
+    } else if (widget.timeController != old.timeController) {
       controller.dispose();
       controller = createController();
     }
@@ -96,17 +96,20 @@ class _DateFieldState extends FieldState<DateField, DateTime?> {
 
   @override
   @protected
-  FieldController createController() =>
-      DateFieldController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
+  InputController createController() {
+    final format = widget.hour24 ? DateFormat.Hm(localizations.localeName) : DateFormat.jm(localizations.localeName);
+    return TimeInputController(localizations, widget.timeController, format, widget.style.textFieldStyle);
+  }
 
   @override
+  @protected
   FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
 
   @override
   @protected
-  DateTime? get value => widget.calendarController.value;
+  FTime? get value => widget.timeController.value;
 
   @override
   @protected
-  String get invalidDateError => localizations.dateFieldInvalidDateError;
+  String get errorMessage => localizations.timeFieldInvalidDateError;
 }

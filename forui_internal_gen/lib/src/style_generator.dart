@@ -6,6 +6,9 @@ import 'package:meta/meta.dart';
 import 'package:source_gen/source_gen.dart';
 
 final _style = RegExp(r'^F.*(Style|Styles)$');
+const _list = TypeChecker.fromUrl('dart:core#List');
+const _set = TypeChecker.fromUrl('dart:core#Set');
+const _map = TypeChecker.fromUrl('dart:core#Map');
 
 /// Generates corresponding style mixins that implement several commonly used operations.
 class StyleGenerator extends Generator {
@@ -149,7 +152,14 @@ Method generateDebugFillProperties(ClassElement element, List<FieldElement> fiel
 /// Generates an `operator==` method using the given [element] and [fields].
 @visibleForTesting
 Method generateEquals(ClassElement element, List<FieldElement> fields) {
-  final comparisons = fields.isEmpty ? '' : '&& ${fields.map((f) => '${f.name} == other.${f.name}').join(' && ')}';
+  String generate(FieldElement field) => switch (field.type) {
+    _ when _list.isAssignableFromType(field.type) => 'listEquals(${field.name}, other.${field.name})',
+    _ when _set.isAssignableFromType(field.type) => 'setEquals(${field.name}, other.${field.name})',
+    _ when _map.isAssignableFromType(field.type) => 'mapEquals(${field.name}, other.${field.name})',
+    _ => '${field.name} == other.${field.name}',
+  };
+
+  final comparisons = fields.isEmpty ? '' : '&& ${fields.map(generate).join(' && ')}';
   return Method(
     (m) =>
         m
@@ -172,7 +182,15 @@ Method generateEquals(ClassElement element, List<FieldElement> fields) {
 /// Generates a `hashCode` method using the given [element] and [fields].
 @visibleForTesting
 Method generateHashCode(ClassElement element, List<FieldElement> fields) {
-  final hash = fields.isEmpty ? '0' : fields.map((f) => '${f.name}.hashCode').join(' ^ ');
+  String generate(FieldElement field) => switch (field.type) {
+    _ when _list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name})',
+    _ when _set.isAssignableFromType(field.type) => 'const SetEquality().hash(${field.name})',
+    _ when _map.isAssignableFromType(field.type) => 'const MapEquality().hash(${field.name})',
+    _ => '${field.name}.hashCode',
+  };
+
+  final hash = fields.isEmpty ? '0' : fields.map(generate).join(' ^ ');
+
   return Method(
     (m) =>
         m

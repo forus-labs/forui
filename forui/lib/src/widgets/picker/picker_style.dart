@@ -46,7 +46,7 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
 
   /// The selection's border radius.
   @override
-  final BorderRadius selectionBorderRadius;
+  final BorderRadiusGeometry selectionBorderRadius;
 
   /// The selection's color.
   @override

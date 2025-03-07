@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/time_field/field/time_field_controller.dart';
+import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 import '../../../test_scaffold.dart';
 
 final _date = DateTime(2024, 12, 25, 15, 30);
@@ -25,7 +25,7 @@ void main() {
             locale: locale,
             child: Builder(
               builder: (context) {
-                final controller = TimeFieldController(
+                final controller = TimeInputController(
                   FLocalizations.of(context)!,
                   FTimeFieldController(vsync: const TestVSync(), initialTime: const FTime(12, 15)),
                   DateFormat.jm(locale.toString()),
@@ -54,7 +54,7 @@ void main() {
             locale: locale,
             child: Builder(
               builder: (context) {
-                final controller = TimeFieldController(
+                final controller = TimeInputController(
                   FLocalizations.of(context)!,
                   FTimeFieldController(vsync: const TestVSync(), initialTime: const FTime(12, 15)),
                   DateFormat.Hm(locale.toString()),

@@ -74,7 +74,7 @@ final class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions 
 
   /// The padding. Defaults to `EdgeInsets.all(16)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FCardContentStyle].
   const FCardContentStyle({

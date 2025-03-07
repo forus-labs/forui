@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
-import 'package:forui/src/foundation/field/parser.dart';
+import 'package:forui/src/foundation/input/parser.dart';
 
 @internal
 abstract class TimeParser extends Parser {

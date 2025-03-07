@@ -98,11 +98,11 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 
   /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
   @override
-  final EdgeInsets titlePadding;
+  final EdgeInsetsGeometry titlePadding;
 
   /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 15)`.
   @override
-  final EdgeInsets childPadding;
+  final EdgeInsetsGeometry childPadding;
 
   /// The icon's color.
   @override

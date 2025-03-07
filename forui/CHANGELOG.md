@@ -18,6 +18,9 @@
 
 * Change all widget styles to use code generated functions.
 * Change spacing between `FDateField`'s default prefix icon and content.
+* Change most occurrences of `Alignment` to `AlignmentGeometry`.
+* Change most occurrences of `BorderRadius` to `BorderRadiusGeometry`.
+* Change most occurrences of `EdgeInsets` to `EdgeInsetsGeometry`.
 * **Breaking** Change `FDatePicker` to `FDateField`.
 * **Breaking** Change `FDatePickerController` to `FDateFieldController`.
 * **Breaking** Change `FDatePickerController.calendar` to `FDateFieldController.popover`.

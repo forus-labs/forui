@@ -204,7 +204,7 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
 
   /// The padding surrounding the header & picker. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 16)`.
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The duration of the page switch animation. Defaults to 200 milliseconds.
   @override

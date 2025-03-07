@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'package:forui/src/foundation/field/parser.dart';
-import 'package:forui/src/widgets/date_field/field/date_parser.dart';
+import 'package:forui/src/foundation/input/parser.dart';
+import 'package:forui/src/widgets/date_field/input/date_parser.dart';
 
 final bg = DateParser('bg', 2000); // d.MM.y r.
 final hr = DateParser('hr', 2000); // dd. MM. y.

@@ -52,10 +52,7 @@ abstract class Entry extends StatelessWidget {
         ),
         _Content(
           style: entryStyle,
-          borderRadius: switch (Directionality.maybeOf(context)) {
-            TextDirection.ltr || null => BorderRadius.horizontal(left: yesterday, right: tomorrow),
-            TextDirection.rtl => BorderRadius.horizontal(left: tomorrow, right: yesterday),
-          },
+          borderRadius: BorderRadiusDirectional.horizontal(start: yesterday, end: tomorrow),
           text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
           data: data,
           current: today,
@@ -172,7 +169,7 @@ class _UnselectableEntry extends Entry {
 
 class _Content extends StatelessWidget {
   final FCalendarEntryStyle style;
-  final BorderRadius borderRadius;
+  final BorderRadiusGeometry borderRadius;
   final String text;
   final FTappableData data;
   final bool current;

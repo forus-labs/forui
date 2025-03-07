@@ -7,18 +7,18 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/localizations/localizations_hr.dart';
-import 'package:forui/src/widgets/date_field/field/date_field_controller.dart';
+import 'package:forui/src/widgets/date_field/input/date_input_controller.dart';
 import '../../../test_scaffold.dart';
 
 void main() {
   late FCalendarController<DateTime?> calendarController;
-  late DateFieldController controller;
+  late DateInputController controller;
 
   setUpAll(initializeDateFormatting);
 
   setUp(() {
     calendarController = FCalendarController.date();
-    controller = DateFieldController.test(
+    controller = DateInputController.test(
       calendarController,
       FLocalizationsEnSg(),
       TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -37,7 +37,7 @@ void main() {
       ].indexed) {
     test('FieldController.() - $index', () {
       expect(
-        DateFieldController(
+        DateInputController(
           FCalendarController.date(initialSelection: initial),
           localizations,
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -106,7 +106,7 @@ void main() {
           ),
         ].indexed) {
       test('single separator - $index', () {
-        controller = DateFieldController.test(
+        controller = DateInputController.test(
           calendarController,
           FLocalizationsEnSg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -168,7 +168,7 @@ void main() {
           ),
         ].indexed) {
       test('multiple separator & suffix - $index', () {
-        controller = DateFieldController.test(
+        controller = DateInputController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -202,7 +202,7 @@ void main() {
           ),
         ].indexed) {
       test('forward - $index', () {
-        controller = DateFieldController.test(
+        controller = DateInputController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -234,7 +234,7 @@ void main() {
           ),
         ].indexed) {
       test('backward - $index', () {
-        controller = DateFieldController.test(
+        controller = DateInputController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -281,7 +281,7 @@ void main() {
         ),
       ].indexed) {
     test('adjust - $index', () {
-      controller = DateFieldController.test(
+      controller = DateInputController.test(
         calendarController,
         FLocalizationsHr(),
         TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -340,7 +340,7 @@ void main() {
           (const TextEditingValue(text: '01/02/2024'), null),
         ].indexed) {
       test('single separator - $index', () {
-        controller = DateFieldController.test(
+        controller = DateInputController.test(
           calendarController,
           FLocalizationsEnSg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -398,7 +398,7 @@ void main() {
           (const TextEditingValue(text: '01. 02. 2024.', selection: TextSelection.collapsed(offset: 3)), null),
         ].indexed) {
       test('multiple separator - $index', () {
-        controller = DateFieldController.test(
+        controller = DateInputController.test(
           calendarController,
           FLocalizationsHr(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -445,7 +445,7 @@ void main() {
           ),
         ].indexed) {
       test('suffix - $index', () {
-        controller = DateFieldController.test(
+        controller = DateInputController.test(
           calendarController,
           FLocalizationsBg(),
           TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
@@ -465,7 +465,7 @@ void main() {
       ].indexed) {
     test('update from calendar(...) - $index', () {
       calendarController = FCalendarController.date(initialSelection: initial);
-      controller = DateFieldController.test(
+      controller = DateInputController.test(
         calendarController,
         FLocalizationsEnSg(),
         TestScaffold.blueScreen.dateFieldStyle.textFieldStyle,
