@@ -104,7 +104,7 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
 /// * Left/Right arrows: Move between date segments
 ///
 /// The input field does not support the following locales that use non-western numerals, it will default to English:
-/// {@macro forui.localizations.fScriptNumerals}
+/// {@macro forui.localizations.scriptNumerals}
 ///
 /// Consider providing a [FDateFieldController.validator] to perform custom date validation logic. By default, all
 /// dates are valid.

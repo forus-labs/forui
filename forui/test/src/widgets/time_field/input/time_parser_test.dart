@@ -8,6 +8,7 @@ import 'package:forui/src/widgets/time_field/input/time_parser.dart';
 void main() {
   late Time12Parser enSG; // h:mm a (am/pm)
   late Time12Parser enUS; // h:mm a (AM/PM)
+  late Time12Parser ms; // h:mm a (PG/PTG)
   late Time12Parser zhHK; // ah:mm (上午/下午)
   late Time24Parser ja; // H:mm
   late Time24Parser frCA; // HH 'h' mm
@@ -16,6 +17,7 @@ void main() {
     initializeDateFormatting();
     enSG = Time12Parser(DateFormat.jm('en_SG'));
     enUS = Time12Parser(DateFormat.jm('en_US'));
+    ms = Time12Parser(DateFormat.jm('ms'));
     zhHK = Time12Parser(DateFormat.jm('zh_HK'));
     ja = Time24Parser(DateFormat.jm('ja'));
     frCA = Time24Parser(DateFormat.jm('fr_CA'));
@@ -298,6 +300,8 @@ void main() {
         ].indexed) {
       test('en_US, upper case - $i', () => expect(enUS.updatePeriod(previous, current), expected));
     }
+
+    test('ms, trims trailing -', () => expect(ms.updatePeriod('p-', 't'), ('PTG', true)));
 
     for (final (i, (previous, current, expected))
         in [
