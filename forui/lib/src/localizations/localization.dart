@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// The locales that use non-western digits in their date and time formatting:
-/// {@template forui.localizations.fScriptNumerals}
+/// {@template forui.localizations.scriptNumerals}
 ///  * Arabic (العربية)
 ///  * Assamese (অসমীয়া)
 ///  * Bengali (বাংলা)
@@ -17,6 +17,19 @@ import 'package:forui/forui.dart';
 /// {@endtemplate}
 @internal
 const scriptNumerals = ['ar', 'as', 'bn', 'fa', 'mr', 'my', 'ne', 'ps', 'ta'];
+
+/// The locales which period is written in a script that requires composing:
+/// {@template forui.localization.scriptPeriods}
+///   * Amharic (አማርኛ)
+///   * Kannada (ಕನ್ನಡ)
+///   * Korean (한국어)
+///   * Punjabi (ਪੰਜਾਬੀ)
+///   * Thai (ไทย)
+/// {@endtemplate}
+///   * Chinese (Hong Kong) (繁體中文)
+///   * Chinese (Taiwan) (繁體中文)
+@internal
+const scriptPeriods = ['am', 'kn', 'ko', 'pa', 'th', 'zh_HK', 'zh_TW'];
 
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
