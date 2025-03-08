@@ -119,6 +119,9 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// The tabs styles.
   final FTabsStyle tabsStyle;
 
+  /// The tappable style.
+  final FTappableStyle tappableStyle;
+
   /// The text field style.
   final FTextFieldStyle textFieldStyle;
 
@@ -170,6 +173,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
+    FTappableStyle? tappableStyle,
     FTextFieldStyle? textFieldStyle,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
@@ -226,6 +230,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           sliderStyles ?? FSliderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       switchStyle: switchStyle ?? FSwitchStyle.inherit(colorScheme: colorScheme, style: style),
       tabsStyle: tabsStyle ?? FTabsStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      tappableStyle: tappableStyle ?? FTappableStyle(),
       textFieldStyle:
           textFieldStyle ?? FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       tileGroupStyle:
@@ -274,6 +279,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.sliderStyles,
     required this.switchStyle,
     required this.tabsStyle,
+    required this.tappableStyle,
     required this.textFieldStyle,
     required this.tileGroupStyle,
     required this.timeFieldStyle,
@@ -839,6 +845,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
+    FTappableStyle? tappableStyle,
     FTextFieldStyle? textFieldStyle,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
@@ -876,6 +883,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     sliderStyles: sliderStyles ?? this.sliderStyles,
     switchStyle: switchStyle ?? this.switchStyle,
     tabsStyle: tabsStyle ?? this.tabsStyle,
+    tappableStyle: tappableStyle ?? this.tappableStyle,
     textFieldStyle: textFieldStyle ?? this.textFieldStyle,
     tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
     timeFieldStyle: timeFieldStyle ?? this.timeFieldStyle,
@@ -920,6 +928,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('tappableStyle', tappableStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('timeFieldStyle', timeFieldStyle, level: DiagnosticLevel.debug))
@@ -965,6 +974,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           sliderStyles == other.sliderStyles &&
           switchStyle == other.switchStyle &&
           tabsStyle == other.tabsStyle &&
+          tappableStyle == other.tappableStyle &&
           textFieldStyle == other.textFieldStyle &&
           tileGroupStyle == other.tileGroupStyle &&
           timeFieldStyle == other.timeFieldStyle &&
@@ -1006,6 +1016,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       sliderStyles.hashCode ^
       switchStyle.hashCode ^
       tabsStyle.hashCode ^
+      tappableStyle.hashCode ^
       textFieldStyle.hashCode ^
       tileGroupStyle.hashCode ^
       timeFieldStyle.hashCode ^
