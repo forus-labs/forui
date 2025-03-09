@@ -33,8 +33,7 @@ class PaginationSiblingsPage extends Sample {
 class PaginationShowEdgesPage extends Sample {
   final FPaginationController controller;
 
-  PaginationShowEdgesPage({@queryParam super.theme})
-    : controller = FPaginationController(pages: 8, showEdges: false);
+  PaginationShowEdgesPage({@queryParam super.theme}) : controller = FPaginationController(pages: 8, showEdges: false);
 
   @override
   Widget sample(BuildContext context) =>
