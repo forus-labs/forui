@@ -73,8 +73,14 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
 /// * Up/Down arrows: Increment/decrement values
 /// * Left/Right arrows: Move between time segments
 ///
-/// The input field does not support the following locales that use non-western numerals, it will default to English:
-/// {@macro forui.localizations.fScriptNumerals}
+/// The input field does not support the following locales that use non-western numerals & scripts that require
+/// composing, it will default to English:
+/// {@macro forui.localizations.scriptNumerals}
+/// {@macro forui.localization.scriptPeriods}
+///
+/// The following locales will default to `zh`:
+///   * Chinese (Hong Kong) (繁體中文)
+///   * Chinese (Taiwan) (繁體中文)
 ///
 /// Consider providing a [FTimeFieldController.validator] to perform custom time validation logic. By default, all
 /// times are valid.

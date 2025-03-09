@@ -112,7 +112,7 @@ class Time12Parser extends TimeParser {
 
   @visibleForTesting
   (String, bool) updatePeriod(String previous, String current) {
-    final full = (previous == '--' ? current : '$previous$current').toLowerCase();
+    final full = (previous == '--' ? current : '$previous$current').replaceAll('-', '').toLowerCase();
     return switch (full) {
       // Backspace.
       _ when current.isEmpty => ('--', false),

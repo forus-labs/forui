@@ -8,6 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/input.dart';
 import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
+import 'package:forui/src/localizations/localizations_zh.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
 @internal
@@ -84,8 +85,14 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
   void didUpdateWidget(covariant TimeInput old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
-      localizations =
-          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+      // We don't support scripts which period requires composing. This is due to how primitive underlying text field
+      // composing support is. I'll gladly accept any PR that fixes this.
+      localizations = switch (widget.localizations.localeName) {
+        'zh_HK' || 'zh_TW' => FLocalizationsZh(),
+        final name when scriptNumerals.contains(name) || scriptPeriods.contains(name) => FDefaultLocalizations(),
+        _ => widget.localizations,
+      };
+
       controller.dispose();
       controller = createController();
     } else if (widget.timeController != old.timeController) {
