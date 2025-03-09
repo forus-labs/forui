@@ -132,6 +132,7 @@ class FPaginationController extends FChangeNotifier {
     if (0 <= index && index <= pages) {
       if (hasClients) {
         _controller.jumpToPage(index);
+        _page = index;
       } else {
         _page = index;
         notifyListeners();

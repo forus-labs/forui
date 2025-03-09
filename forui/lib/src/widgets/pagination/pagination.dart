@@ -46,6 +46,13 @@ final class FPagination extends StatefulWidget {
 
 class _FPaginationState extends State<FPagination> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    widget.controller.page =
+        PageStorage.maybeOf(context)?.readState(context) ?? widget.controller.controller.initialPage;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final controller = widget.controller;
     final style = widget.style ?? context.theme.paginationStyle;
@@ -68,6 +75,7 @@ class _FPaginationState extends State<FPagination> {
       listenable: controller,
       builder: (context, _) {
         final (start, end) = controller.calculateSiblingRange();
+
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
