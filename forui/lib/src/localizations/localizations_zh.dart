@@ -57,6 +57,9 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => '清除';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsZh extends FLocalizations {
   String get dialogLabel => '对话框';
 
   @override
-  String get sheetLabel => '动作条';
+  String get sheetSemanticsLabel => '动作条';
 
   @override
   String get barrierLabel => '纱罩';
@@ -103,6 +106,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   FLocalizationsZhHk() : super('zh_HK');
 
   @override
+  String get textFieldClearButtonSemanticLabel => '清除';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -133,7 +139,7 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get dialogLabel => '對話方塊';
 
   @override
-  String get sheetLabel => '面板';
+  String get sheetSemanticsLabel => '面板';
 
   @override
   String get barrierLabel => 'Scrim';
@@ -149,6 +155,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   FLocalizationsZhTw() : super('zh_TW');
 
   @override
+  String get textFieldClearButtonSemanticLabel => '清除';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -179,7 +188,7 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get dialogLabel => '對話方塊';
 
   @override
-  String get sheetLabel => '功能表';
+  String get sheetSemanticsLabel => '功能表';
 
   @override
   String get barrierLabel => '紗罩';

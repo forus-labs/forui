@@ -59,6 +59,10 @@
       }
     }
   },
+  "textFieldClearButtonSemanticLabel": "Clear",
+  "@textFieldClearButtonSemanticLabel": {
+    "description": "The semantic label for the clear button in a text field."
+  },
   "shortDateSeparator": "/",
   "@shortDateSeparator": {
     "description": "The short date's separator, typically /."
@@ -96,7 +100,7 @@
   "@dialogLabel": {
     "description": "The sheet's label."
   },
-  "sheetLabel": "Sheet",
+  "sheetSemanticsLabel": "Sheet",
   "barrierLabel": "Barrier",
   "@barrierLabel": {
     "description": "The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message)."

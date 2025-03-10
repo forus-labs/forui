@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialogo langas",
-  "sheetLabel": "lapas",
+  "sheetSemanticsLabel": "lapas",
   "barrierOnTapHint": "Uždaryti „$modalRouteContentName“",
   "barrierLabel": "Užsklanda",
   "shortDateSeparator": "-",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Pasirinkite laiką",
-  "timeFieldInvalidDateError": "Neteisingas laikas."
+  "timeFieldInvalidDateError": "Neteisingas laikas.",
+  "textFieldClearButtonSemanticLabel": "Išvalyti"
 }

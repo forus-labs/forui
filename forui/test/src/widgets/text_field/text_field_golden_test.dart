@@ -2,6 +2,7 @@
 library;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -174,6 +175,44 @@ void main() {
         );
 
         debugDefaultTargetPlatformOverride = null;
+      });
+
+      group('clearable', () {
+        testWidgets('clear icon', (tester) async {
+          await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextField(clearable: (_) => true)));
+
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+          await gesture.addPointer(location: Offset.zero);
+          addTearDown(gesture.removePointer);
+
+          await tester.pump();
+          await gesture.moveTo(tester.getCenter(find.bySemanticsLabel('Clear')));
+          await tester.pumpAndSettle();
+
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('text-field/${theme.name}/clear-icon.png'));
+        });
+
+        testWidgets('clear & suffix icon', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FTextField(suffixBuilder: (_, _, _) => FIcon(FAssets.icons.alarmClock), clearable: (_) => true),
+            ),
+          );
+
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+          await gesture.addPointer(location: Offset.zero);
+          addTearDown(gesture.removePointer);
+
+          await tester.pump();
+          await gesture.moveTo(tester.getCenter(find.bySemanticsLabel('Clear')));
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('text-field/${theme.name}/clear-suffix-icon.png'),
+          );
+        });
       });
     }
   });

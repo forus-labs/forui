@@ -57,6 +57,9 @@ class FLocalizationsDe extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Löschen';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsDe extends FLocalizations {
   String get dialogLabel => 'Dialogfeld';
 
   @override
-  String get sheetLabel => 'Ansicht';
+  String get sheetSemanticsLabel => 'Ansicht';
 
   @override
   String get barrierLabel => 'Gitter';
@@ -101,6 +104,9 @@ class FLocalizationsDe extends FLocalizations {
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
   FLocalizationsDeCh() : super('de_CH');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Löschen';
 
   @override
   String get shortDateSeparator => '.';

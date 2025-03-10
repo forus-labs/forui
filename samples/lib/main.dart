@@ -118,6 +118,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/tabs/default', page: TabsRoute.page),
     AutoRoute(path: '/tappable/default', page: TappableRoute.page),
     AutoRoute(path: '/text-field/default', page: TextFieldRoute.page),
+    AutoRoute(path: '/text-field/clearable', page: ClearableTextFieldRoute.page),
     AutoRoute(path: '/text-field/email', page: EmailTextFieldRoute.page),
     AutoRoute(path: '/text-field/password', page: PasswordTextFieldRoute.page),
     AutoRoute(path: '/text-field/multiline', page: MultilineTextFieldRoute.page),

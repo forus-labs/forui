@@ -319,6 +319,12 @@ abstract class FLocalizations {
   /// **'{date}'**
   String shortDate(DateTime date);
 
+  /// The semantic label for the clear button in a text field.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get textFieldClearButtonSemanticLabel;
+
   /// The short date's separator, typically /.
   ///
   /// In en, this message translates to:
@@ -379,11 +385,11 @@ abstract class FLocalizations {
   /// **'Dialog'**
   String get dialogLabel;
 
-  /// No description provided for @sheetLabel.
+  /// No description provided for @sheetSemanticsLabel.
   ///
   /// In en, this message translates to:
   /// **'Sheet'**
-  String get sheetLabel;
+  String get sheetSemanticsLabel;
 
   /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
   ///

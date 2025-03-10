@@ -1,6 +1,6 @@
 {
   "dialogLabel": "ഡയലോഗ്",
-  "sheetLabel": "ഷീറ്റ്",
+  "sheetSemanticsLabel": "ഷീറ്റ്",
   "barrierOnTapHint": "$modalRouteContentName അടയ്ക്കുക",
   "barrierLabel": "സ്ക്രിം",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ഒരു സമയം തിരഞ്ഞെടുക്കുക",
-  "timeFieldInvalidDateError": "അസാധുവായ സമയം."
+  "timeFieldInvalidDateError": "അസാധുവായ സമയം.",
+  "textFieldClearButtonSemanticLabel": "മായ്‌ക്കുക"
 }

@@ -27,6 +27,10 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   @override
   final EdgeInsetsGeometry contentPadding;
 
+  /// The padding surrounding the clear button. Defaults to `EdgeInsetsDirectional.only(end: 2)`.
+  @override
+  final EdgeInsetsGeometry clearButtonPadding;
+
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
   ///
   /// Defaults to `EdgeInsets.all(20)`.
@@ -41,6 +45,10 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   /// The label's layout style.
   @override
   final FLabelLayoutStyle labelLayoutStyle;
+
+  /// The clear button's style when [FTextField.clearable] is true.
+  @override
+  final FButtonCustomStyle clearButtonStyle;
 
   /// The style when this text field is enabled.
   @override
@@ -58,11 +66,13 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   FTextFieldStyle({
     required this.keyboardAppearance,
     required this.labelLayoutStyle,
+    required this.clearButtonStyle,
     required this.enabledStyle,
     required this.disabledStyle,
     required this.errorStyle,
     this.cursorColor = CupertinoColors.activeBlue,
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+    this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 2),
     this.scrollPadding = const EdgeInsets.all(20),
   });
 
@@ -71,6 +81,15 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
     : this(
         keyboardAppearance: colorScheme.brightness,
         labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
+        clearButtonStyle: FButtonStyles.inherit(
+          colorScheme: colorScheme,
+          typography: typography,
+          style: style,
+        ).ghost.transform((ghost) => ghost.copyWith(
+          iconContentStyle: ghost.iconContentStyle.copyWith(
+            size: 17
+          )
+        )),
         enabledStyle: FTextFieldStateStyle.inherit(
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,

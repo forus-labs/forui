@@ -62,7 +62,7 @@ Future<T?> showFSheet<T>({
       builder: builder,
       mainAxisMaxRatio: mainAxisMaxRatio,
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
-      barrierOnTapHint: localizations.barrierOnTapHint(localizations.sheetLabel),
+      barrierOnTapHint: localizations.barrierOnTapHint(localizations.sheetSemanticsLabel),
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
       barrierDismissible: barrierDismissible,
       barrierColor: (style ?? context.theme.sheetStyle).barrierColor,

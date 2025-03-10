@@ -57,6 +57,9 @@ class FLocalizationsJa extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'クリア';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsJa extends FLocalizations {
   String get dialogLabel => 'ダイアログ';
 
   @override
-  String get sheetLabel => 'シート';
+  String get sheetSemanticsLabel => 'シート';
 
   @override
   String get barrierLabel => 'スクリム';

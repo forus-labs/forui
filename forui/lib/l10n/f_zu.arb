@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Ingxoxo",
-  "sheetLabel": "Ishidi",
+  "sheetSemanticsLabel": "Ishidi",
   "barrierOnTapHint": "Vala i-$modalRouteContentName",
   "barrierLabel": "I-Scrim",
   "shortDateSeparator": "-",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Khetha isikhathi",
-  "timeFieldInvalidDateError": "Isikhathi esingalungile."
+  "timeFieldInvalidDateError": "Isikhathi esingalungile.",
+  "textFieldClearButtonSemanticLabel": "Sula"
 }

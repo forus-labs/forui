@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Okno dialogowe",
-  "sheetLabel": "Plansza",
+  "sheetSemanticsLabel": "Plansza",
   "barrierOnTapHint": "Zamknij: $modalRouteContentName",
   "barrierLabel": "Siatka",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Wybierz godzinę",
-  "timeFieldInvalidDateError": "Nieprawidłowa godzina."
+  "timeFieldInvalidDateError": "Nieprawidłowa godzina.",
+  "textFieldClearButtonSemanticLabel": "Wyczyść"
 }

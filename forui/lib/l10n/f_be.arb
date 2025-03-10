@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Дыялогавае акно",
-  "sheetLabel": "аркуш",
+  "sheetSemanticsLabel": "аркуш",
   "barrierOnTapHint": "Закрыць: $modalRouteContentName",
   "barrierLabel": "Палатно",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Выберыце час",
-  "timeFieldInvalidDateError": "Няправільны час."
+  "timeFieldInvalidDateError": "Няправільны час.",
+  "textFieldClearButtonSemanticLabel": "Ачысціць"
 }

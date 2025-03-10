@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialogruta",
-  "sheetLabel": "Ark",
+  "sheetSemanticsLabel": "Ark",
   "barrierOnTapHint": "Stäng $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "-",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Välj en tid",
-  "timeFieldInvalidDateError": "Ogiltig tid."
+  "timeFieldInvalidDateError": "Ogiltig tid.",
+  "textFieldClearButtonSemanticLabel": "Rensa"
 }

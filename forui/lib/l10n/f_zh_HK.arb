@@ -1,6 +1,6 @@
 {
   "dialogLabel": "對話方塊",
-  "sheetLabel": "面板",
+  "sheetSemanticsLabel": "面板",
   "barrierOnTapHint": "關閉 $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "選擇時間",
-  "timeFieldInvalidDateError": "無效的時間。"
+  "timeFieldInvalidDateError": "無效的時間。",
+  "textFieldClearButtonSemanticLabel": "清除"
 }

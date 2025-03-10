@@ -57,6 +57,9 @@ class FLocalizationsId extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Hapus';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsId extends FLocalizations {
   String get dialogLabel => 'Dialog';
 
   @override
-  String get sheetLabel => 'Sheet';
+  String get sheetSemanticsLabel => 'Sheet';
 
   @override
   String get barrierLabel => 'Scrim';

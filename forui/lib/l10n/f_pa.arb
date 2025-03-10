@@ -1,6 +1,6 @@
 {
   "dialogLabel": "ਵਿੰਡੋ",
-  "sheetLabel": "ਸ਼ੀਟ",
+  "sheetSemanticsLabel": "ਸ਼ੀਟ",
   "barrierOnTapHint": "$modalRouteContentName ਨੂੰ ਬੰਦ ਕਰੋ",
   "barrierLabel": "ਸਕ੍ਰਿਮ",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ਇੱਕ ਸਮਾਂ ਚੁਣੋ",
-  "timeFieldInvalidDateError": "ਅਵੈਧ ਸਮਾਂ।"
+  "timeFieldInvalidDateError": "ਅਵੈਧ ਸਮਾਂ।",
+  "textFieldClearButtonSemanticLabel": "ਕਲੀਅਰ ਕਰੋ"
 }

@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Cuadro de diálogo",
-  "sheetLabel": "Hoja",
+  "sheetSemanticsLabel": "Hoja",
   "barrierOnTapHint": "Cerrar $modalRouteContentName",
   "barrierLabel": "Sombreado",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Seleccione una hora",
-  "timeFieldInvalidDateError": "Hora no válida."
+  "timeFieldInvalidDateError": "Hora no válida.",
+  "textFieldClearButtonSemanticLabel": "Borrar"
 }

@@ -33,12 +33,14 @@ typedef FTextFieldCounterBuilder =
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
 final class FTextField extends StatelessWidget with FFormFieldProperties<String> {
-  static Widget _contextMenuBuilder(BuildContext context, EditableTextState state) =>
+  static Widget _contextMenuBuilder(BuildContext _, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
-  static Widget _fieldBuilder(BuildContext context, FTextFieldStateStyle style, Widget? child) => child!;
+  static Widget _fieldBuilder(BuildContext _, FTextFieldStateStyle _, Widget? child) => child!;
 
-  static Widget _errorBuilder(BuildContext context, String text) => Text(text);
+  static Widget _errorBuilder(BuildContext _, String text) => Text(text);
+
+  static bool _clearable(TextEditingValue _) => false;
 
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   final FTextFieldStyle? style;
@@ -527,6 +529,13 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// See [InputDecoration.suffixIcon] for more information.
   final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
 
+  /// A predicate that returns true if a clear icon should be shown at the end when the text field is not empty.
+  ///
+  /// It is never shown when the text field is disabled.
+  ///
+  /// Defaults to always returning false.
+  final bool Function(TextEditingValue) clearable;
+
   @override
   final FormFieldSetter<String>? onSaved;
 
@@ -602,6 +611,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
+    this.clearable = _clearable,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -668,6 +678,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
+    this.clearable = _clearable,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -737,6 +748,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
+    this.clearable = _clearable,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -807,6 +819,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
+    this.clearable = _clearable,
     this.onSaved,
     this.validator,
     this.initialValue,
@@ -924,6 +937,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
+      ..add(ObjectFlagProperty.has('clearable', clearable))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialValue', initialValue))

@@ -1,6 +1,6 @@
 {
   "dialogLabel": "உரையாடல்",
-  "sheetLabel": "திரை",
+  "sheetSemanticsLabel": "திரை",
   "barrierOnTapHint": "$modalRouteContentName ஐ மூடுக",
   "barrierLabel": "ஸ்க்ரிம்",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "நேரத்தைத் தேர்ந்தெடுக்கவும்",
-  "timeFieldInvalidDateError": "தவறான நேரம்."
+  "timeFieldInvalidDateError": "தவறான நேரம்.",
+  "textFieldClearButtonSemanticLabel": "அழி"
 }

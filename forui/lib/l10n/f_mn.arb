@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Харилцах цонх",
-  "sheetLabel": "хүснэгт",
+  "sheetSemanticsLabel": "хүснэгт",
   "barrierOnTapHint": "$modalRouteContentName-г хаах",
   "barrierLabel": "Скрим",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Цаг сонгох",
-  "timeFieldInvalidDateError": "Буруу цаг."
+  "timeFieldInvalidDateError": "Буруу цаг.",
+  "textFieldClearButtonSemanticLabel": "Арилгах"
 }

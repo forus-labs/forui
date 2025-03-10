@@ -1,6 +1,6 @@
 {
   "dialogLabel": "ダイアログ",
-  "sheetLabel": "シート",
+  "sheetSemanticsLabel": "シート",
   "barrierOnTapHint": "$modalRouteContentName を閉じる",
   "barrierLabel": "スクリム",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "時間を選択",
-  "timeFieldInvalidDateError": "無効な時間です。"
+  "timeFieldInvalidDateError": "無効な時間です。",
+  "textFieldClearButtonSemanticLabel": "クリア"
 }

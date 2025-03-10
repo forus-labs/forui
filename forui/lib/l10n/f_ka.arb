@@ -1,6 +1,6 @@
 {
   "dialogLabel": "დიალოგი",
-  "sheetLabel": "ფურცელი",
+  "sheetSemanticsLabel": "ფურცელი",
   "barrierOnTapHint": "$modalRouteContentName-ის დახურვა",
   "barrierLabel": "სკრიმი",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "აირჩიეთ დრო",
-  "timeFieldInvalidDateError": "არასწორი დრო."
+  "timeFieldInvalidDateError": "არასწორი დრო.",
+  "textFieldClearButtonSemanticLabel": "გასუფთავება"
 }

@@ -1,6 +1,6 @@
 {
   "dialogLabel": "对话框",
-  "sheetLabel": "动作条",
+  "sheetSemanticsLabel": "动作条",
   "barrierOnTapHint": "关闭 $modalRouteContentName",
   "barrierLabel": "纱罩",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "选择时间",
-  "timeFieldInvalidDateError": "无效的时间。"
+  "timeFieldInvalidDateError": "无效的时间。",
+  "textFieldClearButtonSemanticLabel": "清除"
 }

@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialogové okno",
-  "sheetLabel": "tabulka",
+  "sheetSemanticsLabel": "tabulka",
   "barrierOnTapHint": "Zavřít $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": ". ",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vyberte čas",
-  "timeFieldInvalidDateError": "Neplatný čas."
+  "timeFieldInvalidDateError": "Neplatný čas.",
+  "textFieldClearButtonSemanticLabel": "Vymazat"
 }
