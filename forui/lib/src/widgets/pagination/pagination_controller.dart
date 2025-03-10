@@ -46,15 +46,14 @@ class FPaginationController extends FChangeNotifier {
     this.showEdges = true,
     this.siblings = 1,
     this.onPageChanged,
-  })
-      : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
-        assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
-        assert(
-        0 <= initialPage && initialPage < pages,
-        'The initial page must be greater than or equal to 0 and less than or equal to length.',
-        ),
-        _page = initialPage,
-        _pages = pages;
+  }) : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
+       assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
+       assert(
+         0 <= initialPage && initialPage < pages,
+         'The initial page must be greater than or equal to 0 and less than or equal to length.',
+       ),
+       _page = initialPage,
+       _pages = pages;
 
   /// Returns the total number of pages in the pagination.
   int get pages => _pages;

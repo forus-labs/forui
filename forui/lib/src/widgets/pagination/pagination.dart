@@ -45,8 +45,6 @@ final class FPagination extends StatefulWidget {
 }
 
 class _FPaginationState extends State<FPagination> {
-
-
   @override
   Widget build(BuildContext context) {
     final controller = widget.controller;

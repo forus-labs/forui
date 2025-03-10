@@ -12,7 +12,13 @@ void main() {
   runApp(const Application());
 }
 
-const List<Widget> _pages = [Text('Home'), Text('Categories'), Text('Search'), Text('Settings'), Sandbox(key: PageStorageKey<String>('Sandbox'),)];
+const List<Widget> _pages = [
+  Text('Home'),
+  Text('Categories'),
+  Text('Search'),
+  Text('Settings'),
+  Sandbox(key: PageStorageKey<String>('Sandbox')),
+];
 
 class Application extends StatefulWidget {
   const Application({super.key});
