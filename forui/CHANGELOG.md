@@ -13,6 +13,9 @@
 * Add `FThemeData.toApproximateMaterialTheme()`.
 * Add `FTimePickerStyle`.
 * Add `FPickerStyle.selectionHeightAdjustment`.
+* Add `FTileGroup.physics`.
+* Add `FSelectTileGroup.physics`.
+* Add `FSelectMenuTile.physics`.
 
 ### Changes
 

@@ -6,7 +6,9 @@ documentation: https://forui.dev/docs
 repository: https://github.com/forus-labs/forui/tree/main/forui
 issue_tracker: https://github.com/forus-labs/forui/issues
 topics:
-  - ui
+  - components
+  - design-system
+  - shadcn-ui
   - widget
 
 environment:
@@ -30,7 +32,6 @@ dependencies:
   nitrogen_flutter_svg: ^0.4.0
   nitrogen_types: ^0.4.0
   sugar: ^4.0.0
-
 
 dev_dependencies:
   build_runner: ^2.4.0
