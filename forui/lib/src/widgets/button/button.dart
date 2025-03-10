@@ -13,16 +13,16 @@ part 'button.style.dart';
 /// [FButton]s typically contain icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
 /// button will be disabled, it will not react to touch.
 ///
-/// The constants in [FButtonStyle] provide a convenient way to style a badge.
+/// The constants in [FBaseButtonStyle] provide a convenient way to style a badge.
 ///
 /// See:
 /// * https://forui.dev/docs/form/button for working examples.
-/// * [FButtonCustomStyle] for customizing a button's appearance.
+/// * [FButtonStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
   /// The style. Defaults to [FButtonStyle.primary].
   ///
-  /// Although typically one of the pre-defined styles in [FButtonStyle], it can also be a [FButtonCustomStyle].
-  final FButtonStyle style;
+  /// Although typically one of the pre-defined styles in [FBaseButtonStyle], it can also be a [FButtonStyle].
+  final FBaseButtonStyle style;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
@@ -96,7 +96,7 @@ class FButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = switch (this.style) {
-      final FButtonCustomStyle style => style,
+      final FButtonStyle style => style,
       Variant.primary => context.theme.buttonStyles.primary,
       Variant.secondary => context.theme.buttonStyles.secondary,
       Variant.destructive => context.theme.buttonStyles.destructive,
@@ -141,40 +141,42 @@ class FButton extends StatelessWidget {
 
 /// A [FButton]'s style.
 ///
-/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonCustomStyle]. The pre-defined
-/// styles are a convenient shorthand for the various [FButtonCustomStyle]s in the current context's [FButtonStyles].
-sealed class FButtonStyle {
+/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonStyle] itself.
+sealed class FBaseButtonStyle {}
+
+@internal
+enum Variant implements FBaseButtonStyle { primary, secondary, destructive, outline, ghost }
+
+/// A custom [FButton] style.
+///
+/// The pre-defined styles are a convenient shorthand for the various [FButtonStyle]s in the current context's
+/// [FButtonStyles].
+class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonCustomStyleFunctions {
   /// The button's primary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.primary] style.
-  static const FButtonStyle primary = Variant.primary;
+  static const FBaseButtonStyle primary = Variant.primary;
 
   /// The button's secondary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.secondary] style.
-  static const FButtonStyle secondary = Variant.secondary;
+  static const FBaseButtonStyle secondary = Variant.secondary;
 
   /// The button's destructive style.
   ///
   /// Shorthand for the current context's [FButtonStyles.destructive] style.
-  static const FButtonStyle destructive = Variant.destructive;
+  static const FBaseButtonStyle destructive = Variant.destructive;
 
   /// The button's outline style.
   ///
   /// Shorthand for the current context's [FButtonStyles.outline] style.
-  static const FButtonStyle outline = Variant.outline;
+  static const FBaseButtonStyle outline = Variant.outline;
 
   /// The button's ghost style.
   ///
   /// Shorthand for the current context's [FButtonStyles.ghost] style.
-  static const FButtonStyle ghost = Variant.ghost;
-}
+  static const FBaseButtonStyle ghost = Variant.ghost;
 
-@internal
-enum Variant implements FButtonStyle { primary, secondary, destructive, outline, ghost }
-
-/// A custom [FButton] style.
-class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCustomStyleFunctions {
   /// The box decoration for an enabled button.
   @override
   final BoxDecoration enabledBoxDecoration;
@@ -203,8 +205,8 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCust
   @override
   final FButtonSpinnerStyle spinnerStyle;
 
-  /// Creates a [FButtonCustomStyle].
-  FButtonCustomStyle({
+  /// Creates a [FButtonStyle].
+  FButtonStyle({
     required this.enabledBoxDecoration,
     required this.enabledHoverBoxDecoration,
     required this.disabledBoxDecoration,
@@ -214,8 +216,8 @@ class FButtonCustomStyle extends FButtonStyle with Diagnosticable, _$FButtonCust
     required this.spinnerStyle,
   });
 
-  /// Creates a [FButtonCustomStyle] that inherits its properties from the given arguments.
-  FButtonCustomStyle.inherit({
+  /// Creates a [FButtonStyle] that inherits its properties from the given arguments.
+  FButtonStyle.inherit({
     required FTypography typography,
     required FStyle style,
     required Color enabledBoxColor,
@@ -255,7 +257,7 @@ class FButtonData extends InheritedWidget {
   }
 
   /// The button's style.
-  final FButtonCustomStyle style;
+  final FButtonStyle style;
 
   /// True if the button is enabled.
   final bool enabled;

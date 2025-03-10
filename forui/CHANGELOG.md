@@ -41,6 +41,9 @@
 * **Breaking** Rename `FBadgeStyle` to `FBaseBadgeStyle`.
 * **Breaking** Rename `FBadgeCustomStyle` to `FBadgeStyle`.
 * **Breaking** Move constants in `FBaseBadgeStyle` to `FBadgeStyle`.
+* **Breaking** Rename `FButtonStyle` to `FBaseButtonStyle`.
+* **Breaking** Rename `FButtonCustomStyle` to `FButtonStyle`.
+* **Breaking** Move constants in `FBaseButtonStyle` to `FButtonStyle`.
 
 ### Fixes
 * Fix `FDateField.input` to show default icon.

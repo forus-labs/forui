@@ -7,29 +7,29 @@ import 'package:forui/forui.dart';
 
 part 'button_styles.style.dart';
 
-/// [FButtonCustomStyle]'s style.
+/// [FButtonStyle]'s style.
 final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
   /// The primary button style.
   @override
-  final FButtonCustomStyle primary;
+  final FButtonStyle primary;
 
   /// The secondary  button style.
   @override
-  final FButtonCustomStyle secondary;
+  final FButtonStyle secondary;
 
   /// The destructive button style.
   @override
-  final FButtonCustomStyle destructive;
+  final FButtonStyle destructive;
 
   /// The outlined button style.
   @override
-  final FButtonCustomStyle outline;
+  final FButtonStyle outline;
 
   /// The ghost button style.
   @override
-  final FButtonCustomStyle ghost;
+  final FButtonStyle ghost;
 
-  /// Creates a [FButtonCustomStyle].
+  /// Creates a [FButtonStyle].
   const FButtonStyles({
     required this.primary,
     required this.secondary,
@@ -38,11 +38,11 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
     required this.ghost,
   });
 
-  /// Creates a [FButtonCustomStyle] that inherits its properties from the provided [colorScheme], [typography], and
+  /// Creates a [FButtonStyle] that inherits its properties from the provided [colorScheme], [typography], and
   /// [style].
   FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
     : this(
-        primary: FButtonCustomStyle.inherit(
+        primary: FButtonStyle.inherit(
           style: style,
           typography: typography,
           enabledBoxColor: colorScheme.primary,
@@ -54,7 +54,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             colorScheme.disable(colorScheme.primary),
           ),
         ),
-        secondary: FButtonCustomStyle.inherit(
+        secondary: FButtonStyle.inherit(
           style: style,
           typography: typography,
           enabledBoxColor: colorScheme.secondary,
@@ -66,7 +66,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             colorScheme.disable(colorScheme.secondary),
           ),
         ),
-        destructive: FButtonCustomStyle.inherit(
+        destructive: FButtonStyle.inherit(
           style: style,
           typography: typography,
           enabledBoxColor: colorScheme.destructive,
@@ -78,7 +78,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             colorScheme.disable(colorScheme.destructive),
           ),
         ),
-        outline: FButtonCustomStyle(
+        outline: FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
             border: Border.all(color: colorScheme.border),
             borderRadius: style.borderRadius,
@@ -107,7 +107,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             disabled: colorScheme.disable(colorScheme.secondaryForeground),
           ),
         ),
-        ghost: FButtonCustomStyle(
+        ghost: FButtonStyle(
           enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius),
           enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.secondary),
           disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius),
