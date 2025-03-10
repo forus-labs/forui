@@ -3,7 +3,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 final List<(String, String)> locales = [
   ('af', 'Vee uit'),
   ('am', 'አጽዳ'),
