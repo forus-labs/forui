@@ -42,6 +42,36 @@ class InputDateFieldPage extends Sample {
 }
 
 @RoutePage()
+class ClearableDateFieldPage extends StatefulSample {
+  ClearableDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+
+  @override
+  State<ClearableDateFieldPage> createState() => _ClearableDateFieldPageState();
+}
+
+class _ClearableDateFieldPageState extends StatefulSampleState<ClearableDateFieldPage>
+    with SingleTickerProviderStateMixin {
+  late final FDateFieldController _controller = FDateFieldController(vsync: this, initialDate: DateTime.now());
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 30),
+    child: FDateField(
+      controller: _controller,
+      label: const Text('Appointment Date'),
+      description: const Text('Select a date for your appointment'),
+      clearable: true,
+    ),
+  );
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+@RoutePage()
 class ValidatorDateFieldPage extends StatefulSample {
   ValidatorDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 

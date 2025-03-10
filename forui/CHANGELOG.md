@@ -5,15 +5,16 @@
 * Add `FTextField.counterBuilder`.
 * Add `FTransformable`.
 * Add `FTransformables`.
+* Add `FTextField.clearable`.
 * Add `FTextField.stylusHandwritingEnabled`.
 * Add `FPickerWheelMixin`.
-* Add `FTextField.clearable`.
 * Add `FTimeField`.
 * Add `FTimeFieldController`.
 * Add `FTimeFieldProperties`.
 * Add `FThemeData.toApproximateMaterialTheme()`.
 * Add `FTimePickerStyle`.
 * Add `FPickerStyle.selectionHeightAdjustment`.
+* Add `FDateField.clearable`.
 * Add `FTileGroup.physics`.
 * Add `FSelectTileGroup.physics`.
 * Add `FSelectMenuTile.physics`.
@@ -44,6 +45,7 @@
 * **Breaking** Rename `FButtonStyle` to `FBaseButtonStyle`.
 * **Breaking** Rename `FButtonCustomStyle` to `FButtonStyle`.
 * **Breaking** Move constants in `FBaseButtonStyle` to `FButtonStyle`.
+
 
 ### Fixes
 * Fix `FDateField.input` to show default icon.

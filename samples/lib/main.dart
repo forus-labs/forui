@@ -58,6 +58,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/checkbox/raw', page: RawCheckboxRoute.page),
     AutoRoute(path: '/checkbox/form', page: FormCheckboxRoute.page),
     AutoRoute(path: '/date-field/default', page: DateFieldRoute.page),
+    AutoRoute(path: '/date-field/clearable', page: ClearableDateFieldRoute.page),
     AutoRoute(path: '/date-field/calendar', page: CalendarDateFieldRoute.page),
     AutoRoute(path: '/date-field/input', page: InputDateFieldRoute.page),
     AutoRoute(path: '/date-field/validator', page: ValidatorDateFieldRoute.page),

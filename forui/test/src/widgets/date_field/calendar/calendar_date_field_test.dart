@@ -113,4 +113,33 @@ void main() {
 
     expect(find.text('15 January 2025'), findsOneWidget);
   });
+
+  group('clearable', () {
+    testWidgets('no clear icon', (tester) async {
+      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15))));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+    });
+
+    testWidgets('shows clear icon', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15), clearable: true)),
+      );
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      expect(find.bySemanticsLabel('Clear'), findsOne);
+    });
+  });
 }

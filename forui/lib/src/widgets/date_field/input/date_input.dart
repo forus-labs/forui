@@ -41,6 +41,7 @@ class DateInput extends Input<DateTime?> {
     required super.canRequestFocus,
     required super.prefixBuilder,
     required super.suffixBuilder,
+    required super.clearable,
     required super.localizations,
     super.key,
   });
@@ -100,6 +101,11 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
       DateInputController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
 
   @override
+  @protected
+  bool clearable(TextEditingValue value) => value.text != controller.placeholder;
+
+  @override
+  @protected
   FTextFieldStyle get textFieldStyle => widget.style.textFieldStyle;
 
   @override
