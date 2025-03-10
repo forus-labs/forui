@@ -48,6 +48,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// Determines the way that the menu's drag start behavior is handled. Defaults to [DragStartBehavior.start].
   final DragStartBehavior dragStartBehavior;
 
+  /// {@macro forui.widgets.FTileGroup.physics}
+  final ScrollPhysics physics;
+
   /// The style.
   final FSelectMenuTileStyle? style;
 
@@ -129,6 +132,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
@@ -201,6 +205,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                      cacheExtent: cacheExtent,
                      maxHeight: maxHeight,
                      dragStartBehavior: dragStartBehavior,
+                     physics: physics,
                      style: menuStyle.tileGroupStyle,
                      semanticLabel: semanticLabel,
                      divider: divider,
@@ -261,6 +266,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
@@ -333,6 +339,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                      cacheExtent: cacheExtent,
                      maxHeight: maxHeight,
                      dragStartBehavior: dragStartBehavior,
+                     physics: physics,
                      style: menuStyle.tileGroupStyle,
                      semanticLabel: semanticLabel,
                      divider: divider,
@@ -382,6 +389,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
+      ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))

@@ -58,7 +58,9 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// {@endtemplate}
   final DragStartBehavior dragStartBehavior;
 
+  /// {@template forui.widgets.FTileGroup.physics}
   /// The scroll physics of the group. Defaults to [ClampingScrollPhysics].
+  /// {@endtemplate}
   final ScrollPhysics physics;
 
   /// {@template forui.widgets.FTileGroup.divider}
