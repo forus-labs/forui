@@ -151,7 +151,7 @@ enum Variant implements FBaseButtonStyle { primary, secondary, destructive, outl
 ///
 /// The pre-defined styles are a convenient shorthand for the various [FButtonStyle]s in the current context's
 /// [FButtonStyles].
-class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonCustomStyleFunctions {
+class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
   /// The button's primary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.primary] style.

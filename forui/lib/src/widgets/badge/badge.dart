@@ -74,7 +74,7 @@ enum Variant implements FBaseBadgeStyle { primary, secondary, outline, destructi
 ///
 /// The pre-defined styles are a convenient shorthand for the various [FBadgeStyle]s in the current context's
 /// [FBadgeStyles].
-final class FBadgeStyle with Diagnosticable, _$FBadgeCustomStyleFunctions implements FBaseBadgeStyle {
+final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions implements FBaseBadgeStyle {
   /// The badge's primary style.
   ///
   /// Shorthand for the current context's [FBadgeStyles.primary] style.
