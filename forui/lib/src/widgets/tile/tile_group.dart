@@ -58,6 +58,9 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// {@endtemplate}
   final DragStartBehavior dragStartBehavior;
 
+  /// The scroll physics of the group. Defaults to [ClampingScrollPhysics].
+  final ScrollPhysics physics;
+
   /// {@template forui.widgets.FTileGroup.divider}
   /// The divider between tiles.
   /// {@endtemplate}
@@ -101,6 +104,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     double? cacheExtent,
     double maxHeight = double.infinity,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
     bool enabled = true,
     FTileDivider divider = FTileDivider.full,
     String? semanticLabel,
@@ -115,6 +119,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     cacheExtent: cacheExtent,
     maxHeight: maxHeight,
     dragStartBehavior: dragStartBehavior,
+    physics: physics,
     enabled: enabled,
     divider: divider,
     semanticLabel: semanticLabel,
@@ -132,6 +137,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
     this.enabled,
     this.divider = FTileDivider.indented,
     this.semanticLabel,
@@ -179,6 +185,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
     this.enabled,
     this.divider = FTileDivider.indented,
     this.semanticLabel,
@@ -247,7 +254,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
                   cacheExtent: cacheExtent,
                   dragStartBehavior: dragStartBehavior,
                   shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
+                  physics: physics,
                   slivers: [sliver],
                 ),
               ),
@@ -269,6 +276,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
+      ..add(DiagnosticsProperty('physics', physics))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticLabel', semanticLabel))
@@ -282,6 +290,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
   final double? cacheExtent;
   final double maxHeight;
   final DragStartBehavior dragStartBehavior;
+  final ScrollPhysics physics;
   final bool enabled;
   final FTileDivider divider;
   final String? semanticLabel;
@@ -292,17 +301,18 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
 
   const _MergeTileGroups({
     required this.children,
-    this.style,
-    this.scrollController,
-    this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.enabled = true,
-    this.divider = FTileDivider.full,
-    this.semanticLabel,
-    this.label,
-    this.description,
-    this.error,
+    required this.style,
+    required this.scrollController,
+    required this.cacheExtent,
+    required this.maxHeight,
+    required this.dragStartBehavior,
+    required this.physics,
+    required this.enabled,
+    required this.divider,
+    required this.semanticLabel,
+    required this.label,
+    required this.description,
+    required this.error,
     super.key,
   });
 
@@ -370,6 +380,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
+      ..add(DiagnosticsProperty('physics', physics))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticLabel', semanticLabel));
