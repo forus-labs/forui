@@ -1,6 +1,7 @@
 export '/src/accordion_controller_hook.dart';
 export '/src/calendar_controller_hook.dart';
 export '/src/date_field_controller_hook.dart';
+export '/src/pagination_controller_hook.dart';
 export '/src/picker_controller_hook.dart';
 export '/src/popover_controller_hook.dart';
 export '/src/resizable_controller_hook.dart';

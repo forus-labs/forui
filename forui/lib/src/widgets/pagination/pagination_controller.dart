@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -26,7 +24,15 @@ class FPaginationController extends FChangeNotifier {
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
   final bool showEdges;
 
-  late final PageController _controller;
+  /// A callback that is triggered whenever the current page changes.
+  ///
+  /// This callback is invoked whenever the `page` property of the `FPaginationController`
+  /// is updated, either programmatically or through user interaction.
+  ///
+  /// This can be useful for performing actions in response to page changes,
+  /// such as updating other parts of the UI or triggering analytics events.
+  final VoidCallback? onPageChanged;
+
   final int _pages;
   int _page;
 
@@ -35,117 +41,54 @@ class FPaginationController extends FChangeNotifier {
   /// # Contract:
   /// * Throws [AssertionError] if 1 <= [initialPage] and [initialPage] <= length.
   FPaginationController({
-    int pages = 0,
+    int pages = 1,
     int initialPage = 0,
     this.showEdges = true,
     this.siblings = 1,
-    ScrollControllerCallback? onAttach,
-    ScrollControllerCallback? onDetach,
-    bool keepPage = true,
-    double viewportFraction = 1.0,
-  }) : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
-       assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
-       assert(
-         0 <= initialPage && initialPage < pages,
-         'The initial page must be greater than or equal to 0 and less than or equal to length.',
-       ),
-       _page = initialPage,
-       _pages = pages {
-    _controller = PageController(
-      initialPage: initialPage,
-      keepPage: keepPage,
-      viewportFraction: viewportFraction,
-      onAttach: onAttach,
-      onDetach: onDetach,
-    )..addListener(_handleScrollChanges);
-  }
-
-  void _handleScrollChanges() {
-    if (hasClients) {
-      if (_controller.page case final page when page!.round() != _page) {
-        _page = page.round();
-
-        notifyListeners();
-      }
-    }
-  }
-
-  /// Returns whether the controller has clients (i.e., it is attached to a [PageView]),
-  bool get hasClients => _controller.hasClients;
-
-  /// Returns the [PageController] instance.
-  PageController get controller => _controller;
+    this.onPageChanged,
+  })
+      : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
+        assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
+        assert(
+        0 <= initialPage && initialPage < pages,
+        'The initial page must be greater than or equal to 0 and less than or equal to length.',
+        ),
+        _page = initialPage,
+        _pages = pages;
 
   /// Returns the total number of pages in the pagination.
-  ///
-  /// If the controller has clients (i.e., it is attached to a [PageView]),
-  /// the length is dynamically computed using the scroll extents and viewport dimensions.
-  ///
-  /// If not attached to any clients, it returns the predefined `_length`, which defaults to 0.
-  num get pages {
-    if (hasClients && _controller.position.hasContentDimensions) {
-      final position = _controller.position;
-      final len =
-          max(0, position.maxScrollExtent - position.minScrollExtent) /
-          max(1.0, position.viewportDimension * _controller.viewportFraction);
-      if (len.isFinite) {
-        return len.ceil() + 1;
-      } else {
-        return len;
-      }
-    } else {
-      return _pages;
-    }
-  }
+  int get pages => _pages;
+
+  /// Returns the current page index.
+  int get page => _page;
 
   /// Moves to the previous page if the current page is greater than 1.
   void previous() {
-    final value = hasClients && _controller.page != null ? _controller.page!.round() : _page;
-    if (0 < value) {
-      if (hasClients) {
-        _controller.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
-      } else {
-        _page = value - 1;
-        notifyListeners();
-      }
+    if (0 < _page) {
+      _page = _page - 1;
+      onPageChanged?.call();
+      notifyListeners();
     }
   }
 
   /// Moves to the next page if the current page is less than the total number of pages.
   void next() {
-    final value = hasClients && _controller.page != null ? _controller.page!.round() : _page;
-    if (value < pages - 1) {
-      if (hasClients) {
-        _controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
-      } else {
-        _page = value + 1;
-        notifyListeners();
-      }
+    if (_page < pages - 1) {
+      _page = _page + 1;
+      onPageChanged?.call();
+      notifyListeners();
     }
   }
-
-  /// Returns the current page index.
-  int get page => _page;
 
   /// Sets the current page index.
   set page(int index) {
     if (0 <= index && index <= pages) {
-      if (hasClients) {
-        _controller.jumpToPage(index);
-        _page = index;
-      } else {
-        _page = index;
-        notifyListeners();
-      }
+      _page = index;
+      onPageChanged?.call();
+      notifyListeners();
     } else {
       throw StateError('The index must be within the allowed range.');
     }
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   /// Calculates the range of page numbers to display around the current page.
@@ -156,7 +99,7 @@ class FPaginationController extends FChangeNotifier {
     final int rangeStart;
     final int rangeEnd;
     if (pages.isFinite) {
-      final last = pages.toInt() - 1;
+      final last = pages - 1;
       if (pages <= minPagesDisplayedAtEdges) {
         return (0, last);
       }
@@ -197,9 +140,8 @@ extension MinPagesDisplayedAtEdges on FPaginationController {
   /// and the full set of sibling pages around the current page, all pages are displayed instead.
   int get minPagesDisplayedAtEdges {
     if (pages.isFinite) {
-      final len = pages.toInt();
       final minDisplayedAtEnds = siblings + 1 + (showEdges ? 1 : 0);
-      return len <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? len : minDisplayedAtEnds;
+      return pages <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? pages : minDisplayedAtEnds;
     }
     return siblings + 1 + (showEdges ? 1 : 0);
   }

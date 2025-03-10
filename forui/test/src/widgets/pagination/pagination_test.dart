@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart' hide Action;
-
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -62,26 +60,8 @@ void main() {
       final controller = FPaginationController(pages: 10)..addListener(() {
         notifyCount++;
       });
-      await tester.pumpWidget(
-        TestScaffold(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 300,
-                width: 300,
-                child: PageView.builder(
-                  itemCount: 10,
-                  controller: controller.controller,
-                  itemBuilder: (context, index) => Text('Page $index', style: const TextStyle(fontSize: 45)),
-                ),
-              ),
-              FPagination(controller: controller),
-            ],
-          ),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(child: FPagination(controller: controller)));
 
-      // Perform actions that should trigger notifyListeners
       controller.page = 6;
       await tester.pumpAndSettle();
       controller.previous();
@@ -89,11 +69,7 @@ void main() {
       controller.next();
       await tester.pumpAndSettle();
 
-      await tester.fling(find.byType(PageView), const Offset(-300, 0), 10);
-      await tester.pump();
-      expect(controller.page, 7);
-
-      expect(notifyCount, 4);
+      expect(notifyCount, 3);
     });
   });
 }

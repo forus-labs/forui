@@ -45,12 +45,7 @@ final class FPagination extends StatefulWidget {
 }
 
 class _FPaginationState extends State<FPagination> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    widget.controller.page =
-        PageStorage.maybeOf(context)?.readState(context) ?? widget.controller.controller.initialPage;
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +76,7 @@ class _FPaginationState extends State<FPagination> {
           children: [
             previous,
             if (controller.page > controller.minPagesDisplayedAtEdges) ...[
-              if (controller.showEdges && lastPage.isFinite)
+              if (controller.showEdges)
                 FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
               elipsis,
             ],
@@ -89,8 +84,8 @@ class _FPaginationState extends State<FPagination> {
               FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
             if (controller.page < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
               elipsis,
-              if (controller.showEdges && lastPage.isFinite)
-                FPaginationItemData(page: lastPage.toInt(), style: style, controller: controller, child: const _Page()),
+              if (controller.showEdges)
+                FPaginationItemData(page: lastPage, style: style, controller: controller, child: const _Page()),
             ],
             next,
           ],
