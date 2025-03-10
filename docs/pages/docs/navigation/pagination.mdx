@@ -16,7 +16,7 @@ Display the current active page and enable navigation between multiple pages.
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        FPagination(controller: FPaginationController(length: 10));
+        FPagination(controller: FPaginationController(pages: 10));
         ```
     </Tabs.Tab>
 </Tabs>
@@ -28,10 +28,11 @@ Display the current active page and enable navigation between multiple pages.
 ```dart copy
 FPagination(
   controller: FPaginationController(
-    length: 20,
-    siblings: 2,
+    pages: 20,
+    initialPage: 4,
     showEdges: false,
-    page: 4,
+    siblings: 2,
+    onPageChanged: () {},
   ),
 );
 ```
@@ -45,12 +46,12 @@ FPagination(
         <Widget name='pagination' variant='siblings' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {4} copy
+        ```dart {5} copy
         FPagination(
           controller: FPaginationController(
-            length: 20,
+            pages: 20,
+            initialPage: 9,
             siblings: 2,
-            page: 9,
           ),
         );
         ```
@@ -67,7 +68,7 @@ FPagination(
         ```dart {4} copy
         FPagination(
           controller: FPaginationController(
-            length: 8,
+            pages: 8,
             showEdges: false,
           ),
         );
@@ -84,8 +85,8 @@ FPagination(
         ```dart copy
         FPagination(
           controller: FPaginationController(
-            length: 10,
-            page: 4,
+            pages: 10,
+            initialPage: 4,
           ),
           next: Padding(
             padding: style.itemPadding,
@@ -126,7 +127,7 @@ FPagination(
         <Widget name='pagination' variant='with-page-view' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {9} {24} {34} opy
+        ```dart {11,12,13,14} {73} copy
         class PageViewExample extends StatefulWidget {
           const PageViewExample({super.key});
 
@@ -192,7 +193,10 @@ FPagination(
                       itemBuilder:(context, index) => ColoredBox(
                         color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
                         child: Center(
-                          child: Text('Page ${index + 1}', style: TextStyle(fontSize: 45, color: style.primaryForeground)),
+                          child: DefaultTextStyle(
+                            style: TextStyle(fontSize: 45, color: style.primaryForeground),
+                            child: Text('Page ${index + 1}'),
+                          ),
                         ),
                       ),
                     ),

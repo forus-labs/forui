@@ -153,13 +153,16 @@ class _PaginationWithViewPageState extends State<PaginationWithViewPage> with Si
                   (context, index) => ColoredBox(
                     color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
                     child: Center(
-                      child: Text('Page ${index + 1}', style: TextStyle(fontSize: 45, color: style.primaryForeground)),
+                      child: DefaultTextStyle(
+                        style: TextStyle(fontSize: 45, color: style.primaryForeground),
+                        child: Text('Page ${index + 1}'),
+                      ),
                     ),
                   ),
             ),
           ),
         ),
-        SizedBox(height: 200, child: FPagination(controller: paginationController)),
+        FPagination(controller: paginationController),
       ],
     );
   }
