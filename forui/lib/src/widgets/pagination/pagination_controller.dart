@@ -55,11 +55,20 @@ class FPaginationController extends FChangeNotifier {
        _page = initialPage,
        _pages = pages;
 
-  /// Returns the total number of pages in the pagination.
+  /// The total number of pages in the pagination.
   int get pages => _pages;
 
-  /// Returns the current page index.
+  /// The current page index.
   int get page => _page;
+
+  set page(int index) {
+    if (index >= pages || index < 0) {
+      throw StateError('The index must be within the allowed range.');
+    }
+    _page = index;
+    onPageChanged?.call();
+    notifyListeners();
+  }
 
   /// Moves to the previous page if the current page is greater than 1.
   void previous() {
@@ -76,17 +85,6 @@ class FPaginationController extends FChangeNotifier {
       _page = _page + 1;
       onPageChanged?.call();
       notifyListeners();
-    }
-  }
-
-  /// Sets the current page index.
-  set page(int index) {
-    if (0 <= index && index <= pages) {
-      _page = index;
-      onPageChanged?.call();
-      notifyListeners();
-    } else {
-      throw StateError('The index must be within the allowed range.');
     }
   }
 

@@ -62,7 +62,7 @@ FPagination(
 ### Show Edges
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='pagination' variant='hide-first-last' height={400}/>
+        <Widget name='pagination' variant='show-edges' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {4} copy
@@ -127,7 +127,7 @@ FPagination(
         <Widget name='pagination' variant='with-page-view' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {11,12,13,14} {73} copy
+        ```dart {11-14} {73} copy
         class PageViewExample extends StatefulWidget {
           const PageViewExample({super.key});
 

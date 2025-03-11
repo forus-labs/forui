@@ -6,17 +6,17 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 
-/// A pagination enables the user to select a specific page from a range of pages.
+/// A pagination allows the user to select a specific page from a range of pages.
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/pagination for working examples.
-/// * [FPaginationController] for customizing the pagination component's behavior.
-/// * [FPaginationStyle] for customizing the pagination component's appearance.
+/// * [FPaginationController] for customizing the pagination's behavior.
+/// * [FPaginationStyle] for customizing the pagination's appearance.
 final class FPagination extends StatefulWidget {
-  /// The pagination's style. Defaults to the appropriate style in [FThemeData.paginationStyle].
+  /// The pagination's style.
   final FPaginationStyle? style;
 
-  /// The controller. Defaults to [FPaginationController.new].
+  /// The controller.
   final FPaginationController controller;
 
   /// The previous button placed at the beginning of the pagination.
@@ -151,10 +151,7 @@ class Action extends StatelessWidget {
       onPress: onPress,
       builder:
           (context, tappableData, child) => DecoratedBox(
-            decoration: switch (tappableData.hovered) {
-              (false) => style.unselected.decoration,
-              (true) => style.unselected.hoveredDecoration,
-            },
+            decoration: tappableData.hovered ? style.unselected.hoveredDecoration : style.unselected.decoration,
             child: ConstrainedBox(
               constraints: style.contentConstraints,
               child: DefaultTextStyle(style: style.unselected.textStyle, child: Center(child: child!)),
@@ -179,7 +176,6 @@ class _Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FPaginationItemData(:page, :controller, :style) = FPaginationItemData.of(context);
-
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
     return Padding(
@@ -193,8 +189,8 @@ class _Page extends StatelessWidget {
             focusedOutlineStyle: focusedOutlineStyle,
             onPress: () => controller.page = page,
             builder:
-                (context, tappableData, _) => DecoratedBox(
-                  decoration: switch ((selected, tappableData.hovered)) {
+                (context, data, _) => DecoratedBox(
+                  decoration: switch ((selected, data.hovered)) {
                     (false, false) => style.unselected.decoration,
                     (false, true) => style.unselected.hoveredDecoration,
                     (true, true) => style.selected.hoveredDecoration,
