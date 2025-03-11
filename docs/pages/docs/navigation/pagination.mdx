@@ -138,10 +138,7 @@ FPagination(
         class _PageViewExampleState extends State<PageViewExample>{
           int pages = 10;
           PageController controller = PageController();
-          FPaginationController paginationController = FPaginationController(
-            pages: pages,
-            onPageChanged: _handlePageChanged,
-          );
+          FPaginationController paginationController = FPaginationController(pages: pages);
 
           @override
           void didChangeDependencies() {
@@ -150,7 +147,7 @@ FPagination(
             paginationController.page = value;
           }
 
-          void _handlePageChanged() {
+          void _handlePageChange() {
             if (!controller.hasClients) {
               return;
             }
@@ -203,7 +200,7 @@ FPagination(
                   ),
                 ),
               ),
-              FPagination(controller: paginationController),
+              FPagination(controller: paginationController, onPageChange: _handlePageChange,),
             ],
           );
 

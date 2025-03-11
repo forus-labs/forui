@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -8,11 +6,8 @@ import 'package:forui/forui.dart';
 class FPaginationController extends FChangeNotifier {
   /// The number of sibling pages displayed beside the current page number. Defaults to 1.
   ///
-  /// This value determines how many pages are shown on either side of the
-  /// currently selected page in the pagination.
-  ///
-  /// For example, if `siblings` is 2 and the current page is 5,
-  /// the displayed pages would be 3, 4, 5, 6, and 7.
+  /// This value determines how many pages are shown on either side of the currently selected page in the pagination.
+  /// For example, if `siblings` is 2 and the current page is 5, the displayed pages would be 3, 4, 5, 6, and 7.
   ///
   /// # Contract:
   /// * Throws [AssertionError] if [siblings] < 0.
@@ -23,15 +18,6 @@ class FPaginationController extends FChangeNotifier {
   /// If `true`, the pagination will always display the first and last page, regardless of the current page.
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
   final bool showEdges;
-
-  /// A callback that is triggered whenever the current page changes.
-  ///
-  /// This callback is invoked whenever the `page` property of the `FPaginationController`
-  /// is updated, either programmatically or through user interaction.
-  ///
-  /// This can be useful for performing actions in response to page changes,
-  /// such as updating other parts of the UI or triggering analytics events.
-  final VoidCallback? onPageChanged;
 
   final int _pages;
   int _page;
@@ -45,7 +31,6 @@ class FPaginationController extends FChangeNotifier {
     int initialPage = 0,
     this.showEdges = true,
     this.siblings = 1,
-    this.onPageChanged,
   }) : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
        assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
        assert(
@@ -66,7 +51,6 @@ class FPaginationController extends FChangeNotifier {
       throw StateError('The index must be within the allowed range.');
     }
     _page = index;
-    onPageChanged?.call();
     notifyListeners();
   }
 
@@ -74,7 +58,6 @@ class FPaginationController extends FChangeNotifier {
   void previous() {
     if (0 < _page) {
       _page = _page - 1;
-      onPageChanged?.call();
       notifyListeners();
     }
   }
@@ -83,7 +66,6 @@ class FPaginationController extends FChangeNotifier {
   void next() {
     if (_page < pages - 1) {
       _page = _page + 1;
-      onPageChanged?.call();
       notifyListeners();
     }
   }

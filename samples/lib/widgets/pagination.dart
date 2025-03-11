@@ -77,10 +77,7 @@ class PaginationWithViewPage extends StatefulSample {
 class _PaginationWithViewPageState extends State<PaginationWithViewPage> with SingleTickerProviderStateMixin {
   int pages = 10;
   late PageController controller = PageController();
-  late FPaginationController paginationController = FPaginationController(
-    pages: pages,
-    onPageChanged: _handlePageChanged,
-  );
+  late FPaginationController paginationController = FPaginationController(pages: pages);
 
   @override
   void didChangeDependencies() {
@@ -89,7 +86,7 @@ class _PaginationWithViewPageState extends State<PaginationWithViewPage> with Si
     paginationController.page = value;
   }
 
-  void _handlePageChanged() {
+  void _handlePageChange() {
     if (!controller.hasClients) {
       return;
     }
@@ -145,7 +142,7 @@ class _PaginationWithViewPageState extends State<PaginationWithViewPage> with Si
             ),
           ),
         ),
-        FPagination(controller: paginationController),
+        FPagination(controller: paginationController, onPageChange: _handlePageChange),
       ],
     );
   }

@@ -10,7 +10,6 @@ FPaginationController useFPaginationController({
   int initialPage = 0,
   bool showEdges = true,
   int siblings = 1,
-  VoidCallback? onPageChanged,
   List<Object?>? keys,
 }) => use(
   _PaginationControllerHook(
@@ -18,7 +17,6 @@ FPaginationController useFPaginationController({
     initialPage: initialPage,
     siblings: siblings,
     showEdges: showEdges,
-    onPageChanged: onPageChanged,
     debugLabel: 'useFPaginationController',
     keys: keys,
   ),
@@ -29,7 +27,6 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
   final int initialPage;
   final int siblings;
   final bool showEdges;
-  final VoidCallback? onPageChanged;
   final String _debugLabel;
 
   const _PaginationControllerHook({
@@ -37,8 +34,6 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
     required this.initialPage,
     required this.siblings,
     required this.showEdges,
-    required this.onPageChanged,
-
     required String debugLabel,
     super.keys,
   }) : _debugLabel = debugLabel;
@@ -53,8 +48,7 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
       ..add(IntProperty('pages', pages))
       ..add(IntProperty('initialPage', initialPage))
       ..add(IntProperty('siblings', siblings))
-      ..add(FlagProperty('showEdges', value: showEdges, ifTrue: 'showEdges'))
-      ..add(ObjectFlagProperty.has('onPageChanged', onPageChanged));
+      ..add(FlagProperty('showEdges', value: showEdges, ifTrue: 'showEdges'));
   }
 }
 
@@ -64,7 +58,6 @@ class _PaginationControllerHookState extends HookState<FPaginationController, _P
     initialPage: hook.initialPage,
     siblings: hook.siblings,
     showEdges: hook.showEdges,
-    onPageChanged: hook.onPageChanged,
   );
 
   @override

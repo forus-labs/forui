@@ -29,8 +29,14 @@ final class FPagination extends StatefulWidget {
   /// Defaults to an `FAssets.icons.chevronRight` icon.
   final Widget? next;
 
+  /// A callback triggered when the current page changes.
+  ///
+  /// Invoked when the `page` property of the [FPaginationController] is updated.
+  /// Useful for actions like updating the UI or triggering analytics events.
+  final VoidCallback? onPageChange;
+
   /// Creates an [FPagination].
-  const FPagination({required this.controller, this.style, this.previous, this.next, super.key});
+  const FPagination({required this.controller, this.style, this.previous, this.next, this.onPageChange, super.key});
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -40,7 +46,8 @@ final class FPagination extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller));
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(ObjectFlagProperty.has('onPageChange', onPageChange));
   }
 }
 
@@ -49,8 +56,24 @@ class _FPaginationState extends State<FPagination> {
   Widget build(BuildContext context) {
     final controller = widget.controller;
     final style = widget.style ?? context.theme.paginationStyle;
-    final previous = widget.previous ?? Action.previous(style: style, onPress: controller.previous);
-    final next = widget.next ?? Action.next(style: style, onPress: controller.next);
+    final previous =
+        widget.previous ??
+        Action.previous(
+          style: style,
+          onPress: () {
+            controller.previous();
+            widget.onPageChange?.call();
+          },
+        );
+    final next =
+        widget.next ??
+        Action.next(
+          style: style,
+          onPress: () {
+            controller.next();
+            widget.onPageChange?.call();
+          },
+        );
     final lastPage = controller.pages - 1;
 
     final elipsis = Padding(
@@ -75,15 +98,20 @@ class _FPaginationState extends State<FPagination> {
             previous,
             if (controller.page > controller.minPagesDisplayedAtEdges) ...[
               if (controller.showEdges)
-                FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
+                FPaginationItemData(page: 0, style: style, controller: controller, child: _Page(widget.onPageChange)),
               elipsis,
             ],
             for (int i = start; i <= end; i++)
-              FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
+              FPaginationItemData(page: i, style: style, controller: controller, child: _Page(widget.onPageChange)),
             if (controller.page < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
               elipsis,
               if (controller.showEdges)
-                FPaginationItemData(page: lastPage, style: style, controller: controller, child: const _Page()),
+                FPaginationItemData(
+                  page: lastPage,
+                  style: style,
+                  controller: controller,
+                  child: _Page(widget.onPageChange),
+                ),
             ],
             next,
           ],
@@ -133,20 +161,30 @@ class Action extends StatelessWidget {
   final VoidCallback onPress;
   final FPaginationStyle style;
   final Widget child;
+  final String semanticLabel;
 
-  const Action({required this.onPress, required this.style, required this.child, super.key});
+  const Action({
+    required this.onPress,
+    required this.style,
+    required this.child,
+    required this.semanticLabel,
+    super.key,
+  });
 
   Action.previous({required this.style, required this.onPress, super.key})
-    : child = FIcon(FAssets.icons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size);
+    : child = FIcon(FAssets.icons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size),
+      semanticLabel = 'Previous';
 
   Action.next({required this.onPress, required this.style, super.key})
-    : child = FIcon(FAssets.icons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size);
+    : child = FIcon(FAssets.icons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size),
+      semanticLabel = 'Next';
 
   @override
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
     child: FTappable(
-      semanticLabel: 'Pagination action',
+      //TODO: Add localization support for semantic labels.
+      semanticLabel: semanticLabel,
       focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
       onPress: onPress,
       builder:
@@ -166,12 +204,15 @@ class Action extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('onPress', onPress));
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(StringProperty('semanticLabel', semanticLabel));
   }
 }
 
 class _Page extends StatelessWidget {
-  const _Page();
+  final VoidCallback? onPageChange;
+
+  const _Page(this.onPageChange);
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +228,10 @@ class _Page extends StatelessWidget {
 
           return FTappable(
             focusedOutlineStyle: focusedOutlineStyle,
-            onPress: () => controller.page = page,
+            onPress: () {
+              controller.page = page;
+              onPageChange?.call();
+            },
             builder:
                 (context, data, _) => DecoratedBox(
                   decoration: switch ((selected, data.hovered)) {
@@ -208,5 +252,11 @@ class _Page extends StatelessWidget {
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty.has('onPageChange', onPageChange));
   }
 }

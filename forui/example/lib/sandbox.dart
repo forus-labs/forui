@@ -13,8 +13,7 @@ class _SandboxState extends State<Sandbox> {
   int pages = 10;
   PageController controller = PageController();
   late FPaginationController paginationController = FPaginationController(
-    pages: pages,
-    onPageChanged: _handlePageChanged,
+    pages: pages
   );
 
   @override
@@ -69,7 +68,7 @@ class _SandboxState extends State<Sandbox> {
           ),
         ),
       ),
-      SizedBox(height: 200, child: FPagination(controller: paginationController)),
+      SizedBox(height: 200, child: FPagination(controller: paginationController, onPageChange: _handlePageChanged)),
     ],
   );
 
