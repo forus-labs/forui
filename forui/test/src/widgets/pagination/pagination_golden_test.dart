@@ -33,7 +33,7 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/default.png'));
       });
 
-      testWidgets('showEdges = false', (tester) async {
+      testWidgets('hide edges', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -47,7 +47,7 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/hide-edges.png'));
       });
 
-      testWidgets('siblings = 0', (tester) async {
+      testWidgets('no siblings, (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -60,7 +60,7 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/siblings-zero.png'));
       });
 
-      testWidgets('siblings = 2', (tester) async {
+      testWidgets('2 siblings', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
