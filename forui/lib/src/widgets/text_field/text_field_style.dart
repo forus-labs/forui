@@ -72,7 +72,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
     required this.errorStyle,
     this.cursorColor = CupertinoColors.activeBlue,
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-    this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 2),
+    this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 4),
     this.scrollPadding = const EdgeInsets.all(20),
   });
 
@@ -85,7 +85,11 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
           colorScheme: colorScheme,
           typography: typography,
           style: style,
-        ).ghost.transform((ghost) => ghost.copyWith(iconContentStyle: ghost.iconContentStyle.copyWith(size: 17))),
+        ).ghost.transform(
+          (ghost) => ghost.copyWith(
+            iconContentStyle: ghost.iconContentStyle.copyWith(enabledColor: colorScheme.mutedForeground, size: 17),
+          ),
+        ),
         enabledStyle: FTextFieldStateStyle.inherit(
           contentColor: colorScheme.primary,
           hintColor: colorScheme.mutedForeground,

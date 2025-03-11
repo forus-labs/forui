@@ -72,39 +72,6 @@ FTextField(
 
 ## Examples
 
-### Clearable
-
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name='text-field' variant='clearable' query={{}}/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart {18} copy
-    class ClearableTextField extends StatefulWidget {
-      @override
-      State<ClearableTextField> createState() => ClearableTextFieldState();
-    }
-
-    class ClearableTextFieldState extends State<ClearableTextField> {
-      late final TextEditingController _controller = TextEditingController(text: 'MyUsername');
-
-      @override
-      Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: FTextField(
-          controller: _controller,
-          label: const Text('Username'),
-          hint: 'JaneDoe',
-          description: const Text('Please enter your username.'),
-          maxLines: 1,
-          clearable: (value) => value.text.isNotEmpty,
-        ),
-      );
-    }
-    ```
-  </Tabs.Tab>
-</Tabs>
-
 ### States
 
 #### Enabled
@@ -142,6 +109,39 @@ FTextField(
       description: const Text('Please enter your username.'),
       maxLines: 1,
     );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Clearable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='clearable' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18} copy
+    class ClearableTextField extends StatefulWidget {
+      @override
+      State<ClearableTextField> createState() => ClearableTextFieldState();
+    }
+
+    class ClearableTextFieldState extends State<ClearableTextField> {
+      late final TextEditingController _controller = TextEditingController(text: 'MyUsername');
+
+      @override
+      Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: FTextField(
+          controller: _controller,
+          label: const Text('Username'),
+          hint: 'JaneDoe',
+          description: const Text('Please enter your username.'),
+          maxLines: 1,
+          clearable: (value) => value.text.isNotEmpty,
+        ),
+      );
+    }
     ```
   </Tabs.Tab>
 </Tabs>
