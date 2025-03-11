@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vaqtni tanlang",
   "timeFieldInvalidDateError": "Yaroqsiz vaqt.",
-  "textFieldClearButtonSemanticLabel": "Tozalash"
+  "textFieldClearButtonSemanticLabel": "Tozalash",
+  "selectHint": "Element tanlang",
+  "selectSearchHint": "Qidirish"
 }

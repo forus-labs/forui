@@ -57,6 +57,12 @@ class FLocalizationsAr extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'حدد عنصرا';
+
+  @override
+  String get selectSearchHint => 'بحث';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'مسح';
 
   @override

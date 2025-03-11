@@ -57,6 +57,12 @@ class FLocalizationsFa extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'یک مورد را انتخاب کنید';
+
+  @override
+  String get selectSearchHint => 'جستجو';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'پاک کردن';
 
   @override

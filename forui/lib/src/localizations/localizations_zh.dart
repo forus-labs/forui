@@ -57,6 +57,12 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
+  String get selectHint => '选择项目';
+
+  @override
+  String get selectSearchHint => '搜索';
+
+  @override
   String get textFieldClearButtonSemanticLabel => '清除';
 
   @override
@@ -106,6 +112,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   FLocalizationsZhHk() : super('zh_HK');
 
   @override
+  String get selectHint => '選擇項目';
+
+  @override
+  String get selectSearchHint => '搜尋';
+
+  @override
   String get textFieldClearButtonSemanticLabel => '清除';
 
   @override
@@ -153,6 +165,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
 class FLocalizationsZhTw extends FLocalizationsZh {
   FLocalizationsZhTw() : super('zh_TW');
+
+  @override
+  String get selectHint => '選擇項目';
+
+  @override
+  String get selectSearchHint => '搜尋';
 
   @override
   String get textFieldClearButtonSemanticLabel => '清除';

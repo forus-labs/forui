@@ -57,6 +57,12 @@ class FLocalizationsSq extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Zgjidhni një artikull';
+
+  @override
+  String get selectSearchHint => 'Kërko';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Pastro';
 
   @override

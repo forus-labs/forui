@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Επιλέξτε μια ώρα",
   "timeFieldInvalidDateError": "Μη έγκυρη ώρα.",
-  "textFieldClearButtonSemanticLabel": "Εκκαθάριση"
+  "textFieldClearButtonSemanticLabel": "Εκκαθάριση",
+  "selectHint": "Επιλέξτε ένα στοιχείο",
+  "selectSearchHint": "Αναζήτηση"
 }

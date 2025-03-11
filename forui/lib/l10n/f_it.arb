@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Scegli un orario",
   "timeFieldInvalidDateError": "Orario non valido.",
-  "textFieldClearButtonSemanticLabel": "Cancella"
+  "textFieldClearButtonSemanticLabel": "Cancella",
+  "selectHint": "Seleziona un elemento",
+  "selectSearchHint": "Cerca"
 }

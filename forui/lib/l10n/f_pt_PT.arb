@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Selecione uma hora",
   "timeFieldInvalidDateError": "Hora inválida.",
-  "textFieldClearButtonSemanticLabel": "Limpar"
+  "textFieldClearButtonSemanticLabel": "Limpar",
+  "selectHint": "Selecione um item",
+  "selectSearchHint": "Pesquisar"
 }

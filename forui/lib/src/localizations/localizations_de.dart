@@ -57,6 +57,12 @@ class FLocalizationsDe extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Wählen Sie ein Element';
+
+  @override
+  String get selectSearchHint => 'Suchen';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Löschen';
 
   @override
@@ -104,6 +110,12 @@ class FLocalizationsDe extends FLocalizations {
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
   FLocalizationsDeCh() : super('de_CH');
+
+  @override
+  String get selectHint => 'Wählen Sie ein Element';
+
+  @override
+  String get selectSearchHint => 'Suchen';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Löschen';

@@ -57,6 +57,12 @@ class FLocalizationsEl extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Επιλέξτε ένα στοιχείο';
+
+  @override
+  String get selectSearchHint => 'Αναζήτηση';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Εκκαθάριση';
 
   @override

@@ -57,6 +57,12 @@ class FLocalizationsFr extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Sélectionnez un élément';
+
+  @override
+  String get selectSearchHint => 'Rechercher';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Effacer';
 
   @override
@@ -104,6 +110,12 @@ class FLocalizationsFr extends FLocalizations {
 /// The translations for French, as used in Canada (`fr_CA`).
 class FLocalizationsFrCa extends FLocalizationsFr {
   FLocalizationsFrCa() : super('fr_CA');
+
+  @override
+  String get selectHint => 'Sélectionnez un élément';
+
+  @override
+  String get selectSearchHint => 'Rechercher';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Effacer';

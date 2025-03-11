@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "وقت منتخب کریں",
   "timeFieldInvalidDateError": "غلط وقت۔",
-  "textFieldClearButtonSemanticLabel": "صاف کریں"
+  "textFieldClearButtonSemanticLabel": "صاف کریں",
+  "selectHint": "آئٹم منتخب کریں",
+  "selectSearchHint": "تلاش کریں"
 }

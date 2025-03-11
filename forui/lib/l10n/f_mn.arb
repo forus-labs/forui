@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Цаг сонгох",
   "timeFieldInvalidDateError": "Буруу цаг.",
-  "textFieldClearButtonSemanticLabel": "Арилгах"
+  "textFieldClearButtonSemanticLabel": "Арилгах",
+  "selectHint": "Зүйл сонгох",
+  "selectSearchHint": "Хайх"
 }

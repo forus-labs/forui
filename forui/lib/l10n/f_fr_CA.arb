@@ -12,5 +12,7 @@
   "timeFieldSuffix": "",
   "timeFieldHint": "Choisir une heure",
   "timeFieldInvalidDateError": "Heure invalide.",
-  "textFieldClearButtonSemanticLabel": "Effacer"
+  "textFieldClearButtonSemanticLabel": "Effacer",
+  "selectHint": "Sélectionnez un élément",
+  "selectSearchHint": "Rechercher"
 }

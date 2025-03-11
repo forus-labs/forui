@@ -57,6 +57,12 @@ class FLocalizationsNo extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Velg et element';
+
+  @override
+  String get selectSearchHint => 'Søk';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Tøm';
 
   @override

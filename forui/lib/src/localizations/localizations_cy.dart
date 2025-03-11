@@ -57,6 +57,12 @@ class FLocalizationsCy extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Dewiswch eitem';
+
+  @override
+  String get selectSearchHint => 'Chwilio';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clirio';
 
   @override

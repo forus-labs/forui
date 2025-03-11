@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "시간 선택",
   "timeFieldInvalidDateError": "잘못된 시간입니다.",
-  "textFieldClearButtonSemanticLabel": "지우기"
+  "textFieldClearButtonSemanticLabel": "지우기",
+  "selectHint": "항목 선택",
+  "selectSearchHint": "검색"
 }

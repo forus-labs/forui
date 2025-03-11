@@ -57,6 +57,12 @@ class FLocalizationsMk extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Изберете ставка';
+
+  @override
+  String get selectSearchHint => 'Пребарување';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Избриши';
 
   @override

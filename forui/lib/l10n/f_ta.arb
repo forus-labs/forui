@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "நேரத்தைத் தேர்ந்தெடுக்கவும்",
   "timeFieldInvalidDateError": "தவறான நேரம்.",
-  "textFieldClearButtonSemanticLabel": "அழி"
+  "textFieldClearButtonSemanticLabel": "அழி",
+  "selectHint": "ஒரு பொருளைத் தேர்ந்தெடுக்கவும்",
+  "selectSearchHint": "தேடு"
 }

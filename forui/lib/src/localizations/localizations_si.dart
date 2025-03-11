@@ -57,6 +57,12 @@ class FLocalizationsSi extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'අයිතමයක් තෝරන්න';
+
+  @override
+  String get selectSearchHint => 'සොයන්න';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'හිස් කරන්න';
 
   @override

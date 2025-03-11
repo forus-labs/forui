@@ -57,6 +57,12 @@ class FLocalizationsPa extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'ਇੱਕ ਆਈਟਮ ਚੁਣੋ';
+
+  @override
+  String get selectSearchHint => 'ਖੋਜ';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ਕਲੀਅਰ ਕਰੋ';
 
   @override

@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "সময় বাছনি কৰক",
   "timeFieldInvalidDateError": "অমান্য সময়।",
-  "textFieldClearButtonSemanticLabel": "মচক"
+  "textFieldClearButtonSemanticLabel": "মচক",
+  "selectHint": "এটা বস্তু বাছনি কৰক",
+  "selectSearchHint": "সন্ধান কৰক"
 }

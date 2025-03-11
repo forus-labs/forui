@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "वेळ निवडा",
   "timeFieldInvalidDateError": "अवैध वेळ.",
-  "textFieldClearButtonSemanticLabel": "साफ करा"
+  "textFieldClearButtonSemanticLabel": "साफ करा",
+  "selectHint": "आयटम निवडा",
+  "selectSearchHint": "शोधा"
 }

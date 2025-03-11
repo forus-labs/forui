@@ -57,6 +57,12 @@ class FLocalizationsHy extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Ընտրեք տարր';
+
+  @override
+  String get selectSearchHint => 'Որոնել';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Մաքրել';
 
   @override

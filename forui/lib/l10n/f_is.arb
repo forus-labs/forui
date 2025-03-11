@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Veldu tíma",
   "timeFieldInvalidDateError": "Ógildur tími.",
-  "textFieldClearButtonSemanticLabel": "Hreinsa"
+  "textFieldClearButtonSemanticLabel": "Hreinsa",
+  "selectHint": "Veldu atriði",
+  "selectSearchHint": "Leita"
 }

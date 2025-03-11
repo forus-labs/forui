@@ -57,6 +57,12 @@ class FLocalizationsKy extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Элементти тандаңыз';
+
+  @override
+  String get selectSearchHint => 'Издөө';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Тазалоо';
 
   @override

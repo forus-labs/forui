@@ -57,6 +57,12 @@ class FLocalizationsTe extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'ఒక అంశాన్ని ఎంచుకోండి';
+
+  @override
+  String get selectSearchHint => 'శోధించు';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'క్లియర్ చేయి';
 
   @override

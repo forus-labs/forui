@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Pilih masa",
   "timeFieldInvalidDateError": "Masa tidak sah.",
-  "textFieldClearButtonSemanticLabel": "Kosongkan"
+  "textFieldClearButtonSemanticLabel": "Kosongkan",
+  "selectHint": "Pilih item",
+  "selectSearchHint": "Cari"
 }

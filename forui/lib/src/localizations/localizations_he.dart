@@ -57,6 +57,12 @@ class FLocalizationsHe extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'בחר פריט';
+
+  @override
+  String get selectSearchHint => 'חיפוש';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ניקוי';
 
   @override

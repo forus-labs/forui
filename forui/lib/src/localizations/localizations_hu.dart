@@ -57,6 +57,12 @@ class FLocalizationsHu extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Válasszon egy elemet';
+
+  @override
+  String get selectSearchHint => 'Keresés';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Törlés';
 
   @override

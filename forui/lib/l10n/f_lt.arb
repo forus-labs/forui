@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Pasirinkite laiką",
   "timeFieldInvalidDateError": "Neteisingas laikas.",
-  "textFieldClearButtonSemanticLabel": "Išvalyti"
+  "textFieldClearButtonSemanticLabel": "Išvalyti",
+  "selectHint": "Pasirinkite elementą",
+  "selectSearchHint": "Ieškoti"
 }

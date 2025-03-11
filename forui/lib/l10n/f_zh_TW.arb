@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "選擇時間",
   "timeFieldInvalidDateError": "無效的時間。",
-  "textFieldClearButtonSemanticLabel": "清除"
+  "textFieldClearButtonSemanticLabel": "清除",
+  "selectHint": "選擇項目",
+  "selectSearchHint": "搜尋"
 }

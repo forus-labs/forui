@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "اختر وقتًا",
   "timeFieldInvalidDateError": "وقت غير صالح.",
-  "textFieldClearButtonSemanticLabel": "مسح"
+  "textFieldClearButtonSemanticLabel": "مسح",
+  "selectHint": "حدد عنصرا",
+  "selectSearchHint": "بحث"
 }

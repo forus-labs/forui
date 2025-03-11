@@ -77,6 +77,12 @@ class FDefaultLocalizations extends FLocalizations {
   String shortDate(DateTime date) => DateFormat.yMd().format(date);
 
   @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
 
   @override

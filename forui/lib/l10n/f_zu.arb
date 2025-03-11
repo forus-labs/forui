@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Khetha isikhathi",
   "timeFieldInvalidDateError": "Isikhathi esingalungile.",
-  "textFieldClearButtonSemanticLabel": "Sula"
+  "textFieldClearButtonSemanticLabel": "Sula",
+  "selectHint": "Khetha into",
+  "selectSearchHint": "Sesha"
 }

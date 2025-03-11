@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "အချိန်ရွေးပါ",
   "timeFieldInvalidDateError": "အချိန်မမှန်ပါ။",
-  "textFieldClearButtonSemanticLabel": "ရှင်းရန်"
+  "textFieldClearButtonSemanticLabel": "ရှင်းရန်",
+  "selectHint": "ပစ္စည်းတစ်ခုရွေးပါ",
+  "selectSearchHint": "ရှာဖွေရန်"
 }

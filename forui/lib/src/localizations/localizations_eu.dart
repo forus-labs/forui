@@ -57,6 +57,12 @@ class FLocalizationsEu extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Hautatu elementu bat';
+
+  @override
+  String get selectSearchHint => 'Bilatu';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Garbitu';
 
   @override

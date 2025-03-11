@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Dewiswch amser",
   "timeFieldInvalidDateError": "Amser annilys.",
-  "textFieldClearButtonSemanticLabel": "Clirio"
+  "textFieldClearButtonSemanticLabel": "Clirio",
+  "selectHint": "Dewiswch eitem",
+  "selectSearchHint": "Chwilio"
 }

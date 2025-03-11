@@ -57,6 +57,12 @@ class FLocalizationsUz extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Element tanlang';
+
+  @override
+  String get selectSearchHint => 'Qidirish';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Tozalash';
 
   @override

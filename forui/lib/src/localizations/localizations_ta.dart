@@ -57,6 +57,12 @@ class FLocalizationsTa extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get selectSearchHint => 'தேடு';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'அழி';
 
   @override

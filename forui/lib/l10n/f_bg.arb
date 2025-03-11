@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Изберете време",
   "timeFieldInvalidDateError": "Невалидно време.",
-  "textFieldClearButtonSemanticLabel": "Изчистване"
+  "textFieldClearButtonSemanticLabel": "Изчистване",
+  "selectHint": "Изберете елемент",
+  "selectSearchHint": "Търсене"
 }

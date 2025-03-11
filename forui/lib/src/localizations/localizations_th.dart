@@ -57,6 +57,12 @@ class FLocalizationsTh extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'เลือกรายการ';
+
+  @override
+  String get selectSearchHint => 'ค้นหา';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ล้าง';
 
   @override

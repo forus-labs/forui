@@ -57,6 +57,12 @@ class FLocalizationsMr extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'आयटम निवडा';
+
+  @override
+  String get selectSearchHint => 'शोधा';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'साफ करा';
 
   @override

@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vali aeg",
   "timeFieldInvalidDateError": "Vigane aeg.",
-  "textFieldClearButtonSemanticLabel": "Kustuta"
+  "textFieldClearButtonSemanticLabel": "Kustuta",
+  "selectHint": "Valige üksus",
+  "selectSearchHint": "Otsi"
 }

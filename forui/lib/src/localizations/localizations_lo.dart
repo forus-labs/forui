@@ -57,6 +57,12 @@ class FLocalizationsLo extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'ເລືອກລາຍການ';
+
+  @override
+  String get selectSearchHint => 'ຊອກຫາ';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ລຶບ';
 
   @override

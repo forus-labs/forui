@@ -319,6 +319,18 @@ abstract class FLocalizations {
   /// **'{date}'**
   String shortDate(DateTime date);
 
+  /// The hint text for the select field.
+  ///
+  /// In en, this message translates to:
+  /// **'Select an item'**
+  String get selectHint;
+
+  /// The hint text for the search field in a select field.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get selectSearchHint;
+
   /// The semantic label for the clear button in a text field.
   ///
   /// In en, this message translates to:

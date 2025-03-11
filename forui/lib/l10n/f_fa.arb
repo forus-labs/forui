@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "یک زمان انتخاب کنید",
   "timeFieldInvalidDateError": "زمان نامعتبر است.",
-  "textFieldClearButtonSemanticLabel": "پاک کردن"
+  "textFieldClearButtonSemanticLabel": "پاک کردن",
+  "selectHint": "یک مورد را انتخاب کنید",
+  "selectSearchHint": "جستجو"
 }

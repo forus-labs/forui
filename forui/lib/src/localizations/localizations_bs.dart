@@ -57,6 +57,12 @@ class FLocalizationsBs extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Odaberite stavku';
+
+  @override
+  String get selectSearchHint => 'Pretraga';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Očisti';
 
   @override

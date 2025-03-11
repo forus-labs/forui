@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ഒരു സമയം തിരഞ്ഞെടുക്കുക",
   "timeFieldInvalidDateError": "അസാധുവായ സമയം.",
-  "textFieldClearButtonSemanticLabel": "മായ്‌ക്കുക"
+  "textFieldClearButtonSemanticLabel": "മായ്‌ക്കുക",
+  "selectHint": "ഒരു ഇനം തിരഞ്ഞെടുക്കുക",
+  "selectSearchHint": "തിരയുക"
 }

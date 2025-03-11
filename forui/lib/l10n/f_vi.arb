@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Chọn thời gian",
   "timeFieldInvalidDateError": "Thời gian không hợp lệ.",
-  "textFieldClearButtonSemanticLabel": "Xóa"
+  "textFieldClearButtonSemanticLabel": "Xóa",
+  "selectHint": "Chọn một mục",
+  "selectSearchHint": "Tìm kiếm"
 }

@@ -57,6 +57,12 @@ class FLocalizationsDa extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Vælg et element';
+
+  @override
+  String get selectSearchHint => 'Søg';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Ryd';
 
   @override

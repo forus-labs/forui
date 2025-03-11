@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ".",
   "timeFieldHint": "වේලාවක් තෝරන්න",
   "timeFieldInvalidDateError": "අවලංගු වේලාවකි.",
-  "textFieldClearButtonSemanticLabel": "හිස් කරන්න"
+  "textFieldClearButtonSemanticLabel": "හිස් කරන්න",
+  "selectHint": "අයිතමයක් තෝරන්න",
+  "selectSearchHint": "සොයන්න"
 }

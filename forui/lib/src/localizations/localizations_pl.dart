@@ -57,6 +57,12 @@ class FLocalizationsPl extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Wybierz element';
+
+  @override
+  String get selectSearchHint => 'Szukaj';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Wyczyść';
 
   @override

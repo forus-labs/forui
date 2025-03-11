@@ -57,6 +57,12 @@ class FLocalizationsMy extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'ပစ္စည်းတစ်ခုရွေးပါ';
+
+  @override
+  String get selectSearchHint => 'ရှာဖွေရန်';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ရှင်းရန်';
 
   @override

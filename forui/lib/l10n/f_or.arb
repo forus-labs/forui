@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ସମୟ ଚୟନ କରନ୍ତୁ",
   "timeFieldInvalidDateError": "ଅବୈଧ ସମୟ।",
-  "textFieldClearButtonSemanticLabel": "ସଫା କରନ୍ତୁ"
+  "textFieldClearButtonSemanticLabel": "ସଫା କରନ୍ତୁ",
+  "selectHint": "ଏକ ଆଇଟମ୍ ଚୟନ କରନ୍ତୁ",
+  "selectSearchHint": "ସନ୍ଧାନ କରନ୍ତୁ"
 }

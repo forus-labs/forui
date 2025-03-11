@@ -57,6 +57,12 @@ class FLocalizationsAz extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Element seçin';
+
+  @override
+  String get selectSearchHint => 'Axtarış';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Təmizlə';
 
   @override

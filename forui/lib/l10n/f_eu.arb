@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Aukeratu ordua",
   "timeFieldInvalidDateError": "Ordu baliogabea.",
-  "textFieldClearButtonSemanticLabel": "Garbitu"
+  "textFieldClearButtonSemanticLabel": "Garbitu",
+  "selectHint": "Hautatu elementu bat",
+  "selectSearchHint": "Bilatu"
 }

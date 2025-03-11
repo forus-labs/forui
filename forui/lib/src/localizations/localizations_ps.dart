@@ -57,6 +57,12 @@ class FLocalizationsPs extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'یو توکی وټاکئ';
+
+  @override
+  String get selectSearchHint => 'لټون';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'پاک کول';
 
   @override

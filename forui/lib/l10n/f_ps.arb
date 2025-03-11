@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "یو وخت وټاکئ",
   "timeFieldInvalidDateError": "ناسم وخت.",
-  "textFieldClearButtonSemanticLabel": "پاک کول"
+  "textFieldClearButtonSemanticLabel": "پاک کول",
+  "selectHint": "یو توکی وټاکئ",
+  "selectSearchHint": "لټون"
 }

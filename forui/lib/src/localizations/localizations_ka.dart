@@ -57,6 +57,12 @@ class FLocalizationsKa extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'აირჩიეთ ელემენტი';
+
+  @override
+  String get selectSearchHint => 'ძიება';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'გასუფთავება';
 
   @override

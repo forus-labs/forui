@@ -57,6 +57,12 @@ class FLocalizationsKo extends FLocalizations {
   }
 
   @override
+  String get selectHint => '항목 선택';
+
+  @override
+  String get selectSearchHint => '검색';
+
+  @override
   String get textFieldClearButtonSemanticLabel => '지우기';
 
   @override

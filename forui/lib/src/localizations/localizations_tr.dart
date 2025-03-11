@@ -57,6 +57,12 @@ class FLocalizationsTr extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Bir öğe seçin';
+
+  @override
+  String get selectSearchHint => 'Ara';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Temizle';
 
   @override

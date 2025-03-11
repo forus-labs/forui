@@ -57,6 +57,12 @@ class FLocalizationsUr extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'آئٹم منتخب کریں';
+
+  @override
+  String get selectSearchHint => 'تلاش کریں';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'صاف کریں';
 
   @override

@@ -57,6 +57,12 @@ class FLocalizationsRo extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Selectați un element';
+
+  @override
+  String get selectSearchHint => 'Căutare';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Ștergeți';
 
   @override

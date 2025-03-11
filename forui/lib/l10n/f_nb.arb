@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Velg et klokkeslett",
   "timeFieldInvalidDateError": "Ugyldig klokkeslett.",
-  "textFieldClearButtonSemanticLabel": "Tøm"
+  "textFieldClearButtonSemanticLabel": "Tøm",
+  "selectHint": "Velg et element",
+  "selectSearchHint": "Søk"
 }

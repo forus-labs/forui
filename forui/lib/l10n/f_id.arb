@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ".",
   "timeFieldHint": "Pilih waktu",
   "timeFieldInvalidDateError": "Waktu tidak valid.",
-  "textFieldClearButtonSemanticLabel": "Hapus"
+  "textFieldClearButtonSemanticLabel": "Hapus",
+  "selectHint": "Pilih item",
+  "selectSearchHint": "Cari"
 }

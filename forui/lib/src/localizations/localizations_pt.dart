@@ -57,6 +57,12 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Selecione um item';
+
+  @override
+  String get selectSearchHint => 'Pesquisar';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Limpar';
 
   @override
@@ -104,6 +110,12 @@ class FLocalizationsPt extends FLocalizations {
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
 class FLocalizationsPtPt extends FLocalizationsPt {
   FLocalizationsPtPt() : super('pt_PT');
+
+  @override
+  String get selectHint => 'Selecione um item';
+
+  @override
+  String get selectSearchHint => 'Pesquisar';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Limpar';

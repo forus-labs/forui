@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Выберите время",
   "timeFieldInvalidDateError": "Недействительное время.",
-  "textFieldClearButtonSemanticLabel": "Очистить"
+  "textFieldClearButtonSemanticLabel": "Очистить",
+  "selectHint": "Выберите элемент",
+  "selectSearchHint": "Поиск"
 }

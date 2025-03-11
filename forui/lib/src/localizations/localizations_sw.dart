@@ -57,6 +57,12 @@ class FLocalizationsSw extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Chagua kipengee';
+
+  @override
+  String get selectSearchHint => 'Tafuta';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Futa';
 
   @override

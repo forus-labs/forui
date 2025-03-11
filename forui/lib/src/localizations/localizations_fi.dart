@@ -57,6 +57,12 @@ class FLocalizationsFi extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Valitse kohde';
+
+  @override
+  String get selectSearchHint => 'Haku';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Tyhjennä';
 
   @override

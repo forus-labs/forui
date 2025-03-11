@@ -57,6 +57,12 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Изаберите ставку';
+
+  @override
+  String get selectSearchHint => 'Претрага';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Обриши';
 
   @override
@@ -104,6 +110,12 @@ class FLocalizationsSr extends FLocalizations {
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
 class FLocalizationsSrLatn extends FLocalizationsSr {
   FLocalizationsSrLatn() : super('sr_Latn');
+
+  @override
+  String get selectHint => 'Izaberite stavku';
+
+  @override
+  String get selectSearchHint => 'Pretraga';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Obriši';

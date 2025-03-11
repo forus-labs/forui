@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Kies een tijd",
   "timeFieldInvalidDateError": "Ongeldige tijd.",
-  "textFieldClearButtonSemanticLabel": "Wissen"
+  "textFieldClearButtonSemanticLabel": "Wissen",
+  "selectHint": "Selecteer een item",
+  "selectSearchHint": "Zoeken"
 }

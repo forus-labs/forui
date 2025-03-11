@@ -57,6 +57,12 @@ class FLocalizationsSk extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Vyberte položku';
+
+  @override
+  String get selectSearchHint => 'Hľadať';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Vymazať';
 
   @override

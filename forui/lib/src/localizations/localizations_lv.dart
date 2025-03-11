@@ -57,6 +57,12 @@ class FLocalizationsLv extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Atlasiet vienumu';
+
+  @override
+  String get selectSearchHint => 'Meklēt';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Notīrīt';
 
   @override

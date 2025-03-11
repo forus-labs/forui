@@ -57,6 +57,12 @@ class FLocalizationsNe extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'वस्तु चयन गर्नुहोस्';
+
+  @override
+  String get selectSearchHint => 'खोज्नुहोस्';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'खाली गर्नुहोस्';
 
   @override

@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Alegeți o oră",
   "timeFieldInvalidDateError": "Oră invalidă.",
-  "textFieldClearButtonSemanticLabel": "Ștergeți"
+  "textFieldClearButtonSemanticLabel": "Ștergeți",
+  "selectHint": "Selectați un element",
+  "selectSearchHint": "Căutare"
 }

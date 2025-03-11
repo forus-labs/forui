@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "સમય પસંદ કરો",
   "timeFieldInvalidDateError": "અમાન્ય સમય.",
-  "textFieldClearButtonSemanticLabel": "સાફ કરો"
+  "textFieldClearButtonSemanticLabel": "સાફ કરો",
+  "selectHint": "આઇટમ પસંદ કરો",
+  "selectSearchHint": "શોધો"
 }

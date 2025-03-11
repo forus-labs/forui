@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "একটি সময় বেছে নিন",
   "timeFieldInvalidDateError": "অবৈধ সময়।",
-  "textFieldClearButtonSemanticLabel": "মুছুন"
+  "textFieldClearButtonSemanticLabel": "মুছুন",
+  "selectHint": "একটি আইটেম নির্বাচন করুন",
+  "selectSearchHint": "অনুসন্ধান"
 }

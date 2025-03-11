@@ -57,6 +57,12 @@ class FLocalizationsMs extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Pilih item';
+
+  @override
+  String get selectSearchHint => 'Cari';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Kosongkan';
 
   @override

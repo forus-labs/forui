@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Ընտրեք ժամանակը",
   "timeFieldInvalidDateError": "Անվավեր ժամանակ:",
-  "textFieldClearButtonSemanticLabel": "Մաքրել"
+  "textFieldClearButtonSemanticLabel": "Մաքրել",
+  "selectHint": "Ընտրեք տարր",
+  "selectSearchHint": "Որոնել"
 }

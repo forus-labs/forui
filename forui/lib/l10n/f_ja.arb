@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "時間を選択",
   "timeFieldInvalidDateError": "無効な時間です。",
-  "textFieldClearButtonSemanticLabel": "クリア"
+  "textFieldClearButtonSemanticLabel": "クリア",
+  "selectHint": "アイテムを選択",
+  "selectSearchHint": "検索"
 }

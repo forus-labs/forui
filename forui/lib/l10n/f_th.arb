@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "เลือกเวลา",
   "timeFieldInvalidDateError": "เวลาไม่ถูกต้อง",
-  "textFieldClearButtonSemanticLabel": "ล้าง"
+  "textFieldClearButtonSemanticLabel": "ล้าง",
+  "selectHint": "เลือกรายการ",
+  "selectSearchHint": "ค้นหา"
 }

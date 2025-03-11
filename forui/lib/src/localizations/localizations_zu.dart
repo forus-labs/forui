@@ -57,6 +57,12 @@ class FLocalizationsZu extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Khetha into';
+
+  @override
+  String get selectSearchHint => 'Sesha';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Sula';
 
   @override

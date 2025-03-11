@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "సమయాన్ని ఎంచుకోండి",
   "timeFieldInvalidDateError": "చెల్లని సమయం.",
-  "textFieldClearButtonSemanticLabel": "క్లియర్ చేయి"
+  "textFieldClearButtonSemanticLabel": "క్లియర్ చేయి",
+  "selectHint": "ఒక అంశాన్ని ఎంచుకోండి",
+  "selectSearchHint": "శోధించు"
 }

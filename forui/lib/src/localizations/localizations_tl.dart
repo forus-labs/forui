@@ -57,6 +57,12 @@ class FLocalizationsTl extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Pumili ng item';
+
+  @override
+  String get selectSearchHint => 'Maghanap';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'I-clear';
 
   @override

@@ -57,6 +57,12 @@ class FLocalizationsEn extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
 
   @override
@@ -104,6 +110,12 @@ class FLocalizationsEn extends FLocalizations {
 /// The translations for English, as used in Australia (`en_AU`).
 class FLocalizationsEnAu extends FLocalizationsEn {
   FLocalizationsEnAu() : super('en_AU');
+
+  @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -155,6 +167,12 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   FLocalizationsEnCa() : super('en_CA');
 
   @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
 
   @override
@@ -202,6 +220,12 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 /// The translations for English, as used in the United Kingdom (`en_GB`).
 class FLocalizationsEnGb extends FLocalizationsEn {
   FLocalizationsEnGb() : super('en_GB');
+
+  @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -253,6 +277,12 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   FLocalizationsEnIe() : super('en_IE');
 
   @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
 
   @override
@@ -300,6 +330,12 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 /// The translations for English, as used in India (`en_IN`).
 class FLocalizationsEnIn extends FLocalizationsEn {
   FLocalizationsEnIn() : super('en_IN');
+
+  @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -351,6 +387,12 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   FLocalizationsEnNz() : super('en_NZ');
 
   @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
 
   @override
@@ -400,6 +442,12 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   FLocalizationsEnSg() : super('en_SG');
 
   @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
 
   @override
@@ -447,6 +495,12 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 /// The translations for English, as used in South Africa (`en_ZA`).
 class FLocalizationsEnZa extends FLocalizationsEn {
   FLocalizationsEnZa() : super('en_ZA');
+
+  @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';

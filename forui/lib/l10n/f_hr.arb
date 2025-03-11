@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Odaberite vrijeme",
   "timeFieldInvalidDateError": "Nevažeće vrijeme.",
-  "textFieldClearButtonSemanticLabel": "Očisti"
+  "textFieldClearButtonSemanticLabel": "Očisti",
+  "selectHint": "Odaberite stavku",
+  "selectSearchHint": "Pretraži"
 }

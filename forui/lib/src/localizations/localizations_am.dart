@@ -57,6 +57,12 @@ class FLocalizationsAm extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'አንድ ንጥል ይምረጡ';
+
+  @override
+  String get selectSearchHint => 'ፍለጋ';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'አጽዳ';
 
   @override

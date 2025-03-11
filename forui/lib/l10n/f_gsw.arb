@@ -12,5 +12,7 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Wähle e Zyt",
   "timeFieldInvalidDateError": "Ungültigi Zyt.",
-  "textFieldClearButtonSemanticLabel": "Lösche"
+  "textFieldClearButtonSemanticLabel": "Lösche",
+  "selectHint": "Wähle e Element",
+  "selectSearchHint": "Sueche"
 }

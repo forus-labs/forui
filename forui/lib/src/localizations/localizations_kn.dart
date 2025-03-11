@@ -57,6 +57,12 @@ class FLocalizationsKn extends FLocalizations {
   }
 
   @override
+  String get selectHint => 'ಐಟಂ ಆಯ್ಕೆಮಾಡಿ';
+
+  @override
+  String get selectSearchHint => 'ಹುಡುಕಿ';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ತೆರವುಗೊಳಿಸಿ';
 
   @override
