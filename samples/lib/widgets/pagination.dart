@@ -7,33 +7,16 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PaginationPage extends Sample {
+  static final controllers = {
+    'default': FPaginationController(pages: 10),
+    'siblings': FPaginationController(pages: 20, siblings: 2, initialPage: 9),
+    'hide-edges': FPaginationController(pages: 8, showEdges: false),
+  };
+
   final FPaginationController controller;
 
-  PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
-    : controller = FPaginationController(pages: 10);
-
-  @override
-  Widget sample(BuildContext context) =>
-      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: controller)]);
-}
-
-@RoutePage()
-class PaginationSiblingsPage extends Sample {
-  final FPaginationController controller;
-
-  PaginationSiblingsPage({@queryParam super.theme, @queryParam super.maxWidth = 500})
-    : controller = FPaginationController(pages: 20, siblings: 2, initialPage: 9);
-
-  @override
-  Widget sample(BuildContext context) =>
-      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: controller)]);
-}
-
-@RoutePage()
-class PaginationShowEdgesPage extends Sample {
-  final FPaginationController controller;
-
-  PaginationShowEdgesPage({@queryParam super.theme}) : controller = FPaginationController(pages: 8, showEdges: false);
+  PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 600, @queryParam String controller = 'default'})
+    : controller = controllers[controller]!;
 
   @override
   Widget sample(BuildContext context) =>

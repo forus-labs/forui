@@ -12,7 +12,7 @@ Display the current active page and enable navigation between multiple pages.
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='pagination' variant='default' height={400}/>
+        <Widget name='pagination' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
@@ -43,7 +43,7 @@ FPagination(
 ### Siblings
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='pagination' variant='siblings' height={400}/>
+        <Widget name='pagination' query={{controller: 'siblings'}} height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {5} copy
@@ -62,7 +62,7 @@ FPagination(
 ### Show Edges
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='pagination' variant='show-edges' height={400}/>
+        <Widget name='pagination' query={{controller: 'hide-edges'}} height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {4} copy
@@ -124,7 +124,7 @@ FPagination(
 ### With a `PageView`
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='pagination' variant='with-page-view' height={400}/>
+        <Widget name='pagination' variant='page-view' height={400}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {11-14} {73} copy
