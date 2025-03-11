@@ -19,29 +19,22 @@ class FPaginationController extends FChangeNotifier {
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
   final bool showEdges;
 
-  final int _pages;
+  /// The total number of pages in the pagination.
+  final int pages;
   int _page;
 
   /// Creates a [FPaginationController].
   ///
   /// # Contract:
   /// * Throws [AssertionError] if 1 <= [initialPage] and [initialPage] <= length.
-  FPaginationController({
-    int pages = 1,
-    int initialPage = 0,
-    this.showEdges = true,
-    this.siblings = 1,
-  }) : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
-       assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
-       assert(
-         0 <= initialPage && initialPage < pages,
-         'The initial page must be greater than or equal to 0 and less than or equal to length.',
-       ),
-       _page = initialPage,
-       _pages = pages;
-
-  /// The total number of pages in the pagination.
-  int get pages => _pages;
+  FPaginationController({int initialPage = 0, this.pages = 1, this.showEdges = true, this.siblings = 1})
+    : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
+      assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
+      assert(
+        0 <= initialPage && initialPage < pages,
+        'The initial page must be greater than or equal to 0 and less than or equal to length.',
+      ),
+      _page = initialPage;
 
   /// The current page index.
   int get page => _page;
@@ -70,11 +63,8 @@ class FPaginationController extends FChangeNotifier {
     }
   }
 
-  /// Calculates the range of page numbers to display around the current page.
-  ///
-  /// Returns a tuple of the start and end page numbers by centering the range around the current page,
-  /// ensuring a balanced display of sibling pages on either side while considering pagination constraints.
-  (int, int) calculateSiblingRange() {
+  /// The start and end pages to display around the current page.
+  (int, int) get siblingRange {
     final int rangeStart;
     final int rangeEnd;
     if (pages.isFinite) {
@@ -113,7 +103,7 @@ class FPaginationController extends FChangeNotifier {
 
 @internal
 extension MinPagesDisplayedAtEdges on FPaginationController {
-  /// Returns the minimum number of pages to display at both the start and end of the pagination.
+  /// The minimum number of pages to display at both the start and end of the pagination.
   ///
   /// If the total number of pages is too small to accommodate both the edge pages
   /// and the full set of sibling pages around the current page, all pages are displayed instead.

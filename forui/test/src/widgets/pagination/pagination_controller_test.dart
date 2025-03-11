@@ -40,7 +40,7 @@ void main() {
       ]) {
         test('siblings = 1', () {
           final controller = FPaginationController(pages: 10)..page = currentPage;
-          expect(controller.calculateSiblingRange(), expected);
+          expect(controller.siblingRange, expected);
         });
       }
 
@@ -58,7 +58,7 @@ void main() {
       ]) {
         test('siblings = 0', () {
           final controller = FPaginationController(siblings: 0, pages: 10)..page = currentPage;
-          expect(controller.calculateSiblingRange(), expected);
+          expect(controller.siblingRange, expected);
         });
       }
     });

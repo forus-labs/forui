@@ -90,7 +90,7 @@ class _FPaginationState extends State<FPagination> {
     return ListenableBuilder(
       listenable: controller,
       builder: (context, _) {
-        final (start, end) = controller.calculateSiblingRange();
+        final (start, end) = controller.siblingRange;
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,

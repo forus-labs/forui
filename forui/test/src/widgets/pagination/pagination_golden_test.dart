@@ -47,7 +47,7 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/hide-edges.png'));
       });
 
-      testWidgets('no siblings, (tester) async {
+      testWidgets('no siblings', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,

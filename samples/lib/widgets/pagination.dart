@@ -6,29 +6,65 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class PaginationPage extends Sample {
-  static final controllers = {
-    'default': FPaginationController(pages: 10),
-    'siblings': FPaginationController(pages: 20, siblings: 2, initialPage: 9),
-    'hide-edges': FPaginationController(pages: 8, showEdges: false),
-  };
+class PaginationPage extends StatefulSample {
+  final String controller;
 
-  final FPaginationController controller;
+  PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 600, @queryParam this.controller = 'default'});
 
-  PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 600, @queryParam String controller = 'default'})
-    : controller = controllers[controller]!;
+  @override
+  State<PaginationPage> createState() => _PaginationPageState();
+}
+
+class _PaginationPageState extends StatefulSampleState<PaginationPage> {
+  late FPaginationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = _updateController(widget.controller);
+  }
+
+  @override
+  void didUpdateWidget(covariant PaginationPage old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      _controller.dispose();
+      _controller = _updateController(widget.controller);
+    }
+  }
+
+  FPaginationController _updateController(String controller) {
+    switch (controller) {
+      case 'siblings':
+        return FPaginationController(pages: 20, siblings: 2, initialPage: 9);
+      case 'hide-edges':
+        return FPaginationController(pages: 8, showEdges: false);
+      default:
+        return FPaginationController(pages: 10);
+    }
+  }
 
   @override
   Widget sample(BuildContext context) =>
-      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: controller)]);
+      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: _controller)]);
 }
 
 @RoutePage()
-class PaginationCustomIconPage extends Sample {
-  final FPaginationController controller;
+class PaginationCustomIconPage extends StatefulSample {
+  PaginationCustomIconPage({@queryParam super.theme, @queryParam super.maxWidth = 400});
 
-  PaginationCustomIconPage({@queryParam super.theme, @queryParam super.maxWidth = 400})
-    : controller = FPaginationController(pages: 10, initialPage: 4);
+  @override
+  State<PaginationCustomIconPage> createState() => _PaginationCustomIconPageState();
+}
+
+class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCustomIconPage> {
+  late final FPaginationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = FPaginationController(pages: 10, initialPage: 4);
+  }
 
   @override
   Widget sample(BuildContext context) {
@@ -37,14 +73,14 @@ class PaginationCustomIconPage extends Sample {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FPagination(
-          controller: controller,
+          controller: _controller,
           next: Padding(
             padding: style.itemPadding,
             child: ConstrainedBox(
               constraints: style.contentConstraints,
               child: FButton.icon(
                 style: FButtonStyle.ghost,
-                onPress: controller.next,
+                onPress: _controller.next,
                 child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.bird)),
               ),
             ),
@@ -55,7 +91,7 @@ class PaginationCustomIconPage extends Sample {
               constraints: style.contentConstraints,
               child: FButton.icon(
                 style: FButtonStyle.ghost,
-                onPress: controller.previous,
+                onPress: _controller.previous,
                 child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.anchor)),
               ),
             ),
@@ -63,6 +99,12 @@ class PaginationCustomIconPage extends Sample {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
 
@@ -74,7 +116,7 @@ class PaginationWithViewPage extends StatefulSample {
   State<PaginationWithViewPage> createState() => _PaginationWithViewPageState();
 }
 
-class _PaginationWithViewPageState extends State<PaginationWithViewPage> with SingleTickerProviderStateMixin {
+class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithViewPage> {
   int pages = 10;
   late PageController controller = PageController();
   late FPaginationController paginationController = FPaginationController(pages: pages);
@@ -106,7 +148,7 @@ class _PaginationWithViewPageState extends State<PaginationWithViewPage> with Si
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget sample(BuildContext context) {
     final style = context.theme.colorScheme;
     return Column(
       mainAxisSize: MainAxisSize.min,
