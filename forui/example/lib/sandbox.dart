@@ -12,9 +12,7 @@ class Sandbox extends StatefulWidget {
 class _SandboxState extends State<Sandbox> {
   int pages = 10;
   PageController controller = PageController();
-  late FPaginationController paginationController = FPaginationController(
-    pages: pages
-  );
+  late FPaginationController paginationController = FPaginationController(pages: pages);
 
   @override
   void didChangeDependencies() {
