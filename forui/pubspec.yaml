@@ -1,6 +1,6 @@
 name: forui
 description: Beautifully designed, minimalistic widgets for desktop & touch devices.
-version: 0.10.0
+version: 0.10.0+1
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
 repository: https://github.com/forus-labs/forui/tree/main/forui

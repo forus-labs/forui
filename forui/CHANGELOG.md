@@ -1,3 +1,7 @@
+## 0.10.0+1
+
+Fix bad build caused by generated files not being published.
+
 ## 0.10.0
 
 ### Additions
@@ -12,12 +16,14 @@
 * Add `FTimeFieldController`.
 * Add `FTimeFieldProperties`.
 * Add `FThemeData.toApproximateMaterialTheme()`.
+* Add `FTimePicker`.
 * Add `FTimePickerStyle`.
 * Add `FPickerStyle.selectionHeightAdjustment`.
 * Add `FDateField.clearable`.
 * Add `FTileGroup.physics`.
 * Add `FSelectTileGroup.physics`.
 * Add `FSelectMenuTile.physics`.
+* Add `FPagination`.
 
 ### Changes
 
