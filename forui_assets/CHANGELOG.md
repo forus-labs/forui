@@ -1,4 +1,4 @@
-## 0.10.0 (Next)
+## 0.10.0
 
 Bumps minimum Flutter SDK version to 3.29.0.
 
