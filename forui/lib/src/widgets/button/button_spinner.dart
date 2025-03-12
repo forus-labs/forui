@@ -64,7 +64,6 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
       FAssets.icons.loaderCircle,
       color: _data.enabled ? _style.enabledSpinnerColor : _style.disabledSpinnerColor,
       size: _style.spinnerSize,
-      semanticLabel: 'Button Spinner',
     ),
   );
 

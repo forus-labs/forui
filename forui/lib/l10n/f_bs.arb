@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dijaloški okvir",
-  "sheetLabel": "tabela",
+  "sheetSemanticsLabel": "tabela",
   "barrierOnTapHint": "Zatvori: $modalRouteContentName",
   "barrierLabel": "Rubno",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Odaberite vrijeme",
-  "timeFieldInvalidDateError": "Nevažeće vrijeme."
+  "timeFieldInvalidDateError": "Nevažeće vrijeme.",
+  "textFieldClearButtonSemanticLabel": "Očisti"
 }

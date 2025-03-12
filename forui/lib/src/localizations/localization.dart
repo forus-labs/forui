@@ -77,6 +77,9 @@ class FDefaultLocalizations extends FLocalizations {
   String shortDate(DateTime date) => DateFormat.yMd().format(date);
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Clear';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -92,7 +95,7 @@ class FDefaultLocalizations extends FLocalizations {
   String get dialogLabel => 'Dialog';
 
   @override
-  String get sheetLabel => 'Sheet';
+  String get sheetSemanticsLabel => 'Sheet';
 
   @override
   String get barrierLabel => 'Barrier';

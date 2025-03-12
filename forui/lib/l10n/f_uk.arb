@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Вікно",
-  "sheetLabel": "екран",
+  "sheetSemanticsLabel": "екран",
   "barrierOnTapHint": "Закрити: $modalRouteContentName",
   "barrierLabel": "Маскувальний фон",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Виберіть час",
-  "timeFieldInvalidDateError": "Недійсний час."
+  "timeFieldInvalidDateError": "Недійсний час.",
+  "textFieldClearButtonSemanticLabel": "Очистити"
 }

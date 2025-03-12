@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialog",
-  "sheetLabel": "Sheet",
+  "sheetSemanticsLabel": "Sheet",
   "barrierOnTapHint": "Tutup $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ".",
   "timeFieldHint": "Pilih waktu",
-  "timeFieldInvalidDateError": "Waktu tidak valid."
+  "timeFieldInvalidDateError": "Waktu tidak valid.",
+  "textFieldClearButtonSemanticLabel": "Hapus"
 }

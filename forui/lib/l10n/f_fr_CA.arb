@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Boîte de dialogue",
-  "sheetLabel": "Zone de contenu",
+  "sheetSemanticsLabel": "Zone de contenu",
   "barrierOnTapHint": "Fermer $modalRouteContentName",
   "barrierLabel": "Grille",
   "shortDateSeparator": "-",
@@ -11,5 +11,6 @@
   "timeFieldPeriodSeparator": "",
   "timeFieldSuffix": "",
   "timeFieldHint": "Choisir une heure",
-  "timeFieldInvalidDateError": "Heure invalide."
+  "timeFieldInvalidDateError": "Heure invalide.",
+  "textFieldClearButtonSemanticLabel": "Effacer"
 }

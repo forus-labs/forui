@@ -1,6 +1,6 @@
 {
   "dialogLabel": "డైలాగ్",
-  "sheetLabel": "షీట్",
+  "sheetSemanticsLabel": "షీట్",
   "barrierOnTapHint": "$modalRouteContentName‌ను మూసివేయండి",
   "barrierLabel": "స్క్రిమ్",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "సమయాన్ని ఎంచుకోండి",
-  "timeFieldInvalidDateError": "చెల్లని సమయం."
+  "timeFieldInvalidDateError": "చెల్లని సమయం.",
+  "textFieldClearButtonSemanticLabel": "క్లియర్ చేయి"
 }

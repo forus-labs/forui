@@ -1,6 +1,6 @@
 {
   "dialogLabel": "대화상자",
-  "sheetLabel": "시트",
+  "sheetSemanticsLabel": "시트",
   "barrierOnTapHint": "$modalRouteContentName 닫기",
   "barrierLabel": "스크림",
   "shortDateSeparator": ". ",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "시간 선택",
-  "timeFieldInvalidDateError": "잘못된 시간입니다."
+  "timeFieldInvalidDateError": "잘못된 시간입니다.",
+  "textFieldClearButtonSemanticLabel": "지우기"
 }

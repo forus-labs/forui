@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Hộp thoại",
-  "sheetLabel": "Bảng",
+  "sheetSemanticsLabel": "Bảng",
   "barrierOnTapHint": "Đóng $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Chọn thời gian",
-  "timeFieldInvalidDateError": "Thời gian không hợp lệ."
+  "timeFieldInvalidDateError": "Thời gian không hợp lệ.",
+  "textFieldClearButtonSemanticLabel": "Xóa"
 }

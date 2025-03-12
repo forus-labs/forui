@@ -57,6 +57,9 @@ class FLocalizationsEs extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsEs extends FLocalizations {
   String get dialogLabel => 'Cuadro de diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Sombreado';
@@ -101,6 +104,9 @@ class FLocalizationsEs extends FLocalizations {
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
 class FLocalizationsEs419 extends FLocalizationsEs {
   FLocalizationsEs419() : super('es_419');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -133,7 +139,7 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -147,6 +153,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Argentina (`es_AR`).
 class FLocalizationsEsAr extends FLocalizationsEs {
   FLocalizationsEsAr() : super('es_AR');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -179,7 +188,7 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -195,6 +204,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   FLocalizationsEsBo() : super('es_BO');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -225,7 +237,7 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -241,6 +253,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   FLocalizationsEsCl() : super('es_CL');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -271,7 +286,7 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -287,6 +302,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   FLocalizationsEsCo() : super('es_CO');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -317,7 +335,7 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -333,6 +351,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   FLocalizationsEsCr() : super('es_CR');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -363,7 +384,7 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -379,6 +400,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   FLocalizationsEsDo() : super('es_DO');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -409,7 +433,7 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -425,6 +449,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   FLocalizationsEsEc() : super('es_EC');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -455,7 +482,7 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -471,6 +498,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   FLocalizationsEsGt() : super('es_GT');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -501,7 +531,7 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -517,6 +547,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   FLocalizationsEsHn() : super('es_HN');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -547,7 +580,7 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -561,6 +594,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
 class FLocalizationsEsMx extends FLocalizationsEs {
   FLocalizationsEsMx() : super('es_MX');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -593,7 +629,7 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -609,6 +645,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   FLocalizationsEsNi() : super('es_NI');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -639,7 +678,7 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -655,6 +694,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   FLocalizationsEsPa() : super('es_PA');
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -685,7 +727,7 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -699,6 +741,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Peru (`es_PE`).
 class FLocalizationsEsPe extends FLocalizationsEs {
   FLocalizationsEsPe() : super('es_PE');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -731,7 +776,7 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -745,6 +790,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Puerto Rico (`es_PR`).
 class FLocalizationsEsPr extends FLocalizationsEs {
   FLocalizationsEsPr() : super('es_PR');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -777,7 +825,7 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -791,6 +839,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Paraguay (`es_PY`).
 class FLocalizationsEsPy extends FLocalizationsEs {
   FLocalizationsEsPy() : super('es_PY');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -823,7 +874,7 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'inferior';
+  String get sheetSemanticsLabel => 'inferior';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -837,6 +888,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in El Salvador (`es_SV`).
 class FLocalizationsEsSv extends FLocalizationsEs {
   FLocalizationsEsSv() : super('es_SV');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -869,7 +923,7 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -883,6 +937,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in the United States (`es_US`).
 class FLocalizationsEsUs extends FLocalizationsEs {
   FLocalizationsEsUs() : super('es_US');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -915,7 +972,7 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -929,6 +986,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Uruguay (`es_UY`).
 class FLocalizationsEsUy extends FLocalizationsEs {
   FLocalizationsEsUy() : super('es_UY');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -961,7 +1021,7 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';
@@ -975,6 +1035,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 /// The translations for Spanish Castilian, as used in Venezuela (`es_VE`).
 class FLocalizationsEsVe extends FLocalizationsEs {
   FLocalizationsEsVe() : super('es_VE');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
   String get shortDateSeparator => '/';
@@ -1007,7 +1070,7 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String get dialogLabel => 'Diálogo';
 
   @override
-  String get sheetLabel => 'Hoja';
+  String get sheetSemanticsLabel => 'Hoja';
 
   @override
   String get barrierLabel => 'Lámina';

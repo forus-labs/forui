@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Երկխոսության պատուհան",
-  "sheetLabel": "էկրան",
+  "sheetSemanticsLabel": "էկրան",
   "barrierOnTapHint": "Փակել՝ $modalRouteContentName",
   "barrierLabel": "Դիմակ",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Ընտրեք ժամանակը",
-  "timeFieldInvalidDateError": "Անվավեր ժամանակ:"
+  "timeFieldInvalidDateError": "Անվավեր ժամանակ:",
+  "textFieldClearButtonSemanticLabel": "Մաքրել"
 }

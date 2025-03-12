@@ -57,6 +57,9 @@ class FLocalizationsAz extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Təmizlə';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsAz extends FLocalizations {
   String get dialogLabel => 'Dialoq';
 
   @override
-  String get sheetLabel => 'Vərəq';
+  String get sheetSemanticsLabel => 'Vərəq';
 
   @override
   String get barrierLabel => 'Kətan';

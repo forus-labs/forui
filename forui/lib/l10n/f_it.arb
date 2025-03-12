@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Finestra di dialogo",
-  "sheetLabel": "Riquadro",
+  "sheetSemanticsLabel": "Riquadro",
   "barrierOnTapHint": "Chiudi $modalRouteContentName",
   "barrierLabel": "Rete",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Scegli un orario",
-  "timeFieldInvalidDateError": "Orario non valido."
+  "timeFieldInvalidDateError": "Orario non valido.",
+  "textFieldClearButtonSemanticLabel": "Cancella"
 }

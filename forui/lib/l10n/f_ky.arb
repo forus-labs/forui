@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Диалог",
-  "sheetLabel": "экран",
+  "sheetSemanticsLabel": "экран",
   "barrierOnTapHint": "$modalRouteContentName жабуу",
   "barrierLabel": "Кенеп",
   "shortDateSeparator": "-",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Убакытты тандаңыз",
-  "timeFieldInvalidDateError": "Жараксыз убакыт."
+  "timeFieldInvalidDateError": "Жараксыз убакыт.",
+  "textFieldClearButtonSemanticLabel": "Тазалоо"
 }

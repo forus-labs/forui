@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Диалогтық терезе",
-  "sheetLabel": "парақша",
+  "sheetSemanticsLabel": "парақша",
   "barrierOnTapHint": "$modalRouteContentName жабу",
   "barrierLabel": "Кенеп",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Уақытты таңдаңыз",
-  "timeFieldInvalidDateError": "Жарамсыз уақыт."
+  "timeFieldInvalidDateError": "Жарамсыз уақыт.",
+  "textFieldClearButtonSemanticLabel": "Тазалау"
 }

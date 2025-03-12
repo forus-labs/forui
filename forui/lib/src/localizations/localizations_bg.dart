@@ -57,6 +57,9 @@ class FLocalizationsBg extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Изчистване';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsBg extends FLocalizations {
   String get dialogLabel => 'Диалогов прозорец';
 
   @override
-  String get sheetLabel => 'лист';
+  String get sheetSemanticsLabel => 'лист';
 
   @override
   String get barrierLabel => 'Скрим';

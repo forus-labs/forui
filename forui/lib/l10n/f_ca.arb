@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Diàleg",
-  "sheetLabel": "Full",
+  "sheetSemanticsLabel": "Full",
   "barrierOnTapHint": "Tanca $modalRouteContentName",
   "barrierLabel": "Fons atenuat",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Trieu una hora",
-  "timeFieldInvalidDateError": "Hora no vàlida."
+  "timeFieldInvalidDateError": "Hora no vàlida.",
+  "textFieldClearButtonSemanticLabel": "Esborrar"
 }

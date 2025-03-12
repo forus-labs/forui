@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Παράθυρο διαλόγου",
-  "sheetLabel": "Φύλλο",
+  "sheetSemanticsLabel": "Φύλλο",
   "barrierOnTapHint": "Κλείσιμο $modalRouteContentName",
   "barrierLabel": "Επικάλυψη",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Επιλέξτε μια ώρα",
-  "timeFieldInvalidDateError": "Μη έγκυρη ώρα."
+  "timeFieldInvalidDateError": "Μη έγκυρη ώρα.",
+  "textFieldClearButtonSemanticLabel": "Εκκαθάριση"
 }

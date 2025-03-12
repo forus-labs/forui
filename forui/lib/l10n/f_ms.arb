@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialog",
-  "sheetLabel": "Helaian",
+  "sheetSemanticsLabel": "Helaian",
   "barrierOnTapHint": "Tutup $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Pilih masa",
-  "timeFieldInvalidDateError": "Masa tidak sah."
+  "timeFieldInvalidDateError": "Masa tidak sah.",
+  "textFieldClearButtonSemanticLabel": "Kosongkan"
 }

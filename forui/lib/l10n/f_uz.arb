@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Muloqot oynasi",
-  "sheetLabel": "ekran",
+  "sheetSemanticsLabel": "ekran",
   "barrierOnTapHint": "Yopish: $modalRouteContentName",
   "barrierLabel": "Kanop",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vaqtni tanlang",
-  "timeFieldInvalidDateError": "Yaroqsiz vaqt."
+  "timeFieldInvalidDateError": "Yaroqsiz vaqt.",
+  "textFieldClearButtonSemanticLabel": "Tozalash"
 }

@@ -8,5 +8,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Wählen Sie eine Zeit",
-  "timeFieldInvalidDateError": "Ungültige Zeit."
+  "timeFieldInvalidDateError": "Ungültige Zeit.",
+  "textFieldClearButtonSemanticLabel": "Löschen"
 }

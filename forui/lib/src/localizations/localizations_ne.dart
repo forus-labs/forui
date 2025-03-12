@@ -57,6 +57,9 @@ class FLocalizationsNe extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'खाली गर्नुहोस्';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsNe extends FLocalizations {
   String get dialogLabel => 'संवाद';
 
   @override
-  String get sheetLabel => 'पाना';
+  String get sheetSemanticsLabel => 'पाना';
 
   @override
   String get barrierLabel => 'स्क्रिम';

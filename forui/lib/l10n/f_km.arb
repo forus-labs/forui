@@ -1,6 +1,6 @@
 {
   "dialogLabel": "ប្រអប់",
-  "sheetLabel": "សន្លឹក",
+  "sheetSemanticsLabel": "សន្លឹក",
   "barrierOnTapHint": "បិទ $modalRouteContentName",
   "barrierLabel": "ផ្ទាំងស្រអាប់",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ជ្រើសរើសពេលវេលា",
-  "timeFieldInvalidDateError": "ពេលវេលាមិនត្រឹមត្រូវ។"
+  "timeFieldInvalidDateError": "ពេលវេលាមិនត្រឹមត្រូវ។",
+  "textFieldClearButtonSemanticLabel": "សម្អាត"
 }

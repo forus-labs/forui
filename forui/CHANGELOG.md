@@ -7,6 +7,7 @@
 * Add `FTransformables`.
 * Add `FTextField.stylusHandwritingEnabled`.
 * Add `FPickerWheelMixin`.
+* Add `FTextField.clearable`.
 * Add `FTimeField`.
 * Add `FTimeFieldController`.
 * Add `FTimeFieldProperties`.
@@ -36,6 +37,7 @@
 * **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
 * **Breaking** Change default `FPickerStyle.textStyle` size from `lg` to `base`.
 * **Breaking** Change `FTimePicker` to use `FTimePickerStyle` instead of `FPickerStyle`.
+* **Breaking** Change `FLocalizations.sheetLabel` to `FLocalizations.sheetSemanticsLabel`.
 
 ### Fixes
 * Fix `FDateField.input` to show default icon.

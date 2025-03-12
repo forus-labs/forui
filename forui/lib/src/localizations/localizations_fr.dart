@@ -57,6 +57,9 @@ class FLocalizationsFr extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Effacer';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsFr extends FLocalizations {
   String get dialogLabel => 'Boîte de dialogue';
 
   @override
-  String get sheetLabel => 'sheet';
+  String get sheetSemanticsLabel => 'sheet';
 
   @override
   String get barrierLabel => 'Fond';
@@ -101,6 +104,9 @@ class FLocalizationsFr extends FLocalizations {
 /// The translations for French, as used in Canada (`fr_CA`).
 class FLocalizationsFrCa extends FLocalizationsFr {
   FLocalizationsFrCa() : super('fr_CA');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Effacer';
 
   @override
   String get shortDateSeparator => '-';
@@ -133,7 +139,7 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get dialogLabel => 'Boîte de dialogue';
 
   @override
-  String get sheetLabel => 'Zone de contenu';
+  String get sheetSemanticsLabel => 'Zone de contenu';
 
   @override
   String get barrierLabel => 'Grille';
