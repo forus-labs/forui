@@ -1,6 +1,7 @@
 ## 0.10.0 (Next)
 Bump `flutter_hooks` version to `0.21.0`.
 
+* Add `useFPaginationController`.
 * Add `useFTimeFieldController`.
 * Add `useFTimePickerController`.
 * **Breaking** Change `useFDatePickerController` to `useFDateFieldController`.
