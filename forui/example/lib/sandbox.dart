@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -10,41 +9,32 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
-class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  late FTimePickerController timeController = FTimePickerController();
-  late Locale locale = const Locale('en', 'US');
+class _SandboxState extends State<Sandbox> {
+  int pages = 10;
+  PageController controller = PageController();
+  late FPaginationController paginationController = FPaginationController(pages: pages);
 
   @override
-  Widget build(BuildContext context) {
-    final _ = DateTime(1970, 1, 1, 13, 30);
-    return const LocaleScaffold(child: FTimeField.picker());
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final value = PageStorage.maybeOf(context)?.readState(context) ?? 0;
+    paginationController.page = value;
   }
 
-  @override
-  void dispose() {
-    timeController.dispose();
-    super.dispose();
+  void _handlePageChanged() {
+    if (!controller.hasClients) {
+      return;
+    }
+    final page = paginationController.page;
+    final old = controller.page?.round();
+    if (old case final old when old != page) {
+      if (page == old! + 1 || page == old - 1) {
+        controller.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      } else {
+        controller.jumpToPage(page);
+      }
+    }
   }
-}
-
-class LocaleScaffold extends StatefulWidget {
-  final List<Locale> locales;
-  final Widget child;
-
-  const LocaleScaffold({required this.child, this.locales = const [Locale('en', 'US'), Locale('ko')]});
-
-  @override
-  State<LocaleScaffold> createState() => _LocaleScaffoldState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty('locales', locales));
-  }
-}
-
-class _LocaleScaffoldState extends State<LocaleScaffold> {
-  int index = 0;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -52,23 +42,38 @@ class _LocaleScaffoldState extends State<LocaleScaffold> {
     mainAxisAlignment: MainAxisAlignment.center,
     spacing: 10,
     children: [
-      Localizations.override(
-        context: context,
-        locale: widget.locales[index % widget.locales.length],
-        child: widget.child,
+      SizedBox(
+        height: 300,
+        width: 300,
+        child: NotificationListener(
+          onNotification: (notification) {
+            if (notification is ScrollEndNotification) {
+              if (controller.hasClients) {
+                paginationController.page = controller.page!.round();
+                return true;
+              }
+            }
+            return false;
+          },
+          child: PageView.builder(
+            itemCount: pages,
+            controller: controller,
+            itemBuilder:
+                (context, index) => ColoredBox(
+                  color: index.isEven ? Colors.red : Colors.blue,
+                  child: Center(child: Text('Page $index', style: const TextStyle(fontSize: 45, color: Colors.white))),
+                ),
+          ),
+        ),
       ),
-      FButton(onPress: () => setState(() => index++), label: const Text('Change Locale')),
+      SizedBox(height: 200, child: FPagination(controller: paginationController, onPageChange: _handlePageChanged)),
     ],
   );
 
   @override
   void dispose() {
+    paginationController.dispose();
+    controller.dispose();
     super.dispose();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IntProperty('index', index));
   }
 }

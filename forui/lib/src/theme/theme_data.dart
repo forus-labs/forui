@@ -80,6 +80,9 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// The line calendar style.
   final FLineCalendarStyle lineCalendarStyle;
 
+  /// The pagination style.
+  final FPaginationStyle paginationStyle;
+
   /// The picker's style.
   final FPickerStyle pickerStyle;
 
@@ -151,12 +154,13 @@ final class FThemeData with Diagnosticable, FTransformable {
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
-    FDateFieldStyle? datePickerStyle,
+    FDateFieldStyle? dateFieldStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
+    FPaginationStyle? paginationStyle,
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
@@ -200,7 +204,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       cardStyle: cardStyle ?? FCardStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       checkboxStyle: checkboxStyle ?? FCheckboxStyle.inherit(colorScheme: colorScheme, style: style),
       dateFieldStyle:
-          datePickerStyle ?? FDateFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+          dateFieldStyle ?? FDateFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       dialogStyle: dialogStyle ?? FDialogStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colorScheme: colorScheme, style: style),
       headerStyle: headerStyle ?? FHeaderStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
@@ -208,6 +212,8 @@ final class FThemeData with Diagnosticable, FTransformable {
       lineCalendarStyle:
           lineCalendarStyle ??
           FLineCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      paginationStyle:
+          paginationStyle ?? FPaginationStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       pickerStyle: pickerStyle ?? FPickerStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
       popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       popoverMenuStyle:
@@ -261,6 +267,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.headerStyle,
     required this.labelStyles,
     required this.lineCalendarStyle,
+    required this.paginationStyle,
     required this.pickerStyle,
     required this.popoverStyle,
     required this.popoverMenuStyle,
@@ -820,12 +827,13 @@ final class FThemeData with Diagnosticable, FTransformable {
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
-    FDateFieldStyle? datePickerStyle,
+    FDateFieldStyle? dateFieldStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
+    FPaginationStyle? paginationStyle,
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
@@ -857,12 +865,13 @@ final class FThemeData with Diagnosticable, FTransformable {
     calendarStyle: calendarStyle ?? this.calendarStyle,
     cardStyle: cardStyle ?? this.cardStyle,
     checkboxStyle: checkboxStyle ?? this.checkboxStyle,
-    datePickerStyle: datePickerStyle ?? dateFieldStyle,
+    dateFieldStyle: dateFieldStyle ?? this.dateFieldStyle,
     dialogStyle: dialogStyle ?? this.dialogStyle,
     dividerStyles: dividerStyles ?? this.dividerStyles,
     headerStyle: headerStyle ?? this.headerStyle,
     labelStyles: labelStyles ?? this.labelStyles,
     lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
+    paginationStyle: paginationStyle ?? this.paginationStyle,
     pickerStyle: pickerStyle ?? this.pickerStyle,
     popoverStyle: popoverStyle ?? this.popoverStyle,
     popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
@@ -901,12 +910,13 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('calendarStyle', calendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('datePickerStyle', dateFieldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('dateFieldStyle', dateFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('paginationStyle', paginationStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('pickerStyle', pickerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle, level: DiagnosticLevel.debug))
@@ -952,6 +962,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           headerStyle == other.headerStyle &&
           labelStyles == other.labelStyles &&
           lineCalendarStyle == other.lineCalendarStyle &&
+          paginationStyle == other.paginationStyle &&
           pickerStyle == other.pickerStyle &&
           popoverStyle == other.popoverStyle &&
           popoverMenuStyle == other.popoverMenuStyle &&
@@ -993,6 +1004,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       headerStyle.hashCode ^
       labelStyles.hashCode ^
       lineCalendarStyle.hashCode ^
+      paginationStyle.hashCode ^
       pickerStyle.hashCode ^
       popoverStyle.hashCode ^
       popoverMenuStyle.hashCode ^
