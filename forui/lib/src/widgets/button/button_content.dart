@@ -17,7 +17,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonCustomStyle(:contentStyle), :enabled) = FButtonData.of(context);
+    final FButtonData(style: FButtonStyle(:contentStyle), :enabled) = FButtonData.of(context);
     return Padding(
       padding: contentStyle.padding,
       child: DefaultTextStyle.merge(

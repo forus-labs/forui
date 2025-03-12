@@ -157,4 +157,22 @@ void main() {
       });
     }
   });
+
+  for (final (description, field, expected) in [
+    ('input only', FDateField.input(key: key), 0),
+    ('input & calendar', const FDateField(key: key), 0),
+    ('input only, clearable', FDateField.input(key: key, clearable: true), 1),
+    ('input & calendar, clearable', const FDateField(key: key, clearable: true), 1),
+  ]) {
+    testWidgets(description, (tester) async {
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));
+
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+
+      await tester.enterText(find.byKey(key), '14/01/2025');
+      await tester.pumpAndSettle();
+
+      expect(find.bySemanticsLabel('Clear'), findsExactly(expected));
+    });
+  }
 }

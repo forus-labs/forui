@@ -44,6 +44,7 @@ class TimeInput extends Input<FTime?> {
     required super.prefixBuilder,
     required super.suffixBuilder,
     required super.localizations,
+    super.clearable = false,
     super.key,
   });
 

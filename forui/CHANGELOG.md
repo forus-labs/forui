@@ -5,15 +5,16 @@
 * Add `FTextField.counterBuilder`.
 * Add `FTransformable`.
 * Add `FTransformables`.
+* Add `FTextField.clearable`.
 * Add `FTextField.stylusHandwritingEnabled`.
 * Add `FPickerWheelMixin`.
-* Add `FTextField.clearable`.
 * Add `FTimeField`.
 * Add `FTimeFieldController`.
 * Add `FTimeFieldProperties`.
 * Add `FThemeData.toApproximateMaterialTheme()`.
 * Add `FTimePickerStyle`.
 * Add `FPickerStyle.selectionHeightAdjustment`.
+* Add `FDateField.clearable`.
 * Add `FTileGroup.physics`.
 * Add `FSelectTileGroup.physics`.
 * Add `FSelectMenuTile.physics`.
@@ -25,19 +26,26 @@
 * Change most occurrences of `Alignment` to `AlignmentGeometry`.
 * Change most occurrences of `BorderRadius` to `BorderRadiusGeometry`.
 * Change most occurrences of `EdgeInsets` to `EdgeInsetsGeometry`.
-* **Breaking** Change `FDatePicker` to `FDateField`.
-* **Breaking** Change `FDatePickerController` to `FDateFieldController`.
-* **Breaking** Change `FDatePickerController.calendar` to `FDateFieldController.popover`.
-* **Breaking** Change `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
-* **Breaking** Change `FLocalizations.datePickerHint` to `FLocalizations.dateFieldHint`.
-* **Breaking** Change `FLocalizations.datePickerInvalidDateError` to `FLocalizations.dateFieldInvalidDateError`.
+* **Breaking** Rename `FDatePicker` to `FDateField`.
+* **Breaking** Rename `FDatePickerController` to `FDateFieldController`.
+* **Breaking** Rename `FDatePickerController.calendar` to `FDateFieldController.popover`.
+* **Breaking** Rename `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
+* **Breaking** Rename `FLocalizations.datePickerHint` to `FLocalizations.dateFieldHint`.
+* **Breaking** Rename `FLocalizations.datePickerInvalidDateError` to `FLocalizations.dateFieldInvalidDateError`.
 * **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
 * **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
 * **Breaking** Change default `FPickerStyle.textStyle` size from `lg` to `base`.
 * **Breaking** Change `FTimePicker` to use `FTimePickerStyle` instead of `FPickerStyle`.
-* **Breaking** Change `FLocalizations.sheetLabel` to `FLocalizations.sheetSemanticsLabel`.
+* **Breaking** Rename `FLocalizations.sheetLabel` to `FLocalizations.sheetSemanticsLabel`.
+* **Breaking** Rename `FBadgeStyle` to `FBaseBadgeStyle`.
+* **Breaking** Rename `FBadgeCustomStyle` to `FBadgeStyle`.
+* **Breaking** Move constants in `FBaseBadgeStyle` to `FBadgeStyle`.
+* **Breaking** Rename `FButtonStyle` to `FBaseButtonStyle`.
+* **Breaking** Rename `FButtonCustomStyle` to `FButtonStyle`.
+* **Breaking** Move constants in `FBaseButtonStyle` to `FButtonStyle`.
+
 
 ### Fixes
 * Fix `FDateField.input` to show default icon.

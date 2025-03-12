@@ -48,7 +48,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
 
   /// The clear button's style when [FTextField.clearable] is true.
   @override
-  final FButtonCustomStyle clearButtonStyle;
+  final FButtonStyle clearButtonStyle;
 
   /// The style when this text field is enabled.
   @override
