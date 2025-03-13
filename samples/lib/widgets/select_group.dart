@@ -20,7 +20,7 @@ class SelectGroupPage extends Sample {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       FSelectGroup(
-        controller: FMultiSelectGroupController(values: {Sidebar.recents}),
+        controller: FSelectController(values: {Sidebar.recents}),
         label: const Text('Sidebar'),
         description: const Text('These will be shown in the sidebar.'),
         items: const [
@@ -43,12 +43,12 @@ class SelectGroupCheckboxFormPage extends StatefulSample {
 
 class _CheckboxFormState extends StatefulSampleState<SelectGroupCheckboxFormPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FMultiSelectGroupController<Language> controller;
+  late final FSelectController<Language> controller;
 
   @override
   void initState() {
     super.initState();
-    controller = FMultiSelectGroupController();
+    controller = FSelectController();
   }
 
   @override
@@ -104,13 +104,7 @@ class SelectGroupRadioFormPage extends StatefulSample {
 
 class _RadioFormState extends StatefulSampleState<SelectGroupRadioFormPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FRadioSelectGroupController<Notification> controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FRadioSelectGroupController();
-  }
+  late final controller = FSelectController<Notification>.radio();
 
   @override
   Widget sample(BuildContext context) => Form(

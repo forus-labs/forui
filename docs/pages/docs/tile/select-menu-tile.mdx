@@ -31,11 +31,11 @@ A tile that, when triggered, displays a list of options for the user to pick fro
     }
 
     class _SelectMenuTileState extends State<_SelectMenuTile> {
-      final controller = FRadioSelectGroupController(value: Notification.all);
+      final controller = FSelectController.radio(value: Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
-        groupController: controller,
+        selectController: controller,
         autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
@@ -73,7 +73,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
 ```dart copy
 FSelectMenuTile<Value>(
-  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  selectController: FSelectController(), // or FSelectController.radio()
   menuAnchor: Alignment.bottomLeft,
   tileAnchor: Alignment.bottomLeft,
   shift: FPortalFollowerShift.flip,
@@ -107,7 +107,7 @@ FSelectMenuTile<Value>(
 
 ```dart copy
 FSelectMenuTile<Value>.builder(
-  groupController: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  selectController: FSelectController(), // or FSelectController.radio()
   menuAnchor: Alignment.bottomLeft,
   tileAnchor: Alignment.bottomLeft,
   shift: FPortalFollowerShift.flip,
@@ -156,11 +156,11 @@ FSelectMenuTile<Value>.builder(
     }
 
     class _SelectMenuTileState extends State<_SelectMenuTile> {
-      final controller = FRadioSelectGroupController(Notification.all);
+      final controller = FSelectController.radio(Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
-        groupController: controller,
+        selectController: controller,
         autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.bell),
@@ -211,11 +211,11 @@ FSelectMenuTile<Value>.builder(
     }
 
     class _ScrollableSelectMenuTileState extends State<_ScrollableSelectMenuTile> {
-      final controller = FRadioSelectGroupController(Notification.all);
+      final controller = FSelectController.radio(Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
-        groupController: controller,
+        selectController: controller,
         autoHide: true,
         maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
@@ -271,11 +271,11 @@ FSelectMenuTile<Value>.builder(
     }
 
     class _LazySelectMenuTileState extends State<_LazySelectMenuTile> {
-      final controller = FMultiSelectGroupController(values: {1});
+      final controller = FSelectController(values: {1});
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile.builder(
-        groupController: controller,
+        selectController: controller,
         autoHide: true,
         maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
@@ -317,7 +317,7 @@ FSelectMenuTile<Value>.builder(
 
     class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
       final _formKey = GlobalKey<FormState>();
-      final controller = FRadioSelectGroupController();
+      final controller = FSelectController.radio();
 
       @override
       Widget build(BuildContext context) => Form(
@@ -326,7 +326,7 @@ FSelectMenuTile<Value>.builder(
               mainAxisSize: MainAxisSize.min,
               children: [
                 FSelectMenuTile(
-                  groupController: controller,
+                  selectController: controller,
                   autoHide: true,
                   validator: (value) => value == null ? 'Select an item' : null,
                   prefixIcon: FIcon(FAssets.icons.bell),

@@ -23,7 +23,7 @@ A group of items that allow users to make a selection from a set of options.
     enum Sidebar { recents, home, applications }
 
     FSelectGroup<Sidebar>(
-      controller: FMultiSelectGroupController(values: {Sidebar.recents}),
+      controller: FSelectController(values: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       items: [
@@ -51,7 +51,7 @@ A group of items that allow users to make a selection from a set of options.
 
 ```dart copy
 FSelectGroup<Value>(
-  controller: FMultiSelectGroupController(), // or FRadioSelectGroupController()
+  controller: FSelectController(), // or FSelectController.radio()
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   items: [
@@ -87,8 +87,8 @@ FSelectGroup<Value>(
         }
 
         class CheckboxFormState extends State<CheckboxForm> {
-          final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-          final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
+          final _formKey = GlobalKey<FormState>();
+          final controller = FSelectController<Language>();
 
           @override
           Widget build(BuildContext context) => Form(
@@ -165,8 +165,8 @@ FSelectGroup<Value>(
     }
 
     class RadioFormState extends State<RadioForm> {
-      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+      final _formKey = GlobalKey<FormState>();
+      final controller = FSelectController<Notification>.radio();
 
       @override
       Widget build(BuildContext context) => Form(

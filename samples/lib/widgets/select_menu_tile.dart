@@ -19,11 +19,11 @@ class SelectMenuTilePage extends StatefulSample {
 }
 
 class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
-  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(value: Notification.all);
+  final controller = FSelectController<Notification>.radio(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
-    groupController: controller,
+    selectController: controller,
     autoHide: widget.autoHide,
     validator: (value) => value == null ? 'Select an item' : null,
     prefixIcon: FIcon(FAssets.icons.bell),
@@ -63,11 +63,11 @@ class ScrollableSelectMenuTilePage extends StatefulSample {
 }
 
 class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableSelectMenuTilePage> {
-  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(value: Notification.all);
+  final controller = FSelectController<Notification>.radio(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
-    groupController: controller,
+    selectController: controller,
     autoHide: widget.autoHide,
     maxHeight: 150,
     validator: (value) => value == null ? 'Select an item' : null,
@@ -111,7 +111,7 @@ class LazySelectMenuTilePage extends StatefulSample {
 }
 
 class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTilePage> {
-  final FMultiSelectGroupController<int> controller = FMultiSelectGroupController(values: {1});
+  final controller = FSelectController(values: {1});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -120,7 +120,7 @@ class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTil
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectMenuTile.builder(
-          groupController: controller,
+          selectController: controller,
           prefixIcon: FIcon(FAssets.icons.variable),
           title: const Text('Applicable values'),
           maxHeight: 200,
@@ -147,7 +147,7 @@ class SelectMenuTileFormPage extends StatefulSample {
 
 class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFormPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController(value: Notification.all);
+  final controller = FSelectController<Notification>.radio(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -156,7 +156,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
       mainAxisSize: MainAxisSize.min,
       children: [
         FSelectMenuTile(
-          groupController: controller,
+          selectController: controller,
           autoHide: true,
           validator: (value) => value == null ? 'Select an item' : null,
           prefixIcon: FIcon(FAssets.icons.bell),

@@ -19,11 +19,7 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// * [FTileGroupStyle] for customizing a select group's appearance.
 class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMixin>, FFormFieldProperties<Set<T>> {
   /// The controller.
-  ///
-  /// See:
-  /// * [FRadioSelectGroupController] for a single radio button like selection.
-  /// * [FMultiSelectGroupController] for multiple selections.
-  final FSelectGroupController<T> groupController;
+  final FSelectController<T> selectController;
 
   /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
@@ -71,7 +67,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
 
   /// Creates a [FSelectTileGroup].
   FSelectTileGroup({
-    required this.groupController,
+    required this.selectController,
     required List<FSelectTile<T>> children,
     this.scrollController,
     this.style,
@@ -114,8 +110,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
              children: [
                for (final child in children)
                  FSelectTileData<T>(
-                   controller: groupController,
-                   selected: groupController.contains(child.value),
+                   controller: selectController,
+                   selected: selectController.contains(child.value),
                    child: child,
                  ),
              ],
@@ -127,7 +123,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   ///
   /// {@macro forui.widgets.FTileGroup.builder}
   FSelectTileGroup.builder({
-    required this.groupController,
+    required this.selectController,
     required FSelectTile<T>? Function(BuildContext, int) tileBuilder,
     int? count,
     this.scrollController,
@@ -174,8 +170,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
                return child == null
                    ? null
                    : FSelectTileData<T>(
-                     controller: groupController,
-                     selected: groupController.contains(child.value),
+                     controller: selectController,
+                     selected: selectController.contains(child.value),
                      child: child,
                    );
              },
@@ -190,7 +186,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('groupController', groupController))
+      ..add(DiagnosticsProperty('groupController', selectController))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
@@ -207,38 +203,38 @@ class _State<T> extends FormFieldState<Set<T>> {
   @override
   void initState() {
     super.initState();
-    widget.groupController.addListener(_handleControllerChanged);
+    widget.selectController.addListener(_handleControllerChanged);
   }
 
   @override
   void didUpdateWidget(covariant FSelectTileGroup<T> old) {
     super.didUpdateWidget(old);
-    if (widget.groupController == old.groupController) {
+    if (widget.selectController == old.selectController) {
       return;
     }
 
-    widget.groupController.addListener(_handleControllerChanged);
-    old.groupController.removeListener(_handleControllerChanged);
+    widget.selectController.addListener(_handleControllerChanged);
+    old.selectController.removeListener(_handleControllerChanged);
   }
 
   @override
   void didChange(Set<T>? value) {
     super.didChange(value);
-    if (!setEquals(widget.groupController.value, value)) {
-      widget.groupController.value = value ?? {};
+    if (!setEquals(widget.selectController.value, value)) {
+      widget.selectController.value = value ?? {};
     }
   }
 
   @override
   void reset() {
     // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
-    widget.groupController.value = widget.initialValue ?? {};
+    widget.selectController.value = widget.initialValue ?? {};
     super.reset();
   }
 
   @override
   void dispose() {
-    widget.groupController.removeListener(_handleControllerChanged);
+    widget.selectController.removeListener(_handleControllerChanged);
     super.dispose();
   }
 
@@ -248,8 +244,8 @@ class _State<T> extends FormFieldState<Set<T>> {
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
     // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
     // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.groupController.value != value) {
-      didChange(widget.groupController.value);
+    if (widget.selectController.value != value) {
+      didChange(widget.selectController.value);
     }
   }
 

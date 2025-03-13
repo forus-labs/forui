@@ -14,15 +14,8 @@ class PopoverMenuPage extends StatefulSample {
 }
 
 class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProviderStateMixin {
-  late FPopoverController controller;
-  late FRadioSelectGroupController<String> groupController;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FPopoverController(vsync: this);
-    groupController = FRadioSelectGroupController<String>();
-  }
+  late final controller = FPopoverController(vsync: this);
+  late final selectController = FSelectController<String>.radio();
 
   @override
   Widget sample(BuildContext context) => FHeader(
@@ -55,7 +48,7 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
   @override
   void dispose() {
     controller.dispose();
-    groupController.dispose();
+    selectController.dispose();
     super.dispose();
   }
 }

@@ -1,3 +1,14 @@
+## 0.11.0
+
+### Changes
+
+* **Breaking** Replace `FSelectGroupController` with `FSelectController`.
+* **Breaking** Remove `FMultiSelectGroupController` - use `FSelectController(...)` instead.
+* **Breaking** Remove `FRadioSelectGroupController` - use `FSelectController.radio(...)` instead.
+* **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
+* **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
+
+
 ## 0.10.0+1
 
 Fix bad build caused by generated files not being published.

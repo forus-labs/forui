@@ -8,12 +8,12 @@ import '../../test_scaffold.dart';
 void main() {
   group('FSelectTileGroup', () {
     testWidgets('press select tile with prefix check icon', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FSelectController<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             children: [FSelectTile(title: const Text('1'), value: 1), FSelectTile(title: const Text('2'), value: 2)],
           ),
         ),
@@ -27,12 +27,12 @@ void main() {
     });
 
     testWidgets('press select tile with suffix check icon', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FSelectController<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             children: [
               FSelectTile.suffix(title: const Text('1'), value: 1),
               FSelectTile.suffix(title: const Text('2'), value: 2),
@@ -49,12 +49,12 @@ void main() {
     });
 
     testWidgets('press already selected tile', (tester) async {
-      final controller = FRadioSelectGroupController<int>(value: 2);
+      final controller = FSelectController<int>.radio(value: 2);
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             children: [
               FSelectTile.suffix(title: const Text('1'), value: 1),
               FSelectTile.suffix(title: const Text('2'), value: 2),
@@ -71,12 +71,12 @@ void main() {
     });
 
     testWidgets('press tile hides error', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FSelectController<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             autovalidateMode: AutovalidateMode.always,
             validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
             children: [
@@ -98,7 +98,7 @@ void main() {
     });
 
     testWidgets('press nested select tile', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FSelectController<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
@@ -106,7 +106,7 @@ void main() {
             children: [
               FTileGroup(children: [FTile(title: const Text('A')), FTile(title: const Text('B'))]),
               FSelectTileGroup(
-                groupController: controller,
+                selectController: controller,
                 children: [
                   FSelectTile(title: const Text('1'), value: 1),
                   FSelectTile(title: const Text('2'), value: 2),

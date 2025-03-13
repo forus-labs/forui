@@ -1,3 +1,8 @@
+## 0.11.0
+* Rename `useFRadioSelectGroupController` to `useFRadioSelectController`.
+* Rename `useFMultiSelectGroupController` to `useFSelectController`.
+
+
 ## 0.10.0
 Bump `flutter_hooks` version to `0.21.0`.
 

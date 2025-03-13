@@ -27,7 +27,7 @@ class SelectTileGroupPage extends StatefulSample {
 }
 
 class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage> {
-  final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
+  final controller = FSelectController(values: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -36,7 +36,7 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup(
-          groupController: controller,
+          selectController: controller,
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           divider: widget.divider,
@@ -70,7 +70,7 @@ class ScrollableSelectTileGroupPage extends StatefulSample {
 }
 
 class _ScrollableSelectTileGroupPageState extends StatefulSampleState<ScrollableSelectTileGroupPage> {
-  final FMultiSelectGroupController<Sidebar> controller = FMultiSelectGroupController(values: {Sidebar.recents});
+  final controller = FSelectController(values: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -79,7 +79,7 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup(
-          groupController: controller,
+          selectController: controller,
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           maxHeight: 100,
@@ -113,7 +113,7 @@ class LazySelectTileGroupPage extends StatefulSample {
 }
 
 class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGroupPage> {
-  final FMultiSelectGroupController<int> controller = FMultiSelectGroupController(values: {1});
+  final controller = FSelectController(values: {1});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -122,7 +122,7 @@ class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGr
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup.builder(
-          groupController: controller,
+          selectController: controller,
           label: const Text('Applicable values'),
           maxHeight: 200,
           tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
@@ -148,7 +148,7 @@ class SelectTileGroupMultiValuePage extends StatefulSample {
 
 class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTileGroupMultiValuePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FMultiSelectGroupController<Language> controller = FMultiSelectGroupController();
+  final controller = FSelectController<Language>();
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -158,7 +158,7 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FSelectTileGroup(
-          groupController: controller,
+          selectController: controller,
           label: const Text('Favorite Languages'),
           description: const Text('Your favorite language.'),
           validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
@@ -202,8 +202,8 @@ class SelectTileGroupRadioPage extends StatefulSample {
 }
 
 class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FRadioSelectGroupController<Notification> controller = FRadioSelectGroupController();
+  final _formKey = GlobalKey<FormState>();
+  final controller = FSelectController<Notification>.radio();
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -213,7 +213,7 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FSelectTileGroup(
-          groupController: controller,
+          selectController: controller,
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
@@ -256,7 +256,7 @@ class SelectTileGroupSuffixPage extends StatefulSample {
 }
 
 class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
-  final FRadioSelectGroupController<String> controller = FRadioSelectGroupController();
+  final controller = FSelectController<String>.radio();
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -265,7 +265,7 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 300),
         child: FSelectTileGroup(
-          groupController: controller,
+          selectController: controller,
           label: const Text('Settings'),
           children: [
             FSelectTile.suffix(prefixIcon: FIcon(FAssets.icons.list), title: const Text('List View'), value: 'List'),

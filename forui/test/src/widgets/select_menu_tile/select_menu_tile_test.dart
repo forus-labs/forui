@@ -6,16 +6,16 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FRadioSelectGroupController<int> controller;
+  late FSelectController<int> controller;
 
-  setUp(() => controller = FRadioSelectGroupController());
+  setUp(() => controller = FSelectController.radio());
 
   group('FSelectMenuTile', () {
     testWidgets('tap on tile opens menu', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            groupController: controller,
+            selectController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
@@ -44,7 +44,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            groupController: controller,
+            selectController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
@@ -76,7 +76,7 @@ void main() {
         TestScaffold.app(
           child: FSelectMenuTile(
             autoHide: true,
-            groupController: controller,
+            selectController: controller,
             prefixIcon: FIcon(FAssets.icons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),

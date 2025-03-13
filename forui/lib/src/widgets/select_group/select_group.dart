@@ -21,11 +21,7 @@ part 'select_group.style.dart';
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>> {
   /// The controller.
-  ///
-  /// See:
-  /// * [FRadioSelectGroupController] for a single radio button like selection.
-  /// * [FMultiSelectGroupController] for multiple selections.
-  final FSelectGroupController<T> controller;
+  final FSelectController<T> controller;
 
   /// The style. Defaults to [FThemeData.selectGroupStyle].
   final FSelectGroupStyle? style;

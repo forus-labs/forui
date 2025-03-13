@@ -19,7 +19,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
     return result!;
   }
 
-  final FSelectGroupController<T> controller;
+  final FSelectController<T> controller;
   final FSelectGroupStyle style;
   final bool selected;
 
@@ -46,8 +46,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 }
 
 /// A [FSelectGroupItem]'s state.
-typedef FSelectGroupItemState<T> =
-    ({FSelectGroupController<T> controller, FSelectGroupStyle style, T value, bool selected});
+typedef FSelectGroupItemState<T> = ({FSelectController<T> controller, FSelectGroupStyle style, T value, bool selected});
 
 /// Represents a selection in a [FSelectGroup].
 abstract class FSelectGroupItem<T> extends StatelessWidget {
