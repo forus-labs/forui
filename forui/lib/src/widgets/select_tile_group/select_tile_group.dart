@@ -206,6 +206,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
       ..add(EnumProperty('divider', divider))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('semanticLabel', semanticLabel));
+    properties.add(ObjectFlagProperty<ValueChanged<Set<T>>?>.has('onChange', onChange));
+    properties.add(ObjectFlagProperty<ValueChanged<(T, bool)>?>.has('onSelect', onSelect));
   }
 }
 

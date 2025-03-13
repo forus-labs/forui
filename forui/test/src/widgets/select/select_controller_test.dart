@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
 
 void main() {
@@ -30,9 +31,9 @@ void main() {
 
     test('should initialize with given values', () {
       final notifier =
-      FSelectController(values: {1, 2, 3})
-        ..addListener(() => count++)
-        ..addSelectListener((_) => changeCount++);
+          FSelectController(values: {1, 2, 3})
+            ..addListener(() => count++)
+            ..addSelectListener((_) => changeCount++);
 
       expect(notifier.value, equals({1, 2, 3}));
       expect(count, 0);
@@ -42,10 +43,10 @@ void main() {
     test('should selected a value when added', () {
       (int, bool)? value;
       final notifier =
-      FSelectController<int>()
-        ..addListener(() => count++)
-        ..addSelectListener((changed) => value = changed)
-        ..update(1, selected: true);
+          FSelectController<int>()
+            ..addListener(() => count++)
+            ..addSelectListener((changed) => value = changed)
+            ..update(1, selected: true);
 
       expect(notifier.value, {1});
       expect(count, 1);
@@ -55,10 +56,10 @@ void main() {
     test('should remove a value when removed', () {
       (int, bool)? value;
       final notifier =
-      FSelectController(values: {1, 2})
-        ..addListener(() => count++)
-        ..addSelectListener((changed) => value = changed)
-        ..update(1, selected: false);
+          FSelectController(values: {1, 2})
+            ..addListener(() => count++)
+            ..addSelectListener((changed) => value = changed)
+            ..update(1, selected: false);
 
       expect(notifier.value, equals({2}));
       expect(count, 1);
@@ -68,10 +69,10 @@ void main() {
     test('should not selected a value when max limit is reached', () {
       (int, bool)? value;
       final notifier =
-      FSelectController(max: 2, values: {1, 2})
-        ..addListener(() => count++)
-        ..addSelectListener((changed) => value = changed)
-        ..update(3, selected: true);
+          FSelectController(max: 2, values: {1, 2})
+            ..addListener(() => count++)
+            ..addSelectListener((changed) => value = changed)
+            ..update(3, selected: true);
 
       expect(notifier.value, equals({1, 2}));
       expect(count, 0);
@@ -81,10 +82,10 @@ void main() {
     test('should not remove a value when min limit is reached', () {
       (int, bool)? value;
       final notifier =
-      FSelectController(min: 2, values: {1, 2})
-        ..addListener(() => count++)
-        ..addSelectListener((changed) => value = changed)
-        ..update(1, selected: false);
+          FSelectController(min: 2, values: {1, 2})
+            ..addListener(() => count++)
+            ..addSelectListener((changed) => value = changed)
+            ..update(1, selected: false);
 
       expect(notifier.value, equals({1, 2}));
       expect(count, 0);
@@ -105,10 +106,11 @@ void main() {
       });
 
       test('should set the value', () {
-        final notifier = FSelectController<int>(min: 2, max: 2)
-          ..addListener(() => count++)
-          ..addSelectListener((_) => changeCount++)
-          ..value = {1, 2};
+        final notifier =
+            FSelectController<int>(min: 2, max: 2)
+              ..addListener(() => count++)
+              ..addSelectListener((_) => changeCount++)
+              ..value = {1, 2};
 
         expect(notifier.value, equals({1, 2}));
         expect(count, 1);
@@ -132,9 +134,9 @@ void main() {
 
     test('should initialize with a single value', () {
       final notifier =
-      FSelectController.radio(value: 1)
-        ..addListener(() => count++)
-        ..addSelectListener((_) => changeCount++);
+          FSelectController.radio(value: 1)
+            ..addListener(() => count++)
+            ..addSelectListener((_) => changeCount++);
 
       expect(notifier.value, {1});
       expect(count, 0);
@@ -142,9 +144,9 @@ void main() {
 
     test('should initialize with an empty set when no value is provided', () {
       final notifier =
-      FSelectController<int>.radio()
-        ..addListener(() => count++)
-        ..addSelectListener((_) => changeCount++);
+          FSelectController<int>.radio()
+            ..addListener(() => count++)
+            ..addSelectListener((_) => changeCount++);
 
       expect(notifier.value, isEmpty);
       expect(count, 0);
@@ -154,10 +156,10 @@ void main() {
     test('should change value when a new value is added', () {
       (int, bool)? value;
       final notifier =
-      FSelectController<int>.radio()
-        ..addListener(() => count++)
-        ..addSelectListener((changed) => value = changed)
-        ..update(1, selected: true);
+          FSelectController<int>.radio()
+            ..addListener(() => count++)
+            ..addSelectListener((changed) => value = changed)
+            ..update(1, selected: true);
 
       expect(notifier.value, {1});
       expect(count, 1);
@@ -167,10 +169,10 @@ void main() {
     test('should not change value when the same value is added', () {
       (int, bool)? value;
       final notifier =
-      FSelectController.radio(value: 1)
-        ..addListener(() => count++)
-        ..addSelectListener((changed) => value = changed)
-        ..update(1, selected: true);
+          FSelectController.radio(value: 1)
+            ..addListener(() => count++)
+            ..addSelectListener((changed) => value = changed)
+            ..update(1, selected: true);
 
       expect(notifier.value, equals({1}));
       expect(value, null);
@@ -180,10 +182,10 @@ void main() {
     test('should not change value when trying to remove', () {
       (int, bool)? value;
       final notifier =
-      FSelectController.radio(value: 1)
-        ..addListener(() => count++)
-        ..addSelectListener((changed) => value = changed)
-        ..update(1, selected: false);
+          FSelectController.radio(value: 1)
+            ..addListener(() => count++)
+            ..addSelectListener((changed) => value = changed)
+            ..update(1, selected: false);
 
       expect(notifier.value, equals({1}));
       expect(value, null);
@@ -199,10 +201,10 @@ void main() {
 
       test('should set the value when only one value is provided', () {
         final notifier =
-        FSelectController.radio()
-          ..addListener(() => count++)
-          ..addSelectListener((_) => changeCount++)
-          ..value = {1};
+            FSelectController.radio()
+              ..addListener(() => count++)
+              ..addSelectListener((_) => changeCount++)
+              ..value = {1};
 
         expect(notifier.value, equals({1}));
         expect(count, 1);

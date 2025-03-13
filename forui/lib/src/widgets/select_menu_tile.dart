@@ -409,6 +409,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+    properties.add(ObjectFlagProperty<ValueChanged<Set<T>>?>.has('onChange', onChange));
+    properties.add(ObjectFlagProperty<ValueChanged<(T, bool)>?>.has('onSelect', onSelect));
   }
 }
 

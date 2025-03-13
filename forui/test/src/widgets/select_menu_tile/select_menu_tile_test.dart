@@ -119,9 +119,7 @@ void main() {
               selections++;
               selection = value;
             },
-            menu: [
-              FSelectTile(title: const Text('1'), value: 1),
-            ],
+            menu: [FSelectTile(title: const Text('1'), value: 1)],
           ),
         ),
       );
@@ -154,9 +152,7 @@ void main() {
               firstSelections++;
               firstSelection = value;
             },
-            menu: [
-              FSelectTile(title: const Text('1'), value: 1),
-            ],
+            menu: [FSelectTile(title: const Text('1'), value: 1)],
           ),
         ),
       );
@@ -185,9 +181,7 @@ void main() {
               secondSelections++;
               secondSelection = value;
             },
-            menu: [
-              FSelectTile(title: const Text('1'), value: 1),
-            ],
+            menu: [FSelectTile(title: const Text('1'), value: 1)],
           ),
         ),
       );
