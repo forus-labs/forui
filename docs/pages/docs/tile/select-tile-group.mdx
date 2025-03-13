@@ -64,6 +64,8 @@ FSelectTileGroup<Value>(
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   divider: FTileDivider.indented,
+  onChange: (all) => print(all),
+  onSelect: (selection) => print(selection),
   items: [
     FSelectTile(
       label: const Text('1'),
@@ -87,6 +89,8 @@ FSelectTileGroup<Value>.builder(
   description: const Text('Personalize your experience'),
   semanticLabel: 'Settings',
   divider: FTileDivider.indented,
+  onChange: (all) => print(all),
+  onSelect: (selection) => print(selection),
   tileBuilder: (context, index) => index < 10 ? FSelectTile(
     title: Text('Tile $index'),
     value: Value.something,

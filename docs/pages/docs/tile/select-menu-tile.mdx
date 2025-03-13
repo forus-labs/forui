@@ -94,7 +94,9 @@ FSelectMenuTile<Value>(
   subtitle: Text('subtitle'),
   details: Text('All'),
   suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
-  menuTiles: [
+  onChange: (all) => print(all),
+  onSelect: (selection) => print(selection),
+  menu: [
     FSelectTile(
       title: const Text('1'),
       value: Value.something,
@@ -128,11 +130,13 @@ FSelectMenuTile<Value>.builder(
   subtitle: Text('subtitle'),
   details: Text('All'),
   suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
-  menuTileBuilder: (context, index) => index < 10 ? FSelectTile(
+  menuBuilder: (context, index) => index < 10 ? FSelectTile(
     label: Text('Tile $index'),
     value: Value.something,
   ) : null,
   count: 100,
+  onChange: (all) => print(all),
+  onSelect: (selection) => print(selection),
 );
 ```
 
@@ -281,7 +285,7 @@ FSelectMenuTile<Value>.builder(
         validator: (value) => value == null ? 'Select an item' : null,
         prefixIcon: FIcon(FAssets.icons.variable),
         title: const Text('Applicable values'),
-        menuTileBuilder: (context, index) => FSelectTile(
+        menuBuilder: (context, index) => FSelectTile(
           title: Text('Tile $index'),
           value: index,
         ),

@@ -5,6 +5,8 @@
 * Add `FSelectGroup.onSelect`.
 * Add `FSelectTileGroup.onChange`.
 * Add `FSelectTileGroup.onSelect`.
+* Add `FSelectMenuTile.onChange`.
+* Add `FSelectMenuTile.onSelect`.
 
 ### Changes
 
@@ -13,6 +15,7 @@
 * **Breaking** Remove `FRadioSelectGroupController` - use `FSelectController.radio(...)` instead.
 * **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
 * **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
+* **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectTileGroup.menuBuilder`.
 
 
 ## 0.10.0+1

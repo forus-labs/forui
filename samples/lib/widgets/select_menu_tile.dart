@@ -124,7 +124,7 @@ class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTil
           prefixIcon: FIcon(FAssets.icons.variable),
           title: const Text('Applicable values'),
           maxHeight: 200,
-          menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+          menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
         ),
       ),
     ],

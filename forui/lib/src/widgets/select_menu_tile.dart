@@ -118,6 +118,12 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The suffix icon. Defaults to `FAssets.icons.chevronsUpDown`.
   final Widget? suffixIcon;
 
+  /// The callback that is called when the value changes.
+  final ValueChanged<Set<T>>? onChange;
+
+  /// The callback that is called when an item is selected.
+  final ValueChanged<(T, bool)>? onSelect;
+
   /// Creates a [FSelectMenuTile].
   FSelectMenuTile({
     required this.selectController,
@@ -148,6 +154,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.subtitle,
     this.details,
     this.suffixIcon,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -239,23 +247,23 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuTileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to
+  /// The [menuBuilder] is called for each tile that should be built. [FTileData] is **not** visible to
   /// `menuTileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
   /// * It will be called only for indices <= [count] if [count] is given.
   ///
-  /// The [count] is the number of tiles to build. If null, [menuTileBuilder] will be called until it returns null.
+  /// The [count] is the number of tiles to build. If null, [menuBuilder] will be called until it returns null.
   ///
   /// ## Notes
   /// May result in an infinite loop or run out of memory if:
   /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
-  /// * [count] is null and [menuTileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
+  /// * [count] is null and [menuBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
   FSelectMenuTile.builder({
     required this.selectController,
     required this.title,
-    required FSelectTile<T>? Function(BuildContext, int) menuTileBuilder,
+    required FSelectTile<T>? Function(BuildContext, int) menuBuilder,
     int? count,
     this.popoverController,
     this.scrollController,
@@ -282,6 +290,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.subtitle,
     this.details,
     this.suffixIcon,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -340,7 +350,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                      style: menuStyle.tileGroupStyle,
                      semanticLabel: semanticLabel,
                      divider: divider,
-                     tileBuilder: menuTileBuilder,
+                     tileBuilder: menuBuilder,
                      count: count,
                    ),
                  ),
@@ -413,6 +423,14 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       widget.popoverController ?? FPopoverController(vsync: this),
       autoHide: widget.autoHide,
     )..addListener(_handleControllerChanged);
+
+    if (widget.onChange case final onChange?) {
+      _controller.addValueListener(onChange);
+    }
+
+    if (widget.onSelect case final onSelect?) {
+      _controller.addSelectListener(onSelect);
+    }
   }
 
   @override
@@ -431,6 +449,20 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     }
 
     _controller.autoHide = old.autoHide;
+
+    if (widget.onChange case final onChange?) {
+      _controller.addValueListener(onChange);
+    }
+    if (widget.onSelect case final onSelect?) {
+      _controller.addSelectListener(onSelect);
+    }
+
+    if (old.onChange case final onChange?) {
+      _controller.removeValueListener(onChange);
+    }
+    if (old.onSelect case final onSelect?) {
+      _controller.removeSelectListener(onSelect);
+    }
   }
 
   @override

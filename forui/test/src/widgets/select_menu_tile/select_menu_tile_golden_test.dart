@@ -201,7 +201,7 @@ void main() {
             description: const Text('Description'),
             maxHeight: 250,
             title: const Text('Title'),
-            menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -222,7 +222,7 @@ void main() {
             maxHeight: 500,
             count: 2,
             title: const Text('Title'),
-            menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -243,7 +243,7 @@ void main() {
             maxHeight: 500,
             count: 24,
             title: const Text('Title'),
-            menuTileBuilder:
+            menuBuilder:
                 (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
           ),
         ),

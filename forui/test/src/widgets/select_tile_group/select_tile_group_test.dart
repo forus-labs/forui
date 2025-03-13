@@ -157,7 +157,7 @@ void main() {
 
     var firstChanges = 0;
     var firstSelections = 0;
-    (int, bool)? firsSelection;
+    (int, bool)? firstSelection;
 
     await tester.pumpWidget(
       TestScaffold(
@@ -166,7 +166,7 @@ void main() {
           onChange: (_) => firstChanges++,
           onSelect: (value) {
             firstSelections++;
-            firsSelection = value;
+            firstSelection = value;
           },
           children: [FSelectTile(title: const Text('1'), value: 1)],
         ),
@@ -178,7 +178,7 @@ void main() {
 
     expect(firstChanges, 1);
     expect(firstSelections, 1);
-    expect(firsSelection, (1, true));
+    expect(firstSelection, (1, true));
 
     var secondChanges = 0;
     var secondSelections = 0;
@@ -203,7 +203,7 @@ void main() {
 
     expect(firstChanges, 1);
     expect(firstSelections, 1);
-    expect(firsSelection, (1, true));
+    expect(firstSelection, (1, true));
 
     expect(secondChanges, 1);
     expect(secondSelections, 1);
