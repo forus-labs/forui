@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:forui/forui.dart';
 
 /// A select controller that manages the selection state of a group of values.
 abstract class FSelectController<T> extends FValueNotifier<Set<T>> {
   final List<ValueChanged<(T, bool)>> _changeListeners = [];
 
-  /// Creates a [FSelectController] with a [min] and [max] number of selected elements allowed. Defaults to no min and 
+  /// Creates a [FSelectController] with a [min] and [max] number of selected elements allowed. Defaults to no min and
   /// max.
   ///
   /// # Contract:
@@ -68,10 +69,10 @@ class _MultiController<T> extends FSelectController<T> {
   final int? max;
 
   _MultiController({this.min = 0, this.max, Set<T>? values})
-      : assert(min >= 0, 'The min must be greater than or equal to 0.'),
-        assert(max == null || max >= 0, 'The max must be greater than or equal to 0.'),
-        assert(max == null || min <= max, 'The max must be greater than or equal to the min.'),
-        super._(values: values ?? {});
+    : assert(min >= 0, 'The min must be greater than or equal to 0.'),
+      assert(max == null || max >= 0, 'The max must be greater than or equal to 0.'),
+      assert(max == null || min <= max, 'The max must be greater than or equal to the min.'),
+      super._(values: values ?? {});
 
   @override
   void update(T value, {required bool selected}) {

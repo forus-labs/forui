@@ -243,8 +243,7 @@ void main() {
             maxHeight: 500,
             count: 24,
             title: const Text('Title'),
-            menuBuilder:
-                (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
+            menuBuilder: (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
           ),
         ),
       );

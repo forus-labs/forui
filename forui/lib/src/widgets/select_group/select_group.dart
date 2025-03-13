@@ -115,7 +115,7 @@ class _State<T> extends FormFieldState<Set<T>> {
     if (widget.onChange case final onChange?) {
       widget.controller.addValueListener(onChange);
     }
-    
+
     if (widget.onSelect case final onSelect?) {
       widget.controller.addSelectListener(onSelect);
     }
