@@ -124,12 +124,10 @@ class _State<T> extends FormFieldState<Set<T>> {
   @override
   void didUpdateWidget(covariant FSelectGroup<T> old) {
     super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
-      return;
+    if (widget.controller != old.controller) {
+      widget.controller.addListener(_handleControllerChanged);
+      old.controller.removeListener(_handleControllerChanged);
     }
-
-    widget.controller.addListener(_handleControllerChanged);
-    old.controller.removeListener(_handleControllerChanged);
 
     if (widget.onChange case final onChange?) {
       widget.controller.addValueListener(onChange);

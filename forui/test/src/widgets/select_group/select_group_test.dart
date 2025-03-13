@@ -34,4 +34,60 @@ void main() {
     expect(selections, 1);
     expect(selection, (2, true));
   });
+
+  testWidgets('update widget', (tester) async {
+    final controller = FSelectController<int>();
+
+    var firstChanges = 0;
+    var firstSelections = 0;
+    (int, bool)? firsSelection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectGroup<int>(
+          controller: controller,
+          onChange: (_) => firstChanges++,
+          onSelect: (value) {
+            firstSelections++;
+            firsSelection = value;
+          },
+          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+
+    expect(firstChanges, 1);
+    expect(firstSelections, 1);
+    expect(firsSelection, (1, true));
+
+    var secondChanges = 0;
+    var secondSelections = 0;
+    (int, bool)? secondSelection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectGroup<int>(
+          controller: controller,
+          onChange: (_) => secondChanges++,
+          onSelect: (value) {
+            secondSelections++;
+            secondSelection = value;
+          },
+          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+
+    expect(firstChanges, 1);
+    expect(firstSelections, 1);
+    expect(firsSelection, (1, true));
+
+    expect(secondChanges, 1);
+    expect(secondSelections, 1);
+    expect(secondSelection, (1, false));
+  });
 }
