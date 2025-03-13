@@ -14,7 +14,7 @@ abstract class FSelectController<T> extends FValueNotifier<Set<T>> {
   /// * [min] < 0.
   /// * [max] < 0.
   /// * [min] > [max].
-  factory FSelectController({int min, int? max, Set<T> values}) = _MultiController<T>;
+  factory FSelectController({int min, int? max, Set<T>? values}) = _MultiController<T>;
 
   /// Creates a [FSelectController] that allows only one element at a time.
   factory FSelectController.radio({T? value}) = _RadioController<T>;

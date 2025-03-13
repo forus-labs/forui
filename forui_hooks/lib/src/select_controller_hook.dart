@@ -7,11 +7,11 @@ import 'package:forui/forui.dart';
 /// Creates a [FSelectController] that allows multiple selections and is automatically disposed.
 ///
 /// The [min] and [max] values are the min and max number of selections allowed. Defaults to no min and max.
-FSelectController<T> useFSelectController<T>({Set<T> values = const {}, int min = 0, int? max, List<Object?>? keys}) =>
+FSelectController<T> useFSelectController<T>({Set<T>? values, int min = 0, int? max, List<Object?>? keys}) =>
     use(_MultiControllerHook<T>(values: values, min: min, max: max, keys: keys));
 
 class _MultiControllerHook<T> extends Hook<FSelectController<T>> {
-  final Set<T> values;
+  final Set<T>? values;
   final int min;
   final int? max;
 

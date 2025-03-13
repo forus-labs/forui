@@ -14,8 +14,8 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFSelectController();
-            return FSelectGroup(
+            controller = useFSelectController<int>();
+            return FSelectGroup<int>(
               controller: controller,
               items: const [
                 FSelectGroupItem.checkbox(value: 0, label: Text('0')),
@@ -32,15 +32,15 @@ void main() {
     await tester.pumpAndSettle();
   });
 
-  testWidgets('useFRadioSelectcontroller', (tester) async {
+  testWidgets('useFRadioSelectController', (tester) async {
     late FSelectController<int> controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFRadioSelectController();
-            return FSelectGroup(
+            controller = useFRadioSelectController<int>();
+            return FSelectGroup<int>(
               controller: controller,
               items: const [
                 FSelectGroupItem.radio(value: 0, label: Text('0')),
