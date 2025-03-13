@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/accordion/accordion.dart';
+import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 /// An interactive heading that reveals a section of content.
 ///
