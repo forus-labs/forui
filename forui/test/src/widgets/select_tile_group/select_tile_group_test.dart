@@ -124,4 +124,89 @@ void main() {
       expect(controller.value, {2});
     });
   });
+
+  testWidgets('callbacks called', (tester) async {
+    var changes = 0;
+    var selections = 0;
+    (int, bool)? selection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: FSelectController(),
+          onChange: (_) => changes++,
+          onSelect: (value) {
+            selections++;
+            selection = value;
+          },
+          children: [FSelectTile(title: const Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(changes, 1);
+    expect(selections, 1);
+    expect(selection, (1, true));
+  });
+
+  testWidgets('update widget', (tester) async {
+    final controller = FSelectController<int>();
+
+    var firstChanges = 0;
+    var firstSelections = 0;
+    (int, bool)? firsSelection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: controller,
+          onChange: (_) => firstChanges++,
+          onSelect: (value) {
+            firstSelections++;
+            firsSelection = value;
+          },
+          children: [FSelectTile(title: const Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(firstChanges, 1);
+    expect(firstSelections, 1);
+    expect(firsSelection, (1, true));
+
+    var secondChanges = 0;
+    var secondSelections = 0;
+    (int, bool)? secondSelection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: controller,
+          onChange: (_) => secondChanges++,
+          onSelect: (value) {
+            secondSelections++;
+            secondSelection = value;
+          },
+          children: [FSelectTile(title: const Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(firstChanges, 1);
+    expect(firstSelections, 1);
+    expect(firsSelection, (1, true));
+
+    expect(secondChanges, 1);
+    expect(secondSelections, 1);
+    expect(secondSelection, (1, false));
+  });
 }

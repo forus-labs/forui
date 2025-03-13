@@ -3,6 +3,8 @@
 ### Additions
 * Add `FSelectGroup.onChange`.
 * Add `FSelectGroup.onSelect`.
+* Add `FSelectTileGroup.onChange`.
+* Add `FSelectTileGroup.onSelect`.
 
 ### Changes
 

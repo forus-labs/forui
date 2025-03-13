@@ -65,6 +65,12 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
+  /// The callback that is called when the value changes.
+  final ValueChanged<Set<T>>? onChange;
+
+  /// The callback that is called when an item is selected.
+  final ValueChanged<(T, bool)>? onSelect;
+
   /// Creates a [FSelectTileGroup].
   FSelectTileGroup({
     required this.selectController,
@@ -80,6 +86,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticLabel,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -137,6 +145,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticLabel,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -204,17 +214,36 @@ class _State<T> extends FormFieldState<Set<T>> {
   void initState() {
     super.initState();
     widget.selectController.addListener(_handleControllerChanged);
+    if (widget.onChange case final onChange?) {
+      widget.selectController.addValueListener(onChange);
+    }
+
+    if (widget.onSelect case final onSelect?) {
+      widget.selectController.addSelectListener(onSelect);
+    }
   }
 
   @override
   void didUpdateWidget(covariant FSelectTileGroup<T> old) {
     super.didUpdateWidget(old);
-    if (widget.selectController == old.selectController) {
-      return;
+    if (widget.selectController != old.selectController) {
+      widget.selectController.addListener(_handleControllerChanged);
+      old.selectController.removeListener(_handleControllerChanged);
     }
 
-    widget.selectController.addListener(_handleControllerChanged);
-    old.selectController.removeListener(_handleControllerChanged);
+    if (widget.onChange case final onChange?) {
+      widget.selectController.addValueListener(onChange);
+    }
+    if (widget.onSelect case final onSelect?) {
+      widget.selectController.addSelectListener(onSelect);
+    }
+
+    if (old.onChange case final onChange?) {
+      old.selectController.removeValueListener(onChange);
+    }
+    if (old.onSelect case final onSelect?) {
+      old.selectController.removeSelectListener(onSelect);
+    }
   }
 
   @override
