@@ -15,8 +15,7 @@
 * **Breaking** Remove `FRadioSelectGroupController` - use `FSelectController.radio(...)` instead.
 * **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
 * **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
-* **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectTileGroup.menuBuilder`.
-
+* **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
 
 ## 0.10.0+1
 
