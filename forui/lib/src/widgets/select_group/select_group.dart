@@ -38,6 +38,12 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   /// The items.
   final List<FSelectGroupItem<T>> items;
 
+  /// The callback that is called when the value changes.
+  final ValueChanged<Set<T>>? onChange;
+
+  /// The callback that is called when an item is selected.
+  final ValueChanged<(T, bool)>? onSelect;
+
   /// Creates a [FSelectGroup].
   FSelectGroup({
     required this.controller,
@@ -46,6 +52,8 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -93,7 +101,9 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onSelect', onSelect));
   }
 }
 
@@ -102,6 +112,13 @@ class _State<T> extends FormFieldState<Set<T>> {
   void initState() {
     super.initState();
     widget.controller.addListener(_handleControllerChanged);
+    if (widget.onChange case final onChange?) {
+      widget.controller.addValueListener(onChange);
+    }
+    
+    if (widget.onSelect case final onSelect?) {
+      widget.controller.addSelectListener(onSelect);
+    }
   }
 
   @override
@@ -113,6 +130,20 @@ class _State<T> extends FormFieldState<Set<T>> {
 
     widget.controller.addListener(_handleControllerChanged);
     old.controller.removeListener(_handleControllerChanged);
+
+    if (widget.onChange case final onChange?) {
+      widget.controller.addValueListener(onChange);
+    }
+    if (widget.onSelect case final onSelect?) {
+      widget.controller.addSelectListener(onSelect);
+    }
+
+    if (old.onChange case final onChange?) {
+      old.controller.removeValueListener(onChange);
+    }
+    if (old.onSelect case final onSelect?) {
+      old.controller.removeSelectListener(onSelect);
+    }
   }
 
   @override

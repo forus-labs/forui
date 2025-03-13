@@ -32,7 +32,7 @@ void main() {
       final notifier =
       FSelectController(values: {1, 2, 3})
         ..addListener(() => count++)
-        ..addChangeListener((_) => changeCount++);
+        ..addSelectListener((_) => changeCount++);
 
       expect(notifier.value, equals({1, 2, 3}));
       expect(count, 0);
@@ -44,7 +44,7 @@ void main() {
       final notifier =
       FSelectController<int>()
         ..addListener(() => count++)
-        ..addChangeListener((changed) => value = changed)
+        ..addSelectListener((changed) => value = changed)
         ..update(1, selected: true);
 
       expect(notifier.value, {1});
@@ -57,7 +57,7 @@ void main() {
       final notifier =
       FSelectController(values: {1, 2})
         ..addListener(() => count++)
-        ..addChangeListener((changed) => value = changed)
+        ..addSelectListener((changed) => value = changed)
         ..update(1, selected: false);
 
       expect(notifier.value, equals({2}));
@@ -70,7 +70,7 @@ void main() {
       final notifier =
       FSelectController(max: 2, values: {1, 2})
         ..addListener(() => count++)
-        ..addChangeListener((changed) => value = changed)
+        ..addSelectListener((changed) => value = changed)
         ..update(3, selected: true);
 
       expect(notifier.value, equals({1, 2}));
@@ -83,7 +83,7 @@ void main() {
       final notifier =
       FSelectController(min: 2, values: {1, 2})
         ..addListener(() => count++)
-        ..addChangeListener((changed) => value = changed)
+        ..addSelectListener((changed) => value = changed)
         ..update(1, selected: false);
 
       expect(notifier.value, equals({1, 2}));
@@ -107,7 +107,7 @@ void main() {
       test('should set the value', () {
         final notifier = FSelectController<int>(min: 2, max: 2)
           ..addListener(() => count++)
-          ..addChangeListener((_) => changeCount++)
+          ..addSelectListener((_) => changeCount++)
           ..value = {1, 2};
 
         expect(notifier.value, equals({1, 2}));
@@ -134,7 +134,7 @@ void main() {
       final notifier =
       FSelectController.radio(value: 1)
         ..addListener(() => count++)
-        ..addChangeListener((_) => changeCount++);
+        ..addSelectListener((_) => changeCount++);
 
       expect(notifier.value, {1});
       expect(count, 0);
@@ -144,7 +144,7 @@ void main() {
       final notifier =
       FSelectController<int>.radio()
         ..addListener(() => count++)
-        ..addChangeListener((_) => changeCount++);
+        ..addSelectListener((_) => changeCount++);
 
       expect(notifier.value, isEmpty);
       expect(count, 0);
@@ -156,7 +156,7 @@ void main() {
       final notifier =
       FSelectController<int>.radio()
         ..addListener(() => count++)
-        ..addChangeListener((changed) => value = changed)
+        ..addSelectListener((changed) => value = changed)
         ..update(1, selected: true);
 
       expect(notifier.value, {1});
@@ -169,7 +169,7 @@ void main() {
       final notifier =
       FSelectController.radio(value: 1)
         ..addListener(() => count++)
-        ..addChangeListener((changed) => value = changed)
+        ..addSelectListener((changed) => value = changed)
         ..update(1, selected: true);
 
       expect(notifier.value, equals({1}));
@@ -182,7 +182,7 @@ void main() {
       final notifier =
       FSelectController.radio(value: 1)
         ..addListener(() => count++)
-        ..addChangeListener((changed) => value = changed)
+        ..addSelectListener((changed) => value = changed)
         ..update(1, selected: false);
 
       expect(notifier.value, equals({1}));
@@ -201,7 +201,7 @@ void main() {
         final notifier =
         FSelectController.radio()
           ..addListener(() => count++)
-          ..addChangeListener((_) => changeCount++)
+          ..addSelectListener((_) => changeCount++)
           ..value = {1};
 
         expect(notifier.value, equals({1}));

@@ -504,7 +504,7 @@ class _SelectGroupController<T> implements FSelectController<T> {
   void addValueListener(ValueChanged<Set<T>> listener) => delegate.addValueListener(listener);
 
   @override
-  void addChangeListener(ValueChanged<(T, bool)> listener) => delegate.addChangeListener(listener);
+  void addSelectListener(ValueChanged<(T, bool)> listener) => delegate.addSelectListener(listener);
 
   @override
   void removeListener(VoidCallback listener) => delegate.removeListener(listener);
@@ -513,13 +513,13 @@ class _SelectGroupController<T> implements FSelectController<T> {
   void removeValueListener(ValueChanged<Set<T>> listener) => delegate.removeValueListener(listener);
 
   @override
-  void removeChangeListener(ValueChanged<(T, bool)> listener) => delegate.removeChangeListener(listener);
+  void removeSelectListener(ValueChanged<(T, bool)> listener) => delegate.removeSelectListener(listener);
 
   @override
   void notifyListeners() => delegate.notifyListeners();
 
   @override
-  void notifyChangeListeners(T value, {required bool add}) => delegate.notifyChangeListeners(value, add: add);
+  void notifySelectListeners(T value, {required bool add}) => delegate.notifySelectListeners(value, add: add);
 
   @override
   Set<T> get value => delegate.value;

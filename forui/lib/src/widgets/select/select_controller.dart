@@ -27,19 +27,19 @@ abstract class FSelectController<T> extends FValueNotifier<Set<T>> {
   ///
   /// Returns true if the notifier was updated.
   ///
-  /// Custom implementations _must_ call [notifyChangeListeners] after changing the value.
+  /// Custom implementations _must_ call [notifySelectListeners] after changing the value.
   void update(T value, {required bool selected});
 
   /// Register a closure to be called whenever [update] successfully updates a selection.
-  void addChangeListener(ValueChanged<(T, bool)> listener) => _changeListeners.add(listener);
+  void addSelectListener(ValueChanged<(T, bool)> listener) => _changeListeners.add(listener);
 
   /// Remove a previously registered closure from the list of closures that are notified whenever [update] successfully
   /// changes a selection.
-  void removeChangeListener(ValueChanged<(T, bool)> listener) => _changeListeners.remove(listener);
+  void removeSelectListener(ValueChanged<(T, bool)> listener) => _changeListeners.remove(listener);
 
-  /// Notify all registered listeners of a change.
+  /// Notify all registered selection listeners of a change.
   @protected
-  void notifyChangeListeners(T value, {required bool add}) {
+  void notifySelectListeners(T value, {required bool add}) {
     for (final listener in _changeListeners) {
       listener((value, add));
     }
@@ -89,7 +89,7 @@ class _MultiController<T> extends FSelectController<T> {
       _value.remove(value);
     }
 
-    notifyChangeListeners(value, add: selected);
+    notifySelectListeners(value, add: selected);
     notifyListeners();
   }
 
@@ -116,7 +116,7 @@ class _RadioController<T> extends FSelectController<T> {
       ..clear()
       ..add(value);
 
-    notifyChangeListeners(value, add: selected);
+    notifySelectListeners(value, add: selected);
     notifyListeners();
   }
 

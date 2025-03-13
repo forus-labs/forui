@@ -1,5 +1,9 @@
 ## 0.11.0
 
+### Additions
+* Add `FSelectGroup.onChange`.
+* Add `FSelectGroup.onSelect`.
+
 ### Changes
 
 * **Breaking** Replace `FSelectGroupController` with `FSelectController`.

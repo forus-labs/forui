@@ -60,7 +60,6 @@ abstract class FSliderController extends FChangeNotifier {
   /// Registers the controller to a slider with the given extent and marks.
   ///
   /// A controller can only be attached to a single slider at a time.
-  @visibleForOverriding
   void attach(double extent, List<FSliderMark> marks);
 
   /// Moves the active track on the [min] edge to the previous/next step.
@@ -123,7 +122,6 @@ abstract class FSliderController extends FChangeNotifier {
   /// The slider's active track/selection.
   FSliderSelection get selection => _selection ?? _initialSelection;
 
-  @visibleForOverriding
   set selection(FSliderSelection? selection) {
     if (selection == null || _selection == selection) {
       return;
@@ -157,7 +155,7 @@ class FContinuousSliderController extends FSliderController {
       super.range();
 
   @override
-  @visibleForOverriding
+  @internal
   void attach(double extent, List<FSliderMark> _) {
     final proposed = ContinuousSelection(
       step: stepPercentage,
@@ -200,7 +198,6 @@ class FDiscreteSliderController extends FSliderController {
   FDiscreteSliderController.range({required super.selection, super.tooltips = true}) : super.range();
 
   @override
-  @visibleForOverriding
   void attach(double extent, List<FSliderMark> marks) {
     assert(marks.isNotEmpty, 'At least one mark is required.');
 
