@@ -8,6 +8,9 @@ import 'package:forui/forui.dart';
 
 part 'select_menu_tile.style.dart';
 
+/// A [FSelectMenuTile]'s controller.
+typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
+
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///
 /// A [FSelectMenuTile] is internally a [FormField], therefore it can be used in a [Form].
@@ -20,7 +23,7 @@ part 'select_menu_tile.style.dart';
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
 class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
   /// The controller that controls the selected tiles.
-  final FSelectController<T> selectController;
+  final FSelectMenuTileController<T> selectController;
 
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
@@ -415,12 +418,12 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 }
 
 class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMixin {
-  late _SelectGroupController<T> _controller;
+  late _Notifier<T> _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = _SelectGroupController(
+    _controller = _Notifier(
       widget.selectController,
       widget.popoverController ?? FPopoverController(vsync: this),
       autoHide: widget.autoHide,
@@ -431,7 +434,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     }
 
     if (widget.onSelect case final onSelect?) {
-      _controller.addSelectListener(onSelect);
+      _controller.addUpdateListener(onSelect);
     }
   }
 
@@ -456,14 +459,14 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       _controller.addValueListener(onChange);
     }
     if (widget.onSelect case final onSelect?) {
-      _controller.addSelectListener(onSelect);
+      _controller.addUpdateListener(onSelect);
     }
 
     if (old.onChange case final onChange?) {
       _controller.removeValueListener(onChange);
     }
     if (old.onSelect case final onSelect?) {
-      _controller.removeSelectListener(onSelect);
+      _controller.removeUpdateListener(onSelect);
     }
   }
 
@@ -506,23 +509,23 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   FSelectMenuTile<T> get widget => super.widget as FSelectMenuTile<T>;
 }
 
-class _SelectGroupController<T> implements FSelectController<T> {
-  FSelectController<T> delegate;
+class _Notifier<T> implements FMultiValueNotifier<T> {
+  FMultiValueNotifier<T> delegate;
   FPopoverController _popover;
   bool autoHide;
 
-  _SelectGroupController(this.delegate, this._popover, {required this.autoHide});
+  _Notifier(this.delegate, this._popover, {required this.autoHide});
 
   @override
   bool contains(T value) => delegate.contains(value);
 
   @override
-  Future<void> update(T value, {required bool selected}) async {
+  Future<void> update(T value, {required bool add}) async {
     if (autoHide && _popover.shown) {
       await _popover.hide();
     }
 
-    delegate.update(value, selected: selected);
+    delegate.update(value, add: add);
   }
 
   @override
@@ -538,7 +541,7 @@ class _SelectGroupController<T> implements FSelectController<T> {
   void addValueListener(ValueChanged<Set<T>> listener) => delegate.addValueListener(listener);
 
   @override
-  void addSelectListener(ValueChanged<(T, bool)> listener) => delegate.addSelectListener(listener);
+  void addUpdateListener(ValueChanged<(T, bool)> listener) => delegate.addUpdateListener(listener);
 
   @override
   void removeListener(VoidCallback listener) => delegate.removeListener(listener);
@@ -547,13 +550,13 @@ class _SelectGroupController<T> implements FSelectController<T> {
   void removeValueListener(ValueChanged<Set<T>> listener) => delegate.removeValueListener(listener);
 
   @override
-  void removeSelectListener(ValueChanged<(T, bool)> listener) => delegate.removeSelectListener(listener);
+  void removeUpdateListener(ValueChanged<(T, bool)> listener) => delegate.removeUpdateListener(listener);
 
   @override
   void notifyListeners() => delegate.notifyListeners();
 
   @override
-  void notifySelectListeners(T value, {required bool add}) => delegate.notifySelectListeners(value, add: add);
+  void notifyUpdateListeners(T value, {required bool add}) => delegate.notifyUpdateListeners(value, add: add);
 
   @override
   Set<T> get value => delegate.value;

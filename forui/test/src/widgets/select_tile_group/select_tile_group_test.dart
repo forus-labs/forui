@@ -8,7 +8,7 @@ import '../../test_scaffold.dart';
 void main() {
   group('FSelectTileGroup', () {
     testWidgets('press select tile with prefix check icon', (tester) async {
-      final controller = FSelectController<int>.radio();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
@@ -27,7 +27,7 @@ void main() {
     });
 
     testWidgets('press select tile with suffix check icon', (tester) async {
-      final controller = FSelectController<int>.radio();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
@@ -49,7 +49,7 @@ void main() {
     });
 
     testWidgets('press already selected tile', (tester) async {
-      final controller = FSelectController<int>.radio(value: 2);
+      final controller = FMultiValueNotifier<int>.radio(value: 2);
 
       await tester.pumpWidget(
         TestScaffold(
@@ -71,7 +71,7 @@ void main() {
     });
 
     testWidgets('press tile hides error', (tester) async {
-      final controller = FSelectController<int>.radio();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
@@ -98,7 +98,7 @@ void main() {
     });
 
     testWidgets('press nested select tile', (tester) async {
-      final controller = FSelectController<int>.radio();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
@@ -133,7 +133,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup<int>(
-          selectController: FSelectController(),
+          selectController: FMultiValueNotifier(),
           onChange: (_) => changes++,
           onSelect: (value) {
             selections++;
@@ -153,7 +153,7 @@ void main() {
   });
 
   testWidgets('update widget', (tester) async {
-    final controller = FSelectController<int>();
+    final controller = FMultiValueNotifier<int>();
 
     var firstChanges = 0;
     var firstSelections = 0;

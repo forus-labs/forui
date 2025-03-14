@@ -24,7 +24,7 @@ A group of tiles that allow users to make a selection from a set of options.
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(
-      controller: FSelectController(values: {Sidebar.recents}),
+      controller: FSelectTileGroupController(values: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [
@@ -55,7 +55,7 @@ A group of tiles that allow users to make a selection from a set of options.
 
 ```dart copy
 FSelectTileGroup<Value>(
-  groupController: FSelectController(), // or FSelectController.radio()
+  groupController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
@@ -79,7 +79,7 @@ FSelectTileGroup<Value>(
 
 ```dart copy
 FSelectTileGroup<Value>.builder(
-  groupController: FSelectController(), // or FSelectController.radio()
+  groupController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
@@ -112,7 +112,7 @@ FSelectTileGroup<Value>.builder(
   <Tabs.Tab>
     ```dart {5} copy
     FSelectTileGroup(
-      selectController: FSelectController(values: {Sidebar.recents}),
+      selectController: FSelectTileGroupController(values: {Sidebar.recents}),
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
       maxHeight: 100,
@@ -147,7 +147,7 @@ FSelectTileGroup<Value>.builder(
   <Tabs.Tab>
     ```dart {1, 5-11} copy
     FSelectTileGroup.builder(
-      selectController: FSelectController(values: {1}),
+      selectController: FSelectTileGroupController(values: {1}),
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
       maxHeight: 200,
@@ -182,7 +182,7 @@ FSelectTileGroup<Value>.builder(
 
     class MultiValueFormState extends State<MultiValueForm> {
       final _formKey = GlobalKey<FormState>();
-      final controller = FSelectController<Language>();
+      final controller = FSelectTileGroupController<Language>();
 
       @override
       Widget build(BuildContext context) => Form(
@@ -248,7 +248,7 @@ FSelectTileGroup<Value>.builder(
 
     class RadioFormState extends State<RadioForm> {
       final _formKey = GlobalKey<FormState>();
-      final controller = FSelectController<Notification>.radio();
+      final controller = FSelectTileGroupController<Notification>.radio();
 
       @override
       Widget build(BuildContext context) => Form(
@@ -315,7 +315,7 @@ FSelectTileGroup<Value>.builder(
   <Tabs.Tab>
     ```dart {4, 9} copy
     FSelectTileGroup(
-      selectController: FSelectController.radio(),
+      selectController: FSelectTileGroupController.radio(),
       label: const Text('Settings'),
       children: [
         FSelectTile.suffix(
@@ -345,7 +345,7 @@ FSelectTileGroup<Value>.builder(
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(
-      selectController: FSelectController(values: {Sidebar.recents}),
+      selectController: FSelectTileGroupController(values: {Sidebar.recents}),
       divider: FTileDivider.full,
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
@@ -382,7 +382,7 @@ FSelectTileGroup<Value>.builder(
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(
-      selectController: FSelectController(values: {Sidebar.recents}),
+      selectController: FSelectTileGroupController(values: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [

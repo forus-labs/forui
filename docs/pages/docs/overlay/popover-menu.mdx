@@ -23,13 +23,11 @@ A popover menu displays a menu in a portal aligned to a child.
 
     class _State extends State<_PopoverMenu> with SingleTickerProviderStateMixin {
       late FPopoverController controller;
-      late FRadioSelectGroupController<String> groupController;
 
       @override
       void initState() {
         super.initState();
         controller = FPopoverController(vsync: this);
-        groupController = FRadioSelectGroupController<String>();
       }
 
       @override
@@ -86,7 +84,6 @@ A popover menu displays a menu in a portal aligned to a child.
       @override
       void dispose() {
         controller.dispose();
-        groupController.dispose();
         super.dispose();
       }
     }

@@ -10,6 +10,9 @@ import 'package:forui/src/widgets/select_group/select_group_item.dart';
 
 part 'select_group.style.dart';
 
+/// A [FSelectGroup]'s controller.
+typedef FSelectGroupController<T> = FMultiValueNotifier<T>;
+
 /// A set of items that are treated as a single selection.
 ///
 /// Typically used to group multiple [FSelectGroupItem.checkbox]s or [FSelectGroupItem.radio]s.
@@ -21,7 +24,7 @@ part 'select_group.style.dart';
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>> {
   /// The controller.
-  final FSelectController<T> controller;
+  final FSelectGroupController<T> controller;
 
   /// The style. Defaults to [FThemeData.selectGroupStyle].
   final FSelectGroupStyle? style;
@@ -117,7 +120,7 @@ class _State<T> extends FormFieldState<Set<T>> {
     }
 
     if (widget.onSelect case final onSelect?) {
-      widget.controller.addSelectListener(onSelect);
+      widget.controller.addUpdateListener(onSelect);
     }
   }
 
@@ -133,14 +136,14 @@ class _State<T> extends FormFieldState<Set<T>> {
       widget.controller.addValueListener(onChange);
     }
     if (widget.onSelect case final onSelect?) {
-      widget.controller.addSelectListener(onSelect);
+      widget.controller.addUpdateListener(onSelect);
     }
 
     if (old.onChange case final onChange?) {
       old.controller.removeValueListener(onChange);
     }
     if (old.onSelect case final onSelect?) {
-      old.controller.removeSelectListener(onSelect);
+      old.controller.removeUpdateListener(onSelect);
     }
   }
 

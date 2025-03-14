@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: FSelectController(),
+          controller: FMultiValueNotifier(),
           onChange: (_) => changes++,
           onSelect: (value) {
             selections++;
@@ -37,7 +37,7 @@ void main() {
   });
 
   testWidgets('update widget', (tester) async {
-    final controller = FSelectController<int>();
+    final controller = FMultiValueNotifier<int>();
 
     var firstChanges = 0;
     var firstSelections = 0;

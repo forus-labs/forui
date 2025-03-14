@@ -17,7 +17,7 @@ void main() {
             style: TestScaffold.blueScreen.selectGroupStyle,
             label: const Text('Select Group'),
             description: const Text('Select Group Description'),
-            controller: FSelectController(values: {1}),
+            controller: FMultiValueNotifier(values: {1}),
             items: const [
               FSelectGroupItem.checkbox(value: 1, label: Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
               FSelectGroupItem.radio(value: 2, label: Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
@@ -37,7 +37,7 @@ void main() {
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
-              controller: FSelectController(values: {1}),
+              controller: FMultiValueNotifier(values: {1}),
               items: const [
                 FSelectGroupItem.checkbox(value: 1, label: Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
                 FSelectGroupItem.checkbox(value: 2, label: Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
@@ -58,7 +58,7 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
-              controller: FSelectController(values: {1}),
+              controller: FMultiValueNotifier(values: {1}),
               items: const [
                 FSelectGroupItem.checkbox(value: 1, label: Text('Checkbox 1'), semanticLabel: 'Checkbox 1'),
                 FSelectGroupItem.checkbox(value: 2, label: Text('Checkbox 2'), semanticLabel: 'Checkbox 2'),
@@ -85,7 +85,7 @@ void main() {
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
-              controller: FSelectController.radio(value: 1),
+              controller: FMultiValueNotifier.radio(value: 1),
               items: const [
                 FSelectGroupItem.radio(value: 1, label: Text('Radio 1'), semanticLabel: 'Radio 1'),
                 FSelectGroupItem.radio(value: 2, label: Text('Radio 2'), semanticLabel: 'Radio 2'),
@@ -106,7 +106,7 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
-              controller: FSelectController.radio(value: 1),
+              controller: FMultiValueNotifier.radio(value: 1),
               items: const [
                 FSelectGroupItem.radio(value: 1, label: Text('Radio 1'), semanticLabel: 'Radio 1'),
                 FSelectGroupItem.radio(value: 2, label: Text('Radio 2'), semanticLabel: 'Radio 2'),

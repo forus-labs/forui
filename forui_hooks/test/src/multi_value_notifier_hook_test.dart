@@ -8,13 +8,13 @@ import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
   testWidgets('useFSelectController', (tester) async {
-    late FSelectController<int> controller;
+    late FMultiValueNotifier<int> controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFSelectController<int>();
+            controller = useFMultiValueNotifier<int>();
             return FSelectGroup<int>(
               controller: controller,
               items: const [
@@ -33,13 +33,13 @@ void main() {
   });
 
   testWidgets('useFRadioSelectController', (tester) async {
-    late FSelectController<int> controller;
+    late FMultiValueNotifier<int> controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFRadioSelectController<int>();
+            controller = useFRadioMultiValueNotifier<int>();
             return FSelectGroup<int>(
               controller: controller,
               items: const [

@@ -19,7 +19,7 @@ class SelectMenuTilePage extends StatefulSample {
 }
 
 class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
-  final controller = FSelectController<Notification>.radio(value: Notification.all);
+  final controller = FSelectMenuTileController<Notification>.radio(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
@@ -63,7 +63,7 @@ class ScrollableSelectMenuTilePage extends StatefulSample {
 }
 
 class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableSelectMenuTilePage> {
-  final controller = FSelectController<Notification>.radio(value: Notification.all);
+  final controller = FSelectMenuTileController<Notification>.radio(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile(
@@ -111,7 +111,7 @@ class LazySelectMenuTilePage extends StatefulSample {
 }
 
 class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTilePage> {
-  final controller = FSelectController(values: {1});
+  final controller = FSelectMenuTileController(values: {1});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -147,7 +147,7 @@ class SelectMenuTileFormPage extends StatefulSample {
 
 class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFormPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final controller = FSelectController<Notification>.radio(value: Notification.all);
+  final controller = FSelectMenuTileController<Notification>.radio(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => Form(

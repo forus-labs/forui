@@ -6,9 +6,9 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FSelectController<int> controller;
+  late FMultiValueNotifier<int> controller;
 
-  setUp(() => controller = FSelectController.radio());
+  setUp(() => controller = FMultiValueNotifier.radio());
 
   group('FSelectMenuTile', () {
     testWidgets('tap on tile opens menu', (tester) async {
@@ -135,7 +135,7 @@ void main() {
     });
 
     testWidgets('update widget', (tester) async {
-      final controller = FSelectController<int>();
+      final controller = FMultiValueNotifier<int>();
 
       var firstChanges = 0;
       var firstSelections = 0;

@@ -1,6 +1,10 @@
 ## 0.11.0
 
 ### Additions
+* Add `FMultiValueNotifier`.
+* Add `FSelectTileGroupController` typedef.
+* Add `FSelectMenuTileController` typedef.
+
 * Add `FSelectGroup.onChange`.
 * Add `FSelectGroup.onSelect`.
 * Add `FSelectTileGroup.onChange`.
@@ -10,9 +14,9 @@
 
 ### Changes
 
-* **Breaking** Replace `FSelectGroupController` with `FSelectController`.
-* **Breaking** Remove `FMultiSelectGroupController` - use `FSelectController(...)` instead.
-* **Breaking** Remove `FRadioSelectGroupController` - use `FSelectController.radio(...)` instead.
+* **Breaking** Replace `FSelectGroupController` with a typedef of `FMultiValueNotifier`.
+* **Breaking** Remove `FMultiSelectGroupController` - use `FSelectGroupController(...)` instead.
+* **Breaking** Remove `FRadioSelectGroupController` - use `FSelectGroupController.radio(...)` instead.
 * **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
 * **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
 * **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.

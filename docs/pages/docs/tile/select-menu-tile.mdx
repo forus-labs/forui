@@ -31,7 +31,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
     }
 
     class _SelectMenuTileState extends State<_SelectMenuTile> {
-      final controller = FSelectController.radio(value: Notification.all);
+      final controller = FSelectMenuTileController.radio(value: Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -73,7 +73,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
 ```dart copy
 FSelectMenuTile<Value>(
-  selectController: FSelectController(), // or FSelectController.radio()
+  selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
   menuAnchor: Alignment.bottomLeft,
   tileAnchor: Alignment.bottomLeft,
   shift: FPortalFollowerShift.flip,
@@ -109,7 +109,7 @@ FSelectMenuTile<Value>(
 
 ```dart copy
 FSelectMenuTile<Value>.builder(
-  selectController: FSelectController(), // or FSelectController.radio()
+  selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
   menuAnchor: Alignment.bottomLeft,
   tileAnchor: Alignment.bottomLeft,
   shift: FPortalFollowerShift.flip,
@@ -160,7 +160,7 @@ FSelectMenuTile<Value>.builder(
     }
 
     class _SelectMenuTileState extends State<_SelectMenuTile> {
-      final controller = FSelectController.radio(Notification.all);
+      final controller = FSelectMenuTileController.radio(Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -215,7 +215,7 @@ FSelectMenuTile<Value>.builder(
     }
 
     class _ScrollableSelectMenuTileState extends State<_ScrollableSelectMenuTile> {
-      final controller = FSelectController.radio(Notification.all);
+      final controller = FSelectMenuTileController.radio(Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -275,7 +275,7 @@ FSelectMenuTile<Value>.builder(
     }
 
     class _LazySelectMenuTileState extends State<_LazySelectMenuTile> {
-      final controller = FSelectController(values: {1});
+      final controller = FSelectMenuTileController(values: {1});
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile.builder(
@@ -321,7 +321,7 @@ FSelectMenuTile<Value>.builder(
 
     class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
       final _formKey = GlobalKey<FormState>();
-      final controller = FSelectController.radio();
+      final controller = FSelectMenuTileController.radio();
 
       @override
       Widget build(BuildContext context) => Form(

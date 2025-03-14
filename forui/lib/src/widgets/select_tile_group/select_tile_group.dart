@@ -7,6 +7,9 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 
+/// A controller for a [FSelectTileGroup].
+typedef FSelectTileGroupController<T> = FMultiValueNotifier<T>;
+
 /// A set of tiles that are treated as a single selection.
 ///
 /// A [FSelectTileGroup] is internally a [FormField], therefore it can be used in a [Form].
@@ -19,7 +22,7 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// * [FTileGroupStyle] for customizing a select group's appearance.
 class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMixin>, FFormFieldProperties<Set<T>> {
   /// The controller.
-  final FSelectController<T> selectController;
+  final FSelectTileGroupController<T> selectController;
 
   /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
@@ -221,7 +224,7 @@ class _State<T> extends FormFieldState<Set<T>> {
     }
 
     if (widget.onSelect case final onSelect?) {
-      widget.selectController.addSelectListener(onSelect);
+      widget.selectController.addUpdateListener(onSelect);
     }
   }
 
@@ -237,14 +240,14 @@ class _State<T> extends FormFieldState<Set<T>> {
       widget.selectController.addValueListener(onChange);
     }
     if (widget.onSelect case final onSelect?) {
-      widget.selectController.addSelectListener(onSelect);
+      widget.selectController.addUpdateListener(onSelect);
     }
 
     if (old.onChange case final onChange?) {
       old.selectController.removeValueListener(onChange);
     }
     if (old.onSelect case final onSelect?) {
-      old.selectController.removeSelectListener(onSelect);
+      old.selectController.removeUpdateListener(onSelect);
     }
   }
 

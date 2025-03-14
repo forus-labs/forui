@@ -9,9 +9,9 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FSelectController<int> controller;
+  late FMultiValueNotifier<int> controller;
 
-  setUp(() => controller = FSelectController.radio(value: 1));
+  setUp(() => controller = FMultiValueNotifier.radio(value: 1));
 
   group('FSelectMenuTile', () {
     group('blue screen', () {

@@ -27,7 +27,7 @@ class SelectTileGroupPage extends StatefulSample {
 }
 
 class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage> {
-  final controller = FSelectController(values: {Sidebar.recents});
+  final controller = FSelectTileGroupController(values: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -70,7 +70,7 @@ class ScrollableSelectTileGroupPage extends StatefulSample {
 }
 
 class _ScrollableSelectTileGroupPageState extends StatefulSampleState<ScrollableSelectTileGroupPage> {
-  final controller = FSelectController(values: {Sidebar.recents});
+  final controller = FSelectTileGroupController(values: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -113,7 +113,7 @@ class LazySelectTileGroupPage extends StatefulSample {
 }
 
 class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGroupPage> {
-  final controller = FSelectController(values: {1});
+  final controller = FMultiValueNotifier(values: {1});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -148,7 +148,7 @@ class SelectTileGroupMultiValuePage extends StatefulSample {
 
 class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTileGroupMultiValuePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final controller = FSelectController<Language>();
+  final controller = FSelectTileGroupController<Language>();
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -203,7 +203,7 @@ class SelectTileGroupRadioPage extends StatefulSample {
 
 class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
   final _formKey = GlobalKey<FormState>();
-  final controller = FSelectController<Notification>.radio();
+  final controller = FSelectTileGroupController<Notification>.radio();
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -256,7 +256,7 @@ class SelectTileGroupSuffixPage extends StatefulSample {
 }
 
 class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
-  final controller = FSelectController<String>.radio();
+  final controller = FSelectTileGroupController<String>.radio();
 
   @override
   Widget sample(BuildContext context) => Column(
