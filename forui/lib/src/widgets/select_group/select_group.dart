@@ -115,13 +115,8 @@ class _State<T> extends FormFieldState<Set<T>> {
   void initState() {
     super.initState();
     widget.controller.addListener(_handleControllerChanged);
-    if (widget.onChange case final onChange?) {
-      widget.controller.addValueListener(onChange);
-    }
-
-    if (widget.onSelect case final onSelect?) {
-      widget.controller.addUpdateListener(onSelect);
-    }
+    widget.controller.addValueListener(widget.onChange);
+    widget.controller.addUpdateListener(widget.onSelect);
   }
 
   @override
@@ -132,19 +127,10 @@ class _State<T> extends FormFieldState<Set<T>> {
       old.controller.removeListener(_handleControllerChanged);
     }
 
-    if (widget.onChange case final onChange?) {
-      widget.controller.addValueListener(onChange);
-    }
-    if (widget.onSelect case final onSelect?) {
-      widget.controller.addUpdateListener(onSelect);
-    }
-
-    if (old.onChange case final onChange?) {
-      old.controller.removeValueListener(onChange);
-    }
-    if (old.onSelect case final onSelect?) {
-      old.controller.removeUpdateListener(onSelect);
-    }
+    widget.controller.addValueListener(widget.onChange);
+    widget.controller.addUpdateListener(widget.onSelect);
+    old.controller.removeValueListener(old.onChange);
+    old.controller.removeUpdateListener(old.onSelect);
   }
 
   @override

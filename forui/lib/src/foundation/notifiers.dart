@@ -26,26 +26,33 @@ class FChangeNotifier with ChangeNotifier {
 
 /// A [ValueNotifier] that provides additional life-cycle tracking capabilities.
 class FValueNotifier<T> extends ValueNotifier<T> {
-  final Map<ValueChanged<T>, VoidCallback> _listeners = {};
+  final List<ValueChanged<T>> _listeners = [];
   bool _disposed = false;
 
   /// Creates a [FValueNotifier].
   FValueNotifier(super._value);
 
-  /// Register a closure to be called with a new value when the notifier changes.
-  void addValueListener(ValueChanged<T> listener) {
-    void callback() => listener(value);
-    _listeners[listener] = callback;
-    addListener(callback);
+  /// Register a closure to be called with a new value when the notifier changes if not null.
+  void addValueListener(ValueChanged<T>? listener) {
+    if (listener != null) {
+      _listeners.add(listener);
+    }
   }
 
   /// Remove a previously registered closure from the list of closures that are notified when the object changes.
-  void removeValueListener(ValueChanged<T> listener) {
-    final callback = _listeners.remove(listener);
-    if (callback != null) {
-      removeListener(callback);
+  void removeValueListener(ValueChanged<T>? listener) => _listeners.remove(listener);
+
+  @override
+  @protected
+  void notifyListeners() {
+    super.notifyListeners();
+    for (final listener in _listeners) {
+      listener(value);
     }
   }
+
+  @override
+  bool get hasListeners => super.hasListeners || _listeners.isNotEmpty;
 
   /// True if this notifier has been disposed.
   bool get disposed => _disposed;
@@ -53,6 +60,7 @@ class FValueNotifier<T> extends ValueNotifier<T> {
   @override
   @mustCallSuper
   void dispose() {
+    _listeners.clear();
     super.dispose();
     _disposed = true;
   }
@@ -84,12 +92,16 @@ abstract class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   /// Subclasses _must_ call [notifyUpdateListeners] after changing the value.
   void update(T value, {required bool add});
 
-  /// Register a closure to be called whenever [update] successfully adds/removes an element.
-  void addUpdateListener(ValueChanged<(T, bool)> listener) => _updateListeners.add(listener);
+  /// Register a closure to be called whenever [update] successfully adds/removes an element if not null.
+  void addUpdateListener(ValueChanged<(T, bool)>? listener) {
+    if (listener != null) {
+      _updateListeners.add(listener);
+    }
+  }
 
   /// Remove a previously registered closure from the list of closures that are notified whenever [update] successfully
   /// adds/removes an element.
-  void removeUpdateListener(ValueChanged<(T, bool)> listener) => _updateListeners.remove(listener);
+  void removeUpdateListener(ValueChanged<(T, bool)>? listener) => _updateListeners.remove(listener);
 
   /// Notify all registered update listeners of a change.
   @protected

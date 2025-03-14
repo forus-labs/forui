@@ -423,19 +423,15 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _controller = _Notifier(
-      widget.selectController,
-      widget.popoverController ?? FPopoverController(vsync: this),
-      autoHide: widget.autoHide,
-    )..addListener(_handleControllerChanged);
-
-    if (widget.onChange case final onChange?) {
-      _controller.addValueListener(onChange);
-    }
-
-    if (widget.onSelect case final onSelect?) {
-      _controller.addUpdateListener(onSelect);
-    }
+    _controller =
+        _Notifier(
+            widget.selectController,
+            widget.popoverController ?? FPopoverController(vsync: this),
+            autoHide: widget.autoHide,
+          )
+          ..addListener(_handleControllerChanged)
+          ..addValueListener(widget.onChange)
+          ..addUpdateListener(widget.onSelect);
   }
 
   @override
@@ -455,19 +451,11 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
 
     _controller.autoHide = old.autoHide;
 
-    if (widget.onChange case final onChange?) {
-      _controller.addValueListener(onChange);
-    }
-    if (widget.onSelect case final onSelect?) {
-      _controller.addUpdateListener(onSelect);
-    }
-
-    if (old.onChange case final onChange?) {
-      _controller.removeValueListener(onChange);
-    }
-    if (old.onSelect case final onSelect?) {
-      _controller.removeUpdateListener(onSelect);
-    }
+    _controller
+      ..addValueListener(widget.onChange)
+      ..addUpdateListener(widget.onSelect)
+      ..removeValueListener(old.onChange)
+      ..removeUpdateListener(old.onSelect);
   }
 
   @override
@@ -538,19 +526,19 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
   void addListener(VoidCallback listener) => delegate.addListener(listener);
 
   @override
-  void addValueListener(ValueChanged<Set<T>> listener) => delegate.addValueListener(listener);
+  void addValueListener(ValueChanged<Set<T>>? listener) => delegate.addValueListener(listener);
 
   @override
-  void addUpdateListener(ValueChanged<(T, bool)> listener) => delegate.addUpdateListener(listener);
+  void addUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.addUpdateListener(listener);
 
   @override
   void removeListener(VoidCallback listener) => delegate.removeListener(listener);
 
   @override
-  void removeValueListener(ValueChanged<Set<T>> listener) => delegate.removeValueListener(listener);
+  void removeValueListener(ValueChanged<Set<T>>? listener) => delegate.removeValueListener(listener);
 
   @override
-  void removeUpdateListener(ValueChanged<(T, bool)> listener) => delegate.removeUpdateListener(listener);
+  void removeUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.removeUpdateListener(listener);
 
   @override
   void notifyListeners() => delegate.notifyListeners();

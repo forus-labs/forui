@@ -32,6 +32,14 @@ void main() {
 
     setUp(() => notifier = FValueNotifier<int>(0));
 
+    testWidgets('hasListeners', (tester) async {
+      expect(notifier.hasListeners, false);
+
+      notifier.addValueListener((_) {});
+
+      expect(notifier.hasListeners, true);
+    });
+
     test('dispose() updates disposed field', () {
       expect(notifier.disposed, false);
 
@@ -102,7 +110,7 @@ void main() {
     });
   });
 
-  group('FSelectController - multi', () {
+  group('FMultiValueNotifier - multi', () {
     test('contains(...)', () {
       final notifier = FMultiValueNotifier(values: {1});
 
@@ -210,7 +218,7 @@ void main() {
     });
   });
 
-  group('FSelectController - radio', () {
+  group('FMultiValueNotifier - radio', () {
     test('contains(...)', () {
       final notifier = FMultiValueNotifier.radio(value: 1);
 
