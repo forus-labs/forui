@@ -1,6 +1,6 @@
 {
   "dialogLabel": "ডায়ালগ",
-  "sheetLabel": "শীট",
+  "sheetSemanticsLabel": "শীট",
   "barrierOnTapHint": "$modalRouteContentName বন্ধ করুন",
   "barrierLabel": "স্ক্রিম",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "একটি সময় বেছে নিন",
-  "timeFieldInvalidDateError": "অবৈধ সময়।"
+  "timeFieldInvalidDateError": "অবৈধ সময়।",
+  "textFieldClearButtonSemanticLabel": "মুছুন"
 }

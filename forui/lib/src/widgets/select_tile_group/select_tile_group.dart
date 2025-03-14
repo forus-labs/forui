@@ -37,6 +37,9 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
+  /// {@macro forui.widgets.FTileGroup.physics}
+  final ScrollPhysics physics;
+
   /// The style. Defaults to [FThemeData.tileGroupStyle].
   final FTileGroupStyle? style;
 
@@ -75,6 +78,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
     this.divider = FTileDivider.indented,
     this.label,
     this.description,
@@ -96,6 +100,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
              cacheExtent: cacheExtent,
              maxHeight: maxHeight,
              dragStartBehavior: dragStartBehavior,
+             physics: physics,
              divider: divider,
              label: label,
              enabled: enabled,
@@ -130,6 +135,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
     this.divider = FTileDivider.indented,
     this.label,
     this.description,
@@ -151,6 +157,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
              cacheExtent: cacheExtent,
              maxHeight: maxHeight,
              dragStartBehavior: dragStartBehavior,
+             physics: physics,
              count: count,
              divider: divider,
              label: label,
@@ -189,6 +196,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
+      ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('semanticLabel', semanticLabel));

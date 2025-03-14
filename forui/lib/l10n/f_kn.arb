@@ -1,6 +1,6 @@
 {
   "dialogLabel": "ಡೈಲಾಗ್",
-  "sheetLabel": "ಶೀಟ್",
+  "sheetSemanticsLabel": "ಶೀಟ್",
   "barrierOnTapHint": "$modalRouteContentName ಅನ್ನು ಮುಚ್ಚಿರಿ",
   "barrierLabel": "ಸ್ಕ್ರಿಮ್",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ಸಮಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
-  "timeFieldInvalidDateError": "ಅಮಾನ್ಯ ಸಮಯ."
+  "timeFieldInvalidDateError": "ಅಮಾನ್ಯ ಸಮಯ.",
+  "textFieldClearButtonSemanticLabel": "ತೆರವುಗೊಳಿಸಿ"
 }

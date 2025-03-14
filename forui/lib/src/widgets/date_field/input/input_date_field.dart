@@ -10,6 +10,7 @@ class _InputDateField extends FDateField {
   final ValueChanged<DateTime>? onSubmit;
   final MouseCursor? mouseCursor;
   final bool canRequestFocus;
+  final bool clearable;
   final int baselineInputYear;
   final FDateFieldCalendarProperties? calendar;
 
@@ -23,6 +24,7 @@ class _InputDateField extends FDateField {
     this.onSubmit,
     this.mouseCursor,
     this.canRequestFocus = true,
+    this.clearable = false,
     this.baselineInputYear = 2000,
     this.calendar = const FDateFieldCalendarProperties(),
     super.controller,
@@ -57,6 +59,7 @@ class _InputDateField extends FDateField {
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(DiagnosticsProperty('calendar', calendar))
       ..add(IntProperty('baselineInputYear', baselineInputYear));
   }
@@ -96,6 +99,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
       label: widget.label,
       description: widget.description,
       errorBuilder: widget.errorBuilder,
+      clearable: widget.clearable,
       enabled: widget.enabled,
       onSaved: widget.onSaved,
       validator: _controller.validator,

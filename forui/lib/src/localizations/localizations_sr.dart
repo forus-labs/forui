@@ -57,6 +57,9 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Обриши';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsSr extends FLocalizations {
   String get dialogLabel => 'Дијалог';
 
   @override
-  String get sheetLabel => 'табела';
+  String get sheetSemanticsLabel => 'табела';
 
   @override
   String get barrierLabel => 'Скрим';
@@ -101,6 +104,9 @@ class FLocalizationsSr extends FLocalizations {
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
 class FLocalizationsSrLatn extends FLocalizationsSr {
   FLocalizationsSrLatn() : super('sr_Latn');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Obriši';
 
   @override
   String get shortDateSeparator => '.';
@@ -133,7 +139,7 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get dialogLabel => 'Dijalog';
 
   @override
-  String get sheetLabel => 'tabela';
+  String get sheetSemanticsLabel => 'tabela';
 
   @override
   String get barrierLabel => 'Skrim';

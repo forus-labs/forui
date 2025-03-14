@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Valintaikkuna",
-  "sheetLabel": "arkki",
+  "sheetSemanticsLabel": "arkki",
   "barrierOnTapHint": "Sulje $modalRouteContentName",
   "barrierLabel": "Sermi",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ".",
   "timeFieldHint": "Valitse aika",
-  "timeFieldInvalidDateError": "Virheellinen aika."
+  "timeFieldInvalidDateError": "Virheellinen aika.",
+  "textFieldClearButtonSemanticLabel": "Tyhjennä"
 }

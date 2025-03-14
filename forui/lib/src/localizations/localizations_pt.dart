@@ -57,6 +57,9 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
+  String get textFieldClearButtonSemanticLabel => 'Limpar';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -87,7 +90,7 @@ class FLocalizationsPt extends FLocalizations {
   String get dialogLabel => 'Caixa de diálogo';
 
   @override
-  String get sheetLabel => 'inferior';
+  String get sheetSemanticsLabel => 'inferior';
 
   @override
   String get barrierLabel => 'Scrim';
@@ -101,6 +104,9 @@ class FLocalizationsPt extends FLocalizations {
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
 class FLocalizationsPtPt extends FLocalizationsPt {
   FLocalizationsPtPt() : super('pt_PT');
+
+  @override
+  String get textFieldClearButtonSemanticLabel => 'Limpar';
 
   @override
   String get shortDateSeparator => '/';
@@ -133,7 +139,7 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   String get dialogLabel => 'Caixa de diálogo';
 
   @override
-  String get sheetLabel => 'Secção';
+  String get sheetSemanticsLabel => 'Secção';
 
   @override
   String get barrierLabel => 'Scrim';

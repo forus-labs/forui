@@ -193,7 +193,7 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
 
   /// The button style.
   @override
-  final FButtonCustomStyle buttonStyle;
+  final FButtonStyle buttonStyle;
 
   /// The header's text style.
   @override

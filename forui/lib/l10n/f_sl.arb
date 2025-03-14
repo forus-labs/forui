@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Pogovorno okno",
-  "sheetLabel": "Razdelek",
+  "sheetSemanticsLabel": "Razdelek",
   "barrierOnTapHint": "Zapiranje »$modalRouteContentName«",
   "barrierLabel": "Scrim",
   "shortDateSeparator": ". ",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Izberite čas",
-  "timeFieldInvalidDateError": "Neveljaven čas."
+  "timeFieldInvalidDateError": "Neveljaven čas.",
+  "textFieldClearButtonSemanticLabel": "Počisti"
 }

@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Deialog",
-  "sheetLabel": "Taflen",
+  "sheetSemanticsLabel": "Taflen",
   "barrierOnTapHint": "Cau $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Dewiswch amser",
-  "timeFieldInvalidDateError": "Amser annilys."
+  "timeFieldInvalidDateError": "Amser annilys.",
+  "textFieldClearButtonSemanticLabel": "Clirio"
 }

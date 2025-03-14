@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialoogvenster",
-  "sheetLabel": "Blad",
+  "sheetSemanticsLabel": "Blad",
   "barrierOnTapHint": "$modalRouteContentName sluiten",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "-",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Kies een tijd",
-  "timeFieldInvalidDateError": "Ongeldige tijd."
+  "timeFieldInvalidDateError": "Ongeldige tijd.",
+  "textFieldClearButtonSemanticLabel": "Wissen"
 }

@@ -218,6 +218,8 @@ abstract class FDateField extends StatefulWidget {
   ///
   /// If [canRequestFocus] is false, the input field cannot obtain focus but can still be selected.
   ///
+  /// If [clearable] is true, the input field will show a clear button when a date is selected. Defaults to false.
+  ///
   /// The [baselineInputYear] is used as a reference point for two-digit year input. Years will be interpreted as
   /// being within 80 years before or 20 years after this year.
   ///
@@ -240,6 +242,7 @@ abstract class FDateField extends StatefulWidget {
     ValueChanged<DateTime>? onSubmit,
     MouseCursor? mouseCursor,
     bool canRequestFocus,
+    bool clearable,
     int baselineInputYear,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStateStyle)>? prefixBuilder,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStateStyle)>? suffixBuilder,
@@ -274,6 +277,8 @@ abstract class FDateField extends StatefulWidget {
   /// The [mouseCursor] can be used to specify the cursor shown when hovering over the input field.
   ///
   /// If [canRequestFocus] is false, the input field cannot obtain focus but can still be selected.
+  ///
+  /// If [clearable] is true, the input field will show a clear button when a date is selected. Defaults to false.
   ///
   /// The [dayBuilder] customizes the appearance of calendar day cells. Defaults to [FCalendar.defaultDayBuilder].
   ///
@@ -311,6 +316,7 @@ abstract class FDateField extends StatefulWidget {
     bool expands,
     MouseCursor mouseCursor,
     bool canRequestFocus,
+    bool clearable,
     String? hint,
     bool autofocus,
     FocusNode? focusNode,
@@ -358,6 +364,8 @@ abstract class FDateField extends StatefulWidget {
   ///
   /// If [canRequestFocus] is false, the input field cannot obtain focus but can still be selected.
   ///
+  /// If [clearable] is true, the input field will show a clear button when a date is selected. Defaults to false.
+  ///
   /// The [baselineInputYear] is used as a reference point for two-digit year input. Years will be interpreted as
   /// being within 80 years before or 20 years after this year.
   ///
@@ -380,6 +388,7 @@ abstract class FDateField extends StatefulWidget {
     ValueChanged<DateTime>? onSubmit,
     MouseCursor? mouseCursor,
     bool canRequestFocus = true,
+    bool clearable = false,
     int baselineInputYear = 2000,
     Widget? label,
     Widget? description,
@@ -396,6 +405,7 @@ abstract class FDateField extends StatefulWidget {
     focusNode: focusNode,
     prefixBuilder: prefixBuilder,
     suffixBuilder: suffixBuilder,
+    clearable: clearable,
     textInputAction: textInputAction,
     textAlign: textAlign,
     textAlignVertical: textAlignVertical,

@@ -69,6 +69,7 @@ FDateField(
   baselineInputYear: 2000,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,
+  clearable: true,
   calendar: FDateFieldCalendarProperties(),
   label: Text('Select Date'),
   description: Text('Choose a date from the calendar or input field'),
@@ -92,6 +93,7 @@ FDateField.calendar(
   expands: false,
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
+  clearable: true,
   hint: 'Select a date',
   start: DateTime(2024),
   end: DateTime(2025),
@@ -125,6 +127,7 @@ FDateField.input(
   onSubmit: (date) => print('Date submitted: $date'),
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
+  clearable: true,
   baselineInputYear: 2000,
   label: Text('Input Date'),
   description: Text('Enter a date using the keyboard'),
@@ -164,6 +167,42 @@ FDateField.input(
           label: Text('Appointment Date'),
           description: Text('Select a date for your appointment'),
         );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Clearable
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='date-field' variant='clearable' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {16} copy
+        class ClearableDateField extends StatefulWidget {
+          @override
+          State<ClearableDateField> createState() => _State();
+        }
+
+        class _State extends State<ClearableDateField> with SingleTickerProviderStateMixin {
+          late final FDateFieldController _controller = FDateFieldController(vsync: this, initialDate: DateTime.now());
+
+          @override
+          Widget build(BuildContext context) => Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: FDateField(
+              controller: _controller,
+              label: const Text('Appointment Date'),
+              description: const Text('Select a date for your appointment'),
+              clearable: true,
+            ),
+          );
+
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+        }
         ```
     </Tabs.Tab>
 </Tabs>

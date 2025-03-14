@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialogfeld",
-  "sheetLabel": "Ansicht",
+  "sheetSemanticsLabel": "Ansicht",
   "barrierOnTapHint": "$modalRouteContentName schließen",
   "barrierLabel": "Gitter",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Wähle e Zyt",
-  "timeFieldInvalidDateError": "Ungültigi Zyt."
+  "timeFieldInvalidDateError": "Ungültigi Zyt.",
+  "textFieldClearButtonSemanticLabel": "Lösche"
 }

@@ -1,6 +1,6 @@
 {
   "dialogLabel": "સંવાદ",
-  "sheetLabel": "શીટ",
+  "sheetSemanticsLabel": "શીટ",
   "barrierOnTapHint": "$modalRouteContentNameને બંધ કરો",
   "barrierLabel": "સ્ક્રિમ",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "સમય પસંદ કરો",
-  "timeFieldInvalidDateError": "અમાન્ય સમય."
+  "timeFieldInvalidDateError": "અમાન્ય સમય.",
+  "textFieldClearButtonSemanticLabel": "સાફ કરો"
 }

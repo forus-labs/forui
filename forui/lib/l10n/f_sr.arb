@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Дијалог",
-  "sheetLabel": "табела",
+  "sheetSemanticsLabel": "табела",
   "barrierOnTapHint": "Затвори: $modalRouteContentName",
   "barrierLabel": "Скрим",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Изаберите време",
-  "timeFieldInvalidDateError": "Неважеће време."
+  "timeFieldInvalidDateError": "Неважеће време.",
+  "textFieldClearButtonSemanticLabel": "Обриши"
 }

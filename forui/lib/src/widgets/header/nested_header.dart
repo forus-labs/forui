@@ -66,10 +66,16 @@ final class _FNestedHeader extends FHeader {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
-                              children: prefixActions.expand((action) => [action, const SizedBox(width: 10)]).toList(),
+                              children:
+                                  prefixActions
+                                      .expand((action) => [action, SizedBox(width: style.actionSpacing)])
+                                      .toList(),
                             ),
                             Row(
-                              children: suffixActions.expand((action) => [const SizedBox(width: 10), action]).toList(),
+                              children:
+                                  suffixActions
+                                      .expand((action) => [SizedBox(width: style.actionSpacing), action])
+                                      .toList(),
                             ),
                           ],
                         ),

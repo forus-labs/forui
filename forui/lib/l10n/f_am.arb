@@ -1,6 +1,6 @@
 {
   "dialogLabel": "መገናኛ",
-  "sheetLabel": "ሉህ",
+  "sheetSemanticsLabel": "ሉህ",
   "barrierOnTapHint": "$modalRouteContentNameን ዝጋ",
   "barrierLabel": "ገዳቢ",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ሰዓት ይምረጡ",
-  "timeFieldInvalidDateError": "ልክ ያልሆነ ሰዓት።"
+  "timeFieldInvalidDateError": "ልክ ያልሆነ ሰዓት።",
+  "textFieldClearButtonSemanticLabel": "አጽዳ"
 }

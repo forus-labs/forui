@@ -1,18 +1,29 @@
-## 0.10.0 (Next)
+## 0.10.0+1
+
+Fix bad build caused by generated files not being published.
+
+## 0.10.0
 
 ### Additions
 
 * Add `FTextField.counterBuilder`.
 * Add `FTransformable`.
 * Add `FTransformables`.
+* Add `FTextField.clearable`.
 * Add `FTextField.stylusHandwritingEnabled`.
 * Add `FPickerWheelMixin`.
 * Add `FTimeField`.
 * Add `FTimeFieldController`.
 * Add `FTimeFieldProperties`.
 * Add `FThemeData.toApproximateMaterialTheme()`.
+* Add `FTimePicker`.
 * Add `FTimePickerStyle`.
 * Add `FPickerStyle.selectionHeightAdjustment`.
+* Add `FDateField.clearable`.
+* Add `FTileGroup.physics`.
+* Add `FSelectTileGroup.physics`.
+* Add `FSelectMenuTile.physics`.
+* Add `FPagination`.
 
 ### Changes
 
@@ -21,18 +32,26 @@
 * Change most occurrences of `Alignment` to `AlignmentGeometry`.
 * Change most occurrences of `BorderRadius` to `BorderRadiusGeometry`.
 * Change most occurrences of `EdgeInsets` to `EdgeInsetsGeometry`.
-* **Breaking** Change `FDatePicker` to `FDateField`.
-* **Breaking** Change `FDatePickerController` to `FDateFieldController`.
-* **Breaking** Change `FDatePickerController.calendar` to `FDateFieldController.popover`.
-* **Breaking** Change `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
-* **Breaking** Change `FLocalizations.datePickerHint` to `FLocalizations.dateFieldHint`.
-* **Breaking** Change `FLocalizations.datePickerInvalidDateError` to `FLocalizations.dateFieldInvalidDateError`.
+* **Breaking** Rename `FDatePicker` to `FDateField`.
+* **Breaking** Rename `FDatePickerController` to `FDateFieldController`.
+* **Breaking** Rename `FDatePickerController.calendar` to `FDateFieldController.popover`.
+* **Breaking** Rename `FDatePickerCalendarProperties` to `FDateFieldCalendarProperties`.
+* **Breaking** Rename `FLocalizations.datePickerHint` to `FLocalizations.dateFieldHint`.
+* **Breaking** Rename `FLocalizations.datePickerInvalidDateError` to `FLocalizations.dateFieldInvalidDateError`.
 * **Breaking** Change `FThemeData(...)` to automatically configure styles not passed in.
 * **Breaking** Remove `FThemeData.inherit`. Use `FThemeData(...)` instead.
 * **Breaking** Remove FTextField.scribbleEnabled. Use `stylusHandwritingEnabled` instead.
 * **Breaking** Change `FDialogContentStyle.actionPadding` to `FDialogContentStyle.actionSpacing`.
 * **Breaking** Change default `FPickerStyle.textStyle` size from `lg` to `base`.
 * **Breaking** Change `FTimePicker` to use `FTimePickerStyle` instead of `FPickerStyle`.
+* **Breaking** Rename `FLocalizations.sheetLabel` to `FLocalizations.sheetSemanticsLabel`.
+* **Breaking** Rename `FBadgeStyle` to `FBaseBadgeStyle`.
+* **Breaking** Rename `FBadgeCustomStyle` to `FBadgeStyle`.
+* **Breaking** Move constants in `FBaseBadgeStyle` to `FBadgeStyle`.
+* **Breaking** Rename `FButtonStyle` to `FBaseButtonStyle`.
+* **Breaking** Rename `FButtonCustomStyle` to `FButtonStyle`.
+* **Breaking** Move constants in `FBaseButtonStyle` to `FButtonStyle`.
+
 
 ### Fixes
 * Fix `FDateField.input` to show default icon.
@@ -40,6 +59,7 @@
 * Fix `FPicker` incorrectly detecting number of wheels when controller is not given and placeholder is used.
 * Fix `FDateField` not handling `bg`, `en`, `sr`, `sr_Latn` and `zu` locales properly.
 * Fix `FDateField` not updating when locale changes.
+* Fix `FHeader` not respecting `FHeaderStyle.actionSpacing`.
 
 ## 0.9.1+1
 Fix documentation not publishing.
@@ -61,6 +81,7 @@ Fix documentation not publishing.
 
 * Add `FDatePicker`.
 * Add `FFormProperties`.
+* Add `FPagination`.
 * Add `FPicker`.
 * Add `FPopoverTagRegion`.
 * Add `FBreadcrumb`.

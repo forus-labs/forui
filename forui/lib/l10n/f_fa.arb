@@ -1,6 +1,6 @@
 {
   "dialogLabel": "کادر گفتگو",
-  "sheetLabel": "برگ",
+  "sheetSemanticsLabel": "برگ",
   "barrierOnTapHint": "بستن $modalRouteContentName",
   "barrierLabel": "رویه",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "یک زمان انتخاب کنید",
-  "timeFieldInvalidDateError": "زمان نامعتبر است."
+  "timeFieldInvalidDateError": "زمان نامعتبر است.",
+  "textFieldClearButtonSemanticLabel": "پاک کردن"
 }

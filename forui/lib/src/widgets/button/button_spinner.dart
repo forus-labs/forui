@@ -17,7 +17,7 @@ part 'button_spinner.style.dart';
 /// See:
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButton] for creating a button.
-/// * [FButtonCustomStyle] for customizing a button's appearance.
+/// * [FButtonStyle] for customizing a button's appearance.
 class FButtonSpinner extends StatefulWidget {
   /// The style. Defaults to the parent button's [FButtonSpinnerStyle].
   ///
@@ -64,7 +64,6 @@ class _FButtonSpinnerState extends State<FButtonSpinner> with SingleTickerProvid
       FAssets.icons.loaderCircle,
       color: _data.enabled ? _style.enabledSpinnerColor : _style.disabledSpinnerColor,
       size: _style.spinnerSize,
-      semanticLabel: 'Button Spinner',
     ),
   );
 

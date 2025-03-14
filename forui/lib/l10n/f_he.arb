@@ -1,6 +1,6 @@
 {
   "dialogLabel": "תיבת דו-שיח",
-  "sheetLabel": "גיליו ",
+  "sheetSemanticsLabel": "גיליו ",
   "barrierOnTapHint": "סגירת $modalRouteContentName",
   "barrierLabel": "מיסוך",
   "shortDateSeparator": ".",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "בחר שעה",
-  "timeFieldInvalidDateError": "שעה לא חוקית."
+  "timeFieldInvalidDateError": "שעה לא חוקית.",
+  "textFieldClearButtonSemanticLabel": "ניקוי"
 }

@@ -10,6 +10,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final bool expands;
   final MouseCursor mouseCursor;
   final bool canRequestFocus;
+  final bool clearable;
   @override
   final AlignmentGeometry anchor;
   @override
@@ -42,6 +43,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.expands = false,
     this.mouseCursor = SystemMouseCursors.click,
     this.canRequestFocus = true,
+    this.clearable = false,
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
     this.shift = FPortalShift.flip,
@@ -83,7 +85,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'));
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
   }
 }
 
@@ -145,6 +148,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.dateFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final hint = widget.hint ?? localizations.dateFieldHint;
     final onSaved = widget.onSaved;
     return FTextField(
       focusNode: _focus,
@@ -157,7 +161,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       mouseCursor: widget.mouseCursor,
       canRequestFocus: widget.canRequestFocus,
       onTap: _controller.calendar.toggle,
-      hint: widget.hint ?? localizations.dateFieldHint,
+      hint: hint,
       readOnly: true,
       enableInteractiveSelection: false,
       prefixBuilder:
@@ -174,6 +178,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
                 cursor: SystemMouseCursors.click,
                 child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
               ),
+      clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
       label: widget.label,
       description: widget.description,
       enabled: widget.enabled,

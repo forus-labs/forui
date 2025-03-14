@@ -48,7 +48,9 @@ final class _FRootHeader extends FHeader {
               ),
               FHeaderData(
                 actionStyle: style.actionStyle,
-                child: Row(children: actions.expand((action) => [action, const SizedBox(width: 10)]).toList()),
+                child: Row(
+                  children: actions.expand((action) => [action, SizedBox(width: style.actionSpacing)]).toList(),
+                ),
               ),
             ],
           ),

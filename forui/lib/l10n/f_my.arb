@@ -1,6 +1,6 @@
 {
   "dialogLabel": "ဒိုင်ယာလော့",
-  "sheetLabel": "ပိုဆောင်း စာမျက်နှာ",
+  "sheetSemanticsLabel": "ပိုဆောင်း စာမျက်နှာ",
   "barrierOnTapHint": "$modalRouteContentName ပိတ်ရန်",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "အချိန်ရွေးပါ",
-  "timeFieldInvalidDateError": "အချိန်မမှန်ပါ။"
+  "timeFieldInvalidDateError": "အချိန်မမှန်ပါ။",
+  "textFieldClearButtonSemanticLabel": "ရှင်းရန်"
 }

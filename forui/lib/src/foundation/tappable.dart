@@ -317,13 +317,13 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   @override
+  Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
+
+  @override
   void _onPointerDown() => controller.forward();
 
   @override
   void _onPointerUp() => controller.reverse();
-
-  @override
-  Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
 
   @override
   void dispose() {

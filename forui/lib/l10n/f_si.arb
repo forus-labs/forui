@@ -1,6 +1,6 @@
 {
   "dialogLabel": "සංවාදය",
-  "sheetLabel": "පත්‍රය",
+  "sheetSemanticsLabel": "පත්‍රය",
   "barrierOnTapHint": "$modalRouteContentName වසන්න",
   "barrierLabel": "ස්ක්‍රිම්",
   "shortDateSeparator": "-",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ".",
   "timeFieldHint": "වේලාවක් තෝරන්න",
-  "timeFieldInvalidDateError": "අවලංගු වේලාවකි."
+  "timeFieldInvalidDateError": "අවලංගු වේලාවකි.",
+  "textFieldClearButtonSemanticLabel": "හිස් කරන්න"
 }

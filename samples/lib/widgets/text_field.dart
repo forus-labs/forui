@@ -25,6 +25,31 @@ class TextFieldPage extends Sample {
 }
 
 @RoutePage()
+class ClearableTextFieldPage extends StatefulSample {
+  ClearableTextFieldPage({@queryParam super.theme});
+
+  @override
+  State<ClearableTextFieldPage> createState() => ClearableTextFieldState();
+}
+
+class ClearableTextFieldState extends StatefulSampleState<ClearableTextFieldPage> {
+  late final TextEditingController _controller = TextEditingController(text: 'MyUsername');
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+    child: FTextField(
+      controller: _controller,
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+      maxLines: 1,
+      clearable: (value) => value.text.isNotEmpty,
+    ),
+  );
+}
+
+@RoutePage()
 class EmailTextFieldPage extends Sample {
   EmailTextFieldPage({@queryParam super.theme});
 

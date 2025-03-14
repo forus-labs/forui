@@ -32,6 +32,7 @@ abstract class Input<T> extends StatefulWidget {
   final bool canRequestFocus;
   final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
   final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
+  final bool clearable;
   final FLocalizations localizations;
 
   const Input({
@@ -57,6 +58,7 @@ abstract class Input<T> extends StatefulWidget {
     required this.canRequestFocus,
     required this.prefixBuilder,
     required this.suffixBuilder,
+    required this.clearable,
     required this.localizations,
     super.key,
   });
@@ -85,6 +87,7 @@ abstract class Input<T> extends StatefulWidget {
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
+      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(DiagnosticsProperty('localizations', localizations));
   }
 }
@@ -146,6 +149,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
           canRequestFocus: widget.canRequestFocus,
           prefixBuilder: widget.prefixBuilder,
           suffixBuilder: widget.suffixBuilder,
+          clearable: widget.clearable ? clearable : (_) => false,
           onSaved: onSaved == null ? null : (_) => onSaved(this.value),
           validator:
               (value) => switch (this.value) {
@@ -160,6 +164,9 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
       ),
     );
   }
+
+  @protected
+  bool clearable(TextEditingValue value) => false;
 
   @protected
   FTextFieldStyle get textFieldStyle;

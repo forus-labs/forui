@@ -1,6 +1,6 @@
 {
   "dialogLabel": "Dialog",
-  "sheetLabel": "sheet",
+  "sheetSemanticsLabel": "sheet",
   "barrierOnTapHint": "Isara ang $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Pumili ng oras",
-  "timeFieldInvalidDateError": "Hindi wastong oras."
+  "timeFieldInvalidDateError": "Hindi wastong oras.",
+  "textFieldClearButtonSemanticLabel": "I-clear"
 }

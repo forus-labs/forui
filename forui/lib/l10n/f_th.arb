@@ -1,6 +1,6 @@
 {
   "dialogLabel": "กล่องโต้ตอบ",
-  "sheetLabel": "Sheet",
+  "sheetSemanticsLabel": "Sheet",
   "barrierOnTapHint": "ปิด $modalRouteContentName",
   "barrierLabel": "Scrim",
   "shortDateSeparator": "/",
@@ -11,5 +11,6 @@
   "timeFieldSuffix": " น.",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "เลือกเวลา",
-  "timeFieldInvalidDateError": "เวลาไม่ถูกต้อง"
+  "timeFieldInvalidDateError": "เวลาไม่ถูกต้อง",
+  "textFieldClearButtonSemanticLabel": "ล้าง"
 }

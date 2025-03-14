@@ -58,6 +58,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/checkbox/raw', page: RawCheckboxRoute.page),
     AutoRoute(path: '/checkbox/form', page: FormCheckboxRoute.page),
     AutoRoute(path: '/date-field/default', page: DateFieldRoute.page),
+    AutoRoute(path: '/date-field/clearable', page: ClearableDateFieldRoute.page),
     AutoRoute(path: '/date-field/calendar', page: CalendarDateFieldRoute.page),
     AutoRoute(path: '/date-field/input', page: InputDateFieldRoute.page),
     AutoRoute(path: '/date-field/validator', page: ValidatorDateFieldRoute.page),
@@ -77,6 +78,9 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/line-calendar/default', page: LineCalendarRoute.page),
     AutoRoute(path: '/modal-sheet/default', page: ModalSheetRoute.page),
     AutoRoute(path: '/modal-sheet/draggable', page: DraggableModalSheetRoute.page),
+    AutoRoute(path: '/pagination/default', page: PaginationRoute.page),
+    AutoRoute(path: '/pagination/custom-icon', page: PaginationCustomIconRoute.page),
+    AutoRoute(path: '/pagination/page-view', page: PaginationWithViewRoute.page),
     AutoRoute(path: '/picker/default', page: PickerRoute.page),
     AutoRoute(path: '/picker/multiple', page: MultiPickerRoute.page),
     AutoRoute(path: '/picker/separator', page: SeparatedPickerRoute.page),
@@ -118,6 +122,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/tabs/default', page: TabsRoute.page),
     AutoRoute(path: '/tappable/default', page: TappableRoute.page),
     AutoRoute(path: '/text-field/default', page: TextFieldRoute.page),
+    AutoRoute(path: '/text-field/clearable', page: ClearableTextFieldRoute.page),
     AutoRoute(path: '/text-field/email', page: EmailTextFieldRoute.page),
     AutoRoute(path: '/text-field/password', page: PasswordTextFieldRoute.page),
     AutoRoute(path: '/text-field/multiline', page: MultilineTextFieldRoute.page),
@@ -129,6 +134,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/tile-group/scrollable', page: ScrollableTileGroupRoute.page),
     AutoRoute(path: '/tile-group/lazy', page: LazyTileGroupRoute.page),
     AutoRoute(path: '/tile-group/merge', page: MergeTileGroup.page),
+
     AutoRoute(path: '/time-field/default', page: TimeFieldRoute.page),
     AutoRoute(path: '/time-field/picker', page: PickerTimeFieldRoute.page),
     AutoRoute(path: '/time-field/validator', page: ValidatorTimeFieldRoute.page),
@@ -136,6 +142,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/time-picker/default', page: TimePickerRoute.page),
     AutoRoute(path: '/time-picker/interval', page: IntervalTimePickerRoute.page),
     AutoRoute(path: '/time-picker/animated', page: AnimatedTimePickerRoute.page),
+
     AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
   ];
 }

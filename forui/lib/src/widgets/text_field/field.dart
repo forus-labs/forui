@@ -11,6 +11,7 @@ class Field extends FormField<String> {
     FTextField parent,
     FTextFieldStateStyle stateStyle,
     EdgeInsetsGeometry contentPadding,
+    Widget? suffix,
   ) {
     final textDirection = Directionality.maybeOf(state.context) ?? TextDirection.ltr;
     final padding = contentPadding.resolve(textDirection);
@@ -18,7 +19,7 @@ class Field extends FormField<String> {
     return InputDecoration(
       isDense: true,
       prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
-      suffixIcon: parent.suffixBuilder?.call(state.context, stateStyle, null),
+      suffixIcon: suffix,
       // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
       prefix: Padding(
         padding: switch (textDirection) {
@@ -68,9 +69,40 @@ class Field extends FormField<String> {
             _ => (FLabelState.enabled, style.enabledStyle),
           };
 
+          final suffixIcon = parent.suffixBuilder?.call(state.context, stateStyle, null);
+          final clear =
+              parent.clearable(state._effectiveController.value)
+                  ? Padding(
+                    padding: style.clearButtonPadding,
+                    child: FButton.icon(
+                      style: style.clearButtonStyle,
+                      onPress: () {
+                        field.didChange('');
+                        parent.onChange?.call('');
+                      },
+                      child: FIcon(
+                        FAssets.icons.x,
+                        semanticLabel:
+                            (FLocalizations.of(state.context) ?? FDefaultLocalizations())
+                                .textFieldClearButtonSemanticLabel,
+                      ),
+                    ),
+                  )
+                  : null;
+
+          final suffix = switch ((suffixIcon, clear)) {
+            (final icon?, final clear?) when labelState != FLabelState.disabled => Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [clear, icon],
+            ),
+            (null, final clear?) when labelState != FLabelState.disabled => clear,
+            (final icon, _) => icon,
+          };
+
           final textfield = TextField(
             controller: state._effectiveController,
-            decoration: _decoration(state, parent, stateStyle, style.contentPadding),
+            decoration: _decoration(state, parent, stateStyle, style.contentPadding, suffix),
             focusNode: parent.focusNode,
             undoController: parent.undoController,
             cursorErrorColor: style.cursorColor,
