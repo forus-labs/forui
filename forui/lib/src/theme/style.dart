@@ -49,6 +49,10 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
   @override
   final List<BoxShadow> shadow;
 
+  /// The tappable style.
+  @override
+  final FTappableStyle tappable;
+
   /// Creates an [FStyle].
   ///
   /// **Note:**
@@ -59,6 +63,7 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
     required this.errorFormFieldStyle,
     required this.focusedOutlineStyle,
     required this.iconStyle,
+    required this.tappable,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.borderWidth = 1,
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -89,5 +94,6 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
         iconStyle: FIconStyle(color: colorScheme.primary, size: 20),
+        tappable: FTappableStyle(),
       );
 }
