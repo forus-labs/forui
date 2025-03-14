@@ -8,12 +8,12 @@ import '../../test_scaffold.dart';
 void main() {
   group('FSelectTileGroup', () {
     testWidgets('press select tile with prefix check icon', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             children: [FSelectTile(title: const Text('1'), value: 1), FSelectTile(title: const Text('2'), value: 2)],
           ),
         ),
@@ -27,12 +27,12 @@ void main() {
     });
 
     testWidgets('press select tile with suffix check icon', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             children: [
               FSelectTile.suffix(title: const Text('1'), value: 1),
               FSelectTile.suffix(title: const Text('2'), value: 2),
@@ -49,12 +49,12 @@ void main() {
     });
 
     testWidgets('press already selected tile', (tester) async {
-      final controller = FRadioSelectGroupController<int>(value: 2);
+      final controller = FMultiValueNotifier<int>.radio(value: 2);
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             children: [
               FSelectTile.suffix(title: const Text('1'), value: 1),
               FSelectTile.suffix(title: const Text('2'), value: 2),
@@ -71,12 +71,12 @@ void main() {
     });
 
     testWidgets('press tile hides error', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             autovalidateMode: AutovalidateMode.always,
             validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
             children: [
@@ -98,7 +98,7 @@ void main() {
     });
 
     testWidgets('press nested select tile', (tester) async {
-      final controller = FRadioSelectGroupController<int>();
+      final controller = FMultiValueNotifier<int>.radio();
 
       await tester.pumpWidget(
         TestScaffold(
@@ -106,7 +106,7 @@ void main() {
             children: [
               FTileGroup(children: [FTile(title: const Text('A')), FTile(title: const Text('B'))]),
               FSelectTileGroup(
-                groupController: controller,
+                selectController: controller,
                 children: [
                   FSelectTile(title: const Text('1'), value: 1),
                   FSelectTile(title: const Text('2'), value: 2),
@@ -123,5 +123,90 @@ void main() {
 
       expect(controller.value, {2});
     });
+  });
+
+  testWidgets('callbacks called', (tester) async {
+    var changes = 0;
+    var selections = 0;
+    (int, bool)? selection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: FMultiValueNotifier(),
+          onChange: (_) => changes++,
+          onSelect: (value) {
+            selections++;
+            selection = value;
+          },
+          children: [FSelectTile(title: const Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(changes, 1);
+    expect(selections, 1);
+    expect(selection, (1, true));
+  });
+
+  testWidgets('update widget', (tester) async {
+    final controller = FMultiValueNotifier<int>();
+
+    var firstChanges = 0;
+    var firstSelections = 0;
+    (int, bool)? firstSelection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: controller,
+          onChange: (_) => firstChanges++,
+          onSelect: (value) {
+            firstSelections++;
+            firstSelection = value;
+          },
+          children: [FSelectTile(title: const Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(firstChanges, 1);
+    expect(firstSelections, 1);
+    expect(firstSelection, (1, true));
+
+    var secondChanges = 0;
+    var secondSelections = 0;
+    (int, bool)? secondSelection;
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: controller,
+          onChange: (_) => secondChanges++,
+          onSelect: (value) {
+            secondSelections++;
+            secondSelection = value;
+          },
+          children: [FSelectTile(title: const Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(firstChanges, 1);
+    expect(firstSelections, 1);
+    expect(firstSelection, (1, true));
+
+    expect(secondChanges, 1);
+    expect(secondSelections, 1);
+    expect(secondSelection, (1, false));
   });
 }

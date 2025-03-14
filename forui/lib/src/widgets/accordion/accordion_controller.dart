@@ -36,33 +36,6 @@ class FAccordionController extends FChangeNotifier {
   /// Creates an [FAccordionController] that allows only one section to be expanded at a time.
   FAccordionController.radio() : this(max: 1);
 
-  /// Adds an item at the given [index], returning true if added.
-  @internal
-  bool addItem(int index, AnimationController controller) {
-    if (controller.value == 1 && _max != null && _max <= _expanded.length) {
-      return false;
-    }
-
-    controllers[index] = controller;
-    if (controller.value == 1) {
-      _expanded.add(index);
-    }
-
-    return true;
-  }
-
-  /// Removes the item at the given [index], returning true if removed.
-  @internal
-  bool removeItem(int index) {
-    if (_expanded.length <= _min && _expanded.contains(index)) {
-      return false;
-    }
-
-    final removed = controllers.remove(index);
-    _expanded.remove(index);
-    return removed != null;
-  }
-
   /// Convenience method for toggling the current expansion status.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
@@ -122,4 +95,32 @@ class FAccordionController extends FChangeNotifier {
 
   /// The indexes of the currently expanded items.
   Set<int> get expanded => {..._expanded};
+}
+
+@internal
+extension FAccordionControllers on FAccordionController {
+  /// Adds an item at the given [index], returning true if added.
+  bool addItem(int index, AnimationController controller) {
+    if (controller.value == 1 && _max != null && _max <= _expanded.length) {
+      return false;
+    }
+
+    controllers[index] = controller;
+    if (controller.value == 1) {
+      _expanded.add(index);
+    }
+
+    return true;
+  }
+
+  /// Removes the item at the given [index], returning true if removed.
+  bool removeItem(int index) {
+    if (_expanded.length <= _min && _expanded.contains(index)) {
+      return false;
+    }
+
+    final removed = controllers.remove(index);
+    _expanded.remove(index);
+    return removed != null;
+  }
 }

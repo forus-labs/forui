@@ -9,9 +9,9 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FSelectGroupController<int> controller;
+  late FMultiValueNotifier<int> controller;
 
-  setUp(() => controller = FRadioSelectGroupController(value: 1));
+  setUp(() => controller = FMultiValueNotifier.radio(value: 1));
 
   group('FSelectMenuTile', () {
     group('blue screen', () {
@@ -19,7 +19,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              groupController: controller,
+              selectController: controller,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefixIcon: FIcon(FAssets.icons.bluetooth),
               label: const Text('Label'),
@@ -39,7 +39,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              groupController: controller,
+              selectController: controller,
               enabled: false,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefixIcon: FIcon(FAssets.icons.bluetooth),
@@ -63,7 +63,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              groupController: controller,
+              selectController: controller,
               prefixIcon: FIcon(FAssets.icons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -89,7 +89,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              groupController: controller,
+              selectController: controller,
               prefixIcon: FIcon(FAssets.icons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -118,7 +118,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              groupController: controller,
+              selectController: controller,
               maxHeight: 150,
               title: const Text('Title'),
               menu: [
@@ -146,7 +146,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              groupController: controller,
+              selectController: controller,
               enabled: false,
               prefixIcon: FIcon(FAssets.icons.calendar),
               label: const Text('Label'),
@@ -170,7 +170,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              groupController: controller,
+              selectController: controller,
               prefixIcon: FIcon(FAssets.icons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -196,12 +196,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 250,
             title: const Text('Title'),
-            menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -216,13 +216,13 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
             count: 2,
             title: const Text('Title'),
-            menuTileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -237,14 +237,13 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
             count: 24,
             title: const Text('Title'),
-            menuTileBuilder:
-                (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
+            menuBuilder: (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
           ),
         ),
       );

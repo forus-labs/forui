@@ -10,6 +10,9 @@ import 'package:forui/src/widgets/select_group/select_group_item.dart';
 
 part 'select_group.style.dart';
 
+/// A [FSelectGroup]'s controller.
+typedef FSelectGroupController<T> = FMultiValueNotifier<T>;
+
 /// A set of items that are treated as a single selection.
 ///
 /// Typically used to group multiple [FSelectGroupItem.checkbox]s or [FSelectGroupItem.radio]s.
@@ -21,10 +24,6 @@ part 'select_group.style.dart';
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>> {
   /// The controller.
-  ///
-  /// See:
-  /// * [FRadioSelectGroupController] for a single radio button like selection.
-  /// * [FMultiSelectGroupController] for multiple selections.
   final FSelectGroupController<T> controller;
 
   /// The style. Defaults to [FThemeData.selectGroupStyle].
@@ -42,6 +41,12 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   /// The items.
   final List<FSelectGroupItem<T>> items;
 
+  /// The callback that is called when the value changes.
+  final ValueChanged<Set<T>>? onChange;
+
+  /// The callback that is called when an item is selected.
+  final ValueChanged<(T, bool)>? onSelect;
+
   /// Creates a [FSelectGroup].
   FSelectGroup({
     required this.controller,
@@ -50,6 +55,8 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -97,7 +104,9 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onSelect', onSelect));
   }
 }
 
@@ -106,17 +115,22 @@ class _State<T> extends FormFieldState<Set<T>> {
   void initState() {
     super.initState();
     widget.controller.addListener(_handleControllerChanged);
+    widget.controller.addValueListener(widget.onChange);
+    widget.controller.addUpdateListener(widget.onSelect);
   }
 
   @override
   void didUpdateWidget(covariant FSelectGroup<T> old) {
     super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
-      return;
+    if (widget.controller != old.controller) {
+      widget.controller.addListener(_handleControllerChanged);
+      old.controller.removeListener(_handleControllerChanged);
     }
 
-    widget.controller.addListener(_handleControllerChanged);
-    old.controller.removeListener(_handleControllerChanged);
+    widget.controller.addValueListener(widget.onChange);
+    widget.controller.addUpdateListener(widget.onSelect);
+    old.controller.removeValueListener(old.onChange);
+    old.controller.removeUpdateListener(old.onSelect);
   }
 
   @override

@@ -10,9 +10,9 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FSelectGroupController<int> controller;
+  late FMultiValueNotifier<int> controller;
 
-  setUp(() => controller = FRadioSelectGroupController(value: 1));
+  setUp(() => controller = FMultiValueNotifier.radio(value: 1));
 
   group('FSelectTileGroup', () {
     group('blue screen', () {
@@ -20,7 +20,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              groupController: controller,
+              selectController: controller,
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
@@ -49,7 +49,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              groupController: controller,
+              selectController: controller,
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
@@ -86,7 +86,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectTileGroup(
-              groupController: controller,
+              selectController: controller,
               style: TestScaffold.blueScreen.tileGroupStyle,
               enabled: false,
               label: const Text('Network'),
@@ -120,7 +120,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FSelectTileGroup(
-                groupController: controller,
+                selectController: controller,
                 label: const Text('Network'),
                 description: const Text('Configure your network'),
                 errorBuilder: (context, error) => Text(error),
@@ -161,7 +161,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FSelectTileGroup(
-                groupController: controller,
+                selectController: controller,
                 maxHeight: 150,
                 divider: divider,
                 children: [
@@ -189,7 +189,7 @@ void main() {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: FSelectTileGroup(
-                    groupController: controller,
+                    selectController: controller,
                     label: const Text('Network'),
                     divider: divider,
                     children: [
@@ -231,7 +231,7 @@ void main() {
               TestScaffold(
                 theme: theme.data,
                 child: FSelectTileGroup(
-                  groupController: controller,
+                  selectController: controller,
                   label: const Text('Network'),
                   description: const Text('Configure your network'),
                   enabled: false,
@@ -272,7 +272,7 @@ void main() {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: FSelectTileGroup(
-                groupController: controller,
+                selectController: controller,
                 label: const Text('Network'),
                 description: const Text('Configure your network'),
                 forceErrorText: 'This should appear',
@@ -307,7 +307,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FSelectTileGroup(
-              groupController: controller,
+              selectController: controller,
               label: const Text('Network'),
               children: [
                 FSelectTile(
@@ -333,7 +333,7 @@ void main() {
             theme: theme.data,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FSelectTileGroup(groupController: controller, label: const Text('Network'), children: const []),
+              child: FSelectTileGroup(selectController: controller, label: const Text('Network'), children: const []),
             ),
           ),
         );
@@ -349,7 +349,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             children: [
               FSelectTile(
@@ -378,7 +378,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             enabled: false,
             children: [
@@ -410,7 +410,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSelectTileGroup.builder(
-            groupController: controller,
+            selectController: controller,
             style: TestScaffold.blueScreen.tileGroupStyle,
             maxHeight: 200,
             count: 5,
@@ -427,7 +427,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup.builder(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 250,
@@ -443,7 +443,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup.builder(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
@@ -463,7 +463,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup.builder(
-            groupController: controller,
+            selectController: controller,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,

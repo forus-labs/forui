@@ -7,40 +7,15 @@ import 'package:forui/forui.dart';
 import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
-  testWidgets('useFRadioSelectGroupController', (tester) async {
-    late FRadioSelectGroupController<int> controller;
+  testWidgets('useFSelectController', (tester) async {
+    late FMultiValueNotifier<int> controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFRadioSelectGroupController();
-            return FSelectGroup(
-              controller: controller,
-              items: const [
-                FSelectGroupItem.radio(value: 0, label: Text('0')),
-                FSelectGroupItem.radio(value: 1, label: Text('1')),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-
-    await tester.tap(find.byType(FRadio).first);
-
-    await tester.pumpAndSettle();
-  });
-
-  testWidgets('useFMultiSelectGroupController', (tester) async {
-    late FMultiSelectGroupController<int> controller;
-
-    await tester.pumpWidget(
-      MaterialApp(
-        home: HookBuilder(
-          builder: (context) {
-            controller = useFMultiSelectGroupController();
-            return FSelectGroup(
+            controller = useFMultiValueNotifier<int>();
+            return FSelectGroup<int>(
               controller: controller,
               items: const [
                 FSelectGroupItem.checkbox(value: 0, label: Text('0')),
@@ -53,6 +28,31 @@ void main() {
     );
 
     await tester.tap(find.byType(FCheckbox).first);
+
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('useFRadioSelectController', (tester) async {
+    late FMultiValueNotifier<int> controller;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFRadioMultiValueNotifier<int>();
+            return FSelectGroup<int>(
+              controller: controller,
+              items: const [
+                FSelectGroupItem.radio(value: 0, label: Text('0')),
+                FSelectGroupItem.radio(value: 1, label: Text('1')),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+
+    await tester.tap(find.byType(FRadio).first);
 
     await tester.pumpAndSettle();
   });
