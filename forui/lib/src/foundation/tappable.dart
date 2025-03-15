@@ -6,6 +6,8 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
+part 'tappable.style.dart';
+
 @internal
 extension Touch on Never {
   /// The platforms that uses touch as the primary input. It isn't 100% accurate as there are hybrid devices that uses
@@ -37,6 +39,9 @@ typedef FTappableData = ({bool focused, bool hovered});
 class FTappable extends StatefulWidget {
   static Widget _builder(BuildContext _, FTappableData _, Widget? child) => child!;
 
+  /// The style.
+  final FTappableStyle? style;
+
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
   final FFocusedOutlineStyle? focusedOutlineStyle;
 
@@ -57,12 +62,6 @@ class FTappable extends StatefulWidget {
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
-
-  /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 200ms.
-  final Duration touchHoverEnterDuration;
-
-  /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 0s.
-  final Duration touchHoverExitDuration;
 
   /// The tappable's hit test behavior. Defaults to [HitTestBehavior.translucent].
   final HitTestBehavior behavior;
@@ -95,6 +94,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const factory FTappable.animated({
+    FTappableStyle? style,
     FFocusedOutlineStyle? focusedOutlineStyle,
     String? semanticLabel,
     bool semanticSelected,
@@ -102,10 +102,7 @@ class FTappable extends StatefulWidget {
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
-    Tween<double>? animationTween,
     HitTestBehavior behavior,
-    Duration touchHoverEnterDuration,
-    Duration touchHoverExitDuration,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
     ValueWidgetBuilder<FTappableData>? builder,
@@ -118,6 +115,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const FTappable({
+    this.style,
     this.focusedOutlineStyle,
     this.semanticLabel,
     this.semanticSelected = false,
@@ -125,8 +123,6 @@ class FTappable extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    this.touchHoverEnterDuration = const Duration(milliseconds: 200),
-    this.touchHoverExitDuration = Duration.zero,
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
@@ -143,6 +139,7 @@ class FTappable extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('semanticsSelected', value: semanticSelected, ifTrue: 'selected'))
@@ -150,8 +147,6 @@ class FTappable extends StatefulWidget {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(DiagnosticsProperty('touchHoverEnterDuration', touchHoverEnterDuration))
-      ..add(DiagnosticsProperty('touchHoverExitDuration', touchHoverExitDuration))
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
@@ -184,6 +179,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
+    final style = widget.style ?? context.theme.tappableStyle;
+
     var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
     tappable = _decorate(context, tappable);
 
@@ -200,7 +197,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
             final count = ++_monotonic;
             _onPointerDown();
 
-            await Future.delayed(widget.touchHoverEnterDuration);
+            await Future.delayed(style.touchHoverEnterDuration);
             if (mounted && count == _monotonic && !_touched) {
               setState(() => _touched = true);
             }
@@ -209,7 +206,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
             final count = ++_monotonic;
             _onPointerUp();
 
-            await Future.delayed(widget.touchHoverExitDuration);
+            await Future.delayed(style.touchHoverExitDuration);
             if (mounted && count == _monotonic && _touched) {
               setState(() => _touched = false);
             }
@@ -268,10 +265,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
 @internal
 class AnimatedTappable extends FTappable {
-  final Tween<double>? animationTween;
-
   const AnimatedTappable({
-    this.animationTween,
+    super.style,
     super.focusedOutlineStyle,
     super.semanticLabel,
     super.semanticSelected = false,
@@ -280,8 +275,6 @@ class AnimatedTappable extends FTappable {
     super.focusNode,
     super.onFocusChange,
     super.behavior,
-    super.touchHoverEnterDuration,
-    super.touchHoverExitDuration,
     super.onPress,
     super.onLongPress,
     super.builder,
@@ -291,31 +284,35 @@ class AnimatedTappable extends FTappable {
 
   @override
   State<FTappable> createState() => AnimatedTappableState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('animationTween', animationTween));
-  }
 }
 
 @internal
 class AnimatedTappableState extends _FTappableState<AnimatedTappable> with SingleTickerProviderStateMixin {
   late final AnimationController controller;
   late Animation<double> animation;
+  late FTappableStyle style;
 
   @override
   void initState() {
     super.initState();
     controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    animation = (widget.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
+    animation = (widget.style?.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    style = widget.style ?? context.theme.tappableStyle;
+    animation = style.animationTween.animate(controller);
   }
 
   @override
   void didUpdateWidget(covariant AnimatedTappable old) {
     super.didUpdateWidget(old);
-    if (widget.animationTween != old.animationTween) {
-      animation = (widget.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
+    style = widget.style ?? context.theme.tappableStyle;
+
+    if (widget.style != old.style) {
+      animation = style.animationTween.animate(controller);
     }
   }
 
@@ -339,6 +336,41 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('animation', animation));
+      ..add(DiagnosticsProperty('animation', animation))
+      ..add(DiagnosticsProperty('style', style));
   }
+}
+
+/// Defines different animation styles for [FTappable] widgets.
+abstract final class FTappableAnimation {
+  // Private constructor to prevent instantiation
+  const FTappableAnimation._();
+  
+  /// No animation will be applied.
+  static Tween<double> none = Tween(begin: 1.0, end: 1.0);
+  
+  /// A bounce animation that scales the widget down and back up.
+  static Tween<double> bounce = Tween(begin: 1.0, end: 0.97);
+}
+
+/// A custom [FTappable] style.
+class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
+  /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 200ms.
+  @override
+  final Duration touchHoverEnterDuration;
+
+  /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 0s.
+  @override
+  final Duration touchHoverExitDuration;
+
+  /// The tween used to animate the scale of the tappable. Defaults to a scale of 0.97.
+  @override
+  final Tween<double> animationTween;
+
+  /// Creates a [FTappableStyle].
+  FTappableStyle({
+    this.touchHoverEnterDuration = const Duration(milliseconds: 200),
+    this.touchHoverExitDuration = Duration.zero,
+    Tween<double>? animationTween,
+  }) : animationTween = animationTween ?? FTappableAnimation.bounce;
 }
