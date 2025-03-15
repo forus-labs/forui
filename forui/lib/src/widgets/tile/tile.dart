@@ -162,7 +162,7 @@ class FTile extends StatelessWidget with FTileMixin {
         style: style,
         divider: tile.divider,
         enabled: enabled,
-        hovered: data.hovered,
+        hovered: data.hovered || data.pressed,
         focused: data.focused,
         index: tile.index,
         last: tile.last,

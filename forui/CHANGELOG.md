@@ -37,6 +37,8 @@
 * **Breaking** Change `FProgressStyle` to `FLinearProgressStyle`.
 * **Breaking** Remove `FButtonSpinner` - use `FProgress.circular(...)` instead.
 
+* **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.
+
 * **Breaking** Replace `FSelectGroupController` with a typedef of `FMultiValueNotifier`.
 * **Breaking** Remove `FMultiSelectGroupController` - use `FSelectGroupController(...)` instead.
 * **Breaking** Remove `FRadioSelectGroupController` - use `FSelectGroupController.radio(...)` instead.
