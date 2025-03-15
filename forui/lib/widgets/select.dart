@@ -5,5 +5,6 @@
 /// See https://forui.dev/docs/form/select for working examples.
 library forui.widgets.select;
 
-export '../src/widgets/select/select.dart';
-export '../src/widgets/select/select_controller.dart';
+export '../src/widgets/select/select_controller.dart' hide FSelectControllerData;
+export '../src/widgets/select/select_item.dart' hide FSelectItemData;
+export '../src/widgets/select/single/select.dart';

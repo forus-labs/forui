@@ -1,17 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/select/select_controller.dart';
+import 'package:forui/src/widgets/select/select_item.dart';
 
 class FSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
   static Widget defaultIconBuilder(BuildContext _, (FTimeFieldStyle, FTextFieldStateStyle) styles, Widget? _) =>
       Padding(
         padding: const EdgeInsetsDirectional.only(end: 8.0),
-        child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.chevronsUpDown)),
+        child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.chevronDown)),
       );
 
   /// The default format function that converts the selected items to a comma separated string.
-  static String defaultFormat<T>(Set<Object?> selected) => selected.map((e) => e.toString()).join(', ');
+  static String defaultFormat(Object? selected) => selected.toString();
 
   /// The controller.
   final FSelectController<T>? controller;
@@ -45,7 +47,7 @@ class FSelect<T> extends StatefulWidget {
   final bool enabled;
 
   /// {@macro forui.foundation.form_field_properties.onSaved}
-  final FormFieldSetter<Set<T>>? onSaved;
+  final FormFieldSetter<T>? onSaved;
 
   /// Used to enable/disable this checkbox auto validation and update its error text.
   ///
@@ -69,7 +71,7 @@ class FSelect<T> extends StatefulWidget {
   /// The function that formats the selected items into a string. The items are sorted in order of selection.
   ///
   /// Defaults to [defaultFormat].
-  final String Function(Set<T>) format;
+  final String Function(T) format;
 
   /// The [hint] that is displayed when the select is empty. Defaults to the current locale's
   /// [FLocalizations.selectHint].
@@ -117,7 +119,10 @@ class FSelect<T> extends StatefulWidget {
   /// True if the dropdown menu should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
+  final List<FSelectItemMixin> children;
+
   const FSelect({
+    required this.children,
     this.controller,
     this.style,
     this.autofocus = false,
@@ -188,22 +193,80 @@ class FSelect<T> extends StatefulWidget {
 }
 
 class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
+  final TextEditingController _textController = TextEditingController();
   late FSelectController<T> _controller;
+  late FocusNode _focus;
+  bool _mutating = false;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? FSelectController(vsync: this);
+
+    _focus = widget.focusNode ?? FocusNode();
+    _textController.addListener(_updateSelectController);
+    _controller.addListener(_updateTextController);
+    _controller.popover.addListener(() {
+      if (!_controller.popover.shown) {
+        _focus.requestFocus();
+      }
+    });
   }
 
   @override
   void didUpdateWidget(covariant FSelect<T> old) {
     super.didUpdateWidget(old);
+    // DO NOT REORDER
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? FocusNode();
+    }
+
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
       }
       _controller = widget.controller ?? FSelectController(vsync: this);
+      _controller.addListener(_updateTextController);
+      _updateTextController();
+      _controller.popover.addListener(() {
+        if (!_controller.popover.shown) {
+          _focus.unfocus();
+        }
+      });
+    }
+  }
+
+  void _updateSelectController() {
+    if (_mutating) {
+      return;
+    }
+
+    try {
+      _mutating = true;
+      if (_textController.text.isEmpty) {
+        _controller.value = null;
+      }
+    } finally {
+      _mutating = false;
+    }
+  }
+
+  void _updateTextController() {
+    if (_mutating) {
+      return;
+    }
+
+    try {
+      _mutating = true;
+      _textController.text = switch (_controller.value) {
+        null => '',
+        final value => widget.format(value),
+      };
+    } finally {
+      _mutating = false;
     }
   }
 
@@ -213,7 +276,8 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final onSaved = widget.onSaved;
     return FTextField(
-      // focusNode: _focus,
+      focusNode: _focus,
+      controller: _textController,
       style: style.textFieldStyle,
       textAlign: widget.textAlign,
       textAlignVertical: widget.textAlignVertical,
@@ -221,7 +285,10 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
       expands: widget.expands,
       mouseCursor: widget.mouseCursor,
       canRequestFocus: widget.canRequestFocus,
-      onTap: _controller.popover.toggle,
+      onTap: () {
+        _focus.unfocus();
+        _controller.popover.toggle();
+      },
       hint: widget.hint ?? localizations.selectHint,
       readOnly: true,
       enableInteractiveSelection: false,
@@ -239,7 +306,7 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
                 cursor: SystemMouseCursors.click,
                 child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
               ),
-      clearable: widget.clearable ? (_) => _controller.value.isNotEmpty : (_) => false,
+      clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
       label: widget.label,
       description: widget.description,
       enabled: widget.enabled,
@@ -258,15 +325,30 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
             hideOnTapOutside: widget.hideOnTapOutside,
             directionPadding: widget.directionPadding,
             popoverBuilder:
-                (_, _, _) => TextFieldTapRegion(
-                  child: ConstrainedBox(
-                    constraints: widget.popoverConstraints,
-                    // TODO: Different select content.
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Column(mainAxisSize: MainAxisSize.min, children: [
+                (_, _, _) => ConstrainedBox(
+                  constraints: widget.popoverConstraints,
+                  child: FSelectControllerData<T>(
+                    contains: (value) => _controller.value == value,
+                    onPress: (value) async {
+                      if (widget.autoHide) {
+                        await _controller.popover.hide();
+                      }
 
-                      ]),
+                      _controller.value = value;
+                    },
+                    // TODO: Extract out content logic
+                    child: FSelectItemData<T>(
+                      style: FSelectItemStyle.inherit(
+                        colorScheme: context.theme.colorScheme,
+                        style: context.theme.style,
+                        typography: context.theme.typography,
+                      ),
+                      enabled: true,
+                      first: false,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: ListView(shrinkWrap: true, children: widget.children),
+                      ),
                     ),
                   ),
                 ),
