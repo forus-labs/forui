@@ -21,4 +21,4 @@
 library forui.localizations;
 
 export 'src/localizations/localizations.dart';
-export 'src/localizations/localization.dart' hide scriptNumerals;
+export 'src/localizations/localization.dart' hide scriptNumerals, scriptPeriods;

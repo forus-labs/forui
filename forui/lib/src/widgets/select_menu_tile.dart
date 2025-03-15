@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -7,9 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/select_group/select_group_controller.dart';
 
 part 'select_menu_tile.style.dart';
+
+/// A [FSelectMenuTile]'s controller.
+typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
 
 /// A tile that, when triggered, displays a list of options for the user to pick from.
 ///
@@ -23,7 +23,7 @@ part 'select_menu_tile.style.dart';
 /// * [FSelectMenuTileStyle] for customizing a select group's appearance.
 class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
   /// The controller that controls the selected tiles.
-  final FSelectGroupController<T> groupController;
+  final FSelectMenuTileController<T> selectController;
 
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
@@ -121,9 +121,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The suffix icon. Defaults to `FAssets.icons.chevronsUpDown`.
   final Widget? suffixIcon;
 
+  /// The callback that is called when the value changes.
+  final ValueChanged<Set<T>>? onChange;
+
+  /// The callback that is called when an item is selected.
+  final ValueChanged<(T, bool)>? onSelect;
+
   /// Creates a [FSelectMenuTile].
   FSelectMenuTile({
-    required this.groupController,
+    required this.selectController,
     required this.title,
     required List<FSelectTile<T>> menu,
     this.popoverController,
@@ -151,6 +157,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.subtitle,
     this.details,
     this.suffixIcon,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -200,7 +208,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                  (_, _, _) => ConstrainedBox(
                    constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                    child: FSelectTileGroup<T>(
-                     groupController: state._controller,
+                     selectController: state._controller,
                      scrollController: scrollController,
                      cacheExtent: cacheExtent,
                      maxHeight: maxHeight,
@@ -242,23 +250,23 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuTileBuilder] is called for each tile that should be built. [FTileData] is **not** visible to
+  /// The [menuBuilder] is called for each tile that should be built. [FTileData] is **not** visible to
   /// `menuTileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
   /// * It will be called only for indices <= [count] if [count] is given.
   ///
-  /// The [count] is the number of tiles to build. If null, [menuTileBuilder] will be called until it returns null.
+  /// The [count] is the number of tiles to build. If null, [menuBuilder] will be called until it returns null.
   ///
   /// ## Notes
   /// May result in an infinite loop or run out of memory if:
   /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
-  /// * [count] is null and [menuTileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
+  /// * [count] is null and [menuBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
   FSelectMenuTile.builder({
-    required this.groupController,
+    required this.selectController,
     required this.title,
-    required FSelectTile<T>? Function(BuildContext, int) menuTileBuilder,
+    required FSelectTile<T>? Function(BuildContext, int) menuBuilder,
     int? count,
     this.popoverController,
     this.scrollController,
@@ -285,6 +293,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.subtitle,
     this.details,
     this.suffixIcon,
+    this.onChange,
+    this.onSelect,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -334,7 +344,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                  (_, _, _) => ConstrainedBox(
                    constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                    child: FSelectTileGroup<T>.builder(
-                     groupController: state._controller,
+                     selectController: state._controller,
                      scrollController: scrollController,
                      cacheExtent: cacheExtent,
                      maxHeight: maxHeight,
@@ -343,7 +353,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                      style: menuStyle.tileGroupStyle,
                      semanticLabel: semanticLabel,
                      divider: divider,
-                     tileBuilder: menuTileBuilder,
+                     tileBuilder: menuBuilder,
                      count: count,
                    ),
                  ),
@@ -382,7 +392,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('groupController', groupController))
+      ..add(DiagnosticsProperty('groupController', selectController))
       ..add(DiagnosticsProperty('popoverController', popoverController))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
@@ -401,21 +411,27 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onSelect', onSelect));
   }
 }
 
 class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMixin {
-  late _SelectGroupController<T> _controller;
+  late _Notifier<T> _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = _SelectGroupController(
-      widget.groupController,
-      widget.popoverController ?? FPopoverController(vsync: this),
-      autoHide: widget.autoHide,
-    )..addListener(_handleControllerChanged);
+    _controller =
+        _Notifier(
+            widget.selectController,
+            widget.popoverController ?? FPopoverController(vsync: this),
+            autoHide: widget.autoHide,
+          )
+          ..addListener(_handleControllerChanged)
+          ..addValueListener(widget.onChange)
+          ..addUpdateListener(widget.onSelect);
   }
 
   @override
@@ -429,11 +445,17 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       _controller._popover = widget.popoverController ?? FPopoverController(vsync: this);
     }
 
-    if (widget.groupController != old.groupController) {
-      _controller.delegate = widget.groupController;
+    if (widget.selectController != old.selectController) {
+      _controller.delegate = widget.selectController;
     }
 
     _controller.autoHide = old.autoHide;
+
+    _controller
+      ..addValueListener(widget.onChange)
+      ..addUpdateListener(widget.onSelect)
+      ..removeValueListener(old.onChange)
+      ..removeUpdateListener(old.onSelect);
   }
 
   @override
@@ -453,7 +475,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
 
   @override
   void dispose() {
-    widget.groupController.removeListener(_handleControllerChanged);
+    widget.selectController.removeListener(_handleControllerChanged);
     if (widget.popoverController == null) {
       _controller._popover.dispose();
     }
@@ -466,8 +488,8 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
     // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
     // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.groupController.value != value) {
-      didChange(widget.groupController.value);
+    if (widget.selectController.value != value) {
+      didChange(widget.selectController.value);
     }
   }
 
@@ -475,26 +497,66 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   FSelectMenuTile<T> get widget => super.widget as FSelectMenuTile<T>;
 }
 
-class _SelectGroupController<T> extends DelegateSelectGroupController<T> {
+class _Notifier<T> implements FMultiValueNotifier<T> {
+  FMultiValueNotifier<T> delegate;
   FPopoverController _popover;
   bool autoHide;
 
-  _SelectGroupController(super.delegate, this._popover, {required this.autoHide});
+  _Notifier(this.delegate, this._popover, {required this.autoHide});
 
   @override
-  Future<void> update(T value, {required bool selected}) async {
+  bool contains(T value) => delegate.contains(value);
+
+  @override
+  Future<void> update(T value, {required bool add}) async {
     if (autoHide && _popover.shown) {
       await _popover.hide();
     }
 
-    super.update(value, selected: selected);
+    delegate.update(value, add: add);
   }
 
   @override
   void dispose() {
+    delegate.dispose();
     _popover.dispose();
-    super.dispose();
   }
+
+  @override
+  void addListener(VoidCallback listener) => delegate.addListener(listener);
+
+  @override
+  void addValueListener(ValueChanged<Set<T>>? listener) => delegate.addValueListener(listener);
+
+  @override
+  void addUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.addUpdateListener(listener);
+
+  @override
+  void removeListener(VoidCallback listener) => delegate.removeListener(listener);
+
+  @override
+  void removeValueListener(ValueChanged<Set<T>>? listener) => delegate.removeValueListener(listener);
+
+  @override
+  void removeUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.removeUpdateListener(listener);
+
+  @override
+  void notifyListeners() => delegate.notifyListeners();
+
+  @override
+  void notifyUpdateListeners(T value, {required bool add}) => delegate.notifyUpdateListeners(value, add: add);
+
+  @override
+  Set<T> get value => delegate.value;
+
+  @override
+  set value(Set<T> values) => delegate.value = values;
+
+  @override
+  bool get disposed => delegate.disposed;
+
+  @override
+  bool get hasListeners => delegate.hasListeners;
 }
 
 /// A [FSelectMenuTileStyle]'s style.

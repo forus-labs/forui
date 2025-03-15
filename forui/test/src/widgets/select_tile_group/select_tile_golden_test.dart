@@ -11,9 +11,9 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FSelectGroupController<int> controller;
+  late FMultiValueNotifier<int> controller;
 
-  setUp(() => controller = FRadioSelectGroupController(value: 1));
+  setUp(() => controller = FMultiValueNotifier.radio(value: 1));
 
   group('FTSelectTile', () {
     group('blue screen', () {

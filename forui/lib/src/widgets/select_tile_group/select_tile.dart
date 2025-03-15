@@ -118,7 +118,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       style: style,
       semanticLabel: semanticLabel,
       enabled: enabled,
-      onPress: () => controller.update(value, selected: !selected),
+      onPress: () => controller.update(value, add: !selected),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -151,7 +151,7 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
     return result!;
   }
 
-  final FSelectGroupController<T> controller;
+  final FSelectTileGroupController<T> controller;
   final bool selected;
 
   const FSelectTileData({required this.controller, required this.selected, required super.child, super.key});

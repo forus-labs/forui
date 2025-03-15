@@ -1,3 +1,30 @@
+## 0.11.0
+
+### Additions
+* Add `FMultiValueNotifier`.
+* Add `FSelectTileGroupController` typedef.
+* Add `FSelectMenuTileController` typedef.
+
+* Add `FSelectGroup.onChange`.
+* Add `FSelectGroup.onSelect`.
+
+* Add `FSelectTileGroup.onChange`.
+* Add `FSelectTileGroup.onSelect`.
+
+* Add `FSelectMenuTile.onChange`.
+* Add `FSelectMenuTile.onSelect`.
+
+### Changes
+
+* **Breaking** Replace `FSelectGroupController` with a typedef of `FMultiValueNotifier`.
+* **Breaking** Remove `FMultiSelectGroupController` - use `FSelectGroupController(...)` instead.
+* **Breaking** Remove `FRadioSelectGroupController` - use `FSelectGroupController.radio(...)` instead.
+
+* **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
+
+* **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
+* **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
+
 ## 0.10.0+1
 
 Fix bad build caused by generated files not being published.

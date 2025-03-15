@@ -46,8 +46,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 }
 
 /// A [FSelectGroupItem]'s state.
-typedef FSelectGroupItemState<T> =
-    ({FSelectGroupController<T> controller, FSelectGroupStyle style, T value, bool selected});
+typedef FSelectGroupItemState<T> = ({FMultiValueNotifier<T> controller, FSelectGroupStyle style, T value, bool selected});
 
 /// Represents a selection in a [FSelectGroup].
 abstract class FSelectGroupItem<T> extends StatelessWidget {
@@ -159,7 +158,7 @@ class _Checkbox<T> extends FSelectGroupItem<T> {
         semanticLabel: semanticLabel,
         error: error,
         value: selected,
-        onChange: (state) => controller.update(value, selected: state),
+        onChange: (state) => controller.update(value, add: state),
         enabled: enabled,
         autofocus: autofocus,
         focusNode: focusNode,
@@ -221,7 +220,7 @@ class _Radio<T> extends FSelectGroupItem<T> {
         semanticLabel: semanticLabel,
         error: error,
         value: selected,
-        onChange: (state) => controller.update(value, selected: state),
+        onChange: (state) => controller.update(value, add: state),
         enabled: enabled,
         autofocus: autofocus,
         focusNode: focusNode,
