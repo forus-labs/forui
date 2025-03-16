@@ -31,9 +31,7 @@ void main() {
 
       testWidgets('hovered - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
-            child: FTappable(builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null),
-          ),
+          TestScaffold(child: FTappable(builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null)),
         );
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 
@@ -103,11 +101,7 @@ void main() {
 
         await tester.pumpWidget(
           TestScaffold(
-            child: FTappable(
-              key: key,
-              builder: (_, value, _) => Text('$value'),
-              onPress: enabled ? () {} : null,
-            ),
+            child: FTappable(key: key, builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null),
           ),
         );
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
@@ -148,7 +142,6 @@ void main() {
     }
   });
 
-
   group('FTappable.static', () {
     for (final enabled in [true, false]) {
       testWidgets('focused - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
@@ -172,7 +165,9 @@ void main() {
 
       testWidgets('hovered - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(child: FTappable.static(builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null)),
+          TestScaffold(
+            child: FTappable.static(builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null),
+          ),
         );
         expect(find.text((focused: false, hovered: false).toString()), findsOneWidget);
 

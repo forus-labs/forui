@@ -129,6 +129,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   final FBottomNavigationBarItemStyle itemStyle;
 
   /// The tappable's style.
+  @override
   final FTappableStyle tappableStyle;
 
   /// Creates a [FBottomNavigationBarStyle].
@@ -151,7 +152,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
            color: colorScheme.background,
          ),
          focusedOutlineStyle: style.focusedOutlineStyle,
-        itemStyle: FBottomNavigationBarItemStyle.inherit(colorScheme: colorScheme, typography: typography),
-        tappableStyle: style.tappable,
-      );
+         itemStyle: FBottomNavigationBarItemStyle.inherit(colorScheme: colorScheme, typography: typography),
+         tappableStyle: style.tappable,
+       );
 }
