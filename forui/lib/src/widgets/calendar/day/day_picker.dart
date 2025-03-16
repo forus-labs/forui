@@ -242,14 +242,14 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
         textStyle: mutedTextStyle,
         focusedBorderColor: colorScheme.primaryForeground,
         radius: const Radius.circular(4),
-        tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       ),
       unselectedStyle: FCalendarEntryStyle(
         backgroundColor: colorScheme.background,
         textStyle: mutedTextStyle,
         focusedBorderColor: colorScheme.background,
         radius: const Radius.circular(4),
-        tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       ),
     );
 
@@ -262,7 +262,7 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
             textStyle: typography.base.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
             focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+            tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
@@ -270,7 +270,7 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
             hoveredBackgroundColor: colorScheme.secondary,
             focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+            tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),
         ),
         enclosing: FCalendarDayStyle(
@@ -279,7 +279,7 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
             textStyle: mutedTextStyle,
             focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+            tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),
           unselectedStyle: FCalendarEntryStyle(
             backgroundColor: colorScheme.background,
@@ -287,7 +287,7 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
             hoveredBackgroundColor: colorScheme.secondary,
             focusedBorderColor: colorScheme.foreground,
             radius: const Radius.circular(4),
-            tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+            tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),
         ),
       ),

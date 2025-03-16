@@ -115,7 +115,7 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable, _$FCalendarYearMo
            hoveredBackgroundColor: colorScheme.secondary,
            focusedBorderColor: colorScheme.foreground,
            radius: const Radius.circular(8),
-           tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+           tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
          ),
          disabledStyle: FCalendarEntryStyle(
            backgroundColor: colorScheme.background,
@@ -125,7 +125,7 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable, _$FCalendarYearMo
            ),
            focusedBorderColor: colorScheme.background,
            radius: const Radius.circular(8),
-           tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+           tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
          ),
        );
 }

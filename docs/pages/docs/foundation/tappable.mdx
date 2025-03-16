@@ -65,7 +65,7 @@ const FTappable(
 
 ### `FTappable.static(...)`
 
-A varient of `FTappable` without any animation. This is similar to using `FTappableAnimation.none`.
+A varient of `FTappable` without any animation. This is similar to using `FTappableAnimations.none`.
 
 ```dart copy
 const FTappable.static(
@@ -90,10 +90,10 @@ const FTappable.static(
 
 ```dart copy
 // Default animation.
-FTappableStyle(animationTween: FTappableAnimation.bounce);
+FTappableStyle(animationTween: FTappableAnimations.bounce);
 
 // No animation.
-FTappableStyle(animationTween: FTappableAnimation.none);
+FTappableStyle(animationTween: FTappableAnimations.none);
 
 // Custom tween.
 FTappableStyle(animationTween: Tween(begin: 1.0, end: 0.97));

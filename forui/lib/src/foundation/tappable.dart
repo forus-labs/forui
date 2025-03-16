@@ -342,15 +342,12 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 }
 
 /// Defines different animation styles for [FTappable] widgets.
-abstract final class FTappableAnimation {
-  // Private constructor to prevent instantiation
-  const FTappableAnimation._();
-
+extension FTappableAnimations on Never {
   /// No animation will be applied.
-  static Tween<double> none = Tween(begin: 1.0, end: 1.0);
+  static final Tween<double> none = Tween(begin: 1.0, end: 1.0);
 
   /// A bounce animation that scales the widget down and back up.
-  static Tween<double> bounce = Tween(begin: 1.0, end: 0.97);
+  static final Tween<double> bounce = Tween(begin: 1.0, end: 0.97);
 }
 
 /// A custom [FTappable] style.
@@ -372,5 +369,5 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
     this.touchHoverEnterDuration = const Duration(milliseconds: 200),
     this.touchHoverExitDuration = Duration.zero,
     Tween<double>? animationTween,
-  }) : animationTween = animationTween ?? FTappableAnimation.bounce;
+  }) : animationTween = animationTween ?? FTappableAnimations.bounce;
 }

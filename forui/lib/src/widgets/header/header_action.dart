@@ -157,5 +157,5 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
     : enabledColor = colorScheme.foreground,
       disabledColor = colorScheme.disable(colorScheme.foreground),
       focusedOutlineStyle = style.focusedOutlineStyle,
-      tappableStyle = style.tappable;
+      tappableStyle = style.tappableStyle;
 }

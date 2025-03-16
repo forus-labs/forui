@@ -258,7 +258,7 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
         dateTextStyle: unselectedDateTextStyle,
         weekdayTextStyle: unselectedWeekdayTextStyle,
       ),
-      tappableStyle: style.tappable,
+      tappableStyle: style.tappableStyle,
     );
   }
 }

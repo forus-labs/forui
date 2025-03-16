@@ -154,7 +154,7 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         iconSize: 20,
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
-        tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       );
 }
 

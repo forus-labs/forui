@@ -67,8 +67,8 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
         ),
 
         iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
-        actionTappableStyle: style.tappable,
-        pageTappableStyle: style.tappable,
+        actionTappableStyle: style.tappableStyle,
+        pageTappableStyle: style.tappableStyle,
       );
 }
 

@@ -171,7 +171,7 @@ class FTile extends StatelessWidget with FTileMixin {
     );
 
     return FTappable(
-      style: style.tappable,
+      style: style.tappableStyle,
       semanticLabel: semanticLabel,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -308,7 +308,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
 
   /// The tappable's style.
   @override
-  final FTappableStyle tappable;
+  final FTappableStyle tappableStyle;
 
   /// The default tile content's style.
   @override
@@ -324,7 +324,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
     required this.disabledBackgroundColor,
     required this.dividerStyle,
     required this.focusedDividerStyle,
-    required this.tappable,
+    required this.tappableStyle,
     required this.contentStyle,
   });
 
@@ -343,7 +343,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
           width: style.borderWidth,
           padding: EdgeInsets.zero,
         ),
-        tappable: style.tappable.copyWith(
+        tappableStyle: style.tappableStyle.copyWith(
           touchHoverEnterDuration: Duration.zero,
           touchHoverExitDuration: const Duration(milliseconds: 25),
         ),

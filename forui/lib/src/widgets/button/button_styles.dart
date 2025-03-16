@@ -106,7 +106,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             enabled: colorScheme.secondaryForeground,
             disabled: colorScheme.disable(colorScheme.secondaryForeground),
           ),
-          tappableStyle: style.tappable,
+          tappableStyle: style.tappableStyle,
         ),
         ghost: FButtonStyle(
           enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius),
@@ -126,7 +126,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             enabled: colorScheme.secondaryForeground,
             disabled: colorScheme.disable(colorScheme.secondaryForeground),
           ),
-          tappableStyle: style.tappable,
+          tappableStyle: style.tappableStyle,
         ),
       );
 }

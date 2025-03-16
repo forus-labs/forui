@@ -153,6 +153,6 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
          ),
          focusedOutlineStyle: style.focusedOutlineStyle,
          itemStyle: FBottomNavigationBarItemStyle.inherit(colorScheme: colorScheme, typography: typography),
-         tappableStyle: style.tappable,
+         tappableStyle: style.tappableStyle,
        );
 }

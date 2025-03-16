@@ -349,6 +349,6 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
           decoration: TextDecoration.underline,
         ),
         iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
-        tappableStyle: style.tappable,
+        tappableStyle: style.tappableStyle,
       );
 }

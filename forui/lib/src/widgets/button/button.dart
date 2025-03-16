@@ -246,7 +246,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            disabledColor: disabledContentColor,
          ),
          spinnerStyle: FButtonSpinnerStyle.inherit(enabled: enabledContentColor, disabled: disabledContentColor),
-         tappableStyle: style.tappable,
+         tappableStyle: style.tappableStyle,
        );
 }
 
