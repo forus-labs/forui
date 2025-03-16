@@ -3,46 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
+import 'package:forui/src/widgets/select/content.dart';
 import 'package:meta/meta.dart';
 
 part 'select_item.style.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FSelect].
 mixin FSelectItemMixin on Widget {}
-
-@internal
-class FSelectSectionData<T> extends InheritedWidget {
-  final FSelectSectionStyle style;
-  final bool enabled;
-  final bool first;
-
-  const FSelectSectionData({
-    required this.style,
-    required this.enabled,
-    required this.first,
-    required super.child,
-    super.key,
-  });
-
-  static FSelectSectionData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FSelectSectionData<T>>();
-    assert(result != null, 'No FSelectContentData found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(FSelectSectionData<T> old) =>
-      style != old.style || first != old.first || enabled != old.enabled;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
-      ..add(FlagProperty('first', value: first, ifTrue: 'first'));
-  }
-}
 
 /// A section in a [FSelect] that can contain multiple [FSelectItem]s.
 class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
@@ -65,21 +32,28 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 
   @override
   Widget build(BuildContext context) {
-    final section = FSelectSectionData.of<T>(context);
-    final enabled = this.enabled ?? section.enabled;
-    final style = this.style ?? section.style;
+    final content = FSelectContentData.of<T>(context);
+    final enabled = this.enabled ?? content.enabled;
+    final style = this.style ?? content.style;
 
-    return FSelectSectionData(
+    return FSelectContentData<T>(
       style: style,
       enabled: enabled,
       first: false,
+      ensureVisible: content.ensureVisible,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultTextStyle(style: style.titleTextStyle, child: Padding(padding: style.titlePadding, child: title)),
-          if (children.isNotEmpty)
-            FSelectSectionData<T>(style: style, first: section.first, enabled: enabled, child: children.first),
+          if (children.firstOrNull case final first?)
+            FSelectContentData<T>(
+              style: style,
+              first: content.first,
+              enabled: enabled,
+              ensureVisible: content.ensureVisible,
+              child: first,
+            ),
           ...children.skip(1),
         ],
       ),
@@ -171,13 +145,26 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
   final _focus = FocusNode();
 
   @override
+  void initState() {
+    super.initState();
+    // This is hacky but I'm not sure how to do it better.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final FSelectControllerData(:contains, :onPress) = FSelectControllerData.of<T>(context);
+      final content = FSelectContentData.of<T>(context);
+      if (contains(widget.value)) {
+        content.ensureVisible(context);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final FSelectControllerData(:contains, :onPress) = FSelectControllerData.of<T>(context);
-    final section = FSelectSectionData.of<T>(context);
+    final content = FSelectContentData.of<T>(context);
 
     final selected = contains(widget.value);
-    final enabled = widget.enabled ?? section.enabled;
-    final style = widget.style ?? section.style.itemStyle;
+    final enabled = widget.enabled ?? content.enabled;
+    final style = widget.style ?? content.style.itemStyle;
     final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
 
     Widget item = Semantics(
@@ -203,7 +190,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
         onEnter: (_) => _focus.requestFocus(),
         onExit: (_) => _focus.unfocus(),
         child: FTappable(
-          autofocus: selected || section.first,
+          autofocus: selected || content.first,
           focusNode: _focus,
           behavior: HitTestBehavior.opaque,
           onPress: () => onPress(widget.value),

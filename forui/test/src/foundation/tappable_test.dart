@@ -78,10 +78,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FTappable(
-              builder: (_, value, _) {
-                print(value);
-                return Text('$value');
-              },
+              builder: (_, value, _) => Text('$value'),
               onPress: enabled ? () => pressCount++ : null,
               onLongPress: enabled ? () => longPressCount++ : null,
             ),

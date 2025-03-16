@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
-import 'package:forui/src/widgets/select/select_item.dart';
+import 'package:forui/src/widgets/select/content.dart';
 
 class FSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
@@ -228,6 +228,7 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
       if (old.controller == null) {
         _controller.dispose();
       }
+
       _controller = widget.controller ?? FSelectController(vsync: this);
       _controller.addListener(_updateTextController);
       _updateTextController();
@@ -337,19 +338,19 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
                       _controller.value = value;
                     },
                     // TODO: Extract out content logic
-                    child: FSelectSectionData<T>(
-                      style: FSelectSectionStyle.inherit(
+                    child: Content<T>(
+                      scrollHandles: true,
+                      controller: null,
+                      style: FSelectContentStyle.inherit(
                         colorScheme: context.theme.colorScheme,
                         style: context.theme.style,
                         typography: context.theme.typography,
                       ),
-                      enabled: true,
-                      first: false,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        child: ListView(shrinkWrap: true, children: widget.children),
-                      ),
-                    ),
+                      first: _controller.value == null,
+                      enabled: widget.enabled,
+                      physics: const ClampingScrollPhysics(),
+                      children: widget.children,
+                    )
                   ),
                 ),
             child: child!,
