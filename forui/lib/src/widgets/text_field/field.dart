@@ -117,6 +117,7 @@ class Field extends FormField<String> {
             showCursor: parent.showCursor,
             autofocus: parent.autofocus,
             statesController: parent.statesController,
+            obscuringCharacter: parent.obscuringCharacter,
             obscureText: parent.obscureText,
             autocorrect: parent.autocorrect,
             smartDashesType: parent.smartDashesType,

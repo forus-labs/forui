@@ -123,6 +123,9 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// See [TextField.statesController] for more information.
   final WidgetStatesController? statesController;
 
+  /// {@macro flutter.widgets.editableText.obscuringCharacter}
+  final String obscuringCharacter;
+
   /// Whether to hide the text being edited (e.g., for passwords). Defaults to false.
   ///
   /// When this is set to true, all the characters in the text field are obscured, and the text in the field cannot be
@@ -572,6 +575,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.textDirection,
     this.autofocus = false,
     this.statesController,
+    this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
     this.smartDashesType,
@@ -639,6 +643,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.textDirection,
     this.autofocus = false,
     this.statesController,
+    this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = false,
     this.smartDashesType,
@@ -709,6 +714,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.textDirection,
     this.autofocus = false,
     this.statesController,
+    this.obscuringCharacter = '•',
     this.obscureText = true,
     this.autocorrect = false,
     this.smartDashesType,
@@ -780,6 +786,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.textDirection,
     this.autofocus = false,
     this.statesController,
+    this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
     this.smartDashesType,
@@ -888,6 +895,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('statesController', statesController))
+      ..add(DiagnosticsProperty<String>('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
       ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
       ..add(EnumProperty('smartDashesType', smartDashesType))
