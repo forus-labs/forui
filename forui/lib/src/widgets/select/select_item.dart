@@ -11,12 +11,12 @@ part 'select_item.style.dart';
 mixin FSelectItemMixin on Widget {}
 
 @internal
-class FSelectItemData<T> extends InheritedWidget {
-  final FSelectItemStyle style;
+class FSelectSectionData<T> extends InheritedWidget {
+  final FSelectSectionStyle style;
   final bool enabled;
   final bool first;
 
-  const FSelectItemData({
+  const FSelectSectionData({
     required this.style,
     required this.enabled,
     required this.first,
@@ -24,14 +24,15 @@ class FSelectItemData<T> extends InheritedWidget {
     super.key,
   });
 
-  static FSelectItemData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FSelectItemData<T>>();
+  static FSelectSectionData<T> of<T>(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<FSelectSectionData<T>>();
     assert(result != null, 'No FSelectContentData found in context');
     return result!;
   }
 
   @override
-  bool updateShouldNotify(FSelectItemData<T> old) => first != old.first;
+  bool updateShouldNotify(FSelectSectionData<T> old) =>
+      style != old.style || first != old.first || enabled != old.enabled;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -43,10 +44,92 @@ class FSelectItemData<T> extends InheritedWidget {
   }
 }
 
+/// A section in a [FSelect] that can contain multiple [FSelectItem]s.
+class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
+  /// The style. Defaults to the [FSelectSectionStyle] inherited from the parent [FSelect].
+  final FSelectSectionStyle? style;
+
+  /// True if the section is enabled. Disabled sections cannot be selected, and is skipped during traversal.
+  ///
+  /// Defaults to inheriting from the [FSelect].
+  final bool? enabled;
+
+  /// The title.
+  final Widget title;
+
+  /// The nested [FSelectItem]s.
+  final List<FSelectItem<T>> children;
+
+  /// Creates a [FSelectSection].
+  const FSelectSection({required this.title, required this.children, this.style, this.enabled, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final section = FSelectSectionData.of<T>(context);
+    final enabled = this.enabled ?? section.enabled;
+    final style = this.style ?? section.style;
+
+    return FSelectSectionData(
+      style: style,
+      enabled: enabled,
+      first: false,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DefaultTextStyle(style: style.titleTextStyle, child: Padding(padding: style.titlePadding, child: title)),
+          if (children.isNotEmpty)
+            FSelectSectionData<T>(style: style, first: section.first, enabled: enabled, child: children.first),
+          ...children.skip(1),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+  }
+}
+
+/// A [FSelectSection]'s style.
+class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
+  /// The title's text style.
+  @override
+  final TextStyle titleTextStyle;
+
+  /// The padding around the title. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
+  @override
+  final EdgeInsetsGeometry titlePadding;
+
+  /// The section's items' style.
+  @override
+  final FSelectItemStyle itemStyle;
+
+  /// Creates a [FSelectSectionStyle].
+  FSelectSectionStyle({
+    required this.titleTextStyle,
+    required this.itemStyle,
+    this.titlePadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+  });
+
+  /// Creates a [FSelectSectionStyle] that inherits from the given [FColorScheme], [FStyle], and [FTypography].
+  FSelectSectionStyle.inherit({
+    required FColorScheme colorScheme,
+    required FStyle style,
+    required FTypography typography,
+  }) : this(
+         titleTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+         itemStyle: FSelectItemStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+       );
+}
+
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
 class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
-  /// The style. Defaults to the [FSelectItemStyle] inherited from the parent [FSelectSection] if present, and the
-  /// default style otherwise.
+  /// The style. Defaults to the [FSelectItemStyle] inherited from the parent [FSelectSection] or [FSelect].
   final FSelectItemStyle? style;
 
   /// The value.
@@ -54,22 +137,22 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
 
   /// True if the item is enabled. Disabled items cannot be selected, and is skipped during traversal.
   ///
-  /// Defaults to inheriting from the parent [FSelectSection] if present, and true otherwise.
+  /// Defaults to the value inherited from the parent [FSelectSection] or [FSelect].
   final bool? enabled;
 
-  /// THe icon to display when the item is selected. Defaults to a check icon.
+  /// The title.
+  final Widget title;
+
+  /// The icon displayed when the item is selected. Defaults to a check icon.
   final Widget selectedIcon;
 
-  /// The child.
-  final Widget child;
-
   /// Creates a [FSelectItem].
-  FSelectItem({required this.value, required this.child, this.style, this.enabled, Widget? icon, super.key})
+  FSelectItem({required this.value, required this.title, this.style, this.enabled, Widget? icon, super.key})
     : selectedIcon = icon ?? FIcon(FAssets.icons.check);
 
   /// Creates a [FSelectItem] that displays the [value] as its title.
   static FSelectItem<String> text(String value, {bool? enabled}) =>
-      FSelectItem(value: value, enabled: enabled, child: Text(value));
+      FSelectItem(value: value, enabled: enabled, title: Text(value));
 
   @override
   State<FSelectItem<T>> createState() => _FSelectItemState<T>();
@@ -78,6 +161,7 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('value', value))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
   }
@@ -89,11 +173,11 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
   @override
   Widget build(BuildContext context) {
     final FSelectControllerData(:contains, :onPress) = FSelectControllerData.of<T>(context);
-    final section = FSelectItemData.of<T>(context);
+    final section = FSelectSectionData.of<T>(context);
 
     final selected = contains(widget.value);
     final enabled = widget.enabled ?? section.enabled;
-    final style = widget.style ?? section.style;
+    final style = widget.style ?? section.style.itemStyle;
     final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
 
     Widget item = Semantics(
@@ -101,12 +185,14 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
       child: Padding(
         padding: padding.copyWith(left: padding.left - 4, right: padding.right - 4),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            DefaultTextStyle(style: enabled ? style.enabledTextStyle : style.disabledTextStyle, child: widget.child),
+            DefaultTextStyle(style: enabled ? style.enabledTextStyle : style.disabledTextStyle, child: widget.title),
             if (selected)
-              FIconStyleData(style: enabled ? style.enabledIconStyle : style.disabledIconStyle, child: widget.selectedIcon),
+              FIconStyleData(
+                style: enabled ? style.enabledIconStyle : style.disabledIconStyle,
+                child: widget.selectedIcon,
+              ),
           ],
         ),
       ),

@@ -6,5 +6,5 @@
 library forui.widgets.select;
 
 export '../src/widgets/select/select_controller.dart' hide FSelectControllerData;
-export '../src/widgets/select/select_item.dart' hide FSelectItemData;
+export '../src/widgets/select/select_item.dart' hide FSelectSectionData;
 export '../src/widgets/select/single/select.dart';

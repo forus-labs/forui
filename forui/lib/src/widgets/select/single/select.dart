@@ -337,8 +337,8 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
                       _controller.value = value;
                     },
                     // TODO: Extract out content logic
-                    child: FSelectItemData<T>(
-                      style: FSelectItemStyle.inherit(
+                    child: FSelectSectionData<T>(
+                      style: FSelectSectionStyle.inherit(
                         colorScheme: context.theme.colorScheme,
                         style: context.theme.style,
                         typography: context.theme.typography,
