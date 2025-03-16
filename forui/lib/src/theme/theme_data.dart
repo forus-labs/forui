@@ -200,7 +200,8 @@ final class FThemeData with Diagnosticable, FTransformable {
       bottomNavigationBarStyle:
           bottomNavigationBarStyle ??
           FBottomNavigationBarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      breadcrumbStyle: breadcrumbStyle ?? FBreadcrumbStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+      breadcrumbStyle:
+          breadcrumbStyle ?? FBreadcrumbStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       buttonStyles:
           buttonStyles ?? FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style),
       calendarStyle:

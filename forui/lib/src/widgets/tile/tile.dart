@@ -305,7 +305,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   /// The focused divider's style.
   @override
   final FDividerStyle focusedDividerStyle;
-  
+
   /// The tappable's style.
   @override
   final FTappableStyle tappable;
@@ -329,27 +329,24 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   });
 
   /// Creates a [FTileStyle] that inherits from the given [colorScheme] and [typography].
-  FTileStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style
-  }) : this(
-         border: Border.all(width: style.borderWidth, color: colorScheme.border),
-         focusedBorder: Border.all(width: style.borderWidth, color: colorScheme.primary),
-         borderRadius: style.borderRadius,
-         enabledBackgroundColor: colorScheme.background,
-         enabledHoveredBackgroundColor: colorScheme.secondary,
-         disabledBackgroundColor: colorScheme.disable(colorScheme.secondary),
-         dividerStyle: FDividerStyle(color: colorScheme.border, width: style.borderWidth, padding: EdgeInsets.zero),
-         focusedDividerStyle: FDividerStyle(
-           color: colorScheme.primary,
-           width: style.borderWidth,
-           padding: EdgeInsets.zero,
-         ),
-         tappable: style.tappable.copyWith(
-           touchHoverEnterDuration: Duration.zero,
-           touchHoverExitDuration: const Duration(milliseconds: 25),
-         ),
-         contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
-       );
+  FTileStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+    : this(
+        border: Border.all(width: style.borderWidth, color: colorScheme.border),
+        focusedBorder: Border.all(width: style.borderWidth, color: colorScheme.primary),
+        borderRadius: style.borderRadius,
+        enabledBackgroundColor: colorScheme.background,
+        enabledHoveredBackgroundColor: colorScheme.secondary,
+        disabledBackgroundColor: colorScheme.disable(colorScheme.secondary),
+        dividerStyle: FDividerStyle(color: colorScheme.border, width: style.borderWidth, padding: EdgeInsets.zero),
+        focusedDividerStyle: FDividerStyle(
+          color: colorScheme.primary,
+          width: style.borderWidth,
+          padding: EdgeInsets.zero,
+        ),
+        tappable: style.tappable.copyWith(
+          touchHoverEnterDuration: Duration.zero,
+          touchHoverExitDuration: const Duration(milliseconds: 25),
+        ),
+        contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+      );
 }

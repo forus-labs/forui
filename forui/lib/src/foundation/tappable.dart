@@ -345,10 +345,10 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 abstract final class FTappableAnimation {
   // Private constructor to prevent instantiation
   const FTappableAnimation._();
-  
+
   /// No animation will be applied.
   static Tween<double> none = Tween(begin: 1.0, end: 1.0);
-  
+
   /// A bounce animation that scales the widget down and back up.
   static Tween<double> bounce = Tween(begin: 1.0, end: 0.97);
 }
