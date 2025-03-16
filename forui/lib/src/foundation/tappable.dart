@@ -89,11 +89,11 @@ class FTappable extends StatefulWidget {
   /// hover changes.
   final Widget? child;
 
-  /// Creates an animated [FTappable].
+  /// Creates an [FTappable].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const factory FTappable.animated({
+  const factory FTappable({
     FTappableStyle? style,
     FFocusedOutlineStyle? focusedOutlineStyle,
     String? semanticLabel,
@@ -110,11 +110,11 @@ class FTappable extends StatefulWidget {
     Key? key,
   }) = AnimatedTappable;
 
-  /// Creates a [FTappable].
+  /// Creates a [FTappable] without animation.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FTappable({
+  const FTappable.static({
     this.style,
     this.focusedOutlineStyle,
     this.semanticLabel,
@@ -274,13 +274,13 @@ class AnimatedTappable extends FTappable {
     super.autofocus = false,
     super.focusNode,
     super.onFocusChange,
-    super.behavior,
+    super.behavior = HitTestBehavior.translucent,
     super.onPress,
     super.onLongPress,
     super.builder,
     super.child,
     super.key,
-  });
+  }) : super.static();
 
   @override
   State<FTappable> createState() => AnimatedTappableState();
