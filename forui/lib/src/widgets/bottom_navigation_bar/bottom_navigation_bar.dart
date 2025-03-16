@@ -129,6 +129,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   final FBottomNavigationBarItemStyle itemStyle;
 
   /// The tappable's style.
+  @override
   final FTappableStyle tappableStyle;
 
   /// Creates a [FBottomNavigationBarStyle].
