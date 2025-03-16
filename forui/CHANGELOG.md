@@ -14,6 +14,19 @@
 * Add `FSelectMenuTile.onChange`.
 * Add `FSelectMenuTile.onSelect`.
 
+* Add `FTappableStyle`.
+* Add `FAccordionStyle.tappableStyle`.
+* Add `FBottomNavigationBarStyle.tappableStyle`.
+* Add `FBreadcrumbStyle.tappableStyle`.
+* Add `FButtonStyle.tappableStyle`.
+* Add `FCalendarDayPickerStyle.tappableStyle`.
+* Add `FCalendarEntryStyle.tappableStyle`.
+* Add `FCalendarHeaderStyle.tappableStyle`.
+* Add `FHeaderActionStyle.tappableStyle`.
+* Add `FLineCalendarStyle.tappableStyle`.
+* Add `FPaginationStyle.tappableStyle`.
+* Add `FTileStyle.tappableStyle`.
+
 ### Changes
 
 * **Breaking** Replace `FSelectGroupController` with a typedef of `FMultiValueNotifier`.
@@ -25,9 +38,14 @@
 * **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
 * **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
 
+* **Breaking** Rename `FTappable` to `FTappable.static`.
+* **Breaking** Rename `FTappable.animated` to `FTappable`.
+
+
 ## 0.10.0+1
 
 Fix bad build caused by generated files not being published.
+
 
 ## 0.10.0
 
@@ -88,8 +106,10 @@ Fix bad build caused by generated files not being published.
 * Fix `FDateField` not updating when locale changes.
 * Fix `FHeader` not respecting `FHeaderStyle.actionSpacing`.
 
+
 ## 0.9.1+1
 Fix documentation not publishing.
+
 
 ## 0.9.1
 

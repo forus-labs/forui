@@ -8,7 +8,7 @@ import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  group('Tappable', () {
+  group('FTappable', () {
     for (final enabled in [true, false]) {
       testWidgets('focused - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         final focusNode = FocusNode();
