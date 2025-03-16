@@ -21,7 +21,7 @@ An area that responds to touch.
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    FTappable.animated(
+    FTappable(
       builder: (context, data, child) => Container(
         decoration: BoxDecoration(
           color: data.hovered ? context.theme.colorScheme.secondary : context.theme.colorScheme.background,
@@ -46,6 +46,7 @@ An area that responds to touch.
 
 ```dart copy
 const FTappable(
+  style: FTappableStyle(),
   semanticLabel: 'Label',
   semanticSelected: false,
   excludeSemantics: false,
@@ -62,10 +63,13 @@ const FTappable(
 );
 ```
 
-### `FTappable.animated(...)`
+### `FTappable.static(...)`
+
+A varient of `FTappable` without any animation. This is similar to using `FTappableAnimations.none`.
 
 ```dart copy
-const FTappable.animated(
+const FTappable.static(
+  style: FTappableStyle(),
   semanticLabel: 'Label',
   semanticSelected: false,
   excludeSemantics: false,
@@ -80,4 +84,17 @@ const FTappable.animated(
   builder: (context, state, child) => child!,
   child: const Text('Tappable'),
 );
+```
+
+## Custom scale animation
+
+```dart copy
+// Default animation.
+FTappableStyle(animationTween: FTappableAnimations.bounce);
+
+// No animation.
+FTappableStyle(animationTween: FTappableAnimations.none);
+
+// Custom tween.
+FTappableStyle(animationTween: Tween(begin: 1.0, end: 0.97));
 ```

@@ -137,6 +137,7 @@ class _SelectableEntry extends Entry {
 
   @override
   Widget build(BuildContext _) => FTappable(
+    style: style.tappableStyle,
     semanticLabel: semanticLabel,
     semanticSelected: selected,
     focusNode: focusNode,
@@ -237,12 +238,17 @@ final class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFuncti
   @override
   final Radius radius;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FCalendarEntryStyle].
   FCalendarEntryStyle({
     required this.backgroundColor,
     required this.textStyle,
     required this.focusedBorderColor,
     required this.radius,
+    required this.tappableStyle,
     Color? hoveredBackgroundColor,
     TextStyle? hoveredTextStyle,
   }) : hoveredBackgroundColor = hoveredBackgroundColor ?? backgroundColor,

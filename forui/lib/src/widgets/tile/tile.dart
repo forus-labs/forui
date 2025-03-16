@@ -171,9 +171,8 @@ class FTile extends StatelessWidget with FTileMixin {
     );
 
     return FTappable(
+      style: style.tappableStyle,
       semanticLabel: semanticLabel,
-      touchHoverEnterDuration: style.touchHoverEnterDuration,
-      touchHoverExitDuration: style.touchHoverExitDuration,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -299,14 +298,6 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   @override
   final Color disabledBackgroundColor;
 
-  /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 0 seconds.
-  @override
-  final Duration touchHoverEnterDuration;
-
-  /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 25ms.
-  @override
-  final Duration touchHoverExitDuration;
-
   /// The divider's style.
   @override
   final FDividerStyle dividerStyle;
@@ -314,6 +305,10 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   /// The focused divider's style.
   @override
   final FDividerStyle focusedDividerStyle;
+
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
 
   /// The default tile content's style.
   @override
@@ -329,9 +324,8 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
     required this.disabledBackgroundColor,
     required this.dividerStyle,
     required this.focusedDividerStyle,
+    required this.tappableStyle,
     required this.contentStyle,
-    this.touchHoverEnterDuration = Duration.zero,
-    this.touchHoverExitDuration = const Duration(milliseconds: 25),
   });
 
   /// Creates a [FTileStyle] that inherits from the given [colorScheme] and [typography].
@@ -348,6 +342,10 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
           color: colorScheme.primary,
           width: style.borderWidth,
           padding: EdgeInsets.zero,
+        ),
+        tappableStyle: style.tappableStyle.copyWith(
+          touchHoverEnterDuration: Duration.zero,
+          touchHoverExitDuration: const Duration(milliseconds: 25),
         ),
         contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
       );

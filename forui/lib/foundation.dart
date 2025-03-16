@@ -6,7 +6,7 @@ export 'src/foundation/focused_outline.dart';
 export 'src/foundation/form_field_properties.dart';
 export 'src/foundation/notifiers.dart';
 export 'src/foundation/rendering.dart' hide Alignments, RenderBoxes;
-export 'src/foundation/tappable.dart' show FTappable, FTappableData;
+export 'src/foundation/tappable.dart' show FTappable, FTappableAnimations, FTappableData, FTappableStyle;
 export 'src/foundation/time.dart';
 export 'src/foundation/transform.dart';
 export 'src/foundation/portal/portal.dart';

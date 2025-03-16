@@ -183,6 +183,7 @@ class Action extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
     child: FTappable(
+      style: style.actionTappableStyle,
       //TODO: Add localization support for semantic labels.
       semanticLabel: semanticLabel,
       focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
@@ -227,6 +228,7 @@ class _Page extends StatelessWidget {
           final selected = controller.page == page;
 
           return FTappable(
+            style: style.pageTappableStyle,
             focusedOutlineStyle: focusedOutlineStyle,
             onPress: () {
               controller.page = page;

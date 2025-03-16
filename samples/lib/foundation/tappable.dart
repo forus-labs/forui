@@ -10,7 +10,7 @@ class TappablePage extends Sample {
   TappablePage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FTappable.animated(
+  Widget sample(BuildContext context) => FTappable(
     builder:
         (context, data, child) => Container(
           decoration: BoxDecoration(

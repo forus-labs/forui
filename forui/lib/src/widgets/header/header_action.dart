@@ -86,7 +86,8 @@ class FHeaderAction extends StatelessWidget {
     final style = this.style ?? FHeaderData.of(context).actionStyle;
     final enabled = onPress != null || onLongPress != null;
 
-    return FTappable.animated(
+    return FTappable(
+      style: style.tappableStyle,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -138,17 +139,23 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FHeaderActionStyle].
   FHeaderActionStyle({
     required this.enabledColor,
     required this.disabledColor,
     required this.size,
     required this.focusedOutlineStyle,
+    required this.tappableStyle,
   });
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
   FHeaderActionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required this.size})
     : enabledColor = colorScheme.foreground,
       disabledColor = colorScheme.disable(colorScheme.foreground),
-      focusedOutlineStyle = style.focusedOutlineStyle;
+      focusedOutlineStyle = style.focusedOutlineStyle,
+      tappableStyle = style.tappableStyle;
 }

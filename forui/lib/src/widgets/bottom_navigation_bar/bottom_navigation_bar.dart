@@ -51,7 +51,8 @@ class FBottomNavigationBar extends StatelessWidget {
             children: [
               for (final (i, child) in children.indexed)
                 Expanded(
-                  child: FTappable.animated(
+                  child: FTappable(
+                    style: style.tappableStyle,
                     focusedOutlineStyle: style.focusedOutlineStyle,
                     onPress: () => onChange?.call(i),
                     child: FBottomNavigationBarData(itemStyle: style.itemStyle, selected: index == i, child: child),
@@ -127,11 +128,16 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   @override
   final FBottomNavigationBarItemStyle itemStyle;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FBottomNavigationBarStyle].
   FBottomNavigationBarStyle({
     required this.decoration,
     required this.focusedOutlineStyle,
     required this.itemStyle,
+    required this.tappableStyle,
     this.padding = const EdgeInsets.all(5),
   });
 
@@ -147,5 +153,6 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
          ),
          focusedOutlineStyle: style.focusedOutlineStyle,
          itemStyle: FBottomNavigationBarItemStyle.inherit(colorScheme: colorScheme, typography: typography),
+         tappableStyle: style.tappableStyle,
        );
 }
