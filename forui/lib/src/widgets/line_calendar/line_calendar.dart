@@ -158,12 +158,17 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
   @override
   final FLineCalendarItemStyle unselectedHoveredItemStyle;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FLineCalendarStyle].
   FLineCalendarStyle({
     required this.selectedItemStyle,
     required this.selectedHoveredItemStyle,
     required this.unselectedItemStyle,
     required this.unselectedHoveredItemStyle,
+    required this.tappableStyle,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 6.5),
     this.itemContentEdgeSpacing = 15.5,
     this.itemContentSpacing = 2,
@@ -253,6 +258,7 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
         dateTextStyle: unselectedDateTextStyle,
         weekdayTextStyle: unselectedWeekdayTextStyle,
       ),
+      tappableStyle: style.tappable,
     );
   }
 }

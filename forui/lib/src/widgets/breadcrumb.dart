@@ -137,6 +137,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
     return FTappable(
+      style: style.tappableStyle,
       focusedOutlineStyle: focusedOutlineStyle,
       onPress: onPress,
       builder:
@@ -323,17 +324,22 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FBreadcrumbStyle].
   FBreadcrumbStyle({
     required this.selectedTextStyle,
     required this.unselectedTextStyle,
     required this.hoveredTextStyle,
     required this.iconStyle,
+    required this.tappableStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
-  FBreadcrumbStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FBreadcrumbStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
     : this(
         selectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colorScheme.foreground),
         unselectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colorScheme.mutedForeground),
@@ -343,5 +349,6 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
           decoration: TextDecoration.underline,
         ),
         iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
+        tappableStyle: style.tappable,
       );
 }

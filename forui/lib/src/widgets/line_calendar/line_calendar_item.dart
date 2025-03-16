@@ -41,7 +41,8 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: controller,
     builder:
-        (context, selected, _) => FTappable.animated(
+        (context, selected, _) => FTappable(
+          style: style.tappableStyle,
           focusNode: FocusNode(debugLabel: 'Date: $date'),
           semanticLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
           onPress: () => controller.select(date),

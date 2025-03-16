@@ -102,6 +102,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               FTappable(
+                style: style.tappableStyle,
                 autofocus: widget.autofocus,
                 focusNode: widget.focusNode,
                 onFocusChange: widget.onFocusChange,

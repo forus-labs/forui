@@ -53,6 +53,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => FTappable(
+    style: widget.style.tappableStyle,
     focusedOutlineStyle: widget.style.focusedOutlineStyle,
     onPress:
         () =>
@@ -211,6 +212,10 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
   @override
   final Duration animationDuration;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FCalendarHeaderStyle].
   FCalendarHeaderStyle({
     required this.focusedOutlineStyle,
@@ -218,6 +223,7 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     required this.headerTextStyle,
     required this.enabledIconColor,
     required this.disabledIconColor,
+    required this.tappableStyle,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
@@ -238,6 +244,7 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
       headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
       enabledIconColor: colorScheme.mutedForeground,
       disabledIconColor: colorScheme.disable(colorScheme.mutedForeground),
+      tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
     );
   }
 }

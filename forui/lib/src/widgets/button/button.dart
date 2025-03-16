@@ -106,7 +106,8 @@ class FButton extends StatelessWidget {
 
     final enabled = onPress != null || onLongPress != null;
 
-    return FTappable.animated(
+    return FTappable(
+      style: style.tappableStyle,
       focusedOutlineStyle: style.focusedOutlineStyle,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -205,6 +206,10 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   @override
   final FButtonSpinnerStyle spinnerStyle;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FButtonStyle].
   FButtonStyle({
     required this.enabledBoxDecoration,
@@ -214,6 +219,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
     required this.contentStyle,
     required this.iconContentStyle,
     required this.spinnerStyle,
+    required this.tappableStyle,
   });
 
   /// Creates a [FButtonStyle] that inherits its properties from the given arguments.
@@ -240,6 +246,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            disabledColor: disabledContentColor,
          ),
          spinnerStyle: FButtonSpinnerStyle.inherit(enabled: enabledContentColor, disabled: disabledContentColor),
+         tappableStyle: style.tappable,
        );
 }
 

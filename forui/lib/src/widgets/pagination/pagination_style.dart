@@ -29,12 +29,21 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   @override
   final BoxConstraints contentConstraints;
 
+  /// The tappable's action style.
+  @override
+  final FTappableStyle actionTappableStyle;
+
+  /// The tappable's page style.
+  @override
+  final FTappableStyle pageTappableStyle;
+
   /// Creates a [FPaginationStyle].
   FPaginationStyle({
     required this.selected,
     required this.unselected,
     required this.iconStyle,
-
+    required this.actionTappableStyle,
+    required this.pageTappableStyle,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
     this.contentConstraints = const BoxConstraints.tightFor(width: 40.0, height: 40.0),
   });
@@ -58,6 +67,8 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
         ),
 
         iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
+        actionTappableStyle: style.tappable,
+        pageTappableStyle: style.tappable,
       );
 }
 

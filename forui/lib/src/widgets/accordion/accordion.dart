@@ -127,6 +127,10 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   @override
   final Duration animationDuration;
 
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FAccordionStyle].
   FAccordionStyle({
     required this.titleTextStyle,
@@ -134,6 +138,7 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     required this.iconColor,
     required this.focusedOutlineStyle,
     required this.dividerStyle,
+    required this.tappableStyle,
     this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
     this.childPadding = const EdgeInsets.only(bottom: 15),
     this.iconSize = 20,
@@ -149,6 +154,7 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         iconSize: 20,
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
+        tappableStyle: style.tappable.copyWith(animationTween: FTappableAnimation.none),
       );
 }
 
