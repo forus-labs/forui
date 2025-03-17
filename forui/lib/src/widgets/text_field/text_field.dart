@@ -123,7 +123,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// See [TextField.statesController] for more information.
   final WidgetStatesController? statesController;
 
-  /// {@macro flutter.widgets.editableText.obscuringCharacter}
+  /// Character used for obscuring text if [obscureText] is true.
+  ///
+  /// Must be only a single character.
+  ///
+  /// Defaults to the character U+2022 BULLET (•).
   final String obscuringCharacter;
 
   /// Whether to hide the text being edited (e.g., for passwords). Defaults to false.

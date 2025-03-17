@@ -1,3 +1,9 @@
+## 0.12.0
+
+### Additions
+
+* Add `obscuringCharacter` for `FTextField`.
+
 ## 0.11.0
 
 ### Additions
