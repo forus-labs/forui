@@ -1,12 +1,8 @@
-## 0.12.0
+## 0.11.0 (Next)
 
 ### Additions
-
 * Add `obscuringCharacter` for `FTextField`.
 
-## 0.11.0
-
-### Additions
 * Add `FMultiValueNotifier`.
 * Add `FSelectTileGroupController` typedef.
 * Add `FSelectMenuTileController` typedef.
