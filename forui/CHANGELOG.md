@@ -1,7 +1,9 @@
 ## 0.11.0 (Next)
 
 ### Additions
-* Add `obscuringCharacter` for `FTextField`.
+* Add `FProgress.circular`.
+
+* Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
 
 * Add `FMultiValueNotifier`.
 * Add `FSelectTileGroupController` typedef.
@@ -30,6 +32,9 @@
 * Add `FTileStyle.tappableStyle`.
 
 ### Changes
+* Change `FProgress` to support indeterminate progress.
+* **Breaking** Change `FProgressStyle` to `FLinearProgressStyle`.
+* **Breaking** Remove `FButtonSpinner` - use `FProgress.circular(...)` instead.
 
 * **Breaking** Replace `FSelectGroupController` with a typedef of `FMultiValueNotifier`.
 * **Breaking** Remove `FMultiSelectGroupController` - use `FSelectGroupController(...)` instead.

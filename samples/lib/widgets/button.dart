@@ -51,10 +51,10 @@ class ButtonOnlyIconPage extends Sample {
 }
 
 @RoutePage()
-class ButtonSpinnerPage extends Sample {
-  ButtonSpinnerPage({@queryParam super.theme});
+class ButtonCircularProgressPage extends Sample {
+  ButtonCircularProgressPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) =>
-      IntrinsicWidth(child: FButton(prefix: const FButtonSpinner(), onPress: null, label: const Text('Please wait')));
+      IntrinsicWidth(child: FButton(prefix: const FProgress.circular(), onPress: null, label: const Text('Please wait')));
 }

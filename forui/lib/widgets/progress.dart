@@ -1,8 +1,8 @@
 /// {@category Widgets}
 ///
-/// A progress bar.
+/// A progress indicator.
 ///
-/// See https://forui.dev/docs/navigation/progress for working examples.
+/// See https://forui.dev/docs/feedback/progress for working examples.
 library forui.widgets.progress;
 
-export '../src/widgets/progress.dart';
+export '../src/widgets/progress.dart' hide FCircularProgressData;

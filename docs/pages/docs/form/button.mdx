@@ -161,7 +161,7 @@ FButton.raw(
   </Tabs.Tab>
 </Tabs>
 
-#### With Button Spinner
+#### With Circular Progress
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='button' variant='spinner' query={{}}/>
@@ -169,7 +169,7 @@ FButton.raw(
   <Tabs.Tab>
     ```dart {2} copy
     FButton(
-      prefix: const FButtonSpinner(),
+      prefix: const FProgress.circular(),
       label: const Text('Please wait'),
       onPress: null,
     ),

@@ -52,4 +52,28 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/linear/update-value-numer.png'));
     });
   });
+
+  group('circular', () {
+    testWidgets('blue screen', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FProgress.circular(style: TestScaffold.blueScreen.progressStyles.circularProgressStyle),
+        ),
+      );
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    for (final theme in TestScaffold.themes) {
+      testWidgets('${theme.name} - indefinite', (tester) async {
+        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FProgress.circular()));
+        await tester.pump(const Duration(milliseconds: 500));
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('progress/circular/${theme.name}/indefinite.png'),
+        );
+      });
+    }
+  });
 }

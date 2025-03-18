@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -10,15 +12,19 @@ part 'progress.style.dart';
 /// A progress indicator that shows the completion progress of a task.
 ///
 /// See:
-/// * https://forui.dev/docs/navigation/progress for working examples.
+/// * https://forui.dev/docs/feedback/progress for working examples.
 /// * [FLinearProgressStyle] for customizing a linear progress indicator's appearance.
+/// * [FCircularProgressStyle] for customizing a circular progress indicator's appearance.
 abstract class FProgress extends StatefulWidget {
+  /// The semantic label.
+  final String? semanticsLabel;
+
   /// The progress's value. Defaults to null.
   ///
   /// A value of 0.0 means no progress and 1.0 means that progress is complete.
   /// The value will be clamped to be in the range, `[0.0, 1.0]`.
   ///
-  /// A null value indicates that the the progress should repeat indefinitely.
+  /// A null value indicates an indeterminate progress.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [value] is not null and is less than 0.0 or greater than 1.0.
@@ -26,26 +32,33 @@ abstract class FProgress extends StatefulWidget {
 
   /// Creates a linear [FProgress].
   ///
-  /// The [constraints] is the constraints for the progress bar. Defaults to a height of 15.0 and no horizontal
-  /// constraint.
-  ///
   /// The [duration] is the duration of the animation. Defaults to 3s if [value] is null and 0.5s otherwise.
   const factory FProgress({
     FLinearProgressStyle? style,
+    String? semanticsLabel,
     double? value,
-    BoxConstraints constraints,
     Duration duration,
     Key? key,
   }) = _Linear;
 
-  const FProgress._({this.value, super.key})
+  /// Creates a indeterminate circular [FProgress].
+  const factory FProgress.circular({
+    FCircularProgressStyle? style,
+    Duration duration,
+    String? semanticsLabel,
+    Key? key,
+  }) = _Circular;
+
+  const FProgress._({this.semanticsLabel, this.value, super.key})
     : assert(value == null || value >= 0.0, 'The value must be greater than or equal to 0.0'),
       assert(value == null || value <= 1.0, 'The value must be less than or equal to 1.0');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('value', value));
+    properties
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DoubleProperty('value', value));
   }
 }
 
@@ -55,16 +68,10 @@ class _Linear extends FProgress {
 
   final FLinearProgressStyle? style;
   final Duration duration;
-  final BoxConstraints constraints;
 
-  const _Linear({
-    this.style,
-    this.constraints = const BoxConstraints(minHeight: 10.0, maxHeight: 10.0),
-    Duration? duration,
-    super.value,
-    super.key,
-  }) : duration = duration ?? (value == null ? _infinite : _finite),
-       super._();
+  const _Linear({this.style, Duration? duration, super.semanticsLabel, super.value, super.key})
+    : duration = duration ?? (value == null ? _infinite : _finite),
+      super._();
 
   @override
   State<_Linear> createState() => _LinearState();
@@ -74,8 +81,7 @@ class _Linear extends FProgress {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('duration', duration))
-      ..add(DiagnosticsProperty('constraints', constraints));
+      ..add(DiagnosticsProperty('duration', duration));
   }
 }
 
@@ -136,17 +142,100 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.progressStyles.linearProgressStyle;
     return ConstrainedBox(
-      constraints: widget.constraints,
-      child: DecoratedBox(
-        decoration: style.backgroundDecoration,
-        child: Align(
-          alignment: AlignmentDirectional.centerStart,
-          child: AnimatedBuilder(
-            animation: _animation,
-            builder: (_, child) => FractionallySizedBox(widthFactor: _animation.value, child: child!),
-            child: Container(decoration: style.progressDecoration),
+      constraints: style.constraints,
+      child: Semantics(
+        label: widget.semanticsLabel,
+        child: DecoratedBox(
+          decoration: style.backgroundDecoration,
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: AnimatedBuilder(
+              animation: _animation,
+              builder: (_, child) => FractionallySizedBox(widthFactor: _animation.value, child: child!),
+              child: Container(decoration: style.progressDecoration),
+            ),
           ),
         ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+@internal
+class FCircularProgressData extends InheritedWidget {
+  static FCircularProgressData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FCircularProgressData>();
+
+  final FCircularProgressStyle style;
+
+  const FCircularProgressData({required this.style, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(FCircularProgressData old) => style != old.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
+  }
+}
+
+class _Circular extends FProgress {
+  final FCircularProgressStyle? style;
+  final Duration duration;
+
+  const _Circular({this.style, this.duration = const Duration(seconds: 1), super.semanticsLabel, super.key})
+    : super._();
+
+  @override
+  State<_Circular> createState() => _CircularState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('duration', duration));
+  }
+}
+
+class _CircularState extends State<_Circular> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: widget.duration)..repeat();
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
+  }
+
+  @override
+  void didUpdateWidget(covariant _Circular old) {
+    super.didUpdateWidget(old);
+    if (widget.duration != old.duration) {
+      _controller.duration = widget.duration;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final data = FCircularProgressData.maybeOf(context);
+    final style = widget.style ?? data?.style ?? context.theme.progressStyles.circularProgressStyle;
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
+      child: FIcon(
+        FAssets.icons.loaderCircle,
+        color: style.color,
+        size: style.size,
+        semanticLabel: widget.semanticsLabel,
       ),
     );
   }
@@ -164,16 +253,25 @@ class FProgressStyles with Diagnosticable, _$FProgressStylesFunctions {
   @override
   final FLinearProgressStyle linearProgressStyle;
 
+  /// The circular progress's style.
+  @override
+  final FCircularProgressStyle circularProgressStyle;
+
   /// Creates a [FProgressStyles].
-  const FProgressStyles({required this.linearProgressStyle});
+  const FProgressStyles({required this.linearProgressStyle, required this.circularProgressStyle});
 
   /// Creates a [FProgressStyles] that inherits its properties from [colorScheme] and [style].
   FProgressStyles.inherit({required FColorScheme colorScheme, required FStyle style})
-    : linearProgressStyle = FLinearProgressStyle.inherit(colorScheme: colorScheme, style: style);
+    : linearProgressStyle = FLinearProgressStyle.inherit(colorScheme: colorScheme, style: style),
+      circularProgressStyle = FCircularProgressStyle.inherit(colorScheme: colorScheme);
 }
 
-/// [FProgress]'s style.
+/// A linear [FProgress]'s style.
 class FLinearProgressStyle with Diagnosticable, _$FLinearProgressStyleFunctions {
+  /// The linear progress's constraints. Defaults to a height of 10.0 and no horizontal constraint.
+  @override
+  final BoxConstraints constraints;
+
   /// The progress's background's decoration.
   @override
   final BoxDecoration backgroundDecoration;
@@ -190,6 +288,7 @@ class FLinearProgressStyle with Diagnosticable, _$FLinearProgressStyleFunctions 
   const FLinearProgressStyle({
     required this.backgroundDecoration,
     required this.progressDecoration,
+    this.constraints = const BoxConstraints.tightFor(height: 10.0),
     this.curve = Curves.ease,
   });
 
@@ -199,4 +298,22 @@ class FLinearProgressStyle with Diagnosticable, _$FLinearProgressStyleFunctions 
         backgroundDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.secondary),
         progressDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
       );
+}
+
+/// A circular [FProgress]'s style.
+class FCircularProgressStyle with Diagnosticable, _$FCircularProgressStyleFunctions {
+  /// The circular indicator's color.
+  @override
+  final Color color;
+
+  /// The circular indicator's size. Defaults to 20.
+  @override
+  final double size;
+
+  /// Creates a [FCircularProgressStyle].
+  FCircularProgressStyle({required this.color, this.size = 20});
+
+  /// Creates a [FCircularProgressStyle] that inherits its properties from [colorScheme].
+  FCircularProgressStyle.inherit({required FColorScheme colorScheme})
+    : this(color: colorScheme.mutedForeground, size: 20);
 }

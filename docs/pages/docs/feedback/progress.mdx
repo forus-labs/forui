@@ -16,26 +16,7 @@ Displays an indicator showing the completion progress of a task, typically displ
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class Progress extends StatefulWidget {
-      @override
-      State<Progress> createState() => ProgressState();
-    }
-
-    class ProgressState extends State<Progress> {
-      double value = 0.2;
-
-      @override
-      void initState() {
-        Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
-        super.initState();
-      }
-
-      @override
-      Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [FProgress(value: value)],
-      );
-    }
+    const FProgress();
     ```
   </Tabs.Tab>
 </Tabs>
@@ -45,5 +26,80 @@ Displays an indicator showing the completion progress of a task, typically displ
 ### `FProgress(...)`
 
 ```dart copy
-FProgress(value: 0.6);
+FProgress(
+  style: FLinearProgressStyle(...),
+  semanticsLabel: 'Label',
+  value: 0.6,
+  duration: const Duration(milliseconds: 500),
+);
 ```
+
+### `FProgress.circular(...)`
+
+```dart copy
+FProgress.circular(
+  style: FCircularProgressStyle(...),
+  semanticsLabel: 'Label',
+  duration: const Duration(milliseconds: 500),
+);
+```
+
+## Examples
+
+### Determinate Linear Progress
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='progress' variant='linear'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class LinearProgress extends StatefulWidget {
+      @override
+      State<LinearProgress> createState() => _State();
+    }
+
+    class _State extends State<LinearProgress> {
+      late Timer timer;
+      double value = 0.2;
+
+      @override
+      void initState() {
+        super.initState();
+        timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+      }
+
+      @override
+      Widget build(BuildContext context) => Column(
+       children: [
+         FProgress(value: value),
+         FButton(label: const Text('Reset'), onPress: () => setState(() {
+           value = 0.2;
+           timer.cancel();
+           timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+         })),
+       ],
+     );
+
+      @override
+      void dispose() {
+        timer.cancel();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Circular Progress
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='progress' variant='circular'/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    const FProgress.circular();
+    ```
+  </Tabs.Tab>
+</Tabs>
