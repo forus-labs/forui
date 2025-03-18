@@ -14,7 +14,7 @@ part 'progress.style.dart';
 /// See:
 /// * https://forui.dev/docs/feedback/progress for working examples.
 /// * [FLinearProgressStyle] for customizing a linear progress indicator's appearance.
-/// * [FCircularProgressStyle] for customizing a circular progress indicator's appearance.
+/// * [FCircularIconProgressStyle] for customizing a circular progress indicator's appearance.
 abstract class FProgress extends StatefulWidget {
   /// The semantic label.
   final String? semanticsLabel;
@@ -43,7 +43,7 @@ abstract class FProgress extends StatefulWidget {
 
   /// Creates a indeterminate circular [FProgress].
   const factory FProgress.circularIcon({
-    FCircularProgressStyle? style,
+    FCircularIconProgressStyle? style,
     Duration duration,
     String? semanticsLabel,
     Key? key,
@@ -172,7 +172,7 @@ class FCircularProgressData extends InheritedWidget {
   static FCircularProgressData? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<FCircularProgressData>();
 
-  final FCircularProgressStyle style;
+  final FCircularIconProgressStyle style;
 
   const FCircularProgressData({required this.style, required super.child, super.key});
 
@@ -187,7 +187,7 @@ class FCircularProgressData extends InheritedWidget {
 }
 
 class _Circular extends FProgress {
-  final FCircularProgressStyle? style;
+  final FCircularIconProgressStyle? style;
   final Duration duration;
 
   const _Circular({this.style, this.duration = const Duration(seconds: 1), super.semanticsLabel, super.key})
@@ -227,7 +227,7 @@ class _CircularState extends State<_Circular> with SingleTickerProviderStateMixi
   @override
   Widget build(BuildContext context) {
     final data = FCircularProgressData.maybeOf(context);
-    final style = widget.style ?? data?.style ?? context.theme.progressStyles.circularProgressStyle;
+    final style = widget.style ?? data?.style ?? context.theme.progressStyles.circularIconProgressStyle;
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
@@ -255,15 +255,15 @@ class FProgressStyles with Diagnosticable, _$FProgressStylesFunctions {
 
   /// The circular progress's style.
   @override
-  final FCircularProgressStyle circularProgressStyle;
+  final FCircularIconProgressStyle circularIconProgressStyle;
 
   /// Creates a [FProgressStyles].
-  const FProgressStyles({required this.linearProgressStyle, required this.circularProgressStyle});
+  const FProgressStyles({required this.linearProgressStyle, required this.circularIconProgressStyle});
 
   /// Creates a [FProgressStyles] that inherits its properties from [colorScheme] and [style].
   FProgressStyles.inherit({required FColorScheme colorScheme, required FStyle style})
     : linearProgressStyle = FLinearProgressStyle.inherit(colorScheme: colorScheme, style: style),
-      circularProgressStyle = FCircularProgressStyle.inherit(colorScheme: colorScheme);
+      circularIconProgressStyle = FCircularIconProgressStyle.inherit(colorScheme: colorScheme);
 }
 
 /// A linear [FProgress]'s style.
@@ -301,7 +301,7 @@ class FLinearProgressStyle with Diagnosticable, _$FLinearProgressStyleFunctions 
 }
 
 /// A circular [FProgress]'s style.
-class FCircularProgressStyle with Diagnosticable, _$FCircularProgressStyleFunctions {
+class FCircularIconProgressStyle with Diagnosticable, _$FCircularIconProgressStyleFunctions {
   /// The circular indicator's color.
   @override
   final Color color;
@@ -310,10 +310,10 @@ class FCircularProgressStyle with Diagnosticable, _$FCircularProgressStyleFuncti
   @override
   final double size;
 
-  /// Creates a [FCircularProgressStyle].
-  FCircularProgressStyle({required this.color, this.size = 20});
+  /// Creates a [FCircularIconProgressStyle].
+  FCircularIconProgressStyle({required this.color, this.size = 20});
 
-  /// Creates a [FCircularProgressStyle] that inherits its properties from [colorScheme].
-  FCircularProgressStyle.inherit({required FColorScheme colorScheme})
+  /// Creates a [FCircularIconProgressStyle] that inherits its properties from [colorScheme].
+  FCircularIconProgressStyle.inherit({required FColorScheme colorScheme})
     : this(color: colorScheme.mutedForeground, size: 20);
 }

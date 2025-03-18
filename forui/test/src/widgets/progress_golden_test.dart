@@ -57,7 +57,7 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FProgress.circularIcon(style: TestScaffold.blueScreen.progressStyles.circularProgressStyle),
+          child: FProgress.circularIcon(style: TestScaffold.blueScreen.progressStyles.circularIconProgressStyle),
         ),
       );
 

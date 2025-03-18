@@ -212,10 +212,10 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 
   /// The enabled circular progress's style.
   @override
-  final FCircularProgressStyle enabledCircularProgressStyle;
+  final FCircularIconProgressStyle enabledCircularProgressStyle;
 
   @override
-  final FCircularProgressStyle disabledenabledCircularProgressStyle;
+  final FCircularIconProgressStyle disabledenabledCircularProgressStyle;
 
   /// The tappable's style.
   @override
@@ -257,8 +257,8 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            enabledColor: enabledContentColor,
            disabledColor: disabledContentColor,
          ),
-         enabledCircularProgressStyle: FCircularProgressStyle(color: enabledContentColor),
-         disabledenabledCircularProgressStyle: FCircularProgressStyle(color: disabledContentColor),
+         enabledCircularProgressStyle: FCircularIconProgressStyle(color: enabledContentColor),
+         disabledenabledCircularProgressStyle: FCircularIconProgressStyle(color: disabledContentColor),
          tappableStyle: style.tappableStyle,
        );
 }

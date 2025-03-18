@@ -102,8 +102,8 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             enabledColor: colorScheme.secondaryForeground,
             disabledColor: colorScheme.disable(colorScheme.secondaryForeground),
           ),
-          enabledCircularProgressStyle: FCircularProgressStyle(color: colorScheme.secondaryForeground),
-          disabledenabledCircularProgressStyle: FCircularProgressStyle(
+          enabledCircularProgressStyle: FCircularIconProgressStyle(color: colorScheme.secondaryForeground),
+          disabledenabledCircularProgressStyle: FCircularIconProgressStyle(
             color: colorScheme.disable(colorScheme.secondaryForeground),
           ),
           tappableStyle: style.tappableStyle,
@@ -122,8 +122,8 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             enabledColor: colorScheme.secondaryForeground,
             disabledColor: colorScheme.disable(colorScheme.secondaryForeground),
           ),
-          enabledCircularProgressStyle: FCircularProgressStyle(color: colorScheme.secondaryForeground),
-          disabledenabledCircularProgressStyle: FCircularProgressStyle(
+          enabledCircularProgressStyle: FCircularIconProgressStyle(color: colorScheme.secondaryForeground),
+          disabledenabledCircularProgressStyle: FCircularIconProgressStyle(
             color: colorScheme.disable(colorScheme.secondaryForeground),
           ),
           tappableStyle: style.tappableStyle,
