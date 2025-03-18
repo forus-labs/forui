@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Orë e pavlefshme.",
   "textFieldClearButtonSemanticLabel": "Pastro",
   "selectHint": "Zgjidhni një artikull",
-  "selectSearchHint": "Kërko"
+  "selectSearchHint": "Kërko",
+  "selectSearchNoResults": "Nuk ka rezultate përputhëse."
 }

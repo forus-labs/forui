@@ -63,6 +63,9 @@ class FLocalizationsKy extends FLocalizations {
   String get selectSearchHint => 'Издөө';
 
   @override
+  String get selectSearchNoResults => 'Дал келген натыйжалар жок.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Тазалоо';
 
   @override

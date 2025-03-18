@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Virheellinen aika.",
   "textFieldClearButtonSemanticLabel": "Tyhjennä",
   "selectHint": "Valitse kohde",
-  "selectSearchHint": "Haku"
+  "selectSearchHint": "Haku",
+  "selectSearchNoResults": "Ei vastaavia tuloksia."
 }

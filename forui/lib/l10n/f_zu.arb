@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Isikhathi esingalungile.",
   "textFieldClearButtonSemanticLabel": "Sula",
   "selectHint": "Khetha into",
-  "selectSearchHint": "Sesha"
+  "selectSearchHint": "Sesha",
+  "selectSearchNoResults": "Ayikho imiphumela efanayo."
 }

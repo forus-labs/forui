@@ -63,6 +63,9 @@ class FLocalizationsUr extends FLocalizations {
   String get selectSearchHint => 'تلاش کریں';
 
   @override
+  String get selectSearchNoResults => 'کوئی مماثل نتائج نہیں۔';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'صاف کریں';
 
   @override

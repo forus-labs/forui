@@ -63,6 +63,9 @@ class FLocalizationsRo extends FLocalizations {
   String get selectSearchHint => 'Căutare';
 
   @override
+  String get selectSearchNoResults => 'Niciun rezultat care să se potrivească.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Ștergeți';
 
   @override

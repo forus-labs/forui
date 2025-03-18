@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "தவறான நேரம்.",
   "textFieldClearButtonSemanticLabel": "அழி",
   "selectHint": "ஒரு பொருளைத் தேர்ந்தெடுக்கவும்",
-  "selectSearchHint": "தேடு"
+  "selectSearchHint": "தேடு",
+  "selectSearchNoResults": "பொருந்தும் முடிவுகள் இல்லை."
 }

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "ልክ ያልሆነ ሰዓት።",
   "textFieldClearButtonSemanticLabel": "አጽዳ",
   "selectHint": "አንድ ንጥል ይምረጡ",
-  "selectSearchHint": "ፍለጋ"
+  "selectSearchHint": "ፍለጋ",
+  "selectSearchNoResults": "ምንም ተዛማጅ ውጤቶች የሉም።"
 }

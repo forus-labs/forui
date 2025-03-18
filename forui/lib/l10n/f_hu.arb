@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Érvénytelen idő.",
   "textFieldClearButtonSemanticLabel": "Törlés",
   "selectHint": "Válasszon egy elemet",
-  "selectSearchHint": "Keresés"
+  "selectSearchHint": "Keresés",
+  "selectSearchNoResults": "Nincs megfelelő találat."
 }

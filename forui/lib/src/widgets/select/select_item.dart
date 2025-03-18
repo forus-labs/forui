@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
-import 'package:forui/src/widgets/select/content.dart';
+import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:meta/meta.dart';
 
 part 'select_item.style.dart';
@@ -147,8 +147,12 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
   @override
   void initState() {
     super.initState();
-    // This is hacky but I'm not sure how to do it better.
+    // This is hacky but I'm not sure how to properly do this.
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+
       final FSelectControllerData(:contains, :onPress) = FSelectControllerData.of<T>(context);
       final content = FSelectContentData.of<T>(context);
       if (contains(widget.value)) {

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "無効な時間です。",
   "textFieldClearButtonSemanticLabel": "クリア",
   "selectHint": "アイテムを選択",
-  "selectSearchHint": "検索"
+  "selectSearchHint": "検索",
+  "selectSearchNoResults": "一致する結果がありません。"
 }

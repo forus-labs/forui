@@ -63,6 +63,9 @@ class FLocalizationsFa extends FLocalizations {
   String get selectSearchHint => 'جستجو';
 
   @override
+  String get selectSearchNoResults => 'نتیجه‌ای مطابقت ندارد.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'پاک کردن';
 
   @override

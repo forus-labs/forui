@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Жарамсыз уақыт.",
   "textFieldClearButtonSemanticLabel": "Тазалау",
   "selectHint": "Элементті таңдаңыз",
-  "selectSearchHint": "Іздеу"
+  "selectSearchHint": "Іздеу",
+  "selectSearchNoResults": "Сәйкес нәтижелер жоқ."
 }

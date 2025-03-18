@@ -63,6 +63,9 @@ class FLocalizationsGu extends FLocalizations {
   String get selectSearchHint => 'શોધો';
 
   @override
+  String get selectSearchNoResults => 'કોઈ મેળ ખાતાં પરિણામો નથી.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'સાફ કરો';
 
   @override

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Ugyldig klokkeslett.",
   "textFieldClearButtonSemanticLabel": "Tøm",
   "selectHint": "Velg et element",
-  "selectSearchHint": "Søk"
+  "selectSearchHint": "Søk",
+  "selectSearchNoResults": "Ingen samsvarende resultater."
 }

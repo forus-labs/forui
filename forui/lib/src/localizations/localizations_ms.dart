@@ -63,6 +63,9 @@ class FLocalizationsMs extends FLocalizations {
   String get selectSearchHint => 'Cari';
 
   @override
+  String get selectSearchNoResults => 'Tiada hasil yang sepadan.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Kosongkan';
 
   @override

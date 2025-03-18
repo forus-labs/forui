@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Thời gian không hợp lệ.",
   "textFieldClearButtonSemanticLabel": "Xóa",
   "selectHint": "Chọn một mục",
-  "selectSearchHint": "Tìm kiếm"
+  "selectSearchHint": "Tìm kiếm",
+  "selectSearchNoResults": "Không có kết quả phù hợp."
 }

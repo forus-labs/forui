@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Ongeldige tyd.",
   "textFieldClearButtonSemanticLabel": "Vee uit",
   "selectHint": "Kies 'n item",
-  "selectSearchHint": "Soek"
+  "selectSearchHint": "Soek",
+  "selectSearchNoResults": "Geen passende resultate nie."
 }

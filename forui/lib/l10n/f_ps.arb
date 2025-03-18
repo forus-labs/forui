@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "ناسم وخت.",
   "textFieldClearButtonSemanticLabel": "پاک کول",
   "selectHint": "یو توکی وټاکئ",
-  "selectSearchHint": "لټون"
+  "selectSearchHint": "لټون",
+  "selectSearchNoResults": "هیڅ سمون لرونکي پایلې نشته."
 }

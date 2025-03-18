@@ -63,6 +63,9 @@ class FLocalizationsAr extends FLocalizations {
   String get selectSearchHint => 'بحث';
 
   @override
+  String get selectSearchNoResults => 'لا توجد نتائج مطابقة.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'مسح';
 
   @override

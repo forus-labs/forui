@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "غلط وقت۔",
   "textFieldClearButtonSemanticLabel": "صاف کریں",
   "selectHint": "آئٹم منتخب کریں",
-  "selectSearchHint": "تلاش کریں"
+  "selectSearchHint": "تلاش کریں",
+  "selectSearchNoResults": "کوئی مماثل نتائج نہیں۔"
 }

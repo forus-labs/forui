@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Անվավեր ժամանակ:",
   "textFieldClearButtonSemanticLabel": "Մաքրել",
   "selectHint": "Ընտրեք տարր",
-  "selectSearchHint": "Որոնել"
+  "selectSearchHint": "Որոնել",
+  "selectSearchNoResults": "Համապատասխան արդյունքներ չկան։"
 }

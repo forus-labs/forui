@@ -63,6 +63,9 @@ class FLocalizationsSr extends FLocalizations {
   String get selectSearchHint => 'Претрага';
 
   @override
+  String get selectSearchNoResults => 'Нема подударајућих резултата.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Обриши';
 
   @override
@@ -116,6 +119,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get selectSearchHint => 'Pretraga';
+
+  @override
+  String get selectSearchNoResults => 'Nema podudarajućih rezultata.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Obriši';

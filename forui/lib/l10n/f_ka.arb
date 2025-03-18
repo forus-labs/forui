@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "არასწორი დრო.",
   "textFieldClearButtonSemanticLabel": "გასუფთავება",
   "selectHint": "აირჩიეთ ელემენტი",
-  "selectSearchHint": "ძიება"
+  "selectSearchHint": "ძიება",
+  "selectSearchNoResults": "შესაბამისი შედეგები არ არის."
 }

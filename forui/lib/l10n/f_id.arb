@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Waktu tidak valid.",
   "textFieldClearButtonSemanticLabel": "Hapus",
   "selectHint": "Pilih item",
-  "selectSearchHint": "Cari"
+  "selectSearchHint": "Cari",
+  "selectSearchNoResults": "Tidak ada hasil yang cocok."
 }

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "ଅବୈଧ ସମୟ।",
   "textFieldClearButtonSemanticLabel": "ସଫା କରନ୍ତୁ",
   "selectHint": "ଏକ ଆଇଟମ୍ ଚୟନ କରନ୍ତୁ",
-  "selectSearchHint": "ସନ୍ଧାନ କରନ୍ତୁ"
+  "selectSearchHint": "ସନ୍ଧାନ କରନ୍ତୁ",
+  "selectSearchNoResults": "କୌଣସି ମେଳଖାଉଥିବା ଫଳାଫଳ ନାହିଁ।"
 }

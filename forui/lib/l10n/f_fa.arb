@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "زمان نامعتبر است.",
   "textFieldClearButtonSemanticLabel": "پاک کردن",
   "selectHint": "یک مورد را انتخاب کنید",
-  "selectSearchHint": "جستجو"
+  "selectSearchHint": "جستجو",
+  "selectSearchNoResults": "نتیجه‌ای مطابقت ندارد."
 }

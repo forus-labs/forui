@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Ugyldigt tidspunkt.",
   "textFieldClearButtonSemanticLabel": "Ryd",
   "selectHint": "Vælg et element",
-  "selectSearchHint": "Søg"
+  "selectSearchHint": "Søg",
+  "selectSearchNoResults": "Ingen matchende resultater."
 }

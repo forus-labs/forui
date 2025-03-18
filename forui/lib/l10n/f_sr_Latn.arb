@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Nevažeće vreme.",
   "textFieldClearButtonSemanticLabel": "Obriši",
   "selectHint": "Izaberite stavku",
-  "selectSearchHint": "Pretraga"
+  "selectSearchHint": "Pretraga",
+  "selectSearchNoResults": "Nema podudarajućih rezultata."
 }

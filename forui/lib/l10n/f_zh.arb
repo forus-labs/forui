@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "无效的时间。",
   "textFieldClearButtonSemanticLabel": "清除",
   "selectHint": "选择项目",
-  "selectSearchHint": "搜索"
+  "selectSearchHint": "搜索",
+  "selectSearchNoResults": "没有匹配结果。"
 }

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Ordu baliogabea.",
   "textFieldClearButtonSemanticLabel": "Garbitu",
   "selectHint": "Hautatu elementu bat",
-  "selectSearchHint": "Bilatu"
+  "selectSearchHint": "Bilatu",
+  "selectSearchNoResults": "Ez dago bat datorren emaitzarik."
 }

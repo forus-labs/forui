@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "שעה לא חוקית.",
   "textFieldClearButtonSemanticLabel": "ניקוי",
   "selectHint": "בחר פריט",
-  "selectSearchHint": "חיפוש"
+  "selectSearchHint": "חיפוש",
+  "selectSearchNoResults": "אין תוצאות תואמות."
 }

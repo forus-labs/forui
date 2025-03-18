@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Ungültigi Zyt.",
   "textFieldClearButtonSemanticLabel": "Lösche",
   "selectHint": "Wähle e Element",
-  "selectSearchHint": "Sueche"
+  "selectSearchHint": "Sueche",
+  "selectSearchNoResults": "Kei passendi Ergebnis."
 }

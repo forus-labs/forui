@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Буруу цаг.",
   "textFieldClearButtonSemanticLabel": "Арилгах",
   "selectHint": "Зүйл сонгох",
-  "selectSearchHint": "Хайх"
+  "selectSearchHint": "Хайх",
+  "selectSearchNoResults": "Тохирох үр дүн олдсонгүй."
 }

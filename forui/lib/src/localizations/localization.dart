@@ -83,6 +83,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get selectSearchHint => 'Search';
 
   @override
+  String get selectSearchNoResults => 'No matching results.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
 
   @override

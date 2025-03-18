@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Hora no vàlida.",
   "textFieldClearButtonSemanticLabel": "Esborrar",
   "selectHint": "Selecciona un element",
-  "selectSearchHint": "Cerca"
+  "selectSearchHint": "Cerca",
+  "selectSearchNoResults": "No s'han trobat resultats coincidents."
 }

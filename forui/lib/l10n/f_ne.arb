@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "अमान्य समय।",
   "textFieldClearButtonSemanticLabel": "खाली गर्नुहोस्",
   "selectHint": "वस्तु चयन गर्नुहोस्",
-  "selectSearchHint": "खोज्नुहोस्"
+  "selectSearchHint": "खोज्नुहोस्",
+  "selectSearchNoResults": "कुनै मिल्दो परिणामहरू छैनन्।"
 }

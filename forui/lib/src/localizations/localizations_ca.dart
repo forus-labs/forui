@@ -63,6 +63,9 @@ class FLocalizationsCa extends FLocalizations {
   String get selectSearchHint => 'Cerca';
 
   @override
+  String get selectSearchNoResults => 'No s\'han trobat resultats coincidents.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Esborrar';
 
   @override

@@ -63,6 +63,9 @@ class FLocalizationsKn extends FLocalizations {
   String get selectSearchHint => 'ಹುಡುಕಿ';
 
   @override
+  String get selectSearchNoResults => 'ಹೊಂದಾಣಿಕೆಯಾಗುವ ಫಲಿತಾಂಶಗಳಿಲ್ಲ.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ತೆರವುಗೊಳಿಸಿ';
 
   @override

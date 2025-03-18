@@ -63,6 +63,9 @@ class FLocalizationsPs extends FLocalizations {
   String get selectSearchHint => 'لټون';
 
   @override
+  String get selectSearchNoResults => 'هیڅ سمون لرونکي پایلې نشته.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'پاک کول';
 
   @override

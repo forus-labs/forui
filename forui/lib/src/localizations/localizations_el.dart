@@ -63,6 +63,9 @@ class FLocalizationsEl extends FLocalizations {
   String get selectSearchHint => 'Αναζήτηση';
 
   @override
+  String get selectSearchNoResults => 'Δεν βρέθηκαν αποτελέσματα.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Εκκαθάριση';
 
   @override

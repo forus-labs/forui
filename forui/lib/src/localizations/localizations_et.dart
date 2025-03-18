@@ -63,6 +63,9 @@ class FLocalizationsEt extends FLocalizations {
   String get selectSearchHint => 'Otsi';
 
   @override
+  String get selectSearchNoResults => 'Sobivaid tulemusi pole.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Kustuta';
 
   @override

@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/spinner.dart';
+import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
-import 'package:forui/src/widgets/select/content.dart';
 
 class FSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
@@ -11,6 +14,16 @@ class FSelect<T> extends StatefulWidget {
         padding: const EdgeInsetsDirectional.only(end: 8.0),
         child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.chevronDown)),
       );
+
+  /// The default loading builder that shows a spinner when an asynchronous search is pending.
+  static Widget defaultSearchLoadingBuilder(BuildContext context) =>
+      const Padding(padding: EdgeInsets.all(8.0), child: FSpinner()); // TODO add spinner style
+
+  /// The default empty builder that shows a localized message when a search has no results.
+  static Widget defaultSearchEmptyBuilder(BuildContext context) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return Padding(padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15), child: Text(localizations.selectSearchNoResults)); // TODO: add text style.
+  }
 
   /// The default format function that converts the selected items to a comma separated string.
   static String defaultFormat(Object? selected) => selected.toString();
@@ -119,10 +132,49 @@ class FSelect<T> extends StatefulWidget {
   /// True if the dropdown menu should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
-  final List<FSelectItemMixin> children;
+  final FutureOr<Iterable<T>> Function(String) filter;
+  final WidgetBuilder loadingBuilder;
+  final List<FSelectItemMixin> Function(BuildContext, FSelectSearchData<T>) builder;
+  final WidgetBuilder searchEmptyBuilder;
+  final Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder;
 
-  const FSelect({
-    required this.children,
+  // const FSelect({
+  //   required this.child,
+  //   this.controller,
+  //   this.style,
+  //   this.autofocus = false,
+  //   this.focusNode,
+  //   this.prefixBuilder,
+  //   this.suffixBuilder = defaultIconBuilder,
+  //   this.label,
+  //   this.description,
+  //   this.enabled = true,
+  //   this.onSaved,
+  //   this.autovalidateMode = AutovalidateMode.onUnfocus,
+  //   this.forceErrorText,
+  //   this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+  //   this.format = defaultFormat,
+  //   this.hint,
+  //   this.textAlign = TextAlign.start,
+  //   this.textAlignVertical,
+  //   this.textDirection,
+  //   this.expands = false,
+  //   this.mouseCursor = SystemMouseCursors.click,
+  //   this.canRequestFocus = true,
+  //   this.clearable = false,
+  //   this.anchor = Alignment.topLeft,
+  //   this.fieldAnchor = Alignment.bottomLeft,
+  //   this.popoverConstraints = const BoxConstraints(),
+  //   this.shift = FPortalShift.flip,
+  //   this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+  //   this.directionPadding = false,
+  //   this.autoHide = true,
+  //   super.key,
+  // });
+
+  const FSelect.search({
+    required this.filter,
+    required this.builder,
     this.controller,
     this.style,
     this.autofocus = false,
@@ -152,6 +204,9 @@ class FSelect<T> extends StatefulWidget {
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.autoHide = true,
+    this.loadingBuilder = defaultSearchLoadingBuilder,
+    this.searchEmptyBuilder = defaultSearchEmptyBuilder,
+    this.searchErrorBuilder,
     super.key,
   });
 
@@ -337,8 +392,7 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
 
                       _controller.value = value;
                     },
-                    // TODO: Extract out content logic
-                    child: Content<T>(
+                    child: SearchContent<T>(
                       scrollHandles: true,
                       controller: null,
                       style: FSelectContentStyle.inherit(
@@ -349,8 +403,12 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
                       first: _controller.value == null,
                       enabled: widget.enabled,
                       physics: const ClampingScrollPhysics(),
-                      children: widget.children,
-                    )
+                      loadingBuilder: widget.loadingBuilder,
+                      filter: widget.filter,
+                      builder: widget.builder,
+                      emptyBuilder: widget.searchEmptyBuilder,
+                      errorBuilder: widget.searchErrorBuilder,
+                    ),
                   ),
                 ),
             child: child!,

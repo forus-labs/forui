@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "చెల్లని సమయం.",
   "textFieldClearButtonSemanticLabel": "క్లియర్ చేయి",
   "selectHint": "ఒక అంశాన్ని ఎంచుకోండి",
-  "selectSearchHint": "శోధించు"
+  "selectSearchHint": "శోధించు",
+  "selectSearchNoResults": "సరిపోలే ఫలితాలు లేవు."
 }

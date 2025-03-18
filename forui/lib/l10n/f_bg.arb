@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Невалидно време.",
   "textFieldClearButtonSemanticLabel": "Изчистване",
   "selectHint": "Изберете елемент",
-  "selectSearchHint": "Търсене"
+  "selectSearchHint": "Търсене",
+  "selectSearchNoResults": "Няма съвпадащи резултати."
 }

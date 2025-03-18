@@ -63,6 +63,9 @@ class FLocalizationsKa extends FLocalizations {
   String get selectSearchHint => 'ძიება';
 
   @override
+  String get selectSearchNoResults => 'შესაბამისი შედეგები არ არის.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'გასუფთავება';
 
   @override

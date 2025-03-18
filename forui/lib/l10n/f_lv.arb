@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Nederīgs laiks.",
   "textFieldClearButtonSemanticLabel": "Notīrīt",
   "selectHint": "Atlasiet vienumu",
-  "selectSearchHint": "Meklēt"
+  "selectSearchHint": "Meklēt",
+  "selectSearchNoResults": "Nav atbilstošu rezultātu."
 }

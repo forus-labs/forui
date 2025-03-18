@@ -63,6 +63,9 @@ class FLocalizationsIt extends FLocalizations {
   String get selectSearchHint => 'Cerca';
 
   @override
+  String get selectSearchNoResults => 'Nessun risultato corrispondente.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Cancella';
 
   @override

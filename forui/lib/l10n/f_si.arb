@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "අවලංගු වේලාවකි.",
   "textFieldClearButtonSemanticLabel": "හිස් කරන්න",
   "selectHint": "අයිතමයක් තෝරන්න",
-  "selectSearchHint": "සොයන්න"
+  "selectSearchHint": "සොයන්න",
+  "selectSearchNoResults": "ගැලපෙන ප්‍රතිඵල නොමැත."
 }

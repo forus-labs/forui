@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Amser annilys.",
   "textFieldClearButtonSemanticLabel": "Clirio",
   "selectHint": "Dewiswch eitem",
-  "selectSearchHint": "Chwilio"
+  "selectSearchHint": "Chwilio",
+  "selectSearchNoResults": "Dim canlyniadau cyfatebol."
 }

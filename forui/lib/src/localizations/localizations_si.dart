@@ -63,6 +63,9 @@ class FLocalizationsSi extends FLocalizations {
   String get selectSearchHint => 'සොයන්න';
 
   @override
+  String get selectSearchNoResults => 'ගැලපෙන ප්‍රතිඵල නොමැත.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'හිස් කරන්න';
 
   @override

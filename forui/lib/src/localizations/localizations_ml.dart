@@ -63,6 +63,9 @@ class FLocalizationsMl extends FLocalizations {
   String get selectSearchHint => 'തിരയുക';
 
   @override
+  String get selectSearchNoResults => 'പൊരുത്തപ്പെടുന്ന ഫലങ്ങളൊന്നുമില്ല.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'മായ്‌ക്കുക';
 
   @override

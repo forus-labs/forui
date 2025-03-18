@@ -63,6 +63,9 @@ class FLocalizationsSw extends FLocalizations {
   String get selectSearchHint => 'Tafuta';
 
   @override
+  String get selectSearchNoResults => 'Hakuna matokeo yanayolingana.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Futa';
 
   @override

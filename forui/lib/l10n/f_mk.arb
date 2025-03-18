@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Невалидно време.",
   "textFieldClearButtonSemanticLabel": "Избриши",
   "selectHint": "Изберете ставка",
-  "selectSearchHint": "Пребарување"
+  "selectSearchHint": "Пребарување",
+  "selectSearchNoResults": "Нема совпаѓачки резултати."
 }

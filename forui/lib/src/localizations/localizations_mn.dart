@@ -63,6 +63,9 @@ class FLocalizationsMn extends FLocalizations {
   String get selectSearchHint => 'Хайх';
 
   @override
+  String get selectSearchNoResults => 'Тохирох үр дүн олдсонгүй.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Арилгах';
 
   @override

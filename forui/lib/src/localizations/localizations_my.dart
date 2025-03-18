@@ -63,6 +63,9 @@ class FLocalizationsMy extends FLocalizations {
   String get selectSearchHint => 'ရှာဖွေရန်';
 
   @override
+  String get selectSearchNoResults => 'တူညီသည့်ရလဒ်များမရှိပါ။';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'ရှင်းရန်';
 
   @override

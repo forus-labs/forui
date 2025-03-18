@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Ógildur tími.",
   "textFieldClearButtonSemanticLabel": "Hreinsa",
   "selectHint": "Veldu atriði",
-  "selectSearchHint": "Leita"
+  "selectSearchHint": "Leita",
+  "selectSearchNoResults": "Engar samsvarandi niðurstöður."
 }

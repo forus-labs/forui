@@ -68,6 +68,10 @@
   "@selectSearchHint": {
     "description": "The hint text for the search field in a select field."
   },
+  "selectSearchNoResults": "No matching results.",
+  "@selectSearchNoResults": {
+    "description": "The message displayed when there are no matching results for a search."
+  },
 
   "textFieldClearButtonSemanticLabel": "Clear",
   "@textFieldClearButtonSemanticLabel": {

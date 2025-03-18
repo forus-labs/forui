@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Neteisingas laikas.",
   "textFieldClearButtonSemanticLabel": "Išvalyti",
   "selectHint": "Pasirinkite elementą",
-  "selectSearchHint": "Ieškoti"
+  "selectSearchHint": "Ieškoti",
+  "selectSearchNoResults": "Jokių atitinkančių rezultatų."
 }

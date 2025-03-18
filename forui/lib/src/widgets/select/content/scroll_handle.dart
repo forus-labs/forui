@@ -37,6 +37,7 @@ class ScrollHandle extends StatefulWidget {
 class _ScrollHandleState extends State<ScrollHandle> {
   int _monotonic = 0;
 
+  // TODO: We don't handle pressing yet!
   @override
   Widget build(BuildContext context) => Align(
     alignment: widget.alignment,

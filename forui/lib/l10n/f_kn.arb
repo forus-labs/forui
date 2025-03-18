@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "ಅಮಾನ್ಯ ಸಮಯ.",
   "textFieldClearButtonSemanticLabel": "ತೆರವುಗೊಳಿಸಿ",
   "selectHint": "ಐಟಂ ಆಯ್ಕೆಮಾಡಿ",
-  "selectSearchHint": "ಹುಡುಕಿ"
+  "selectSearchHint": "ಹುಡುಕಿ",
+  "selectSearchNoResults": "ಹೊಂದಾಣಿಕೆಯಾಗುವ ಫಲಿತಾಂಶಗಳಿಲ್ಲ."
 }

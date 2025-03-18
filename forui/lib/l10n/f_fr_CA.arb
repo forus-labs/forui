@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Heure invalide.",
   "textFieldClearButtonSemanticLabel": "Effacer",
   "selectHint": "Sélectionnez un élément",
-  "selectSearchHint": "Rechercher"
+  "selectSearchHint": "Rechercher",
+  "selectSearchNoResults": "Aucun résultat correspondant."
 }

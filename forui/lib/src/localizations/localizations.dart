@@ -331,6 +331,12 @@ abstract class FLocalizations {
   /// **'Search'**
   String get selectSearchHint;
 
+  /// The message displayed when there are no matching results for a search.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching results.'**
+  String get selectSearchNoResults;
+
   /// The semantic label for the clear button in a text field.
   ///
   /// In en, this message translates to:

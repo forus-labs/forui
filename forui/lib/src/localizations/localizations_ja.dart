@@ -63,6 +63,9 @@ class FLocalizationsJa extends FLocalizations {
   String get selectSearchHint => '検索';
 
   @override
+  String get selectSearchNoResults => '一致する結果がありません。';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'クリア';
 
   @override

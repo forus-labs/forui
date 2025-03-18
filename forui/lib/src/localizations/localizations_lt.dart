@@ -63,6 +63,9 @@ class FLocalizationsLt extends FLocalizations {
   String get selectSearchHint => 'Ieškoti';
 
   @override
+  String get selectSearchNoResults => 'Jokių atitinkančių rezultatų.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Išvalyti';
 
   @override

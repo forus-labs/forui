@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "وقت غير صالح.",
   "textFieldClearButtonSemanticLabel": "مسح",
   "selectHint": "حدد عنصرا",
-  "selectSearchHint": "بحث"
+  "selectSearchHint": "بحث",
+  "selectSearchNoResults": "لا توجد نتائج مطابقة."
 }

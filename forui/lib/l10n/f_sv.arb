@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Ogiltig tid.",
   "textFieldClearButtonSemanticLabel": "Rensa",
   "selectHint": "Välj ett objekt",
-  "selectSearchHint": "Sök"
+  "selectSearchHint": "Sök",
+  "selectSearchNoResults": "Inga matchande resultat."
 }

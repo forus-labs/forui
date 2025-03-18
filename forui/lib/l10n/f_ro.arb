@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Oră invalidă.",
   "textFieldClearButtonSemanticLabel": "Ștergeți",
   "selectHint": "Selectați un element",
-  "selectSearchHint": "Căutare"
+  "selectSearchHint": "Căutare",
+  "selectSearchNoResults": "Niciun rezultat care să se potrivească."
 }

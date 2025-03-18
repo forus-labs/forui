@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Недействительное время.",
   "textFieldClearButtonSemanticLabel": "Очистить",
   "selectHint": "Выберите элемент",
-  "selectSearchHint": "Поиск"
+  "selectSearchHint": "Поиск",
+  "selectSearchNoResults": "Нет совпадающих результатов."
 }

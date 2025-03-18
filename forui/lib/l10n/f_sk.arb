@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Neplatný čas.",
   "textFieldClearButtonSemanticLabel": "Vymazať",
   "selectHint": "Vyberte položku",
-  "selectSearchHint": "Hľadať"
+  "selectSearchHint": "Hľadať",
+  "selectSearchNoResults": "Žiadne zodpovedajúce výsledky."
 }

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Yaroqsiz vaqt.",
   "textFieldClearButtonSemanticLabel": "Tozalash",
   "selectHint": "Element tanlang",
-  "selectSearchHint": "Qidirish"
+  "selectSearchHint": "Qidirish",
+  "selectSearchNoResults": "Mos keladigan natijalar yo'q."
 }

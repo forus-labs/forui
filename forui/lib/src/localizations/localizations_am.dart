@@ -63,6 +63,9 @@ class FLocalizationsAm extends FLocalizations {
   String get selectSearchHint => 'ፍለጋ';
 
   @override
+  String get selectSearchNoResults => 'ምንም ተዛማጅ ውጤቶች የሉም።';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'አጽዳ';
 
   @override

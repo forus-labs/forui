@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Geçersiz zaman.",
   "textFieldClearButtonSemanticLabel": "Temizle",
   "selectHint": "Bir öğe seçin",
-  "selectSearchHint": "Ara"
+  "selectSearchHint": "Ara",
+  "selectSearchNoResults": "Eşleşen sonuç yok."
 }

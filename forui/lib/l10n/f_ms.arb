@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Masa tidak sah.",
   "textFieldClearButtonSemanticLabel": "Kosongkan",
   "selectHint": "Pilih item",
-  "selectSearchHint": "Cari"
+  "selectSearchHint": "Cari",
+  "selectSearchNoResults": "Tiada hasil yang sepadan."
 }

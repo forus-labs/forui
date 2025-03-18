@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/select/scroll_handle.dart';
+import 'package:forui/src/widgets/select/content/scroll_handle.dart';
 import 'package:meta/meta.dart';
 
 part 'content.style.dart';
@@ -182,7 +182,9 @@ class _ContentState<T> extends State<Content<T>> {
 
   Future<void> _ensureVisible(BuildContext context) async {
     await Scrollable.ensureVisible(context);
-    if (widget.scrollHandles) {
+    // There is an edge case, when at max scroll extent, the first visible item, if selected, remains partially obscured
+    // by the scroll handle.
+    if (widget.scrollHandles && 0 < _controller.offset && _controller.offset < _controller.position.maxScrollExtent) {
       _controller.jumpTo(_controller.offset - widget.style.scrollHandleStyle.size);
     }
   }

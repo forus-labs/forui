@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "ເວລາບໍ່ຖືກຕ້ອງ.",
   "textFieldClearButtonSemanticLabel": "ລຶບ",
   "selectHint": "ເລືອກລາຍການ",
-  "selectSearchHint": "ຊອກຫາ"
+  "selectSearchHint": "ຊອກຫາ",
+  "selectSearchNoResults": "ບໍ່ມີຜົນການຊອກຫາທີ່ກົງກັນ."
 }

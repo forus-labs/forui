@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Μη έγκυρη ώρα.",
   "textFieldClearButtonSemanticLabel": "Εκκαθάριση",
   "selectHint": "Επιλέξτε ένα στοιχείο",
-  "selectSearchHint": "Αναζήτηση"
+  "selectSearchHint": "Αναζήτηση",
+  "selectSearchNoResults": "Δεν βρέθηκαν αποτελέσματα."
 }

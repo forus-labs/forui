@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Hindi wastong oras.",
   "textFieldClearButtonSemanticLabel": "I-clear",
   "selectHint": "Pumili ng item",
-  "selectSearchHint": "Maghanap"
+  "selectSearchHint": "Maghanap",
+  "selectSearchNoResults": "Walang mga tumutugmang resulta."
 }

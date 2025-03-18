@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "잘못된 시간입니다.",
   "textFieldClearButtonSemanticLabel": "지우기",
   "selectHint": "항목 선택",
-  "selectSearchHint": "검색"
+  "selectSearchHint": "검색",
+  "selectSearchNoResults": "일치하는 결과가 없습니다."
 }

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "ਅਵੈਧ ਸਮਾਂ।",
   "textFieldClearButtonSemanticLabel": "ਕਲੀਅਰ ਕਰੋ",
   "selectHint": "ਇੱਕ ਆਈਟਮ ਚੁਣੋ",
-  "selectSearchHint": "ਖੋਜ"
+  "selectSearchHint": "ਖੋਜ",
+  "selectSearchNoResults": "ਕੋਈ ਮੇਲ ਖਾਂਦੇ ਨਤੀਜੇ ਨਹੀਂ ਹਨ।"
 }

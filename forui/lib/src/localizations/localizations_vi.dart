@@ -63,6 +63,9 @@ class FLocalizationsVi extends FLocalizations {
   String get selectSearchHint => 'Tìm kiếm';
 
   @override
+  String get selectSearchNoResults => 'Không có kết quả phù hợp.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Xóa';
 
   @override

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "अवैध वेळ.",
   "textFieldClearButtonSemanticLabel": "साफ करा",
   "selectHint": "आयटम निवडा",
-  "selectSearchHint": "शोधा"
+  "selectSearchHint": "शोधा",
+  "selectSearchNoResults": "कोणतेही जुळणारे परिणाम नाहीत."
 }

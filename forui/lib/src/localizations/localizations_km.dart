@@ -63,6 +63,9 @@ class FLocalizationsKm extends FLocalizations {
   String get selectSearchHint => 'ស្វែងរក';
 
   @override
+  String get selectSearchNoResults => 'គ្មានលទ្ធផលដែលត្រូវគ្នាទេ។';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'សម្អាត';
 
   @override

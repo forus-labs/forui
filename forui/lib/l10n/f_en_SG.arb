@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Invalid time.",
   "textFieldClearButtonSemanticLabel": "Clear",
   "selectHint": "Select an item",
-  "selectSearchHint": "Search"
+  "selectSearchHint": "Search",
+  "selectSearchNoResults": "No matching results."
 }

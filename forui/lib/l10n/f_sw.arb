@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Wakati batili.",
   "textFieldClearButtonSemanticLabel": "Futa",
   "selectHint": "Chagua kipengee",
-  "selectSearchHint": "Tafuta"
+  "selectSearchHint": "Tafuta",
+  "selectSearchNoResults": "Hakuna matokeo yanayolingana."
 }

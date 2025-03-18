@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Yanlış vaxt.",
   "textFieldClearButtonSemanticLabel": "Təmizlə",
   "selectHint": "Element seçin",
-  "selectSearchHint": "Axtarış"
+  "selectSearchHint": "Axtarış",
+  "selectSearchNoResults": "Uyğun nəticə tapılmadı."
 }

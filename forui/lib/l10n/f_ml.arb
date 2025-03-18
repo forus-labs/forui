@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "അസാധുവായ സമയം.",
   "textFieldClearButtonSemanticLabel": "മായ്‌ക്കുക",
   "selectHint": "ഒരു ഇനം തിരഞ്ഞെടുക്കുക",
-  "selectSearchHint": "തിരയുക"
+  "selectSearchHint": "തിരയുക",
+  "selectSearchNoResults": "പൊരുത്തപ്പെടുന്ന ഫലങ്ങളൊന്നുമില്ല."
 }

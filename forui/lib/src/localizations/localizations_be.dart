@@ -63,6 +63,9 @@ class FLocalizationsBe extends FLocalizations {
   String get selectSearchHint => 'Пошук';
 
   @override
+  String get selectSearchNoResults => 'Няма адпаведных вынікаў.';
+
+  @override
   String get textFieldClearButtonSemanticLabel => 'Ачысціць';
 
   @override

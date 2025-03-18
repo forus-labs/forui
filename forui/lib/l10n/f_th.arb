@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "เวลาไม่ถูกต้อง",
   "textFieldClearButtonSemanticLabel": "ล้าง",
   "selectHint": "เลือกรายการ",
-  "selectSearchHint": "ค้นหา"
+  "selectSearchHint": "ค้นหา",
+  "selectSearchNoResults": "ไม่มีผลลัพธ์ที่ตรงกัน"
 }

@@ -14,5 +14,6 @@
   "timeFieldInvalidDateError": "Vigane aeg.",
   "textFieldClearButtonSemanticLabel": "Kustuta",
   "selectHint": "Valige üksus",
-  "selectSearchHint": "Otsi"
+  "selectSearchHint": "Otsi",
+  "selectSearchNoResults": "Sobivaid tulemusi pole."
 }
