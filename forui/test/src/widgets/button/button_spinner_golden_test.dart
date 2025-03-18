@@ -18,7 +18,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FButton(
-                prefix: const FProgress.circular(),
+                prefix: const FProgress.circularIcon(),
                 label: const Text('Loading'),
                 onPress: () {},
                 style: variant,
@@ -37,7 +37,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FButton(
-                prefix: const FProgress.circular(),
+                prefix: const FProgress.circularIcon(),
                 label: const Text('Loading'),
                 onPress: null,
                 style: variant,

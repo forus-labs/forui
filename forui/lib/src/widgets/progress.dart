@@ -42,7 +42,7 @@ abstract class FProgress extends StatefulWidget {
   }) = _Linear;
 
   /// Creates a indeterminate circular [FProgress].
-  const factory FProgress.circular({
+  const factory FProgress.circularIcon({
     FCircularProgressStyle? style,
     Duration duration,
     String? semanticsLabel,

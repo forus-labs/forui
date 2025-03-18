@@ -57,7 +57,7 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FProgress.circular(style: TestScaffold.blueScreen.progressStyles.circularProgressStyle),
+          child: FProgress.circularIcon(style: TestScaffold.blueScreen.progressStyles.circularProgressStyle),
         ),
       );
 
@@ -66,7 +66,7 @@ void main() {
 
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} - indefinite', (tester) async {
-        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FProgress.circular()));
+        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FProgress.circularIcon()));
         await tester.pump(const Duration(milliseconds: 500));
 
         await expectLater(

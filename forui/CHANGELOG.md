@@ -1,7 +1,7 @@
 ## 0.11.0 (Next)
 
 ### Additions
-* Add `FProgress.circular`.
+* Add `FProgress.circularIcon`.
 
 * Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
 
