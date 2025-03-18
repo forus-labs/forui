@@ -20,7 +20,6 @@ class _LinearProgressPageState extends StatefulSampleState<LinearProgressPage> {
   Widget sample(BuildContext context) => const FProgress();
 }
 
-
 @RoutePage()
 class DeterminateLinearProgressPage extends StatefulSample {
   DeterminateLinearProgressPage({@queryParam super.theme});
@@ -45,11 +44,15 @@ class _DeterminateLinearProgressPageState extends StatefulSampleState<Determinat
     spacing: 20,
     children: [
       FProgress(value: value),
-      FButton(label: const Text('Reset'), onPress: () => setState(() {
-        value = 0.2;
-        timer.cancel();
-        timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
-      })),
+      FButton(
+        label: const Text('Reset'),
+        onPress:
+            () => setState(() {
+              value = 0.2;
+              timer.cancel();
+              timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+            }),
+      ),
     ],
   );
 
