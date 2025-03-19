@@ -63,7 +63,7 @@ class FLocalizationsZh extends FLocalizations {
   String get selectSearchHint => '搜索';
 
   @override
-  String get selectSearchNoResults => '没有匹配结果。';
+  String get selectNoResults => '没有匹配结果。';
 
   @override
   String get textFieldClearButtonSemanticLabel => '清除';
@@ -121,7 +121,7 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get selectSearchHint => '搜尋';
 
   @override
-  String get selectSearchNoResults => '沒有匹配結果。';
+  String get selectNoResults => '沒有匹配結果。';
 
   @override
   String get textFieldClearButtonSemanticLabel => '清除';
@@ -179,7 +179,7 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get selectSearchHint => '搜尋';
 
   @override
-  String get selectSearchNoResults => '沒有匹配結果。';
+  String get selectNoResults => '沒有匹配結果。';
 
   @override
   String get textFieldClearButtonSemanticLabel => '清除';

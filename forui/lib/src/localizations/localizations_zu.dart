@@ -63,7 +63,7 @@ class FLocalizationsZu extends FLocalizations {
   String get selectSearchHint => 'Sesha';
 
   @override
-  String get selectSearchNoResults => 'Ayikho imiphumela efanayo.';
+  String get selectNoResults => 'Ayikho imiphumela efanayo.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Sula';

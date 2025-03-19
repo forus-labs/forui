@@ -63,7 +63,7 @@ class FLocalizationsEs extends FLocalizations {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -121,9 +121,6 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -177,9 +174,6 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -237,9 +231,6 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -293,9 +284,6 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -353,9 +341,6 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -409,9 +394,6 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -469,9 +451,6 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -525,9 +504,6 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -585,9 +561,6 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -641,9 +614,6 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -701,9 +671,6 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -757,9 +724,6 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -817,9 +781,6 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -873,9 +834,6 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -933,9 +891,6 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -989,9 +944,6 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -1049,9 +1001,6 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -1105,9 +1054,6 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
@@ -1165,9 +1111,6 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
-
-  @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';
 
   @override
@@ -1221,9 +1164,6 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
-
-  @override
-  String get selectSearchNoResults => 'No hay resultados coincidentes.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Borrar';

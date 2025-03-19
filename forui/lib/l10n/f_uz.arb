@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Tozalash",
   "selectHint": "Element tanlang",
   "selectSearchHint": "Qidirish",
-  "selectSearchNoResults": "Mos keladigan natijalar yo'q."
+  "selectNoResults": "Mos keladigan natijalar yo'q."
 }

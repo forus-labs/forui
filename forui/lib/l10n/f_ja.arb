@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "クリア",
   "selectHint": "アイテムを選択",
   "selectSearchHint": "検索",
-  "selectSearchNoResults": "一致する結果がありません。"
+  "selectNoResults": "一致する結果がありません。"
 }

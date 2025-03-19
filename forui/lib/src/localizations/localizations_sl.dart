@@ -63,7 +63,7 @@ class FLocalizationsSl extends FLocalizations {
   String get selectSearchHint => 'Iskanje';
 
   @override
-  String get selectSearchNoResults => 'Ni ujemajočih se rezultatov.';
+  String get selectNoResults => 'Ni ujemajočih se rezultatov.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Počisti';

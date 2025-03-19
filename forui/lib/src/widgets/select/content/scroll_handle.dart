@@ -37,7 +37,7 @@ class ScrollHandle extends StatefulWidget {
 class _ScrollHandleState extends State<ScrollHandle> {
   bool _hovered = false;
   int _monotonic = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     final scroll = widget.alignment == Alignment.topCenter ? _up : _down;

@@ -1,28 +1,45 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/spinner.dart';
+import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
+import 'package:meta/meta.dart';
 
-class FSelect<T> extends StatefulWidget {
+part 'basic_select.dart';
+part 'search_select.dart';
+
+part 'select.style.dart';
+
+/// A select displays a list of options for the user to pick from.
+///
+/// A select is a [FormField] and therefore can be used in a [Form] widget.
+///
+/// See
+/// * https://forui.dev/docs/form/select for working examples.
+/// * [FSelectController] for customizing the behavior of a select.
+/// * [FSelectStyle] for customizing the appearance of a select.
+abstract class FSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, (FTimeFieldStyle, FTextFieldStateStyle) styles, Widget? _) =>
-      Padding(
-        padding: const EdgeInsetsDirectional.only(end: 8.0),
-        child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.chevronDown)),
-      );
+  static Widget defaultIconBuilder(BuildContext _, (FSelectStyle, FTextFieldStateStyle) styles, Widget? _) {
+    final style = styles.$1.iconStyle;
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(end: 8.0),
+      child: FIcon(FAssets.icons.chevronDown, color: style.color, size: style.size),
+    );
+  }
 
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultSearchLoadingBuilder(BuildContext context) =>
-      const Padding(padding: EdgeInsets.all(8.0), child: FSpinner()); // TODO add spinner style
+  static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) =>
+      Padding(padding: const EdgeInsets.all(8.0), child: FProgress.circularIcon(style: style.loadingIndicatorStyle));
 
-  /// The default empty builder that shows a localized message when a search has no results.
-  static Widget defaultSearchEmptyBuilder(BuildContext context) {
+  /// The default empty builder that shows a localized message when there are no results.
+  static Widget defaultEmptyBuilder(BuildContext context, FSelectStyle style, Widget? _) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    return Padding(padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15), child: Text(localizations.selectSearchNoResults)); // TODO: add text style.
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+      child: Text(localizations.selectNoResults, style: style.emptyTextStyle),
+    );
   }
 
   /// The default format function that converts the selected items to a comma separated string.
@@ -32,7 +49,7 @@ class FSelect<T> extends StatefulWidget {
   final FSelectController<T>? controller;
 
   /// The style.
-  final FTimeFieldStyle? style;
+  final FSelectStyle? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -41,11 +58,11 @@ class FSelect<T> extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// Builds a widget at the start of the select that can be pressed to toggle the popover. Defaults to no icon.
-  final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? prefixBuilder;
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? prefixBuilder;
 
   /// Builds a widget at the end of the select that can be pressed to toggle the popover. Defaults to
   /// [defaultIconBuilder].
-  final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? suffixBuilder;
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? suffixBuilder;
 
   /// The label.
   final Widget? label;
@@ -132,49 +149,111 @@ class FSelect<T> extends StatefulWidget {
   /// True if the dropdown menu should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
-  final FutureOr<Iterable<T>> Function(String) filter;
-  final WidgetBuilder loadingBuilder;
-  final List<FSelectItemMixin> Function(BuildContext, FSelectSearchData<T>) builder;
-  final WidgetBuilder searchEmptyBuilder;
-  final Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder;
+  /// The builder that is called when the select is empty. Defaults to [defaultEmptyBuilder].
+  final ValueWidgetBuilder<FSelectStyle> emptyBuilder;
+  
+  /// The content's scroll controller.
+  final ScrollController? contentScrollController;
 
-  // const FSelect({
-  //   required this.child,
-  //   this.controller,
-  //   this.style,
-  //   this.autofocus = false,
-  //   this.focusNode,
-  //   this.prefixBuilder,
-  //   this.suffixBuilder = defaultIconBuilder,
-  //   this.label,
-  //   this.description,
-  //   this.enabled = true,
-  //   this.onSaved,
-  //   this.autovalidateMode = AutovalidateMode.onUnfocus,
-  //   this.forceErrorText,
-  //   this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-  //   this.format = defaultFormat,
-  //   this.hint,
-  //   this.textAlign = TextAlign.start,
-  //   this.textAlignVertical,
-  //   this.textDirection,
-  //   this.expands = false,
-  //   this.mouseCursor = SystemMouseCursors.click,
-  //   this.canRequestFocus = true,
-  //   this.clearable = false,
-  //   this.anchor = Alignment.topLeft,
-  //   this.fieldAnchor = Alignment.bottomLeft,
-  //   this.popoverConstraints = const BoxConstraints(),
-  //   this.shift = FPortalShift.flip,
-  //   this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-  //   this.directionPadding = false,
-  //   this.autoHide = true,
-  //   super.key,
-  // });
+  /// The content's scroll handles. Defaults to true.
+  ///
+  /// Setting it to false will disable the scroll handles and show a scrollbar instead.
+  final bool contentScrollHandles;
 
-  const FSelect.search({
-    required this.filter,
-    required this.builder,
+  /// The content's scroll physics. Defaults to [ClampingScrollPhysics].
+  final ScrollPhysics contentPhysics;
+
+  /// Creates a select with a list of selectable items.
+  const factory FSelect({
+    required List<FSelectItemMixin> children,
+    FSelectController<T>? controller,
+    FSelectStyle? style,
+    bool autofocus,
+    FocusNode? focusNode,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? suffixBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled,
+    FormFieldSetter<T>? onSaved,
+    AutovalidateMode autovalidateMode,
+    String? forceErrorText,
+    Widget Function(BuildContext, String) errorBuilder,
+    String Function(T) format,
+    String? hint,
+    TextAlign textAlign,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands,
+    MouseCursor mouseCursor,
+    bool canRequestFocus,
+    bool clearable,
+    AlignmentGeometry anchor,
+    AlignmentGeometry fieldAnchor,
+    BoxConstraints popoverConstraints,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    FHidePopoverRegion hideOnTapOutside,
+    bool directionPadding,
+    bool autoHide,
+    ValueWidgetBuilder<FSelectStyle> emptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles,
+    ScrollPhysics contentPhysics,
+    Key? key,
+  }) = _BasicSelect<T>;
+
+  /// Creates a searchable select with dynamic content based on search input.
+  ///
+  /// The [searchFieldProperties] can be used to customize the search field.
+  ///
+  /// The [filter] callback produces a list of items based on the search query either synchronously or asynchronously.
+  /// The [builder] callback builds the list of items based on search results returned by [filter].
+  /// The [searchLoadingBuilder] is used to show a loading indicator while the search results is processed
+  /// asynchronously by [filter].
+  /// The [searchErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
+  const factory FSelect.search({
+    required FSelectSearchFilter<T> filter,
+    required FSelectSearchContentBuilder<T> builder,
+    FSelectSearchFieldProperties searchFieldProperties,
+    ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder,
+    Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder,
+    FSelectController<T>? controller,
+    FSelectStyle? style,
+    bool autofocus,
+    FocusNode? focusNode,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? suffixBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled,
+    FormFieldSetter<T>? onSaved,
+    AutovalidateMode autovalidateMode,
+    String? forceErrorText,
+    Widget Function(BuildContext, String) errorBuilder,
+    String Function(T) format,
+    String? hint,
+    TextAlign textAlign,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands,
+    MouseCursor mouseCursor,
+    bool canRequestFocus,
+    bool clearable,
+    AlignmentGeometry anchor,
+    AlignmentGeometry fieldAnchor,
+    BoxConstraints popoverConstraints,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    FHidePopoverRegion hideOnTapOutside,
+    bool directionPadding,
+    bool autoHide,
+    ValueWidgetBuilder<FSelectStyle> emptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles,
+    ScrollPhysics contentPhysics,
+    Key? key,
+  }) = _SearchSelect<T>;
+
+  const FSelect._({
     this.controller,
     this.style,
     this.autofocus = false,
@@ -204,14 +283,12 @@ class FSelect<T> extends StatefulWidget {
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
     this.autoHide = true,
-    this.loadingBuilder = defaultSearchLoadingBuilder,
-    this.searchEmptyBuilder = defaultSearchEmptyBuilder,
-    this.searchErrorBuilder,
+    this.emptyBuilder = defaultEmptyBuilder,
+    this.contentScrollController,
+    this.contentScrollHandles = true,
+    this.contentPhysics = const ClampingScrollPhysics(),
     super.key,
   });
-
-  @override
-  State<FSelect<T>> createState() => _State<T>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -243,11 +320,15 @@ class FSelect<T> extends StatefulWidget {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
-      ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'));
+      ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
+      ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
+      ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
+      ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles))
+      ..add(DiagnosticsProperty('contentPhysics', contentPhysics));
   }
 }
 
-class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
+abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTickerProviderStateMixin {
   final TextEditingController _textController = TextEditingController();
   late FSelectController<T> _controller;
   late FocusNode _focus;
@@ -269,7 +350,7 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
   }
 
   @override
-  void didUpdateWidget(covariant FSelect<T> old) {
+  void didUpdateWidget(covariant S old) {
     super.didUpdateWidget(old);
     // DO NOT REORDER
     if (widget.focusNode != old.focusNode) {
@@ -328,13 +409,13 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.timeFieldStyle;
+    final style = widget.style ?? context.theme.selectStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final onSaved = widget.onSaved;
     return FTextField(
       focusNode: _focus,
       controller: _textController,
-      style: style.textFieldStyle,
+      style: style.selectFieldStyle,
       textAlign: widget.textAlign,
       textAlignVertical: widget.textAlignVertical,
       textDirection: widget.textDirection,
@@ -383,7 +464,7 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
             popoverBuilder:
                 (_, _, _) => ConstrainedBox(
                   constraints: widget.popoverConstraints,
-                  child: FSelectControllerData<T>(
+                  child: SelectControllerData<T>(
                     contains: (value) => _controller.value == value,
                     onPress: (value) async {
                       if (widget.autoHide) {
@@ -392,29 +473,15 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
 
                       _controller.value = value;
                     },
-                    child: SearchContent<T>(
-                      scrollHandles: true,
-                      controller: null,
-                      style: FSelectContentStyle.inherit(
-                        colorScheme: context.theme.colorScheme,
-                        style: context.theme.style,
-                        typography: context.theme.typography,
-                      ),
-                      first: _controller.value == null,
-                      enabled: widget.enabled,
-                      physics: const ClampingScrollPhysics(),
-                      loadingBuilder: widget.loadingBuilder,
-                      filter: widget.filter,
-                      builder: widget.builder,
-                      emptyBuilder: widget.searchEmptyBuilder,
-                      errorBuilder: widget.searchErrorBuilder,
-                    ),
+                    child: content(context, style),
                   ),
                 ),
             child: child!,
           ),
     );
   }
+
+  Widget content(BuildContext context, FSelectStyle style);
 
   @override
   void dispose() {
@@ -423,4 +490,52 @@ class _State<T> extends State<FSelect<T>> with SingleTickerProviderStateMixin {
     }
     super.dispose();
   }
+}
+
+/// A [FSelect]'s style.
+class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
+  /// The select field's style.
+  @override
+  final FTextFieldStyle selectFieldStyle;
+
+  /// The select field's icon style.
+  @override
+  final FIconStyle iconStyle;
+
+  /// The popover's style.
+  @override
+  final FPopoverStyle popoverStyle;
+
+  /// The search's style.
+  @override
+  final FSelectSearchStyle searchStyle;
+
+  /// The content's style.
+  @override
+  final FSelectContentStyle contentStyle;
+
+  ///The default text style when there are no results.
+  @override
+  final TextStyle emptyTextStyle;
+
+  /// Creates a [FSelectStyle].
+  FSelectStyle({
+    required this.selectFieldStyle,
+    required this.iconStyle,
+    required this.popoverStyle,
+    required this.searchStyle,
+    required this.contentStyle,
+    required this.emptyTextStyle,
+  });
+
+  /// Creates a [FSelectStyle] that inherits from the given [colorScheme], [typography], and [style].
+  FSelectStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+    : this(
+        selectFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+        popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
+        searchStyle: FSelectSearchStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        contentStyle: FSelectContentStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
+        emptyTextStyle: typography.sm,
+      );
 }

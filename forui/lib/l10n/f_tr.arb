@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Temizle",
   "selectHint": "Bir öğe seçin",
   "selectSearchHint": "Ara",
-  "selectSearchNoResults": "Eşleşen sonuç yok."
+  "selectNoResults": "Eşleşen sonuç yok."
 }

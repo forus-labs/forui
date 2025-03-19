@@ -63,7 +63,7 @@ class FLocalizationsHu extends FLocalizations {
   String get selectSearchHint => 'Keresés';
 
   @override
-  String get selectSearchNoResults => 'Nincs megfelelő találat.';
+  String get selectNoResults => 'Nincs megfelelő találat.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Törlés';

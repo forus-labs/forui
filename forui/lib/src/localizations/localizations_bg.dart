@@ -63,7 +63,7 @@ class FLocalizationsBg extends FLocalizations {
   String get selectSearchHint => 'Търсене';
 
   @override
-  String get selectSearchNoResults => 'Няма съвпадащи резултати.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Изчистване';

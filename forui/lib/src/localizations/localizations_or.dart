@@ -63,7 +63,7 @@ class FLocalizationsOr extends FLocalizations {
   String get selectSearchHint => 'ସନ୍ଧାନ କରନ୍ତୁ';
 
   @override
-  String get selectSearchNoResults => 'କୌଣସି ମେଳଖାଉଥିବା ଫଳାଫଳ ନାହିଁ।';
+  String get selectNoResults => 'କୌଣସି ମେଳଖାଉଥିବା ଫଳାଫଳ ନାହିଁ।';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'ସଫା କରନ୍ତୁ';

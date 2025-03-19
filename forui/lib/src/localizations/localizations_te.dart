@@ -63,7 +63,7 @@ class FLocalizationsTe extends FLocalizations {
   String get selectSearchHint => 'శోధించు';
 
   @override
-  String get selectSearchNoResults => 'సరిపోలే ఫలితాలు లేవు.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'క్లియర్ చేయి';

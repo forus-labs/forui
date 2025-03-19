@@ -63,7 +63,7 @@ class FLocalizationsNl extends FLocalizations {
   String get selectSearchHint => 'Zoeken';
 
   @override
-  String get selectSearchNoResults => 'Geen overeenkomende resultaten.';
+  String get selectNoResults => 'Geen overeenkomende resultaten.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Wissen';

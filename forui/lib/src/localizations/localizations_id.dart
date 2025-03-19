@@ -63,7 +63,7 @@ class FLocalizationsId extends FLocalizations {
   String get selectSearchHint => 'Cari';
 
   @override
-  String get selectSearchNoResults => 'Tidak ada hasil yang cocok.';
+  String get selectNoResults => 'Tidak ada hasil yang cocok.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Hapus';

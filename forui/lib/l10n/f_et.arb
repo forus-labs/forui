@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Kustuta",
   "selectHint": "Valige üksus",
   "selectSearchHint": "Otsi",
-  "selectSearchNoResults": "Sobivaid tulemusi pole."
+  "selectNoResults": "Sobivaid tulemusi pole."
 }

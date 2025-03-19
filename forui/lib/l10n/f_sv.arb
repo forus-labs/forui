@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Rensa",
   "selectHint": "Välj ett objekt",
   "selectSearchHint": "Sök",
-  "selectSearchNoResults": "Inga matchande resultat."
+  "selectNoResults": "Inga matchande resultat."
 }

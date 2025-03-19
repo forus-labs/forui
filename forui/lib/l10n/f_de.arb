@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Löschen",
   "selectHint": "Wählen Sie ein Element",
   "selectSearchHint": "Suchen",
-  "selectSearchNoResults": "Keine übereinstimmenden Ergebnisse."
+  "selectNoResults": "Keine übereinstimmenden Ergebnisse."
 }

@@ -63,7 +63,7 @@ class FLocalizationsEn extends FLocalizations {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -121,7 +121,7 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -179,7 +179,7 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -237,7 +237,7 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -295,7 +295,7 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -353,7 +353,7 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -411,7 +411,7 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -469,7 +469,7 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';
@@ -527,7 +527,7 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectSearchNoResults => 'No matching results.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clear';

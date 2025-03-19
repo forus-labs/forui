@@ -63,7 +63,7 @@ class FLocalizationsLo extends FLocalizations {
   String get selectSearchHint => 'ຊອກຫາ';
 
   @override
-  String get selectSearchNoResults => 'ບໍ່ມີຜົນການຊອກຫາທີ່ກົງກັນ.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'ລຶບ';

@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "清除",
   "selectHint": "选择项目",
   "selectSearchHint": "搜索",
-  "selectSearchNoResults": "没有匹配结果。"
+  "selectNoResults": "没有匹配结果。"
 }

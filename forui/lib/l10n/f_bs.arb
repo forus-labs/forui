@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Očisti",
   "selectHint": "Odaberite stavku",
   "selectSearchHint": "Pretraga",
-  "selectSearchNoResults": "Nema odgovarajućih rezultata."
+  "selectNoResults": "Nema odgovarajućih rezultata."
 }

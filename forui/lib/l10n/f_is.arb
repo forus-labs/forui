@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Hreinsa",
   "selectHint": "Veldu atriði",
   "selectSearchHint": "Leita",
-  "selectSearchNoResults": "Engar samsvarandi niðurstöður."
+  "selectNoResults": "Engar samsvarandi niðurstöður."
 }

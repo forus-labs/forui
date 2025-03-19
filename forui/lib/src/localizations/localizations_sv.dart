@@ -63,7 +63,7 @@ class FLocalizationsSv extends FLocalizations {
   String get selectSearchHint => 'Sök';
 
   @override
-  String get selectSearchNoResults => 'Inga matchande resultat.';
+  String get selectNoResults => 'Inga matchande resultat.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Rensa';

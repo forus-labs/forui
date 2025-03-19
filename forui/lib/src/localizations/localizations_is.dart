@@ -63,7 +63,7 @@ class FLocalizationsIs extends FLocalizations {
   String get selectSearchHint => 'Leita';
 
   @override
-  String get selectSearchNoResults => 'Engar samsvarandi niðurstöður.';
+  String get selectNoResults => 'Engar samsvarandi niðurstöður.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Hreinsa';

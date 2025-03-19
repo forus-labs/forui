@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "মুছুন",
   "selectHint": "একটি আইটেম নির্বাচন করুন",
   "selectSearchHint": "অনুসন্ধান",
-  "selectSearchNoResults": "কোন মিলে যাওয়া ফলাফল নেই।"
+  "selectNoResults": "কোন মিলে যাওয়া ফলাফল নেই।"
 }

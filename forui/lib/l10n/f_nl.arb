@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Wissen",
   "selectHint": "Selecteer een item",
   "selectSearchHint": "Zoeken",
-  "selectSearchNoResults": "Geen overeenkomende resultaten."
+  "selectNoResults": "Geen overeenkomende resultaten."
 }

@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "សម្អាត",
   "selectHint": "ជ្រើសរើសធាតុមួយ",
   "selectSearchHint": "ស្វែងរក",
-  "selectSearchNoResults": "គ្មានលទ្ធផលដែលត្រូវគ្នាទេ។"
+  "selectNoResults": "គ្មានលទ្ធផលដែលត្រូវគ្នាទេ។"
 }

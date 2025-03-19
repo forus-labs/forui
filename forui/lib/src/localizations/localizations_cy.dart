@@ -63,7 +63,7 @@ class FLocalizationsCy extends FLocalizations {
   String get selectSearchHint => 'Chwilio';
 
   @override
-  String get selectSearchNoResults => 'Dim canlyniadau cyfatebol.';
+  String get selectNoResults => 'Dim canlyniadau cyfatebol.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Clirio';

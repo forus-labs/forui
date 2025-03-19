@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "মচক",
   "selectHint": "এটা বস্তু বাছনি কৰক",
   "selectSearchHint": "সন্ধান কৰক",
-  "selectSearchNoResults": "কোনো মিল থকা ফলাফল নাই।"
+  "selectNoResults": "কোনো মিল থকা ফলাফল নাই।"
 }

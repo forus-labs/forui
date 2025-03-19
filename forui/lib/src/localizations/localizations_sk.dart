@@ -63,7 +63,7 @@ class FLocalizationsSk extends FLocalizations {
   String get selectSearchHint => 'Hľadať';
 
   @override
-  String get selectSearchNoResults => 'Žiadne zodpovedajúce výsledky.';
+  String get selectNoResults => 'Žiadne zodpovedajúce výsledky.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Vymazať';

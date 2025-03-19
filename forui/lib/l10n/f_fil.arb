@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "I-clear",
   "selectHint": "Pumili ng item",
   "selectSearchHint": "Maghanap",
-  "selectSearchNoResults": "Walang mga tumutugmang resulta."
+  "selectNoResults": "Walang mga tumutugmang resulta."
 }

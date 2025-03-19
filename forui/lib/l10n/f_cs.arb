@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Vymazat",
   "selectHint": "Vyberte položku",
   "selectSearchHint": "Hledat",
-  "selectSearchNoResults": "Žádné odpovídající výsledky."
+  "selectNoResults": "Žádné odpovídající výsledky."
 }

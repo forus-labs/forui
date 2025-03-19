@@ -63,7 +63,7 @@ class FLocalizationsUz extends FLocalizations {
   String get selectSearchHint => 'Qidirish';
 
   @override
-  String get selectSearchNoResults => 'Mos keladigan natijalar yo\'q.';
+  String get selectNoResults => 'Mos keladigan natijalar yo\'q.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Tozalash';

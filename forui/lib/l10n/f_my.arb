@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "ရှင်းရန်",
   "selectHint": "ပစ္စည်းတစ်ခုရွေးပါ",
   "selectSearchHint": "ရှာဖွေရန်",
-  "selectSearchNoResults": "တူညီသည့်ရလဒ်များမရှိပါ။"
+  "selectNoResults": "တူညီသည့်ရလဒ်များမရှိပါ။"
 }

@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Vee uit",
   "selectHint": "Kies 'n item",
   "selectSearchHint": "Soek",
-  "selectSearchNoResults": "Geen passende resultate nie."
+  "selectNoResults": "Geen passende resultate nie."
 }

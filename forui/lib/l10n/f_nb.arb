@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Tøm",
   "selectHint": "Velg et element",
   "selectSearchHint": "Søk",
-  "selectSearchNoResults": "Ingen samsvarende resultater."
+  "selectNoResults": "Ingen samsvarende resultater."
 }

@@ -63,7 +63,7 @@ class FLocalizationsFr extends FLocalizations {
   String get selectSearchHint => 'Rechercher';
 
   @override
-  String get selectSearchNoResults => 'Aucun résultat correspondant.';
+  String get selectNoResults => 'Aucun résultat correspondant.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Effacer';
@@ -121,7 +121,7 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get selectSearchHint => 'Rechercher';
 
   @override
-  String get selectSearchNoResults => 'Aucun résultat correspondant.';
+  String get selectNoResults => 'Aucun résultat correspondant.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Effacer';

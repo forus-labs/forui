@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Lösche",
   "selectHint": "Wähle e Element",
   "selectSearchHint": "Sueche",
-  "selectSearchNoResults": "Kei passendi Ergebnis."
+  "selectNoResults": "Kei passendi Ergebnis."
 }

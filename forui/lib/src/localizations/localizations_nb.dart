@@ -63,7 +63,7 @@ class FLocalizationsNb extends FLocalizations {
   String get selectSearchHint => 'Søk';
 
   @override
-  String get selectSearchNoResults => 'Ingen samsvarende resultater.';
+  String get selectNoResults => 'Ingen samsvarende resultater.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Tøm';

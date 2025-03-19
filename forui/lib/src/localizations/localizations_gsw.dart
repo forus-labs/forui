@@ -63,7 +63,7 @@ class FLocalizationsGsw extends FLocalizations {
   String get selectSearchHint => 'Sueche';
 
   @override
-  String get selectSearchNoResults => 'Kei passendi Ergebnis.';
+  String get selectNoResults => 'Kei passendi Ergebnis.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Lösche';

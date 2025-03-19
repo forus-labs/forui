@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Ryd",
   "selectHint": "Vælg et element",
   "selectSearchHint": "Søg",
-  "selectSearchNoResults": "Ingen matchende resultater."
+  "selectNoResults": "Ingen matchende resultater."
 }

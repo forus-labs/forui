@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Təmizlə",
   "selectHint": "Element seçin",
   "selectSearchHint": "Axtarış",
-  "selectSearchNoResults": "Uyğun nəticə tapılmadı."
+  "selectNoResults": "Uyğun nəticə tapılmadı."
 }

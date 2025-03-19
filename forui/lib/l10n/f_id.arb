@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Hapus",
   "selectHint": "Pilih item",
   "selectSearchHint": "Cari",
-  "selectSearchNoResults": "Tidak ada hasil yang cocok."
+  "selectNoResults": "Tidak ada hasil yang cocok."
 }

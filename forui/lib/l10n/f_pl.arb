@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Wyczyść",
   "selectHint": "Wybierz element",
   "selectSearchHint": "Szukaj",
-  "selectSearchNoResults": "Brak pasujących wyników."
+  "selectNoResults": "Brak pasujących wyników."
 }

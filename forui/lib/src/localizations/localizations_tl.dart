@@ -63,7 +63,7 @@ class FLocalizationsTl extends FLocalizations {
   String get selectSearchHint => 'Maghanap';
 
   @override
-  String get selectSearchNoResults => 'Walang mga tumutugmang resulta.';
+  String get selectNoResults => 'Walang mga tumutugmang resulta.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'I-clear';

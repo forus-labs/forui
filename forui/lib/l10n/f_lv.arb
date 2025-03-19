@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Notīrīt",
   "selectHint": "Atlasiet vienumu",
   "selectSearchHint": "Meklēt",
-  "selectSearchNoResults": "Nav atbilstošu rezultātu."
+  "selectNoResults": "Nav atbilstošu rezultātu."
 }

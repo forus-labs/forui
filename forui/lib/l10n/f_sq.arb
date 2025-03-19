@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Pastro",
   "selectHint": "Zgjidhni një artikull",
   "selectSearchHint": "Kërko",
-  "selectSearchNoResults": "Nuk ka rezultate përputhëse."
+  "selectNoResults": "Nuk ka rezultate përputhëse."
 }

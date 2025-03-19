@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Effacer",
   "selectHint": "Sélectionnez un élément",
   "selectSearchHint": "Rechercher",
-  "selectSearchNoResults": "Aucun résultat correspondant."
+  "selectNoResults": "Aucun résultat correspondant."
 }

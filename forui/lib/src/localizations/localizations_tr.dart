@@ -63,7 +63,7 @@ class FLocalizationsTr extends FLocalizations {
   String get selectSearchHint => 'Ara';
 
   @override
-  String get selectSearchNoResults => 'Eşleşen sonuç yok.';
+  String get selectNoResults => 'Eşleşen sonuç yok.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Temizle';

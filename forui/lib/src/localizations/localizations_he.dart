@@ -63,7 +63,7 @@ class FLocalizationsHe extends FLocalizations {
   String get selectSearchHint => 'חיפוש';
 
   @override
-  String get selectSearchNoResults => 'אין תוצאות תואמות.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'ניקוי';

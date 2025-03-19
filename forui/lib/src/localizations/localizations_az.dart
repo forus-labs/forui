@@ -63,7 +63,7 @@ class FLocalizationsAz extends FLocalizations {
   String get selectSearchHint => 'Axtarış';
 
   @override
-  String get selectSearchNoResults => 'Uyğun nəticə tapılmadı.';
+  String get selectNoResults => 'Uyğun nəticə tapılmadı.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Təmizlə';

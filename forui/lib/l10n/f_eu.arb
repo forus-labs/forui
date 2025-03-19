@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Garbitu",
   "selectHint": "Hautatu elementu bat",
   "selectSearchHint": "Bilatu",
-  "selectSearchNoResults": "Ez dago bat datorren emaitzarik."
+  "selectNoResults": "Ez dago bat datorren emaitzarik."
 }

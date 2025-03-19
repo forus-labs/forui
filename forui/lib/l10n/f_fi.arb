@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Tyhjennä",
   "selectHint": "Valitse kohde",
   "selectSearchHint": "Haku",
-  "selectSearchNoResults": "Ei vastaavia tuloksia."
+  "selectNoResults": "Ei vastaavia tuloksia."
 }

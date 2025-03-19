@@ -63,7 +63,7 @@ class FLocalizationsAs extends FLocalizations {
   String get selectSearchHint => 'সন্ধান কৰক';
 
   @override
-  String get selectSearchNoResults => 'কোনো মিল থকা ফলাফল নাই।';
+  String get selectNoResults => 'কোনো মিল থকা ফলাফল নাই।';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'মচক';

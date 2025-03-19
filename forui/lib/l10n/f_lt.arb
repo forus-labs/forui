@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Išvalyti",
   "selectHint": "Pasirinkite elementą",
   "selectSearchHint": "Ieškoti",
-  "selectSearchNoResults": "Jokių atitinkančių rezultatų."
+  "selectNoResults": "Jokių atitinkančių rezultatų."
 }

@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Clirio",
   "selectHint": "Dewiswch eitem",
   "selectSearchHint": "Chwilio",
-  "selectSearchNoResults": "Dim canlyniadau cyfatebol."
+  "selectNoResults": "Dim canlyniadau cyfatebol."
 }

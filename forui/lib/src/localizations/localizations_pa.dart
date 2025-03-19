@@ -63,7 +63,7 @@ class FLocalizationsPa extends FLocalizations {
   String get selectSearchHint => 'ਖੋਜ';
 
   @override
-  String get selectSearchNoResults => 'ਕੋਈ ਮੇਲ ਖਾਂਦੇ ਨਤੀਜੇ ਨਹੀਂ ਹਨ।';
+  String get selectNoResults => 'ਕੋਈ ਮੇਲ ਖਾਂਦੇ ਨਤੀਜੇ ਨਹੀਂ ਹਨ।';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'ਕਲੀਅਰ ਕਰੋ';

@@ -63,7 +63,7 @@ class FLocalizationsSq extends FLocalizations {
   String get selectSearchHint => 'Kërko';
 
   @override
-  String get selectSearchNoResults => 'Nuk ka rezultate përputhëse.';
+  String get selectNoResults => 'Nuk ka rezultate përputhëse.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Pastro';

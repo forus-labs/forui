@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Futa",
   "selectHint": "Chagua kipengee",
   "selectSearchHint": "Tafuta",
-  "selectSearchNoResults": "Hakuna matokeo yanayolingana."
+  "selectNoResults": "Hakuna matokeo yanayolingana."
 }

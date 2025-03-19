@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Ștergeți",
   "selectHint": "Selectați un element",
   "selectSearchHint": "Căutare",
-  "selectSearchNoResults": "Niciun rezultat care să se potrivească."
+  "selectNoResults": "Niciun rezultat care să se potrivească."
 }

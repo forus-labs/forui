@@ -15,5 +15,5 @@
   "textFieldClearButtonSemanticLabel": "Törlés",
   "selectHint": "Válasszon egy elemet",
   "selectSearchHint": "Keresés",
-  "selectSearchNoResults": "Nincs megfelelő találat."
+  "selectNoResults": "Nincs megfelelő találat."
 }

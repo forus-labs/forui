@@ -63,7 +63,7 @@ class FLocalizationsEu extends FLocalizations {
   String get selectSearchHint => 'Bilatu';
 
   @override
-  String get selectSearchNoResults => 'Ez dago bat datorren emaitzarik.';
+  String get selectNoResults => 'Ez dago bat datorren emaitzarik.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Garbitu';

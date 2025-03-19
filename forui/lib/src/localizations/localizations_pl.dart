@@ -63,7 +63,7 @@ class FLocalizationsPl extends FLocalizations {
   String get selectSearchHint => 'Szukaj';
 
   @override
-  String get selectSearchNoResults => 'Brak pasujących wyników.';
+  String get selectNoResults => 'Brak pasujących wyników.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'Wyczyść';

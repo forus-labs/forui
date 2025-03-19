@@ -63,7 +63,7 @@ class FLocalizationsTa extends FLocalizations {
   String get selectSearchHint => 'தேடு';
 
   @override
-  String get selectSearchNoResults => 'பொருந்தும் முடிவுகள் இல்லை.';
+  String get selectNoResults => 'No matching results.';
 
   @override
   String get textFieldClearButtonSemanticLabel => 'அழி';
