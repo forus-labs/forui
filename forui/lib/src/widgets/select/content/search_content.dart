@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:meta/meta.dart';
@@ -72,6 +73,7 @@ class SearchContent<T> extends StatefulWidget {
 
 class _SearchContentState<T> extends State<SearchContent<T>> {
   final TextEditingController _textController = TextEditingController();
+  final FocusNode _focus = FocusNode();
   late String _previous;
   late FutureOr<FSelectSearchData<T>> _data;
 
@@ -106,59 +108,65 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        FTextField(
-          controller: _textController,
-          style: widget.style.searchStyle.textFieldStyle,
-          hint: widget.properties.hint ?? localizations.selectSearchHint,
-          magnifierConfiguration: widget.properties.magnifierConfiguration,
-          keyboardType: widget.properties.keyboardType,
-          textInputAction: widget.properties.textInputAction,
-          textCapitalization: widget.properties.textCapitalization,
-          textAlign: widget.properties.textAlign,
-          textAlignVertical: widget.properties.textAlignVertical,
-          textDirection: widget.properties.textDirection,
-          autofocus: widget.properties.autofocus,
-          autocorrect: widget.properties.autocorrect,
-          smartDashesType: widget.properties.smartDashesType,
-          smartQuotesType: widget.properties.smartQuotesType,
-          enableSuggestions: widget.properties.enableSuggestions,
-          minLines: widget.properties.minLines,
-          maxLines: widget.properties.maxLines,
-          readOnly: widget.properties.readOnly,
-          showCursor: widget.properties.showCursor,
-          maxLength: widget.properties.maxLength,
-          maxLengthEnforcement: widget.properties.maxLengthEnforcement,
-          onChange: widget.properties.onChange,
-          onTap: widget.properties.onTap,
-          onTapAlwaysCalled: widget.properties.onTapAlwaysCalled,
-          onEditingComplete: widget.properties.onEditingComplete,
-          onSubmit: widget.properties.onSubmit,
-          inputFormatters: widget.properties.inputFormatters,
-          enabled: widget.properties.enabled,
-          ignorePointers: widget.properties.ignorePointers,
-          enableInteractiveSelection: widget.properties.enableInteractiveSelection,
-          selectionControls: widget.properties.selectionControls,
-          dragStartBehavior: widget.properties.dragStartBehavior,
-          mouseCursor: widget.properties.mouseCursor,
-          scrollPhysics: widget.properties.scrollPhysics,
-          scrollController: widget.properties.scrollController,
-          autofillHints: widget.properties.autofillHints,
-          restorationId: widget.properties.restorationId,
-          stylusHandwritingEnabled: widget.properties.stylusHandwritingEnabled,
-          enableIMEPersonalizedLearning: widget.properties.enableIMEPersonalizedLearning,
-          contentInsertionConfiguration: widget.properties.contentInsertionConfiguration,
-          contextMenuBuilder: widget.properties.contextMenuBuilder,
-          undoController: widget.properties.undoController,
-          spellCheckConfiguration: widget.properties.spellCheckConfiguration,
-          prefixBuilder:
-              prefix == null
-                  ? null
-                  : (context, style, child) => prefix(context, (widget.style.searchStyle, style), child),
-          suffixBuilder:
-              suffix == null
-                  ? null
-                  : (context, style, child) => suffix(context, (widget.style.searchStyle, style), child),
-          clearable: widget.properties.clearable,
+        CallbackShortcuts(
+          bindings: {
+            const SingleActivator(LogicalKeyboardKey.enter): _focus.nextFocus,
+          },
+          child: FTextField(
+            controller: _textController,
+            focusNode: _focus,
+            style: widget.style.searchStyle.textFieldStyle,
+            hint: widget.properties.hint ?? localizations.selectSearchHint,
+            magnifierConfiguration: widget.properties.magnifierConfiguration,
+            keyboardType: widget.properties.keyboardType,
+            textInputAction: widget.properties.textInputAction,
+            textCapitalization: widget.properties.textCapitalization,
+            textAlign: widget.properties.textAlign,
+            textAlignVertical: widget.properties.textAlignVertical,
+            textDirection: widget.properties.textDirection,
+            autofocus: widget.properties.autofocus,
+            autocorrect: widget.properties.autocorrect,
+            smartDashesType: widget.properties.smartDashesType,
+            smartQuotesType: widget.properties.smartQuotesType,
+            enableSuggestions: widget.properties.enableSuggestions,
+            minLines: widget.properties.minLines,
+            maxLines: widget.properties.maxLines,
+            readOnly: widget.properties.readOnly,
+            showCursor: widget.properties.showCursor,
+            maxLength: widget.properties.maxLength,
+            maxLengthEnforcement: widget.properties.maxLengthEnforcement,
+            onChange: widget.properties.onChange,
+            onTap: widget.properties.onTap,
+            onTapAlwaysCalled: widget.properties.onTapAlwaysCalled,
+            onEditingComplete: widget.properties.onEditingComplete,
+            onSubmit: widget.properties.onSubmit,
+            inputFormatters: widget.properties.inputFormatters,
+            enabled: widget.properties.enabled,
+            ignorePointers: widget.properties.ignorePointers,
+            enableInteractiveSelection: widget.properties.enableInteractiveSelection,
+            selectionControls: widget.properties.selectionControls,
+            dragStartBehavior: widget.properties.dragStartBehavior,
+            mouseCursor: widget.properties.mouseCursor,
+            scrollPhysics: widget.properties.scrollPhysics,
+            scrollController: widget.properties.scrollController,
+            autofillHints: widget.properties.autofillHints,
+            restorationId: widget.properties.restorationId,
+            stylusHandwritingEnabled: widget.properties.stylusHandwritingEnabled,
+            enableIMEPersonalizedLearning: widget.properties.enableIMEPersonalizedLearning,
+            contentInsertionConfiguration: widget.properties.contentInsertionConfiguration,
+            contextMenuBuilder: widget.properties.contextMenuBuilder,
+            undoController: widget.properties.undoController,
+            spellCheckConfiguration: widget.properties.spellCheckConfiguration,
+            prefixBuilder:
+                prefix == null
+                    ? null
+                    : (context, style, child) => prefix(context, (widget.style.searchStyle, style), child),
+            suffixBuilder:
+                suffix == null
+                    ? null
+                    : (context, style, child) => suffix(context, (widget.style.searchStyle, style), child),
+            clearable: widget.properties.clearable,
+          ),
         ),
         FDivider(style: widget.style.searchStyle.dividerStyle),
         switch (_data) {
@@ -193,7 +201,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       child: Content<T>(
         controller: widget.controller,
         style: widget.style.contentStyle,
-        first: widget.first,
+        first: true,
         enabled: widget.enabled,
         scrollHandles: widget.scrollHandles,
         physics: widget.physics,
@@ -204,6 +212,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
 
   @override
   void dispose() {
+    _focus.dispose();
     _textController.dispose();
     super.dispose();
   }

@@ -142,7 +142,7 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
 }
 
 class _FSelectItemState<T> extends State<FSelectItem<T>> {
-  final _focus = FocusNode();
+  late final _focus = FocusNode(debugLabel: widget.value.toString());
 
   @override
   void initState() {
@@ -194,8 +194,11 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
         onEnter: (_) => _focus.requestFocus(),
         onExit: (_) => _focus.unfocus(),
         child: FTappable(
+          style: style.tappableStyle,
           autofocus: selected || content.first,
           focusNode: _focus,
+          onFocusChange: (f) {
+          },
           behavior: HitTestBehavior.opaque,
           onPress: () => onPress(widget.value),
           builder: (context, data, child) {
@@ -246,6 +249,10 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   @override
   final FIconStyle disabledIconStyle;
 
+  /// The tappable style for the item.
+  @override
+  final FTappableStyle tappableStyle;
+
   /// Creates a [FSelectItemStyle].
   FSelectItemStyle({
     required this.enabledHoveredDecoration,
@@ -253,6 +260,7 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
     required this.disabledTextStyle,
     required this.enabledIconStyle,
     required this.disabledIconStyle,
+    required this.tappableStyle,
     this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
 
@@ -264,5 +272,6 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
         disabledTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.primary)),
         enabledIconStyle: FIconStyle(color: colorScheme.primary, size: 15),
         disabledIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.primary), size: 15),
+        tappableStyle: FTappableStyle(animationTween: FTappableAnimations.none),
       );
 }

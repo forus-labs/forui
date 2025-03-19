@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
@@ -7,6 +8,7 @@ import 'package:forui/src/widgets/select/select_controller.dart';
 import 'package:meta/meta.dart';
 
 part 'basic_select.dart';
+
 part 'search_select.dart';
 
 part 'select.style.dart';
@@ -134,7 +136,7 @@ abstract class FSelect<T> extends StatefulWidget {
   /// The alignment point on the select's field. Defaults to [Alignment.bottomLeft].
   final AlignmentGeometry fieldAnchor;
 
-  /// The constraints to apply to the popover. Defaults to `BoxConstraints()`.
+  /// The constraints to apply to the popover. Defaults to `const BoxConstraints(maxWidth: 200, maxHeight: 300)`.
   final BoxConstraints popoverConstraints;
 
   /// {@macro forui.widgets.FPopover.shift}
@@ -151,7 +153,7 @@ abstract class FSelect<T> extends StatefulWidget {
 
   /// The builder that is called when the select is empty. Defaults to [defaultEmptyBuilder].
   final ValueWidgetBuilder<FSelectStyle> emptyBuilder;
-  
+
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
 
@@ -278,7 +280,7 @@ abstract class FSelect<T> extends StatefulWidget {
     this.clearable = false,
     this.anchor = Alignment.topLeft,
     this.fieldAnchor = Alignment.bottomLeft,
-    this.popoverConstraints = const BoxConstraints(),
+    this.popoverConstraints = const BoxConstraints(maxWidth: 200, maxHeight: 300),
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
@@ -422,10 +424,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       expands: widget.expands,
       mouseCursor: widget.mouseCursor,
       canRequestFocus: widget.canRequestFocus,
-      onTap: () {
-        _focus.unfocus();
-        _controller.popover.toggle();
-      },
+      onTap: _show,
       hint: widget.hint ?? localizations.selectHint,
       readOnly: true,
       enableInteractiveSelection: false,
@@ -476,12 +475,23 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
                     child: content(context, style),
                   ),
                 ),
-            child: child!,
+            child: CallbackShortcuts(
+              bindings: {
+                const SingleActivator(LogicalKeyboardKey.enter): _show,
+                const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
+              },
+              child: child!,
+            ),
           ),
     );
   }
 
   Widget content(BuildContext context, FSelectStyle style);
+
+  void _show() {
+    _focus.unfocus();
+    _controller.popover.toggle();
+  }
 
   @override
   void dispose() {
