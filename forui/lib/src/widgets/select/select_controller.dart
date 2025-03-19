@@ -4,20 +4,23 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
 @internal
-class FSelectControllerData<T> extends InheritedWidget {
+class SelectControllerData<T> extends InheritedWidget {
   final bool Function(T) contains;
   final ValueChanged<T> onPress;
 
-  const FSelectControllerData({required this.contains, required this.onPress, required super.child, super.key});
+  const SelectControllerData({required this.contains, required this.onPress, required super.child, super.key});
 
-  static FSelectControllerData<T> of<T>(BuildContext context) {
-    final FSelectControllerData<T>? result = context.dependOnInheritedWidgetOfExactType<FSelectControllerData<T>>();
-    assert(result != null, 'No FSelectData found in context');
+  static SelectControllerData<T> of<T>(BuildContext context) {
+    final SelectControllerData<T>? result = context.dependOnInheritedWidgetOfExactType<SelectControllerData<T>>();
+    assert(
+      result != null,
+      "No SelectControllerData found in context. Try explicitly specifying FSelect's type parameter, i.e. FSelect<String>.",
+    );
     return result!;
   }
 
   @override
-  bool updateShouldNotify(FSelectControllerData<T> old) => contains != old.contains || onPress != old.onPress;
+  bool updateShouldNotify(SelectControllerData<T> old) => contains != old.contains || onPress != old.onPress;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

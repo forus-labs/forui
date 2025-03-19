@@ -32,11 +32,11 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 
   @override
   Widget build(BuildContext context) {
-    final content = FSelectContentData.of<T>(context);
+    final content = SelectContentData.of<T>(context);
     final enabled = this.enabled ?? content.enabled;
     final style = this.style ?? content.style;
 
-    return FSelectContentData<T>(
+    return SelectContentData<T>(
       style: style,
       enabled: enabled,
       first: false,
@@ -47,7 +47,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
         children: [
           DefaultTextStyle(style: style.titleTextStyle, child: Padding(padding: style.titlePadding, child: title)),
           if (children.firstOrNull case final first?)
-            FSelectContentData<T>(
+            SelectContentData<T>(
               style: style,
               first: content.first,
               enabled: enabled,
@@ -153,8 +153,8 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
         return;
       }
 
-      final FSelectControllerData(:contains, :onPress) = FSelectControllerData.of<T>(context);
-      final content = FSelectContentData.of<T>(context);
+      final SelectControllerData(:contains, :onPress) = SelectControllerData.of<T>(context);
+      final content = SelectContentData.of<T>(context);
       if (contains(widget.value)) {
         content.ensureVisible(context);
       }
@@ -163,8 +163,8 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectControllerData(:contains, :onPress) = FSelectControllerData.of<T>(context);
-    final content = FSelectContentData.of<T>(context);
+    final SelectControllerData(:contains, :onPress) = SelectControllerData.of<T>(context);
+    final content = SelectContentData.of<T>(context);
 
     final selected = contains(widget.value);
     final enabled = widget.enabled ?? content.enabled;

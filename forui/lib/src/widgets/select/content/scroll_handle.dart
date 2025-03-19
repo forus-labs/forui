@@ -35,30 +35,46 @@ class ScrollHandle extends StatefulWidget {
 }
 
 class _ScrollHandleState extends State<ScrollHandle> {
+  bool _hovered = false;
   int _monotonic = 0;
-
-  // TODO: We don't handle pressing yet!
+  
   @override
-  Widget build(BuildContext context) => Align(
+  Widget build(BuildContext context) {
+    final scroll = widget.alignment == Alignment.topCenter ? _up : _down;
+    return Align(
     alignment: widget.alignment,
     child: MouseRegion(
-      onEnter: (_) => widget.alignment == Alignment.topCenter ? _up() : _down(),
+      onEnter: (_) {
+        _hovered = true;
+        scroll();
+      },
       onExit: (_) {
+        _hovered = false;
         _monotonic++;
         widget.controller.jumpTo(widget.controller.offset);
       },
-      child: Padding(
-        padding: const EdgeInsets.all(3),
-        child: SizedBox(
-          width: double.infinity,
-          child: ColoredBox(
-            color: widget.style.background,
-            child: FIcon(widget.icon, color: widget.style.color, size: widget.style.size),
+      child: Listener(
+        onPointerDown: (_) => scroll(),
+        onPointerUp: (_) {
+          _monotonic++;
+          if (!_hovered) {
+            widget.controller.jumpTo(widget.controller.offset);
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(3),
+          child: SizedBox(
+            width: double.infinity,
+            child: ColoredBox(
+              color: widget.style.background,
+              child: FIcon(widget.icon, color: widget.style.color, size: widget.style.size),
+            ),
           ),
         ),
       ),
     ),
   );
+  }
 
   Future<void> _up() async {
     final current = _monotonic;
@@ -105,7 +121,7 @@ class _ScrollHandleState extends State<ScrollHandle> {
   }
 }
 
-/// An [FSelect] content scroll handle's style.
+/// A [FSelect] content scroll handle's style.
 class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFunctions {
   /// The handle icon's color.
   @override

@@ -7,13 +7,13 @@ import 'package:meta/meta.dart';
 part 'content.style.dart';
 
 @internal
-class FSelectContentData<T> extends InheritedWidget {
+class SelectContentData<T> extends InheritedWidget {
   final FSelectSectionStyle style;
   final bool enabled;
   final bool first;
   final ValueChanged<BuildContext> ensureVisible;
 
-  const FSelectContentData({
+  const SelectContentData({
     required this.style,
     required this.enabled,
     required this.first,
@@ -22,14 +22,17 @@ class FSelectContentData<T> extends InheritedWidget {
     super.key,
   });
 
-  static FSelectContentData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FSelectContentData<T>>();
-    assert(result != null, 'No FSelectContentData found in context');
+  static SelectContentData<T> of<T>(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<SelectContentData<T>>();
+    assert(
+      result != null,
+      "No SelectContentData found in context. Try explicitly specifying FSelect's type parameter, i.e. FSelect<String>.",
+    );
     return result!;
   }
 
   @override
-  bool updateShouldNotify(FSelectContentData<T> old) =>
+  bool updateShouldNotify(SelectContentData<T> old) =>
       style != old.style || first != old.first || enabled != old.enabled || ensureVisible != old.ensureVisible;
 
   @override
@@ -122,7 +125,7 @@ class _ContentState<T> extends State<Content<T>> {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = FSelectContentData<T>(
+    Widget content = SelectContentData<T>(
       style: widget.style.sectionStyle,
       first: false,
       enabled: widget.enabled,
@@ -136,7 +139,7 @@ class _ContentState<T> extends State<Content<T>> {
           shrinkWrap: true,
           children: [
             if (widget.children.firstOrNull case final first?)
-              FSelectContentData<T>(
+              SelectContentData<T>(
                 style: widget.style.sectionStyle,
                 first: widget.first,
                 enabled: widget.enabled,
@@ -196,7 +199,7 @@ class _ContentState<T> extends State<Content<T>> {
   }
 }
 
-/// A [FSelectContentStyle]'s style.
+/// An [FSelect]'s contents style.
 class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   /// A section's style.
   @override
