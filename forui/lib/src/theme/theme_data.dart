@@ -93,7 +93,7 @@ final class FThemeData with Diagnosticable, FTransformable {
   final FPopoverMenuStyle popoverMenuStyle;
 
   /// The progress styles.
-  final FProgressStyle progressStyle;
+  final FProgressStyles progressStyles;
 
   /// The radio style.
   final FRadioStyle radioStyle;
@@ -167,7 +167,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
-    FProgressStyle? progressStyle,
+    FProgressStyles? progressStyles,
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
     FScaffoldStyle? scaffoldStyle,
@@ -223,7 +223,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
       popoverMenuStyle:
           popoverMenuStyle ?? FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
-      progressStyle: progressStyle ?? FProgressStyle.inherit(colorScheme: colorScheme, style: style),
+      progressStyles: progressStyles ?? FProgressStyles.inherit(colorScheme: colorScheme, style: style),
       radioStyle: radioStyle ?? FRadioStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: resizableStyle ?? FResizableStyle.inherit(colorScheme: colorScheme, style: style),
       scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
@@ -277,7 +277,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.pickerStyle,
     required this.popoverStyle,
     required this.popoverMenuStyle,
-    required this.progressStyle,
+    required this.progressStyles,
     required this.radioStyle,
     required this.resizableStyle,
     required this.scaffoldStyle,
@@ -784,7 +784,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
-    FProgressStyle? progressStyle,
+    FProgressStyles? progressStyles,
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
     FScaffoldStyle? scaffoldStyle,
@@ -823,7 +823,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     pickerStyle: pickerStyle ?? this.pickerStyle,
     popoverStyle: popoverStyle ?? this.popoverStyle,
     popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
-    progressStyle: progressStyle ?? this.progressStyle,
+    progressStyles: progressStyles ?? this.progressStyles,
     radioStyle: radioStyle ?? this.radioStyle,
     resizableStyle: resizableStyle ?? this.resizableStyle,
     scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
@@ -869,7 +869,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('pickerStyle', pickerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('progressStyle', progressStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('progressStyles', progressStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
@@ -916,7 +916,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           pickerStyle == other.pickerStyle &&
           popoverStyle == other.popoverStyle &&
           popoverMenuStyle == other.popoverMenuStyle &&
-          progressStyle == other.progressStyle &&
+          progressStyles == other.progressStyles &&
           radioStyle == other.radioStyle &&
           resizableStyle == other.resizableStyle &&
           scaffoldStyle == other.scaffoldStyle &&
@@ -959,7 +959,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       pickerStyle.hashCode ^
       popoverStyle.hashCode ^
       popoverMenuStyle.hashCode ^
-      progressStyle.hashCode ^
+      progressStyles.hashCode ^
       radioStyle.hashCode ^
       resizableStyle.hashCode ^
       scaffoldStyle.hashCode ^

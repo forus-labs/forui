@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
+import 'package:forui/src/widgets/progress.dart';
 
 part 'button.style.dart';
 
@@ -123,7 +124,14 @@ class FButton extends StatelessWidget {
             },
             child: child,
           ),
-      child: FButtonData(style: style, enabled: enabled, child: child),
+      child: FButtonData(
+        style: style,
+        enabled: enabled,
+        child: FCircularProgressData(
+          style: enabled ? style.enabledCircularProgressStyle : style.disabledenabledCircularProgressStyle,
+          child: child,
+        ),
+      ),
     );
   }
 
@@ -202,9 +210,12 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   @override
   final FButtonIconContentStyle iconContentStyle;
 
-  /// The spinner's style.
+  /// The enabled circular progress's style.
   @override
-  final FButtonSpinnerStyle spinnerStyle;
+  final FCircularIconProgressStyle enabledCircularProgressStyle;
+
+  @override
+  final FCircularIconProgressStyle disabledenabledCircularProgressStyle;
 
   /// The tappable's style.
   @override
@@ -218,7 +229,8 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
     required this.focusedOutlineStyle,
     required this.contentStyle,
     required this.iconContentStyle,
-    required this.spinnerStyle,
+    required this.enabledCircularProgressStyle,
+    required this.disabledenabledCircularProgressStyle,
     required this.tappableStyle,
   });
 
@@ -245,7 +257,8 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            enabledColor: enabledContentColor,
            disabledColor: disabledContentColor,
          ),
-         spinnerStyle: FButtonSpinnerStyle.inherit(enabled: enabledContentColor, disabled: disabledContentColor),
+         enabledCircularProgressStyle: FCircularIconProgressStyle(color: enabledContentColor),
+         disabledenabledCircularProgressStyle: FCircularIconProgressStyle(color: disabledContentColor),
          tappableStyle: style.tappableStyle,
        );
 }

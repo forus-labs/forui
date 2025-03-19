@@ -8,14 +8,27 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class ProgressPage extends StatefulSample {
-  ProgressPage({@queryParam super.theme});
+class LinearProgressPage extends StatefulSample {
+  LinearProgressPage({@queryParam super.theme});
 
   @override
-  State<ProgressPage> createState() => _State();
+  State<LinearProgressPage> createState() => _LinearProgressPageState();
 }
 
-class _State extends StatefulSampleState<ProgressPage> {
+class _LinearProgressPageState extends StatefulSampleState<LinearProgressPage> {
+  @override
+  Widget sample(BuildContext context) => const FProgress();
+}
+
+@RoutePage()
+class DeterminateLinearProgressPage extends StatefulSample {
+  DeterminateLinearProgressPage({@queryParam super.theme});
+
+  @override
+  State<DeterminateLinearProgressPage> createState() => _DeterminateLinearProgressPageState();
+}
+
+class _DeterminateLinearProgressPageState extends StatefulSampleState<DeterminateLinearProgressPage> {
   late Timer timer;
   double value = 0.2;
 
@@ -26,11 +39,39 @@ class _State extends StatefulSampleState<ProgressPage> {
   }
 
   @override
-  Widget sample(BuildContext context) => FProgress(value: value);
+  Widget sample(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    spacing: 20,
+    children: [
+      FProgress(value: value),
+      FButton(
+        label: const Text('Reset'),
+        onPress:
+            () => setState(() {
+              value = 0.2;
+              timer.cancel();
+              timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+            }),
+      ),
+    ],
+  );
 
   @override
   void dispose() {
     timer.cancel();
     super.dispose();
   }
+}
+
+@RoutePage()
+class CircularProgressPage extends StatefulSample {
+  CircularProgressPage({@queryParam super.theme});
+
+  @override
+  State<CircularProgressPage> createState() => _CircularProgressPageState();
+}
+
+class _CircularProgressPageState extends StatefulSampleState<CircularProgressPage> {
+  @override
+  Widget sample(BuildContext context) => const FProgress.circularIcon();
 }
