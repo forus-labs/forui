@@ -1,23 +1,52 @@
 ## 0.11.0 (Next)
+We are experimenting with a new changelog format which groups changes by feature.
 
-### Additions
+### `FPopover`
+The traversal edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
+
+* Add `FPopover.traversalEdgeBehavior`.
+* Add `traversalEdgeBehavior` to `FBreadcrumbItem.collapsed`.
+* Add `traversalEdgeBehavior` to `FPopoverMenu`.
+* Add `traversalEdgeBehavior` to `FSelectMenuTile`.
+* **Breaking** Change `FPopover.focusNode` from `FocusNode` to `FocusScopeNode`.
+* **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FBreadcrumbItem.collapsed`.
+* **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FPopoverMenu`.
+* **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FSelectMenuTile`.
+
+
+### `FProgress`
+`FProgress` has been updated to support indeterminate progress and fix some longstanding issues.
+
 * Add `FProgress.circularIcon`.
+* **Breaking** Change `FProgressStyle` to `FLinearProgressStyle`.
+* **Breaking** Remove `FButtonSpinner` - use `FProgress.circular(...)` instead.
 
-* Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
-* Add `filled` and `fillColor` for `FTextField`.
+### `FSelectGroupController` & controller callbacks
+`FSelectGroupController` has been replaced with `FMultiValueNotifier` to allow usage across other non-select group 
+widgets. This applies to all Forui widgets that use `FSelectGroupController`. 
+
+A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 
 * Add `FMultiValueNotifier`.
 * Add `FSelectTileGroupController` typedef.
 * Add `FSelectMenuTileController` typedef.
-
 * Add `FSelectGroup.onChange`.
 * Add `FSelectGroup.onSelect`.
-
 * Add `FSelectTileGroup.onChange`.
 * Add `FSelectTileGroup.onSelect`.
-
 * Add `FSelectMenuTile.onChange`.
 * Add `FSelectMenuTile.onSelect`.
+* **Breaking** Replace `FSelectGroupController` with a typedef of `FMultiValueNotifier`.
+* **Breaking** Remove `FMultiSelectGroupController` - use `FSelectGroupController(...)` instead.
+* **Breaking** Remove `FRadioSelectGroupController` - use `FSelectGroupController.radio(...)` instead.
+* **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
+* **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
+* **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
+
+
+### `FTappable`
+`FTappable` has been updated to support animations by default. This applies to all Forui widgets that use `FTappable`.
+The `hovered` state has also been split into `hovered` and `pressed` states.
 
 * Add `FTappableStyle`.
 * Add `FAccordionStyle.tappableStyle`.
@@ -31,25 +60,14 @@
 * Add `FLineCalendarStyle.tappableStyle`.
 * Add `FPaginationStyle.tappableStyle`.
 * Add `FTileStyle.tappableStyle`.
-
-### Changes
-* Change `FProgress` to support indeterminate progress.
-* **Breaking** Change `FProgressStyle` to `FLinearProgressStyle`.
-* **Breaking** Remove `FButtonSpinner` - use `FProgress.circular(...)` instead.
-
-* **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.
-
-* **Breaking** Replace `FSelectGroupController` with a typedef of `FMultiValueNotifier`.
-* **Breaking** Remove `FMultiSelectGroupController` - use `FSelectGroupController(...)` instead.
-* **Breaking** Remove `FRadioSelectGroupController` - use `FSelectGroupController.radio(...)` instead.
-
-* **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
-
-* **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
-* **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
-
 * **Breaking** Rename `FTappable` to `FTappable.static`.
 * **Breaking** Rename `FTappable.animated` to `FTappable`.
+* **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.
+
+
+### Others
+* Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
+* Add `filled` and `fillColor` for `FTextField`. Thanks @MrHeer!
 
 ### `FHeader`
 * Fixed an issue where header spacing is incorrectly ordered.
