@@ -45,7 +45,12 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DefaultTextStyle(style: style.titleTextStyle, child: Padding(padding: style.titlePadding, child: title)),
+          DefaultTextStyle(
+            style: enabled ? style.enabledTitleTextStyle : style.disabledTitleTextStyle,
+            child: Padding(padding: style.titlePadding, child: title),
+          ),
+          // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
+          // No feasible solution that doesn't involve a lot of complexity exists.
           if (children.firstOrNull case final first?)
             SelectContentData<T>(
               style: style,
@@ -71,9 +76,13 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 
 /// A [FSelectSection]'s style.
 class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
-  /// The title's text style.
+  /// The enabled title's text style.
   @override
-  final TextStyle titleTextStyle;
+  final TextStyle enabledTitleTextStyle;
+
+  /// The disabled title's text style.
+  @override
+  final TextStyle disabledTitleTextStyle;
 
   /// The padding around the title. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
@@ -85,7 +94,8 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
   /// Creates a [FSelectSectionStyle].
   FSelectSectionStyle({
-    required this.titleTextStyle,
+    required this.enabledTitleTextStyle,
+    required this.disabledTitleTextStyle,
     required this.itemStyle,
     this.titlePadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
@@ -96,7 +106,11 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FStyle style,
     required FTypography typography,
   }) : this(
-         titleTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+         enabledTitleTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+         disabledTitleTextStyle: typography.sm.copyWith(
+           color: colorScheme.disable(colorScheme.primary),
+           fontWeight: FontWeight.w600,
+         ),
          itemStyle: FSelectItemStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
        );
 }
@@ -197,8 +211,6 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
           style: style.tappableStyle,
           autofocus: selected || content.first,
           focusNode: _focus,
-          onFocusChange: (f) {
-          },
           behavior: HitTestBehavior.opaque,
           onPress: () => onPress(widget.value),
           builder: (context, data, child) {
