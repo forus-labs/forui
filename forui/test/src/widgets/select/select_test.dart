@@ -20,6 +20,31 @@ void main() {
   });
 
   group('FSelect', () {
+    testWidgets('custom format', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            key: key,
+            format: (value) => '$value!',
+            controller: controller,
+            children: [
+              FSelectItem.text('A'),
+              FSelectItem.text('B'),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('A!'), findsOne);
+      expect(controller.value, 'A');
+    });
+
     testWidgets('keyboard navigation', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

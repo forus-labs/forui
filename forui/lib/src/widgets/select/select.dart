@@ -15,7 +15,7 @@ part 'select.style.dart';
 
 /// A select displays a list of options for the user to pick from.
 ///
-/// A select is a [FormField] and therefore can be used in a [Form] widget.
+/// It is a [FormField] and therefore can be used in a [Form] widget.
 ///
 /// See
 /// * https://forui.dev/docs/form/select for working examples.
@@ -46,6 +46,8 @@ abstract class FSelect<T> extends StatefulWidget {
 
   /// The default format function that converts the selected items to a comma separated string.
   static String defaultFormat(Object? selected) => selected.toString();
+
+  static String? _defaultValidator(Object? _) => null;
 
   /// The controller.
   final FSelectController<T>? controller;
@@ -96,9 +98,15 @@ abstract class FSelect<T> extends StatefulWidget {
   /// When the [forceErrorText] property is provided, the [FormFieldState.errorText] will be set to the provided value,
   /// causing the form field to be considered invalid and to display the error message specified.
   ///
-  /// When [FTimeFieldController.validator] is provided, [forceErrorText] will override any error that it returns.
-  /// [FTimeFieldController.validator] will not be called unless [forceErrorText] is null.
+  /// When [validator] is provided, [forceErrorText] will override any error that it returns. [validator] will not be
+  /// called unless [forceErrorText] is null.
   final String? forceErrorText;
+
+  /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
+  /// whether a time in a picker is selectable.
+  ///
+  /// Defaults to always returning null.
+  final FormFieldValidator<T> validator;
 
   /// The function that formats the selected items into a string. The items are sorted in order of selection.
   ///
@@ -180,6 +188,7 @@ abstract class FSelect<T> extends StatefulWidget {
     FormFieldSetter<T>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
+    FormFieldValidator<T> validator,
     Widget Function(BuildContext, String) errorBuilder,
     String Function(T) format,
     String? hint,
@@ -231,6 +240,7 @@ abstract class FSelect<T> extends StatefulWidget {
     FormFieldSetter<T>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
+    FormFieldValidator<T> validator,
     Widget Function(BuildContext, String) errorBuilder,
     String Function(T) format,
     String? hint,
@@ -268,6 +278,7 @@ abstract class FSelect<T> extends StatefulWidget {
     this.onSaved,
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
+    this.validator = _defaultValidator,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.format = defaultFormat,
     this.hint,
@@ -307,6 +318,7 @@ abstract class FSelect<T> extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
+      ..add(ObjectFlagProperty.has('validator', validator))
       ..add(ObjectFlagProperty.has('format', format))
       ..add(StringProperty('hint', hint))
       ..add(EnumProperty('textAlign', textAlign))
@@ -448,7 +460,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       description: widget.description,
       enabled: widget.enabled,
       onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
-      validator: (_) => _controller.validator(_controller.value),
+      validator: (_) => widget.validator(_controller.value),
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
