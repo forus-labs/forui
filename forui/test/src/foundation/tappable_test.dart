@@ -265,10 +265,7 @@ void main() {
       testWidgets('press and hold - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FTappable.static(
-              builder: (_, value, _) => Text('$value'),
-              onPress: enabled ? () {} : null,
-            ),
+            child: FTappable.static(builder: (_, value, _) => Text('$value'), onPress: enabled ? () {} : null),
           ),
         );
         expect(find.text((focused: false, hovered: false, pressed: false).toString()), findsOneWidget);

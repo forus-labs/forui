@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
-import 'package:meta/meta.dart';
 
 part 'search_content.style.dart';
 
@@ -82,7 +84,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     super.initState();
     _controller = widget.properties.controller ?? TextEditingController();
     _controller.addListener(_update);
-    
+
     _previous = _controller.text;
     _data = _filter(_controller.text);
   }
@@ -130,9 +132,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       mainAxisSize: MainAxisSize.min,
       children: [
         CallbackShortcuts(
-          bindings: {
-            const SingleActivator(LogicalKeyboardKey.enter): _focus.nextFocus,
-          },
+          bindings: {const SingleActivator(LogicalKeyboardKey.enter): _focus.nextFocus},
           child: FTextField(
             controller: _controller,
             focusNode: _focus,

@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/select/select_controller.dart';
-import 'package:forui/src/widgets/select/content/content.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/select/content/content.dart';
+import 'package:forui/src/widgets/select/select_controller.dart';
 
 part 'select_item.style.dart';
 

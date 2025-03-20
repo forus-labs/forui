@@ -1,7 +1,9 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
-import 'package:forui/forui.dart';
+import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'scroll_handle.style.dart';
 
@@ -13,12 +15,12 @@ class ScrollHandle extends StatefulWidget {
   final SvgAsset icon;
 
   ScrollHandle.up({required this.controller, required this.style, super.key})
-      : alignment = Alignment.topCenter,
-        icon = FAssets.icons.chevronUp;
+    : alignment = Alignment.topCenter,
+      icon = FAssets.icons.chevronUp;
 
   ScrollHandle.down({required this.controller, required this.style, super.key})
-      : alignment = Alignment.bottomCenter,
-        icon = FAssets.icons.chevronDown;
+    : alignment = Alignment.bottomCenter,
+      icon = FAssets.icons.chevronDown;
 
   @override
   State<ScrollHandle> createState() => _ScrollHandleState();
@@ -47,41 +49,41 @@ class _ScrollHandleState extends State<ScrollHandle> {
     };
 
     return Align(
-    alignment: widget.alignment,
-    child: MouseRegion(
-      onEnter: (_) {
-        _hovered = true;
-        scroll();
-      },
-      onExit: (_) {
-        _hovered = false;
-        _monotonic++;
-        widget.controller.jumpTo(widget.controller.offset);
-      },
-      child: Listener(
-        onPointerDown: (_) => scroll(),
-        onPointerUp: (_) {
-          _monotonic++;
-          if (!_hovered) {
-            widget.controller.jumpTo(widget.controller.offset);
-          }
+      alignment: widget.alignment,
+      child: MouseRegion(
+        onEnter: (_) {
+          _hovered = true;
+          scroll();
         },
-        child: Semantics(
-          label: label,
-          child: Padding(
-            padding: const EdgeInsets.all(3),
-            child: SizedBox(
-              width: double.infinity,
-              child: ColoredBox(
-                color: widget.style.background,
-                child: FIcon(widget.icon, color: widget.style.color, size: widget.style.size),
+        onExit: (_) {
+          _hovered = false;
+          _monotonic++;
+          widget.controller.jumpTo(widget.controller.offset);
+        },
+        child: Listener(
+          onPointerDown: (_) => scroll(),
+          onPointerUp: (_) {
+            _monotonic++;
+            if (!_hovered) {
+              widget.controller.jumpTo(widget.controller.offset);
+            }
+          },
+          child: Semantics(
+            label: label,
+            child: Padding(
+              padding: const EdgeInsets.all(3),
+              child: SizedBox(
+                width: double.infinity,
+                child: ColoredBox(
+                  color: widget.style.background,
+                  child: FIcon(widget.icon, color: widget.style.color, size: widget.style.size),
+                ),
               ),
             ),
           ),
         ),
       ),
-    ),
-  );
+    );
   }
 
   Future<void> _up() async {
@@ -98,11 +100,7 @@ class _ScrollHandleState extends State<ScrollHandle> {
 
     final ms = currentOffset / (widget.style.pixelsPerSecond / 1000);
 
-    await widget.controller.animateTo(
-      0,
-      duration: Duration(microseconds: (ms * 1000).round()),
-      curve: Curves.linear,
-    );
+    await widget.controller.animateTo(0, duration: Duration(microseconds: (ms * 1000).round()), curve: Curves.linear);
   }
 
   Future<void> _down() async {
@@ -165,9 +163,9 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
     this.enterDuration = const Duration(milliseconds: 200),
     this.pixelsPerSecond = 200,
   }) : assert(0 < size, 'The size must be greater than 0.'),
-        assert(0 < pixelsPerSecond, 'The pixels per second must be greater than 0.');
+       assert(0 < pixelsPerSecond, 'The pixels per second must be greater than 0.');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits from the given [colorScheme].
   FSelectScrollHandleStyle.inherit({required FColorScheme colorScheme})
-      : this(color: colorScheme.primary, background: colorScheme.background);
+    : this(color: colorScheme.primary, background: colorScheme.background);
 }

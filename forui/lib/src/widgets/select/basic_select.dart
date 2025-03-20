@@ -40,7 +40,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.contentScrollHandles,
     super.contentPhysics,
     super.key,
-  }): super._();
+  }) : super._();
 
   @override
   _BasicSelectState<T> createState() => _BasicSelectState<T>();

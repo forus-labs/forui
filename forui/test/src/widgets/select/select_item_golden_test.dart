@@ -4,9 +4,10 @@ library;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
@@ -58,11 +59,7 @@ void main() {
                 FSelectSection(
                   title: const Text('Lorem'),
                   enabled: false,
-                  children: [
-                    FSelectItem.text('A'),
-                    FSelectItem.text('B'),
-                    FSelectItem.text('C', enabled: true),
-                  ],
+                  children: [FSelectItem.text('A'), FSelectItem.text('B'), FSelectItem.text('C', enabled: true)],
                 ),
               ],
             ),

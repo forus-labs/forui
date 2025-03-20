@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -22,14 +23,8 @@ void main() {
             key: key,
             controller: controller,
             children: [
-              FSelectSection(
-                title: const Text('1st'),
-                children: [FSelectItem.text('A')],
-              ),
-              FSelectSection(
-                title: const Text('2nd'),
-                children: [FSelectItem.text('B')],
-              ),
+              FSelectSection(title: const Text('1st'), children: [FSelectItem.text('A')]),
+              FSelectSection(title: const Text('2nd'), children: [FSelectItem.text('B')]),
             ],
           ),
         ),
