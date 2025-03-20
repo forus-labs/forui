@@ -66,7 +66,13 @@ class FLocalizationsMy extends FLocalizations {
   String get selectNoResults => 'တူညီသည့်ရလဒ်များမရှိပါ။';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'ရှင်းရန်';
+  String get selectScrollUpSemanticsLabel => 'အပေါ်သို့ပွတ်ဆွဲရန်';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'အောက်သို့ပွတ်ဆွဲရန်';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

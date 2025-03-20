@@ -66,7 +66,13 @@ class FLocalizationsEu extends FLocalizations {
   String get selectNoResults => 'Ez dago bat datorren emaitzarik.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Garbitu';
+  String get selectScrollUpSemanticsLabel => 'Egin gora';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Egin behera';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Garbitu';
 
   @override
   String get shortDateSeparator => '/';

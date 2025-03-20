@@ -66,7 +66,13 @@ class FLocalizationsFi extends FLocalizations {
   String get selectNoResults => 'Ei vastaavia tuloksia.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Tyhjennä';
+  String get selectScrollUpSemanticsLabel => 'Vieritä ylös';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Vieritä alas';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Tyhjennä';
 
   @override
   String get shortDateSeparator => '.';

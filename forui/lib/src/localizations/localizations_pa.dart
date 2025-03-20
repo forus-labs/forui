@@ -66,7 +66,13 @@ class FLocalizationsPa extends FLocalizations {
   String get selectNoResults => 'ਕੋਈ ਮੇਲ ਖਾਂਦੇ ਨਤੀਜੇ ਨਹੀਂ ਹਨ।';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'ਕਲੀਅਰ ਕਰੋ';
+  String get selectScrollUpSemanticsLabel => 'ਉੱਪਰ ਸਕ੍ਰੋਲ ਕਰੋ';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'ਹੇਠਾਂ ਸਕ੍ਰੋਲ ਕਰੋ';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'ਕਲੀਅਰ ਕਰੋ';
 
   @override
   String get shortDateSeparator => '/';

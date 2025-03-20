@@ -63,10 +63,16 @@ class FLocalizationsEs extends FLocalizations {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -121,7 +127,10 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -176,7 +185,10 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -231,7 +243,10 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -286,7 +301,10 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -341,7 +359,10 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -396,7 +417,10 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -451,7 +475,10 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -506,7 +533,10 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -561,7 +591,10 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -616,7 +649,10 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -671,7 +707,10 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -726,7 +765,10 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -781,7 +823,10 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -836,7 +881,10 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -891,7 +939,10 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -946,7 +997,10 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -1001,7 +1055,10 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -1056,7 +1113,10 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -1111,7 +1171,10 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';
@@ -1166,7 +1229,10 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desplazarse hacia abajo';
 
   @override
   String get shortDateSeparator => '/';

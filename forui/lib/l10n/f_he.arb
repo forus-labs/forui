@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "ניקוי",
   "selectHint": "בחר פריט",
   "selectSearchHint": "חיפוש",
-  "selectSearchNoResults": "אין תוצאות תואמות."
+  "selectSearchNoResults": "לא נמצאו התאמות.",
+  "selectScrollUpSemanticsLabel": "גלול למעלה",
+  "selectScrollDownSemanticsLabel": "גלול למטה"
 }

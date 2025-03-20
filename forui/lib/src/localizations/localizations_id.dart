@@ -66,7 +66,13 @@ class FLocalizationsId extends FLocalizations {
   String get selectNoResults => 'Tidak ada hasil yang cocok.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Hapus';
+  String get selectScrollUpSemanticsLabel => 'Gulir ke atas';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Gulir ke bawah';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Hapus';
 
   @override
   String get shortDateSeparator => '/';

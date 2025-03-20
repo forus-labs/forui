@@ -66,7 +66,13 @@ class FLocalizationsDe extends FLocalizations {
   String get selectNoResults => 'Keine übereinstimmenden Ergebnisse.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Löschen';
+  String get selectScrollUpSemanticsLabel => 'Nach oben scrollen';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Nach unten scrollen';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Löschen';
 
   @override
   String get shortDateSeparator => '.';
@@ -124,7 +130,13 @@ class FLocalizationsDeCh extends FLocalizationsDe {
   String get selectNoResults => 'Keine übereinstimmenden Ergebnisse.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Löschen';
+  String get selectScrollUpSemanticsLabel => 'Nach oben scrollen';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Nach unten scrollen';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Löschen';
 
   @override
   String get shortDateSeparator => '.';

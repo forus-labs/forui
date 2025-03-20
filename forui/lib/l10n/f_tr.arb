@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Bir zaman seçin",
   "timeFieldInvalidDateError": "Geçersiz zaman.",
-  "textFieldClearButtonSemanticLabel": "Temizle",
+  "textFieldClearButtonSemanticsLabel": "Temizle",
   "selectHint": "Bir öğe seçin",
   "selectSearchHint": "Ara",
-  "selectNoResults": "Eşleşen sonuç yok."
+  "selectNoResults": "Eşleşen sonuç yok.",
+  "selectSearchNoResults": "Eşleşme bulunamadı.",
+  "selectScrollUpSemanticsLabel": "Yukarı kaydır",
+  "selectScrollDownSemanticsLabel": "Aşağı kaydır"
 }

@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Izvēlieties laiku",
   "timeFieldInvalidDateError": "Nederīgs laiks.",
-  "textFieldClearButtonSemanticLabel": "Notīrīt",
+  "textFieldClearButtonSemanticsLabel": "Notīrīt",
   "selectHint": "Atlasiet vienumu",
   "selectSearchHint": "Meklēt",
-  "selectNoResults": "Nav atbilstošu rezultātu."
+  "selectNoResults": "Nav atbilstošu rezultātu.",
+  "selectSearchNoResults": "Nav atrasta neviena atbilstība.",
+  "selectScrollUpSemanticsLabel": "Ritināt uz augšu",
+  "selectScrollDownSemanticsLabel": "Ritināt uz leju"
 }

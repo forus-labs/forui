@@ -66,7 +66,13 @@ class FLocalizationsDa extends FLocalizations {
   String get selectNoResults => 'Ingen matchende resultater.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Ryd';
+  String get selectScrollUpSemanticsLabel => 'Rul op';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Rul ned';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Ryd';
 
   @override
   String get shortDateSeparator => '.';

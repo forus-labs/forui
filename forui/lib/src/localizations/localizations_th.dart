@@ -66,7 +66,13 @@ class FLocalizationsTh extends FLocalizations {
   String get selectNoResults => 'ไม่มีผลลัพธ์ที่ตรงกัน';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'ล้าง';
+  String get selectScrollUpSemanticsLabel => 'เลื่อนขึ้น';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'เลื่อนลง';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'ล้าง';
 
   @override
   String get shortDateSeparator => '/';

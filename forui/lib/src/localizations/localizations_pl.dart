@@ -66,7 +66,13 @@ class FLocalizationsPl extends FLocalizations {
   String get selectNoResults => 'Brak pasujących wyników.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Wyczyść';
+  String get selectScrollUpSemanticsLabel => 'Przewiń w górę';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Przewiń w dół';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Wyczyść';
 
   @override
   String get shortDateSeparator => '.';

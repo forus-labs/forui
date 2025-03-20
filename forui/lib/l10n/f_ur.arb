@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "وقت منتخب کریں",
   "timeFieldInvalidDateError": "غلط وقت۔",
-  "textFieldClearButtonSemanticLabel": "صاف کریں",
+  "textFieldClearButtonSemanticsLabel": "صاف کریں",
   "selectHint": "آئٹم منتخب کریں",
   "selectSearchHint": "تلاش کریں",
-  "selectNoResults": "کوئی مماثل نتائج نہیں۔"
+  "selectNoResults": "کوئی مماثل نتائج نہیں۔",
+  "selectSearchNoResults": "کوئی میچ نہیں ملا۔",
+  "selectScrollUpSemanticsLabel": "اوپر سکرول کریں",
+  "selectScrollDownSemanticsLabel": "نیچے سکرول کریں"
 }

@@ -63,10 +63,16 @@ class FLocalizationsEn extends FLocalizations {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -124,7 +130,13 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -182,7 +194,13 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '-';
@@ -240,7 +258,13 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -298,7 +322,13 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -356,7 +386,13 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -414,7 +450,13 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -472,7 +514,13 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -530,7 +578,13 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

@@ -66,7 +66,13 @@ class FLocalizationsZu extends FLocalizations {
   String get selectNoResults => 'Ayikho imiphumela efanayo.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Sula';
+  String get selectScrollUpSemanticsLabel => 'Skrola phezulu';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Skrola phansi';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Sula';
 
   @override
   String get shortDateSeparator => '-';

@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Pumili ng oras",
   "timeFieldInvalidDateError": "Hindi wastong oras.",
-  "textFieldClearButtonSemanticLabel": "I-clear",
+  "textFieldClearButtonSemanticsLabel": "I-clear",
   "selectHint": "Pumili ng item",
   "selectSearchHint": "Maghanap",
-  "selectNoResults": "Walang mga tumutugmang resulta."
+  "selectNoResults": "Walang mga tumutugmang resulta.",
+  "selectSearchNoResults": "Walang nahanap na tumutugma.",
+  "selectScrollUpSemanticsLabel": "Mag-scroll pataas",
+  "selectScrollDownSemanticsLabel": "Mag-scroll pababa"
 }

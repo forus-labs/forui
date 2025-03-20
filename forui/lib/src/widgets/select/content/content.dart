@@ -194,7 +194,10 @@ class _ContentState<T> extends State<Content<T>> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.removeListener(_updateHandles);
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 }

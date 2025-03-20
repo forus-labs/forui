@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Esborrar",
   "selectHint": "Selecciona un element",
   "selectSearchHint": "Cerca",
-  "selectSearchNoResults": "No s'han trobat resultats coincidents."
+  "selectSearchNoResults": "No s'ha trobat cap coincidència.",
+  "selectScrollUpSemanticsLabel": "Desplaça amunt",
+  "selectScrollDownSemanticsLabel": "Desplaça avall"
 }

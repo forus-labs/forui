@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vaxt seçin",
   "timeFieldInvalidDateError": "Yanlış vaxt.",
-  "textFieldClearButtonSemanticLabel": "Təmizlə",
+  "textFieldClearButtonSemanticsLabel": "Təmizlə",
   "selectHint": "Element seçin",
   "selectSearchHint": "Axtarış",
-  "selectNoResults": "Uyğun nəticə tapılmadı."
+  "selectNoResults": "Uyğun nəticə tapılmadı.",
+  "selectSearchNoResults": "Heç bir uyğunluq tapılmadı.",
+  "selectScrollUpSemanticsLabel": "Yuxarı sürüşdür",
+  "selectScrollDownSemanticsLabel": "Aşağı sürüşdür"
 }

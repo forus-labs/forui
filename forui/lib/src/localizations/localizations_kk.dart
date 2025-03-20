@@ -63,10 +63,16 @@ class FLocalizationsKk extends FLocalizations {
   String get selectSearchHint => 'Іздеу';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Тазалау';
+  String get selectScrollUpSemanticsLabel => 'Жоғары айналдыру';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Төмен айналдыру';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '.';

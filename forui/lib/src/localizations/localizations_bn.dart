@@ -66,7 +66,13 @@ class FLocalizationsBn extends FLocalizations {
   String get selectNoResults => 'কোন মিলে যাওয়া ফলাফল নেই।';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'মুছুন';
+  String get selectScrollUpSemanticsLabel => 'উপরে স্ক্রোল করুন';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'নিচে স্ক্রোল করুন';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'মুছুন';
 
   @override
   String get shortDateSeparator => '/';

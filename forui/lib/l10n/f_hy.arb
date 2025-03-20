@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Մաքրել",
   "selectHint": "Ընտրեք տարր",
   "selectSearchHint": "Որոնել",
-  "selectSearchNoResults": "Համապատասխան արդյունքներ չկան։"
+  "selectSearchNoResults": "Համապատասխանություններ չեն գտնվել։",
+  "selectScrollUpSemanticsLabel": "Ոլորել վերև",
+  "selectScrollDownSemanticsLabel": "Ոլորել ներքև"
 }

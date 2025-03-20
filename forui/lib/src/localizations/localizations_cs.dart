@@ -66,7 +66,13 @@ class FLocalizationsCs extends FLocalizations {
   String get selectNoResults => 'Žádné odpovídající výsledky.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Vymazat';
+  String get selectScrollUpSemanticsLabel => 'Posunout nahoru';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Posunout dolů';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Vymazat';
 
   @override
   String get shortDateSeparator => '. ';

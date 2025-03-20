@@ -66,7 +66,13 @@ class FLocalizationsJa extends FLocalizations {
   String get selectNoResults => '一致する結果がありません。';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'クリア';
+  String get selectScrollUpSemanticsLabel => '上にスクロール';
+
+  @override
+  String get selectScrollDownSemanticsLabel => '下にスクロール';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'クリア';
 
   @override
   String get shortDateSeparator => '/';

@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Aukeratu ordua",
   "timeFieldInvalidDateError": "Ordu baliogabea.",
-  "textFieldClearButtonSemanticLabel": "Garbitu",
+  "textFieldClearButtonSemanticsLabel": "Garbitu",
   "selectHint": "Hautatu elementu bat",
   "selectSearchHint": "Bilatu",
-  "selectNoResults": "Ez dago bat datorren emaitzarik."
+  "selectNoResults": "Ez dago bat datorren emaitzarik.",
+  "selectSearchNoResults": "Ez da aurkitu bat datorrenik.",
+  "selectScrollUpSemanticsLabel": "Egin gora",
+  "selectScrollDownSemanticsLabel": "Egin behera"
 }

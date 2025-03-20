@@ -66,7 +66,13 @@ class FLocalizationsFr extends FLocalizations {
   String get selectNoResults => 'Aucun résultat correspondant.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Effacer';
+  String get selectScrollUpSemanticsLabel => 'Faire défiler vers le haut';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Faire défiler vers le bas';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Effacer';
 
   @override
   String get shortDateSeparator => '/';
@@ -124,7 +130,13 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get selectNoResults => 'Aucun résultat correspondant.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Effacer';
+  String get selectScrollUpSemanticsLabel => 'Faire défiler vers le haut';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Faire défiler vers le bas';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Effacer';
 
   @override
   String get shortDateSeparator => '-';

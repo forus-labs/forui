@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Очистить",
   "selectHint": "Выберите элемент",
   "selectSearchHint": "Поиск",
-  "selectSearchNoResults": "Нет совпадающих результатов."
+  "selectSearchNoResults": "Совпадений не найдено.",
+  "selectScrollUpSemanticsLabel": "Прокрутить вверх",
+  "selectScrollDownSemanticsLabel": "Прокрутить вниз"
 }

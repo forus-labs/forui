@@ -66,7 +66,13 @@ class FLocalizationsCy extends FLocalizations {
   String get selectNoResults => 'Dim canlyniadau cyfatebol.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clirio';
+  String get selectScrollUpSemanticsLabel => 'Sgrolio i fyny';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Sgrolio i lawr';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clirio';
 
   @override
   String get shortDateSeparator => '/';

@@ -66,7 +66,13 @@ class FLocalizationsUr extends FLocalizations {
   String get selectNoResults => 'کوئی مماثل نتائج نہیں۔';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'صاف کریں';
+  String get selectScrollUpSemanticsLabel => 'اوپر سکرول کریں';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'نیچے سکرول کریں';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'صاف کریں';
 
   @override
   String get shortDateSeparator => '/';

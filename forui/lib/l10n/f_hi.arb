@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "साफ़ करें",
   "selectHint": "एक आइटम चुनें",
   "selectSearchHint": "खोजें",
-  "selectSearchNoResults": "कोई मिलान परिणाम नहीं।"
+  "selectSearchNoResults": "कोई मिलान नहीं मिला।",
+  "selectScrollUpSemanticsLabel": "ऊपर स्क्रॉल करें",
+  "selectScrollDownSemanticsLabel": "नीचे स्क्रॉल करें"
 }

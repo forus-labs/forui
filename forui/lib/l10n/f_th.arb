@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "เลือกเวลา",
   "timeFieldInvalidDateError": "เวลาไม่ถูกต้อง",
-  "textFieldClearButtonSemanticLabel": "ล้าง",
+  "textFieldClearButtonSemanticsLabel": "ล้าง",
   "selectHint": "เลือกรายการ",
   "selectSearchHint": "ค้นหา",
-  "selectNoResults": "ไม่มีผลลัพธ์ที่ตรงกัน"
+  "selectNoResults": "ไม่มีผลลัพธ์ที่ตรงกัน",
+  "selectSearchNoResults": "ไม่พบการจับคู่",
+  "selectScrollUpSemanticsLabel": "เลื่อนขึ้น",
+  "selectScrollDownSemanticsLabel": "เลื่อนลง"
 }

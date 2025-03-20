@@ -63,10 +63,16 @@ class FLocalizationsHy extends FLocalizations {
   String get selectSearchHint => 'Որոնել';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Մաքրել';
+  String get selectScrollUpSemanticsLabel => 'Ոլորել վերև';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Ոլորել ներքև';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '.';

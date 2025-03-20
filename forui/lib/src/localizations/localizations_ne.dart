@@ -66,7 +66,13 @@ class FLocalizationsNe extends FLocalizations {
   String get selectNoResults => 'कुनै मिल्दो परिणामहरू छैनन्।';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'खाली गर्नुहोस्';
+  String get selectScrollUpSemanticsLabel => 'माथि स्क्रोल गर्नुहोस्';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'तल स्क्रोल गर्नुहोस्';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

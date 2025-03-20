@@ -66,7 +66,13 @@ class FLocalizationsRo extends FLocalizations {
   String get selectNoResults => 'Niciun rezultat care să se potrivească.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Ștergeți';
+  String get selectScrollUpSemanticsLabel => 'Derulează în sus';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Derulează în jos';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Ștergeți';
 
   @override
   String get shortDateSeparator => '.';

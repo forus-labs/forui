@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Обриши",
   "selectHint": "Изаберите ставку",
   "selectSearchHint": "Претрага",
-  "selectSearchNoResults": "Нема подударајућих резултата."
+  "selectSearchNoResults": "Није пронађено подударање.",
+  "selectScrollUpSemanticsLabel": "Померите нагоре",
+  "selectScrollDownSemanticsLabel": "Померите надоле"
 }

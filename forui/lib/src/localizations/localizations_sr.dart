@@ -63,10 +63,16 @@ class FLocalizationsSr extends FLocalizations {
   String get selectSearchHint => 'Претрага';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Обриши';
+  String get selectScrollUpSemanticsLabel => 'Померите нагоре';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Померите надоле';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '.';
@@ -124,7 +130,13 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get selectNoResults => 'Nema podudarajućih rezultata.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Obriši';
+  String get selectScrollUpSemanticsLabel => 'Pomerite nagore';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Pomerite nadole';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Obriši';
 
   @override
   String get shortDateSeparator => '.';

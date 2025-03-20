@@ -63,10 +63,16 @@ class FLocalizationsSi extends FLocalizations {
   String get selectSearchHint => 'සොයන්න';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'හිස් කරන්න';
+  String get selectScrollUpSemanticsLabel => 'ඉහළට අනුචලනය කරන්න';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'පහළට අනුචලනය කරන්න';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '-';

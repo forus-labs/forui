@@ -63,10 +63,16 @@ class FLocalizationsTe extends FLocalizations {
   String get selectSearchHint => 'శోధించు';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'క్లియర్ చేయి';
+  String get selectScrollUpSemanticsLabel => 'పైకి స్క్రోల్ చేయండి';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'క్రిందికి స్క్రోల్ చేయండి';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

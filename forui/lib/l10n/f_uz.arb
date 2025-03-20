@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vaqtni tanlang",
   "timeFieldInvalidDateError": "Yaroqsiz vaqt.",
-  "textFieldClearButtonSemanticLabel": "Tozalash",
+  "textFieldClearButtonSemanticsLabel": "Tozalash",
   "selectHint": "Element tanlang",
   "selectSearchHint": "Qidirish",
-  "selectNoResults": "Mos keladigan natijalar yo'q."
+  "selectNoResults": "Mos keladigan natijalar yo'q.",
+  "selectSearchNoResults": "Mos keluvchilar topilmadi.",
+  "selectScrollUpSemanticsLabel": "Tepaga aylantirish",
+  "selectScrollDownSemanticsLabel": "Pastga aylantirish"
 }

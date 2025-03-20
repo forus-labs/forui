@@ -40,7 +40,12 @@ class _ScrollHandleState extends State<ScrollHandle> {
 
   @override
   Widget build(BuildContext context) {
-    final scroll = widget.alignment == Alignment.topCenter ? _up : _down;
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final (scroll, label) = switch (widget.alignment) {
+      Alignment.topCenter => (_up, localizations.selectScrollUpSemanticsLabel),
+      _ => (_down, localizations.selectScrollDownSemanticsLabel),
+    };
+
     return Align(
     alignment: widget.alignment,
     child: MouseRegion(
@@ -61,13 +66,16 @@ class _ScrollHandleState extends State<ScrollHandle> {
             widget.controller.jumpTo(widget.controller.offset);
           }
         },
-        child: Padding(
-          padding: const EdgeInsets.all(3),
-          child: SizedBox(
-            width: double.infinity,
-            child: ColoredBox(
-              color: widget.style.background,
-              child: FIcon(widget.icon, color: widget.style.color, size: widget.style.size),
+        child: Semantics(
+          label: label,
+          child: Padding(
+            padding: const EdgeInsets.all(3),
+            child: SizedBox(
+              width: double.infinity,
+              child: ColoredBox(
+                color: widget.style.background,
+                child: FIcon(widget.icon, color: widget.style.color, size: widget.style.size),
+              ),
             ),
           ),
         ),
@@ -88,7 +96,7 @@ class _ScrollHandleState extends State<ScrollHandle> {
       return;
     }
 
-    final ms = currentOffset / widget.style.pixelsPerMillisecond;
+    final ms = currentOffset / (widget.style.pixelsPerSecond / 1000);
 
     await widget.controller.animateTo(
       0,
@@ -111,7 +119,7 @@ class _ScrollHandleState extends State<ScrollHandle> {
     }
 
     final distance = maxScrollExtent - currentOffset;
-    final ms = distance / widget.style.pixelsPerMillisecond;
+    final ms = distance / (widget.style.pixelsPerSecond / 1000);
 
     await widget.controller.animateTo(
       maxScrollExtent,
@@ -142,12 +150,12 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
   @override
   final Duration enterDuration;
 
-  /// The number of pixels per millisecond for the scroll animation. Defaults to 0.2.
+  /// The number of pixels to scroll per second. Defaults to 200.
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if the pixels per millisecond <= 0.
+  /// Throws an [AssertionError] if the pixels per second <= 0.
   @override
-  final double pixelsPerMillisecond;
+  final double pixelsPerSecond;
 
   /// Creates a [FSelectScrollHandleStyle].
   const FSelectScrollHandleStyle({
@@ -155,9 +163,9 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
     required this.background,
     this.size = 17,
     this.enterDuration = const Duration(milliseconds: 200),
-    this.pixelsPerMillisecond = 0.2,
+    this.pixelsPerSecond = 200,
   }) : assert(0 < size, 'The size must be greater than 0.'),
-        assert(0 < pixelsPerMillisecond, 'The pixels per millisecond must be greater than 0.');
+        assert(0 < pixelsPerSecond, 'The pixels per second must be greater than 0.');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits from the given [colorScheme].
   FSelectScrollHandleStyle.inherit({required FColorScheme colorScheme})

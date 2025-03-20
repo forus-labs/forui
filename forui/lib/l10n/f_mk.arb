@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Избриши",
   "selectHint": "Изберете ставка",
   "selectSearchHint": "Пребарување",
-  "selectSearchNoResults": "Нема совпаѓачки резултати."
+  "selectSearchNoResults": "Не се пронајдени совпаѓања.",
+  "selectScrollUpSemanticsLabel": "Лизгај нагоре",
+  "selectScrollDownSemanticsLabel": "Лизгај надолу"
 }

@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Арилгах",
   "selectHint": "Зүйл сонгох",
   "selectSearchHint": "Хайх",
-  "selectSearchNoResults": "Тохирох үр дүн олдсонгүй."
+  "selectSearchNoResults": "Тохирох зүйл олдсонгүй.",
+  "selectScrollUpSemanticsLabel": "Дээш гүйлгэх",
+  "selectScrollDownSemanticsLabel": "Доош гүйлгэх"
 }

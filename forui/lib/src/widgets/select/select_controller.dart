@@ -57,10 +57,7 @@ class FSelectController<T> extends FValueNotifier<T?> {
        super(value);
 
   @override
-  set value(T? value) {
-    super.value = super.value == value ? null : value;
-    notifyListeners();
-  }
+  set value(T? value) => super.value = super.value == value ? null : value;
 
   @override
   void dispose() {

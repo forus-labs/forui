@@ -66,7 +66,13 @@ class FLocalizationsNl extends FLocalizations {
   String get selectNoResults => 'Geen overeenkomende resultaten.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Wissen';
+  String get selectScrollUpSemanticsLabel => 'Omhoog scrollen';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Omlaag scrollen';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Wissen';
 
   @override
   String get shortDateSeparator => '-';

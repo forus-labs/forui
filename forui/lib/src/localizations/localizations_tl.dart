@@ -66,7 +66,13 @@ class FLocalizationsTl extends FLocalizations {
   String get selectNoResults => 'Walang mga tumutugmang resulta.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'I-clear';
+  String get selectScrollUpSemanticsLabel => 'Mag-scroll pataas';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Mag-scroll pababa';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'I-clear';
 
   @override
   String get shortDateSeparator => '/';

@@ -100,7 +100,7 @@ void main() {
         addTearDown(gesture.removePointer);
 
         await gesture.moveTo(tester.getCenter(find.text('Lorem')));
-        await tester.pump(); // Rebuild
+        await tester.pump();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/section/hovered.png'));
       });
@@ -193,7 +193,7 @@ void main() {
         addTearDown(gesture.removePointer);
 
         await gesture.moveTo(tester.getCenter(find.text('A')));
-        await tester.pump(); // Rebuild
+        await tester.pump();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/hover.png'));
       });
@@ -217,7 +217,7 @@ void main() {
         addTearDown(gesture.removePointer);
 
         await gesture.down(tester.getCenter(find.text('A')));
-        await tester.pumpAndSettle(); // Rebuild
+        await tester.pumpAndSettle();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/press.png'));
 

@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "გასუფთავება",
   "selectHint": "აირჩიეთ ელემენტი",
   "selectSearchHint": "ძიება",
-  "selectSearchNoResults": "შესაბამისი შედეგები არ არის."
+  "selectSearchNoResults": "დამთხვევები ვერ მოიძებნა.",
+  "selectScrollUpSemanticsLabel": "ზემოთ გადაადგილება",
+  "selectScrollDownSemanticsLabel": "ქვემოთ გადაადგილება"
 }

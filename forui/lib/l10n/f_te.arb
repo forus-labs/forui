@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "క్లియర్ చేయి",
   "selectHint": "ఒక అంశాన్ని ఎంచుకోండి",
   "selectSearchHint": "శోధించు",
-  "selectSearchNoResults": "సరిపోలే ఫలితాలు లేవు."
+  "selectSearchNoResults": "సరిపోలికలు కనుగొనబడలేదు.",
+  "selectScrollUpSemanticsLabel": "పైకి స్క్రోల్ చేయండి",
+  "selectScrollDownSemanticsLabel": "క్రిందికి స్క్రోల్ చేయండి"
 }

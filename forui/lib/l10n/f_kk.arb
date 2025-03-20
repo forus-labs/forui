@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Тазалау",
   "selectHint": "Элементті таңдаңыз",
   "selectSearchHint": "Іздеу",
-  "selectSearchNoResults": "Сәйкес нәтижелер жоқ."
+  "selectSearchNoResults": "Сәйкестіктер табылмады.",
+  "selectScrollUpSemanticsLabel": "Жоғары айналдыру",
+  "selectScrollDownSemanticsLabel": "Төмен айналдыру"
 }

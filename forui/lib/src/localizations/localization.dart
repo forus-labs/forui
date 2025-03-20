@@ -83,10 +83,16 @@ class FDefaultLocalizations extends FLocalizations {
   String get selectSearchHint => 'Search';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

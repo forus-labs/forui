@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Εκκαθάριση",
   "selectHint": "Επιλέξτε ένα στοιχείο",
   "selectSearchHint": "Αναζήτηση",
-  "selectSearchNoResults": "Δεν βρέθηκαν αποτελέσματα."
+  "selectSearchNoResults": "Δεν βρέθηκαν αντιστοιχίες.",
+  "selectScrollUpSemanticsLabel": "Κύλιση προς τα πάνω",
+  "selectScrollDownSemanticsLabel": "Κύλιση προς τα κάτω"
 }

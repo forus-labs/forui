@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Chọn thời gian",
   "timeFieldInvalidDateError": "Thời gian không hợp lệ.",
-  "textFieldClearButtonSemanticLabel": "Xóa",
+  "textFieldClearButtonSemanticsLabel": "Xóa",
   "selectHint": "Chọn một mục",
   "selectSearchHint": "Tìm kiếm",
-  "selectNoResults": "Không có kết quả phù hợp."
+  "selectNoResults": "Không có kết quả phù hợp.",
+  "selectSearchNoResults": "Không tìm thấy kết quả phù hợp.",
+  "selectScrollUpSemanticsLabel": "Cuộn lên",
+  "selectScrollDownSemanticsLabel": "Cuộn xuống"
 }

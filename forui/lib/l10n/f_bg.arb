@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Изчистване",
   "selectHint": "Изберете елемент",
   "selectSearchHint": "Търсене",
-  "selectSearchNoResults": "Няма съвпадащи резултати."
+  "selectSearchNoResults": "Не са намерени съвпадения.",
+  "selectScrollUpSemanticsLabel": "Превъртане нагоре",
+  "selectScrollDownSemanticsLabel": "Превъртане надолу"
 }

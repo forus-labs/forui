@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Khetha isikhathi",
   "timeFieldInvalidDateError": "Isikhathi esingalungile.",
-  "textFieldClearButtonSemanticLabel": "Sula",
+  "textFieldClearButtonSemanticsLabel": "Sula",
   "selectHint": "Khetha into",
   "selectSearchHint": "Sesha",
-  "selectNoResults": "Ayikho imiphumela efanayo."
+  "selectNoResults": "Ayikho imiphumela efanayo.",
+  "selectSearchNoResults": "Akukho okufanayo okutholakele.",
+  "selectScrollUpSemanticsLabel": "Skrola phezulu",
+  "selectScrollDownSemanticsLabel": "Skrola phansi"
 }

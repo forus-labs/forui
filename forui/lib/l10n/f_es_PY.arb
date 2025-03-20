@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Borrar",
   "selectHint": "Seleccione un elemento",
   "selectSearchHint": "Buscar",
-  "selectSearchNoResults": "No hay resultados coincidentes."
+  "selectSearchNoResults": "No se encontraron coincidencias.",
+  "selectScrollUpSemanticsLabel": "Desplazarse hacia arriba",
+  "selectScrollDownSemanticsLabel": "Desplazarse hacia abajo"
 }

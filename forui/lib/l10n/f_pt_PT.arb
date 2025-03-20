@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Limpar",
   "selectHint": "Selecione um item",
   "selectSearchHint": "Pesquisar",
-  "selectSearchNoResults": "Sem resultados correspondentes."
+  "selectSearchNoResults": "Não foram encontradas correspondências.",
+  "selectScrollUpSemanticsLabel": "Deslocar para cima",
+  "selectScrollDownSemanticsLabel": "Deslocar para baixo"
 }

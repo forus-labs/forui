@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "সময় বাছনি কৰক",
   "timeFieldInvalidDateError": "অমান্য সময়।",
-  "textFieldClearButtonSemanticLabel": "মচক",
+  "textFieldClearButtonSemanticsLabel": "মচক",
   "selectHint": "এটা বস্তু বাছনি কৰক",
   "selectSearchHint": "সন্ধান কৰক",
-  "selectNoResults": "কোনো মিল থকা ফলাফল নাই।"
+  "selectNoResults": "কোনো মিল থকা ফলাফল নাই।",
+  "selectSearchNoResults": "কোনো মিল পোৱা নাই।",
+  "selectScrollUpSemanticsLabel": "ওপৰলৈ স্ক্ৰল কৰক",
+  "selectScrollDownSemanticsLabel": "তললৈ স্ক্ৰল কৰক"
 }

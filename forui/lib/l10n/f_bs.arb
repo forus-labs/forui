@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Odaberite vrijeme",
   "timeFieldInvalidDateError": "Nevažeće vrijeme.",
-  "textFieldClearButtonSemanticLabel": "Očisti",
+  "textFieldClearButtonSemanticsLabel": "Očisti",
   "selectHint": "Odaberite stavku",
   "selectSearchHint": "Pretraga",
-  "selectNoResults": "Nema odgovarajućih rezultata."
+  "selectNoResults": "Nema odgovarajućih rezultata.",
+  "selectSearchNoResults": "Nije pronađeno podudaranje.",
+  "selectScrollUpSemanticsLabel": "Pomjerite prema gore",
+  "selectScrollDownSemanticsLabel": "Pomjerite prema dolje"
 }

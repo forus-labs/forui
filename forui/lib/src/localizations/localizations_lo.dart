@@ -63,10 +63,16 @@ class FLocalizationsLo extends FLocalizations {
   String get selectSearchHint => 'ຊອກຫາ';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'ລຶບ';
+  String get selectScrollUpSemanticsLabel => 'ເລື່ອນຂຶ້ນ';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'ເລື່ອນລົງ';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

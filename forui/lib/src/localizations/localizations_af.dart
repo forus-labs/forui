@@ -66,7 +66,13 @@ class FLocalizationsAf extends FLocalizations {
   String get selectNoResults => 'Geen passende resultate nie.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Vee uit';
+  String get selectScrollUpSemanticsLabel => 'Rol op';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Rol af';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Vee uit';
 
   @override
   String get shortDateSeparator => '-';

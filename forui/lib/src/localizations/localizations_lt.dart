@@ -66,7 +66,13 @@ class FLocalizationsLt extends FLocalizations {
   String get selectNoResults => 'Jokių atitinkančių rezultatų.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Išvalyti';
+  String get selectScrollUpSemanticsLabel => 'Slinkti aukštyn';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Slinkti žemyn';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Išvalyti';
 
   @override
   String get shortDateSeparator => '-';

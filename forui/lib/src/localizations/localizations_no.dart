@@ -66,7 +66,13 @@ class FLocalizationsNo extends FLocalizations {
   String get selectNoResults => 'Ingen samsvarende resultater.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Tøm';
+  String get selectScrollUpSemanticsLabel => 'Rull opp';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Rull ned';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Tøm';
 
   @override
   String get shortDateSeparator => '.';

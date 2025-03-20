@@ -12,8 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Wähle e Zyt",
   "timeFieldInvalidDateError": "Ungültigi Zyt.",
-  "textFieldClearButtonSemanticLabel": "Lösche",
+  "textFieldClearButtonSemanticsLabel": "Lösche",
   "selectHint": "Wähle e Element",
   "selectSearchHint": "Sueche",
-  "selectNoResults": "Kei passendi Ergebnis."
+  "selectNoResults": "Kei passendi Ergebnis.",
+  "selectSearchNoResults": "Kei Träffer gfunde.",
+  "selectScrollUpSemanticsLabel": "Nach obe scrolle",
+  "selectScrollDownSemanticsLabel": "Nach unde scrolle"
 }

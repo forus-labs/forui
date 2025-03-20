@@ -9,8 +9,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Wählen Sie eine Zeit",
   "timeFieldInvalidDateError": "Ungültige Zeit.",
-  "textFieldClearButtonSemanticLabel": "Löschen",
+  "textFieldClearButtonSemanticsLabel": "Löschen",
   "selectHint": "Wählen Sie ein Element",
   "selectSearchHint": "Suchen",
-  "selectNoResults": "Keine übereinstimmenden Ergebnisse."
+  "selectNoResults": "Keine übereinstimmenden Ergebnisse.",
+  "selectSearchNoResults": "Keine Übereinstimmungen gefunden.",
+  "selectScrollUpSemanticsLabel": "Nach oben scrollen",
+  "selectScrollDownSemanticsLabel": "Nach unten scrollen"
 }

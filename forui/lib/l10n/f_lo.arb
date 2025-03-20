@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "ລຶບ",
   "selectHint": "ເລືອກລາຍການ",
   "selectSearchHint": "ຊອກຫາ",
-  "selectSearchNoResults": "ບໍ່ມີຜົນການຊອກຫາທີ່ກົງກັນ."
+  "selectSearchNoResults": "ບໍ່ພົບການຈັບຄູ່.",
+  "selectScrollUpSemanticsLabel": "ເລື່ອນຂຶ້ນ",
+  "selectScrollDownSemanticsLabel": "ເລື່ອນລົງ"
 }

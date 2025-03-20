@@ -66,7 +66,13 @@ class FLocalizationsHr extends FLocalizations {
   String get selectNoResults => 'Nema podudarajućih rezultata.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Očisti';
+  String get selectScrollUpSemanticsLabel => 'Pomakni prema gore';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Pomakni prema dolje';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Očisti';
 
   @override
   String get shortDateSeparator => '. ';

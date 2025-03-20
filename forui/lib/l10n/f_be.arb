@@ -15,5 +15,7 @@
   "textFieldClearButtonSemanticLabel": "Ачысціць",
   "selectHint": "Выберыце элемент",
   "selectSearchHint": "Пошук",
-  "selectSearchNoResults": "Няма адпаведных вынікаў."
+  "selectSearchNoResults": "Супадзенняў не знойдзена.",
+  "selectScrollUpSemanticsLabel": "Прагартаць уверх",
+  "selectScrollDownSemanticsLabel": "Прагартаць уніз"
 }

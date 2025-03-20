@@ -334,14 +334,26 @@ abstract class FLocalizations {
   /// The message displayed when there are no matching results.
   ///
   /// In en, this message translates to:
-  /// **'No matching results.'**
+  /// **'No matches found.'**
   String get selectNoResults;
+
+  /// The semantic label for the scroll handle in a select field.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll up'**
+  String get selectScrollUpSemanticsLabel;
+
+  /// The semantic label for the scroll handle in a select field.
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll down'**
+  String get selectScrollDownSemanticsLabel;
 
   /// The semantic label for the clear button in a text field.
   ///
   /// In en, this message translates to:
   /// **'Clear'**
-  String get textFieldClearButtonSemanticLabel;
+  String get textFieldClearButtonSemanticsLabel;
 
   /// The short date's separator, typically /.
   ///

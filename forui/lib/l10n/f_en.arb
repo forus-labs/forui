@@ -68,13 +68,21 @@
   "@selectSearchHint": {
     "description": "The hint text for the search field in a select field."
   },
-  "selectNoResults": "No matching results.",
+  "selectNoResults": "No matches found.",
   "@selectNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "selectScrollUpSemanticsLabel": "Scroll up",
+  "@selectScrollUpSemanticsLabel": {
+    "description": "The semantic label for the scroll handle in a select field."
+  },
+  "selectScrollDownSemanticsLabel": "Scroll down",
+    "@selectScrollDownSemanticsLabel": {
+      "description": "The semantic label for the scroll handle in a select field."
+    },
 
-  "textFieldClearButtonSemanticLabel": "Clear",
-  "@textFieldClearButtonSemanticLabel": {
+  "textFieldClearButtonSemanticsLabel": "Clear",
+  "@textFieldClearButtonSemanticsLabel": {
     "description": "The semantic label for the clear button in a text field."
   },
 

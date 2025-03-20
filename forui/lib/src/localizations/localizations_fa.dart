@@ -63,10 +63,16 @@ class FLocalizationsFa extends FLocalizations {
   String get selectSearchHint => 'جستجو';
 
   @override
-  String get selectNoResults => 'No matching results.';
+  String get selectNoResults => 'No matches found.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'پاک کردن';
+  String get selectScrollUpSemanticsLabel => 'پیمایش به بالا';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'پیمایش به پایین';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

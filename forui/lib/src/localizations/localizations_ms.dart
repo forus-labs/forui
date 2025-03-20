@@ -66,7 +66,13 @@ class FLocalizationsMs extends FLocalizations {
   String get selectNoResults => 'Tiada hasil yang sepadan.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Kosongkan';
+  String get selectScrollUpSemanticsLabel => 'Tatal ke atas';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Tatal ke bawah';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Kosongkan';
 
   @override
   String get shortDateSeparator => '/';

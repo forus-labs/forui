@@ -66,7 +66,13 @@ class FLocalizationsGsw extends FLocalizations {
   String get selectNoResults => 'Kei passendi Ergebnis.';
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Lösche';
+  String get selectScrollUpSemanticsLabel => 'Nach obe scrolle';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Nach unde scrolle';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Lösche';
 
   @override
   String get shortDateSeparator => '.';
