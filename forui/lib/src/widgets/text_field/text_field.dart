@@ -374,25 +374,21 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// {@template forui.text_field.onTap}
   /// Called for the first tap in a series of taps.
   ///
-  /// The text field builds a [GestureDetector] to handle input events like tap,
-  /// to trigger focus requests, to move the caret, adjust the selection, etc.
-  /// Handling some of those events by wrapping the text field with a competing
+  /// The text field builds a [GestureDetector] to handle input events like tap, to trigger focus requests, to move the
+  /// caret, adjust the selection, etc. Handling some of those events by wrapping the text field with a competing
   /// GestureDetector is problematic.
   ///
-  /// To unconditionally handle taps, without interfering with the text field's
-  /// internal gesture detector, provide this callback.
+  /// To unconditionally handle taps, without interfering with the text field's internal gesture detector, provide this
+  /// callback.
   ///
-  /// If the text field is created with [enabled] false, taps will not be
-  /// recognized.
+  /// If the text field is created with [enabled] false, taps will not be recognized.
   ///
-  /// To be notified when the text field gains or loses the focus, provide a
-  /// [focusNode] and add a listener to that.
+  /// To be notified when the text field gains or loses the focus, provide a [focusNode] and add a listener to that.
   ///
-  /// To listen to arbitrary pointer events without competing with the
-  /// text field's internal gesture detector, use a [Listener].
+  /// To listen to arbitrary pointer events without competing with the text field's internal gesture detector, use a
+  /// [Listener].
   ///
-  /// If [onTapAlwaysCalled] is enabled, this will also be called for consecutive
-  /// taps.
+  /// If [onTapAlwaysCalled] is enabled, this will also be called for consecutive taps.
   /// {@endtemplate}
   final GestureTapCallback? onTap;
 
