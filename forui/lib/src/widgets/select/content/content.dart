@@ -84,7 +84,7 @@ class Content<T> extends StatefulWidget {
 }
 
 class _ContentState<T> extends State<Content<T>> {
-  late final ScrollController _controller;
+  late ScrollController _controller;
   bool _up = false;
   bool _down = false;
 
@@ -99,6 +99,7 @@ class _ContentState<T> extends State<Content<T>> {
   void didUpdateWidget(covariant Content<T> old) {
     super.didUpdateWidget(old);
     if (old.controller != widget.controller) {
+      old.controller?.removeListener(_updateHandles);
       if (old.controller == null) {
         _controller.dispose();
       }
