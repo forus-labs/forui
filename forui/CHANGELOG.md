@@ -1,6 +1,14 @@
 ## 0.11.0 (Next)
 We are experimenting with a new changelog format which groups changes by feature.
 
+### `FSelect`
+A select displays a list of options for the user to pick from. It is searchable and supports both async & sync loading
+of items.
+
+* Add `FSelect`.
+* Add `FSelectController`.
+
+
 ### `FPopover`
 The traversal edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
 

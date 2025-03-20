@@ -1,4 +1,6 @@
 ## 0.11.0
+* Add `FSelectController`.
+
 * Add `useFSelectGroupController`.
 * Add `useFRadioSelectGroupController`.
 
