@@ -363,6 +363,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     }
 
     if (widget.controller != old.controller) {
+      old.controller?.removeListener(_updateTextController);
       if (old.controller == null) {
         _controller.dispose();
       }
@@ -495,9 +496,11 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
   @override
   void dispose() {
+    _controller.removeListener(_updateTextController);
     if (widget.controller == null) {
       _controller.dispose();
     }
+    _textController.dispose();
     super.dispose();
   }
 }
