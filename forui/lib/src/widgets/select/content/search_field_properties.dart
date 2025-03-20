@@ -19,6 +19,9 @@ final class FSelectSearchFieldProperties with Diagnosticable {
 
   static bool _clearable(TextEditingValue _) => false;
 
+  /// The search field's controller.
+  final TextEditingController? controller;
+
   /// {@macro forui.text_field.hint}
   final String? hint;
 
@@ -155,6 +158,7 @@ final class FSelectSearchFieldProperties with Diagnosticable {
 
   /// Creates a [FSelectSearchFieldProperties].
   const FSelectSearchFieldProperties({
+    this.controller,
     this.hint,
     this.magnifierConfiguration,
     this.keyboardType,
@@ -205,6 +209,7 @@ final class FSelectSearchFieldProperties with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('controller', controller))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))

@@ -72,8 +72,7 @@ void main() {
 
       expect(scrollController.hasListeners, true);
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-      await tester.pumpAndSettle();
+      await tester.pumpWidget(const SizedBox());
 
       expect(scrollController.hasListeners, false);
       expect(scrollController.dispose, returnsNormally);

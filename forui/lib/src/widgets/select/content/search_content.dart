@@ -72,26 +72,47 @@ class SearchContent<T> extends StatefulWidget {
 }
 
 class _SearchContentState<T> extends State<SearchContent<T>> {
-  final TextEditingController _textController = TextEditingController();
   final FocusNode _focus = FocusNode();
+  late TextEditingController _controller;
   late String _previous;
   late FutureOr<FSelectSearchData<T>> _data;
 
   @override
   void initState() {
     super.initState();
-    _previous = _textController.text;
-    _data = _filter('');
-    _textController.addListener(() {
-      if (_previous != _textController.text) {
-        _previous = _textController.text;
-        setState(() {
-          // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
-          // results in an assertion error being thrown.
-          _data = _filter(_textController.text);
-        });
+    _controller = widget.properties.controller ?? TextEditingController();
+    _controller.addListener(_update);
+    
+    _previous = _controller.text;
+    _data = _filter(_controller.text);
+  }
+
+  @override
+  void didUpdateWidget(covariant SearchContent<T> old) {
+    super.didUpdateWidget(old);
+    if (widget.properties.controller != old.properties.controller) {
+      old.properties.controller?.removeListener(_update);
+      if (old.properties.controller == null) {
+        _controller.dispose();
       }
-    });
+
+      _controller = widget.properties.controller ?? TextEditingController();
+      _controller.addListener(_update);
+
+      _previous = _controller.text;
+      _data = _filter(_controller.text);
+    }
+  }
+
+  void _update() {
+    if (_previous != _controller.text) {
+      _previous = _controller.text;
+      setState(() {
+        // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
+        // results in an assertion error being thrown.
+        _data = _filter(_controller.text);
+      });
+    }
   }
 
   FutureOr<FSelectSearchData<T>> _filter(String query) => switch (widget.filter(query)) {
@@ -113,7 +134,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             const SingleActivator(LogicalKeyboardKey.enter): _focus.nextFocus,
           },
           child: FTextField(
-            controller: _textController,
+            controller: _controller,
             focusNode: _focus,
             style: widget.style.searchStyle.textFieldStyle,
             hint: widget.properties.hint ?? localizations.selectSearchHint,
@@ -212,8 +233,11 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
 
   @override
   void dispose() {
+    _controller.removeListener(_update);
+    if (widget.properties.controller == null) {
+      _controller.dispose();
+    }
     _focus.dispose();
-    _textController.dispose();
     super.dispose();
   }
 }
