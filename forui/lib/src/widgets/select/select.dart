@@ -167,9 +167,7 @@ abstract class FSelect<T> extends StatefulWidget {
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
 
-  /// The content's scroll handles. Defaults to true.
-  ///
-  /// Setting it to false will disable the scroll handles and show a scrollbar instead.
+  /// True if the content should show scroll handles instead of a scrollbar. Defaults to false.
   final bool contentScrollHandles;
 
   /// The content's scroll physics. Defaults to [ClampingScrollPhysics].
@@ -300,7 +298,7 @@ abstract class FSelect<T> extends StatefulWidget {
     this.autoHide = true,
     this.emptyBuilder = defaultEmptyBuilder,
     this.contentScrollController,
-    this.contentScrollHandles = true,
+    this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     super.key,
   });

@@ -223,15 +223,15 @@ class FormatSelectPage extends Sample {
 }
 
 @RoutePage()
-class NoScrollHandlesSelectPage extends Sample {
-  NoScrollHandlesSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class ScrollHandlesSelectPage extends Sample {
+  ScrollHandlesSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>(
       hint: 'Select a fruit',
-      contentScrollHandles: false,
+      contentScrollHandles: true,
       children: [for (final fruit in fruits) FSelectItem.text(fruit)],
     ),
   );

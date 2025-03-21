@@ -361,19 +361,19 @@ FSelect<User>.search(
   </Tabs.Tab>
 </Tabs>
 
-#### No Scroll Handles
+#### With Scroll Handles
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select' variant='no-scroll-handles' query={{}} height={400}/>
+    <Widget name='select' variant='scroll-handles' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {5} copy
-    class NoScrollHandlesSelectPage extends StatelessWidget {
+    class ScrollHandlesSelectPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => FSelect<String>(
         hint: 'Select a fruit',
-        contentScrollHandles: false, 
+        contentScrollHandles: true,
         children: [for (final fruit in fruits) FSelectItem.text(fruit)],
       );
     }

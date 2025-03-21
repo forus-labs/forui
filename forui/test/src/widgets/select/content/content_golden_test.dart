@@ -32,6 +32,7 @@ void main() {
               child: FSelect<String>(
                 key: key,
                 contentScrollController: scrollController,
+                contentScrollHandles: true,
                 children: [
                   FSelectSection(
                     title: const Text('Lorem'),
@@ -62,6 +63,7 @@ void main() {
               child: FSelect<String>(
                 key: key,
                 contentScrollController: scrollController,
+                contentScrollHandles: true,
                 children: [
                   FSelectSection(
                     title: const Text('Lorem'),
@@ -89,6 +91,7 @@ void main() {
               child: FSelect<String>(
                 key: key,
                 contentScrollController: scrollController,
+                contentScrollHandles: true,
                 children: [
                   FSelectSection(
                     title: const Text('Lorem'),
@@ -119,7 +122,6 @@ void main() {
               child: FSelect<String>(
                 key: key,
                 contentScrollController: scrollController,
-                contentScrollHandles: false,
                 children: [
                   FSelectSection(
                     title: const Text('Lorem'),
@@ -150,6 +152,7 @@ void main() {
               child: FSelect<String>(
                 key: key,
                 contentScrollController: scrollController,
+                contentScrollHandles: true,
                 children: [
                   FSelectSection(title: const Text('Lorem'), children: [FSelectItem.text('1')]),
                 ],
