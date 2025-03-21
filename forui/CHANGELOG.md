@@ -48,6 +48,9 @@
 * **Breaking** Rename `FTappable` to `FTappable.static`.
 * **Breaking** Rename `FTappable.animated` to `FTappable`.
 
+### `FHeader`
+* Fixed an issue where header spacing is incorrectly ordered.
+
 
 ## 0.10.0+1
 
