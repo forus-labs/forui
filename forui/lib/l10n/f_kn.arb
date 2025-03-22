@@ -12,5 +12,10 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ಸಮಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
   "timeFieldInvalidDateError": "ಅಮಾನ್ಯ ಸಮಯ.",
-  "textFieldClearButtonSemanticLabel": "ತೆರವುಗೊಳಿಸಿ"
+  "textFieldClearButtonSemanticLabel": "ತೆರವುಗೊಳಿಸಿ",
+  "selectHint": "ಐಟಂ ಆಯ್ಕೆಮಾಡಿ",
+  "selectSearchHint": "ಹುಡುಕಿ",
+  "selectSearchNoResults": "ಯಾವುದೇ ಹೊಂದಾಣಿಕೆಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+  "selectScrollUpSemanticsLabel": "ಮೇಲಕ್ಕೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ",
+  "selectScrollDownSemanticsLabel": "ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ"
 }

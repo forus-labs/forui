@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ሰዓት ይምረጡ",
   "timeFieldInvalidDateError": "ልክ ያልሆነ ሰዓት።",
-  "textFieldClearButtonSemanticLabel": "አጽዳ"
+  "textFieldClearButtonSemanticsLabel": "አጽዳ",
+  "selectHint": "አንድ ንጥል ይምረጡ",
+  "selectSearchHint": "ፍለጋ",
+  "selectNoResults": "ምንም ተዛማጅ ውጤቶች የሉም።",
+  "selectSearchNoResults": "ምንም ተዛማጅ አልተገኙም።",
+  "selectScrollUpSemanticsLabel": "ወደ ላይ ሸብልል",
+  "selectScrollDownSemanticsLabel": "ወደ ታች ሸብልል"
 }

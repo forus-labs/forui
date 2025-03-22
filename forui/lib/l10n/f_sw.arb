@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Chagua wakati",
   "timeFieldInvalidDateError": "Wakati batili.",
-  "textFieldClearButtonSemanticLabel": "Futa"
+  "textFieldClearButtonSemanticsLabel": "Futa",
+  "selectHint": "Chagua kipengee",
+  "selectSearchHint": "Tafuta",
+  "selectNoResults": "Hakuna matokeo yanayolingana.",
+  "selectSearchNoResults": "Hakuna vifanano vilivyopatikana.",
+  "selectScrollUpSemanticsLabel": "Sogeza juu",
+  "selectScrollDownSemanticsLabel": "Sogeza chini"
 }

@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "समय चयन गर्नुहोस्",
   "timeFieldInvalidDateError": "अमान्य समय।",
-  "textFieldClearButtonSemanticLabel": "खाली गर्नुहोस्"
+  "textFieldClearButtonSemanticLabel": "खाली गर्नुहोस्",
+  "selectHint": "वस्तु चयन गर्नुहोस्",
+  "selectSearchHint": "खोज्नुहोस्",
+  "selectNoResults": "कुनै मिल्दो परिणामहरू छैनन्।",
+  "selectSearchNoResults": "कुनै मिल्दो फेला परेन।",
+  "selectScrollUpSemanticsLabel": "माथि स्क्रोल गर्नुहोस्",
+  "selectScrollDownSemanticsLabel": "तल स्क्रोल गर्नुहोस्"
 }

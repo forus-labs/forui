@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Dewiswch amser",
   "timeFieldInvalidDateError": "Amser annilys.",
-  "textFieldClearButtonSemanticLabel": "Clirio"
+  "textFieldClearButtonSemanticsLabel": "Clirio",
+  "selectHint": "Dewiswch eitem",
+  "selectSearchHint": "Chwilio",
+  "selectNoResults": "Dim canlyniadau cyfatebol.",
+  "selectSearchNoResults": "Ni chanfuwyd unrhyw gyfatebiaeth.",
+  "selectScrollUpSemanticsLabel": "Sgrolio i fyny",
+  "selectScrollDownSemanticsLabel": "Sgrolio i lawr"
 }

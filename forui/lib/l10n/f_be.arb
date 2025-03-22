@@ -12,5 +12,10 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Выберыце час",
   "timeFieldInvalidDateError": "Няправільны час.",
-  "textFieldClearButtonSemanticLabel": "Ачысціць"
+  "textFieldClearButtonSemanticLabel": "Ачысціць",
+  "selectHint": "Выберыце элемент",
+  "selectSearchHint": "Пошук",
+  "selectSearchNoResults": "Супадзенняў не знойдзена.",
+  "selectScrollUpSemanticsLabel": "Прагартаць уверх",
+  "selectScrollDownSemanticsLabel": "Прагартаць уніз"
 }

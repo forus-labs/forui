@@ -57,7 +57,22 @@ class FLocalizationsIs extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Hreinsa';
+  String get selectHint => 'Veldu atriði';
+
+  @override
+  String get selectSearchHint => 'Leita';
+
+  @override
+  String get selectNoResults => 'Engar samsvarandi niðurstöður.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Fletta upp';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Fletta niður';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Hreinsa';
 
   @override
   String get shortDateSeparator => '.';

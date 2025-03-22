@@ -119,7 +119,7 @@ abstract class FTimeField extends StatefulWidget {
   final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? prefixBuilder;
 
   /// Builds a widget at the end of the input field that can be pressed to toggle the popover. Defaults to
-  /// no prefix.
+  /// no suffix.
   final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStateStyle)>? suffixBuilder;
 
   /// The label.

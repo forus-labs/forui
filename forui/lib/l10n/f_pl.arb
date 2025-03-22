@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Wybierz godzinę",
   "timeFieldInvalidDateError": "Nieprawidłowa godzina.",
-  "textFieldClearButtonSemanticLabel": "Wyczyść"
+  "textFieldClearButtonSemanticsLabel": "Wyczyść",
+  "selectHint": "Wybierz element",
+  "selectSearchHint": "Szukaj",
+  "selectNoResults": "Brak pasujących wyników.",
+  "selectSearchNoResults": "Nie znaleziono pasujących elementów.",
+  "selectScrollUpSemanticsLabel": "Przewiń w górę",
+  "selectScrollDownSemanticsLabel": "Przewiń w dół"
 }

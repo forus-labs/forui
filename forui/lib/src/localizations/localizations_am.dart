@@ -57,7 +57,22 @@ class FLocalizationsAm extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'አጽዳ';
+  String get selectHint => 'አንድ ንጥል ይምረጡ';
+
+  @override
+  String get selectSearchHint => 'ፍለጋ';
+
+  @override
+  String get selectNoResults => 'ምንም ተዛማጅ ውጤቶች የሉም።';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'ወደ ላይ ሸብልል';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'ወደ ታች ሸብልል';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'አጽዳ';
 
   @override
   String get shortDateSeparator => '/';

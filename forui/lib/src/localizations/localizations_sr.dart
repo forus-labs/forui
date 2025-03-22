@@ -57,7 +57,22 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Обриши';
+  String get selectHint => 'Изаберите ставку';
+
+  @override
+  String get selectSearchHint => 'Претрага';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Померите нагоре';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Померите надоле';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '.';
@@ -106,7 +121,22 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   FLocalizationsSrLatn() : super('sr_Latn');
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Obriši';
+  String get selectHint => 'Izaberite stavku';
+
+  @override
+  String get selectSearchHint => 'Pretraga';
+
+  @override
+  String get selectNoResults => 'Nema podudarajućih rezultata.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Pomerite nagore';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Pomerite nadole';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Obriši';
 
   @override
   String get shortDateSeparator => '.';

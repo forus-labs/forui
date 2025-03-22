@@ -6,6 +6,7 @@ export '/src/pagination_controller_hook.dart';
 export '/src/picker_controller_hook.dart';
 export '/src/popover_controller_hook.dart';
 export '/src/resizable_controller_hook.dart';
+export '/src/select_controller_hook.dart';
 export '/src/select_group_controller_hook.dart';
 export '/src/select_menu_tile_controller_hook.dart';
 export '/src/select_tile_group_controller_hook.dart';

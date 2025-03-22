@@ -176,7 +176,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
-      expect(Focus.of(tester.element(find.text('2'))).hasFocus, true);
+      expect(Focus.of(tester.element(find.text('3'))).hasFocus, true);
     });
   });
 

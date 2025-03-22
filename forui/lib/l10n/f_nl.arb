@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Kies een tijd",
   "timeFieldInvalidDateError": "Ongeldige tijd.",
-  "textFieldClearButtonSemanticLabel": "Wissen"
+  "textFieldClearButtonSemanticsLabel": "Wissen",
+  "selectHint": "Selecteer een item",
+  "selectSearchHint": "Zoeken",
+  "selectNoResults": "Geen overeenkomende resultaten.",
+  "selectSearchNoResults": "Geen overeenkomsten gevonden.",
+  "selectScrollUpSemanticsLabel": "Omhoog scrollen",
+  "selectScrollDownSemanticsLabel": "Omlaag scrollen"
 }

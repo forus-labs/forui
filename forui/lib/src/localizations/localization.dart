@@ -77,7 +77,22 @@ class FDefaultLocalizations extends FLocalizations {
   String shortDate(DateTime date) => DateFormat.yMd().format(date);
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clear';
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

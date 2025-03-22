@@ -57,7 +57,22 @@ class FLocalizationsEt extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Kustuta';
+  String get selectHint => 'Valige üksus';
+
+  @override
+  String get selectSearchHint => 'Otsi';
+
+  @override
+  String get selectNoResults => 'Sobivaid tulemusi pole.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Keri üles';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Keri alla';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Kustuta';
 
   @override
   String get shortDateSeparator => '.';

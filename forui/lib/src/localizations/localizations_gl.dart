@@ -57,7 +57,22 @@ class FLocalizationsGl extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Borrar';
+  String get selectHint => 'Seleccione un elemento';
+
+  @override
+  String get selectSearchHint => 'Buscar';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Desprazarse cara arriba';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Desprazarse cara abaixo';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

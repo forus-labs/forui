@@ -68,10 +68,13 @@ class FPopoverMenu extends StatefulWidget {
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
-  final FocusNode? focusNode;
+  final FocusScopeNode? focusNode;
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
+  /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
+  final TraversalEdgeBehavior traversalEdgeBehavior;
 
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticLabel;
@@ -104,6 +107,7 @@ class FPopoverMenu extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     super.key,
   }) : _automatic = false;
 
@@ -131,6 +135,7 @@ class FPopoverMenu extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     super.key,
   }) : _automatic = true;
 
@@ -156,7 +161,8 @@ class FPopoverMenu extends StatefulWidget {
       ..add(StringProperty('semanticLabel', semanticLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior));
   }
 }
 
@@ -196,6 +202,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
+      traversalEdgeBehavior: widget.traversalEdgeBehavior,
       popoverBuilder:
           (_, _, _) => ConstrainedBox(
             constraints: BoxConstraints(maxWidth: style.maxWidth),

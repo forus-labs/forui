@@ -57,7 +57,22 @@ class FLocalizationsFil extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'I-clear';
+  String get selectHint => 'Pumili ng item';
+
+  @override
+  String get selectSearchHint => 'Maghanap';
+
+  @override
+  String get selectNoResults => 'Walang mga tumutugmang resulta.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Mag-scroll pataas';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Mag-scroll pababa';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'I-clear';
 
   @override
   String get shortDateSeparator => '/';

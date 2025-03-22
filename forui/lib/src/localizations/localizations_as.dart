@@ -57,7 +57,22 @@ class FLocalizationsAs extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'মচক';
+  String get selectHint => 'এটা বস্তু বাছনি কৰক';
+
+  @override
+  String get selectSearchHint => 'সন্ধান কৰক';
+
+  @override
+  String get selectNoResults => 'কোনো মিল থকা ফলাফল নাই।';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'ওপৰলৈ স্ক্ৰল কৰক';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'তললৈ স্ক্ৰল কৰক';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'মচক';
 
   @override
   String get shortDateSeparator => '-';

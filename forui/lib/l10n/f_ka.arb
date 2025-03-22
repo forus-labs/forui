@@ -12,5 +12,10 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "აირჩიეთ დრო",
   "timeFieldInvalidDateError": "არასწორი დრო.",
-  "textFieldClearButtonSemanticLabel": "გასუფთავება"
+  "textFieldClearButtonSemanticLabel": "გასუფთავება",
+  "selectHint": "აირჩიეთ ელემენტი",
+  "selectSearchHint": "ძიება",
+  "selectSearchNoResults": "დამთხვევები ვერ მოიძებნა.",
+  "selectScrollUpSemanticsLabel": "ზემოთ გადაადგილება",
+  "selectScrollDownSemanticsLabel": "ქვემოთ გადაადგილება"
 }

@@ -57,7 +57,22 @@ class FLocalizationsBn extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'মুছুন';
+  String get selectHint => 'একটি আইটেম নির্বাচন করুন';
+
+  @override
+  String get selectSearchHint => 'অনুসন্ধান';
+
+  @override
+  String get selectNoResults => 'কোন মিলে যাওয়া ফলাফল নেই।';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'উপরে স্ক্রোল করুন';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'নিচে স্ক্রোল করুন';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'মুছুন';
 
   @override
   String get shortDateSeparator => '/';

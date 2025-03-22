@@ -101,10 +101,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
-  final FocusNode? focusNode;
+  final FocusScopeNode? focusNode;
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
+  /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
+  final TraversalEdgeBehavior traversalEdgeBehavior;
 
   /// The prefix icon.
   final Widget? prefixIcon;
@@ -153,6 +156,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     this.prefixIcon,
     this.subtitle,
     this.details,
@@ -204,6 +208,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              autofocus: autofocus,
              focusNode: focusNode,
              onFocusChange: onFocusChange,
+             traversalEdgeBehavior: traversalEdgeBehavior,
              popoverBuilder:
                  (_, _, _) => ConstrainedBox(
                    constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
@@ -289,6 +294,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     this.prefixIcon,
     this.subtitle,
     this.details,
@@ -340,6 +346,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              autofocus: autofocus,
              focusNode: focusNode,
              onFocusChange: onFocusChange,
+             traversalEdgeBehavior: traversalEdgeBehavior,
              popoverBuilder:
                  (_, _, _) => ConstrainedBox(
                    constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
@@ -412,6 +419,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSelect', onSelect));
   }

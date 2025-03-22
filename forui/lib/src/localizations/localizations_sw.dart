@@ -57,7 +57,22 @@ class FLocalizationsSw extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Futa';
+  String get selectHint => 'Chagua kipengee';
+
+  @override
+  String get selectSearchHint => 'Tafuta';
+
+  @override
+  String get selectNoResults => 'Hakuna matokeo yanayolingana.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Sogeza juu';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Sogeza chini';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Futa';
 
   @override
   String get shortDateSeparator => '/';

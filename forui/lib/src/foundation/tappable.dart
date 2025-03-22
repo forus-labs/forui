@@ -30,7 +30,7 @@ extension Touch on Never {
 }
 
 /// The tappable's current data.
-typedef FTappableData = ({bool focused, bool hovered});
+typedef FTappableData = ({bool focused, bool hovered, bool pressed});
 
 /// An area that responds to touch.
 ///
@@ -81,7 +81,7 @@ class FTappable extends StatefulWidget {
   final VoidCallback? onLongPress;
 
   /// The builder used to build to create a child with the current state.
-  final ValueWidgetBuilder<({bool focused, bool hovered})> builder;
+  final ValueWidgetBuilder<FTappableData> builder;
 
   /// The child.
   ///
@@ -180,8 +180,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.tappableStyle;
+    var tappable = widget.builder(context, (focused: _focused, hovered: _hovered, pressed: _touched), widget.child);
 
-    var tappable = widget.builder(context, (focused: _focused, hovered: _hovered || _touched), widget.child);
     tappable = _decorate(context, tappable);
 
     if (widget._enabled) {

@@ -140,10 +140,18 @@ class FPopover extends StatefulWidget {
   final bool autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
-  final FocusNode? focusNode;
+  final FocusScopeNode? focusNode;
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
+  /// {@template forui.widgets.FPopover.traversalEdgeBehavior}
+  /// Controls the transfer of focus beyond the first and the last items in a popover. Defaults to
+  /// [TraversalEdgeBehavior.closedLoop].
+  ///
+  /// Changing this field value has no immediate effect on the UI.
+  /// {@endtemplate}
+  final TraversalEdgeBehavior traversalEdgeBehavior;
 
   /// The popover's semantic label used by accessibility frameworks.
   final String? semanticLabel;
@@ -169,6 +177,7 @@ class FPopover extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
@@ -192,6 +201,7 @@ class FPopover extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     this.semanticLabel,
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
@@ -218,6 +228,7 @@ class FPopover extends StatefulWidget {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
   }
 }
@@ -281,25 +292,23 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             child: Semantics(
               label: widget.semanticLabel,
               container: true,
-              child: Focus(
+              child: FocusScope(
                 autofocus: widget.autofocus,
-                focusNode: widget.focusNode,
+                node: widget.focusNode,
                 onFocusChange: widget.onFocusChange,
-                child: FocusTraversalGroup(
-                  child: Padding(
-                    padding: style.padding,
-                    child: FadeTransition(
-                      opacity: _controller._fade,
-                      child: ScaleTransition(
-                        scale: _controller._scale,
-                        child: TapRegion(
-                          groupId: _group,
-                          onTapOutside:
-                              widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
-                          child: DecoratedBox(
-                            decoration: style.decoration,
-                            child: widget.popoverBuilder(context, style, null),
-                          ),
+                child: Padding(
+                  padding: style.padding,
+                  child: FadeTransition(
+                    opacity: _controller._fade,
+                    child: ScaleTransition(
+                      scale: _controller._scale,
+                      child: TapRegion(
+                        groupId: _group,
+                        onTapOutside:
+                            widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
+                        child: DecoratedBox(
+                          decoration: style.decoration,
+                          child: widget.popoverBuilder(context, style, null),
                         ),
                       ),
                     ),

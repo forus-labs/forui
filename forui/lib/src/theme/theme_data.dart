@@ -104,6 +104,9 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// The scaffold style.
   final FScaffoldStyle scaffoldStyle;
 
+  /// The select style.
+  final FSelectStyle selectStyle;
+
   /// The select group style.
   final FSelectGroupStyle selectGroupStyle;
 
@@ -171,6 +174,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
     FScaffoldStyle? scaffoldStyle,
+    FSelectStyle? selectStyle,
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
     FSheetStyle? sheetStyle,
@@ -227,6 +231,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       radioStyle: radioStyle ?? FRadioStyle.inherit(colorScheme: colorScheme, style: style),
       resizableStyle: resizableStyle ?? FResizableStyle.inherit(colorScheme: colorScheme, style: style),
       scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colorScheme: colorScheme, style: style),
+      selectStyle: selectStyle ?? FSelectStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       selectGroupStyle:
           selectGroupStyle ?? FSelectGroupStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
       selectMenuTileStyle:
@@ -281,6 +286,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.radioStyle,
     required this.resizableStyle,
     required this.scaffoldStyle,
+    required this.selectStyle,
     required this.selectGroupStyle,
     required this.selectMenuTileStyle,
     required this.sheetStyle,
@@ -788,6 +794,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
     FScaffoldStyle? scaffoldStyle,
+    FSelectStyle? selectStyle,
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
     FSheetStyle? sheetStyle,
@@ -827,6 +834,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     radioStyle: radioStyle ?? this.radioStyle,
     resizableStyle: resizableStyle ?? this.resizableStyle,
     scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
+    selectStyle: selectStyle ?? this.selectStyle,
     selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
     selectMenuTileStyle: selectMenuTileStyle ?? this.selectMenuTileStyle,
     sheetStyle: sheetStyle ?? this.sheetStyle,
@@ -873,6 +881,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('selectStyle', selectStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('selectMenuTileStyle', selectMenuTileStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sheetStyle', sheetStyle, level: DiagnosticLevel.debug))
@@ -920,6 +929,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           radioStyle == other.radioStyle &&
           resizableStyle == other.resizableStyle &&
           scaffoldStyle == other.scaffoldStyle &&
+          selectStyle == other.selectStyle &&
           selectGroupStyle == other.selectGroupStyle &&
           selectMenuTileStyle == other.selectMenuTileStyle &&
           sheetStyle == other.sheetStyle &&
@@ -963,6 +973,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       radioStyle.hashCode ^
       resizableStyle.hashCode ^
       scaffoldStyle.hashCode ^
+      selectStyle.hashCode ^
       selectGroupStyle.hashCode ^
       selectMenuTileStyle.hashCode ^
       sheetStyle.hashCode ^

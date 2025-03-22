@@ -57,7 +57,22 @@ class FLocalizationsAz extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Təmizlə';
+  String get selectHint => 'Element seçin';
+
+  @override
+  String get selectSearchHint => 'Axtarış';
+
+  @override
+  String get selectNoResults => 'Uyğun nəticə tapılmadı.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Yuxarı sürüşdür';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Aşağı sürüşdür';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Təmizlə';
 
   @override
   String get shortDateSeparator => '.';

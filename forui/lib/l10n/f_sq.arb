@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Zgjidh një orë",
   "timeFieldInvalidDateError": "Orë e pavlefshme.",
-  "textFieldClearButtonSemanticLabel": "Pastro"
+  "textFieldClearButtonSemanticsLabel": "Pastro",
+  "selectHint": "Zgjidhni një artikull",
+  "selectSearchHint": "Kërko",
+  "selectNoResults": "Nuk ka rezultate përputhëse.",
+  "selectSearchNoResults": "Nuk u gjetën përputhje.",
+  "selectScrollUpSemanticsLabel": "Lëviz lart",
+  "selectScrollDownSemanticsLabel": "Lëviz poshtë"
 }

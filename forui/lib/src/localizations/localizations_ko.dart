@@ -57,7 +57,22 @@ class FLocalizationsKo extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => '지우기';
+  String get selectHint => '항목 선택';
+
+  @override
+  String get selectSearchHint => '검색';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => '위로 스크롤';
+
+  @override
+  String get selectScrollDownSemanticsLabel => '아래로 스크롤';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '. ';

@@ -57,7 +57,22 @@ class FLocalizationsMk extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Избриши';
+  String get selectHint => 'Изберете ставка';
+
+  @override
+  String get selectSearchHint => 'Пребарување';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Лизгај нагоре';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Лизгај надолу';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '.';
