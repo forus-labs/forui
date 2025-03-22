@@ -11,7 +11,7 @@
 
 import 'package:flutter/widgets.dart';
 
-/// The icons bundled with Forui.
+/// The Lucide icons bundled with Forui.
 ///
 /// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g.
 /// [FIcons.armchair].
@@ -243,16 +243,36 @@ class FIcons {
   static const arrowBigDown = IconData(57825, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`arrow-big-left-dash`](https://lucide.dev/icons/arrow-big-left-dash) icon.
-  static const arrowBigLeftDash = IconData(58403, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowBigLeftDash = IconData(
+    58403,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-big-left`](https://lucide.dev/icons/arrow-big-left) icon.
-  static const arrowBigLeft = IconData(57826, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowBigLeft = IconData(
+    57826,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-big-right-dash`](https://lucide.dev/icons/arrow-big-right-dash) icon.
-  static const arrowBigRightDash = IconData(58404, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowBigRightDash = IconData(
+    58404,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-big-right`](https://lucide.dev/icons/arrow-big-right) icon.
-  static const arrowBigRight = IconData(57827, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowBigRight = IconData(
+    57827,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-big-up-dash`](https://lucide.dev/icons/arrow-big-up-dash) icon.
   static const arrowBigUpDash = IconData(58405, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -300,28 +320,58 @@ class FIcons {
   static const arrowDown = IconData(57414, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`arrow-left-from-line`](https://lucide.dev/icons/arrow-left-from-line) icon.
-  static const arrowLeftFromLine = IconData(58459, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowLeftFromLine = IconData(
+    58459,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-left-right`](https://lucide.dev/icons/arrow-left-right) icon.
   static const arrowLeftRight = IconData(57930, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`arrow-left-to-line`](https://lucide.dev/icons/arrow-left-to-line) icon.
-  static const arrowLeftToLine = IconData(58460, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowLeftToLine = IconData(
+    58460,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-left`](https://lucide.dev/icons/arrow-left) icon.
-  static const arrowLeft = IconData(57420, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowLeft = IconData(
+    57420,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-right-from-line`](https://lucide.dev/icons/arrow-right-from-line) icon.
-  static const arrowRightFromLine = IconData(58461, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowRightFromLine = IconData(
+    58461,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-right-left`](https://lucide.dev/icons/arrow-right-left) icon.
   static const arrowRightLeft = IconData(58396, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`arrow-right-to-line`](https://lucide.dev/icons/arrow-right-to-line) icon.
-  static const arrowRightToLine = IconData(58462, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowRightToLine = IconData(
+    58462,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-right`](https://lucide.dev/icons/arrow-right) icon.
-  static const arrowRight = IconData(57421, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const arrowRight = IconData(
+    57421,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`arrow-up-0-1`](https://lucide.dev/icons/arrow-up-0-1) icon.
   static const arrowUp01 = IconData(58397, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1001,16 +1051,36 @@ class FIcons {
   static const chevronDown = IconData(57457, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`chevron-first`](https://lucide.dev/icons/chevron-first) icon.
-  static const chevronFirst = IconData(57923, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chevronFirst = IconData(
+    57923,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`chevron-last`](https://lucide.dev/icons/chevron-last) icon.
-  static const chevronLast = IconData(57924, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chevronLast = IconData(
+    57924,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`chevron-left`](https://lucide.dev/icons/chevron-left) icon.
-  static const chevronLeft = IconData(57458, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chevronLeft = IconData(
+    57458,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`chevron-right`](https://lucide.dev/icons/chevron-right) icon.
-  static const chevronRight = IconData(57459, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chevronRight = IconData(
+    57459,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`chevron-up`](https://lucide.dev/icons/chevron-up) icon.
   static const chevronUp = IconData(57460, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1028,13 +1098,23 @@ class FIcons {
   static const chevronsLeftRight = IconData(58003, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`chevrons-left`](https://lucide.dev/icons/chevrons-left) icon.
-  static const chevronsLeft = IconData(57462, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chevronsLeft = IconData(
+    57462,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`chevrons-right-left`](https://lucide.dev/icons/chevrons-right-left) icon.
   static const chevronsRightLeft = IconData(58004, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`chevrons-right`](https://lucide.dev/icons/chevrons-right) icon.
-  static const chevronsRight = IconData(57463, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const chevronsRight = IconData(
+    57463,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`chevrons-up-down`](https://lucide.dev/icons/chevrons-up-down) icon.
   static const chevronsUpDown = IconData(57873, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1061,7 +1141,12 @@ class FIcons {
   static const circleArrowDown = IconData(57468, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`circle-arrow-left`](https://lucide.dev/icons/circle-arrow-left) icon.
-  static const circleArrowLeft = IconData(57469, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleArrowLeft = IconData(
+    57469,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`circle-arrow-out-down-left`](https://lucide.dev/icons/circle-arrow-out-down-left) icon.
   static const circleArrowOutDownLeft = IconData(58364, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1076,7 +1161,12 @@ class FIcons {
   static const circleArrowOutUpRight = IconData(58367, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`circle-arrow-right`](https://lucide.dev/icons/circle-arrow-right) icon.
-  static const circleArrowRight = IconData(57470, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleArrowRight = IconData(
+    57470,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`circle-arrow-up`](https://lucide.dev/icons/circle-arrow-up) icon.
   static const circleArrowUp = IconData(57471, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -1091,10 +1181,20 @@ class FIcons {
   static const circleChevronDown = IconData(58594, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`circle-chevron-left`](https://lucide.dev/icons/circle-chevron-left) icon.
-  static const circleChevronLeft = IconData(58595, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleChevronLeft = IconData(
+    58595,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`circle-chevron-right`](https://lucide.dev/icons/circle-chevron-right) icon.
-  static const circleChevronRight = IconData(58596, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const circleChevronRight = IconData(
+    58596,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`circle-chevron-up`](https://lucide.dev/icons/circle-chevron-up) icon.
   static const circleChevronUp = IconData(58597, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -2411,10 +2511,20 @@ class FIcons {
   static const inbox = IconData(57595, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`indent-decrease`](https://lucide.dev/icons/indent-decrease) icon.
-  static const indentDecrease = IconData(57596, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const indentDecrease = IconData(
+    57596,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`indent-increase`](https://lucide.dev/icons/indent-increase) icon.
-  static const indentIncrease = IconData(57597, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const indentIncrease = IconData(
+    57597,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`indian-rupee`](https://lucide.dev/icons/indian-rupee) icon.
   static const indianRupee = IconData(57598, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3941,7 +4051,12 @@ class FIcons {
   static const squareArrowDown = IconData(58412, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`square-arrow-left`](https://lucide.dev/icons/square-arrow-left) icon.
-  static const squareArrowLeft = IconData(58413, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowLeft = IconData(
+    58413,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`square-arrow-out-down-left`](https://lucide.dev/icons/square-arrow-out-down-left) icon.
   static const squareArrowOutDownLeft = IconData(58790, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
@@ -3956,7 +4071,12 @@ class FIcons {
   static const squareArrowOutUpRight = IconData(58793, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
 
   /// An [`square-arrow-right`](https://lucide.dev/icons/square-arrow-right) icon.
-  static const squareArrowRight = IconData(58414, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
+  static const squareArrowRight = IconData(
+    58414,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_assets',
+    matchTextDirection: true,
+  );
 
   /// An [`square-arrow-up-left`](https://lucide.dev/icons/square-arrow-up-left) icon.
   static const squareArrowUpLeft = IconData(58556, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');
