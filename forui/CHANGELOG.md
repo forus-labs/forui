@@ -4,6 +4,7 @@
 * Add `FProgress.circularIcon`.
 
 * Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
+* Add `filled` and `fillColor` for `FTextField`.
 
 * Add `FMultiValueNotifier`.
 * Add `FSelectTileGroupController` typedef.
@@ -336,7 +337,7 @@ This update adds responsive breakpoints, focused outlines & localization! It als
 * **Breaking** Change `FPopover()` to not automatically wrap a target in a `GestureDetector` - use `FPopover.tappable(...)`
   instead.
 
-* **Breaking** Change `FSlider` to default to the current text direction instead of `Layout.ltr`. 
+* **Breaking** Change `FSlider` to default to the current text direction instead of `Layout.ltr`.
 
 * Change `FCalendar` to support localization.
 
