@@ -9,6 +9,7 @@ class Field extends FormField<String> {
   static InputDecoration _decoration(
     _State state,
     FTextField parent,
+    FTextFieldStyle style,
     FTextFieldStateStyle stateStyle,
     EdgeInsetsGeometry contentPadding,
     Widget? suffix,
@@ -35,8 +36,8 @@ class Field extends FormField<String> {
       },
       hintText: parent.hint,
       hintStyle: stateStyle.hintTextStyle,
-      fillColor: parent.fillColor,
-      filled: parent.filled,
+      fillColor: style.fillColor,
+      filled: style.filled,
       disabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
         borderRadius: stateStyle.unfocusedStyle.radius,
@@ -104,7 +105,7 @@ class Field extends FormField<String> {
 
           final textfield = TextField(
             controller: state._effectiveController,
-            decoration: _decoration(state, parent, stateStyle, style.contentPadding, suffix),
+            decoration: _decoration(state, parent, style, stateStyle, style.contentPadding, suffix),
             focusNode: parent.focusNode,
             undoController: parent.undoController,
             cursorErrorColor: style.cursorColor,

@@ -114,7 +114,7 @@ Method generateDebugFillProperties(ClassElement element, List<FieldElement> fiel
               _ when enumeration.isAssignableFromType(field.type) => "EnumProperty('${field.name}', ${field.name})",
               _ when iterable.isAssignableFromType(field.type) => "IterableProperty('${field.name}', ${field.name})",
               _ when bool.isAssignableFromType(field.type) =>
-                "FlagProperty('${field.name}', value: ${field.name}, ifTrue: '${field.name}'",
+                "FlagProperty('${field.name}', value: ${field.name}, ifTrue: '${field.name}')",
               _ when field.type.isDartCoreFunction => "ObjectFlagProperty.has('${field.name}', ${field.name})",
               _ when field.type is RecordType => "StringProperty('${field.name}', ${field.name}.toString())",
               _ => "DiagnosticsProperty('${field.name}', ${field.name})",

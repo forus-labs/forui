@@ -21,6 +21,14 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   @override
   final Color cursorColor;
 
+  /// The base fill color of the decoration's container color.
+  @override
+  final Color? fillColor;
+
+  /// If true the decoration's container is filled with [fillColor]. Defaults to false.
+  @override
+  final bool filled;
+
   /// The padding surrounding this text field's content.
   ///
   /// Defaults to `const EdgeInsets.symmetric(horizontal: 14, vertical: 14)`.
@@ -71,6 +79,8 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
     required this.disabledStyle,
     required this.errorStyle,
     this.cursorColor = CupertinoColors.activeBlue,
+    this.fillColor,
+    this.filled = false,
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
     this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 4),
     this.scrollPadding = const EdgeInsets.all(20),
