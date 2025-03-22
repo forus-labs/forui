@@ -43,7 +43,7 @@ void main() {
             child: FAvatar.raw(
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Icon(FIcons.baby, color: theme.data.colorScheme.mutedForeground),
+                child: Icon(FIcons.baby, color: theme.data.colorScheme.mutedForeground, size: 20),
               ),
             ),
           ),

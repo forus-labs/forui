@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -221,7 +223,7 @@ class _Thumb extends StatelessWidget {
     decoration: BoxDecoration(color: style.backgroundColor, borderRadius: BorderRadius.circular(4)),
     height: style.height,
     width: style.width,
-    child: Icon(icon, color: style.foregroundColor),
+    child: Icon(icon, color: style.foregroundColor, size: min(style.height, style.width)),
   );
 
   @override
