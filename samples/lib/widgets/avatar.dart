@@ -35,9 +35,7 @@ class AvatarRawPage extends Sample {
     children: [
       FAvatar.raw(),
       const SizedBox(width: 10),
-      FAvatar.raw(
-        child: FAssets.icons.baby(colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn)),
-      ),
+      FAvatar.raw(child: Icon(FIcons.baby, color: theme.colorScheme.mutedForeground)),
       const SizedBox(width: 10),
       FAvatar.raw(child: const Text('MN')),
     ],

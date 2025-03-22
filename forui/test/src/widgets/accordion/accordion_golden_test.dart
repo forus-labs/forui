@@ -15,7 +15,7 @@ void main() {
         TestScaffold.blue(
           child: FAccordion(
             style: TestScaffold.blueScreen.accordionStyle,
-            items: [FAccordionItem(title: const Text('Title'), child: const SizedBox())],
+            items: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
           ),
         ),
       );
@@ -28,12 +28,12 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FAccordion(
+            child: const FAccordion(
               items: [
                 FAccordionItem(
                   initiallyExpanded: true,
-                  title: const Text('Title'),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                  title: Text('Title'),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),
@@ -47,17 +47,17 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FAccordion(
+            child: const FAccordion(
               items: [
                 FAccordionItem(
                   initiallyExpanded: true,
                   autofocus: true,
-                  title: const Text('Title'),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                  title: Text('Title'),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
                 FAccordionItem(
-                  title: const Text('Title'),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                  title: Text('Title'),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),
@@ -71,12 +71,12 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FAccordion(
+            child: const FAccordion(
               items: [
                 FAccordionItem(
                   initiallyExpanded: true,
-                  title: const Text('Title'),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                  title: Text('Title'),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),

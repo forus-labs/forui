@@ -121,7 +121,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The details.
   final Widget? details;
 
-  /// The suffix icon. Defaults to `FAssets.icons.chevronsUpDown`.
+  /// The suffix icon. Defaults to `FIcons.chevronsUpDown`.
   final Widget? suffixIcon;
 
   /// The callback that is called when the value changes.
@@ -232,7 +232,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                title: title,
                subtitle: subtitle,
                details: details,
-               suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
+               suffixIcon: suffixIcon ?? const Icon(FIcons.chevronsUpDown),
                onPress: state._controller._popover.toggle,
              ),
            );
@@ -371,7 +371,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                title: title,
                subtitle: subtitle,
                details: details,
-               suffixIcon: suffixIcon ?? FIcon(FAssets.icons.chevronsUpDown),
+               suffixIcon: suffixIcon ?? const Icon(FIcons.chevronsUpDown),
                onPress: state._controller._popover.toggle,
              ),
            );

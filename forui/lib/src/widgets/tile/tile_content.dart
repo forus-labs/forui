@@ -60,7 +60,7 @@ class FTileContent extends StatelessWidget {
                 ltr
                     ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
                     : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
-            child: FIconStyleData(style: style.prefixIconStyle, child: prefix),
+            child: IconTheme(data: style.prefixIconStyle, child: prefix),
           )
         else
           const SizedBox(),
@@ -117,7 +117,7 @@ class FTileContent extends StatelessWidget {
                 ltr
                     ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
                     : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
-            child: FIconStyleData(style: style.suffixIconStyle, child: suffixIcon),
+            child: IconTheme(data: style.suffixIconStyle, child: suffixIcon),
           )
         else
           const SizedBox(),
@@ -196,25 +196,25 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
   FTileContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
     : this(
         enabledStyle: FTileContentStateStyle(
-          prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
+          prefixIconStyle: IconThemeData(color: colorScheme.primary, size: 18),
           titleTextStyle: typography.base,
           subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
           detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
-          suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+          suffixIconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
         ),
         enabledHoveredStyle: FTileContentStateStyle(
-          prefixIconStyle: FIconStyle(color: colorScheme.primary, size: 18),
+          prefixIconStyle: IconThemeData(color: colorScheme.primary, size: 18),
           titleTextStyle: typography.base,
           subtitleTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
           detailsTextStyle: typography.base.copyWith(color: colorScheme.mutedForeground),
-          suffixIconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+          suffixIconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
         ),
         disabledStyle: FTileContentStateStyle(
-          prefixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.primary), size: 18),
+          prefixIconStyle: IconThemeData(color: colorScheme.disable(colorScheme.primary), size: 18),
           titleTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.primary)),
           subtitleTextStyle: typography.xs.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
           detailsTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
-          suffixIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.mutedForeground), size: 18),
+          suffixIconStyle: IconThemeData(color: colorScheme.disable(colorScheme.mutedForeground), size: 18),
         ),
       );
 }
@@ -223,7 +223,7 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
 final class FTileContentStateStyle with Diagnosticable, _$FTileContentStateStyleFunctions {
   /// The prefix icon's style.
   @override
-  final FIconStyle prefixIconStyle;
+  final IconThemeData prefixIconStyle;
 
   /// The title's text style.
   @override
@@ -239,7 +239,7 @@ final class FTileContentStateStyle with Diagnosticable, _$FTileContentStateStyle
 
   /// The suffix icon's style.
   @override
-  final FIconStyle suffixIconStyle;
+  final IconThemeData suffixIconStyle;
 
   /// Creates a [FTileContentStateStyle].
   const FTileContentStateStyle({

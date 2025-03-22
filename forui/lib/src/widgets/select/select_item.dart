@@ -137,8 +137,14 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   final Widget selectedIcon;
 
   /// Creates a [FSelectItem].
-  FSelectItem({required this.value, required this.child, this.style, this.enabled, Widget? icon, super.key})
-    : selectedIcon = icon ?? FIcon(FAssets.icons.check);
+  FSelectItem({
+    required this.value,
+    required this.child,
+    this.style,
+    this.enabled,
+    this.selectedIcon = const Icon(FIcons.check),
+    super.key,
+  });
 
   /// Creates a [FSelectItem] that displays the [value] as the a text.
   static FSelectItem<String> text(String value, {bool? enabled}) =>
@@ -196,10 +202,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
           children: [
             DefaultTextStyle(style: enabled ? style.enabledTextStyle : style.disabledTextStyle, child: widget.child),
             if (selected)
-              FIconStyleData(
-                style: enabled ? style.enabledIconStyle : style.disabledIconStyle,
-                child: widget.selectedIcon,
-              ),
+              IconTheme(data: enabled ? style.enabledIconStyle : style.disabledIconStyle, child: widget.selectedIcon),
           ],
         ),
       ),
@@ -257,11 +260,11 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
 
   /// The icon style for a checked item when enabled.
   @override
-  final FIconStyle enabledIconStyle;
+  final IconThemeData enabledIconStyle;
 
   /// The icon style for a checked item when disabled.
   @override
-  final FIconStyle disabledIconStyle;
+  final IconThemeData disabledIconStyle;
 
   /// The tappable style for the item.
   @override
@@ -284,8 +287,8 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
         enabledHoveredDecoration: BoxDecoration(color: colorScheme.secondary, borderRadius: style.borderRadius),
         enabledTextStyle: typography.sm.copyWith(color: colorScheme.primary),
         disabledTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.primary)),
-        enabledIconStyle: FIconStyle(color: colorScheme.primary, size: 15),
-        disabledIconStyle: FIconStyle(color: colorScheme.disable(colorScheme.primary), size: 15),
+        enabledIconStyle: IconThemeData(color: colorScheme.primary, size: 15),
+        disabledIconStyle: IconThemeData(color: colorScheme.disable(colorScheme.primary), size: 15),
         tappableStyle: FTappableStyle(animationTween: FTappableAnimations.none),
       );
 }

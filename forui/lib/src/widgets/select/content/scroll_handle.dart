@@ -12,15 +12,15 @@ class ScrollHandle extends StatefulWidget {
   final ScrollController controller;
   final FSelectScrollHandleStyle style;
   final Alignment alignment;
-  final SvgAsset icon;
+  final IconData icon;
 
-  ScrollHandle.up({required this.controller, required this.style, super.key})
+  const ScrollHandle.up({required this.controller, required this.style, super.key})
     : alignment = Alignment.topCenter,
-      icon = FAssets.icons.chevronUp;
+      icon = FIcons.chevronUp;
 
-  ScrollHandle.down({required this.controller, required this.style, super.key})
+  const ScrollHandle.down({required this.controller, required this.style, super.key})
     : alignment = Alignment.bottomCenter,
-      icon = FAssets.icons.chevronDown;
+      icon = FIcons.chevronDown;
 
   @override
   State<ScrollHandle> createState() => _ScrollHandleState();
@@ -76,7 +76,7 @@ class _ScrollHandleState extends State<ScrollHandle> {
                 width: double.infinity,
                 child: ColoredBox(
                   color: widget.style.background,
-                  child: FIcon(widget.icon, color: widget.style.color, size: widget.style.size),
+                  child: IconTheme(data: widget.style.iconStyle, child: Icon(widget.icon)),
                 ),
               ),
             ),
@@ -129,20 +129,13 @@ class _ScrollHandleState extends State<ScrollHandle> {
 
 /// A [FSelect] content scroll handle's style.
 class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFunctions {
-  /// The handle icon's color.
+  /// The handle icon's style.
   @override
-  final Color color;
+  final IconThemeData iconStyle;
 
   /// The background color.
   @override
   final Color background;
-
-  /// The handle icon's size. Defaults to 17.
-  ///
-  /// ## Contract
-  /// Throws an [AssertionError] if the size <= 0.
-  @override
-  final double size;
 
   /// The duration to wait before scrolling. Defaults to 200ms.
   @override
@@ -157,15 +150,13 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
 
   /// Creates a [FSelectScrollHandleStyle].
   const FSelectScrollHandleStyle({
-    required this.color,
     required this.background,
-    this.size = 17,
+    required this.iconStyle,
     this.enterDuration = const Duration(milliseconds: 200),
     this.pixelsPerSecond = 200,
-  }) : assert(0 < size, 'The size must be greater than 0.'),
-       assert(0 < pixelsPerSecond, 'The pixels per second must be greater than 0.');
+  }) : assert(0 < pixelsPerSecond, 'The pixels per second must be greater than 0.');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits from the given [colorScheme].
   FSelectScrollHandleStyle.inherit({required FColorScheme colorScheme})
-    : this(color: colorScheme.primary, background: colorScheme.background);
+    : this(iconStyle: IconThemeData(color: colorScheme.primary, size: 17), background: colorScheme.background);
 }

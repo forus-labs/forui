@@ -12,9 +12,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   /// The style.
   final FBottomNavigationBarItemStyle? style;
 
-  /// The icon.
-  ///
-  /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  /// The icon, wrapped in a [IconTheme].
   final Widget icon;
 
   /// The label.
@@ -35,16 +33,13 @@ class FBottomNavigationBarItem extends StatelessWidget {
         spacing: 2,
         children: [
           ExcludeSemantics(
-            child: FIconStyleData(
-              style: FIconStyle(
-                color: selected ? style.activeIconColor : style.inactiveIconColor,
-                size: style.iconSize,
-              ),
+            child: IconTheme(
+              data: selected ? style.selectedIconStyle : style.unselectedIconStyle,
               child: icon,
             ),
           ),
           DefaultTextStyle.merge(
-            style: selected ? style.activeTextStyle : style.inactiveTextStyle,
+            style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
             overflow: TextOverflow.ellipsis,
             child: label,
           ),
@@ -62,25 +57,21 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
 /// [FBottomNavigationBarItem]'s style.
 final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
-  /// The icon's color when this item is active.
+  /// The icon's style when an item is selected.
   @override
-  final Color activeIconColor;
+  final IconThemeData selectedIconStyle;
 
-  /// The icon's color when this item is inactive.
+  /// The icon's style when an item is unselected.
   @override
-  final Color inactiveIconColor;
+  final IconThemeData unselectedIconStyle;
 
-  /// The icon's size. Defaults to `24`.
+  /// The text's style when an item is selected.
   @override
-  final double iconSize;
+  final TextStyle selectedTextStyle;
 
-  /// The text's style when this item is active.
+  /// The text's style when an item is unselected.
   @override
-  final TextStyle activeTextStyle;
-
-  /// The text's style when this item is inactive.
-  @override
-  final TextStyle inactiveTextStyle;
+  final TextStyle unselectedTextStyle;
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
@@ -88,11 +79,10 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
 
   /// Creates a [FBottomNavigationBarItemStyle].
   FBottomNavigationBarItemStyle({
-    required this.activeIconColor,
-    required this.inactiveIconColor,
-    required this.activeTextStyle,
-    required this.inactiveTextStyle,
-    this.iconSize = 24,
+    required this.selectedIconStyle,
+    required this.unselectedIconStyle,
+    required this.selectedTextStyle,
+    required this.unselectedTextStyle,
     this.padding = const EdgeInsets.all(5),
   });
 
@@ -100,9 +90,9 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
   /// [FTypography].
   FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
     : this(
-        activeIconColor: colorScheme.primary,
-        inactiveIconColor: colorScheme.disable(colorScheme.foreground),
-        activeTextStyle: typography.base.copyWith(color: colorScheme.primary, fontSize: 10),
-        inactiveTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.foreground), fontSize: 10),
+        selectedIconStyle: IconThemeData(color: colorScheme.primary, size: 24),
+        unselectedIconStyle: IconThemeData(color: colorScheme.disable(colorScheme.foreground), size: 24),
+        selectedTextStyle: typography.base.copyWith(color: colorScheme.primary, fontSize: 10),
+        unselectedTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.foreground), fontSize: 10),
       );
 }

@@ -41,11 +41,11 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
           description: const Text('These will be shown in the sidebar.'),
           divider: widget.divider,
           children: [
-            FSelectTile(title: const Text('Recents'), suffixIcon: FIcon(FAssets.icons.timer), value: Sidebar.recents),
-            FSelectTile(title: const Text('Home'), suffixIcon: FIcon(FAssets.icons.house), value: Sidebar.home),
+            FSelectTile(title: const Text('Recents'), suffixIcon: const Icon(FIcons.timer), value: Sidebar.recents),
+            FSelectTile(title: const Text('Home'), suffixIcon: const Icon(FIcons.house), value: Sidebar.home),
             FSelectTile(
               title: const Text('Applications'),
-              suffixIcon: FIcon(FAssets.icons.appWindowMac),
+              suffixIcon: const Icon(FIcons.appWindowMac),
               value: Sidebar.applications,
             ),
           ],
@@ -84,11 +84,11 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
           description: const Text('These will be shown in the sidebar.'),
           maxHeight: 100,
           children: [
-            FSelectTile(title: const Text('Recents'), suffixIcon: FIcon(FAssets.icons.timer), value: Sidebar.recents),
-            FSelectTile(title: const Text('Home'), suffixIcon: FIcon(FAssets.icons.house), value: Sidebar.home),
+            FSelectTile(title: const Text('Recents'), suffixIcon: const Icon(FIcons.timer), value: Sidebar.recents),
+            FSelectTile(title: const Text('Home'), suffixIcon: const Icon(FIcons.house), value: Sidebar.home),
             FSelectTile(
               title: const Text('Applications'),
-              suffixIcon: FIcon(FAssets.icons.appWindowMac),
+              suffixIcon: const Icon(FIcons.appWindowMac),
               value: Sidebar.applications,
             ),
           ],
@@ -268,9 +268,9 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
           selectController: controller,
           label: const Text('Settings'),
           children: [
-            FSelectTile.suffix(prefixIcon: FIcon(FAssets.icons.list), title: const Text('List View'), value: 'List'),
+            FSelectTile.suffix(prefixIcon: const Icon(FIcons.list), title: const Text('List View'), value: 'List'),
             FSelectTile.suffix(
-              prefixIcon: FIcon(FAssets.icons.layoutGrid),
+              prefixIcon: const Icon(FIcons.layoutGrid),
               title: const Text('Grid View'),
               value: 'Grid',
             ),

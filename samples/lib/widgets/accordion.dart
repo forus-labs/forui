@@ -24,19 +24,19 @@ class AccordionPage extends Sample {
     children: [
       FAccordion(
         controller: controller,
-        items: [
+        items: const [
           FAccordionItem(
-            title: const Text('Is it accessible?'),
-            child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+            title: Text('Is it accessible?'),
+            child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),
           ),
           FAccordionItem(
             initiallyExpanded: true,
-            title: const Text('Is it Styled?'),
-            child: const Text("Yes. It comes with default styles that matches the other components' aesthetics"),
+            title: Text('Is it Styled?'),
+            child: Text("Yes. It comes with default styles that matches the other components' aesthetics"),
           ),
           FAccordionItem(
-            title: const Text('Is it Animated?'),
-            child: const Text('Yes. It is animated by default, but you can disable it if you prefer'),
+            title: Text('Is it Animated?'),
+            child: Text('Yes. It is animated by default, but you can disable it if you prefer'),
           ),
         ],
       ),

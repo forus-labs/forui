@@ -81,13 +81,12 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               ).animate(_controller),
               child: Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: FAssets.icons.chevronRight(
-                  height: 15,
-                  matchTextDirection: true,
-                  colorFilter: ColorFilter.mode(
-                    widget.style.headerTextStyle.color ?? widget.style.enabledIconColor,
-                    BlendMode.srcIn,
-                  ),
+                child: Icon(
+                  FIcons.chevronRight,
+                  size: 15,
+                  color:
+                      widget.style.headerTextStyle.color ??
+                      widget.style.buttonStyle.iconContentStyle.enabledStyle.color,
                 ),
               ),
             ),
@@ -141,35 +140,13 @@ class Navigation extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onPrevious,
-              child: FAssets.icons.chevronLeft(
-                height: 17,
-                matchTextDirection: true,
-                colorFilter: ColorFilter.mode(
-                  onPrevious == null ? style.disabledIconColor : style.enabledIconColor,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
+            padding: const EdgeInsetsDirectional.only(start: 7),
+            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
           ),
           const Expanded(child: SizedBox()),
           Padding(
-            padding: const EdgeInsets.only(right: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onNext,
-              child: FAssets.icons.chevronRight(
-                height: 17,
-                matchTextDirection: true,
-                colorFilter: ColorFilter.mode(
-                  onNext == null ? style.disabledIconColor : style.enabledIconColor,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
+            padding: const EdgeInsetsDirectional.only(end: 7),
+            child: FButton.icon(style: style.buttonStyle, onPress: onNext, child: const Icon(FIcons.chevronRight)),
           ),
         ],
       ),
@@ -192,21 +169,13 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The button style.
+  /// The style used in the previous and next buttons.
   @override
   final FButtonStyle buttonStyle;
 
   /// The header's text style.
   @override
   final TextStyle headerTextStyle;
-
-  /// The header icons' enabled color.
-  @override
-  final Color enabledIconColor;
-
-  /// The header icons' disabled color.
-  @override
-  final Color disabledIconColor;
 
   /// The arrow turn animation's duration. Defaults to 200ms.
   @override
@@ -221,8 +190,6 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     required this.focusedOutlineStyle,
     required this.buttonStyle,
     required this.headerTextStyle,
-    required this.enabledIconColor,
-    required this.disabledIconColor,
     required this.tappableStyle,
     this.animationDuration = const Duration(milliseconds: 200),
   });
@@ -232,19 +199,24 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  }) {
-    final outline = FButtonStyles.inherit(colorScheme: colorScheme, typography: typography, style: style).outline;
-    return FCalendarHeaderStyle(
-      focusedOutlineStyle: style.focusedOutlineStyle,
-      buttonStyle: outline.copyWith(
-        enabledBoxDecoration: outline.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-        enabledHoverBoxDecoration: outline.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-        disabledBoxDecoration: outline.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+  }) => FCalendarHeaderStyle(
+    focusedOutlineStyle: style.focusedOutlineStyle,
+    buttonStyle: FButtonStyles.inherit(
+      colorScheme: colorScheme,
+      typography: typography,
+      style: style,
+    ).outline.transform(
+      (style) => style.copyWith(
+        enabledBoxDecoration: style.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+        enabledHoverBoxDecoration: style.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+        disabledBoxDecoration: style.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
+        iconContentStyle: style.iconContentStyle.copyWith(
+          enabledStyle: IconThemeData(color: colorScheme.mutedForeground, size: 17),
+          disabledStyle: IconThemeData(color: colorScheme.disable(colorScheme.mutedForeground), size: 17),
+        ),
       ),
-      headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-      enabledIconColor: colorScheme.mutedForeground,
-      disabledIconColor: colorScheme.disable(colorScheme.mutedForeground),
-      tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-    );
-  }
+    ),
+    headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+    tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+  );
 }

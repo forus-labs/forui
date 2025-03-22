@@ -23,17 +23,17 @@ class ResizablePage extends Sample {
         FResizableRegion(
           initialExtent: 250,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
+          builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
         ),
         FResizableRegion(
           initialExtent: 100,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+          builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
         ),
         FResizableRegion(
           initialExtent: 250,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+          builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
         ),
       ],
     ),
@@ -58,17 +58,17 @@ class NoCascadingResizablePage extends Sample {
         FResizableRegion(
           initialExtent: 200,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunrise, label: 'Morning'),
+          builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
         ),
         FResizableRegion(
           initialExtent: 200,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sun, label: 'Afternoon'),
+          builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
         ),
         FResizableRegion(
           initialExtent: 200,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FAssets.icons.sunset, label: 'Evening'),
+          builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
         ),
       ],
     ),
@@ -79,7 +79,7 @@ class Label extends StatelessWidget {
   static final DateFormat format = DateFormat.jm(); // Requires package:intl
 
   final FResizableRegionData data;
-  final SvgAsset icon;
+  final IconData icon;
   final String label;
 
   const Label({required this.data, required this.icon, required this.label, super.key});
@@ -105,7 +105,7 @@ class Label extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
+              Icon(icon, size: 15, color: colorScheme.foreground),
               const SizedBox(width: 3),
               Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
             ],

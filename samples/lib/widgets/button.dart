@@ -33,7 +33,7 @@ class ButtonIconPage extends Sample {
   @override
   Widget sample(BuildContext context) => IntrinsicWidth(
     child: FButton(
-      prefix: FIcon(FAssets.icons.mail),
+      prefix: const Icon(FIcons.mail),
       label: const Text('Login with Email'),
       style: variant,
       onPress: () {},
@@ -47,7 +47,7 @@ class ButtonOnlyIconPage extends Sample {
 
   @override
   Widget sample(BuildContext context) =>
-      IntrinsicWidth(child: FButton.icon(child: FIcon(FAssets.icons.chevronRight), onPress: () {}));
+      IntrinsicWidth(child: FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {}));
 }
 
 @RoutePage()

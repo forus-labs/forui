@@ -20,12 +20,12 @@ class _State extends StatefulSampleState<BottomNavigationBarPage> {
   Widget sample(BuildContext context) => FBottomNavigationBar(
     index: index,
     onChange: (index) => setState(() => this.index = index),
-    children: [
-      FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
-      FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Browse')),
-      FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Radio')),
-      FBottomNavigationBarItem(icon: FIcon(FAssets.icons.libraryBig), label: const Text('Library')),
-      FBottomNavigationBarItem(icon: FIcon(FAssets.icons.search), label: const Text('Search')),
+    children: const [
+      FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+      FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+      FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+      FBottomNavigationBarItem(icon: Icon(FIcons.libraryBig), label: Text('Library')),
+      FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
     ],
   );
 }

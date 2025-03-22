@@ -13,8 +13,8 @@ class RootHeaderPage extends Sample {
   Widget sample(BuildContext context) => FHeader(
     title: const Text('Edit Alarm'),
     actions: [
-      FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: () {}),
-      FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
+      FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
+      FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
     ],
   );
 }
@@ -28,8 +28,8 @@ class NestedHeaderPage extends Sample {
     title: const Text('Appointment'),
     prefixActions: [FHeaderAction.back(onPress: () {})],
     suffixActions: [
-      FHeaderAction(icon: FIcon(FAssets.icons.info), onPress: () {}),
-      FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
+      FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
+      FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
     ],
   );
 }
@@ -42,8 +42,8 @@ class XNestedHeaderPage extends Sample {
   Widget sample(BuildContext context) => FHeader.nested(
     title: const Text('Climate'),
     prefixActions: [
-      FHeaderAction(icon: FIcon(FAssets.icons.thermometer), onPress: () {}),
-      FHeaderAction(icon: FIcon(FAssets.icons.wind), onPress: null),
+      FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),
+      const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),
     ],
     suffixActions: [FHeaderAction.x(onPress: () {})],
   );

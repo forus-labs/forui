@@ -250,7 +250,7 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
 
   /// The search icon's style.
   @override
-  final FIconStyle iconStyle;
+  final IconThemeData iconStyle;
 
   /// The style of the divider between the search field and results.
   @override
@@ -258,7 +258,7 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
 
   /// The loading indicators style.
   @override
-  final FCircularIconProgressStyle loadingIndicatorStyle;
+  final IconThemeData loadingIndicatorStyle;
 
   /// Creates a [FSelectSearchStyle].
   FSelectSearchStyle({
@@ -286,11 +286,12 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
              ),
            ),
          ),
-         iconStyle: FIconStyle(size: 15, color: colorScheme.mutedForeground),
+         iconStyle: IconThemeData(size: 15, color: colorScheme.mutedForeground),
          dividerStyle: FDividerStyles.inherit(
            colorScheme: colorScheme,
            style: style,
          ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
-         loadingIndicatorStyle: FCircularIconProgressStyle.inherit(colorScheme: colorScheme),
+         loadingIndicatorStyle:
+             FProgressStyles.inherit(colorScheme: colorScheme, style: style).circularIconProgressStyle,
        );
 }
