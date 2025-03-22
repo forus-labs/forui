@@ -8,6 +8,35 @@ import 'package:sugar/core.dart';
 const family = 'ForuiLucideIcons';
 const package = 'forui_assets';
 
+const directional = {
+  'arrow-big-left-dash',
+  'arrow-big-left',
+  'arrow-big-right-dash',
+  'arrow-big-right',
+  'arrow-left-from-line',
+  'arrow-left-to-line',
+  'arrow-left',
+  'arrow-right-from-line',
+  'arrow-right-to-line',
+  'arrow-right',
+  'chevron-first',
+  'chevron-last',
+  'chevron-left',
+  'chevron-right',
+  'chevrons-left',
+  'chevrons-right',
+  'circle-arrow-left',
+  'circle-arrow-right',
+  'circle-chevron-left',
+  'circle-chevron-right',
+  'indent-decrease',
+  'indent-increase',
+  'square-arrow-left',
+  'square-arrow-right',
+  'square-chevrons-left',
+  'square-chevrons-right',
+};
+
 void main() => generate(parse());
 
 // This script assumes that .dart_tool/lucide-font exists. The archive is manually downloaded and unzipped from
@@ -68,7 +97,12 @@ void generate(List<(String, String, String)> icons) {
                               refer('IconData')
                                   .newInstance(
                                     [literalNum(int.parse(icon.$3))],
-                                    {'fontFamily': literalString(family), 'fontPackage': literalString(package)},
+                                    {
+                                      'fontFamily': literalString(family),
+                                      'fontPackage': literalString(package),
+                                      if (directional.contains(icon.$2))
+                                        'matchTextDirection': literalTrue,
+                                    },
                                   )
                                   .code)
                         .build(),
