@@ -66,8 +66,8 @@ FSelect<String>(
   onSaved: (value) => print('Selected country: $value'),
   style: FSelectStyle.inherit(...),
   autovalidateMode: AutovalidateMode.onUserInteraction,
-  prefixBuilder: (context, styles, _) => FIcon(FAssets.icons.globe),
-  suffixBuilder: (context, styles, _) => FIcon(FAssets.icons.arrowDown),
+  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
+  suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
   popoverConstraints: const BoxConstraints(
     maxWidth: 300,
     maxHeight: 400,
@@ -303,7 +303,7 @@ FSelect<User>.search(
           final style = context.theme.selectStyle.iconStyle;
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: FIcon(FAssets.icons.messageCircleX, size: style.size, color: style.color),
+            child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),
           );
         },
       );

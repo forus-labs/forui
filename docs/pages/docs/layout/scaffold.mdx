@@ -24,7 +24,7 @@ Creates a visual scaffold for Forui widgets.
         title: const Text('Settings'),
         actions: [
           FHeaderAction(
-            icon: FAssets.icons.ellipsis,
+            icon: FIcons.ellipsis,
             onPress: () {},
           ),
         ],
@@ -92,19 +92,19 @@ Creates a visual scaffold for Forui widgets.
               onChange: (index) => setState(() => this.index = index),
               items: [
                 FBottomNavigationBarItem(
-                  icon: FAssets.icons.home,
+                  icon: FIcons.home,
                   label: 'Home',
                 ),
                 FBottomNavigationBarItem(
-                  icon: FAssets.icons.layoutGrid,
+                  icon: FIcons.layoutGrid,
                   label: 'Categories',
                 ),
                 FBottomNavigationBarItem(
-                  icon: FAssets.icons.search,
+                  icon: FIcons.search,
                   label: 'Search',
                 ),
                 FBottomNavigationBarItem(
-                  icon: FAssets.icons.settings,
+                  icon: FIcons.settings,
                   label: 'Settings',
                 ),
               ],
@@ -125,7 +125,7 @@ FScaffold(
     title: const Text('Settings'),
     actions: [
       FHeaderAction(
-        icon: FAssets.icons.ellipsis,
+        icon: Icon(FIcons.ellipsis),
         onPress: () {},
       ),
     ],

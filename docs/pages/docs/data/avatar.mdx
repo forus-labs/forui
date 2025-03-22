@@ -57,9 +57,7 @@ FAvatar(
 ```dart copy
 // Raw constructor - with icon.
 FAvatar.raw(
-  child: FAssets.icons.baby(
-    colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
-  ),
+  child: Icon(FIcons.baby, color: theme.colorScheme.mutedForeground),
 );
 
 // Raw constructor - with text.
@@ -109,9 +107,7 @@ FAvatar.raw(child: const Text('MN'));
 
             // Raw constructor - with icon.
             FAvatar.raw(
-              child: FAssets.icons.baby(
-                colorFilter: ColorFilter.mode(theme.colorScheme.mutedForeground, BlendMode.srcIn),
-              ),
+              child: Icon(FIcons.baby, color: theme.colorScheme.mutedForeground),
             ),
             const SizedBox(width: 10),
 
