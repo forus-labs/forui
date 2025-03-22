@@ -136,6 +136,20 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// copied with copy or cut. If [readOnly] is also true, then the text cannot be selected.
   final bool obscureText;
 
+  /// The base fill color of the decoration's container color.
+  ///
+  /// When [InputDecorator.isHovering] is true, the [InputDecoration.hoverColor]
+  /// is also blended into the final fill color.
+  ///
+  /// By default the [fillColor] is based on the current
+  /// [InputDecorationTheme.fillColor].
+  final Color? fillColor;
+
+  /// If true the decoration's container is filled with [fillColor].
+  ///
+  /// This property is false by default.
+  final bool? filled;
+
   /// Whether to enable autocorrection. Defaults to true.
   final bool autocorrect;
 
@@ -581,6 +595,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
+    this.fillColor,
+    this.filled,
     this.autocorrect = true,
     this.smartDashesType,
     this.smartQuotesType,
@@ -649,6 +665,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
+    this.fillColor,
+    this.filled,
     this.autocorrect = false,
     this.smartDashesType,
     this.smartQuotesType,
@@ -720,6 +738,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = true,
+    this.fillColor,
+    this.filled,
     this.autocorrect = false,
     this.smartDashesType,
     this.smartQuotesType,
@@ -792,6 +812,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
+    this.fillColor,
+    this.filled,
     this.autocorrect = true,
     this.smartDashesType,
     this.smartQuotesType,
@@ -901,6 +923,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(DiagnosticsProperty('statesController', statesController))
       ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
       ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
+      ..add(ColorProperty('fillColor', fillColor))
+      ..add(FlagProperty('filled', value: filled, ifTrue: 'filled'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
       ..add(EnumProperty('smartDashesType', smartDashesType))
       ..add(EnumProperty('smartQuotesType', smartQuotesType))

@@ -35,6 +35,8 @@ class Field extends FormField<String> {
       },
       hintText: parent.hint,
       hintStyle: stateStyle.hintTextStyle,
+      fillColor: parent.fillColor,
+      filled: parent.filled,
       disabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
         borderRadius: stateStyle.unfocusedStyle.radius,
