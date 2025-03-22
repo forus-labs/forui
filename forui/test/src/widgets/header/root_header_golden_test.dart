@@ -21,7 +21,7 @@ void main() {
             title: const Text('Title'),
             actions: [
               FHeaderAction.back(onPress: () {}),
-              FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
+              const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
             ],
           ),
         ),
@@ -38,8 +38,8 @@ void main() {
             child: FHeader(
               title: const Text(title),
               actions: [
-                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
-                FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
               ],
             ),
           ),
@@ -55,8 +55,8 @@ void main() {
             child: FHeader(
               title: const Text(title),
               actions: [
-                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
-                FHeaderAction(autofocus: true, icon: FIcon(FAssets.icons.plus), onPress: () {}),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
               ],
             ),
           ),
@@ -73,8 +73,8 @@ void main() {
             child: FHeader(
               title: const Text(title),
               actions: [
-                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
-                FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -22,7 +23,7 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
 
   /// The date field icon's style.
   @override
-  final FIconStyle iconStyle;
+  final IconThemeData iconStyle;
 
   /// Creates a [FDateFieldStyle].
   const FDateFieldStyle({
@@ -38,6 +39,6 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
         textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
         calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
       );
 }

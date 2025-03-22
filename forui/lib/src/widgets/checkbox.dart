@@ -133,7 +133,7 @@ class _State extends State<FCheckbox> {
                 switchInCurve: style.curve,
                 child: SizedBox.square(
                   key: ValueKey(widget.value),
-                  dimension: 16,
+                  dimension: stateStyle.size,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
@@ -142,11 +142,7 @@ class _State extends State<FCheckbox> {
                     ),
                     child:
                         widget.value
-                            ? FAssets.icons.check(
-                              height: 14,
-                              width: 14,
-                              colorFilter: ColorFilter.mode(stateStyle.iconColor, BlendMode.srcIn),
-                            )
+                            ? IconTheme(data: stateStyle.iconStyle, child: const Icon(FIcons.check))
                             : const SizedBox(),
                   ),
                 ),
@@ -214,7 +210,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
           borderColor: colorScheme.primary,
-          iconColor: colorScheme.primaryForeground,
+          iconStyle: IconThemeData(color: colorScheme.primaryForeground, size: 14),
           checkedBackgroundColor: colorScheme.primary,
           uncheckedBackgroundColor: colorScheme.background,
         ),
@@ -222,7 +218,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
           borderColor: colorScheme.disable(colorScheme.primary),
-          iconColor: colorScheme.disable(colorScheme.primaryForeground),
+          iconStyle: IconThemeData(color: colorScheme.disable(colorScheme.primaryForeground), size: 14),
           checkedBackgroundColor: colorScheme.disable(colorScheme.primary),
           uncheckedBackgroundColor: colorScheme.disable(colorScheme.background),
         ),
@@ -231,7 +227,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
           borderColor: colorScheme.error,
-          iconColor: colorScheme.errorForeground,
+          iconStyle: IconThemeData(color: colorScheme.errorForeground, size: 14),
           checkedBackgroundColor: colorScheme.error,
           uncheckedBackgroundColor: colorScheme.background,
         ),
@@ -248,19 +244,23 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
 /// A checkbox state's style.
 // ignore: avoid_implementing_value_types
 class FCheckboxStateStyle with Diagnosticable, _$FCheckboxStateStyleFunctions implements FFormFieldStyle {
-  /// The [FCheckbox]'s border color.
+  /// The checkbox's size. Defaults to 16.
+  @override
+  final double size;
+
+  /// The checked icon's style.
+  @override
+  final IconThemeData iconStyle;
+
+  /// The border color.
   @override
   final Color borderColor;
 
-  /// The checked [FCheckbox]'s icon's color.
-  @override
-  final Color iconColor;
-
-  /// The checked [FCheckbox]'s background color.
+  /// The checked background color.
   @override
   final Color checkedBackgroundColor;
 
-  /// The unchecked [FCheckbox]'s background color.
+  /// The unchecked background color.
   @override
   final Color uncheckedBackgroundColor;
 
@@ -273,11 +273,12 @@ class FCheckboxStateStyle with Diagnosticable, _$FCheckboxStateStyleFunctions im
   /// Creates a [FCheckboxStateStyle].
   const FCheckboxStateStyle({
     required this.borderColor,
-    required this.iconColor,
+    required this.iconStyle,
     required this.checkedBackgroundColor,
     required this.uncheckedBackgroundColor,
     required this.labelTextStyle,
     required this.descriptionTextStyle,
+    this.size = 16,
   });
 }
 
@@ -294,10 +295,11 @@ final class FCheckboxErrorStyle extends FCheckboxStateStyle
   FCheckboxErrorStyle({
     required this.errorTextStyle,
     required super.borderColor,
-    required super.iconColor,
+    required super.iconStyle,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.checkedBackgroundColor,
     required super.uncheckedBackgroundColor,
+    super.size,
   });
 }

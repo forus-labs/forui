@@ -178,7 +178,7 @@ class AsyncErrorSelectPage extends Sample {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: FIcon(FAssets.icons.messageCircleX, size: style.size, color: style.color),
+          child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),
         );
       },
     ),

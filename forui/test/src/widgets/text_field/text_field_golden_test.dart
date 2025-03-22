@@ -196,7 +196,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
-              child: FTextField(suffixBuilder: (_, _, _) => FIcon(FAssets.icons.alarmClock), clearable: (_) => true),
+              child: FTextField(suffixBuilder: (_, _, _) => const Icon(FIcons.alarmClock), clearable: (_) => true),
             ),
           );
 

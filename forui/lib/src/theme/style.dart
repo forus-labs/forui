@@ -31,7 +31,7 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
 
   /// The icon style.
   @override
-  final FIconStyle iconStyle;
+  final IconThemeData iconStyle;
 
   /// The border radius. Defaults to `BorderRadius.circular(8)`.
   @override
@@ -93,7 +93,7 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
           color: colorScheme.primary,
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
-        iconStyle: FIconStyle(color: colorScheme.primary, size: 20),
+        iconStyle: IconThemeData(color: colorScheme.primary, size: 20),
         tappableStyle: FTappableStyle(),
       );
 }

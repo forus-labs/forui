@@ -64,13 +64,8 @@ final class PlaceholderContent extends StatelessWidget {
   const PlaceholderContent({required this.size, this.style, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.avatarStyle;
-    return FAssets.icons.userRound(
-      height: size / 2,
-      colorFilter: ColorFilter.mode(style.foregroundColor, BlendMode.srcIn),
-    );
-  }
+  Widget build(BuildContext context) =>
+      Icon(FIcons.userRound, size: size / 2, color: (style ?? context.theme.avatarStyle).foregroundColor);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

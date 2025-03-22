@@ -83,8 +83,8 @@ class Field extends FormField<String> {
                         field.didChange('');
                         parent.onChange?.call('');
                       },
-                      child: FIcon(
-                        FAssets.icons.x,
+                      child: Icon(
+                        FIcons.x,
                         semanticLabel:
                             (FLocalizations.of(state.context) ?? FDefaultLocalizations())
                                 .textFieldClearButtonSemanticsLabel,

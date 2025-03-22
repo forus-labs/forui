@@ -25,13 +25,10 @@ part 'select.style.dart';
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, (FSelectStyle, FTextFieldStateStyle) styles, Widget? _) {
-    final style = styles.$1.iconStyle;
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(end: 8.0),
-      child: FIcon(FAssets.icons.chevronDown, color: style.color, size: style.size),
-    );
-  }
+  static Widget defaultIconBuilder(BuildContext _, (FSelectStyle, FTextFieldStateStyle) styles, Widget? _) => Padding(
+    padding: const EdgeInsetsDirectional.only(end: 8.0),
+    child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.chevronDown)),
+  );
 
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) =>
@@ -525,7 +522,7 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
 
   /// The select field's icon style.
   @override
-  final FIconStyle iconStyle;
+  final IconThemeData iconStyle;
 
   /// The popover's style.
   @override
@@ -557,7 +554,7 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   FSelectStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
     : this(
         selectFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
         popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
         searchStyle: FSelectSearchStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         contentStyle: FSelectContentStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),

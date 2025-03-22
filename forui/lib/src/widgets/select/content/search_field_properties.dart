@@ -13,7 +13,7 @@ final class FSelectSearchFieldProperties with Diagnosticable {
     final style = styles.$1.iconStyle;
     return Padding(
       padding: const EdgeInsetsDirectional.only(start: 10.0, end: 4.0),
-      child: FIcon(FAssets.icons.search, size: style.size, color: style.color),
+      child: Icon(FIcons.search, size: style.size, color: style.color),
     );
   }
 

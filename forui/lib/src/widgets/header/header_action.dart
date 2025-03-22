@@ -10,9 +10,7 @@ class FHeaderAction extends StatelessWidget {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticLabel;
 
-  /// The icon.
-  ///
-  /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  /// The icon, wrapped in a [IconThemeData].
   final Widget icon;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
@@ -43,7 +41,7 @@ class FHeaderAction extends StatelessWidget {
     super.key,
   });
 
-  /// Creates a [FHeaderAction] with `FAssets.icons.arrowLeft`.
+  /// Creates a [FHeaderAction] with `FIcons.arrowLeft`.
   factory FHeaderAction.back({
     required VoidCallback? onPress,
     FHeaderActionStyle? style,
@@ -53,7 +51,7 @@ class FHeaderAction extends StatelessWidget {
     ValueChanged<bool>? onFocusChange,
     Key? key,
   }) => FHeaderAction(
-    icon: FIcon(FAssets.icons.arrowLeft),
+    icon: const Icon(FIcons.arrowLeft),
     onPress: onPress,
     style: style,
     semanticLabel: semanticLabel,
@@ -63,7 +61,7 @@ class FHeaderAction extends StatelessWidget {
     key: key,
   );
 
-  /// Creates a [FHeaderAction] with `FAssets.icons.x`.
+  /// Creates a [FHeaderAction] with `FIcons.x`.
   factory FHeaderAction.x({
     required VoidCallback? onPress,
     FHeaderActionStyle? style,
@@ -72,7 +70,7 @@ class FHeaderAction extends StatelessWidget {
     ValueChanged<bool>? onFocusChange,
     Key? key,
   }) => FHeaderAction(
-    icon: FIcon(FAssets.icons.x),
+    icon: const Icon(FIcons.x),
     onPress: onPress,
     style: style,
     autofocus: autofocus,
@@ -95,10 +93,7 @@ class FHeaderAction extends StatelessWidget {
       semanticLabel: semanticLabel,
       onPress: onPress,
       onLongPress: onLongPress,
-      child: FIconStyleData(
-        style: FIconStyle(color: enabled ? style.enabledColor : style.disabledColor, size: style.size),
-        child: icon,
-      ),
+      child: IconTheme(data: enabled ? style.enabledStyle : style.disabledStyle, child: icon),
     );
   }
 
@@ -119,21 +114,13 @@ class FHeaderAction extends StatelessWidget {
 
 /// [FHeaderAction]'s style.
 final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
-  /// The icon's color when this action is enabled.
+  /// The icon's style when an action is enabled.
   @override
-  final Color enabledColor;
+  final IconThemeData enabledStyle;
 
-  /// The icon's color when this action is disabled.
+  /// The icon's style when an action is disabled.
   @override
-  final Color disabledColor;
-
-  /// The icon's size.
-  ///
-  /// Defaults to:
-  /// * 30 for [FHeader].
-  /// * 25 for [FHeader.nested]
-  @override
-  final double size;
+  final IconThemeData disabledStyle;
 
   /// The outline style when this action is focused.
   @override
@@ -145,17 +132,16 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
 
   /// Creates a [FHeaderActionStyle].
   FHeaderActionStyle({
-    required this.enabledColor,
-    required this.disabledColor,
-    required this.size,
+    required this.enabledStyle,
+    required this.disabledStyle,
     required this.focusedOutlineStyle,
     required this.tappableStyle,
   });
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
-  FHeaderActionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required this.size})
-    : enabledColor = colorScheme.foreground,
-      disabledColor = colorScheme.disable(colorScheme.foreground),
+  FHeaderActionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required double size})
+    : enabledStyle = IconThemeData(color: colorScheme.foreground, size: size),
+      disabledStyle = IconThemeData(color: colorScheme.disable(colorScheme.foreground), size: size),
       focusedOutlineStyle = style.focusedOutlineStyle,
       tappableStyle = style.tappableStyle;
 }

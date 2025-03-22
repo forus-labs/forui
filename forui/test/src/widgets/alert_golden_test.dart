@@ -50,7 +50,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FAlert(
-                icon: FIcon(FAssets.icons.badgeAlert),
+                icon: const Icon(FIcons.badgeAlert),
                 title: const Text('Alert Title'),
                 subtitle: const Text('Alert description with extra text'),
                 style: variant,

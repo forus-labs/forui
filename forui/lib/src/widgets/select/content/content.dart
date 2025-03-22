@@ -191,7 +191,7 @@ class _ContentState<T> extends State<Content<T>> {
     // There is an edge case, when at max scroll extent, the first visible item, if selected, remains partially obscured
     // by the scroll handle.
     if (widget.scrollHandles && 0 < _controller.offset && _controller.offset < _controller.position.maxScrollExtent) {
-      _controller.jumpTo(_controller.offset - widget.style.scrollHandleStyle.size);
+      _controller.jumpTo(_controller.offset - (widget.style.scrollHandleStyle.iconStyle.size ?? 0));
     }
   }
 

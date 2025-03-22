@@ -16,9 +16,9 @@ void main() {
           child: FBottomNavigationBar(
             style: TestScaffold.blueScreen.bottomNavigationBarStyle,
             index: 2,
-            children: [
-              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
-              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Browse')),
+            children: const [
+              FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
             ],
           ),
         ),
@@ -32,14 +32,14 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FBottomNavigationBar(
+            child: const FBottomNavigationBar(
               index: 2,
               children: [
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Browse')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Radio')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Library')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Search')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Library')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Search')),
               ],
             ),
           ),
@@ -55,14 +55,14 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FBottomNavigationBar(
+            child: const FBottomNavigationBar(
               index: 2,
               children: [
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Browse')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Radio')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Library')),
-                FBottomNavigationBarItem(icon: FIcon(FAssets.icons.radio), label: const Text('Search')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Library')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Search')),
               ],
             ),
           ),

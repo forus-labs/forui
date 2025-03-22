@@ -50,12 +50,12 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
         footer: FBottomNavigationBar(
           index: index,
           onChange: (index) => setState(() => this.index = index),
-          children: [
-            FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
-            FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Categories')),
-            FBottomNavigationBarItem(icon: FIcon(FAssets.icons.search), label: const Text('Search')),
-            FBottomNavigationBarItem(icon: FIcon(FAssets.icons.settings), label: const Text('Settings')),
-            FBottomNavigationBarItem(icon: FIcon(FAssets.icons.castle), label: const Text('Sandbox')),
+          children: const [
+            FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
           ],
         ),
       ),

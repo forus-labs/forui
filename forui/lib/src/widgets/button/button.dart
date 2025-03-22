@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
-import 'package:forui/src/widgets/progress.dart';
 
 part 'button.style.dart';
 
@@ -45,7 +44,7 @@ class FButton extends StatelessWidget {
 
   /// Creates a [FButton] that contains a [prefix], [label], and [suffix].
   ///
-  /// [prefix] and [suffix] are wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  /// [prefix] and [suffix] are wrapped in [IconThemeData].
   ///
   /// The button layout is as follows, assuming the locale is LTR:
   /// ```diagram
@@ -70,7 +69,7 @@ class FButton extends StatelessWidget {
 
   /// Creates a [FButton] that contains only an icon.
   ///
-  /// [child] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  /// [child] is wrapped in [IconThemeData].
   FButton.icon({
     required this.onPress,
     required Widget child,
@@ -127,10 +126,7 @@ class FButton extends StatelessWidget {
       child: FButtonData(
         style: style,
         enabled: enabled,
-        child: FCircularProgressData(
-          style: enabled ? style.enabledCircularProgressStyle : style.disabledenabledCircularProgressStyle,
-          child: child,
-        ),
+        child: child,
       ),
     );
   }
@@ -156,7 +152,7 @@ sealed class FBaseButtonStyle {}
 @internal
 enum Variant implements FBaseButtonStyle { primary, secondary, destructive, outline, ghost }
 
-/// A custom [FButton] style.
+/// A [FButton]'s style.
 ///
 /// The pre-defined styles are a convenient shorthand for the various [FButtonStyle]s in the current context's
 /// [FButtonStyles].
@@ -212,10 +208,10 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 
   /// The enabled circular progress's style.
   @override
-  final FCircularIconProgressStyle enabledCircularProgressStyle;
+  final IconThemeData enabledCircularProgressStyle;
 
   @override
-  final FCircularIconProgressStyle disabledenabledCircularProgressStyle;
+  final IconThemeData disabledCircularProgressStyle;
 
   /// The tappable's style.
   @override
@@ -230,7 +226,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
     required this.contentStyle,
     required this.iconContentStyle,
     required this.enabledCircularProgressStyle,
-    required this.disabledenabledCircularProgressStyle,
+    required this.disabledCircularProgressStyle,
     required this.tappableStyle,
   });
 
@@ -254,11 +250,11 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            disabled: disabledContentColor,
          ),
          iconContentStyle: FButtonIconContentStyle(
-           enabledColor: enabledContentColor,
-           disabledColor: disabledContentColor,
+           enabledStyle: IconThemeData(color: enabledContentColor, size: 20),
+           disabledStyle: IconThemeData(color: disabledContentColor, size: 20),
          ),
-         enabledCircularProgressStyle: FCircularIconProgressStyle(color: enabledContentColor),
-         disabledenabledCircularProgressStyle: FCircularIconProgressStyle(color: disabledContentColor),
+         enabledCircularProgressStyle: IconThemeData(color: enabledContentColor, size: 20),
+         disabledCircularProgressStyle: IconThemeData(color: disabledContentColor, size: 20),
          tappableStyle: style.tappableStyle,
        );
 }

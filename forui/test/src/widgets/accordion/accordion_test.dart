@@ -42,14 +42,14 @@ void main() {
       final first = FAccordionController();
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAccordion(items: [FAccordionItem(title: const Text('Title'), child: const Text('button'))]),
+          child: const FAccordion(items: [FAccordionItem(title: Text('Title'), child: Text('button'))]),
         ),
       );
 
       final second = FAccordionController();
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAccordion(items: [FAccordionItem(title: const Text('Title'), child: const Text('button'))]),
+          child: const FAccordion(items: [FAccordionItem(title: Text('Title'), child: Text('button'))]),
         ),
       );
 

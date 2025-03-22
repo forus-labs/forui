@@ -94,7 +94,7 @@ abstract class FTimeField extends StatefulWidget {
   static Widget defaultIconBuilder(BuildContext _, (FTimeFieldStyle, FTextFieldStateStyle) styles, Widget? _) =>
       Padding(
         padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
-        child: FIconStyleData(style: styles.$1.iconStyle, child: FIcon(FAssets.icons.clock4)),
+        child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.clock4)),
       );
 
   /// The controller.

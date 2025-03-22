@@ -12,7 +12,7 @@ topics:
 
 environment:
   sdk: '>=3.7.0 <4.0.0'
-  flutter: ">=3.27.0"
+  flutter: ">=3.29.0"
 resolution: workspace
 
 dependencies:
@@ -21,13 +21,18 @@ dependencies:
   nitrogen_types: ^0.4.0
 
 dev_dependencies:
-  build_runner: ^2.4.0
-  nitrogen: ^0.4.0
+  code_builder: ^4.10.0
+  dart_style: ^3.0.0
+  html: ^0.15.0
+  pub_semver: ^2.1.5
+  sugar: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter packages.
+#
+## The following section is specific to Flutter packages.
 flutter:
-  assets:
-    - assets/icons/
+  fonts:
+    - family: ForuiLucideIcons
+      fonts:
+        - asset: assets/lucide.ttf

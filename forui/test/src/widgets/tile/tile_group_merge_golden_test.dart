@@ -28,10 +28,10 @@ void main() {
                   label: const Text('Network'),
                   children: [
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      prefixIcon: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
                       details: const Text('Forus Labs (5G)'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      suffixIcon: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -52,18 +52,18 @@ void main() {
               label: const Text('Network'),
               children: [
                 FTile(
-                  prefixIcon: FIcon(FAssets.icons.wifi),
+                  prefixIcon: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  suffixIcon: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
                 FTile(
-                  prefixIcon: FIcon(FAssets.icons.bluetooth),
+                  prefixIcon: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo, Fum'),
                   details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  suffixIcon: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
               ],
@@ -91,18 +91,18 @@ void main() {
               children: [
                 FTile(
                   enabled: false,
-                  prefixIcon: FIcon(FAssets.icons.wifi),
+                  prefixIcon: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  suffixIcon: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
                 FTile(
-                  prefixIcon: FIcon(FAssets.icons.bluetooth),
+                  prefixIcon: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo, Fum'),
                   details: const Text('Forus Labs (5G)'),
-                  suffixIcon: FIcon(FAssets.icons.chevronRight),
+                  suffixIcon: const Icon(FIcons.chevronRight),
                   onPress: () {},
                 ),
               ],
@@ -128,22 +128,22 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        prefixIcon: const Icon(FIcons.wifi),
                         title: const Text('WiFi'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.mail),
+                        prefixIcon: const Icon(FIcons.mail),
                         title: const Text('Mail'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.bluetooth),
+                        prefixIcon: const Icon(FIcons.bluetooth),
                         title: const Text('Bluetooth'),
                         subtitle: const Text('Fee, Fo'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -151,16 +151,16 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        prefixIcon: const Icon(FIcons.wifi),
                         title: const Text('WiFi'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.bluetooth),
+                        prefixIcon: const Icon(FIcons.bluetooth),
                         title: const Text('Bluetooth'),
                         subtitle: const Text('Fee, Fo'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -168,16 +168,16 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        prefixIcon: const Icon(FIcons.wifi),
                         title: const Text('WiFi'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.bluetooth),
+                        prefixIcon: const Icon(FIcons.bluetooth),
                         title: const Text('Bluetooth'),
                         subtitle: const Text('Fee, Fo'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -206,9 +206,9 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        prefixIcon: const Icon(FIcons.wifi),
                         title: const Text('WiFi'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -216,14 +216,14 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.mail),
+                        prefixIcon: const Icon(FIcons.mail),
                         title: const Text('Mail'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.bluetooth),
+                        prefixIcon: const Icon(FIcons.bluetooth),
                         title: const Text('Bluetooth'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -252,9 +252,9 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        prefixIcon: const Icon(FIcons.wifi),
                         title: const Text('WiFi'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -262,14 +262,14 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.mail),
+                        prefixIcon: const Icon(FIcons.mail),
                         title: const Text('Mail'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.bluetooth),
+                        prefixIcon: const Icon(FIcons.bluetooth),
                         title: const Text('Bluetooth'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -298,9 +298,9 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        prefixIcon: const Icon(FIcons.wifi),
                         title: const Text('WiFi'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -308,14 +308,14 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.mail),
+                        prefixIcon: const Icon(FIcons.mail),
                         title: const Text('Mail'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.bluetooth),
+                        prefixIcon: const Icon(FIcons.bluetooth),
                         title: const Text('Bluetooth'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                     ],
@@ -350,31 +350,31 @@ void main() {
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.wifi),
+                        prefixIcon: const Icon(FIcons.wifi),
                         title: const Text('WiFi'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                       FTile(
                         focusNode: focusNode,
-                        prefixIcon: FIcon(FAssets.icons.mail),
+                        prefixIcon: const Icon(FIcons.mail),
                         title: const Text('Mail'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                       ),
                     ],
                   ),
                   FTileGroup(
                     children: [
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.bluetooth),
+                        prefixIcon: const Icon(FIcons.bluetooth),
                         title: const Text('Bluetooth'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                         onPress: () {},
                       ),
                       FTile(
-                        prefixIcon: FIcon(FAssets.icons.arrowDown),
+                        prefixIcon: const Icon(FIcons.arrowDown),
                         title: const Text('Last'),
-                        suffixIcon: FIcon(FAssets.icons.chevronRight),
+                        suffixIcon: const Icon(FIcons.chevronRight),
                       ),
                     ],
                   ),
@@ -409,9 +409,9 @@ void main() {
                 FTileGroup(
                   children: [
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      prefixIcon: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      suffixIcon: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -419,9 +419,9 @@ void main() {
                 FTileGroup(
                   children: [
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      prefixIcon: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      suffixIcon: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -446,9 +446,9 @@ void main() {
                 FTileGroup(
                   children: [
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      prefixIcon: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      suffixIcon: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -456,9 +456,9 @@ void main() {
                 FTileGroup(
                   children: [
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      prefixIcon: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      suffixIcon: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -479,10 +479,10 @@ void main() {
                 FTileGroup(
                   children: [
                     FTile(
-                      prefixIcon: FIcon(FAssets.icons.wifi),
+                      prefixIcon: const Icon(FIcons.wifi),
                       title: const Text('WiFi'),
                       details: const Text('FL (5G)'),
-                      suffixIcon: FIcon(FAssets.icons.chevronRight),
+                      suffixIcon: const Icon(FIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -512,15 +512,15 @@ void main() {
                 divider: FTileDivider.none,
                 children: [
                   FTile(
-                    prefixIcon: FIcon.empty(),
+                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
                     title: const Text('Personalization'),
-                    suffixIcon: FIcon(FAssets.icons.user),
+                    suffixIcon: const Icon(FIcons.user),
                     onPress: () {},
                   ),
                   FTile(
-                    prefixIcon: FIcon.empty(),
+                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
                     title: const Text('Network'),
-                    suffixIcon: FIcon(FAssets.icons.appWindowMac),
+                    suffixIcon: const Icon(FIcons.appWindowMac),
                     onPress: () {},
                   ),
                 ],
@@ -529,15 +529,15 @@ void main() {
                 divider: FTileDivider.none,
                 children: [
                   FTile(
-                    prefixIcon: FIcon.empty(),
+                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
                     title: const Text('List View'),
-                    suffixIcon: FIcon(FAssets.icons.list),
+                    suffixIcon: const Icon(FIcons.list),
                     onPress: () {},
                   ),
                   FTile(
-                    prefixIcon: FIcon.empty(),
+                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
                     title: const Text('Grid View'),
-                    suffixIcon: FIcon(FAssets.icons.layoutGrid),
+                    suffixIcon: const Icon(FIcons.layoutGrid),
                     onPress: () {},
                   ),
                 ],
@@ -562,10 +562,10 @@ void main() {
                 error: const Text('This should not appear'),
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    prefixIcon: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -590,10 +590,10 @@ void main() {
                 error: const Text('This should not appear'),
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    prefixIcon: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -604,10 +604,10 @@ void main() {
                 error: const Text('This should not appear'),
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    prefixIcon: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -629,29 +629,29 @@ void main() {
                 style: FThemes.green.dark.tileGroupStyle,
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    prefixIcon: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
                   FTile(
                     style: FThemes.blue.dark.tileGroupStyle.tileStyle,
-                    prefixIcon: FIcon(FAssets.icons.bluetooth),
+                    prefixIcon: const Icon(FIcons.bluetooth),
                     title: const Text('Bluetooth'),
                     subtitle: const Text('Fee, Fo'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                   ),
                 ],
               ),
               FTileGroup(
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    prefixIcon: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -673,18 +673,18 @@ void main() {
               FTileGroup(
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    prefixIcon: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.bluetooth),
+                    prefixIcon: const Icon(FIcons.bluetooth),
                     title: const Text('Bluetooth'),
                     subtitle: const Text('Fee, Fo'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                   ),
                 ],
               ),
@@ -692,10 +692,10 @@ void main() {
                 enabled: true,
                 children: [
                   FTile(
-                    prefixIcon: FIcon(FAssets.icons.wifi),
+                    prefixIcon: const Icon(FIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffixIcon: FIcon(FAssets.icons.chevronRight),
+                    suffixIcon: const Icon(FIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],

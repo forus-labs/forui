@@ -27,7 +27,7 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
 
   /// The time field icon's style.
   @override
-  final FIconStyle iconStyle;
+  final IconThemeData iconStyle;
 
   /// Creates a [FTimeFieldStyle].
   const FTimeFieldStyle({
@@ -44,6 +44,6 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
         textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
         popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
         pickerStyle: FTimePickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 18),
+        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
       );
 }

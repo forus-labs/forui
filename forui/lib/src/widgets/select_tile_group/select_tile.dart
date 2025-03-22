@@ -15,7 +15,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// The style.
   final FTileStyle? style;
 
-  /// The checked icon. Defaults to `FIcon(FAssets.icons.check)`.
+  /// The checked icon. Defaults to `FIcon(FIcons.check)`.
   final Widget? checkedIcon;
 
   /// The unchecked icon.
@@ -57,6 +57,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     required this.title,
     required this.value,
     this.style,
+    this.checkedIcon = const Icon(FIcons.check),
+    this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
     this.subtitle,
     this.details,
     this.semanticLabel,
@@ -64,13 +66,9 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    Widget? checkedIcon,
-    Widget? uncheckedIcon,
     Widget? suffixIcon,
     super.key,
-  }) : checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
-       uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
-       _suffix = false,
+  }) : _suffix = false,
        _icon = suffixIcon;
 
   /// Creates a [FSelectTile] with a suffix check icon.
@@ -78,6 +76,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     required this.title,
     required this.value,
     this.style,
+    this.checkedIcon = const Icon(FIcons.check),
+    this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
     this.subtitle,
     this.details,
     this.semanticLabel,
@@ -86,12 +86,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.focusNode,
     this.onFocusChange,
     Widget? prefixIcon,
-    Widget? checkedIcon,
-    Widget? uncheckedIcon,
     super.key,
   }) : _icon = prefixIcon,
-       checkedIcon = checkedIcon ?? FIcon(FAssets.icons.check),
-       uncheckedIcon = uncheckedIcon ?? FIcon.empty(),
        _suffix = true;
 
   @override

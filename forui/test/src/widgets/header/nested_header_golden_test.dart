@@ -18,10 +18,10 @@ void main() {
             title: const Text('Title'),
             prefixActions: [
               FHeaderAction.back(onPress: () {}),
-              FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
+              const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
             ],
             suffixActions: [
-              FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
+              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
               FHeaderAction.x(onPress: () {}),
             ],
           ),
@@ -40,10 +40,10 @@ void main() {
               title: const Text('Title'),
               prefixActions: [
                 FHeaderAction.back(onPress: () {}),
-                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
               suffixActions: [
-                FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
                 FHeaderAction.x(onPress: () {}),
               ],
             ),
@@ -67,10 +67,10 @@ void main() {
               title: const Text('Title'),
               prefixActions: [
                 FHeaderAction.back(onPress: () {}),
-                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
               suffixActions: [
-                FHeaderAction(autofocus: true, icon: FIcon(FAssets.icons.plus), onPress: () {}),
+                FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
                 FHeaderAction.x(onPress: () {}),
               ],
             ),
@@ -89,10 +89,10 @@ void main() {
               title: const Text('Title'),
               prefixActions: [
                 FHeaderAction.back(onPress: () {}),
-                FHeaderAction(icon: FIcon(FAssets.icons.alarmClock), onPress: null),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
               suffixActions: [
-                FHeaderAction(icon: FIcon(FAssets.icons.plus), onPress: () {}),
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
                 FHeaderAction.x(onPress: () {}),
               ],
             ),

@@ -43,7 +43,7 @@ class BreadcrumbDividerPage extends Sample {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       FBreadcrumb(
-        divider: Transform.rotate(angle: -60, child: FIcon(FAssets.icons.slash, size: 14)),
+        divider: Transform.rotate(angle: -60, child: const Icon(FIcons.slash, size: 14)),
         children: [
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
           FBreadcrumbItem.collapsed(
