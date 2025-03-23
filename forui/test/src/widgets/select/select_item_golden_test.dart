@@ -34,7 +34,7 @@ void main() {
               key: key,
               children: [
                 FSelectSection(
-                  title: const Text('Lorem'),
+                  label: const Text('Lorem'),
                   children: [for (final letter in letters) FSelectItem.text(letter)],
                 ),
               ],
@@ -57,7 +57,7 @@ void main() {
               key: key,
               children: [
                 FSelectSection(
-                  title: const Text('Lorem'),
+                  label: const Text('Lorem'),
                   enabled: false,
                   children: [FSelectItem.text('A'), FSelectItem.text('B'), FSelectItem.text('C', enabled: true)],
                 ),
@@ -81,7 +81,7 @@ void main() {
               key: key,
               children: [
                 FSelectSection(
-                  title: const Text('Lorem'),
+                  label: const Text('Lorem'),
                   children: [for (final letter in letters) FSelectItem.text(letter)],
                 ),
               ],

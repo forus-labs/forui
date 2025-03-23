@@ -46,7 +46,7 @@ class SectionSelectPage extends Sample {
       popoverConstraints: const BoxConstraints(maxWidth: 400, maxHeight: 300),
       children: [
         FSelectSection(
-          title: const Text('North America'),
+          label: const Text('North America'),
           children: [
             FSelectItem.text('Eastern Standard Time (EST)'),
             FSelectItem.text('Central Standard Time (CST)'),
@@ -57,7 +57,7 @@ class SectionSelectPage extends Sample {
           ],
         ),
         FSelectSection(
-          title: const Text('South America'),
+          label: const Text('South America'),
           children: [
             FSelectItem.text('Argentina Time (ART)'),
             FSelectItem.text('Bolivia Time (BOT)'),
@@ -66,7 +66,7 @@ class SectionSelectPage extends Sample {
           ],
         ),
         FSelectSection(
-          title: const Text('Europe & Africa'),
+          label: const Text('Europe & Africa'),
           children: [
             FSelectItem.text('Greenwich Mean Time (GMT)'),
             FSelectItem.text('Central European Time (CET)'),
@@ -77,7 +77,7 @@ class SectionSelectPage extends Sample {
           ],
         ),
         FSelectSection(
-          title: const Text('Asia'),
+          label: const Text('Asia'),
           children: [
             FSelectItem.text('Moscow Time (MSK)'),
             FSelectItem.text('India Standard Time (IST)'),
@@ -88,7 +88,7 @@ class SectionSelectPage extends Sample {
           ],
         ),
         FSelectSection(
-          title: const Text('Australia & Pacific'),
+          label: const Text('Australia & Pacific'),
           children: [
             FSelectItem.text('Australian Western Standard Time (AWST)'),
             FSelectItem.text('Australian Central Standard Time (ACST)'),
@@ -217,7 +217,7 @@ class FormatSelectPage extends Sample {
     child: FSelect<({String firstName, String lastName})>(
       hint: 'Select a user',
       format: (user) => '${user.firstName} ${user.lastName}',
-      children: [for (final user in users) FSelectItem(value: user, title: Text(user.firstName))],
+      children: [for (final user in users) FSelectItem(value: user, child: Text(user.firstName))],
     ),
   );
 }

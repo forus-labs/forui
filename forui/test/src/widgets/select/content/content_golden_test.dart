@@ -35,7 +35,7 @@ void main() {
                 contentScrollHandles: true,
                 children: [
                   FSelectSection(
-                    title: const Text('Lorem'),
+                    label: const Text('Lorem'),
                     children: [for (final letter in letters) FSelectItem.text(letter)],
                   ),
                 ],
@@ -66,7 +66,7 @@ void main() {
                 contentScrollHandles: true,
                 children: [
                   FSelectSection(
-                    title: const Text('Lorem'),
+                    label: const Text('Lorem'),
                     children: [for (final letter in letters) FSelectItem.text(letter)],
                   ),
                 ],
@@ -94,7 +94,7 @@ void main() {
                 contentScrollHandles: true,
                 children: [
                   FSelectSection(
-                    title: const Text('Lorem'),
+                    label: const Text('Lorem'),
                     children: [for (final letter in letters) FSelectItem.text(letter)],
                   ),
                 ],
@@ -124,7 +124,7 @@ void main() {
                 contentScrollController: scrollController,
                 children: [
                   FSelectSection(
-                    title: const Text('Lorem'),
+                    label: const Text('Lorem'),
                     children: [for (final letter in letters) FSelectItem.text(letter)],
                   ),
                 ],
@@ -154,7 +154,7 @@ void main() {
                 contentScrollController: scrollController,
                 contentScrollHandles: true,
                 children: [
-                  FSelectSection(title: const Text('Lorem'), children: [FSelectItem.text('1')]),
+                  FSelectSection(label: const Text('Lorem'), children: [FSelectItem.text('1')]),
                 ],
               ),
             ),
@@ -186,7 +186,7 @@ void main() {
               contentScrollController: scrollController,
               children: [
                 FSelectSection(
-                  title: const Text('Lorem'),
+                  label: const Text('Lorem'),
                   children: [for (final letter in letters) FSelectItem.text(letter)],
                 ),
               ],

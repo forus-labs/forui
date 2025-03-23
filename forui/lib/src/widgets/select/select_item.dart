@@ -23,14 +23,14 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// Defaults to inheriting from the [FSelect].
   final bool? enabled;
 
-  /// The title.
-  final Widget title;
+  /// The label.
+  final Widget label;
 
   /// The nested [FSelectItem]s.
   final List<FSelectItem<T>> children;
 
   /// Creates a [FSelectSection].
-  const FSelectSection({required this.title, required this.children, this.style, this.enabled, super.key});
+  const FSelectSection({required this.label, required this.children, this.style, this.enabled, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
         children: [
           DefaultTextStyle(
             style: enabled ? style.enabledTitleTextStyle : style.disabledTitleTextStyle,
-            child: Padding(padding: style.titlePadding, child: title),
+            child: Padding(padding: style.titlePadding, child: label),
           ),
           // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
           // No feasible solution that doesn't involve a lot of complexity exists.
@@ -130,19 +130,19 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// Defaults to the value inherited from the parent [FSelectSection] or [FSelect].
   final bool? enabled;
 
-  /// The title.
-  final Widget title;
+  /// The child.
+  final Widget child;
 
   /// The icon displayed when the item is selected. Defaults to a check icon.
   final Widget selectedIcon;
 
   /// Creates a [FSelectItem].
-  FSelectItem({required this.value, required this.title, this.style, this.enabled, Widget? icon, super.key})
+  FSelectItem({required this.value, required this.child, this.style, this.enabled, Widget? icon, super.key})
     : selectedIcon = icon ?? FIcon(FAssets.icons.check);
 
   /// Creates a [FSelectItem] that displays the [value] as its title.
   static FSelectItem<String> text(String value, {bool? enabled}) =>
-      FSelectItem(value: value, enabled: enabled, title: Text(value));
+      FSelectItem(value: value, enabled: enabled, child: Text(value));
 
   @override
   State<FSelectItem<T>> createState() => _FSelectItemState<T>();
@@ -194,7 +194,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            DefaultTextStyle(style: enabled ? style.enabledTextStyle : style.disabledTextStyle, child: widget.title),
+            DefaultTextStyle(style: enabled ? style.enabledTextStyle : style.disabledTextStyle, child: widget.child),
             if (selected)
               FIconStyleData(
                 style: enabled ? style.enabledIconStyle : style.disabledIconStyle,
