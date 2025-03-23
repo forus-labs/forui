@@ -140,7 +140,7 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   FSelectItem({required this.value, required this.child, this.style, this.enabled, Widget? icon, super.key})
     : selectedIcon = icon ?? FIcon(FAssets.icons.check);
 
-  /// Creates a [FSelectItem] that displays the [value] as its title.
+  /// Creates a [FSelectItem] that displays the [value] as the a text.
   static FSelectItem<String> text(String value, {bool? enabled}) =>
       FSelectItem(value: value, enabled: enabled, child: Text(value));
 
