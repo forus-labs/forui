@@ -136,6 +136,7 @@ Lastly, types from 3rd party packages should not be publicly exported by Forui.
 ### Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`
 
 Prefer the `Geometry` variants when possible because they are more flexible.
+
 ### Widget Styles
 
 ```dart
@@ -145,7 +146,7 @@ class FooStyle with Diagnosticable, _$FooStyleFunctions { // ---- (2) (3)
   
   final Color color;
   
-  FooStyle({required this.color}); // ---- (3)
+  FooStyle({required this.color});
   
   FooStyle.inherit({FFont font, FColorScheme scheme}): color = scheme.primary; // ---- (4)
   
