@@ -48,8 +48,8 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultTextStyle(
-            style: enabled ? style.enabledTitleTextStyle : style.disabledTitleTextStyle,
-            child: Padding(padding: style.titlePadding, child: label),
+            style: enabled ? style.enabledLabelTextStyle : style.disabledLabelTextStyle,
+            child: Padding(padding: style.labelPadding, child: label),
           ),
           // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
           // No feasible solution that doesn't involve a lot of complexity exists.
@@ -78,17 +78,17 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 
 /// A [FSelectSection]'s style.
 class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
-  /// The enabled title's text style.
+  /// The enabled label's text style.
   @override
-  final TextStyle enabledTitleTextStyle;
+  final TextStyle enabledLabelTextStyle;
 
-  /// The disabled title's text style.
+  /// The disabled label's text style.
   @override
-  final TextStyle disabledTitleTextStyle;
+  final TextStyle disabledLabelTextStyle;
 
-  /// The padding around the title. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
+  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
-  final EdgeInsetsGeometry titlePadding;
+  final EdgeInsetsGeometry labelPadding;
 
   /// The section's items' style.
   @override
@@ -96,10 +96,10 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
   /// Creates a [FSelectSectionStyle].
   FSelectSectionStyle({
-    required this.enabledTitleTextStyle,
-    required this.disabledTitleTextStyle,
+    required this.enabledLabelTextStyle,
+    required this.disabledLabelTextStyle,
     required this.itemStyle,
-    this.titlePadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.labelPadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
 
   /// Creates a [FSelectSectionStyle] that inherits from the given [FColorScheme], [FStyle], and [FTypography].
@@ -108,8 +108,8 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FStyle style,
     required FTypography typography,
   }) : this(
-         enabledTitleTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-         disabledTitleTextStyle: typography.sm.copyWith(
+         enabledLabelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+         disabledLabelTextStyle: typography.sm.copyWith(
            color: colorScheme.disable(colorScheme.primary),
            fontWeight: FontWeight.w600,
          ),
@@ -247,11 +247,11 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   @override
   final BoxDecoration enabledHoveredDecoration;
 
-  /// The text style for the item's title when enabled.
+  /// The text style for the child when enabled.
   @override
   final TextStyle enabledTextStyle;
 
-  /// The text style for the item's title when disabled.
+  /// The text style for the child when disabled.
   @override
   final TextStyle disabledTextStyle;
 
