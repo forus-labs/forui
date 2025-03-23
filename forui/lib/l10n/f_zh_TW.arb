@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "選擇時間",
   "timeFieldInvalidDateError": "無效的時間。",
-  "textFieldClearButtonSemanticLabel": "清除"
+  "textFieldClearButtonSemanticsLabel": "清除",
+  "selectHint": "選擇項目",
+  "selectSearchHint": "搜尋",
+  "selectNoResults": "沒有匹配結果。",
+  "selectSearchNoResults": "未找到匹配項。",
+  "selectScrollUpSemanticsLabel": "向上捲動",
+  "selectScrollDownSemanticsLabel": "向下捲動"
 }

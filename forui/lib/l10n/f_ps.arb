@@ -12,5 +12,10 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "یو وخت وټاکئ",
   "timeFieldInvalidDateError": "ناسم وخت.",
-  "textFieldClearButtonSemanticLabel": "پاک کول"
+  "textFieldClearButtonSemanticLabel": "پاک کول",
+  "selectHint": "یو توکی وټاکئ",
+  "selectSearchHint": "لټون",
+  "selectSearchNoResults": "هیڅ سمون لرونکي ونه موندل شول.",
+  "selectScrollUpSemanticsLabel": "پورته سکرول کړئ",
+  "selectScrollDownSemanticsLabel": "ښکته سکرول کړئ"
 }

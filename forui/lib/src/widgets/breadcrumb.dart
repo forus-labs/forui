@@ -116,8 +116,9 @@ abstract interface class FBreadcrumbItem extends Widget {
     FHidePopoverRegion hideOnTapOutside,
     bool directionPadding,
     bool autofocus,
-    FocusNode? focusNode,
+    FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    TraversalEdgeBehavior traversalEdgeBehavior,
     String? semanticLabel,
     Key? key,
   }) = _CollapsedCrumb;
@@ -144,7 +145,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
           (_, data, child) => Padding(
             padding: style.padding,
             child: DefaultTextStyle(
-              style: switch ((current, data.hovered)) {
+              style: switch ((current, data.hovered || data.pressed)) {
                 (false, false) => style.unselectedTextStyle,
                 (false, true) => style.hoveredTextStyle,
                 (true, true) => style.hoveredTextStyle,
@@ -182,8 +183,9 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final FHidePopoverRegion hideOnTapOutside;
   final bool directionPadding;
   final bool autofocus;
-  final FocusNode? focusNode;
+  final FocusScopeNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
+  final TraversalEdgeBehavior traversalEdgeBehavior;
   final String? semanticLabel;
 
   const _CollapsedCrumb({
@@ -204,6 +206,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     super.key,
   });
 
@@ -229,6 +232,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(StringProperty('semanticLabel', semanticLabel));
   }
 }
@@ -269,6 +273,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
+      traversalEdgeBehavior: widget.traversalEdgeBehavior,
       scrollController: widget.scrollController,
       cacheExtent: widget.cacheExtent,
       maxHeight: widget.maxHeight,

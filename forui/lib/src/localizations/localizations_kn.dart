@@ -57,7 +57,22 @@ class FLocalizationsKn extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'ತೆರವುಗೊಳಿಸಿ';
+  String get selectHint => 'ಐಟಂ ಆಯ್ಕೆಮಾಡಿ';
+
+  @override
+  String get selectSearchHint => 'ಹುಡುಕಿ';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'ಮೇಲಕ್ಕೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

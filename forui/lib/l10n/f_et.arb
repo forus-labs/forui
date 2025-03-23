@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vali aeg",
   "timeFieldInvalidDateError": "Vigane aeg.",
-  "textFieldClearButtonSemanticLabel": "Kustuta"
+  "textFieldClearButtonSemanticsLabel": "Kustuta",
+  "selectHint": "Valige üksus",
+  "selectSearchHint": "Otsi",
+  "selectNoResults": "Sobivaid tulemusi pole.",
+  "selectSearchNoResults": "Vasteid ei leitud.",
+  "selectScrollUpSemanticsLabel": "Keri üles",
+  "selectScrollDownSemanticsLabel": "Keri alla"
 }

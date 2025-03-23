@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Vyberte čas",
   "timeFieldInvalidDateError": "Neplatný čas.",
-  "textFieldClearButtonSemanticLabel": "Vymazať"
+  "textFieldClearButtonSemanticsLabel": "Vymazať",
+  "selectHint": "Vyberte položku",
+  "selectSearchHint": "Hľadať",
+  "selectNoResults": "Žiadne zodpovedajúce výsledky.",
+  "selectSearchNoResults": "Neboli nájdené žiadne zhody.",
+  "selectScrollUpSemanticsLabel": "Posunúť nahor",
+  "selectScrollDownSemanticsLabel": "Posunúť nadol"
 }

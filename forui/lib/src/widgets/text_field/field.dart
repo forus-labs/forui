@@ -87,7 +87,7 @@ class Field extends FormField<String> {
                         FAssets.icons.x,
                         semanticLabel:
                             (FLocalizations.of(state.context) ?? FDefaultLocalizations())
-                                .textFieldClearButtonSemanticLabel,
+                                .textFieldClearButtonSemanticsLabel,
                       ),
                     ),
                   )

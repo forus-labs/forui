@@ -57,7 +57,22 @@ class FLocalizationsSi extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'හිස් කරන්න';
+  String get selectHint => 'අයිතමයක් තෝරන්න';
+
+  @override
+  String get selectSearchHint => 'සොයන්න';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'ඉහළට අනුචලනය කරන්න';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'පහළට අනුචලනය කරන්න';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '-';

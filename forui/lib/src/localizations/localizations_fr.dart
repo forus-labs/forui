@@ -57,7 +57,22 @@ class FLocalizationsFr extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Effacer';
+  String get selectHint => 'Sélectionnez un élément';
+
+  @override
+  String get selectSearchHint => 'Rechercher';
+
+  @override
+  String get selectNoResults => 'Aucun résultat correspondant.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Faire défiler vers le haut';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Faire défiler vers le bas';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Effacer';
 
   @override
   String get shortDateSeparator => '/';
@@ -106,7 +121,22 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   FLocalizationsFrCa() : super('fr_CA');
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Effacer';
+  String get selectHint => 'Sélectionnez un élément';
+
+  @override
+  String get selectSearchHint => 'Rechercher';
+
+  @override
+  String get selectNoResults => 'Aucun résultat correspondant.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Faire défiler vers le haut';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Faire défiler vers le bas';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Effacer';
 
   @override
   String get shortDateSeparator => '-';

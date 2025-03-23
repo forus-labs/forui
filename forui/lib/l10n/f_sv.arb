@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Välj en tid",
   "timeFieldInvalidDateError": "Ogiltig tid.",
-  "textFieldClearButtonSemanticLabel": "Rensa"
+  "textFieldClearButtonSemanticsLabel": "Rensa",
+  "selectHint": "Välj ett objekt",
+  "selectSearchHint": "Sök",
+  "selectNoResults": "Inga matchande resultat.",
+  "selectSearchNoResults": "Inga matchningar hittades.",
+  "selectScrollUpSemanticsLabel": "Rulla uppåt",
+  "selectScrollDownSemanticsLabel": "Rulla nedåt"
 }

@@ -57,7 +57,22 @@ class FLocalizationsGu extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'સાફ કરો';
+  String get selectHint => 'આઇટમ પસંદ કરો';
+
+  @override
+  String get selectSearchHint => 'શોધો';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'ઉપર સ્ક્રોલ કરો';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'નીચે સ્ક્રોલ કરો';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

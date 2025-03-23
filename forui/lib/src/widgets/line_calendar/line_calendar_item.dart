@@ -47,7 +47,7 @@ class Item extends StatelessWidget {
           semanticLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
           onPress: () => controller.select(date),
           builder: (context, state, _) {
-            final itemStyle = switch ((selected == date, state.hovered)) {
+            final itemStyle = switch ((selected == date, state.hovered || state.pressed)) {
               (true, true) => style.selectedHoveredItemStyle,
               (true, false) => style.selectedItemStyle,
               (false, true) => style.unselectedHoveredItemStyle,
@@ -62,7 +62,7 @@ class Item extends StatelessWidget {
                 date: date,
                 today: today,
                 selected: selected == date,
-                hovered: state.hovered,
+                hovered: state.hovered || state.pressed,
                 focused: state.focused,
               ),
               Stack(

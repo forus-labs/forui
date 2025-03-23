@@ -57,7 +57,22 @@ class FLocalizationsFa extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'پاک کردن';
+  String get selectHint => 'یک مورد را انتخاب کنید';
+
+  @override
+  String get selectSearchHint => 'جستجو';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'پیمایش به بالا';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'پیمایش به پایین';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

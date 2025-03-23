@@ -57,7 +57,22 @@ class FLocalizationsMn extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Арилгах';
+  String get selectHint => 'Зүйл сонгох';
+
+  @override
+  String get selectSearchHint => 'Хайх';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Дээш гүйлгэх';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Доош гүйлгэх';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '.';

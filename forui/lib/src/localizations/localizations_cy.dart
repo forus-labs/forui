@@ -57,7 +57,22 @@ class FLocalizationsCy extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Clirio';
+  String get selectHint => 'Dewiswch eitem';
+
+  @override
+  String get selectSearchHint => 'Chwilio';
+
+  @override
+  String get selectNoResults => 'Dim canlyniadau cyfatebol.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Sgrolio i fyny';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Sgrolio i lawr';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clirio';
 
   @override
   String get shortDateSeparator => '/';

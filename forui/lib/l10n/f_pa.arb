@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ਇੱਕ ਸਮਾਂ ਚੁਣੋ",
   "timeFieldInvalidDateError": "ਅਵੈਧ ਸਮਾਂ।",
-  "textFieldClearButtonSemanticLabel": "ਕਲੀਅਰ ਕਰੋ"
+  "textFieldClearButtonSemanticsLabel": "ਕਲੀਅਰ ਕਰੋ",
+  "selectHint": "ਇੱਕ ਆਈਟਮ ਚੁਣੋ",
+  "selectSearchHint": "ਖੋਜ",
+  "selectNoResults": "ਕੋਈ ਮੇਲ ਖਾਂਦੇ ਨਤੀਜੇ ਨਹੀਂ ਹਨ।",
+  "selectSearchNoResults": "ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ।",
+  "selectScrollUpSemanticsLabel": "ਉੱਪਰ ਸਕ੍ਰੋਲ ਕਰੋ",
+  "selectScrollDownSemanticsLabel": "ਹੇਠਾਂ ਸਕ੍ਰੋਲ ਕਰੋ"
 }

@@ -57,7 +57,22 @@ class FLocalizationsUk extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Очистити';
+  String get selectHint => 'Виберіть елемент';
+
+  @override
+  String get selectSearchHint => 'Пошук';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Прокрутити вгору';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Прокрутити вниз';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '.';

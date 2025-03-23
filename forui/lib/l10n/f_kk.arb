@@ -12,5 +12,10 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Уақытты таңдаңыз",
   "timeFieldInvalidDateError": "Жарамсыз уақыт.",
-  "textFieldClearButtonSemanticLabel": "Тазалау"
+  "textFieldClearButtonSemanticLabel": "Тазалау",
+  "selectHint": "Элементті таңдаңыз",
+  "selectSearchHint": "Іздеу",
+  "selectSearchNoResults": "Сәйкестіктер табылмады.",
+  "selectScrollUpSemanticsLabel": "Жоғары айналдыру",
+  "selectScrollDownSemanticsLabel": "Төмен айналдыру"
 }

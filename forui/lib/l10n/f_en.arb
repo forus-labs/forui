@@ -59,10 +59,33 @@
       }
     }
   },
-  "textFieldClearButtonSemanticLabel": "Clear",
-  "@textFieldClearButtonSemanticLabel": {
+
+  "selectHint": "Select an item",
+  "@selectHint": {
+    "description": "The hint text for the select field."
+  },
+  "selectSearchHint": "Search",
+  "@selectSearchHint": {
+    "description": "The hint text for the search field in a select field."
+  },
+  "selectNoResults": "No matches found.",
+  "@selectNoResults": {
+    "description": "The message displayed when there are no matching results."
+  },
+  "selectScrollUpSemanticsLabel": "Scroll up",
+  "@selectScrollUpSemanticsLabel": {
+    "description": "The semantic label for the scroll handle in a select field."
+  },
+  "selectScrollDownSemanticsLabel": "Scroll down",
+    "@selectScrollDownSemanticsLabel": {
+      "description": "The semantic label for the scroll handle in a select field."
+    },
+
+  "textFieldClearButtonSemanticsLabel": "Clear",
+  "@textFieldClearButtonSemanticsLabel": {
     "description": "The semantic label for the clear button in a text field."
   },
+
   "shortDateSeparator": "/",
   "@shortDateSeparator": {
     "description": "The short date's separator, typically /."
@@ -71,6 +94,7 @@
   "@shortDateSuffix": {
     "description": "The short date's suffix, typically empty."
   },
+
   "dateFieldHint": "Pick a date",
   "@dateFieldHint": {
     "description": "The hint text for the calendar-only date field."
@@ -79,6 +103,7 @@
   "@dateFieldInvalidDateError": {
     "description": "Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format."
   },
+
   "timeFieldTimeSeparator": ":",
   "@timeFieldTimeSeparator": {
     "description": "The time field's time separator, typically ':'."
@@ -100,6 +125,7 @@
   "@dialogLabel": {
     "description": "The sheet's label."
   },
+
   "sheetSemanticsLabel": "Sheet",
   "barrierLabel": "Barrier",
   "@barrierLabel": {

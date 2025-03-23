@@ -57,7 +57,22 @@ class FLocalizationsUz extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Tozalash';
+  String get selectHint => 'Element tanlang';
+
+  @override
+  String get selectSearchHint => 'Qidirish';
+
+  @override
+  String get selectNoResults => 'Mos keladigan natijalar yo\'q.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Tepaga aylantirish';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Pastga aylantirish';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Tozalash';
 
   @override
   String get shortDateSeparator => '/';

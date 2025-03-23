@@ -57,7 +57,22 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => '清除';
+  String get selectHint => '选择项目';
+
+  @override
+  String get selectSearchHint => '搜索';
+
+  @override
+  String get selectNoResults => '没有匹配结果。';
+
+  @override
+  String get selectScrollUpSemanticsLabel => '向上滚动';
+
+  @override
+  String get selectScrollDownSemanticsLabel => '向下滚动';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => '清除';
 
   @override
   String get shortDateSeparator => '/';
@@ -106,7 +121,22 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   FLocalizationsZhHk() : super('zh_HK');
 
   @override
-  String get textFieldClearButtonSemanticLabel => '清除';
+  String get selectHint => '選擇項目';
+
+  @override
+  String get selectSearchHint => '搜尋';
+
+  @override
+  String get selectNoResults => '沒有匹配結果。';
+
+  @override
+  String get selectScrollUpSemanticsLabel => '向上捲動';
+
+  @override
+  String get selectScrollDownSemanticsLabel => '向下捲動';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => '清除';
 
   @override
   String get shortDateSeparator => '/';
@@ -155,7 +185,22 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   FLocalizationsZhTw() : super('zh_TW');
 
   @override
-  String get textFieldClearButtonSemanticLabel => '清除';
+  String get selectHint => '選擇項目';
+
+  @override
+  String get selectSearchHint => '搜尋';
+
+  @override
+  String get selectNoResults => '沒有匹配結果。';
+
+  @override
+  String get selectScrollUpSemanticsLabel => '向上捲動';
+
+  @override
+  String get selectScrollDownSemanticsLabel => '向下捲動';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => '清除';
 
   @override
   String get shortDateSeparator => '/';

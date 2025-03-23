@@ -57,7 +57,22 @@ class FLocalizationsLv extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Notīrīt';
+  String get selectHint => 'Atlasiet vienumu';
+
+  @override
+  String get selectSearchHint => 'Meklēt';
+
+  @override
+  String get selectNoResults => 'Nav atbilstošu rezultātu.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Ritināt uz augšu';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Ritināt uz leju';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Notīrīt';
 
   @override
   String get shortDateSeparator => '.';

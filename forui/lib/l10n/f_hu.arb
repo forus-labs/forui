@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Válasszon időpontot",
   "timeFieldInvalidDateError": "Érvénytelen idő.",
-  "textFieldClearButtonSemanticLabel": "Törlés"
+  "textFieldClearButtonSemanticsLabel": "Törlés",
+  "selectHint": "Válasszon egy elemet",
+  "selectSearchHint": "Keresés",
+  "selectNoResults": "Nincs megfelelő találat.",
+  "selectSearchNoResults": "Nincs találat.",
+  "selectScrollUpSemanticsLabel": "Görgetés felfelé",
+  "selectScrollDownSemanticsLabel": "Görgetés lefelé"
 }

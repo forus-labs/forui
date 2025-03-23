@@ -12,5 +12,10 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "ເລືອກເວລາ",
   "timeFieldInvalidDateError": "ເວລາບໍ່ຖືກຕ້ອງ.",
-  "textFieldClearButtonSemanticLabel": "ລຶບ"
+  "textFieldClearButtonSemanticLabel": "ລຶບ",
+  "selectHint": "ເລືອກລາຍການ",
+  "selectSearchHint": "ຊອກຫາ",
+  "selectSearchNoResults": "ບໍ່ພົບການຈັບຄູ່.",
+  "selectScrollUpSemanticsLabel": "ເລື່ອນຂຶ້ນ",
+  "selectScrollDownSemanticsLabel": "ເລື່ອນລົງ"
 }

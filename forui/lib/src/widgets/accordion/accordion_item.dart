@@ -119,7 +119,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                                 applyHeightToLastDescent: false,
                               ),
                               style:
-                                  data.hovered
+                                  data.hovered || data.pressed
                                       ? style.titleTextStyle.copyWith(decoration: TextDecoration.underline)
                                       : style.titleTextStyle,
                               child: widget.title,

@@ -57,7 +57,22 @@ class FLocalizationsOr extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'ସଫା କରନ୍ତୁ';
+  String get selectHint => 'ଏକ ଆଇଟମ୍ ଚୟନ କରନ୍ତୁ';
+
+  @override
+  String get selectSearchHint => 'ସନ୍ଧାନ କରନ୍ତୁ';
+
+  @override
+  String get selectNoResults => 'କୌଣସି ମେଳଖାଉଥିବା ଫଳାଫଳ ନାହିଁ।';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'ଉପରକୁ ସ୍କ୍ରୋଲ କରନ୍ତୁ';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'ତଳକୁ ସ୍କ୍ରୋଲ କରନ୍ତୁ';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'ସଫା କରନ୍ତୁ';
 
   @override
   String get shortDateSeparator => '/';

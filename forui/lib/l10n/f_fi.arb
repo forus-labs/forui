@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ".",
   "timeFieldHint": "Valitse aika",
   "timeFieldInvalidDateError": "Virheellinen aika.",
-  "textFieldClearButtonSemanticLabel": "Tyhjennä"
+  "textFieldClearButtonSemanticsLabel": "Tyhjennä",
+  "selectHint": "Valitse kohde",
+  "selectSearchHint": "Haku",
+  "selectNoResults": "Ei vastaavia tuloksia.",
+  "selectSearchNoResults": "Ei löytynyt vastaavuuksia.",
+  "selectScrollUpSemanticsLabel": "Vieritä ylös",
+  "selectScrollDownSemanticsLabel": "Vieritä alas"
 }

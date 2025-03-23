@@ -57,7 +57,22 @@ class FLocalizationsPs extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'پاک کول';
+  String get selectHint => 'یو توکی وټاکئ';
+
+  @override
+  String get selectSearchHint => 'لټون';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'پورته سکرول کړئ';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'ښکته سکرول کړئ';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

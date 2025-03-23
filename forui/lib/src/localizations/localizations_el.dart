@@ -57,7 +57,22 @@ class FLocalizationsEl extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Εκκαθάριση';
+  String get selectHint => 'Επιλέξτε ένα στοιχείο';
+
+  @override
+  String get selectSearchHint => 'Αναζήτηση';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Κύλιση προς τα πάνω';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Κύλιση προς τα κάτω';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

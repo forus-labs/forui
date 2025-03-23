@@ -57,7 +57,22 @@ class FLocalizationsKm extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'សម្អាត';
+  String get selectHint => 'ជ្រើសរើសធាតុមួយ';
+
+  @override
+  String get selectSearchHint => 'ស្វែងរក';
+
+  @override
+  String get selectNoResults => 'គ្មានលទ្ធផលដែលត្រូវគ្នាទេ។';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'រមូរឡើងលើ';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'រមូរចុះក្រោម';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';

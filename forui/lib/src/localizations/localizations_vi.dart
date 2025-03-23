@@ -57,7 +57,22 @@ class FLocalizationsVi extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Xóa';
+  String get selectHint => 'Chọn một mục';
+
+  @override
+  String get selectSearchHint => 'Tìm kiếm';
+
+  @override
+  String get selectNoResults => 'Không có kết quả phù hợp.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Cuộn lên';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Cuộn xuống';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Xóa';
 
   @override
   String get shortDateSeparator => '/';

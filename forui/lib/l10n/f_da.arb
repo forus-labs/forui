@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ".",
   "timeFieldHint": "Vælg et tidspunkt",
   "timeFieldInvalidDateError": "Ugyldigt tidspunkt.",
-  "textFieldClearButtonSemanticLabel": "Ryd"
+  "textFieldClearButtonSemanticsLabel": "Ryd",
+  "selectHint": "Vælg et element",
+  "selectSearchHint": "Søg",
+  "selectNoResults": "Ingen matchende resultater.",
+  "selectSearchNoResults": "Ingen match fundet.",
+  "selectScrollUpSemanticsLabel": "Rul op",
+  "selectScrollDownSemanticsLabel": "Rul ned"
 }

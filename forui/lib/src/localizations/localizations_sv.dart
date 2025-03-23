@@ -57,7 +57,22 @@ class FLocalizationsSv extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Rensa';
+  String get selectHint => 'Välj ett objekt';
+
+  @override
+  String get selectSearchHint => 'Sök';
+
+  @override
+  String get selectNoResults => 'Inga matchande resultat.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Rulla uppåt';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Rulla nedåt';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Rensa';
 
   @override
   String get shortDateSeparator => '-';

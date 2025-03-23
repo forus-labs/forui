@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Veldu tíma",
   "timeFieldInvalidDateError": "Ógildur tími.",
-  "textFieldClearButtonSemanticLabel": "Hreinsa"
+  "textFieldClearButtonSemanticsLabel": "Hreinsa",
+  "selectHint": "Veldu atriði",
+  "selectSearchHint": "Leita",
+  "selectNoResults": "Engar samsvarandi niðurstöður.",
+  "selectSearchNoResults": "Engin samsvörun fannst.",
+  "selectScrollUpSemanticsLabel": "Fletta upp",
+  "selectScrollDownSemanticsLabel": "Fletta niður"
 }

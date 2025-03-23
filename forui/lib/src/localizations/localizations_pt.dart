@@ -57,7 +57,22 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Limpar';
+  String get selectHint => 'Selecione um item';
+
+  @override
+  String get selectSearchHint => 'Pesquisar';
+
+  @override
+  String get selectNoResults => 'No matches found.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Rolar para cima';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Rolar para baixo';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get shortDateSeparator => '/';
@@ -106,7 +121,16 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   FLocalizationsPtPt() : super('pt_PT');
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Limpar';
+  String get selectHint => 'Selecione um item';
+
+  @override
+  String get selectSearchHint => 'Pesquisar';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Deslocar para cima';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Deslocar para baixo';
 
   @override
   String get shortDateSeparator => '/';

@@ -12,5 +12,10 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "בחר שעה",
   "timeFieldInvalidDateError": "שעה לא חוקית.",
-  "textFieldClearButtonSemanticLabel": "ניקוי"
+  "textFieldClearButtonSemanticLabel": "ניקוי",
+  "selectHint": "בחר פריט",
+  "selectSearchHint": "חיפוש",
+  "selectSearchNoResults": "לא נמצאו התאמות.",
+  "selectScrollUpSemanticsLabel": "גלול למעלה",
+  "selectScrollDownSemanticsLabel": "גלול למטה"
 }

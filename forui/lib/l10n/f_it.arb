@@ -12,5 +12,11 @@
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Scegli un orario",
   "timeFieldInvalidDateError": "Orario non valido.",
-  "textFieldClearButtonSemanticLabel": "Cancella"
+  "textFieldClearButtonSemanticsLabel": "Cancella",
+  "selectHint": "Seleziona un elemento",
+  "selectSearchHint": "Cerca",
+  "selectNoResults": "Nessun risultato corrispondente.",
+  "selectSearchNoResults": "Nessuna corrispondenza trovata.",
+  "selectScrollUpSemanticsLabel": "Scorri verso l'alto",
+  "selectScrollDownSemanticsLabel": "Scorri verso il basso"
 }

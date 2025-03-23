@@ -57,7 +57,22 @@ class FLocalizationsHu extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Törlés';
+  String get selectHint => 'Válasszon egy elemet';
+
+  @override
+  String get selectSearchHint => 'Keresés';
+
+  @override
+  String get selectNoResults => 'Nincs megfelelő találat.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Görgetés felfelé';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Görgetés lefelé';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Törlés';
 
   @override
   String get shortDateSeparator => '. ';

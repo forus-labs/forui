@@ -57,7 +57,22 @@ class FLocalizationsSq extends FLocalizations {
   }
 
   @override
-  String get textFieldClearButtonSemanticLabel => 'Pastro';
+  String get selectHint => 'Zgjidhni një artikull';
+
+  @override
+  String get selectSearchHint => 'Kërko';
+
+  @override
+  String get selectNoResults => 'Nuk ka rezultate përputhëse.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Lëviz lart';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Lëviz poshtë';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Pastro';
 
   @override
   String get shortDateSeparator => '.';
