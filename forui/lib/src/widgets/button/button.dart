@@ -202,13 +202,6 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   @override
   final FButtonIconContentStyle iconContentStyle;
 
-  /// The enabled circular progress's style.
-  @override
-  final IconThemeData enabledCircularProgressStyle;
-
-  @override
-  final IconThemeData disabledCircularProgressStyle;
-
   /// The tappable's style.
   @override
   final FTappableStyle tappableStyle;
@@ -221,8 +214,6 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
     required this.focusedOutlineStyle,
     required this.contentStyle,
     required this.iconContentStyle,
-    required this.enabledCircularProgressStyle,
-    required this.disabledCircularProgressStyle,
     required this.tappableStyle,
   });
 
@@ -249,8 +240,6 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            enabledStyle: IconThemeData(color: enabledContentColor, size: 20),
            disabledStyle: IconThemeData(color: disabledContentColor, size: 20),
          ),
-         enabledCircularProgressStyle: IconThemeData(color: enabledContentColor, size: 20),
-         disabledCircularProgressStyle: IconThemeData(color: disabledContentColor, size: 20),
          tappableStyle: style.tappableStyle,
        );
 }

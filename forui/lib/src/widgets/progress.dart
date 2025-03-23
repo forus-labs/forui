@@ -202,7 +202,11 @@ class _CircularState extends State<_Circular> with SingleTickerProviderStateMixi
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.progressStyles.circularIconProgressStyle;
+    final style =
+        widget.style ??
+        context.dependOnInheritedWidgetOfExactType<IconTheme>()?.data ??
+        context.theme.progressStyles.circularIconProgressStyle;
+
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),

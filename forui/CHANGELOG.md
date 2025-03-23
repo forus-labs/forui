@@ -16,7 +16,9 @@ with font icons. In addition, all `iconColor` and `iconSize` style properties ha
   and `unselectedTextStyle`.
 * **Breaking** Replace `FButtonIconContentStyle` `enabledColor`, `disabledColor` and `iconSize` with `enabledStyle` and
   `disabledStyle`.
-* **Breaking** Replace `FButtonIconStyle` `enabledColor`, `disabledColor` and `iconSize` with `enabledStyle` and
+* **Breaking** Replace `FButtonContentStyle` `enabledIconColor`, `disabledIconColor` and `iconSize` with `enabledIconStyle` 
+  and `disabledIconStyle`.
+* **Breaking** Replace `FButtonIconContentStyle` `enabledColor`, `disabledColor` and `iconSize` with `enabledStyle` and
   `disabledStyle`.
 * **Breaking** Remove `FCalendarHeaderStyle` `enabledIconColor` and `disabledIconColor` - configure 
   `buttonStyle.iconContentStyle` instead.
