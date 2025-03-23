@@ -33,10 +33,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
         spacing: 2,
         children: [
           ExcludeSemantics(
-            child: IconTheme(
-              data: selected ? style.selectedIconStyle : style.unselectedIconStyle,
-              child: icon,
-            ),
+            child: IconTheme(data: selected ? style.selectedIconStyle : style.unselectedIconStyle, child: icon),
           ),
           DefaultTextStyle.merge(
             style: selected ? style.selectedTextStyle : style.unselectedTextStyle,

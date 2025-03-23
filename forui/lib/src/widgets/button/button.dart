@@ -123,11 +123,7 @@ class FButton extends StatelessWidget {
             },
             child: child,
           ),
-      child: FButtonData(
-        style: style,
-        enabled: enabled,
-        child: child,
-      ),
+      child: FButtonData(style: style, enabled: enabled, child: child),
     );
   }
 

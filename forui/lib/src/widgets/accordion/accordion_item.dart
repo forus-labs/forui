@@ -130,10 +130,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                     ),
                 child: Transform.rotate(
                   angle: (_controller.value * angle + 90) * math.pi / 180.0,
-                  child: IconTheme(
-                    data: style.iconStyle,
-                    child: widget.icon,
-                  ),
+                  child: IconTheme(data: style.iconStyle, child: widget.icon),
                 ),
               ),
               // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by

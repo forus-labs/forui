@@ -41,12 +41,8 @@ abstract class FProgress extends StatefulWidget {
   }) = _Linear;
 
   /// Creates a indeterminate circular [FProgress].
-  const factory FProgress.circularIcon({
-    IconThemeData? style,
-    Duration duration,
-    String? semanticsLabel,
-    Key? key,
-  }) = _Circular;
+  const factory FProgress.circularIcon({IconThemeData? style, Duration duration, String? semanticsLabel, Key? key}) =
+      _Circular;
 
   const FProgress._({this.semanticsLabel, this.value, super.key})
     : assert(value == null || value >= 0.0, 'The value must be greater than or equal to 0.0'),
@@ -210,13 +206,7 @@ class _CircularState extends State<_Circular> with SingleTickerProviderStateMixi
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
-      child: IconTheme(
-        data: style,
-        child: Icon(
-          FIcons.loaderCircle,
-          semanticLabel: widget.semanticsLabel,
-        ),
-      ),
+      child: IconTheme(data: style, child: Icon(FIcons.loaderCircle, semanticLabel: widget.semanticsLabel)),
     );
   }
 

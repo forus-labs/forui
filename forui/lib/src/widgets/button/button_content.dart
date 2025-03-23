@@ -51,7 +51,7 @@ class IconContent extends StatelessWidget {
     return Padding(
       padding: style.iconContentStyle.padding,
       child: IconTheme(
-        data:  enabled ? style.iconContentStyle.enabledStyle : style.iconContentStyle.disabledStyle,
+        data: enabled ? style.iconContentStyle.enabledStyle : style.iconContentStyle.disabledStyle,
         child: child,
       ),
     );
