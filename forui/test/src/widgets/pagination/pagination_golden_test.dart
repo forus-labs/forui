@@ -1,6 +1,3 @@
-@Tags(['golden'])
-library;
-
 import 'package:flutter/widgets.dart' hide Action;
 
 import 'package:flutter_test/flutter_test.dart';

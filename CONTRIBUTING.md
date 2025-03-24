@@ -220,8 +220,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 ```
 
 Golden tests should follow these guidelines:
-* Golden test files should be suffixed with `golden_test`, i.e. `button_golden_test.dart`. 
-* Golden tests should be annotated with `@Tags(['golden'])`.
+* Golden test files should be suffixed with `golden_test`, i.e. `button_golden_test.dart`.
 * Widgets under test should be tested against all themes specified in `TestScaffold.themes`.
 * Widgets under test should be wrapped in a `TestScaffold`.
 
