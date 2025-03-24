@@ -1,6 +1,3 @@
-@Tags(['golden'])
-library;
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -10,6 +7,103 @@ import '../../test_scaffold.dart';
 
 void main() {
   const key = ValueKey('select');
+
+  group('blue screen', () {
+    testWidgets('basic', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<String>(
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            children: [
+              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
+              for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('basic', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<String>(key: key, style: TestScaffold.blueScreen.selectStyle, children: const []),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('handles', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<String>(
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            contentScrollHandles: true,
+            children: [
+              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
+              for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('search', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<String>.search(
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            contentScrollHandles: true,
+            filter: (_) => [],
+            builder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('search - waiting', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<String>.search(
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            contentScrollHandles: true,
+            filter: (_) async {
+              await Future.delayed(const Duration(seconds: 1));
+              return [];
+            },
+            builder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+  });
 
   for (final theme in TestScaffold.themes) {
     group('FSelect', () {

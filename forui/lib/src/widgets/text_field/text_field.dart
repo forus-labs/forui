@@ -11,9 +11,9 @@ import 'package:forui/src/widgets/text_field/field.dart';
 
 /// The [FTextField.counterBuilder] callback.
 ///
-/// [currentLength] represents the length of the textfield's input.
-/// [maxLength] represents the maximum length of the textfield's input.
-/// [focused] represents whether the textfield is currently focused.
+/// [currentLength] represents the length of the text field's input.
+/// [maxLength] represents the maximum length of the text field's input.
+/// [focused] represents whether the text field is currently focused.
 typedef FTextFieldCounterBuilder =
     Widget? Function(
       BuildContext context,
@@ -219,20 +219,6 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// When [maxLines] is set as well, the height will grow between the indicated range of lines. When [maxLines] is null,
   /// it will grow as high as needed, starting from [minLines].
   ///
-  /// A few examples of behaviors possible with [minLines] and [maxLines] are as follows. These apply equally to
-  /// [TextField], [TextFormField], [CupertinoTextField], and [EditableText].
-  ///
-  /// Input that always occupies at least 2 lines and has an infinite max. Expands vertically as needed.
-  /// ```dart
-  /// TextField(minLines: 2)
-  /// ```
-  ///
-  /// Input whose height starts from 2 lines and grows up to 4 lines at which point the height limit is reached.
-  /// If additional lines are entered it will scroll vertically.
-  /// ```dart
-  /// const TextField(minLines:2, maxLines: 4)
-  /// ```
-  ///
   /// Defaults to null.
   ///
   /// See also:
@@ -257,31 +243,6 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// If this is not null, the value must be greater than zero, and it will lock the input to the given number of lines
   /// and take up enough horizontal space to accommodate that number of lines. Setting [minLines] as well allows the
   /// input to grow and shrink between the indicated range.
-  ///
-  /// The full set of behaviors possible with [minLines] and [maxLines] are as follows. These examples apply equally to
-  /// [TextField], [TextFormField], [CupertinoTextField], and [EditableText].
-  ///
-  /// Input that occupies a single line and scrolls horizontally as needed.
-  /// ```dart
-  /// const TextField()
-  /// ```
-  ///
-  /// Input whose height grows from one line up to as many lines as needed for the text that was entered. If a height
-  /// limit is imposed by its parent, it will scroll vertically when its height reaches that limit.
-  /// ```dart
-  /// const TextField(maxLines: null)
-  /// ```
-  ///
-  /// The input's height is large enough for the given number of lines. If additional lines are entered the input scrolls
-  /// vertically.
-  /// ```dart
-  /// const TextField(maxLines: 2)
-  /// ```
-  ///
-  /// Input whose height grows with content between a min and max. An infinite max is possible with `maxLines: null`.
-  /// ```dart
-  /// const TextField(minLines: 2, maxLines: 4)
-  /// ```
   ///
   /// See also:
   ///  * [minLines], which sets the minimum number of lines visible.
@@ -395,8 +356,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// {@template forui.text_field.onTapAlwaysCalled}
   /// Whether [onTap] should be called for every tap.
   ///
-  /// Defaults to false, so [onTap] is only called for each distinct tap. When
-  /// enabled, [onTap] is called for every tap including consecutive taps.
+  /// Defaults to false, so [onTap] is only called for each distinct tap. When enabled, [onTap] is called for every tap
+  /// including consecutive taps.
   /// {@endtemplate}
   final bool onTapAlwaysCalled;
 

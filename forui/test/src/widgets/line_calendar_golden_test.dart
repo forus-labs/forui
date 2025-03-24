@@ -1,6 +1,3 @@
-@Tags(['golden'])
-library;
-
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';

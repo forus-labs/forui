@@ -168,17 +168,9 @@ class _ContentState<T> extends State<Content<T>> {
               child: content,
             ),
           ),
-          if (_up)
-            ScrollHandle.up(
-              controller: _controller,
-              style: FSelectScrollHandleStyle.inherit(colorScheme: context.theme.colorScheme),
-            ),
+          if (_up) ScrollHandle.up(controller: _controller, style: widget.style.scrollHandleStyle),
 
-          if (_down)
-            ScrollHandle.down(
-              controller: _controller,
-              style: FSelectScrollHandleStyle.inherit(colorScheme: context.theme.colorScheme),
-            ),
+          if (_down) ScrollHandle.down(controller: _controller, style: widget.style.scrollHandleStyle),
         ],
       );
     }
