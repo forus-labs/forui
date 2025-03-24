@@ -13,11 +13,9 @@ part 'alert.style.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/alert for working examples.
-/// * [FAlertStyle] for customizing an alert's appearance.
+/// * [FBaseAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
-  /// The icon. Defaults to `FAssets.icons.circleAlert`.
-  ///
-  /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  /// The icon, wrapped in [IconThemeData]. Defaults to `FIcons.circleAlert`.
   final Widget icon;
 
   /// The title.
@@ -28,8 +26,8 @@ class FAlert extends StatelessWidget {
 
   /// The style. Defaults to [FAlertStyle.primary].
   ///
-  /// Although typically one of the pre-defined styles in [FAlertStyle], it can also be a [FAlertCustomStyle].
-  final FAlertStyle style;
+  /// Although typically one of the pre-defined styles in [FBaseAlertStyle], it can also be a [FAlertStyle].
+  final FBaseAlertStyle style;
 
   /// Creates a [FAlert] with a tile, subtitle, and icon.
   ///
@@ -40,13 +38,18 @@ class FAlert extends StatelessWidget {
   /// |          [subtitle]       |
   /// |---------------------------|
   /// ```
-  FAlert({required this.title, Widget? icon, this.subtitle, this.style = FAlertStyle.primary, super.key})
-    : icon = icon ?? FIcon(FAssets.icons.circleAlert);
+  const FAlert({
+    required this.title,
+    this.icon = const Icon(FIcons.circleAlert),
+    this.subtitle,
+    this.style = FAlertStyle.primary,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final style = switch (this.style) {
-      final FAlertCustomStyle style => style,
+      final FAlertStyle style => style,
       Variant.primary => context.theme.alertStyles.primary,
       Variant.destructive => context.theme.alertStyles.destructive,
     };
@@ -60,7 +63,7 @@ class FAlert extends StatelessWidget {
           children: [
             Row(
               children: [
-                FIconStyleData(style: FIconStyle(color: style.iconColor, size: style.iconSize), child: icon),
+                IconTheme(data: style.iconStyle, child: icon),
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
@@ -72,7 +75,7 @@ class FAlert extends StatelessWidget {
             if (subtitle case final subtitle?)
               Row(
                 children: [
-                  SizedBox(width: style.iconSize),
+                  SizedBox(width: style.iconStyle.size),
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
@@ -94,15 +97,15 @@ class FAlert extends StatelessWidget {
   }
 }
 
-/// [FAlertCustomStyle]'s style.
+/// [FAlertStyle]'s style.
 final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   /// The primary alert style.
   @override
-  final FAlertCustomStyle primary;
+  final FAlertStyle primary;
 
   /// The destructive alert style.
   @override
-  final FAlertCustomStyle destructive;
+  final FAlertStyle destructive;
 
   /// Creates a [FAlertStyles].
   const FAlertStyles({required this.primary, required this.destructive});
@@ -110,8 +113,8 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   /// Creates a [FAlertStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
   FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
     : this(
-        primary: FAlertCustomStyle(
-          iconColor: colorScheme.foreground,
+        primary: FAlertStyle(
+          iconStyle: IconThemeData(color: colorScheme.foreground, size: 20),
           titleTextStyle: typography.base.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.foreground,
@@ -124,8 +127,8 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
             color: colorScheme.background,
           ),
         ),
-        destructive: FAlertCustomStyle(
-          iconColor: colorScheme.destructive,
+        destructive: FAlertStyle(
+          iconStyle: IconThemeData(color: colorScheme.destructive, size: 20),
           titleTextStyle: typography.base.copyWith(
             fontWeight: FontWeight.w500,
             color: colorScheme.destructive,
@@ -143,25 +146,26 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
 
 /// A [FAlert]'s style.
 ///
-/// A style can be either one of the pre-defined styles in [FAlertStyle] or a [FAlertCustomStyle]. The pre-defined
-/// styles are a convenient shorthand for the various [FAlertCustomStyle]s in the current context's [FAlertStyles].
-sealed class FAlertStyle {
+/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonStyle] itself.
+sealed class FBaseAlertStyle {}
+
+@internal
+enum Variant implements FBaseAlertStyle { primary, destructive }
+
+/// A custom [FAlert] style.
+///
+/// The pre-defined styles are a convenient shorthand for the various [FAlertStyle]s in the current context.
+final class FAlertStyle extends FBaseAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
   /// The alert's primary style.
   ///
   /// Shorthand for the current context's [FAlertStyle.primary] style.
-  static const FAlertStyle primary = Variant.primary;
+  static const FBaseAlertStyle primary = Variant.primary;
 
   /// The alert's destructive style.
   ///
   /// Shorthand for the current context's [FAlertStyle.destructive] style.
-  static const FAlertStyle destructive = Variant.destructive;
-}
+  static const FBaseAlertStyle destructive = Variant.destructive;
 
-@internal
-enum Variant implements FAlertStyle { primary, destructive }
-
-/// A custom [FAlert] style.
-final class FAlertCustomStyle extends FAlertStyle with Diagnosticable, _$FAlertCustomStyleFunctions {
   /// The decoration.
   @override
   final BoxDecoration decoration;
@@ -170,18 +174,9 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable, _$FAlertC
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The icon's color.
-  ///
-  /// Defaults to 20.
+  /// The icon's style.
   @override
-  final Color iconColor;
-
-  /// The icon's size. Defaults to 20.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if `iconSize` is not positive.
-  @override
-  final double iconSize;
+  final IconThemeData iconStyle;
 
   /// The title's [TextStyle].
   @override
@@ -191,13 +186,12 @@ final class FAlertCustomStyle extends FAlertStyle with Diagnosticable, _$FAlertC
   @override
   final TextStyle subtitleTextStyle;
 
-  /// Creates a [FAlertCustomStyle].
-  FAlertCustomStyle({
+  /// Creates a [FAlertStyle].
+  FAlertStyle({
     required this.decoration,
-    required this.iconColor,
+    required this.iconStyle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
     this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 12),
-    this.iconSize = 20,
-  }) : assert(0 < iconSize, 'iconSize is $iconSize, but it should be positive.');
+  });
 }

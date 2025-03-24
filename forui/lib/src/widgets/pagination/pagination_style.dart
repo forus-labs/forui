@@ -19,7 +19,7 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
 
   /// The icon style.
   @override
-  final FIconStyle iconStyle;
+  final IconThemeData iconStyle;
 
   /// The padding around each item. Defaults to EdgeInsets.symmetric(horizontal: 2)`.
   @override
@@ -66,7 +66,7 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
           textStyle: typography.sm.copyWith(color: colorScheme.primary),
         ),
 
-        iconStyle: FIconStyle(color: colorScheme.primary, size: 18),
+        iconStyle: IconThemeData(color: colorScheme.primary, size: 18),
         actionTappableStyle: style.tappableStyle,
         pageTappableStyle: style.tappableStyle,
       );

@@ -88,7 +88,7 @@ void main() {
                   child: FButton.icon(
                     style: FButtonStyle.ghost,
                     onPress: controller.next,
-                    child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.bird)),
+                    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.bird)),
                   ),
                 ),
               ),
@@ -99,7 +99,7 @@ void main() {
                   child: FButton.icon(
                     style: FButtonStyle.ghost,
                     onPress: controller.previous,
-                    child: FIconStyleData(style: style.iconStyle, child: FIcon(FAssets.icons.anchor)),
+                    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.anchor)),
                   ),
                 ),
               ),

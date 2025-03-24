@@ -106,14 +106,7 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 
   /// The icon's color.
   @override
-  final Color iconColor;
-
-  /// The icon's size. Defaults to 20.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [iconSize] is not positive.
-  @override
-  final double iconSize;
+  final IconThemeData iconStyle;
 
   /// The focused outline style.
   @override
@@ -135,23 +128,21 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   FAccordionStyle({
     required this.titleTextStyle,
     required this.childTextStyle,
-    required this.iconColor,
+    required this.iconStyle,
     required this.focusedOutlineStyle,
     required this.dividerStyle,
     required this.tappableStyle,
     this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
     this.childPadding = const EdgeInsets.only(bottom: 15),
-    this.iconSize = 20,
     this.animationDuration = const Duration(milliseconds: 200),
-  }) : assert(0 < iconSize, 'iconSize should be positive.');
+  });
 
   /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
   FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
     : this(
         titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
         childTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
-        iconColor: colorScheme.primary,
-        iconSize: 20,
+        iconStyle: IconThemeData(color: colorScheme.primary, size: 20),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),

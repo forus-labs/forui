@@ -21,7 +21,7 @@ void main() {
             child: FSelectMenuTile(
               selectController: controller,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
-              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              prefixIcon: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Bluetooth'),
@@ -42,7 +42,7 @@ void main() {
               selectController: controller,
               enabled: false,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
-              prefixIcon: FIcon(FAssets.icons.bluetooth),
+              prefixIcon: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Bluetooth'),
@@ -64,7 +64,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               selectController: controller,
-              prefixIcon: FIcon(FAssets.icons.calendar),
+              prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -90,7 +90,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               selectController: controller,
-              prefixIcon: FIcon(FAssets.icons.calendar),
+              prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -148,7 +148,7 @@ void main() {
             child: FSelectMenuTile(
               selectController: controller,
               enabled: false,
-              prefixIcon: FIcon(FAssets.icons.calendar),
+              prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -171,7 +171,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               selectController: controller,
-              prefixIcon: FIcon(FAssets.icons.calendar),
+              prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               forceErrorText: 'This should appear',

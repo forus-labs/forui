@@ -20,8 +20,8 @@ void main() {
               autofocus: true,
               label: const Text('Button'),
               style: TestScaffold.blueScreen.buttonStyles.primary,
-              prefix: FIcon(FAssets.icons.circlePlay),
-              suffix: FIcon(FAssets.icons.circleStop),
+              prefix: const Icon(FIcons.circlePlay),
+              suffix: const Icon(FIcons.circleStop),
               onPress: () {},
             ),
           ),
@@ -35,7 +35,7 @@ void main() {
           TestScaffold.blue(
             child: FButton.icon(
               style: TestScaffold.blueScreen.buttonStyles.primary,
-              child: FIcon(FAssets.icons.circleStop),
+              child: const Icon(FIcons.circleStop),
               onPress: () {},
             ),
           ),
@@ -54,8 +54,8 @@ void main() {
               child: FButton(
                 label: const Text('Button'),
                 style: variant,
-                prefix: FIcon(FAssets.icons.circlePlay),
-                suffix: FIcon(FAssets.icons.circleStop),
+                prefix: const Icon(FIcons.circlePlay),
+                suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
               ),
             ),
@@ -74,8 +74,8 @@ void main() {
               child: FButton(
                 label: const Text('Button'),
                 style: variant,
-                prefix: FIcon(FAssets.icons.circlePlay),
-                suffix: FIcon(FAssets.icons.circleStop),
+                prefix: const Icon(FIcons.circlePlay),
+                suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
               ),
             ),
@@ -102,8 +102,8 @@ void main() {
               child: FButton(
                 label: const Text('Button'),
                 style: variant,
-                prefix: FIcon(FAssets.icons.circlePlay),
-                suffix: FIcon(FAssets.icons.circleStop),
+                prefix: const Icon(FIcons.circlePlay),
+                suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
               ),
             ),
@@ -131,8 +131,8 @@ void main() {
                 autofocus: true,
                 label: const Text('Button'),
                 style: variant,
-                prefix: FIcon(FAssets.icons.circlePlay),
-                suffix: FIcon(FAssets.icons.circleStop),
+                prefix: const Icon(FIcons.circlePlay),
+                suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
               ),
             ),
@@ -148,8 +148,8 @@ void main() {
               child: FButton(
                 label: const Text('Button'),
                 style: variant,
-                prefix: FIcon(FAssets.icons.circlePlay),
-                suffix: FIcon(FAssets.icons.circleStop),
+                prefix: const Icon(FIcons.circlePlay),
+                suffix: const Icon(FIcons.circleStop),
                 onPress: null,
               ),
             ),
@@ -231,7 +231,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FButton.icon(onPress: () {}, style: variant, child: FIcon(FAssets.icons.chevronRight)),
+              child: FButton.icon(onPress: () {}, style: variant, child: const Icon(FIcons.chevronRight)),
             ),
           );
 
@@ -245,13 +245,51 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FButton.icon(onPress: null, style: variant, child: FIcon(FAssets.icons.chevronRight)),
+              child: FButton.icon(onPress: null, style: variant, child: const Icon(FIcons.chevronRight)),
             ),
           );
 
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('button/${theme.name}/$variant/icon-disabled.png'),
+          );
+        });
+
+        testWidgets('${theme.name} with enabled circular progress', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FButton(
+                prefix: const FProgress.circularIcon(),
+                label: const Text('Loading'),
+                onPress: () {},
+                style: variant,
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/${theme.name}/$variant/circular-progress-enabled-button.png'),
+          );
+        });
+
+        testWidgets('${theme.name} with disabled circular progress', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FButton(
+                prefix: const FProgress.circularIcon(),
+                label: const Text('Loading'),
+                onPress: null,
+                style: variant,
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/${theme.name}/$variant/circular-progress-disabled-button.png'),
           );
         });
       }

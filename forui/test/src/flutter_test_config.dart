@@ -17,17 +17,21 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 Future<void> configureGoldenTests(double threshold) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  final fontLoader = FontLoader('packages/forui/Inter');
-
-  final prefix =
+  final workingDirectory =
       Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
 
-  final directory = Directory('$prefix/assets/fonts/inter/');
+  final inter = FontLoader('packages/forui/Inter');
+  final directory = Directory('$workingDirectory/assets/fonts/inter/');
   for (final file in directory.listSync().whereType<File>().where((e) => e.path.endsWith('.ttf'))) {
-    fontLoader.addFont(rootBundle.load(file.path));
+    inter.addFont(rootBundle.load(file.path));
   }
 
-  await fontLoader.load();
+  await inter.load();
+
+  final lucide = FontLoader('packages/forui_assets/ForuiLucideIcons')
+    ..addFont(rootBundle.load('packages/forui_assets/assets/lucide.ttf'));
+
+  await lucide.load();
 
   if (goldenFileComparator case final LocalFileComparator _) {
     goldenFileComparator = ThresholdComparator(
@@ -37,7 +41,7 @@ Future<void> configureGoldenTests(double threshold) async {
       // As such, we use the default `testUrl`, which is only the `baseDir` and
       // append a generically named `test.dart` so that the `baseDir` is
       // properly extracted.
-      Uri.parse('$prefix/test/golden/test.dart'),
+      Uri.parse('$workingDirectory/test/golden/test.dart'),
       threshold,
     );
   }

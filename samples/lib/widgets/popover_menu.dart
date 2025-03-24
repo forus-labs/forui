@@ -27,19 +27,19 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
         menu: [
           FTileGroup(
             children: [
-              FTile(prefixIcon: FIcon(FAssets.icons.user), title: const Text('Personalization'), onPress: () {}),
-              FTile(prefixIcon: FIcon(FAssets.icons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-              FTile(prefixIcon: FIcon(FAssets.icons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              FTile(prefixIcon: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+              FTile(prefixIcon: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              FTile(prefixIcon: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
             ],
           ),
           FTileGroup(
             children: [
-              FTile(prefixIcon: FIcon(FAssets.icons.list), title: const Text('List View'), onPress: () {}),
-              FTile(prefixIcon: FIcon(FAssets.icons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              FTile(prefixIcon: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+              FTile(prefixIcon: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],
-        child: FHeaderAction(icon: FIcon(FAssets.icons.ellipsis), onPress: controller.toggle),
+        child: FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );

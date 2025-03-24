@@ -16,7 +16,7 @@ void main() {
         TestScaffold.app(
           child: FSelectMenuTile(
             selectController: controller,
-            prefixIcon: FIcon(FAssets.icons.calendar),
+            prefixIcon: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
             title: const Text('Repeat'),
@@ -45,7 +45,7 @@ void main() {
         TestScaffold.app(
           child: FSelectMenuTile(
             selectController: controller,
-            prefixIcon: FIcon(FAssets.icons.calendar),
+            prefixIcon: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
             title: const Text('Repeat'),
@@ -77,7 +77,7 @@ void main() {
           child: FSelectMenuTile(
             autoHide: true,
             selectController: controller,
-            prefixIcon: FIcon(FAssets.icons.calendar),
+            prefixIcon: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
             title: const Text('Repeat'),

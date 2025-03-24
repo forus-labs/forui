@@ -23,16 +23,16 @@ class TileGroupPage extends Sample {
     divider: divider,
     children: [
       FTile(
-        prefixIcon: FIcon(FAssets.icons.user),
+        prefixIcon: const Icon(FIcons.user),
         title: const Text('Personalization'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        suffixIcon: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
       FTile(
-        prefixIcon: FIcon(FAssets.icons.wifi),
+        prefixIcon: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Forus Labs (5G)'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        suffixIcon: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -50,34 +50,34 @@ class ScrollableTileGroupPage extends Sample {
     maxHeight: 200,
     children: [
       FTile(
-        prefixIcon: FIcon(FAssets.icons.user),
+        prefixIcon: const Icon(FIcons.user),
         title: const Text('Personalization'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        suffixIcon: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
       FTile(
-        prefixIcon: FIcon(FAssets.icons.mail),
+        prefixIcon: const Icon(FIcons.mail),
         title: const Text('Mail'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        suffixIcon: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
       FTile(
-        prefixIcon: FIcon(FAssets.icons.wifi),
+        prefixIcon: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Forus Labs (5G)'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        suffixIcon: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
       FTile(
-        prefixIcon: FIcon(FAssets.icons.alarmClock),
+        prefixIcon: const Icon(FIcons.alarmClock),
         title: const Text('Alarm Clock'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        suffixIcon: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
       FTile(
-        prefixIcon: FIcon(FAssets.icons.qrCode),
+        prefixIcon: const Icon(FIcons.qrCode),
         title: const Text('QR code'),
-        suffixIcon: FIcon(FAssets.icons.chevronRight),
+        suffixIcon: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -96,7 +96,7 @@ class LazyTileGroupPage extends Sample {
     count: 200,
     tileBuilder:
         (context, index) =>
-            FTile(title: Text('Tile $index'), suffixIcon: FIcon(FAssets.icons.chevronRight), onPress: () {}),
+            FTile(title: Text('Tile $index'), suffixIcon: const Icon(FIcons.chevronRight), onPress: () {}),
   );
 }
 
@@ -125,16 +125,16 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
       FTileGroup(
         children: [
           FTile(
-            prefixIcon: FIcon(FAssets.icons.user),
+            prefixIcon: const Icon(FIcons.user),
             title: const Text('Personalization'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            suffixIcon: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
           FTile(
-            prefixIcon: FIcon(FAssets.icons.wifi),
+            prefixIcon: const Icon(FIcons.wifi),
             title: const Text('WiFi'),
             details: const Text('Forus Labs (5G)'),
-            suffixIcon: FIcon(FAssets.icons.chevronRight),
+            suffixIcon: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ],

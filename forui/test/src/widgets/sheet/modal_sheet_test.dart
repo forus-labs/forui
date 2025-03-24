@@ -13,7 +13,7 @@ void main() {
           child: Builder(
             builder:
                 (context) => FButton.icon(
-                  child: FIcon(FAssets.icons.chevronRight),
+                  child: const Icon(FIcons.chevronRight),
                   onPress:
                       () => showFSheet(
                         context: context,
@@ -52,7 +52,7 @@ void main() {
             child: Builder(
               builder:
                   (context) => FButton.icon(
-                    child: FIcon(FAssets.icons.chevronRight),
+                    child: const Icon(FIcons.chevronRight),
                     onPress:
                         () => showFSheet(
                           context: context,
@@ -85,7 +85,7 @@ void main() {
             child: Builder(
               builder:
                   (context) => FButton.icon(
-                    child: FIcon(FAssets.icons.chevronRight),
+                    child: const Icon(FIcons.chevronRight),
                     onPress:
                         () => showFSheet(
                           context: context,

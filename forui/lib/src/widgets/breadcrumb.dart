@@ -31,7 +31,7 @@ final class FBreadcrumb extends StatelessWidget {
 
   /// The divider placed in between the children.
   ///
-  /// Defaults to an `FAssets.icons.chevronRight` icon.
+  /// Defaults to an `FIcons.chevronRight` icon.
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
@@ -40,10 +40,7 @@ final class FBreadcrumb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.breadcrumbStyle;
-    final divider =
-        this.divider != null
-            ? FIconStyleData(style: style.iconStyle, child: this.divider!)
-            : FIcon(FAssets.icons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size);
+    final divider = IconTheme(data: style.iconStyle, child: this.divider ?? const Icon(FIcons.chevronRight));
 
     return Row(
       children: [
@@ -286,7 +283,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         onPress: controller.toggle,
         child: Padding(
           padding: style.padding,
-          child: FIcon(FAssets.icons.ellipsis, size: style.iconStyle.size, color: style.iconStyle.color),
+          child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
         ),
       ),
     );
@@ -323,7 +320,7 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
 
   /// The divider icon style.
   @override
-  final FIconStyle iconStyle;
+  final IconThemeData iconStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
   @override
@@ -353,7 +350,7 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
           color: colorScheme.primary,
           decoration: TextDecoration.underline,
         ),
-        iconStyle: FIconStyle(color: colorScheme.mutedForeground, size: 16),
+        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 16),
         tappableStyle: style.tappableStyle,
       );
 }

@@ -1,6 +1,38 @@
 ## 0.11.0 (Next)
 We are experimenting with a new changelog format which groups changes by feature.
 
+### `FIcon`
+`FIcon` has been removed in favor of Flutter's `Icon` class. `FIcon` was designed with only monochrome icons in mind
+and is not able to support multicolored icons. This coincides with replacement of `FAssets` with `FIcons` and svg icons 
+with font icons. In addition, all `iconColor` and `iconSize` style properties have been replaced with `IconThemeData`.
+
+* **Breaking** Remove `FIcon` - use Flutter's `Icon`.
+* **Breaking** Remove `FIconStyle` - use Flutter's `IconThemeData` instead.
+* **Breaking** Replace `FAssets` with `FIcons`.
+* **Breaking** Replace `FAccordionStyle` `iconColor` and `iconSize` with `iconStyle`.
+* **Breaking** Replace `FBottomNavigationBarItemStyle ` `activeIconColor`, `inactiveIconColor` and `iconSize` with 
+  `selectedIconStyle` and `unselectedIconStyle`.
+* **Breaking** Replace `FBottomNavigationBarItemStyle` `activeTextStyle` and `inactiveTextStyle` with `selectedTextStyle` 
+  and `unselectedTextStyle`.
+* **Breaking** Replace `FButtonIconContentStyle` `enabledColor`, `disabledColor` and `iconSize` with `enabledStyle` and
+  `disabledStyle`.
+* **Breaking** Replace `FButtonContentStyle` `enabledIconColor`, `disabledIconColor` and `iconSize` with `enabledIconStyle` 
+  and `disabledIconStyle`.
+* **Breaking** Replace `FButtonIconContentStyle` `enabledColor`, `disabledColor` and `iconSize` with `enabledStyle` and
+  `disabledStyle`.
+* **Breaking** Remove `FCalendarHeaderStyle` `enabledIconColor` and `disabledIconColor` - configure 
+  `buttonStyle.iconContentStyle` instead.
+* **Breaking** Change `FDateFieldStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
+* **Breaking** Replace `FHeaderActionStyle` `enabledColor`, `disabledColor` and `size` with `enabledStyle` and 
+  `disabledStyle`.
+* **Breaking** Change `FPaginationStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
+* **Breaking** Change `FTileContentStateStyle.prefixIconStyle` from `FIconStyle` to `IconThemeData`.
+* **Breaking** Change `FTileContentStateStyle.suffixIconStyle` from `FIconStyle` to `IconThemeData`.
+* **Breaking** Change `FTimeFieldStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
+* **Breaking** Replace `FAlertCustomStyle` `iconColor` and `iconSize` with `iconStyle`.
+* **Breaking** Change `FBreadcrumbStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
+* **Breaking** Replace `FCheckboxStateStyle` `iconColor` with `iconStyle`.
+
 ### `FSelect`
 A select displays a list of options for the user to pick from. It is searchable and supports both async & sync loading
 of items.
@@ -27,7 +59,7 @@ The traversal edge behavior of `FPopover` and Forui widgets that depend on it ha
 
 * Add `FProgress.circularIcon`.
 * **Breaking** Change `FProgressStyle` to `FLinearProgressStyle`.
-* **Breaking** Remove `FButtonSpinner` - use `FProgress.circular(...)` instead.
+* **Breaking** Remove `FButtonSpinner` - use `FProgress.circularIcon(...)` instead.
 
 ### `FSelectGroupController` & controller callbacks
 `FSelectGroupController` has been replaced with `FMultiValueNotifier` to allow usage across other non-select group 
@@ -76,10 +108,11 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 ### Others
 * Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
 * Add `filled` and `fillColor` for `FTextField`. Thanks @MrHeer!
-
-### `FHeader`
+* Add `FCheckboxStateStyle.size`.
+* **Breaking** Rename `FAlertStyle` to `FBaseAlertStyle`.
+* **Breaking** Rename `FAlertCustomStyle` to `FAlertStyle`.
+* **Breaking** Move constants in `FBaseAlertStyle` to `FAlertStyle`.
 * Fixed an issue where header spacing is incorrectly ordered.
-
 
 ## 0.10.0+1
 

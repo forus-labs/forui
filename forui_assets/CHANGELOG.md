@@ -1,3 +1,10 @@
+## 0.11.0
+
+All svg icons have been replaced with font icons, improving performance.
+
+**Breaking** Replace `FAssets` with `FIcons`.
+
+
 ## 0.10.0
 
 Bumps minimum Flutter SDK version to 3.29.0.

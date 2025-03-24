@@ -19,9 +19,7 @@ class FAccordionItem extends StatefulWidget {
   /// The title.
   final Widget title;
 
-  /// The icon. Defaults to `FAssets.icons.chevronRight`.
-  ///
-  /// [icon] is wrapped in [FIconStyle], and therefore works with [FIcon]s.
+  /// The icon, wrapped in a [IconTheme]. Defaults to `Icon(FIcons.chevronRight)`.
   final Widget icon;
 
   /// True if the item is initially expanded.
@@ -40,16 +38,17 @@ class FAccordionItem extends StatefulWidget {
   final Widget child;
 
   /// Creates an [FAccordionItem].
-  FAccordionItem({
+  const FAccordionItem({
     required this.title,
     required this.child,
     this.style,
+    this.icon = const Icon(FIcons.chevronRight),
     this.initiallyExpanded = false,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     super.key,
-  }) : icon = FIcon(FAssets.icons.chevronRight);
+  });
 
   @override
   State<FAccordionItem> createState() => _FAccordionItemState();
@@ -131,10 +130,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                     ),
                 child: Transform.rotate(
                   angle: (_controller.value * angle + 90) * math.pi / 180.0,
-                  child: FIconStyleData(
-                    style: FIconStyle(color: style.iconColor, size: style.iconSize),
-                    child: widget.icon,
-                  ),
+                  child: IconTheme(data: style.iconStyle, child: widget.icon),
                 ),
               ),
               // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by

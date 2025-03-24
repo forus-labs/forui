@@ -28,11 +28,11 @@ class _State extends StatefulSampleState<ScaffoldPage> {
           footer: FBottomNavigationBar(
             index: index,
             onChange: (index) => setState(() => this.index = index),
-            children: [
-              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.house), label: const Text('Home')),
-              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.layoutGrid), label: const Text('Categories')),
-              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.search), label: const Text('Search')),
-              FBottomNavigationBarItem(icon: FIcon(FAssets.icons.settings), label: const Text('Settings')),
+            children: const [
+              FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
             ],
           ),
         ),
@@ -45,7 +45,7 @@ final headers = [
   const FHeader(title: Text('Home')),
   const FHeader(title: Text('Categories')),
   const FHeader(title: Text('Search')),
-  FHeader(title: const Text('Settings'), actions: [FHeaderAction(icon: FIcon(FAssets.icons.ellipsis), onPress: () {})]),
+  FHeader(title: const Text('Settings'), actions: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})]),
 ];
 
 final contents = [

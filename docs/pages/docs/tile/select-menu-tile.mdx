@@ -38,7 +38,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
         selectController: controller,
         autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: FIcon(FAssets.icons.bell),
+        prefixIcon: Icon(FIcons.bell),
         title: const Text('Notifications'),
         details: ListenableBuilder(
           listenable: controller,
@@ -89,11 +89,11 @@ FSelectMenuTile<Value>(
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),
-  prefixIcon: FIcon(FAssets.icons.bell),
+  prefixIcon: Icon(FIcons.bell),
   title: Text('Notifications'),
   subtitle: Text('subtitle'),
   details: Text('All'),
-  suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
+  suffixIcon: Icon(FIcons.chevronsUpDown),
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
   menu: [
@@ -125,11 +125,11 @@ FSelectMenuTile<Value>.builder(
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),
-  prefixIcon: FIcon(FAssets.icons.bell),
+  prefixIcon: Icon(FIcons.bell),
   title: Text('Notifications'),
   subtitle: Text('subtitle'),
   details: Text('All'),
-  suffixIcon: FIcon(FAssets.icons.chevronsUpDown),
+  suffixIcon: Icon(FIcons.chevronsUpDown),
   menuBuilder: (context, index) => index < 10 ? FSelectTile(
     label: Text('Tile $index'),
     value: Value.something,
@@ -167,7 +167,7 @@ FSelectMenuTile<Value>.builder(
         selectController: controller,
         autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: FIcon(FAssets.icons.bell),
+        prefixIcon: Icon(FIcons.bell),
         title: const Text('Notifications'),
         details: ListenableBuilder(
           listenable: controller,
@@ -223,7 +223,7 @@ FSelectMenuTile<Value>.builder(
         autoHide: true,
         maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: FIcon(FAssets.icons.bell),
+        prefixIcon: Icon(FIcons.bell),
         title: const Text('Notifications'),
         details: ListenableBuilder(
           listenable: controller,
@@ -283,7 +283,7 @@ FSelectMenuTile<Value>.builder(
         autoHide: true,
         maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: FIcon(FAssets.icons.variable),
+        prefixIcon: Icon(FIcons.variable),
         title: const Text('Applicable values'),
         menuBuilder: (context, index) => FSelectTile(
           title: Text('Tile $index'),
@@ -333,7 +333,7 @@ FSelectMenuTile<Value>.builder(
                   selectController: controller,
                   autoHide: true,
                   validator: (value) => value == null ? 'Select an item' : null,
-                  prefixIcon: FIcon(FAssets.icons.bell),
+                  prefixIcon: Icon(FIcons.bell),
                   title: const Text('Notifications'),
                   details: ListenableBuilder(
                     listenable: controller,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -127,7 +129,7 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
             child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
           ),
         if (widget.type == FResizableDivider.dividerWithThumb)
-          _Thumb(style: widget.style.thumbStyle, icon: FAssets.icons.gripVertical),
+          _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripVertical),
         SizedBox(
           height: widget.crossAxisExtent,
           width: widget.hitRegionExtent,
@@ -188,7 +190,7 @@ class _VerticalDividerState extends State<VerticalDivider> {
             child: SizedBox(height: widget.style.width, width: widget.crossAxisExtent),
           ),
         if (widget.type == FResizableDivider.dividerWithThumb)
-          _Thumb(style: widget.style.thumbStyle, icon: FAssets.icons.gripHorizontal),
+          _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripHorizontal),
         SizedBox(
           height: widget.hitRegionExtent,
           width: widget.crossAxisExtent,
@@ -211,7 +213,7 @@ class _VerticalDividerState extends State<VerticalDivider> {
 
 class _Thumb extends StatelessWidget {
   final FResizableDividerThumbStyle style;
-  final SvgAsset icon;
+  final IconData icon;
 
   const _Thumb({required this.style, required this.icon});
 
@@ -221,7 +223,7 @@ class _Thumb extends StatelessWidget {
     decoration: BoxDecoration(color: style.backgroundColor, borderRadius: BorderRadius.circular(4)),
     height: style.height,
     width: style.width,
-    child: icon(colorFilter: ColorFilter.mode(style.foregroundColor, BlendMode.srcIn)),
+    child: Icon(icon, color: style.foregroundColor, size: min(style.height, style.width)),
   );
 
   @override

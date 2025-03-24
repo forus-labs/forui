@@ -22,11 +22,8 @@ class Content extends StatelessWidget {
       padding: contentStyle.padding,
       child: DefaultTextStyle.merge(
         style: enabled ? contentStyle.enabledTextStyle : contentStyle.disabledTextStyle,
-        child: FIconStyleData(
-          style: FIconStyle(
-            color: enabled ? contentStyle.enabledIconColor : contentStyle.disabledIconColor,
-            size: contentStyle.iconSize,
-          ),
+        child: IconTheme(
+          data: enabled ? contentStyle.enabledIconStyle : contentStyle.disabledIconStyle,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
@@ -50,11 +47,8 @@ class IconContent extends StatelessWidget {
 
     return Padding(
       padding: style.iconContentStyle.padding,
-      child: FIconStyleData(
-        style: FIconStyle(
-          color: enabled ? style.iconContentStyle.enabledColor : style.iconContentStyle.disabledColor,
-          size: style.iconContentStyle.size,
-        ),
+      child: IconTheme(
+        data: enabled ? style.iconContentStyle.enabledStyle : style.iconContentStyle.disabledStyle,
         child: child,
       ),
     );
@@ -75,26 +69,21 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The icon's color when this button is enabled.
+  /// The icon's style when this button is enabled.
   @override
-  final Color enabledIconColor;
+  final IconThemeData enabledIconStyle;
 
-  /// The icon's color when this button is disabled.
+  /// The icon's style when this button is disabled.
   @override
-  final Color disabledIconColor;
-
-  /// The icon's size. Defaults to 20.
-  @override
-  final double iconSize;
+  final IconThemeData disabledIconStyle;
 
   /// Creates a [FButtonContentStyle].
   FButtonContentStyle({
     required this.enabledTextStyle,
     required this.disabledTextStyle,
-    required this.enabledIconColor,
-    required this.disabledIconColor,
+    required this.enabledIconStyle,
+    required this.disabledIconStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
-    this.iconSize = 20,
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled].
@@ -102,8 +91,8 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
     : this(
         enabledTextStyle: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
         disabledTextStyle: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
-        enabledIconColor: enabled,
-        disabledIconColor: disabled,
+        enabledIconStyle: IconThemeData(color: enabled, size: 20),
+        disabledIconStyle: IconThemeData(color: disabled, size: 20),
       );
 }
 
@@ -113,23 +102,18 @@ final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentSty
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The icon's color when this button is enabled.
+  /// The icon's style when this button is enabled.
   @override
-  final Color enabledColor;
+  final IconThemeData enabledStyle;
 
-  /// The icon's color when this button is disabled.
+  /// The icon's style when this button is disabled.
   @override
-  final Color disabledColor;
-
-  /// The icon's size. Defaults to 20.
-  @override
-  final double size;
+  final IconThemeData disabledStyle;
 
   /// Creates a [FButtonIconContentStyle].
   const FButtonIconContentStyle({
-    required this.enabledColor,
-    required this.disabledColor,
+    required this.enabledStyle,
+    required this.disabledStyle,
     this.padding = const EdgeInsets.all(7.5),
-    this.size = 20,
   });
 }

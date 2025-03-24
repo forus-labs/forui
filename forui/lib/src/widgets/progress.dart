@@ -14,7 +14,6 @@ part 'progress.style.dart';
 /// See:
 /// * https://forui.dev/docs/feedback/progress for working examples.
 /// * [FLinearProgressStyle] for customizing a linear progress indicator's appearance.
-/// * [FCircularIconProgressStyle] for customizing a circular progress indicator's appearance.
 abstract class FProgress extends StatefulWidget {
   /// The semantic label.
   final String? semanticsLabel;
@@ -42,12 +41,8 @@ abstract class FProgress extends StatefulWidget {
   }) = _Linear;
 
   /// Creates a indeterminate circular [FProgress].
-  const factory FProgress.circularIcon({
-    FCircularIconProgressStyle? style,
-    Duration duration,
-    String? semanticsLabel,
-    Key? key,
-  }) = _Circular;
+  const factory FProgress.circularIcon({IconThemeData? style, Duration duration, String? semanticsLabel, Key? key}) =
+      _Circular;
 
   const FProgress._({this.semanticsLabel, this.value, super.key})
     : assert(value == null || value >= 0.0, 'The value must be greater than or equal to 0.0'),
@@ -167,27 +162,8 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
   }
 }
 
-@internal
-class FCircularProgressData extends InheritedWidget {
-  static FCircularProgressData? maybeOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<FCircularProgressData>();
-
-  final FCircularIconProgressStyle style;
-
-  const FCircularProgressData({required this.style, required super.child, super.key});
-
-  @override
-  bool updateShouldNotify(FCircularProgressData old) => style != old.style;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
-  }
-}
-
 class _Circular extends FProgress {
-  final FCircularIconProgressStyle? style;
+  final IconThemeData? style;
   final Duration duration;
 
   const _Circular({this.style, this.duration = const Duration(seconds: 1), super.semanticsLabel, super.key})
@@ -226,17 +202,15 @@ class _CircularState extends State<_Circular> with SingleTickerProviderStateMixi
 
   @override
   Widget build(BuildContext context) {
-    final data = FCircularProgressData.maybeOf(context);
-    final style = widget.style ?? data?.style ?? context.theme.progressStyles.circularIconProgressStyle;
+    final style =
+        widget.style ??
+        context.dependOnInheritedWidgetOfExactType<IconTheme>()?.data ??
+        context.theme.progressStyles.circularIconProgressStyle;
+
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
-      child: FIcon(
-        FAssets.icons.loaderCircle,
-        color: style.color,
-        size: style.size,
-        semanticLabel: widget.semanticsLabel,
-      ),
+      child: IconTheme(data: style, child: Icon(FIcons.loaderCircle, semanticLabel: widget.semanticsLabel)),
     );
   }
 
@@ -255,7 +229,7 @@ class FProgressStyles with Diagnosticable, _$FProgressStylesFunctions {
 
   /// The circular progress's style.
   @override
-  final FCircularIconProgressStyle circularIconProgressStyle;
+  final IconThemeData circularIconProgressStyle;
 
   /// Creates a [FProgressStyles].
   const FProgressStyles({required this.linearProgressStyle, required this.circularIconProgressStyle});
@@ -263,7 +237,7 @@ class FProgressStyles with Diagnosticable, _$FProgressStylesFunctions {
   /// Creates a [FProgressStyles] that inherits its properties from [colorScheme] and [style].
   FProgressStyles.inherit({required FColorScheme colorScheme, required FStyle style})
     : linearProgressStyle = FLinearProgressStyle.inherit(colorScheme: colorScheme, style: style),
-      circularIconProgressStyle = FCircularIconProgressStyle.inherit(colorScheme: colorScheme);
+      circularIconProgressStyle = IconThemeData(color: colorScheme.mutedForeground, size: 20);
 }
 
 /// A linear [FProgress]'s style.
@@ -298,22 +272,4 @@ class FLinearProgressStyle with Diagnosticable, _$FLinearProgressStyleFunctions 
         backgroundDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.secondary),
         progressDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
       );
-}
-
-/// A circular [FProgress]'s style.
-class FCircularIconProgressStyle with Diagnosticable, _$FCircularIconProgressStyleFunctions {
-  /// The circular indicator's color.
-  @override
-  final Color color;
-
-  /// The circular indicator's size. Defaults to 20.
-  @override
-  final double size;
-
-  /// Creates a [FCircularIconProgressStyle].
-  FCircularIconProgressStyle({required this.color, this.size = 20});
-
-  /// Creates a [FCircularIconProgressStyle] that inherits its properties from [colorScheme].
-  FCircularIconProgressStyle.inherit({required FColorScheme colorScheme})
-    : this(color: colorScheme.mutedForeground, size: 20);
 }

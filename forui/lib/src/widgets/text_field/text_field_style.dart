@@ -97,7 +97,9 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
           style: style,
         ).ghost.transform(
           (ghost) => ghost.copyWith(
-            iconContentStyle: ghost.iconContentStyle.copyWith(enabledColor: colorScheme.mutedForeground, size: 17),
+            iconContentStyle: ghost.iconContentStyle.copyWith(
+              enabledStyle: IconThemeData(color: colorScheme.mutedForeground, size: 17),
+            ),
           ),
         ),
         enabledStyle: FTextFieldStateStyle.inherit(

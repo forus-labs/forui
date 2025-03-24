@@ -21,12 +21,12 @@ final class FPagination extends StatefulWidget {
 
   /// The previous button placed at the beginning of the pagination.
   ///
-  /// Defaults to an `FAssets.icons.chevronLeft` icon.
+  /// Defaults to an `FIcons.chevronLeft` icon.
   final Widget? previous;
 
   /// The next button placed at the end of the pagination.
   ///
-  /// Defaults to an `FAssets.icons.chevronRight` icon.
+  /// Defaults to an `FIcons.chevronRight` icon.
   final Widget? next;
 
   /// A callback triggered when the current page changes.
@@ -172,11 +172,11 @@ class Action extends StatelessWidget {
   });
 
   Action.previous({required this.style, required this.onPress, super.key})
-    : child = FIcon(FAssets.icons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size),
+    : child = Icon(FIcons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size),
       semanticLabel = 'Previous';
 
   Action.next({required this.onPress, required this.style, super.key})
-    : child = FIcon(FAssets.icons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size),
+    : child = Icon(FIcons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size),
       semanticLabel = 'Next';
 
   @override

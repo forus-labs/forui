@@ -41,16 +41,12 @@ void main() {
     testWidgets('old controller is not disposed', (tester) async {
       final first = FAccordionController();
       await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAccordion(items: [FAccordionItem(title: const Text('Title'), child: const Text('button'))]),
-        ),
+        TestScaffold.app(child: const FAccordion(items: [FAccordionItem(title: Text('Title'), child: Text('button'))])),
       );
 
       final second = FAccordionController();
       await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAccordion(items: [FAccordionItem(title: const Text('Title'), child: const Text('button'))]),
-        ),
+        TestScaffold.app(child: const FAccordion(items: [FAccordionItem(title: Text('Title'), child: Text('button'))])),
       );
 
       expect(first.disposed, false);
