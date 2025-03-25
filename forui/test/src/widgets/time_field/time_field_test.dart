@@ -1,19 +1,17 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/src/widgets/time_field/time_field.dart';
 
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:forui/src/widgets/time_field/time_field.dart';
 import '../../locale_scaffold.dart';
 import '../../test_scaffold.dart';
 
 void main() {
   for (final (name, field) in [
     ('input only', (controller, focus) => FTimeField(controller: controller, focusNode: focus)),
-    (
-    'picker only',
-        (controller, focus) => FTimeField.picker(controller: controller, focusNode: focus),
-    ),
+    ('picker only', (controller, focus) => FTimeField.picker(controller: controller, focusNode: focus)),
   ]) {
     group(name, () {
       testWidgets('update controller', (tester) async {

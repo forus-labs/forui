@@ -107,10 +107,7 @@ void main() {
               FTileGroup(children: [FTile(title: const Text('A')), FTile(title: const Text('B'))]),
               FSelectTileGroup(
                 selectController: controller,
-                children: const [
-                  FSelectTile(title: Text('1'), value: 1),
-                  FSelectTile(title: Text('2'), value: 2),
-                ],
+                children: const [FSelectTile(title: Text('1'), value: 1), FSelectTile(title: Text('2'), value: 2)],
               ),
             ],
           ),
