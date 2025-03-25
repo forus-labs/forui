@@ -17,5 +17,7 @@
   "selectSearchHint": "Cerca",
   "selectSearchNoResults": "No s'ha trobat cap coincidència.",
   "selectScrollUpSemanticsLabel": "Desplaça amunt",
-  "selectScrollDownSemanticsLabel": "Desplaça avall"
+  "selectScrollDownSemanticsLabel": "Desplaça avall",
+  "paginationPrevious": "Anterior",
+  "paginationNext": "Següent"
 }

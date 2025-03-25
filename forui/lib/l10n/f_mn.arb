@@ -17,5 +17,7 @@
   "selectSearchHint": "Хайх",
   "selectSearchNoResults": "Тохирох зүйл олдсонгүй.",
   "selectScrollUpSemanticsLabel": "Дээш гүйлгэх",
-  "selectScrollDownSemanticsLabel": "Доош гүйлгэх"
+  "selectScrollDownSemanticsLabel": "Доош гүйлгэх",
+  "paginationPrevious": "Өмнөх",
+  "paginationNext": "Дараах"
 }

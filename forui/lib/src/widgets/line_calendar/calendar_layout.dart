@@ -12,9 +12,11 @@ import 'package:forui/src/widgets/line_calendar/line_calendar_item.dart';
 @internal
 class CalendarLayout extends StatefulWidget {
   final FCalendarController<DateTime?> controller;
-  final FLineCalendarStyle? style;
+  final FLineCalendarStyle style;
   final AlignmentDirectional alignment;
   final double? cacheExtent;
+  final TextScaler scale;
+  final TextStyle textStyle;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
   final LocalDate start;
   final LocalDate? end;
@@ -27,6 +29,8 @@ class CalendarLayout extends StatefulWidget {
     required this.style,
     required this.alignment,
     required this.cacheExtent,
+    required this.scale,
+    required this.textStyle,
     required this.builder,
     required this.start,
     required this.end,
@@ -47,6 +51,8 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scaler', scale))
+      ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
@@ -57,48 +63,47 @@ class CalendarLayout extends StatefulWidget {
 }
 
 class _CalendarLayoutState extends State<CalendarLayout> {
-  late FLineCalendarStyle _style;
-  ScrollController? _controller;
-  double? _width;
+  late ScrollController _scrollController;
+  late double _width;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _style = widget.style ?? context.theme.lineCalendarStyle;
+  void initState() {
+    super.initState();
     _width = _estimateWidth();
 
-    final startOffset = ((widget.initial ?? widget.today).difference(widget.start).inDays) * _width!;
-    final offset = switch (widget.alignment.start) {
-      -1 => startOffset,
-      1 => startOffset - widget.constraints.maxWidth + _width!,
-      _ => startOffset - (widget.constraints.maxWidth - _width!) / 2,
-    };
+    final start = ((widget.initial ?? widget.today).difference(widget.start).inDays) * _width;
+    _scrollController = ScrollController(
+      initialScrollOffset: switch (widget.alignment.start) {
+        -1 => start,
+        1 => start - widget.constraints.maxWidth + _width,
+        _ => start - (widget.constraints.maxWidth - _width) / 2,
+      },
+    );
+  }
 
-    if (_controller != null) {
-      _controller!.dispose();
+  @override
+  void didUpdateWidget(covariant CalendarLayout old) {
+    super.didUpdateWidget(old);
+    if (widget.style != old.style || widget.scale != old.scale || widget.textStyle != old.textStyle) {
+      _width = _estimateWidth();
     }
-
-    _controller = ScrollController(initialScrollOffset: offset);
   }
 
   double _estimateWidth() {
-    final scale = MediaQuery.textScalerOf(context);
-    final textStyle = DefaultTextStyle.of(context).style;
-
     double height(FLineCalendarItemStyle style) {
-      final dateHeight = scale.scale(style.dateTextStyle.fontSize ?? textStyle.fontSize ?? 0);
-      final weekdayHeight = scale.scale(style.weekdayTextStyle.fontSize ?? textStyle.fontSize ?? 0);
-      final otherHeight = _style.itemContentSpacing + (_style.itemContentEdgeSpacing * 2);
+      final dateHeight = widget.scale.scale(style.dateTextStyle.fontSize ?? widget.textStyle.fontSize ?? 0);
+      final weekdayHeight = widget.scale.scale(style.weekdayTextStyle.fontSize ?? widget.textStyle.fontSize ?? 0);
+      final otherHeight = widget.style.itemContentSpacing + (widget.style.itemContentEdgeSpacing * 2);
 
       return dateHeight + weekdayHeight + otherHeight;
     }
 
     // We use the height to estimate the width.
     return [
-      height(_style.selectedItemStyle),
-      height(_style.selectedHoveredItemStyle),
-      height(_style.unselectedItemStyle),
-      height(_style.unselectedHoveredItemStyle),
+      height(widget.style.selectedItemStyle),
+      height(widget.style.selectedHoveredItemStyle),
+      height(widget.style.unselectedItemStyle),
+      height(widget.style.unselectedHoveredItemStyle),
     ].max!;
   }
 
@@ -108,47 +113,47 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     return SpeculativeLayout(
       children: [
         ItemContent(
-          style: _style,
-          itemStyle: _style.selectedItemStyle,
+          style: widget.style,
+          itemStyle: widget.style.selectedItemStyle,
           date: placeholder,
           hovered: false,
           focused: false,
         ),
         ItemContent(
-          style: _style,
-          itemStyle: _style.selectedItemStyle,
+          style: widget.style,
+          itemStyle: widget.style.selectedItemStyle,
           date: placeholder,
           hovered: true,
           focused: false,
         ),
         ItemContent(
-          style: _style,
-          itemStyle: _style.unselectedItemStyle,
+          style: widget.style,
+          itemStyle: widget.style.unselectedItemStyle,
           date: placeholder,
           hovered: false,
           focused: false,
         ),
         ItemContent(
-          style: _style,
-          itemStyle: _style.unselectedItemStyle,
+          style: widget.style,
+          itemStyle: widget.style.unselectedItemStyle,
           date: placeholder,
           hovered: true,
           focused: false,
         ),
         ListView.builder(
-          controller: _controller,
+          controller: _scrollController,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.zero,
           cacheExtent: widget.cacheExtent,
-          itemExtent: _width!,
+          itemExtent: _width,
           itemCount: widget.end == null ? null : widget.end!.difference(widget.start).inDays + 1,
           itemBuilder: (_, index) {
             final date = widget.start.plus(days: index);
             return Padding(
-              padding: _style.itemPadding,
+              padding: widget.style.itemPadding,
               child: Item(
-                style: _style,
                 controller: widget.controller,
+                style: widget.style,
                 date: date.toNative(),
                 today: widget.today == date,
                 builder: widget.builder,
@@ -158,6 +163,12 @@ class _CalendarLayoutState extends State<CalendarLayout> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
 

@@ -75,6 +75,12 @@ class FLocalizationsZu extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Sula';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Okwedlule';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Okulandelayo';
+
+  @override
   String get shortDateSeparator => '-';
 
   @override

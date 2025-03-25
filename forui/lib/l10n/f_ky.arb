@@ -17,5 +17,7 @@
   "selectSearchHint": "Издөө",
   "selectSearchNoResults": "Дал келгендер табылган жок.",
   "selectScrollUpSemanticsLabel": "Өйдө сыдыруу",
-  "selectScrollDownSemanticsLabel": "Ылдый сыдыруу"
+  "selectScrollDownSemanticsLabel": "Ылдый сыдыруу",
+  "paginationPrevious": "Мурунку",
+  "paginationNext": "Кийинки"
 }

@@ -78,19 +78,14 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
 
 class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   final TextEditingController _textController = TextEditingController();
+  late FocusNode _focus = widget.focusNode ?? FocusNode();
   DateFormat? _format;
-  late FocusNode _focus;
 
   @override
   void initState() {
     super.initState();
     _controller._picker.addListener(_updateTextController);
-    _focus = widget.focusNode ?? FocusNode();
-    _controller.popover.addListener(() {
-      if (!_controller.popover.shown) {
-        _focus.unfocus();
-      }
-    });
+    _controller.popover.addListener(_updateFocus);
   }
 
   @override
@@ -110,13 +105,17 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     }
 
     if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        _controller._picker.removeListener(_updateTextController);
+        _controller.popover.removeListener(_updateFocus);
+      }
+
+      _controller = widget.controller ?? FTimeFieldController(vsync: this);
       _controller._picker.addListener(_updateTextController);
+      _controller.popover.addListener(_updateFocus);
       _updateTextController();
-      _controller.popover.addListener(() {
-        if (!_controller.popover.shown) {
-          _focus.unfocus();
-        }
-      });
     }
   }
 
@@ -134,6 +133,12 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     if (_controller._picker.value case final value) {
       final time = value.withDate(DateTime(1970));
       _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
+    }
+  }
+
+  void _updateFocus() {
+    if (!_controller.popover.shown) {
+      _focus.unfocus();
     }
   }
 
@@ -191,6 +196,13 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
 
   @override
   void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller._picker.removeListener(_updateTextController);
+      _controller.popover.removeListener(_updateFocus);
+    }
+
     if (widget.focusNode == null) {
       _focus.dispose();
     }

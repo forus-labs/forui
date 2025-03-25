@@ -17,5 +17,7 @@
   "selectSearchHint": "Търсене",
   "selectSearchNoResults": "Не са намерени съвпадения.",
   "selectScrollUpSemanticsLabel": "Превъртане нагоре",
-  "selectScrollDownSemanticsLabel": "Превъртане надолу"
+  "selectScrollDownSemanticsLabel": "Превъртане надолу",
+  "paginationPrevious": "Предишен",
+  "paginationNext": "Напред"
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -205,6 +207,61 @@ void main() {
 
     expect(first.disposed, false);
     expect(second.disposed, false);
+  });
+
+  group('state', () {
+    testWidgets('update controller', (tester) async {
+      final first = FPopoverController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPopover(
+            controller: first,
+            popoverBuilder: (context, value, child) => const SizedBox(),
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      expect(first.hasListeners, false);
+      expect(first.disposed, false);
+
+      final second = FPopoverController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPopover(
+            controller: second,
+            popoverBuilder: (context, value, child) => const SizedBox(),
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      expect(first.hasListeners, false);
+      expect(first.disposed, false);
+      expect(second.hasListeners, false);
+      expect(second.disposed, false);
+    });
+
+    testWidgets('dispose controller', (tester) async {
+      final controller = FPopoverController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPopover(
+            controller: controller,
+            popoverBuilder: (context, value, child) => const SizedBox(),
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      expect(controller.hasListeners, false);
+      expect(controller.disposed, false);
+
+      await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+      expect(controller.hasListeners, false);
+      expect(controller.disposed, false);
+    });
   });
 
   tearDown(() => controller.dispose());

@@ -720,6 +720,8 @@ final class FThemeData with Diagnosticable, FTransformable {
         color: dividerStyles.horizontalStyle.color,
         thickness: dividerStyles.horizontalStyle.width,
       ),
+
+      iconTheme: IconThemeData(color: colorScheme.primary, size: 20),
     );
   }
 

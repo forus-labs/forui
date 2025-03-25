@@ -92,19 +92,14 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
 
 class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   final TextEditingController _textController = TextEditingController();
+  late FocusNode _focus = widget.focusNode ?? FocusNode();
   DateFormat? _format;
-  late FocusNode _focus;
 
   @override
   void initState() {
     super.initState();
     _controller._calendar.addListener(_updateTextController);
-    _focus = widget.focusNode ?? FocusNode();
-    _controller.calendar.addListener(() {
-      if (!_controller.calendar.shown) {
-        _focus.unfocus();
-      }
-    });
+    _controller.calendar.addListener(_updateFocus);
   }
 
   @override
@@ -119,13 +114,17 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     }
 
     if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        _controller._calendar.removeListener(_updateTextController);
+        _controller.calendar.removeListener(_updateFocus);
+      }
+
+      _controller = widget.controller ?? FDateFieldController(vsync: this);
       _controller._calendar.addListener(_updateTextController);
+      _controller.calendar.addListener(_updateFocus);
       _updateTextController();
-      _controller.calendar.addListener(() {
-        if (!_controller.calendar.shown) {
-          _focus.unfocus();
-        }
-      });
     }
   }
 
@@ -141,6 +140,12 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       _textController.text = widget.format?.format(value) ?? _format?.format(value) ?? '';
     } else {
       _textController.text = '';
+    }
+  }
+
+  void _updateFocus() {
+    if (!_controller.calendar.shown) {
+      _focus.unfocus();
     }
   }
 
@@ -194,6 +199,13 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   @override
   void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller._calendar.removeListener(_updateTextController);
+      _controller.calendar.removeListener(_updateFocus);
+    }
+
     if (widget.focusNode == null) {
       _focus.dispose();
     }

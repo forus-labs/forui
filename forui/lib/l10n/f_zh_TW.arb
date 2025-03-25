@@ -18,5 +18,7 @@
   "selectNoResults": "沒有匹配結果。",
   "selectSearchNoResults": "未找到匹配項。",
   "selectScrollUpSemanticsLabel": "向上捲動",
-  "selectScrollDownSemanticsLabel": "向下捲動"
+  "selectScrollDownSemanticsLabel": "向下捲動",
+  "paginationPreviousSemanticsLabel": "上一個",
+  "paginationNextSemanticsLabel": "下一個"
 }

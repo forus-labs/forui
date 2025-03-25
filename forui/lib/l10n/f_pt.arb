@@ -17,5 +17,7 @@
   "selectSearchHint": "Pesquisar",
   "selectSearchNoResults": "Nenhuma correspondência encontrada.",
   "selectScrollUpSemanticsLabel": "Rolar para cima",
-  "selectScrollDownSemanticsLabel": "Rolar para baixo"
+  "selectScrollDownSemanticsLabel": "Rolar para baixo",
+  "paginationPrevious": "Anterior",
+  "paginationNext": "Próximo"
 }

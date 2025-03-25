@@ -18,5 +18,7 @@
   "selectNoResults": "Dim canlyniadau cyfatebol.",
   "selectSearchNoResults": "Ni chanfuwyd unrhyw gyfatebiaeth.",
   "selectScrollUpSemanticsLabel": "Sgrolio i fyny",
-  "selectScrollDownSemanticsLabel": "Sgrolio i lawr"
+  "selectScrollDownSemanticsLabel": "Sgrolio i lawr",
+  "paginationPreviousSemanticsLabel": "Blaenorol",
+  "paginationNextSemanticsLabel": "Nesaf"
 }

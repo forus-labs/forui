@@ -18,5 +18,7 @@
   "selectNoResults": "没有匹配结果。",
   "selectSearchNoResults": "未找到匹配项。",
   "selectScrollUpSemanticsLabel": "向上滚动",
-  "selectScrollDownSemanticsLabel": "向下滚动"
+  "selectScrollDownSemanticsLabel": "向下滚动",
+  "paginationPreviousSemanticsLabel": "上一个",
+  "paginationNextSemanticsLabel": "下一个"
 }

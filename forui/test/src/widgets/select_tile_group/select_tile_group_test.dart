@@ -14,7 +14,7 @@ void main() {
         TestScaffold(
           child: FSelectTileGroup(
             selectController: controller,
-            children: [FSelectTile(title: const Text('1'), value: 1), FSelectTile(title: const Text('2'), value: 2)],
+            children: const [FSelectTile(title: Text('1'), value: 1), FSelectTile(title: Text('2'), value: 2)],
           ),
         ),
       );
@@ -33,9 +33,9 @@ void main() {
         TestScaffold(
           child: FSelectTileGroup(
             selectController: controller,
-            children: [
-              FSelectTile.suffix(title: const Text('1'), value: 1),
-              FSelectTile.suffix(title: const Text('2'), value: 2),
+            children: const [
+              FSelectTile.suffix(title: Text('1'), value: 1),
+              FSelectTile.suffix(title: Text('2'), value: 2),
             ],
           ),
         ),
@@ -55,9 +55,9 @@ void main() {
         TestScaffold(
           child: FSelectTileGroup(
             selectController: controller,
-            children: [
-              FSelectTile.suffix(title: const Text('1'), value: 1),
-              FSelectTile.suffix(title: const Text('2'), value: 2),
+            children: const [
+              FSelectTile.suffix(title: Text('1'), value: 1),
+              FSelectTile.suffix(title: Text('2'), value: 2),
             ],
           ),
         ),
@@ -79,9 +79,9 @@ void main() {
             selectController: controller,
             autovalidateMode: AutovalidateMode.always,
             validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
-            children: [
-              FSelectTile.suffix(title: const Text('1'), value: 1),
-              FSelectTile.suffix(title: const Text('2'), value: 2),
+            children: const [
+              FSelectTile.suffix(title: Text('1'), value: 1),
+              FSelectTile.suffix(title: Text('2'), value: 2),
             ],
           ),
         ),
@@ -107,10 +107,7 @@ void main() {
               FTileGroup(children: [FTile(title: const Text('A')), FTile(title: const Text('B'))]),
               FSelectTileGroup(
                 selectController: controller,
-                children: [
-                  FSelectTile(title: const Text('1'), value: 1),
-                  FSelectTile(title: const Text('2'), value: 2),
-                ],
+                children: const [FSelectTile(title: Text('1'), value: 1), FSelectTile(title: Text('2'), value: 2)],
               ),
             ],
           ),
@@ -139,7 +136,7 @@ void main() {
             selections++;
             selection = value;
           },
-          children: [FSelectTile(title: const Text('1'), value: 1)],
+          children: const [FSelectTile(title: Text('1'), value: 1)],
         ),
       ),
     );
@@ -152,7 +149,7 @@ void main() {
     expect(selection, (1, true));
   });
 
-  testWidgets('update widget', (tester) async {
+  testWidgets('update callbacks', (tester) async {
     final controller = FMultiValueNotifier<int>();
 
     var firstChanges = 0;
@@ -168,7 +165,7 @@ void main() {
             firstSelections++;
             firstSelection = value;
           },
-          children: [FSelectTile(title: const Text('1'), value: 1)],
+          children: const [FSelectTile(title: Text('1'), value: 1)],
         ),
       ),
     );
@@ -193,7 +190,7 @@ void main() {
             secondSelections++;
             secondSelection = value;
           },
-          children: [FSelectTile(title: const Text('1'), value: 1)],
+          children: const [FSelectTile(title: Text('1'), value: 1)],
         ),
       ),
     );
@@ -208,5 +205,55 @@ void main() {
     expect(secondChanges, 1);
     expect(secondSelections, 1);
     expect(secondSelection, (1, false));
+  });
+
+  testWidgets('update controller', (tester) async {
+    final first = FMultiValueNotifier<int>();
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: first,
+          children: const [FSelectTile(title: Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    expect(first.hasListeners, true);
+    expect(first.disposed, false);
+
+    final second = FMultiValueNotifier<int>();
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: second,
+          children: const [FSelectTile(title: Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    expect(first.hasListeners, false);
+    expect(first.disposed, false);
+    expect(second.hasListeners, true);
+    expect(second.disposed, false);
+  });
+
+  testWidgets('dispose controller', (tester) async {
+    final controller = FMultiValueNotifier<int>();
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup<int>(
+          selectController: controller,
+          children: const [FSelectTile(title: Text('1'), value: 1)],
+        ),
+      ),
+    );
+
+    expect(controller.hasListeners, true);
+    expect(controller.disposed, false);
+
+    await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+    expect(controller.hasListeners, false);
+    expect(controller.disposed, false);
   });
 }

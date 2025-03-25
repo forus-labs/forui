@@ -18,5 +18,7 @@
   "selectNoResults": "Ei vastaavia tuloksia.",
   "selectSearchNoResults": "Ei löytynyt vastaavuuksia.",
   "selectScrollUpSemanticsLabel": "Vieritä ylös",
-  "selectScrollDownSemanticsLabel": "Vieritä alas"
+  "selectScrollDownSemanticsLabel": "Vieritä alas",
+  "paginationPreviousSemanticsLabel": "Edellinen",
+  "paginationNextSemanticsLabel": "Seuraava"
 }

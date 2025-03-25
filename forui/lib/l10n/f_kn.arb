@@ -17,5 +17,7 @@
   "selectSearchHint": "ಹುಡುಕಿ",
   "selectSearchNoResults": "ಯಾವುದೇ ಹೊಂದಾಣಿಕೆಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
   "selectScrollUpSemanticsLabel": "ಮೇಲಕ್ಕೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ",
-  "selectScrollDownSemanticsLabel": "ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ"
+  "selectScrollDownSemanticsLabel": "ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ",
+  "paginationPrevious": "ಹಿಂದಿನ",
+  "paginationNext": "ಮುಂದಿನ"
 }

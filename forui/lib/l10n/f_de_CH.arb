@@ -15,5 +15,7 @@
   "selectNoResults": "Keine übereinstimmenden Ergebnisse.",
   "selectSearchNoResults": "Keine Übereinstimmungen gefunden.",
   "selectScrollUpSemanticsLabel": "Nach oben scrollen",
-  "selectScrollDownSemanticsLabel": "Nach unten scrollen"
+  "selectScrollDownSemanticsLabel": "Nach unten scrollen",
+  "paginationPreviousSemanticsLabel": "Zurück",
+  "paginationNextSemanticsLabel": "Weiter"
 }

@@ -75,6 +75,12 @@ class FLocalizationsId extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Hapus';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Sebelumnya';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Berikutnya';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

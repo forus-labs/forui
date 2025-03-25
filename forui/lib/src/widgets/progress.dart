@@ -15,7 +15,7 @@ part 'progress.style.dart';
 /// * https://forui.dev/docs/feedback/progress for working examples.
 /// * [FLinearProgressStyle] for customizing a linear progress indicator's appearance.
 abstract class FProgress extends StatefulWidget {
-  /// The semantic label.
+  /// The semantics label.
   final String? semanticsLabel;
 
   /// The progress's value. Defaults to null.
@@ -81,7 +81,7 @@ class _Linear extends FProgress {
 }
 
 class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
+  late final AnimationController _controller = AnimationController(vsync: this, duration: widget.duration);
   late CurvedAnimation _curve;
   late Animation<double> _animation;
   double _previous = 0;
@@ -89,7 +89,6 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.duration);
     widget.value == null ? _controller.repeat() : _controller.forward();
   }
 

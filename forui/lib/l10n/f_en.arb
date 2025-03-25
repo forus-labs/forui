@@ -86,6 +86,15 @@
     "description": "The semantic label for the clear button in a text field."
   },
 
+  "paginationPreviousSemanticsLabel": "Previous",
+  "@paginationPreviousSemanticsLabel": {
+    "description": "The label for the previous button in a pagination control."
+  },
+  "paginationNextSemanticsLabel": "Next",
+  "@paginationNextSemanticsLabel": {
+    "description": "The label for the next button in a pagination control."
+  },
+
   "shortDateSeparator": "/",
   "@shortDateSeparator": {
     "description": "The short date's separator, typically /."

@@ -59,6 +59,17 @@ class _InputTimeField extends FTimeField {
 
 class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
+  void didUpdateWidget(covariant _InputTimeField old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      }
+      _controller = widget.controller ?? FTimeFieldController(vsync: this);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.timeFieldStyle;
     final ValueWidgetBuilder<FTextFieldStateStyle>? prefix = switch (widget.prefixBuilder) {
@@ -98,5 +109,13 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
       builder: (_, _, child) => child!,
     );
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 }

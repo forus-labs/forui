@@ -1,4 +1,5 @@
-import 'package:flutter/rendering.dart';
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -118,4 +119,71 @@ void main() {
     expect(find.text('Pick a date'), findsNothing);
     expect(find.text('날짜 선택'), findsOneWidget);
   });
+
+  for (final (name, field) in [
+    ('calendar only', (controller, focus) => FDateField.calendar(controller: controller, focusNode: focus)),
+    ('input only', (controller, focus) => FDateField.input(controller: controller, focusNode: focus)),
+    ('both', (controller, focus) => FDateField(controller: controller, focusNode: focus)),
+  ]) {
+    group(name, () {
+      testWidgets('update controller', (tester) async {
+        final first = FDateFieldController(vsync: tester);
+
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
+
+        expect(first.hasListeners, true);
+        expect(first.disposed, false);
+
+        final second = FDateFieldController(vsync: tester);
+
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
+
+        expect(first.hasListeners, false);
+        expect(first.calendar.hasListeners, false);
+        expect(first.disposed, false);
+        expect(second.hasListeners, true);
+        expect(second.disposed, false);
+      });
+
+      testWidgets('dispose controller', (tester) async {
+        final controller = FDateFieldController(vsync: tester);
+
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(controller, null))));
+
+        expect(controller.hasListeners, true);
+        expect(controller.disposed, false);
+
+        await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
+
+        expect(controller.hasListeners, false);
+        expect(controller.calendar.hasListeners, false);
+        expect(controller.disposed, false);
+      });
+
+      testWidgets('update focus', (tester) async {
+        final first = FocusNode();
+
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+
+        expect(first.hasListeners, true);
+
+        final second = FocusNode();
+
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
+
+        expect(first.hasListeners, false);
+        expect(second.hasListeners, true);
+      });
+
+      testWidgets('dispose focus', (tester) async {
+        final first = FocusNode();
+
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+        expect(first.hasListeners, true);
+
+        await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
+        expect(first.hasListeners, false);
+      });
+    });
+  }
 }

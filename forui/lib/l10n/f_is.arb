@@ -18,5 +18,7 @@
   "selectNoResults": "Engar samsvarandi niðurstöður.",
   "selectSearchNoResults": "Engin samsvörun fannst.",
   "selectScrollUpSemanticsLabel": "Fletta upp",
-  "selectScrollDownSemanticsLabel": "Fletta niður"
+  "selectScrollDownSemanticsLabel": "Fletta niður",
+  "paginationPreviousSemanticsLabel": "Fyrri",
+  "paginationNextSemanticsLabel": "Næsta"
 }

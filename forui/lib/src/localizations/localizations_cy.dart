@@ -75,6 +75,12 @@ class FLocalizationsCy extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clirio';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Blaenorol';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Nesaf';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

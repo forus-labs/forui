@@ -75,6 +75,12 @@ class FLocalizationsHu extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Törlés';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Előző';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Következő';
+
+  @override
   String get shortDateSeparator => '. ';
 
   @override

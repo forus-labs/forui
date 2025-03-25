@@ -75,6 +75,12 @@ class FLocalizationsSk extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Vymazať';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Predchádzajúce';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Ďalej';
+
+  @override
   String get shortDateSeparator => '. ';
 
   @override

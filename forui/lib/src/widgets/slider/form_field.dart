@@ -110,12 +110,10 @@ class _State extends FormFieldState<FSliderSelection> {
   @override
   void didUpdateWidget(covariant SliderFormField old) {
     super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
-      return;
+    if (widget.controller != old.controller) {
+      widget.controller.addListener(_handleControllerChanged);
+      old.controller.removeListener(_handleControllerChanged);
     }
-
-    widget.controller.addListener(_handleControllerChanged);
-    old.controller.removeListener(_handleControllerChanged);
   }
 
   @override

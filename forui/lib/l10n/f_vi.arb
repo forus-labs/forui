@@ -18,5 +18,7 @@
   "selectNoResults": "Không có kết quả phù hợp.",
   "selectSearchNoResults": "Không tìm thấy kết quả phù hợp.",
   "selectScrollUpSemanticsLabel": "Cuộn lên",
-  "selectScrollDownSemanticsLabel": "Cuộn xuống"
+  "selectScrollDownSemanticsLabel": "Cuộn xuống",
+  "paginationPreviousSemanticsLabel": "Trước",
+  "paginationNextSemanticsLabel": "Tiếp"
 }

@@ -79,8 +79,8 @@ class FTabs extends StatefulWidget {
     this.onPress,
     super.key,
   }) : assert(tabs.isNotEmpty, 'Must have at least 1 tab provided.'),
-       assert(0 <= initialIndex && initialIndex < tabs.length, 'Initial index must be within the range of tabs.'),
-       assert(controller == null || controller.index == initialIndex, 'Controller index must match the initial index.'),
+       assert(0 <= initialIndex && initialIndex < tabs.length, 'initialIndex must be within the range of tabs.'),
+       assert(controller == null || controller.index == initialIndex, "Controller's index must match initialIndex."),
        assert(
          controller == null || controller.length == tabs.length,
          'Controller length must match the number of tabs.',
@@ -109,8 +109,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller =
-        widget.controller ?? FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this)
-          ..addListener(() => setState(() {}));
+        widget.controller ?? FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this);
+    _controller.addListener(_update);
   }
 
   @override
@@ -119,14 +119,18 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        _controller.removeListener(_update);
       }
 
       _controller =
           widget.controller ??
-                FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this)
-            ..addListener(() => setState(() {}));
+          FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this);
+      _controller.addListener(_update);
     }
   }
+
+  void _update() => setState(() {});
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +156,6 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               labelStyle: style.selectedLabelTextStyle,
               unselectedLabelStyle: style.unselectedLabelTextStyle,
               onTap: (index) {
-                setState(() {});
                 widget.onPress?.call(index);
               },
             ),
@@ -188,6 +191,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   void dispose() {
     if (widget.controller == null) {
       _controller.dispose();
+    } else {
+      _controller.removeListener(_update);
     }
     super.dispose();
   }

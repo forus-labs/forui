@@ -355,6 +355,18 @@ abstract class FLocalizations {
   /// **'Clear'**
   String get textFieldClearButtonSemanticsLabel;
 
+  /// The label for the previous button in a pagination control.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get paginationPreviousSemanticsLabel;
+
+  /// The label for the next button in a pagination control.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get paginationNextSemanticsLabel;
+
   /// The short date's separator, typically /.
   ///
   /// In en, this message translates to:

@@ -18,5 +18,7 @@
   "selectNoResults": "কোন মিলে যাওয়া ফলাফল নেই।",
   "selectSearchNoResults": "কোন মিল পাওয়া যায়নি।",
   "selectScrollUpSemanticsLabel": "উপরে স্ক্রোল করুন",
-  "selectScrollDownSemanticsLabel": "নিচে স্ক্রোল করুন"
+  "selectScrollDownSemanticsLabel": "নিচে স্ক্রোল করুন",
+  "paginationPrevious": "পূর্ববর্তী",
+  "paginationNext": "পরবর্তী"
 }

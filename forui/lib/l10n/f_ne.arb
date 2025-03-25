@@ -18,5 +18,7 @@
   "selectNoResults": "कुनै मिल्दो परिणामहरू छैनन्।",
   "selectSearchNoResults": "कुनै मिल्दो फेला परेन।",
   "selectScrollUpSemanticsLabel": "माथि स्क्रोल गर्नुहोस्",
-  "selectScrollDownSemanticsLabel": "तल स्क्रोल गर्नुहोस्"
+  "selectScrollDownSemanticsLabel": "तल स्क्रोल गर्नुहोस्",
+  "paginationPrevious": "अघिल्लो",
+  "paginationNext": "अर्को"
 }

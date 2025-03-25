@@ -53,7 +53,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   final bool _suffix;
 
   /// Creates a [FSelectTile] with a prefix check icon.
-  FSelectTile({
+  const FSelectTile({
     required this.title,
     required this.value,
     this.style,
@@ -72,7 +72,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
        _icon = suffixIcon;
 
   /// Creates a [FSelectTile] with a suffix check icon.
-  FSelectTile.suffix({
+  const FSelectTile.suffix({
     required this.title,
     required this.value,
     this.style,

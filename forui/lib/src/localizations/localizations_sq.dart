@@ -75,6 +75,12 @@ class FLocalizationsSq extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Pastro';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'E mëparshme';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Tjetër';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override

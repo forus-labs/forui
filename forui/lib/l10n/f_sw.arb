@@ -18,5 +18,7 @@
   "selectNoResults": "Hakuna matokeo yanayolingana.",
   "selectSearchNoResults": "Hakuna vifanano vilivyopatikana.",
   "selectScrollUpSemanticsLabel": "Sogeza juu",
-  "selectScrollDownSemanticsLabel": "Sogeza chini"
+  "selectScrollDownSemanticsLabel": "Sogeza chini",
+  "paginationPreviousSemanticsLabel": "Iliyotangulia",
+  "paginationNextSemanticsLabel": "Inayofuata"
 }

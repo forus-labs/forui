@@ -107,7 +107,7 @@ class FPicker extends StatefulWidget {
 class _FPickerState extends State<FPicker> {
   late FPickerController _controller;
 
-  // This prevents the controller's value from being updated when the wheels are scrolling.
+  /// Prevents the controller's value from being updated when the wheels are scrolling.
   int _scrolling = 0;
 
   @override
@@ -119,15 +119,13 @@ class _FPickerState extends State<FPicker> {
   @override
   void didUpdateWidget(covariant FPicker old) {
     super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
-      return;
-    }
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      }
 
-    if (old.controller == null) {
-      _controller.dispose();
+      _createController();
     }
-
-    _createController();
   }
 
   void _createController() {

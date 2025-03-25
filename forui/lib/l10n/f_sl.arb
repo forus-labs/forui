@@ -18,5 +18,7 @@
   "selectNoResults": "Ni ujemajočih se rezultatov.",
   "selectSearchNoResults": "Ni najdenih ujemanj.",
   "selectScrollUpSemanticsLabel": "Pomik navzgor",
-  "selectScrollDownSemanticsLabel": "Pomik navzdol"
+  "selectScrollDownSemanticsLabel": "Pomik navzdol",
+  "paginationPreviousSemanticsLabel": "Prejšnji",
+  "paginationNextSemanticsLabel": "Naprej"
 }

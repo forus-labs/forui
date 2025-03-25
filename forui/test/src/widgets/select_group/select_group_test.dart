@@ -36,7 +36,7 @@ void main() {
     expect(selection, (2, true));
   });
 
-  testWidgets('update widget', (tester) async {
+  testWidgets('update callbacks', (tester) async {
     final controller = FMultiValueNotifier<int>();
 
     var firstChanges = 0;
@@ -62,6 +62,7 @@ void main() {
     expect(firstChanges, 1);
     expect(firstSelections, 1);
     expect(firsSelection, (1, true));
+    expect(controller.hasListeners, true);
 
     var secondChanges = 0;
     var secondSelections = 0;
@@ -90,5 +91,61 @@ void main() {
     expect(secondChanges, 1);
     expect(secondSelections, 1);
     expect(secondSelection, (1, false));
+  });
+
+  testWidgets('update controller', (tester) async {
+    final first = FMultiValueNotifier<int>();
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectGroup<int>(
+          controller: first,
+          onChange: (_) {},
+          onSelect: (_) {},
+          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+        ),
+      ),
+    );
+
+    expect(first.hasListeners, true);
+    expect(first.disposed, false);
+
+    final second = FMultiValueNotifier<int>();
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectGroup<int>(
+          controller: second,
+          onChange: (_) {},
+          onSelect: (_) {},
+          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+        ),
+      ),
+    );
+
+    expect(first.hasListeners, false);
+    expect(first.disposed, false);
+    expect(second.hasListeners, true);
+    expect(second.disposed, false);
+  });
+
+  testWidgets('dispose controller', (tester) async {
+    final controller = FMultiValueNotifier<int>();
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectGroup<int>(
+          controller: controller,
+          onChange: (_) {},
+          onSelect: (_) {},
+          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+        ),
+      ),
+    );
+
+    expect(controller.hasListeners, true);
+    expect(controller.disposed, false);
+
+    await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+    expect(controller.hasListeners, false);
+    expect(controller.disposed, false);
   });
 }

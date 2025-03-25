@@ -75,6 +75,12 @@ class FLocalizationsUz extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Tozalash';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Oldingi';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Keyingi';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

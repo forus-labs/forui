@@ -18,5 +18,7 @@
   "selectNoResults": "ምንም ተዛማጅ ውጤቶች የሉም።",
   "selectSearchNoResults": "ምንም ተዛማጅ አልተገኙም።",
   "selectScrollUpSemanticsLabel": "ወደ ላይ ሸብልል",
-  "selectScrollDownSemanticsLabel": "ወደ ታች ሸብልል"
+  "selectScrollDownSemanticsLabel": "ወደ ታች ሸብልል",
+  "paginationPreviousSemanticsLabel": "ቀዳሚ",
+  "paginationNextSemanticsLabel": "ቀጣይ"
 }

@@ -75,6 +75,12 @@ class FLocalizationsAm extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'አጽዳ';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'ቀዳሚ';
+
+  @override
+  String get paginationNextSemanticsLabel => 'ቀጣይ';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

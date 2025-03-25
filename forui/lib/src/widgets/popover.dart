@@ -235,26 +235,17 @@ class FPopover extends StatefulWidget {
 
 class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   final Key _group = UniqueKey();
-  late FPopoverController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? FPopoverController(vsync: this);
-  }
+  late FPopoverController _controller = widget.controller ?? FPopoverController(vsync: this);
 
   @override
   void didUpdateWidget(covariant FPopover old) {
     super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
-      return;
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      }
+      _controller = widget.controller ?? FPopoverController(vsync: this);
     }
-
-    if (old.controller == null) {
-      _controller.dispose();
-    }
-
-    _controller = widget.controller ?? FPopoverController(vsync: this);
   }
 
   @override

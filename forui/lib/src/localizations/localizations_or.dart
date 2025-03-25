@@ -75,6 +75,12 @@ class FLocalizationsOr extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'ସଫା କରନ୍ତୁ';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'ପୂର୍ବବର୍ତ୍ତୀ';
+
+  @override
+  String get paginationNextSemanticsLabel => 'ପରବର୍ତ୍ତୀ';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

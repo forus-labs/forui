@@ -17,5 +17,7 @@
   "selectSearchHint": "ძიება",
   "selectSearchNoResults": "დამთხვევები ვერ მოიძებნა.",
   "selectScrollUpSemanticsLabel": "ზემოთ გადაადგილება",
-  "selectScrollDownSemanticsLabel": "ქვემოთ გადაადგილება"
+  "selectScrollDownSemanticsLabel": "ქვემოთ გადაადგილება",
+  "paginationPrevious": "წინა",
+  "paginationNext": "შემდეგი"
 }

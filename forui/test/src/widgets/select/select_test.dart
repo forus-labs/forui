@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -69,7 +71,7 @@ void main() {
       expect(controller.value, 'A');
     });
 
-    testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
+    testWidgets('update controller', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>(
@@ -84,6 +86,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
+      expect(controller.popover.hasListeners, true);
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -95,10 +98,11 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, false);
+      expect(controller.popover.hasListeners, false);
       expect(controller.dispose, returnsNormally);
     });
 
-    testWidgets('dispose() does not dispose external controller', (tester) async {
+    testWidgets('dispose controller', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>(
@@ -113,10 +117,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
+      expect(controller.popover.hasListeners, true);
 
       await tester.pumpWidget(const SizedBox());
 
       expect(controller.hasListeners, false);
+      expect(controller.popover.hasListeners, false);
       expect(controller.dispose, returnsNormally);
     });
   });

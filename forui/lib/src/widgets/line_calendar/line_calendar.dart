@@ -96,10 +96,12 @@ class FLineCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder:
-        (_, constraints) => CalendarLayout(
+        (context, constraints) => CalendarLayout(
           controller: controller,
-          style: style,
+          style: style ?? context.theme.lineCalendarStyle,
           cacheExtent: cacheExtent,
+          scale: MediaQuery.textScalerOf(context),
+          textStyle: DefaultTextStyle.of(context).style,
           builder: builder,
           start: _start,
           end: _end,

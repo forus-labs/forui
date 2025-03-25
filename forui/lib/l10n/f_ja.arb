@@ -18,5 +18,7 @@
   "selectNoResults": "一致する結果がありません。",
   "selectSearchNoResults": "一致するものが見つかりません。",
   "selectScrollUpSemanticsLabel": "上にスクロール",
-  "selectScrollDownSemanticsLabel": "下にスクロール"
+  "selectScrollDownSemanticsLabel": "下にスクロール",
+  "paginationPreviousSemanticsLabel": "前へ",
+  "paginationNextSemanticsLabel": "次へ"
 }

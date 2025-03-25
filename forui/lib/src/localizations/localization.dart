@@ -92,6 +92,12 @@ class FDefaultLocalizations extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override

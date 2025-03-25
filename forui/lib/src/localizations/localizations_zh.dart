@@ -75,6 +75,12 @@ class FLocalizationsZh extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => '清除';
 
   @override
+  String get paginationPreviousSemanticsLabel => '上一个';
+
+  @override
+  String get paginationNextSemanticsLabel => '下一个';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -139,6 +145,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get textFieldClearButtonSemanticsLabel => '清除';
 
   @override
+  String get paginationPreviousSemanticsLabel => '上一個';
+
+  @override
+  String get paginationNextSemanticsLabel => '下一個';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -201,6 +213,12 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get textFieldClearButtonSemanticsLabel => '清除';
+
+  @override
+  String get paginationPreviousSemanticsLabel => '上一個';
+
+  @override
+  String get paginationNextSemanticsLabel => '下一個';
 
   @override
   String get shortDateSeparator => '/';

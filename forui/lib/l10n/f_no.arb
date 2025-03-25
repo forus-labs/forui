@@ -18,5 +18,7 @@
   "selectNoResults": "Ingen samsvarende resultater.",
   "selectSearchNoResults": "Ingen treff funnet.",
   "selectScrollUpSemanticsLabel": "Rull opp",
-  "selectScrollDownSemanticsLabel": "Rull ned"
+  "selectScrollDownSemanticsLabel": "Rull ned",
+  "paginationPreviousSemanticsLabel": "Forrige",
+  "paginationNextSemanticsLabel": "Neste"
 }

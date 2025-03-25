@@ -75,6 +75,12 @@ class FLocalizationsHr extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Očisti';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Prethodno';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Sljedeće';
+
+  @override
   String get shortDateSeparator => '. ';
 
   @override

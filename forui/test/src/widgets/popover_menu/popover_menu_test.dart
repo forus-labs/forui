@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -88,7 +90,7 @@ void main() {
     });
   });
 
-  group('FPopover.tappable', () {
+  group('FPopover.automatic', () {
     testWidgets('shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
@@ -106,6 +108,67 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Group 1'), findsOneWidget);
+    });
+  });
+
+  group('state', () {
+    testWidgets('update controller', (tester) async {
+      final first = FPopoverController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPopoverMenu(
+            popoverController: first,
+            menu: [
+              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+            ],
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      expect(first.hasListeners, false);
+      expect(first.disposed, false);
+
+      final second = FPopoverController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPopoverMenu(
+            popoverController: second,
+            menu: [
+              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+            ],
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      expect(first.hasListeners, false);
+      expect(first.disposed, false);
+      expect(second.hasListeners, false);
+      expect(second.disposed, false);
+    });
+
+    testWidgets('dispose controller', (tester) async {
+      final controller = FPopoverController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPopoverMenu(
+            popoverController: controller,
+            menu: [
+              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+            ],
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      expect(controller.hasListeners, false);
+      expect(controller.disposed, false);
+
+      await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+      expect(controller.hasListeners, false);
+      expect(controller.disposed, false);
     });
   });
 }

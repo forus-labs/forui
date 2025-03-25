@@ -18,5 +18,7 @@
   "selectNoResults": "Žiadne zodpovedajúce výsledky.",
   "selectSearchNoResults": "Neboli nájdené žiadne zhody.",
   "selectScrollUpSemanticsLabel": "Posunúť nahor",
-  "selectScrollDownSemanticsLabel": "Posunúť nadol"
+  "selectScrollDownSemanticsLabel": "Posunúť nadol",
+  "paginationPreviousSemanticsLabel": "Predchádzajúce",
+  "paginationNextSemanticsLabel": "Ďalej"
 }

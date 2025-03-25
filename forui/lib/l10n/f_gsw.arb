@@ -18,5 +18,7 @@
   "selectNoResults": "Kei passendi Ergebnis.",
   "selectSearchNoResults": "Kei Träffer gfunde.",
   "selectScrollUpSemanticsLabel": "Nach obe scrolle",
-  "selectScrollDownSemanticsLabel": "Nach unde scrolle"
+  "selectScrollDownSemanticsLabel": "Nach unde scrolle",
+  "paginationPreviousSemanticsLabel": "Vorig",
+  "paginationNextSemanticsLabel": "Witer"
 }

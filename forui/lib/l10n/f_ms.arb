@@ -18,5 +18,7 @@
   "selectNoResults": "Tiada hasil yang sepadan.",
   "selectSearchNoResults": "Tiada padanan ditemui.",
   "selectScrollUpSemanticsLabel": "Tatal ke atas",
-  "selectScrollDownSemanticsLabel": "Tatal ke bawah"
+  "selectScrollDownSemanticsLabel": "Tatal ke bawah",
+  "paginationPreviousSemanticsLabel": "Sebelumnya",
+  "paginationNextSemanticsLabel": "Seterusnya"
 }

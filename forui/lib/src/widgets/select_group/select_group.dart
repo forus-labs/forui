@@ -127,10 +127,10 @@ class _State<T> extends FormFieldState<Set<T>> {
       old.controller.removeListener(_handleControllerChanged);
     }
 
-    widget.controller.addValueListener(widget.onChange);
-    widget.controller.addUpdateListener(widget.onSelect);
     old.controller.removeValueListener(old.onChange);
     old.controller.removeUpdateListener(old.onSelect);
+    widget.controller.addValueListener(widget.onChange);
+    widget.controller.addUpdateListener(widget.onSelect);
   }
 
   @override
@@ -150,7 +150,10 @@ class _State<T> extends FormFieldState<Set<T>> {
 
   @override
   void dispose() {
-    widget.controller.removeListener(_handleControllerChanged);
+    widget.controller
+      ..removeListener(_handleControllerChanged)
+      ..removeValueListener(widget.onChange)
+      ..removeUpdateListener(widget.onSelect);
     super.dispose();
   }
 

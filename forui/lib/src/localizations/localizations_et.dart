@@ -75,6 +75,12 @@ class FLocalizationsEt extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Kustuta';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Eelmine';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Järgmine';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override

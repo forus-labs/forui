@@ -24,7 +24,7 @@ void main() {
               title: const Text('Bluetooth'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('Forus Labs (5G)'),
-              menu: [FSelectTile(title: const Text('Menu'), value: 1)],
+              menu: const [FSelectTile(title: Text('Menu'), value: 1)],
             ),
           ),
         );
@@ -45,7 +45,7 @@ void main() {
               title: const Text('Bluetooth'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('Forus Labs (5G)'),
-              menu: [FSelectTile(title: const Text('Menu'), value: 1)],
+              menu: const [FSelectTile(title: Text('Menu'), value: 1)],
             ),
           ),
         );
@@ -67,10 +67,7 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: [
-                FSelectTile(title: const Text('Item 1'), value: 1),
-                FSelectTile(title: const Text('Item 2'), value: 2),
-              ],
+              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
             ),
           ),
         );
@@ -93,10 +90,7 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: [
-                FSelectTile(title: const Text('Item 1'), value: 1),
-                FSelectTile(title: const Text('Item 2'), value: 2),
-              ],
+              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
             ),
           ),
         );
@@ -118,12 +112,12 @@ void main() {
               selectController: controller,
               maxHeight: 150,
               title: const Text('Title'),
-              menu: [
-                FSelectTile(title: const Text('Tile 1'), value: 1),
-                FSelectTile(title: const Text('Tile 2'), value: 2),
-                FSelectTile(title: const Text('Tile 3'), value: 3),
-                FSelectTile(title: const Text('Tile 4'), value: 4),
-                FSelectTile(title: const Text('Tile 5'), value: 4),
+              menu: const [
+                FSelectTile(title: Text('Tile 1'), value: 1),
+                FSelectTile(title: Text('Tile 2'), value: 2),
+                FSelectTile(title: Text('Tile 3'), value: 3),
+                FSelectTile(title: Text('Tile 4'), value: 4),
+                FSelectTile(title: Text('Tile 5'), value: 4),
               ],
             ),
           ),
@@ -151,10 +145,7 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: [
-                FSelectTile(title: const Text('Item 1'), value: 1),
-                FSelectTile(title: const Text('Item 2'), value: 2),
-              ],
+              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
             ),
           ),
         );
@@ -175,10 +166,7 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: [
-                FSelectTile(title: const Text('Item 1'), value: 1),
-                FSelectTile(title: const Text('Item 2'), value: 2),
-              ],
+              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
             ),
           ),
         );
