@@ -75,6 +75,12 @@ class FLocalizationsMs extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Kosongkan';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Sebelumnya';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Seterusnya';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

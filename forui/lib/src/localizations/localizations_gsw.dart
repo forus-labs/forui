@@ -75,6 +75,12 @@ class FLocalizationsGsw extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Lösche';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Vorig';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Witer';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override

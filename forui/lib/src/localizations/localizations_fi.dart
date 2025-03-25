@@ -75,6 +75,12 @@ class FLocalizationsFi extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Tyhjennä';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Edellinen';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Seuraava';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override

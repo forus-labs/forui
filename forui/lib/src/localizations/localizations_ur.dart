@@ -75,6 +75,12 @@ class FLocalizationsUr extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'صاف کریں';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'پچھلا';
+
+  @override
+  String get paginationNextSemanticsLabel => 'اگلا';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

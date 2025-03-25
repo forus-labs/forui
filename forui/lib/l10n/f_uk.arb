@@ -17,5 +17,7 @@
   "selectSearchHint": "Пошук",
   "selectSearchNoResults": "Збігів не знайдено.",
   "selectScrollUpSemanticsLabel": "Прокрутити вгору",
-  "selectScrollDownSemanticsLabel": "Прокрутити вниз"
+  "selectScrollDownSemanticsLabel": "Прокрутити вниз",
+  "paginationPrevious": "Назад",
+  "paginationNext": "Далі"
 }

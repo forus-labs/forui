@@ -75,6 +75,12 @@ class FLocalizationsLv extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Notīrīt';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Iepriekšējais';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Tālāk';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override

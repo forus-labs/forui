@@ -17,5 +17,7 @@
   "selectSearchHint": "Որոնել",
   "selectSearchNoResults": "Համապատասխանություններ չեն գտնվել։",
   "selectScrollUpSemanticsLabel": "Ոլորել վերև",
-  "selectScrollDownSemanticsLabel": "Ոլորել ներքև"
+  "selectScrollDownSemanticsLabel": "Ոլորել ներքև",
+  "paginationPrevious": "Նախորդ",
+  "paginationNext": "Հաջորդը"
 }

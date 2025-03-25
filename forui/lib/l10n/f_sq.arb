@@ -18,5 +18,7 @@
   "selectNoResults": "Nuk ka rezultate përputhëse.",
   "selectSearchNoResults": "Nuk u gjetën përputhje.",
   "selectScrollUpSemanticsLabel": "Lëviz lart",
-  "selectScrollDownSemanticsLabel": "Lëviz poshtë"
+  "selectScrollDownSemanticsLabel": "Lëviz poshtë",
+  "paginationPreviousSemanticsLabel": "E mëparshme",
+  "paginationNextSemanticsLabel": "Tjetër"
 }

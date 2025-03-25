@@ -18,5 +18,7 @@
   "selectNoResults": "Žádné odpovídající výsledky.",
   "selectSearchNoResults": "Nebyly nalezeny žádné shody.",
   "selectScrollUpSemanticsLabel": "Posunout nahoru",
-  "selectScrollDownSemanticsLabel": "Posunout dolů"
+  "selectScrollDownSemanticsLabel": "Posunout dolů",
+  "paginationPreviousSemanticsLabel": "Předchozí",
+  "paginationNextSemanticsLabel": "Další"
 }

@@ -18,5 +18,7 @@
   "selectNoResults": "Nema podudarajućih rezultata.",
   "selectSearchNoResults": "Nije pronađeno podudaranje.",
   "selectScrollUpSemanticsLabel": "Pomerite nagore",
-  "selectScrollDownSemanticsLabel": "Pomerite nadole"
+  "selectScrollDownSemanticsLabel": "Pomerite nadole",
+  "paginationPreviousSemanticsLabel": "Prethodno",
+  "paginationNextSemanticsLabel": "Sledeće"
 }

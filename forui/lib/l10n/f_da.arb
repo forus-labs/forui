@@ -18,5 +18,7 @@
   "selectNoResults": "Ingen matchende resultater.",
   "selectSearchNoResults": "Ingen match fundet.",
   "selectScrollUpSemanticsLabel": "Rul op",
-  "selectScrollDownSemanticsLabel": "Rul ned"
+  "selectScrollDownSemanticsLabel": "Rul ned",
+  "paginationPreviousSemanticsLabel": "Forrige",
+  "paginationNextSemanticsLabel": "Næste"
 }

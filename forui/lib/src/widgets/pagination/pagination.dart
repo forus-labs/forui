@@ -13,11 +13,11 @@ import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 /// * [FPaginationController] for customizing the pagination's behavior.
 /// * [FPaginationStyle] for customizing the pagination's appearance.
 final class FPagination extends StatefulWidget {
-  /// The pagination's style.
-  final FPaginationStyle? style;
-
   /// The controller.
   final FPaginationController controller;
+
+  /// The pagination's style.
+  final FPaginationStyle? style;
 
   /// The previous button placed at the beginning of the pagination.
   ///
@@ -45,8 +45,8 @@ final class FPagination extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onPageChange', onPageChange));
   }
 }
@@ -56,10 +56,12 @@ class _FPaginationState extends State<FPagination> {
   Widget build(BuildContext context) {
     final controller = widget.controller;
     final style = widget.style ?? context.theme.paginationStyle;
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final previous =
         widget.previous ??
         Action.previous(
           style: style,
+          semanticsLabel: localizations.paginationPreviousSemanticsLabel,
           onPress: () {
             controller.previous();
             widget.onPageChange?.call();
@@ -69,6 +71,7 @@ class _FPaginationState extends State<FPagination> {
         widget.next ??
         Action.next(
           style: style,
+          semanticsLabel: localizations.paginationNextSemanticsLabel,
           onPress: () {
             controller.next();
             widget.onPageChange?.call();
@@ -76,7 +79,7 @@ class _FPaginationState extends State<FPagination> {
         );
     final lastPage = controller.pages - 1;
 
-    final elipsis = Padding(
+    final ellipsis = Padding(
       padding: style.itemPadding,
       child: DecoratedBox(
         decoration: style.unselected.decoration,
@@ -99,12 +102,12 @@ class _FPaginationState extends State<FPagination> {
             if (controller.page > controller.minPagesDisplayedAtEdges) ...[
               if (controller.showEdges)
                 FPaginationItemData(page: 0, style: style, controller: controller, child: _Page(widget.onPageChange)),
-              elipsis,
+              ellipsis,
             ],
             for (int i = start; i <= end; i++)
               FPaginationItemData(page: i, style: style, controller: controller, child: _Page(widget.onPageChange)),
             if (controller.page < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
-              elipsis,
+              ellipsis,
               if (controller.showEdges)
                 FPaginationItemData(
                   page: lastPage,
@@ -158,34 +161,31 @@ class FPaginationItemData extends InheritedWidget {
 
 @internal
 class Action extends StatelessWidget {
-  final VoidCallback onPress;
   final FPaginationStyle style;
+  final String semanticsLabel;
+  final VoidCallback onPress;
   final Widget child;
-  final String semanticLabel;
 
   const Action({
-    required this.onPress,
     required this.style,
+    required this.semanticsLabel,
+    required this.onPress,
     required this.child,
-    required this.semanticLabel,
     super.key,
   });
 
-  Action.previous({required this.style, required this.onPress, super.key})
-    : child = Icon(FIcons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size),
-      semanticLabel = 'Previous';
+  Action.previous({required this.style, required this.semanticsLabel, required this.onPress, super.key})
+    : child = Icon(FIcons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size);
 
-  Action.next({required this.onPress, required this.style, super.key})
-    : child = Icon(FIcons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size),
-      semanticLabel = 'Next';
+  Action.next({required this.style, required this.semanticsLabel, required this.onPress, super.key})
+    : child = Icon(FIcons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size);
 
   @override
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
     child: FTappable(
       style: style.actionTappableStyle,
-      //TODO: Add localization support for semantic labels.
-      semanticLabel: semanticLabel,
+      semanticLabel: semanticsLabel,
       focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
       onPress: onPress,
       builder:
@@ -206,7 +206,7 @@ class Action extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(StringProperty('semanticLabel', semanticLabel));
+      ..add(StringProperty('semanticLabel', semanticsLabel));
   }
 }
 

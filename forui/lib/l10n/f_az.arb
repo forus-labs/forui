@@ -18,5 +18,7 @@
   "selectNoResults": "Uyğun nəticə tapılmadı.",
   "selectSearchNoResults": "Heç bir uyğunluq tapılmadı.",
   "selectScrollUpSemanticsLabel": "Yuxarı sürüşdür",
-  "selectScrollDownSemanticsLabel": "Aşağı sürüşdür"
+  "selectScrollDownSemanticsLabel": "Aşağı sürüşdür",
+  "paginationPreviousSemanticsLabel": "Əvvəlki",
+  "paginationNextSemanticsLabel": "Növbəti"
 }

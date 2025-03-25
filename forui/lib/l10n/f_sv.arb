@@ -18,5 +18,7 @@
   "selectNoResults": "Inga matchande resultat.",
   "selectSearchNoResults": "Inga matchningar hittades.",
   "selectScrollUpSemanticsLabel": "Rulla uppåt",
-  "selectScrollDownSemanticsLabel": "Rulla nedåt"
+  "selectScrollDownSemanticsLabel": "Rulla nedåt",
+  "paginationPreviousSemanticsLabel": "Föregående",
+  "paginationNextSemanticsLabel": "Nästa"
 }

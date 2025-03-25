@@ -18,5 +18,7 @@
   "selectNoResults": "Geen overeenkomende resultaten.",
   "selectSearchNoResults": "Geen overeenkomsten gevonden.",
   "selectScrollUpSemanticsLabel": "Omhoog scrollen",
-  "selectScrollDownSemanticsLabel": "Omlaag scrollen"
+  "selectScrollDownSemanticsLabel": "Omlaag scrollen",
+  "paginationPreviousSemanticsLabel": "Vorige",
+  "paginationNextSemanticsLabel": "Volgende"
 }

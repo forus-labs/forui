@@ -18,5 +18,7 @@
   "selectNoResults": "কোনো মিল থকা ফলাফল নাই।",
   "selectSearchNoResults": "কোনো মিল পোৱা নাই।",
   "selectScrollUpSemanticsLabel": "ওপৰলৈ স্ক্ৰল কৰক",
-  "selectScrollDownSemanticsLabel": "তললৈ স্ক্ৰল কৰক"
+  "selectScrollDownSemanticsLabel": "তললৈ স্ক্ৰল কৰক",
+  "paginationPrevious": "পূৰ্বৱৰ্তী",
+  "paginationNext": "পৰৱৰ্তী"
 }

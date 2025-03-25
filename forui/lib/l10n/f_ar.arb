@@ -17,5 +17,7 @@
   "selectSearchHint": "بحث",
   "selectSearchNoResults": "لم يتم العثور على تطابقات.",
   "selectScrollUpSemanticsLabel": "التمرير لأعلى",
-  "selectScrollDownSemanticsLabel": "التمرير لأسفل"
+  "selectScrollDownSemanticsLabel": "التمرير لأسفل",
+  "paginationPrevious": "السابق",
+  "paginationNext": "التالي"
 }

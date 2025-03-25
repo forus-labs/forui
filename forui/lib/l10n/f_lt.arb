@@ -18,5 +18,7 @@
   "selectNoResults": "Jokių atitinkančių rezultatų.",
   "selectSearchNoResults": "Atitikmenų nerasta.",
   "selectScrollUpSemanticsLabel": "Slinkti aukštyn",
-  "selectScrollDownSemanticsLabel": "Slinkti žemyn"
+  "selectScrollDownSemanticsLabel": "Slinkti žemyn",
+  "paginationPreviousSemanticsLabel": "Ankstesnis",
+  "paginationNextSemanticsLabel": "Kitas"
 }

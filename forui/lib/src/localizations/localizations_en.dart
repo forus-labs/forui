@@ -75,6 +75,12 @@ class FLocalizationsEn extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -137,6 +143,12 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
 
   @override
   String get shortDateSeparator => '/';
@@ -203,6 +215,12 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
   String get shortDateSeparator => '-';
 
   @override
@@ -265,6 +283,12 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
 
   @override
   String get shortDateSeparator => '/';
@@ -331,6 +355,12 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -393,6 +423,12 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
 
   @override
   String get shortDateSeparator => '/';
@@ -459,6 +495,12 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -523,6 +565,12 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -585,6 +633,12 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
 
   @override
   String get shortDateSeparator => '/';

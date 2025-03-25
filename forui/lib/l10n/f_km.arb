@@ -18,5 +18,7 @@
   "selectNoResults": "គ្មានលទ្ធផលដែលត្រូវគ្នាទេ។",
   "selectSearchNoResults": "រកមិនឃើញការផ្គូផ្គងទេ។",
   "selectScrollUpSemanticsLabel": "រមូរឡើងលើ",
-  "selectScrollDownSemanticsLabel": "រមូរចុះក្រោម"
+  "selectScrollDownSemanticsLabel": "រមូរចុះក្រោម",
+  "paginationPrevious": "មុន",
+  "paginationNext": "បន្ទាប់"
 }

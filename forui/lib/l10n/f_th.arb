@@ -18,5 +18,7 @@
   "selectNoResults": "ไม่มีผลลัพธ์ที่ตรงกัน",
   "selectSearchNoResults": "ไม่พบการจับคู่",
   "selectScrollUpSemanticsLabel": "เลื่อนขึ้น",
-  "selectScrollDownSemanticsLabel": "เลื่อนลง"
+  "selectScrollDownSemanticsLabel": "เลื่อนลง",
+  "paginationPrevious": "ก่อนหน้า",
+  "paginationNext": "ถัดไป"
 }

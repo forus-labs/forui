@@ -17,5 +17,7 @@
   "selectSearchHint": "തിരയുക",
   "selectSearchNoResults": "പൊരുത്തങ്ങളൊന്നും കണ്ടെത്തിയില്ല.",
   "selectScrollUpSemanticsLabel": "മുകളിലേക്ക് സ്ക്രോൾ ചെയ്യുക",
-  "selectScrollDownSemanticsLabel": "താഴേക്ക് സ്ക്രോൾ ചെയ്യുക"
+  "selectScrollDownSemanticsLabel": "താഴേക്ക് സ്ക്രോൾ ചെയ്യുക",
+  "paginationPrevious": "മുമ്പത്തേത്",
+  "paginationNext": "അടുത്തത്"
 }

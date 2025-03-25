@@ -18,5 +18,7 @@
   "selectNoResults": "Geen passende resultate nie.",
   "selectSearchNoResults": "Geen passende gevind nie.",
   "selectScrollUpSemanticsLabel": "Rol op",
-  "selectScrollDownSemanticsLabel": "Rol af"
+  "selectScrollDownSemanticsLabel": "Rol af",
+  "paginationPreviousSemanticsLabel": "Vorige",
+  "paginationNextSemanticsLabel": "Volgende"
 }

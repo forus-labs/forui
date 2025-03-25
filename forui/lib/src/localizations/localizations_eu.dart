@@ -75,6 +75,12 @@ class FLocalizationsEu extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Garbitu';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Aurrekoa';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Hurrengoa';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

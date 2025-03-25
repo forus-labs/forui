@@ -75,6 +75,12 @@ class FLocalizationsSw extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Futa';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Iliyotangulia';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Inayofuata';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

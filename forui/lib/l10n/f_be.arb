@@ -17,5 +17,7 @@
   "selectSearchHint": "Пошук",
   "selectSearchNoResults": "Супадзенняў не знойдзена.",
   "selectScrollUpSemanticsLabel": "Прагартаць уверх",
-  "selectScrollDownSemanticsLabel": "Прагартаць уніз"
+  "selectScrollDownSemanticsLabel": "Прагартаць уніз",
+  "paginationPrevious": "Папярэдні",
+  "paginationNext": "Наступны"
 }

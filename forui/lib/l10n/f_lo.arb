@@ -17,5 +17,7 @@
   "selectSearchHint": "ຊອກຫາ",
   "selectSearchNoResults": "ບໍ່ພົບການຈັບຄູ່.",
   "selectScrollUpSemanticsLabel": "ເລື່ອນຂຶ້ນ",
-  "selectScrollDownSemanticsLabel": "ເລື່ອນລົງ"
+  "selectScrollDownSemanticsLabel": "ເລື່ອນລົງ",
+  "paginationPrevious": "ກ່ອນໜ້າ",
+  "paginationNext": "ຕໍ່ໄປ"
 }

@@ -18,5 +18,7 @@
   "selectNoResults": "Niciun rezultat care să se potrivească.",
   "selectSearchNoResults": "Nu au fost găsite potriviri.",
   "selectScrollUpSemanticsLabel": "Derulează în sus",
-  "selectScrollDownSemanticsLabel": "Derulează în jos"
+  "selectScrollDownSemanticsLabel": "Derulează în jos",
+  "paginationPreviousSemanticsLabel": "Anterior",
+  "paginationNextSemanticsLabel": "Înainte"
 }

@@ -75,6 +75,12 @@ class FLocalizationsVi extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Xóa';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Trước';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Tiếp';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

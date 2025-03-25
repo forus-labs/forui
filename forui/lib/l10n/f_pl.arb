@@ -18,5 +18,7 @@
   "selectNoResults": "Brak pasujących wyników.",
   "selectSearchNoResults": "Nie znaleziono pasujących elementów.",
   "selectScrollUpSemanticsLabel": "Przewiń w górę",
-  "selectScrollDownSemanticsLabel": "Przewiń w dół"
+  "selectScrollDownSemanticsLabel": "Przewiń w dół",
+  "paginationPreviousSemanticsLabel": "Poprzedni",
+  "paginationNextSemanticsLabel": "Dalej"
 }

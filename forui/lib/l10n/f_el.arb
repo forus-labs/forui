@@ -17,5 +17,7 @@
   "selectSearchHint": "Αναζήτηση",
   "selectSearchNoResults": "Δεν βρέθηκαν αντιστοιχίες.",
   "selectScrollUpSemanticsLabel": "Κύλιση προς τα πάνω",
-  "selectScrollDownSemanticsLabel": "Κύλιση προς τα κάτω"
+  "selectScrollDownSemanticsLabel": "Κύλιση προς τα κάτω",
+  "paginationPrevious": "Προηγούμενο",
+  "paginationNext": "Επόμενο"
 }

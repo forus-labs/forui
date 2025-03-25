@@ -17,5 +17,7 @@
   "selectSearchHint": "لټون",
   "selectSearchNoResults": "هیڅ سمون لرونکي ونه موندل شول.",
   "selectScrollUpSemanticsLabel": "پورته سکرول کړئ",
-  "selectScrollDownSemanticsLabel": "ښکته سکرول کړئ"
+  "selectScrollDownSemanticsLabel": "ښکته سکرول کړئ",
+  "paginationPrevious": "مخکینی",
+  "paginationNext": "راتلونکی"
 }

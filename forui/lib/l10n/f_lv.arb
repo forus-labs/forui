@@ -18,5 +18,7 @@
   "selectNoResults": "Nav atbilstošu rezultātu.",
   "selectSearchNoResults": "Nav atrasta neviena atbilstība.",
   "selectScrollUpSemanticsLabel": "Ritināt uz augšu",
-  "selectScrollDownSemanticsLabel": "Ritināt uz leju"
+  "selectScrollDownSemanticsLabel": "Ritināt uz leju",
+  "paginationPreviousSemanticsLabel": "Iepriekšējais",
+  "paginationNextSemanticsLabel": "Tālāk"
 }

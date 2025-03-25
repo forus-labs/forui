@@ -18,5 +18,7 @@
   "selectNoResults": "Sobivaid tulemusi pole.",
   "selectSearchNoResults": "Vasteid ei leitud.",
   "selectScrollUpSemanticsLabel": "Keri üles",
-  "selectScrollDownSemanticsLabel": "Keri alla"
+  "selectScrollDownSemanticsLabel": "Keri alla",
+  "paginationPreviousSemanticsLabel": "Eelmine",
+  "paginationNextSemanticsLabel": "Järgmine"
 }

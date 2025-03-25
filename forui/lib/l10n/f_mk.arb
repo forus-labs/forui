@@ -17,5 +17,7 @@
   "selectSearchHint": "Пребарување",
   "selectSearchNoResults": "Не се пронајдени совпаѓања.",
   "selectScrollUpSemanticsLabel": "Лизгај нагоре",
-  "selectScrollDownSemanticsLabel": "Лизгај надолу"
+  "selectScrollDownSemanticsLabel": "Лизгај надолу",
+  "paginationPrevious": "Претходно",
+  "paginationNext": "Следно"
 }

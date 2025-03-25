@@ -18,5 +18,7 @@
   "selectNoResults": "Mos keladigan natijalar yo'q.",
   "selectSearchNoResults": "Mos keluvchilar topilmadi.",
   "selectScrollUpSemanticsLabel": "Tepaga aylantirish",
-  "selectScrollDownSemanticsLabel": "Pastga aylantirish"
+  "selectScrollDownSemanticsLabel": "Pastga aylantirish",
+  "paginationPreviousSemanticsLabel": "Oldingi",
+  "paginationNextSemanticsLabel": "Keyingi"
 }

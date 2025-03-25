@@ -75,6 +75,12 @@ class FLocalizationsFr extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Précédent';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Suivant';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override
@@ -137,6 +143,12 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Précédent';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Suivant';
 
   @override
   String get shortDateSeparator => '-';

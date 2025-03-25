@@ -17,5 +17,7 @@
   "selectSearchHint": "Buscar",
   "selectSearchNoResults": "Non se atoparon coincidencias.",
   "selectScrollUpSemanticsLabel": "Desprazarse cara arriba",
-  "selectScrollDownSemanticsLabel": "Desprazarse cara abaixo"
+  "selectScrollDownSemanticsLabel": "Desprazarse cara abaixo",
+  "paginationPrevious": "Anterior",
+  "paginationNext": "Seguinte"
 }

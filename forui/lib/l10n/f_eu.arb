@@ -18,5 +18,7 @@
   "selectNoResults": "Ez dago bat datorren emaitzarik.",
   "selectSearchNoResults": "Ez da aurkitu bat datorrenik.",
   "selectScrollUpSemanticsLabel": "Egin gora",
-  "selectScrollDownSemanticsLabel": "Egin behera"
+  "selectScrollDownSemanticsLabel": "Egin behera",
+  "paginationPreviousSemanticsLabel": "Aurrekoa",
+  "paginationNextSemanticsLabel": "Hurrengoa"
 }

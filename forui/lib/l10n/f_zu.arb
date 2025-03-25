@@ -18,5 +18,7 @@
   "selectNoResults": "Ayikho imiphumela efanayo.",
   "selectSearchNoResults": "Akukho okufanayo okutholakele.",
   "selectScrollUpSemanticsLabel": "Skrola phezulu",
-  "selectScrollDownSemanticsLabel": "Skrola phansi"
+  "selectScrollDownSemanticsLabel": "Skrola phansi",
+  "paginationPreviousSemanticsLabel": "Okwedlule",
+  "paginationNextSemanticsLabel": "Okulandelayo"
 }

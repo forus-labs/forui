@@ -75,6 +75,12 @@ class FLocalizationsNb extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Tøm';
 
   @override
+  String get paginationPreviousSemanticsLabel => 'Forrige';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Neste';
+
+  @override
   String get shortDateSeparator => '.';
 
   @override

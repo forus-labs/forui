@@ -17,5 +17,7 @@
   "selectSearchHint": "Претрага",
   "selectSearchNoResults": "Није пронађено подударање.",
   "selectScrollUpSemanticsLabel": "Померите нагоре",
-  "selectScrollDownSemanticsLabel": "Померите надоле"
+  "selectScrollDownSemanticsLabel": "Померите надоле",
+  "paginationPrevious": "Претходно",
+  "paginationNext": "Следеће"
 }

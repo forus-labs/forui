@@ -17,5 +17,7 @@
   "selectSearchHint": "Іздеу",
   "selectSearchNoResults": "Сәйкестіктер табылмады.",
   "selectScrollUpSemanticsLabel": "Жоғары айналдыру",
-  "selectScrollDownSemanticsLabel": "Төмен айналдыру"
+  "selectScrollDownSemanticsLabel": "Төмен айналдыру",
+  "paginationPrevious": "Алдыңғы",
+  "paginationNext": "Келесі"
 }

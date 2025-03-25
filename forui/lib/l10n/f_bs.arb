@@ -18,5 +18,7 @@
   "selectNoResults": "Nema odgovarajućih rezultata.",
   "selectSearchNoResults": "Nije pronađeno podudaranje.",
   "selectScrollUpSemanticsLabel": "Pomjerite prema gore",
-  "selectScrollDownSemanticsLabel": "Pomjerite prema dolje"
+  "selectScrollDownSemanticsLabel": "Pomjerite prema dolje",
+  "paginationPreviousSemanticsLabel": "Prethodno",
+  "paginationNextSemanticsLabel": "Sljedeće"
 }

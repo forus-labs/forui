@@ -17,5 +17,7 @@
   "selectSearchHint": "शोधा",
   "selectSearchNoResults": "कोणतेही जुळणारे आढळले नाही.",
   "selectScrollUpSemanticsLabel": "वर स्क्रोल करा",
-  "selectScrollDownSemanticsLabel": "खाली स्क्रोल करा"
+  "selectScrollDownSemanticsLabel": "खाली स्क्रोल करा",
+  "paginationPrevious": "मागील",
+  "paginationNext": "पुढील"
 }

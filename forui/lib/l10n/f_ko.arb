@@ -17,5 +17,7 @@
   "selectSearchHint": "검색",
   "selectSearchNoResults": "일치하는 항목을 찾을 수 없습니다.",
   "selectScrollUpSemanticsLabel": "위로 스크롤",
-  "selectScrollDownSemanticsLabel": "아래로 스크롤"
+  "selectScrollDownSemanticsLabel": "아래로 스크롤",
+  "paginationPrevious": "이전",
+  "paginationNext": "다음"
 }

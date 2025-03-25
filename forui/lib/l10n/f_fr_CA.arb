@@ -18,5 +18,7 @@
   "selectNoResults": "Aucun résultat correspondant.",
   "selectSearchNoResults": "Aucune correspondance trouvée.",
   "selectScrollUpSemanticsLabel": "Faire défiler vers le haut",
-  "selectScrollDownSemanticsLabel": "Faire défiler vers le bas"
+  "selectScrollDownSemanticsLabel": "Faire défiler vers le bas",
+  "paginationPreviousSemanticsLabel": "Précédent",
+  "paginationNextSemanticsLabel": "Suivant"
 }

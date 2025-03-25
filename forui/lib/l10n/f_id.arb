@@ -18,5 +18,7 @@
   "selectNoResults": "Tidak ada hasil yang cocok.",
   "selectSearchNoResults": "Tidak ditemukan kecocokan.",
   "selectScrollUpSemanticsLabel": "Gulir ke atas",
-  "selectScrollDownSemanticsLabel": "Gulir ke bawah"
+  "selectScrollDownSemanticsLabel": "Gulir ke bawah",
+  "paginationPreviousSemanticsLabel": "Sebelumnya",
+  "paginationNextSemanticsLabel": "Berikutnya"
 }

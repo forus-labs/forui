@@ -17,5 +17,7 @@
   "selectSearchHint": "חיפוש",
   "selectSearchNoResults": "לא נמצאו התאמות.",
   "selectScrollUpSemanticsLabel": "גלול למעלה",
-  "selectScrollDownSemanticsLabel": "גלול למטה"
+  "selectScrollDownSemanticsLabel": "גלול למטה",
+  "paginationPrevious": "הקודם",
+  "paginationNext": "הבא"
 }

@@ -18,5 +18,7 @@
   "selectNoResults": "တူညီသည့်ရလဒ်များမရှိပါ။",
   "selectSearchNoResults": "တူညီမှုများ ရှာမတွေ့ပါ။",
   "selectScrollUpSemanticsLabel": "အပေါ်သို့ပွတ်ဆွဲရန်",
-  "selectScrollDownSemanticsLabel": "အောက်သို့ပွတ်ဆွဲရန်"
+  "selectScrollDownSemanticsLabel": "အောက်သို့ပွတ်ဆွဲရန်",
+  "paginationPrevious": "ယခင်",
+  "paginationNext": "ရှေ့သို့"
 }

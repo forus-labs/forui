@@ -18,5 +18,7 @@
   "selectNoResults": "No matching results.",
   "selectSearchNoResults": "No matches found.",
   "selectScrollUpSemanticsLabel": "Scroll up",
-  "selectScrollDownSemanticsLabel": "Scroll down"
+  "selectScrollDownSemanticsLabel": "Scroll down",
+  "paginationPreviousSemanticsLabel": "Previous",
+  "paginationNextSemanticsLabel": "Next"
 }
