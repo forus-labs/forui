@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 part 'accordion.style.dart';
 
-/// A vertically stacked set of interactive headings that each reveal a section of content.
+/// A vertically stacked set of interactive headings, each revealing a section of content.
 ///
 /// See:
 /// * https://forui.dev/docs/data/accordion for working examples.
@@ -45,25 +45,17 @@ class FAccordion extends StatefulWidget {
 }
 
 class _FAccordionState extends State<FAccordion> {
-  late FAccordionController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? FAccordionController();
-  }
+  late FAccordionController _controller = widget.controller ?? FAccordionController();
 
   @override
   void didUpdateWidget(covariant FAccordion old) {
     super.didUpdateWidget(old);
-    if (widget.controller == old.controller) {
-      return;
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      }
+      _controller = widget.controller ?? FAccordionController();
     }
-
-    if (old.controller == null) {
-      _controller.dispose();
-    }
-    _controller = widget.controller ?? FAccordionController();
   }
 
   @override

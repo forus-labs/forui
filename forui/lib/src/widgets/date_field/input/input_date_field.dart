@@ -67,6 +67,17 @@ class _InputDateField extends FDateField {
 
 class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   @override
+  void didUpdateWidget(covariant _InputDateField old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      }
+      _controller = widget.controller ?? FDateFieldController(vsync: this);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.dateFieldStyle;
 
@@ -121,5 +132,13 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
       baselineYear: widget.baselineInputYear,
       builder: builder,
     );
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 }

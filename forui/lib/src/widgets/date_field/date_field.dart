@@ -446,30 +446,5 @@ abstract class FDateField extends StatefulWidget {
 }
 
 abstract class _FDateFieldState<T extends FDateField> extends State<T> with SingleTickerProviderStateMixin {
-  late FDateFieldController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? FDateFieldController(vsync: this);
-  }
-
-  @override
-  void didUpdateWidget(covariant T old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      }
-      _controller = widget.controller ?? FDateFieldController(vsync: this);
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
-  }
+  late FDateFieldController _controller = widget.controller ?? FDateFieldController(vsync: this);
 }
