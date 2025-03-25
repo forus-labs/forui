@@ -37,10 +37,10 @@ class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
             _ => 'None',
           }),
     ),
-    menu: [
-      FSelectTile(title: const Text('All'), value: Notification.all),
-      FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
-      FSelectTile(title: const Text('None'), value: Notification.nothing),
+    menu: const [
+      FSelectTile(title: Text('All'), value: Notification.all),
+      FSelectTile(title: Text('Direct Messages'), value: Notification.direct),
+      FSelectTile(title: Text('None'), value: Notification.nothing),
     ],
   );
 
@@ -85,13 +85,13 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
             null || Notification.nothing => 'None',
           }),
     ),
-    menu: [
-      FSelectTile(title: const Text('All'), value: Notification.all),
-      FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
-      FSelectTile(title: const Text('Limited Time'), value: Notification.limitedTime),
-      FSelectTile(title: const Text('Selected Apps'), value: Notification.selectedApps),
-      FSelectTile(title: const Text('Time Sensitive'), value: Notification.timeSensitive),
-      FSelectTile(title: const Text('None'), value: Notification.nothing),
+    menu: const [
+      FSelectTile(title: Text('All'), value: Notification.all),
+      FSelectTile(title: Text('Direct Messages'), value: Notification.direct),
+      FSelectTile(title: Text('Limited Time'), value: Notification.limitedTime),
+      FSelectTile(title: Text('Selected Apps'), value: Notification.selectedApps),
+      FSelectTile(title: Text('Time Sensitive'), value: Notification.timeSensitive),
+      FSelectTile(title: Text('None'), value: Notification.nothing),
     ],
   );
 
@@ -170,10 +170,10 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
                   _ => 'None',
                 }),
           ),
-          menu: [
-            FSelectTile(title: const Text('All'), value: Notification.all),
-            FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
-            FSelectTile(title: const Text('None'), value: Notification.nothing),
+          menu: const [
+            FSelectTile(title: Text('All'), value: Notification.all),
+            FSelectTile(title: Text('Direct Messages'), value: Notification.direct),
+            FSelectTile(title: Text('None'), value: Notification.nothing),
           ],
         ),
         const SizedBox(height: 20),

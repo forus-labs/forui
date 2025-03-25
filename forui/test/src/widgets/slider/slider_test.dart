@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart' hide Thumb;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +10,37 @@ import 'package:forui/src/widgets/slider/track.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  group('state', () {
+    testWidgets('update controller', (tester) async {
+      final first = FContinuousSliderController(selection: FSliderSelection(max: 0.5));
+      await tester.pumpWidget(TestScaffold(child: FSlider(controller: first)));
+
+      expect(first.hasListeners, true);
+      expect(first.disposed, false);
+
+      final second = FContinuousSliderController(selection: FSliderSelection(max: 0.5));
+      await tester.pumpWidget(TestScaffold(child: FSlider(controller: second)));
+
+      expect(first.hasListeners, false);
+      expect(first.disposed, false);
+      expect(second.hasListeners, true);
+      expect(second.disposed, false);
+    });
+
+    testWidgets('dispose controller', (tester) async {
+      final controller = FContinuousSliderController(selection: FSliderSelection(max: 0.5));
+      await tester.pumpWidget(TestScaffold(child: FSlider(controller: controller)));
+
+      expect(controller.hasListeners, true);
+      expect(controller.disposed, false);
+
+      await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+      expect(controller.hasListeners, false);
+      expect(controller.disposed, false);
+    });
+  });
+
   group('value slider tooltip', () {
     Widget slider({
       FSliderSelection? selection,

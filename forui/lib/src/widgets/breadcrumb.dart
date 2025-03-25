@@ -235,32 +235,25 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 }
 
 class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProviderStateMixin {
-  late FPopoverController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = widget.popoverController ?? FPopoverController(vsync: this);
-  }
+  late FPopoverController _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
 
   @override
   void didUpdateWidget(covariant _CollapsedCrumb old) {
     super.didUpdateWidget(old);
-    if (widget.popoverController == old.popoverController) {
-      return;
-    }
+    if (widget.popoverController != old.popoverController) {
+      if (old.popoverController == null) {
+        _popoverController.dispose();
+      }
 
-    if (old.popoverController != null) {
-      controller.dispose();
+      _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
     }
-    controller = widget.popoverController ?? FPopoverController(vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
     return FPopoverMenu(
-      popoverController: controller,
+      popoverController: _popoverController,
       style: widget.popOverMenuStyle,
       menuAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,
@@ -280,7 +273,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       menu: widget.menu,
       child: FTappable(
         focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
-        onPress: controller.toggle,
+        onPress: _popoverController.toggle,
         child: Padding(
           padding: style.padding,
           child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
@@ -292,7 +285,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
   @override
   void dispose() {
     if (widget.popoverController == null) {
-      controller.dispose();
+      _popoverController.dispose();
     }
     super.dispose();
   }
@@ -300,7 +293,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', controller));
+    properties.add(DiagnosticsProperty('controller', _popoverController));
   }
 }
 

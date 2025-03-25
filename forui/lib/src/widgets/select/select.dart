@@ -353,11 +353,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     _focus = widget.focusNode ?? FocusNode();
     _textController.addListener(_updateSelectController);
     _controller.addListener(_updateTextController);
-    _controller.popover.addListener(() {
-      if (!_controller.popover.shown) {
-        _focus.requestFocus();
-      }
-    });
+    _controller.popover.addListener(_updateFocus);
   }
 
   @override
@@ -372,19 +368,17 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     }
 
     if (widget.controller != old.controller) {
-      old.controller?.removeListener(_updateTextController);
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        old.controller!.popover.removeListener(_updateFocus);
+        old.controller!.removeListener(_updateTextController);
       }
 
       _controller = widget.controller ?? FSelectController(vsync: this);
       _controller.addListener(_updateTextController);
+      _controller.popover.addListener(_updateFocus);
       _updateTextController();
-      _controller.popover.addListener(() {
-        if (!_controller.popover.shown) {
-          _focus.unfocus();
-        }
-      });
     }
   }
 
@@ -416,6 +410,12 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       };
     } finally {
       _mutating = false;
+    }
+  }
+
+  void _updateFocus() {
+    if (!_controller.popover.shown) {
+      _focus.unfocus();
     }
   }
 
@@ -505,11 +505,14 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
   @override
   void dispose() {
-    _controller.removeListener(_updateTextController);
     if (widget.controller == null) {
       _controller.dispose();
+    } else {
+      _controller.popover.removeListener(_updateFocus);
+      _controller.removeListener(_updateTextController);
     }
     _textController.dispose();
+    _focus.dispose();
     super.dispose();
   }
 }

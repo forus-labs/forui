@@ -123,62 +123,67 @@ void main() {
   for (final (name, field) in [
     ('calendar only', (controller, focus) => FDateField.calendar(controller: controller, focusNode: focus)),
     ('input only', (controller, focus) => FDateField.input(controller: controller, focusNode: focus)),
+    ('both', (controller, focus) => FDateField(controller: controller, focusNode: focus)),
   ]) {
-    testWidgets('update controller - $name', (tester) async {
-      final first = FDateFieldController(vsync: tester);
+    group(name, () {
+      testWidgets('update controller', (tester) async {
+        final first = FDateFieldController(vsync: tester);
 
-      await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
 
-      expect(first.hasListeners, true);
-      expect(first.disposed, false);
+        expect(first.hasListeners, true);
+        expect(first.disposed, false);
 
-      final second = FDateFieldController(vsync: tester);
+        final second = FDateFieldController(vsync: tester);
 
-      await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
 
-      expect(first.hasListeners, false);
-      expect(first.disposed, false);
-      expect(second.hasListeners, true);
-      expect(second.disposed, false);
-    });
+        expect(first.hasListeners, false);
+        expect(first.calendar.hasListeners, false);
+        expect(first.disposed, false);
+        expect(second.hasListeners, true);
+        expect(second.disposed, false);
+      });
 
-    testWidgets('dispose controller - $name', (tester) async {
-      final first = FDateFieldController(vsync: tester);
+      testWidgets('dispose controller', (tester) async {
+        final controller = FDateFieldController(vsync: tester);
 
-      await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(controller, null))));
 
-      expect(first.hasListeners, true);
-      expect(first.disposed, false);
+        expect(controller.hasListeners, true);
+        expect(controller.disposed, false);
 
-      await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
+        await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
 
-      expect(first.hasListeners, false);
-      expect(first.disposed, false);
-    });
+        expect(controller.hasListeners, false);
+        expect(controller.calendar.hasListeners, false);
+        expect(controller.disposed, false);
+      });
 
-    testWidgets('update focus - $name', (tester) async {
-      final first = FocusNode();
+      testWidgets('update focus', (tester) async {
+        final first = FocusNode();
 
-      await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
 
-      expect(first.hasListeners, true);
+        expect(first.hasListeners, true);
 
-      final second = FocusNode();
+        final second = FocusNode();
 
-      await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
 
-      expect(first.hasListeners, false);
-      expect(second.hasListeners, true);
-    });
+        expect(first.hasListeners, false);
+        expect(second.hasListeners, true);
+      });
 
-    testWidgets('update focus - $name', (tester) async {
-      final first = FocusNode();
+      testWidgets('dispose focus', (tester) async {
+        final first = FocusNode();
 
-      await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
-      expect(first.hasListeners, true);
+        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+        expect(first.hasListeners, true);
 
-      await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
-      expect(first.hasListeners, false);
+        await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
+        expect(first.hasListeners, false);
+      });
     });
   }
 }

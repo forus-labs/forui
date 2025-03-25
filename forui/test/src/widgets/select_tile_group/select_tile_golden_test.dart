@@ -117,11 +117,11 @@ void main() {
             child: FSelectTileData(
               controller: controller,
               selected: false,
-              child: FSelectTile(
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: const Icon(FIcons.chevronRight),
+              child: const FSelectTile(
+                title: Text('Bluetooth'),
+                subtitle: Text('Fee, Fo, Fum'),
+                details: Text('Forus Labs (5G)'),
+                suffixIcon: Icon(FIcons.chevronRight),
                 value: 1,
               ),
             ),
@@ -141,11 +141,11 @@ void main() {
             child: FSelectTileData(
               controller: controller,
               selected: false,
-              child: FSelectTile(
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: const Icon(FIcons.chevronRight),
+              child: const FSelectTile(
+                title: Text('Bluetooth'),
+                subtitle: Text('Fee, Fo, Fum'),
+                details: Text('Forus Labs (5G)'),
+                suffixIcon: Icon(FIcons.chevronRight),
                 value: 1,
               ),
             ),
@@ -172,12 +172,12 @@ void main() {
             child: FSelectTileData(
               controller: controller,
               selected: false,
-              child: FSelectTile(
+              child: const FSelectTile(
                 enabled: false,
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: const Icon(FIcons.chevronRight),
+                title: Text('Bluetooth'),
+                subtitle: Text('Fee, Fo, Fum'),
+                details: Text('Forus Labs (5G)'),
+                suffixIcon: Icon(FIcons.chevronRight),
                 value: 1,
               ),
             ),
@@ -197,11 +197,11 @@ void main() {
             child: FSelectTileData(
               controller: controller,
               selected: true,
-              child: FSelectTile(
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
-                suffixIcon: const Icon(FIcons.chevronRight),
+              child: const FSelectTile(
+                title: Text('Bluetooth'),
+                subtitle: Text('Fee, Fo, Fum'),
+                details: Text('Forus Labs (5G)'),
+                suffixIcon: Icon(FIcons.chevronRight),
                 value: 1,
               ),
             ),
@@ -221,11 +221,11 @@ void main() {
             child: FSelectTileData(
               controller: controller,
               selected: true,
-              child: FSelectTile.suffix(
-                prefixIcon: const Icon(FIcons.bluetooth),
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
+              child: const FSelectTile.suffix(
+                prefixIcon: Icon(FIcons.bluetooth),
+                title: Text('Bluetooth'),
+                subtitle: Text('Fee, Fo, Fum'),
+                details: Text('Forus Labs (5G)'),
                 value: 1,
               ),
             ),
@@ -245,11 +245,11 @@ void main() {
             child: FSelectTileData(
               controller: controller,
               selected: false,
-              child: FSelectTile.suffix(
-                prefixIcon: const Icon(FIcons.bluetooth),
-                title: const Text('Bluetooth'),
-                subtitle: const Text('Fee, Fo, Fum'),
-                details: const Text('Forus Labs (5G)'),
+              child: const FSelectTile.suffix(
+                prefixIcon: Icon(FIcons.bluetooth),
+                title: Text('Bluetooth'),
+                subtitle: Text('Fee, Fo, Fum'),
+                details: Text('Forus Labs (5G)'),
                 value: 1,
               ),
             ),

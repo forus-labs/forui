@@ -167,32 +167,24 @@ class FPopoverMenu extends StatefulWidget {
 }
 
 class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderStateMixin {
-  late FPopoverController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.popoverController ?? FPopoverController(vsync: this);
-  }
+  late FPopoverController _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
 
   @override
   void didUpdateWidget(covariant FPopoverMenu old) {
     super.didUpdateWidget(old);
-    if (widget.popoverController == old.popoverController) {
-      return;
+    if (widget.popoverController != old.popoverController) {
+      if (old.popoverController == null) {
+        _popoverController.dispose();
+      }
+      _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
     }
-
-    if (old.popoverController != null) {
-      _controller.dispose();
-    }
-    _controller = widget.popoverController ?? FPopoverController(vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverMenuStyle;
     return (widget._automatic ? FPopover.automatic : FPopover.new)(
-      controller: _controller,
+      controller: _popoverController,
       style: style,
       popoverAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,
@@ -224,7 +216,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
   @override
   void dispose() {
     if (widget.popoverController == null) {
-      _controller.dispose();
+      _popoverController.dispose();
     }
     super.dispose();
   }

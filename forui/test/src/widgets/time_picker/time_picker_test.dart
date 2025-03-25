@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -93,6 +95,15 @@ void main() {
 
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller)));
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: const FTimePicker()));
+
+      expect(controller.disposed, false);
+    });
+
+    testWidgets('dispose controller', (tester) async {
+      final controller = FTimePickerController(initial: const FTime(10, 30));
+
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: FTimePicker(controller: controller)));
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: const SizedBox()));
 
       expect(controller.disposed, false);
     });

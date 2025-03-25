@@ -40,12 +40,12 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           divider: widget.divider,
-          children: [
-            FSelectTile(title: const Text('Recents'), suffixIcon: const Icon(FIcons.timer), value: Sidebar.recents),
-            FSelectTile(title: const Text('Home'), suffixIcon: const Icon(FIcons.house), value: Sidebar.home),
+          children: const [
+            FSelectTile(title: Text('Recents'), suffixIcon: Icon(FIcons.timer), value: Sidebar.recents),
+            FSelectTile(title: Text('Home'), suffixIcon: Icon(FIcons.house), value: Sidebar.home),
             FSelectTile(
-              title: const Text('Applications'),
-              suffixIcon: const Icon(FIcons.appWindowMac),
+              title: Text('Applications'),
+              suffixIcon: Icon(FIcons.appWindowMac),
               value: Sidebar.applications,
             ),
           ],
@@ -83,12 +83,12 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           maxHeight: 100,
-          children: [
-            FSelectTile(title: const Text('Recents'), suffixIcon: const Icon(FIcons.timer), value: Sidebar.recents),
-            FSelectTile(title: const Text('Home'), suffixIcon: const Icon(FIcons.house), value: Sidebar.home),
+          children: const [
+            FSelectTile(title: Text('Recents'), suffixIcon: Icon(FIcons.timer), value: Sidebar.recents),
+            FSelectTile(title: Text('Home'), suffixIcon: Icon(FIcons.house), value: Sidebar.home),
             FSelectTile(
-              title: const Text('Applications'),
-              suffixIcon: const Icon(FIcons.appWindowMac),
+              title: Text('Applications'),
+              suffixIcon: Icon(FIcons.appWindowMac),
               value: Sidebar.applications,
             ),
           ],
@@ -162,11 +162,11 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
           label: const Text('Favorite Languages'),
           description: const Text('Your favorite language.'),
           validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
-          children: [
-            FSelectTile(title: const Text('Dart'), value: Language.dart),
-            FSelectTile(title: const Text('Java'), value: Language.java),
-            FSelectTile(title: const Text('Rust'), value: Language.rust),
-            FSelectTile(title: const Text('Python'), value: Language.python),
+          children: const [
+            FSelectTile(title: Text('Dart'), value: Language.dart),
+            FSelectTile(title: Text('Java'), value: Language.java),
+            FSelectTile(title: Text('Rust'), value: Language.rust),
+            FSelectTile(title: Text('Python'), value: Language.python),
           ],
         ),
         const SizedBox(height: 20),
@@ -217,10 +217,10 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-          children: [
-            FSelectTile(title: const Text('All new messages'), value: Notification.all),
-            FSelectTile(title: const Text('Direct messages and mentions'), value: Notification.direct),
-            FSelectTile(title: const Text('Nothing'), value: Notification.nothing),
+          children: const [
+            FSelectTile(title: Text('All new messages'), value: Notification.all),
+            FSelectTile(title: Text('Direct messages and mentions'), value: Notification.direct),
+            FSelectTile(title: Text('Nothing'), value: Notification.nothing),
           ],
         ),
         const SizedBox(height: 20),
@@ -267,11 +267,11 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
         child: FSelectTileGroup(
           selectController: controller,
           label: const Text('Settings'),
-          children: [
-            FSelectTile.suffix(prefixIcon: const Icon(FIcons.list), title: const Text('List View'), value: 'List'),
+          children: const [
+            FSelectTile.suffix(prefixIcon: Icon(FIcons.list), title: Text('List View'), value: 'List'),
             FSelectTile.suffix(
-              prefixIcon: const Icon(FIcons.layoutGrid),
-              title: const Text('Grid View'),
+              prefixIcon: Icon(FIcons.layoutGrid),
+              title: Text('Grid View'),
               value: 'Grid',
             ),
           ],

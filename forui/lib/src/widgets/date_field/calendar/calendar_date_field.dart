@@ -114,11 +114,13 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     }
 
     if (widget.controller != old.controller) {
-      _controller._calendar.removeListener(_updateTextController);
-      _controller.calendar.removeListener(_updateFocus);
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        _controller._calendar.removeListener(_updateTextController);
+        _controller.calendar.removeListener(_updateFocus);
       }
+
       _controller = widget.controller ?? FDateFieldController(vsync: this);
       _controller._calendar.addListener(_updateTextController);
       _controller.calendar.addListener(_updateFocus);

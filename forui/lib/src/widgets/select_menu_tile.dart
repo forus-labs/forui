@@ -446,24 +446,28 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   void didUpdateWidget(covariant FSelectMenuTile<T> old) {
     super.didUpdateWidget(old);
     if (widget.popoverController != old.popoverController) {
-      if (old.popoverController != null) {
+      if (old.popoverController == null) {
         _controller._popover.dispose();
       }
 
       _controller._popover = widget.popoverController ?? FPopoverController(vsync: this);
     }
 
-    if (widget.selectController != old.selectController) {
-      _controller.delegate = widget.selectController;
-    }
-
     _controller.autoHide = old.autoHide;
 
     _controller
-      ..addValueListener(widget.onChange)
-      ..addUpdateListener(widget.onSelect)
       ..removeValueListener(old.onChange)
       ..removeUpdateListener(old.onSelect);
+
+    if (widget.selectController != old.selectController) {
+      widget.selectController.addListener(_handleControllerChanged);
+      old.selectController.removeListener(_handleControllerChanged);
+      _controller.delegate = widget.selectController;
+    }
+
+    _controller
+      ..addValueListener(widget.onChange)
+      ..addUpdateListener(widget.onSelect);
   }
 
   @override
@@ -487,6 +491,10 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     if (widget.popoverController == null) {
       _controller._popover.dispose();
     }
+
+    _controller
+      ..removeValueListener(widget.onChange)
+      ..removeUpdateListener(widget.onSelect);
     super.dispose();
   }
 
@@ -526,7 +534,7 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
 
   @override
   void dispose() {
-    delegate.dispose();
+    // We don't dispose delegate as it is always owned by a parent.
     _popover.dispose();
   }
 

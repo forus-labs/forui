@@ -67,7 +67,6 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   late double _width;
 
   @override
-  @override
   void initState() {
     super.initState();
     _width = _estimateWidth();

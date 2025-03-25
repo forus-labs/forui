@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' hide TextDirection;
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_field/input/time_input.dart';
 import 'package:forui/src/widgets/time_field/picker/properties.dart';
+import 'package:meta/meta.dart';
 
 part 'input/input_time_field.dart';
 
@@ -49,17 +50,22 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
       }
     });
 
-    addValueListener((time) {
-      if (!_mutating && time != null) {
-        _picker.value = time;
-      }
-    });
+    addValueListener(update);
   }
 
   @override
   void dispose() {
     popover.dispose();
     super.dispose();
+  }
+}
+
+@internal
+extension FTimeFieldControllers on FTimeFieldController {
+  void update(FTime? time) {
+    if (!_mutating && time != null) {
+      _picker.value = time;
+    }
   }
 }
 
@@ -315,30 +321,5 @@ abstract class FTimeField extends StatefulWidget {
 }
 
 abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with SingleTickerProviderStateMixin {
-  late FTimeFieldController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? FTimeFieldController(vsync: this);
-  }
-
-  @override
-  void didUpdateWidget(covariant T old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      }
-      _controller = widget.controller ?? FTimeFieldController(vsync: this);
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
-  }
+  late FTimeFieldController _controller = widget.controller ?? FTimeFieldController(vsync: this);
 }

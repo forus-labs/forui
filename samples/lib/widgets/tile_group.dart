@@ -141,9 +141,9 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
       ),
       FSelectTileGroup(
         selectController: controller,
-        children: [
-          FSelectTile(title: const Text('List View'), value: 'List'),
-          FSelectTile(title: const Text('Grid View'), value: 'Grid'),
+        children: const [
+          FSelectTile(title: Text('List View'), value: 'List'),
+          FSelectTile(title: Text('Grid View'), value: 'Grid'),
         ],
       ),
     ],

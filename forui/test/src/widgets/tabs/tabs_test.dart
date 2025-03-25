@@ -80,7 +80,7 @@ void main() {
       expect(find.text('bar content'), findsNothing);
     });
 
-    testWidgets('using internal controller and tapping on tab switches tab entry', (tester) async {
+    testWidgets('tapping on tab with internal controller switches tab entry', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTabs(
@@ -100,7 +100,7 @@ void main() {
       expect(find.text('bar content'), findsOneWidget);
     });
 
-    testWidgets('using external controller and tapping on tab switches tab entry', (tester) async {
+    testWidgets('tapping on tab with external controller switches tab entry', (tester) async {
       final controller = FTabController(length: 2, vsync: tester);
 
       await tester.pumpWidget(
@@ -123,7 +123,7 @@ void main() {
       expect(find.text('bar content'), findsOneWidget);
     });
 
-    testWidgets('using controller to switches tab entry', (tester) async {
+    testWidgets('using controller to switch tab entry', (tester) async {
       final controller = FTabController(length: 2, vsync: tester);
 
       await tester.pumpWidget(
@@ -146,7 +146,7 @@ void main() {
       expect(find.text('bar content'), findsOneWidget);
     });
 
-    testWidgets('old controller is not disposed', (tester) async {
+    testWidgets('update controller', (tester) async {
       final first = FTabController(length: 2, vsync: tester);
       await tester.pumpWidget(
         TestScaffold.app(
@@ -159,6 +159,9 @@ void main() {
           ),
         ),
       );
+
+      expect(first.hasListeners, true);
+      expect(first.disposed, false);
 
       final second = FTabController(length: 2, vsync: tester);
       await tester.pumpWidget(
@@ -173,8 +176,30 @@ void main() {
         ),
       );
 
+      expect(first.hasListeners, false);
       expect(first.disposed, false);
+      expect(second.hasListeners, true);
       expect(second.disposed, false);
+    });
+
+    testWidgets('dispose controller', (tester) async {
+      final controller = FTabController(length: 2, vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            controller: controller,
+            tabs: const [
+              FTabEntry(label: Text('foo'), content: Text('foo content')),
+              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+      expect(controller.hasListeners, false);
+      expect(controller.disposed, false);
     });
   });
 }

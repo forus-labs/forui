@@ -5,5 +5,5 @@
 /// See https://forui.dev/docs/form/time-field for working examples.
 library forui.widgets.time_field;
 
-export '../src/widgets/time_field/time_field.dart';
+export '../src/widgets/time_field/time_field.dart' hide FTimeFieldControllers;
 export '../src/widgets/time_field/time_field_style.dart';

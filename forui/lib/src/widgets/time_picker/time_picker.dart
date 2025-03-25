@@ -73,15 +73,9 @@ class FTimePicker extends StatefulWidget {
 }
 
 class _FTimePickerState extends State<FTimePicker> {
-  late FTimePickerController controller;
+  late FTimePickerController _controller = widget.controller ?? FTimePickerController();
   late DateFormat format;
   late int padding;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = widget.controller ?? FTimePickerController();
-  }
 
   @override
   void didChangeDependencies() {
@@ -94,10 +88,10 @@ class _FTimePickerState extends State<FTimePicker> {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
       if (old.controller == null) {
-        controller.dispose();
+        _controller.dispose();
       }
 
-      controller = widget.controller ?? FTimePickerController();
+      _controller = widget.controller ?? FTimePickerController();
     }
 
     _update();
@@ -112,32 +106,40 @@ class _FTimePickerState extends State<FTimePicker> {
     // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
     // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
     // See https://github.com/flutter/flutter/issues/162972
-    controller
+    _controller
       ..pattern = format.pattern!
       ..hours24 = !format.pattern!.contains('a')
       ..hourInterval = widget.hourInterval
       ..minuteInterval = widget.minuteInterval;
 
-    controller.picker?.dispose();
-    controller.picker = FPickerController(initialIndexes: controller.encode(controller.value));
-    controller.picker?.addListener(() => controller.decode());
+    _controller.picker?.dispose();
+    _controller.picker = FPickerController(initialIndexes: _controller.encode(_controller.value));
+    _controller.picker?.addListener(() => _controller.decode());
   }
 
   @override
   Widget build(BuildContext context) => TimePicker(
-    controller: controller,
+    controller: _controller,
     style: widget.style ?? context.theme.timePickerStyle,
     format: format,
     padding: padding,
-    hourInterval: controller.hourInterval,
-    minuteInterval: controller.minuteInterval,
+    hourInterval: _controller.hourInterval,
+    minuteInterval: _controller.minuteInterval,
   );
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('controller', _controller))
       ..add(DiagnosticsProperty('format', format))
       ..add(IntProperty('padding', padding));
   }
