@@ -269,11 +269,7 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
           label: const Text('Settings'),
           children: const [
             FSelectTile.suffix(prefixIcon: Icon(FIcons.list), title: Text('List View'), value: 'List'),
-            FSelectTile.suffix(
-              prefixIcon: Icon(FIcons.layoutGrid),
-              title: Text('Grid View'),
-              value: 'Grid',
-            ),
+            FSelectTile.suffix(prefixIcon: Icon(FIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),
           ],
         ),
       ),
