@@ -43,7 +43,6 @@ class Item extends StatelessWidget {
     builder:
         (context, selected, _) => FTappable(
           style: style.tappableStyle,
-          focusNode: FocusNode(debugLabel: 'Date: $date'),
           semanticLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
           onPress: () => controller.select(date),
           builder: (context, state, _) {

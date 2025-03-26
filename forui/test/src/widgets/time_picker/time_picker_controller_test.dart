@@ -12,6 +12,10 @@ void main() {
 
   setUp(() => controller = FTimePickerController());
 
+  tearDown(() {
+    controller.dispose();
+  });
+
   for (final (grouping, function) in [
     ('animateTo(...)', (time) => unawaited(controller.animateTo(time))),
     ('set value', (time) => controller.value = time),
@@ -85,6 +89,8 @@ void main() {
   }
 
   testWidgets('dispose()', (tester) async {
+    final controller = FTimePickerController();
+
     await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
 
     controller.dispose();
@@ -128,6 +134,7 @@ void main() {
         );
 
         controller
+          ..picker?.dispose()
           ..picker = FPickerController(initialIndexes: [1, 13, 30])
           ..decode();
 
@@ -140,6 +147,7 @@ void main() {
         );
 
         controller
+          ..picker?.dispose()
           ..picker = FPickerController(initialIndexes: [0, 5, 30])
           ..decode();
 
@@ -152,6 +160,7 @@ void main() {
         await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
 
         controller
+          ..picker?.dispose()
           ..picker = FPickerController(initialIndexes: [13, 30, 1])
           ..decode();
 
@@ -162,6 +171,7 @@ void main() {
         await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
 
         controller
+          ..picker?.dispose()
           ..picker = FPickerController(initialIndexes: [5, 30, 0])
           ..decode();
 
@@ -174,6 +184,7 @@ void main() {
         await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller, hour24: true)));
 
         controller
+          ..picker?.dispose()
           ..picker = FPickerController(initialIndexes: [14, 30])
           ..decode();
 
@@ -186,6 +197,7 @@ void main() {
         );
 
         controller
+          ..picker?.dispose()
           ..picker = FPickerController(initialIndexes: [2, 30])
           ..decode();
 
@@ -198,6 +210,7 @@ void main() {
         );
 
         controller
+          ..picker?.dispose()
           ..picker = FPickerController(initialIndexes: [14, 7])
           ..decode();
 

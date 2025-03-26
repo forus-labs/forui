@@ -4,8 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 import '../../test_scaffold.dart';
 
+// TODO: Enable leak testing once FCalendar is reimplemented.
 void main() {
   final selected = {
     DateTime.utc(2024, 7, 4),
@@ -34,7 +36,7 @@ void main() {
         );
 
         await expectBlueScreen(find.byType(TestScaffold));
-      });
+      }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
       testWidgets('year picker', (tester) async {
         await tester.pumpWidget(
@@ -54,7 +56,7 @@ void main() {
         );
 
         await expectBlueScreen(find.byType(TestScaffold));
-      });
+      }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
     });
 
     for (final theme in TestScaffold.themes) {
@@ -86,7 +88,7 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/day-picker/default.png'),
           );
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
         testWidgets('max rows - ${theme.name}', (tester) async {
           await tester.pumpWidget(
@@ -105,7 +107,7 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/day-picker/max-rows.png'),
           );
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
         testWidgets('hovered and selected dates next to each other - ${theme.name}', (tester) async {
           await tester.pumpWidget(
@@ -135,7 +137,7 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/day-picker/hovered-selected.png'),
           );
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
         testWidgets('disabled previous icon - ${theme.name}', (tester) async {
           await tester.pumpWidget(
@@ -154,7 +156,7 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/day-picker/disabled-previous.png'),
           );
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
       });
 
       group('month picker', () {
@@ -187,7 +189,7 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/month-picker/default.png'),
           );
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
       });
 
       group('year picker', () {
@@ -209,7 +211,7 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/year-picker/default.png'),
           );
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
         testWidgets('initial date different from today - ${theme.name}', (tester) async {
           await tester.pumpWidget(
@@ -238,7 +240,7 @@ void main() {
             find.byType(TestScaffold),
             matchesGoldenFile('calendar/${theme.name}/year-picker/initial-date.png'),
           );
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
         testWidgets('RTL - ${theme.name}', (tester) async {
           await tester.pumpWidget(
@@ -265,7 +267,7 @@ void main() {
           await tester.pumpAndSettle();
 
           await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/${theme.name}/day-picker/rtl.png'));
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
       });
     }
   });

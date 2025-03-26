@@ -7,11 +7,19 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  late FTooltipController controller;
+
+  setUp(() {
+    controller = FTooltipController(vsync: const TestVSync());
+  });
+
+  tearDown(() {
+    controller.dispose();
+  });
+
   for (final theme in TestScaffold.themes) {
     group('FTooltip', () {
       testWidgets('${theme.name} hidden ', (tester) async {
-        final controller = FTooltipController(vsync: const TestVSync());
-
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
@@ -27,8 +35,6 @@ void main() {
       });
 
       testWidgets('${theme.name} shown on touch devices', (tester) async {
-        final controller = FTooltipController(vsync: const TestVSync());
-
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,

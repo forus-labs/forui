@@ -13,6 +13,8 @@ void main() {
 
   setUp(() => controller = FPopoverController(vsync: const TestVSync()));
 
+  tearDown(() => controller.dispose());
+
   group('FPopover', () {
     testWidgets('tap outside hides popover', (tester) async {
       await tester.pumpWidget(
@@ -182,36 +184,9 @@ void main() {
     });
   });
 
-  testWidgets('old controller is not disposed', (tester) async {
-    final first = FPopoverController(vsync: tester);
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FPopover.automatic(
-          controller: first,
-          popoverBuilder: (context, style, _) => const Text('popover'),
-          child: Container(color: Colors.black, height: 10, width: 10),
-        ),
-      ),
-    );
-
-    final second = FPopoverController(vsync: tester);
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FPopover.automatic(
-          controller: second,
-          popoverBuilder: (context, style, _) => const Text('popover'),
-          child: Container(color: Colors.black, height: 10, width: 10),
-        ),
-      ),
-    );
-
-    expect(first.disposed, false);
-    expect(second.disposed, false);
-  });
-
   group('state', () {
     testWidgets('update controller', (tester) async {
-      final first = FPopoverController(vsync: tester);
+      final first = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FPopover(
@@ -225,7 +200,7 @@ void main() {
       expect(first.hasListeners, false);
       expect(first.disposed, false);
 
-      final second = FPopoverController(vsync: tester);
+      final second = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FPopover(
@@ -243,7 +218,7 @@ void main() {
     });
 
     testWidgets('dispose controller', (tester) async {
-      final controller = FPopoverController(vsync: tester);
+      final controller = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FPopover(
@@ -263,6 +238,4 @@ void main() {
       expect(controller.disposed, false);
     });
   });
-
-  tearDown(() => controller.dispose());
 }

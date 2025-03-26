@@ -156,6 +156,7 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
+    _curve.dispose();
     _controller.dispose();
     super.dispose();
   }

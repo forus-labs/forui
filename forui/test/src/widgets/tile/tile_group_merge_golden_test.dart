@@ -333,7 +333,7 @@ void main() {
         // The rounded corners will not be colored properly. This is a known issue that's a side effect of clipping the
         // tiles. There isn't a known, straightforward solution to this. It is minor enough that it is acceptable.
         testWidgets('focused on non-first bottom viewport - ${theme.name} - $divider', (tester) async {
-          final focusNode = FocusNode();
+          final focusNode = autoDispose(FocusNode());
 
           await tester.pumpWidget(
             TestScaffold(

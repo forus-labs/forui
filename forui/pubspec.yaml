@@ -40,6 +40,7 @@ dev_dependencies:
     sdk: flutter
   forui_internal_gen:
   http: ^1.2.2
+  leak_tracker_flutter_testing: any
   mockito: ^5.4.4
 
 # For information on the generic Dart part of this file, see the

@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: FMultiValueNotifier(),
+          controller: autoDispose(FMultiValueNotifier()),
           onChange: (_) => changes++,
           onSelect: (value) {
             selections++;
@@ -37,7 +37,7 @@ void main() {
   });
 
   testWidgets('update callbacks', (tester) async {
-    final controller = FMultiValueNotifier<int>();
+    final controller = autoDispose(FMultiValueNotifier<int>());
 
     var firstChanges = 0;
     var firstSelections = 0;
@@ -94,7 +94,7 @@ void main() {
   });
 
   testWidgets('update controller', (tester) async {
-    final first = FMultiValueNotifier<int>();
+    final first = autoDispose(FMultiValueNotifier<int>());
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
@@ -109,7 +109,7 @@ void main() {
     expect(first.hasListeners, true);
     expect(first.disposed, false);
 
-    final second = FMultiValueNotifier<int>();
+    final second = autoDispose(FMultiValueNotifier<int>());
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
@@ -128,7 +128,7 @@ void main() {
   });
 
   testWidgets('dispose controller', (tester) async {
-    final controller = FMultiValueNotifier<int>();
+    final controller = autoDispose(FMultiValueNotifier<int>());
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(

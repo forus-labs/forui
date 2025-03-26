@@ -10,7 +10,7 @@ import '../../test_scaffold.dart';
 void main() {
   group('FBreadcrumb.collapsed', () {
     testWidgets('update controller', (tester) async {
-      final first = FPopoverController(vsync: tester);
+      final first = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FBreadcrumb(
@@ -29,7 +29,7 @@ void main() {
       expect(first.hasListeners, false);
       expect(first.disposed, false);
 
-      final second = FPopoverController(vsync: tester);
+      final second = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FBreadcrumb(
@@ -52,7 +52,7 @@ void main() {
     });
 
     testWidgets('dispose controller', (tester) async {
-      final controller = FPopoverController(vsync: tester);
+      final controller = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FBreadcrumb(

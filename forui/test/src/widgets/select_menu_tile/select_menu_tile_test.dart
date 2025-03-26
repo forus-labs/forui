@@ -12,6 +12,8 @@ void main() {
 
   setUp(() => controller = FMultiValueNotifier.radio());
 
+  tearDown(() => controller.dispose());
+
   group('FSelectMenuTile', () {
     testWidgets('tap on tile opens menu', (tester) async {
       await tester.pumpWidget(
@@ -99,7 +101,7 @@ void main() {
 
   group('state', () {
     testWidgets('update callbacks', (tester) async {
-      final controller = FMultiValueNotifier<int>();
+      final controller = autoDispose(FMultiValueNotifier<int>());
 
       var firstChanges = 0;
       var firstSelections = 0;
@@ -165,8 +167,8 @@ void main() {
     });
 
     testWidgets('update controller', (tester) async {
-      final firstController = FMultiValueNotifier<int>();
-      final firstPopoverController = FPopoverController(vsync: tester);
+      final firstController = autoDispose(FMultiValueNotifier<int>());
+      final firstPopoverController = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
@@ -186,8 +188,8 @@ void main() {
       expect(firstPopoverController.hasListeners, false);
       expect(firstPopoverController.disposed, false);
 
-      final secondController = FMultiValueNotifier<int>(values: {1});
-      final secondPopoverController = FPopoverController(vsync: tester);
+      final secondController = autoDispose(FMultiValueNotifier<int>(values: {1}));
+      final secondPopoverController = autoDispose(FPopoverController(vsync: tester));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -215,8 +217,8 @@ void main() {
     });
 
     testWidgets('dispose controller', (tester) async {
-      final controller = FMultiValueNotifier<int>();
-      final popoverController = FPopoverController(vsync: tester);
+      final controller = autoDispose(FMultiValueNotifier<int>());
+      final popoverController = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
@@ -246,6 +248,4 @@ void main() {
       expect(popoverController.disposed, false);
     });
   });
-
-  tearDown(() => controller.dispose());
 }

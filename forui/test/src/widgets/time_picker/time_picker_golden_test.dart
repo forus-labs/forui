@@ -42,7 +42,7 @@ void main() {
       ('Western 24-hour interval', const Locale('en'), true, 2, 5, 'western-24-interval.png'),
     ]) {
       testWidgets('${theme.name} $name', (tester) async {
-        controller = FTimePickerController(initial: const FTime(10, 30));
+        controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -71,7 +71,7 @@ void main() {
     // emit a scroll notification that crosses said boundary.
     for (final locale in [const Locale('ar'), const Locale('en')]) {
       testWidgets('11am to 12pm - $locale', (tester) async {
-        controller = FTimePickerController(initial: const FTime(10));
+        controller = autoDispose(FTimePickerController(initial: const FTime(10)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -92,7 +92,7 @@ void main() {
       });
 
       testWidgets('11pm to 12am - $locale', (tester) async {
-        controller = FTimePickerController(initial: const FTime(22));
+        controller = autoDispose(FTimePickerController(initial: const FTime(22)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -113,7 +113,7 @@ void main() {
       });
 
       testWidgets('12pm to 11am - $locale', (tester) async {
-        controller = FTimePickerController(initial: const FTime(13));
+        controller = autoDispose(FTimePickerController(initial: const FTime(13)));
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -134,7 +134,7 @@ void main() {
       });
 
       testWidgets('12am to 11pm - $locale', (tester) async {
-        controller = FTimePickerController(initial: const FTime(1));
+        controller = autoDispose(FTimePickerController(initial: const FTime(1)));
 
         await tester.pumpWidget(
           TestScaffold.app(

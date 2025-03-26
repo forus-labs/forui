@@ -8,12 +8,18 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FPagination', () {
+    late FPaginationController controller;
+
+    setUp(() => controller = FPaginationController(pages: 10));
+
+    tearDown(() => controller.dispose());
+
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FPagination(
             style: TestScaffold.blueScreen.paginationStyle,
-            controller: FPaginationController(pages: 10),
+            controller: controller,
           ),
         ),
       );
@@ -24,17 +30,19 @@ void main() {
     for (final theme in TestScaffold.themes) {
       testWidgets('default', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(theme: theme.data, child: FPagination(controller: FPaginationController(pages: 10))),
+          TestScaffold(theme: theme.data, child: FPagination(controller: controller)),
         );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/default.png'));
       });
 
       testWidgets('hide edges', (tester) async {
+        final controller = autoDispose(FPaginationController(pages: 10, showEdges: false));
+
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(pages: 10, showEdges: false)),
+            child: FPagination(controller: controller),
           ),
         );
 
@@ -48,7 +56,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(pages: 10, siblings: 0, initialPage: 2)),
+            child: FPagination(controller: autoDispose(FPaginationController(pages: 10, siblings: 0, initialPage: 2))),
           ),
         );
         await tester.tap(find.byType(Action).last);
@@ -61,7 +69,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPagination(controller: FPaginationController(pages: 14, siblings: 2)),
+            child: FPagination(controller: autoDispose(FPaginationController(pages: 14, siblings: 2))),
           ),
         );
         await tester.tap(find.text('7'));
@@ -72,7 +80,8 @@ void main() {
 
       testWidgets('custom icon', (tester) async {
         final style = theme.data.paginationStyle;
-        final controller = FPaginationController(pages: 10, initialPage: 4);
+        final controller = autoDispose(FPaginationController(pages: 10, initialPage: 4));
+
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,

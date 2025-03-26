@@ -8,11 +8,15 @@ import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
 
 void main() {
+  late FocusNode focusNode;
+
+  setUp(() => focusNode = FocusNode());
+
+  tearDown(() => focusNode.dispose());
+
   group('FTappable', () {
     for (final enabled in [true, false]) {
       testWidgets('focused - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
-        final focusNode = FocusNode();
-
         await tester.pumpWidget(
           TestScaffold(
             child: FTappable(
@@ -175,8 +179,6 @@ void main() {
   group('FTappable.static', () {
     for (final enabled in [true, false]) {
       testWidgets('focused - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
-        final focusNode = FocusNode();
-
         await tester.pumpWidget(
           TestScaffold(
             child: FTappable.static(

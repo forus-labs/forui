@@ -12,13 +12,13 @@ import '../../test_scaffold.dart';
 void main() {
   group('state', () {
     testWidgets('update controller', (tester) async {
-      final first = FContinuousSliderController(selection: FSliderSelection(max: 0.5));
+      final first = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5)));
       await tester.pumpWidget(TestScaffold(child: FSlider(controller: first)));
 
       expect(first.hasListeners, true);
       expect(first.disposed, false);
 
-      final second = FContinuousSliderController(selection: FSliderSelection(max: 0.5));
+      final second = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5)));
       await tester.pumpWidget(TestScaffold(child: FSlider(controller: second)));
 
       expect(first.hasListeners, false);
@@ -28,7 +28,7 @@ void main() {
     });
 
     testWidgets('dispose controller', (tester) async {
-      final controller = FContinuousSliderController(selection: FSliderSelection(max: 0.5));
+      final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5)));
       await tester.pumpWidget(TestScaffold(child: FSlider(controller: controller)));
 
       expect(controller.hasListeners, true);
@@ -47,10 +47,10 @@ void main() {
       FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
     }) => TestScaffold.app(
       child: FSlider(
-        controller: FContinuousSliderController(
+        controller: autoDispose(FContinuousSliderController(
           selection: selection ?? FSliderSelection(max: 0.75),
           allowedInteraction: interaction,
-        ),
+        )),
       ),
     );
 
@@ -117,7 +117,7 @@ void main() {
     Widget slider({FSliderSelection? selection}) => TestScaffold.app(
       theme: FThemes.zinc.light,
       child: FSlider(
-        controller: FContinuousSliderController.range(selection: selection ?? FSliderSelection(max: 0.75)),
+        controller: autoDispose(FContinuousSliderController.range(selection: selection ?? FSliderSelection(max: 0.75))),
       ),
     );
 
@@ -151,7 +151,7 @@ void main() {
       padded: false,
       child: FSlider(
         layout: layout,
-        controller: controller,
+        controller: autoDispose(controller),
         marks: const [
           FSliderMark(value: 0),
           FSliderMark(value: 0.25),
