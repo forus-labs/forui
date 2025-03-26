@@ -47,10 +47,12 @@ void main() {
       FSliderInteraction interaction = FSliderInteraction.tapAndSlideThumb,
     }) => TestScaffold.app(
       child: FSlider(
-        controller: autoDispose(FContinuousSliderController(
-          selection: selection ?? FSliderSelection(max: 0.75),
-          allowedInteraction: interaction,
-        )),
+        controller: autoDispose(
+          FContinuousSliderController(
+            selection: selection ?? FSliderSelection(max: 0.75),
+            allowedInteraction: interaction,
+          ),
+        ),
       ),
     );
 

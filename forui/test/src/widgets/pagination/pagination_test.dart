@@ -60,9 +60,11 @@ void main() {
 
     testWidgets('notifyListener', (tester) async {
       int notifyCount = 0;
-      final controller = autoDispose(FPaginationController(pages: 10)..addListener(() {
-        notifyCount++;
-      }));
+      final controller = autoDispose(
+        FPaginationController(pages: 10)..addListener(() {
+          notifyCount++;
+        }),
+      );
 
       await tester.pumpWidget(TestScaffold(child: FPagination(controller: controller)));
 

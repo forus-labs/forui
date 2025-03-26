@@ -49,7 +49,9 @@ void main() {
                     style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
                     label: const Text('Label'),
                     description: const Text('Description'),
-                    controller: autoDispose(FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60))),
+                    controller: autoDispose(
+                      FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
+                    ),
                     layout: layout,
                     enabled: enabled,
                     trackMainAxisExtent: 300,
@@ -97,7 +99,9 @@ void main() {
                   label: const Text('Label'),
                   description: const Text('Description'),
                   forceErrorText: 'Error',
-                  controller: autoDispose(FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60))),
+                  controller: autoDispose(
+                    FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
+                  ),
                   layout: layout,
                   trackMainAxisExtent: 300,
                   marks: const [
@@ -136,7 +140,9 @@ void main() {
                   label: const Text('Label'),
                   description: const Text('Description'),
                   forceErrorText: 'Error',
-                  controller: autoDispose(FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60))),
+                  controller: autoDispose(
+                    FContinuousSliderController.range(selection: FSliderSelection(min: 0.30, max: 0.60)),
+                  ),
                   layout: layout,
                   trackMainAxisExtent: 300,
                   marks: const [
@@ -173,10 +179,9 @@ void main() {
           await tester.pumpWidget(
             TestScaffold.app(
               child: FSlider(
-                controller: autoDispose(FContinuousSliderController(
-                  minExtendable: min,
-                  selection: FSliderSelection(min: 0.30, max: 0.60),
-                )),
+                controller: autoDispose(
+                  FContinuousSliderController(minExtendable: min, selection: FSliderSelection(min: 0.30, max: 0.60)),
+                ),
                 layout: layout,
                 marks: const [
                   FSliderMark(value: 0.0, label: Text('0')),

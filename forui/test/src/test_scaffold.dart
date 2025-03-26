@@ -16,8 +16,6 @@ MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen
 
 Future<void> expectBlueScreen(dynamic actual) => expectLater(actual, isBlueScreen);
 
-
-
 T autoDispose<T>(T disposable) {
   // We cast this to dynamic as there isn't a standard Disposable interface.
   addTearDown((disposable as dynamic).dispose);
@@ -33,8 +31,6 @@ extension WidgetTesters on WidgetTester {
     return gesture;
   }
 }
-
-
 
 class TestScaffold extends StatelessWidget {
   static final blueScreen = () {

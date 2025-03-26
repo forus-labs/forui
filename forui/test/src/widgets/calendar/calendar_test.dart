@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 
 import 'package:forui/forui.dart';
-import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 import '../../test_scaffold.dart';
 
 // TODO : enable leak testing when calendar is reimplemented.

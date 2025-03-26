@@ -159,7 +159,7 @@ class _FResizableState extends State<FResizable> {
   @override
   Widget build(BuildContext context) {
     assert(
-    _controller.regions.length == widget.children.length,
+      _controller.regions.length == widget.children.length,
       'The number of FResizableData should be equal to the number of children.',
     );
 

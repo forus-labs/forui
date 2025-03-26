@@ -115,10 +115,7 @@ FPersistentSheetController showFPersistentSheet({
     rethrow;
   }
 
-
-
   controller.show();
-
 
   return controller;
 }
