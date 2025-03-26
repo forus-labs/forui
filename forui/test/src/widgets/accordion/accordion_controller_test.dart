@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/src/widgets/accordion/accordion_controller.dart';
+import '../../test_scaffold.dart';
 
 void main() {
   group('FAccordionController', () {
@@ -130,7 +131,7 @@ void main() {
           ..value = 1;
 
         final controller =
-            FAccordionController(min: 1, max: 1)
+            autoDispose(FAccordionController(min: 1, max: 1))
               ..addListener(() => count++)
               ..addItem(0, first)
               ..addItem(1, second);

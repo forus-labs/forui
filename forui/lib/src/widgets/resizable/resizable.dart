@@ -26,7 +26,7 @@ class FResizable extends StatefulWidget {
       '${left.extent.current}, ${right.extent.current}';
 
   /// The controller that manages the resizing of regions. Defaults to [FResizableController.cascade].
-  final FResizableController controller;
+  final FResizableController? controller;
 
   /// The resizable' style.
   final FResizableStyle? style;
@@ -70,12 +70,12 @@ class FResizable extends StatefulWidget {
   FResizable({
     required this.axis,
     required this.children,
+    this.controller,
     this.style,
     this.divider = FResizableDivider.dividerWithThumb,
     this.crossAxisExtent,
     this.resizePercentage = 0.005,
     this.semanticFormatterCallback = _label,
-    FResizableController? controller,
     double? hitRegionExtent,
     super.key,
   }) : assert(
@@ -86,7 +86,6 @@ class FResizable extends StatefulWidget {
          hitRegionExtent == null || 0 < hitRegionExtent,
          'The hitRegionExtent should be positive, but is $hitRegionExtent.',
        ),
-       controller = controller ?? FResizableController.cascade(),
        hitRegionExtent = hitRegionExtent ?? (Touch.primary ? 60 : 10);
 
   @override
@@ -109,6 +108,8 @@ class FResizable extends StatefulWidget {
 }
 
 class _FResizableState extends State<FResizable> {
+  late FResizableController _controller = widget.controller ?? FResizableController.cascade();
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -118,6 +119,14 @@ class _FResizableState extends State<FResizable> {
   @override
   void didUpdateWidget(FResizable old) {
     super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      }
+
+      _controller = widget.controller ?? FResizableController.cascade();
+    }
+
     if (widget.axis != old.axis ||
         widget.crossAxisExtent != old.crossAxisExtent ||
         widget.controller != old.controller ||
@@ -143,14 +152,14 @@ class _FResizableState extends State<FResizable> {
         ),
     ];
 
-    widget.controller.regions.clear();
-    widget.controller.regions.addAll(regions);
+    _controller.regions.clear();
+    _controller.regions.addAll(regions);
   }
 
   @override
   Widget build(BuildContext context) {
     assert(
-      widget.controller.regions.length == widget.children.length,
+      _controller.regions.length == widget.children.length,
       'The number of FResizableData should be equal to the number of children.',
     );
 
@@ -161,7 +170,7 @@ class _FResizableState extends State<FResizable> {
         child: LayoutBuilder(
           builder:
               (_, constraints) => ListenableBuilder(
-                listenable: widget.controller,
+                listenable: _controller,
                 builder:
                     (_, _) => Stack(
                       children: [
@@ -170,16 +179,16 @@ class _FResizableState extends State<FResizable> {
                           children: [
                             for (final (i, child) in widget.children.indexed)
                               InheritedData(
-                                controller: widget.controller,
+                                controller: _controller,
                                 axis: widget.axis,
-                                data: widget.controller.regions[i],
+                                data: _controller.regions[i],
                                 child: child,
                               ),
                           ],
                         ),
                         for (var i = 0; i < widget.children.length - 1; i++)
                           HorizontalDivider(
-                            controller: widget.controller,
+                            controller: _controller,
                             style: style.horizontalDividerStyle,
                             type: widget.divider,
                             left: i,
@@ -202,7 +211,7 @@ class _FResizableState extends State<FResizable> {
         child: LayoutBuilder(
           builder:
               (_, constraints) => ListenableBuilder(
-                listenable: widget.controller,
+                listenable: _controller,
                 builder:
                     (_, _) => Stack(
                       children: [
@@ -211,16 +220,16 @@ class _FResizableState extends State<FResizable> {
                           children: [
                             for (final (i, child) in widget.children.indexed)
                               InheritedData(
-                                controller: widget.controller,
+                                controller: _controller,
                                 axis: widget.axis,
-                                data: widget.controller.regions[i],
+                                data: _controller.regions[i],
                                 child: child,
                               ),
                           ],
                         ),
                         for (var i = 0; i < widget.children.length - 1; i++)
                           VerticalDivider(
-                            controller: widget.controller,
+                            controller: _controller,
                             style: style.verticalDividerStyle,
                             type: widget.divider,
                             left: i,
@@ -238,6 +247,12 @@ class _FResizableState extends State<FResizable> {
         ),
       );
     }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
 

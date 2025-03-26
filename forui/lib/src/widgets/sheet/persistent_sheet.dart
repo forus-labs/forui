@@ -95,20 +95,25 @@ FPersistentSheetController showFPersistentSheet({
     onDispose: () => state._remove(key!),
   );
 
-  state._add(
-    controller,
-    Sheet(
-      controller: controller._controller,
-      style: style,
-      side: side,
-      mainAxisMaxRatio: mainAxisMaxRatio,
-      constraints: constraints,
-      draggable: draggable,
-      anchorPoint: anchorPoint,
-      useSafeArea: useSafeArea,
-      builder: (context) => builder(context, controller),
-    ),
-  );
+  try {
+    state._add(
+      controller,
+      Sheet(
+        controller: controller._controller,
+        style: style,
+        side: side,
+        mainAxisMaxRatio: mainAxisMaxRatio,
+        constraints: constraints,
+        draggable: draggable,
+        anchorPoint: anchorPoint,
+        useSafeArea: useSafeArea,
+        builder: (context) => builder(context, controller),
+      ),
+    );
+  } catch (_) {
+    controller.dispose();
+    rethrow;
+  }
 
   controller.show();
 
@@ -147,8 +152,7 @@ class FPersistentSheetController {
         object: this,
       );
     }
-
-    _controller.addStatusListener((status) => setState.call(() {}));
+    _controller.addStatusListener((status) => setState(() {}));
   }
 
   /// Shows the sheet if it is hidden.
@@ -167,6 +171,9 @@ class FPersistentSheetController {
   void dispose() {
     _controller.dispose();
     _onDispose();
+    if (kFlutterMemoryAllocationsEnabled) {
+      FlutterMemoryAllocations.instance.dispatchObjectDisposed(object: this);
+    }
   }
 }
 

@@ -23,6 +23,7 @@ void main() {
           for (final element in find.byType(Image).evaluate()) {
             final Image widget = element.widget as Image;
             final ImageProvider image = widget.image;
+
             await precacheImage(image, element);
             await tester.pumpAndSettle();
           }

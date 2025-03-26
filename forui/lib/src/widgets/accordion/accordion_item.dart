@@ -66,7 +66,8 @@ class FAccordionItem extends StatefulWidget {
 }
 
 class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController? _controller;
+  CurvedAnimation? _curved;
   late Animation<double> _animation;
 
   @override
@@ -74,17 +75,20 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     super.didChangeDependencies();
 
     final FAccordionItemData(:index, :controller, :style) = FAccordionItemData.of(context);
-    if (controller.removeItem(index)) {
-      _controller.dispose();
-    }
+    controller.removeItem(index);
 
+    _controller?.dispose();
     _controller =
         AnimationController(vsync: this)
           ..value = widget.initiallyExpanded ? 1 : 0
           ..duration = style.animationDuration;
-    _animation = Tween<double>(begin: 0, end: 100).animate(CurvedAnimation(curve: Curves.ease, parent: _controller));
 
-    if (!controller.addItem(index, _controller)) {
+    _curved?.dispose();
+    _curved = CurvedAnimation(curve: Curves.ease, parent: _controller!);
+
+    _animation = Tween<double>(begin: 0, end: 100).animate(_curved!);
+
+    if (!controller.addItem(index, _controller!)) {
       throw StateError('Number of expanded items must be within the min and max.');
     }
   }
@@ -129,7 +133,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                       ),
                     ),
                 child: Transform.rotate(
-                  angle: (_controller.value * angle + 90) * math.pi / 180.0,
+                  angle: (_controller!.value * angle + 90) * math.pi / 180.0,
                   child: IconTheme(data: style.iconStyle, child: widget.icon),
                 ),
               ),
@@ -137,9 +141,9 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
               // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
               // child to layout at a smaller size while the amount of padding remains the same.
               _Expandable(
-                value: _controller.value,
+                value: _controller!.value,
                 child: ClipRect(
-                  clipper: _Clipper(_controller.value),
+                  clipper: _Clipper(_controller!.value),
                   child: Padding(
                     padding: style.childPadding,
                     child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
@@ -154,7 +158,8 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
 
   @override
   void dispose() {
-    _controller.dispose();
+    _curved?.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 }

@@ -1,15 +1,17 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
+// TODO : enable leak testing when calendar is reimplemented.
 void main() {
   group('FCalendar', () {
     testWidgets('initial type changes', (tester) async {
-      final controller = FCalendarController.date(initialSelection: DateTime(2024, 7, 14));
-      final type = ValueNotifier(FCalendarPickerType.yearMonth);
+      final controller = autoDispose(FCalendarController.date(initialSelection: DateTime(2024, 7, 14)));
+      final type = autoDispose(ValueNotifier(FCalendarPickerType.yearMonth));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -33,10 +35,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('2023'), findsOneWidget);
-    });
+    }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
     testWidgets('initial month changes', (tester) async {
-      final controller = FCalendarController.date(initialSelection: DateTime(2024, 7, 14));
+      final controller = autoDispose(FCalendarController.date(initialSelection: DateTime(2024, 7, 14)));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -64,14 +66,16 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('June 2024'), findsOneWidget);
-    });
+    }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
     group('previous button', () {
       testWidgets('navigates to previous page', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FCalendar(
-              controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              controller: autoDispose(
+                FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              ),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -85,13 +89,15 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('June 2024'), findsOneWidget);
-      });
+      }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
       testWidgets('did not navigate to previous page', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FCalendar(
-              controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              controller: autoDispose(
+                FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              ),
               start: DateTime(2024, 7),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -105,7 +111,7 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
         expect(find.text('June 2024'), findsNothing);
-      });
+      }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
     });
 
     group('next button', () {
@@ -113,7 +119,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FCalendar(
-              controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              controller: autoDispose(
+                FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              ),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 8, 10),
               today: DateTime(2024, 7, 14),
@@ -127,13 +135,15 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('August 2024'), findsOneWidget);
-      });
+      }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
       testWidgets('did not navigate to next page', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FCalendar(
-              controller: FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              controller: autoDispose(
+                FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2)),
+              ),
               start: DateTime(2024),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -147,22 +157,28 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('August 2024'), findsNothing);
-      });
+      }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
     });
 
     group('year month picker', () {
+      late FCalendarController<Set<DateTime>> controller;
       late Widget calendar;
 
       setUp(() {
+        controller = FCalendarController.dates();
         calendar = TestScaffold.app(
           child: FCalendar(
             initialType: FCalendarPickerType.yearMonth,
-            controller: FCalendarController.dates(),
+            controller: controller,
             start: DateTime(2023, 2, 8),
             end: DateTime(2025, 8, 10),
             today: DateTime(2024, 7, 14),
           ),
         );
+      });
+
+      tearDown(() {
+        controller.dispose();
       });
 
       for (final (year, mmm, mmmm) in [(2023, 'Feb', 'February'), (2025, 'Aug', 'August')]) {
@@ -182,7 +198,7 @@ void main() {
           await tester.pumpAndSettle(const Duration(seconds: 1));
 
           expect(find.text('$mmmm $year'), findsOneWidget);
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
       }
 
       testWidgets('select year out of range', (tester) async {
@@ -195,7 +211,7 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
         expect(find.text('July 2026'), findsNothing);
-      });
+      }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 
       for (final (year, mmm, mmmm) in [(2023, 'Jan', 'January'), (2025, 'Sep', 'September')]) {
         testWidgets('select $year $mmmm out of range', (tester) async {
@@ -214,7 +230,7 @@ void main() {
           await tester.pumpAndSettle(const Duration(seconds: 1));
 
           expect(find.text('$mmmm $year'), findsNothing);
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
       }
 
       for (final (year, month) in [(2023, 'September'), (2025, 'May')]) {
@@ -223,7 +239,7 @@ void main() {
             TestScaffold.app(
               child: FCalendar(
                 initialType: FCalendarPickerType.yearMonth,
-                controller: FCalendarController.dates(),
+                controller: autoDispose(FCalendarController.dates()),
                 start: DateTime(2023, 9, 8),
                 end: DateTime(2025, 5, 10),
                 today: DateTime(2024, 7, 14),
@@ -238,7 +254,7 @@ void main() {
           await tester.pumpAndSettle(const Duration(seconds: 1));
 
           expect(find.text('$month $year'), findsOneWidget);
-        });
+        }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
       }
     });
   });

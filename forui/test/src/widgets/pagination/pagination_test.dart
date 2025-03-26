@@ -7,7 +7,8 @@ import '../../test_scaffold.dart';
 void main() {
   group('FPagination', () {
     testWidgets('select page', (tester) async {
-      final controller = FPaginationController(pages: 10, initialPage: 2);
+      final controller = autoDispose(FPaginationController(pages: 10, initialPage: 2));
+
       await tester.pumpWidget(TestScaffold(child: FPagination(controller: controller)));
       expect(controller.page, 2);
 
@@ -17,7 +18,8 @@ void main() {
     });
 
     testWidgets('Actions - previous', (tester) async {
-      final controller = FPaginationController(pages: 10);
+      final controller = autoDispose(FPaginationController(pages: 10));
+
       await tester.pumpWidget(TestScaffold(child: FPagination(controller: controller)));
       expect(controller.page, 0);
 
@@ -42,7 +44,8 @@ void main() {
     });
 
     testWidgets('Actions - next', (tester) async {
-      final controller = FPaginationController(pages: 10, initialPage: 9);
+      final controller = autoDispose(FPaginationController(pages: 10, initialPage: 9));
+
       await tester.pumpWidget(TestScaffold(child: FPagination(controller: controller)));
       expect(controller.page, 9);
 
@@ -57,9 +60,12 @@ void main() {
 
     testWidgets('notifyListener', (tester) async {
       int notifyCount = 0;
-      final controller = FPaginationController(pages: 10)..addListener(() {
-        notifyCount++;
-      });
+      final controller = autoDispose(
+        FPaginationController(pages: 10)..addListener(() {
+          notifyCount++;
+        }),
+      );
+
       await tester.pumpWidget(TestScaffold(child: FPagination(controller: controller)));
 
       controller.page = 6;

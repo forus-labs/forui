@@ -6,14 +6,24 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  late FPickerController controller;
+
+  setUp(() {
+    controller = FPickerController(initialIndexes: [0, 1]);
+  });
+
+  tearDown(() {
+    controller.dispose();
+  });
+
   group('FPickerController value setter', () {
     test('setting value updates internal state', () {
-      final controller = FPickerController(initialIndexes: [0, 1])..value = [2, 3];
+      controller.value = [2, 3];
+
       expect(controller.value, [2, 3]);
     });
 
     test('setting value throws if length mismatch with wheels', () {
-      final controller = FPickerController(initialIndexes: [0, 1]);
       controller.wheels.addAll([FixedExtentScrollController(), FixedExtentScrollController()]);
 
       expect(() => controller.value = [1], throwsAssertionError);
@@ -21,8 +31,6 @@ void main() {
     });
 
     testWidgets('setting value updates wheel positions', (tester) async {
-      final controller = FPickerController(initialIndexes: [0, 1]);
-
       await tester.pumpWidget(
         TestScaffold(
           child: FPicker(
@@ -42,8 +50,6 @@ void main() {
     });
 
     testWidgets('setting value works in RTL direction', (tester) async {
-      final controller = FPickerController(initialIndexes: [0, 1]);
-
       await tester.pumpWidget(
         TestScaffold(
           textDirection: TextDirection.rtl,

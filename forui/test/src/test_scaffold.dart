@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -14,6 +15,22 @@ final relativePath =
 MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
 
 Future<void> expectBlueScreen(dynamic actual) => expectLater(actual, isBlueScreen);
+
+T autoDispose<T>(T disposable) {
+  // We cast this to dynamic as there isn't a standard Disposable interface.
+  addTearDown((disposable as dynamic).dispose);
+  return disposable;
+}
+
+extension WidgetTesters on WidgetTester {
+  Future<TestGesture> createPointerGesture({PointerDeviceKind kind = PointerDeviceKind.mouse}) async {
+    final gesture = await createGesture(kind: kind);
+    await gesture.addPointer(location: Offset.zero);
+    addTearDown(gesture.removePointer);
+
+    return gesture;
+  }
+}
 
 class TestScaffold extends StatelessWidget {
   static final blueScreen = () {

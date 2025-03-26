@@ -39,7 +39,7 @@ void main() {
     });
 
     testWidgets('old controller is not disposed', (tester) async {
-      final first = FAccordionController();
+      final first = autoDispose(FAccordionController());
       await tester.pumpWidget(
         TestScaffold.app(
           child: FAccordion(
@@ -49,7 +49,7 @@ void main() {
         ),
       );
 
-      final second = FAccordionController();
+      final second = autoDispose(FAccordionController());
       await tester.pumpWidget(
         TestScaffold.app(
           child: FAccordion(

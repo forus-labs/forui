@@ -4,12 +4,19 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 
 import 'threshold_file_comparator.dart';
 
 const _kGoldenTestsThreshold = 0.5 / 100;
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
+  LeakTesting.enable();
+  LeakTesting.settings = LeakTesting.settings.withIgnored(
+    createdByTestHelpers: true,
+    classes: ['Image', 'ImageInfo', 'ImageStreamCompleterHandle', '_CachedImage'],
+  );
+
   await configureGoldenTests(_kGoldenTestsThreshold);
   await testMain();
 }

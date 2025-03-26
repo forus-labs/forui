@@ -42,20 +42,22 @@ void main() {
                           (context) => FButton.icon(
                             child: const Icon(FIcons.chevronRight),
                             onPress: () {
-                              showFPersistentSheet(
-                                context: context,
-                                side: FLayout.ltr,
-                                draggable: false,
-                                builder:
-                                    (context, controller) => Container(
-                                      height: double.infinity,
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(color: context.theme.colorScheme.primary),
-                                        color: context.theme.colorScheme.background,
+                              autoDispose(
+                                showFPersistentSheet(
+                                  context: context,
+                                  side: FLayout.ltr,
+                                  draggable: false,
+                                  builder:
+                                      (context, controller) => Container(
+                                        height: double.infinity,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: context.theme.colorScheme.primary),
+                                          color: context.theme.colorScheme.background,
+                                        ),
+                                        child: const Center(child: Text('sheet')),
                                       ),
-                                      child: const Center(child: Text('sheet')),
-                                    ),
+                                ),
                               );
                             },
                           ),

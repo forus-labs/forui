@@ -10,6 +10,7 @@ void main() {
   group('FTooltip', () {
     testWidgets('does nothing', (tester) async {
       final controller = FTooltipController(vsync: const TestVSync());
+      addTearDown(controller.dispose);
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -210,7 +211,8 @@ void main() {
     });
 
     testWidgets('old controller is not disposed', (tester) async {
-      final first = FTooltipController(vsync: tester);
+      final first = autoDispose(FTooltipController(vsync: tester));
+
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(
@@ -221,7 +223,8 @@ void main() {
         ),
       );
 
-      final second = FTooltipController(vsync: tester);
+      final second = autoDispose(FTooltipController(vsync: tester));
+
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(

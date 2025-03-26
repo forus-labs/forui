@@ -12,6 +12,8 @@ void main() {
 
   setUp(() => controller = FPopoverController(vsync: const TestVSync()));
 
+  tearDown(() => controller.dispose());
+
   group('FPopover', () {
     testWidgets('tap outside hides popover', (tester) async {
       await tester.pumpWidget(
@@ -113,7 +115,7 @@ void main() {
 
   group('state', () {
     testWidgets('update controller', (tester) async {
-      final first = FPopoverController(vsync: tester);
+      final first = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FPopoverMenu(
@@ -129,7 +131,7 @@ void main() {
       expect(first.hasListeners, false);
       expect(first.disposed, false);
 
-      final second = FPopoverController(vsync: tester);
+      final second = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FPopoverMenu(
@@ -149,7 +151,7 @@ void main() {
     });
 
     testWidgets('dispose controller', (tester) async {
-      final controller = FPopoverController(vsync: tester);
+      final controller = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FPopoverMenu(

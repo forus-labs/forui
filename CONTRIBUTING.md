@@ -166,6 +166,17 @@ They should:
 
 Lastly, the order of the fields and methods should be as shown above.
 
+
+## Leak Tracking
+
+To detect memory leaks, [`leak_tracker_flutter_testing`](https://github.com/dart-lang/leak_tracker/blob/main/doc/leak_tracking/DETECT.md)
+is enabled by default in all tests. 
+
+Leak tracking results currently are not shown when running tests via an IntelliJ run  configuration. As a workaround, 
+run the tests via the terminal.
+
+It is recommended to wrap disposable objects created in tests with `autoDispose(...)`, i.e. `final focus = autoDispose(FocusNode())`.
+
 ## Writing Golden Tests
 
 Golden images are generated in the `test/golden` directory instead of relative to the test file. 

@@ -6,10 +6,14 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  late FMultiValueNotifier<int> controller;
+
+  setUp(() => controller = FMultiValueNotifier.radio());
+
+  tearDown(() => controller.dispose());
+
   group('FSelectTileGroup', () {
     testWidgets('press select tile with prefix check icon', (tester) async {
-      final controller = FMultiValueNotifier<int>.radio();
-
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
@@ -27,8 +31,6 @@ void main() {
     });
 
     testWidgets('press select tile with suffix check icon', (tester) async {
-      final controller = FMultiValueNotifier<int>.radio();
-
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
@@ -49,7 +51,7 @@ void main() {
     });
 
     testWidgets('press already selected tile', (tester) async {
-      final controller = FMultiValueNotifier<int>.radio(value: 2);
+      final controller = autoDispose(FMultiValueNotifier<int>.radio(value: 2));
 
       await tester.pumpWidget(
         TestScaffold(
@@ -71,8 +73,6 @@ void main() {
     });
 
     testWidgets('press tile hides error', (tester) async {
-      final controller = FMultiValueNotifier<int>.radio();
-
       await tester.pumpWidget(
         TestScaffold(
           child: FSelectTileGroup(
@@ -98,8 +98,6 @@ void main() {
     });
 
     testWidgets('press nested select tile', (tester) async {
-      final controller = FMultiValueNotifier<int>.radio();
-
       await tester.pumpWidget(
         TestScaffold(
           child: FTileGroup.merge(
@@ -130,7 +128,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup<int>(
-          selectController: FMultiValueNotifier(),
+          selectController: controller,
           onChange: (_) => changes++,
           onSelect: (value) {
             selections++;
@@ -150,7 +148,7 @@ void main() {
   });
 
   testWidgets('update callbacks', (tester) async {
-    final controller = FMultiValueNotifier<int>();
+    final controller = autoDispose(FMultiValueNotifier<int>());
 
     var firstChanges = 0;
     var firstSelections = 0;
@@ -208,7 +206,7 @@ void main() {
   });
 
   testWidgets('update controller', (tester) async {
-    final first = FMultiValueNotifier<int>();
+    final first = autoDispose(FMultiValueNotifier<int>());
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup<int>(
@@ -221,7 +219,7 @@ void main() {
     expect(first.hasListeners, true);
     expect(first.disposed, false);
 
-    final second = FMultiValueNotifier<int>();
+    final second = autoDispose(FMultiValueNotifier<int>());
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup<int>(
@@ -238,7 +236,6 @@ void main() {
   });
 
   testWidgets('dispose controller', (tester) async {
-    final controller = FMultiValueNotifier<int>();
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectTileGroup<int>(

@@ -18,7 +18,7 @@ void main() {
     );
 
     testWidgets('different controller size', (tester) async {
-      final initialController = FPickerController(initialIndexes: [1, 1]);
+      final initialController = autoDispose(FPickerController(initialIndexes: [1, 1]));
 
       await tester.pumpWidget(picker(initialController));
 
@@ -28,7 +28,7 @@ void main() {
       expect(initialController.value, [2, 1]);
       expect(initialController.wheels.map((w) => w.selectedItem).toList(), [2, 1]);
 
-      final newController = FPickerController(initialIndexes: [1, 2, 0]);
+      final newController = autoDispose(FPickerController(initialIndexes: [1, 2, 0]));
 
       await tester.pumpWidget(picker(newController));
       await tester.pumpAndSettle();
@@ -61,7 +61,7 @@ void main() {
     });
 
     testWidgets('same controller size', (tester) async {
-      final initialController = FPickerController(initialIndexes: [1, 1, 1]);
+      final initialController = autoDispose(FPickerController(initialIndexes: [1, 1, 1]));
 
       await tester.pumpWidget(picker(initialController));
 
@@ -71,7 +71,7 @@ void main() {
       expect(initialController.value, [2, 1, 1]);
       expect(initialController.wheels.map((w) => w.selectedItem).toList(), [2, 1, 1]);
 
-      final newController = FPickerController(initialIndexes: [1, 2, 0]);
+      final newController = autoDispose(FPickerController(initialIndexes: [1, 2, 0]));
 
       await tester.pumpWidget(picker(newController));
       await tester.pumpAndSettle();
@@ -92,7 +92,7 @@ void main() {
       await tester.drag(find.text('0A'), const Offset(0, -100));
       await tester.pumpAndSettle();
 
-      final newController = FPickerController(initialIndexes: [0, 1]);
+      final newController = autoDispose(FPickerController(initialIndexes: [0, 1]));
       await tester.pumpWidget(picker(newController));
       await tester.pumpAndSettle();
 

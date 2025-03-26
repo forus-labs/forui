@@ -7,8 +7,6 @@ import 'package:forui/src/widgets/sheet/persistent_sheet.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  FPersistentSheetController? controller;
-
   group('showFPersistentSheet', () {
     testWidgets('shows sheet', (tester) async {
       await tester.pumpWidget(
@@ -19,16 +17,18 @@ void main() {
                   (context) => FButton.icon(
                     child: const Icon(FIcons.chevronRight),
                     onPress: () {
-                      controller = showFPersistentSheet(
-                        context: context,
-                        side: FLayout.btt,
-                        builder:
-                            (context, controller) => Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              color: context.theme.colorScheme.background,
-                              child: const Center(child: Text('sheet')),
-                            ),
+                      autoDispose(
+                        showFPersistentSheet(
+                          context: context,
+                          side: FLayout.btt,
+                          builder:
+                              (context, controller) => Container(
+                                height: double.infinity,
+                                width: double.infinity,
+                                color: context.theme.colorScheme.background,
+                                child: const Center(child: Text('sheet')),
+                              ),
+                        ),
                       );
                     },
                   ),
@@ -55,17 +55,19 @@ void main() {
                   (context) => FButton.icon(
                     child: const Icon(FIcons.chevronRight),
                     onPress: () {
-                      controller = showFPersistentSheet(
-                        context: context,
-                        side: FLayout.btt,
-                        keepAliveOffstage: true,
-                        builder:
-                            (context, controller) => Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              color: context.theme.colorScheme.background,
-                              child: const Center(child: Text('sheet')),
-                            ),
+                      autoDispose(
+                        showFPersistentSheet(
+                          context: context,
+                          side: FLayout.btt,
+                          keepAliveOffstage: true,
+                          builder:
+                              (context, controller) => Container(
+                                height: double.infinity,
+                                width: double.infinity,
+                                color: context.theme.colorScheme.background,
+                                child: const Center(child: Text('sheet')),
+                              ),
+                        ),
                       );
                     },
                   ),
@@ -91,16 +93,18 @@ void main() {
                 (context) => FButton.icon(
                   child: const Icon(FIcons.chevronRight),
                   onPress: () {
-                    controller = showFPersistentSheet(
-                      context: context,
-                      side: FLayout.btt,
-                      builder:
-                          (context, controller) => Container(
-                            height: double.infinity,
-                            width: double.infinity,
-                            color: context.theme.colorScheme.background,
-                            child: const Center(child: Text('sheet')),
-                          ),
+                    autoDispose(
+                      showFPersistentSheet(
+                        context: context,
+                        side: FLayout.btt,
+                        builder:
+                            (context, controller) => Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              color: context.theme.colorScheme.background,
+                              child: const Center(child: Text('sheet')),
+                            ),
+                      ),
                     );
                   },
                 ),
@@ -123,17 +127,19 @@ void main() {
                   (context) => FButton.icon(
                     child: const Icon(FIcons.chevronRight),
                     onPress: () {
-                      controller = showFPersistentSheet(
-                        key: const Key('test'),
-                        context: context,
-                        side: FLayout.btt,
-                        builder:
-                            (context, controller) => Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              color: context.theme.colorScheme.background,
-                              child: const Center(child: Text('sheet')),
-                            ),
+                      autoDispose(
+                        showFPersistentSheet(
+                          key: const Key('test'),
+                          context: context,
+                          side: FLayout.btt,
+                          builder:
+                              (context, controller) => Container(
+                                height: double.infinity,
+                                width: double.infinity,
+                                color: context.theme.colorScheme.background,
+                                child: const Center(child: Text('sheet')),
+                              ),
+                        ),
                       );
                     },
                   ),
@@ -205,16 +211,18 @@ void main() {
                     (context) => FButton.icon(
                       child: const Icon(FIcons.chevronRight),
                       onPress: () {
-                        controller = showFPersistentSheet(
-                          context: context,
-                          side: side,
-                          builder:
-                              (context, controller) => Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                color: context.theme.colorScheme.background,
-                                child: const Center(child: Text('sheet')),
-                              ),
+                        autoDispose(
+                          showFPersistentSheet(
+                            context: context,
+                            side: side,
+                            builder:
+                                (context, controller) => Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  color: context.theme.colorScheme.background,
+                                  child: const Center(child: Text('sheet')),
+                                ),
+                          ),
                         );
                       },
                     ),
@@ -241,17 +249,19 @@ void main() {
                     (context) => FButton.icon(
                       child: const Icon(FIcons.chevronRight),
                       onPress: () {
-                        controller = showFPersistentSheet(
-                          context: context,
-                          side: side,
-                          draggable: false,
-                          builder:
-                              (context, controller) => Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                color: context.theme.colorScheme.background,
-                                child: const Center(child: Text('sheet')),
-                              ),
+                        autoDispose(
+                          showFPersistentSheet(
+                            context: context,
+                            side: side,
+                            draggable: false,
+                            builder:
+                                (context, controller) => Container(
+                                  height: double.infinity,
+                                  width: double.infinity,
+                                  color: context.theme.colorScheme.background,
+                                  child: const Center(child: Text('sheet')),
+                                ),
+                          ),
                         );
                       },
                     ),
@@ -269,10 +279,5 @@ void main() {
         expect(find.text('sheet'), findsOne);
       });
     }
-
-    tearDown(() {
-      controller?.dispose();
-      controller = null;
-    });
   });
 }
