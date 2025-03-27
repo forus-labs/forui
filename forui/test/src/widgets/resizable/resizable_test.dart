@@ -7,7 +7,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
-
 import '../../test_scaffold.dart';
 
 void main() {
@@ -98,12 +97,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Center(
-            child: FResizable(
-              controller: first,
-              crossAxisExtent: 50,
-              axis: Axis.horizontal,
-              children: [top, bottom],
-            ),
+            child: FResizable(controller: first, crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
           ),
         ),
       );
@@ -115,16 +109,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Center(
-            child: FResizable(
-              controller: second,
-              crossAxisExtent: 50,
-              axis: Axis.horizontal,
-              children: [top, bottom],
-            ),
+            child: FResizable(controller: second, crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
           ),
         ),
       );
-
 
       expect(first.hasListeners, false);
       expect(first.disposed, false);
