@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart' hide VerticalDivider;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -5,6 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
+
+import '../../test_scaffold.dart';
 
 void main() {
   final top = FResizableRegion(
@@ -23,6 +27,8 @@ void main() {
     Touch.primary = false;
   });
 
+  tearDown(() => Touch.primary = null);
+
   for (final (index, constructor)
       in [
         () => FResizable(crossAxisExtent: 0, axis: Axis.vertical, children: [top, bottom]),
@@ -31,10 +37,10 @@ void main() {
   }
 
   testWidgets('vertical drag downwards', (tester) async {
-    final vertical = FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom]);
-
     await tester.pumpWidget(
-      MaterialApp(theme: ThemeData(useMaterial3: true), home: Scaffold(body: Center(child: vertical))),
+      TestScaffold.app(
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom])),
+      ),
     );
 
     await tester.timedDrag(find.byType(VerticalDivider), const Offset(0, 100), const Duration(seconds: 1));
@@ -45,10 +51,10 @@ void main() {
   });
 
   testWidgets('vertical drag upwards', (tester) async {
-    final vertical = FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom]);
-
     await tester.pumpWidget(
-      MaterialApp(theme: ThemeData(useMaterial3: true), home: Scaffold(body: Center(child: vertical))),
+      TestScaffold.app(
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom])),
+      ),
     );
 
     await tester.timedDrag(find.byType(VerticalDivider), const Offset(0, -100), const Duration(seconds: 1));
@@ -59,10 +65,10 @@ void main() {
   });
 
   testWidgets('horizontal drag right', (tester) async {
-    final horizontal = FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]);
-
     await tester.pumpWidget(
-      MaterialApp(theme: ThemeData(useMaterial3: true), home: Scaffold(body: Center(child: horizontal))),
+      TestScaffold.app(
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom])),
+      ),
     );
 
     await tester.timedDrag(find.byType(HorizontalDivider), const Offset(100, 0), const Duration(seconds: 1));
@@ -73,10 +79,10 @@ void main() {
   });
 
   testWidgets('horizontal drag left', (tester) async {
-    final horizontal = FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]);
-
     await tester.pumpWidget(
-      MaterialApp(theme: ThemeData(useMaterial3: true), home: Scaffold(body: Center(child: horizontal))),
+      TestScaffold.app(
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom])),
+      ),
     );
 
     await tester.timedDrag(find.byType(HorizontalDivider), const Offset(-100, 0), const Duration(seconds: 1));
@@ -86,5 +92,68 @@ void main() {
     expect(tester.getSize(find.byType(FResizableRegion).last), const Size(80, 50));
   });
 
-  tearDown(() => Touch.primary = null);
+  group('state', () {
+    testWidgets('update controller', (tester) async {
+      final first = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: first,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+            ),
+          ),
+        ),
+      );
+
+      expect(first.hasListeners, true);
+      expect(first.disposed, false);
+
+      final second = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: second,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+            ),
+          ),
+        ),
+      );
+
+
+      expect(first.hasListeners, false);
+      expect(first.disposed, false);
+      expect(second.hasListeners, true);
+      expect(second.disposed, false);
+    });
+
+    testWidgets('dispose controller', (tester) async {
+      final controller = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: controller,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+            ),
+          ),
+        ),
+      );
+
+      expect(controller.hasListeners, true);
+      expect(controller.disposed, false);
+
+      await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+      expect(controller.hasListeners, false);
+      expect(controller.disposed, false);
+    });
+  });
 }
