@@ -31,7 +31,10 @@ dependencies:
   sugar: ^4.0.0
 
 dev_dependencies:
+  analyzer: ^7.3.0
   build_runner: ^2.4.0
+  code_builder: ^4.10.1
+  dart_style: ^3.0.1
   flint: ^2.8.1
   flutter_test:
     sdk: flutter
@@ -39,6 +42,8 @@ dev_dependencies:
   http: ^1.2.2
   leak_tracker_flutter_testing: any
   mockito: ^5.4.4
+  path: ^1.9.1
+  pub_semver: ^2.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
