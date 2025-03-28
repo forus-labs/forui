@@ -120,6 +120,7 @@ final List<(String, String)> locales = [
 ];
 
 void main() {
+  // Replace with name of key to generate.
   const key = 'selectScrollDownSemanticsLabel';
 
   for (final (locale, value) in locales) {
