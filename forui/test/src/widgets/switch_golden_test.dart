@@ -18,7 +18,7 @@ void main() {
                 child: FSwitch(
                   label: const Text('Airplane Mode'),
                   description: const Text('Disable all wireless connections.'),
-                  semanticLabel: 'Airplane Mode',
+                  semanticsLabel: 'Airplane Mode',
                   value: value,
                 ),
               ),
@@ -40,7 +40,7 @@ void main() {
                 child: FSwitch(
                   label: const Text('Airplane Mode'),
                   description: const Text('Disable all wireless connections.'),
-                  semanticLabel: 'Airplane Mode',
+                  semanticsLabel: 'Airplane Mode',
                   value: value,
                   autofocus: true,
                 ),
@@ -60,7 +60,7 @@ void main() {
                 child: FSwitch(
                   label: const Text('Airplane Mode'),
                   description: const Text('Disable all wireless connections.'),
-                  semanticLabel: 'Airplane Mode',
+                  semanticsLabel: 'Airplane Mode',
                   enabled: false,
                   value: value,
                   autofocus: true,
@@ -82,7 +82,7 @@ void main() {
                   label: const Text('Airplane Mode'),
                   description: const Text('Disable all wireless connections.'),
                   error: const Text('Please enable to continue.'),
-                  semanticLabel: 'Airplane Mode',
+                  semanticsLabel: 'Airplane Mode',
                   value: value,
                   enabled: false,
                   autofocus: true,

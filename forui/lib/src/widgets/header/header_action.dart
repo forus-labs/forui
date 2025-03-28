@@ -8,7 +8,7 @@ class FHeaderAction extends StatelessWidget {
   final FHeaderActionStyle? style;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The icon, wrapped in a [IconThemeData].
   final Widget icon;
@@ -33,7 +33,7 @@ class FHeaderAction extends StatelessWidget {
     required this.icon,
     required this.onPress,
     this.style,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -45,7 +45,7 @@ class FHeaderAction extends StatelessWidget {
   factory FHeaderAction.back({
     required VoidCallback? onPress,
     FHeaderActionStyle? style,
-    String? semanticLabel,
+    String? semanticsLabel,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -54,7 +54,7 @@ class FHeaderAction extends StatelessWidget {
     icon: const Icon(FIcons.arrowLeft),
     onPress: onPress,
     style: style,
-    semanticLabel: semanticLabel,
+    semanticsLabel: semanticsLabel,
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
@@ -90,7 +90,7 @@ class FHeaderAction extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       focusedOutlineStyle: style.focusedOutlineStyle,
-      semanticLabel: semanticLabel,
+      semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
       child: IconTheme(data: enabled ? style.enabledStyle : style.disabledStyle, child: icon),
@@ -102,7 +102,7 @@ class FHeaderAction extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(DiagnosticsProperty('icon', icon))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

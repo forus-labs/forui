@@ -24,13 +24,10 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_svg: ^2.0.10+1
   forui_assets: ^0.10.0
   google_fonts: ^6.2.0
   intl: any
   meta: ^1.11.0
-  nitrogen_flutter_svg: ^0.4.0
-  nitrogen_types: ^0.4.0
   sugar: ^4.0.0
 
 dev_dependencies:

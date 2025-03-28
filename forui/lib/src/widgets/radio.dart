@@ -31,7 +31,7 @@ class FRadio extends StatefulWidget {
   final Widget? error;
 
   //// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The current value of the radio.
   final bool value;
@@ -57,7 +57,7 @@ class FRadio extends StatefulWidget {
     this.label,
     this.description,
     this.error,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.value = false,
     this.onChange,
     this.enabled = true,
@@ -75,7 +75,7 @@ class FRadio extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('value', value: value, ifTrue: 'checked'))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
@@ -115,7 +115,7 @@ class _State extends State<FRadio> {
         },
         mouseCursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
         child: Semantics(
-          label: widget.semanticLabel,
+          label: widget.semanticsLabel,
           enabled: widget.enabled,
           checked: widget.value,
           child: FLabel(

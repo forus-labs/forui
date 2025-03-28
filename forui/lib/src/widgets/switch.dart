@@ -32,7 +32,7 @@ class FSwitch extends StatelessWidget {
   final Widget? error;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The current value of the checkbox.
   final bool value;
@@ -75,7 +75,7 @@ class FSwitch extends StatelessWidget {
     this.label,
     this.description,
     this.error,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.value = false,
     this.onChange,
     this.enabled = true,
@@ -107,7 +107,7 @@ class FSwitch extends StatelessWidget {
         onFocusChange: onFocusChange,
         mouseCursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
         child: Semantics(
-          label: semanticLabel,
+          label: semanticsLabel,
           enabled: enabled,
           toggled: value,
           child: FLabel(
@@ -147,7 +147,7 @@ class FSwitch extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))

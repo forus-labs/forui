@@ -116,7 +116,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     TraversalEdgeBehavior traversalEdgeBehavior,
-    String? semanticLabel,
+    String? semanticsLabel,
     Key? key,
   }) = _CollapsedCrumb;
 }
@@ -183,7 +183,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final FocusScopeNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
   final TraversalEdgeBehavior traversalEdgeBehavior;
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   const _CollapsedCrumb({
     required this.menu,
@@ -199,7 +199,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -230,7 +230,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
-      ..add(StringProperty('semanticLabel', semanticLabel));
+      ..add(StringProperty('semanticsLabel', semanticsLabel));
   }
 }
 
@@ -268,7 +268,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       cacheExtent: widget.cacheExtent,
       maxHeight: widget.maxHeight,
       dragStartBehavior: widget.dragStartBehavior,
-      semanticLabel: widget.semanticLabel,
+      semanticsLabel: widget.semanticsLabel,
       divider: widget.divider,
       menu: widget.menu,
       child: FTappable(

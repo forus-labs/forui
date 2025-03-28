@@ -39,14 +39,14 @@ class FDialog extends StatelessWidget {
   ///
   /// See also:
   ///  * [SemanticsConfiguration.namesRoute], for a description of how this value is used.
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The builder for the dialog's content.
   final Widget Function(BuildContext, FDialogStyle) builder;
 
   /// Creates a [FDialog] with a title, subtitle, and possible actions.
   ///
-  /// The [semanticLabel] defaults to [title] if it is not provided.
+  /// The [semanticsLabel] defaults to [title] if it is not provided.
   ///
   /// The [direction] determines the layout of the actions. It is recommended to use [Axis.vertical] on smaller devices,
   /// such as mobile phones, and [Axis.horizontal] on larger devices, such as tablets and desktops.
@@ -77,7 +77,7 @@ class FDialog extends StatelessWidget {
     this.style,
     this.insetAnimationDuration = _defaultDuration,
     this.insetAnimationCurve = Curves.decelerate,
-    this.semanticLabel,
+    this.semanticsLabel,
     Widget? title,
     Widget? body,
     Axis direction = Axis.vertical,
@@ -96,7 +96,7 @@ class FDialog extends StatelessWidget {
     this.style,
     this.insetAnimationDuration = _defaultDuration,
     this.insetAnimationCurve = Curves.decelerate,
-    this.semanticLabel,
+    this.semanticsLabel,
     Widget? title,
     Widget? body,
     super.key,
@@ -117,7 +117,7 @@ class FDialog extends StatelessWidget {
     this.style,
     this.insetAnimationDuration = _defaultDuration,
     this.insetAnimationCurve = Curves.decelerate,
-    this.semanticLabel,
+    this.semanticsLabel,
     super.key,
   });
 
@@ -145,7 +145,7 @@ class FDialog extends StatelessWidget {
               scopesRoute: true,
               explicitChildNodes: true,
               namesRoute: true,
-              label: semanticLabel,
+              label: semanticsLabel,
               child: ConstrainedBox(
                 constraints: BoxConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
                 child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
@@ -164,7 +164,7 @@ class FDialog extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration, defaultValue: _defaultDuration))
       ..add(DiagnosticsProperty('insetAnimationCurve', insetAnimationCurve, defaultValue: Curves.decelerate))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }

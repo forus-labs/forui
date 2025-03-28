@@ -54,7 +54,7 @@ class FTile extends StatelessWidget with FTileMixin {
   final bool? enabled;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -97,7 +97,7 @@ class FTile extends StatelessWidget with FTileMixin {
     required Widget title,
     this.style,
     this.enabled,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -172,7 +172,7 @@ class FTile extends StatelessWidget with FTileMixin {
 
     return FTappable(
       style: style.tappableStyle,
-      semanticLabel: semanticLabel,
+      semanticsLabel: semanticsLabel,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -188,7 +188,7 @@ class FTile extends StatelessWidget with FTileMixin {
     properties
       ..add(DiagnosticsProperty('style', style, level: DiagnosticLevel.debug))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', level: DiagnosticLevel.debug))
-      ..add(StringProperty('semanticLabel', semanticLabel, defaultValue: null, quoted: false))
+      ..add(StringProperty('semanticsLabel', semanticsLabel, defaultValue: null, quoted: false))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

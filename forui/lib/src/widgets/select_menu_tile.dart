@@ -95,7 +95,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// The menu's semantic label used by accessibility frameworks.
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -152,7 +152,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -220,7 +220,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                      dragStartBehavior: dragStartBehavior,
                      physics: physics,
                      style: menuStyle.tileGroupStyle,
-                     semanticLabel: semanticLabel,
+                     semanticsLabel: semanticsLabel,
                      divider: divider,
                      children: menu,
                    ),
@@ -290,7 +290,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -358,7 +358,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                      dragStartBehavior: dragStartBehavior,
                      physics: physics,
                      style: menuStyle.tileGroupStyle,
-                     semanticLabel: semanticLabel,
+                     semanticsLabel: semanticsLabel,
                      divider: divider,
                      tileBuilder: menuBuilder,
                      count: count,
@@ -415,7 +415,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

@@ -10,14 +10,14 @@ final class Content extends StatelessWidget {
   final FAvatarStyle? style;
   final double size;
   final ImageProvider image;
-  final String? semanticLabel;
+  final String? semanticsLabel;
   final Widget? fallback;
 
   const Content({
     required this.style,
     required this.size,
     required this.image,
-    required this.semanticLabel,
+    required this.semanticsLabel,
     required this.fallback,
     super.key,
   });
@@ -30,7 +30,7 @@ final class Content extends StatelessWidget {
       height: size,
       width: size,
       image: image,
-      semanticLabel: semanticLabel,
+      semanticLabel: semanticsLabel,
       errorBuilder: (_, _, _) => fallback,
       frameBuilder:
           (_, child, frame, wasSynchronouslyLoaded) =>
@@ -52,7 +52,7 @@ final class Content extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('size', size))
       ..add(DiagnosticsProperty('image', image))
-      ..add(StringProperty('semanticLabel', semanticLabel));
+      ..add(StringProperty('semanticsLabel', semanticsLabel));
   }
 }
 

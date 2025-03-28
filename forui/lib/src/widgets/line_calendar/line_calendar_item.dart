@@ -43,7 +43,7 @@ class Item extends StatelessWidget {
     builder:
         (context, selected, _) => FTappable(
           style: style.tappableStyle,
-          semanticLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
+          semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
           onPress: () => controller.select(date),
           builder: (context, state, _) {
             final itemStyle = switch ((selected == date, state.hovered || state.pressed)) {

@@ -40,7 +40,7 @@ A control that allows the user to toggle between checked and not checked.
           Widget build(BuildContext context) => FCheckbox(
             label: const Text('Accept terms and conditions'),
             description: const Text('You agree to our terms and conditions.'),
-            semanticLabel: 'Accept terms and conditions',
+            semanticsLabel: 'Accept terms and conditions',
             value: state,
             onChange: (value) => setState(() => state = value),
           );
@@ -58,7 +58,7 @@ FCheckbox(
   label: const Text('Accept terms and conditions'),
   description: const Text('You agree to our terms and conditions.'),
   error: const Text('Please accept the terms and conditions.'),
-  semanticLabel: 'Accept terms and conditions',
+  semanticsLabel: 'Accept terms and conditions',
   value: true,
   onChange: (value) {},
   enabled: true,
@@ -90,7 +90,7 @@ FCheckbox(
       Widget build(BuildContext context) => FCheckbox(
         label: const Text('Accept terms and conditions'),
         description: const Text('You agree to our terms and conditions.'),
-        semanticLabel: 'Accept terms and conditions',
+        semanticsLabel: 'Accept terms and conditions',
         value: state,
         onChange: (value) => setState(() => state = value),
         enabled: false,
@@ -123,7 +123,7 @@ FCheckbox(
         label: const Text('Accept terms and conditions'),
         description: const Text('You agree to our terms and conditions.'),
         error: const Text('Please accept the terms and conditions.'),
-        semanticLabel: 'Accept terms and conditions',
+        semanticsLabel: 'Accept terms and conditions',
         value: state,
         onChange: (value) => setState(() => state = value),
       );

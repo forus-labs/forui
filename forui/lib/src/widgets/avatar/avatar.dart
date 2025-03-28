@@ -33,10 +33,10 @@ class FAvatar extends StatelessWidget {
     required ImageProvider image,
     this.style,
     this.size = 40.0,
-    String? semanticLabel,
+    String? semanticsLabel,
     Widget? fallback,
     super.key,
-  }) : child = Content(style: style, size: size, image: image, semanticLabel: semanticLabel, fallback: fallback);
+  }) : child = Content(style: style, size: size, image: image, semanticsLabel: semanticsLabel, fallback: fallback);
 
   /// Creates a [FAvatar] without a fallback.
   FAvatar.raw({Widget? child, this.style, this.size = 40.0, super.key})
